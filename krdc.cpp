@@ -47,6 +47,9 @@
 QScrollView2::QScrollView2(QWidget *w, const char *name) :
 	QScrollView(w, name) {
 	setMouseTracking(true);
+        viewport()->setMouseTracking(true);
+        horizontalScrollBar()->setMouseTracking(true);
+        verticalScrollBar()->setMouseTracking(true);
 }
 
 void QScrollView2::mouseMoveEvent( QMouseEvent *e )
