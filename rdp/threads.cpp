@@ -80,8 +80,9 @@ void RdpControllerThread::run()
 	KApplication::kApplication()->lock();
 	ui_init(m_view->x11Display(), m_view->x11Visual());
 	KApplication::kApplication()->unlock();
-	
-	if(!sec_connect(m_view->m_host.latin1()))
+
+	QCString host(m_view->m_host.utf8());
+	if(!sec_connect(host.data()))
 	{
 		changeStatus(REMOTE_VIEW_DISCONNECTED);
 		QApplication::postEvent(m_view, new FatalErrorEvent(ERROR_CONNECTION));
@@ -89,8 +90,13 @@ void RdpControllerThread::run()
 	}
   
 	changeStatus(REMOTE_VIEW_AUTHENTICATING);
-	rdp_send_logon_info(m_view->m_flags, m_view->m_domain.latin1(), m_view->m_user.latin1(),
-	                    m_view->m_password.latin1(), m_view->m_shell.latin1(), m_view->m_directory.latin1());
+	QCString domain(m_view->m_domain.utf8());
+	QCString user(m_view->m_user.utf8());
+	QCString password(m_view->m_password.utf8());
+	QCString shell(m_view->m_shell.utf8());
+	QCString directory(m_view->m_directory.utf8());
+	rdp_send_logon_info(m_view->m_flags, domain.data(), user.data(),
+	                    password.data(), shell.data(), directory.data());
   
 	changeStatus(REMOTE_VIEW_PREPARING);
 	QApplication::postEvent(m_view, new ScreenResizeEvent(0, 0)); // KRdpView actually already knows the new size through
@@ -129,7 +135,8 @@ void RdpControllerThread::run()
 				break;
 
 			default:
-				unimpl("PDU %d\n", type);
+				QCString s = "PDU %d\n";
+				unimpl(s.data(), type);
 		}
 	}
 	m_quitFlag = true;
