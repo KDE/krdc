@@ -41,6 +41,7 @@ enum RemoteViewStatus {
 
 enum ErrorCode {
 	ERROR_NONE = 0,
+	ERROR_INTERNAL,
 	ERROR_CONNECTION,
 	ERROR_PROTOCOL,
 	ERROR_IO,

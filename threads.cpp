@@ -82,7 +82,10 @@ void ControllerThread::run() {
 	DesktopInit(m_view->winId());
 	unlockQt();
 
-	SetFormatAndEncodings();
+	if (!SetFormatAndEncodings()) {
+		sendFatalError(ERROR_INTERNAL);
+		return;
+	}
 
 	changeStatus(REMOTE_VIEW_CONNECTED);
 
