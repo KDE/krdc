@@ -41,6 +41,8 @@ public:
 		    const char *name = 0, 
 		    WFlags f = 0);
 
+	virtual ~KRemoteView();
+
 	/**
 	 * Checks whether the widget is in scale mode.
 	 * @return true if scaling is activated

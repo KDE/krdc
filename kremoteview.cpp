@@ -23,4 +23,7 @@ KRemoteView::KRemoteView(QWidget *parent,
 	QWidget(parent, name, f) {
 }
 
+KRemoteView::~KRemoteView() {
+}
+
 #include "kremoteview.moc"
