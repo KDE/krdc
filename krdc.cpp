@@ -36,6 +36,7 @@
 #include <qwhatsthis.h>
 
 #include <kmessagebox.h>
+#include <kwin.h>
 #include <kglobal.h>
 #include <kinstance.h>
 #include <kstandarddirs.h>
@@ -412,6 +413,8 @@ void KRDC::switchToFullscreen()
 	setGeometry(0, 0, m_fullscreenResolution.width(), 
 		    m_fullscreenResolution.height());
 
+	KWin::setState(winId(), NET::StaysOnTop);
+
 	m_ftAutoHide = !m_ftAutoHide;
 	setFsToolbarAutoHide(!m_ftAutoHide);
 
@@ -424,8 +427,10 @@ void KRDC::switchToNormal(bool scaling)
 {
 	bool fromFullscreen = (m_isFullscreen == WINDOW_MODE_FULLSCREEN);
 	bool scalingChanged = (scaling != m_view->scaling());
-	if (fromFullscreen)
+	if (fromFullscreen) {
+		KWin::clearState(winId(), NET::StaysOnTop);
 		hide();
+	}
 	m_isFullscreen = WINDOW_MODE_NORMAL;
 	m_view->enableScaling(scaling);
 
@@ -493,8 +498,11 @@ void KRDC::switchToNormal(bool scaling)
 
 void KRDC::iconify()
 {
+	KWin::clearState(winId(), NET::StaysOnTop);
+
 	m_view->releaseKeyboard();
-	ungrabInput(qt_xdisplay());
+	if (m_oldResolution)
+		ungrabInput(qt_xdisplay());
 
 	vidmodeNormalSwitch(qt_xdisplay(), m_oldResolution);
 	m_oldResolution = 0;
@@ -505,7 +513,7 @@ void KRDC::iconify()
 
 bool KRDC::event(QEvent *e) {
 /* used to change resolution when fullscreen was minimized */
-	if ((!m_fullscreenMinimized) || (e->type() != QEvent::Show)) 
+        if ((!m_fullscreenMinimized) || (e->type() != QEvent::Show)) 
 		return QWidget::event(e);
 
 	m_fullscreenMinimized = false;
@@ -518,12 +526,14 @@ bool KRDC::event(QEvent *e) {
 		m_fullscreenResolution = QSize(x, y);
 	else
 		m_fullscreenResolution = QApplication::desktop()->size();
-
+	
 	showFullScreen();
 	setGeometry(0, 0, m_fullscreenResolution.width(), 
 		    m_fullscreenResolution.height());
-	grabInput(qt_xdisplay(), winId());
+	if (m_oldResolution)
+		grabInput(qt_xdisplay(), winId());
 	m_view->grabKeyboard();
+	KWin::setState(winId(), NET::StaysOnTop);
 
 	return QWidget::event(e);
 }
