@@ -40,7 +40,7 @@ enum ErrorCode {
 	ERROR_AUTHENTICATION
 };
 
-const int ScreenResizeEventType = 781001;
+const int ScreenResizeEventType = 41001;
 
 class ScreenResizeEvent : public QCustomEvent
 {
@@ -56,7 +56,7 @@ public:
 	int height() const { return m_height; };
 };
 
-const int StatusChangeEventType = 781002;
+const int StatusChangeEventType = 41002;
 
 class StatusChangeEvent : public QCustomEvent
 {
@@ -70,7 +70,7 @@ public:
 	RemoteViewStatus status() const { return m_status; };
 };
 
-const int PasswordRequiredEventType = 781003;
+const int PasswordRequiredEventType = 41003;
 
 class PasswordRequiredEvent : public QCustomEvent
 {
@@ -80,7 +80,7 @@ public:
 	{};
 };
 
-const int FatalErrorEventType = 781004;
+const int FatalErrorEventType = 41004;
 
 class FatalErrorEvent : public QCustomEvent
 {
@@ -94,7 +94,7 @@ public:
 	ErrorCode errorCode() { return m_error; }
 };
 
-const int DesktopInitEventType = 781005;
+const int DesktopInitEventType = 41005;
 
 class DesktopInitEvent : public QCustomEvent
 {
@@ -104,7 +104,7 @@ public:
 	{};
 };
 
-const int ScreenRepaintEventType = 781006;
+const int ScreenRepaintEventType = 41006;
 
 class ScreenRepaintEvent : public QCustomEvent
 {
@@ -124,7 +124,7 @@ public:
 	int height() const { return m_height; };
 };
 
-const int BeepEventType = 781007;
+const int BeepEventType = 41007;
 
 class BeepEvent : public QCustomEvent
 {
@@ -134,7 +134,7 @@ public:
 	{};
 };
 
-const int ServerCutEventType = 781008;
+const int ServerCutEventType = 41008;
 
 class ServerCutEvent : public QCustomEvent
 {
@@ -154,7 +154,7 @@ public:
 	char *bytes() const { return m_bytes; };
 };
 
-const int MouseStateEventType = 781009;
+const int MouseStateEventType = 41009;
 
 class MouseStateEvent : public QCustomEvent
 {
