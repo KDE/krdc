@@ -84,7 +84,7 @@ KRDC::KRDC(WindowMode wm, const QString &host,
 	   Quality q, const QString &encodings,
 	   const QString &password,
 	   const QString &resolution,
-	   bool scale, 
+	   bool scale,
 	   QSize initialWindowSize,
 	   const QString &keymap) :
   QWidget(0, 0, Qt::WStyle_ContextHelp),
@@ -131,7 +131,7 @@ bool KRDC::start()
 	QString serverHost;
 	int serverPort = 5900;
 
-	if (!m_host.isNull() && 
+	if (!m_host.isNull() &&
 	    (m_host != "vnc:/") &&
 	    (m_host != "rdp:/")) {
 		if (m_host.startsWith("vnc:/"))
@@ -390,7 +390,7 @@ void KRDC::switchToFullscreen(bool scaling)
 	QSize fbs = m_view->framebufferSize();
 	bool scalingPossible = m_view->supportsScaling() &&
 	  ((fbs.width() >= ds.width()) || (fbs.height() >= ds.height()));
-	
+
 	if (!fromFullscreen) {
 		hide();
 		m_oldResolution = vidmodeFullscreenSwitch(qt_xdisplay(),
@@ -431,7 +431,7 @@ void KRDC::switchToFullscreen(bool scaling)
 		m_view->enableScaling(scaling);
 		if (scaling)
 			m_view->resize(ds);
-		else 
+		else
 			m_view->resize(fbs);
 		repositionView(true);
 	}
@@ -691,7 +691,7 @@ void KRDC::setSize(int w, int h)
 	case WINDOW_MODE_AUTO:
 		if ((w >= dw) || (h >= dh))
 			switchToFullscreen(m_windowScaling);
-		else 
+		else
 			switchToNormal(m_windowScaling);
 		break;
 	case WINDOW_MODE_NORMAL:

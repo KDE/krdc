@@ -18,11 +18,12 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-#include <kapplication.h>
 #include <qobject.h>
 #include "krdc.h"
 #include "kremoteview.h"
 #include "smartptr.h"
+
+class KApplication;
 
 class MainController : public QObject {
 	Q_OBJECT

@@ -19,13 +19,11 @@
 #define KRDC_H
 
 #include <kprogress.h>
-#include <kprocess.h>
 #include <qscrollview.h>
-#include <qlayout.h> 
+#include <qlayout.h>
 #include <qsize.h>
 #include <qrect.h>
-#include <qtimer.h> 
-#include <qpixmap.h>
+#include <qtimer.h>
 #include <qdesktopwidget.h>
 #include "vnc/kvncview.h"
 #include "rdp/krdpview.h"
@@ -34,6 +32,7 @@
 #include "vidmode.h"
 #include "smartptr.h"
 
+class QPixmap;
 class KToolBar;
 class QPopupMenu;
 
@@ -61,7 +60,7 @@ protected:
 
 class KRDC : public QWidget
 {
-	Q_OBJECT 
+	Q_OBJECT
 private:
 	SmartPtr<KProgressDialog> m_progressDialog; // dialog, displayed while connecting
 	QVBoxLayout *m_layout;     // the layout for autosizing the scrollview
@@ -71,7 +70,7 @@ private:
 
 	SmartPtr<KeyCaptureDialog2> m_keyCaptureDialog; // dialog for key capturing
 	KFullscreenPanel *m_fsToolbar;     // toolbar for fullscreen (0 in normal mode)
-	QWidget *m_fsToolbarWidget;        // qt designer widget for fs toolbar 
+	QWidget *m_fsToolbarWidget;        // qt designer widget for fs toolbar
                                            //     (invalid in normal mode)
 	QPixmap m_pinup, m_pindown;        // fs toolbar imaged for autohide button
 	KToolBar *m_toolbar;               // toolbar in normal mode (0 in fs mode)
@@ -83,7 +82,7 @@ private:
 	QTimer m_autoHideTimer; // timer for autohide
 
 	QTimer m_bumpScrollTimer; // timer for bump scrolling (in fs, when res too large)
-	
+
 	bool m_showProgress; // can disable showing the progress dialog temporary
 	QString m_host;      // host string as given from user
         Protocol m_protocol; // the used protocol
@@ -126,8 +125,8 @@ protected:
 	virtual QSize sizeHint();
 
 public:
-	KRDC(WindowMode wm = WINDOW_MODE_AUTO, 
-	     const QString &host = QString::null, 
+	KRDC(WindowMode wm = WINDOW_MODE_AUTO,
+	     const QString &host = QString::null,
 	     Quality q = QUALITY_UNKNOWN,
 	     const QString &encodings = QString::null,
 	     const QString &password = QString::null,
@@ -156,7 +155,7 @@ private slots:
 	void showFullscreenToolbar();
 	void hideFullscreenToolbarDelayed();
 	void hideFullscreenToolbarNow();
-	
+
 public slots:
 	void quit();
 	void enableFullscreen(bool full = false);
@@ -165,7 +164,7 @@ public slots:
 	void viewOnlyToggled();
 
 signals:
-        void disconnected(); 
+        void disconnected();
 	void disconnectedError();
 };
 

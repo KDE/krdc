@@ -15,7 +15,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <stdlib.h> 
+#include <stdlib.h>
 
 #ifndef EVENTS_H
 #define EVENTS_H
@@ -24,7 +24,7 @@
 
 /**
  * State of the connection. The state of the connection is returned
- * by @ref KRemoteView::status(). 
+ * by @ref KRemoteView::status().
  *
  * Not every state transition is allowed. You are only allowed to transition
  * a state to the following state, with three exceptions:
@@ -64,10 +64,10 @@ class ScreenResizeEvent : public QCustomEvent
 private:
 	int m_width, m_height;
 public:
-	ScreenResizeEvent(int w, int h) : 
-		QCustomEvent(ScreenResizeEventType), 
+	ScreenResizeEvent(int w, int h) :
+		QCustomEvent(ScreenResizeEventType),
 		m_width(w),
-		m_height(h) 
+		m_height(h)
 	{};
 	int width() const { return m_width; };
 	int height() const { return m_height; };
@@ -92,7 +92,7 @@ const int PasswordRequiredEventType = 41003;
 class PasswordRequiredEvent : public QCustomEvent
 {
 public:
-	PasswordRequiredEvent() : 
+	PasswordRequiredEvent() :
 		QCustomEvent(PasswordRequiredEventType)
 	{};
 };
@@ -103,12 +103,12 @@ class FatalErrorEvent : public QCustomEvent
 {
 	ErrorCode m_error;
 public:
-	FatalErrorEvent(ErrorCode e) : 
+	FatalErrorEvent(ErrorCode e) :
 		QCustomEvent(FatalErrorEventType),
 		m_error(e)
 	{};
 
-	ErrorCode errorCode() { return m_error; }
+	ErrorCode errorCode() const { return m_error; }
 };
 
 const int DesktopInitEventType = 41005;
@@ -116,7 +116,7 @@ const int DesktopInitEventType = 41005;
 class DesktopInitEvent : public QCustomEvent
 {
 public:
-	DesktopInitEvent() : 
+	DesktopInitEvent() :
 		QCustomEvent(DesktopInitEventType)
 	{};
 };
@@ -128,12 +128,12 @@ class ScreenRepaintEvent : public QCustomEvent
 private:
 	int m_x, m_y, m_width, m_height;
 public:
-	ScreenRepaintEvent(int x, int y, int w, int h) : 
-		QCustomEvent(ScreenRepaintEventType), 
+	ScreenRepaintEvent(int x, int y, int w, int h) :
+		QCustomEvent(ScreenRepaintEventType),
 		m_x(x),
 		m_y(y),
 		m_width(w),
-		m_height(h) 
+		m_height(h)
 	{};
 	int x() const { return m_x; };
 	int y() const { return m_y; };
@@ -146,7 +146,7 @@ const int BeepEventType = 41007;
 class BeepEvent : public QCustomEvent
 {
 public:
-	BeepEvent() : 
+	BeepEvent() :
 		QCustomEvent(BeepEventType)
 	{};
 };
