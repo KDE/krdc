@@ -356,7 +356,8 @@ void KRDC::switchToFullscreen()
 	m_isFullscreen = WINDOW_MODE_FULLSCREEN;
 
 	if (m_toolbar) {
-		delete m_toolbar;
+		m_toolbar->hide();
+		m_toolbar->deleteLater();
 		m_toolbar = 0;
 	}
 
@@ -408,7 +409,8 @@ void KRDC::switchToNormal(bool scaling)
 	}
 
 	if (m_fsToolbar) {
-		delete m_fsToolbar; 
+		m_fsToolbar->hide();
+		m_fsToolbar->deleteLater(); 
 		m_fsToolbar = 0;
 	}
 

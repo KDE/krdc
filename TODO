@@ -16,8 +16,6 @@ Future:
 
 
 Known bugs/problems:
-- Switching between fullscreen and normal mode can cause crashes with a
-  backtrace somewhere deep in Qt
 - when using the XShm extension (see DesktopInit(), CreateShmImage() 
   invocation) I get error messages like "Xlib: unexpected async reply 
   (sequence 0x1717)!" after a few seconds. That's why XShm is not used at 
