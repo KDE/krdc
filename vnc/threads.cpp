@@ -21,7 +21,9 @@
 #include "vncviewer.h"
 #include "threads.h"
 
-// Maximum idle time for writer thread in ms. When it timeouts, it will request 
+#include <qcstring.h>
+
+// Maximum idle time for writer thread in ms. When it timeouts, it will request
 // another incremental update. Must be smaller than the timeout of the server
 // (krfb's is 20s).
 static const int MAXIMUM_WAIT_PERIOD = 8000;
@@ -100,19 +102,19 @@ void ControllerThread::run() {
 			sendFatalError(ERROR_AUTHENTICATION);
 		else if (s == INIT_ABORTED)
 			changeStatus(REMOTE_VIEW_DISCONNECTED);
-		else 
-			sendFatalError(ERROR_INTERNAL);			
+		else
+			sendFatalError(ERROR_INTERNAL);
 		return;
 	}
 
-	QApplication::postEvent(m_view, 
-				new ScreenResizeEvent(si.framebufferWidth, 
+	QApplication::postEvent(m_view,
+				new ScreenResizeEvent(si.framebufferWidth,
 						      si.framebufferHeight));
-	m_wthread.queueUpdateRequest(QRegion(QRect(0,0,si.framebufferWidth, 
+	m_wthread.queueUpdateRequest(QRegion(QRect(0,0,si.framebufferWidth,
 		si.framebufferHeight)));
 
 	QApplication::postEvent(m_view, new DesktopInitEvent());
-	while ((!m_quitFlag) && (!m_desktopInitialized)) 
+	while ((!m_quitFlag) && (!m_desktopInitialized))
 		m_waiter.wait(1000);
 
 	if (m_quitFlag) {
@@ -182,10 +184,10 @@ bool WriterThread::sendIncrementalUpdateRequest() {
 
 bool WriterThread::sendUpdateRequest(const QRegion &region) {
 	QMemArray<QRect> r = region.rects();
-	for (unsigned int i = 0; i < r.size(); i++) 
-		if (!SendFramebufferUpdateRequest(r[i].x(), 
-						  r[i].y(), 
-						  r[i].width(), 
+	for (unsigned int i = 0; i < r.size(); i++)
+		if (!SendFramebufferUpdateRequest(r[i].x(),
+						  r[i].y(),
+						  r[i].width(),
 						  r[i].height(), False))
 			return false;
 	return true;
@@ -311,8 +313,8 @@ void WriterThread::run() {
 		    (updateRegionRQ.isNull()) &&
 		    (inputEvents.size() == 0) &&
 		    (clientCut.isNull())) {
-			if (!m_waiter.wait(&m_lock, 
-					   m_lastIncrUpdatePostponed ? 
+			if (!m_waiter.wait(&m_lock,
+					   m_lastIncrUpdatePostponed ?
 					   POSTPONED_INCRRQ_WAIT_PERIOD : MAXIMUM_WAIT_PERIOD))
 				m_incrementalUpdateRQ = true;
 			m_lock.unlock();
@@ -327,7 +329,7 @@ void WriterThread::run() {
 			m_clientCut = QString::null;
 			m_lock.unlock();
 
-			// always send incremental update, unless 
+			// always send incremental update, unless
 			// a) a framebuffer update is done ATM and will do the request later, or
 			// b) the last unrequested update has been done less than 0.1s ago
 			//
@@ -368,12 +370,14 @@ void WriterThread::run() {
 					sendFatalError(ERROR_IO);
 					break;
 				}
-			if (!clientCut.isNull()) 
-				if (!SendClientCutText(clientCut.latin1(), 
-						       (int)clientCut.length())) {
+			if (!clientCut.isNull())  {
+				QCString cutTextUtf8(clientCut.utf8());
+				if (!SendClientCutText(cutTextUtf8.data(),
+						       (int)cutTextUtf8.length())) {
 					sendFatalError(ERROR_IO);
 					break;
 				}
+			}
 		}
 	}
 	m_quitFlag = true;

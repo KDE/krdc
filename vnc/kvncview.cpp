@@ -419,7 +419,7 @@ void KVncView::customEvent(QCustomEvent *e)
 	else if (e->type() == ServerCutEventType) {
 		ServerCutEvent *sce = (ServerCutEvent*) e;
 		m_dontSendCb = true;
-		m_cb->setText(sce->bytes());
+		m_cb->setText(QString::fromUtf8(sce->bytes(), sce->length()));
 		m_dontSendCb = false;
 	}
 	else if (e->type() == MouseStateEventType) {
