@@ -30,30 +30,43 @@ typedef enum {
   QUALITY_LOW=3
 } Quality;
 
+/**
+ * Describes the state of a local cursor, if there is such a concept in the backend.
+ * With local cursors, there are two cursors: the cursor on the local machine (client),
+ * and the cursor on the remote machine (server). Because there is usually some lag,
+ * some backends show both cursors simultanously. In the VNC backend the local cursor
+ * is a dot and the remote cursor is the 'real' cursor, usually an arrow.
+ */
+enum DotCursorState {
+	DOT_CURSOR_ON,  ///< Always show local cursor (and the remote one).
+	DOT_CURSOR_OFF, ///< Never show local cursor, only the remote one.
+	/// Try to measure the lag and enable the local cursor if the latency is too high.
+	DOT_CURSOR_AUTO
+};
 
 /**
  * Generic widget that displays a remote framebuffer.
- * Implement this if you want to add another backend. 
+ * Implement this if you want to add another backend.
  *
  * Things to take care of:
- * @li The KRemoteView is responsible for its size. In 
+ * @li The KRemoteView is responsible for its size. In
  *     non-scaling mode, set the fixed size of the widget
  *     to the remote resolution. In scaling mode, set the
  *     maximum size to the remote size and minimum size to the
  *     smallest resolution that your scaler can handle.
  * @li if you override mouseMoveEvent()
  *     you must ignore the QEvent, because the KRDC widget will
- *     need it for stuff like toolbar auto-hide and bump 
- *     scrolling. If you use x11Event(), make sure that 
+ *     need it for stuff like toolbar auto-hide and bump
+ *     scrolling. If you use x11Event(), make sure that
  *     MotionNotify events will be forwarded.
- * 
+ *
  */
 class KRemoteView : public QWidget
 {
-	Q_OBJECT 
+	Q_OBJECT
 public:
-	KRemoteView(QWidget *parent = 0, 
-		    const char *name = 0, 
+	KRemoteView(QWidget *parent = 0,
+		    const char *name = 0,
 		    WFlags f = 0);
 
 	virtual ~KRemoteView();
@@ -64,7 +77,7 @@ public:
 	 * @return true if scaling is supported
 	 * @see scaling()
 	 */
-	virtual bool supportsScaling();
+	virtual bool supportsScaling() const;
 
 	/**
 	 * Checks whether the widget is in scale mode. The
@@ -73,7 +86,36 @@ public:
 	 *         false if @ref supportsScaling() returns false
 	 * @see supportsScaling()
 	 */
-	virtual bool scaling();
+	virtual bool scaling() const;
+
+	/**
+	 * Checks whether the backend supports the concept of local cursors. The
+	 * default implementation returns false.
+	 * @return true if local cursors are supported/known
+	 * @see DotCursorState
+	 * @see showDotCursor()
+	 * @see dotCursorState()
+	 */
+	virtual bool supportsLocalCursor() const;
+
+	/**
+	 * Sets the state of the dot cursor, if supported by the backend.
+	 * The default implementation does nothing.
+	 * @param state the new state (DOT_CURSOR_ON, DOT_CURSOR_OFF or
+	 *        DOT_CURSOR_AUTO)
+	 * @see dotCursorState()
+	 * @see supportsLocalCursor()
+	 */
+	virtual void showDotCursor(DotCursorState state);
+
+	/**
+	 * Returns the state of the local cursor. The default implementation returns
+	 * always DOT_CURSOR_OFF.
+	 * @return true if local cursors are supported/known
+	 * @see showDotCursor()
+	 * @see supportsLocalCursor()
+	 */
+	virtual DotCursorState dotCursorState() const;
 
 	/**
 	 * Checks whether the view is in view-only mode. This means
@@ -83,7 +125,7 @@ public:
 
 	/**
 	 * Returns the resolution of the remote framebuffer.
-	 * It should return a null @ref QSize when the size 
+	 * It should return a null @ref QSize when the size
 	 * is not known.
 	 * The backend must also emit a @ref changeSize()
 	 * when the size of the framebuffer becomes available
@@ -94,7 +136,7 @@ public:
 	virtual QSize framebufferSize() = 0;
 
 	/**
-	 * Initiate the disconnection. This doesn't need to happen 
+	 * Initiate the disconnection. This doesn't need to happen
 	 * immediately. The call must not block.
 	 * @see isQuitting()
 	 */
@@ -121,9 +163,9 @@ public:
 	virtual int port() = 0;
 
 	/**
-	 * Initialize the view (for example by showing configuration 
-	 * dialogs to the user) and start connecting. Should not block 
-	 * without running the event loop (so displaying a dialog is ok). 
+	 * Initialize the view (for example by showing configuration
+	 * dialogs to the user) and start connecting. Should not block
+	 * without running the event loop (so displaying a dialog is ok).
 	 * When the view starts connecting the application must call
 	 * @ref setStatus() with the status REMOTE_VIEW_CONNECTING.
 	 * @return true if successful (so far), false
@@ -141,14 +183,14 @@ public:
 	 * @see setStatus()
 	 */
 	enum RemoteViewStatus status();
-	
+
 public slots:
         /**
 	 * Called to enable or disable scaling.
 	 * Ignored if @ref supportsScaling() is false.
 	 * The default implementation does nothing.
 	 * @param s true to enable, false to disable.
-	 * @see supportsScaling() 
+	 * @see supportsScaling()
 	 * @see scaling()
 	 */
         virtual void enableScaling(bool s);
@@ -158,8 +200,8 @@ public slots:
 	 * Ignored if @ref supportsScaling() is false.
 	 * The default implementation does nothing.
 	 * @param s true to enable, false to disable.
-	 * @see supportsScaling() 
-	 * @see viewOnly() 
+	 * @see supportsScaling()
+	 * @see viewOnly()
 	 */
 	virtual void setViewOnly(bool s) = 0;
 
@@ -170,12 +212,12 @@ public slots:
 	 *           false when switching from fullscreen.
 	 */
 	virtual void switchFullscreen(bool on);
-	
+
         /**
 	 * Sends a key to the remote server.
 	 * @param k the key to send
-	 */ 
-        virtual void pressKey(XEvent *k) = 0; 
+	 */
+        virtual void pressKey(XEvent *k) = 0;
 
 signals:
         /**
@@ -183,7 +225,7 @@ signals:
 	 * called when the size is known for the first time.
 	 * @param x the width of the screen
 	 * @param y the height of the screen
-	 */ 
+	 */
 	void changeSize(int w, int h);
 
 	/**
@@ -209,7 +251,7 @@ signals:
 
 	/**
 	 * Emitted when the password dialog is shown or hidden.
-	 * @param b true when the dialog is shown, false when it has 
+	 * @param b true when the dialog is shown, false when it has
 	 *               been hidden
 	 */
 	void showingPasswordDialog(bool b);
@@ -230,7 +272,7 @@ protected:
 	enum RemoteViewStatus m_status;
 
 	/**
-	 * Set the status of the connection. 
+	 * Set the status of the connection.
 	 * Emits a statusChanged() signal.
 	 * Note that the states need to be set in a certain order,
 	 * see @ref RemoteViewStatus. setStatus() will try to do this

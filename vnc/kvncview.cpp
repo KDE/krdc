@@ -110,6 +110,10 @@ void KVncView::showDotCursor(DotCursorState state) {
 	showDotCursorInternal();
 }
 
+DotCursorState KVncView::dotCursorState() const {
+	return m_cursorState;
+}
+
 void KVncView::showDotCursorInternal() {
 	switch (m_cursorState) {
 	case DOT_CURSOR_ON:
@@ -284,11 +288,15 @@ KVncView::~KVncView()
 	freeResources();
 }
 
-bool KVncView::supportsScaling() {
+bool KVncView::supportsLocalCursor() const {
 	return true;
 }
 
-bool KVncView::scaling() {
+bool KVncView::supportsScaling() const {
+	return true;
+}
+
+bool KVncView::scaling() const {
 	return m_scaling;
 }
 

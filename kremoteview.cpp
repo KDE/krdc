@@ -17,9 +17,9 @@
 
 #include "kremoteview.h"
 
-KRemoteView::KRemoteView(QWidget *parent, 
-			 const char *name, 
-			 WFlags f) : 
+KRemoteView::KRemoteView(QWidget *parent,
+			 const char *name,
+			 WFlags f) :
 	QWidget(parent, name, f),
         m_status(REMOTE_VIEW_DISCONNECTED) {
 }
@@ -32,16 +32,16 @@ void KRemoteView::setStatus(RemoteViewStatus s) {
 	if (m_status == s)
 		return;
 
-	if (((1+(int)m_status) != (int)s) && 
+	if (((1+(int)m_status) != (int)s) &&
 	    (s != REMOTE_VIEW_DISCONNECTED)) {
 		// follow state transition rules
 
 		if (s == REMOTE_VIEW_DISCONNECTING) {
               	    if (m_status == REMOTE_VIEW_DISCONNECTED)
-			return; 
+			return;
 		}
 		else {
-			Q_ASSERT(((int) s) >= 0); 
+			Q_ASSERT(((int) s) >= 0);
 			if (((int)m_status) > ((int)s) ) {
 				m_status = REMOTE_VIEW_DISCONNECTED;
 				emit statusChanged(REMOTE_VIEW_DISCONNECTED);
@@ -61,11 +61,22 @@ void KRemoteView::setStatus(RemoteViewStatus s) {
 KRemoteView::~KRemoteView() {
 }
 
-bool KRemoteView::supportsScaling() {
+bool KRemoteView::supportsScaling() const {
 	return false;
 }
 
-bool KRemoteView::scaling() {
+bool KRemoteView::supportsLocalCursor() const {
+	return false;
+}
+
+void KRemoteView::showDotCursor(DotCursorState) {
+}
+
+DotCursorState KRemoteView::dotCursorState() const {
+	return DOT_CURSOR_OFF;
+}
+
+bool KRemoteView::scaling() const {
 	return false;
 }
 

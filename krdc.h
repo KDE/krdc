@@ -165,6 +165,7 @@ public slots:
 	void switchToNormal(bool scaling = false);
 	void switchToFullscreen(bool scaling = false);
 	void viewOnlyToggled();
+	void showLocalCursorToggled();
 
 signals:
         void disconnected();

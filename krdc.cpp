@@ -41,6 +41,7 @@
 #define BUMP_SCROLL_CONSTANT (200)
 
 const int VIEW_ONLY_ID = 10;
+const int SHOW_LOCAL_CURSOR_ID = 20;
 
 const int FS_AUTOHIDE_ID = 1;
 const int FS_FULLSCREEN_ID = 2;
@@ -369,6 +370,14 @@ QPopupMenu *KRDC::createPopupMenu(QWidget *parent) const {
 	pu->insertItem(i18n("View Only"), this, SLOT(viewOnlyToggled()), 0, VIEW_ONLY_ID);
 	pu->setCheckable(true);
 	pu->setItemChecked(VIEW_ONLY_ID, m_view->viewOnly());
+	if (m_view->supportsLocalCursor()) {
+		pu->insertItem(i18n("Always Show Local Cursor"), this,
+			SLOT(showLocalCursorToggled()), 0,
+			SHOW_LOCAL_CURSOR_ID);
+		pu->setCheckable(true);
+		pu->setItemChecked(SHOW_LOCAL_CURSOR_ID,
+			m_view->dotCursorState() == DOT_CURSOR_ON);
+	}
 	return pu;
 }
 
@@ -622,6 +631,12 @@ void KRDC::viewOnlyToggled() {
 	bool s = !m_view->viewOnly();
 	m_popup->setItemChecked(VIEW_ONLY_ID, s);
 	m_view->setViewOnly(s);
+}
+
+void KRDC::showLocalCursorToggled() {
+	bool s = (m_view->dotCursorState() != DOT_CURSOR_ON);
+	m_popup->setItemChecked(SHOW_LOCAL_CURSOR_ID, s);
+	m_view->showDotCursor(s ? DOT_CURSOR_ON : DOT_CURSOR_AUTO);
 }
 
 void KRDC::iconify()

@@ -28,12 +28,6 @@
 
 class QClipBoard;
 
-enum DotCursorState {
-	DOT_CURSOR_ON,
-	DOT_CURSOR_OFF,
-	DOT_CURSOR_AUTO
-};
-
 class KVncView : public KRemoteView
 {
 	Q_OBJECT
@@ -66,7 +60,6 @@ private:
 	unsigned long toKeySym(QKeyEvent *k);
 	bool checkLocalKRfb();
 	void paintMessage(const QString &msg);
-	void showDotCursor(DotCursorState state);
 	void showDotCursorInternal();
 	void unpressModifiers();
 
@@ -94,13 +87,15 @@ public:
 	void lockFramebuffer();
 	void unlockFramebuffer();
 	void enableClientCursor(bool enable);
-	virtual bool scaling();
-	virtual bool supportsScaling();
+	virtual bool scaling() const;
+	virtual bool supportsScaling() const;
+	virtual bool supportsLocalCursor() const;
 	virtual QSize framebufferSize();
 	void setRemoteMouseTracking(bool s);
 	bool remoteMouseTracking();
 	void configureApp(Quality q, const QString specialEncodings = QString::null);
-
+	void showDotCursor(DotCursorState state);
+	DotCursorState dotCursorState() const;
 	virtual void startQuitting();
 	virtual bool isQuitting();
 	virtual QString host();
