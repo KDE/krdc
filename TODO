@@ -3,6 +3,7 @@ For 3.1:
 
 For 3.2:
 - remove QThread::postEvent()
+- better scaling algorithm
 - button for ctrl-alt-del and similar things in normal mode
 - SASL authentication
 - X11 support
@@ -16,8 +17,6 @@ Future:
 
 
 Known bugs/problems:
-- what's this button can disappear after fullscreen. This is a Qt bug.
-- fullscreen does not always stay on top after minimizing it once
 - when using the XShm extension (see DesktopInit(), CreateShmImage() 
   invocation) I get error messages like "Xlib: unexpected async reply 
   (sequence 0x1717)!" after a few seconds. That's why XShm is not used at 
