@@ -315,12 +315,10 @@ extern int isQuitFlagSet() {
 }
 
 extern void SyncScreenRegion(int x, int y, int width, int height) {
-	if (KApplication::kApplication()->tryLock()) {
-		DrawScreenRegionX11Thread(x, y, width, height);
-		KApplication::kApplication()->unlock();
-	}
-	else
-		QThread::postEvent(kvncview, new ScreenRepaintEvent(x, y, width, height));	
+	KApplication::kApplication()->lock();
+	DrawScreenRegionX11Thread(x, y, width, height);
+	KApplication::kApplication()->unlock();
+	//QThread::postEvent(kvncview, new ScreenRepaintEvent(x, y, width, height));	
 }
 
 unsigned long KVncView::toKeySym(QKeyEvent *k)

@@ -53,7 +53,6 @@ void
 DesktopInit(Window win)
 {
   XGCValues gcv;
-  XSetWindowAttributes attr;
 
   /* image = CreateShmImage(); */
 

@@ -53,18 +53,22 @@ private:
 	QWidget *m_toolbar;
 
 	static const int TOOLBAR_AUTOHIDE_TIMEOUT = 2000;
-	bool m_ftAutoHide;
+	bool m_ftAutoHide; // if true auto hide in fs is activated
 	QTimer m_autoHideTimer;
 
 	QTimer m_bumpScrollTimer;
-
+	
 	bool m_showProgress;
-	QString m_host;
-	Quality m_quality;
+	QString m_host;      // host string as given from user
+	Quality m_quality;   // current quality setting
 	QString m_encodings;
 	AppData m_appData;
 
-	WindowMode m_isFullscreen;
+	WindowMode m_isFullscreen;  // fs/normal state
+	unsigned int m_oldResolution; // conatins encoded res before fs
+	bool m_fullscreenMinimized; //true if minimized from fs
+	QSize m_fullscreenResolution; // xvidmode size (valid only in fs)
+	QRect m_oldWindowGeometry; // geometry before switching to fullscreen
 
 	void configureApp(Quality q);
 	void parseHost(QString &s, QString &serverHost, int &serverPort);
@@ -85,6 +89,7 @@ private:
 
 protected:
 	void mouseMoveEvent(QMouseEvent *e);
+	bool event(QEvent *e);
 
 public:
 	KRDC(WindowMode wm = WINDOW_MODE_AUTO, 
@@ -101,11 +106,13 @@ private slots:
 	void showProgressTimeout();
 
 	void setSize(int w, int h);
+	void iconify();
 
 	void bumpScroll();
 
 	void setFsToolbarAutoHide(bool on);
 	void fsToolbarHide();
+
 	
 public slots:
 	void quit();

@@ -100,7 +100,7 @@ Bool HandleXCursor(int xhot, int yhot, int width, int height)
   Pixmap source, mask;
   Cursor cursor;
   int i;
-
+fprintf(stderr, "Received undemanded XCursor!\n");
   bytesPerRow = (width + 7) / 8;
   bytesData = bytesPerRow * height;
   dr = DefaultRootWindow(dpy);
@@ -119,7 +119,7 @@ Bool HandleXCursor(int xhot, int yhot, int width, int height)
     }
 
     /*    lockQt(); */
-    XQueryBestCursor(dpy, dr, width, height, &wret, &hret);
+    /* XQueryBestCursor(dpy, dr, width, height, &wret, &hret); */
     /* unlockQt(); */
   }
 
