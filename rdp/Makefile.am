@@ -12,9 +12,9 @@ METASOURCES = AUTO
 
 noinst_LTLIBRARIES = librdp.la
 
-librdp_la_SOURCES = bitmap.c cache.c ewmhints.c iso.c krdpview.cpp licence.c \
+librdp_la_SOURCES = threads.cpp bitmap.c cache.c ewmhints.c iso.c krdpview.cpp licence.c \
                     mcs.c orders.c rdesktop.c rdp.c rdphostpref.cpp secure.c \
-                    tcp.c threads.cpp xkeymap.c xwin.c rdpprefs.ui
+                    tcp.c xkeymap.c xwin.c rdpprefs.ui
 
 noinst_HEADERS = krdpview.h constants.h orders.h parse.h \
                  proto.h rdesktop.h rdphostpref.h scancodes.h threads.h types.h
