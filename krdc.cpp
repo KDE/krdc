@@ -357,6 +357,9 @@ QRect KRDC::getAutoHideToolbarGeometry()
 
 void KRDC::switchToNormal(bool scaling)
 {
+	QRect oldGeometry;
+	if (m_isFullscreen == WINDOW_MODE_NORMAL)
+	    oldGeometry = frameGeometry();
 	hide();
 	m_isFullscreen = WINDOW_MODE_NORMAL;
 	m_view->enableScaling(scaling);
@@ -422,6 +425,9 @@ void KRDC::switchToNormal(bool scaling)
 	m_layout->activate();
 
 	showNormal();
+	    
+	if (!oldGeometry.isNull())
+		setGeometry(oldGeometry);
 
 	setMouseTracking(false);
 }
