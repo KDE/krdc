@@ -84,6 +84,8 @@ int main(int argc, char *argv[])
 		quality = QUALITY_LOW;
 	else if (args->isSet("medium-quality"))
 		quality = QUALITY_MEDIUM;
+	else if (args->isSet("high-quality"))
+		quality = QUALITY_HIGH;
 
 	if (args->isSet("fullscreen"))
 		wm = WINDOW_MODE_FULLSCREEN;
