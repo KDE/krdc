@@ -261,11 +261,13 @@ void KRDC::changeProgress(RemoteViewStatus s) {
 	if (s == REMOTE_VIEW_CONNECTING) {
 		m_progress->setValue(0);
 		m_progressDialog->setLabel(i18n("Establishing connection..."));
+		m_progressDialog->setAllowCancel(false);
 		showProgressDialog();
 	}
 	else if (s == REMOTE_VIEW_AUTHENTICATING) {
 		m_progress->setValue(1);
 		m_progressDialog->setLabel(i18n("Authenticating..."));
+		m_progressDialog->setAllowCancel(true);
 	}
 	else if (s == REMOTE_VIEW_PREPARING) {
 		m_progress->setValue(2);
