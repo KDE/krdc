@@ -136,11 +136,11 @@ KServiceLocatorPrivate::KServiceLocatorPrivate(KServiceLocator *ksl,
 /*     Signals for async events     */
 /*   ****** *** ****** *** ******   */
 
-const int MinLastSignalEventType = 785001;
-const int LastServiceTypeSignalEventType = 785001;
-const int LastServiceSignalEventType = 785002;
-const int LastAttributesSignalEventType = 785003;
-const int MaxLastSignalEventType = 785003;
+const int MinLastSignalEventType = 45001;
+const int LastServiceTypeSignalEventType = 45001;
+const int LastServiceSignalEventType = 45002;
+const int LastAttributesSignalEventType = 45003;
+const int MaxLastSignalEventType = 45003;
 class LastSignalEvent : public QCustomEvent
 {
 private:
