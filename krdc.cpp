@@ -15,7 +15,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "newconnectiondialog.h"
+#include "srvlocncdialog.h"
 #include "toolbar.h"
 #include "fullscreentoolbar.h"
 #include "krdc.h"
@@ -29,6 +29,7 @@
 #include <kconfig.h>
 #include <kurl.h>
 #include <klocale.h>
+#include <kdialog.h>
 #include <qlabel.h> 
 #include <qtoolbutton.h> 
 
@@ -97,7 +98,8 @@ bool KRDC::start(bool onlyFailOnCancel)
 		if (m_quality == QUALITY_UNKNOWN)
 			m_quality = QUALITY_MEDIUM;
 	} else {
-		NewConnectionDialog ncd(0, 0, true);
+		SrvLocNCDialog ncd(0, "SrvLocNCDialog", 
+				   config->readBoolEntry("browsingPanel", false));
 		QStringList list = config->readListEntry("serverCompletions");
 		ncd.serverInput->completionObject()->setItems(list);
 		list = config->readListEntry("serverHistory");
@@ -105,8 +107,7 @@ bool KRDC::start(bool onlyFailOnCancel)
 		ncd.serverInput->setEditText(m_lastHost);
 		ncd.qualityCombo->setCurrentItem(m_lastQuality);
 
-		if ((ncd.exec() == QDialog::Rejected) ||
-		    (ncd.serverInput->currentText().length() == 0)) {
+		if (ncd.exec() == QDialog::Rejected) {
 			return false;
 		}
 
@@ -141,6 +142,7 @@ bool KRDC::start(bool onlyFailOnCancel)
 		config->writeEntry("serverCompletions", list);
 		list = ncd.serverInput->historyItems();
 		config->writeEntry("serverHistory", list);
+		config->writeEntry("browsingPanel", ncd.browsing());
 	}
 
 	setCaption(i18n("%1 - Remote Desktop Connection").arg(m_host));
