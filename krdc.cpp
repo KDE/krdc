@@ -225,6 +225,8 @@ void KRDC::changeProgress(RemoteViewStatus s) {
 			connect(m_view, SIGNAL(disconnectedError()), 
 				SIGNAL(disconnected()));
 		}
+		else if (m_isFullscreen == WINDOW_MODE_FULLSCREEN)
+			switchToNormal(m_view->scaling());
 	}
 }
 
@@ -279,7 +281,7 @@ void KRDC::configureApp(Quality q) {
 		m_appData.useBGR233 = 0;
 		m_appData.encodingsString = "copyrect softcursor tight zlib hextile raw";
 		m_appData.compressLevel = -1;
-		m_appData.qualityLevel = 6;
+		m_appData.qualityLevel = 7;
 		m_appData.dotCursor = 1;
 	}
 	else if (q == QUALITY_HIGH) {
