@@ -1,0 +1,12 @@
+Read this for how to use the rdesktop patch:
+
+This patch is intended for rdesktop 1.3.1 only. It has not been tested
+with other versions, and future versions should (hopefully) include it
+by default.
+
+- Get a copy of the rdesktop 1.3.1 sources and unpack it.
+- Place the rdesktop.patch file in the top directory of the unpacked
+  sources.
+- Go to the directory where you placed the patch and type the following
+  command: patch -p 0 -i rdesktop.patch
+- You can now compile the sources as usual.
