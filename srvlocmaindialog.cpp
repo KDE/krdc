@@ -184,9 +184,13 @@ void SrvLocMainDialog::rescan() {
 }
 
 void SrvLocMainDialog::foundService(QString url, int) {
-	QRegExp rx("^service:remotedesktop\\.kde:(\\w+)://([^;]+);(.*)$");
-	if (rx.search(url) < 0)
+	QRegExp rx( "^service:remotedesktop\\.kde:(\\w+)://([^;]+);(.*)$" );
+
+	if (rx.search(url) < 0){
+	   rx = QRegExp( "^service:remotedesktop\\.kde:(\\w+)://(.*)$" );
+ 	   if (rx.search(url) < 0)
 		return;
+        }
 
 	QMap<QString,QString> map;
 	KServiceLocator::parseAttributeList(rx.cap(3), map);
