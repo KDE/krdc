@@ -28,6 +28,11 @@
 #include <errno.h>		/* errno */
 #include "rdesktop.h"
 
+// Solaris doesn't have an INADDR_NONE (but does understand -1).
+#ifndef INADDR_NONE
+#define INADDR_NONE (-1)
+#endif
+
 static int sock;
 static struct stream in;
 static struct stream out;
