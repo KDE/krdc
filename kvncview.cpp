@@ -26,14 +26,13 @@
 #include <kapplication.h>
 #include <qdatastream.h>
 #include <dcopclient.h>
-#include <qcursor.h>
 #include <qbitmap.h>
 #include <qlineedit.h>
 #include <qdialog.h>
 #include <qmutex.h>
 #include <qwaitcondition.h>
-#include "kvncview.h"
 
+#include "kvncview.h"
 #include "vncviewer.h"
 
 /*
@@ -84,23 +83,27 @@ KVncView::KVncView(QWidget *parent,
 	m_cb->setSelectionMode(true);
 	connect(m_cb, SIGNAL(selectionChanged()), this, SLOT(selectionChanged()));
 
-	showDotCursor(appData.dotCursor ? true : false);
-}
-
-void KVncView::showDotCursor(bool show) {
-
-	if (!show) {
-		setCursor(QCursor(Qt::BlankCursor));
-		return;
-	}
-
 	KStandardDirs *dirs = KGlobal::dirs();
 	QBitmap cursorBitmap(dirs->findResource("appdata", 
 						"pics/pointcursor.png"));
 	QBitmap cursorMask(dirs->findResource("appdata", 
 					      "pics/pointcursormask.png"));
-	QCursor cursor(cursorBitmap, cursorMask);
-	setCursor(cursor);
+	m_cursor = QCursor(cursorBitmap, cursorMask);
+
+	/* Reverse m_cursorOn because showDotCursor only works when state changed */
+	m_cursorOn = appData.dotCursor ? false : true;
+	showDotCursor(!m_cursorOn);
+}
+
+void KVncView::showDotCursor(bool show) {
+	if (show == m_cursorOn)
+		return;
+
+	m_cursorOn = show;
+	if (!show)
+		setCursor(QCursor(Qt::BlankCursor));
+	else
+		setCursor(m_cursor);
 }
 
 void KVncView::setDefaultAppData() {
@@ -339,6 +342,11 @@ void KVncView::customEvent(QCustomEvent *e)
 		ServerCutEvent *sce = (ServerCutEvent*) e;
 		m_cb->setText(sce->bytes());
 	}
+	else if (e->type() == MouseStateEventType) {
+		MouseStateEvent *mse = (MouseStateEvent*) e;
+		emit mouseStateChanged(mse->x(), mse->y(), mse->buttonMask());
+		showDotCursor(m_plom.handlePointerEvent(mse->x(), mse->y()));
+	}
 }
 
 void KVncView::mouseEvent(QMouseEvent *e) {
@@ -371,6 +379,7 @@ void KVncView::mouseEvent(QMouseEvent *e) {
 		x = (x * m_framebufferSize.width()) / width();
 		y = (y * m_framebufferSize.height()) / height();
 	}
+	m_plom.registerPointerState(x, y);
 	m_wthread.queueMouseEvent(x, y, m_buttonMask);
 }
 
@@ -427,6 +436,14 @@ QSize KVncView::sizeHint() {
 	return maximumSize();
 }
 
+void KVncView::setRemoteMouseTracking(bool s) {
+	m_remoteMouseTracking = s;
+}
+
+bool KVncView::remoteMouseTracking() {
+	return m_remoteMouseTracking;
+}
+
 void KVncView::selectionChanged() {
 	if (status() != REMOTE_VIEW_CONNECTED)
 		return;
@@ -479,6 +496,10 @@ extern void beep() {
 
 extern void newServerCut(char *bytes, int length) {
 	QThread::postEvent(kvncview, new ServerCutEvent(bytes, length));
+}
+
+extern void postMouseEvent(int x, int y, int buttonMask) {
+	QThread::postEvent(kvncview, new MouseStateEvent(x, y, buttonMask));
 }
 
 unsigned long KVncView::toKeySym(QKeyEvent *k)

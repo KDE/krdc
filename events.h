@@ -154,3 +154,23 @@ public:
 	char *bytes() const { return m_bytes; };
 };
 
+const int MouseStateEventType = 781009;
+
+class MouseStateEvent : public QCustomEvent
+{
+private:
+	int m_x, m_y, m_buttonMask;
+public:
+	MouseStateEvent(int x, int y, int buttonMask) :
+		QCustomEvent(MouseStateEventType),
+		m_x(x),
+		m_y(y),
+		m_buttonMask(buttonMask)
+	{};
+	~MouseStateEvent() {
+	}
+	int x() const { return m_x; };
+	int y() const { return m_y; };
+	int buttonMask() const { return m_buttonMask; };
+};
+

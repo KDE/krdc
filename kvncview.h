@@ -22,11 +22,17 @@
 #include <kapplication.h>
 #include <qclipboard.h>
 #include <qwidget.h>
+#include <qcursor.h>
 
+#include "pointerlatencyometer.h"
 #include "threads.h"
 #include "vnctypes.h"
 
-
+enum DotCursorState {
+	DOT_CURSOR_ON,
+	DOT_CURSOR_OFF, 
+	DOT_CURSOR_AUTO 
+};
 
 class KVncView : public QWidget
 {
@@ -39,19 +45,24 @@ private:
 
 	QSize m_framebufferSize;
 	bool m_scaling;
-
+	bool m_remoteMouseTracking;
+	
 	int m_buttonMask;
 
 	QString m_host;
 	int m_port;
 
 	QClipboard *m_cb;
+	QCursor m_cursor;
+	bool m_cursorOn;
+	PointerLatencyOMeter m_plom;
 
 	void setDefaultAppData();
 	void mouseEvent(QMouseEvent*);
 	unsigned long toKeySym(QKeyEvent *k);
 	bool checkLocalKRfb();
 	void paintMessage(const QString &msg);
+	void showDotCursor(bool show);
 
 protected:
 	void paintEvent(QPaintEvent*);
@@ -75,6 +86,8 @@ public:
 	void drawRegion(int x, int y, int w, int h);
 	bool scaling();
 	QSize framebufferSize();
+	void setRemoteMouseTracking(bool s);
+	bool remoteMouseTracking();
 
 	void startQuitting();
 	bool isQuitting();
@@ -86,7 +99,6 @@ public:
 
 public slots:
         void enableScaling(bool s);
-	void showDotCursor(bool show);
 
 private slots:
 	void selectionChanged();
@@ -98,6 +110,7 @@ signals:
 	void disconnectedError();
 	void statusChanged(RemoteViewStatus s);
 	void showingPasswordDialog(bool b);
+	void mouseStateChanged(int x, int y, int buttonMask);
 };
 
 #endif

@@ -550,6 +550,9 @@ HandleSoftCursorMove(rfbSoftCursorMove *msg, rfbRectangle *rect)
     SyncScreenRegion(ox, oy, ow, oh);
     SyncScreenRegion(nx, ny, nw, nh);
   }
+
+  postMouseEvent(cursorX, cursorY, msg->buttonMask);
+
   return True;
 }
 

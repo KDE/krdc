@@ -10,7 +10,7 @@ krdc_SOURCES = main.cpp krdc.cpp kvncview.cpp threads.cpp vidmode.cpp \
 
 noinst_HEADERS = main.h krdc.h kvncview.h vidmode.h rfbproto.h  \
    kfullscreenpanel.h vncviewer.h vnctypes.h vncauth.h events.h \
-   threads.h newconnectiondialog.ui.h 
+   pointerlatencyometer.h threads.h newconnectiondialog.ui.h 
 
 EXTRA_DIST = README TODO
 

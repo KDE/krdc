@@ -69,7 +69,8 @@ extern int isQuitFlagSet();
 extern int getPassword(char *passwd, int pwlen);
 extern void DrawScreenRegion(int x, int y, int width, int height);
 extern void beep();
-void newServerCut(char *bytes, int len);
+extern void newServerCut(char *bytes, int len);
+extern void postMouseEvent(int x, int y, int buttonMask);
 
 /** threads.cpp **/
 
