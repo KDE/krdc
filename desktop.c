@@ -682,8 +682,8 @@ static void transformZoomSrc(int six, int siy, int siw, int sih,
   
   *dix = dx;
   *diy = dy;
-  *diw = dw;
-  *dih = dh;
+  *diw = dw+(dx-(int)dx)+0.5;
+  *dih = dh+(dy-(int)dy)+0.5;
 }
 
 static void transformZoomDst(int *six, int *siy, int *siw, int *sih,
@@ -706,8 +706,8 @@ static void transformZoomDst(int *six, int *siy, int *siw, int *sih,
   
   *six = sx;
   *siy = sy;
-  *siw = sw;
-  *sih = sh;
+  *siw = sw+(sx-(int)sx)+0.5;
+  *sih = sh+(sy-(int)sy)+0.5;
 }
 
 
