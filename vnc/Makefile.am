@@ -15,6 +15,3 @@ libvnc_la_LIBADD   = $(LIB_KDEUI) $(LIBJPEG)
 libvnc_la_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
 INCLUDES= -I$(top_srcdir)/krdc -I.. $(all_includes)
-
-messages: rc.cpp
-	$(XGETTEXT) *.cpp *.h -o $(podir)/krdc.pot

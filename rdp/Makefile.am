@@ -35,7 +35,3 @@ uninstall-local:
 	rm -r $(DESTDIR)$(kde_datadir)/krdc/rdp-keymaps/$$file
 
 AM_CFLAGS = -DWITH_OPENSSL -DKEYMAP_PATH=\"$(keymapdir)/\"
-
-messages: rc.cpp
-	$(XGETTEXT) *.cpp *.h -o $(podir)/krdc.pot
-
