@@ -180,6 +180,11 @@ bool KRdpView::start()
 void KRdpView::switchFullscreen(bool on)
 {
 	fullscreen = (on ? True : False);
+
+	if(on == false)
+	{
+		grabKeyboard();
+	}
 }
 
 // captures pressed keys

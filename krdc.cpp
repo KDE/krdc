@@ -196,7 +196,6 @@ bool KRDC::start()
 	connect(m_keyCaptureDialog, SIGNAL(keyPressed(XEvent*)),
 		m_view, SLOT(pressKey(XEvent*)));
 
-	m_view->grabKeyboard();
 	return m_view->start();
 }
 
