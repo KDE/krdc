@@ -381,7 +381,7 @@ static void SoftCursorDraw(void)
   int x, y, x0, y0;
   int offset, bytesPerPixel;
   char *pos;
-
+return;
   bytesPerPixel = myFormat.bitsPerPixel / 8;
 
   /* FIXME: Speed optimization is possible. */

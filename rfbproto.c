@@ -354,8 +354,9 @@ SetFormatAndEncodings()
       /* if (se->nEncodings < MAX_ENCODINGS)
 	encs[se->nEncodings++] = Swap32IfLE(rfbEncodingXCursor);
       */
-      if (se->nEncodings < MAX_ENCODINGS)
+      /*if (se->nEncodings < MAX_ENCODINGS)
 	encs[se->nEncodings++] = Swap32IfLE(rfbEncodingRichCursor);
+      */
     }
 
     if (se->nEncodings < MAX_ENCODINGS && requestLastRectEncoding) {
