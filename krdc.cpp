@@ -17,8 +17,6 @@
 
 #include "krdc.h"
 #include "srvlocmaindialog.h"
-#include "toolbar.h"
-#include "fullscreentoolbar.h"
 #include <kdebug.h>
 #include <kapplication.h>
 #include <kcombobox.h>
@@ -31,9 +29,14 @@
 #include <kstandarddirs.h>
 #include <klocale.h>
 #include <kdialog.h>
+#include <ktoolbar.h>
+#include <ktoolbarbutton.h>
+#include <kpopupmenu.h>
 #include <qlabel.h>
 #include <qtoolbutton.h>
 #include <qwhatsthis.h>
+#include <qtooltip.h>
+#include <qiconset.h>
 
 #include <kmessagebox.h>
 #include <kwin.h>
@@ -45,6 +48,15 @@
 #include <qbitmap.h>
 
 #define BUMP_SCROLL_CONSTANT (200)
+
+const int VIEW_ONLY_ID = 10;
+
+const int FS_AUTOHIDE_ID = 1;
+const int FS_FULLSCREEN_ID = 2;
+const int FS_SCALE_ID = 3;
+const int FS_HOSTLABEL_ID = 4;
+const int FS_ICONIFY_ID = 5;
+const int FS_CLOSE_ID = 6;
 
 const int KRDC::TOOLBAR_AUTOHIDE_TIMEOUT = 2000;
 const int KRDC::TOOLBAR_FPS_1000 = 10000;
@@ -80,6 +92,7 @@ KRDC::KRDC(WindowMode wm, const QString &host,
   m_view(0),
   m_fsToolbar(0),
   m_toolbar(0),
+  m_popup(0),
   m_ftAutoHide(false),
   m_showProgress(false),
   m_host(host),
@@ -389,6 +402,7 @@ void KRDC::switchToFullscreen(bool scaling)
 		m_toolbar->hide();
 		m_toolbar->deleteLater();
 		m_toolbar = 0;
+		m_popup = 0;
 	}
 	if (m_fsToolbar) {
 		m_fsToolbar->hide();
@@ -413,27 +427,57 @@ void KRDC::switchToFullscreen(bool scaling)
 		m_view->enableScaling(false);
 
 	m_fsToolbar = new KFullscreenPanel(this, "fstoolbar", m_fullscreenResolution);
-	FullscreenToolbar *t = new FullscreenToolbar(m_fsToolbar);
-	m_fsToolbarWidget = t;
-	t->hostLabel->setName("kde toolbar widget");
-	t->hostLabel->setText(m_host);
-	t->fullscreenButton->setOn(true);
-	t->scaleButton->setOn(scaling);
-	if (scalingPossible)
-		t->scaleButton->show();
-	else
-		t->scaleButton->hide();
-	m_fsToolbar->setChild(t);
 	connect(m_fsToolbar, SIGNAL(mouseEnter()), SLOT(showFullscreenToolbar()));
 	connect(m_fsToolbar, SIGNAL(mouseLeave()), SLOT(hideFullscreenToolbarDelayed()));
-	connect((QObject*)t->closeButton, SIGNAL(clicked()), SLOT(quit()));
-	connect((QObject*)t->iconifyButton, SIGNAL(clicked()), SLOT(iconify()));
-	connect((QObject*)t->fullscreenButton, SIGNAL(toggled(bool)),
-		SLOT(enableFullscreen(bool)));
-	connect((QObject*)t->scaleButton, SIGNAL(toggled(bool)),
-		SLOT(switchToFullscreen(bool)));
-	connect((QObject*)t->autohideButton, SIGNAL(clicked()),
-		SLOT(toggleFsToolbarAutoHide()));
+
+	KToolBar *t = new KToolBar(m_fsToolbar);
+	m_fsToolbarWidget = t;
+
+	QIconSet pinIconSet;
+	pinIconSet.setPixmap(m_pinup, QIconSet::Automatic, QIconSet::Normal, QIconSet::On);
+	pinIconSet.setPixmap(m_pindown, QIconSet::Automatic, QIconSet::Normal, QIconSet::Off);
+	t->insertButton("pinup", FS_AUTOHIDE_ID);
+	KToolBarButton *pinButton = t->getButton(FS_AUTOHIDE_ID);
+	pinButton->setIconSet(pinIconSet);
+	QToolTip::add(pinButton, i18n("Autohide on/off"));
+	t->setToggle(FS_AUTOHIDE_ID);
+	t->setButton(FS_AUTOHIDE_ID, false);
+	t->addConnection(FS_AUTOHIDE_ID, SIGNAL(clicked()), this, SLOT(toggleFsToolbarAutoHide()));
+
+	t->insertButton("window_fullscreen", FS_FULLSCREEN_ID);
+	KToolBarButton *fullscreenButton = t->getButton(FS_FULLSCREEN_ID);
+	QToolTip::add(fullscreenButton, i18n("Fullscreen"));
+	t->setToggle(FS_FULLSCREEN_ID);
+	t->setButton(FS_FULLSCREEN_ID, true);
+	t->addConnection(FS_FULLSCREEN_ID, SIGNAL(toggled(bool)), this, SLOT(enableFullscreen(bool)));
+
+	if (scalingPossible) {
+		t->insertButton("viewmagfit", FS_SCALE_ID);
+		KToolBarButton *scaleButton = t->getButton(FS_SCALE_ID);
+		QToolTip::add(scaleButton, i18n("Scale View"));
+		t->setToggle(FS_SCALE_ID);
+		t->setButton(FS_SCALE_ID, scaling);
+		t->addConnection(FS_SCALE_ID, SIGNAL(toggled(bool)), this, SLOT(switchToFullscreen(bool)));
+	}
+
+	QLabel *hostLabel = new QLabel(t);
+	hostLabel->setAlignment(Qt::AlignCenter);
+	hostLabel->setText("   "+m_host+"   ");
+	t->insertWidget(FS_HOSTLABEL_ID, 400, hostLabel);
+	t->setItemAutoSized(FS_HOSTLABEL_ID, true);
+
+	t->insertButton("iconify", FS_ICONIFY_ID);
+	KToolBarButton *iconifyButton = t->getButton(FS_ICONIFY_ID);
+	QToolTip::add(iconifyButton, i18n("Minimize"));
+	t->addConnection(FS_ICONIFY_ID, SIGNAL(clicked()), this, SLOT(iconify()));
+
+	t->insertButton("close", FS_CLOSE_ID);
+	KToolBarButton *closeButton = t->getButton(FS_CLOSE_ID);
+	QToolTip::add(closeButton, i18n("Close"));
+	t->addConnection(FS_CLOSE_ID, SIGNAL(clicked()), this, SLOT(quit()));
+
+	m_fsToolbar->setChild(t);
+
 	repositionView(true);
 	showFullScreen();
 
@@ -480,22 +524,46 @@ void KRDC::switchToNormal(bool scaling)
 	}
 
 	if (!m_toolbar) {
-		Toolbar *t = new Toolbar(this);
+		KToolBar *t = new KToolBar(this);
 		m_toolbar = t;
+		t->setIconText(KToolBar::IconTextRight);
 		t->setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding,
 					     QSizePolicy::Fixed));
-		t->fullscreenButton->setOn(false);
-		t->scaleButton->setOn(scaling);
-		if (m_view->supportsScaling())
-			t->scaleButton->show();
-		else
-			t->scaleButton->hide();
-		connect((QObject*)t->fullscreenButton, SIGNAL(toggled(bool)),
-			SLOT(enableFullscreen(bool)));
-		connect((QObject*)t->scaleButton, SIGNAL(toggled(bool)),
-			SLOT(switchToNormal(bool)));
-		connect((QObject*)t->specialKeyButton, SIGNAL(clicked()),
-			m_keyCaptureDialog, SLOT(execute()));
+		t->insertButton("window_fullscreen", 0, true, i18n("Fullscreen"));
+		KToolBarButton *fullscreenButton = t->getButton(0);
+		QToolTip::add(fullscreenButton, i18n("Fullscreen"));
+		QWhatsThis::add(fullscreenButton, i18n("Switches to full screen. If the remote desktop has a different screen resolution, Remote Desktop Connection will automatically switch to the nearest resolution."));
+		t->setToggle(0);
+		t->setButton(0, false);
+		t->addConnection(0, SIGNAL(toggled(bool)), this, SLOT(enableFullscreen(bool)));
+
+		if (m_view->supportsScaling()) {
+			t->insertButton("viewmagfit", 1, true, i18n("Scale"));
+			KToolBarButton *scaleButton = t->getButton(1);
+			QToolTip::add(scaleButton, i18n("Scale View"));
+			QWhatsThis::add(scaleButton, i18n("This option scales the remote screen to fit your window size."));
+			t->setToggle(1);
+			t->setButton(1, scaling);
+			t->addConnection(1, SIGNAL(toggled(bool)), this, SLOT(switchToNormal(bool)));
+		}
+
+		t->insertButton("key_enter", 2, true, i18n("Special Keys"));
+		KToolBarButton *skButton = t->getButton(2);
+		QToolTip::add(skButton, i18n("Enter special keys."));
+		QWhatsThis::add(skButton, i18n("This option allows you to send special key combinations like Ctrl-Alt-Del to the remote host."));
+		t->addConnection(2, SIGNAL(clicked()), m_keyCaptureDialog, SLOT(execute()));
+
+		KPopupMenu *pu = new KPopupMenu(t);
+
+		t->insertButton("configure", 3, pu, true, i18n("Advanced"));
+		KToolBarButton *advancedButton = t->getButton(3);
+		QToolTip::add(skButton, i18n("Advanced options"));
+		advancedButton->setPopupDelay(0);
+
+		pu->insertItem(i18n("View only"), this, SLOT(viewOnlyToggled()), VIEW_ONLY_ID);
+		pu->setCheckable(true);
+		pu->setItemChecked(VIEW_ONLY_ID, m_view->viewOnly());
+		m_popup = pu;
 	}
 
 	if (scaling) {
@@ -531,6 +599,12 @@ void KRDC::switchToNormal(bool scaling)
 	}
 	else
 		showNormal();
+}
+
+void KRDC::viewOnlyToggled() {
+	bool s = !m_view->viewOnly();
+	m_popup->setItemChecked(VIEW_ONLY_ID, s);
+	m_view->setViewOnly(s);
 }
 
 void KRDC::iconify()
@@ -653,13 +727,8 @@ void KRDC::setFsToolbarAutoHide(bool on) {
 		return;
 
 	m_ftAutoHide = on;
-	QButton *b = ((FullscreenToolbar*)m_fsToolbarWidget)->autohideButton;
-	if (on)
-		b->setPixmap(m_pinup);
-	else {
-		b->setPixmap(m_pindown);
+	if (!on)
 		showFullscreenToolbar();
-	}
 }
 
 void KRDC::hideFullscreenToolbarNow() {

@@ -34,6 +34,8 @@
 #include "vidmode.h"
 #include "smartptr.h"
 
+class KToolBar;
+class KPopupMenu;
 
 enum WindowMode {
 	WINDOW_MODE_AUTO,
@@ -72,7 +74,8 @@ private:
 	QWidget *m_fsToolbarWidget;        // qt designer widget for fs toolbar 
                                            //     (invalid in normal mode)
 	QPixmap m_pinup, m_pindown;        // fs toolbar imaged for autohide button
-	QWidget *m_toolbar;                // toolbar in normal mode (0 in fs mode)
+	KToolBar *m_toolbar;               // toolbar in normal mode (0 in fs mode)
+	QPopupMenu *m_popup;               // advanced options popup (0 in fs mode)
 	QDesktopWidget m_desktopWidget;
 
 	static const int TOOLBAR_AUTOHIDE_TIMEOUT;
@@ -100,7 +103,6 @@ private:
                                       // The current state is m_view->scaled().
 	QSize m_initialWindowSize;    // initial window size (windowed mode only),
 	                              // invalid after first use
-
 	static QString m_lastHost; // remembers last value of host input
 
 	bool parseHost(QString &s, Protocol &prot, QString &serverHost, int &serverPort,
@@ -159,6 +161,7 @@ public slots:
 	void enableFullscreen(bool full = false);
 	void switchToNormal(bool scaling = false);
 	void switchToFullscreen(bool scaling = false);
+	void viewOnlyToggled();
 
 signals:
         void disconnected(); 

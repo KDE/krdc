@@ -47,6 +47,7 @@ class KRdpView : public KRemoteView
 		// functions regarding the window
 		virtual QSize framebufferSize();         // returns the size of the remote view
 		QSize sizeHint();                        // returns the suggested size
+		virtual bool viewOnly();
         
 		// functions regarding the connection
 		virtual void startQuitting();            // start closing the connection
@@ -58,6 +59,7 @@ class KRdpView : public KRemoteView
 	public slots:
 		virtual void switchFullscreen(bool on);
 		virtual void pressKey(XEvent *k);        // send a generated key to the server
+		virtual void setViewOnly(bool s);
 
 	private:
 		// properties used for setting up the connection
@@ -74,6 +76,7 @@ class KRdpView : public KRemoteView
 		// other properties
 		int m_buttonMask;
 		volatile bool m_quitFlag;          // if set: all threads should die ASAP    
+		bool m_viewOnly;                   // if set: ignore all input
 
 		// threads
 		RdpControllerThread m_cthread;     // this is the thread that communicates with the RDP server

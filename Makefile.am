@@ -6,19 +6,18 @@ METASOURCES = AUTO
 
 bin_PROGRAMS = krdc
 krdc_SOURCES = main.cpp krdc.cpp vidmode.cpp kfullscreenpanel.cpp \
-  preferences.ui maindialog.ui fullscreentoolbar.ui toolbar.ui \
-  kservicelocator.cpp srvlocmaindialog.cpp keycapturedialog.ui \
-  keycapturedialog2.cpp kremoteview.cpp smartptr.cpp hostpreferences.cpp
+  preferences.ui maindialog.ui keycapturedialog.ui \
+  kservicelocator.cpp srvlocmaindialog.cpp keycapturedialog2.cpp \
+  kremoteview.cpp smartptr.cpp hostpreferences.cpp
 
 noinst_HEADERS = main.h krdc.h vidmode.h kfullscreenpanel.h events.h \
    maindialog.ui.h kservicelocator.h srvlocmaindialog.h \
    keycapturedialog2.h kremoteview.h smartptr.h hostpreferences.h
 
-EXTRA_DIST = README TODO window_fullscreen.png window_nofullscreen.png \
-             iconify.png close.png scale.png
+EXTRA_DIST = README TODO
 
 appdatadir = $(kde_datadir)/krdc/pics
-appdata_DATA =  pointcursor.png pointcursormask.png pinup.png pindown.png 
+appdata_DATA =  pointcursor.png pointcursormask.png pinup.png pindown.png  iconify.png close.png
 
 
 krdc_LDADD   = vnc/libvnc.la rdp/librdp.la $(LIB_KDEUI) $(LIBXF86VIDMODE) $(LIB_SLP) -L/usr/X11R6/lib -lX11 $(LIBSSL)

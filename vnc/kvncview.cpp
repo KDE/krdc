@@ -73,6 +73,8 @@ KVncView::KVncView(QWidget *parent,
   m_quitFlag(false),
   m_enableFramebufferLocking(false),
   m_scaling(false),
+  m_remoteMouseTracking(false),
+  m_viewOnly(false),
   m_buttonMask(0),
   m_host(_host),
   m_port(_port),
@@ -108,7 +110,11 @@ void KVncView::showDotCursor(bool show) {
 		return;
 
 	m_cursorEnabled = s;
-	if (!s)
+	showDotCursorInternal();
+}
+
+void KVncView::showDotCursorInternal() {
+	if (!m_cursorEnabled)
 		setCursor(QCursor(Qt::BlankCursor));
 	else
 		setCursor(m_cursor);
@@ -169,9 +175,11 @@ void KVncView::configureApp(Quality q, const QString specialEncodings) {
 	appData.rawDelay = 0;
 	appData.copyRectDelay = 0;
 
-	/* Reverse m_cursorEnabled because showDotCursor only works when state changed */
-	m_cursorEnabled = appData.dotCursor ? false : true;
-	showDotCursor(!m_cursorEnabled);
+	if (m_enableClientCursor)
+		m_cursorEnabled = false;
+	else
+		m_cursorEnabled = appData.dotCursor ? true : false;
+	showDotCursorInternal();
 }
 
 bool KVncView::checkLocalKRfb() {
@@ -272,8 +280,21 @@ bool KVncView::scaling() {
 	return m_scaling;
 }
 
+bool KVncView::viewOnly() {
+	return m_viewOnly;
+}
+
 QSize KVncView::framebufferSize() {
 	return m_framebufferSize;
+}
+
+void KVncView::setViewOnly(bool s) {
+	m_viewOnly = s;
+
+	if (s)
+		setCursor(Qt::ArrowCursor);
+	else
+		showDotCursorInternal();
 }
 
 void KVncView::enableScaling(bool s) {
@@ -284,20 +305,10 @@ void KVncView::enableScaling(bool s) {
 			setMaximumSize(m_framebufferSize);
 			setMinimumSize(m_framebufferSize.width()/16,
 				       m_framebufferSize.height()/16);
-/*			if (height() != heightForWidth(width()))
-				resize(m_framebufferSize.width(),
-					heightForWidth(m_framebufferSize.width()));
-*/		}
+		}
 		else
 			setFixedSize(m_framebufferSize);
 	}
-}
-
-int KVncView::heightForWidth(int w) const {
-	if (m_scaling)
-		return w * m_framebufferSize.height() / m_framebufferSize.width();
-	else
-		return 0;
 }
 
 void KVncView::paintEvent(QPaintEvent *e) {
@@ -426,6 +437,8 @@ void KVncView::customEvent(QCustomEvent *e)
 void KVncView::mouseEvent(QMouseEvent *e) {
 	if (m_status != REMOTE_VIEW_CONNECTED)
 		return;
+	if (m_viewOnly)
+		return;
 
 	if ( e->type() != QEvent::MouseMove ) {
 		if ( (e->type() == QEvent::MouseButtonPress) ||
@@ -483,6 +496,8 @@ void KVncView::mouseMoveEvent(QMouseEvent *e) {
 void KVncView::wheelEvent(QWheelEvent *e) {
 	if (m_status != REMOTE_VIEW_CONNECTED)
 		return;
+	if (m_viewOnly)
+		return;
 
 	int eb = 0;
 	if ( e->delta() < 0 )
@@ -535,7 +550,8 @@ bool KVncView::x11Event(XEvent *e) {
 	else
 		return QWidget::x11Event(e);
 
-	m_wthread.queueKeyEvent(KKeyNative(e).sym(), pressed);
+	if (!m_viewOnly)
+		m_wthread.queueKeyEvent(KKeyNative(e).sym(), pressed);
 	return true;
 }
 

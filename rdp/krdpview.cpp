@@ -69,6 +69,7 @@ KRdpView::KRdpView(QWidget *parent, const char *name,
   m_directory(directory),
   m_buttonMask(0),
   m_quitFlag(false),
+  m_viewOnly(false),
   m_cthread(this, m_wthread, m_quitFlag),
   m_wthread(this, m_quitFlag)
 {
@@ -148,6 +149,14 @@ void KRdpView::pressKey(XEvent *e)
 	m_wthread.queueX11Event(e);
 }
 
+bool KRdpView::viewOnly() {
+	return m_viewOnly;
+}
+
+void KRdpView::setViewOnly(bool s) {
+	m_viewOnly = s;
+}
+
 // receive a custom event
 void KRdpView::customEvent(QCustomEvent *e)
 {
@@ -203,7 +212,9 @@ bool KRdpView::x11Event(XEvent *e)
 	   e->type == LeaveNotify || e->type == Expose || e->type == MappingNotify || 
 	   e->type == ClientMessage && e->xclient.message_type == protocol_atom)
 	{
-		m_wthread.queueX11Event(e);
+		if ((!m_viewOnly) || e->type == Expose || e->type == MappingNotify || 
+		    e->type == ClientMessage && e->xclient.message_type == protocol_atom) 
+			m_wthread.queueX11Event(e);
 		if(e->type != MotionNotify)
 			return true;
 	}

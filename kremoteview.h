@@ -76,6 +76,12 @@ public:
 	virtual bool scaling();
 
 	/**
+	 * Checks whether the view is in view-only mode. This means
+	 * that all input is ignored.
+	 */
+	virtual bool viewOnly() = 0;
+
+	/**
 	 * Returns the resolution of the remote framebuffer.
 	 * It should return a null @ref QSize when the size 
 	 * is not known.
@@ -146,6 +152,16 @@ public slots:
 	 * @see scaling()
 	 */
         virtual void enableScaling(bool s);
+
+	/**
+	 * Enables/disables the view-only mode.
+	 * Ignored if @ref supportsScaling() is false.
+	 * The default implementation does nothing.
+	 * @param s true to enable, false to disable.
+	 * @see supportsScaling() 
+	 * @see viewOnly() 
+	 */
+	virtual void setViewOnly(bool s) = 0;
 
 	/**
 	 * Called to let the backend know it when

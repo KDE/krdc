@@ -47,6 +47,7 @@ private:
 	QSize m_framebufferSize;
 	bool m_scaling;
 	bool m_remoteMouseTracking;
+	bool m_viewOnly;
 	
 	int m_buttonMask;
 
@@ -64,6 +65,7 @@ private:
 	bool checkLocalKRfb();
 	void paintMessage(const QString &msg);
 	void showDotCursor(bool show);
+	void showDotCursorInternal();
 
 protected:
 	void paintEvent(QPaintEvent*);
@@ -83,7 +85,6 @@ public:
 		 const QString &encodings = QString::null);
 	~KVncView();
 	QSize sizeHint();
-	int heightForWidth (int w) const;
 	void drawRegion(int x, int y, int w, int h);
 	void lockFramebuffer();
 	void unlockFramebuffer();
@@ -102,9 +103,14 @@ public:
 	virtual int port();
 	virtual bool start();
 
+	virtual bool viewOnly();
+
+
 public slots:
         virtual void enableScaling(bool s);
+	virtual void setViewOnly(bool s);
         virtual void pressKey(XEvent *k); 
+
 
 private slots:
 	void selectionChanged();
