@@ -92,16 +92,16 @@ KVncView::KVncView(QWidget *parent,
 					      "pics/pointcursormask.png"));
 	m_cursor = QCursor(cursorBitmap, cursorMask);
 
-	/* Reverse m_cursorOn because showDotCursor only works when state changed */
-	m_cursorOn = appData.dotCursor ? false : true;
-	showDotCursor(!m_cursorOn);
+	/* Reverse m_cursorEnabled because showDotCursor only works when state changed */
+	m_cursorEnabled = appData.dotCursor ? false : true;
+	showDotCursor(!m_cursorEnabled);
 }
 
 void KVncView::showDotCursor(bool show) {
-	if (show == m_cursorOn)
+	if (show == m_cursorEnabled)
 		return;
 
-	m_cursorOn = show;
+	m_cursorEnabled = show;
 	if (!show)
 		setCursor(QCursor(Qt::BlankCursor));
 	else

@@ -53,7 +53,7 @@ private:
 	QClipboard *m_cb;
 	bool m_dontSendCb;
 	QCursor m_cursor;
-	bool m_cursorOn;
+	bool m_cursorEnabled;
 	PointerLatencyOMeter m_plom;
 
 	void setDefaultAppData();

@@ -2,7 +2,7 @@
                   pointerlatencyometer.h  - measuring pointer latency
                              -------------------
     begin                : Wed Jun 30 12:04:44 CET 2002
-    copyright            : (C) 2002 by Tim Jansen
+    copyright            : (C) 2002-2003 by Tim Jansen
     email                : tim@tjansen.de
  ***************************************************************************/
 
@@ -38,6 +38,7 @@ public:
 		last20Latency(25) {
 	}
 	
+	// registers a client pointer state
 	void registerPointerState(int x, int y) {
 		if (stateNum == stateCapacity)
 			stateNum--;
@@ -63,7 +64,8 @@ public:
 		return last20Latency > (1000/12);
 	}
 
-	/* Returns true if pointer should be visible */
+	// Called with server-side coordinates.
+	// Returns true if pointer should be visible
 	bool handlePointerEvent(int x, int y) {
 		for (int i = stateNum-1; i >= 0; i--) {
 			int idx = (i+firstState) % stateCapacity;
