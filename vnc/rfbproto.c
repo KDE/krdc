@@ -361,10 +361,10 @@ SetFormatAndEncodings()
 	encs[se->nEncodings++] = Swap32IfLE(rfbEncodingCopyRect);
       } else if (strncasecmp(encStr,"softcursor",encStrLen) == 0) {
 	encs[se->nEncodings++] = Swap32IfLE(rfbEncodingSoftCursor);
-        /* if server supports SoftCursor, it will ignore XCursor and PointerPos
-        // XCursor will not be used ATM, it is just because TightVNC
-	// refuses to use PointerPos without XCursor */
+        /* if server supports SoftCursor, it will ignore X/RichCursor 
+	 * and PointerPos */
         encs[se->nEncodings++] = Swap32IfLE(rfbEncodingXCursor);
+        encs[se->nEncodings++] = Swap32IfLE(rfbEncodingRichCursor);
         encs[se->nEncodings++] = Swap32IfLE(rfbEncodingPointerPos);
       } else if (strncasecmp(encStr,"background",encStrLen) == 0) {
 	encs[se->nEncodings++] = Swap32IfLE(rfbEncodingBackground);
