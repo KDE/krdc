@@ -54,7 +54,7 @@ void vidmodeNormalSwitch(Display *dpy, Resolution oldResolution)
 	}
 }
 
-Resolution vidmodeFullscreenSwitch(Display *dpy, int screen, 
+Resolution vidmodeFullscreenSwitch(Display *dpy, int screen,
 				   int sw, int sh, int &nx, int &ny)
 {
 	XF86VidModeModeInfo **modes;
@@ -84,18 +84,21 @@ Resolution vidmodeFullscreenSwitch(Display *dpy, int screen,
 		int w = (*modes[i]).hdisplay;
 		int h = (*modes[i]).vdisplay;
 
+		if ((w == cw) && (h == ch))
+			continue;
+
 		/* If resolution matches framebuffer, take it */
 		if ((w == sw) && (h == sh)) {
 			bestw = w;
 			besth = h;
 			bestmode = i;
 			break;
-		} 
+		}
 		/* if resolution larger than framebuffer... */
 		if ((w>=sw) && (h>=sh)) {
 			/* and no other previously found resoltion was smaller or
 			   this is smaller than the best resolution so far, take it*/
-			if ((!foundLargeEnoughRes) || 
+			if ((!foundLargeEnoughRes) ||
 			    (w*h < bestw*besth)) {
 				bestw = w;
 				besth = h;
@@ -119,7 +122,7 @@ Resolution vidmodeFullscreenSwitch(Display *dpy, int screen,
 
 	nx = bestw;
 	ny = besth;
-	XF86VidModeSwitchToMode(dpy,screen,modes[bestmode]);	
+	XF86VidModeSwitchToMode(dpy,screen,modes[bestmode]);
 	XF86VidModeSetViewPort(dpy,screen,0,0);
 	XFlush(dpy);
 
