@@ -49,7 +49,7 @@ public:
 				setText(1, i18n("Shared Desktop"));
 //User connects to desktop that exists only on the network
 			else if (type == "Private") 
-				setText(1, i18n("Stand-alone Desktop"));
+				setText(1, i18n("Standalone Desktop"));
 		}
 		if ((!userid.isEmpty()) && (!fullname.isEmpty()))
 			setText(0, 
@@ -130,7 +130,7 @@ bool SrvLocNCDialog::ensureLocatorOpen() {
 	m_locator = new KServiceLocator();
 	if (!m_locator->available()) {
 		KMessageBox::error(0, 
-				   i18n("Browsing the network is not possible. Probably you did not install SLP support correctly."), 
+				   i18n("Browsing the network is not possible. You probably did not install SLP support correctly."), 
 				   i18n("Browsing Not Possible"), false);
 		return false;
 	}
