@@ -49,7 +49,7 @@ void QScrollView2::mouseMoveEvent( QMouseEvent *e )
 }
 
 
-KRDC::KRDC(WindowMode wm, const QString &host, Quality q) : 
+KRDC::KRDC(WindowMode wm, const QString &host, Quality q, const QString &encodings) : 
   QWidget(0, 0),
   m_layout(0),
   m_progressDialog(0),
@@ -60,6 +60,7 @@ KRDC::KRDC(WindowMode wm, const QString &host, Quality q) :
   m_showProgress(false),
   m_host(host),
   m_quality(q),
+  m_encodings(encodings),
   m_isFullscreen(wm)
 {
 	m_scrollView = new QScrollView2(this, "Remote View");
@@ -224,6 +225,9 @@ void KRDC::configureApp(Quality q) {
 		m_appData.compressLevel = -1;
 		m_appData.qualityLevel = 9;
 	}
+
+	if (!m_encodings.isNull())
+		m_appData.encodingsString = m_encodings.latin1();
 
 	m_appData.nColours = 256;
 	m_appData.useSharedColours = 1;

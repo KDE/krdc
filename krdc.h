@@ -59,6 +59,7 @@ private:
 	bool m_showProgress;
 	QString m_host;
 	Quality m_quality;
+	QString m_encodings;
 	AppData m_appData;
 
 	WindowMode m_isFullscreen;
@@ -86,7 +87,8 @@ protected:
 public:
 	KRDC(WindowMode wm = WINDOW_MODE_AUTO, 
 	     const QString &host = QString::null, 
-	     Quality q = QUALITY_UNKNOWN);
+	     Quality q = QUALITY_UNKNOWN,
+	     const QString &encodings = QString::null);
 	~KRDC();
 	bool start();
 

@@ -45,6 +45,8 @@ static KCmdLineOptions options[] =
 	{ "medium-quality", I18N_NOOP("Medium quality mode (Tight Encoding, lossy)."), 0 }, 
 	{ "h", 0, 0 },
 	{ "high-quality", I18N_NOOP("High quality mode, default (Hextile Encoding)."), 0 }, 
+	{ "e", 0, 0 },
+	{ "encodings ", I18N_NOOP("Override encoding list (e.g. 'hextile raw')."), 0 }, 
 	{ "+[host]", I18N_NOOP("The name of the host, e.g. 'localhost:1'."), 0 },
 	{ 0, 0, 0 }
 };
@@ -74,6 +76,7 @@ int main(int argc, char *argv[])
 	KApplication a;
 
 	Quality quality = QUALITY_HIGH;
+	QString encodings = QString::null;
 	WindowMode wm = WINDOW_MODE_AUTO;
 
 	KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
@@ -89,13 +92,16 @@ int main(int argc, char *argv[])
 		wm = WINDOW_MODE_FULLSCREEN;
 	else if (args->isSet("window"))
 		wm = WINDOW_MODE_NORMAL;
-	
+
+	if (args->isSet("encodings"))
+		encodings = args->getOption("encodings");
+
 	if (args->count() > 0) {
 		QString host = args->arg(0);
-		krdc = new KRDC(wm, host, quality);		
+		krdc = new KRDC(wm, host, quality, encodings);		
 	}
 	else
-		krdc = new KRDC(wm);
+		krdc = new KRDC(wm, QString::null, QUALITY_UNKNOWN, encodings);
 
 	a.setMainWidget(krdc);
 	QObject::connect(krdc, SIGNAL(disconnected()), &a, SLOT(quit()));
