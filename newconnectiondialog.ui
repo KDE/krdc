@@ -60,7 +60,7 @@
                         </font>
                     </property>
                     <property name="text">
-                        <string>Please enter the name or address of the computer that you want to connect to.</string>
+                        <string>Please enter the address and display number of the computer that you want to connect to, separated by a colon.</string>
                     </property>
                     <property name="alignment">
                         <set>WordBreak|AlignVCenter|AlignLeft</set>
@@ -104,7 +104,7 @@
                         <string></string>
                     </property>
                     <property name="whatsThis" stdset="0">
-                        <string>Enter the name of the server you want to connect to. If you have a display number enter it as well, separated from the server by a colon, e.g. 'mycomputer:2'.</string>
+                        <string>Enter the name and display number of the computer that you want to connect to, separated by a colon, e.g. 'mycomputer:1'. The address can be any valid internet address. The display numbers usually start at 0. If you do not have a display number, try 0 or 1.</string>
                     </property>
                 </widget>
             </grid>
@@ -281,8 +281,11 @@
     <tabstop>connectButton</tabstop>
     <tabstop>cancelButton</tabstop>
 </tabstops>
+<includes>
+    <include location="local" impldecl="in implementation">newconnectiondialog.ui.h</include>
+</includes>
 <slots>
-    <slot>hostChanged(const QString &amp;text)</slot>
+    <slot>hostChanged( const QString &amp; text )</slot>
 </slots>
 <layoutdefaults spacing="6" margin="11"/>
 </UI>
