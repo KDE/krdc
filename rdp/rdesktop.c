@@ -1,7 +1,7 @@
 /*
    rdesktop: A Remote Desktop Protocol client.
    Entrypoint and utility functions
-   Copyright (C) Matthew Chapman 1999-2002
+   Copyright (C) Matthew Chapman 1999-2003
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -21,8 +21,8 @@
 #include <stdarg.h>		/* va_list va_start va_end */
 #include <unistd.h>		/* read close getuid getgid getpid getppid gethostname */
 #include <fcntl.h>		/* open */
+#include <errno.h>		/* save licence uses it. */
 #include <pwd.h>		/* getpwuid */
-#include <limits.h>		/* PATH_MAX */
 #include <termios.h>		/* tcgetattr tcsetattr */
 #include <sys/stat.h>		/* stat */
 #include <sys/time.h>		/* gettimeofday */
@@ -57,258 +57,7 @@ BOOL desktop_save = True;
 BOOL fullscreen = False;
 BOOL grab_keyboard = True;
 BOOL hide_decorations = False;
-
-/* Display usage information */
-static void
-usage(char *program)
-{
-	fprintf(stderr, "rdesktop: A Remote Desktop Protocol client.\n");
-	fprintf(stderr, "Version " VERSION ". Copyright (C) 1999-2002 Matt Chapman.\n");
-	fprintf(stderr, "See http://www.rdesktop.org/ for more information.\n\n");
-
-	fprintf(stderr, "Usage: %s [options] server[:port]\n", program);
-	fprintf(stderr, "   -u: user name\n");
-	fprintf(stderr, "   -d: domain\n");
-	fprintf(stderr, "   -s: shell\n");
-	fprintf(stderr, "   -c: working directory\n");
-	fprintf(stderr, "   -p: password (- to prompt)\n");
-	fprintf(stderr, "   -n: client hostname\n");
-	fprintf(stderr, "   -k: keyboard layout on terminal server (us,sv,gr,etc.)\n");
-	fprintf(stderr, "   -g: desktop geometry (WxH)\n");
-	fprintf(stderr, "   -f: full-screen mode\n");
-	fprintf(stderr, "   -b: force bitmap updates\n");
-	fprintf(stderr, "   -e: disable encryption (French TS)\n");
-	fprintf(stderr, "   -m: do not send motion events\n");
-	fprintf(stderr, "   -K: keep window manager key bindings\n");
-	fprintf(stderr, "   -T: window title\n");
-	fprintf(stderr, "   -D: hide window manager decorations\n");
-}
-
-static BOOL
-read_password(char *password, int size)
-{
-	struct termios tios;
-	BOOL ret = False;
-	int istty = 0;
-	char *p;
-
-	if (tcgetattr(STDIN_FILENO, &tios) == 0)
-	{
-		fprintf(stderr, "Password: ");
-		tios.c_lflag &= ~ECHO;
-		tcsetattr(STDIN_FILENO, TCSANOW, &tios);
-		istty = 1;
-	}
-
-	if (fgets(password, size, stdin) != NULL)
-	{
-		ret = True;
-
-		/* strip final newline */
-		p = strchr(password, '\n');
-		if (p != NULL)
-			*p = 0;
-	}
-
-	if (istty)
-	{
-		tios.c_lflag |= ECHO;
-		tcsetattr(STDIN_FILENO, TCSANOW, &tios);
-		fprintf(stderr, "\n");
-	}
-
-	return ret;
-}
-
-/* Client program */
-/*int
-main(int argc, char *argv[])
-{
-	char server[64];
-	char fullhostname[64];
-	char domain[16];
-	char password[16];
-	char shell[128];
-	char directory[32];
-	BOOL prompt_password;
-	struct passwd *pw;
-	uint32 flags;
-	char *p;
-	int c;
-
-	flags = RDP_LOGON_NORMAL;
-	prompt_password = False;
-	domain[0] = password[0] = shell[0] = directory[0] = 0;
-	strcpy(keymapname, "en-us");
-
-	while ((c = getopt(argc, argv, "u:d:s:c:p:n:k:g:fbemKT:Dh?")) != -1)
-	{
-		switch (c)
-		{
-			case 'u':
-				STRNCPY(username, optarg, sizeof(username));
-				break;
-
-			case 'd':
-				STRNCPY(domain, optarg, sizeof(domain));
-				break;
-
-			case 's':
-				STRNCPY(shell, optarg, sizeof(shell));
-				break;
-
-			case 'c':
-				STRNCPY(directory, optarg, sizeof(directory));
-				break;
-
-			case 'p':
-				if ((optarg[0] == '-') && (optarg[1] == 0))
-				{
-					prompt_password = True;
-					break;
-				}
-
-				STRNCPY(password, optarg, sizeof(password));
-				flags |= RDP_LOGON_AUTO;
-
-				// try to overwrite argument so it won't appear in ps 
-				p = optarg;
-				while (*p)
-					*(p++) = 'X';
-				break;
-
-			case 'n':
-				STRNCPY(hostname, optarg, sizeof(hostname));
-				break;
-
-			case 'k':
-				STRNCPY(keymapname, optarg, sizeof(keymapname));
-				break;
-
-			case 'g':
-				if (!strcmp(optarg, "workarea"))
-				{
-					width = height = 0;
-					break;
-				}
-
-				width = strtol(optarg, &p, 10);
-				if (*p == 'x')
-					height = strtol(p + 1, NULL, 10);
-
-				if ((width == 0) || (height == 0))
-				{
-					error("invalid geometry\n");
-					return 1;
-				}
-				break;
-
-			case 'f':
-				fullscreen = True;
-				break;
-
-			case 'b':
-				orders = False;
-				break;
-
-			case 'e':
-				encryption = False;
-				break;
-
-			case 'm':
-				sendmotion = False;
-				break;
-
-			case 'K':
-				grab_keyboard = False;
-				break;
-
-			case 'T':
-				STRNCPY(title, optarg, sizeof(title));
-				break;
-
-			case 'D':
-				hide_decorations = True;
-				break;
-
-			case 'h':
-			case '?':
-			default:
-				usage(argv[0]);
-				return 1;
-		}
-	}
-
-	if (argc - optind < 1)
-	{
-		usage(argv[0]);
-		return 1;
-	}
-
-	STRNCPY(server, argv[optind], sizeof(server));
-	p = strchr(server, ':');
-	if (p != NULL)
-	{
-		tcp_port_rdp = strtol(p + 1, NULL, 10);
-		*p = 0;
-	}
-
-	if (username[0] == 0)
-	{
-		pw = getpwuid(getuid());
-		if ((pw == NULL) || (pw->pw_name == NULL))
-		{
-			error("could not determine username, use -u\n");
-			return 1;
-		}
-
-		STRNCPY(username, pw->pw_name, sizeof(username));
-	}
-
-	if (hostname[0] == 0)
-	{
-		if (gethostname(fullhostname, sizeof(fullhostname)) == -1)
-		{
-			error("could not determine local hostname, use -n\n");
-			return 1;
-		}
-
-		p = strchr(fullhostname, '.');
-		if (p != NULL)
-			*p = 0;
-
-		STRNCPY(hostname, fullhostname, sizeof(hostname));
-	}
-
-	if (prompt_password && read_password(password, sizeof(password)))
-		flags |= RDP_LOGON_AUTO;
-
-	if (title[0] == 0)
-	{
-		strcpy(title, "rdesktop - ");
-		strncat(title, server, sizeof(title) - sizeof("rdesktop - "));
-	}
-
-	if (!ui_init(NULL, NULL))
-		return 1;
-
-	ui_create_window(-1);
-                        
-	if (!rdp_connect(server, flags, domain, password, shell, directory))
-		return 1;
-
-	DEBUG(("Connection successful.\n"));
-	memset(password, 0, sizeof(password));
-
-	rdp_main_loop();
-	ui_destroy_window();
-
-	DEBUG(("Disconnecting...\n"));
-	rdp_disconnect();
-	ui_deinit();
-	return 0;
-}
-*/
+extern BOOL owncolmap;
 
 #ifdef EGD_SOCKET
 /* Read 32 random bytes from PRNGD or EGD socket (based on OpenSSL RAND_egd) */
@@ -439,6 +188,19 @@ error(char *format, ...)
 	va_end(ap);
 }
 
+/* report a warning */
+void
+warning(char *format, ...)
+{
+	va_list ap;
+
+	fprintf(stderr, "WARNING: ");
+
+	va_start(ap, format);
+	vfprintf(stderr, format, ap);
+	va_end(ap);
+}
+
 /* report an unimplemented protocol feature */
 void
 unimpl(char *format, ...)
@@ -486,7 +248,7 @@ hexdump(unsigned char *p, unsigned int len)
 int
 load_licence(unsigned char **data)
 {
-	char path[PATH_MAX];
+	char *path;
 	char *home;
 	struct stat st;
 	int fd;
@@ -495,8 +257,8 @@ load_licence(unsigned char **data)
 	if (home == NULL)
 		return -1;
 
-	STRNCPY(path, home, sizeof(path));
-	strncat(path, "/.rdesktop/licence", sizeof(path) - strlen(path) - 1);
+	path = xmalloc(strlen(home) + strlen(hostname) + 20);
+	sprintf(path, "%s/.rdesktop/licence.%s", home, hostname);
 
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
@@ -512,28 +274,130 @@ load_licence(unsigned char **data)
 void
 save_licence(unsigned char *data, int length)
 {
-	char path[PATH_MAX];
+	char *fpath;		/* file path for licence */
+	char *fname, *fnamewrk;	/* file name for licence .inkl path. */
 	char *home;
-	int fd;
+	uint32 y;
+	struct flock fnfl;
+	int fnfd, fnwrkfd, i, wlen;
+	struct stream s, *s_ptr;
+	uint32 len;
+
+	/* Construct a stream, so that we can use macros to extract the
+	 * licence.
+	 */
+	s_ptr = &s;
+	s_ptr->p = data;
+	/* Skip first two bytes */
+	in_uint16(s_ptr, len);
+
+	/* Skip three strings */
+	for (i = 0; i < 3; i++)
+	{
+		in_uint32(s_ptr, len);
+		s_ptr->p += len;
+		/* Make sure that we won't be past the end of data after
+		 * reading the next length value
+		 */
+		if ((s_ptr->p) + 4 > data + length)
+		{
+			printf("Error in parsing licence key.\n");
+			printf("Strings %d end value %x > supplied length (%x)\n",
+			       i, s_ptr->p, data + length);
+			return;
+		}
+	}
+	in_uint32(s_ptr, len);
+	if (s_ptr->p + len > data + length)
+	{
+		printf("Error in parsing licence key.\n");
+		printf("End of licence %x > supplied length (%x)\n", s_ptr->p + len, data + length);
+		return;
+	}
 
 	home = getenv("HOME");
 	if (home == NULL)
 		return;
 
-	STRNCPY(path, home, sizeof(path));
-	strncat(path, "/.rdesktop", sizeof(path) - strlen(path) - 1);
-	mkdir(path, 0700);
+	/* set and create the directory -- if it doesn't exist. */
+	fpath = xmalloc(strlen(home) + 11);
+	STRNCPY(fpath, home, strlen(home) + 1);
 
-	strncat(path, "/licence", sizeof(path) - strlen(path) - 1);
-
-	fd = open(path, O_WRONLY | O_CREAT | O_TRUNC, 0600);
-	if (fd == -1)
+	sprintf(fpath, "%s/.rdesktop", fpath);
+	if (mkdir(fpath, 0700) == -1 && errno != EEXIST)
 	{
-		perror("open");
-		return;
+		perror("mkdir");
+		exit(1);
 	}
 
-	write(fd, data, length);
-	close(fd);
+	/* set the real licence filename, and put a write lock on it. */
+	fname = xmalloc(strlen(fpath) + strlen(hostname) + 10);
+	sprintf(fname, "%s/licence.%s", fpath, hostname);
+	fnfd = open(fname, O_RDONLY);
+	if (fnfd != -1)
+	{
+		fnfl.l_type = F_WRLCK;
+		fnfl.l_whence = SEEK_SET;
+		fnfl.l_start = 0;
+		fnfl.l_len = 1;
+		fcntl(fnfd, F_SETLK, &fnfl);
+	}
+
+	/* create a temporary licence file */
+	fnamewrk = xmalloc(strlen(fname) + 12);
+	for (y = 0;; y++)
+	{
+		sprintf(fnamewrk, "%s.%lu", fname, y);
+		fnwrkfd = open(fnamewrk, O_WRONLY | O_CREAT | O_EXCL, 0600);
+		if (fnwrkfd == -1)
+		{
+			if (errno == EINTR || errno == EEXIST)
+				continue;
+			perror("create");
+			exit(1);
+		}
+		break;
+	}
+	/* write to the licence file */
+	for (y = 0; y < len;)
+	{
+		do
+		{
+			wlen = write(fnwrkfd, s_ptr->p + y, len - y);
+		}
+		while (wlen == -1 && errno == EINTR);
+		if (wlen < 1)
+		{
+			perror("write");
+			unlink(fnamewrk);
+			exit(1);
+		}
+		y += wlen;
+	}
+
+	/* close the file and rename it to fname */
+	if (close(fnwrkfd) == -1)
+	{
+		perror("close");
+		unlink(fnamewrk);
+		exit(1);
+	}
+	if (rename(fnamewrk, fname) == -1)
+	{
+		perror("rename");
+		unlink(fnamewrk);
+		exit(1);
+	}
+	/* close the file lock on fname */
+	if (fnfd != -1)
+	{
+		fnfl.l_type = F_UNLCK;
+		fnfl.l_whence = SEEK_SET;
+		fnfl.l_start = 0;
+		fnfl.l_len = 1;
+		fcntl(fnfd, F_SETLK, &fnfl);
+		close(fnfd);
+	}
+
 }
 #endif

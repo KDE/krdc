@@ -27,8 +27,8 @@
 #include "rdesktop.h"
 #include "scancodes.h"
 
-#define KEYMAP_SIZE 4096
-#define KEYMAP_MASK (KEYMAP_SIZE - 1)
+#define KEYMAP_SIZE 0xffff+1
+#define KEYMAP_MASK 0xffff
 #define KEYMAP_MAX_LINE_LENGTH 80
 
 extern Display *display;
@@ -51,7 +51,7 @@ add_to_keymap(char *keyname, uint8 scancode, uint16 modifiers, char *mapname)
 	keysym = XStringToKeysym(keyname);
 	if (keysym == NoSymbol)
 	{
-		error("Bad keysym %s in keymap %s\n", keyname, mapname);
+		warning("Bad keysym %s in keymap %s\n", keyname, mapname);
 		return;
 	}
 
@@ -198,7 +198,7 @@ xkeymap_read(char *mapname)
 			/* Automatically add uppercase key, with same modifiers 
 			   plus shift */
 			for (p = keyname; *p; p++)
-				*p = toupper(*p);
+				*p = toupper((int)*p);
 			MASK_ADD_BITS(modifiers, MapLeftShiftMask);
 			add_to_keymap(keyname, scancode, modifiers, mapname);
 		}
@@ -220,7 +220,7 @@ xkeymap_init(void)
 	mapname_ptr = keymapname;
 	while (*mapname_ptr)
 	{
-		*mapname_ptr = tolower(*mapname_ptr);
+		*mapname_ptr = tolower((int)*mapname_ptr);
 		mapname_ptr++;
 	}
 
@@ -344,7 +344,7 @@ xkeymap_translate_key(uint32 keysym, unsigned int keycode, unsigned int state)
 	}
 
 	if (keymap_loaded)
-		error("No translation for (keysym 0x%lx, %s)\n", keysym, get_ksname(keysym));
+		warning("No translation for (keysym 0x%lx, %s)\n", keysym, get_ksname(keysym));
 
 	/* not in keymap, try to interpret the raw scancode */
 	if ((keycode >= min_keycode) && (keycode <= 0x60))

@@ -51,6 +51,7 @@ void RdpControllerThread::changeStatus(RemoteViewStatus s)
 	QApplication::postEvent(m_view, new StatusChangeEvent(s));
 }
 
+// creates the window for rdesktop, called from Qt thread
 void RdpControllerThread::desktopInit()
 {
 	ui_create_window(m_view->winId());
@@ -91,7 +92,7 @@ void RdpControllerThread::run()
 		QApplication::postEvent(m_view, new FatalErrorEvent(ERROR_CONNECTION));
 		return;
 	}
-  
+
 	changeStatus(REMOTE_VIEW_AUTHENTICATING);
 	QCString domain(m_view->m_domain.utf8());
 	QCString user(m_view->m_user.utf8());
@@ -100,7 +101,7 @@ void RdpControllerThread::run()
 	QCString directory(m_view->m_directory.utf8());
 	rdp_send_logon_info(m_view->m_flags, domain.data(), user.data(),
 	                    password.data(), shell.data(), directory.data());
-  
+
 	changeStatus(REMOTE_VIEW_PREPARING);
 	QApplication::postEvent(m_view, new ScreenResizeEvent(0, 0)); // KRdpView actually already knows the new size through
 	                                                              // the global width and height, I don't need to tell him
@@ -113,6 +114,7 @@ void RdpControllerThread::run()
 		changeStatus(REMOTE_VIEW_DISCONNECTED);
 		return;
 	}
+
 	changeStatus(REMOTE_VIEW_CONNECTED);
 
 	// start the writer thread
@@ -136,13 +138,15 @@ void RdpControllerThread::run()
 				KApplication::kApplication()->unlock();
 				break;
 
+			case 0:
+				break;
+
 			default:
 				QCString s = "PDU %d\n";
 				unimpl(s.data(), type);
 		}
 	}
 	m_quitFlag = true;
-  
 
 	// start disconnecting
 	changeStatus(REMOTE_VIEW_DISCONNECTING);
@@ -192,7 +196,7 @@ void RdpWriterThread::run()
 	QValueList<XEvent> x11Events;
 
 	m_waiter.wait(1000);
-	
+
 	while(!m_quitFlag)
 	{
 		m_lock.lock();

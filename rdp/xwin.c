@@ -22,7 +22,6 @@
 #include <X11/Xutil.h>
 #include <time.h>
 #include <errno.h>
-#include <stdlib.h>
 #include "rdesktop.h"
 
 extern int width;
@@ -63,11 +62,11 @@ static Pixmap backstore;
 #define PROP_MOTIF_WM_HINTS_ELEMENTS    5
 typedef struct
 {
-	unsigned long flags;
-	unsigned long functions;
-	unsigned long decorations;
-	long inputMode;
-	unsigned long status;
+	uint32 flags;
+	uint32 functions;
+	uint32 decorations;
+	sint32 inputMode;
+	uint32 status;
 }
 PropMotifWmHints;
 
@@ -79,12 +78,19 @@ PropMotifWmHints;
 		XFillRectangle(display, backstore, gc, x, y, cx, cy); \
 }
 
+#define FILL_RECTANGLE_BACKSTORE(x,y,cx,cy)\
+{ \
+	XFillRectangle(display, ownbackstore ? backstore : wnd, gc, x, y, cx, cy); \
+}
+
 /* colour maps */
+BOOL owncolmap = False;
 static Colormap xcolmap;
 static uint32 *colmap;
 
-#define SET_FOREGROUND(col)	XSetForeground(display, gc, translate_colour(colmap[col]));
-#define SET_BACKGROUND(col)	XSetBackground(display, gc, translate_colour(colmap[col]));
+#define TRANSLATE(col)		( owncolmap ? col : translate_colour(colmap[col]) )
+#define SET_FOREGROUND(col)	XSetForeground(display, gc, TRANSLATE(col));
+#define SET_BACKGROUND(col)	XSetBackground(display, gc, TRANSLATE(col));
 
 static int rop2_map[] = {
 	GXclear,		/* 0 */
@@ -122,7 +128,7 @@ mwm_hide_decorations(void)
 	hintsatom = XInternAtom(display, "_MOTIF_WM_HINTS", False);
 	if (!hintsatom)
 	{
-		error("Failed to get atom _MOTIF_WM_HINTS\n");
+		warning("Failed to get atom _MOTIF_WM_HINTS: probably your window manager does not support MWM hints\n");
 		return;
 	}
 
@@ -290,7 +296,13 @@ ui_init(void *_display, void *_visual)
 		return False;
 	}
 
-	xcolmap = DefaultColormapOfScreen(screen);
+	if (owncolmap != True)
+	{
+		xcolmap = DefaultColormapOfScreen(screen);
+		if (depth <= 8)
+			warning("Screen depth is 8 bits or lower: you may want to use -C for a private colourmap\n");
+	}
+
 	gc = XCreateGC(display, RootWindowOfScreen(screen), 0, NULL);
 
 	if (DoesBackingStore(screen) != Always)
@@ -303,13 +315,16 @@ ui_init(void *_display, void *_visual)
 	if ((width == 0) || (height == 0))
 	{
 		/* Fetch geometry from _NET_WORKAREA */
-		uint32 xpos, ypos;
+		uint32 x, y, cx, cy;
 
-		if (get_current_workarea(&xpos, &ypos, &width, &height) < 0)
+		if (get_current_workarea(&x, &y, &cx, &cy) == 0)
 		{
-			error("Failed to get workarea.\n");
-			error("Perhaps your window manager does not support EWMH?\n");
-			error("Defaulting to geometry 800x600\n");
+			width = cx;
+			height = cy;
+		}
+		else
+		{
+			warning("Failed to get workarea: probably your window manager does not support extended hints\n");
 			width = 800;
 			height = 600;
 		}
@@ -483,24 +498,6 @@ xwin_toggle_fullscreen(void)
 	}
 }
 
-/* Process all events in Xlib queue 
-   Returns 0 after user quit, 1 otherwise */
-static int
-xwin_process_events(void)
-{
-	XEvent xevent;
-
-	while (XPending(display) > 0)
-	{
-		XNextEvent(display, &xevent);
-
-		if(!xwin_process_event(xevent))
-			return 0;
-	}
-	/* Keep going */
-	return 1;
-}
-
 /* Processes one particular event */
 int
 xwin_process_event(XEvent xevent)
@@ -554,13 +551,13 @@ xwin_process_event(XEvent xevent)
 				XLookupString((XKeyEvent *) & xevent,
 					      str, sizeof(str), &keysym, NULL);
 			}
-				DEBUG_KBD(("KeyPress for (keysym 0x%lx, %s)\n", keysym,
+			DEBUG_KBD(("KeyPress for (keysym 0x%lx, %s)\n", keysym,
 				   get_ksname(keysym)));
 
 			ev_time = time(NULL);
 			if (handle_special_keys(keysym, xevent.xkey.state, ev_time, True))
 				break;
-				 tr = xkeymap_translate_key(keysym,
+			tr = xkeymap_translate_key(keysym,
 						   xevent.xkey.keycode, xevent.xkey.state);
 
 			if (tr.scancode == 0)
@@ -605,6 +602,9 @@ xwin_process_event(XEvent xevent)
 			break;
 
 		case MotionNotify:
+			if (fullscreen && !focused)
+				XSetInputFocus(display, wnd, RevertToPointerRoot,
+					       CurrentTime);
 			rdp_send_input(time(NULL), RDP_INPUT_MOUSE,
 				       MOUSE_FLAG_MOVE, xevent.xmotion.x, xevent.xmotion.y);
 			break;
@@ -671,7 +671,6 @@ xwin_process_event(XEvent xevent)
 				mod_map = XGetModifierMapping(display);
 			}
 			break;
-
 	}
 	return 1;
 }
@@ -687,11 +686,6 @@ ui_select(int rdp_socket)
 
 	while (True)
 	{
-		/* Process any events already waiting */
-		/*if (!xwin_process_events())
-			 User quit 
-			return 0;*/
-
 		FD_ZERO(&rfds);
 		FD_SET(rdp_socket, &rfds);
 		FD_SET(x_socket, &rfds);
@@ -723,7 +717,7 @@ ui_create_bitmap(int width, int height, uint8 * data)
 	Pixmap bitmap;
 	uint8 *tdata;
 
-	tdata = translate_image(width, height, data);
+	tdata = (owncolmap ? data : translate_image(width, height, data));
 	bitmap = XCreatePixmap(display, wnd, width, height, depth);
 	image = XCreateImage(display, visual, depth, ZPixmap, 0,
 			     (char *) tdata, width, height, 8, 0);
@@ -731,7 +725,8 @@ ui_create_bitmap(int width, int height, uint8 * data)
 	XPutImage(display, bitmap, gc, image, 0, 0, 0, 0, width, height);
 
 	XFree(image);
-	xfree(tdata);
+	if (!owncolmap)
+		xfree(tdata);
 	return (HBITMAP) bitmap;
 }
 
@@ -741,7 +736,7 @@ ui_paint_bitmap(int x, int y, int cx, int cy, int width, int height, uint8 * dat
 	XImage *image;
 	uint8 *tdata;
 
-	tdata = translate_image(width, height, data);
+	tdata = (owncolmap ? data : translate_image(width, height, data));
 	image = XCreateImage(display, visual, depth, ZPixmap, 0,
 			     (char *) tdata, width, height, 8, 0);
 
@@ -756,7 +751,8 @@ ui_paint_bitmap(int x, int y, int cx, int cy, int width, int height, uint8 * dat
 	}
 
 	XFree(image);
-	xfree(tdata);
+	if (!owncolmap)
+		xfree(tdata);
 }
 
 void
@@ -887,95 +883,125 @@ ui_destroy_cursor(HCURSOR cursor)
 		(xc)->blue  = ((c)->blue  << 8) | (c)->blue; \
 		(xc)->flags = DoRed | DoGreen | DoBlue;
 
+
 HCOLOURMAP
 ui_create_colourmap(COLOURMAP * colours)
 {
 	COLOURENTRY *entry;
 	int i, ncolours = colours->ncolours;
-	uint32 *map = xmalloc(sizeof(*colmap) * ncolours);
-	XColor xentry;
-	XColor xc_cache[256];
-	uint32 colour;
-	int colLookup = 256;
-	for (i = 0; i < ncolours; i++)
+	if (!owncolmap)
 	{
-		entry = &colours->colours[i];
-		MAKE_XCOLOR(&xentry, entry);
-
-		if (XAllocColor(display, xcolmap, &xentry) == 0)
+		uint32 *map = xmalloc(sizeof(*colmap) * ncolours);
+		XColor xentry;
+		XColor xc_cache[256];
+		uint32 colour;
+		int colLookup = 256;
+		for (i = 0; i < ncolours; i++)
 		{
-			/* Allocation failed, find closest match. */
-			int j = 256;
-			int nMinDist = 3 * 256 * 256;
-			long nDist = nMinDist;
+			entry = &colours->colours[i];
+			MAKE_XCOLOR(&xentry, entry);
 
-			/* only get the colors once */
-			while (colLookup--)
+			if (XAllocColor(display, xcolmap, &xentry) == 0)
 			{
-				xc_cache[colLookup].pixel = colLookup;
-				xc_cache[colLookup].red = xc_cache[colLookup].green =
-					xc_cache[colLookup].blue = 0;
-				xc_cache[colLookup].flags = 0;
-				XQueryColor(display,
-					    DefaultColormap(display, DefaultScreen(display)),
-					    &xc_cache[colLookup]);
-			}
-			colLookup = 0;
+				/* Allocation failed, find closest match. */
+				int j = 256;
+				int nMinDist = 3 * 256 * 256;
+				long nDist = nMinDist;
 
-			/* approximate the pixel */
-			while (j--)
+				/* only get the colors once */
+				while (colLookup--)
+				{
+					xc_cache[colLookup].pixel = colLookup;
+					xc_cache[colLookup].red = xc_cache[colLookup].green =
+						xc_cache[colLookup].blue = 0;
+					xc_cache[colLookup].flags = 0;
+					XQueryColor(display,
+						    DefaultColormap(display,
+								    DefaultScreen(display)),
+						    &xc_cache[colLookup]);
+				}
+				colLookup = 0;
+
+				/* approximate the pixel */
+				while (j--)
+				{
+					if (xc_cache[j].flags)
+					{
+						nDist = ((long) (xc_cache[j].red >> 8) -
+							 (long) (xentry.red >> 8)) *
+							((long) (xc_cache[j].red >> 8) -
+							 (long) (xentry.red >> 8)) +
+							((long) (xc_cache[j].green >> 8) -
+							 (long) (xentry.green >> 8)) *
+							((long) (xc_cache[j].green >> 8) -
+							 (long) (xentry.green >> 8)) +
+							((long) (xc_cache[j].blue >> 8) -
+							 (long) (xentry.blue >> 8)) *
+							((long) (xc_cache[j].blue >> 8) -
+							 (long) (xentry.blue >> 8));
+					}
+					if (nDist < nMinDist)
+					{
+						nMinDist = nDist;
+						xentry.pixel = j;
+					}
+				}
+			}
+			colour = xentry.pixel;
+
+			/* update our cache */
+			if (xentry.pixel < 256)
 			{
-				if (xc_cache[j].flags)
-				{
-					nDist = ((long) (xc_cache[j].red >> 8) -
-						 (long) (xentry.red >> 8)) *
-						((long) (xc_cache[j].red >> 8) -
-						 (long) (xentry.red >> 8)) +
-						((long) (xc_cache[j].green >> 8) -
-						 (long) (xentry.green >> 8)) *
-						((long) (xc_cache[j].green >> 8) -
-						 (long) (xentry.green >> 8)) +
-						((long) (xc_cache[j].blue >> 8) -
-						 (long) (xentry.blue >> 8)) *
-						((long) (xc_cache[j].blue >> 8) -
-						 (long) (xentry.blue >> 8));
-				}
-				if (nDist < nMinDist)
-				{
-					nMinDist = nDist;
-					xentry.pixel = j;
-				}
+				xc_cache[xentry.pixel].red = xentry.red;
+				xc_cache[xentry.pixel].green = xentry.green;
+				xc_cache[xentry.pixel].blue = xentry.blue;
+
 			}
+
+
+			/* byte swap here to make translate_image faster */
+			map[i] = translate_colour(colour);
 		}
-		colour = xentry.pixel;
-
-		/* update our cache */
-		if (xentry.pixel < 256)
-		{
-			xc_cache[xentry.pixel].red = xentry.red;
-			xc_cache[xentry.pixel].green = xentry.green;
-			xc_cache[xentry.pixel].blue = xentry.blue;
-
-		}
-
-
-		/* byte swap here to make translate_image faster */
-		map[i] = translate_colour(colour);
+		return map;
 	}
+	else
+	{
+		XColor *xcolours, *xentry;
+		Colormap map;
 
-	return map;
+		xcolours = xmalloc(sizeof(XColor) * ncolours);
+		for (i = 0; i < ncolours; i++)
+		{
+			entry = &colours->colours[i];
+			xentry = &xcolours[i];
+			xentry->pixel = i;
+			MAKE_XCOLOR(xentry, entry);
+		}
+
+		map = XCreateColormap(display, wnd, visual, AllocAll);
+		XStoreColors(display, map, xcolours, ncolours);
+
+		xfree(xcolours);
+		return (HCOLOURMAP) map;
+	}
 }
 
 void
 ui_destroy_colourmap(HCOLOURMAP map)
 {
-	xfree(map);
+	if (!owncolmap)
+		xfree(map);
+	else
+		XFreeColormap(display, (Colormap) map);
 }
 
 void
 ui_set_colourmap(HCOLOURMAP map)
 {
-	colmap = map;
+	if (!owncolmap)
+		colmap = map;
+	else
+		XSetWindowColormap(display, wnd, (Colormap) map);
 }
 
 void
@@ -1138,6 +1164,7 @@ ui_rect(
 	FILL_RECTANGLE(x, y, cx, cy);
 }
 
+/* warning, this function only draws on wnd or backstore, not both */
 void
 ui_draw_glyph(int mixmode,
 	      /* dest */ int x, int y, int cx, int cy,
@@ -1152,7 +1179,7 @@ ui_draw_glyph(int mixmode,
 	XSetStipple(display, gc, (Pixmap) glyph);
 	XSetTSOrigin(display, gc, x, y);
 
-	FILL_RECTANGLE(x, y, cx, cy);
+	FILL_RECTANGLE_BACKSTORE(x, y, cx, cy);
 
 	XSetFillStyle(display, gc, FillSolid);
 }
@@ -1181,8 +1208,8 @@ ui_draw_glyph(int mixmode,
     }\
   if (glyph != NULL)\
     {\
-      ui_draw_glyph (mixmode, x + (short) glyph->offset,\
-		     y + (short) glyph->baseline,\
+      ui_draw_glyph (mixmode, x + glyph->offset,\
+		     y + glyph->baseline,\
 		     glyph->width, glyph->height,\
 		     glyph->pixmap, 0, 0, bgcolour, fgcolour);\
       if (flags & TEXT2_IMPLICIT_X)\
@@ -1204,11 +1231,11 @@ ui_draw_text(uint8 font, uint8 flags, int mixmode, int x, int y,
 
 	if (boxcx > 1)
 	{
-		FILL_RECTANGLE(boxx, boxy, boxcx, boxcy);
+		FILL_RECTANGLE_BACKSTORE(boxx, boxy, boxcx, boxcy);
 	}
 	else if (mixmode == MIX_OPAQUE)
 	{
-		FILL_RECTANGLE(clipx, clipy, clipcx, clipcy);
+		FILL_RECTANGLE_BACKSTORE(clipx, clipy, clipcx, clipcy);
 	}
 
 	/* Paint text, character by character */
@@ -1242,17 +1269,17 @@ ui_draw_text(uint8 font, uint8 flags, int mixmode, int x, int y,
 						else
 							x += text[i + 2];
 					}
-					if (i + 2 < length)
-						i += 3;
-					else
-						i += 2;
-					length -= i;
-					/* this will move pointer from start to first character after FE command */
-					text = &(text[i]);
-					i = 0;
 					for (j = 0; j < entry->size; j++)
 						DO_GLYPH(((uint8 *) (entry->data)), j);
 				}
+				if (i + 2 < length)
+					i += 3;
+				else
+					i += 2;
+				length -= i;
+				/* this will move pointer from start to first character after FE command */
+				text = &(text[i]);
+				i = 0;
 				break;
 
 			default:
@@ -1261,8 +1288,15 @@ ui_draw_text(uint8 font, uint8 flags, int mixmode, int x, int y,
 				break;
 		}
 	}
-
-
+	if (ownbackstore)
+	{
+		if (boxcx > 1)
+			XCopyArea(display, backstore, wnd, gc, boxx,
+				  boxy, boxcx, boxcy, boxx, boxy);
+		else
+			XCopyArea(display, backstore, wnd, gc, clipx,
+				  clipy, clipcx, clipcy, clipx, clipy);
+	}
 }
 
 void
