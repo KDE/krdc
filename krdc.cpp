@@ -444,7 +444,7 @@ void KRDC::switchToFullscreen(bool scaling)
 	t->setButton(FS_AUTOHIDE_ID, false);
 	t->addConnection(FS_AUTOHIDE_ID, SIGNAL(clicked()), this, SLOT(toggleFsToolbarAutoHide()));
 
-	t->insertButton("window_fullscreen", FS_FULLSCREEN_ID);
+	t->insertButton("window_nofullscreen", FS_FULLSCREEN_ID);
 	KToolBarButton *fullscreenButton = t->getButton(FS_FULLSCREEN_ID);
 	QToolTip::add(fullscreenButton, i18n("Fullscreen"));
 	t->setToggle(FS_FULLSCREEN_ID);
@@ -464,7 +464,7 @@ void KRDC::switchToFullscreen(bool scaling)
 	hostLabel->setName("kde toolbar widget");
 	hostLabel->setAlignment(Qt::AlignCenter);
 	hostLabel->setText("   "+m_host+"   ");
-	t->insertWidget(FS_HOSTLABEL_ID, 400, hostLabel);
+	t->insertWidget(FS_HOSTLABEL_ID, 150, hostLabel);
 	t->setItemAutoSized(FS_HOSTLABEL_ID, true);
 
 	t->insertButton("iconify", FS_ICONIFY_ID);
