@@ -13,12 +13,12 @@ noinst_HEADERS = main.h krdc.h kvncview.h vidmode.h rfbproto.h  \
    pointerlatencyometer.h threads.h newconnectiondialog.ui.h  \
    kservicelocator.h srvlocncdialog.h threadsafeeventreceiver.h
 
-EXTRA_DIST = README TODO
+EXTRA_DIST = README TODO window_fullscreen.png window_nofullscreen.png \
+             pinup.png pindown.png iconify.png close.png scale.png
 
 datadir = $(kde_datadir)/krdc/pics
-data_DATA = window_fullscreen.png window_nofullscreen.png \
-            pinup.png pindown.png iconify.png close.png scale.png \
-            pointcursor.png pointcursormask.png
+data_DATA =  pointcursor.png pointcursormask.png
+
 
 krdc_LDADD   = $(LIB_KDEUI) $(LIBJPEG) $(LIBXF86VIDMODE) $(LIB_SLP)
 krdc_LDFLAGS = $(all_libraries) $(KDE_RPATH)
