@@ -31,7 +31,8 @@ ControllerThread::ControllerThread(KVncView *v, WriterThread &wt, volatile bool 
 	m_view(v),
 	m_status(REMOTE_VIEW_CONNECTING),
 	m_wthread(wt),
-	m_quitFlag(quitFlag)
+	m_quitFlag(quitFlag),
+	m_desktopInitialized(false)
 {
 }
 
@@ -43,11 +44,31 @@ void ControllerThread::changeStatus(RemoteViewStatus s) {
 void ControllerThread::sendFatalError(ErrorCode s) {
 	m_quitFlag = true;
 	QThread::postEvent(m_view, new FatalErrorEvent(s));
+	m_wthread.kick();
+}
+
+/*
+ * Calls this from the X11 thread
+ */
+void ControllerThread::desktopInit() {
+	SetVisualAndCmap();
+	ToplevelInit();
+	DesktopInit(m_view->winId());
+	m_desktopInitialized = true;
+	m_waiter.wakeAll();
+}
+
+void ControllerThread::kick() {
+	m_waiter.wakeAll();
 }
 
 void ControllerThread::run() {
 	if (!ConnectToRFBServer(m_view->host().latin1(), m_view->port())) {
 		sendFatalError(ERROR_CONNECTION);
+		return;
+	}
+	if (m_quitFlag) {
+		changeStatus(REMOTE_VIEW_DISCONNECTED);
 		return;
 	}
 
@@ -74,13 +95,16 @@ void ControllerThread::run() {
 	QThread::postEvent(m_view, new ScreenResizeEvent(si.framebufferWidth, 
 							 si.framebufferHeight));
 
-	changeStatus(REMOTE_VIEW_PREPARING);
+	QThread::postEvent(m_view, new DesktopInitEvent());
+	while ((!m_quitFlag) && (!m_desktopInitialized)) 
+		m_waiter.wait(1000);
 
-	lockQt();
-	SetVisualAndCmap();
-	ToplevelInit();
-	DesktopInit(m_view->winId());
-	unlockQt();
+	if (m_quitFlag) {
+		changeStatus(REMOTE_VIEW_DISCONNECTED);
+		return;
+	}
+
+	changeStatus(REMOTE_VIEW_PREPARING);
 
 	if (!SetFormatAndEncodings()) {
 		sendFatalError(ERROR_INTERNAL);
@@ -100,6 +124,7 @@ void ControllerThread::run() {
 
 	m_quitFlag = true;
 	changeStatus(REMOTE_VIEW_DISCONNECTED);
+	m_wthread.kick();
 }
 
 enum RemoteViewStatus ControllerThread::status() {
@@ -279,3 +304,4 @@ void WriterThread::sendFatalError(ErrorCode s) {
 	m_quitFlag = true;
 	QThread::postEvent(m_view, new FatalErrorEvent(s));
 }
+

@@ -351,8 +351,9 @@ SetFormatAndEncodings()
     }
 
     if (appData.useRemoteCursor) {
-      if (se->nEncodings < MAX_ENCODINGS)
+      /* if (se->nEncodings < MAX_ENCODINGS)
 	encs[se->nEncodings++] = Swap32IfLE(rfbEncodingXCursor);
+      */
       if (se->nEncodings < MAX_ENCODINGS)
 	encs[se->nEncodings++] = Swap32IfLE(rfbEncodingRichCursor);
     }
@@ -383,7 +384,7 @@ SetFormatAndEncodings()
     }
 
     if (appData.useRemoteCursor) {
-      encs[se->nEncodings++] = Swap32IfLE(rfbEncodingXCursor);
+      /* encs[se->nEncodings++] = Swap32IfLE(rfbEncodingXCursor); */
       encs[se->nEncodings++] = Swap32IfLE(rfbEncodingRichCursor);
     }
 
@@ -531,9 +532,11 @@ HandleRFBServerMessage()
       xc.green = Swap16IfLE(rgb[1]);
       xc.blue = Swap16IfLE(rgb[2]);
       xc.flags = DoRed|DoGreen|DoBlue;
+      /* Disable colormaps
       lockQt();
       XStoreColor(dpy, cmap, &xc);
       unlockQt();
+      */
     }
 
     break;
@@ -633,25 +636,6 @@ HandleRFBServerMessage()
 	   rectangle) to the source rectangle as well. */
 	SoftCursorLockArea(cr.srcX, cr.srcY, rect.r.w, rect.r.h);
 
-	if (appData.copyRectDelay != 0) {
-	  lockQt();
-	  XFillRectangle(dpy, desktopWin, srcGC, cr.srcX, cr.srcY,
-			 rect.r.w, rect.r.h);
-	  XFillRectangle(dpy, desktopWin, dstGC, rect.r.x, rect.r.y,
-			 rect.r.w, rect.r.h);
-	  XSync(dpy,False);
-
-	  unlockQt();
-	  usleep(appData.copyRectDelay * 1000);
-	  lockQt();
-
-	  XFillRectangle(dpy, desktopWin, dstGC, rect.r.x, rect.r.y,
-			 rect.r.w, rect.r.h);
-	  XFillRectangle(dpy, desktopWin, srcGC, cr.srcX, cr.srcY,
-			 rect.r.w, rect.r.h);
-	  unlockQt();
-	}
-
 	CopyArea(cr.srcX, cr.srcY, rect.r.w, rect.r.h, rect.r.x, rect.r.y);
 
 	break;
@@ -738,17 +722,18 @@ HandleRFBServerMessage()
   case rfbBell:
   {
     Window toplevelWin;
-fprintf(stderr, "tugce bell\n");
+fprintf(stderr, "bell, need event here\n");
+/*
     lockQt();
     XBell(dpy, 0);
     unlockQt();
-    
+*/    
     break;
   }
 
   case rfbServerCutText:
   {
-fprintf(stderr, "tugce cut\n");
+fprintf(stderr, "cut, need event here\n");
     if (!ReadFromRFBServer(((char *)&msg) + 1,
 			   sz_rfbServerCutTextMsg - 1))
       return False;

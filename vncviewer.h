@@ -68,7 +68,7 @@ extern int endianTest;
   (DEFAULT_SSH_CMD " -f -L %L:%H:%R %G sleep 20")
 
 
-/** main.cpp **/
+/** kvncview.cpp **/
 
 extern AppData appData;
 
@@ -77,10 +77,8 @@ extern const char *vncServerHost;
 extern int vncServerPort;
 
 extern int isQuitFlagSet();
-extern void lockQt();
-extern void unlockQt();
-extern void unlockQtGui();
 extern int getPassword(char *passwd, int pwlen);
+extern void SyncScreenRegion(int x, int y, int width, int height);
 
 /* threads.cpp */
 extern void queueIncrementalUpdateRequest();
@@ -121,8 +119,7 @@ extern void FillRectangle8(CARD8, int x, int y, int width, int height);
 extern void FillRectangle16(CARD16, int x, int y, int width, int height);
 extern void FillRectangle32(CARD32, int x, int y, int width, int height);
 extern void CopyArea(int srcX, int srcY, int width, int height, int x, int y);
-extern void SyncScreenRegion(int x, int y, int width, int height);
-extern void SyncScreenRegionUnlocked(int x, int y, int width, int height);
+extern void DrawScreenRegionX11Thread(int x, int y, int width, int height);
 extern void ShmSync(void);
 extern void Cleanup(void);
 

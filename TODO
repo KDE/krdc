@@ -1,13 +1,26 @@
 - display connection status on canvas
 - bump scrolling in fullscreen
+- make bump scrolling smooth / counter class
 - adjust screen resolution in fullscreen mode
 - optional scaling if remote desktop is too big
 - animated autohide for fullscreen toolbar
 - stop fs toolbar autohide timeout when mouse is over the toolbar
+- bell
+- cut&paste
 - add function to vncviewer code to de-allocate resources
 - dont quit after failed connect attempt but allow re-try
 - security audit of the protocol code
 
 - login with user's name+password?
 - SSL/TLS?
+
+
+Known bugs/problems:
+- Switching between fullscreen and normal mode can cause crashes with a
+  backtrace somewhere deep in Qt
+- at least on some KWin versions the minimize button in fullscreen hides the 
+  window (does not appear in window/task lists). KWin-bug, probably.
+- when using the XShm extension (see DesktopInit(), CreateShmImage() invocation)
+  I get error messages like "Xlib: unexpected async reply (sequence 0x1717)!" after
+  a few seconds. That's why XShm is not used at the moment
 

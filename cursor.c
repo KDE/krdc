@@ -118,9 +118,9 @@ Bool HandleXCursor(int xhot, int yhot, int width, int height)
       return False;
     }
 
-    lockQt();
+    /*    lockQt(); */
     XQueryBestCursor(dpy, dr, width, height, &wret, &hret);
-    unlockQt();
+    /* unlockQt(); */
   }
 
   if (width * height == 0 || wret < width || hret < height) {
@@ -141,7 +141,7 @@ Bool HandleXCursor(int xhot, int yhot, int width, int height)
   for (i = 0; i < bytesData * 2; i++)
     buf[i] = (char)_reverse_byte[(int)buf[i] & 0xFF];
 
-  lockQt();
+  /* lockQt(); */
   source = XCreateBitmapFromData(dpy, dr, buf, width, height);
   mask = XCreateBitmapFromData(dpy, dr, &buf[bytesData], width, height);
   cursor = XCreatePixmapCursor(dpy, source, mask, &fg, &bg, xhot, yhot);
@@ -153,7 +153,7 @@ Bool HandleXCursor(int xhot, int yhot, int width, int height)
   FreeCursors(False);
   prevXCursor = cursor;
   prevXCursorSet = True;
-  unlockQt();
+  /* unlockQt(); */
   return True;
 }
 
@@ -366,7 +366,6 @@ static void SoftCursorCopyArea(int oper)
     h = si.framebufferHeight - y;
   }
 
-  lockQt();
   if (oper == OPER_SAVE) {
     /* Save screen area in memory. */
     ShmSync();
@@ -375,7 +374,6 @@ static void SoftCursorCopyArea(int oper)
     /* Restore screen area. */
     CopyDataToScreen(rcSavedArea, x, y, w, h);
   }
-  unlockQt();
 }
 
 static void SoftCursorDraw(void)
@@ -406,15 +404,13 @@ static void SoftCursorDraw(void)
 
 static void FreeCursors(Bool setDotCursor)
 {
-  lockQt();
-  if (setDotCursor)
-    XDefineCursor(dpy, desktopWin, dotCursor);
+  /* lockQt(); */
 
   if (prevXCursorSet) {
     XFreeCursor(dpy, prevXCursor);
     prevXCursorSet = False;
   }
-  unlockQt();
+  /*  unlockQt(); */
   
   if (prevRichCursorSet) {
     SoftCursorCopyArea(OPER_RESTORE);

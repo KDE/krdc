@@ -115,6 +115,7 @@ int KVncView::port() {
 void KVncView::startQuitting() {
 	m_quitFlag = true;
 	m_wthread.kick();
+	m_cthread.kick();
 }
 
 bool KVncView::isQuitting() {
@@ -140,18 +141,26 @@ KVncView::~KVncView()
 
 void KVncView::paintEvent(QPaintEvent *e) {
 	if (status() == REMOTE_VIEW_CONNECTED)
-		SyncScreenRegionUnlocked(e->rect().x(),
-					 e->rect().y(),
-					 e->rect().width(),
-					 e->rect().height());
+		DrawScreenRegionX11Thread(e->rect().x(),
+					  e->rect().y(),
+					  e->rect().width(),
+					  e->rect().height());
 }
 
 void KVncView::customEvent(QCustomEvent *e)
 {
-	if (e->type() == ScreenResizeEventType) {  
+	if (e->type() == ScreenRepaintEventType) {  
+		ScreenRepaintEvent *sre = (ScreenRepaintEvent*) e;
+		DrawScreenRegionX11Thread(sre->x(), sre->y(), 
+					  sre->width(), sre->height());
+	}
+	else if (e->type() == ScreenResizeEventType) {  
 		ScreenResizeEvent *sre = (ScreenResizeEvent*) e;
 		setFixedSize(sre->width(), sre->height());
 		emit changeSize(sre->width(), sre->height());
+	}
+	else if (e->type() == DesktopInitEventType) {  
+		m_cthread.desktopInit();
 	}
 	else if (e->type() == StatusChangeEventType) {  
 		StatusChangeEvent *sce = (StatusChangeEvent*) e;
@@ -305,16 +314,13 @@ extern int isQuitFlagSet() {
 	return kvncview->isQuitting() ? 1 : 0; 
 }
 
-void lockQt() {
-	KApplication::kApplication()->lock();
-}
-
-void unlockQt() {
-	KApplication::kApplication()->unlock(false);
-}
-
-void unlockQtGui() {
-	KApplication::kApplication()->unlock(true);
+extern void SyncScreenRegion(int x, int y, int width, int height) {
+	if (KApplication::kApplication()->tryLock()) {
+		DrawScreenRegionX11Thread(x, y, width, height);
+		KApplication::kApplication()->unlock();
+	}
+	else
+		QThread::postEvent(kvncview, new ScreenRepaintEvent(x, y, width, height));	
 }
 
 unsigned long KVncView::toKeySym(QKeyEvent *k)

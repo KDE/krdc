@@ -102,6 +102,35 @@ public:
 	ErrorCode errorCode() { return m_error; }
 };
 
+const int DesktopInitEventType = 781005;
+
+class DesktopInitEvent : public QCustomEvent
+{
+public:
+	DesktopInitEvent() : 
+		QCustomEvent(DesktopInitEventType)
+	{};
+};
+
+const int ScreenRepaintEventType = 781006;
+
+class ScreenRepaintEvent : public QCustomEvent
+{
+private:
+	int m_x, m_y, m_width, m_height;
+public:
+	ScreenRepaintEvent(int x, int y, int w, int h) : 
+		QCustomEvent(ScreenRepaintEventType), 
+		m_x(x),
+		m_y(y),
+		m_width(w),
+		m_height(h) 
+	{};
+	int x() const { return m_x; };
+	int y() const { return m_y; };
+	int width() const { return m_width; };
+	int height() const { return m_height; };
+};
 
 struct MouseEvent {
 	int x, y, buttons;
@@ -126,7 +155,8 @@ private:
 	QValueList<MouseEvent> m_mouseEvents; // list of unsent mouse events
 	QValueList<KeyEvent> m_keyEvents;     // list of unsent key events
 
-	void sendFatalError(ErrorCode s);	
+	void sendFatalError(ErrorCode s);
+
 public:
 	WriterThread(KVncView *v, volatile bool &quitFlag);
 	
@@ -152,13 +182,18 @@ private:
 	enum RemoteViewStatus m_status;
 	WriterThread &m_wthread;
 	volatile bool &m_quitFlag;
+	volatile bool m_desktopInitialized;
+	QWaitCondition m_waiter;
 
 	void changeStatus(RemoteViewStatus s);
 	void sendFatalError(ErrorCode s);
-public:
 
+public:
 	ControllerThread(KVncView *v, WriterThread &wt, volatile bool &quitFlag);
 	enum RemoteViewStatus status();	
+	void desktopInit();
+	void kick();
+
 protected:
 	void run();
 };
