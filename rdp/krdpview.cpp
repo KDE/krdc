@@ -132,8 +132,6 @@ int KRdpView::port()
 // open a connection
 bool KRdpView::start()
 { 
-	setStatus(REMOTE_VIEW_CONNECTING);
-
 	SmartPtr<RdpHostPref> hp;
 
 	if(!rdpAppDataConfigured)
@@ -195,6 +193,7 @@ bool KRdpView::start()
 	strcpy(keymapname, hp->layout().latin1());
 
 	// start the connect thread
+	setStatus(REMOTE_VIEW_CONNECTING);
 	m_cthread.start();
 	return true;
 }
