@@ -794,7 +794,7 @@ int i;
 	  if (!appData.useBGR233)
 	    memcpy(fbx, img, pl);
 	  else
-	    bgr233cpy(fbx, img, pl);
+	    bgr233cpy(fbx, img, pixelsLeft);
 	  img += pl;
 	}
 
@@ -812,7 +812,7 @@ int i;
 	if (!appData.useBGR233)
 	  memcpy(fbx, img, pl);
 	else
-	  bgr233cpy(fbx, img, pl);
+	  bgr233cpy(fbx, img, wl);
 	img += pl;
       }
     }
@@ -1347,9 +1347,9 @@ static void _calcRect(Surface *src, Surface *dst, float theta, float xscale, flo
 	UintXX *dst_row; \
 	UintXX c1, c2, c3, c4;\
 	Uint32 R, G, B, A=0; \
-	UintXX Rmask = myFormat.redMax << myFormat.redShift;\
-        UintXX Gmask = myFormat.greenMax << myFormat.greenShift;\
-        UintXX Bmask = myFormat.blueMax << myFormat.blueShift;\
+	UintXX Rmask = image->red_mask;\
+        UintXX Gmask = image->green_mask;\
+        UintXX Bmask = image->blue_mask;\
         UintXX Amask = 0;\
 	Uint32 wx, wy;\
 	Uint32 p1, p2, p3, p4;\
