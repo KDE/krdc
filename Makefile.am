@@ -21,7 +21,7 @@ appdata_DATA =  pointcursor.png pointcursormask.png pinup.png pindown.png \
   iconify.png close.png
 
 
-krdc_LDADD   = vnc/libvnc.la rdp/librdp.la $(LIB_KDEUI) $(LIBXF86VIDMODE) $(LIB_SLP) -L/usr/X11R6/lib -lX11
+krdc_LDADD   = vnc/libvnc.la rdp/librdp.la $(LIB_KDEUI) $(LIBXF86VIDMODE) $(LIB_SLP) $(LIB_KDNSSD) -L/usr/X11R6/lib -lX11 
 krdc_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
 xdg_apps_DATA = krdc.desktop

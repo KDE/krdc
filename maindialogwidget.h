@@ -23,6 +23,8 @@
 
 #include "kservicelocator.h"
 #include "maindialogbase.h"
+#include <dnssd/servicebrowser.h>
+#include <dnssd/remoteservice.h>
 #include "smartptr.h"
 
 class MainDialogWidget : public MainDialogBase
@@ -58,11 +60,16 @@ class MainDialogWidget : public MainDialogBase
     void foundService( QString url, int );
     void lastSignalServices( bool success );
     void foundScopes( QStringList scopeList );
+    void addedService( DNSSD::RemoteService::Ptr );
+    void removedService( DNSSD::RemoteService::Ptr );
+
 
   protected:
     QString m_scope;
     bool m_scanning;
     SmartPtr<KServiceLocator> m_locator;
+    DNSSD::ServiceBrowser *m_locator_vnc;
+    DNSSD::ServiceBrowser *m_locator_rdp;
 };
 
 #endif // MAINDIALOGWIDGET_H

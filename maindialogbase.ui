@@ -317,12 +317,6 @@ Remote Desktop Connection only supports systems that use VNC.</string>
         <slot>rescan()</slot>
     </connection>
     <connection>
-        <sender>m_scopeCombo</sender>
-        <signal>activated(int)</signal>
-        <receiver>MainDialogBase</receiver>
-        <slot>rescan()</slot>
-    </connection>
-    <connection>
         <sender>m_serverInput</sender>
         <signal>textChanged(const QString&amp;)</signal>
         <receiver>MainDialogBase</receiver>

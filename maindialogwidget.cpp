@@ -33,6 +33,7 @@
 #include "maindialogwidget.h"
 
 static const QString DEFAULT_SCOPE = "default";
+static const QString DNSSD_SCOPE = "DNS-SD";
 
 class UrlListViewItem : public KListViewItem
 {
@@ -67,6 +68,10 @@ class UrlListViewItem : public KListViewItem
   {
     return m_url;
   }
+  const QString& serviceid() const
+  {
+    return m_serviceid;
+  }
 
   protected:
     QString m_url;
@@ -75,7 +80,7 @@ class UrlListViewItem : public KListViewItem
 
 MainDialogWidget::MainDialogWidget( QWidget *parent, const char *name )
     : MainDialogBase( parent, name ),
-      m_scanning( false )
+      m_scanning( false ), m_locator_vnc(0), m_locator_rdp(0)
 {
   HostPreferences *hp = HostPreferences::instance();
   QStringList list;
@@ -174,9 +179,9 @@ void MainDialogWidget::itemSelected( QListViewItem *item )
 {
   UrlListViewItem *u = ( UrlListViewItem* ) item;
   QRegExp rx( "^service:remotedesktop\\.kde:([^;]*)" );
-  if ( rx.search( u->url() ) < 0 )
-    return;
-  m_serverInput->setCurrentText( rx.cap( 1 ) );
+  if ( rx.search( u->url() ) < 0 ) 
+    m_serverInput->setCurrentText( u->url());
+    else m_serverInput->setCurrentText( rx.cap( 1 ) );
 }
 
 void MainDialogWidget::itemDoubleClicked( QListViewItem *item )
@@ -211,18 +216,45 @@ void MainDialogWidget::rescan()
 
   m_browsingView->clear();
 
-  QString filter;
-  if ( !m_searchInput->text().stripWhiteSpace().isEmpty() ) {
-    QString ef = KServiceLocator::escapeFilter(
-      m_searchInput->text().stripWhiteSpace() );
-    filter = "(|(|(description=*"+ef+"*)(username=*"+ef+"*))(fullname=*"+ef+"*))";
+  if (m_locator_vnc) {
+    delete m_locator_vnc;  // still active browsers
+    m_locator_vnc = 0;
+  }
+  if (m_locator_rdp) {
+    delete m_locator_rdp;
+    m_locator_rdp = 0;
   }
 
-  if ( !m_locator->findServices( "service:remotedesktop.kde",
-                                 filter, m_scope ) ) {
-    kdWarning() << "Failure in findServices()" << endl;
-    errorScanning();
-    return;
+  if (m_scope == DNSSD_SCOPE) {
+    kdDebug() << "Scope is DNSSD\n";
+    m_locator_vnc = new DNSSD::ServiceBrowser("_rfb._tcp",0,true);
+    m_locator_rdp = new DNSSD::ServiceBrowser("_rdp._tcp",0,true);
+    connect(m_locator_vnc,SIGNAL(serviceAdded(DNSSD::RemoteService::Ptr)),
+      SLOT(addedService(DNSSD::RemoteService::Ptr)));
+    connect(m_locator_vnc,SIGNAL(serviceRemoved(DNSSD::RemoteService::Ptr)),
+      SLOT(removedService(DNSSD::RemoteService::Ptr)));
+    connect(m_locator_rdp,SIGNAL(serviceAdded(DNSSD::RemoteService::Ptr)),
+      SLOT(addedService(DNSSD::RemoteService::Ptr)));
+    connect(m_locator_rdp,SIGNAL(serviceRemoved(DNSSD::RemoteService::Ptr)),
+      SLOT(removedService(DNSSD::RemoteService::Ptr)));
+    m_locator_vnc->startBrowse();
+    m_locator_rdp->startBrowse();
+    // now find scopes
+    lastSignalServices(true);
+  } else {
+    QString filter;
+    if ( !m_searchInput->text().stripWhiteSpace().isEmpty() ) {
+      QString ef = KServiceLocator::escapeFilter(
+        m_searchInput->text().stripWhiteSpace() );
+      filter = "(|(|(description=*"+ef+"*)(username=*"+ef+"*))(fullname=*"+ef+"*))";
+    }
+
+    if ( !m_locator->findServices( "service:remotedesktop.kde",
+                                   filter, m_scope ) ) {
+      kdWarning() << "Failure in findServices()" << endl;
+      errorScanning();
+      return;
+    }
   }
 }
 
@@ -289,6 +321,28 @@ void MainDialogWidget::foundService( QString url, int )
       KServiceLocator::decodeAttributeValue( map[ "serviceid" ] ) );
 }
 
+void MainDialogWidget::addedService( DNSSD::RemoteService::Ptr service )
+{
+QString type = service->type().mid(1,3);
+if (type == "rfb") type = "vnc";
+QString url = type+"://"+service->hostName()+":"+QString::number(service->port());
+new UrlListViewItem( m_browsingView, url, service->serviceName(),
+     type.upper(),service->textData()["type"],
+     service->textData()["u"],service->textData()["fullname"],
+     service->textData()["description"],service->serviceName()+service->domain());
+}
+
+void MainDialogWidget::removedService( DNSSD::RemoteService::Ptr service )
+{
+  QListViewItemIterator it( m_browsingView );
+  while ( it.current() ) {
+    if ( ((UrlListViewItem*)it.current())->serviceid() == service->serviceName()+service->domain() )
+      delete it.current();
+      else ++it;
+  }
+}
+
+
 void MainDialogWidget::lastSignalServices( bool success )
 {
   if ( !success )
@@ -306,8 +360,7 @@ void MainDialogWidget::lastSignalServices( bool success )
 
 void MainDialogWidget::foundScopes( QStringList scopeList )
 {
-  if ( scopeList.isEmpty() )
-    return;
+  scopeList << DNSSD_SCOPE;  
 
   int di = scopeList.findIndex( DEFAULT_SCOPE );
   if ( di >= 0 )
