@@ -23,6 +23,7 @@
 #include <qclipboard.h>
 #include <qwidget.h>
 #include <qcursor.h>
+#include <qmap.h>
 
 #include "threadsafeeventreceiver.h"
 #include "pointerlatencyometer.h"
@@ -49,6 +50,7 @@ private:
 	bool m_remoteMouseTracking;
 	
 	int m_buttonMask;
+        QMap<unsigned int,bool> m_mods;
 
 	QString m_host;
 	int m_port;
@@ -65,7 +67,8 @@ private:
 	bool checkLocalKRfb();
 	void paintMessage(const QString &msg);
 	void showDotCursor(bool show);
-
+        void unpressModifiers();
+        
 protected:
 	void paintEvent(QPaintEvent*);
 	void customEvent(QCustomEvent*);
@@ -74,10 +77,11 @@ protected:
 	void mouseReleaseEvent(QMouseEvent*);
 	void mouseMoveEvent(QMouseEvent*);
 	void wheelEvent(QWheelEvent *);
+	void focusOutEvent(QFocusEvent *);
 	bool x11Event(XEvent*);
 
 public:
-	KVncView(QWidget* parent=0, const char *name=0, 
+	KVncView(QWidget* parent=0, const char *name=0,
 		 const QString &host = QString(""), int port = 5900,
 		 const QString &password = QString::null, 
 		 AppData *data = 0);

@@ -30,6 +30,9 @@ void NewConnectionDialog::enableBrowsingArea(bool enable)
 	browsingPanel->setMaximumSize(0, 0);
 	browsingPanel->setEnabled(false);
 	browseButton->setText(browseButton->text().replace(QRegExp("<<"), ">>"));
+#ifndef HAVE_SLP
+	browseButton->hide();
+#endif
 	int h = minimumSize().height()-hOffset;
 	setMinimumSize(minimumSize().width(), (h > 0) ? h : 0);
 	resize(width(), height()-hOffset);
