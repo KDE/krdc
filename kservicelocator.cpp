@@ -638,6 +638,8 @@ void KServiceLocator::customEvent(QCustomEvent *e) {
 
 QString KServiceLocator::decodeAttributeValue(const QString &value) {
 	char *n;
+	if (value.isNull())
+		return value;
 	if (SLPUnescape(value.latin1(), &n, SLP_TRUE) != SLP_OK)
 		return QString::null;
 	QString r(n);

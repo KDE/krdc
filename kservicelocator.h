@@ -78,7 +78,8 @@ class KServiceLocator : public QObject {
 	 * This function requires the presence of the SLP library, otherwise it
 	 * will return the original value.
 	 * @param value the attribute value to decode
-	 * @return the decoded value
+	 * @return the decoded value. If @p value was QString::null or decoding
+	 *         failed, QString::null will be returned
 	 */
 	static QString decodeAttributeValue(const QString &value);
 
