@@ -2,7 +2,7 @@
                      keycapturedialog2.cpp - KeyCaptureDialog
                              -------------------
     begin                : Wed Dec 25 01:20:22 CET 2002
-    copyright            : (C) 2002 by Tim Jansen
+    copyright            : (C) 2002-2003 by Tim Jansen
                            (C) unknown (whoever wrote kshortcutdialog.cpp)
     email                : tim@tjansen.de
  ***************************************************************************/
@@ -99,7 +99,7 @@ void KeyCaptureDialog2::x11EventKeyPress( XEvent *pEvent )
 			break;
 		default:
 			if( pEvent->type == XKeyPress && keyNative.sym() ) {
-				emit keyPressed(keyNative);
+				emit keyPressed(pEvent);
 				reject();
 			}
 			return;

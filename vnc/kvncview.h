@@ -2,7 +2,7 @@
                   kvncview.h  -  widget that shows the vnc client
                              -------------------
     begin                : Thu Dec 20 15:11:42 CET 2001
-    copyright            : (C) 2001-2002 by Tim Jansen
+    copyright            : (C) 2001-2003 by Tim Jansen
     email                : tim@tjansen.de
  ***************************************************************************/
 
@@ -97,7 +97,7 @@ public:
 
 public slots:
         virtual void enableScaling(bool s);
-        virtual void pressKey(KKeyNative k); 
+        virtual void pressKey(XEvent *k); 
 
 private slots:
 	void selectionChanged();

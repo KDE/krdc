@@ -2,7 +2,7 @@
                           krdc.cpp  -  main window
                              -------------------
     begin                : Tue May 13 23:07:42 CET 2002
-    copyright            : (C) 2002 by Tim Jansen
+    copyright            : (C) 2002-2003 by Tim Jansen
     email                : tim@tjansen.de
  ***************************************************************************/
 
@@ -241,8 +241,8 @@ bool KRDC::start(bool onlyFailOnCancel)
 		SLOT(changeProgress(RemoteViewStatus)));
 	connect(m_view, SIGNAL(showingPasswordDialog(bool)),
 		SLOT(showingPasswordDialog(bool)));
-	connect(m_keyCaptureDialog, SIGNAL(keyPressed(KKeyNative)),
-		m_view, SLOT(pressKey(KKeyNative)));
+	connect(m_keyCaptureDialog, SIGNAL(keyPressed(XEvent*)),
+		m_view, SLOT(pressKey(XEvent*)));
 
 	changeProgress(REMOTE_VIEW_CONNECTING);
 	if ((!m_view->start()) && (!m_host.isNull()))

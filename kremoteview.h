@@ -2,7 +2,7 @@
                    kremoteview.h  -  widget that shows the remote framebuffer
                              -------------------
     begin                : Wed Dec 25 23:58:12 CET 2002
-    copyright            : (C) 2002 by Tim Jansen
+    copyright            : (C) 2002-2003 by Tim Jansen
     email                : tim@tjansen.de
  ***************************************************************************/
 
@@ -19,8 +19,8 @@
 #define KREMOTEVIEW_H
 
 
-#include <kkeynative.h>
 #include <qwidget.h>
+#include <kkeynative.h>
 #include "events.h"
 
 typedef enum {
@@ -29,6 +29,7 @@ typedef enum {
   QUALITY_MEDIUM,
   QUALITY_LOW
 } Quality;
+
 
 /**
  * Generic widget that displays a remote framebuffer.
@@ -131,7 +132,7 @@ public slots:
 	 * Sends a key to the remote server.
 	 * @param k the key to send
 	 */ 
-        virtual void pressKey(KKeyNative k) = 0; 
+        virtual void pressKey(XEvent *k) = 0; 
 
 signals:
         /**

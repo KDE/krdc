@@ -2,7 +2,7 @@
                           kvncview.cpp  -  main widget
                              -------------------
     begin                : Thu Dec 20 15:11:42 CET 2001
-    copyright            : (C) 2001-2002 by Tim Jansen
+    copyright            : (C) 2001-2003 by Tim Jansen
     email                : tim@tjansen.de
  ***************************************************************************/
 
@@ -426,7 +426,8 @@ void KVncView::wheelEvent(QWheelEvent *e) {
 	e->accept();
 }
 
-void KVncView::pressKey(KKeyNative k) {
+void KVncView::pressKey(XEvent *xe) {
+	KKeyNative k(xe);
 	uint mod = k.mod();
 	if (mod & KKeyNative::modX(KKey::SHIFT))
 		m_wthread.queueKeyEvent(XK_Shift_L, true);

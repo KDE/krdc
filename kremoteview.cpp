@@ -2,7 +2,7 @@
                    kremoteview.cpp  -  widget that shows the remote framebuffer
                              -------------------
     begin                : Wed Dec 26 00:21:14 CET 2002
-    copyright            : (C) 2002 by Tim Jansen
+    copyright            : (C) 2002-2003 by Tim Jansen
     email                : tim@tjansen.de
  ***************************************************************************/
 

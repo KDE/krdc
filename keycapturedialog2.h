@@ -2,7 +2,7 @@
                     keycapturedialog2.h - KeyCaptureDialog
                              -------------------
     begin                : Wed Dec 25 01:16:23 CET 2002
-    copyright            : (C) 2002 by Tim Jansen
+    copyright            : (C) 2002-2003 by Tim Jansen
     email                : tim@tjansen.de
  ***************************************************************************/
 
@@ -40,7 +40,7 @@ public slots:
 	void execute();
 
 signals:
-	void keyPressed(KKeyNative key);
+	void keyPressed(XEvent *key);
 };
 
 
