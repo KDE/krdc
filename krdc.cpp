@@ -646,13 +646,13 @@ void KRDC::bumpScroll() {
 	if (d.width() < s.width()) {
 		if (x == 0)
 			m_scrollView->scrollBy(-BUMP_SCROLL_CONSTANT, 0);
-		else if (x >= d.width()-1)
+		else if (x == d.width()-1)
 			m_scrollView->scrollBy(BUMP_SCROLL_CONSTANT, 0);
 	}
 	if (d.height() < s.height()) {
 		if (y == 0)
 			m_scrollView->scrollBy(0, -BUMP_SCROLL_CONSTANT);
-		else if (y >= d.height()-1)
+		else if (y == d.height()-1)
 			m_scrollView->scrollBy(0, BUMP_SCROLL_CONSTANT);
 	}
 
