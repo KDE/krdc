@@ -30,4 +30,4 @@ kde_services_DATA = vnc.protocol
 INCLUDES= $(all_includes)
 
 messages: rc.cpp
-	$(XGETTEXT) rc.cpp *.cpp *.cc -o $(podir)/krdc.pot
+	$(XGETTEXT) *.cpp *.h -o $(podir)/krdc.pot
