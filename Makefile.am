@@ -20,7 +20,7 @@ appdatadir = $(kde_datadir)/krdc/pics
 appdata_DATA =  pointcursor.png pointcursormask.png pinup.png pindown.png \
   iconify.png close.png
 
-dnssddatadir = $(kde_datadir)/dnssd
+dnssddatadir = $(kde_datadir)/zeroconf
 dnssddata_DATA = _rfb._tcp
 
 krdc_LDADD   = vnc/libvnc.la rdp/librdp.la $(LIB_KDEUI) $(LIBXF86VIDMODE) $(LIB_SLP) $(LIB_KDNSSD) $(X_LDFLAGS) $(LIB_X11)
