@@ -20,7 +20,17 @@
 KRemoteView::KRemoteView(QWidget *parent, 
 			 const char *name, 
 			 WFlags f) : 
-	QWidget(parent, name, f) {
+	QWidget(parent, name, f),
+        m_status(REMOTE_VIEW_DISCONNECTED) {
+}
+
+enum RemoteViewStatus KRemoteView::status() {
+	return m_status;
+}
+
+void KRemoteView::setStatus(RemoteViewStatus s) {
+	m_status = s;
+	emit statusChanged(m_status);
 }
 
 KRemoteView::~KRemoteView() {

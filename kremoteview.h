@@ -91,12 +91,12 @@ public:
 	 * @see statusChanged()
 	 */
 	virtual bool start() = 0;
-
+        
 	/**
 	 * Returns the current status of the connection.
 	 * @return the status of the connection
 	 */
-	virtual enum RemoteViewStatus status() = 0;
+	enum RemoteViewStatus status();
 
 public slots:
         /**
@@ -155,6 +155,18 @@ signals:
 	 *                   button, 1 for second button etc)a
 	 */
 	void mouseStateChanged(int x, int y, int buttonMask);
+
+protected:
+	/**
+	 * The status of the remote view.
+	 */
+	enum RemoteViewStatus m_status;
+
+	/**
+	 * Set the status of the connection
+	 * @param s the new status
+	 */
+	virtual void setStatus(RemoteViewStatus s);
 };
 
 #endif

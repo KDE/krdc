@@ -40,7 +40,6 @@ private:
 	ControllerThread m_cthread;
 	WriterThread m_wthread;
 	volatile bool m_quitFlag; // if set: all threads should die ASAP
-	enum RemoteViewStatus m_status;
 
 	QSize m_framebufferSize;
 	bool m_scaling;
@@ -94,7 +93,6 @@ public:
 	virtual QString host();
 	virtual int port();
 	virtual bool start();
-	virtual enum RemoteViewStatus status();
 
 public slots:
         virtual void enableScaling(bool s);

@@ -145,10 +145,6 @@ bool KVncView::isQuitting() {
 	return m_quitFlag;
 }
 
-enum RemoteViewStatus KVncView::status() {
-	return m_status;
-}
-
 bool KVncView::checkLocalKRfb() {
 	if ((m_host != "localhost") && (m_host != ""))
 		return true;
@@ -171,7 +167,7 @@ bool KVncView::checkLocalKRfb() {
 	if (m_port != portNum)
 		return true;
 
-	emit statusChanged(REMOTE_VIEW_DISCONNECTED);
+	setStatus(REMOTE_VIEW_DISCONNECTED);
 	KMessageBox::error(0, 
 			   i18n("It is not possible to connect to a local Desktop Sharing service."),
 			   i18n("Connection Failure"));
@@ -228,7 +224,7 @@ int KVncView::heightForWidth(int w) const {
 }
 
 void KVncView::paintEvent(QPaintEvent *e) {
-	if (status() == REMOTE_VIEW_CONNECTED) 
+	if (m_status == REMOTE_VIEW_CONNECTED) 
 		drawRegion(e->rect().x(),
 			   e->rect().y(),
 			   e->rect().width(),
@@ -260,8 +256,7 @@ void KVncView::customEvent(QCustomEvent *e)
 	}
 	else if (e->type() == StatusChangeEventType) {  
 		StatusChangeEvent *sce = (StatusChangeEvent*) e;
-		m_status = sce->status();
-		emit statusChanged(m_status);
+		setStatus(sce->status());
 		if (m_status == REMOTE_VIEW_CONNECTED) {
 			emit connected();
 			setFocus();
@@ -291,7 +286,7 @@ void KVncView::customEvent(QCustomEvent *e)
 	}
 	else if (e->type() == FatalErrorEventType) {  
 		FatalErrorEvent *fee = (FatalErrorEvent*) e;
-		emit statusChanged(REMOTE_VIEW_DISCONNECTED);
+		setStatus(REMOTE_VIEW_DISCONNECTED);
 		switch (fee->errorCode()) {
 		case ERROR_CONNECTION:
 			KMessageBox::error(0, 
@@ -353,7 +348,7 @@ void KVncView::customEvent(QCustomEvent *e)
 }
 
 void KVncView::mouseEvent(QMouseEvent *e) {
-	if (status() != REMOTE_VIEW_CONNECTED)
+	if (m_status != REMOTE_VIEW_CONNECTED)
 		return;
 
 	if ( e->type() != QEvent::MouseMove ) {
@@ -407,7 +402,7 @@ void KVncView::mouseMoveEvent(QMouseEvent *e) {
 }
 
 void KVncView::wheelEvent(QWheelEvent *e) {
-	if (status() != REMOTE_VIEW_CONNECTED)
+	if (m_status != REMOTE_VIEW_CONNECTED)
 		return;
 
 	int eb = 0;
@@ -477,7 +472,7 @@ bool KVncView::remoteMouseTracking() {
 }
 
 void KVncView::selectionChanged() {
-	if (status() != REMOTE_VIEW_CONNECTED)
+	if (m_status != REMOTE_VIEW_CONNECTED)
 		return;
 
 	if (m_cb->ownsSelection() || m_dontSendCb)
