@@ -97,8 +97,8 @@ static void CopyBGR233ToScreen(CARD8 *buf, int x, int y, int width,int height);
 static void FillRectangleBGR233(CARD8 buf, int x, int y, int width,int height);
 static int CheckRectangle(int x, int y, int width, int height);
 static SoftCursorState getSoftCursorState(int x, int y, int width, int height);
-static void discardCursorSavedArea();
-static void saveCursorSavedArea();
+static void discardCursorSavedArea(void);
+static void saveCursorSavedArea(void);
 
 static void ZoomInit(void);
 static void transformZoomSrc(int six, int siy, int siw, int sih,
@@ -634,7 +634,7 @@ ShmCleanup()
 }
 
 static int
-ShmCreationXErrorHandler(Display* _dpy, XErrorEvent *_e)
+ShmCreationXErrorHandler(Display* d, XErrorEvent *e)
 {
   caughtShmError = True;
   return 0;
@@ -946,29 +946,29 @@ int rectContains(int outX, int outY, int outW, int outH,
 
 void rectsJoin(int *nx1, int *ny1, int *nw1, int *nh1, 
 	       int x2, int y2, int w2, int h2) {
-  int x1, y1, w1, h1;
-  x1 = *nx1;
-  y1 = *ny1;
-  w1 = *nw1;
-  h1 = *nh1;
+  int ox, oy, ow, oh;
+  ox = *nx1;
+  oy = *ny1;
+  ow = *nw1;
+  oh = *nh1;
   
-  if (x2 < x1) {
-    w1 += x1 - x2;
-    x1 = x2;
+  if (x2 < ox) {
+    ow += ox - x2;
+    ox = x2;
   }
-  if (y2 < y1) {
-    h1 += y1 - y2;
-    y1 = y2;
+  if (y2 < oy) {
+    oh += oy - y2;
+    oy = y2;
   }
-  if ((x2+w2) > (x1+w1))
-    w1 = (x2+w2) - x1;
-  if ((y2+h2) > (y1+h1))
-    h1 = (y2+h2) - y1;
+  if ((x2+w2) > (ox+ow))
+    ow = (x2+w2) - ox;
+  if ((y2+h2) > (oy+oh))
+    oh = (y2+h2) - oy;
 
-  *nx1 = x1;
-  *ny1 = y1;
-  *nw1 = w1;
-  *nh1 = h1;
+  *nx1 = ox;
+  *ny1 = oy;
+  *nw1 = ow;
+  *nh1 = oh;
 }
 
 XImage *
