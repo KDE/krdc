@@ -730,3 +730,5 @@ QString KServiceLocator::createCommaList(const QStringList &values) {
 	return values.join(",");
 }
 
+#include "kservicelocator.moc"
+
