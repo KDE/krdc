@@ -14,8 +14,7 @@ EXTRA_DIST = README TODO
 
 datadir = $(kde_datadir)/krdc/pics
 data_DATA = window_fullscreen.png window_nofullscreen.png \
-            pinup.png pindown.png iconify.png close.png \
-	    pointcursor.png pointcursormask.png
+            pinup.png pindown.png iconify.png close.png
 
 krdc_LDADD   = $(LIB_KDEUI) -ljpeg
 krdc_LDFLAGS = $(all_libraries) $(KDE_RPATH)
