@@ -305,11 +305,11 @@ void WriterThread::run() {
 			m_clientCut = QString::null;
 			m_lock.unlock();
 
-			if (incrementalUpdateRQ) 
-				if (!sendIncrementalUpdateRequest()) {
-					sendFatalError(ERROR_IO);
-					break;
-				}
+			// always send a incremental update request.
+			if (!sendIncrementalUpdateRequest()) {
+			  sendFatalError(ERROR_IO);
+			  break;
+			}
 			if (!updateRegionRQ.isNull())
 				if (!sendUpdateRequest(updateRegionRQ)) {
 					sendFatalError(ERROR_IO);
