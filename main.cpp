@@ -72,7 +72,7 @@ int main(int argc, char *argv[])
 
 	KApplication a;
 
-	Quality quality = QUALITY_HIGH;
+	Quality quality = QUALITY_MEDIUM;
 	QString encodings = QString::null;
 	WindowMode wm = WINDOW_MODE_AUTO;
 
@@ -101,7 +101,7 @@ int main(int argc, char *argv[])
 				 &a, SLOT(quit()));
 		QObject::connect(krdc, SIGNAL(disconnectedError()), 
 				 &a, SLOT(quit()));
-		
+
 		if (!krdc->start(false))
 			return 0;
 		

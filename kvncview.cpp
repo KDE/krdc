@@ -84,7 +84,16 @@ KVncView::KVncView(QWidget *parent,
 	m_cb->setSelectionMode(true);
 	connect(m_cb, SIGNAL(selectionChanged()), this, SLOT(selectionChanged()));
 
-/*
+	showDotCursor(appData.dotCursor ? true : false);
+}
+
+void KVncView::showDotCursor(bool show) {
+
+	if (!show) {
+		setCursor(QCursor(Qt::BlankCursor));
+		return;
+	}
+
 	KStandardDirs *dirs = KGlobal::dirs();
 	QBitmap cursorBitmap(dirs->findResource("appdata", 
 						"pics/pointcursor.png"));
@@ -92,10 +101,7 @@ KVncView::KVncView(QWidget *parent,
 					      "pics/pointcursormask.png"));
 	QCursor cursor(cursorBitmap, cursorMask);
 	setCursor(cursor);
-*/
-	setCursor(QCursor(Qt::BlankCursor));
 }
-
 
 void KVncView::setDefaultAppData() {
 	appData.shareDesktop = True;
@@ -109,6 +115,8 @@ void KVncView::setDefaultAppData() {
 	appData.nColours = 256;
 	appData.useSharedColours = True;
 	appData.requestedDepth = 0;
+
+	appData.dotCursor = False;
 
 	appData.rawDelay = 0;
 	appData.copyRectDelay = 0;

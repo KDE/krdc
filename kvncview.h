@@ -86,6 +86,7 @@ public:
 
 public slots:
         void enableScaling(bool s);
+	void showDotCursor(bool show);
 
 private slots:
 	void selectionChanged();

@@ -252,18 +252,21 @@ void KRDC::configureApp(Quality q) {
 		m_appData.encodingsString = "copyrect softcursor tight zlib hextile raw";
 		m_appData.compressLevel = -1;
 		m_appData.qualityLevel = 1;
+		m_appData.dotCursor = 1;
 	}
 	else if ((q == QUALITY_MEDIUM) || (q == QUALITY_UNKNOWN)) {
 		m_appData.useBGR233 = 0;
 		m_appData.encodingsString = "copyrect softcursor tight zlib hextile raw";
 		m_appData.compressLevel = -1;
 		m_appData.qualityLevel = 6;
+		m_appData.dotCursor = 1;
 	}
 	else if (q == QUALITY_HIGH) {
 		m_appData.useBGR233 = 0;
 		m_appData.encodingsString = "copyrect softcursor hextile raw";
 		m_appData.compressLevel = -1;
 		m_appData.qualityLevel = 9;
+		m_appData.dotCursor = 0;
 	}
 
 	if (!m_encodings.isNull())

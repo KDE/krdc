@@ -51,6 +51,7 @@ typedef struct {
 
   int compressLevel;
   int qualityLevel;
+  int dotCursor; /* bool */
 
 } AppData;
 
