@@ -191,11 +191,10 @@ static void
 CopyDataToScreenRaw(char *buf, int x, int y, int width, int height)
 {
   int h;
-  int widthInBytes = width * myFormat.bitsPerPixel / 8;
+  int widthInBytes = width * visbpp / 8;
   int scrWidthInBytes = image->bytes_per_line;
-  
   char *scr = (image->data + y * scrWidthInBytes
-	       + x * myFormat.bitsPerPixel / 8);
+	       + x * visbpp / 8);
   
   for (h = 0; h < height; h++) {
     memcpy(scr, buf, widthInBytes);
@@ -282,11 +281,11 @@ FillRectangle8(CARD8 fg, int x, int y, int width, int height)
     return;
   if (!appData.useBGR233) {
     int h;
-    int widthInBytes = width * myFormat.bitsPerPixel / 8;
+    int widthInBytes = width * visbpp / 8;
     int scrWidthInBytes = image->bytes_per_line;
 
     char *scr = (image->data + y * scrWidthInBytes
-		 + x * myFormat.bitsPerPixel / 8);
+		 + x * visbpp / 8);
 
     for (h = 0; h < height; h++) {
       memset(scr, fg, widthInBytes);
@@ -377,7 +376,7 @@ FillRectangle16(CARD16 fg, int x, int y, int width, int height)
   int scrWidthInBytes = image->bytes_per_line;
   
   char *scr = (image->data + y * scrWidthInBytes
-	       + x * myFormat.bitsPerPixel / 8);
+	       + x * visbpp / 8);
   CARD16 *scr16;
 
   if (!CheckRectangle(x, y, width, height))
@@ -402,7 +401,7 @@ FillRectangle32(CARD32 fg, int x, int y, int width, int height)
   int scrWidthInBytes = image->bytes_per_line;
   
   char *scr = (image->data + y * scrWidthInBytes
-	       + x * myFormat.bitsPerPixel / 8);
+	       + x * visbpp / 8);
   CARD32 *scr32;
 
   if (!CheckRectangle(x, y, width, height))
@@ -423,10 +422,10 @@ FillRectangle32(CARD32 fg, int x, int y, int width, int height)
 void
 CopyDataFromScreen(char *buf, int x, int y, int width, int height)
 {
-  int widthInBytes = width * myFormat.bitsPerPixel / 8;
+  int widthInBytes = width * visbpp / 8;
   int scrWidthInBytes = image->bytes_per_line;
   char *src = (image->data + y * scrWidthInBytes
-	       + x * myFormat.bitsPerPixel / 8);
+	       + x * visbpp / 8);
   int h;
 
   if (!CheckRectangle(x, y, width, height))
@@ -446,16 +445,16 @@ CopyDataFromScreen(char *buf, int x, int y, int width, int height)
 void
 CopyArea(int srcX, int srcY, int width, int height, int x, int y)
 {
-  int widthInBytes = width * myFormat.bitsPerPixel / 8;
+  int widthInBytes = width * visbpp / 8;
   
   if ((srcY+height < y) || (y+height < srcY) ||
       (srcX+width  < x) || (x+width  < srcX)) {
 
     int scrWidthInBytes = image->bytes_per_line;
     char *src = (image->data + srcY * scrWidthInBytes
-		 + srcX * myFormat.bitsPerPixel / 8);
+		 + srcX * visbpp / 8);
     char *dst = (image->data + y * scrWidthInBytes
-		 + x * myFormat.bitsPerPixel / 8);
+		 + x * visbpp / 8);
     int h;
 
     if (!CheckRectangle(srcX, srcY, width, height))
@@ -491,12 +490,12 @@ void SyncScreenRegion(int x, int y, int width, int height) {
     src.h = si.framebufferHeight;
     src.pitch = image->bytes_per_line;
     src.pixels = image->data;
-    src.BytesPerPixel = myFormat.bitsPerPixel / 8;
+    src.BytesPerPixel = visbpp / 8;
     dest.w = zoomWidth;
     dest.h = zoomHeight;
     dest.pitch = zoomImage->bytes_per_line;
     dest.pixels = zoomImage->data;
-    dest.BytesPerPixel = myFormat.bitsPerPixel / 8;
+    dest.BytesPerPixel = visbpp / 8;
     ZoomSurfaceSrcCoords(x, y, width, height, &dx, &dy, &dw, &dh, &src, &dest);
   }
   else {
@@ -688,12 +687,12 @@ DrawZoomedScreenRegionX11Thread(Window win, int zwidth, int zheight,
     src.h = si.framebufferHeight;
     src.pitch = image->bytes_per_line;
     src.pixels = image->data;
-    src.BytesPerPixel = myFormat.bitsPerPixel / 8;
+    src.BytesPerPixel = visbpp / 8;
     dest.w = zwidth;
     dest.h = zheight;
     dest.pitch = zoomImage->bytes_per_line;
     dest.pixels = zoomImage->data;
-    dest.BytesPerPixel = myFormat.bitsPerPixel / 8;
+    dest.BytesPerPixel = visbpp / 8;
     sge_transform(&src, &dest, 0, 
 		  (float)dest.w/(float)src.w, (float)dest.h/(float)src.h,
 		  0, 0, 0, 0);
