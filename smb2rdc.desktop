@@ -4,7 +4,16 @@ ServiceTypes=application/x-smb-server
 Actions=smb2rdc
 
 [Desktop Action smb2rdc]
-Name=Open Remote Desktop Connection to this machine
+Name=Open Remote Desktop Connection to This Machine
+Name[bg]=Връзка с отдалечен работно място с избрания компютър
+Name[et]=Kaugtöölaua ühenduse avamine sellesse arvutisse
+Name[nl]=Externe bureaubladverbinding met deze machine openen
+Name[pt]=Abrir Ligação Remota a Ecrã para este computador
+Name[pt_BR]=Abrir Ligação Remota a Ecrã para este computador
+Name[ru]=Активизировать общий рабочий стол KRDC
+Name[sv]=Öppna fjärranslutning till den här datorn
+Name[uk]=Відкрити з'єднання з віддаленою стільницею до цього комп'ютера
+Name[xx]=xxOpen Remote Desktop Connection to this machinexx
 Exec=krdc %u
 Icon=krdc
 
