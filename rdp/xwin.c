@@ -688,9 +688,9 @@ ui_select(int rdp_socket)
 	while (True)
 	{
 		/* Process any events already waiting */
-		if (!xwin_process_events())
-			/* User quit */
-			return 0;
+		/*if (!xwin_process_events())
+			 User quit 
+			return 0;*/
 
 		FD_ZERO(&rfds);
 		FD_SET(rdp_socket, &rfds);
