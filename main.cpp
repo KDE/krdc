@@ -76,14 +76,13 @@ int main(int argc, char *argv[])
 
 	KApplication a;
 
-	Quality quality = QUALITY_MEDIUM;
+	QString host = QString::null;
+	Quality quality = QUALITY_UNKNOWN;
 	QString encodings = QString::null;
 	QString password = QString::null;
 	WindowMode wm = WINDOW_MODE_AUTO;
 
 	KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
-
-	KRDC *krdc;
 
 	if (args->isSet("low-quality"))
 		quality = QUALITY_LOW;
@@ -112,31 +111,26 @@ int main(int argc, char *argv[])
 	}
 
 	if (args->count() > 0) {
-		QString host = args->arg(0);
-		krdc = new KRDC(wm, host, quality, encodings, password);
-		a.setMainWidget(krdc);
-		QObject::connect(krdc, SIGNAL(disconnected()), 
-				 &a, SLOT(quit()));
-		QObject::connect(krdc, SIGNAL(disconnectedError()), 
-				 &a, SLOT(quit()));
-
-		if (!krdc->start(false))
-			return 0;
-		
-		return a.exec();
+		host = args->arg(0);
+		if (quality == QUALITY_UNKNOWN)
+			quality = QUALITY_MEDIUM;
 	}
 
-	MainController mc(&a, wm, encodings, password);
+	MainController mc(&a, wm, host, quality, encodings, password);
 	return mc.main();
 }
 
 MainController::MainController(KApplication *app, WindowMode wm,
+			       const QString &host,
+			       Quality quality, 
 			       const QString &encodings,
 			       const QString &password) :
 	m_krdc(0),
         m_windowMode(wm),
+	m_host(host),
         m_encodings(encodings),
         m_password(password),
+	m_quality(quality),
 	m_app(app) {
 }
 
@@ -158,8 +152,8 @@ void MainController::errorRestartRequested() {
 }
 
 bool MainController::start() {
-	m_krdc = new KRDC(m_windowMode, QString::null, 
-			  QUALITY_UNKNOWN, m_encodings, m_password);
+	m_krdc = new KRDC(m_windowMode, m_host, 
+			  m_quality, m_encodings, m_password);
 	m_app->setMainWidget(m_krdc);
 
 	QObject::connect(m_krdc, SIGNAL(disconnected()), 
@@ -171,6 +165,11 @@ bool MainController::start() {
 }
 
 void MainController::errorRestart() {
+	if (!m_host.isEmpty())
+		KRDC::setLastHost(m_host);	
+	m_host = QString::null; // only auto-connect once
+	
+	// unset KRDC as main widget, to avoid quit on delete
 	m_app->setMainWidget(0);
 
 	if (m_krdc)

@@ -112,6 +112,8 @@ public:
 	~KRDC();
 	bool start(bool onlyFailOnCancel);
 
+	static void setLastHost(const QString &host);
+
 private slots:
 	void changeProgress(RemoteViewStatus s);
 	void showingPasswordDialog(bool b);

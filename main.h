@@ -28,12 +28,15 @@ class MainController : public QObject {
 private:
 	KRDC *m_krdc;
 	WindowMode m_windowMode;
-	QString m_encodings, m_password;
+	QString m_host, m_encodings, m_password;
+	Quality m_quality;
 
 	KApplication *m_app;
 
 public:
 	MainController(KApplication *app, WindowMode wm,
+		       const QString &host,
+		       Quality quality,
 		       const QString &encodings,
 		       const QString &password);
 	~MainController();

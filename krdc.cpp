@@ -705,4 +705,8 @@ void KRDC::mouseMoveEvent(QMouseEvent *e) {
 	e->accept();
 }
 
+void KRDC::setLastHost(const QString &lastHost) {
+	m_lastHost = lastHost;
+}
+
 #include "krdc.moc"
