@@ -285,6 +285,8 @@ bool KRDC::parseHost(QString &str, QString &serverHost, int &serverPort,
 		s = "vnc://" + s;
 
 	KURL url(s);
+	if (url.isMalformed())
+		return false;
 	serverHost = url.host();
 	if (serverHost.isEmpty())
 		serverHost = "localhost";
@@ -300,6 +302,7 @@ bool KRDC::parseHost(QString &str, QString &serverHost, int &serverPort,
 		str = QString("%1@%2:%3").arg(userName).arg(serverHost).arg(url.port());
 	else
 		str = QString("%1:%2").arg(serverHost).arg(url.port());
+	return true;
 }
 
 KRDC::~KRDC()
@@ -373,9 +376,8 @@ void KRDC::switchToFullscreen()
 		SLOT(enableFullscreen(bool)));
 	connect((QObject*)t->autohideButton, SIGNAL(toggled(bool)), 
 		SLOT(setFsToolbarAutoHide(bool)));
-	showFullScreen();
-
 	repositionView(true);
+	showFullScreen();
 
 	setMaximumSize(m_fullscreenResolution.width(), 
 		       m_fullscreenResolution.height());
