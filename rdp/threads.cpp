@@ -165,6 +165,7 @@ RdpWriterThread::RdpWriterThread(KRdpView *v, volatile bool &quitFlag) :
 {
 }
 
+// puts an X11 event in queue, called from the Qt thread
 void RdpWriterThread::queueX11Event(XEvent *e)
 {
 	m_lock.lock();
@@ -194,8 +195,6 @@ void RdpWriterThread::kick()
 void RdpWriterThread::run()
 {
 	QValueList<XEvent> x11Events;
-
-	m_waiter.wait(1000);
 
 	while(!m_quitFlag)
 	{
@@ -231,9 +230,25 @@ bool RdpWriterThread::sendX11Events(const QValueList<XEvent> &events)
 	
 	while(it != events.end())
 	{
+		if((*it).type != MotionNotify && (*it).type != ButtonPress && (*it).type != ButtonRelease)
+			KApplication::kApplication()->lock();
+			
 		if(!xwin_process_event(*it))
+		{
+			if((*it).type != MotionNotify && (*it).type != ButtonPress && (*it).type != ButtonRelease)
+				KApplication::kApplication()->unlock();
+				
 			return false;
+		}
+		if((*it).type != MotionNotify && (*it).type != ButtonPress && (*it).type != ButtonRelease)
+			KApplication::kApplication()->unlock();
+			
 		it++;
 	}
 	return true;
+}
+
+char *getEventName(XEvent *e)
+{
+
 }
