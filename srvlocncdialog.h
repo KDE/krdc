@@ -49,7 +49,7 @@ public slots:
 private slots:
 	void itemSelected(QListViewItem*);
 	void itemDoubleClicked(QListViewItem*);
-        void scopeSelected(const QString &string); 
+        void scopeSelected(const QString &string);
 
 	void foundService(QString, int);
 	void lastSignalServices(bool);

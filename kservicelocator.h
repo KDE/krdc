@@ -97,6 +97,18 @@ class KServiceLocator : public QObject {
 	static QString createCommaList(const QStringList &values);
 
 	/**
+	 * Escapes a string for use as part of a filter, as described in
+	 * RFC 2254. This will replace all occurrences of special 
+	 * characters like paranthesis, backslash and "*", so you can use 
+	 * the converted string as part of the query. Never escape the whole 
+	 * query because then even the neccessary paranthesis characters 
+	 * will be escaped.
+	 * @param str the string to escape 
+	 * @return the escaped string
+	 */
+	static QString escapeFilter(const QString &str);
+
+	/**
 	 * Returns true if service location is generally possible.
 	 * It will fail if SLP libraries are not installed.
 	 * @return true if service location seems to be possible
@@ -123,8 +135,8 @@ class KServiceLocator : public QObject {
 	 * When KServiceLocator is in synchronous mode the function will not be
 	 * returned before lastServiceTypeSignal() has been emitted, in 
 	 * asynchronous mode lastServiceTypeSignal() can be emitted later. If 
-	 * you call this function while another asynchronous operation is running 
-	 * it will fail.
+	 * you call this function while another asynchronous operation is 
+	 * running it will fail.
 	 * 
 	 * @param namingAuthority the naming authorities of the service 
 	 *                        types to be found. If DEFAULT_AUTHORITY
@@ -144,7 +156,7 @@ class KServiceLocator : public QObject {
 	 * Finds all services in the given scope with the given service type.
 	 * Examples for service types are "service:ftp" to find all ftp servers
 	 * or "service:remotedesktop:" to find all remote desktop services.
-	 * You can also specify a filter to match services using their 
+	 * You can also specify a filter to match services depending their 
 	 * attributes. The filter uses the LDAP Search Filter syntax as 
 	 * described in RFC 2254, "String Representation of LDAP Search 
 	 * Filters".

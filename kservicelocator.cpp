@@ -129,8 +129,6 @@ KServiceLocatorPrivate::KServiceLocatorPrivate(KServiceLocator *ksl,
 }
 
 
-
-
 #ifdef HAVE_SLP   /** The real SLP implementations ********************** */
 
 
@@ -728,6 +726,35 @@ QStringList KServiceLocator::parseCommaList(const QString &list) {
 
 QString KServiceLocator::createCommaList(const QStringList &values) {
 	return values.join(",");
+}
+
+QString KServiceLocator::escapeFilter(const QString &str) {
+	QString f;
+	int s = str.length();
+	for (int i = 0; i < s; i++) {
+		char c = str[i];
+		switch(c) {
+		case '*':
+			f.append("\2a");
+			break;
+		case '(':
+			f.append("\28");
+			break;
+		case ')':
+			f.append("\29");
+			break;
+		case '\\':
+			f.append("\5c");
+			break;
+		case 0:
+			f.append("\2a");
+			break;
+		default:
+			f.append(c);
+			break;
+		}
+	}
+	return f;
 }
 
 #include "kservicelocator.moc"

@@ -21,6 +21,7 @@
 #include <klocale.h>
 #include <kdebug.h>
 #include <klistview.h>
+#include <klineedit.h>
 #include <kcombobox.h>
 #include <kmessagebox.h>
 #include <qmap.h>
@@ -81,6 +82,9 @@ SrvLocNCDialog::SrvLocNCDialog(QWidget* parent, const char* name, bool browsing)
 		SLOT(itemDoubleClicked(QListViewItem*)));
 	connect(scopeCombo, SIGNAL(activated(const QString&)),
 		SLOT(scopeSelected(const QString&)));	
+	connect(searchInput, SIGNAL(returnPressed(const QString&)),
+		SLOT(rescan()));
+	searchInput->setTrapReturnKey(true);
 	if (!browsing) {
 		enableBrowsingArea(false);
 		adjustSize();
@@ -160,8 +164,15 @@ void SrvLocNCDialog::rescan() {
 
 	browsingView->clear();
 
+	QString filter = QString::null;
+	if (!searchInput->text().stripWhiteSpace().isEmpty()) {
+		QString ef = KServiceLocator::escapeFilter(
+			searchInput->text().stripWhiteSpace());
+		filter = "(|(|(description=*"+ef+"*)(username=*"+ef+"*))(fullname=*"+ef+"*))";
+	}
+
 	if (!m_locator->findServices("service:remotedesktop.kde:vnc",
-				     QString::null,
+				     filter,
 				     m_scope)) {
 		kdWarning() << "Failure in findServices()" << endl;
 		errorScanning();

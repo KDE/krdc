@@ -8,8 +8,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>534</width>
-            <height>368</height>
+            <width>460</width>
+            <height>304</height>
         </rect>
     </property>
     <property name="sizePolicy">
@@ -99,6 +99,48 @@
                             </property>
                             <property name="sizeType">
                                 <enum>Expanding</enum>
+                            </property>
+                            <property name="sizeHint">
+                                <size>
+                                    <width>16</width>
+                                    <height>0</height>
+                                </size>
+                            </property>
+                        </spacer>
+                        <widget class="QLabel">
+                            <property name="name">
+                                <cstring>TextLabel1_2</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Search:</string>
+                            </property>
+                        </widget>
+                        <widget class="KLineEdit">
+                            <property name="name">
+                                <cstring>searchInput</cstring>
+                            </property>
+                            <property name="toolTip" stdset="0">
+                                <string>Enter a search term</string>
+                            </property>
+                            <property name="whatsThis" stdset="0">
+                                <string>Enter a search term here if you do want to search for a specific system, and press return or hit Rescan. All systems, whose description matchs the search term, will be displayed. The search is not case sensitive. If you leave the field empty all systems will be displayed.</string>
+                            </property>
+                        </widget>
+                        <spacer>
+                            <property name="name">
+                                <cstring>Spacer4</cstring>
+                            </property>
+                            <property name="orientation">
+                                <enum>Horizontal</enum>
+                            </property>
+                            <property name="sizeType">
+                                <enum>Expanding</enum>
+                            </property>
+                            <property name="sizeHint">
+                                <size>
+                                    <width>20</width>
+                                    <height>0</height>
+                                </size>
                             </property>
                         </spacer>
                         <widget class="QLabel">
@@ -263,10 +305,11 @@
                         <bool>false</bool>
                     </property>
                     <property name="toolTip" stdset="0">
-                        <string></string>
+                        <string>Enter the name and display number</string>
                     </property>
                     <property name="whatsThis" stdset="0">
-                        <string>Enter the name and display number of the computer that you want to connect to, separated by a colon, e.g. 'mycomputer:1'. The address can be any valid Internet address. The display numbers usually start at 0. If you do not have a display number, try 0 or 1.</string>
+                        <string>Enter the name and display number of the computer that you want to connect to, separated by a colon, e.g. 'mycomputer:1'. The address can be any valid Internet address. The display numbers usually start at 0. If you do not have a display number, try 0 or 1.
+Remote Desktop Connection only supports systems that use VNC.</string>
                     </property>
                 </widget>
                 <widget class="QPushButton">
@@ -307,7 +350,7 @@
                 </font>
             </property>
             <property name="text">
-                <string>Enter the address and display number of the computer that you want to connect to, separated by a colon. Alternatively, browse the network and select a desktop to connect to.</string>
+                <string>Enter the address and display number of the computer that you want to connect to, separated by a colon. Alternatively, browse the network and select a desktop to connect to. All VNC compatible servers will be supported.</string>
             </property>
             <property name="alignment">
                 <set>WordBreak|AlignVCenter|AlignLeft</set>
@@ -395,6 +438,12 @@
                     <property name="sizeType">
                         <enum>Expanding</enum>
                     </property>
+                    <property name="sizeHint">
+                        <size>
+                            <width>20</width>
+                            <height>0</height>
+                        </size>
+                    </property>
                 </spacer>
             </hbox>
         </widget>
@@ -421,6 +470,12 @@
                     </property>
                     <property name="sizeType">
                         <enum>Expanding</enum>
+                    </property>
+                    <property name="sizeHint">
+                        <size>
+                            <width>20</width>
+                            <height>0</height>
+                        </size>
                     </property>
                 </spacer>
                 <widget class="QPushButton">
