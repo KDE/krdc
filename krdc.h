@@ -76,7 +76,7 @@ private:
 	static int m_lastQuality; // remembers last quality selection
 
 	void configureApp(Quality q);
-	void parseHost(QString &s, QString &serverHost, int &serverPort);
+	void parseHost(const QString &s, QString &serverHost, int &serverPort);
 
 	void switchToFullscreen();
 	void repositionView(bool fullscreen);

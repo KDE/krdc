@@ -83,7 +83,7 @@ bool KRDC::start()
 	if (!m_host.isNull()) {
 		parseHost(m_host, vncServerHost, vncServerPort);
 		if (m_quality == QUALITY_UNKNOWN)
-			m_quality = QUALITY_HIGH;
+			m_quality = QUALITY_MEDIUM;
 	} else {
 		NewConnectionDialog ncd(0, 0, true);
 		QStringList list = config->readListEntry("serverCompletions");
@@ -228,13 +228,13 @@ void KRDC::configureApp(Quality q) {
 		m_appData.compressLevel = -1;
 		m_appData.qualityLevel = 1;
 	}
-	else if (q == QUALITY_MEDIUM) {
+	else if ((q == QUALITY_MEDIUM) || (q == QUALITY_UNKNOWN)) {
 		m_appData.useBGR233 = 0;
 		m_appData.encodingsString = "copyrect tight zlib hextile raw";
 		m_appData.compressLevel = -1;
-		m_appData.qualityLevel = 4;
+		m_appData.qualityLevel = 6;
 	}
-	else if ((q == QUALITY_HIGH) || (q == QUALITY_UNKNOWN)) {
+	else if (q == QUALITY_HIGH) {
 		m_appData.useBGR233 = 0;
 		m_appData.encodingsString = "copyrect hextile raw";
 		m_appData.compressLevel = -1;
@@ -252,12 +252,18 @@ void KRDC::configureApp(Quality q) {
 	m_appData.copyRectDelay = 0;
 }
 
-void KRDC::parseHost(QString &s, QString &serverHost, int &serverPort) {
-	QString host = s;
+void KRDC::parseHost(const QString &str, QString &serverHost, int &serverPort) {
+	QString host;
+	QString s = str;
+	
+	if (s.startsWith("vnc:"))
+		s = s.mid(4);
+	if (s.startsWith("//"))
+		s = s.mid(2);
+
 	int pos = s.find(':');
 	if (pos < 0) {
 		s+= ":0";
-		host+= ":0";
 		pos = s.find(':');
 	}
 
@@ -270,6 +276,10 @@ void KRDC::parseHost(QString &s, QString &serverHost, int &serverPort) {
 			serverPort = port + 5900;
 		else
 			serverPort = port;
+	}
+	else {
+		host = s;
+		serverPort = 5900;
 	}
 	
 	serverHost = host;

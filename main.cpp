@@ -143,12 +143,11 @@ bool MainController::start() {
 	m_app->setMainWidget(m_krdc);
 
 	QObject::connect(m_krdc, SIGNAL(disconnected()), 
-	m_app, SLOT(quit()));
+			 m_app, SLOT(quit()));
 	connect(m_krdc, SIGNAL(disconnectedError()),
 		SLOT(errorRestartRequested()));
 
 	return m_krdc->start();
-	      
 }
 
 void MainController::errorRestart() {
@@ -157,7 +156,8 @@ void MainController::errorRestart() {
 	if (m_krdc)
 		delete m_krdc;
 
-	start();
+	if (!start()) 
+		m_app->quit();
 }
 
 #include "main.moc"
