@@ -50,6 +50,8 @@ static KCmdLineOptions options[] =
 	{ "encodings ", I18N_NOOP("Override VNC encoding list (e.g. 'hextile raw')."), 0 }, 
 	{ "p", 0, 0 },
 	{ "password-file ", I18N_NOOP("Provide the password in a file."), 0 }, 
+	{ "r", 0, 0 },
+	{ "resolution ", I18N_NOOP("Resolution of the remote desktop."), "800x600" },
 	{ "+[host]", I18N_NOOP("The name of the host, e.g. 'localhost:1'."), 0 },
 	{ 0, 0, 0 }
 };
@@ -84,6 +86,7 @@ int main(int argc, char *argv[])
 	Quality quality = QUALITY_UNKNOWN;
 	QString encodings = QString::null;
 	QString password = QString::null;
+	QString resolution = QString::null;
 	WindowMode wm = WINDOW_MODE_AUTO;
 
 	KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
@@ -103,6 +106,8 @@ int main(int argc, char *argv[])
 	if (args->isSet("encodings"))
 		encodings = args->getOption("encodings");
 
+	resolution = args->getOption("resolution");
+
 	if (args->isSet("password-file")) {
 		QString passwordFile = args->getOption("password-file");
 		QFile f(passwordFile);
@@ -120,7 +125,7 @@ int main(int argc, char *argv[])
 			quality = QUALITY_MEDIUM;
 	}
 
-	MainController mc(&a, wm, host, quality, encodings, password);
+	MainController mc(&a, wm, host, quality, encodings, password, resolution);
 	return mc.main();
 }
 
@@ -128,12 +133,14 @@ MainController::MainController(KApplication *app, WindowMode wm,
 			       const QString &host,
 			       Quality quality, 
 			       const QString &encodings,
-			       const QString &password) :
+			       const QString &password,
+			       const QString &resolution) :
 	m_krdc(0),
         m_windowMode(wm),
 	m_host(host),
         m_encodings(encodings),
         m_password(password),
+	m_resolution(resolution),
 	m_quality(quality),
 	m_app(app) {
 }
@@ -157,7 +164,7 @@ void MainController::errorRestartRequested() {
 
 bool MainController::start() {
 	m_krdc = new KRDC(m_windowMode, m_host, 
-			  m_quality, m_encodings, m_password);
+			  m_quality, m_encodings, m_password, m_resolution);
 	m_app->setMainWidget(m_krdc);
 
 	QObject::connect(m_krdc, SIGNAL(disconnected()), 

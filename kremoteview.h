@@ -109,14 +109,14 @@ public:
 	 * @see statusChanged()
 	 */
 	virtual bool start() = 0;
-        
+
 	/**
 	 * Returns the current status of the connection.
 	 * @return the status of the connection
 	 * @see setStatus()
 	 */
 	enum RemoteViewStatus status();
-
+	
 public slots:
         /**
 	 * Called to enable or disable scaling.

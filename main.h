@@ -28,7 +28,7 @@ class MainController : public QObject {
 private:
 	KRDC *m_krdc;
 	WindowMode m_windowMode;
-	QString m_host, m_encodings, m_password;
+	QString m_host, m_encodings, m_password, m_resolution;
 	Quality m_quality;
 
 	KApplication *m_app;
@@ -38,7 +38,8 @@ public:
 		       const QString &host,
 		       Quality quality,
 		       const QString &encodings,
-		       const QString &password);
+		       const QString &password,
+		       const QString &resolution);
 	~MainController();
 	int main();
 	bool start();

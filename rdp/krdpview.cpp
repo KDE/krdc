@@ -40,14 +40,17 @@
 #include "rdesktop.h"
 
 // global variables from rdesktop
-extern int width;   // width of the remote desktop
-extern int height;  // height of the remote desktop
+extern int width;           // width of the remote desktop
+extern int height;          // height of the remote desktop
+extern Atom protocol_atom;  // used to handle the WM_DELETE_WINDOW protocol
+extern BOOL fullscreen;     // are we in fullscreen mode?
 
 static KRdpView *krdpview;
 
 // constructor
 KRdpView::KRdpView(QWidget *parent, const char *name, 
                    const QString &host, int port,
+                   const QString &resolution,
                    const QString &user, const QString &password,
                    int flags, const QString &domain,
                    const QString &shell, const QString &directory) : 
@@ -66,6 +69,9 @@ KRdpView::KRdpView(QWidget *parent, const char *name,
   m_cthread(this, m_wthread, m_quitFlag),
   m_wthread(this, m_quitFlag)
 {
+	::width = resolution.section('x', 0, 0).toInt();
+	::height = resolution.section('x', 1, 1).toInt();
+	
 	krdpview = this;
 	setFixedSize(16,16);
 }
@@ -135,7 +141,7 @@ void KRdpView::customEvent(QCustomEvent *e)
 {
 	if(e->type() == ScreenResizeEventType)
 	{ 
-		setFixedSize(QSize(::width, ::height));
+		setFixedSize(::width, ::height);
 		emit changeSize(::width, ::height);
 	}
 	else if(e->type() == DesktopInitEventType)
@@ -180,9 +186,10 @@ void KRdpView::customEvent(QCustomEvent *e)
 // captures X11 events
 bool KRdpView::x11Event(XEvent *e)
 {
-	if(e->type != KeyPress && e->type != KeyRelease && e->type != ButtonPress && e->type != ButtonRelease &&
-	   e->type != MotionNotify && e->type != FocusIn && e->type != FocusOut && e->type != EnterNotify && 
-	   e->type != LeaveNotify && e->type != ClientMessage && e->type != Expose && e->type != MappingNotify)
+	if((e->type != KeyPress && e->type != KeyRelease && e->type != ButtonPress && e->type != ButtonRelease &&
+	    e->type != MotionNotify && e->type != FocusIn && e->type != FocusOut && e->type != EnterNotify && 
+	    e->type != LeaveNotify && e->type != ClientMessage && e->type != Expose && e->type != MappingNotify) ||
+	   (e->type == ClientMessage && e->xclient.message_type != protocol_atom))
 		return QWidget::x11Event(e);
 
 	m_wthread.queueX11Event(e);

@@ -72,5 +72,4 @@ bool KRemoteView::scaling() {
 void KRemoteView::enableScaling(bool) {
 }
 
-
 #include "kremoteview.moc"

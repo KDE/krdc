@@ -18,7 +18,6 @@
 */
 
 #include <time.h>
-#include <iostream>
 
 #include "events.h"
 

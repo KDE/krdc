@@ -48,7 +48,7 @@ static XIM IM;
 static XIC IC;
 static XModifierKeymap *mod_map;
 static Cursor current_cursor;
-static Atom protocol_atom, kill_atom;
+Atom protocol_atom, kill_atom;
 
 /* endianness */
 static BOOL host_be;
