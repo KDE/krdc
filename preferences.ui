@@ -1,4 +1,4 @@
-<!DOCTYPE UI><UI version="3.1" stdsetdef="1">
+<!DOCTYPE UI><UI version="3.2" stdsetdef="1">
 <class>PreferencesDialog</class>
 <widget class="QDialog">
     <property name="name">
@@ -9,7 +9,7 @@
             <x>0</x>
             <y>0</y>
             <width>595</width>
-            <height>479</height>
+            <height>481</height>
         </rect>
     </property>
     <property name="caption">
@@ -88,7 +88,7 @@
                                 <property name="fullWidth">
                                     <bool>true</bool>
                                 </property>
-                                <property name="itemsMovable" stdset="0">
+                                <property name="itemsMovable">
                                     <bool>false</bool>
                                 </property>
                                 <property name="whatsThis" stdset="0">
@@ -467,6 +467,9 @@
                                         <property name="maxValue">
                                             <number>9999</number>
                                         </property>
+                                        <property name="minValue">
+                                            <number>1</number>
+                                        </property>
                                         <property name="value">
                                             <number>800</number>
                                         </property>
@@ -497,6 +500,9 @@
                                         </property>
                                         <property name="maxValue">
                                             <number>9999</number>
+                                        </property>
+                                        <property name="minValue">
+                                            <number>1</number>
                                         </property>
                                         <property name="value">
                                             <number>600</number>
@@ -788,6 +794,8 @@
         </widget>
     </vbox>
 </widget>
+<customwidgets>
+</customwidgets>
 <connections>
     <connection>
         <sender>okButton</sender>
