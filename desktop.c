@@ -42,9 +42,12 @@
 #include "vncviewer.h"
 
 static XShmSegmentInfo shminfo;
-
 static Bool caughtShmError = False;
 static Bool needShmCleanup = False;
+
+static XShmSegmentInfo zoomshminfo;
+static Bool caughtZoomShmError = False;
+static Bool needZoomShmCleanup = False;
 
 GC gc;
 GC srcGC, dstGC; /* used for debugging copyrect */
@@ -76,6 +79,7 @@ typedef struct {
         Sint16 x, y;
         Uint16 w, h;
 } Rect;
+
 
 static void CopyDataToScreenRaw(char *buf, int x, int y, int width, int height);
 static void CopyBGR233ToScreen(CARD8 *buf, int x, int y, int width,int height);
@@ -524,7 +528,7 @@ ToplevelInit()
 void
 Cleanup()
 {
-  if (useShm)
+  if (useShm || useZoomShm)
     ShmCleanup();
 }
 
@@ -536,6 +540,11 @@ ShmCleanup()
     shmdt(shminfo.shmaddr);
     shmctl(shminfo.shmid, IPC_RMID, 0);
     needShmCleanup = False;
+  }
+  if (needZoomShmCleanup) {
+    shmdt(zoomshminfo.shmaddr);
+    shmctl(zoomshminfo.shmid, IPC_RMID, 0);
+    needZoomShmCleanup = False;
   }
 }
 
@@ -591,6 +600,57 @@ CreateShmImage()
   }
 
   needShmCleanup = True;
+
+  fprintf(stderr,"Using shared memory PutImage\n");
+
+  return _image;
+}
+
+XImage *
+CreateShmZoomImage()
+{
+  XImage *_image;
+  XErrorHandler oldXErrorHandler;
+
+  if (!XShmQueryExtension(dpy))
+    return NULL;
+
+  _image = XShmCreateImage(dpy, vis, visdepth, ZPixmap, NULL, &zoomshminfo,
+			  si.framebufferWidth, si.framebufferHeight);
+  if (!_image) return NULL;
+
+  zoomshminfo.shmid = shmget(IPC_PRIVATE,
+			     _image->bytes_per_line * _image->height,
+			     IPC_CREAT|0777);
+
+  if (zoomshminfo.shmid == -1) {
+    XDestroyImage(_image);
+    return NULL;
+  }
+
+  zoomshminfo.shmaddr = _image->data = shmat(zoomshminfo.shmid, 0, 0);
+
+  if (zoomshminfo.shmaddr == (char *)-1) {
+    XDestroyImage(_image);
+    shmctl(zoomshminfo.shmid, IPC_RMID, 0);
+    return NULL;
+  }
+
+  zoomshminfo.readOnly = True;
+
+  oldXErrorHandler = XSetErrorHandler(ShmCreationXErrorHandler);
+  XShmAttach(dpy, &zoomshminfo);
+  XSync(dpy, False);
+  XSetErrorHandler(oldXErrorHandler);
+
+  if (caughtZoomShmError) {
+    XDestroyImage(_image);
+    shmdt(zoomshminfo.shmaddr);
+    shmctl(zoomshminfo.shmid, IPC_RMID, 0);
+    return NULL;
+  }
+
+  needZoomShmCleanup = True;
 
   fprintf(stderr,"Using shared memory PutImage\n");
 
@@ -656,7 +716,7 @@ ZoomInit()
   if (zoomImage)
     return;
 
-   zoomImage = CreateShmImage(); 
+   zoomImage = CreateShmZoomImage(); 
 
   if (!zoomImage) {
     useZoomShm = False;
@@ -1083,6 +1143,22 @@ void sge_transform(Surface *src, Surface *dst, float angle, float xscale, float 
 	}
 }
 
+void freeDesktopResources() {
+  Cleanup();
+  if (image) {
+    if (!useShm)
+      free(image->data);
+    XDestroyImage(image);
+  }
+  if (zoomImage) {
+    if(!useZoomShm)
+      free(zoomImage->data);
+    XDestroyImage(zoomImage);
+  }
+
+  XFreeGC(dpy, srcGC);
+  XFreeGC(dpy, dstGC);
+}
 
 
 /*

@@ -232,42 +232,15 @@ ConnectToTcpAddr(unsigned int host, int port)
     return -1;
   }
 
+  if (fcntl(sock, F_SETFL, O_NONBLOCK) < 0) {
+    perror(": AcceptTcpConnection: fcntl");
+    close(sock);
+    return -1;
+  }  
+
   return sock;
 }
 
-
-
-/*
- * FindFreeTcpPort tries to find unused TCP port in the range
- * (TUNNEL_PORT_OFFSET, TUNNEL_PORT_OFFSET + 99]. Returns 0 on failure.
- */
-
-int
-FindFreeTcpPort(void)
-{
-  int sock, port;
-  struct sockaddr_in addr;
-
-  addr.sin_family = AF_INET;
-  addr.sin_addr.s_addr = INADDR_ANY;
-
-  sock = socket(AF_INET, SOCK_STREAM, 0);
-  if (sock < 0) {
-    perror("krdc: FindFreeTcpPort: socket");
-    return 0;
-  }
-
-  for (port = TUNNEL_PORT_OFFSET + 99; port > TUNNEL_PORT_OFFSET; port--) {
-    addr.sin_port = htons((unsigned short)port);
-    if (bind(sock, (struct sockaddr *)&addr, sizeof(addr)) == 0) {
-      close(sock);
-      return port;
-    }
-  }
-
-  close(sock);
-  return 0;
-}
 
 
 /*
@@ -313,51 +286,6 @@ ListenAtTcpPort(int port)
   return sock;
 }
 
-
-/*
- * AcceptTcpConnection accepts a TCP connection.
- */
-
-int
-AcceptTcpConnection(int listenSock)
-{
-  int sock;
-  struct sockaddr_in addr;
-  int addrlen = sizeof(addr);
-  int one = 1;
-
-  sock = accept(listenSock, (struct sockaddr *) &addr, &addrlen);
-  if (sock < 0) {
-    perror("krdc: AcceptTcpConnection: accept");
-    return -1;
-  }
-
-  if (setsockopt(sock, IPPROTO_TCP, TCP_NODELAY,
-		 (char *)&one, sizeof(one)) < 0) {
-    perror("krdc: AcceptTcpConnection: setsockopt");
-    close(sock);
-    return -1;
-  }
-
-  return sock;
-}
-
-
-/*
- * SetNonBlocking sets a socket into non-blocking mode.
- */
-
-Bool
-SetNonBlocking(int sock)
-{
-  if (fcntl(sock, F_SETFL, O_NONBLOCK) < 0) {
-    perror("krdc: AcceptTcpConnection: fcntl");
-    return False;
-  }
-  return True;
-}
-
-
 /*
  * StringToIPAddr - convert a host string to an IP address.
  */
@@ -385,23 +313,6 @@ StringToIPAddr(const char *str, unsigned int *addr)
   }
 
   return False;
-}
-
-
-/*
- * Test if the other end of a socket is on the same machine.
- */
-
-Bool
-SameMachine(int sock)
-{
-  struct sockaddr_in peeraddr, myaddr;
-  int addrlen = sizeof(struct sockaddr_in);
-
-  getpeername(sock, (struct sockaddr *)&peeraddr, &addrlen);
-  getsockname(sock, (struct sockaddr *)&myaddr, &addrlen);
-
-  return (peeraddr.sin_addr.s_addr == myaddr.sin_addr.s_addr);
 }
 
 
@@ -447,3 +358,8 @@ PrintInHex(char *_buf, int len)
 
   fflush(stderr);
 }
+
+void freeSocketsResources() {
+  close(rfbsock);
+}
+

@@ -179,6 +179,7 @@ KVncView::~KVncView()
 	startQuitting();
 	m_cthread.wait();
 	m_wthread.wait();
+	freeResources();
 }
 
 bool KVncView::scaling() {

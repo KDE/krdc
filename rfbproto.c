@@ -74,7 +74,7 @@ static char buffer[BUFFER_SIZE];
    allocate this buffer one time to be the full size of the buffer. */
 
 static int raw_buffer_size = -1;
-static char *raw_buffer;
+static char *raw_buffer = NULL;
 
 static z_stream decompStream;
 static Bool decompStreamInited = False;
@@ -125,7 +125,7 @@ ConnectToRFBServer(const char *hostname, int port)
     return False;
   }
 
-  return SetNonBlocking(rfbsock);
+  return rfbsock;
 }
 
 
@@ -353,15 +353,11 @@ SetFormatAndEncodings()
     }
   }
   else {
-    if (SameMachine(rfbsock)) {
-      fprintf(stderr,"Same machine: preferring raw encoding\n");
-      encs[se->nEncodings++] = Swap32IfLE(rfbEncodingRaw);
-    }
-
     encs[se->nEncodings++] = Swap32IfLE(rfbEncodingCopyRect);
     encs[se->nEncodings++] = Swap32IfLE(rfbEncodingTight);
     encs[se->nEncodings++] = Swap32IfLE(rfbEncodingHextile);
     encs[se->nEncodings++] = Swap32IfLE(rfbEncodingZlib);
+    encs[se->nEncodings++] = Swap32IfLE(rfbEncodingRaw);
 
     if (appData.compressLevel >= 0 && appData.compressLevel <= 9) {
       encs[se->nEncodings++] = Swap32IfLE(appData.compressLevel +
@@ -695,7 +691,7 @@ HandleRFBServerMessage()
       return False;
 
     serverCutText[msg.sct.length] = 0;
-    newServerCut(serverCutText, msg.sct.length); /* takes ownershit of serverCutText */
+    newServerCut(serverCutText, msg.sct.length); /* takes ownership of serverCutText */
 
     break;
   }
@@ -792,6 +788,19 @@ ReadCompactLen (void)
     }
   }
   return len;
+}
+
+void freeRFBProtoResources() {
+  if (desktopName)
+    free(desktopName);
+  if (raw_buffer)
+    free(raw_buffer);
+}
+
+void freeResources() {
+  freeSocketsResources();
+  freeDesktopResources();
+  freeRFBProtoResources();
 }
 
 /*

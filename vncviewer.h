@@ -56,17 +56,6 @@ extern int endianTest;
 
 #define MAX_ENCODINGS 20
 
-#define FLASH_PORT_OFFSET 5400
-#define LISTEN_PORT_OFFSET 5500
-#define TUNNEL_PORT_OFFSET 5500
-#define SERVER_PORT_OFFSET 5900
-
-#define DEFAULT_SSH_CMD "/usr/bin/ssh"
-#define DEFAULT_TUNNEL_CMD  \
-  (DEFAULT_SSH_CMD " -f -L %L:localhost:%R %H sleep 20")
-#define DEFAULT_VIA_CMD     \
-  (DEFAULT_SSH_CMD " -f -L %L:%H:%R %G sleep 20")
-
 
 /** kvncview.cpp **/
 
@@ -82,7 +71,8 @@ extern void DrawScreenRegion(int x, int y, int width, int height);
 extern void beep();
 void newServerCut(char *bytes, int len);
 
-/* threads.cpp */
+/** threads.cpp **/
+
 extern void queueIncrementalUpdateRequest();
 
 /* colour.c */
@@ -112,12 +102,18 @@ extern void FillRectangle16(CARD16, int x, int y, int width, int height);
 extern void FillRectangle32(CARD32, int x, int y, int width, int height);
 extern void CopyArea(int srcX, int srcY, int width, int height, int x, int y);
 extern void SyncScreenRegion(int x, int y, int width, int height);
-extern void DrawZoomedScreenRegionX11Thread(Window win, int zwidth, int zheight, 
-					    int x, int y, int width, int height);
+extern void DrawZoomedScreenRegionX11Thread(Window win, int zwidth, 
+					    int zheight, 
+					    int x, int y, 
+					    int width, int height);
 extern void DrawScreenRegionX11Thread(Window win, int x, int y, 
 				      int width, int height);
 extern void ShmSync(void);
 extern void Cleanup(void);
+extern XImage *CreateShmZoomImage(void);
+extern XImage *CreateShmImage(void);
+extern void ShmCleanup(void);
+extern void freeDesktopResources();
 
 /* rfbproto.c */
 
@@ -140,19 +136,8 @@ extern Bool SendClientCutText(const char *str, int len);
 extern Bool HandleRFBServerMessage(void);
 
 extern void PrintPixelFormat(rfbPixelFormat *format);
-
-/* selection.c */
-
-extern void InitialiseSelection(void);
-extern void SelectionToVNC(Widget w, XEvent *event, String *params,
-			   Cardinal *num_params);
-extern void SelectionFromVNC(Widget w, XEvent *event, String *params,
-			     Cardinal *num_params);
-
-/* shm.c */
-
-extern XImage *CreateShmImage(void);
-extern void ShmCleanup(void);
+extern void freeRFBProtoResources();
+extern void freeResources();
 
 /* sockets.c */
 
@@ -160,14 +145,11 @@ extern Bool errorMessageOnReadFailure;
 
 extern Bool ReadFromRFBServer(char *out, unsigned int n);
 extern Bool WriteExact(int sock, const char *buf, int n);
-extern int FindFreeTcpPort(void);
 extern int ListenAtTcpPort(int port);
 extern int ConnectToTcpAddr(unsigned int host, int port);
-extern int AcceptTcpConnection(int listenSock);
-extern Bool SetNonBlocking(int sock);
 
 extern int StringToIPAddr(const char *str, unsigned int *addr);
-extern Bool SameMachine(int sock);
+extern void freeSocketsResources();
 
 #if(defined __cplusplus)
 }
