@@ -3,8 +3,6 @@
                              -------------------
     begin                : Thu Dec 20 15:11:42 CET 2001
     copyright            : (C) 2001-2002 by Tim Jansen
-                           contains portions (event handling) from Keystone:
-                           (C) 1999-2000 Richard Moore
     email                : tim@tjansen.de
  ***************************************************************************/
 
@@ -24,6 +22,7 @@
 #include <kinstance.h>
 #include <kstandarddirs.h>
 #include <kapplication.h>
+#include <kkeynative.h>
 #include <qdatastream.h>
 #include <dcopclient.h>
 #include <qbitmap.h>
@@ -34,6 +33,8 @@
 
 #include "kvncview.h"
 #include "vncviewer.h"
+
+#include <X11/Xlib.h>
 
 /*
  * appData is our application-specific data which can be set by the user with
@@ -440,12 +441,17 @@ void KVncView::wheelEvent(QWheelEvent *e) {
 	e->accept();
 }
 
-void KVncView::keyPressEvent(QKeyEvent *e) {
-	m_wthread.queueKeyEvent((KeySym)toKeySym(e), true);
-}
+bool KVncView::x11Event(XEvent *e) {
+	bool pressed;
+	if (e->type == KeyPress)
+		pressed = true;
+	else if (e->type == KeyRelease)
+		pressed = false;
+	else
+		return QWidget::x11Event(e);
 
-void KVncView::keyReleaseEvent(QKeyEvent *e) {
-	m_wthread.queueKeyEvent((KeySym)toKeySym(e), false);
+	m_wthread.queueKeyEvent(KKeyNative(e).sym(), pressed);
+	return true;
 }
 
 QSize KVncView::sizeHint() {
@@ -520,147 +526,4 @@ extern void postMouseEvent(int x, int y, int buttonMask) {
 	kvncview->sendEvent(new MouseStateEvent(x, y, buttonMask));
 }
 
-unsigned long KVncView::toKeySym(QKeyEvent *k)
-{
-	int ke = 0;
-
-	ke = k->ascii();
-	// Markus: Crappy hack. I dont know why lower case letters are
-	// not defined in qkeydefs.h. The key() for e.g. 'l' == 'L'. 
-	// This sucks. :-(
-	
-	if ( (ke >= 'a') && (ke <= 'z') ) {
-		ke = k->key();
-		ke = ke + 0x20;
-		return ke;
-	}
-
-	// qkeydefs = xkeydefs! :-)
-	if ( ( k->key() >= 0x0a0 ) && k->key() <= 0x0ff )
-		return k->key();
-	
-	if ( ( k->key() >= 0x20 ) && ( k->key() <= 0x7e ) )
-		return k->key();
-	
-	// qkeydefs != xkeydefs! :-(
-	// This is gonna suck :-(
-	
-	switch( k->key() ) {
-	case SHIFT:
-		return XK_Shift_L;
-	case CTRL:
-		return XK_Control_L;
-	case ALT:
-		return XK_Alt_L;
-		
-	case Key_Escape:
-		return  XK_Escape;
-	case Key_Tab:
-		return XK_Tab;
-	case Key_Backspace:
-		return XK_BackSpace;
-	case Key_Return:
-		return XK_Return;
-	case Key_Enter:
-		return XK_Return;
-	case Key_Insert:
-		return XK_Insert;
-	case Key_Delete:
-		return XK_Delete;
-	case Key_Pause:
-		return XK_Pause;
-	case Key_Print:
-		return XK_Print;
-	case Key_SysReq:
-		return XK_Sys_Req;
-	case Key_Home:
-		return XK_Home;
-	case Key_End:
-		return XK_End;
-	case Key_Left:
-		return XK_Left;
-	case Key_Up:
-		return XK_Up;
-	case Key_Right:
-		return XK_Right;
-	case Key_Down:
-		return XK_Down;
-	case Key_Prior:
-		return XK_Prior;
-	case Key_Next:
-		return XK_Next;
-		
-	case Key_Shift:
-		return XK_Shift_L;
-	case Key_Control:
-		return XK_Control_L;
-	case Key_Meta:
-		return XK_Meta_L;
-	case Key_Alt:
-		return XK_Alt_L;
-	case Key_CapsLock:
-		return XK_Caps_Lock;
-	case Key_NumLock:
-		return XK_Num_Lock;
-	case Key_ScrollLock:
-		return XK_Scroll_Lock;
-		
-	case Key_F1:
-		return XK_F1;
-	case Key_F2:
-		return XK_F2;
-	case Key_F3:
-		return XK_F3;
-	case Key_F4:
-		return XK_F4;
-	case Key_F5:
-		return XK_F5;
-	case Key_F6:
-		return XK_F6;
-	case Key_F7:
-		return XK_F7;
-	case Key_F8:
-		return XK_F8;
-	case Key_F9:
-		return XK_F9;
-	case Key_F10:
-		return XK_F10;
-	case Key_F11:
-		return XK_F11;
-	case Key_F12:
-		return XK_F12;
-	case Key_F13:
-		return XK_F13;
-	case Key_F14:
-		return XK_F14;
-	case Key_F15:
-		return XK_F15;
-	case Key_F16:
-		return XK_F16;
-	case Key_F17:
-		return XK_F17;
-	case Key_F18:
-		return XK_F18;
-	case Key_F19:
-		return XK_F19;
-	case Key_F20:
-		return XK_F20;
-	case Key_F21:
-		return XK_F21;
-	case Key_F22:
-		return XK_F22;
-	case Key_F23:
-		return XK_F23;
-	case Key_F24:
-		return XK_F24;
-		
-	case Key_unknown:
-		return 0;
-	default:
-		return 0;
-	}
-
-	// Puhhhhh done. :-)
-	return 0;
-}
 #include "kvncview.moc"

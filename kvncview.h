@@ -74,8 +74,7 @@ protected:
 	void mouseReleaseEvent(QMouseEvent*);
 	void mouseMoveEvent(QMouseEvent*);
 	void wheelEvent(QWheelEvent *);
-	void keyPressEvent(QKeyEvent*);
-	void keyReleaseEvent(QKeyEvent*);
+	bool x11Event(XEvent*);
 
 public:
 	KVncView(QWidget* parent=0, const char *name=0, 

@@ -559,7 +559,7 @@ typedef struct {
  * one of 16 images, and Move selects the image and sets the position of the
  * cursor. 
  * Each SoftCursor message starts with a CARD8. If it is in the 0-15 range
- * it specifies the numer of the cursor image and is followed by the 
+ * it specifies the number of the cursor image and is followed by the 
  * rfbSoftCursorMove message. If the given cursor has not been set yet the 
  * message will be ignored. If the first CARD8 is in the 128-143 range it 
  * specifies the cursor that will be set in the following 
