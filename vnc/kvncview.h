@@ -19,7 +19,6 @@
 #define KVNCVIEW_H
 
 #include "kremoteview.h"
-#include "krdc.h"
 #include <kapplication.h>
 #include <qclipboard.h>
 #include <qcursor.h>
