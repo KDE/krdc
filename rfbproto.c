@@ -682,13 +682,7 @@ HandleRFBServerMessage()
 
   case rfbBell:
   {
-    Window toplevelWin;
-fprintf(stderr, "bell, need event here\n");
-/*
-    lockQt();
-    XBell(dpy, 0);
-    unlockQt();
-*/    
+    beep();
     break;
   }
 

@@ -79,6 +79,7 @@ extern int vncServerPort;
 extern int isQuitFlagSet();
 extern int getPassword(char *passwd, int pwlen);
 extern void SyncScreenRegion(int x, int y, int width, int height);
+extern void beep();
 
 /* threads.cpp */
 extern void queueIncrementalUpdateRequest();

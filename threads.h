@@ -132,6 +132,16 @@ public:
 	int height() const { return m_height; };
 };
 
+const int BeepEventType = 781007;
+
+class BeepEvent : public QCustomEvent
+{
+public:
+	BeepEvent() : 
+		QCustomEvent(BeepEventType)
+	{};
+};
+
 struct MouseEvent {
 	int x, y, buttons;
 };

@@ -259,6 +259,9 @@ void KVncView::customEvent(QCustomEvent *e)
 		}
 		emit disconnected();
 	}
+	else if (e->type() == BeepEventType) {  
+		QApplication::beep();
+	}
 }
 
 void KVncView::mouseEvent(QMouseEvent *e) {
@@ -354,6 +357,10 @@ extern void SyncScreenRegion(int x, int y, int width, int height) {
 	DrawScreenRegionX11Thread(x, y, width, height);
 	KApplication::kApplication()->unlock();
 	//QThread::postEvent(kvncview, new ScreenRepaintEvent(x, y, width, height));	
+}
+
+extern void beep() {
+	QThread::postEvent(kvncview, new BeepEvent());	
 }
 
 unsigned long KVncView::toKeySym(QKeyEvent *k)
