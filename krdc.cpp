@@ -31,8 +31,8 @@
 #include <kstandarddirs.h>
 #include <klocale.h>
 #include <kdialog.h>
-#include <qlabel.h> 
-#include <qtoolbutton.h> 
+#include <qlabel.h>
+#include <qtoolbutton.h>
 #include <qwhatsthis.h>
 
 #include <kmessagebox.h>
@@ -40,6 +40,7 @@
 #include <kglobal.h>
 #include <kinstance.h>
 #include <kstandarddirs.h>
+#include <kstartupinfo.h>
 #include <qcursor.h>
 #include <qobjectlist.h>
 #include <qbitmap.h>
@@ -62,8 +63,8 @@ void QScrollView2::mouseMoveEvent( QMouseEvent *e )
 QString KRDC::m_lastHost = "";
 int KRDC::m_lastQuality = 0;
 
-KRDC::KRDC(WindowMode wm, const QString &host, 
-	   Quality q, const QString &encodings) : 
+KRDC::KRDC(WindowMode wm, const QString &host,
+	   Quality q, const QString &encodings) :
   QWidget(0, 0, Qt::WStyle_ContextHelp),
   m_layout(0),
   m_scrollView(0),
@@ -88,7 +89,9 @@ KRDC::KRDC(WindowMode wm, const QString &host,
 	m_pindown = QPixmap(dirs->findResource("appdata", "pics/pindown.png"));
 	m_pinup   = QPixmap(dirs->findResource("appdata", "pics/pinup.png"));
 
-	setMouseTracking(true);	
+	setMouseTracking(true);
+
+	KStartupInfo::appStarted();
 }
 
 bool KRDC::start(bool onlyFailOnCancel)
@@ -112,7 +115,7 @@ bool KRDC::start(bool onlyFailOnCancel)
 		if (m_quality == QUALITY_UNKNOWN)
 			m_quality = QUALITY_MEDIUM;
 	} else {
-		SrvLocNCDialog ncd(0, "SrvLocNCDialog", 
+		SrvLocNCDialog ncd(0, "SrvLocNCDialog",
 				   config->readBoolEntry("browsingPanel", false));
 		QStringList list = config->readListEntry("serverCompletions");
 		ncd.serverInput->completionObject()->setItems(list);
