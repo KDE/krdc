@@ -314,12 +314,12 @@ void KVncView::customEvent(QCustomEvent *e)
 			break;
 		case ERROR_NAME:
 			KMessageBox::error(0, 
-					   i18n("Connection failed. A server with the given name can not be found."),
+					   i18n("Connection failed. A server with the given name cannot be found."),
 					   i18n("Connection Failure"));
 			break;
 		case ERROR_NO_SERVER:
 			KMessageBox::error(0, 
-					   i18n("Connection failed. No server running at the given address."),
+					   i18n("Connection failed. No server running at the given address and port."),
 					   i18n("Connection Failure"));
 			break;
 		case ERROR_AUTHENTICATION:
