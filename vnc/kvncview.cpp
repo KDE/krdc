@@ -65,6 +65,7 @@ KVncView::KVncView(QWidget *parent,
   m_cthread(this, m_wthread, m_quitFlag),
   m_wthread(this, m_quitFlag),
   m_quitFlag(false),
+  m_enableFramebufferLocking(false),
   m_scaling(false),
   m_buttonMask(0),
   m_host(_host),
@@ -98,11 +99,14 @@ KVncView::KVncView(QWidget *parent,
 }
 
 void KVncView::showDotCursor(bool show) {
+	bool s = show;
+	if (m_enableClientCursor)
+		s = false;
 	if (show == m_cursorEnabled)
 		return;
 
-	m_cursorEnabled = show;
-	if (!show)
+	m_cursorEnabled = s;
+	if (!s)
 		setCursor(QCursor(Qt::BlankCursor));
 	else
 		setCursor(m_cursor);
@@ -383,6 +387,9 @@ void KVncView::mouseEvent(QMouseEvent *e) {
 		y = (y * m_framebufferSize.height()) / height();
 	}
 	m_wthread.queueMouseEvent(x, y, m_buttonMask);
+
+	if (m_enableClientCursor)
+		DrawCursorX11Thread(x, y); // in rfbproto.c
 }
 
 void KVncView::mousePressEvent(QMouseEvent *e) {
@@ -491,6 +498,27 @@ void KVncView::selectionChanged() {
 	m_wthread.queueClientCut(text);
 }
 
+void KVncView::lockFramebuffer() {
+	if (m_enableFramebufferLocking)
+		m_framebufferLock.lock();
+}
+
+void KVncView::unlockFramebuffer() {
+	if (m_enableFramebufferLocking)
+		m_framebufferLock.unlock();
+}
+
+void KVncView::enableClientCursor(bool enable) {
+	if (enable) {
+		m_enableFramebufferLocking = true; // cant be turned off
+		showDotCursor(false);
+	}
+	else
+		showDotCursor(appData.dotCursor);
+	m_enableClientCursor = enable;
+
+}
+
 int getPassword(char *passwd, int pwlen) {
 	int retV = 1;
 
@@ -522,6 +550,23 @@ extern void DrawScreenRegion(int x, int y, int width, int height) {
 	KApplication::kApplication()->unlock();
 */
 	QApplication::postEvent(kvncview, new ScreenRepaintEvent(x, y, width, height));	
+}
+
+// call only from x11 thread!
+extern void DrawAnyScreenRegionX11Thread(int x, int y, int width, int height) {
+	kvncview->drawRegion(x, y, width, height);
+}
+
+extern void EnableClientCursor(int enable) {
+	kvncview->enableClientCursor(enable);
+}
+
+extern void LockFramebuffer() {
+  	kvncview->lockFramebuffer();
+}
+
+extern void UnlockFramebuffer() {
+  	kvncview->unlockFramebuffer();
 }
 
 extern void beep() {

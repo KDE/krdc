@@ -65,25 +65,33 @@ HandleHextileBPP (int rx, int ry, int rw, int rh)
 	if (!ReadFromRFBServer((char *)&bg, sizeof(bg)))
 	  return False;
 
+      LockFramebuffer();
       FillRectangleBPP(bg, x, y, w, h);
 
       if (subencoding & rfbHextileForegroundSpecified)
-	if (!ReadFromRFBServer((char *)&fg, sizeof(fg)))
+	if (!ReadFromRFBServer((char *)&fg, sizeof(fg))) {
+	  UnlockFramebuffer();
 	  return False;
+	}
 
       if (!(subencoding & rfbHextileAnySubrects)) {
+	UnlockFramebuffer();
 	SyncScreenRegion(x, y, w, h);
 	continue;
       }
 
-      if (!ReadFromRFBServer((char *)&nSubrects, 1))
+      if (!ReadFromRFBServer((char *)&nSubrects, 1)) {
+	UnlockFramebuffer();
 	return False;
+      }
 
       ptr = (CARD8 *)buffer;
 
       if (subencoding & rfbHextileSubrectsColoured) {
-	if (!ReadFromRFBServer(buffer, nSubrects * (2 + (BPP / 8))))
+	if (!ReadFromRFBServer(buffer, nSubrects * (2 + (BPP / 8)))) {
+	  UnlockFramebuffer();
 	  return False;
+	}
 
 	for (i = 0; i < nSubrects; i++) {
 	  GET_PIXEL(fg, ptr);
@@ -97,8 +105,10 @@ HandleHextileBPP (int rx, int ry, int rw, int rh)
 	}
 
       } else {
-	if (!ReadFromRFBServer(buffer, nSubrects * 2))
+	if (!ReadFromRFBServer(buffer, nSubrects * 2)) {
+	  UnlockFramebuffer();
 	  return False;
+	}
 
 	for (i = 0; i < nSubrects; i++) {
 	  sx = rfbHextileExtractX(*ptr);
@@ -110,6 +120,7 @@ HandleHextileBPP (int rx, int ry, int rw, int rh)
 	  FillRectangleBPP(fg, x+sx, y+sy, sw, sh);
 	}
       }
+      UnlockFramebuffer();
       SyncScreenRegion(x, y, w, h);
     }
   }

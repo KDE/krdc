@@ -70,6 +70,10 @@ extern int vncServerPort;
 extern int isQuitFlagSet();
 extern int getPassword(char *passwd, int pwlen);
 extern void DrawScreenRegion(int x, int y, int width, int height);
+extern void DrawAnyScreenRegionX11Thread(int x, int y, int width, int height);
+extern void LockFramebuffer();
+extern void UnlockFramebuffer();
+extern void EnableClientCursor(int state);
 extern void beep();
 extern void newServerCut(char *bytes, int len);
 extern void postMouseEvent(int x, int y, int buttonMask);
@@ -106,6 +110,7 @@ extern void FillRectangle32(CARD32, int x, int y, int width, int height);
 extern void CopyArea(int srcX, int srcY, int width, int height, int x, int y);
 extern void SyncScreenRegion(int x, int y, int width, int height);
 extern void drawCursor(void);
+extern void DrawCursorX11Thread(int x, int y);
 extern void undrawCursor(void);
 extern void getBoundingRectCursor(int cx, int cy, int _imageIndex,
 				  int *x, int *y, int *w, int *h);

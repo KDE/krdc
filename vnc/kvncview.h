@@ -40,6 +40,9 @@ private:
 	ControllerThread m_cthread;
 	WriterThread m_wthread;
 	volatile bool m_quitFlag; // if set: all threads should die ASAP
+	QMutex m_framebufferLock;
+	bool m_enableFramebufferLocking;
+	bool m_enableClientCursor;
 
 	QSize m_framebufferSize;
 	bool m_scaling;
@@ -82,6 +85,9 @@ public:
 	QSize sizeHint();
 	int heightForWidth (int w) const;
 	void drawRegion(int x, int y, int w, int h);
+	void lockFramebuffer();
+	void unlockFramebuffer();
+	void enableClientCursor(bool enable);
 	virtual bool scaling();
 	virtual bool supportsScaling();
 	virtual QSize framebufferSize();

@@ -301,14 +301,14 @@ void KRDC::configureApp(Quality q) {
 
 	if (q == QUALITY_LOW) {
 		m_appData.useBGR233 = 1;
-		m_appData.encodingsString = "copyrect softcursor tight zlib hextile raw";
+		m_appData.encodingsString = "background copyrect softcursor tight zlib hextile raw";
 		m_appData.compressLevel = -1;
 		m_appData.qualityLevel = 1;
 		m_appData.dotCursor = 1;
 	}
 	else if ((q == QUALITY_MEDIUM) || (q == QUALITY_UNKNOWN)) {
 		m_appData.useBGR233 = 0;
-		m_appData.encodingsString = "copyrect softcursor tight zlib hextile raw";
+		m_appData.encodingsString = "background copyrect softcursor tight zlib hextile raw";
 		m_appData.compressLevel = -1;
 		m_appData.qualityLevel = 6;
 		m_appData.dotCursor = 1;
@@ -475,6 +475,7 @@ void KRDC::switchToFullscreen(bool scaling)
 	m_fsToolbar = new KFullscreenPanel(this, "fstoolbar", m_fullscreenResolution);
 	FullscreenToolbar *t = new FullscreenToolbar(m_fsToolbar);
 	m_fsToolbarWidget = t;
+	t->hostLabel->setName("kde toolbar widget");
 	t->hostLabel->setText(m_host);
 	t->fullscreenButton->setOn(true);
 	t->scaleButton->setOn(scaling);

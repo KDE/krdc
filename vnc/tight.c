@@ -128,8 +128,10 @@ HandleTightBPP (int rx, int ry, int rw, int rh)
     if (!ReadFromRFBServer((char*)&fill_colour, sizeof(fill_colour)))
 	return False;
 #endif
-
+    
+    LockFramebuffer();
     FillRectangleBPP(fill_colour, rx, ry, rw, rh);
+    UnlockFramebuffer();
     SyncScreenRegion(rx, ry, rw, rh);
     return True;
   }

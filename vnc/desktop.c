@@ -216,6 +216,7 @@ CopyDataToScreen(char *buf, int x, int y, int width, int height)
   if (!CheckRectangle(x, y, width, height))
     return;
 
+  LockFramebuffer();
   s = getSoftCursorState(x, y, width, height);
   if (s == SOFTCURSOR_PART_UNDER)
     undrawCursor();
@@ -228,6 +229,7 @@ CopyDataToScreen(char *buf, int x, int y, int width, int height)
   if (s != SOFTCURSOR_UNAFFECTED)
     drawCursor();
 
+  UnlockFramebuffer();
   SyncScreenRegion(x, y, width, height);
 }
 
@@ -522,6 +524,7 @@ CopyArea(int srcX, int srcY, int width, int height, int x, int y)
   int widthInBytes = width * visbpp / 8;
   SoftCursorState sSrc, sDst;
 
+  LockFramebuffer();
   sSrc = getSoftCursorState(srcX, srcY, width, height);
   sDst = getSoftCursorState(x, y, width, height);
   if ((sSrc != SOFTCURSOR_UNAFFECTED) ||
@@ -538,10 +541,14 @@ CopyArea(int srcX, int srcY, int width, int height, int x, int y)
 		 + x * visbpp / 8);
     int h;
 
-    if (!CheckRectangle(srcX, srcY, width, height))
+    if (!CheckRectangle(srcX, srcY, width, height)) {
+      UnlockFramebuffer();
       return;
-    if (!CheckRectangle(x, y, width, height))
+    }
+    if (!CheckRectangle(x, y, width, height)) {
+      UnlockFramebuffer();
       return;
+    }
       
     for (h = 0; h < height; h++) {
       memcpy(dst, src, widthInBytes);
@@ -552,6 +559,7 @@ CopyArea(int srcX, int srcY, int width, int height, int x, int y)
   else { 
     char *buf = malloc(widthInBytes*height);
     if (!buf) {
+      UnlockFramebuffer();
       fprintf(stderr, "Out of memory, CopyArea impossible\n");
       return;
     }
@@ -562,6 +570,7 @@ CopyArea(int srcX, int srcY, int width, int height, int x, int y)
   if ((sSrc != SOFTCURSOR_UNAFFECTED) ||
       (sDst != SOFTCURSOR_UNAFFECTED))
     drawCursor();
+  UnlockFramebuffer();
   SyncScreenRegion(x, y, width, height);
 }
 
@@ -710,13 +719,20 @@ static void drawCursorImage() {
   CARD8 *imgEnd = &img[pi->len];
   CARD8 *fb;
 
+  /* check whether the source image has ended (image broken) */
 #define CHECK_IMG(x) if (&img[x] > imgEnd) goto imgError
+
+/* check whether the end of the framebuffer has been reached (last line) */
 #define CHECK_END()  if ((wl == 0) && (h == 1)) return
+
+/* skip x pixels in the source (x must be < pixelsLeft!) */
 #define SKIP_IMG(x)  if ((x > 0) && !processingMask) { \
       CHECK_END();   \
       img += pw * x; \
       CHECK_IMG(0);  \
    }
+
+/* skip x pixels in source and destination */
 #define SKIP_PIXELS(x) { int wl = x; \
     while (pixelsLeft <= wl) { \
       wl -= pixelsLeft;        \
@@ -744,14 +760,15 @@ static void drawCursorImage() {
     return;
   }
 
-  fb = (CARD8*) image->data + y * image->bytes_per_line + x * visbpp / 8;
-
-  if ((y+h) > si.framebufferHeight) 
-    h = si.framebufferHeight - y;
-
   pw = myFormat.bitsPerPixel / 8;
   processingMask = 1;
   pixelsLeft = *(img++);
+
+/* at this point everything is initialized for the macros */
+
+  /* skip/clip bottom lines */
+  if ((y+h) > si.framebufferHeight) 
+    h = si.framebufferHeight - y;
 
   /* Skip invisible top lines */
   while (y < 0) {
@@ -775,6 +792,8 @@ static void drawCursorImage() {
   }
   else
     skipRight = 0;
+
+  fb = (CARD8*) image->data + y * image->bytes_per_line + x * visbpp / 8;
 
   /* Paint the thing */
   while (h > 0) {

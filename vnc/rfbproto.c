@@ -54,6 +54,14 @@ static void JpegSetSrcManager(j_decompress_ptr cinfo, CARD8 *compressedData,
                               int compressedLen);
 
 
+#define RGB24_TO_PIXEL(bpp,r,g,b)                                       \
+   ((((CARD##bpp)(r) & 0xFF) * myFormat.redMax + 127) / 255             \
+    << myFormat.redShift |                                              \
+    (((CARD##bpp)(g) & 0xFF) * myFormat.greenMax + 127) / 255           \
+    << myFormat.greenShift |                                            \
+    (((CARD##bpp)(b) & 0xFF) * myFormat.blueMax + 127) / 255            \
+    << myFormat.blueShift)
+
 int rfbsock;
 char *desktopName;
 rfbPixelFormat myFormat;
@@ -353,6 +361,13 @@ SetFormatAndEncodings()
 	encs[se->nEncodings++] = Swap32IfLE(rfbEncodingCopyRect);
       } else if (strncasecmp(encStr,"softcursor",encStrLen) == 0) {
 	encs[se->nEncodings++] = Swap32IfLE(rfbEncodingSoftCursor);
+        /* if server supports SoftCursor, it will ignore XCursor and PointerPos
+        // XCursor will not be used ATM, it is just because TightVNC
+	// refuses to use PointerPos without XCursor */
+        encs[se->nEncodings++] = Swap32IfLE(rfbEncodingXCursor);
+        encs[se->nEncodings++] = Swap32IfLE(rfbEncodingPointerPos);
+      } else if (strncasecmp(encStr,"background",encStrLen) == 0) {
+	encs[se->nEncodings++] = Swap32IfLE(rfbEncodingBackground);
       } else if (strncasecmp(encStr,"tight",encStrLen) == 0) {
 	encs[se->nEncodings++] = Swap32IfLE(rfbEncodingTight);
 	requestLastRectEncoding = True;
@@ -504,7 +519,7 @@ SendClientCutText(const char *str, int len)
   rfbClientCutTextMsg cct;
 
   cct.type = rfbClientCutText;
-  cct.length = Swap32IfLE(len);
+  cct.length = Swap32IfLE((unsigned int)len);
   return  (WriteExact(rfbsock, (char *)&cct, sz_rfbClientCutTextMsg) &&
 	   WriteExact(rfbsock, str, len));
 }
@@ -519,6 +534,7 @@ HandleSoftCursorSetImage(rfbSoftCursorSetImage *msg, rfbRectangle *rect)
     fprintf(stderr, "Received invalid soft cursor image index %d for SetImage\n", iindex);
     return False;
   }
+  EnableClientCursor(0);
 
   if (pi->set && pi->image) 
     free(pi->image);
@@ -540,9 +556,10 @@ HandleSoftCursorSetImage(rfbSoftCursorSetImage *msg, rfbRectangle *rect)
   return True;
 }
 
+/* framebuffer must be locked when calling this!!! */
 static Bool
-pointerMove(unsigned int x, unsigned int y, unsigned int mask,
-		int ox, int oy, int ow, int oh) 
+PointerMove(unsigned int x, unsigned int y, unsigned int mask,
+	    int ox, int oy, int ow, int oh) 
 {
   int nx, ny, nw, nh;
 
@@ -551,12 +568,10 @@ pointerMove(unsigned int x, unsigned int y, unsigned int mask,
   if (y >= si.framebufferHeight)
     y = si.framebufferHeight - 1;
 
-  getBoundingRectCursor(cursorX, cursorY, imageIndex,
-			&ox, &oy, &ow, &oh);
-
   cursorX = x;
   cursorY = y;
   drawCursor();
+  UnlockFramebuffer();
 
   getBoundingRectCursor(cursorX, cursorY, imageIndex,
 			&nx, &ny, &nw, &nh);
@@ -580,6 +595,7 @@ HandleSoftCursorMove(rfbSoftCursorMove *msg, rfbRectangle *rect)
 {
   int ii, ox, oy, ow, oh;
 
+  /* get old cursor rect to know what to update */
   getBoundingRectCursor(cursorX, cursorY, imageIndex,
 			&ox, &oy, &ow, &oh);
 
@@ -592,10 +608,11 @@ HandleSoftCursorMove(rfbSoftCursorMove *msg, rfbRectangle *rect)
   if (!pointerImages[ii].set)
     return True;
 
+  LockFramebuffer();
   undrawCursor();
   imageIndex = ii;
 
-  return pointerMove(rect->w, rect->h, msg->buttonMask, ox, oy, ow, oh);
+  return PointerMove(rect->w, rect->h, msg->buttonMask, ox, oy, ow, oh);
 }
 
 static Bool
@@ -603,10 +620,258 @@ HandleCursorPos(unsigned int x, unsigned int y)
 {
   int ox, oy, ow, oh;
 
+  /* get old cursor rect to know what to update */
+  LockFramebuffer();
   getBoundingRectCursor(cursorX, cursorY, imageIndex,
 			&ox, &oy, &ow, &oh);
-  return pointerMove(x, y, 0, ox, oy, ow, oh);
+  undrawCursor();
+  if (!pointerImages[0].set)
+    return True;
+  imageIndex = 0;
+  return PointerMove(x, y, 0, ox, oy, ow, oh);
 }
+
+/* call only from X11 thread. Only updates framebuffer, does not sync! */
+void DrawCursorX11Thread(int x, int y) {
+  int ox, oy, ow, oh, nx, ny, nw, nh;
+  if (!pointerImages[0].set)
+    return True;
+  imageIndex = 0;
+
+  if (x >= si.framebufferWidth)
+    x = si.framebufferWidth - 1;
+  if (y >= si.framebufferHeight)
+    y = si.framebufferHeight - 1;
+
+  LockFramebuffer();
+  getBoundingRectCursor(cursorX, cursorY, imageIndex,
+			&ox, &oy, &ow, &oh);
+  undrawCursor();
+  cursorX = x;
+  cursorY = y;
+  drawCursor();
+  UnlockFramebuffer();
+
+  getBoundingRectCursor(cursorX, cursorY, imageIndex,
+			&nx, &ny, &nw, &nh);
+  if (rectsIntersect(ox, oy, ow, oh, nx, ny, nw, nh)) {
+    rectsJoin(&ox, &oy, &ow, &oh, nx, ny, nw, nh);
+    DrawAnyScreenRegionX11Thread(ox, oy, ow, oh);
+  }
+  else {
+    DrawAnyScreenRegionX11Thread(ox, oy, ow, oh);
+    DrawAnyScreenRegionX11Thread(nx, ny, nw, nh);
+  }
+}
+
+/**
+ * Create a softcursor in the "compressed alpha" format.
+ * Returns the softcursor, caller owns the object
+ */
+static void *MakeSoftCursor(int bpp, int cursorWidth, int cursorHeight, 
+			    CARD8 *cursorData, CARD8 *cursorMask, short *imageLen)
+{
+    int w = (cursorWidth+7)/8;
+    unsigned char *cp, *sp, *dstData;
+    int state; /* 0 = transparent, 1 otherwise */
+    CARD8 *counter;
+    unsigned char bit;
+    int i,j;
+    
+    sp = (unsigned char*)cursorData;
+    dstData = cp = (unsigned char*)calloc(cursorWidth*(bpp+2),cursorHeight);
+    if (!dstData)
+      return 0;
+
+    state = 0;
+    counter = cp++;
+    *counter = 0;
+    
+    for(j=0;j<cursorHeight;j++)
+	for(i=0,bit=0x80;i<cursorWidth;i++,bit=(bit&1)?0x80:bit>>1)
+	    if(cursorMask[j*w+i/8]&bit) {
+		if (state) {
+		    memcpy(cp,sp,bpp);
+		    cp += bpp;
+		    sp += bpp;
+		    (*counter)++;
+		    if (*counter == 255) {
+			state = 0;
+			counter = cp++;
+			*counter = 0;
+		    }
+		}
+		else {
+		    state = 1;
+		    counter = cp++;
+		    *counter = 1;
+		    memcpy(cp,sp,bpp);
+		    cp += bpp;
+		    sp += bpp;
+		}
+	    }
+	    else {
+		if (!state) {
+		    (*counter)++;
+		    if (*counter == 255) {
+			state = 1;
+			counter = cp++;
+			*counter = 0;
+		    }
+		}
+		else {
+		    state = 0;
+		    counter = cp++;
+		    *counter = 1;
+		}
+		sp += bpp;
+	    }
+
+    *imageLen = cp - dstData;
+    return (void*) dstData;
+}
+
+
+/*********************************************************************
+ * HandleCursorShape(). Support for XCursor and RichCursor shape
+ * updates. We emulate cursor operating on the frame buffer (that is
+ * why we call it "software cursor").
+ ********************************************************************/
+
+static Bool HandleCursorShape(int xhot, int yhot, int width, int height, CARD32 enc)
+{
+  int bytesPerPixel;
+  size_t bytesPerRow, bytesMaskData;
+  rfbXCursorColors rgb;
+  CARD32 colors[2];
+  CARD8 *ptr, *rcSource, *rcMask;
+  void *softCursor;
+  int x, y, b;
+  int ox, oy, ow, oh;
+  PointerImage *pi;
+  short imageLen;
+
+  bytesPerPixel = myFormat.bitsPerPixel / 8;
+  bytesPerRow = (width + 7) / 8;
+  bytesMaskData = bytesPerRow * height;
+
+  if (width * height == 0)
+    return True;
+
+  /* Allocate memory for pixel data and temporary mask data. */
+
+  rcSource = malloc(width * height * bytesPerPixel);
+  if (rcSource == NULL)
+    return False;
+
+  rcMask = malloc(bytesMaskData);
+  if (rcMask == NULL) {
+    free(rcSource);
+    return False;
+  }
+
+  /* Read and decode cursor pixel data, depending on the encoding type. */
+
+  if (enc == rfbEncodingXCursor) {
+    /* Read and convert background and foreground colors. */
+    if (!ReadFromRFBServer((char *)&rgb, sz_rfbXCursorColors)) {
+      free(rcSource);
+      free(rcMask);
+      return False;
+    }
+    colors[0] = RGB24_TO_PIXEL(32, rgb.backRed, rgb.backGreen, rgb.backBlue);
+    colors[1] = RGB24_TO_PIXEL(32, rgb.foreRed, rgb.foreGreen, rgb.foreBlue);
+
+    /* Read 1bpp pixel data into a temporary buffer. */
+    if (!ReadFromRFBServer((char*)rcMask, bytesMaskData)) {
+      free(rcSource);
+      free(rcMask);
+      return False;
+    }
+
+    /* Convert 1bpp data to byte-wide color indices. */
+    ptr = rcSource;
+    for (y = 0; y < height; y++) {
+      for (x = 0; x < width / 8; x++) {
+	for (b = 7; b >= 0; b--) {
+	  *ptr = rcMask[y * bytesPerRow + x] >> b & 1;
+	  ptr += bytesPerPixel;
+	}
+      }
+      for (b = 7; b > 7 - width % 8; b--) {
+	*ptr = rcMask[y * bytesPerRow + x] >> b & 1;
+	ptr += bytesPerPixel;
+      }
+    }
+
+    /* Convert indices into the actual pixel values. */
+    switch (bytesPerPixel) {
+    case 1:
+      for (x = 0; x < width * height; x++)
+	rcSource[x] = (CARD8)colors[rcSource[x]];
+      break;
+    case 2:
+      for (x = 0; x < width * height; x++)
+	((CARD16 *)rcSource)[x] = (CARD16)colors[rcSource[x * 2]];
+      break;
+    case 4:
+      for (x = 0; x < width * height; x++)
+	((CARD32 *)rcSource)[x] = colors[rcSource[x * 4]];
+      break;
+    }
+    
+
+  } else {
+    if (!ReadFromRFBServer((char *)rcSource, width * height * bytesPerPixel)) {
+      free(rcSource);
+      free(rcMask);
+      return False;
+    }
+  }
+
+  /* Read mask data. */
+
+  if (!ReadFromRFBServer((char*)rcMask, bytesMaskData)) {
+    free(rcSource);
+    free(rcMask);
+    return False;
+  }
+
+
+  /* Set the soft cursor. */
+  softCursor = MakeSoftCursor(bytesPerPixel, width, height, rcSource, rcMask, &imageLen);
+  if (!softCursor) {
+    free(rcMask);
+    free(rcSource);
+    return False;
+  }
+
+  /* get old cursor rect to know what to update */
+  EnableClientCursor(1);
+  LockFramebuffer();
+  getBoundingRectCursor(cursorX, cursorY, imageIndex,
+			&ox, &oy, &ow, &oh);
+  undrawCursor();
+
+  pi = &pointerImages[0];
+  if (pi->set && pi->image)
+    free(pi->image);
+  pi->w = width;
+  pi->h = height;
+  pi->hotX = xhot;
+  pi->hotY = yhot;
+  pi->len = imageLen;
+  pi->image = softCursor;
+  pi->set = 1;
+
+  imageIndex = 0;
+
+  free(rcMask);
+  free(rcSource);
+
+  return PointerMove(cursorX, cursorY, 0, ox, oy, ow, oh);
+}
+
 
 
 /*
@@ -684,6 +949,15 @@ HandleRFBServerMessage()
           return False;
         }
         continue;
+      }
+
+      if (rect.encoding == rfbEncodingXCursor ||
+	  rect.encoding == rfbEncodingRichCursor) {
+	if (!HandleCursorShape(rect.r.x, rect.r.y, rect.r.w, rect.r.h,
+			      rect.encoding)) {
+	  return False;
+	}
+	continue;
       }
 
       if ((rect.r.x + rect.r.w > si.framebufferWidth) ||
@@ -859,7 +1133,7 @@ HandleRFBServerMessage()
     serverCutText = malloc(msg.sct.length+1);
 
     if (!serverCutText) {
-      fprintf(stderr, "Out-of-memory, cutbuffer to long.\n");
+      fprintf(stderr, "Out-of-memory, cutbuffer too long.\n");
       return False;
     }
 

@@ -323,6 +323,7 @@ typedef struct {
 #define rfbEncodingPointerPos      0xFFFFFF18
 
 #define rfbEncodingLastRect        0xFFFFFF20
+#define rfbEncodingBackground      0xFFFFFF25
 
 #define rfbEncodingQualityLevel0   0xFFFFFFE0
 #define rfbEncodingQualityLevel1   0xFFFFFFE1
@@ -721,7 +722,6 @@ typedef union {
 
 #define rfbSoftCursorMaxImages    16
 #define rfbSoftCursorSetIconOffset    128
-
 
 /*-----------------------------------------------------------------------------
  * SetColourMapEntries - these messages are only sent if the pixel
