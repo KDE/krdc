@@ -392,11 +392,11 @@ void KVncView::mouseEvent(QMouseEvent *e) {
 
 	int x = e->x();
 	int y = e->y();
+	m_plom.registerPointerState(x, y);
 	if (m_scaling) {
 		x = (x * m_framebufferSize.width()) / width();
 		y = (y * m_framebufferSize.height()) / height();
 	}
-	m_plom.registerPointerState(x, y);
 	m_wthread.queueMouseEvent(x, y, m_buttonMask);
 }
 
