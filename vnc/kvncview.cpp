@@ -150,7 +150,7 @@ bool KVncView::isQuitting() {
 }
 
 bool KVncView::checkLocalKRfb() {
-	if ((m_host != "localhost") && (m_host != ""))
+	if ( m_host != "localhost" && !m_host.isEmpty() )
 		return true;
 	DCOPClient *d = KApplication::dcopClient();
 
