@@ -95,6 +95,10 @@ QValueList<SmartPtr<HostPref> > HostPreferences::getAllHostPrefs() {
 	return r;
 }
 
+void HostPreferences::removeHostPref(HostPref *hostPref) {
+	hostPref->remove();
+}
+
 void HostPreferences::sync() {
 	m_config->sync();
 }

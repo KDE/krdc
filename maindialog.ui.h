@@ -1,6 +1,7 @@
 #include <qregexp.h>
 #include <kdebug.h>
 #include <config.h>
+#include "preferences.h"
 
 void MainDialog::hostChanged( const QString & text )
 {
@@ -47,4 +48,9 @@ void MainDialog::enableBrowsingArea( bool enable )
 	rescan();
 }
 
+void MainDialog::preferencesClicked()
+{
+    PreferencesDialog p(0, "PreferencesDialog", true);
+    p.exec();
+}
 

@@ -6,7 +6,7 @@ METASOURCES = AUTO
 
 bin_PROGRAMS = krdc
 krdc_SOURCES = main.cpp krdc.cpp vidmode.cpp kfullscreenpanel.cpp \
-  maindialog.ui fullscreentoolbar.ui toolbar.ui \
+  preferences.ui maindialog.ui fullscreentoolbar.ui toolbar.ui \
   kservicelocator.cpp srvlocmaindialog.cpp keycapturedialog.ui \
   keycapturedialog2.cpp kremoteview.cpp smartptr.cpp hostpreferences.cpp
 

@@ -58,6 +58,7 @@ public:
 	SmartPtr<HostPref> getHostPref(const QString &host, const QString &type);
 	SmartPtr<HostPref> createHostPref(const QString &host, const QString &type);
 	QValueList<SmartPtr<HostPref> > getAllHostPrefs();
+	void removeHostPref(HostPref *hostPref);
 	void sync();
 
 };

@@ -364,9 +364,6 @@ Remote Desktop Connection only supports systems that use VNC.</string>
                     <property name="name">
                         <cstring>preferencesButton</cstring>
                     </property>
-                    <property name="enabled">
-                        <bool>false</bool>
-                    </property>
                     <property name="text">
                         <string>&amp;Preferences...</string>
                     </property>
@@ -473,22 +470,29 @@ Remote Desktop Connection only supports systems that use VNC.</string>
         <receiver>MainDialog</receiver>
         <slot>rescan()</slot>
     </connection>
+    <connection>
+        <sender>preferencesButton</sender>
+        <signal>clicked()</signal>
+        <receiver>MainDialog</receiver>
+        <slot>preferencesClicked()</slot>
+    </connection>
 </connections>
 <tabstops>
-    <tabstop>rescanButton</tabstop>
-    <tabstop>searchInput</tabstop>
-    <tabstop>scopeCombo</tabstop>
-    <tabstop>browsingView</tabstop>
     <tabstop>serverInput</tabstop>
     <tabstop>browseButton</tabstop>
     <tabstop>kActiveLabel2</tabstop>
     <tabstop>preferencesButton</tabstop>
     <tabstop>connectButton</tabstop>
     <tabstop>cancelButton</tabstop>
+    <tabstop>rescanButton</tabstop>
+    <tabstop>searchInput</tabstop>
+    <tabstop>scopeCombo</tabstop>
+    <tabstop>browsingView</tabstop>
 </tabstops>
 <includes>
-    <include location="local" impldecl="in implementation">kcombobox.h</include>
     <include location="local" impldecl="in declaration">kservicelocator.h</include>
+    <include location="local" impldecl="in implementation">kcombobox.h</include>
+    <include location="local" impldecl="in implementation">preferences.h</include>
     <include location="local" impldecl="in implementation">maindialog.ui.h</include>
 </includes>
 <variables>
@@ -499,6 +503,7 @@ Remote Desktop Connection only supports systems that use VNC.</string>
     <slot>toggleBrowsingArea()</slot>
     <slot>rescan()</slot>
     <slot>enableBrowsingArea( bool enable )</slot>
+    <slot>preferencesClicked()</slot>
 </slots>
 <layoutdefaults spacing="6" margin="11"/>
 <includehints>

@@ -56,6 +56,17 @@
                                 </column>
                                 <column>
                                     <property name="text">
+                                        <string>Type</string>
+                                    </property>
+                                    <property name="clickable">
+                                        <bool>true</bool>
+                                    </property>
+                                    <property name="resizable">
+                                        <bool>true</bool>
+                                    </property>
+                                </column>
+                                <column>
+                                    <property name="text">
                                         <string>Settings</string>
                                     </property>
                                     <property name="clickable">
@@ -65,28 +76,20 @@
                                         <bool>true</bool>
                                     </property>
                                 </column>
-                            <item>
-                                <property name="text">
-                                    <string>megan</string>
-                                </property>
-                                <property name="text">
-                                    <string>Some setting here... </string>
-                                </property>
-                                <property name="pixmap">
-                                    <pixmap></pixmap>
-                                </property>
-                                <property name="pixmap">
-                                    <pixmap></pixmap>
-                                </property>
-                            </item>
                                 <property name="name">
                                     <cstring>hostListView</cstring>
                                 </property>
                                 <property name="selectionMode" stdset="0">
                                     <enum>Multi</enum>
                                 </property>
+                                <property name="allColumnsShowFocus">
+                                    <bool>true</bool>
+                                </property>
                                 <property name="fullWidth">
                                     <bool>true</bool>
+                                </property>
+                                <property name="itemsMovable">
+                                    <bool>false</bool>
                                 </property>
                                 <property name="whatsThis" stdset="0">
                                     <string>This list shows all hosts that you have visited and a summary of your settings for them. If you want to reset the setting for a host, you can delete it using the buttons below. When you connect again you can then re-configure them.</string>
@@ -335,6 +338,9 @@
                     <property name="text">
                         <string>&amp;OK</string>
                     </property>
+                    <property name="default">
+                        <bool>true</bool>
+                    </property>
                 </widget>
                 <widget class="QPushButton">
                     <property name="name">
@@ -361,10 +367,51 @@
         <receiver>PreferencesDialog</receiver>
         <slot>reject()</slot>
     </connection>
+    <connection>
+        <sender>okButton</sender>
+        <signal>clicked()</signal>
+        <receiver>PreferencesDialog</receiver>
+        <slot>okClicked()</slot>
+    </connection>
+    <connection>
+        <sender>removeHostButton</sender>
+        <signal>clicked()</signal>
+        <receiver>PreferencesDialog</receiver>
+        <slot>removeHost()</slot>
+    </connection>
+    <connection>
+        <sender>removeAllButton</sender>
+        <signal>clicked()</signal>
+        <receiver>PreferencesDialog</receiver>
+        <slot>removeAllHosts()</slot>
+    </connection>
+    <connection>
+        <sender>hostListView</sender>
+        <signal>selectionChanged()</signal>
+        <receiver>PreferencesDialog</receiver>
+        <slot>adjustSize()</slot>
+    </connection>
 </connections>
+<includes>
+    <include location="global" impldecl="in implementation">kapplication.h</include>
+    <include location="global" impldecl="in implementation">kconfig.h</include>
+    <include location="global" impldecl="in implementation">klistview.h</include>
+    <include location="local" impldecl="in declaration">hostpreferences.h</include>
+    <include location="global" impldecl="in declaration">qvaluelist.h</include>
+    <include location="local" impldecl="in implementation">preferences.ui.h</include>
+</includes>
+<variables>
+    <variable>QValueList&lt;SmartPtr&lt;HostPref&gt; &gt; deletedHosts;</variable>
+</variables>
 <slots>
-    <slot>pushButton4_clicked()</slot>
+    <slot>okClicked()</slot>
+    <slot>removeHost()</slot>
+    <slot>removeAllHosts()</slot>
+    <slot>selectionChanged()</slot>
 </slots>
+<functions>
+    <function>init()</function>
+</functions>
 <layoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>klistview.h</includehint>

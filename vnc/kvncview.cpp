@@ -211,12 +211,15 @@ bool KVncView::start() {
 
 	if (!appDataConfigured) {
 		KConfig *config = KApplication::kApplication()->config();
+		config->setGroup("VncDefaultSettings");
+		bool showPrefs = config->readBoolEntry("vncShowHostPreferences", true);
+
 		HostPreferences hps(config);
 		SmartPtr<VncHostPref> hp = 
 			SmartPtr<VncHostPref>(hps.createHostPref(m_host, 
 								 VncHostPref::VncType));
 		int ci = hp->quality();
-		if (hp->askOnConnect()) {
+		if (showPrefs && hp->askOnConnect()) {
 			// show preferences dialog
 			VncHostPreferences vhp(0, "VncHostPreferencesDialog", true);
 			vhp.setCaption(i18n("VNC Host Preferences for %1").arg(m_host));

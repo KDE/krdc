@@ -19,7 +19,7 @@
 #include <kconfig.h>
 #include <klocale.h>
 
-const QString VncHostPref::VncType = "vnc";
+const QString VncHostPref::VncType = "VNC";
 
 VncHostPref::VncHostPref(KConfig *conf, const QString &host, const QString &type) :
 	HostPref(conf, host, type),
@@ -74,7 +74,8 @@ QString VncHostPref::prefDescription() const {
 	default:
 		Q_ASSERT(true);
 	}
-	return i18n("VNC Connection, Quality: %1").arg(q);
+	return i18n("Show Preferences: %1, Quality: %2")
+	  .arg(m_askOnConnect ? i18n("yes") : i18n("no")).arg(q);
 }
 
 void VncHostPref::setQuality(int q) {
