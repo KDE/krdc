@@ -1,3 +1,5 @@
+#ifndef VNCVIEWER_H
+#define VNCVIEWER_H
 /*
  *  Copyright (C) 2000, 2001 Const Kaplinsky.  All Rights Reserved.
  *  Copyright (C) 2000 Tridia Corporation.  All Rights Reserved.
@@ -174,4 +176,5 @@ extern void freeSocketsResources(void);
 
 #if(defined __cplusplus)
 }
+#endif
 #endif
