@@ -38,7 +38,8 @@ public:
 			const QString &protocol,
 			const QString &type, 
 			const QString &userid,
-			const QString &fullname) :
+			const QString &fullname,
+			const QString &desc) :
 		KListViewItem(v, host, 
 			      i18n("unknown"), 
 			      host, protocol),
@@ -51,6 +52,8 @@ public:
 			else if (type.lower() == "private") 
 				setText(1, i18n("Standalone Desktop"));
 		}
+		if (!desc.isNull())
+			setText(0, desc);
 		if ((!userid.isEmpty()) && (!fullname.isEmpty()))
 			setText(0, 
 				QString("%1 (%2)").arg(fullname).arg(userid));
@@ -177,7 +180,8 @@ void SrvLocNCDialog::foundService(QString url, int) {
 	new UrlListViewItem(browsingView, url, rx.cap(2), rx.cap(1),
 			    KServiceLocator::decodeAttributeValue(map["type"]), 
 			    KServiceLocator::decodeAttributeValue(map["username"]), 
-			    KServiceLocator::decodeAttributeValue(map["fullname"]));
+			    KServiceLocator::decodeAttributeValue(map["fullname"]),
+			    KServiceLocator::decodeAttributeValue(map["description"]));
 
 }
 
