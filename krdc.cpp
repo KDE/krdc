@@ -23,6 +23,7 @@
 #include <kdebug.h>
 #include <kapplication.h>
 #include <kcombobox.h>
+#include <kprocess.h>
 #include <qevent.h>
 #include <qsizepolicy.h>
 #include <qcolor.h>
@@ -95,6 +96,23 @@ KRDC::KRDC(WindowMode wm, const QString &host,
 	KStartupInfo::appStarted();
 }
 
+bool KRDC::startRDP(const QString &host, bool onlyFailOnCancel) {
+	KProcess proc;
+	proc << "rdesktop";
+	proc << KProcess::quote(host);
+	if(!proc.start(KProcess::Block)) {
+		KMessageBox::error(0,
+		   i18n("Couldn't open connection using rdesktop. Please ensure that rdesktop is installed."),
+				   i18n("Connection failed"));
+		if (!onlyFailOnCancel)
+			return false;
+		emit disconnectedError();
+		return true;
+	}
+	else
+		return true;	
+}
+
 bool KRDC::start(bool onlyFailOnCancel)
 {
 	QString userName, password;
@@ -102,6 +120,10 @@ bool KRDC::start(bool onlyFailOnCancel)
 	QString vncServerHost;
 	int vncServerPort = 5900;
 
+
+	if(m_host.startsWith("rdp://")) 
+		return startRDP(m_host.right(m_host.length() - 6),
+				onlyFailOnCancel);
 	if (!m_host.isNull()) {
 		if (!parseHost(m_host, vncServerHost, vncServerPort,
 			       userName, password)) {
@@ -131,6 +153,9 @@ bool KRDC::start(bool onlyFailOnCancel)
 
 		m_host = ncd.serverInput->currentText();
 		m_lastHost = m_host;
+		if(m_host.startsWith("rdp://")) 
+			return startRDP(m_host.right(m_host.length() - 6),
+					onlyFailOnCancel);
 		if (!parseHost(m_host, vncServerHost, vncServerPort,
 			       userName, password)) {
 			KMessageBox::error(0,

@@ -1,4 +1,4 @@
-<!DOCTYPE UI><UI version="3.0" stdsetdef="1">
+<!DOCTYPE UI><UI version="3.1" stdsetdef="1">
 <class>NewConnectionDialog</class>
 <widget class="QDialog">
     <property name="name">
@@ -8,7 +8,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>463</width>
+            <width>487</width>
             <height>332</height>
         </rect>
     </property>
@@ -194,7 +194,7 @@
                         <property name="clickable">
                             <bool>true</bool>
                         </property>
-                        <property name="resizeable">
+                        <property name="resizable">
                             <bool>true</bool>
                         </property>
                     </column>
@@ -205,7 +205,7 @@
                         <property name="clickable">
                             <bool>true</bool>
                         </property>
-                        <property name="resizeable">
+                        <property name="resizable">
                             <bool>true</bool>
                         </property>
                     </column>
@@ -216,7 +216,7 @@
                         <property name="clickable">
                             <bool>true</bool>
                         </property>
-                        <property name="resizeable">
+                        <property name="resizable">
                             <bool>true</bool>
                         </property>
                     </column>
@@ -227,7 +227,7 @@
                         <property name="clickable">
                             <bool>true</bool>
                         </property>
-                        <property name="resizeable">
+                        <property name="resizable">
                             <bool>true</bool>
                         </property>
                     </column>
@@ -350,7 +350,7 @@ Remote Desktop Connection only supports systems that use VNC.</string>
                 </font>
             </property>
             <property name="text">
-                <string>Enter the address and display number of the computer that you want to connect to, separated by a colon. Alternatively, browse the network and select a desktop to connect to. All VNC compatible servers will be supported.</string>
+                <string>Enter the address and display number of the computer that you want to connect to, separated by a colon. Alternatively, browse the network and select a desktop to connect to. All VNC or RDP compatible servers will be supported.</string>
             </property>
             <property name="alignment">
                 <set>WordBreak|AlignVCenter|AlignLeft</set>
@@ -590,4 +590,11 @@ Remote Desktop Connection only supports systems that use VNC.</string>
     <slot>enableBrowsingArea( bool enable )</slot>
 </slots>
 <layoutdefaults spacing="6" margin="11"/>
+<includehints>
+    <includehint>klineedit.h</includehint>
+    <includehint>kcombobox.h</includehint>
+    <includehint>klistview.h</includehint>
+    <includehint>kcombobox.h</includehint>
+    <includehint>klineedit.h</includehint>
+</includehints>
 </UI>

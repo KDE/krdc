@@ -110,6 +110,8 @@ public:
 	     const QString &encodings = QString::null,
 	     const QString &password = QString::null);
 	~KRDC();
+
+	bool startRDP(const QString &host, bool onlyFailOnCancel);
 	bool start(bool onlyFailOnCancel);
 
 	static void setLastHost(const QString &host);

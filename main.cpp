@@ -65,6 +65,8 @@ int main(int argc, char *argv[])
 		"(c) 1999, AT&T Laboratories Cambridge\n", 0, 0, 
 			      "tim@tjansen.de");
 	aboutData.addAuthor("Tim Jansen",0, "tim@tjansen.de");
+	aboutData.addCredit("Arend van Beelen jr.",
+			    I18N_NOOP("Initial RDP support"));
 	aboutData.addCredit("AT&T Laboratories Cambridge",
 			    I18N_NOOP("Original VNC viewer and protocol design"));
 	aboutData.addCredit("Const Kaplinsky",
