@@ -18,7 +18,7 @@ datadir = $(kde_datadir)/krdc/pics
 data_DATA = window_fullscreen.png window_nofullscreen.png \
             pinup.png pindown.png iconify.png close.png scale.png
 
-krdc_LDADD   = $(LIB_KDEUI) -ljpeg -lXext -lXxf86vm
+krdc_LDADD   = $(LIB_KDEUI) $(LIBJPEG) $(LIBXF86VIDMODE)
 krdc_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
 lnkdir = $(kde_appsdir)/Internet

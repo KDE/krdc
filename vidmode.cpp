@@ -15,13 +15,16 @@
  *                                                                         *
  ***************************************************************************/
 
-
+#include <config.h>
 #include <X11/Xlib.h>
+
+#ifdef HAVE_VIDMODE_EXTENSION
 #include <X11/extensions/xf86vmode.h>
-#include <stdio.h>
+#endif
 
 #include "vidmode.h"
 
+#ifdef HAVE_VIDMODE_EXTENSION
 
 void vidmodeNormalSwitch(Display *dpy, int oldResolution)
 {
@@ -117,6 +120,19 @@ int vidmodeFullscreenSwitch(Display *dpy, int sw, int sh, int &nx, int &ny)
 
 	return (cw << 16) + ch;
 }
+
+#else
+
+void vidmodeNormalSwitch(Display *dpy, int oldResolution)
+{
+}
+
+int vidmodeFullscreenSwitch(Display *dpy, int sw, int sh, int &nx, int &ny)
+{
+	return 0;
+}
+
+#endif
 
 void grabInput(Display *dpy, unsigned int winId) {
 	XGrabPointer(dpy, winId, True, 0,
