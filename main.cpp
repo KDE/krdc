@@ -61,7 +61,7 @@ int main(int argc, char *argv[])
 			      "tim@tjansen.de");
 	aboutData.addAuthor("Tim Jansen",0, "tim@tjansen.de");
 	aboutData.addCredit("AT&T Laboratories Cambridge",
-			    I18N_NOOP("original VNC viewer and protocol design"));
+			    I18N_NOOP("Original VNC viewer and protocol design"));
 	aboutData.addCredit("Const Kaplinsky",
 			    I18N_NOOP("TightVNC encoding"));
 	aboutData.addCredit("Tridia Corporation",

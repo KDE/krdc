@@ -299,7 +299,7 @@ void KVncView::customEvent(QCustomEvent *e)
 			break;
 		case ERROR_PROTOCOL:
 			KMessageBox::error(0, 
-					   i18n("Remote host uses a incompatible protocol."),
+					   i18n("Remote host is using an incompatible protocol."),
 					   i18n("Connection Failure"));
 			break;		
 		case ERROR_IO:
