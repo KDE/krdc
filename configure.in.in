@@ -9,6 +9,7 @@ AC_SUBST(LIBXF86VIDMODE)
 
 KDE_CHECK_SSL()
 
-if test "$have_ssl" != yes; then
+if test "$have_ssl" != yes || test "x$kde_use_qt_mac" = "xyes"; then
    DO_NOT_COMPILE="$DO_NOT_COMPILE krdc"
 fi
+
