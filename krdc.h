@@ -27,15 +27,22 @@
 #include <qtimer.h> 
 #include <qpixmap.h>
 #include "vnc/kvncview.h"
+#include "rdp/krdpview.h"
 #include "kfullscreenpanel.h"
 #include "keycapturedialog2.h"
-#include "rdpconnectingdialog.h"
 
 
 enum WindowMode {
 	WINDOW_MODE_AUTO,
 	WINDOW_MODE_NORMAL,
 	WINDOW_MODE_FULLSCREEN
+};
+
+// known protocols
+enum Protocol {
+	PROTOCOL_AUTO,
+	PROTOCOL_VNC,
+	PROTOCOL_RDP
 };
 
 // Overloaded QScrollView, to let mouse move events through to remote widget
@@ -56,7 +63,6 @@ private:
 	KProgressDialog *m_progressDialog; // dialog, displayed while connecting
 	KProgress *m_progress;             // progress bar for the dialog
 	KRemoteView *m_view;                  // the remote widget (e.g. KVncView)
-	RDPConnectingDialog *m_rdpConnDialog; // the rdp connection dialog
 
 	KeyCaptureDialog2 *m_keyCaptureDialog; // dialog for key capturing
 	KFullscreenPanel *m_fsToolbar;     // toolbar for fullscreen (0 in normal mode)
@@ -73,6 +79,7 @@ private:
 	
 	bool m_showProgress; // can disable showing the progress dialog temporary
 	QString m_host;      // host string as given from user
+        Protocol m_protocol; // the used protocol
 	Quality m_quality;   // current quality setting
 	QString m_encodings; // string containing the encodings, space separated,
 	                     // used for config before connection
@@ -90,7 +97,7 @@ private:
 	static int m_lastQuality;  // remembers last quality selection
 
 	void configureApp(Quality q);
-	bool parseHost(QString &s, QString &serverHost, int &serverPort,
+	bool parseHost(QString &s, Protocol &prot, QString &serverHost, int &serverPort,
 		       QString &userName, QString &password);
 
 	void repositionView(bool fullscreen);
@@ -117,7 +124,6 @@ public:
 	     const QString &password = QString::null);
 	~KRDC();
 
-	bool startRDP(const QString &host, bool onlyFailOnCancel);
 	bool start(bool onlyFailOnCancel);
 
 	static void setLastHost(const QString &host);
@@ -143,7 +149,6 @@ public slots:
 	void enableFullscreen(bool full = false);
 	void switchToNormal(bool scaling = false);
 	void switchToFullscreen(bool scaling = false);
-	void rdpExited(KProcess *);
 
 signals:
         void disconnected(); 

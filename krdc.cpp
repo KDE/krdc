@@ -78,12 +78,12 @@ KRDC::KRDC(WindowMode wm, const QString &host,
   m_scrollView(0),
   m_progressDialog(0),
   m_view(0),
-  m_rdpConnDialog(0),
   m_fsToolbar(0),
   m_toolbar(0),
   m_ftAutoHide(false),
   m_showProgress(false),
   m_host(host),
+  m_protocol(PROTOCOL_AUTO),
   m_quality(q),
   m_encodings(encodings),
   m_password(password),
@@ -105,46 +105,6 @@ KRDC::KRDC(WindowMode wm, const QString &host,
 	KStartupInfo::appStarted();
 }
 
-bool KRDC::startRDP(const QString &host, bool onlyFailOnCancel) {
-	KProcess proc;
-        
-	proc << "rdesktop";
-	proc << host;
-        connect(&proc, SIGNAL(processExited(KProcess *)),
-                this, SLOT(rdpExited(KProcess *)));
-	if(!proc.start()) {
-		KMessageBox::error(0,
-				   i18n("Couldn't start rdesktop. Please ensure that rdesktop is installed."),
-				   i18n("Connection failed"));
-		if (!onlyFailOnCancel)
-			return false;
-		emit disconnectedError();
-		return true;
-	}
-	else {
-		m_rdpConnDialog = new RDPConnectingDialog(this);
-		m_rdpConnDialog->exec();
-		if(proc.isRunning())                
-			proc.kill();
-		if(!proc.normalExit() || proc.exitStatus())
-			return false;                
-		return true;
-	}        
-} // startRDP
-
-void KRDC::rdpExited(KProcess *proc) {
-	if(!proc->normalExit())
-		KMessageBox::error(0,
-				   i18n("rdesktop exited unexpectedly."),
-				   i18n("Connection failed"));
-	else if(proc->exitStatus())
-		KMessageBox::error(0,
-				   i18n("rdesktop couldn't connect to the specified host."),
-				   i18n("Connection failed"));
-	if(m_rdpConnDialog)
-		m_rdpConnDialog->cancelButton_clicked();       
-} // rdpExited
-
 bool KRDC::start(bool onlyFailOnCancel)
 {
 	QString userName, password;
@@ -152,12 +112,12 @@ bool KRDC::start(bool onlyFailOnCancel)
 	QString serverHost;
 	int serverPort = 5900;
 
-
-	if(m_host.startsWith("rdp://")) 
-		return startRDP(m_host.right(m_host.length() - 6),
-				onlyFailOnCancel);
 	if (!m_host.isNull()) {
-		if (!parseHost(m_host, serverHost, serverPort,
+		if (m_host.startsWith("vnc://"))
+			m_protocol = PROTOCOL_VNC;
+		if (m_host.startsWith("rdp://"))
+			m_protocol = PROTOCOL_RDP;
+		if (!parseHost(m_host, m_protocol, serverHost, serverPort,
 			       userName, password)) {
 			KMessageBox::error(0,
 			   i18n("The entered host does not have the required form."),
@@ -185,10 +145,11 @@ bool KRDC::start(bool onlyFailOnCancel)
 
 		m_host = ncd.serverInput->currentText();
 		m_lastHost = m_host;
-		if(m_host.startsWith("rdp://")) 
-			return startRDP(m_host.right(m_host.length() - 6),
-					onlyFailOnCancel);
-		if (!parseHost(m_host, serverHost, serverPort,
+		if (m_host.startsWith("vnc://"))
+			m_protocol = PROTOCOL_VNC;
+		if (m_host.startsWith("rdp://"))
+			m_protocol = PROTOCOL_RDP;
+		if (!parseHost(m_host, m_protocol, serverHost, serverPort,
 			       userName, password)) {
 			KMessageBox::error(0,
 					   i18n("The entered host does not have the required form."),
@@ -225,9 +186,12 @@ bool KRDC::start(bool onlyFailOnCancel)
 
 	m_scrollView = new QScrollView2(this, "remote scrollview");
 	m_scrollView->setFrameStyle(QFrame::NoFrame);
-	m_view = new KVncView(this, 0, serverHost, serverPort,
-			      m_password.isNull() ? password : m_password,
-			      &m_appData);
+	if(m_protocol == PROTOCOL_AUTO || m_protocol == PROTOCOL_VNC)
+		m_view = new KVncView(this, 0, serverHost, serverPort,
+				      m_password.isNull() ? password : m_password,
+				      &m_appData);
+	if(m_protocol == PROTOCOL_RDP)
+		m_view = new KRdpView(this, 0, serverHost, serverPort);
 	m_scrollView->addChild(m_view);
 	QWhatsThis::add(m_view, i18n("Here you can see the remote desktop. If the other side allows you to control it, you can also move the mouse, click or enter keystrokes. If the content does not fit your screen, click on the toolbar's full screen button or scale button. To end the connection, just close the window."));
 
@@ -364,16 +328,22 @@ void KRDC::configureApp(Quality q) {
 	m_appData.copyRectDelay = 0;
 }
 
-bool KRDC::parseHost(QString &str, QString &serverHost, int &serverPort,
+bool KRDC::parseHost(QString &str, Protocol &prot, QString &serverHost, int &serverPort,
 		     QString &userName, QString &password) {
 	QString s = str;
 	userName = QString::null;
 	password = QString::null;
 
-	if (s.startsWith(":"))
-		s = "localhost" + s;
-	if (!s.startsWith("vnc://"))
-		s = "vnc://" + s;
+	if (prot == PROTOCOL_AUTO || prot == PROTOCOL_VNC) {
+		if (s.startsWith(":"))
+			s = "localhost" + s;
+		if (!s.startsWith("vnc://"))
+			s = "vnc://" + s;
+	}
+	if (prot == PROTOCOL_RDP) {
+		if (!s.startsWith("rdp://"))
+			s = "rdp://" + s;
+	}
 
 	KURL url(s);
 	if (url.isMalformed())
@@ -382,17 +352,25 @@ bool KRDC::parseHost(QString &str, QString &serverHost, int &serverPort,
 	if (serverHost.isEmpty())
 		serverHost = "localhost";
 	serverPort = url.port();
-	if (serverPort < 100)
+	if ((prot == PROTOCOL_AUTO || prot == PROTOCOL_VNC) && serverPort < 100)
 		serverPort += 5900;
 	if (url.hasUser())
 		userName = url.user();
 	if (url.hasPass())
 		password = url.pass();
 
-	if (url.hasUser())
-		str = QString("%1@%2:%3").arg(userName).arg(serverHost).arg(url.port());
-	else
-		str = QString("%1:%2").arg(serverHost).arg(url.port());
+	if (url.port()) {
+		if (url.hasUser())
+			str = QString("%1@%2:%3").arg(userName).arg(serverHost).arg(url.port());
+		else
+			str = QString("%1:%2").arg(serverHost).arg(url.port());
+	}
+	else {
+		if (url.hasUser())
+			str = QString("%1@%2").arg(userName).arg(serverHost);
+		else
+			str = QString("%1").arg(serverHost);
+	}
 	return true;
 }
 

@@ -174,7 +174,7 @@ void SrvLocNCDialog::rescan() {
 		filter = "(|(|(description=*"+ef+"*)(username=*"+ef+"*))(fullname=*"+ef+"*))";
 	}
 
-	if (!m_locator->findServices("service:remotedesktop.kde:vnc",
+	if (!m_locator->findServices("service:remotedesktop.kde",
 				     filter,
 				     m_scope)) {
 		kdWarning() << "Failure in findServices()" << endl;

@@ -20,6 +20,8 @@
 #ifndef EVENTS_H
 #define EVENTS_H
 
+#include <qevent.h>
+
 /**
  * State of the connection. The state of the connection is returned
  * by @ref KRemoteView::status(). 

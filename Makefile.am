@@ -1,6 +1,6 @@
-KDE_CXXFLAGS = $(USE_THREADS)
+KDE_CXXFLAGS = $(USE_THREADS) -DWITH_OPENSSL
 
-SUBDIRS = vnc
+SUBDIRS = vnc rdp
 
 METASOURCES = AUTO
 
@@ -8,7 +8,7 @@ bin_PROGRAMS = krdc
 krdc_SOURCES = main.cpp krdc.cpp vidmode.cpp kfullscreenpanel.cpp \
   newconnectiondialog.ui fullscreentoolbar.ui toolbar.ui \
   kservicelocator.cpp srvlocncdialog.cpp keycapturedialog.ui \
-  keycapturedialog2.cpp rdpconnectingdialog.ui kremoteview.cpp
+  keycapturedialog2.cpp kremoteview.cpp
 
 noinst_HEADERS = main.h krdc.h vidmode.h kfullscreenpanel.h events.h \
    newconnectiondialog.ui.h kservicelocator.h srvlocncdialog.h \
@@ -21,8 +21,8 @@ datadir = $(kde_datadir)/krdc/pics
 data_DATA =  pointcursor.png pointcursormask.png pinup.png pindown.png 
 
 
-krdc_LDADD   = vnc/libvnc.la $(LIB_KDEUI) $(LIBXF86VIDMODE) $(LIB_SLP)
-krdc_LDFLAGS = $(all_libraries) $(KDE_RPATH)
+krdc_LDADD   = vnc/libvnc.la rdp/librdp.la $(LIB_KDEUI) $(LIBXF86VIDMODE) $(LIB_SLP) -L/usr/X11R6/lib -lX11 $(LIBSSL)
+krdc_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(SSL_LDFLAGS) 
 
 lnkdir = $(kde_appsdir)/Internet
 lnk_DATA = krdc.desktop

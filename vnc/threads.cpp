@@ -293,7 +293,7 @@ void WriterThread::run() {
 		    (inputEvents.size() == 0) &&
 		    (clientCut.isNull())) {
 			if (!m_waiter.wait(&m_lock, WAIT_PERIOD))
-				m_incrementalUpdateRQ = true;				
+				m_incrementalUpdateRQ = true;
 			m_lock.unlock();
 		}
 		else {

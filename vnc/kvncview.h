@@ -24,8 +24,8 @@
 #include <qcursor.h>
 
 #include "pointerlatencyometer.h"
-#include "threads.h"
 #include "vnctypes.h"
+#include "threads.h"
 
 enum DotCursorState {
 	DOT_CURSOR_ON,

@@ -59,14 +59,16 @@ int main(int argc, char *argv[])
 {
 	KAboutData aboutData( "krdc", I18N_NOOP("Remote Desktop Connection"),
 			      VERSION, description, KAboutData::License_GPL,
-		"(c) 2002, Tim Jansen"
-		"(c) 2000-2001, Const Kaplinsky\n"
+		"(c) 2001-2003, Tim Jansen"
+		"(c) 2002-2003, Arend van Beelen jr."
+		"(c) 2000-2002, Const Kaplinsky\n"
 		"(c) 2000, Tridia Corporation\n"
-		"(c) 1999, AT&T Laboratories Cambridge\n", 0, 0, 
+		"(c) 1999, AT&T Laboratories Cambridge\n"
+		"(c) 1999-2003, Matthew Chapman\n", 0, 0, 
 			      "tim@tjansen.de");
 	aboutData.addAuthor("Tim Jansen",0, "tim@tjansen.de");
-	aboutData.addCredit("Arend van Beelen jr.",
-			    I18N_NOOP("Initial RDP support"));
+	aboutData.addAuthor("Arend van Beelen jr.",
+			    I18N_NOOP("RDP backend"));
 	aboutData.addCredit("AT&T Laboratories Cambridge",
 			    I18N_NOOP("Original VNC viewer and protocol design"));
 	aboutData.addCredit("Const Kaplinsky",

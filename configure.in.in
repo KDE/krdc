@@ -3,3 +3,10 @@ KDE_CHECK_HEADER(X11/extensions/xf86vmode.h, [
 	LIBXF86VIDMODE="-lXext -lXxf86vm"
 ])
 AC_SUBST(LIBXF86VIDMODE)
+
+KDE_CHECK_SSL()
+
+if test "$have_ssl" != yes; then
+	AC_MSG_ERROR([OpenSSL not found])
+fi
+
