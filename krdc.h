@@ -69,6 +69,7 @@ private:
 	Quality m_quality;   // current quality setting
 	QString m_encodings; // string containing the encodings, space separated,
 	                     // used for config before connection
+	QString m_password;  // if not null, contains the password to use
 	AppData m_appData;   // various config stuff, used before connection
 
 	WindowMode m_isFullscreen;    // fs/normal state
@@ -106,7 +107,8 @@ public:
 	KRDC(WindowMode wm = WINDOW_MODE_AUTO, 
 	     const QString &host = QString::null, 
 	     Quality q = QUALITY_UNKNOWN,
-	     const QString &encodings = QString::null);
+	     const QString &encodings = QString::null,
+	     const QString &password = QString::null);
 	~KRDC();
 	bool start(bool onlyFailOnCancel);
 

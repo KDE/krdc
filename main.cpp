@@ -20,9 +20,12 @@
 #include <kaboutdata.h>
 #include <kapplication.h>
 #include <klocale.h>
+#include <kmessagebox.h>
 #include <kdebug.h>
 #include <qwindowdefs.h>
 #include <qtimer.h>
+#include <qfile.h>
+#include <qtextstream.h>
 
 #include "../config.h"
 #include "main.h" 
@@ -45,6 +48,8 @@ static KCmdLineOptions options[] =
 	{ "high-quality", I18N_NOOP("High quality mode, default (Hextile Encoding)."), 0 }, 
 	{ "e", 0, 0 },
 	{ "encodings ", I18N_NOOP("Override encoding list (e.g. 'hextile raw')."), 0 }, 
+	{ "p", 0, 0 },
+	{ "password-file ", I18N_NOOP("Provide the password in a file."), 0 }, 
 	{ "+[host]", I18N_NOOP("The name of the host, e.g. 'localhost:1'."), 0 },
 	{ 0, 0, 0 }
 };
@@ -73,6 +78,7 @@ int main(int argc, char *argv[])
 
 	Quality quality = QUALITY_MEDIUM;
 	QString encodings = QString::null;
+	QString password = QString::null;
 	WindowMode wm = WINDOW_MODE_AUTO;
 
 	KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
@@ -94,9 +100,20 @@ int main(int argc, char *argv[])
 	if (args->isSet("encodings"))
 		encodings = args->getOption("encodings");
 
+	if (args->isSet("password-file")) {
+		QString passwordFile = args->getOption("password-file");
+		QFile f(passwordFile);
+		if (!f.open(IO_ReadOnly)) {
+			KMessageBox::error(0, i18n("The password file '%1' does not exist.").arg(passwordFile));
+			return 1;
+		}
+		password = QTextStream(&f).readLine();
+		f.close();
+	}
+
 	if (args->count() > 0) {
 		QString host = args->arg(0);
-		krdc = new KRDC(wm, host, quality, encodings);
+		krdc = new KRDC(wm, host, quality, encodings, password);
 		a.setMainWidget(krdc);
 		QObject::connect(krdc, SIGNAL(disconnected()), 
 				 &a, SLOT(quit()));
@@ -109,15 +126,17 @@ int main(int argc, char *argv[])
 		return a.exec();
 	}
 
-	MainController mc(&a, wm, encodings);
+	MainController mc(&a, wm, encodings, password);
 	return mc.main();
 }
 
 MainController::MainController(KApplication *app, WindowMode wm,
-			       const QString &encodings) :
+			       const QString &encodings,
+			       const QString &password) :
 	m_krdc(0),
         m_windowMode(wm),
         m_encodings(encodings),
+        m_password(password),
 	m_app(app) {
 }
 
@@ -140,7 +159,7 @@ void MainController::errorRestartRequested() {
 
 bool MainController::start() {
 	m_krdc = new KRDC(m_windowMode, QString::null, 
-			  QUALITY_UNKNOWN, m_encodings);
+			  QUALITY_UNKNOWN, m_encodings, m_password);
 	m_app->setMainWidget(m_krdc);
 
 	QObject::connect(m_krdc, SIGNAL(disconnected()), 

@@ -64,7 +64,8 @@ QString KRDC::m_lastHost = "";
 int KRDC::m_lastQuality = 0;
 
 KRDC::KRDC(WindowMode wm, const QString &host,
-	   Quality q, const QString &encodings) :
+	   Quality q, const QString &encodings,
+	   const QString &password) :
   QWidget(0, 0, Qt::WStyle_ContextHelp),
   m_layout(0),
   m_scrollView(0),
@@ -77,6 +78,7 @@ KRDC::KRDC(WindowMode wm, const QString &host,
   m_host(host),
   m_quality(q),
   m_encodings(encodings),
+  m_password(password),
   m_isFullscreen(wm),
   m_oldResolution(0),
   m_fullscreenMinimized(false),
@@ -167,7 +169,8 @@ bool KRDC::start(bool onlyFailOnCancel)
 
 	m_scrollView = new QScrollView2(this, "remote scrollview");
 	m_scrollView->setFrameStyle(QFrame::NoFrame);
-	m_view = new KVncView(this, 0, vncServerHost, vncServerPort, password,
+	m_view = new KVncView(this, 0, vncServerHost, vncServerPort, 
+			      m_password.isNull() ? password : m_password,
 			      &m_appData);
 	m_scrollView->addChild(m_view);
 	QWhatsThis::add(m_view, i18n("Here you can see the remote desktop. If the other side allows you to control it, you can also move the mouse, click or enter keystrokes. If the content does not fit your screen, click on the toolbar's full screen button or scale button. To end the connection, just close the window."));
