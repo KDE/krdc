@@ -20,38 +20,62 @@
 #ifndef KRDPVIEW_H
 #define KRDPVIEW_H
 
+#include <qxembed.h>
+
 #include "kremoteview.h"
-#include "constants.h"
-#include "threads.h"
+
+#define TCP_PORT_RDP 3389
+#define RDP_LOGON_NORMAL 0x33
+
+class KProcess;
+class KRdpView;
+
+class RdpContainer : public QXEmbed
+{
+	Q_OBJECT
+
+	friend class KRdpView;
+
+	public:
+		RdpContainer(QWidget *parent = 0, const char *name = 0, WFlags f = 0);
+		~RdpContainer();
+
+	signals:
+		void newEmbeddedWindow(WId window);
+
+	protected:
+		virtual void windowChanged(WId window);
+		virtual bool x11Event(XEvent *e);
+
+	private:
+		bool m_viewOnly;                   // if set: ignore all input
+};
 
 class KRdpView : public KRemoteView
 {
-	Q_OBJECT 
+	Q_OBJECT
 
-	friend class RdpControllerThread;
-	friend class RdpWriterThread;
-    
 	public:
 		// constructor and destructor
-		KRdpView(QWidget *parent = 0, const char *name = 0, 
+		KRdpView(QWidget *parent = 0, const char *name = 0,
 		         const QString &host = QString(""), int port = TCP_PORT_RDP,
-		         const QString &user = QString(""), const QString &password = QString(""), 
+		         const QString &user = QString(""), const QString &password = QString(""),
 		         int flags = RDP_LOGON_NORMAL, const QString &domain = QString(""),
 		         const QString &shell = QString(""), const QString &directory = QString(""));
 		virtual ~KRdpView();
-    
+
 		// functions regarding the window
 		virtual QSize framebufferSize();         // returns the size of the remote view
 		QSize sizeHint();                        // returns the suggested size
 		virtual bool viewOnly();
-        
+
 		// functions regarding the connection
 		virtual void startQuitting();            // start closing the connection
 		virtual bool isQuitting();               // are we currently closing the connection?
 		virtual QString host();                  // return the host we're connected to
 		virtual int port();                      // return the port number we're connected on
 		virtual bool start();                    // open a connection
-    
+
 	public slots:
 		virtual void switchFullscreen(bool on);
 		virtual void pressKey(XEvent *k);        // send a generated key to the server
@@ -61,7 +85,7 @@ class KRdpView : public KRemoteView
 		// properties used for setting up the connection
 		QString  m_name;       // name of the connection
 		QString  m_host;       // the host to connect to
-		int      m_port;       // the port on the host   
+		int      m_port;       // the port on the host
 		QString  m_user;       // the user to use to log in
 		QString  m_password;   // the password to use
 		int      m_flags;      // flags which determine how the connection is set up
@@ -70,19 +94,17 @@ class KRdpView : public KRemoteView
 		QString  m_directory;  // the working directory on the server
 
 		// other properties
-		int m_buttonMask;
-		volatile bool m_quitFlag;          // if set: all threads should die ASAP    
-		bool m_viewOnly;                   // if set: ignore all input
+		bool    m_quitFlag;                // if set: die
+		QString m_clientVersion;           // version number returned by rdesktop
+		RdpContainer *m_container;         // container for the rdesktop window
+		KProcess *m_process;               // rdesktop process
 
-		// threads
-		RdpControllerThread m_cthread;     // this is the thread that communicates with the RDP server
-		RdpWriterThread m_wthread;         // this is the thread that communicates with the user
-    
 	private slots:
-
-	protected:
-		void customEvent(QCustomEvent *e);       // receives custom events
-		bool x11Event(XEvent *e);                // captures X11 events
+		void connectionOpened(WId window); // called if rdesktop started
+		void connectionClosed();           // called if rdesktop quits
+		void processDied(KProcess *);      // called if rdesktop dies
+		void receivedStderr(KProcess *proc, char *buffer, int buflen);
+		                                   // catches rdesktop debug output
 };
 
 #endif

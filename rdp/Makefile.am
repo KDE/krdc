@@ -1,37 +1,11 @@
-# kdelibs/kio/kssl/Makefile.am says this about OpenSSL headers:
-# don't change the order of this one. it breaks when openssl is in /usr/include
-# and the distro's KDE is there too, but the current "devel" KDE prefix is
-# somewhere else. Another option for the future (needs testing) would be to
-# change SSL_INCLUDES to .../include/openssl and make the source use #include <f
-# instead of #include <openssl/foo.h>
-INCLUDES=-I$(top_srcdir)/krdc $(all_includes) $(SSL_INCLUDES)
-
-KDE_CXXFLAGS = $(USE_THREADS)
+INCLUDES=-I$(top_srcdir)/krdc $(all_includes)
 
 METASOURCES = AUTO
 
 noinst_LTLIBRARIES = librdp.la
 
-librdp_la_SOURCES = threads.cpp bitmap.c cache.c ewmhints.c iso.c krdpview.cpp licence.c \
-                    mcs.c orders.c rdesktop.c rdp.c rdphostpref.cpp secure.c \
-                    tcp.c xkeymap.c xwin.c rdpprefs.ui
+librdp_la_SOURCES = krdpview.cpp rdphostpref.cpp rdpprefs.ui
 
-noinst_HEADERS = krdpview.h constants.h orders.h parse.h \
-                 proto.h rdesktop.h rdphostpref.h scancodes.h threads.h types.h
-librdp_la_LIBADD   = $(LIB_KDEUI) $(LIBJPEG) $(LIBSSL) 
-librdp_la_LDFLAGS = $(all_libraries) $(SSL_LDFLAGS) $(KDE_RPATH)
-
-keymapdir = $(kde_datadir)/krdc/rdp-keymaps
-
-install-data-local:
-	$(mkinstalldirs) $(DESTDIR)$(keymapdir)
-	for file in $(srcdir)/keymaps/*; do \
-		if test -f $$file && ! test -x $$file; then \
-		   $(INSTALL_DATA) $$file $(DESTDIR)$(keymapdir)/`basename $$file`;\
-		fi \
-	done
-
-uninstall-local:
-	rm -r $(DESTDIR)$(kde_datadir)/krdc/rdp-keymaps/$$file
-
-AM_CFLAGS = -DWITH_OPENSSL -DKEYMAP_PATH=\"$(keymapdir)/\"
+noinst_HEADERS = krdpview.h rdphostpref.h
+librdp_la_LIBADD   = $(LIB_KDEUI) $(LIBJPEG)
+librdp_la_LDFLAGS = $(all_libraries) $(KDE_RPATH)

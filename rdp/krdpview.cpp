@@ -19,37 +19,65 @@
      For any questions, comments or whatever, you may mail me at: arend@auton.nl
 */
 
+#include <kdialogbase.h>
 #include <klocale.h>
 #include <kmessagebox.h>
-#include <kdialogbase.h>
+#include <kprocess.h>
 
 #include <qvbox.h>
+#include <qxembed.h>
 
 #include <X11/Xlib.h>
 #include <X11/keysym.h>
 
 #undef Bool
 
-#include "events.h"
 #include "krdpview.h"
-#include "rdesktop.h"
 #include "rdphostpref.h"
 #include "rdpprefs.h"
 
-// global variables from rdesktop
-extern int width;           // width of the remote desktop
-extern int height;          // height of the remote desktop
-extern Atom protocol_atom;  // used to handle the WM_DELETE_WINDOW protocol
-extern BOOL fullscreen;     // are we in fullscreen mode?
-extern char keymapname[16];
-
 bool rdpAppDataConfigured = false;
-
 
 static KRdpView *krdpview;
 
+RdpContainer::RdpContainer(QWidget *parent, const char *name, WFlags f) :
+  QXEmbed(parent, name, f),
+  m_viewOnly(false)
+{
+}
+
+RdpContainer::~RdpContainer()
+{
+}
+
+void RdpContainer::windowChanged(WId window)
+{
+	if(window == 0)
+	{
+		emit embeddedWindowDestroyed();
+	}
+	else
+	{
+		emit newEmbeddedWindow(window);
+	}
+}
+
+bool RdpContainer::x11Event(XEvent *e)
+{
+	// FIXME: mouse events still get through in view-only
+	if(m_viewOnly && (e->type == KeyPress || e->type == KeyRelease || e->type == ButtonPress ||
+	                  e->type == ButtonRelease || e->type == MotionNotify || e->type == FocusIn ||
+	                  e->type == FocusOut || e->type == EnterNotify || e->type == LeaveNotify))
+	{
+		return true;
+	}
+
+	return QXEmbed::x11Event(e);
+}
+
+
 // constructor
-KRdpView::KRdpView(QWidget *parent, const char *name, 
+KRdpView::KRdpView(QWidget *parent, const char *name,
                    const QString &host, int port,
                    const QString &user, const QString &password,
                    int flags, const QString &domain,
@@ -64,28 +92,31 @@ KRdpView::KRdpView(QWidget *parent, const char *name,
   m_domain(domain),
   m_shell(shell),
   m_directory(directory),
-  m_buttonMask(0),
   m_quitFlag(false),
-  m_viewOnly(false),
-  m_cthread(this, m_wthread, m_quitFlag),
-  m_wthread(this, m_quitFlag)
+  m_process(NULL)
 {
 	krdpview = this;
-	setFixedSize(16,16);
+	setFixedSize(16, 16);
+	if(m_port == 0)
+	{
+		m_port = TCP_PORT_RDP;
+	}
+
+	m_container = new RdpContainer(this);
 }
 
 // destructor
 KRdpView::~KRdpView()
 {
+	m_container->releaseKeyboard();
 	startQuitting();
-	m_cthread.wait();
-	m_wthread.wait();
+	delete m_container;
 }
 
 // returns the size of the framebuffer
 QSize KRdpView::framebufferSize()
 {
-	return QSize(::width, ::height);
+	return m_container->sizeHint();
 }
 
 // returns the suggested size
@@ -98,8 +129,10 @@ QSize KRdpView::sizeHint()
 void KRdpView::startQuitting()
 {
 	m_quitFlag = true;
-	m_wthread.kick();
-	m_cthread.kick();
+	if(m_process != NULL)
+	{
+		m_container->sendDelete();
+	}
 }
 
 // are we currently closing the connection?
@@ -122,7 +155,7 @@ int KRdpView::port()
 
 // open a connection
 bool KRdpView::start()
-{ 
+{
 	SmartPtr<RdpHostPref> hp, rdpDefaults;
 
 	if(!rdpAppDataConfigured)
@@ -166,104 +199,110 @@ bool KRdpView::start()
 		}
 	}
 
-	// apply settings
-	::width = hp->width();
-	::height = hp->height();
-	strcpy(keymapname, hp->layout().latin1());
+	m_container->show();
 
-	// start the connect thread
+	m_process = new KProcess(m_container);
+	*m_process << "rdesktop";
+	*m_process << "-g" << (QString::number(hp->width()) + "x" + QString::number(hp->height()));
+	*m_process << "-k" << hp->layout();
+	if(!m_user.isEmpty())     { *m_process << "-u" << m_user; }
+	if(!m_password.isEmpty()) { *m_process << "-p" << m_password; }
+	*m_process << "-X" << ("0x" + QString::number(m_container->winId(), 16));
+	*m_process << (m_host + ":" + QString::number(m_port));
+	connect(m_process, SIGNAL(processExited(KProcess *)), SLOT(processDied(KProcess *)));
+	connect(m_process, SIGNAL(receivedStderr(KProcess *, char *, int)), SLOT(receivedStderr(KProcess *, char *, int)));
+	connect(m_container, SIGNAL(embeddedWindowDestroyed()), SLOT(connectionClosed()));
+	connect(m_container, SIGNAL(newEmbeddedWindow(WId)), SLOT(connectionOpened(WId)));
+	if(!m_process->start(KProcess::NotifyOnExit, KProcess::Stderr))
+	{
+		KMessageBox::error(0, i18n("Couldn't start rdesktop. Make sure rdesktop is properly installed."),
+		                      i18n("rdesktop Failure"));
+		return false;
+	}
+
 	setStatus(REMOTE_VIEW_CONNECTING);
-	m_cthread.start();
+
 	return true;
 }
 
-void KRdpView::switchFullscreen(bool on)
+void KRdpView::switchFullscreen(bool /*on*/)
 {
-	fullscreen = (on ? True : False);
-
-	if(on == false)
-	{
-		grabKeyboard();
-	}
+	m_container->grabKeyboard();
 }
 
 // captures pressed keys
 void KRdpView::pressKey(XEvent *e)
 {
-	m_wthread.queueX11Event(e);
+	m_container->x11Event(e);
+	m_container->grabKeyboard();
 }
 
-bool KRdpView::viewOnly() {
-	return m_viewOnly;
-}
-
-void KRdpView::setViewOnly(bool s) {
-	m_viewOnly = s;
-}
-
-// receive a custom event
-void KRdpView::customEvent(QCustomEvent *e)
+bool KRdpView::viewOnly()
 {
-	if(e->type() == ScreenResizeEventType)
+	return m_container->m_viewOnly;
+}
+
+void KRdpView::setViewOnly(bool s)
+{
+	m_container->m_viewOnly = s;
+}
+
+void KRdpView::connectionOpened(WId /*window*/)
+{
+	QSize size = m_container->sizeHint();
+
+	setStatus(REMOTE_VIEW_CONNECTED);
+	setFixedSize(size);
+	m_container->setFixedSize(size);
+	emit changeSize(size.width(), size.height());
+	emit connected();
+	setFocus();
+}
+
+void KRdpView::connectionClosed()
+{
+	emit disconnected();
+	setStatus(REMOTE_VIEW_DISCONNECTED);
+	m_quitFlag = true;
+}
+
+void KRdpView::processDied(KProcess */*proc*/)
+{
+	if(m_status == REMOTE_VIEW_CONNECTING)
 	{
-		setFixedSize(::width, ::height);
-		emit changeSize(::width, ::height);
-	}
-	else if(e->type() == DesktopInitEventType)
-	{  
-		m_cthread.desktopInit();
-	}
-	else if(e->type() == StatusChangeEventType)
-	{  
-		StatusChangeEvent *sce = (StatusChangeEvent *) e;
-		setStatus(sce->status());
-		if(m_status == REMOTE_VIEW_CONNECTED)
-		{
-			emit connected();
-			setFocus();
-			setMouseTracking(true);
-		}
-		else if(m_status == REMOTE_VIEW_DISCONNECTED)
-		{
-			setMouseTracking(false);
-			emit disconnected();
-		}
-	}
-	else if(e->type() == FatalErrorEventType)
-	{
-		FatalErrorEvent *fee = (FatalErrorEvent*) e;
 		setStatus(REMOTE_VIEW_DISCONNECTED);
-		switch(fee->errorCode())
-		{ 
-			case ERROR_CONNECTION:
-				KMessageBox::error(0, i18n("Connection attempt to host failed."),
-				                      i18n("Connection Failure"));
-				break;
-			default:
-				KMessageBox::error(0, i18n("Unknown error."),
-				                      i18n("Unknown Error"));
-				break;
+		if(m_clientVersion.isEmpty())
+		{
+			KMessageBox::error(0, i18n("Connection attempt to host failed."),
+			                      i18n("Connection Failure"));
+		}
+		else
+		{
+			// FIXME: rdesktop 1.3.2 (or maybe 1.4.0) should be released by the time KDE 3.3 is released
+			KMessageBox::error(0, i18n("The version of rdesktop you're using (%1) is too old.\n"
+			                           "rdesktop 1.3.2 or greater is required. A working patch for "
+			                           "rdesktop 1.3.1 can be found in KDE CVS.").arg(m_clientVersion),
+			                      i18n("rdesktop Failure"));
 		}
 		emit disconnectedError();
 	}
 }
 
-// captures X11 events
-bool KRdpView::x11Event(XEvent *e)
+void KRdpView::receivedStderr(KProcess */*proc*/, char *buffer, int /*buflen*/)
 {
-	if(e->type == KeyPress || e->type == KeyRelease || e->type == ButtonPress || e->type == ButtonRelease ||
-	   e->type == MotionNotify || e->type == FocusIn || e->type == FocusOut || e->type == EnterNotify ||
-	   e->type == LeaveNotify || e->type == Expose || e->type == MappingNotify || 
-	   e->type == ClientMessage && e->xclient.message_type == protocol_atom)
+	QString output(buffer);
+	QString line;
+	int i = 0;
+	while(!(line = output.section('\n', i, i)).isEmpty())
 	{
-		if ((!m_viewOnly) || e->type == Expose || e->type == MappingNotify || 
-		    e->type == ClientMessage && e->xclient.message_type == protocol_atom) 
-			m_wthread.queueX11Event(e);
-		if(e->type != MotionNotify)
-			return true;
+		if(line.startsWith("Version "))
+		{
+			m_clientVersion = line.section(' ', 1, 1);
+			m_clientVersion = m_clientVersion.left(m_clientVersion.length() - 1);
+			return;
+		}
+		i++;
 	}
-	
-	return QWidget::x11Event(e);
 }
 
 #include "krdpview.moc"
