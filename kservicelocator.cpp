@@ -433,12 +433,14 @@ bool KServiceLocatorPrivate::ensureOpen() {
 
 	if (m_opened)
 		return true;
-
+qDebug("opening... ");
 	e = SLPOpen(m_lang.latin1(), SLP_FALSE, &m_handle);
 	if (e != SLP_OK) {
+qDebug("ooooops!... ");
 		kdError() << "KServiceLocator: error while opening:" << e <<endl;
 		return false;
 	}
+qDebug("done... ");
 	m_opened = true;
 	return true;
 }

@@ -130,6 +130,8 @@ int KRdpView::port()
 // open a connection
 bool KRdpView::start()
 { 
+	setStatus(REMOTE_VIEW_CONNECTING);
+
 	// start the connect thread
 	m_cthread.start();
 	return true;

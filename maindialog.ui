@@ -1,15 +1,15 @@
 <!DOCTYPE UI><UI version="3.1" stdsetdef="1">
-<class>NewConnectionDialog</class>
+<class>MainDialog</class>
 <widget class="QDialog">
     <property name="name">
-        <cstring>NewConnectionDialog</cstring>
+        <cstring>MainDialog</cstring>
     </property>
     <property name="geometry">
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>487</width>
-            <height>332</height>
+            <width>503</width>
+            <height>352</height>
         </rect>
     </property>
     <property name="sizePolicy">
@@ -159,7 +159,7 @@
                                 </sizepolicy>
                             </property>
                             <property name="text">
-                                <string>Sco&amp;pe:</string>
+                                <string>Scop&amp;e:</string>
                             </property>
                             <property name="buddy" stdset="0">
                                 <cstring>scopeCombo</cstring>
@@ -336,134 +336,41 @@ Remote Desktop Connection only supports systems that use VNC.</string>
                 </widget>
             </hbox>
         </widget>
-        <widget class="QLabel">
+        <widget class="KActiveLabel">
             <property name="name">
-                <cstring>serverDescLabel</cstring>
+                <cstring>kActiveLabel2</cstring>
             </property>
             <property name="sizePolicy">
                 <sizepolicy>
-                    <hsizetype>5</hsizetype>
+                    <hsizetype>7</hsizetype>
                     <vsizetype>0</vsizetype>
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
                 </sizepolicy>
             </property>
-            <property name="font">
-                <font>
-                </font>
-            </property>
             <property name="text">
-                <string>Enter the address and display number of the computer that you want to connect to, separated by a colon. Alternatively, browse the network and select a desktop to connect to. All VNC or RDP compatible servers will be supported.</string>
-            </property>
-            <property name="alignment">
-                <set>WordBreak|AlignVCenter|AlignLeft</set>
-            </property>
-            <property name="wordwrap" stdset="0">
+                <string>Enter the address of the computer to connect to, or browse the network and select one. VNC and RDP compatible servers will be supported. &lt;a href="whatsthis:&lt;h3&gt;Examples&lt;/h3&gt;&lt;table&gt;&lt;tr&gt;&lt;td&gt;megan:1&lt;/td&gt;&lt;td&gt;connect to the VNC server on 'megan' with display number 1&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;vnc:/megan:1&lt;/td&gt;&lt;td&gt;longer form for the same thing&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;rdp:/marry&lt;/td&gt;&lt;td&gt;connect to the RDP server on 'marry'&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;"&gt;Examples&lt;/a&gt;</string>
             </property>
         </widget>
         <widget class="QLayoutWidget">
             <property name="name">
-                <cstring>Layout2</cstring>
+                <cstring>layout4</cstring>
             </property>
             <hbox>
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <property name="margin">
-                    <number>0</number>
-                </property>
-                <property name="spacing">
-                    <number>6</number>
-                </property>
-                <widget class="QLabel">
+                <widget class="QPushButton">
                     <property name="name">
-                        <cstring>connectionTypeLabel</cstring>
+                        <cstring>preferencesButton</cstring>
                     </property>
-                    <property name="sizePolicy">
-                        <sizepolicy>
-                            <hsizetype>0</hsizetype>
-                            <vsizetype>1</vsizetype>
-                            <horstretch>0</horstretch>
-                            <verstretch>0</verstretch>
-                        </sizepolicy>
+                    <property name="enabled">
+                        <bool>false</bool>
                     </property>
                     <property name="text">
-                        <string>Connection &amp;type:</string>
-                    </property>
-                    <property name="buddy" stdset="0">
-                        <cstring>qualityCombo</cstring>
+                        <string>&amp;Preferences...</string>
                     </property>
                 </widget>
-                <widget class="QComboBox">
-                    <item>
-                        <property name="text">
-                            <string>High Quality (LAN, direct connection)</string>
-                        </property>
-                    </item>
-                    <item>
-                        <property name="text">
-                            <string>Medium Quality (DSL, Cable, fast Internet)</string>
-                        </property>
-                    </item>
-                    <item>
-                        <property name="text">
-                            <string>Low Quality (Modem, ISDN, slow Internet)</string>
-                        </property>
-                    </item>
-                    <property name="name">
-                        <cstring>qualityCombo</cstring>
-                    </property>
-                    <property name="sizePolicy">
-                        <sizepolicy>
-                            <hsizetype>5</hsizetype>
-                            <vsizetype>0</vsizetype>
-                            <horstretch>0</horstretch>
-                            <verstretch>0</verstretch>
-                        </sizepolicy>
-                    </property>
-                    <property name="minimumSize">
-                        <size>
-                            <width>280</width>
-                            <height>0</height>
-                        </size>
-                    </property>
-                    <property name="whatsThis" stdset="0">
-                        <string>Use this to specify the performance of your connection. Note that you should select the speed of the weakest link - even if you have a high speed connection this will not help you if the remote computer uses a slow modem. Choosing a too high quality on a slow link will cause slower response times. Choosing a lower quality will increase latencies in high speed connections and results in lower image quality, especially in 'Low Quality' mode.</string>
-                    </property>
-                </widget>
-                <spacer>
-                    <property name="name">
-                        <cstring>Spacer2</cstring>
-                    </property>
-                    <property name="orientation">
-                        <enum>Horizontal</enum>
-                    </property>
-                    <property name="sizeType">
-                        <enum>Expanding</enum>
-                    </property>
-                    <property name="sizeHint">
-                        <size>
-                            <width>20</width>
-                            <height>0</height>
-                        </size>
-                    </property>
-                </spacer>
-            </hbox>
-        </widget>
-        <widget class="QLayoutWidget">
-            <property name="name">
-                <cstring>Layout1</cstring>
-            </property>
-            <hbox>
-                <property name="name">
-                    <cstring>unnamed</cstring>
-                </property>
-                <property name="margin">
-                    <number>0</number>
-                </property>
-                <property name="spacing">
-                    <number>6</number>
-                </property>
                 <spacer>
                     <property name="name">
                         <cstring>spacer</cstring>
@@ -476,8 +383,8 @@ Remote Desktop Connection only supports systems that use VNC.</string>
                     </property>
                     <property name="sizeHint">
                         <size>
-                            <width>20</width>
-                            <height>0</height>
+                            <width>100</width>
+                            <height>20</height>
                         </size>
                     </property>
                 </spacer>
@@ -527,19 +434,19 @@ Remote Desktop Connection only supports systems that use VNC.</string>
     <connection>
         <sender>connectButton</sender>
         <signal>clicked()</signal>
-        <receiver>NewConnectionDialog</receiver>
+        <receiver>MainDialog</receiver>
         <slot>accept()</slot>
     </connection>
     <connection>
         <sender>cancelButton</sender>
         <signal>clicked()</signal>
-        <receiver>NewConnectionDialog</receiver>
+        <receiver>MainDialog</receiver>
         <slot>reject()</slot>
     </connection>
     <connection>
         <sender>serverInput</sender>
         <signal>textChanged(const QString&amp;)</signal>
-        <receiver>NewConnectionDialog</receiver>
+        <receiver>MainDialog</receiver>
         <slot>hostChanged(const QString&amp;)</slot>
     </connection>
     <connection>
@@ -551,36 +458,38 @@ Remote Desktop Connection only supports systems that use VNC.</string>
     <connection>
         <sender>browseButton</sender>
         <signal>clicked()</signal>
-        <receiver>NewConnectionDialog</receiver>
+        <receiver>MainDialog</receiver>
         <slot>toggleBrowsingArea()</slot>
     </connection>
     <connection>
         <sender>scopeCombo</sender>
         <signal>activated(int)</signal>
-        <receiver>NewConnectionDialog</receiver>
+        <receiver>MainDialog</receiver>
         <slot>rescan()</slot>
     </connection>
     <connection>
         <sender>rescanButton</sender>
         <signal>clicked()</signal>
-        <receiver>NewConnectionDialog</receiver>
+        <receiver>MainDialog</receiver>
         <slot>rescan()</slot>
     </connection>
 </connections>
 <tabstops>
-    <tabstop>serverInput</tabstop>
-    <tabstop>browseButton</tabstop>
-    <tabstop>qualityCombo</tabstop>
-    <tabstop>connectButton</tabstop>
-    <tabstop>cancelButton</tabstop>
     <tabstop>rescanButton</tabstop>
     <tabstop>searchInput</tabstop>
     <tabstop>scopeCombo</tabstop>
     <tabstop>browsingView</tabstop>
+    <tabstop>serverInput</tabstop>
+    <tabstop>browseButton</tabstop>
+    <tabstop>kActiveLabel2</tabstop>
+    <tabstop>preferencesButton</tabstop>
+    <tabstop>connectButton</tabstop>
+    <tabstop>cancelButton</tabstop>
 </tabstops>
 <includes>
     <include location="local" impldecl="in implementation">kcombobox.h</include>
     <include location="local" impldecl="in declaration">kservicelocator.h</include>
+    <include location="local" impldecl="in implementation">maindialog.ui.h</include>
 </includes>
 <variables>
     <variable>KServiceLocator *m_ksl</variable>
@@ -598,5 +507,6 @@ Remote Desktop Connection only supports systems that use VNC.</string>
     <includehint>klistview.h</includehint>
     <includehint>kcombobox.h</includehint>
     <includehint>klineedit.h</includehint>
+    <includehint>kactivelabel.h</includehint>
 </includehints>
 </UI>

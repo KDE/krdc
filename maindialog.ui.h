@@ -2,23 +2,26 @@
 #include <kdebug.h>
 #include <config.h>
 
-/* Disable connect before user typed something like a host name */
-void NewConnectionDialog::hostChanged(const QString &text) {
+void MainDialog::hostChanged( const QString & text )
+{
     connectButton->setEnabled(text.contains(QRegExp(":[0-9]+$")) ||
 			      text.contains(QRegExp("^vnc://.+")) ||
 			      text.contains(QRegExp("^rdp://.+")));
 }
 
-void NewConnectionDialog::toggleBrowsingArea()
+
+void MainDialog::toggleBrowsingArea()
 {
     enableBrowsingArea(!browsingPanel->isVisible());
 }
 
-void NewConnectionDialog::rescan()
+
+void MainDialog::rescan()
 {
 }
 
-void NewConnectionDialog::enableBrowsingArea(bool enable)
+
+void MainDialog::enableBrowsingArea( bool enable )
 {
     int hOffset = 0;
     if (enable) {
@@ -43,4 +46,5 @@ void NewConnectionDialog::enableBrowsingArea(bool enable)
     if (enable)
 	rescan();
 }
+
 

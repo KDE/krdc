@@ -1,8 +1,8 @@
 /***************************************************************************
-             srvlocncdialog.cpp - NewConnectionDialog with SrvLoc support
+             srvlocncdialog.cpp - MainDialog with SrvLoc support
                              -------------------
     begin                : Sun Jul 21 14:51:47 CET 2002
-    copyright            : (C) 2002 by Tim Jansen
+    copyright            : (C) 2002-2003 by Tim Jansen
     email                : tim@tjansen.de
  ***************************************************************************/
 
@@ -15,7 +15,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "srvlocncdialog.h"
+#include "srvlocmaindialog.h"
 #include "kservicelocator.h"
 #include <kurl.h>
 #include <klocale.h>
@@ -72,8 +72,8 @@ public:
 	}
 };
 
-SrvLocNCDialog::SrvLocNCDialog(QWidget* parent, const char* name, bool browsing) :
-	NewConnectionDialog(parent, name, true),
+SrvLocMainDialog::SrvLocMainDialog(QWidget* parent, const char* name, bool browsing) :
+	MainDialog(parent, name, true),
 	m_locator(0),
         m_scanning(false),
 	m_browsing(browsing),
@@ -96,21 +96,21 @@ SrvLocNCDialog::SrvLocNCDialog(QWidget* parent, const char* name, bool browsing)
 		rescan();
 }
 
-SrvLocNCDialog::~SrvLocNCDialog() {
+SrvLocMainDialog::~SrvLocMainDialog() {
 	if (m_locator)
 		delete m_locator;
 }
 
-void SrvLocNCDialog::enableBrowsingArea(bool enable) {
+void SrvLocMainDialog::enableBrowsingArea(bool enable) {
 	m_browsing = enable;
-	NewConnectionDialog::enableBrowsingArea(enable);
+	MainDialog::enableBrowsingArea(enable);
 }
 
-bool SrvLocNCDialog::browsing() {
+bool SrvLocMainDialog::browsing() {
 	return m_browsing;
 }
 
-void SrvLocNCDialog::itemSelected(QListViewItem *it) {
+void SrvLocMainDialog::itemSelected(QListViewItem *it) {
 	UrlListViewItem *u = (UrlListViewItem*) it;
 	QRegExp rx("^service:remotedesktop\\.kde:([^;]*)");
 	if (rx.search(u->url()) < 0)
@@ -118,12 +118,12 @@ void SrvLocNCDialog::itemSelected(QListViewItem *it) {
 	serverInput->setCurrentText(rx.cap(1));
 }
 
-void SrvLocNCDialog::itemDoubleClicked(QListViewItem *it) {
+void SrvLocMainDialog::itemDoubleClicked(QListViewItem *it) {
 	itemSelected(it);
 	accept();
 }
 
-void SrvLocNCDialog::scopeSelected(const QString &string) {
+void SrvLocMainDialog::scopeSelected(const QString &string) {
 	QString s = string;
 	if (s == i18n("default"))
 		s = DEFAULT_SCOPE;
@@ -134,7 +134,7 @@ void SrvLocNCDialog::scopeSelected(const QString &string) {
 	rescan();
 }
 
-bool SrvLocNCDialog::ensureLocatorOpen() {
+bool SrvLocMainDialog::ensureLocatorOpen() {
 	if (m_locator)
 		return true;
 	m_locator = new KServiceLocator();
@@ -154,7 +154,7 @@ bool SrvLocNCDialog::ensureLocatorOpen() {
 	return true;
 }
 
-void SrvLocNCDialog::rescan() {
+void SrvLocMainDialog::rescan() {
 	QStringList scopeList;
 
 	if (m_scanning)
@@ -183,7 +183,7 @@ void SrvLocNCDialog::rescan() {
 	}
 }
 
-void SrvLocNCDialog::foundService(QString url, int) {
+void SrvLocMainDialog::foundService(QString url, int) {
 	QRegExp rx("^service:remotedesktop\\.kde:(\\w+)://([^;]+);(.*)$");
 	if (rx.search(url) < 0)
 		return;
@@ -199,19 +199,19 @@ void SrvLocNCDialog::foundService(QString url, int) {
 			    KServiceLocator::decodeAttributeValue(map["serviceid"]));
 }
 
-void SrvLocNCDialog::errorScanning() {
+void SrvLocMainDialog::errorScanning() {
 	KMessageBox::error(0, i18n("An error occurred while scanning the network."),
 			   i18n("Error While Scanning"), false);
 	finishScanning();
 }
 
-void SrvLocNCDialog::finishScanning() {
+void SrvLocMainDialog::finishScanning() {
 	rescanButton->setEnabled(true);
 	scopeCombo->setEnabled(true);
 	m_scanning = false;
 }
 
-void SrvLocNCDialog::lastSignalServices(bool success) {
+void SrvLocMainDialog::lastSignalServices(bool success) {
 	if (!success) {
 		errorScanning();
 		return;
@@ -223,7 +223,7 @@ void SrvLocNCDialog::lastSignalServices(bool success) {
 	}
 }
 
-void SrvLocNCDialog::foundScopes(QStringList scopeList) {
+void SrvLocMainDialog::foundScopes(QStringList scopeList) {
 	if (scopeList.isEmpty())
 		return;
 	
@@ -241,5 +241,5 @@ void SrvLocNCDialog::foundScopes(QStringList scopeList) {
 
 
 
-#include "srvlocncdialog.moc"
+#include "srvlocmaindialog.moc"
 

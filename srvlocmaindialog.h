@@ -15,15 +15,15 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef SRVLOCNCDIALOG_H
-#define SRVLOCNCDIALOG_H
+#ifndef SRVLOCMAINDIALOG_H
+#define SRVLOCMAINDIALOG_H
 
-#include "newconnectiondialog.h"
+#include "maindialog.h"
 #include <qstringlist.h>
 
 class KServiceLocator;
 
-class SrvLocNCDialog : public NewConnectionDialog {
+class SrvLocMainDialog : public MainDialog {
 	Q_OBJECT
 private:
 	KServiceLocator *m_locator;	
@@ -37,8 +37,8 @@ private:
 	void finishScanning();
 
 public:
-	SrvLocNCDialog(QWidget* parent = 0, const char* name = 0, bool modal = FALSE);
-	virtual ~SrvLocNCDialog();
+	SrvLocMainDialog(QWidget* parent = 0, const char* name = 0, bool modal = FALSE);
+	virtual ~SrvLocMainDialog();
 
 	void enableBrowsingArea(bool enable);
 	bool browsing();

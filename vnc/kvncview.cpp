@@ -15,7 +15,9 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kvncview.h"
 #include "passworddialog.h"
+#include "vnchostpreferences.h"
 #include <kdebug.h>
 #include <klocale.h>
 #include <kmessagebox.h>
@@ -28,10 +30,10 @@
 #include <qbitmap.h>
 #include <qlineedit.h>
 #include <qdialog.h>
+#include <qcombobox.h>
 #include <qmutex.h>
 #include <qwaitcondition.h>
 
-#include "kvncview.h"
 #include "vncviewer.h"
 
 #include <X11/Xlib.h>
@@ -41,8 +43,8 @@
  * application resource specs.  The AppData structure is defined in the header
  * file.
  */
-
 AppData appData;
+bool appDataConfigured = false; 
 
 Display* dpy;
 
@@ -60,7 +62,8 @@ KVncView::KVncView(QWidget *parent,
 		   const QString &_host,
 		   int _port,
 		   const QString &_password,
-		   AppData *data) : 
+		   Quality quality,
+		   const QString &encodings) : 
   KRemoteView(parent, name, Qt::WResizeNoErase | Qt::WRepaintNoErase | Qt::WStaticContents),
   m_cthread(this, m_wthread, m_quitFlag),
   m_wthread(this, m_quitFlag),
@@ -75,10 +78,6 @@ KVncView::KVncView(QWidget *parent,
 	kvncview = this;
 	password = _password;
 	dpy = qt_xdisplay();
-	if (data) 
-		appData = *data;
-	else
-		setDefaultAppData();
 	setFixedSize(16,16);
 	setFocusPolicy(QWidget::StrongFocus);
 
@@ -93,9 +92,9 @@ KVncView::KVncView(QWidget *parent,
 					      "pics/pointcursormask.png"));
 	m_cursor = QCursor(cursorBitmap, cursorMask);
 
-	/* Reverse m_cursorEnabled because showDotCursor only works when state changed */
-	m_cursorEnabled = appData.dotCursor ? false : true;
-	showDotCursor(!m_cursorEnabled);
+	if ((quality != QUALITY_UNKNOWN) ||
+	    !encodings.isNull()) 
+		configureApp(quality, encodings);
 }
 
 void KVncView::showDotCursor(bool show) {
@@ -110,25 +109,6 @@ void KVncView::showDotCursor(bool show) {
 		setCursor(QCursor(Qt::BlankCursor));
 	else
 		setCursor(m_cursor);
-}
-
-void KVncView::setDefaultAppData() {
-	appData.shareDesktop = True;
-	appData.viewOnly = False;
-
-	appData.useBGR233 = False;
-	appData.encodingsString = "copyrect softcursor hextile corre rre raw";
-	appData.compressLevel = -1;
-	appData.qualityLevel = 9;
-
-	appData.nColours = 256;
-	appData.useSharedColours = True;
-	appData.requestedDepth = 0;
-
-	appData.dotCursor = False;
-
-	appData.rawDelay = 0;
-	appData.copyRectDelay = 0;
 }
 
 QString KVncView::host() {
@@ -147,6 +127,48 @@ void KVncView::startQuitting() {
 
 bool KVncView::isQuitting() {
 	return m_quitFlag;
+}
+
+void KVncView::configureApp(Quality q, const QString specialEncodings) {
+	appDataConfigured = true;
+	appData.shareDesktop = 1;
+	appData.viewOnly = 0;
+
+	if (q == QUALITY_LOW) {
+		appData.useBGR233 = 1;
+		appData.encodingsString = "background copyrect softcursor tight zlib hextile raw";
+		appData.compressLevel = -1;
+		appData.qualityLevel = 1;
+		appData.dotCursor = 1;
+	}
+	else if (q == QUALITY_MEDIUM) {
+		appData.useBGR233 = 0;
+		appData.encodingsString = "background copyrect softcursor tight zlib hextile raw";
+		appData.compressLevel = -1;
+		appData.qualityLevel = 7;
+		appData.dotCursor = 1;
+	}
+	else if ((q == QUALITY_HIGH) || (q == QUALITY_UNKNOWN)) {
+		appData.useBGR233 = 0;
+		appData.encodingsString = "copyrect softcursor hextile raw";
+		appData.compressLevel = -1;
+		appData.qualityLevel = 9;
+		appData.dotCursor = 1;
+	}
+
+	if (!specialEncodings.isNull())
+		appData.encodingsString = specialEncodings.latin1();
+
+	appData.nColours = 256;
+	appData.useSharedColours = 1;
+	appData.requestedDepth = 0;
+
+	appData.rawDelay = 0;
+	appData.copyRectDelay = 0;
+
+	/* Reverse m_cursorEnabled because showDotCursor only works when state changed */
+	m_cursorEnabled = appData.dotCursor ? false : true;
+	showDotCursor(!m_cursorEnabled);
 }
 
 bool KVncView::checkLocalKRfb() {
@@ -182,6 +204,31 @@ bool KVncView::checkLocalKRfb() {
 bool KVncView::start() {
 	if (!checkLocalKRfb())
 		return false;
+
+	if (!appDataConfigured) {
+		// show preferences dialog
+		VncHostPreferences vhp(0, "VncHostPreferencesDialog", true);
+		if (vhp.exec() == QDialog::Rejected)
+			return false;
+
+		Quality quality;
+		int ci = vhp.qualityCombo->currentItem();
+		if (ci == 0)
+			quality = QUALITY_HIGH;
+		else if (ci == 1)
+			quality = QUALITY_MEDIUM;
+		else if (ci == 2)
+			quality = QUALITY_LOW;
+		else {
+			kdDebug() << "Unknown quality";
+			return false;
+		}
+
+		configureApp(quality);
+	}
+
+	setStatus(REMOTE_VIEW_CONNECTING);
+
 	m_cthread.start();
 	setBackgroundMode(Qt::NoBackground);
 	return true;

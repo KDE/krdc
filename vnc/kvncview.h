@@ -19,6 +19,7 @@
 #define KVNCVIEW_H
 
 #include "kremoteview.h"
+#include "krdc.h"
 #include <kapplication.h>
 #include <qclipboard.h>
 #include <qcursor.h>
@@ -59,7 +60,6 @@ private:
 	bool m_cursorEnabled;
 	PointerLatencyOMeter m_plom;
 
-	void setDefaultAppData();
 	void mouseEvent(QMouseEvent*);
 	unsigned long toKeySym(QKeyEvent *k);
 	bool checkLocalKRfb();
@@ -79,8 +79,9 @@ protected:
 public:
 	KVncView(QWidget* parent=0, const char *name=0, 
 		 const QString &host = QString(""), int port = 5900,
-		 const QString &password = QString::null, 
-		 AppData *data = 0);
+		 const QString &password = QString::null,
+		 Quality quality = QUALITY_UNKNOWN,
+		 const QString &encodings = QString::null);
 	~KVncView();
 	QSize sizeHint();
 	int heightForWidth (int w) const;
@@ -93,6 +94,7 @@ public:
 	virtual QSize framebufferSize();
 	void setRemoteMouseTracking(bool s);
 	bool remoteMouseTracking();
+	void configureApp(Quality q, const QString specialEncodings = QString::null);
 
 	virtual void startQuitting();
 	virtual bool isQuitting();

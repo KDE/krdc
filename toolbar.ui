@@ -8,8 +8,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>480</width>
-            <height>32</height>
+            <width>578</width>
+            <height>33</height>
         </rect>
     </property>
     <property name="caption">
@@ -136,7 +136,7 @@
                         <bool>true</bool>
                     </property>
                     <property name="textLabel">
-                        <string>Special Keys</string>
+                        <string>Special Keys...</string>
                     </property>
                     <property name="textPosition">
                         <enum>Right</enum>
@@ -146,6 +146,35 @@
                     </property>
                     <property name="whatsThis" stdset="0">
                         <string>This option allows you to send special key combinations like Ctrl-Alt-Del to the remote host.</string>
+                    </property>
+                </widget>
+                <widget class="QToolButton">
+                    <property name="name">
+                        <cstring>advancedButton</cstring>
+                    </property>
+                    <property name="enabled">
+                        <bool>false</bool>
+                    </property>
+                    <property name="text">
+                        <string></string>
+                    </property>
+                    <property name="pixmap">
+                        <pixmap></pixmap>
+                    </property>
+                    <property name="iconSet">
+                        <iconset>image3</iconset>
+                    </property>
+                    <property name="usesTextLabel">
+                        <bool>true</bool>
+                    </property>
+                    <property name="textLabel">
+                        <string>Advanced</string>
+                    </property>
+                    <property name="popupDelay">
+                        <number>0</number>
+                    </property>
+                    <property name="textPosition">
+                        <enum>Right</enum>
                     </property>
                 </widget>
                 <spacer>
@@ -160,7 +189,7 @@
                     </property>
                     <property name="sizeHint">
                         <size>
-                            <width>180</width>
+                            <width>70</width>
                             <height>20</height>
                         </size>
                     </property>
@@ -178,6 +207,9 @@
     </image>
     <image name="image2">
         <data format="XPM.GZ" length="1145">789c6dd34b4fe2601886e13dbfa2811d99a09c0a64e2c213a00282a2909859b45ffb092aa09c949af9efd3fb8174baf0bd59f47a1222623cca3be37ed7c91f65566b6f3d358e99784b271f6c66b3ddd39f93ef4cb6e83af1ab5a728ad95f996cc1314e6f310f791ec5cfb9631d1c8b2ec147d1101cc26289e0bdd82078275a820358aa12ec8b3ec15b582e11ec887582576248f00c5674702bfa04df61b54830125d82cf628d60288604bbd00d087ab05e21f82036085ec04699604e74095ad112bc844199e0b55823188886e0b9a88313a8df5eeffd102b04a7628de08bd820f8297a045f459fe09768081a3120b81375f04db40497d01e139c89fa7bc39558223817cb04d762856053ac125c882ec1965823b811eb046f447dd1f054f409f64443b02d06047d51a77f845cfabcc27ef34d724178d88c9f9c7d4eb6c9f4e5d5bccde60bfb9e6c1ff1b45cad171bbb4db6cfaf5d3c45fea93d3b6ce7f6c25ece9badc86fdbabc3e679deb5df6cdd44f1cfe8ecb7f8e26dd3edb1dda6b728be78eba7b776579f6f90de0e9ff9ee87edfe876d98daf6df937d78fcbf85e1b633188e46a37121fbf777e61fcc2a1493</data>
+    </image>
+    <image name="image3">
+        <data format="XPM.GZ" length="1885">789c75d4c94e1c311006e03b4f31c2371415bdd0ddb6a21c202c098435614b948397360c30ac4358a2bc7baafff2344bc81402bef1afb6cbf6cceccce0606b7d30333b7533b6e3a11ff8637b3d9809b7a3d1c38f9f1f7e4f4de7f5807f1a3328a6df4d4d6f8f077eb07171de7620cb50a52e75a5e1b673652bdb18f873e7baa91b5d775604dbda6ac9d770a883f6f061e7266f721d913f81cba63439c637e0aaa90c16a3301f3fbe36253c82f9652a58c1a671a68187b063cbfc39ec1b9f9cc16dd31a8b7c8063efe3de0ef9ef9d75a6b3e40817ba30d81fe5e1726252c9a5417f6460ad6b8b7e681336da58f4431a76da59ec1f5570d4d1cafece753695a9accc770673c3569e7f005b639d3c7f1f8e263a398fa3ce36b7b993fef7603e4027fdac27d70ee7a31cacad7601e35f606b9d93f93ec18edf103770b4d14b3f1f3bbb8c3d07af885d2656a770ee722fe787fd74852b9271df5ce52a2febbd876b577bd98f35980f38b98479033dce8f0ad838e3a5bf5fb077decbfddbedec739f05b96f57c979f225dcf82a603d749bdc245fc0fcc020eb5be82df39f27fbe465985f293fee2de3b8cf3e862cc8fab03f21e377c437e27e1c9f97c0ab6b33781ed641b772fe4bc92619f725987e7c983c19c77d0f2eb856ee1f3e0f21f47e4c0ec9b84f2186d84a3fb8ff6dd6fb4ecc25fe06e75c725eb85f6dc125fe0a975c725e3b70c525fd6ec39a4beee3166c5b1ba5ff5538b4214a3f8b9d63ce25e7f500175ce26bb8e4aae5cb4e8ad4a426ef48bdc858725c9e02b5d4fe2713397544c734a4133a7d4a3dcfa4d419274674fe32f37c059c52fc8c0bbaa4ab492a65ae2729feff86c674cb895fff64eeba1412172971ff2af3408f348fc4429ff8f82ab3484be865b94facd0a71799489f69f5d93ad638f185d6694352d23b77bc495bb44d3bf495be717a97f6689f0ee8b04ba54cb72f967f7fa78c72fe5b50c98939aaa8a6f6690f534e2ae3f91a4e68328a5eeef3535a296595e38457e1ad4c4ab52aaa2375ac866f6752ea449daa33359afef37eea2f9ee6cca8</data>
     </image>
 </images>
 <layoutdefaults spacing="6" margin="11"/>

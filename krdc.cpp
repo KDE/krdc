@@ -15,10 +15,10 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "srvlocncdialog.h"
+#include "krdc.h"
+#include "srvlocmaindialog.h"
 #include "toolbar.h"
 #include "fullscreentoolbar.h"
-#include "krdc.h"
 #include <kdebug.h>
 #include <kapplication.h>
 #include <kcombobox.h>
@@ -66,7 +66,6 @@ void QScrollView2::mouseMoveEvent( QMouseEvent *e )
 
 
 QString KRDC::m_lastHost = "";
-int KRDC::m_lastQuality = 0;
 
 KRDC::KRDC(WindowMode wm, const QString &host,
 	   Quality q, const QString &encodings,
@@ -131,17 +130,14 @@ bool KRDC::start(bool onlyFailOnCancel)
 			emit disconnectedError();
 			return true;
 		}
-		if (m_quality == QUALITY_UNKNOWN)
-			m_quality = QUALITY_MEDIUM;
 	} else {
-		SrvLocNCDialog ncd(0, "SrvLocNCDialog",
-				   config->readBoolEntry("browsingPanel", false));
+		SrvLocMainDialog ncd(0, "SrvLocMainDialog",
+				     config->readBoolEntry("browsingPanel", false));
 		QStringList list = config->readListEntry("serverCompletions");
 		ncd.serverInput->completionObject()->setItems(list);
 		list = config->readListEntry("serverHistory");
 		ncd.serverInput->setHistoryItems(list);
 		ncd.serverInput->setEditText(m_lastHost);
-		ncd.qualityCombo->setCurrentItem(m_lastQuality);
 
 		if (ncd.exec() == QDialog::Rejected) {
 			return false;
@@ -164,19 +160,6 @@ bool KRDC::start(bool onlyFailOnCancel)
 			return true;
 		}
 
-		int ci = ncd.qualityCombo->currentItem();
-		m_lastQuality = ci;
-		if (ci == 0)
-			m_quality = QUALITY_HIGH;
-		else if (ci == 1)
-			m_quality = QUALITY_MEDIUM;
-		else if (ci == 2)
-			m_quality = QUALITY_LOW;
-		else {
-			kdDebug() << "Unknown quality";
-			return false;
-		}
-
 		ncd.serverInput->addToHistory(m_host);
 		list = ncd.serverInput->completionObject()->items();
 		config->writeEntry("serverCompletions", list);
@@ -186,14 +169,13 @@ bool KRDC::start(bool onlyFailOnCancel)
 	}
 
 	setCaption(i18n("%1 - Remote Desktop Connection").arg(m_host));
-	configureApp(m_quality);
 
 	m_scrollView = new QScrollView2(this, "remote scrollview");
 	m_scrollView->setFrameStyle(QFrame::NoFrame);
 	if(m_protocol == PROTOCOL_AUTO || m_protocol == PROTOCOL_VNC)
 		m_view = new KVncView(this, 0, serverHost, serverPort,
 				      m_password.isNull() ? password : m_password,
-				      &m_appData);
+				      m_quality, m_encodings);
 	if(m_protocol == PROTOCOL_RDP)
 		m_view = new KRdpView(this, 0, serverHost, serverPort,
 				      m_resolution, m_keymap, userName,
@@ -214,7 +196,6 @@ bool KRDC::start(bool onlyFailOnCancel)
 	connect(m_keyCaptureDialog, SIGNAL(keyPressed(XEvent*)),
 		m_view, SLOT(pressKey(XEvent*)));
 
-	changeProgress(REMOTE_VIEW_CONNECTING);
 	if ((!m_view->start()) && (!m_host.isNull()))
 		return onlyFailOnCancel;
 	return true;
@@ -297,43 +278,6 @@ void KRDC::quit() {
 	if (m_view)
 		m_view->startQuitting();
 	emit disconnected();
-}
-
-void KRDC::configureApp(Quality q) {
-	m_appData.shareDesktop = 1;
-	m_appData.viewOnly = 0;
-
-	if (q == QUALITY_LOW) {
-		m_appData.useBGR233 = 1;
-		m_appData.encodingsString = "background copyrect softcursor tight zlib hextile raw";
-		m_appData.compressLevel = -1;
-		m_appData.qualityLevel = 1;
-		m_appData.dotCursor = 1;
-	}
-	else if ((q == QUALITY_MEDIUM) || (q == QUALITY_UNKNOWN)) {
-		m_appData.useBGR233 = 0;
-		m_appData.encodingsString = "background copyrect softcursor tight zlib hextile raw";
-		m_appData.compressLevel = -1;
-		m_appData.qualityLevel = 7;
-		m_appData.dotCursor = 1;
-	}
-	else if (q == QUALITY_HIGH) {
-		m_appData.useBGR233 = 0;
-		m_appData.encodingsString = "copyrect softcursor hextile raw";
-		m_appData.compressLevel = -1;
-		m_appData.qualityLevel = 9;
-		m_appData.dotCursor = 1;
-	}
-
-	if (!m_encodings.isNull())
-		m_appData.encodingsString = m_encodings.latin1();
-
-	m_appData.nColours = 256;
-	m_appData.useSharedColours = 1;
-	m_appData.requestedDepth = 0;
-
-	m_appData.rawDelay = 0;
-	m_appData.copyRectDelay = 0;
 }
 
 bool KRDC::parseHost(QString &str, Protocol &prot, QString &serverHost, int &serverPort,

@@ -89,7 +89,6 @@ private:
 	QString m_password;  // if not null, contains the password to use
 	QString m_resolution;// contains an alternative resolution
 	QString m_keymap;    // keymap on the terminal server
-	AppData m_appData;   // various config stuff, used before connection
 
 	WindowMode m_isFullscreen;    // fs/normal state
 	Resolution m_oldResolution;   // conatins encoded res before fs
@@ -98,9 +97,7 @@ private:
 	bool m_windowScaling;         // whether scaling was enabled in norm mode
 
 	static QString m_lastHost; // remembers last value of host input
-	static int m_lastQuality;  // remembers last quality selection
 
-	void configureApp(Quality q);
 	bool parseHost(QString &s, Protocol &prot, QString &serverHost, int &serverPort,
 		       QString &userName, QString &password);
 

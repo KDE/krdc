@@ -2,7 +2,7 @@
                            main.cpp  -  main control
                              -------------------
     begin                : Thu Dec 20 15:11:42 CET 2001
-    copyright            : (C) 2001-2002 by Tim Jansen
+    copyright            : (C) 2001-2003 by Tim Jansen
     email                : tim@tjansen.de
  ***************************************************************************/
 
@@ -124,11 +124,8 @@ int main(int argc, char *argv[])
 		f.close();
 	}
 
-	if (args->count() > 0) {
+	if (args->count() > 0)
 		host = args->arg(0);
-		if (quality == QUALITY_UNKNOWN)
-			quality = QUALITY_MEDIUM;
-	}
 
 	MainController mc(&a, wm, host, quality, encodings, password, resolution, keymap);
 	return mc.main();
