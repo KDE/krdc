@@ -60,7 +60,11 @@ class ThreadSafeEventReceiver {
 		m_openEventLock->lock();
 		m_openEventNum++;
 		m_openEventLock->unlock();
+#if QT_VERSION < 0x030200
 		QThread::postEvent(m_receiver, e);
+#else
+		QApplication::postEvent(m_receiver, e);
+#endif
 	}
 
 	void gotEvent(QEvent *) { 
