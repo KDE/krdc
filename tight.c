@@ -39,6 +39,7 @@
 #define FilterCopyBPP CONCAT2E(FilterCopy,BPP)
 #define FilterPaletteBPP CONCAT2E(FilterPalette,BPP)
 #define FilterGradientBPP CONCAT2E(FilterGradient,BPP)
+#define FillRectangleBPP CONCAT2E(FillRectangle,BPP)
 
 #if BPP != 8
 #define DecompressJpegRectBPP CONCAT2E(DecompressJpegRect,BPP)
@@ -128,17 +129,8 @@ HandleTightBPP (int rx, int ry, int rw, int rh)
 	return False;
 #endif
 
-#if (BPP == 8)
-    gcv.foreground = (appData.useBGR233) ?
-      BGR233ToPixel[fill_colour] : fill_colour;
-#else
-    gcv.foreground = fill_colour;
-#endif
-
-    lockQt();
-    XChangeGC(dpy, gc, GCForeground, &gcv);
-    XFillRectangle(dpy, desktopWin, gc, rx, ry, rw, rh);
-    unlockQt();
+    FillRectangleBPP(fill_colour, rx, ry, rw, rh);
+    SyncScreenRegion(rx, ry, rw, rh);
     return True;
   }
 
