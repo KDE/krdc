@@ -23,8 +23,6 @@ krdc_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 lnkdir = $(kde_appsdir)/Internet
 lnk_DATA = krdc.desktop
 
-KDE_ICON = AUTO
-
 INCLUDES= $(all_includes)
 
 messages: rc.cpp
