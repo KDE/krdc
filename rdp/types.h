@@ -17,6 +17,8 @@
    along with this program; if not, write to the Free Software
    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 */
+#ifndef I_TYPES_H
+#define I_TYPES_H
 
 typedef int BOOL;
 
@@ -105,3 +107,4 @@ typedef struct _key_translation
 	uint16 modifiers;
 }
 key_translation;
+#endif /* I_TYPES_H */

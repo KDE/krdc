@@ -17,6 +17,8 @@
    along with this program; if not, write to the Free Software
    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 */
+#ifndef I_PARSE_H
+#define I_PARSE_H
 
 /* Parser state */
 typedef struct stream
@@ -91,3 +93,5 @@ typedef struct stream
 #define out_uint8p(s,v,n)	{ memcpy((s)->p,v,n); (s)->p += n; }
 #define out_uint8a(s,v,n)	out_uint8p(s,v,n);
 #define out_uint8s(s,n)		{ memset((s)->p,0,n); (s)->p += n; }
+
+#endif /* I_PARSE_H */
