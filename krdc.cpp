@@ -225,6 +225,8 @@ void KRDC::changeProgress(RemoteViewStatus s) {
 			connect(m_view, SIGNAL(disconnectedError()), 
 				SIGNAL(disconnected()));
 		}
+		else if (m_isFullscreen == WINDOW_MODE_FULLSCREEN)
+			switchToNormal(m_view->scaling());
 	}
 }
 
