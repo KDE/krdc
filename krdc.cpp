@@ -105,7 +105,7 @@ KRDC::KRDC(WindowMode wm, const QString &host,
 	KStartupInfo::appStarted();
 }
 
-bool KRDC::start(bool onlyFailOnCancel)
+bool KRDC::start()
 {
 	QString userName, password;
 	KConfig *config = KApplication::kApplication()->config();
@@ -125,8 +125,6 @@ bool KRDC::start(bool onlyFailOnCancel)
 			KMessageBox::error(0,
 			   i18n("The entered host does not have the required form."),
 			   i18n("Malformed URL or host"));
-			if (!onlyFailOnCancel)
-				return false;
 			emit disconnectedError();
 			return true;
 		}
@@ -154,8 +152,6 @@ bool KRDC::start(bool onlyFailOnCancel)
 			KMessageBox::error(0,
 					   i18n("The entered host does not have the required form."),
 					   i18n("Malformed URL or host"));
-			if (!onlyFailOnCancel)
-				return false;
 			emit disconnectedError();
 			return true;
 		}
@@ -196,9 +192,7 @@ bool KRDC::start(bool onlyFailOnCancel)
 	connect(m_keyCaptureDialog, SIGNAL(keyPressed(XEvent*)),
 		m_view, SLOT(pressKey(XEvent*)));
 
-	if ((!m_view->start()) && (!m_host.isNull()))
-		return onlyFailOnCancel;
-	return true;
+	return m_view->start();
 }
 
 void KRDC::changeProgress(RemoteViewStatus s) {

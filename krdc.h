@@ -128,7 +128,7 @@ public:
 	     const QString &keymap = QString::null);
 	~KRDC();
 
-	bool start(bool onlyFailOnCancel);
+	bool start();
 
 	static void setLastHost(const QString &host);
 

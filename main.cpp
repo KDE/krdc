@@ -173,7 +173,7 @@ bool MainController::start() {
 	connect(m_krdc, SIGNAL(disconnectedError()),
 		SLOT(errorRestartRequested()));
 
-	return m_krdc->start(true);
+	return m_krdc->start();
 }
 
 void MainController::errorRestart() {
