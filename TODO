@@ -1,4 +1,3 @@
-- animated autohide for fullscreen toolbar
 - add function to vncviewer code to de-allocate resources
 - dont quit after failed connect attempt but allow re-try
 - make sure vidmode compiles on non-XF86 servers
@@ -21,3 +20,6 @@ Known bugs/problems:
   making the window smaller than the framebuffer and turning the 'scaled 
   mode' off the scrollbars will not be displayed until the user resizes 
   the window. I dont know why and cannot find a work-around.
+- in fullscreen mode the auto-hide toolbar makes problems: Mouse movements
+  are only recognized while a mouse button is pressed (and no, i did no forget
+  to turn on mouse tracking)

@@ -21,6 +21,28 @@
 #include <qwidget.h>
 #include <qlayout.h>
 #include <qevent.h>
+#include <qtimer.h>
+
+class Counter : public QObject {
+	Q_OBJECT
+private:
+	QTimer m_timer;
+	float m_stopValue, m_currentValue, m_stepSize;
+	int m_timeoutMs;
+
+public:
+	Counter(float start);
+
+	void count(float stop, float stepSize, float frequency);
+private slots:
+	void timeout();
+
+signals:	
+	void countingDownFinished();
+	void countingUpFinished();
+	void counted(float value);
+};
+
 
 class KFullscreenPanel : public QWidget {
 	Q_OBJECT 
@@ -28,6 +50,7 @@ private:
 	QWidget *m_child;
 	QVBoxLayout *m_layout;
 	QSize    m_fsResolution;
+	Counter m_counter;
 
 	void doLayout();
 
@@ -43,6 +66,9 @@ public:
 protected:
 	void enterEvent(QEvent *e);
 	void leaveEvent(QEvent *e);
+
+private slots:
+	void movePanel(float posY);
 	
 signals:
 	void mouseEnter();

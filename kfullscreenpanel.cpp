@@ -16,6 +16,43 @@
  ***************************************************************************/
 
 #include "kfullscreenpanel.h"
+#include <kdebug.h>
+
+Counter::Counter(float start) :
+	m_currentValue(start) {
+	connect(&m_timer, SIGNAL(timeout()), SLOT(timeout()));
+}
+
+void Counter::count(float stop, float stepSize, float frequency) {
+	m_timer.stop();
+	m_stopValue = stop;
+	m_stepSize = stepSize;
+	m_timeoutMs = (int)(1000.0 / frequency);
+	timeout();
+}
+
+void Counter::timeout() {
+	if (m_stepSize < 0) {
+		if (m_currentValue <= m_stopValue) {
+			m_currentValue = m_stopValue;
+			emit counted(m_currentValue);
+			emit countingDownFinished();
+			return;
+		}
+	} else {
+		if (m_currentValue >= m_stopValue) {
+			m_currentValue = m_stopValue;
+			emit counted(m_currentValue);
+			emit countingUpFinished();
+			return;
+		}
+	}
+	emit counted(m_currentValue);
+	
+	m_currentValue += m_stepSize;
+	m_timer.start(m_timeoutMs, true);
+}
+
 
 KFullscreenPanel::KFullscreenPanel(QWidget* parent, 
 				   const char *name,
@@ -23,11 +60,20 @@ KFullscreenPanel::KFullscreenPanel(QWidget* parent,
 	QWidget(parent, name),
 	m_child(0),
 	m_layout(0),
-	m_fsResolution(resolution)
+	m_fsResolution(resolution),
+	m_counter(0)
 {
+	connect(&m_counter, SIGNAL(countingDownFinished()), SLOT(hide()));
+	connect(&m_counter, SIGNAL(counted(float)), SLOT(movePanel(float)));
 }
 
 KFullscreenPanel::~KFullscreenPanel() {
+}
+
+void KFullscreenPanel::movePanel(float posY) {
+	move(x(), (int)posY);
+	if (!isVisible())
+		show();
 }
 
 void KFullscreenPanel::setChild(QWidget *child) {
@@ -49,11 +95,11 @@ void KFullscreenPanel::doLayout() {
 }
 
 void KFullscreenPanel::startShow() {
-	show();
+	m_counter.count(0, height()/3.0, 24);
 }
 
 void KFullscreenPanel::startHide() {
-	hide();
+	m_counter.count(-height(), -height()/12.0, 24);
 }
 
 void KFullscreenPanel::enterEvent(QEvent*) {
