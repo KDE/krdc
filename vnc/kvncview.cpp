@@ -214,11 +214,12 @@ bool KVncView::start() {
 		HostPreferences hps(config);
 		SmartPtr<VncHostPref> hp = 
 			SmartPtr<VncHostPref>(hps.createHostPref(m_host, 
-								 VncHostPref::VncType));	
+								 VncHostPref::VncType));
 		int ci = hp->quality();
 		if (hp->askOnConnect()) {
 			// show preferences dialog
 			VncHostPreferences vhp(0, "VncHostPreferencesDialog", true);
+			vhp.setCaption(i18n("VNC Host Preferences for %1").arg(m_host));
 			vhp.qualityCombo->setCurrentItem(ci);
 			vhp.nextStartupCheckbox->setChecked(true);
 			if (vhp.exec() == QDialog::Rejected)
