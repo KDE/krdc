@@ -86,6 +86,9 @@
                             <property name="text">
                                 <string>&amp;Rescan</string>
                             </property>
+                            <property name="whatsThis" stdset="0">
+                                <string>Rescans the network. Depending on the network configuration this may take a few seconds until all systems have responded.</string>
+                            </property>
                         </widget>
                         <spacer>
                             <property name="name">
@@ -134,6 +137,9 @@
                                     <width>100</width>
                                     <height>0</height>
                                 </size>
+                            </property>
+                            <property name="whatsThis" stdset="0">
+                                <string>An administrator can configure the network to have several scopes. If this is the case, you can select the scope to scan here.</string>
                             </property>
                         </widget>
                     </hbox>
@@ -194,6 +200,9 @@
                     </property>
                     <property name="resizeMode">
                         <enum>AllColumns</enum>
+                    </property>
+                    <property name="whatsThis" stdset="0">
+                        <string>Here you can see the systems on the network that allow you to connect. Note that a administrator can hide systems, so the list is not always complete. Click on an item to select it, double-click it to connect immediately.</string>
                     </property>
                 </widget>
             </vbox>
@@ -274,6 +283,9 @@
                     </property>
                     <property name="text">
                         <string>&amp;Browse &lt;&lt;</string>
+                    </property>
+                    <property name="whatsThis" stdset="0">
+                        <string>Turn on/off the network browsing panel.</string>
                     </property>
                 </widget>
             </hbox>

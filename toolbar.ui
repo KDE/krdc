@@ -94,6 +94,9 @@
                     <property name="toggleButton">
                         <bool>true</bool>
                     </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Scale Content</string>
+                    </property>
                 </widget>
                 <spacer>
                     <property name="name">
@@ -104,6 +107,12 @@
                     </property>
                     <property name="sizeType">
                         <enum>Expanding</enum>
+                    </property>
+                    <property name="sizeHint">
+                        <size>
+                            <width>20</width>
+                            <height>0</height>
+                        </size>
                     </property>
                 </spacer>
             </hbox>
