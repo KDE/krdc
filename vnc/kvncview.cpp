@@ -563,8 +563,10 @@ bool KVncView::x11Event(XEvent *e) {
 		case XK_Shift_R:
 			if (pressed)
 				m_mods[s] = true;
-			else
+			else if (m_mods.contains(s))
 				m_mods.remove(s);
+			else
+				unpressModifiers();
 		}
 		m_wthread.queueKeyEvent(s, pressed);
 	}
