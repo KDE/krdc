@@ -45,18 +45,21 @@ const int XKeyRelease = KeyRelease;
 KeyCaptureDialog2::KeyCaptureDialog2(QWidget *w, 
 				     const char *name, 
 				     bool modal) :
-	KeyCaptureDialog(w, name, modal) {
+	KeyCaptureDialog(w, name, modal),
+	m_grabbed(false) {
 }
 
 KeyCaptureDialog2::~KeyCaptureDialog2() {
+	if (m_grabbed)
+		releaseKeyboard();
 }
 
 
 void KeyCaptureDialog2::execute() {
 	keyLabel->setText("");
-	grabKeyboard();
 	exec();
-	releaseKeyboard();
+	if (m_grabbed)
+		releaseKeyboard();
 }
 
 bool KeyCaptureDialog2::x11Event(XEvent *pEvent)
@@ -65,6 +68,14 @@ bool KeyCaptureDialog2::x11Event(XEvent *pEvent)
 		case XKeyPress:
 		case XKeyRelease:
 			x11EventKeyPress( pEvent );
+			return true;
+		case XFocusIn:
+			if (!m_grabbed)
+				grabKeyboard();
+			return true;
+		case XFocusOut:
+			if (m_grabbed)
+				releaseKeyboard();
 			return true;
 		default:
 			break;

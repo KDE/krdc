@@ -26,6 +26,8 @@
 
 class KeyCaptureDialog2 : public KeyCaptureDialog {
 	Q_OBJECT
+
+	bool m_grabbed;
 public:
 	KeyCaptureDialog2(QWidget *w = 0, 
 			  const char *name = 0, 
