@@ -27,7 +27,7 @@ install-data-local:
 	$(mkinstalldirs) $(DESTDIR)$(keymapdir)
 	for file in $(srcdir)/keymaps/*; do \
 		if test -f $$file; then \
-		   $(INSTALL_DATA) $$file $(DESTDIR)$(keymapdir)/`echo $$file|sed "s,^.*/,,"`;\
+		   $(INSTALL_DATA) $$file $(DESTDIR)$(keymapdir)/`basename $$file`;\
 		fi \
 	done
 
