@@ -21,8 +21,7 @@ noinst_HEADERS = krdpview.h constants.h krdpview.h orders.h parse.h \
 librdp_la_LIBADD   = $(LIB_KDEUI) $(LIBJPEG) $(LIBSSL) 
 librdp_la_LDFLAGS = $(all_libraries) $(SSL_LDFLAGS) $(KDE_RPATH)
 
-# Please do not remove the slash at the end of the next line, thanks.
-keymapdir = $(kde_datadir)/krdc/rdp-keymaps/
+keymapdir = $(kde_datadir)/krdc/rdp-keymaps
 
 install-data-local:
 	$(mkinstalldirs) $(DESTDIR)$(keymapdir)
@@ -35,7 +34,7 @@ install-data-local:
 uninstall-local:
 	rm -r $(DESTDIR)$(kde_datadir)/krdc/rdp-keymaps/$$file
 
-AM_CFLAGS = -DWITH_OPENSSL -DKEYMAP_PATH=\"$(keymapdir)\"
+AM_CFLAGS = -DWITH_OPENSSL -DKEYMAP_PATH=\"$(keymapdir)/\"
 
 messages: rc.cpp
 	$(XGETTEXT) *.cpp *.h -o $(podir)/krdc.pot
