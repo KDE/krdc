@@ -13,8 +13,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KDE_UTIL_SMARTPTR_H
-#define KDE_UTIL_SMARTPTR_H
+#ifndef SMARTPTR_H
+#define SMARTPTR_H
 
 #include <qstring.h>
 
@@ -352,7 +352,7 @@ public:
          * @return true if both point to different objects
          */
 	bool operator!=(const T* p) const {
-		return ptr == p;
+		return ptr != p;
 	}
 
         /** 
