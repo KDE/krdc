@@ -87,8 +87,8 @@ KVncView::KVncView(QWidget *parent,
 	setFocusPolicy(QWidget::StrongFocus);
 
 	m_cb = QApplication::clipboard();
-	m_cb->setSelectionMode(true);
 	connect(m_cb, SIGNAL(selectionChanged()), this, SLOT(selectionChanged()));
+	connect(m_cb, SIGNAL(dataChanged()), this, SLOT(clipboardChanged()));
 
 	KStandardDirs *dirs = KGlobal::dirs();
 	QBitmap cursorBitmap(dirs->findResource("appdata",
@@ -418,8 +418,10 @@ void KVncView::customEvent(QCustomEvent *e)
 	}
 	else if (e->type() == ServerCutEventType) {
 		ServerCutEvent *sce = (ServerCutEvent*) e;
+		QString ctext = QString::fromUtf8(sce->bytes(), sce->length());
 		m_dontSendCb = true;
-		m_cb->setText(QString::fromUtf8(sce->bytes(), sce->length()));
+		m_cb->setText(ctext, QClipboard::Clipboard);
+		m_cb->setText(ctext, QClipboard::Selection);
 		m_dontSendCb = false;
 	}
 	else if (e->type() == MouseStateEventType) {
@@ -595,6 +597,20 @@ bool KVncView::remoteMouseTracking() {
 	return m_remoteMouseTracking;
 }
 
+void KVncView::clipboardChanged() {
+	if (m_status != REMOTE_VIEW_CONNECTED)
+		return;
+
+	if (m_cb->ownsClipboard() || m_dontSendCb)
+		return;
+
+	QString text = m_cb->text(QClipboard::Clipboard);
+	if (text.length() > MAX_SELECTION_LENGTH)
+		return;
+
+	m_wthread.queueClientCut(text);
+}
+
 void KVncView::selectionChanged() {
 	if (m_status != REMOTE_VIEW_CONNECTED)
 		return;
@@ -602,13 +618,13 @@ void KVncView::selectionChanged() {
 	if (m_cb->ownsSelection() || m_dontSendCb)
 		return;
 
-	QString text;
-	text = m_cb->text();
+	QString text = m_cb->text(QClipboard::Selection);
 	if (text.length() > MAX_SELECTION_LENGTH)
 		return;
 
 	m_wthread.queueClientCut(text);
 }
+
 
 void KVncView::lockFramebuffer() {
 	if (m_enableFramebufferLocking)

@@ -117,6 +117,7 @@ public slots:
 
 
 private slots:
+	void clipboardChanged();
 	void selectionChanged();
 };
 
