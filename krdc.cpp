@@ -39,7 +39,6 @@
 #include <kwin.h>
 #include <kglobal.h>
 #include <kinstance.h>
-#include <kstandarddirs.h>
 #include <kstartupinfo.h>
 #include <qcursor.h>
 #include <qobjectlist.h>
@@ -106,7 +105,7 @@ bool KRDC::start(bool onlyFailOnCancel)
 	if (!m_host.isNull()) {
 		if (!parseHost(m_host, vncServerHost, vncServerPort,
 			       userName, password)) {
-			KMessageBox::error(0, 
+			KMessageBox::error(0,
 			   i18n("The entered host does not have the required form."),
 			   i18n("Malformed URL or host"));
 			if (!onlyFailOnCancel)
@@ -134,7 +133,7 @@ bool KRDC::start(bool onlyFailOnCancel)
 		m_lastHost = m_host;
 		if (!parseHost(m_host, vncServerHost, vncServerPort,
 			       userName, password)) {
-			KMessageBox::error(0, 
+			KMessageBox::error(0,
 					   i18n("The entered host does not have the required form."),
 					   i18n("Malformed URL or host"));
 			if (!onlyFailOnCancel)
@@ -145,7 +144,7 @@ bool KRDC::start(bool onlyFailOnCancel)
 
 		int ci = ncd.qualityCombo->currentItem();
 		m_lastQuality = ci;
-		if (ci == 0) 
+		if (ci == 0)
 			m_quality = QUALITY_HIGH;
 		else if (ci == 1)
 			m_quality = QUALITY_MEDIUM;
@@ -169,7 +168,7 @@ bool KRDC::start(bool onlyFailOnCancel)
 
 	m_scrollView = new QScrollView2(this, "remote scrollview");
 	m_scrollView->setFrameStyle(QFrame::NoFrame);
-	m_view = new KVncView(this, 0, vncServerHost, vncServerPort, 
+	m_view = new KVncView(this, 0, vncServerHost, vncServerPort,
 			      m_password.isNull() ? password : m_password,
 			      &m_appData);
 	m_scrollView->addChild(m_view);
@@ -181,9 +180,9 @@ bool KRDC::start(bool onlyFailOnCancel)
 	// note that the disconnectedError() will be disconnected when kvncview
 	// is completely initialized
 	connect(m_view, SIGNAL(disconnectedError()), SIGNAL(disconnectedError()));
-	connect(m_view, SIGNAL(statusChanged(RemoteViewStatus)), 
+	connect(m_view, SIGNAL(statusChanged(RemoteViewStatus)),
 		SLOT(changeProgress(RemoteViewStatus)));
-	connect(m_view, SIGNAL(showingPasswordDialog(bool)), 
+	connect(m_view, SIGNAL(showingPasswordDialog(bool)),
 		SLOT(showingPasswordDialog(bool)));
 
 	changeProgress(REMOTE_VIEW_CONNECTING);
@@ -194,14 +193,14 @@ bool KRDC::start(bool onlyFailOnCancel)
 
 void KRDC::changeProgress(RemoteViewStatus s) {
 	if (!m_progressDialog) {
-		m_progressDialog = new KProgressDialog(0, 0, QString::null, 
+		m_progressDialog = new KProgressDialog(0, 0, QString::null,
 				   "1234567890", false);
 		m_progressDialog->showCancelButton(true);
 		m_progressDialog->setMinimumDuration(0x7fffffff);//disable effectively
 		m_progress = m_progressDialog->progressBar();
 		m_progress->setTextEnabled(false);
 		m_progress->setTotalSteps(3);
-		connect(m_progressDialog, SIGNAL(cancelClicked()), 
+		connect(m_progressDialog, SIGNAL(cancelClicked()),
 			SIGNAL(disconnectedError()));
 	}
 
@@ -212,20 +211,20 @@ void KRDC::changeProgress(RemoteViewStatus s) {
 	}
 	else if (s == REMOTE_VIEW_AUTHENTICATING) {
 		m_progress->setValue(1);
-		m_progressDialog->setLabel(i18n("Authenticating..."));	
+		m_progressDialog->setLabel(i18n("Authenticating..."));
 	}
 	else if (s == REMOTE_VIEW_PREPARING) {
 		m_progress->setValue(2);
-		m_progressDialog->setLabel(i18n("Preparing desktop..."));	
+		m_progressDialog->setLabel(i18n("Preparing desktop..."));
 	}
-	else if ((s == REMOTE_VIEW_CONNECTED) || 
+	else if ((s == REMOTE_VIEW_CONNECTED) ||
 		 (s == REMOTE_VIEW_DISCONNECTED)) {
 		m_progress->setValue(3);
 		hideProgressDialog();
 		if (s == REMOTE_VIEW_CONNECTED) {
-			QObject::disconnect(m_view, SIGNAL(disconnectedError()), 
+			QObject::disconnect(m_view, SIGNAL(disconnectedError()),
 					    this, SIGNAL(disconnectedError()));
-			connect(m_view, SIGNAL(disconnectedError()), 
+			connect(m_view, SIGNAL(disconnectedError()),
 				SIGNAL(disconnected()));
 		}
 	}
@@ -251,7 +250,7 @@ void KRDC::hideProgressDialog() {
 }
 
 void KRDC::showProgressTimeout() {
-	if (!m_showProgress) 
+	if (!m_showProgress)
 		return;
 
 	m_progressDialog->setMinimumSize(300, 50);
@@ -329,7 +328,7 @@ bool KRDC::parseHost(QString &str, QString &serverHost, int &serverPort,
 	if (url.hasPass())
 		password = url.pass();
 
-	if (url.hasUser()) 
+	if (url.hasUser())
 		str = QString("%1@%2:%3").arg(userName).arg(serverHost).arg(url.port());
 	else
 		str = QString("%1:%2").arg(serverHost).arg(url.port());
@@ -338,7 +337,7 @@ bool KRDC::parseHost(QString &str, QString &serverHost, int &serverPort,
 
 KRDC::~KRDC()
 {
-	if (m_progressDialog) 
+	if (m_progressDialog)
 		delete m_progressDialog;
 
 	// kill explicitly to avoid xlib calls by the threads after closing the window!
@@ -346,7 +345,7 @@ KRDC::~KRDC()
 		delete m_view;
 }
 
-void KRDC::enableFullscreen(bool on) 
+void KRDC::enableFullscreen(bool on)
 {
 	if (on) {
 		if (m_isFullscreen != WINDOW_MODE_FULLSCREEN)
@@ -360,13 +359,13 @@ void KRDC::enableFullscreen(bool on)
 QSize KRDC::sizeHint()
 {
 	if ((m_isFullscreen != WINDOW_MODE_FULLSCREEN) && m_toolbar)
-		return QSize(m_view->framebufferSize().width(), 
+		return QSize(m_view->framebufferSize().width(),
 			 m_toolbar->sizeHint().height() + m_view->framebufferSize().height());
 	else
 		return m_view->framebufferSize();
 }
 
-void KRDC::switchToFullscreen() 
+void KRDC::switchToFullscreen()
 {
 	int x, y;
 
@@ -376,7 +375,7 @@ void KRDC::switchToFullscreen()
 	m_wasScaling = m_view->scaling();
 	m_view->enableScaling(false);
 	hide();
-	m_oldResolution = vidmodeFullscreenSwitch(qt_xdisplay(), 
+	m_oldResolution = vidmodeFullscreenSwitch(qt_xdisplay(),
 						  m_view->width(),
 						  m_view->height(),
 						  x, y);
@@ -407,16 +406,16 @@ void KRDC::switchToFullscreen()
 	connect(m_fsToolbar, SIGNAL(mouseLeave()), SLOT(hideFullscreenToolbarDelayed()));
 	connect((QObject*)t->closeButton, SIGNAL(clicked()), SLOT(quit()));
 	connect((QObject*)t->iconifyButton, SIGNAL(clicked()), SLOT(iconify()));
-	connect((QObject*)t->fullscreenButton, SIGNAL(toggled(bool)), 
+	connect((QObject*)t->fullscreenButton, SIGNAL(toggled(bool)),
 		SLOT(enableFullscreen(bool)));
-	connect((QObject*)t->autohideButton, SIGNAL(clicked()), 
+	connect((QObject*)t->autohideButton, SIGNAL(clicked()),
 		SLOT(toggleFsToolbarAutoHide()));
 	repositionView(true);
 	showFullScreen();
 
-	setMaximumSize(m_fullscreenResolution.width(), 
+	setMaximumSize(m_fullscreenResolution.width(),
 		       m_fullscreenResolution.height());
-	setGeometry(0, 0, m_fullscreenResolution.width(), 
+	setGeometry(0, 0, m_fullscreenResolution.width(),
 		    m_fullscreenResolution.height());
 
 	KWin::setState(winId(), NET::StaysOnTop);
@@ -449,20 +448,20 @@ void KRDC::switchToNormal(bool scaling)
 
 	if (m_fsToolbar) {
 		m_fsToolbar->hide();
-		m_fsToolbar->deleteLater(); 
+		m_fsToolbar->deleteLater();
 		m_fsToolbar = 0;
 	}
 
 	if (!m_toolbar) {
 		Toolbar *t = new Toolbar(this);
 		m_toolbar = t;
-		t->setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding, 
+		t->setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding,
 					     QSizePolicy::Fixed));
 		t->fullscreenButton->setOn(false);
 		t->scaleButton->setOn(m_wasScaling);
-		connect((QObject*)t->fullscreenButton, SIGNAL(toggled(bool)), 
+		connect((QObject*)t->fullscreenButton, SIGNAL(toggled(bool)),
 			SLOT(enableFullscreen(bool)));
-		connect((QObject*)t->scaleButton, SIGNAL(toggled(bool)), 
+		connect((QObject*)t->scaleButton, SIGNAL(toggled(bool)),
 			SLOT(switchToNormal(bool)));
 	}
 
@@ -519,12 +518,12 @@ void KRDC::iconify()
 
 bool KRDC::event(QEvent *e) {
 /* used to change resolution when fullscreen was minimized */
-        if ((!m_fullscreenMinimized) || (e->type() != QEvent::WindowActivate)) 
+        if ((!m_fullscreenMinimized) || (e->type() != QEvent::WindowActivate))
 		return QWidget::event(e);
 
 	m_fullscreenMinimized = false;
 	int x, y;
-	m_oldResolution = vidmodeFullscreenSwitch(qt_xdisplay(), 
+	m_oldResolution = vidmodeFullscreenSwitch(qt_xdisplay(),
 						  m_view->width(),
 						  m_view->height(),
 						  x, y);
@@ -532,9 +531,9 @@ bool KRDC::event(QEvent *e) {
 		m_fullscreenResolution = QSize(x, y);
 	else
 		m_fullscreenResolution = QApplication::desktop()->size();
-	
+
 	showFullScreen();
-	setGeometry(0, 0, m_fullscreenResolution.width(), 
+	setGeometry(0, 0, m_fullscreenResolution.width(),
 		    m_fullscreenResolution.height());
 	if (m_oldResolution)
 		grabInput(qt_xdisplay(), winId());
@@ -548,7 +547,7 @@ bool KRDC::eventFilter(QObject *watched, QEvent *e) {
 /* used to get events from QScrollView  on resize  for scale mode*/
 	if (watched != m_scrollView)
 		return false;
-	if (e->type() != QEvent::Resize) 
+	if (e->type() != QEvent::Resize)
 		return false;
 
 	QResizeEvent *re = (QResizeEvent*) e;
@@ -585,7 +584,7 @@ void KRDC::setSize(int w, int h)
 void KRDC::repositionView(bool fullscreen) {
 	int ox = 0;
 	int oy = 0;
-	
+
 	if (!m_scrollView)
 		return;
 
@@ -596,7 +595,7 @@ void KRDC::repositionView(bool fullscreen) {
 		bool margin = false;
 		if (d.width() > s.width())
 			ox = (d.width() - s.width()) / 2;
-		else if (d.width() < s.width()) 
+		else if (d.width() < s.width())
 			margin = true;
 
 		if (d.height() > s.height())
@@ -604,7 +603,7 @@ void KRDC::repositionView(bool fullscreen) {
 		else if (d.height() < s.height())
 			margin = true;
 
-		if (margin) 
+		if (margin)
 			m_layout->setMargin(1);
 	}
 
@@ -629,12 +628,12 @@ void KRDC::setFsToolbarAutoHide(bool on) {
 	else
 		b->setPixmap(m_pindown);
 
-	if (!on) 
+	if (!on)
 		showFullscreenToolbar();
 }
 
 void KRDC::hideFullscreenToolbarNow() {
-	if (m_fsToolbar && m_ftAutoHide) 
+	if (m_fsToolbar && m_ftAutoHide)
 		m_fsToolbar->startHide();
 }
 
@@ -701,7 +700,7 @@ void KRDC::mouseMoveEvent(QMouseEvent *e) {
 
 	if (((y <= 0) && (x >= x1) && (x <= x2)))
 		showFullscreenToolbar();
-	else 
+	else
 		hideFullscreenToolbarDelayed();
 	e->accept();
 }
