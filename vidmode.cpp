@@ -26,9 +26,9 @@
 
 #ifdef HAVE_VIDMODE_EXTENSION
 
-void vidmodeNormalSwitch(Display *dpy, int oldResolution)
+void vidmodeNormalSwitch(Display *dpy, Resolution oldResolution)
 {
-	if (!oldResolution)
+	if (!oldResolution.valid)
 		return;
 
 	XF86VidModeModeInfo **modes;
@@ -38,13 +38,14 @@ void vidmodeNormalSwitch(Display *dpy, int oldResolution)
 	if (!XF86VidModeQueryExtension(dpy, &eventB, &errorB))
 		return;
 
-	XF86VidModeGetAllModeLines(dpy,0,&modecount, &modes);
+	XF86VidModeGetAllModeLines(dpy,oldResolution.screen,&modecount, &modes);
 	for (int i = 0; i < modecount; i++) {
 		int w = (*modes[i]).hdisplay;
 		int h = (*modes[i]).vdisplay;
 
-		if (((w << 16) + h) == oldResolution) {
-			XF86VidModeSwitchToMode(dpy,0,modes[i]);
+		if ((oldResolution.width == w) &&
+		    (oldResolution.height == h)) {
+			XF86VidModeSwitchToMode(dpy,oldResolution.screen,modes[i]);
 			XFlush(dpy);
 			XF86VidModeSetViewPort(dpy,DefaultScreen(dpy),0,0);
 			XFlush(dpy);
@@ -53,7 +54,8 @@ void vidmodeNormalSwitch(Display *dpy, int oldResolution)
 	}
 }
 
-int vidmodeFullscreenSwitch(Display *dpy, int sw, int sh, int &nx, int &ny)
+Resolution vidmodeFullscreenSwitch(Display *dpy, int screen, 
+				   int sw, int sh, int &nx, int &ny)
 {
 	XF86VidModeModeInfo **modes;
 	int modecount;
@@ -61,16 +63,19 @@ int vidmodeFullscreenSwitch(Display *dpy, int sw, int sh, int &nx, int &ny)
 	int bestw, besth;
 	int eventB, errorB;
 
-	if (!XF86VidModeQueryExtension(dpy, &eventB, &errorB))
-		return 0;
+	if (screen < 0)
+		return Resolution();
 
-	XF86VidModeGetAllModeLines(dpy,0,&modecount, &modes);
+	if (!XF86VidModeQueryExtension(dpy, &eventB, &errorB))
+		return Resolution();
+
+	XF86VidModeGetAllModeLines(dpy,screen,&modecount, &modes);
 	int cw = (*modes[0]).hdisplay;
 	int ch = (*modes[0]).vdisplay;
 	nx = cw;
 	ny = ch;
 	if ((cw == sw) && (ch == sh))
-		return 0;
+		return Resolution();
 	bool foundLargeEnoughRes = (cw>=sw) && (ch>=sh);
 	bestw = cw;
 	besth = ch;
@@ -110,15 +115,15 @@ int vidmodeFullscreenSwitch(Display *dpy, int sw, int sh, int &nx, int &ny)
 	}
 
 	if (bestmode == -1)
-		return 0;
+		return Resolution();
 
 	nx = bestw;
 	ny = besth;
-	XF86VidModeSwitchToMode(dpy,0,modes[bestmode]);	
-	XF86VidModeSetViewPort(dpy,DefaultScreen(dpy),0,0);
+	XF86VidModeSwitchToMode(dpy,screen,modes[bestmode]);	
+	XF86VidModeSetViewPort(dpy,screen,0,0);
 	XFlush(dpy);
 
-	return (cw << 16) + ch;
+	return Resolution(cw, ch, screen);
 }
 
 #else
