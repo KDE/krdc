@@ -112,8 +112,8 @@ static void ZoomSurfaceSrcCoords(int x, int y, int w, int h,
 				 Surface * src, Surface * dst);
 static void ZoomSurfaceCoords32(int sx, int sy, int sw, int sh,
 				int dx, int dy, Surface * src, Surface * dst);
-static void sge_transform(Surface *src, Surface *dst, float angle, float xscale, float yscale,
-			  Uint16 px, Uint16 py, Uint16 qx, Uint16 qy);
+static void sge_transform(Surface *src, Surface *dst, float xscale, float yscale,
+			  Uint16 qx, Uint16 qy);
 
 
 void
@@ -1057,9 +1057,9 @@ DrawZoomedScreenRegionX11Thread(Window win, int zwidth, int zheight,
     dest.pitch = zoomImage->bytes_per_line;
     dest.pixels = zoomImage->data;
     dest.BytesPerPixel = visbpp / 8;
-    sge_transform(&src, &dest, 0, 
+    sge_transform(&src, &dest,  
 		  (float)dest.w/(float)src.w, (float)dest.h/(float)src.h,
-		  0, 0, 0, 0);
+		  0, 0);
 
     if (useZoomShm) 
       XShmPutImage(dpy, win, gc, zoomImage, 0, 0, 0, 0, zwidth, zheight, False);
@@ -1197,9 +1197,9 @@ static void ZoomSurfaceCoords32(int sx, int sy, int sw, int sh,
   s2.pixels = ((char*)s2.pixels) + (sx * s2.BytesPerPixel) + (sy * src->pitch);
   s2.w = sw;
   s2.h = sh;
-  sge_transform(&s2, dst, 0, 
+  sge_transform(&s2, dst,  
 		(float)dst->w/(float)src->w, (float)dst->h/(float)src->h,
-		0, 0, dx, dy);
+		dx, dy);
 }
 
 
@@ -1213,8 +1213,8 @@ static void ZoomSurfaceCoords32(int sx, int sy, int sw, int sh,
 // Returns the bounding box
 //==================================================================================
 */
-static void _calcRect(Surface *src, Surface *dst, float theta, float xscale, float yscale, 
-		      Uint16 px, Uint16 py, Uint16 qx, Uint16 qy, 
+static void _calcRect(Surface *src, Surface *dst, float xscale, float yscale, 
+		      Uint16 qx, Uint16 qy, 
 		      Sint16 *xmin, Sint16 *ymin, Sint16 *xmax, Sint16 *ymax)
 {
 	Sint16 x, y, rx, ry;
@@ -1230,10 +1230,8 @@ static void _calcRect(Surface *src, Surface *dst, float theta, float xscale, flo
 	
 	/* We don't really need fixed-point here
 	 * but why not? */
-	Sint32 istx = (Sint32)((sin(theta)*xscale) * 8192.0);  /* Inverse transform */
-	Sint32 ictx = (Sint32)((cos(theta)*xscale) * 8192.2);
-	Sint32 isty = (Sint32)((sin(theta)*yscale) * 8192.0);
-	Sint32 icty = (Sint32)((cos(theta)*yscale) * 8192.2);
+	Sint32 ictx = (Sint32) (xscale * 8192.0);
+	Sint32 icty = (Sint32) (yscale * 8192.0);
 
 	sx[0] = sxmin;
 	sx[1] = sxmax;
@@ -1246,11 +1244,11 @@ static void _calcRect(Surface *src, Surface *dst, float theta, float xscale, flo
 
 	/* Calculate the four corner points */
 	for(i=0; i<4; i++){
-		rx = sx[i] - px;
-		ry = sy[i] - py;
+		rx = sx[i];
+		ry = sy[i];
 		
-		x = (Sint16)(((ictx*rx - isty*ry) >> 13) + qx);
-		y = (Sint16)(((icty*ry + istx*rx) >> 13) + qy);
+		x = (Sint16)(((ictx*rx) >> 13) + qx);
+		y = (Sint16)(((icty*ry) >> 13) + qy);
 		
 		
 		if(i==0){
@@ -1290,18 +1288,8 @@ static void _calcRect(Surface *src, Surface *dst, float theta, float xscale, flo
 
 
 /*==================================================================================
-** Rotate by angle about pivot (px,py) scale by scale and place at
-** position (qx,qy). 
+** Scale by scale and place at position (qx,qy). 
 ** 
-** Transformation matrix application (rotated coords "R"):
-**
-**   / rx \   /  cos(theta)  sin(theta) \  / dx \
-**   |    | = |                         |  |    |
-**   \ ry /   \ -sin(theta)  cos(theta) /  \ dy /
-**
-** =>  rx = cos(theta) dx + sin(theta) dy
-**     ry = cos(theta) dy - sin(theta) dx 
-** but represented as a fixed-point float using integer math
 **
 ** Developed with the help from Terry Hancock (hancock@earthlink.net)
 **
@@ -1318,8 +1306,8 @@ static void _calcRect(Surface *src, Surface *dst, float theta, float xscale, flo
 	for (y=ymin; y<ymax; y++){ \
 		dy = y - qy; \
 \
-		sx = (Sint32)(ctdx  + stx*dy + mx);  /* Compute source anchor points */ \
-		sy = (Sint32)(cty*dy - stdx  + my); \
+		sx = (Sint32)ctdx;  /* Compute source anchor points */ \
+		sy = (Sint32)(cty*dy); \
 \
 		/* Calculate pointer to dst surface */ \
 		dst_row = (UintXX *)dst->pixels + y*dst_pitch; \
@@ -1333,7 +1321,6 @@ static void _calcRect(Surface *src, Surface *dst, float theta, float xscale, flo
 				*(dst_row + x) = *(src_row + ry*src_pitch + rx); \
 \
 			sx += ctx;  /* Incremental transformations */ \
-			sy -= sty; \
 		} \
 	}
 	
@@ -1389,8 +1376,8 @@ static void _calcRect(Surface *src, Surface *dst, float theta, float xscale, flo
 	for (y=ymin; y<ymax; y++){ \
 		dy = y - qy; \
 \
-		sx = (Sint32)(ctdx  + stx*dy + mx);  /* Compute source anchor points */ \
-		sy = (Sint32)(cty*dy - stdx  + my); \
+		sx = (Sint32)(ctdx);  /* Compute source anchor points */ \
+		sy = (Sint32)(cty*dy); \
 \
 		/* Calculate pointer to dst surface */ \
 		dst_row = (UintXX *)dst->pixels + y*dst_pitch; \
@@ -1424,21 +1411,19 @@ static void _calcRect(Surface *src, Surface *dst, float theta, float xscale, flo
 				*(dst_row + x) = R | G | B | A;\
 			} \
 			sx += ctx;  /* Incremental transformations */ \
-			sy -= sty; \
 		} \
 	} 
 
-void sge_transform(Surface *src, Surface *dst, float angle, float xscale, float yscale ,Uint16 px, Uint16 py, Uint16 qx, Uint16 qy)
+void sge_transform(Surface *src, Surface *dst, float xscale, float yscale, Uint16 qx, Uint16 qy)
 {
 	Sint32 dy, sx, sy;
 	Sint16 x, y, rx, ry;
 	Rect r;
-	float theta = (float)(angle*M_PI/180.0);  /* Convert to radians.  */
 
-	Sint32 stx, ctx, sty, cty, mx, my;
+	Sint32 ctx, cty;
 	Sint16 xmin, xmax, ymin, ymax;
 	Sint16 sxmin, sxmax, symin, symax;
-	Sint32 dx, ctdx, stdx;
+	Sint32 dx, ctdx;
 
 
 	/* Here we use 18.13 fixed point integer math
@@ -1466,17 +1451,13 @@ void sge_transform(Surface *src, Surface *dst, float angle, float xscale, float 
 
 
 	/* Fixed-point equivalents */
-	stx = (Sint32)((sin(theta)/xscale) * 8192.0);
-	ctx = (Sint32)((cos(theta)/xscale) * 8192.0);
-	sty = (Sint32)((sin(theta)/yscale) * 8192.0);
-	cty = (Sint32)((cos(theta)/yscale) * 8192.0);
-	mx = (Sint32)(px*8192.0); 
-	my = (Sint32)(py*8192.0);
+	ctx = (Sint32)(8192.0/xscale);
+	cty = (Sint32)(8192.0/yscale);
 
 	/* Compute a bounding rectangle */
 	xmin=0; xmax=dst->w; ymin=0; ymax=dst->h;
-	_calcRect(src, dst, theta, xscale, yscale, 
-		  px, py, qx, qy, &xmin, &ymin, &xmax, &ymax);	
+	_calcRect(src, dst, xscale, yscale, 
+		  qx, qy, &xmin, &ymin, &xmax, &ymax);	
 
 	/* Clip to src surface */
 	sxmin = sge_clip_xmin(src);
@@ -1487,7 +1468,6 @@ void sge_transform(Surface *src, Surface *dst, float angle, float xscale, float 
 	/* Some terms in the transform are constant */
 	dx = xmin - qx;
 	ctdx = ctx*dx;
-	stdx = sty*dx;
 	
 	/* Use the correct bpp */
 	if( src->BytesPerPixel == dst->BytesPerPixel){
