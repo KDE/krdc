@@ -45,10 +45,10 @@ public:
 		m_url(url) {
 		if (!type.isNull()) {
 //User connects to somebody else's desktop, used for krfb
-			if (type == "shared")
+			if (type.lower() == "shared")
 				setText(1, i18n("Shared Desktop"));
 //User connects to desktop that exists only on the network
-			else if (type == "Private") 
+			else if (type.lower() == "private") 
 				setText(1, i18n("Standalone Desktop"));
 		}
 		if ((!userid.isEmpty()) && (!fullname.isEmpty()))
