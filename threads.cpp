@@ -21,7 +21,11 @@
 #include "vncviewer.h"
 #include "threads.h"
 
-static const int WAIT_PERIOD = 5000;
+// Maximum idle time for writer thread. When it timeouts, it will request 
+// another incremental update. Must be smaller than the timeout of the server
+// (krfb's is 20s).
+static const int WAIT_PERIOD = 8000;
+
 static const unsigned int MOUSEPRESS_QUEUE_SIZE = 10;
 static const unsigned int MOUSEMOVE_QUEUE_SIZE = 5;
 static const unsigned int KEY_QUEUE_SIZE = 8192;
@@ -287,7 +291,8 @@ void WriterThread::run() {
 		    (mouseEvents.size() == 0) &&
 		    (keyEvents.size() == 0) && 
 		    (clientCut.isNull())) {
-			m_waiter.wait(&m_lock, WAIT_PERIOD);
+			if (!m_waiter.wait(&m_lock, WAIT_PERIOD))
+				m_incrementalUpdateRQ = true;				
 			m_lock.unlock();
 		}
 		else {
