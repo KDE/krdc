@@ -157,6 +157,9 @@ DrawScreenRegionX11Thread(Window win, int x, int y, int width, int height) {
   zoomWidth = 0;
   zoomHeight = 0;
 
+  if (!image)
+    return;
+
   if (useShm) 
     XShmPutImage(dpy, win, gc, image, x, y, x, y, width, height, False);
   else
@@ -1034,6 +1037,9 @@ CreateShmZoomImage()
 void
 DrawZoomedScreenRegionX11Thread(Window win, int zwidth, int zheight, 
 				int x, int y, int width, int height) {
+  if (!image)
+    return;				
+				
   if (zwidth > si.framebufferWidth)
     zwidth = si.framebufferWidth;
   if (zheight > si.framebufferHeight)
