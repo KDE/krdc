@@ -23,15 +23,14 @@
 #endif
 
 #include "kservicelocator.h"
+#include "threadsafeeventreceiver.h"
 #include <kdebug.h>
-#include <kapplication.h>
 #include <qregexp.h>
 
 #ifdef HAVE_SLP
 #include <slp.h>
 #include <qevent.h>
 #include <qthread.h>
-#include <qmutex.h>
 #endif
 
 const QString KServiceLocator::DEFAULT_AUTHORITY = "";
@@ -39,7 +38,7 @@ const QString KServiceLocator::ALL_AUTHORITIES = QString::null;
 
 class AsyncThread;
 
-class KServiceLocatorPrivate {
+class KServiceLocatorPrivate : public ThreadSafeEventReceiver {
 public:
 	KServiceLocator *m_ksl;
         bool m_opened;
@@ -55,16 +54,9 @@ public:
 	~KServiceLocatorPrivate();
 
 #ifdef HAVE_SLP
-	QMutex *m_openEventLock;
-	volatile int m_openEventNum;
-
         SLPHandle m_handle;
 	AsyncThread *m_thread;
 	QString m_operationServiceUrl; // for findAttributes()/foundAttributes()
-
-	void sendEvent(QEvent *);
-	void gotEvent();
-	void waitForLastEvent();
 
 	friend class FindSrvTypesThread;	
 	friend class FindSrvsThread;	
@@ -124,6 +116,7 @@ KServiceLocator::KServiceLocator(const QString &lang, bool async) :
 KServiceLocatorPrivate::KServiceLocatorPrivate(KServiceLocator *ksl,
 					       const QString &lang,
 					       bool async) :
+	ThreadSafeEventReceiver(ksl),
 	m_ksl(ksl),
 	m_opened(false),
 	m_abort(false),
@@ -132,8 +125,6 @@ KServiceLocatorPrivate::KServiceLocatorPrivate(KServiceLocator *ksl,
 
 #ifdef HAVE_SLP
 	m_thread = 0;
-	m_openEventNum = 0;
-	m_openEventLock = new QMutex();
 #endif
 }
 
@@ -419,40 +410,10 @@ KServiceLocatorPrivate::~KServiceLocatorPrivate() {
 	waitForLastEvent();
 	if (m_opened)
 		SLPClose(m_handle);
-	delete m_openEventLock;
 }
 
 KServiceLocator::~KServiceLocator() {
 	delete d;
-}
-
-void KServiceLocatorPrivate::sendEvent(QEvent *e) {
-	m_openEventLock->lock();
-	m_openEventNum++;
-	m_openEventLock->unlock();
-	QThread::postEvent(m_ksl, e);
-
-}
-void KServiceLocatorPrivate::gotEvent() { 
-	m_openEventLock->lock();
-	m_openEventNum--;
-	m_openEventLock->unlock();
-	if (m_openEventNum < 0) 
-		kdError() << "Got unexpected event!" << endl;
-}
-void KServiceLocatorPrivate::waitForLastEvent() {
-	int c = 0;
-	while (true) {
-		m_openEventLock->lock();
-		int snap = m_openEventNum;
-		m_openEventLock->unlock();
-		if (snap == 0)
-			return;
-		if (c > 0)
-			kdError() << "Missing/lost event!" << endl;
-		KApplication::kApplication()->processEvents();
-		c++;
-	}
 }
 	
 bool KServiceLocator::available() {
@@ -630,9 +591,12 @@ SLPBoolean KServiceLocatorPrivate::handleAttrCallback(const char* attrlist,
 
 
 void KServiceLocator::customEvent(QCustomEvent *e) {
+	if (d->ignoreEvents())
+		return;
+
 	if ((e->type() >= MinLastSignalEventType) &&
 	    (e->type() <= MaxLastSignalEventType)){
-                d->gotEvent();
+                d->gotEvent(e);
 		bool s = true;
 		if (d->m_thread) {
 			d->m_thread->wait();
@@ -650,21 +614,21 @@ void KServiceLocator::customEvent(QCustomEvent *e) {
 			kdFatal() << "unmapped last signal type " << e->type()<< endl;
 	}
 	else if (e->type() == FoundAttributesEventType) {
-                d->gotEvent();
+                d->gotEvent(e);
 		emit foundAttributes(d->m_operationServiceUrl, 
 				     ((FoundAttributesEvent*)e)->attributes());
 	}
 	else if (e->type() == FoundServiceEventType) {
-                d->gotEvent();
+                d->gotEvent(e);
 		FoundServiceEvent *fse = (FoundServiceEvent*)e;
 		emit foundService(fse->srvUrl(), fse->lifetime());
 	}
 	else if (e->type() == FoundServiceTypesEventType) {
-                d->gotEvent();
+                d->gotEvent(e);
 		emit foundServiceTypes(((FoundServiceTypesEvent*)e)->srvtypes());
 	}
 	else if (e->type() == FoundScopesEventType) {
-                d->gotEvent();
+                d->gotEvent(e);
 		if (d->m_thread) {
 			d->m_thread->wait();
 			delete d->m_thread;

@@ -24,6 +24,7 @@
 #include <qwidget.h>
 #include <qcursor.h>
 
+#include "threadsafeeventreceiver.h"
 #include "pointerlatencyometer.h"
 #include "threads.h"
 #include "vnctypes.h"
@@ -34,7 +35,7 @@ enum DotCursorState {
 	DOT_CURSOR_AUTO 
 };
 
-class KVncView : public QWidget
+class KVncView : public QWidget, public ThreadSafeEventReceiver
 {
 	Q_OBJECT 
 private:

@@ -38,12 +38,12 @@ ControllerThread::ControllerThread(KVncView *v, WriterThread &wt, volatile bool 
 
 void ControllerThread::changeStatus(RemoteViewStatus s) {
 	m_status = s;
-	QThread::postEvent(m_view, new StatusChangeEvent(s));
+	m_view->sendEvent(new StatusChangeEvent(s));
 }
 
 void ControllerThread::sendFatalError(ErrorCode s) {
 	m_quitFlag = true;
-	QThread::postEvent(m_view, new FatalErrorEvent(s));
+	m_view->sendEvent(new FatalErrorEvent(s));
 	m_wthread.kick();
 }
 
@@ -98,10 +98,10 @@ void ControllerThread::run() {
 		return;
 	}
 
-	QThread::postEvent(m_view, new ScreenResizeEvent(si.framebufferWidth, 
-							 si.framebufferHeight));
+	m_view->sendEvent(new ScreenResizeEvent(si.framebufferWidth, 
+						si.framebufferHeight));
 
-	QThread::postEvent(m_view, new DesktopInitEvent());
+	m_view->sendEvent(new DesktopInitEvent());
 	while ((!m_quitFlag) && (!m_desktopInitialized)) 
 		m_waiter.wait(1000);
 
@@ -329,6 +329,6 @@ void WriterThread::run() {
 
 void WriterThread::sendFatalError(ErrorCode s) {
 	m_quitFlag = true;
-	QThread::postEvent(m_view, new FatalErrorEvent(s));
+	m_view->sendEvent(new FatalErrorEvent(s));
 }
 
