@@ -197,7 +197,8 @@ bool KRDC::start(bool onlyFailOnCancel)
 				      &m_appData);
 	if(m_protocol == PROTOCOL_RDP)
 		m_view = new KRdpView(this, 0, serverHost, serverPort,
-				      m_resolution, m_keymap, userName);
+				      m_resolution, m_keymap, userName,
+                                      m_password.isNull() ? password : m_password);
 	m_scrollView->addChild(m_view);
 	QWhatsThis::add(m_view, i18n("Here you can see the remote desktop. If the other side allows you to control it, you can also move the mouse, click or enter keystrokes. If the content does not fit your screen, click on the toolbar's full screen button or scale button. To end the connection, just close the window."));
 
