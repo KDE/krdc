@@ -61,4 +61,16 @@ void KRemoteView::setStatus(RemoteViewStatus s) {
 KRemoteView::~KRemoteView() {
 }
 
+bool KRemoteView::supportsScaling() {
+	return false;
+}
+
+bool KRemoteView::scaling() {
+	return false;
+}
+
+void KRemoteView::enableScaling(bool) {
+}
+
+
 #include "kremoteview.moc"

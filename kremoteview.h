@@ -44,14 +44,31 @@ public:
 	virtual ~KRemoteView();
 
 	/**
-	 * Checks whether the widget is in scale mode.
-	 * @return true if scaling is activated
+	 * Checks whether the backend supports scaling. The
+	 * default implementation returns false.
+	 * @return true if scaling is supported
+	 * @see scaling()
 	 */
-	virtual bool scaling() = 0;
+	virtual bool supportsScaling();
+
+	/**
+	 * Checks whether the widget is in scale mode. The
+	 * default implementation always returns false.
+	 * @return true if scaling is activated. Must always be
+	 *         false if @ref supportsScaling() returns false
+	 * @see supportsScaling()
+	 */
+	virtual bool scaling();
 
 	/**
 	 * Returns the resolution of the remote framebuffer.
-	 * @return the remote framebuffer size
+	 * It should return a null @ref QSize when the size 
+	 * is not known.
+	 * The backend must also emit a @ref changeSize()
+	 * when the size of the framebuffer becomes available
+	 * for the first time or the size changed.
+	 * @return the remote framebuffer size, a null QSize
+	 *         if unknown
 	 */
 	virtual QSize framebufferSize() = 0;
 
@@ -102,9 +119,14 @@ public:
 public slots:
         /**
 	 * Called to enable or disable scaling.
-	 * @param s true to enable, false to disable
+	 * Ignored if @ref supportsScaling() is false.
+	 * The default implementation does nothing.
+	 * @param s true to enable, false to disable.
+	 * @see supportsScaling()
+	 * @see scaling()
 	 */
-        virtual void enableScaling(bool s) = 0;
+        virtual void enableScaling(bool s);
+
         /**
 	 * Sends a key to the remote server.
 	 * @param k the key to send
@@ -160,6 +182,7 @@ signals:
 protected:
 	/**
 	 * The status of the remote view.
+	 * @return the status of the remote view
 	 */
 	enum RemoteViewStatus m_status;
 

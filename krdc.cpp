@@ -434,7 +434,8 @@ void KRDC::switchToFullscreen(bool scaling)
 	QWidget *desktop = QApplication::desktop();
 	QSize ds = desktop->size();
 	QSize fbs = m_view->framebufferSize();
-	bool scalingPossible = ((fbs.width() >= ds.width()) || (fbs.height() >= ds.height()));
+	bool scalingPossible = m_view->supportsScaling() &&
+	  ((fbs.width() >= ds.width()) || (fbs.height() >= ds.height()));
 	
 	if (!fromFullscreen) {
 		hide();
@@ -551,6 +552,10 @@ void KRDC::switchToNormal(bool scaling)
 					     QSizePolicy::Fixed));
 		t->fullscreenButton->setOn(false);
 		t->scaleButton->setOn(scaling);
+		if (m_view->supportsScaling())
+			t->scaleButton->show();
+		else
+			t->scaleButton->hide();
 		connect((QObject*)t->fullscreenButton, SIGNAL(toggled(bool)),
 			SLOT(enableFullscreen(bool)));
 		connect((QObject*)t->scaleButton, SIGNAL(toggled(bool)),

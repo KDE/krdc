@@ -83,6 +83,7 @@ public:
 	int heightForWidth (int w) const;
 	void drawRegion(int x, int y, int w, int h);
 	virtual bool scaling();
+	virtual bool supportsScaling();
 	virtual QSize framebufferSize();
 	void setRemoteMouseTracking(bool s);
 	bool remoteMouseTracking();

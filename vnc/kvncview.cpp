@@ -191,6 +191,10 @@ KVncView::~KVncView()
 	freeResources();
 }
 
+bool KVncView::supportsScaling() {
+	return true;
+}
+
 bool KVncView::scaling() {
 	return m_scaling;
 }
