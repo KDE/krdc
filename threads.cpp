@@ -100,6 +100,8 @@ void ControllerThread::run() {
 
 	m_view->sendEvent(new ScreenResizeEvent(si.framebufferWidth, 
 						si.framebufferHeight));
+	m_wthread.queueUpdateRequest(QRegion(QRect(0,0,si.framebufferWidth, 
+		si.framebufferHeight)));
 
 	m_view->sendEvent(new DesktopInitEvent());
 	while ((!m_quitFlag) && (!m_desktopInitialized)) 

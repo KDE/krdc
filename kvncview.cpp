@@ -183,7 +183,6 @@ bool KVncView::start() {
 	if (!checkLocalKRfb())
 		return false;
 	m_cthread.start();
-	m_wthread.queueUpdateRequest(QRegion(QRect(0,0,width(),height())));
 	setBackgroundMode(Qt::NoBackground);
 	return true;
 }

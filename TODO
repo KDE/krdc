@@ -2,6 +2,7 @@ For 3.1:
 - security audit of the protocol code
 
 For 3.2:
+- button for ctrl-alt-del and similar things in normal mode
 - SASL authentication
 - X11 support
  - patch xnest to allow embedding it into a QXEmbed
@@ -14,8 +15,8 @@ Future:
 
 
 Known bugs/problems:
-- when krdc is in fullscreen and another window pops up, it may lock 
-  (unconfirmed)
+- when krdc is in fullscreen, it does not stay on top
+- what's this button can disappear after fullscreen
 - when using the XShm extension (see DesktopInit(), CreateShmImage() 
   invocation) I get error messages like "Xlib: unexpected async reply 
   (sequence 0x1717)!" after a few seconds. That's why XShm is not used at 
