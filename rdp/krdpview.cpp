@@ -214,7 +214,7 @@ bool KRdpView::start()
 	connect(m_container, SIGNAL(newEmbeddedWindow(WId)), SLOT(connectionOpened(WId)));
 	if(!m_process->start(KProcess::NotifyOnExit, KProcess::Stderr))
 	{
-		KMessageBox::error(0, i18n("Couldn't start rdesktop. Make sure rdesktop is properly installed."),
+		KMessageBox::error(0, i18n("Could not start rdesktop; make sure rdesktop is properly installed."),
 		                      i18n("rdesktop Failure"));
 		return false;
 	}
@@ -281,7 +281,7 @@ void KRdpView::processDied(KProcess */*proc*/)
 		else
 		{
 			// FIXME: rdesktop 1.3.2 (or maybe 1.4.0) should be released by the time KDE 3.3 is released
-			KMessageBox::error(0, i18n("The version of rdesktop you're using (%1) is too old.\n"
+			KMessageBox::error(0, i18n("The version of rdesktop you are using (%1) is too old:\n"
 			                           "rdesktop 1.3.2 or greater is required. A working patch for "
 			                           "rdesktop 1.3.1 can be found in KDE CVS.").arg(m_clientVersion),
 			                      i18n("rdesktop Failure"));
