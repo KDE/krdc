@@ -58,7 +58,7 @@ class KRdpView : public KRemoteView
 
 	private:
 		// properties used for setting up the connection
-		char    *m_name;       // name of the connection
+		QString  m_name;       // name of the connection
 		QString  m_host;       // the host to connect to
 		int      m_port;       // the port on the host   
 		QString  m_user;       // the user to use to log in
