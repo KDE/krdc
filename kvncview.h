@@ -57,6 +57,7 @@ protected:
 	void paintEvent(QPaintEvent*);
 	void customEvent(QCustomEvent*);
 	void mousePressEvent(QMouseEvent*);
+	void mouseDoubleClickEvent(QMouseEvent*);
 	void mouseReleaseEvent(QMouseEvent*);
 	void mouseMoveEvent(QMouseEvent*);
 	void wheelEvent(QWheelEvent *);

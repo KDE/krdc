@@ -102,7 +102,7 @@ void KVncView::setDefaultAppData() {
 	appData.viewOnly = False;
 
 	appData.useBGR233 = False;
-	appData.encodingsString = "copyrect hextile corre rre raw";
+	appData.encodingsString = "copyrect softcursor hextile corre rre raw";
 	appData.compressLevel = -1;
 	appData.qualityLevel = 9;
 
@@ -323,7 +323,8 @@ void KVncView::mouseEvent(QMouseEvent *e) {
 		return;
 
 	if ( e->type() != QEvent::MouseMove ) {
-		if ( e->type() == QEvent::MouseButtonPress ) {
+		if ( (e->type() == QEvent::MouseButtonPress) ||
+                     (e->type() == QEvent::MouseButtonDblClick)) {
 			if ( e->button() & LeftButton )
 				m_buttonMask |= 0x01;
 			if ( e->button() & MidButton )
@@ -351,6 +352,11 @@ void KVncView::mouseEvent(QMouseEvent *e) {
 }
 
 void KVncView::mousePressEvent(QMouseEvent *e) {
+	mouseEvent(e);
+	e->accept();
+}
+
+void KVncView::mouseDoubleClickEvent(QMouseEvent *e) {
 	mouseEvent(e);
 	e->accept();
 }
