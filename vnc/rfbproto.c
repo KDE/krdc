@@ -621,12 +621,13 @@ HandleCursorPos(unsigned int x, unsigned int y)
   int ox, oy, ow, oh;
 
   /* get old cursor rect to know what to update */
-  LockFramebuffer();
   getBoundingRectCursor(cursorX, cursorY, imageIndex,
 			&ox, &oy, &ow, &oh);
-  undrawCursor();
   if (!pointerImages[0].set)
     return True;
+
+  LockFramebuffer();
+  undrawCursor();
   imageIndex = 0;
   return PointerMove(x, y, 0, ox, oy, ow, oh);
 }
@@ -656,11 +657,11 @@ void DrawCursorX11Thread(int x, int y) {
 			&nx, &ny, &nw, &nh);
   if (rectsIntersect(ox, oy, ow, oh, nx, ny, nw, nh)) {
     rectsJoin(&ox, &oy, &ow, &oh, nx, ny, nw, nh);
-    DrawAnyScreenRegionX11Thread(ox, oy, ow, oh);
+    SyncScreenRegionX11Thread(ox, oy, ow, oh);
   }
   else {
-    DrawAnyScreenRegionX11Thread(ox, oy, ow, oh);
-    DrawAnyScreenRegionX11Thread(nx, ny, nw, nh);
+    SyncScreenRegionX11Thread(ox, oy, ow, oh);
+    SyncScreenRegionX11Thread(nx, ny, nw, nh);
   }
 }
 

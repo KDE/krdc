@@ -110,6 +110,7 @@ extern void FillRectangle16(CARD16, int x, int y, int width, int height);
 extern void FillRectangle32(CARD32, int x, int y, int width, int height);
 extern void CopyArea(int srcX, int srcY, int width, int height, int x, int y);
 extern void SyncScreenRegion(int x, int y, int width, int height);
+extern void SyncScreenRegionX11Thread(int x, int y, int width, int height);
 extern void drawCursor(void);
 extern void DrawCursorX11Thread(int x, int y);
 extern void undrawCursor(void);

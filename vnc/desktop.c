@@ -601,6 +601,30 @@ void SyncScreenRegion(int x, int y, int width, int height) {
   DrawScreenRegion(dx, dy, dw, dh);
 }
 
+void SyncScreenRegionX11Thread(int x, int y, int width, int height) {
+  int dx, dy, dw, dh; 
+
+  if (zoomActive) {
+    Surface src, dest;
+    src.w = si.framebufferWidth;
+    src.h = si.framebufferHeight;
+    src.pitch = image->bytes_per_line;
+    src.pixels = image->data;
+    src.BytesPerPixel = visbpp / 8;
+    dest.w = zoomWidth;
+    dest.h = zoomHeight;
+    dest.pitch = zoomImage->bytes_per_line;
+    dest.pixels = zoomImage->data;
+    dest.BytesPerPixel = visbpp / 8;
+    ZoomSurfaceSrcCoords(x, y, width, height, &dx, &dy, &dw, &dh, &src, &dest);
+  }
+  else {
+    dx = x; dy = y;
+    dw = width; dh = height;
+  }
+  DrawAnyScreenRegionX11Thread(dx, dy, dw, dh);
+}
+
 /*
  * ToplevelInitBeforeRealization sets the title, geometry and other resources
  * on the toplevel window.
