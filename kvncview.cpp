@@ -502,10 +502,11 @@ extern int isQuitFlagSet() {
 }
 
 extern void DrawScreenRegion(int x, int y, int width, int height) {
-	KApplication::kApplication()->lock();
+/*	KApplication::kApplication()->lock();
 	kvncview->drawRegion(x, y, width, height);
 	KApplication::kApplication()->unlock();
-//	kvncview->sendEvent(kvncview->sendEvent(new ScreenRepaintEvent(x, y, width, height));	
+*/
+	kvncview->sendEvent(new ScreenRepaintEvent(x, y, width, height));	
 }
 
 extern void beep() {

@@ -13,16 +13,17 @@ For 3.2:
 Future:
 - SSL/TLS?
 - make KVncView a KPart
+- possibly reduce flickering by bundling bitblts
 
 
 Known bugs/problems:
-- on some systems, the fullscreen-autohide mode does not detect mouse
-  movement unless a button is pressed
-- sometimes pixel-dirt with copy encoding. Not sure whether this
-  is krdc's fault.
 - After authentication is may be neccessary to click before 
   window opens
 - when using the XShm extension (see DesktopInit(), CreateShmImage() 
   invocation) I get error messages like "Xlib: unexpected async reply 
   (sequence 0x1717)!" after a few seconds. That's why XShm is not used at 
   the moment.
+
+Maybe a problem:
+- on some systems, the fullscreen-autohide mode does not detect mouse
+  movement unless a button is pressed. Not sure whether this is fixed.
