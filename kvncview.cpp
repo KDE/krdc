@@ -23,6 +23,9 @@
 #include <kmessagebox.h>
 #include <kinstance.h>
 #include <kstandarddirs.h>
+#include <kapplication.h>
+#include <qdatastream.h>
+#include <dcopclient.h>
 #include <qcursor.h>
 #include <qbitmap.h>
 #include <qlineedit.h>
@@ -125,10 +128,43 @@ enum RemoteViewStatus KVncView::status() {
 	return m_status;
 }
 
-void KVncView::start() {
+bool KVncView::checkLocalKRfb() {
+	if ((m_host != "localhost") && (m_host != ""))
+		return true;
+	DCOPClient *d = KApplication::dcopClient();
+
+	int portNum;
+	QByteArray sdata, rdata;
+	QCString replyType;
+	QDataStream arg(sdata, IO_WriteOnly);
+	arg << QString("krfb");
+	if (!d->call ("kded", "kinetd", "port(QString)", sdata, replyType, rdata))
+		return true;
+
+	if (replyType != "int")
+		return true;
+
+	QDataStream answer(rdata, IO_ReadOnly);
+	answer >> portNum;
+
+	if (m_port != portNum)
+		return true;
+
+	emit statusChanged(REMOTE_VIEW_DISCONNECTED);
+	KMessageBox::error(0, 
+			   i18n("It is not possible to connect to a local Desktop Sharing service."),
+			   i18n("Connection Failure"));
+	emit disconnected();
+	return false;
+}
+
+bool KVncView::start() {
+	if (!checkLocalKRfb())
+		return false;
 	m_cthread.start();
 	m_wthread.queueUpdateRequest(QRegion(QRect(0,0,width(),height())));
 	setBackgroundMode(Qt::NoBackground);
+	return true;
 }
 
 KVncView::~KVncView()

@@ -121,7 +121,7 @@ bool KRDC::start()
 	setCaption(m_host + i18n(" - Remote Desktop Connection"));
 	configureApp(m_quality);
 
-	m_view = new KVncView(m_scrollView, 0, vncServerHost, vncServerPort, 
+	m_view = new KVncView(m_scrollView, 0, vncServerHost, vncServerPort,
 			      &m_appData);
 	m_scrollView->addChild(m_view);
 	connect(m_view, SIGNAL(changeSize(int,int)), SLOT(setSize(int,int)));
@@ -133,9 +133,7 @@ bool KRDC::start()
 		SLOT(showingPasswordDialog(bool)));
 
 	changeProgress(REMOTE_VIEW_CONNECTING);
-	m_view->start();
-
-	return true;
+	return m_view->start();
 }
 
 void KRDC::changeProgress(RemoteViewStatus s) {

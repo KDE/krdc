@@ -44,6 +44,7 @@ private:
 	void setDefaultAppData();
 	void mouseEvent(QMouseEvent*);
 	unsigned long toKeySym(QKeyEvent *k);
+	bool checkLocalKRfb();
 	void paintMessage(const QString &msg);
 
 protected:
@@ -68,7 +69,7 @@ public:
 
 	QString host();
 	int port();
-	void start();
+	bool start();
 	enum RemoteViewStatus status();
 
 signals:
