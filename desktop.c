@@ -721,10 +721,10 @@ static void ZoomSurfaceSrcCoords(int six, int siy, int siw, int sih,
   transformZoomSrc(six, siy, siw, sih,
 		   &dx, &dy, &dw, &dh,
 		   src->w, dst->w, src->h, dst->h);
-  dx-=1;
-  dy-=1;
-  dw+=2;
-  dh+=2;
+  dx-=2;
+  dy-=2;
+  dw+=4;
+  dh+=4;
 
   if (dx < 0)
     dx = 0;
