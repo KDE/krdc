@@ -513,7 +513,7 @@ void KRDC::iconify()
 
 bool KRDC::event(QEvent *e) {
 /* used to change resolution when fullscreen was minimized */
-        if ((!m_fullscreenMinimized) || (e->type() != QEvent::Show)) 
+        if ((!m_fullscreenMinimized) || (e->type() != QEvent::WindowActivate)) 
 		return QWidget::event(e);
 
 	m_fullscreenMinimized = false;
