@@ -140,7 +140,7 @@ bool KRDC::start()
 			       userName, password)) {
 			KMessageBox::error(0,
 			   i18n("The entered host does not have the required form."),
-			   i18n("Malformed URL or host"));
+			   i18n("Malformed URL or Host"));
 			emit disconnectedError();
 			return true;
 		}
@@ -167,7 +167,7 @@ bool KRDC::start()
 			       userName, password)) {
 			KMessageBox::error(0,
 					   i18n("The entered host does not have the required form."),
-					   i18n("Malformed URL or host"));
+					   i18n("Malformed URL or Host"));
 			emit disconnectedError();
 			return true;
 		}
