@@ -112,10 +112,12 @@ bool KRDC::start(bool onlyFailOnCancel)
 	QString serverHost;
 	int serverPort = 5900;
 
-	if (!m_host.isNull()) {
-		if (m_host.startsWith("vnc://"))
+	if (!m_host.isNull() && 
+	    (m_host != "vnc:/") &&
+	    (m_host != "rdp:/")) {
+		if (m_host.startsWith("vnc:/"))
 			m_protocol = PROTOCOL_VNC;
-		if (m_host.startsWith("rdp://"))
+		if (m_host.startsWith("rdp:/"))
 			m_protocol = PROTOCOL_RDP;
 		if (!parseHost(m_host, m_protocol, serverHost, serverPort,
 			       userName, password)) {
@@ -145,9 +147,9 @@ bool KRDC::start(bool onlyFailOnCancel)
 
 		m_host = ncd.serverInput->currentText();
 		m_lastHost = m_host;
-		if (m_host.startsWith("vnc://"))
+		if (m_host.startsWith("vnc:/"))
 			m_protocol = PROTOCOL_VNC;
-		if (m_host.startsWith("rdp://"))
+		if (m_host.startsWith("rdp:/"))
 			m_protocol = PROTOCOL_RDP;
 		if (!parseHost(m_host, m_protocol, serverHost, serverPort,
 			       userName, password)) {
@@ -337,12 +339,16 @@ bool KRDC::parseHost(QString &str, Protocol &prot, QString &serverHost, int &ser
 	if (prot == PROTOCOL_AUTO || prot == PROTOCOL_VNC) {
 		if (s.startsWith(":"))
 			s = "localhost" + s;
-		if (!s.startsWith("vnc://"))
+		if (!s.startsWith("vnc:/"))
 			s = "vnc://" + s;
+		else if (!s.startsWith("vnc://")) // TODO: fix this in KURL!
+			s.insert(4, '/');
 	}
 	if (prot == PROTOCOL_RDP) {
-		if (!s.startsWith("rdp://"))
+		if (!s.startsWith("rdp:/"))
 			s = "rdp://" + s;
+		else if (!s.startsWith("rdp://")) // TODO: fix this in KURL!
+			s.insert(4, '/');
 	}
 
 	KURL url(s);
