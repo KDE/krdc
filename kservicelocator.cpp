@@ -153,7 +153,7 @@ public:
 	int success() const { return m_success; };
 };
 
-const int FoundServiceTypesEventType = 785012;
+const int FoundServiceTypesEventType = 45012;
 class FoundServiceTypesEvent : public QCustomEvent
 {
 private:
@@ -166,7 +166,7 @@ public:
 	QString srvtypes() const { return m_srvtypes; };
 };
 
-const int FoundServiceEventType = 785013;
+const int FoundServiceEventType = 45013;
 class FoundServiceEvent : public QCustomEvent
 {
 private:
@@ -182,7 +182,7 @@ public:
 	unsigned short lifetime() const { return m_lifetime; };
 };
 
-const int FoundAttributesEventType = 785014;
+const int FoundAttributesEventType = 45014;
 class FoundAttributesEvent : public QCustomEvent
 {
 private:
@@ -195,7 +195,7 @@ public:
 	QString attributes() const { return m_attributes; };
 };
 
-const int FoundScopesEventType = 785015;
+const int FoundScopesEventType = 45015;
 class FoundScopesEvent : public QCustomEvent
 {
 private:
