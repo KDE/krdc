@@ -60,7 +60,7 @@ KVncView::KVncView(QWidget *parent,
 		   int _port,
 		   const QString &_password,
 		   AppData *data) : 
-  QWidget(parent, name),
+  QWidget(parent, name, Qt::WResizeNoErase | Qt::WRepaintNoErase | Qt::WStaticContents),
   ThreadSafeEventReceiver(this),
   m_cthread(this, m_wthread, m_quitFlag),
   m_wthread(this, m_quitFlag),
