@@ -62,7 +62,6 @@ KVncView::KVncView(QWidget *parent,
 		   const QString &_password,
 		   AppData *data) : 
   KRemoteView(parent, name, Qt::WResizeNoErase | Qt::WRepaintNoErase | Qt::WStaticContents),
-  ThreadSafeEventReceiver(this),
   m_cthread(this, m_wthread, m_quitFlag),
   m_wthread(this, m_quitFlag),
   m_quitFlag(false),
@@ -194,7 +193,6 @@ KVncView::~KVncView()
 	m_cthread.wait();
 	m_wthread.wait();
 	freeResources();
-	waitForLastEvent();
 }
 
 bool KVncView::scaling() {
@@ -247,27 +245,20 @@ void KVncView::drawRegion(int x, int y, int w, int h) {
 
 void KVncView::customEvent(QCustomEvent *e)
 {
-	if (ignoreEvents())
-		return;
-
 	if (e->type() == ScreenRepaintEventType) {  
-		gotEvent(e);
 		ScreenRepaintEvent *sre = (ScreenRepaintEvent*) e;
 		drawRegion(sre->x(), sre->y(),sre->width(), sre->height());
 	}
 	else if (e->type() == ScreenResizeEventType) {  
-		gotEvent(e);
 		ScreenResizeEvent *sre = (ScreenResizeEvent*) e;
 		m_framebufferSize = QSize(sre->width(), sre->height());
 		setFixedSize(m_framebufferSize);
 		emit changeSize(sre->width(), sre->height());
 	}
 	else if (e->type() == DesktopInitEventType) {  
-		gotEvent(e);
 		m_cthread.desktopInit();
 	}
 	else if (e->type() == StatusChangeEventType) {  
-		gotEvent(e);
 		StatusChangeEvent *sce = (StatusChangeEvent*) e;
 		m_status = sce->status();
 		emit statusChanged(m_status);
@@ -282,7 +273,6 @@ void KVncView::customEvent(QCustomEvent *e)
 		}
 	}
 	else if (e->type() == PasswordRequiredEventType) {  
-		gotEvent(e);
 		PasswordDialog pd(0, 0, true);
 
 		emit showingPasswordDialog(true);
@@ -300,7 +290,6 @@ void KVncView::customEvent(QCustomEvent *e)
 		passwordLock.unlock();
 	}
 	else if (e->type() == FatalErrorEventType) {  
-		gotEvent(e);
 		FatalErrorEvent *fee = (FatalErrorEvent*) e;
 		emit statusChanged(REMOTE_VIEW_DISCONNECTED);
 		switch (fee->errorCode()) {
@@ -348,18 +337,15 @@ void KVncView::customEvent(QCustomEvent *e)
 		emit disconnectedError();
 	}
 	else if (e->type() == BeepEventType) {  
-		gotEvent(e);
 		QApplication::beep();
 	}
 	else if (e->type() == ServerCutEventType) { 
-		gotEvent(e);
 		ServerCutEvent *sce = (ServerCutEvent*) e;
 		m_dontSendCb = true;
 		m_cb->setText(sce->bytes());
 		m_dontSendCb = false;
 	}
 	else if (e->type() == MouseStateEventType) {
-		gotEvent(e);
 		MouseStateEvent *mse = (MouseStateEvent*) e;
 		emit mouseStateChanged(mse->x(), mse->y(), mse->buttonMask());
 		showDotCursor(m_plom.handlePointerEvent(mse->x(), mse->y()));
@@ -510,7 +496,7 @@ int getPassword(char *passwd, int pwlen) {
 
 	passwordLock.lock();
 	if (password.isNull()) {
-		kvncview->sendEvent(new PasswordRequiredEvent());
+		QApplication::postEvent(kvncview, new PasswordRequiredEvent());
 		passwordWaiter.wait(&passwordLock);
 	}
 	if (!password.isNull())
@@ -535,19 +521,19 @@ extern void DrawScreenRegion(int x, int y, int width, int height) {
 	kvncview->drawRegion(x, y, width, height);
 	KApplication::kApplication()->unlock();
 */
-	kvncview->sendEvent(new ScreenRepaintEvent(x, y, width, height));	
+	QApplication::postEvent(kvncview, new ScreenRepaintEvent(x, y, width, height));	
 }
 
 extern void beep() {
-	kvncview->sendEvent(new BeepEvent());	
+	QApplication::postEvent(kvncview, new BeepEvent());	
 }
 
 extern void newServerCut(char *bytes, int length) {
-	kvncview->sendEvent(new ServerCutEvent(bytes, length));
+	QApplication::postEvent(kvncview, new ServerCutEvent(bytes, length));
 }
 
 extern void postMouseEvent(int x, int y, int buttonMask) {
-	kvncview->sendEvent(new MouseStateEvent(x, y, buttonMask));
+	QApplication::postEvent(kvncview, new MouseStateEvent(x, y, buttonMask));
 }
 
 #include "kvncview.moc"

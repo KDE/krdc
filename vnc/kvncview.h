@@ -23,7 +23,6 @@
 #include <qclipboard.h>
 #include <qcursor.h>
 
-#include "threadsafeeventreceiver.h"
 #include "pointerlatencyometer.h"
 #include "threads.h"
 #include "vnctypes.h"
@@ -34,7 +33,7 @@ enum DotCursorState {
 	DOT_CURSOR_AUTO 
 };
 
-class KVncView : public KRemoteView, public ThreadSafeEventReceiver
+class KVncView : public KRemoteView
 {
 	Q_OBJECT 
 private:
