@@ -57,8 +57,6 @@ ReadFromRFBServer(char *out, unsigned int n)
   fd_set fds;
   int e;
   struct timeval tx;
-  tx.tv_sec = SELECT_PERIOD;
-  tx.tv_usec = 0;
 
   if (isQuitFlagSet())
     return False;
@@ -85,12 +83,15 @@ ReadFromRFBServer(char *out, unsigned int n)
       if (isQuitFlagSet())
 	return False;
       i = read(rfbsock, buf + buffered, BUF_SIZE - buffered);
+
       if (i <= 0) {
 	if (i < 0) {
 	  if (errno == EWOULDBLOCK || errno == EAGAIN) {
 	    FD_ZERO(&fds);
 	    FD_SET(rfbsock,&fds);
 
+	    tx.tv_sec = SELECT_PERIOD;
+	    tx.tv_usec = 0;
 	    if ((e=select(rfbsock+1, &fds, NULL, &fds, &tx)) < 0) {
 	      perror("krdc: select read");
 	      return False;
@@ -126,6 +127,8 @@ ReadFromRFBServer(char *out, unsigned int n)
 	    FD_ZERO(&fds);
 	    FD_SET(rfbsock,&fds);
 
+	    tx.tv_sec = SELECT_PERIOD;
+	    tx.tv_usec = 0;
 	    if ((e=select(rfbsock+1, &fds, NULL, &fds, &tx)) < 0) {
 	      perror("krdc: select");
 	      return False;
@@ -162,8 +165,6 @@ WriteExact(int sock, char *_buf, int n)
   int j;
   int e;
   struct timeval tx;
-  tx.tv_sec = SELECT_PERIOD;
-  tx.tv_usec = 0;
 
   while (i < n) {
     if (isQuitFlagSet())
@@ -175,6 +176,8 @@ WriteExact(int sock, char *_buf, int n)
 	  FD_ZERO(&fds);
 	  FD_SET(rfbsock,&fds);
 
+	  tx.tv_sec = SELECT_PERIOD;
+	  tx.tv_usec = 0;
 	  if ((e=select(rfbsock+1, NULL, &fds, NULL, &tx)) < 0) {
 	    perror("krdc: select write");
 	    return False;
