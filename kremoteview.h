@@ -98,6 +98,7 @@ public:
 	 * Checks whether the view is currently quitting.
 	 * @return true if it is quitting
 	 * @see startQuitting()
+	 * @see setStatus()
 	 */
 	virtual bool isQuitting() = 0;
 
@@ -114,7 +115,11 @@ public:
 	virtual int port() = 0;
 
 	/**
-	 * Starts connecting. Should not block.
+	 * Initialize the view (for example by showing configuration 
+	 * dialogs to the user) and start connecting. Should not block 
+	 * without running the event loop (so displaying a dialog is ok). 
+	 * When the view starts connecting the application must call
+	 * @ref setStatus() with the status REMOTE_VIEW_CONNECTING.
 	 * @return true if successful (so far), false
 	 *         otherwise
 	 * @see connected()
@@ -137,7 +142,7 @@ public slots:
 	 * Ignored if @ref supportsScaling() is false.
 	 * The default implementation does nothing.
 	 * @param s true to enable, false to disable.
-	 * @see supportsScaling()
+	 * @see supportsScaling() 
 	 * @see scaling()
 	 */
         virtual void enableScaling(bool s);

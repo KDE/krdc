@@ -110,6 +110,7 @@ bool KRDC::start(bool onlyFailOnCancel)
 {
 	QString userName, password;
 	KConfig *config = KApplication::kApplication()->config();
+	config->setGroup(QString::null);
 	QString serverHost;
 	int serverPort = 5900;
 

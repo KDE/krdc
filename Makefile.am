@@ -8,11 +8,11 @@ bin_PROGRAMS = krdc
 krdc_SOURCES = main.cpp krdc.cpp vidmode.cpp kfullscreenpanel.cpp \
   maindialog.ui fullscreentoolbar.ui toolbar.ui \
   kservicelocator.cpp srvlocmaindialog.cpp keycapturedialog.ui \
-  keycapturedialog2.cpp kremoteview.cpp
+  keycapturedialog2.cpp kremoteview.cpp smartptr.cpp hostpreferences.cpp
 
 noinst_HEADERS = main.h krdc.h vidmode.h kfullscreenpanel.h events.h \
    maindialog.ui.h kservicelocator.h srvlocmaindialog.h \
-   keycapturedialog2.h kremoteview.h
+   keycapturedialog2.h kremoteview.h smartptr.h hostpreferences.h
 
 EXTRA_DIST = README TODO window_fullscreen.png window_nofullscreen.png \
              iconify.png close.png scale.png

@@ -18,12 +18,14 @@
 #include "kvncview.h"
 #include "passworddialog.h"
 #include "vnchostpreferences.h"
+#include "vnchostpref.h"
 #include <kdebug.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kinstance.h>
 #include <kstandarddirs.h>
 #include <kapplication.h>
+#include <kconfig.h>
 #include <kkeynative.h>
 #include <qdatastream.h>
 #include <dcopclient.h>
@@ -31,6 +33,7 @@
 #include <qlineedit.h>
 #include <qdialog.h>
 #include <qcombobox.h>
+#include <qcheckbox.h>
 #include <qmutex.h>
 #include <qwaitcondition.h>
 
@@ -202,17 +205,32 @@ bool KVncView::checkLocalKRfb() {
 }
 
 bool KVncView::start() {
+
 	if (!checkLocalKRfb())
 		return false;
 
 	if (!appDataConfigured) {
-		// show preferences dialog
-		VncHostPreferences vhp(0, "VncHostPreferencesDialog", true);
-		if (vhp.exec() == QDialog::Rejected)
-			return false;
+		KConfig *config = KApplication::kApplication()->config();
+		HostPreferences hps(config);
+		SmartPtr<VncHostPref> hp = 
+			SmartPtr<VncHostPref>(hps.createHostPref(m_host, 
+								 VncHostPref::VncType));	
+		int ci = hp->quality();
+		if (hp->askOnConnect()) {
+			// show preferences dialog
+			VncHostPreferences vhp(0, "VncHostPreferencesDialog", true);
+			vhp.qualityCombo->setCurrentItem(ci);
+			vhp.nextStartupCheckbox->setChecked(true);
+			if (vhp.exec() == QDialog::Rejected)
+				return false;
+			
+			ci = vhp.qualityCombo->currentItem();
+			hp->setAskOnConnect(vhp.nextStartupCheckbox->isChecked());
+			hp->setQuality(ci);
+			hps.sync();
+		}
 
 		Quality quality;
-		int ci = vhp.qualityCombo->currentItem();
 		if (ci == 0)
 			quality = QUALITY_HIGH;
 		else if (ci == 1)
@@ -221,7 +239,7 @@ bool KVncView::start() {
 			quality = QUALITY_LOW;
 		else {
 			kdDebug() << "Unknown quality";
-			return false;
+				return false;
 		}
 
 		configureApp(quality);
