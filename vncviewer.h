@@ -116,6 +116,10 @@ extern void DesktopInit(Window win);
 extern void ToplevelInit(void);
 extern void SendRFBEvent(XEvent *event, String *params, Cardinal *num_params);
 extern void CopyDataToScreen(char *buf, int x, int y, int width, int height);
+extern void FillRectangle8(CARD8, int x, int y, int width, int height);
+extern void FillRectangle16(CARD16, int x, int y, int width, int height);
+extern void FillRectangle32(CARD32, int x, int y, int width, int height);
+extern void SyncScreenRegion(int x, int y, int width, int height);
 extern void ShmSync(void);
 extern void Cleanup(void);
 

@@ -48,6 +48,7 @@ Bool useShm = True;
 
 static Cursor CreateDotCursor(void);
 static void CopyBGR233ToScreen(CARD8 *buf, int x, int y, int width,int height);
+static void FillRectangleBGR233(CARD8 buf, int x, int y, int width,int height);
 
 
 void
@@ -286,6 +287,18 @@ CreateDotCursor()
   return cursor;
 }
 
+/*
+ * SyncScreenRegion
+ */
+void
+SyncScreenRegion(int x, int y, int width, int height) {
+  lockQt();
+  if (useShm) 
+    XShmPutImage(dpy, desktopWin, gc, image, x, y, x, y, width, height, False);
+  else
+    XPutImage(dpy, desktopWin, gc, image, x, y, x, y, width, height);
+  unlockQt();
+}
 
 /*
  * CopyDataToScreen.
@@ -320,14 +333,8 @@ CopyDataToScreen(char *buf, int x, int y, int width, int height)
     CopyBGR233ToScreen((CARD8 *)buf, x, y, width, height);
   }
 
-  lockQt();
-  if (useShm) 
-    XShmPutImage(dpy, desktopWin, gc, image, x, y, x, y, width, height, False);
-  else
-    XPutImage(dpy, desktopWin, gc, image, x, y, x, y, width, height);
-  unlockQt();
+  SyncScreenRegion(x, y, width, height);
 }
-
 
 /*
  * CopyBGR233ToScreen.
@@ -393,6 +400,143 @@ CopyBGR233ToScreen(CARD8 *buf, int x, int y, int width, int height)
       scr32 += si.framebufferWidth - width;
     }
     break;
+  }
+}
+
+/*
+ * FillRectangle8.
+ */
+
+void
+FillRectangle8(CARD8 fg, int x, int y, int width, int height)
+{
+  if (!appData.useBGR233) {
+    int h;
+    int widthInBytes = width * myFormat.bitsPerPixel / 8;
+    int scrWidthInBytes = si.framebufferWidth * myFormat.bitsPerPixel / 8;
+
+    char *scr = (image->data + y * scrWidthInBytes
+		 + x * myFormat.bitsPerPixel / 8);
+
+    for (h = 0; h < height; h++) {
+      memset(scr, fg, widthInBytes);
+      scr += scrWidthInBytes;
+    }
+  } else {
+    FillRectangleBGR233(fg, x, y, width, height);
+  }
+}
+
+/*
+ * FillRectangleBGR233.
+ */
+
+static void
+FillRectangleBGR233(CARD8 fg, int x, int y, int width, int height)
+{
+  int p, q;
+  int xoff = 7 - (x & 7);
+  int xcur;
+  int fbwb = si.framebufferWidth / 8;
+  CARD8 *scr1 = ((CARD8 *)image->data) + y * fbwb + x / 8;
+  CARD8 *scrt;
+  CARD8 *scr8 = ((CARD8 *)image->data) + y * si.framebufferWidth + x;
+  CARD16 *scr16 = ((CARD16 *)image->data) + y * si.framebufferWidth + x;
+  CARD32 *scr32 = ((CARD32 *)image->data) + y * si.framebufferWidth + x;
+
+  unsigned long fg233 = BGR233ToPixel[fg];
+
+  switch (visbpp) {
+
+    /* thanks to Chris Hooper for single bpp support */
+
+  case 1:
+    for (q = 0; q < height; q++) {
+      xcur = xoff;
+      scrt = scr1;
+      for (p = 0; p < width; p++) {
+	*scrt = ((*scrt & ~(1 << xcur))
+		 | (fg233 << xcur));
+
+	if (xcur-- == 0) {
+	  xcur = 7;
+	  scrt++;
+	}
+      }
+      scr1 += fbwb;
+    }
+    break;
+
+  case 8:
+    for (q = 0; q < height; q++) {
+      for (p = 0; p < width; p++) {
+	*(scr8++) = fg233;
+      }
+      scr8 += si.framebufferWidth - width;
+    }
+    break;
+
+  case 16:
+    for (q = 0; q < height; q++) {
+      for (p = 0; p < width; p++) {
+	*(scr16++) = fg233;
+      }
+      scr16 += si.framebufferWidth - width;
+    }
+    break;
+
+  case 32:
+    for (q = 0; q < height; q++) {
+      for (p = 0; p < width; p++) {
+	*(scr32++) = fg233;
+      }
+      scr32 += si.framebufferWidth - width;
+    }
+    break;
+  }
+}
+
+/*
+ * FillRectangle16
+ */
+
+void
+FillRectangle16(CARD16 fg, int x, int y, int width, int height)
+{
+  int i, h;
+  int scrWidthInBytes = si.framebufferWidth * myFormat.bitsPerPixel / 8;
+  
+  char *scr = (image->data + y * scrWidthInBytes
+	       + x * myFormat.bitsPerPixel / 8);
+  CARD16 *scr16;
+
+  for (h = 0; h < height; h++) {
+    scr16 = (CARD16*) scr;
+    for (i = 0; i < width; i++)
+      scr16[i] = fg;
+    scr += scrWidthInBytes;
+  }
+}
+
+/*
+ * FillRectangle32
+ */
+
+void
+FillRectangle32(CARD32 fg, int x, int y, int width, int height)
+{
+  int i, h;
+  int scrWidthInBytes = si.framebufferWidth * myFormat.bitsPerPixel / 8;
+  
+  char *scr = (image->data + y * scrWidthInBytes
+	       + x * myFormat.bitsPerPixel / 8);
+  CARD32 *scr32;
+
+  for (h = 0; h < height; h++) {
+    scr32 = (CARD32*) scr;
+    for (i = 0; i < width; i++)
+      scr32[i] = fg;
+    scr += scrWidthInBytes;
   }
 }
 

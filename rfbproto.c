@@ -1,4 +1,5 @@
 /*
+ *  Copyright (C) 2002, Tim Jansen.  All Rights Reserved.
  *  Copyright (C) 2000, 2001 Const Kaplinsky.  All Rights Reserved.
  *  Copyright (C) 2000 Tridia Corporation.  All Rights Reserved.
  *  Copyright (C) 1999 AT&T Laboratories Cambridge.  All Rights Reserved.
@@ -61,12 +62,10 @@ Bool newServerCutText = False;
 int endianTest = 1;
 
 
-/* Note that the CoRRE encoding uses this buffer and assumes it is big enough
-   to hold 255 * 255 * 32 bits -> 260100 bytes.  640*480 = 307200 bytes.
-   Hextile also assumes it is big enough to hold 16 * 16 * 32 bits.
+/*  Hextile assumes it is big enough to hold 16 * 16 * 32 bits.
    Tight encoding assumes BUFFER_SIZE is at least 16384 bytes. */
 
-#define BUFFER_SIZE (640*480)
+#define BUFFER_SIZE (16384)
 static char buffer[BUFFER_SIZE];
 
 

@@ -29,12 +29,12 @@
 #define HandleHextileBPP CONCAT2E(HandleHextile,BPP)
 #define CARDBPP CONCAT2E(CARD,BPP)
 #define GET_PIXEL CONCAT2E(GET_PIXEL,BPP)
+#define FillRectangleBPP CONCAT2E(FillRectangle,BPP)
 
 static Bool
 HandleHextileBPP (int rx, int ry, int rw, int rh)
 {
   CARDBPP bg, fg;
-  XGCValues gcv;
   int i;
   CARD8 *ptr;
   int x, y, w, h;
@@ -65,23 +65,14 @@ HandleHextileBPP (int rx, int ry, int rw, int rh)
 	if (!ReadFromRFBServer((char *)&bg, sizeof(bg)))
 	  return False;
 
-#if (BPP == 8)
-      if (appData.useBGR233)
-	gcv.foreground = BGR233ToPixel[bg];
-      else
-#endif
-	gcv.foreground = bg;
-
-      lockQt();
-      XChangeGC(dpy, gc, GCForeground, &gcv);
-      XFillRectangle(dpy, desktopWin, gc, x, y, w, h);
-      unlockQt();
+      FillRectangleBPP(bg, x, y, w, h);
 
       if (subencoding & rfbHextileForegroundSpecified)
 	if (!ReadFromRFBServer((char *)&fg, sizeof(fg)))
 	  return False;
 
       if (!(subencoding & rfbHextileAnySubrects)) {
+	SyncScreenRegion(x, y, w, h);
 	continue;
       }
 
@@ -94,7 +85,6 @@ HandleHextileBPP (int rx, int ry, int rw, int rh)
 	if (!ReadFromRFBServer(buffer, nSubrects * (2 + (BPP / 8))))
 	  return False;
 
-	lockQt();
 	for (i = 0; i < nSubrects; i++) {
 	  GET_PIXEL(fg, ptr);
 	  sx = rfbHextileExtractX(*ptr);
@@ -103,31 +93,12 @@ HandleHextileBPP (int rx, int ry, int rw, int rh)
 	  sw = rfbHextileExtractW(*ptr);
 	  sh = rfbHextileExtractH(*ptr);
 	  ptr++;
-#if (BPP == 8)
-	  if (appData.useBGR233)
-	    gcv.foreground = BGR233ToPixel[fg];
-	  else
-#endif
-	    gcv.foreground = fg;
-
-	  XChangeGC(dpy, gc, GCForeground, &gcv);
-	  XFillRectangle(dpy, desktopWin, gc, x+sx, y+sy, sw, sh);
+	  FillRectangleBPP(fg, x+sx, y+sy, sw, sh);
 	}
-	unlockQt();
 
       } else {
 	if (!ReadFromRFBServer(buffer, nSubrects * 2))
 	  return False;
-
-#if (BPP == 8)
-	if (appData.useBGR233)
-	  gcv.foreground = BGR233ToPixel[fg];
-	else
-#endif
-	  gcv.foreground = fg;
-
-	lockQt();
-	XChangeGC(dpy, gc, GCForeground, &gcv);
 
 	for (i = 0; i < nSubrects; i++) {
 	  sx = rfbHextileExtractX(*ptr);
@@ -136,10 +107,10 @@ HandleHextileBPP (int rx, int ry, int rw, int rh)
 	  sw = rfbHextileExtractW(*ptr);
 	  sh = rfbHextileExtractH(*ptr);
 	  ptr++;
-	  XFillRectangle(dpy, desktopWin, gc, x+sx, y+sy, sw, sh);
+	  FillRectangleBPP(fg, x+sx, y+sy, sw, sh);
 	}
-	unlockQt();
       }
+      SyncScreenRegion(x, y, w, h);
     }
   }
 
