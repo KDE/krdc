@@ -32,7 +32,7 @@
 #include "main.h"
 
 
-static const char *description = I18N_NOOP("Remote Desktop Connection");
+static const char description[] = I18N_NOOP("Remote Desktop Connection");
 
 
 static KCmdLineOptions options[] =
