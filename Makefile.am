@@ -17,15 +17,14 @@ noinst_HEADERS = main.h krdc.h vidmode.h kfullscreenpanel.h events.h \
 EXTRA_DIST = README TODO window_fullscreen.png window_nofullscreen.png \
              iconify.png close.png scale.png
 
-datadir = $(kde_datadir)/krdc/pics
-data_DATA =  pointcursor.png pointcursormask.png pinup.png pindown.png 
+appdatadir = $(kde_datadir)/krdc/pics
+appdata_DATA =  pointcursor.png pointcursormask.png pinup.png pindown.png 
 
 
 krdc_LDADD   = vnc/libvnc.la rdp/librdp.la $(LIB_KDEUI) $(LIBXF86VIDMODE) $(LIB_SLP) -L/usr/X11R6/lib -lX11 $(LIBSSL)
 krdc_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(SSL_LDFLAGS) 
 
-lnkdir = $(kde_appsdir)/Internet
-lnk_DATA = krdc.desktop
+xdg_apps_DATA = krdc.desktop
 
 kde_services_DATA = vnc.protocol rdp.protocol
 
