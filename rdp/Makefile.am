@@ -26,7 +26,7 @@ keymapdir = $(kde_datadir)/krdc/rdp-keymaps
 install-data-local:
 	$(mkinstalldirs) $(DESTDIR)$(keymapdir)
 	for file in $(srcdir)/keymaps/*; do \
-		if test -f $$file; then \
+		if test -f $$file && ! test -x $$file; then \
 		   $(INSTALL_DATA) $$file $(DESTDIR)$(keymapdir)/`basename $$file`;\
 		fi \
 	done
