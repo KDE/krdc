@@ -503,14 +503,14 @@
         <slot>toggleBrowsingArea()</slot>
     </connection>
     <connection>
-        <sender>rescanButton</sender>
-        <signal>pressed()</signal>
+        <sender>scopeCombo</sender>
+        <signal>activated(int)</signal>
         <receiver>NewConnectionDialog</receiver>
         <slot>rescan()</slot>
     </connection>
     <connection>
-        <sender>scopeCombo</sender>
-        <signal>activated(int)</signal>
+        <sender>rescanButton</sender>
+        <signal>clicked()</signal>
         <receiver>NewConnectionDialog</receiver>
         <slot>rescan()</slot>
     </connection>
