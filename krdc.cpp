@@ -411,7 +411,7 @@ void KRDC::switchToNormal(bool scaling)
 	if (!m_toolbar) {
 		Toolbar *t = new Toolbar(this);
 		m_toolbar = t;
-		t->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, 
+		t->setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding, 
 					     QSizePolicy::Fixed));
 		t->fullscreenButton->setOn(false);
 		t->scaleButton->setOn(m_wasScaling);
