@@ -449,8 +449,38 @@ bool KVncView::x11Event(XEvent *e) {
 	else
 		return QWidget::x11Event(e);
 
-	m_wthread.queueKeyEvent(KKeyNative(e).sym(), pressed);
+        unsigned int s = KKeyNative(e).sym();
+ 
+        switch (s) {
+        case XK_Meta_L:
+        case XK_Alt_L:
+        case XK_Control_L:
+        case XK_Shift_L:
+        case XK_Meta_R:
+        case XK_Alt_R:
+        case XK_Control_R:
+        case XK_Shift_R:
+		if (pressed)
+                	m_mods[s] = true;
+                else
+                	m_mods.remove(s);
+	}
+        m_wthread.queueKeyEvent(s, pressed);
 	return true;
+}
+
+void KVncView::unpressModifiers() {
+	QValueList<unsigned int> keys = m_mods.keys();
+	QValueList<unsigned int>::const_iterator it = keys.begin();
+        while (it != keys.end()) {
+                m_wthread.queueKeyEvent(*it, false);
+                it++;
+        }
+        m_mods.clear();
+}
+ 
+void KVncView::focusOutEvent(QFocusEvent *) {
+        unpressModifiers();
 }
 
 QSize KVncView::sizeHint() {
