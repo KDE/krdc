@@ -232,11 +232,10 @@ int KVncView::heightForWidth(int w) const {
 }
 
 void KVncView::paintEvent(QPaintEvent *e) {
-	if (m_status == REMOTE_VIEW_CONNECTED) 
-		drawRegion(e->rect().x(),
-			   e->rect().y(),
-			   e->rect().width(),
-			   e->rect().height());
+	drawRegion(e->rect().x(),
+		   e->rect().y(),
+		   e->rect().width(),
+		   e->rect().height());
 }
 
 void KVncView::drawRegion(int x, int y, int w, int h) {
