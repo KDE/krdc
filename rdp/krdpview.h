@@ -58,10 +58,10 @@ class KRdpView : public KRemoteView
 	public:
 		// constructor and destructor
 		KRdpView(QWidget *parent = 0, const char *name = 0,
-		         const QString &host = QString(""), int port = TCP_PORT_RDP,
-		         const QString &user = QString(""), const QString &password = QString(""),
-		         int flags = RDP_LOGON_NORMAL, const QString &domain = QString(""),
-		         const QString &shell = QString(""), const QString &directory = QString(""));
+		         const QString &host = QString::null, int port = TCP_PORT_RDP,
+		         const QString &user = QString::null, const QString &password = QString::null,
+		         int flags = RDP_LOGON_NORMAL, const QString &domain = QString::null,
+		         const QString &shell = QString::null, const QString &directory = QString::null);
 		virtual ~KRdpView();
 
 		// functions regarding the window

@@ -1,4 +1,4 @@
-<!DOCTYPE UI><UI version="3.2" stdsetdef="1">
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
 <class>RdpPrefs</class>
 <widget class="QWidget">
     <property name="name">
@@ -9,7 +9,7 @@
             <x>0</x>
             <y>0</y>
             <width>449</width>
-            <height>157</height>
+            <height>177</height>
         </rect>
     </property>
     <vbox>
@@ -30,25 +30,6 @@
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QLabel" row="0" column="0">
-                    <property name="name">
-                        <cstring>resolutionLabel</cstring>
-                    </property>
-                    <property name="sizePolicy">
-                        <sizepolicy>
-                            <hsizetype>0</hsizetype>
-                            <vsizetype>1</vsizetype>
-                            <horstretch>0</horstretch>
-                            <verstretch>0</verstretch>
-                        </sizepolicy>
-                    </property>
-                    <property name="text">
-                        <string>Desktop &amp;resolution:</string>
-                    </property>
-                    <property name="buddy" stdset="0">
-                        <cstring>cmbResolution</cstring>
-                    </property>
-                </widget>
                 <spacer row="1" column="0">
                     <property name="name">
                         <cstring>spacer8</cstring>
@@ -66,25 +47,6 @@
                         </size>
                     </property>
                 </spacer>
-                <widget class="QLabel" row="2" column="0">
-                    <property name="name">
-                        <cstring>layoutLabel</cstring>
-                    </property>
-                    <property name="sizePolicy">
-                        <sizepolicy>
-                            <hsizetype>0</hsizetype>
-                            <vsizetype>1</vsizetype>
-                            <horstretch>0</horstretch>
-                            <verstretch>0</verstretch>
-                        </sizepolicy>
-                    </property>
-                    <property name="text">
-                        <string>&amp;Keyboard layout:</string>
-                    </property>
-                    <property name="buddy" stdset="0">
-                        <cstring>cmbKbLayout</cstring>
-                    </property>
-                </widget>
                 <widget class="QComboBox" row="0" column="1" rowspan="1" colspan="4">
                     <item>
                         <property name="text">
@@ -128,23 +90,6 @@
                     </property>
                     <property name="whatsThis" stdset="0">
                         <string>Here you can specify the resolution of the remote desktop. This resolution determines the size of the desktop that will be presented to you.</string>
-                    </property>
-                </widget>
-                <widget class="QLabel" row="1" column="1">
-                    <property name="name">
-                        <cstring>widthLabel</cstring>
-                    </property>
-                    <property name="enabled">
-                        <bool>false</bool>
-                    </property>
-                    <property name="text">
-                        <string>&amp;Width:</string>
-                    </property>
-                    <property name="alignment">
-                        <set>AlignVCenter|AlignRight</set>
-                    </property>
-                    <property name="buddy" stdset="0">
-                        <cstring>spinWidth</cstring>
                     </property>
                 </widget>
                 <widget class="QSpinBox" row="1" column="2">
@@ -198,7 +143,7 @@
                         <string>This is the height of the remote desktop. You can only change this value manually if you select Custom as desktop resolution above.</string>
                     </property>
                 </widget>
-                <widget class="QComboBox" row="2" column="1" rowspan="1" colspan="4">
+                <widget class="QComboBox" row="3" column="1" rowspan="1" colspan="4">
                     <item>
                         <property name="text">
                             <string>Arabic (ar)</string>
@@ -346,6 +291,100 @@
                         <string>Use this to specify your keyboard layout. This layout setting is used to send the correct keyboard codes to the server.</string>
                     </property>
                 </widget>
+                <widget class="QLabel" row="3" column="0">
+                    <property name="name">
+                        <cstring>layoutLabel</cstring>
+                    </property>
+                    <property name="sizePolicy">
+                        <sizepolicy>
+                            <hsizetype>0</hsizetype>
+                            <vsizetype>1</vsizetype>
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                        </sizepolicy>
+                    </property>
+                    <property name="text">
+                        <string>&amp;Keyboard layout:</string>
+                    </property>
+                    <property name="buddy" stdset="0">
+                        <cstring>cmbKbLayout</cstring>
+                    </property>
+                </widget>
+                <widget class="QLabel" row="0" column="0">
+                    <property name="name">
+                        <cstring>resolutionLabel</cstring>
+                    </property>
+                    <property name="sizePolicy">
+                        <sizepolicy>
+                            <hsizetype>0</hsizetype>
+                            <vsizetype>1</vsizetype>
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                        </sizepolicy>
+                    </property>
+                    <property name="text">
+                        <string>Desktop &amp;resolution:</string>
+                    </property>
+                    <property name="buddy" stdset="0">
+                        <cstring>cmbResolution</cstring>
+                    </property>
+                </widget>
+                <widget class="QLabel" row="2" column="0">
+                    <property name="name">
+                        <cstring>colorDepthLabel</cstring>
+                    </property>
+                    <property name="sizePolicy">
+                        <sizepolicy>
+                            <hsizetype>0</hsizetype>
+                            <vsizetype>1</vsizetype>
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                        </sizepolicy>
+                    </property>
+                    <property name="text">
+                        <string>Color &amp;depth:</string>
+                    </property>
+                    <property name="buddy" stdset="0">
+                        <cstring>cmbKbLayout</cstring>
+                    </property>
+                </widget>
+                <widget class="QLabel" row="1" column="1">
+                    <property name="name">
+                        <cstring>widthLabel</cstring>
+                    </property>
+                    <property name="enabled">
+                        <bool>false</bool>
+                    </property>
+                    <property name="text">
+                        <string>&amp;Width:</string>
+                    </property>
+                    <property name="alignment">
+                        <set>AlignVCenter|AlignRight</set>
+                    </property>
+                    <property name="buddy" stdset="0">
+                        <cstring>spinWidth</cstring>
+                    </property>
+                </widget>
+                <widget class="QComboBox" row="2" column="1" rowspan="1" colspan="4">
+                    <item>
+                        <property name="text">
+                            <string>Low Color (8 Bit)</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>High Color (16 Bit)</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>True Color (24 Bit)</string>
+                        </property>
+                    </item>
+                    <property name="name">
+                        <cstring>cmbColorDepth</cstring>
+                    </property>
+                </widget>
             </grid>
         </widget>
         <widget class="QCheckBox">
@@ -368,13 +407,29 @@
         <receiver>RdpPrefs</receiver>
         <slot>resolutionChanged(int)</slot>
     </connection>
+    <connection>
+        <sender>cmbColorDepth</sender>
+        <signal>activated(int)</signal>
+        <receiver>RdpPrefs</receiver>
+        <slot>colorDepth()</slot>
+    </connection>
 </connections>
+<tabstops>
+    <tabstop>cmbResolution</tabstop>
+    <tabstop>spinWidth</tabstop>
+    <tabstop>spinHeight</tabstop>
+    <tabstop>cmbColorDepth</tabstop>
+    <tabstop>cmbKbLayout</tabstop>
+    <tabstop>cbShowPrefs</tabstop>
+</tabstops>
 <includes>
     <include location="global" impldecl="in implementation">kdialog.h</include>
     <include location="local" impldecl="in implementation">rdpprefs.ui.h</include>
 </includes>
 <slots>
     <slot access="protected" specifier="non virtual">resolutionChanged( int selection )</slot>
+    <slot returnType="int">colorDepth()</slot>
+    <slot>setColorDepth( int depth )</slot>
 </slots>
 <functions>
     <function specifier="non virtual">setRdpWidth( int w )</function>

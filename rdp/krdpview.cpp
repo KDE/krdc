@@ -165,6 +165,7 @@ bool KRdpView::start()
 		                                              RdpHostPref::RdpType));
 		int wv = hp->width();
 		int hv = hp->height();
+		int cd = hp->colorDepth();
 		QString kl = hp->layout();
 		if(hp->askOnConnect())
 		{
@@ -181,6 +182,7 @@ bool KRdpView::start()
 			prefs->setRdpWidth( wv );
 			prefs->setRdpHeight( hv );
 			prefs->setResolution();
+			prefs->setColorDepth(cd);
 			prefs->setKbLayout( keymap2int( kl ) );
 			prefs->setShowPrefs( true );
 
@@ -193,6 +195,7 @@ bool KRdpView::start()
 			hp->setAskOnConnect( prefs->showPrefs() );
 			hp->setWidth(wv);
 			hp->setHeight(hv);
+			hp->setColorDepth( prefs->colorDepth() );
 			hp->setLayout(kl);
 			hps->sync();
 		}
@@ -208,10 +211,12 @@ bool KRdpView::start()
 	if(!m_password.isEmpty()) { *m_process << "-p" << m_password; }
 	*m_process << "-X" << ("0x" + QString::number(m_container->winId(), 16));
 	*m_process << (m_host + ":" + QString::number(m_port));
+	*m_process << "-a" << QString::number(hp->colorDepth());
 	connect(m_process, SIGNAL(processExited(KProcess *)), SLOT(processDied(KProcess *)));
 	connect(m_process, SIGNAL(receivedStderr(KProcess *, char *, int)), SLOT(receivedStderr(KProcess *, char *, int)));
 	connect(m_container, SIGNAL(embeddedWindowDestroyed()), SLOT(connectionClosed()));
 	connect(m_container, SIGNAL(newEmbeddedWindow(WId)), SLOT(connectionOpened(WId)));
+  qDebug("Color depth: %d", hp->colorDepth());
 	if(!m_process->start(KProcess::NotifyOnExit, KProcess::Stderr))
 	{
 		KMessageBox::error(0, i18n("Could not start rdesktop; make sure rdesktop is properly installed."),

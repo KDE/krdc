@@ -64,6 +64,43 @@ int RdpPrefs::rdpHeight()
 }
 
 
+int RdpPrefs::colorDepth()
+{
+  qDebug("current depth: %i", cmbColorDepth->currentItem() );
+  switch (cmbColorDepth->currentItem())
+  {
+    case 0:
+      return 8;
+    case 1:
+      return 16;
+    case 2:
+      return 24;
+    default:
+      // shouldn't happen, but who knows..
+      return 8;
+    break;	
+  }
+}
+
+
+void RdpPrefs::setColorDepth(int depth)
+{
+  switch (depth)
+  {
+    case 8:
+      cmbColorDepth->setCurrentItem(0);
+      break;   
+    case 16:
+      cmbColorDepth->setCurrentItem(1);
+      break;   
+    case 24:
+      cmbColorDepth->setCurrentItem(2);
+      break;   
+    default:
+      break;	
+  }    
+}
+
 void RdpPrefs::setResolution()
 {
   if (rdpWidth()==640 && rdpHeight()==480)
@@ -113,3 +150,4 @@ bool RdpPrefs::showPrefs()
 {
   return cbShowPrefs->isChecked();
 }
+

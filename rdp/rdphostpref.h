@@ -84,6 +84,7 @@ class RdpHostPref : public HostPref
 
 		int      m_width;
 		int      m_height;
+		int      m_colorDepth;
 		QString  m_layout;
 		bool     m_askOnConnect;
 
@@ -104,6 +105,8 @@ class RdpHostPref : public HostPref
 		int              width() const;
 		void             setHeight(int h);
 		int              height() const;
+		void             setColorDepth(int depth);
+		int              colorDepth() const;
 		void             setLayout(const QString &l);
 		QString          layout() const;
 		void             setAskOnConnect(bool ask);
