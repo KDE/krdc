@@ -25,8 +25,10 @@
 #include <qrect.h>
 #include <qtimer.h> 
 #include <qpixmap.h>
+#include <qdesktopwidget.h>
 #include "kvncview.h"
 #include "kfullscreenpanel.h"
+#include "vidmode.h"
 
 enum WindowMode {
 	WINDOW_MODE_AUTO,
@@ -57,6 +59,7 @@ private:
                                            //     (invalid in normal mode)
 	QPixmap m_pinup, m_pindown;        // fs toolbar imaged for autohide button
 	QWidget *m_toolbar;                // toolbar in normal mode (0 in fs mode)
+	QDesktopWidget m_desktopWidget;
 
 	static const int TOOLBAR_AUTOHIDE_TIMEOUT = 2000;
 	bool m_ftAutoHide; // if true auto hide in fs is activated
@@ -72,7 +75,7 @@ private:
 	AppData m_appData;   // various config stuff, used before connection
 
 	WindowMode m_isFullscreen;    // fs/normal state
-	unsigned int m_oldResolution; // conatins encoded res before fs
+	Resolution m_oldResolution;   // conatins encoded res before fs
 	bool m_fullscreenMinimized;   // true if minimized from fs
 	QSize m_fullscreenResolution; // xvidmode size (valid only in fs)
 	QRect m_oldWindowGeometry;    // geometry before switching to fullscreen
