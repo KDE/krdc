@@ -235,9 +235,9 @@ bool MainDialogWidget::ensureLocatorOpen()
 
   if ( !m_locator->available() ) {
 #ifdef HAVE_SLP
-    KMessageBox::error( 0,·
+    KMessageBox::error( 0,
         i18n( "Browsing the network is not possible. You probably "
-              "did not install SLP support correctly." ),·
+              "did not install SLP support correctly." ),
         i18n( "Browsing Not Possible" ), false );
 #endif
     return false;
