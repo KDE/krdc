@@ -29,36 +29,36 @@
 #include <qregexp.h>
 
 #include "../config.h"
-#include "main.h" 
+#include "main.h"
 
 
 static const char *description = I18N_NOOP("Remote Desktop Connection");
-	
+
 
 static KCmdLineOptions options[] =
 {
 	{ "f", 0, 0 },
-	{ "fullscreen", I18N_NOOP("Start in fullscreen mode."), 0 }, 
+	{ "fullscreen", I18N_NOOP("Start in fullscreen mode."), 0 },
 	{ "w", 0, 0 },
-	{ "window", I18N_NOOP("Start in regular window."), 0 }, 
+	{ "window", I18N_NOOP("Start in regular window."), 0 },
 	{ "l", 0, 0 },
-	{ "low-quality", I18N_NOOP("Low quality mode (Tight Encoding, 8 bit color)."), 0 }, 
+	{ "low-quality", I18N_NOOP("Low quality mode (Tight Encoding, 8 bit color)."), 0 },
 	{ "m", 0, 0 },
-	{ "medium-quality", I18N_NOOP("Medium quality mode (Tight Encoding, lossy)."), 0 }, 
+	{ "medium-quality", I18N_NOOP("Medium quality mode (Tight Encoding, lossy)."), 0 },
 	{ "h", 0, 0 },
-	{ "high-quality", I18N_NOOP("High quality mode, default (Hextile Encoding)."), 0 }, 
+	{ "high-quality", I18N_NOOP("High quality mode, default (Hextile Encoding)."), 0 },
 	{ "s", 0, 0 },
-	{ "scale", I18N_NOOP("Start VNC in scaled mode."), 0 }, 
+	{ "scale", I18N_NOOP("Start VNC in scaled mode."), 0 },
 	{ "e", 0, 0 },
-	{ "encodings ", I18N_NOOP("Override VNC encoding list (e.g. 'hextile raw')."), 0 }, 
+	{ "encodings ", I18N_NOOP("Override VNC encoding list (e.g. 'hextile raw')."), 0 },
 	{ "p", 0, 0 },
-	{ "password-file ", I18N_NOOP("Provide the password in a file."), 0 }, 
+	{ "password-file ", I18N_NOOP("Provide the password in a file."), 0 },
 	{ "r", 0, 0 },
 	{ "resolution ", I18N_NOOP("Resolution of the remote desktop."), "800x600" },
 	{ "k", 0, 0 },
 	{ "keymap ", I18N_NOOP("Keyboard layout on Terminal Server."), "en-us" },
 	{ "+[host]", I18N_NOOP("The name of the host, e.g. 'localhost:1'."), 0 },
-	{ 0, 0, 0 }
+	KCmdLineLastOption
 };
 
 
@@ -71,7 +71,7 @@ int main(int argc, char *argv[])
 		"(c) 2000-2002, Const Kaplinsky\n"
 		"(c) 2000, Tridia Corporation\n"
 		"(c) 1999, AT&T Laboratories Cambridge\n"
-		"(c) 1999-2003, Matthew Chapman\n", 0, 0, 
+		"(c) 1999-2003, Matthew Chapman\n", 0, 0,
 			      "tim@tjansen.de");
 	aboutData.addAuthor("Tim Jansen",0, "tim@tjansen.de");
 	aboutData.addAuthor("Arend van Beelen jr.",
@@ -83,7 +83,7 @@ int main(int argc, char *argv[])
 	aboutData.addCredit("Tridia Corporation",
 			    I18N_NOOP("ZLib encoding"));
 	KCmdLineArgs::init( argc, argv, &aboutData );
-	KCmdLineArgs::addCmdLineOptions( options ); 
+	KCmdLineArgs::addCmdLineOptions( options );
 
 	KApplication a;
 
@@ -143,18 +143,18 @@ int main(int argc, char *argv[])
 		initialWindowSize = QSize(re.cap(1).toInt(), re.cap(2).toInt());
 	}
 
-	MainController mc(&a, wm, host, quality, encodings, password, resolution, 
+	MainController mc(&a, wm, host, quality, encodings, password, resolution,
 			  scale, initialWindowSize, keymap);
 	return mc.main();
 }
 
 MainController::MainController(KApplication *app, WindowMode wm,
 			       const QString &host,
-			       Quality quality, 
+			       Quality quality,
 			       const QString &encodings,
 			       const QString &password,
 			       const QString &resolution,
-			       bool scale, 
+			       bool scale,
 			       QSize initialWindowSize,
 			       const QString &keymap) :
         m_windowMode(wm),
@@ -185,12 +185,12 @@ void MainController::errorRestartRequested() {
 }
 
 bool MainController::start() {
-	m_krdc = new KRDC(m_windowMode, m_host, 
-			  m_quality, m_encodings, m_password, m_resolution, 
+	m_krdc = new KRDC(m_windowMode, m_host,
+			  m_quality, m_encodings, m_password, m_resolution,
 			  m_scale, m_initialWindowSize, m_keymap);
 	m_app->setMainWidget(m_krdc);
 
-	QObject::connect(m_krdc, SIGNAL(disconnected()), 
+	QObject::connect(m_krdc, SIGNAL(disconnected()),
 			 m_app, SLOT(quit()));
 	connect(m_krdc, SIGNAL(disconnectedError()),
 		SLOT(errorRestartRequested()));
@@ -200,15 +200,15 @@ bool MainController::start() {
 
 void MainController::errorRestart() {
 	if (!m_host.isEmpty())
-		KRDC::setLastHost(m_host);	
+		KRDC::setLastHost(m_host);
 	m_host = QString::null; // only auto-connect once
-	
+
 	// unset KRDC as main widget, to avoid quit on delete
 	m_app->setMainWidget(0);
 
 	m_krdc = 0;
 
-	if (!start()) 
+	if (!start())
 		m_app->quit();
 }
 
