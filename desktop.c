@@ -783,7 +783,6 @@ static void drawCursorImage() {
     SKIP_PIXELS(skipLeft);
 
     {
-int i;
       CARD8 *fbx = fb;
       int wl = w;
       while (pixelsLeft <= wl) {
