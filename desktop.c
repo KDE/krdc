@@ -89,6 +89,7 @@ static void transformZoomDst(int *six, int *siy, int *siw, int *sih,
 			     int dix, int diy, int diw, int dih,
 			     int srcW, int dstW, int srcH, int dstH);
 static void ZoomSurfaceSrcCoords(int x, int y, int w, int h, 
+				 int *dix, int *diy, int *diw, int *dih,
 				 Surface * src, Surface * dst);
 static void ZoomSurfaceCoords32(int sx, int sy, int sw, int sh,
 				int dx, int dy, Surface * src, Surface * dst);
@@ -466,6 +467,8 @@ CopyArea(int srcX, int srcY, int width, int height, int x, int y)
 }
 
 void SyncScreenRegion(int x, int y, int width, int height) {
+  int dx, dy, dw, dh; 
+
   if (zoomActive) {
     Surface src, dest;
     src.w = si.framebufferWidth;
@@ -478,9 +481,13 @@ void SyncScreenRegion(int x, int y, int width, int height) {
     dest.pitch = zoomImage->bytes_per_line;
     dest.pixels = zoomImage->data;
     dest.BytesPerPixel = myFormat.bitsPerPixel / 8;
-    ZoomSurfaceSrcCoords(x, y, width, height, &src, &dest);
+    ZoomSurfaceSrcCoords(x, y, width, height, &dx, &dy, &dw, &dh, &src, &dest);
   }
-  DrawScreenRegion(x, y, width, height);
+  else {
+    dx = x; dy = y;
+    dw = width; dh = height;
+  }
+  DrawScreenRegion(dx, dy, dw, dh);
 }
 
 void ShmSync(void) {
@@ -589,8 +596,6 @@ CreateShmImage()
 void
 DrawZoomedScreenRegionX11Thread(Window win, int zwidth, int zheight, 
 				int x, int y, int width, int height) {
-  int dx, dy, dw, dh;
-
   if (zwidth > si.framebufferWidth)
     zwidth = si.framebufferWidth;
   if (zheight > si.framebufferHeight)
@@ -628,13 +633,10 @@ DrawZoomedScreenRegionX11Thread(Window win, int zwidth, int zheight,
     return;
   }
 
-  transformZoomSrc(x, y, width, height, &dx, &dy, &dw, &dh,
-      si.framebufferWidth, zwidth, si.framebufferHeight, zheight);
-
   if (useZoomShm) 
-    XShmPutImage(dpy, win, gc, zoomImage, dx, dy, dx, dy, dw, dh, False);
+    XShmPutImage(dpy, win, gc, zoomImage, x, y, x, y, width, height, False);
   else
-    XPutImage(dpy, win, gc, zoomImage, dx, dy, dx, dy, dw, dh);
+    XPutImage(dpy, win, gc, zoomImage, x, y, x, y, width, height);
 }
 
 
@@ -710,6 +712,7 @@ static void transformZoomDst(int *six, int *siy, int *siw, int *sih,
 
 
 static void ZoomSurfaceSrcCoords(int six, int siy, int siw, int sih,
+				 int *dix, int *diy, int *diw, int *dih,
 				 Surface * src, Surface * dst)
 {
   int dx, dy, dw, dh;
@@ -742,6 +745,11 @@ static void ZoomSurfaceSrcCoords(int six, int siy, int siw, int sih,
     sh = src->h - sy;
 
   ZoomSurfaceCoords32(sx, sy, sw, sh, dx, dy, src, dst);
+
+  *dix = dx;
+  *diy = dy;
+  *diw = dw;
+  *dih = dh;
 }
 
 static void ZoomSurfaceCoords32(int sx, int sy, int sw, int sh,
