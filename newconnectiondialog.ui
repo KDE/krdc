@@ -112,7 +112,10 @@
                                 <cstring>TextLabel1_2</cstring>
                             </property>
                             <property name="text">
-                                <string>Search:</string>
+                                <string>&amp;Search:</string>
+                            </property>
+                            <property name="buddy" stdset="0">
+                                <cstring>searchInput</cstring>
                             </property>
                         </widget>
                         <widget class="KLineEdit">
@@ -156,7 +159,7 @@
                                 </sizepolicy>
                             </property>
                             <property name="text">
-                                <string>&amp;Scope:</string>
+                                <string>Sco&amp;pe:</string>
                             </property>
                             <property name="buddy" stdset="0">
                                 <cstring>scopeCombo</cstring>
@@ -578,7 +581,6 @@ Remote Desktop Connection only supports systems that use VNC.</string>
 <includes>
     <include location="local" impldecl="in implementation">kcombobox.h</include>
     <include location="local" impldecl="in declaration">kservicelocator.h</include>
-    <include location="local" impldecl="in implementation">newconnectiondialog.ui.h</include>
 </includes>
 <variables>
     <variable>KServiceLocator *m_ksl</variable>
