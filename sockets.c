@@ -158,7 +158,7 @@ ReadFromRFBServer(char *out, unsigned int n)
  */
 
 Bool
-WriteExact(int sock, char *_buf, int n)
+WriteExact(int sock, const char *_buf, int n)
 {
   fd_set fds;
   int i = 0;

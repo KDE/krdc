@@ -311,7 +311,7 @@ void WriterThread::run() {
 				}
 			if (!clientCut.isNull()) 
 				if (!SendClientCutText(clientCut.latin1(), 
-						       clientCut.length())) {
+						       (int)clientCut.length())) {
 					sendFatalError(ERROR_IO);
 					break;
 				}

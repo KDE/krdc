@@ -466,7 +466,7 @@ SendKeyEvent(CARD32 key, Bool down)
  */
 
 Bool
-SendClientCutText(char *str, int len)
+SendClientCutText(const char *str, int len)
 {
   rfbClientCutTextMsg cct;
 

@@ -133,7 +133,7 @@ extern Bool SendFramebufferUpdateRequest(int x, int y, int w, int h,
 					 Bool incremental);
 extern Bool SendPointerEvent(int x, int y, int buttonMask);
 extern Bool SendKeyEvent(CARD32 key, Bool down);
-extern Bool SendClientCutText(char *str, int len);
+extern Bool SendClientCutText(const char *str, int len);
 extern Bool HandleRFBServerMessage(void);
 
 extern void PrintPixelFormat(rfbPixelFormat *format);
@@ -156,7 +156,7 @@ extern void ShmCleanup(void);
 extern Bool errorMessageOnReadFailure;
 
 extern Bool ReadFromRFBServer(char *out, unsigned int n);
-extern Bool WriteExact(int sock, char *buf, int n);
+extern Bool WriteExact(int sock, const char *buf, int n);
 extern int FindFreeTcpPort(void);
 extern int ListenAtTcpPort(int port);
 extern int ConnectToTcpAddr(unsigned int host, int port);
