@@ -495,7 +495,7 @@ void KRDC::switchToFullscreen(bool scaling)
 	if (scalingPossible) {
 		t->insertButton("viewmagfit", FS_SCALE_ID);
 		KToolBarButton *scaleButton = t->getButton(FS_SCALE_ID);
-		QToolTip::add(scaleButton, i18n("Scale View"));
+		QToolTip::add(scaleButton, i18n("Scale view"));
 		t->setToggle(FS_SCALE_ID);
 		t->setButton(FS_SCALE_ID, scaling);
 		t->addConnection(FS_SCALE_ID, SIGNAL(toggled(bool)), this, SLOT(switchToFullscreen(bool)));
@@ -581,7 +581,7 @@ void KRDC::switchToNormal(bool scaling)
 		if (m_view->supportsScaling()) {
 			t->insertButton("viewmagfit", 1, true, i18n("Scale"));
 			KToolBarButton *scaleButton = t->getButton(1);
-			QToolTip::add(scaleButton, i18n("Scale View"));
+			QToolTip::add(scaleButton, i18n("Scale view"));
 			QWhatsThis::add(scaleButton, i18n("This option scales the remote screen to fit your window size."));
 			t->setToggle(1);
 			t->setButton(1, scaling);
