@@ -52,7 +52,8 @@ void QScrollView2::mouseMoveEvent( QMouseEvent *e )
 QString KRDC::m_lastHost = "";
 int KRDC::m_lastQuality = 0;
 
-KRDC::KRDC(WindowMode wm, const QString &host, Quality q, const QString &encodings) : 
+KRDC::KRDC(WindowMode wm, const QString &host, 
+	   Quality q, const QString &encodings) : 
   QWidget(0, 0),
   m_layout(0),
   m_scrollView(0),
@@ -74,7 +75,7 @@ KRDC::KRDC(WindowMode wm, const QString &host, Quality q, const QString &encodin
 	connect(&m_bumpScrollTimer, SIGNAL(timeout()), SLOT(bumpScroll()));
 }
 
-bool KRDC::start()
+bool KRDC::start(bool onlyFailOnCancel)
 {
 	KConfig *config = KApplication::kApplication()->config();
 	QString vncServerHost;
@@ -140,7 +141,8 @@ bool KRDC::start()
 		SLOT(showingPasswordDialog(bool)));
 
 	changeProgress(REMOTE_VIEW_CONNECTING);
-	m_view->start();
+	if ((!m_view->start()) && (!m_host.isNull()))
+		return onlyFailOnCancel;
 	return true;
 }
 

@@ -79,7 +79,7 @@ public:
 	void disableCursor();
 	QString host();
 	int port();
-	void start();
+	bool start();
 	enum RemoteViewStatus status();
 
 public slots:

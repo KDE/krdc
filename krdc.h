@@ -99,7 +99,7 @@ public:
 	     Quality q = QUALITY_UNKNOWN,
 	     const QString &encodings = QString::null);
 	~KRDC();
-	bool start();
+	bool start(bool onlyFailOnCancel);
 
 private slots:
 	void changeProgress(RemoteViewStatus s);

@@ -165,12 +165,13 @@ bool KVncView::checkLocalKRfb() {
 	return false;
 }
 
-void KVncView::start() {
+bool KVncView::start() {
 	if (!checkLocalKRfb())
-		return;
+		return false;
 	m_cthread.start();
 	m_wthread.queueUpdateRequest(QRegion(QRect(0,0,width(),height())));
 	setBackgroundMode(Qt::NoBackground);
+	return true;
 }
 
 KVncView::~KVncView()

@@ -102,7 +102,7 @@ int main(int argc, char *argv[])
 		QObject::connect(krdc, SIGNAL(disconnectedError()), 
 				 &a, SLOT(quit()));
 		
-		if (!krdc->start())
+		if (!krdc->start(false))
 			return 0;
 		
 		return a.exec();
@@ -147,7 +147,7 @@ bool MainController::start() {
 	connect(m_krdc, SIGNAL(disconnectedError()),
 		SLOT(errorRestartRequested()));
 
-	return m_krdc->start();
+	return m_krdc->start(true);
 }
 
 void MainController::errorRestart() {
