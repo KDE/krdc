@@ -33,6 +33,7 @@
 #include <kdialog.h>
 #include <qlabel.h> 
 #include <qtoolbutton.h> 
+#include <qwhatsthis.h>
 
 #include <kmessagebox.h>
 #include <kglobal.h>
@@ -62,7 +63,7 @@ int KRDC::m_lastQuality = 0;
 
 KRDC::KRDC(WindowMode wm, const QString &host, 
 	   Quality q, const QString &encodings) : 
-  QWidget(0, 0),
+  QWidget(0, 0, Qt::WStyle_ContextHelp),
   m_layout(0),
   m_scrollView(0),
   m_progressDialog(0),
@@ -165,6 +166,7 @@ bool KRDC::start(bool onlyFailOnCancel)
 	m_view = new KVncView(this, 0, vncServerHost, vncServerPort, password,
 			      &m_appData);
 	m_scrollView->addChild(m_view);
+	QWhatsThis::add(m_view, i18n("Here you can see the remote desktop. If the other side allows you to control it, you can also move the mouse, click or enter keystrokes. If the content does not fit your screen, click on the toolbar's full screen button or scale button. To end the connection, just close the window."));
 
 	connect(m_view, SIGNAL(changeSize(int,int)), SLOT(setSize(int,int)));
 	connect(m_view, SIGNAL(connected()), SLOT(show()));
