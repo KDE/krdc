@@ -81,6 +81,7 @@ extern void postMouseEvent(int x, int y, int buttonMask);
 /** threads.cpp **/
 
 extern void queueIncrementalUpdateRequest();
+extern void announceIncrementalUpdateRequest();
 
 /* colour.c */
 

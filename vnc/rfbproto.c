@@ -925,6 +925,8 @@ HandleRFBServerMessage()
     int bytesPerLine;
     int i;
 
+    announceIncrementalUpdateRequest();
+
     if (!ReadFromRFBServer(((char *)&msg.fu) + 1,
 			   sz_rfbFramebufferUpdateMsg - 1))
       return False;

@@ -153,11 +153,16 @@ void queueIncrementalUpdateRequest() {
 	writerThread->queueIncrementalUpdateRequest();
 }
 
+void announceIncrementalUpdateRequest() {
+	writerThread->announceIncrementalUpdateRequest();
+}
+
 
 WriterThread::WriterThread(KVncView *v, volatile bool &quitFlag) :
 	m_quitFlag(quitFlag),
 	m_view(v),
 	m_incrementalUpdateRQ(false),
+	m_incrementalUpdateAnnounced(false),
 	m_mouseEventNum(0),
 	m_keyEventNum(0),
 	m_clientCut(QString::null)
@@ -199,6 +204,12 @@ void WriterThread::queueIncrementalUpdateRequest() {
 	m_lock.lock();
 	m_incrementalUpdateRQ = true;
 	m_waiter.wakeAll();
+	m_lock.unlock();
+}
+
+void WriterThread::announceIncrementalUpdateRequest() {
+	m_lock.lock();
+	m_incrementalUpdateAnnounced = true;
 	m_lock.unlock();
 }
 
@@ -277,6 +288,7 @@ void WriterThread::kick() {
 
 void WriterThread::run() {
 	bool incrementalUpdateRQ = false;
+	bool incrementalUpdateAnnounced = false;
 	QRegion updateRegionRQ;
 	QValueList<InputEvent> inputEvents;
 	QString clientCut;
@@ -284,6 +296,7 @@ void WriterThread::run() {
 	while (!m_quitFlag) {
 		m_lock.lock();
 		incrementalUpdateRQ = m_incrementalUpdateRQ;
+		incrementalUpdateAnnounced = m_incrementalUpdateAnnounced;
 		updateRegionRQ = m_updateRegionRQ;
 		inputEvents = m_inputEvents;
 		clientCut = m_clientCut;
@@ -298,6 +311,7 @@ void WriterThread::run() {
 		}
 		else {
 			m_incrementalUpdateRQ = false;
+			m_incrementalUpdateAnnounced = false;
 			m_updateRegionRQ = QRegion();
 			m_inputEvents.clear();
 			m_keyEventNum = 0;
@@ -305,10 +319,13 @@ void WriterThread::run() {
 			m_clientCut = QString::null;
 			m_lock.unlock();
 
-			// always send a incremental update request.
-			if (!sendIncrementalUpdateRequest()) {
-			  sendFatalError(ERROR_IO);
-			  break;
+			// always send incremental update, unless a framebuffer
+			// update is done ATM and will do the request later
+			if (incrementalUpdateRQ || !incrementalUpdateAnnounced) {
+				if (!sendIncrementalUpdateRequest()) {
+					sendFatalError(ERROR_IO);
+					break;
+				}
 			}
 			if (!updateRegionRQ.isNull())
 				if (!sendUpdateRequest(updateRegionRQ)) {

@@ -65,7 +65,8 @@ private:
 	KVncView *m_view;
 
 	// all things that can be send follow:
-	int m_incrementalUpdateRQ; // for sending an incremental request
+	bool m_incrementalUpdateRQ; // for sending an incremental request
+	bool m_incrementalUpdateAnnounced; // set when a RQ will come soon
 	QRegion m_updateRegionRQ;  // for sending updates, null if it is done
 	QValueList<InputEvent> m_inputEvents; // list of unsent input events
 	MouseEvent m_lastMouseEvent;
@@ -78,6 +79,7 @@ public:
 	WriterThread(KVncView *v, volatile bool &quitFlag);
 	
 	void queueIncrementalUpdateRequest();
+	void announceIncrementalUpdateRequest();
 	void queueUpdateRequest(const QRegion &r);
 	void queueMouseEvent(int x, int y, int buttonMask);
 	void queueKeyEvent(unsigned int k, bool down);
