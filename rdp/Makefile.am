@@ -16,7 +16,7 @@ librdp_la_SOURCES = bitmap.c cache.c ewmhints.c iso.c krdpview.cpp licence.c \
                     mcs.c orders.c rdesktop.c rdp.c rdphostpref.cpp secure.c \
                     tcp.c threads.cpp xkeymap.c xwin.c rdphostpreferences.ui
 
-noinst_HEADERS = krdpview.h constants.h krdpview.h orders.h parse.h \
+noinst_HEADERS = krdpview.h constants.h orders.h parse.h \
                  proto.h rdesktop.h rdphostpref.h scancodes.h threads.h types.h
 librdp_la_LIBADD   = $(LIB_KDEUI) $(LIBJPEG) $(LIBSSL) 
 librdp_la_LDFLAGS = $(all_libraries) $(SSL_LDFLAGS) $(KDE_RPATH)
