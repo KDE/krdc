@@ -28,6 +28,7 @@
 #include <qcolor.h>
 #include <kconfig.h>
 #include <kurl.h>
+#include <kstandarddirs.h>
 #include <klocale.h>
 #include <kdialog.h>
 #include <qlabel.h> 
@@ -38,6 +39,7 @@
 #include <kinstance.h>
 #include <kstandarddirs.h>
 #include <qcursor.h>
+#include <qobjectlist.h>
 #include <qbitmap.h>
 
 #define BUMP_SCROLL_CONSTANT (200)
@@ -75,6 +77,10 @@ KRDC::KRDC(WindowMode wm, const QString &host,
 {
 	connect(&m_autoHideTimer, SIGNAL(timeout()), SLOT(hideFullscreenToolbarNow()));
 	connect(&m_bumpScrollTimer, SIGNAL(timeout()), SLOT(bumpScroll()));
+
+	KStandardDirs *dirs = KGlobal::dirs();
+	m_pindown = QPixmap(dirs->findResource("appdata", "pics/pindown.png"));
+	m_pinup   = QPixmap(dirs->findResource("appdata", "pics/pinup.png"));
 }
 
 bool KRDC::start(bool onlyFailOnCancel)
@@ -366,8 +372,9 @@ void KRDC::switchToFullscreen()
 	m_layout = new QVBoxLayout(this);
 	m_layout->addWidget(m_scrollView);
 
-	m_fsToolbar = new KFullscreenPanel(this, 0, m_fullscreenResolution);
+	m_fsToolbar = new KFullscreenPanel(this, "fstoolbar", m_fullscreenResolution);
 	FullscreenToolbar *t = new FullscreenToolbar(m_fsToolbar);
+	m_fsToolbarWidget = t;
 	t->hostLabel->setText(m_host);
 	t->fullscreenButton->setOn(true);
 	m_fsToolbar->setChild(t);
@@ -377,8 +384,8 @@ void KRDC::switchToFullscreen()
 	connect((QObject*)t->iconifyButton, SIGNAL(clicked()), SLOT(iconify()));
 	connect((QObject*)t->fullscreenButton, SIGNAL(toggled(bool)), 
 		SLOT(enableFullscreen(bool)));
-	connect((QObject*)t->autohideButton, SIGNAL(toggled(bool)), 
-		SLOT(setFsToolbarAutoHide(bool)));
+	connect((QObject*)t->autohideButton, SIGNAL(clicked()), 
+		SLOT(toggleFsToolbarAutoHide()));
 	repositionView(true);
 	showFullScreen();
 
@@ -386,6 +393,9 @@ void KRDC::switchToFullscreen()
 		       m_fullscreenResolution.height());
 	setGeometry(0, 0, m_fullscreenResolution.width(), 
 		    m_fullscreenResolution.height());
+
+	m_ftAutoHide = !m_ftAutoHide;
+	setFsToolbarAutoHide(!m_ftAutoHide);
 
 	if (m_oldResolution)
 		grabInput(qt_xdisplay(), winId());
@@ -563,6 +573,10 @@ void KRDC::repositionView(bool fullscreen) {
 	m_scrollView->moveChild(m_view, ox, oy);
 }
 
+void KRDC::toggleFsToolbarAutoHide() {
+	setFsToolbarAutoHide(!m_ftAutoHide);
+}
+
 void KRDC::setFsToolbarAutoHide(bool on) {
 
 	if (on == m_ftAutoHide)
@@ -571,6 +585,11 @@ void KRDC::setFsToolbarAutoHide(bool on) {
 		return;
 
 	m_ftAutoHide = on;
+	QButton *b = ((FullscreenToolbar*)m_fsToolbarWidget)->autohideButton;
+	if (on)
+		b->setPixmap(m_pinup);
+	else
+		b->setPixmap(m_pindown);
 
 	setMouseTracking(m_ftAutoHide || 
 			 (m_view->width()>m_scrollView->width()) || 
