@@ -19,7 +19,6 @@
 #include "toolbar.h"
 #include "fullscreentoolbar.h"
 #include "krdc.h"
-#include "vidmode.h"
 #include <kdebug.h>
 #include <kapplication.h>
 #include <kcombobox.h>
@@ -78,7 +77,7 @@ KRDC::KRDC(WindowMode wm, const QString &host,
   m_quality(q),
   m_encodings(encodings),
   m_isFullscreen(wm),
-  m_oldResolution(0),
+  m_oldResolution(),
   m_fullscreenMinimized(false),
   m_wasScaling(false)
 {
@@ -376,10 +375,11 @@ void KRDC::switchToFullscreen()
 	m_view->enableScaling(false);
 	hide();
 	m_oldResolution = vidmodeFullscreenSwitch(qt_xdisplay(), 
+						  m_desktopWidget.screenNumber(this),
 						  m_view->width(),
 						  m_view->height(),
 						  x, y);
-	if (m_oldResolution != 0)
+	if (m_oldResolution.valid)
 		m_fullscreenResolution = QSize(x, y);
 	else
 		m_fullscreenResolution = QApplication::desktop()->size();
@@ -423,7 +423,7 @@ void KRDC::switchToFullscreen()
 	m_ftAutoHide = !m_ftAutoHide;
 	setFsToolbarAutoHide(!m_ftAutoHide);
 
-	if (m_oldResolution)
+	if (m_oldResolution.valid)
 		grabInput(qt_xdisplay(), winId());
 	m_view->grabKeyboard();
 }
@@ -440,10 +440,10 @@ void KRDC::switchToNormal(bool scaling)
 	m_view->enableScaling(scaling);
 
 	m_view->releaseKeyboard();
-	if (m_oldResolution) {
+	if (m_oldResolution.valid) {
 		ungrabInput(qt_xdisplay());
 		vidmodeNormalSwitch(qt_xdisplay(), m_oldResolution);
-		m_oldResolution = 0;
+		m_oldResolution = Resolution();
 	}
 
 	if (m_fsToolbar) {
@@ -506,11 +506,11 @@ void KRDC::iconify()
 	KWin::clearState(winId(), NET::StaysOnTop);
 
 	m_view->releaseKeyboard();
-	if (m_oldResolution)
+	if (m_oldResolution.valid)
 		ungrabInput(qt_xdisplay());
 
 	vidmodeNormalSwitch(qt_xdisplay(), m_oldResolution);
-	m_oldResolution = 0;
+	m_oldResolution = Resolution();
 	showNormal();
 	showMinimized();
 	m_fullscreenMinimized = true;
@@ -524,10 +524,11 @@ bool KRDC::event(QEvent *e) {
 	m_fullscreenMinimized = false;
 	int x, y;
 	m_oldResolution = vidmodeFullscreenSwitch(qt_xdisplay(), 
+						  m_desktopWidget.screenNumber(this),
 						  m_view->width(),
 						  m_view->height(),
 						  x, y);
-	if (m_oldResolution != 0)
+	if (m_oldResolution.valid)
 		m_fullscreenResolution = QSize(x, y);
 	else
 		m_fullscreenResolution = QApplication::desktop()->size();
@@ -535,7 +536,7 @@ bool KRDC::event(QEvent *e) {
 	showFullScreen();
 	setGeometry(0, 0, m_fullscreenResolution.width(), 
 		    m_fullscreenResolution.height());
-	if (m_oldResolution)
+	if (m_oldResolution.valid)
 		grabInput(qt_xdisplay(), winId());
 	m_view->grabKeyboard();
 	KWin::setState(winId(), NET::StaysOnTop);

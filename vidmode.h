@@ -15,9 +15,21 @@
  *                                                                         *
  ***************************************************************************/
 
+struct Resolution {
+  Resolution(int w, int h, int s) :
+    valid(true), width(w), height(h), screen(s) {
+  }
+  Resolution() :
+    valid(false), width(0), height(0), screen(0) {
+  }
+  bool valid;
+  int width;
+  int height;
+  int screen;
+};
 
-void vidmodeNormalSwitch(Display *dpy, int oldResolution);
-int vidmodeFullscreenSwitch(Display *dpy, int sw, int sh, int &nx, int &ny);
+void vidmodeNormalSwitch(Display *dpy, Resolution oldResolution);
+Resolution vidmodeFullscreenSwitch(Display *dpy, int screen, int sw, int sh, int &nx, int &ny);
 
 void grabInput(Display *dpy, unsigned int winId);
 void ungrabInput(Display *dpy);
