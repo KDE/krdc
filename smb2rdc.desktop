@@ -1,0 +1,11 @@
+# KDE Config File  
+[Desktop Entry]
+ServiceTypes=application/x-smb-server
+Actions=smb2rdc
+
+[Desktop Action smb2rdc]
+Name=Open Remote Desktop Connection to this machine
+Exec=krdc %u
+Icon=krdc
+
+

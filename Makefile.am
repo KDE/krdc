@@ -28,6 +28,9 @@ krdc_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
 xdg_apps_DATA = krdc.desktop
 
+servicedir = $(kde_datadir)/konqueror/servicemenus
+service_DATA = smb2rdc.desktop
+
 kde_services_DATA = vnc.protocol rdp.protocol
 
 KDE_ICON = krdc
