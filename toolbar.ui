@@ -1,0 +1,97 @@
+<!DOCTYPE UI><UI version="3.0" stdsetdef="1">
+<class>Toolbar</class>
+<widget class="QWidget">
+    <property name="name">
+        <cstring>Toolbar</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>52</width>
+            <height>28</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>Toolbar</string>
+    </property>
+    <hbox>
+        <property name="name">
+            <cstring>unnamed</cstring>
+        </property>
+        <property name="margin">
+            <number>0</number>
+        </property>
+        <property name="spacing">
+            <number>0</number>
+        </property>
+        <widget class="QFrame">
+            <property name="name">
+                <cstring>Frame3</cstring>
+            </property>
+            <property name="frameShape">
+                <enum>ToolBarPanel</enum>
+            </property>
+            <property name="frameShadow">
+                <enum>Raised</enum>
+            </property>
+            <hbox>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <property name="margin">
+                    <number>2</number>
+                </property>
+                <property name="spacing">
+                    <number>2</number>
+                </property>
+                <widget class="QToolButton">
+                    <property name="name">
+                        <cstring>fullscreenButton</cstring>
+                    </property>
+                    <property name="sizePolicy">
+                        <sizepolicy>
+                            <hsizetype>0</hsizetype>
+                            <vsizetype>1</vsizetype>
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                        </sizepolicy>
+                    </property>
+                    <property name="text">
+                        <string></string>
+                    </property>
+                    <property name="toggleButton">
+                        <bool>true</bool>
+                    </property>
+                    <property name="iconSet">
+                        <iconset>image0</iconset>
+                    </property>
+                    <property name="autoRaise">
+                        <bool>false</bool>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Fullscreen</string>
+                    </property>
+                </widget>
+                <spacer>
+                    <property name="name">
+                        <cstring>Spacer1</cstring>
+                    </property>
+                    <property name="orientation">
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                        <enum>Expanding</enum>
+                    </property>
+                </spacer>
+            </hbox>
+        </widget>
+    </hbox>
+</widget>
+<images>
+    <image name="image0">
+        <data format="XPM.GZ" length="1877">789cadd459531a411007f0773ec516f346a55a408ea55279f0c403503cd1541ef614544039544ce5bb67a6fff0176212f390edda2a7f3bedf474ef166b39af73dcf4726b99f12498f4222fea06232f174ffbfdd9d76f5fbe67b205df2b54bd6ad12b663f65b2ed891779ade12071106361f27aa9ef9cab7aa987cefedbfaad732d75a1ee39076517eaae3a72a1be710ed75da85375e0429d38477917ea585d75a18ed4890b75e81c975da80375e4c2d9e8fe4925a984357542e33c3e1dabcb0ba3be89691d9614e892ae477445d7cf695fd7433ad4f5168df30534ead7699da7310bc7055d7fa5757e46683d8fd4689c674c637e155ae721031af32fd238cfc5c209ea1fd198f73d8d7a55e7d45e31fa2dd1d82f4fe3fdadd3f87ece164ef0fe4f69ccff9ac6f7d3a4d1ff098df35dd1385f83c63c3ab4be2f39a4319f368df9ecd2e8ef80c6f77449a3df7d1afd1ed3e87767e114fdce68cc7b9b46ff7b34fa7fa1d1ff168dfe9f69f4bf49a3ff118dfe9f68f4ff48a3ff298dfe3768f4ff40a3ff098dfefb748a1f9f8f03bf4b1fc73c2fd0082592581249e546bad2935b8de5bcbbbfc472debdf4ff10835ff2861a587b904719cd9f8c7f93e7722632952779961799e9b3d777797d7b6fd89d36654bb665c76ad7def577e773d5863667cfe6eccb811c4a439ad25ac93b5aaa766c73daf63f4ee454cee47c25ef42771ada9d2e6db58e5cc9b555dede8595bca29ef9addaa9ac4b499f9557f22af32934e6d5f2529d3ff157f26af64f2375139850ce4d240513db9d7c93987425ef5fbf83ff97f7e373e627a299b7e5</data>
+    </image>
+</images>
+<layoutdefaults spacing="6" margin="11"/>
+</UI>

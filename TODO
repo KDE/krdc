@@ -1,0 +1,16 @@
+- mouse wheel
+- use pixmap only, dont paint directly on screen
+  -> write desktop.c function for 8,16,32 to fill rect
+  -> use CONCAT2E to replace func calls to xlib with desktop.c func
+  -> find out when to copy rect into buffer
+- display connection status on canvas
+- bump scrolling in fullscreen
+- optional scaling if other desktop is too big
+- animated autohide for fullscreen toolbar
+- stop fs toolbar autohide timeout when mouse is over the toolbar
+- add function to vncviewer code to de-allocate resources
+- dont quit after failed connect attempt but allow re-try
+
+- login with user's name+password?
+- SSL/TLS?
+

@@ -1,0 +1,36 @@
+KDE Remote Desktop Connection
+=============================
+
+KDE Remote Desktop Connection (krdc) is a small VNC-compatible client
+that is based on the TightVNC Unix client.  You can use it to access
+VNC-compatible servers like KDE's Desktop Sharing (krfb). 
+
+Its focus is on being small and as easy to use as possible. Therefore
+it does not have many capabilities that may be useful in classrooms or
+for tasks like system administration (like receiving 'broadcasts' of
+a remote desktop, viewing several desktops at once, tabs to switch between 
+desktops). In the future I plan to make the backend a KPart so that
+it is possible to write a more complex clients while sharing code with
+krdc. 
+
+tim@tjansen.de
+
+
+
+Planned major features
+----------------------
+
+Before 3.1:
+- use pixmap buffer in backend (faster refreshs)
+- scaling (fit desktop into window)
+- better integration with Desktop Sharing (krfb) invitations
+
+Maybe before 3.1:
+- make backend a KPart
+
+After 3.1:
+- encrypted connections
+- new authentication methods
+- different (non-VNC) backends. I am thinking about embedding Xnest. 
+  Then it would connect to the remote machine using ssh and start some 
+  script (like startkde).
