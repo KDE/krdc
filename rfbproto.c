@@ -126,14 +126,12 @@ ConnectToRFBServer(const char *hostname, int port)
 
   if (!StringToIPAddr(hostname, &host)) {
     fprintf(stderr,"Couldn't convert '%s' to host address\n", hostname);
-    return -1;
+    return -(int)INIT_NAME_RESOLUTION_FAILURE;
   }
 
   rfbsock = ConnectToTcpAddr(host, port);
-
   if (rfbsock < 0) {
     fprintf(stderr,"Unable to connect to VNC server\n");
-    return -1;
   }
 
   return rfbsock;
@@ -159,7 +157,7 @@ InitialiseRFBConnection()
   /* if the connection is immediately closed, don't report anything, so
        that pmw's monitor can make test connections */
 
-  if (!ReadFromRFBServer(pv, sz_rfbProtocolVersionMsg)) return INIT_PROTOCOL_FAILURE;
+  if (!ReadFromRFBServer(pv, sz_rfbProtocolVersionMsg)) return INIT_SERVER_BLOCKED;
 
   errorMessageOnReadFailure = True;
 

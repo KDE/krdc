@@ -296,6 +296,21 @@ void KVncView::customEvent(QCustomEvent *e)
 					   i18n("The connection to the host has been interrupted."),
 					   i18n("Connection Failure"));
 			break;
+		case ERROR_SERVER_BLOCKED:
+			KMessageBox::error(0, 
+					   i18n("Connection failed. The server does not accept new connections."),
+					   i18n("Connection Failure"));
+			break;
+		case ERROR_NAME:
+			KMessageBox::error(0, 
+					   i18n("Connection failed. A server with the given name can not be found."),
+					   i18n("Connection Failure"));
+			break;
+		case ERROR_NO_SERVER:
+			KMessageBox::error(0, 
+					   i18n("Connection failed. No server running at the given address."),
+					   i18n("Connection Failure"));
+			break;
 		case ERROR_AUTHENTICATION:
 			KMessageBox::error(0, 
 					   i18n("Authentication failed. Connection aborted."),

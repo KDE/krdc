@@ -216,75 +216,31 @@ ConnectToTcpAddr(unsigned int host, int port)
   sock = socket(AF_INET, SOCK_STREAM, 0);
   if (sock < 0) {
     perror("krdc: ConnectToTcpAddr: socket");
-    return -1;
+    return -(int)INIT_CONNECTION_FAILED;
   }
 
   if (connect(sock, (struct sockaddr *)&addr, sizeof(addr)) < 0) {
     perror("krdc: ConnectToTcpAddr: connect");
     close(sock);
-    return -1;
+    return -(int)INIT_NO_SERVER;
   }
 
   if (setsockopt(sock, IPPROTO_TCP, TCP_NODELAY,
 		 (char *)&one, sizeof(one)) < 0) {
     perror("krdc: ConnectToTcpAddr: setsockopt");
     close(sock);
-    return -1;
+    return -(int)INIT_CONNECTION_FAILED;
   }
 
   if (fcntl(sock, F_SETFL, O_NONBLOCK) < 0) {
     perror(": AcceptTcpConnection: fcntl");
     close(sock);
-    return -1;
+    return -(int)INIT_CONNECTION_FAILED;
   }  
 
   return sock;
 }
 
-
-
-/*
- * ListenAtTcpPort starts listening at the given TCP port.
- */
-
-int
-ListenAtTcpPort(int port)
-{
-  int sock;
-  struct sockaddr_in addr;
-  int one = 1;
-
-  addr.sin_family = AF_INET;
-  addr.sin_port = htons(port);
-  addr.sin_addr.s_addr = INADDR_ANY;
-
-  sock = socket(AF_INET, SOCK_STREAM, 0);
-  if (sock < 0) {
-    perror("krdc: ListenAtTcpPort: socket");
-    return -1;
-  }
-
-  if (setsockopt(sock, SOL_SOCKET, SO_REUSEADDR,
-		 (const char *)&one, sizeof(one)) < 0) {
-    perror("krdc: ListenAtTcpPort: setsockopt");
-    close(sock);
-    return -1;
-  }
-
-  if (bind(sock, (struct sockaddr *)&addr, sizeof(addr)) < 0) {
-    perror("krdc: ListenAtTcpPort: bind");
-    close(sock);
-    return -1;
-  }
-
-  if (listen(sock, 5) < 0) {
-    perror("krdc: ListenAtTcpPort: listen");
-    close(sock);
-    return -1;
-  }
-
-  return sock;
-}
 
 /*
  * StringToIPAddr - convert a host string to an IP address.

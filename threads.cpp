@@ -63,8 +63,15 @@ void ControllerThread::kick() {
 }
 
 void ControllerThread::run() {
-	if (ConnectToRFBServer(m_view->host().latin1(), m_view->port()) < 0) {
-		sendFatalError(ERROR_CONNECTION);
+	int fd;
+	fd = ConnectToRFBServer(m_view->host().latin1(), m_view->port());
+	if (fd < 0) {
+		if (fd == -(int)INIT_NO_SERVER)
+			sendFatalError(ERROR_NO_SERVER);
+		else if (fd == -(int)INIT_NAME_RESOLUTION_FAILURE)
+			sendFatalError(ERROR_NAME);
+		else
+			sendFatalError(ERROR_CONNECTION);
 		return;
 	}
 	if (m_quitFlag) {
@@ -75,20 +82,19 @@ void ControllerThread::run() {
         changeStatus(REMOTE_VIEW_AUTHENTICATING);
 
 	enum InitStatus s = InitialiseRFBConnection();
-	if (s == INIT_CONNECTION_FAILED) {
-		sendFatalError(ERROR_IO);
-		return;
-	}
-	else if (s == INIT_PROTOCOL_FAILURE) {
-		sendFatalError(ERROR_PROTOCOL);
-		return;
-	}
-	else if (s == INIT_AUTHENTICATION_FAILED) {
-		sendFatalError(ERROR_AUTHENTICATION);
-		return;
-	}
-	else if (s == INIT_ABORTED) {
-		changeStatus(REMOTE_VIEW_DISCONNECTED);
+	if (s != INIT_OK) {
+		if (s == INIT_CONNECTION_FAILED)
+			sendFatalError(ERROR_IO);
+		else if (s == INIT_SERVER_BLOCKED)
+			sendFatalError(ERROR_SERVER_BLOCKED);
+		else if (s == INIT_PROTOCOL_FAILURE)
+			sendFatalError(ERROR_PROTOCOL);
+		else if (s == INIT_AUTHENTICATION_FAILED)
+			sendFatalError(ERROR_AUTHENTICATION);
+		else if (s == INIT_ABORTED)
+			changeStatus(REMOTE_VIEW_DISCONNECTED);
+		else 
+			sendFatalError(ERROR_INTERNAL);			
 		return;
 	}
 

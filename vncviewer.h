@@ -166,7 +166,6 @@ extern Bool errorMessageOnReadFailure;
 
 extern Bool ReadFromRFBServer(char *out, unsigned int n);
 extern Bool WriteExact(int sock, const char *buf, int n);
-extern int ListenAtTcpPort(int port);
 extern int ConnectToTcpAddr(unsigned int host, int port);
 
 extern int StringToIPAddr(const char *str, unsigned int *addr);
