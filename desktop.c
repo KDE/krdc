@@ -82,6 +82,12 @@ static void FillRectangleBGR233(CARD8 buf, int x, int y, int width,int height);
 static int CheckRectangle(int x, int y, int width, int height);
 
 static void ZoomInit(void);
+static void transformZoomSrc(int six, int siy, int siw, int sih,
+			     int *dix, int *diy, int *diw, int *dih,
+			     int srcW, int dstW, int srcH, int dstH);
+static void transformZoomDst(int *six, int *siy, int *siw, int *sih,
+			     int dix, int diy, int diw, int dih,
+			     int srcW, int dstW, int srcH, int dstH);
 static void ZoomSurfaceSrcCoords(int x, int y, int w, int h, 
 				 Surface * src, Surface * dst);
 static void ZoomSurfaceCoords32(int sx, int sy, int sw, int sh,
@@ -583,7 +589,7 @@ CreateShmImage()
 void
 DrawZoomedScreenRegionX11Thread(Window win, int zwidth, int zheight, 
 				int x, int y, int width, int height) {
-  Surface src, dest;
+  int dx, dy, dw, dh;
 
   if (zwidth > si.framebufferWidth)
     zwidth = si.framebufferWidth;
@@ -596,6 +602,8 @@ DrawZoomedScreenRegionX11Thread(Window win, int zwidth, int zheight,
   }
   
   if ((zoomWidth != zwidth) || (zoomHeight != zheight)) {
+    Surface src, dest;
+
     zoomWidth = zwidth;
     zoomHeight = zheight;
   
@@ -613,12 +621,20 @@ DrawZoomedScreenRegionX11Thread(Window win, int zwidth, int zheight,
 		  (float)dest.w/(float)src.w, (float)dest.h/(float)src.h,
 		  0, 0, 0, 0);
 
+    if (useZoomShm) 
+      XShmPutImage(dpy, win, gc, zoomImage, 0, 0, 0, 0, zwidth, zheight, False);
+    else
+      XPutImage(dpy, win, gc, zoomImage, 0, 0, 0, 0, zwidth, zheight);
+    return;
   }
-  
+
+  transformZoomSrc(x, y, width, height, &dx, &dy, &dw, &dh,
+      si.framebufferWidth, zwidth, si.framebufferHeight, zheight);
+
   if (useZoomShm) 
-    XShmPutImage(dpy, win, gc, zoomImage, x, y, x, y, width, height, False);
+    XShmPutImage(dpy, win, gc, zoomImage, dx, dy, dx, dy, dw, dh, False);
   else
-    XPutImage(dpy, win, gc, zoomImage, x, y, x, y, width, height);
+    XPutImage(dpy, win, gc, zoomImage, dx, dy, dx, dy, dw, dh);
 }
 
 
@@ -644,39 +660,86 @@ ZoomInit()
   }
 }
 
+static void transformZoomSrc(int six, int siy, int siw, int sih,
+			     int *dix, int *diy, int *diw, int *dih,
+			     int srcW, int dstW, int srcH, int dstH) {
+  double sx, sy, sw, sh;
+  double dx, dy, dw, dh;
+  double wq, hq;
+
+  sx = six; sy = siy;
+  sw = siw; sh = sih;
+
+  wq = ((double)dstW) / (double) srcW;
+  hq = ((double)dstH) / (double) srcH;
+
+  dx = sx * wq;
+  dy = sy * hq;
+  dw = sw * wq;
+  dh = sh * hq;
+  
+  *dix = dx;
+  *diy = dy;
+  *diw = dw;
+  *dih = dh;
+}
+
+static void transformZoomDst(int *six, int *siy, int *siw, int *sih,
+			     int dix, int diy, int diw, int dih,
+			     int srcW, int dstW, int srcH, int dstH) {
+  double sx, sy, sw, sh;
+  double dx, dy, dw, dh;
+  double wq, hq;
+
+  dx = dix; dy = diy;
+  dw = diw; dh = dih;
+
+  wq = ((double)dstW) / (double) srcW;
+  hq = ((double)dstH) / (double) srcH;
+
+  sx = dx / wq;
+  sy = dy / hq;
+  sw = dw / wq;
+  sh = dh / hq;
+  
+  *six = sx;
+  *siy = sy;
+  *siw = sw;
+  *sih = sh;
+}
 
 
-
-static void ZoomSurfaceSrcCoords(int sx, int sy, int sw, int sh,
+static void ZoomSurfaceSrcCoords(int six, int siy, int siw, int sih,
 				 Surface * src, Surface * dst)
 {
   int dx, dy, dw, dh;
-  int spixw, spixh;
-  
-  spixw = (src->w / dst->w)+1;
-  spixh = (src->h / dst->h)+1;
+  int sx, sy, sw, sh;
 
-  sx-=spixw;
-  if (sx < 0)
-    sx = 0;
-  sy-=spixh;
-  if (sy < 0)
-    sy = 0;
-  sw+=spixw;
+  transformZoomSrc(six, siy, siw, sih,
+		   &dx, &dy, &dw, &dh,
+		   src->w, dst->w, src->h, dst->h);
+  dx-=1;
+  dy-=1;
+  dw+=2;
+  dh+=2;
+
+  if (dx < 0)
+    dx = 0;
+  if (dy < 0)
+    dy = 0;
+  if (dx+dw > dst->w)
+    dw = dst->w - dx;
+  if (dy+dh > dst->h)
+    dh = dst->h - dy;
+  
+  transformZoomDst(&sx, &sy, &sw, &sh,
+		   dx, dy, dw, dh,
+		   src->w, dst->w, src->h, dst->h);
+
   if (sx+sw > src->w)
     sw = src->w - sx;
-  sh+=spixh;
   if (sy+sh > src->h)
     sh = src->h - sy;
-
-  dx = sx * dst->w / src->w;
-  dy = sy * dst->h / src->h;
-  dw = sw * dst->w / src->w;
-  dh = sh * dst->h / src->h;
-  if ((dx + dw) > dst->w)
-    dw = dst->w - dx;
-  if ((dy + dh) > dst->h)
-    dh = dst->h - dy;
 
   ZoomSurfaceCoords32(sx, sy, sw, sh, dx, dy, src, dst);
 }
@@ -686,9 +749,9 @@ static void ZoomSurfaceCoords32(int sx, int sy, int sw, int sh,
 				Surface * src, Surface * dst)
 {
   Surface s2;
-  /*fprintf(stderr, "src=%d/%d/%d/%d dst=%d/%d/%d/%d\n", sx, sy, sw, sh, dx, dy, dw, dh);*/
+
   s2 = *src;
-  s2.pixels += (sx * s2.BytesPerPixel) + (sy * src->pitch);
+  s2.pixels = ((char*)s2.pixels) + (sx * s2.BytesPerPixel) + (sy * src->pitch);
   s2.w = sw;
   s2.h = sh;
   sge_transform(&s2, dst, 0, 
@@ -1000,8 +1063,52 @@ void sge_transform(Surface *src, Surface *dst, float angle, float xscale, float 
 			break;
 		}
 	}
-
-	/* Return the bounding rectangle */
-	r.x=xmin; r.y=ymin; r.w=xmax-xmin; r.h=ymax-ymin;
-	return r;
 }
+
+
+
+/*
+ * ColorRectangle32
+ * Only used for debugging / visualizing output
+ */
+/*
+static void
+ColorRectangle32(XImage *img, CARD32 fg, int x, int y, int width, int height)
+{
+  int i, h;
+  int scrWidthInBytes = img->bytes_per_line;
+  char *scr;
+  CARD32 *scr32;
+
+  if ((!img) || (!img->data))
+    return;
+
+  scr = (img->data + y * scrWidthInBytes + x * 4);
+    
+  if (!CheckRectangle(x, y, width, height))
+    return;
+
+  for (h = 0; h < height; h++) {
+    scr32 = (CARD32*) scr;
+    for (i = 0; i < width; i++) {
+      CARD32 n = 0;
+      CARD32 p = scr32[i];
+      if (0xff & fg)
+	n |= (((    0xff & p)+(    0xff & fg)) >> 2) & 0xff;
+      else
+	n |= (0xff & p);
+      if (0xff00 & fg)
+	n |= (((  0xff00 & p)+(  0xff00 & fg)) >> 2) & 0xff00;
+      else
+	n |= (0xff00 & p);
+      if (0xff0000 & fg)
+	n |= (((0xff0000 & p)+(0xff0000 & fg)) >> 2) & 0xff0000;
+      else
+	n |= (0xff0000 & p);
+      scr32[i] = n;
+    }
+    scr += scrWidthInBytes;
+  }
+}
+*/
+
