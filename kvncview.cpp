@@ -455,3 +455,4 @@ unsigned long KVncView::toKeySym(QKeyEvent *k)
 	// Puhhhhh done. :-)
 	return 0;
 }
+#include "kvncview.moc"

@@ -446,3 +446,4 @@ void KRDC::mouseMoveEvent(QMouseEvent *e) {
 		m_autoHideTimer.start(TOOLBAR_AUTOHIDE_TIMEOUT, true);
 	e->accept();
 }
+#include "krdc.moc"
