@@ -87,7 +87,7 @@ private:
 
 	bool m_showProgress; // can disable showing the progress dialog temporary
 	QString m_host;      // host string as given from user
-        Protocol m_protocol; // the used protocol
+	Protocol m_protocol; // the used protocol
 	Quality m_quality;   // current quality setting
 	QString m_encodings; // string containing the encodings, space separated,
 	                     // used for config before connection
@@ -101,13 +101,13 @@ private:
 	QSize m_fullscreenResolution; // xvidmode size (valid only in fs)
 	bool m_windowScaling;         // used in startup and fullscreen to determine
 	                              // whether scaling should be enabled in norm mode.
-                                      // The current state is m_view->scaled().
+	                              // The current state is m_view->scaled().
 	QSize m_initialWindowSize;    // initial window size (windowed mode only),
 	                              // invalid after first use
 	static QString m_lastHost; // remembers last value of host input
 
 	bool parseHost(QString &s, Protocol &prot, QString &serverHost, int &serverPort,
-		       QString &userName, QString &password);
+	               QString &userName, QString &password);
 
 	void repositionView(bool fullscreen);
 
@@ -132,10 +132,8 @@ public:
 	     Quality q = QUALITY_UNKNOWN,
 	     const QString &encodings = QString::null,
 	     const QString &password = QString::null,
-	     const QString &resolution = QString::null,
 	     bool scale = false,
-	     QSize initialWindowSize = QSize(),
-	     const QString &keymap = QString::null);
+	     QSize initialWindowSize = QSize());
 	~KRDC();
 
 	bool start();

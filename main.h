@@ -44,10 +44,8 @@ public:
 		       Quality quality,
 		       const QString &encodings,
 		       const QString &password,
-		       const QString &resolution,
 		       bool scale,
-		       QSize initialWindowSize,
-		       const QString &keymap);
+		       QSize initialWindowSize);
 	~MainController();
 	int main();
 	bool start();

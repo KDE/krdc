@@ -17,6 +17,7 @@
      For any questions, comments or whatever, you may mail me at: arend@auton.nl
 */
 
+#include <kconfig.h>
 #include <kdebug.h>
 #include <klocale.h>
 #include <kmessagebox.h>
@@ -24,12 +25,15 @@
 #include <kstandarddirs.h>
 #include <kapplication.h>
 #include <kkeynative.h>
+#include <qcheckbox.h>
+#include <qcombobox.h>
 #include <qdatastream.h>
 #include <dcopclient.h>
 #include <qbitmap.h>
 #include <qlineedit.h>
 #include <qdialog.h>
 #include <qmutex.h>
+#include <qspinbox.h>
 #include <qwaitcondition.h>
 
 #include <X11/Xlib.h>
@@ -38,6 +42,8 @@
 #include "events.h"
 #include "krdpview.h"
 #include "rdesktop.h"
+#include "rdphostpref.h"
+#include "rdphostpreferences.h"
 
 // global variables from rdesktop
 extern int width;           // width of the remote desktop
@@ -46,17 +52,17 @@ extern Atom protocol_atom;  // used to handle the WM_DELETE_WINDOW protocol
 extern BOOL fullscreen;     // are we in fullscreen mode?
 extern char keymapname[16];
 
+bool rdpAppDataConfigured = false;
+
 
 static KRdpView *krdpview;
 
 // constructor
 KRdpView::KRdpView(QWidget *parent, const char *name, 
                    const QString &host, int port,
-                   const QString &resolution,
-                   const QString &keymap,
                    const QString &user, const QString &password,
                    int flags, const QString &domain,
-                   const QString &shell, const QString &directory) : 
+                   const QString &shell, const QString &directory) :
   KRemoteView(parent, name, Qt::WResizeNoErase | Qt::WRepaintNoErase | Qt::WStaticContents),
   m_name(name),
   m_host(host),
@@ -73,11 +79,6 @@ KRdpView::KRdpView(QWidget *parent, const char *name,
   m_cthread(this, m_wthread, m_quitFlag),
   m_wthread(this, m_quitFlag)
 {
-	::width = resolution.section('x', 0, 0).toInt();
-	::height = resolution.section('x', 1, 1).toInt();
-	
-	strcpy(keymapname, keymap.latin1());
-	
 	krdpview = this;
 	setFixedSize(16,16);
 }
@@ -133,6 +134,66 @@ bool KRdpView::start()
 { 
 	setStatus(REMOTE_VIEW_CONNECTING);
 
+	SmartPtr<RdpHostPref> hp;
+
+	if(!rdpAppDataConfigured)
+	{
+		KConfig *config = KApplication::kApplication()->config();
+		config->setGroup("RdpDefaultSettings");
+		bool showPrefs = config->readBoolEntry("rdpShowHostPreferences", true);
+
+		HostPreferences hps(config);
+		hp = SmartPtr<RdpHostPref>(hps.createHostPref(m_host,
+		                                              RdpHostPref::RdpType));
+		int wv = hp->width();
+		int hv = hp->height();
+		QString kl = hp->layout();
+		if(showPrefs && hp->askOnConnect())
+		{
+			// show preferences dialog
+			RdpHostPreferences rhp(0, "RdpHostPreferencesDialog", true);
+			rhp.setCaption(i18n("RDP Host Preferences for %1").arg(m_host));
+			rhp.rdpWidthSpin->setValue(wv);
+			rhp.rdpHeightSpin->setValue(hv);
+			rhp.rdpKeyboardCombo->setCurrentItem(keymap2int(kl));
+			if(wv == 640 && hv == 480)
+			{
+				rhp.rdpResolutionCombo->setCurrentItem(0);
+			}
+			else if(wv == 800 && hv == 600)
+			{
+				rhp.rdpResolutionCombo->setCurrentItem(1);
+			}
+			else if(wv == 1024 && hv == 768)
+			{
+				rhp.rdpResolutionCombo->setCurrentItem(2);
+			}
+			else
+			{
+				rhp.rdpResolutionCombo->setCurrentItem(3);
+				rhp.rdpWidthSpin->setEnabled(true);
+				rhp.rdpHeightSpin->setEnabled(true);
+			}
+			rhp.nextStartupCheckbox->setChecked(true);
+			if(rhp.exec() == QDialog::Rejected)
+				return false;
+
+			wv = rhp.rdpWidthSpin->value();
+			hv = rhp.rdpHeightSpin->value();
+			kl = int2keymap(rhp.rdpKeyboardCombo->currentItem());
+			hp->setAskOnConnect(rhp.nextStartupCheckbox->isChecked());
+			hp->setWidth(wv);
+			hp->setHeight(hv);
+			hp->setLayout(kl);
+			hps.sync();
+		}
+	}
+
+	// apply settings
+	::width = hp->width();
+	::height = hp->height();
+	strcpy(keymapname, hp->layout().latin1());
+
 	// start the connect thread
 	m_cthread.start();
 	return true;
@@ -161,7 +222,7 @@ void KRdpView::setViewOnly(bool s) {
 void KRdpView::customEvent(QCustomEvent *e)
 {
 	if(e->type() == ScreenResizeEventType)
-	{ 
+	{
 		setFixedSize(::width, ::height);
 		emit changeSize(::width, ::height);
 	}

@@ -53,10 +53,6 @@ static KCmdLineOptions options[] =
 	{ "encodings ", I18N_NOOP("Override VNC encoding list (e.g. 'hextile raw')."), 0 },
 	{ "p", 0, 0 },
 	{ "password-file ", I18N_NOOP("Provide the password in a file."), 0 },
-	{ "r", 0, 0 },
-	{ "resolution ", I18N_NOOP("Resolution of the remote desktop."), "800x600" },
-	{ "k", 0, 0 },
-	{ "keymap ", I18N_NOOP("Keyboard layout on Terminal Server."), "en-us" },
 	{ "+[host]", I18N_NOOP("The name of the host, e.g. 'localhost:1'."), 0 },
 	KCmdLineLastOption
 };
@@ -117,10 +113,6 @@ int main(int argc, char *argv[])
 	if (args->isSet("encodings"))
 		encodings = args->getOption("encodings");
 
-	resolution = args->getOption("resolution");
-
-	keymap = args->getOption("keymap");
-
 	if (args->isSet("password-file")) {
 		QString passwordFile = args->getOption("password-file");
 		QFile f(passwordFile);
@@ -143,8 +135,8 @@ int main(int argc, char *argv[])
 		initialWindowSize = QSize(re.cap(1).toInt(), re.cap(2).toInt());
 	}
 
-	MainController mc(&a, wm, host, quality, encodings, password, resolution,
-			  scale, initialWindowSize, keymap);
+	MainController mc(&a, wm, host, quality, encodings, password,
+			  scale, initialWindowSize);
 	return mc.main();
 }
 
@@ -153,18 +145,14 @@ MainController::MainController(KApplication *app, WindowMode wm,
 			       Quality quality,
 			       const QString &encodings,
 			       const QString &password,
-			       const QString &resolution,
 			       bool scale,
-			       QSize initialWindowSize,
-			       const QString &keymap) :
+			       QSize initialWindowSize) :
         m_windowMode(wm),
 	m_host(host),
         m_encodings(encodings),
         m_password(password),
-	m_resolution(resolution),
 	m_scale(scale),
 	m_initialWindowSize(initialWindowSize),
-	m_keymap(keymap),
 	m_quality(quality),
 	m_app(app) {
 }
@@ -186,8 +174,8 @@ void MainController::errorRestartRequested() {
 
 bool MainController::start() {
 	m_krdc = new KRDC(m_windowMode, m_host,
-			  m_quality, m_encodings, m_password, m_resolution,
-			  m_scale, m_initialWindowSize, m_keymap);
+			  m_quality, m_encodings, m_password,
+			  m_scale, m_initialWindowSize);
 	m_app->setMainWidget(m_krdc);
 
 	QObject::connect(m_krdc, SIGNAL(disconnected()),

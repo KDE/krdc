@@ -17,6 +17,7 @@
 
 #include "hostpreferences.h"
 #include "vnc/vnchostpref.h"
+#include "rdp/rdphostpref.h"
 #include <kconfig.h>
 #include <qregexp.h>
 #include <qmap.h>
@@ -55,9 +56,14 @@ SmartPtr<HostPref> HostPreferences::getHostPref(const QString &host, const QStri
 	m_config->setGroup("PerHostSettings");
 	if (!m_config->readBoolEntry(HostPref::getPrefix(host, type)+"exists"))
 		return 0;
-	
+
 	if (type == VncHostPref::VncType) {
 		SmartPtr<HostPref> hp = new VncHostPref(m_config, host, type);
+		hp->load();
+		return hp;
+	}
+	else if(type == RdpHostPref::RdpType) {
+		SmartPtr<HostPref> hp = new RdpHostPref(m_config, host, type);
 		hp->load();
 		return hp;
 	}
@@ -69,7 +75,15 @@ SmartPtr<HostPref> HostPreferences::createHostPref(const QString &host, const QS
 	SmartPtr<HostPref> hp = getHostPref(host, type);
 	if (hp)
 		return hp;
-	hp = new VncHostPref(m_config, host, type);
+
+	if(type == VncHostPref::VncType)
+	{
+		hp = new VncHostPref(m_config, host, type);
+	}
+	else if(type == RdpHostPref::RdpType)
+	{
+		hp = new RdpHostPref(m_config, host, type);
+	}
 	hp->setDefaults();
 	return hp;
 }
