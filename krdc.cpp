@@ -196,6 +196,7 @@ bool KRDC::start()
 	connect(m_keyCaptureDialog, SIGNAL(keyPressed(XEvent*)),
 		m_view, SLOT(pressKey(XEvent*)));
 
+	m_view->grabKeyboard();
 	return m_view->start();
 }
 
@@ -459,7 +460,7 @@ void KRDC::switchToFullscreen(bool scaling)
 	t->insertButton("configure", FS_ADVANCED_ID, m_popup, true, i18n("Advanced options"));
 	KToolBarButton *advancedButton = t->getButton(FS_ADVANCED_ID);
 	QToolTip::add(advancedButton, i18n("Advanced options"));
-	advancedButton->setPopupDelay(0);
+	//advancedButton->setPopupDelay(0);
 
 	QLabel *hostLabel = new QLabel(t);
 	hostLabel->setName("kde toolbar widget");
@@ -574,7 +575,7 @@ void KRDC::switchToNormal(bool scaling)
 		t->insertButton("configure", 3, m_popup, true, i18n("Advanced"));
 		KToolBarButton *advancedButton = t->getButton(3);
 		QToolTip::add(advancedButton, i18n("Advanced options"));
-		advancedButton->setPopupDelay(0);
+		//advancedButton->setPopupDelay(0);
 
 		if (m_layout)
 			delete m_layout;
