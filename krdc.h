@@ -56,6 +56,8 @@ private:
 	bool m_ftAutoHide;
 	QTimer m_autoHideTimer;
 
+	QTimer m_bumpScrollTimer;
+
 	bool m_showProgress;
 	QString m_host;
 	Quality m_quality;
@@ -99,6 +101,8 @@ private slots:
 	void showProgressTimeout();
 
 	void setSize(int w, int h);
+
+	void bumpScroll();
 
 	void setFsToolbarAutoHide(bool on);
 	void fsToolbarHide();

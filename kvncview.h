@@ -44,6 +44,7 @@ private:
 	void setDefaultAppData();
 	void mouseEvent(QMouseEvent*);
 	unsigned long toKeySym(QKeyEvent *k);
+	void paintMessage(const QString &msg);
 
 protected:
 	void paintEvent(QPaintEvent*);

@@ -37,7 +37,7 @@
 #include <qcursor.h>
 #include <qbitmap.h>
 
-
+#define BUMP_SCROLL_CONSTANT (200)
 
 QScrollView2::QScrollView2(QWidget *w, const char *name) :
 	QScrollView(w, name) {
@@ -67,6 +67,7 @@ KRDC::KRDC(WindowMode wm, const QString &host, Quality q, const QString &encodin
 	m_scrollView->setFrameStyle(QFrame::NoFrame);
 	
 	connect(&m_autoHideTimer, SIGNAL(timeout()), SLOT(fsToolbarHide()));
+	connect(&m_bumpScrollTimer, SIGNAL(timeout()), SLOT(bumpScroll()));
 }
 
 bool KRDC::start()
@@ -312,7 +313,9 @@ void KRDC::switchToFullscreen()
 	t->show();
 	showFullScreen();
 	repositionView(true);
-	setMouseTracking(m_ftAutoHide);
+	setMouseTracking(m_ftAutoHide || 
+			 (m_view->width()>m_scrollView->width()) || 
+			 (m_view->height()>m_scrollView->height()));
 }
 
 QRect KRDC::getAutoHideToolbarGeometry()
@@ -391,14 +394,23 @@ void KRDC::setSize(int w, int h)
 void KRDC::repositionView(bool fullscreen) {
 	int ox = 0;
 	int oy = 0;
+	QSize s = m_view->size();
 
 	if (fullscreen) {
-		QSize s = m_view->size();
 		QSize d = QApplication::desktop()->size();
+		bool margin = false;
 		if (d.width() > s.width())
 			ox = (d.width() - s.width()) / 2;
+		else if (d.width() < s.width()) 
+			margin = true;
+
 		if (d.height() > s.height())
 			oy = (d.height() - s.height()) / 2;
+		else if (d.height() < s.height())
+			margin = true;
+
+		if (margin) 
+			m_layout->setMargin(1);
 	}
 
 	m_scrollView->moveChild(m_view, ox, oy);
@@ -425,20 +437,59 @@ void KRDC::fsToolbarHide() {
 		m_fsToolbar->hide();
 }
 
-void KRDC::mouseMoveEvent(QMouseEvent *e) {
+void KRDC::bumpScroll() {
+	int x = QCursor::pos().x();
+	int y = QCursor::pos().y();
+	QSize s = m_view->size();
+	QSize d = QApplication::desktop()->size();
 
+	if (d.width() < s.width()) {
+		if (x == 0)
+			m_scrollView->scrollBy(-BUMP_SCROLL_CONSTANT, 0);
+		else if (x >= d.width()-1)
+			m_scrollView->scrollBy(BUMP_SCROLL_CONSTANT, 0);
+	}
+	if (d.height() < s.height()) {
+		if (y == 0)
+			m_scrollView->scrollBy(0, -BUMP_SCROLL_CONSTANT);
+		else if (y >= d.height()-1)
+			m_scrollView->scrollBy(0, BUMP_SCROLL_CONSTANT);
+	}
+
+	m_bumpScrollTimer.start(333, true);
+}
+
+void KRDC::mouseMoveEvent(QMouseEvent *e) {
 	if (m_isFullscreen != WINDOW_MODE_FULLSCREEN)
 		return;
+
+	int x = e->x();
+	int y = e->y();
+
+	/* Bump Scrolling */
+
+	QSize s = m_view->size();
+	QSize d = QApplication::desktop()->size();
+	if ((d.width() < s.width()) || d.height() < s.height()) {
+ 		if ((x == 0) || (x >= d.width()-1) ||
+		    (y == 0) || (y >= d.height()-1))
+			bumpScroll();
+		else
+			m_bumpScrollTimer.stop();
+	}
+
+	/* Toolbar autohide */
+
 	if (!m_ftAutoHide)
 		return;
 
-	int dw = QApplication::desktop()->width();
+	int dw = d.width();
 	int w = m_fsToolbar->sizeHint().width();
 	int x1 = (dw - w)/4;
 	int x2 = dw - x1;
 
 	// todo: show toolbar on mouse over
-	if (((e->y() <= 0) && (e->x() >= x1) && (e->x() <= x2))) {
+	if (((y <= 0) && (x >= x1) && (x <= x2))) {
 		m_fsToolbar->show();
 		m_autoHideTimer.stop();
 	}

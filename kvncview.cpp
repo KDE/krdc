@@ -171,7 +171,7 @@ void KVncView::customEvent(QCustomEvent *e)
 			setFocus();
 			setMouseTracking(true);
 		}
-		if (m_status == REMOTE_VIEW_DISCONNECTED) {
+		else if (m_status == REMOTE_VIEW_DISCONNECTED) {
 			setMouseTracking(false);
 			emit disconnected();
 		}
