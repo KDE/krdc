@@ -68,7 +68,7 @@ KRDC::KRDC(WindowMode wm, const QString &host, Quality q, const QString &encodin
   m_fullscreenMinimized(false),
   m_wasScaling(false)
 {
-	connect(&m_autoHideTimer, SIGNAL(timeout()), SLOT(fsToolbarHide()));
+	connect(&m_autoHideTimer, SIGNAL(timeout()), SLOT(hideFullscreenToolbarNow()));
 	connect(&m_bumpScrollTimer, SIGNAL(timeout()), SLOT(bumpScroll()));
 }
 
@@ -307,9 +307,9 @@ void KRDC::switchToFullscreen()
 		m_toolbar = 0;
 	}
 	if (!m_scrollView) {
-		m_scrollView = new QScrollView2(this, "Remote ScrollView");
+		m_scrollView = new QScrollView2(this, "remote scrollview");
 		m_scrollView->setFrameStyle(QFrame::NoFrame);
-		m_view->reparent(m_scrollView, 
+		m_view->reparent(m_scrollView->viewport(), 
 				 getWFlags() & ~WType_Mask, QPoint());
 		m_scrollView->addChild(m_view);
 	}
@@ -319,19 +319,19 @@ void KRDC::switchToFullscreen()
 	m_layout = new QVBoxLayout(this);
 	m_layout->addWidget(m_scrollView);
 
-	FullscreenToolbar *t = new FullscreenToolbar(this);
-	m_fsToolbar = t;
+	m_fsToolbar = new KFullscreenPanel(this, 0, m_fullscreenResolution);
+	FullscreenToolbar *t = new FullscreenToolbar(m_fsToolbar);
 	t->hostLabel->setText(m_host);
 	t->fullscreenButton->setOn(true);
+	m_fsToolbar->setChild(t);
+	connect(m_fsToolbar, SIGNAL(mouseEnter()), SLOT(showFullscreenToolbar()));
+	connect(m_fsToolbar, SIGNAL(mouseLeave()), SLOT(hideFullscreenToolbarDelayed()));
 	connect((QObject*)t->closeButton, SIGNAL(clicked()), SLOT(quit()));
 	connect((QObject*)t->iconifyButton, SIGNAL(clicked()), SLOT(iconify()));
 	connect((QObject*)t->fullscreenButton, SIGNAL(toggled(bool)), 
 		SLOT(enableFullscreen(bool)));
 	connect((QObject*)t->autohideButton, SIGNAL(toggled(bool)), 
 		SLOT(setFsToolbarAutoHide(bool)));
-	t->setFixedSize(t->sizeHint());
-	t->setGeometry(getAutoHideToolbarGeometry());
-//	t->show();
 	showFullScreen();
 
 	repositionView(true);
@@ -346,13 +346,6 @@ void KRDC::switchToFullscreen()
 	setMouseTracking(m_ftAutoHide || 
 			 (m_view->width()>m_scrollView->width()) || 
 			 (m_view->height()>m_scrollView->height()));
-}
-
-QRect KRDC::getAutoHideToolbarGeometry()
-{
-	QSize s = m_fsToolbar->sizeHint();
-	int h = s.height();
-	return QRect((m_fullscreenResolution.width() - s.width())/2, 0, s.width(), h);
 }
 
 void KRDC::switchToNormal(bool scaling)
@@ -400,7 +393,7 @@ void KRDC::switchToNormal(bool scaling)
 		if (!m_scrollView) {
 			m_scrollView = new QScrollView2(this, "Remote ScrollView");
 			m_scrollView->setFrameStyle(QFrame::NoFrame);
-			m_view->reparent(m_scrollView, 
+			m_view->reparent(m_scrollView->viewport(), 
 					 getWFlags() & ~WType_Mask, QPoint());
 			m_scrollView->addChild(m_view);
 		}
@@ -520,6 +513,7 @@ void KRDC::repositionView(bool fullscreen) {
 }
 
 void KRDC::setFsToolbarAutoHide(bool on) {
+
 	if (on == m_ftAutoHide)
 		return;
 	if (m_isFullscreen != WINDOW_MODE_FULLSCREEN)
@@ -527,17 +521,17 @@ void KRDC::setFsToolbarAutoHide(bool on) {
 
 	m_ftAutoHide = on;
 
-	setMouseTracking(m_ftAutoHide);
+	setMouseTracking(m_ftAutoHide || 
+			 (m_view->width()>m_scrollView->width()) || 
+			 (m_view->height()>m_scrollView->height()));
 	
-	if (!on) {
-		m_fsToolbar->show();
-		m_autoHideTimer.stop();
-	}
+	if (!on) 
+		showFullscreenToolbar();
 }
 
-void KRDC::fsToolbarHide() {
-	if (m_fsToolbar && m_ftAutoHide)
-		m_fsToolbar->hide();
+void KRDC::hideFullscreenToolbarNow() {
+	if (m_fsToolbar && m_ftAutoHide) 
+		m_fsToolbar->startHide();
 }
 
 void KRDC::bumpScroll() {
@@ -562,7 +556,20 @@ void KRDC::bumpScroll() {
 	m_bumpScrollTimer.start(333, true);
 }
 
+void KRDC::showFullscreenToolbar() {
+	m_fsToolbar->startShow();
+	m_autoHideTimer.stop();
+}
+
+void KRDC::hideFullscreenToolbarDelayed() {
+	if (!m_autoHideTimer.isActive())
+	  m_autoHideTimer.start(TOOLBAR_AUTOHIDE_TIMEOUT, true);
+}
+
 void KRDC::mouseMoveEvent(QMouseEvent *e) {
+if (!e->state())
+kdDebug() << "pure mouse move! "<<e->state()<<endl;
+
 	if (m_isFullscreen != WINDOW_MODE_FULLSCREEN)
 		return;
 
@@ -587,17 +594,15 @@ void KRDC::mouseMoveEvent(QMouseEvent *e) {
 		return;
 
 	int dw = d.width();
-	int w = m_fsToolbar->sizeHint().width();
+	int w = m_fsToolbar->width();
 	int x1 = (dw - w)/4;
 	int x2 = dw - x1;
 
-	// todo: show toolbar on mouse over
-	if (((y <= 0) && (x >= x1) && (x <= x2))) {
-		m_fsToolbar->show();
-		m_autoHideTimer.stop();
-	}
-	else if (!m_autoHideTimer.isActive())
-		m_autoHideTimer.start(TOOLBAR_AUTOHIDE_TIMEOUT, true);
+	if (((y <= 0) && (x >= x1) && (x <= x2)))
+		showFullscreenToolbar();
+	else 
+		hideFullscreenToolbarDelayed();
 	e->accept();
 }
+
 #include "krdc.moc"

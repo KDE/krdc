@@ -4,12 +4,13 @@ METASOURCES = AUTO
 
 bin_PROGRAMS = krdc
 krdc_SOURCES = main.cpp krdc.cpp kvncview.cpp threads.cpp vidmode.cpp \
-  colour.c d3des.c desktop.c rfbproto.c sockets.c vncauth.c \
-  newconnectiondialog.ui passworddialog.ui fullscreentoolbar.ui \
-  toolbar.ui
+  kfullscreenpanel.cpp colour.c d3des.c desktop.c rfbproto.c sockets.c \
+  vncauth.c newconnectiondialog.ui passworddialog.ui fullscreentoolbar.ui \
+  toolbar.ui 
 
-noinst_HEADERS = krdc.h kvncview.h vidmode.h rfbproto.h \
-   vncviewer.h vnctypes.h vncauth.h events.h threads.h
+noinst_HEADERS = krdc.h kvncview.h vidmode.h rfbproto.h  \
+   kfullscreenpanel.h vncviewer.h vnctypes.h vncauth.h events.h \
+   threads.h 
 
 EXTRA_DIST = README TODO
 

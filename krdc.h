@@ -25,6 +25,7 @@
 #include <qrect.h>
 #include <qtimer.h> 
 #include "kvncview.h"
+#include "kfullscreenpanel.h"
 
 enum WindowMode {
 	WINDOW_MODE_AUTO,
@@ -49,7 +50,7 @@ private:
 	KProgress *m_progress;
 	KVncView *m_view;
 
-	QWidget *m_fsToolbar;
+	KFullscreenPanel *m_fsToolbar;
 	QWidget *m_toolbar;
 
 	static const int TOOLBAR_AUTOHIDE_TIMEOUT = 2000;
@@ -83,8 +84,6 @@ private:
 	static const int TOOLBAR_FPS_1000 = 10000;
 	static const int TOOLBAR_SPEED_DOWN = 34;
 	static const int TOOLBAR_SPEED_UP = 20;
-	QRect getAutoHideToolbarGeometry();
-	int getAutoHideToolbarPosition();
 	void fsToolbarScheduleHidden();
 
 protected:
@@ -111,8 +110,9 @@ private slots:
 	void bumpScroll();
 
 	void setFsToolbarAutoHide(bool on);
-	void fsToolbarHide();
-
+	void showFullscreenToolbar();
+	void hideFullscreenToolbarDelayed();
+	void hideFullscreenToolbarNow();
 	
 public slots:
 	void quit();

@@ -1,5 +1,4 @@
 - animated autohide for fullscreen toolbar
-- stop fs toolbar autohide timeout when mouse is over the toolbar
 - add function to vncviewer code to de-allocate resources
 - dont quit after failed connect attempt but allow re-try
 - make sure vidmode compiles on non-XF86 servers
@@ -14,10 +13,11 @@ Future:
 Known bugs/problems:
 - Switching between fullscreen and normal mode can cause crashes with a
   backtrace somewhere deep in Qt
-- when using the XShm extension (see DesktopInit(), CreateShmImage() invocation)
-  I get error messages like "Xlib: unexpected async reply (sequence 0x1717)!" after
-  a few seconds. That's why XShm is not used at the moment.
-- when switching to 'scaled mode' (left button on toolbar in window mode), making
-  the window smaller than the framebuffer and turning the 'scaled mode' off the
-  scrollbars will not be displayed until the user resizes the window. I dont know
-  why and cannot find a work-around.
+- when using the XShm extension (see DesktopInit(), CreateShmImage() 
+  invocation) I get error messages like "Xlib: unexpected async reply 
+  (sequence 0x1717)!" after a few seconds. That's why XShm is not used at 
+  the moment.
+- when switching to 'scaled mode' (left button on toolbar in window mode), 
+  making the window smaller than the framebuffer and turning the 'scaled 
+  mode' off the scrollbars will not be displayed until the user resizes 
+  the window. I dont know why and cannot find a work-around.
