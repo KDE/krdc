@@ -56,8 +56,6 @@ int rfbsock;
 char *desktopName;
 rfbPixelFormat myFormat;
 rfbServerInitMsg si;
-char *serverCutText = NULL;
-Bool newServerCutText = False;
 
 int endianTest = 1;
 
@@ -472,10 +470,6 @@ SendClientCutText(char *str, int len)
 {
   rfbClientCutTextMsg cct;
 
-  if (serverCutText)
-    free(serverCutText);
-  serverCutText = NULL;
-
   cct.type = rfbClientCutText;
   cct.length = Swap32IfLE(len);
   return  (WriteExact(rfbsock, (char *)&cct, sz_rfbClientCutTextMsg) &&
@@ -688,15 +682,12 @@ HandleRFBServerMessage()
 
   case rfbServerCutText:
   {
-fprintf(stderr, "cut, need event here\n");
+    char *serverCutText;
     if (!ReadFromRFBServer(((char *)&msg) + 1,
 			   sz_rfbServerCutTextMsg - 1))
       return False;
 
     msg.sct.length = Swap32IfLE(msg.sct.length);
-
-    if (serverCutText)
-      free(serverCutText);
 
     serverCutText = malloc(msg.sct.length+1);
 
@@ -704,8 +695,8 @@ fprintf(stderr, "cut, need event here\n");
       return False;
 
     serverCutText[msg.sct.length] = 0;
+    newServerCut(serverCutText, msg.sct.length); /* takes ownershit of serverCutText */
 
-    newServerCutText = True;
     break;
   }
 

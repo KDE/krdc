@@ -80,6 +80,7 @@ extern int isQuitFlagSet();
 extern int getPassword(char *passwd, int pwlen);
 extern void SyncScreenRegion(int x, int y, int width, int height);
 extern void beep();
+void newServerCut(char *bytes, int len);
 
 /* threads.cpp */
 extern void queueIncrementalUpdateRequest();
@@ -123,8 +124,6 @@ extern Bool canUseHextile;
 extern char *desktopName;
 extern rfbPixelFormat myFormat;
 extern rfbServerInitMsg si;
-extern char *serverCutText;
-extern Bool newServerCutText;
 
 extern Bool ConnectToRFBServer(const char *hostname, int port);
 extern enum InitStatus InitialiseRFBConnection(void);

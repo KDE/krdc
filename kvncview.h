@@ -20,6 +20,7 @@
 
 
 #include <kapplication.h>
+#include <qclipboard.h>
 #include <qwidget.h>
 
 #include "threads.h"
@@ -40,6 +41,8 @@ private:
 
 	QString m_host;
 	int m_port;
+
+	QClipboard *m_cb;
 
 	void setDefaultAppData();
 	void mouseEvent(QMouseEvent*);
@@ -71,6 +74,9 @@ public:
 	int port();
 	bool start();
 	enum RemoteViewStatus status();
+
+private slots:
+	void selectionChanged();
 
 signals:
 	void changeSize(int x, int y);

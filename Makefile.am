@@ -9,7 +9,7 @@ krdc_SOURCES = main.cpp krdc.cpp kvncview.cpp threads.cpp vidmode.cpp \
   toolbar.ui
 
 noinst_HEADERS = krdc.h kvncview.h vidmode.h rfbproto.h \
-   vncviewer.h vnctypes.h vncauth.h
+   vncviewer.h vnctypes.h vncauth.h events.h threads.h
 
 EXTRA_DIST = README TODO
 

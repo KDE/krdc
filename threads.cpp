@@ -143,7 +143,8 @@ void queueIncrementalUpdateRequest() {
 
 WriterThread::WriterThread(KVncView *v, volatile bool &quitFlag) :
 	m_quitFlag(quitFlag),
-	m_view(v)
+	m_view(v),
+	m_clientCut(QString::null)
 {
 	writerThread = this;
 }
@@ -244,6 +245,15 @@ void WriterThread::queueKeyEvent(unsigned int k, bool down) {
 	m_lock.unlock();
 }
 
+void WriterThread::queueClientCut(const QString &text) {
+	m_lock.lock();
+
+	m_clientCut = text;
+
+	m_waiter.wakeAll();
+	m_lock.unlock();
+}
+
 void WriterThread::kick() {
 	m_waiter.wakeAll();
 }
@@ -253,6 +263,7 @@ void WriterThread::run() {
 	QRegion updateRegionRQ;
 	QValueList<MouseEvent> mouseEvents;
 	QValueList<KeyEvent> keyEvents;
+	QString clientCut;
 
 	while (!m_quitFlag) {
 		m_lock.lock();
@@ -260,11 +271,13 @@ void WriterThread::run() {
 		updateRegionRQ = m_updateRegionRQ;
 		mouseEvents = m_mouseEvents;
 		keyEvents = m_keyEvents;
+		clientCut = m_clientCut;
 
 		if ((!incrementalUpdateRQ) &&
 		    (updateRegionRQ.isNull()) &&
 		    (mouseEvents.size() == 0) &&
-		    (keyEvents.size() == 0)) {
+		    (keyEvents.size() == 0) && 
+		    (clientCut.isNull())) {
 			m_waiter.wait(&m_lock, WAIT_PERIOD);
 			m_lock.unlock();
 		}
@@ -273,6 +286,7 @@ void WriterThread::run() {
 			m_updateRegionRQ = QRegion();
 			m_mouseEvents.clear(); 
 			m_keyEvents.clear();
+			m_clientCut = QString::null;
 			m_lock.unlock();
 
 			if (incrementalUpdateRQ) 
@@ -292,6 +306,12 @@ void WriterThread::run() {
 				}
 			if (keyEvents.size() != 0)
 				if (!sendKeyEvents(keyEvents)) {
+					sendFatalError(ERROR_IO);
+					break;
+				}
+			if (!clientCut.isNull()) 
+				if (!SendClientCutText(clientCut.latin1(), 
+						       clientCut.length())) {
 					sendFatalError(ERROR_IO);
 					break;
 				}

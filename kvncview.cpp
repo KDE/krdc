@@ -36,7 +36,6 @@
 
 #include "vncviewer.h"
 
-
 /*
  * appData is our application-specific data which can be set by the user with
  * application resource specs.  The AppData structure is defined in the header
@@ -52,6 +51,9 @@ static KVncView *kvncview;
 static QString password;
 static QMutex passwordLock;
 static QWaitCondition passwordWaiter;
+
+const unsigned int MAX_SELECTION_LENGTH = 4096;
+
 
 KVncView::KVncView(QWidget *parent, 
 		   const char *name, 
@@ -75,6 +77,10 @@ KVncView::KVncView(QWidget *parent,
 		setDefaultAppData();
 	setFixedSize(16,16);
 	setFocusPolicy(QWidget::StrongFocus);
+
+	m_cb = QApplication::clipboard();
+	m_cb->setSelectionMode(true);
+	connect(m_cb, SIGNAL(selectionChanged()), this, SLOT(selectionChanged()));
 
 /*
 	KStandardDirs *dirs = KGlobal::dirs();
@@ -262,6 +268,10 @@ void KVncView::customEvent(QCustomEvent *e)
 	else if (e->type() == BeepEventType) {  
 		QApplication::beep();
 	}
+	else if (e->type() == ServerCutEventType) {  
+		ServerCutEvent *sce = (ServerCutEvent*) e;
+		m_cb->setText(sce->bytes());
+	}
 }
 
 void KVncView::mouseEvent(QMouseEvent *e) {
@@ -273,17 +283,17 @@ void KVncView::mouseEvent(QMouseEvent *e) {
 			if ( e->button() & LeftButton )
 				m_buttonMask |= 0x01;
 			if ( e->button() & MidButton )
-				m_buttonMask |= 0x04;
-			if ( e->button() & RightButton )
 				m_buttonMask |= 0x02;
+			if ( e->button() & RightButton )
+				m_buttonMask |= 0x04;
 		}
 		else if ( e->type() == QEvent::MouseButtonRelease ) {
 			if ( e->button() & LeftButton )
 				m_buttonMask &= 0xfe;
 			if ( e->button() & MidButton )
-				m_buttonMask &= 0xfb;
-			if ( e->button() & RightButton )
 				m_buttonMask &= 0xfd;
+			if ( e->button() & RightButton )
+				m_buttonMask &= 0xfb;
 		}
 	}
 	m_wthread.queueMouseEvent(e->x(), e->y(), m_buttonMask);
@@ -327,6 +337,20 @@ void KVncView::keyReleaseEvent(QKeyEvent *e) {
 	m_wthread.queueKeyEvent((KeySym)toKeySym(e), false);
 }
 
+void KVncView::selectionChanged() {
+	if (status() != REMOTE_VIEW_CONNECTED)
+		return;
+
+	if (m_cb->ownsSelection())
+		return;
+
+	QString text = m_cb->text();
+	if (text.length() > MAX_SELECTION_LENGTH)
+		return;
+
+	m_wthread.queueClientCut(text);
+}
+
 int getPassword(char *passwd, int pwlen) {
 	int retV = 1;
 
@@ -361,6 +385,10 @@ extern void SyncScreenRegion(int x, int y, int width, int height) {
 
 extern void beep() {
 	QThread::postEvent(kvncview, new BeepEvent());	
+}
+
+extern void newServerCut(char *bytes, int length) {
+	QThread::postEvent(kvncview, new ServerCutEvent(bytes, length));
 }
 
 unsigned long KVncView::toKeySym(QKeyEvent *k)
