@@ -55,8 +55,9 @@ const int FS_AUTOHIDE_ID = 1;
 const int FS_FULLSCREEN_ID = 2;
 const int FS_SCALE_ID = 3;
 const int FS_HOSTLABEL_ID = 4;
-const int FS_ICONIFY_ID = 5;
-const int FS_CLOSE_ID = 6;
+const int FS_ADVANCED_ID = 5;
+const int FS_ICONIFY_ID = 6;
+const int FS_CLOSE_ID = 7;
 
 const int KRDC::TOOLBAR_AUTOHIDE_TIMEOUT = 1000;
 const int KRDC::TOOLBAR_FPS_1000 = 10000;
@@ -370,6 +371,14 @@ QSize KRDC::sizeHint()
 		return m_view->framebufferSize();
 }
 
+QPopupMenu *KRDC::createPopupMenu(QWidget *parent) const {
+	KPopupMenu *pu = new KPopupMenu(parent);
+	pu->insertItem(i18n("View only"), this, SLOT(viewOnlyToggled()), 0, VIEW_ONLY_ID);
+	pu->setCheckable(true);
+	pu->setItemChecked(VIEW_ONLY_ID, m_view->viewOnly());
+	return pu;
+}
+
 void KRDC::switchToFullscreen(bool scaling)
 {
 	int x, y;
@@ -402,6 +411,9 @@ void KRDC::switchToFullscreen(bool scaling)
 		m_toolbar->hide();
 		m_toolbar->deleteLater();
 		m_toolbar = 0;
+	}
+	if (m_popup) {
+		m_popup->deleteLater();
 		m_popup = 0;
 	}
 	if (m_fsToolbar) {
@@ -451,6 +463,19 @@ void KRDC::switchToFullscreen(bool scaling)
 	t->setButton(FS_FULLSCREEN_ID, true);
 	t->addConnection(FS_FULLSCREEN_ID, SIGNAL(toggled(bool)), this, SLOT(enableFullscreen(bool)));
 
+	m_popup = createPopupMenu(t);
+	t->insertButton("configure", FS_ADVANCED_ID, m_popup, true, i18n("Advanced options"));
+	KToolBarButton *advancedButton = t->getButton(FS_ADVANCED_ID);
+	QToolTip::add(advancedButton, i18n("Advanced options"));
+	advancedButton->setPopupDelay(0);
+
+	QLabel *hostLabel = new QLabel(t);
+	hostLabel->setName("kde toolbar widget");
+	hostLabel->setAlignment(Qt::AlignCenter);
+	hostLabel->setText("   "+m_host+"   ");
+	t->insertWidget(FS_HOSTLABEL_ID, 150, hostLabel);
+	t->setItemAutoSized(FS_HOSTLABEL_ID, true);
+
 	if (scalingPossible) {
 		t->insertButton("viewmagfit", FS_SCALE_ID);
 		KToolBarButton *scaleButton = t->getButton(FS_SCALE_ID);
@@ -459,13 +484,6 @@ void KRDC::switchToFullscreen(bool scaling)
 		t->setButton(FS_SCALE_ID, scaling);
 		t->addConnection(FS_SCALE_ID, SIGNAL(toggled(bool)), this, SLOT(switchToFullscreen(bool)));
 	}
-
-	QLabel *hostLabel = new QLabel(t);
-	hostLabel->setName("kde toolbar widget");
-	hostLabel->setAlignment(Qt::AlignCenter);
-	hostLabel->setText("   "+m_host+"   ");
-	t->insertWidget(FS_HOSTLABEL_ID, 150, hostLabel);
-	t->setItemAutoSized(FS_HOSTLABEL_ID, true);
 
 	t->insertButton("iconify", FS_ICONIFY_ID);
 	KToolBarButton *iconifyButton = t->getButton(FS_ICONIFY_ID);
@@ -518,6 +536,10 @@ void KRDC::switchToNormal(bool scaling)
 		m_oldResolution = Resolution();
 	}
 
+	if (m_popup) {
+		m_popup->deleteLater();
+		m_popup = 0;
+	}
 	if (m_fsToolbar) {
 		m_fsToolbar->hide();
 		m_fsToolbar->deleteLater();
@@ -554,17 +576,11 @@ void KRDC::switchToNormal(bool scaling)
 		QWhatsThis::add(skButton, i18n("This option allows you to send special key combinations like Ctrl-Alt-Del to the remote host."));
 		t->addConnection(2, SIGNAL(clicked()), m_keyCaptureDialog, SLOT(execute()));
 
-		KPopupMenu *pu = new KPopupMenu(t);
-
-		t->insertButton("configure", 3, pu, true, i18n("Advanced"));
+		m_popup = createPopupMenu(t);
+		t->insertButton("configure", 3, m_popup, true, i18n("Advanced"));
 		KToolBarButton *advancedButton = t->getButton(3);
-		QToolTip::add(skButton, i18n("Advanced options"));
+		QToolTip::add(advancedButton, i18n("Advanced options"));
 		advancedButton->setPopupDelay(0);
-
-		pu->insertItem(i18n("View only"), this, SLOT(viewOnlyToggled()), VIEW_ONLY_ID);
-		pu->setCheckable(true);
-		pu->setItemChecked(VIEW_ONLY_ID, m_view->viewOnly());
-		m_popup = pu;
 	}
 
 	if (scaling) {

@@ -35,7 +35,7 @@
 #include "smartptr.h"
 
 class KToolBar;
-class KPopupMenu;
+class QPopupMenu;
 
 enum WindowMode {
 	WINDOW_MODE_AUTO,
@@ -117,6 +117,7 @@ private:
 	static const int TOOLBAR_SPEED_DOWN;
 	static const int TOOLBAR_SPEED_UP;
 	void fsToolbarScheduleHidden();
+	QPopupMenu *createPopupMenu(QWidget *parent) const;
 
 protected:
 	virtual void mouseMoveEvent(QMouseEvent *e);
