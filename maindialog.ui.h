@@ -1,5 +1,6 @@
 #include <qregexp.h>
 #include <kdebug.h>
+#include <kapplication.h>
 #include <config.h>
 #include "preferences.h"
 
@@ -54,3 +55,7 @@ void MainDialog::preferencesClicked()
     p.exec();
 }
 
+void MainDialog::helpClicked()
+{
+	KApplication::kApplication()->invokeHelp();
+}

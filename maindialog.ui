@@ -1,4 +1,4 @@
-<!DOCTYPE UI><UI version="3.1" stdsetdef="1">
+<!DOCTYPE UI><UI version="3.2" stdsetdef="1">
 <class>MainDialog</class>
 <widget class="QDialog">
     <property name="name">
@@ -9,7 +9,7 @@
             <x>0</x>
             <y>0</y>
             <width>544</width>
-            <height>352</height>
+            <height>356</height>
         </rect>
     </property>
     <property name="sizePolicy">
@@ -367,6 +367,20 @@ Remote Desktop Connection only supports systems that use VNC.</string>
                     <property name="text">
                         <string>&amp;Preferences...</string>
                     </property>
+                    <property name="accel">
+                        <string>Alt+P</string>
+                    </property>
+                </widget>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>helpButton</cstring>
+                    </property>
+                    <property name="text">
+                        <string>&amp;Help</string>
+                    </property>
+                    <property name="accel">
+                        <string>Alt+H</string>
+                    </property>
                 </widget>
                 <spacer>
                     <property name="name">
@@ -427,6 +441,8 @@ Remote Desktop Connection only supports systems that use VNC.</string>
         </widget>
     </vbox>
 </widget>
+<customwidgets>
+</customwidgets>
 <connections>
     <connection>
         <sender>connectButton</sender>
@@ -476,6 +492,12 @@ Remote Desktop Connection only supports systems that use VNC.</string>
         <receiver>MainDialog</receiver>
         <slot>preferencesClicked()</slot>
     </connection>
+    <connection>
+        <sender>helpButton</sender>
+        <signal>clicked()</signal>
+        <receiver>MainDialog</receiver>
+        <slot>helpClicked()</slot>
+    </connection>
 </connections>
 <tabstops>
     <tabstop>serverInput</tabstop>
@@ -490,21 +512,17 @@ Remote Desktop Connection only supports systems that use VNC.</string>
     <tabstop>browsingView</tabstop>
 </tabstops>
 <includes>
-    <include location="local" impldecl="in declaration">kservicelocator.h</include>
     <include location="local" impldecl="in implementation">kcombobox.h</include>
     <include location="local" impldecl="in implementation">preferences.h</include>
-    <include location="local" impldecl="in implementation">maindialog.ui.h</include>
     <include location="local" impldecl="in implementation">kactivelabel.h</include>
 </includes>
-<variables>
-    <variable>KServiceLocator *m_ksl</variable>
-</variables>
 <slots>
     <slot>hostChanged( const QString &amp; text )</slot>
     <slot>toggleBrowsingArea()</slot>
     <slot>rescan()</slot>
     <slot>enableBrowsingArea( bool enable )</slot>
     <slot>preferencesClicked()</slot>
+    <slot>helpClicked()</slot>
 </slots>
 <layoutdefaults spacing="6" margin="11"/>
 <includehints>
@@ -513,6 +531,5 @@ Remote Desktop Connection only supports systems that use VNC.</string>
     <includehint>klistview.h</includehint>
     <includehint>kcombobox.h</includehint>
     <includehint>klineedit.h</includehint>
-    <includehint>kactivelabel.h</includehint>
 </includehints>
 </UI>
