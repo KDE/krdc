@@ -324,7 +324,7 @@ bool KRDC::parseHost(QString &str, Protocol &prot, QString &serverHost, int &ser
 	}
 
 	KURL url(s);
-	if (url.isMalformed())
+	if (!url.isValid())
 		return false;
 	serverHost = url.host();
 	if (serverHost.isEmpty())
