@@ -150,6 +150,7 @@ void queueIncrementalUpdateRequest() {
 WriterThread::WriterThread(KVncView *v, volatile bool &quitFlag) :
 	m_quitFlag(quitFlag),
 	m_view(v),
+	m_incrementalUpdateRQ(false),
 	m_clientCut(QString::null)
 {
 	writerThread = this;
