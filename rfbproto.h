@@ -319,6 +319,7 @@ typedef struct {
 
 #define rfbEncodingXCursor         0xFFFFFF10
 #define rfbEncodingRichCursor      0xFFFFFF11
+#define rfbEncodingSoftCursor      0xFFFFFF12
 
 #define rfbEncodingLastRect        0xFFFFFF20
 
@@ -550,6 +551,54 @@ typedef struct {
  * in the XCursor encoding). If (w * h == 0), cursor should be hidden (or
  * default local cursor should be set by the client).
  */
+
+
+/*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ * SoftCursor encoding. This encoding is used to transmit image and position 
+ * of the remote cursor. It has two sub-messages: SetImage is used to upload
+ * one of 16 images, and Move selects the image and sets the position of the
+ * cursor. 
+ * Each SoftCursor message starts with a CARD8. If it is in the 0-63 range
+ * it specifies the image of the cursor and is followed by the 
+ * rfbSoftCursorMove message. If the given cursor has not been set yet the 
+ * message will be ignored. If the first CARD8 is in the 128-191 range it 
+ * specifies the cursor that will be set in the following 
+ * rfbSoftCursorSetImage message. To hide the cursor send a SetCursor 
+ * message with width and height 0 and imageLength 0.
+ * SetImage transports the hotspot coordinates in the x/y fields of the
+ * rfbFramebufferUpdateRectHeader, width and height of the image in the
+ * header's width and height fields.
+ * Move transports the pointer coordinates in the w/h fields of the
+ * header, x/y are always 0.
+ */
+
+typedef struct {
+  CARD8 imageIndex;
+  CARD8 buttonMask; /* bits 0-7 are buttons 1-8, 0=up, 1=down */
+} rfbSoftCursorMove;
+
+typedef struct {
+  CARD8 imageIndex;
+  CARD8 padding;
+  CARD16 imageLength;
+  /* 
+   * Followed by an image of the cursor in the client's image format
+   * with the following RLE mask compression. It begins with CARD8 that
+   * specifies the number of mask'ed pixels that will be NOT transmitted.
+   * Then follows a CARD8 that specified by the number of unmask'd pixels 
+   * that will be transmitted next. Then a CARD8 with the number of mask'd 
+   * pixels and so on. 
+   */
+} rfbSoftCursorSetImage;
+
+typedef union {
+  CARD8 type;
+  rfbSoftCursorMove move;
+  rfbSoftCursorSetImage setImage;
+} rfbSoftCursorMsg;
+
+#define rfbSoftCursorMaxImages    16
+#define rfbSoftCursorSetIconOffset    128
 
 
 /*-----------------------------------------------------------------------------

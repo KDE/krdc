@@ -102,6 +102,16 @@ extern void FillRectangle16(CARD16, int x, int y, int width, int height);
 extern void FillRectangle32(CARD32, int x, int y, int width, int height);
 extern void CopyArea(int srcX, int srcY, int width, int height, int x, int y);
 extern void SyncScreenRegion(int x, int y, int width, int height);
+extern void drawCursor(void);
+extern void undrawCursor(void);
+extern void getBoundingRectCursor(int cx, int cy, int _imageIndex,
+				  int *x, int *y, int *w, int *h);
+extern int rectsIntersect(int x, int y, int w, int h, 
+			  int x2, int y2, int w2, int h2);
+extern int rectContains(int outX, int outY, int outW, int outH, 
+			int inX, int inY, int inW, int inH);
+extern void rectsJoin(int *nx1, int *ny1, int *nw1, int *nh1, 
+		      int x2, int y2, int w2, int h2);
 extern void DrawZoomedScreenRegionX11Thread(Window win, int zwidth, 
 					    int zheight, 
 					    int x, int y, 
@@ -113,7 +123,7 @@ extern void Cleanup(void);
 extern XImage *CreateShmZoomImage(void);
 extern XImage *CreateShmImage(void);
 extern void ShmCleanup(void);
-extern void freeDesktopResources();
+extern void freeDesktopResources(void);
 
 /* rfbproto.c */
 
@@ -123,6 +133,17 @@ extern Bool canUseHextile;
 extern char *desktopName;
 extern rfbPixelFormat myFormat;
 extern rfbServerInitMsg si;
+
+extern int cursorX, cursorY;
+extern int imageIndex;
+typedef struct {
+  int set;
+  int w, h;
+  int hotX, hotY;
+  int len;
+  char *image;
+} PointerImage;
+extern PointerImage pointerImages[];
 
 extern int ConnectToRFBServer(const char *hostname, int port);
 extern enum InitStatus InitialiseRFBConnection(void);
@@ -136,8 +157,8 @@ extern Bool SendClientCutText(const char *str, int len);
 extern Bool HandleRFBServerMessage(void);
 
 extern void PrintPixelFormat(rfbPixelFormat *format);
-extern void freeRFBProtoResources();
-extern void freeResources();
+extern void freeRFBProtoResources(void);
+extern void freeResources(void);
 
 /* sockets.c */
 
@@ -149,7 +170,7 @@ extern int ListenAtTcpPort(int port);
 extern int ConnectToTcpAddr(unsigned int host, int port);
 
 extern int StringToIPAddr(const char *str, unsigned int *addr);
-extern void freeSocketsResources();
+extern void freeSocketsResources(void);
 
 #if(defined __cplusplus)
 }

@@ -22,6 +22,8 @@
 
 /*
  * rfbproto.c - functions to deal with client side of RFB protocol.
+ * tim@tjansen.de: - added softcursor encoding
+ *                 - changed various things for krdc
  */
 
 #include <unistd.h>
@@ -58,6 +60,15 @@ rfbPixelFormat myFormat;
 rfbServerInitMsg si;
 
 int endianTest = 1;
+
+/*
+ * Softcursor variables
+ */
+
+int cursorX, cursorY;
+int imageIndex = -1;
+
+PointerImage pointerImages[rfbSoftCursorMaxImages];
 
 
 /*  Hextile assumes it is big enough to hold 16 * 16 * 32 bits.
@@ -318,6 +329,8 @@ SetFormatAndEncodings()
 	encs[se->nEncodings++] = Swap32IfLE(rfbEncodingRaw);
       } else if (strncasecmp(encStr,"copyrect",encStrLen) == 0) {
 	encs[se->nEncodings++] = Swap32IfLE(rfbEncodingCopyRect);
+      } else if (strncasecmp(encStr,"softcursor",encStrLen) == 0) {
+	encs[se->nEncodings++] = Swap32IfLE(rfbEncodingSoftCursor);
       } else if (strncasecmp(encStr,"tight",encStrLen) == 0) {
 	encs[se->nEncodings++] = Swap32IfLE(rfbEncodingTight);
 	requestLastRectEncoding = True;
@@ -369,6 +382,8 @@ SetFormatAndEncodings()
 					  rfbEncodingQualityLevel0);
     }
 
+    if (si.format.depth >= 8) 
+      encs[se->nEncodings++] = Swap32IfLE(rfbEncodingSoftCursor);
     encs[se->nEncodings++] = Swap32IfLE(rfbEncodingLastRect);
   }
 
@@ -473,6 +488,73 @@ SendClientCutText(const char *str, int len)
 }
 
 
+static Bool
+HandleSoftCursorSetImage(rfbSoftCursorSetImage *msg, rfbRectangle *rect) 
+{
+  int iindex = msg->imageIndex - rfbSoftCursorSetIconOffset;
+  PointerImage *pi = &pointerImages[iindex];
+  if (iindex >= rfbSoftCursorMaxImages) {
+    fprintf(stderr, "Received invalid soft cursor image index %d for SetImage\n", iindex);
+    return False;
+  }
+
+  if (pi->set && pi->image) 
+    free(pi->image);
+
+  pi->w = rect->w;
+  pi->h = rect->h;
+  pi->hotX = rect->x;
+  pi->hotY = rect->y;
+  pi->len = Swap16IfLE(msg->imageLength);
+  pi->image = malloc(pi->len);
+  if (!pi->image) {
+    fprintf(stderr, "out of memory (size=%d)\n", pi->len);
+    return False;
+  }
+
+  if (!ReadFromRFBServer(pi->image, pi->len)) 
+    return False;
+  pi->set = 1;
+  return True;
+}
+
+static Bool
+HandleSoftCursorMove(rfbSoftCursorMove *msg, rfbRectangle *rect) 
+{
+  int ii, ox, oy, ow, oh, nx, ny, nw, nh;
+
+  getBoundingRectCursor(cursorX, cursorY, imageIndex,
+			&ox, &oy, &ow, &oh);
+
+  ii = msg->imageIndex;
+  if (ii >= rfbSoftCursorMaxImages) {
+    fprintf(stderr, "Received invalid soft cursor image index %d for Move\n", ii);
+    return False;
+  }
+
+  if (!pointerImages[ii].set)
+    return True;
+
+  undrawCursor();
+  imageIndex = ii;
+  cursorX = rect->w;
+  cursorY = rect->h;
+  drawCursor();
+
+  getBoundingRectCursor(cursorX, cursorY, imageIndex,
+			&nx, &ny, &nw, &nh);
+
+  if (rectsIntersect(ox, oy, ow, oh, nx, ny, nw, nh)) {
+    rectsJoin(&ox, &oy, &ow, &oh, nx, ny, nw, nh);
+    SyncScreenRegion(ox, oy, ow, oh);
+  }
+  else {
+    SyncScreenRegion(ox, oy, ow, oh);
+    SyncScreenRegion(nx, ny, nw, nh);
+  }
+  return True;
+}
+
 
 /*
  * HandleRFBServerMessage.
@@ -552,7 +634,8 @@ HandleRFBServerMessage()
 	  return False;
 	}
 
-      if (rect.r.h * rect.r.w == 0) {
+      if ((rect.r.h * rect.r.w == 0) && 
+	  (rect.encoding != rfbEncodingSoftCursor)) {
 	fprintf(stderr,"Zero size rect - ignoring\n");
 	continue;
       }
@@ -648,6 +731,34 @@ HandleRFBServerMessage()
 	  if (!HandleTight32(rect.r.x,rect.r.y,rect.r.w,rect.r.h))
 	    return False;
 	  break;
+	}
+	break;
+      }
+
+      case rfbEncodingSoftCursor:
+      {
+	rfbSoftCursorMsg scmsg;
+	if (!ReadFromRFBServer((char *)&scmsg, 1))
+	  return False;
+	if (scmsg.type < rfbSoftCursorMaxImages) {
+	  if (!ReadFromRFBServer(((char *)&scmsg)+1, 
+				 sizeof(rfbSoftCursorMove)- 1))
+	    return False;
+	  if (!HandleSoftCursorMove(&scmsg.move, &rect))
+	    return False;
+	}
+	else if((scmsg.type >= rfbSoftCursorSetIconOffset) && 
+		(scmsg.type < rfbSoftCursorSetIconOffset+rfbSoftCursorMaxImages)) {
+	  if (!ReadFromRFBServer(((char *)&scmsg)+1, 
+				 sizeof(rfbSoftCursorSetImage)- 1))
+	    return False;
+	  if (!HandleSoftCursorSetImage(&scmsg.setImage, &rect))
+	    return False;
+	}
+	else {
+	  fprintf(stderr,"Unknown soft cursor image index %d\n", 
+		  (int)scmsg.type);
+	  return False;
 	}
 	break;
       }
@@ -791,10 +902,15 @@ ReadCompactLen (void)
 }
 
 void freeRFBProtoResources() {
+  int i;
+
   if (desktopName)
     free(desktopName);
   if (raw_buffer)
     free(raw_buffer);
+  for (i = 0; i < rfbSoftCursorMaxImages; i++) 
+    if (pointerImages[i].set && pointerImages[i].image)
+      free(pointerImages[i].image);
 
   raw_buffer_size = -1;
   raw_buffer = NULL;
@@ -803,6 +919,9 @@ void freeRFBProtoResources() {
   zlibStreamActive[1] = False;
   zlibStreamActive[2] = False;
   zlibStreamActive[3] = False;
+  for (i = 0; i < rfbSoftCursorMaxImages; i++) 
+    pointerImages[i].set = 0;
+  imageIndex = -1;
 }
 
 void freeResources() {

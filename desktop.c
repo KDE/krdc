@@ -26,6 +26,7 @@
  *                   the image
  *                 - added Zoom functionality, based on rotation funcs from
  *                   SGE by Anders Lindström)
+ *                 - added support for softcursor encoding
  *
  */
 
@@ -62,6 +63,15 @@ static int zoomWidth, zoomHeight;
 static XImage *zoomImage = NULL;
 static Bool useZoomShm = True;
 
+/* for softcursor */
+static char *savedArea = NULL;
+
+typedef enum {
+  SOFTCURSOR_UNDER,
+  SOFTCURSOR_PART_UNDER,
+  SOFTCURSOR_UNAFFECTED
+} SoftCursorState;
+
 typedef int Sint32;
 typedef short Sint16;
 typedef char Sint8;
@@ -81,11 +91,14 @@ typedef struct {
         Uint16 w, h;
 } Rect;
 
-
+static void bgr233cpy(CARD8 *dst, CARD8 *src, int len);
 static void CopyDataToScreenRaw(char *buf, int x, int y, int width, int height);
 static void CopyBGR233ToScreen(CARD8 *buf, int x, int y, int width,int height);
 static void FillRectangleBGR233(CARD8 buf, int x, int y, int width,int height);
 static int CheckRectangle(int x, int y, int width, int height);
+static SoftCursorState getSoftCursorState(int x, int y, int width, int height);
+static void discardCursorSavedArea();
+static void saveCursorSavedArea();
 
 static void ZoomInit(void);
 static void transformZoomSrc(int six, int siy, int siw, int sih,
@@ -164,6 +177,32 @@ static int CheckRectangle(int x, int y, int width, int height) {
   return 1;
 }
 
+static 
+void bgr233cpy(CARD8 *dst, CARD8 *src, int len) {
+  int i;
+  CARD16 *d16;
+  CARD32 *d32;
+
+  switch (visbpp) {
+  case 8:
+    for (i = 0; i < len; i++) 
+      *(dst++) = (CARD8) BGR233ToPixel[*(src++)];
+    break;
+  case 16:
+    d16 = (CARD16*) dst;
+    for (i = 0; i < len; i++) 
+      *(d16++) = (CARD16) BGR233ToPixel[*(src++)];
+    break;
+  case 32:
+    d32 = (CARD32*) dst;
+    for (i = 0; i < len; i++) 
+      *(d32++) = (CARD32) BGR233ToPixel[*(src++)];
+    break;
+  default:
+    fprintf(stderr, "Unsupported softcursor depth %d\n", visbpp);
+  }
+}
+
 
 /*
  * CopyDataToScreen.
@@ -172,13 +211,22 @@ static int CheckRectangle(int x, int y, int width, int height) {
 void
 CopyDataToScreen(char *buf, int x, int y, int width, int height)
 {
+  SoftCursorState s;
+
   if (!CheckRectangle(x, y, width, height))
     return;
+
+  s = getSoftCursorState(x, y, width, height);
+  if (s == SOFTCURSOR_PART_UNDER)
+    undrawCursor();
 
   if (!appData.useBGR233)
     CopyDataToScreenRaw(buf, x, y, width, height);
   else
     CopyBGR233ToScreen((CARD8 *)buf, x, y, width, height);
+
+  if (s != SOFTCURSOR_UNAFFECTED)
+    drawCursor();
 
   SyncScreenRegion(x, y, width, height);
 }
@@ -277,8 +325,15 @@ CopyBGR233ToScreen(CARD8 *buf, int x, int y, int width, int height)
 void
 FillRectangle8(CARD8 fg, int x, int y, int width, int height)
 {
+  SoftCursorState s;
+
   if (!CheckRectangle(x, y, width, height))
     return;
+
+  s = getSoftCursorState(x, y, width, height);
+  if (s == SOFTCURSOR_PART_UNDER)
+    undrawCursor();
+
   if (!appData.useBGR233) {
     int h;
     int widthInBytes = width * visbpp / 8;
@@ -294,6 +349,9 @@ FillRectangle8(CARD8 fg, int x, int y, int width, int height)
   } else {
     FillRectangleBGR233(fg, x, y, width, height);
   }
+
+  if (s != SOFTCURSOR_UNAFFECTED)
+    drawCursor();
 }
 
 /*
@@ -378,9 +436,14 @@ FillRectangle16(CARD16 fg, int x, int y, int width, int height)
   char *scr = (image->data + y * scrWidthInBytes
 	       + x * visbpp / 8);
   CARD16 *scr16;
+  SoftCursorState s;
 
   if (!CheckRectangle(x, y, width, height))
     return;
+
+  s = getSoftCursorState(x, y, width, height);
+  if (s == SOFTCURSOR_PART_UNDER)
+    undrawCursor();
 
   for (h = 0; h < height; h++) {
     scr16 = (CARD16*) scr;
@@ -388,6 +451,9 @@ FillRectangle16(CARD16 fg, int x, int y, int width, int height)
       scr16[i] = fg;
     scr += scrWidthInBytes;
   }
+
+  if (s != SOFTCURSOR_UNAFFECTED)
+    drawCursor();
 }
 
 /*
@@ -399,6 +465,7 @@ FillRectangle32(CARD32 fg, int x, int y, int width, int height)
 {
   int i, h;
   int scrWidthInBytes = image->bytes_per_line;
+  SoftCursorState s;
   
   char *scr = (image->data + y * scrWidthInBytes
 	       + x * visbpp / 8);
@@ -407,12 +474,19 @@ FillRectangle32(CARD32 fg, int x, int y, int width, int height)
   if (!CheckRectangle(x, y, width, height))
     return;
 
+  s = getSoftCursorState(x, y, width, height);
+  if (s == SOFTCURSOR_PART_UNDER)
+    undrawCursor();
+
   for (h = 0; h < height; h++) {
     scr32 = (CARD32*) scr;
     for (i = 0; i < width; i++)
       scr32[i] = fg;
     scr += scrWidthInBytes;
   }
+
+  if (s != SOFTCURSOR_UNAFFECTED)
+    drawCursor();
 }
 
 /*
@@ -446,7 +520,14 @@ void
 CopyArea(int srcX, int srcY, int width, int height, int x, int y)
 {
   int widthInBytes = width * visbpp / 8;
-  
+  SoftCursorState sSrc, sDst;
+
+  sSrc = getSoftCursorState(srcX, srcY, width, height);
+  sDst = getSoftCursorState(x, y, width, height);
+  if ((sSrc != SOFTCURSOR_UNAFFECTED) ||
+      (sDst == SOFTCURSOR_PART_UNDER))
+    undrawCursor();
+
   if ((srcY+height < y) || (y+height < srcY) ||
       (srcX+width  < x) || (x+width  < srcX)) {
 
@@ -478,6 +559,9 @@ CopyArea(int srcX, int srcY, int width, int height, int x, int y)
     CopyDataToScreenRaw(buf, x, y, width, height);
     free(buf);
   }
+  if ((sSrc != SOFTCURSOR_UNAFFECTED) ||
+      (sDst != SOFTCURSOR_UNAFFECTED))
+    drawCursor();
   SyncScreenRegion(x, y, width, height);
 }
 
@@ -605,6 +689,287 @@ CreateShmImage()
   fprintf(stderr,"Using shared memory PutImage\n");
 
   return _image;
+}
+
+void undrawCursor() {
+  int x, y, w, h;
+  
+  if ((imageIndex < 0) || !savedArea)
+    return;
+
+  getBoundingRectCursor(cursorX, cursorY, imageIndex,
+			&x, &y, &w, &h);
+
+  if ((w < 1) || (h < 1))
+    return;
+
+  CopyDataToScreenRaw(savedArea, x, y, w, h);
+  discardCursorSavedArea();
+}
+
+static void drawCursorImage() {
+  int x, y, w, h, pw, pixelsLeft, processingMask;
+  int skipLeft, skipRight;
+  PointerImage *pi = &pointerImages[imageIndex];
+  CARD8 *img = (CARD8*) pi->image;
+  CARD8 *imgEnd = &img[pi->len];
+  CARD8 *fb;
+
+#define CHECK_IMG(x) if (&img[x] > imgEnd) goto imgError
+#define CHECK_END()  if ((wl == 0) && (h == 1)) return
+#define SKIP_IMG(x)  if ((x > 0) && !processingMask) { \
+      CHECK_END();   \
+      img += pw * x; \
+      CHECK_IMG(0);  \
+   }
+#define SKIP_PIXELS(x) { int wl = x; \
+    while (pixelsLeft <= wl) { \
+      wl -= pixelsLeft;        \
+      SKIP_IMG(pixelsLeft);    \
+      CHECK_END();             \
+      pixelsLeft = *(img++);   \
+      CHECK_IMG(0);            \
+      processingMask = processingMask ? 0 : 1; \
+    }                          \
+    pixelsLeft -= wl;          \
+    SKIP_IMG(wl);              \
+  }
+
+  x = cursorX - pi->hotX;
+  y = cursorY - pi->hotY;
+  w = pi->w;
+  h = pi->h;
+
+  if (!rectsIntersect(x, y, w, h, 
+		      0, 0, si.framebufferWidth, si.framebufferHeight)) {
+    fprintf(stderr, "intersect abort\n");
+    return;
+  }
+
+  fb = (CARD8*) image->data + y * image->bytes_per_line + x * visbpp / 8;
+
+  if ((y+h) > si.framebufferHeight) 
+    h = si.framebufferHeight - y;
+
+  pw = myFormat.bitsPerPixel / 8;
+  processingMask = 1;
+  pixelsLeft = *(img++);
+
+  /* Skip invisible top lines */
+  while (y < 0) {
+    SKIP_PIXELS(w);
+    y++;
+    h--;
+  }
+
+  /* calculate left/right clipping */
+  if (x < 0) {
+    skipLeft = -x;
+    w += x;
+    x = 0;
+  }
+  else
+    skipLeft = 0;
+
+  if ((x+w) > si.framebufferWidth) {
+    skipRight = (x+w) - si.framebufferWidth;
+    w = si.framebufferWidth - x;
+  }
+  else
+    skipRight = 0;
+
+  /* Paint the thing */
+  while (h > 0) {
+    SKIP_PIXELS(skipLeft);
+
+    {
+int i;
+      CARD8 *fbx = fb;
+      int wl = w;
+      while (pixelsLeft <= wl) {
+	wl -= pixelsLeft;
+	if ((pixelsLeft > 0) && !processingMask) {
+	  int pl = pw * pixelsLeft;
+	  CHECK_IMG(pl);
+	  if (!appData.useBGR233)
+	    memcpy(fbx, img, pl);
+	  else
+	    bgr233cpy(fbx, img, pl);
+	  img += pl;
+	}
+
+        CHECK_END();
+	fbx += pixelsLeft * visbpp / 8;
+	pixelsLeft = *(img++);
+
+	CHECK_IMG(0);
+	processingMask = processingMask ? 0 : 1;
+      }
+      pixelsLeft -= wl;
+      if ((wl > 0) && !processingMask) {
+	int pl = pw * wl;
+	CHECK_IMG(pl);
+	if (!appData.useBGR233)
+	  memcpy(fbx, img, pl);
+	else
+	  bgr233cpy(fbx, img, pl);
+	img += pl;
+      }
+    }
+
+    SKIP_PIXELS(skipRight);
+    fb += image->bytes_per_line;
+    h--;
+  }
+  return;
+
+imgError:
+  fprintf(stderr, "Error in softcursor image %d\n", imageIndex);
+  pointerImages[imageIndex].set = 0;
+}
+
+static void discardCursorSavedArea() {
+  if (savedArea)
+    free(savedArea);
+  savedArea = 0;
+}
+
+static void saveCursorSavedArea() {
+  int x, y, w, h;
+
+  if (imageIndex < 0)
+    return;
+  getBoundingRectCursor(cursorX, cursorY, imageIndex,
+			&x, &y, &w, &h);
+  if ((w < 1) || (h < 1))
+    return;
+  discardCursorSavedArea();
+  savedArea = malloc(h*image->bytes_per_line);
+  if (!savedArea) {
+    fprintf(stderr,"malloc failed, saving cursor not possible\n");
+    exit(1);
+  }
+  CopyDataFromScreen(savedArea, x, y, w, h);  
+}
+
+void drawCursor() {
+  saveCursorSavedArea();
+  drawCursorImage();
+}
+
+void getBoundingRectCursor(int cx, int cy, int _imageIndex,
+			   int *x, int *y, int *w, int *h) {
+  int nx, ny, nw, nh;
+
+  if ((_imageIndex < 0) || !pointerImages[_imageIndex].set) {
+    *x = 0;
+    *y = 0;
+    *w = 0;
+    *h = 0;
+    return;
+  }
+
+  nx = cx - pointerImages[_imageIndex].hotX;
+  ny = cy - pointerImages[_imageIndex].hotY;
+  nw = pointerImages[_imageIndex].w;
+  nh = pointerImages[_imageIndex].h;
+  if (nx < 0) {
+    nw += nx;
+    nx = 0;
+  }
+  if (ny < 0) {
+    nh += ny;
+    ny = 0;
+  }
+  if ((nx+nw) > si.framebufferWidth)
+    nw = si.framebufferWidth - nx;
+  if ((ny+nh) > si.framebufferHeight)
+    nh = si.framebufferHeight - ny;
+  if ((nw <= 0) || (nh <= 0)) {
+    *x = 0;
+    *y = 0;
+    *w = 0;
+    *h = 0;
+    return;
+  }
+
+  *x = nx;
+  *y = ny;
+  *w = nw;
+  *h = nh;
+}
+
+static SoftCursorState getSoftCursorState(int x, int y, int w, int h) {
+  int cx, cy, cw, ch;
+
+  if (imageIndex < 0)
+    return SOFTCURSOR_UNAFFECTED;
+
+  getBoundingRectCursor(cursorX, cursorY, imageIndex,
+			&cx, &cy, &cw, &ch);
+
+  if ((cw == 0) || (ch == 0))
+    return SOFTCURSOR_UNAFFECTED;
+
+  if (!rectsIntersect(x, y, w, h, cx, cy, cw, ch))
+    return SOFTCURSOR_UNAFFECTED;
+  if (rectContains(x, y, w, h, cx, cy, cw, ch))
+    return SOFTCURSOR_UNDER;
+  else
+    return SOFTCURSOR_PART_UNDER;
+}
+
+int rectsIntersect(int x, int y, int w, int h, 
+		   int x2, int y2, int w2, int h2) {
+  if (x2 >= (x+w))
+    return 0;
+  if (y2 >= (y+h))
+    return 0;
+  if ((x2+w2) <= x)
+    return 0;
+  if ((y2+h2) <= y)
+    return 0;
+  return 1;
+}
+
+int rectContains(int outX, int outY, int outW, int outH, 
+		 int inX, int inY, int inW, int inH) {
+  if (inX < outX)
+    return 0;
+  if (inY < outY)
+    return 0;
+  if ((inX+inW) > (outX+outW))
+    return 0;
+  if ((inY+inH) > (outY+outH))
+    return 0;
+  return 1;
+}
+
+void rectsJoin(int *nx1, int *ny1, int *nw1, int *nh1, 
+	       int x2, int y2, int w2, int h2) {
+  int x1, y1, w1, h1;
+  x1 = *nx1;
+  y1 = *ny1;
+  w1 = *nw1;
+  h1 = *nh1;
+  
+  if (x2 < x1) {
+    w1 += x1 - x2;
+    x1 = x2;
+  }
+  if (y2 < y1) {
+    h1 += y1 - y2;
+    y1 = y2;
+  }
+  if ((x2+w2) > (x1+w1))
+    w1 = (x2+w2) - x1;
+  if ((y2+h2) > (y1+h1))
+    h1 = (y2+h2) - y1;
+
+  *nx1 = x1;
+  *ny1 = y1;
+  *nw1 = w1;
+  *nh1 = h1;
 }
 
 XImage *
@@ -1152,6 +1517,8 @@ void freeDesktopResources() {
   if (zoomImage) {
     XDestroyImage(zoomImage);
   }
+  if (savedArea)
+    free(savedArea);
 
   if (gcInited) {
     XFreeGC(dpy, gc);
@@ -1169,6 +1536,7 @@ void freeDesktopResources() {
   zoomActive = False;
   zoomImage = NULL;
   useZoomShm = True;
+  savedArea = NULL;
 }
 
 
