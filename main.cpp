@@ -15,6 +15,7 @@
  *                                                                         *
  ***************************************************************************/
 
+
 #include <kcmdlineargs.h>
 #include <kaboutdata.h>
 #include <kapplication.h>
@@ -22,8 +23,9 @@
 #include <kdebug.h>
 #include <qwindowdefs.h>
 
-#include "kvncview.h"
 #include "krdc.h" 
+#define EXCLUDE_X11
+#include "kvncview.h"
 
 
 #define VERSION "0.1"

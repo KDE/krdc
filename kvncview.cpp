@@ -18,11 +18,9 @@
  ***************************************************************************/
 
 #include "passworddialog.h"
-#include "kvncview.h"
 #include <kdebug.h>
 #include <klocale.h>
 #include <kmessagebox.h>
-#include <kglobal.h>
 #include <kinstance.h>
 #include <kstandarddirs.h>
 #include <qcursor.h>
@@ -31,6 +29,10 @@
 #include <qdialog.h>
 #include <qmutex.h>
 #include <qwaitcondition.h>
+#include "kvncview.h"
+
+#include "vncviewer.h"
+
 
 /*
  * appData is our application-specific data which can be set by the user with
@@ -49,10 +51,10 @@ static QMutex passwordLock;
 static QWaitCondition passwordWaiter;
 
 KVncView::KVncView(QWidget *parent, 
-			 const char *name, 
-			 const QString &_host,
-			 int _port,
-			 AppData *data) : 
+		   const char *name, 
+		   const QString &_host,
+		   int _port,
+		   AppData *data) : 
   QWidget(parent, name),
   m_cthread(this, m_wthread, m_quitFlag),
   m_wthread(this, m_quitFlag),
@@ -251,11 +253,11 @@ void KVncView::mouseMoveEvent(QMouseEvent *e) {
 }
 
 void KVncView::keyPressEvent(QKeyEvent *e) {
-	m_wthread.queueKeyEvent(toKeySym(e), true);
+	m_wthread.queueKeyEvent((KeySym)toKeySym(e), true);
 }
 
 void KVncView::keyReleaseEvent(QKeyEvent *e) {
-	m_wthread.queueKeyEvent(toKeySym(e), false);
+	m_wthread.queueKeyEvent((KeySym)toKeySym(e), false);
 }
 
 int getPassword(char *passwd, int pwlen) {
@@ -295,7 +297,7 @@ void unlockQtGui() {
 	KApplication::kApplication()->unlock(true);
 }
 
-KeySym KVncView::toKeySym(QKeyEvent *k)
+unsigned long KVncView::toKeySym(QKeyEvent *k)
 {
 	int ke = 0;
 

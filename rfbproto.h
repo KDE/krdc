@@ -43,6 +43,7 @@
  *      messages have to be explained by comments.
  */
 
+#include "vnctypes.h"
 
 /*****************************************************************************
  *

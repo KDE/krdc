@@ -18,11 +18,6 @@
 #ifndef THREADS_H
 #define THREADS_H
 
-#ifndef VNCVIEWER_H
-#define VNCVIEWER_H
-#include "vncviewer.h"
-#endif
-
 #include <qthread.h>
 #include <qregion.h>
 #include <qrect.h>
@@ -30,6 +25,9 @@
 #include <qwaitcondition.h>
 #include <qevent.h>
 #include <qvaluelist.h>
+
+#include "vnctypes.h"
+
 
 class KVncView;
 

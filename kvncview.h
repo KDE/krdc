@@ -22,14 +22,9 @@
 #include <kapplication.h>
 #include <qwidget.h>
 
-#define VNCVIEWER_H
 #include "threads.h"
-#undef VNCVIEWER_H
+#include "vnctypes.h"
 
-#ifndef VNCVIEWER_H
-#define VNCVIEWER_H
-#include "vncviewer.h"
-#endif
 
 
 class KVncView : public QWidget
@@ -48,7 +43,7 @@ private:
 
 	void setDefaultAppData();
 	void mouseEvent(QMouseEvent*);
-	KeySym toKeySym(QKeyEvent *k);
+	unsigned long toKeySym(QKeyEvent *k);
 
 protected:
 	void paintEvent(QPaintEvent*);

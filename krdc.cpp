@@ -203,32 +203,32 @@ void KRDC::connected() {
 }
 
 void KRDC::configureApp(Quality q) {
-	m_appData.shareDesktop = True;
-	m_appData.viewOnly = False;
+	m_appData.shareDesktop = 1;
+	m_appData.viewOnly = 0;
 
 	if (q == QUALITY_LOW) {
-		m_appData.useBGR233 = True;
+		m_appData.useBGR233 = 1;
 		m_appData.encodingsString = "copyrect tight zlib hextile corre rre raw";
 		m_appData.compressLevel = -1;
 		m_appData.qualityLevel = 1;
 	}
 	else if (q == QUALITY_MEDIUM) {
-		m_appData.useBGR233 = False;
+		m_appData.useBGR233 = 0;
 		m_appData.encodingsString = "copyrect tight zlib hextile corre rre raw";
 		m_appData.compressLevel = -1;
 		m_appData.qualityLevel = 4;
 	}
 	else if ((q == QUALITY_HIGH) || (q == QUALITY_UNKNOWN)) {
-		m_appData.useBGR233 = False;
+		m_appData.useBGR233 = 0;
 		m_appData.encodingsString = "copyrect hextile corre rre raw";
 		m_appData.compressLevel = -1;
 		m_appData.qualityLevel = 9;
 	}
 
 	m_appData.nColours = 256;
-	m_appData.useSharedColours = True;
+	m_appData.useSharedColours = 1;
 	m_appData.requestedDepth = 0;
-	m_appData.useRemoteCursor = True;
+	m_appData.useRemoteCursor = 0;
 
 	m_appData.rawDelay = 0;
 	m_appData.copyRectDelay = 0;

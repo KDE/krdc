@@ -31,10 +31,10 @@
 #include <X11/IntrinsicP.h>
 #include <X11/StringDefs.h>
 #include <X11/Shell.h>
-#include <X11/Xmd.h>
 #include <X11/keysym.h>
 #include <X11/Xatom.h>
 #include <X11/Xmu/StdSel.h>
+#include "vnctypes.h" 
 
 #if(defined __cplusplus)
 extern "C"
@@ -69,35 +69,6 @@ extern int endianTest;
 
 
 /** main.cpp **/
-
-typedef enum {
-  QUALITY_UNKNOWN,
-  QUALITY_HIGH,
-  QUALITY_MEDIUM,
-  QUALITY_LOW
-} Quality;
-
-typedef struct {
-  Bool shareDesktop;
-  Bool viewOnly;
-
-  const char* encodingsString;
-
-  Bool useBGR233;
-  int nColours;
-  Bool useSharedColours;
-  int requestedDepth;
-
-  int rawDelay;
-  int copyRectDelay;
-
-  Bool debug;
-
-  int compressLevel;
-  int qualityLevel;
-  Bool useRemoteCursor;
-
-} AppData;
 
 extern AppData appData;
 
@@ -158,14 +129,6 @@ extern rfbPixelFormat myFormat;
 extern rfbServerInitMsg si;
 extern char *serverCutText;
 extern Bool newServerCutText;
-
-enum InitStatus {
-  INIT_OK,
-  INIT_PROTOCOL_FAILURE,
-  INIT_CONNECTION_FAILED,
-  INIT_AUTHENTICATION_FAILED,
-  INIT_ABORTED
-};
 
 extern Bool ConnectToRFBServer(const char *hostname, int port);
 extern enum InitStatus InitialiseRFBConnection(void);

@@ -16,8 +16,10 @@
  ***************************************************************************/
 
 #include "kvncview.h"
-#include "threads.h"
 #include "kdebug.h"
+
+#include "vncviewer.h"
+#include "threads.h"
 
 static const int WAIT_PERIOD = 5000;
 static const unsigned int MOUSEPRESS_QUEUE_SIZE = 10;
