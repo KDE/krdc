@@ -1,6 +1,6 @@
 /*
  *  Copyright (C) 2002, Tim Jansen.  All Rights Reserved.
- *  Copyright (C) 2000, 2001 Const Kaplinsky.  All Rights Reserved.
+ *  Copyright (C) 2000-2002 Constantin Kaplinsky.  All Rights Reserved.
  *  Copyright (C) 2000 Tridia Corporation.  All Rights Reserved.
  *  Copyright (C) 1999 AT&T Laboratories Cambridge.  All Rights Reserved.
  *
@@ -541,9 +541,44 @@ HandleSoftCursorSetImage(rfbSoftCursorSetImage *msg, rfbRectangle *rect)
 }
 
 static Bool
+pointerMove(unsigned int x, unsigned int y, unsigned int mask,
+		int ox, int oy, int ow, int oh) 
+{
+  int nx, ny, nw, nh;
+
+  if (x >= si.framebufferWidth)
+    x = si.framebufferWidth - 1;
+  if (y >= si.framebufferHeight)
+    y = si.framebufferHeight - 1;
+
+  getBoundingRectCursor(cursorX, cursorY, imageIndex,
+			&ox, &oy, &ow, &oh);
+
+  cursorX = x;
+  cursorY = y;
+  drawCursor();
+
+  getBoundingRectCursor(cursorX, cursorY, imageIndex,
+			&nx, &ny, &nw, &nh);
+
+  if (rectsIntersect(ox, oy, ow, oh, nx, ny, nw, nh)) {
+    rectsJoin(&ox, &oy, &ow, &oh, nx, ny, nw, nh);
+    SyncScreenRegion(ox, oy, ow, oh);
+  }
+  else {
+    SyncScreenRegion(ox, oy, ow, oh);
+    SyncScreenRegion(nx, ny, nw, nh);
+  }
+
+  postMouseEvent(cursorX, cursorY, mask);
+
+  return True;
+}
+
+static Bool
 HandleSoftCursorMove(rfbSoftCursorMove *msg, rfbRectangle *rect) 
 {
-  int ii, ox, oy, ow, oh, nx, ny, nw, nh;
+  int ii, ox, oy, ow, oh;
 
   getBoundingRectCursor(cursorX, cursorY, imageIndex,
 			&ox, &oy, &ow, &oh);
@@ -559,25 +594,18 @@ HandleSoftCursorMove(rfbSoftCursorMove *msg, rfbRectangle *rect)
 
   undrawCursor();
   imageIndex = ii;
-  cursorX = rect->w;
-  cursorY = rect->h;
-  drawCursor();
+
+  return pointerMove(rect->w, rect->h, msg->buttonMask, ox, oy, ow, oh);
+}
+
+static Bool
+HandleCursorPos(unsigned int x, unsigned int y) 
+{
+  int ox, oy, ow, oh;
 
   getBoundingRectCursor(cursorX, cursorY, imageIndex,
-			&nx, &ny, &nw, &nh);
-
-  if (rectsIntersect(ox, oy, ow, oh, nx, ny, nw, nh)) {
-    rectsJoin(&ox, &oy, &ow, &oh, nx, ny, nw, nh);
-    SyncScreenRegion(ox, oy, ow, oh);
-  }
-  else {
-    SyncScreenRegion(ox, oy, ow, oh);
-    SyncScreenRegion(nx, ny, nw, nh);
-  }
-
-  postMouseEvent(cursorX, cursorY, msg->buttonMask);
-
-  return True;
+			&ox, &oy, &ow, &oh);
+  return pointerMove(x, y, 0, ox, oy, ow, oh);
 }
 
 
@@ -650,6 +678,13 @@ HandleRFBServerMessage()
       rect.r.y = Swap16IfLE(rect.r.y);
       rect.r.w = Swap16IfLE(rect.r.w);
       rect.r.h = Swap16IfLE(rect.r.h);
+
+      if (rect.encoding == rfbEncodingPointerPos) {
+        if (!HandleCursorPos(rect.r.x, rect.r.y)) {
+          return False;
+        }
+        continue;
+      }
 
       if ((rect.r.x + rect.r.w > si.framebufferWidth) ||
 	  (rect.r.y + rect.r.h > si.framebufferHeight))
