@@ -46,11 +46,12 @@
 
 QScrollView2::QScrollView2(QWidget *w, const char *name) :
 	QScrollView(w, name) {
+	setMouseTracking(true);
 }
 
 void QScrollView2::mouseMoveEvent( QMouseEvent *e )
 {
-    e->ignore();
+         e->ignore();
 }
 
 QString KRDC::m_lastHost = "";
@@ -81,6 +82,8 @@ KRDC::KRDC(WindowMode wm, const QString &host,
 	KStandardDirs *dirs = KGlobal::dirs();
 	m_pindown = QPixmap(dirs->findResource("appdata", "pics/pindown.png"));
 	m_pinup   = QPixmap(dirs->findResource("appdata", "pics/pinup.png"));
+
+	setMouseTracking(true);	
 }
 
 bool KRDC::start(bool onlyFailOnCancel)
@@ -399,9 +402,6 @@ void KRDC::switchToFullscreen()
 
 	if (m_oldResolution)
 		grabInput(qt_xdisplay(), winId());
-	setMouseTracking(m_ftAutoHide || 
-			 (m_view->width()>m_scrollView->width()) || 
-			 (m_view->height()>m_scrollView->height()));
 }
 
 void KRDC::switchToNormal(bool scaling)
@@ -469,8 +469,6 @@ void KRDC::switchToNormal(bool scaling)
 	}
 	else
 		showNormal();
-
-	setMouseTracking(false);
 }
 
 void KRDC::iconify()
@@ -591,10 +589,6 @@ void KRDC::setFsToolbarAutoHide(bool on) {
 	else
 		b->setPixmap(m_pindown);
 
-	setMouseTracking(m_ftAutoHide || 
-			 (m_view->width()>m_scrollView->width()) || 
-			 (m_view->height()>m_scrollView->height()));
-	
 	if (!on) 
 		showFullscreenToolbar();
 }
@@ -633,7 +627,7 @@ void KRDC::showFullscreenToolbar() {
 
 void KRDC::hideFullscreenToolbarDelayed() {
 	if (!m_autoHideTimer.isActive())
-	  m_autoHideTimer.start(TOOLBAR_AUTOHIDE_TIMEOUT, true);
+		m_autoHideTimer.start(TOOLBAR_AUTOHIDE_TIMEOUT, true);
 }
 
 void KRDC::mouseMoveEvent(QMouseEvent *e) {
