@@ -7,8 +7,8 @@
 void MainDialog::hostChanged( const QString & text )
 {
     connectButton->setEnabled(text.contains(QRegExp(":[0-9]+$")) ||
-			      text.contains(QRegExp("^vnc://.+")) ||
-			      text.contains(QRegExp("^rdp://.+")));
+			      text.contains(QRegExp("^vnc:/.+")) ||
+			      text.contains(QRegExp("^rdp:/.+")));
 }
 
 
