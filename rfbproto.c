@@ -250,6 +250,9 @@ InitialiseRFBConnection()
   si.format.blueMax = Swap16IfLE(si.format.blueMax);
   si.nameLength = Swap32IfLE(si.nameLength);
 
+  if ((si.framebufferWidth*si.framebufferHeight) > (4096*4096))
+    return INIT_CONNECTION_FAILED;
+
   desktopName = malloc(si.nameLength + 1);
   if (!desktopName) {
     fprintf(stderr, "Error allocating memory for desktop name, %lu bytes\n",
@@ -630,8 +633,8 @@ HandleRFBServerMessage()
 	   rectangle) to the source rectangle as well. */
 	SoftCursorLockArea(cr.srcX, cr.srcY, rect.r.w, rect.r.h);
 
-	lockQt();
 	if (appData.copyRectDelay != 0) {
+	  lockQt();
 	  XFillRectangle(dpy, desktopWin, srcGC, cr.srcX, cr.srcY,
 			 rect.r.w, rect.r.h);
 	  XFillRectangle(dpy, desktopWin, dstGC, rect.r.x, rect.r.y,
@@ -646,11 +649,10 @@ HandleRFBServerMessage()
 			 rect.r.w, rect.r.h);
 	  XFillRectangle(dpy, desktopWin, srcGC, cr.srcX, cr.srcY,
 			 rect.r.w, rect.r.h);
+	  unlockQt();
 	}
 
-	XCopyArea(dpy, desktopWin, desktopWin, gc, cr.srcX, cr.srcY,
-		  rect.r.w, rect.r.h, rect.r.x, rect.r.y);
-	unlockQt();
+	CopyArea(cr.srcX, cr.srcY, rect.r.w, rect.r.h, rect.r.x, rect.r.y);
 
 	break;
       }

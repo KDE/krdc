@@ -70,7 +70,7 @@ static Cursor prevXCursor;
 
 /* Data kept for RichCursor encoding support. */
 static Bool prevRichCursorSet = False;
-static Pixmap rcSavedArea;
+static char *rcSavedArea;
 static CARD8 *rcSource, *rcMask;
 static int rcHotX, rcHotY, rcWidth, rcHeight;
 static int rcCursorX = 0, rcCursorY = 0;
@@ -232,9 +232,7 @@ Bool HandleRichCursor(int xhot, int yhot, int width, int height)
   /* Set remaining data associated with cursor. */
 
   dr = DefaultRootWindow(dpy);
-  lockQt();
-  rcSavedArea = XCreatePixmap(dpy, dr, width, height, visdepth);
-  unlockQt();
+  rcSavedArea = malloc(width * myFormat.bitsPerPixel / 8 *  height);
   rcHotX = xhot;
   rcHotY = yhot;
   rcWidth = width;
@@ -372,10 +370,10 @@ static void SoftCursorCopyArea(int oper)
   if (oper == OPER_SAVE) {
     /* Save screen area in memory. */
     ShmSync();
-    XCopyArea(dpy, desktopWin, rcSavedArea, gc, x, y, w, h, 0, 0);
+    CopyDataFromScreen(rcSavedArea, x, y, w, h);
   } else {
     /* Restore screen area. */
-    XCopyArea(dpy, rcSavedArea, desktopWin, gc, 0, 0, w, h, x, y);
+    CopyDataToScreen(rcSavedArea, x, y, w, h);
   }
   unlockQt();
 }
@@ -420,12 +418,10 @@ static void FreeCursors(Bool setDotCursor)
   
   if (prevRichCursorSet) {
     SoftCursorCopyArea(OPER_RESTORE);
-    lockQt();
-    XFreePixmap(dpy, rcSavedArea);
+    free(rcSavedArea);
     free(rcSource);
     free(rcMask);
     prevRichCursorSet = False;
-    unlockQt();
   }
 }
 

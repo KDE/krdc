@@ -127,6 +127,8 @@ enum RemoteViewStatus KVncView::status() {
 
 void KVncView::start() {
 	m_cthread.start();
+	m_wthread.queueUpdateRequest(QRegion(QRect(0,0,width(),height())));
+	setBackgroundMode(Qt::NoBackground);
 }
 
 KVncView::~KVncView()
@@ -138,7 +140,10 @@ KVncView::~KVncView()
 
 void KVncView::paintEvent(QPaintEvent *e) {
 	if (status() == REMOTE_VIEW_CONNECTED)
-		m_wthread.queueUpdateRequest(e->region());
+		SyncScreenRegionUnlocked(e->rect().x(),
+					 e->rect().y(),
+					 e->rect().width(),
+					 e->rect().height());
 }
 
 void KVncView::customEvent(QCustomEvent *e)

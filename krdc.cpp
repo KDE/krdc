@@ -232,7 +232,7 @@ void KRDC::configureApp(Quality q) {
 	m_appData.nColours = 256;
 	m_appData.useSharedColours = 1;
 	m_appData.requestedDepth = 0;
-	m_appData.useRemoteCursor = 0;
+	m_appData.useRemoteCursor = 1;
 
 	m_appData.rawDelay = 0;
 	m_appData.copyRectDelay = 0;

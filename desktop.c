@@ -293,11 +293,19 @@ CreateDotCursor()
 void
 SyncScreenRegion(int x, int y, int width, int height) {
   lockQt();
+  SyncScreenRegionUnlocked(x, y, width, height);
+  unlockQt();
+}
+
+/*
+ * SyncScreenRegionUnlocked
+ */
+void
+SyncScreenRegionUnlocked(int x, int y, int width, int height) {
   if (useShm) 
     XShmPutImage(dpy, desktopWin, gc, image, x, y, x, y, width, height, False);
   else
     XPutImage(dpy, desktopWin, gc, image, x, y, x, y, width, height);
-  unlockQt();
 }
 
 static int CheckRectangle(int x, int y, int width, int height) {
@@ -562,31 +570,71 @@ FillRectangle32(CARD32 fg, int x, int y, int width, int height)
 }
 
 /*
+ * CopyDataFromScreen.
+ */
+
+void
+CopyDataFromScreen(char *buf, int x, int y, int width, int height)
+{
+  int widthInBytes = width * myFormat.bitsPerPixel / 8;
+  int scrWidthInBytes = si.framebufferWidth * myFormat.bitsPerPixel / 8;
+  char *src = (image->data + y * scrWidthInBytes
+	       + x * myFormat.bitsPerPixel / 8);
+  int h;
+
+  if (!CheckRectangle(x, y, width, height))
+    return;
+
+  for (h = 0; h < height; h++) {
+    memcpy(buf, src, widthInBytes);
+    src += scrWidthInBytes;
+    buf += widthInBytes;
+  }
+}
+
+/*
  * CopyArea
  */
 
-/*void
-CopyArea(int srcX, int srcY, int x, int y, int width, int height)
+void
+CopyArea(int srcX, int srcY, int width, int height, int x, int y)
 {
-  int h;
   int widthInBytes = width * myFormat.bitsPerPixel / 8;
-  int scrWidthInBytes = si.framebufferWidth * myFormat.bitsPerPixel / 8;
   
-  char *scr = (image->data + y * scrWidthInBytes
-	       + x * myFormat.bitsPerPixel / 8);
+  if ((srcY+height < y) || (y+height < srcY) ||
+      (srcX+width  < x) || (x+width  < srcX)) {
 
-  if ((srcY != y) ||
-      ())
-  
-  for (h = 0; h < height; h++) {
-    memcpy(scr, buf, widthInBytes);
-    buf += widthInBytes;
-    scr += scrWidthInBytes;
+    int scrWidthInBytes = si.framebufferWidth * myFormat.bitsPerPixel / 8;
+    char *src = (image->data + srcY * scrWidthInBytes
+		 + srcX * myFormat.bitsPerPixel / 8);
+    char *dst = (image->data + y * scrWidthInBytes
+		 + x * myFormat.bitsPerPixel / 8);
+    int h;
+
+    if (!CheckRectangle(srcX, srcY, width, height))
+      return;
+    if (!CheckRectangle(x, y, width, height))
+      return;
+      
+    for (h = 0; h < height; h++) {
+      memcpy(dst, src, widthInBytes);
+      src += scrWidthInBytes;
+      dst += scrWidthInBytes;
+    }
+    SyncScreenRegion(x, y, width, height);
   }
-
-  SyncScreenRegion(x, y, width, height);
+  else {
+    char *buf = malloc(widthInBytes*height);
+    if (!buf) {
+      fprintf(stderr, "Out of memory, CopyArea impossible\n");
+      return;
+    }
+    CopyDataFromScreen(buf, srcX, srcY, width, height);
+    CopyDataToScreen(buf, x, y, width, height);
+    free(buf);
+  }
 }
-*/
+
 
 void ShmSync(void) {
     if (useShm)
