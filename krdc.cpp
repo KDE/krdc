@@ -250,6 +250,7 @@ void KRDC::showProgressTimeout() {
 }
 
 void KRDC::quit() {
+	m_view->releaseKeyboard();
 	hide();
 	vidmodeNormalSwitch(qt_xdisplay(), m_oldResolution);
 	if (m_view)
@@ -405,6 +406,7 @@ void KRDC::switchToFullscreen()
 
 	if (m_oldResolution)
 		grabInput(qt_xdisplay(), winId());
+	m_view->grabKeyboard();
 }
 
 void KRDC::switchToNormal(bool scaling)
@@ -415,6 +417,7 @@ void KRDC::switchToNormal(bool scaling)
 	m_isFullscreen = WINDOW_MODE_NORMAL;
 	m_view->enableScaling(scaling);
 
+	m_view->releaseKeyboard();
 	if (m_oldResolution) {
 		ungrabInput(qt_xdisplay());
 		vidmodeNormalSwitch(qt_xdisplay(), m_oldResolution);
@@ -476,7 +479,9 @@ void KRDC::switchToNormal(bool scaling)
 
 void KRDC::iconify()
 {
+	m_view->releaseKeyboard();
 	ungrabInput(qt_xdisplay());
+
 	vidmodeNormalSwitch(qt_xdisplay(), m_oldResolution);
 	m_oldResolution = 0;
 	showNormal();
@@ -504,6 +509,8 @@ bool KRDC::event(QEvent *e) {
 	setGeometry(0, 0, m_fullscreenResolution.width(), 
 		    m_fullscreenResolution.height());
 	grabInput(qt_xdisplay(), winId());
+	m_view->grabKeyboard();
+
 	return QWidget::event(e);
 }
 
