@@ -20,12 +20,27 @@
 #ifndef EVENTS_H
 #define EVENTS_H
 
+/**
+ * State of the connection. The state of the connection is returned
+ * by @ref KRemoteView::status(). 
+ *
+ * Not every state transition is allowed. You are only allowed to transition
+ * a state to the following state, with three exceptions:
+ * @li You can move from every state directly to REMOTE_VIEW_DISCONNECTED
+ * @li You can move from every state except REMOTE_VIEW_DISCONNECTED to
+ *     REMOTE_VIEW_DISCONNECTING
+ * @li You can move from REMOTE_VIEW_DISCONNECTED to REMOTE_VIEW_CONNECTING
+ *
+ * @ref KRemoteView::setStatus() will follow this rules for you.
+ * (If you add/remove a state here, you must adapt it)
+ */
 enum RemoteViewStatus {
-	REMOTE_VIEW_CONNECTING,
-	REMOTE_VIEW_AUTHENTICATING,
-	REMOTE_VIEW_PREPARING,
-	REMOTE_VIEW_CONNECTED,
-	REMOTE_VIEW_DISCONNECTED
+	REMOTE_VIEW_CONNECTING     = 0,
+	REMOTE_VIEW_AUTHENTICATING = 1,
+	REMOTE_VIEW_PREPARING      = 2,
+	REMOTE_VIEW_CONNECTED      = 3,
+	REMOTE_VIEW_DISCONNECTING  = -1,
+	REMOTE_VIEW_DISCONNECTED   = -2
 };
 
 enum ErrorCode {

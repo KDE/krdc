@@ -29,6 +29,31 @@ enum RemoteViewStatus KRemoteView::status() {
 }
 
 void KRemoteView::setStatus(RemoteViewStatus s) {
+	if (m_status == s)
+		return;
+
+	if (((1+(int)m_status) != (int)s) && 
+	    (s != REMOTE_VIEW_DISCONNECTED)) {
+		// follow state transition rules
+
+		if (s == REMOTE_VIEW_DISCONNECTING) {
+              	    if (m_status == REMOTE_VIEW_DISCONNECTED)
+			return; 
+		}
+		else {
+			Q_ASSERT(((int) s) >= 0); 
+			if (((int)m_status) > ((int)s) ) {
+				m_status = REMOTE_VIEW_DISCONNECTED;
+				emit statusChanged(REMOTE_VIEW_DISCONNECTED);
+			}
+			// smooth state transition
+			int origState = (int)m_status;
+			for (int i = origState; i < (int)s; i++) {
+				m_status = (RemoteViewStatus) i;
+				emit statusChanged((RemoteViewStatus) i);
+			}
+		}
+	}
 	m_status = s;
 	emit statusChanged(m_status);
 }

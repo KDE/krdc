@@ -95,6 +95,7 @@ public:
 	/**
 	 * Returns the current status of the connection.
 	 * @return the status of the connection
+	 * @see setStatus()
 	 */
 	enum RemoteViewStatus status();
 
@@ -163,7 +164,15 @@ protected:
 	enum RemoteViewStatus m_status;
 
 	/**
-	 * Set the status of the connection
+	 * Set the status of the connection. 
+	 * Emits a statusChanged() signal.
+	 * Note that the states need to be set in a certain order,
+	 * see @ref RemoteViewStatus. setStatus() will try to do this
+	 * transition automatically, so if you are in REMOTE_VIEW_CONNECTING
+	 * and call setStatus(REMOTE_VIEW_PREPARING), setStatus() will
+	 * emit a REMOTE_VIEW_AUTHENTICATING and then REMOTE_VIEW_PREPARING.
+	 * If you transition backwards, it will emit a
+	 * REMOTE_VIEW_DISCONNECTED before doing the transition.
 	 * @param s the new status
 	 */
 	virtual void setStatus(RemoteViewStatus s);
