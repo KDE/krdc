@@ -491,12 +491,13 @@ bool KRDC::event(QEvent *e) {
 bool KRDC::eventFilter(QObject *watched, QEvent *e) {
 /* used to get events from QScrollView  on resize  for scale mode*/
 	if (watched != m_scrollView)
-		return;
+		return false;
 	if (e->type() != QEvent::Resize) 
-		return;
+		return false;
 
 	QResizeEvent *re = (QResizeEvent*) e;
 	m_view->resize(re->size());
+	return false;
 }
 
 void KRDC::setSize(int w, int h)
