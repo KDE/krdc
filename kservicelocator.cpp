@@ -23,9 +23,9 @@
 #endif
 
 #include "kservicelocator.h"
-#include "vnc/threadsafeeventreceiver.h"
 #include <kdebug.h>
 #include <qregexp.h>
+#include <qapplication.h>
 
 #ifdef HAVE_SLP
 #include <slp.h>
@@ -38,7 +38,7 @@ const QString KServiceLocator::ALL_AUTHORITIES = QString::null;
 
 class AsyncThread;
 
-class KServiceLocatorPrivate : public ThreadSafeEventReceiver {
+class KServiceLocatorPrivate {
 public:
 	KServiceLocator *m_ksl;
         bool m_opened;
@@ -116,7 +116,6 @@ KServiceLocator::KServiceLocator(const QString &lang, bool async) :
 KServiceLocatorPrivate::KServiceLocatorPrivate(KServiceLocator *ksl,
 					       const QString &lang,
 					       bool async) :
-	ThreadSafeEventReceiver(ksl),
 	m_ksl(ksl),
 	m_opened(false),
 	m_abort(false),
@@ -227,13 +226,13 @@ SLPBoolean srvTypeCallbackAsync(SLPHandle,
 				void* cookie) {
 	KServiceLocatorPrivate *ksl = (KServiceLocatorPrivate*) cookie;
 	if ((errcode != SLP_OK) || ksl->m_abort) {
-		ksl->sendEvent(new LastSignalEvent(LastServiceTypeSignalEventType,
+		QApplication::postEvent(ksl->m_ksl, new LastSignalEvent(LastServiceTypeSignalEventType,
 						   (errcode == SLP_OK) || 
 						   (errcode == SLP_LAST_CALL) || 
 						   ksl->m_abort));
 		return SLP_FALSE;
 	}
-	ksl->sendEvent(new FoundServiceTypesEvent(srvtypes));
+	QApplication::postEvent(ksl->m_ksl, new FoundServiceTypesEvent(srvtypes));
 	return SLP_TRUE;
 }
 
@@ -252,13 +251,14 @@ SLPBoolean srvUrlCallbackAsync(SLPHandle,
 			       void* cookie) {
 	KServiceLocatorPrivate *ksl = (KServiceLocatorPrivate*) cookie;
 	if ((errcode != SLP_OK) || ksl->m_abort) {
-               ksl->sendEvent(new LastSignalEvent(LastServiceSignalEventType,
+               QApplication::postEvent(ksl->m_ksl, new LastSignalEvent(LastServiceSignalEventType,
 						  (errcode == SLP_OK) ||
 						  (errcode == SLP_LAST_CALL) ||
 						  ksl->m_abort));
 		return SLP_FALSE;
 	}
-	ksl->sendEvent(new FoundServiceEvent(srvurl, lifetime));
+	QApplication::postEvent(ksl->m_ksl, 
+				new FoundServiceEvent(srvurl, lifetime));
 	return SLP_TRUE;
 }
 
@@ -275,13 +275,15 @@ SLPBoolean srvAttrCallbackAsync(SLPHandle,
 				void* cookie) {
 	KServiceLocatorPrivate *ksl = (KServiceLocatorPrivate*) cookie;
 	if ((errcode != SLP_OK) || ksl->m_abort) {
-		ksl->sendEvent(new LastSignalEvent(LastAttributesSignalEventType,
-						   (errcode == SLP_OK) ||
-						   (errcode == SLP_LAST_CALL) ||
-						   ksl->m_abort));
+		QApplication::postEvent(ksl->m_ksl, 
+					new LastSignalEvent(LastAttributesSignalEventType,
+							    (errcode == SLP_OK) ||
+							    (errcode == SLP_LAST_CALL) ||
+							    ksl->m_abort));
 		return SLP_FALSE;
 	}
-	ksl->sendEvent(new FoundAttributesEvent(attrlist));
+	QApplication::postEvent(ksl->m_ksl, 
+				new FoundAttributesEvent(attrlist));
 	return SLP_TRUE;
 }
 
@@ -319,8 +321,9 @@ public:
 				    srvTypeCallbackAsync, 
 				    m_parent);
 		if (e != SLP_OK)
-			m_parent->sendEvent(new LastSignalEvent(LastServiceTypeSignalEventType, 
-								false));
+			QApplication::postEvent(m_parent->m_ksl, 
+						new LastSignalEvent(LastServiceTypeSignalEventType, 
+								    false));
 	}
 };
 class FindSrvsThread : public AsyncThread {
@@ -346,8 +349,9 @@ public:
 				srvUrlCallbackAsync, 
 				m_parent);
 		if (e != SLP_OK)
-			m_parent->sendEvent(new LastSignalEvent(LastServiceSignalEventType, 
-								false));
+			QApplication::postEvent(m_parent->m_ksl, 
+						new LastSignalEvent(LastServiceSignalEventType, 
+								    false));
 	}
 };
 class FindAttrsThread : public AsyncThread {
@@ -372,8 +376,9 @@ public:
 				 srvAttrCallbackAsync,
 				 m_parent);
 		if (e != SLP_OK)
-			m_parent->sendEvent(new LastSignalEvent(LastAttributesSignalEventType, 
-								false));
+			QApplication::postEvent(m_parent->m_ksl, 
+						new LastSignalEvent(LastAttributesSignalEventType, 
+								    false));
 	}
 };
 class FindScopesThread : public AsyncThread {
@@ -388,13 +393,15 @@ public:
 
 		e = SLPFindScopes(m_handle, &_scopelist);
 		if (e != SLP_OK) {
-                        m_parent->sendEvent(new FoundScopesEvent(""));
+                        QApplication::postEvent(m_parent->m_ksl, 
+						new FoundScopesEvent(""));
 			return;
 		}
 
 		QString scopeList(_scopelist);
 		SLPFree(_scopelist);
-                m_parent->sendEvent(new FoundScopesEvent(scopeList.latin1()));
+                QApplication::postEvent(m_parent->m_ksl, 
+					new FoundScopesEvent(scopeList.latin1()));
 	}
 };
 
@@ -405,7 +412,6 @@ KServiceLocatorPrivate::~KServiceLocatorPrivate() {
 		delete m_thread;
 		m_thread = 0; // important, because event handler will run
 	}
-	waitForLastEvent();
 	if (m_opened)
 		SLPClose(m_handle);
 }
@@ -589,12 +595,8 @@ SLPBoolean KServiceLocatorPrivate::handleAttrCallback(const char* attrlist,
 
 
 void KServiceLocator::customEvent(QCustomEvent *e) {
-	if (d->ignoreEvents())
-		return;
-
 	if ((e->type() >= MinLastSignalEventType) &&
 	    (e->type() <= MaxLastSignalEventType)){
-                d->gotEvent(e);
 		bool s = true;
 		if (d->m_thread) {
 			d->m_thread->wait();
@@ -612,21 +614,17 @@ void KServiceLocator::customEvent(QCustomEvent *e) {
 			kdFatal() << "unmapped last signal type " << e->type()<< endl;
 	}
 	else if (e->type() == FoundAttributesEventType) {
-                d->gotEvent(e);
 		emit foundAttributes(d->m_operationServiceUrl, 
 				     ((FoundAttributesEvent*)e)->attributes());
 	}
 	else if (e->type() == FoundServiceEventType) {
-                d->gotEvent(e);
 		FoundServiceEvent *fse = (FoundServiceEvent*)e;
 		emit foundService(fse->srvUrl(), fse->lifetime());
 	}
 	else if (e->type() == FoundServiceTypesEventType) {
-                d->gotEvent(e);
 		emit foundServiceTypes(((FoundServiceTypesEvent*)e)->srvtypes());
 	}
 	else if (e->type() == FoundScopesEventType) {
-                d->gotEvent(e);
 		if (d->m_thread) {
 			d->m_thread->wait();
 			delete d->m_thread;
