@@ -25,11 +25,9 @@ struct PointerState {
 
 class PointerLatencyOMeter {
 private:
-	static const int stateCapacity = 30;
+	enum { stateCapacity = 30, maximumLatency = 1000 };
 	PointerState states[stateCapacity];
 	int firstState, stateNum;
-
-	static const int maximumLatency = 1000;
 	float last3Latency, last20Latency;
 
 public:

@@ -48,6 +48,11 @@
 
 #define BUMP_SCROLL_CONSTANT (200)
 
+const int KRDC::TOOLBAR_AUTOHIDE_TIMEOUT = 2000;
+const int KRDC::TOOLBAR_FPS_1000 = 10000;
+const int KRDC::TOOLBAR_SPEED_DOWN = 34;
+const int KRDC::TOOLBAR_SPEED_UP = 20;
+
 QScrollView2::QScrollView2(QWidget *w, const char *name) :
 	QScrollView(w, name) {
 	setMouseTracking(true);

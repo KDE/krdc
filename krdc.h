@@ -65,7 +65,7 @@ private:
 	QPixmap m_pinup, m_pindown;        // fs toolbar imaged for autohide button
 	QWidget *m_toolbar;                // toolbar in normal mode (0 in fs mode)
 
-	static const int TOOLBAR_AUTOHIDE_TIMEOUT = 2000;
+	static const int TOOLBAR_AUTOHIDE_TIMEOUT;
 	bool m_ftAutoHide; // if true auto hide in fs is activated
 	QTimer m_autoHideTimer; // timer for autohide
 
@@ -98,9 +98,9 @@ private:
 	void showProgressDialog();
 	void hideProgressDialog();
 
-	static const int TOOLBAR_FPS_1000 = 10000;
-	static const int TOOLBAR_SPEED_DOWN = 34;
-	static const int TOOLBAR_SPEED_UP = 20;
+	static const int TOOLBAR_FPS_1000;
+	static const int TOOLBAR_SPEED_DOWN;
+	static const int TOOLBAR_SPEED_UP;
 	void fsToolbarScheduleHidden();
 
 protected:
