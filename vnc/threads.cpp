@@ -21,14 +21,14 @@
 #include "vncviewer.h"
 #include "threads.h"
 
-// Maximum idle time for writer thread. When it timeouts, it will request 
+// Maximum idle time for writer thread in ms. When it timeouts, it will request 
 // another incremental update. Must be smaller than the timeout of the server
 // (krfb's is 20s).
 static const int WAIT_PERIOD = 8000;
 
-static const unsigned int MOUSEPRESS_QUEUE_SIZE = 10;
-static const unsigned int MOUSEMOVE_QUEUE_SIZE = 5;
-static const unsigned int KEY_QUEUE_SIZE = 8192;
+static const int MOUSEPRESS_QUEUE_SIZE = 16;
+static const int MOUSEMOVE_QUEUE_SIZE = 8;
+static const int KEY_QUEUE_SIZE = 8192;
 
 
 ControllerThread::ControllerThread(KVncView *v, WriterThread &wt, volatile bool &quitFlag) :
@@ -158,6 +158,8 @@ WriterThread::WriterThread(KVncView *v, volatile bool &quitFlag) :
 	m_quitFlag(quitFlag),
 	m_view(v),
 	m_incrementalUpdateRQ(false),
+	m_mouseEventNum(0),
+	m_keyEventNum(0),
 	m_clientCut(QString::null)
 {
 	writerThread = this;
@@ -178,21 +180,16 @@ bool WriterThread::sendUpdateRequest(const QRegion &region) {
 	return true;
 }
 
-bool WriterThread::sendMouseEvents(const QValueList<MouseEvent> &events) {
-	QValueList<MouseEvent>::const_iterator it = events.begin();
+bool WriterThread::sendInputEvents(const QValueList<InputEvent> &events) {
+	QValueList<InputEvent>::const_iterator it = events.begin();
 	while (it != events.end()) {
-		if (!SendPointerEvent((*it).x, (*it).y, (*it).buttons))
-			return false;
-		it++;
-	}
-	return true;
-}
-
-bool WriterThread::sendKeyEvents(const QValueList<KeyEvent> &events) {
-	QValueList<KeyEvent>::const_iterator it = events.begin();
-	while (it != events.end()) {
-		if (!SendKeyEvent((*it).k, (*it).down ? True : False))
-			return false;
+		if ((*it).type == KeyEventType) {
+			if (!SendKeyEvent((*it).e.k.k, (*it).e.k.down ? True : False))
+				return false;
+		}
+		else
+			if (!SendPointerEvent((*it).e.m.x, (*it).e.m.y, (*it).e.m.buttons))
+				return false;
 		it++;
 	}
 	return true;
@@ -214,47 +211,53 @@ void WriterThread::queueUpdateRequest(const QRegion &r) {
 }
 
 void WriterThread::queueMouseEvent(int x, int y, int buttonMask) {
-	MouseEvent e;
-	e.x = x;
-	e.y = y;
-	e.buttons = buttonMask;
+	InputEvent e;
+	e.type = MouseEventType;
+	e.e.m.x = x;
+	e.e.m.y = y;
+	e.e.m.buttons = buttonMask;
 
 	m_lock.lock();
-	if (m_mouseEvents.size() > 0) {
-		if ((e.x == m_mouseEvents.last().x) &&
-		    (e.y == m_mouseEvents.last().y) &&
-		    (e.buttons == m_mouseEvents.last().buttons)) {
+	if (m_mouseEventNum > 0) {
+		if ((e.e.m.x == m_lastMouseEvent.x) &&
+		    (e.e.m.y == m_lastMouseEvent.y) &&
+		    (e.e.m.buttons == m_lastMouseEvent.buttons)) {
 			m_lock.unlock();
 			return;
 		}
-		if (m_mouseEvents.size() >= MOUSEPRESS_QUEUE_SIZE) {
+		if (m_mouseEventNum >= MOUSEPRESS_QUEUE_SIZE) {
 			m_lock.unlock();
 			return;
 		}
-		if ((m_mouseEvents.last().buttons == buttonMask) &&
-		    (m_mouseEvents.size() >= MOUSEMOVE_QUEUE_SIZE)) {
+		if ((m_lastMouseEvent.buttons == buttonMask) &&
+		    (m_mouseEventNum >= MOUSEMOVE_QUEUE_SIZE)) {
 			m_lock.unlock();
 			return;
 		}
 	}
 
-	m_mouseEvents.push_back(e);
+	m_mouseEventNum++;
+	m_lastMouseEvent = e.e.m;
+
+	m_inputEvents.push_back(e);
 	m_waiter.wakeAll();
 	m_lock.unlock();
 }
 
 void WriterThread::queueKeyEvent(unsigned int k, bool down) {
-	KeyEvent e;
-	e.k = k;
-	e.down = down;
+	InputEvent e;
+	e.type = KeyEventType;
+	e.e.k.k = k;
+	e.e.k.down = down;
 
 	m_lock.lock();
-	if (m_keyEvents.size() >= KEY_QUEUE_SIZE) {
+	if (m_keyEventNum >= KEY_QUEUE_SIZE) {
 		m_lock.unlock();
 		return;
 	}
 
-	m_keyEvents.push_back(e);
+	m_keyEventNum++;
+	m_inputEvents.push_back(e);
 	m_waiter.wakeAll();
 	m_lock.unlock();
 }
@@ -275,22 +278,19 @@ void WriterThread::kick() {
 void WriterThread::run() {
 	bool incrementalUpdateRQ = false;
 	QRegion updateRegionRQ;
-	QValueList<MouseEvent> mouseEvents;
-	QValueList<KeyEvent> keyEvents;
+	QValueList<InputEvent> inputEvents;
 	QString clientCut;
 
 	while (!m_quitFlag) {
 		m_lock.lock();
 		incrementalUpdateRQ = m_incrementalUpdateRQ;
 		updateRegionRQ = m_updateRegionRQ;
-		mouseEvents = m_mouseEvents;
-		keyEvents = m_keyEvents;
+		inputEvents = m_inputEvents;
 		clientCut = m_clientCut;
 
 		if ((!incrementalUpdateRQ) &&
 		    (updateRegionRQ.isNull()) &&
-		    (mouseEvents.size() == 0) &&
-		    (keyEvents.size() == 0) && 
+		    (inputEvents.size() == 0) &&
 		    (clientCut.isNull())) {
 			if (!m_waiter.wait(&m_lock, WAIT_PERIOD))
 				m_incrementalUpdateRQ = true;				
@@ -299,8 +299,9 @@ void WriterThread::run() {
 		else {
 			m_incrementalUpdateRQ = false;
 			m_updateRegionRQ = QRegion();
-			m_mouseEvents.clear(); 
-			m_keyEvents.clear();
+			m_inputEvents.clear();
+			m_keyEventNum = 0;
+			m_mouseEventNum = 0;
 			m_clientCut = QString::null;
 			m_lock.unlock();
 
@@ -314,13 +315,8 @@ void WriterThread::run() {
 					sendFatalError(ERROR_IO);
 					break;
 				}
-			if (mouseEvents.size() != 0)
-				if (!sendMouseEvents(mouseEvents)) {
-					sendFatalError(ERROR_IO);
-					break;
-				}
-			if (keyEvents.size() != 0)
-				if (!sendKeyEvents(keyEvents)) {
+			if (inputEvents.size() != 0)
+				if (!sendInputEvents(inputEvents)) {
 					sendFatalError(ERROR_IO);
 					break;
 				}

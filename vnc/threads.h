@@ -33,6 +33,11 @@
 
 class KVncView;
 
+enum EventType {
+	MouseEventType,
+	KeyEventType
+};
+
 
 struct MouseEvent {
 	int x, y, buttons;
@@ -41,6 +46,14 @@ struct MouseEvent {
 struct KeyEvent {
 	unsigned int k;
 	bool down;
+};
+
+struct InputEvent {
+	EventType type;
+	union {
+		MouseEvent m;
+		KeyEvent k;
+	} e;
 };
 
 
@@ -54,8 +67,9 @@ private:
 	// all things that can be send follow:
 	int m_incrementalUpdateRQ; // for sending an incremental request
 	QRegion m_updateRegionRQ;  // for sending updates, null if it is done
-	QValueList<MouseEvent> m_mouseEvents; // list of unsent mouse events
-	QValueList<KeyEvent> m_keyEvents;     // list of unsent key events
+	QValueList<InputEvent> m_inputEvents; // list of unsent input events
+	MouseEvent m_lastMouseEvent;
+	int m_mouseEventNum, m_keyEventNum;
 	QString m_clientCut;
 
 	void sendFatalError(ErrorCode s);
@@ -74,8 +88,7 @@ protected:
 	void run();
 	bool sendIncrementalUpdateRequest();
 	bool sendUpdateRequest(const QRegion &r);
-	bool sendMouseEvents(const QValueList<MouseEvent> &events);
-	bool sendKeyEvents(const QValueList<KeyEvent> &events);
+	bool sendInputEvents(const QValueList<InputEvent> &events);
 };
 
 
