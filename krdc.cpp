@@ -75,7 +75,6 @@ KRDC::KRDC(WindowMode wm, const QString &host,
   QWidget(0, 0, Qt::WStyle_ContextHelp),
   m_layout(0),
   m_scrollView(0),
-  m_progressDialog(0),
   m_view(0),
   m_fsToolbar(0),
   m_toolbar(0),
@@ -333,11 +332,6 @@ bool KRDC::parseHost(QString &str, Protocol &prot, QString &serverHost, int &ser
 
 KRDC::~KRDC()
 {
-	if (m_progressDialog)
-		delete m_progressDialog;
-
-	delete m_keyCaptureDialog;
-
 	// kill explicitly to avoid xlib calls by the threads after closing the window!
 	if (m_view)
 		delete m_view;

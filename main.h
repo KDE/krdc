@@ -22,11 +22,12 @@
 #include <qobject.h>
 #include "krdc.h"
 #include "kremoteview.h"
+#include "smartptr.h"
 
 class MainController : public QObject {
 	Q_OBJECT
 private:
-	KRDC *m_krdc;
+	SmartPtr<KRDC> m_krdc;
 	WindowMode m_windowMode;
 	QString m_host, m_encodings, m_password, m_resolution, m_keymap;
 	Quality m_quality;

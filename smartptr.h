@@ -263,8 +263,9 @@ public:
          * @see release()
          * @see WeakPtr
          */
-	operator T*() const { 
-		return ptr;
+	template<class T2>
+	operator T2*() const { 
+		return static_cast<T2*>(ptr);
 	}
 
         /**
@@ -277,8 +278,9 @@ public:
          * @see release()
          * @see WeakPtr
          */
-	operator const T*() const { 
-		return (const T*)(ptr);
+	template<class T2>
+	operator const T2*() const { 
+		return static_cast<const T2*>(ptr);
 	}
 
         /**

@@ -138,7 +138,6 @@ MainController::MainController(KApplication *app, WindowMode wm,
 			       const QString &password,
 			       const QString &resolution,
 			       const QString &keymap) :
-	m_krdc(0),
         m_windowMode(wm),
 	m_host(host),
         m_encodings(encodings),
@@ -150,8 +149,6 @@ MainController::MainController(KApplication *app, WindowMode wm,
 }
 
 MainController::~MainController() {
-	if (m_krdc)
-		delete m_krdc;
 }
 
 int MainController::main() {
@@ -187,8 +184,7 @@ void MainController::errorRestart() {
 	// unset KRDC as main widget, to avoid quit on delete
 	m_app->setMainWidget(0);
 
-	if (m_krdc)
-		delete m_krdc;
+	m_krdc = 0;
 
 	if (!start()) 
 		m_app->quit();

@@ -19,6 +19,7 @@
 #define SRVLOCMAINDIALOG_H
 
 #include "maindialog.h"
+#include "smartptr.h"
 #include <qstringlist.h>
 
 class KServiceLocator;
@@ -26,7 +27,7 @@ class KServiceLocator;
 class SrvLocMainDialog : public MainDialog {
 	Q_OBJECT
 private:
-	KServiceLocator *m_locator;	
+	SmartPtr<KServiceLocator> m_locator;	
 	bool m_scanning;
 	bool m_browsing;
 	QString m_scope;

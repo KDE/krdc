@@ -74,7 +74,6 @@ public:
 
 SrvLocMainDialog::SrvLocMainDialog(QWidget* parent, const char* name, bool browsing) :
 	MainDialog(parent, name, true),
-	m_locator(0),
         m_scanning(false),
 	m_browsing(browsing),
 	m_scope(QString::null),
@@ -97,8 +96,6 @@ SrvLocMainDialog::SrvLocMainDialog(QWidget* parent, const char* name, bool brows
 }
 
 SrvLocMainDialog::~SrvLocMainDialog() {
-	if (m_locator)
-		delete m_locator;
 }
 
 void SrvLocMainDialog::enableBrowsingArea(bool enable) {

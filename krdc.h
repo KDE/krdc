@@ -32,6 +32,7 @@
 #include "kfullscreenpanel.h"
 #include "keycapturedialog2.h"
 #include "vidmode.h"
+#include "smartptr.h"
 
 
 enum WindowMode {
@@ -60,13 +61,13 @@ class KRDC : public QWidget
 {
 	Q_OBJECT 
 private:
+	SmartPtr<KProgressDialog> m_progressDialog; // dialog, displayed while connecting
 	QVBoxLayout *m_layout;     // the layout for autosizing the scrollview
 	QScrollView *m_scrollView; // scrollview that contains the remote widget
-	KProgressDialog *m_progressDialog; // dialog, displayed while connecting
 	KProgress *m_progress;             // progress bar for the dialog
 	KRemoteView *m_view;                  // the remote widget (e.g. KVncView)
 
-	KeyCaptureDialog2 *m_keyCaptureDialog; // dialog for key capturing
+	SmartPtr<KeyCaptureDialog2> m_keyCaptureDialog; // dialog for key capturing
 	KFullscreenPanel *m_fsToolbar;     // toolbar for fullscreen (0 in normal mode)
 	QWidget *m_fsToolbarWidget;        // qt designer widget for fs toolbar 
                                            //     (invalid in normal mode)
