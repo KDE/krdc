@@ -47,8 +47,6 @@ Do NOT change these in the translation. -->
 <date>2003-09-27</date>
 <releaseinfo>1.0.0</releaseinfo>
 
-<!-- Abstract about this handbook -->
-
 <abstract>
 <para>
 &krdc; is a client application that allows you to view or even control
@@ -186,6 +184,438 @@ the screenshot below.
 </screenshot>
 </para>
 
+<para>
+If you click on the <guibutton>Browse &lt;&lt;</guibutton> button, you
+will get an even simpler interface, as shown below.
+</para>
+
+<para>
+<screenshot>
+<screeninfo>&krdc; main window, without browse functionality</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="snapshot_nobrowse.png" format="PNG"/>
+	  </imageobject>
+	  <imageobject>
+	    <imagedata fileref="snapshot_nobrowse.eps" format="EPS"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>&krdc; main window, without browse functionality</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+If you click on the <guibutton>Browse &gt;&gt;</guibutton> button, you
+will get the normal interface back.
+</para>
+
+<sect1><title>Connecting &krdc; to compatible servers</title>
+
+<para>
+&krdc; is a client, and it needs to be used with compatible
+servers. There are three ways to connect to those servers:
+</para>
+
+<itemizedlist>
+<listitem>
+<para>Directly typing the server name (or IP address) into the
+<guilabel>Remote desktop:</guilabel> combo box.</para> 
+</listitem>
+<listitem>
+<para>By using an invitation that you received. &krfb; uses
+invitations, and can send them by email.</para>
+</listitem>
+<listitem>
+<para>By using Service Location Protocol browsing.</para>
+</listitem>
+</itemizedlist>
+
+<para>
+Let's look at each of these in turn.
+</para>
+
+<sect2><title>Server name entry</title>
+<para>
+If you know the host name (or IP address) of the server you want to
+connect to, you can enter it directly into the <guilabel>Remote
+desktop:</guilabel> combo box.
+</para>
+
+<para>
+If you want to connect to a machine named megan, which is
+running a <acronym>VNC</acronym> server on screen 1, you can enter
+<userinput>megan:1</userinput> or alternatively as
+<userinput>vnc:/megan:1</userinput> into the <guilabel>Remote
+desktop:</guilabel> combo box.
+</para>
+
+<para>
+<screenshot>
+<screeninfo>Entering a hostname into &krdc;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="snapshot_vncentry.png" format="PNG"/>
+	  </imageobject>
+	  <imageobject>
+	    <imagedata fileref="snapshot_vncentry.eps" format="EPS"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>Entering a hostname into &krdc;</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+Similary, if you are using a <acronym>RFB</acronym> server on that
+machine, you can enter <userinput>rfb:/megan</userinput>. RFB does not
+need the screen number to be specified.
+</para>
+
+</sect2>
+
+<sect2><title>Using an invitation</title>
+<para>
+Within the &krfb; server application, it is possible to send
+invitations over email (and in other ways, although email is the most
+useful). If you receive this type of email invitation, you can just
+click on the link provided in the mail. 
+This will start &krdc; if it is not already running, and connect to
+the server specified in the invitation.
+</para>
+
+</sect2>
+
+<sect2><title>Using Service Location Protocol</title>
+<para>
+The third way to use &krdc; is to browse using Service Location
+Protocol. A list of compatible servers that are registered with the
+Service Location Protocol system is shown in a list in the center of
+the main window:
+</para>
+
+<para>
+<screenshot>
+<screeninfo>&krdc; showing service browsing</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="snapshot.png" format="PNG"/>
+	  </imageobject>
+	  <imageobject>
+	    <imagedata fileref="snapshot.eps" format="EPS"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>&krdc; showing service browsing</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<note>
+<para>
+If your main window doesn't contain the table, remember that you can
+use the <guibutton>Browse &gt;&gt;</guibutton> to get back to the full
+&krdc; window. Also, not all compatible servers support automatic
+registration - one that does is the &krfb; server which is part of
+&kde;.
+</para>
+</note>
+
+<para>
+If you click once on an entry in the table, it will be selected, and
+you can use the <guibutton>Connect</guibutton> to establish a
+connection to the server. As a short-cut, you can just double-click on
+an entry, which will also establish a connection.
+</para>
+
+<para>
+While Service Location Protocol will usually detect new servers
+becoming available, you can also force the &krdc; to scan for new
+servers. This is done using the <guibutton>Rescan</guibutton>. When
+you ask for a scan, the button is disabled (greyed out) while the scan
+is being performed - this typically takes a few seconds.
+</para>
+
+<para>
+When using Service Location Protocol, the concept of Scopes is
+important. If there are a lot of services being advertised, it can
+become unwieldy to scan through a list. A re-scan can also produce
+a lot of network traffic. To avoid this problem, administrator's can
+configure Service Location Protocol with a set of Scopes, and only
+register services in certain scopes. For example, a host may be
+registered in the "third_floor" scope and the "logistics" scope, but
+not in the "engineering" scope or "maintenance" scope. In smaller
+setups, everything is only registered in the "DEFAULT" scope. &krdc;
+supports selection of a scope other than "DEFAULT", using the
+<guilabel>Scope:</guilabel> drop-down box in the top right hand corner
+of the main window.
+</para>
+</sect2>
+
+</sect1>
+
+<sect1><title>What happens when you connect</title>
+
+<para>
+No matter how you select the server to connect to, the next thing that
+happens is that &krdc; asks you about the network connection to the
+server, as shown below:
+</para>
+
+<para>
+<screenshot>
+<screeninfo>&krdc; connection speed selection</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="snapshot_connectionspeed.png" format="PNG"/>
+	  </imageobject>
+	  <imageobject>
+	    <imagedata fileref="snapshot_connectionspeed.eps" format="EPS"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>&krdc; connection speed selection</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+There are three speed settings:
+</para>
+
+<itemizedlist>
+<listitem><para>High Quality (LAN, direct connection), which is the
+default, and you should evaluate how well this setting performs before
+selecting a lower performance option that uses less bandwidth.
+</para></listitem>
+<listitem><para>Medium Quality (DSL, Cable, fast
+Internet).</para></listitem>
+<listitem><para>Low Quality (Modem, ISDN, slow
+Internet).</para></listitem>
+</itemizedlist>
+
+<para>
+If you always operate over the same link type, you can deselect the
+checkbox labelled <guilabel>Show this dialog again for this
+host</guilabel>, which means that you won't be asked about the
+connection type again for this host, providing you identify it in the
+same way. For example, if a host has two names, and deselect the
+checkbox when connecting using one name, you won't get asked if you
+connect using that name, although you will be asked if you use the
+other name, or the IP address.
+</para>
+
+<para>
+You select the appropriate speed setting, and select the
+<guibutton>Connect</guibutton> to proceed.
+</para>
+
+<para>
+You will then see a small window containing a progress bar, which
+fills in as &krdc; negotiates the connection.
+</para>
+
+<para>
+Depending on the configuration of the server, you may (and almost
+certainly will) need to provide a password to authenticate to the
+server. &krdc; will provide a password dialog similar to that shown
+below. 
+</para>
+
+<para>
+<screenshot>
+<screeninfo>&krdc; password entry</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="authentication.png" format="PNG"/>
+	  </imageobject>
+	  <imageobject>
+	    <imagedata fileref="authentication.eps" format="EPS"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>&krdc; password entry</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+After authentication, you will be connected to the remote server, and
+can begin using &krdc; to observe or control the remote desktop.
+</para>
+
+</sect1>
+
+<sect1><title>Controlling the remote desktop connection</title>
+
+<para>
+Having connected to the remote server, you would normally use the
+keyboard and mouse to control the windowing system and applications on
+that remote machine. 
+</para>
+
+<para>
+You can view the remote desktop either as a full screen, or as a
+window on the local desktop. You can change between these modes using
+icons shown below.
+</para>
+
+<para>
+<screenshot>
+<screeninfo>&krdc; full screen mode selection</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="window_fullscreen.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>&krdc; full screen mode selection</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+<screenshot>
+<screeninfo>&krdc; window mode selection</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="window_nofullscreen.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>&krdc; window mode selection</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+Full screen mode is normally better when you are helping a remote
+user, because you can see all of what they can see. Window mode is
+most useful when you are working both remotely and locally - perhaps
+referring to some local documentation and then using those
+instructions on the remote machine.
+</para>
+
+<sect2><title>Using window mode</title>
+
+<para>
+&krdc; in window mode looks something like the screenshot below.
+</para>
+
+<para>
+<screenshot>
+<screeninfo>&krdc; window</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="krdc_window.png" format="PNG"/>
+	  </imageobject>
+	  <imageobject>
+	    <imagedata fileref="krdc_window.eps" format="EPS"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>&krdc; window</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+In window mode, you can terminate the connection by closing the window.
+</para>
+
+</sect2>
+
+<sect2><title>Using full screen mode</title>
+
+<para>
+In full screen mode, you can terminate the connection by selecting the
+red "close" icon, which is shown below.
+</para>
+
+<para>
+<screenshot>
+<screeninfo>&krdc; close icon</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="close.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>&krdc; close icon</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+</sect2>
+
+</sect1>
+
+<sect1><title>Managing &krdc; configuration</title>
+<para>
+Using the <guibutton>Preferences...</guibutton> button in the bottom
+left hand corner of the the &krdc; main window, you can open a dialog
+to modify the behaviour of &krdc;. Selecting that button brings up a
+window as shown below:
+</para>
+
+<para>
+<screenshot>
+<screeninfo>&krdc; preferences - Host Profiles tab</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="preferences_profilestab.png" format="PNG"/>
+	  </imageobject>
+	  <imageobject>
+	    <imagedata fileref="preferences_profilestab.eps" format="EPS"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>&krdc; preferences - <guilabel>Host Profiles</guilabel> tab</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+<screenshot>
+<screeninfo>&krdc; preferences - <guilabel>VNC Defaults</guilabel> tab</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="preferences_vncdefaultstab.png" format="PNG"/>
+	  </imageobject>
+	  <imageobject>
+	    <imagedata fileref="preferences_vncdefaultstab.eps" format="EPS"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>&krdc; preferences - <guilabel>VNC
+Defaults</guilabel> profiles tab</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+<screenshot>
+<screeninfo>&krdc; preferences - <guilabel>RDP Defaults</guilabel> tab</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="preferences_rdpdefaultstab.png" format="PNG"/>
+	  </imageobject>
+	  <imageobject>
+	    <imagedata fileref="preferences_rdpdefaultstab.eps" format="EPS"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>&krdc; preferences - <guilabel>RDP
+Defaults</guilabel> profiles tab</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+
+</sect1>
+
 </chapter>
 
 <chapter id="dcop">
@@ -241,18 +671,34 @@ application work. -->
 &reporting.bugs;
 &updating.documentation;
 
-<!-- Needs some content.
 <qandaset id="faqlist">
 <qandaentry>
 <question>
-<para>A question </para>
+<para>When I start &krdc;, I get a message box that reads
+<computeroutput> Browsing the network is not possible. You probably
+did not install SLP support correctly.</computeroutput>
+What is wrong?</para> 
 </question>
 <answer>
-<para>and an answer.</para>
+<para>SLP is Service Location Protocol, and is typically provided by
+<application>OpenSLP</application>, or by <application>The
+Knot</application>. </para>
+<para>
+If you compiled &krdc; yourself, this probably
+means that &krdc; has been compiled against the SLP libraries, but
+the server (probably called <command>slpd</command> or
+<command>knotd</command>) isn't running. You normally need to start
+these servers as the superuser, which may mean requesting that your
+system administrator does this, if you can't do this yourself.
+</para>
+<para>
+If you are running a packaged version of &krdc;, then you may have some missing
+dependencies. There are so many ways this can happen that you'd need
+to seek support from whoever did the packaging.</para>
 </answer>
 </qandaentry>
 </qandaset>
--->
+
 </chapter>
 
 <chapter id="credits">
