@@ -434,13 +434,13 @@ void KRDC::switchToNormal(bool scaling)
 	m_layout = new QVBoxLayout(this);
 	m_layout->addWidget(m_toolbar);
 	m_layout->addWidget(m_scrollView);
-	
-	QSize fbSize = m_view->framebufferSize();
-	setMaximumSize(fbSize.width(), fbSize.height() + m_toolbar->height());
+
 	if (m_wasScaling) {
 		m_view->enableScaling(true);
 		m_wasScaling = false;
 	}
+
+	setMaximumSize(sizeHint());
 
 	repositionView(false);
 
