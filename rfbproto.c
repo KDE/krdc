@@ -300,6 +300,8 @@ SetFormatAndEncodings()
   Bool requestLastRectEncoding = False;
 
   spf.type = rfbSetPixelFormat;
+  spf.pad1 = 0;
+  spf.pad2 = 0;
   spf.format = myFormat;
   spf.format.redMax = Swap16IfLE(spf.format.redMax);
   spf.format.greenMax = Swap16IfLE(spf.format.greenMax);
@@ -309,6 +311,7 @@ SetFormatAndEncodings()
     return False;
 
   se->type = rfbSetEncodings;
+  se->pad = 0;
   se->nEncodings = 0;
 
   if (appData.encodingsString) {
