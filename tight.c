@@ -546,6 +546,11 @@ DecompressJpegRectBPP(int x, int y, int w, int h)
     return False;
   }
 
+  if (compressedLen > MAX_JPEG_SIZE) {
+    fprintf(stderr, "To large data announced by the server.\n");
+    return False;
+  }
+
   compressedData = malloc(compressedLen);
   if (compressedData == NULL) {
     fprintf(stderr, "Memory allocation error.\n");

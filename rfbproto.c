@@ -114,6 +114,15 @@ static CARD8 tightPrevRow[2048*3*sizeof(CARD16)];
 /* JPEG decoder state. */
 static Bool jpegError;
 
+/* Maximum length for the cut buffer (16 MB)*/
+#define MAX_CUTBUFFER (1024*1024*16)
+
+/* Maximum length for the strings (64 kB)*/
+#define MAX_STRING (1024*64)
+
+/* Maximum length for the strings (32 MB)*/
+#define MAX_JPEG_SIZE (1024*1024*32)
+
 
 /*
  * ConnectToRFBServer.
@@ -188,8 +197,15 @@ InitialiseRFBConnection()
     if (!ReadFromRFBServer((char *)&reasonLen, 4)) return INIT_CONNECTION_FAILED;
     reasonLen = Swap32IfLE(reasonLen);
 
+    if (reasonLen > MAX_STRING) {
+      fprintf(stderr, "Connection failure reason too long.\n");
+      return INIT_CONNECTION_FAILED;
+    }
+      
     reason = malloc(reasonLen);
-
+    if (!reason)
+      return INIT_CONNECTION_FAILED;
+      
     if (!ReadFromRFBServer(reason, reasonLen)) return INIT_CONNECTION_FAILED;
 
     fprintf(stderr,"VNC connection failed: %.*s\n",(int)reasonLen, reason);
@@ -259,6 +275,11 @@ InitialiseRFBConnection()
 
   if ((si.framebufferWidth*si.framebufferHeight) > (4096*4096))
     return INIT_CONNECTION_FAILED;
+
+  if (si.nameLength > MAX_STRING) {
+    fprintf(stderr, "Display name too long.\n");  
+    return INIT_CONNECTION_FAILED;
+  }
 
   desktopName = malloc(si.nameLength + 1);
   if (!desktopName) {
@@ -800,7 +821,17 @@ HandleRFBServerMessage()
 
     msg.sct.length = Swap32IfLE(msg.sct.length);
 
+    if (msg.sct.length > MAX_CUTBUFFER) {
+      fprintf(stderr, "Cutbuffer too long.\n");
+      return False;
+    }
+
     serverCutText = malloc(msg.sct.length+1);
+
+    if (!serverCutText) {
+      fprintf(stderr, "Out-of-memory, cutbuffer to long.\n");
+      return False;
+    }
 
     if (!ReadFromRFBServer(serverCutText, msg.sct.length))
       return False;
