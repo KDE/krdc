@@ -26,8 +26,8 @@
 // (krfb's is 20s).
 static const int WAIT_PERIOD = 8000;
 
-static const int MOUSEPRESS_QUEUE_SIZE = 16;
-static const int MOUSEMOVE_QUEUE_SIZE = 8;
+static const int MOUSEPRESS_QUEUE_SIZE = 5;
+static const int MOUSEMOVE_QUEUE_SIZE = 3;
 static const int KEY_QUEUE_SIZE = 8192;
 
 
