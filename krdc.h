@@ -80,7 +80,7 @@ private:
 	bool m_fullscreenMinimized;   // true if minimized from fs
 	QSize m_fullscreenResolution; // xvidmode size (valid only in fs)
 	QRect m_oldWindowGeometry;    // geometry before switching to fullscreen
-	bool m_wasScaling;            // whether scaling was enabled in norm mode
+	bool m_windowScaling;         // whether scaling was enabled in norm mode
 
 	static QString m_lastHost; // remembers last value of host input
 	static int m_lastQuality;  // remembers last quality selection
@@ -89,7 +89,6 @@ private:
 	bool parseHost(QString &s, QString &serverHost, int &serverPort,
 		       QString &userName, QString &password);
 
-	void switchToFullscreen();
 	void repositionView(bool fullscreen);
 
 	void showProgressDialog();
@@ -139,6 +138,7 @@ public slots:
 	void quit();
 	void enableFullscreen(bool full = false);
 	void switchToNormal(bool scaling = false);
+	void switchToFullscreen(bool scaling = false);
 
 signals:
         void disconnected(); 

@@ -84,8 +84,7 @@ KRDC::KRDC(WindowMode wm, const QString &host,
   m_password(password),
   m_isFullscreen(wm),
   m_oldResolution(0),
-  m_fullscreenMinimized(false),
-  m_wasScaling(false)
+  m_fullscreenMinimized(false)
 {
 	connect(&m_autoHideTimer, SIGNAL(timeout()), SLOT(hideFullscreenToolbarNow()));
 	connect(&m_bumpScrollTimer, SIGNAL(timeout()), SLOT(bumpScroll()));
@@ -383,11 +382,11 @@ void KRDC::enableFullscreen(bool on)
 {
 	if (on) {
 		if (m_isFullscreen != WINDOW_MODE_FULLSCREEN)
-			switchToFullscreen();
+			switchToFullscreen(m_view->scaling());
 	}
 	else
 		if (m_isFullscreen != WINDOW_MODE_NORMAL)
-			switchToNormal(m_wasScaling);
+			switchToNormal(m_view->scaling() || m_windowScaling);
 }
 
 QSize KRDC::sizeHint()
@@ -399,30 +398,43 @@ QSize KRDC::sizeHint()
 		return m_view->framebufferSize();
 }
 
-void KRDC::switchToFullscreen()
+void KRDC::switchToFullscreen(bool scaling)
 {
 	int x, y;
 
+	bool fromFullscreen = (m_isFullscreen == WINDOW_MODE_FULLSCREEN);
 	if (m_isFullscreen != WINDOW_MODE_AUTO)
 		m_oldWindowGeometry = geometry();
 
-	m_wasScaling = m_view->scaling();
-	m_view->enableScaling(false);
-	hide();
-	m_oldResolution = vidmodeFullscreenSwitch(qt_xdisplay(),
-						  m_view->width(),
-						  m_view->height(),
-						  x, y);
-	if (m_oldResolution != 0)
-		m_fullscreenResolution = QSize(x, y);
-	else
-		m_fullscreenResolution = QApplication::desktop()->size();
-	m_isFullscreen = WINDOW_MODE_FULLSCREEN;
+	QWidget *desktop = QApplication::desktop();
+	QSize ds = desktop->size();
+	QSize fbs = m_view->framebufferSize();
+	bool scalingPossible = ((fbs.width() >= ds.width()) || (fbs.height() >= ds.height()));
+	
+	if (!fromFullscreen) {
+		hide();
+		m_oldResolution = vidmodeFullscreenSwitch(qt_xdisplay(),
+							  fbs.width(),
+							  fbs.height(),
+							  x, y);
+		if (m_oldResolution != 0)
+			m_fullscreenResolution = QSize(x, y);
+		else
+			m_fullscreenResolution = QApplication::desktop()->size();
+		m_isFullscreen = WINDOW_MODE_FULLSCREEN;
+		if (!scalingPossible)
+			m_windowScaling = m_view->scaling();
+	}
 
 	if (m_toolbar) {
 		m_toolbar->hide();
 		m_toolbar->deleteLater();
 		m_toolbar = 0;
+	}
+	if (m_fsToolbar) {
+		m_fsToolbar->hide();
+		m_fsToolbar->deleteLater();
+		m_fsToolbar = 0;
 	}
 
 	if (m_layout)
@@ -430,11 +442,27 @@ void KRDC::switchToFullscreen()
 	m_layout = new QVBoxLayout(this);
 	m_layout->addWidget(m_scrollView);
 
+	if (scalingPossible) {
+		m_view->enableScaling(scaling);
+		if (scaling)
+			m_view->resize(ds);
+		else 
+			m_view->resize(fbs);
+		repositionView(true);
+	}
+	else
+		m_view->enableScaling(false);
+
 	m_fsToolbar = new KFullscreenPanel(this, "fstoolbar", m_fullscreenResolution);
 	FullscreenToolbar *t = new FullscreenToolbar(m_fsToolbar);
 	m_fsToolbarWidget = t;
 	t->hostLabel->setText(m_host);
 	t->fullscreenButton->setOn(true);
+	t->scaleButton->setOn(scaling);
+	if (scalingPossible)
+		t->scaleButton->show();
+	else
+		t->scaleButton->hide();
 	m_fsToolbar->setChild(t);
 	connect(m_fsToolbar, SIGNAL(mouseEnter()), SLOT(showFullscreenToolbar()));
 	connect(m_fsToolbar, SIGNAL(mouseLeave()), SLOT(hideFullscreenToolbarDelayed()));
@@ -442,6 +470,8 @@ void KRDC::switchToFullscreen()
 	connect((QObject*)t->iconifyButton, SIGNAL(clicked()), SLOT(iconify()));
 	connect((QObject*)t->fullscreenButton, SIGNAL(toggled(bool)),
 		SLOT(enableFullscreen(bool)));
+	connect((QObject*)t->scaleButton, SIGNAL(toggled(bool)),
+		SLOT(switchToFullscreen(bool)));
 	connect((QObject*)t->autohideButton, SIGNAL(clicked()),
 		SLOT(toggleFsToolbarAutoHide()));
 	repositionView(true);
@@ -457,15 +487,18 @@ void KRDC::switchToFullscreen()
 	m_ftAutoHide = !m_ftAutoHide;
 	setFsToolbarAutoHide(!m_ftAutoHide);
 
-	if (m_oldResolution)
-		grabInput(qt_xdisplay(), winId());
-	m_view->grabKeyboard();
+	if (!fromFullscreen) {
+		if (m_oldResolution)
+			grabInput(qt_xdisplay(), winId());
+		m_view->grabKeyboard();
+	}
 }
 
 void KRDC::switchToNormal(bool scaling)
 {
 	bool fromFullscreen = (m_isFullscreen == WINDOW_MODE_FULLSCREEN);
 	bool scalingChanged = (scaling != m_view->scaling());
+	m_windowScaling = false; // delete remembered scaling value
 	if (fromFullscreen) {
 		KWin::clearState(winId(), NET::StaysOnTop);
 		hide();
@@ -492,7 +525,7 @@ void KRDC::switchToNormal(bool scaling)
 		t->setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding,
 					     QSizePolicy::Fixed));
 		t->fullscreenButton->setOn(false);
-		t->scaleButton->setOn(m_wasScaling);
+		t->scaleButton->setOn(scaling);
 		connect((QObject*)t->fullscreenButton, SIGNAL(toggled(bool)),
 			SLOT(enableFullscreen(bool)));
 		connect((QObject*)t->scaleButton, SIGNAL(toggled(bool)),
@@ -515,11 +548,6 @@ void KRDC::switchToNormal(bool scaling)
 	m_layout = new QVBoxLayout(this);
 	m_layout->addWidget(m_toolbar);
 	m_layout->addWidget(m_scrollView);
-
-	if (m_wasScaling) {
-		m_view->enableScaling(true);
-		m_wasScaling = false;
-	}
 
 	setMaximumSize(sizeHint());
 
@@ -601,12 +629,10 @@ void KRDC::setSize(int w, int h)
 
 	switch (m_isFullscreen) {
 	case WINDOW_MODE_AUTO:
-		if ((w >= dw) || (h >= dh)) {
-			switchToFullscreen();
-		}
-		else {
+		if ((w >= dw) || (h >= dh))
+			switchToFullscreen(false);
+		else 
 			switchToNormal(false);
-		}
 		break;
 	case WINDOW_MODE_NORMAL:
 		switchToNormal(false);
