@@ -49,7 +49,7 @@ Bool useShm = True;
 static Cursor CreateDotCursor(void);
 static void CopyBGR233ToScreen(CARD8 *buf, int x, int y, int width,int height);
 static void FillRectangleBGR233(CARD8 buf, int x, int y, int width,int height);
-
+static int CheckRectangle(int x, int y, int width, int height);
 
 void
 DesktopInit(Window win)
@@ -300,6 +300,17 @@ SyncScreenRegion(int x, int y, int width, int height) {
   unlockQt();
 }
 
+static int CheckRectangle(int x, int y, int width, int height) {
+  if ((x < 0) || (y < 0))
+    return 0;
+
+  if (((x+width) > si.framebufferWidth) || ((y+height) > si.framebufferHeight))
+    return 0;
+
+  return 1;
+}
+
+
 /*
  * CopyDataToScreen.
  */
@@ -307,6 +318,8 @@ SyncScreenRegion(int x, int y, int width, int height) {
 void
 CopyDataToScreen(char *buf, int x, int y, int width, int height)
 {
+  if (!CheckRectangle(x, y, width, height))
+    return;
   if (appData.rawDelay != 0) {
     lockQt();
     XFillRectangle(dpy, desktopWin, gc, x, y, width, height);
@@ -410,6 +423,8 @@ CopyBGR233ToScreen(CARD8 *buf, int x, int y, int width, int height)
 void
 FillRectangle8(CARD8 fg, int x, int y, int width, int height)
 {
+  if (!CheckRectangle(x, y, width, height))
+    return;
   if (!appData.useBGR233) {
     int h;
     int widthInBytes = width * myFormat.bitsPerPixel / 8;
@@ -510,6 +525,9 @@ FillRectangle16(CARD16 fg, int x, int y, int width, int height)
 	       + x * myFormat.bitsPerPixel / 8);
   CARD16 *scr16;
 
+  if (!CheckRectangle(x, y, width, height))
+    return;
+
   for (h = 0; h < height; h++) {
     scr16 = (CARD16*) scr;
     for (i = 0; i < width; i++)
@@ -532,6 +550,9 @@ FillRectangle32(CARD32 fg, int x, int y, int width, int height)
 	       + x * myFormat.bitsPerPixel / 8);
   CARD32 *scr32;
 
+  if (!CheckRectangle(x, y, width, height))
+    return;
+
   for (h = 0; h < height; h++) {
     scr32 = (CARD32*) scr;
     for (i = 0; i < width; i++)
@@ -539,6 +560,33 @@ FillRectangle32(CARD32 fg, int x, int y, int width, int height)
     scr += scrWidthInBytes;
   }
 }
+
+/*
+ * CopyArea
+ */
+
+/*void
+CopyArea(int srcX, int srcY, int x, int y, int width, int height)
+{
+  int h;
+  int widthInBytes = width * myFormat.bitsPerPixel / 8;
+  int scrWidthInBytes = si.framebufferWidth * myFormat.bitsPerPixel / 8;
+  
+  char *scr = (image->data + y * scrWidthInBytes
+	       + x * myFormat.bitsPerPixel / 8);
+
+  if ((srcY != y) ||
+      ())
+  
+  for (h = 0; h < height; h++) {
+    memcpy(scr, buf, widthInBytes);
+    buf += widthInBytes;
+    scr += scrWidthInBytes;
+  }
+
+  SyncScreenRegion(x, y, width, height);
+}
+*/
 
 void ShmSync(void) {
     if (useShm)
