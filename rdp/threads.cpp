@@ -112,6 +112,10 @@ void RdpControllerThread::run()
 
 	changeStatus(REMOTE_VIEW_CONNECTED);
 
+	KApplication::kApplication()->lock();
+	m_view->grabKeyboard();
+	KApplication::kApplication()->unlock();
+
 	// start the writer thread
 	m_wthread.start();
 
