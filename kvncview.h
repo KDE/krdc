@@ -65,8 +65,9 @@ protected:
 
 public:
 	KVncView(QWidget* parent=0, const char *name=0, 
-		    const QString &host = QString(""), int port = 5900,
-		    AppData *data = 0);
+		 const QString &host = QString(""), int port = 5900,
+		 const QString &password = QString::null, 
+		 AppData *data = 0);
 	~KVncView();
 	QSize sizeHint();
 	int heightForWidth (int w) const;

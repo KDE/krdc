@@ -59,6 +59,7 @@ KVncView::KVncView(QWidget *parent,
 		   const char *name, 
 		   const QString &_host,
 		   int _port,
+		   const QString &_password,
 		   AppData *data) : 
   QWidget(parent, name),
   m_cthread(this, m_wthread, m_quitFlag),
@@ -70,7 +71,7 @@ KVncView::KVncView(QWidget *parent,
   m_port(_port)
 {
 	kvncview = this;
-	password = QString::null;
+	password = _password;
 	dpy = qt_xdisplay();
 	if (data) 
 		appData = *data;

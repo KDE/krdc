@@ -27,6 +27,7 @@
 #include <qsizepolicy.h>
 #include <qcolor.h>
 #include <kconfig.h>
+#include <kurl.h>
 #include <klocale.h>
 #include <qlabel.h> 
 #include <qtoolbutton.h> 
@@ -77,12 +78,22 @@ KRDC::KRDC(WindowMode wm, const QString &host,
 
 bool KRDC::start(bool onlyFailOnCancel)
 {
+	QString userName, password;
 	KConfig *config = KApplication::kApplication()->config();
 	QString vncServerHost;
 	int vncServerPort = 5900;
 
 	if (!m_host.isNull()) {
-		parseHost(m_host, vncServerHost, vncServerPort);
+		if (!parseHost(m_host, vncServerHost, vncServerPort,
+			       userName, password)) {
+			KMessageBox::error(0, 
+			   i18n("The entered host does not have the required form."),
+			   i18n("Malformed URL or host"));
+			if (!onlyFailOnCancel)
+				return false;
+			emit disconnectedError();
+			return true;
+		}
 		if (m_quality == QUALITY_UNKNOWN)
 			m_quality = QUALITY_MEDIUM;
 	} else {
@@ -99,10 +110,18 @@ bool KRDC::start(bool onlyFailOnCancel)
 			return false;
 		}
 
-		QString host = ncd.serverInput->currentText();
-		m_lastHost = host;
-		parseHost(host, vncServerHost, vncServerPort);
-		m_host = host;
+		m_host = ncd.serverInput->currentText();
+		m_lastHost = m_host;
+		if (!parseHost(m_host, vncServerHost, vncServerPort,
+			       userName, password)) {
+			KMessageBox::error(0, 
+					   i18n("The entered host does not have the required form."),
+					   i18n("Malformed URL or host"));
+			if (!onlyFailOnCancel)
+				return false;
+			emit disconnectedError();
+			return true;
+		}
 
 		int ci = ncd.qualityCombo->currentItem();
 		m_lastQuality = ci;
@@ -117,7 +136,7 @@ bool KRDC::start(bool onlyFailOnCancel)
 			return false;
 		}
 
-		ncd.serverInput->addToHistory(host);
+		ncd.serverInput->addToHistory(m_host);
 		list = ncd.serverInput->completionObject()->items();
 		config->writeEntry("serverCompletions", list);
 		list = ncd.serverInput->historyItems();
@@ -127,7 +146,7 @@ bool KRDC::start(bool onlyFailOnCancel)
 	setCaption(i18n("%1 - Remote Desktop Connection").arg(m_host));
 	configureApp(m_quality);
 
-	m_view = new KVncView(this, 0, vncServerHost, vncServerPort,
+	m_view = new KVncView(this, 0, vncServerHost, vncServerPort, password,
 			      &m_appData);
 	connect(m_view, SIGNAL(changeSize(int,int)), SLOT(setSize(int,int)));
 	connect(m_view, SIGNAL(connected()), SLOT(show()));
@@ -254,37 +273,33 @@ void KRDC::configureApp(Quality q) {
 	m_appData.copyRectDelay = 0;
 }
 
-void KRDC::parseHost(const QString &str, QString &serverHost, int &serverPort) {
-	QString host;
+bool KRDC::parseHost(QString &str, QString &serverHost, int &serverPort,
+		     QString &userName, QString &password) {
 	QString s = str;
-	
-	if (s.startsWith("vnc:"))
-		s = s.mid(4);
-	if (s.startsWith("//"))
-		s = s.mid(2);
+	userName = QString::null;
+	password = QString::null;
 
-	int pos = s.find(':');
-	if (pos < 0) {
-		s+= ":0";
-		pos = s.find(':');
-	}
+	if (s.startsWith(":"))
+		s = "localhost" + s;
+	if (!s.startsWith("vnc://"))
+		s = "vnc://" + s;
 
-	bool portOk = false;
-	QString portS = s.mid(pos+1);
-	int port = portS.toInt(&portOk);
-	if (portOk) {
-		host = s.left(pos);
-		if (port < 100)
-			serverPort = port + 5900;
-		else
-			serverPort = port;
-	}
-	else {
-		host = s;
-		serverPort = 5900;
-	}
-	
-	serverHost = host;
+	KURL url(s);
+	serverHost = url.host();
+	if (serverHost.isEmpty())
+		serverHost = "localhost";
+	serverPort = url.port();
+	if (serverPort < 100)
+		serverPort += 5900;
+	if (url.hasUser())
+		userName = url.user();
+	if (url.hasPass())
+		password = url.pass();
+
+	if (url.hasUser()) 
+		str = QString("%1@%2:%3").arg(userName).arg(serverHost).arg(url.port());
+	else
+		str = QString("%1:%2").arg(serverHost).arg(url.port());
 }
 
 KRDC::~KRDC()
