@@ -133,8 +133,8 @@ QString MainDialogWidget::remoteHost()
 void MainDialogWidget::hostChanged( const QString &text )
 {
   emit hostValid(text.contains(QRegExp(":[0-9]+$")) ||
-                 text.contains(QRegExp("^vnc://.+")) ||
-                 text.contains(QRegExp("^rdp://.+")));
+                 text.contains(QRegExp("^vnc:/.+")) ||
+                 text.contains(QRegExp("^rdp:/.+")));
 }
 
 void MainDialogWidget::toggleBrowsingArea()
@@ -213,7 +213,7 @@ void MainDialogWidget::rescan()
 
   QString filter;
   if ( !m_searchInput->text().stripWhiteSpace().isEmpty() ) {
-    QString ef = KServiceLocator::escapeFilter( 
+    QString ef = KServiceLocator::escapeFilter(
       m_searchInput->text().stripWhiteSpace() );
     filter = "(|(|(description=*"+ef+"*)(username=*"+ef+"*))(fullname=*"+ef+"*))";
   }

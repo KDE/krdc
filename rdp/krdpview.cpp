@@ -108,7 +108,6 @@ KRdpView::KRdpView(QWidget *parent, const char *name,
 // destructor
 KRdpView::~KRdpView()
 {
-	m_container->releaseKeyboard();
 	startQuitting();
 	delete m_container;
 }
@@ -225,9 +224,12 @@ bool KRdpView::start()
 	return true;
 }
 
-void KRdpView::switchFullscreen(bool /*on*/)
+void KRdpView::switchFullscreen(bool on)
 {
-	m_container->grabKeyboard();
+	if(on == true)
+	{
+		m_container->grabKeyboard();
+	}
 }
 
 // captures pressed keys
