@@ -68,7 +68,7 @@ int main(int argc, char *argv[])
 			      "tim@tjansen.de");
 	aboutData.addAuthor("Tim Jansen",0, "tim@tjansen.de");
 	aboutData.addAuthor("Arend van Beelen jr.",
-			    I18N_NOOP("RDP backend"));
+			    I18N_NOOP("RDP backend"), "arend@auton.nl");
 	aboutData.addCredit("AT&T Laboratories Cambridge",
 			    I18N_NOOP("Original VNC viewer and protocol design"));
 	aboutData.addCredit("Const Kaplinsky",

@@ -18,7 +18,7 @@
 */
 
 #include <time.h>
-#include <iostream.h>
+#include <iostream>
 
 #include "events.h"
 
@@ -84,7 +84,6 @@ void RdpControllerThread::run()
 	QCString host(m_view->m_host.utf8());
 	if(!sec_connect(host.data()))
 	{
-		changeStatus(REMOTE_VIEW_DISCONNECTED);
 		QApplication::postEvent(m_view, new FatalErrorEvent(ERROR_CONNECTION));
 		return;
 	}
