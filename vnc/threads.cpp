@@ -24,7 +24,10 @@
 // Maximum idle time for writer thread in ms. When it timeouts, it will request 
 // another incremental update. Must be smaller than the timeout of the server
 // (krfb's is 20s).
-static const int WAIT_PERIOD = 8000;
+static const int MAXIMUM_WAIT_PERIOD = 8000;
+
+// time to postpone incremental updates that have not been requested explicitly
+static const int POSTPONED_INCRRQ_WAIT_PERIOD = 110;
 
 static const int MOUSEPRESS_QUEUE_SIZE = 5;
 static const int MOUSEMOVE_QUEUE_SIZE = 3;
@@ -161,6 +164,7 @@ void announceIncrementalUpdateRequest() {
 WriterThread::WriterThread(KVncView *v, volatile bool &quitFlag) :
 	m_quitFlag(quitFlag),
 	m_view(v),
+	m_lastIncrUpdatePostponed(false),
 	m_incrementalUpdateRQ(false),
 	m_incrementalUpdateAnnounced(false),
 	m_mouseEventNum(0),
@@ -168,9 +172,11 @@ WriterThread::WriterThread(KVncView *v, volatile bool &quitFlag) :
 	m_clientCut(QString::null)
 {
 	writerThread = this;
+	m_lastIncrUpdate.start();
 }
 
 bool WriterThread::sendIncrementalUpdateRequest() {
+	m_lastIncrUpdate.restart();
 	return SendIncrementalFramebufferUpdateRequest();
 }
 
@@ -305,7 +311,9 @@ void WriterThread::run() {
 		    (updateRegionRQ.isNull()) &&
 		    (inputEvents.size() == 0) &&
 		    (clientCut.isNull())) {
-			if (!m_waiter.wait(&m_lock, WAIT_PERIOD))
+			if (!m_waiter.wait(&m_lock, 
+					   m_lastIncrUpdatePostponed ? 
+					   POSTPONED_INCRRQ_WAIT_PERIOD : MAXIMUM_WAIT_PERIOD))
 				m_incrementalUpdateRQ = true;
 			m_lock.unlock();
 		}
@@ -319,14 +327,37 @@ void WriterThread::run() {
 			m_clientCut = QString::null;
 			m_lock.unlock();
 
-			// always send incremental update, unless a framebuffer
-			// update is done ATM and will do the request later
+			// always send incremental update, unless 
+			// a) a framebuffer update is done ATM and will do the request later, or
+			// b) the last unrequested update has been done less than 0.1s ago
+			//
+			// if the update has not been done because of b, postpone it.
 			if (incrementalUpdateRQ || !incrementalUpdateAnnounced) {
-				if (!sendIncrementalUpdateRequest()) {
-					sendFatalError(ERROR_IO);
-					break;
+				bool sendUpdate;
+				if (incrementalUpdateRQ) {
+					sendUpdate = true;
+					m_lastIncrUpdatePostponed = false;
 				}
+				else {
+					if (m_lastIncrUpdate.elapsed() < 100) {
+						sendUpdate = false;
+						m_lastIncrUpdatePostponed = true;
+					}
+					else {
+						sendUpdate = true;
+						m_lastIncrUpdatePostponed = false;
+					}
+				}
+
+				if (sendUpdate)
+					if (!sendIncrementalUpdateRequest()) {
+						sendFatalError(ERROR_IO);
+						break;
+					}
 			}
+			else
+				m_lastIncrUpdatePostponed = false;
+
 			if (!updateRegionRQ.isNull())
 				if (!sendUpdateRequest(updateRegionRQ)) {
 					sendFatalError(ERROR_IO);

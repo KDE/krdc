@@ -25,6 +25,7 @@
 #include <qwaitcondition.h>
 #include <qevent.h>
 #include <qvaluelist.h>
+#include <qdatetime.h>
 
 #include <stdlib.h> 
 
@@ -63,6 +64,9 @@ private:
 	QWaitCondition m_waiter;
 	volatile bool &m_quitFlag;
 	KVncView *m_view;
+
+	QTime m_lastIncrUpdate; // start()ed when a incr update is sent
+	bool m_lastIncrUpdatePostponed;
 
 	// all things that can be send follow:
 	bool m_incrementalUpdateRQ; // for sending an incremental request
