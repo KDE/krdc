@@ -32,6 +32,7 @@ static const QString rdpKeymaps[] = { "ar",
                                       "fr",
                                       "fr-be",
                                       "hr",
+                                      "hu",
                                       "it",
                                       "ja",
                                       "lt",
@@ -46,7 +47,7 @@ static const QString rdpKeymaps[] = { "ar",
                                       "sv",
                                       "th",
                                       "tr" };
-static const int rdpNumKeymaps = 24;
+static const int rdpNumKeymaps = 25;
 static const int rdpDefaultKeymap = 4; // en-us
 
 inline int keymap2int(QString &keymap)
