@@ -128,13 +128,13 @@ Resolution vidmodeFullscreenSwitch(Display *dpy, int screen,
 
 #else
 
-void vidmodeNormalSwitch(Display *dpy, int oldResolution)
+void vidmodeNormalSwitch(Display *dpy, Resolution oldResolution)
 {
 }
 
-int vidmodeFullscreenSwitch(Display *dpy, int sw, int sh, int &nx, int &ny)
+Resolution vidmodeFullscreenSwitch(Display *dpy, int screen, int sw, int sh, int &nx, int &ny)
 {
-	return 0;
+	return Resolution();
 }
 
 #endif
