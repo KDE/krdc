@@ -341,8 +341,8 @@ void KVncView::mouseEvent(QMouseEvent *e) {
 	int x = e->x();
 	int y = e->y();
 	if (m_scaling) {
-		x = (x * width()) / m_framebufferSize.width();
-		y = (y * height()) / m_framebufferSize.height();
+		x = (x * m_framebufferSize.width()) / width();
+		y = (y * m_framebufferSize.height()) / height();
 	}
 	m_wthread.queueMouseEvent(x, y, m_buttonMask);
 }
@@ -375,8 +375,8 @@ void KVncView::wheelEvent(QWheelEvent *e) {
 	int x = e->pos().x();
 	int y = e->pos().y();
 	if (m_scaling) {
-		x = (x * width()) / m_framebufferSize.width();
-		y = (y * height()) / m_framebufferSize.height();
+		x = (x * m_framebufferSize.width()) / width();
+		y = (y * m_framebufferSize.height()) / height();
 	}
 	m_wthread.queueMouseEvent(x, y, eb|m_buttonMask);
 	m_wthread.queueMouseEvent(x, y, m_buttonMask);
