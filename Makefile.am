@@ -28,6 +28,8 @@ lnk_DATA = krdc.desktop
 
 kde_services_DATA = vnc.protocol
 
+KDE_ICON = krdc
+
 INCLUDES= $(all_includes)
 
 messages: rc.cpp
