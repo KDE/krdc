@@ -140,6 +140,9 @@
                     <property name="text">
                         <string>&amp;Enable encryption (secure, but slow and not always possible)</string>
                     </property>
+                    <property name="whatsThis" stdset="0">
+                        <string>Enable this option to encrypt the connection. Only newer servers support this option. Encrypting prevents others from eavesdropping, but can slow down the connection considerably.</string>
+                    </property>
                 </widget>
             </vbox>
         </widget>
@@ -151,7 +154,7 @@
                 <string>&amp;Show this dialog again for this host</string>
             </property>
             <property name="whatsThis" stdset="0">
-                <string>Enable if you do save these preferences. You can change them later in the settings menu.</string>
+                <string>Disable this option if you do not want to see this dialog again for this host. You can reset this setting later in the configuration menu.</string>
             </property>
         </widget>
         <widget class="QLayoutWidget">

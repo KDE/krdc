@@ -88,6 +88,9 @@
                                 <property name="fullWidth">
                                     <bool>true</bool>
                                 </property>
+                                <property name="whatsThis" stdset="0">
+                                    <string>This list shows all hosts that you have visited and a summary of your settings for them. If you want to reset the setting for a host, you can delete it using the buttons below. When you connect again you can then re-configure them.</string>
+                                </property>
                             </widget>
                             <widget class="QLayoutWidget">
                                 <property name="name">
@@ -121,6 +124,9 @@
                                         <property name="text">
                                             <string>&amp;Remove Selected Host</string>
                                         </property>
+                                        <property name="whatsThis" stdset="0">
+                                            <string>Deletes the hosts that you have selected in the list above.</string>
+                                        </property>
                                     </widget>
                                     <widget class="QPushButton">
                                         <property name="name">
@@ -128,6 +134,9 @@
                                         </property>
                                         <property name="text">
                                             <string>Remove &amp;All Hosts</string>
+                                        </property>
+                                        <property name="whatsThis" stdset="0">
+                                            <string>Removes all hosts from the list.</string>
                                         </property>
                                     </widget>
                                 </hbox>
@@ -257,6 +266,9 @@
                                 <property name="text">
                                     <string>&amp;Enable encryption (secure, but slow and not always possible)</string>
                                 </property>
+                                <property name="whatsThis" stdset="0">
+                                    <string>Enable this option to encrypt the connection. Only newer servers support this option. Encrypting prevents others from eavesdropping, but can slow down the connection considerably.</string>
+                                </property>
                             </widget>
                         </vbox>
                     </widget>
@@ -266,6 +278,9 @@
                         </property>
                         <property name="text">
                             <string>Do not &amp;show the preferences dialog on new connections</string>
+                        </property>
+                        <property name="whatsThis" stdset="0">
+                            <string>Select this option if you do not want to be asked for the settings when connecting to a host. For hosts with existing profiles these profiles will be taken. New hosts will be configured with the defaults.</string>
                         </property>
                     </widget>
                     <spacer>
