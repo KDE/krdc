@@ -17,6 +17,7 @@
 
 #include "srvlocmaindialog.h"
 #include "kservicelocator.h"
+#include <config.h>
 #include <kurl.h>
 #include <klocale.h>
 #include <kdebug.h>
@@ -136,9 +137,11 @@ bool SrvLocMainDialog::ensureLocatorOpen() {
 		return true;
 	m_locator = new KServiceLocator();
 	if (!m_locator->available()) {
+#ifdef HAVE_SLP
 		KMessageBox::error(0, 
 				   i18n("Browsing the network is not possible. You probably did not install SLP support correctly."), 
 				   i18n("Browsing Not Possible"), false);
+#endif
 		return false;
 	}
 
