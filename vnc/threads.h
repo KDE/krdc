@@ -31,6 +31,7 @@
 #include "events.h"
 #include "vnctypes.h"
 
+class KVncView;
 
 
 struct MouseEvent {

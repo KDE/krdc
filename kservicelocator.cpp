@@ -23,7 +23,7 @@
 #endif
 
 #include "kservicelocator.h"
-#include "threadsafeeventreceiver.h"
+#include "vnc/threadsafeeventreceiver.h"
 #include <kdebug.h>
 #include <qregexp.h>
 

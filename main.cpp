@@ -47,7 +47,7 @@ static KCmdLineOptions options[] =
 	{ "h", 0, 0 },
 	{ "high-quality", I18N_NOOP("High quality mode, default (Hextile Encoding)."), 0 }, 
 	{ "e", 0, 0 },
-	{ "encodings ", I18N_NOOP("Override encoding list (e.g. 'hextile raw')."), 0 }, 
+	{ "encodings ", I18N_NOOP("Override VNC encoding list (e.g. 'hextile raw')."), 0 }, 
 	{ "p", 0, 0 },
 	{ "password-file ", I18N_NOOP("Provide the password in a file."), 0 }, 
 	{ "+[host]", I18N_NOOP("The name of the host, e.g. 'localhost:1'."), 0 },

@@ -21,7 +21,7 @@
 #include <kapplication.h>
 #include <qobject.h>
 #include "krdc.h"
-#include "kvncview.h"
+#include "vnc/kvncview.h"
 
 class MainController : public QObject {
 	Q_OBJECT

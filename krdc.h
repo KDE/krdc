@@ -26,7 +26,7 @@
 #include <qrect.h>
 #include <qtimer.h> 
 #include <qpixmap.h>
-#include "kvncview.h"
+#include "vnc/kvncview.h"
 #include "kfullscreenpanel.h"
 #include "keycapturedialog2.h"
 #include "rdpconnectingdialog.h"

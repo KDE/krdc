@@ -16,9 +16,6 @@
  ***************************************************************************/
 
 #include <stdlib.h> 
-#include "vnctypes.h"
-
-class KVncView;
 
 enum RemoteViewStatus {
 	REMOTE_VIEW_CONNECTING,
