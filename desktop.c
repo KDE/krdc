@@ -77,6 +77,7 @@ typedef struct {
         Uint16 w, h;
 } Rect;
 
+static void CopyDataToScreenRaw(char *buf, int x, int y, int width, int height);
 static void CopyBGR233ToScreen(CARD8 *buf, int x, int y, int width,int height);
 static void FillRectangleBGR233(CARD8 buf, int x, int y, int width,int height);
 static int CheckRectangle(int x, int y, int width, int height);
@@ -168,24 +169,33 @@ CopyDataToScreen(char *buf, int x, int y, int width, int height)
   if (!CheckRectangle(x, y, width, height))
     return;
 
-  if (!appData.useBGR233) {
-    int h;
-    int widthInBytes = width * myFormat.bitsPerPixel / 8;
-    int scrWidthInBytes = si.framebufferWidth * myFormat.bitsPerPixel / 8;
-
-    char *scr = (image->data + y * scrWidthInBytes
-		 + x * myFormat.bitsPerPixel / 8);
-
-    for (h = 0; h < height; h++) {
-      memcpy(scr, buf, widthInBytes);
-      buf += widthInBytes;
-      scr += scrWidthInBytes;
-    }
-  } else {
+  if (!appData.useBGR233)
+    CopyDataToScreenRaw(buf, x, y, width, height);
+  else
     CopyBGR233ToScreen((CARD8 *)buf, x, y, width, height);
-  }
 
   SyncScreenRegion(x, y, width, height);
+}
+
+/*
+ * CopyDataToScreenRaw.
+ */
+
+static void
+CopyDataToScreenRaw(char *buf, int x, int y, int width, int height)
+{
+  int h;
+  int widthInBytes = width * myFormat.bitsPerPixel / 8;
+  int scrWidthInBytes = image->bytes_per_line;
+  
+  char *scr = (image->data + y * scrWidthInBytes
+	       + x * myFormat.bitsPerPixel / 8);
+  
+  for (h = 0; h < height; h++) {
+    memcpy(scr, buf, widthInBytes);
+    buf += widthInBytes;
+    scr += scrWidthInBytes;
+  }
 }
 
 /*
@@ -267,7 +277,7 @@ FillRectangle8(CARD8 fg, int x, int y, int width, int height)
   if (!appData.useBGR233) {
     int h;
     int widthInBytes = width * myFormat.bitsPerPixel / 8;
-    int scrWidthInBytes = si.framebufferWidth * myFormat.bitsPerPixel / 8;
+    int scrWidthInBytes = image->bytes_per_line;
 
     char *scr = (image->data + y * scrWidthInBytes
 		 + x * myFormat.bitsPerPixel / 8);
@@ -358,7 +368,7 @@ void
 FillRectangle16(CARD16 fg, int x, int y, int width, int height)
 {
   int i, h;
-  int scrWidthInBytes = si.framebufferWidth * myFormat.bitsPerPixel / 8;
+  int scrWidthInBytes = image->bytes_per_line;
   
   char *scr = (image->data + y * scrWidthInBytes
 	       + x * myFormat.bitsPerPixel / 8);
@@ -383,7 +393,7 @@ void
 FillRectangle32(CARD32 fg, int x, int y, int width, int height)
 {
   int i, h;
-  int scrWidthInBytes = si.framebufferWidth * myFormat.bitsPerPixel / 8;
+  int scrWidthInBytes = image->bytes_per_line;
   
   char *scr = (image->data + y * scrWidthInBytes
 	       + x * myFormat.bitsPerPixel / 8);
@@ -408,7 +418,7 @@ void
 CopyDataFromScreen(char *buf, int x, int y, int width, int height)
 {
   int widthInBytes = width * myFormat.bitsPerPixel / 8;
-  int scrWidthInBytes = si.framebufferWidth * myFormat.bitsPerPixel / 8;
+  int scrWidthInBytes = image->bytes_per_line;
   char *src = (image->data + y * scrWidthInBytes
 	       + x * myFormat.bitsPerPixel / 8);
   int h;
@@ -435,7 +445,7 @@ CopyArea(int srcX, int srcY, int width, int height, int x, int y)
   if ((srcY+height < y) || (y+height < srcY) ||
       (srcX+width  < x) || (x+width  < srcX)) {
 
-    int scrWidthInBytes = si.framebufferWidth * myFormat.bitsPerPixel / 8;
+    int scrWidthInBytes = image->bytes_per_line;
     char *src = (image->data + srcY * scrWidthInBytes
 		 + srcX * myFormat.bitsPerPixel / 8);
     char *dst = (image->data + y * scrWidthInBytes
@@ -452,18 +462,18 @@ CopyArea(int srcX, int srcY, int width, int height, int x, int y)
       src += scrWidthInBytes;
       dst += scrWidthInBytes;
     }
-    SyncScreenRegion(x, y, width, height);
   }
-  else {
+  else { 
     char *buf = malloc(widthInBytes*height);
     if (!buf) {
       fprintf(stderr, "Out of memory, CopyArea impossible\n");
       return;
     }
     CopyDataFromScreen(buf, srcX, srcY, width, height);
-    CopyDataToScreen(buf, x, y, width, height);
+    CopyDataToScreenRaw(buf, x, y, width, height);
     free(buf);
   }
+  SyncScreenRegion(x, y, width, height);
 }
 
 void SyncScreenRegion(int x, int y, int width, int height) {
