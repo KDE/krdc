@@ -386,7 +386,7 @@ QSize KRDC::sizeHint()
 
 QPopupMenu *KRDC::createPopupMenu(QWidget *parent) const {
 	KPopupMenu *pu = new KPopupMenu(parent);
-	pu->insertItem(i18n("View only"), this, SLOT(viewOnlyToggled()), 0, VIEW_ONLY_ID);
+	pu->insertItem(i18n("View Only"), this, SLOT(viewOnlyToggled()), 0, VIEW_ONLY_ID);
 	pu->setCheckable(true);
 	pu->setItemChecked(VIEW_ONLY_ID, m_view->viewOnly());
 	return pu;
