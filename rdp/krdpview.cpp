@@ -191,14 +191,17 @@ void KRdpView::customEvent(QCustomEvent *e)
 // captures X11 events
 bool KRdpView::x11Event(XEvent *e)
 {
-	if((e->type != KeyPress && e->type != KeyRelease && e->type != ButtonPress && e->type != ButtonRelease &&
-	    e->type != MotionNotify && e->type != FocusIn && e->type != FocusOut && e->type != EnterNotify && 
-	    e->type != LeaveNotify && e->type != ClientMessage && e->type != Expose && e->type != MappingNotify) ||
-	   (e->type == ClientMessage && e->xclient.message_type != protocol_atom))
-		return QWidget::x11Event(e);
-
-	m_wthread.queueX11Event(e);
-	return true;
+	if(e->type == KeyPress || e->type == KeyRelease || e->type == ButtonPress || e->type == ButtonRelease ||
+	   e->type == MotionNotify || e->type == FocusIn || e->type == FocusOut || e->type == EnterNotify ||
+	   e->type == LeaveNotify || e->type == Expose || e->type == MappingNotify || 
+	   e->type == ClientMessage && e->xclient.message_type == protocol_atom)
+	{
+		m_wthread.queueX11Event(e);
+		if(e->type != MotionNotify)
+			return true;
+	}
+	
+	return QWidget::x11Event(e);
 }
 
 #include "krdpview.moc"
