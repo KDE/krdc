@@ -22,6 +22,7 @@
 #include <kapplication.h>
 #include <qclipboard.h>
 #include <qcursor.h>
+#include <qmap.h>
 
 #include "pointerlatencyometer.h"
 #include "vnctypes.h"
@@ -29,13 +30,13 @@
 
 enum DotCursorState {
 	DOT_CURSOR_ON,
-	DOT_CURSOR_OFF, 
-	DOT_CURSOR_AUTO 
+	DOT_CURSOR_OFF,
+	DOT_CURSOR_AUTO
 };
 
 class KVncView : public KRemoteView
 {
-	Q_OBJECT 
+	Q_OBJECT
 private:
 	ControllerThread m_cthread;
 	WriterThread m_wthread;
@@ -48,8 +49,9 @@ private:
 	bool m_scaling;
 	bool m_remoteMouseTracking;
 	bool m_viewOnly;
-	
+
 	int m_buttonMask;
+	QMap<unsigned int,bool> m_mods;
 
 	QString m_host;
 	int m_port;
@@ -66,6 +68,7 @@ private:
 	void paintMessage(const QString &msg);
 	void showDotCursor(bool show);
 	void showDotCursorInternal();
+	void unpressModifiers();
 
 protected:
 	void paintEvent(QPaintEvent*);
@@ -75,10 +78,11 @@ protected:
 	void mouseReleaseEvent(QMouseEvent*);
 	void mouseMoveEvent(QMouseEvent*);
 	void wheelEvent(QWheelEvent *);
+	void focusOutEvent(QFocusEvent *);
 	bool x11Event(XEvent*);
 
 public:
-	KVncView(QWidget* parent=0, const char *name=0, 
+	KVncView(QWidget* parent=0, const char *name=0,
 		 const QString &host = QString(""), int port = 5900,
 		 const QString &password = QString::null,
 		 Quality quality = QUALITY_UNKNOWN,
@@ -109,7 +113,7 @@ public:
 public slots:
         virtual void enableScaling(bool s);
 	virtual void setViewOnly(bool s);
-        virtual void pressKey(XEvent *k); 
+        virtual void pressKey(XEvent *k);
 
 
 private slots:

@@ -47,7 +47,7 @@
  * file.
  */
 AppData appData;
-bool appDataConfigured = false; 
+bool appDataConfigured = false;
 
 Display* dpy;
 
@@ -60,13 +60,13 @@ static QWaitCondition passwordWaiter;
 const unsigned int MAX_SELECTION_LENGTH = 4096;
 
 
-KVncView::KVncView(QWidget *parent, 
-		   const char *name, 
+KVncView::KVncView(QWidget *parent,
+		   const char *name,
 		   const QString &_host,
 		   int _port,
 		   const QString &_password,
 		   Quality quality,
-		   const QString &encodings) : 
+		   const QString &encodings) :
   KRemoteView(parent, name, Qt::WResizeNoErase | Qt::WRepaintNoErase | Qt::WStaticContents),
   m_cthread(this, m_wthread, m_quitFlag),
   m_wthread(this, m_quitFlag),
@@ -91,14 +91,14 @@ KVncView::KVncView(QWidget *parent,
 	connect(m_cb, SIGNAL(selectionChanged()), this, SLOT(selectionChanged()));
 
 	KStandardDirs *dirs = KGlobal::dirs();
-	QBitmap cursorBitmap(dirs->findResource("appdata", 
+	QBitmap cursorBitmap(dirs->findResource("appdata",
 						"pics/pointcursor.png"));
-	QBitmap cursorMask(dirs->findResource("appdata", 
+	QBitmap cursorMask(dirs->findResource("appdata",
 					      "pics/pointcursormask.png"));
 	m_cursor = QCursor(cursorBitmap, cursorMask);
 
 	if ((quality != QUALITY_UNKNOWN) ||
-	    !encodings.isNull()) 
+	    !encodings.isNull())
 		configureApp(quality, encodings);
 }
 
@@ -205,7 +205,7 @@ bool KVncView::checkLocalKRfb() {
 		return true;
 
 	setStatus(REMOTE_VIEW_DISCONNECTED);
-	KMessageBox::error(0, 
+	KMessageBox::error(0,
 			   i18n("It is not possible to connect to a local Desktop Sharing service."),
 			   i18n("Connection Failure"));
 	emit disconnectedError();
@@ -223,8 +223,8 @@ bool KVncView::start() {
 		bool showPrefs = config->readBoolEntry("vncShowHostPreferences", true);
 
 		HostPreferences hps(config);
-		SmartPtr<VncHostPref> hp = 
-			SmartPtr<VncHostPref>(hps.createHostPref(m_host, 
+		SmartPtr<VncHostPref> hp =
+			SmartPtr<VncHostPref>(hps.createHostPref(m_host,
 								 VncHostPref::VncType));
 		int ci = hp->quality();
 		if (showPrefs && hp->askOnConnect()) {
@@ -235,7 +235,7 @@ bool KVncView::start() {
 			vhp.nextStartupCheckbox->setChecked(true);
 			if (vhp.exec() == QDialog::Rejected)
 				return false;
-			
+
 			ci = vhp.qualityCombo->currentItem();
 			hp->setAskOnConnect(vhp.nextStartupCheckbox->isChecked());
 			hp->setQuality(ci);
@@ -320,7 +320,7 @@ void KVncView::paintEvent(QPaintEvent *e) {
 
 void KVncView::drawRegion(int x, int y, int w, int h) {
 	if (m_scaling)
-		DrawZoomedScreenRegionX11Thread(winId(), width(), height(), 
+		DrawZoomedScreenRegionX11Thread(winId(), width(), height(),
 						x, y, w, h);
 	else
 		DrawScreenRegionX11Thread(winId(), x, y, w, h);
@@ -328,20 +328,20 @@ void KVncView::drawRegion(int x, int y, int w, int h) {
 
 void KVncView::customEvent(QCustomEvent *e)
 {
-	if (e->type() == ScreenRepaintEventType) {  
+	if (e->type() == ScreenRepaintEventType) {
 		ScreenRepaintEvent *sre = (ScreenRepaintEvent*) e;
 		drawRegion(sre->x(), sre->y(),sre->width(), sre->height());
 	}
-	else if (e->type() == ScreenResizeEventType) {  
+	else if (e->type() == ScreenResizeEventType) {
 		ScreenResizeEvent *sre = (ScreenResizeEvent*) e;
 		m_framebufferSize = QSize(sre->width(), sre->height());
 		setFixedSize(m_framebufferSize);
 		emit changeSize(sre->width(), sre->height());
 	}
-	else if (e->type() == DesktopInitEventType) {  
+	else if (e->type() == DesktopInitEventType) {
 		m_cthread.desktopInit();
 	}
-	else if (e->type() == StatusChangeEventType) {  
+	else if (e->type() == StatusChangeEventType) {
 		StatusChangeEvent *sce = (StatusChangeEvent*) e;
 		setStatus(sce->status());
 		if (m_status == REMOTE_VIEW_CONNECTED) {
@@ -354,10 +354,10 @@ void KVncView::customEvent(QCustomEvent *e)
 			emit disconnected();
 		}
 	}
-	else if (e->type() == PasswordRequiredEventType) {  
+	else if (e->type() == PasswordRequiredEventType) {
 		emit showingPasswordDialog(true);
 
-		if (KPasswordDialog::getPassword(password, i18n("Access to the system requires a password.")) != KPasswordDialog::Accepted) 
+		if (KPasswordDialog::getPassword(password, i18n("Access to the system requires a password.")) != KPasswordDialog::Accepted)
 			password = QCString();
 
 		emit showingPasswordDialog(false);
@@ -366,57 +366,57 @@ void KVncView::customEvent(QCustomEvent *e)
 		passwordWaiter.wakeAll();
 		passwordLock.unlock();
 	}
-	else if (e->type() == FatalErrorEventType) {  
+	else if (e->type() == FatalErrorEventType) {
 		FatalErrorEvent *fee = (FatalErrorEvent*) e;
 		setStatus(REMOTE_VIEW_DISCONNECTED);
 		switch (fee->errorCode()) {
 		case ERROR_CONNECTION:
-			KMessageBox::error(0, 
+			KMessageBox::error(0,
 					   i18n("Connection attempt to host failed."),
 					   i18n("Connection Failure"));
 			break;
 		case ERROR_PROTOCOL:
-			KMessageBox::error(0, 
+			KMessageBox::error(0,
 					   i18n("Remote host is using an incompatible protocol."),
 					   i18n("Connection Failure"));
-			break;		
+			break;
 		case ERROR_IO:
-			KMessageBox::error(0, 
+			KMessageBox::error(0,
 					   i18n("The connection to the host has been interrupted."),
 					   i18n("Connection Failure"));
 			break;
 		case ERROR_SERVER_BLOCKED:
-			KMessageBox::error(0, 
+			KMessageBox::error(0,
 					   i18n("Connection failed. The server does not accept new connections."),
 					   i18n("Connection Failure"));
 			break;
 		case ERROR_NAME:
-			KMessageBox::error(0, 
+			KMessageBox::error(0,
 					   i18n("Connection failed. A server with the given name cannot be found."),
 					   i18n("Connection Failure"));
 			break;
 		case ERROR_NO_SERVER:
-			KMessageBox::error(0, 
+			KMessageBox::error(0,
 					   i18n("Connection failed. No server running at the given address and port."),
 					   i18n("Connection Failure"));
 			break;
 		case ERROR_AUTHENTICATION:
-			KMessageBox::error(0, 
+			KMessageBox::error(0,
 					   i18n("Authentication failed. Connection aborted."),
 					   i18n("Authentication Failure"));
 			break;
 		default:
-			KMessageBox::error(0, 
+			KMessageBox::error(0,
 					   i18n("Unknown error."),
 					   i18n("Unknown Error"));
 			break;
 		}
 		emit disconnectedError();
 	}
-	else if (e->type() == BeepEventType) {  
+	else if (e->type() == BeepEventType) {
 		QApplication::beep();
 	}
-	else if (e->type() == ServerCutEventType) { 
+	else if (e->type() == ServerCutEventType) {
 		ServerCutEvent *sce = (ServerCutEvent*) e;
 		m_dontSendCb = true;
 		m_cb->setText(sce->bytes());
@@ -534,6 +534,8 @@ void KVncView::pressKey(XEvent *xe) {
 		m_wthread.queueKeyEvent(XK_Control_L, false);
 	if (mod & KKeyNative::modX(KKey::SHIFT))
 		m_wthread.queueKeyEvent(XK_Shift_L, false);
+
+	m_mods.clear();
 }
 
 bool KVncView::x11Event(XEvent *e) {
@@ -545,9 +547,40 @@ bool KVncView::x11Event(XEvent *e) {
 	else
 		return QWidget::x11Event(e);
 
-	if (!m_viewOnly)
-		m_wthread.queueKeyEvent(KKeyNative(e).sym(), pressed);
+	if (!m_viewOnly) {
+		unsigned int s = KKeyNative(e).sym();
+
+		switch (s) {
+		case XK_Meta_L:
+		case XK_Alt_L:
+		case XK_Control_L:
+		case XK_Shift_L:
+		case XK_Meta_R:
+		case XK_Alt_R:
+		case XK_Control_R:
+		case XK_Shift_R:
+			if (pressed)
+				m_mods[s] = true;
+			else
+				m_mods.remove(s);
+		}
+		m_wthread.queueKeyEvent(s, pressed);
+	}
 	return true;
+}
+
+void KVncView::unpressModifiers() {
+	QValueList<unsigned int> keys = m_mods.keys();
+	QValueList<unsigned int>::const_iterator it = keys.begin();
+	while (it != keys.end()) {
+		m_wthread.queueKeyEvent(*it, false);
+		it++;
+	}
+	m_mods.clear();
+}
+
+void KVncView::focusOutEvent(QFocusEvent *) {
+	unpressModifiers();
 }
 
 QSize KVncView::sizeHint() {
@@ -620,7 +653,7 @@ int getPassword(char *passwd, int pwlen) {
 }
 
 extern int isQuitFlagSet() {
-	return kvncview->isQuitting() ? 1 : 0; 
+	return kvncview->isQuitting() ? 1 : 0;
 }
 
 extern void DrawScreenRegion(int x, int y, int width, int height) {
@@ -628,7 +661,7 @@ extern void DrawScreenRegion(int x, int y, int width, int height) {
 	kvncview->drawRegion(x, y, width, height);
 	KApplication::kApplication()->unlock();
 */
-	QApplication::postEvent(kvncview, new ScreenRepaintEvent(x, y, width, height));	
+	QApplication::postEvent(kvncview, new ScreenRepaintEvent(x, y, width, height));
 }
 
 // call only from x11 thread!
@@ -649,7 +682,7 @@ extern void UnlockFramebuffer() {
 }
 
 extern void beep() {
-	QApplication::postEvent(kvncview, new BeepEvent());	
+	QApplication::postEvent(kvncview, new BeepEvent());
 }
 
 extern void newServerCut(char *bytes, int length) {
