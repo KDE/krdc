@@ -55,6 +55,7 @@ typedef QValueList<HostPrefPtr> HostPrefPtrList;
 class HostPreferences {
 public:
 	static HostPreferences *instance();
+	~HostPreferences();
 
 	HostPrefPtr getHostPref(const QString &host, const QString &type);
 	HostPrefPtr createHostPref(const QString &host, const QString &type);
@@ -75,7 +76,6 @@ public:
 
 private:
 	HostPreferences();
-	~HostPreferences();
 
 	KConfig *m_config;
 	static HostPreferences *m_instance;

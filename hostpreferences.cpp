@@ -22,16 +22,18 @@
 
 #include <kapplication.h>
 #include <kconfig.h>
+#include <kstaticdeleter.h>
 
 #include <qregexp.h>
 #include <qmap.h>
 
 HostPreferences *HostPreferences::m_instance = 0;
+static KStaticDeleter<HostPreferences> sd;
 
 HostPreferences *HostPreferences::instance()
 {
 	if ( m_instance == 0 )
-		m_instance = new HostPreferences();
+		sd.setObject( m_instance, new HostPreferences() );
 
 	return m_instance;
 }
@@ -68,7 +70,8 @@ HostPreferences::HostPreferences() {
 }
 
 HostPreferences::~HostPreferences() {
-	delete m_instance;
+  if ( m_instance == this )
+    sd.setObject( m_instance, 0, false );
 }
 
 HostPrefPtr HostPreferences::getHostPref(const QString &host, const QString &type) {
