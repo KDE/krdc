@@ -42,7 +42,6 @@
 // global variables from rdesktop
 extern int width;   // width of the remote desktop
 extern int height;  // height of the remote desktop
-extern int sock;    // rdp socket
 
 static KRdpView *krdpview;
 

@@ -19,7 +19,11 @@
 */
 
 #include "rdesktop.h"
-#include "openssl/rc4.h"
+#ifdef WITH_OPENSSL
+#include <openssl/rc4.h>
+#else
+#include "crypto/rc4.h"
+#endif
 
 extern char username[16];
 extern char hostname[16];

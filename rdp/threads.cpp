@@ -30,6 +30,9 @@
 #include "krdpview.h"
 #include "threads.h"
 
+// global variables from rdesktop
+extern char keymapname[16];
+
 static const int WAIT_PERIOD = 8000;
 static const unsigned int X11_QUEUE_SIZE = 8192;
 
@@ -74,6 +77,8 @@ void RdpControllerThread::run()
 	uint8 type;
 	STREAM s;
 
+	strcpy(keymapname, "en-us"); // default keyboard layout to en-us
+	
 	// start connecting
 	changeStatus(REMOTE_VIEW_CONNECTING);
   
