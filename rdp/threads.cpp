@@ -252,5 +252,6 @@ bool RdpWriterThread::sendX11Events(const QValueList<XEvent> &events)
 
 char *getEventName(XEvent *e)
 {
-
+ Q_UNUSED(e);
+ return 0;
 }
