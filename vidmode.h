@@ -15,6 +15,9 @@
  *                                                                         *
  ***************************************************************************/
 
+#ifndef VIDMODE_H
+#define VIDMODE_H
+
 struct Resolution {
   Resolution(int w, int h, int s) :
     valid(true), width(w), height(h), screen(s) {
@@ -33,3 +36,5 @@ Resolution vidmodeFullscreenSwitch(Display *dpy, int screen, int sw, int sh, int
 
 void grabInput(Display *dpy, unsigned int winId);
 void ungrabInput(Display *dpy);
+
+#endif
