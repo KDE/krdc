@@ -16,7 +16,6 @@
  ***************************************************************************/
 
 #include "kvncview.h"
-#include "passworddialog.h"
 #include "vnchostpreferences.h"
 #include "vnchostpref.h"
 #include <kdebug.h>
@@ -27,6 +26,7 @@
 #include <kapplication.h>
 #include <kconfig.h>
 #include <kkeynative.h>
+#include <kpassdlg.h>
 #include <qdatastream.h>
 #include <dcopclient.h>
 #include <qbitmap.h>
@@ -53,7 +53,7 @@ Display* dpy;
 
 static KVncView *kvncview;
 
-static QString password;
+static QCString password;
 static QMutex passwordLock;
 static QWaitCondition passwordWaiter;
 
@@ -81,7 +81,7 @@ KVncView::KVncView(QWidget *parent,
   m_dontSendCb(false)
 {
 	kvncview = this;
-	password = _password;
+	password = _password.latin1();
 	dpy = qt_xdisplay();
 	setFixedSize(16,16);
 	setFocusPolicy(QWidget::StrongFocus);
@@ -355,15 +355,10 @@ void KVncView::customEvent(QCustomEvent *e)
 		}
 	}
 	else if (e->type() == PasswordRequiredEventType) {  
-		PasswordDialog pd(0, 0, true);
-
 		emit showingPasswordDialog(true);
 
-		if (pd.exec() == QDialog::Accepted) 
-			password = pd.passwordInput->text();
-		else {
-			password = QString::null;
-		}
+		if (KPasswordDialog::getPassword(password, i18n("Access to the system requires a password.")) != KPasswordDialog::Accepted) 
+			password = QCString();
 
 		emit showingPasswordDialog(false);
 
@@ -612,7 +607,7 @@ int getPassword(char *passwd, int pwlen) {
 		passwordWaiter.wait(&passwordLock);
 	}
 	if (!password.isNull())
-		strncpy(passwd, password.latin1(), pwlen);
+		strncpy(passwd, (const char*)password, pwlen);
 	else {
 		passwd[0] = 0;
 		retV = 0;
