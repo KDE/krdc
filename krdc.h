@@ -72,6 +72,9 @@ private:
 	QRect m_oldWindowGeometry; // geometry before switching to fullscreen
 	bool m_wasScaling; //whether scaling was enabled in norm mode
 
+	static QString m_lastHost; //remembers last value of host input
+	static int m_lastQuality; // remembers last quality selection
+
 	void configureApp(Quality q);
 	void parseHost(QString &s, QString &serverHost, int &serverPort);
 

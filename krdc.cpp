@@ -49,6 +49,8 @@ void QScrollView2::mouseMoveEvent( QMouseEvent *e )
     e->ignore();
 }
 
+QString KRDC::m_lastHost = "";
+int KRDC::m_lastQuality = 0;
 
 KRDC::KRDC(WindowMode wm, const QString &host, Quality q, const QString &encodings) : 
   QWidget(0, 0),
@@ -88,6 +90,8 @@ bool KRDC::start()
 		ncd.serverInput->completionObject()->setItems(list);
 		list = config->readListEntry("serverHistory");
 		ncd.serverInput->setHistoryItems(list);
+		ncd.serverInput->setEditText(m_lastHost);
+		ncd.qualityCombo->setCurrentItem(m_lastQuality);
 
 		if ((ncd.exec() == QDialog::Rejected) ||
 		    (ncd.serverInput->currentText().length() == 0)) {
@@ -95,10 +99,12 @@ bool KRDC::start()
 		}
 
 		QString host = ncd.serverInput->currentText();
+		m_lastHost = host;
 		parseHost(host, vncServerHost, vncServerPort);
 		m_host = host;
 
 		int ci = ncd.qualityCombo->currentItem();
+		m_lastQuality = ci;
 		if (ci == 0) 
 			m_quality = QUALITY_HIGH;
 		else if (ci == 1)
