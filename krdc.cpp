@@ -446,8 +446,10 @@ void KRDC::switchToNormal(bool scaling)
 
 	m_layout->activate();
 
-	if (!fromFullscreen)
+	if (!fromFullscreen) {
 		show();
+		m_view->update();
+	}
 	else
 		showNormal();
 

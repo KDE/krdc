@@ -742,7 +742,7 @@ HandleRFBServerMessage()
 	  if (!ReadFromRFBServer(((char *)&scmsg)+1, 
 				 sizeof(rfbSoftCursorMove)- 1))
 	    return False;
-	  if (!HandleSoftCursorMove(&scmsg.move, &rect))
+	  if (!HandleSoftCursorMove(&scmsg.move, &rect.r))
 	    return False;
 	}
 	else if((scmsg.type >= rfbSoftCursorSetIconOffset) && 
@@ -750,7 +750,7 @@ HandleRFBServerMessage()
 	  if (!ReadFromRFBServer(((char *)&scmsg)+1, 
 				 sizeof(rfbSoftCursorSetImage)- 1))
 	    return False;
-	  if (!HandleSoftCursorSetImage(&scmsg.setImage, &rect))
+	  if (!HandleSoftCursorSetImage(&scmsg.setImage, &rect.r))
 	    return False;
 	}
 	else {
