@@ -74,3 +74,5 @@ void MainDialog::slotClose()
 
   KDialogBase::reject();
 }
+
+#include "maindialog.moc"

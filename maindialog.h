@@ -26,6 +26,7 @@ class MainDialogWidget;
 
 class MainDialog : public KDialogBase
 {
+    Q_OBJECT
   public:
     MainDialog( QWidget *parent, const char *name=0 );
     ~MainDialog() {}
