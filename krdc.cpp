@@ -45,7 +45,6 @@
 #include <qobjectlist.h>
 #include <qbitmap.h>
 
-
 #define BUMP_SCROLL_CONSTANT (200)
 
 const int KRDC::TOOLBAR_AUTOHIDE_TIMEOUT = 2000;
@@ -401,9 +400,11 @@ void KRDC::enableFullscreen(bool on)
 		if (m_isFullscreen != WINDOW_MODE_FULLSCREEN)
 			switchToFullscreen(m_view->scaling());
 	}
-	else
+	else {
 		if (m_isFullscreen != WINDOW_MODE_NORMAL)
 			switchToNormal(m_view->scaling() || m_windowScaling);
+	}
+	m_view->switchFullscreen(on);
 }
 
 QSize KRDC::sizeHint()

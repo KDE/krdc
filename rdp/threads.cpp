@@ -118,7 +118,6 @@ void RdpControllerThread::run()
 	// start the writer thread
 	m_wthread.start();
 
-
 	// the main loop
 	while(!m_quitFlag && (s = rdp_recv(&type)) != NULL)
 	{
@@ -192,6 +191,8 @@ void RdpWriterThread::run()
 {
 	QValueList<XEvent> x11Events;
 
+	m_waiter.wait(1000);
+	
 	while(!m_quitFlag)
 	{
 		m_lock.lock();
@@ -228,7 +229,6 @@ bool RdpWriterThread::sendX11Events(const QValueList<XEvent> &events)
 	{
 		if(!xwin_process_event(*it))
 			return false;
-
 		it++;
 	}
 	return true;

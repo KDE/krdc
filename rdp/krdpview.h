@@ -55,6 +55,7 @@ class KRdpView : public KRemoteView
 		virtual bool start();                    // open a connection
     
 	public slots:
+		virtual void switchFullscreen(bool on);
 		virtual void pressKey(XEvent *k);        // send a generated key to the server
 
 	private:

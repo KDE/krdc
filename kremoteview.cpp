@@ -72,4 +72,7 @@ bool KRemoteView::scaling() {
 void KRemoteView::enableScaling(bool) {
 }
 
+void KRemoteView::switchFullscreen(bool) {
+}
+
 #include "kremoteview.moc"

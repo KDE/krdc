@@ -128,6 +128,14 @@ public slots:
 	 */
         virtual void enableScaling(bool s);
 
+	/**
+	 * Called to let the backend know it when
+	 * we switch from/to fullscreen.
+	 * @param on true when switching to fullscreen,
+	 *           false when switching from fullscreen.
+	 */
+	virtual void switchFullscreen(bool on);
+	
         /**
 	 * Sends a key to the remote server.
 	 * @param k the key to send
