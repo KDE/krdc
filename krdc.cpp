@@ -58,7 +58,7 @@ const int FS_HOSTLABEL_ID = 4;
 const int FS_ICONIFY_ID = 5;
 const int FS_CLOSE_ID = 6;
 
-const int KRDC::TOOLBAR_AUTOHIDE_TIMEOUT = 2000;
+const int KRDC::TOOLBAR_AUTOHIDE_TIMEOUT = 1000;
 const int KRDC::TOOLBAR_FPS_1000 = 10000;
 const int KRDC::TOOLBAR_SPEED_DOWN = 34;
 const int KRDC::TOOLBAR_SPEED_UP = 20;
