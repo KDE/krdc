@@ -37,13 +37,6 @@ as Authors, publish date, the abstract, and Keywords -->
 
 <legalnotice>&FDLNotice;</legalnotice>
 
-<!-- Date and version information of the documentation
-Don't forget to include this last date and this last revision number, we
-need them for translation coordination !
-Please respect the format of the date (YYYY-MM-DD) and of the version
-(V.MM.LL), it could be used by automation scripts.
-Do NOT change these in the translation. -->
-
 <date>2003-09-27</date>
 <releaseinfo>1.0.0</releaseinfo>
 
@@ -54,10 +47,6 @@ the desktop session on another machine that is running a compatible
 (VNC) server.
 </para>
 </abstract>
-
-<!-- This is a set of Keywords for indexing by search engines.
-Please at least include KDE, the KDE package it is in, the name
- of your application, and a few relevant keywords. -->
 
 <keywordset>
 <keyword>KDE</keyword>
@@ -74,22 +63,8 @@ Please at least include KDE, the KDE package it is in, the name
 
 </bookinfo>
 
-<!-- The contents of the documentation begin here.  Label
-each chapter so with the id attribute. This is necessary for two reasons: it
-allows you to easily reference the chapter from other chapters of your
-document, and if there is no ID, the name of the generated HTML files will vary
-from time to time making it hard to manage for maintainers and for the CVS
-system. Any chapter labelled (OPTIONAL) may be left out at the author's
-discretion. Other chapters should not be left out in order to maintain a
-consistent documentation style across all KDE apps. -->
-
 <chapter id="introduction">
 <title>Introduction</title>
-
-<!-- The introduction chapter contains a brief introduction for the
-application that explains what it does and where to report
-problems. Basically a long version of the abstract.  Don't include a
-revision history. (see installation appendix comment) -->
 
 <para>
 &krdc; is a client application that allows you to view or even control
@@ -158,10 +133,6 @@ use &krdc; over other links, but performance is unlikely to be as good.
 <chapter id="using-krdc">
 <title>Using &krdc;</title>
 
-<!-- This chapter should tell the user how to use your app. You should use as
-many sections (Chapter, Sect1, Sect3, etc...) as is necessary to fully document
-your application. -->
-
 <para>
 It is very easy to use &krdc; - it has a simple interface, as shown in
 the screenshot below.
@@ -211,7 +182,7 @@ If you click on the <guibutton>Browse &gt;&gt;</guibutton> button, you
 will get the normal interface back.
 </para>
 
-<sect1><title>Connecting &krdc; to compatible servers</title>
+<sect1 id="compatible-versions"><title>Connecting &krdc; to compatible servers</title>
 
 <para>
 &krdc; is a client, and it needs to be used with compatible
@@ -356,7 +327,7 @@ of the main window.
 
 </sect1>
 
-<sect1><title>What happens when you connect</title>
+<sect1 id="connection"><title>What happens when you connect</title>
 
 <para>
 No matter how you select the server to connect to, the next thing that
@@ -448,7 +419,7 @@ can begin using &krdc; to observe or control the remote desktop.
 
 </sect1>
 
-<sect1><title>Controlling the remote desktop connection</title>
+<sect1 id="controlling-remote"><title>Controlling the remote desktop connection</title>
 
 <para>
 Having connected to the remote server, you would normally use the
@@ -552,7 +523,7 @@ red "close" icon, which is shown below.
 
 </sect1>
 
-<sect1><title>Managing &krdc; configuration</title>
+<sect1 id="managing-configuration"><title>Managing &krdc; configuration</title>
 <para>
 Using the <guibutton>Preferences...</guibutton> button in the bottom
 left hand corner of the the &krdc; main window, you can open a dialog
