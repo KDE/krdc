@@ -38,7 +38,7 @@ enum WindowMode {
 	WINDOW_MODE_FULLSCREEN
 };
 
-// Overloaded QScrollView, to let mouse move events through to vnc widget
+// Overloaded QScrollView, to let mouse move events through to remote widget
 class QScrollView2 : public QScrollView {
 public:
 	QScrollView2(QWidget *w, const char *name);
@@ -52,10 +52,10 @@ class KRDC : public QWidget
 	Q_OBJECT 
 private:
 	QVBoxLayout *m_layout;     // the layout for autosizing the scrollview
-	QScrollView *m_scrollView; // scrollview that contains the vnc widget
+	QScrollView *m_scrollView; // scrollview that contains the remote widget
 	KProgressDialog *m_progressDialog; // dialog, displayed while connecting
 	KProgress *m_progress;             // progress bar for the dialog
-	KVncView *m_view;                  // the vnc widget
+	KRemoteView *m_view;                  // the remote widget (e.g. KVncView)
 	RDPConnectingDialog *m_rdpConnDialog; // the rdp connection dialog
 
 	KeyCaptureDialog2 *m_keyCaptureDialog; // dialog for key capturing

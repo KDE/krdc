@@ -144,15 +144,15 @@ bool KRDC::start(bool onlyFailOnCancel)
 {
 	QString userName, password;
 	KConfig *config = KApplication::kApplication()->config();
-	QString vncServerHost;
-	int vncServerPort = 5900;
+	QString serverHost;
+	int serverPort = 5900;
 
 
 	if(m_host.startsWith("rdp://")) 
 		return startRDP(m_host.right(m_host.length() - 6),
 				onlyFailOnCancel);
 	if (!m_host.isNull()) {
-		if (!parseHost(m_host, vncServerHost, vncServerPort,
+		if (!parseHost(m_host, serverHost, serverPort,
 			       userName, password)) {
 			KMessageBox::error(0,
 			   i18n("The entered host does not have the required form."),
@@ -183,7 +183,7 @@ bool KRDC::start(bool onlyFailOnCancel)
 		if(m_host.startsWith("rdp://")) 
 			return startRDP(m_host.right(m_host.length() - 6),
 					onlyFailOnCancel);
-		if (!parseHost(m_host, vncServerHost, vncServerPort,
+		if (!parseHost(m_host, serverHost, serverPort,
 			       userName, password)) {
 			KMessageBox::error(0,
 					   i18n("The entered host does not have the required form."),
@@ -220,7 +220,7 @@ bool KRDC::start(bool onlyFailOnCancel)
 
 	m_scrollView = new QScrollView2(this, "remote scrollview");
 	m_scrollView->setFrameStyle(QFrame::NoFrame);
-	m_view = new KVncView(this, 0, vncServerHost, vncServerPort,
+	m_view = new KVncView(this, 0, serverHost, serverPort,
 			      m_password.isNull() ? password : m_password,
 			      &m_appData);
 	m_scrollView->addChild(m_view);
@@ -229,7 +229,7 @@ bool KRDC::start(bool onlyFailOnCancel)
 	connect(m_view, SIGNAL(changeSize(int,int)), SLOT(setSize(int,int)));
 	connect(m_view, SIGNAL(connected()), SLOT(show()));
 	connect(m_view, SIGNAL(disconnected()), SIGNAL(disconnected()));
-	// note that the disconnectedError() will be disconnected when kvncview
+	// note that the disconnectedError() will be disconnected when kremoteview
 	// is completely initialized
 	connect(m_view, SIGNAL(disconnectedError()), SIGNAL(disconnectedError()));
 	connect(m_view, SIGNAL(statusChanged(RemoteViewStatus)),

@@ -18,11 +18,9 @@
 #ifndef KVNCVIEW_H
 #define KVNCVIEW_H
 
-
+#include "kremoteview.h"
 #include <kapplication.h>
-#include <kshortcut.h>
 #include <qclipboard.h>
-#include <qwidget.h>
 #include <qcursor.h>
 
 #include "threadsafeeventreceiver.h"
@@ -36,7 +34,7 @@ enum DotCursorState {
 	DOT_CURSOR_AUTO 
 };
 
-class KVncView : public QWidget, public ThreadSafeEventReceiver
+class KVncView : public KRemoteView, public ThreadSafeEventReceiver
 {
 	Q_OBJECT 
 private:
@@ -86,34 +84,25 @@ public:
 	QSize sizeHint();
 	int heightForWidth (int w) const;
 	void drawRegion(int x, int y, int w, int h);
-	bool scaling();
-	QSize framebufferSize();
+	virtual bool scaling();
+	virtual QSize framebufferSize();
 	void setRemoteMouseTracking(bool s);
 	bool remoteMouseTracking();
 
-	void startQuitting();
-	bool isQuitting();
+	virtual void startQuitting();
+	virtual bool isQuitting();
 	void disableCursor();
-	QString host();
-	int port();
-	bool start();
-	enum RemoteViewStatus status();
+	virtual QString host();
+	virtual int port();
+	virtual bool start();
+	virtual enum RemoteViewStatus status();
 
 public slots:
-        void enableScaling(bool s);
-        void pressKey(KKeyNative k); 
+        virtual void enableScaling(bool s);
+        virtual void pressKey(KKeyNative k); 
 
 private slots:
 	void selectionChanged();
-
-signals:
-	void changeSize(int x, int y);
-	void connected();
-	void disconnected();
-	void disconnectedError();
-	void statusChanged(RemoteViewStatus s);
-	void showingPasswordDialog(bool b);
-	void mouseStateChanged(int x, int y, int buttonMask);
 };
 
 #endif

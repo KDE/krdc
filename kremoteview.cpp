@@ -1,7 +1,7 @@
 /***************************************************************************
-                          main.h  -  controller object
+                   kremoteview.cpp  -  widget that shows the remote framebuffer
                              -------------------
-    begin                : Sat Jun 15 02:12:00 CET 2002
+    begin                : Wed Dec 26 00:21:14 CET 2002
     copyright            : (C) 2002 by Tim Jansen
     email                : tim@tjansen.de
  ***************************************************************************/
@@ -15,37 +15,12 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef MAIN_H
-#define MAIN_H
-
-#include <kapplication.h>
-#include <qobject.h>
-#include "krdc.h"
 #include "kremoteview.h"
 
-class MainController : public QObject {
-	Q_OBJECT
-private:
-	KRDC *m_krdc;
-	WindowMode m_windowMode;
-	QString m_host, m_encodings, m_password;
-	Quality m_quality;
+KRemoteView::KRemoteView(QWidget *parent, 
+			 const char *name, 
+			 WFlags f) : 
+	QWidget(parent, name, f) {
+}
 
-	KApplication *m_app;
-
-public:
-	MainController(KApplication *app, WindowMode wm,
-		       const QString &host,
-		       Quality quality,
-		       const QString &encodings,
-		       const QString &password);
-	~MainController();
-	int main();
-	bool start();
-
-private slots:
-	void errorRestartRequested();
-	void errorRestart();
-};
-
-#endif
+#include "kremoteview.moc"

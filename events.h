@@ -17,6 +17,9 @@
 
 #include <stdlib.h> 
 
+#ifndef EVENTS_H
+#define EVENTS_H
+
 enum RemoteViewStatus {
 	REMOTE_VIEW_CONNECTING,
 	REMOTE_VIEW_AUTHENTICATING,
@@ -171,3 +174,4 @@ public:
 	int buttonMask() const { return m_buttonMask; };
 };
 
+#endif

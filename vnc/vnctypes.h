@@ -53,12 +53,6 @@ typedef struct {
 
 } AppData;
 
-typedef enum {
-  QUALITY_UNKNOWN,
-  QUALITY_HIGH,
-  QUALITY_MEDIUM,
-  QUALITY_LOW
-} Quality;
 
 enum InitStatus {
   INIT_OK = 0,
