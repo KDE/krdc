@@ -32,6 +32,7 @@
 #include <ktoolbar.h>
 #include <ktoolbarbutton.h>
 #include <kpopupmenu.h>
+#include <qdockarea.h>
 #include <qlabel.h>
 #include <qtoolbutton.h>
 #include <qwhatsthis.h>
@@ -93,6 +94,7 @@ KRDC::KRDC(WindowMode wm, const QString &host,
   m_view(0),
   m_fsToolbar(0),
   m_toolbar(0),
+  m_dockArea(0),
   m_popup(0),
   m_ftAutoHide(false),
   m_showProgress(false),
@@ -186,6 +188,9 @@ bool KRDC::start()
 
 	m_scrollView = new QScrollView2(this, "remote scrollview");
 	m_scrollView->setFrameStyle(QFrame::NoFrame);
+	m_scrollView->setSizePolicy(QSizePolicy(QSizePolicy::Expanding,
+					QSizePolicy::Expanding));
+
 	if(m_protocol == PROTOCOL_AUTO || m_protocol == PROTOCOL_VNC)
 		m_view = new KVncView(this, 0, serverHost, serverPort,
 				      m_password.isNull() ? password : m_password,
@@ -364,9 +369,12 @@ void KRDC::enableFullscreen(bool on)
 
 QSize KRDC::sizeHint()
 {
-	if ((m_isFullscreen != WINDOW_MODE_FULLSCREEN) && m_toolbar)
+	if ((m_isFullscreen != WINDOW_MODE_FULLSCREEN) && m_toolbar) {
+		int dockHint = m_dockArea->sizeHint().height();
+		dockHint = dockHint < 1 ? 1 : dockHint; // fix wrong size hint
 		return QSize(m_view->framebufferSize().width(),
-			 m_toolbar->sizeHint().height() + m_view->framebufferSize().height());
+			  dockHint + m_view->framebufferSize().height());
+	}
 	else
 		return m_view->framebufferSize();
 }
@@ -411,6 +419,9 @@ void KRDC::switchToFullscreen(bool scaling)
 		m_toolbar->hide();
 		m_toolbar->deleteLater();
 		m_toolbar = 0;
+		m_dockArea->hide();
+		m_dockArea->deleteLater();
+		m_dockArea = 0;
 	}
 	if (m_popup) {
 		m_popup->deleteLater();
@@ -547,11 +558,13 @@ void KRDC::switchToNormal(bool scaling)
 	}
 
 	if (!m_toolbar) {
-		KToolBar *t = new KToolBar(this);
+		m_dockArea = new QDockArea(Qt::Horizontal, QDockArea::Normal, this);
+		m_dockArea->setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding,
+					QSizePolicy::Fixed));
+		KToolBar *t = new KToolBar(m_dockArea);
 		m_toolbar = t;
 		t->setIconText(KToolBar::IconTextRight);
-		t->setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding,
-					     QSizePolicy::Fixed));
+		connect(t, SIGNAL(placeChanged(QDockWindow::Place)), SLOT(toolbarChanged()));
 		t->insertButton("window_fullscreen", 0, true, i18n("Fullscreen"));
 		KToolBarButton *fullscreenButton = t->getButton(0);
 		QToolTip::add(fullscreenButton, i18n("Fullscreen"));
@@ -581,6 +594,12 @@ void KRDC::switchToNormal(bool scaling)
 		KToolBarButton *advancedButton = t->getButton(3);
 		QToolTip::add(advancedButton, i18n("Advanced options"));
 		advancedButton->setPopupDelay(0);
+
+		if (m_layout)
+			delete m_layout;
+		m_layout = new QVBoxLayout(this);
+		m_layout->addWidget(m_dockArea);
+		m_layout->addWidget(m_scrollView);
 	}
 
 	if (scaling) {
@@ -591,12 +610,6 @@ void KRDC::switchToNormal(bool scaling)
 		m_scrollView->removeEventFilter(this);
 		m_view->resize(m_view->framebufferSize());
 	}
-
-	if (m_layout)
-		delete m_layout;
-	m_layout = new QVBoxLayout(this);
-	m_layout->addWidget(m_toolbar);
-	m_layout->addWidget(m_scrollView);
 
 	setMaximumSize(sizeHint());
 
@@ -638,6 +651,18 @@ void KRDC::iconify()
 	showMinimized();
 	m_fullscreenMinimized = true;
 }
+
+void KRDC::toolbarChanged() {
+	setMaximumSize(sizeHint());
+
+	// resize window when toolbar is docked and it was maximized
+	QSize fs = m_view->framebufferSize();
+	QSize cs = size();
+	QSize cs1(cs.width(), cs.height()-1); // adjusted for QDockArea.height()==1
+	if ((fs == cs) || (fs == cs1))
+		resize(sizeHint());
+}
+
 
 bool KRDC::event(QEvent *e) {
 /* used to change resolution when fullscreen was minimized */

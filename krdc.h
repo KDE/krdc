@@ -35,6 +35,7 @@
 class QPixmap;
 class KToolBar;
 class QPopupMenu;
+class QDockArea;
 
 enum WindowMode {
 	WINDOW_MODE_AUTO,
@@ -74,6 +75,7 @@ private:
                                            //     (invalid in normal mode)
 	QPixmap m_pinup, m_pindown;        // fs toolbar imaged for autohide button
 	KToolBar *m_toolbar;               // toolbar in normal mode (0 in fs mode)
+	QDockArea *m_dockArea;             // dock area for toolbar in normal mode (0 in fs mode)
 	QPopupMenu *m_popup;               // advanced options popup (0 in fs mode)
 	QDesktopWidget m_desktopWidget;
 
@@ -147,7 +149,7 @@ private slots:
 
 	void setSize(int w, int h);
 	void iconify();
-
+	void toolbarChanged();
 	void bumpScroll();
 
 	void toggleFsToolbarAutoHide();
