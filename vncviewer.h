@@ -121,7 +121,6 @@ extern void DrawZoomedScreenRegionX11Thread(Window win, int zwidth,
 					    int width, int height);
 extern void DrawScreenRegionX11Thread(Window win, int x, int y, 
 				      int width, int height);
-extern void ShmSync(void);
 extern void Cleanup(void);
 extern XImage *CreateShmZoomImage(void);
 extern XImage *CreateShmImage(void);

@@ -121,7 +121,7 @@ DesktopInit(Window win)
 {
   XGCValues gcv;
 
-  /* image = CreateShmImage(); */
+  image = CreateShmImage();
 
   if (!image) {
     useShm = False;
@@ -589,11 +589,6 @@ void SyncScreenRegion(int x, int y, int width, int height) {
   DrawScreenRegion(dx, dy, dw, dh);
 }
 
-void ShmSync(void) {
-    if (useShm)
-      XSync(dpy, False);
-}
-
 /*
  * ToplevelInitBeforeRealization sets the title, geometry and other resources
  * on the toplevel window.
@@ -634,7 +629,7 @@ ShmCleanup()
 }
 
 static int
-ShmCreationXErrorHandler(Display* d, XErrorEvent *e)
+ShmCreationXErrorHandler(Display *d, XErrorEvent *e)
 {
   caughtShmError = True;
   return 0;

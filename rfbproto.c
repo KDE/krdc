@@ -831,11 +831,6 @@ HandleRFBServerMessage()
 
     }
 
-    /* if using shared memory PutImage, make sure that the X server has
-       updated its framebuffer before we reuse the shared memory.  This is
-       mainly to avoid copyrect using invalid screen contents - not sure
-       if we'd need it otherwise. */
-    ShmSync();
     queueIncrementalUpdateRequest();
 
     break;
