@@ -71,6 +71,8 @@ KRDC::KRDC(WindowMode wm, const QString &host,
 	   Quality q, const QString &encodings,
 	   const QString &password,
 	   const QString &resolution,
+	   bool scale, 
+	   QSize initialWindowSize,
 	   const QString &keymap) :
   QWidget(0, 0, Qt::WStyle_ContextHelp),
   m_layout(0),
@@ -89,7 +91,9 @@ KRDC::KRDC(WindowMode wm, const QString &host,
   m_keymap(keymap),
   m_isFullscreen(wm),
   m_oldResolution(),
-  m_fullscreenMinimized(false)
+  m_fullscreenMinimized(false),
+  m_windowScaling(scale),
+  m_initialWindowSize(initialWindowSize)
 {
 	connect(&m_autoHideTimer, SIGNAL(timeout()), SLOT(hideFullscreenToolbarNow()));
 	connect(&m_bumpScrollTimer, SIGNAL(timeout()), SLOT(bumpScroll()));
@@ -515,7 +519,11 @@ void KRDC::switchToNormal(bool scaling)
 
 
 	if (!fromFullscreen) {
-		if (!scalingChanged)
+		if (m_initialWindowSize.isValid()) {
+			resize(m_initialWindowSize);
+			m_initialWindowSize = QSize();
+		}
+		else if (!scalingChanged)
 			resize(sizeHint());
 		show();
 		if (scalingChanged)
@@ -591,15 +599,15 @@ void KRDC::setSize(int w, int h)
 	switch (m_isFullscreen) {
 	case WINDOW_MODE_AUTO:
 		if ((w >= dw) || (h >= dh))
-			switchToFullscreen(false);
+			switchToFullscreen(m_windowScaling);
 		else 
-			switchToNormal(false);
+			switchToNormal(m_windowScaling);
 		break;
 	case WINDOW_MODE_NORMAL:
-		switchToNormal(false);
+		switchToNormal(m_windowScaling);
 		break;
 	case WINDOW_MODE_FULLSCREEN:
-		switchToFullscreen();
+		switchToFullscreen(m_windowScaling);
  	        break;
 	}
 }

@@ -93,9 +93,13 @@ private:
 
 	WindowMode m_isFullscreen;    // fs/normal state
 	Resolution m_oldResolution;   // conatins encoded res before fs
-	bool m_fullscreenMinimized;   // true if minimized from fs
+	bool m_fullscreenMinimized;   // true if window is currently minimized from fs
 	QSize m_fullscreenResolution; // xvidmode size (valid only in fs)
-	bool m_windowScaling;         // whether scaling was enabled in norm mode
+	bool m_windowScaling;         // used in startup and fullscreen to determine
+	                              // whether scaling should be enabled in norm mode.
+                                      // The current state is m_view->scaled().
+	QSize m_initialWindowSize;    // initial window size (windowed mode only),
+	                              // invalid after first use
 
 	static QString m_lastHost; // remembers last value of host input
 
@@ -125,6 +129,8 @@ public:
 	     const QString &encodings = QString::null,
 	     const QString &password = QString::null,
 	     const QString &resolution = QString::null,
+	     bool scale = false,
+	     QSize initialWindowSize = QSize(),
 	     const QString &keymap = QString::null);
 	~KRDC();
 

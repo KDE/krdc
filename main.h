@@ -29,7 +29,10 @@ class MainController : public QObject {
 private:
 	SmartPtr<KRDC> m_krdc;
 	WindowMode m_windowMode;
-	QString m_host, m_encodings, m_password, m_resolution, m_keymap;
+	QString m_host, m_encodings, m_password, m_resolution;
+	bool m_scale;
+	QSize m_initialWindowSize;
+	QString m_keymap;
 	Quality m_quality;
 
 	KApplication *m_app;
@@ -41,6 +44,8 @@ public:
 		       const QString &encodings,
 		       const QString &password,
 		       const QString &resolution,
+		       bool scale,
+		       QSize initialWindowSize,
 		       const QString &keymap);
 	~MainController();
 	int main();

@@ -26,6 +26,7 @@
 #include <qtimer.h>
 #include <qfile.h>
 #include <qtextstream.h>
+#include <qregexp.h>
 
 #include "../config.h"
 #include "main.h" 
@@ -46,6 +47,8 @@ static KCmdLineOptions options[] =
 	{ "medium-quality", I18N_NOOP("Medium quality mode (Tight Encoding, lossy)."), 0 }, 
 	{ "h", 0, 0 },
 	{ "high-quality", I18N_NOOP("High quality mode, default (Hextile Encoding)."), 0 }, 
+	{ "s", 0, 0 },
+	{ "scale", I18N_NOOP("Start VNC in scaled mode."), 0 }, 
 	{ "e", 0, 0 },
 	{ "encodings ", I18N_NOOP("Override VNC encoding list (e.g. 'hextile raw')."), 0 }, 
 	{ "p", 0, 0 },
@@ -91,6 +94,8 @@ int main(int argc, char *argv[])
 	QString resolution = QString::null;
 	QString keymap = QString::null;
 	WindowMode wm = WINDOW_MODE_AUTO;
+	bool scale = false;
+	QSize initialWindowSize;
 
 	KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
 
@@ -105,6 +110,9 @@ int main(int argc, char *argv[])
 		wm = WINDOW_MODE_FULLSCREEN;
 	else if (args->isSet("window"))
 		wm = WINDOW_MODE_NORMAL;
+
+	if (args->isSet("scale"))
+		scale = true;
 
 	if (args->isSet("encodings"))
 		encodings = args->getOption("encodings");
@@ -127,7 +135,16 @@ int main(int argc, char *argv[])
 	if (args->count() > 0)
 		host = args->arg(0);
 
-	MainController mc(&a, wm, host, quality, encodings, password, resolution, keymap);
+	QString is = a.geometryArgument();
+	if (!is.isNull()) {
+		QRegExp re("([0-9]+)[xX]([0-9]+)");
+		if (!re.exactMatch(is))
+			args->usage(i18n("Wrong geometry format, must be widthXheight"));
+		initialWindowSize = QSize(re.cap(1).toInt(), re.cap(2).toInt());
+	}
+
+	MainController mc(&a, wm, host, quality, encodings, password, resolution, 
+			  scale, initialWindowSize, keymap);
 	return mc.main();
 }
 
@@ -137,12 +154,16 @@ MainController::MainController(KApplication *app, WindowMode wm,
 			       const QString &encodings,
 			       const QString &password,
 			       const QString &resolution,
+			       bool scale, 
+			       QSize initialWindowSize,
 			       const QString &keymap) :
         m_windowMode(wm),
 	m_host(host),
         m_encodings(encodings),
         m_password(password),
 	m_resolution(resolution),
+	m_scale(scale),
+	m_initialWindowSize(initialWindowSize),
 	m_keymap(keymap),
 	m_quality(quality),
 	m_app(app) {
@@ -165,7 +186,8 @@ void MainController::errorRestartRequested() {
 
 bool MainController::start() {
 	m_krdc = new KRDC(m_windowMode, m_host, 
-			  m_quality, m_encodings, m_password, m_resolution, m_keymap);
+			  m_quality, m_encodings, m_password, m_resolution, 
+			  m_scale, m_initialWindowSize, m_keymap);
 	m_app->setMainWidget(m_krdc);
 
 	QObject::connect(m_krdc, SIGNAL(disconnected()), 
