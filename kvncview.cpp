@@ -59,6 +59,7 @@ KVncView::KVncView(QWidget *parent,
   m_cthread(this, m_wthread, m_quitFlag),
   m_wthread(this, m_quitFlag),
   m_quitFlag(false),
+  m_buttonMask(0),
   m_host(_host),
   m_port(_port)
 {
@@ -216,7 +217,6 @@ void KVncView::mouseEvent(QMouseEvent *e) {
 		return;
 
 	if ( e->type() != QEvent::MouseMove ) {
-		m_buttonMask = 0;
 		if ( e->type() == QEvent::MouseButtonPress ) {
 			if ( e->button() & LeftButton )
 				m_buttonMask |= 0x01;
@@ -227,11 +227,11 @@ void KVncView::mouseEvent(QMouseEvent *e) {
 		}
 		else if ( e->type() == QEvent::MouseButtonRelease ) {
 			if ( e->button() & LeftButton )
-				m_buttonMask &= 0x06;
+				m_buttonMask &= 0xfe;
 			if ( e->button() & MidButton )
-				m_buttonMask &= 0x04;
+				m_buttonMask &= 0xfb;
 			if ( e->button() & RightButton )
-				m_buttonMask &= 0x02;
+				m_buttonMask &= 0xfd;
 		}
 	}
 	m_wthread.queueMouseEvent(e->x(), e->y(), m_buttonMask);
@@ -250,6 +250,21 @@ void KVncView::mouseReleaseEvent(QMouseEvent *e) {
 void KVncView::mouseMoveEvent(QMouseEvent *e) {
 	mouseEvent(e);
 	e->ignore();
+}
+
+void KVncView::wheelEvent(QWheelEvent *e) {
+	if (status() != REMOTE_VIEW_CONNECTED)
+		return;
+
+	int eb = 0;
+	if ( e->delta() < 0 )
+		eb |= 0x10;
+	else
+		eb |= 0x8;
+
+	m_wthread.queueMouseEvent(e->pos().x(), e->pos().y(), eb|m_buttonMask);
+	m_wthread.queueMouseEvent(e->pos().x(), e->pos().y(), m_buttonMask);
+	e->accept();
 }
 
 void KVncView::keyPressEvent(QKeyEvent *e) {

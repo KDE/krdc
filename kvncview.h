@@ -51,6 +51,7 @@ protected:
 	void mousePressEvent(QMouseEvent*);
 	void mouseReleaseEvent(QMouseEvent*);
 	void mouseMoveEvent(QMouseEvent*);
+	void wheelEvent(QWheelEvent *);
 	void keyPressEvent(QKeyEvent*);
 	void keyReleaseEvent(QKeyEvent*);
 
