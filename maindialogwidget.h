@@ -68,8 +68,7 @@ class MainDialogWidget : public MainDialogBase
     QString m_scope;
     bool m_scanning;
     SmartPtr<KServiceLocator> m_locator;
-    DNSSD::ServiceBrowser *m_locator_vnc;
-    DNSSD::ServiceBrowser *m_locator_rdp;
+    DNSSD::ServiceBrowser *m_locator_dnssd;
 };
 
 #endif // MAINDIALOGWIDGET_H

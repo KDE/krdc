@@ -80,7 +80,7 @@ class UrlListViewItem : public KListViewItem
 
 MainDialogWidget::MainDialogWidget( QWidget *parent, const char *name )
     : MainDialogBase( parent, name ),
-      m_scanning( false ), m_locator_vnc(0), m_locator_rdp(0)
+      m_scanning( false ), m_locator_dnssd(0)
 {
   HostPreferences *hp = HostPreferences::instance();
   QStringList list;
@@ -216,29 +216,19 @@ void MainDialogWidget::rescan()
 
   m_browsingView->clear();
 
-  if (m_locator_vnc) {
-    delete m_locator_vnc;  // still active browsers
-    m_locator_vnc = 0;
-  }
-  if (m_locator_rdp) {
-    delete m_locator_rdp;
-    m_locator_rdp = 0;
+  if (m_locator_dnssd) {
+    delete m_locator_dnssd;  // still active browsers
+    m_locator_dnssd = 0;
   }
 
   if (m_scope == DNSSD_SCOPE) {
     kdDebug() << "Scope is DNSSD\n";
-    m_locator_vnc = new DNSSD::ServiceBrowser("_rfb._tcp",0,true);
-    m_locator_rdp = new DNSSD::ServiceBrowser("_rdp._tcp",0,true);
-    connect(m_locator_vnc,SIGNAL(serviceAdded(DNSSD::RemoteService::Ptr)),
+    m_locator_dnssd = new DNSSD::ServiceBrowser(QStringList::split(',',"_rfb._tcp,_rdp._tcp"),0,true);
+    connect(m_locator_dnssd,SIGNAL(serviceAdded(DNSSD::RemoteService::Ptr)),
       SLOT(addedService(DNSSD::RemoteService::Ptr)));
-    connect(m_locator_vnc,SIGNAL(serviceRemoved(DNSSD::RemoteService::Ptr)),
+    connect(m_locator_dnssd,SIGNAL(serviceRemoved(DNSSD::RemoteService::Ptr)),
       SLOT(removedService(DNSSD::RemoteService::Ptr)));
-    connect(m_locator_rdp,SIGNAL(serviceAdded(DNSSD::RemoteService::Ptr)),
-      SLOT(addedService(DNSSD::RemoteService::Ptr)));
-    connect(m_locator_rdp,SIGNAL(serviceRemoved(DNSSD::RemoteService::Ptr)),
-      SLOT(removedService(DNSSD::RemoteService::Ptr)));
-    m_locator_vnc->startBrowse();
-    m_locator_rdp->startBrowse();
+    m_locator_dnssd->startBrowse();
     // now find scopes
     lastSignalServices(true);
   } else {
