@@ -24,10 +24,9 @@
 #include <qwindowdefs.h>
 #include <qtimer.h>
 
+#include "../config.h"
 #include "main.h" 
 
-
-#define VERSION "0.1"
 
 static const char *description = I18N_NOOP("Remote Desktop Connection");
 	
