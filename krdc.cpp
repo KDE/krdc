@@ -75,6 +75,7 @@ KRDC::KRDC(WindowMode wm, const QString &host,
 	   Quality q, const QString &encodings,
 	   const QString &password,
 	   bool scale,
+	   bool localCursor,
 	   QSize initialWindowSize) :
   QWidget(0, 0, Qt::WStyle_ContextHelp),
   m_layout(0),
@@ -95,6 +96,7 @@ KRDC::KRDC(WindowMode wm, const QString &host,
   m_oldResolution(),
   m_fullscreenMinimized(false),
   m_windowScaling(scale),
+  m_localCursor(localCursor),
   m_initialWindowSize(initialWindowSize)
 {
 	connect(&m_autoHideTimer, SIGNAL(timeout()), SLOT(hideFullscreenToolbarNow()));
@@ -171,7 +173,9 @@ bool KRDC::start()
 		case PROTOCOL_VNC:
 			m_view = new KVncView(this, 0, serverHost, serverPort,
 			                      m_password.isNull() ? password : m_password,
-			                      m_quality, m_encodings);
+			                      m_quality,
+			                      m_localCursor ? DOT_CURSOR_ON : DOT_CURSOR_AUTO,
+			                      m_encodings);
 			break;
 
 		case PROTOCOL_RDP:

@@ -64,6 +64,7 @@ KVncView::KVncView(QWidget *parent,
 		   int _port,
 		   const QString &_password,
 		   Quality quality,
+		   DotCursorState dotCursorState,
 		   const QString &encodings) :
   KRemoteView(parent, name, Qt::WResizeNoErase | Qt::WRepaintNoErase | Qt::WStaticContents),
   m_cthread(this, m_wthread, m_quitFlag),
@@ -76,7 +77,8 @@ KVncView::KVncView(QWidget *parent,
   m_buttonMask(0),
   m_host(_host),
   m_port(_port),
-  m_dontSendCb(false)
+  m_dontSendCb(false),
+  m_cursorState(dotCursorState)
 {
 	kvncview = this;
 	password = _password.latin1();
@@ -100,22 +102,29 @@ KVncView::KVncView(QWidget *parent,
 		configureApp(quality, encodings);
 }
 
-void KVncView::showDotCursor(bool show) {
-	bool s = show;
-	if (m_enableClientCursor)
-		s = false;
-	if (show == m_cursorEnabled)
+void KVncView::showDotCursor(DotCursorState state) {
+	if (state == m_cursorState)
 		return;
 
-	m_cursorEnabled = s;
+	m_cursorState = state;
 	showDotCursorInternal();
 }
 
 void KVncView::showDotCursorInternal() {
-	if (!m_cursorEnabled)
-		setCursor(QCursor(Qt::BlankCursor));
-	else
+	switch (m_cursorState) {
+	case DOT_CURSOR_ON:
 		setCursor(m_cursor);
+		break;
+	case DOT_CURSOR_OFF:
+		setCursor(QCursor(Qt::BlankCursor));
+		break;
+	case DOT_CURSOR_AUTO:
+		if (m_enableClientCursor)
+			setCursor(QCursor(Qt::BlankCursor));
+		else
+			setCursor(m_cursor);
+		break;
+	}
 }
 
 QString KVncView::host() {
@@ -173,10 +182,8 @@ void KVncView::configureApp(Quality q, const QString specialEncodings) {
 	appData.rawDelay = 0;
 	appData.copyRectDelay = 0;
 
-	if (m_enableClientCursor)
-		m_cursorEnabled = false;
-	else
-		m_cursorEnabled = appData.dotCursor ? true : false;
+	if (!appData.dotCursor)
+		m_cursorState = DOT_CURSOR_OFF;
 	showDotCursorInternal();
 }
 
@@ -432,7 +439,9 @@ void KVncView::customEvent(QCustomEvent *e)
 	else if (e->type() == MouseStateEventType) {
 		MouseStateEvent *mse = (MouseStateEvent*) e;
 		emit mouseStateChanged(mse->x(), mse->y(), mse->buttonMask());
-		showDotCursor(m_plom.handlePointerEvent(mse->x(), mse->y()));
+		bool show = m_plom.handlePointerEvent(mse->x(), mse->y());
+		if (m_cursorState != DOT_CURSOR_ON)
+			showDotCursor(show ? DOT_CURSOR_AUTO : DOT_CURSOR_OFF);
 	}
 }
 
@@ -646,12 +655,9 @@ void KVncView::unlockFramebuffer() {
 void KVncView::enableClientCursor(bool enable) {
 	if (enable) {
 		m_enableFramebufferLocking = true; // cant be turned off
-		showDotCursor(false);
 	}
-	else
-		showDotCursor(appData.dotCursor);
 	m_enableClientCursor = enable;
-
+	showDotCursorInternal();
 }
 
 int getPassword(char *passwd, int pwlen) {

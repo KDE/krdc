@@ -59,14 +59,14 @@ private:
 	QClipboard *m_cb;
 	bool m_dontSendCb;
 	QCursor m_cursor;
-	bool m_cursorEnabled;
+	DotCursorState m_cursorState;
 	PointerLatencyOMeter m_plom;
 
 	void mouseEvent(QMouseEvent*);
 	unsigned long toKeySym(QKeyEvent *k);
 	bool checkLocalKRfb();
 	void paintMessage(const QString &msg);
-	void showDotCursor(bool show);
+	void showDotCursor(DotCursorState state);
 	void showDotCursorInternal();
 	void unpressModifiers();
 
@@ -86,6 +86,7 @@ public:
 		 const QString &host = QString(""), int port = 5900,
 		 const QString &password = QString::null,
 		 Quality quality = QUALITY_UNKNOWN,
+		 DotCursorState dotCursorState = DOT_CURSOR_AUTO,
 		 const QString &encodings = QString::null);
 	~KVncView();
 	QSize sizeHint();
@@ -102,7 +103,6 @@ public:
 
 	virtual void startQuitting();
 	virtual bool isQuitting();
-	void disableCursor();
 	virtual QString host();
 	virtual int port();
 	virtual bool start();

@@ -32,6 +32,7 @@ private:
 	WindowMode m_windowMode;
 	QString m_host, m_encodings, m_password, m_resolution;
 	bool m_scale;
+	bool m_localCursor;
 	QSize m_initialWindowSize;
 	QString m_keymap;
 	Quality m_quality;
@@ -45,6 +46,7 @@ public:
 		       const QString &encodings,
 		       const QString &password,
 		       bool scale,
+		       bool localCursor,
 		       QSize initialWindowSize);
 	~MainController();
 	int main();

@@ -103,6 +103,7 @@ private:
 	bool m_windowScaling;         // used in startup and fullscreen to determine
 	                              // whether scaling should be enabled in norm mode.
 	                              // The current state is m_view->scaled().
+	bool m_localCursor;           // show local cursor no matter what
 	QSize m_initialWindowSize;    // initial window size (windowed mode only),
 	                              // invalid after first use
 	static QString m_lastHost; // remembers last value of host input
@@ -134,6 +135,7 @@ public:
 	     const QString &encodings = QString::null,
 	     const QString &password = QString::null,
 	     bool scale = false,
+	     bool localCursor = false,
 	     QSize initialWindowSize = QSize());
 	~KRDC();
 

@@ -49,6 +49,8 @@ static KCmdLineOptions options[] =
 	{ "high-quality", I18N_NOOP("High quality mode, default (Hextile Encoding)."), 0 },
 	{ "s", 0, 0 },
 	{ "scale", I18N_NOOP("Start VNC in scaled mode."), 0 },
+	{ "c", 0, 0 },
+	{ "local-cursor", I18N_NOOP("Show local cursor (VNC only)."), 0 },
 	{ "e", 0, 0 },
 	{ "encodings ", I18N_NOOP("Override VNC encoding list (e.g. 'hextile raw')."), 0 },
 	{ "p", 0, 0 },
@@ -91,6 +93,7 @@ int main(int argc, char *argv[])
 	QString keymap = QString::null;
 	WindowMode wm = WINDOW_MODE_AUTO;
 	bool scale = false;
+	bool localCursor = false;
 	QSize initialWindowSize;
 
 	KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
@@ -109,6 +112,9 @@ int main(int argc, char *argv[])
 
 	if (args->isSet("scale"))
 		scale = true;
+
+	if (args->isSet("local-cursor"))
+		localCursor = true;
 
 	if (args->isSet("encodings"))
 		encodings = args->getOption("encodings");
@@ -136,7 +142,7 @@ int main(int argc, char *argv[])
 	}
 
 	MainController mc(&a, wm, host, quality, encodings, password,
-			  scale, initialWindowSize);
+			  scale, localCursor, initialWindowSize);
 	return mc.main();
 }
 
@@ -146,12 +152,14 @@ MainController::MainController(KApplication *app, WindowMode wm,
 			       const QString &encodings,
 			       const QString &password,
 			       bool scale,
+			       bool localCursor,
 			       QSize initialWindowSize) :
         m_windowMode(wm),
 	m_host(host),
         m_encodings(encodings),
         m_password(password),
 	m_scale(scale),
+	m_localCursor(localCursor),
 	m_initialWindowSize(initialWindowSize),
 	m_quality(quality),
 	m_app(app) {
@@ -175,7 +183,7 @@ void MainController::errorRestartRequested() {
 bool MainController::start() {
 	m_krdc = new KRDC(m_windowMode, m_host,
 			  m_quality, m_encodings, m_password,
-			  m_scale, m_initialWindowSize);
+			  m_scale, m_localCursor, m_initialWindowSize);
 	m_app->setMainWidget(m_krdc);
 
 	QObject::connect(m_krdc, SIGNAL(disconnected()),
