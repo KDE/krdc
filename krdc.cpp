@@ -208,6 +208,7 @@ bool KRDC::start()
 	QWhatsThis::add(m_view, i18n("Here you can see the remote desktop. If the other side allows you to control it, you can also move the mouse, click or enter keystrokes. If the content does not fit your screen, click on the toolbar's full screen button or scale button. To end the connection, just close the window."));
 
 	connect(m_view, SIGNAL(changeSize(int,int)), SLOT(setSize(int,int)));
+	connect(m_view, SIGNAL(changeSize(int,int)), m_scrollView, SLOT(resize(int,int)));
 	connect(m_view, SIGNAL(connected()), SLOT(show()));
 	connect(m_view, SIGNAL(disconnected()), SIGNAL(disconnected()));
 	// note that the disconnectedError() will be disconnected when kremoteview
