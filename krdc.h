@@ -93,6 +93,7 @@ private:
 protected:
 	void mouseMoveEvent(QMouseEvent *e);
 	bool event(QEvent *e);
+	bool eventFilter(QObject *watched, QEvent *e);
 
 public:
 	KRDC(WindowMode wm = WINDOW_MODE_AUTO, 

@@ -146,8 +146,12 @@ bool KRDC::start(bool onlyFailOnCancel)
 	setCaption(i18n("%1 - Remote Desktop Connection").arg(m_host));
 	configureApp(m_quality);
 
+	m_scrollView = new QScrollView2(this, "remote scrollview");
+	m_scrollView->setFrameStyle(QFrame::NoFrame);
 	m_view = new KVncView(this, 0, vncServerHost, vncServerPort, password,
 			      &m_appData);
+	m_scrollView->addChild(m_view);
+
 	connect(m_view, SIGNAL(changeSize(int,int)), SLOT(setSize(int,int)));
 	connect(m_view, SIGNAL(connected()), SLOT(show()));
 	connect(m_view, SIGNAL(disconnected()), SIGNAL(disconnected()));
@@ -350,13 +354,6 @@ void KRDC::switchToFullscreen()
 		delete m_toolbar;
 		m_toolbar = 0;
 	}
-	if (!m_scrollView) {
-		m_scrollView = new QScrollView2(this, "remote scrollview");
-		m_scrollView->setFrameStyle(QFrame::NoFrame);
-		m_view->reparent(m_scrollView->viewport(), 
-				 getWFlags() & ~WType_Mask, QPoint());
-		m_scrollView->addChild(m_view);
-	}
 
 	if (m_layout)
 		delete m_layout;
@@ -425,36 +422,26 @@ void KRDC::switchToNormal(bool scaling)
 	}
 
 	if (scaling) {
-		if (m_scrollView) {
-			m_view->reparent(this, 
-					 getWFlags() & ~WType_Mask, QPoint());
-			delete m_scrollView;
-			m_scrollView = 0;
-		}
+		m_scrollView->installEventFilter(this);
+		m_view->resize(m_scrollView->size());
 	}
 	else {
-		if (!m_scrollView) {
-			m_scrollView = new QScrollView2(this, "Remote ScrollView");
-			m_scrollView->setFrameStyle(QFrame::NoFrame);
-			m_view->reparent(m_scrollView->viewport(), 
-					 getWFlags() & ~WType_Mask, QPoint());
-			m_scrollView->addChild(m_view);
-		}
+		m_scrollView->removeEventFilter(this);
+		m_view->resize(m_view->framebufferSize());
 	}
 
 	if (m_layout)
 		delete m_layout;
 	m_layout = new QVBoxLayout(this);
 	m_layout->addWidget(m_toolbar);
-	if (m_scrollView)
-		m_layout->addWidget(m_scrollView);
-	else
-		m_layout->addWidget(m_view);
+	m_layout->addWidget(m_scrollView);
 	
 	QSize fbSize = m_view->framebufferSize();
 	setMaximumSize(fbSize.width(), fbSize.height() + m_toolbar->height());
-	if (m_wasScaling)
+	if (m_wasScaling) {
 		m_view->enableScaling(true);
+		m_wasScaling = false;
+	}
 
 	repositionView(false);
 
@@ -479,6 +466,7 @@ void KRDC::iconify()
 }
 
 bool KRDC::event(QEvent *e) {
+/* used to change resolution when fullscreen was minimized */
 	if ((!m_fullscreenMinimized) || (e->type() != QEvent::Show)) 
 		return QWidget::event(e);
 
@@ -498,6 +486,17 @@ bool KRDC::event(QEvent *e) {
 		    m_fullscreenResolution.height());
 	grabInput(qt_xdisplay(), winId());
 	return QWidget::event(e);
+}
+
+bool KRDC::eventFilter(QObject *watched, QEvent *e) {
+/* used to get events from QScrollView  on resize  for scale mode*/
+	if (watched != m_scrollView)
+		return;
+	if (e->type() != QEvent::Resize) 
+		return;
+
+	QResizeEvent *re = (QResizeEvent*) e;
+	m_view->resize(re->size());
 }
 
 void KRDC::setSize(int w, int h)
@@ -610,9 +609,6 @@ void KRDC::hideFullscreenToolbarDelayed() {
 }
 
 void KRDC::mouseMoveEvent(QMouseEvent *e) {
-if (!e->state())
-kdDebug() << "pure mouse move! "<<e->state()<<endl;
-
 	if (m_isFullscreen != WINDOW_MODE_FULLSCREEN)
 		return;
 

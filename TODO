@@ -1,5 +1,4 @@
 - find out when remote cursor lags and turn local cursor on
-- rewrite/inherit/overload qscrollbar to avoid reparenting
 - make sure vidmode compiles on non-XF86 servers
 - check endian test
 - security audit of the protocol code
@@ -24,6 +23,4 @@ Known bugs/problems:
   making the window smaller than the framebuffer and turning the 'scaled 
   mode' off the scrollbars will not be displayed until the user resizes 
   the window. I dont know why and cannot find a work-around.
-- in fullscreen mode the auto-hide toolbar makes problems: Mouse movements
-  are only recognized while a mouse button is pressed (and no, i did no forget
-  to turn on mouse tracking)
+
