@@ -28,9 +28,7 @@ extern "C"
 {
 #endif
 
-typedef unsigned char  CARD8;
-typedef unsigned short CARD16;
-typedef unsigned int   CARD32;
+#include <X11/Xmd.h>
 
 
 typedef struct {
