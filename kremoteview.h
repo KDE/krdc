@@ -33,6 +33,20 @@ typedef enum {
 
 /**
  * Generic widget that displays a remote framebuffer.
+ * Implement this if you want to add another backend. 
+ *
+ * Things to take care of:
+ * @li The KRemoteView is responsible for its size. In 
+ *     non-scaling mode, set the fixed size of the widget
+ *     to the remote resolution. In scaling mode, set the
+ *     maximum size to the remote size and minimum size to the
+ *     smallest resolution that your scaler can handle.
+ * @li if you override mouseMoveEvent()
+ *     you must ignore the QEvent, because the KRDC widget will
+ *     need it for stuff like toolbar auto-hide and bump 
+ *     scrolling. If you use x11Event(), make sure that 
+ *     MotionNotify events will be forwarded.
+ * 
  */
 class KRemoteView : public QWidget
 {
@@ -191,7 +205,6 @@ signals:
 protected:
 	/**
 	 * The status of the remote view.
-	 * @return the status of the remote view
 	 */
 	enum RemoteViewStatus m_status;
 
