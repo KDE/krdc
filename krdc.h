@@ -95,7 +95,6 @@ private:
 	Resolution m_oldResolution;   // conatins encoded res before fs
 	bool m_fullscreenMinimized;   // true if minimized from fs
 	QSize m_fullscreenResolution; // xvidmode size (valid only in fs)
-	QRect m_oldWindowGeometry;    // geometry before switching to fullscreen
 	bool m_windowScaling;         // whether scaling was enabled in norm mode
 
 	static QString m_lastHost; // remembers last value of host input

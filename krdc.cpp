@@ -425,8 +425,6 @@ void KRDC::switchToFullscreen(bool scaling)
 	int x, y;
 
 	bool fromFullscreen = (m_isFullscreen == WINDOW_MODE_FULLSCREEN);
-	if (m_isFullscreen != WINDOW_MODE_AUTO)
-		m_oldWindowGeometry = geometry();
 
 	QWidget *desktop = QApplication::desktop();
 	QSize ds = desktop->size();
