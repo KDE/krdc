@@ -53,6 +53,7 @@ void QScrollView2::mouseMoveEvent( QMouseEvent *e )
 KRDC::KRDC(WindowMode wm, const QString &host, Quality q, const QString &encodings) : 
   QWidget(0, 0),
   m_layout(0),
+  m_scrollView(0),
   m_progressDialog(0),
   m_view(0),
   m_fsToolbar(0),
@@ -64,11 +65,9 @@ KRDC::KRDC(WindowMode wm, const QString &host, Quality q, const QString &encodin
   m_encodings(encodings),
   m_isFullscreen(wm),
   m_oldResolution(0),
-  m_fullscreenMinimized(false)
+  m_fullscreenMinimized(false),
+  m_wasScaling(false)
 {
-	m_scrollView = new QScrollView2(this, "Remote View");
-	m_scrollView->setFrameStyle(QFrame::NoFrame);
-	
 	connect(&m_autoHideTimer, SIGNAL(timeout()), SLOT(fsToolbarHide()));
 	connect(&m_bumpScrollTimer, SIGNAL(timeout()), SLOT(bumpScroll()));
 }
@@ -121,9 +120,8 @@ bool KRDC::start()
 	setCaption(m_host + i18n(" - Remote Desktop Connection"));
 	configureApp(m_quality);
 
-	m_view = new KVncView(m_scrollView, 0, vncServerHost, vncServerPort,
+	m_view = new KVncView(this, 0, vncServerHost, vncServerPort,
 			      &m_appData);
-	m_scrollView->addChild(m_view);
 	connect(m_view, SIGNAL(changeSize(int,int)), SLOT(setSize(int,int)));
 	connect(m_view, SIGNAL(connected()), SLOT(connected()));
 	connect(m_view, SIGNAL(disconnected()), SIGNAL(disconnected()));
@@ -273,16 +271,15 @@ KRDC::~KRDC()
 		delete m_view;
 }
 
-void KRDC::switchToFullscreen(bool on) 
+void KRDC::enableFullscreen(bool on) 
 {
-
 	if (on) {
 		if (m_isFullscreen != WINDOW_MODE_FULLSCREEN)
 			switchToFullscreen();
 	}
 	else
 		if (m_isFullscreen != WINDOW_MODE_NORMAL)
-			switchToNormal();
+			switchToNormal(m_wasScaling);
 }
 
 void KRDC::switchToFullscreen() 
@@ -292,6 +289,8 @@ void KRDC::switchToFullscreen()
 	if (m_isFullscreen != WINDOW_MODE_AUTO)
 		m_oldWindowGeometry = geometry();
 
+	m_wasScaling = m_view->scaling();
+	m_view->enableScaling(false);
 	hide();
 	m_oldResolution = vidmodeFullscreenSwitch(qt_xdisplay(), 
 						  m_view->width(),
@@ -307,6 +306,13 @@ void KRDC::switchToFullscreen()
 		delete m_toolbar;
 		m_toolbar = 0;
 	}
+	if (!m_scrollView) {
+		m_scrollView = new QScrollView2(this, "Remote ScrollView");
+		m_scrollView->setFrameStyle(QFrame::NoFrame);
+		m_view->reparent(m_scrollView, 
+				 getWFlags() & ~WType_Mask, QPoint());
+		m_scrollView->addChild(m_view);
+	}
 
 	if (m_layout)
 		delete m_layout;
@@ -320,12 +326,12 @@ void KRDC::switchToFullscreen()
 	connect((QObject*)t->closeButton, SIGNAL(clicked()), SLOT(quit()));
 	connect((QObject*)t->iconifyButton, SIGNAL(clicked()), SLOT(iconify()));
 	connect((QObject*)t->fullscreenButton, SIGNAL(toggled(bool)), 
-		SLOT(switchToFullscreen(bool)));
+		SLOT(enableFullscreen(bool)));
 	connect((QObject*)t->autohideButton, SIGNAL(toggled(bool)), 
 		SLOT(setFsToolbarAutoHide(bool)));
 	t->setFixedSize(t->sizeHint());
 	t->setGeometry(getAutoHideToolbarGeometry());
-	t->show();
+//	t->show();
 	showFullScreen();
 
 	repositionView(true);
@@ -349,10 +355,12 @@ QRect KRDC::getAutoHideToolbarGeometry()
 	return QRect((m_fullscreenResolution.width() - s.width())/2, 0, s.width(), h);
 }
 
-void KRDC::switchToNormal()
+void KRDC::switchToNormal(bool scaling)
 {
 	hide();
 	m_isFullscreen = WINDOW_MODE_NORMAL;
+	m_view->enableScaling(scaling);
+
 	if (m_oldResolution) {
 		ungrabInput(qt_xdisplay());
 		vidmodeNormalSwitch(qt_xdisplay(), m_oldResolution);
@@ -364,23 +372,57 @@ void KRDC::switchToNormal()
 		m_fsToolbar = 0;
 	}
 
-        Toolbar *t = new Toolbar(this);
-	m_toolbar = t;
-	t->fullscreenButton->setOn(false);
-	connect((QObject*)t->fullscreenButton, SIGNAL(toggled(bool)), 
-		SLOT(switchToFullscreen(bool)));
+	if (!m_toolbar) {
+		Toolbar *t = new Toolbar(this);
+		m_toolbar = t;
+		t->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, 
+					     QSizePolicy::Fixed));
+		t->fullscreenButton->setOn(false);
+		t->scaleButton->setOn(m_wasScaling);
+		connect((QObject*)t->fullscreenButton, SIGNAL(toggled(bool)), 
+			SLOT(enableFullscreen(bool)));
+		connect((QObject*)t->scaleButton, SIGNAL(toggled(bool)), 
+			SLOT(switchToNormal(bool)));
+	}
+
+	if (scaling) {
+		if (m_scrollView) {
+			m_view->reparent(this, 
+					 getWFlags() & ~WType_Mask, QPoint());
+			delete m_scrollView;
+			m_scrollView = 0;
+		}
+	}
+	else {
+		if (!m_scrollView) {
+			m_scrollView = new QScrollView2(this, "Remote ScrollView");
+			m_scrollView->setFrameStyle(QFrame::NoFrame);
+			m_view->reparent(m_scrollView, 
+					 getWFlags() & ~WType_Mask, QPoint());
+			m_scrollView->addChild(m_view);
+		}
+	}
 
 	if (m_layout)
 		delete m_layout;
 	m_layout = new QVBoxLayout(this);
-	m_layout->addWidget(t);
-	m_layout->addWidget(m_scrollView);
-	m_layout->activate();
-	setMaximumSize(m_view->width(), m_view->height() + m_toolbar->height());
-	show();
-	showNormal();
-	t->show();
+	m_layout->addWidget(m_toolbar);
+	if (m_scrollView)
+		m_layout->addWidget(m_scrollView);
+	else
+		m_layout->addWidget(m_view);
+	
+	QSize fbSize = m_view->framebufferSize();
+	setMaximumSize(fbSize.width(), fbSize.height() + m_toolbar->height());
+	if (m_wasScaling)
+		m_view->enableScaling(true);
+
 	repositionView(false);
+
+	m_layout->activate();
+
+	showNormal();
+
 	setMouseTracking(false);
 }
 
@@ -418,36 +460,25 @@ bool KRDC::event(QEvent *e) {
 
 void KRDC::setSize(int w, int h)
 {
-	int dw, dh, nw, nh;
+	int dw, dh;
 
 	QWidget *desktop = QApplication::desktop();
 	dw = desktop->width();
 	dh = desktop->height();
 
-	nw = w;
-	nh = h;
-	while ((nw >= dw) || (nh >= dh)) {
-		nw /= 2;
-		nh /= 2;
-	}
-
 	switch (m_isFullscreen) {
 	case WINDOW_MODE_AUTO:
 		if ((w >= dw) || (h >= dh)) {
-			m_scrollView->resizeContents(dw, dh);
 			switchToFullscreen();
 		}
 		else {
-			m_scrollView->resizeContents(nw, nh);
-			switchToNormal();
+			switchToNormal(false);
 		}
 		break;
 	case WINDOW_MODE_NORMAL:
-		m_scrollView->resizeContents(nw, nh);
-		switchToNormal();
+		switchToNormal(false);
 		break;
 	case WINDOW_MODE_FULLSCREEN:
-		m_scrollView->resizeContents(dw, dh);
 		switchToFullscreen();
  	        break;
 	}
@@ -456,6 +487,10 @@ void KRDC::setSize(int w, int h)
 void KRDC::repositionView(bool fullscreen) {
 	int ox = 0;
 	int oy = 0;
+	
+	if (!m_scrollView)
+		return;
+
 	QSize s = m_view->size();
 
 	if (fullscreen) {

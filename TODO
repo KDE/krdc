@@ -1,4 +1,3 @@
-- optional down-scaling if remote desktop is too large for window
 - animated autohide for fullscreen toolbar
 - stop fs toolbar autohide timeout when mouse is over the toolbar
 - add function to vncviewer code to de-allocate resources
@@ -18,4 +17,7 @@ Known bugs/problems:
 - when using the XShm extension (see DesktopInit(), CreateShmImage() invocation)
   I get error messages like "Xlib: unexpected async reply (sequence 0x1717)!" after
   a few seconds. That's why XShm is not used at the moment.
-
+- when switching to 'scaled mode' (left button on toolbar in window mode), making
+  the window smaller than the framebuffer and turning the 'scaled mode' off the
+  scrollbars will not be displayed until the user resizes the window. I dont know
+  why and cannot find a work-around.

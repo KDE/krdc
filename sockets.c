@@ -112,7 +112,7 @@ ReadFromRFBServer(char *out, unsigned int n)
     memcpy(out, bufoutptr, n);
     bufoutptr += n;
     buffered -= n;
-    return True;
+    return isQuitFlagSet() ? False : True;
 
   } else {
 
@@ -147,7 +147,7 @@ ReadFromRFBServer(char *out, unsigned int n)
       n -= i;
     }
 
-    return True;
+    return isQuitFlagSet() ? False : True;
   }
 }
 

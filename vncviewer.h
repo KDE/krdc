@@ -78,7 +78,7 @@ extern int vncServerPort;
 
 extern int isQuitFlagSet();
 extern int getPassword(char *passwd, int pwlen);
-extern void SyncScreenRegion(int x, int y, int width, int height);
+extern void DrawScreenRegion(int x, int y, int width, int height);
 extern void beep();
 void newServerCut(char *bytes, int len);
 
@@ -98,7 +98,6 @@ extern void SetVisualAndCmap(void);
 /* desktop.c */
 
 extern Widget form, viewport, desktop;
-extern Window desktopWin;
 extern GC gc;
 extern GC srcGC, dstGC;
 extern Dimension dpyWidth, dpyHeight;
@@ -112,7 +111,11 @@ extern void FillRectangle8(CARD8, int x, int y, int width, int height);
 extern void FillRectangle16(CARD16, int x, int y, int width, int height);
 extern void FillRectangle32(CARD32, int x, int y, int width, int height);
 extern void CopyArea(int srcX, int srcY, int width, int height, int x, int y);
-extern void DrawScreenRegionX11Thread(int x, int y, int width, int height);
+extern void SyncScreenRegion(int x, int y, int width, int height);
+extern void DrawZoomedScreenRegionX11Thread(Window win, int zwidth, int zheight, 
+					    int x, int y, int width, int height);
+extern void DrawScreenRegionX11Thread(Window win, int x, int y, 
+				      int width, int height);
 extern void ShmSync(void);
 extern void Cleanup(void);
 

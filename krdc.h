@@ -69,12 +69,12 @@ private:
 	bool m_fullscreenMinimized; //true if minimized from fs
 	QSize m_fullscreenResolution; // xvidmode size (valid only in fs)
 	QRect m_oldWindowGeometry; // geometry before switching to fullscreen
+	bool m_wasScaling; //whether scaling was enabled in norm mode
 
 	void configureApp(Quality q);
 	void parseHost(QString &s, QString &serverHost, int &serverPort);
 
 	void switchToFullscreen();
-	void switchToNormal();
 	void repositionView(bool fullscreen);
 
 	void showProgressDialog();
@@ -116,8 +116,8 @@ private slots:
 	
 public slots:
 	void quit();
-	void switchToFullscreen(bool);
- 
+	void enableFullscreen(bool full = false);
+	void switchToNormal(bool scaling = false);
 
 signals:
         void disconnected(); 

@@ -64,6 +64,7 @@ KVncView::KVncView(QWidget *parent,
   m_cthread(this, m_wthread, m_quitFlag),
   m_wthread(this, m_quitFlag),
   m_quitFlag(false),
+  m_scaling(false),
   m_buttonMask(0),
   m_host(_host),
   m_port(_port)
@@ -180,24 +181,64 @@ KVncView::~KVncView()
 	m_wthread.wait();
 }
 
+bool KVncView::scaling() {
+	return m_scaling;
+}
+
+QSize KVncView::framebufferSize() {
+	return m_framebufferSize;
+}
+
+void KVncView::enableScaling(bool s) {
+	bool os = m_scaling;
+	m_scaling = s;
+	if (s != os) {
+		if (s) {
+			setMaximumSize(m_framebufferSize);
+			setMinimumSize(m_framebufferSize.width()/16,
+				       m_framebufferSize.height()/16);
+/*			if (height() != heightForWidth(width()))
+				resize(m_framebufferSize.width(),
+					heightForWidth(m_framebufferSize.width()));
+*/		}
+		else
+			setFixedSize(m_framebufferSize);
+	}
+}
+
+int KVncView::heightForWidth(int w) const {
+	if (m_scaling)
+		return w * m_framebufferSize.height() / m_framebufferSize.width();
+	else
+		return 0;
+}
+
 void KVncView::paintEvent(QPaintEvent *e) {
-	if (status() == REMOTE_VIEW_CONNECTED)
-		DrawScreenRegionX11Thread(e->rect().x(),
-					  e->rect().y(),
-					  e->rect().width(),
-					  e->rect().height());
+	if (status() == REMOTE_VIEW_CONNECTED) 
+		drawRegion(e->rect().x(),
+			   e->rect().y(),
+			   e->rect().width(),
+			   e->rect().height());
+}
+
+void KVncView::drawRegion(int x, int y, int w, int h) {
+	if (m_scaling)
+		DrawZoomedScreenRegionX11Thread(winId(), width(), height(), 
+						x, y, w, h);
+	else
+		DrawScreenRegionX11Thread(winId(), x, y, w, h);
 }
 
 void KVncView::customEvent(QCustomEvent *e)
 {
 	if (e->type() == ScreenRepaintEventType) {  
 		ScreenRepaintEvent *sre = (ScreenRepaintEvent*) e;
-		DrawScreenRegionX11Thread(sre->x(), sre->y(), 
-					  sre->width(), sre->height());
+		drawRegion(sre->x(), sre->y(),sre->width(), sre->height());
 	}
 	else if (e->type() == ScreenResizeEventType) {  
 		ScreenResizeEvent *sre = (ScreenResizeEvent*) e;
-		setFixedSize(sre->width(), sre->height());
+		m_framebufferSize = QSize(sre->width(), sre->height());
+		setFixedSize(m_framebufferSize);
 		emit changeSize(sre->width(), sre->height());
 	}
 	else if (e->type() == DesktopInitEventType) {  
@@ -296,7 +337,14 @@ void KVncView::mouseEvent(QMouseEvent *e) {
 				m_buttonMask &= 0xfb;
 		}
 	}
-	m_wthread.queueMouseEvent(e->x(), e->y(), m_buttonMask);
+
+	int x = e->x();
+	int y = e->y();
+	if (m_scaling) {
+		x = (x * width()) / m_framebufferSize.width();
+		y = (y * height()) / m_framebufferSize.height();
+	}
+	m_wthread.queueMouseEvent(x, y, m_buttonMask);
 }
 
 void KVncView::mousePressEvent(QMouseEvent *e) {
@@ -324,8 +372,14 @@ void KVncView::wheelEvent(QWheelEvent *e) {
 	else
 		eb |= 0x8;
 
-	m_wthread.queueMouseEvent(e->pos().x(), e->pos().y(), eb|m_buttonMask);
-	m_wthread.queueMouseEvent(e->pos().x(), e->pos().y(), m_buttonMask);
+	int x = e->pos().x();
+	int y = e->pos().y();
+	if (m_scaling) {
+		x = (x * width()) / m_framebufferSize.width();
+		y = (y * height()) / m_framebufferSize.height();
+	}
+	m_wthread.queueMouseEvent(x, y, eb|m_buttonMask);
+	m_wthread.queueMouseEvent(x, y, m_buttonMask);
 	e->accept();
 }
 
@@ -335,6 +389,10 @@ void KVncView::keyPressEvent(QKeyEvent *e) {
 
 void KVncView::keyReleaseEvent(QKeyEvent *e) {
 	m_wthread.queueKeyEvent((KeySym)toKeySym(e), false);
+}
+
+QSize KVncView::sizeHint() {
+	return maximumSize();
 }
 
 void KVncView::selectionChanged() {
@@ -376,11 +434,11 @@ extern int isQuitFlagSet() {
 	return kvncview->isQuitting() ? 1 : 0; 
 }
 
-extern void SyncScreenRegion(int x, int y, int width, int height) {
+extern void DrawScreenRegion(int x, int y, int width, int height) {
 	KApplication::kApplication()->lock();
-	DrawScreenRegionX11Thread(x, y, width, height);
+	kvncview->drawRegion(x, y, width, height);
 	KApplication::kApplication()->unlock();
-	//QThread::postEvent(kvncview, new ScreenRepaintEvent(x, y, width, height));	
+//	QThread::postEvent(kvncview, new ScreenRepaintEvent(x, y, width, height));	
 }
 
 extern void beep() {

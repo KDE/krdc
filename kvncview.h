@@ -37,6 +37,9 @@ private:
 	volatile bool m_quitFlag;
 	enum RemoteViewStatus m_status;
 
+	QSize m_framebufferSize;
+	bool m_scaling;
+
 	int m_buttonMask;
 
 	QString m_host;
@@ -65,15 +68,22 @@ public:
 		    const QString &host = QString(""), int port = 5900,
 		    AppData *data = 0);
 	~KVncView();
-	
+	QSize sizeHint();
+	int heightForWidth (int w) const;
+	void drawRegion(int x, int y, int w, int h);
+	bool scaling();
+	QSize framebufferSize();
+
 	void startQuitting();
 	bool isQuitting();
 	void disableCursor();
-
 	QString host();
 	int port();
 	bool start();
 	enum RemoteViewStatus status();
+
+public slots:
+        void enableScaling(bool s);
 
 private slots:
 	void selectionChanged();
