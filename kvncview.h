@@ -54,6 +54,7 @@ private:
 	int m_port;
 
 	QClipboard *m_cb;
+	bool m_dontSendCb;
 	QCursor m_cursor;
 	bool m_cursorOn;
 	PointerLatencyOMeter m_plom;

@@ -16,6 +16,8 @@ Future:
 
 
 Known bugs/problems:
+- on some systems, the fullscreen-autohide mode does not detect mouse
+  movement unless a button is pressed
 - when using the XShm extension (see DesktopInit(), CreateShmImage() 
   invocation) I get error messages like "Xlib: unexpected async reply 
   (sequence 0x1717)!" after a few seconds. That's why XShm is not used at 

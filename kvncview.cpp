@@ -68,7 +68,8 @@ KVncView::KVncView(QWidget *parent,
   m_scaling(false),
   m_buttonMask(0),
   m_host(_host),
-  m_port(_port)
+  m_port(_port),
+  m_dontSendCb(false)
 {
 	kvncview = this;
 	password = _password;
@@ -350,10 +351,12 @@ void KVncView::customEvent(QCustomEvent *e)
 		gotEvent(e);
 		QApplication::beep();
 	}
-	else if (e->type() == ServerCutEventType) {  
+	else if (e->type() == ServerCutEventType) { 
 		gotEvent(e);
 		ServerCutEvent *sce = (ServerCutEvent*) e;
+		m_dontSendCb = true;
 		m_cb->setText(sce->bytes());
+		m_dontSendCb = false;
 	}
 	else if (e->type() == MouseStateEventType) {
 		gotEvent(e);
@@ -462,10 +465,11 @@ void KVncView::selectionChanged() {
 	if (status() != REMOTE_VIEW_CONNECTED)
 		return;
 
-	if (m_cb->ownsSelection())
+	if (m_cb->ownsSelection() || m_dontSendCb)
 		return;
 
-	QString text = m_cb->text();
+	QString text;
+	text = m_cb->text();
 	if (text.length() > MAX_SELECTION_LENGTH)
 		return;
 
