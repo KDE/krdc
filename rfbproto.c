@@ -31,12 +31,6 @@
 #include <zlib.h>
 #include <jpeglib.h>
 
-static Bool HandleRRE8(int rx, int ry, int rw, int rh);
-static Bool HandleRRE16(int rx, int ry, int rw, int rh);
-static Bool HandleRRE32(int rx, int ry, int rw, int rh);
-static Bool HandleCoRRE8(int rx, int ry, int rw, int rh);
-static Bool HandleCoRRE16(int rx, int ry, int rw, int rh);
-static Bool HandleCoRRE32(int rx, int ry, int rw, int rh);
 static Bool HandleHextile8(int rx, int ry, int rw, int rh);
 static Bool HandleHextile16(int rx, int ry, int rw, int rh);
 static Bool HandleHextile32(int rx, int ry, int rw, int rh);
@@ -337,10 +331,6 @@ SetFormatAndEncodings()
 	encs[se->nEncodings++] = Swap32IfLE(rfbEncodingZlib);
 	if (appData.compressLevel >= 0 && appData.compressLevel <= 9)
 	  requestCompressLevel = True;
-      } else if (strncasecmp(encStr,"corre",encStrLen) == 0) {
-	encs[se->nEncodings++] = Swap32IfLE(rfbEncodingCoRRE);
-      } else if (strncasecmp(encStr,"rre",encStrLen) == 0) {
-	encs[se->nEncodings++] = Swap32IfLE(rfbEncodingRRE);
       } else {
 	fprintf(stderr,"Unknown encoding '%.*s'\n",encStrLen,encStr);
       }
@@ -379,8 +369,6 @@ SetFormatAndEncodings()
     encs[se->nEncodings++] = Swap32IfLE(rfbEncodingTight);
     encs[se->nEncodings++] = Swap32IfLE(rfbEncodingHextile);
     encs[se->nEncodings++] = Swap32IfLE(rfbEncodingZlib);
-    encs[se->nEncodings++] = Swap32IfLE(rfbEncodingCoRRE);
-    encs[se->nEncodings++] = Swap32IfLE(rfbEncodingRRE);
 
     if (appData.compressLevel >= 0 && appData.compressLevel <= 9) {
       encs[se->nEncodings++] = Swap32IfLE(appData.compressLevel +
@@ -668,44 +656,6 @@ HandleRFBServerMessage()
 	break;
       }
 
-      case rfbEncodingRRE:
-      {
-	switch (myFormat.bitsPerPixel) {
-	case 8:
-	  if (!HandleRRE8(rect.r.x,rect.r.y,rect.r.w,rect.r.h))
-	    return False;
-	  break;
-	case 16:
-	  if (!HandleRRE16(rect.r.x,rect.r.y,rect.r.w,rect.r.h))
-	    return False;
-	  break;
-	case 32:
-	  if (!HandleRRE32(rect.r.x,rect.r.y,rect.r.w,rect.r.h))
-	    return False;
-	  break;
-	}
-	break;
-      }
-
-      case rfbEncodingCoRRE:
-      {
-	switch (myFormat.bitsPerPixel) {
-	case 8:
-	  if (!HandleCoRRE8(rect.r.x,rect.r.y,rect.r.w,rect.r.h))
-	    return False;
-	  break;
-	case 16:
-	  if (!HandleCoRRE16(rect.r.x,rect.r.y,rect.r.w,rect.r.h))
-	    return False;
-	  break;
-	case 32:
-	  if (!HandleCoRRE32(rect.r.x,rect.r.y,rect.r.w,rect.r.h))
-	    return False;
-	  break;
-	}
-	break;
-      }
-
       case rfbEncodingHextile:
       {
 	switch (myFormat.bitsPerPixel) {
@@ -844,22 +794,16 @@ fprintf(stderr, "tugce cut\n");
 #define CONCAT2E(a,b) CONCAT2(a,b)
 
 #define BPP 8
-#include "rre.c"
-#include "corre.c"
 #include "hextile.c"
 #include "zlib.c"
 #include "tight.c"
 #undef BPP
 #define BPP 16
-#include "rre.c"
-#include "corre.c"
 #include "hextile.c"
 #include "zlib.c"
 #include "tight.c"
 #undef BPP
 #define BPP 32
-#include "rre.c"
-#include "corre.c"
 #include "hextile.c"
 #include "zlib.c"
 #include "tight.c"
