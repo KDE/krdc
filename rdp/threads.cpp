@@ -19,6 +19,8 @@
 
 #include <time.h>
 
+#include <kapplication.h>
+
 #include "events.h"
 
 #include <X11/Xlib.h>

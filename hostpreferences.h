@@ -3,6 +3,7 @@
                              -------------------
     begin                : Fri May 09 19:02 CET 2003
     copyright            : (C) 2003 by Tim Jansen
+                         : (C) 2004 Nadeem Hasan <nhasan@kde.org>
     email                : tim@tjansen.de
  ***************************************************************************/
 
@@ -19,7 +20,7 @@
 #define HOSTPREFERENCES_H
 
 #include <qstring.h>
-#include <qvaluelist.h>
+#include <qstringlist.h>
 #include "smartptr.h"
 
 class HostPreferences;
@@ -45,21 +46,39 @@ public:
 	QString host() const;
 	QString type() const;
 	QString prefix() const;
-	static QString getPrefix(const QString &host, const QString &type);
+	static QString prefix(const QString &host, const QString &type);
 };
 
+typedef SmartPtr<HostPref>      HostPrefPtr;
+typedef QValueList<HostPrefPtr> HostPrefPtrList;
+
 class HostPreferences {
-private:
-	KConfig *m_config;
-
 public:
-	HostPreferences(KConfig *conf);
+	static HostPreferences *instance();
 
-	SmartPtr<HostPref> getHostPref(const QString &host, const QString &type);
-	SmartPtr<HostPref> createHostPref(const QString &host, const QString &type);
-	QValueList<SmartPtr<HostPref> > getAllHostPrefs();
+	HostPrefPtr getHostPref(const QString &host, const QString &type);
+	HostPrefPtr createHostPref(const QString &host, const QString &type);
+	HostPrefPtrList getAllHostPrefs();
+	HostPrefPtr vncDefaults();
+	HostPrefPtr rdpDefaults();
 	void removeHostPref(HostPref *hostPref);
+
+	void setShowBrowsingPanel( bool b );
+	void setServerCompletions( const QStringList &list );
+	void setServerHistory( const QStringList &list );
+
+	bool showBrowsingPanel();
+	QStringList serverCompletions();
+	QStringList serverHistory();
+
 	void sync();
+
+private:
+	HostPreferences();
+	~HostPreferences();
+
+	KConfig *m_config;
+	static HostPreferences *m_instance;
 
 };
 

@@ -38,23 +38,41 @@ RdpHostPref::~RdpHostPref()
 
 void RdpHostPref::save()
 {
-	m_config->setGroup("PerHostSettings");
-	QString p = prefix();
-	m_config->writeEntry(p+"exists", true);
-	m_config->writeEntry(p+"width", m_width);
-	m_config->writeEntry(p+"height", m_height);
-	m_config->writeEntry(p+"layout", m_layout);
-	m_config->writeEntry(p+"askOnConnect", m_askOnConnect);
+	if ( !m_host.isEmpty() && !m_type.isEmpty() )
+	{
+		m_config->setGroup("PerHostSettings");
+		QString p = prefix();
+		m_config->writeEntry(p+"exists", true);
+		m_config->writeEntry(p+"width", m_width);
+		m_config->writeEntry(p+"height", m_height);
+		m_config->writeEntry(p+"layout", m_layout);
+		m_config->writeEntry(p+"askOnConnect", m_askOnConnect);
+	}
+	else
+	{
+		m_config->setGroup( "RdpDefaultSettings" );
+		m_config->writeEntry( "rdpWidth", m_width );
+		m_config->writeEntry( "rdpHeight", m_height );
+		m_config->writeEntry( "rdpKeyboardLayout", m_layout );
+		m_config->writeEntry( "rdpShowHostPreferences", m_askOnConnect );
+	}
 }
 
 void RdpHostPref::load()
 {
-	m_config->setGroup("PerHostSettings");
-	QString p = prefix();
-	m_width = m_config->readNumEntry(p+"width", 800);
-	m_height = m_config->readNumEntry(p+"height", 600);
-	m_layout = m_config->readEntry(p+"layout", "en-us");
-	m_askOnConnect = m_config->readBoolEntry(p+"askOnConnect", true);
+	if ( !m_host.isEmpty() && !m_type.isEmpty() )
+	{
+		m_config->setGroup("PerHostSettings");
+		QString p = prefix();
+		m_width = m_config->readNumEntry(p+"width", 800);
+		m_height = m_config->readNumEntry(p+"height", 600);
+		m_layout = m_config->readEntry(p+"layout", "en-us");
+		m_askOnConnect = m_config->readBoolEntry(p+"askOnConnect", true);
+	}
+	else
+	{
+		setDefaults();
+	}
 }
 
 void RdpHostPref::remove()
@@ -74,7 +92,7 @@ void RdpHostPref::setDefaults()
 	m_width = m_config->readNumEntry("rdpWidth", 800);
 	m_height = m_config->readNumEntry("rdpHeight", 600);
 	m_layout = m_config->readEntry("rdpLayout", "en-us");
-	m_askOnConnect = true;
+	m_askOnConnect = m_config->readBoolEntry("rdpShowHostPreferences", true);
 }
 
 QString RdpHostPref::prefDescription() const
@@ -105,7 +123,7 @@ int RdpHostPref::height() const
 	return m_height;
 }
 
-void RdpHostPref::setLayout(QString &l)
+void RdpHostPref::setLayout(const QString &l)
 {
 	m_layout = l;
 	save();

@@ -31,18 +31,34 @@ VncHostPref::~VncHostPref() {
 }
 
 void VncHostPref::save() {
-	m_config->setGroup("PerHostSettings");
-	QString p = prefix();
-	m_config->writeEntry(p+"exists", true);
-	m_config->writeEntry(p+"quality", m_quality);
-	m_config->writeEntry(p+"askOnConnect", m_askOnConnect);
+	if ( !m_host.isEmpty() && !m_type.isEmpty() )
+	{
+		m_config->setGroup("PerHostSettings");
+		QString p = prefix();
+		m_config->writeEntry(p+"exists", true);
+		m_config->writeEntry(p+"quality", m_quality);
+		m_config->writeEntry(p+"askOnConnect", m_askOnConnect);
+	}
+	else
+	{
+		m_config->setGroup( "VncDefaultSettings" );
+		m_config->writeEntry( "vncQuality", m_quality );
+		m_config->writeEntry( "vncShowHostPreferences", m_askOnConnect );
+	}
 }
 
 void VncHostPref::load() {
-	m_config->setGroup("PerHostSettings");
-	QString p = prefix();
-	m_quality = m_config->readNumEntry(p+"quality", 0);
-	m_askOnConnect = m_config->readBoolEntry(p+"askOnConnect", true);
+	if ( !m_host.isEmpty() && !m_type.isEmpty() )
+	{
+		m_config->setGroup("PerHostSettings");
+		QString p = prefix();
+		m_quality = m_config->readNumEntry(p+"quality", 0);
+		m_askOnConnect = m_config->readBoolEntry(p+"askOnConnect", true);
+	}
+	else
+	{
+		setDefaults();
+	}
 }
 
 void VncHostPref::remove() {
@@ -56,7 +72,7 @@ void VncHostPref::remove() {
 void VncHostPref::setDefaults() {
 	m_config->setGroup("VncDefaultSettings");
 	m_quality = m_config->readNumEntry("vncQuality", 0);
-	m_askOnConnect = true;
+	m_askOnConnect = m_config->readBoolEntry("vncShowHostPreferences", true);
 }
 
 QString VncHostPref::prefDescription() const {

@@ -25,12 +25,13 @@
 #include <qrect.h>
 #include <qtimer.h>
 #include <qdesktopwidget.h>
+
 #include "vnc/kvncview.h"
 #include "rdp/krdpview.h"
 #include "kfullscreenpanel.h"
-#include "keycapturedialog2.h"
 #include "vidmode.h"
 #include "smartptr.h"
+#include "keycapturedialog.h"
 
 class QPixmap;
 class KToolBar;
@@ -69,7 +70,7 @@ private:
 	KProgress *m_progress;             // progress bar for the dialog
 	KRemoteView *m_view;                  // the remote widget (e.g. KVncView)
 
-	SmartPtr<KeyCaptureDialog2> m_keyCaptureDialog; // dialog for key capturing
+	SmartPtr<KeyCaptureDialog> m_keyCaptureDialog; // dialog for key capturing
 	KFullscreenPanel *m_fsToolbar;     // toolbar for fullscreen (0 in normal mode)
 	QWidget *m_fsToolbarWidget;        // qt designer widget for fs toolbar
                                            //     (invalid in normal mode)

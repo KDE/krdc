@@ -32,8 +32,6 @@ struct SmartPtrRefCount {
 	int refsToThis;   // number of pointer to the ref count
 };
 
-class WeakPtr;
-
 /**
  * SmartPtr is a reference counting smart pointer. When you create
  * the first instance it will create a new counter for the pointee

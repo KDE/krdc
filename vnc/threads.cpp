@@ -16,7 +16,9 @@
  ***************************************************************************/
 
 #include "kvncview.h"
-#include "kdebug.h"
+
+#include <kdebug.h>
+#include <kapplication.h>
 
 #include "vncviewer.h"
 #include "threads.h"

@@ -1,9 +1,10 @@
 /***************************************************************************
-                     keycapturedialog2.cpp - KeyCaptureDialog
+                     keycapturedialog.cpp - KeyCaptureDialog
                              -------------------
     begin                : Wed Dec 25 01:20:22 CET 2002
     copyright            : (C) 2002-2003 by Tim Jansen
                            (C) unknown (whoever wrote kshortcutdialog.cpp)
+                           (C) 2004 Nadeem Hasan <nhasan@kde.org>
     email                : tim@tjansen.de
  ***************************************************************************/
 
@@ -20,10 +21,13 @@
 // based on key capture code from kdelibs/kdeui/kshortcutdialog.cpp
 //
 
-#include "keycapturedialog2.h"
+#include "keycapturedialog.h"
+#include "keycapturewidget.h"
+
 #include <qlabel.h>
 #include <qlayout.h>
-#include <kdebug.h>
+
+#include <klocale.h>
 
 #define XK_XKB_KEYS
 #define XK_MISCELLANY
@@ -42,27 +46,29 @@ const int XKeyRelease = KeyRelease;
 #endif
 
 
-KeyCaptureDialog2::KeyCaptureDialog2(QWidget *w, 
-				     const char *name, 
-				     bool modal) :
-	KeyCaptureDialog(w, name, modal),
-	m_grabbed(false) {
+KeyCaptureDialog::KeyCaptureDialog(QWidget *parent, const char *name)
+    : KDialogBase(parent, name, true, i18n( "Enter Key Combination" ),
+      Cancel, Cancel, true), m_grabbed(false) {
+  QFrame *main = makeMainWidget();
+  QVBoxLayout *layout = new QVBoxLayout( main, 0, KDialog::spacingHint() );
+  m_captureWidget = new KeyCaptureWidget( main, "m_captureWidget" );
+  layout->addWidget( m_captureWidget );
+  layout->addStretch();
 }
 
-KeyCaptureDialog2::~KeyCaptureDialog2() {
+KeyCaptureDialog::~KeyCaptureDialog() {
 	if (m_grabbed)
 		releaseKeyboard();
 }
 
-
-void KeyCaptureDialog2::execute() {
-	keyLabel->setText("");
+void KeyCaptureDialog::execute() {
+	m_captureWidget->keyLabel->setText("");
 	exec();
 	if (m_grabbed)
 		releaseKeyboard();
 }
 
-bool KeyCaptureDialog2::x11Event(XEvent *pEvent)
+bool KeyCaptureDialog::x11Event(XEvent *pEvent)
 {
 	switch( pEvent->type ) {
 		case XKeyPress:
@@ -83,7 +89,7 @@ bool KeyCaptureDialog2::x11Event(XEvent *pEvent)
 	return QWidget::x11Event( pEvent );
 }
 
-void KeyCaptureDialog2::x11EventKeyPress( XEvent *pEvent )
+void KeyCaptureDialog::x11EventKeyPress( XEvent *pEvent )
 {
 	// taken from kshortcutdialog.h
 	KKeyNative keyNative( pEvent );
@@ -130,8 +136,8 @@ void KeyCaptureDialog2::x11EventKeyPress( XEvent *pEvent )
 	if( keyModX & KKeyNative::modX(KKey::SHIFT) )	keyModStr += KKey::modFlagLabel(KKey::SHIFT) + "+";
 
 	// Display currently selected modifiers, or redisplay old key.
-	keyLabel->setText( keyModStr );
+	m_captureWidget->keyLabel->setText( keyModStr );
 }
 
-#include "keycapturedialog2.moc"
+#include "keycapturedialog.moc"
 

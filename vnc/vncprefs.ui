@@ -1,0 +1,158 @@
+<!DOCTYPE UI><UI version="3.2" stdsetdef="1">
+<class>VncPrefs</class>
+<widget class="QWidget">
+    <property name="name">
+        <cstring>VncPrefs</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>472</width>
+            <height>126</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>Form2</string>
+    </property>
+    <vbox>
+        <property name="name">
+            <cstring>unnamed</cstring>
+        </property>
+        <property name="margin">
+            <number>0</number>
+        </property>
+        <widget class="QGroupBox">
+            <property name="name">
+                <cstring>groupBox</cstring>
+            </property>
+            <property name="title">
+                <string>Connection</string>
+            </property>
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QCheckBox" row="1" column="0" rowspan="1" colspan="3">
+                    <property name="name">
+                        <cstring>cbUseEncryption</cstring>
+                    </property>
+                    <property name="enabled">
+                        <bool>false</bool>
+                    </property>
+                    <property name="text">
+                        <string>&amp;Enable encryption (secure, but slow and not always possible)</string>
+                    </property>
+                    <property name="accel">
+                        <string>Alt+E</string>
+                    </property>
+                    <property name="whatsThis" stdset="0">
+                        <string>Enable this option to encrypt the connection. Only newer servers support this option. Encrypting prevents others from eavesdropping, but can slow down the connection considerably.</string>
+                    </property>
+                </widget>
+                <widget class="QLabel" row="0" column="0">
+                    <property name="name">
+                        <cstring>connectionTypeLabel</cstring>
+                    </property>
+                    <property name="sizePolicy">
+                        <sizepolicy>
+                            <hsizetype>0</hsizetype>
+                            <vsizetype>1</vsizetype>
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                        </sizepolicy>
+                    </property>
+                    <property name="text">
+                        <string>Connection &amp;type:</string>
+                    </property>
+                    <property name="buddy" stdset="0">
+                        <cstring>cmbQuality</cstring>
+                    </property>
+                </widget>
+                <widget class="QComboBox" row="0" column="1">
+                    <item>
+                        <property name="text">
+                            <string>High Quality (LAN, direct connection)</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>Medium Quality (DSL, Cable, fast Internet)</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>Low Quality (Modem, ISDN, slow Internet)</string>
+                        </property>
+                    </item>
+                    <property name="name">
+                        <cstring>cmbQuality</cstring>
+                    </property>
+                    <property name="sizePolicy">
+                        <sizepolicy>
+                            <hsizetype>5</hsizetype>
+                            <vsizetype>0</vsizetype>
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                        </sizepolicy>
+                    </property>
+                    <property name="minimumSize">
+                        <size>
+                            <width>280</width>
+                            <height>0</height>
+                        </size>
+                    </property>
+                    <property name="whatsThis" stdset="0">
+                        <string>Use this to specify the performance of your connection. Note that you should select the speed of the weakest link - even if you have a high speed connection, it will not help you if the remote computer uses a slow modem. Choosing a too high quality on a slow link will cause slower response times. Choosing a lower quality will increase latencies in high speed connections and results in lower image quality, especially in 'Low Quality' mode.</string>
+                    </property>
+                </widget>
+                <spacer row="0" column="2">
+                    <property name="name">
+                        <cstring>Spacer</cstring>
+                    </property>
+                    <property name="orientation">
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                        <enum>Expanding</enum>
+                    </property>
+                    <property name="sizeHint">
+                        <size>
+                            <width>84</width>
+                            <height>16</height>
+                        </size>
+                    </property>
+                </spacer>
+            </grid>
+        </widget>
+        <widget class="QCheckBox">
+            <property name="name">
+                <cstring>cbShowPrefs</cstring>
+            </property>
+            <property name="text">
+                <string>&amp;Show this dialog again for this host</string>
+            </property>
+            <property name="accel">
+                <string>Alt+S</string>
+            </property>
+            <property name="whatsThis" stdset="0">
+                <string>Select this option if you do not want to be asked for the settings when connecting to a host. For hosts with existing profiles these profiles will be taken. New hosts will be configured with the defaults.</string>
+            </property>
+        </widget>
+    </vbox>
+</widget>
+<includes>
+    <include location="global" impldecl="in implementation">kdialog.h</include>
+    <include location="local" impldecl="in implementation">vncprefs.ui.h</include>
+</includes>
+<functions>
+    <function specifier="non virtual">setQuality( int quality )</function>
+    <function specifier="non virtual" returnType="int">quality()</function>
+    <function specifier="non virtual">setShowPrefs( bool b )</function>
+    <function specifier="non virtual" returnType="int">showPrefs()</function>
+    <function specifier="non virtual">setUseEncryption( bool b )</function>
+    <function specifier="non virtual" returnType="bool">useEncryption()</function>
+</functions>
+<layoutdefaults spacing="6" margin="11"/>
+<layoutfunctions spacing="KDialog::spacingHint" margin="KDialog::marginHint"/>
+</UI>

@@ -2,48 +2,39 @@
      krdpview.h, implementation of the KRdpView class
      Copyright (C) 2002 Arend van Beelen jr.
 
-     This program is free software; you can redistribute it and/or modify it under the terms of the
-     GNU General Public License as published by the Free Software Foundation; either version 2 of
-     the License, or (at your option) any later version.
+     This program is free software; you can redistribute it and/or modify
+     it under the terms of the GNU General Public License as published by
+     the Free Software Foundation; either version 2 of the License, or (at
+     your option) any later version.
 
-     This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
-     without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
-     the GNU General Public License for more details.
+     This program is distributed in the hope that it will be useful, but
+     WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+     or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
+     for more details.
 
-     You should have received a copy of the GNU General Public License along with this program; if
-     not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston,
-     MA 02111-1307 USA
+     You should have received a copy of the GNU General Public License along
+     with this program; if not, write to the Free Software Foundation, Inc.,
+     59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
      For any questions, comments or whatever, you may mail me at: arend@auton.nl
 */
 
-#include <kconfig.h>
-#include <kdebug.h>
 #include <klocale.h>
 #include <kmessagebox.h>
-#include <kinstance.h>
-#include <kstandarddirs.h>
-#include <kapplication.h>
-#include <kkeynative.h>
-#include <qcheckbox.h>
-#include <qcombobox.h>
-#include <qdatastream.h>
-#include <dcopclient.h>
-#include <qbitmap.h>
-#include <qlineedit.h>
-#include <qdialog.h>
-#include <qmutex.h>
-#include <qspinbox.h>
-#include <qwaitcondition.h>
+#include <kdialogbase.h>
+
+#include <qvbox.h>
 
 #include <X11/Xlib.h>
 #include <X11/keysym.h>
+
+#undef Bool
 
 #include "events.h"
 #include "krdpview.h"
 #include "rdesktop.h"
 #include "rdphostpref.h"
-#include "rdphostpreferences.h"
+#include "rdpprefs.h"
 
 // global variables from rdesktop
 extern int width;           // width of the remote desktop
@@ -132,58 +123,46 @@ int KRdpView::port()
 // open a connection
 bool KRdpView::start()
 { 
-	SmartPtr<RdpHostPref> hp;
+	SmartPtr<RdpHostPref> hp, rdpDefaults;
 
 	if(!rdpAppDataConfigured)
 	{
-		KConfig *config = KApplication::kApplication()->config();
-		config->setGroup("RdpDefaultSettings");
-		bool showPrefs = config->readBoolEntry("rdpShowHostPreferences", true);
+		HostPreferences *hps = HostPreferences::instance();
 
-		HostPreferences hps(config);
-		hp = SmartPtr<RdpHostPref>(hps.createHostPref(m_host,
+		hp = SmartPtr<RdpHostPref>(hps->createHostPref(m_host,
 		                                              RdpHostPref::RdpType));
 		int wv = hp->width();
 		int hv = hp->height();
 		QString kl = hp->layout();
-		if(showPrefs && hp->askOnConnect())
+		if(hp->askOnConnect())
 		{
 			// show preferences dialog
-			RdpHostPreferences rhp(0, "RdpHostPreferencesDialog", true);
-			rhp.setCaption(i18n("RDP Host Preferences for %1").arg(m_host));
-			rhp.rdpWidthSpin->setValue(wv);
-			rhp.rdpHeightSpin->setValue(hv);
-			rhp.rdpKeyboardCombo->setCurrentItem(keymap2int(kl));
-			if(wv == 640 && hv == 480)
-			{
-				rhp.rdpResolutionCombo->setCurrentItem(0);
-			}
-			else if(wv == 800 && hv == 600)
-			{
-				rhp.rdpResolutionCombo->setCurrentItem(1);
-			}
-			else if(wv == 1024 && hv == 768)
-			{
-				rhp.rdpResolutionCombo->setCurrentItem(2);
-			}
-			else
-			{
-				rhp.rdpResolutionCombo->setCurrentItem(3);
-				rhp.rdpWidthSpin->setEnabled(true);
-				rhp.rdpHeightSpin->setEnabled(true);
-			}
-			rhp.nextStartupCheckbox->setChecked(true);
-			if(rhp.exec() == QDialog::Rejected)
+			KDialogBase *dlg = new KDialogBase( this, "dlg", true,
+				i18n( "RDP Host Preferences for %1" ).arg( m_host ),
+				KDialogBase::Ok|KDialogBase::Cancel, KDialogBase::Ok, true );
+
+			QVBox *vbox = dlg->makeVBoxMainWidget();
+			RdpPrefs *prefs = new RdpPrefs( vbox );
+			QWidget *spacer = new QWidget( vbox );
+			vbox->setStretchFactor( spacer, 10 );
+
+			prefs->setRdpWidth( wv );
+			prefs->setRdpHeight( hv );
+			prefs->setResolution();
+			prefs->setKbLayout( keymap2int( kl ) );
+			prefs->setShowPrefs( true );
+
+			if ( dlg->exec() == QDialog::Rejected )
 				return false;
 
-			wv = rhp.rdpWidthSpin->value();
-			hv = rhp.rdpHeightSpin->value();
-			kl = int2keymap(rhp.rdpKeyboardCombo->currentItem());
-			hp->setAskOnConnect(rhp.nextStartupCheckbox->isChecked());
+			wv = prefs->rdpWidth();
+			hv = prefs->rdpHeight();
+			kl = int2keymap( prefs->kbLayout() );
+			hp->setAskOnConnect( prefs->showPrefs() );
 			hp->setWidth(wv);
 			hp->setHeight(hv);
 			hp->setLayout(kl);
-			hps.sync();
+			hps->sync();
 		}
 	}
 

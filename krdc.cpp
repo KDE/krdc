@@ -3,6 +3,7 @@
                              -------------------
     begin                : Tue May 13 23:07:42 CET 2002
     copyright            : (C) 2002-2003 by Tim Jansen
+                           (C) 2003 Nadeem Hasan <nhasan@kde.org>
     email                : tim@tjansen.de
  ***************************************************************************/
 
@@ -16,37 +17,26 @@
  ***************************************************************************/
 
 #include "krdc.h"
-#include "srvlocmaindialog.h"
-#include <kdebug.h>
+#include "maindialog.h"
+#include "hostpreferences.h"
+
 #include <kapplication.h>
+#include <kdebug.h>
 #include <kcombobox.h>
-#include <kkeybutton.h>
-#include <qevent.h>
-#include <qsizepolicy.h>
-#include <qcolor.h>
-#include <kconfig.h>
 #include <kurl.h>
-#include <kstandarddirs.h>
+#include <kiconloader.h>
 #include <klocale.h>
-#include <kdialog.h>
 #include <ktoolbar.h>
 #include <ktoolbarbutton.h>
 #include <kpopupmenu.h>
-#include <qdockarea.h>
-#include <qlabel.h>
-#include <qtoolbutton.h>
-#include <qwhatsthis.h>
-#include <qtooltip.h>
-#include <qiconset.h>
-
 #include <kmessagebox.h>
 #include <kwin.h>
-#include <kglobal.h>
-#include <kinstance.h>
 #include <kstartupinfo.h>
-#include <qcursor.h>
-#include <qobjectlist.h>
-#include <qbitmap.h>
+
+#include <qdockarea.h>
+#include <qlabel.h>
+#include <qwhatsthis.h>
+#include <qtooltip.h>
 
 #define BUMP_SCROLL_CONSTANT (200)
 
@@ -110,11 +100,10 @@ KRDC::KRDC(WindowMode wm, const QString &host,
 	connect(&m_autoHideTimer, SIGNAL(timeout()), SLOT(hideFullscreenToolbarNow()));
 	connect(&m_bumpScrollTimer, SIGNAL(timeout()), SLOT(bumpScroll()));
 
-	KStandardDirs *dirs = KGlobal::dirs();
-	m_pindown = QPixmap(dirs->findResource("appdata", "pics/pindown.png"));
-	m_pinup   = QPixmap(dirs->findResource("appdata", "pics/pinup.png"));
+	m_pindown = UserIcon("pindown");
+	m_pinup   = UserIcon("pinup");
 
-	m_keyCaptureDialog = new KeyCaptureDialog2(0, 0);
+	m_keyCaptureDialog = new KeyCaptureDialog(0, 0);
 
 	setMouseTracking(true);
 
@@ -124,8 +113,6 @@ KRDC::KRDC(WindowMode wm, const QString &host,
 bool KRDC::start()
 {
 	QString userName, password;
-	KConfig *config = KApplication::kApplication()->config();
-	config->setGroup(QString::null);
 	QString serverHost;
 	int serverPort = 5900;
 
@@ -145,19 +132,15 @@ bool KRDC::start()
 			return true;
 		}
 	} else {
-		SrvLocMainDialog ncd(0, "SrvLocMainDialog",
-				     config->readBoolEntry("browsingPanel", false));
-		QStringList list = config->readListEntry("serverCompletions");
-		ncd.serverInput->completionObject()->setItems(list);
-		list = config->readListEntry("serverHistory");
-		ncd.serverInput->setHistoryItems(list);
-		ncd.serverInput->setEditText(m_lastHost);
 
-		if (ncd.exec() == QDialog::Rejected) {
+		MainDialog mainDlg(this, "MainDialog");
+		mainDlg.setRemoteHost(m_lastHost);
+
+		if (mainDlg.exec() == QDialog::Rejected) {
 			return false;
 		}
 
-		QString hostString = m_host = ncd.serverInput->currentText();
+		QString m_host = mainDlg.remoteHost();
 		m_lastHost = m_host;
 		if (m_host.startsWith("vnc:/"))
 			m_protocol = PROTOCOL_VNC;
@@ -166,18 +149,11 @@ bool KRDC::start()
 		if (!parseHost(m_host, m_protocol, serverHost, serverPort,
 			       userName, password)) {
 			KMessageBox::error(0,
-					   i18n("The entered host does not have the required form."),
-					   i18n("Malformed URL or Host"));
+					i18n("The entered host does not have the required form."),
+					i18n("Malformed URL or Host"));
 			emit disconnectedError();
 			return true;
 		}
-
-		ncd.serverInput->addToHistory(hostString);
-		list = ncd.serverInput->completionObject()->items();
-		config->writeEntry("serverCompletions", list);
-		list = ncd.serverInput->historyItems();
-		config->writeEntry("serverHistory", list);
-		config->writeEntry("browsingPanel", ncd.browsing());
 	}
 
 	setCaption(i18n("%1 - Remote Desktop Connection").arg(m_host));

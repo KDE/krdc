@@ -95,7 +95,8 @@ class RdpHostPref : public HostPref
 	public:
 		static const QString RdpType;
 
-		RdpHostPref(KConfig *conf, const QString &host, const QString &type);
+		RdpHostPref(KConfig *conf, const QString &host=QString::null,
+			const QString &type=QString::null);
 		virtual ~RdpHostPref();
 
 		virtual QString  prefDescription() const;
@@ -103,7 +104,7 @@ class RdpHostPref : public HostPref
 		int              width() const;
 		void             setHeight(int h);
 		int              height() const;
-		void             setLayout(QString &l);
+		void             setLayout(const QString &l);
 		QString          layout() const;
 		void             setAskOnConnect(bool ask);
 		bool             askOnConnect() const;

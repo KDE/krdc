@@ -1,0 +1,366 @@
+<!DOCTYPE UI><UI version="3.2" stdsetdef="1">
+<class>MainDialogBase</class>
+<widget class="QWidget">
+    <property name="name">
+        <cstring>MainDialogBase</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>544</width>
+            <height>338</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>Form1</string>
+    </property>
+    <grid>
+        <property name="name">
+            <cstring>unnamed</cstring>
+        </property>
+        <property name="margin">
+            <number>0</number>
+        </property>
+        <widget class="QLabel" row="1" column="0">
+            <property name="name">
+                <cstring>m_serverLabel</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>0</hsizetype>
+                    <vsizetype>5</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="frameShape">
+                <enum>MShape</enum>
+            </property>
+            <property name="frameShadow">
+                <enum>MShadow</enum>
+            </property>
+            <property name="text">
+                <string>Remote &amp;desktop:</string>
+            </property>
+            <property name="buddy" stdset="0">
+                <cstring>m_serverInput</cstring>
+            </property>
+        </widget>
+        <widget class="KHistoryCombo" row="1" column="1">
+            <property name="name">
+                <cstring>m_serverInput</cstring>
+            </property>
+            <property name="minimumSize">
+                <size>
+                    <width>250</width>
+                    <height>0</height>
+                </size>
+            </property>
+            <property name="maxCount">
+                <number>12</number>
+            </property>
+            <property name="duplicatesEnabled">
+                <bool>false</bool>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Enter the hostname and display number</string>
+            </property>
+            <property name="whatsThis" stdset="0">
+                <string>Enter the name and display number of the computer that you want to connect to, separated by a colon, e.g. 'mycomputer:1'. The address can be any valid Internet address. The display numbers usually start at 0. If you do not have a display number, try 0 or 1.
+Remote Desktop Connection only supports systems that use VNC.</string>
+            </property>
+        </widget>
+        <widget class="KPushButton" row="1" column="2">
+            <property name="name">
+                <cstring>m_browseButton</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>0</hsizetype>
+                    <vsizetype>0</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="text">
+                <string>&amp;Browse &lt;&lt;</string>
+            </property>
+            <property name="accel">
+                <string>Alt+B</string>
+            </property>
+            <property name="whatsThis" stdset="0">
+                <string>Turn on/off the network browsing panel.</string>
+            </property>
+        </widget>
+        <widget class="KActiveLabel" row="2" column="0" rowspan="1" colspan="3">
+            <property name="name">
+                <cstring>kActiveLabel2</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>7</hsizetype>
+                    <vsizetype>0</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="text">
+                <string>Enter the address of the computer to connect to, or browse the network and select one. VNC and RDP compatible servers will be supported. &lt;a href="whatsthis:&lt;h3&gt;Examples&lt;/h3&gt;for a computer called 'megan':&lt;p&gt;&lt;table&gt;&lt;tr&gt;&lt;td&gt;megan:1&lt;/td&gt;&lt;td&gt;connect to the VNC server on 'megan' with display number 1&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;vnc:/megan:1&lt;/td&gt;&lt;td&gt;longer form for the same thing&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;rdp:/megan&lt;/td&gt;&lt;td&gt;connect to the RDP server on 'megan'&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;"&gt;Examples&lt;/a&gt;</string>
+            </property>
+        </widget>
+        <widget class="QFrame" row="0" column="0" rowspan="1" colspan="3">
+            <property name="name">
+                <cstring>m_browsingPanel</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>5</hsizetype>
+                    <vsizetype>3</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="frameShape">
+                <enum>NoFrame</enum>
+            </property>
+            <property name="frameShadow">
+                <enum>Plain</enum>
+            </property>
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <property name="margin">
+                    <number>0</number>
+                </property>
+                <widget class="KPushButton" row="0" column="0">
+                    <property name="name">
+                        <cstring>m_rescanButton</cstring>
+                    </property>
+                    <property name="text">
+                        <string>&amp;Rescan</string>
+                    </property>
+                    <property name="accel">
+                        <string>Alt+R</string>
+                    </property>
+                    <property name="whatsThis" stdset="0">
+                        <string>Rescans the network. Depending on the network configuration this may take a few seconds until all systems have responded.</string>
+                    </property>
+                </widget>
+                <spacer row="0" column="1">
+                    <property name="name">
+                        <cstring>Spacer3</cstring>
+                    </property>
+                    <property name="orientation">
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                        <enum>Expanding</enum>
+                    </property>
+                    <property name="sizeHint">
+                        <size>
+                            <width>34</width>
+                            <height>16</height>
+                        </size>
+                    </property>
+                </spacer>
+                <widget class="QLabel" row="0" column="2">
+                    <property name="name">
+                        <cstring>TextLabel1_2</cstring>
+                    </property>
+                    <property name="text">
+                        <string>&amp;Search:</string>
+                    </property>
+                    <property name="buddy" stdset="0">
+                        <cstring>m_searchInput</cstring>
+                    </property>
+                </widget>
+                <widget class="KLineEdit" row="0" column="3">
+                    <property name="name">
+                        <cstring>m_searchInput</cstring>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Enter a search term</string>
+                    </property>
+                    <property name="whatsThis" stdset="0">
+                        <string>Enter a search term here if you want to search for a specific system, then press Enter or click Rescan. All systems, whose description matches the search term, will be displayed. The search is not case sensitive. If you leave the field empty all systems will be displayed.</string>
+                    </property>
+                </widget>
+                <spacer row="0" column="4">
+                    <property name="name">
+                        <cstring>Spacer4</cstring>
+                    </property>
+                    <property name="orientation">
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                        <enum>Expanding</enum>
+                    </property>
+                    <property name="sizeHint">
+                        <size>
+                            <width>34</width>
+                            <height>16</height>
+                        </size>
+                    </property>
+                </spacer>
+                <widget class="QLabel" row="0" column="5">
+                    <property name="name">
+                        <cstring>TextLabel1</cstring>
+                    </property>
+                    <property name="sizePolicy">
+                        <sizepolicy>
+                            <hsizetype>0</hsizetype>
+                            <vsizetype>5</vsizetype>
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                        </sizepolicy>
+                    </property>
+                    <property name="text">
+                        <string>Scop&amp;e:</string>
+                    </property>
+                    <property name="buddy" stdset="0">
+                        <cstring>m_scopeCombo</cstring>
+                    </property>
+                </widget>
+                <widget class="KComboBox" row="0" column="6">
+                    <property name="name">
+                        <cstring>m_scopeCombo</cstring>
+                    </property>
+                    <property name="sizePolicy">
+                        <sizepolicy>
+                            <hsizetype>0</hsizetype>
+                            <vsizetype>0</vsizetype>
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                        </sizepolicy>
+                    </property>
+                    <property name="minimumSize">
+                        <size>
+                            <width>100</width>
+                            <height>0</height>
+                        </size>
+                    </property>
+                    <property name="whatsThis" stdset="0">
+                        <string>An administrator can configure the network to have several scopes. If this is the case, you can select the scope to scan here.</string>
+                    </property>
+                </widget>
+                <widget class="KListView" row="1" column="0" rowspan="1" colspan="7">
+                    <column>
+                        <property name="text">
+                            <string>Name</string>
+                        </property>
+                        <property name="clickable">
+                            <bool>true</bool>
+                        </property>
+                        <property name="resizable">
+                            <bool>true</bool>
+                        </property>
+                    </column>
+                    <column>
+                        <property name="text">
+                            <string>Type</string>
+                        </property>
+                        <property name="clickable">
+                            <bool>true</bool>
+                        </property>
+                        <property name="resizable">
+                            <bool>true</bool>
+                        </property>
+                    </column>
+                    <column>
+                        <property name="text">
+                            <string>Address</string>
+                        </property>
+                        <property name="clickable">
+                            <bool>true</bool>
+                        </property>
+                        <property name="resizable">
+                            <bool>true</bool>
+                        </property>
+                    </column>
+                    <column>
+                        <property name="text">
+                            <string>Protocol</string>
+                        </property>
+                        <property name="clickable">
+                            <bool>true</bool>
+                        </property>
+                        <property name="resizable">
+                            <bool>true</bool>
+                        </property>
+                    </column>
+                    <property name="name">
+                        <cstring>m_browsingView</cstring>
+                    </property>
+                    <property name="allColumnsShowFocus">
+                        <bool>true</bool>
+                    </property>
+                    <property name="showToolTips">
+                        <bool>false</bool>
+                    </property>
+                    <property name="resizeMode">
+                        <enum>AllColumns</enum>
+                    </property>
+                    <property name="whatsThis" stdset="0">
+                        <string>Here you can see the systems on the network that allow you to connect. Note that an administrator can hide systems, so the list is not always complete. Click on an item to select it, double-click it to connect immediately.</string>
+                    </property>
+                </widget>
+            </grid>
+        </widget>
+    </grid>
+</widget>
+<customwidgets>
+</customwidgets>
+<connections>
+    <connection>
+        <sender>m_browseButton</sender>
+        <signal>clicked()</signal>
+        <receiver>MainDialogBase</receiver>
+        <slot>toggleBrowsingArea()</slot>
+    </connection>
+    <connection>
+        <sender>m_rescanButton</sender>
+        <signal>clicked()</signal>
+        <receiver>MainDialogBase</receiver>
+        <slot>rescan()</slot>
+    </connection>
+    <connection>
+        <sender>m_scopeCombo</sender>
+        <signal>activated(int)</signal>
+        <receiver>MainDialogBase</receiver>
+        <slot>rescan()</slot>
+    </connection>
+    <connection>
+        <sender>m_serverInput</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>MainDialogBase</receiver>
+        <slot>hostChanged(const QString&amp;)</slot>
+    </connection>
+    <connection>
+        <sender>m_searchInput</sender>
+        <signal>returnPressed()</signal>
+        <receiver>MainDialogBase</receiver>
+        <slot>rescan()</slot>
+    </connection>
+</connections>
+<includes>
+    <include location="global" impldecl="in implementation">kdialog.h</include>
+</includes>
+<slots>
+    <slot access="protected" specifier="pure virtual">hostChanged( const QString &amp; text )</slot>
+    <slot access="protected" specifier="pure virtual">toggleBrowsingArea()</slot>
+    <slot access="protected" specifier="pure virtual">itemSelected( QListViewItem * item )</slot>
+    <slot access="protected" specifier="pure virtual">itemDoubleClicked( QListViewItem * item )</slot>
+    <slot access="protected" specifier="pure virtual">scopeSelected( const QString &amp; scope )</slot>
+    <slot access="protected" specifier="pure virtual">rescan()</slot>
+</slots>
+<functions>
+    <function access="protected" specifier="non virtual">enableBrowsingArea( bool enable )</function>
+</functions>
+<layoutdefaults spacing="6" margin="11"/>
+<layoutfunctions spacing="KDialog::spacingHint" margin="KDialog::marginHint"/>
+<includehints>
+    <includehint>kcombobox.h</includehint>
+</includehints>
+</UI>

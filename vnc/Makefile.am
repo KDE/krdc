@@ -5,8 +5,7 @@ METASOURCES = AUTO
 noinst_LTLIBRARIES = libvnc.la
 
 libvnc_la_SOURCES = kvncview.cpp threads.cpp colour.c d3des.c desktop.c \
-  rfbproto.c sockets.c vncauth.c vnchostpreferences.ui \
-  vnchostpref.cpp
+  rfbproto.c sockets.c vncauth.c vncprefs.ui vnchostpref.cpp
 
 noinst_HEADERS = kvncview.h rfbproto.h  vncviewer.h vnctypes.h vncauth.h \
    pointerlatencyometer.h threads.h d3des.h vnchostpref.h

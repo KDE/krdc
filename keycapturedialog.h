@@ -3,6 +3,7 @@
                              -------------------
     begin                : Wed Dec 25 01:16:23 CET 2002
     copyright            : (C) 2002-2003 by Tim Jansen
+                         : (C) 2004 Nadeem Hasan <nhasan@kde.org>
     email                : tim@tjansen.de
  ***************************************************************************/
 
@@ -15,34 +16,36 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KEYCAPTUREDIALOG2_H
-#define KEYCAPTUREDIALOG2_H
+#ifndef KEYCAPTUREDIALOG_H
+#define KEYCAPTUREDIALOG_H
+
+class KeyCaptureWidget;
 
 #include "keycapturedialog.h"
 
 #include <kshortcut.h>
 #include <kkeynative.h>
+#include <kdialogbase.h>
 
-
-class KeyCaptureDialog2 : public KeyCaptureDialog {
+class KeyCaptureDialog : public KDialogBase {
 	Q_OBJECT
 
 	bool m_grabbed;
 public:
-	KeyCaptureDialog2(QWidget *w = 0, 
-			  const char *name = 0, 
-			  bool modal = true);
-	~KeyCaptureDialog2();
-
-protected:
-	bool x11Event(XEvent*);
-	void x11EventKeyPress(XEvent*);
+	KeyCaptureDialog(QWidget * parent= 0, const char *name = 0);
+	~KeyCaptureDialog();
 
 public slots:
 	void execute();
 
 signals:
 	void keyPressed(XEvent *key);
+
+protected:
+	bool x11Event(XEvent*);
+	void x11EventKeyPress(XEvent*);
+
+	KeyCaptureWidget *m_captureWidget;
 };
 
 

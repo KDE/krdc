@@ -19,14 +19,14 @@
 #define KVNCVIEW_H
 
 #include "kremoteview.h"
-#include <kapplication.h>
-#include <qclipboard.h>
 #include <qcursor.h>
 #include <qmap.h>
 
 #include "pointerlatencyometer.h"
 #include "vnctypes.h"
 #include "threads.h"
+
+class QClipBoard;
 
 enum DotCursorState {
 	DOT_CURSOR_ON,
@@ -111,9 +111,9 @@ public:
 
 
 public slots:
-        virtual void enableScaling(bool s);
+	virtual void enableScaling(bool s);
 	virtual void setViewOnly(bool s);
-        virtual void pressKey(XEvent *k);
+	virtual void pressKey(XEvent *k);
 
 
 private slots:

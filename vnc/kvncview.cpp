@@ -16,25 +16,23 @@
  ***************************************************************************/
 
 #include "kvncview.h"
-#include "vnchostpreferences.h"
+#include "vncprefs.h"
 #include "vnchostpref.h"
+
+#include <kapplication.h>
 #include <kdebug.h>
 #include <klocale.h>
 #include <kmessagebox.h>
-#include <kinstance.h>
 #include <kstandarddirs.h>
-#include <kapplication.h>
-#include <kconfig.h>
-#include <kkeynative.h>
 #include <kpassdlg.h>
+#include <kdialogbase.h>
+
 #include <qdatastream.h>
 #include <dcopclient.h>
+#include <qclipboard.h>
 #include <qbitmap.h>
-#include <qlineedit.h>
-#include <qdialog.h>
-#include <qcombobox.h>
-#include <qcheckbox.h>
 #include <qmutex.h>
+#include <qvbox.h>
 #include <qwaitcondition.h>
 
 #include "vncviewer.h"
@@ -218,28 +216,35 @@ bool KVncView::start() {
 		return false;
 
 	if (!appDataConfigured) {
-		KConfig *config = KApplication::kApplication()->config();
-		config->setGroup("VncDefaultSettings");
-		bool showPrefs = config->readBoolEntry("vncShowHostPreferences", true);
 
-		HostPreferences hps(config);
+		HostPreferences *hps = HostPreferences::instance();
 		SmartPtr<VncHostPref> hp =
-			SmartPtr<VncHostPref>(hps.createHostPref(m_host,
+			SmartPtr<VncHostPref>(hps->createHostPref(m_host,
 								 VncHostPref::VncType));
 		int ci = hp->quality();
-		if (showPrefs && hp->askOnConnect()) {
+		if (hp->askOnConnect()) {
 			// show preferences dialog
-			VncHostPreferences vhp(0, "VncHostPreferencesDialog", true);
-			vhp.setCaption(i18n("VNC Host Preferences for %1").arg(m_host));
-			vhp.qualityCombo->setCurrentItem(ci);
-			vhp.nextStartupCheckbox->setChecked(true);
-			if (vhp.exec() == QDialog::Rejected)
+			KDialogBase *dlg = new KDialogBase( this, "dlg", true,
+				i18n( "VNC Host Preferences for %1" ).arg( m_host ),
+				KDialogBase::Ok|KDialogBase::Cancel, KDialogBase::Ok, true );
+
+			QVBox *vbox = dlg->makeVBoxMainWidget();
+			VncPrefs *prefs = new VncPrefs( vbox );
+			QWidget *spacer = new QWidget( vbox );
+			vbox->setStretchFactor( spacer, 10 );
+
+			prefs->setQuality( ci );
+			prefs->setShowPrefs(true);
+
+			if ( dlg->exec() == QDialog::Rejected )
 				return false;
 
-			ci = vhp.qualityCombo->currentItem();
-			hp->setAskOnConnect(vhp.nextStartupCheckbox->isChecked());
+			ci = prefs->quality();
+			hp->setAskOnConnect(prefs->showPrefs());
 			hp->setQuality(ci);
-			hps.sync();
+			hps->sync();
+
+			delete dlg;
 		}
 
 		Quality quality;

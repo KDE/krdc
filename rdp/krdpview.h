@@ -20,8 +20,6 @@
 #ifndef KRDPVIEW_H
 #define KRDPVIEW_H
 
-#include <kapplication.h>
-
 #include "kremoteview.h"
 #include "constants.h"
 #include "threads.h"

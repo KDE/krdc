@@ -1,0 +1,399 @@
+<!DOCTYPE UI><UI version="3.2" stdsetdef="1">
+<class>RdpPrefs</class>
+<widget class="QWidget">
+    <property name="name">
+        <cstring>RdpPrefs</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>449</width>
+            <height>157</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>Form3</string>
+    </property>
+    <vbox>
+        <property name="name">
+            <cstring>unnamed</cstring>
+        </property>
+        <property name="margin">
+            <number>0</number>
+        </property>
+        <widget class="QGroupBox">
+            <property name="name">
+                <cstring>rdpGroupBox</cstring>
+            </property>
+            <property name="title">
+                <string>Connection</string>
+            </property>
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QLabel" row="0" column="0">
+                    <property name="name">
+                        <cstring>resolutionLabel</cstring>
+                    </property>
+                    <property name="sizePolicy">
+                        <sizepolicy>
+                            <hsizetype>0</hsizetype>
+                            <vsizetype>1</vsizetype>
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                        </sizepolicy>
+                    </property>
+                    <property name="text">
+                        <string>Desktop &amp;resolution:</string>
+                    </property>
+                    <property name="buddy" stdset="0">
+                        <cstring>cmbResolution</cstring>
+                    </property>
+                </widget>
+                <spacer row="1" column="0">
+                    <property name="name">
+                        <cstring>spacer8</cstring>
+                    </property>
+                    <property name="orientation">
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                        <enum>Fixed</enum>
+                    </property>
+                    <property name="sizeHint">
+                        <size>
+                            <width>70</width>
+                            <height>21</height>
+                        </size>
+                    </property>
+                </spacer>
+                <widget class="QLabel" row="2" column="0">
+                    <property name="name">
+                        <cstring>layoutLabel</cstring>
+                    </property>
+                    <property name="sizePolicy">
+                        <sizepolicy>
+                            <hsizetype>0</hsizetype>
+                            <vsizetype>1</vsizetype>
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                        </sizepolicy>
+                    </property>
+                    <property name="text">
+                        <string>&amp;Keyboard layout:</string>
+                    </property>
+                    <property name="buddy" stdset="0">
+                        <cstring>cmbKbLayout</cstring>
+                    </property>
+                </widget>
+                <widget class="QComboBox" row="0" column="1" rowspan="1" colspan="4">
+                    <item>
+                        <property name="text">
+                            <string>Small (640x480)</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>Medium (800x600)</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>Big (1024x768)</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>Custom (...)</string>
+                        </property>
+                    </item>
+                    <property name="name">
+                        <cstring>cmbResolution</cstring>
+                    </property>
+                    <property name="sizePolicy">
+                        <sizepolicy>
+                            <hsizetype>5</hsizetype>
+                            <vsizetype>0</vsizetype>
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                        </sizepolicy>
+                    </property>
+                    <property name="minimumSize">
+                        <size>
+                            <width>280</width>
+                            <height>0</height>
+                        </size>
+                    </property>
+                    <property name="currentItem">
+                        <number>1</number>
+                    </property>
+                    <property name="whatsThis" stdset="0">
+                        <string>Here you can specify the resolution of the remote desktop. This resolution determines the size of the desktop that will be presented to you.</string>
+                    </property>
+                </widget>
+                <widget class="QLabel" row="1" column="1">
+                    <property name="name">
+                        <cstring>widthLabel</cstring>
+                    </property>
+                    <property name="enabled">
+                        <bool>false</bool>
+                    </property>
+                    <property name="text">
+                        <string>&amp;Width:</string>
+                    </property>
+                    <property name="alignment">
+                        <set>AlignVCenter|AlignRight</set>
+                    </property>
+                    <property name="buddy" stdset="0">
+                        <cstring>spinWidth</cstring>
+                    </property>
+                </widget>
+                <widget class="QSpinBox" row="1" column="2">
+                    <property name="name">
+                        <cstring>spinWidth</cstring>
+                    </property>
+                    <property name="enabled">
+                        <bool>false</bool>
+                    </property>
+                    <property name="maxValue">
+                        <number>9999</number>
+                    </property>
+                    <property name="value">
+                        <number>800</number>
+                    </property>
+                    <property name="whatsThis" stdset="0">
+                        <string>This is the width of the remote desktop. You can only change this value manually if you select Custom as desktop resolution above.</string>
+                    </property>
+                </widget>
+                <widget class="QLabel" row="1" column="3">
+                    <property name="name">
+                        <cstring>heightLabel</cstring>
+                    </property>
+                    <property name="enabled">
+                        <bool>false</bool>
+                    </property>
+                    <property name="text">
+                        <string>H&amp;eight:</string>
+                    </property>
+                    <property name="alignment">
+                        <set>AlignVCenter|AlignRight</set>
+                    </property>
+                    <property name="buddy" stdset="0">
+                        <cstring>spinHeight</cstring>
+                    </property>
+                </widget>
+                <widget class="QSpinBox" row="1" column="4">
+                    <property name="name">
+                        <cstring>spinHeight</cstring>
+                    </property>
+                    <property name="enabled">
+                        <bool>false</bool>
+                    </property>
+                    <property name="maxValue">
+                        <number>9999</number>
+                    </property>
+                    <property name="value">
+                        <number>600</number>
+                    </property>
+                    <property name="whatsThis" stdset="0">
+                        <string>This is the height of the remote desktop. You can only change this value manually if you select Custom as desktop resolution above.</string>
+                    </property>
+                </widget>
+                <widget class="QComboBox" row="2" column="1" rowspan="1" colspan="4">
+                    <item>
+                        <property name="text">
+                            <string>Arabic (ar)</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>Danish (da)</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>German (de)</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>English GB (en-gb)</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>English US (en-us)</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>Spanish (es)</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>Finnish (fi)</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>French (fr)</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>Belgium (fr-be)</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>Croation (hr)</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>Italian (it)</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>Japanese (ja)</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>Lithuanian (lt)</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>Latvian (lv)</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>Macedonian (mk)</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>Norwegian (no)</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>Polish (pl)</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>Portuguese (pt)</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>Brazilian (pt-br)</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>Russian (ru)</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>Slovenian (sl)</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>Swedish (sv)</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>Thai (th)</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>Turkish (tr)</string>
+                        </property>
+                    </item>
+                    <property name="name">
+                        <cstring>cmbKbLayout</cstring>
+                    </property>
+                    <property name="sizePolicy">
+                        <sizepolicy>
+                            <hsizetype>5</hsizetype>
+                            <vsizetype>0</vsizetype>
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                        </sizepolicy>
+                    </property>
+                    <property name="minimumSize">
+                        <size>
+                            <width>280</width>
+                            <height>0</height>
+                        </size>
+                    </property>
+                    <property name="editable">
+                        <bool>false</bool>
+                    </property>
+                    <property name="currentItem">
+                        <number>4</number>
+                    </property>
+                    <property name="whatsThis" stdset="0">
+                        <string>Use this to specify your keyboard layout. This layout setting is used to send the correct keyboard codes to the server.</string>
+                    </property>
+                </widget>
+            </grid>
+        </widget>
+        <widget class="QCheckBox">
+            <property name="name">
+                <cstring>cbShowPrefs</cstring>
+            </property>
+            <property name="text">
+                <string>&amp;Show this dialog again for this host</string>
+            </property>
+            <property name="accel">
+                <string>Alt+S</string>
+            </property>
+            <property name="whatsThis" stdset="0">
+                <string>Select this option if you do not want to be asked for the settings when connecting to a host. For hosts with existing profiles these profiles will be taken. New hosts will be configured with the defaults.</string>
+            </property>
+        </widget>
+    </vbox>
+</widget>
+<connections>
+    <connection>
+        <sender>cmbResolution</sender>
+        <signal>activated(int)</signal>
+        <receiver>RdpPrefs</receiver>
+        <slot>resolutionChanged(int)</slot>
+    </connection>
+</connections>
+<includes>
+    <include location="global" impldecl="in implementation">kdialog.h</include>
+    <include location="local" impldecl="in implementation">rdpprefs.ui.h</include>
+</includes>
+<slots>
+    <slot access="protected" specifier="non virtual">resolutionChanged( int selection )</slot>
+</slots>
+<functions>
+    <function specifier="non virtual">setRdpWidth( int w )</function>
+    <function specifier="non virtual" returnType="int">rdpWidth()</function>
+    <function specifier="non virtual">setRdpHeight( int h )</function>
+    <function specifier="non virtual" returnType="int">rdpHeight()</function>
+    <function specifier="non virtual">setResolution()</function>
+    <function specifier="non virtual" returnType="int">resolution()</function>
+    <function specifier="non virtual">setKbLayout( int i )</function>
+    <function specifier="non virtual" returnType="int">kbLayout()</function>
+    <function specifier="non virtual">setShowPrefs( bool b )</function>
+    <function specifier="non virtual" returnType="bool">showPrefs()</function>
+</functions>
+<layoutdefaults spacing="6" margin="11"/>
+<layoutfunctions spacing="KDialog::spacingHint" margin="KDialog::marginHint"/>
+</UI>

@@ -3,6 +3,7 @@
                              -------------------
     begin                : Fri May 09 22:33 CET 2003
     copyright            : (C) 2003 by Tim Jansen
+                         : (C) 2004 Nadeem Hasan <nhasan@kde.org>
     email                : tim@tjansen.de
  ***************************************************************************/
 
@@ -18,9 +19,22 @@
 #include "hostpreferences.h"
 #include "vnc/vnchostpref.h"
 #include "rdp/rdphostpref.h"
+
+#include <kapplication.h>
 #include <kconfig.h>
+
 #include <qregexp.h>
 #include <qmap.h>
+
+HostPreferences *HostPreferences::m_instance = 0;
+
+HostPreferences *HostPreferences::instance()
+{
+	if ( m_instance == 0 )
+		m_instance = new HostPreferences();
+
+	return m_instance;
+}
 
 HostPref::HostPref(KConfig *conf, const QString &host, const QString &type) :
 	m_host(host),
@@ -29,6 +43,7 @@ HostPref::HostPref(KConfig *conf, const QString &host, const QString &type) :
 }
 
 HostPref::~HostPref() {
+	m_config->sync();
 }
 
 QString HostPref::host() const {
@@ -40,30 +55,34 @@ QString HostPref::type() const {
 }
 
 QString HostPref::prefix() const {
-	return getPrefix(m_host, m_type);
+	return prefix(m_host, m_type);
 }
 
-QString HostPref::getPrefix(const QString &host, const QString &type) {
+QString HostPref::prefix(const QString &host, const QString &type) {
 	return QString("PerHost-%1-%2-").arg(type).arg(host);
 }
 
 
-HostPreferences::HostPreferences(KConfig *conf) :
-	m_config(conf) {
+HostPreferences::HostPreferences() {
+	m_config = kapp->config();
 }
 
-SmartPtr<HostPref> HostPreferences::getHostPref(const QString &host, const QString &type) {
+HostPreferences::~HostPreferences() {
+	delete m_instance;
+}
+
+HostPrefPtr HostPreferences::getHostPref(const QString &host, const QString &type) {
 	m_config->setGroup("PerHostSettings");
-	if (!m_config->readBoolEntry(HostPref::getPrefix(host, type)+"exists"))
+	if (!m_config->readBoolEntry(HostPref::prefix(host, type)+"exists"))
 		return 0;
 
 	if (type == VncHostPref::VncType) {
-		SmartPtr<HostPref> hp = new VncHostPref(m_config, host, type);
+		HostPrefPtr hp = new VncHostPref(m_config, host, type);
 		hp->load();
 		return hp;
 	}
 	else if(type == RdpHostPref::RdpType) {
-		SmartPtr<HostPref> hp = new RdpHostPref(m_config, host, type);
+		HostPrefPtr hp = new RdpHostPref(m_config, host, type);
 		hp->load();
 		return hp;
 	}
@@ -71,8 +90,8 @@ SmartPtr<HostPref> HostPreferences::getHostPref(const QString &host, const QStri
 	return 0;
 }
 
-SmartPtr<HostPref> HostPreferences::createHostPref(const QString &host, const QString &type) {
-	SmartPtr<HostPref> hp = getHostPref(host, type);
+HostPrefPtr HostPreferences::createHostPref(const QString &host, const QString &type) {
+	HostPrefPtr hp = getHostPref(host, type);
 	if (hp)
 		return hp;
 
@@ -88,8 +107,24 @@ SmartPtr<HostPref> HostPreferences::createHostPref(const QString &host, const QS
 	return hp;
 }
 
-QValueList<SmartPtr<HostPref> > HostPreferences::getAllHostPrefs() {
-	QValueList<SmartPtr<HostPref> > r;
+HostPrefPtr HostPreferences::vncDefaults()
+{
+	HostPrefPtr hp = new VncHostPref( m_config );
+	hp->load();
+
+	return hp;
+}
+
+HostPrefPtr HostPreferences::rdpDefaults()
+{
+	HostPrefPtr hp = new RdpHostPref( m_config );
+	hp->load();
+
+	return hp;
+}
+
+HostPrefPtrList HostPreferences::getAllHostPrefs() {
+	HostPrefPtrList r;
 	QMap<QString, QString> map = m_config->entryMap("PerHostSettings");
 	QStringList keys = map.keys();
 	QStringList::iterator it = keys.begin();
@@ -98,7 +133,7 @@ QValueList<SmartPtr<HostPref> > HostPreferences::getAllHostPrefs() {
 		if (key.endsWith("-exists")) {
 			QRegExp re("PerHost-([^-]+)-(.*)-exists");
 			if (re.exactMatch(key)) {
-				SmartPtr<HostPref> hp = getHostPref(re.cap(2), re.cap(1));
+				HostPrefPtr hp = getHostPref(re.cap(2), re.cap(1));
 				if (hp)
 					r += hp;
 			}
@@ -111,6 +146,42 @@ QValueList<SmartPtr<HostPref> > HostPreferences::getAllHostPrefs() {
 
 void HostPreferences::removeHostPref(HostPref *hostPref) {
 	hostPref->remove();
+}
+
+void HostPreferences::setShowBrowsingPanel( bool b )
+{
+	m_config->setGroup( QString::null );
+	m_config->writeEntry( "browsingPanel", b );
+}
+
+void HostPreferences::setServerCompletions( const QStringList &list )
+{
+	m_config->setGroup( QString::null );
+	m_config->writeEntry( "serverCompletions", list );
+}
+
+void HostPreferences::setServerHistory( const QStringList &list )
+{
+	m_config->setGroup( QString::null );
+	m_config->writeEntry( "serverHistory", list );
+}
+
+bool HostPreferences::showBrowsingPanel()
+{
+	m_config->setGroup( QString::null );
+	return m_config->readBoolEntry( "browsingPanel" );
+}
+
+QStringList HostPreferences::serverCompletions()
+{
+	m_config->setGroup( QString::null );
+	return m_config->readListEntry( "serverCompletions" );
+}
+
+QStringList HostPreferences::serverHistory()
+{
+	m_config->setGroup( QString::null );
+	return m_config->readListEntry( "serverHistory" );
 }
 
 void HostPreferences::sync() {

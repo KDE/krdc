@@ -24,10 +24,10 @@
 #include "events.h"
 
 typedef enum {
-  QUALITY_UNKNOWN,
-  QUALITY_HIGH,
-  QUALITY_MEDIUM,
-  QUALITY_LOW
+  QUALITY_UNKNOWN=0,
+  QUALITY_HIGH=1,
+  QUALITY_MEDIUM=2,
+  QUALITY_LOW=3
 } Quality;
 
 
