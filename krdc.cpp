@@ -461,6 +461,7 @@ void KRDC::switchToFullscreen(bool scaling)
 	}
 
 	QLabel *hostLabel = new QLabel(t);
+	hostLabel->setName("kde toolbar widget");
 	hostLabel->setAlignment(Qt::AlignCenter);
 	hostLabel->setText("   "+m_host+"   ");
 	t->insertWidget(FS_HOSTLABEL_ID, 400, hostLabel);
