@@ -32,6 +32,7 @@ static const QString DEFAULT_SCOPE = "default";
 
 class UrlListViewItem : public KListViewItem {
 	QString m_url;
+	QString m_serviceid;
 public:
 	UrlListViewItem(QListView *v, 
 			const QString &url,
@@ -40,11 +41,13 @@ public:
 			const QString &type, 
 			const QString &userid,
 			const QString &fullname,
-			const QString &desc) :
+			const QString &desc,
+			const QString &serviceid) :
 		KListViewItem(v, host, 
 			      i18n("unknown"), 
 			      host, protocol),
-		m_url(url) {
+		m_url(url),
+		m_serviceid(serviceid) {
 		if (!type.isNull()) {
 //User connects to somebody else's desktop, used for krfb
 			if (type.lower() == "shared")
@@ -192,8 +195,8 @@ void SrvLocNCDialog::foundService(QString url, int) {
 			    KServiceLocator::decodeAttributeValue(map["type"]), 
 			    KServiceLocator::decodeAttributeValue(map["username"]), 
 			    KServiceLocator::decodeAttributeValue(map["fullname"]),
-			    KServiceLocator::decodeAttributeValue(map["description"]));
-
+			    KServiceLocator::decodeAttributeValue(map["description"]),
+			    KServiceLocator::decodeAttributeValue(map["serviceid"]));
 }
 
 void SrvLocNCDialog::errorScanning() {
