@@ -558,17 +558,17 @@ typedef struct {
  * of the remote cursor. It has two sub-messages: SetImage is used to upload
  * one of 16 images, and Move selects the image and sets the position of the
  * cursor. 
- * Each SoftCursor message starts with a CARD8. If it is in the 0-63 range
- * it specifies the image of the cursor and is followed by the 
+ * Each SoftCursor message starts with a CARD8. If it is in the 0-15 range
+ * it specifies the numer of the cursor image and is followed by the 
  * rfbSoftCursorMove message. If the given cursor has not been set yet the 
- * message will be ignored. If the first CARD8 is in the 128-191 range it 
+ * message will be ignored. If the first CARD8 is in the 128-143 range it 
  * specifies the cursor that will be set in the following 
- * rfbSoftCursorSetImage message. To hide the cursor send a SetCursor 
+ * rfbSoftCursorSetImage message. To hide the cursor send a SetImage
  * message with width and height 0 and imageLength 0.
- * SetImage transports the hotspot coordinates in the x/y fields of the
- * rfbFramebufferUpdateRectHeader, width and height of the image in the
+ * SetImage transmits the hotspot coordinates in the x/y fields of the
+ * rfbFramebufferUpdateRectHeader, width and height of the image are in the
  * header's width and height fields.
- * Move transports the pointer coordinates in the w/h fields of the
+ * Move transmits the pointer coordinates in the w/h fields of the
  * header, x/y are always 0.
  */
 
