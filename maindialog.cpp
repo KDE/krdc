@@ -27,7 +27,7 @@
 
 MainDialog::MainDialog( QWidget *parent, const char *name )
     : KDialogBase( parent, name, true, i18n( "Remote Desktop Connection" ),
-      Ok|Close|Help|User1, Ok, true, KGuiItem( i18n( "&Preferences..." ),
+      Ok|Close|Help|User1, Ok, true, KGuiItem( i18n( "&Preferences" ),
       "configure" ) )
 {
   m_dialogWidget = new MainDialogWidget( this, "m_dialogWidget" );
