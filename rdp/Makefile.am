@@ -28,7 +28,7 @@ install-data-local:
 	for file in $(srcdir)/keymaps/*; do \
 		if test -f $$file; then \
 		   $(INSTALL_DATA) $$file $(DESTDIR)$(keymapdir)/$$file ;\
-		fi
+		fi \
 	done
 
 uninstall-local:
