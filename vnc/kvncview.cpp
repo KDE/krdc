@@ -215,7 +215,7 @@ bool KVncView::checkLocalKRfb() {
 
 	setStatus(REMOTE_VIEW_DISCONNECTED);
 	KMessageBox::error(0,
-			   i18n("It is not possible to connect to a local Desktop Sharing service."),
+			   i18n("It is not possible to connect to a local desktop sharing service."),
 			   i18n("Connection Failure"));
 	emit disconnectedError();
 	return false;
