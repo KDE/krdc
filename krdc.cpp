@@ -279,7 +279,7 @@ void KRDC::configureApp(Quality q) {
 		m_appData.useBGR233 = 0;
 		m_appData.encodingsString = "copyrect softcursor tight zlib hextile raw";
 		m_appData.compressLevel = -1;
-		m_appData.qualityLevel = 6;
+		m_appData.qualityLevel = 7;
 		m_appData.dotCursor = 1;
 	}
 	else if (q == QUALITY_HIGH) {
