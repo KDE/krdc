@@ -20,6 +20,7 @@
 
 
 #include <kapplication.h>
+#include <kshortcut.h>
 #include <qclipboard.h>
 #include <qwidget.h>
 #include <qcursor.h>
@@ -100,6 +101,7 @@ public:
 
 public slots:
         void enableScaling(bool s);
+        void pressKey(KKeyNative k); 
 
 private slots:
 	void selectionChanged();

@@ -27,6 +27,7 @@
 #include <qpixmap.h>
 #include "kvncview.h"
 #include "kfullscreenpanel.h"
+#include "keycapturedialog2.h"
 
 enum WindowMode {
 	WINDOW_MODE_AUTO,
@@ -42,6 +43,7 @@ protected:
 	virtual void mouseMoveEvent(QMouseEvent *e);
 };
 
+
 class KRDC : public QWidget
 {
 	Q_OBJECT 
@@ -52,6 +54,7 @@ private:
 	KProgress *m_progress;             // progress bar for the dialog
 	KVncView *m_view;                  // the vnc widget
 
+	KeyCaptureDialog2 *m_keyCaptureDialog; // dialog for key capturing
 	KFullscreenPanel *m_fsToolbar;     // toolbar for fullscreen (0 in normal mode)
 	QWidget *m_fsToolbarWidget;        // qt designer widget for fs toolbar 
                                            //     (invalid in normal mode)

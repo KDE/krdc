@@ -441,6 +441,30 @@ void KVncView::wheelEvent(QWheelEvent *e) {
 	e->accept();
 }
 
+void KVncView::pressKey(KKeyNative k) {
+	uint mod = k.mod();
+	if (mod & KKeyNative::modX(KKey::SHIFT))
+		m_wthread.queueKeyEvent(XK_Shift_L, true);
+	if (mod & KKeyNative::modX(KKey::CTRL))
+		m_wthread.queueKeyEvent(XK_Control_L, true);
+	if (mod & KKeyNative::modX(KKey::ALT))
+		m_wthread.queueKeyEvent(XK_Alt_L, true);
+	if (mod & KKeyNative::modX(KKey::WIN))
+		m_wthread.queueKeyEvent(XK_Meta_L, true);
+
+	m_wthread.queueKeyEvent(k.sym(), true);
+	m_wthread.queueKeyEvent(k.sym(), false);
+
+	if (mod & KKeyNative::modX(KKey::WIN))
+		m_wthread.queueKeyEvent(XK_Meta_L, false);
+	if (mod & KKeyNative::modX(KKey::ALT))
+		m_wthread.queueKeyEvent(XK_Alt_L, false);
+	if (mod & KKeyNative::modX(KKey::CTRL))
+		m_wthread.queueKeyEvent(XK_Control_L, false);
+	if (mod & KKeyNative::modX(KKey::SHIFT))
+		m_wthread.queueKeyEvent(XK_Shift_L, false);
+}
+
 bool KVncView::x11Event(XEvent *e) {
 	bool pressed;
 	if (e->type == KeyPress)

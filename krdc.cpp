@@ -24,6 +24,7 @@
 #include <kapplication.h>
 #include <kcombobox.h>
 #include <kprocess.h>
+#include <kkeybutton.h>
 #include <qevent.h>
 #include <qsizepolicy.h>
 #include <qcolor.h>
@@ -45,6 +46,7 @@
 #include <qobjectlist.h>
 #include <qbitmap.h>
 
+
 #define BUMP_SCROLL_CONSTANT (200)
 
 QScrollView2::QScrollView2(QWidget *w, const char *name) :
@@ -59,6 +61,7 @@ void QScrollView2::mouseMoveEvent( QMouseEvent *e )
 {
          e->ignore();
 }
+
 
 QString KRDC::m_lastHost = "";
 int KRDC::m_lastQuality = 0;
@@ -90,6 +93,8 @@ KRDC::KRDC(WindowMode wm, const QString &host,
 	KStandardDirs *dirs = KGlobal::dirs();
 	m_pindown = QPixmap(dirs->findResource("appdata", "pics/pindown.png"));
 	m_pinup   = QPixmap(dirs->findResource("appdata", "pics/pinup.png"));
+
+	m_keyCaptureDialog = new KeyCaptureDialog2(0, 0);
 
 	setMouseTracking(true);
 
@@ -209,6 +214,8 @@ bool KRDC::start(bool onlyFailOnCancel)
 		SLOT(changeProgress(RemoteViewStatus)));
 	connect(m_view, SIGNAL(showingPasswordDialog(bool)),
 		SLOT(showingPasswordDialog(bool)));
+	connect(m_keyCaptureDialog, SIGNAL(keyPressed(KKeyNative)),
+		m_view, SLOT(pressKey(KKeyNative)));
 
 	changeProgress(REMOTE_VIEW_CONNECTING);
 	if ((!m_view->start()) && (!m_host.isNull()))
@@ -365,6 +372,8 @@ KRDC::~KRDC()
 	if (m_progressDialog)
 		delete m_progressDialog;
 
+	delete m_keyCaptureDialog;
+
 	// kill explicitly to avoid xlib calls by the threads after closing the window!
 	if (m_view)
 		delete m_view;
@@ -488,6 +497,8 @@ void KRDC::switchToNormal(bool scaling)
 			SLOT(enableFullscreen(bool)));
 		connect((QObject*)t->scaleButton, SIGNAL(toggled(bool)),
 			SLOT(switchToNormal(bool)));
+		connect((QObject*)t->specialKeyButton, SIGNAL(clicked()),
+			m_keyCaptureDialog, SLOT(execute()));
 	}
 
 	if (scaling) {
