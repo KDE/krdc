@@ -4,7 +4,7 @@ METASOURCES = AUTO
 
 bin_PROGRAMS = krdc
 krdc_SOURCES = main.cpp krdc.cpp kvncview.cpp threads.cpp vidmode.cpp \
-  colour.c cursor.c d3des.c desktop.c rfbproto.c sockets.c vncauth.c \
+  colour.c d3des.c desktop.c rfbproto.c sockets.c vncauth.c \
   newconnectiondialog.ui passworddialog.ui fullscreentoolbar.ui \
   toolbar.ui
 

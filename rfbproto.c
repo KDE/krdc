@@ -350,15 +350,6 @@ SetFormatAndEncodings()
 					  rfbEncodingQualityLevel0);
     }
 
-    if (appData.useRemoteCursor) {
-      /* if (se->nEncodings < MAX_ENCODINGS)
-	encs[se->nEncodings++] = Swap32IfLE(rfbEncodingXCursor);
-      */
-      /*if (se->nEncodings < MAX_ENCODINGS)
-	encs[se->nEncodings++] = Swap32IfLE(rfbEncodingRichCursor);
-      */
-    }
-
     if (se->nEncodings < MAX_ENCODINGS && requestLastRectEncoding) {
       encs[se->nEncodings++] = Swap32IfLE(rfbEncodingLastRect);
     }
@@ -382,11 +373,6 @@ SetFormatAndEncodings()
     if (appData.qualityLevel >= 0 && appData.qualityLevel <= 9) {
       encs[se->nEncodings++] = Swap32IfLE(appData.qualityLevel +
 					  rfbEncodingQualityLevel0);
-    }
-
-    if (appData.useRemoteCursor) {
-      /* encs[se->nEncodings++] = Swap32IfLE(rfbEncodingXCursor); */
-      encs[se->nEncodings++] = Swap32IfLE(rfbEncodingRichCursor);
     }
 
     encs[se->nEncodings++] = Swap32IfLE(rfbEncodingLastRect);
@@ -453,7 +439,6 @@ SendPointerEvent(int x, int y, int buttonMask)
   pe.buttonMask = buttonMask;
   if (x < 0) x = 0;
   if (y < 0) y = 0;
-  SoftCursorMove(x, y);
   pe.x = Swap16IfLE(x);
   pe.y = Swap16IfLE(y);
   return WriteExact(rfbsock, (char *)&pe, sz_rfbPointerEventMsg);
@@ -569,19 +554,6 @@ HandleRFBServerMessage()
       rect.r.w = Swap16IfLE(rect.r.w);
       rect.r.h = Swap16IfLE(rect.r.h);
 
-      if (rect.encoding == rfbEncodingXCursor) {
-	if (!HandleXCursor(rect.r.x, rect.r.y, rect.r.w, rect.r.h)) {
-	  return False;
-	}
-	continue;
-      }
-      if (rect.encoding == rfbEncodingRichCursor) {
-	if (!HandleRichCursor(rect.r.x, rect.r.y, rect.r.w, rect.r.h)) {
-	  return False;
-	}
-	continue;
-      }
-
       if ((rect.r.x + rect.r.w > si.framebufferWidth) ||
 	  (rect.r.y + rect.r.h > si.framebufferHeight))
 	{
@@ -594,10 +566,6 @@ HandleRFBServerMessage()
 	fprintf(stderr,"Zero size rect - ignoring\n");
 	continue;
       }
-
-      /* If RichCursor encoding is used, we should prevent collisions
-	 between framebuffer updates and cursor drawing operations. */
-      SoftCursorLockArea(rect.r.x, rect.r.y, rect.r.w, rect.r.h);
 
       switch (rect.encoding) {
 
@@ -631,11 +599,6 @@ HandleRFBServerMessage()
 
 	cr.srcX = Swap16IfLE(cr.srcX);
 	cr.srcY = Swap16IfLE(cr.srcY);
-
-	/* If RichCursor encoding is used, we should extend our
-	   "cursor lock area" (previously set to destination
-	   rectangle) to the source rectangle as well. */
-	SoftCursorLockArea(cr.srcX, cr.srcY, rect.r.w, rect.r.h);
 
 	CopyArea(cr.srcX, cr.srcY, rect.r.w, rect.r.h, rect.r.x, rect.r.y);
 
@@ -705,8 +668,6 @@ HandleRFBServerMessage()
 	return False;
       }
 
-      /* Now we may discard "soft cursor locks". */
-      SoftCursorUnlockScreen();
     }
 
     /* if using shared memory PutImage, make sure that the X server has

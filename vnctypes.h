@@ -51,7 +51,6 @@ typedef struct {
 
   int compressLevel;
   int qualityLevel;
-  int useRemoteCursor; /* bool */
 
 } AppData;
 

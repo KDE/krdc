@@ -93,19 +93,10 @@ extern unsigned int visdepth, visbpp;
 
 extern void SetVisualAndCmap(void);
 
-/* cursor.c */
-
-extern Bool HandleXCursor(int xhot, int yhot, int width, int height);
-extern Bool HandleRichCursor(int xhot, int yhot, int width, int height);
-extern void SoftCursorLockArea(int x, int y, int w, int h);
-extern void SoftCursorUnlockScreen(void);
-extern void SoftCursorMove(int x, int y);
-
 /* desktop.c */
 
 extern Widget form, viewport, desktop;
 extern Window desktopWin;
-extern Cursor dotCursor;
 extern GC gc;
 extern GC srcGC, dstGC;
 extern Dimension dpyWidth, dpyHeight;

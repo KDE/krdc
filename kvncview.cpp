@@ -98,7 +98,6 @@ void KVncView::setDefaultAppData() {
 	appData.nColours = 256;
 	appData.useSharedColours = True;
 	appData.requestedDepth = 0;
-	appData.useRemoteCursor = True;
 
 	appData.rawDelay = 0;
 	appData.copyRectDelay = 0;
