@@ -713,7 +713,6 @@ HandleRFBServerMessage()
        mainly to avoid copyrect using invalid screen contents - not sure
        if we'd need it otherwise. */
     ShmSync();
-    usleep(1000);
     queueIncrementalUpdateRequest();
 
     break;
