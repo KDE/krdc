@@ -730,6 +730,9 @@ static void drawCursorImage() {
     SKIP_IMG(wl);              \
   }
 
+  if (!img)
+    return;
+
   x = cursorX - pi->hotX;
   y = cursorY - pi->hotY;
   w = pi->w;
