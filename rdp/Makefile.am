@@ -22,7 +22,7 @@ librdp_la_LIBADD   = $(LIB_KDEUI) $(LIBJPEG) $(LIBSSL)
 librdp_la_LDFLAGS = $(all_libraries) $(SSL_LDFLAGS) $(KDE_RPATH)
 
 keymapdir = $(kde_datadir)/krdc/rdp-keymaps
-keymap_DATA = keymaps/*
+keymap_DATA = $(srcdir)/keymaps/*
 
 AM_CFLAGS = -DWITH_OPENSSL -DKEYMAP_PATH=\"$(keymapdir)\"
 
