@@ -19,8 +19,3 @@ Known bugs/problems:
   invocation) I get error messages like "Xlib: unexpected async reply 
   (sequence 0x1717)!" after a few seconds. That's why XShm is not used at 
   the moment.
-- when switching to 'scaled mode' (left button on toolbar in window mode), 
-  making the window smaller than the framebuffer and turning the 'scaled 
-  mode' off the scrollbars will not be displayed until the user resizes 
-  the window. I dont know why and cannot find a work-around.
-

@@ -390,10 +390,9 @@ void KRDC::switchToFullscreen()
 
 void KRDC::switchToNormal(bool scaling)
 {
-	QRect oldGeometry;
-	if (m_isFullscreen == WINDOW_MODE_NORMAL)
-	    oldGeometry = frameGeometry();
-	hide();
+	bool fromFullscreen = (m_isFullscreen != WINDOW_MODE_NORMAL);
+	if (fromFullscreen)
+		hide();
 	m_isFullscreen = WINDOW_MODE_NORMAL;
 	m_view->enableScaling(scaling);
 
@@ -447,10 +446,10 @@ void KRDC::switchToNormal(bool scaling)
 
 	m_layout->activate();
 
-	showNormal();
-	    
-	if (!oldGeometry.isNull())
-		setGeometry(oldGeometry);
+	if (!fromFullscreen)
+		show();
+	else
+		showNormal();
 
 	setMouseTracking(false);
 }
