@@ -316,7 +316,7 @@ void KRDC::configureApp(Quality q) {
 		m_appData.encodingsString = "copyrect softcursor hextile raw";
 		m_appData.compressLevel = -1;
 		m_appData.qualityLevel = 9;
-		m_appData.dotCursor = 0;
+		m_appData.dotCursor = 1;
 	}
 
 	if (!m_encodings.isNull())
