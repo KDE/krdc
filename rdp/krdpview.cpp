@@ -44,6 +44,8 @@ extern int width;           // width of the remote desktop
 extern int height;          // height of the remote desktop
 extern Atom protocol_atom;  // used to handle the WM_DELETE_WINDOW protocol
 extern BOOL fullscreen;     // are we in fullscreen mode?
+extern char keymapname[16];
+
 
 static KRdpView *krdpview;
 
@@ -51,6 +53,7 @@ static KRdpView *krdpview;
 KRdpView::KRdpView(QWidget *parent, const char *name, 
                    const QString &host, int port,
                    const QString &resolution,
+                   const QString &keymap,
                    const QString &user, const QString &password,
                    int flags, const QString &domain,
                    const QString &shell, const QString &directory) : 
@@ -71,6 +74,8 @@ KRdpView::KRdpView(QWidget *parent, const char *name,
 {
 	::width = resolution.section('x', 0, 0).toInt();
 	::height = resolution.section('x', 1, 1).toInt();
+	
+	strcpy(keymapname, keymap.latin1());
 	
 	krdpview = this;
 	setFixedSize(16,16);

@@ -85,6 +85,7 @@ private:
 	                     // used for config before connection
 	QString m_password;  // if not null, contains the password to use
 	QString m_resolution;// contains an alternative resolution
+	QString m_keymap;    // keymap on the terminal server
 	AppData m_appData;   // various config stuff, used before connection
 
 	WindowMode m_isFullscreen;    // fs/normal state
@@ -123,7 +124,8 @@ public:
 	     Quality q = QUALITY_UNKNOWN,
 	     const QString &encodings = QString::null,
 	     const QString &password = QString::null,
-	     const QString &resolution = QString::null);
+	     const QString &resolution = QString::null,
+	     const QString &keymap = QString::null);
 	~KRDC();
 
 	bool start(bool onlyFailOnCancel);

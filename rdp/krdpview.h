@@ -38,6 +38,7 @@ class KRdpView : public KRemoteView
 		KRdpView(QWidget *parent = 0, const char *name = 0, 
 		         const QString &host = QString(""), int port = TCP_PORT_RDP,
 		         const QString &resolution = QString("800x600"),
+		         const QString &keymap = QString("en-us"),
 		         const QString &user = QString(""), const QString &password = QString(""), 
 		         int flags = RDP_LOGON_NORMAL, const QString &domain = QString(""),
 		         const QString &shell = QString(""), const QString &directory = QString(""));

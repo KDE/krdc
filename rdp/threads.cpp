@@ -29,9 +29,6 @@
 #include "krdpview.h"
 #include "threads.h"
 
-// global variables from rdesktop
-extern char keymapname[16];
-
 static const int WAIT_PERIOD = 8000;
 static const unsigned int X11_QUEUE_SIZE = 8192;
 
@@ -77,8 +74,6 @@ void RdpControllerThread::run()
 	uint8 type;
 	STREAM s;
 
-	strcpy(keymapname, "en-us"); // default keyboard layout to en-us
-	
 	// start connecting
 	changeStatus(REMOTE_VIEW_CONNECTING);
   
@@ -226,25 +221,32 @@ void RdpWriterThread::run()
 
 bool RdpWriterThread::sendX11Events(const QValueList<XEvent> &events)
 {
+	bool locked = false;
+	
 	QValueList<XEvent>::const_iterator it = events.begin();
 	
 	while(it != events.end())
 	{
-		if((*it).type != MotionNotify && (*it).type != ButtonPress && (*it).type != ButtonRelease)
+		if(locked == false &&
+		   (*it).type != MotionNotify && (*it).type != ButtonPress && (*it).type != ButtonRelease)
+		{
 			KApplication::kApplication()->lock();
+			locked = true;
+		}
 			
 		if(!xwin_process_event(*it))
 		{
-			if((*it).type != MotionNotify && (*it).type != ButtonPress && (*it).type != ButtonRelease)
+			if(locked == true)
 				KApplication::kApplication()->unlock();
 				
 			return false;
 		}
-		if((*it).type != MotionNotify && (*it).type != ButtonPress && (*it).type != ButtonRelease)
-			KApplication::kApplication()->unlock();
-			
 		it++;
 	}
+	
+	if(locked == true)
+		KApplication::kApplication()->unlock();
+	
 	return true;
 }
 
