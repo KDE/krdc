@@ -97,9 +97,10 @@ private:
 	void fsToolbarScheduleHidden();
 
 protected:
-	void mouseMoveEvent(QMouseEvent *e);
-	bool event(QEvent *e);
-	bool eventFilter(QObject *watched, QEvent *e);
+	virtual void mouseMoveEvent(QMouseEvent *e);
+	virtual bool event(QEvent *e);
+	virtual bool eventFilter(QObject *watched, QEvent *e);
+	virtual QSize sizeHint();
 
 public:
 	KRDC(WindowMode wm = WINDOW_MODE_AUTO, 

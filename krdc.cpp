@@ -350,6 +350,15 @@ void KRDC::enableFullscreen(bool on)
 			switchToNormal(m_wasScaling);
 }
 
+QSize KRDC::sizeHint()
+{
+	if ((m_isFullscreen != WINDOW_MODE_FULLSCREEN) && m_toolbar)
+		return QSize(m_view->framebufferSize().width(), 
+			 m_toolbar->sizeHint().height() + m_view->framebufferSize().height());
+	else
+		return m_view->framebufferSize();
+}
+
 void KRDC::switchToFullscreen() 
 {
 	int x, y;
@@ -413,7 +422,8 @@ void KRDC::switchToFullscreen()
 
 void KRDC::switchToNormal(bool scaling)
 {
-	bool fromFullscreen = (m_isFullscreen != WINDOW_MODE_NORMAL);
+	bool fromFullscreen = (m_isFullscreen == WINDOW_MODE_FULLSCREEN);
+	bool scalingChanged = (scaling != m_view->scaling());
 	if (fromFullscreen)
 		hide();
 	m_isFullscreen = WINDOW_MODE_NORMAL;
@@ -469,11 +479,13 @@ void KRDC::switchToNormal(bool scaling)
 
 	repositionView(false);
 
-	m_layout->activate();
 
 	if (!fromFullscreen) {
+		if (!scalingChanged)
+			resize(sizeHint());
 		show();
-		m_view->update();
+		if (scalingChanged)
+			m_view->update();
 	}
 	else
 		showNormal();
