@@ -23,7 +23,6 @@
 #include <kdebug.h>
 #include <kapplication.h>
 #include <kcombobox.h>
-#include <kprocess.h>
 #include <kkeybutton.h>
 #include <qevent.h>
 #include <qsizepolicy.h>
@@ -74,6 +73,7 @@ KRDC::KRDC(WindowMode wm, const QString &host,
   m_scrollView(0),
   m_progressDialog(0),
   m_view(0),
+  m_rdpConnDialog(0),
   m_fsToolbar(0),
   m_toolbar(0),
   m_ftAutoHide(false),
@@ -102,20 +102,43 @@ KRDC::KRDC(WindowMode wm, const QString &host,
 
 bool KRDC::startRDP(const QString &host, bool onlyFailOnCancel) {
 	KProcess proc;
+        
 	proc << "rdesktop";
-	proc << KProcess::quote(host);
-	if(!proc.start(KProcess::Block)) {
+	proc << host;
+        connect(&proc, SIGNAL(processExited(KProcess *)),
+                this, SLOT(rdpExited(KProcess *)));
+	if(!proc.start()) {
 		KMessageBox::error(0,
-		   i18n("Couldn't open connection using rdesktop. Please ensure that rdesktop is installed."),
+				   i18n("Couldn't start rdesktop. Please ensure that rdesktop is installed."),
 				   i18n("Connection failed"));
 		if (!onlyFailOnCancel)
 			return false;
 		emit disconnectedError();
 		return true;
 	}
-	else
-		return true;	
-}
+	else {
+		m_rdpConnDialog = new RDPConnectingDialog(this);
+		m_rdpConnDialog->exec();
+		if(proc.isRunning())                
+			proc.kill();
+		if(!proc.normalExit() || proc.exitStatus())
+			return false;                
+		return true;
+	}        
+} // startRDP
+
+void KRDC::rdpExited(KProcess *proc) {
+	if(!proc->normalExit())
+		KMessageBox::error(0,
+				   i18n("rdesktop exited unexpectedly."),
+				   i18n("Connection failed"));
+	else if(proc->exitStatus())
+		KMessageBox::error(0,
+				   i18n("rdesktop couldn't connect to the specified host."),
+				   i18n("Connection failed"));
+	if(m_rdpConnDialog)
+		m_rdpConnDialog->cancelButton_clicked();       
+} // rdpExited
 
 bool KRDC::start(bool onlyFailOnCancel)
 {

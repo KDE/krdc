@@ -19,6 +19,7 @@
 #define KRDC_H
 
 #include <kprogress.h>
+#include <kprocess.h>
 #include <qscrollview.h>
 #include <qlayout.h> 
 #include <qsize.h>
@@ -28,6 +29,8 @@
 #include "kvncview.h"
 #include "kfullscreenpanel.h"
 #include "keycapturedialog2.h"
+#include "rdpconnectingdialog.h"
+
 
 enum WindowMode {
 	WINDOW_MODE_AUTO,
@@ -53,6 +56,7 @@ private:
 	KProgressDialog *m_progressDialog; // dialog, displayed while connecting
 	KProgress *m_progress;             // progress bar for the dialog
 	KVncView *m_view;                  // the vnc widget
+	RDPConnectingDialog *m_rdpConnDialog; // the rdp connection dialog
 
 	KeyCaptureDialog2 *m_keyCaptureDialog; // dialog for key capturing
 	KFullscreenPanel *m_fsToolbar;     // toolbar for fullscreen (0 in normal mode)
@@ -139,6 +143,7 @@ public slots:
 	void enableFullscreen(bool full = false);
 	void switchToNormal(bool scaling = false);
 	void switchToFullscreen(bool scaling = false);
+	void rdpExited(KProcess *);
 
 signals:
         void disconnected(); 
