@@ -124,7 +124,7 @@ extern char *desktopName;
 extern rfbPixelFormat myFormat;
 extern rfbServerInitMsg si;
 
-extern Bool ConnectToRFBServer(const char *hostname, int port);
+extern int ConnectToRFBServer(const char *hostname, int port);
 extern enum InitStatus InitialiseRFBConnection(void);
 extern Bool SetFormatAndEncodings(void);
 extern Bool SendIncrementalFramebufferUpdateRequest(void);

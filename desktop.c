@@ -49,6 +49,7 @@ static XShmSegmentInfo zoomshminfo;
 static Bool caughtZoomShmError = False;
 static Bool needZoomShmCleanup = False;
 
+static Bool gcInited = False;
 GC gc;
 GC srcGC, dstGC; /* used for debugging copyrect */
 Dimension dpyWidth, dpyHeight;
@@ -129,6 +130,7 @@ DesktopInit(Window win)
   srcGC = XCreateGC(dpy,win,GCFunction|GCForeground,&gcv);
   gcv.foreground = 0xf0f0f0f0;
   dstGC = XCreateGC(dpy,win,GCFunction|GCForeground,&gcv);
+  gcInited = True;
 }
 
 /*
@@ -1146,18 +1148,28 @@ void sge_transform(Surface *src, Surface *dst, float angle, float xscale, float 
 void freeDesktopResources() {
   Cleanup();
   if (image) {
-    if (!useShm)
-      free(image->data);
     XDestroyImage(image);
   }
   if (zoomImage) {
-    if(!useZoomShm)
-      free(zoomImage->data);
     XDestroyImage(zoomImage);
   }
 
-  XFreeGC(dpy, srcGC);
-  XFreeGC(dpy, dstGC);
+  if (gcInited) {
+    XFreeGC(dpy, gc);
+    XFreeGC(dpy, srcGC);
+    XFreeGC(dpy, dstGC);
+  }
+
+  caughtShmError = False;
+  needShmCleanup = False;
+  caughtZoomShmError = False;
+  needZoomShmCleanup = False;
+  gcInited = False;
+  image = NULL;
+  useShm = True;
+  zoomActive = False;
+  zoomImage = NULL;
+  useZoomShm = True;
 }
 
 

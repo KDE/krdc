@@ -161,17 +161,16 @@ bool KVncView::checkLocalKRfb() {
 	KMessageBox::error(0, 
 			   i18n("It is not possible to connect to a local Desktop Sharing service."),
 			   i18n("Connection Failure"));
-	emit disconnected();
+	emit disconnectedError();
 	return false;
 }
 
-bool KVncView::start() {
+void KVncView::start() {
 	if (!checkLocalKRfb())
-		return false;
+		return;
 	m_cthread.start();
 	m_wthread.queueUpdateRequest(QRegion(QRect(0,0,width(),height())));
 	setBackgroundMode(Qt::NoBackground);
-	return true;
 }
 
 KVncView::~KVncView()
@@ -266,8 +265,9 @@ void KVncView::customEvent(QCustomEvent *e)
 
 		if (pd.exec() == QDialog::Accepted) 
 			password = pd.passwordInput->text();
-		else 
+		else {
 			password = QString::null;
+		}
 
 		emit showingPasswordDialog(false);
 
@@ -305,7 +305,7 @@ void KVncView::customEvent(QCustomEvent *e)
 					   i18n("Unknown Error"));
 			break;
 		}
-		emit disconnected();
+		emit disconnectedError();
 	}
 	else if (e->type() == BeepEventType) {  
 		QApplication::beep();

@@ -34,7 +34,7 @@ class KVncView : public QWidget
 private:
 	ControllerThread m_cthread;
 	WriterThread m_wthread;
-	volatile bool m_quitFlag;
+	volatile bool m_quitFlag; // if set: all threads should die ASAP
 	enum RemoteViewStatus m_status;
 
 	QSize m_framebufferSize;
@@ -79,7 +79,7 @@ public:
 	void disableCursor();
 	QString host();
 	int port();
-	bool start();
+	void start();
 	enum RemoteViewStatus status();
 
 public slots:
@@ -92,6 +92,7 @@ signals:
 	void changeSize(int x, int y);
 	void connected();
 	void disconnected();
+	void disconnectedError();
 	void statusChanged(RemoteViewStatus s);
 	void showingPasswordDialog(bool b);
 };

@@ -117,21 +117,25 @@ bool KRDC::start()
 		config->writeEntry("serverHistory", list);
 	}
 
-	setCaption(m_host + i18n(" - Remote Desktop Connection"));
+	setCaption(i18n("%1 - Remote Desktop Connection").arg(m_host));
 	configureApp(m_quality);
 
 	m_view = new KVncView(this, 0, vncServerHost, vncServerPort,
 			      &m_appData);
 	connect(m_view, SIGNAL(changeSize(int,int)), SLOT(setSize(int,int)));
-	connect(m_view, SIGNAL(connected()), SLOT(connected()));
+	connect(m_view, SIGNAL(connected()), SLOT(show()));
 	connect(m_view, SIGNAL(disconnected()), SIGNAL(disconnected()));
+	// note that the disconnectedError() will be disconnected when kvncview
+	// is completely initialized
+	connect(m_view, SIGNAL(disconnectedError()), SIGNAL(disconnectedError()));
 	connect(m_view, SIGNAL(statusChanged(RemoteViewStatus)), 
 		SLOT(changeProgress(RemoteViewStatus)));
 	connect(m_view, SIGNAL(showingPasswordDialog(bool)), 
 		SLOT(showingPasswordDialog(bool)));
 
 	changeProgress(REMOTE_VIEW_CONNECTING);
-	return m_view->start();
+	m_view->start();
+	return true;
 }
 
 void KRDC::changeProgress(RemoteViewStatus s) {
@@ -143,7 +147,8 @@ void KRDC::changeProgress(RemoteViewStatus s) {
 		m_progress = m_progressDialog->progressBar();
 		m_progress->setTextEnabled(false);
 		m_progress->setTotalSteps(3);
-		connect(m_progressDialog, SIGNAL(cancelClicked()), SLOT(quit()));
+		connect(m_progressDialog, SIGNAL(cancelClicked()), 
+			SIGNAL(disconnectedError()));
 	}
 
 	if (s == REMOTE_VIEW_CONNECTING) {
@@ -163,6 +168,12 @@ void KRDC::changeProgress(RemoteViewStatus s) {
 		 (s == REMOTE_VIEW_DISCONNECTED)) {
 		m_progress->setValue(3);
 		hideProgressDialog();
+		if (s == REMOTE_VIEW_CONNECTED) {
+			QObject::disconnect(m_view, SIGNAL(disconnectedError()), 
+					    this, SIGNAL(disconnectedError()));
+			connect(m_view, SIGNAL(disconnectedError()), 
+				SIGNAL(disconnected()));
+		}
 	}
 }
 
@@ -194,14 +205,11 @@ void KRDC::showProgressTimeout() {
 }
 
 void KRDC::quit() {
+	hide();
 	vidmodeNormalSwitch(qt_xdisplay(), m_oldResolution);
 	if (m_view)
 		m_view->startQuitting();
 	emit disconnected();
-}
-
-void KRDC::connected() {
-	show();
 }
 
 void KRDC::configureApp(Quality q) {

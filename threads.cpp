@@ -63,7 +63,7 @@ void ControllerThread::kick() {
 }
 
 void ControllerThread::run() {
-	if (!ConnectToRFBServer(m_view->host().latin1(), m_view->port())) {
+	if (ConnectToRFBServer(m_view->host().latin1(), m_view->port()) < 0) {
 		sendFatalError(ERROR_CONNECTION);
 		return;
 	}
@@ -116,7 +116,7 @@ void ControllerThread::run() {
 	m_wthread.start();
 
 	while (!m_quitFlag) {
-		if (!HandleRFBServerMessage()) {
+		if ((!HandleRFBServerMessage()) && (!m_quitFlag)) {
 			sendFatalError(ERROR_IO);
 			return;
 		}

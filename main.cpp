@@ -1,5 +1,5 @@
 /***************************************************************************
-                          main.cpp  -  description
+                           main.cpp  -  main control
                              -------------------
     begin                : Thu Dec 20 15:11:42 CET 2001
     copyright            : (C) 2001-2002 by Tim Jansen
@@ -22,10 +22,9 @@
 #include <klocale.h>
 #include <kdebug.h>
 #include <qwindowdefs.h>
+#include <qtimer.h>
 
-#include "krdc.h" 
-#define EXCLUDE_X11
-#include "kvncview.h"
+#include "main.h" 
 
 
 #define VERSION "0.1"
@@ -50,8 +49,6 @@ static KCmdLineOptions options[] =
 	{ "+[host]", I18N_NOOP("The name of the host, e.g. 'localhost:1'."), 0 },
 	{ 0, 0, 0 }
 };
-
-
 
 
 int main(int argc, char *argv[])
@@ -98,16 +95,69 @@ int main(int argc, char *argv[])
 
 	if (args->count() > 0) {
 		QString host = args->arg(0);
-		krdc = new KRDC(wm, host, quality, encodings);		
+		krdc = new KRDC(wm, host, quality, encodings);
+		a.setMainWidget(krdc);
+		QObject::connect(krdc, SIGNAL(disconnected()), 
+				 &a, SLOT(quit()));
+		QObject::connect(krdc, SIGNAL(disconnectedError()), 
+				 &a, SLOT(quit()));
+		
+		if (!krdc->start())
+			return 0;
+		
+		return a.exec();
 	}
-	else
-		krdc = new KRDC(wm, QString::null, QUALITY_UNKNOWN, encodings);
 
-	a.setMainWidget(krdc);
-	QObject::connect(krdc, SIGNAL(disconnected()), &a, SLOT(quit()));
-
-	if (!krdc->start())
-		return 0;
-	
-	return a.exec();
+	MainController mc(&a, wm, encodings);
+	return mc.main();
 }
+
+MainController::MainController(KApplication *app, WindowMode wm,
+			       const QString &encodings) :
+	m_krdc(0),
+        m_windowMode(wm),
+        m_encodings(encodings),
+	m_app(app) {
+}
+
+MainController::~MainController() {
+	if (m_krdc)
+		delete m_krdc;
+}
+
+int MainController::main() {
+
+	if (start())
+		return m_app->exec();
+	else
+		return 0;
+}
+
+void MainController::errorRestartRequested() {
+	QTimer::singleShot(0, this, SLOT(errorRestart()));
+}
+
+bool MainController::start() {
+	m_krdc = new KRDC(m_windowMode, QString::null, 
+			  QUALITY_UNKNOWN, m_encodings);
+	m_app->setMainWidget(m_krdc);
+
+	QObject::connect(m_krdc, SIGNAL(disconnected()), 
+	m_app, SLOT(quit()));
+	connect(m_krdc, SIGNAL(disconnectedError()),
+		SLOT(errorRestartRequested()));
+
+	return m_krdc->start();
+	      
+}
+
+void MainController::errorRestart() {
+	m_app->setMainWidget(0);
+
+	if (m_krdc)
+		delete m_krdc;
+
+	start();
+}
+
+#include "main.moc"

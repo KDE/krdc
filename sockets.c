@@ -361,5 +361,9 @@ PrintInHex(char *_buf, int len)
 
 void freeSocketsResources() {
   close(rfbsock);
+
+  errorMessageOnReadFailure = True;
+  bufoutptr = buf;
+  buffered = 0;
 }
 

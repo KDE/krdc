@@ -108,21 +108,21 @@ static Bool jpegError;
  * ConnectToRFBServer.
  */
 
-Bool
+int
 ConnectToRFBServer(const char *hostname, int port)
 {
   unsigned int host;
 
   if (!StringToIPAddr(hostname, &host)) {
     fprintf(stderr,"Couldn't convert '%s' to host address\n", hostname);
-    return False;
+    return -1;
   }
 
   rfbsock = ConnectToTcpAddr(host, port);
 
   if (rfbsock < 0) {
     fprintf(stderr,"Unable to connect to VNC server\n");
-    return False;
+    return -1;
   }
 
   return rfbsock;
@@ -795,6 +795,14 @@ void freeRFBProtoResources() {
     free(desktopName);
   if (raw_buffer)
     free(raw_buffer);
+
+  raw_buffer_size = -1;
+  raw_buffer = NULL;
+  decompStreamInited = False;
+  zlibStreamActive[0] = False;
+  zlibStreamActive[1] = False;
+  zlibStreamActive[2] = False;
+  zlibStreamActive[3] = False;
 }
 
 void freeResources() {

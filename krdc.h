@@ -99,7 +99,6 @@ public:
 	bool start();
 
 private slots:
-        void connected(); 
 	void changeProgress(RemoteViewStatus s);
 	void showingPasswordDialog(bool b);
 	void showProgressTimeout();
@@ -121,7 +120,7 @@ public slots:
 
 signals:
         void disconnected(); 
-	
+	void disconnectedError();
 };
 
 #endif
