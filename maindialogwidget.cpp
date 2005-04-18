@@ -223,7 +223,7 @@ void MainDialogWidget::rescan()
 
   if (m_scope == DNSSD_SCOPE) {
     kdDebug() << "Scope is DNSSD\n";
-    m_locator_dnssd = new DNSSD::ServiceBrowser(QStringList::split(',',"_rfb._tcp,_rdp._tcp"),0,true);
+    m_locator_dnssd = new DNSSD::ServiceBrowser(QStringList::split(',',"_rfb._tcp,_rdp._tcp"),0,DNSSD::ServiceBrowser::AutoResolve);
     connect(m_locator_dnssd,SIGNAL(serviceAdded(DNSSD::RemoteService::Ptr)),
       SLOT(addedService(DNSSD::RemoteService::Ptr)));
     connect(m_locator_dnssd,SIGNAL(serviceRemoved(DNSSD::RemoteService::Ptr)),
