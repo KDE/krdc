@@ -1,4 +1,4 @@
-/s
+/*
      krdpview.h, implementation of the KRdpView class
      Copyright (C) 2002 Arend van Beelen jr.
 
