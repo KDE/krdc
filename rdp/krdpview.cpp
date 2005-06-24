@@ -288,7 +288,7 @@ void KRdpView::processDied(KProcess */*proc*/)
 			// FIXME: rdesktop 1.3.2 (or maybe 1.4.0) should be released by the time KDE 3.3 is released
 			KMessageBox::error(0, i18n("The version of rdesktop you are using (%1) is too old:\n"
 			                           "rdesktop 1.3.2 or greater is required. A working patch for "
-			                           "rdesktop 1.3.1 can be found in KDE CVS.").arg(m_clientVersion),
+			                           "rdesktop 1.3.1 can be found in KDE SVN.").arg(m_clientVersion),
 			                      i18n("rdesktop Failure"));
 		}
 		emit disconnectedError();
