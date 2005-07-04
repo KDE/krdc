@@ -44,6 +44,20 @@
                         <string>Enable this option to encrypt the connection. Only newer servers support this option. Encrypting prevents others from eavesdropping, but can slow down the connection considerably.</string>
                     </property>
                 </widget>
+		<widget class="QCheckBox" row="2" column="0" rowspan="1" colspan="3">
+			<property name="name">
+				<cstring>cbUseKWallet</cstring>
+			</property>
+			<property name="enabled">
+				<bool>true</bool>
+			</property>
+			<property name="text">
+				<string>Use K&amp;Wallet for passwords.</string>
+			</property>
+			<property name="whatsThis" stdset="0">
+				<string>Enable this option to store your passwords with KWallet.</string>
+			</property>
+		</widget>
                 <widget class="QLabel" row="0" column="0">
                     <property name="name">
                         <cstring>connectionTypeLabel</cstring>
@@ -143,6 +157,8 @@
     <function specifier="non virtual" returnType="int">showPrefs()</function>
     <function specifier="non virtual">setUseEncryption( bool b )</function>
     <function specifier="non virtual" returnType="bool">useEncryption()</function>
+    <function specifier="non virtual">setUseKWallet( bool b )</function>
+    <function specifier="non virtual" returnType="bool">useKWallet()</function>
 </functions>
 <layoutdefaults spacing="6" margin="11"/>
 <layoutfunctions spacing="KDialog::spacingHint" margin="KDialog::marginHint"/>

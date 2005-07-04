@@ -26,6 +26,7 @@ protected:
 
 	int m_quality;
 	bool m_askOnConnect;
+	bool m_useKWallet;
 
 	virtual void load();
 	virtual void setDefaults();
@@ -44,6 +45,8 @@ public:
 	int quality() const;
 	void setAskOnConnect(bool ask);
 	bool askOnConnect() const;
+	void setUseKWallet(bool);
+	bool useKWallet() const;
 };
 
 #endif

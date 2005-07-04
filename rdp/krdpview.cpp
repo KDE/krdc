@@ -23,6 +23,8 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kprocess.h>
+#include <kwallet.h>
+#include <kpassdlg.h>
 
 #include <qvbox.h>
 #include <qxembed.h>
@@ -37,6 +39,7 @@
 #include "rdpprefs.h"
 
 bool rdpAppDataConfigured = false;
+extern KWallet::Wallet *wallet;
 
 static KRdpView *krdpview;
 
@@ -156,6 +159,7 @@ int KRdpView::port()
 bool KRdpView::start()
 {
 	SmartPtr<RdpHostPref> hp, rdpDefaults;
+	bool useKWallet = false;
 
 	if(!rdpAppDataConfigured)
 	{
@@ -167,6 +171,7 @@ bool KRdpView::start()
 		int hv = hp->height();
 		int cd = hp->colorDepth();
 		QString kl = hp->layout();
+		bool kwallet = hp->useKWallet();
 		if(hp->askOnConnect())
 		{
 			// show preferences dialog
@@ -185,6 +190,7 @@ bool KRdpView::start()
 			prefs->setColorDepth(cd);
 			prefs->setKbLayout( keymap2int( kl ) );
 			prefs->setShowPrefs( true );
+			prefs->setUseKWallet(kwallet);
 
 			if ( dlg->exec() == QDialog::Rejected )
 				return false;
@@ -197,8 +203,11 @@ bool KRdpView::start()
 			hp->setHeight(hv);
 			hp->setColorDepth( prefs->colorDepth() );
 			hp->setLayout(kl);
+			hp->setUseKWallet(prefs->useKWallet());
 			hps->sync();
 		}
+
+		useKWallet = hp->useKWallet();
 	}
 
 	m_container->show();
@@ -208,7 +217,49 @@ bool KRdpView::start()
 	*m_process << "-g" << (QString::number(hp->width()) + "x" + QString::number(hp->height()));
 	*m_process << "-k" << hp->layout();
 	if(!m_user.isEmpty())     { *m_process << "-u" << m_user; }
-	if(!m_password.isEmpty()) { *m_process << "-p" << m_password; }
+
+	if(m_password.isEmpty() && useKWallet ) {
+		QString krdc_folder = "KRDC-RDP";
+
+		// Bugfix: Check if wallet has been closed by an outside source
+		if ( wallet && !wallet->isOpen() ) {
+			delete wallet; wallet=0;
+		}
+
+		// Do we need to open the wallet?
+		if ( !wallet ) {
+			QString walletName = KWallet::Wallet::NetworkWallet();
+			wallet = KWallet::Wallet::openWallet(walletName);
+		}
+
+		if (wallet && wallet->isOpen()) {
+			bool walletOK = wallet->hasFolder(krdc_folder);
+			if (walletOK == false) {
+				walletOK = wallet->createFolder(krdc_folder);
+			}
+	
+			if (walletOK == true) {
+				wallet->setFolder(krdc_folder);
+				if ( wallet->hasEntry(m_host) ) {
+					wallet->readPassword(m_host, m_password);
+				}
+			}
+
+			if ( m_password.isEmpty() ) {
+				//There must not be an existing entry. Let's make one.
+				QCString newPassword;
+				if (KPasswordDialog::getPassword(newPassword, i18n("Please enter the password.")) == KPasswordDialog::Accepted) {
+					m_password = newPassword;
+					wallet->writePassword(m_host, m_password);
+				}
+			}
+		}
+	}
+
+	if(!m_password.isEmpty()) {
+		*m_process << "-p" << m_password; 
+	}
+
 	*m_process << "-X" << ("0x" + QString::number(m_container->winId(), 16));
 	*m_process << "-a" << QString::number(hp->colorDepth());
 	*m_process << (m_host + ":" + QString::number(m_port));

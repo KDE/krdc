@@ -315,6 +315,20 @@
                         <cstring>cmbKbLayout</cstring>
                     </property>
                 </widget>
+		<widget class="QCheckBox" row="4" column="0">
+			<property name="name">
+				<cstring>cbUseKWallet</cstring>
+			</property>
+			<property name="enabled">
+				<bool>true</bool>
+			</property>
+			<property name="text">
+				<string>Use K&amp;Wallet for passwords.</string>
+			</property>
+			<property name="whatsThis" stdset="0">
+				<string>Enable this option to store your passwords with KWallet.</string>
+			</property>
+		</widget>
                 <widget class="QLabel" row="0" column="0">
                     <property name="name">
                         <cstring>resolutionLabel</cstring>
@@ -447,6 +461,8 @@
     <function specifier="non virtual" returnType="int">kbLayout()</function>
     <function specifier="non virtual">setShowPrefs( bool b )</function>
     <function specifier="non virtual" returnType="bool">showPrefs()</function>
+    <function specifier="non virtual">setUseKWallet( bool b )</function>
+    <function specifier="non virtual" returnType="bool">useKWallet()</function>
 </functions>
 <layoutdefaults spacing="6" margin="11"/>
 <layoutfunctions spacing="KDialog::spacingHint" margin="KDialog::marginHint"/>

@@ -22,6 +22,7 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kdebug.h>
+#include <kwallet.h>
 #include <qwindowdefs.h>
 #include <qtimer.h>
 #include <qfile.h>
@@ -31,9 +32,17 @@
 #include "../config.h"
 #include "main.h"
 
+// NOTE: I'm not comfortable with the wallet being global data and this high up
+// in the heirarchy, but there are 3 reasons for its current placement here:
+// 1) There are some important threading issues where it comes to the password
+// handling code, and a lot of it is done outside of the objects. 
+// 2) Different backends need access to the same wallet. so that it is not
+// opened multiple times.
+// 3) MainController is about the only thing that isn't deleted in between connection
+// attempts.
+KWallet::Wallet *wallet = 0;
 
 static const char description[] = I18N_NOOP("Remote desktop connection");
-
 
 static KCmdLineOptions options[] =
 {
@@ -166,6 +175,9 @@ MainController::MainController(KApplication *app, WindowMode wm,
 }
 
 MainController::~MainController() {
+	if ( wallet ) {
+		delete wallet; wallet = 0;
+	}
 }
 
 int MainController::main() {

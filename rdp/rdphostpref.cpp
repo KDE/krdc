@@ -29,6 +29,7 @@ RdpHostPref::RdpHostPref(KConfig *conf, const QString &host, const QString &type
 	m_height(600),
 	m_colorDepth(8),
 	m_layout("en-us"),
+	m_useKWallet(true),
 	m_askOnConnect(true)
 {
 }
@@ -49,6 +50,7 @@ void RdpHostPref::save()
 		m_config->writeEntry(p+"colorDepth", m_colorDepth);
 		m_config->writeEntry(p+"layout", m_layout);
 		m_config->writeEntry(p+"askOnConnect", m_askOnConnect);
+		m_config->writeEntry(p+"useKWallet", m_useKWallet);
 	}
 	else
 	{
@@ -58,6 +60,7 @@ void RdpHostPref::save()
 		m_config->writeEntry( "rdpColorDepth", m_colorDepth);
 		m_config->writeEntry( "rdpKeyboardLayout", m_layout );
 		m_config->writeEntry( "rdpShowHostPreferences", m_askOnConnect );
+		m_config->writeEntry( "rdpUseKWallet", m_useKWallet );
 	}
 }
 
@@ -72,6 +75,7 @@ void RdpHostPref::load()
 		m_colorDepth = m_config->readNumEntry(p+"colorDepth", 8);
 		m_layout = m_config->readEntry(p+"layout", "en-us");
 		m_askOnConnect = m_config->readBoolEntry(p+"askOnConnect", true);
+		m_useKWallet = m_config->readBoolEntry(p+"useKWallet", true);
 	}
 	else
 	{
@@ -99,13 +103,14 @@ void RdpHostPref::setDefaults()
 	m_colorDepth = m_config->readNumEntry("rdpColorDepth", 8);
 	m_layout = m_config->readEntry("rdpLayout", "en-us");
 	m_askOnConnect = m_config->readBoolEntry("rdpShowHostPreferences", true);
+	m_useKWallet = m_config->readBoolEntry("rdpUseKWallet", true);
 }
 
 QString RdpHostPref::prefDescription() const
 {
-	return i18n("Show Preferences: %1, Resolution: %2x%3, Color Depth: %4 Keymap: %5")
+	return i18n("Show Preferences: %1, Resolution: %2x%3, Color Depth: %4, Keymap: %5, KWallet: %6")
 	  .arg(m_askOnConnect ? i18n("yes") : i18n("no")).arg(m_width).arg(m_height)
-	  .arg(m_colorDepth).arg(m_layout);
+	  .arg(m_colorDepth).arg(m_layout).arg(m_useKWallet ? i18n("yes") : i18n("no"));
 }
 
 void RdpHostPref::setWidth(int w)
@@ -162,4 +167,13 @@ void RdpHostPref::setAskOnConnect(bool ask)
 bool RdpHostPref::askOnConnect() const
 {
 	return m_askOnConnect;
+}
+
+void RdpHostPref::setUseKWallet(bool use) {
+	m_useKWallet = use;
+	save();
+}
+
+bool RdpHostPref::useKWallet() const {
+	return m_useKWallet;
 }

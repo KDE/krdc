@@ -42,3 +42,12 @@ bool VncPrefs::useEncryption()
   return cbUseEncryption->isChecked();
 }
 
+void VncPrefs::setUseKWallet( bool b )
+{
+  cbUseKWallet->setChecked(b);
+}
+
+bool VncPrefs::useKWallet()
+{
+  return cbUseKWallet->isChecked();
+}

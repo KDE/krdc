@@ -24,6 +24,7 @@ const QString VncHostPref::VncType = "VNC";
 VncHostPref::VncHostPref(KConfig *conf, const QString &host, const QString &type) :
 	HostPref(conf, host, type),
 	m_quality(0),
+	m_useKWallet(true),
 	m_askOnConnect(true) {
 }
 
@@ -38,12 +39,14 @@ void VncHostPref::save() {
 		m_config->writeEntry(p+"exists", true);
 		m_config->writeEntry(p+"quality", m_quality);
 		m_config->writeEntry(p+"askOnConnect", m_askOnConnect);
+		m_config->writeEntry(p+"useKWallet", m_useKWallet);
 	}
 	else
 	{
 		m_config->setGroup( "VncDefaultSettings" );
 		m_config->writeEntry( "vncQuality", m_quality );
 		m_config->writeEntry( "vncShowHostPreferences", m_askOnConnect );
+		m_config->writeEntry( "vncUseKWallet", m_useKWallet );
 	}
 }
 
@@ -54,6 +57,7 @@ void VncHostPref::load() {
 		QString p = prefix();
 		m_quality = m_config->readNumEntry(p+"quality", 0);
 		m_askOnConnect = m_config->readBoolEntry(p+"askOnConnect", true);
+		m_useKWallet = m_config->readBoolEntry(p+"useKWallet", true);
 	}
 	else
 	{
@@ -73,6 +77,7 @@ void VncHostPref::setDefaults() {
 	m_config->setGroup("VncDefaultSettings");
 	m_quality = m_config->readNumEntry("vncQuality", 0);
 	m_askOnConnect = m_config->readBoolEntry("vncShowHostPreferences", true);
+	m_useKWallet = m_config->readBoolEntry("vncUseKWallet", true);
 }
 
 QString VncHostPref::prefDescription() const {
@@ -90,8 +95,8 @@ QString VncHostPref::prefDescription() const {
 	default:
 		Q_ASSERT(true);
 	}
-	return i18n("Show Preferences: %1, Quality: %2")
-	  .arg(m_askOnConnect ? i18n("yes") : i18n("no")).arg(q);
+	return i18n("Show Preferences: %1, Quality: %2, KWallet: %3")
+	  .arg(m_askOnConnect ? i18n("yes") : i18n("no")).arg(q).arg(m_useKWallet ? i18n("yes") : i18n("no"));
 }
 
 void VncHostPref::setQuality(int q) {
@@ -110,4 +115,13 @@ void VncHostPref::setAskOnConnect(bool ask) {
 
 bool VncHostPref::askOnConnect() const {
 	return m_askOnConnect;
+}
+
+void VncHostPref::setUseKWallet(bool use) {
+	m_useKWallet = use;
+	save();
+}
+
+bool VncHostPref::useKWallet() const {
+	return m_useKWallet;
 }

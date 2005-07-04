@@ -151,3 +151,12 @@ bool RdpPrefs::showPrefs()
   return cbShowPrefs->isChecked();
 }
 
+void RdpPrefs::setUseKWallet( bool b )
+{
+  cbUseKWallet->setChecked(b);
+}
+
+bool RdpPrefs::useKWallet()
+{
+  return cbUseKWallet->isChecked();
+}

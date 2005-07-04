@@ -87,6 +87,7 @@ class RdpHostPref : public HostPref
 		int      m_colorDepth;
 		QString  m_layout;
 		bool     m_askOnConnect;
+		bool     m_useKWallet;
 
 		virtual void load();
 		virtual void setDefaults();
@@ -111,6 +112,8 @@ class RdpHostPref : public HostPref
 		QString          layout() const;
 		void             setAskOnConnect(bool ask);
 		bool             askOnConnect() const;
+		bool             useKWallet() const;
+		void             setUseKWallet(bool);
 };
 
 #endif

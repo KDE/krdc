@@ -67,10 +67,12 @@ void PreferencesDialog::load()
 
   m_vncPrefs->setQuality( m_vncDefaults->quality() );
   m_vncPrefs->setShowPrefs( m_vncDefaults->askOnConnect() );
+  m_vncPrefs->setUseKWallet( m_vncDefaults->useKWallet() );
 
   m_rdpPrefs->setRdpWidth( m_rdpDefaults->width() );
   m_rdpPrefs->setRdpHeight( m_rdpDefaults->height() );
   m_rdpPrefs->setShowPrefs( m_rdpDefaults->askOnConnect() );
+  m_rdpPrefs->setUseKWallet( m_rdpDefaults->useKWallet() );
   m_rdpPrefs->setResolution();
 }
 
@@ -80,11 +82,13 @@ void PreferencesDialog::save()
 
   m_vncDefaults->setQuality( m_vncPrefs->quality() );
   m_vncDefaults->setAskOnConnect(  m_vncPrefs->showPrefs() );
+  m_vncDefaults->setUseKWallet( m_vncPrefs->useKWallet() );
 
   m_rdpDefaults->setWidth( m_rdpPrefs->rdpWidth() );
   m_rdpDefaults->setHeight( m_rdpPrefs->rdpHeight() );
   m_rdpDefaults->setLayout( rdpKeymaps[ m_rdpPrefs->kbLayout() ] );
   m_rdpDefaults->setAskOnConnect( m_rdpPrefs->showPrefs() );
+  m_rdpDefaults->setUseKWallet( m_rdpPrefs->useKWallet() );
 
   HostPreferences *hp = HostPreferences::instance();
   hp->sync();

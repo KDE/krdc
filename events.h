@@ -191,4 +191,14 @@ public:
 	int buttonMask() const { return m_buttonMask; };
 };
 
+const int WalletOpenEventType = 41010;
+
+class WalletOpenEvent : public QCustomEvent
+{
+public:
+	WalletOpenEvent() :
+		QCustomEvent(WalletOpenEventType)
+	{};
+};
+
 #endif

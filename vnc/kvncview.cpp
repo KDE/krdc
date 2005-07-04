@@ -26,6 +26,7 @@
 #include <kstandarddirs.h>
 #include <kpassdlg.h>
 #include <kdialogbase.h>
+#include <kwallet.h>
 
 #include <qdatastream.h>
 #include <dcopclient.h>
@@ -51,6 +52,9 @@ Display* dpy;
 
 static KVncView *kvncview;
 
+//Passwords and KWallet data
+extern KWallet::Wallet *wallet;
+bool useKWallet = false;
 static QCString password;
 static QMutex passwordLock;
 static QWaitCondition passwordWaiter;
@@ -233,6 +237,7 @@ bool KVncView::start() {
 			SmartPtr<VncHostPref>(hps->createHostPref(m_host,
 								 VncHostPref::VncType));
 		int ci = hp->quality();
+		bool kwallet = hp->useKWallet();
 		if (hp->askOnConnect()) {
 			// show preferences dialog
 			KDialogBase *dlg = new KDialogBase( this, "dlg", true,
@@ -246,6 +251,7 @@ bool KVncView::start() {
 
 			prefs->setQuality( ci );
 			prefs->setShowPrefs(true);
+			prefs->setUseKWallet(kwallet);
 
 			if ( dlg->exec() == QDialog::Rejected )
 				return false;
@@ -253,6 +259,7 @@ bool KVncView::start() {
 			ci = prefs->quality();
 			hp->setAskOnConnect(prefs->showPrefs());
 			hp->setQuality(ci);
+			hp->setUseKWallet(prefs->useKWallet());
 			hps->sync();
 
 			delete dlg;
@@ -271,6 +278,7 @@ bool KVncView::start() {
 		}
 
 		configureApp(quality);
+		useKWallet = hp->useKWallet();
 	}
 
 	setStatus(REMOTE_VIEW_CONNECTING);
@@ -373,6 +381,13 @@ void KVncView::customEvent(QCustomEvent *e)
 			setMouseTracking(false);
 			emit disconnected();
 		}
+		else if (m_status == REMOTE_VIEW_PREPARING) {
+			//Login was successfull: Write KWallet password if necessary.
+			if ( useKWallet && !password.isNull() && wallet && wallet->isOpen() && !wallet->hasEntry(host())) {
+				wallet->writePassword(host(), password);
+			}
+			delete wallet; wallet=0;
+		}
 	}
 	else if (e->type() == PasswordRequiredEventType) {
 		emit showingPasswordDialog(true);
@@ -385,6 +400,42 @@ void KVncView::customEvent(QCustomEvent *e)
 		passwordLock.lock(); // to guarantee that thread is waiting
 		passwordWaiter.wakeAll();
 		passwordLock.unlock();
+	}
+	else if (e->type() == WalletOpenEventType) {
+		QString krdc_folder = "KRDC-VNC";
+		emit showingPasswordDialog(true); //Bad things happen if you don't do this.
+
+		// Bugfix: Check if wallet has been closed by an outside source
+		if ( wallet && !wallet->isOpen() ) {
+			delete wallet; wallet=0;
+		}
+
+		// Do we need to open the wallet?
+		if ( !wallet ) {
+			QString walletName = KWallet::Wallet::NetworkWallet();
+			wallet = KWallet::Wallet::openWallet(walletName);
+		}
+
+		if (wallet && wallet->isOpen()) {
+			bool walletOK = wallet->hasFolder(krdc_folder);
+			if (walletOK == false) {
+				walletOK = wallet->createFolder(krdc_folder);
+			}
+	
+			if (walletOK == true) {
+				wallet->setFolder(krdc_folder);
+				QString newPass;
+				if ( wallet->hasEntry(kvncview->host()) && !wallet->readPassword(kvncview->host(), newPass) ) {
+					password=newPass.latin1();
+				}
+			}
+		}
+
+		passwordLock.lock(); // to guarantee that thread is waiting
+		passwordWaiter.wakeAll();
+		passwordLock.unlock();
+
+		emit showingPasswordDialog(false);
 	}
 	else if (e->type() == FatalErrorEventType) {
 		FatalErrorEvent *fee = (FatalErrorEvent*) e;
@@ -421,6 +472,10 @@ void KVncView::customEvent(QCustomEvent *e)
 					   i18n("Connection Failure"));
 			break;
 		case ERROR_AUTHENTICATION:
+			//Login failed: Remove wallet entry if there is one.
+			if ( useKWallet && wallet && wallet->isOpen() && wallet->hasEntry(host()) ) {
+				wallet->removeEntry(host());
+			}
 			KMessageBox::error(0,
 					   i18n("Authentication failed. Connection aborted."),
 					   i18n("Authentication Failure"));
@@ -668,24 +723,50 @@ void KVncView::enableClientCursor(bool enable) {
 	showDotCursorInternal();
 }
 
+/*!
+	\brief Get a password for this host.
+	Tries to get a password from the url or wallet if at all possible. If
+	both of these fail, it then asks the user to enter a password.
+	\note Lots of dialogs can be popped up during this process. The thread
+	locks and signals are there to protect against deadlocks and other
+	horribleness. Be careful making changes here. 
+*/
 int getPassword(char *passwd, int pwlen) {
-	int retV = 1;
+	int retV = 0;
 
+	//Prepare the system
 	passwordLock.lock();
-	if (password.isNull()) {
-		QApplication::postEvent(kvncview, new PasswordRequiredEvent());
-		passwordWaiter.wait(&passwordLock);
-	}
-	if (!password.isNull())
-		strncpy(passwd, (const char*)password, pwlen);
-	else {
-		passwd[0] = 0;
-		retV = 0;
-	}
-	passwordLock.unlock();
 
-	if (!retV)
-		kvncview->startQuitting();
+	//Try #1: Did the user give a password in the URL?
+	if (!password.isNull()) {
+		retV = 1; //got it!
+	}
+
+	//Try #2: Is there something in the wallet?
+	if ( !retV && useKWallet ) {
+		QApplication::postEvent(kvncview, new WalletOpenEvent());
+		passwordWaiter.wait(&passwordLock); //block
+		if (!password.isNull()) retV = 1; //got it!
+	}
+
+	//Last try: Ask the user
+	if (!retV) {
+		QApplication::postEvent(kvncview, new PasswordRequiredEvent());
+		passwordWaiter.wait(&passwordLock); //block
+		if (!password.isNull()) retV = 1; //got it!
+	}
+
+	//Process the password if we got it, clear it if we didn't
+	if (retV) {
+		strncpy(passwd, (const char*)password, pwlen);
+	} else {
+		passwd[0] = 0;
+	}
+
+	//Pack up and go home
+	passwordLock.unlock();
+	if (!retV) kvncview->startQuitting();
+
 	return retV;
 }
 
