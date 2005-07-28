@@ -21,6 +21,8 @@
 #define EVENTS_H
 
 #include <qevent.h>
+//Added by qt3to4:
+#include <QCustomEvent>
 
 /**
  * State of the connection. The state of the connection is returned

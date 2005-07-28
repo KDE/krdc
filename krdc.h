@@ -19,12 +19,18 @@
 #define KRDC_H
 
 #include <kprogress.h>
-#include <qscrollview.h>
+#include <q3scrollview.h>
 #include <qlayout.h>
 #include <qsize.h>
 #include <qrect.h>
 #include <qtimer.h>
 #include <qdesktopwidget.h>
+//Added by qt3to4:
+#include <QPixmap>
+#include <QEvent>
+#include <QVBoxLayout>
+#include <Q3PopupMenu>
+#include <QMouseEvent>
 
 #include "vnc/kvncview.h"
 #include "rdp/krdpview.h"
@@ -35,8 +41,8 @@
 
 class QPixmap;
 class KToolBar;
-class QPopupMenu;
-class QDockArea;
+class Q3PopupMenu;
+class Q3DockArea;
 
 enum WindowMode {
 	WINDOW_MODE_AUTO,
@@ -52,7 +58,7 @@ enum Protocol {
 };
 
 // Overloaded QScrollView, to let mouse move events through to remote widget
-class QScrollView2 : public QScrollView {
+class QScrollView2 : public Q3ScrollView {
 public:
 	QScrollView2(QWidget *w, const char *name);
 protected:
@@ -66,7 +72,7 @@ class KRDC : public QWidget
 private:
 	SmartPtr<KProgressDialog> m_progressDialog; // dialog, displayed while connecting
 	QVBoxLayout *m_layout;     // the layout for autosizing the scrollview
-	QScrollView *m_scrollView; // scrollview that contains the remote widget
+	Q3ScrollView *m_scrollView; // scrollview that contains the remote widget
 	KProgress *m_progress;             // progress bar for the dialog
 	KRemoteView *m_view;                  // the remote widget (e.g. KVncView)
 
@@ -76,8 +82,8 @@ private:
                                            //     (invalid in normal mode)
 	QPixmap m_pinup, m_pindown;        // fs toolbar imaged for autohide button
 	KToolBar *m_toolbar;               // toolbar in normal mode (0 in fs mode)
-	QDockArea *m_dockArea;             // dock area for toolbar in normal mode (0 in fs mode)
-	QPopupMenu *m_popup;               // advanced options popup (0 in fs mode)
+	Q3DockArea *m_dockArea;             // dock area for toolbar in normal mode (0 in fs mode)
+	Q3PopupMenu *m_popup;               // advanced options popup (0 in fs mode)
 	QDesktopWidget m_desktopWidget;
 
 	static const int TOOLBAR_AUTOHIDE_TIMEOUT;
@@ -120,7 +126,7 @@ private:
 	static const int TOOLBAR_SPEED_DOWN;
 	static const int TOOLBAR_SPEED_UP;
 	void fsToolbarScheduleHidden();
-	QPopupMenu *createPopupMenu(QWidget *parent) const;
+	Q3PopupMenu *createPopupMenu(QWidget *parent) const;
 
 protected:
 	virtual void mouseMoveEvent(QMouseEvent *e);

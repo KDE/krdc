@@ -24,7 +24,7 @@
 #include "rdp/rdpprefs.h"
 
 #include <qcheckbox.h>
-#include <qvbox.h>
+#include <q3vbox.h>
 
 #include <klocale.h>
 
@@ -32,7 +32,7 @@ PreferencesDialog::PreferencesDialog( QWidget *parent, const char *name )
     : KDialogBase( Tabbed, i18n( "Preferences" ), Ok|Cancel, Ok, 
       parent, name, true )
 {
-  QVBox *page;
+  Q3VBox *page;
   QWidget *spacer;
 
   page = addVBoxPage( i18n( "&Host Profiles" ) );

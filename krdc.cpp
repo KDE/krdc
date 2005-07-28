@@ -33,10 +33,18 @@
 #include <kwin.h>
 #include <kstartupinfo.h>
 
-#include <qdockarea.h>
+#include <q3dockarea.h>
 #include <qlabel.h>
-#include <qwhatsthis.h>
+
 #include <qtooltip.h>
+//Added by qt3to4:
+#include <QEvent>
+#include <Q3Frame>
+#include <QVBoxLayout>
+#include <QResizeEvent>
+#include <Q3PopupMenu>
+#include <QMouseEvent>
+#include <QX11Info>
 
 #define BUMP_SCROLL_CONSTANT (200)
 
@@ -57,7 +65,7 @@ const int KRDC::TOOLBAR_SPEED_DOWN = 34;
 const int KRDC::TOOLBAR_SPEED_UP = 20;
 
 QScrollView2::QScrollView2(QWidget *w, const char *name) :
-	QScrollView(w, name) {
+	Q3ScrollView(w, name) {
 	setMouseTracking(true);
         viewport()->setMouseTracking(true);
         horizontalScrollBar()->setMouseTracking(true);
@@ -162,7 +170,7 @@ bool KRDC::start()
 	setCaption(i18n("%1 - Remote Desktop Connection").arg(serverHost));
 
 	m_scrollView = new QScrollView2(this, "remote scrollview");
-	m_scrollView->setFrameStyle(QFrame::NoFrame);
+	m_scrollView->setFrameStyle(Q3Frame::NoFrame);
 	m_scrollView->setSizePolicy(QSizePolicy(QSizePolicy::Expanding,
 					QSizePolicy::Expanding));
 
@@ -186,7 +194,7 @@ bool KRDC::start()
 	}
 
 	m_scrollView->addChild(m_view);
-	QWhatsThis::add(m_view, i18n("Here you can see the remote desktop. If the other side allows you to control it, you can also move the mouse, click or enter keystrokes. If the content does not fit your screen, click on the toolbar's full screen button or scale button. To end the connection, just close the window."));
+	m_view->setWhatsThis( i18n("Here you can see the remote desktop. If the other side allows you to control it, you can also move the mouse, click or enter keystrokes. If the content does not fit your screen, click on the toolbar's full screen button or scale button. To end the connection, just close the window."));
 
 	connect(m_view, SIGNAL(changeSize(int,int)), SLOT(setSize(int,int)));
 	connect(m_view, SIGNAL(connected()), SLOT(show()));
@@ -277,7 +285,7 @@ void KRDC::showProgressTimeout() {
 void KRDC::quit() {
 	m_view->releaseKeyboard();
 	hide();
-	vidmodeNormalSwitch(qt_xdisplay(), m_oldResolution);
+	vidmodeNormalSwitch(QX11Info::display(), m_oldResolution);
 	if (m_view)
 		m_view->startQuitting();
 	emit disconnected();
@@ -375,7 +383,7 @@ QSize KRDC::sizeHint()
 		return m_view->framebufferSize();
 }
 
-QPopupMenu *KRDC::createPopupMenu(QWidget *parent) const {
+Q3PopupMenu *KRDC::createPopupMenu(QWidget *parent) const {
 	KPopupMenu *pu = new KPopupMenu(parent);
 	pu->insertItem(i18n("View Only"), this, SLOT(viewOnlyToggled()), 0, VIEW_ONLY_ID);
 	pu->setCheckable(true);
@@ -405,7 +413,7 @@ void KRDC::switchToFullscreen(bool scaling)
 
 	if (!fromFullscreen) {
 		hide();
-		m_oldResolution = vidmodeFullscreenSwitch(qt_xdisplay(),
+		m_oldResolution = vidmodeFullscreenSwitch(QX11Info::display(),
 							  m_desktopWidget.screenNumber(this),
 							  fbs.width(),
 							  fbs.height(),
@@ -460,9 +468,9 @@ void KRDC::switchToFullscreen(bool scaling)
 	KToolBar *t = new KToolBar(m_fsToolbar);
 	m_fsToolbarWidget = t;
 
-	QIconSet pinIconSet;
-	pinIconSet.setPixmap(m_pinup, QIconSet::Automatic, QIconSet::Normal, QIconSet::On);
-	pinIconSet.setPixmap(m_pindown, QIconSet::Automatic, QIconSet::Normal, QIconSet::Off);
+	QIcon pinIconSet;
+	pinIconSet.setPixmap(m_pinup, QIcon::Automatic, QIcon::Normal, QIcon::On);
+	pinIconSet.setPixmap(m_pindown, QIcon::Automatic, QIcon::Normal, QIcon::Off);
 	t->insertButton("pinup", FS_AUTOHIDE_ID);
 	KToolBarButton *pinButton = t->getButton(FS_AUTOHIDE_ID);
 	pinButton->setIconSet(pinIconSet);
@@ -527,7 +535,7 @@ void KRDC::switchToFullscreen(bool scaling)
 
 	if (!fromFullscreen) {
 		if (m_oldResolution.valid)
-			grabInput(qt_xdisplay(), winId());
+			grabInput(QX11Info::display(), winId());
 		m_view->grabKeyboard();
 	}
 }
@@ -546,8 +554,8 @@ void KRDC::switchToNormal(bool scaling)
 
 	m_view->releaseKeyboard();
 	if (m_oldResolution.valid) {
-		ungrabInput(qt_xdisplay());
-		vidmodeNormalSwitch(qt_xdisplay(), m_oldResolution);
+		ungrabInput(QX11Info::display());
+		vidmodeNormalSwitch(QX11Info::display(), m_oldResolution);
 		m_oldResolution = Resolution();
 	}
 
@@ -562,17 +570,17 @@ void KRDC::switchToNormal(bool scaling)
 	}
 
 	if (!m_toolbar) {
-		m_dockArea = new QDockArea(Qt::Horizontal, QDockArea::Normal, this);
+		m_dockArea = new Q3DockArea(Qt::Horizontal, Q3DockArea::Normal, this);
 		m_dockArea->setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding,
 					QSizePolicy::Fixed));
 		KToolBar *t = new KToolBar(m_dockArea);
 		m_toolbar = t;
 		t->setIconText(KToolBar::IconTextRight);
-		connect(t, SIGNAL(placeChanged(QDockWindow::Place)), SLOT(toolbarChanged()));
+		connect(t, SIGNAL(placeChanged(Q3DockWindow::Place)), SLOT(toolbarChanged()));
 		t->insertButton("window_fullscreen", 0, true, i18n("Fullscreen"));
 		KToolBarButton *fullscreenButton = t->getButton(0);
 		QToolTip::add(fullscreenButton, i18n("Fullscreen"));
-		QWhatsThis::add(fullscreenButton, i18n("Switches to full screen. If the remote desktop has a different screen resolution, Remote Desktop Connection will automatically switch to the nearest resolution."));
+		fullscreenButton->setWhatsThis( i18n("Switches to full screen. If the remote desktop has a different screen resolution, Remote Desktop Connection will automatically switch to the nearest resolution."));
 		t->setToggle(0);
 		t->setButton(0, false);
 		t->addConnection(0, SIGNAL(toggled(bool)), this, SLOT(enableFullscreen(bool)));
@@ -581,7 +589,7 @@ void KRDC::switchToNormal(bool scaling)
 			t->insertButton("viewmagfit", 1, true, i18n("Scale"));
 			KToolBarButton *scaleButton = t->getButton(1);
 			QToolTip::add(scaleButton, i18n("Scale view"));
-			QWhatsThis::add(scaleButton, i18n("This option scales the remote screen to fit your window size."));
+			scaleButton->setWhatsThis( i18n("This option scales the remote screen to fit your window size."));
 			t->setToggle(1);
 			t->setButton(1, scaling);
 			t->addConnection(1, SIGNAL(toggled(bool)), this, SLOT(switchToNormal(bool)));
@@ -590,7 +598,7 @@ void KRDC::switchToNormal(bool scaling)
 		t->insertButton("key_enter", 2, true, i18n("Special Keys"));
 		KToolBarButton *skButton = t->getButton(2);
 		QToolTip::add(skButton, i18n("Enter special keys."));
-		QWhatsThis::add(skButton, i18n("This option allows you to send special key combinations like Ctrl-Alt-Del to the remote host."));
+		skButton->setWhatsThis( i18n("This option allows you to send special key combinations like Ctrl-Alt-Del to the remote host."));
 		t->addConnection(2, SIGNAL(clicked()), m_keyCaptureDialog, SLOT(execute()));
 
 		m_popup = createPopupMenu(t);
@@ -655,9 +663,9 @@ void KRDC::iconify()
 
 	m_view->releaseKeyboard();
 	if (m_oldResolution.valid)
-		ungrabInput(qt_xdisplay());
+		ungrabInput(QX11Info::display());
 
-	vidmodeNormalSwitch(qt_xdisplay(), m_oldResolution);
+	vidmodeNormalSwitch(QX11Info::display(), m_oldResolution);
 	m_oldResolution = Resolution();
 	showNormal();
 	showMinimized();
@@ -683,7 +691,7 @@ bool KRDC::event(QEvent *e) {
 
 	m_fullscreenMinimized = false;
 	int x, y;
-	m_oldResolution = vidmodeFullscreenSwitch(qt_xdisplay(),
+	m_oldResolution = vidmodeFullscreenSwitch(QX11Info::display(),
 						  m_desktopWidget.screenNumber(this),
 						  m_view->width(),
 						  m_view->height(),
@@ -697,7 +705,7 @@ bool KRDC::event(QEvent *e) {
 	setGeometry(0, 0, m_fullscreenResolution.width(),
 		    m_fullscreenResolution.height());
 	if (m_oldResolution.valid)
-		grabInput(qt_xdisplay(), winId());
+		grabInput(QX11Info::display(), winId());
 	m_view->grabKeyboard();
 	KWin::setState(winId(), NET::StaysOnTop);
 

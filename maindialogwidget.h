@@ -52,8 +52,8 @@ class MainDialogWidget : public MainDialogBase
   protected slots:
     void hostChanged( const QString & );
     void toggleBrowsingArea();
-    void itemSelected( QListViewItem * );
-    void itemDoubleClicked( QListViewItem * );
+    void itemSelected( Q3ListViewItem * );
+    void itemDoubleClicked( Q3ListViewItem * );
     void scopeSelected( const QString & );
     void rescan();
 

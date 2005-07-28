@@ -21,6 +21,8 @@
 
 #include <qstring.h>
 #include <qstringlist.h>
+//Added by qt3to4:
+#include <Q3ValueList>
 #include "smartptr.h"
 
 class HostPreferences;
@@ -50,7 +52,7 @@ public:
 };
 
 typedef SmartPtr<HostPref>      HostPrefPtr;
-typedef QValueList<HostPrefPtr> HostPrefPtrList;
+typedef Q3ValueList<HostPrefPtr> HostPrefPtrList;
 
 class HostPreferences {
 public:

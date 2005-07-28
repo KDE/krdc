@@ -26,6 +26,8 @@
 #include <kdebug.h>
 #include <qregexp.h>
 #include <qapplication.h>
+//Added by qt3to4:
+#include <QCustomEvent>
 
 #ifdef HAVE_SLP
 #include <slp.h>

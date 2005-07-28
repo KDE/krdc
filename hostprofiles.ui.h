@@ -11,10 +11,10 @@ void HostProfiles::removeHost()
 {
   HostPreferences *hps = HostPreferences::instance();
 
-  QListViewItemIterator it(hostListView);
+  Q3ListViewItemIterator it(hostListView);
   while (it.current())
   {
-    QListViewItem *vi = it.current();
+    Q3ListViewItem *vi = it.current();
     if (vi->isSelected())
     {
       HostPrefPtr hp = hps->getHostPref(vi->text(0), vi->text(1));
@@ -32,10 +32,10 @@ void HostProfiles::removeAllHosts()
 {
   HostPreferences *hps = HostPreferences::instance();
 
-  QListViewItemIterator it(hostListView);
+  Q3ListViewItemIterator it(hostListView);
   while (it.current())
   {
-    QListViewItem *vi = it.current();
+    Q3ListViewItem *vi = it.current();
     HostPrefPtr hp = hps->getHostPref(vi->text(0), vi->text(1));
     if (hp)
       deletedHosts += hp;
@@ -48,7 +48,7 @@ void HostProfiles::removeAllHosts()
 
 void HostProfiles::selectionChanged()
 {
-  QListViewItemIterator it(hostListView);
+  Q3ListViewItemIterator it(hostListView);
   while (it.current())
   {
     if (it.current()->isSelected())

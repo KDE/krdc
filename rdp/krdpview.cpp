@@ -26,7 +26,7 @@
 #include <kwallet.h>
 #include <kpassdlg.h>
 
-#include <qvbox.h>
+#include <q3vbox.h>
 #include <qxembed.h>
 
 #include <X11/Xlib.h>
@@ -43,7 +43,7 @@ extern KWallet::Wallet *wallet;
 
 static KRdpView *krdpview;
 
-RdpContainer::RdpContainer(QWidget *parent, const char *name, WFlags f) :
+RdpContainer::RdpContainer(QWidget *parent, const char *name, Qt::WFlags f) :
   QXEmbed(parent, name, f),
   m_viewOnly(false)
 {
@@ -85,7 +85,7 @@ KRdpView::KRdpView(QWidget *parent, const char *name,
                    const QString &user, const QString &password,
                    int flags, const QString &domain,
                    const QString &shell, const QString &directory) :
-  KRemoteView(parent, name, Qt::WResizeNoErase | Qt::WRepaintNoErase | Qt::WStaticContents),
+  KRemoteView(parent, name, Qt::WResizeNoErase | Qt::WNoAutoErase | Qt::WStaticContents),
   m_name(name),
   m_host(host),
   m_port(port),
@@ -179,7 +179,7 @@ bool KRdpView::start()
 				i18n( "RDP Host Preferences for %1" ).arg( m_host ),
 				KDialogBase::Ok|KDialogBase::Cancel, KDialogBase::Ok, true );
 
-			QVBox *vbox = dlg->makeVBoxMainWidget();
+			Q3VBox *vbox = dlg->makeVBoxMainWidget();
 			RdpPrefs *prefs = new RdpPrefs( vbox );
 			QWidget *spacer = new QWidget( vbox );
 			vbox->setStretchFactor( spacer, 10 );

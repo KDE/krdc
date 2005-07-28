@@ -37,7 +37,7 @@ class RdpContainer : public QXEmbed
 	friend class KRdpView;
 
 	public:
-		RdpContainer(QWidget *parent = 0, const char *name = 0, WFlags f = 0);
+		RdpContainer(QWidget *parent = 0, const char *name = 0, Qt::WFlags f = 0);
 		~RdpContainer();
 
 	signals:

@@ -38,7 +38,7 @@ static const QString DNSSD_SCOPE = "DNS-SD";
 class UrlListViewItem : public KListViewItem
 {
   public:
-    UrlListViewItem( QListView *v, const QString &url, const QString &host,
+    UrlListViewItem( Q3ListView *v, const QString &url, const QString &host,
         const QString &protocol, const QString &type, const QString &userid,
         const QString &fullname, const QString &desc,
         const QString &serviceid )
@@ -93,11 +93,11 @@ MainDialogWidget::MainDialogWidget( QWidget *parent, const char *name )
   m_searchInput->setTrapReturnKey( true );
 
   connect( m_browsingView,
-      SIGNAL( selectionChanged( QListViewItem * ) ),
-      SLOT( itemSelected( QListViewItem * ) ) );
+      SIGNAL( selectionChanged( Q3ListViewItem * ) ),
+      SLOT( itemSelected( Q3ListViewItem * ) ) );
   connect( m_browsingView,
-      SIGNAL( doubleClicked( QListViewItem *, const QPoint &, int ) ),
-      SLOT( itemDoubleClicked( QListViewItem * ) ) );
+      SIGNAL( doubleClicked( Q3ListViewItem *, const QPoint &, int ) ),
+      SLOT( itemDoubleClicked( Q3ListViewItem * ) ) );
   connect( m_scopeCombo,
       SIGNAL( activated( const QString & ) ),
       SLOT( scopeSelected( const QString & ) ) );
@@ -175,7 +175,7 @@ void MainDialogWidget::enableBrowsingArea( bool enable )
     rescan();
 }
 
-void MainDialogWidget::itemSelected( QListViewItem *item )
+void MainDialogWidget::itemSelected( Q3ListViewItem *item )
 {
   UrlListViewItem *u = ( UrlListViewItem* ) item;
   QRegExp rx( "^service:remotedesktop\\.kde:([^;]*)" );
@@ -184,7 +184,7 @@ void MainDialogWidget::itemSelected( QListViewItem *item )
     else m_serverInput->setCurrentText( rx.cap( 1 ) );
 }
 
-void MainDialogWidget::itemDoubleClicked( QListViewItem *item )
+void MainDialogWidget::itemDoubleClicked( Q3ListViewItem *item )
 {
   itemSelected( item );
   emit accept();
@@ -324,7 +324,7 @@ new UrlListViewItem( m_browsingView, url, service->serviceName(),
 
 void MainDialogWidget::removedService( DNSSD::RemoteService::Ptr service )
 {
-  QListViewItemIterator it( m_browsingView );
+  Q3ListViewItemIterator it( m_browsingView );
   while ( it.current() ) {
     if ( ((UrlListViewItem*)it.current())->serviceid() == service->serviceName()+service->domain() )
       delete it.current();

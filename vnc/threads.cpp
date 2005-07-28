@@ -23,7 +23,10 @@
 #include "vncviewer.h"
 #include "threads.h"
 
-#include <qcstring.h>
+#include <q3cstring.h>
+//Added by qt3to4:
+#include <Q3ValueList>
+#include <Q3MemArray>
 
 // Maximum idle time for writer thread in ms. When it timeouts, it will request
 // another incremental update. Must be smaller than the timeout of the server
@@ -185,7 +188,7 @@ bool WriterThread::sendIncrementalUpdateRequest() {
 }
 
 bool WriterThread::sendUpdateRequest(const QRegion &region) {
-	QMemArray<QRect> r = region.rects();
+	Q3MemArray<QRect> r = region.rects();
 	for (unsigned int i = 0; i < r.size(); i++)
 		if (!SendFramebufferUpdateRequest(r[i].x(),
 						  r[i].y(),
@@ -195,8 +198,8 @@ bool WriterThread::sendUpdateRequest(const QRegion &region) {
 	return true;
 }
 
-bool WriterThread::sendInputEvents(const QValueList<InputEvent> &events) {
-	QValueList<InputEvent>::const_iterator it = events.begin();
+bool WriterThread::sendInputEvents(const Q3ValueList<InputEvent> &events) {
+	Q3ValueList<InputEvent>::const_iterator it = events.begin();
 	while (it != events.end()) {
 		if ((*it).type == KeyEventType) {
 			if (!SendKeyEvent((*it).e.k.k, (*it).e.k.down ? True : False))
@@ -300,7 +303,7 @@ void WriterThread::run() {
 	bool incrementalUpdateRQ = false;
 	bool incrementalUpdateAnnounced = false;
 	QRegion updateRegionRQ;
-	QValueList<InputEvent> inputEvents;
+	Q3ValueList<InputEvent> inputEvents;
 	QString clientCut;
 
 	while (!m_quitFlag) {
@@ -373,7 +376,7 @@ void WriterThread::run() {
 					break;
 				}
 			if (!clientCut.isNull())  {
-				QCString cutTextUtf8(clientCut.utf8());
+				Q3CString cutTextUtf8(clientCut.utf8());
 				if (!SendClientCutText(cutTextUtf8.data(),
 						       (int)cutTextUtf8.length())) {
 					sendFatalError(ERROR_IO);

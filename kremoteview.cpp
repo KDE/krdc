@@ -19,7 +19,7 @@
 
 KRemoteView::KRemoteView(QWidget *parent,
 			 const char *name,
-			 WFlags f) :
+			 Qt::WFlags f) :
 	QWidget(parent, name, f),
         m_status(REMOTE_VIEW_DISCONNECTED) {
 }

@@ -131,7 +131,7 @@ int main(int argc, char *argv[])
 	if (args->isSet("password-file")) {
 		QString passwordFile = args->getOption("password-file");
 		QFile f(passwordFile);
-		if (!f.open(IO_ReadOnly)) {
+		if (!f.open(QIODevice::ReadOnly)) {
 			KMessageBox::error(0, i18n("The password file '%1' does not exist.").arg(passwordFile));
 			return 1;
 		}

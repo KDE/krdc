@@ -29,13 +29,22 @@
 #include <kwallet.h>
 
 #include <qdatastream.h>
+//Added by qt3to4:
+#include <QWheelEvent>
+#include <Q3CString>
+#include <QFocusEvent>
+#include <QPaintEvent>
+#include <QEvent>
+#include <Q3ValueList>
+#include <QMouseEvent>
+#include <QCustomEvent>
 #include <dcopclient.h>
 #include <qclipboard.h>
 #include <qbitmap.h>
 #include <qmutex.h>
-#include <qvbox.h>
+#include <q3vbox.h>
 #include <qwaitcondition.h>
-
+#include <QX11Info>
 #include "vncviewer.h"
 
 #include <X11/Xlib.h>
@@ -55,7 +64,7 @@ static KVncView *kvncview;
 //Passwords and KWallet data
 extern KWallet::Wallet *wallet;
 bool useKWallet = false;
-static QCString password;
+static Q3CString password;
 static QMutex passwordLock;
 static QWaitCondition passwordWaiter;
 
@@ -70,7 +79,7 @@ KVncView::KVncView(QWidget *parent,
 		   Quality quality,
 		   DotCursorState dotCursorState,
 		   const QString &encodings) :
-  KRemoteView(parent, name, Qt::WResizeNoErase | Qt::WRepaintNoErase | Qt::WStaticContents),
+  KRemoteView(parent, name, Qt::WResizeNoErase | Qt::WNoAutoErase | Qt::WStaticContents),
   m_cthread(this, m_wthread, m_quitFlag),
   m_wthread(this, m_quitFlag),
   m_quitFlag(false),
@@ -86,9 +95,9 @@ KVncView::KVncView(QWidget *parent,
 {
 	kvncview = this;
 	password = _password.latin1();
-	dpy = qt_xdisplay();
+	dpy = QX11Info::display();
 	setFixedSize(16,16);
-	setFocusPolicy(QWidget::StrongFocus);
+	setFocusPolicy(Qt::StrongFocus);
 
 	m_cb = QApplication::clipboard();
 	connect(m_cb, SIGNAL(selectionChanged()), this, SLOT(selectionChanged()));
@@ -202,8 +211,8 @@ bool KVncView::checkLocalKRfb() {
 
 	int portNum;
 	QByteArray sdata, rdata;
-	QCString replyType;
-	QDataStream arg(sdata, IO_WriteOnly);
+	DCOPCString replyType;
+	QDataStream arg(&sdata, QIODevice::WriteOnly);
 	arg << QString("krfb");
 	if (!d->call ("kded", "kinetd", "port(QString)", sdata, replyType, rdata))
 		return true;
@@ -211,7 +220,7 @@ bool KVncView::checkLocalKRfb() {
 	if (replyType != "int")
 		return true;
 
-	QDataStream answer(rdata, IO_ReadOnly);
+	QDataStream answer(&rdata, QIODevice::ReadOnly);
 	answer >> portNum;
 
 	if (m_port != portNum)
@@ -244,7 +253,7 @@ bool KVncView::start() {
 				i18n( "VNC Host Preferences for %1" ).arg( m_host ),
 				KDialogBase::Ok|KDialogBase::Cancel, KDialogBase::Ok, true );
 
-			QVBox *vbox = dlg->makeVBoxMainWidget();
+			Q3VBox *vbox = dlg->makeVBoxMainWidget();
 			VncPrefs *prefs = new VncPrefs( vbox );
 			QWidget *spacer = new QWidget( vbox );
 			vbox->setStretchFactor( spacer, 10 );
@@ -392,8 +401,8 @@ void KVncView::customEvent(QCustomEvent *e)
 	else if (e->type() == PasswordRequiredEventType) {
 		emit showingPasswordDialog(true);
 
-		if (KPasswordDialog::getPassword(password, i18n("Access to the system requires a password.")) != KPasswordDialog::Accepted)
-			password = QCString();
+		if (KPasswordDialog::getPassword(this,password, i18n("Access to the system requires a password.")) != KPasswordDialog::Accepted)
+			password = Q3CString();
 
 		emit showingPasswordDialog(false);
 
@@ -517,19 +526,19 @@ void KVncView::mouseEvent(QMouseEvent *e) {
 	if ( e->type() != QEvent::MouseMove ) {
 		if ( (e->type() == QEvent::MouseButtonPress) ||
                      (e->type() == QEvent::MouseButtonDblClick)) {
-			if ( e->button() & LeftButton )
+			if ( e->button() & Qt::LeftButton )
 				m_buttonMask |= 0x01;
-			if ( e->button() & MidButton )
+			if ( e->button() & Qt::MidButton )
 				m_buttonMask |= 0x02;
-			if ( e->button() & RightButton )
+			if ( e->button() & Qt::RightButton )
 				m_buttonMask |= 0x04;
 		}
 		else if ( e->type() == QEvent::MouseButtonRelease ) {
-			if ( e->button() & LeftButton )
+			if ( e->button() & Qt::LeftButton )
 				m_buttonMask &= 0xfe;
-			if ( e->button() & MidButton )
+			if ( e->button() & Qt::MidButton )
 				m_buttonMask &= 0xfd;
-			if ( e->button() & RightButton )
+			if ( e->button() & Qt::RightButton )
 				m_buttonMask &= 0xfb;
 		}
 	}
@@ -651,8 +660,8 @@ bool KVncView::x11Event(XEvent *e) {
 }
 
 void KVncView::unpressModifiers() {
-	QValueList<unsigned int> keys = m_mods.keys();
-	QValueList<unsigned int>::const_iterator it = keys.begin();
+	Q3ValueList<unsigned int> keys = m_mods.keys();
+	Q3ValueList<unsigned int>::const_iterator it = keys.begin();
 	while (it != keys.end()) {
 		m_wthread.queueKeyEvent(*it, false);
 		it++;

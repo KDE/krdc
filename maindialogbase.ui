@@ -144,7 +144,7 @@ Remote Desktop Connection only supports systems that use VNC.</string>
                         <cstring>Spacer3</cstring>
                     </property>
                     <property name="orientation">
-                        <enum>Horizontal</enum>
+                        <enum>Qt::Horizontal</enum>
                     </property>
                     <property name="sizeType">
                         <enum>Expanding</enum>
@@ -183,7 +183,7 @@ Remote Desktop Connection only supports systems that use VNC.</string>
                         <cstring>Spacer4</cstring>
                     </property>
                     <property name="orientation">
-                        <enum>Horizontal</enum>
+                        <enum>Qt::Horizontal</enum>
                     </property>
                     <property name="sizeType">
                         <enum>Expanding</enum>
@@ -335,8 +335,8 @@ Remote Desktop Connection only supports systems that use VNC.</string>
 <slots>
     <slot access="protected" specifier="pure virtual">hostChanged( const QString &amp; text )</slot>
     <slot access="protected" specifier="pure virtual">toggleBrowsingArea()</slot>
-    <slot access="protected" specifier="pure virtual">itemSelected( QListViewItem * item )</slot>
-    <slot access="protected" specifier="pure virtual">itemDoubleClicked( QListViewItem * item )</slot>
+    <slot access="protected" specifier="pure virtual">itemSelected( Q3ListViewItem * item )</slot>
+    <slot access="protected" specifier="pure virtual">itemDoubleClicked( Q3ListViewItem * item )</slot>
     <slot access="protected" specifier="pure virtual">scopeSelected( const QString &amp; scope )</slot>
     <slot access="protected" specifier="pure virtual">rescan()</slot>
 </slots>

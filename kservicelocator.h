@@ -24,6 +24,8 @@
 #include <qobject.h>
 #include <qmap.h>
 #include <qstringlist.h>
+//Added by qt3to4:
+#include <QCustomEvent>
 
 class KServiceLocatorPrivate;
 

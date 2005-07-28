@@ -17,6 +17,9 @@
 
 #include "kfullscreenpanel.h"
 #include <kdebug.h>
+//Added by qt3to4:
+#include <QVBoxLayout>
+#include <QEvent>
 
 Counter::Counter(float start) :
 	m_currentValue(start) {

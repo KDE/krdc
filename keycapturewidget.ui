@@ -27,7 +27,7 @@
                 <string>Enter a special key or key combination to send to the remote side:</string>
             </property>
             <property name="alignment">
-                <set>WordBreak|AlignVCenter</set>
+                <set>Qt::TextWordWrap|Qt::AlignVCenter</set>
             </property>
         </widget>
         <spacer row="1" column="0">
@@ -35,7 +35,7 @@
                 <cstring>spacer2</cstring>
             </property>
             <property name="orientation">
-                <enum>Horizontal</enum>
+                <enum>Qt::Horizontal</enum>
             </property>
             <property name="sizeType">
                 <enum>Expanding</enum>
@@ -72,7 +72,7 @@
                 <cstring>spacer3</cstring>
             </property>
             <property name="orientation">
-                <enum>Horizontal</enum>
+                <enum>Qt::Horizontal</enum>
             </property>
             <property name="sizeType">
                 <enum>Expanding</enum>
@@ -92,7 +92,7 @@
                 <string>This function allows you to send a key combination like Ctrl+Alt+Del to the remote side. Press Esc to cancel.</string>
             </property>
             <property name="alignment">
-                <set>WordBreak|AlignVCenter</set>
+                <set>Qt::TextWordWrap|Qt::AlignVCenter</set>
             </property>
         </widget>
     </grid>

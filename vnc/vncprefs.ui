@@ -119,7 +119,7 @@
                         <cstring>Spacer</cstring>
                     </property>
                     <property name="orientation">
-                        <enum>Horizontal</enum>
+                        <enum>Qt::Horizontal</enum>
                     </property>
                     <property name="sizeType">
                         <enum>Expanding</enum>
@@ -147,7 +147,7 @@
     </vbox>
 </widget>
 <includes>
-    <include location="global" impldecl="in implementation">kdialog.h</include>
+    <include location="local" impldecl="in declaration">kdialog.h</include>
     <include location="local" impldecl="in implementation">vncprefs.ui.h</include>
 </includes>
 <functions>

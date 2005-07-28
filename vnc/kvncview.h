@@ -21,6 +21,13 @@
 #include "kremoteview.h"
 #include <qcursor.h>
 #include <qmap.h>
+//Added by qt3to4:
+#include <QWheelEvent>
+#include <QFocusEvent>
+#include <QPaintEvent>
+#include <QKeyEvent>
+#include <QMouseEvent>
+#include <QCustomEvent>
 
 #include "pointerlatencyometer.h"
 #include "vnctypes.h"

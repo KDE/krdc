@@ -24,7 +24,7 @@
 #include <qmutex.h>
 #include <qwaitcondition.h>
 #include <qevent.h>
-#include <qvaluelist.h>
+#include <q3valuelist.h>
 #include <qdatetime.h>
 
 #include <stdlib.h> 
@@ -72,7 +72,7 @@ private:
 	bool m_incrementalUpdateRQ; // for sending an incremental request
 	bool m_incrementalUpdateAnnounced; // set when a RQ will come soon
 	QRegion m_updateRegionRQ;  // for sending updates, null if it is done
-	QValueList<InputEvent> m_inputEvents; // list of unsent input events
+	Q3ValueList<InputEvent> m_inputEvents; // list of unsent input events
 	MouseEvent m_lastMouseEvent;
 	int m_mouseEventNum, m_keyEventNum;
 	QString m_clientCut;
@@ -94,7 +94,7 @@ protected:
 	void run();
 	bool sendIncrementalUpdateRequest();
 	bool sendUpdateRequest(const QRegion &r);
-	bool sendInputEvents(const QValueList<InputEvent> &events);
+	bool sendInputEvents(const Q3ValueList<InputEvent> &events);
 };
 
 
