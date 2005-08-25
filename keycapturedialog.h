@@ -21,7 +21,6 @@
 
 class KeyCaptureWidget;
 
-#include "keycapturedialog.h"
 
 #include <kshortcut.h>
 #include <kkeynative.h>
