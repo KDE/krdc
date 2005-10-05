@@ -530,6 +530,8 @@ void KRDC::switchToFullscreen(bool scaling)
 			grabInput(qt_xdisplay(), winId());
 		m_view->grabKeyboard();
 	}
+  
+  m_view->switchFullscreen( true );
 }
 
 void KRDC::switchToNormal(bool scaling)
