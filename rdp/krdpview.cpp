@@ -237,7 +237,7 @@ bool KRdpView::start()
 			if (walletOK == false) {
 				walletOK = wallet->createFolder(krdc_folder);
 			}
-	
+
 			if (walletOK == true) {
 				wallet->setFolder(krdc_folder);
 				if ( wallet->hasEntry(m_host) ) {
@@ -257,7 +257,7 @@ bool KRdpView::start()
 	}
 
 	if(!m_password.isEmpty()) {
-		*m_process << "-p" << m_password; 
+		*m_process << "-p" << m_password;
 	}
 
 	*m_process << "-X" << ("0x" + QString::number(m_container->winId(), 16));
@@ -329,19 +329,11 @@ void KRdpView::processDied(KProcess */*proc*/)
 	if(m_status == REMOTE_VIEW_CONNECTING)
 	{
 		setStatus(REMOTE_VIEW_DISCONNECTED);
-		if(m_clientVersion.isEmpty())
-		{
-			KMessageBox::error(0, i18n("Connection attempt to host failed."),
+    if(m_clientVersion.isEmpty())
+    {
+      KMessageBox::error(0, i18n("Connection attempt to host failed."),
 			                      i18n("Connection Failure"));
-		}
-		else
-		{
-			// FIXME: rdesktop 1.3.2 (or maybe 1.4.0) should be released by the time KDE 3.3 is released
-			KMessageBox::error(0, i18n("The version of rdesktop you are using (%1) is too old:\n"
-			                           "rdesktop 1.3.2 or greater is required. A working patch for "
-			                           "rdesktop 1.3.1 can be found in KDE SVN.").arg(m_clientVersion),
-			                      i18n("rdesktop Failure"));
-		}
+    }
 		emit disconnectedError();
 	}
 }
