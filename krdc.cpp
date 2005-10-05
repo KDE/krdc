@@ -538,6 +538,8 @@ void KRDC::switchToFullscreen(bool scaling)
 			grabInput(QX11Info::display(), winId());
 		m_view->grabKeyboard();
 	}
+  
+  m_view->switchFullscreen( true );
 }
 
 void KRDC::switchToNormal(bool scaling)
