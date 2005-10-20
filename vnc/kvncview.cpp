@@ -253,7 +253,7 @@ bool KVncView::start() {
 				i18n( "VNC Host Preferences for %1" ).arg( m_host ),
 				KDialogBase::Ok|KDialogBase::Cancel, KDialogBase::Ok, true );
 
-			Q3VBox *vbox = dlg->makeVBoxMainWidget();
+			KVBox *vbox = dlg->makeVBoxMainWidget();
 			VncPrefs *prefs = new VncPrefs( vbox );
 			QWidget *spacer = new QWidget( vbox );
 			vbox->setStretchFactor( spacer, 10 );

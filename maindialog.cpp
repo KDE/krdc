@@ -24,6 +24,7 @@
 #include <kapplication.h>
 #include <kguiitem.h>
 #include <klocale.h>
+#include <ktoolinvocation.h>
 
 MainDialog::MainDialog( QWidget *parent, const char *name )
     : KDialogBase( parent, name, true, i18n( "Remote Desktop Connection" ),
@@ -52,7 +53,7 @@ QString MainDialog::remoteHost()
 
 void MainDialog::slotHelp()
 {
-  kapp->invokeHelp();
+  KToolInvocation::invokeHelp();
 }
 
 void MainDialog::slotUser1()

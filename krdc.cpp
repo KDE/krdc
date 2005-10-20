@@ -28,7 +28,7 @@
 #include <klocale.h>
 #include <ktoolbar.h>
 #include <ktoolbarbutton.h>
-#include <kpopupmenu.h>
+#include <kmenu.h>
 #include <kmessagebox.h>
 #include <kwin.h>
 #include <kstartupinfo.h>
@@ -384,7 +384,7 @@ QSize KRDC::sizeHint()
 }
 
 Q3PopupMenu *KRDC::createPopupMenu(QWidget *parent) const {
-	KPopupMenu *pu = new KPopupMenu(parent);
+	KMenu *pu = new KMenu(parent);
 	pu->insertItem(i18n("View Only"), this, SLOT(viewOnlyToggled()), 0, VIEW_ONLY_ID);
 	pu->setCheckable(true);
 	pu->setItemChecked(VIEW_ONLY_ID, m_view->viewOnly());

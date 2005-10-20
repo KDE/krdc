@@ -179,7 +179,7 @@ bool KRdpView::start()
 				i18n( "RDP Host Preferences for %1" ).arg( m_host ),
 				KDialogBase::Ok|KDialogBase::Cancel, KDialogBase::Ok, true );
 
-			Q3VBox *vbox = dlg->makeVBoxMainWidget();
+			KVBox *vbox = dlg->makeVBoxMainWidget();
 			RdpPrefs *prefs = new RdpPrefs( vbox );
 			QWidget *spacer = new QWidget( vbox );
 			vbox->setStretchFactor( spacer, 10 );
