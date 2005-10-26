@@ -530,7 +530,7 @@ void KRDC::switchToFullscreen(bool scaling)
 			grabInput(qt_xdisplay(), winId());
 		m_view->grabKeyboard();
 	}
-  
+
   m_view->switchFullscreen( true );
 }
 
@@ -700,7 +700,7 @@ bool KRDC::event(QEvent *e) {
 		    m_fullscreenResolution.height());
 	if (m_oldResolution.valid)
 		grabInput(qt_xdisplay(), winId());
-	m_view->grabKeyboard();
+	m_view->switchFullscreen( true );
 	KWin::setState(winId(), NET::StaysOnTop);
 
 	return QWidget::event(e);
