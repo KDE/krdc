@@ -30,6 +30,7 @@
 
 #include <qdatastream.h>
 //Added by qt3to4:
+#include <kvbox.h>
 #include <QWheelEvent>
 #include <Q3CString>
 #include <QFocusEvent>
@@ -602,25 +603,25 @@ void KVncView::wheelEvent(QWheelEvent *e) {
 void KVncView::pressKey(XEvent *xe) {
 	KKeyNative k(xe);
 	uint mod = k.mod();
-	if (mod & KKeyNative::modX(KKey::SHIFT))
+	if (mod & KKeyNative::modXShift())
 		m_wthread.queueKeyEvent(XK_Shift_L, true);
-	if (mod & KKeyNative::modX(KKey::CTRL))
+	if (mod & KKeyNative::modXCtrl())
 		m_wthread.queueKeyEvent(XK_Control_L, true);
-	if (mod & KKeyNative::modX(KKey::ALT))
+	if (mod & KKeyNative::modXAlt())
 		m_wthread.queueKeyEvent(XK_Alt_L, true);
-	if (mod & KKeyNative::modX(KKey::WIN))
+	if (mod & KKeyNative::modXWin())
 		m_wthread.queueKeyEvent(XK_Meta_L, true);
 
 	m_wthread.queueKeyEvent(k.sym(), true);
 	m_wthread.queueKeyEvent(k.sym(), false);
 
-	if (mod & KKeyNative::modX(KKey::WIN))
+	if (mod & KKeyNative::modXWin())
 		m_wthread.queueKeyEvent(XK_Meta_L, false);
-	if (mod & KKeyNative::modX(KKey::ALT))
+	if (mod & KKeyNative::modXAlt())
 		m_wthread.queueKeyEvent(XK_Alt_L, false);
-	if (mod & KKeyNative::modX(KKey::CTRL))
+	if (mod & KKeyNative::modXCtrl())
 		m_wthread.queueKeyEvent(XK_Control_L, false);
-	if (mod & KKeyNative::modX(KKey::SHIFT))
+	if (mod & KKeyNative::modXShift())
 		m_wthread.queueKeyEvent(XK_Shift_L, false);
 
 	m_mods.clear();

@@ -106,12 +106,12 @@ void KeyCaptureDialog::x11EventKeyPress( XEvent *pEvent )
 		// Don't allow setting a modifier key as an accelerator.
 		// Also, don't release the focus yet.  We'll wait until
 		//  we get a 'normal' key.
-		case XK_Shift_L:   case XK_Shift_R:   keyModX = KKeyNative::modX(KKey::SHIFT); break;
-		case XK_Control_L: case XK_Control_R: keyModX = KKeyNative::modX(KKey::CTRL); break;
-		case XK_Alt_L:     case XK_Alt_R:     keyModX = KKeyNative::modX(KKey::ALT); break;
+		case XK_Shift_L:   case XK_Shift_R:   keyModX = KKeyNative::modXShift(); break;
+		case XK_Control_L: case XK_Control_R: keyModX = KKeyNative::modXCtrl(); break;
+		case XK_Alt_L:     case XK_Alt_R:     keyModX = KKeyNative::modXAlt(); break;
 		// FIXME: check whether the Meta or Super key are for the Win modifier
 		case XK_Meta_L:    case XK_Meta_R:
-		case XK_Super_L:   case XK_Super_R:   keyModX = KKeyNative::modX(KKey::WIN); break;
+		case XK_Super_L:   case XK_Super_R:   keyModX = KKeyNative::modXWin(); break;
 		case XK_Hyper_L:   case XK_Hyper_R:
 		case XK_Mode_switch:
 		case XK_Num_Lock:
@@ -133,10 +133,10 @@ void KeyCaptureDialog::x11EventKeyPress( XEvent *pEvent )
 		keyModX = pEvent->xkey.state & ~keyModX;
 
 	QString keyModStr;
-	if( keyModX & KKeyNative::modX(KKey::WIN) )	keyModStr += KKey::modFlagLabel(KKey::WIN) + "+";
-	if( keyModX & KKeyNative::modX(KKey::ALT) )	keyModStr += KKey::modFlagLabel(KKey::ALT) + "+";
-	if( keyModX & KKeyNative::modX(KKey::CTRL) )	keyModStr += KKey::modFlagLabel(KKey::CTRL) + "+";
-	if( keyModX & KKeyNative::modX(KKey::SHIFT) )	keyModStr += KKey::modFlagLabel(KKey::SHIFT) + "+";
+	if( keyModX & KKeyNative::modXWin() )	keyModStr += KKey::modFlagLabel(KKey::WIN) + "+";
+	if( keyModX & KKeyNative::modXAlt() )	keyModStr += KKey::modFlagLabel(KKey::ALT) + "+";
+	if( keyModX & KKeyNative::modXCtrl() )	keyModStr += KKey::modFlagLabel(KKey::CTRL) + "+";
+	if( keyModX & KKeyNative::modXShift() )	keyModStr += KKey::modFlagLabel(KKey::SHIFT) + "+";
 
 	// Display currently selected modifiers, or redisplay old key.
 	m_captureWidget->keyLabel->setText( keyModStr );
