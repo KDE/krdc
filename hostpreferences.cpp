@@ -26,6 +26,7 @@
 
 #include <qregexp.h>
 #include <qmap.h>
+#include <kglobal.h>
 
 HostPreferences *HostPreferences::m_instance = 0;
 static KStaticDeleter<HostPreferences> sd;
@@ -66,7 +67,7 @@ QString HostPref::prefix(const QString &host, const QString &type) {
 
 
 HostPreferences::HostPreferences() {
-	m_config = kapp->config();
+	m_config = KGlobal::config();
 }
 
 HostPreferences::~HostPreferences() {
