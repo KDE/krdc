@@ -142,7 +142,10 @@ int main(int argc, char *argv[])
 	if (args->count() > 0)
 		host = args->arg(0);
 
-	QString is = a.geometryArgument();
+    QString is;
+    KCmdLineArgs *args = KCmdLineArgs::parsedArgs("kde");
+    if (args && args->isSet("geometry"))
+            is = args->getOption("geometry");
 	if (!is.isNull()) {
 		QRegExp re("([0-9]+)[xX]([0-9]+)");
 		if (!re.exactMatch(is))
