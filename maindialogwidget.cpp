@@ -233,9 +233,9 @@ void MainDialogWidget::rescan()
     lastSignalServices(true);
   } else {
     QString filter;
-    if ( !m_searchInput->text().stripWhiteSpace().isEmpty() ) {
+    if ( !m_searchInput->text().trimmed().isEmpty() ) {
       QString ef = KServiceLocator::escapeFilter(
-        m_searchInput->text().stripWhiteSpace() );
+        m_searchInput->text().trimmed() );
       filter = "(|(|(description=*"+ef+"*)(username=*"+ef+"*))(fullname=*"+ef+"*))";
     }
 
