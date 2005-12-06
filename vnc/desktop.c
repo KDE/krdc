@@ -1,7 +1,7 @@
 /*
  *  Copyright (C) 1999 AT&T Laboratories Cambridge.  All Rights Reserved.
  *  Copyright (C) 2002 Tim Jansen. All Rights Reserved.
- *  Copyright (C) 1999-2001 Anders Lindström
+ *  Copyright (C) 1999-2001 Anders LindstrÃ¶m
  * 
  *  
  *
@@ -25,7 +25,7 @@
  *                 - added FillRectangle and Sync methods to draw only on 
  *                   the image
  *                 - added Zoom functionality, based on rotation funcs from
- *                   SGE by Anders Lindström)
+ *                   SGE by Anders LindstrÃ¶m)
  *                 - added support for softcursor encoding
  *
  */
@@ -1390,7 +1390,7 @@ static void _calcRect(Surface *src, Surface *dst, float xscale, float yscale,
 	/* 
 	*  Interpolation:
 	*  We calculate the distances from our point to the four nearest pixels, d1..d4.
-	*  d(a,b) = sqrt(a²+b²) ~= 0.707(a+b)  (Pythagoras (Taylor) expanded around (0.5;0.5))
+	*  d(a,b) = sqrt(aÂ²+bÂ²) ~= 0.707(a+b)  (Pythagoras (Taylor) expanded around (0.5;0.5))
 	*  
 	*    1  wx 2
 	*     *-|-*  (+ = our point at (x,y))
