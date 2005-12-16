@@ -101,7 +101,7 @@ void RdpHostPref::setDefaults()
 	m_width = m_config->readNumEntry("rdpWidth", 800);
 	m_height = m_config->readNumEntry("rdpHeight", 600);
 	m_colorDepth = m_config->readNumEntry("rdpColorDepth", 8);
-	m_layout = m_config->readEntry("rdpLayout", "en-us");
+	m_layout = m_config->readEntry("rdpKeyboardLayout", "en-us");
 	m_askOnConnect = m_config->readBoolEntry("rdpShowHostPreferences", true);
 	m_useKWallet = m_config->readBoolEntry("rdpUseKWallet", true);
 }
