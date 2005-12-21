@@ -29,8 +29,8 @@ RdpHostPref::RdpHostPref(KConfig *conf, const QString &host, const QString &type
 	m_height(600),
 	m_colorDepth(8),
 	m_layout("en-us"),
-	m_useKWallet(true),
-	m_askOnConnect(true)
+	m_askOnConnect(true),
+	m_useKWallet(true)
 {
 }
 
@@ -93,6 +93,7 @@ void RdpHostPref::remove()
 	m_config->deleteEntry(p+"colorDepth");
 	m_config->deleteEntry(p+"layout");
 	m_config->deleteEntry(p+"askOnConnect");
+	m_config->deleteEntry(p+"useKWallet");
 }
 
 void RdpHostPref::setDefaults()
