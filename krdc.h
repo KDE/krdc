@@ -18,7 +18,7 @@
 #ifndef KRDC_H
 #define KRDC_H
 
-#include <kprogress.h>
+#include <kprogressbar.h>
 #include <q3scrollview.h>
 #include <qlayout.h>
 #include <qsize.h>

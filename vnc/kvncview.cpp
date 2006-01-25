@@ -24,7 +24,7 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kstandarddirs.h>
-#include <kpassdlg.h>
+#include <kpassworddialog.h>
 #include <kdialogbase.h>
 #include <kwallet.h>
 

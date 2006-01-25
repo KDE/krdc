@@ -24,7 +24,7 @@
 #include <kmessagebox.h>
 #include <kprocess.h>
 #include <kwallet.h>
-#include <kpassdlg.h>
+#include <kpassworddialog.h>
 
 #include <q3vbox.h>
 #include <qxembed.h>
