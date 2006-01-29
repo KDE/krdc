@@ -322,7 +322,7 @@ bool KRDC::parseHost(QString &str, Protocol &prot, QString &serverHost, int &ser
 			s.insert(4, '/');
 	}
 
-	KURL url(s);
+	KUrl url(s);
 	if (!url.isValid())
 		return false;
 	serverHost = url.host();
