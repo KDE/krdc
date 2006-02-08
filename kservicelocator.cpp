@@ -437,7 +437,7 @@ bool KServiceLocatorPrivate::ensureOpen() {
 		return true;
 	e = SLPOpen(m_lang.latin1(), SLP_FALSE, &m_handle);
 	if (e != SLP_OK) {
-		kdError() << "KServiceLocator: error while opening:" << e <<endl;
+		kError() << "KServiceLocator: error while opening:" << e <<endl;
 		return false;
 	}
 	m_opened = true;
@@ -612,7 +612,7 @@ void KServiceLocator::customEvent(QCustomEvent *e) {
 		else if (e->type() == LastAttributesSignalEventType)
 			emit lastAttributesSignal(s);
 		else
-			kdFatal() << "unmapped last signal type " << e->type()<< endl;
+			kFatal() << "unmapped last signal type " << e->type()<< endl;
 	}
 	else if (e->type() == FoundAttributesEventType) {
 		emit foundAttributes(d->m_operationServiceUrl, 

@@ -222,7 +222,7 @@ void MainDialogWidget::rescan()
   }
 
   if (m_scope == DNSSD_SCOPE) {
-    kdDebug() << "Scope is DNSSD\n";
+    kDebug() << "Scope is DNSSD\n";
     m_locator_dnssd = new DNSSD::ServiceBrowser(QStringList::split(',',"_rfb._tcp,_rdp._tcp"),0,DNSSD::ServiceBrowser::AutoResolve);
     connect(m_locator_dnssd,SIGNAL(serviceAdded(DNSSD::RemoteService::Ptr)),
       SLOT(addedService(DNSSD::RemoteService::Ptr)));
@@ -241,7 +241,7 @@ void MainDialogWidget::rescan()
 
     if ( !m_locator->findServices( "service:remotedesktop.kde",
                                    filter, m_scope ) ) {
-      kdWarning() << "Failure in findServices()" << endl;
+      kWarning() << "Failure in findServices()" << endl;
       errorScanning();
       return;
     }
@@ -343,7 +343,7 @@ void MainDialogWidget::lastSignalServices( bool success )
 
   if ( !m_locator->findScopes() )
   {
-    kdWarning() << "Failure in findScopes()" << endl;
+    kWarning() << "Failure in findScopes()" << endl;
     errorScanning();
   }
 }

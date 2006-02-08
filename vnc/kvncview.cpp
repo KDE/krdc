@@ -283,7 +283,7 @@ bool KVncView::start() {
 		else if (ci == 2)
 			quality = QUALITY_LOW;
 		else {
-			kdDebug() << "Unknown quality";
+			kDebug() << "Unknown quality";
 				return false;
 		}
 
