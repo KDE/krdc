@@ -119,8 +119,18 @@ void ControllerThread::run() {
 		si.framebufferHeight)));
 
 	QApplication::postEvent(m_view, new DesktopInitEvent());
-	while ((!m_quitFlag) && (!m_desktopInitialized))
-		m_waiter.wait(1000);
+	// FIXME: check if this is necessary. Qt4 removed the wait method
+	// not requiring a mutex, but it might be sufficient to e.g. call
+	// QThread::currentThread()->wait(1000) here.  I'm not familiar
+	// with this code; maybe it is critical that we can suddenly break
+	// out of this loop in less than a second, which requires we use
+	// m_waiter.wait.
+	QMutex mutex;
+	while ((!m_quitFlag) && (!m_desktopInitialized)) {
+		mutex.lock();
+		m_waiter.wait(&mutex, 1000);
+		mutex.unlock();
+	}
 
 	if (m_quitFlag) {
 		changeStatus(REMOTE_VIEW_DISCONNECTED);
