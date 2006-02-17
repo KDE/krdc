@@ -73,7 +73,7 @@ void RdpHostPref::load()
 		m_width = m_config->readNumEntry(p+"width", 800);
 		m_height = m_config->readNumEntry(p+"height", 600);
 		m_colorDepth = m_config->readNumEntry(p+"colorDepth", 8);
-		m_layout = m_config->readEntry(p+"layout", "en-us");
+		m_layout = m_config->readEntry(p+"layout", QString("en-us"));
 		m_askOnConnect = m_config->readBoolEntry(p+"askOnConnect", true);
 		m_useKWallet = m_config->readBoolEntry(p+"useKWallet", true);
 	}
