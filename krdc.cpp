@@ -312,13 +312,13 @@ bool KRDC::parseHost(QString &str, Protocol &prot, QString &serverHost, int &ser
 			s = "localhost" + s;
 		if (!s.startsWith("vnc:/"))
 			s = "vnc://" + s;
-		else if (!s.startsWith("vnc://")) // TODO: fix this in KURL!
+		else if (!s.startsWith("vnc://")) // TODO: fix this in KUrl!
 			s.insert(4, '/');
 	}
 	if (prot == PROTOCOL_RDP) {
 		if (!s.startsWith("rdp:/"))
 			s = "rdp://" + s;
-		else if (!s.startsWith("rdp://")) // TODO: fix this in KURL!
+		else if (!s.startsWith("rdp://")) // TODO: fix this in KUrl!
 			s.insert(4, '/');
 	}
 
