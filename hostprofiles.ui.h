@@ -71,7 +71,7 @@ void HostProfiles::load()
   while ( it != hplist.end() )
   {
     HostPref *hp = *it;
-    new KListViewItem( hostListView, hp->host(), hp->type(),
+    new K3ListViewItem( hostListView, hp->host(), hp->type(),
         hp->prefDescription() );
     ++it;
   }

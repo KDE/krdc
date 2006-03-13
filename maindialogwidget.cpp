@@ -24,7 +24,7 @@
 #include <kcombobox.h>
 #include <kdebug.h>
 #include <klineedit.h>
-#include <klistview.h>
+#include <k3listview.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kpushbutton.h>
@@ -35,14 +35,14 @@
 static const QString DEFAULT_SCOPE = "default";
 static const QString DNSSD_SCOPE = "DNS-SD";
 
-class UrlListViewItem : public KListViewItem
+class UrlListViewItem : public K3ListViewItem
 {
   public:
     UrlListViewItem( Q3ListView *v, const QString &url, const QString &host,
         const QString &protocol, const QString &type, const QString &userid,
         const QString &fullname, const QString &desc,
         const QString &serviceid )
-      : KListViewItem( v, host, i18n( "unknown" ), host, protocol ),
+      : K3ListViewItem( v, host, i18n( "unknown" ), host, protocol ),
         m_url( url ), m_serviceid( serviceid )
     {
       if ( !type.isNull() )
