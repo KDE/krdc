@@ -19,6 +19,7 @@
 #define KRDC_H
 
 #include <kprogressbar.h>
+#include <kprogressdialog.h>
 #include <q3scrollview.h>
 #include <qlayout.h>
 #include <qsize.h>
@@ -39,10 +40,12 @@
 #include "smartptr.h"
 #include "keycapturedialog.h"
 
+class KActionCollection;
 class QPixmap;
 class KToolBar;
 class Q3PopupMenu;
 class Q3DockArea;
+
 
 enum WindowMode {
 	WINDOW_MODE_AUTO,
@@ -73,7 +76,7 @@ private:
 	SmartPtr<KProgressDialog> m_progressDialog; // dialog, displayed while connecting
 	QVBoxLayout *m_layout;     // the layout for autosizing the scrollview
 	Q3ScrollView *m_scrollView; // scrollview that contains the remote widget
-	KProgress *m_progress;             // progress bar for the dialog
+	KProgressBar *m_progress;             // progress bar for the dialog
 	KRemoteView *m_view;                  // the remote widget (e.g. KVncView)
 
 	SmartPtr<KeyCaptureDialog> m_keyCaptureDialog; // dialog for key capturing
@@ -113,6 +116,7 @@ private:
 	QSize m_initialWindowSize;    // initial window size (windowed mode only),
 	                              // invalid after first use
 	static QString m_lastHost; // remembers last value of host input
+	KActionCollection* m_actionCollection; // used to hold all our KActions for toolbars and menus
 
 	bool parseHost(QString &s, Protocol &prot, QString &serverHost, int &serverPort,
 	               QString &userName, QString &password);
@@ -174,7 +178,7 @@ public slots:
 	void showLocalCursorToggled();
 
 signals:
-        void disconnected();
+	void disconnected();
 	void disconnectedError();
 };
 

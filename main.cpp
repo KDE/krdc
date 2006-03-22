@@ -143,7 +143,7 @@ int main(int argc, char *argv[])
 		host = args->arg(0);
 
     QString is;
-    KCmdLineArgs *args = KCmdLineArgs::parsedArgs("kde");
+    args = KCmdLineArgs::parsedArgs("kde");
     if (args && args->isSet("geometry"))
             is = args->getOption("geometry");
 	if (!is.isNull()) {
@@ -199,7 +199,6 @@ bool MainController::start() {
 	m_krdc = new KRDC(m_windowMode, m_host,
 			  m_quality, m_encodings, m_password,
 			  m_scale, m_localCursor, m_initialWindowSize);
-	m_app->setMainWidget(m_krdc);
 
 	QObject::connect(m_krdc, SIGNAL(disconnected()),
 			 m_app, SLOT(quit()));
@@ -213,9 +212,6 @@ void MainController::errorRestart() {
 	if (!m_host.isEmpty())
 		KRDC::setLastHost(m_host);
 	m_host = QString::null; // only auto-connect once
-
-	// unset KRDC as main widget, to avoid quit on delete
-	m_app->setMainWidget(0);
 
 	m_krdc = 0;
 

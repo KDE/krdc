@@ -21,6 +21,8 @@
 #include "hostpreferences.h"
 
 #include <kapplication.h>
+#include <kaction.h>
+#include <kactioncollection.h>
 #include <kdebug.h>
 #include <kcombobox.h>
 #include <kurl.h>
@@ -86,7 +88,7 @@ KRDC::KRDC(WindowMode wm, const QString &host,
 	   bool scale,
 	   bool localCursor,
 	   QSize initialWindowSize) :
-  QWidget(0, 0, Qt::WStyle_ContextHelp),
+  QWidget(0, Qt::WStyle_ContextHelp),
   m_layout(0),
   m_scrollView(0),
   m_view(0),
@@ -106,10 +108,14 @@ KRDC::KRDC(WindowMode wm, const QString &host,
   m_fullscreenMinimized(false),
   m_windowScaling(scale),
   m_localCursor(localCursor),
-  m_initialWindowSize(initialWindowSize)
+  m_initialWindowSize(initialWindowSize),
+  m_actionCollection(new KActionCollection(this))
 {
 	connect(&m_autoHideTimer, SIGNAL(timeout()), SLOT(hideFullscreenToolbarNow()));
 	connect(&m_bumpScrollTimer, SIGNAL(timeout()), SLOT(bumpScroll()));
+
+	m_authoHideTimer.setSingleShot(true);
+	m_bumpScrollTimer.setSingleShot(true);
 
 	m_pindown = UserIcon("pindown");
 	m_pinup   = UserIcon("pinup");
@@ -127,7 +133,7 @@ bool KRDC::start()
 	QString serverHost;
 	int serverPort = 5900;
 
-	if (!m_host.isNull() &&
+	if (!m_host.isEmpty() &&
 	    (m_host != "vnc:/") &&
 	    (m_host != "rdp:/")) {
 		if (m_host.startsWith("vnc:/"))
@@ -167,7 +173,7 @@ bool KRDC::start()
 		}
 	}
 
-	setCaption(i18n("%1 - Remote Desktop Connection").arg(serverHost));
+	setWindowTitle(i18n("%1 - Remote Desktop Connection").arg(serverHost));
 
 	m_scrollView = new QScrollView2(this, "remote scrollview");
 	m_scrollView->setFrameStyle(Q3Frame::NoFrame);
@@ -181,7 +187,7 @@ bool KRDC::start()
 
 		case PROTOCOL_VNC:
 			m_view = new KVncView(this, 0, serverHost, serverPort,
-			                      m_password.isNull() ? password : m_password,
+			                      m_password.isEmpty() ? password : m_password,
 			                      m_quality,
 			                      m_localCursor ? DOT_CURSOR_ON : DOT_CURSOR_AUTO,
 			                      m_encodings);
@@ -189,7 +195,7 @@ bool KRDC::start()
 
 		case PROTOCOL_RDP:
 			m_view = new KRdpView(this, 0, serverHost, serverPort,
-			                      userName, m_password.isNull() ? password : m_password);
+			                      userName, m_password.isEmpty() ? password : m_password);
 			break;
 	}
 
@@ -214,13 +220,11 @@ bool KRDC::start()
 
 void KRDC::changeProgress(RemoteViewStatus s) {
 	if (!m_progressDialog) {
-		m_progressDialog = new KProgressDialog(0, 0, QString::null,
-				   "1234567890", false);
+		m_progressDialog = new KProgressDialog();
 		m_progressDialog->showCancelButton(true);
 		m_progressDialog->setMinimumDuration(0x7fffffff);//disable effectively
-		m_progress = m_progressDialog->progressBar();
-		m_progress->setTextEnabled(false);
-		m_progress->setTotalSteps(3);
+		m_progress->setFormat(QString());
+		m_progress->setRange(0, 3);
 		connect(m_progressDialog, SIGNAL(cancelClicked()),
 			SIGNAL(disconnectedError()));
 	}
@@ -294,8 +298,8 @@ void KRDC::quit() {
 bool KRDC::parseHost(QString &str, Protocol &prot, QString &serverHost, int &serverPort,
 		     QString &userName, QString &password) {
 	QString s = str;
-	userName = QString::null;
-	password = QString::null;
+	userName = QString();
+	password = QString();
 
 	if (prot == PROTOCOL_AUTO) {
 		if(s.startsWith("smb://")>0) {  //we know it's more likely to be windows..
@@ -389,6 +393,7 @@ Q3PopupMenu *KRDC::createPopupMenu(QWidget *parent) const {
 	pu->setCheckable(true);
 	pu->setItemChecked(VIEW_ONLY_ID, m_view->viewOnly());
 	if (m_view->supportsLocalCursor()) {
+		
 		pu->insertItem(i18n("Always Show Local Cursor"), this,
 			SLOT(showLocalCursorToggled()), 0,
 			SHOW_LOCAL_CURSOR_ID);
@@ -471,20 +476,20 @@ void KRDC::switchToFullscreen(bool scaling)
 	QIcon pinIconSet;
 	pinIconSet.setPixmap(m_pinup, QIcon::Automatic, QIcon::Normal, QIcon::On);
 	pinIconSet.setPixmap(m_pindown, QIcon::Automatic, QIcon::Normal, QIcon::Off);
-	t->insertButton("pinup", FS_AUTOHIDE_ID);
-	KToolBarButton *pinButton = t->getButton(FS_AUTOHIDE_ID);
-	pinButton->setIconSet(pinIconSet);
-	QToolTip::add(pinButton, i18n("Autohide on/off"));
-	t->setToggle(FS_AUTOHIDE_ID);
-	t->setButton(FS_AUTOHIDE_ID, false);
-	t->addConnection(FS_AUTOHIDE_ID, SIGNAL(clicked()), this, SLOT(toggleFsToolbarAutoHide()));
 
-	t->insertButton("window_nofullscreen", FS_FULLSCREEN_ID);
-	KToolBarButton *fullscreenButton = t->getButton(FS_FULLSCREEN_ID);
-	QToolTip::add(fullscreenButton, i18n("Fullscreen"));
-	t->setToggle(FS_FULLSCREEN_ID);
-	t->setButton(FS_FULLSCREEN_ID, true);
-	t->addConnection(FS_FULLSCREEN_ID, SIGNAL(toggled(bool)), this, SLOT(enableFullscreen(bool)));
+	KAction* action = new KAction(KIcon("pinup"), i18n("Autohide"), m_actionCollection, "pinup");
+	action->setToolTip(i18n("Autohide on/off"));
+	action->setCheckable(true);
+	connect(action, SIGNAL(toggled(bool)), this, SLOT(toggleFsToolbarAutoHide(bool)));
+	t->addAction(action);
+
+	action = new KAction(KIcon("window_nofullscreen"), i18n("Fullscreen"), 
+								m_actionCollection, "window_nofullscreen");
+	action->setToolTip(i18n("Fullscreen"));
+	action->setCheckable(true);
+	action->setChecked(true);
+	connect(action, SIGNAL(toggled(bool)), this, SLOT(enableFullscreen(bool)));
+	t->addAction(action);
 
 	m_popup = createPopupMenu(t);
 	t->insertButton("configure", FS_ADVANCED_ID, m_popup, true, i18n("Advanced options"));
@@ -500,23 +505,24 @@ void KRDC::switchToFullscreen(bool scaling)
 	t->setItemAutoSized(FS_HOSTLABEL_ID, true);
 
 	if (scalingPossible) {
-		t->insertButton("viewmagfit", FS_SCALE_ID);
-		KToolBarButton *scaleButton = t->getButton(FS_SCALE_ID);
-		QToolTip::add(scaleButton, i18n("Scale view"));
-		t->setToggle(FS_SCALE_ID);
-		t->setButton(FS_SCALE_ID, scaling);
-		t->addConnection(FS_SCALE_ID, SIGNAL(toggled(bool)), this, SLOT(switchToFullscreen(bool)));
+		action = new KAction(KIcon("viewmagfit"), i18n("Scale"), m_actionCollection, "viewmagfit");
+		action->setToolTip(i18n("Scale view"));
+		action->setCheckable(true);
+		action->setChecked(scaling);
+		connect(action, SIGNAL(toggled(bool)), this, SLOT(switchToFullscreen(bool)));
 	}
 
-	t->insertButton("iconify", FS_ICONIFY_ID);
-	KToolBarButton *iconifyButton = t->getButton(FS_ICONIFY_ID);
-	QToolTip::add(iconifyButton, i18n("Minimize"));
-	t->addConnection(FS_ICONIFY_ID, SIGNAL(clicked()), this, SLOT(iconify()));
+	action = new KAction(KIcon("iconify"), i18n("Iconify"), m_actionCollection, "iconify");
+	action->setToolTip(i18n("Minimize"));
+	action->setCheckable(true);
+	connect(action, SIGNAL(toggled(bool)), this, SLOT(iconify()));
+	t->addAction(action);
 
-	t->insertButton("close", FS_CLOSE_ID);
-	KToolBarButton *closeButton = t->getButton(FS_CLOSE_ID);
-	QToolTip::add(closeButton, i18n("Close"));
-	t->addConnection(FS_CLOSE_ID, SIGNAL(clicked()), this, SLOT(quit()));
+	action = new KAction(KIcon("close"), i18n("Close"), m_actionCollection, "close");
+	action->setToolTip(i18n("Close"));
+	action->setCheckable(true);
+	connect(action, SIGNAL(toggled(bool)), this, SLOT(quit()));
+	t->addAction(action);
 
 	m_fsToolbar->setChild(t);
 
@@ -577,31 +583,33 @@ void KRDC::switchToNormal(bool scaling)
 					QSizePolicy::Fixed));
 		KToolBar *t = new KToolBar(m_dockArea);
 		m_toolbar = t;
-		t->setIconText(KToolBar::IconTextRight);
+		t->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
 		connect(t, SIGNAL(placeChanged(Q3DockWindow::Place)), SLOT(toolbarChanged()));
-		t->insertButton("window_fullscreen", 0, true, i18n("Fullscreen"));
-		KToolBarButton *fullscreenButton = t->getButton(0);
-		QToolTip::add(fullscreenButton, i18n("Fullscreen"));
-		fullscreenButton->setWhatsThis( i18n("Switches to full screen. If the remote desktop has a different screen resolution, Remote Desktop Connection will automatically switch to the nearest resolution."));
-		t->setToggle(0);
-		t->setButton(0, false);
-		t->addConnection(0, SIGNAL(toggled(bool)), this, SLOT(enableFullscreen(bool)));
+
+		KAction* action = new KAction(KIcon("window_fullscreen"), i18n("Fullscreen"),
+									m_actionCollection, "window_fullscreen");
+		action->setToolTip(i18n("Fullscreen"));
+		action->setWhatsThis( i18n("Switches to full screen. If the remote desktop has a different screen resolution, Remote Desktop Connection will automatically switch to the nearest resolution."));
+		action->setCheckable(true);
+		connect(action, SIGNAL(toggled(bool)), this, SLOT(enableFullscreen(bool)));
+		t->addAction(action);
 
 		if (m_view->supportsScaling()) {
-			t->insertButton("viewmagfit", 1, true, i18n("Scale"));
-			KToolBarButton *scaleButton = t->getButton(1);
-			QToolTip::add(scaleButton, i18n("Scale view"));
-			scaleButton->setWhatsThis( i18n("This option scales the remote screen to fit your window size."));
-			t->setToggle(1);
-			t->setButton(1, scaling);
-			t->addConnection(1, SIGNAL(toggled(bool)), this, SLOT(switchToNormal(bool)));
+			KAction* action = new KAction(KIcon("viewmagfit"), i18n("Scale"), m_actionCollection, "viewmagfit");
+			action->setToolTip(i18n("Scale View"));
+			action->setWhatsThis( i18n("This option scales the remote screen to fit your window size."));
+			action->setCheckable(true);
+			action->setChecked(scaling);
+			connect(action, SIGNAL(toggled(bool)), this, SLOT(switchToNormal(bool)));
+			t->addAction(action);
 		}
 
-		t->insertButton("key_enter", 2, true, i18n("Special Keys"));
-		KToolBarButton *skButton = t->getButton(2);
-		QToolTip::add(skButton, i18n("Enter special keys."));
-		skButton->setWhatsThis( i18n("This option allows you to send special key combinations like Ctrl-Alt-Del to the remote host."));
-		t->addConnection(2, SIGNAL(clicked()), m_keyCaptureDialog, SLOT(execute()));
+		action = new KAction(KIcon("key_enter"), i18n("Special Keys"), m_actionCollection, "key_enter");
+		action->setToolTip(i18n("Enter special keys"));
+		action->setWhatsThis( i18n("This option allows you to send special key combinations like Ctrl-Alt-Del to the remote host."));
+		action->setCheckable(true);
+		connect(action, SIGNAL(toggled(bool)), m_keyCaptureDialog, SLOT(execute(bool)));
+		t->addAction(action);
 
 		m_popup = createPopupMenu(t);
 		t->insertButton("configure", 3, m_popup, true, i18n("Advanced"));
@@ -819,7 +827,7 @@ void KRDC::bumpScroll() {
 			m_scrollView->scrollBy(0, BUMP_SCROLL_CONSTANT);
 	}
 
-	m_bumpScrollTimer.start(333, true);
+	m_bumpScrollTimer.start(333);
 }
 
 void KRDC::showFullscreenToolbar() {
@@ -829,7 +837,7 @@ void KRDC::showFullscreenToolbar() {
 
 void KRDC::hideFullscreenToolbarDelayed() {
 	if (!m_autoHideTimer.isActive())
-		m_autoHideTimer.start(TOOLBAR_AUTOHIDE_TIMEOUT, true);
+		m_autoHideTimer.start(TOOLBAR_AUTOHIDE_TIMEOUT);
 }
 
 void KRDC::mouseMoveEvent(QMouseEvent *e) {
