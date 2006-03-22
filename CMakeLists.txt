@@ -28,7 +28,7 @@ kde4_add_ui_files(krdc_SRCS hostprofiles.ui maindialogbase.ui keycapturewidget.u
 
 kde4_add_executable(krdc ${krdc_SRCS})
 
-target_link_libraries(krdc  ${QT_AND_KDECORE_LIBS} vnc rdp kdeui kdnssd kwalletclient )
+target_link_libraries(krdc  ${KDE4_KDECORE_LIBS} vnc rdp kdeui kdnssd kwalletclient )
 
 install_targets(/bin krdc )
 
