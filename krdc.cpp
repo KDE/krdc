@@ -50,17 +50,6 @@
 
 #define BUMP_SCROLL_CONSTANT (200)
 
-const int VIEW_ONLY_ID = 10;
-const int SHOW_LOCAL_CURSOR_ID = 20;
-
-const int FS_AUTOHIDE_ID = 1;
-const int FS_FULLSCREEN_ID = 2;
-const int FS_SCALE_ID = 3;
-const int FS_HOSTLABEL_ID = 4;
-const int FS_ADVANCED_ID = 5;
-const int FS_ICONIFY_ID = 6;
-const int FS_CLOSE_ID = 7;
-
 const int KRDC::TOOLBAR_AUTOHIDE_TIMEOUT = 1000;
 const int KRDC::TOOLBAR_FPS_1000 = 10000;
 const int KRDC::TOOLBAR_SPEED_DOWN = 34;
@@ -114,7 +103,7 @@ KRDC::KRDC(WindowMode wm, const QString &host,
 	connect(&m_autoHideTimer, SIGNAL(timeout()), SLOT(hideFullscreenToolbarNow()));
 	connect(&m_bumpScrollTimer, SIGNAL(timeout()), SLOT(bumpScroll()));
 
-	m_authoHideTimer.setSingleShot(true);
+	m_autoHideTimer.setSingleShot(true);
 	m_bumpScrollTimer.setSingleShot(true);
 
 	m_pindown = UserIcon("pindown");
@@ -387,19 +376,37 @@ QSize KRDC::sizeHint()
 		return m_view->framebufferSize();
 }
 
-Q3PopupMenu *KRDC::createPopupMenu(QWidget *parent) const {
-	KMenu *pu = new KMenu(parent);
-	pu->insertItem(i18n("View Only"), this, SLOT(viewOnlyToggled()), 0, VIEW_ONLY_ID);
-	pu->setCheckable(true);
-	pu->setItemChecked(VIEW_ONLY_ID, m_view->viewOnly());
+KActionMenu *KRDC::createActionMenu(QWidget *parent) const {
+	KActionMenu *pu = new KActionMenu(KIcon("configure"), i18n("Advanced"),
+									m_actionCollection, "configure");
+	m_popup->setToolTip(i18n("Advanced options"));
+
+	KAction* action = m_actionCollection->action("popupmenu_view_only");
+
+	if (!action)
+	{
+		new KAction(i18n("View Only"),
+					m_actionCollection, "popupmenu_view_only");
+    }
+
+	action->setCheckable(true);
+	action->setChecked(m_view->viewOnly());
+	connect(action, SIGNAL(toggled()), this, SLOT(viewOnlyToggled()));
+	pu->addAction(action);
+
 	if (m_view->supportsLocalCursor()) {
-		
-		pu->insertItem(i18n("Always Show Local Cursor"), this,
-			SLOT(showLocalCursorToggled()), 0,
-			SHOW_LOCAL_CURSOR_ID);
-		pu->setCheckable(true);
-		pu->setItemChecked(SHOW_LOCAL_CURSOR_ID,
-			m_view->dotCursorState() == DOT_CURSOR_ON);
+		KAction* action = m_actionCollection->action("popupmenu_local_cursor");
+
+		if (!action)
+		{
+			new KAction(i18n("Always Show Local Cursor"),
+						m_actionCollection, "popupmenu_local_cursor");
+		}
+
+		action->setCheckable(true);
+		action->setChecked(m_view->dotCursorState() == DOT_CURSOR_ON);
+		connect(action, SIGNAL(toggled()), this, SLOT(showLocalCursorToggled()));
+		pu->addAction(action);
 	}
 	return pu;
 }
@@ -483,7 +490,7 @@ void KRDC::switchToFullscreen(bool scaling)
 	connect(action, SIGNAL(toggled(bool)), this, SLOT(toggleFsToolbarAutoHide(bool)));
 	t->addAction(action);
 
-	action = new KAction(KIcon("window_nofullscreen"), i18n("Fullscreen"), 
+	action = new KAction(KIcon("window_nofullscreen"), i18n("Fullscreen"),
 								m_actionCollection, "window_nofullscreen");
 	action->setToolTip(i18n("Fullscreen"));
 	action->setCheckable(true);
@@ -491,18 +498,15 @@ void KRDC::switchToFullscreen(bool scaling)
 	connect(action, SIGNAL(toggled(bool)), this, SLOT(enableFullscreen(bool)));
 	t->addAction(action);
 
-	m_popup = createPopupMenu(t);
-	t->insertButton("configure", FS_ADVANCED_ID, m_popup, true, i18n("Advanced options"));
-	KToolBarButton *advancedButton = t->getButton(FS_ADVANCED_ID);
-	QToolTip::add(advancedButton, i18n("Advanced options"));
+	m_popup = createActionMenu(t);
+	t->addAction(m_popup);
 	//advancedButton->setPopupDelay(0);
 
 	QLabel *hostLabel = new QLabel(t);
 	hostLabel->setName("kde toolbar widget");
 	hostLabel->setAlignment(Qt::AlignCenter);
 	hostLabel->setText("   "+m_host+"   ");
-	t->insertWidget(FS_HOSTLABEL_ID, 150, hostLabel);
-	t->setItemAutoSized(FS_HOSTLABEL_ID, true);
+	t->addWidget(hostLabel);
 
 	if (scalingPossible) {
 		action = new KAction(KIcon("viewmagfit"), i18n("Scale"), m_actionCollection, "viewmagfit");
@@ -544,7 +548,7 @@ void KRDC::switchToFullscreen(bool scaling)
 			grabInput(QX11Info::display(), winId());
 		m_view->grabKeyboard();
 	}
-  
+
   m_view->switchFullscreen( true );
 }
 
@@ -611,10 +615,8 @@ void KRDC::switchToNormal(bool scaling)
 		connect(action, SIGNAL(toggled(bool)), m_keyCaptureDialog, SLOT(execute(bool)));
 		t->addAction(action);
 
-		m_popup = createPopupMenu(t);
-		t->insertButton("configure", 3, m_popup, true, i18n("Advanced"));
-		KToolBarButton *advancedButton = t->getButton(3);
-		QToolTip::add(advancedButton, i18n("Advanced options"));
+		m_popup = createActionMenu(t);
+		t->addAction(m_popup);
 		//advancedButton->setPopupDelay(0);
 
 		if (m_layout)
@@ -657,14 +659,24 @@ void KRDC::switchToNormal(bool scaling)
 
 void KRDC::viewOnlyToggled() {
 	bool s = !m_view->viewOnly();
-	m_popup->setItemChecked(VIEW_ONLY_ID, s);
 	m_view->setViewOnly(s);
+
+	KAction* action = m_actionCollection->action("popupmenu_view_only");
+	if (!action)
+	{
+		action->setChecked(s);
+	}
 }
 
 void KRDC::showLocalCursorToggled() {
 	bool s = (m_view->dotCursorState() != DOT_CURSOR_ON);
-	m_popup->setItemChecked(SHOW_LOCAL_CURSOR_ID, s);
 	m_view->showDotCursor(s ? DOT_CURSOR_ON : DOT_CURSOR_AUTO);
+
+	KAction* action = m_actionCollection->action("popupmenu_local_cursor");
+	if (action)
+	{
+		action->setChecked(s);
+	}
 }
 
 void KRDC::iconify()

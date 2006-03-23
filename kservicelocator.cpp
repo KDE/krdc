@@ -60,41 +60,41 @@ public:
 	AsyncThread *m_thread;
 	QString m_operationServiceUrl; // for findAttributes()/foundAttributes()
 
-	friend class FindSrvTypesThread;	
-	friend class FindSrvsThread;	
-	friend class FindAttrsThread;	
-	friend class FindScopesThread;	
+	friend class FindSrvTypesThread;
+	friend class FindSrvsThread;
+	friend class FindAttrsThread;
+	friend class FindScopesThread;
 
-	friend SLPBoolean srvTypeCallback(SLPHandle hslp, 
-					  const char* srvtypes, 
-					  SLPError errcode, 
+	friend SLPBoolean srvTypeCallback(SLPHandle hslp,
+					  const char* srvtypes,
+					  SLPError errcode,
 					  void* cookie);
-	friend SLPBoolean srvTypeCallbackAsync(SLPHandle hslp, 
-					       const char* srvtypes, 
-					       SLPError errcode, 
+	friend SLPBoolean srvTypeCallbackAsync(SLPHandle hslp,
+					       const char* srvtypes,
+					       SLPError errcode,
 					       void* cookie);
-	friend SLPBoolean srvUrlCallback(SLPHandle hslp, 
+	friend SLPBoolean srvUrlCallback(SLPHandle hslp,
 					 const char* srvurl,
 					 unsigned short lifetime,
-					 SLPError errcode, 
+					 SLPError errcode,
 					 void* cookie);
-	friend SLPBoolean srvUrlCallbackAsync(SLPHandle hslp, 
+	friend SLPBoolean srvUrlCallbackAsync(SLPHandle hslp,
 					      const char* srvurl,
 					      unsigned short lifetime,
-					      SLPError errcode, 
+					      SLPError errcode,
 					      void* cookie);
-	friend SLPBoolean srvAttrCallback(SLPHandle hslp, 
+	friend SLPBoolean srvAttrCallback(SLPHandle hslp,
 					  const char* attrlist,
-					  SLPError errcode, 
+					  SLPError errcode,
 					  void* cookie);
-	friend SLPBoolean srvAttrCallbackAsync(SLPHandle hslp, 
+	friend SLPBoolean srvAttrCallbackAsync(SLPHandle hslp,
 					       const char* attrlist,
-					       SLPError errcode, 
+					       SLPError errcode,
 					       void* cookie);
 
-	SLPBoolean handleSrvTypeCallback(const char* srvtypes, 
+	SLPBoolean handleSrvTypeCallback(const char* srvtypes,
 					 SLPError errcode);
-	SLPBoolean handleSrvTypeCallbackAsync(const char* srvtypes, 
+	SLPBoolean handleSrvTypeCallbackAsync(const char* srvtypes,
 					      SLPError errcode);
 	SLPBoolean handleSrvUrlCallback(const char* srvUrl,
 					unsigned short lifetime,
@@ -147,8 +147,8 @@ class LastSignalEvent : public QCustomEvent
 private:
 	bool m_success;
 public:
-	LastSignalEvent(int type, bool s) : 
-		QCustomEvent(type), 
+	LastSignalEvent(int type, bool s) :
+		QCustomEvent(type),
 		m_success(s)
 	{};
 	int success() const { return m_success; };
@@ -160,8 +160,8 @@ class FoundServiceTypesEvent : public QCustomEvent
 private:
 	QString m_srvtypes;
 public:
-	FoundServiceTypesEvent(const char *srvtypes) : 
-		QCustomEvent(FoundServiceTypesEventType), 
+	FoundServiceTypesEvent(const char *srvtypes) :
+		QCustomEvent(FoundServiceTypesEventType),
 		m_srvtypes(srvtypes)
 	{};
 	QString srvtypes() const { return m_srvtypes; };
@@ -174,8 +174,8 @@ private:
 	QString m_srvUrl;
 	unsigned short m_lifetime;
 public:
-	FoundServiceEvent(const char *srvUrl, unsigned short lifetime) : 
-		QCustomEvent(FoundServiceEventType), 
+	FoundServiceEvent(const char *srvUrl, unsigned short lifetime) :
+		QCustomEvent(FoundServiceEventType),
 		m_srvUrl(srvUrl),
 		m_lifetime(lifetime)
 	{};
@@ -189,8 +189,8 @@ class FoundAttributesEvent : public QCustomEvent
 private:
 	QString m_attributes;
 public:
-	FoundAttributesEvent(const char *attributes) : 
-		QCustomEvent(FoundAttributesEventType), 
+	FoundAttributesEvent(const char *attributes) :
+		QCustomEvent(FoundAttributesEventType),
 		m_attributes(attributes)
 	{};
 	QString attributes() const { return m_attributes; };
@@ -202,8 +202,8 @@ class FoundScopesEvent : public QCustomEvent
 private:
 	QString m_scopes;
 public:
-	FoundScopesEvent(const char *scopes) : 
-		QCustomEvent(FoundScopesEventType), 
+	FoundScopesEvent(const char *scopes) :
+		QCustomEvent(FoundScopesEventType),
 		m_scopes(scopes)
 	{};
 	QString scopes() const { return m_scopes; };
@@ -215,22 +215,22 @@ public:
 /*             Callbacks            */
 /*   ****** *** ****** *** ******   */
 
-SLPBoolean srvTypeCallback(SLPHandle, 
-			   const char* srvtypes, 
-			   SLPError errcode, 
+SLPBoolean srvTypeCallback(SLPHandle,
+			   const char* srvtypes,
+			   SLPError errcode,
 			   void* cookie) {
 	KServiceLocatorPrivate *ksl = (KServiceLocatorPrivate*) cookie;
 	return ksl->handleSrvTypeCallback(srvtypes, errcode);
 }
-SLPBoolean srvTypeCallbackAsync(SLPHandle, 
-				const char* srvtypes, 
-				SLPError errcode, 
+SLPBoolean srvTypeCallbackAsync(SLPHandle,
+				const char* srvtypes,
+				SLPError errcode,
 				void* cookie) {
 	KServiceLocatorPrivate *ksl = (KServiceLocatorPrivate*) cookie;
 	if ((errcode != SLP_OK) || ksl->m_abort) {
 		QApplication::postEvent(ksl->m_ksl, new LastSignalEvent(LastServiceTypeSignalEventType,
-						   (errcode == SLP_OK) || 
-						   (errcode == SLP_LAST_CALL) || 
+						   (errcode == SLP_OK) ||
+						   (errcode == SLP_LAST_CALL) ||
 						   ksl->m_abort));
 		return SLP_FALSE;
 	}
@@ -238,18 +238,18 @@ SLPBoolean srvTypeCallbackAsync(SLPHandle,
 	return SLP_TRUE;
 }
 
-SLPBoolean srvUrlCallback(SLPHandle, 
+SLPBoolean srvUrlCallback(SLPHandle,
 			  const char* srvurl,
 			  unsigned short lifetime,
-			  SLPError errcode, 
+			  SLPError errcode,
 			  void* cookie) {
 	KServiceLocatorPrivate *ksl = (KServiceLocatorPrivate*) cookie;
 	return ksl->handleSrvUrlCallback(srvurl, lifetime, errcode);
 }
-SLPBoolean srvUrlCallbackAsync(SLPHandle, 
+SLPBoolean srvUrlCallbackAsync(SLPHandle,
 			       const char* srvurl,
 			       unsigned short lifetime,
-			       SLPError errcode, 
+			       SLPError errcode,
 			       void* cookie) {
 	KServiceLocatorPrivate *ksl = (KServiceLocatorPrivate*) cookie;
 	if ((errcode != SLP_OK) || ksl->m_abort) {
@@ -259,32 +259,32 @@ SLPBoolean srvUrlCallbackAsync(SLPHandle,
 						  ksl->m_abort));
 		return SLP_FALSE;
 	}
-	QApplication::postEvent(ksl->m_ksl, 
+	QApplication::postEvent(ksl->m_ksl,
 				new FoundServiceEvent(srvurl, lifetime));
 	return SLP_TRUE;
 }
 
-SLPBoolean srvAttrCallback(SLPHandle, 
+SLPBoolean srvAttrCallback(SLPHandle,
 			   const char* attrlist,
-			   SLPError errcode, 
+			   SLPError errcode,
 			   void* cookie) {
 	KServiceLocatorPrivate *ksl = (KServiceLocatorPrivate*) cookie;
 	return ksl->handleAttrCallback(attrlist, errcode);
 }
-SLPBoolean srvAttrCallbackAsync(SLPHandle, 
+SLPBoolean srvAttrCallbackAsync(SLPHandle,
 				const char* attrlist,
-				SLPError errcode, 
+				SLPError errcode,
 				void* cookie) {
 	KServiceLocatorPrivate *ksl = (KServiceLocatorPrivate*) cookie;
 	if ((errcode != SLP_OK) || ksl->m_abort) {
-		QApplication::postEvent(ksl->m_ksl, 
+		QApplication::postEvent(ksl->m_ksl,
 					new LastSignalEvent(LastAttributesSignalEventType,
 							    (errcode == SLP_OK) ||
 							    (errcode == SLP_LAST_CALL) ||
 							    ksl->m_abort));
 		return SLP_FALSE;
 	}
-	QApplication::postEvent(ksl->m_ksl, 
+	QApplication::postEvent(ksl->m_ksl,
 				new FoundAttributesEvent(attrlist));
 	return SLP_TRUE;
 }
@@ -300,14 +300,14 @@ protected:
 	SLPHandle m_handle;
 	KServiceLocatorPrivate *m_parent;
 	AsyncThread(SLPHandle handle, KServiceLocatorPrivate *parent) :
-		m_handle(handle), 
-		m_parent(parent) {		
+		m_handle(handle),
+		m_parent(parent) {
 	}
 };
 class FindSrvTypesThread : public AsyncThread {
 	QString m_namingAuthority, m_scopeList;
 public:
-	FindSrvTypesThread(SLPHandle handle, 
+	FindSrvTypesThread(SLPHandle handle,
 			   KServiceLocatorPrivate *parent,
 			   const char *namingAuthority,
 			   const char *scopeList) :
@@ -317,21 +317,21 @@ public:
 	}
       	virtual void run() {
 		SLPError e;
-		e = SLPFindSrvTypes(m_handle, 
-				    m_namingAuthority.latin1(), 
-				    m_scopeList.latin1(),
-				    srvTypeCallbackAsync, 
+		e = SLPFindSrvTypes(m_handle,
+				    m_namingAuthority.toLatin1(),
+				    m_scopeList.toLatin1(),
+				    srvTypeCallbackAsync,
 				    m_parent);
 		if (e != SLP_OK)
-			QApplication::postEvent(m_parent->m_ksl, 
-						new LastSignalEvent(LastServiceTypeSignalEventType, 
+			QApplication::postEvent(m_parent->m_ksl,
+						new LastSignalEvent(LastServiceTypeSignalEventType,
 								    false));
 	}
 };
 class FindSrvsThread : public AsyncThread {
 	QString m_srvUrl, m_scopeList, m_filter;
 public:
-	FindSrvsThread(SLPHandle handle, 
+	FindSrvsThread(SLPHandle handle,
 		       KServiceLocatorPrivate *parent,
 		       const char *srvUrl,
 		       const char *scopeList,
@@ -344,22 +344,22 @@ public:
       	virtual void run() {
 		SLPError e;
 
-		e = SLPFindSrvs(m_handle, 
-				m_srvUrl.latin1(), 
-				m_scopeList.isNull() ? "" : m_scopeList.latin1(), 
-				m_filter.isNull() ? "" : m_filter.latin1(), 
-				srvUrlCallbackAsync, 
+		e = SLPFindSrvs(m_handle,
+				m_srvUrl.toLatin1(),
+				m_scopeList.isNull() ? "" : m_scopeList.toLatin1(),
+				m_filter.isNull() ? "" : m_filter.toLatin1(),
+				srvUrlCallbackAsync,
 				m_parent);
 		if (e != SLP_OK)
-			QApplication::postEvent(m_parent->m_ksl, 
-						new LastSignalEvent(LastServiceSignalEventType, 
+			QApplication::postEvent(m_parent->m_ksl,
+						new LastSignalEvent(LastServiceSignalEventType,
 								    false));
 	}
 };
 class FindAttrsThread : public AsyncThread {
 	QString m_srvUrl, m_scopeList, m_attrIds;
 public:
-	FindAttrsThread(SLPHandle handle, 
+	FindAttrsThread(SLPHandle handle,
 		       KServiceLocatorPrivate *parent,
 		       const char *srvUrl,
 		       const char *scopeList,
@@ -371,21 +371,21 @@ public:
 	}
       	virtual void run() {
 		SLPError e;
-		e = SLPFindAttrs(m_handle, 
-				 m_srvUrl.latin1(),
-				 m_scopeList.isNull() ? "" : m_scopeList.latin1(),
-				 m_attrIds.isNull() ? "" : m_attrIds.latin1(),
+		e = SLPFindAttrs(m_handle,
+				 m_srvUrl.toLatin1(),
+				 m_scopeList.isNull() ? "" : m_scopeList.toLatin1(),
+				 m_attrIds.isNull() ? "" : m_attrIds.toLatin1(),
 				 srvAttrCallbackAsync,
 				 m_parent);
 		if (e != SLP_OK)
-			QApplication::postEvent(m_parent->m_ksl, 
-						new LastSignalEvent(LastAttributesSignalEventType, 
+			QApplication::postEvent(m_parent->m_ksl,
+						new LastSignalEvent(LastAttributesSignalEventType,
 								    false));
 	}
 };
 class FindScopesThread : public AsyncThread {
 public:
-	FindScopesThread(SLPHandle handle, 
+	FindScopesThread(SLPHandle handle,
 			 KServiceLocatorPrivate *parent) :
 		AsyncThread(handle, parent){
 	}
@@ -395,15 +395,15 @@ public:
 
 		e = SLPFindScopes(m_handle, &_scopelist);
 		if (e != SLP_OK) {
-                        QApplication::postEvent(m_parent->m_ksl, 
+                        QApplication::postEvent(m_parent->m_ksl,
 						new FoundScopesEvent(""));
 			return;
 		}
 
 		QString scopeList(_scopelist);
 		SLPFree(_scopelist);
-                QApplication::postEvent(m_parent->m_ksl, 
-					new FoundScopesEvent(scopeList.latin1()));
+                QApplication::postEvent(m_parent->m_ksl,
+					new FoundScopesEvent(scopeList.toLatin1()));
 	}
 };
 
@@ -421,7 +421,7 @@ KServiceLocatorPrivate::~KServiceLocatorPrivate() {
 KServiceLocator::~KServiceLocator() {
 	delete d;
 }
-	
+
 bool KServiceLocator::available() {
 	return d->ensureOpen();
 }
@@ -435,7 +435,7 @@ bool KServiceLocatorPrivate::ensureOpen() {
 
 	if (m_opened)
 		return true;
-	e = SLPOpen(m_lang.latin1(), SLP_FALSE, &m_handle);
+	e = SLPOpen(m_lang.toLatin1(), SLP_FALSE, &m_handle);
 	if (e != SLP_OK) {
 		kError() << "KServiceLocator: error while opening:" << e <<endl;
 		return false;
@@ -453,26 +453,26 @@ bool KServiceLocator::findServiceTypes(const QString &namingAuthority,
 	d->m_abort = false;
 
 	if (d->m_async) {
-		d->m_thread = new FindSrvTypesThread(d->m_handle, 
+		d->m_thread = new FindSrvTypesThread(d->m_handle,
 				    d,
-				    namingAuthority.isNull() ? "*" : namingAuthority.latin1(),
-				    scopeList.isNull() ? "" : scopeList.latin1());
+				    namingAuthority.isNull() ? "*" : namingAuthority.toLatin1(),
+				    scopeList.isNull() ? "" : scopeList.toLatin1());
 		d->m_thread->start();
 		return true;
 	}
 	else {
 		SLPError e;
-		e = SLPFindSrvTypes(d->m_handle, 
-				    namingAuthority.isNull() ? "*" : namingAuthority.latin1(), 
-				    scopeList.isNull() ? "" : scopeList.latin1(), 
-				    srvTypeCallback, 
+		e = SLPFindSrvTypes(d->m_handle,
+				    namingAuthority.isNull() ? "*" : namingAuthority.toLatin1(),
+				    scopeList.isNull() ? "" : scopeList.toLatin1(),
+				    srvTypeCallback,
 				    d);
 		return e == SLP_OK;
 	}
 }
 
-bool KServiceLocator::findServices(const QString &srvtype, 
-				   const QString &filter, 
+bool KServiceLocator::findServices(const QString &srvtype,
+				   const QString &filter,
 				   const QString &scopeList) {
 	if (!d->ensureOpen())
 		return false;
@@ -481,21 +481,21 @@ bool KServiceLocator::findServices(const QString &srvtype,
 	d->m_abort = false;
 
 	if (d->m_async) {
-		d->m_thread = new FindSrvsThread(d->m_handle, 
+		d->m_thread = new FindSrvsThread(d->m_handle,
 						 d,
-						 srvtype.latin1(), 
-						 scopeList.isNull() ? "" : scopeList.latin1(), 
-						 filter.isNull() ? "" : filter.latin1());
+						 srvtype.toLatin1(),
+						 scopeList.isNull() ? "" : scopeList.toLatin1(),
+						 filter.isNull() ? "" : filter.toLatin1());
 		d->m_thread->start();
 		return true;
 	}
 	else {
 		SLPError e;
-		e = SLPFindSrvs(d->m_handle, 
-				srvtype.latin1(), 
-				scopeList.isNull() ? "" : scopeList.latin1(), 
-				filter.isNull() ? "" : filter.latin1(), 
-				srvUrlCallback, 
+		e = SLPFindSrvs(d->m_handle,
+				srvtype.toLatin1(),
+				scopeList.isNull() ? "" : scopeList.toLatin1(),
+				filter.isNull() ? "" : filter.toLatin1(),
+				srvUrlCallback,
 				d);
 		return e == SLP_OK;
 	}
@@ -511,21 +511,21 @@ bool KServiceLocator::findAttributes(const QString &serviceUrl,
 
 	d->m_operationServiceUrl = serviceUrl;
 	if (d->m_async) {
-		d->m_thread = new FindAttrsThread(d->m_handle, 
+		d->m_thread = new FindAttrsThread(d->m_handle,
 						  d,
-						  serviceUrl.latin1(), 
+						  serviceUrl.toLatin1(),
 						  "",
-						  attributeIds.isNull() ? "" : attributeIds.latin1());
+						  attributeIds.isNull() ? "" : attributeIds.toLatin1());
 		d->m_thread->start();
 		return true;
 	}
 	else {
 		SLPError e;
-		e = SLPFindAttrs(d->m_handle, 
-				 serviceUrl.latin1(), 
+		e = SLPFindAttrs(d->m_handle,
+				 serviceUrl.toLatin1(),
 				 "",
-				 attributeIds.isNull() ? "" : attributeIds.latin1(), 
-				 srvAttrCallback, 
+				 attributeIds.isNull() ? "" : attributeIds.toLatin1(),
+				 srvAttrCallback,
 				 d);
 		return e == SLP_OK;
 	}
@@ -544,7 +544,7 @@ bool KServiceLocator::findScopes() {
 		return true;
 	}
 	else {
-		SLPError e; 
+		SLPError e;
 		char *_scopelist;
 		QStringList scopeList;
 		e = SLPFindScopes(d->m_handle, &_scopelist);
@@ -557,36 +557,36 @@ bool KServiceLocator::findScopes() {
 	}
 }
 
-SLPBoolean KServiceLocatorPrivate::handleSrvTypeCallback(const char* srvtypes, 
+SLPBoolean KServiceLocatorPrivate::handleSrvTypeCallback(const char* srvtypes,
 							 SLPError errcode) {
 	if ((errcode != SLP_OK) || m_abort) {
-		m_ksl->emitLastServiceTypeSignal((errcode == SLP_OK) || 
-						  (errcode == SLP_LAST_CALL) || 
+		m_ksl->emitLastServiceTypeSignal((errcode == SLP_OK) ||
+						  (errcode == SLP_LAST_CALL) ||
 						  m_abort);
 		return SLP_FALSE;
 	}
 	m_ksl->emitFoundServiceTypes(srvtypes);
 	return SLP_TRUE;
 }
-	
-SLPBoolean KServiceLocatorPrivate::handleSrvUrlCallback(const char* srvurl, 
+
+SLPBoolean KServiceLocatorPrivate::handleSrvUrlCallback(const char* srvurl,
 							unsigned short lifetime,
 							SLPError errcode) {
 	if ((errcode != SLP_OK) || m_abort) {
-		m_ksl->emitLastServiceSignal((errcode == SLP_OK) || 
-					      (errcode == SLP_LAST_CALL) || 
+		m_ksl->emitLastServiceSignal((errcode == SLP_OK) ||
+					      (errcode == SLP_LAST_CALL) ||
 					      m_abort);
 		return SLP_FALSE;
 	}
 	m_ksl->emitFoundService(srvurl, lifetime);
 	return SLP_TRUE;
 }
-	
-SLPBoolean KServiceLocatorPrivate::handleAttrCallback(const char* attrlist, 
+
+SLPBoolean KServiceLocatorPrivate::handleAttrCallback(const char* attrlist,
 						      SLPError errcode) {
 	if ((errcode != SLP_OK) || m_abort) {
-		m_ksl->emitLastAttributesSignal((errcode == SLP_OK) || 
-						(errcode == SLP_LAST_CALL) || 
+		m_ksl->emitLastAttributesSignal((errcode == SLP_OK) ||
+						(errcode == SLP_LAST_CALL) ||
 						m_abort);
 		return SLP_FALSE;
 	}
@@ -615,7 +615,7 @@ void KServiceLocator::customEvent(QCustomEvent *e) {
 			kFatal() << "unmapped last signal type " << e->type()<< endl;
 	}
 	else if (e->type() == FoundAttributesEventType) {
-		emit foundAttributes(d->m_operationServiceUrl, 
+		emit foundAttributes(d->m_operationServiceUrl,
 				     ((FoundAttributesEvent*)e)->attributes());
 	}
 	else if (e->type() == FoundServiceEventType) {
@@ -639,7 +639,7 @@ QString KServiceLocator::decodeAttributeValue(const QString &value) {
 	char *n;
 	if (value.isNull())
 		return value;
-	if (SLPUnescape(value.latin1(), &n, SLP_TRUE) != SLP_OK)
+	if (SLPUnescape(value.toLatin1(), &n, SLP_TRUE) != SLP_OK)
 		return QString::null;
 	QString r(n);
 	SLPFree(n);
@@ -674,7 +674,7 @@ QString KServiceLocator::decodeAttributeValue(const QString &value) {
 	return value;
 }
 
-#endif 
+#endif
 
 
 /*** Private emit-helpers ***/
@@ -707,13 +707,13 @@ void KServiceLocator::emitLastAttributesSignal(bool success) {
 
 /*** Static helpers ***/
 
-void KServiceLocator::parseAttributeList(const QString &attributes, 
+void KServiceLocator::parseAttributeList(const QString &attributes,
 					 QMap<QString,QString> &attributeMap) {
 	QRegExp r("\\((.*)=(.*)\\)");
 	r.setMinimal(true);
 	int pos = 0;
 	while (pos >= 0) {
-		pos = r.search(attributes, pos);
+		pos = r.indexIn(attributes, pos);
 		if (pos != -1) {
 			attributeMap[r.cap(1)] = r.cap(2);
 			pos  += r.matchedLength();
@@ -722,7 +722,7 @@ void KServiceLocator::parseAttributeList(const QString &attributes,
 }
 
 QStringList KServiceLocator::parseCommaList(const QString &list) {
-	return QStringList::split(QChar(','), list);
+	return list.split(',');
 }
 
 QString KServiceLocator::createCommaList(const QStringList &values) {
@@ -733,7 +733,7 @@ QString KServiceLocator::escapeFilter(const QString &str) {
 	QString f;
 	int s = str.length();
 	for (int i = 0; i < s; i++) {
-		char c = str[i];
+		char c = str[i].toAscii();
 		switch(c) {
 		case '*':
 			f.append("\2a");

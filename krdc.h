@@ -41,6 +41,7 @@
 #include "keycapturedialog.h"
 
 class KActionCollection;
+class KActionMenu;
 class QPixmap;
 class KToolBar;
 class Q3PopupMenu;
@@ -86,7 +87,7 @@ private:
 	QPixmap m_pinup, m_pindown;        // fs toolbar imaged for autohide button
 	KToolBar *m_toolbar;               // toolbar in normal mode (0 in fs mode)
 	Q3DockArea *m_dockArea;             // dock area for toolbar in normal mode (0 in fs mode)
-	Q3PopupMenu *m_popup;               // advanced options popup (0 in fs mode)
+	KActionMenu *m_popup;               // advanced options popup (0 in fs mode)
 	QDesktopWidget m_desktopWidget;
 
 	static const int TOOLBAR_AUTOHIDE_TIMEOUT;
@@ -130,7 +131,7 @@ private:
 	static const int TOOLBAR_SPEED_DOWN;
 	static const int TOOLBAR_SPEED_UP;
 	void fsToolbarScheduleHidden();
-	Q3PopupMenu *createPopupMenu(QWidget *parent) const;
+	KActionMenu *createActionMenu(QWidget *parent) const;
 
 protected:
 	virtual void mouseMoveEvent(QMouseEvent *e);
