@@ -162,7 +162,7 @@ bool KRDC::start()
 		}
 	}
 
-	setWindowTitle(i18n("%1 - Remote Desktop Connection").arg(serverHost));
+	setWindowTitle(i18n("%1 - Remote Desktop Connection", serverHost));
 
 	m_scrollView = new QScrollView2(this, "remote scrollview");
 	m_scrollView->setFrameStyle(Q3Frame::NoFrame);

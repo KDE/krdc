@@ -108,9 +108,9 @@ void RdpHostPref::setDefaults()
 
 QString RdpHostPref::prefDescription() const
 {
-	return i18n("Show Preferences: %1, Resolution: %2x%3, Color Depth: %4, Keymap: %5, KWallet: %6")
-	  .arg(m_askOnConnect ? i18n("yes") : i18n("no")).arg(m_width).arg(m_height)
-	  .arg(m_colorDepth).arg(m_layout).arg(m_useKWallet ? i18n("yes") : i18n("no"));
+	return ki18n("Show Preferences: %1, Resolution: %2x%3, Color Depth: %4, Keymap: %5, KWallet: %6")
+	   .subs(m_askOnConnect ? i18n("yes") : i18n("no")).subs(m_width).subs(m_height)
+	   .subs(m_colorDepth).subs(m_layout).subs(m_useKWallet ? i18n("yes") : i18n("no")).toString();
 }
 
 void RdpHostPref::setWidth(int w)

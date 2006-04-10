@@ -251,7 +251,7 @@ bool KVncView::start() {
 		if (hp->askOnConnect()) {
 			// show preferences dialog
 			KDialogBase *dlg = new KDialogBase( this, "dlg", true,
-				i18n( "VNC Host Preferences for %1" ).arg( m_host ),
+				i18n( "VNC Host Preferences for %1", m_host ),
 				KDialogBase::Ok|KDialogBase::Cancel, KDialogBase::Ok, true );
 
 			KVBox *vbox = dlg->makeVBoxMainWidget();

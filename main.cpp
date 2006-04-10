@@ -132,7 +132,7 @@ int main(int argc, char *argv[])
 		QString passwordFile = args->getOption("password-file");
 		QFile f(passwordFile);
 		if (!f.open(QIODevice::ReadOnly)) {
-			KMessageBox::error(0, i18n("The password file '%1' does not exist.").arg(passwordFile));
+			KMessageBox::error(0, i18n("The password file '%1' does not exist.", passwordFile));
 			return 1;
 		}
 		password = QTextStream(&f).readLine();

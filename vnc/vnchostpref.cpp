@@ -95,8 +95,8 @@ QString VncHostPref::prefDescription() const {
 	default:
 		Q_ASSERT(true);
 	}
-	return i18n("Show Preferences: %1, Quality: %2, KWallet: %3")
-	  .arg(m_askOnConnect ? i18n("yes") : i18n("no")).arg(q).arg(m_useKWallet ? i18n("yes") : i18n("no"));
+	return i18n("Show Preferences: %1, Quality: %2, KWallet: %3",
+	   m_askOnConnect ? i18n("yes") : i18n("no"), q, m_useKWallet ? i18n("yes") : i18n("no"));
 }
 
 void VncHostPref::setQuality(int q) {
