@@ -37,6 +37,3 @@ KDE_ICON = krdc
 
 INCLUDES= $(all_includes)
 
-messages: rc.cpp
-	$(EXTRACTRC) *.ui */*.ui >> rc.cpp
-	$(XGETTEXT) *.cpp */*.cpp *.h -o $(podir)/krdc.pot
