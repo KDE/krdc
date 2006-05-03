@@ -53,7 +53,9 @@ KeyCaptureDialog::KeyCaptureDialog(QWidget *parent, const char *name)
     : KDialogBase(parent, name, true, i18n( "Enter Key Combination" ),
       Cancel, Cancel, true), m_grabbed(false) {
   QFrame *main = makeMainWidget();
-  QVBoxLayout *layout = new QVBoxLayout( main, 0, KDialog::spacingHint() );
+  QVBoxLayout *layout = new QVBoxLayout( main );
+  layout->setSpacing( KDialog::spacingHint() );
+  layout->setMargin( 0 );
   m_captureWidget = new KeyCaptureWidget( main, "m_captureWidget" );
   layout->addWidget( m_captureWidget );
   layout->addStretch();
