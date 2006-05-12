@@ -1,4 +1,3 @@
-kde4_header()
 
 add_subdirectory( vnc ) 
 add_subdirectory( rdp ) 
@@ -43,7 +42,6 @@ install_files( ${DATA_INSTALL_DIR}/zeroconf FILES _rfb._tcp )
 
 kde4_install_icons( ${ICON_INSTALL_DIR}  hicolor )
 
-kde4_footer()
 
 
 
