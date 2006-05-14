@@ -1,4 +1,6 @@
 
+configure_file (config-krdc.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-krdc.h )
+
 add_subdirectory( vnc ) 
 add_subdirectory( rdp ) 
 

@@ -16,6 +16,7 @@
  ***************************************************************************/
 
 #include <config.h>
+#include <config-krdc.h>
 #include <X11/Xlib.h>
 
 #ifdef HAVE_VIDMODE_EXTENSION
