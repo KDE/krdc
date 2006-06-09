@@ -214,7 +214,7 @@ bool KRdpView::start()
 
 	m_process = new KProcess(m_container);
 	*m_process << "rdesktop";
-	*m_process << "-g" << (QString::number(hp->width()) + "x" + QString::number(hp->height()));
+	*m_process << "-g" << (QString::number(hp->width()) + 'x' + QString::number(hp->height()));
 	*m_process << "-k" << hp->layout();
 	if(!m_user.isEmpty())     { *m_process << "-u" << m_user; }
 
@@ -237,7 +237,7 @@ bool KRdpView::start()
 			if (walletOK == false) {
 				walletOK = wallet->createFolder(krdc_folder);
 			}
-	
+
 			if (walletOK == true) {
 				wallet->setFolder(krdc_folder);
 				if ( wallet->hasEntry(m_host) ) {
@@ -257,12 +257,12 @@ bool KRdpView::start()
 	}
 
 	if(!m_password.isEmpty()) {
-		*m_process << "-p" << m_password; 
+		*m_process << "-p" << m_password;
 	}
 
 	*m_process << "-X" << ("0x" + QString::number(m_container->winId(), 16));
 	*m_process << "-a" << QString::number(hp->colorDepth());
-	*m_process << (m_host + ":" + QString::number(m_port));
+	*m_process << (m_host + ':' + QString::number(m_port));
 	connect(m_process, SIGNAL(processExited(KProcess *)), SLOT(processDied(KProcess *)));
 	connect(m_process, SIGNAL(receivedStderr(KProcess *, char *, int)), SLOT(receivedStderr(KProcess *, char *, int)));
 	connect(m_container, SIGNAL(embeddedWindowDestroyed()), SLOT(connectionClosed()));

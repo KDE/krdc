@@ -232,7 +232,7 @@ SetupBGR233Map(void)
 	 pixel, so no use to us.  If it returns us the same pixel again, then
 	 it's likely that it's a shared colour - however, it is possible that
 	 it was actually an unallocated pixel, which we've now allocated.  We
-	 minimise this possibility by going through the pixels in reverse order
+	 minimize this possibility by going through the pixels in reverse order
 	 - this helps becuse the X server allocates new pixels from the lowest
 	 number up, so it should only be a problem for the lowest unallocated
 	 pixel.  Got that? */

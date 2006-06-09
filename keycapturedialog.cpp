@@ -135,10 +135,10 @@ void KeyCaptureDialog::x11EventKeyPress( XEvent *pEvent )
 		keyModX = pEvent->xkey.state & ~keyModX;
 
 	QString keyModStr;
-	if( keyModX & KKeyNative::modXWin() )	keyModStr += KKey::modFlagLabel(KKey::WIN) + "+";
-	if( keyModX & KKeyNative::modXAlt() )	keyModStr += KKey::modFlagLabel(KKey::ALT) + "+";
-	if( keyModX & KKeyNative::modXCtrl() )	keyModStr += KKey::modFlagLabel(KKey::CTRL) + "+";
-	if( keyModX & KKeyNative::modXShift() )	keyModStr += KKey::modFlagLabel(KKey::SHIFT) + "+";
+	if( keyModX & KKeyNative::modXWin() )	keyModStr += KKey::modFlagLabel(KKey::WIN) + '+';
+	if( keyModX & KKeyNative::modXAlt() )	keyModStr += KKey::modFlagLabel(KKey::ALT) + '+';
+	if( keyModX & KKeyNative::modXCtrl() )	keyModStr += KKey::modFlagLabel(KKey::CTRL) + '+';
+	if( keyModX & KKeyNative::modXShift() )	keyModStr += KKey::modFlagLabel(KKey::SHIFT) + '+';
 
 	// Display currently selected modifiers, or redisplay old key.
 	m_captureWidget->keyLabel->setText( keyModStr );

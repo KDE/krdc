@@ -341,7 +341,7 @@ void WriterThread::run() {
 			m_inputEvents.clear();
 			m_keyEventNum = 0;
 			m_mouseEventNum = 0;
-			m_clientCut = QString::null;
+			m_clientCut.clear();
 			m_lock.unlock();
 
 			// always send incremental update, unless

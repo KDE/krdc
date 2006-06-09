@@ -392,7 +392,7 @@ void KVncView::customEvent(QCustomEvent *e)
 			emit disconnected();
 		}
 		else if (m_status == REMOTE_VIEW_PREPARING) {
-			//Login was successfull: Write KWallet password if necessary.
+			//Login was successful: Write KWallet password if necessary.
 			if ( useKWallet && !password.isNull() && wallet && wallet->isOpen() && !wallet->hasEntry(host())) {
 				wallet->writePassword(host(), password);
 			}
@@ -431,7 +431,7 @@ void KVncView::customEvent(QCustomEvent *e)
 			if (walletOK == false) {
 				walletOK = wallet->createFolder(krdc_folder);
 			}
-	
+
 			if (walletOK == true) {
 				wallet->setFolder(krdc_folder);
 				QString newPass;
@@ -739,7 +739,7 @@ void KVncView::enableClientCursor(bool enable) {
 	both of these fail, it then asks the user to enter a password.
 	\note Lots of dialogs can be popped up during this process. The thread
 	locks and signals are there to protect against deadlocks and other
-	horribleness. Be careful making changes here. 
+	horribleness. Be careful making changes here.
 */
 int getPassword(char *passwd, int pwlen) {
 	int retV = 0;

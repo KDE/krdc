@@ -35,8 +35,8 @@
 #include <qthread.h>
 #endif
 
-const QString KServiceLocator::DEFAULT_AUTHORITY = "";
-const QString KServiceLocator::ALL_AUTHORITIES = QString::null;
+const QString KServiceLocator::DEFAULT_AUTHORITY;
+const QString KServiceLocator::ALL_AUTHORITIES;
 
 class AsyncThread;
 

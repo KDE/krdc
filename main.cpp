@@ -35,7 +35,7 @@
 // NOTE: I'm not comfortable with the wallet being global data and this high up
 // in the heirarchy, but there are 3 reasons for its current placement here:
 // 1) There are some important threading issues where it comes to the password
-// handling code, and a lot of it is done outside of the objects. 
+// handling code, and a lot of it is done outside of the objects.
 // 2) Different backends need access to the same wallet. so that it is not
 // opened multiple times.
 // 3) MainController is about the only thing that isn't deleted in between connection
@@ -94,12 +94,12 @@ int main(int argc, char *argv[])
 
 	KApplication a;
 
-	QString host = QString::null;
+	QString host;
 	Quality quality = QUALITY_UNKNOWN;
-	QString encodings = QString::null;
-	QString password = QString::null;
-	QString resolution = QString::null;
-	QString keymap = QString::null;
+	QString encodings;
+	QString password;
+	QString resolution;
+	QString keymap;
 	WindowMode wm = WINDOW_MODE_AUTO;
 	bool scale = false;
 	bool localCursor = false;
@@ -211,7 +211,7 @@ bool MainController::start() {
 void MainController::errorRestart() {
 	if (!m_host.isEmpty())
 		KRDC::setLastHost(m_host);
-	m_host = QString::null; // only auto-connect once
+	m_host.clear(); // only auto-connect once
 
 	m_krdc = 0;
 

@@ -179,7 +179,7 @@ void MainDialogWidget::itemSelected( Q3ListViewItem *item )
 {
   UrlListViewItem *u = ( UrlListViewItem* ) item;
   QRegExp rx( "^service:remotedesktop\\.kde:([^;]*)" );
-  if ( rx.search( u->url() ) < 0 ) 
+  if ( rx.search( u->url() ) < 0 )
     m_serverInput->setCurrentText( u->url());
     else m_serverInput->setCurrentText( rx.cap( 1 ) );
 }
@@ -315,7 +315,7 @@ void MainDialogWidget::addedService( DNSSD::RemoteService::Ptr service )
 {
 QString type = service->type().mid(1,3);
 if (type == "rfb") type = "vnc";
-QString url = type+"://"+service->hostName()+":"+QString::number(service->port());
+QString url = type+"://"+service->hostName()+':'+QString::number(service->port());
 new UrlListViewItem( m_browsingView, url, service->serviceName(),
      type.upper(),service->textData()["type"],
      service->textData()["u"],service->textData()["fullname"],
@@ -350,7 +350,7 @@ void MainDialogWidget::lastSignalServices( bool success )
 
 void MainDialogWidget::foundScopes( QStringList scopeList )
 {
-  scopeList << DNSSD_SCOPE;  
+  scopeList << DNSSD_SCOPE;
 
   int di = scopeList.findIndex( DEFAULT_SCOPE );
   if ( di >= 0 )
