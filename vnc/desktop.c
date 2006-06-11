@@ -1,7 +1,7 @@
 /*
- *  Copyright (C) 1999 AT&T Laboratories Cambridge.  All Rights Reserved.
- *  Copyright (C) 2002 Tim Jansen. All Rights Reserved.
- *  Copyright (C) 1999-2001 Anders Lindström
+ *  Copyright 1999 AT&T Laboratories Cambridge.  All Rights Reserved.
+ *  Copyright 2002 Tim Jansen <tim@tjansen.de> All Rights Reserved.
+ *  Copyright 1999-2001 Anders Lindström
  * 
  *  
  *

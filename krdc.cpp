@@ -1,12 +1,7 @@
-/***************************************************************************
-                          krdc.cpp  -  main window
-                             -------------------
-    begin                : Tue May 13 23:07:42 CET 2002
-    copyright            : (C) 2002-2003 by Tim Jansen
-                           (C) 2003 Nadeem Hasan <nhasan@kde.org>
-    email                : tim@tjansen.de
- ***************************************************************************/
-
+/*
+   Copyright (C) 2002-2003 Tim Jansen <tim@tjansen.de>
+   Copyright (C) 2003 Nadeem Hasan <nhasan@kde.org>
+*/
 /***************************************************************************
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *

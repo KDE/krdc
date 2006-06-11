@@ -1,7 +1,7 @@
 /*
- *  Copyright (C) 2000-2002 Constantin Kaplinsky.  All Rights Reserved.
- *  Copyright (C) 2000 Tridia Corporation.  All Rights Reserved.
- *  Copyright (C) 1999 AT&T Laboratories Cambridge.  All Rights Reserved.
+ *  Copyright 2000-2002 Constantin Kaplinsky. <const@ce.cctpu.edu.ru>
+ *  Copyright 2000 Tridia Corporation.  All Rights Reserved.
+ *  Copyright 1999 AT&T Laboratories Cambridge.  All Rights Reserved.
  *
  *  This is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by

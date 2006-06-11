@@ -1,12 +1,7 @@
-/***************************************************************************
-                       hostpreferences.h  -  per host preferences
-                             -------------------
-    begin                : Fri May 09 19:02 CET 2003
-    copyright            : (C) 2003 by Tim Jansen
-                         : (C) 2004 Nadeem Hasan <nhasan@kde.org>
-    email                : tim@tjansen.de
- ***************************************************************************/
-
+/*
+   Copyright (C) 2003 Tim Jansen <tim@tjansen.de>
+   Copyright (C) 2004 Nadeem Hasan <nhasan@kde.org>
+*/
 /***************************************************************************
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *

@@ -1,12 +1,7 @@
-/***************************************************************************
-                    keycapturedialog2.h - KeyCaptureDialog
-                             -------------------
-    begin                : Wed Dec 25 01:16:23 CET 2002
-    copyright            : (C) 2002-2003 by Tim Jansen
-                         : (C) 2004 Nadeem Hasan <nhasan@kde.org>
-    email                : tim@tjansen.de
- ***************************************************************************/
-
+/*
+   Copyright (C) 2002-2003 Tim Jansen <tim@tjansen.de>
+   Copyright (C) 2004 Nadeem Hasan <nhasan@kde.org>
+*/
 /***************************************************************************
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
