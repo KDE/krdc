@@ -10,13 +10,21 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
 
-/* d3des.h -
+/* D3DES (V5.09) - d3des.h
  *
  *	Headers and defines for d3des.c
  *	Graven Imagery, 1992.
+
+ * A portable, public domain, version of the Data Encryption Standard.
  *
- * Copyright (c) 1988,1989,1990,1991,1992 by Richard Outerbridge
- *	(GEnie : OUTER; CIS : [71755,204])
+ * Written with Symantec's THINK (Lightspeed) C by Richard Outerbridge.
+ * Thanks to: Dan Hoey for his excellent Initial and Inverse permutation
+ * code;  Jim Gillogly & Phil Karn for the DES key schedule code; Dennis
+ * Ferguson, Eric Young and Dana How for comparing notes; and Ray Lau,
+ * for humouring me on.
+ *
+ * Copyright (c) 1988,1989,1990,1991,1992 by Richard Outerbridge.
+ * (GEnie : OUTER; CIS : [71755,204]) Graven Imagery, 1992.
  */
 
 #define EN0	0	/* MODE == encrypt */
