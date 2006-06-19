@@ -35,10 +35,10 @@ MainDialog::MainDialog( QWidget *parent, const char *name )
   setMainWidget( m_dialogWidget );
 
   setButtonText( Ok, i18n( "Connect" ) );
-  enableButtonOK( false );
+  enableButtonOk( false );
 
   connect( m_dialogWidget, SIGNAL( hostValid( bool ) ),
-                           SLOT( enableButtonOK( bool ) ) );
+                           SLOT( enableButtonOk( bool ) ) );
 }
 
 void MainDialog::setRemoteHost( const QString &host )
