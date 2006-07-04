@@ -31,16 +31,16 @@ kde4_add_executable(krdc ${krdc_SRCS})
 
 target_link_libraries(krdc  ${KDE4_KDEUI_LIBS} vnc rdp kdnssd kwalletclient )
 
-install_targets(/bin krdc )
+install(TARGETS krdc  DESTINATION ${BIN_INSTALL_DIR} )
 
 
 ########### install files ###############
 
-install_files( ${XDG_APPS_DIR} FILES krdc.desktop )
-install_files( ${DATA_INSTALL_DIR}/konqueror/servicemenus FILES smb2rdc.desktop )
-install_files( ${DATA_INSTALL_DIR}/krdc/pics FILES pointcursor.png pointcursormask.png pinup.png pindown.png    iconify.png close.png )
-install_files( ${SERVICES_INSTALL_DIR} FILES vnc.protocol rdp.protocol )
-install_files( ${DATA_INSTALL_DIR}/zeroconf FILES _rfb._tcp )
+install( FILES krdc.desktop  DESTINATION ${XDG_APPS_DIR})
+install( FILES smb2rdc.desktop  DESTINATION ${DATA_INSTALL_DIR}/konqueror/servicemenus)
+install( FILES pointcursor.png pointcursormask.png pinup.png pindown.png    iconify.png close.png  DESTINATION ${DATA_INSTALL_DIR}/krdc/pics)
+install( FILES vnc.protocol rdp.protocol  DESTINATION ${SERVICES_INSTALL_DIR})
+install( FILES _rfb._tcp  DESTINATION ${DATA_INSTALL_DIR}/zeroconf)
 
 kde4_install_icons( ${ICON_INSTALL_DIR}  hicolor )
 
