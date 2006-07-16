@@ -293,8 +293,8 @@ bool KRDC::parseHost(QString &str, Protocol &prot, QString &serverHost, int &ser
 	password = QString::null;
 
 	if (prot == PROTOCOL_AUTO) {
-		if(s.startsWith("smb://")>0) {  //we know it's more likely to be windows..
-			s = "rdp://" + s.section("smb://", 1);
+		if(s.startsWith("smb:/")>0) {  //we know it's more likely to be windows..
+			s = "rdp:/" + s.section("smb:/", 1);
 			prot = PROTOCOL_RDP;
 		} else if(s.contains("://") > 0) {
 			s = s.section("://",1);
