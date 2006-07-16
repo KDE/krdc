@@ -21,6 +21,7 @@
 #include "hostpreferences.h"
 
 #include <kapplication.h>
+#include <kconfig.h>
 #include <kdebug.h>
 #include <kcombobox.h>
 #include <kurl.h>
@@ -184,6 +185,8 @@ bool KRDC::start()
 			                      userName, m_password.isNull() ? password : m_password);
 			break;
 	}
+
+	m_view->setViewOnly(kapp->config()->readBoolEntry("viewOnly", false));
 
 	m_scrollView->addChild(m_view);
 	QWhatsThis::add(m_view, i18n("Here you can see the remote desktop. If the other side allows you to control it, you can also move the mouse, click or enter keystrokes. If the content does not fit your screen, click on the toolbar's full screen button or scale button. To end the connection, just close the window."));

@@ -21,6 +21,7 @@
 #include <kapplication.h>
 #include <klocale.h>
 #include <kmessagebox.h>
+#include <kconfig.h>
 #include <kdebug.h>
 #include <kwallet.h>
 #include <qwindowdefs.h>
@@ -102,7 +103,7 @@ int main(int argc, char *argv[])
 	QString keymap = QString::null;
 	WindowMode wm = WINDOW_MODE_AUTO;
 	bool scale = false;
-	bool localCursor = false;
+	bool localCursor = kapp->config()->readBoolEntry("alwaysShowLocalCursor", false);
 	QSize initialWindowSize;
 
 	KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
