@@ -553,10 +553,6 @@ void KRDC::switchToNormal(bool scaling)
 		m_oldResolution = Resolution();
 	}
 
-	if (m_popup) {
-		m_popup->deleteLater();
-		m_popup = 0;
-	}
 	if (m_fsToolbar) {
 		m_fsToolbar->hide();
 		m_fsToolbar->deleteLater();
@@ -594,6 +590,11 @@ void KRDC::switchToNormal(bool scaling)
 		QToolTip::add(skButton, i18n("Enter special keys."));
 		QWhatsThis::add(skButton, i18n("This option allows you to send special key combinations like Ctrl-Alt-Del to the remote host."));
 		t->addConnection(2, SIGNAL(clicked()), m_keyCaptureDialog, SLOT(execute()));
+
+		if (m_popup) {
+			m_popup->deleteLater();
+			m_popup = 0;
+		}
 
 		m_popup = createPopupMenu(t);
 		t->insertButton("configure", 3, m_popup, true, i18n("Advanced"));
