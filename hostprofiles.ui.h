@@ -91,3 +91,10 @@ void HostProfiles::save()
 
   hps->sync();
 }
+
+void HostProfiles::slotHostDoubleClicked( QListViewItem *vi )
+{
+  HostPreferences *hps = HostPreferences::instance();
+  HostPrefPtr hp = hps->getHostPref(vi->text(0), vi->text(1));
+  emit( hostDoubleClicked( hp ));
+}

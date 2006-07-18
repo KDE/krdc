@@ -23,6 +23,7 @@
 #include <qmap.h>
 
 #include "pointerlatencyometer.h"
+#include "hostpreferences.h"
 #include "vnctypes.h"
 #include "threads.h"
 
@@ -104,6 +105,7 @@ public:
 
 	virtual bool viewOnly();
 
+	static bool editPreferences( HostPrefPtr );
 
 public slots:
 	virtual void enableScaling(bool s);

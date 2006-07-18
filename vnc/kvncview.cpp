@@ -225,6 +225,39 @@ bool KVncView::checkLocalKRfb() {
 	return false;
 }
 
+bool KVncView::editPreferences( HostPrefPtr host )
+{
+	SmartPtr<VncHostPref> hp( host );
+
+	int ci = hp->quality();
+	bool kwallet = hp->useKWallet();
+
+	// show preferences dialog
+	KDialogBase *dlg = new KDialogBase( 0L, "dlg", true,
+		i18n( "VNC Host Preferences for %1" ).arg( host->host() ),
+		KDialogBase::Ok|KDialogBase::Cancel, KDialogBase::Ok, true );
+
+	QVBox *vbox = dlg->makeVBoxMainWidget();
+	VncPrefs *prefs = new VncPrefs( vbox );
+	QWidget *spacer = new QWidget( vbox );
+	vbox->setStretchFactor( spacer, 10 );
+
+	prefs->setQuality( ci );
+	prefs->setShowPrefs(true);
+	prefs->setUseKWallet(kwallet);
+
+	if ( dlg->exec() == QDialog::Rejected )
+		return false;
+
+	ci = prefs->quality();
+	hp->setAskOnConnect(prefs->showPrefs());
+	hp->setQuality(ci);
+	hp->setUseKWallet(prefs->useKWallet());
+
+	delete dlg;
+	return true;
+}
+
 bool KVncView::start() {
 
 	if (!checkLocalKRfb())
@@ -236,34 +269,13 @@ bool KVncView::start() {
 		SmartPtr<VncHostPref> hp =
 			SmartPtr<VncHostPref>(hps->createHostPref(m_host,
 								 VncHostPref::VncType));
-		int ci = hp->quality();
-		bool kwallet = hp->useKWallet();
 		if (hp->askOnConnect()) {
-			// show preferences dialog
-			KDialogBase *dlg = new KDialogBase( this, "dlg", true,
-				i18n( "VNC Host Preferences for %1" ).arg( m_host ),
-				KDialogBase::Ok|KDialogBase::Cancel, KDialogBase::Ok, true );
-
-			QVBox *vbox = dlg->makeVBoxMainWidget();
-			VncPrefs *prefs = new VncPrefs( vbox );
-			QWidget *spacer = new QWidget( vbox );
-			vbox->setStretchFactor( spacer, 10 );
-
-			prefs->setQuality( ci );
-			prefs->setShowPrefs(true);
-			prefs->setUseKWallet(kwallet);
-
-			if ( dlg->exec() == QDialog::Rejected )
+			if (!editPreferences(hp))
 				return false;
-
-			ci = prefs->quality();
-			hp->setAskOnConnect(prefs->showPrefs());
-			hp->setQuality(ci);
-			hp->setUseKWallet(prefs->useKWallet());
 			hps->sync();
-
-			delete dlg;
 		}
+
+		int ci = hp->quality();
 
 		Quality quality;
 		if (ci == 0)

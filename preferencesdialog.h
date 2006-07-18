@@ -40,6 +40,7 @@ class PreferencesDialog : public KDialogBase
 
   protected slots:
     void slotOk();
+    void slotHostDoubleClicked( HostPrefPtr );
 
   protected:
     void load();

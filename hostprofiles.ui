@@ -132,6 +132,12 @@
         <receiver>HostProfiles</receiver>
         <slot>selectionChanged()</slot>
     </connection>
+    <connection>
+        <sender>hostListView</sender>
+        <signal>doubleClicked(QListViewItem*,const QPoint&amp;,int)</signal>
+        <receiver>HostProfiles</receiver>
+        <slot>slotHostDoubleClicked(QListViewItem*)</slot>
+    </connection>
 </connections>
 <includes>
     <include location="global" impldecl="in implementation">kdialog.h</include>
@@ -141,10 +147,14 @@
 <variables>
     <variable>HostPrefPtrList deletedHosts;</variable>
 </variables>
+<signals>
+    <signal>hostDoubleClicked(HostPrefPtr)</signal>
+</signals>
 <slots>
     <slot>removeHost()</slot>
     <slot access="protected" specifier="non virtual">removeAllHosts()</slot>
     <slot access="protected" specifier="non virtual">selectionChanged()</slot>
+    <slot>slotHostDoubleClicked( QListViewItem * )</slot>
 </slots>
 <functions>
     <function specifier="non virtual">load()</function>
@@ -152,4 +162,7 @@
 </functions>
 <layoutdefaults spacing="6" margin="11"/>
 <layoutfunctions spacing="KDialog::spacingHint" margin="KDialog::marginHint"/>
+<includehints>
+    <includehint>klistview.h</includehint>
+</includehints>
 </UI>

@@ -23,9 +23,13 @@
 #include "vnc/vncprefs.h"
 #include "rdp/rdpprefs.h"
 
+#include "rdp/krdpview.h"
+#include "vnc/kvncview.h"
+
 #include <qcheckbox.h>
 #include <qvbox.h>
 
+#include <klistview.h>
 #include <klocale.h>
 
 PreferencesDialog::PreferencesDialog( QWidget *parent, const char *name )
@@ -37,6 +41,8 @@ PreferencesDialog::PreferencesDialog( QWidget *parent, const char *name )
 
   page = addVBoxPage( i18n( "&Host Profiles" ) );
   m_hostProfiles = new HostProfiles( page, "m_hostProfiles" );
+
+  connect( m_hostProfiles, SIGNAL( hostDoubleClicked(HostPrefPtr) ), this, SLOT( slotHostDoubleClicked(HostPrefPtr) ));
 
   page = addVBoxPage( i18n( "&VNC Defaults" ) );
   m_vncPrefs = new VncPrefs( page, "m_vncPrefs" );
@@ -101,6 +107,22 @@ void PreferencesDialog::slotOk()
 {
   save();
   accept();
+}
+
+void PreferencesDialog::slotHostDoubleClicked( HostPrefPtr hp )
+{
+  bool hostChanged = false;
+
+  if( hp->type() == RdpHostPref::RdpType )
+    hostChanged = KRdpView::editPreferences( hp );
+  else if( hp->type() == VncHostPref::VncType )
+    hostChanged = KVncView::editPreferences( hp );
+
+  if( hostChanged )
+  {
+    m_hostProfiles->hostListView->clear();
+    m_hostProfiles->load();
+  }
 }
 
 #include "preferencesdialog.moc"

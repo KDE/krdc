@@ -155,6 +155,51 @@ int KRdpView::port()
 	return m_port;
 }
 
+bool KRdpView::editPreferences( HostPrefPtr host )
+{
+	SmartPtr<RdpHostPref> hp( host );
+
+	int wv = hp->width();
+	int hv = hp->height();
+	int cd = hp->colorDepth();
+	QString kl = hp->layout();
+	bool kwallet = hp->useKWallet();
+
+	// show preferences dialog
+	KDialogBase *dlg = new KDialogBase( 0L, "dlg", true,
+		i18n( "RDP Host Preferences for %1" ).arg( host->host() ),
+		KDialogBase::Ok|KDialogBase::Cancel, KDialogBase::Ok, true );
+
+	QVBox *vbox = dlg->makeVBoxMainWidget();
+	RdpPrefs *prefs = new RdpPrefs( vbox );
+	QWidget *spacer = new QWidget( vbox );
+	vbox->setStretchFactor( spacer, 10 );
+
+	prefs->setRdpWidth( wv );
+	prefs->setRdpHeight( hv );
+	prefs->setResolution();
+	prefs->setColorDepth(cd);
+	prefs->setKbLayout( keymap2int( kl ) );
+	prefs->setShowPrefs( true );
+	prefs->setUseKWallet(kwallet);
+
+	if ( dlg->exec() == QDialog::Rejected )
+		return false;
+
+	wv = prefs->rdpWidth();
+	hv = prefs->rdpHeight();
+	kl = int2keymap( prefs->kbLayout() );
+	hp->setAskOnConnect( prefs->showPrefs() );
+	hp->setWidth(wv);
+	hp->setHeight(hv);
+	hp->setColorDepth( prefs->colorDepth() );
+	hp->setLayout(kl);
+	hp->setUseKWallet(prefs->useKWallet());
+
+	delete dlg;
+	return true;
+}
+
 // open a connection
 bool KRdpView::start()
 {
@@ -164,46 +209,12 @@ bool KRdpView::start()
 	if(!rdpAppDataConfigured)
 	{
 		HostPreferences *hps = HostPreferences::instance();
-
 		hp = SmartPtr<RdpHostPref>(hps->createHostPref(m_host,
 		                                              RdpHostPref::RdpType));
-		int wv = hp->width();
-		int hv = hp->height();
-		int cd = hp->colorDepth();
-		QString kl = hp->layout();
-		bool kwallet = hp->useKWallet();
 		if(hp->askOnConnect())
 		{
-			// show preferences dialog
-			KDialogBase *dlg = new KDialogBase( this, "dlg", true,
-				i18n( "RDP Host Preferences for %1" ).arg( m_host ),
-				KDialogBase::Ok|KDialogBase::Cancel, KDialogBase::Ok, true );
-
-			QVBox *vbox = dlg->makeVBoxMainWidget();
-			RdpPrefs *prefs = new RdpPrefs( vbox );
-			QWidget *spacer = new QWidget( vbox );
-			vbox->setStretchFactor( spacer, 10 );
-
-			prefs->setRdpWidth( wv );
-			prefs->setRdpHeight( hv );
-			prefs->setResolution();
-			prefs->setColorDepth(cd);
-			prefs->setKbLayout( keymap2int( kl ) );
-			prefs->setShowPrefs( true );
-			prefs->setUseKWallet(kwallet);
-
-			if ( dlg->exec() == QDialog::Rejected )
+			if( !editPreferences( hp ))
 				return false;
-
-			wv = prefs->rdpWidth();
-			hv = prefs->rdpHeight();
-			kl = int2keymap( prefs->kbLayout() );
-			hp->setAskOnConnect( prefs->showPrefs() );
-			hp->setWidth(wv);
-			hp->setHeight(hv);
-			hp->setColorDepth( prefs->colorDepth() );
-			hp->setLayout(kl);
-			hp->setUseKWallet(prefs->useKWallet());
 			hps->sync();
 		}
 

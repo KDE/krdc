@@ -22,6 +22,7 @@
 
 #include <qxembed.h>
 
+#include "hostpreferences.h"
 #include "kremoteview.h"
 
 #define TCP_PORT_RDP 3389
@@ -75,6 +76,8 @@ class KRdpView : public KRemoteView
 		virtual QString host();                  // return the host we're connected to
 		virtual int port();                      // return the port number we're connected on
 		virtual bool start();                    // open a connection
+
+		static bool editPreferences( HostPrefPtr );
 
 	public slots:
 		virtual void switchFullscreen(bool on);
