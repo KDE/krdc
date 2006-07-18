@@ -119,6 +119,7 @@ void RdpPrefs::setResolution()
   {
     cmbResolution->setCurrentItem(3);
   }
+  resolutionChanged( cmbResolution->currentItem() );
 }
 
 
