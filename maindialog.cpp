@@ -27,10 +27,13 @@
 #include <ktoolinvocation.h>
 
 MainDialog::MainDialog( QWidget *parent, const char *name )
-    : KDialogBase( parent, name, true, i18n( "Remote Desktop Connection" ),
-      Ok|Close|Help|User1, Ok, true, KGuiItem( i18n( "&Preferences" ),
-      "configure" ) )
+  : KDialog( parent )
 {
+  setObjectName( name );
+  setModal( true );
+  setCaption( i18n( "Remote Desktop Connection" ) );
+  setButtons( Ok | Close | Help | User1 );
+  setButtonGuiItem( User1, KGuiItem( i18n( "&Preferences" ), "configure" ) );
   m_dialogWidget = new MainDialogWidget( this, "m_dialogWidget" );
   setMainWidget( m_dialogWidget );
 
@@ -66,14 +69,14 @@ void MainDialog::slotOk()
 {
   m_dialogWidget->save();
 
-  KDialogBase::accept();
+  KDialog::accept();
 }
 
 void MainDialog::slotClose()
 {
   m_dialogWidget->save();
 
-  KDialogBase::reject();
+  KDialog::reject();
 }
 
 #include "maindialog.moc"

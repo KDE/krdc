@@ -20,11 +20,11 @@
 #ifndef MAINDIALOG_H
 #define MAINDIALOG_H
 
-#include <kdialogbase.h>
+#include <kdialog.h>
 
 class MainDialogWidget;
 
-class MainDialog : public KDialogBase
+class MainDialog : public KDialog
 {
     Q_OBJECT
   public:
