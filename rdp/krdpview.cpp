@@ -19,18 +19,18 @@
      For any questions, comments or whatever, you may mail me at: arend@auton.nl
 */
 
-#include <kdialogbase.h>
+#include <kdialog.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kprocess.h>
 #include <kwallet.h>
 #include <kpassworddialog.h>
 
-#include <q3vbox.h>
-#include <qxembed.h>
+#include <kvbox.h>
+#include <QX11EmbedContainer>
 
-#include <X11/Xlib.h>
-#include <X11/keysym.h>
+// #include <X11/Xlib.h>
+// #include <X11/keysym.h>
 
 #undef Bool
 
@@ -44,9 +44,11 @@ extern KWallet::Wallet *wallet;
 static KRdpView *krdpview;
 
 RdpContainer::RdpContainer(QWidget *parent, const char *name, Qt::WFlags f) :
-  QXEmbed(parent, name, f),
+  QX11EmbedContainer(parent),
   m_viewOnly(false)
 {
+  setObjectName( name );
+  setWindowFlags( f );
 }
 
 RdpContainer::~RdpContainer()
@@ -55,6 +57,9 @@ RdpContainer::~RdpContainer()
 
 void RdpContainer::windowChanged(WId window)
 {
+#warning rethink this with clientClosed() and clientIsEmbedded() signals
+#if 0
+  
 	if(window == 0)
 	{
 		emit embeddedWindowDestroyed();
@@ -63,10 +68,13 @@ void RdpContainer::windowChanged(WId window)
 	{
 		emit newEmbeddedWindow(window);
 	}
+#endif
 }
 
 bool RdpContainer::x11Event(XEvent *e)
 {
+#warning try to redo this in a less X11-ish way
+#if 0
 	// FIXME: mouse events still get through in view-only
 	if(m_viewOnly && (e->type == KeyPress || e->type == KeyRelease || e->type == ButtonPress ||
 	                  e->type == ButtonRelease || e->type == MotionNotify || e->type == FocusIn ||
@@ -74,8 +82,9 @@ bool RdpContainer::x11Event(XEvent *e)
 	{
 		return true;
 	}
+#endif
+	return QX11EmbedContainer::x11Event(e);
 
-	return QXEmbed::x11Event(e);
 }
 
 
@@ -133,7 +142,8 @@ void KRdpView::startQuitting()
 	m_quitFlag = true;
 	if(m_process != NULL)
 	{
-		m_container->sendDelete();
+	  m_container->discardClient();
+	  // FIXME: we proably need to kill the rdesktop process here.
 	}
 }
 
@@ -175,11 +185,17 @@ bool KRdpView::start()
 		if(hp->askOnConnect())
 		{
 			// show preferences dialog
-			KDialogBase *dlg = new KDialogBase( this, "dlg", true,
-				i18n( "RDP Host Preferences for %1", m_host ),
-				KDialogBase::Ok|KDialogBase::Cancel, KDialogBase::Ok, true );
+			KDialog *dlg = new KDialog( this );
+			dlg->setObjectName( "rdpPrefDlg" );
+			dlg->setModal( true );
+			dlg->setCaption( i18n( "RDP Host Preferences for %1", m_host ) );
+			dlg->setButtons( KDialog::Ok | KDialog::Cancel );
+			dlg->setDefaultButton( KDialog::Ok );
+			dlg->showButtonSeparator( true );
 
-			KVBox *vbox = dlg->makeVBoxMainWidget();
+			KVBox *vbox = new KVBox( this );
+			dlg->setMainWidget( vbox );
+
 			RdpPrefs *prefs = new RdpPrefs( vbox );
 			QWidget *spacer = new QWidget( vbox );
 			vbox->setStretchFactor( spacer, 10 );
@@ -247,8 +263,8 @@ bool KRdpView::start()
 
 			if ( m_password.isEmpty() ) {
 				//There must not be an existing entry. Let's make one.
-				QCString newPassword;
-				if (KPasswordDialog::getPassword(newPassword, i18n("Please enter the password.")) == KPasswordDialog::Accepted) {
+				QByteArray newPassword;
+				if (KPasswordDialog::getPassword(this, newPassword, i18n("Please enter the password.")) == KPasswordDialog::Accepted) {
 					m_password = newPassword;
 					wallet->writePassword(m_host, m_password);
 				}

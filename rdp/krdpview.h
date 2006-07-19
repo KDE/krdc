@@ -20,7 +20,7 @@
 #ifndef KRDPVIEW_H
 #define KRDPVIEW_H
 
-#include <qxembed.h>
+#include <QX11EmbedContainer>
 
 #include "kremoteview.h"
 
@@ -30,7 +30,7 @@
 class KProcess;
 class KRdpView;
 
-class RdpContainer : public QXEmbed
+class RdpContainer : public QX11EmbedContainer
 {
 	Q_OBJECT
 
