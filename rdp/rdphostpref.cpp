@@ -70,12 +70,12 @@ void RdpHostPref::load()
 	{
 		m_config->setGroup("PerHostSettings");
 		QString p = prefix();
-		m_width = m_config->readNumEntry(p+"width", 800);
-		m_height = m_config->readNumEntry(p+"height", 600);
-		m_colorDepth = m_config->readNumEntry(p+"colorDepth", 8);
+		m_width = m_config->readEntry(p+"width", 800);
+		m_height = m_config->readEntry(p+"height", 600);
+		m_colorDepth = m_config->readEntry(p+"colorDepth", 8);
 		m_layout = m_config->readEntry(p+"layout", QString("en-us"));
-		m_askOnConnect = m_config->readBoolEntry(p+"askOnConnect", true);
-		m_useKWallet = m_config->readBoolEntry(p+"useKWallet", true);
+		m_askOnConnect = m_config->readEntry(p+"askOnConnect", true);
+		m_useKWallet = m_config->readEntry(p+"useKWallet", true);
 	}
 	else
 	{
@@ -98,12 +98,12 @@ void RdpHostPref::remove()
 void RdpHostPref::setDefaults()
 {
 	m_config->setGroup("RdpDefaultSettings");
-	m_width = m_config->readNumEntry("rdpWidth", 800);
-	m_height = m_config->readNumEntry("rdpHeight", 600);
-	m_colorDepth = m_config->readNumEntry("rdpColorDepth", 8);
+	m_width = m_config->readEntry("rdpWidth", 800);
+	m_height = m_config->readEntry("rdpHeight", 600);
+	m_colorDepth = m_config->readEntry("rdpColorDepth", 8);
 	m_layout = m_config->readEntry("rdpLayout", "en-us");
-	m_askOnConnect = m_config->readBoolEntry("rdpShowHostPreferences", true);
-	m_useKWallet = m_config->readBoolEntry("rdpUseKWallet", true);
+	m_askOnConnect = m_config->readEntry("rdpShowHostPreferences", true);
+	m_useKWallet = m_config->readEntry("rdpUseKWallet", true);
 }
 
 QString RdpHostPref::prefDescription() const

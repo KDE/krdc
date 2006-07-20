@@ -86,8 +86,8 @@ class RdpHostPref : public HostPref
 		int      m_height;
 		int      m_colorDepth;
 		QString  m_layout;
-		bool     m_askOnConnect;
 		bool     m_useKWallet;
+		bool     m_askOnConnect;
 
 		virtual void load();
 		virtual void setDefaults();
