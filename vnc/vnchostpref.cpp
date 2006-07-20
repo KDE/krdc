@@ -55,9 +55,9 @@ void VncHostPref::load() {
 	{
 		m_config->setGroup("PerHostSettings");
 		QString p = prefix();
-		m_quality = m_config->readNumEntry(p+"quality", 0);
-		m_askOnConnect = m_config->readBoolEntry(p+"askOnConnect", true);
-		m_useKWallet = m_config->readBoolEntry(p+"useKWallet", true);
+		m_quality = m_config->readEntry(p+"quality", 0);
+		m_askOnConnect = m_config->readEntry(p+"askOnConnect", true);
+		m_useKWallet = m_config->readEntry(p+"useKWallet", true);
 	}
 	else
 	{
@@ -75,9 +75,9 @@ void VncHostPref::remove() {
 
 void VncHostPref::setDefaults() {
 	m_config->setGroup("VncDefaultSettings");
-	m_quality = m_config->readNumEntry("vncQuality", 0);
-	m_askOnConnect = m_config->readBoolEntry("vncShowHostPreferences", true);
-	m_useKWallet = m_config->readBoolEntry("vncUseKWallet", true);
+	m_quality = m_config->readEntry("vncQuality", 0);
+	m_askOnConnect = m_config->readEntry("vncShowHostPreferences", true);
+	m_useKWallet = m_config->readEntry("vncUseKWallet", true);
 }
 
 QString VncHostPref::prefDescription() const {

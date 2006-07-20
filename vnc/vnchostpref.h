@@ -25,8 +25,8 @@ protected:
 	friend class HostPreferences;
 
 	int m_quality;
-	bool m_askOnConnect;
 	bool m_useKWallet;
+	bool m_askOnConnect;
 
 	virtual void load();
 	virtual void setDefaults();
