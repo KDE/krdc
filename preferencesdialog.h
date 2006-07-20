@@ -20,7 +20,7 @@
 #ifndef PREFERENCESDIALOG_H
 #define PREFERENCESDIALOG_H
 
-#include <kdialogbase.h>
+#include <kpagedialog.h>
 
 #include "smartptr.h"
 #include "vnc/vnchostpref.h"
@@ -30,7 +30,7 @@ class HostProfiles;
 class VncPrefs;
 class RdpPrefs;
 
-class PreferencesDialog : public KDialogBase
+class PreferencesDialog : public KPageDialog
 {
   Q_OBJECT
 
