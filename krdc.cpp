@@ -18,13 +18,13 @@
 #include <kapplication.h>
 #include <kaction.h>
 #include <kactioncollection.h>
+#include <kactionmenu.h>
 #include <kdebug.h>
 #include <kcombobox.h>
 #include <kurl.h>
 #include <kiconloader.h>
 #include <klocale.h>
 #include <ktoolbar.h>
-#include <ktoolbarbutton.h>
 #include <kmenu.h>
 #include <kmessagebox.h>
 #include <kwin.h>
@@ -104,7 +104,7 @@ KRDC::KRDC(WindowMode wm, const QString &host,
 	m_pindown = UserIcon("pindown");
 	m_pinup   = UserIcon("pinup");
 
-	m_keyCaptureDialog = new KeyCaptureDialog(0, 0);
+	// m_keyCaptureDialog = new KeyCaptureDialog(0, 0);
 
 	setMouseTracking(true);
 
@@ -206,28 +206,28 @@ void KRDC::changeProgress(RemoteViewStatus s) {
 	if (!m_progressDialog) {
 		m_progressDialog = new KProgressDialog();
 		m_progressDialog->showCancelButton(true);
-		m_progress->setFormat(QString());
-		m_progress->setRange(0, 3);
+		m_progressDialog->progressBar()->setFormat(QString());
+		m_progressDialog->progressBar()->setRange(0, 3);
 		connect(m_progressDialog, SIGNAL(cancelClicked()),
 			SIGNAL(disconnectedError()));
 	}
 
 	if (s == REMOTE_VIEW_CONNECTING) {
-		m_progress->setValue(0);
 		m_progressDialog->setLabel(i18n("Establishing connection..."));
 		showProgressDialog();
+		m_progressDialog->progressBar()->setValue(0);
 	}
 	else if (s == REMOTE_VIEW_AUTHENTICATING) {
-		m_progress->setValue(1);
 		m_progressDialog->setLabel(i18n("Authenticating..."));
+		m_progressDialog->progressBar()->setValue(1);
 	}
 	else if (s == REMOTE_VIEW_PREPARING) {
-		m_progress->setValue(2);
 		m_progressDialog->setLabel(i18n("Preparing desktop..."));
+		m_progressDialog->progressBar()->setValue(2);
 	}
 	else if ((s == REMOTE_VIEW_CONNECTED) ||
 		 (s == REMOTE_VIEW_DISCONNECTED)) {
-		m_progress->setValue(3);
+	        m_progressDialog->progressBar()->setValue(3);
 		hideProgressDialog();
 		if (s == REMOTE_VIEW_CONNECTED) {
 			QObject::disconnect(m_view, SIGNAL(disconnectedError()),
@@ -379,7 +379,7 @@ KActionMenu *KRDC::createActionMenu(QWidget *parent) const {
 	{
 		new KAction(i18n("View Only"),
 					m_actionCollection, "popupmenu_view_only");
-    }
+	}
 
 	action->setCheckable(true);
 	action->setChecked(m_view->viewOnly());

@@ -77,7 +77,6 @@ private:
 	SmartPtr<KProgressDialog> m_progressDialog; // dialog, displayed while connecting
 	QVBoxLayout *m_layout;     // the layout for autosizing the scrollview
 	Q3ScrollView *m_scrollView; // scrollview that contains the remote widget
-	KProgressBar *m_progress;             // progress bar for the dialog
 	KRemoteView *m_view;                  // the remote widget (e.g. KVncView)
 
 	SmartPtr<KeyCaptureDialog> m_keyCaptureDialog; // dialog for key capturing
