@@ -25,7 +25,7 @@
 #include <kmessagebox.h>
 #include <kstandarddirs.h>
 #include <kpassworddialog.h>
-#include <kdialogbase.h>
+#include <kdialog.h>
 #include <kwallet.h>
 
 #include <qdatastream.h>
@@ -39,7 +39,8 @@
 #include <Q3ValueList>
 #include <QMouseEvent>
 #include <QCustomEvent>
-#include <dcopclient.h>
+#warning Need some dbus equivalent here.
+// #include <dcopclient.h>
 #include <qclipboard.h>
 #include <qbitmap.h>
 #include <qmutex.h>
@@ -69,7 +70,7 @@ static Q3CString password;
 static QMutex passwordLock;
 static QWaitCondition passwordWaiter;
 
-const unsigned int MAX_SELECTION_LENGTH = 4096;
+const int MAX_SELECTION_LENGTH = 4096;
 
 
 KVncView::KVncView(QWidget *parent,
@@ -95,7 +96,7 @@ KVncView::KVncView(QWidget *parent,
   m_cursorState(dotCursorState)
 {
 	kvncview = this;
-	password = _password.latin1();
+	password = _password.toLatin1();
 	dpy = QX11Info::display();
 	setFixedSize(16,16);
 	setFocusPolicy(Qt::StrongFocus);
@@ -191,7 +192,7 @@ void KVncView::configureApp(Quality q, const QString specialEncodings) {
 	}
 
 	if (!specialEncodings.isNull())
-		appData.encodingsString = specialEncodings.latin1();
+		appData.encodingsString = specialEncodings.toLatin1();
 
 	appData.nColours = 256;
 	appData.useSharedColours = 1;
@@ -208,6 +209,8 @@ void KVncView::configureApp(Quality q, const QString specialEncodings) {
 bool KVncView::checkLocalKRfb() {
 	if ( m_host != "localhost" && !m_host.isEmpty() )
 		return true;
+	#warning port this to dbus
+#if 0
 	DCOPClient *d = KApplication::dcopClient();
 
 	int portNum;
@@ -232,6 +235,7 @@ bool KVncView::checkLocalKRfb() {
 			   i18n("It is not possible to connect to a local desktop sharing service."),
 			   i18n("Connection Failure"));
 	emit disconnectedError();
+#endif
 	return false;
 }
 
@@ -250,11 +254,16 @@ bool KVncView::start() {
 		bool kwallet = hp->useKWallet();
 		if (hp->askOnConnect()) {
 			// show preferences dialog
-			KDialogBase *dlg = new KDialogBase( this, "dlg", true,
-				i18n( "VNC Host Preferences for %1", m_host ),
-				KDialogBase::Ok|KDialogBase::Cancel, KDialogBase::Ok, true );
+			KDialog *dlg = new KDialog( this );
+			dlg->setObjectName( "hpPrefsDlg" );
+			dlg->setModal( true );
+			dlg->setCaption( i18n( "VNC Host Preferences for %1", m_host ) );
+			dlg->setButtons( KDialog::Ok | KDialog::Cancel );
+			dlg->setDefaultButton( KDialog::Ok );
+			dlg->showButtonSeparator( true );
 
-			KVBox *vbox = dlg->makeVBoxMainWidget();
+			KVBox *vbox = new KVBox( this );
+			dlg->setMainWidget( vbox );
 			VncPrefs *prefs = new VncPrefs( vbox );
 			QWidget *spacer = new QWidget( vbox );
 			vbox->setStretchFactor( spacer, 10 );
@@ -436,7 +445,7 @@ void KVncView::customEvent(QCustomEvent *e)
 				wallet->setFolder(krdc_folder);
 				QString newPass;
 				if ( wallet->hasEntry(kvncview->host()) && !wallet->readPassword(kvncview->host(), newPass) ) {
-					password=newPass.latin1();
+					password=newPass.toLatin1();
 				}
 			}
 		}
@@ -601,6 +610,8 @@ void KVncView::wheelEvent(QWheelEvent *e) {
 }
 
 void KVncView::pressKey(XEvent *xe) {
+#warning port me - KKeyNative should become an int
+#if 0
 	KKeyNative k(xe);
 	uint mod = k.mod();
 	if (mod & KKeyNative::modXShift())
@@ -625,9 +636,12 @@ void KVncView::pressKey(XEvent *xe) {
 		m_wthread.queueKeyEvent(XK_Shift_L, false);
 
 	m_mods.clear();
+#endif
 }
 
 bool KVncView::x11Event(XEvent *e) {
+#warning port me - KKeyNative should become an int
+#if 0
 	bool pressed;
 	if (e->type == KeyPress)
 		pressed = true;
@@ -657,6 +671,7 @@ bool KVncView::x11Event(XEvent *e) {
 		}
 		m_wthread.queueKeyEvent(s, pressed);
 	}
+#endif
 	return true;
 }
 
@@ -741,6 +756,7 @@ void KVncView::enableClientCursor(bool enable) {
 	locks and signals are there to protect against deadlocks and other
 	horribleness. Be careful making changes here.
 */
+#warning is this shared with something in kdelibs?
 int getPassword(char *passwd, int pwlen) {
 	int retV = 0;
 
