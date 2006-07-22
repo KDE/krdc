@@ -20,7 +20,7 @@
 
 
 #include <qwidget.h>
-#include <kkeynative.h>
+// #include <kkeynative.h>
 #include "events.h"
 
 typedef enum {

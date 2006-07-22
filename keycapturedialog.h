@@ -17,10 +17,10 @@
 class KeyCaptureWidget;
 
 #include <kshortcut.h>
-#include <kkeynative.h>
-#include <kdialogbase.h>
+// #include <kkeynative.h>
+#include <kdialog.h>
 
-class KeyCaptureDialog : public KDialogBase {
+class KeyCaptureDialog : public KDialog {
 	Q_OBJECT
 
 	bool m_grabbed;

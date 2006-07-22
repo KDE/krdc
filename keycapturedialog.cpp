@@ -44,9 +44,17 @@ const int XKeyRelease = KeyRelease;
 
 
 KeyCaptureDialog::KeyCaptureDialog(QWidget *parent, const char *name)
-    : KDialogBase(parent, name, true, i18n( "Enter Key Combination" ),
-      Cancel, Cancel, true), m_grabbed(false) {
-  QFrame *main = makeMainWidget();
+  : KDialog( parent ), m_grabbed(false) {
+  setObjectName( name );
+  setModal( true );
+  setCaption( i18n( "Enter Key Combination" ) );
+  setButtons( Cancel );
+  setDefaultButton( Cancel );
+  showButtonSeparator( true );
+
+  QFrame *main = new QFrame();
+  setMainWidget( main );
+
   QVBoxLayout *layout = new QVBoxLayout( main );
   layout->setSpacing( KDialog::spacingHint() );
   layout->setMargin( 0 );
@@ -90,6 +98,8 @@ bool KeyCaptureDialog::x11Event(XEvent *pEvent)
 
 void KeyCaptureDialog::x11EventKeyPress( XEvent *pEvent )
 {
+#warning PortMe
+#if 0
 	// taken from kshortcutdialog.h
 	KKeyNative keyNative( pEvent );
 	uint keyModX = keyNative.mod(), keySymX = keyNative.sym();
@@ -136,6 +146,7 @@ void KeyCaptureDialog::x11EventKeyPress( XEvent *pEvent )
 
 	// Display currently selected modifiers, or redisplay old key.
 	m_captureWidget->keyLabel->setText( keyModStr );
+#endif
 }
 
 #include "keycapturedialog.moc"

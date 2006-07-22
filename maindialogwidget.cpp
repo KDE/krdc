@@ -48,10 +48,10 @@ class UrlListViewItem : public K3ListViewItem
       if ( !type.isNull() )
       {
         //User connects to somebody else's desktop, used for krfb
-        if ( type.lower() == "shared" )
+        if ( type.toLower() == "shared" )
           setText( 1, i18n( "Shared Desktop" ) );
         //User connects to desktop that exists only on the network
-        else if ( type.lower() == "private" )
+        else if ( type.toLower() == "private" )
           setText( 1, i18n( "Standalone Desktop" ) );
       }
       if ( !desc.isNull() )
@@ -317,7 +317,7 @@ QString type = service->type().mid(1,3);
 if (type == "rfb") type = "vnc";
 QString url = type+"://"+service->hostName()+':'+QString::number(service->port());
 new UrlListViewItem( m_browsingView, url, service->serviceName(),
-     type.upper(),service->textData()["type"],
+     type.toUpper(),service->textData()["type"],
      service->textData()["u"],service->textData()["fullname"],
      service->textData()["description"],service->serviceName()+service->domain());
 }
@@ -360,7 +360,7 @@ void MainDialogWidget::foundScopes( QStringList scopeList )
   m_scopeCombo->clear();
   m_scopeCombo->insertStringList( scopeList );
   if ( ct >= 0 )
-    m_scopeCombo->setCurrentItem( ct );
+    m_scopeCombo->setCurrentIndex( ct );
   finishScanning();
 }
 
