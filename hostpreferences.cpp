@@ -72,7 +72,7 @@ HostPreferences::~HostPreferences() {
 
 HostPrefPtr HostPreferences::getHostPref(const QString &host, const QString &type) {
 	m_config->setGroup("PerHostSettings");
-	if (!m_config->readBoolEntry(HostPref::prefix(host, type)+"exists"))
+	if (!m_config->readEntry(HostPref::prefix(host, type)+"exists",false))
 		return 0;
 
 	if (type == VncHostPref::VncType) {
@@ -168,7 +168,7 @@ void HostPreferences::setServerHistory( const QStringList &list )
 bool HostPreferences::showBrowsingPanel()
 {
 	m_config->setGroup( QString::null );
-	return m_config->readBoolEntry( "browsingPanel" );
+	return m_config->readEntry( "browsingPanel",false );
 }
 
 QStringList HostPreferences::serverCompletions()
