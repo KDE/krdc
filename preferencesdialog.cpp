@@ -38,12 +38,14 @@ PreferencesDialog::PreferencesDialog( QWidget *parent, const char *name )
   setDefaultButton( Ok );
   showButtonSeparator( true );
 
-  KVBox *page = new KVBox();
-  KPageWidgetItem *hostProfileItem = addPage( page, i18n( "&Host Profiles" ) );
+  KVBox *page;
+  page = new KVBox();
+  addPage( page, i18n( "&Host Profiles" ) );
 
   m_hostProfiles = new HostProfiles( page, "m_hostProfiles" );
 
-  KPageWidgetItem *vncItem = addPage( page, i18n( "&VNC Defaults" ) );
+  page = new KVBox();
+  addPage( page, i18n( "&VNC Defaults" ) );
   m_vncPrefs = new VncPrefs( page, "m_vncPrefs" );
 
   QWidget *spacer = new QWidget( page );
@@ -53,7 +55,8 @@ PreferencesDialog::PreferencesDialog( QWidget *parent, const char *name )
   m_vncPrefs->cbShowPrefs->setText( i18n( "Do not &show the preferences "
                                           "dialog on new connections" ) );
 
-  KPageWidgetItem *rdpItem = addPage( page, i18n( "RD&P Defaults" ) );
+  page = new KVBox();
+  addPage( page, i18n( "RD&P Defaults" ) );
   m_rdpPrefs = new RdpPrefs( page, "m_rdpPrefs" );
   spacer = new QWidget( page );
   page->setStretchFactor( spacer, 10 );
