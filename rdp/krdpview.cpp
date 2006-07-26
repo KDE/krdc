@@ -279,11 +279,13 @@ bool KRdpView::start()
 	*m_process << "-X" << ("0x" + QString::number(m_container->winId(), 16));
 	*m_process << "-a" << QString::number(hp->colorDepth());
 	*m_process << (m_host + ':' + QString::number(m_port));
+
+	kDebug() << "KProcess args: " << m_process->args() << endl;
+
 	connect(m_process, SIGNAL(processExited(KProcess *)), SLOT(processDied(KProcess *)));
 	connect(m_process, SIGNAL(receivedStderr(KProcess *, char *, int)), SLOT(receivedStderr(KProcess *, char *, int)));
 	connect(m_container, SIGNAL(embeddedWindowDestroyed()), SLOT(connectionClosed()));
 	connect(m_container, SIGNAL(newEmbeddedWindow(WId)), SLOT(connectionOpened(WId)));
-  qDebug("Color depth: %d", hp->colorDepth());
 	if(!m_process->start(KProcess::NotifyOnExit, KProcess::Stderr))
 	{
 		KMessageBox::error(0, i18n("Could not start rdesktop; make sure rdesktop is properly installed."),
