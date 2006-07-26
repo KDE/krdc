@@ -25,7 +25,7 @@ set(krdc_SRCS
 
 kde4_automoc(${krdc_SRCS})
 
-kde4_add_ui3_files(krdc_SRCS hostprofiles.ui3 maindialogbase.ui3 keycapturewidget.ui3 )
+kde4_add_ui3_files(krdc_SRCS hostprofiles.ui maindialogbase.ui keycapturewidget.ui )
 
 kde4_add_executable(krdc ${krdc_SRCS})
 

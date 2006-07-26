@@ -10,6 +10,7 @@
 
 void RdpPrefs::resolutionChanged( int selection )
 {
+#warning including ui.h
   bool enable = (selection==3);
   spinWidth->setEnabled(enable);
   spinHeight->setEnabled(enable);

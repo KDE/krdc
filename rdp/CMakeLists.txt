@@ -10,7 +10,7 @@ set(krdc_rdp_SRCS
 
 kde4_automoc(${krdc_rdp_SRCS})
 
-kde4_add_ui3_files(krdc_rdp_SRCS rdpprefs.ui3 )
+kde4_add_ui3_files(krdc_rdp_SRCS rdpprefs.ui )
 
 kde4_add_library(rdp STATIC ${krdc_rdp_SRCS})
 
