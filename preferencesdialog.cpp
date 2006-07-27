@@ -82,6 +82,8 @@ void PreferencesDialog::load()
   m_rdpPrefs->setRdpHeight( m_rdpDefaults->height() );
   m_rdpPrefs->setShowPrefs( m_rdpDefaults->askOnConnect() );
   m_rdpPrefs->setUseKWallet( m_rdpDefaults->useKWallet() );
+  m_rdpPrefs->setColorDepth( m_rdpDefaults->colorDepth() );
+  m_rdpPrefs->setKbLayout( keymap2int( m_rdpDefaults->layout() ));
   m_rdpPrefs->setResolution();
 }
 
@@ -95,9 +97,10 @@ void PreferencesDialog::save()
 
   m_rdpDefaults->setWidth( m_rdpPrefs->rdpWidth() );
   m_rdpDefaults->setHeight( m_rdpPrefs->rdpHeight() );
-  m_rdpDefaults->setLayout( rdpKeymaps[ m_rdpPrefs->kbLayout() ] );
+  m_rdpDefaults->setLayout( int2keymap( m_rdpPrefs->kbLayout() ));
   m_rdpDefaults->setAskOnConnect( m_rdpPrefs->showPrefs() );
   m_rdpDefaults->setUseKWallet( m_rdpPrefs->useKWallet() );
+  m_rdpDefaults->setColorDepth( m_rdpPrefs->colorDepth() );
 
   HostPreferences *hp = HostPreferences::instance();
   hp->sync();
