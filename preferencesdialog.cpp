@@ -23,7 +23,6 @@
 #include "vnc/vncprefs.h"
 #include "rdp/rdpprefs.h"
 
-#include <qcheckbox.h>
 #include <kvbox.h>
 
 #include <klocale.h>

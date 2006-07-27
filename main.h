@@ -18,7 +18,7 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-#include <qobject.h>
+#include <QObject>
 #include "krdc.h"
 #include "kremoteview.h"
 #include "smartptr.h"

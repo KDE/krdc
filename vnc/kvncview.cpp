@@ -28,7 +28,7 @@
 #include <kdialog.h>
 #include <kwallet.h>
 
-#include <qdatastream.h>
+#include <QDataStream>
 //Added by qt3to4:
 #include <kvbox.h>
 #include <QWheelEvent>
@@ -36,16 +36,15 @@
 #include <QFocusEvent>
 #include <QPaintEvent>
 #include <QEvent>
-#include <Q3ValueList>
+#include <QList>
 #include <QMouseEvent>
 #include <QCustomEvent>
 #warning Need some dbus equivalent here.
 // #include <dcopclient.h>
-#include <qclipboard.h>
-#include <qbitmap.h>
-#include <qmutex.h>
-#include <q3vbox.h>
-#include <qwaitcondition.h>
+#include <QClipboard>
+#include <QBitmap>
+#include <QMutex>
+#include <QWaitCondition>
 #include <QX11Info>
 #include "vncviewer.h"
 
@@ -676,8 +675,8 @@ bool KVncView::x11Event(XEvent *e) {
 }
 
 void KVncView::unpressModifiers() {
-	Q3ValueList<unsigned int> keys = m_mods.keys();
-	Q3ValueList<unsigned int>::const_iterator it = keys.begin();
+	QList<unsigned int> keys = m_mods.keys();
+	QList<unsigned int>::const_iterator it = keys.begin();
 	while (it != keys.end()) {
 		m_wthread.queueKeyEvent(*it, false);
 		it++;

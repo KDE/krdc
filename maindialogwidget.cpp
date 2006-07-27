@@ -18,8 +18,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include <qregexp.h>
-#include <qtimer.h>
+#include <QRegExp>
+#include <QTimer>
 
 #include <kcombobox.h>
 #include <kdebug.h>

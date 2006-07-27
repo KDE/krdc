@@ -30,10 +30,9 @@
 #include <kwin.h>
 #include <kstartupinfo.h>
 
-#include <q3dockarea.h>
-#include <qlabel.h>
+#include <Q3DockArea>
+#include <QLabel>
 
-#include <qtooltip.h>
 //Added by qt3to4:
 #include <QEvent>
 #include <Q3Frame>

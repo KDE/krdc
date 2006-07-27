@@ -14,10 +14,9 @@
 #ifndef HOSTPREFERENCES_H
 #define HOSTPREFERENCES_H
 
-#include <qstring.h>
-#include <qstringlist.h>
-//Added by qt3to4:
-#include <Q3ValueList>
+#include <QString>
+#include <QStringList>
+#include <QList>
 #include "smartptr.h"
 
 class HostPreferences;
@@ -46,8 +45,8 @@ public:
 	static QString prefix(const QString &host, const QString &type);
 };
 
-typedef SmartPtr<HostPref>      HostPrefPtr;
-typedef Q3ValueList<HostPrefPtr> HostPrefPtrList;
+typedef SmartPtr<HostPref> HostPrefPtr;
+typedef QList<HostPrefPtr> HostPrefPtrList;
 
 class HostPreferences {
 public:

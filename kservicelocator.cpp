@@ -24,15 +24,13 @@
 
 #include "kservicelocator.h"
 #include <kdebug.h>
-#include <qregexp.h>
-#include <qapplication.h>
-//Added by qt3to4:
+#include <QRegExp>
+#include <QApplication>
 #include <QCustomEvent>
 
 #ifdef HAVE_SLP
 #include <slp.h>
-#include <qevent.h>
-#include <qthread.h>
+#include <QThread>
 #endif
 
 const QString KServiceLocator::DEFAULT_AUTHORITY;

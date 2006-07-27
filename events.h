@@ -20,8 +20,6 @@
 #ifndef EVENTS_H
 #define EVENTS_H
 
-#include <qevent.h>
-//Added by qt3to4:
 #include <QCustomEvent>
 
 /**

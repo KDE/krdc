@@ -23,11 +23,10 @@
 #include <kmessagebox.h>
 #include <kdebug.h>
 #include <kwallet.h>
-#include <qwindowdefs.h>
-#include <qtimer.h>
-#include <qfile.h>
-#include <qtextstream.h>
-#include <qregexp.h>
+#include <QTimer>
+#include <QFile>
+#include <QTextStream>
+#include <QRegExp>
 
 #include "../config.h"
 #include "main.h"

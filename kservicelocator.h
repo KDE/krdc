@@ -21,13 +21,12 @@
 #ifndef __KSERVICELOCATOR_H
 #define __KSERVICELOCATOR_H
 
-#include <qobject.h>
-#include <qmap.h>
-#include <qstringlist.h>
-//Added by qt3to4:
-#include <QCustomEvent>
+#include <QObject>
+#include <QMap>
+#include <QStringList>
 
 class KServiceLocatorPrivate;
+class QCustomEvent;
 
 /**
  * KServiceLocator allows you to search the network for service types,

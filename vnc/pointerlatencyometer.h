@@ -15,7 +15,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <qdatetime.h>
+#include <QTime>
 #include <kdebug.h>
 
 struct PointerState {

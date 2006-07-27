@@ -18,12 +18,11 @@
 #ifndef KFULLSCREENPANEL_H
 #define KFULLSCREENPANEL_H
 
-#include <qwidget.h>
-#include <qlayout.h>
-#include <qevent.h>
-#include <qtimer.h>
-//Added by qt3to4:
-#include <QVBoxLayout>
+#include <QWidget>
+#include <QTimer>
+
+class QVBoxLayout;
+class QEvent;
 
 class Counter : public QObject {
 	Q_OBJECT

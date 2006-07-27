@@ -19,8 +19,8 @@
 #include <kconfig.h>
 #include <kstaticdeleter.h>
 
-#include <qregexp.h>
-#include <qmap.h>
+#include <QRegExp>
+#include <QMap>
 #include <kglobal.h>
 
 HostPreferences *HostPreferences::m_instance = 0;

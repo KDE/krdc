@@ -23,9 +23,8 @@
 #include "vncviewer.h"
 #include "threads.h"
 
-#include <q3cstring.h>
-//Added by qt3to4:
-#include <Q3ValueList>
+#include <QList>
+#include <Q3CString>
 #include <Q3MemArray>
 
 // Maximum idle time for writer thread in ms. When it timeouts, it will request
@@ -208,8 +207,8 @@ bool WriterThread::sendUpdateRequest(const QRegion &region) {
 	return true;
 }
 
-bool WriterThread::sendInputEvents(const Q3ValueList<InputEvent> &events) {
-	Q3ValueList<InputEvent>::const_iterator it = events.begin();
+bool WriterThread::sendInputEvents(const QList<InputEvent> &events) {
+	QList<InputEvent>::const_iterator it = events.begin();
 	while (it != events.end()) {
 		if ((*it).type == KeyEventType) {
 			if (!SendKeyEvent((*it).e.k.k, (*it).e.k.down ? True : False))
@@ -313,7 +312,7 @@ void WriterThread::run() {
 	bool incrementalUpdateRQ = false;
 	bool incrementalUpdateAnnounced = false;
 	QRegion updateRegionRQ;
-	Q3ValueList<InputEvent> inputEvents;
+	QList<InputEvent> inputEvents;
 	QString clientCut;
 
 	while (!m_quitFlag) {

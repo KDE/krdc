@@ -19,8 +19,8 @@
 #define KVNCVIEW_H
 
 #include "kremoteview.h"
-#include <qcursor.h>
-#include <qmap.h>
+#include <QCursor>
+#include <QMap>
 //Added by qt3to4:
 #include <QWheelEvent>
 #include <QFocusEvent>

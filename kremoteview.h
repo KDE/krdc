@@ -18,8 +18,7 @@
 #ifndef KREMOTEVIEW_H
 #define KREMOTEVIEW_H
 
-
-#include <qwidget.h>
+#include <QWidget>
 // #include <kkeynative.h>
 #include "events.h"
 

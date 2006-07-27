@@ -20,18 +20,17 @@
 
 #include <kprogressbar.h>
 #include <kprogressdialog.h>
-#include <q3scrollview.h>
-#include <qlayout.h>
-#include <qsize.h>
-#include <qrect.h>
-#include <qtimer.h>
-#include <qdesktopwidget.h>
-//Added by qt3to4:
+#include <QSize>
+#include <QRect>
+#include <QTimer>
+#include <QDesktopWidget>
 #include <QPixmap>
 #include <QEvent>
 #include <QVBoxLayout>
-#include <Q3PopupMenu>
 #include <QMouseEvent>
+
+#include <Q3PopupMenu>
+#include <Q3ScrollView>
 
 #include "vnc/kvncview.h"
 #include "rdp/krdpview.h"
@@ -42,7 +41,6 @@
 
 class KActionCollection;
 class KActionMenu;
-class QPixmap;
 class KToolBar;
 class Q3PopupMenu;
 class Q3DockArea;
