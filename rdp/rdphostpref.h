@@ -23,21 +23,29 @@
 #include "hostpreferences.h"
 
 static const QString rdpKeymaps[] = { "ar",
+                                      "cs",
                                       "da",
                                       "de",
+                                      "de-ch",
                                       "en-gb",
                                       "en-us",
                                       "es",
+                                      "et",
                                       "fi",
                                       "fr",
                                       "fr-be",
+                                      "fr-ca",
+                                      "fr-ch",
                                       "hr",
                                       "hu",
+                                      "is",
                                       "it",
                                       "ja",
                                       "lt",
                                       "lv",
                                       "mk",
+                                      "nl",
+                                      "nl-be",
                                       "no",
                                       "pl",
                                       "pt",
@@ -47,8 +55,8 @@ static const QString rdpKeymaps[] = { "ar",
                                       "sv",
                                       "th",
                                       "tr" };
-static const int rdpNumKeymaps = 25;
-static const int rdpDefaultKeymap = 4; // en-us
+static const int rdpNumKeymaps = 34;
+static const int rdpDefaultKeymap = 8; // en-us
 
 inline int keymap2int(QString &keymap)
 {
