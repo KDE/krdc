@@ -9,13 +9,13 @@
 
 void VncPrefs::setQuality( int quality )
 {
-  cmbQuality->setCurrentItem(quality);
+  cmbQuality->setCurrentIndex(quality);
 }
 
 
 int VncPrefs::quality()
 {
-  return cmbQuality->currentItem();
+  return cmbQuality->currentIndex();
 }
 
 

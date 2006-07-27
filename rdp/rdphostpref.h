@@ -56,7 +56,7 @@ static const QString rdpKeymaps[] = { "ar",
                                       "th",
                                       "tr" };
 static const int rdpNumKeymaps = 34;
-static const int rdpDefaultKeymap = 8; // en-us
+static const int rdpDefaultKeymap = 6; // en-us
 
 inline int keymap2int(const QString &keymap)
 {

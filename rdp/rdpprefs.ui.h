@@ -77,8 +77,8 @@ int RdpPrefs::rdpHeight()
 
 int RdpPrefs::colorDepth()
 {
-  qDebug("current depth: %i", cmbColorDepth->currentItem() );
-  switch (cmbColorDepth->currentItem())
+  qDebug("current depth: %i", cmbColorDepth->currentIndex() );
+  switch (cmbColorDepth->currentIndex())
   {
     case 0:
       return 8;
@@ -99,13 +99,13 @@ void RdpPrefs::setColorDepth(int depth)
   switch (depth)
   {
     case 8:
-      cmbColorDepth->setCurrentItem(0);
+      cmbColorDepth->setCurrentIndex(0);
       break;   
     case 16:
-      cmbColorDepth->setCurrentItem(1);
+      cmbColorDepth->setCurrentIndex(1);
       break;   
     case 24:
-      cmbColorDepth->setCurrentItem(2);
+      cmbColorDepth->setCurrentIndex(2);
       break;   
     default:
       break;	
@@ -116,47 +116,47 @@ void RdpPrefs::setResolution()
 {
   if (rdpWidth()==640 && rdpHeight()==480)
   {
-    cmbResolution->setCurrentItem(0);
+    cmbResolution->setCurrentIndex(0);
   }
   else if (rdpWidth()==800 && rdpHeight()==600)
   {
-    cmbResolution->setCurrentItem(1);
+    cmbResolution->setCurrentIndex(1);
   }
   else if (rdpWidth()==1024 && rdpHeight()==768)
   {
-    cmbResolution->setCurrentItem(2);
+    cmbResolution->setCurrentIndex(2);
   }
   else if (rdpWidth()==1280 && rdpHeight()==1024)
   {
-    cmbResolution->setCurrentItem(3);
+    cmbResolution->setCurrentIndex(3);
   }
   else if (rdpWidth()==1600 && rdpHeight()==1200)
   {
-    cmbResolution->setCurrentItem(4);
+    cmbResolution->setCurrentIndex(4);
   }
   else
   {
-    cmbResolution->setCurrentItem(5);
+    cmbResolution->setCurrentIndex(5);
   }
-  resolutionChanged( cmbResolution->currentItem() );
+  resolutionChanged( cmbResolution->currentIndex() );
 }
 
 
 int RdpPrefs::resolution()
 {
-  return cmbResolution->currentItem();
+  return cmbResolution->currentIndex();
 }
 
 
 void RdpPrefs::setKbLayout( int i )
 {
-  cmbKbLayout->setCurrentItem( i );
+  cmbKbLayout->setCurrentIndex( i );
 }
 
 
 int RdpPrefs::kbLayout()
 {
-  return cmbKbLayout->currentItem();
+  return cmbKbLayout->currentIndex();
 }
 
 
