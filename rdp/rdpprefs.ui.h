@@ -11,7 +11,7 @@
 void RdpPrefs::resolutionChanged( int selection )
 {
 #warning including ui.h
-  bool enable = (selection==3);
+  bool enable = (selection==5);
   spinWidth->setEnabled(enable);
   spinHeight->setEnabled(enable);
   widthLabel->setEnabled(enable);
@@ -35,6 +35,16 @@ void RdpPrefs::resolutionChanged( int selection )
       break;
 
     case 3:
+      spinWidth->setValue(1280);
+      spinHeight->setValue(1024);
+      break;
+
+    case 4:
+      spinWidth->setValue(1600);
+      spinHeight->setValue(1200);
+      break;
+
+    case 5:
     default:
       break;
   }
@@ -116,9 +126,17 @@ void RdpPrefs::setResolution()
   {
     cmbResolution->setCurrentItem(2);
   }
-  else
+  else if (rdpWidth()==1280 && rdpHeight()==1024)
   {
     cmbResolution->setCurrentItem(3);
+  }
+  else if (rdpWidth()==1600 && rdpHeight()==1200)
+  {
+    cmbResolution->setCurrentItem(4);
+  }
+  else
+  {
+    cmbResolution->setCurrentItem(5);
   }
 }
 
