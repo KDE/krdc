@@ -32,7 +32,7 @@
 //Added by qt3to4:
 #include <kvbox.h>
 #include <QWheelEvent>
-#include <Q3CString>
+#include <QByteArray>
 #include <QFocusEvent>
 #include <QPaintEvent>
 #include <QEvent>
@@ -65,7 +65,7 @@ static KVncView *kvncview;
 //Passwords and KWallet data
 extern KWallet::Wallet *wallet;
 bool useKWallet = false;
-static Q3CString password;
+static QByteArray password;
 static QMutex passwordLock;
 static QWaitCondition passwordWaiter;
 
@@ -411,7 +411,7 @@ void KVncView::customEvent(QCustomEvent *e)
 		emit showingPasswordDialog(true);
 
 		if (KPasswordDialog::getPassword(this,password, i18n("Access to the system requires a password.")) != KPasswordDialog::Accepted)
-			password = Q3CString();
+			password.clear();
 
 		emit showingPasswordDialog(false);
 

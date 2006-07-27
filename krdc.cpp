@@ -475,8 +475,8 @@ void KRDC::switchToFullscreen(bool scaling)
 	m_fsToolbarWidget = t;
 
 	QIcon pinIconSet;
-	pinIconSet.setPixmap(m_pinup, QIcon::Automatic, QIcon::Normal, QIcon::On);
-	pinIconSet.setPixmap(m_pindown, QIcon::Automatic, QIcon::Normal, QIcon::Off);
+	pinIconSet.addPixmap(m_pinup, QIcon::Normal, QIcon::On);
+	pinIconSet.addPixmap(m_pindown, QIcon::Normal, QIcon::Off);
 
 	KAction* action = new KAction(KIcon("pinup"), i18n("Autohide"), m_actionCollection, "pinup");
 	action->setToolTip(i18n("Autohide on/off"));
@@ -497,7 +497,7 @@ void KRDC::switchToFullscreen(bool scaling)
 	//advancedButton->setPopupDelay(0);
 
 	QLabel *hostLabel = new QLabel(t);
-	hostLabel->setName("kde toolbar widget");
+	hostLabel->setObjectName("kde toolbar widget");
 	hostLabel->setAlignment(Qt::AlignCenter);
 	hostLabel->setText("   "+m_host+"   ");
 	t->addWidget(hostLabel);

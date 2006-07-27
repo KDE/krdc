@@ -179,9 +179,10 @@ void MainDialogWidget::itemSelected( Q3ListViewItem *item )
 {
   UrlListViewItem *u = ( UrlListViewItem* ) item;
   QRegExp rx( "^service:remotedesktop\\.kde:([^;]*)" );
-  if ( rx.search( u->url() ) < 0 )
-    m_serverInput->setCurrentText( u->url());
-    else m_serverInput->setCurrentText( rx.cap( 1 ) );
+  if ( rx.indexIn( u->url() ) < 0 )
+    m_serverInput->setItemText( m_serverInput->currentIndex(), u->url() );
+  else
+    m_serverInput->setItemText( m_serverInput->currentIndex(), rx.cap( 1 ) );
 }
 
 void MainDialogWidget::itemDoubleClicked( Q3ListViewItem *item )
@@ -223,7 +224,7 @@ void MainDialogWidget::rescan()
 
   if (m_scope == DNSSD_SCOPE) {
     kDebug() << "Scope is DNSSD\n";
-    m_locator_dnssd = new DNSSD::ServiceBrowser(QStringList::split(',',"_rfb._tcp,_rdp._tcp"),0,DNSSD::ServiceBrowser::AutoResolve);
+    m_locator_dnssd = new DNSSD::ServiceBrowser((QStringList() << "_rfb._tcp" << "_rdp._tcp"),0,DNSSD::ServiceBrowser::AutoResolve);
     connect(m_locator_dnssd,SIGNAL(serviceAdded(DNSSD::RemoteService::Ptr)),
       SLOT(addedService(DNSSD::RemoteService::Ptr)));
     connect(m_locator_dnssd,SIGNAL(serviceRemoved(DNSSD::RemoteService::Ptr)),
@@ -293,10 +294,10 @@ void MainDialogWidget::foundService( QString url, int )
 {
   QRegExp rx(  "^service:remotedesktop\\.kde:(\\w+)://([^;]+);(.*)$" );
 
-  if ( rx.search( url ) < 0 )
+  if ( rx.indexIn( url ) < 0 )
   {
     rx = QRegExp(  "^service:remotedesktop\\.kde:(\\w+)://(.*)$" );
-    if ( rx.search( url ) < 0 )
+    if ( rx.indexIn( url ) < 0 )
       return;
   }
 
@@ -352,13 +353,13 @@ void MainDialogWidget::foundScopes( QStringList scopeList )
 {
   scopeList << DNSSD_SCOPE;
 
-  int di = scopeList.findIndex( DEFAULT_SCOPE );
+  int di = scopeList.indexOf( DEFAULT_SCOPE );
   if ( di >= 0 )
     scopeList[ di ] = i18n( "default" );
 
-  int ct = scopeList.findIndex( m_scopeCombo->currentText() );
+  int ct = scopeList.indexOf( m_scopeCombo->currentText() );
   m_scopeCombo->clear();
-  m_scopeCombo->insertStringList( scopeList );
+  m_scopeCombo->addItems( scopeList );
   if ( ct >= 0 )
     m_scopeCombo->setCurrentIndex( ct );
   finishScanning();

@@ -24,8 +24,7 @@
 #include "threads.h"
 
 #include <QList>
-#include <Q3CString>
-#include <Q3MemArray>
+#include <QVector>
 
 // Maximum idle time for writer thread in ms. When it timeouts, it will request
 // another incremental update. Must be smaller than the timeout of the server
@@ -77,7 +76,7 @@ void ControllerThread::kick() {
 
 void ControllerThread::run() {
 	int fd;
-	fd = ConnectToRFBServer(m_view->host().latin1(), m_view->port());
+	fd = ConnectToRFBServer(m_view->host().toLatin1(), m_view->port());
 	if (fd < 0) {
 		if (fd == -(int)INIT_NO_SERVER)
 			sendFatalError(ERROR_NO_SERVER);
@@ -197,8 +196,8 @@ bool WriterThread::sendIncrementalUpdateRequest() {
 }
 
 bool WriterThread::sendUpdateRequest(const QRegion &region) {
-	Q3MemArray<QRect> r = region.rects();
-	for (unsigned int i = 0; i < r.size(); i++)
+	QVector<QRect> r = region.rects();
+	for (int i = 0; i < r.size(); i++)
 		if (!SendFramebufferUpdateRequest(r[i].x(),
 						  r[i].y(),
 						  r[i].width(),
@@ -324,7 +323,7 @@ void WriterThread::run() {
 		clientCut = m_clientCut;
 
 		if ((!incrementalUpdateRQ) &&
-		    (updateRegionRQ.isNull()) &&
+		    (updateRegionRQ.isEmpty()) &&
 		    (inputEvents.size() == 0) &&
 		    (clientCut.isNull())) {
 			if (!m_waiter.wait(&m_lock,
@@ -374,7 +373,7 @@ void WriterThread::run() {
 			else
 				m_lastIncrUpdatePostponed = false;
 
-			if (!updateRegionRQ.isNull())
+			if (!updateRegionRQ.isEmpty())
 				if (!sendUpdateRequest(updateRegionRQ)) {
 					sendFatalError(ERROR_IO);
 					break;
@@ -385,9 +384,8 @@ void WriterThread::run() {
 					break;
 				}
 			if (!clientCut.isNull())  {
-				Q3CString cutTextUtf8(clientCut.utf8());
-				if (!SendClientCutText(cutTextUtf8.data(),
-						       (int)cutTextUtf8.length())) {
+				QByteArray cutTextUtf8(clientCut.toUtf8());
+				if (!SendClientCutText(cutTextUtf8.data(), cutTextUtf8.length())) {
 					sendFatalError(ERROR_IO);
 					break;
 				}
