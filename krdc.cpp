@@ -42,6 +42,7 @@
 #include <Q3PopupMenu>
 #include <QMouseEvent>
 #include <QX11Info>
+#include <kicon.h>
 
 #define BUMP_SCROLL_CONSTANT (200)
 
