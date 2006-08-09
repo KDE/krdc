@@ -38,7 +38,9 @@ void vidmodeNormalSwitch(Display *dpy, Resolution oldResolution)
 	if (!XF86VidModeQueryExtension(dpy, &eventB, &errorB))
 		return;
 
-	XF86VidModeGetAllModeLines(dpy,oldResolution.screen,&modecount, &modes);
+	if (!XF86VidModeGetAllModeLines(dpy, oldResolution.screen, &modecount, &modes))
+		return;
+
 	for (int i = 0; i < modecount; i++) {
 		int w = (*modes[i]).hdisplay;
 		int h = (*modes[i]).vdisplay;
@@ -69,7 +71,9 @@ Resolution vidmodeFullscreenSwitch(Display *dpy, int screen,
 	if (!XF86VidModeQueryExtension(dpy, &eventB, &errorB))
 		return Resolution();
 
-	XF86VidModeGetAllModeLines(dpy,screen,&modecount, &modes);
+	if (!XF86VidModeGetAllModeLines(dpy,screen,&modecount, &modes))
+		return Resolution();
+
 	int cw = (*modes[0]).hdisplay;
 	int ch = (*modes[0]).vdisplay;
 	nx = cw;
