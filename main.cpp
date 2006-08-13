@@ -102,7 +102,7 @@ int main(int argc, char *argv[])
 	QString keymap;
 	WindowMode wm = WINDOW_MODE_AUTO;
 	bool scale = false;
-	bool localCursor = KGlobal::config()->readBoolEntry("alwaysShowLocalCursor", false);
+	bool localCursor = KGlobal::config()->readEntry("alwaysShowLocalCursor", false);
 	QSize initialWindowSize;
 	QString caption;
 

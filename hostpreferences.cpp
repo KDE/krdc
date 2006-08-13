@@ -174,13 +174,13 @@ bool HostPreferences::showBrowsingPanel()
 QStringList HostPreferences::serverCompletions()
 {
 	m_config->setGroup( QString::null );
-	return m_config->readListEntry( "serverCompletions" );
+	return m_config->readEntry( "serverCompletions", QStringList() );
 }
 
 QStringList HostPreferences::serverHistory()
 {
 	m_config->setGroup( QString::null );
-	return m_config->readListEntry( "serverHistory" );
+	return m_config->readEntry( "serverHistory", QStringList() );
 }
 
 void HostPreferences::sync() {

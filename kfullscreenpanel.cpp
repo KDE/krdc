@@ -53,7 +53,8 @@ void Counter::timeout() {
 	emit counted(m_currentValue);
 	
 	m_currentValue += m_stepSize;
-	m_timer.start(m_timeoutMs, true);
+	m_timer.setSingleShot(true);
+	m_timer.start(m_timeoutMs);
 }
 
 
