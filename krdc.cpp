@@ -192,7 +192,7 @@ bool KRDC::start()
 			break;
 	}
 
-	m_view->setViewOnly(KGlobal::config()->readBoolEntry("viewOnly", false));
+	m_view->setViewOnly(KGlobal::config()->readEntry("viewOnly", false));
 
 	m_scrollView->addChild(m_view);
 	m_view->setWhatsThis( i18n("Here you can see the remote desktop. If the other side allows you to control it, you can also move the mouse, click or enter keystrokes. If the content does not fit your screen, click on the toolbar's full screen button or scale button. To end the connection, just close the window."));
@@ -486,11 +486,11 @@ void KRDC::switchToFullscreen(bool scaling)
 	KToolBar *t = new KToolBar(m_fsToolbar);
 	m_fsToolbarWidget = t;
 
-	QIcon pinIconSet;
+	KIcon pinIconSet;
 	pinIconSet.addPixmap(m_pinup, QIcon::Normal, QIcon::On);
 	pinIconSet.addPixmap(m_pindown, QIcon::Normal, QIcon::Off);
 
-	KAction* action = new KAction(KIcon("pinup"), i18n("Autohide"), m_actionCollection, "pinup");
+	KAction* action = new KAction(pinIconSet, i18n("Autohide"), m_actionCollection, "pinup");
 	action->setToolTip(i18n("Autohide on/off"));
 	action->setCheckable(true);
 	connect(action, SIGNAL(toggled(bool)), this, SLOT(setFsToolbarAutoHide(bool)));
