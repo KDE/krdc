@@ -762,7 +762,7 @@ void KRDC::setSize(int w, int h)
 
 	switch (m_isFullscreen) {
 	case WINDOW_MODE_AUTO:
-		if ((w >= dw) || (h >= dh))
+		if ((w > dw) || (h > dh))
 			switchToFullscreen(m_windowScaling);
 		else
 			switchToNormal(m_windowScaling);
