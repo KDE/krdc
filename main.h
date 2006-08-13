@@ -36,6 +36,7 @@ private:
 	QSize m_initialWindowSize;
 	QString m_keymap;
 	Quality m_quality;
+	QString m_caption;
 
 	KApplication *m_app;
 
@@ -47,7 +48,8 @@ public:
 		       const QString &password,
 		       bool scale,
 		       bool localCursor,
-		       QSize initialWindowSize);
+		       QSize initialWindowSize,
+		       QString &caption);
 	~MainController();
 	int main();
 	bool start();

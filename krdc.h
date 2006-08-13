@@ -115,6 +115,7 @@ private:
 	                              // invalid after first use
 	static QString m_lastHost; // remembers last value of host input
 	KActionCollection* m_actionCollection; // used to hold all our KActions for toolbars and menus
+	QString m_caption;             // window caption - normally a command line argument 
 
 	bool parseHost(QString &s, Protocol &prot, QString &serverHost, int &serverPort,
 	               QString &userName, QString &password);
@@ -144,7 +145,8 @@ public:
 	     const QString &password = QString::null,
 	     bool scale = false,
 	     bool localCursor = false,
-	     QSize initialWindowSize = QSize());
+	     QSize initialWindowSize = QSize(),
+	     const QString &caption = QString::null );
 	~KRDC();
 
 	bool start();

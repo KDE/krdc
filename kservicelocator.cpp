@@ -108,8 +108,9 @@ public:
 };
 
 KServiceLocator::KServiceLocator(const QString &lang, bool async) :
-	QObject(0, "KServiceLocator") {
-
+	QObject(0 )
+{
+        setObjectName( "KServiceLocator" );
 	d = new KServiceLocatorPrivate(this, lang, async);
 }
 

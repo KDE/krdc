@@ -104,6 +104,7 @@ int main(int argc, char *argv[])
 	bool scale = false;
 	bool localCursor = KGlobal::config()->readBoolEntry("alwaysShowLocalCursor", false);
 	QSize initialWindowSize;
+	QString caption;
 
 	KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
 
@@ -142,19 +143,22 @@ int main(int argc, char *argv[])
 	if (args->count() > 0)
 		host = args->arg(0);
 
-    QString is;
-    args = KCmdLineArgs::parsedArgs("kde");
-    if (args && args->isSet("geometry"))
-            is = args->getOption("geometry");
+	QString is;
+	args = KCmdLineArgs::parsedArgs("kde");
+	if (args && args->isSet("geometry"))
+	        is = args->getOption("geometry");
 	if (!is.isNull()) {
-		QRegExp re("([0-9]+)[xX]([0-9]+)");
+	        QRegExp re("([0-9]+)[xX]([0-9]+)");
 		if (!re.exactMatch(is))
-			args->usage(i18n("Wrong geometry format, must be widthXheight"));
+		        args->usage(i18n("Wrong geometry format, must be widthXheight"));
 		initialWindowSize = QSize(re.cap(1).toInt(), re.cap(2).toInt());
 	}
 
+	if (args && args->isSet("caption"))
+	  caption = args->getOption("caption");
+
 	MainController mc(&a, wm, host, quality, encodings, password,
-			  scale, localCursor, initialWindowSize);
+			  scale, localCursor, initialWindowSize, caption);
 	return mc.main();
 }
 
@@ -165,7 +169,8 @@ MainController::MainController(KApplication *app, WindowMode wm,
 			       const QString &password,
 			       bool scale,
 			       bool localCursor,
-			       QSize initialWindowSize) :
+			       QSize initialWindowSize,
+			       QString &caption) :
         m_windowMode(wm),
 	m_host(host),
         m_encodings(encodings),
@@ -174,6 +179,7 @@ MainController::MainController(KApplication *app, WindowMode wm,
 	m_localCursor(localCursor),
 	m_initialWindowSize(initialWindowSize),
 	m_quality(quality),
+	m_caption(caption),
 	m_app(app) {
 }
 
@@ -198,7 +204,8 @@ void MainController::errorRestartRequested() {
 bool MainController::start() {
 	m_krdc = new KRDC(m_windowMode, m_host,
 			  m_quality, m_encodings, m_password,
-			  m_scale, m_localCursor, m_initialWindowSize);
+			  m_scale, m_localCursor, m_initialWindowSize,
+			  m_caption);
 
 	QObject::connect(m_krdc, SIGNAL(disconnected()),
 			 m_app, SLOT(quit()));

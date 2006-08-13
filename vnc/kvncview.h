@@ -61,6 +61,7 @@ private:
 	bool m_dontSendCb;
 	QCursor m_cursor;
 	DotCursorState m_cursorState;
+	QString m_caption;
 	PointerLatencyOMeter m_plom;
 
 	void mouseEvent(QMouseEvent*);
@@ -72,7 +73,7 @@ private:
 
 protected:
 	void paintEvent(QPaintEvent*);
-	void customEvent(QCustomEvent*);
+	void customEvent(QEvent*);
 	void mousePressEvent(QMouseEvent*);
 	void mouseDoubleClickEvent(QMouseEvent*);
 	void mouseReleaseEvent(QMouseEvent*);
@@ -87,7 +88,8 @@ public:
 		 const QString &password = QString::null,
 		 Quality quality = QUALITY_UNKNOWN,
 		 DotCursorState dotCursorState = DOT_CURSOR_AUTO,
-		 const QString &encodings = QString::null);
+		 const QString &encodings = QString::null,
+		 const QString &caption = QString::null);
 	~KVncView();
 	QSize sizeHint();
 	void drawRegion(int x, int y, int w, int h);

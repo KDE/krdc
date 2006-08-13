@@ -79,7 +79,8 @@ KVncView::KVncView(QWidget *parent,
 		   const QString &_password,
 		   Quality quality,
 		   DotCursorState dotCursorState,
-		   const QString &encodings) :
+		   const QString &encodings,
+		   const QString &caption) :
   KRemoteView(parent, name, Qt::WResizeNoErase | Qt::WNoAutoErase | Qt::WStaticContents),
   m_cthread(this, m_wthread, m_quitFlag),
   m_wthread(this, m_quitFlag),
@@ -92,7 +93,8 @@ KVncView::KVncView(QWidget *parent,
   m_host(_host),
   m_port(_port),
   m_dontSendCb(false),
-  m_cursorState(dotCursorState)
+  m_cursorState(dotCursorState),
+  m_caption(caption)
 {
 	kvncview = this;
 	password = _password.toLatin1();
@@ -372,7 +374,7 @@ void KVncView::drawRegion(int x, int y, int w, int h) {
 		DrawScreenRegionX11Thread(winId(), x, y, w, h);
 }
 
-void KVncView::customEvent(QCustomEvent *e)
+void KVncView::customEvent(QEvent *e)
 {
 	if (e->type() == ScreenRepaintEventType) {
 		ScreenRepaintEvent *sre = (ScreenRepaintEvent*) e;

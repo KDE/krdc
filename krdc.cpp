@@ -72,7 +72,8 @@ KRDC::KRDC(WindowMode wm, const QString &host,
 	   const QString &password,
 	   bool scale,
 	   bool localCursor,
-	   QSize initialWindowSize) :
+	   QSize initialWindowSize,
+	   const QString &caption ) :
   QWidget(0, Qt::WStyle_ContextHelp),
   m_layout(0),
   m_scrollView(0),
@@ -94,7 +95,8 @@ KRDC::KRDC(WindowMode wm, const QString &host,
   m_windowScaling(scale),
   m_localCursor(localCursor),
   m_initialWindowSize(initialWindowSize),
-  m_actionCollection(new KActionCollection(this))
+  m_actionCollection(new KActionCollection(this)),
+  m_caption(caption)
 {
 	connect(&m_autoHideTimer, SIGNAL(timeout()), SLOT(hideFullscreenToolbarNow()));
 	connect(&m_bumpScrollTimer, SIGNAL(timeout()), SLOT(bumpScroll()));
@@ -175,12 +177,18 @@ bool KRDC::start()
 			                      m_password.isEmpty() ? password : m_password,
 			                      m_quality,
 			                      m_localCursor ? DOT_CURSOR_ON : DOT_CURSOR_AUTO,
-			                      m_encodings);
+			                      m_encodings,
+					      m_caption);
 			break;
 
 		case PROTOCOL_RDP:
 			m_view = new KRdpView(this, 0, serverHost, serverPort,
-			                      userName, m_password.isEmpty() ? password : m_password);
+			                      userName, m_password.isEmpty() ? password : m_password,
+					      RDP_LOGON_NORMAL, // flags
+					      QString::null, // domain
+					      QString::null, // shell
+					      QString::null, // directory
+					      m_caption);
 			break;
 	}
 
@@ -201,7 +209,6 @@ bool KRDC::start()
 		SLOT(showingPasswordDialog(bool)));
 	connect(m_keyCaptureDialog, SIGNAL(keyPressed(XEvent*)),
 		m_view, SLOT(pressKey(XEvent*)));
-
 	return m_view->start();
 }
 
@@ -371,23 +378,27 @@ QSize KRDC::sizeHint()
 		return m_view->framebufferSize();
 }
 
-KActionMenu *KRDC::createActionMenu(QWidget *parent) const {
+KActionMenu *KRDC::createActionMenu(QWidget *parent) const
+{
 	KActionMenu *pu = new KActionMenu(KIcon("configure"), i18n("Advanced"),
-									m_actionCollection, "configure");
-	m_popup->setToolTip(i18n("Advanced options"));
+					  m_actionCollection, "configure");
+
+	if (m_popup)
+	        m_popup->setToolTip(i18n("Advanced options"));
 
 	KAction* action = m_actionCollection->action("popupmenu_view_only");
 
 	if (!action)
 	{
 		new KAction(i18n("View Only"),
-					m_actionCollection, "popupmenu_view_only");
+			    m_actionCollection,
+			    "popupmenu_view_only");
+	} else {
+	  	action->setCheckable(true);
+		action->setChecked(m_view->viewOnly());
+		connect(action, SIGNAL(toggled()), this, SLOT(viewOnlyToggled()));
+		pu->addAction(action);
 	}
-
-	action->setCheckable(true);
-	action->setChecked(m_view->viewOnly());
-	connect(action, SIGNAL(toggled()), this, SLOT(viewOnlyToggled()));
-	pu->addAction(action);
 
 	if (m_view->supportsLocalCursor()) {
 		KAction* action = m_actionCollection->action("popupmenu_local_cursor");
@@ -396,12 +407,12 @@ KActionMenu *KRDC::createActionMenu(QWidget *parent) const {
 		{
 			new KAction(i18n("Always Show Local Cursor"),
 						m_actionCollection, "popupmenu_local_cursor");
+		} else {
+		        action->setCheckable(true);
+			action->setChecked(m_view->dotCursorState() == DOT_CURSOR_ON);
+			connect(action, SIGNAL(toggled()), this, SLOT(showLocalCursorToggled()));
+			pu->addAction(action);
 		}
-
-		action->setCheckable(true);
-		action->setChecked(m_view->dotCursorState() == DOT_CURSOR_ON);
-		connect(action, SIGNAL(toggled()), this, SLOT(showLocalCursorToggled()));
-		pu->addAction(action);
 	}
 	return pu;
 }
@@ -482,7 +493,7 @@ void KRDC::switchToFullscreen(bool scaling)
 	KAction* action = new KAction(KIcon("pinup"), i18n("Autohide"), m_actionCollection, "pinup");
 	action->setToolTip(i18n("Autohide on/off"));
 	action->setCheckable(true);
-	connect(action, SIGNAL(toggled(bool)), this, SLOT(toggleFsToolbarAutoHide(bool)));
+	connect(action, SIGNAL(toggled(bool)), this, SLOT(setFsToolbarAutoHide(bool)));
 	t->addAction(action);
 
 	action = new KAction(KIcon("window_nofullscreen"), i18n("Fullscreen"),

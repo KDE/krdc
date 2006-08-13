@@ -61,7 +61,8 @@ class KRdpView : public KRemoteView
 		         const QString &host = QString::null, int port = TCP_PORT_RDP,
 		         const QString &user = QString::null, const QString &password = QString::null,
 		         int flags = RDP_LOGON_NORMAL, const QString &domain = QString::null,
-		         const QString &shell = QString::null, const QString &directory = QString::null);
+		         const QString &shell = QString::null, const QString &directory = QString::null,
+			 const QString &caption = QString::null);
 		virtual ~KRdpView();
 
 		// functions regarding the window
@@ -99,8 +100,10 @@ class KRdpView : public KRemoteView
 		RdpContainer *m_container;         // container for the rdesktop window
 		KProcess *m_process;               // rdesktop process
 
+		QString  m_caption;    // the caption to use on the window
+
 	private slots:
-		void connectionOpened(WId window); // called if rdesktop started
+		void connectionOpened();           // called if rdesktop started
 		void connectionClosed();           // called if rdesktop quits
 		void processDied(KProcess *);      // called if rdesktop dies
 		void receivedStderr(KProcess *proc, char *buffer, int buflen);

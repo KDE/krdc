@@ -20,6 +20,7 @@
 #ifndef EVENTS_H
 #define EVENTS_H
 
+#include <kdebug.h>
 #include <QCustomEvent>
 
 /**
@@ -59,77 +60,83 @@ enum ErrorCode {
 
 const int ScreenResizeEventType = 41001;
 
-class ScreenResizeEvent : public QCustomEvent
+class ScreenResizeEvent : public QEvent
 {
 private:
 	int m_width, m_height;
 public:
 	ScreenResizeEvent(int w, int h) :
-		QCustomEvent(ScreenResizeEventType),
+	        QEvent( (Type)ScreenResizeEventType ),
 		m_width(w),
 		m_height(h)
-	{};
+	{
+	  // kDebug() << "New ScreenResize: " << w << ", " << h << endl;
+	};
 	int width() const { return m_width; };
 	int height() const { return m_height; };
+	Type type() const { return (Type) ScreenResizeEventType; };
 };
 
 const int StatusChangeEventType = 41002;
 
-class StatusChangeEvent : public QCustomEvent
+class StatusChangeEvent : public QEvent
 {
 private:
 	RemoteViewStatus m_status;
 public:
 	StatusChangeEvent(RemoteViewStatus s) :
-		QCustomEvent(StatusChangeEventType),
+	        QEvent( (Type)StatusChangeEventType ),
 		m_status(s)
 	{};
 	RemoteViewStatus status() const { return m_status; };
+	Type type() const { return (Type)StatusChangeEventType; };
 };
 
 const int PasswordRequiredEventType = 41003;
 
-class PasswordRequiredEvent : public QCustomEvent
+class PasswordRequiredEvent : public QEvent
 {
 public:
 	PasswordRequiredEvent() :
-		QCustomEvent(PasswordRequiredEventType)
+	        QEvent( (Type)PasswordRequiredEventType )
 	{};
+	Type type() const { return (Type)PasswordRequiredEventType; };
 };
 
 const int FatalErrorEventType = 41004;
 
-class FatalErrorEvent : public QCustomEvent
+class FatalErrorEvent : public QEvent
 {
 	ErrorCode m_error;
 public:
 	FatalErrorEvent(ErrorCode e) :
-		QCustomEvent(FatalErrorEventType),
+	        QEvent( (Type)FatalErrorEventType ),
 		m_error(e)
 	{};
 
-	ErrorCode errorCode() const { return m_error; }
+	ErrorCode errorCode() const { return m_error; };
+	Type type() const { return (Type)FatalErrorEventType; };
 };
 
 const int DesktopInitEventType = 41005;
 
-class DesktopInitEvent : public QCustomEvent
+class DesktopInitEvent : public QEvent
 {
 public:
-	DesktopInitEvent() :
-		QCustomEvent(DesktopInitEventType)
-	{};
+        DesktopInitEvent() : QEvent( (Type)DesktopInitEventType )
+	  {};
+	  Type type() const { return (Type)DesktopInitEventType; };
 };
 
 const int ScreenRepaintEventType = 41006;
 
-class ScreenRepaintEvent : public QCustomEvent
+class ScreenRepaintEvent : public QEvent
 {
 private:
 	int m_x, m_y, m_width, m_height;
 public:
 	ScreenRepaintEvent(int x, int y, int w, int h) :
-		QCustomEvent(ScreenRepaintEventType),
+	        QEvent( (Type)ScreenRepaintEventType ),
 		m_x(x),
 		m_y(y),
 		m_width(w),
@@ -139,28 +146,29 @@ public:
 	int y() const { return m_y; };
 	int width() const { return m_width; };
 	int height() const { return m_height; };
+	Type type() const { return (Type)ScreenRepaintEventType; };
 };
 
 const int BeepEventType = 41007;
 
-class BeepEvent : public QCustomEvent
+class BeepEvent : public QEvent
 {
 public:
-	BeepEvent() :
-		QCustomEvent(BeepEventType)
-	{};
+        BeepEvent() : QEvent( (Type)BeepEventType)
+	  {};
+	Type type() const { return (Type)BeepEventType; };
 };
 
 const int ServerCutEventType = 41008;
 
-class ServerCutEvent : public QCustomEvent
+class ServerCutEvent : public QEvent
 {
 private:
 	char *m_bytes;
 	int m_length;
 public:
 	ServerCutEvent(char *bytes, int length) :
-		QCustomEvent(ServerCutEventType),
+	        QEvent( (Type)ServerCutEventType ),
 		m_bytes(bytes),
 		m_length(length)
 	{};
@@ -169,17 +177,18 @@ public:
 	}
 	int length() const { return m_length; };
 	char *bytes() const { return m_bytes; };
+	Type type() const { return (Type)ServerCutEventType; };
 };
 
 const int MouseStateEventType = 41009;
 
-class MouseStateEvent : public QCustomEvent
+class MouseStateEvent : public QEvent
 {
 private:
 	int m_x, m_y, m_buttonMask;
 public:
 	MouseStateEvent(int x, int y, int buttonMask) :
-		QCustomEvent(MouseStateEventType),
+	        QEvent( (Type)MouseStateEventType ),
 		m_x(x),
 		m_y(y),
 		m_buttonMask(buttonMask)
@@ -188,16 +197,16 @@ public:
 	}
 	int x() const { return m_x; };
 	int y() const { return m_y; };
-	int buttonMask() const { return m_buttonMask; };
+	Type buttonMask() const { return (Type)m_buttonMask; };
 };
 
 const int WalletOpenEventType = 41010;
 
-class WalletOpenEvent : public QCustomEvent
+class WalletOpenEvent : public QEvent
 {
 public:
 	WalletOpenEvent() :
-		QCustomEvent(WalletOpenEventType)
+	        QEvent( (Type)WalletOpenEventType )
 	{};
 };
 

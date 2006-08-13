@@ -93,7 +93,8 @@ KRdpView::KRdpView(QWidget *parent, const char *name,
                    const QString &host, int port,
                    const QString &user, const QString &password,
                    int flags, const QString &domain,
-                   const QString &shell, const QString &directory) :
+                   const QString &shell, const QString &directory,
+		   const QString &caption) :
   KRemoteView(parent, name, Qt::WResizeNoErase | Qt::WNoAutoErase | Qt::WStaticContents),
   m_name(name),
   m_host(host),
@@ -105,16 +106,17 @@ KRdpView::KRdpView(QWidget *parent, const char *name,
   m_shell(shell),
   m_directory(directory),
   m_quitFlag(false),
-  m_process(NULL)
+  m_process(NULL),
+  m_caption(caption)
 {
 	krdpview = this;
 	setFixedSize(16, 16);
-	if(m_port == 0)
+	if(m_port <= 0)
 	{
 		m_port = TCP_PORT_RDP;
 	}
 
-	m_container = new RdpContainer(this);
+	m_container = new RdpContainer(0);
 }
 
 // destructor
@@ -139,6 +141,7 @@ QSize KRdpView::sizeHint()
 // start closing the connection
 void KRdpView::startQuitting()
 {
+  kDebug() << "About to quit" << endl;
 	m_quitFlag = true;
 	if(m_process != NULL)
 	{
@@ -227,6 +230,7 @@ bool KRdpView::start()
 	}
 
 	m_container->show();
+	m_container->setWindowTitle( m_caption );
 
 	m_process = new KProcess(m_container);
 	*m_process << "rdesktop";
@@ -284,8 +288,8 @@ bool KRdpView::start()
 
 	connect(m_process, SIGNAL(processExited(KProcess *)), SLOT(processDied(KProcess *)));
 	connect(m_process, SIGNAL(receivedStderr(KProcess *, char *, int)), SLOT(receivedStderr(KProcess *, char *, int)));
-	connect(m_container, SIGNAL(embeddedWindowDestroyed()), SLOT(connectionClosed()));
-	connect(m_container, SIGNAL(newEmbeddedWindow(WId)), SLOT(connectionOpened(WId)));
+	connect(m_container, SIGNAL(clientClosed()), SLOT(connectionClosed()));
+	connect(m_container, SIGNAL(clientIsEmbedded()), SLOT(connectionOpened()));
 	if(!m_process->start(KProcess::NotifyOnExit, KProcess::Stderr))
 	{
 		KMessageBox::error(0, i18n("Could not start rdesktop; make sure rdesktop is properly installed."),
@@ -323,12 +327,14 @@ void KRdpView::setViewOnly(bool s)
 	m_container->m_viewOnly = s;
 }
 
-void KRdpView::connectionOpened(WId /*window*/)
+void KRdpView::connectionOpened()
 {
+  kDebug() << "Connection opened" << endl;
 	QSize size = m_container->sizeHint();
 
 	setStatus(REMOTE_VIEW_CONNECTED);
 	setFixedSize(size);
+	// m_container->adjustSize() ?
 	m_container->setFixedSize(size);
 	emit changeSize(size.width(), size.height());
 	emit connected();
@@ -356,8 +362,7 @@ void KRdpView::processDied(KProcess */*proc*/)
 		{
 			// FIXME: rdesktop 1.3.2 (or maybe 1.4.0) should be released by the time KDE 3.3 is released
 			KMessageBox::error(0, i18n("The version of rdesktop you are using (%1) is too old:\n"
-			                           "rdesktop 1.3.2 or greater is required. A working patch for "
-			                           "rdesktop 1.3.1 can be found in KDE SVN.", m_clientVersion),
+			                           "rdesktop 1.3.2 or greater is required.", m_clientVersion),
 			                      i18n("rdesktop Failure"));
 		}
 		emit disconnectedError();
@@ -376,6 +381,8 @@ void KRdpView::receivedStderr(KProcess */*proc*/, char *buffer, int /*buflen*/)
 			m_clientVersion = line.section(' ', 1, 1);
 			m_clientVersion = m_clientVersion.left(m_clientVersion.length() - 1);
 			return;
+		} else {
+		  kDebug() << "Process error output: " << line << endl;
 		}
 		i++;
 	}

@@ -110,11 +110,13 @@ void ControllerThread::run() {
 		return;
 	}
 
+	kDebug() << "Got VNC connection (INIT_OK)" << endl;
+
 	QApplication::postEvent(m_view,
 				new ScreenResizeEvent(si.framebufferWidth,
 						      si.framebufferHeight));
 	m_wthread.queueUpdateRequest(QRegion(QRect(0,0,si.framebufferWidth,
-		si.framebufferHeight)));
+						   si.framebufferHeight)));
 
 	QApplication::postEvent(m_view, new DesktopInitEvent());
 	// FIXME: check if this is necessary. Qt4 removed the wait method

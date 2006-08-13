@@ -60,12 +60,13 @@ void Counter::timeout() {
 KFullscreenPanel::KFullscreenPanel(QWidget* parent, 
 				   const char *name,
 				   const QSize &resolution) :
-	QWidget(parent, name),
+	QWidget(parent),
 	m_child(0),
 	m_layout(0),
 	m_fsResolution(resolution),
 	m_counter(0)
 {
+        setObjectName(name);
 	connect(&m_counter, SIGNAL(countingDownFinished()), SLOT(hide()));
 	connect(&m_counter, SIGNAL(counted(float)), SLOT(movePanel(float)));
 }
