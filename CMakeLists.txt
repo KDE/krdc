@@ -42,7 +42,7 @@ install( FILES pointcursor.png pointcursormask.png pinup.png pindown.png    icon
 install( FILES vnc.protocol rdp.protocol  DESTINATION ${SERVICES_INSTALL_DIR})
 install( FILES _rfb._tcp  DESTINATION ${DATA_INSTALL_DIR}/zeroconf)
 
-kde4_install_icons( ${ICON_INSTALL_DIR}  crystalsvg )
+kde4_install_icons( ${ICON_INSTALL_DIR}   )
 
 
 
