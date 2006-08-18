@@ -45,7 +45,8 @@ PreferencesDialog::PreferencesDialog( QWidget *parent, const char *name )
 
   page = new KVBox();
   addPage( page, i18n( "&VNC Defaults" ) );
-  m_vncPrefs = new VncPrefs( page, "m_vncPrefs" );
+  m_vncPrefs = new VncPrefs( page );
+  m_vncPrefs->setObjectName( "m_vncPrefs" );
 
   QWidget *spacer = new QWidget( page );
 

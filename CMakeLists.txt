@@ -9,6 +9,10 @@ add_subdirectory( rdp )
 
 ########### next target ###############
 
+include_directories(
+${CMAKE_BINARY_DIR}/krdc/vnc
+)
+
 set(krdc_SRCS 
    main.cpp 
    krdc.cpp 
