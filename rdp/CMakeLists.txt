@@ -6,11 +6,12 @@ include_directories( ${CMAKE_SOURCE_DIR}/krdc  )
 set(krdc_rdp_SRCS 
     krdpview.cpp
     rdphostpref.cpp
+    rdpprefs.cpp
  )
 
 kde4_automoc(${krdc_rdp_SRCS})
 
-kde4_add_ui3_files(krdc_rdp_SRCS rdpprefs.ui )
+kde4_add_ui_files(krdc_rdp_SRCS rdpprefs.ui )
 
 kde4_add_library(rdp STATIC ${krdc_rdp_SRCS})
 

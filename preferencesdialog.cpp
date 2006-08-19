@@ -57,7 +57,8 @@ PreferencesDialog::PreferencesDialog( QWidget *parent, const char *name )
 
   page = new KVBox();
   addPage( page, i18n( "RD&P Defaults" ) );
-  m_rdpPrefs = new RdpPrefs( page, "m_rdpPrefs" );
+  m_rdpPrefs = new RdpPrefs( page );
+  m_rdpPrefs->setObjectName( "m_rdpPrefs" );
   spacer = new QWidget( page );
   page->setStretchFactor( spacer, 10 );
 
