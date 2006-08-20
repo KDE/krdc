@@ -35,6 +35,7 @@ PreferencesDialog::PreferencesDialog( QWidget *parent, const char *name )
   setCaption( i18n( "Preferences" ) );
   setButtons( Ok | Cancel );
   setDefaultButton( Ok );
+  connect( this, SIGNAL( okClicked() ), this, SLOT( slotOk() ) );
   showButtonSeparator( true );
 
   KVBox *page;
