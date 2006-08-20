@@ -41,7 +41,8 @@ PreferencesDialog::PreferencesDialog( QWidget *parent, const char *name )
   page = new KVBox();
   addPage( page, i18n( "&Host Profiles" ) );
 
-  m_hostProfiles = new HostProfiles( page, "m_hostProfiles" );
+  m_hostProfiles = new HostProfiles( page );
+  m_hostProfiles->setObjectName( "m_hostProfiles" );
 
   page = new KVBox();
   addPage( page, i18n( "&VNC Defaults" ) );

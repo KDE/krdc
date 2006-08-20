@@ -10,6 +10,7 @@ add_subdirectory( rdp )
 ########### next target ###############
 
 include_directories(
+${CMAKE_BINARY_DIR}/krdc
 ${CMAKE_BINARY_DIR}/krdc/vnc
 ${CMAKE_BINARY_DIR}/krdc/rdp
 )
@@ -26,11 +27,13 @@ set(krdc_SRCS
    hostpreferences.cpp 
    preferencesdialog.cpp 
    maindialogwidget.cpp 
-   maindialog.cpp )
+   maindialog.cpp
+   hostprofiles.cpp )
 
 kde4_automoc(${krdc_SRCS})
 
-kde4_add_ui3_files(krdc_SRCS hostprofiles.ui maindialogbase.ui keycapturewidget.ui )
+kde4_add_ui_files(krdc_SRCS hostprofiles.ui )
+kde4_add_ui3_files(krdc_SRCS maindialogbase.ui keycapturewidget.ui )
 
 kde4_add_executable(krdc ${krdc_SRCS})
 
