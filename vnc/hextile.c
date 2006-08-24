@@ -66,7 +66,8 @@ HandleHextileBPP (int rx, int ry, int rw, int rh)
 	  return False;
 
       LockFramebuffer();
-      FillRectangleBPP(bg, x, y, w, h);
+      if (subencoding & rfbHextileBackgroundSpecified)
+          FillRectangleBPP(bg, x, y, w, h);
 
       if (subencoding & rfbHextileForegroundSpecified)
 	if (!ReadFromRFBServer((char *)&fg, sizeof(fg))) {
