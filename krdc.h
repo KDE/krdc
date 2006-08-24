@@ -135,7 +135,7 @@ protected:
 	virtual void mouseMoveEvent(QMouseEvent *e);
 	virtual bool event(QEvent *e);
 	virtual bool eventFilter(QObject *watched, QEvent *e);
-	virtual QSize sizeHint();
+	virtual QSize sizeHint() const;
 
 public:
 	KRDC(WindowMode wm = WINDOW_MODE_AUTO,

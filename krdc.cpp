@@ -366,7 +366,7 @@ void KRDC::enableFullscreen(bool on)
 	m_view->switchFullscreen(on);
 }
 
-QSize KRDC::sizeHint()
+QSize KRDC::sizeHint() const
 {
 	if ((m_isFullscreen != WINDOW_MODE_FULLSCREEN) && m_toolbar) {
 		int dockHint = m_dockArea->sizeHint().height();
