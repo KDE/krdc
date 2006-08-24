@@ -91,7 +91,7 @@ public:
 		 const QString &encodings = QString::null,
 		 const QString &caption = QString::null);
 	~KVncView();
-	QSize sizeHint();
+	QSize sizeHint() const;
 	void drawRegion(int x, int y, int w, int h);
 	void lockFramebuffer();
 	void unlockFramebuffer();

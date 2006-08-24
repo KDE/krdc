@@ -690,7 +690,7 @@ void KVncView::focusOutEvent(QFocusEvent *) {
 	unpressModifiers();
 }
 
-QSize KVncView::sizeHint() {
+QSize KVncView::sizeHint() const {
 	return maximumSize();
 }
 
