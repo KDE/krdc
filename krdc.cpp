@@ -668,7 +668,7 @@ void KRDC::viewOnlyToggled() {
 	m_view->setViewOnly(s);
 
 	KAction* action = m_actionCollection->action("popupmenu_view_only");
-	if (!action)
+	if (action)
 	{
 		action->setChecked(s);
 	}
