@@ -133,7 +133,7 @@ QSize KRdpView::framebufferSize()
 }
 
 // returns the suggested size
-QSize KRdpView::sizeHint()
+QSize KRdpView::sizeHint() const
 {
 	return maximumSize();
 }

@@ -67,7 +67,7 @@ class KRdpView : public KRemoteView
 
 		// functions regarding the window
 		virtual QSize framebufferSize();         // returns the size of the remote view
-		QSize sizeHint();                        // returns the suggested size
+		QSize sizeHint() const;                        // returns the suggested size
 		virtual bool viewOnly();
 
 		// functions regarding the connection
