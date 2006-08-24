@@ -214,7 +214,10 @@ InitialiseRFBConnection()
     if (!reason)
       return INIT_CONNECTION_FAILED;
       
-    if (!ReadFromRFBServer(reason, reasonLen)) return INIT_CONNECTION_FAILED;
+    if (!ReadFromRFBServer(reason, reasonLen)) {
+        free (reason);
+        return INIT_CONNECTION_FAILED;
+    }
 
     fprintf(stderr,"VNC connection failed: %.*s\n",(int)reasonLen, reason);
     free(reason);
@@ -1140,8 +1143,10 @@ HandleRFBServerMessage()
       return False;
     }
 
-    if (!ReadFromRFBServer(serverCutText, msg.sct.length))
+    if (!ReadFromRFBServer(serverCutText, msg.sct.length)) {
+      free(serverCutText);
       return False;
+    }
 
     serverCutText[msg.sct.length] = 0;
     newServerCut(serverCutText, msg.sct.length); /* takes ownership of serverCutText */
