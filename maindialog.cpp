@@ -34,7 +34,8 @@ MainDialog::MainDialog( QWidget *parent, const char *name )
   setCaption( i18n( "Remote Desktop Connection" ) );
   setButtons( Ok | Close | Help | User1 );
   setButtonGuiItem( User1, KGuiItem( i18n( "&Preferences" ), "configure" ) );
-  m_dialogWidget = new MainDialogWidget( this, "m_dialogWidget" );
+  m_dialogWidget = new MainDialogWidget( this );
+  m_dialogWidget->setObjectName( "m_dialogWidget" );
   setMainWidget( m_dialogWidget );
 
   setButtonText( Ok, i18n( "Connect" ) );
@@ -43,9 +44,12 @@ MainDialog::MainDialog( QWidget *parent, const char *name )
   connect( m_dialogWidget, SIGNAL( hostValid( bool ) ),
                            SLOT( enableButtonOk( bool ) ) );
 
+  // preferences button....
   connect( this, SIGNAL( user1Clicked() ),
 	   this, SLOT( slotUser1() ) );
 
+  connect( this, SIGNAL( helpClicked() ),
+	   this, SLOT( slotHelp() ) );
 }
 
 void MainDialog::setRemoteHost( const QString &host )
@@ -56,6 +60,11 @@ void MainDialog::setRemoteHost( const QString &host )
 QString MainDialog::remoteHost()
 {
   return m_dialogWidget->remoteHost();
+}
+
+void MainDialog::adjustWidgetSize()
+{
+    adjustSize();
 }
 
 void MainDialog::slotHelp()

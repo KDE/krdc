@@ -28,12 +28,13 @@ set(krdc_SRCS
    preferencesdialog.cpp 
    maindialogwidget.cpp 
    maindialog.cpp
-   hostprofiles.cpp )
+   hostprofiles.cpp 
+)
 
 kde4_automoc(${krdc_SRCS})
 
-kde4_add_ui_files(krdc_SRCS hostprofiles.ui )
-kde4_add_ui3_files(krdc_SRCS maindialogbase.ui keycapturewidget.ui )
+kde4_add_ui_files(krdc_SRCS hostprofiles.ui maindialogbase.ui )
+kde4_add_ui3_files(krdc_SRCS keycapturewidget.ui )
 
 kde4_add_executable(krdc ${krdc_SRCS})
 

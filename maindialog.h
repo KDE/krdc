@@ -39,6 +39,7 @@ class MainDialog : public KDialog
     virtual void slotClose();
     virtual void slotUser1();
     virtual void slotHelp();
+    void adjustWidgetSize();
 
   protected:
     MainDialogWidget *m_dialogWidget;

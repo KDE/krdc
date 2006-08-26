@@ -22,17 +22,17 @@
 #define MAINDIALOGWIDGET_H
 
 #include "kservicelocator.h"
-#include "maindialogbase.h"
 #include <dnssd/servicebrowser.h>
 #include <dnssd/remoteservice.h>
 #include "smartptr.h"
+#include "ui_maindialogbase.h"
 
-class MainDialogWidget : public MainDialogBase
+class MainDialogWidget : public QWidget, public Ui::MainDialogBase
 {
   Q_OBJECT
 
   public:
-    MainDialogWidget( QWidget *parent, const char *name );
+    MainDialogWidget( QWidget *parent );
     ~MainDialogWidget() {}
 
     void setRemoteHost( const QString & );
@@ -40,7 +40,7 @@ class MainDialogWidget : public MainDialogBase
     void save();
 
   protected:
-    void enableBrowsingArea( bool );
+    void enableBrowsingArea( bool enable );
     bool ensureLocatorOpen();
     void errorScanning();
     void finishScanning();
@@ -50,11 +50,11 @@ class MainDialogWidget : public MainDialogBase
     void accept();
 
   protected slots:
-    void hostChanged( const QString & );
+    void hostChanged( const QString & text);
     void toggleBrowsingArea();
-    void itemSelected( Q3ListViewItem * );
-    void itemDoubleClicked( Q3ListViewItem * );
-    void scopeSelected( const QString & );
+    void itemSelected( Q3ListViewItem * item );
+    void itemDoubleClicked( Q3ListViewItem * item );
+    void scopeSelected( const QString & scope);
     void rescan();
 
     void foundService( QString url, int );
@@ -62,7 +62,9 @@ class MainDialogWidget : public MainDialogBase
     void foundScopes( QStringList scopeList );
     void addedService( DNSSD::RemoteService::Ptr );
     void removedService( DNSSD::RemoteService::Ptr );
+    void languageChange();
 
+    void exampleWhatsThis(const QString & link);
 
   protected:
     QString m_scope;

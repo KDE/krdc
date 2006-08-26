@@ -28,6 +28,7 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kpushbutton.h>
+#include <QWhatsThis>
 
 #include "hostpreferences.h"
 #include "maindialogwidget.h"
@@ -78,10 +79,25 @@ class UrlListViewItem : public K3ListViewItem
     QString m_serviceid;
 };
 
-MainDialogWidget::MainDialogWidget( QWidget *parent, const char *name )
-    : MainDialogBase( parent, name ),
-      m_scanning( false ), m_locator_dnssd(0)
+MainDialogWidget::MainDialogWidget( QWidget *parent )
+  : QWidget( parent ), m_scanning( false ), m_locator_dnssd(0)
 {
+    setupUi(this);
+    // These should be folded back into the .ui, if we keep it.
+    m_browseButton->setText( i18n( "Browse >>" ) );
+    m_rescanButton->setText( i18n( "Rescan" ) );
+    m_activeNoteLabel->setWordWrap( true );
+
+
+    // signals and slots connections
+    connect(m_browseButton, SIGNAL(clicked()), this, SLOT(toggleBrowsingArea()));
+    connect(m_rescanButton, SIGNAL(clicked()), this, SLOT(rescan()));
+    connect(m_serverInput, SIGNAL(textChanged(const QString&)),
+	    this, SLOT(hostChanged(const QString&)));
+    connect(m_searchInput, SIGNAL(returnPressed()), this, SLOT(rescan()));
+    connect(m_activeNoteLabel, SIGNAL(linkActivated(const QString&)), 
+	    this, SLOT(exampleWhatsThis(const QString&)));
+
   HostPreferences *hp = HostPreferences::instance();
   QStringList list;
 
@@ -109,6 +125,15 @@ MainDialogWidget::MainDialogWidget( QWidget *parent, const char *name )
   enableBrowsingArea( showBrowse );
 
   adjustSize();
+}
+
+/*
+ *  Sets the strings of the subwidgets using the current
+ *  language.
+ */
+void MainDialogWidget::languageChange()
+{
+    retranslateUi(this);
 }
 
 void MainDialogWidget::save()
@@ -147,6 +172,22 @@ void MainDialogWidget::toggleBrowsingArea()
     enableBrowsingArea(!m_browsingPanel->isVisible());
 }
 
+void MainDialogWidget::exampleWhatsThis(const QString & link)
+{
+  if ( link == QString( "whatsthisExampleUrls" ) ) {
+    QString whatsThisText( "<h3>Examples</h3>" );
+    whatsThisText += "for a computer called 'megan':";
+    whatsThisText += "<table>";
+    whatsThisText += "<tr><td>megan:1</td><td>connect to the VNC server on 'megan' with display number 1</td></tr>";
+    whatsThisText += "<tr><td>vnc:/megan:1</td><td>longer form for the same thing</td></tr>";
+    whatsThisText += "<tr><td>rdp:/megan</td><td>connect to the RDP server on 'megan'</td></tr>";
+    whatsThisText += "</table>";
+    QWhatsThis::showText( QCursor::pos(), whatsThisText, this );
+  } else {
+    kDebug() << "got unexpected whatsThis link: " << link << endl;
+  }
+}
+
 void MainDialogWidget::enableBrowsingArea( bool enable )
 {
   int hOffset = 0;
@@ -168,7 +209,7 @@ void MainDialogWidget::enableBrowsingArea( bool enable )
     setMinimumSize(minimumSize().width(), (h > 0) ? h : 0);
     resize(width(), height()-hOffset);
 
-    QTimer::singleShot( 0, parentWidget(), SLOT( adjustSize() ) );
+    QTimer::singleShot( 0, parentWidget(), SLOT( adjustWidgetSize() ) );
   }
 
   if (enable)
