@@ -639,7 +639,7 @@ QString KServiceLocator::decodeAttributeValue(const QString &value) {
 	if (value.isNull())
 		return value;
 	if (SLPUnescape(value.toLatin1(), &n, SLP_TRUE) != SLP_OK)
-		return QString::null;
+	        return QString();
 	QString r(n);
 	SLPFree(n);
 	return r;
