@@ -13,7 +13,7 @@ kde4_add_ui_files(krdc_vnc_SRCS vncprefs.ui )
 
 kde4_add_library(vnc STATIC ${krdc_vnc_SRCS})
 
-target_link_libraries( vnc ${KDE4_KDECORE_LIBS} ${QT_QTGUI_LIBRARY} ${JPEG_LIBRARIES} ${X11VIDMODE_LIBRARIES} )
+target_link_libraries( vnc ${KDE4_KDECORE_LIBS} ${QT_QTGUI_LIBRARY} ${JPEG_LIBRARIES} )
 
 
 ########### install files ###############

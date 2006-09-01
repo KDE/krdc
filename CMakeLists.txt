@@ -1,3 +1,4 @@
+macro_bool_to_01(X11VIDMODE_FOUND HAVE_VIDMODE_EXTENSION)
 
 configure_file (config-krdc.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-krdc.h )
 
@@ -39,6 +40,9 @@ kde4_add_ui3_files(krdc_SRCS keycapturewidget.ui )
 kde4_add_executable(krdc ${krdc_SRCS})
 
 target_link_libraries(krdc  ${KDE4_KDEUI_LIBS} vnc rdp kdnssd kwalletclient )
+if (HAVE_VIDMODE_EXTENSION)
+  target_link_libraries(krdc ${X11VIDMODE_LIBRARIES})
+endif (HAVE_VIDMODE_EXTENSION)
 
 install(TARGETS krdc  DESTINATION ${BIN_INSTALL_DIR} )
 
@@ -52,7 +56,6 @@ install( FILES vnc.protocol rdp.protocol  DESTINATION ${SERVICES_INSTALL_DIR})
 install( FILES _rfb._tcp  DESTINATION ${DATA_INSTALL_DIR}/zeroconf)
 
 kde4_install_icons( ${ICON_INSTALL_DIR}   )
-
 
 
 
