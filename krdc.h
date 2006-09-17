@@ -18,7 +18,6 @@
 #ifndef KRDC_H
 #define KRDC_H
 
-#include <kprogressbar.h>
 #include <kprogressdialog.h>
 #include <QSize>
 #include <QRect>
