@@ -7,7 +7,7 @@ set(krdc_vnc_SRCS
     kvncview.cpp threads.cpp colour.c d3des.c desktop.c rfbproto.c sockets.c vncauth.c vnchostpref.cpp vncprefs.cpp
 )
 
-kde4_automoc(krdc_vnc ${krdc_vnc_SRCS})
+kde4_automoc(${krdc_vnc_SRCS})
 
 kde4_add_ui_files(krdc_vnc_SRCS vncprefs.ui )
 

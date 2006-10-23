@@ -9,7 +9,7 @@ set(krdc_rdp_SRCS
     rdpprefs.cpp
  )
 
-kde4_automoc(krdc_rdp ${krdc_rdp_SRCS})
+kde4_automoc(${krdc_rdp_SRCS})
 
 kde4_add_ui_files(krdc_rdp_SRCS rdpprefs.ui )
 

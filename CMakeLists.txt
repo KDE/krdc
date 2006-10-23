@@ -32,7 +32,7 @@ set(krdc_SRCS
    hostprofiles.cpp 
 )
 
-kde4_automoc(krdc ${krdc_SRCS})
+kde4_automoc(${krdc_SRCS})
 
 kde4_add_ui_files(krdc_SRCS hostprofiles.ui maindialogbase.ui )
 kde4_add_ui3_files(krdc_SRCS keycapturewidget.ui )
