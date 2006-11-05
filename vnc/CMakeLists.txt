@@ -1,5 +1,5 @@
 
-include_directories( ${CMAKE_SOURCE_DIR}/krdc  )
+include_directories( ${CMAKE_SOURCE_DIR}/krdc  ${JPEG_INCLUDE_DIR} )
 
 
 ########### next target ###############
