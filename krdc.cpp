@@ -386,7 +386,7 @@ KActionMenu *KRDC::createActionMenu(QWidget *parent) const
 	if (m_popup)
 	        m_popup->setToolTip(i18n("Advanced options"));
 
-	KAction* action = m_actionCollection->action("popupmenu_view_only");
+	QAction* action = m_actionCollection->action("popupmenu_view_only");
 
 	if (!action)
 	{
@@ -401,7 +401,7 @@ KActionMenu *KRDC::createActionMenu(QWidget *parent) const
 	}
 
 	if (m_view->supportsLocalCursor()) {
-		KAction* action = m_actionCollection->action("popupmenu_local_cursor");
+		QAction* action = m_actionCollection->action("popupmenu_local_cursor");
 
 		if (!action)
 		{
@@ -667,7 +667,7 @@ void KRDC::viewOnlyToggled() {
 	bool s = !m_view->viewOnly();
 	m_view->setViewOnly(s);
 
-	KAction* action = m_actionCollection->action("popupmenu_view_only");
+	QAction* action = m_actionCollection->action("popupmenu_view_only");
 	if (action)
 	{
 		action->setChecked(s);
@@ -678,7 +678,7 @@ void KRDC::showLocalCursorToggled() {
 	bool s = (m_view->dotCursorState() != DOT_CURSOR_ON);
 	m_view->showDotCursor(s ? DOT_CURSOR_ON : DOT_CURSOR_AUTO);
 
-	KAction* action = m_actionCollection->action("popupmenu_local_cursor");
+	QAction* action = m_actionCollection->action("popupmenu_local_cursor");
 	if (action)
 	{
 		action->setChecked(s);
