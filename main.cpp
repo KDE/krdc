@@ -23,6 +23,7 @@
 #include <kmessagebox.h>
 #include <kconfig.h>
 #include <kdebug.h>
+#include <kglobal.h>
 #include <kwallet.h>
 #include <QTimer>
 #include <QFile>
