@@ -412,8 +412,13 @@ void KVncView::customEvent(QEvent *e)
 	else if (e->type() == PasswordRequiredEventType) {
 		emit showingPasswordDialog(true);
 
-		if (KPasswordDialog::getPassword(this,password, i18n("Access to the system requires a password.")) != KPasswordDialog::Accepted)
+        KPasswordDialog dlg(this);
+        dlg.setPrompt(i18n("Access to the system requires a password."));
+		if (dlg.exec() != KPasswordDialog::Accepted)
 			password.clear();
+        else
+            password=dlg.password().toLocal8Bit();
+#warning  is toLocal8Bit OK here ?  or should utf8 be used ?
 
 		emit showingPasswordDialog(false);
 

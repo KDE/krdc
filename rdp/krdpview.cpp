@@ -267,9 +267,10 @@ bool KRdpView::start()
 
 			if ( m_password.isEmpty() ) {
 				//There must not be an existing entry. Let's make one.
-				QByteArray newPassword;
-				if (KPasswordDialog::getPassword(this, newPassword, i18n("Please enter the password.")) == KPasswordDialog::Accepted) {
-					m_password = newPassword;
+				KPasswordDialog dlg(this);
+                dlg.setPrompt( i18n("Please enter the password.") );
+				if (dlg.exec() == KPasswordDialog::Accepted) {
+					m_password = dlg.password();
 					wallet->writePassword(m_host, m_password);
 				}
 			}
