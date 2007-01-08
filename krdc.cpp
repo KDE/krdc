@@ -380,8 +380,9 @@ QSize KRDC::sizeHint() const
 
 KActionMenu *KRDC::createActionMenu(QWidget *parent) const
 {
-	KActionMenu *pu = new KActionMenu(KIcon("configure"), i18n("Advanced"),
-					  m_actionCollection, "configure");
+        KActionMenu *pu = m_actionCollection->add<KActionMenu>( "configure" );
+        pu->setText( i18n("Advanced") );
+        pu->setIcon( KIcon("configure") );
 
 	if (m_popup)
 	        m_popup->setToolTip(i18n("Advanced options"));
@@ -390,9 +391,8 @@ KActionMenu *KRDC::createActionMenu(QWidget *parent) const
 
 	if (!action)
 	{
-		new KAction(i18n("View Only"),
-			    m_actionCollection,
-			    "popupmenu_view_only");
+            QAction *a = m_actionCollection->addAction( "popupmenu_view_only");
+            a->setText( i18n("View Only") );
 	} else {
 	  	action->setCheckable(true);
 		action->setChecked(m_view->viewOnly());
@@ -405,8 +405,8 @@ KActionMenu *KRDC::createActionMenu(QWidget *parent) const
 
 		if (!action)
 		{
-			new KAction(i18n("Always Show Local Cursor"),
-						m_actionCollection, "popupmenu_local_cursor");
+                    QAction *a = m_actionCollection->addAction( "popupmenu_local_cursor");
+                    a->setText( i18n("Always Show Local Cursor") );
 		} else {
 		        action->setCheckable(true);
 			action->setChecked(m_view->dotCursorState() == DOT_CURSOR_ON);
@@ -490,14 +490,18 @@ void KRDC::switchToFullscreen(bool scaling)
 	pinIconSet.addPixmap(m_pinup, QIcon::Normal, QIcon::On);
 	pinIconSet.addPixmap(m_pindown, QIcon::Normal, QIcon::Off);
 
-	KAction* action = new KAction(pinIconSet, i18n("Autohide"), m_actionCollection, "pinup");
+
+        QAction* action = m_actionCollection->addAction( "pinup" );
+        action->setText( i18n("Autohide") );
+        action->setIcon( pinIconSet );
 	action->setToolTip(i18n("Autohide on/off"));
 	action->setCheckable(true);
 	connect(action, SIGNAL(toggled(bool)), this, SLOT(setFsToolbarAutoHide(bool)));
 	t->addAction(action);
 
-	action = new KAction(KIcon("window_nofullscreen"), i18n("Fullscreen"),
-								m_actionCollection, "window_nofullscreen");
+        action = m_actionCollection->addAction( "window_nofullscreen" );
+        action->setText( i18n("Fullscreen") );
+        action->setIcon( KIcon("window_nofullscreen") );
 	action->setToolTip(i18n("Fullscreen"));
 	action->setCheckable(true);
 	action->setChecked(true);
@@ -515,20 +519,26 @@ void KRDC::switchToFullscreen(bool scaling)
 	t->addWidget(hostLabel);
 
 	if (scalingPossible) {
-		action = new KAction(KIcon("viewmagfit"), i18n("Scale"), m_actionCollection, "viewmagfit");
+                action = m_actionCollection->addAction( "viewmagfit" );
+                action->setText( i18n( "Scale") );
+                action->setIcon( KIcon("viewmagfit") );
 		action->setToolTip(i18n("Scale view"));
 		action->setCheckable(true);
 		action->setChecked(scaling);
 		connect(action, SIGNAL(toggled(bool)), this, SLOT(switchToFullscreen(bool)));
 	}
 
-	action = new KAction(KIcon("iconify"), i18n("Iconify"), m_actionCollection, "iconify");
+        action = m_actionCollection->addAction( "iconify" );
+        action->setText( i18n("Iconify") );
+        action->setIcon( KIcon("iconify") );
 	action->setToolTip(i18n("Minimize"));
 	action->setCheckable(true);
 	connect(action, SIGNAL(toggled(bool)), this, SLOT(iconify()));
 	t->addAction(action);
 
-	action = new KAction(KIcon("close"), i18n("Close"), m_actionCollection, "close");
+        action = m_actionCollection->addAction( "close" );
+        action->setText( i18n("Close") );
+        action->setIcon( KIcon( "close" ) );
 	action->setToolTip(i18n("Close"));
 	action->setCheckable(true);
 	connect(action, SIGNAL(toggled(bool)), this, SLOT(quit()));
@@ -596,8 +606,9 @@ void KRDC::switchToNormal(bool scaling)
 		t->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
 		connect(t, SIGNAL(placeChanged(Q3DockWindow::Place)), SLOT(toolbarChanged()));
 
-		KAction* action = new KAction(KIcon("window_fullscreen"), i18n("Fullscreen"),
-									m_actionCollection, "window_fullscreen");
+                QAction* action = m_actionCollection->addAction( "window_fullscreen");
+                action->setText( i18n("Fullscreen") );
+                action->setIcon( KIcon("window_fullscreen") );
 		action->setToolTip(i18n("Fullscreen"));
 		action->setWhatsThis( i18n("Switches to full screen. If the remote desktop has a different screen resolution, Remote Desktop Connection will automatically switch to the nearest resolution."));
 		action->setCheckable(true);
@@ -605,7 +616,9 @@ void KRDC::switchToNormal(bool scaling)
 		t->addAction(action);
 
 		if (m_view->supportsScaling()) {
-			KAction* action = new KAction(KIcon("viewmagfit"), i18n("Scale"), m_actionCollection, "viewmagfit");
+                        QAction* action = m_actionCollection->addAction( "viewmagfit" );
+                        action->setText( i18n( "Scale" ) );
+                        action->setIcon( KIcon("viewmagfit") );
 			action->setToolTip(i18n("Scale View"));
 			action->setWhatsThis( i18n("This option scales the remote screen to fit your window size."));
 			action->setCheckable(true);
@@ -614,7 +627,9 @@ void KRDC::switchToNormal(bool scaling)
 			t->addAction(action);
 		}
 
-		action = new KAction(KIcon("key_enter"), i18n("Special Keys"), m_actionCollection, "key_enter");
+                action =m_actionCollection->addAction("key_enter");
+                action->setText( i18n("Special Keys") );
+                action->setIcon( KIcon("key_enter") );
 		action->setToolTip(i18n("Enter special keys"));
 		action->setWhatsThis( i18n("This option allows you to send special key combinations like Ctrl-Alt-Del to the remote host."));
 		action->setCheckable(true);
@@ -625,8 +640,7 @@ void KRDC::switchToNormal(bool scaling)
 		t->addAction(m_popup);
 		//advancedButton->setPopupDelay(0);
 
-		if (m_layout)
-			delete m_layout;
+                delete m_layout;
 		m_layout = new QVBoxLayout(this);
 		m_layout->addWidget(m_dockArea);
 		m_layout->addWidget(m_scrollView);
