@@ -39,7 +39,9 @@
 #include <QList>
 #include <QMouseEvent>
 #include <QCustomEvent>
+#ifdef __GNUC__
 #warning Need some dbus equivalent here.
+#endif
 // #include <dcopclient.h>
 #include <QClipboard>
 #include <QBitmap>
@@ -210,7 +212,9 @@ void KVncView::configureApp(Quality q, const QString specialEncodings) {
 bool KVncView::checkLocalKRfb() {
 	if ( m_host != "localhost" && !m_host.isEmpty() )
 		return true;
+#ifdef __GNUC__
 	#warning port this to dbus
+#endif
 #if 0
 	DCOPClient *d = KApplication::dcopClient();
 
@@ -418,7 +422,9 @@ void KVncView::customEvent(QEvent *e)
 			password.clear();
         else
             password=dlg.password().toLocal8Bit();
+#ifdef __GNUC__
 #warning  is toLocal8Bit OK here ?  or should utf8 be used ?
+#endif
 
 		emit showingPasswordDialog(false);
 
@@ -616,7 +622,9 @@ void KVncView::wheelEvent(QWheelEvent *e) {
 }
 
 void KVncView::pressKey(XEvent *xe) {
+#ifdef __GNUC__
 #warning port me - KKeyNative should become an int
+#endif
 #if 0
 	KKeyNative k(xe);
 	uint mod = k.mod();
@@ -646,7 +654,9 @@ void KVncView::pressKey(XEvent *xe) {
 }
 
 bool KVncView::x11Event(XEvent *e) {
+#ifdef __GNUC__
 #warning port me - KKeyNative should become an int
+#endif
 #if 0
 	bool pressed;
 	if (e->type == KeyPress)
@@ -762,7 +772,9 @@ void KVncView::enableClientCursor(bool enable) {
 	locks and signals are there to protect against deadlocks and other
 	horribleness. Be careful making changes here.
 */
+#ifdef __GNUC__
 #warning is this shared with something in kdelibs?
+#endif
 int getPassword(char *passwd, int pwlen) {
 	int retV = 0;
 

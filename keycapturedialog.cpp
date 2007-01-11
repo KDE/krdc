@@ -96,7 +96,9 @@ bool KeyCaptureDialog::x11Event(XEvent *pEvent)
 
 void KeyCaptureDialog::x11EventKeyPress( XEvent *pEvent )
 {
+#ifdef __GNUC__
 #warning PortMe
+#endif
 #if 0
 	// taken from kshortcutdialog.h
 	KKeyNative keyNative( pEvent );

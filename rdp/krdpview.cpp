@@ -57,7 +57,9 @@ RdpContainer::~RdpContainer()
 
 void RdpContainer::windowChanged(WId window)
 {
+#ifdef __GNUC__
 #warning rethink this with clientClosed() and clientIsEmbedded() signals
+#endif
 #if 0
   
 	if(window == 0)
@@ -73,7 +75,9 @@ void RdpContainer::windowChanged(WId window)
 
 bool RdpContainer::x11Event(XEvent *e)
 {
+#ifdef __GNUC__
 #warning try to redo this in a less X11-ish way
+#endif
 #if 0
 	// FIXME: mouse events still get through in view-only
 	if(m_viewOnly && (e->type == KeyPress || e->type == KeyRelease || e->type == ButtonPress ||
