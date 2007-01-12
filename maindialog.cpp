@@ -50,6 +50,8 @@ MainDialog::MainDialog( QWidget *parent, const char *name )
 
   connect( this, SIGNAL( helpClicked() ),
 	   this, SLOT( slotHelp() ) );
+  connect(this,SIGNAL(okClicked()),this,SLOT(slotOk()));
+  connect(this,SIGNAL(closeClicked()),this,SLOT(slotClose()));
 }
 
 void MainDialog::setRemoteHost( const QString &host )
