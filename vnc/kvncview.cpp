@@ -39,10 +39,6 @@
 #include <QList>
 #include <QMouseEvent>
 #include <QCustomEvent>
-#ifdef __GNUC__
-#warning Need some dbus equivalent here.
-#endif
-// #include <dcopclient.h>
 #include <QClipboard>
 #include <QBitmap>
 #include <QMutex>
