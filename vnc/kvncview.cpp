@@ -44,6 +44,8 @@
 #include <QMutex>
 #include <QWaitCondition>
 #include <QX11Info>
+#include <QDBusInterface>
+#include <QDBusReply>
 #include "vncviewer.h"
 
 #include <X11/Xlib.h>
@@ -211,32 +213,20 @@ bool KVncView::checkLocalKRfb() {
 #ifdef __GNUC__
 	#warning port this to dbus
 #endif
-#if 0
-	DCOPClient *d = KApplication::dcopClient();
-
-	int portNum;
-	QByteArray sdata, rdata;
-	DCOPCString replyType;
-	QDataStream arg(&sdata, QIODevice::WriteOnly);
-	arg << QString("krfb");
-	if (!d->call ("kded", "kinetd", "port(QString)", sdata, replyType, rdata))
-		return true;
-
-	if (replyType != "int")
-		return true;
-
-	QDataStream answer(&rdata, QIODevice::ReadOnly);
-	answer >> portNum;
-
-	if (m_port != portNum)
-		return true;
-
-	setStatus(REMOTE_VIEW_DISCONNECTED);
-	KMessageBox::error(0,
-			   i18n("It is not possible to connect to a local desktop sharing service."),
-			   i18n("Connection Failure"));
-	emit disconnectedError();
-#endif
+        //TODO verify it when kinetd will port
+        QDBusInterface kinetd("org.kde.kded", "/modules/kinetd", "org.kde.kinetd");
+        QDBusReply<int> reply = kinetd.call("port","krfb");
+        if(!reply.isValid())
+           return true;
+        int portNum = reply;
+        if(m_port != portNum)
+                return true;
+        setStatus(REMOTE_VIEW_DISCONNECTED);
+        KMessageBox::error(0,
+                           i18n("It is not possible to connect to a local desktop sharing service."),
+                           i18n("Connection Failure"));
+ 
+        emit disconnectedError();
 	return false;
 }
 
