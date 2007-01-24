@@ -1,3 +1,4 @@
+project(krdc)
 macro_bool_to_01(X11VIDMODE_FOUND HAVE_VIDMODE_EXTENSION)
 
 configure_file (config-krdc.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-krdc.h )
