@@ -18,6 +18,8 @@
    Boston, MA 02110-1301, USA.
 */
 
+#include <config-krdc.h>
+
 #include <QRegExp>
 #include <QTimer>
 
@@ -95,7 +97,7 @@ MainDialogWidget::MainDialogWidget( QWidget *parent )
     connect(m_serverInput, SIGNAL(textChanged(const QString&)),
 	    this, SLOT(hostChanged(const QString&)));
     connect(m_searchInput, SIGNAL(returnPressed()), this, SLOT(rescan()));
-    connect(m_activeNoteLabel, SIGNAL(linkActivated(const QString&)), 
+    connect(m_activeNoteLabel, SIGNAL(linkActivated(const QString&)),
 	    this, SLOT(exampleWhatsThis(const QString&)));
 
   HostPreferences *hp = HostPreferences::instance();

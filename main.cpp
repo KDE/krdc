@@ -30,7 +30,6 @@
 #include <QTextStream>
 #include <QRegExp>
 
-#include "../config.h"
 #include "main.h"
 
 // NOTE: I'm not comfortable with the wallet being global data and this high up
@@ -73,7 +72,7 @@ static KCmdLineOptions options[] =
 int main(int argc, char *argv[])
 {
 	KAboutData aboutData( "krdc", I18N_NOOP("Remote Desktop Connection"),
-			      VERSION, description, KAboutData::License_GPL,
+			      KDE_VERSION_STRING, description, KAboutData::License_GPL,
 		"(c) 2001-2003, Tim Jansen"
 		"(c) 2002-2003, Arend van Beelen jr."
 		"(c) 2000-2002, Const Kaplinsky\n"

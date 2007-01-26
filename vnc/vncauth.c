@@ -21,8 +21,6 @@
  * vncauth.c - Functions for VNC password management and authentication.
  */
 
-#include "config.h"
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -34,10 +32,8 @@
 #ifdef __GNUC__
 #warning If we keep this, it needs to be cleaned up
 #endif
-#ifdef HAVE_SYS_TIME_H
 #include <time.h>
 #include <sys/time.h>
-#endif
 
 /*
  * We use a fixed key to store passwords, since we assume that our local
