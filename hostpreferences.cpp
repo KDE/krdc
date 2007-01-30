@@ -34,7 +34,7 @@ HostPreferences *HostPreferences::instance()
 	return m_instance;
 }
 
-HostPref::HostPref(KConfig *conf, const QString &host, const QString &type) :
+HostPref::HostPref(KSharedConfigPtr conf, const QString &host, const QString &type) :
 	m_host(host),
 	m_type(type),
 	m_config(conf) {
@@ -61,7 +61,8 @@ QString HostPref::prefix(const QString &host, const QString &type) {
 }
 
 
-HostPreferences::HostPreferences() {
+HostPreferences::HostPreferences() 
+{
 	m_config = KGlobal::config();
 }
 

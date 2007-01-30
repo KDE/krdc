@@ -21,7 +21,7 @@
 
 const QString VncHostPref::VncType = "VNC";
 
-VncHostPref::VncHostPref(KConfig *conf, const QString &host, const QString &type) :
+VncHostPref::VncHostPref(KSharedConfigPtr conf, const QString &host, const QString &type) :
 	HostPref(conf, host, type),
 	m_quality(0),
 	m_useKWallet(true),

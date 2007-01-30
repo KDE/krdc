@@ -17,6 +17,8 @@
 #include <QString>
 #include <QStringList>
 #include <QList>
+#include <kconfig.h>
+
 #include "smartptr.h"
 
 class HostPreferences;
@@ -27,9 +29,9 @@ protected:
 	friend class HostPreferences;
 	QString m_host;
 	QString m_type;
-	KConfig *m_config;
+	KSharedConfigPtr m_config;
 
-	HostPref(KConfig *conf, const QString &host, const QString &type);
+	HostPref(KSharedConfigPtr conf, const QString &host, const QString &type);
 
 	virtual void load() = 0;
 	virtual void setDefaults() = 0;
@@ -73,7 +75,7 @@ public:
 private:
 	HostPreferences();
 
-	KConfig *m_config;
+	KSharedConfigPtr m_config;
 	static HostPreferences *m_instance;
 
 };

@@ -23,7 +23,7 @@
 
 const QString RdpHostPref::RdpType = "RDP";
 
-RdpHostPref::RdpHostPref(KConfig *conf, const QString &host, const QString &type) :
+RdpHostPref::RdpHostPref(KSharedConfigPtr conf, const QString &host, const QString &type) :
 	HostPref(conf, host, type),
 	m_width(800),
 	m_height(600),
