@@ -33,7 +33,7 @@ class MainDialogWidget : public MainDialogBase
 
   public:
     MainDialogWidget( QWidget *parent, const char *name );
-    ~MainDialogWidget() {}
+    ~MainDialogWidget();
 
     void setRemoteHost( const QString & );
     QString remoteHost();

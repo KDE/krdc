@@ -33,7 +33,6 @@
 #include "maindialogwidget.h"
 
 static const QString DEFAULT_SCOPE = "default";
-static const QString DNSSD_SCOPE = "DNS-SD";
 
 class UrlListViewItem : public KListViewItem
 {
@@ -80,7 +79,7 @@ class UrlListViewItem : public KListViewItem
 
 MainDialogWidget::MainDialogWidget( QWidget *parent, const char *name )
     : MainDialogBase( parent, name ),
-      m_scanning( false ), m_locator_dnssd(0)
+      m_scanning( false )
 {
   HostPreferences *hp = HostPreferences::instance();
   QStringList list;
@@ -108,7 +107,19 @@ MainDialogWidget::MainDialogWidget( QWidget *parent, const char *name )
   bool showBrowse = hp->showBrowsingPanel();
   enableBrowsingArea( showBrowse );
 
+  m_locator_dnssd = new DNSSD::ServiceBrowser(QStringList::split(',',"_rfb._tcp,_rdp._tcp"),0,DNSSD::ServiceBrowser::AutoResolve);
+  connect(m_locator_dnssd,SIGNAL(serviceAdded(DNSSD::RemoteService::Ptr)),
+	  SLOT(addedService(DNSSD::RemoteService::Ptr)));
+  connect(m_locator_dnssd,SIGNAL(serviceRemoved(DNSSD::RemoteService::Ptr)),
+	  SLOT(removedService(DNSSD::RemoteService::Ptr)));
+  m_locator_dnssd->startBrowse();
+
   adjustSize();
+}
+
+MainDialogWidget::~MainDialogWidget()
+{
+  delete m_locator_dnssd;
 }
 
 void MainDialogWidget::save()
@@ -216,35 +227,18 @@ void MainDialogWidget::rescan()
 
   m_browsingView->clear();
 
-  if (m_locator_dnssd) {
-    delete m_locator_dnssd;  // still active browsers
-    m_locator_dnssd = 0;
+  QString filter;
+  if ( !m_searchInput->text().stripWhiteSpace().isEmpty() ) {
+    QString ef = KServiceLocator::escapeFilter(
+					       m_searchInput->text().stripWhiteSpace() );
+    filter = "(|(|(description=*"+ef+"*)(username=*"+ef+"*))(fullname=*"+ef+"*))";
   }
 
-  if (m_scope == DNSSD_SCOPE) {
-    kdDebug() << "Scope is DNSSD\n";
-    m_locator_dnssd = new DNSSD::ServiceBrowser(QStringList::split(',',"_rfb._tcp,_rdp._tcp"),0,DNSSD::ServiceBrowser::AutoResolve);
-    connect(m_locator_dnssd,SIGNAL(serviceAdded(DNSSD::RemoteService::Ptr)),
-      SLOT(addedService(DNSSD::RemoteService::Ptr)));
-    connect(m_locator_dnssd,SIGNAL(serviceRemoved(DNSSD::RemoteService::Ptr)),
-      SLOT(removedService(DNSSD::RemoteService::Ptr)));
-    m_locator_dnssd->startBrowse();
-    // now find scopes
-    lastSignalServices(true);
-  } else {
-    QString filter;
-    if ( !m_searchInput->text().stripWhiteSpace().isEmpty() ) {
-      QString ef = KServiceLocator::escapeFilter(
-        m_searchInput->text().stripWhiteSpace() );
-      filter = "(|(|(description=*"+ef+"*)(username=*"+ef+"*))(fullname=*"+ef+"*))";
-    }
-
-    if ( !m_locator->findServices( "service:remotedesktop.kde",
-                                   filter, m_scope ) ) {
-      kdWarning() << "Failure in findServices()" << endl;
-      errorScanning();
-      return;
-    }
+  if ( !m_locator->findServices( "service:remotedesktop.kde",
+				 filter, m_scope ) ) {
+    kdWarning() << "Failure in findServices()" << endl;
+    errorScanning();
+    return;
   }
 }
 
@@ -350,8 +344,6 @@ void MainDialogWidget::lastSignalServices( bool success )
 
 void MainDialogWidget::foundScopes( QStringList scopeList )
 {
-  scopeList << DNSSD_SCOPE;  
-
   int di = scopeList.findIndex( DEFAULT_SCOPE );
   if ( di >= 0 )
     scopeList[ di ] = i18n( "default" );
