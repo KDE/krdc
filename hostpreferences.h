@@ -17,7 +17,7 @@
 #include <QString>
 #include <QStringList>
 #include <QList>
-#include <kconfig.h>
+#include <ksharedconfig.h>
 
 #include "smartptr.h"
 
