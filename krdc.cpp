@@ -501,7 +501,7 @@ void KRDC::switchToFullscreen(bool scaling)
 
         action = m_actionCollection->addAction( "window_nofullscreen" );
         action->setText( i18n("Fullscreen") );
-        action->setIcon( KIcon("window_nofullscreen") );
+        action->setIcon( KIcon("view-restore") );
 	action->setToolTip(i18n("Fullscreen"));
 	action->setCheckable(true);
 	action->setChecked(true);
@@ -521,7 +521,7 @@ void KRDC::switchToFullscreen(bool scaling)
 	if (scalingPossible) {
                 action = m_actionCollection->addAction( "viewmagfit" );
                 action->setText( i18n( "Scale") );
-                action->setIcon( KIcon("viewmagfit") );
+                action->setIcon( KIcon("zoom-best-fit") );
 		action->setToolTip(i18n("Scale view"));
 		action->setCheckable(true);
 		action->setChecked(scaling);
@@ -608,7 +608,7 @@ void KRDC::switchToNormal(bool scaling)
 
                 QAction* action = m_actionCollection->addAction( "window_fullscreen");
                 action->setText( i18n("Fullscreen") );
-                action->setIcon( KIcon("window_fullscreen") );
+                action->setIcon( KIcon("view-fullscreen") );
 		action->setToolTip(i18n("Fullscreen"));
 		action->setWhatsThis( i18n("Switches to full screen. If the remote desktop has a different screen resolution, Remote Desktop Connection will automatically switch to the nearest resolution."));
 		action->setCheckable(true);
@@ -618,7 +618,7 @@ void KRDC::switchToNormal(bool scaling)
 		if (m_view->supportsScaling()) {
                         QAction* action = m_actionCollection->addAction( "viewmagfit" );
                         action->setText( i18n( "Scale" ) );
-                        action->setIcon( KIcon("viewmagfit") );
+                        action->setIcon( KIcon("zoom-best-fit") );
 			action->setToolTip(i18n("Scale View"));
 			action->setWhatsThis( i18n("This option scales the remote screen to fit your window size."));
 			action->setCheckable(true);
@@ -629,7 +629,7 @@ void KRDC::switchToNormal(bool scaling)
 
                 action =m_actionCollection->addAction("key_enter");
                 action->setText( i18n("Special Keys") );
-                action->setIcon( KIcon("key_enter") );
+                action->setIcon( KIcon("browser-go") );
 		action->setToolTip(i18n("Enter special keys"));
 		action->setWhatsThis( i18n("This option allows you to send special key combinations like Ctrl-Alt-Del to the remote host."));
 		action->setCheckable(true);
