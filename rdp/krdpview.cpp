@@ -22,7 +22,7 @@
 #include <kdialog.h>
 #include <klocale.h>
 #include <kmessagebox.h>
-#include <kprocess.h>
+#include <k3process.h>
 #include <kwallet.h>
 #include <kpassworddialog.h>
 
@@ -236,7 +236,7 @@ bool KRdpView::start()
 	m_container->show();
 	m_container->setWindowTitle( m_caption );
 
-	m_process = new KProcess(m_container);
+	m_process = new K3Process(m_container);
 	*m_process << "rdesktop";
 	*m_process << "-g" << (QString::number(hp->width()) + 'x' + QString::number(hp->height()));
 	*m_process << "-k" << hp->layout();
@@ -289,13 +289,13 @@ bool KRdpView::start()
 	*m_process << "-a" << QString::number(hp->colorDepth());
 	*m_process << (m_host + ':' + QString::number(m_port));
 
-	kDebug() << "KProcess args: " << m_process->args() << endl;
+	kDebug() << "K3Process args: " << m_process->args() << endl;
 
-	connect(m_process, SIGNAL(processExited(KProcess *)), SLOT(processDied(KProcess *)));
-	connect(m_process, SIGNAL(receivedStderr(KProcess *, char *, int)), SLOT(receivedStderr(KProcess *, char *, int)));
+	connect(m_process, SIGNAL(processExited(K3Process *)), SLOT(processDied(K3Process *)));
+	connect(m_process, SIGNAL(receivedStderr(K3Process *, char *, int)), SLOT(receivedStderr(K3Process *, char *, int)));
 	connect(m_container, SIGNAL(clientClosed()), SLOT(connectionClosed()));
 	connect(m_container, SIGNAL(clientIsEmbedded()), SLOT(connectionOpened()));
-	if(!m_process->start(KProcess::NotifyOnExit, KProcess::Stderr))
+	if(!m_process->start(K3Process::NotifyOnExit, K3Process::Stderr))
 	{
 		KMessageBox::error(0, i18n("Could not start rdesktop; make sure rdesktop is properly installed."),
 		                      i18n("rdesktop Failure"));
@@ -353,7 +353,7 @@ void KRdpView::connectionClosed()
 	m_quitFlag = true;
 }
 
-void KRdpView::processDied(KProcess */*proc*/)
+void KRdpView::processDied(K3Process */*proc*/)
 {
 	if(m_status == REMOTE_VIEW_CONNECTING)
 	{
@@ -374,7 +374,7 @@ void KRdpView::processDied(KProcess */*proc*/)
 	}
 }
 
-void KRdpView::receivedStderr(KProcess */*proc*/, char *buffer, int /*buflen*/)
+void KRdpView::receivedStderr(K3Process */*proc*/, char *buffer, int /*buflen*/)
 {
 	QString output(buffer);
 	QString line;

@@ -27,7 +27,7 @@
 #define TCP_PORT_RDP 3389
 #define RDP_LOGON_NORMAL 0x33
 
-class KProcess;
+class K3Process;
 class KRdpView;
 
 class RdpContainer : public QX11EmbedContainer
@@ -98,15 +98,15 @@ class KRdpView : public KRemoteView
 		bool    m_quitFlag;                // if set: die
 		QString m_clientVersion;           // version number returned by rdesktop
 		RdpContainer *m_container;         // container for the rdesktop window
-		KProcess *m_process;               // rdesktop process
+		K3Process *m_process;               // rdesktop process
 
 		QString  m_caption;    // the caption to use on the window
 
 	private slots:
 		void connectionOpened();           // called if rdesktop started
 		void connectionClosed();           // called if rdesktop quits
-		void processDied(KProcess *);      // called if rdesktop dies
-		void receivedStderr(KProcess *proc, char *buffer, int buflen);
+		void processDied(K3Process *);      // called if rdesktop dies
+		void receivedStderr(K3Process *proc, char *buffer, int buflen);
 		                                   // catches rdesktop debug output
 };
 
