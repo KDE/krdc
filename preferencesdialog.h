@@ -35,7 +35,7 @@ class PreferencesDialog : public KPageDialog
   Q_OBJECT
 
   public:
-    PreferencesDialog( QWidget *parent, const char *name=0 );
+    PreferencesDialog( QWidget *parent );
     ~PreferencesDialog() {};
 
   protected slots:

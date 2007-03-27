@@ -20,8 +20,6 @@
 #ifndef KRDPVIEW_H
 #define KRDPVIEW_H
 
-#include <QX11EmbedContainer>
-
 #include "kremoteview.h"
 
 #define TCP_PORT_RDP 3389
@@ -29,27 +27,7 @@
 
 class K3Process;
 class KRdpView;
-
-class RdpContainer : public QX11EmbedContainer
-{
-	Q_OBJECT
-
-	friend class KRdpView;
-
-	public:
-		RdpContainer(QWidget *parent = 0, const char *name = 0, Qt::WFlags f = 0);
-		~RdpContainer();
-
-	signals:
-		void newEmbeddedWindow(WId window);
-
-	protected:
-		virtual void windowChanged(WId window);
-		virtual bool x11Event(XEvent *e);
-
-	private:
-		bool m_viewOnly;                   // if set: ignore all input
-};
+class QX11EmbedContainer;
 
 class KRdpView : public KRemoteView
 {
@@ -57,7 +35,7 @@ class KRdpView : public KRemoteView
 
 	public:
 		// constructor and destructor
-		KRdpView(QWidget *parent = 0, const char *name = 0,
+		KRdpView(QWidget *parent = 0,
 		         const QString &host = QString::null, int port = TCP_PORT_RDP,
 		         const QString &user = QString::null, const QString &password = QString::null,
 		         int flags = RDP_LOGON_NORMAL, const QString &domain = QString::null,
@@ -82,6 +60,9 @@ class KRdpView : public KRemoteView
 		virtual void pressKey(XEvent *k);        // send a generated key to the server
 		virtual void setViewOnly(bool s);
 
+	protected:
+		bool eventFilter(QObject *obj, QEvent *event);
+
 	private:
 		// properties used for setting up the connection
 		QString  m_name;       // name of the connection
@@ -97,10 +78,12 @@ class KRdpView : public KRemoteView
 		// other properties
 		bool    m_quitFlag;                // if set: die
 		QString m_clientVersion;           // version number returned by rdesktop
-		RdpContainer *m_container;         // container for the rdesktop window
+		QX11EmbedContainer *m_container;    // container for the rdesktop window
 		K3Process *m_process;               // rdesktop process
 
 		QString  m_caption;    // the caption to use on the window
+
+		bool m_viewOnly; // if true filter out any input to the widget
 
 	private slots:
 		void connectionOpened();           // called if rdesktop started

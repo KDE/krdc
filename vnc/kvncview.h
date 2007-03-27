@@ -83,7 +83,7 @@ protected:
 	bool x11Event(XEvent*);
 
 public:
-	KVncView(QWidget* parent=0, const char *name=0,
+	KVncView(QWidget* parent=0,
 		 const QString &host = QString(""), int port = 5900,
 		 const QString &password = QString::null,
 		 Quality quality = QUALITY_UNKNOWN,

@@ -26,10 +26,9 @@
 #include <QPixmap>
 #include <QEvent>
 #include <QVBoxLayout>
+#include <QMainWindow>
 #include <QMouseEvent>
-
-#include <Q3PopupMenu>
-#include <Q3ScrollView>
+#include <QScrollArea>
 
 #include "vnc/kvncview.h"
 #include "rdp/krdpview.h"
@@ -41,8 +40,6 @@
 class KActionCollection;
 class KActionMenu;
 class KToolBar;
-class Q3PopupMenu;
-class Q3DockArea;
 
 
 enum WindowMode {
@@ -58,22 +55,22 @@ enum Protocol {
 	PROTOCOL_RDP
 };
 
-// Overloaded QScrollView, to let mouse move events through to remote widget
-class QScrollView2 : public Q3ScrollView {
+// Overloaded QScrollArea, to let mouse move events through to remote widget
+class RemoteScrollArea : public QScrollArea {
 public:
-	QScrollView2(QWidget *w, const char *name);
+	RemoteScrollArea(QWidget *parent);
 protected:
 	virtual void mouseMoveEvent(QMouseEvent *e);
 };
 
 
-class KRDC : public QWidget
+class KRDC : public QMainWindow
 {
 	Q_OBJECT
 private:
 	SmartPtr<KProgressDialog> m_progressDialog; // dialog, displayed while connecting
 	QVBoxLayout *m_layout;     // the layout for autosizing the scrollview
-	Q3ScrollView *m_scrollView; // scrollview that contains the remote widget
+	RemoteScrollArea *m_scrollView; // scrollview that contains the remote widget
 	KRemoteView *m_view;                  // the remote widget (e.g. KVncView)
 
 	SmartPtr<KeyCaptureDialog> m_keyCaptureDialog; // dialog for key capturing
@@ -81,8 +78,7 @@ private:
 	QWidget *m_fsToolbarWidget;        // qt designer widget for fs toolbar
                                            //     (invalid in normal mode)
 	QPixmap m_pinup, m_pindown;        // fs toolbar imaged for autohide button
-	KToolBar *m_toolbar;               // toolbar in normal mode (0 in fs mode)
-	Q3DockArea *m_dockArea;             // dock area for toolbar in normal mode (0 in fs mode)
+	QToolBar *m_toolbar;               // toolbar in normal mode (0 in fs mode)
 	KActionMenu *m_popup;               // advanced options popup (0 in fs mode)
 	QDesktopWidget m_desktopWidget;
 

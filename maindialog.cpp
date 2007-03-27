@@ -26,10 +26,9 @@
 #include <klocale.h>
 #include <ktoolinvocation.h>
 
-MainDialog::MainDialog( QWidget *parent, const char *name )
+MainDialog::MainDialog( QWidget *parent )
   : KDialog( parent )
 {
-  setObjectName( name );
   setModal( true );
   setCaption( i18n( "Remote Desktop Connection" ) );
   setButtons( Ok | Close | Help | User1 );

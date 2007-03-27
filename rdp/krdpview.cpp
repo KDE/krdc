@@ -27,10 +27,10 @@
 #include <kpassworddialog.h>
 
 #include <kvbox.h>
+#include <QTimer>
 #include <QX11EmbedContainer>
-
-// #include <X11/Xlib.h>
-// #include <X11/keysym.h>
+#include <QCoreApplication>
+#include <QEvent>
 
 #undef Bool
 
@@ -43,64 +43,14 @@ extern KWallet::Wallet *wallet;
 
 static KRdpView *krdpview;
 
-RdpContainer::RdpContainer(QWidget *parent, const char *name, Qt::WFlags f) :
-  QX11EmbedContainer(parent),
-  m_viewOnly(false)
-{
-  setObjectName( name );
-  setWindowFlags( f );
-}
-
-RdpContainer::~RdpContainer()
-{
-}
-
-void RdpContainer::windowChanged(WId window)
-{
-#ifdef __GNUC__
-#warning rethink this with clientClosed() and clientIsEmbedded() signals
-#endif
-#if 0
-  
-	if(window == 0)
-	{
-		emit embeddedWindowDestroyed();
-	}
-	else
-	{
-		emit newEmbeddedWindow(window);
-	}
-#endif
-}
-
-bool RdpContainer::x11Event(XEvent *e)
-{
-#ifdef __GNUC__
-#warning try to redo this in a less X11-ish way
-#endif
-#if 0
-	// FIXME: mouse events still get through in view-only
-	if(m_viewOnly && (e->type == KeyPress || e->type == KeyRelease || e->type == ButtonPress ||
-	                  e->type == ButtonRelease || e->type == MotionNotify || e->type == FocusIn ||
-	                  e->type == FocusOut || e->type == EnterNotify || e->type == LeaveNotify))
-	{
-		return true;
-	}
-#endif
-	return QX11EmbedContainer::x11Event(e);
-
-}
-
-
 // constructor
-KRdpView::KRdpView(QWidget *parent, const char *name,
+KRdpView::KRdpView(QWidget *parent,
                    const QString &host, int port,
                    const QString &user, const QString &password,
                    int flags, const QString &domain,
                    const QString &shell, const QString &directory,
 		   const QString &caption) :
-  KRemoteView(parent, name, Qt::WResizeNoErase | Qt::WNoAutoErase | Qt::WStaticContents),
-  m_name(name),
+  KRemoteView(parent, Qt::WResizeNoErase | Qt::WNoAutoErase | Qt::WStaticContents),
   m_host(host),
   m_port(port),
   m_user(user),
@@ -111,7 +61,8 @@ KRdpView::KRdpView(QWidget *parent, const char *name,
   m_directory(directory),
   m_quitFlag(false),
   m_process(NULL),
-  m_caption(caption)
+  m_caption(caption),
+  m_viewOnly(true)
 {
 	krdpview = this;
 	setFixedSize(16, 16);
@@ -120,7 +71,8 @@ KRdpView::KRdpView(QWidget *parent, const char *name,
 		m_port = TCP_PORT_RDP;
 	}
 
-	m_container = new RdpContainer(0);
+	m_container = new QX11EmbedContainer(this);
+	m_container->installEventFilter(this);
 }
 
 // destructor
@@ -130,10 +82,26 @@ KRdpView::~KRdpView()
 	delete m_container;
 }
 
+// filter out key and mouse events to the container if we are view only
+//FIXME: X11 events are passed to the app before getting caught in the Qt event processing
+bool KRdpView::eventFilter(QObject *obj, QEvent *event)
+{
+    if (m_viewOnly) {
+        if (event->type() == QEvent::KeyPress ||
+            event->type() == QEvent::KeyRelease ||
+            event->type() == QEvent::MouseButtonDblClick ||
+            event->type() == QEvent::MouseButtonPress ||
+            event->type() == QEvent::MouseButtonRelease ||
+            event->type() == QEvent::MouseMove )
+            return true;
+    }
+    return KRemoteView::eventFilter(obj, event);
+}
+
 // returns the size of the framebuffer
 QSize KRdpView::framebufferSize()
 {
-	return m_container->sizeHint();
+	return m_container->minimumSizeHint();
 }
 
 // returns the suggested size
@@ -285,12 +253,13 @@ bool KRdpView::start()
 		*m_process << "-p" << m_password;
 	}
 
-	*m_process << "-X" << ("0x" + QString::number(m_container->winId(), 16));
+	*m_process << "-X" << QString::number(m_container->winId());
 	*m_process << "-a" << QString::number(hp->colorDepth());
 	*m_process << (m_host + ':' + QString::number(m_port));
 
 	kDebug() << "K3Process args: " << m_process->args() << endl;
 
+	setStatus(REMOTE_VIEW_CONNECTING);
 	connect(m_process, SIGNAL(processExited(K3Process *)), SLOT(processDied(K3Process *)));
 	connect(m_process, SIGNAL(receivedStderr(K3Process *, char *, int)), SLOT(receivedStderr(K3Process *, char *, int)));
 	connect(m_container, SIGNAL(clientClosed()), SLOT(connectionClosed()));
@@ -301,8 +270,6 @@ bool KRdpView::start()
 		                      i18n("rdesktop Failure"));
 		return false;
 	}
-
-	setStatus(REMOTE_VIEW_CONNECTING);
 
 	return true;
 }
@@ -318,27 +285,27 @@ void KRdpView::switchFullscreen(bool on)
 // captures pressed keys
 void KRdpView::pressKey(XEvent *e)
 {
-	m_container->x11Event(e);
 	m_container->grabKeyboard();
 }
 
 bool KRdpView::viewOnly()
 {
-	return m_container->m_viewOnly;
+	return m_viewOnly;
 }
 
 void KRdpView::setViewOnly(bool s)
 {
-	m_container->m_viewOnly = s;
+	m_viewOnly = s;
 }
 
 void KRdpView::connectionOpened()
 {
   kDebug() << "Connection opened" << endl;
-	QSize size = m_container->sizeHint();
-
+	QSize size = m_container->minimumSizeHint();
+	kDebug () << "Size hint: " << size.width() << " " << size.height() << endl;
 	setStatus(REMOTE_VIEW_CONNECTED);
 	setFixedSize(size);
+	resize(size);
 	// m_container->adjustSize() ?
 	m_container->setFixedSize(size);
 	emit changeSize(size.width(), size.height());

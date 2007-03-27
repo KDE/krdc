@@ -41,9 +41,8 @@ const int XKeyRelease = KeyRelease;
 #endif
 
 
-KeyCaptureDialog::KeyCaptureDialog(QWidget *parent, const char *name)
+KeyCaptureDialog::KeyCaptureDialog(QWidget *parent)
   : KDialog( parent ), m_grabbed(false) {
-  setObjectName( name );
   setModal( true );
   setCaption( i18n( "Enter Key Combination" ) );
   setButtons( Cancel );

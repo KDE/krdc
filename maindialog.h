@@ -28,7 +28,7 @@ class MainDialog : public KDialog
 {
     Q_OBJECT
   public:
-    MainDialog( QWidget *parent, const char *name=0 );
+    MainDialog( QWidget *parent );
     ~MainDialog() {}
 
     void setRemoteHost( const QString & );

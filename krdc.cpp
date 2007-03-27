@@ -31,15 +31,14 @@
 #include <kwin.h>
 #include <kstartupinfo.h>
 
-#include <Q3DockArea>
 #include <QLabel>
+#include <QScrollBar>
 
-//Added by qt3to4:
 #include <QEvent>
-#include <Q3Frame>
+#include <QFrame>
 #include <QVBoxLayout>
 #include <QResizeEvent>
-#include <Q3PopupMenu>
+#include <QMenu>
 #include <QMouseEvent>
 #include <QX11Info>
 #include <kicon.h>
@@ -51,15 +50,15 @@ const int KRDC::TOOLBAR_FPS_1000 = 10000;
 const int KRDC::TOOLBAR_SPEED_DOWN = 34;
 const int KRDC::TOOLBAR_SPEED_UP = 20;
 
-QScrollView2::QScrollView2(QWidget *w, const char *name) :
-	Q3ScrollView(w, name) {
+RemoteScrollArea::RemoteScrollArea(QWidget *parent) :
+	QScrollArea(parent) {
 	setMouseTracking(true);
         viewport()->setMouseTracking(true);
         horizontalScrollBar()->setMouseTracking(true);
         verticalScrollBar()->setMouseTracking(true);
 }
 
-void QScrollView2::mouseMoveEvent( QMouseEvent *e )
+void RemoteScrollArea::mouseMoveEvent( QMouseEvent *e )
 {
          e->ignore();
 }
@@ -74,13 +73,12 @@ KRDC::KRDC(WindowMode wm, const QString &host,
 	   bool localCursor,
 	   QSize initialWindowSize,
 	   const QString &caption ) :
-  QWidget(0, Qt::WStyle_ContextHelp),
+  QMainWindow(0, Qt::WStyle_ContextHelp),
   m_layout(0),
   m_scrollView(0),
   m_view(0),
   m_fsToolbar(0),
   m_toolbar(0),
-  m_dockArea(0),
   m_popup(0),
   m_ftAutoHide(false),
   m_showProgress(false),
@@ -107,7 +105,7 @@ KRDC::KRDC(WindowMode wm, const QString &host,
 	m_pindown = UserIcon("pindown");
 	m_pinup   = UserIcon("pinup");
 
-	// m_keyCaptureDialog = new KeyCaptureDialog(0, 0);
+	m_keyCaptureDialog = new KeyCaptureDialog(0);
 
 	setMouseTracking(true);
 
@@ -137,7 +135,7 @@ bool KRDC::start()
 		}
 	} else {
 
-		MainDialog mainDlg(this, "MainDialog");
+		MainDialog mainDlg(this);
 		mainDlg.setRemoteHost(m_lastHost);
 
 		if (mainDlg.exec() == QDialog::Rejected) {
@@ -162,10 +160,12 @@ bool KRDC::start()
 
 	setWindowTitle(i18n("%1 - Remote Desktop Connection", serverHost));
 
-	m_scrollView = new QScrollView2(this, "remote scrollview");
-	m_scrollView->setFrameStyle(Q3Frame::NoFrame);
+	m_scrollView = new RemoteScrollArea(this);
+	m_scrollView->setFrameStyle(QFrame::NoFrame);
 	m_scrollView->setSizePolicy(QSizePolicy(QSizePolicy::Expanding,
 					QSizePolicy::Expanding));
+
+	setCentralWidget(m_scrollView);
 
 	switch(m_protocol)
 	{
@@ -173,7 +173,7 @@ bool KRDC::start()
 			// fall through
 
 		case PROTOCOL_VNC:
-			m_view = new KVncView(this, 0, serverHost, serverPort,
+			m_view = new KVncView(this, serverHost, serverPort,
 			                      m_password.isEmpty() ? password : m_password,
 			                      m_quality,
 			                      m_localCursor ? DOT_CURSOR_ON : DOT_CURSOR_AUTO,
@@ -182,7 +182,7 @@ bool KRDC::start()
 			break;
 
 		case PROTOCOL_RDP:
-			m_view = new KRdpView(this, 0, serverHost, serverPort,
+			m_view = new KRdpView(this, serverHost, serverPort,
 			                      userName, m_password.isEmpty() ? password : m_password,
 					      RDP_LOGON_NORMAL, // flags
 					      QString::null, // domain
@@ -194,7 +194,7 @@ bool KRDC::start()
 
 	m_view->setViewOnly(KGlobal::config()->readEntry("viewOnly", false));
 
-	m_scrollView->addChild(m_view);
+	m_scrollView->setWidget(m_view);
 	m_view->setWhatsThis( i18n("Here you can see the remote desktop. If the other side allows you to control it, you can also move the mouse, click or enter keystrokes. If the content does not fit your screen, click on the toolbar's full screen button or scale button. To end the connection, just close the window."));
 
 	connect(m_view, SIGNAL(changeSize(int,int)), SLOT(setSize(int,int)));
@@ -369,7 +369,7 @@ void KRDC::enableFullscreen(bool on)
 QSize KRDC::sizeHint() const
 {
 	if ((m_isFullscreen != WINDOW_MODE_FULLSCREEN) && m_toolbar) {
-		int dockHint = m_dockArea->sizeHint().height();
+		int dockHint = m_toolbar->sizeHint().height();
 		dockHint = dockHint < 1 ? 1 : dockHint; // fix wrong size hint
 		return QSize(m_view->framebufferSize().width(),
 			  dockHint + m_view->framebufferSize().height());
@@ -449,9 +449,6 @@ void KRDC::switchToFullscreen(bool scaling)
 		m_toolbar->hide();
 		m_toolbar->deleteLater();
 		m_toolbar = 0;
-		m_dockArea->hide();
-		m_dockArea->deleteLater();
-		m_dockArea = 0;
 	}
 	if (m_popup) {
 		m_popup->deleteLater();
@@ -467,6 +464,7 @@ void KRDC::switchToFullscreen(bool scaling)
 		delete m_layout;
 	m_layout = new QVBoxLayout(this);
 	m_layout->addWidget(m_scrollView);
+setLayout(m_layout);
 
 	if (scalingPossible) {
 		m_view->enableScaling(scaling);
@@ -598,13 +596,9 @@ void KRDC::switchToNormal(bool scaling)
 	}
 
 	if (!m_toolbar) {
-		m_dockArea = new Q3DockArea(Qt::Horizontal, Q3DockArea::Normal, this);
-		m_dockArea->setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding,
-					QSizePolicy::Fixed));
-		KToolBar *t = new KToolBar(m_dockArea);
+		QToolBar *t = addToolBar(i18n("Window Mode"));
 		m_toolbar = t;
 		t->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
-		connect(t, SIGNAL(placeChanged(Q3DockWindow::Place)), SLOT(toolbarChanged()));
 
                 QAction* action = m_actionCollection->addAction( "window_fullscreen");
                 action->setText( i18n("Fullscreen") );
@@ -639,13 +633,6 @@ void KRDC::switchToNormal(bool scaling)
 		m_popup = createActionMenu(t);
 		t->addAction(m_popup);
 		//advancedButton->setPopupDelay(0);
-
-                delete m_layout;
-		m_layout = new QVBoxLayout(this);
-		m_layout->addWidget(m_dockArea);
-		m_layout->addWidget(m_scrollView);
-		m_layout->setGeometry(QRect(0, 0, m_scrollView->width(),
-		                            m_dockArea->height() + m_scrollView->height()));
 	}
 
 	if (scaling) {
@@ -816,7 +803,7 @@ void KRDC::repositionView(bool fullscreen) {
 			m_layout->setMargin(1);
 	}
 
-	m_scrollView->moveChild(m_view, ox, oy);
+	m_scrollView->move(ox, oy);
 }
 
 void KRDC::toggleFsToolbarAutoHide() {
@@ -848,15 +835,15 @@ void KRDC::bumpScroll() {
 
 	if (d.width() < s.width()) {
 		if (x == 0)
-			m_scrollView->scrollBy(-BUMP_SCROLL_CONSTANT, 0);
+			m_scrollView->scroll(-BUMP_SCROLL_CONSTANT, 0);
 		else if (x == d.width()-1)
-			m_scrollView->scrollBy(BUMP_SCROLL_CONSTANT, 0);
+			m_scrollView->scroll(BUMP_SCROLL_CONSTANT, 0);
 	}
 	if (d.height() < s.height()) {
 		if (y == 0)
-			m_scrollView->scrollBy(0, -BUMP_SCROLL_CONSTANT);
+			m_scrollView->scroll(0, -BUMP_SCROLL_CONSTANT);
 		else if (y == d.height()-1)
-			m_scrollView->scrollBy(0, BUMP_SCROLL_CONSTANT);
+			m_scrollView->scroll(0, BUMP_SCROLL_CONSTANT);
 	}
 
 	m_bumpScrollTimer.start(333);

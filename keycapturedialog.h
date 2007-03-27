@@ -25,7 +25,7 @@ class KeyCaptureDialog : public KDialog {
 
 	bool m_grabbed;
 public:
-	KeyCaptureDialog(QWidget * parent= 0, const char *name = 0);
+	KeyCaptureDialog(QWidget * parent= 0);
 	~KeyCaptureDialog();
 
 public slots:

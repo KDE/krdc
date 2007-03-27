@@ -27,10 +27,9 @@
 
 #include <klocale.h>
 
-PreferencesDialog::PreferencesDialog( QWidget *parent, const char *name )
+PreferencesDialog::PreferencesDialog( QWidget *parent )
     : KPageDialog( parent )
 {
-  setObjectName( name );
   setFaceType( KPageDialog::Tabbed );
   setCaption( i18n( "Preferences" ) );
   setButtons( Ok | Cancel );

@@ -73,7 +73,6 @@ const int MAX_SELECTION_LENGTH = 4096;
 
 
 KVncView::KVncView(QWidget *parent,
-		   const char *name,
 		   const QString &_host,
 		   int _port,
 		   const QString &_password,
@@ -81,7 +80,7 @@ KVncView::KVncView(QWidget *parent,
 		   DotCursorState dotCursorState,
 		   const QString &encodings,
 		   const QString &caption) :
-  KRemoteView(parent, name, Qt::WResizeNoErase | Qt::WNoAutoErase | Qt::WStaticContents),
+  KRemoteView(parent, Qt::WResizeNoErase | Qt::WNoAutoErase | Qt::WStaticContents),
   m_cthread(this, m_wthread, m_quitFlag),
   m_wthread(this, m_quitFlag),
   m_quitFlag(false),
