@@ -18,7 +18,7 @@
 
      For any questions, comments or whatever, you may mail me at: arend@auton.nl
 */
-
+#include <fixx11h.h>
 #include <kdialog.h>
 #include <klocale.h>
 #include <kmessagebox.h>
