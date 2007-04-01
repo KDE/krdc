@@ -536,7 +536,7 @@ setLayout(m_layout);
 
         action = m_actionCollection->addAction( "close" );
         action->setText( i18n("Close") );
-        action->setIcon( KIcon( "close" ) );
+        action->setIcon( KIcon( "application-exit" ) );
 	action->setToolTip(i18n("Close"));
 	action->setCheckable(true);
 	connect(action, SIGNAL(toggled(bool)), this, SLOT(quit()));
@@ -627,7 +627,7 @@ void KRDC::switchToNormal(bool scaling)
 		action->setToolTip(i18n("Enter special keys"));
 		action->setWhatsThis( i18n("This option allows you to send special key combinations like Ctrl-Alt-Del to the remote host."));
 		action->setCheckable(true);
-		connect(action, SIGNAL(toggled(bool)), m_keyCaptureDialog, SLOT(execute(bool)));
+		connect(action, SIGNAL(toggled(bool)), m_keyCaptureDialog, SLOT(execute()));
 		t->addAction(action);
 
 		m_popup = createActionMenu(t);
