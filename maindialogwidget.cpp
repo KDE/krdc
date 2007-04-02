@@ -82,7 +82,7 @@ class UrlListViewItem : public K3ListViewItem
 };
 
 MainDialogWidget::MainDialogWidget( QWidget *parent )
-  : QWidget( parent ), m_scanning( false ), m_locator_dnssd(0)
+  : QWidget( parent ), m_scanning( false ), m_locator_dnssd_rfb(0),m_locator_dnssd_vnc(0)
 {
     setupUi(this);
     // These should be folded back into the .ui, if we keep it.
@@ -260,19 +260,28 @@ void MainDialogWidget::rescan()
 
   m_browsingView->clear();
 
-  if (m_locator_dnssd) {
-    delete m_locator_dnssd;  // still active browsers
-    m_locator_dnssd = 0;
+  if (m_locator_dnssd_rfb) {
+    delete m_locator_dnssd_rfb;  // still active browsers
+    m_locator_dnssd_rfb = 0;
+    delete m_locator_vnc;
+    m_locator_vnc=0;
   }
 
   if (m_scope == DNSSD_SCOPE) {
     kDebug() << "Scope is DNSSD\n";
-    m_locator_dnssd = new DNSSD::ServiceBrowser((QStringList() << "_rfb._tcp" << "_rdp._tcp"),0,DNSSD::ServiceBrowser::AutoResolve);
-    connect(m_locator_dnssd,SIGNAL(serviceAdded(DNSSD::RemoteService::Ptr)),
+    //FIXME: non-default domains too
+    m_locator_dnssd_rfb = new DNSSD::ServiceBrowser("_rfb._tcp",true);
+    m_locator_dnssd_vnc = new DNSSD::ServiceBrowser("_vnc._tcp",true);
+    connect(m_locator_dnssd_rfb,SIGNAL(serviceAdded(DNSSD::RemoteService::Ptr)),
       SLOT(addedService(DNSSD::RemoteService::Ptr)));
-    connect(m_locator_dnssd,SIGNAL(serviceRemoved(DNSSD::RemoteService::Ptr)),
+    connect(m_locator_dnssd_rfb,SIGNAL(serviceRemoved(DNSSD::RemoteService::Ptr)),
       SLOT(removedService(DNSSD::RemoteService::Ptr)));
-    m_locator_dnssd->startBrowse();
+    connect(m_locator_dnssd_vnc,SIGNAL(serviceAdded(DNSSD::RemoteService::Ptr)),
+      SLOT(addedService(DNSSD::RemoteService::Ptr)));
+    connect(m_locator_dnssd_vnc,SIGNAL(serviceRemoved(DNSSD::RemoteService::Ptr)),
+      SLOT(removedService(DNSSD::RemoteService::Ptr)));
+    m_locator_dnssd_vnc->startBrowse();
+    m_locator_dnssd_rfb->startBrowse();
     // now find scopes
     lastSignalServices(true);
   } else {
