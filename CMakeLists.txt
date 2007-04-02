@@ -56,7 +56,7 @@ kde4_add_ui3_files(krdc_SRCS keycapturewidget.ui)
 
 kde4_add_executable(krdc ${krdc_SRCS})
 
-target_link_libraries(krdc  ${JPEG_LIBRARIES} ${KDE4_KDEUI_LIBS} ${KDE4_KDNSSD_LIBS} ${KDE4_KWALLETCLIENT_LIBS} ${SLP_LIBRARIES})
+target_link_libraries(krdc  ${JPEG_LIBRARIES} ${KDE4_KDEUI_LIBS} ${KDE4_KDNSSD_LIBS} ${KDE4_KWALLETCLIENT_LIBS} ${SLP_LIBRARIES} ${KDE4_KDE3SUPPORT_LIBS})
 if (HAVE_VIDMODE_EXTENSION)
   target_link_libraries(krdc ${X11VIDMODE_LIBRARIES})
 endif (HAVE_VIDMODE_EXTENSION)
