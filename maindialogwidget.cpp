@@ -263,8 +263,8 @@ void MainDialogWidget::rescan()
   if (m_locator_dnssd_rfb) {
     delete m_locator_dnssd_rfb;  // still active browsers
     m_locator_dnssd_rfb = 0;
-    delete m_locator_vnc;
-    m_locator_vnc=0;
+    delete m_locator_dnssd_vnc;
+    m_locator_dnssd_vnc=0;
   }
 
   if (m_scope == DNSSD_SCOPE) {
