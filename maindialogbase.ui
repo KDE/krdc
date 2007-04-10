@@ -38,7 +38,7 @@
     </widget>
    </item>
    <item row="1" column="1" >
-    <widget class="KHistoryCombo" name="m_serverInput" >
+    <widget class="KHistoryComboBox" name="m_serverInput" >
      <property name="minimumSize" >
       <size>
        <width>250</width>
@@ -237,15 +237,9 @@ Remote Desktop Connection only supports systems that use VNC.</string>
  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
  <customwidgets>
   <customwidget>
-   <class>Q3Frame</class>
-   <extends>QFrame</extends>
-   <header>Qt3Support/Q3Frame</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>KHistoryCombo</class>
+   <class>KHistoryComboBox</class>
    <extends>QWidget</extends>
-   <header>kcombobox.h</header>
+   <header>khistorycombobox.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
