@@ -17,40 +17,39 @@
 
 #include "kremoteview.h"
 
-KRemoteView::KRemoteView(QWidget *parent,
-			 Qt::WFlags f) :
-	QWidget(parent, f),
-        m_status(REMOTE_VIEW_DISCONNECTED)
+KRemoteView::KRemoteView(QWidget *parent) :
+	QWidget(parent),
+        m_status(Disconnected)
 {
 }
 
-enum RemoteViewStatus KRemoteView::status() {
+KRemoteView::RemoteStatus KRemoteView::status() {
 	return m_status;
 }
 
-void KRemoteView::setStatus(RemoteViewStatus s) {
+void KRemoteView::setStatus(KRemoteView::RemoteStatus s) {
 	if (m_status == s)
 		return;
 
 	if (((1+(int)m_status) != (int)s) &&
-	    (s != REMOTE_VIEW_DISCONNECTED)) {
+	    (s != Disconnected)) {
 		// follow state transition rules
 
-		if (s == REMOTE_VIEW_DISCONNECTING) {
-              	    if (m_status == REMOTE_VIEW_DISCONNECTED)
+		if (s == Disconnecting) {
+              	    if (m_status == Disconnected)
 			return;
 		}
 		else {
 			Q_ASSERT(((int) s) >= 0);
 			if (((int)m_status) > ((int)s) ) {
-				m_status = REMOTE_VIEW_DISCONNECTED;
-				emit statusChanged(REMOTE_VIEW_DISCONNECTED);
+				m_status = Disconnected;
+				emit statusChanged(Disconnected);
 			}
 			// smooth state transition
 			int origState = (int)m_status;
 			for (int i = origState; i < (int)s; i++) {
-				m_status = (RemoteViewStatus) i;
-				emit statusChanged((RemoteViewStatus) i);
+				m_status = (RemoteStatus) i;
+				emit statusChanged((RemoteStatus) i);
 			}
 		}
 	}
@@ -72,8 +71,8 @@ bool KRemoteView::supportsLocalCursor() const {
 void KRemoteView::showDotCursor(DotCursorState) {
 }
 
-DotCursorState KRemoteView::dotCursorState() const {
-	return DOT_CURSOR_OFF;
+KRemoteView::DotCursorState KRemoteView::dotCursorState() const {
+	return CursorOff;
 }
 
 bool KRemoteView::scaling() const {

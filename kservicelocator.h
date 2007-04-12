@@ -49,12 +49,12 @@ class KServiceLocator : public QObject {
  public:
 	/**
 	 * Creates a new KServiceLocator.
-	 * @param lang the language to search in, or QString::null for the
+	 * @param lang the language to search in, or QString() for the
 	 *             default language
 	 * @param async true to create the service locator in asynchronous
 	 *                   mode, false otherwise
 	 */
-        KServiceLocator(const QString &lang = QString::null,
+        KServiceLocator(const QString &lang = QString(),
 			bool async = true);
 
 	virtual ~KServiceLocator();
@@ -79,8 +79,8 @@ class KServiceLocator : public QObject {
 	 * This function requires the presence of the SLP library, otherwise it
 	 * will return the original value.
 	 * @param value the attribute value to decode
-	 * @return the decoded value. If @p value was QString::null or decoding
-	 *         failed, QString::null will be returned
+	 * @return the decoded value. If @p value was QString() or decoding
+	 *         failed, QString() will be returned
 	 */
 	static QString decodeAttributeValue(const QString &value);
 
@@ -151,8 +151,8 @@ class KServiceLocator : public QObject {
 	 *                  scopes
 	 * @return true if the operation was successful
 	 */
-	bool findServiceTypes(const QString &namingAuthority = QString::null,
-			      const QString &scopelist = QString::null);
+	bool findServiceTypes(const QString &namingAuthority = QString(),
+			      const QString &scopelist = QString());
 
 	/**
 	 * Finds all services in the given scope with the given service type.
@@ -179,8 +179,8 @@ class KServiceLocator : public QObject {
 	 * @return true if the operation was successful
 	 */
 	bool findServices(const QString &srvtype,
-			  const QString &filter = QString::null,
-			  const QString &scopelist = QString::null);
+			  const QString &filter = QString(),
+			  const QString &scopelist = QString());
 
 	/**
 	 * Finds the attributes of the service with the given URL.
@@ -194,12 +194,12 @@ class KServiceLocator : public QObject {
 	 *
 	 * @param serviceURL the URL of the service to search
 	 * @param attributeIds a comma-separated list of attributes to
-	 *                     retrieve, or QString::null to retrieve all
+	 *                     retrieve, or QString() to retrieve all
 	 *                     attributes
 	 * @return true if the operation was successful
 	 */
 	bool findAttributes(const QString &serviceUrl,
-			    const QString &attributeIds = QString::null);
+			    const QString &attributeIds = QString());
 
 	/**
 	 * Finds all scopes that can be searched. Always finds at least

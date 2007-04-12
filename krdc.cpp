@@ -67,7 +67,7 @@ void RemoteScrollArea::mouseMoveEvent( QMouseEvent *e )
 QString KRDC::m_lastHost = "";
 
 KRDC::KRDC(WindowMode wm, const QString &host,
-	   Quality q, const QString &encodings,
+	   KRemoteView::Quality q, const QString &encodings,
 	   const QString &password,
 	   bool scale,
 	   bool localCursor,
@@ -176,7 +176,7 @@ bool KRDC::start()
 			m_view = new KVncView(this, serverHost, serverPort,
 			                      m_password.isEmpty() ? password : m_password,
 			                      m_quality,
-			                      m_localCursor ? DOT_CURSOR_ON : DOT_CURSOR_AUTO,
+			                      m_localCursor ? KRemoteView::CursorOn : KRemoteView::CursorAuto,
 			                      m_encodings,
 					      m_caption);
 			break;
@@ -185,9 +185,9 @@ bool KRDC::start()
 			m_view = new KRdpView(this, serverHost, serverPort,
 			                      userName, m_password.isEmpty() ? password : m_password,
 					      RDP_LOGON_NORMAL, // flags
-					      QString::null, // domain
-					      QString::null, // shell
-					      QString::null, // directory
+					      QString(), // domain
+					      QString(), // shell
+					      QString(), // directory
 					      m_caption);
 			break;
 	}
@@ -203,8 +203,8 @@ bool KRDC::start()
 	// note that the disconnectedError() will be disconnected when kremoteview
 	// is completely initialized
 	connect(m_view, SIGNAL(disconnectedError()), SIGNAL(disconnectedError()));
-	connect(m_view, SIGNAL(statusChanged(RemoteViewStatus)),
-		SLOT(changeProgress(RemoteViewStatus)));
+	connect(m_view, SIGNAL(statusChanged(KRemoteView::RemoteStatus)),
+		SLOT(changeProgress(KRemoteView::RemoteStatus)));
 	connect(m_view, SIGNAL(showingPasswordDialog(bool)),
 		SLOT(showingPasswordDialog(bool)));
 	connect(m_keyCaptureDialog, SIGNAL(keyPressed(XEvent*)),
@@ -212,7 +212,7 @@ bool KRDC::start()
 	return m_view->start();
 }
 
-void KRDC::changeProgress(RemoteViewStatus s) {
+void KRDC::changeProgress(KRemoteView::RemoteStatus s) {
 	if (!m_progressDialog) {
 		m_progressDialog = new KProgressDialog();
 		m_progressDialog->showCancelButton(true);
@@ -222,24 +222,24 @@ void KRDC::changeProgress(RemoteViewStatus s) {
 			SIGNAL(disconnectedError()));
 	}
 
-	if (s == REMOTE_VIEW_CONNECTING) {
+	if (s == KRemoteView::Connecting) {
 		m_progressDialog->setLabel(i18n("Establishing connection..."));
 		showProgressDialog();
 		m_progressDialog->progressBar()->setValue(0);
 	}
-	else if (s == REMOTE_VIEW_AUTHENTICATING) {
+	else if (s == KRemoteView::Authenticating) {
 		m_progressDialog->setLabel(i18n("Authenticating..."));
 		m_progressDialog->progressBar()->setValue(1);
 	}
-	else if (s == REMOTE_VIEW_PREPARING) {
+	else if (s == KRemoteView::Preparing) {
 		m_progressDialog->setLabel(i18n("Preparing desktop..."));
 		m_progressDialog->progressBar()->setValue(2);
 	}
-	else if ((s == REMOTE_VIEW_CONNECTED) ||
-		 (s == REMOTE_VIEW_DISCONNECTED)) {
+	else if ((s == KRemoteView::Connected) ||
+		 (s == KRemoteView::Disconnected)) {
 	        m_progressDialog->progressBar()->setValue(3);
 		hideProgressDialog();
-		if (s == REMOTE_VIEW_CONNECTED) {
+		if (s == KRemoteView::Connected) {
 			QObject::disconnect(m_view, SIGNAL(disconnectedError()),
 					    this, SIGNAL(disconnectedError()));
 			connect(m_view, SIGNAL(disconnectedError()),
@@ -409,7 +409,7 @@ KActionMenu *KRDC::createActionMenu(QWidget *parent) const
                     a->setText( i18n("Always Show Local Cursor") );
 		} else {
 		        action->setCheckable(true);
-			action->setChecked(m_view->dotCursorState() == DOT_CURSOR_ON);
+			action->setChecked(m_view->dotCursorState() == KRemoteView::CursorOn);
 			connect(action, SIGNAL(toggled()), this, SLOT(showLocalCursorToggled()));
 			pu->addAction(action);
 		}
@@ -676,8 +676,8 @@ void KRDC::viewOnlyToggled() {
 }
 
 void KRDC::showLocalCursorToggled() {
-	bool s = (m_view->dotCursorState() != DOT_CURSOR_ON);
-	m_view->showDotCursor(s ? DOT_CURSOR_ON : DOT_CURSOR_AUTO);
+	bool s = (m_view->dotCursorState() != KRemoteView::CursorOn);
+	m_view->showDotCursor(s ? KRemoteView::CursorOn : KRemoteView::CursorAuto);
 
 	QAction* action = m_actionCollection->action("popupmenu_local_cursor");
 	if (action)

@@ -80,7 +80,7 @@ KVncView::KVncView(QWidget *parent,
 		   DotCursorState dotCursorState,
 		   const QString &encodings,
 		   const QString &caption) :
-  KRemoteView(parent, Qt::WResizeNoErase | Qt::WNoAutoErase | Qt::WStaticContents),
+  KRemoteView(parent),
   m_cthread(this, m_wthread, m_quitFlag),
   m_wthread(this, m_quitFlag),
   m_quitFlag(false),
@@ -95,6 +95,7 @@ KVncView::KVncView(QWidget *parent,
   m_cursorState(dotCursorState),
   m_caption(caption)
 {
+	setAttribute(Qt::WA_StaticContents);
 	kvncview = this;
 	password = _password.toLatin1();
 	dpy = QX11Info::display();
@@ -112,7 +113,7 @@ KVncView::KVncView(QWidget *parent,
 					      "pics/pointcursormask.png"));
 	m_cursor = QCursor(cursorBitmap, cursorMask);
 
-	if ((quality != QUALITY_UNKNOWN) ||
+	if ((quality != Unknown) ||
 	    !encodings.isNull())
 		configureApp(quality, encodings);
 }
@@ -125,19 +126,19 @@ void KVncView::showDotCursor(DotCursorState state) {
 	showDotCursorInternal();
 }
 
-DotCursorState KVncView::dotCursorState() const {
+KRemoteView::DotCursorState KVncView::dotCursorState() const {
 	return m_cursorState;
 }
 
 void KVncView::showDotCursorInternal() {
 	switch (m_cursorState) {
-	case DOT_CURSOR_ON:
+	case CursorOn:
 		setCursor(m_cursor);
 		break;
-	case DOT_CURSOR_OFF:
+	case CursorOff:
 		setCursor(QCursor(Qt::BlankCursor));
 		break;
-	case DOT_CURSOR_AUTO:
+	case CursorAuto:
 		if (m_enableClientCursor)
 			setCursor(QCursor(Qt::BlankCursor));
 		else
@@ -169,21 +170,21 @@ void KVncView::configureApp(Quality q, const QString specialEncodings) {
 	appData.shareDesktop = 1;
 	appData.viewOnly = 0;
 
-	if (q == QUALITY_LOW) {
+	if (q == Low) {
 		appData.useBGR233 = 1;
 		appData.encodingsString = "background copyrect softcursor tight zlib hextile raw";
 		appData.compressLevel = -1;
 		appData.qualityLevel = 1;
 		appData.dotCursor = 1;
 	}
-	else if (q == QUALITY_MEDIUM) {
+	else if (q == Medium) {
 		appData.useBGR233 = 0;
 		appData.encodingsString = "background copyrect softcursor tight zlib hextile raw";
 		appData.compressLevel = -1;
 		appData.qualityLevel = 7;
 		appData.dotCursor = 1;
 	}
-	else if ((q == QUALITY_HIGH) || (q == QUALITY_UNKNOWN)) {
+	else if ((q == High) || (q == Unknown)) {
 		appData.useBGR233 = 0;
 		appData.encodingsString = "copyrect softcursor hextile raw";
 		appData.compressLevel = -1;
@@ -202,7 +203,7 @@ void KVncView::configureApp(Quality q, const QString specialEncodings) {
 	appData.copyRectDelay = 0;
 
 	if (!appData.dotCursor)
-		m_cursorState = DOT_CURSOR_OFF;
+		m_cursorState = CursorOff;
 	showDotCursorInternal();
 }
 
@@ -220,7 +221,7 @@ bool KVncView::checkLocalKRfb() {
         int portNum = reply;
         if(m_port != portNum)
                 return true;
-        setStatus(REMOTE_VIEW_DISCONNECTED);
+        setStatus(Disconnected);
         KMessageBox::error(0,
                            i18n("It is not possible to connect to a local desktop sharing service."),
                            i18n("Connection Failure"));
@@ -276,11 +277,11 @@ bool KVncView::start() {
 
 		Quality quality;
 		if (ci == 0)
-			quality = QUALITY_HIGH;
+			quality = High;
 		else if (ci == 1)
-			quality = QUALITY_MEDIUM;
+			quality = Medium;
 		else if (ci == 2)
-			quality = QUALITY_LOW;
+			quality = Low;
 		else {
 			kDebug() << "Unknown quality";
 				return false;
@@ -290,7 +291,7 @@ bool KVncView::start() {
 		useKWallet = hp->useKWallet();
 	}
 
-	setStatus(REMOTE_VIEW_CONNECTING);
+	setStatus(Connecting);
 
 	m_cthread.start();
 	setBackgroundMode(Qt::NoBackground);
@@ -381,16 +382,16 @@ void KVncView::customEvent(QEvent *e)
 	else if (e->type() == StatusChangeEventType) {
 		StatusChangeEvent *sce = (StatusChangeEvent*) e;
 		setStatus(sce->status());
-		if (m_status == REMOTE_VIEW_CONNECTED) {
+		if (m_status == Connected) {
 			emit connected();
 			setFocus();
 			setMouseTracking(true);
 		}
-		else if (m_status == REMOTE_VIEW_DISCONNECTED) {
+		else if (m_status == Disconnected) {
 			setMouseTracking(false);
 			emit disconnected();
 		}
-		else if (m_status == REMOTE_VIEW_PREPARING) {
+		else if (m_status == Preparing) {
 			//Login was successful: Write KWallet password if necessary.
 			if ( useKWallet && !password.isNull() && wallet && wallet->isOpen() && !wallet->hasEntry(host())) {
 				wallet->writePassword(host(), password);
@@ -455,39 +456,39 @@ void KVncView::customEvent(QEvent *e)
 	}
 	else if (e->type() == FatalErrorEventType) {
 		FatalErrorEvent *fee = (FatalErrorEvent*) e;
-		setStatus(REMOTE_VIEW_DISCONNECTED);
+		setStatus(Disconnected);
 		switch (fee->errorCode()) {
-		case ERROR_CONNECTION:
+		case Connection:
 			KMessageBox::error(0,
 					   i18n("Connection attempt to host failed."),
 					   i18n("Connection Failure"));
 			break;
-		case ERROR_PROTOCOL:
+		case Protocol:
 			KMessageBox::error(0,
 					   i18n("Remote host is using an incompatible protocol."),
 					   i18n("Connection Failure"));
 			break;
-		case ERROR_IO:
+		case IO:
 			KMessageBox::error(0,
 					   i18n("The connection to the host has been interrupted."),
 					   i18n("Connection Failure"));
 			break;
-		case ERROR_SERVER_BLOCKED:
+		case ServerBlocked:
 			KMessageBox::error(0,
 					   i18n("Connection failed. The server does not accept new connections."),
 					   i18n("Connection Failure"));
 			break;
-		case ERROR_NAME:
+		case Name:
 			KMessageBox::error(0,
 					   i18n("Connection failed. A server with the given name cannot be found."),
 					   i18n("Connection Failure"));
 			break;
-		case ERROR_NO_SERVER:
+		case NoServer:
 			KMessageBox::error(0,
 					   i18n("Connection failed. No server running at the given address and port."),
 					   i18n("Connection Failure"));
 			break;
-		case ERROR_AUTHENTICATION:
+		case Authentication:
 			//Login failed: Remove wallet entry if there is one.
 			if ( useKWallet && wallet && wallet->isOpen() && wallet->hasEntry(host()) ) {
 				wallet->removeEntry(host());
@@ -519,13 +520,13 @@ void KVncView::customEvent(QEvent *e)
 		MouseStateEvent *mse = (MouseStateEvent*) e;
 		emit mouseStateChanged(mse->x(), mse->y(), mse->buttonMask());
 		bool show = m_plom.handlePointerEvent(mse->x(), mse->y());
-		if (m_cursorState != DOT_CURSOR_ON)
-			showDotCursor(show ? DOT_CURSOR_AUTO : DOT_CURSOR_OFF);
+		if (m_cursorState != CursorOn)
+			showDotCursor(show ? CursorAuto : CursorOff);
 	}
 }
 
 void KVncView::mouseEvent(QMouseEvent *e) {
-	if (m_status != REMOTE_VIEW_CONNECTED)
+	if (m_status != Connected)
 		return;
 	if (m_viewOnly)
 		return;
@@ -584,7 +585,7 @@ void KVncView::mouseMoveEvent(QMouseEvent *e) {
 }
 
 void KVncView::wheelEvent(QWheelEvent *e) {
-	if (m_status != REMOTE_VIEW_CONNECTED)
+	if (m_status != Connected)
 		return;
 	if (m_viewOnly)
 		return;
@@ -703,7 +704,7 @@ bool KVncView::remoteMouseTracking() {
 }
 
 void KVncView::clipboardChanged() {
-	if (m_status != REMOTE_VIEW_CONNECTED)
+	if (m_status != Connected)
 		return;
 
 	if (m_cb->ownsClipboard() || m_dontSendCb)
@@ -717,7 +718,7 @@ void KVncView::clipboardChanged() {
 }
 
 void KVncView::selectionChanged() {
-	if (m_status != REMOTE_VIEW_CONNECTED)
+	if (m_status != Connected)
 		return;
 
 	if (m_cb->ownsSelection() || m_dontSendCb)

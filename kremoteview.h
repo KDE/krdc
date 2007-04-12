@@ -19,29 +19,6 @@
 #define KREMOTEVIEW_H
 
 #include <QWidget>
-// #include <kkeynative.h>
-#include "events.h"
-
-typedef enum {
-  QUALITY_UNKNOWN=0,
-  QUALITY_HIGH=1,
-  QUALITY_MEDIUM=2,
-  QUALITY_LOW=3
-} Quality;
-
-/**
- * Describes the state of a local cursor, if there is such a concept in the backend.
- * With local cursors, there are two cursors: the cursor on the local machine (client),
- * and the cursor on the remote machine (server). Because there is usually some lag,
- * some backends show both cursors simultanously. In the VNC backend the local cursor
- * is a dot and the remote cursor is the 'real' cursor, usually an arrow.
- */
-enum DotCursorState {
-	DOT_CURSOR_ON,  ///< Always show local cursor (and the remote one).
-	DOT_CURSOR_OFF, ///< Never show local cursor, only the remote one.
-	/// Try to measure the lag and enable the local cursor if the latency is too high.
-	DOT_CURSOR_AUTO
-};
 
 /**
  * Generic widget that displays a remote framebuffer.
@@ -64,8 +41,74 @@ class KRemoteView : public QWidget
 {
 	Q_OBJECT
 public:
-	KRemoteView(QWidget *parent = 0,
-		    Qt::WFlags f = 0);
+
+    Q_ENUMS(Quality)
+
+    enum Quality {
+        Unknown,
+        High,
+        Medium,
+        Low
+    };
+
+    /**
+    * Describes the state of a local cursor, if there is such a concept in the backend.
+    * With local cursors, there are two cursors: the cursor on the local machine (client),
+    * and the cursor on the remote machine (server). Because there is usually some lag,
+    * some backends show both cursors simultanously. In the VNC backend the local cursor
+    * is a dot and the remote cursor is the 'real' cursor, usually an arrow.
+    */
+
+    Q_ENUMS(DotCursorState)
+
+    enum DotCursorState {
+        CursorOn,  ///< Always show local cursor (and the remote one).
+        CursorOff, ///< Never show local cursor, only the remote one.
+        /// Try to measure the lag and enable the local cursor if the latency is too high.
+        CursorAuto
+    };
+
+    /**
+    * State of the connection. The state of the connection is returned
+    * by @ref KRemoteView::status().
+    *
+    * Not every state transition is allowed. You are only allowed to transition
+    * a state to the following state, with three exceptions:
+    * @li You can move from every state directly to Disconnected
+    * @li You can move from every state except Disconnected to
+    *     Disconnecting
+    * @li You can move from Disconnected to Connecting
+    *
+    * @ref KRemoteView::setStatus() will follow this rules for you.
+    * (If you add/remove a state here, you must adapt it)
+    */
+
+    Q_ENUMS(RemoteStatus)
+
+    enum RemoteStatus {
+        Connecting     = 0,
+        Authenticating = 1,
+        Preparing      = 2,
+        Connected      = 3,
+        Disconnecting  = -1,
+        Disconnected   = -2
+    };
+
+    Q_ENUMS(ErrorCode)
+
+    enum ErrorCode {
+        None = 0,
+        Internal,
+        Connection,
+        Protocol,
+        IO,
+        Name,
+        NoServer,
+        ServerBlocked,
+        Authentication
+    };
+
+	KRemoteView(QWidget *parent = 0);
 
 	virtual ~KRemoteView();
 
@@ -99,8 +142,8 @@ public:
 	/**
 	 * Sets the state of the dot cursor, if supported by the backend.
 	 * The default implementation does nothing.
-	 * @param state the new state (DOT_CURSOR_ON, DOT_CURSOR_OFF or
-	 *        DOT_CURSOR_AUTO)
+	 * @param state the new state (CursorOn, CursorOff or
+	 *        CursorAuto)
 	 * @see dotCursorState()
 	 * @see supportsLocalCursor()
 	 */
@@ -108,7 +151,7 @@ public:
 
 	/**
 	 * Returns the state of the local cursor. The default implementation returns
-	 * always DOT_CURSOR_OFF.
+	 * always CursorOff.
 	 * @return true if local cursors are supported/known
 	 * @see showDotCursor()
 	 * @see supportsLocalCursor()
@@ -165,7 +208,7 @@ public:
 	 * dialogs to the user) and start connecting. Should not block
 	 * without running the event loop (so displaying a dialog is ok).
 	 * When the view starts connecting the application must call
-	 * @ref setStatus() with the status REMOTE_VIEW_CONNECTING.
+	 * @ref setStatus() with the status Connecting.
 	 * @return true if successful (so far), false
 	 *         otherwise
 	 * @see connected()
@@ -180,7 +223,7 @@ public:
 	 * @return the status of the connection
 	 * @see setStatus()
 	 */
-	enum RemoteViewStatus status();
+	RemoteStatus status();
 
 public slots:
         /**
@@ -245,7 +288,7 @@ signals:
 	 * Emitted when the status of the view changed.
 	 * @param s the new status
 	 */
-	void statusChanged(RemoteViewStatus s);
+	void statusChanged(KRemoteView::RemoteStatus s);
 
 	/**
 	 * Emitted when the password dialog is shown or hidden.
@@ -267,21 +310,21 @@ protected:
 	/**
 	 * The status of the remote view.
 	 */
-	enum RemoteViewStatus m_status;
+	RemoteStatus m_status;
 
 	/**
 	 * Set the status of the connection.
 	 * Emits a statusChanged() signal.
 	 * Note that the states need to be set in a certain order,
-	 * see @ref RemoteViewStatus. setStatus() will try to do this
-	 * transition automatically, so if you are in REMOTE_VIEW_CONNECTING
-	 * and call setStatus(REMOTE_VIEW_PREPARING), setStatus() will
-	 * emit a REMOTE_VIEW_AUTHENTICATING and then REMOTE_VIEW_PREPARING.
+	 * see @ref Status. setStatus() will try to do this
+	 * transition automatically, so if you are in Connecting
+	 * and call setStatus(Preparing), setStatus() will
+	 * emit a Authenticating and then Preparing.
 	 * If you transition backwards, it will emit a
-	 * REMOTE_VIEW_DISCONNECTED before doing the transition.
+	 * Disconnected before doing the transition.
 	 * @param s the new status
 	 */
-	virtual void setStatus(RemoteViewStatus s);
+	virtual void setStatus(RemoteStatus s);
 };
 
 #endif

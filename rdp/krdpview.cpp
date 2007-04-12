@@ -50,7 +50,7 @@ KRdpView::KRdpView(QWidget *parent,
                    int flags, const QString &domain,
                    const QString &shell, const QString &directory,
 		   const QString &caption) :
-  KRemoteView(parent, Qt::WResizeNoErase | Qt::WNoAutoErase | Qt::WStaticContents),
+  KRemoteView(parent),
   m_host(host),
   m_port(port),
   m_user(user),
@@ -259,7 +259,7 @@ bool KRdpView::start()
 
 	kDebug() << "K3Process args: " << m_process->args() << endl;
 
-	setStatus(REMOTE_VIEW_CONNECTING);
+	setStatus(Connecting);
 	connect(m_process, SIGNAL(processExited(K3Process *)), SLOT(processDied(K3Process *)));
 	connect(m_process, SIGNAL(receivedStderr(K3Process *, char *, int)), SLOT(receivedStderr(K3Process *, char *, int)));
 	connect(m_container, SIGNAL(clientClosed()), SLOT(connectionClosed()));
@@ -303,7 +303,7 @@ void KRdpView::connectionOpened()
   kDebug() << "Connection opened" << endl;
 	QSize size = m_container->minimumSizeHint();
 	kDebug () << "Size hint: " << size.width() << " " << size.height() << endl;
-	setStatus(REMOTE_VIEW_CONNECTED);
+	setStatus(Connected);
 	setFixedSize(size);
 	resize(size);
 	// m_container->adjustSize() ?
@@ -316,15 +316,15 @@ void KRdpView::connectionOpened()
 void KRdpView::connectionClosed()
 {
 	emit disconnected();
-	setStatus(REMOTE_VIEW_DISCONNECTED);
+	setStatus(Disconnected);
 	m_quitFlag = true;
 }
 
 void KRdpView::processDied(K3Process */*proc*/)
 {
-	if(m_status == REMOTE_VIEW_CONNECTING)
+	if(m_status == Connecting)
 	{
-		setStatus(REMOTE_VIEW_DISCONNECTED);
+		setStatus(Disconnected);
 		if(m_clientVersion.isEmpty())
 		{
 			KMessageBox::error(0, i18n("Connection attempt to host failed."),

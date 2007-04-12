@@ -91,7 +91,7 @@ private:
 	bool m_showProgress; // can disable showing the progress dialog temporary
 	QString m_host;      // host string as given from user
 	Protocol m_protocol; // the used protocol
-	Quality m_quality;   // current quality setting
+	KRemoteView::Quality m_quality;   // current quality setting
 	QString m_encodings; // string containing the encodings, space separated,
 	                     // used for config before connection
 	QString m_password;  // if not null, contains the password to use
@@ -134,14 +134,14 @@ protected:
 
 public:
 	KRDC(WindowMode wm = WINDOW_MODE_AUTO,
-	     const QString &host = QString::null,
-	     Quality q = QUALITY_UNKNOWN,
-	     const QString &encodings = QString::null,
-	     const QString &password = QString::null,
+	     const QString &host = QString(),
+	     KRemoteView::Quality q = KRemoteView::Unknown,
+	     const QString &encodings = QString(),
+	     const QString &password = QString(),
 	     bool scale = false,
 	     bool localCursor = false,
 	     QSize initialWindowSize = QSize(),
-	     const QString &caption = QString::null );
+	     const QString &caption = QString() );
 	~KRDC();
 
 	bool start();
@@ -149,7 +149,7 @@ public:
 	static void setLastHost(const QString &host);
 
 private slots:
-	void changeProgress(RemoteViewStatus s);
+	void changeProgress(KRemoteView::RemoteStatus s);
 	void showingPasswordDialog(bool b);
 	void showProgressTimeout();
 

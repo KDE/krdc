@@ -41,19 +41,19 @@ static const int KEY_QUEUE_SIZE = 8192;
 
 ControllerThread::ControllerThread(KVncView *v, WriterThread &wt, volatile bool &quitFlag) :
 	m_view(v),
-	m_status(REMOTE_VIEW_CONNECTING),
+	m_status(KRemoteView::Connecting),
 	m_wthread(wt),
 	m_quitFlag(quitFlag),
 	m_desktopInitialized(false)
 {
 }
 
-void ControllerThread::changeStatus(RemoteViewStatus s) {
+void ControllerThread::changeStatus(KRemoteView::RemoteStatus s) {
 	m_status = s;
 	QApplication::postEvent(m_view, new StatusChangeEvent(s));
 }
 
-void ControllerThread::sendFatalError(ErrorCode s) {
+void ControllerThread::sendFatalError(KRemoteView::ErrorCode s) {
 	m_quitFlag = true;
 	QApplication::postEvent(m_view, new FatalErrorEvent(s));
 	m_wthread.kick();
@@ -79,34 +79,34 @@ void ControllerThread::run() {
 	fd = ConnectToRFBServer(m_view->host().toLatin1(), m_view->port());
 	if (fd < 0) {
 		if (fd == -(int)INIT_NO_SERVER)
-			sendFatalError(ERROR_NO_SERVER);
+			sendFatalError(KRemoteView::NoServer);
 		else if (fd == -(int)INIT_NAME_RESOLUTION_FAILURE)
-			sendFatalError(ERROR_NAME);
+			sendFatalError(KRemoteView::Name);
 		else
-			sendFatalError(ERROR_CONNECTION);
+			sendFatalError(KRemoteView::Connection);
 		return;
 	}
 	if (m_quitFlag) {
-		changeStatus(REMOTE_VIEW_DISCONNECTED);
+		changeStatus(KRemoteView::Disconnected);
 		return;
 	}
 
-        changeStatus(REMOTE_VIEW_AUTHENTICATING);
+        changeStatus(KRemoteView::Authenticating);
 
 	enum InitStatus s = InitialiseRFBConnection();
 	if (s != INIT_OK) {
 		if (s == INIT_CONNECTION_FAILED)
-			sendFatalError(ERROR_IO);
+			sendFatalError(KRemoteView::IO);
 		else if (s == INIT_SERVER_BLOCKED)
-			sendFatalError(ERROR_SERVER_BLOCKED);
+			sendFatalError(KRemoteView::ServerBlocked);
 		else if (s == INIT_PROTOCOL_FAILURE)
-			sendFatalError(ERROR_PROTOCOL);
+			sendFatalError(KRemoteView::Protocol);
 		else if (s == INIT_AUTHENTICATION_FAILED)
-			sendFatalError(ERROR_AUTHENTICATION);
+			sendFatalError(KRemoteView::Authentication);
 		else if (s == INIT_ABORTED)
-			changeStatus(REMOTE_VIEW_DISCONNECTED);
+			changeStatus(KRemoteView::Disconnected);
 		else
-			sendFatalError(ERROR_INTERNAL);
+			sendFatalError(KRemoteView::Internal);
 		return;
 	}
 
@@ -133,34 +133,34 @@ void ControllerThread::run() {
 	}
 
 	if (m_quitFlag) {
-		changeStatus(REMOTE_VIEW_DISCONNECTED);
+		changeStatus(KRemoteView::Disconnected);
 		return;
 	}
 
-	changeStatus(REMOTE_VIEW_PREPARING);
+	changeStatus(KRemoteView::Preparing);
 
 	if (!SetFormatAndEncodings()) {
-		sendFatalError(ERROR_INTERNAL);
+		sendFatalError(KRemoteView::Internal);
 		return;
 	}
 
-	changeStatus(REMOTE_VIEW_CONNECTED);
+	changeStatus(KRemoteView::Connected);
 
 	m_wthread.start();
 
 	while (!m_quitFlag) {
 		if ((!HandleRFBServerMessage()) && (!m_quitFlag)) {
-			sendFatalError(ERROR_IO);
+			sendFatalError(KRemoteView::IO);
 			return;
 		}
 	}
 
 	m_quitFlag = true;
-	changeStatus(REMOTE_VIEW_DISCONNECTED);
+	changeStatus(KRemoteView::Disconnected);
 	m_wthread.kick();
 }
 
-enum RemoteViewStatus ControllerThread::status() {
+KRemoteView::RemoteStatus ControllerThread::status() {
 	return m_status;
 }
 
@@ -186,7 +186,7 @@ WriterThread::WriterThread(KVncView *v, volatile bool &quitFlag) :
 	m_incrementalUpdateAnnounced(false),
 	m_mouseEventNum(0),
 	m_keyEventNum(0),
-	m_clientCut(QString::null)
+	m_clientCut(QString())
 {
 	writerThread = this;
 	m_lastIncrUpdate.start();
@@ -368,7 +368,7 @@ void WriterThread::run() {
 
 				if (sendUpdate)
 					if (!sendIncrementalUpdateRequest()) {
-						sendFatalError(ERROR_IO);
+						sendFatalError(KRemoteView::IO);
 						break;
 					}
 			}
@@ -377,18 +377,18 @@ void WriterThread::run() {
 
 			if (!updateRegionRQ.isEmpty())
 				if (!sendUpdateRequest(updateRegionRQ)) {
-					sendFatalError(ERROR_IO);
+					sendFatalError(KRemoteView::IO);
 					break;
 				}
 			if (inputEvents.size() != 0)
 				if (!sendInputEvents(inputEvents)) {
-					sendFatalError(ERROR_IO);
+					sendFatalError(KRemoteView::IO);
 					break;
 				}
 			if (!clientCut.isNull())  {
 				QByteArray cutTextUtf8(clientCut.toUtf8());
 				if (!SendClientCutText(cutTextUtf8.data(), cutTextUtf8.length())) {
-					sendFatalError(ERROR_IO);
+					sendFatalError(KRemoteView::IO);
 					break;
 				}
 			}
@@ -397,7 +397,7 @@ void WriterThread::run() {
 	m_quitFlag = true;
 }
 
-void WriterThread::sendFatalError(ErrorCode s) {
+void WriterThread::sendFatalError(KRemoteView::ErrorCode s) {
 	m_quitFlag = true;
 	QApplication::postEvent(m_view, new FatalErrorEvent(s));
 }

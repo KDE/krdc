@@ -150,37 +150,37 @@ void HostPreferences::removeHostPref(HostPref *hostPref) {
 
 void HostPreferences::setShowBrowsingPanel( bool b )
 {
-	m_config->setGroup( QString::null );
+	m_config->setGroup( QString() );
 	m_config->writeEntry( "browsingPanel", b );
 }
 
 void HostPreferences::setServerCompletions( const QStringList &list )
 {
-	m_config->setGroup( QString::null );
+	m_config->setGroup( QString() );
 	m_config->writeEntry( "serverCompletions", list );
 }
 
 void HostPreferences::setServerHistory( const QStringList &list )
 {
-	m_config->setGroup( QString::null );
+	m_config->setGroup( QString() );
 	m_config->writeEntry( "serverHistory", list );
 }
 
 bool HostPreferences::showBrowsingPanel()
 {
-	m_config->setGroup( QString::null );
+	m_config->setGroup( QString() );
 	return m_config->readEntry( "browsingPanel",false );
 }
 
 QStringList HostPreferences::serverCompletions()
 {
-	m_config->setGroup( QString::null );
+	m_config->setGroup( QString() );
 	return m_config->readEntry( "serverCompletions", QStringList() );
 }
 
 QStringList HostPreferences::serverHistory()
 {
-	m_config->setGroup( QString::null );
+	m_config->setGroup( QString() );
 	return m_config->readEntry( "serverHistory", QStringList() );
 }
 

@@ -35,7 +35,7 @@ private:
 	bool m_localCursor;
 	QSize m_initialWindowSize;
 	QString m_keymap;
-	Quality m_quality;
+	KRemoteView::Quality m_quality;
 	QString m_caption;
 
 	KApplication *m_app;
@@ -43,7 +43,7 @@ private:
 public:
 	MainController(KApplication *app, WindowMode wm,
 		       const QString &host,
-		       Quality quality,
+		       KRemoteView::Quality quality,
 		       const QString &encodings,
 		       const QString &password,
 		       bool scale,

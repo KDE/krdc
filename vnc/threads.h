@@ -76,7 +76,7 @@ private:
 	int m_mouseEventNum, m_keyEventNum;
 	QString m_clientCut;
 
-	void sendFatalError(ErrorCode s);
+	void sendFatalError(KRemoteView::ErrorCode s);
 
 public:
 	WriterThread(KVncView *v, volatile bool &quitFlag);
@@ -101,18 +101,18 @@ protected:
 class ControllerThread : public QThread { 
 private:
 	KVncView *m_view;
-	enum RemoteViewStatus m_status;
+	KRemoteView::RemoteStatus m_status;
 	WriterThread &m_wthread;
 	volatile bool &m_quitFlag;
 	volatile bool m_desktopInitialized;
 	QWaitCondition m_waiter;
 
-	void changeStatus(RemoteViewStatus s);
-	void sendFatalError(ErrorCode s);
+	void changeStatus(KRemoteView::RemoteStatus s);
+	void sendFatalError(KRemoteView::ErrorCode s);
 
 public:
 	ControllerThread(KVncView *v, WriterThread &wt, volatile bool &quitFlag);
-	enum RemoteViewStatus status();	
+	KRemoteView::RemoteStatus status();
 	void desktopInit();
 	void kick();
 

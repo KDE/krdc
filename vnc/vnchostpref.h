@@ -36,8 +36,8 @@ protected:
 public:
 	static const QString VncType;
 
-	VncHostPref(KSharedConfigPtr conf, const QString &host=QString::null,
-		const QString &type=QString::null);
+	VncHostPref(KSharedConfigPtr conf, const QString &host=QString(),
+		const QString &type=QString());
 	virtual ~VncHostPref();
 	
 	virtual QString prefDescription() const;

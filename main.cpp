@@ -95,7 +95,7 @@ int main(int argc, char *argv[])
 	KApplication a;
 
 	QString host;
-	Quality quality = QUALITY_UNKNOWN;
+	KRemoteView::Quality quality = KRemoteView::Unknown;
 	QString encodings;
 	QString password;
 	QString resolution;
@@ -109,11 +109,11 @@ int main(int argc, char *argv[])
 	KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
 
 	if (args->isSet("low-quality"))
-		quality = QUALITY_LOW;
+		quality = KRemoteView::Low;
 	else if (args->isSet("medium-quality"))
-		quality = QUALITY_MEDIUM;
+		quality = KRemoteView::Medium;
 	else if (args->isSet("high-quality"))
-		quality = QUALITY_HIGH;
+		quality = KRemoteView::High;
 
 	if (args->isSet("fullscreen"))
 		wm = WINDOW_MODE_FULLSCREEN;
@@ -164,7 +164,7 @@ int main(int argc, char *argv[])
 
 MainController::MainController(KApplication *app, WindowMode wm,
 			       const QString &host,
-			       Quality quality,
+			       KRemoteView::Quality quality,
 			       const QString &encodings,
 			       const QString &password,
 			       bool scale,

@@ -105,8 +105,8 @@ class RdpHostPref : public HostPref
 	public:
 		static const QString RdpType;
 
-		RdpHostPref(KSharedConfigPtr conf, const QString &host=QString::null,
-			const QString &type=QString::null);
+		RdpHostPref(KSharedConfigPtr conf, const QString &host=QString(),
+			const QString &type=QString());
 		virtual ~RdpHostPref();
 
 		virtual QString  prefDescription() const;

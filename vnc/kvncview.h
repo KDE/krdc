@@ -85,11 +85,11 @@ protected:
 public:
 	KVncView(QWidget* parent=0,
 		 const QString &host = QString(""), int port = 5900,
-		 const QString &password = QString::null,
-		 Quality quality = QUALITY_UNKNOWN,
-		 DotCursorState dotCursorState = DOT_CURSOR_AUTO,
-		 const QString &encodings = QString::null,
-		 const QString &caption = QString::null);
+		 const QString &password = QString(),
+		 KRemoteView::Quality quality = Unknown,
+		 DotCursorState dotCursorState = CursorAuto,
+		 const QString &encodings = QString(),
+		 const QString &caption = QString());
 	~KVncView();
 	QSize sizeHint() const;
 	void drawRegion(int x, int y, int w, int h);
@@ -102,7 +102,7 @@ public:
 	virtual QSize framebufferSize();
 	void setRemoteMouseTracking(bool s);
 	bool remoteMouseTracking();
-	void configureApp(Quality q, const QString specialEncodings = QString::null);
+	void configureApp(Quality q, const QString specialEncodings = QString());
 	void showDotCursor(DotCursorState state);
 	DotCursorState dotCursorState() const;
 	virtual void startQuitting();

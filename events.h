@@ -20,43 +20,10 @@
 #ifndef EVENTS_H
 #define EVENTS_H
 
+#include "kremoteview.h"
+
 #include <kdebug.h>
 #include <QCustomEvent>
-
-/**
- * State of the connection. The state of the connection is returned
- * by @ref KRemoteView::status().
- *
- * Not every state transition is allowed. You are only allowed to transition
- * a state to the following state, with three exceptions:
- * @li You can move from every state directly to REMOTE_VIEW_DISCONNECTED
- * @li You can move from every state except REMOTE_VIEW_DISCONNECTED to
- *     REMOTE_VIEW_DISCONNECTING
- * @li You can move from REMOTE_VIEW_DISCONNECTED to REMOTE_VIEW_CONNECTING
- *
- * @ref KRemoteView::setStatus() will follow this rules for you.
- * (If you add/remove a state here, you must adapt it)
- */
-enum RemoteViewStatus {
-	REMOTE_VIEW_CONNECTING     = 0,
-	REMOTE_VIEW_AUTHENTICATING = 1,
-	REMOTE_VIEW_PREPARING      = 2,
-	REMOTE_VIEW_CONNECTED      = 3,
-	REMOTE_VIEW_DISCONNECTING  = -1,
-	REMOTE_VIEW_DISCONNECTED   = -2
-};
-
-enum ErrorCode {
-	ERROR_NONE = 0,
-	ERROR_INTERNAL,
-	ERROR_CONNECTION,
-	ERROR_PROTOCOL,
-	ERROR_IO,
-	ERROR_NAME,
-	ERROR_NO_SERVER,
-	ERROR_SERVER_BLOCKED,
-	ERROR_AUTHENTICATION
-};
 
 const int ScreenResizeEventType = 41001;
 
@@ -82,13 +49,13 @@ const int StatusChangeEventType = 41002;
 class StatusChangeEvent : public QEvent
 {
 private:
-	RemoteViewStatus m_status;
+	KRemoteView::RemoteStatus m_status;
 public:
-	StatusChangeEvent(RemoteViewStatus s) :
+	StatusChangeEvent(KRemoteView::RemoteStatus s) :
 	        QEvent( (Type)StatusChangeEventType ),
 		m_status(s)
 	{};
-	RemoteViewStatus status() const { return m_status; };
+	KRemoteView::RemoteStatus status() const { return m_status; };
 	Type type() const { return (Type)StatusChangeEventType; };
 };
 
@@ -107,14 +74,14 @@ const int FatalErrorEventType = 41004;
 
 class FatalErrorEvent : public QEvent
 {
-	ErrorCode m_error;
+	KRemoteView::ErrorCode m_error;
 public:
-	FatalErrorEvent(ErrorCode e) :
+	FatalErrorEvent(KRemoteView::ErrorCode e) :
 	        QEvent( (Type)FatalErrorEventType ),
 		m_error(e)
 	{};
 
-	ErrorCode errorCode() const { return m_error; };
+	KRemoteView::ErrorCode errorCode() const { return m_error; };
 	Type type() const { return (Type)FatalErrorEventType; };
 };
 
