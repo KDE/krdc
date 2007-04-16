@@ -18,13 +18,13 @@
 #include "kvncview.h"
 
 #include <kdebug.h>
-#include <kapplication.h>
 
 #include "vncviewer.h"
 #include "threads.h"
 
 #include <QList>
 #include <QVector>
+#include <QApplication>
 
 // Maximum idle time for writer thread in ms. When it timeouts, it will request
 // another incremental update. Must be smaller than the timeout of the server

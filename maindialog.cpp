@@ -21,7 +21,6 @@
 #include "maindialogwidget.h"
 #include "preferencesdialog.h"
 
-#include <kapplication.h>
 #include <kguiitem.h>
 #include <klocale.h>
 #include <ktoolinvocation.h>

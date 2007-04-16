@@ -15,7 +15,6 @@
 #include "maindialog.h"
 #include "hostpreferences.h"
 
-#include <kapplication.h>
 #include <kconfig.h>
 #include <kaction.h>
 #include <kactioncollection.h>
@@ -42,6 +41,7 @@
 #include <QMouseEvent>
 #include <QX11Info>
 #include <kicon.h>
+#include <QApplication>
 
 #define BUMP_SCROLL_CONSTANT (200)
 

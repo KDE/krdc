@@ -15,7 +15,6 @@
 #include "vnc/vnchostpref.h"
 #include "rdp/rdphostpref.h"
 
-#include <kapplication.h>
 #include <kconfig.h>
 #include <kstaticdeleter.h>
 
