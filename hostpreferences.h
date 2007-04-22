@@ -14,7 +14,7 @@
 #ifndef HOSTPREFERENCES_H
 #define HOSTPREFERENCES_H
 
-#include <QString>
+
 #include <QStringList>
 #include <QList>
 #include <ksharedconfig.h>
