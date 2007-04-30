@@ -223,16 +223,16 @@ void KRDC::changeProgress(KRemoteView::RemoteStatus s) {
 	}
 
 	if (s == KRemoteView::Connecting) {
-		m_progressDialog->setLabel(i18n("Establishing connection..."));
+		m_progressDialog->setLabelText(i18n("Establishing connection..."));
 		showProgressDialog();
 		m_progressDialog->progressBar()->setValue(0);
 	}
 	else if (s == KRemoteView::Authenticating) {
-		m_progressDialog->setLabel(i18n("Authenticating..."));
+		m_progressDialog->setLabelText(i18n("Authenticating..."));
 		m_progressDialog->progressBar()->setValue(1);
 	}
 	else if (s == KRemoteView::Preparing) {
-		m_progressDialog->setLabel(i18n("Preparing desktop..."));
+		m_progressDialog->setLabelText(i18n("Preparing desktop..."));
 		m_progressDialog->progressBar()->setValue(2);
 	}
 	else if ((s == KRemoteView::Connected) ||
