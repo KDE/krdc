@@ -429,7 +429,7 @@ void KVncView::customEvent(QEvent *e)
 		// Do we need to open the wallet?
 		if ( !wallet ) {
 			QString walletName = KWallet::Wallet::NetworkWallet();
-			wallet = KWallet::Wallet::openWallet(walletName);
+			wallet = KWallet::Wallet::openWallet(walletName, topLevelWidget()->winId());
 		}
 
 		if (wallet && wallet->isOpen()) {
