@@ -28,7 +28,7 @@
 #include <kmenu.h>
 #include <kmessagebox.h>
 #include <kstartupinfo.h>
-#include <kwm.h>
+#include <kwindowsystem.h>
 
 #include <QLabel>
 #include <QScrollBar>
@@ -552,7 +552,7 @@ setLayout(m_layout);
 	setGeometry(0, 0, m_fullscreenResolution.width(),
 		    m_fullscreenResolution.height());
 
-	KWM::setState(winId(), KWM::StaysOnTop);
+	KWindowSystem::setState(winId(), KWindowSystem::StaysOnTop);
 
 	m_ftAutoHide = !m_ftAutoHide;
 	setFsToolbarAutoHide(!m_ftAutoHide);
@@ -572,7 +572,7 @@ void KRDC::switchToNormal(bool scaling)
 	bool scalingChanged = (scaling != m_view->scaling());
 	m_windowScaling = false; // delete remembered scaling value
 	if (fromFullscreen) {
-		KWM::clearState(winId(), KWM::StaysOnTop);
+		KWindowSystem::clearState(winId(), KWindowSystem::StaysOnTop);
 		hide();
 	}
 	m_isFullscreen = WINDOW_MODE_NORMAL;
@@ -688,7 +688,7 @@ void KRDC::showLocalCursorToggled() {
 
 void KRDC::iconify()
 {
-	KWM::clearState(winId(), KWM::StaysOnTop);
+	KWindowSystem::clearState(winId(), KWindowSystem::StaysOnTop);
 
 	m_view->releaseKeyboard();
 	if (m_oldResolution.valid)
@@ -736,7 +736,7 @@ bool KRDC::event(QEvent *e) {
 	if (m_oldResolution.valid)
 		grabInput(QX11Info::display(), winId());
 	m_view->switchFullscreen( true );
-	KWM::setState(winId(), KWM::StaysOnTop);
+	KWindowSystem::setState(winId(), KWindowSystem::StaysOnTop);
 
 	return QWidget::event(e);
 }
