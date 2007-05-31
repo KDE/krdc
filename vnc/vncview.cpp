@@ -23,10 +23,12 @@
 
 #include "vncview.h"
 
+#include <KLocale>
+#include <KPasswordDialog>
+
 #include <QImage>
 #include <QPainter>
 #include <QMouseEvent>
-#include <QInputDialog>
 
 VncView::VncView(QWidget *parent,
                  const QString &host, int port)
@@ -59,19 +61,17 @@ bool VncView::start()
 
 void VncView::requestPassword()
 {
-//     qDebug("request password");
+    kDebug(5011) << "request password" << endl;
 
-    bool ok;
-    QString text = QInputDialog::getText(this, "Password Dialog",
-                                        "Please enter the VNC password:", QLineEdit::Password,
-                                        "", &ok);
-    if (ok)
-        vncThread.setPassword(text);
+    KPasswordDialog dialog(this);
+    dialog.setPrompt(i18n("Access to the system requires a password."));
+    if (dialog.exec() == KPasswordDialog::Accepted)
+        vncThread.setPassword(dialog.password());
 }
 
 void VncView::updateImage(int x, int y, int w, int h)
 {
-//     qDebug("got update");
+//     kDebug(5011) << "got update" << endl;
 
     m_x = x;
     m_y = y;
@@ -92,17 +92,17 @@ void VncView::updateImage(int x, int y, int w, int h)
 
 void VncView::paintEvent(QPaintEvent *event)
 {
-//     qDebug("paint event: x: %d, y: %d, h: %d, w: %d", m_x, m_y, m_w, m_h);
+//     kDebug(5011) << "paint event: x: " << m_x << ", y: " << m_y << ", w: " << m_w << ", h: " << m_h << endl;
 
     event->accept();
 
     QPainter painter(this);
 
     if (m_repaint) {
-//         qDebug("normal repaint");
+//         kDebug(5011) << "normal repaint" << endl;
         painter.drawImage(QRect(m_x, m_y, m_w, m_h), vncThread.image(m_x, m_y, m_w, m_h));
     } else {
-//         qDebug("resize repaint");
+//         kDebug(5011) << "resize repaint" << endl;
         painter.drawImage(QRect(0, 0, vncThread.image().width(), vncThread.image().height()), vncThread.image());
     }
 
@@ -111,7 +111,7 @@ void VncView::paintEvent(QPaintEvent *event)
 
 void VncView::mouseMoveEvent(QMouseEvent *event)
 {
-//     qDebug("mouse move");
+//     kDebug(5011) << "mouse move" << endl;
 
     mouseEvent(event);
 
@@ -120,7 +120,7 @@ void VncView::mouseMoveEvent(QMouseEvent *event)
 
 void VncView::mousePressEvent(QMouseEvent *event)
 {
-//     qDebug("mouse press");
+//     kDebug(5011) << "mouse press" << endl;
 
     mouseEvent(event);
 
@@ -129,7 +129,7 @@ void VncView::mousePressEvent(QMouseEvent *event)
 
 void VncView::mouseDoubleClickEvent(QMouseEvent *event)
 {
-//     qDebug("mouse double click");
+//     kDebug(5011) << "mouse double click" << endl;
 
     mouseEvent(event);
 
@@ -138,7 +138,7 @@ void VncView::mouseDoubleClickEvent(QMouseEvent *event)
 
 void VncView::mouseReleaseEvent(QMouseEvent *event)
 {
-//     qDebug("mouse release");
+//     kDebug(5011) << "mouse release" << endl;
 
     mouseEvent(event);
 
@@ -251,7 +251,7 @@ void VncView::keyEvent(QKeyEvent *e, bool pressed)
 
 void VncView::keyPressEvent(QKeyEvent *event)
 {
-//     qDebug("key press");
+//     kDebug(5011) << "key press" << endl;
 
     keyEvent(event, true);
 
@@ -260,7 +260,7 @@ void VncView::keyPressEvent(QKeyEvent *event)
 
 void VncView::keyReleaseEvent(QKeyEvent *event)
 {
-//     qDebug("key release");
+//     kDebug(5011) << "key release" << endl;
 
     keyEvent(event, false);
 
@@ -269,7 +269,7 @@ void VncView::keyReleaseEvent(QKeyEvent *event)
 
 void VncView::closeEvent(QCloseEvent *event)
 {
-//     qDebug("close event");
+    kDebug(5011) << "close event" << endl;
 
     vncThread.cleanup();
 

@@ -23,6 +23,8 @@
 
 #include "vncclientthread.h"
 
+#include <KDebug>
+
 #include <QMutexLocker>
 
 extern rfbBool newclient(rfbClient *cl)
@@ -54,14 +56,14 @@ extern rfbBool newclient(rfbClient *cl)
 
 extern void updatefb(rfbClient* cl, int x, int y, int w, int h)
 {
-//     qDebug("updated client (%d, %d, %d, %d)",x,y,w,h);
+//     kDebug(5011) << "updated client: x: " << x << ", y: " << y << ", w: " << w << ", h: " << h << endl;
 
     int width = cl->width, height = cl->height;
 
     QImage img(cl->frameBuffer, width, height, QImage::Format_RGB32);
 
     if (img.isNull())
-        qDebug("image not loaded");
+        kDebug(5011) << "image not loaded" << endl;
 
 
     VncClientThread *t = (VncClientThread*)rfbClientGetClientData(cl, 0);
@@ -74,24 +76,24 @@ extern void updatefb(rfbClient* cl, int x, int y, int w, int h)
 extern char *passwd(rfbClient *cl)
 {
     Q_UNUSED(cl);
-//     qDebug("password request");
+    kDebug(5011) << "password request" << endl;
 
     VncClientThread *t = (VncClientThread*)rfbClientGetClientData(cl, 0);
 
     t->emitPasswordRequest();
 
-    return strdup(t->password().toLatin1());
+    return strdup(t->password().toLocal8Bit());
 }
 
 extern void log(const char *format, ...)
 {
-//     qDebug(format);
+    kDebug(5011) << format << endl;
     Q_UNUSED(format);
 }
 
 extern void error(const char *format, ...)
 {
-//     qDebug(format);
+    kDebug(5011) << format << endl;
     Q_UNUSED(format);
 }
 
@@ -201,11 +203,6 @@ void VncClientThread::mouseEvent(int x, int y, int buttonMask)
 void VncClientThread::keyEvent(int key, bool pressed)
 {
     SendKeyEvent(cl, key, pressed);
-}
-
-void VncClientThread::requestFullUpdate()
-{
-    updatefb(cl, 0, 0, cl->width, cl->height);
 }
 
 void VncClientThread::cleanup()

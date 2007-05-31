@@ -109,7 +109,7 @@ QSize RdpView::sizeHint() const
 // start closing the connection
 void RdpView::startQuitting()
 {
-    kDebug() << "About to quit" << endl;
+    kDebug(5012) << "About to quit" << endl;
     m_quitFlag = true;
     if(m_process != NULL) {
         m_container->discardClient();
@@ -247,7 +247,7 @@ bool RdpView::start()
     arguments << (m_host + ':' + QString::number(m_port));
 
     for (int i = 0; i < arguments.size(); ++i)
-        kDebug() << arguments.at(i).toLocal8Bit().constData() << endl;
+        kDebug(5012) << arguments.at(i).toLocal8Bit().constData() << endl;
 
     setStatus(Connecting);
 
@@ -287,9 +287,9 @@ void RdpView::setViewOnly(bool s)
 
 void RdpView::connectionOpened()
 {
-    kDebug() << "Connection opened" << endl;
+    kDebug(5012) << "Connection opened" << endl;
     QSize size = m_container->minimumSizeHint();
-    kDebug () << "Size hint: " << size.width() << " " << size.height() << endl;
+    kDebug(5012) << "Size hint: " << size.width() << " " << size.height() << endl;
     setStatus(Connected);
     setFixedSize(size);
     resize(size);
@@ -341,7 +341,7 @@ void RdpView::receivedStandardError()
             m_clientVersion = m_clientVersion.left(m_clientVersion.length() - 1);
             return;
         } else {
-            kDebug() << "Process error output: " << line << endl;
+            kDebug(5012) << "Process error output: " << line << endl;
         }
         i++;
     }

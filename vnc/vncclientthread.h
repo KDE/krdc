@@ -57,7 +57,6 @@ public slots:
     void mouseEvent(int x, int y, int buttonMask);
     void keyEvent(int key, bool pressed);
     void cleanup();
-    void requestFullUpdate();
 
 protected:
     void run();
