@@ -100,10 +100,10 @@ void VncView::paintEvent(QPaintEvent *event)
 
     if (m_repaint) {
 //         qDebug("normal repaint");
-        painter.drawImage(QRect(m_x, m_y, m_w, m_h), vncThread.image());
+        painter.drawImage(QRect(m_x, m_y, m_w, m_h), vncThread.image(m_x, m_y, m_w, m_h));
     } else {
 //         qDebug("resize repaint");
-        painter.drawImage(QRect(0, 0, vncThread.fullImage().width(), vncThread.fullImage().height()), vncThread.fullImage());
+        painter.drawImage(QRect(0, 0, vncThread.image().width(), vncThread.image().height()), vncThread.image());
     }
 
     QWidget::paintEvent(event);

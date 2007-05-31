@@ -39,10 +39,8 @@ class VncClientThread: public QThread
 public:
     explicit VncClientThread();
     ~VncClientThread();
-    const QImage image();
-    const QImage fullImage();
+    const QImage image(int x = 0, int y = 0, int w = 0, int h = 0);
     void setImage(const QImage &img);
-    void setFullImage(const QImage &img);
     void emitUpdated(int x, int y, int w, int h);
     void emitPasswordRequest();
     void stop();
@@ -66,7 +64,6 @@ protected:
 
 private:
     QImage m_image;
-    QImage m_fullImage;
     rfbClient *cl;
     volatile bool m_stopped;
     volatile bool m_cleanup;

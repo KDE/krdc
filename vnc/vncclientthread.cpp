@@ -66,8 +66,7 @@ extern void updatefb(rfbClient* cl, int x, int y, int w, int h)
 
     VncClientThread *t = (VncClientThread*)rfbClientGetClientData(cl, 0);
 
-    t->setImage(img.copy(x, y, w, h));
-    t->setFullImage(img);
+    t->setImage(img);
 
     t->emitUpdated(x, y, w, h);
 }
@@ -135,22 +134,14 @@ void VncClientThread::setImage(const QImage &img)
     m_image = img;
 }
 
-void VncClientThread::setFullImage(const QImage &img)
+const QImage VncClientThread::image(int x, int y, int w, int h)
 {
     QMutexLocker locker(&mutex);
-    m_fullImage = img;
-}
 
-const QImage VncClientThread::image()
-{
-    QMutexLocker locker(&mutex);
-    return m_image;
-}
-
-const QImage VncClientThread::fullImage()
-{
-    QMutexLocker locker(&mutex);
-    return m_fullImage;
+    if (w == 0) // full image requested
+        return m_image;
+    else
+        return m_image.copy(x, y, w, h);
 }
 
 void VncClientThread::emitUpdated(int x, int y, int w, int h)
