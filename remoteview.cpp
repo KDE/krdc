@@ -22,9 +22,9 @@
 **
 ****************************************************************************/
 
-#include "kremoteview.h"
+#include "remoteview.h"
 
-KRemoteView::KRemoteView(QWidget *parent)
+RemoteView::RemoteView(QWidget *parent)
   : QWidget(parent),
     m_status(Disconnected),
     m_host(QString()),
@@ -32,12 +32,12 @@ KRemoteView::KRemoteView(QWidget *parent)
 {
 }
 
-KRemoteView::RemoteStatus KRemoteView::status()
+RemoteView::RemoteStatus RemoteView::status()
 {
     return m_status;
 }
 
-void KRemoteView::setStatus(KRemoteView::RemoteStatus s)
+void RemoteView::setStatus(RemoteView::RemoteStatus s)
 {
     if (m_status == s)
         return;
@@ -66,77 +66,77 @@ void KRemoteView::setStatus(KRemoteView::RemoteStatus s)
     emit statusChanged(m_status);
 }
 
-KRemoteView::~KRemoteView()
+RemoteView::~RemoteView()
 {
 }
 
-bool KRemoteView::supportsScaling() const
-{
-    return false;
-}
-
-bool KRemoteView::supportsLocalCursor() const
+bool RemoteView::supportsScaling() const
 {
     return false;
 }
 
-QString KRemoteView::host()
+bool RemoteView::supportsLocalCursor() const
+{
+    return false;
+}
+
+QString RemoteView::host()
 {
     return m_host;
 }
 
-QSize KRemoteView::framebufferSize()
+QSize RemoteView::framebufferSize()
 {
     return QSize(0, 0);
 }
 
-void KRemoteView::startQuitting()
+void RemoteView::startQuitting()
 {
 }
 
-bool KRemoteView::isQuitting()
+bool RemoteView::isQuitting()
 {
     return false;
 }
 
-int KRemoteView::port()
+int RemoteView::port()
 {
     return m_port;
 }
 
-void KRemoteView::pressKey(XEvent *)
+void RemoteView::pressKey(XEvent *)
 {
 }
 
-bool KRemoteView::viewOnly()
+bool RemoteView::viewOnly()
 {
     return false;
 }
 
-void KRemoteView::setViewOnly(bool)
+void RemoteView::setViewOnly(bool)
 {
 }
 
-void KRemoteView::showDotCursor(DotCursorState)
+void RemoteView::showDotCursor(DotCursorState)
 {
 }
 
-KRemoteView::DotCursorState KRemoteView::dotCursorState() const
+RemoteView::DotCursorState RemoteView::dotCursorState() const
 {
     return CursorOff;
 }
 
-bool KRemoteView::scaling() const
+bool RemoteView::scaling() const
 {
     return false;
 }
 
-void KRemoteView::enableScaling(bool)
+void RemoteView::enableScaling(bool)
 {
 }
 
-void KRemoteView::switchFullscreen(bool)
+void RemoteView::switchFullscreen(bool)
 {
 }
 
-#include "kremoteview.moc"
+#include "remoteview.moc"

@@ -30,7 +30,7 @@
 
 VncView::VncView(QWidget *parent,
                  const QString &host, int port)
-  : KRemoteView(parent)
+  : RemoteView(parent)
 {
     m_host = host;
     m_port = port;

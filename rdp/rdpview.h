@@ -22,32 +22,32 @@
 **
 ****************************************************************************/
 
-#ifndef KRDPVIEW_H
-#define KRDPVIEW_H
+#ifndef RDPVIEW_H
+#define RDPVIEW_H
 
-#include "kremoteview.h"
+#include "remoteview.h"
 
 #include <QProcess>
 
 #define TCP_PORT_RDP 3389
 #define RDP_LOGON_NORMAL 0x33
 
-class KRdpView;
+class RdpView;
 class QX11EmbedContainer;
 
-class KRdpView : public KRemoteView
+class RdpView : public RemoteView
 {
     Q_OBJECT
 
 public:
-    KRdpView(QWidget *parent = 0,
+    RdpView(QWidget *parent = 0,
              const QString &host = QString(), int port = TCP_PORT_RDP,
              const QString &user = QString(), const QString &password = QString(),
              int flags = RDP_LOGON_NORMAL, const QString &domain = QString(),
              const QString &shell = QString(), const QString &directory = QString(),
              const QString &caption = QString());
 
-    virtual ~KRdpView();
+    virtual ~RdpView();
 
     // functions regarding the window
     virtual QSize framebufferSize();         // returns the size of the remote view

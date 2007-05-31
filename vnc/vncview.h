@@ -24,7 +24,7 @@
 #ifndef VNCVIEW_H
 #define VNCVIEW_H
 
-#include "kremoteview.h"
+#include "remoteview.h"
 
 #include "vncclientthread.h"
 
@@ -32,7 +32,7 @@ extern "C" {
 #include <rfb/rfbclient.h>
 }
 
-class VncView: public KRemoteView
+class VncView: public RemoteView
 {
     Q_OBJECT
 

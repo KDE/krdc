@@ -6,7 +6,7 @@ include_directories(
 )
 
 set(krdc_rdp_SRCS
-    rdp/krdpview.cpp
+    rdp/rdpview.cpp
 )
 
 check_symbol_exists(rfbInitServer "rfb/rfb.h" HAVE_LIBVNCSERVER)
@@ -20,7 +20,7 @@ if(HAVE_LIBVNCSERVER)
 endif(HAVE_LIBVNCSERVER)
 
 set(krdc_SRCS ${krdc_rdp_SRCS} ${krdc_vnc_SRCS}
-    kremoteview.cpp
+    remoteview.cpp
     mainwindow.cpp
     main.cpp
 )

@@ -22,8 +22,8 @@
 **
 ****************************************************************************/
 
-#ifndef KREMOTEVIEW_H
-#define KREMOTEVIEW_H
+#ifndef REMOTEVIEW_H
+#define REMOTEVIEW_H
 
 #include <QWidget>
 
@@ -32,7 +32,7 @@
  * Implement this if you want to add another backend.
  *
  * Things to take care of:
- * @li The KRemoteView is responsible for its size. In
+ * @li The RemoteView is responsible for its size. In
  *     non-scaling mode, set the fixed size of the widget
  *     to the remote resolution. In scaling mode, set the
  *     maximum size to the remote size and minimum size to the
@@ -44,7 +44,7 @@
  *     MotionNotify events will be forwarded.
  *
  */
-class KRemoteView : public QWidget
+class RemoteView : public QWidget
 {
     Q_OBJECT
 
@@ -78,7 +78,7 @@ public:
 
     /**
     * State of the connection. The state of the connection is returned
-    * by @ref KRemoteView::status().
+    * by @ref RemoteView::status().
     *
     * Not every state transition is allowed. You are only allowed to transition
     * a state to the following state, with three exceptions:
@@ -87,7 +87,7 @@ public:
     *     Disconnecting
     * @li You can move from Disconnected to Connecting
     *
-    * @ref KRemoteView::setStatus() will follow this rules for you.
+    * @ref RemoteView::setStatus() will follow this rules for you.
     * (If you add/remove a state here, you must adapt it)
     */
 
@@ -116,9 +116,9 @@ public:
         Authentication
     };
 
-    KRemoteView(QWidget *parent = 0);
+    RemoteView(QWidget *parent = 0);
 
-    virtual ~KRemoteView();
+    virtual ~RemoteView();
 
     /**
      * Checks whether the backend supports scaling. The
@@ -294,7 +294,7 @@ signals:
      * Emitted when the status of the view changed.
      * @param s the new status
         */
-    void statusChanged(KRemoteView::RemoteStatus s);
+    void statusChanged(RemoteView::RemoteStatus s);
 
     /**
      * Emitted when the password dialog is shown or hidden.

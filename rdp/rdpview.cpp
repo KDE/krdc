@@ -34,22 +34,22 @@
 
 #undef Bool
 
-#include "krdpview.h"
+#include "rdpview.h"
 // #include "rdphostpref.h"
 // #include "rdpprefs.h"
 
 bool rdpAppDataConfigured = false;
 extern KWallet::Wallet *wallet;
 
-static KRdpView *krdpview;
+static RdpView *krdpview;
 
-KRdpView::KRdpView(QWidget *parent,
+RdpView::RdpView(QWidget *parent,
                    const QString &host, int port,
                    const QString &user, const QString &password,
                    int flags, const QString &domain,
                    const QString &shell, const QString &directory,
                    const QString &caption)
-  : KRemoteView(parent),
+  : RemoteView(parent),
     m_user(user),
     m_password(password),
     m_flags(flags),
@@ -73,14 +73,14 @@ KRdpView::KRdpView(QWidget *parent,
     m_container->installEventFilter(this);
 }
 
-KRdpView::~KRdpView()
+RdpView::~RdpView()
 {
     startQuitting();
 }
 
 // filter out key and mouse events to the container if we are view only
 //FIXME: X11 events are passed to the app before getting caught in the Qt event processing
-bool KRdpView::eventFilter(QObject *obj, QEvent *event)
+bool RdpView::eventFilter(QObject *obj, QEvent *event)
 {
     if (m_viewOnly) {
         if (event->type() == QEvent::KeyPress ||
@@ -91,23 +91,23 @@ bool KRdpView::eventFilter(QObject *obj, QEvent *event)
             event->type() == QEvent::MouseMove)
             return true;
     }
-    return KRemoteView::eventFilter(obj, event);
+    return RemoteView::eventFilter(obj, event);
 }
 
 // returns the size of the framebuffer
-QSize KRdpView::framebufferSize()
+QSize RdpView::framebufferSize()
 {
     return m_container->minimumSizeHint();
 }
 
 // returns the suggested size
-QSize KRdpView::sizeHint() const
+QSize RdpView::sizeHint() const
 {
     return maximumSize();
 }
 
 // start closing the connection
-void KRdpView::startQuitting()
+void RdpView::startQuitting()
 {
     kDebug() << "About to quit" << endl;
     m_quitFlag = true;
@@ -118,13 +118,13 @@ void KRdpView::startQuitting()
 }
 
 // are we currently closing the connection?
-bool KRdpView::isQuitting()
+bool RdpView::isQuitting()
 {
     return m_quitFlag;
 }
 
 // open a connection
-bool KRdpView::start()
+bool RdpView::start()
 {
 #if 0
     SmartPtr<RdpHostPref> hp, rdpDefaults;
@@ -261,7 +261,7 @@ bool KRdpView::start()
     return true;
 }
 
-void KRdpView::switchFullscreen(bool on)
+void RdpView::switchFullscreen(bool on)
 {
     if(on == true) {
         m_container->grabKeyboard();
@@ -269,23 +269,23 @@ void KRdpView::switchFullscreen(bool on)
 }
 
 // captures pressed keys
-void KRdpView::pressKey(XEvent *e)
+void RdpView::pressKey(XEvent *e)
 {
     Q_UNUSED(e);
     m_container->grabKeyboard();
 }
 
-bool KRdpView::viewOnly()
+bool RdpView::viewOnly()
 {
     return m_viewOnly;
 }
 
-void KRdpView::setViewOnly(bool s)
+void RdpView::setViewOnly(bool s)
 {
     m_viewOnly = s;
 }
 
-void KRdpView::connectionOpened()
+void RdpView::connectionOpened()
 {
     kDebug() << "Connection opened" << endl;
     QSize size = m_container->minimumSizeHint();
@@ -300,14 +300,14 @@ void KRdpView::connectionOpened()
     setFocus();
 }
 
-void KRdpView::connectionClosed()
+void RdpView::connectionClosed()
 {
     emit disconnected();
     setStatus(Disconnected);
     m_quitFlag = true;
 }
 
-void KRdpView::processError(QProcess::ProcessError error)
+void RdpView::processError(QProcess::ProcessError error)
 {
     if(m_status == Connecting) {
         setStatus(Disconnected);
@@ -330,7 +330,7 @@ void KRdpView::processError(QProcess::ProcessError error)
     }
 }
 
-void KRdpView::receivedStandardError()
+void RdpView::receivedStandardError()
 {
     QString output(m_process->readAllStandardError());
     QString line;
@@ -347,4 +347,4 @@ void KRdpView::receivedStandardError()
     }
 }
 
-#include "krdpview.moc"
+#include "rdpview.moc"

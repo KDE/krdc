@@ -23,7 +23,7 @@
 
 #include "mainwindow.h"
 
-#include "krdpview.h"
+#include "rdpview.h"
 #include "vncview.h"
 
 #include <KAction>
@@ -121,7 +121,7 @@ void MainWindow::slotNewConnection()
     QScrollArea *scrollArea = new QScrollArea(this);
     scrollArea->setBackgroundRole(QPalette::Dark);
 
-    KRemoteView *view;
+    RemoteView *view;
 
 #ifdef BUILDVNC
     if (url.scheme() == "vnc")
@@ -130,7 +130,7 @@ void MainWindow::slotNewConnection()
 #endif
 
     if (url.scheme() == "rdp")
-        view = new KRdpView(this, url.host(), url.port());
+        view = new RdpView(this, url.host(), url.port());
     else
         return;
 
