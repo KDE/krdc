@@ -1,21 +1,25 @@
-/* This file is part of the KDE project
-   Copyright (C) 2007 Urs Wolfer <uwolfer @ kde.org>
-
-   This program is free software; you can redistribute it and/or
-   modify it under the terms of the GNU General Public
-   License as published by the Free Software Foundation; either
-   version 2 of the License, or (at your option) any later version.
-
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-   General Public License for more details.
-
-   You should have received a copy of the GNU General Public License
-   along with this program; see the file COPYING. If not, write to
-   the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-   Boston, MA 02110-1301, USA.
-*/
+/****************************************************************************
+**
+** Copyright (C) 2007 Urs Wolfer <uwolfer @ kde.org>
+**
+** This file is part of KDE.
+**
+** This program is free software; you can redistribute it and/or modify
+** it under the terms of the GNU General Public License as published by
+** the Free Software Foundation; either version 2 of the License, or
+** (at your option) any later version.
+**
+** This program is distributed in the hope that it will be useful,
+** but WITHOUT ANY WARRANTY; without even the implied warranty of
+** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+** GNU General Public License for more details.
+**
+** You should have received a copy of the GNU Library General Public License
+** along with this library; see the file COPYING.LIB. If not, write to
+** the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+** Boston, MA 02110-1301, USA.
+**
+****************************************************************************/
 
 #ifndef VNCCLIENTTHREAD_H
 #define VNCCLIENTTHREAD_H
@@ -36,8 +40,10 @@ public:
     explicit VncClientThread();
     ~VncClientThread();
     const QImage image();
+    const QImage fullImage();
     void setImage(const QImage &img);
-    void emitUpdated(int x, int y);
+    void setFullImage(const QImage &img);
+    void emitUpdated(int x, int y, int w, int h);
     void emitPasswordRequest();
     void stop();
     void setHost(const QString &host);
@@ -46,20 +52,21 @@ public:
     const QString password() const;
 
 signals:
-    void imageUpdated(int x, int y);
+    void imageUpdated(int x, int y, int w, int h);
     void passwordRequest();
 
 public slots:
     void mouseEvent(int x, int y, int buttonMask);
     void keyEvent(int key, bool pressed);
     void cleanup();
-
+    void requestFullUpdate();
 
 protected:
     void run();
 
 private:
     QImage m_image;
+    QImage m_fullImage;
     rfbClient *cl;
     volatile bool m_stopped;
     volatile bool m_cleanup;

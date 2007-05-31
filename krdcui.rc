@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
+<gui name="krdc" version="1">
+<MenuBar>
+    <Menu noMerge="1" name="file"><text>&amp;File</text>
+        <Action name="new_connection" />
+        <Separator/>
+        <Action name="quit" />
+    </Menu>
+        <Menu noMerge="1" name="session"><text>&amp;Session</text>
+    </Menu>
+   <Menu name="settings"><text>&amp;Settings</text>
+        <Separator/>
+        <Action name="configure_notifications" />
+        <Action name="configure_keys" />
+        <Action name="configure_toolbars" />
+        <Separator/>
+        <Action name="preferences" />
+        <Separator/>
+        <Action name="settings_showmenubar" append="show_merge" />
+    </Menu>
+    <Menu name="help"><text>&amp;Help</text>
+    </Menu>
+</MenuBar>
+<ToolBar fullWidth="true" name="krdc_address_toolbar" newline="true"><text>Address Toolbar</text>
+    <Action name="address_line" />
+    <Action name="goto_address" />
+</ToolBar>
+</gui>

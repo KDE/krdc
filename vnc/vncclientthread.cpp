@@ -1,21 +1,25 @@
-/* This file is part of the KDE project
-   Copyright (C) 2007 Urs Wolfer <uwolfer @ kde.org>
-
-   This program is free software; you can redistribute it and/or
-   modify it under the terms of the GNU General Public
-   License as published by the Free Software Foundation; either
-   version 2 of the License, or (at your option) any later version.
-
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-   General Public License for more details.
-
-   You should have received a copy of the GNU General Public License
-   along with this program; see the file COPYING. If not, write to
-   the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-   Boston, MA 02110-1301, USA.
-*/
+/****************************************************************************
+**
+** Copyright (C) 2007 Urs Wolfer <uwolfer @ kde.org>
+**
+** This file is part of KDE.
+**
+** This program is free software; you can redistribute it and/or modify
+** it under the terms of the GNU General Public License as published by
+** the Free Software Foundation; either version 2 of the License, or
+** (at your option) any later version.
+**
+** This program is distributed in the hope that it will be useful,
+** but WITHOUT ANY WARRANTY; without even the implied warranty of
+** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+** GNU General Public License for more details.
+**
+** You should have received a copy of the GNU Library General Public License
+** along with this library; see the file COPYING.LIB. If not, write to
+** the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+** Boston, MA 02110-1301, USA.
+**
+****************************************************************************/
 
 #include "vncclientthread.h"
 
@@ -63,8 +67,9 @@ extern void updatefb(rfbClient* cl, int x, int y, int w, int h)
     VncClientThread *t = (VncClientThread*)rfbClientGetClientData(cl, 0);
 
     t->setImage(img.copy(x, y, w, h));
+    t->setFullImage(img);
 
-    t->emitUpdated(x, y);
+    t->emitUpdated(x, y, w, h);
 }
 
 extern char *passwd(rfbClient *cl)
@@ -130,15 +135,27 @@ void VncClientThread::setImage(const QImage &img)
     m_image = img;
 }
 
+void VncClientThread::setFullImage(const QImage &img)
+{
+    QMutexLocker locker(&mutex);
+    m_fullImage = img;
+}
+
 const QImage VncClientThread::image()
 {
     QMutexLocker locker(&mutex);
     return m_image;
 }
 
-void VncClientThread::emitUpdated(int x, int y)
+const QImage VncClientThread::fullImage()
 {
-    emit imageUpdated(x, y);
+    QMutexLocker locker(&mutex);
+    return m_fullImage;
+}
+
+void VncClientThread::emitUpdated(int x, int y, int w, int h)
+{
+    emit imageUpdated(x, y, w, h);
 }
 
 void VncClientThread::emitPasswordRequest()
@@ -193,6 +210,11 @@ void VncClientThread::mouseEvent(int x, int y, int buttonMask)
 void VncClientThread::keyEvent(int key, bool pressed)
 {
     SendKeyEvent(cl, key, pressed);
+}
+
+void VncClientThread::requestFullUpdate()
+{
+    updatefb(cl, 0, 0, cl->width, cl->height);
 }
 
 void VncClientThread::cleanup()

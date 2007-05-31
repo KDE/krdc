@@ -21,52 +21,37 @@
 **
 ****************************************************************************/
 
-#ifndef VNCVIEW_H
-#define VNCVIEW_H
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
 
-#include "kremoteview.h"
+#include <KXmlGuiWindow>
 
-#include "vncclientthread.h"
+class KToggleAction;
+class KTabWidget;
+class KHistoryComboBox;
 
-extern "C" {
-#include <rfb/rfbclient.h>
-}
-
-class VncView: public KRemoteView
+class MainWindow : public KXmlGuiWindow
 {
     Q_OBJECT
-
 public:
-    explicit VncView(QWidget *parent = 0,
-                     const QString &host = QString(), int port = 5901);
-    ~VncView();
-
-public slots:
-    bool start();
-
-protected:
-    void paintEvent(QPaintEvent *event);
-    void mouseMoveEvent(QMouseEvent *event);
-    void mousePressEvent(QMouseEvent *event);
-    void mouseDoubleClickEvent(QMouseEvent *event);
-    void mouseReleaseEvent(QMouseEvent *event);
-    void wheelEvent(QWheelEvent *event);
-    void keyPressEvent(QKeyEvent *event);
-    void keyReleaseEvent(QKeyEvent *event);
-    void closeEvent(QCloseEvent *event);
-
-private:
-    VncClientThread vncThread;
-    bool m_initDone;
-    int m_buttonMask;
-    int m_x, m_y, m_w, m_h;
-    bool m_repaint;
+    MainWindow(QWidget *parent = 0);
+    ~MainWindow();
 
 private slots:
-    void updateImage(int x, int y, int w, int h);
-    void requestPassword();
-    void mouseEvent(QMouseEvent *event);
-    void keyEvent(QKeyEvent *e, bool pressed);
+    void slotNewConnection();
+    void slotQuit();
+    void slotPreferences();
+    void slotConfigureNotifications();
+    void slotConfigureKeys();
+    void slotConfigureToolbars();
+    void slotShowMenubar();
+
+private:
+    void setupActions();
+
+    KToggleAction *m_menubarAction;
+    KTabWidget *m_tabWidget;
+    KHistoryComboBox *m_addressComboBox;
 };
 
 #endif

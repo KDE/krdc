@@ -1,21 +1,25 @@
-/* This file is part of the KDE project
-   Copyright (C) 2007 Urs Wolfer <uwolfer @ kde.org>
-
-   This program is free software; you can redistribute it and/or
-   modify it under the terms of the GNU General Public
-   License as published by the Free Software Foundation; either
-   version 2 of the License, or (at your option) any later version.
-
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-   General Public License for more details.
-
-   You should have received a copy of the GNU General Public License
-   along with this program; see the file COPYING. If not, write to
-   the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-   Boston, MA 02110-1301, USA.
-*/
+/****************************************************************************
+**
+** Copyright (C) 2007 Urs Wolfer <uwolfer @ kde.org>
+**
+** This file is part of KDE.
+**
+** This program is free software; you can redistribute it and/or modify
+** it under the terms of the GNU General Public License as published by
+** the Free Software Foundation; either version 2 of the License, or
+** (at your option) any later version.
+**
+** This program is distributed in the hope that it will be useful,
+** but WITHOUT ANY WARRANTY; without even the implied warranty of
+** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+** GNU General Public License for more details.
+**
+** You should have received a copy of the GNU Library General Public License
+** along with this library; see the file COPYING.LIB. If not, write to
+** the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+** Boston, MA 02110-1301, USA.
+**
+****************************************************************************/
 
 #include "vncview.h"
 
@@ -24,31 +28,33 @@
 #include <QMouseEvent>
 #include <QInputDialog>
 
-VncView::VncView()
+VncView::VncView(QWidget *parent,
+                 const QString &host, int port)
+  : KRemoteView(parent)
 {
+    m_host = host;
+    m_port = port;
+
     m_initDone = false;
+    m_repaint = false;
 
     m_buttonMask = 0;
 
-    bool ok;
-    QString text = QInputDialog::getText(this, "Address Dialog",
-                                        "Please enter the VNC server you would like to connect to (e.g. 192.168.1.2:5901):", QLineEdit::Normal,
-                                        "", &ok);
-    if (ok) {
-        int pos = text.indexOf(':');
-        vncThread.setHost(text.left(pos));
-        vncThread.setPort(text.right(text.length() - pos - 1).toInt());
-    } else
-        close();
-
-    vncThread.start();
-
-    connect(&vncThread, SIGNAL(imageUpdated(int, int)), this, SLOT(updateImage(int, int)), Qt::BlockingQueuedConnection);
+    connect(&vncThread, SIGNAL(imageUpdated(int, int, int, int)), this, SLOT(updateImage(int, int, int, int)), Qt::BlockingQueuedConnection);
     connect(&vncThread, SIGNAL(passwordRequest()), this, SLOT(requestPassword()), Qt::BlockingQueuedConnection);
 }
 
 VncView::~VncView()
 {
+}
+
+bool VncView::start()
+{
+    vncThread.setHost(m_host);
+    vncThread.setPort(m_port);
+
+    vncThread.start();
+    return true;
 }
 
 void VncView::requestPassword()
@@ -63,22 +69,25 @@ void VncView::requestPassword()
         vncThread.setPassword(text);
 }
 
-void VncView::updateImage(int x, int y)
+void VncView::updateImage(int x, int y, int w, int h)
 {
 //     qDebug("got update");
 
     m_x = x;
     m_y = y;
+    m_w = w;
+    m_h = h;
 
     if (!m_initDone) {
         setCursor(Qt::BlankCursor);
         setMouseTracking(true); // get mouse events even when there is no mousebutton pressed
-        setAttribute(Qt::WA_OpaquePaintEvent); // keep the old background, just overwrite new parts
-        setMinimumSize(vncThread.image().width(), vncThread.image().height());
+        setFixedSize(vncThread.image().width(), vncThread.image().height());
         m_initDone = true;
     }
 
-    repaint();
+    m_repaint = true;
+    repaint(x, y, w, h);
+    m_repaint = false;
 }
 
 void VncView::paintEvent(QPaintEvent *event)
@@ -88,7 +97,14 @@ void VncView::paintEvent(QPaintEvent *event)
     event->accept();
 
     QPainter painter(this);
-    painter.drawImage(QRect(m_x, m_y, vncThread.image().width(), vncThread.image().height()), vncThread.image());
+
+    if (m_repaint) {
+//         qDebug("normal repaint");
+        painter.drawImage(QRect(m_x, m_y, m_w, m_h), vncThread.image());
+    } else {
+//         qDebug("resize repaint");
+        painter.drawImage(QRect(0, 0, vncThread.fullImage().width(), vncThread.fullImage().height()), vncThread.fullImage());
+    }
 
     QWidget::paintEvent(event);
 }
