@@ -41,7 +41,11 @@ public:
                      const QString &host = QString(), int port = 5901);
     ~VncView();
 
-public slots:
+    QSize framebufferSize();
+    QSize sizeHint() const;
+    QSize minimumSizeHint() const;
+    void startQuitting();
+    bool isQuitting();
     bool start();
 
 protected:
@@ -53,7 +57,7 @@ protected:
     void wheelEvent(QWheelEvent *event);
     void keyPressEvent(QKeyEvent *event);
     void keyReleaseEvent(QKeyEvent *event);
-    void closeEvent(QCloseEvent *event);
+    bool eventFilter(QObject *obj, QEvent *event);
 
 private:
     VncClientThread vncThread;
@@ -61,6 +65,7 @@ private:
     int m_buttonMask;
     int m_x, m_y, m_w, m_h;
     bool m_repaint;
+    bool m_quitFlag;
 
 private slots:
     void updateImage(int x, int y, int w, int h);

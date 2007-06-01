@@ -39,6 +39,7 @@ VncView::VncView(QWidget *parent,
 
     m_initDone = false;
     m_repaint = false;
+    m_quitFlag = false;
 
     m_buttonMask = 0;
 
@@ -48,12 +49,60 @@ VncView::VncView(QWidget *parent,
 
 VncView::~VncView()
 {
+    startQuitting();
+}
+
+bool VncView::eventFilter(QObject *obj, QEvent *event)
+{
+    if (m_viewOnly) {
+        if (event->type() == QEvent::KeyPress ||
+            event->type() == QEvent::KeyRelease ||
+            event->type() == QEvent::MouseButtonDblClick ||
+            event->type() == QEvent::MouseButtonPress ||
+            event->type() == QEvent::MouseButtonRelease ||
+            event->type() == QEvent::MouseMove)
+            return true;
+    }
+    return RemoteView::eventFilter(obj, event);
+}
+
+QSize VncView::framebufferSize()
+{
+    return size();
+}
+
+QSize VncView::sizeHint() const
+{
+    return size();
+}
+
+QSize VncView::minimumSizeHint() const
+{
+    return size();
+}
+
+void VncView::startQuitting()
+{
+    kDebug(5011) << "about to quit" << endl;
+    m_quitFlag = true;
+
+    vncThread.cleanup();
+
+    vncThread.stop();
+    vncThread.wait();
+}
+
+bool VncView::isQuitting()
+{
+    return m_quitFlag;
 }
 
 bool VncView::start()
 {
     vncThread.setHost(m_host);
     vncThread.setPort(m_port);
+
+    setStatus(Connecting);
 
     vncThread.start();
     return true;
@@ -79,9 +128,14 @@ void VncView::updateImage(int x, int y, int w, int h)
     m_h = h;
 
     if (!m_initDone) {
+        installEventFilter(this);
         setCursor(Qt::BlankCursor);
         setMouseTracking(true); // get mouse events even when there is no mousebutton pressed
         setFixedSize(vncThread.image().width(), vncThread.image().height());
+        setStatus(Connected);
+        emit changeSize(vncThread.image().width(), vncThread.image().height());
+        emit connected();
+        setFocus(); // WORKAROUND: get keyboard inputs
         m_initDone = true;
     }
 
@@ -116,6 +170,8 @@ void VncView::mouseMoveEvent(QMouseEvent *event)
     mouseEvent(event);
 
     event->accept();
+
+    setFocus(); // WORKAROUND: get keyboard inputs
 }
 
 void VncView::mousePressEvent(QMouseEvent *event)
@@ -125,6 +181,8 @@ void VncView::mousePressEvent(QMouseEvent *event)
     mouseEvent(event);
 
     event->accept();
+
+    setFocus(); // WORKAROUND: get keyboard inputs
 }
 
 void VncView::mouseDoubleClickEvent(QMouseEvent *event)
@@ -134,6 +192,8 @@ void VncView::mouseDoubleClickEvent(QMouseEvent *event)
     mouseEvent(event);
 
     event->accept();
+
+    setFocus(); // WORKAROUND: get keyboard inputs
 }
 
 void VncView::mouseReleaseEvent(QMouseEvent *event)
@@ -143,6 +203,8 @@ void VncView::mouseReleaseEvent(QMouseEvent *event)
     mouseEvent(event);
 
     event->accept();
+
+    setFocus(); // WORKAROUND: get keyboard inputs
 }
 
 void VncView::mouseEvent(QMouseEvent *e)
@@ -263,18 +325,6 @@ void VncView::keyReleaseEvent(QKeyEvent *event)
 //     kDebug(5011) << "key release" << endl;
 
     keyEvent(event, false);
-
-    event->accept();
-}
-
-void VncView::closeEvent(QCloseEvent *event)
-{
-    kDebug(5011) << "close event" << endl;
-
-    vncThread.cleanup();
-
-    vncThread.stop();
-    vncThread.wait();
 
     event->accept();
 }

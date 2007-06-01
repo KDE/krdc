@@ -28,7 +28,8 @@ RemoteView::RemoteView(QWidget *parent)
   : QWidget(parent),
     m_status(Disconnected),
     m_host(QString()),
-    m_port(0)
+    m_port(0),
+    m_viewOnly(false)
 {
 }
 
@@ -110,11 +111,12 @@ void RemoteView::pressKey(XEvent *)
 
 bool RemoteView::viewOnly()
 {
-    return false;
+    return m_viewOnly;
 }
 
-void RemoteView::setViewOnly(bool)
+void RemoteView::setViewOnly(bool viewOnly)
 {
+    m_viewOnly = viewOnly;
 }
 
 void RemoteView::showDotCursor(DotCursorState)

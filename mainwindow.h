@@ -45,6 +45,7 @@ private slots:
     void slotConfigureKeys();
     void slotConfigureToolbars();
     void slotShowMenubar();
+    void resizeTabWidget(int w, int h);
 
 private:
     void setupActions();

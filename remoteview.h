@@ -246,11 +246,11 @@ public slots:
      * Enables/disables the view-only mode.
      * Ignored if @ref supportsScaling() is false.
      * The default implementation does nothing.
-     * @param s true to enable, false to disable.
+     * @param viewOnly true to enable, false to disable.
      * @see supportsScaling()
      * @see viewOnly()
      */
-    virtual void setViewOnly(bool s);
+    virtual void setViewOnly(bool viewOnly);
 
     /**
      * Called to let the backend know it when
@@ -333,6 +333,7 @@ protected:
 
     QString m_host;
     int m_port;
+    bool m_viewOnly;
 };
 
 #endif

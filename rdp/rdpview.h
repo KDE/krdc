@@ -52,7 +52,6 @@ public:
     // functions regarding the window
     virtual QSize framebufferSize();         // returns the size of the remote view
     QSize sizeHint() const;                  // returns the suggested size
-    virtual bool viewOnly();
 
     // functions regarding the connection
     virtual void startQuitting();            // start closing the connection
@@ -62,7 +61,6 @@ public:
 public slots:
     virtual void switchFullscreen(bool on);
     virtual void pressKey(XEvent *k);        // send a generated key to the server
-    virtual void setViewOnly(bool s);
 
 protected:
     bool eventFilter(QObject *obj, QEvent *event);
@@ -84,8 +82,6 @@ private:
     QProcess *m_process;              // rdesktop process
 
     QString m_caption;    // the caption to use on the window
-
-    bool m_viewOnly; // if true filter out any input to the widget
 
 private slots:
     void connectionOpened();           // called if rdesktop started

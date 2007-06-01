@@ -58,8 +58,7 @@ RdpView::RdpView(QWidget *parent,
     m_directory(directory),
     m_quitFlag(false),
     m_process(NULL),
-    m_caption(caption),
-    m_viewOnly(true)
+    m_caption(caption)
 {
     m_host = host;
     m_port = port;
@@ -273,16 +272,6 @@ void RdpView::pressKey(XEvent *e)
 {
     Q_UNUSED(e);
     m_container->grabKeyboard();
-}
-
-bool RdpView::viewOnly()
-{
-    return m_viewOnly;
-}
-
-void RdpView::setViewOnly(bool s)
-{
-    m_viewOnly = s;
 }
 
 void RdpView::connectionOpened()

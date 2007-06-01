@@ -37,11 +37,12 @@
 #include <KMenuBar>
 #include <KShortcut>
 #include <KShortcutsDialog>
+#include <KStatusBar>
 #include <KTabWidget>
 #include <KToggleAction>
 
 #include <QLabel>
-#include <QHBoxLayout>
+#include <QLayout>
 #include <QX11EmbedContainer>
 #include <QToolButton>
 #include <QScrollArea>
@@ -55,9 +56,11 @@ MainWindow::MainWindow(QWidget *parent)
 
     setStandardToolBarMenuEnabled(true);
 
-    m_tabWidget = new KTabWidget();
+    m_tabWidget = new KTabWidget(this);
     m_tabWidget->setMinimumSize(400, 300);
     setCentralWidget(m_tabWidget);
+
+    statusBar()->showMessage(i18n("KRDC started"));
 }
 
 MainWindow::~MainWindow()
@@ -118,21 +121,24 @@ void MainWindow::slotNewConnection()
     if (url.isEmpty())
         return;
 
-    QScrollArea *scrollArea = new QScrollArea(this);
+    QScrollArea *scrollArea = new QScrollArea(m_tabWidget);
+    scrollArea->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
     scrollArea->setBackgroundRole(QPalette::Dark);
 
     RemoteView *view;
 
 #ifdef BUILDVNC
-    if (url.scheme() == "vnc")
-        view = new VncView(this, url.host(), url.port());
+    if (url.scheme().toLower() == "vnc")
+        view = new VncView(scrollArea, url.host(), url.port());
     else
 #endif
 
-    if (url.scheme() == "rdp")
-        view = new RdpView(this, url.host(), url.port());
+    if (url.scheme().toLower() == "rdp")
+        view = new RdpView(scrollArea, url.host(), url.port());
     else
         return;
+
+    connect(view, SIGNAL(changeSize(int, int)), this, SLOT(resizeTabWidget(int, int)));
 
     view->resize(0, 0);
     view->start();
@@ -140,6 +146,19 @@ void MainWindow::slotNewConnection()
     scrollArea->setWidget(view);
 
     m_tabWidget->addTab(scrollArea, KIcon("krdc"), url.toString());
+
+    statusBar()->showMessage(i18n("Connected to %1 via %2", url.host(), url.scheme().toUpper()));
+}
+
+void MainWindow::resizeTabWidget(int w, int h)
+{
+    kDebug(5010) << "tabwidget resize: w: " << w << ", h: " << h << endl;
+
+    //WORKAROUND: QTabWidget resize problem. Let's see if there is a clean solution for this issue.
+    m_tabWidget->setMinimumSize(w + 8, h + 38); // FIXME: do not use hardcoded values
+    m_tabWidget->adjustSize();
+    QCoreApplication::processEvents();
+    m_tabWidget->setMinimumSize(400, 300);
 }
 
 void MainWindow::slotPreferences()
