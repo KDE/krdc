@@ -111,8 +111,9 @@ void RdpView::startQuitting()
     kDebug(5012) << "About to quit" << endl;
     m_quitFlag = true;
     if(m_process != NULL) {
+        m_process->terminate();
+        m_process->waitForFinished(1000);
         m_container->discardClient();
-        // FIXME: we proably need to kill the rdesktop process here.
     }
 }
 
