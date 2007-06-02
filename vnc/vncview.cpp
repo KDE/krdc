@@ -128,14 +128,15 @@ void VncView::updateImage(int x, int y, int w, int h)
     m_h = h;
 
     if (!m_initDone) {
+        setAttribute(Qt::WA_StaticContents);
         installEventFilter(this);
         setCursor(Qt::BlankCursor);
         setMouseTracking(true); // get mouse events even when there is no mousebutton pressed
+        setFocusPolicy(Qt::StrongFocus);
         setFixedSize(vncThread.image().width(), vncThread.image().height());
         setStatus(Connected);
         emit changeSize(vncThread.image().width(), vncThread.image().height());
         emit connected();
-        setFocus(); // WORKAROUND: get keyboard inputs
         m_initDone = true;
     }
 
@@ -170,8 +171,6 @@ void VncView::mouseMoveEvent(QMouseEvent *event)
     mouseEvent(event);
 
     event->accept();
-
-    setFocus(); // WORKAROUND: get keyboard inputs
 }
 
 void VncView::mousePressEvent(QMouseEvent *event)
@@ -181,8 +180,6 @@ void VncView::mousePressEvent(QMouseEvent *event)
     mouseEvent(event);
 
     event->accept();
-
-    setFocus(); // WORKAROUND: get keyboard inputs
 }
 
 void VncView::mouseDoubleClickEvent(QMouseEvent *event)
@@ -192,8 +189,6 @@ void VncView::mouseDoubleClickEvent(QMouseEvent *event)
     mouseEvent(event);
 
     event->accept();
-
-    setFocus(); // WORKAROUND: get keyboard inputs
 }
 
 void VncView::mouseReleaseEvent(QMouseEvent *event)
@@ -203,8 +198,6 @@ void VncView::mouseReleaseEvent(QMouseEvent *event)
     mouseEvent(event);
 
     event->accept();
-
-    setFocus(); // WORKAROUND: get keyboard inputs
 }
 
 void VncView::mouseEvent(QMouseEvent *e)
