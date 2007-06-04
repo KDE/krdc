@@ -33,7 +33,6 @@
 #include "vnctypes.h"
 #include "threads.h"
 
-class QClipBoard;
 
 class KVncView : public KRemoteView
 {

@@ -22,7 +22,6 @@
 #include "smartptr.h"
 
 class HostPreferences;
-class KConfig;
 
 class HostPref {
 protected:

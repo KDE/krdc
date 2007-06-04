@@ -39,7 +39,6 @@
 
 class KActionCollection;
 class KActionMenu;
-class KToolBar;
 
 
 enum WindowMode {
