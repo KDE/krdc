@@ -1,0 +1,72 @@
+/****************************************************************************
+**
+** Copyright (C) 2007 Urs Wolfer <uwolfer @ kde.org>
+** Parts of this file have been take from okular:
+** Copyright (C) 2004-2005 Enrico Ros <eros.kde@email.it>
+**
+** This file is part of KDE.
+**
+** This program is free software; you can redistribute it and/or modify
+** it under the terms of the GNU General Public License as published by
+** the Free Software Foundation; either version 2 of the License, or
+** (at your option) any later version.
+**
+** This program is distributed in the hope that it will be useful,
+** but WITHOUT ANY WARRANTY; without even the implied warranty of
+** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+** GNU General Public License for more details.
+**
+** You should have received a copy of the GNU Library General Public License
+** along with this library; see the file COPYING.LIB. If not, write to
+** the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+** Boston, MA 02110-1301, USA.
+**
+****************************************************************************/
+
+#ifndef FLOATINGTOOLBAR
+#define FLOATINGTOOLBAR
+
+#include <QWidget>
+
+/**
+ * @short A widget containing buttons, that slides in from a side.
+ *
+ * This is a shaped widget that slides in from a side of the 'anchor widget'
+ * it's attached to. It can be dragged and docked on {left,top,right,bottom}
+ * sides and contains buttons.
+ */
+class FloatingToolBar : public QWidget
+{
+    Q_OBJECT
+public:
+    FloatingToolBar(QWidget *parent, QWidget *anchorWidget);
+    ~FloatingToolBar();
+
+    Q_ENUMS(Side)
+    enum Side { Left = 0, Top = 1, Right = 2, Bottom = 3 };
+
+    void addAction(QAction *action);
+    void setSide(Side side);
+
+    void showAndAnimate();
+    void hideAndDestroy();
+
+signals:
+    void orientationChanged(int side);
+
+protected:
+    bool eventFilter(QObject *o, QEvent *e);
+    void paintEvent(QPaintEvent *);
+    void mousePressEvent(QMouseEvent *e);
+    void mouseMoveEvent(QMouseEvent *e);
+    void mouseReleaseEvent(QMouseEvent *e);
+    void wheelEvent(QWheelEvent *e);
+
+private:
+    class FloatingToolBarPrivate *d;
+
+private slots:
+    void slotAnimate();
+};
+
+#endif

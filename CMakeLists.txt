@@ -20,6 +20,7 @@ if(HAVE_LIBVNCSERVER)
 endif(HAVE_LIBVNCSERVER)
 
 set(krdc_SRCS ${krdc_rdp_SRCS} ${krdc_vnc_SRCS}
+    floatingtoolbar.cpp
     remoteview.cpp
     mainwindow.cpp
     main.cpp
