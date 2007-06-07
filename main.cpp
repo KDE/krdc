@@ -142,10 +142,13 @@ int main(int argc, char *argv[])
 
 	if (args->count() > 0)
 		host = args->arg(0);
+ 	args->clear();
 
 	QString is;
 	args = KCmdLineArgs::parsedArgs("kde");
-	if (args && args->isSet("geometry"))
+	if( args)
+	{
+	if (args->isSet("geometry"))
 	        is = args->getOption("geometry");
 	if (!is.isNull()) {
 	        QRegExp re("([0-9]+)[xX]([0-9]+)");
@@ -154,9 +157,10 @@ int main(int argc, char *argv[])
 		initialWindowSize = QSize(re.cap(1).toInt(), re.cap(2).toInt());
 	}
 
-	if (args && args->isSet("caption"))
+	if (args->isSet("caption"))
 	  caption = args->getOption("caption");
-
+	args->clear();
+        }
 	MainController mc(&a, wm, host, quality, encodings, password,
 			  scale, localCursor, initialWindowSize, caption);
 	return mc.main();
@@ -184,9 +188,7 @@ MainController::MainController(KApplication *app, WindowMode wm,
 }
 
 MainController::~MainController() {
-	if ( wallet ) {
-		delete wallet; wallet = 0;
-	}
+	delete wallet; wallet = 0;
 }
 
 int MainController::main() {
