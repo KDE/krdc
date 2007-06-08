@@ -30,6 +30,8 @@ class KToggleAction;
 class KTabWidget;
 class KHistoryComboBox;
 
+class FloatingToolBar;
+
 class MainWindow : public KXmlGuiWindow
 {
     Q_OBJECT
@@ -46,13 +48,23 @@ private slots:
     void slotConfigureToolbars();
     void slotShowMenubar();
     void resizeTabWidget(int w, int h);
+    void showRemoteViewToolbar();
+    void slotTakeScreenshot();
+    void slotSwitchFullscreen();
+    void slotLogout();
 
 private:
     void setupActions();
 
+    QWidget *m_fullscreenWindow;
+    QWidget *m_fullscreenWindowView;
+    QByteArray m_mainWindowGeometry;
+
     KToggleAction *m_menubarAction;
     KTabWidget *m_tabWidget;
     KHistoryComboBox *m_addressComboBox;
+
+    FloatingToolBar *m_toolBar;
 };
 
 #endif

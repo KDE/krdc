@@ -23,6 +23,7 @@
 
 #include "mainwindow.h"
 
+#include "floatingtoolbar.h"
 #include "rdpview.h"
 #include "vncview.h"
 
@@ -41,14 +42,18 @@
 #include <KTabWidget>
 #include <KToggleAction>
 
+#include <QClipboard>
 #include <QLabel>
 #include <QLayout>
 #include <QX11EmbedContainer>
+#include <QTimer>
 #include <QToolButton>
 #include <QScrollArea>
 
 MainWindow::MainWindow(QWidget *parent)
-  : KXmlGuiWindow(parent)
+  : KXmlGuiWindow(parent),
+    m_fullscreenWindow(0),
+    m_toolBar(0)
 {
     setupActions();
 
@@ -57,7 +62,7 @@ MainWindow::MainWindow(QWidget *parent)
     setStandardToolBarMenuEnabled(true);
 
     m_tabWidget = new KTabWidget(this);
-    m_tabWidget->setMinimumSize(400, 300);
+    m_tabWidget->setMinimumSize(500, 400);
     setCentralWidget(m_tabWidget);
 
     statusBar()->showMessage(i18n("KRDC started"));
@@ -75,6 +80,21 @@ void MainWindow::setupActions()
     newDownloadAction->setShortcuts(KShortcut("Ctrl+N"));
     connect(newDownloadAction, SIGNAL(triggered()), SLOT(slotNewConnection()));
 
+    QAction *screenshotAction = actionCollection()->addAction("take_screenshot");
+    screenshotAction->setText(i18n("&Copy Screenshot to Clipboard"));
+    screenshotAction->setIcon(KIcon("ksnapshot"));
+    connect(screenshotAction, SIGNAL(triggered()), SLOT(slotTakeScreenshot()));
+
+    QAction *fullscreenAction = actionCollection()->addAction("switch_fullscreen");
+    fullscreenAction->setText(i18n("&Switch to Fullscreen Mode"));
+    fullscreenAction->setIcon(KIcon("view-fullscreen"));
+    connect(fullscreenAction, SIGNAL(triggered()), SLOT(slotSwitchFullscreen()));
+
+    QAction *logoutAction = actionCollection()->addAction("logout");
+    logoutAction->setText(i18n("&Log Out"));
+    logoutAction->setIcon(KIcon("system-log-out"));
+    connect(logoutAction, SIGNAL(triggered()), SLOT(slotLogout()));
+
     QAction *quitAction = KStandardAction::quit(this, SLOT(slotQuit()), actionCollection());
     actionCollection()->addAction("quit", quitAction);
     QAction *preferencesAction = KStandardAction::preferences(this, SLOT(slotPreferences()), actionCollection());
@@ -88,7 +108,6 @@ void MainWindow::setupActions()
     m_menubarAction = KStandardAction::showMenubar(this, SLOT(slotShowMenubar()), actionCollection());
     m_menubarAction->setChecked(!menuBar()->isHidden());
     actionCollection()->addAction("settings_showmenubar", m_menubarAction);
-
 
     m_addressComboBox = new KHistoryComboBox(this);
 
@@ -158,7 +177,121 @@ void MainWindow::resizeTabWidget(int w, int h)
     m_tabWidget->setMinimumSize(w + 8, h + 38); // FIXME: do not use hardcoded values
     m_tabWidget->adjustSize();
     QCoreApplication::processEvents();
-    m_tabWidget->setMinimumSize(400, 300);
+    m_tabWidget->setMinimumSize(500, 400);
+}
+
+void MainWindow::slotTakeScreenshot()
+{
+    QPixmap snapshot;
+
+    if (!m_fullscreenWindow) {
+        QScrollArea *tmp = qobject_cast<QScrollArea *>(m_tabWidget->currentWidget());
+        snapshot = QPixmap::grabWidget(tmp->widget());
+    } else
+        snapshot = QPixmap::grabWidget(m_fullscreenWindowView);
+
+    QApplication::clipboard()->setPixmap(snapshot);
+}
+
+void MainWindow::slotSwitchFullscreen()
+{
+    kDebug(5010) << "slotSwitchFullscreen" << endl;
+
+    if (m_fullscreenWindow) {
+        show();
+        restoreGeometry(m_mainWindowGeometry);
+
+        m_fullscreenWindow->setWindowState(0);
+        m_fullscreenWindow->hide();
+
+        QScrollArea *scrollArea = new QScrollArea(m_tabWidget);
+        scrollArea->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+        scrollArea->setBackgroundRole(QPalette::Dark);
+        scrollArea->setWidget(m_fullscreenWindowView);
+
+        int currentTab = m_tabWidget->currentIndex();
+        m_tabWidget->insertTab(currentTab, scrollArea, m_tabWidget->tabIcon(currentTab), m_tabWidget->tabText(currentTab));
+        m_tabWidget->removeTab(m_tabWidget->currentIndex());
+        m_tabWidget->setCurrentIndex(currentTab);
+
+        resizeTabWidget(m_fullscreenWindowView->sizeHint().width(), m_fullscreenWindowView->sizeHint().height());
+
+        if (m_toolBar) {
+            m_toolBar->hideAndDestroy();
+            m_toolBar = 0;
+        }
+
+        actionCollection()->action("switch_fullscreen")->setIcon(KIcon("view-fullscreen"));
+        actionCollection()->action("switch_fullscreen")->setText(i18n("Switch to Fullscreen Mode"));
+
+        m_fullscreenWindow->deleteLater();
+
+        m_fullscreenWindow = 0;
+    } else {
+        m_fullscreenWindow = new QWidget(this, Qt::Window);
+        m_fullscreenWindow->setWindowTitle(i18n("KRDC Fullscreen"));
+
+        QScrollArea *tmp = qobject_cast<QScrollArea *>(m_tabWidget->currentWidget());
+
+        m_fullscreenWindowView = tmp->widget();
+
+        QScrollArea *scrollArea = new QScrollArea(m_fullscreenWindow);
+        scrollArea->setFrameShape(QFrame::NoFrame);
+        scrollArea->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+        scrollArea->setBackgroundRole(QPalette::Dark);
+        scrollArea->setWidget(m_fullscreenWindowView);
+
+        QVBoxLayout *fullscreenLayout = new QVBoxLayout();
+        fullscreenLayout->setMargin(0);
+        fullscreenLayout->addWidget(scrollArea);
+        m_fullscreenWindow->setLayout(fullscreenLayout);
+
+        m_fullscreenWindow->show();
+
+        m_fullscreenWindow->setWindowState(Qt::WindowFullScreen);
+
+        // show the toolbar after we have switched to fullscreen mode
+        QTimer::singleShot(100, this, SLOT(showRemoteViewToolbar()));
+
+        m_mainWindowGeometry = saveGeometry();
+        hide();
+    }
+}
+
+void MainWindow::slotLogout()
+{
+    kDebug(5010) << "slotLogout" << endl;
+
+    if (m_fullscreenWindow) { // first close fullscreen view
+        slotSwitchFullscreen();
+        slotLogout();
+    }
+
+    QWidget *tmp = m_tabWidget->currentWidget();
+
+    m_tabWidget->removeTab(m_tabWidget->currentIndex());
+
+    tmp->deleteLater();
+}
+
+void MainWindow::showRemoteViewToolbar()
+{
+    kDebug(5010) << "showRemoteViewToolbar" << endl;
+
+    m_fullscreenWindowView->repaint(); // be sure there are no artifacts on the remote view
+
+    if (!m_toolBar) {
+        actionCollection()->action("switch_fullscreen")->setIcon(KIcon("view-restore"));
+        actionCollection()->action("switch_fullscreen")->setText(i18n("Switch to Window Mode"));
+
+        m_toolBar = new FloatingToolBar(m_fullscreenWindow, m_fullscreenWindow);
+        m_toolBar->setSide(FloatingToolBar::Top);
+        m_toolBar->addAction(actionCollection()->action("switch_fullscreen"));
+        m_toolBar->addAction(actionCollection()->action("take_screenshot"));
+        m_toolBar->addAction(actionCollection()->action("logout"));
+    }
+
+    m_toolBar->showAndAnimate();
 }
 
 void MainWindow::slotPreferences()
