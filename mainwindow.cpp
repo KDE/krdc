@@ -25,7 +25,9 @@
 
 #include "floatingtoolbar.h"
 #include "rdpview.h"
+#ifdef BUILDVNC
 #include "vncview.h"
+#endif
 
 #include <KAction>
 #include <KActionCollection>
