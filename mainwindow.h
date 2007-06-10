@@ -28,7 +28,7 @@
 
 class KToggleAction;
 class KTabWidget;
-class KHistoryComboBox;
+class KUrlNavigator;
 
 class FloatingToolBar;
 
@@ -52,6 +52,7 @@ private slots:
     void slotTakeScreenshot();
     void slotSwitchFullscreen();
     void slotLogout();
+    void updateActionStatus();
 
 private:
     void setupActions();
@@ -62,7 +63,7 @@ private:
 
     KToggleAction *m_menubarAction;
     KTabWidget *m_tabWidget;
-    KHistoryComboBox *m_addressComboBox;
+    KUrlNavigator *m_addressNavigator;
 
     FloatingToolBar *m_toolBar;
 };

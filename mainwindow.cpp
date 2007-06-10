@@ -33,7 +33,6 @@
 #include <KActionCollection>
 #include <KApplication>
 #include <KEditToolBar>
-#include <KHistoryComboBox>
 #include <KIcon>
 #include <KLocale>
 #include <KNotifyConfigWidget>
@@ -43,6 +42,7 @@
 #include <KStatusBar>
 #include <KTabWidget>
 #include <KToggleAction>
+#include <KUrlNavigator>
 
 #include <QClipboard>
 #include <QLabel>
@@ -111,9 +111,7 @@ void MainWindow::setupActions()
     m_menubarAction->setChecked(!menuBar()->isHidden());
     actionCollection()->addAction("settings_showmenubar", m_menubarAction);
 
-    m_addressComboBox = new KHistoryComboBox(this);
-
-    connect(m_addressComboBox, SIGNAL(returnPressed()), this, SLOT(slotNewConnection()));
+    m_addressNavigator = new KUrlNavigator(0, KUrl("vnc://"), this);
 
     QLabel *addressLabel = new QLabel(i18n("Remote desktop:"), this);
 
@@ -121,7 +119,7 @@ void MainWindow::setupActions()
     QHBoxLayout *addressLayout = new QHBoxLayout(addressWidget);
     addressLayout->setMargin(0);
     addressLayout->addWidget(addressLabel);
-    addressLayout->addWidget(m_addressComboBox, 1);
+    addressLayout->addWidget(m_addressNavigator, 1);
 
     KAction *addressLineAction = new KAction(i18n("Address"), this);
     actionCollection()->addAction("address_line", addressLineAction);
@@ -132,14 +130,15 @@ void MainWindow::setupActions()
     gotoAction->setIcon(KIcon("browser-go"));
     connect(gotoAction, SIGNAL(triggered()), SLOT(slotNewConnection()));
 
+    updateActionStatus(); // disable remote view actions
 }
 
 void MainWindow::slotNewConnection()
 {
-    QUrl url = m_addressComboBox->currentText();
-    m_addressComboBox->clear();
+    QUrl url = m_addressNavigator->url();
+    m_addressNavigator->setUrl(KUrl("vnc://"));
 
-    if (url.isEmpty())
+    if (!url.isValid())
         return;
 
     QScrollArea *scrollArea = new QScrollArea(m_tabWidget);
@@ -169,6 +168,8 @@ void MainWindow::slotNewConnection()
     m_tabWidget->addTab(scrollArea, KIcon("krdc"), url.toString());
 
     statusBar()->showMessage(i18n("Connected to %1 via %2", url.host(), url.scheme().toUpper()));
+
+    updateActionStatus();
 }
 
 void MainWindow::resizeTabWidget(int w, int h)
@@ -274,6 +275,8 @@ void MainWindow::slotLogout()
     m_tabWidget->removeTab(m_tabWidget->currentIndex());
 
     tmp->deleteLater();
+
+    updateActionStatus();
 }
 
 void MainWindow::showRemoteViewToolbar()
@@ -294,6 +297,17 @@ void MainWindow::showRemoteViewToolbar()
     }
 
     m_toolBar->showAndAnimate();
+}
+
+void MainWindow::updateActionStatus()
+{
+    kDebug(5010) << "updateActionStatus = " << m_tabWidget->currentIndex() << endl;
+
+    bool enabled = (m_tabWidget->currentIndex() >= 0) ? true : false;
+
+    actionCollection()->action("switch_fullscreen")->setEnabled(enabled);
+    actionCollection()->action("take_screenshot")->setEnabled(enabled);
+    actionCollection()->action("logout")->setEnabled(enabled);
 }
 
 void MainWindow::slotPreferences()
