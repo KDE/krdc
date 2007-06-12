@@ -68,6 +68,8 @@ MainWindow::MainWindow(QWidget *parent)
     setCentralWidget(m_tabWidget);
 
     statusBar()->showMessage(i18n("KRDC started"));
+
+    updateActionStatus(); // disable remote view actions
 }
 
 MainWindow::~MainWindow()
@@ -129,8 +131,6 @@ void MainWindow::setupActions()
     gotoAction->setText(i18n("&Goto address"));
     gotoAction->setIcon(KIcon("browser-go"));
     connect(gotoAction, SIGNAL(triggered()), SLOT(slotNewConnection()));
-
-    updateActionStatus(); // disable remote view actions
 }
 
 void MainWindow::slotNewConnection()
