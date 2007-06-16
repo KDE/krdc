@@ -1,0 +1,1 @@
+install(FILES krdc.kcfg DESTINATION ${KCFG_INSTALL_DIR})

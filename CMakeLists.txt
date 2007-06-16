@@ -1,5 +1,7 @@
 project(krdc)
 
+add_subdirectory(config)
+
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/rdp/
     ${CMAKE_CURRENT_SOURCE_DIR}/vnc/
@@ -20,13 +22,20 @@ if(HAVE_LIBVNCSERVER)
 endif(HAVE_LIBVNCSERVER)
 
 set(krdc_SRCS ${krdc_rdp_SRCS} ${krdc_vnc_SRCS}
+    config/preferencesdialog.cpp
     floatingtoolbar.cpp
     remoteview.cpp
     mainwindow.cpp
     main.cpp
 )
 
+kde4_add_ui_files(krdc_SRCS
+    config/general.ui
+)
+
 kde4_automoc(${krdc_SRCS})
+
+kde4_add_kcfg_files(krdc_SRCS config/settings.kcfgc)
 
 kde4_add_executable(krdc ${krdc_SRCS})
 

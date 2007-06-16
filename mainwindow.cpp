@@ -23,6 +23,8 @@
 
 #include "mainwindow.h"
 
+#include "settings.h"
+#include "config/preferencesdialog.h"
 #include "floatingtoolbar.h"
 #include "rdpview.h"
 #ifdef BUILDVNC
@@ -35,8 +37,9 @@
 #include <KEditToolBar>
 #include <KIcon>
 #include <KLocale>
-#include <KNotifyConfigWidget>
 #include <KMenuBar>
+#include <KMessageBox>
+#include <KNotifyConfigWidget>
 #include <KShortcut>
 #include <KShortcutsDialog>
 #include <KStatusBar>
@@ -114,6 +117,7 @@ void MainWindow::setupActions()
     actionCollection()->addAction("settings_showmenubar", m_menubarAction);
 
     m_addressNavigator = new KUrlNavigator(0, KUrl("vnc://"), this);
+    connect(m_addressNavigator, SIGNAL(returnPressed()), SLOT(slotNewConnection()));
 
     QLabel *addressLabel = new QLabel(i18n("Remote desktop:"), this);
 
@@ -138,8 +142,12 @@ void MainWindow::slotNewConnection()
     QUrl url = m_addressNavigator->url();
     m_addressNavigator->setUrl(KUrl("vnc://"));
 
-    if (!url.isValid())
+    if (!url.isValid()) {
+        KMessageBox::error(this,
+                           i18n("The entered address does not have the required form."),
+                           i18n("Malformed URL"));
         return;
+    }
 
     QScrollArea *scrollArea = new QScrollArea(m_tabWidget);
     scrollArea->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
@@ -312,10 +320,35 @@ void MainWindow::updateActionStatus()
 
 void MainWindow::slotPreferences()
 {
+    // An instance of your dialog could be already created and could be
+    // cached, in which case you want to display the cached dialog
+    // instead of creating another one
+    if (PreferencesDialog::showDialog("preferences"))
+        return;
+
+    // KConfigDialog didn't find an instance of this dialog, so lets
+    // create it:
+    PreferencesDialog *dialog = new PreferencesDialog(this, Settings::self());
+
+    // User edited the configuration - update your local copies of the
+    // configuration data
+//     connect(dialog, SIGNAL(settingsChanged(const QString&)),
+//             this, SLOT(updateConfiguration()));
+
+    dialog->show();
 }
 
 void MainWindow::slotQuit()
 {
+    if (KMessageBox::warningYesNoCancel(this,
+            i18n("Are you sure you want to close KRdc?"),
+            i18n("Confirm Quit"),
+            KStandardGuiItem::yes(), KStandardGuiItem::no(), KStandardGuiItem::cancel(),
+            "AskBeforeExit") != KMessageBox::Yes)
+        return;
+
+    Settings::self()->writeConfig();
+
     close();
 }
 

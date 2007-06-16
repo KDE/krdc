@@ -1,0 +1,29 @@
+<ui version="4.0" >
+ <class>General</class>
+ <widget class="QWidget" name="General" >
+  <layout class="QVBoxLayout" >
+   <item>
+    <widget class="QCheckBox" name="kcfg_RememberSessions" >
+     <property name="text" >
+      <string>Remember open sessions for next startup</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <spacer>
+     <property name="orientation" >
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" >
+      <size>
+       <width>253</width>
+       <height>111</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
