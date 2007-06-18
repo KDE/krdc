@@ -139,7 +139,7 @@ void MainWindow::setupActions()
 
 void MainWindow::slotNewConnection()
 {
-    QUrl url = m_addressNavigator->url();
+    QUrl url = m_addressNavigator->uncommittedUrl();
     m_addressNavigator->setUrl(KUrl("vnc://"));
 
     if (!url.isValid()) {
