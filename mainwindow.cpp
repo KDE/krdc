@@ -48,6 +48,7 @@
 #include <KUrlNavigator>
 
 #include <QClipboard>
+#include <QCloseEvent>
 #include <QLabel>
 #include <QLayout>
 #include <QX11EmbedContainer>
@@ -117,6 +118,7 @@ void MainWindow::setupActions()
     actionCollection()->addAction("settings_showmenubar", m_menubarAction);
 
     m_addressNavigator = new KUrlNavigator(0, KUrl("vnc://"), this);
+    m_addressNavigator->setUrlEditable(Settings::normalUrlInputLine());
     connect(m_addressNavigator, SIGNAL(returnPressed()), SLOT(slotNewConnection()));
 
     QLabel *addressLabel = new QLabel(i18n("Remote desktop:"), this);
@@ -149,9 +151,7 @@ void MainWindow::slotNewConnection()
         return;
     }
 
-    QScrollArea *scrollArea = new QScrollArea(m_tabWidget);
-    scrollArea->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-    scrollArea->setBackgroundRole(QPalette::Dark);
+    QScrollArea *scrollArea = createScrollArea(m_tabWidget, 0);
 
     RemoteView *view;
 
@@ -168,10 +168,12 @@ void MainWindow::slotNewConnection()
 
     connect(view, SIGNAL(changeSize(int, int)), this, SLOT(resizeTabWidget(int, int)));
 
+    m_remoteViewList.append(view);
+
     view->resize(0, 0);
     view->start();
 
-    scrollArea->setWidget(view);
+    scrollArea->setWidget(m_remoteViewList.at(m_tabWidget->count()));
 
     m_tabWidget->addTab(scrollArea, KIcon("krdc"), url.toString());
 
@@ -193,13 +195,7 @@ void MainWindow::resizeTabWidget(int w, int h)
 
 void MainWindow::slotTakeScreenshot()
 {
-    QPixmap snapshot;
-
-    if (!m_fullscreenWindow) {
-        QScrollArea *tmp = qobject_cast<QScrollArea *>(m_tabWidget->currentWidget());
-        snapshot = QPixmap::grabWidget(tmp->widget());
-    } else
-        snapshot = QPixmap::grabWidget(m_fullscreenWindowView);
+    QPixmap snapshot = QPixmap::grabWidget(m_remoteViewList.at(m_tabWidget->currentIndex()));
 
     QApplication::clipboard()->setPixmap(snapshot);
 }
@@ -215,17 +211,15 @@ void MainWindow::slotSwitchFullscreen()
         m_fullscreenWindow->setWindowState(0);
         m_fullscreenWindow->hide();
 
-        QScrollArea *scrollArea = new QScrollArea(m_tabWidget);
-        scrollArea->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-        scrollArea->setBackgroundRole(QPalette::Dark);
-        scrollArea->setWidget(m_fullscreenWindowView);
+        QScrollArea *scrollArea = createScrollArea(m_tabWidget, m_remoteViewList.at(m_tabWidget->currentIndex()));
 
         int currentTab = m_tabWidget->currentIndex();
         m_tabWidget->insertTab(currentTab, scrollArea, m_tabWidget->tabIcon(currentTab), m_tabWidget->tabText(currentTab));
         m_tabWidget->removeTab(m_tabWidget->currentIndex());
         m_tabWidget->setCurrentIndex(currentTab);
 
-        resizeTabWidget(m_fullscreenWindowView->sizeHint().width(), m_fullscreenWindowView->sizeHint().height());
+        resizeTabWidget(m_remoteViewList.at(m_tabWidget->currentIndex())->sizeHint().width(),
+                        m_remoteViewList.at(m_tabWidget->currentIndex())->sizeHint().height());
 
         if (m_toolBar) {
             m_toolBar->hideAndDestroy();
@@ -240,17 +234,10 @@ void MainWindow::slotSwitchFullscreen()
         m_fullscreenWindow = 0;
     } else {
         m_fullscreenWindow = new QWidget(this, Qt::Window);
-        m_fullscreenWindow->setWindowTitle(i18n("KRDC Fullscreen"));
+        m_fullscreenWindow->setWindowTitle(i18n("KRdc Fullscreen"));
 
-        QScrollArea *tmp = qobject_cast<QScrollArea *>(m_tabWidget->currentWidget());
-
-        m_fullscreenWindowView = tmp->widget();
-
-        QScrollArea *scrollArea = new QScrollArea(m_fullscreenWindow);
+        QScrollArea *scrollArea = createScrollArea(m_fullscreenWindow, m_remoteViewList.at(m_tabWidget->currentIndex()));
         scrollArea->setFrameShape(QFrame::NoFrame);
-        scrollArea->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-        scrollArea->setBackgroundRole(QPalette::Dark);
-        scrollArea->setWidget(m_fullscreenWindowView);
 
         QVBoxLayout *fullscreenLayout = new QVBoxLayout();
         fullscreenLayout->setMargin(0);
@@ -269,6 +256,21 @@ void MainWindow::slotSwitchFullscreen()
     }
 }
 
+QScrollArea *MainWindow::createScrollArea(QWidget *parent, RemoteView *remoteView)
+{
+    QScrollArea *scrollArea = new QScrollArea(parent);
+    scrollArea->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+
+    QPalette palette = scrollArea->palette();
+    palette.setColor(QPalette::Dark, Settings::backgroundColor());
+    scrollArea->setPalette(palette);
+
+    scrollArea->setBackgroundRole(QPalette::Dark);
+    scrollArea->setWidget(remoteView);
+
+    return scrollArea;
+}
+
 void MainWindow::slotLogout()
 {
     kDebug(5010) << "slotLogout" << endl;
@@ -279,6 +281,8 @@ void MainWindow::slotLogout()
     }
 
     QWidget *tmp = m_tabWidget->currentWidget();
+
+    m_remoteViewList.removeAt(m_tabWidget->currentIndex());
 
     m_tabWidget->removeTab(m_tabWidget->currentIndex());
 
@@ -291,7 +295,7 @@ void MainWindow::showRemoteViewToolbar()
 {
     kDebug(5010) << "showRemoteViewToolbar" << endl;
 
-    m_fullscreenWindowView->repaint(); // be sure there are no artifacts on the remote view
+    m_remoteViewList.at(m_tabWidget->currentIndex())->repaint(); // be sure there are no artifacts on the remote view
 
     if (!m_toolBar) {
         actionCollection()->action("switch_fullscreen")->setIcon(KIcon("view-restore"));
@@ -332,23 +336,26 @@ void MainWindow::slotPreferences()
 
     // User edited the configuration - update your local copies of the
     // configuration data
-//     connect(dialog, SIGNAL(settingsChanged(const QString&)),
-//             this, SLOT(updateConfiguration()));
+    connect(dialog, SIGNAL(settingsChanged(const QString&)),
+            this, SLOT(updateConfiguration()));
 
     dialog->show();
 }
 
+void MainWindow::updateConfiguration()
+{
+    m_addressNavigator->setUrlEditable(Settings::normalUrlInputLine());
+
+    // update the scroll areas background color
+    for (int i = 0; i < m_tabWidget->count(); i++) {
+        QPalette palette = m_tabWidget->widget(i)->palette();
+        palette.setColor(QPalette::Dark, Settings::backgroundColor());
+        m_tabWidget->widget(i)->setPalette(palette);
+    }
+}
+
 void MainWindow::slotQuit()
 {
-    if (KMessageBox::warningYesNoCancel(this,
-            i18n("Are you sure you want to close KRdc?"),
-            i18n("Confirm Quit"),
-            KStandardGuiItem::yes(), KStandardGuiItem::no(), KStandardGuiItem::cancel(),
-            "AskBeforeExit") != KMessageBox::Yes)
-        return;
-
-    Settings::self()->writeConfig();
-
     close();
 }
 
@@ -375,6 +382,20 @@ void MainWindow::slotShowMenubar()
         menuBar()->show();
     else
         menuBar()->hide();
+}
+
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    if (KMessageBox::warningYesNoCancel(this,
+            i18n("Are you sure you want to close KRdc?"),
+            i18n("Confirm Quit"),
+            KStandardGuiItem::yes(), KStandardGuiItem::no(), KStandardGuiItem::cancel(),
+            "AskBeforeExit") == KMessageBox::Yes) {
+
+        Settings::self()->writeConfig();
+        event->accept();
+    } else
+        event->ignore();
 }
 
 #include "mainwindow.moc"

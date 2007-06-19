@@ -31,6 +31,8 @@ class KTabWidget;
 class KUrlNavigator;
 
 class FloatingToolBar;
+class RemoteView;
+class QScrollArea;
 
 class MainWindow : public KXmlGuiWindow
 {
@@ -38,6 +40,9 @@ class MainWindow : public KXmlGuiWindow
 public:
     MainWindow(QWidget *parent = 0);
     ~MainWindow();
+
+protected:
+    virtual void closeEvent(QCloseEvent *event);
 
 private slots:
     void slotNewConnection();
@@ -53,12 +58,13 @@ private slots:
     void slotSwitchFullscreen();
     void slotLogout();
     void updateActionStatus();
+    void updateConfiguration();
 
 private:
     void setupActions();
+    QScrollArea *createScrollArea(QWidget *parent, RemoteView *remoteView);
 
     QWidget *m_fullscreenWindow;
-    QWidget *m_fullscreenWindowView;
     QByteArray m_mainWindowGeometry;
 
     KToggleAction *m_menubarAction;
@@ -66,6 +72,8 @@ private:
     KUrlNavigator *m_addressNavigator;
 
     FloatingToolBar *m_toolBar;
+
+    QList<RemoteView *> m_remoteViewList;
 };
 
 #endif
