@@ -85,16 +85,21 @@ extern char *passwd(rfbClient *cl)
     return strdup(t->password().toLocal8Bit());
 }
 
-extern void log(const char *format, ...)
+extern void output(const char *format, ...)
 {
-    kDebug(5011) << format << endl;
-    Q_UNUSED(format);
-}
 
-extern void error(const char *format, ...)
-{
-    kDebug(5011) << format << endl;
-    Q_UNUSED(format);
+    va_list args;
+    va_start(args, format);
+
+    QString message;
+    message.vsprintf(format, args);
+
+    va_end(args);
+
+    kDebug(5011) << message.toLocal8Bit().constData();
+
+    if (message.contains("Could not open"))
+        kDebug(5011) << "Server not found!" << endl;
 }
 
 VncClientThread::VncClientThread()
@@ -165,8 +170,8 @@ void VncClientThread::stop()
 void VncClientThread::run()
 {
     QMutexLocker locker(&mutex);
-//     rfbClientLog = log;
-//     rfbClientErr = error;
+    rfbClientLog = output;
+    rfbClientErr = output;
     cl = rfbGetClient(8, 3, 4);
     cl->MallocFrameBuffer = newclient;
     cl->canHandleNewFBSize = true;
@@ -174,7 +179,11 @@ void VncClientThread::run()
     cl->GotFrameBufferUpdate = updatefb;
     rfbClientSetClientData(cl, 0, this);
     cl->serverHost = m_host.toLatin1().data();
+
+    if(m_port >= 0 && m_port < 5900)
+        m_port += 5900;
     cl->serverPort = m_port;
+
     if(!rfbInitClient(cl, 0, 0))
         return;
 
