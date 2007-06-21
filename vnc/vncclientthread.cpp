@@ -42,11 +42,32 @@ extern rfbBool newclient(rfbClient *cl)
     cl->format.greenMax = 0xff;
     cl->format.blueMax = 0xff;
 
-    //best quality
-    cl->appData.useBGR233 = 0;
-    cl->appData.encodingsString = "copyrect hextile raw";
-    cl->appData.compressLevel = -1;
-    cl->appData.qualityLevel = 9;
+    VncClientThread *t = (VncClientThread*)rfbClientGetClientData(cl, 0);
+
+    switch (t->quality()) {
+    case RemoteView::High:
+        cl->appData.useBGR233 = 0;
+        cl->appData.encodingsString = "copyrect hextile raw";
+        cl->appData.compressLevel = -1;
+        cl->appData.qualityLevel = 9;
+        break;
+    case RemoteView::Medium:
+        cl->appData.useBGR233 = 0;
+        cl->appData.encodingsString = "copyrect tight zlib hextile raw";
+        cl->appData.compressLevel = -1;
+        cl->appData.qualityLevel = 7;
+        break;
+    case RemoteView::Low:
+    case RemoteView::Unknown:
+    default:
+        cl->appData.useBGR233 = 1;
+        cl->appData.encodingsString = "copyrect tight zlib hextile raw";
+        cl->appData.compressLevel = -1;
+        cl->appData.qualityLevel = 1;
+        break;
+    }
+
+    cl->appData.nColours = 256;
 
     SetFormatAndEncodings(cl);
     SendFramebufferUpdateRequest(cl, 0, 0, cl->width, cl->height, false);
@@ -130,6 +151,16 @@ void VncClientThread::setPassword(const QString &password)
     m_password = password;
 }
 
+void VncClientThread::setQuality(RemoteView::Quality quality)
+{
+    m_quality = quality;
+}
+
+const RemoteView::Quality VncClientThread::quality()
+{
+    return m_quality;
+}
+
 const QString VncClientThread::password() const
 {
     return m_password;
@@ -180,7 +211,7 @@ void VncClientThread::run()
     rfbClientSetClientData(cl, 0, this);
     cl->serverHost = m_host.toLatin1().data();
 
-    if(m_port >= 0 && m_port < 5900)
+    if(m_port >= 0 && m_port < 100) // the user most likely used the short form (e.g. :1)
         m_port += 5900;
     cl->serverPort = m_port;
 

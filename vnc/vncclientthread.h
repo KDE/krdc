@@ -24,6 +24,8 @@
 #ifndef VNCCLIENTTHREAD_H
 #define VNCCLIENTTHREAD_H
 
+#include "remoteview.h"
+
 #include <QThread>
 #include <QImage>
 #include <QMutex>
@@ -48,6 +50,8 @@ public:
     void setPort(int port);
     void setPassword(const QString &password);
     const QString password() const;
+    void setQuality(RemoteView::Quality quality);
+    const RemoteView::Quality quality();
 
 signals:
     void imageUpdated(int x, int y, int w, int h);
@@ -70,6 +74,7 @@ private:
     QString m_password;
     int m_port;
     QMutex mutex;
+    RemoteView::Quality m_quality;
 };
 
 #endif

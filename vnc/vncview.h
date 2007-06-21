@@ -38,7 +38,8 @@ class VncView: public RemoteView
 
 public:
     explicit VncView(QWidget *parent = 0,
-                     const QString &host = QString(), int port = 5901);
+                     const QString &host = QString(), int port = 5901,
+                     RemoteView::Quality quality = Medium);
     ~VncView();
 
     QSize framebufferSize();
@@ -66,6 +67,7 @@ private:
     int m_x, m_y, m_w, m_h;
     bool m_repaint;
     bool m_quitFlag;
+    RemoteView::Quality m_quality;
 
 private slots:
     void updateImage(int x, int y, int w, int h);

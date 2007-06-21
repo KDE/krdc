@@ -157,7 +157,7 @@ void MainWindow::slotNewConnection()
 
 #ifdef BUILDVNC
     if (url.scheme().toLower() == "vnc")
-        view = new VncView(scrollArea, url.host(), url.port());
+        view = new VncView(scrollArea, url.host(), url.port(), RemoteView::High);
     else
 #endif
 
