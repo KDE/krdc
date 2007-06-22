@@ -209,7 +209,13 @@ void VncClientThread::run()
     cl->GetPassword = passwd;
     cl->GotFrameBufferUpdate = updatefb;
     rfbClientSetClientData(cl, 0, this);
-    cl->serverHost = m_host.toLatin1().data();
+
+    // make a copy of the host string...
+    QByteArray hostByteArray(m_host.toUtf8().constData());
+    char *host = (char*) malloc(hostByteArray.size());
+    strcpy(host, hostByteArray);
+
+    cl->serverHost = host;
 
     if(m_port >= 0 && m_port < 100) // the user most likely used the short form (e.g. :1)
         m_port += 5900;
