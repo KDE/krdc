@@ -57,6 +57,7 @@ private slots:
     void slotTakeScreenshot();
     void slotSwitchFullscreen();
     void slotLogout();
+    void slotViewOnly(bool viewOnly);
     void updateActionStatus();
     void updateConfiguration();
 

@@ -10,9 +10,10 @@
     <Menu noMerge="1" name="session"><text>&amp;Session</text>
         <Action name="switch_fullscreen" />
         <Action name="take_screenshot" />
+        <Action name="view_only" />
         <Action name="logout" />
     </Menu>
-   <Menu name="settings"><text>&amp;Settings</text>
+    <Menu name="settings"><text>&amp;Settings</text>
         <Separator/>
         <Action name="configure_notifications" />
         <Action name="configure_keys" />
@@ -28,6 +29,7 @@
 <ToolBar fullWidth="false" name="krdc_remote_view_toolbar" newline="false"><text>Remote View Toolbar</text>
     <Action name="switch_fullscreen" />
     <Action name="take_screenshot" />
+    <Action name="view_only" />
     <Action name="logout" />
 </ToolBar>
 <ToolBar fullWidth="false" name="krdc_address_toolbar" newline="false"><text>Address Toolbar</text>

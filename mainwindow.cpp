@@ -101,6 +101,12 @@ void MainWindow::setupActions()
     fullscreenAction->setIcon(KIcon("view-fullscreen"));
     connect(fullscreenAction, SIGNAL(triggered()), SLOT(slotSwitchFullscreen()));
 
+    QAction *viewOnlyAction = actionCollection()->addAction("view_only");
+    viewOnlyAction->setCheckable(true);
+    viewOnlyAction->setText(i18n("&View Only"));
+    viewOnlyAction->setIcon(KIcon("kgpg-sign-kgpg"));
+    connect(viewOnlyAction, SIGNAL(triggered(bool)), SLOT(slotViewOnly(bool)));
+
     QAction *logoutAction = actionCollection()->addAction("logout");
     logoutAction->setText(i18n("&Log Out"));
     logoutAction->setIcon(KIcon("system-log-out"));
@@ -299,6 +305,13 @@ void MainWindow::slotLogout()
     updateActionStatus();
 }
 
+void MainWindow::slotViewOnly(bool viewOnly)
+{
+    kDebug(5010) << "slotViewOnly" << endl;
+
+    m_remoteViewList.at(m_tabWidget->currentIndex())->setViewOnly(viewOnly);
+}
+
 void MainWindow::showRemoteViewToolbar()
 {
     kDebug(5010) << "showRemoteViewToolbar" << endl;
@@ -313,6 +326,7 @@ void MainWindow::showRemoteViewToolbar()
         m_toolBar->setSide(FloatingToolBar::Top);
         m_toolBar->addAction(actionCollection()->action("switch_fullscreen"));
         m_toolBar->addAction(actionCollection()->action("take_screenshot"));
+        m_toolBar->addAction(actionCollection()->action("view_only"));
         m_toolBar->addAction(actionCollection()->action("logout"));
     }
 
@@ -327,6 +341,7 @@ void MainWindow::updateActionStatus()
 
     actionCollection()->action("switch_fullscreen")->setEnabled(enabled);
     actionCollection()->action("take_screenshot")->setEnabled(enabled);
+    actionCollection()->action("view_only")->setEnabled(enabled);
     actionCollection()->action("logout")->setEnabled(enabled);
 }
 

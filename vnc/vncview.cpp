@@ -57,6 +57,8 @@ VncView::~VncView()
 bool VncView::eventFilter(QObject *obj, QEvent *event)
 {
     if (m_viewOnly) {
+        setCursor(Qt::ArrowCursor);
+
         if (event->type() == QEvent::KeyPress ||
             event->type() == QEvent::KeyRelease ||
             event->type() == QEvent::MouseButtonDblClick ||
@@ -65,6 +67,8 @@ bool VncView::eventFilter(QObject *obj, QEvent *event)
             event->type() == QEvent::MouseMove)
             return true;
     }
+    setCursor(Qt::BlankCursor);
+
     return RemoteView::eventFilter(obj, event);
 }
 
