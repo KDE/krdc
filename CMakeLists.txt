@@ -22,10 +22,11 @@ if(HAVE_RDESKTOP)
     )
 endif(HAVE_RDESKTOP)
 
-check_symbol_exists(rfbInitServer "rfb/rfb.h" HAVE_LIBVNCSERVER)
-
-if(HAVE_LIBVNCSERVER)
+if(LIBVNCSERVER_FOUND)
     add_definitions(-DBUILD_VNC)
+
+    include_directories(${LIBVNCCLIENT_INCLUDE_DIR})
+
     set(krdc_vnc_SRCS
         vnc/vnchostpreferences.cpp
         vnc/vncclientthread.cpp
@@ -35,7 +36,7 @@ if(HAVE_LIBVNCSERVER)
     kde4_add_ui_files(krdc_vnc_SRCS
         vnc/vncpreferences.ui
     )
-endif(HAVE_LIBVNCSERVER)
+endif(LIBVNCSERVER_FOUND)
 
 set(krdc_SRCS ${krdc_rdp_SRCS} ${krdc_vnc_SRCS}
     hostpreferences.cpp
@@ -58,9 +59,9 @@ kde4_add_executable(krdc ${krdc_SRCS})
 
 target_link_libraries(krdc ${KDE4_KDEUI_LIBRARY} ${KDE4_KFILE_LIBRARY} ${KDE4_KNOTIFYCONFIG_LIBRARY})
 
-if(HAVE_LIBVNCSERVER)
+if(LIBVNCSERVER_FOUND)
     target_link_libraries(krdc ${LIBVNCCLIENT_LIBRARIES})
-endif(HAVE_LIBVNCSERVER)
+endif(LIBVNCSERVER_FOUND)
 
 install(TARGETS krdc DESTINATION ${BIN_INSTALL_DIR})
 install(FILES krdcui.rc DESTINATION ${DATA_INSTALL_DIR}/krdc)
