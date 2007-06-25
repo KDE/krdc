@@ -1,0 +1,49 @@
+# KDE Config File
+[Desktop Entry]
+Encoding=UTF-8
+ServiceTypes=application/x-smb-server
+Actions=smb2rdc;
+
+[Desktop Action smb2rdc]
+Name=Open Remote Desktop Connection to This Machine
+Name[ca]=Obre una connexió remota d'escriptori a aquesta màquina
+Name[cs]=Otevřít vzdálené připojení plochy k tomuto počítači
+Name[da]=Åbn ekstern desktopforbindelse til denne maskine
+Name[de]=Verbindung zur Arbeitsfläche dieses Rechners herstellen
+Name[el]=Δημιουργία σύνδεσης σε απομακρυσμένη επιφάνεια εργασίας σε αυτό το μηχάνημα
+Name[es]=Abrir conexión remota de escritorio a este sistema
+Name[et]=Kaugtöölaua ühenduse avamine sellesse arvutisse
+Name[eu]=Open Remote Desktop konexioa makina honetara
+Name[fa]=باز کردن اتصال رومیزی راه دور برای این ماشین
+Name[fi]=Avaa etätyöpöytäyhteys tähän koneeseen
+Name[fr]=Ouvrir une connexion distante au bureau de cette machine
+Name[gl]=Abrir Conexión Remota de Escritorio a Esta Máquina
+Name[he]=פתח חיבור שולחן עבודה מרוחק למכונה זו
+Name[hu]=Távoli munkaasztal nyitása itt
+Name[is]=Opna fjarlæga skjáborðtengingu til þessarar vélar
+Name[it]=Apri connessione a desktop remoto a questa macchina
+Name[ja]=このホストへリモートデスクトップ接続を開く
+Name[kk]=Осы компьютердегі үстелге қашық қосылымды ашу
+Name[km]=បើក​ការ​ត​ភ្ជាប​ផ្ទៃ​តុ​ពី​ចម្ងាយ​ទៅ​ម៉ាស៊ីន​នេះ
+Name[lt]=Užmegzti nutolusio darbastalio prijungimą prie šio kompiuterio
+Name[nb]=Åpne fjerntilkobling til skrivebord til denne maskinen
+Name[nds]=Schriefdisch-Feernverbinnen na dissen Reekner opmaken
+Name[ne]=यो मेशिनमा टाढाको डेस्कटप जडान खोल्नुहोस्
+Name[nl]=Externe bureaubladverbinding met deze computer openen
+Name[nn]=Opna samband til skrivebordet over nettverket til denne maskina
+Name[pl]=Otwórz zdalne połączenie z pulpitem na tej maszynie
+Name[pt_BR]=Abre Conexões Remotas para Essa Máquina
+Name[ru]=Открыть соединение Remote Desktop с этой машиной
+Name[sl]=Odpri povezavo z oddaljenim namizjem na tem računalniku
+Name[sr]=Отвори удаљену везу са радном површином на овој машини
+Name[sr@latin]=Otvori udaljenu vezu sa radnom površinom na ovoj mašini
+Name[sv]=Öppna fjärrskrivbordsanslutning till den här datorn
+Name[tr]=Bu makinaya Uzak Masaüstü Bağlantısı aç
+Name[uk]=Відкрити з'єднання з віддаленою стільницею до цього комп'ютера
+Name[x-test]=xxOpen Remote Desktop Connection to This Machinexx
+Name[zh_HK]=開放遠端桌面連線到這電腦
+Name[zh_TW]=在此主機上開啟遠端桌面
+Exec=krdc %u
+Icon=krdc
+
+

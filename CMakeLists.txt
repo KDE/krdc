@@ -65,5 +65,8 @@ endif(LIBVNCSERVER_FOUND)
 
 install(TARGETS krdc DESTINATION ${BIN_INSTALL_DIR})
 install(FILES krdcui.rc DESTINATION ${DATA_INSTALL_DIR}/krdc)
+install(FILES krdc.desktop DESTINATION ${XDG_APPS_DIR})
+install(FILES vnc.protocol rdp.protocol DESTINATION ${SERVICES_INSTALL_DIR})
+install(FILES _rfb._tcp DESTINATION ${DATA_INSTALL_DIR}/zeroconf)
 
 kde4_install_icons(${ICON_INSTALL_DIR})
