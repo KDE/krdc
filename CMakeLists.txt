@@ -7,9 +7,9 @@ include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/vnc/
 )
 
-if(WIN32)
+if(UNIX)
     set(HAVE_RDESKTOP true) # TODO: implement cmake check?
-endif(WIN32)
+endif(UNIX)
 
 if(HAVE_RDESKTOP)
     add_definitions(-DBUILD_RDP)
