@@ -26,7 +26,10 @@
 #define REMOTEVIEW_H
 
 #include <QWidget>
+
+#ifndef Q_WS_X11
 class XEvent;
+#endif
 
 /**
  * Generic widget that displays a remote framebuffer.
