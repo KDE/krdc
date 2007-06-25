@@ -24,10 +24,12 @@
 #include "preferencesdialog.h"
 
 #include "ui_general.h"
-#ifdef BUILDVNC
+#ifdef BUILD_VNC
 #include "ui_vncpreferences.h"
 #endif
+#ifdef BUILD_RDP
 #include "ui_rdppreferences.h"
+#endif
 
 PreferencesDialog::PreferencesDialog(QWidget *parent, KConfigSkeleton *skeleton)
   : KConfigDialog(parent, "preferences", skeleton)
@@ -37,15 +39,17 @@ PreferencesDialog::PreferencesDialog(QWidget *parent, KConfigSkeleton *skeleton)
     generalUi.setupUi(generalPage);
     addPage(generalPage, i18n("General"), "krdc", i18n("General Config"));
 
-#ifdef BUILDVNC
+#ifdef BUILD_VNC
     QWidget *vncPage = new QWidget(this);
     Ui::VncPreferences vncUi;
     vncUi.setupUi(vncPage);
     addPage(vncPage, i18n("VNC"), "krdc", i18n("VNC Config"));
 #endif
 
+#ifdef BUILD_RDP
     QWidget *rdpPage = new QWidget(this);
     Ui::RdpPreferences rdpUi;
     rdpUi.setupUi(rdpPage);
     addPage(rdpPage, i18n("RDP"), "krdc", i18n("RDP Config"));
+#endif
 }

@@ -264,7 +264,9 @@ public slots:
      * Sends a key to the remote server.
      * @param k the key to send
      */
+#ifdef Q_WS_X11
     virtual void pressKey(XEvent *k);
+#endif
 
 signals:
     /**

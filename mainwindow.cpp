@@ -26,8 +26,10 @@
 #include "settings.h"
 #include "config/preferencesdialog.h"
 #include "floatingtoolbar.h"
+#ifdef BUILD_RDP
 #include "rdpview.h"
-#ifdef BUILDVNC
+#endif
+#ifdef BUILD_VNC
 #include "vnchostpreferences.h"
 #include "vncview.h"
 #endif
@@ -156,7 +158,7 @@ void MainWindow::slotNewConnection()
 
     RemoteView *view;
 
-#ifdef BUILDVNC
+#ifdef BUILD_VNC
     if (url.scheme().toLower() == "vnc") {
         VncHostPreferences preferences(url.toString(), this);
         view = new VncView(scrollArea, url.host(), url.port(), preferences.quality());
@@ -164,10 +166,12 @@ void MainWindow::slotNewConnection()
     else
 #endif
 
+#ifdef BUILD_RDP
     if (url.scheme().toLower() == "rdp") {
         view = new RdpView(scrollArea, url.host(), url.port());
     }
     else
+#endif
         return;
 
     connect(view, SIGNAL(changeSize(int, int)), this, SLOT(resizeTabWidget(int, int)));

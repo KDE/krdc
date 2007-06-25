@@ -7,21 +7,32 @@ include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/vnc/
 )
 
-set(krdc_rdp_SRCS
-    rdp/rdpview.cpp
-)
+if(WIN32)
+    set(HAVE_RDESKTOP true) # TODO: implement cmake check?
+endif(WIN32)
+
+if(HAVE_RDESKTOP)
+    add_definitions(-DBUILD_RDP)
+    set(krdc_rdp_SRCS
+        rdp/rdpview.cpp
+    )
+
+    kde4_add_ui_files(krdc_rdp_SRCS
+        rdp/rdppreferences.ui
+    )
+endif(HAVE_RDESKTOP)
 
 check_symbol_exists(rfbInitServer "rfb/rfb.h" HAVE_LIBVNCSERVER)
 
 if(HAVE_LIBVNCSERVER)
-    add_definitions(-DBUILDVNC)
+    add_definitions(-DBUILD_VNC)
     set(krdc_vnc_SRCS
         vnc/vnchostpreferences.cpp
         vnc/vncclientthread.cpp
         vnc/vncview.cpp
     )
 
-    kde4_add_ui_files(krdc_SRCS
+    kde4_add_ui_files(krdc_vnc_SRCS
         vnc/vncpreferences.ui
     )
 endif(HAVE_LIBVNCSERVER)
@@ -37,7 +48,6 @@ set(krdc_SRCS ${krdc_rdp_SRCS} ${krdc_vnc_SRCS}
 
 kde4_add_ui_files(krdc_SRCS
     config/general.ui
-    rdp/rdppreferences.ui
 )
 
 kde4_automoc(${krdc_SRCS})
