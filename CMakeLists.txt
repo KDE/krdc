@@ -16,12 +16,18 @@ check_symbol_exists(rfbInitServer "rfb/rfb.h" HAVE_LIBVNCSERVER)
 if(HAVE_LIBVNCSERVER)
     add_definitions(-DBUILDVNC)
     set(krdc_vnc_SRCS
+        vnc/vnchostpreferences.cpp
         vnc/vncclientthread.cpp
         vnc/vncview.cpp
+    )
+
+    kde4_add_ui_files(krdc_SRCS
+        vnc/vncpreferences.ui
     )
 endif(HAVE_LIBVNCSERVER)
 
 set(krdc_SRCS ${krdc_rdp_SRCS} ${krdc_vnc_SRCS}
+    hostpreferences.cpp
     config/preferencesdialog.cpp
     floatingtoolbar.cpp
     remoteview.cpp
@@ -31,6 +37,7 @@ set(krdc_SRCS ${krdc_rdp_SRCS} ${krdc_vnc_SRCS}
 
 kde4_add_ui_files(krdc_SRCS
     config/general.ui
+    rdp/rdppreferences.ui
 )
 
 kde4_automoc(${krdc_SRCS})

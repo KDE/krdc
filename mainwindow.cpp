@@ -28,6 +28,7 @@
 #include "floatingtoolbar.h"
 #include "rdpview.h"
 #ifdef BUILDVNC
+#include "vnchostpreferences.h"
 #include "vncview.h"
 #endif
 
@@ -156,13 +157,16 @@ void MainWindow::slotNewConnection()
     RemoteView *view;
 
 #ifdef BUILDVNC
-    if (url.scheme().toLower() == "vnc")
-        view = new VncView(scrollArea, url.host(), url.port(), RemoteView::High);
+    if (url.scheme().toLower() == "vnc") {
+        VncHostPreferences preferences(url.toString(), this);
+        view = new VncView(scrollArea, url.host(), url.port(), preferences.quality());
+    }
     else
 #endif
 
-    if (url.scheme().toLower() == "rdp")
+    if (url.scheme().toLower() == "rdp") {
         view = new RdpView(scrollArea, url.host(), url.port());
+    }
     else
         return;
 

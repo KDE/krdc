@@ -21,31 +21,29 @@
 **
 ****************************************************************************/
 
-#include "preferencesdialog.h"
+#ifndef VNCHOSTPREFERENCES_H
+#define VNCHOSTPREFERENCES_H
 
-#include "ui_general.h"
-#ifdef BUILDVNC
-#include "ui_vncpreferences.h"
-#endif
-#include "ui_rdppreferences.h"
+#include "hostpreferences.h"
 
-PreferencesDialog::PreferencesDialog(QWidget *parent, KConfigSkeleton *skeleton)
-  : KConfigDialog(parent, "preferences", skeleton)
+class VncHostPreferences : public HostPreferences
 {
-    QWidget *generalPage = new QWidget(this);
-    Ui::General generalUi;
-    generalUi.setupUi(generalPage);
-    addPage(generalPage, i18n("General"), "krdc", i18n("General Config"));
+    Q_OBJECT
 
-#ifdef BUILDVNC
-    QWidget *vncPage = new QWidget(this);
-    Ui::VncPreferences vncUi;
-    vncUi.setupUi(vncPage);
-    addPage(vncPage, i18n("VNC"), "krdc", i18n("VNC Config"));
+public:
+    VncHostPreferences(const QString &url, QObject *parent);
+    ~VncHostPreferences();
+
+    void setQuality(RemoteView::Quality quality);
+    RemoteView::Quality quality();
+
+protected:
+    void showDialog();
+    void readProtocolSpecificConfig();
+    void saveProtocolSpecificConfig();
+
+private:
+    RemoteView::Quality m_quality;
+};
+
 #endif
-
-    QWidget *rdpPage = new QWidget(this);
-    Ui::RdpPreferences rdpUi;
-    rdpUi.setupUi(rdpPage);
-    addPage(rdpPage, i18n("RDP"), "krdc", i18n("RDP Config"));
-}

@@ -1,0 +1,87 @@
+<ui version="4.0" >
+ <class>VncPreferences</class>
+ <widget class="QWidget" name="VncPreferences" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>420</width>
+    <height>113</height>
+   </rect>
+  </property>
+  <layout class="QVBoxLayout" >
+   <item>
+    <widget class="QGroupBox" name="vncGroupBox" >
+     <property name="title" >
+      <string>Connection</string>
+     </property>
+     <layout class="QGridLayout" >
+      <item row="0" column="0" >
+       <widget class="QLabel" name="connectionLabel" >
+        <property name="text" >
+         <string>Connection type:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1" >
+       <widget class="QComboBox" name="kcfg_Quality" >
+        <property name="minimumSize" >
+         <size>
+          <width>280</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="whatsThis" >
+         <string>Use this to specify the performance of your connection. Note that you should select the speed of the weakest link - even if you have a high speed connection, it will not help you if the remote computer uses a slow modem. Choosing a level of quality that is too high on a slow link will cause slower response times. Choosing a lower quality will increase latencies in high speed connections and results in lower image quality, especially in 'Low Quality' mode.</string>
+        </property>
+        <item>
+         <property name="text" >
+          <string>High Quality (LAN, direct connection)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Medium Quality (DSL, Cable, fast Internet)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Low Quality (Modem, ISDN, slow Internet)</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="1" column="0" >
+       <spacer>
+        <property name="orientation" >
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" >
+         <size>
+          <width>161</width>
+          <height>0</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <spacer>
+     <property name="orientation" >
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" >
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

@@ -21,31 +21,46 @@
 **
 ****************************************************************************/
 
-#include "preferencesdialog.h"
+#ifndef HOSTPREFERENCES_H
+#define HOSTPREFERENCES_H
 
-#include "ui_general.h"
-#ifdef BUILDVNC
-#include "ui_vncpreferences.h"
-#endif
-#include "ui_rdppreferences.h"
+#include "remoteview.h"
 
-PreferencesDialog::PreferencesDialog(QWidget *parent, KConfigSkeleton *skeleton)
-  : KConfigDialog(parent, "preferences", skeleton)
+#include <KDialog>
+
+#include <QDomDocument>
+
+class QCheckBox;
+
+class HostPreferences : public QObject
 {
-    QWidget *generalPage = new QWidget(this);
-    Ui::General generalUi;
-    generalUi.setupUi(generalPage);
-    addPage(generalPage, i18n("General"), "krdc", i18n("General Config"));
+    Q_OBJECT
 
-#ifdef BUILDVNC
-    QWidget *vncPage = new QWidget(this);
-    Ui::VncPreferences vncUi;
-    vncUi.setupUi(vncPage);
-    addPage(vncPage, i18n("VNC"), "krdc", i18n("VNC Config"));
+public:
+    HostPreferences(const QString &url, QObject *parent);
+    ~HostPreferences();
+
+protected:
+    virtual void showDialog() = 0;
+    virtual void readProtocolSpecificConfig() = 0;
+    virtual void saveProtocolSpecificConfig() = 0;
+    void updateElement(const QString &name, const QString &value);
+    void readConfig();
+    bool saveConfig();
+    bool hostConfigured();
+    bool showConfigAgain();
+    KDialog *createDialog(QWidget *widget);
+
+    QDomElement m_element;
+
+private:
+    void setShowConfigAgain(bool show);
+
+    QString m_filename;
+    QString m_url;
+    QDomDocument m_doc;
+    QCheckBox *showAgainCheckBox;
+    bool m_showConfigAgain;
+};
+
 #endif
-
-    QWidget *rdpPage = new QWidget(this);
-    Ui::RdpPreferences rdpUi;
-    rdpUi.setupUi(rdpPage);
-    addPage(rdpPage, i18n("RDP"), "krdc", i18n("RDP Config"));
-}

@@ -1,0 +1,400 @@
+<ui version="4.0" >
+ <class>RdpPreferences</class>
+ <widget class="QWidget" name="RdpPreferences" >
+  <layout class="QVBoxLayout" >
+   <item>
+    <widget class="QGroupBox" name="rdpGroupBox" >
+     <property name="title" >
+      <string>Connection</string>
+     </property>
+     <layout class="QGridLayout" >
+      <item row="1" column="0" >
+       <spacer>
+        <property name="orientation" >
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeType" >
+         <enum>QSizePolicy::Expanding</enum>
+        </property>
+        <property name="sizeHint" >
+         <size>
+          <width>70</width>
+          <height>21</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="0" column="1" colspan="4" >
+       <widget class="QComboBox" name="resolutionComboBox" >
+        <property name="minimumSize" >
+         <size>
+          <width>280</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="whatsThis" >
+         <string>Here you can specify the resolution of the remote desktop. This resolution determines the size of the desktop that will be presented to you.</string>
+        </property>
+        <property name="currentIndex" >
+         <number>1</number>
+        </property>
+        <item>
+         <property name="text" >
+          <string>Minimal (640x480)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Small (800x600)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Normal (1024x768)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Large (1280x1024)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Very Large (1600x1200)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Custom (...)</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="1" column="2" >
+       <widget class="QSpinBox" name="widthSpinBox" >
+        <property name="enabled" >
+         <bool>false</bool>
+        </property>
+        <property name="whatsThis" >
+         <string>This is the width of the remote desktop. You can only change this value manually if you select Custom as desktop resolution above.</string>
+        </property>
+        <property name="maximum" >
+         <number>9999</number>
+        </property>
+        <property name="value" >
+         <number>800</number>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3" >
+       <widget class="QLabel" name="heightLabel" >
+        <property name="enabled" >
+         <bool>false</bool>
+        </property>
+        <property name="text" >
+         <string>H&amp;eight:</string>
+        </property>
+        <property name="alignment" >
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+        <property name="buddy" >
+         <cstring>heightSpinBox</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="4" >
+       <widget class="QSpinBox" name="heightSpinBox" >
+        <property name="enabled" >
+         <bool>false</bool>
+        </property>
+        <property name="whatsThis" >
+         <string>This is the height of the remote desktop. You can only change this value manually if you select Custom as desktop resolution above.</string>
+        </property>
+        <property name="maximum" >
+         <number>9999</number>
+        </property>
+        <property name="value" >
+         <number>600</number>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1" colspan="4" >
+       <widget class="QComboBox" name="keyboardLayoutComboBox" >
+        <property name="minimumSize" >
+         <size>
+          <width>280</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="whatsThis" >
+         <string>Use this to specify your keyboard layout. This layout setting is used to send the correct keyboard codes to the server.</string>
+        </property>
+        <property name="currentIndex" >
+         <number>6</number>
+        </property>
+        <item>
+         <property name="text" >
+          <string>Arabic (ar)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Czech (cs)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Danish (da)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>German (de)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Swiss German (de-ch)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>British English (en-gb)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>US English (en-us)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Spanish (es)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Estonian (et)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Finnish (fi)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>French (fr)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Belgian (fr-be)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>French Canadian (fr-ca)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Swiss French (fr-ch)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Croatian (hr)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Hungarian (hu)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Icelandic (is)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Italian (it)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Japanese (ja)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Lithuanian (lt)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Latvian (lv)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Macedonian (mk)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Dutch (nl)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Belgian Dutch (nl-be)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Norwegian (no)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Polish (pl)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Portuguese (pt)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Brazilian (pt-br)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Russian (ru)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Slovenian (sl)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Swedish (sv)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Thai (th)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Turkish (tr)</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="3" column="0" >
+       <widget class="QLabel" name="layoutLabel" >
+        <property name="text" >
+         <string>&amp;Keyboard layout:</string>
+        </property>
+        <property name="buddy" >
+         <cstring>keyboardLayoutComboBox</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0" >
+       <widget class="QLabel" name="resolutionLabel" >
+        <property name="text" >
+         <string>Desktop &amp;resolution:</string>
+        </property>
+        <property name="buddy" >
+         <cstring>resolutionComboBox</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0" >
+       <widget class="QLabel" name="colorDepthLabel" >
+        <property name="text" >
+         <string>Color &amp;depth:</string>
+        </property>
+        <property name="buddy" >
+         <cstring>keyboardLayoutComboBox</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1" >
+       <widget class="QLabel" name="widthLabel" >
+        <property name="enabled" >
+         <bool>false</bool>
+        </property>
+        <property name="text" >
+         <string>&amp;Width:</string>
+        </property>
+        <property name="alignment" >
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+        <property name="buddy" >
+         <cstring>widthSpinBox</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1" colspan="4" >
+       <widget class="QComboBox" name="colorDepthComboBox" >
+        <property name="minimumSize" >
+         <size>
+          <width>280</width>
+          <height>0</height>
+         </size>
+        </property>
+        <item>
+         <property name="text" >
+          <string>Low Color (8 Bit)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>High Color (16 Bit)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>True Color (24 Bit)</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <spacer>
+     <property name="orientation" >
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" >
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>resolutionComboBox</tabstop>
+  <tabstop>widthSpinBox</tabstop>
+  <tabstop>heightSpinBox</tabstop>
+  <tabstop>colorDepthComboBox</tabstop>
+  <tabstop>keyboardLayoutComboBox</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>
