@@ -26,6 +26,7 @@
 #define REMOTEVIEW_H
 
 #include <QWidget>
+class XEvent;
 
 /**
  * Generic widget that displays a remote framebuffer.
@@ -264,9 +265,7 @@ public slots:
      * Sends a key to the remote server.
      * @param k the key to send
      */
-#ifdef Q_WS_X11
     virtual void pressKey(XEvent *k);
-#endif
 
 signals:
     /**

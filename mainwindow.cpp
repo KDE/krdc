@@ -23,6 +23,7 @@
 
 #include "mainwindow.h"
 
+#include "remoteview.h"
 #include "settings.h"
 #include "config/preferencesdialog.h"
 #include "floatingtoolbar.h"
@@ -54,7 +55,9 @@
 #include <QCloseEvent>
 #include <QLabel>
 #include <QLayout>
+#ifdef Q_WS_X11
 #include <QX11EmbedContainer>
+#endif
 #include <QTimer>
 #include <QToolButton>
 #include <QScrollArea>

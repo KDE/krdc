@@ -105,11 +105,9 @@ int RemoteView::port()
     return m_port;
 }
 
-#ifdef Q_WS_X11
 void RemoteView::pressKey(XEvent *)
 {
 }
-#endif
 
 bool RemoteView::viewOnly()
 {
