@@ -26,6 +26,7 @@
 #include <KDebug>
 #include <KLocale>
 #include <KStandardDirs>
+#include <KTitleWidget>
 
 #include <QCheckBox>
 #include <QFile>
@@ -170,10 +171,15 @@ KDialog *HostPreferences::createDialog(QWidget *widget)
     QWidget *mainWidget = new QWidget(dialog);
     QVBoxLayout *layout = new QVBoxLayout(mainWidget);
 
+    KTitleWidget *titleWidget = new KTitleWidget(dialog);
+    titleWidget->setText(i18n("Host configuration"));
+    titleWidget->setPixmap(KIcon("krdc"));
+
     showAgainCheckBox = new QCheckBox(mainWidget);
     showAgainCheckBox->setText(i18n("Show this dialog again for this host"));
     showAgainCheckBox->setChecked(showConfigAgain());
 
+    layout->addWidget(titleWidget);
     layout->addWidget(widget);
     layout->addWidget(showAgainCheckBox);
     layout->addStretch(1);
