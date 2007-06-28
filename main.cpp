@@ -45,10 +45,9 @@ int main(int argc, char **argv)
 
     aboutData.addAuthor("Urs Wolfer", I18N_NOOP("Developer, Maintainer"), "uwolfer@kde.org");
     aboutData.addAuthor("Tim Jansen", I18N_NOOP("Former Developer"), "tim@tjansen.de");
-    aboutData.addAuthor("Arend van Beelen jr.", I18N_NOOP("RDP backend"), "arend@auton.nl");
-    aboutData.addCredit("AT&T Laboratories Cambridge", I18N_NOOP("Original VNC viewer and protocol design"));
-    aboutData.addCredit("Const Kaplinsky", I18N_NOOP("TightVNC encoding"));
-    aboutData.addCredit("Tridia Corporation", I18N_NOOP("ZLib encoding"));
+    aboutData.addAuthor("Arend van Beelen jr.", I18N_NOOP("Initial RDP backend"), "arend@auton.nl");
+    aboutData.addCredit("LibVNCServer / LibVNCClient developers", I18N_NOOP("VNC client library"),
+                        "libvncserver-common@lists.sf.net");
 
     KCmdLineArgs::init(argc, argv, &aboutData);
 

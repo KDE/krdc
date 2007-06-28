@@ -70,7 +70,7 @@ MainWindow::MainWindow(QWidget *parent)
     setStandardToolBarMenuEnabled(true);
 
     m_tabWidget = new KTabWidget(this);
-    m_tabWidget->setMinimumSize(500, 400);
+    m_tabWidget->setMinimumSize(600, 400);
     setCentralWidget(m_tabWidget);
 
     statusBar()->showMessage(i18n("KRDC started"));
@@ -246,7 +246,7 @@ void MainWindow::slotSwitchFullscreen()
         m_fullscreenWindow = 0;
     } else {
         m_fullscreenWindow = new QWidget(this, Qt::Window);
-        m_fullscreenWindow->setWindowTitle(i18n("KRdc Fullscreen"));
+        m_fullscreenWindow->setWindowTitle(i18n("KRDC Fullscreen"));
 
         QScrollArea *scrollArea = createScrollArea(m_fullscreenWindow, m_remoteViewList.at(m_tabWidget->currentIndex()));
         scrollArea->setFrameShape(QFrame::NoFrame);
@@ -408,7 +408,7 @@ void MainWindow::slotShowMenubar()
 void MainWindow::closeEvent(QCloseEvent *event)
 {
     if (KMessageBox::warningYesNoCancel(this,
-            i18n("Are you sure you want to close KRdc?"),
+            i18n("Are you sure you want to close KRDC?"),
             i18n("Confirm Quit"),
             KStandardGuiItem::yes(), KStandardGuiItem::no(), KStandardGuiItem::cancel(),
             "AskBeforeExit") == KMessageBox::Yes) {
