@@ -25,6 +25,8 @@
 #ifndef REMOTEVIEW_H
 #define REMOTEVIEW_H
 
+#include <QUrl>
+
 #include <QWidget>
 
 #ifndef Q_WS_X11
@@ -338,6 +340,7 @@ protected:
     QString m_host;
     int m_port;
     bool m_viewOnly;
+    QUrl m_url;
 };
 
 #endif

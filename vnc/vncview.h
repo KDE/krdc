@@ -25,7 +25,7 @@
 #define VNCVIEW_H
 
 #include "remoteview.h"
-
+#include "vnchostpreferences.h"
 #include "vncclientthread.h"
 
 extern "C" {
@@ -38,7 +38,7 @@ class VncView: public RemoteView
 
 public:
     explicit VncView(QWidget *parent = 0,
-                     const QString &host = QString(), int port = 5901,
+                     const KUrl &url = KUrl(),
                      RemoteView::Quality quality = Medium);
     ~VncView();
 
@@ -68,6 +68,7 @@ private:
     bool m_repaint;
     bool m_quitFlag;
     RemoteView::Quality m_quality;
+    VncHostPreferences *m_hostPreferences;
 
 private slots:
     void updateImage(int x, int y, int w, int h);

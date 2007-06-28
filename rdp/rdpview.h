@@ -27,12 +27,15 @@
 
 #include "remoteview.h"
 
+#include "rdphostpreferences.h"
+
 #include <QProcess>
 
 #define TCP_PORT_RDP 3389
 #define RDP_LOGON_NORMAL 0x33
 
 class RdpView;
+
 class QX11EmbedContainer;
 
 class RdpView : public RemoteView
@@ -41,7 +44,7 @@ class RdpView : public RemoteView
 
 public:
     RdpView(QWidget *parent = 0,
-             const QString &host = QString(), int port = TCP_PORT_RDP,
+             const KUrl &url = KUrl(),
              const QString &user = QString(), const QString &password = QString(),
              int flags = RDP_LOGON_NORMAL, const QString &domain = QString(),
              const QString &shell = QString(), const QString &directory = QString(),
@@ -82,6 +85,8 @@ private:
     QProcess *m_process;              // rdesktop process
 
     QString m_caption;    // the caption to use on the window
+
+    RdpHostPreferences *m_hostPreferences;
 
 private slots:
     void connectionOpened();           // called if rdesktop started

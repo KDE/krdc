@@ -22,6 +22,10 @@
 **
 ****************************************************************************/
 
+#include "rdpview.h"
+
+#include "settings.h"
+
 #include <kdialog.h>
 #include <klocale.h>
 #include <kmessagebox.h>
@@ -32,19 +36,13 @@
 #include <QX11EmbedContainer>
 #include <QEvent>
 
-#undef Bool
-
-#include "rdpview.h"
-// #include "rdphostpref.h"
-// #include "rdpprefs.h"
-
 bool rdpAppDataConfigured = false;
 extern KWallet::Wallet *wallet;
 
 static RdpView *krdpview;
 
 RdpView::RdpView(QWidget *parent,
-                   const QString &host, int port,
+                   const KUrl &url,
                    const QString &user, const QString &password,
                    int flags, const QString &domain,
                    const QString &shell, const QString &directory,
@@ -60,8 +58,9 @@ RdpView::RdpView(QWidget *parent,
     m_process(NULL),
     m_caption(caption)
 {
-    m_host = host;
-    m_port = port;
+    m_url = url;
+    m_host = url.host();
+    m_port = url.port();
 
     krdpview = this;
     if(m_port <= 0) {
@@ -126,6 +125,7 @@ bool RdpView::isQuitting()
 // open a connection
 bool RdpView::start()
 {
+    m_hostPreferences = new RdpHostPreferences(m_url.toString(), this);
 #if 0
     SmartPtr<RdpHostPref> hp, rdpDefaults;
     bool useKWallet = false;
@@ -189,8 +189,9 @@ bool RdpView::start()
     m_process = new QProcess(m_container);
 
     QStringList arguments;
-//     arguments << "-g" << (QString::number(hp->width()) + 'x' + QString::number(hp->height()));
-//     arguments << "-k" << hp->layout();
+    arguments << "-g" << (QString::number(m_hostPreferences->width()) + 'x' +
+                          QString::number(m_hostPreferences->height()));
+    arguments << "-k" << m_hostPreferences->keyboardLayout();
 
     if(!m_user.isEmpty()) {
         arguments << "-u" << m_user;
@@ -243,7 +244,7 @@ bool RdpView::start()
     }
 
     arguments << "-X" << QString::number(m_container->winId());
-//     arguments << "-a" << QString::number(hp->colorDepth());
+    arguments << "-a" << QString::number((m_hostPreferences->colorDepth() + 1) * 8);
     arguments << (m_host + ':' + QString::number(m_port));
 
     for (int i = 0; i < arguments.size(); ++i)

@@ -31,12 +31,13 @@
 #include <QMouseEvent>
 
 VncView::VncView(QWidget *parent,
-                 const QString &host, int port,
+                 const KUrl &url,
                  RemoteView::Quality quality)
   : RemoteView(parent)
 {
-    m_host = host;
-    m_port = port;
+    m_url = url;
+    m_host = url.host();
+    m_port = url.port();
     m_quality = quality;
 
     m_initDone = false;
@@ -105,9 +106,11 @@ bool VncView::isQuitting()
 
 bool VncView::start()
 {
+    m_hostPreferences = new VncHostPreferences(m_url.toString(), this);
+
     vncThread.setHost(m_host);
     vncThread.setPort(m_port);
-    vncThread.setQuality(m_quality);
+    vncThread.setQuality(m_hostPreferences->quality());
 
     setStatus(Connecting);
 

@@ -50,6 +50,14 @@ PreferencesDialog::PreferencesDialog(QWidget *parent, KConfigSkeleton *skeleton)
     QWidget *rdpPage = new QWidget(this);
     Ui::RdpPreferences rdpUi;
     rdpUi.setupUi(rdpPage);
+    // would need a lot of code duplication. find a solution, bit it's not
+    // that imporant because you will not change this configuration each day...
+    // see rdp/rdphostpreferences.cpp
+    rdpUi.resolutionComboBox->hide();
+    rdpUi.kcfg_Height->setEnabled(true);
+    rdpUi.kcfg_Width->setEnabled(true);
+    rdpUi.heightLabel->setEnabled(true);
+    rdpUi.widthLabel->setEnabled(true);
     addPage(rdpPage, i18n("RDP"), "krdc", i18n("RDP Config"));
 #endif
 }

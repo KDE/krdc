@@ -1,6 +1,14 @@
 <ui version="4.0" >
  <class>RdpPreferences</class>
  <widget class="QWidget" name="RdpPreferences" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>435</width>
+    <height>174</height>
+   </rect>
+  </property>
   <layout class="QVBoxLayout" >
    <item>
     <widget class="QGroupBox" name="rdpGroupBox" >
@@ -8,6 +16,134 @@
       <string>Connection</string>
      </property>
      <layout class="QGridLayout" >
+      <item row="0" column="0" >
+       <widget class="QLabel" name="resolutionLabel" >
+        <property name="text" >
+         <string>Desktop &amp;resolution:</string>
+        </property>
+        <property name="buddy" >
+         <cstring>resolutionComboBox</cstring>
+        </property>
+       </widget>
+      </item>
+      <item rowspan="2" row="0" column="1" >
+       <layout class="QVBoxLayout" >
+        <item>
+         <widget class="QComboBox" name="resolutionComboBox" >
+          <property name="minimumSize" >
+           <size>
+            <width>280</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="whatsThis" >
+           <string>Here you can specify the resolution of the remote desktop. This resolution determines the size of the desktop that will be presented to you.</string>
+          </property>
+          <property name="currentIndex" >
+           <number>1</number>
+          </property>
+          <item>
+           <property name="text" >
+            <string>Minimal (640x480)</string>
+           </property>
+          </item>
+          <item>
+           <property name="text" >
+            <string>Small (800x600)</string>
+           </property>
+          </item>
+          <item>
+           <property name="text" >
+            <string>Normal (1024x768)</string>
+           </property>
+          </item>
+          <item>
+           <property name="text" >
+            <string>Large (1280x1024)</string>
+           </property>
+          </item>
+          <item>
+           <property name="text" >
+            <string>Very Large (1600x1200)</string>
+           </property>
+          </item>
+          <item>
+           <property name="text" >
+            <string>Custom (...)</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" >
+          <item>
+           <widget class="QLabel" name="widthLabel" >
+            <property name="enabled" >
+             <bool>false</bool>
+            </property>
+            <property name="text" >
+             <string>&amp;Width:</string>
+            </property>
+            <property name="alignment" >
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+            <property name="buddy" >
+             <cstring>kcfg_Width</cstring>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="kcfg_Width" >
+            <property name="enabled" >
+             <bool>false</bool>
+            </property>
+            <property name="whatsThis" >
+             <string>This is the width of the remote desktop. You can only change this value manually if you select Custom as desktop resolution above.</string>
+            </property>
+            <property name="maximum" >
+             <number>9999</number>
+            </property>
+            <property name="value" >
+             <number>800</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="heightLabel" >
+            <property name="enabled" >
+             <bool>false</bool>
+            </property>
+            <property name="text" >
+             <string>H&amp;eight:</string>
+            </property>
+            <property name="alignment" >
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+            <property name="buddy" >
+             <cstring>kcfg_Height</cstring>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="kcfg_Height" >
+            <property name="enabled" >
+             <bool>false</bool>
+            </property>
+            <property name="whatsThis" >
+             <string>This is the height of the remote desktop. You can only change this value manually if you select Custom as desktop resolution above.</string>
+            </property>
+            <property name="maximum" >
+             <number>9999</number>
+            </property>
+            <property name="value" >
+             <number>600</number>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
       <item row="1" column="0" >
        <spacer>
         <property name="orientation" >
@@ -19,107 +155,58 @@
         <property name="sizeHint" >
          <size>
           <width>70</width>
-          <height>21</height>
+          <height>0</height>
          </size>
         </property>
        </spacer>
       </item>
-      <item row="0" column="1" colspan="4" >
-       <widget class="QComboBox" name="resolutionComboBox" >
+      <item row="2" column="0" >
+       <widget class="QLabel" name="colorDepthLabel" >
+        <property name="text" >
+         <string>Color &amp;depth:</string>
+        </property>
+        <property name="buddy" >
+         <cstring>kcfg_KeyboardLayout</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1" >
+       <widget class="QComboBox" name="kcfg_ColorDepth" >
         <property name="minimumSize" >
          <size>
           <width>280</width>
           <height>0</height>
          </size>
         </property>
-        <property name="whatsThis" >
-         <string>Here you can specify the resolution of the remote desktop. This resolution determines the size of the desktop that will be presented to you.</string>
-        </property>
-        <property name="currentIndex" >
-         <number>1</number>
-        </property>
         <item>
          <property name="text" >
-          <string>Minimal (640x480)</string>
+          <string>Low Color (8 Bit)</string>
          </property>
         </item>
         <item>
          <property name="text" >
-          <string>Small (800x600)</string>
+          <string>High Color (16 Bit)</string>
          </property>
         </item>
         <item>
          <property name="text" >
-          <string>Normal (1024x768)</string>
-         </property>
-        </item>
-        <item>
-         <property name="text" >
-          <string>Large (1280x1024)</string>
-         </property>
-        </item>
-        <item>
-         <property name="text" >
-          <string>Very Large (1600x1200)</string>
-         </property>
-        </item>
-        <item>
-         <property name="text" >
-          <string>Custom (...)</string>
+          <string>True Color (24 Bit)</string>
          </property>
         </item>
        </widget>
       </item>
-      <item row="1" column="2" >
-       <widget class="QSpinBox" name="widthSpinBox" >
-        <property name="enabled" >
-         <bool>false</bool>
-        </property>
-        <property name="whatsThis" >
-         <string>This is the width of the remote desktop. You can only change this value manually if you select Custom as desktop resolution above.</string>
-        </property>
-        <property name="maximum" >
-         <number>9999</number>
-        </property>
-        <property name="value" >
-         <number>800</number>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="3" >
-       <widget class="QLabel" name="heightLabel" >
-        <property name="enabled" >
-         <bool>false</bool>
-        </property>
+      <item row="3" column="0" >
+       <widget class="QLabel" name="layoutLabel" >
         <property name="text" >
-         <string>H&amp;eight:</string>
-        </property>
-        <property name="alignment" >
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         <string>&amp;Keyboard layout:</string>
         </property>
         <property name="buddy" >
-         <cstring>heightSpinBox</cstring>
+         <cstring>kcfg_KeyboardLayout</cstring>
         </property>
        </widget>
       </item>
-      <item row="1" column="4" >
-       <widget class="QSpinBox" name="heightSpinBox" >
-        <property name="enabled" >
-         <bool>false</bool>
-        </property>
-        <property name="whatsThis" >
-         <string>This is the height of the remote desktop. You can only change this value manually if you select Custom as desktop resolution above.</string>
-        </property>
-        <property name="maximum" >
-         <number>9999</number>
-        </property>
-        <property name="value" >
-         <number>600</number>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1" colspan="4" >
-       <widget class="QComboBox" name="keyboardLayoutComboBox" >
+      <item row="3" column="1" >
+       <widget class="QComboBox" name="kcfg_KeyboardLayout" >
         <property name="minimumSize" >
          <size>
           <width>280</width>
@@ -130,7 +217,7 @@
          <string>Use this to specify your keyboard layout. This layout setting is used to send the correct keyboard codes to the server.</string>
         </property>
         <property name="currentIndex" >
-         <number>6</number>
+         <number>7</number>
         </property>
         <item>
          <property name="text" >
@@ -155,6 +242,11 @@
         <item>
          <property name="text" >
           <string>Swiss German (de-ch)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>American Dvorak (en-dv)</string>
          </property>
         </item>
         <item>
@@ -184,6 +276,11 @@
         </item>
         <item>
          <property name="text" >
+          <string>Faroese (fo)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
           <string>French (fr)</string>
          </property>
         </item>
@@ -200,6 +297,11 @@
         <item>
          <property name="text" >
           <string>Swiss French (fr-ch)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Hebrew (he)</string>
          </property>
         </item>
         <item>
@@ -225,6 +327,11 @@
         <item>
          <property name="text" >
           <string>Japanese (ja)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Korean (ko)</string>
          </property>
         </item>
         <item>
@@ -299,77 +406,6 @@
         </item>
        </widget>
       </item>
-      <item row="3" column="0" >
-       <widget class="QLabel" name="layoutLabel" >
-        <property name="text" >
-         <string>&amp;Keyboard layout:</string>
-        </property>
-        <property name="buddy" >
-         <cstring>keyboardLayoutComboBox</cstring>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0" >
-       <widget class="QLabel" name="resolutionLabel" >
-        <property name="text" >
-         <string>Desktop &amp;resolution:</string>
-        </property>
-        <property name="buddy" >
-         <cstring>resolutionComboBox</cstring>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0" >
-       <widget class="QLabel" name="colorDepthLabel" >
-        <property name="text" >
-         <string>Color &amp;depth:</string>
-        </property>
-        <property name="buddy" >
-         <cstring>keyboardLayoutComboBox</cstring>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1" >
-       <widget class="QLabel" name="widthLabel" >
-        <property name="enabled" >
-         <bool>false</bool>
-        </property>
-        <property name="text" >
-         <string>&amp;Width:</string>
-        </property>
-        <property name="alignment" >
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-        </property>
-        <property name="buddy" >
-         <cstring>widthSpinBox</cstring>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1" colspan="4" >
-       <widget class="QComboBox" name="colorDepthComboBox" >
-        <property name="minimumSize" >
-         <size>
-          <width>280</width>
-          <height>0</height>
-         </size>
-        </property>
-        <item>
-         <property name="text" >
-          <string>Low Color (8 Bit)</string>
-         </property>
-        </item>
-        <item>
-         <property name="text" >
-          <string>High Color (16 Bit)</string>
-         </property>
-        </item>
-        <item>
-         <property name="text" >
-          <string>True Color (24 Bit)</string>
-         </property>
-        </item>
-       </widget>
-      </item>
      </layout>
     </widget>
    </item>
@@ -381,7 +417,7 @@
      <property name="sizeHint" >
       <size>
        <width>20</width>
-       <height>40</height>
+       <height>16</height>
       </size>
      </property>
     </spacer>
@@ -390,10 +426,10 @@
  </widget>
  <tabstops>
   <tabstop>resolutionComboBox</tabstop>
-  <tabstop>widthSpinBox</tabstop>
-  <tabstop>heightSpinBox</tabstop>
-  <tabstop>colorDepthComboBox</tabstop>
-  <tabstop>keyboardLayoutComboBox</tabstop>
+  <tabstop>kcfg_Width</tabstop>
+  <tabstop>kcfg_Height</tabstop>
+  <tabstop>kcfg_ColorDepth</tabstop>
+  <tabstop>kcfg_KeyboardLayout</tabstop>
  </tabstops>
  <resources/>
  <connections/>

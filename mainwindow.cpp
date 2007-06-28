@@ -31,7 +31,6 @@
 #include "rdpview.h"
 #endif
 #ifdef BUILD_VNC
-#include "vnchostpreferences.h"
 #include "vncview.h"
 #endif
 
@@ -166,15 +165,14 @@ void MainWindow::slotNewConnection()
 
 #ifdef BUILD_VNC
     if (url.scheme().toLower() == "vnc") {
-        VncHostPreferences preferences(url.toString(), this);
-        view = new VncView(scrollArea, url.host(), url.port(), preferences.quality());
+        view = new VncView(scrollArea, url);
     }
     else
 #endif
 
 #ifdef BUILD_RDP
     if (url.scheme().toLower() == "rdp") {
-        view = new RdpView(scrollArea, url.host(), url.port());
+        view = new RdpView(scrollArea, url);
     }
     else
 #endif

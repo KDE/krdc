@@ -14,6 +14,7 @@ endif(UNIX)
 if(HAVE_RDESKTOP)
     add_definitions(-DBUILD_RDP)
     set(krdc_rdp_SRCS
+        rdp/rdphostpreferences.cpp
         rdp/rdpview.cpp
     )
 
