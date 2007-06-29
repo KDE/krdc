@@ -65,6 +65,7 @@ bool VncView::eventFilter(QObject *obj, QEvent *event)
             event->type() == QEvent::MouseButtonDblClick ||
             event->type() == QEvent::MouseButtonPress ||
             event->type() == QEvent::MouseButtonRelease ||
+            event->type() == QEvent::Wheel ||
             event->type() == QEvent::MouseMove)
             return true;
     }
