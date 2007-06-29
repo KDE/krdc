@@ -123,6 +123,11 @@ void VncView::requestPassword()
 {
     kDebug(5011) << "request password" << endl;
 
+    if(!m_url.password().isNull()) {
+        vncThread.setPassword(m_url.password());
+        return;
+    }
+
     KPasswordDialog dialog(this);
     dialog.setPrompt(i18n("Access to the system requires a password."));
     if (dialog.exec() == KPasswordDialog::Accepted)

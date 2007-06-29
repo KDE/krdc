@@ -153,7 +153,6 @@ void MainWindow::setupActions()
 void MainWindow::slotNewConnection()
 {
     QUrl url = m_addressNavigator->uncommittedUrl();
-    m_addressNavigator->setUrl(KUrl(url.scheme().toLower() + "://"));
 
     if (!url.isValid()) {
         KMessageBox::error(this,
@@ -161,6 +160,8 @@ void MainWindow::slotNewConnection()
                            i18n("Malformed URL"));
         return;
     }
+
+    m_addressNavigator->setUrl(KUrl(url.scheme().toLower() + "://"));
 
     QScrollArea *scrollArea = createScrollArea(m_tabWidget, 0);
 
@@ -179,7 +180,12 @@ void MainWindow::slotNewConnection()
     }
     else
 #endif
+    {
+        KMessageBox::error(this,
+                           i18n("The entered address cannot be handled."),
+                           i18n("Unusable URL"));
         return;
+    }
 
     connect(view, SIGNAL(changeSize(int, int)), this, SLOT(resizeTabWidget(int, int)));
 

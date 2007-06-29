@@ -121,13 +121,13 @@ bool RdpView::start()
                           QString::number(m_hostPreferences->height()));
     arguments << "-k" << m_hostPreferences->keyboardLayout();
 
-    if(!m_user.isEmpty()) {
-        arguments << "-u" << m_user;
-    }
+    if(!m_url.userName().isEmpty())
+        arguments << "-u" << m_url.userName();
+    else if (!Settings::sendCurrentUserName())
+        arguments << "-u" << "";
 
-    if(!m_password.isEmpty()) {
-        arguments << "-p" << m_password;
-    }
+    if(!m_url.password().isNull())
+        arguments << "-p" << m_url.password();
 
     arguments << "-X" << QString::number(m_container->winId());
     arguments << "-a" << QString::number((m_hostPreferences->colorDepth() + 1) * 8);
