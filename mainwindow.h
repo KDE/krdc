@@ -75,6 +75,9 @@ private:
     FloatingToolBar *m_toolBar;
 
     QList<RemoteView *> m_remoteViewList;
+
+    int m_topBottomBorder; // tabwidget borders
+    int m_leftRightBorder;
 };
 
 #endif

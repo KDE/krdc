@@ -52,6 +52,7 @@
 
 #include <QClipboard>
 #include <QCloseEvent>
+#include <QDesktopWidget>
 #include <QLabel>
 #include <QLayout>
 #include <QTimer>
@@ -61,7 +62,9 @@
 MainWindow::MainWindow(QWidget *parent)
   : KXmlGuiWindow(parent),
     m_fullscreenWindow(0),
-    m_toolBar(0)
+    m_toolBar(0),
+    m_topBottomBorder(0),
+    m_leftRightBorder(0)
 {
     setupActions();
 
@@ -150,7 +153,7 @@ void MainWindow::setupActions()
 void MainWindow::slotNewConnection()
 {
     QUrl url = m_addressNavigator->uncommittedUrl();
-    m_addressNavigator->setUrl(KUrl("vnc://"));
+    m_addressNavigator->setUrl(KUrl(url.scheme().toLower() + "://"));
 
     if (!url.isValid()) {
         KMessageBox::error(this,
@@ -198,8 +201,31 @@ void MainWindow::resizeTabWidget(int w, int h)
 {
     kDebug(5010) << "tabwidget resize: w: " << w << ", h: " << h << endl;
 
+    if (m_topBottomBorder == 0) { // the values are not cached yet
+        QScrollArea *tmp = qobject_cast<QScrollArea *>(m_tabWidget->currentWidget());
+
+        m_leftRightBorder = m_tabWidget->width() - m_tabWidget->currentWidget()->width() + (2 * tmp->frameWidth());
+        m_topBottomBorder = m_tabWidget->height() - m_tabWidget->currentWidget()->height() + (2 * tmp->frameWidth());
+
+        kDebug(5010) << "tabwidget border: w: " << m_leftRightBorder << ", h: " << m_topBottomBorder << endl;
+    }
+
+    int newTabWidth = w + m_leftRightBorder;
+    int newTabHeight = h + m_topBottomBorder;
+
+    QSize newWindowSize = size() - m_tabWidget->size() + QSize(newTabWidth, newTabHeight);
+
+    QSize desktopSize = QSize(QApplication::desktop()->availableGeometry().width(),
+                              QApplication::desktop()->availableGeometry().height());
+
+    if ((newWindowSize.height() >= desktopSize.height()) || (newWindowSize.width() >= desktopSize.width())) {
+        kDebug(5010) << "remote desktop needs more place than available -> show window maximized" << endl;
+        showMaximized();
+        return;
+    }
+
     //WORKAROUND: QTabWidget resize problem. Let's see if there is a clean solution for this issue.
-    m_tabWidget->setMinimumSize(w + 8, h + 38); // FIXME: do not use hardcoded values
+    m_tabWidget->setMinimumSize(newTabWidth, newTabHeight);
     m_tabWidget->adjustSize();
     QCoreApplication::processEvents();
     m_tabWidget->setMinimumSize(500, 400);

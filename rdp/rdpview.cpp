@@ -26,20 +26,10 @@
 
 #include "settings.h"
 
-#include <kdialog.h>
-#include <klocale.h>
-#include <kmessagebox.h>
-#include <kwallet.h>
-#include <kpassworddialog.h>
-#include <kvbox.h>
+#include <KMessageBox>
 
 #include <QX11EmbedContainer>
 #include <QEvent>
-
-bool rdpAppDataConfigured = false;
-extern KWallet::Wallet *wallet;
-
-static RdpView *krdpview;
 
 RdpView::RdpView(QWidget *parent,
                    const KUrl &url,
@@ -62,7 +52,6 @@ RdpView::RdpView(QWidget *parent,
     m_host = url.host();
     m_port = url.port();
 
-    krdpview = this;
     if(m_port <= 0) {
         m_port = TCP_PORT_RDP;
     }
@@ -92,96 +81,35 @@ bool RdpView::eventFilter(QObject *obj, QEvent *event)
     return RemoteView::eventFilter(obj, event);
 }
 
-// returns the size of the framebuffer
 QSize RdpView::framebufferSize()
 {
     return m_container->minimumSizeHint();
 }
 
-// returns the suggested size
 QSize RdpView::sizeHint() const
 {
     return maximumSize();
 }
 
-// start closing the connection
 void RdpView::startQuitting()
 {
     kDebug(5012) << "About to quit" << endl;
     m_quitFlag = true;
-    if(m_process != NULL) {
+    if(m_process) {
         m_process->terminate();
         m_process->waitForFinished(1000);
         m_container->discardClient();
     }
 }
 
-// are we currently closing the connection?
 bool RdpView::isQuitting()
 {
     return m_quitFlag;
 }
 
-// open a connection
 bool RdpView::start()
 {
     m_hostPreferences = new RdpHostPreferences(m_url.toString(), this);
-#if 0
-    SmartPtr<RdpHostPref> hp, rdpDefaults;
-    bool useKWallet = false;
-
-    if(!rdpAppDataConfigured) {
-        HostPreferences *hps = HostPreferences::instance();
-
-        hp = SmartPtr<RdpHostPref>(hps->createHostPref(m_host, RdpHostPref::RdpType));
-        int wv = hp->width();
-        int hv = hp->height();
-        int cd = hp->colorDepth();
-        QString kl = hp->layout();
-        bool kwallet = hp->useKWallet();
-        if(hp->askOnConnect()) {
-            // show preferences dialog
-            KDialog *dlg = new KDialog(this);
-            dlg->setObjectName("rdpPrefDlg");
-            dlg->setModal(true);
-            dlg->setCaption(i18n("RDP Host Preferences for %1", m_host));
-            dlg->setButtons(KDialog::Ok | KDialog::Cancel);
-            dlg->setDefaultButton(KDialog::Ok);
-            dlg->showButtonSeparator(true);
-
-            KVBox *vbox = new KVBox(this);
-            dlg->setMainWidget(vbox);
-
-            RdpPrefs *prefs = new RdpPrefs(vbox);
-            QWidget *spacer = new QWidget(vbox);
-            vbox->setStretchFactor(spacer, 10);
-
-            prefs->setRdpWidth(wv);
-            prefs->setRdpHeight(hv);
-            prefs->setResolution();
-            prefs->setColorDepth(cd);
-            prefs->setKbLayout(keymap2int(kl));
-            prefs->setShowPrefs(true);
-            prefs->setUseKWallet(kwallet);
-
-            if (dlg->exec() == QDialog::Rejected)
-                return false;
-
-            wv = prefs->rdpWidth();
-            hv = prefs->rdpHeight();
-            kl = int2keymap(prefs->kbLayout());
-            hp->setAskOnConnect(prefs->showPrefs());
-            hp->setWidth(wv);
-            hp->setHeight(hv);
-            hp->setColorDepth(prefs->colorDepth());
-            hp->setLayout(kl);
-            hp->setUseKWallet(prefs->useKWallet());
-            hps->sync();
-        }
-
-        useKWallet = hp->useKWallet();
-    }
-#endif
 
     m_container->show();
     m_container->setWindowTitle(m_caption);
@@ -197,48 +125,6 @@ bool RdpView::start()
         arguments << "-u" << m_user;
     }
 
-#if 0
-    if(m_password.isEmpty() && useKWallet) {
-        QString krdc_folder = "KRDC-RDP";
-
-        // Bugfix: Check if wallet has been closed by an outside source
-        if (wallet && !wallet->isOpen()) {
-            delete wallet;
-            wallet = 0;
-        }
-
-        // Do we need to open the wallet?
-        if (!wallet) {
-            QString walletName = KWallet::Wallet::NetworkWallet();
-            wallet = KWallet::Wallet::openWallet(walletName, topLevelWidget()->winId());
-        }
-
-        if (wallet && wallet->isOpen()) {
-            bool walletOK = wallet->hasFolder(krdc_folder);
-            if (walletOK == false) {
-                walletOK = wallet->createFolder(krdc_folder);
-            }
-
-            if (walletOK == true) {
-                wallet->setFolder(krdc_folder);
-                if (wallet->hasEntry(m_host)) {
-                    wallet->readPassword(m_host, m_password);
-                }
-            }
-
-            if (m_password.isEmpty()) {
-                //There must not be an existing entry. Let's make one.
-                KPasswordDialog dlg(this);
-                dlg.setPrompt(i18n("Please enter the password."));
-                if (dlg.exec() == KPasswordDialog::Accepted) {
-                    m_password = dlg.password();
-                    wallet->writePassword(m_host, m_password);
-                }
-            }
-        }
-    }
-#endif
-
     if(!m_password.isEmpty()) {
         arguments << "-p" << m_password;
     }
@@ -247,8 +133,7 @@ bool RdpView::start()
     arguments << "-a" << QString::number((m_hostPreferences->colorDepth() + 1) * 8);
     arguments << (m_host + ':' + QString::number(m_port));
 
-    for (int i = 0; i < arguments.size(); ++i)
-        kDebug(5012) << arguments.at(i).toLocal8Bit().constData() << endl;
+    kDebug(5012) << arguments << endl;
 
     setStatus(Connecting);
 
@@ -269,7 +154,6 @@ void RdpView::switchFullscreen(bool on)
     }
 }
 
-// captures pressed keys
 void RdpView::pressKey(XEvent *e)
 {
     Q_UNUSED(e);
@@ -284,7 +168,6 @@ void RdpView::connectionOpened()
     setStatus(Connected);
     setFixedSize(size);
     resize(size);
-    // m_container->adjustSize() ?
     m_container->setFixedSize(size);
     emit changeSize(size.width(), size.height());
     emit connected();
