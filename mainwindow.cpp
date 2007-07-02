@@ -129,6 +129,7 @@ void MainWindow::setupActions()
     actionCollection()->addAction("settings_showmenubar", m_menubarAction);
 
     m_addressNavigator = new KUrlNavigator(0, KUrl("vnc://"), this);
+    m_addressNavigator->setCustomProtocols(QStringList() << "vnc" << "rdp");
     m_addressNavigator->setUrlEditable(Settings::normalUrlInputLine());
     connect(m_addressNavigator, SIGNAL(returnPressed()), SLOT(slotNewConnection()));
 
