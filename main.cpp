@@ -150,7 +150,7 @@ int main(int argc, char *argv[])
 	if (!is.isNull()) {
 	        QRegExp re("([0-9]+)[xX]([0-9]+)");
 		if (!re.exactMatch(is))
-		        args->usage(i18n("Wrong geometry format, must be widthXheight"));
+		        args->usageError(i18n("Wrong geometry format, must be widthXheight"));
 		initialWindowSize = QSize(re.cap(1).toInt(), re.cap(2).toInt());
 	}
 
