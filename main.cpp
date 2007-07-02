@@ -44,52 +44,49 @@ KWallet::Wallet *wallet = 0;
 
 static const char description[] = I18N_NOOP("Remote desktop connection");
 
-static KCmdLineOptions options[] =
-{
-	{ "f", 0, 0 },
-	{ "fullscreen", I18N_NOOP("Start in fullscreen mode"), 0 },
-	{ "w", 0, 0 },
-	{ "window", I18N_NOOP("Start in regular window"), 0 },
-	{ "l", 0, 0 },
-	{ "low-quality", I18N_NOOP("Low quality mode (Tight Encoding, 8 bit color)"), 0 },
-	{ "m", 0, 0 },
-	{ "medium-quality", I18N_NOOP("Medium quality mode (Tight Encoding, lossy)"), 0 },
-	{ "h", 0, 0 },
-	{ "high-quality", I18N_NOOP("High quality mode, default (Hextile Encoding)"), 0 },
-	{ "s", 0, 0 },
-	{ "scale", I18N_NOOP("Start VNC in scaled mode"), 0 },
-	{ "c", 0, 0 },
-	{ "local-cursor", I18N_NOOP("Show local cursor (VNC only)"), 0 },
-	{ "e", 0, 0 },
-	{ "encodings ", I18N_NOOP("Override VNC encoding list (e.g. 'hextile raw')"), 0 },
-	{ "p", 0, 0 },
-	{ "password-file ", I18N_NOOP("Provide the password in a file"), 0 },
-	{ "+[host]", I18N_NOOP("The name of the host, e.g. 'localhost:1'"), 0 },
-	KCmdLineLastOption
-};
-
 
 int main(int argc, char *argv[])
 {
-	KAboutData aboutData( "krdc", I18N_NOOP("Remote Desktop Connection"),
-			      KDE_VERSION_STRING, description, KAboutData::License_GPL,
-		"(c) 2001-2003, Tim Jansen"
+	KAboutData aboutData( "krdc", 0, ki18n("Remote Desktop Connection"),
+			      KDE_VERSION_STRING, ki18n(description), KAboutData::License_GPL,
+		ki18n("(c) 2001-2003, Tim Jansen"
 		"(c) 2002-2003, Arend van Beelen jr."
 		"(c) 2000-2002, Const Kaplinsky\n"
 		"(c) 2000, Tridia Corporation\n"
 		"(c) 1999, AT&T Laboratories Cambridge\n"
-		"(c) 1999-2003, Matthew Chapman\n", 0, 0,
+		"(c) 1999-2003, Matthew Chapman\n"), KLocalizedString(), 0,
 			      "tim@tjansen.de");
-	aboutData.addAuthor("Tim Jansen",0, "tim@tjansen.de");
-	aboutData.addAuthor("Arend van Beelen jr.",
-			    I18N_NOOP("RDP backend"), "arend@auton.nl");
-	aboutData.addCredit("AT&T Laboratories Cambridge",
-			    I18N_NOOP("Original VNC viewer and protocol design"));
-	aboutData.addCredit("Const Kaplinsky",
-			    I18N_NOOP("TightVNC encoding"));
-	aboutData.addCredit("Tridia Corporation",
-			    I18N_NOOP("ZLib encoding"));
+	aboutData.addAuthor(ki18n("Tim Jansen"),KLocalizedString(), "tim@tjansen.de");
+	aboutData.addAuthor(ki18n("Arend van Beelen jr."),
+			    ki18n("RDP backend"), "arend@auton.nl");
+	aboutData.addCredit(ki18n("AT&T Laboratories Cambridge"),
+			    ki18n("Original VNC viewer and protocol design"));
+	aboutData.addCredit(ki18n("Const Kaplinsky"),
+			    ki18n("TightVNC encoding"));
+	aboutData.addCredit(ki18n("Tridia Corporation"),
+			    ki18n("ZLib encoding"));
 	KCmdLineArgs::init( argc, argv, &aboutData );
+
+	KCmdLineOptions options;
+	options.add("f");
+	options.add("fullscreen", ki18n("Start in fullscreen mode"));
+	options.add("w");
+	options.add("window", ki18n("Start in regular window"));
+	options.add("l");
+	options.add("low-quality", ki18n("Low quality mode (Tight Encoding, 8 bit color)"));
+	options.add("m");
+	options.add("medium-quality", ki18n("Medium quality mode (Tight Encoding, lossy)"));
+	options.add("h");
+	options.add("high-quality", ki18n("High quality mode, default (Hextile Encoding)"));
+	options.add("s");
+	options.add("scale", ki18n("Start VNC in scaled mode"));
+	options.add("c");
+	options.add("local-cursor", ki18n("Show local cursor (VNC only)"));
+	options.add("e");
+	options.add("encodings ", ki18n("Override VNC encoding list (e.g. 'hextile raw')"));
+	options.add("p");
+	options.add("password-file ", ki18n("Provide the password in a file"));
+	options.add("+[host]", ki18n("The name of the host, e.g. 'localhost:1'"));
 	KCmdLineArgs::addCmdLineOptions( options );
 
 	KApplication a;
