@@ -29,13 +29,11 @@
 #include <KCmdLineArgs>
 #include <KAboutData>
 
-static const char description[] = I18N_NOOP("KDE remote desktop connection");
-
 int main(int argc, char **argv)
 {
-    KAboutData aboutData("krdc", I18N_NOOP("KRDC"),
-                         KDE_VERSION_STRING, description, KAboutData::License_GPL,
-                         I18N_NOOP("(c) 2007, Urs Wolfer\n"
+    KAboutData aboutData("krdc", 0, ki18n("KRDC"), KDE_VERSION_STRING,
+                         ki18n("KDE remote desktop connection"), KAboutData::License_GPL,
+                         ki18n("(c) 2007, Urs Wolfer\n"
                                    "(c) 2001-2003, Tim Jansen\n"
                                    "(c) 2002-2003, Arend van Beelen jr.\n"
                                    "(c) 2000-2002, Const Kaplinsky\n"
@@ -43,10 +41,10 @@ int main(int argc, char **argv)
                                    "(c) 1999, AT&T Laboratories Cambridge\n"
                                    "(c) 1999-2003, Matthew Chapman"));
 
-    aboutData.addAuthor("Urs Wolfer", I18N_NOOP("Developer, Maintainer"), "uwolfer@kde.org");
-    aboutData.addAuthor("Tim Jansen", I18N_NOOP("Former Developer"), "tim@tjansen.de");
-    aboutData.addAuthor("Arend van Beelen jr.", I18N_NOOP("Initial RDP backend"), "arend@auton.nl");
-    aboutData.addCredit("LibVNCServer / LibVNCClient developers", I18N_NOOP("VNC client library"),
+    aboutData.addAuthor(ki18n("Urs Wolfer"), ki18n("Developer, Maintainer"), "uwolfer@kde.org");
+    aboutData.addAuthor(ki18n("Tim Jansen"), ki18n("Former Developer"), "tim@tjansen.de");
+    aboutData.addAuthor(ki18n("Arend van Beelen jr."), ki18n("Initial RDP backend"), "arend@auton.nl");
+    aboutData.addCredit(ki18n("LibVNCServer / LibVNCClient developers"), ki18n("VNC client library"),
                         "libvncserver-common@lists.sf.net");
 
     KCmdLineArgs::init(argc, argv, &aboutData);
