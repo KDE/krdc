@@ -21,43 +21,37 @@
 **
 ****************************************************************************/
 
-#ifndef RDPHOSTPREFERENCES_H
-#define RDPHOSTPREFERENCES_H
+#ifndef HOSTPREFERENCESLIST_H
+#define HOSTPREFERENCESLIST_H
 
-#include "hostpreferences.h"
-#include "ui_rdppreferences.h"
+#include <QDomDocument>
+#include <QWidget>
 
-class RdpHostPreferences : public HostPreferences
+class KPushButton;
+
+class QListWidget;
+
+class HostPreferencesList : public QWidget
 {
     Q_OBJECT
 
 public:
-    RdpHostPreferences(const QString &url, bool forceShow = false, QObject *parent = 0);
-    ~RdpHostPreferences();
-
-    void setHeight(int height);
-    int height();
-    void setWidth(int width);
-    int width();
-    void setColorDepth(int colorDepth);
-    int colorDepth();
-    void setKeyboardLayout(const QString &keyboardLayout);
-    QString keyboardLayout() const;
-
-protected:
-    void showDialog();
-    void readProtocolSpecificConfig();
-    void saveProtocolSpecificConfig();
-
-private:
-    int m_height;
-    int m_width;
-    int m_colorDepth;
-    QString m_keyboardLayout;
-    Ui::RdpPreferences rdpUi;
+    HostPreferencesList(QWidget *parent);
+    ~HostPreferencesList();
 
 private slots:
-    void updateWidthHeight(int index);
+    void readConfig();
+    void saveSettings();
+    void configureHost();
+    void removeHost();
+    void selectionChanged();
+
+private:
+    KPushButton *configureButton;
+    KPushButton *removeButton;
+    QListWidget *hostList;
+    QDomDocument m_doc;
+    QString m_filename;
 };
 
 #endif

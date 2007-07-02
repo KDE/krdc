@@ -41,6 +41,7 @@ endif(LIBVNCSERVER_FOUND)
 
 set(krdc_SRCS ${krdc_rdp_SRCS} ${krdc_vnc_SRCS}
     hostpreferences.cpp
+    config/hostpreferenceslist.cpp
     config/preferencesdialog.cpp
     floatingtoolbar.cpp
     remoteview.cpp

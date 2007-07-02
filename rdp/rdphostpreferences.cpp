@@ -83,7 +83,7 @@ inline QString int2keymap(int layout)
         return keymaps.at(defaultKeymap);
 }
 
-RdpHostPreferences::RdpHostPreferences(const QString &url, QObject *parent)
+RdpHostPreferences::RdpHostPreferences(const QString &url, bool forceShow, QObject *parent)
   : HostPreferences(url, parent),
     m_height(600),
     m_width(800),
@@ -91,7 +91,7 @@ RdpHostPreferences::RdpHostPreferences(const QString &url, QObject *parent)
     m_keyboardLayout("en-us")
 {
     if (hostConfigured()) {
-        if (showConfigAgain()) {
+        if (showConfigAgain() || forceShow) {
             kDebug(5012) << "Show config dialog again" << endl;
             showDialog();
         } else

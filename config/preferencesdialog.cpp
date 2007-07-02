@@ -23,6 +23,7 @@
 
 #include "preferencesdialog.h"
 
+#include "hostpreferenceslist.h"
 #include "ui_general.h"
 #ifdef BUILD_VNC
 #include "ui_vncpreferences.h"
@@ -38,6 +39,9 @@ PreferencesDialog::PreferencesDialog(QWidget *parent, KConfigSkeleton *skeleton)
     Ui::General generalUi;
     generalUi.setupUi(generalPage);
     addPage(generalPage, i18n("General"), "krdc", i18n("General Config"));
+
+    HostPreferencesList *hostPreferencesList = new HostPreferencesList(this);
+    addPage(hostPreferencesList, i18n("Hosts"), "krdc", i18n("Host Config"));
 
 #ifdef BUILD_VNC
     QWidget *vncPage = new QWidget(this);

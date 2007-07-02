@@ -28,12 +28,12 @@
 
 #include <KDebug>
 
-VncHostPreferences::VncHostPreferences(const QString &url, QObject *parent)
+VncHostPreferences::VncHostPreferences(const QString &url, bool forceShow, QObject *parent)
   : HostPreferences(url, parent),
     m_quality(RemoteView::Low)
 {
     if (hostConfigured()) {
-        if (showConfigAgain()) {
+        if (showConfigAgain() || forceShow) {
             kDebug(5011) << "Show config dialog again" << endl;
             showDialog();
         } else
