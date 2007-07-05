@@ -43,6 +43,7 @@
 #include <KMenuBar>
 #include <KMessageBox>
 #include <KNotifyConfigWidget>
+#include <KPushButton>
 #include <KShortcut>
 #include <KShortcutsDialog>
 #include <KStatusBar>
@@ -55,16 +56,19 @@
 #include <QDesktopWidget>
 #include <QLabel>
 #include <QLayout>
+#include <QScrollArea>
 #include <QTimer>
 #include <QToolButton>
-#include <QScrollArea>
+#include <QToolTip>
 
 MainWindow::MainWindow(QWidget *parent)
   : KXmlGuiWindow(parent),
     m_fullscreenWindow(0),
     m_toolBar(0),
     m_topBottomBorder(0),
-    m_leftRightBorder(0)
+    m_leftRightBorder(0),
+    m_currentRemoteView(0),
+    m_showStartPage(false)
 {
     setupActions();
 
@@ -76,9 +80,14 @@ MainWindow::MainWindow(QWidget *parent)
     m_tabWidget->setMinimumSize(600, 400);
     setCentralWidget(m_tabWidget);
 
+    connect(m_tabWidget, SIGNAL(currentChanged(int)), SLOT(tabChanged(int)));
+
     statusBar()->showMessage(i18n("KRDC started"));
 
     updateActionStatus(); // disable remote view actions
+
+    if (Settings::showStartPage())
+        createStartPage();
 }
 
 MainWindow::~MainWindow()
@@ -87,11 +96,15 @@ MainWindow::~MainWindow()
 
 void MainWindow::setupActions()
 {
-    QAction *newDownloadAction = actionCollection()->addAction("new_connection");
-    newDownloadAction->setText(i18n("&New Connection..."));
-    newDownloadAction->setIcon(KIcon("document-new"));
-    newDownloadAction->setShortcuts(KShortcut("Ctrl+N"));
-    connect(newDownloadAction, SIGNAL(triggered()), SLOT(slotNewConnection()));
+    QAction *vncConnectionAction = actionCollection()->addAction("new_vnc_connection");
+    vncConnectionAction->setText(i18n("&New VNC Connection..."));
+    vncConnectionAction->setIcon(KIcon("krdc"));
+    connect(vncConnectionAction, SIGNAL(triggered()), SLOT(newVncConnection()));
+
+    QAction *rdpConnectionAction = actionCollection()->addAction("new_rdp_connection");
+    rdpConnectionAction->setText(i18n("&New RDP Connection..."));
+    rdpConnectionAction->setIcon(KIcon("krdc"));
+    connect(rdpConnectionAction, SIGNAL(triggered()), SLOT(newRdpConnection()));
 
     QAction *screenshotAction = actionCollection()->addAction("take_screenshot");
     screenshotAction->setText(i18n("&Copy Screenshot to Clipboard"));
@@ -195,9 +208,10 @@ void MainWindow::slotNewConnection()
     view->resize(0, 0);
     view->start();
 
-    scrollArea->setWidget(m_remoteViewList.at(m_tabWidget->count()));
+    scrollArea->setWidget(m_remoteViewList.at(m_tabWidget->count() - m_showStartPage ? 1 : 0));
 
-    m_tabWidget->addTab(scrollArea, KIcon("krdc"), url.toString());
+    int newIndex = m_tabWidget->addTab(scrollArea, KIcon("krdc"), url.toString());
+    m_tabWidget->setCurrentIndex(newIndex);
 
     statusBar()->showMessage(i18n("Connected to %1 via %2", url.host(), url.scheme().toUpper()));
 
@@ -240,7 +254,7 @@ void MainWindow::resizeTabWidget(int w, int h)
 
 void MainWindow::slotTakeScreenshot()
 {
-    QPixmap snapshot = QPixmap::grabWidget(m_remoteViewList.at(m_tabWidget->currentIndex()));
+    QPixmap snapshot = QPixmap::grabWidget(m_remoteViewList.at(m_currentRemoteView));
 
     QApplication::clipboard()->setPixmap(snapshot);
 }
@@ -256,15 +270,15 @@ void MainWindow::slotSwitchFullscreen()
         m_fullscreenWindow->setWindowState(0);
         m_fullscreenWindow->hide();
 
-        QScrollArea *scrollArea = createScrollArea(m_tabWidget, m_remoteViewList.at(m_tabWidget->currentIndex()));
+        QScrollArea *scrollArea = createScrollArea(m_tabWidget, m_remoteViewList.at(m_currentRemoteView));
 
         int currentTab = m_tabWidget->currentIndex();
         m_tabWidget->insertTab(currentTab, scrollArea, m_tabWidget->tabIcon(currentTab), m_tabWidget->tabText(currentTab));
         m_tabWidget->removeTab(m_tabWidget->currentIndex());
         m_tabWidget->setCurrentIndex(currentTab);
 
-        resizeTabWidget(m_remoteViewList.at(m_tabWidget->currentIndex())->sizeHint().width(),
-                        m_remoteViewList.at(m_tabWidget->currentIndex())->sizeHint().height());
+        resizeTabWidget(m_remoteViewList.at(m_currentRemoteView)->sizeHint().width(),
+                        m_remoteViewList.at(m_currentRemoteView)->sizeHint().height());
 
         if (m_toolBar) {
             m_toolBar->hideAndDestroy();
@@ -281,7 +295,7 @@ void MainWindow::slotSwitchFullscreen()
         m_fullscreenWindow = new QWidget(this, Qt::Window);
         m_fullscreenWindow->setWindowTitle(i18n("KRDC Fullscreen"));
 
-        QScrollArea *scrollArea = createScrollArea(m_fullscreenWindow, m_remoteViewList.at(m_tabWidget->currentIndex()));
+        QScrollArea *scrollArea = createScrollArea(m_fullscreenWindow, m_remoteViewList.at(m_currentRemoteView));
         scrollArea->setFrameShape(QFrame::NoFrame);
 
         QVBoxLayout *fullscreenLayout = new QVBoxLayout();
@@ -327,7 +341,7 @@ void MainWindow::slotLogout()
 
     QWidget *tmp = m_tabWidget->currentWidget();
 
-    m_remoteViewList.removeAt(m_tabWidget->currentIndex());
+    m_remoteViewList.removeAt(m_currentRemoteView);
 
     m_tabWidget->removeTab(m_tabWidget->currentIndex());
 
@@ -340,14 +354,14 @@ void MainWindow::slotViewOnly(bool viewOnly)
 {
     kDebug(5010) << "slotViewOnly" << endl;
 
-    m_remoteViewList.at(m_tabWidget->currentIndex())->setViewOnly(viewOnly);
+    m_remoteViewList.at(m_currentRemoteView)->setViewOnly(viewOnly);
 }
 
 void MainWindow::showRemoteViewToolbar()
 {
     kDebug(5010) << "showRemoteViewToolbar" << endl;
 
-    m_remoteViewList.at(m_tabWidget->currentIndex())->repaint(); // be sure there are no artifacts on the remote view
+    m_remoteViewList.at(m_currentRemoteView)->repaint(); // be sure there are no artifacts on the remote view
 
     if (!m_toolBar) {
         actionCollection()->action("switch_fullscreen")->setIcon(KIcon("view-restore"));
@@ -368,7 +382,13 @@ void MainWindow::updateActionStatus()
 {
     kDebug(5010) << "updateActionStatus = " << m_tabWidget->currentIndex() << endl;
 
-    bool enabled = (m_tabWidget->currentIndex() >= 0) ? true : false;
+    bool enabled;
+
+    if ((m_showStartPage && (m_tabWidget->currentIndex() == 0)) ||
+       (!m_showStartPage && (m_tabWidget->currentIndex() < 0)))
+        enabled = false;
+    else
+        enabled = true;
 
     actionCollection()->action("switch_fullscreen")->setEnabled(enabled);
     actionCollection()->action("take_screenshot")->setEnabled(enabled);
@@ -400,8 +420,16 @@ void MainWindow::updateConfiguration()
 {
     m_addressNavigator->setUrlEditable(Settings::normalUrlInputLine());
 
+    if (Settings::showStartPage() && !m_showStartPage)
+        createStartPage();
+    else if (m_showStartPage) {
+        m_tabWidget->removeTab(0);
+        m_showStartPage = false;
+    }
+    updateActionStatus();
+
     // update the scroll areas background color
-    for (int i = 0; i < m_tabWidget->count(); i++) {
+    for (int i = m_showStartPage ? 1 : 0; i < m_tabWidget->count(); i++) {
         QPalette palette = m_tabWidget->widget(i)->palette();
         palette.setColor(QPalette::Dark, Settings::backgroundColor());
         m_tabWidget->widget(i)->setPalette(palette);
@@ -450,6 +478,76 @@ void MainWindow::closeEvent(QCloseEvent *event)
         event->accept();
     } else
         event->ignore();
+}
+
+void MainWindow::tabChanged(int index)
+{
+    kDebug(5010) << "tabChanged: " << index << endl;
+
+    updateActionStatus();
+
+    m_currentRemoteView = index - m_showStartPage ? 1 : 0;
+}
+
+void MainWindow::createStartPage()
+{
+    m_showStartPage = true;
+
+    QWidget *startWidget = new QWidget(this);
+
+    QVBoxLayout *startLayout = new QVBoxLayout(startWidget);
+
+    QLabel *headerLabel = new QLabel(this);
+    headerLabel->setText(i18n("<h1>KRDC</h1><br />What would you like to do?"));
+
+    QLabel *headerIconLabel = new QLabel(this);
+    headerIconLabel->setPixmap(KIcon("krdc").pixmap(48));
+
+    QHBoxLayout *headerLayout = new QHBoxLayout;
+    headerLayout->setMargin(20);
+    headerLayout->addWidget(headerLabel, 1, Qt::AlignTop);
+    headerLayout->addWidget(headerIconLabel);
+
+    KPushButton *vncConnectButton = new KPushButton(this);
+    vncConnectButton->setStyleSheet("KPushButton { padding: 12px; margin: 10px; }");
+    vncConnectButton->setIcon(KIcon(actionCollection()->action("new_vnc_connection")->icon()));
+    vncConnectButton->setText(i18n("Connect to a remote Linux / Unix computer. (Using VNC)"));
+    connect(vncConnectButton, SIGNAL(clicked()), SLOT(newVncConnection()));
+
+    KPushButton *rdpConnectButton = new KPushButton(this);
+    rdpConnectButton->setStyleSheet("KPushButton { padding: 12px; margin: 10px; }");
+    rdpConnectButton->setIcon(KIcon(actionCollection()->action("new_rdp_connection")->icon()));
+    rdpConnectButton->setText(i18n("Connect to a remote Windows computer. (Using RDP)"));
+    connect(rdpConnectButton, SIGNAL(clicked()), SLOT(newRdpConnection()));
+
+    startLayout->addLayout(headerLayout);
+    startLayout->addWidget(vncConnectButton);
+    startLayout->addWidget(rdpConnectButton);
+    startLayout->addStretch();
+
+    m_tabWidget->insertTab(0, startWidget, KIcon("krdc"), i18n("Start Page"));
+}
+
+void MainWindow::newVncConnection()
+{
+    m_addressNavigator->setUrl(KUrl("vnc://"));
+    m_addressNavigator->setFocus();
+
+    QToolTip::showText(m_addressNavigator->pos() + pos() + QPoint(m_addressNavigator->width(),
+                                                                  m_addressNavigator->height() + 20),
+                       i18n("Enter here the address.<br />"
+                            "<i>Example: vncserver:1 (host:port / screen)</i>"));
+}
+
+void MainWindow::newRdpConnection()
+{
+    m_addressNavigator->setUrl(KUrl("rdp://"));
+    m_addressNavigator->setFocus();
+
+    QToolTip::showText(m_addressNavigator->pos() + pos() + QPoint(m_addressNavigator->width(),
+                                                                  m_addressNavigator->height() + 20),
+                       i18n("Enter here the address.<br />"
+                            "<i>Example: rdpserver (host)</i>"));
 }
 
 #include "mainwindow.moc"

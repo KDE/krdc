@@ -60,6 +60,10 @@ private slots:
     void slotViewOnly(bool viewOnly);
     void updateActionStatus();
     void updateConfiguration();
+    void tabChanged(int index);
+    void createStartPage();
+    void newVncConnection();
+    void newRdpConnection();
 
 private:
     void setupActions();
@@ -78,6 +82,9 @@ private:
 
     int m_topBottomBorder; // tabwidget borders
     int m_leftRightBorder;
+
+    int m_currentRemoteView;
+    bool m_showStartPage;
 };
 
 #endif
