@@ -536,7 +536,7 @@ void MainWindow::newVncConnection()
     QToolTip::showText(m_addressNavigator->pos() + pos() + QPoint(m_addressNavigator->width(),
                                                                   m_addressNavigator->height() + 20),
                        i18n("Enter here the address.<br />"
-                            "<i>Example: vncserver:1 (host:port / screen)</i>"));
+                            "<i>Example: vncserver:1 (host:port / screen)</i>"), this);
 }
 
 void MainWindow::newRdpConnection()
@@ -547,7 +547,7 @@ void MainWindow::newRdpConnection()
     QToolTip::showText(m_addressNavigator->pos() + pos() + QPoint(m_addressNavigator->width(),
                                                                   m_addressNavigator->height() + 20),
                        i18n("Enter here the address.<br />"
-                            "<i>Example: rdpserver (host)</i>"));
+                            "<i>Example: rdpserver (host)</i>"), this);
 }
 
 #include "mainwindow.moc"
