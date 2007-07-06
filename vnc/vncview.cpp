@@ -107,7 +107,7 @@ bool VncView::isQuitting()
 
 bool VncView::start()
 {
-    m_hostPreferences = new VncHostPreferences(m_url.toString(), false, this);
+    m_hostPreferences = new VncHostPreferences(m_url.prettyUrl(KUrl::RemoveTrailingSlash), false, this);
 
     vncThread.setHost(m_host);
     vncThread.setPort(m_port);

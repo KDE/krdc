@@ -166,7 +166,7 @@ void MainWindow::setupActions()
 
 void MainWindow::slotNewConnection()
 {
-    QUrl url = m_addressNavigator->uncommittedUrl();
+    KUrl url = m_addressNavigator->uncommittedUrl();
 
     if (!url.isValid()) {
         KMessageBox::error(this,
@@ -210,7 +210,7 @@ void MainWindow::slotNewConnection()
 
     scrollArea->setWidget(m_remoteViewList.at(m_tabWidget->count() - m_showStartPage ? 1 : 0));
 
-    int newIndex = m_tabWidget->addTab(scrollArea, KIcon("krdc"), url.toString());
+    int newIndex = m_tabWidget->addTab(scrollArea, KIcon("krdc"), url.prettyUrl(KUrl::RemoveTrailingSlash));
     m_tabWidget->setCurrentIndex(newIndex);
 
     statusBar()->showMessage(i18n("Connected to %1 via %2", url.host(), url.scheme().toUpper()));

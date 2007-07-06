@@ -109,7 +109,7 @@ bool RdpView::isQuitting()
 
 bool RdpView::start()
 {
-    m_hostPreferences = new RdpHostPreferences(m_url.toString(), false, this);
+    m_hostPreferences = new RdpHostPreferences(m_url.prettyUrl(KUrl::RemoveTrailingSlash), false, this);
 
     m_container->show();
     m_container->setWindowTitle(m_caption);
