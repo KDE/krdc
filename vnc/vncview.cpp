@@ -129,6 +129,7 @@ void VncView::requestPassword()
     }
 
     KPasswordDialog dialog(this);
+    dialog.setPixmap(KIcon("password").pixmap(48));
     dialog.setPrompt(i18n("Access to the system requires a password."));
     if (dialog.exec() == KPasswordDialog::Accepted)
         vncThread.setPassword(dialog.password());
