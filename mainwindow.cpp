@@ -100,11 +100,17 @@ void MainWindow::setupActions()
     vncConnectionAction->setText(i18n("&New VNC Connection..."));
     vncConnectionAction->setIcon(KIcon("krdc"));
     connect(vncConnectionAction, SIGNAL(triggered()), SLOT(newVncConnection()));
+#ifndef BUILD_VNC
+    vncConnectionAction->setVisible(false);
+#endif
 
     QAction *rdpConnectionAction = actionCollection()->addAction("new_rdp_connection");
     rdpConnectionAction->setText(i18n("&New RDP Connection..."));
     rdpConnectionAction->setIcon(KIcon("krdc"));
     connect(rdpConnectionAction, SIGNAL(triggered()), SLOT(newRdpConnection()));
+#ifndef BUILD_RDP
+    rdpConnectionAction->setVisible(false);
+#endif
 
     QAction *screenshotAction = actionCollection()->addAction("take_screenshot");
     screenshotAction->setText(i18n("&Copy Screenshot to Clipboard"));
@@ -142,7 +148,14 @@ void MainWindow::setupActions()
     actionCollection()->addAction("settings_showmenubar", m_menubarAction);
 
     m_addressNavigator = new KUrlNavigator(0, KUrl("vnc://"), this);
-    m_addressNavigator->setCustomProtocols(QStringList() << "vnc" << "rdp");
+    m_addressNavigator->setCustomProtocols(QStringList()
+#ifdef BUILD_VNC
+                                           << "vnc"
+#endif
+#ifdef BUILD_RDP
+                                           << "rdp"
+#endif
+                                           );
     m_addressNavigator->setUrlEditable(Settings::normalUrlInputLine());
     connect(m_addressNavigator, SIGNAL(returnPressed()), SLOT(slotNewConnection()));
 
@@ -513,12 +526,18 @@ void MainWindow::createStartPage()
     vncConnectButton->setIcon(KIcon(actionCollection()->action("new_vnc_connection")->icon()));
     vncConnectButton->setText(i18n("Connect to a remote Linux / Unix computer. (Using VNC)"));
     connect(vncConnectButton, SIGNAL(clicked()), SLOT(newVncConnection()));
+#ifndef BUILD_VNC
+    vncConnectButton->setVisible(false);
+#endif
 
     KPushButton *rdpConnectButton = new KPushButton(this);
     rdpConnectButton->setStyleSheet("KPushButton { padding: 12px; margin: 10px; }");
     rdpConnectButton->setIcon(KIcon(actionCollection()->action("new_rdp_connection")->icon()));
     rdpConnectButton->setText(i18n("Connect to a remote Windows computer. (Using RDP)"));
     connect(rdpConnectButton, SIGNAL(clicked()), SLOT(newRdpConnection()));
+#ifndef BUILD_RDP
+    rdpConnectButton->setVisible(false);
+#endif
 
     startLayout->addLayout(headerLayout);
     startLayout->addWidget(vncConnectButton);
