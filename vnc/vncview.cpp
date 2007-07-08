@@ -123,6 +123,15 @@ void VncView::requestPassword()
 {
     kDebug(5011) << "request password" << endl;
 
+    if (m_hostPreferences->walletSupport()) {
+        QString walletPassword = readWalletPassword();
+
+        if (!walletPassword.isNull()) {
+            vncThread.setPassword(walletPassword);
+            return;
+        }
+    }
+
     if(!m_url.password().isNull()) {
         vncThread.setPassword(m_url.password());
         return;
@@ -131,8 +140,14 @@ void VncView::requestPassword()
     KPasswordDialog dialog(this);
     dialog.setPixmap(KIcon("password").pixmap(48));
     dialog.setPrompt(i18n("Access to the system requires a password."));
-    if (dialog.exec() == KPasswordDialog::Accepted)
+    if (dialog.exec() == KPasswordDialog::Accepted) {
         vncThread.setPassword(dialog.password());
+
+        if (m_hostPreferences->walletSupport()) {
+            //TODO: save it only when the password has also been accepted.
+            saveWalletPassword(dialog.password());
+        }
+    }
 }
 
 void VncView::updateImage(int x, int y, int w, int h)

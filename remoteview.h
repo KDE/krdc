@@ -26,6 +26,7 @@
 #define REMOTEVIEW_H
 
 #include <KUrl>
+#include <KWallet/Wallet>
 
 #include <QWidget>
 
@@ -337,10 +338,14 @@ protected:
      */
     virtual void setStatus(RemoteStatus s);
 
+    QString readWalletPassword();
+    void saveWalletPassword(const QString &password);
+
     QString m_host;
     int m_port;
     bool m_viewOnly;
     KUrl m_url;
+    KWallet::Wallet *m_wallet;
 };
 
 #endif

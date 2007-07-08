@@ -39,6 +39,7 @@ class HostPreferences : public QObject
 public:
     HostPreferences(const QString &url, QObject *parent);
     ~HostPreferences();
+    bool walletSupport();
 
 protected:
     virtual void showDialog() = 0;
@@ -55,12 +56,15 @@ protected:
 
 private:
     void setShowConfigAgain(bool show);
+    void setWalletSupport(bool walletSupport);
 
     QString m_filename;
     QString m_url;
     QDomDocument m_doc;
     QCheckBox *showAgainCheckBox;
+    QCheckBox *walletSupportCheckBox;
     bool m_showConfigAgain;
+    bool m_walletSupport;
 };
 
 #endif

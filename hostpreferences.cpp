@@ -23,6 +23,8 @@
 
 #include "hostpreferences.h"
 
+#include "settings.h"
+
 #include <KDebug>
 #include <KLocale>
 #include <KStandardDirs>
@@ -35,7 +37,8 @@
 HostPreferences::HostPreferences(const QString &url, QObject *parent)
   : QObject(parent),
     m_url(url),
-    m_showConfigAgain(true)
+    m_showConfigAgain(true),
+    m_walletSupport(true)
 {
     if (m_url.endsWith('/')) // check case when user enters an ending slash -> remove it
         m_url.truncate(m_url.length() - 1);
@@ -95,7 +98,11 @@ bool HostPreferences::saveConfig()
     if (showAgainCheckBox) // check if the checkbox has been created
         setShowConfigAgain(showAgainCheckBox->isChecked());
 
+    if (walletSupportCheckBox)
+        setWalletSupport(walletSupportCheckBox->isChecked());
+
     updateElement("showConfigAgain", m_showConfigAgain ? "true" : "false");
+    updateElement("walletSupport", m_walletSupport ? "true" : "false");
 
     QDomElement root = m_doc.documentElement();
     QDomElement oldElement = QDomElement();
@@ -152,6 +159,10 @@ void HostPreferences::readConfig()
     readProtocolSpecificConfig();
 
     setShowConfigAgain(m_element.firstChildElement("showConfigAgain").text() != "false");
+    if (m_element.firstChildElement("walletSupport") != QDomElement())
+        setWalletSupport(m_element.firstChildElement("walletSupport").text() != "false");
+    else
+        setWalletSupport(Settings::walletSupport());
 }
 
 void HostPreferences::setShowConfigAgain(bool show)
@@ -162,6 +173,16 @@ void HostPreferences::setShowConfigAgain(bool show)
 bool HostPreferences::showConfigAgain()
 {
     return m_showConfigAgain;
+}
+
+void HostPreferences::setWalletSupport(bool walletSupport)
+{
+    m_walletSupport = walletSupport;
+}
+
+bool HostPreferences::walletSupport()
+{
+    return m_walletSupport;
 }
 
 KDialog *HostPreferences::createDialog(QWidget *widget)
@@ -179,9 +200,14 @@ KDialog *HostPreferences::createDialog(QWidget *widget)
     showAgainCheckBox->setText(i18n("Show this dialog again for this host"));
     showAgainCheckBox->setChecked(showConfigAgain());
 
+    walletSupportCheckBox = new QCheckBox(mainWidget);
+    walletSupportCheckBox->setText(i18n("Remember password (KWallet)"));
+    walletSupportCheckBox->setChecked(walletSupport());
+
     layout->addWidget(titleWidget);
     layout->addWidget(widget);
     layout->addWidget(showAgainCheckBox);
+    layout->addWidget(walletSupportCheckBox);
     layout->addStretch(1);
     mainWidget->setLayout(layout);
 

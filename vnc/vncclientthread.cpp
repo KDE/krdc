@@ -108,7 +108,6 @@ extern char *passwd(rfbClient *cl)
 
 extern void output(const char *format, ...)
 {
-
     va_list args;
     va_start(args, format);
 
@@ -121,6 +120,9 @@ extern void output(const char *format, ...)
 
     if (message.contains("Could not open"))
         kDebug(5011) << "Server not found!" << endl;
+
+    if (message.contains("VNC authentication succeeded"))
+        kDebug(5011) << "Password OK" << endl;
 }
 
 VncClientThread::VncClientThread()

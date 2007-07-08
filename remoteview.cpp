@@ -24,12 +24,15 @@
 
 #include "remoteview.h"
 
+#include <KDebug>
+
 RemoteView::RemoteView(QWidget *parent)
   : QWidget(parent),
     m_status(Disconnected),
     m_host(QString()),
     m_port(0),
-    m_viewOnly(false)
+    m_viewOnly(false),
+    m_wallet(0)
 {
 }
 
@@ -139,6 +142,41 @@ void RemoteView::enableScaling(bool)
 
 void RemoteView::switchFullscreen(bool)
 {
+}
+
+QString RemoteView::readWalletPassword()
+{
+    QString krdc_folder = "KRDC";
+
+    m_wallet = KWallet::Wallet::openWallet(KWallet::Wallet::NetworkWallet(), window()->winId());
+
+    if (m_wallet) {
+        bool walletOK = m_wallet->hasFolder(krdc_folder);
+        if (!walletOK)
+            walletOK = m_wallet->createFolder(krdc_folder);
+            kDebug(5010) << "Wallet folder created" << endl;
+        if (walletOK) {
+            kDebug(5010) << "Wallet OK" << endl;
+            m_wallet->setFolder(krdc_folder);
+            QString password;
+
+            if (m_wallet->hasEntry(m_url.prettyUrl(KUrl::RemoveTrailingSlash)) &&
+                !m_wallet->readPassword(m_url.prettyUrl(KUrl::RemoveTrailingSlash), password)) {
+                kDebug(5010) << "Password read OK" << endl;
+
+                return password;
+            }
+        }
+    }
+    return QString();
+}
+
+void RemoteView::saveWalletPassword(const QString &password)
+{
+    if (m_wallet && m_wallet->isOpen() && !m_wallet->hasEntry(m_url.prettyUrl(KUrl::RemoveTrailingSlash))) {
+        kDebug(5010) << "Write wallet password" << endl;
+        m_wallet->writePassword(m_url.prettyUrl(KUrl::RemoveTrailingSlash), password);
+    }
 }
 
 #include "remoteview.moc"
