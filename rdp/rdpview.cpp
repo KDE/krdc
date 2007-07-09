@@ -26,7 +26,9 @@
 
 #include "settings.h"
 
+#include <KInputDialog>
 #include <KMessageBox>
+#include <KPasswordDialog>
 
 #include <QX11EmbedContainer>
 #include <QEvent>
@@ -113,6 +115,36 @@ bool RdpView::start()
 
     m_container->show();
     m_container->setWindowTitle(m_caption);
+
+    if (m_hostPreferences->walletSupport()) {
+        QString userName;
+        bool ok = true;
+
+        userName = KInputDialog::getText(i18n("Enter Username"),
+                                        i18n("Please enter the username you would like to use for login."),
+                                        QString(), &ok, this);
+
+        if (ok)
+            m_url.setUserName(userName);
+
+        if(!m_url.userName().isEmpty()) {
+            QString walletPassword = readWalletPassword();
+
+            if (!walletPassword.isNull())
+                m_url.setPassword(walletPassword);
+            else {
+                KPasswordDialog dialog(this);
+                dialog.setPixmap(KIcon("password").pixmap(48));
+                dialog.setPrompt(i18n("Access to the system requires a password."));
+                if (dialog.exec() == KPasswordDialog::Accepted) {
+                    m_url.setPassword(dialog.password());
+
+                    if (m_hostPreferences->walletSupport())
+                        saveWalletPassword(dialog.password());
+                }
+            }
+        }
+    }
 
     m_process = new QProcess(m_container);
 
