@@ -92,12 +92,17 @@ QSize VncView::minimumSizeHint() const
 void VncView::startQuitting()
 {
     kDebug(5011) << "about to quit" << endl;
+
+    setStatus(Disconnecting);
+
     m_quitFlag = true;
 
     vncThread.cleanup();
 
     vncThread.stop();
     vncThread.wait();
+
+    setStatus(Disconnected);
 }
 
 bool VncView::isQuitting()
@@ -122,6 +127,8 @@ bool VncView::start()
 void VncView::requestPassword()
 {
     kDebug(5011) << "request password" << endl;
+
+    setStatus(Authenticating);
 
     if (m_hostPreferences->walletSupport()) {
         QString walletPassword = readWalletPassword();
