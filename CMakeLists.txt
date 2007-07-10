@@ -53,8 +53,6 @@ kde4_add_ui_files(krdc_SRCS
     config/general.ui
 )
 
-kde4_automoc(${krdc_SRCS})
-
 kde4_add_kcfg_files(krdc_SRCS config/settings.kcfgc)
 
 kde4_add_executable(krdc ${krdc_SRCS})
