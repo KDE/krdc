@@ -215,20 +215,20 @@ void MainWindow::slotNewConnection()
     }
 
     connect(view, SIGNAL(changeSize(int, int)), this, SLOT(resizeTabWidget(int, int)));
+    connect(view, SIGNAL(statusChanged(RemoteView::RemoteStatus)), this, SLOT(statusChanged(RemoteView::RemoteStatus)));
 
     m_remoteViewList.append(view);
 
     view->resize(0, 0);
-    view->start();
 
     scrollArea->setWidget(m_remoteViewList.at(m_tabWidget->count() - m_showStartPage ? 1 : 0));
 
     int newIndex = m_tabWidget->addTab(scrollArea, KIcon("krdc"), url.prettyUrl(KUrl::RemoveTrailingSlash));
     m_tabWidget->setCurrentIndex(newIndex);
 
-    statusBar()->showMessage(i18n("Connected to %1 via %2", url.host(), url.scheme().toUpper()));
-
     updateActionStatus();
+
+    view->start();
 }
 
 void MainWindow::resizeTabWidget(int w, int h)
@@ -263,6 +263,41 @@ void MainWindow::resizeTabWidget(int w, int h)
     m_tabWidget->adjustSize();
     QCoreApplication::processEvents();
     m_tabWidget->setMinimumSize(500, 400);
+}
+
+void MainWindow::statusChanged(RemoteView::RemoteStatus status)
+{
+    kDebug(5010) << "statusChanged: " << status << endl;
+
+    QString host = m_remoteViewList.at(m_currentRemoteView)->host();
+
+    QString iconName = "krdc";
+    QString message;
+
+    switch (status) {
+    case RemoteView::Connecting:
+        iconName = "network";
+        message = i18n("Connecting to %1", host);
+        break;
+    case RemoteView::Authenticating:
+        iconName = "password";
+        message = i18n("Authenticating at %1", host);
+        break;
+    case RemoteView::Preparing:
+        iconName = "history";
+        message = i18n("Preparing connection to %1", host);
+        break;
+    case RemoteView::Connected:
+        iconName = "krdc";
+        message = i18n("Connected to %1", host);
+        break;
+    default:
+        iconName = "krdc";
+        message = QString();
+    }
+
+    m_tabWidget->setTabIcon(m_tabWidget->currentIndex(), KIcon(iconName));
+    statusBar()->showMessage(message);
 }
 
 void MainWindow::slotTakeScreenshot()

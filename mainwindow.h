@@ -24,6 +24,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "remoteview.h"
+
 #include <KXmlGuiWindow>
 
 class KToggleAction;
@@ -53,6 +55,7 @@ private slots:
     void slotConfigureToolbars();
     void slotShowMenubar();
     void resizeTabWidget(int w, int h);
+    void statusChanged(RemoteView::RemoteStatus status);
     void showRemoteViewToolbar();
     void slotTakeScreenshot();
     void slotSwitchFullscreen();
