@@ -535,6 +535,10 @@ void MainWindow::tabChanged(int index)
     updateActionStatus();
 
     m_currentRemoteView = index - m_showStartPage ? 1 : 0;
+
+    QString tabTitle = m_tabWidget->tabText(index).remove('&');
+
+    setCaption(tabTitle == i18n("Start Page") ? QString() : tabTitle);
 }
 
 void MainWindow::createStartPage()
