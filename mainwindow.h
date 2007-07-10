@@ -44,7 +44,7 @@ public:
     ~MainWindow();
 
 public slots:
-    void slotNewConnection(const KUrl &newUrl = KUrl(), bool switchFullsceenWhenConnected = false);
+    void slotNewConnection(const KUrl &newUrl = KUrl(), bool switchFullscreenWhenConnected = false);
 
 protected:
     virtual void closeEvent(QCloseEvent *event);
@@ -90,7 +90,7 @@ private:
 
     int m_currentRemoteView;
     bool m_showStartPage;
-    bool m_switchFullsceenWhenConnected;
+    bool m_switchFullscreenWhenConnected;
 };
 
 #endif

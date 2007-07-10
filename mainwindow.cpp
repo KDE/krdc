@@ -177,9 +177,9 @@ void MainWindow::setupActions()
     connect(gotoAction, SIGNAL(triggered()), SLOT(slotNewConnection()));
 }
 
-void MainWindow::slotNewConnection(const KUrl &newUrl, bool switchFullsceenWhenConnected)
+void MainWindow::slotNewConnection(const KUrl &newUrl, bool switchFullscreenWhenConnected)
 {
-    m_switchFullsceenWhenConnected = switchFullsceenWhenConnected;
+    m_switchFullscreenWhenConnected = switchFullscreenWhenConnected;
 
     KUrl url = newUrl.isEmpty() ? m_addressNavigator->uncommittedUrl() : newUrl;
 
@@ -293,9 +293,9 @@ void MainWindow::statusChanged(RemoteView::RemoteStatus status)
         iconName = "krdc";
         message = i18n("Connected to %1", host);
 
-        // when started with command line fullsceen argument
-        if (m_switchFullsceenWhenConnected) {
-            m_switchFullsceenWhenConnected = false;
+        // when started with command line fullscreen argument
+        if (m_switchFullscreenWhenConnected) {
+            m_switchFullscreenWhenConnected = false;
             slotSwitchFullscreen();
         }
 
