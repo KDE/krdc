@@ -43,11 +43,13 @@ public:
     MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+public slots:
+    void slotNewConnection(const KUrl &newUrl = KUrl(), bool switchFullsceenWhenConnected = false);
+
 protected:
     virtual void closeEvent(QCloseEvent *event);
 
 private slots:
-    void slotNewConnection();
     void slotQuit();
     void slotPreferences();
     void slotConfigureNotifications();
@@ -88,6 +90,7 @@ private:
 
     int m_currentRemoteView;
     bool m_showStartPage;
+    bool m_switchFullsceenWhenConnected;
 };
 
 #endif

@@ -49,9 +49,28 @@ int main(int argc, char **argv)
 
     KCmdLineArgs::init(argc, argv, &aboutData);
 
+    KCmdLineOptions options;
+    options.add("fullsceen", ki18n("Start KRDC with the provied URL in fullsceen mode (works only with one URL)"));
+    options.add("!+[URL]", ki18n("URLs to connect after startup"));
+
+    KCmdLineArgs::addCmdLineOptions(options);
+
     KApplication app;
 
     MainWindow *mainwindow = new MainWindow;
     mainwindow->show();
+
+    KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+
+    if (args->count() > 0) {
+        for (int i = 0; i < args->count(); i++) {
+            KUrl u(args->url(i));
+            if (!u.isValid())
+                continue;
+
+            mainwindow->slotNewConnection(u, ((args->isSet("fullsceen")) && (args->count() == 1)));
+        }
+    }
+
     return app.exec();
 }
