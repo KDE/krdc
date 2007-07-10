@@ -50,8 +50,6 @@ set(krdc_SRCS ${krdc_vnc_SRCS} ${krdc_rdp_SRCS}
    hostprofiles.cpp 
 )
 
-kde4_automoc(${krdc_SRCS})
-
 kde4_add_ui_files(krdc_SRCS hostprofiles.ui maindialogbase.ui vnc/vncprefs.ui rdp/rdpprefs.ui)
 kde4_add_ui3_files(krdc_SRCS keycapturewidget.ui)
 
