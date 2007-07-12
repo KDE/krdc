@@ -271,6 +271,10 @@ void MainWindow::statusChanged(RemoteView::RemoteStatus status)
 {
     kDebug(5010) << "statusChanged: " << status << endl;
 
+    // the remoteview is already deleted, so don't show it; otherwise it would crash
+    if (status == RemoteView::Disconnecting || status == RemoteView::Disconnected)
+        return;
+
     QString host = m_remoteViewList.at(m_currentRemoteView)->host();
 
     QString iconName = "krdc";
