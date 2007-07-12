@@ -61,6 +61,10 @@ target_link_libraries(krdc ${KDE4_KDEUI_LIBRARY} ${KDE4_KFILE_LIBRARY} ${KDE4_KN
 
 if(LIBVNCSERVER_FOUND)
     target_link_libraries(krdc ${LIBVNCCLIENT_LIBRARIES})
+
+    if(JPEG_FOUND)
+        target_link_libraries(krdc ${JPEG_LIBRARIES})
+    endif(JPEG_FOUND)
 endif(LIBVNCSERVER_FOUND)
 
 install(TARGETS krdc DESTINATION ${BIN_INSTALL_DIR})
