@@ -50,7 +50,7 @@ int main(int argc, char **argv)
     KCmdLineArgs::init(argc, argv, &aboutData);
 
     KCmdLineOptions options;
-    options.add("fullscreen", ki18n("Start KRDC with the provied URL in fullscreen mode (works only with one URL)"));
+    options.add("fullscreen", ki18n("Start KRDC with the provided URL in fullscreen mode (works only with one URL)"));
     options.add("!+[URL]", ki18n("URLs to connect after startup"));
 
     KCmdLineArgs::addCmdLineOptions(options);

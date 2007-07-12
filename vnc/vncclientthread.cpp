@@ -89,9 +89,9 @@ extern void updatefb(rfbClient* cl, int x, int y, int w, int h)
 
     VncClientThread *t = (VncClientThread*)rfbClientGetClientData(cl, 0);
 
-    t->setImage(img);
+    t->setImage(img.scaled(QSize(width*.7, height*.7), Qt::KeepAspectRatio, Qt::SmoothTransformation));
 
-    t->emitUpdated(x, y, w, h);
+    t->emitUpdated(x*.7, y*.7, w*.7, h*.7);
 }
 
 extern char *passwd(rfbClient *cl)
