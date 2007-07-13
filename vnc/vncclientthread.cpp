@@ -48,33 +48,28 @@ extern rfbBool newclient(rfbClient *cl)
     case RemoteView::High:
         cl->appData.useBGR233 = 0;
         cl->appData.encodingsString = "copyrect hextile raw";
-        cl->appData.compressLevel = -1;
+        cl->appData.compressLevel = 0;
         cl->appData.qualityLevel = 9;
         break;
     case RemoteView::Medium:
         cl->appData.useBGR233 = 0;
-        cl->appData.encodingsString = "copyrect tight zlib hextile raw";
-        cl->appData.compressLevel = -1;
+        cl->appData.encodingsString = "tight zrle ultra copyrect hextile zlib corre rre raw";
+        cl->appData.compressLevel = 5;
         cl->appData.qualityLevel = 7;
         break;
     case RemoteView::Low:
     case RemoteView::Unknown:
     default:
         cl->appData.useBGR233 = 1;
-        cl->appData.encodingsString = "copyrect tight zlib hextile raw";
-        cl->appData.compressLevel = -1;
+        cl->appData.encodingsString = "tight zrle ultra copyrect hextile zlib corre rre raw";
+        cl->appData.compressLevel = 9;
         cl->appData.qualityLevel = 1;
-        break;
     }
 
-    cl->appData.nColours = 256;
-
     SetFormatAndEncodings(cl);
-    SendFramebufferUpdateRequest(cl, 0, 0, cl->width, cl->height, false);
 
     return true;
 }
-
 extern void updatefb(rfbClient* cl, int x, int y, int w, int h)
 {
 //     kDebug(5011) << "updated client: x: " << x << ", y: " << y << ", w: " << w << ", h: " << h << endl;
