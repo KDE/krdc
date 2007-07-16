@@ -25,9 +25,7 @@
 
 #include <KLocale>
 #include <KPasswordDialog>
-#include <KStandardDirs>
 
-#include <QBitmap>
 #include <QImage>
 #include <QPainter>
 #include <QMouseEvent>
@@ -72,7 +70,7 @@ bool VncView::eventFilter(QObject *obj, QEvent *event)
             return true;
     }
 
-    setCursor(m_dotCursorState == CursorOn ? m_cursor : Qt::BlankCursor);
+    setCursor(m_dotCursorState == CursorOn ? localDotCursor() : Qt::BlankCursor);
 
     return RemoteView::eventFilter(obj, event);
 }
@@ -178,13 +176,7 @@ void VncView::updateImage(int x, int y, int w, int h)
         setAttribute(Qt::WA_StaticContents);
         installEventFilter(this);
 
-        QBitmap cursorBitmap(KGlobal::dirs()->findResource("appdata",
-                                                           "pics/pointcursor.png"));
-        QBitmap cursorMask(KGlobal::dirs()->findResource("appdata",
-                                                         "pics/pointcursormask.png"));
-        m_cursor = QCursor(cursorBitmap, cursorMask);
-
-        setCursor(m_dotCursorState == CursorOn ? m_cursor : Qt::BlankCursor);
+        setCursor(m_dotCursorState == CursorOn ? localDotCursor() : Qt::BlankCursor);
 
         setMouseTracking(true); // get mouse events even when there is no mousebutton pressed
         setFocusPolicy(Qt::StrongFocus);

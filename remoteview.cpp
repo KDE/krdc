@@ -24,7 +24,9 @@
 
 #include "remoteview.h"
 
+#include <QBitmap>
 #include <KDebug>
+#include <KStandardDirs>
 
 RemoteView::RemoteView(QWidget *parent)
   : QWidget(parent),
@@ -179,6 +181,15 @@ void RemoteView::saveWalletPassword(const QString &password)
         kDebug(5010) << "Write wallet password" << endl;
         m_wallet->writePassword(m_url.prettyUrl(KUrl::RemoveTrailingSlash), password);
     }
+}
+
+QCursor RemoteView::localDotCursor() const
+{
+    QBitmap cursorBitmap(KGlobal::dirs()->findResource("appdata",
+                                                        "pics/pointcursor.png"));
+    QBitmap cursorMask(KGlobal::dirs()->findResource("appdata",
+                                                        "pics/pointcursormask.png"));
+    return QCursor(cursorBitmap, cursorMask);
 }
 
 #include "remoteview.moc"

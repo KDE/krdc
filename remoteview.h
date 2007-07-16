@@ -338,6 +338,8 @@ protected:
      */
     virtual void setStatus(RemoteStatus s);
 
+    QCursor localDotCursor() const;
+
     QString readWalletPassword();
     void saveWalletPassword(const QString &password);
 

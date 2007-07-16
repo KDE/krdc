@@ -32,8 +32,6 @@ extern "C" {
 #include <rfb/rfbclient.h>
 }
 
-class QCursor;
-
 class VncView: public RemoteView
 {
     Q_OBJECT
@@ -72,7 +70,6 @@ private:
     bool m_quitFlag;
     RemoteView::Quality m_quality;
     VncHostPreferences *m_hostPreferences;
-    QCursor m_cursor;
 
 private slots:
     void updateImage(int x, int y, int w, int h);
