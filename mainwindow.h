@@ -63,6 +63,7 @@ private slots:
     void slotSwitchFullscreen();
     void slotLogout();
     void slotViewOnly(bool viewOnly);
+    void slotShowLocalCursor(bool showLocalCursor);
     void updateActionStatus();
     void updateConfiguration();
     void tabChanged(int index);

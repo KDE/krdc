@@ -67,7 +67,7 @@ MainWindow::MainWindow(QWidget *parent)
     m_toolBar(0),
     m_topBottomBorder(0),
     m_leftRightBorder(0),
-    m_currentRemoteView(0),
+    m_currentRemoteView(-1),
     m_showStartPage(false)
 {
     setupActions();
@@ -132,6 +132,11 @@ void MainWindow::setupActions()
     logoutAction->setText(i18n("&Log Out"));
     logoutAction->setIcon(KIcon("system-log-out"));
     connect(logoutAction, SIGNAL(triggered()), SLOT(slotLogout()));
+
+    QAction *showLocalCursorAction = actionCollection()->addAction("show_local_cursor");
+    showLocalCursorAction->setCheckable(true);
+    showLocalCursorAction->setText(i18n("S&how Local Cursor"));
+    connect(showLocalCursorAction, SIGNAL(triggered(bool)), SLOT(slotShowLocalCursor(bool)));
 
     QAction *quitAction = KStandardAction::quit(this, SLOT(slotQuit()), actionCollection());
     actionCollection()->addAction("quit", quitAction);
@@ -227,8 +232,6 @@ void MainWindow::slotNewConnection(const KUrl &newUrl, bool switchFullscreenWhen
 
     int newIndex = m_tabWidget->addTab(scrollArea, KIcon("krdc"), url.prettyUrl(KUrl::RemoveTrailingSlash));
     m_tabWidget->setCurrentIndex(newIndex);
-
-    updateActionStatus();
 
     view->start();
 }
@@ -411,6 +414,13 @@ void MainWindow::slotLogout()
     updateActionStatus();
 }
 
+void MainWindow::slotShowLocalCursor(bool showLocalCursor)
+{
+    kDebug(5010) << "slotShowLocalCursor" << endl;
+
+    m_remoteViewList.at(m_currentRemoteView)->showDotCursor(showLocalCursor ? RemoteView::CursorOn : RemoteView::CursorOff);
+}
+
 void MainWindow::slotViewOnly(bool viewOnly)
 {
     kDebug(5010) << "slotViewOnly" << endl;
@@ -455,6 +465,11 @@ void MainWindow::updateActionStatus()
     actionCollection()->action("take_screenshot")->setEnabled(enabled);
     actionCollection()->action("view_only")->setEnabled(enabled);
     actionCollection()->action("logout")->setEnabled(enabled);
+
+    bool showLocalCursorVisible = false;
+    if (m_currentRemoteView >= 0)
+        showLocalCursorVisible = enabled && m_remoteViewList.at(m_currentRemoteView)->supportsLocalCursor();
+    actionCollection()->action("show_local_cursor")->setVisible(showLocalCursorVisible);
 }
 
 void MainWindow::slotPreferences()
@@ -545,13 +560,13 @@ void MainWindow::tabChanged(int index)
 {
     kDebug(5010) << "tabChanged: " << index << endl;
 
-    updateActionStatus();
-
     m_currentRemoteView = index - m_showStartPage ? 1 : 0;
 
     QString tabTitle = m_tabWidget->tabText(index).remove('&');
 
     setCaption(tabTitle == i18n("Start Page") ? QString() : tabTitle);
+
+    updateActionStatus();
 }
 
 void MainWindow::createStartPage()

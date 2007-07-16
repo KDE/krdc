@@ -70,6 +70,7 @@ extern rfbBool newclient(rfbClient *cl)
 
     return true;
 }
+
 extern void updatefb(rfbClient* cl, int x, int y, int w, int h)
 {
 //     kDebug(5011) << "updated client: x: " << x << ", y: " << y << ", w: " << w << ", h: " << h << endl;

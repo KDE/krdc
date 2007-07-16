@@ -346,6 +346,7 @@ protected:
     bool m_viewOnly;
     KUrl m_url;
     KWallet::Wallet *m_wallet;
+    DotCursorState m_dotCursorState;
 };
 
 #endif

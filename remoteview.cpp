@@ -32,7 +32,8 @@ RemoteView::RemoteView(QWidget *parent)
     m_host(QString()),
     m_port(0),
     m_viewOnly(false),
-    m_wallet(0)
+    m_wallet(0),
+    m_dotCursorState(CursorOff)
 {
 }
 
@@ -122,13 +123,14 @@ void RemoteView::setViewOnly(bool viewOnly)
     m_viewOnly = viewOnly;
 }
 
-void RemoteView::showDotCursor(DotCursorState)
+void RemoteView::showDotCursor(DotCursorState state)
 {
+    m_dotCursorState = state;
 }
 
 RemoteView::DotCursorState RemoteView::dotCursorState() const
 {
-    return CursorOff;
+    return m_dotCursorState;
 }
 
 bool RemoteView::scaling() const

@@ -25,7 +25,9 @@
 
 #include <KLocale>
 #include <KPasswordDialog>
+#include <KStandardDirs>
 
+#include <QBitmap>
 #include <QImage>
 #include <QPainter>
 #include <QMouseEvent>
@@ -69,7 +71,8 @@ bool VncView::eventFilter(QObject *obj, QEvent *event)
             event->type() == QEvent::MouseMove)
             return true;
     }
-    setCursor(Qt::BlankCursor);
+
+    setCursor(m_dotCursorState == CursorOn ? m_cursor : Qt::BlankCursor);
 
     return RemoteView::eventFilter(obj, event);
 }
@@ -124,6 +127,11 @@ bool VncView::start()
     return true;
 }
 
+bool VncView::supportsLocalCursor() const
+{
+    return true;
+}
+
 void VncView::requestPassword()
 {
     kDebug(5011) << "request password" << endl;
@@ -169,7 +177,15 @@ void VncView::updateImage(int x, int y, int w, int h)
     if (!m_initDone) {
         setAttribute(Qt::WA_StaticContents);
         installEventFilter(this);
-        setCursor(Qt::BlankCursor);
+
+        QBitmap cursorBitmap(KGlobal::dirs()->findResource("appdata",
+                                                           "pics/pointcursor.png"));
+        QBitmap cursorMask(KGlobal::dirs()->findResource("appdata",
+                                                         "pics/pointcursormask.png"));
+        m_cursor = QCursor(cursorBitmap, cursorMask);
+
+        setCursor(m_dotCursorState == CursorOn ? m_cursor : Qt::BlankCursor);
+
         setMouseTracking(true); // get mouse events even when there is no mousebutton pressed
         setFocusPolicy(Qt::StrongFocus);
         setFixedSize(vncThread.image().width(), vncThread.image().height());
