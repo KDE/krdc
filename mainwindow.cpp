@@ -400,7 +400,6 @@ void MainWindow::slotLogout()
 
     if (m_fullscreenWindow) { // first close fullscreen view
         slotSwitchFullscreen();
-        slotLogout();
     }
 
     QWidget *tmp = m_tabWidget->currentWidget();
