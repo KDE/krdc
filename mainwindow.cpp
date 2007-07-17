@@ -466,6 +466,16 @@ void MainWindow::updateActionStatus()
     actionCollection()->action("view_only")->setEnabled(enabled);
     actionCollection()->action("logout")->setEnabled(enabled);
 
+    bool viewOnlyChecked = false;
+    if (m_currentRemoteView >= 0)
+        viewOnlyChecked = enabled && m_remoteViewList.at(m_currentRemoteView)->viewOnly();
+    actionCollection()->action("view_only")->setChecked(viewOnlyChecked);
+
+    bool showLocalCursorChecked = false;
+    if (m_currentRemoteView >= 0)
+        showLocalCursorChecked = enabled && m_remoteViewList.at(m_currentRemoteView)->dotCursorState() == RemoteView::CursorOn;
+    actionCollection()->action("show_local_cursor")->setChecked(showLocalCursorChecked);
+
     bool showLocalCursorVisible = false;
     if (m_currentRemoteView >= 0)
         showLocalCursorVisible = enabled && m_remoteViewList.at(m_currentRemoteView)->supportsLocalCursor();
