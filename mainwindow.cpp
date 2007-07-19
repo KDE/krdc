@@ -600,7 +600,7 @@ void MainWindow::createStartPage()
     KPushButton *vncConnectButton = new KPushButton(this);
     vncConnectButton->setStyleSheet("KPushButton { padding: 12px; margin: 10px; }");
     vncConnectButton->setIcon(KIcon(actionCollection()->action("new_vnc_connection")->icon()));
-    vncConnectButton->setText(i18n("Connect to a remote Linux / Unix computer. (Using VNC)"));
+    vncConnectButton->setText(i18n("Connect to a VNC remote desktop."));
     connect(vncConnectButton, SIGNAL(clicked()), SLOT(newVncConnection()));
 #ifndef BUILD_VNC
     vncConnectButton->setVisible(false);
@@ -609,7 +609,7 @@ void MainWindow::createStartPage()
     KPushButton *rdpConnectButton = new KPushButton(this);
     rdpConnectButton->setStyleSheet("KPushButton { padding: 12px; margin: 10px; }");
     rdpConnectButton->setIcon(KIcon(actionCollection()->action("new_rdp_connection")->icon()));
-    rdpConnectButton->setText(i18n("Connect to a remote Windows computer. (Using RDP)"));
+    rdpConnectButton->setText(i18n("Connect to a Windows remote desktop (RDP)."));
     connect(rdpConnectButton, SIGNAL(clicked()), SLOT(newRdpConnection()));
 #ifndef BUILD_RDP
     rdpConnectButton->setVisible(false);

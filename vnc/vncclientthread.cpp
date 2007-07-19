@@ -251,6 +251,7 @@ void VncClientThread::keyEvent(int key, bool pressed)
 
 void VncClientThread::cleanup()
 {
+    QMutexLocker locker(&mutex);
     m_cleanup = true;
 }
 
