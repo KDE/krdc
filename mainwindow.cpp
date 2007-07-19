@@ -135,6 +135,7 @@ void MainWindow::setupActions()
 
     QAction *showLocalCursorAction = actionCollection()->addAction("show_local_cursor");
     showLocalCursorAction->setCheckable(true);
+    showLocalCursorAction->setIcon(KIcon("input-mouse"));
     showLocalCursorAction->setText(i18n("S&how Local Cursor"));
     connect(showLocalCursorAction, SIGNAL(triggered(bool)), SLOT(slotShowLocalCursor(bool)));
 
@@ -442,6 +443,7 @@ void MainWindow::showRemoteViewToolbar()
         m_toolBar->addAction(actionCollection()->action("switch_fullscreen"));
         m_toolBar->addAction(actionCollection()->action("take_screenshot"));
         m_toolBar->addAction(actionCollection()->action("view_only"));
+        m_toolBar->addAction(actionCollection()->action("show_local_cursor"));
         m_toolBar->addAction(actionCollection()->action("logout"));
     }
 
