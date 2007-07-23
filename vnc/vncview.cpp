@@ -94,14 +94,21 @@ void VncView::startQuitting()
 {
     kDebug(5011) << "about to quit" << endl;
 
+    bool connected = status() == RemoteView::Connected;
+
     setStatus(Disconnecting);
 
     m_quitFlag = true;
 
-    vncThread.cleanup();
+    if (connected) {
+        vncThread.cleanup();
 
-    vncThread.stop();
-    vncThread.wait();
+        vncThread.stop();
+    } else {
+        vncThread.quit();
+    }
+
+    vncThread.wait(500);
 
     setStatus(Disconnected);
 }
