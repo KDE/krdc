@@ -66,7 +66,7 @@ install(TARGETS krdc  DESTINATION ${BIN_INSTALL_DIR} )
 
 ########### install files ###############
 
-install( FILES krdc.desktop  DESTINATION ${XDG_APPS_DIR})
+install( FILES krdc.desktop  DESTINATION ${XDG_APPS_INSTALL_DIR})
 install( FILES smb2rdc.desktop  DESTINATION ${DATA_INSTALL_DIR}/konqueror/servicemenus)
 install( FILES pointcursor.png pointcursormask.png pinup.png pindown.png iconify.png DESTINATION ${DATA_INSTALL_DIR}/krdc/pics)
 install( FILES vnc.protocol rdp.protocol  DESTINATION ${SERVICES_INSTALL_DIR})
