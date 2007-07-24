@@ -32,7 +32,7 @@ class RdpHostPreferences : public HostPreferences
     Q_OBJECT
 
 public:
-    RdpHostPreferences(const QString &url, bool forceShow = false, QObject *parent = 0);
+    explicit RdpHostPreferences(const QString &url, bool forceShow = false, QObject *parent = 0);
     ~RdpHostPreferences();
 
     void setHeight(int height);

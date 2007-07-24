@@ -31,7 +31,7 @@ class VncHostPreferences : public HostPreferences
     Q_OBJECT
 
 public:
-    VncHostPreferences(const QString &url, bool forceShow = false, QObject *parent = 0);
+    explicit VncHostPreferences(const QString &url, bool forceShow = false, QObject *parent = 0);
     ~VncHostPreferences();
 
     void setQuality(RemoteView::Quality quality);

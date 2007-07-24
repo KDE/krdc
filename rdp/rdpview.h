@@ -43,12 +43,12 @@ class RdpView : public RemoteView
     Q_OBJECT
 
 public:
-    RdpView(QWidget *parent = 0,
-             const KUrl &url = KUrl(),
-             const QString &user = QString(), const QString &password = QString(),
-             int flags = RDP_LOGON_NORMAL, const QString &domain = QString(),
-             const QString &shell = QString(), const QString &directory = QString(),
-             const QString &caption = QString());
+    explicit RdpView(QWidget *parent = 0,
+                     const KUrl &url = KUrl(),
+                     const QString &user = QString(), const QString &password = QString(),
+                     int flags = RDP_LOGON_NORMAL, const QString &domain = QString(),
+                     const QString &shell = QString(), const QString &directory = QString(),
+                     const QString &caption = QString());
 
     virtual ~RdpView();
 
