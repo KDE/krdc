@@ -2,6 +2,8 @@ project(krdc)
 
 add_subdirectory(config)
 
+find_package(Strigi)
+
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/rdp/
     ${CMAKE_CURRENT_SOURCE_DIR}/vnc/
@@ -57,7 +59,7 @@ kde4_add_kcfg_files(krdc_SRCS config/settings.kcfgc)
 
 kde4_add_executable(krdc ${krdc_SRCS})
 
-target_link_libraries(krdc ${KDE4_KDEUI_LIBRARY} ${KDE4_KFILE_LIBRARY} ${KDE4_KNOTIFYCONFIG_LIBRARY} ${QT_QTGUI_LIBRARY})
+target_link_libraries(krdc ${KDE4_KDEUI_LIBRARY} ${KDE4_KFILE_LIBRARY} ${KDE4_KNOTIFYCONFIG_LIBRARY} ${QT_QTGUI_LIBRARY} ${STRIGI_LIBRARIES})
 
 if(LIBVNCSERVER_FOUND)
     target_link_libraries(krdc ${LIBVNCCLIENT_LIBRARIES})
