@@ -57,7 +57,7 @@ kde4_add_kcfg_files(krdc_SRCS config/settings.kcfgc)
 
 kde4_add_executable(krdc ${krdc_SRCS})
 
-target_link_libraries(krdc ${KDE4_KDEUI_LIBS} ${KDE4_KFILE_LIBS} ${KDE4_KNOTIFYCONFIG_LIBS})
+target_link_libraries(krdc ${KDE4_KFILE_LIBS} ${KDE4_KNOTIFYCONFIG_LIBS})
 
 if(LIBVNCSERVER_FOUND)
     target_link_libraries(krdc ${LIBVNCCLIENT_LIBRARIES})
