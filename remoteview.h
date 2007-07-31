@@ -238,6 +238,11 @@ public:
      */
     RemoteStatus status();
 
+    /**
+     * @return the current url
+     */
+    KUrl url();
+
 public slots:
     /**
      * Called to enable or disable scaling.

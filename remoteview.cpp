@@ -148,6 +148,11 @@ void RemoteView::switchFullscreen(bool)
 {
 }
 
+KUrl RemoteView::url()
+{
+    return m_url;
+}
+
 QString RemoteView::readWalletPassword()
 {
     QString krdc_folder = "KRDC";

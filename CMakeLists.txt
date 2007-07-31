@@ -44,6 +44,7 @@ set(krdc_SRCS ${krdc_rdp_SRCS} ${krdc_vnc_SRCS}
     config/hostpreferenceslist.cpp
     config/preferencesdialog.cpp
     floatingtoolbar.cpp
+    bookmarkmanager.cpp
     remoteview.cpp
     mainwindow.cpp
     main.cpp

@@ -32,6 +32,7 @@ class KToggleAction;
 class KTabWidget;
 class KUrlNavigator;
 
+class BookmarkManager;
 class FloatingToolBar;
 class RemoteView;
 class QScrollArea;
@@ -42,6 +43,9 @@ class MainWindow : public KXmlGuiWindow
 public:
     MainWindow(QWidget *parent = 0);
     ~MainWindow();
+
+    QList<RemoteView *> remoteViewList() const;
+    int currentRemoteView() const;
 
 public slots:
     void slotNewConnection(const KUrl &newUrl = KUrl(), bool switchFullscreenWhenConnected = false);
@@ -83,6 +87,8 @@ private:
     KUrlNavigator *m_addressNavigator;
 
     FloatingToolBar *m_toolBar;
+
+    BookmarkManager *m_bookmarkManager;
 
     QList<RemoteView *> m_remoteViewList;
 

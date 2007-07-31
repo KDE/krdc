@@ -27,6 +27,7 @@
 #include "settings.h"
 #include "config/preferencesdialog.h"
 #include "floatingtoolbar.h"
+#include "bookmarkmanager.h"
 #ifdef BUILD_RDP
 #include "rdpview.h"
 #endif
@@ -36,6 +37,7 @@
 
 #include <KAction>
 #include <KActionCollection>
+#include <KActionMenu>
 #include <KApplication>
 #include <KEditToolBar>
 #include <KIcon>
@@ -181,6 +183,11 @@ void MainWindow::setupActions()
     gotoAction->setText(i18n("&Goto address"));
     gotoAction->setIcon(KIcon("browser-go"));
     connect(gotoAction, SIGNAL(triggered()), SLOT(slotNewConnection()));
+
+    KActionMenu *bookmarkMenu = new KActionMenu(i18n("&Bookmarks"), actionCollection());
+    m_bookmarkManager = new BookmarkManager(actionCollection(), bookmarkMenu->menu(), this);
+    actionCollection()->addAction("bookmark" , bookmarkMenu);
+    connect(m_bookmarkManager, SIGNAL(openUrl(KUrl)), SLOT(slotNewConnection(KUrl)));
 }
 
 void MainWindow::slotNewConnection(const KUrl &newUrl, bool switchFullscreenWhenConnected)
@@ -571,7 +578,7 @@ void MainWindow::tabChanged(int index)
 {
     kDebug(5010) << "tabChanged: " << index << endl;
 
-    m_currentRemoteView = index - m_showStartPage ? 1 : 0;
+    m_currentRemoteView = index - (m_showStartPage ? 1 : 0);
 
     QString tabTitle = m_tabWidget->tabText(index).remove('&');
 
@@ -645,6 +652,16 @@ void MainWindow::newRdpConnection()
                                                                   m_addressNavigator->height() + 20),
                        i18n("Enter here the address.<br />"
                             "<i>Example: rdpserver (host)</i>"), this);
+}
+
+QList<RemoteView *> MainWindow::remoteViewList() const
+{
+    return m_remoteViewList;
+}
+
+int MainWindow::currentRemoteView() const
+{
+    return m_currentRemoteView;
 }
 
 #include "mainwindow.moc"
