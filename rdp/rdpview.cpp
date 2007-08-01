@@ -163,6 +163,26 @@ bool RdpView::start()
 
     arguments << "-X" << QString::number(m_container->winId());
     arguments << "-a" << QString::number((m_hostPreferences->colorDepth() + 1) * 8);
+
+    QString sound;
+    switch (m_hostPreferences->sound()) {
+    case 0:
+        sound = "local";
+        break;
+    case 1:
+        sound = "remote";
+        break;
+    case 2:
+    default:
+        sound = "off";
+    }
+    arguments << "-r" << "sound:" + sound;
+
+    if (!m_hostPreferences->extraOptions().isEmpty()) {
+        QStringList additionalArguments = m_hostPreferences->extraOptions().split(' ');
+        arguments += additionalArguments;
+    }
+
     arguments << (m_host + ':' + QString::number(m_port));
 
     kDebug(5012) << arguments << endl;

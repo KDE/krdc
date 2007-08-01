@@ -1,17 +1,9 @@
 <ui version="4.0" >
  <class>RdpPreferences</class>
  <widget class="QWidget" name="RdpPreferences" >
-  <property name="geometry" >
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>435</width>
-    <height>174</height>
-   </rect>
-  </property>
   <layout class="QVBoxLayout" >
    <item>
-    <widget class="QGroupBox" name="rdpGroupBox" >
+    <widget class="QGroupBox" name="connectionGroupBox" >
      <property name="title" >
       <string>Connection</string>
      </property>
@@ -406,6 +398,70 @@
         </item>
        </widget>
       </item>
+      <item row="4" column="1" >
+       <widget class="QComboBox" name="kcfg_Sound" >
+        <item>
+         <property name="text" >
+          <string>On this computer</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>On remote computer</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Disable sound</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="4" column="0" >
+       <widget class="QLabel" name="soudLabel" >
+        <property name="text" >
+         <string>Sound:</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="expertGroupBox" >
+     <property name="title" >
+      <string>Expert options</string>
+     </property>
+     <layout class="QGridLayout" >
+      <item row="0" column="0" >
+       <widget class="QLabel" name="extraOptionsLabel" >
+        <property name="minimumSize" >
+         <size>
+          <width>116</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text" >
+         <string>Extra options:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1" >
+       <widget class="KLineEdit" name="kcfg_ExtraOptions" >
+        <property name="minimumSize" >
+         <size>
+          <width>280</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="whatsThis" >
+         <string>Here you can enter additional rdesktop options.</string>
+        </property>
+        <property name="showClearButton" stdset="0" >
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>
@@ -424,6 +480,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>KLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>klineedit.h</header>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>resolutionComboBox</tabstop>
   <tabstop>kcfg_Width</tabstop>

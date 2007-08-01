@@ -43,6 +43,10 @@ public:
     int colorDepth();
     void setKeyboardLayout(const QString &keyboardLayout);
     QString keyboardLayout() const;
+    void setSound(int sound);
+    int sound() const;
+    void setExtraOptions(const QString &extraOptions);
+    QString extraOptions() const;
 
 protected:
     void showDialog();
@@ -54,6 +58,8 @@ private:
     int m_width;
     int m_colorDepth;
     QString m_keyboardLayout;
+    int m_sound;
+    QString m_extraOptions;
     Ui::RdpPreferences rdpUi;
 
 private slots:

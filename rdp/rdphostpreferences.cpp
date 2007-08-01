@@ -88,7 +88,9 @@ RdpHostPreferences::RdpHostPreferences(const QString &url, bool forceShow, QObje
     m_height(600),
     m_width(800),
     m_colorDepth(0),
-    m_keyboardLayout("en-us")
+    m_keyboardLayout("en-us"),
+    m_sound(0),
+    m_extraOptions(QString())
 {
     if (hostConfigured()) {
         if (showConfigAgain() || forceShow) {
@@ -120,6 +122,8 @@ void RdpHostPreferences::showDialog()
     rdpUi.kcfg_Width->setValue(width());
     rdpUi.kcfg_ColorDepth->setCurrentIndex(colorDepth());
     rdpUi.kcfg_KeyboardLayout->setCurrentIndex(keymap2int(keyboardLayout()));
+    rdpUi.kcfg_Sound->setCurrentIndex(sound());
+    rdpUi.kcfg_ExtraOptions->setText(extraOptions());
 
     connect(rdpUi.resolutionComboBox, SIGNAL(currentIndexChanged(int)), SLOT(updateWidthHeight(int)));
 
@@ -130,10 +134,12 @@ void RdpHostPreferences::showDialog()
     if (dialog->exec() == KDialog::Accepted) {
         kDebug(5012) << "RdpHostPreferences config dialog accepted" << endl;
 
-       setHeight(rdpUi.kcfg_Height->value());
-       setWidth(rdpUi.kcfg_Width->value());
-       setColorDepth(rdpUi.kcfg_ColorDepth->currentIndex());
-       setKeyboardLayout(int2keymap(rdpUi.kcfg_KeyboardLayout->currentIndex()));
+        setHeight(rdpUi.kcfg_Height->value());
+        setWidth(rdpUi.kcfg_Width->value());
+        setColorDepth(rdpUi.kcfg_ColorDepth->currentIndex());
+        setKeyboardLayout(int2keymap(rdpUi.kcfg_KeyboardLayout->currentIndex()));
+        setSound(rdpUi.kcfg_Sound->currentIndex());
+        setExtraOptions(rdpUi.kcfg_ExtraOptions->text());
     }
 }
 
@@ -196,6 +202,16 @@ void RdpHostPreferences::readProtocolSpecificConfig()
         setKeyboardLayout(int2keymap(m_element.firstChildElement("keyboardLayout").text().toInt()));
     else
         setKeyboardLayout(int2keymap(Settings::keyboardLayout()));
+
+    if (m_element.firstChildElement("sound") != QDomElement())
+        setSound(m_element.firstChildElement("sound").text().toInt());
+    else
+        setSound(Settings::sound());
+
+    if (m_element.firstChildElement("extraOptions") != QDomElement())
+        setExtraOptions(m_element.firstChildElement("extraOptions").text());
+    else
+        setExtraOptions(Settings::extraOptions());
 }
 
 void RdpHostPreferences::saveProtocolSpecificConfig()
@@ -206,6 +222,8 @@ void RdpHostPreferences::saveProtocolSpecificConfig()
     updateElement("width", QString::number(width()));
     updateElement("colorDepth", QString::number(colorDepth()));
     updateElement("keyboardLayout", QString::number(keymap2int(keyboardLayout())));
+    updateElement("sound", QString::number(sound()));
+    updateElement("extraOptions", extraOptions());
 }
 
 void RdpHostPreferences::setHeight(int height)
@@ -250,6 +268,28 @@ void RdpHostPreferences::setKeyboardLayout(const QString &keyboardLayout)
 QString RdpHostPreferences::keyboardLayout() const
 {
     return m_keyboardLayout;
+}
+
+void RdpHostPreferences::setSound(int sound)
+{
+    if (sound >= 0)
+        m_sound = sound;
+}
+
+int RdpHostPreferences::sound() const
+{
+    return m_sound;
+}
+
+void RdpHostPreferences::setExtraOptions(const QString &extraOptions)
+{
+    if (!extraOptions.isNull())
+        m_extraOptions = extraOptions;
+}
+
+QString RdpHostPreferences::extraOptions() const
+{
+    return m_extraOptions;
 }
 
 #include "rdphostpreferences.moc"
