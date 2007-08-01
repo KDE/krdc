@@ -186,7 +186,7 @@ void VncView::updateImage(int x, int y, int w, int h)
         setCursor(m_dotCursorState == CursorOn ? localDotCursor() : Qt::BlankCursor);
 
         setMouseTracking(true); // get mouse events even when there is no mousebutton pressed
-        setFocusPolicy(Qt::StrongFocus);
+        setFocusPolicy(Qt::WheelFocus);
         setFixedSize(vncThread.image().width(), vncThread.image().height());
         setStatus(Connected);
         emit changeSize(vncThread.image().width(), vncThread.image().height());
@@ -216,6 +216,21 @@ void VncView::paintEvent(QPaintEvent *event)
     }
 
     QWidget::paintEvent(event);
+}
+
+void VncView::focusOutEvent(QFocusEvent *event)
+{
+//     kDebug(5011) << "focusOutEvent" << endl;
+
+    if (event->reason() == Qt::TabFocusReason) {
+//         kDebug(5011) << "event->reason() == Qt::TabFocusReason" << endl;
+        event->ignore();
+        setFocus(); // get focus back and send tab key event to remote desktop
+        keyEvent(new QKeyEvent(QEvent::KeyPress, Qt::Key_Tab, Qt::NoModifier), true);
+        keyEvent(new QKeyEvent(QEvent::KeyPress, Qt::Key_Tab, Qt::NoModifier), false);
+    }
+
+    event->accept();
 }
 
 void VncView::mouseMoveEvent(QMouseEvent *event)

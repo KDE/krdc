@@ -52,6 +52,7 @@ public:
 
 protected:
     void paintEvent(QPaintEvent *event);
+    void focusOutEvent(QFocusEvent *event);
     void mouseMoveEvent(QMouseEvent *event);
     void mousePressEvent(QMouseEvent *event);
     void mouseDoubleClickEvent(QMouseEvent *event);
