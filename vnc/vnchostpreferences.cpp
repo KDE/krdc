@@ -34,12 +34,12 @@ VncHostPreferences::VncHostPreferences(const QString &url, bool forceShow, QObje
 {
     if (hostConfigured()) {
         if (showConfigAgain() || forceShow) {
-            kDebug(5011) << "Show config dialog again" << endl;
+            kDebug(5011) << "Show config dialog again";
             showDialog();
         } else
             return; // no changes, no need to save
     } else {
-        kDebug(5011) << "No config found, create new" << endl;
+        kDebug(5011) << "No config found, create new";
         if (Settings::showPreferencesForNewConnections())
             showDialog();
     }
@@ -62,7 +62,7 @@ void VncHostPreferences::showDialog()
     vncUi.kcfg_Quality->setCurrentIndex(quality() - 1);
 
     if (dialog->exec() == KDialog::Accepted) {
-        kDebug(5011) << "VncHostPreferences config dialog accepted" << endl;
+        kDebug(5011) << "VncHostPreferences config dialog accepted";
 
         setQuality((RemoteView::Quality)(vncUi.kcfg_Quality->currentIndex() + 1));
     }
@@ -70,7 +70,7 @@ void VncHostPreferences::showDialog()
 
 void VncHostPreferences::readProtocolSpecificConfig()
 {
-    kDebug(5011) << "VncHostPreferences::readProtocolSpecificConfig" << endl;
+    kDebug(5011) << "VncHostPreferences::readProtocolSpecificConfig";
 
     if (m_element.firstChildElement("quality") != QDomElement()) // not configured yet
         setQuality((RemoteView::Quality)(m_element.firstChildElement("quality").text().toInt()));
@@ -80,7 +80,7 @@ void VncHostPreferences::readProtocolSpecificConfig()
 
 void VncHostPreferences::saveProtocolSpecificConfig()
 {
-    kDebug(5011) << "VncHostPreferences::saveProtocolSpecificConfig" << endl;
+    kDebug(5011) << "VncHostPreferences::saveProtocolSpecificConfig";
 
     updateElement("quality", QString::number(quality()));
 }

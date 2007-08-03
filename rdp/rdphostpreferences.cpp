@@ -94,12 +94,12 @@ RdpHostPreferences::RdpHostPreferences(const QString &url, bool forceShow, QObje
 {
     if (hostConfigured()) {
         if (showConfigAgain() || forceShow) {
-            kDebug(5012) << "Show config dialog again" << endl;
+            kDebug(5012) << "Show config dialog again";
             showDialog();
         } else
             return; // no changes, no need to save
     } else {
-        kDebug(5012) << "No config found, create new" << endl;
+        kDebug(5012) << "No config found, create new";
         if (Settings::showPreferencesForNewConnections())
             showDialog();
     }
@@ -132,7 +132,7 @@ void RdpHostPreferences::showDialog()
     rdpUi.resolutionComboBox->setCurrentIndex((resolutionIndex == -1) ? 5 : resolutionIndex);
 
     if (dialog->exec() == KDialog::Accepted) {
-        kDebug(5012) << "RdpHostPreferences config dialog accepted" << endl;
+        kDebug(5012) << "RdpHostPreferences config dialog accepted";
 
         setHeight(rdpUi.kcfg_Height->value());
         setWidth(rdpUi.kcfg_Width->value());
@@ -181,7 +181,7 @@ void RdpHostPreferences::updateWidthHeight(int index)
 
 void RdpHostPreferences::readProtocolSpecificConfig()
 {
-    kDebug(5012) << "RdpHostPreferences::readProtocolSpecificConfig" << endl;
+    kDebug(5012) << "RdpHostPreferences::readProtocolSpecificConfig";
 
     if (m_element.firstChildElement("height") != QDomElement()) // not configured yet
         setHeight(m_element.firstChildElement("height").text().toInt());
@@ -216,7 +216,7 @@ void RdpHostPreferences::readProtocolSpecificConfig()
 
 void RdpHostPreferences::saveProtocolSpecificConfig()
 {
-    kDebug(5012) << "RdpHostPreferences::saveProtocolSpecificConfig" << endl;
+    kDebug(5012) << "RdpHostPreferences::saveProtocolSpecificConfig";
 
     updateElement("height", QString::number(height()));
     updateElement("width", QString::number(width()));

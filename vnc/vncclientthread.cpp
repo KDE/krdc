@@ -73,14 +73,14 @@ extern rfbBool newclient(rfbClient *cl)
 
 extern void updatefb(rfbClient* cl, int x, int y, int w, int h)
 {
-//     kDebug(5011) << "updated client: x: " << x << ", y: " << y << ", w: " << w << ", h: " << h << endl;
+//     kDebug(5011) << "updated client: x: " << x << ", y: " << y << ", w: " << w << ", h: " << h;
 
     int width = cl->width, height = cl->height;
 
     QImage img(cl->frameBuffer, width, height, QImage::Format_RGB32);
 
     if (img.isNull())
-        kDebug(5011) << "image not loaded" << endl;
+        kDebug(5011) << "image not loaded";
 
 
     VncClientThread *t = (VncClientThread*)rfbClientGetClientData(cl, 0);
@@ -93,7 +93,7 @@ extern void updatefb(rfbClient* cl, int x, int y, int w, int h)
 extern char *passwd(rfbClient *cl)
 {
     Q_UNUSED(cl);
-    kDebug(5011) << "password request" << endl;
+    kDebug(5011) << "password request";
 
     VncClientThread *t = (VncClientThread*)rfbClientGetClientData(cl, 0);
 
@@ -115,10 +115,10 @@ extern void output(const char *format, ...)
     kDebug(5011) << message.toLocal8Bit().constData();
 
     if (message.contains("Could not open"))
-        kDebug(5011) << "Server not found!" << endl;
+        kDebug(5011) << "Server not found!";
 
     if (message.contains("VNC authentication succeeded"))
-        kDebug(5011) << "Password OK" << endl;
+        kDebug(5011) << "Password OK";
 }
 
 VncClientThread::VncClientThread()

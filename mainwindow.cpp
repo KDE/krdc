@@ -246,7 +246,7 @@ void MainWindow::slotNewConnection(const KUrl &newUrl, bool switchFullscreenWhen
 
 void MainWindow::resizeTabWidget(int w, int h)
 {
-    kDebug(5010) << "tabwidget resize: w: " << w << ", h: " << h << endl;
+    kDebug(5010) << "tabwidget resize: w: " << w << ", h: " << h;
 
     if (m_topBottomBorder == 0) { // the values are not cached yet
         QScrollArea *tmp = qobject_cast<QScrollArea *>(m_tabWidget->currentWidget());
@@ -254,7 +254,7 @@ void MainWindow::resizeTabWidget(int w, int h)
         m_leftRightBorder = m_tabWidget->width() - m_tabWidget->currentWidget()->width() + (2 * tmp->frameWidth());
         m_topBottomBorder = m_tabWidget->height() - m_tabWidget->currentWidget()->height() + (2 * tmp->frameWidth());
 
-        kDebug(5010) << "tabwidget border: w: " << m_leftRightBorder << ", h: " << m_topBottomBorder << endl;
+        kDebug(5010) << "tabwidget border: w: " << m_leftRightBorder << ", h: " << m_topBottomBorder;
     }
 
     int newTabWidth = w + m_leftRightBorder;
@@ -266,7 +266,7 @@ void MainWindow::resizeTabWidget(int w, int h)
                               QApplication::desktop()->availableGeometry().height());
 
     if ((newWindowSize.height() >= desktopSize.height()) || (newWindowSize.width() >= desktopSize.width())) {
-        kDebug(5010) << "remote desktop needs more place than available -> show window maximized" << endl;
+        kDebug(5010) << "remote desktop needs more place than available -> show window maximized";
         showMaximized();
         return;
     }
@@ -280,7 +280,7 @@ void MainWindow::resizeTabWidget(int w, int h)
 
 void MainWindow::statusChanged(RemoteView::RemoteStatus status)
 {
-    kDebug(5010) << "statusChanged: " << status << endl;
+    kDebug(5010) << "statusChanged: " << status;
 
     // the remoteview is already deleted, so don't show it; otherwise it would crash
     if (status == RemoteView::Disconnecting || status == RemoteView::Disconnected)
@@ -333,7 +333,7 @@ void MainWindow::slotTakeScreenshot()
 
 void MainWindow::slotSwitchFullscreen()
 {
-    kDebug(5010) << "slotSwitchFullscreen" << endl;
+    kDebug(5010) << "slotSwitchFullscreen";
 
     if (m_fullscreenWindow) {
         show();
@@ -404,7 +404,7 @@ QScrollArea *MainWindow::createScrollArea(QWidget *parent, RemoteView *remoteVie
 
 void MainWindow::slotLogout()
 {
-    kDebug(5010) << "slotLogout" << endl;
+    kDebug(5010) << "slotLogout";
 
     if (m_fullscreenWindow) { // first close fullscreen view
         slotSwitchFullscreen();
@@ -423,21 +423,21 @@ void MainWindow::slotLogout()
 
 void MainWindow::slotShowLocalCursor(bool showLocalCursor)
 {
-    kDebug(5010) << "slotShowLocalCursor" << endl;
+    kDebug(5010) << "slotShowLocalCursor";
 
     m_remoteViewList.at(m_currentRemoteView)->showDotCursor(showLocalCursor ? RemoteView::CursorOn : RemoteView::CursorOff);
 }
 
 void MainWindow::slotViewOnly(bool viewOnly)
 {
-    kDebug(5010) << "slotViewOnly" << endl;
+    kDebug(5010) << "slotViewOnly";
 
     m_remoteViewList.at(m_currentRemoteView)->setViewOnly(viewOnly);
 }
 
 void MainWindow::showRemoteViewToolbar()
 {
-    kDebug(5010) << "showRemoteViewToolbar" << endl;
+    kDebug(5010) << "showRemoteViewToolbar";
 
     m_remoteViewList.at(m_currentRemoteView)->repaint(); // be sure there are no artifacts on the remote view
 
@@ -459,7 +459,7 @@ void MainWindow::showRemoteViewToolbar()
 
 void MainWindow::updateActionStatus()
 {
-    kDebug(5010) << "updateActionStatus = " << m_tabWidget->currentIndex() << endl;
+    kDebug(5010) << "updateActionStatus = " << m_tabWidget->currentIndex();
 
     bool enabled;
 
@@ -576,7 +576,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 void MainWindow::tabChanged(int index)
 {
-    kDebug(5010) << "tabChanged: " << index << endl;
+    kDebug(5010) << "tabChanged: " << index;
 
     m_currentRemoteView = index - (m_showStartPage ? 1 : 0);
 

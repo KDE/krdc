@@ -95,7 +95,7 @@ QSize RdpView::sizeHint() const
 
 void RdpView::startQuitting()
 {
-    kDebug(5012) << "About to quit" << endl;
+    kDebug(5012) << "About to quit";
     m_quitFlag = true;
     if(m_process) {
         m_process->terminate();
@@ -185,7 +185,7 @@ bool RdpView::start()
 
     arguments << (m_host + ':' + QString::number(m_port));
 
-    kDebug(5012) << arguments << endl;
+    kDebug(5012) << arguments;
 
     setStatus(Connecting);
 
@@ -214,9 +214,9 @@ void RdpView::pressKey(XEvent *e)
 
 void RdpView::connectionOpened()
 {
-    kDebug(5012) << "Connection opened" << endl;
+    kDebug(5012) << "Connection opened";
     QSize size = m_container->minimumSizeHint();
-    kDebug(5012) << "Size hint: " << size.width() << " " << size.height() << endl;
+    kDebug(5012) << "Size hint: " << size.width() << " " << size.height();
     setStatus(Connected);
     setFixedSize(size);
     resize(size);
@@ -267,7 +267,7 @@ void RdpView::receivedStandardError()
             m_clientVersion = m_clientVersion.left(m_clientVersion.length() - 1);
             return;
         } else {
-            kDebug(5012) << "Process error output: " << line << endl;
+            kDebug(5012) << "Process error output: " << line;
         }
         i++;
     }

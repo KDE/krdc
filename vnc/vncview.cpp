@@ -92,7 +92,7 @@ QSize VncView::minimumSizeHint() const
 
 void VncView::startQuitting()
 {
-    kDebug(5011) << "about to quit" << endl;
+    kDebug(5011) << "about to quit";
 
     bool connected = status() == RemoteView::Connected;
 
@@ -139,7 +139,7 @@ bool VncView::supportsLocalCursor() const
 
 void VncView::requestPassword()
 {
-    kDebug(5011) << "request password" << endl;
+    kDebug(5011) << "request password";
 
     setStatus(Authenticating);
 
@@ -172,7 +172,7 @@ void VncView::requestPassword()
 
 void VncView::updateImage(int x, int y, int w, int h)
 {
-//     kDebug(5011) << "got update" << endl;
+//     kDebug(5011) << "got update";
 
     m_x = x;
     m_y = y;
@@ -201,17 +201,17 @@ void VncView::updateImage(int x, int y, int w, int h)
 
 void VncView::paintEvent(QPaintEvent *event)
 {
-//     kDebug(5011) << "paint event: x: " << m_x << ", y: " << m_y << ", w: " << m_w << ", h: " << m_h << endl;
+//     kDebug(5011) << "paint event: x: " << m_x << ", y: " << m_y << ", w: " << m_w << ", h: " << m_h;
 
     event->accept();
 
     QPainter painter(this);
 
     if (m_repaint) {
-//         kDebug(5011) << "normal repaint" << endl;
+//         kDebug(5011) << "normal repaint";
         painter.drawImage(QRect(m_x, m_y, m_w, m_h), vncThread.image(m_x, m_y, m_w, m_h));
     } else {
-//         kDebug(5011) << "resize repaint" << endl;
+//         kDebug(5011) << "resize repaint";
         painter.drawImage(QRect(0, 0, vncThread.image().width(), vncThread.image().height()), vncThread.image());
     }
 
@@ -220,10 +220,10 @@ void VncView::paintEvent(QPaintEvent *event)
 
 void VncView::focusOutEvent(QFocusEvent *event)
 {
-//     kDebug(5011) << "focusOutEvent" << endl;
+//     kDebug(5011) << "focusOutEvent";
 
     if (event->reason() == Qt::TabFocusReason) {
-//         kDebug(5011) << "event->reason() == Qt::TabFocusReason" << endl;
+//         kDebug(5011) << "event->reason() == Qt::TabFocusReason";
         event->ignore();
         setFocus(); // get focus back and send tab key event to remote desktop
         keyEvent(new QKeyEvent(QEvent::KeyPress, Qt::Key_Tab, Qt::NoModifier), true);
@@ -235,7 +235,7 @@ void VncView::focusOutEvent(QFocusEvent *event)
 
 void VncView::mouseMoveEvent(QMouseEvent *event)
 {
-//     kDebug(5011) << "mouse move" << endl;
+//     kDebug(5011) << "mouse move";
 
     mouseEvent(event);
 
@@ -244,7 +244,7 @@ void VncView::mouseMoveEvent(QMouseEvent *event)
 
 void VncView::mousePressEvent(QMouseEvent *event)
 {
-//     kDebug(5011) << "mouse press" << endl;
+//     kDebug(5011) << "mouse press";
 
     mouseEvent(event);
 
@@ -253,7 +253,7 @@ void VncView::mousePressEvent(QMouseEvent *event)
 
 void VncView::mouseDoubleClickEvent(QMouseEvent *event)
 {
-//     kDebug(5011) << "mouse double click" << endl;
+//     kDebug(5011) << "mouse double click";
 
     mouseEvent(event);
 
@@ -262,7 +262,7 @@ void VncView::mouseDoubleClickEvent(QMouseEvent *event)
 
 void VncView::mouseReleaseEvent(QMouseEvent *event)
 {
-//     kDebug(5011) << "mouse release" << endl;
+//     kDebug(5011) << "mouse release";
 
     mouseEvent(event);
 
@@ -375,7 +375,7 @@ void VncView::keyEvent(QKeyEvent *e, bool pressed)
 
 void VncView::keyPressEvent(QKeyEvent *event)
 {
-//     kDebug(5011) << "key press" << endl;
+//     kDebug(5011) << "key press";
 
     keyEvent(event, true);
 
@@ -384,7 +384,7 @@ void VncView::keyPressEvent(QKeyEvent *event)
 
 void VncView::keyReleaseEvent(QKeyEvent *event)
 {
-//     kDebug(5011) << "key release" << endl;
+//     kDebug(5011) << "key release";
 
     keyEvent(event, false);
 

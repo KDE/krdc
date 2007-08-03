@@ -85,7 +85,7 @@ void HostPreferencesList::readConfig()
     QFile file(m_filename);
 
     if(!m_doc.setContent(&file)) {
-        kWarning(5010) << "Error reading " << m_filename.toLocal8Bit() << endl;
+        kWarning(5010) << "Error reading " << m_filename.toLocal8Bit();
         return;
     }
 
@@ -107,7 +107,7 @@ void HostPreferencesList::configureHost()
     foreach(QListWidgetItem *selectedItem, selectedItems) {
         QString url = selectedItem->text();
 
-        kDebug(5010) << "Configure host: " << url << endl;
+        kDebug(5010) << "Configure host: " << url;
 
 #ifdef BUILD_VNC
         if (url.startsWith("vnc", Qt::CaseInsensitive))
@@ -130,12 +130,12 @@ void HostPreferencesList::removeHost()
     QList<QListWidgetItem *> selectedItems = hostList->selectedItems();
 
     foreach(QListWidgetItem *selectedItem, selectedItems) {
-        kDebug(5010) << "Remove host: " <<  selectedItem->text()<< endl;
+        kDebug(5010) << "Remove host: " <<  selectedItem->text();
 
         QDomElement root = m_doc.documentElement();
         for(QDomNode n = root.firstChild(); !n.isNull(); n = n.nextSibling()) {
             if (n.toElement().hasAttribute("url") && n.toElement().attribute("url") == selectedItem->text()) {
-                kDebug(5010) << "Found and remove now: " << selectedItem->text() << endl;
+                kDebug(5010) << "Found and remove now: " << selectedItem->text();
                 root.removeChild(n);
             }
         }

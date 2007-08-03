@@ -48,7 +48,7 @@ HostPreferences::HostPreferences(const QString &url, QObject *parent)
     QFile file(m_filename);
 
     if(!m_doc.setContent(&file)) {
-        kWarning(5010) << "Error reading " << m_filename.toLocal8Bit() << endl;
+        kWarning(5010) << "Error reading " << m_filename.toLocal8Bit();
 
         // no xml file found, create a new one
         QDomDocument domDocument("krdc");
@@ -61,7 +61,7 @@ HostPreferences::HostPreferences(const QString &url, QObject *parent)
         domDocument.appendChild(root);
 
         if (!file.open(QFile::WriteOnly | QFile::Truncate))
-            kWarning(5010) << "Error creating " << m_filename.toLocal8Bit() << endl;
+            kWarning(5010) << "Error creating " << m_filename.toLocal8Bit();
 
         QTextStream out(&file);
         domDocument.save(out, 4);
@@ -134,7 +134,7 @@ bool HostPreferences::hostConfigured()
     QDomElement root = m_doc.documentElement();
     for(QDomNode n = root.firstChild(); !n.isNull(); n = n.nextSibling()) {
         if (n.toElement().hasAttribute("url") && n.toElement().attribute("url") == m_url) {
-            kDebug(5010) << "Found: " << m_url.toLocal8Bit() << endl;
+            kDebug(5010) << "Found: " << m_url.toLocal8Bit();
             m_element = n.toElement();
 
             readConfig();

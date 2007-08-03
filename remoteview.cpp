@@ -163,15 +163,15 @@ QString RemoteView::readWalletPassword()
         bool walletOK = m_wallet->hasFolder(krdc_folder);
         if (!walletOK)
             walletOK = m_wallet->createFolder(krdc_folder);
-            kDebug(5010) << "Wallet folder created" << endl;
+            kDebug(5010) << "Wallet folder created";
         if (walletOK) {
-            kDebug(5010) << "Wallet OK" << endl;
+            kDebug(5010) << "Wallet OK";
             m_wallet->setFolder(krdc_folder);
             QString password;
 
             if (m_wallet->hasEntry(m_url.prettyUrl(KUrl::RemoveTrailingSlash)) &&
                 !m_wallet->readPassword(m_url.prettyUrl(KUrl::RemoveTrailingSlash), password)) {
-                kDebug(5010) << "Password read OK" << endl;
+                kDebug(5010) << "Password read OK";
 
                 return password;
             }
@@ -183,7 +183,7 @@ QString RemoteView::readWalletPassword()
 void RemoteView::saveWalletPassword(const QString &password)
 {
     if (m_wallet && m_wallet->isOpen() && !m_wallet->hasEntry(m_url.prettyUrl(KUrl::RemoveTrailingSlash))) {
-        kDebug(5010) << "Write wallet password" << endl;
+        kDebug(5010) << "Write wallet password";
         m_wallet->writePassword(m_url.prettyUrl(KUrl::RemoveTrailingSlash), password);
     }
 }
