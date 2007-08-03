@@ -25,7 +25,7 @@
 
 #include "floatingtoolbar.h"
 
-#include <KImageEffect>
+#include <KDebug>
 
 #include <QApplication>
 #include <QBitmap>
@@ -43,6 +43,9 @@ static const int iconSize = 22;
 static const int buttonSize = 28;
 static const int toolBarGridSize = 28;
 static const int toolBarRBMargin = 2;
+static const qreal toolBarOpacity = 0.8;
+static const int visiblePixelWhenAutoHidden = 3;
+static const int autoHideTimeout = 2000;
 
 class FloatingToolBarPrivate
 {
@@ -65,10 +68,13 @@ public:
     FloatingToolBar::Side anchorSide;
 
     QTimer *animTimer;
+    QTimer *autoHideTimer;
     QPoint currentPosition;
     QPoint endPosition;
     bool hiding;
+    bool toDelete;
     bool visible;
+    bool sticky;
     qreal opacity;
 
     QPixmap backgroundPixmap;
@@ -83,11 +89,17 @@ FloatingToolBar::FloatingToolBar(QWidget *parent, QWidget *anchorWidget)
     d->anchorWidget = anchorWidget;
     d->anchorSide = Left;
     d->hiding = false;
+    d->toDelete = false;
     d->visible = false;
-    d->opacity = 0.8;
+    d->sticky = false;
+    d->opacity = toolBarOpacity;
 
     d->animTimer = new QTimer(this);
     connect(d->animTimer, SIGNAL(timeout()), this, SLOT(slotAnimate()));
+
+    d->autoHideTimer = new QTimer(this);
+    connect(d->autoHideTimer, SIGNAL(timeout()), this, SLOT(hide()));
+    d->autoHideTimer->start(autoHideTimeout);
 
     // apply a filter to get notified when anchor changes geometry
     d->anchorWidget->installEventFilter(this);
@@ -109,6 +121,9 @@ void FloatingToolBar::addAction(QAction *action)
 
     d->buttons.append(button);
 
+    button->setMouseTracking(true);
+    button->installEventFilter(this);
+
     // rebuild toolbar shape and contents
     d->reposition();
 }
@@ -120,9 +135,21 @@ void FloatingToolBar::setSide(Side side)
     d->reposition();
 }
 
+void FloatingToolBar::setSticky(bool sticky)
+{
+    kDebug(5010) << "showAndAnimate: " << sticky;
+    d->sticky = sticky;
+
+    if (sticky)
+        d->autoHideTimer->stop();
+    else
+        d->autoHideTimer->start(autoHideTimeout);
+}
+
 void FloatingToolBar::showAndAnimate()
 {
-    // set parameters for sliding in
+    kDebug(5010) << "showAndAnimate";
+
     d->hiding = false;
 
     show();
@@ -135,7 +162,37 @@ void FloatingToolBar::hideAndDestroy()
 {
     // set parameters for sliding out
     d->hiding = true;
+    d->toDelete = true;
     d->endPosition = d->getOuterPoint();
+
+    // start scrolling out
+    d->animTimer->start(20);
+}
+
+void FloatingToolBar::hide()
+{
+    kDebug(5010) << "hide";
+    // set parameters for sliding out
+
+    if (d->visible) {
+        QPoint diff;
+        switch (d->anchorSide) {
+        case Left:
+            diff = QPoint(visiblePixelWhenAutoHidden, 0);
+            break;
+        case Right:
+            diff = QPoint(-visiblePixelWhenAutoHidden, 0);
+            break;
+        case Top:
+            diff = QPoint(0, visiblePixelWhenAutoHidden);
+            break;
+        case Bottom:
+            diff = QPoint(0, -visiblePixelWhenAutoHidden);
+            break;
+        }
+        d->hiding = true;
+        d->endPosition = d->getOuterPoint() + diff;
+    }
 
     // start scrolling out
     d->animTimer->start(20);
@@ -146,11 +203,15 @@ bool FloatingToolBar::eventFilter(QObject *obj, QEvent *e)
     // if anchorWidget changed geometry reposition toolbar
     if (obj == d->anchorWidget && e->type() == QEvent::Resize) {
         d->animTimer->stop();
-        if (d->hiding)
+        if (d->hiding && d->toDelete)
             deleteLater();
         else
             d->reposition();
     }
+
+    // keep toolbar visible when mouse is on it
+    if (e->type() == QEvent::MouseMove && d->autoHideTimer->isActive())
+        d->autoHideTimer->start(autoHideTimeout);
 
     return false;
 }
@@ -171,6 +232,22 @@ void FloatingToolBar::mousePressEvent(QMouseEvent *e)
 
 void FloatingToolBar::mouseMoveEvent(QMouseEvent *e)
 {
+    // keep toolbar visible when mouse is on it
+    if (d->autoHideTimer->isActive())
+        d->autoHideTimer->start(autoHideTimeout);
+
+    // show the toolbar again when it is auto-hidden
+    if (!d->visible && !d->animTimer->isActive()) {
+        d->hiding = false;
+        show();
+        d->endPosition = QPoint();
+        d->reposition();
+
+        d->animTimer->start(20);
+
+        return;
+    }
+
     if ((QApplication::mouseButtons() & Qt::LeftButton) != Qt::LeftButton)
         return;
 
@@ -277,12 +354,24 @@ void FloatingToolBarPrivate::buildToolBar()
     QPainter bufferPainter(&backgroundPixmap);
     QPalette pal = q->palette();
     // 5.1. draw horizontal/vertical gradient
-    QColor fromColor = topLeft ? pal.color(QPalette::Active, QPalette::Button) : pal.color(QPalette::Active, QPalette::Light);
-    QColor toColor = topLeft ? pal.color(QPalette::Active, QPalette::Light) : pal.color(QPalette::Active, QPalette::Button);
-    QImage gradientPattern = KImageEffect::gradient(
-            vertical ? QSize(myWidth + 1, 1) : QSize(1, myHeight + 1), fromColor, toColor,
-            vertical ? KImageEffect::HorizontalGradient : KImageEffect::VerticalGradient);
-    bufferPainter.drawTiledPixmap(0, 0, myWidth + 1, myHeight + 1, QPixmap::fromImage(gradientPattern));
+    QLinearGradient grad;
+    switch (anchorSide) {
+    case FloatingToolBar::Left:
+        grad = QLinearGradient(0, 1, myWidth + 1, 1);
+        break;
+    case FloatingToolBar::Right:
+        grad = QLinearGradient(myWidth + 1, 1, 0, 1);
+        break;
+    case FloatingToolBar::Top:
+        grad = QLinearGradient(1, 0, 1, myHeight + 1);
+        break;
+    case FloatingToolBar::Bottom:
+        grad = QLinearGradient(1, myHeight + 1, 0, 1);
+        break;
+    }
+    grad.setColorAt(0, pal.color(QPalette::Active, QPalette::Button));
+    grad.setColorAt(1, pal.color(QPalette::Active, QPalette::Light));
+    bufferPainter.fillRect(0, 0, myWidth + 1, myHeight + 1, grad);
     // 5.2. draw rounded border
     bufferPainter.setPen(pal.color(QPalette::Active, QPalette::Dark));
     bufferPainter.setRenderHints(QPainter::Antialiasing);
@@ -389,7 +478,8 @@ void FloatingToolBar::slotAnimate()
         d->animTimer->stop();
         if (d->hiding) {
             d->visible = false;
-            deleteLater();
+            if (d->toDelete)
+                deleteLater();
         }
         else
             d->visible = true;

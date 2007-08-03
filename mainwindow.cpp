@@ -452,6 +452,14 @@ void MainWindow::showRemoteViewToolbar()
         m_toolBar->addAction(actionCollection()->action("view_only"));
         m_toolBar->addAction(actionCollection()->action("show_local_cursor"));
         m_toolBar->addAction(actionCollection()->action("logout"));
+
+        QAction *stickToolBarAction = new QAction(m_toolBar);
+        stickToolBarAction->setCheckable(true);
+        stickToolBarAction->setIcon(KIcon("note2"));
+        stickToolBarAction->setText(i18n("S&tick Toolbar"));
+        connect(stickToolBarAction, SIGNAL(triggered(bool)), m_toolBar, SLOT(setSticky(bool)));
+
+        m_toolBar->addAction(stickToolBarAction);
     }
 
     m_toolBar->showAndAnimate();
@@ -516,7 +524,7 @@ void MainWindow::updateConfiguration()
 
     if (Settings::showStartPage() && !m_showStartPage)
         createStartPage();
-    else if (m_showStartPage) {
+    else if (!Settings::showStartPage() && m_showStartPage) {
         m_tabWidget->removeTab(0);
         m_showStartPage = false;
     }

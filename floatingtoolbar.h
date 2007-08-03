@@ -54,6 +54,9 @@ public:
 signals:
     void orientationChanged(int side);
 
+public slots:
+    void setSticky(bool sticky);
+
 protected:
     bool eventFilter(QObject *o, QEvent *e);
     void paintEvent(QPaintEvent *);
@@ -67,6 +70,7 @@ private:
 
 private slots:
     void slotAnimate();
+    void hide();
 };
 
 #endif
