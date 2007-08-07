@@ -47,6 +47,7 @@ public:
     virtual bool editBookmarkEntry() const;
     virtual bool supportsTabs() const;
     virtual QList<QPair<QString, QString> > currentBookmarkList() const;
+    void addHistoryBookmark();
 
 signals:
     void openUrl(const KUrl &url);
@@ -57,6 +58,8 @@ private slots:
 private:
     KMenu *m_menu;
     KBookmarkMenu *m_bookmarkMenu;
+    KBookmarkManager *m_manager;
+    KBookmarkGroup m_historyGroup;
 
     MainWindow *m_mainWindow;
 };

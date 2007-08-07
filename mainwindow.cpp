@@ -314,6 +314,8 @@ void MainWindow::statusChanged(RemoteView::RemoteStatus status)
             slotSwitchFullscreen();
         }
 
+        m_bookmarkManager->addHistoryBookmark();
+
         break;
     default:
         iconName = "krdc";

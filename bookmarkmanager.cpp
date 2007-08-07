@@ -37,15 +37,53 @@ BookmarkManager::BookmarkManager(KActionCollection *collection, KMenu *menu, Mai
 
     QString file = KStandardDirs::locateLocal("data", "krdc/bookmarks.xml");
 
-    KBookmarkManager *manager = KBookmarkManager::managerForFile(file, "krdc");
+    m_manager = KBookmarkManager::managerForFile(file, "krdc");
 
-    manager->setUpdate(true);
+    m_manager->setUpdate(true);
 
-    m_bookmarkMenu = new KBookmarkMenu(manager, this, m_menu, collection );
+    m_bookmarkMenu = new KBookmarkMenu(m_manager, this, m_menu, collection );
+
+    KBookmarkGroup root = m_manager->root();
+    KBookmark bm = root.first();
+    while (!bm.isNull()) {
+        if (bm.metaDataItem("krdc-history") == "historyfolder") // get it also when user renamed it
+            break;
+        bm = root.next(bm);
+    }
+
+    if(bm.isNull()) {
+        kDebug(5010) << "History folder not found. Create it.";
+        bm = m_manager->root().createNewFolder(m_manager, i18n("History"));
+        bm.setMetaDataItem("krdc-history", "historyfolder");
+    }
+
+    m_historyGroup = bm.toGroup();
 }
 
 BookmarkManager::~BookmarkManager()
 {
+}
+
+void BookmarkManager::addHistoryBookmark()
+{
+    kDebug(5010) << "addHistoryBookmark";
+
+    KBookmark bm = m_historyGroup.first();
+    while (!bm.isNull()) {
+        if (bm.url() == KUrl(currentUrl())) {
+            kDebug(5010) << "Found URL. Move it at the history start.";
+            m_historyGroup.moveItem(bm, KBookmark());
+            m_manager->emitChanged();
+            return;
+        }
+        bm = m_historyGroup.next(bm);
+    }
+
+    if(bm.isNull()) {
+        kDebug(5010) << "Add new history bookmark.";
+        m_historyGroup.moveItem(m_historyGroup.addBookmark(m_manager, currentTitle(), currentUrl()), KBookmark());
+        m_manager->emitChanged();
+    }
 }
 
 void BookmarkManager::openBookmark(const KBookmark &bm, Qt::MouseButtons, Qt::KeyboardModifiers)
