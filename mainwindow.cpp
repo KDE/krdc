@@ -84,7 +84,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(m_tabWidget, SIGNAL(currentChanged(int)), SLOT(tabChanged(int)));
 
-    statusBar()->showMessage(i18n("KRDC started"));
+    statusBar()->showMessage(i18n("KDE Remote Desktop Client started"));
 
     updateActionStatus(); // disable remote view actions
 
@@ -367,7 +367,7 @@ void MainWindow::slotSwitchFullscreen()
         m_fullscreenWindow = 0;
     } else {
         m_fullscreenWindow = new QWidget(this, Qt::Window);
-        m_fullscreenWindow->setWindowTitle(i18n("KRDC Fullscreen"));
+        m_fullscreenWindow->setWindowTitle(i18n("KDE Remote Desktop Client (Fullscreen)"));
 
         QScrollArea *scrollArea = createScrollArea(m_fullscreenWindow, m_remoteViewList.at(m_currentRemoteView));
         scrollArea->setFrameShape(QFrame::NoFrame);
@@ -573,7 +573,7 @@ void MainWindow::slotShowMenubar()
 void MainWindow::closeEvent(QCloseEvent *event)
 {
     if (KMessageBox::warningYesNoCancel(this,
-            i18n("Are you sure you want to close KRDC?"),
+            i18n("Are you sure you want to close the KDE Remote Desktop Client?"),
             i18n("Confirm Quit"),
             KStandardGuiItem::yes(), KStandardGuiItem::no(), KStandardGuiItem::cancel(),
             "AskBeforeExit") == KMessageBox::Yes) {
@@ -602,11 +602,12 @@ void MainWindow::createStartPage()
     m_showStartPage = true;
 
     QWidget *startWidget = new QWidget(this);
+    startWidget->setStyleSheet("QWidget { background-color: palette(base) }");
 
     QVBoxLayout *startLayout = new QVBoxLayout(startWidget);
 
     QLabel *headerLabel = new QLabel(this);
-    headerLabel->setText(i18n("<h1>KRDC</h1><br />What would you like to do?"));
+    headerLabel->setText(i18n("<h1>KDE Remote Desktop Client</h1><br />What would you like to do?"));
 
     QLabel *headerIconLabel = new QLabel(this);
     headerIconLabel->setPixmap(KIcon("krdc").pixmap(48));
