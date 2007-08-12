@@ -50,7 +50,7 @@ HostPreferencesList::HostPreferencesList(QWidget *parent)
 
     configureButton = new KPushButton(this);
     configureButton->setEnabled(false);
-    configureButton->setText(i18n("Configure"));
+    configureButton->setText(i18n("Configure..."));
     configureButton->setIcon(KIcon("configure"));
     connect(configureButton, SIGNAL(clicked()), SLOT(configureHost()));
 

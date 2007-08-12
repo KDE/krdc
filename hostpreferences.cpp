@@ -193,7 +193,7 @@ KDialog *HostPreferences::createDialog(QWidget *widget)
     QVBoxLayout *layout = new QVBoxLayout(mainWidget);
 
     KTitleWidget *titleWidget = new KTitleWidget(dialog);
-    titleWidget->setText(i18n("Host configuration"));
+    titleWidget->setText(i18n("Host Configuration"));
     titleWidget->setPixmap(KIcon("krdc"));
 
     showAgainCheckBox = new QCheckBox(mainWidget);
