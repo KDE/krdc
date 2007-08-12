@@ -38,7 +38,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent, KConfigSkeleton *skeleton)
     QWidget *generalPage = new QWidget(this);
     Ui::General generalUi;
     generalUi.setupUi(generalPage);
-    addPage(generalPage, i18n("General"), "krdc", i18n("General Config"));
+    addPage(generalPage, i18nc("General Config", "General"), "krdc", i18n("General Config"));
 
     HostPreferencesList *hostPreferencesList = new HostPreferencesList(this);
     addPage(hostPreferencesList, i18n("Hosts"), "krdc", i18n("Host Config"));

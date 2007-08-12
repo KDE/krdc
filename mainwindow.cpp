@@ -181,7 +181,7 @@ void MainWindow::setupActions()
     addressLayout->addWidget(addressLabel);
     addressLayout->addWidget(m_addressNavigator, 1);
 
-    KAction *addressLineAction = new KAction(i18n("Address"), this);
+    KAction *addressLineAction = new KAction(i18nc("Title for remote address input action", "Address"), this);
     actionCollection()->addAction("address_line", addressLineAction);
     addressLineAction->setDefaultWidget(addressWidget);
 
@@ -623,7 +623,7 @@ void MainWindow::createStartPage()
     QVBoxLayout *startLayout = new QVBoxLayout(startWidget);
 
     QLabel *headerLabel = new QLabel(this);
-    headerLabel->setText(i18n("<h1>KDE Remote Desktop Client</h1><br />What would you like to do?"));
+    headerLabel->setText(i18n("<h1>KDE Remote Desktop Client</h1><br /><br />What would you like to do?<br />"));
 
     QLabel *headerIconLabel = new QLabel(this);
     headerIconLabel->setPixmap(KIcon("krdc").pixmap(48));

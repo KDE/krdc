@@ -188,6 +188,7 @@ bool HostPreferences::walletSupport()
 KDialog *HostPreferences::createDialog(QWidget *widget)
 {
     KDialog *dialog = new KDialog;
+    dialog->setCaption(i18n("Host Configuration"));
 
     QWidget *mainWidget = new QWidget(dialog);
     QVBoxLayout *layout = new QVBoxLayout(mainWidget);
