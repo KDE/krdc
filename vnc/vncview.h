@@ -49,6 +49,7 @@ public:
     bool isQuitting();
     bool start();
     bool supportsLocalCursor() const;
+    void keyEvent(QKeyEvent *e);
 
 protected:
     void paintEvent(QPaintEvent *event);
@@ -76,7 +77,6 @@ private slots:
     void updateImage(int x, int y, int w, int h);
     void requestPassword();
     void mouseEvent(QMouseEvent *event);
-    void keyEvent(QKeyEvent *e, bool pressed);
 };
 
 #endif

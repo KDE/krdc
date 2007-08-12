@@ -28,6 +28,7 @@
 #include "config/preferencesdialog.h"
 #include "floatingtoolbar.h"
 #include "bookmarkmanager.h"
+#include "specialkeysdialog.h"
 #ifdef BUILD_RDP
 #include "rdpview.h"
 #endif
@@ -140,6 +141,11 @@ void MainWindow::setupActions()
     showLocalCursorAction->setIcon(KIcon("input-mouse"));
     showLocalCursorAction->setText(i18n("S&how Local Cursor"));
     connect(showLocalCursorAction, SIGNAL(triggered(bool)), SLOT(slotShowLocalCursor(bool)));
+
+    QAction *specialKeysDialogAction = actionCollection()->addAction("special_keys_dialog");
+    specialKeysDialogAction->setIcon(KIcon("browser-go"));
+    specialKeysDialogAction->setText(i18n("Open Special Keys Dialog..."));
+    connect(specialKeysDialogAction, SIGNAL(triggered()), SLOT(slotSpecialKeyDialog()));
 
     QAction *quitAction = KStandardAction::quit(this, SLOT(slotQuit()), actionCollection());
     actionCollection()->addAction("quit", quitAction);
@@ -437,6 +443,14 @@ void MainWindow::slotViewOnly(bool viewOnly)
     m_remoteViewList.at(m_currentRemoteView)->setViewOnly(viewOnly);
 }
 
+void MainWindow::slotSpecialKeyDialog()
+{
+    kDebug(5010) << "slotSpecialKeyDialog";
+
+    SpecialKeysDialog dialog(this, m_remoteViewList.at(m_currentRemoteView));
+    dialog.exec();
+}
+
 void MainWindow::showRemoteViewToolbar()
 {
     kDebug(5010) << "showRemoteViewToolbar";
@@ -453,6 +467,7 @@ void MainWindow::showRemoteViewToolbar()
         m_toolBar->addAction(actionCollection()->action("take_screenshot"));
         m_toolBar->addAction(actionCollection()->action("view_only"));
         m_toolBar->addAction(actionCollection()->action("show_local_cursor"));
+        m_toolBar->addAction(actionCollection()->action("special_keys_dialog"));
         m_toolBar->addAction(actionCollection()->action("logout"));
 
         QAction *stickToolBarAction = new QAction(m_toolBar);
@@ -482,6 +497,7 @@ void MainWindow::updateActionStatus()
     actionCollection()->action("switch_fullscreen")->setEnabled(enabled);
     actionCollection()->action("take_screenshot")->setEnabled(enabled);
     actionCollection()->action("view_only")->setEnabled(enabled);
+    actionCollection()->action("special_keys_dialog")->setEnabled(enabled);
     actionCollection()->action("logout")->setEnabled(enabled);
 
     bool viewOnlyChecked = false;

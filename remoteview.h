@@ -30,10 +30,6 @@
 
 #include <QWidget>
 
-#ifndef Q_WS_X11
-class XEvent;
-#endif
-
 /**
  * Generic widget that displays a remote framebuffer.
  * Implement this if you want to add another backend.
@@ -273,10 +269,10 @@ public slots:
     virtual void switchFullscreen(bool on);
 
     /**
-     * Sends a key to the remote server.
-     * @param k the key to send
+     * Sends a QKeyEvent to the remote server.
+     * @param event the key to send
      */
-    virtual void pressKey(XEvent *k);
+    virtual void keyEvent(QKeyEvent *event);
 
 signals:
     /**

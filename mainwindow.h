@@ -68,6 +68,7 @@ private slots:
     void slotLogout();
     void slotViewOnly(bool viewOnly);
     void slotShowLocalCursor(bool showLocalCursor);
+    void slotSpecialKeyDialog();
     void updateActionStatus();
     void updateConfiguration();
     void tabChanged(int index);

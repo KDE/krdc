@@ -226,8 +226,8 @@ void VncView::focusOutEvent(QFocusEvent *event)
 //         kDebug(5011) << "event->reason() == Qt::TabFocusReason";
         event->ignore();
         setFocus(); // get focus back and send tab key event to remote desktop
-        keyEvent(new QKeyEvent(QEvent::KeyPress, Qt::Key_Tab, Qt::NoModifier), true);
-        keyEvent(new QKeyEvent(QEvent::KeyPress, Qt::Key_Tab, Qt::NoModifier), false);
+        keyEvent(new QKeyEvent(QEvent::KeyPress, Qt::Key_Tab, Qt::NoModifier));
+        keyEvent(new QKeyEvent(QEvent::KeyRelease, Qt::Key_Tab, Qt::NoModifier));
     }
 
     event->accept();
@@ -310,7 +310,7 @@ void VncView::wheelEvent(QWheelEvent *event)
     event->accept();
 }
 
-void VncView::keyEvent(QKeyEvent *e, bool pressed)
+void VncView::keyEvent(QKeyEvent *e)
 {
     rfbKeySym k = 0;
     switch (e->key()) {
@@ -370,23 +370,26 @@ void VncView::keyEvent(QKeyEvent *e, bool pressed)
             rfbClientLog("Unknown keysym: %d\n", e->key());
     }
 
-    vncThread.keyEvent(k, pressed);
+    if (k < 26) // workaround for modified keys by pressing CTRL
+        k += 96;
+
+    vncThread.keyEvent(k, (e->type() == QEvent::KeyPress) ? true : false);
 }
 
 void VncView::keyPressEvent(QKeyEvent *event)
 {
-//     kDebug(5011) << "key press";
+//     kDebug(5011) << "key press" << event->key();
 
-    keyEvent(event, true);
+    keyEvent(event);
 
     event->accept();
 }
 
 void VncView::keyReleaseEvent(QKeyEvent *event)
 {
-//     kDebug(5011) << "key release";
+//     kDebug(5011) << "key release" << event->key();
 
-    keyEvent(event, false);
+    keyEvent(event);
 
     event->accept();
 }

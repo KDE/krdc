@@ -111,7 +111,7 @@ int RemoteView::port()
     return m_port;
 }
 
-void RemoteView::pressKey(XEvent *)
+void RemoteView::keyEvent(QKeyEvent *event)
 {
 }
 

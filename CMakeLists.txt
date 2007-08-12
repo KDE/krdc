@@ -45,6 +45,7 @@ set(krdc_SRCS ${krdc_rdp_SRCS} ${krdc_vnc_SRCS}
     config/preferencesdialog.cpp
     floatingtoolbar.cpp
     bookmarkmanager.cpp
+    specialkeysdialog.cpp
     remoteview.cpp
     mainwindow.cpp
     main.cpp
