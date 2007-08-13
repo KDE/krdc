@@ -53,8 +53,9 @@ BookmarkManager::BookmarkManager(KActionCollection *collection, KMenu *menu, Mai
 
     if(bm.isNull()) {
         kDebug(5010) << "History folder not found. Create it.";
-        bm = m_manager->root().createNewFolder(m_manager, i18n("History"));
+        bm = m_manager->root().createNewFolder(i18n("History"));
         bm.setMetaDataItem("krdc-history", "historyfolder");
+        m_manager->emitChanged();
     }
 
     m_historyGroup = bm.toGroup();
@@ -81,7 +82,7 @@ void BookmarkManager::addHistoryBookmark()
 
     if(bm.isNull()) {
         kDebug(5010) << "Add new history bookmark.";
-        m_historyGroup.moveItem(m_historyGroup.addBookmark(m_manager, currentTitle(), currentUrl()), KBookmark());
+        m_historyGroup.moveItem(m_historyGroup.addBookmark(currentTitle(), currentUrl()), KBookmark());
         m_manager->emitChanged();
     }
 }
