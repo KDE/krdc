@@ -27,6 +27,8 @@
 
 #include <KDebug>
 
+#include <QDesktopWidget>
+
 static QStringList keymaps = (QStringList()
     << "ar"
     << "cs"
@@ -167,11 +169,15 @@ void RdpHostPreferences::updateWidthHeight(int index)
         rdpUi.kcfg_Width->setValue(1600);
         break;
     case 5:
+        rdpUi.kcfg_Height->setValue(QApplication::desktop()->screenGeometry().height());
+        rdpUi.kcfg_Width->setValue(QApplication::desktop()->screenGeometry().width());
+        break;
+    case 6:
     default:
         break;
     }
 
-    bool enabled = (index == 5) ? true : false;
+    bool enabled = (index == 6) ? true : false;
 
     rdpUi.kcfg_Height->setEnabled(enabled);
     rdpUi.kcfg_Width->setEnabled(enabled);
