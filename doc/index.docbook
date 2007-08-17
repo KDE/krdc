@@ -1,0 +1,593 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.2-Based Variant V1.1//EN" "dtd/kdex.dtd" [
+  <!ENTITY kappname "&krdc;">
+  <!ENTITY package "kdenetwork">
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % English "INCLUDE"> <!-- ONLY If you are writing non-English 
+                                     original documentation, change 
+                                     the language here -->
+    
+  <!-- Do not define any other entities; instead, use the entities
+       from entities/general.entities and $LANG/user.entities. -->
+]>
+<!-- Based on kdoctemplate v0.9 January 10 2003 -->
+
+<book lang="&language;">
+
+<!-- This header contains all of the meta-information for the document such
+as Authors, publish date, the abstract, and Keywords -->
+
+<bookinfo>
+<title>The &krdc; Handbook</title>
+
+<authorgroup>
+<author>
+&Brad.Hards;
+&Brad.Hards.mail;
+</author>
+<author>
+    <firstname>Urs</firstname>
+    <surname>Wolfer</surname>
+    <affiliation>
+        <address><email>uwolfer @ kde.org</email></address>
+    </affiliation>
+</author>
+<!-- TRANS:ROLES_OF_TRANSLATORS -->
+</authorgroup>
+
+<legalnotice>&FDLNotice;</legalnotice>
+
+<date>2007-08-20</date>
+<releaseinfo>1.0.0</releaseinfo>
+
+<copyright>
+<year>2003, 2007</year>
+</copyright>
+
+<abstract>
+<para>
+&krdc; is a client application that allows you to view or even control
+the desktop session on another machine that is running a compatible server.
+VNC and RDP is supported.
+</para>
+</abstract>
+
+<keywordset>
+<keyword>KDE</keyword>
+<keyword>kdenetwork</keyword>
+<keyword>krfb</keyword>
+<keyword>VNC</keyword>
+<keyword>RFB</keyword>
+<keyword>krdc</keyword>
+<keyword>Desktop Sharing</keyword>
+<keyword>Remote Control</keyword>
+<keyword>Remote Assistance</keyword>
+<keyword>Remote Desktop</keyword>
+<keyword>RDP</keyword>
+<keyword>Remote Administration</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title>Introduction</title>
+
+<para>
+&krdc; is a client application that allows you to view or even control
+the desktop session on another machine that is running a compatible
+server.
+</para>
+
+<para>
+You would typically use &krdc; with the &kde; VNC server, which is
+&krfb;, since it closely matches the special features of &krdc;.
+</para>
+
+<para>
+Please report any problems or feature requests to the &kde; mailing
+lists or file a bug at <ulink
+url="http://bugs.kde.org">http://bugs.kde.org</ulink>. 
+</para>
+</chapter>
+
+<chapter id="what-is-RFB">
+<title>The Remote Frame Buffer protocol</title>
+
+<para>
+This chapter provides a brief description of the Remote Frame Buffer
+protocol used by &krdc; and by other compatible systems. If you are
+already familiar with Remote Frame Buffer, you can safely skip this
+chapter.
+</para>
+
+<para>
+The high level implementation of a system using the Remote Frame
+Buffer protocol is known as Virtual Network Computer, or more often
+just as <acronym>VNC</acronym>.
+</para>
+
+<para>
+Remote Frame Buffer (or <acronym>RFB</acronym> for short) is a simple
+protocol for remote access to graphical user interfaces. It works at
+the frame-buffer level, which roughly corresponds to the rendered
+screen image, which means that it can be applied to all windowing
+systems (including X11, &MacOS; and &Microsoft; &Windows;). Remote
+Frame Buffer applications exist for many platforms, and can often be
+free re-distributed.
+</para>
+
+<para>
+In the Remote Frame Buffer protocol, the application that runs on the
+machine where the user sits (containing the display, keyboard and
+pointer) is called the client. The application that runs on the
+machine where the framebuffer is located (which is running the
+windowing system and applications that the user is remotely
+controlling) is called the server. &krdc; is the &kde; client for the
+Remote Frame Buffer protocol. &krfb; is the &kde; server for the
+Remote Frame Buffer protocol. 
+</para>
+
+<para>
+It takes a reasonable amount of network traffic to send an image of
+the framebuffer, so Remote Frame Buffer works best over high
+bandwidth links, such as a local area network. It is still possible to
+use &krdc; over other links, but performance is unlikely to be as good.
+</para>
+
+</chapter>
+
+<chapter id="using-krdc">
+<title>Using &krdc;</title>
+
+<para>
+It is very easy to use &krdc; - it has a simple interface, as shown in
+the screenshot below.
+</para>
+
+<para>
+<screenshot>
+<screeninfo>Here's a screenshot of &krdc;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="krdc_mainwindow.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>&krdc; main window</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<sect1 id="compatible-versions"><title>Connecting &krdc; to compatible servers</title>
+
+<para>
+&krdc; is a client, and it needs to be used with compatible
+servers. There are different ways to connect to those servers:
+</para>
+
+<itemizedlist>
+<listitem>
+<para>Directly typing the server name (or IP address) into the
+<guilabel>Address:</guilabel> input.</para> 
+</listitem>
+<listitem>
+<para>By using an invitation that you received. &krfb; uses
+invitations, and can send them by email.</para>
+</listitem>
+</itemizedlist>
+
+<para>
+Let's look at each of these in turn.
+</para>
+
+<sect2><title>Server name entry</title>
+<para>
+If you know the host name (or IP address) of the server you want to
+connect to, you can enter it directly into the <guilabel>Addresss:</guilabel> input.
+</para>
+
+<para>
+If you want to connect to a machine named megan, which is
+running a <acronym>VNC</acronym> server on screen 1 (5901), you can enter
+<userinput>megan:1</userinput> and choose VNC as the protocol in the <guilabel>Address:
+</guilabel> input.
+</para>
+
+<para>
+<screenshot>
+<screeninfo>Entering a hostname into &krdc;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="address_input.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>Entering a hostname into &krdc;</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+Similary, if you are using a <acronym>RDP</acronym> server on that
+machine, you can enter <userinput>megan</userinput>. Choose RDP as
+the protocol. RDP does not need the screen number to be specified.
+If the server runs the RDP server not on the default port, you may
+specify it in the following way: <userinput>megan:3910</userinput>
+</para>
+
+</sect2>
+
+<sect2><title>Using an invitation</title>
+<para>
+Within the &krfb; server application, it is possible to send
+invitations over email (and in other ways, although email is the most
+useful). If you receive this type of email invitation, you can just
+click on the link provided in the mail.
+This will start &krdc; if it is not already running, and connect to
+the server specified in the invitation.
+</para>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="connection"><title>What happens when you connect</title>
+
+<para>
+No matter how you select the server to connect to, the next thing that
+happens is that &krdc; asks you about the network connection to the
+server, as shown below:
+</para>
+
+<para>
+<screenshot>
+<screeninfo>&krdc; connection speed selection</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="vnc_host_configuration.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>&krdc; connection speed selection</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+There are three speed settings for the VNC protocol:
+</para>
+
+<itemizedlist>
+<listitem><para>High Quality (LAN, direct connection), which is the
+default, and you should evaluate how well this setting performs before
+selecting a lower performance option that uses less bandwidth.
+</para></listitem>
+<listitem><para>Medium Quality (DSL, Cable, fast
+Internet).</para></listitem>
+<listitem><para>Low Quality (Modem, ISDN, slow
+Internet).</para></listitem>
+</itemizedlist>
+
+<para>
+If you always operate over the same link type, you can deselect the
+checkbox labelled <guilabel>Show this dialog again for this
+host</guilabel>, which means that you won't be asked about the
+connection type again for this host, providing you identify it in the
+same way. For example, if a host has two names, and deselect the
+checkbox when connecting using one name, you won't get asked if you
+connect using that name, although you will be asked if you use the
+other name, or the IP address.
+</para>
+
+<para>
+You select the appropriate speed setting, and select the
+<guibutton>Connect</guibutton> to proceed.
+</para>
+
+<para>
+You can see the connection status in the icon in the tab.
+</para>
+
+<para>
+Depending on the configuration of the server, you may (and almost
+certainly will) need to provide a password to authenticate to the
+server. &krdc; will provide a password dialog similar to that shown
+below.
+</para>
+
+<para>
+&krdc; has the ability to save the password for for further connections
+to the same host. It uses KWallet for doing this. You need to check the
+<guibutton>Remember password (KWallet)</guibutton> checkbox if you like
+to use this feature.
+</para>
+
+<para>
+<screenshot>
+<screeninfo>&krdc; password entry</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="password_entry.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>&krdc; password entry</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+After authentication, you will be connected to the remote server, and
+can begin using &krdc; to observe or control the remote desktop.
+</para>
+
+</sect1>
+
+<sect1 id="controlling-remote"><title>Controlling the remote desktop connection</title>
+
+<para>
+Having connected to the remote server, you would normally use the
+keyboard and mouse to control the windowing system and applications on
+that remote machine.
+</para>
+
+<para>
+You can view the remote desktop either as a full screen, or as a
+window on the local desktop. You can change between these modes using
+icons shown below.
+</para>
+
+<para>
+<screenshot>
+<screeninfo>&krdc; full screen mode selection</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="fullscreen_button.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>&krdc; full screen mode selection</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+<screenshot>
+<screeninfo>&krdc; window mode selection</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="windowmode_button.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>&krdc; window mode selection</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+Full screen mode is normally better when you are helping a remote
+user, because you can see all of what they can see. Window mode is
+most useful when you are working both remotely and locally - perhaps
+referring to some local documentation and then using those
+instructions on the remote machine.
+</para>
+
+<sect2><title>Using window mode</title>
+
+<para>
+In window mode, you can terminate the connection by closing the window, by clicking
+on the logout button.
+</para>
+
+</sect2>
+
+<sect2><title>Using full screen mode</title>
+
+<para>
+In full screen mode, you can chane the appearance of the toolbar.
+The transparency of the toolbar can be changed with scrollwheel.
+</para>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="bookmarks"><title>Bookmarks</title>
+
+<para>
+&krdc; has the ability to manage bookmarks. If you need to connect often to
+the same remote desktop, you can add an entry for this conection to the
+bookmark list. You can do so with a click on <guibutton>Bookmarks -> Add Bookmark</guibutton>.
+</para>
+
+<para>
+<screenshot>
+<screeninfo>&krdc; bookmarks menu</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="bookmarks_menu.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>&krdc; bookmarks menu</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+
+<sect2><title>History Bookmarks</title>
+
+<para>
+&krdc; saves last used remote desktop connections. You can access these special
+bookmarks at <guibutton>Bookmarks -> History</guibutton>. Of couse you can also
+delete a bookmark of this list if you don't need it anymore in the list. Just click
+<guibutton>Delete</guibutton> which appears after a click with the right mouse button on
+the bookmark you would like to delete.
+</para>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="managing-configuration"><title>Managing &krdc; configuration</title>
+<para>
+Using <guibutton>Settings -> Configure KRDC...</guibutton>, you can open a dialog
+to modify the behaviour of &krdc;. Selecting that button brings up a
+window as shown below:
+</para>
+
+<para>
+<screenshot>
+<screeninfo>&krdc; preferences - Host Profiles tab</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="host_preferences.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>&krdc; preferences - <guilabel>Host Profiles</guilabel> tab</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+<screenshot>
+<screeninfo>&krdc; preferences - <guilabel>VNC Defaults</guilabel> tab</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="vnc_preferences.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>&krdc; preferences - <guilabel>VNC
+Defaults</guilabel> profiles tab</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+<screenshot>
+<screeninfo>&krdc; preferences - <guilabel>RDP Defaults</guilabel> tab</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="rdp_preferences.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>&krdc; preferences - <guilabel>RDP
+Defaults</guilabel> profiles tab</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+
+</sect1>
+
+</chapter>
+
+<chapter id="faq">
+<title>Questions and Answers</title>
+
+<!-- (OPTIONAL but recommended) This chapter should include all of the silly
+(and not-so-silly) newbie questions that fill up your mailbox. This chapter
+should be reserved for BRIEF questions and answers! If one question uses more
+than a page or so then it should probably be part of the
+"Using this Application" chapter instead. You should use links to
+cross-reference questions to the parts of your documentation that answer them.
+This is also a great place to provide pointers to other FAQ's if your users
+must do some complicated configuration on other programs in order for your
+application work. -->
+
+
+&reporting.bugs;
+&updating.documentation;
+
+<qandaset id="faqlist">
+<qandaentry>
+<question>
+<para>Why does RDP support not work?</para>
+</question>
+<answer>
+<para>RDP support in &krdc; depends on rdesktop. Make sure that you have installed
+this runtime dependency.
+</para>
+</answer>
+</qandaentry>
+</qandaset>
+
+</chapter>
+
+<chapter id="credits">
+
+<!-- Include credits for the programmers, documentation writers, and
+contributors here. The license for your software should then be included below
+the credits with a reference to the appropriate license file included in the KDE
+distribution. -->
+
+<title>Credits and License</title>
+
+<para>
+&krdc;
+</para>
+<para>
+The &krdc; project has been started by Tim Jansen <email>tim@tjansen.de</email>.
+As a Google Summer of Code 2007 project, Urs Wolfer <email>uwolfer @ kde.org</email>
+has completely rewritten &krdc;. Thanks to Google for making this possible, and thanks
+to the great mentor of this Summer of Code project, &Brad.Hards; &Brad.Hards.mail;.
+</para>
+
+<para>
+Documentation Copyright &copy; 2003 &Brad.Hards; &Brad.Hards.mail;
+Documentation Copyright &copy; 2007 Urs Wolfer <email>uwolfer @ kde.org</email>
+</para>
+
+<!-- TRANS:CREDIT_FOR_TRANSLATORS -->
+
+&underFDL;               <!-- FDL: do not remove -->
+
+&underGPL;        	 <!-- GPL License -->
+
+</chapter>
+
+<appendix id="installation">
+<title>Installation</title>
+
+<sect1 id="getting-krdc">
+<title>How to obtain &krdc;</title>
+
+<!-- This first entity contains boiler plate for applications that are
+part of KDE CVS.  You should remove it if you are releasing your
+application -->
+
+&install.intro.documentation;
+
+</sect1>
+
+<sect1 id="compilation">
+<title>Compilation and Installation</title>
+
+<!-- This entity contains the boilerplate text for standard -->
+<!-- compilation instructions.  If your application requires any -->
+<!-- special handling, remove it, and replace with your own text. -->
+
+&install.compile.documentation;
+
+</sect1>
+
+</appendix>
+
+&documentation.index;
+</book>
+
+<!--
+Local Variables:
+mode: xml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+
+vim:tabstop=2:shiftwidth=2:expandtab 
+-->
