@@ -44,6 +44,8 @@ int main(int argc, char **argv)
     aboutData.addAuthor(ki18n("Urs Wolfer"), ki18n("Developer, Maintainer"), "uwolfer@kde.org");
     aboutData.addAuthor(ki18n("Tim Jansen"), ki18n("Former Developer"), "tim@tjansen.de");
     aboutData.addAuthor(ki18n("Arend van Beelen jr."), ki18n("Initial RDP backend"), "arend@auton.nl");
+    aboutData.addCredit(ki18n("Brad Hards"), ki18n("Google Summer of Code 2007 KRDC project mentor"),
+                        "bradh@frogmouth.net");
     aboutData.addCredit(ki18n("LibVNCServer / LibVNCClient developers"), ki18n("VNC client library"),
                         "libvncserver-common@lists.sf.net");
 

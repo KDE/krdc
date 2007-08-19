@@ -626,7 +626,7 @@ void MainWindow::createStartPage()
     headerLabel->setText(i18n("<h1>KDE Remote Desktop Client</h1><br /><br />What would you like to do?<br />"));
 
     QLabel *headerIconLabel = new QLabel(this);
-    headerIconLabel->setPixmap(KIcon("krdc").pixmap(48));
+    headerIconLabel->setPixmap(KIcon("krdc").pixmap(128));
 
     QHBoxLayout *headerLayout = new QHBoxLayout;
     headerLayout->setMargin(20);
