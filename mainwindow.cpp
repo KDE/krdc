@@ -161,7 +161,15 @@ void MainWindow::setupActions()
     m_menubarAction->setChecked(!menuBar()->isHidden());
     actionCollection()->addAction("settings_showmenubar", m_menubarAction);
 
-    m_addressNavigator = new KUrlNavigator(0, KUrl("vnc://"), this);
+    QString initialProtocol;
+#ifdef BUILD_RDP
+    initialProtocol = "rdp";
+#endif
+#ifdef BUILD_VNC
+    initialProtocol = "vnc";
+#endif
+
+    m_addressNavigator = new KUrlNavigator(0, KUrl(initialProtocol + "://"), this);
     m_addressNavigator->setCustomProtocols(QStringList()
 #ifdef BUILD_VNC
                                            << "vnc"

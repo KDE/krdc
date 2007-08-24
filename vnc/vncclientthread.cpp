@@ -112,7 +112,7 @@ extern void output(const char *format, ...)
 
     va_end(args);
 
-    kDebug(5011) << message.toLocal8Bit().constData();
+    kDebug(5011) << message;
 
     if (message.contains("Could not open"))
         kDebug(5011) << "Server not found!";
@@ -215,7 +215,10 @@ void VncClientThread::run()
 
     cl->serverHost = host;
 
-    if(m_port >= 0 && m_port < 100) // the user most likely used the short form (e.g. :1)
+    if (m_port < 0 || !m_port) // port is invalid or empty...
+        m_port = 5900; // fallback: try an often used VNC port
+
+    if (m_port >= 0 && m_port < 100) // the user most likely used the short form (e.g. :1)
         m_port += 5900;
     cl->serverPort = m_port;
 

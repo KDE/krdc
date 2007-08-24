@@ -117,15 +117,17 @@ bool RdpView::start()
     m_container->setWindowTitle(m_caption);
 
     if (m_hostPreferences->walletSupport()) {
-        QString userName;
-        bool ok = true;
+        if (m_url.userName().isEmpty()) {
+            QString userName;
+            bool ok = true;
 
-        userName = KInputDialog::getText(i18n("Enter Username"),
-                                        i18n("Please enter the username you would like to use for login."),
-                                        QString(), &ok, this);
+            userName = KInputDialog::getText(i18n("Enter Username"),
+                                             i18n("Please enter the username you would like to use for login."),
+                                             QString(), &ok, this);
 
-        if (ok)
-            m_url.setUserName(userName);
+            if (ok)
+                m_url.setUserName(userName);
+        }
 
         if(!m_url.userName().isEmpty()) {
             QString walletPassword = readWalletPassword();
