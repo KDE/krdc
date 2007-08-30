@@ -130,6 +130,8 @@ VncClientThread::VncClientThread()
 
 VncClientThread::~VncClientThread()
 {
+    stop();
+    wait();
 }
 
 void VncClientThread::setHost(const QString &host)
@@ -208,12 +210,7 @@ void VncClientThread::run()
     cl->GotFrameBufferUpdate = updatefb;
     rfbClientSetClientData(cl, 0, this);
 
-    // make a copy of the host string...
-    QByteArray hostByteArray(m_host.toUtf8().constData());
-    char *host = (char*) malloc(hostByteArray.size());
-    strcpy(host, hostByteArray);
-
-    cl->serverHost = host;
+    cl->serverHost = strdup(m_host.toUtf8().constData());
 
     if (m_port < 0 || !m_port) // port is invalid or empty...
         m_port = 5900; // fallback: try an often used VNC port
