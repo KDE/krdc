@@ -210,7 +210,8 @@ void MainWindow::slotNewConnection(const KUrl &newUrl, bool switchFullscreenWhen
 
     KUrl url = newUrl.isEmpty() ? m_addressNavigator->uncommittedUrl() : newUrl;
 
-    if (!url.isValid()) {
+    if (!url.isValid() || (url.host().isEmpty() && url.port()<0)
+        || !url.path().isEmpty()) {
         KMessageBox::error(this,
                            i18n("The entered address does not have the required form."),
                            i18n("Malformed URL"));
