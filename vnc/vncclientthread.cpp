@@ -27,7 +27,7 @@
 
 #include <QMutexLocker>
 
-extern rfbBool newclient(rfbClient *cl)
+static rfbBool newclient(rfbClient *cl)
 {
     int width = cl->width, height = cl->height, depth = cl->format.bitsPerPixel;
     int size = width * height * (depth / 8);
@@ -90,7 +90,7 @@ extern void updatefb(rfbClient* cl, int x, int y, int w, int h)
     t->emitUpdated(x, y, w, h);
 }
 
-extern char *passwd(rfbClient *cl)
+static char *passwd(rfbClient *cl)
 {
     Q_UNUSED(cl);
     kDebug(5011) << "password request";
@@ -225,18 +225,23 @@ void VncClientThread::run()
     locker.unlock();
 
     while (!m_stopped) {
-        if (m_cleanup) {
-            rfbClientCleanup(cl);
-            return;
-        }
+        if (m_cleanup)
+            break;
 
         int i = WaitForMessage(cl, 500);
         if (i < 0)
-            return;
+            break;
         if (i)
             if(!HandleRFBServerMessage(cl))
-                return;
+                break;
     }
+
+    locker.relock();
+    delete [] cl->frameBuffer;
+    cl->frameBuffer = 0;
+    rfbClientCleanup(cl);
+    m_stopped = true;
+    m_cleanup = true;
 }
 
 void VncClientThread::mouseEvent(int x, int y, int buttonMask)
