@@ -44,14 +44,14 @@ public:
     const QImage image(int x = 0, int y = 0, int w = 0, int h = 0);
     void setImage(const QImage &img);
     void emitUpdated(int x, int y, int w, int h);
-    void emitPasswordRequest();
     void stop();
     void setHost(const QString &host);
     void setPort(int port);
-    void setPassword(const QString &password);
-    const QString password() const;
     void setQuality(RemoteView::Quality quality);
-    const RemoteView::Quality quality();
+    void setPassword(const QString &password) { m_password = password; }
+    const QString password() const { return m_password; }
+
+    RemoteView::Quality quality() const;
 
 signals:
     void imageUpdated(int x, int y, int w, int h);
@@ -60,21 +60,24 @@ signals:
 public slots:
     void mouseEvent(int x, int y, int buttonMask);
     void keyEvent(int key, bool pressed);
-    void cleanup();
 
 protected:
     void run();
 
 private:
+    static char* passwdHandler(rfbClient *cl);
+    static void outputHandler(const char *format, ...);
+
     QImage m_image;
     rfbClient *cl;
-    volatile bool m_stopped;
-    volatile bool m_cleanup;
     QString m_host;
     QString m_password;
     int m_port;
     QMutex mutex;
     RemoteView::Quality m_quality;
+
+    volatile bool m_stopped;
+    volatile bool m_passwordError;
 };
 
 #endif

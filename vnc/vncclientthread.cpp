@@ -90,19 +90,19 @@ extern void updatefb(rfbClient* cl, int x, int y, int w, int h)
     t->emitUpdated(x, y, w, h);
 }
 
-static char *passwd(rfbClient *cl)
+char *VncClientThread::passwdHandler(rfbClient *cl)
 {
-    Q_UNUSED(cl);
-    kDebug(5011) << "password request";
+    kDebug(5011) << "password request" << kdBacktrace() ;
 
     VncClientThread *t = (VncClientThread*)rfbClientGetClientData(cl, 0);
 
-    t->emitPasswordRequest();
+    t->passwordRequest();
+    t->m_passwordError = true;
 
     return strdup(t->password().toLocal8Bit());
 }
 
-extern void output(const char *format, ...)
+void VncClientThread::outputHandler(const char *format, ...)
 {
     va_list args;
     va_start(args, format);
@@ -125,7 +125,6 @@ VncClientThread::VncClientThread()
 {
     QMutexLocker locker(&mutex);
     m_stopped = false;
-    m_cleanup = false;
 }
 
 VncClientThread::~VncClientThread()
@@ -146,24 +145,14 @@ void VncClientThread::setPort(int port)
     m_port = port;
 }
 
-void VncClientThread::setPassword(const QString &password)
-{
-    m_password = password;
-}
-
 void VncClientThread::setQuality(RemoteView::Quality quality)
 {
     m_quality = quality;
 }
 
-const RemoteView::Quality VncClientThread::quality()
+RemoteView::Quality VncClientThread::quality() const
 {
     return m_quality;
-}
-
-const QString VncClientThread::password() const
-{
-    return m_password;
 }
 
 void VncClientThread::setImage(const QImage &img)
@@ -187,11 +176,6 @@ void VncClientThread::emitUpdated(int x, int y, int w, int h)
     emit imageUpdated(x, y, w, h);
 }
 
-void VncClientThread::emitPasswordRequest()
-{
-    emit passwordRequest();
-}
-
 void VncClientThread::stop()
 {
     QMutexLocker locker(&mutex);
@@ -201,33 +185,43 @@ void VncClientThread::stop()
 void VncClientThread::run()
 {
     QMutexLocker locker(&mutex);
-    rfbClientLog = output;
-    rfbClientErr = output;
-    cl = rfbGetClient(8, 3, 4);
-    cl->MallocFrameBuffer = newclient;
-    cl->canHandleNewFBSize = true;
-    cl->GetPassword = passwd;
-    cl->GotFrameBufferUpdate = updatefb;
-    rfbClientSetClientData(cl, 0, this);
 
-    cl->serverHost = strdup(m_host.toUtf8().constData());
+    for (int c = 0; c < 3; ++c) {
+        m_passwordError = false;
 
-    if (m_port < 0 || !m_port) // port is invalid or empty...
-        m_port = 5900; // fallback: try an often used VNC port
+        rfbClientLog = outputHandler;
+        rfbClientErr = outputHandler;
+        cl = rfbGetClient(8, 3, 4);
+        cl->MallocFrameBuffer = newclient;
+        cl->canHandleNewFBSize = true;
+        cl->GetPassword = passwdHandler;
+        cl->GotFrameBufferUpdate = updatefb;
+        rfbClientSetClientData(cl, 0, this);
 
-    if (m_port >= 0 && m_port < 100) // the user most likely used the short form (e.g. :1)
-        m_port += 5900;
-    cl->serverPort = m_port;
+        cl->serverHost = strdup(m_host.toUtf8().constData());
 
-    if(!rfbInitClient(cl, 0, 0))
+        if (m_port < 0 || !m_port) // port is invalid or empty...
+            m_port = 5900; // fallback: try an often used VNC port
+
+        if (m_port >= 0 && m_port < 100) // the user most likely used the short form (e.g. :1)
+            m_port += 5900;
+        cl->serverPort = m_port;
+
+        kDebug() << "--------------------- trying init ---------------------";
+
+        if(rfbInitClient(cl, 0, 0))
+            break;
+
+        if (m_passwordError)
+            continue;
+
         return;
+    }
 
     locker.unlock();
 
+    // Main VNC event loop
     while (!m_stopped) {
-        if (m_cleanup)
-            break;
-
         int i = WaitForMessage(cl, 500);
         if (i < 0)
             break;
@@ -236,12 +230,12 @@ void VncClientThread::run()
                 break;
     }
 
+    // Cleanup allocated ressources
     locker.relock();
     delete [] cl->frameBuffer;
     cl->frameBuffer = 0;
     rfbClientCleanup(cl);
     m_stopped = true;
-    m_cleanup = true;
 }
 
 void VncClientThread::mouseEvent(int x, int y, int buttonMask)
@@ -252,12 +246,6 @@ void VncClientThread::mouseEvent(int x, int y, int buttonMask)
 void VncClientThread::keyEvent(int key, bool pressed)
 {
     SendKeyEvent(cl, key, pressed);
-}
-
-void VncClientThread::cleanup()
-{
-    QMutexLocker locker(&mutex);
-    m_cleanup = true;
 }
 
 #include "vncclientthread.moc"

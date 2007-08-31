@@ -101,8 +101,6 @@ void VncView::startQuitting()
     m_quitFlag = true;
 
     if (connected) {
-        vncThread.cleanup();
-
         vncThread.stop();
     } else {
         vncThread.quit();
