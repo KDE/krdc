@@ -56,6 +56,7 @@ public:
 signals:
     void imageUpdated(int x, int y, int w, int h);
     void passwordRequest();
+    void outputMessage(const QString &message);
 
 public slots:
     void mouseEvent(int x, int y, int buttonMask);
@@ -78,6 +79,9 @@ private:
 
     volatile bool m_stopped;
     volatile bool m_passwordError;
+
+private slots:
+    void checkOutputMessage();
 };
 
 #endif

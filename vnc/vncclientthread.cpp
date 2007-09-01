@@ -24,8 +24,12 @@
 #include "vncclientthread.h"
 
 #include <KDebug>
+#include <KLocale>
 
 #include <QMutexLocker>
+#include <QTimer>
+
+static QString outputMessageString;
 
 static rfbBool newclient(rfbClient *cl)
 {
@@ -92,7 +96,7 @@ extern void updatefb(rfbClient* cl, int x, int y, int w, int h)
 
 char *VncClientThread::passwdHandler(rfbClient *cl)
 {
-    kDebug(5011) << "password request" << kdBacktrace() ;
+    kDebug(5011) << "password request" << kBacktrace();
 
     VncClientThread *t = (VncClientThread*)rfbClientGetClientData(cl, 0);
 
@@ -112,25 +116,42 @@ void VncClientThread::outputHandler(const char *format, ...)
 
     va_end(args);
 
+    message = message.trimmed();
+
     kDebug(5011) << message;
 
-    if (message.contains("Could not open"))
-        kDebug(5011) << "Server not found!";
+    if ((message.contains("Couldn't convert ")) ||
+        (message.contains("Unable to connect to VNC server")))
+        outputMessageString = i18n("Server not found.");
 
-    if (message.contains("VNC authentication succeeded"))
-        kDebug(5011) << "Password OK";
+    if (message.contains("VNC connection failed: Authentication failed, too many tries"))
+        outputMessageString = i18n("VNC authentication faile because of too many tries.");
 }
 
 VncClientThread::VncClientThread()
 {
     QMutexLocker locker(&mutex);
     m_stopped = false;
+
+    QTimer *outputMessagesCheck = new QTimer(this);
+    outputMessagesCheck->setInterval(500);
+    connect(outputMessagesCheck, SIGNAL(timeout()), this, SLOT(checkOutputMessage()));
+    outputMessagesCheck->start();
 }
 
 VncClientThread::~VncClientThread()
 {
     stop();
-    wait();
+    wait(500);
+}
+
+void VncClientThread::checkOutputMessage()
+{
+    if (!outputMessageString.isEmpty()) {
+        kDebug(5011) << outputMessageString;
+        outputMessage(outputMessageString);
+        outputMessageString.clear();
+    }
 }
 
 void VncClientThread::setHost(const QString &host)
@@ -207,9 +228,9 @@ void VncClientThread::run()
             m_port += 5900;
         cl->serverPort = m_port;
 
-        kDebug() << "--------------------- trying init ---------------------";
+        kDebug(5011) << "--------------------- trying init ---------------------";
 
-        if(rfbInitClient(cl, 0, 0))
+        if (rfbInitClient(cl, 0, 0))
             break;
 
         if (m_passwordError)

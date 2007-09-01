@@ -24,6 +24,7 @@
 #include "vncview.h"
 
 #include <KLocale>
+#include <KMessageBox>
 #include <KPasswordDialog>
 
 #include <QImage>
@@ -48,6 +49,7 @@ VncView::VncView(QWidget *parent,
 
     connect(&vncThread, SIGNAL(imageUpdated(int, int, int, int)), this, SLOT(updateImage(int, int, int, int)), Qt::BlockingQueuedConnection);
     connect(&vncThread, SIGNAL(passwordRequest()), this, SLOT(requestPassword()), Qt::BlockingQueuedConnection);
+    connect(&vncThread, SIGNAL(outputMessage(QString)), this, SLOT(outputMessage(QString)));
 }
 
 VncView::~VncView()
@@ -160,12 +162,14 @@ void VncView::requestPassword()
     dialog.setPrompt(i18n("Access to the system requires a password."));
     if (dialog.exec() == KPasswordDialog::Accepted) {
         vncThread.setPassword(dialog.password());
-
-        if (m_hostPreferences->walletSupport()) {
-            //TODO: save it only when the password has also been accepted.
-            saveWalletPassword(dialog.password());
-        }
     }
+}
+
+void VncView::outputMessage(const QString &message)
+{
+    kDebug(5011) << message;
+
+    KMessageBox::error(this, message, i18n("VNC failure"));
 }
 
 void VncView::updateImage(int x, int y, int w, int h)
@@ -190,6 +194,10 @@ void VncView::updateImage(int x, int y, int w, int h)
         emit changeSize(vncThread.image().width(), vncThread.image().height());
         emit connected();
         m_initDone = true;
+
+        if (m_hostPreferences->walletSupport()) {
+            saveWalletPassword(vncThread.password());
+        }
     }
 
     m_repaint = true;

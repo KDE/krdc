@@ -76,6 +76,7 @@ private:
 private slots:
     void updateImage(int x, int y, int w, int h);
     void requestPassword();
+    void outputMessage(const QString &message);
     void mouseEvent(QMouseEvent *event);
 };
 

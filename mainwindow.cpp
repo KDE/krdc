@@ -91,6 +91,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     if (Settings::showStartPage())
         createStartPage();
+
+    setAutoSaveSettings(); // e.g toolbar position, mainwindow size, ...
 }
 
 MainWindow::~MainWindow()
