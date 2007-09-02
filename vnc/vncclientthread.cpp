@@ -124,8 +124,15 @@ void VncClientThread::outputHandler(const char *format, ...)
         (message.contains("Unable to connect to VNC server")))
         outputMessageString = i18n("Server not found.");
 
-    if (message.contains("VNC connection failed: Authentication failed, too many tries"))
-        outputMessageString = i18n("VNC authentication faile because of too many tries.");
+    if ((message.contains("VNC connection failed: Authentication failed, too many tries")) ||
+        (message.contains("VNC connection failed: Too many authentication failures")))
+        outputMessageString = i18n("VNC authentication failed because of too many authentication tries.");
+
+    if (message.contains("VNC connection failed: Authentication failed"))
+        outputMessageString = i18n("VNC authentication failed.");
+
+    if (message.contains("VNC server closed connection"))
+        outputMessageString = i18n("VNC server closed connection.");
 }
 
 VncClientThread::VncClientThread()
@@ -133,10 +140,10 @@ VncClientThread::VncClientThread()
     QMutexLocker locker(&mutex);
     m_stopped = false;
 
-    QTimer *outputMessagesCheck = new QTimer(this);
-    outputMessagesCheck->setInterval(500);
-    connect(outputMessagesCheck, SIGNAL(timeout()), this, SLOT(checkOutputMessage()));
-    outputMessagesCheck->start();
+    QTimer *outputMessagesCheckTimer = new QTimer(this);
+    outputMessagesCheckTimer->setInterval(500);
+    connect(outputMessagesCheckTimer, SIGNAL(timeout()), this, SLOT(checkOutputMessage()));
+    outputMessagesCheckTimer->start();
 }
 
 VncClientThread::~VncClientThread()
@@ -149,8 +156,11 @@ void VncClientThread::checkOutputMessage()
 {
     if (!outputMessageString.isEmpty()) {
         kDebug(5011) << outputMessageString;
-        outputMessage(outputMessageString);
+        QString message = outputMessageString;
         outputMessageString.clear();
+        // show authentication failure error only after the 3rd unsuccessful try
+        if ((message != i18n("VNC authentication failed.")) || m_passwordError)
+            outputMessage(message);
     }
 }
 
@@ -251,7 +261,7 @@ void VncClientThread::run()
                 break;
     }
 
-    // Cleanup allocated ressources
+    // Cleanup allocated resources
     locker.relock();
     delete [] cl->frameBuffer;
     cl->frameBuffer = 0;

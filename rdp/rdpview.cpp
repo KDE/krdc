@@ -136,7 +136,7 @@ bool RdpView::start()
                 m_url.setPassword(walletPassword);
             else {
                 KPasswordDialog dialog(this);
-                dialog.setPixmap(KIcon("password").pixmap(48));
+                dialog.setPixmap(KIcon("dialog-password").pixmap(48));
                 dialog.setPrompt(i18n("Access to the system requires a password."));
                 if (dialog.exec() == KPasswordDialog::Accepted) {
                     m_url.setPassword(dialog.password());

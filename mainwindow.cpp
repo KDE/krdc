@@ -314,7 +314,7 @@ void MainWindow::statusChanged(RemoteView::RemoteStatus status)
         message = i18n("Connecting to %1", host);
         break;
     case RemoteView::Authenticating:
-        iconName = "password";
+        iconName = "dialog-password";
         message = i18n("Authenticating at %1", host);
         break;
     case RemoteView::Preparing:
