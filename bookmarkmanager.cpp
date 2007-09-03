@@ -73,7 +73,7 @@ void BookmarkManager::addHistoryBookmark()
     while (!bm.isNull()) {
         if (bm.url() == KUrl(currentUrl())) {
             kDebug(5010) << "Found URL. Move it at the history start.";
-            m_historyGroup.moveItem(bm, KBookmark());
+            m_historyGroup.moveBookmark(bm, KBookmark());
             m_manager->emitChanged();
             return;
         }
@@ -82,7 +82,7 @@ void BookmarkManager::addHistoryBookmark()
 
     if(bm.isNull()) {
         kDebug(5010) << "Add new history bookmark.";
-        m_historyGroup.moveItem(m_historyGroup.addBookmark(currentTitle(), currentUrl()), KBookmark());
+        m_historyGroup.moveBookmark(m_historyGroup.addBookmark(currentTitle(), currentUrl()), KBookmark());
         m_manager->emitChanged();
     }
 }
