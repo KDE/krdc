@@ -285,6 +285,8 @@ void MainWindow::resizeTabWidget(int w, int h)
     if ((newWindowSize.height() >= desktopSize.height()) || (newWindowSize.width() >= desktopSize.width())) {
         kDebug(5010) << "remote desktop needs more place than available -> show window maximized";
         showMaximized();
+        QCoreApplication::processEvents();
+        m_remoteViewList.at(m_currentRemoteView)->repaint(); // be sure there are no artifacts on the remote view
         return;
     }
 

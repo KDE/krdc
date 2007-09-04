@@ -31,25 +31,21 @@
 #include <QPainter>
 #include <QMouseEvent>
 
-VncView::VncView(QWidget *parent,
-                 const KUrl &url,
-                 RemoteView::Quality quality)
-  : RemoteView(parent)
+VncView::VncView(QWidget *parent, const KUrl &url)
+  : RemoteView(parent),
+    m_initDone(false),
+    m_buttonMask(0),
+    m_repaint(false),
+    m_quitFlag(false),
+    m_firstPasswordTry(true)
 {
     m_url = url;
     m_host = url.host();
     m_port = url.port();
-    m_quality = quality;
-
-    m_initDone = false;
-    m_repaint = false;
-    m_quitFlag = false;
-
-    m_buttonMask = 0;
 
     connect(&vncThread, SIGNAL(imageUpdated(int, int, int, int)), this, SLOT(updateImage(int, int, int, int)), Qt::BlockingQueuedConnection);
     connect(&vncThread, SIGNAL(passwordRequest()), this, SLOT(requestPassword()), Qt::BlockingQueuedConnection);
-    connect(&vncThread, SIGNAL(outputMessage(QString)), this, SLOT(outputMessage(QString)));
+    connect(&vncThread, SIGNAL(outputErrorMessage(QString)), this, SLOT(outputErrorMessage(QString)));
 }
 
 VncView::~VncView()
@@ -159,15 +155,19 @@ void VncView::requestPassword()
 
     KPasswordDialog dialog(this);
     dialog.setPixmap(KIcon("dialog-password").pixmap(48));
-    dialog.setPrompt(i18n("Access to the system requires a password."));
+    dialog.setPrompt(m_firstPasswordTry ? i18n("Access to the system requires a password.")
+                                        : i18n("Authentication failed. Please try again."));
     if (dialog.exec() == KPasswordDialog::Accepted) {
+        m_firstPasswordTry = false;
         vncThread.setPassword(dialog.password());
     }
 }
 
-void VncView::outputMessage(const QString &message)
+void VncView::outputErrorMessage(const QString &message)
 {
     kDebug(5011) << message;
+
+    startQuitting();
 
     KMessageBox::error(this, message, i18n("VNC failure"));
 }

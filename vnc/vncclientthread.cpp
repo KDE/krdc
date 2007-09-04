@@ -29,7 +29,7 @@
 #include <QMutexLocker>
 #include <QTimer>
 
-static QString outputMessageString;
+static QString outputErrorMessageString;
 
 static rfbBool newclient(rfbClient *cl)
 {
@@ -122,17 +122,17 @@ void VncClientThread::outputHandler(const char *format, ...)
 
     if ((message.contains("Couldn't convert ")) ||
         (message.contains("Unable to connect to VNC server")))
-        outputMessageString = i18n("Server not found.");
+        outputErrorMessageString = i18n("Server not found.");
 
     if ((message.contains("VNC connection failed: Authentication failed, too many tries")) ||
         (message.contains("VNC connection failed: Too many authentication failures")))
-        outputMessageString = i18n("VNC authentication failed because of too many authentication tries.");
+        outputErrorMessageString = i18n("VNC authentication failed because of too many authentication tries.");
 
     if (message.contains("VNC connection failed: Authentication failed"))
-        outputMessageString = i18n("VNC authentication failed.");
+        outputErrorMessageString = i18n("VNC authentication failed.");
 
     if (message.contains("VNC server closed connection"))
-        outputMessageString = i18n("VNC server closed connection.");
+        outputErrorMessageString = i18n("VNC server closed connection.");
 }
 
 VncClientThread::VncClientThread()
@@ -140,10 +140,10 @@ VncClientThread::VncClientThread()
     QMutexLocker locker(&mutex);
     m_stopped = false;
 
-    QTimer *outputMessagesCheckTimer = new QTimer(this);
-    outputMessagesCheckTimer->setInterval(500);
-    connect(outputMessagesCheckTimer, SIGNAL(timeout()), this, SLOT(checkOutputMessage()));
-    outputMessagesCheckTimer->start();
+    QTimer *outputErrorMessagesCheckTimer = new QTimer(this);
+    outputErrorMessagesCheckTimer->setInterval(500);
+    connect(outputErrorMessagesCheckTimer, SIGNAL(timeout()), this, SLOT(checkOutputErrorMessage()));
+    outputErrorMessagesCheckTimer->start();
 }
 
 VncClientThread::~VncClientThread()
@@ -152,15 +152,15 @@ VncClientThread::~VncClientThread()
     wait(500);
 }
 
-void VncClientThread::checkOutputMessage()
+void VncClientThread::checkOutputErrorMessage()
 {
-    if (!outputMessageString.isEmpty()) {
-        kDebug(5011) << outputMessageString;
-        QString message = outputMessageString;
-        outputMessageString.clear();
+    if (!outputErrorMessageString.isEmpty()) {
+        kDebug(5011) << outputErrorMessageString;
+        QString errorMessage = outputErrorMessageString;
+        outputErrorMessageString.clear();
         // show authentication failure error only after the 3rd unsuccessful try
-        if ((message != i18n("VNC authentication failed.")) || m_passwordError)
-            outputMessage(message);
+        if ((errorMessage != i18n("VNC authentication failed.")) || m_passwordError)
+            outputErrorMessage(errorMessage);
     }
 }
 
@@ -217,7 +217,7 @@ void VncClientThread::run()
 {
     QMutexLocker locker(&mutex);
 
-    for (int c = 0; c < 3; ++c) {
+    while (!m_stopped) { // try to connect as long as the server allows
         m_passwordError = false;
 
         rfbClientLog = outputHandler;
@@ -257,7 +257,7 @@ void VncClientThread::run()
         if (i < 0)
             break;
         if (i)
-            if(!HandleRFBServerMessage(cl))
+            if (!HandleRFBServerMessage(cl))
                 break;
     }
 
