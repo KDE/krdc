@@ -679,8 +679,8 @@ void MainWindow::newVncConnection()
 
     QToolTip::showText(m_addressNavigator->pos() + pos() + QPoint(m_addressNavigator->width(),
                                                                   m_addressNavigator->height() + 20),
-                       i18n("Enter here the address.<br />"
-                            "<i>Example: vncserver:1 (host:port / screen)</i>"), this);
+                       i18n("<html>Enter here the address.<br />"
+                            "<i>Example: vncserver:1 (host:port / screen)</i></html>"), this);
 }
 
 void MainWindow::newRdpConnection()
@@ -690,8 +690,8 @@ void MainWindow::newRdpConnection()
 
     QToolTip::showText(m_addressNavigator->pos() + pos() + QPoint(m_addressNavigator->width(),
                                                                   m_addressNavigator->height() + 20),
-                       i18n("Enter here the address. Port is optional.<br />"
-                            "<i>Example: rdpserver:3389 (host:port)</i>"), this);
+                       i18n("<html>Enter here the address. Port is optional.<br />"
+                            "<i>Example: rdpserver:3389 (host:port)</i></html>"), this);
 }
 
 QList<RemoteView *> MainWindow::remoteViewList() const
