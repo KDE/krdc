@@ -93,6 +93,9 @@ MainWindow::MainWindow(QWidget *parent)
         createStartPage();
 
     setAutoSaveSettings(); // e.g toolbar position, mainwindow size, ...
+
+    if (Settings::rememberSessions()) // give some time to create and show the window first
+        QTimer::singleShot(100, this, SLOT(restoreOpenSessions()));
 }
 
 MainWindow::~MainWindow()
@@ -204,6 +207,17 @@ void MainWindow::setupActions()
     m_bookmarkManager = new BookmarkManager(actionCollection(), bookmarkMenu->menu(), this);
     actionCollection()->addAction("bookmark" , bookmarkMenu);
     connect(m_bookmarkManager, SIGNAL(openUrl(KUrl)), SLOT(slotNewConnection(KUrl)));
+}
+
+void MainWindow::restoreOpenSessions()
+{
+    QStringList list = Settings::openSessions();
+    QStringList::Iterator it = list.begin();
+    QStringList::Iterator end = list.end();
+    while (it != end) {
+        slotNewConnection(*it);
+        ++it;
+    }
 }
 
 void MainWindow::slotNewConnection(const KUrl &newUrl, bool switchFullscreenWhenConnected)
@@ -607,7 +621,17 @@ void MainWindow::closeEvent(QCloseEvent *event)
             KStandardGuiItem::yes(), KStandardGuiItem::no(), KStandardGuiItem::cancel(),
             "AskBeforeExit") == KMessageBox::Yes) {
 
+        if (Settings::rememberSessions()) { // remember open remote views for next startup
+            QStringList list;
+            for (int i = m_showStartPage ? 1 : 0; i < m_tabWidget->count(); i++) {
+                kDebug(5010) << m_remoteViewList.at(i - 1)->url();
+                list.append(m_remoteViewList.at(i - 1)->url().prettyUrl(KUrl::RemoveTrailingSlash));
+            }
+            Settings::setOpenSessions(list);
+        }
+
         Settings::self()->writeConfig();
+
         event->accept();
     } else
         event->ignore();

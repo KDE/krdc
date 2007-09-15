@@ -54,6 +54,7 @@ protected:
     virtual void closeEvent(QCloseEvent *event);
 
 private slots:
+    void restoreOpenSessions();
     void slotQuit();
     void slotPreferences();
     void slotConfigureNotifications();
