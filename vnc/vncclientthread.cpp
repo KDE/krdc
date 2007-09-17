@@ -139,6 +139,7 @@ VncClientThread::VncClientThread()
 {
     QMutexLocker locker(&mutex);
     m_stopped = false;
+    m_event = 0;
 
     QTimer *outputErrorMessagesCheckTimer = new QTimer(this);
     outputErrorMessagesCheckTimer->setInterval(500);
@@ -259,6 +260,15 @@ void VncClientThread::run()
         if (i)
             if (!HandleRFBServerMessage(cl))
                 break;
+
+        locker.relock();
+
+        if (m_event) {
+            m_event->fire(cl);
+            delete m_event;
+            m_event = 0;
+        }
+        locker.unlock();
     }
 
     // Cleanup allocated resources
@@ -269,14 +279,34 @@ void VncClientThread::run()
     m_stopped = true;
 }
 
+ClientEvent::~ClientEvent()
+{
+}
+
+void PointerClientEvent::fire(rfbClient* cl)
+{
+    SendPointerEvent(cl, m_x, m_y, m_buttonMask);
+}
+
+void KeyClientEvent::fire(rfbClient* cl)
+{
+    SendKeyEvent(cl, m_key, m_pressed);
+}
+
 void VncClientThread::mouseEvent(int x, int y, int buttonMask)
 {
-    SendPointerEvent(cl, x, y, buttonMask);
+    QMutexLocker lock (&mutex);
+
+    delete m_event;
+    m_event = new PointerClientEvent(x, y, buttonMask);
 }
 
 void VncClientThread::keyEvent(int key, bool pressed)
 {
-    SendKeyEvent(cl, key, pressed);
+    QMutexLocker lock(&mutex);
+
+    delete m_event;
+    m_event = new KeyClientEvent(key, pressed);
 }
 
 #include "vncclientthread.moc"

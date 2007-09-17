@@ -34,6 +34,41 @@ extern "C" {
 #include <rfb/rfbclient.h>
 }
 
+class ClientEvent 
+{
+public:
+    virtual ~ClientEvent();
+
+    virtual void fire(rfbClient*) = 0;
+};
+
+class KeyClientEvent : public ClientEvent 
+{
+public:
+    KeyClientEvent(int key, int pressed)
+        : m_key(key), m_pressed(pressed) {}
+
+    void fire(rfbClient*);
+
+private:
+    int m_key;
+    int m_pressed;
+};
+
+class PointerClientEvent : public ClientEvent 
+{
+public:
+    PointerClientEvent(int x, int y, int buttonMask)
+        : m_x(x), m_y(y), m_buttonMask(buttonMask) {}
+
+    void fire(rfbClient*);
+
+private:
+    int m_x;
+    int m_y;
+    int m_buttonMask;
+};
+
 class VncClientThread: public QThread
 {
     Q_OBJECT
@@ -76,6 +111,8 @@ private:
     int m_port;
     QMutex mutex;
     RemoteView::Quality m_quality;
+    // when I'm grown up, I become a QQueue
+    ClientEvent* m_event;
 
     volatile bool m_stopped;
     volatile bool m_passwordError;
