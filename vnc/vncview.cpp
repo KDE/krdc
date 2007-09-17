@@ -189,9 +189,10 @@ void VncView::updateImage(int x, int y, int w, int h)
 
         setMouseTracking(true); // get mouse events even when there is no mousebutton pressed
         setFocusPolicy(Qt::WheelFocus);
-        setFixedSize(vncThread.image().width(), vncThread.image().height());
+        QImage frame = vncThread.image();
+        setFixedSize(frame.width(), frame.height());
         setStatus(Connected);
-        emit changeSize(vncThread.image().width(), vncThread.image().height());
+        emit changeSize(frame.width(), frame.height());
         emit connected();
         m_initDone = true;
 
@@ -213,12 +214,14 @@ void VncView::paintEvent(QPaintEvent *event)
 
     QPainter painter(this);
 
+
     if (m_repaint) {
 //         kDebug(5011) << "normal repaint";
         painter.drawImage(QRect(m_x, m_y, m_w, m_h), vncThread.image(m_x, m_y, m_w, m_h));
     } else {
 //         kDebug(5011) << "resize repaint";
-        painter.drawImage(QRect(0, 0, vncThread.image().width(), vncThread.image().height()), vncThread.image());
+        QImage frame = vncThread.image();
+        painter.drawImage(frame.rect(), frame);
     }
 
     QWidget::paintEvent(event);
