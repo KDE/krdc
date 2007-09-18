@@ -26,6 +26,7 @@
 
 #include "remoteview.h"
 
+#include <QQueue>
 #include <QThread>
 #include <QImage>
 #include <QMutex>
@@ -111,8 +112,7 @@ private:
     int m_port;
     QMutex mutex;
     RemoteView::Quality m_quality;
-    // when I'm grown up, I become a QQueue
-    ClientEvent* m_event;
+    QQueue<ClientEvent* > m_eventQueue;
 
     volatile bool m_stopped;
     volatile bool m_passwordError;

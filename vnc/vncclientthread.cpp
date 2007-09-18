@@ -139,7 +139,6 @@ VncClientThread::VncClientThread()
 {
     QMutexLocker locker(&mutex);
     m_stopped = false;
-    m_event = 0;
 
     QTimer *outputErrorMessagesCheckTimer = new QTimer(this);
     outputErrorMessagesCheckTimer->setInterval(500);
@@ -263,11 +262,12 @@ void VncClientThread::run()
 
         locker.relock();
 
-        if (m_event) {
-            m_event->fire(cl);
-            delete m_event;
-            m_event = 0;
+        while (!m_eventQueue.isEmpty()) {
+            ClientEvent* clientEvent = m_eventQueue.dequeue();
+            clientEvent->fire(cl);
+            delete clientEvent;
         }
+
         locker.unlock();
     }
 
@@ -297,16 +297,14 @@ void VncClientThread::mouseEvent(int x, int y, int buttonMask)
 {
     QMutexLocker lock (&mutex);
 
-    delete m_event;
-    m_event = new PointerClientEvent(x, y, buttonMask);
+    m_eventQueue.enqueue(new PointerClientEvent(x, y, buttonMask));
 }
 
 void VncClientThread::keyEvent(int key, bool pressed)
 {
     QMutexLocker lock(&mutex);
 
-    delete m_event;
-    m_event = new KeyClientEvent(key, pressed);
+    m_eventQueue.enqueue(new KeyClientEvent(key, pressed));
 }
 
 #include "vncclientthread.moc"
