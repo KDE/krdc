@@ -300,7 +300,6 @@ void MainWindow::resizeTabWidget(int w, int h)
         kDebug(5010) << "remote desktop needs more place than available -> show window maximized";
         showMaximized();
         QCoreApplication::processEvents();
-        m_remoteViewList.at(m_currentRemoteView)->repaint(); // be sure there are no artifacts on the remote view
         return;
     }
 
@@ -481,8 +480,6 @@ void MainWindow::slotSpecialKeyDialog()
 void MainWindow::showRemoteViewToolbar()
 {
     kDebug(5010) << "showRemoteViewToolbar";
-
-    m_remoteViewList.at(m_currentRemoteView)->repaint(); // be sure there are no artifacts on the remote view
 
     if (!m_toolBar) {
         actionCollection()->action("switch_fullscreen")->setIcon(KIcon("view-restore"));

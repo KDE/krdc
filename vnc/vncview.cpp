@@ -183,6 +183,7 @@ void VncView::updateImage(int x, int y, int w, int h)
 
     if (!m_initDone) {
         setAttribute(Qt::WA_StaticContents);
+        setAttribute(Qt::WA_OpaquePaintEvent);
         installEventFilter(this);
 
         setCursor(m_dotCursorState == CursorOn ? localDotCursor() : Qt::BlankCursor);
@@ -324,7 +325,7 @@ void VncView::keyEvent(QKeyEvent *e)
     rfbKeySym k = 0;
     switch (e->key()) {
     case Qt::Key_Backspace: k = XK_BackSpace; break;
-    case Qt::Key_Tab: k = XK_ISO_Left_Tab; break;
+    case Qt::Key_Tab: k = XK_Tab; break;
     case Qt::Key_Clear: k = XK_Clear; break;
     case Qt::Key_Return: k = XK_Return; break;
     case Qt::Key_Pause: k = XK_Pause; break;
