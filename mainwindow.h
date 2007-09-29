@@ -102,4 +102,30 @@ private:
     bool m_switchFullscreenWhenConnected;
 };
 
+#include <QApplication>
+#include <QDesktopWidget>
+#include <QMouseEvent>
+
+class MinimizePixel : public QWidget
+{
+Q_OBJECT
+public:
+    MinimizePixel(QWidget *parent)
+        : QWidget(parent)
+    {
+        setFixedSize(1, 1);
+        move(QApplication::desktop()->screenGeometry().width() - 1, 0);
+    }
+
+signals:
+    void rightClicked();
+
+protected:
+    void mousePressEvent(QMouseEvent *event)
+    {
+        if (event->button() == Qt::RightButton)
+            emit rightClicked();
+    }
+};
+
 #endif

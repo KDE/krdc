@@ -409,6 +409,9 @@ void MainWindow::slotSwitchFullscreen()
         fullscreenLayout->addWidget(scrollArea);
         m_fullscreenWindow->setLayout(fullscreenLayout);
 
+        MinimizePixel *minimizePixel = new MinimizePixel(m_fullscreenWindow);
+        connect(minimizePixel, SIGNAL(rightClicked()), m_fullscreenWindow, SLOT(showMinimized()));
+
         m_fullscreenWindow->show();
 
         m_fullscreenWindow->setWindowState(Qt::WindowFullScreen);
@@ -488,6 +491,13 @@ void MainWindow::showRemoteViewToolbar()
         m_toolBar = new FloatingToolBar(m_fullscreenWindow, m_fullscreenWindow);
         m_toolBar->setSide(FloatingToolBar::Top);
         m_toolBar->addAction(actionCollection()->action("switch_fullscreen"));
+
+        QAction *minimizeAction = new QAction(m_toolBar);
+        minimizeAction->setIcon(KIcon("window-suppressed"));
+        minimizeAction->setText(i18n("Minimize Fullscreen Window"));
+        connect(minimizeAction, SIGNAL(triggered()), m_fullscreenWindow, SLOT(showMinimized()));
+        m_toolBar->addAction(minimizeAction);
+
         m_toolBar->addAction(actionCollection()->action("take_screenshot"));
         m_toolBar->addAction(actionCollection()->action("view_only"));
         m_toolBar->addAction(actionCollection()->action("show_local_cursor"));
@@ -499,7 +509,6 @@ void MainWindow::showRemoteViewToolbar()
         stickToolBarAction->setIcon(KIcon("note2"));
         stickToolBarAction->setText(i18n("S&tick Toolbar"));
         connect(stickToolBarAction, SIGNAL(triggered(bool)), m_toolBar, SLOT(setSticky(bool)));
-
         m_toolBar->addAction(stickToolBarAction);
     }
 
