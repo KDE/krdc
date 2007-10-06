@@ -26,6 +26,7 @@
 #include <KLocale>
 #include <KMessageBox>
 #include <KPasswordDialog>
+#include <KDebug>
 
 #include <QImage>
 #include <QPainter>

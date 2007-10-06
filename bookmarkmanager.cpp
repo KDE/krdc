@@ -27,6 +27,7 @@
 
 #include <KBookmarkMenu>
 #include <KStandardDirs>
+#include <KDebug>
 
 BookmarkManager::BookmarkManager(KActionCollection *collection, KMenu *menu, MainWindow *parent)
   : QObject(parent),
