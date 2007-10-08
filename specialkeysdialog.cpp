@@ -39,6 +39,7 @@ SpecialKeysDialog::SpecialKeysDialog(QWidget *parent, RemoteView *remoteView)
     "<br /><br />This function allows you to send a key combination like Ctrl+Q to the remote computer."
     "<br /><br />When you have finished entering the special keys, close this window."), this);
     descriptionLabel->setWordWrap(true);
+    descriptionLabel->setTextFormat(Qt::RichText);
 
     setMainWidget(descriptionLabel);
     setFocusPolicy(Qt::StrongFocus);
