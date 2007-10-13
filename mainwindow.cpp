@@ -32,6 +32,9 @@
 #ifdef BUILD_RDP
 #include "rdpview.h"
 #endif
+#ifdef BUILD_NX
+#include "nxview.h"
+#endif
 #ifdef BUILD_VNC
 #include "vncview.h"
 #endif
@@ -105,15 +108,23 @@ MainWindow::~MainWindow()
 void MainWindow::setupActions()
 {
     QAction *vncConnectionAction = actionCollection()->addAction("new_vnc_connection");
-    vncConnectionAction->setText(i18n("&New VNC Connection..."));
+    vncConnectionAction->setText(i18n("New VNC Connection..."));
     vncConnectionAction->setIcon(KIcon("krdc"));
     connect(vncConnectionAction, SIGNAL(triggered()), SLOT(newVncConnection()));
 #ifndef BUILD_VNC
     vncConnectionAction->setVisible(false);
 #endif
 
+    QAction *nxConnectionAction = actionCollection()->addAction("new_nx_connection");
+    nxConnectionAction->setText(i18n("New NX Connection..."));
+    nxConnectionAction->setIcon(KIcon("krdc"));
+    connect(nxConnectionAction, SIGNAL(triggered()), SLOT(newNxConnection()));
+#ifndef BUILD_NX
+    nxConnectionAction->setVisible(false);
+#endif
+
     QAction *rdpConnectionAction = actionCollection()->addAction("new_rdp_connection");
-    rdpConnectionAction->setText(i18n("&New RDP Connection..."));
+    rdpConnectionAction->setText(i18n("New RDP Connection..."));
     rdpConnectionAction->setIcon(KIcon("krdc"));
     connect(rdpConnectionAction, SIGNAL(triggered()), SLOT(newRdpConnection()));
 #ifndef BUILD_RDP
@@ -121,54 +132,57 @@ void MainWindow::setupActions()
 #endif
 
     QAction *screenshotAction = actionCollection()->addAction("take_screenshot");
-    screenshotAction->setText(i18n("&Copy Screenshot to Clipboard"));
+    screenshotAction->setText(i18n("Copy Screenshot to Clipboard"));
     screenshotAction->setIcon(KIcon("ksnapshot"));
-    connect(screenshotAction, SIGNAL(triggered()), SLOT(slotTakeScreenshot()));
+    connect(screenshotAction, SIGNAL(triggered()), SLOT(takeScreenshot()));
 
     QAction *fullscreenAction = actionCollection()->addAction("switch_fullscreen");
-    fullscreenAction->setText(i18n("&Switch to Fullscreen Mode"));
+    fullscreenAction->setText(i18n("Switch to Fullscreen Mode"));
     fullscreenAction->setIcon(KIcon("view-fullscreen"));
-    connect(fullscreenAction, SIGNAL(triggered()), SLOT(slotSwitchFullscreen()));
+    connect(fullscreenAction, SIGNAL(triggered()), SLOT(switchFullscreen()));
 
     QAction *viewOnlyAction = actionCollection()->addAction("view_only");
     viewOnlyAction->setCheckable(true);
-    viewOnlyAction->setText(i18n("&View Only"));
+    viewOnlyAction->setText(i18n("View Only"));
     viewOnlyAction->setIcon(KIcon("kgpg-sign-kgpg"));
-    connect(viewOnlyAction, SIGNAL(triggered(bool)), SLOT(slotViewOnly(bool)));
+    connect(viewOnlyAction, SIGNAL(triggered(bool)), SLOT(viewOnly(bool)));
 
     QAction *logoutAction = actionCollection()->addAction("logout");
-    logoutAction->setText(i18n("&Log Out"));
+    logoutAction->setText(i18n("Log Out"));
     logoutAction->setIcon(KIcon("system-log-out"));
-    connect(logoutAction, SIGNAL(triggered()), SLOT(slotLogout()));
+    connect(logoutAction, SIGNAL(triggered()), SLOT(logout()));
 
     QAction *showLocalCursorAction = actionCollection()->addAction("show_local_cursor");
     showLocalCursorAction->setCheckable(true);
     showLocalCursorAction->setIcon(KIcon("input-mouse"));
-    showLocalCursorAction->setText(i18n("S&how Local Cursor"));
-    connect(showLocalCursorAction, SIGNAL(triggered(bool)), SLOT(slotShowLocalCursor(bool)));
+    showLocalCursorAction->setText(i18n("Show Local Cursor"));
+    connect(showLocalCursorAction, SIGNAL(triggered(bool)), SLOT(showLocalCursor(bool)));
 
     QAction *specialKeysDialogAction = actionCollection()->addAction("special_keys_dialog");
     specialKeysDialogAction->setIcon(KIcon("browser-go"));
     specialKeysDialogAction->setText(i18n("Open Special Keys Dialog..."));
-    connect(specialKeysDialogAction, SIGNAL(triggered()), SLOT(slotSpecialKeyDialog()));
+    connect(specialKeysDialogAction, SIGNAL(triggered()), SLOT(specialKeyDialog()));
 
-    QAction *quitAction = KStandardAction::quit(this, SLOT(slotQuit()), actionCollection());
+    QAction *quitAction = KStandardAction::quit(this, SLOT(quit()), actionCollection());
     actionCollection()->addAction("quit", quitAction);
-    QAction *preferencesAction = KStandardAction::preferences(this, SLOT(slotPreferences()), actionCollection());
+    QAction *preferencesAction = KStandardAction::preferences(this, SLOT(preferences()), actionCollection());
     actionCollection()->addAction("preferences", preferencesAction);
-    QAction *configToolbarAction = KStandardAction::configureToolbars(this, SLOT(slotConfigureToolbars()), actionCollection());
+    QAction *configToolbarAction = KStandardAction::configureToolbars(this, SLOT(configureToolbars()), actionCollection());
     actionCollection()->addAction("configure_toolbars", configToolbarAction);
-    QAction *keyBindingsAction = KStandardAction::keyBindings(this, SLOT(slotConfigureKeys()), actionCollection());
+    QAction *keyBindingsAction = KStandardAction::keyBindings(this, SLOT(configureKeys()), actionCollection());
     actionCollection()->addAction("configure_keys", keyBindingsAction);
-    QAction *cinfigNotifyAction = KStandardAction::configureNotifications(this, SLOT(slotConfigureNotifications()), actionCollection());
+    QAction *cinfigNotifyAction = KStandardAction::configureNotifications(this, SLOT(configureNotifications()), actionCollection());
     actionCollection()->addAction("configure_notifications", cinfigNotifyAction);
-    m_menubarAction = KStandardAction::showMenubar(this, SLOT(slotShowMenubar()), actionCollection());
+    m_menubarAction = KStandardAction::showMenubar(this, SLOT(showMenubar()), actionCollection());
     m_menubarAction->setChecked(!menuBar()->isHidden());
     actionCollection()->addAction("settings_showmenubar", m_menubarAction);
 
     QString initialProtocol;
 #ifdef BUILD_RDP
     initialProtocol = "rdp";
+#endif
+#ifdef BUILD_NX
+    initialProtocol = "nx";
 #endif
 #ifdef BUILD_VNC
     initialProtocol = "vnc";
@@ -179,12 +193,15 @@ void MainWindow::setupActions()
 #ifdef BUILD_VNC
                                            << "vnc"
 #endif
+#ifdef BUILD_NX
+                                           << "nx"
+#endif
 #ifdef BUILD_RDP
                                            << "rdp"
 #endif
                                            );
     m_addressNavigator->setUrlEditable(Settings::normalUrlInputLine());
-    connect(m_addressNavigator, SIGNAL(returnPressed()), SLOT(slotNewConnection()));
+    connect(m_addressNavigator, SIGNAL(returnPressed()), SLOT(newConnection()));
 
     QLabel *addressLabel = new QLabel(i18n("Remote desktop:"), this);
 
@@ -199,14 +216,14 @@ void MainWindow::setupActions()
     addressLineAction->setDefaultWidget(addressWidget);
 
     QAction *gotoAction = actionCollection()->addAction("goto_address");
-    gotoAction->setText(i18n("&Goto Address"));
+    gotoAction->setText(i18n("Goto Address"));
     gotoAction->setIcon(KIcon("browser-go"));
-    connect(gotoAction, SIGNAL(triggered()), SLOT(slotNewConnection()));
+    connect(gotoAction, SIGNAL(triggered()), SLOT(newConnection()));
 
-    KActionMenu *bookmarkMenu = new KActionMenu(i18n("&Bookmarks"), actionCollection());
+    KActionMenu *bookmarkMenu = new KActionMenu(i18n("Bookmarks"), actionCollection());
     m_bookmarkManager = new BookmarkManager(actionCollection(), bookmarkMenu->menu(), this);
     actionCollection()->addAction("bookmark" , bookmarkMenu);
-    connect(m_bookmarkManager, SIGNAL(openUrl(KUrl)), SLOT(slotNewConnection(KUrl)));
+    connect(m_bookmarkManager, SIGNAL(openUrl(KUrl)), SLOT(newConnection(KUrl)));
 }
 
 void MainWindow::restoreOpenSessions()
@@ -215,12 +232,12 @@ void MainWindow::restoreOpenSessions()
     QStringList::Iterator it = list.begin();
     QStringList::Iterator end = list.end();
     while (it != end) {
-        slotNewConnection(*it);
+        newConnection(*it);
         ++it;
     }
 }
 
-void MainWindow::slotNewConnection(const KUrl &newUrl, bool switchFullscreenWhenConnected)
+void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConnected)
 {
     m_switchFullscreenWhenConnected = switchFullscreenWhenConnected;
 
@@ -243,6 +260,13 @@ void MainWindow::slotNewConnection(const KUrl &newUrl, bool switchFullscreenWhen
 #ifdef BUILD_VNC
     if (url.scheme().toLower() == "vnc") {
         view = new VncView(scrollArea, url);
+    }
+    else
+#endif
+
+#ifdef BUILD_NX
+    if (url.scheme().toLower() == "nx") {
+        view = new NxView(scrollArea, url);
     }
     else
 #endif
@@ -312,7 +336,7 @@ void MainWindow::resizeTabWidget(int w, int h)
 
 void MainWindow::statusChanged(RemoteView::RemoteStatus status)
 {
-    kDebug(5010) << "statusChanged: " << status;
+    kDebug(5010) << status;
 
     // the remoteview is already deleted, so don't show it; otherwise it would crash
     if (status == RemoteView::Disconnecting || status == RemoteView::Disconnected)
@@ -343,7 +367,7 @@ void MainWindow::statusChanged(RemoteView::RemoteStatus status)
         // when started with command line fullscreen argument
         if (m_switchFullscreenWhenConnected) {
             m_switchFullscreenWhenConnected = false;
-            slotSwitchFullscreen();
+            switchFullscreen();
         }
 
         m_bookmarkManager->addHistoryBookmark();
@@ -358,16 +382,16 @@ void MainWindow::statusChanged(RemoteView::RemoteStatus status)
     statusBar()->showMessage(message);
 }
 
-void MainWindow::slotTakeScreenshot()
+void MainWindow::takeScreenshot()
 {
     QPixmap snapshot = QPixmap::grabWidget(m_remoteViewList.at(m_currentRemoteView));
 
     QApplication::clipboard()->setPixmap(snapshot);
 }
 
-void MainWindow::slotSwitchFullscreen()
+void MainWindow::switchFullscreen()
 {
-    kDebug(5010) << "slotSwitchFullscreen";
+    kDebug(5010);
 
     if (m_fullscreenWindow) {
         show();
@@ -404,10 +428,9 @@ void MainWindow::slotSwitchFullscreen()
         QScrollArea *scrollArea = createScrollArea(m_fullscreenWindow, m_remoteViewList.at(m_currentRemoteView));
         scrollArea->setFrameShape(QFrame::NoFrame);
 
-        QVBoxLayout *fullscreenLayout = new QVBoxLayout();
+        QVBoxLayout *fullscreenLayout = new QVBoxLayout(m_fullscreenWindow);
         fullscreenLayout->setMargin(0);
         fullscreenLayout->addWidget(scrollArea);
-        m_fullscreenWindow->setLayout(fullscreenLayout);
 
         MinimizePixel *minimizePixel = new MinimizePixel(m_fullscreenWindow);
         connect(minimizePixel, SIGNAL(rightClicked()), m_fullscreenWindow, SLOT(showMinimized()));
@@ -439,12 +462,12 @@ QScrollArea *MainWindow::createScrollArea(QWidget *parent, RemoteView *remoteVie
     return scrollArea;
 }
 
-void MainWindow::slotLogout()
+void MainWindow::logout()
 {
-    kDebug(5010) << "slotLogout";
+    kDebug(5010);
 
     if (m_fullscreenWindow) { // first close fullscreen view
-        slotSwitchFullscreen();
+        switchFullscreen();
     }
 
     QWidget *tmp = m_tabWidget->currentWidget();
@@ -458,23 +481,23 @@ void MainWindow::slotLogout()
     updateActionStatus();
 }
 
-void MainWindow::slotShowLocalCursor(bool showLocalCursor)
+void MainWindow::showLocalCursor(bool showLocalCursor)
 {
-    kDebug(5010) << "slotShowLocalCursor";
+    kDebug(5010) << showLocalCursor;
 
     m_remoteViewList.at(m_currentRemoteView)->showDotCursor(showLocalCursor ? RemoteView::CursorOn : RemoteView::CursorOff);
 }
 
-void MainWindow::slotViewOnly(bool viewOnly)
+void MainWindow::viewOnly(bool viewOnly)
 {
-    kDebug(5010) << "slotViewOnly";
+    kDebug(5010) << viewOnly;
 
     m_remoteViewList.at(m_currentRemoteView)->setViewOnly(viewOnly);
 }
 
-void MainWindow::slotSpecialKeyDialog()
+void MainWindow::specialKeyDialog()
 {
-    kDebug(5010) << "slotSpecialKeyDialog";
+    kDebug(5010);
 
     SpecialKeysDialog dialog(this, m_remoteViewList.at(m_currentRemoteView));
     dialog.exec();
@@ -482,7 +505,7 @@ void MainWindow::slotSpecialKeyDialog()
 
 void MainWindow::showRemoteViewToolbar()
 {
-    kDebug(5010) << "showRemoteViewToolbar";
+    kDebug(5010);
 
     if (!m_toolBar) {
         actionCollection()->action("switch_fullscreen")->setIcon(KIcon("view-restore"));
@@ -507,7 +530,7 @@ void MainWindow::showRemoteViewToolbar()
         QAction *stickToolBarAction = new QAction(m_toolBar);
         stickToolBarAction->setCheckable(true);
         stickToolBarAction->setIcon(KIcon("note2"));
-        stickToolBarAction->setText(i18n("S&tick Toolbar"));
+        stickToolBarAction->setText(i18n("Stick Toolbar"));
         connect(stickToolBarAction, SIGNAL(triggered(bool)), m_toolBar, SLOT(setSticky(bool)));
         m_toolBar->addAction(stickToolBarAction);
     }
@@ -517,7 +540,7 @@ void MainWindow::showRemoteViewToolbar()
 
 void MainWindow::updateActionStatus()
 {
-    kDebug(5010) << "updateActionStatus = " << m_tabWidget->currentIndex();
+    kDebug(5010) << m_tabWidget->currentIndex();
 
     bool enabled;
 
@@ -549,7 +572,7 @@ void MainWindow::updateActionStatus()
     actionCollection()->action("show_local_cursor")->setVisible(showLocalCursorVisible);
 }
 
-void MainWindow::slotPreferences()
+void MainWindow::preferences()
 {
     // An instance of your dialog could be already created and could be
     // cached, in which case you want to display the cached dialog
@@ -589,29 +612,29 @@ void MainWindow::updateConfiguration()
     }
 }
 
-void MainWindow::slotQuit()
+void MainWindow::quit()
 {
     close();
 }
 
-void MainWindow::slotConfigureNotifications()
+void MainWindow::configureNotifications()
 {
     KNotifyConfigWidget::configure(this);
 }
 
-void MainWindow::slotConfigureKeys()
+void MainWindow::configureKeys()
 {
     KShortcutsDialog::configure(actionCollection());
 }
 
-void MainWindow::slotConfigureToolbars()
+void MainWindow::configureToolbars()
 {
     KEditToolBar edit(actionCollection());
-    connect(&edit, SIGNAL(newToolbarConfig()), this, SLOT(slotNewToolbarConfig()));
+    connect(&edit, SIGNAL(newToolbarConfig()), this, SLOT(newToolbarConfig()));
     edit.exec();
 }
 
-void MainWindow::slotShowMenubar()
+void MainWindow::showMenubar()
 {
     if (m_menubarAction->isChecked())
         menuBar()->show();
@@ -645,7 +668,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 void MainWindow::tabChanged(int index)
 {
-    kDebug(5010) << "tabChanged: " << index;
+    kDebug(5010) << index;
 
     m_currentRemoteView = index - (m_showStartPage ? 1 : 0);
 
@@ -685,6 +708,15 @@ void MainWindow::createStartPage()
     vncConnectButton->setVisible(false);
 #endif
 
+    KPushButton *nxConnectButton = new KPushButton(this);
+    nxConnectButton->setStyleSheet("KPushButton { padding: 12px; margin: 10px; }");
+    nxConnectButton->setIcon(KIcon(actionCollection()->action("new_nx_connection")->icon()));
+    nxConnectButton->setText(i18n("Connect to a NX Remote Desktop"));
+    connect(nxConnectButton, SIGNAL(clicked()), SLOT(newNxConnection()));
+#ifndef BUILD_NX
+    nxConnectButton->setVisible(false);
+#endif
+
     KPushButton *rdpConnectButton = new KPushButton(this);
     rdpConnectButton->setStyleSheet("KPushButton { padding: 12px; margin: 10px; }");
     rdpConnectButton->setIcon(KIcon(actionCollection()->action("new_rdp_connection")->icon()));
@@ -696,6 +728,7 @@ void MainWindow::createStartPage()
 
     startLayout->addLayout(headerLayout);
     startLayout->addWidget(vncConnectButton);
+    startLayout->addWidget(nxConnectButton);
     startLayout->addWidget(rdpConnectButton);
     startLayout->addStretch();
 
@@ -711,6 +744,17 @@ void MainWindow::newVncConnection()
                                                                   m_addressNavigator->height() + 20),
                        i18n("<html>Enter here the address.<br />"
                             "<i>Example: vncserver:1 (host:port / screen)</i></html>"), this);
+}
+
+void MainWindow::newNxConnection()
+{
+    m_addressNavigator->setUrl(KUrl("nx://"));
+    m_addressNavigator->setFocus();
+
+    QToolTip::showText(m_addressNavigator->pos() + pos() + QPoint(m_addressNavigator->width(),
+                                                                  m_addressNavigator->height() + 20),
+                       i18n("<html>Enter here the address.<br />"
+                            "<i>Example: nxserver (host)</i></html>"), this);
 }
 
 void MainWindow::newRdpConnection()

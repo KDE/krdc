@@ -48,33 +48,34 @@ public:
     int currentRemoteView() const;
 
 public slots:
-    void slotNewConnection(const KUrl &newUrl = KUrl(), bool switchFullscreenWhenConnected = false);
+    void newConnection(const KUrl &newUrl = KUrl(), bool switchFullscreenWhenConnected = false);
 
 protected:
     virtual void closeEvent(QCloseEvent *event);
 
 private slots:
     void restoreOpenSessions();
-    void slotQuit();
-    void slotPreferences();
-    void slotConfigureNotifications();
-    void slotConfigureKeys();
-    void slotConfigureToolbars();
-    void slotShowMenubar();
+    void quit();
+    void preferences();
+    void configureNotifications();
+    void configureKeys();
+    void configureToolbars();
+    void showMenubar();
     void resizeTabWidget(int w, int h);
     void statusChanged(RemoteView::RemoteStatus status);
     void showRemoteViewToolbar();
-    void slotTakeScreenshot();
-    void slotSwitchFullscreen();
-    void slotLogout();
-    void slotViewOnly(bool viewOnly);
-    void slotShowLocalCursor(bool showLocalCursor);
-    void slotSpecialKeyDialog();
+    void takeScreenshot();
+    void switchFullscreen();
+    void logout();
+    void viewOnly(bool viewOnly);
+    void showLocalCursor(bool showLocalCursor);
+    void specialKeyDialog();
     void updateActionStatus();
     void updateConfiguration();
     void tabChanged(int index);
     void createStartPage();
     void newVncConnection();
+    void newNxConnection();
     void newRdpConnection();
 
 private:

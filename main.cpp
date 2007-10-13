@@ -70,7 +70,7 @@ int main(int argc, char **argv)
             if (!u.isValid())
                 continue;
 
-            mainwindow->slotNewConnection(u, ((args->isSet("fullscreen")) && (args->count() == 1)));
+            mainwindow->newConnection(u, ((args->isSet("fullscreen")) && (args->count() == 1)));
         }
     }
 
