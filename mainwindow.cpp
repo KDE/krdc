@@ -159,7 +159,7 @@ void MainWindow::setupActions()
     connect(showLocalCursorAction, SIGNAL(triggered(bool)), SLOT(showLocalCursor(bool)));
 
     QAction *specialKeysDialogAction = actionCollection()->addAction("special_keys_dialog");
-    specialKeysDialogAction->setIcon(KIcon("browser-go"));
+    specialKeysDialogAction->setIcon(KIcon("go-jump-locationbar"));
     specialKeysDialogAction->setText(i18n("Open Special Keys Dialog..."));
     connect(specialKeysDialogAction, SIGNAL(triggered()), SLOT(specialKeyDialog()));
 
@@ -217,7 +217,7 @@ void MainWindow::setupActions()
 
     QAction *gotoAction = actionCollection()->addAction("goto_address");
     gotoAction->setText(i18n("Goto Address"));
-    gotoAction->setIcon(KIcon("browser-go"));
+    gotoAction->setIcon(KIcon("go-jump-locationbar"));
     connect(gotoAction, SIGNAL(triggered()), SLOT(newConnection()));
 
     KActionMenu *bookmarkMenu = new KActionMenu(i18n("Bookmarks"), actionCollection());
