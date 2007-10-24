@@ -94,6 +94,18 @@ extern void updatefb(rfbClient* cl, int x, int y, int w, int h)
     t->emitUpdated(x, y, w, h);
 }
 
+extern void cuttext(rfbClient* cl, const char *text, int textlen)
+{
+    QString cutText = QString::fromUtf8(text, textlen);
+    kDebug(5011) << cutText;
+
+    if (!cutText.isEmpty()) {
+        VncClientThread *t = (VncClientThread*)rfbClientGetClientData(cl, 0);
+
+        t->emitGotCut(cutText);
+    }
+}
+
 char *VncClientThread::passwdHandler(rfbClient *cl)
 {
     kDebug(5011) << "password request" << kBacktrace();
@@ -207,6 +219,11 @@ void VncClientThread::emitUpdated(int x, int y, int w, int h)
     emit imageUpdated(x, y, w, h);
 }
 
+void VncClientThread::emitGotCut(const QString &text)
+{
+    emit gotCut(text);
+}
+
 void VncClientThread::stop()
 {
     QMutexLocker locker(&mutex);
@@ -227,6 +244,7 @@ void VncClientThread::run()
         cl->canHandleNewFBSize = true;
         cl->GetPassword = passwdHandler;
         cl->GotFrameBufferUpdate = updatefb;
+        cl->GotXCutText = cuttext;
         rfbClientSetClientData(cl, 0, this);
 
         cl->serverHost = strdup(m_host.toUtf8().constData());
@@ -293,6 +311,11 @@ void KeyClientEvent::fire(rfbClient* cl)
     SendKeyEvent(cl, m_key, m_pressed);
 }
 
+void ClientCutEvent::fire(rfbClient* cl)
+{
+    SendClientCutText(cl, text, qstrlen(text));
+}
+
 void VncClientThread::mouseEvent(int x, int y, int buttonMask)
 {
     QMutexLocker lock (&mutex);
@@ -305,6 +328,13 @@ void VncClientThread::keyEvent(int key, bool pressed)
     QMutexLocker lock(&mutex);
 
     m_eventQueue.enqueue(new KeyClientEvent(key, pressed));
+}
+
+void VncClientThread::clientCut(const QString &text)
+{
+    QMutexLocker lock(&mutex);
+
+    m_eventQueue.enqueue(new ClientCutEvent(strdup(text.toUtf8())));
 }
 
 #include "vncclientthread.moc"

@@ -43,7 +43,7 @@ public:
     virtual void fire(rfbClient*) = 0;
 };
 
-class KeyClientEvent : public ClientEvent 
+class KeyClientEvent : public ClientEvent
 {
 public:
     KeyClientEvent(int key, int pressed)
@@ -56,7 +56,7 @@ private:
     int m_pressed;
 };
 
-class PointerClientEvent : public ClientEvent 
+class PointerClientEvent : public ClientEvent
 {
 public:
     PointerClientEvent(int x, int y, int buttonMask)
@@ -70,6 +70,18 @@ private:
     int m_buttonMask;
 };
 
+class ClientCutEvent : public ClientEvent
+{
+public:
+    ClientCutEvent(char *text)
+        : text(text) {}
+
+    void fire(rfbClient*);
+
+private:
+    char *text;
+};
+
 class VncClientThread: public QThread
 {
     Q_OBJECT
@@ -80,6 +92,7 @@ public:
     const QImage image(int x = 0, int y = 0, int w = 0, int h = 0);
     void setImage(const QImage &img);
     void emitUpdated(int x, int y, int w, int h);
+    void emitGotCut(const QString &text);
     void stop();
     void setHost(const QString &host);
     void setPort(int port);
@@ -91,12 +104,14 @@ public:
 
 signals:
     void imageUpdated(int x, int y, int w, int h);
+    void gotCut(const QString &text);
     void passwordRequest();
     void outputErrorMessage(const QString &message);
 
 public slots:
     void mouseEvent(int x, int y, int buttonMask);
     void keyEvent(int key, bool pressed);
+    void clientCut(const QString &text);
 
 protected:
     void run();

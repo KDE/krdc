@@ -28,6 +28,8 @@
 #include "vnchostpreferences.h"
 #include "vncclientthread.h"
 
+#include <QClipboard>
+
 extern "C" {
 #include <rfb/rfbclient.h>
 }
@@ -63,19 +65,24 @@ protected:
 
 private:
     VncClientThread vncThread;
+    QClipboard *m_clipboard;
     bool m_initDone;
     int m_buttonMask;
     int m_x, m_y, m_w, m_h;
     bool m_repaint;
     bool m_quitFlag;
     bool m_firstPasswordTry;
+    bool m_dontSendClipboard;
     VncHostPreferences *m_hostPreferences;
 
 private slots:
     void updateImage(int x, int y, int w, int h);
+    void setCut(const QString &text);
     void requestPassword();
     void outputErrorMessage(const QString &message);
     void mouseEvent(QMouseEvent *event);
+    void clipboardSelectionChanged();
+    void clipboardDataChanged();
 };
 
 #endif

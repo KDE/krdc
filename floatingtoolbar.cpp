@@ -137,7 +137,6 @@ void FloatingToolBar::setSide(Side side)
 
 void FloatingToolBar::setSticky(bool sticky)
 {
-    kDebug(5010) << "showAndAnimate: " << sticky;
     d->sticky = sticky;
 
     if (sticky)
@@ -148,8 +147,6 @@ void FloatingToolBar::setSticky(bool sticky)
 
 void FloatingToolBar::showAndAnimate()
 {
-    kDebug(5010) << "showAndAnimate";
-
     d->hiding = false;
 
     show();
@@ -171,9 +168,6 @@ void FloatingToolBar::hideAndDestroy()
 
 void FloatingToolBar::hide()
 {
-    kDebug(5010) << "hide";
-    // set parameters for sliding out
-
     if (d->visible) {
         QPoint diff;
         switch (d->anchorSide) {

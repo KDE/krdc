@@ -28,6 +28,7 @@
 #include <KPasswordDialog>
 #include <KDebug>
 
+#include <QApplication>
 #include <QImage>
 #include <QPainter>
 #include <QMouseEvent>
@@ -38,15 +39,21 @@ VncView::VncView(QWidget *parent, const KUrl &url)
     m_buttonMask(0),
     m_repaint(false),
     m_quitFlag(false),
-    m_firstPasswordTry(true)
+    m_firstPasswordTry(true),
+    m_dontSendClipboard(false)
 {
     m_url = url;
     m_host = url.host();
     m_port = url.port();
 
     connect(&vncThread, SIGNAL(imageUpdated(int, int, int, int)), this, SLOT(updateImage(int, int, int, int)), Qt::BlockingQueuedConnection);
+    connect(&vncThread, SIGNAL(gotCut(const QString&)), this, SLOT(setCut(const QString&)), Qt::BlockingQueuedConnection);
     connect(&vncThread, SIGNAL(passwordRequest()), this, SLOT(requestPassword()), Qt::BlockingQueuedConnection);
     connect(&vncThread, SIGNAL(outputErrorMessage(QString)), this, SLOT(outputErrorMessage(QString)));
+
+    m_clipboard = QApplication::clipboard();
+    connect(m_clipboard, SIGNAL(selectionChanged()), this, SLOT(clipboardSelectionChanged()));
+    connect(m_clipboard, SIGNAL(dataChanged()), this, SLOT(clipboardDataChanged()));
 }
 
 VncView::~VncView()
@@ -206,6 +213,14 @@ void VncView::updateImage(int x, int y, int w, int h)
     m_repaint = true;
     repaint(x, y, w, h);
     m_repaint = false;
+}
+
+void VncView::setCut(const QString &text)
+{
+        m_dontSendClipboard = true;
+        m_clipboard->setText(text, QClipboard::Clipboard);
+        m_clipboard->setText(text, QClipboard::Selection);
+        m_dontSendClipboard = false;
 }
 
 void VncView::paintEvent(QPaintEvent *event)
@@ -403,6 +418,36 @@ void VncView::keyReleaseEvent(QKeyEvent *event)
     keyEvent(event);
 
     event->accept();
+}
+
+void VncView::clipboardSelectionChanged()
+{
+    kDebug(5011);
+
+    if (m_status != Connected)
+        return;
+
+    if (m_clipboard->ownsSelection() || m_dontSendClipboard)
+        return;
+
+    QString text = m_clipboard->text(QClipboard::Selection);
+
+    vncThread.clientCut(text);
+}
+
+void VncView::clipboardDataChanged()
+{
+    kDebug(5011);
+
+    if (m_status != Connected)
+        return;
+
+    if (m_clipboard->ownsClipboard() || m_dontSendClipboard)
+        return;
+
+    QString text = m_clipboard->text(QClipboard::Clipboard);
+
+    vncThread.clientCut(text);
 }
 
 #include "vncview.moc"
