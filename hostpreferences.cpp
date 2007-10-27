@@ -35,10 +35,10 @@
 #include <QVBoxLayout>
 
 HostPreferences::HostPreferences(const QString &url, QObject *parent)
-  : QObject(parent),
-    m_url(url),
-    m_showConfigAgain(true),
-    m_walletSupport(true)
+        : QObject(parent),
+        m_url(url),
+        m_showConfigAgain(true),
+        m_walletSupport(true)
 {
     if (m_url.endsWith('/')) // check case when user enters an ending slash -> remove it
         m_url.truncate(m_url.length() - 1);
@@ -47,13 +47,13 @@ HostPreferences::HostPreferences(const QString &url, QObject *parent)
 
     QFile file(m_filename);
 
-    if(!m_doc.setContent(&file)) {
-        kWarning(5010) << "Error reading " << m_filename.toLocal8Bit();
+    if (!m_doc.setContent(&file)) {
+        kWarning(5010) << "Error reading " << m_filename;
 
         // no xml file found, create a new one
         QDomDocument domDocument("krdc");
         QDomProcessingInstruction process = domDocument.createProcessingInstruction(
-                                "xml", "version=\"1.0\" encoding=\"UTF-8\"");
+                                                "xml", "version=\"1.0\" encoding=\"UTF-8\"");
         domDocument.appendChild(process);
 
         QDomElement root = domDocument.createElement("krdc");
@@ -61,7 +61,7 @@ HostPreferences::HostPreferences(const QString &url, QObject *parent)
         domDocument.appendChild(root);
 
         if (!file.open(QFile::WriteOnly | QFile::Truncate))
-            kWarning(5010) << "Error creating " << m_filename.toLocal8Bit();
+            kWarning(5010) << "Error creating " << m_filename;
 
         QTextStream out(&file);
         domDocument.save(out, 4);
@@ -106,7 +106,7 @@ bool HostPreferences::saveConfig()
 
     QDomElement root = m_doc.documentElement();
     QDomElement oldElement = QDomElement();
-    for(QDomNode n = root.firstChild(); !n.isNull(); n = n.nextSibling()) {
+    for (QDomNode n = root.firstChild(); !n.isNull(); n = n.nextSibling()) {
         if (n.toElement().hasAttribute("url") && n.toElement().attribute("url") == m_url) {
             oldElement = n.toElement();
         }
@@ -119,8 +119,7 @@ bool HostPreferences::saveConfig()
 
     QFile file(m_filename);
     if (!file.open(QFile::WriteOnly | QFile::Text)) {
-        kWarning(5010) << "Cannot write " << m_filename.toLocal8Bit() << ". "
-                       << file.errorString().toLocal8Bit() << endl;
+        kWarning(5010) << "Cannot write " << m_filename << ". " << file.errorString() << endl;
         return false;
     }
 
@@ -132,9 +131,9 @@ bool HostPreferences::saveConfig()
 bool HostPreferences::hostConfigured()
 {
     QDomElement root = m_doc.documentElement();
-    for(QDomNode n = root.firstChild(); !n.isNull(); n = n.nextSibling()) {
+    for (QDomNode n = root.firstChild(); !n.isNull(); n = n.nextSibling()) {
         if (n.toElement().hasAttribute("url") && n.toElement().attribute("url") == m_url) {
-            kDebug(5010) << "Found: " << m_url.toLocal8Bit();
+            kDebug(5010) << "Found: " << m_url;
             m_element = n.toElement();
 
             readConfig();

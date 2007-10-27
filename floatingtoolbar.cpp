@@ -51,8 +51,7 @@ class FloatingToolBarPrivate
 {
 public:
     FloatingToolBarPrivate(FloatingToolBar *qq)
-      : q(qq)
-    {
+            : q(qq) {
     }
 
     // rebuild contents and reposition then widget
@@ -82,7 +81,7 @@ public:
 };
 
 FloatingToolBar::FloatingToolBar(QWidget *parent, QWidget *anchorWidget)
-    : QWidget(parent), d(new FloatingToolBarPrivate(this))
+        : QWidget(parent), d(new FloatingToolBarPrivate(this))
 {
     setMouseTracking(true);
 
@@ -247,8 +246,8 @@ void FloatingToolBar::mouseMoveEvent(QMouseEvent *e)
 
     // compute the nearest side to attach the widget to
     QPoint parentPos = mapToParent(e->pos());
-    float nX = (float)parentPos.x() / (float)d->anchorWidget->width(),
-          nY = (float)parentPos.y() / (float)d->anchorWidget->height();
+    float nX = (float)parentPos.x() / (float)d->anchorWidget->width();
+    float nY = (float)parentPos.y() / (float)d->anchorWidget->height();
     if (nX > 0.3 && nX < 0.7 && nY > 0.3 && nY < 0.7)
         return;
     bool LT = nX < (1.0 - nY);
@@ -284,11 +283,11 @@ void FloatingToolBar::wheelEvent(QWheelEvent *e)
 
 void FloatingToolBarPrivate::buildToolBar()
 {
-    int buttonsNumber = buttons.count(),
-        parentWidth = anchorWidget->width(),
-        parentHeight = anchorWidget->height(),
-        myCols = 1,
-        myRows = 1;
+    int buttonsNumber = buttons.count();
+    int parentWidth = anchorWidget->width();
+    int parentHeight = anchorWidget->height();
+    int myCols = 1;
+    int myRows = 1;
 
     // 1. find out columns and rows we're going to use
     bool topLeft = anchorSide == FloatingToolBar::Left || anchorSide == FloatingToolBar::Top;
@@ -297,18 +296,17 @@ void FloatingToolBarPrivate::buildToolBar()
         myCols = 1 + (buttonsNumber * toolBarGridSize) /
                  (parentHeight - toolBarGridSize);
         myRows = (int)ceil((float)buttonsNumber / (float)myCols);
-    }
-    else {
+    } else {
         myRows = 1 + (buttonsNumber * toolBarGridSize) /
                  (parentWidth - toolBarGridSize);
         myCols = (int)ceil((float)buttonsNumber / (float)myRows);
     }
 
     // 2. compute widget size (from rows/cols)
-    int myWidth = myCols * toolBarGridSize,
-        myHeight = myRows * toolBarGridSize,
-        xOffset = (toolBarGridSize - buttonSize) / 2,
-        yOffset = (toolBarGridSize - buttonSize) / 2;
+    int myWidth = myCols * toolBarGridSize;
+    int myHeight = myRows * toolBarGridSize;
+    int xOffset = (toolBarGridSize - buttonSize) / 2;
+    int yOffset = (toolBarGridSize - buttonSize) / 2;
 
     if (vertical) {
         myHeight += 16;
@@ -316,8 +314,7 @@ void FloatingToolBarPrivate::buildToolBar()
         yOffset += 12;
         if (anchorSide == FloatingToolBar::Right)
             xOffset += 4;
-    }
-    else {
+    } else {
         myWidth += 16;
         myHeight += 4;
         xOffset += 12;
@@ -382,8 +379,7 @@ void FloatingToolBarPrivate::buildToolBar()
         bufferPainter.setPen(pal.color(QPalette::Active, QPalette::Light));
         bufferPainter.drawLine(dx + 1, 7, dx + myWidth - 7, 7);
         bufferPainter.drawLine(dx + 1, 10, dx + myWidth - 7, 10);
-    }
-    else {
+    } else {
         int dy = anchorSide == FloatingToolBar::Top ? 2 : 4;
         bufferPainter.drawLine(6, dy, 6, dy + myHeight - 8);
         bufferPainter.drawLine(9, dy, 9, dy + myHeight - 8);
@@ -393,13 +389,13 @@ void FloatingToolBarPrivate::buildToolBar()
     }
 
     // 6. reposition buttons (in rows/col grid)
-    int gridX = 0,
-        gridY = 0;
+    int gridX = 0;
+    int gridY = 0;
     QLinkedList<QToolButton*>::const_iterator it = buttons.begin(), end = buttons.end();
     for (; it != end; ++it) {
         QToolButton *button = *it;
         button->move(gridX * toolBarGridSize + xOffset,
-                      gridY * toolBarGridSize + yOffset);
+                     gridY * toolBarGridSize + yOffset);
         button->show();
         if (++gridX == myCols) {
             gridX = 0;
@@ -418,8 +414,7 @@ void FloatingToolBarPrivate::reposition()
     if (!visible) {
         currentPosition = getOuterPoint();
         endPosition = getInnerPoint();
-    }
-    else {
+    } else {
         currentPosition = getInnerPoint();
         endPosition = getOuterPoint();
     }
@@ -458,8 +453,8 @@ QPoint FloatingToolBarPrivate::getOuterPoint() const
 void FloatingToolBar::slotAnimate()
 {
     // move currentPosition towards endPosition
-    int dX = d->endPosition.x() - d->currentPosition.x(),
-        dY = d->endPosition.y() - d->currentPosition.y();
+    int dX = d->endPosition.x() - d->currentPosition.x();
+    int dY = d->endPosition.y() - d->currentPosition.y();
     dX = dX / 6 + qMax(-1, qMin(1, dX));
     dY = dY / 6 + qMax(-1, qMin(1, dY));
     d->currentPosition.setX(d->currentPosition.x() + dX);
@@ -474,8 +469,7 @@ void FloatingToolBar::slotAnimate()
             d->visible = false;
             if (d->toDelete)
                 deleteLater();
-        }
-        else
+        } else
             d->visible = true;
     }
 }

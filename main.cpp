@@ -34,12 +34,12 @@ int main(int argc, char **argv)
     KAboutData aboutData("krdc", 0, ki18n("KRDC"), KDE_VERSION_STRING,
                          ki18n("KDE remote desktop connection"), KAboutData::License_GPL,
                          ki18n("(c) 2007, Urs Wolfer\n"
-                                   "(c) 2001-2003, Tim Jansen\n"
-                                   "(c) 2002-2003, Arend van Beelen jr.\n"
-                                   "(c) 2000-2002, Const Kaplinsky\n"
-                                   "(c) 2000, Tridia Corporation\n"
-                                   "(c) 1999, AT&T Laboratories Cambridge\n"
-                                   "(c) 1999-2003, Matthew Chapman"));
+                               "(c) 2001-2003, Tim Jansen\n"
+                               "(c) 2002-2003, Arend van Beelen jr.\n"
+                               "(c) 2000-2002, Const Kaplinsky\n"
+                               "(c) 2000, Tridia Corporation\n"
+                               "(c) 1999, AT&T Laboratories Cambridge\n"
+                               "(c) 1999-2003, Matthew Chapman"));
 
     aboutData.addAuthor(ki18n("Urs Wolfer"), ki18n("Developer, Maintainer"), "uwolfer@kde.org");
     aboutData.addAuthor(ki18n("Tim Jansen"), ki18n("Former Developer"), "tim@tjansen.de");

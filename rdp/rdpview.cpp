@@ -34,27 +34,27 @@
 #include <QEvent>
 
 RdpView::RdpView(QWidget *parent,
-                   const KUrl &url,
-                   const QString &user, const QString &password,
-                   int flags, const QString &domain,
-                   const QString &shell, const QString &directory,
-                   const QString &caption)
-  : RemoteView(parent),
-    m_user(user),
-    m_password(password),
-    m_flags(flags),
-    m_domain(domain),
-    m_shell(shell),
-    m_directory(directory),
-    m_quitFlag(false),
-    m_process(NULL),
-    m_caption(caption)
+                 const KUrl &url,
+                 const QString &user, const QString &password,
+                 int flags, const QString &domain,
+                 const QString &shell, const QString &directory,
+                 const QString &caption)
+        : RemoteView(parent),
+        m_user(user),
+        m_password(password),
+        m_flags(flags),
+        m_domain(domain),
+        m_shell(shell),
+        m_directory(directory),
+        m_quitFlag(false),
+        m_process(NULL),
+        m_caption(caption)
 {
     m_url = url;
     m_host = url.host();
     m_port = url.port();
 
-    if(m_port <= 0) {
+    if (m_port <= 0) {
         m_port = TCP_PORT_RDP;
     }
 
@@ -73,11 +73,11 @@ bool RdpView::eventFilter(QObject *obj, QEvent *event)
 {
     if (m_viewOnly) {
         if (event->type() == QEvent::KeyPress ||
-            event->type() == QEvent::KeyRelease ||
-            event->type() == QEvent::MouseButtonDblClick ||
-            event->type() == QEvent::MouseButtonPress ||
-            event->type() == QEvent::MouseButtonRelease ||
-            event->type() == QEvent::MouseMove)
+                event->type() == QEvent::KeyRelease ||
+                event->type() == QEvent::MouseButtonDblClick ||
+                event->type() == QEvent::MouseButtonPress ||
+                event->type() == QEvent::MouseButtonRelease ||
+                event->type() == QEvent::MouseMove)
             return true;
     }
     return RemoteView::eventFilter(obj, event);
@@ -97,7 +97,7 @@ void RdpView::startQuitting()
 {
     kDebug(5012) << "About to quit";
     m_quitFlag = true;
-    if(m_process) {
+    if (m_process) {
         m_process->terminate();
         m_process->waitForFinished(1000);
         m_container->discardClient();
@@ -129,7 +129,7 @@ bool RdpView::start()
                 m_url.setUserName(userName);
         }
 
-        if(!m_url.userName().isEmpty()) {
+        if (!m_url.userName().isEmpty()) {
             QString walletPassword = readWalletPassword();
 
             if (!walletPassword.isNull())
@@ -155,12 +155,12 @@ bool RdpView::start()
                           QString::number(m_hostPreferences->height()));
     arguments << "-k" << m_hostPreferences->keyboardLayout();
 
-    if(!m_url.userName().isEmpty())
+    if (!m_url.userName().isEmpty())
         arguments << "-u" << m_url.userName();
     else if (!Settings::sendCurrentUserName())
         arguments << "-u" << "";
 
-    if(!m_url.password().isNull())
+    if (!m_url.password().isNull())
         arguments << "-p" << m_url.password();
 
     arguments << "-X" << QString::number(m_container->winId());
@@ -203,7 +203,7 @@ bool RdpView::start()
 
 void RdpView::switchFullscreen(bool on)
 {
-    if(on == true) {
+    if (on == true) {
         m_container->grabKeyboard();
     }
 }
@@ -231,22 +231,22 @@ void RdpView::connectionClosed()
 
 void RdpView::processError(QProcess::ProcessError error)
 {
-    if(m_status == Connecting) {
+    if (m_status == Connecting) {
         setStatus(Disconnected);
 
         if (error == QProcess::FailedToStart) {
             KMessageBox::error(0, i18n("Could not start rdesktop; make sure rdesktop is properly installed."),
-                                  i18n("rdesktop Failure"));
+                               i18n("rdesktop Failure"));
             return;
         }
 
-        if(m_clientVersion.isEmpty()) {
+        if (m_clientVersion.isEmpty()) {
             KMessageBox::error(0, i18n("Connection attempt to host failed."),
-                                  i18n("Connection Failure"));
+                               i18n("Connection Failure"));
         } else {
             KMessageBox::error(0, i18n("The version of rdesktop you are using (%1) is too old:\n"
                                        "rdesktop 1.3.2 or greater is required.", m_clientVersion),
-                                  i18n("rdesktop Failure"));
+                               i18n("rdesktop Failure"));
         }
         emit disconnectedError();
     }
@@ -257,8 +257,8 @@ void RdpView::receivedStandardError()
     QString output(m_process->readAllStandardError());
     QString line;
     int i = 0;
-    while(!(line = output.section('\n', i, i)).isEmpty()) {
-        if(line.startsWith("Version ")) {
+    while (!(line = output.section('\n', i, i)).isEmpty()) {
+        if (line.startsWith("Version ")) {
             m_clientVersion = line.section(' ', 1, 1);
             m_clientVersion = m_clientVersion.left(m_clientVersion.length() - 1);
             return;

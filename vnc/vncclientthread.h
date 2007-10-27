@@ -35,7 +35,7 @@ extern "C" {
 #include <rfb/rfbclient.h>
 }
 
-class ClientEvent 
+class ClientEvent
 {
 public:
     virtual ~ClientEvent();
@@ -47,7 +47,7 @@ class KeyClientEvent : public ClientEvent
 {
 public:
     KeyClientEvent(int key, int pressed)
-        : m_key(key), m_pressed(pressed) {}
+            : m_key(key), m_pressed(pressed) {}
 
     void fire(rfbClient*);
 
@@ -60,7 +60,7 @@ class PointerClientEvent : public ClientEvent
 {
 public:
     PointerClientEvent(int x, int y, int buttonMask)
-        : m_x(x), m_y(y), m_buttonMask(buttonMask) {}
+            : m_x(x), m_y(y), m_buttonMask(buttonMask) {}
 
     void fire(rfbClient*);
 
@@ -74,7 +74,7 @@ class ClientCutEvent : public ClientEvent
 {
 public:
     ClientCutEvent(char *text)
-        : text(text) {}
+            : text(text) {}
 
     void fire(rfbClient*);
 
@@ -97,8 +97,12 @@ public:
     void setHost(const QString &host);
     void setPort(int port);
     void setQuality(RemoteView::Quality quality);
-    void setPassword(const QString &password) { m_password = password; }
-    const QString password() const { return m_password; }
+    void setPassword(const QString &password) {
+        m_password = password;
+    }
+    const QString password() const {
+        return m_password;
+    }
 
     RemoteView::Quality quality() const;
 

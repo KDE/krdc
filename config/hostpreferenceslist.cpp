@@ -42,7 +42,7 @@
 #include <QListWidget>
 
 HostPreferencesList::HostPreferencesList(QWidget *parent)
-  : QWidget(parent)
+        : QWidget(parent)
 {
     hostList = new QListWidget(this);
     connect(hostList, SIGNAL(itemSelectionChanged()), SLOT(selectionChanged()));
@@ -84,13 +84,13 @@ void HostPreferencesList::readConfig()
 
     QFile file(m_filename);
 
-    if(!m_doc.setContent(&file)) {
-        kWarning(5010) << "Error reading " << m_filename.toLocal8Bit();
+    if (!m_doc.setContent(&file)) {
+        kWarning(5010) << "Error reading " << m_filename;
         return;
     }
 
     QDomElement root = m_doc.documentElement();
-    for(QDomNode n = root.firstChild(); !n.isNull(); n = n.nextSibling()) {
+    for (QDomNode n = root.firstChild(); !n.isNull(); n = n.nextSibling()) {
         if (n.toElement().hasAttribute("url"))
             hostList->addItem(new QListWidgetItem(n.toElement().attribute("url")));
     }
@@ -133,7 +133,7 @@ void HostPreferencesList::removeHost()
         kDebug(5010) << "Remove host: " <<  selectedItem->text();
 
         QDomElement root = m_doc.documentElement();
-        for(QDomNode n = root.firstChild(); !n.isNull(); n = n.nextSibling()) {
+        for (QDomNode n = root.firstChild(); !n.isNull(); n = n.nextSibling()) {
             if (n.toElement().hasAttribute("url") && n.toElement().attribute("url") == selectedItem->text()) {
                 kDebug(5010) << "Found and remove now: " << selectedItem->text();
                 root.removeChild(n);
@@ -144,8 +144,7 @@ void HostPreferencesList::removeHost()
 
     QFile file(m_filename);
     if (!file.open(QFile::WriteOnly | QFile::Text)) {
-        kWarning(5010) << "Cannot write " << m_filename.toLocal8Bit() << ". "
-                       << file.errorString().toLocal8Bit() << endl;
+        kWarning(5010) << "Cannot write " << m_filename << ". " << file.errorString() << endl;
     }
 
     QTextStream out(&file);

@@ -29,15 +29,15 @@
 #include <QLabel>
 
 SpecialKeysDialog::SpecialKeysDialog(QWidget *parent, RemoteView *remoteView)
-  : KDialog(parent),
-    m_remoteView(remoteView)
+        : KDialog(parent),
+        m_remoteView(remoteView)
 {
     setCaption(i18n("Special Keys"));
     setButtons(0);
 
     QLabel *descriptionLabel = new QLabel(i18n("Enter a special key or a key combination to sent the the remote desktop."
-    "<br /><br />This function allows you to send a key combination like Ctrl+Q to the remote computer."
-    "<br /><br />When you have finished entering the special keys, close this window."), this);
+                                          "<br /><br />This function allows you to send a key combination like Ctrl+Q to the remote computer."
+                                          "<br /><br />When you have finished entering the special keys, close this window."), this);
     descriptionLabel->setWordWrap(true);
     descriptionLabel->setTextFormat(Qt::RichText);
 

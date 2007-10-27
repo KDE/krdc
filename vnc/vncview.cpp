@@ -34,13 +34,13 @@
 #include <QMouseEvent>
 
 VncView::VncView(QWidget *parent, const KUrl &url)
-  : RemoteView(parent),
-    m_initDone(false),
-    m_buttonMask(0),
-    m_repaint(false),
-    m_quitFlag(false),
-    m_firstPasswordTry(true),
-    m_dontSendClipboard(false)
+        : RemoteView(parent),
+        m_initDone(false),
+        m_buttonMask(0),
+        m_repaint(false),
+        m_quitFlag(false),
+        m_firstPasswordTry(true),
+        m_dontSendClipboard(false)
 {
     m_url = url;
     m_host = url.host();
@@ -67,12 +67,12 @@ bool VncView::eventFilter(QObject *obj, QEvent *event)
         setCursor(Qt::ArrowCursor);
 
         if (event->type() == QEvent::KeyPress ||
-            event->type() == QEvent::KeyRelease ||
-            event->type() == QEvent::MouseButtonDblClick ||
-            event->type() == QEvent::MouseButtonPress ||
-            event->type() == QEvent::MouseButtonRelease ||
-            event->type() == QEvent::Wheel ||
-            event->type() == QEvent::MouseMove)
+                event->type() == QEvent::KeyRelease ||
+                event->type() == QEvent::MouseButtonDblClick ||
+                event->type() == QEvent::MouseButtonPress ||
+                event->type() == QEvent::MouseButtonRelease ||
+                event->type() == QEvent::Wheel ||
+                event->type() == QEvent::MouseMove)
             return true;
     }
 
@@ -156,7 +156,7 @@ void VncView::requestPassword()
         }
     }
 
-    if(!m_url.password().isNull()) {
+    if (!m_url.password().isNull()) {
         vncThread.setPassword(m_url.password());
         return;
     }
@@ -217,10 +217,10 @@ void VncView::updateImage(int x, int y, int w, int h)
 
 void VncView::setCut(const QString &text)
 {
-        m_dontSendClipboard = true;
-        m_clipboard->setText(text, QClipboard::Clipboard);
-        m_clipboard->setText(text, QClipboard::Selection);
-        m_dontSendClipboard = false;
+    m_dontSendClipboard = true;
+    m_clipboard->setText(text, QClipboard::Clipboard);
+    m_clipboard->setText(text, QClipboard::Selection);
+    m_dontSendClipboard = false;
 }
 
 void VncView::paintEvent(QPaintEvent *event)
@@ -299,15 +299,14 @@ void VncView::mouseEvent(QMouseEvent *e)
 {
     if (e->type() != QEvent::MouseMove) {
         if ((e->type() == QEvent::MouseButtonPress) ||
-            (e->type() == QEvent::MouseButtonDblClick)) {
+                (e->type() == QEvent::MouseButtonDblClick)) {
             if (e->button() & Qt::LeftButton)
                 m_buttonMask |= 0x01;
             if (e->button() & Qt::MidButton)
                 m_buttonMask |= 0x02;
             if (e->button() & Qt::RightButton)
                 m_buttonMask |= 0x04;
-        }
-        else if (e->type() == QEvent::MouseButtonRelease) {
+        } else if (e->type() == QEvent::MouseButtonRelease) {
             if (e->button() & Qt::LeftButton)
                 m_buttonMask &= 0xfe;
             if (e->button() & Qt::MidButton)
@@ -331,7 +330,7 @@ void VncView::wheelEvent(QWheelEvent *event)
     int x = event->x();
     int y = event->y();
 
-    vncThread.mouseEvent(x, y, eb|m_buttonMask);
+    vncThread.mouseEvent(x, y, eb | m_buttonMask);
     vncThread.mouseEvent(x, y, m_buttonMask);
     event->accept();
 }

@@ -29,13 +29,13 @@
 #include <KStandardDirs>
 
 RemoteView::RemoteView(QWidget *parent)
-  : QWidget(parent),
-    m_status(Disconnected),
-    m_host(QString()),
-    m_port(0),
-    m_viewOnly(false),
-    m_wallet(0),
-    m_dotCursorState(CursorOff)
+        : QWidget(parent),
+        m_status(Disconnected),
+        m_host(QString()),
+        m_port(0),
+        m_viewOnly(false),
+        m_wallet(0),
+        m_dotCursorState(CursorOff)
 {
 }
 
@@ -49,7 +49,7 @@ void RemoteView::setStatus(RemoteView::RemoteStatus s)
     if (m_status == s)
         return;
 
-    if (((1+(int)m_status) != (int)s) && (s != Disconnected)) {
+    if (((1 + (int)m_status) != (int)s) && (s != Disconnected)) {
         // follow state transition rules
 
         if (s == Disconnecting) {
@@ -57,7 +57,7 @@ void RemoteView::setStatus(RemoteView::RemoteStatus s)
                 return;
         } else {
             Q_ASSERT(((int) s) >= 0);
-            if (((int)m_status) > ((int)s) ) {
+            if (((int)m_status) > ((int)s)) {
                 m_status = Disconnected;
                 emit statusChanged(Disconnected);
             }
@@ -161,16 +161,17 @@ QString RemoteView::readWalletPassword()
 
     if (m_wallet) {
         bool walletOK = m_wallet->hasFolder(krdc_folder);
-        if (!walletOK)
+        if (!walletOK) {
             walletOK = m_wallet->createFolder(krdc_folder);
             kDebug(5010) << "Wallet folder created";
+        }
         if (walletOK) {
             kDebug(5010) << "Wallet OK";
             m_wallet->setFolder(krdc_folder);
             QString password;
 
             if (m_wallet->hasEntry(m_url.prettyUrl(KUrl::RemoveTrailingSlash)) &&
-                !m_wallet->readPassword(m_url.prettyUrl(KUrl::RemoveTrailingSlash), password)) {
+                    !m_wallet->readPassword(m_url.prettyUrl(KUrl::RemoveTrailingSlash), password)) {
                 kDebug(5010) << "Password read OK";
 
                 return password;
@@ -191,9 +192,9 @@ void RemoteView::saveWalletPassword(const QString &password)
 QCursor RemoteView::localDotCursor() const
 {
     QBitmap cursorBitmap(KGlobal::dirs()->findResource("appdata",
-                                                        "pics/pointcursor.png"));
+                                                       "pics/pointcursor.png"));
     QBitmap cursorMask(KGlobal::dirs()->findResource("appdata",
-                                                        "pics/pointcursormask.png"));
+                                                     "pics/pointcursormask.png"));
     return QCursor(cursorBitmap, cursorMask);
 }
 

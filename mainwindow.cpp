@@ -68,13 +68,13 @@
 #include <QToolTip>
 
 MainWindow::MainWindow(QWidget *parent)
-  : KXmlGuiWindow(parent),
-    m_fullscreenWindow(0),
-    m_toolBar(0),
-    m_topBottomBorder(0),
-    m_leftRightBorder(0),
-    m_currentRemoteView(-1),
-    m_showStartPage(false)
+        : KXmlGuiWindow(parent),
+        m_fullscreenWindow(0),
+        m_toolBar(0),
+        m_topBottomBorder(0),
+        m_leftRightBorder(0),
+        m_currentRemoteView(-1),
+        m_showStartPage(false)
 {
     setupActions();
 
@@ -199,7 +199,7 @@ void MainWindow::setupActions()
 #ifdef BUILD_RDP
                                            << "rdp"
 #endif
-                                           );
+                                          );
     m_addressNavigator->setUrlEditable(Settings::normalUrlInputLine());
     connect(m_addressNavigator, SIGNAL(returnPressed()), SLOT(newConnection()));
 
@@ -243,8 +243,8 @@ void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConn
 
     KUrl url = newUrl.isEmpty() ? m_addressNavigator->uncommittedUrl() : newUrl;
 
-    if (!url.isValid() || (url.host().isEmpty() && url.port()<0)
-        || !url.path().isEmpty()) {
+    if (!url.isValid() || (url.host().isEmpty() && url.port() < 0)
+            || !url.path().isEmpty()) {
         KMessageBox::error(this,
                            i18n("The entered address does not have the required form."),
                            i18n("Malformed URL"));
@@ -260,22 +260,19 @@ void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConn
 #ifdef BUILD_VNC
     if (url.scheme().toLower() == "vnc") {
         view = new VncView(scrollArea, url);
-    }
-    else
+    } else
 #endif
 
 #ifdef BUILD_NX
     if (url.scheme().toLower() == "nx") {
         view = new NxView(scrollArea, url);
-    }
-    else
+    } else
 #endif
 
 #ifdef BUILD_RDP
     if (url.scheme().toLower() == "rdp") {
         view = new RdpView(scrollArea, url);
-    }
-    else
+    } else
 #endif
     {
         KMessageBox::error(this,
@@ -545,7 +542,7 @@ void MainWindow::updateActionStatus()
     bool enabled;
 
     if ((m_showStartPage && (m_tabWidget->currentIndex() == 0)) ||
-       (!m_showStartPage && (m_tabWidget->currentIndex() < 0)))
+            (!m_showStartPage && (m_tabWidget->currentIndex() < 0)))
         enabled = false;
     else
         enabled = true;
@@ -645,10 +642,10 @@ void MainWindow::showMenubar()
 void MainWindow::closeEvent(QCloseEvent *event)
 {
     if (KMessageBox::warningYesNoCancel(this,
-            i18n("Are you sure you want to close the KDE Remote Desktop Client?"),
-            i18n("Confirm Quit"),
-            KStandardGuiItem::yes(), KStandardGuiItem::no(), KStandardGuiItem::cancel(),
-            "AskBeforeExit") == KMessageBox::Yes) {
+                                        i18n("Are you sure you want to close the KDE Remote Desktop Client?"),
+                                        i18n("Confirm Quit"),
+                                        KStandardGuiItem::yes(), KStandardGuiItem::no(), KStandardGuiItem::cancel(),
+                                        "AskBeforeExit") == KMessageBox::Yes) {
 
         if (Settings::rememberSessions()) { // remember open remote views for next startup
             QStringList list;

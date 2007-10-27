@@ -133,11 +133,11 @@ void VncClientThread::outputHandler(const char *format, ...)
     kDebug(5011) << message;
 
     if ((message.contains("Couldn't convert ")) ||
-        (message.contains("Unable to connect to VNC server")))
+            (message.contains("Unable to connect to VNC server")))
         outputErrorMessageString = i18n("Server not found.");
 
     if ((message.contains("VNC connection failed: Authentication failed, too many tries")) ||
-        (message.contains("VNC connection failed: Too many authentication failures")))
+            (message.contains("VNC connection failed: Too many authentication failures")))
         outputErrorMessageString = i18n("VNC authentication failed because of too many authentication tries.");
 
     if (message.contains("VNC connection failed: Authentication failed"))
@@ -318,7 +318,7 @@ void ClientCutEvent::fire(rfbClient* cl)
 
 void VncClientThread::mouseEvent(int x, int y, int buttonMask)
 {
-    QMutexLocker lock (&mutex);
+    QMutexLocker lock(&mutex);
 
     m_eventQueue.enqueue(new PointerClientEvent(x, y, buttonMask));
 }

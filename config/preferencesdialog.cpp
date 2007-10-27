@@ -33,7 +33,7 @@
 #endif
 
 PreferencesDialog::PreferencesDialog(QWidget *parent, KConfigSkeleton *skeleton)
-  : KConfigDialog(parent, "preferences", skeleton)
+        : KConfigDialog(parent, "preferences", skeleton)
 {
     QWidget *generalPage = new QWidget(this);
     Ui::General generalUi;

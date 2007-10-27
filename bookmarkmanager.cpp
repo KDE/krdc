@@ -30,9 +30,9 @@
 #include <KDebug>
 
 BookmarkManager::BookmarkManager(KActionCollection *collection, KMenu *menu, MainWindow *parent)
-  : QObject(parent),
-    KBookmarkOwner(),
-    m_mainWindow(parent)
+        : QObject(parent),
+        KBookmarkOwner(),
+        m_mainWindow(parent)
 {
     m_menu = menu;
 
@@ -42,7 +42,7 @@ BookmarkManager::BookmarkManager(KActionCollection *collection, KMenu *menu, Mai
 
     m_manager->setUpdate(true);
 
-    m_bookmarkMenu = new KBookmarkMenu(m_manager, this, m_menu, collection );
+    m_bookmarkMenu = new KBookmarkMenu(m_manager, this, m_menu, collection);
 
     KBookmarkGroup root = m_manager->root();
     KBookmark bm = root.first();
@@ -52,7 +52,7 @@ BookmarkManager::BookmarkManager(KActionCollection *collection, KMenu *menu, Mai
         bm = root.next(bm);
     }
 
-    if(bm.isNull()) {
+    if (bm.isNull()) {
         kDebug(5010) << "History folder not found. Create it.";
         bm = m_manager->root().createNewFolder(i18n("History"));
         bm.setMetaDataItem("krdc-history", "historyfolder");
@@ -81,7 +81,7 @@ void BookmarkManager::addHistoryBookmark()
         bm = m_historyGroup.next(bm);
     }
 
-    if(bm.isNull()) {
+    if (bm.isNull()) {
         kDebug(5010) << "Add new history bookmark.";
         m_historyGroup.moveBookmark(m_historyGroup.addBookmark(currentTitle(), currentUrl()), KBookmark());
         m_manager->emitChanged();
@@ -107,7 +107,7 @@ QString BookmarkManager::currentUrl() const
 {
     if (m_mainWindow->currentRemoteView() >= 0)
         return m_mainWindow->remoteViewList().at(m_mainWindow->currentRemoteView())
-            ->url().prettyUrl(KUrl::RemoveTrailingSlash);
+               ->url().prettyUrl(KUrl::RemoveTrailingSlash);
     else
         return QString();
 }
@@ -131,7 +131,7 @@ QList<QPair<QString, QString> > BookmarkManager::currentBookmarkList() const
     while (iter.hasNext()) {
         RemoteView *next = iter.next();
         QString url = next->url().prettyUrl(KUrl::RemoveTrailingSlash);
-        list << QPair<QString,QString>(url, url);
+        list << QPair<QString, QString>(url, url);
     }
 
     return list;

@@ -29,8 +29,8 @@
 #include <KDebug>
 
 VncHostPreferences::VncHostPreferences(const QString &url, bool forceShow, QObject *parent)
-  : HostPreferences(url, parent),
-    m_quality(RemoteView::Low)
+        : HostPreferences(url, parent),
+        m_quality(RemoteView::Low)
 {
     if (hostConfigured()) {
         if (showConfigAgain() || forceShow) {
