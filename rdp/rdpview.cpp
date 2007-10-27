@@ -208,12 +208,6 @@ void RdpView::switchFullscreen(bool on)
     }
 }
 
-void RdpView::pressKey(XEvent *e)
-{
-    Q_UNUSED(e);
-    m_container->grabKeyboard();
-}
-
 void RdpView::connectionOpened()
 {
     kDebug(5012) << "Connection opened";

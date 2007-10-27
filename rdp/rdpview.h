@@ -63,7 +63,6 @@ public:
 
 public slots:
     virtual void switchFullscreen(bool on);
-    virtual void pressKey(XEvent *k);        // send a generated key to the server
 
 protected:
     bool eventFilter(QObject *obj, QEvent *event);
