@@ -28,6 +28,7 @@
 #include <KLocale>
 #include <KCmdLineArgs>
 #include <KAboutData>
+#include <KDebug>
 
 int main(int argc, char **argv)
 {
@@ -67,6 +68,23 @@ int main(int argc, char **argv)
     if (args->count() > 0) {
         for (int i = 0; i < args->count(); i++) {
             KUrl u(args->url(i));
+
+            if (u.scheme().isEmpty() || u.host().isEmpty()) { // unusable url; try to recover it...
+                QString arg(args->url(i).url());
+
+                kDebug(5010) << "unusable url; try to recover it:" << arg;
+
+                if (arg.lastIndexOf('/') != 0)
+                    arg = arg.right(arg.length() - arg.lastIndexOf('/') - 1);
+
+                if (!arg.contains("://"))
+                    arg.prepend("vnc://"); // vnc was default in kde3 times...
+
+                kDebug(5010) << "recovered url:" << arg;
+
+                u = arg;
+            }
+
             if (!u.isValid())
                 continue;
 
