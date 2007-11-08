@@ -39,7 +39,7 @@ int main(int argc, char **argv)
                                "(c) 2002-2003, Arend van Beelen jr.\n"
                                "(c) 2000-2002, Const Kaplinsky\n"
                                "(c) 2000, Tridia Corporation\n"
-                               "(c) 1999, AT&T Laboratories Cambridge\n"
+                               "(c) 1999, AT&T Laboratories Boston\n"
                                "(c) 1999-2003, Matthew Chapman"));
 
     aboutData.addAuthor(ki18n("Urs Wolfer"), ki18n("Developer, Maintainer"), "uwolfer@kde.org");
