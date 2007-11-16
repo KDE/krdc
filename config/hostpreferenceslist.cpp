@@ -144,7 +144,7 @@ void HostPreferencesList::removeHost()
 
     QFile file(m_filename);
     if (!file.open(QFile::WriteOnly | QFile::Text)) {
-        kWarning(5010) << "Cannot write " << m_filename << ". " << file.errorString() << endl;
+        kWarning(5010) << "Cannot write " << m_filename << ". " << file.errorString();
     }
 
     QTextStream out(&file);
