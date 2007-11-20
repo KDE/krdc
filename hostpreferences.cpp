@@ -195,6 +195,9 @@ KDialog *HostPreferences::createDialog(QWidget *widget)
     KTitleWidget *titleWidget = new KTitleWidget(dialog);
     titleWidget->setText(i18n("Host Configuration"));
     titleWidget->setPixmap(KIcon("krdc"));
+    layout->addWidget(titleWidget);
+
+    layout->addWidget(widget);
 
     showAgainCheckBox = new QCheckBox(mainWidget);
     showAgainCheckBox->setText(i18n("Show this dialog again for this host"));
@@ -204,8 +207,6 @@ KDialog *HostPreferences::createDialog(QWidget *widget)
     walletSupportCheckBox->setText(i18n("Remember password (KWallet)"));
     walletSupportCheckBox->setChecked(walletSupport());
 
-    layout->addWidget(titleWidget);
-    layout->addWidget(widget);
     layout->addWidget(showAgainCheckBox);
     layout->addWidget(walletSupportCheckBox);
     layout->addStretch(1);

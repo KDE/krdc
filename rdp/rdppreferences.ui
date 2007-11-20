@@ -1,7 +1,27 @@
 <ui version="4.0" >
  <class>RdpPreferences</class>
  <widget class="QWidget" name="RdpPreferences" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>446</width>
+    <height>282</height>
+   </rect>
+  </property>
   <layout class="QVBoxLayout" >
+   <property name="leftMargin" >
+    <number>0</number>
+   </property>
+   <property name="topMargin" >
+    <number>0</number>
+   </property>
+   <property name="rightMargin" >
+    <number>0</number>
+   </property>
+   <property name="bottomMargin" >
+    <number>0</number>
+   </property>
    <item>
     <widget class="QGroupBox" name="connectionGroupBox" >
      <property name="title" >
@@ -9,16 +29,23 @@
      </property>
      <layout class="QGridLayout" >
       <item row="0" column="0" >
-       <widget class="QLabel" name="resolutionLabel" >
-        <property name="text" >
-         <string>Desktop &amp;resolution:</string>
-        </property>
-        <property name="buddy" >
-         <cstring>resolutionComboBox</cstring>
-        </property>
-       </widget>
+       <layout class="QVBoxLayout" >
+        <item>
+         <widget class="QLabel" name="resolutionLabel" >
+          <property name="text" >
+           <string>Desktop &amp;resolution:</string>
+          </property>
+          <property name="buddy" >
+           <cstring>resolutionComboBox</cstring>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="resolutionDummyLabel" />
+        </item>
+       </layout>
       </item>
-      <item rowspan="2" row="0" column="1" >
+      <item row="0" column="1" >
        <layout class="QVBoxLayout" >
         <item>
          <widget class="QComboBox" name="resolutionComboBox" >
@@ -142,32 +169,16 @@
        </layout>
       </item>
       <item row="1" column="0" >
-       <spacer>
-        <property name="orientation" >
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeType" >
-         <enum>QSizePolicy::Expanding</enum>
-        </property>
-        <property name="sizeHint" >
-         <size>
-          <width>70</width>
-          <height>0</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="2" column="0" >
        <widget class="QLabel" name="colorDepthLabel" >
         <property name="text" >
          <string>Color &amp;depth:</string>
         </property>
         <property name="buddy" >
-         <cstring>kcfg_KeyboardLayout</cstring>
+         <cstring>kcfg_ColorDepth</cstring>
         </property>
        </widget>
       </item>
-      <item row="2" column="1" >
+      <item row="1" column="1" >
        <widget class="QComboBox" name="kcfg_ColorDepth" >
         <property name="minimumSize" >
          <size>
@@ -192,7 +203,7 @@
         </item>
        </widget>
       </item>
-      <item row="3" column="0" >
+      <item row="2" column="0" >
        <widget class="QLabel" name="layoutLabel" >
         <property name="text" >
          <string>&amp;Keyboard layout:</string>
@@ -202,7 +213,7 @@
         </property>
        </widget>
       </item>
-      <item row="3" column="1" >
+      <item row="2" column="1" >
        <widget class="QComboBox" name="kcfg_KeyboardLayout" >
         <property name="minimumSize" >
          <size>
@@ -403,7 +414,17 @@
         </item>
        </widget>
       </item>
-      <item row="4" column="1" >
+      <item row="3" column="0" >
+       <widget class="QLabel" name="soudLabel" >
+        <property name="text" >
+         <string>Sound:</string>
+        </property>
+        <property name="buddy" >
+         <cstring>kcfg_Sound</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1" >
        <widget class="QComboBox" name="kcfg_Sound" >
         <item>
          <property name="text" >
@@ -420,13 +441,6 @@
           <string>Disable sound</string>
          </property>
         </item>
-       </widget>
-      </item>
-      <item row="4" column="0" >
-       <widget class="QLabel" name="soudLabel" >
-        <property name="text" >
-         <string>Sound:</string>
-        </property>
        </widget>
       </item>
      </layout>
@@ -448,6 +462,9 @@
         </property>
         <property name="text" >
          <string>Extra options:</string>
+        </property>
+        <property name="buddy" >
+         <cstring>kcfg_ExtraOptions</cstring>
         </property>
        </widget>
       </item>
@@ -477,7 +494,7 @@
      </property>
      <property name="sizeHint" >
       <size>
-       <width>20</width>
+       <width>428</width>
        <height>16</height>
       </size>
      </property>

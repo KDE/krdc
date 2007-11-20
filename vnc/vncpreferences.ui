@@ -1,7 +1,27 @@
 <ui version="4.0" >
  <class>VncPreferences</class>
  <widget class="QWidget" name="VncPreferences" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>429</width>
+    <height>115</height>
+   </rect>
+  </property>
   <layout class="QVBoxLayout" >
+   <property name="leftMargin" >
+    <number>0</number>
+   </property>
+   <property name="topMargin" >
+    <number>0</number>
+   </property>
+   <property name="rightMargin" >
+    <number>0</number>
+   </property>
+   <property name="bottomMargin" >
+    <number>0</number>
+   </property>
    <item>
     <widget class="QGroupBox" name="vncGroupBox" >
      <property name="title" >
@@ -12,6 +32,9 @@
        <widget class="QLabel" name="connectionLabel" >
         <property name="text" >
          <string>Connection type:</string>
+        </property>
+        <property name="buddy" >
+         <cstring>kcfg_Quality</cstring>
         </property>
        </widget>
       </item>

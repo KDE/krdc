@@ -58,6 +58,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent, KConfigSkeleton *skeleton)
     // that imporant because you will not change this configuration each day...
     // see rdp/rdphostpreferences.cpp
     rdpUi.resolutionComboBox->hide();
+    rdpUi.resolutionDummyLabel->hide();
     rdpUi.kcfg_Height->setEnabled(true);
     rdpUi.kcfg_Width->setEnabled(true);
     rdpUi.heightLabel->setEnabled(true);
