@@ -526,7 +526,7 @@ void MainWindow::showRemoteViewToolbar()
 
         QAction *stickToolBarAction = new QAction(m_toolBar);
         stickToolBarAction->setCheckable(true);
-        stickToolBarAction->setIcon(KIcon("note2"));
+        stickToolBarAction->setIcon(KIcon("document-encrypt"));
         stickToolBarAction->setText(i18n("Stick Toolbar"));
         connect(stickToolBarAction, SIGNAL(triggered(bool)), m_toolBar, SLOT(setSticky(bool)));
         m_toolBar->addAction(stickToolBarAction);
