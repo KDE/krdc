@@ -64,6 +64,7 @@ BookmarkManager::BookmarkManager(KActionCollection *collection, KMenu *menu, Mai
 
 BookmarkManager::~BookmarkManager()
 {
+    delete m_bookmarkMenu;
 }
 
 void BookmarkManager::addHistoryBookmark()

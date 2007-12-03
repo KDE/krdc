@@ -319,6 +319,8 @@ void ClientCutEvent::fire(rfbClient* cl)
 void VncClientThread::mouseEvent(int x, int y, int buttonMask)
 {
     QMutexLocker lock(&mutex);
+    if (m_stopped)
+        return;
 
     m_eventQueue.enqueue(new PointerClientEvent(x, y, buttonMask));
 }
@@ -326,6 +328,8 @@ void VncClientThread::mouseEvent(int x, int y, int buttonMask)
 void VncClientThread::keyEvent(int key, bool pressed)
 {
     QMutexLocker lock(&mutex);
+    if (m_stopped)
+        return;
 
     m_eventQueue.enqueue(new KeyClientEvent(key, pressed));
 }
@@ -333,6 +337,8 @@ void VncClientThread::keyEvent(int key, bool pressed)
 void VncClientThread::clientCut(const QString &text)
 {
     QMutexLocker lock(&mutex);
+    if (m_stopped)
+        return;
 
     m_eventQueue.enqueue(new ClientCutEvent(strdup(text.toUtf8())));
 }
