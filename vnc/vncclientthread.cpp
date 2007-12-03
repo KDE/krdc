@@ -31,11 +31,15 @@
 
 static QString outputErrorMessageString;
 
+static uint8_t *buf = 0;
+
 static rfbBool newclient(rfbClient *cl)
 {
     int width = cl->width, height = cl->height, depth = cl->format.bitsPerPixel;
     int size = width * height * (depth / 8);
-    uint8_t *buf = new uint8_t[size];
+    if (cl->frameBuffer)
+        delete [] buf; // do not leak if we get a new framebuffer size
+    buf = new uint8_t[size];
     memset(buf, '\0', size);
     cl->frameBuffer = buf;
     cl->format.bitsPerPixel = 32;
@@ -89,6 +93,9 @@ extern void updatefb(rfbClient* cl, int x, int y, int w, int h)
 
     VncClientThread *t = (VncClientThread*)rfbClientGetClientData(cl, 0);
 
+    if (!t)
+        return;
+
     t->setImage(img);
 
     t->emitUpdated(x, y, w, h);
@@ -102,6 +109,9 @@ extern void cuttext(rfbClient* cl, const char *text, int textlen)
     if (!cutText.isEmpty()) {
         VncClientThread *t = (VncClientThread*)rfbClientGetClientData(cl, 0);
 
+        if (!t)
+            return;
+
         t->emitGotCut(cutText);
     }
 }
@@ -111,6 +121,9 @@ char *VncClientThread::passwdHandler(rfbClient *cl)
     kDebug(5011) << "password request" << kBacktrace();
 
     VncClientThread *t = (VncClientThread*)rfbClientGetClientData(cl, 0);
+
+    if (!t)
+        return 0;
 
     t->passwordRequest();
     t->m_passwordError = true;
@@ -294,6 +307,7 @@ void VncClientThread::run()
     delete [] cl->frameBuffer;
     cl->frameBuffer = 0;
     rfbClientCleanup(cl);
+    buf = 0;
     m_stopped = true;
 }
 
