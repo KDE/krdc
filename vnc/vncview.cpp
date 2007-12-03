@@ -252,8 +252,8 @@ void VncView::focusOutEvent(QFocusEvent *event)
 //         kDebug(5011) << "event->reason() == Qt::TabFocusReason";
         event->ignore();
         setFocus(); // get focus back and send tab key event to remote desktop
-        keyEvent(new QKeyEvent(QEvent::KeyPress, Qt::Key_Tab, Qt::NoModifier));
-        keyEvent(new QKeyEvent(QEvent::KeyRelease, Qt::Key_Tab, Qt::NoModifier));
+        vncThread.keyEvent(XK_Tab, true);
+        vncThread.keyEvent(XK_Tab, false);
     }
 
     event->accept();
