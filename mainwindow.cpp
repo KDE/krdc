@@ -288,7 +288,7 @@ void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConn
 
     view->resize(0, 0);
 
-    scrollArea->setWidget(m_remoteViewList.at(m_tabWidget->count() - m_showStartPage ? 1 : 0));
+    scrollArea->setWidget(m_remoteViewList.at(m_tabWidget->count() - (m_showStartPage ? 1 : 0)));
 
     int newIndex = m_tabWidget->addTab(scrollArea, KIcon("krdc"), url.prettyUrl(KUrl::RemoveTrailingSlash));
     m_tabWidget->setCurrentIndex(newIndex);
@@ -602,7 +602,7 @@ void MainWindow::updateConfiguration()
     updateActionStatus();
 
     // update the scroll areas background color
-    for (int i = m_showStartPage ? 1 : 0; i < m_tabWidget->count(); i++) {
+    for (int i = (m_showStartPage ? 1 : 0); i < m_tabWidget->count(); i++) {
         QPalette palette = m_tabWidget->widget(i)->palette();
         palette.setColor(QPalette::Dark, Settings::backgroundColor());
         m_tabWidget->widget(i)->setPalette(palette);
@@ -649,7 +649,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
         if (Settings::rememberSessions()) { // remember open remote views for next startup
             QStringList list;
-            for (int i = m_showStartPage ? 1 : 0; i < m_tabWidget->count(); i++) {
+            for (int i = (m_showStartPage ? 1 : 0); i < m_tabWidget->count(); i++) {
                 kDebug(5010) << m_remoteViewList.at(i - 1)->url();
                 list.append(m_remoteViewList.at(i - 1)->url().prettyUrl(KUrl::RemoveTrailingSlash));
             }
