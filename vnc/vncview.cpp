@@ -189,6 +189,8 @@ void VncView::updateImage(int x, int y, int w, int h)
     m_w = w;
     m_h = h;
 
+    m_frame = vncThread.image();
+
     if (!m_initDone) {
         setAttribute(Qt::WA_StaticContents);
         setAttribute(Qt::WA_OpaquePaintEvent);
@@ -198,16 +200,20 @@ void VncView::updateImage(int x, int y, int w, int h)
 
         setMouseTracking(true); // get mouse events even when there is no mousebutton pressed
         setFocusPolicy(Qt::WheelFocus);
-        QImage frame = vncThread.image();
-        setFixedSize(frame.width(), frame.height());
+        setFixedSize(m_frame.width(), m_frame.height());
         setStatus(Connected);
-        emit changeSize(frame.width(), frame.height());
+        emit changeSize(m_frame.width(), m_frame.height());
         emit connected();
         m_initDone = true;
 
         if (m_hostPreferences->walletSupport()) {
             saveWalletPassword(vncThread.password());
         }
+    }
+
+    if ((y == 0 && x == 0) && (m_frame.size() != size())) {
+        setFixedSize(m_frame.width(), m_frame.height());
+        emit changeSize(m_frame.width(), m_frame.height());
     }
 
     m_repaint = true;
@@ -231,14 +237,12 @@ void VncView::paintEvent(QPaintEvent *event)
 
     QPainter painter(this);
 
-
     if (m_repaint) {
 //         kDebug(5011) << "normal repaint";
-        painter.drawImage(QRect(m_x, m_y, m_w, m_h), vncThread.image(m_x, m_y, m_w, m_h));
+        painter.drawImage(QRect(m_x, m_y, m_w, m_h), m_frame.copy(m_x, m_y, m_w, m_h));
     } else {
 //         kDebug(5011) << "resize repaint";
-        QImage frame = vncThread.image();
-        painter.drawImage(frame.rect(), frame);
+        painter.drawImage(m_frame.rect(), m_frame);
     }
 
     QWidget::paintEvent(event);

@@ -74,6 +74,7 @@ private:
     bool m_firstPasswordTry;
     bool m_dontSendClipboard;
     VncHostPreferences *m_hostPreferences;
+    QImage m_frame;
 
 private slots:
     void updateImage(int x, int y, int w, int h);
