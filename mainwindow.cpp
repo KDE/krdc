@@ -172,6 +172,7 @@ void MainWindow::setupActions()
     QAction *keyBindingsAction = KStandardAction::keyBindings(this, SLOT(configureKeys()), actionCollection());
     actionCollection()->addAction("configure_keys", keyBindingsAction);
     QAction *cinfigNotifyAction = KStandardAction::configureNotifications(this, SLOT(configureNotifications()), actionCollection());
+    cinfigNotifyAction->setVisible(false);
     actionCollection()->addAction("configure_notifications", cinfigNotifyAction);
     m_menubarAction = KStandardAction::showMenubar(this, SLOT(showMenubar()), actionCollection());
     m_menubarAction->setChecked(!menuBar()->isHidden());
