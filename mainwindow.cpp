@@ -144,7 +144,7 @@ void MainWindow::setupActions()
     QAction *viewOnlyAction = actionCollection()->addAction("view_only");
     viewOnlyAction->setCheckable(true);
     viewOnlyAction->setText(i18n("View Only"));
-    viewOnlyAction->setIcon(KIcon("kgpg-sign-kgpg"));
+    viewOnlyAction->setIcon(KIcon("document-preview"));
     connect(viewOnlyAction, SIGNAL(triggered(bool)), SLOT(viewOnly(bool)));
 
     QAction *logoutAction = actionCollection()->addAction("logout");
@@ -355,7 +355,7 @@ void MainWindow::statusChanged(RemoteView::RemoteStatus status)
         message = i18n("Authenticating at %1", host);
         break;
     case RemoteView::Preparing:
-        iconName = "history";
+        iconName = "view-history";
         message = i18n("Preparing connection to %1", host);
         break;
     case RemoteView::Connected:
@@ -527,7 +527,7 @@ void MainWindow::showRemoteViewToolbar()
 
         QAction *stickToolBarAction = new QAction(m_toolBar);
         stickToolBarAction->setCheckable(true);
-        stickToolBarAction->setIcon(KIcon("document-encrypt"));
+        stickToolBarAction->setIcon(KIcon("object-locked"));
         stickToolBarAction->setText(i18n("Stick Toolbar"));
         connect(stickToolBarAction, SIGNAL(triggered(bool)), m_toolBar, SLOT(setSticky(bool)));
         m_toolBar->addAction(stickToolBarAction);
