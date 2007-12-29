@@ -109,7 +109,7 @@ void MainWindow::setupActions()
 {
     QAction *vncConnectionAction = actionCollection()->addAction("new_vnc_connection");
     vncConnectionAction->setText(i18n("New VNC Connection..."));
-    vncConnectionAction->setIcon(KIcon("krdc"));
+    vncConnectionAction->setIcon(KIcon("network-connect"));
     connect(vncConnectionAction, SIGNAL(triggered()), SLOT(newVncConnection()));
 #ifndef BUILD_VNC
     vncConnectionAction->setVisible(false);
@@ -117,7 +117,7 @@ void MainWindow::setupActions()
 
     QAction *nxConnectionAction = actionCollection()->addAction("new_nx_connection");
     nxConnectionAction->setText(i18n("New NX Connection..."));
-    nxConnectionAction->setIcon(KIcon("krdc"));
+    nxConnectionAction->setIcon(KIcon("network-connect"));
     connect(nxConnectionAction, SIGNAL(triggered()), SLOT(newNxConnection()));
 #ifndef BUILD_NX
     nxConnectionAction->setVisible(false);
@@ -125,7 +125,7 @@ void MainWindow::setupActions()
 
     QAction *rdpConnectionAction = actionCollection()->addAction("new_rdp_connection");
     rdpConnectionAction->setText(i18n("New RDP Connection..."));
-    rdpConnectionAction->setIcon(KIcon("krdc"));
+    rdpConnectionAction->setIcon(KIcon("network-connect"));
     connect(rdpConnectionAction, SIGNAL(triggered()), SLOT(newRdpConnection()));
 #ifndef BUILD_RDP
     rdpConnectionAction->setVisible(false);
@@ -159,7 +159,7 @@ void MainWindow::setupActions()
     connect(showLocalCursorAction, SIGNAL(triggered(bool)), SLOT(showLocalCursor(bool)));
 
     QAction *specialKeysDialogAction = actionCollection()->addAction("special_keys_dialog");
-    specialKeysDialogAction->setIcon(KIcon("go-jump-locationbar"));
+    specialKeysDialogAction->setIcon(KIcon("configure-shortcuts"));
     specialKeysDialogAction->setText(i18n("Open Special Keys Dialog..."));
     connect(specialKeysDialogAction, SIGNAL(triggered()), SLOT(specialKeyDialog()));
 
@@ -347,7 +347,7 @@ void MainWindow::statusChanged(RemoteView::RemoteStatus status)
 
     switch (status) {
     case RemoteView::Connecting:
-        iconName = "network";
+        iconName = "network-connect";
         message = i18n("Connecting to %1", host);
         break;
     case RemoteView::Authenticating:
