@@ -214,7 +214,7 @@ void FloatingToolBar::paintEvent(QPaintEvent *e)
     // paint the internal pixmap over the widget
     QPainter p(this);
     p.setOpacity(d->opacity);
-    p.drawPixmap(e->rect().topLeft(), d->backgroundPixmap, e->rect());
+    p.drawImage(e->rect().topLeft(), d->backgroundPixmap.toImage(), e->rect());
 }
 
 void FloatingToolBar::mousePressEvent(QMouseEvent *e)
@@ -328,6 +328,7 @@ void FloatingToolBarPrivate::buildToolBar()
     // 3. resize pixmap, mask and widget
     QBitmap mask(myWidth + 1, myHeight + 1);
     backgroundPixmap = QPixmap(myWidth + 1, myHeight + 1);
+    backgroundPixmap.fill(Qt::transparent);
     q->resize(myWidth + 1, myHeight + 1);
 
     // 4. create and set transparency mask
@@ -343,6 +344,7 @@ void FloatingToolBarPrivate::buildToolBar()
 
     // 5. draw background
     QPainter bufferPainter(&backgroundPixmap);
+    bufferPainter.translate(0.5, 0.5);
     QPalette pal = q->palette();
     // 5.1. draw horizontal/vertical gradient
     QLinearGradient grad;
@@ -362,15 +364,16 @@ void FloatingToolBarPrivate::buildToolBar()
     }
     grad.setColorAt(0, pal.color(QPalette::Active, QPalette::Button));
     grad.setColorAt(1, pal.color(QPalette::Active, QPalette::Light));
-    bufferPainter.fillRect(0, 0, myWidth + 1, myHeight + 1, grad);
+    bufferPainter.setBrush(QBrush(grad));
     // 5.2. draw rounded border
-    bufferPainter.setPen(pal.color(QPalette::Active, QPalette::Dark));
+    bufferPainter.setPen( pal.color(QPalette::Active, QPalette::Dark).lighter(40));
     bufferPainter.setRenderHints(QPainter::Antialiasing);
     if (vertical)
         bufferPainter.drawRoundRect(topLeft ? -10 : 0, 0, myWidth + 10, myHeight, 2000 / (myWidth + 10), 2000 / myHeight);
     else
         bufferPainter.drawRoundRect(0, topLeft ? -10 : 0, myWidth, myHeight + 10, 2000 / myWidth, 2000 / (myHeight + 10));
     // 5.3. draw handle
+    bufferPainter.translate(-0.5, -0.5);
     bufferPainter.setPen(pal.color(QPalette::Active, QPalette::Mid));
     if (vertical) {
         int dx = anchorSide == FloatingToolBar::Left ? 2 : 4;
