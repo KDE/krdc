@@ -421,7 +421,8 @@ void MainWindow::switchFullscreen()
         m_fullscreenWindow = 0;
     } else {
         m_fullscreenWindow = new QWidget(this, Qt::Window);
-        m_fullscreenWindow->setWindowTitle(i18n("KDE Remote Desktop Client (Fullscreen)"));
+        m_fullscreenWindow->setWindowTitle(i18nc("window title when in fullscreen mode (for example displayed in tasklist)",
+                                                 "KDE Remote Desktop Client (Fullscreen)"));
 
         QScrollArea *scrollArea = createScrollArea(m_fullscreenWindow, m_remoteViewList.at(m_currentRemoteView));
         scrollArea->setFrameShape(QFrame::NoFrame);
