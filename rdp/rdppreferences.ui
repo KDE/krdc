@@ -6,7 +6,7 @@
     <x>0</x>
     <y>0</y>
     <width>446</width>
-    <height>282</height>
+    <height>283</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" >
@@ -93,7 +93,7 @@
           </item>
           <item>
            <property name="text" >
-            <string>Custom (...)</string>
+            <string>Custom resolution (...)</string>
            </property>
           </item>
          </widget>
@@ -417,7 +417,7 @@
       <item row="3" column="0" >
        <widget class="QLabel" name="soudLabel" >
         <property name="text" >
-         <string>Sound:</string>
+         <string comment="label for soundsettings in preferences dialog" >Sound:</string>
         </property>
         <property name="buddy" >
          <cstring>kcfg_Sound</cstring>
