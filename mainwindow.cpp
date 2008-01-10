@@ -741,7 +741,7 @@ void MainWindow::newVncConnection()
 
     QToolTip::showText(m_addressNavigator->pos() + pos() + QPoint(m_addressNavigator->width(),
                                                                   m_addressNavigator->height() + 20),
-                       i18n("<html>Enter here the address.<br />"
+                       i18n("<html>Enter the address here.<br />"
                             "<i>Example: vncserver:1 (host:port / screen)</i></html>"), this);
 }
 
@@ -752,7 +752,7 @@ void MainWindow::newNxConnection()
 
     QToolTip::showText(m_addressNavigator->pos() + pos() + QPoint(m_addressNavigator->width(),
                                                                   m_addressNavigator->height() + 20),
-                       i18n("<html>Enter here the address.<br />"
+                       i18n("<html>Enter the address here.<br />"
                             "<i>Example: nxserver (host)</i></html>"), this);
 }
 
@@ -763,7 +763,7 @@ void MainWindow::newRdpConnection()
 
     QToolTip::showText(m_addressNavigator->pos() + pos() + QPoint(m_addressNavigator->width(),
                                                                   m_addressNavigator->height() + 20),
-                       i18n("<html>Enter here the address. Port is optional.<br />"
+                       i18n("<html>Enter the address here. Port is optional.<br />"
                             "<i>Example: rdpserver:3389 (host:port)</i></html>"), this);
 }
 
