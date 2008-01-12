@@ -42,7 +42,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent, KConfigSkeleton *skeleton)
 
     HostPreferencesList *hostPreferencesList = new HostPreferencesList(this);
     addPage(hostPreferencesList, i18n("Hosts"), "krdc", i18n("Host Config"));
-
+    setHelp(QString(),"krdc");
 #ifdef BUILD_VNC
     QWidget *vncPage = new QWidget(this);
     Ui::VncPreferences vncUi;
