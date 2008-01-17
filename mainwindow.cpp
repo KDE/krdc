@@ -293,6 +293,7 @@ void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConn
 
     int newIndex = m_tabWidget->addTab(scrollArea, KIcon("krdc"), url.prettyUrl(KUrl::RemoveTrailingSlash));
     m_tabWidget->setCurrentIndex(newIndex);
+    tabChanged(newIndex); // force to update m_currentRemoteView (tabChanged is not emitted when start page has been disabled)
 
     view->start();
 }
@@ -650,9 +651,9 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
         if (Settings::rememberSessions()) { // remember open remote views for next startup
             QStringList list;
-            for (int i = (m_showStartPage ? 1 : 0); i < m_tabWidget->count(); i++) {
-                kDebug(5010) << m_remoteViewList.at(i - 1)->url();
-                list.append(m_remoteViewList.at(i - 1)->url().prettyUrl(KUrl::RemoveTrailingSlash));
+            for (int i = 0; i < m_remoteViewList.count(); i++) {
+                kDebug(5010) << m_remoteViewList.at(i)->url();
+                list.append(m_remoteViewList.at(i)->url().prettyUrl(KUrl::RemoveTrailingSlash));
             }
             Settings::setOpenSessions(list);
         }
