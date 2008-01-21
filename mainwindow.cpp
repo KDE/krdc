@@ -28,6 +28,7 @@
 #include "config/preferencesdialog.h"
 #include "floatingtoolbar.h"
 #include "bookmarkmanager.h"
+#include "systemtrayicon.h"
 #include "specialkeysdialog.h"
 #ifdef BUILD_RDP
 #include "rdpview.h"
@@ -74,7 +75,8 @@ MainWindow::MainWindow(QWidget *parent)
         m_topBottomBorder(0),
         m_leftRightBorder(0),
         m_currentRemoteView(-1),
-        m_showStartPage(false)
+        m_showStartPage(false),
+        m_systemTrayIcon(0)
 {
     setupActions();
 
@@ -85,6 +87,11 @@ MainWindow::MainWindow(QWidget *parent)
     m_tabWidget = new KTabWidget(this);
     m_tabWidget->setMinimumSize(600, 400);
     setCentralWidget(m_tabWidget);
+
+    if (Settings::systemTrayIcon()) {
+        m_systemTrayIcon = new SystemTrayIcon(this);
+        m_systemTrayIcon->setVisible(true);
+    }
 
     connect(m_tabWidget, SIGNAL(currentChanged(int)), SLOT(tabChanged(int)));
 
@@ -596,6 +603,14 @@ void MainWindow::updateConfiguration()
 {
     m_addressNavigator->setUrlEditable(Settings::normalUrlInputLine());
 
+    if (Settings::systemTrayIcon() && !m_systemTrayIcon) {
+        m_systemTrayIcon = new SystemTrayIcon(this);
+        m_systemTrayIcon->setVisible(true);
+    } else if (m_systemTrayIcon) {
+        delete m_systemTrayIcon;
+        m_systemTrayIcon = 0;
+    }
+
     if (Settings::showStartPage() && !m_showStartPage)
         createStartPage();
     else if (!Settings::showStartPage() && m_showStartPage) {
@@ -614,7 +629,25 @@ void MainWindow::updateConfiguration()
 
 void MainWindow::quit()
 {
-    close();
+    if (KMessageBox::warningYesNoCancel(this,
+                                        i18n("Are you sure you want to close the KDE Remote Desktop Client?"),
+                                        i18n("Confirm Quit"),
+                                        KStandardGuiItem::yes(), KStandardGuiItem::no(), KStandardGuiItem::cancel(),
+                                        "AskBeforeExit") == KMessageBox::Yes) {
+
+        if (Settings::rememberSessions()) { // remember open remote views for next startup
+            QStringList list;
+            for (int i = 0; i < m_remoteViewList.count(); i++) {
+                kDebug(5010) << m_remoteViewList.at(i)->url();
+                list.append(m_remoteViewList.at(i)->url().prettyUrl(KUrl::RemoveTrailingSlash));
+            }
+            Settings::setOpenSessions(list);
+        }
+
+        Settings::self()->writeConfig();
+
+        qApp->quit();
+    }
 }
 
 void MainWindow::configureNotifications()
@@ -644,26 +677,13 @@ void MainWindow::showMenubar()
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
-    if (KMessageBox::warningYesNoCancel(this,
-                                        i18n("Are you sure you want to close the KDE Remote Desktop Client?"),
-                                        i18n("Confirm Quit"),
-                                        KStandardGuiItem::yes(), KStandardGuiItem::no(), KStandardGuiItem::cancel(),
-                                        "AskBeforeExit") == KMessageBox::Yes) {
+    event->ignore();
 
-        if (Settings::rememberSessions()) { // remember open remote views for next startup
-            QStringList list;
-            for (int i = 0; i < m_remoteViewList.count(); i++) {
-                kDebug(5010) << m_remoteViewList.at(i)->url();
-                list.append(m_remoteViewList.at(i)->url().prettyUrl(KUrl::RemoveTrailingSlash));
-            }
-            Settings::setOpenSessions(list);
-        }
-
-        Settings::self()->writeConfig();
-
-        event->accept();
-    } else
-        event->ignore();
+    if (Settings::systemTrayIcon()) {
+        hide(); // just hide the mainwindow, keep it in systemtray
+    } else {
+        quit();
+    }
 }
 
 void MainWindow::tabChanged(int index)

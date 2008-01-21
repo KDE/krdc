@@ -35,6 +35,7 @@ class KUrlNavigator;
 class BookmarkManager;
 class FloatingToolBar;
 class RemoteView;
+class SystemTrayIcon;
 class QScrollArea;
 
 class MainWindow : public KXmlGuiWindow
@@ -101,6 +102,8 @@ private:
     int m_currentRemoteView;
     bool m_showStartPage;
     bool m_switchFullscreenWhenConnected;
+
+    SystemTrayIcon *m_systemTrayIcon;
 };
 
 #include <QApplication>
