@@ -633,7 +633,7 @@ void MainWindow::quit()
                                         i18n("Are you sure you want to close the KDE Remote Desktop Client?"),
                                         i18n("Confirm Quit"),
                                         KStandardGuiItem::yes(), KStandardGuiItem::no(), KStandardGuiItem::cancel(),
-                                        "AskBeforeExit") == KMessageBox::Yes) {
+                                        "DoNotAskBeforeExit") == KMessageBox::Yes) {
 
         if (Settings::rememberSessions()) { // remember open remote views for next startup
             QStringList list;
