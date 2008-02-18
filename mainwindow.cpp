@@ -629,11 +629,11 @@ void MainWindow::updateConfiguration()
 
 void MainWindow::quit()
 {
-    if (KMessageBox::warningYesNoCancel(this,
-                                        i18n("Are you sure you want to close the KDE Remote Desktop Client?"),
-                                        i18n("Confirm Quit"),
-                                        KStandardGuiItem::yes(), KStandardGuiItem::no(), KStandardGuiItem::cancel(),
-                                        "DoNotAskBeforeExit") == KMessageBox::Yes) {
+    if (KMessageBox::warningContinueCancel(this,
+                                           i18n("Are you sure you want to quit the KDE Remote Desktop Client?"),
+                                           i18n("Confirm Quit"),
+                                           KStandardGuiItem::quit(), KStandardGuiItem::cancel(),
+                                           "DoNotAskBeforeExit") == KMessageBox::Continue) {
 
         if (Settings::rememberSessions()) { // remember open remote views for next startup
             QStringList list;
