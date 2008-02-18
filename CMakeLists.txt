@@ -74,6 +74,7 @@ install(TARGETS krdc DESTINATION ${BIN_INSTALL_DIR})
 install(FILES krdcui.rc DESTINATION ${DATA_INSTALL_DIR}/krdc)
 install(FILES krdc.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
 install(FILES vnc.protocol rdp.protocol DESTINATION ${SERVICES_INSTALL_DIR})
+install(FILES smb2rdc.desktop DESTINATION ${SERVICES_INSTALL_DIR}/ServiceMenus)
 install(FILES _rfb._tcp DESTINATION ${DATA_INSTALL_DIR}/zeroconf)
 install(FILES pointcursor.png pointcursormask.png DESTINATION ${DATA_INSTALL_DIR}/krdc/pics)
 

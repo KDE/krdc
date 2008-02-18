@@ -1,6 +1,7 @@
-# KDE Config File
 [Desktop Entry]
-X-KDE-ServiceTypes=application/x-smb-server
+Type=Service
+X-KDE-ServiceTypes=KonqPopupMenu/Plugin
+MimeType=application/x-smb-server;
 Actions=smb2rdc;
 
 [Desktop Action smb2rdc]
@@ -55,5 +56,3 @@ Name[zh_HK]=開放遠端桌面連線到這電腦
 Name[zh_TW]=在此主機上開啟遠端桌面
 Exec=krdc %u
 Icon=krdc
-
-
