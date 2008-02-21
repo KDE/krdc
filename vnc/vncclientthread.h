@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007 Urs Wolfer <uwolfer @ kde.org>
+** Copyright (C) 2007-2008 Urs Wolfer <uwolfer @ kde.org>
 **
 ** This file is part of KDE.
 **
@@ -23,6 +23,16 @@
 
 #ifndef VNCCLIENTTHREAD_H
 #define VNCCLIENTTHREAD_H
+
+#ifdef QTONLY
+    #include <QDebug>
+    #define kDebug(n) qDebug()
+    #define kBacktrace() ""
+    #define i18n tr
+#else
+    #include <KDebug>
+    #include <KLocale>
+#endif
 
 #include "remoteview.h"
 

@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007 Urs Wolfer <uwolfer @ kde.org>
+** Copyright (C) 2007-2008 Urs Wolfer <uwolfer @ kde.org>
 **
 ** This file is part of KDE.
 **
@@ -25,8 +25,11 @@
 #define VNCVIEW_H
 
 #include "remoteview.h"
-#include "vnchostpreferences.h"
 #include "vncclientthread.h"
+
+#ifndef QTONLY
+    #include "vnchostpreferences.h"
+#endif
 
 #include <QClipboard>
 
@@ -73,7 +76,9 @@ private:
     bool m_quitFlag;
     bool m_firstPasswordTry;
     bool m_dontSendClipboard;
+#ifndef QTONLY
     VncHostPreferences *m_hostPreferences;
+#endif
     QImage m_frame;
 
 private slots:

@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007 Urs Wolfer <uwolfer @ kde.org>
+** Copyright (C) 2007-2008 Urs Wolfer <uwolfer @ kde.org>
 **
 ** This file is part of KDE.
 **
@@ -22,9 +22,6 @@
 ****************************************************************************/
 
 #include "vncclientthread.h"
-
-#include <KDebug>
-#include <KLocale>
 
 #include <QMutexLocker>
 #include <QTimer>
@@ -357,4 +354,4 @@ void VncClientThread::clientCut(const QString &text)
     m_eventQueue.enqueue(new ClientCutEvent(strdup(text.toUtf8())));
 }
 
-#include "vncclientthread.moc"
+#include "moc_vncclientthread.cpp"

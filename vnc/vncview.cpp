@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007 Urs Wolfer <uwolfer @ kde.org>
+** Copyright (C) 2007-2008 Urs Wolfer <uwolfer @ kde.org>
 **
 ** This file is part of KDE.
 **
@@ -23,10 +23,16 @@
 
 #include "vncview.h"
 
-#include <KLocale>
-#include <KMessageBox>
-#include <KPasswordDialog>
-#include <KDebug>
+#ifdef QTONLY
+    #include <QMessageBox>
+    #include <QInputDialog>
+    #define KMessageBox QMessageBox
+    #define error(parent, message, caption) \
+        critical(parent, caption, message)
+#else
+    #include <KMessageBox>
+    #include <KPasswordDialog>
+#endif
 
 #include <QApplication>
 #include <QImage>
@@ -124,11 +130,15 @@ bool VncView::isQuitting()
 
 bool VncView::start()
 {
-    m_hostPreferences = new VncHostPreferences(m_url.prettyUrl(KUrl::RemoveTrailingSlash), false, this);
-
     vncThread.setHost(m_host);
     vncThread.setPort(m_port);
+#ifdef QTONLY
+    int quality = (QCoreApplication::arguments().count() > 2) ? QCoreApplication::arguments().at(2).toInt() : 2;
+    vncThread.setQuality((RemoteView::Quality)quality);
+#else
+    m_hostPreferences = new VncHostPreferences(m_url.prettyUrl(KUrl::RemoveTrailingSlash), false, this);
     vncThread.setQuality(m_hostPreferences->quality());
+#endif
 
     setStatus(Connecting);
 
@@ -147,6 +157,7 @@ void VncView::requestPassword()
 
     setStatus(Authenticating);
 
+#ifndef QTONLY
     if (m_hostPreferences->walletSupport()) {
         QString walletPassword = readWalletPassword();
 
@@ -155,12 +166,20 @@ void VncView::requestPassword()
             return;
         }
     }
+#endif
 
     if (!m_url.password().isNull()) {
         vncThread.setPassword(m_url.password());
         return;
     }
 
+#ifdef QTONLY
+    QString password = QInputDialog::getText(this, //krazy:exclude=qclasses
+                                             tr("Password required"),
+                                             tr("Please enter the password for the remote desktop:"),
+                                             QLineEdit::Password);
+    vncThread.setPassword(password);
+#else
     KPasswordDialog dialog(this);
     dialog.setPixmap(KIcon("dialog-password").pixmap(48));
     dialog.setPrompt(m_firstPasswordTry ? i18n("Access to the system requires a password.")
@@ -169,6 +188,7 @@ void VncView::requestPassword()
         m_firstPasswordTry = false;
         vncThread.setPassword(dialog.password());
     }
+#endif
 }
 
 void VncView::outputErrorMessage(const QString &message)
@@ -206,9 +226,11 @@ void VncView::updateImage(int x, int y, int w, int h)
         emit connected();
         m_initDone = true;
 
+#ifndef QTONLY
         if (m_hostPreferences->walletSupport()) {
             saveWalletPassword(vncThread.password());
         }
+#endif
     }
 
     if ((y == 0 && x == 0) && (m_frame.size() != size())) {
@@ -453,4 +475,4 @@ void VncView::clipboardDataChanged()
     vncThread.clientCut(text);
 }
 
-#include "vncview.moc"
+#include "moc_vncview.cpp"

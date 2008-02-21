@@ -1,7 +1,7 @@
 /****************************************************************************
 **
 ** Copyright (C) 2002-2003 Tim Jansen <tim@tjansen.de>
-** Copyright (C) 2007 Urs Wolfer <uwolfer @ kde.org>
+** Copyright (C) 2007-2008 Urs Wolfer <uwolfer @ kde.org>
 **
 ** This file is part of KDE.
 **
@@ -25,8 +25,13 @@
 #ifndef REMOTEVIEW_H
 #define REMOTEVIEW_H
 
-#include <KUrl>
-#include <KWallet/Wallet>
+#ifdef QTONLY
+    #include <QUrl>
+    #define KUrl QUrl
+#else
+    #include <KUrl>
+    #include <KWallet/Wallet>
+#endif
 
 #include <QWidget>
 
@@ -341,14 +346,17 @@ protected:
 
     QCursor localDotCursor() const;
 
-    QString readWalletPassword();
-    void saveWalletPassword(const QString &password);
-
     QString m_host;
     int m_port;
     bool m_viewOnly;
     KUrl m_url;
+
+#ifndef QTONLY
+    QString readWalletPassword();
+    void saveWalletPassword(const QString &password);
     KWallet::Wallet *m_wallet;
+#endif
+
     DotCursorState m_dotCursorState;
 };
 

@@ -1,7 +1,7 @@
 /****************************************************************************
 **
 ** Copyright (C) 2002-2003 Tim Jansen <tim@tjansen.de>
-** Copyright (C) 2007 Urs Wolfer <uwolfer @ kde.org>
+** Copyright (C) 2007-2008 Urs Wolfer <uwolfer @ kde.org>
 **
 ** This file is part of KDE.
 **
@@ -24,9 +24,12 @@
 
 #include "remoteview.h"
 
+#ifndef QTONLY
+    #include <KDebug>
+    #include <KStandardDirs>
+#endif
+
 #include <QBitmap>
-#include <KDebug>
-#include <KStandardDirs>
 
 RemoteView::RemoteView(QWidget *parent)
         : QWidget(parent),
@@ -34,7 +37,9 @@ RemoteView::RemoteView(QWidget *parent)
         m_host(QString()),
         m_port(0),
         m_viewOnly(false),
+#ifndef QTONLY
         m_wallet(0),
+#endif
         m_dotCursorState(CursorOff)
 {
 }
@@ -153,6 +158,7 @@ KUrl RemoteView::url()
     return m_url;
 }
 
+#ifndef QTONLY
 QString RemoteView::readWalletPassword()
 {
     QString krdc_folder = "KRDC";
@@ -188,14 +194,19 @@ void RemoteView::saveWalletPassword(const QString &password)
         m_wallet->writePassword(m_url.prettyUrl(KUrl::RemoveTrailingSlash), password);
     }
 }
+#endif
 
 QCursor RemoteView::localDotCursor() const
 {
+#ifdef QTONLY
+    return QCursor(); //TODO
+#else
     QBitmap cursorBitmap(KGlobal::dirs()->findResource("appdata",
                                                        "pics/pointcursor.png"));
     QBitmap cursorMask(KGlobal::dirs()->findResource("appdata",
                                                      "pics/pointcursormask.png"));
     return QCursor(cursorBitmap, cursorMask);
+#endif
 }
 
-#include "remoteview.moc"
+#include "moc_remoteview.cpp"
