@@ -70,8 +70,6 @@ VncView::~VncView()
 bool VncView::eventFilter(QObject *obj, QEvent *event)
 {
     if (m_viewOnly) {
-        setCursor(Qt::ArrowCursor);
-
         if (event->type() == QEvent::KeyPress ||
                 event->type() == QEvent::KeyRelease ||
                 event->type() == QEvent::MouseButtonDblClick ||
@@ -81,8 +79,6 @@ bool VncView::eventFilter(QObject *obj, QEvent *event)
                 event->type() == QEvent::MouseMove)
             return true;
     }
-
-    setCursor(m_dotCursorState == CursorOn ? localDotCursor() : Qt::BlankCursor);
 
     return RemoteView::eventFilter(obj, event);
 }
@@ -241,6 +237,22 @@ void VncView::updateImage(int x, int y, int w, int h)
     m_repaint = true;
     repaint(x, y, w, h);
     m_repaint = false;
+}
+
+void VncView::setViewOnly(bool viewOnly)
+{
+    if (viewOnly)
+        setCursor(Qt::ArrowCursor);
+    else
+        setCursor(m_dotCursorState == CursorOn ? localDotCursor() : Qt::BlankCursor);
+
+    m_viewOnly = viewOnly;
+}
+
+void VncView::showDotCursor(DotCursorState state)
+{
+    setCursor(state == CursorOn ? localDotCursor() : Qt::BlankCursor);
+    m_dotCursorState = state;
 }
 
 void VncView::setCut(const QString &text)
