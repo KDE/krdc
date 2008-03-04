@@ -50,6 +50,8 @@ public:
     bool start();
     bool supportsLocalCursor() const;
     void keyEvent(QKeyEvent *e);
+    void setViewOnly(bool viewOnly);
+    void showDotCursor(DotCursorState state);
 
 protected:
     void paintEvent(QPaintEvent *event);
