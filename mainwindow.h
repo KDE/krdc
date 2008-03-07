@@ -78,6 +78,8 @@ private slots:
     void newVncConnection();
     void newNxConnection();
     void newRdpConnection();
+    void createZeroconfPage();
+    void closeZeroconfPage();
 
 private:
     void setupActions();
@@ -101,6 +103,8 @@ private:
 
     int m_currentRemoteView;
     bool m_showStartPage;
+    bool m_showZeroconfPage;
+    int m_zeroconfTabIndex;
     bool m_switchFullscreenWhenConnected;
 
     SystemTrayIcon *m_systemTrayIcon;

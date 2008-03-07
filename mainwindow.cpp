@@ -39,6 +39,9 @@
 #ifdef BUILD_VNC
 #include "vncview.h"
 #endif
+#ifdef BUILD_ZEROCONF
+#include "zeroconfpage.h"
+#endif
 
 #include <KAction>
 #include <KActionCollection>
@@ -76,6 +79,8 @@ MainWindow::MainWindow(QWidget *parent)
         m_leftRightBorder(0),
         m_currentRemoteView(-1),
         m_showStartPage(false),
+        m_showZeroconfPage(false),
+        m_zeroconfTabIndex(-1),
         m_systemTrayIcon(0)
 {
     setupActions();
@@ -137,6 +142,15 @@ void MainWindow::setupActions()
 #ifndef BUILD_RDP
     rdpConnectionAction->setVisible(false);
 #endif
+
+    QAction *zeroconfAction = actionCollection()->addAction("zeroconf_page");
+    zeroconfAction->setText(i18n("Browse Remote Desktop Services on Local Network..."));
+    zeroconfAction->setIcon(KIcon("network-connect"));
+    connect(zeroconfAction, SIGNAL(triggered()), SLOT(createZeroconfPage()));
+#ifndef BUILD_ZEROCONF
+    zeroconfAction->setVisible(false);
+#endif
+
 
     QAction *screenshotAction = actionCollection()->addAction("take_screenshot");
     screenshotAction->setText(i18n("Copy Screenshot to Clipboard"));
@@ -295,8 +309,14 @@ void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConn
     m_remoteViewList.append(view);
 
     view->resize(0, 0);
+ 
+   int numNonRemoteView = 0;
+    if(m_showStartPage)
+      numNonRemoteView++;
+    if(m_showZeroconfPage)
+      numNonRemoteView++;
 
-    scrollArea->setWidget(m_remoteViewList.at(m_tabWidget->count() - (m_showStartPage ? 1 : 0)));
+    scrollArea->setWidget(m_remoteViewList.at(m_tabWidget->count() - numNonRemoteView));
 
     int newIndex = m_tabWidget->addTab(scrollArea, KIcon("krdc"), url.prettyUrl(KUrl::RemoveTrailingSlash));
     m_tabWidget->setCurrentIndex(newIndex);
@@ -420,6 +440,7 @@ void MainWindow::switchFullscreen()
             m_toolBar->hideAndDestroy();
             m_toolBar = 0;
         }
+
 
         actionCollection()->action("switch_fullscreen")->setIcon(KIcon("view-fullscreen"));
         actionCollection()->action("switch_fullscreen")->setText(i18n("Switch to Fullscreen Mode"));
@@ -551,8 +572,9 @@ void MainWindow::updateActionStatus()
 
     bool enabled;
 
-    if ((m_showStartPage && (m_tabWidget->currentIndex() == 0)) ||
-            (!m_showStartPage && (m_tabWidget->currentIndex() < 0)))
+    if ((m_showStartPage && (m_tabWidget->currentIndex() == 0)) || 
+         ((m_zeroconfTabIndex > -1) && (m_tabWidget->currentIndex() == m_zeroconfTabIndex)) || 
+         (!m_showStartPage && (m_tabWidget->currentIndex() < 0)))
         enabled = false;
     else
         enabled = true;
@@ -620,7 +642,12 @@ void MainWindow::updateConfiguration()
     updateActionStatus();
 
     // update the scroll areas background color
-    for (int i = (m_showStartPage ? 1 : 0); i < m_tabWidget->count(); i++) {
+    int numNonRemoteView = 0;
+    if(m_showStartPage)
+      numNonRemoteView++;
+    if(m_showZeroconfPage)
+      numNonRemoteView++;
+    for (int i = numNonRemoteView; i < m_tabWidget->count(); i++) {
         QPalette palette = m_tabWidget->widget(i)->palette();
         palette.setColor(QPalette::Dark, Settings::backgroundColor());
         m_tabWidget->widget(i)->setPalette(palette);
@@ -689,8 +716,16 @@ void MainWindow::closeEvent(QCloseEvent *event)
 void MainWindow::tabChanged(int index)
 {
     kDebug(5010) << index;
+    
+    int numNonRemoteView = 0;
+    if(m_showStartPage)
+      numNonRemoteView++;
+    if(m_showZeroconfPage)
+      numNonRemoteView++;
 
-    m_currentRemoteView = index - (m_showStartPage ? 1 : 0);
+    // Used to be (m_showStartPage ? 1 : 0);
+    m_currentRemoteView = index - numNonRemoteView;
+    
 
     QString tabTitle = m_tabWidget->tabText(index).remove('&');
 
@@ -746,10 +781,20 @@ void MainWindow::createStartPage()
     rdpConnectButton->setVisible(false);
 #endif
 
+    KPushButton *zeroconfButton = new KPushButton(this);
+    zeroconfButton->setStyleSheet("KPushButton { padding: 12px; margin: 10px; }");
+    zeroconfButton->setIcon(KIcon(actionCollection()->action("zeroconf_page")->icon()));
+    zeroconfButton->setText(i18n("Browse Remote Desktop Services on Local Network"));
+    connect(zeroconfButton, SIGNAL(clicked()), SLOT(createZeroconfPage()));
+#ifndef BUILD_ZEROCONF
+    zeroconfButton->setVisible(false);
+#endif
+
     startLayout->addLayout(headerLayout);
     startLayout->addWidget(vncConnectButton);
     startLayout->addWidget(nxConnectButton);
     startLayout->addWidget(rdpConnectButton);
+    startLayout->addWidget(zeroconfButton);
     startLayout->addStretch();
 
     m_tabWidget->insertTab(0, startWidget, KIcon("krdc"), i18n("Start Page"));
@@ -786,6 +831,32 @@ void MainWindow::newRdpConnection()
                                                                   m_addressNavigator->height() + 20),
                        i18n("<html>Enter the address here. Port is optional.<br />"
                             "<i>Example: rdpserver:3389 (host:port)</i></html>"), this);
+}
+
+void MainWindow::createZeroconfPage()
+{
+#ifdef BUILD_ZEROCONF
+   if(m_showZeroconfPage)
+      return;
+
+    m_showZeroconfPage = true;
+    ZeroconfPage* zp = new ZeroconfPage(this);
+    connect(zp, SIGNAL(newConnection(const KUrl, bool)), this, SLOT(newConnection(const KUrl, bool)));
+    connect(zp, SIGNAL(closeZeroconfPage()), this, SLOT(closeZeroconfPage()));
+    m_zeroconfTabIndex = m_tabWidget->addTab(zp, KIcon("krdc"), i18n("Browse Local Network"));
+    m_tabWidget->setCurrentIndex(m_zeroconfTabIndex);
+    tabChanged(m_zeroconfTabIndex);
+#endif
+}
+
+void MainWindow::closeZeroconfPage()
+{
+#ifdef BUILD_ZEROCONF
+    QWidget* oldZw = m_tabWidget->currentWidget();
+    m_tabWidget->removeTab(m_zeroconfTabIndex);
+    m_showZeroconfPage = false;
+    oldZw->deleteLater();
+#endif
 }
 
 QList<RemoteView *> MainWindow::remoteViewList() const
