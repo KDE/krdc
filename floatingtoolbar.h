@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007 Urs Wolfer <uwolfer @ kde.org>
+** Copyright (C) 2007-2008 Urs Wolfer <uwolfer @ kde.org>
 ** Parts of this file have been take from okular:
 ** Copyright (C) 2004-2005 Enrico Ros <eros.kde@email.it>
 **
@@ -23,19 +23,19 @@
 **
 ****************************************************************************/
 
-#ifndef FLOATINGTOOLBAR
-#define FLOATINGTOOLBAR
+#ifndef FLOATINGTOOLBAR_H
+#define FLOATINGTOOLBAR_H
 
-#include <QWidget>
+#include <QToolBar>
 
 /**
- * @short A widget containing buttons, that slides in from a side.
+ * @short A toolbar widget that slides in from a side.
  *
  * This is a shaped widget that slides in from a side of the 'anchor widget'
  * it's attached to. It can be dragged and docked on {left,top,right,bottom}
- * sides and contains buttons.
+ * sides and contains actions.
  */
-class FloatingToolBar : public QWidget
+class FloatingToolBar : public QToolBar
 {
     Q_OBJECT
 public:
@@ -51,10 +51,10 @@ public:
     void showAndAnimate();
     void hideAndDestroy();
 
-signals:
+Q_SIGNALS:
     void orientationChanged(int side);
 
-public slots:
+public Q_SLOTS:
     void setSticky(bool sticky);
 
 protected:
@@ -68,8 +68,8 @@ protected:
 private:
     class FloatingToolBarPrivate *d;
 
-private slots:
-    void slotAnimate();
+private Q_SLOTS:
+    void animate();
     void hide();
 };
 

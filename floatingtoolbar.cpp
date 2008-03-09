@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007 Urs Wolfer <uwolfer @ kde.org>
+** Copyright (C) 2007-2008 Urs Wolfer <uwolfer @ kde.org>
 ** Parts of this file have been take from okular:
 ** Copyright (C) 2004-2005 Enrico Ros <eros.kde@email.it>
 **
@@ -30,22 +30,14 @@
 #include <QApplication>
 #include <QBitmap>
 #include <QMouseEvent>
-#include <QLinkedList>
 #include <QPainter>
-#include <QPaintEvent>
 #include <QTimer>
-#include <QToolButton>
-#include <QWheelEvent>
 
-#include <math.h>
-
-static const int iconSize = 22;
-static const int buttonSize = 28;
-static const int toolBarGridSize = 28;
-static const int toolBarRBMargin = 2;
-static const qreal toolBarOpacity = 0.8;
-static const int visiblePixelWhenAutoHidden = 3;
-static const int autoHideTimeout = 2000;
+#define iconSize 22
+#define toolBarRBMargin 2
+#define toolBarOpacity 0.8
+#define visiblePixelWhenAutoHidden 6
+#define autoHideTimeout 2000
 
 class FloatingToolBarPrivate
 {
@@ -65,6 +57,7 @@ public:
 
     QWidget *anchorWidget;
     FloatingToolBar::Side anchorSide;
+    QWidget *offsetPlaceHolder;
 
     QTimer *animTimer;
     QTimer *autoHideTimer;
@@ -77,14 +70,16 @@ public:
     qreal opacity;
 
     QPixmap backgroundPixmap;
-    QLinkedList<QToolButton*> buttons;
 };
 
 FloatingToolBar::FloatingToolBar(QWidget *parent, QWidget *anchorWidget)
-        : QWidget(parent), d(new FloatingToolBarPrivate(this))
+        : QToolBar(parent), d(new FloatingToolBarPrivate(this))
 {
-    setMouseTracking(true);
+    d->offsetPlaceHolder = new QWidget(this);
+    addWidget(d->offsetPlaceHolder);
 
+    setMouseTracking(true);
+    setIconSize(QSize(iconSize, iconSize));
     d->anchorWidget = anchorWidget;
     d->anchorSide = Left;
     d->hiding = false;
@@ -94,7 +89,7 @@ FloatingToolBar::FloatingToolBar(QWidget *parent, QWidget *anchorWidget)
     d->opacity = toolBarOpacity;
 
     d->animTimer = new QTimer(this);
-    connect(d->animTimer, SIGNAL(timeout()), this, SLOT(slotAnimate()));
+    connect(d->animTimer, SIGNAL(timeout()), this, SLOT(animate()));
 
     d->autoHideTimer = new QTimer(this);
     connect(d->autoHideTimer, SIGNAL(timeout()), this, SLOT(hide()));
@@ -111,17 +106,7 @@ FloatingToolBar::~FloatingToolBar()
 
 void FloatingToolBar::addAction(QAction *action)
 {
-    QToolButton *button = new QToolButton(this);
-    button->setDefaultAction(action);
-    button->setCheckable(true);
-    button->setAutoRaise(true);
-    button->resize(buttonSize, buttonSize);
-    button->setIconSize(QSize(iconSize, iconSize));
-
-    d->buttons.append(button);
-
-    button->setMouseTracking(true);
-    button->installEventFilter(this);
+    QToolBar::addAction(action);
 
     // rebuild toolbar shape and contents
     d->reposition();
@@ -211,6 +196,8 @@ bool FloatingToolBar::eventFilter(QObject *obj, QEvent *e)
 
 void FloatingToolBar::paintEvent(QPaintEvent *e)
 {
+    QToolBar::paintEvent(e);
+
     // paint the internal pixmap over the widget
     QPainter p(this);
     p.setOpacity(d->opacity);
@@ -221,6 +208,8 @@ void FloatingToolBar::mousePressEvent(QMouseEvent *e)
 {
     if (e->button() == Qt::LeftButton)
         setCursor(Qt::SizeAllCursor);
+
+    QToolBar::mousePressEvent(e);
 }
 
 void FloatingToolBar::mouseMoveEvent(QMouseEvent *e)
@@ -261,12 +250,16 @@ void FloatingToolBar::mouseMoveEvent(QMouseEvent *e)
     d->anchorSide = side;
     d->reposition();
     emit orientationChanged((int)side);
+
+    QToolBar::mouseMoveEvent(e);
 }
 
 void FloatingToolBar::mouseReleaseEvent(QMouseEvent *e)
 {
     if (e->button() == Qt::LeftButton)
         setCursor(Qt::ArrowCursor);
+
+    QToolBar::mouseReleaseEvent(e);
 }
 
 void FloatingToolBar::wheelEvent(QWheelEvent *e)
@@ -279,56 +272,36 @@ void FloatingToolBar::wheelEvent(QWheelEvent *e)
         d->opacity += diff;
 
     update();
+
+    QToolBar::wheelEvent(e);
 }
 
 void FloatingToolBarPrivate::buildToolBar()
 {
-    int buttonsNumber = buttons.count();
-    int parentWidth = anchorWidget->width();
-    int parentHeight = anchorWidget->height();
-    int myCols = 1;
-    int myRows = 1;
-
-    // 1. find out columns and rows we're going to use
-    bool topLeft = anchorSide == FloatingToolBar::Left || anchorSide == FloatingToolBar::Top;
-    bool vertical = anchorSide == FloatingToolBar::Left || anchorSide == FloatingToolBar::Right;
-    if (vertical) {
-        myCols = 1 + (buttonsNumber * toolBarGridSize) /
-                 (parentHeight - toolBarGridSize);
-        myRows = (int)ceil((float)buttonsNumber / (float)myCols);
-    } else {
-        myRows = 1 + (buttonsNumber * toolBarGridSize) /
-                 (parentWidth - toolBarGridSize);
-        myCols = (int)ceil((float)buttonsNumber / (float)myRows);
-    }
-
-    // 2. compute widget size (from rows/cols)
-    int myWidth = myCols * toolBarGridSize;
-    int myHeight = myRows * toolBarGridSize;
-    int xOffset = (toolBarGridSize - buttonSize) / 2;
-    int yOffset = (toolBarGridSize - buttonSize) / 2;
-
-    if (vertical) {
-        myHeight += 16;
-        myWidth += 4;
-        yOffset += 12;
-        if (anchorSide == FloatingToolBar::Right)
-            xOffset += 4;
-    } else {
-        myWidth += 16;
-        myHeight += 4;
-        xOffset += 12;
-        if (anchorSide == FloatingToolBar::Bottom)
-            yOffset += 4;
-    }
-
     bool prevUpdates = q->updatesEnabled();
     q->setUpdatesEnabled(false);
+
+    // 1. init numbers we are going to use
+    bool topLeft = anchorSide == FloatingToolBar::Left || anchorSide == FloatingToolBar::Top;
+    bool vertical = anchorSide == FloatingToolBar::Left || anchorSide == FloatingToolBar::Right;
+
+    if (anchorSide == FloatingToolBar::Left || anchorSide == FloatingToolBar::Right) {
+        offsetPlaceHolder->setFixedSize(1, 7);
+        q->setOrientation(Qt::Vertical);
+    } else {
+        offsetPlaceHolder->setFixedSize(7, 1);
+        q->setOrientation(Qt::Horizontal);
+    }
+
+    // 2. compute widget size
+    int myWidth = q->sizeHint().width() - 1;
+    int myHeight = q->sizeHint().height() - 1;
 
     // 3. resize pixmap, mask and widget
     QBitmap mask(myWidth + 1, myHeight + 1);
     backgroundPixmap = QPixmap(myWidth + 1, myHeight + 1);
     backgroundPixmap.fill(Qt::transparent);
+
     q->resize(myWidth + 1, myHeight + 1);
 
     // 4. create and set transparency mask
@@ -391,21 +364,6 @@ void FloatingToolBarPrivate::buildToolBar()
         bufferPainter.drawLine(10, dy + 1, 10, dy + myHeight - 7);
     }
 
-    // 6. reposition buttons (in rows/col grid)
-    int gridX = 0;
-    int gridY = 0;
-    QLinkedList<QToolButton*>::const_iterator it = buttons.begin(), end = buttons.end();
-    for (; it != end; ++it) {
-        QToolButton *button = *it;
-        button->move(gridX * toolBarGridSize + xOffset,
-                     gridY * toolBarGridSize + yOffset);
-        button->show();
-        if (++gridX == myCols) {
-            gridX = 0;
-            gridY++;
-        }
-    }
-
     q->setUpdatesEnabled(prevUpdates);
 }
 
@@ -422,11 +380,6 @@ void FloatingToolBarPrivate::reposition()
         endPosition = getOuterPoint();
     }
     q->move(currentPosition);
-
-    // repaint all buttons (to update background)
-    QLinkedList<QToolButton*>::const_iterator it = buttons.begin(), end = buttons.end();
-    for (; it != end; ++it)
-        (*it)->update();
 }
 
 QPoint FloatingToolBarPrivate::getInnerPoint() const
@@ -453,7 +406,7 @@ QPoint FloatingToolBarPrivate::getOuterPoint() const
     return QPoint((anchorWidget->width() - q->width()) / 2, anchorWidget->height() + toolBarRBMargin);
 }
 
-void FloatingToolBar::slotAnimate()
+void FloatingToolBar::animate()
 {
     // move currentPosition towards endPosition
     int dX = d->endPosition.x() - d->currentPosition.x();

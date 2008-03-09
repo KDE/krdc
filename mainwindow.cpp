@@ -47,6 +47,7 @@
 #include <KActionCollection>
 #include <KActionMenu>
 #include <KApplication>
+#include <KComboBox>
 #include <KEditToolBar>
 #include <KIcon>
 #include <KLocale>
@@ -541,6 +542,25 @@ void MainWindow::showRemoteViewToolbar()
 
         m_toolBar = new FloatingToolBar(m_fullscreenWindow, m_fullscreenWindow);
         m_toolBar->setSide(FloatingToolBar::Top);
+
+        QLabel *hostLabel = new QLabel(m_remoteViewList.at(m_currentRemoteView)->url().prettyUrl(KUrl::RemoveTrailingSlash), m_toolBar);
+        hostLabel->setMargin(4);
+        QFont font(hostLabel->font());
+        font.setBold(true);
+        hostLabel->setFont(font);
+        m_toolBar->addWidget(hostLabel);
+
+#if 0 //TODO: implement functionality
+        KComboBox *sessionComboBox = new KComboBox(m_toolBar);
+        sessionComboBox->setEditable(false);
+        sessionComboBox->addItem(i18n("Switch to..."));
+        for (int i = 0; i < m_remoteViewList.count(); i++) {
+            sessionComboBox->addItem(m_remoteViewList.at(i)->url().prettyUrl(KUrl::RemoveTrailingSlash));
+        }
+        sessionComboBox->setVisible(m_remoteViewList.count() > 1); // just show it if there are sessions to switch
+        m_toolBar->addWidget(sessionComboBox);
+#endif
+
         m_toolBar->addAction(actionCollection()->action("switch_fullscreen"));
 
         QAction *minimizeAction = new QAction(m_toolBar);
