@@ -35,16 +35,15 @@ SpecialKeysDialog::SpecialKeysDialog(QWidget *parent, RemoteView *remoteView)
     setCaption(i18n("Special Keys"));
     setButtons(0);
 
-    QLabel *descriptionLabel = new QLabel(i18n("Enter a special key or a key combination to sent the the remote desktop."
-                                          "<br /><br />This function allows you to send a key combination like Ctrl+Q to the remote computer."
-                                          "<br /><br />When you have finished entering the special keys, close this window."), this);
+    QLabel *descriptionLabel = new QLabel(i18n("<html>Enter a special key or a key combination to sent the the remote desktop."
+                                          "<br /><br />This function allows you to send a key combination like Ctrl+Alt+Del to the remote computer."
+                                          "<br /><br />When you have finished entering the special keys, close this window.</html>"), this);
     descriptionLabel->setWordWrap(true);
     descriptionLabel->setTextFormat(Qt::RichText);
 
     setMainWidget(descriptionLabel);
     setFocusPolicy(Qt::StrongFocus);
     setFocus();
-    grabKeyboard();
 }
 
 SpecialKeysDialog::~SpecialKeysDialog()
@@ -68,6 +67,18 @@ void SpecialKeysDialog::keyReleaseEvent(QKeyEvent *event)
     m_remoteView->keyEvent(event);
 
     event->accept();
+}
+
+void SpecialKeysDialog::focusInEvent(QFocusEvent *event)
+{
+    Q_UNUSED(event);
+    grabKeyboard();
+}
+
+void SpecialKeysDialog::focusOutEvent(QFocusEvent *event)
+{
+    Q_UNUSED(event);
+    releaseKeyboard();
 }
 
 #include "specialkeysdialog.moc"
