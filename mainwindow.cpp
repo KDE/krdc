@@ -182,7 +182,7 @@ void MainWindow::setupActions()
     QAction *grabAllKeysAction = actionCollection()->addAction("grab_all_keys");
     grabAllKeysAction->setCheckable(true);
     grabAllKeysAction->setIcon(KIcon("configure-shortcuts"));
-    grabAllKeysAction->setText(i18n("Grab all possible keys..."));
+    grabAllKeysAction->setText(i18n("Grab all possible keys"));
     connect(grabAllKeysAction, SIGNAL(triggered(bool)), SLOT(grabAllKeys(bool)));
 
     QAction *quitAction = KStandardAction::quit(this, SLOT(quit()), actionCollection());
