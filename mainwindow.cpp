@@ -29,7 +29,6 @@
 #include "floatingtoolbar.h"
 #include "bookmarkmanager.h"
 #include "systemtrayicon.h"
-#include "specialkeysdialog.h"
 #ifdef BUILD_RDP
 #include "rdpview.h"
 #endif
@@ -180,10 +179,11 @@ void MainWindow::setupActions()
     showLocalCursorAction->setText(i18n("Show Local Cursor"));
     connect(showLocalCursorAction, SIGNAL(triggered(bool)), SLOT(showLocalCursor(bool)));
 
-    QAction *specialKeysDialogAction = actionCollection()->addAction("special_keys_dialog");
-    specialKeysDialogAction->setIcon(KIcon("configure-shortcuts"));
-    specialKeysDialogAction->setText(i18n("Open Special Keys Dialog..."));
-    connect(specialKeysDialogAction, SIGNAL(triggered()), SLOT(specialKeyDialog()));
+    QAction *grabAllKeysAction = actionCollection()->addAction("grab_all_keys");
+    grabAllKeysAction->setCheckable(true);
+    grabAllKeysAction->setIcon(KIcon("configure-shortcuts"));
+    grabAllKeysAction->setText(i18n("Grab all possible keys..."));
+    connect(grabAllKeysAction, SIGNAL(triggered(bool)), SLOT(grabAllKeys(bool)));
 
     QAction *quitAction = KStandardAction::quit(this, SLOT(quit()), actionCollection());
     actionCollection()->addAction("quit", quitAction);
@@ -524,12 +524,11 @@ void MainWindow::viewOnly(bool viewOnly)
     m_remoteViewList.at(m_currentRemoteView)->setViewOnly(viewOnly);
 }
 
-void MainWindow::specialKeyDialog()
+void MainWindow::grabAllKeys(bool grabAllKeys)
 {
     kDebug(5010);
 
-    SpecialKeysDialog dialog(this, m_remoteViewList.at(m_currentRemoteView));
-    dialog.exec();
+    m_remoteViewList.at(m_currentRemoteView)->setGrabAllKeys(grabAllKeys);
 }
 
 void MainWindow::showRemoteViewToolbar()
@@ -572,7 +571,7 @@ void MainWindow::showRemoteViewToolbar()
         m_toolBar->addAction(actionCollection()->action("take_screenshot"));
         m_toolBar->addAction(actionCollection()->action("view_only"));
         m_toolBar->addAction(actionCollection()->action("show_local_cursor"));
-        m_toolBar->addAction(actionCollection()->action("special_keys_dialog"));
+        m_toolBar->addAction(actionCollection()->action("grab_all_keys"));
         m_toolBar->addAction(actionCollection()->action("logout"));
 
         QAction *stickToolBarAction = new QAction(m_toolBar);
@@ -602,7 +601,7 @@ void MainWindow::updateActionStatus()
     actionCollection()->action("switch_fullscreen")->setEnabled(enabled);
     actionCollection()->action("take_screenshot")->setEnabled(enabled);
     actionCollection()->action("view_only")->setEnabled(enabled);
-    actionCollection()->action("special_keys_dialog")->setEnabled(enabled);
+    actionCollection()->action("grab_all_keys")->setEnabled(enabled);
     actionCollection()->action("logout")->setEnabled(enabled);
 
     bool viewOnlyChecked = false;

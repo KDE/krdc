@@ -181,6 +181,11 @@ public:
     virtual bool viewOnly();
 
     /**
+     * Checks whether grabbing all possible keys is enabled.
+     */
+    virtual bool grabAllKeys();
+
+    /**
      * Returns the resolution of the remote framebuffer.
      * It should return a null @ref QSize when the size
      * is not known.
@@ -266,6 +271,15 @@ public slots:
     virtual void setViewOnly(bool viewOnly);
 
     /**
+     * Enables/disables grabbing all possible keys.
+     * @param grabAllKeys true to enable, false to disable.
+     * Default is false.
+     * @see supportsScaling()
+     * @see grabAllKeys()
+     */
+    virtual void setGrabAllKeys(bool grabAllKeys);
+
+    /**
      * Called to let the backend know it when
      * we switch from/to fullscreen.
      * @param on true when switching to fullscreen,
@@ -325,6 +339,9 @@ signals:
     void mouseStateChanged(int x, int y, int buttonMask);
 
 protected:
+    void focusInEvent(QFocusEvent *event);
+    void focusOutEvent(QFocusEvent *event);
+
     /**
      * The status of the remote view.
      */
@@ -349,6 +366,8 @@ protected:
     QString m_host;
     int m_port;
     bool m_viewOnly;
+    bool m_grabAllKeys;
+    bool m_keyboardIsGrabbed;
     KUrl m_url;
 
 #ifndef QTONLY

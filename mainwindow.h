@@ -70,7 +70,7 @@ private slots:
     void logout();
     void viewOnly(bool viewOnly);
     void showLocalCursor(bool showLocalCursor);
-    void specialKeyDialog();
+    void grabAllKeys(bool grabAllKeys);
     void updateActionStatus();
     void updateConfiguration();
     void tabChanged(int index);

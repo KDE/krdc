@@ -37,6 +37,8 @@ RemoteView::RemoteView(QWidget *parent)
         m_host(QString()),
         m_port(0),
         m_viewOnly(false),
+        m_grabAllKeys(false),
+        m_keyboardIsGrabbed(false),
 #ifndef QTONLY
         m_wallet(0),
 #endif
@@ -130,6 +132,23 @@ void RemoteView::setViewOnly(bool viewOnly)
     m_viewOnly = viewOnly;
 }
 
+bool RemoteView::grabAllKeys()
+{
+    return m_grabAllKeys;
+}
+
+void RemoteView::setGrabAllKeys(bool grabAllKeys)
+{
+    m_grabAllKeys = grabAllKeys;
+
+    if (grabAllKeys) {
+        m_keyboardIsGrabbed = true;
+        grabKeyboard();
+    } else if (m_keyboardIsGrabbed) {
+        releaseKeyboard();
+    }
+}
+
 void RemoteView::showDotCursor(DotCursorState state)
 {
     m_dotCursorState = state;
@@ -207,6 +226,26 @@ QCursor RemoteView::localDotCursor() const
                                                      "pics/pointcursormask.png"));
     return QCursor(cursorBitmap, cursorMask);
 #endif
+}
+
+void RemoteView::focusInEvent(QFocusEvent *event)
+{
+    if (m_grabAllKeys) {
+        m_keyboardIsGrabbed = true;
+        grabKeyboard();
+    }
+
+    QWidget::focusInEvent(event);
+}
+
+void RemoteView::focusOutEvent(QFocusEvent *event)
+{
+    if (m_grabAllKeys || m_keyboardIsGrabbed) {
+        m_keyboardIsGrabbed = false;
+        releaseKeyboard();
+    }
+
+    QWidget::focusOutEvent(event);
 }
 
 #include "moc_remoteview.cpp"

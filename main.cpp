@@ -34,7 +34,7 @@ int main(int argc, char **argv)
 {
     KAboutData aboutData("krdc", 0, ki18n("KRDC"), KDE_VERSION_STRING,
                          ki18n("KDE remote desktop connection"), KAboutData::License_GPL,
-                         ki18n("(c) 2007, Urs Wolfer\n"
+                         ki18n("(c) 2007-2008, Urs Wolfer\n"
                                "(c) 2001-2003, Tim Jansen\n"
                                "(c) 2002-2003, Arend van Beelen jr.\n"
                                "(c) 2000-2002, Const Kaplinsky\n"

@@ -279,7 +279,7 @@ void VncView::paintEvent(QPaintEvent *event)
         painter.drawImage(m_frame.rect(), m_frame);
     }
 
-    QWidget::paintEvent(event);
+    RemoteView::paintEvent(event);
 }
 
 void VncView::focusOutEvent(QFocusEvent *event)
@@ -294,7 +294,7 @@ void VncView::focusOutEvent(QFocusEvent *event)
         vncThread.keyEvent(XK_Tab, false);
     }
 
-    event->accept();
+    RemoteView::focusOutEvent(event);
 }
 
 void VncView::mouseMoveEvent(QMouseEvent *event)
@@ -303,7 +303,7 @@ void VncView::mouseMoveEvent(QMouseEvent *event)
 
     mouseEvent(event);
 
-    event->accept();
+    RemoteView::mouseMoveEvent(event);
 }
 
 void VncView::mousePressEvent(QMouseEvent *event)
@@ -312,7 +312,7 @@ void VncView::mousePressEvent(QMouseEvent *event)
 
     mouseEvent(event);
 
-    event->accept();
+    RemoteView::mousePressEvent(event);
 }
 
 void VncView::mouseDoubleClickEvent(QMouseEvent *event)
@@ -321,7 +321,7 @@ void VncView::mouseDoubleClickEvent(QMouseEvent *event)
 
     mouseEvent(event);
 
-    event->accept();
+    RemoteView::mouseDoubleClickEvent(event);
 }
 
 void VncView::mouseReleaseEvent(QMouseEvent *event)
@@ -330,7 +330,7 @@ void VncView::mouseReleaseEvent(QMouseEvent *event)
 
     mouseEvent(event);
 
-    event->accept();
+    RemoteView::mouseReleaseEvent(event);
 }
 
 void VncView::mouseEvent(QMouseEvent *e)
@@ -370,7 +370,8 @@ void VncView::wheelEvent(QWheelEvent *event)
 
     vncThread.mouseEvent(x, y, eb | m_buttonMask);
     vncThread.mouseEvent(x, y, m_buttonMask);
-    event->accept();
+
+    RemoteView::wheelEvent(event);
 }
 
 void VncView::keyEvent(QKeyEvent *e)
@@ -437,6 +438,8 @@ void VncView::keyEvent(QKeyEvent *e)
         k += 96;
 
     vncThread.keyEvent(k, (e->type() == QEvent::KeyPress) ? true : false);
+
+    RemoteView::keyEvent(e);
 }
 
 void VncView::keyPressEvent(QKeyEvent *event)
@@ -445,7 +448,7 @@ void VncView::keyPressEvent(QKeyEvent *event)
 
     keyEvent(event);
 
-    event->accept();
+    RemoteView::keyPressEvent(event);
 }
 
 void VncView::keyReleaseEvent(QKeyEvent *event)
@@ -454,7 +457,7 @@ void VncView::keyReleaseEvent(QKeyEvent *event)
 
     keyEvent(event);
 
-    event->accept();
+    RemoteView::keyReleaseEvent(event);
 }
 
 void VncView::clipboardSelectionChanged()
