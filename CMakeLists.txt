@@ -53,6 +53,8 @@ set(krdc_SRCS ${krdc_zeroconf_SRCS} ${krdc_rdp_SRCS} ${krdc_vnc_SRCS}
     config/preferencesdialog.cpp
     floatingtoolbar.cpp
     bookmarkmanager.cpp
+    remotedesktopsitem.cpp
+    remotedesktopsmodel.cpp
     systemtrayicon.cpp
     remoteview.cpp
     mainwindow.cpp

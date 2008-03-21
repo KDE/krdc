@@ -274,7 +274,6 @@ public slots:
      * Enables/disables grabbing all possible keys.
      * @param grabAllKeys true to enable, false to disable.
      * Default is false.
-     * @see supportsScaling()
      * @see grabAllKeys()
      */
     virtual void setGrabAllKeys(bool grabAllKeys);

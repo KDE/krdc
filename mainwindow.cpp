@@ -28,6 +28,7 @@
 #include "config/preferencesdialog.h"
 #include "floatingtoolbar.h"
 #include "bookmarkmanager.h"
+#include "remotedesktopsmodel.h"
 #include "systemtrayicon.h"
 #ifdef BUILD_RDP
 #include "rdpview.h"
@@ -64,12 +65,15 @@
 #include <QClipboard>
 #include <QCloseEvent>
 #include <QDesktopWidget>
+#include <QDockWidget>
+#include <QHeaderView>
 #include <QLabel>
 #include <QLayout>
 #include <QScrollArea>
 #include <QTimer>
 #include <QToolButton>
 #include <QToolTip>
+#include <QTreeView>
 
 MainWindow::MainWindow(QWidget *parent)
         : KXmlGuiWindow(parent),
@@ -85,13 +89,27 @@ MainWindow::MainWindow(QWidget *parent)
 {
     setupActions();
 
-    createGUI("krdcui.rc");
-
     setStandardToolBarMenuEnabled(true);
 
     m_tabWidget = new KTabWidget(this);
     m_tabWidget->setMinimumSize(600, 400);
     setCentralWidget(m_tabWidget);
+
+    QDockWidget *remoteDesktopsDockWidget = new QDockWidget(this);
+    remoteDesktopsDockWidget->setObjectName("remoteDesktopsDockWidget");
+    remoteDesktopsDockWidget->setWindowTitle("Remote desktops");
+    actionCollection()->addAction("remote_desktop_dockwidget",
+                                  remoteDesktopsDockWidget->toggleViewAction());
+    QTreeView *remoteDesktopsTreeView = new QTreeView(remoteDesktopsDockWidget);
+    remoteDesktopsTreeView->setModel(new RemoteDesktopsModel(this));
+    remoteDesktopsTreeView->header()->hide();
+    connect(remoteDesktopsTreeView, SIGNAL(doubleClicked(const QModelIndex &)),
+                                    SLOT(openFromDockWidget(const QModelIndex &)));
+
+    remoteDesktopsDockWidget->setWidget(remoteDesktopsTreeView);
+    addDockWidget(Qt::LeftDockWidgetArea, remoteDesktopsDockWidget);
+
+    createGUI("krdcui.rc");
 
     if (Settings::systemTrayIcon()) {
         m_systemTrayIcon = new SystemTrayIcon(this);
@@ -111,6 +129,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     if (Settings::rememberSessions()) // give some time to create and show the window first
         QTimer::singleShot(100, this, SLOT(restoreOpenSessions()));
+
+    remoteDesktopsDockWidget->setVisible(false); //TODO: remove when fully implemented
 }
 
 MainWindow::~MainWindow()
@@ -324,6 +344,14 @@ void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConn
     tabChanged(newIndex); // force to update m_currentRemoteView (tabChanged is not emitted when start page has been disabled)
 
     view->start();
+}
+
+void MainWindow::openFromDockWidget(const QModelIndex &index)
+{
+    KUrl url(index.data().toString());
+    kDebug(5010) << url;
+    if (url.isValid())
+        newConnection(url);
 }
 
 void MainWindow::resizeTabWidget(int w, int h)
@@ -864,16 +892,16 @@ void MainWindow::createZeroconfPage()
     connect(zp, SIGNAL(closeZeroconfPage()), this, SLOT(closeZeroconfPage()));
     m_zeroconfTabIndex = m_tabWidget->addTab(zp, KIcon("krdc"), i18n("Browse Local Network"));
     m_tabWidget->setCurrentIndex(m_zeroconfTabIndex);
-    tabChanged(m_zeroconfTabIndex);
 #endif
 }
 
 void MainWindow::closeZeroconfPage()
 {
 #ifdef BUILD_ZEROCONF
+    m_showZeroconfPage = false;
     QWidget* oldZw = m_tabWidget->currentWidget();
     m_tabWidget->removeTab(m_zeroconfTabIndex);
-    m_showZeroconfPage = false;
+    m_zeroconfTabIndex = -1;
     oldZw->deleteLater();
 #endif
 }

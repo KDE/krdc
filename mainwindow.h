@@ -37,6 +37,7 @@ class FloatingToolBar;
 class RemoteView;
 class SystemTrayIcon;
 class QScrollArea;
+class QModelIndex;
 
 class MainWindow : public KXmlGuiWindow
 {
@@ -80,6 +81,7 @@ private slots:
     void newRdpConnection();
     void createZeroconfPage();
     void closeZeroconfPage();
+    void openFromDockWidget(const QModelIndex &index);
 
 private:
     void setupActions();
