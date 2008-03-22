@@ -21,9 +21,9 @@
 **
 ****************************************************************************/
 
-#include <QStringList>
-
 #include "remotedesktopsitem.h"
+
+#include <QStringList>
 
 RemoteDesktopsItem::RemoteDesktopsItem(const QList<QVariant> &data, RemoteDesktopsItem *parent)
 {

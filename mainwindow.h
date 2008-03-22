@@ -36,6 +36,8 @@ class BookmarkManager;
 class FloatingToolBar;
 class RemoteView;
 class SystemTrayIcon;
+class ZeroconfPage;
+
 class QScrollArea;
 class QModelIndex;
 
@@ -105,11 +107,10 @@ private:
 
     int m_currentRemoteView;
     bool m_showStartPage;
-    bool m_showZeroconfPage;
-    int m_zeroconfTabIndex;
     bool m_switchFullscreenWhenConnected;
 
     SystemTrayIcon *m_systemTrayIcon;
+    ZeroconfPage *m_zeroconfPage;
 };
 
 #include <QApplication>

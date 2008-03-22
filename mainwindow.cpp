@@ -60,6 +60,7 @@
 #include <KStatusBar>
 #include <KTabWidget>
 #include <KToggleAction>
+#include <KToggleFullScreenAction>
 #include <KUrlNavigator>
 
 #include <QClipboard>
@@ -83,9 +84,8 @@ MainWindow::MainWindow(QWidget *parent)
         m_leftRightBorder(0),
         m_currentRemoteView(-1),
         m_showStartPage(false),
-        m_showZeroconfPage(false),
-        m_zeroconfTabIndex(-1),
-        m_systemTrayIcon(0)
+        m_systemTrayIcon(0),
+        m_zeroconfPage(0)
 {
     setupActions();
 
@@ -331,13 +331,13 @@ void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConn
 
     view->resize(0, 0);
  
-   int numNonRemoteView = 0;
-    if(m_showStartPage)
-      numNonRemoteView++;
-    if(m_showZeroconfPage)
-      numNonRemoteView++;
+    int numNonRemoteView = 0;
+    if (m_showStartPage)
+        numNonRemoteView++;
+    if (m_zeroconfPage)
+        numNonRemoteView++;
 
-    scrollArea->setWidget(m_remoteViewList.at(m_tabWidget->count() - numNonRemoteView));
+    scrollArea->setWidget(m_remoteViewList.at(m_remoteViewList.count() - 1));
 
     int newIndex = m_tabWidget->addTab(scrollArea, KIcon("krdc"), url.prettyUrl(KUrl::RemoveTrailingSlash));
     m_tabWidget->setCurrentIndex(newIndex);
@@ -377,8 +377,7 @@ void MainWindow::resizeTabWidget(int w, int h)
 
     if ((newWindowSize.height() >= desktopSize.height()) || (newWindowSize.width() >= desktopSize.width())) {
         kDebug(5010) << "remote desktop needs more place than available -> show window maximized";
-        showMaximized();
-        QCoreApplication::processEvents();
+        setWindowState(windowState() | Qt::WindowMaximized);
         return;
     }
 
@@ -494,7 +493,7 @@ void MainWindow::switchFullscreen()
 
         m_fullscreenWindow->show();
 
-        m_fullscreenWindow->setWindowState(Qt::WindowFullScreen);
+        KToggleFullScreenAction::setFullScreen(m_fullscreenWindow, true);
 
         // show the toolbar after we have switched to fullscreen mode
         QTimer::singleShot(100, this, SLOT(showRemoteViewToolbar()));
@@ -534,8 +533,6 @@ void MainWindow::logout()
     m_tabWidget->removeTab(m_tabWidget->currentIndex());
 
     tmp->deleteLater();
-
-    updateActionStatus();
 }
 
 void MainWindow::showLocalCursor(bool showLocalCursor)
@@ -620,7 +617,9 @@ void MainWindow::updateActionStatus()
     bool enabled;
 
     if ((m_showStartPage && (m_tabWidget->currentIndex() == 0)) || 
-         ((m_zeroconfTabIndex > -1) && (m_tabWidget->currentIndex() == m_zeroconfTabIndex)) || 
+#ifdef BUILD_ZEROCONF
+         (m_zeroconfPage && (m_tabWidget->currentIndex() == m_tabWidget->indexOf(m_zeroconfPage))) ||
+#endif
          (!m_showStartPage && (m_tabWidget->currentIndex() < 0)))
         enabled = false;
     else
@@ -690,10 +689,10 @@ void MainWindow::updateConfiguration()
 
     // update the scroll areas background color
     int numNonRemoteView = 0;
-    if(m_showStartPage)
-      numNonRemoteView++;
-    if(m_showZeroconfPage)
-      numNonRemoteView++;
+    if (m_showStartPage)
+        numNonRemoteView++;
+    if (m_zeroconfPage)
+        numNonRemoteView++;
     for (int i = numNonRemoteView; i < m_tabWidget->count(); i++) {
         QPalette palette = m_tabWidget->widget(i)->palette();
         palette.setColor(QPalette::Dark, Settings::backgroundColor());
@@ -765,14 +764,12 @@ void MainWindow::tabChanged(int index)
     kDebug(5010) << index;
     
     int numNonRemoteView = 0;
-    if(m_showStartPage)
-      numNonRemoteView++;
-    if(m_showZeroconfPage)
-      numNonRemoteView++;
+    if (m_showStartPage)
+        numNonRemoteView++;
+    if (m_zeroconfPage)
+        numNonRemoteView++;
 
-    // Used to be (m_showStartPage ? 1 : 0);
     m_currentRemoteView = index - numNonRemoteView;
-    
 
     QString tabTitle = m_tabWidget->tabText(index).remove('&');
 
@@ -883,26 +880,25 @@ void MainWindow::newRdpConnection()
 void MainWindow::createZeroconfPage()
 {
 #ifdef BUILD_ZEROCONF
-   if(m_showZeroconfPage)
-      return;
+    if (m_zeroconfPage)
+        return;
 
-    m_showZeroconfPage = true;
-    ZeroconfPage* zp = new ZeroconfPage(this);
-    connect(zp, SIGNAL(newConnection(const KUrl, bool)), this, SLOT(newConnection(const KUrl, bool)));
-    connect(zp, SIGNAL(closeZeroconfPage()), this, SLOT(closeZeroconfPage()));
-    m_zeroconfTabIndex = m_tabWidget->addTab(zp, KIcon("krdc"), i18n("Browse Local Network"));
-    m_tabWidget->setCurrentIndex(m_zeroconfTabIndex);
+    m_zeroconfPage = new ZeroconfPage(this);
+    connect(m_zeroconfPage, SIGNAL(newConnection(const KUrl, bool)), this, SLOT(newConnection(const KUrl, bool)));
+    connect(m_zeroconfPage, SIGNAL(closeZeroconfPage()), this, SLOT(closeZeroconfPage()));
+    int zeroconfTabIndex = m_tabWidget->insertTab(m_showStartPage ? 1 : 0, m_zeroconfPage, KIcon("krdc"), i18n("Browse Local Network"));
+    m_tabWidget->setCurrentIndex(zeroconfTabIndex);
 #endif
 }
 
 void MainWindow::closeZeroconfPage()
 {
 #ifdef BUILD_ZEROCONF
-    m_showZeroconfPage = false;
-    QWidget* oldZw = m_tabWidget->currentWidget();
-    m_tabWidget->removeTab(m_zeroconfTabIndex);
-    m_zeroconfTabIndex = -1;
-    oldZw->deleteLater();
+    int index = m_tabWidget->indexOf(m_zeroconfPage);
+    m_tabWidget->removeTab(index);
+    m_zeroconfPage->deleteLater();
+    m_zeroconfPage = 0;
+    tabChanged(index); // force update again because m_zeroconfPage was not null before
 #endif
 }
 

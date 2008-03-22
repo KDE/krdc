@@ -108,15 +108,18 @@ void FloatingToolBar::addAction(QAction *action)
 {
     QToolBar::addAction(action);
 
-    // rebuild toolbar shape and contents
-    d->reposition();
+    // rebuild toolbar shape and contents only if the toolbar is already visible,
+    // otherwise it will be done in showAndAnimate()
+    if (isVisible())
+        d->reposition();
 }
 
 void FloatingToolBar::setSide(Side side)
 {
     d->anchorSide = side;
 
-    d->reposition();
+    if (isVisible())
+        d->reposition();
 }
 
 void FloatingToolBar::setSticky(bool sticky)
@@ -134,6 +137,9 @@ void FloatingToolBar::showAndAnimate()
     d->hiding = false;
 
     show();
+
+    // force update for case when toolbar has not been built yet
+    d->reposition();
 
     // start scrolling in
     d->animTimer->start(20);

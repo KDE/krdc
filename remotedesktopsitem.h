@@ -30,7 +30,7 @@
 class RemoteDesktopsItem
 {
 public:
-    RemoteDesktopsItem(const QList<QVariant> &data, RemoteDesktopsItem *parent = 0);
+    explicit RemoteDesktopsItem(const QList<QVariant> &data, RemoteDesktopsItem *parent = 0);
     ~RemoteDesktopsItem();
 
     void appendChild(RemoteDesktopsItem *child);
