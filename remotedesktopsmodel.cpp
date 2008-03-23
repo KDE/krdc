@@ -26,6 +26,7 @@
 #include "remotedesktopsitem.h"
 
 #include <KBookmarkManager>
+#include <KIcon>
 #include <KStandardDirs>
 #include <KDebug>
 
@@ -42,12 +43,7 @@ RemoteDesktopsModel::RemoteDesktopsModel(QObject *parent)
 
     m_manager->setUpdate(true);
 
-    KBookmarkGroup root = m_manager->root();
-    KBookmark bm = root.first();
-    while (!bm.isNull()) {
-        rootItem->appendChild(new RemoteDesktopsItem(QList<QVariant>() << bm.text(), rootItem));
-        bm = root.next(bm);
-    }
+    buildModelFromBookmarkGroup(m_manager->root(), rootItem);
 
     RemoteDesktopsItem *localNetwork = new RemoteDesktopsItem(QList<QVariant>() << "Local Network", rootItem);
 
@@ -72,12 +68,25 @@ QVariant RemoteDesktopsModel::data(const QModelIndex &index, int role) const
     if (!index.isValid())
         return QVariant();
 
-    if (role != Qt::DisplayRole)
-        return QVariant();
-
     RemoteDesktopsItem *item = static_cast<RemoteDesktopsItem*>(index.internalPointer());
 
-    return item->data(index.column());
+    switch (role) {
+    case Qt::DisplayRole:
+        return item->data(index.column());
+    case Qt::DecorationRole:
+        if (item->data(index.column()).toString().contains("://")) //TODO: clean impl
+            return KIcon("krdc");
+        else if (item->data(index.column()).toString() == "Local Network") //TODO: clean impl
+            return KIcon("network-workgroup");
+        else if (item->data(index.column()).toString() == "...") //TODO: clean impl
+            return KIcon("view-history");
+        else
+            return KIcon("folder-bookmarks");
+    case Qt::UserRole: // tell if it is an address
+        return QVariant(item->data(index.column()).toString().contains("://"));
+    default:
+        return QVariant();
+    }
 }
 
 Qt::ItemFlags RemoteDesktopsModel::flags(const QModelIndex &index) const
@@ -142,6 +151,18 @@ int RemoteDesktopsModel::rowCount(const QModelIndex &parent) const
         parentItem = static_cast<RemoteDesktopsItem*>(parent.internalPointer());
 
     return parentItem->childCount();
+}
+
+void RemoteDesktopsModel::buildModelFromBookmarkGroup(const KBookmarkGroup &group, RemoteDesktopsItem *item)
+{
+    KBookmark bm = group.first();
+    while (!bm.isNull()) {
+        RemoteDesktopsItem *newItem = new RemoteDesktopsItem(QList<QVariant>() << bm.text(), item);
+        item->appendChild(newItem);
+        if (bm.isGroup())
+            buildModelFromBookmarkGroup(bm.toGroup(), newItem); //recursive
+        bm = group.next(bm);
+    }
 }
 
 #include "remotedesktopsmodel.moc"

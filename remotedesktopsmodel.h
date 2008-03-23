@@ -26,6 +26,7 @@
 
 #include <QAbstractItemModel>
 
+class KBookmarkGroup;
 class KBookmarkManager;
 class RemoteDesktopsItem;
 
@@ -48,6 +49,8 @@ public:
     int columnCount(const QModelIndex &parent = QModelIndex()) const;
 
 private:
+    void buildModelFromBookmarkGroup(const KBookmarkGroup &group, RemoteDesktopsItem *item);
+
     KBookmarkManager *m_manager;
     RemoteDesktopsItem *rootItem;
 };

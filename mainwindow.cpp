@@ -103,6 +103,7 @@ MainWindow::MainWindow(QWidget *parent)
     QTreeView *remoteDesktopsTreeView = new QTreeView(remoteDesktopsDockWidget);
     remoteDesktopsTreeView->setModel(new RemoteDesktopsModel(this));
     remoteDesktopsTreeView->header()->hide();
+    remoteDesktopsTreeView->expandAll();
     connect(remoteDesktopsTreeView, SIGNAL(doubleClicked(const QModelIndex &)),
                                     SLOT(openFromDockWidget(const QModelIndex &)));
 
@@ -348,10 +349,22 @@ void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConn
 
 void MainWindow::openFromDockWidget(const QModelIndex &index)
 {
-    KUrl url(index.data().toString());
-    kDebug(5010) << url;
-    if (url.isValid())
+    if (index.data(Qt::UserRole).toBool()) {
+        KUrl url(index.data().toString());
+        // first check if url has already been opened; in case show the tab
+        for (int i = 0; i < m_remoteViewList.count(); i++) {
+            if (m_remoteViewList.at(i)->url() == url) {
+                int numNonRemoteView = 0;
+                if (m_showStartPage)
+                    numNonRemoteView++;
+                if (m_zeroconfPage)
+                    numNonRemoteView++;
+                m_tabWidget->setCurrentIndex(i + numNonRemoteView);
+                return;
+            }
+        }
         newConnection(url);
+    }
 }
 
 void MainWindow::resizeTabWidget(int w, int h)
