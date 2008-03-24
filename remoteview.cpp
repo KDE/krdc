@@ -38,6 +38,7 @@ RemoteView::RemoteView(QWidget *parent)
         m_port(0),
         m_viewOnly(false),
         m_grabAllKeys(false),
+        m_scale(false),
         m_keyboardIsGrabbed(false),
 #ifndef QTONLY
         m_wallet(0),
@@ -161,11 +162,12 @@ RemoteView::DotCursorState RemoteView::dotCursorState() const
 
 bool RemoteView::scaling() const
 {
-    return false;
+    return m_scale;
 }
 
-void RemoteView::enableScaling(bool)
+void RemoteView::enableScaling(bool scale)
 {
+    m_scale = scale;
 }
 
 void RemoteView::switchFullscreen(bool)

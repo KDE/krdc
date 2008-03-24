@@ -172,7 +172,6 @@ void MainWindow::setupActions()
     zeroconfAction->setVisible(false);
 #endif
 
-
     QAction *screenshotAction = actionCollection()->addAction("take_screenshot");
     screenshotAction->setText(i18n("Copy Screenshot to Clipboard"));
     screenshotAction->setIcon(KIcon("ksnapshot"));
@@ -205,6 +204,12 @@ void MainWindow::setupActions()
     grabAllKeysAction->setIcon(KIcon("configure-shortcuts"));
     grabAllKeysAction->setText(i18n("Grab all possible keys"));
     connect(grabAllKeysAction, SIGNAL(triggered(bool)), SLOT(grabAllKeys(bool)));
+
+    QAction *scaleAction = actionCollection()->addAction("scale");
+    scaleAction->setCheckable(true);
+    scaleAction->setIcon(KIcon("zoom-fit-best"));
+    scaleAction->setText(i18n("Scale remote screen to fit window size"));
+    connect(scaleAction, SIGNAL(triggered(bool)), SLOT(scale(bool)));
 
     QAction *quitAction = KStandardAction::quit(this, SLOT(quit()), actionCollection());
     actionCollection()->addAction("quit", quitAction);
@@ -297,25 +302,23 @@ void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConn
 
     m_addressNavigator->setUrl(KUrl(url.scheme().toLower() + "://"));
 
-    QScrollArea *scrollArea = createScrollArea(m_tabWidget, 0);
-
     RemoteView *view;
 
 #ifdef BUILD_VNC
     if (url.scheme().toLower() == "vnc") {
-        view = new VncView(scrollArea, url);
+        view = new VncView(this, url);
     } else
 #endif
 
 #ifdef BUILD_NX
     if (url.scheme().toLower() == "nx") {
-        view = new NxView(scrollArea, url);
+        view = new NxView(this, url);
     } else
 #endif
 
 #ifdef BUILD_RDP
     if (url.scheme().toLower() == "rdp") {
-        view = new RdpView(scrollArea, url);
+        view = new RdpView(this, url);
     } else
 #endif
     {
@@ -338,7 +341,7 @@ void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConn
     if (m_zeroconfPage)
         numNonRemoteView++;
 
-    scrollArea->setWidget(m_remoteViewList.at(m_remoteViewList.count() - 1));
+    QScrollArea *scrollArea = createScrollArea(m_tabWidget, m_remoteViewList.at(m_remoteViewList.count() - 1));
 
     int newIndex = m_tabWidget->addTab(scrollArea, KIcon("krdc"), url.prettyUrl(KUrl::RemoveTrailingSlash));
     m_tabWidget->setCurrentIndex(newIndex);
@@ -479,9 +482,9 @@ void MainWindow::switchFullscreen()
 
         if (m_toolBar) {
             m_toolBar->hideAndDestroy();
+            m_toolBar->deleteLater();
             m_toolBar = 0;
         }
-
 
         actionCollection()->action("switch_fullscreen")->setIcon(KIcon("view-fullscreen"));
         actionCollection()->action("switch_fullscreen")->setText(i18n("Switch to Fullscreen Mode"));
@@ -518,8 +521,10 @@ void MainWindow::switchFullscreen()
 
 QScrollArea *MainWindow::createScrollArea(QWidget *parent, RemoteView *remoteView)
 {
-    QScrollArea *scrollArea = new QScrollArea(parent);
+    RemoteViewScrollArea *scrollArea = new RemoteViewScrollArea(parent);
     scrollArea->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+
+    connect(scrollArea, SIGNAL(resized(int, int)), remoteView, SLOT(scaleResize(int, int)));
 
     QPalette palette = scrollArea->palette();
     palette.setColor(QPalette::Dark, Settings::backgroundColor());
@@ -569,6 +574,13 @@ void MainWindow::grabAllKeys(bool grabAllKeys)
     m_remoteViewList.at(m_currentRemoteView)->setGrabAllKeys(grabAllKeys);
 }
 
+void MainWindow::scale(bool scale)
+{
+    kDebug(5010);
+
+    m_remoteViewList.at(m_currentRemoteView)->enableScaling(scale);
+}
+
 void MainWindow::showRemoteViewToolbar()
 {
     kDebug(5010);
@@ -610,6 +622,7 @@ void MainWindow::showRemoteViewToolbar()
         m_toolBar->addAction(actionCollection()->action("view_only"));
         m_toolBar->addAction(actionCollection()->action("show_local_cursor"));
         m_toolBar->addAction(actionCollection()->action("grab_all_keys"));
+        m_toolBar->addAction(actionCollection()->action("scale"));
         m_toolBar->addAction(actionCollection()->action("logout"));
 
         QAction *stickToolBarAction = new QAction(m_toolBar);
@@ -642,6 +655,7 @@ void MainWindow::updateActionStatus()
     actionCollection()->action("take_screenshot")->setEnabled(enabled);
     actionCollection()->action("view_only")->setEnabled(enabled);
     actionCollection()->action("grab_all_keys")->setEnabled(enabled);
+    actionCollection()->action("scale")->setEnabled(enabled);
     actionCollection()->action("logout")->setEnabled(enabled);
 
     bool viewOnlyChecked = false;
@@ -658,6 +672,11 @@ void MainWindow::updateActionStatus()
     if (m_currentRemoteView >= 0)
         showLocalCursorVisible = enabled && m_remoteViewList.at(m_currentRemoteView)->supportsLocalCursor();
     actionCollection()->action("show_local_cursor")->setVisible(showLocalCursorVisible);
+
+    bool scaleVisible = false;
+    if (m_currentRemoteView >= 0)
+        scaleVisible = enabled && m_remoteViewList.at(m_currentRemoteView)->supportsScaling();
+    actionCollection()->action("scale")->setVisible(scaleVisible);
 }
 
 void MainWindow::preferences()

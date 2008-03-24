@@ -74,6 +74,7 @@ private slots:
     void viewOnly(bool viewOnly);
     void showLocalCursor(bool showLocalCursor);
     void grabAllKeys(bool grabAllKeys);
+    void scale(bool scale);
     void updateActionStatus();
     void updateConfiguration();
     void tabChanged(int index);
@@ -134,6 +135,26 @@ protected:
     void mousePressEvent(QMouseEvent *event) {
         if (event->button() == Qt::RightButton)
             emit rightClicked();
+    }
+};
+
+#include <QScrollArea>
+
+class RemoteViewScrollArea : public QScrollArea
+{
+    Q_OBJECT
+public:
+    RemoteViewScrollArea(QWidget *parent)
+            : QScrollArea(parent) {
+    }
+
+signals:
+    void resized(int w, int h);
+
+protected:
+    void resizeEvent(QResizeEvent *event) {
+        QScrollArea::resizeEvent(event);
+        emit resized(width() - 2*frameWidth(), height() - 2*frameWidth());
     }
 };
 

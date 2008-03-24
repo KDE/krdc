@@ -258,7 +258,7 @@ public slots:
      * @see supportsScaling()
      * @see scaling()
      */
-    virtual void enableScaling(bool s);
+    virtual void enableScaling(bool scale);
 
     /**
      * Enables/disables the view-only mode.
@@ -366,6 +366,7 @@ protected:
     int m_port;
     bool m_viewOnly;
     bool m_grabAllKeys;
+    bool m_scale;
     bool m_keyboardIsGrabbed;
     KUrl m_url;
 

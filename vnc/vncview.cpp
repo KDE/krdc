@@ -46,7 +46,9 @@ VncView::VncView(QWidget *parent, const KUrl &url)
         m_repaint(false),
         m_quitFlag(false),
         m_firstPasswordTry(true),
-        m_dontSendClipboard(false)
+        m_dontSendClipboard(false),
+        m_horizontalFactor(1.0),
+        m_verticalFactor(1.0)
 {
     m_url = url;
     m_host = url.host();
@@ -98,6 +100,13 @@ QSize VncView::minimumSizeHint() const
     return size();
 }
 
+void VncView::scaleResize(int w, int h)
+{
+    kDebug(5011) << w << h;
+    if (m_scale)
+        resize(w, h);
+}
+
 void VncView::startQuitting()
 {
     kDebug(5011) << "about to quit";
@@ -139,6 +148,11 @@ bool VncView::start()
     setStatus(Connecting);
 
     vncThread.start();
+    return true;
+}
+
+bool VncView::supportsScaling() const
+{
     return true;
 }
 
@@ -216,7 +230,7 @@ void VncView::updateImage(int x, int y, int w, int h)
 
         setMouseTracking(true); // get mouse events even when there is no mousebutton pressed
         setFocusPolicy(Qt::WheelFocus);
-        setFixedSize(m_frame.width(), m_frame.height());
+        resize(m_frame.width(), m_frame.height());
         setStatus(Connected);
         emit changeSize(m_frame.width(), m_frame.height());
         emit connected();
@@ -230,29 +244,43 @@ void VncView::updateImage(int x, int y, int w, int h)
     }
 
     if ((y == 0 && x == 0) && (m_frame.size() != size())) {
-        setFixedSize(m_frame.width(), m_frame.height());
+        resize(m_frame.width(), m_frame.height());
         emit changeSize(m_frame.width(), m_frame.height());
     }
 
     m_repaint = true;
-    repaint(x, y, w, h);
+    repaint(qRound(x * m_horizontalFactor), qRound(y * m_verticalFactor), qRound(w * m_horizontalFactor), qRound(h * m_verticalFactor));
     m_repaint = false;
 }
 
 void VncView::setViewOnly(bool viewOnly)
 {
+    RemoteView::setViewOnly(viewOnly);
+
     if (viewOnly)
         setCursor(Qt::ArrowCursor);
     else
         setCursor(m_dotCursorState == CursorOn ? localDotCursor() : Qt::BlankCursor);
-
-    m_viewOnly = viewOnly;
 }
 
 void VncView::showDotCursor(DotCursorState state)
 {
+    RemoteView::showDotCursor(state);
+
     setCursor(state == CursorOn ? localDotCursor() : Qt::BlankCursor);
-    m_dotCursorState = state;
+}
+
+void VncView::enableScaling(bool scale)
+{
+    RemoteView::enableScaling(scale);
+
+    if (scale) {
+        if (parentWidget())
+            resize(parentWidget()->width(), parentWidget()->height());
+    } else {
+        resize(m_frame.width(), m_frame.height());
+        emit changeSize(m_frame.width(), m_frame.height());
+    }
 }
 
 void VncView::setCut(const QString &text)
@@ -273,13 +301,28 @@ void VncView::paintEvent(QPaintEvent *event)
 
     if (m_repaint) {
 //         kDebug(5011) << "normal repaint";
-        painter.drawImage(QRect(m_x, m_y, m_w, m_h), m_frame.copy(m_x, m_y, m_w, m_h));
+        painter.drawImage(QRect(qRound(m_x*m_horizontalFactor), qRound(m_y*m_verticalFactor),
+                                qRound(m_w*m_horizontalFactor), qRound(m_h*m_verticalFactor)), 
+                          m_frame.copy(m_x, m_y, m_w, m_h).scaled(qRound(m_w*m_horizontalFactor), 
+                                                                  qRound(m_h*m_verticalFactor),
+                                                                  Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
     } else {
 //         kDebug(5011) << "resize repaint";
-        painter.drawImage(m_frame.rect(), m_frame);
+        painter.drawImage(QRect(0, 0, width(), height()), m_frame.scaled(width(), height(),
+                                                                         Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
     }
 
     RemoteView::paintEvent(event);
+}
+
+void VncView::resizeEvent(QResizeEvent *event)
+{
+    RemoteView::resizeEvent(event);
+
+    m_verticalFactor = (qreal) height() / m_frame.height();
+    m_horizontalFactor = (qreal) width() / m_frame.width();
+
+    update();
 }
 
 void VncView::focusOutEvent(QFocusEvent *event)

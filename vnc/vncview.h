@@ -51,13 +51,19 @@ public:
     void startQuitting();
     bool isQuitting();
     bool start();
+    bool supportsScaling() const;
     bool supportsLocalCursor() const;
     void keyEvent(QKeyEvent *e);
     void setViewOnly(bool viewOnly);
     void showDotCursor(DotCursorState state);
+    void enableScaling(bool scale);
+
+public slots:
+    void scaleResize(int w, int h);
 
 protected:
     void paintEvent(QPaintEvent *event);
+    void resizeEvent(QResizeEvent *event);
     void focusOutEvent(QFocusEvent *event);
     void mouseMoveEvent(QMouseEvent *event);
     void mousePressEvent(QMouseEvent *event);
@@ -78,6 +84,8 @@ private:
     bool m_quitFlag;
     bool m_firstPasswordTry;
     bool m_dontSendClipboard;
+    qreal m_horizontalFactor;
+    qreal m_verticalFactor;
 #ifndef QTONLY
     VncHostPreferences *m_hostPreferences;
 #endif
