@@ -397,7 +397,7 @@ void VncView::mouseEvent(QMouseEvent *e)
         }
     }
 
-    vncThread.mouseEvent(e->x(), e->y(), m_buttonMask);
+    vncThread.mouseEvent(qRound(e->x() / m_horizontalFactor), qRound(e->y() / m_verticalFactor), m_buttonMask);
 }
 
 void VncView::wheelEvent(QWheelEvent *event)
