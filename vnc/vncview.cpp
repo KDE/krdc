@@ -294,6 +294,11 @@ void VncView::setCut(const QString &text)
 void VncView::paintEvent(QPaintEvent *event)
 {
 //     kDebug(5011) << "paint event: x: " << m_x << ", y: " << m_y << ", w: " << m_w << ", h: " << m_h;
+    if (m_frame.isNull() || m_frame.format() == QImage::Format_Invalid) {
+        kDebug(5011) << "no valid image to paint";
+        RemoteView::paintEvent(event);
+        return;
+    }
 
     event->accept();
 
