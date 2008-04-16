@@ -168,10 +168,13 @@ void RdpHostPreferences::updateWidthHeight(int index)
         rdpUi.kcfg_Height->setValue(1200);
         rdpUi.kcfg_Width->setValue(1600);
         break;
-    case 5:
-        rdpUi.kcfg_Height->setValue(QApplication::desktop()->screenGeometry().height());
-        rdpUi.kcfg_Width->setValue(QApplication::desktop()->screenGeometry().width());
+    case 5: {
+        QDesktopWidget *desktop = QApplication::desktop();
+        int currentScreen = desktop->screenNumber(rdpUi.kcfg_Height);
+        rdpUi.kcfg_Height->setValue(desktop->screenGeometry(currentScreen).height());
+        rdpUi.kcfg_Width->setValue(desktop->screenGeometry(currentScreen).width());
         break;
+    }
     case 6:
     default:
         break;
