@@ -71,6 +71,7 @@ private slots:
     void takeScreenshot();
     void switchFullscreen();
     void logout();
+    void closeTab(QWidget *widget);
     void viewOnly(bool viewOnly);
     void showLocalCursor(bool showLocalCursor);
     void grabAllKeys(bool grabAllKeys);

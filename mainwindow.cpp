@@ -92,6 +92,9 @@ MainWindow::MainWindow(QWidget *parent)
     setStandardToolBarMenuEnabled(true);
 
     m_tabWidget = new KTabWidget(this);
+    m_tabWidget->setCloseButtonEnabled(true);
+    connect(m_tabWidget, SIGNAL(closeRequest(QWidget *)), SLOT(closeTab(QWidget *)));
+
     m_tabWidget->setMinimumSize(600, 400);
     setCentralWidget(m_tabWidget);
 
@@ -551,6 +554,40 @@ void MainWindow::logout()
     m_tabWidget->removeTab(m_tabWidget->currentIndex());
 
     tmp->deleteLater();
+}
+
+void MainWindow::closeTab(QWidget *widget)
+{
+    kDebug(5010);
+
+    int index = m_tabWidget->indexOf(widget);
+
+    if (m_showStartPage && index == 0) {
+        KMessageBox::information(this, i18n("The start page cannot be closed. "
+                                            "If you want to disable it, you can do so in the settings."));
+        return;
+    }
+
+    if (widget == m_zeroconfPage) {
+        closeZeroconfPage();
+        return;
+    }
+
+    int numNonRemoteView = 0;
+    if (m_showStartPage)
+        numNonRemoteView++;
+    if (m_zeroconfPage)
+        numNonRemoteView++;
+
+    if (index - numNonRemoteView >= 0)
+        m_remoteViewList.removeAt(index - numNonRemoteView);
+
+    m_tabWidget->removeTab(index);
+
+    widget->deleteLater();
+    widget = 0;
+
+    tabChanged(index);
 }
 
 void MainWindow::showLocalCursor(bool showLocalCursor)
