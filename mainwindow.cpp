@@ -568,10 +568,12 @@ void MainWindow::closeTab(QWidget *widget)
         return;
     }
 
+#ifdef BUILD_ZEROCONF
     if (widget == m_zeroconfPage) {
         closeZeroconfPage();
         return;
     }
+#endif
 
     int numNonRemoteView = 0;
     if (m_showStartPage)
