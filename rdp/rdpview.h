@@ -47,8 +47,7 @@ public:
                      const KUrl &url = KUrl(),
                      const QString &user = QString(), const QString &password = QString(),
                      int flags = RDP_LOGON_NORMAL, const QString &domain = QString(),
-                     const QString &shell = QString(), const QString &directory = QString(),
-                     const QString &caption = QString());
+                     const QString &shell = QString(), const QString &directory = QString());
 
     virtual ~RdpView();
 
@@ -82,8 +81,6 @@ private:
     QString m_clientVersion;           // version number returned by rdesktop
     QX11EmbedContainer *m_container;   // container for the rdesktop window
     QProcess *m_process;              // rdesktop process
-
-    QString m_caption;    // the caption to use on the window
 
     RdpHostPreferences *m_hostPreferences;
 

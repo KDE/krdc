@@ -37,8 +37,7 @@ RdpView::RdpView(QWidget *parent,
                  const KUrl &url,
                  const QString &user, const QString &password,
                  int flags, const QString &domain,
-                 const QString &shell, const QString &directory,
-                 const QString &caption)
+                 const QString &shell, const QString &directory)
         : RemoteView(parent),
         m_user(user),
         m_password(password),
@@ -47,8 +46,7 @@ RdpView::RdpView(QWidget *parent,
         m_shell(shell),
         m_directory(directory),
         m_quitFlag(false),
-        m_process(NULL),
-        m_caption(caption)
+        m_process(NULL)
 {
     m_url = url;
     m_host = url.host();
@@ -114,7 +112,6 @@ bool RdpView::start()
     m_hostPreferences = new RdpHostPreferences(m_url.prettyUrl(KUrl::RemoveTrailingSlash), false, this);
 
     m_container->show();
-    m_container->setWindowTitle(m_caption);
 
     if (m_hostPreferences->walletSupport()) {
         if (m_url.userName().isEmpty()) {
