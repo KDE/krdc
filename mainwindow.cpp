@@ -99,12 +99,14 @@ MainWindow::MainWindow(QWidget *parent)
     setCentralWidget(m_tabWidget);
 
     QDockWidget *remoteDesktopsDockWidget = new QDockWidget(this);
-    remoteDesktopsDockWidget->setObjectName("remoteDesktopsDockWidget");
-    remoteDesktopsDockWidget->setWindowTitle("Remote desktops");
+    remoteDesktopsDockWidget->setObjectName("remoteDesktopsDockWidget"); // required for saving position / state
+    remoteDesktopsDockWidget->setWindowTitle(i18n("Remote desktops"));
     actionCollection()->addAction("remote_desktop_dockwidget",
                                   remoteDesktopsDockWidget->toggleViewAction());
     QTreeView *remoteDesktopsTreeView = new QTreeView(remoteDesktopsDockWidget);
-    remoteDesktopsTreeView->setModel(new RemoteDesktopsModel(this));
+    RemoteDesktopsModel *remoteDesktopsModel = new RemoteDesktopsModel(this);
+    connect(remoteDesktopsModel, SIGNAL(modelReset()), remoteDesktopsTreeView, SLOT(expandAll()));
+    remoteDesktopsTreeView->setModel(remoteDesktopsModel);
     remoteDesktopsTreeView->header()->hide();
     remoteDesktopsTreeView->expandAll();
     connect(remoteDesktopsTreeView, SIGNAL(doubleClicked(const QModelIndex &)),
@@ -133,8 +135,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     if (Settings::rememberSessions()) // give some time to create and show the window first
         QTimer::singleShot(100, this, SLOT(restoreOpenSessions()));
-
-    remoteDesktopsDockWidget->setVisible(false); //TODO: remove when fully implemented
 }
 
 MainWindow::~MainWindow()

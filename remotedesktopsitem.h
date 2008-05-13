@@ -41,6 +41,7 @@ public:
     QVariant data(int column) const;
     int row() const;
     RemoteDesktopsItem *parent();
+    void clearChildren();
 
 private:
     QList<RemoteDesktopsItem*> childItems;

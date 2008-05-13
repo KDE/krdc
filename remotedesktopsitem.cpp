@@ -73,3 +73,8 @@ int RemoteDesktopsItem::row() const
 
     return 0;
 }
+
+void RemoteDesktopsItem::clearChildren()
+{
+    childItems.clear();
+}

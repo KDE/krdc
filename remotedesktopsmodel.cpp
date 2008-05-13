@@ -29,30 +29,42 @@
 #include <KIcon>
 #include <KStandardDirs>
 #include <KDebug>
+#include <KLocale>
+#include <KProcess>
 
 RemoteDesktopsModel::RemoteDesktopsModel(QObject *parent)
         : QAbstractItemModel(parent)
 {
-    QList<QVariant> rootData;
-    rootData << "Remote desktops";
-    rootItem = new RemoteDesktopsItem(rootData);
+    rootItem = new RemoteDesktopsItem(QList<QVariant>() << "Remote desktops");
 
     QString file = KStandardDirs::locateLocal("data", "krdc/bookmarks.xml");
 
     m_manager = KBookmarkManager::managerForFile(file, "krdc");
-
     m_manager->setUpdate(true);
+    connect(m_manager, SIGNAL(changed(const QString &, const QString &)), SLOT(changed()));
 
     buildModelFromBookmarkGroup(m_manager->root(), rootItem);
 
-    RemoteDesktopsItem *localNetwork = new RemoteDesktopsItem(QList<QVariant>() << "Local Network", rootItem);
+#if 0
+    localNetworkItem = new RemoteDesktopsItem(QList<QVariant>() << "Local Network", rootItem);
+    rootItem->appendChild(localNetworkItem);
 
-    rootItem->appendChild(localNetwork);
-    localNetwork->appendChild(new RemoteDesktopsItem(QList<QVariant>() << "...", localNetwork));
+    scanLocalNetwork();
+
+    localNetworkItem->appendChild(new RemoteDesktopsItem(QList<QVariant>() << "...", localNetworkItem));
+#endif
 }
 
 RemoteDesktopsModel::~RemoteDesktopsModel()
 {
+}
+
+void RemoteDesktopsModel::changed()
+{
+    kDebug(5010);
+    rootItem->clearChildren();
+    buildModelFromBookmarkGroup(m_manager->root(), rootItem);
+    reset();
 }
 
 int RemoteDesktopsModel::columnCount(const QModelIndex &parent) const
@@ -76,8 +88,10 @@ QVariant RemoteDesktopsModel::data(const QModelIndex &index, int role) const
     case Qt::DecorationRole:
         if (item->data(index.column()).toString().contains("://")) //TODO: clean impl
             return KIcon("krdc");
+#if 0
         else if (item->data(index.column()).toString() == "Local Network") //TODO: clean impl
             return KIcon("network-workgroup");
+#endif
         else if (item->data(index.column()).toString() == "...") //TODO: clean impl
             return KIcon("view-history");
         else
@@ -164,5 +178,43 @@ void RemoteDesktopsModel::buildModelFromBookmarkGroup(const KBookmarkGroup &grou
         bm = group.next(bm);
     }
 }
+
+#if 0
+void RemoteDesktopsModel::scanLocalNetwork()
+{
+    m_scanProcess = new KProcess(this);
+    m_scanProcess->setOutputChannelMode(KProcess::SeparateChannels);
+    QStringList args(QStringList() << "-vv" << "-PN" << "-p5901" << "192.168.1.0-255");
+    connect(m_scanProcess, SIGNAL(readyReadStandardOutput()),
+                           SLOT(readInput()));
+    m_scanProcess->setProgram("nmap", args);
+    m_scanProcess->start();
+}
+
+void RemoteDesktopsModel::readInput()
+{
+    // we do not know if the output array ends in the middle of an utf-8 sequence
+    m_output += m_scanProcess->readAllStandardOutput();
+
+    int pos;
+    while ((pos = m_output.indexOf('\n')) != -1) {
+        QString line = QString::fromLocal8Bit(m_output, pos + 1);
+        m_output.remove(0, pos + 1);
+
+        if (line.contains("open port")) {
+            kDebug(5010) << line;
+
+            QString ip(line.mid(line.lastIndexOf(' ') + 1));
+            ip = ip.left(ip.length() - 1);
+
+            QString port(line.left(line.indexOf('/')));
+            port = port.mid(port.lastIndexOf(' ') + 1);
+            RemoteDesktopsItem *item = new RemoteDesktopsItem(QList<QVariant>() << "vnc://" + ip + ':' + port, localNetworkItem);
+            localNetworkItem->appendChild(item);
+            emit dataChanged(QModelIndex(), QModelIndex());
+        }
+    }
+}
+#endif
 
 #include "remotedesktopsmodel.moc"

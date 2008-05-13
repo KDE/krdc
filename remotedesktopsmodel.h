@@ -30,6 +30,9 @@ class KBookmarkGroup;
 class KBookmarkManager;
 class RemoteDesktopsItem;
 
+class KProcess;
+class QByteArray;
+
 class RemoteDesktopsModel : public QAbstractItemModel
 {
     Q_OBJECT
@@ -50,9 +53,23 @@ public:
 
 private:
     void buildModelFromBookmarkGroup(const KBookmarkGroup &group, RemoteDesktopsItem *item);
+    void scanLocalNetwork();
 
     KBookmarkManager *m_manager;
     RemoteDesktopsItem *rootItem;
+#if 0
+    RemoteDesktopsItem *localNetworkItem;
+
+    KProcess *m_scanProcess;
+    QString m_strBt;
+    QByteArray m_output;
+#endif
+
+private slots:
+    void changed();
+#if 0
+    void readInput();
+#endif
 };
 
 #endif
