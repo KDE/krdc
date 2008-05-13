@@ -97,7 +97,7 @@ class VncClientThread: public QThread
     Q_OBJECT
 
 public:
-    explicit VncClientThread();
+    explicit VncClientThread(QObject *parent = 0);
     ~VncClientThread();
     const QImage image(int x = 0, int y = 0, int w = 0, int h = 0);
     void setImage(const QImage &img);

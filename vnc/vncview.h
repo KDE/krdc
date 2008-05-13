@@ -83,6 +83,7 @@ private:
     bool m_repaint;
     bool m_quitFlag;
     bool m_firstPasswordTry;
+    bool m_authenticaionCanceled;
     bool m_dontSendClipboard;
     qreal m_horizontalFactor;
     qreal m_verticalFactor;

@@ -46,6 +46,7 @@ VncView::VncView(QWidget *parent, const KUrl &url)
         m_repaint(false),
         m_quitFlag(false),
         m_firstPasswordTry(true),
+        m_authenticaionCanceled(false),
         m_dontSendClipboard(false),
         m_horizontalFactor(1.0),
         m_verticalFactor(1.0)
@@ -165,6 +166,11 @@ void VncView::requestPassword()
 {
     kDebug(5011) << "request password";
 
+    if (m_authenticaionCanceled) {
+        startQuitting();
+        return;
+    }
+
     setStatus(Authenticating);
 
 #ifndef QTONLY
@@ -184,11 +190,16 @@ void VncView::requestPassword()
     }
 
 #ifdef QTONLY
+    bool ok;
     QString password = QInputDialog::getText(this, //krazy:exclude=qclasses
                                              tr("Password required"),
                                              tr("Please enter the password for the remote desktop:"),
-                                             QLineEdit::Password);
-    vncThread.setPassword(password);
+                                             QLineEdit::Password, QString(), &ok);
+    m_firstPasswordTry = false;
+    if (ok)
+        vncThread.setPassword(password);
+    else
+        m_authenticaionCanceled = true;
 #else
     KPasswordDialog dialog(this);
     dialog.setPixmap(KIcon("dialog-password").pixmap(48));
@@ -197,6 +208,9 @@ void VncView::requestPassword()
     if (dialog.exec() == KPasswordDialog::Accepted) {
         m_firstPasswordTry = false;
         vncThread.setPassword(dialog.password());
+    } else {
+        kDebug(5011) << "password dialog not accepted";
+        m_authenticaionCanceled = true;
     }
 #endif
 }

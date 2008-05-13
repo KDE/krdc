@@ -157,7 +157,8 @@ void VncClientThread::outputHandler(const char *format, ...)
         outputErrorMessageString = i18n("VNC server closed connection.");
 }
 
-VncClientThread::VncClientThread()
+VncClientThread::VncClientThread(QObject *parent)
+        : QThread(parent)
 {
     QMutexLocker locker(&mutex);
     m_stopped = false;
