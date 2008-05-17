@@ -202,7 +202,6 @@ void VncView::requestPassword()
         m_authenticaionCanceled = true;
 #else
     KPasswordDialog dialog(this);
-    dialog.setPixmap(KIcon("dialog-password").pixmap(48));
     dialog.setPrompt(m_firstPasswordTry ? i18n("Access to the system requires a password.")
                                         : i18n("Authentication failed. Please try again."));
     if (dialog.exec() == KPasswordDialog::Accepted) {
