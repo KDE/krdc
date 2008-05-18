@@ -37,11 +37,11 @@ as Authors, publish date, the abstract, and Keywords -->
 
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2007-08-20</date>
-<releaseinfo>1.0.0</releaseinfo>
+<date>2008-05-18</date>
+<releaseinfo>1.0.1</releaseinfo>
 
 <copyright>
-<year>2003, 2007</year>
+<year>2003, 2008</year>
 </copyright>
 
 <abstract>
@@ -79,8 +79,12 @@ server.
 </para>
 
 <para>
-You would typically use &krdc; with the &kde; VNC server, which is
-&krfb;, since it closely matches the special features of &krdc;.
+You would typically use &krdc; with the &kde; VNC server (&krfb;), which is
+also known as Krfb, since it closely matches the special features of &krdc;.
+</para>
+
+<para>
+If you want to start &krdc; from Konsole, the command is "krdc".
 </para>
 
 <para>
@@ -189,8 +193,8 @@ connect to, you can enter it directly into the <guilabel>Address:</guilabel> inp
 <para>
 If you want to connect to a machine named megan, which is
 running a <acronym>VNC</acronym> server on screen 1 (5901), you can enter
-<userinput>megan:1</userinput> and choose VNC as the protocol in the <guilabel>Address:
-</guilabel> input.
+<userinput>megan:1</userinput> and choose VNC as the protocol in the 
+<guilabel>Address:</guilabel> input.
 </para>
 
 <para>
@@ -232,6 +236,12 @@ the server specified in the invitation.
 </sect1>
 
 <sect1 id="connection"><title>What happens when you connect</title>
+
+<para>
+Notice: Before connecting, ensure that the target computer (server) is
+available on the network and, if necessary, that its firewall has
+been correctly configured or disabled.
+</para>
 
 <para>
 No matter how you select the server to connect to, the next thing that
@@ -281,7 +291,7 @@ other name, or the IP address.
 
 <para>
 You select the appropriate speed setting, and select the
-<guibutton>Connect</guibutton> to proceed.
+<guibutton>OK</guibutton> to proceed.
 </para>
 
 <para>
