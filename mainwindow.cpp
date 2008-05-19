@@ -305,29 +305,32 @@ void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConn
 
     m_addressNavigator->setUrl(KUrl(url.scheme().toLower() + "://"));
 
-    RemoteView *view;
+    RemoteView *view = 0;
 
-#ifdef BUILD_VNC
     if (url.scheme().toLower() == "vnc") {
+#ifdef BUILD_VNC
         view = new VncView(this, url);
-    } else
 #endif
-
+    } else if (url.scheme().toLower() == "nx") {
 #ifdef BUILD_NX
-    if (url.scheme().toLower() == "nx") {
         view = new NxView(this, url);
-    } else
 #endif
-
+    } else if (url.scheme().toLower() == "rdp") {
 #ifdef BUILD_RDP
-    if (url.scheme().toLower() == "rdp") {
         view = new RdpView(this, url);
-    } else
 #endif
+    } else
     {
         KMessageBox::error(this,
                            i18n("The entered address cannot be handled."),
                            i18n("Unusable URL"));
+        return;
+    }
+
+    if (!view) {
+        KMessageBox::error(this, i18n("Support for %1:// has not been enabled during build.",
+                    url.scheme().toLower()),
+                i18n("Unusable URL"));
         return;
     }
 
@@ -773,7 +776,8 @@ void MainWindow::updateConfiguration()
 
 void MainWindow::quit()
 {
-    if (KMessageBox::warningContinueCancel(this,
+    bool haveRemoteConnections = m_remoteViewList.count();
+    if (!haveRemoteConnections || KMessageBox::warningContinueCancel(this,
                                            i18n("Are you sure you want to quit the KDE Remote Desktop Client?"),
                                            i18n("Confirm Quit"),
                                            KStandardGuiItem::quit(), KStandardGuiItem::cancel(),
