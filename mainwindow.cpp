@@ -432,6 +432,7 @@ void MainWindow::switchFullscreen()
         fullscreenLayout->addWidget(scrollArea);
 
         MinimizePixel *minimizePixel = new MinimizePixel(m_fullscreenWindow);
+        minimizePixel->winId(); // force it to be a native widget (prevents problem with QX11EmbedContainer)
         connect(minimizePixel, SIGNAL(rightClicked()), m_fullscreenWindow, SLOT(showMinimized()));
 
         m_fullscreenWindow->show();
@@ -511,6 +512,7 @@ void MainWindow::showRemoteViewToolbar()
         actionCollection()->action("switch_fullscreen")->setText(i18n("Switch to Window Mode"));
 
         m_toolBar = new FloatingToolBar(m_fullscreenWindow, m_fullscreenWindow);
+        m_toolBar->winId(); // force it to be a native widget (prevents problem with QX11EmbedContainer)
         m_toolBar->setSide(FloatingToolBar::Top);
         m_toolBar->addAction(actionCollection()->action("switch_fullscreen"));
 
