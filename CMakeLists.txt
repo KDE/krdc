@@ -83,7 +83,7 @@ if(DNSSD_FOUND)
    target_link_libraries(krdc ${KDE4_KDNSSD_LIBS})
 endif(DNSSD_FOUND)
 
-install(TARGETS krdc DESTINATION ${BIN_INSTALL_DIR})
+install(TARGETS krdc ${INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES krdcui.rc DESTINATION ${DATA_INSTALL_DIR}/krdc)
 install(FILES krdc.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
 install(FILES vnc.protocol rdp.protocol DESTINATION ${SERVICES_INSTALL_DIR})
