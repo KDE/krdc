@@ -37,6 +37,8 @@
 HostPreferences::HostPreferences(const QString &url, QObject *parent)
         : QObject(parent),
         m_url(url),
+        showAgainCheckBox(0),
+        walletSupportCheckBox(0),
         m_showConfigAgain(true),
         m_walletSupport(true)
 {
