@@ -732,7 +732,9 @@ void KVncView::enableClientCursor(bool enable) {
 		m_enableFramebufferLocking = true; // cant be turned off
 	}
 	m_enableClientCursor = enable;
+	lockFramebuffer();
 	showDotCursorInternal();
+	unlockFramebuffer();
 }
 
 /*!
