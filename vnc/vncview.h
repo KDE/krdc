@@ -91,6 +91,7 @@ private:
     VncHostPreferences *m_hostPreferences;
 #endif
     QImage m_frame;
+    bool m_forceLocalCursor;
 
 private slots:
     void updateImage(int x, int y, int w, int h);

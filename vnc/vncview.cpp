@@ -49,7 +49,8 @@ VncView::VncView(QWidget *parent, const KUrl &url)
         m_authenticaionCanceled(false),
         m_dontSendClipboard(false),
         m_horizontalFactor(1.0),
-        m_verticalFactor(1.0)
+        m_verticalFactor(1.0),
+        m_forceLocalCursor(false)
 {
     m_url = url;
     m_host = url.host();
@@ -218,6 +219,12 @@ void VncView::outputErrorMessage(const QString &message)
 {
     kDebug(5011) << message;
 
+    if (message == "INTERNAL:APPLE_VNC_COMPATIBILTY") {
+        setCursor(localDotCursor());
+        m_forceLocalCursor = true;
+        return;
+    }
+
     startQuitting();
 
     KMessageBox::error(this, message, i18n("VNC failure"));
@@ -239,7 +246,7 @@ void VncView::updateImage(int x, int y, int w, int h)
         setAttribute(Qt::WA_OpaquePaintEvent);
         installEventFilter(this);
 
-        setCursor(m_dotCursorState == CursorOn ? localDotCursor() : Qt::BlankCursor);
+        setCursor(((m_dotCursorState == CursorOn) || m_forceLocalCursor) ? localDotCursor() : Qt::BlankCursor);
 
         setMouseTracking(true); // get mouse events even when there is no mousebutton pressed
         setFocusPolicy(Qt::WheelFocus);

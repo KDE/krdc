@@ -155,6 +155,10 @@ void VncClientThread::outputHandler(const char *format, ...)
 
     if (message.contains("VNC server closed connection"))
         outputErrorMessageString = i18n("VNC server closed connection.");
+
+    // internal messages, not displayed to user
+    if (message.contains("VNC server supports protocol version 3.889")) // see http://bugs.kde.org/162640
+        outputErrorMessageString = "INTERNAL:APPLE_VNC_COMPATIBILTY";
 }
 
 VncClientThread::VncClientThread(QObject *parent)
