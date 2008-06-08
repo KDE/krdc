@@ -148,7 +148,7 @@ void MainWindow::setupActions()
     vncConnectionAction->setIcon(KIcon("network-connect"));
     connect(vncConnectionAction, SIGNAL(triggered()), SLOT(newVncConnection()));
 #ifndef BUILD_VNC
-    vncConnectionAction->setVisible(false);
+    vncConnectionAction->deleteLater();
 #endif
 
     QAction *nxConnectionAction = actionCollection()->addAction("new_nx_connection");
@@ -156,7 +156,7 @@ void MainWindow::setupActions()
     nxConnectionAction->setIcon(KIcon("network-connect"));
     connect(nxConnectionAction, SIGNAL(triggered()), SLOT(newNxConnection()));
 #ifndef BUILD_NX
-    nxConnectionAction->setVisible(false);
+    nxConnectionAction->deleteLater();
 #endif
 
     QAction *rdpConnectionAction = actionCollection()->addAction("new_rdp_connection");
@@ -164,7 +164,7 @@ void MainWindow::setupActions()
     rdpConnectionAction->setIcon(KIcon("network-connect"));
     connect(rdpConnectionAction, SIGNAL(triggered()), SLOT(newRdpConnection()));
 #ifndef BUILD_RDP
-    rdpConnectionAction->setVisible(false);
+    rdpConnectionAction->deleteLater();
 #endif
 
     QAction *zeroconfAction = actionCollection()->addAction("zeroconf_page");
