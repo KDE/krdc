@@ -174,6 +174,10 @@ void RemoteView::switchFullscreen(bool)
 {
 }
 
+void RemoteView::scaleResize(int, int)
+{
+}
+
 KUrl RemoteView::url()
 {
     return m_url;
