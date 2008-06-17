@@ -67,6 +67,7 @@
 #include <QCloseEvent>
 #include <QDesktopWidget>
 #include <QDockWidget>
+#include <QFontMetrics>
 #include <QHeaderView>
 #include <QLabel>
 #include <QLayout>
@@ -101,6 +102,8 @@ MainWindow::MainWindow(QWidget *parent)
     QDockWidget *remoteDesktopsDockWidget = new QDockWidget(this);
     remoteDesktopsDockWidget->setObjectName("remoteDesktopsDockWidget"); // required for saving position / state
     remoteDesktopsDockWidget->setWindowTitle(i18n("Remote desktops"));
+    QFontMetrics fontMetrics(remoteDesktopsDockWidget->font());
+    remoteDesktopsDockWidget->setMinimumWidth(fontMetrics.width("vnc://192.168.100.100:6000"));
     actionCollection()->addAction("remote_desktop_dockwidget",
                                   remoteDesktopsDockWidget->toggleViewAction());
     QTreeView *remoteDesktopsTreeView = new QTreeView(remoteDesktopsDockWidget);
