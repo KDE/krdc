@@ -227,7 +227,7 @@ void RdpView::connectionClosed()
 
 void RdpView::processError(QProcess::ProcessError error)
 {
-    if (m_quitFlag && error == QProcess::Crashed)
+    if (m_quitFlag) // do not try to show error messages while quitting (prevent crashes)
         return;
 
     if (m_status == Connecting) {
