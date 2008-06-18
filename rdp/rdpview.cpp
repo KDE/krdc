@@ -227,6 +227,9 @@ void RdpView::connectionClosed()
 
 void RdpView::processError(QProcess::ProcessError error)
 {
+    if (m_quitFlag && error == QProcess::Crashed)
+        return;
+
     if (m_status == Connecting) {
         setStatus(Disconnected);
 
