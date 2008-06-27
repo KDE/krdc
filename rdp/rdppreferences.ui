@@ -6,20 +6,11 @@
     <x>0</x>
     <y>0</y>
     <width>446</width>
-    <height>283</height>
+    <height>315</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" >
-   <property name="leftMargin" >
-    <number>0</number>
-   </property>
-   <property name="topMargin" >
-    <number>0</number>
-   </property>
-   <property name="rightMargin" >
-    <number>0</number>
-   </property>
-   <property name="bottomMargin" >
+   <property name="margin" >
     <number>0</number>
    </property>
    <item>
@@ -48,7 +39,7 @@
       <item row="0" column="1" >
        <layout class="QVBoxLayout" >
         <item>
-         <widget class="QComboBox" name="resolutionComboBox" >
+         <widget class="KComboBox" name="resolutionComboBox" >
           <property name="minimumSize" >
            <size>
             <width>280</width>
@@ -179,7 +170,7 @@
        </widget>
       </item>
       <item row="1" column="1" >
-       <widget class="QComboBox" name="kcfg_ColorDepth" >
+       <widget class="KComboBox" name="kcfg_ColorDepth" >
         <property name="minimumSize" >
          <size>
           <width>280</width>
@@ -214,7 +205,7 @@
        </widget>
       </item>
       <item row="2" column="1" >
-       <widget class="QComboBox" name="kcfg_KeyboardLayout" >
+       <widget class="KComboBox" name="kcfg_KeyboardLayout" >
         <property name="minimumSize" >
          <size>
           <width>280</width>
@@ -425,7 +416,7 @@
        </widget>
       </item>
       <item row="3" column="1" >
-       <widget class="QComboBox" name="kcfg_Sound" >
+       <widget class="KComboBox" name="kcfg_Sound" >
         <item>
          <property name="text" >
           <string>On this computer</string>
@@ -492,7 +483,7 @@
      <property name="orientation" >
       <enum>Qt::Vertical</enum>
      </property>
-     <property name="sizeHint" >
+     <property name="sizeHint" stdset="0" >
       <size>
        <width>428</width>
        <height>16</height>
@@ -503,6 +494,11 @@
   </layout>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>KComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kcombobox.h</header>
+  </customwidget>
   <customwidget>
    <class>KLineEdit</class>
    <extends>QLineEdit</extends>
