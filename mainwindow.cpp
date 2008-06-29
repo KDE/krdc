@@ -565,9 +565,9 @@ void MainWindow::logout()
 
 void MainWindow::closeTab(QWidget *widget)
 {
-    kDebug(5010);
-
     int index = m_tabWidget->indexOf(widget);
+
+    kDebug(5010) << index;
 
     if (m_showStartPage && index == 0) {
         KMessageBox::information(this, i18n("The start page cannot be closed. "
@@ -594,9 +594,6 @@ void MainWindow::closeTab(QWidget *widget)
     m_tabWidget->removeTab(index);
 
     widget->deleteLater();
-    widget = 0;
-
-    tabChanged(index);
 }
 
 void MainWindow::showLocalCursor(bool showLocalCursor)
