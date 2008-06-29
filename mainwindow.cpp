@@ -136,6 +136,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     setAutoSaveSettings(); // e.g toolbar position, mainwindow size, ...
 
+    m_addressNavigator->setFocus();
+
     if (Settings::rememberSessions()) // give some time to create and show the window first
         QTimer::singleShot(100, this, SLOT(restoreOpenSessions()));
 }
