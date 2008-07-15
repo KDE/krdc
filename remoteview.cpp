@@ -83,6 +83,9 @@ void RemoteView::setStatus(RemoteView::RemoteStatus s)
 
 RemoteView::~RemoteView()
 {
+#ifndef QTONLY
+    delete m_wallet;
+#endif
 }
 
 bool RemoteView::supportsScaling() const
