@@ -76,5 +76,6 @@ int RemoteDesktopsItem::row() const
 
 void RemoteDesktopsItem::clearChildren()
 {
+    qDeleteAll(childItems);
     childItems.clear();
 }

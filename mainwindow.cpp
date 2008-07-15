@@ -455,8 +455,7 @@ void MainWindow::statusChanged(RemoteView::RemoteStatus status)
 
         break;
     default:
-        iconName = "krdc";
-        message = QString();
+        break;
     }
 
     m_tabWidget->setTabIcon(m_tabWidget->currentIndex(), KIcon(iconName));
