@@ -496,7 +496,7 @@ void VncView::keyEvent(QKeyEvent *e)
     }
 
     if (k == 0) {
-        if (e->key() < 0x100)
+        if (e->key() < 0x100 && e->text().length() > 0)
             k = QChar(e->text().at(0)).unicode(); //respect upper- / lowercase
         else
             rfbClientLog("Unknown keysym: %d\n", e->key());
