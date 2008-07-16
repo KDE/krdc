@@ -5,6 +5,7 @@ add_subdirectory(config)
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/rdp/
     ${CMAKE_CURRENT_SOURCE_DIR}/vnc/
+    ${CMAKE_CURRENT_SOURCE_DIR}/nx/
     ${CMAKE_CURRENT_SOURCE_DIR}/zeroconf/
 )
 
@@ -47,7 +48,23 @@ if(LIBVNCSERVER_FOUND)
     )
 endif(LIBVNCSERVER_FOUND)
 
-set(krdc_SRCS ${krdc_zeroconf_SRCS} ${krdc_rdp_SRCS} ${krdc_vnc_SRCS}
+if(LIBNXCL_FOUND)
+    add_definitions(-DBUILD_NX)
+
+    include_directories(${LIBNXCL_INCLUDE_DIR})
+
+    set(krdc_nx_SRCS
+        nx/nxhostpreferences.cpp
+	nx/nxview.cpp
+	nx/nxclientthread.cpp
+    )
+
+    kde4_add_ui_files(krdc_nx_SRCS
+        nx/nxpreferences.ui
+    )
+endif(LIBNXCL_FOUND)
+
+set(krdc_SRCS ${krdc_zeroconf_SRCS} ${krdc_rdp_SRCS} ${krdc_vnc_SRCS} ${krdc_nx_SRCS}
     hostpreferences.cpp
     config/hostpreferenceslist.cpp
     config/preferencesdialog.cpp
@@ -82,6 +99,10 @@ endif(LIBVNCSERVER_FOUND)
 if(DNSSD_FOUND)
    target_link_libraries(krdc ${KDE4_KDNSSD_LIBS})
 endif(DNSSD_FOUND)
+
+if(LIBNXCL_FOUND)
+   target_link_libraries(krdc ${LIBNXCL_LIBRARIES})
+endif(LIBNXCL_FOUND)
 
 install(TARGETS krdc ${INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES krdcui.rc DESTINATION ${DATA_INSTALL_DIR}/krdc)
