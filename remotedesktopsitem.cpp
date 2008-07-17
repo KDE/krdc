@@ -53,7 +53,7 @@ int RemoteDesktopsItem::childCount() const
 
 int RemoteDesktopsItem::columnCount() const
 {
-    return itemData.count();
+    return 1;
 }
 
 QVariant RemoteDesktopsItem::data(int column) const

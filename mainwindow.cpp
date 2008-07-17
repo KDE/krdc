@@ -363,8 +363,9 @@ void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConn
 
 void MainWindow::openFromDockWidget(const QModelIndex &index)
 {
-    if (index.data(Qt::UserRole).toBool()) {
-        KUrl url(index.data().toString());
+    QString data = index.data(Qt::UserRole).toString();
+    if (!data.isEmpty()) {
+        KUrl url(data);
         // first check if url has already been opened; in case show the tab
         for (int i = 0; i < m_remoteViewList.count(); i++) {
             if (m_remoteViewList.at(i)->url() == url) {
