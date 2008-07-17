@@ -455,7 +455,7 @@ void VncView::keyEvent(QKeyEvent *e)
     case Qt::Key_Space: k = XK_space; break;
     case Qt::Key_Delete: k = XK_Delete; break;
     case Qt::Key_Enter: k = XK_KP_Enter; break;
-    case Qt::Key_Equal: k = XK_KP_Equal; break;
+    case Qt::Key_Equal: k = XK_equal; break;
     case Qt::Key_Up: k = XK_Up; break;
     case Qt::Key_Down: k = XK_Down; break;
     case Qt::Key_Right: k = XK_Right; break;
