@@ -96,8 +96,11 @@ QVariant RemoteDesktopsModel::data(const QModelIndex &index, int role) const
             return KIcon("view-history");
         else
             return KIcon("folder-bookmarks");
-    case Qt::UserRole: // tell if it is an address
-        return QVariant(item->data(index.column()).toString().contains("://"));
+    case Qt::UserRole:
+        if (item->data(index.column() + 1).toString().contains("://"))
+            return QVariant(item->data(index.column() + 1).toString());
+        else
+            return QVariant();
     default:
         return QVariant();
     }
@@ -171,7 +174,7 @@ void RemoteDesktopsModel::buildModelFromBookmarkGroup(const KBookmarkGroup &grou
 {
     KBookmark bm = group.first();
     while (!bm.isNull()) {
-        RemoteDesktopsItem *newItem = new RemoteDesktopsItem(QList<QVariant>() << bm.text(), item);
+        RemoteDesktopsItem *newItem = new RemoteDesktopsItem(QList<QVariant>() << bm.text() << bm.url().url(), item);
         item->appendChild(newItem);
         if (bm.isGroup())
             buildModelFromBookmarkGroup(bm.toGroup(), newItem); //recursive
