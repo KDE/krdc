@@ -6,19 +6,16 @@
     <x>0</x>
     <y>0</y>
     <width>429</width>
-    <height>115</height>
+    <height>127</height>
    </rect>
   </property>
-  <layout class="QVBoxLayout" >
-   <property name="margin" >
-    <number>0</number>
-   </property>
+  <layout class="QVBoxLayout" name="verticalLayout" >
    <item>
     <widget class="QGroupBox" name="vncGroupBox" >
      <property name="title" >
       <string>Connection</string>
      </property>
-     <layout class="QGridLayout" >
+     <layout class="QFormLayout" name="formLayout" >
       <item row="0" column="0" >
        <widget class="QLabel" name="connectionLabel" >
         <property name="text" >
@@ -57,31 +54,18 @@
         </item>
        </widget>
       </item>
-      <item row="1" column="0" >
-       <spacer>
-        <property name="orientation" >
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0" >
-         <size>
-          <width>161</width>
-          <height>0</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
      </layout>
     </widget>
    </item>
    <item>
-    <spacer>
+    <spacer name="verticalSpacer" >
      <property name="orientation" >
       <enum>Qt::Vertical</enum>
      </property>
      <property name="sizeHint" stdset="0" >
       <size>
        <width>20</width>
-       <height>0</height>
+       <height>41</height>
       </size>
      </property>
     </spacer>

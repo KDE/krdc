@@ -15,7 +15,7 @@
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
-  <layout class="QVBoxLayout" >
+  <layout class="QVBoxLayout" name="verticalLayout" >
    <property name="margin" >
     <number>0</number>
    </property>
@@ -24,7 +24,7 @@
      <property name="title" >
       <string>Connection</string>
      </property>
-     <layout class="QGridLayout" >
+     <layout class="QFormLayout" name="formLayout" >
       <item row="0" column="0" >
        <layout class="QVBoxLayout" >
         <item>
@@ -173,6 +173,39 @@
         <property name="buddy" >
          <cstring>kcfg_DesktopType</cstring>
         </property>
+       </widget>
+      </item>
+      <item row="1" column="1" >
+       <widget class="KComboBox" name="kcfg_DesktopType" >
+        <property name="minimumSize" >
+         <size>
+          <width>280</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="whatsThis" >
+         <string>Here you can specify the desktop environment of the remote desktop.</string>
+        </property>
+        <item>
+         <property name="text" >
+          <string>KDE</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Gnome</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>CDE</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>XDM</string>
+         </property>
+        </item>
        </widget>
       </item>
       <item row="2" column="0" >
@@ -393,64 +426,24 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="1" >
-       <widget class="KComboBox" name="kcfg_DesktopType" >
-        <property name="minimumSize" >
-         <size>
-          <width>280</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="whatsThis" >
-         <string>Here you can specify the desktop environment of the remote desktop.</string>
-        </property>
-        <item>
-         <property name="text" >
-          <string>KDE</string>
-         </property>
-        </item>
-        <item>
-         <property name="text" >
-          <string>Gnome</string>
-         </property>
-        </item>
-        <item>
-         <property name="text" >
-          <string>CDE</string>
-         </property>
-        </item>
-        <item>
-         <property name="text" >
-          <string>XDM</string>
-         </property>
-        </item>
-       </widget>
-      </item>
       <item row="3" column="1" >
        <layout class="QHBoxLayout" name="horizontalLayout" >
         <item>
          <widget class="QCheckBox" name="checkboxDefaultPrivateKey" >
+          <property name="whatsThis" >
+           <string>The authentification on the NX server requires a private key. By default, it is the NoMachine DSA key. Use this box to choose the default key, or configure it by importing from a file or editing directly the textbox. </string>
+          </property>
           <property name="text" >
            <string>NoMachine Key</string>
           </property>
           <property name="checked" >
            <bool>true</bool>
           </property>
-          <property name="whatsThis" >
-           <string>The authentification on the NX server requires a private key. By default, it is the NoMachine DSA key. Use this box to choose the default key, or configure it by importing from a file or editing directly the textbox. </string>
-          </property>
          </widget>
         </item>
        </layout>
       </item>
      </layout>
-     <zorder>desktopTypeLabel</zorder>
-     <zorder>layoutLabel</zorder>
-     <zorder>kcfg_KeyboardLayout</zorder>
-     <zorder>labelPrivateKey</zorder>
-     <zorder>kcfg_DesktopType</zorder>
-     <zorder>verticalLayoutWidget</zorder>
-     <zorder>pushButton</zorder>
     </widget>
    </item>
    <item>
@@ -467,9 +460,9 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-	<property name="whatsThis" >
-	 <string>Use this textbox to edit the private key for the authentification on the NX server.</string>
-	</property>
+        <property name="whatsThis" >
+         <string>Use this textbox to edit the private key for the authentification on the NX server.</string>
+        </property>
        </widget>
       </item>
       <item row="0" column="0" >
@@ -492,12 +485,12 @@
         </item>
         <item>
          <widget class="QPushButton" name="buttonImportPrivateKey" >
+          <property name="whatsThis" >
+           <string>Use this button to import the private key from a file.</string>
+          </property>
           <property name="text" >
            <string>Import ...</string>
           </property>
-	  <property name="whatsThis" >
-	   <string>Use this button to import the private key from a file.</string>
-	  </property>
          </widget>
         </item>
        </layout>
@@ -519,10 +512,6 @@
     </spacer>
    </item>
   </layout>
-  <zorder>connectionGroupBox</zorder>
-  <zorder>groupboxPrivateKey</zorder>
-  <zorder>textEdit</zorder>
-  <zorder>textEdit</zorder>
  </widget>
  <customwidgets>
   <customwidget>

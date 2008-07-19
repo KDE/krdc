@@ -199,6 +199,9 @@ KDialog *HostPreferences::createDialog(QWidget *widget)
     titleWidget->setPixmap(KIcon("krdc"));
     layout->addWidget(titleWidget);
 
+    if (widget->layout())
+        widget->layout()->setMargin(0);
+
     layout->addWidget(widget);
 
     showAgainCheckBox = new QCheckBox(mainWidget);
