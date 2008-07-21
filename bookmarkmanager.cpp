@@ -94,6 +94,15 @@ void BookmarkManager::openBookmark(const KBookmark &bm, Qt::MouseButtons, Qt::Ke
     emit openUrl(bm.url());
 }
 
+void BookmarkManager::openFolderinTabs(const KBookmarkGroup &bookmarkGroup)
+{
+    KBookmark bm = bookmarkGroup.first();
+    while (!bm.isNull()) {
+        emit openUrl(bm.url());
+        bm = bookmarkGroup.next(bm);
+    }
+}
+
 bool BookmarkManager::addBookmarkEntry() const
 {
     return true;

@@ -54,6 +54,7 @@ signals:
 
 private slots:
     void openBookmark(const KBookmark &bm, Qt::MouseButtons, Qt::KeyboardModifiers);
+    void openFolderinTabs(const KBookmarkGroup &bookmarkGroup);
 
 private:
     KMenu *m_menu;
