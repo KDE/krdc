@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007 Urs Wolfer <uwolfer @ kde.org>
+** Copyright (C) 2007 - 2008 Urs Wolfer <uwolfer @ kde.org>
 **
 ** This file is part of KDE.
 **
@@ -177,7 +177,7 @@ void MainWindow::setupActions()
     zeroconfAction->setIcon(KIcon("network-connect"));
     connect(zeroconfAction, SIGNAL(triggered()), SLOT(createZeroconfPage()));
 #ifndef BUILD_ZEROCONF
-    zeroconfAction->setVisible(false);
+    zeroconfAction->deleteLater();
 #endif
 
     QAction *screenshotAction = actionCollection()->addAction("take_screenshot");
@@ -312,15 +312,15 @@ void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConn
 
     RemoteView *view = 0;
 
-    if (url.scheme().toLower() == "vnc") {
+    if (url.scheme().compare("vnc", Qt::CaseInsensitive) == 0) {
 #ifdef BUILD_VNC
         view = new VncView(this, url);
 #endif
-    } else if (url.scheme().toLower() == "nx") {
+    } else if (url.scheme().compare("nx", Qt::CaseInsensitive) == 0) {
 #ifdef BUILD_NX
         view = new NxView(this, url);
 #endif
-    } else if (url.scheme().toLower() == "rdp") {
+    } else if (url.scheme().compare("rdp", Qt::CaseInsensitive) == 0) {
 #ifdef BUILD_RDP
         view = new RdpView(this, url);
 #endif
