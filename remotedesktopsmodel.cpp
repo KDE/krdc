@@ -84,6 +84,7 @@ QVariant RemoteDesktopsModel::data(const QModelIndex &index, int role) const
 
     switch (role) {
     case Qt::DisplayRole:
+    case Qt::ToolTipRole:
         return item->data(index.column());
     case Qt::DecorationRole:
         if (item->data(index.column()).toString().contains("://")) //TODO: clean impl
