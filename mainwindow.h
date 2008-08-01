@@ -70,7 +70,7 @@ private slots:
     void showRemoteViewToolbar();
     void takeScreenshot();
     void switchFullscreen();
-    void logout();
+    void disconnect();
     void closeTab(QWidget *widget);
     void viewOnly(bool viewOnly);
     void showLocalCursor(bool showLocalCursor);

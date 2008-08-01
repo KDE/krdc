@@ -196,10 +196,10 @@ void MainWindow::setupActions()
     viewOnlyAction->setIcon(KIcon("document-preview"));
     connect(viewOnlyAction, SIGNAL(triggered(bool)), SLOT(viewOnly(bool)));
 
-    QAction *logoutAction = actionCollection()->addAction("logout");
-    logoutAction->setText(i18n("Log Out"));
-    logoutAction->setIcon(KIcon("system-log-out"));
-    connect(logoutAction, SIGNAL(triggered()), SLOT(logout()));
+    QAction *disconnectAction = actionCollection()->addAction("disconnect");
+    disconnectAction->setText(i18n("Disconnect"));
+    disconnectAction->setIcon(KIcon("system-log-out"));
+    connect(disconnectAction, SIGNAL(triggered()), SLOT(disconnect()));
 
     QAction *showLocalCursorAction = actionCollection()->addAction("show_local_cursor");
     showLocalCursorAction->setCheckable(true);
@@ -548,7 +548,7 @@ QScrollArea *MainWindow::createScrollArea(QWidget *parent, RemoteView *remoteVie
     return scrollArea;
 }
 
-void MainWindow::logout()
+void MainWindow::disconnect()
 {
     kDebug(5010);
 
@@ -669,7 +669,7 @@ void MainWindow::showRemoteViewToolbar()
         m_toolBar->addAction(actionCollection()->action("show_local_cursor"));
         m_toolBar->addAction(actionCollection()->action("grab_all_keys"));
         m_toolBar->addAction(actionCollection()->action("scale"));
-        m_toolBar->addAction(actionCollection()->action("logout"));
+        m_toolBar->addAction(actionCollection()->action("disconnect"));
 
         QAction *stickToolBarAction = new QAction(m_toolBar);
         stickToolBarAction->setCheckable(true);
@@ -702,7 +702,7 @@ void MainWindow::updateActionStatus()
     actionCollection()->action("view_only")->setEnabled(enabled);
     actionCollection()->action("grab_all_keys")->setEnabled(enabled);
     actionCollection()->action("scale")->setEnabled(enabled);
-    actionCollection()->action("logout")->setEnabled(enabled);
+    actionCollection()->action("disconnect")->setEnabled(enabled);
 
     bool viewOnlyChecked = false;
     if (m_currentRemoteView >= 0)
