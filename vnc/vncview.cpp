@@ -518,6 +518,9 @@ void VncView::keyEvent(QKeyEvent *e)
     bool isUpper = e->key() >= 'A' && e->key() <= 'Z';
     // bool isLower = e->key() >= 'a' && e->key() <= 'z';
     // bool isLetter = isLower || isUpper;
+    
+    // If shift is pressed, we receive Alt as Meta, but we want to actually send Alt.
+    if (k == XK_Meta_L && hasShift) k = XK_Alt_L;
 
     if (k == 0) {
         if (hasOtherMod && (! isUpper || hasShift)) {
@@ -533,7 +536,7 @@ void VncView::keyEvent(QKeyEvent *e)
     if (k < 26) // workaround for modified keys by pressing CTRL
         k += 96;
 
-    //rfbClientLog("Key event: orig: 0x%x, sent: 0x%x\n", e->key(), k);
+    //rfbClientLog("Key event(%s): orig: 0x%x, sent: 0x%x\n", pressed ? "P" : "R", e->key(), k);
 
     vncThread.keyEvent(k, pressed);
     RemoteView::keyEvent(e);
