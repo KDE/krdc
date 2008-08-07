@@ -29,6 +29,9 @@
 #ifdef BUILD_RDP
 #include "rdphostpreferences.h"
 #endif
+#ifdef BUILD_NX
+#include "nxhostpreferences.h"
+#endif
 
 #include <KDebug>
 #include <KIcon>
@@ -117,6 +120,11 @@ void HostPreferencesList::configureHost()
 #ifdef BUILD_RDP
         if (url.startsWith("rdp", Qt::CaseInsensitive))
             RdpHostPreferences hostPreferences(url, true, this);
+        else
+#endif
+#ifdef BUILD_NX
+        if (url.startsWith("nx", Qt::CaseInsensitive))
+            NxHostPreferences hostPreferences(url, true, this);
         else
 #endif
             KMessageBox::error(this,

@@ -39,12 +39,13 @@ NxView::NxView(QWidget *parent, const KUrl &url)
     m_host = url.host();
     m_port = url.port();
 
-    if (m_port <= 0 || m_port >= 65536) {
+    if (m_port <= 0 || m_port >= 65536)
         m_port = TCP_PORT_NX;
-    }
 
     m_container = new QX11EmbedContainer(this);
     m_container->installEventFilter(this);
+
+    connect(&nxClientThread, SIGNAL(hasXid(int)), this, SLOT(hasXid(int)));
 }
 
 NxView::~NxView()
@@ -76,11 +77,10 @@ void NxView::startQuitting()
     setStatus(Disconnecting);
     m_quitFlag = true;
 
-    if (connected) {
+    if (connected)
         nxClientThread.stop();
-    } else {
+    else
         nxClientThread.quit();
-    }
 
     nxClientThread.wait(500);
     setStatus(Disconnected);
@@ -121,7 +121,7 @@ bool NxView::start()
 
             if (!walletPassword.isNull())
                 m_url.setPassword(walletPassword);
-            else {
+	    else {
                 KPasswordDialog dialog(this);
                 dialog.setPrompt(i18n("Access to the system requires a password."));
                 if (dialog.exec() == KPasswordDialog::Accepted) {
@@ -162,15 +162,32 @@ QSize NxView::sizeHint() const
 
 void NxView::switchFullscreen(bool on)
 {
-    if (on == true) {
+    if (on)
+        setGrabAllKeys(true);
+    else
+        setGrabAllKeys(false);
+}
+
+void NxView::setGrabAllKeys(bool grabAllKeys)
+{
+    m_grabAllKeys = grabAllKeys;
+
+    if (grabAllKeys) {
+        m_keyboardIsGrabbed = true;
         m_container->grabKeyboard();
-    }
+    } else if (m_keyboardIsGrabbed)
+        m_container->releaseKeyboard();
+}
+
+void NxView::hasXid(int xid) 
+{
+    m_container->embedClient(xid);
 }
 
 void NxView::connectionOpened()
 {
     kDebug(5013) << "Connection opened";
-    QSize size = m_container->minimumSizeHint();
+    QSize size(m_hostPreferences->width(), m_hostPreferences->height());
     kDebug(5013) << "Size hint: " << size.width() << " " << size.height();
     setStatus(Connected);
     setFixedSize(size);

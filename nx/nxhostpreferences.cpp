@@ -146,10 +146,10 @@ void NxHostPreferences::showDialog()
 
     KDialog *dialog = createDialog(nxPage);
 
-    nxUi.kcfg_Height->setValue(height());
-    nxUi.kcfg_Width->setValue(width());
-    nxUi.kcfg_DesktopType->setCurrentIndex(desktopType2int(desktopType()));
-    nxUi.kcfg_KeyboardLayout->setCurrentIndex(keymap2int(keyboardLayout()));
+    nxUi.kcfg_NxHeight->setValue(height());
+    nxUi.kcfg_NxWidth->setValue(width());
+    nxUi.kcfg_NxDesktopType->setCurrentIndex(desktopType2int(desktopType()));
+    nxUi.kcfg_NxKeyboardLayout->setCurrentIndex(keymap2int(keyboardLayout()));
 
     if(privateKey() == "default") {
         nxUi.checkboxDefaultPrivateKey->setChecked(true);
@@ -164,7 +164,7 @@ void NxHostPreferences::showDialog()
     connect(nxUi.resolutionComboBox, SIGNAL(currentIndexChanged(int)), SLOT(updateWidthHeight(int)));
     connect(nxUi.checkboxDefaultPrivateKey, SIGNAL(stateChanged(int)), SLOT(setDefaultPrivateKey(int)));
     connect(nxUi.buttonImportPrivateKey, SIGNAL(pressed()), SLOT(chooseKeyFile()));
-    connect(nxUi.kcfg_PrivateKey, SIGNAL(textChanged()), SLOT(updatePrivateKey()));
+    connect(nxUi.kcfg_NxPrivateKey, SIGNAL(textChanged()), SLOT(updatePrivateKey()));
 
     QString resolutionString = QString::number(width()) + 'x' + QString::number(height());
     int resolutionIndex = nxUi.resolutionComboBox->findText(resolutionString, Qt::MatchContains);
@@ -173,10 +173,10 @@ void NxHostPreferences::showDialog()
     if (dialog->exec() == KDialog::Accepted) {
         kDebug(5013) << "NxHostPreferences config dialog accepted";
 
-        setHeight(nxUi.kcfg_Height->value());
-        setWidth(nxUi.kcfg_Width->value());
-        setDesktopType(int2desktopType(nxUi.kcfg_DesktopType->currentIndex()));
-        setKeyboardLayout(int2keymap(nxUi.kcfg_KeyboardLayout->currentIndex()));
+        setHeight(nxUi.kcfg_NxHeight->value());
+        setWidth(nxUi.kcfg_NxWidth->value());
+        setDesktopType(int2desktopType(nxUi.kcfg_NxDesktopType->currentIndex()));
+        setKeyboardLayout(int2keymap(nxUi.kcfg_NxKeyboardLayout->currentIndex()));
     }
 }
 
@@ -184,30 +184,30 @@ void NxHostPreferences::updateWidthHeight(int index)
 {
     switch (index) {
     case 0:
-        nxUi.kcfg_Height->setValue(480);
-        nxUi.kcfg_Width->setValue(640);
+        nxUi.kcfg_NxHeight->setValue(480);
+        nxUi.kcfg_NxWidth->setValue(640);
         break;
     case 1:
-        nxUi.kcfg_Height->setValue(600);
-        nxUi.kcfg_Width->setValue(800);
+        nxUi.kcfg_NxHeight->setValue(600);
+        nxUi.kcfg_NxWidth->setValue(800);
         break;
     case 2:
-        nxUi.kcfg_Height->setValue(768);
-        nxUi.kcfg_Width->setValue(1024);
+        nxUi.kcfg_NxHeight->setValue(768);
+        nxUi.kcfg_NxWidth->setValue(1024);
         break;
     case 3:
-        nxUi.kcfg_Height->setValue(1024);
-        nxUi.kcfg_Width->setValue(1280);
+        nxUi.kcfg_NxHeight->setValue(1024);
+        nxUi.kcfg_NxWidth->setValue(1280);
         break;
     case 4:
-        nxUi.kcfg_Height->setValue(1200);
-        nxUi.kcfg_Width->setValue(1600);
+        nxUi.kcfg_NxHeight->setValue(1200);
+        nxUi.kcfg_NxWidth->setValue(1600);
         break;
     case 5: {
         QDesktopWidget *desktop = QApplication::desktop();
-        int currentScreen = desktop->screenNumber(nxUi.kcfg_Height);
-        nxUi.kcfg_Height->setValue(desktop->screenGeometry(currentScreen).height());
-        nxUi.kcfg_Width->setValue(desktop->screenGeometry(currentScreen).width());
+        int currentScreen = desktop->screenNumber(nxUi.kcfg_NxHeight);
+        nxUi.kcfg_NxHeight->setValue(desktop->screenGeometry(currentScreen).height());
+        nxUi.kcfg_NxWidth->setValue(desktop->screenGeometry(currentScreen).width());
         break;
     }
     case 6:
@@ -217,8 +217,8 @@ void NxHostPreferences::updateWidthHeight(int index)
 
     bool enabled = (index == 6) ? true : false;
 
-    nxUi.kcfg_Height->setEnabled(enabled);
-    nxUi.kcfg_Width->setEnabled(enabled);
+    nxUi.kcfg_NxHeight->setEnabled(enabled);
+    nxUi.kcfg_NxWidth->setEnabled(enabled);
     nxUi.heightLabel->setEnabled(enabled);
     nxUi.widthLabel->setEnabled(enabled);
 }
@@ -236,7 +236,7 @@ void NxHostPreferences::setDefaultPrivateKey(int state)
 
 void NxHostPreferences::updatePrivateKey() 
 {
-    m_privateKey = nxUi.kcfg_PrivateKey->toPlainText();
+    m_privateKey = nxUi.kcfg_NxPrivateKey->toPlainText();
 }
 
 void NxHostPreferences::chooseKeyFile()
@@ -248,11 +248,10 @@ void NxHostPreferences::chooseKeyFile()
         return;
 
     QByteArray key;
-    while (!file.atEnd()) {
+    while (!file.atEnd())
         key += file.readLine();
-    }
 
-    nxUi.kcfg_PrivateKey->setPlainText(QString(key));
+    nxUi.kcfg_NxPrivateKey->setPlainText(QString(key));
     setPrivateKey(QString(key));
 }
 
@@ -263,27 +262,27 @@ void NxHostPreferences::readProtocolSpecificConfig()
     if (m_element.firstChildElement("height") != QDomElement())
         setHeight(m_element.firstChildElement("height").text().toInt());
     else
-        setHeight(Settings::height());
+        setHeight(Settings::nxHeight());
 
     if (m_element.firstChildElement("width") != QDomElement())
         setWidth(m_element.firstChildElement("width").text().toInt());
     else
-        setWidth(Settings::width());
+        setWidth(Settings::nxWidth());
 
     if (m_element.firstChildElement("desktopType") != QDomElement())
         setDesktopType(int2desktopType(m_element.firstChildElement("desktopType").text().toInt()));
     else
-        setDesktopType(int2desktopType(Settings::desktopType()));
+        setDesktopType(int2desktopType(Settings::nxDesktopType()));
 
     if (m_element.firstChildElement("keyboardLayout") != QDomElement())
         setKeyboardLayout(int2keymap(m_element.firstChildElement("keyboardLayout").text().toInt()));
     else
-        setKeyboardLayout(int2keymap(Settings::keyboardLayout()));
+        setKeyboardLayout(int2keymap(Settings::nxKeyboardLayout()));
 
     if (m_element.firstChildElement("privateKey") != QDomElement())
         setPrivateKey(m_element.firstChildElement("privateKey").text());
     else
-        setPrivateKey(Settings::privateKey());
+        setPrivateKey(Settings::nxPrivateKey());
 }
 
 void NxHostPreferences::saveProtocolSpecificConfig()

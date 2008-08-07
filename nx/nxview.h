@@ -52,9 +52,11 @@ public:
     virtual QSize framebufferSize();
     // Returns the suggested size of the remote view
     QSize sizeHint() const;
+virtual void setGrabAllKeys(bool grabAllKeys);
 
 public slots:
     void switchFullscreen(bool on);
+    void hasXid(int xid);
 
 protected:
     bool eventFilter(QObject *obj, QEvent *event);

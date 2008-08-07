@@ -109,12 +109,12 @@
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
             <property name="buddy" >
-             <cstring>kcfg_Width</cstring>
+             <cstring>kcfg_NxWidth</cstring>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QSpinBox" name="kcfg_Width" >
+           <widget class="QSpinBox" name="kcfg_NxWidth" >
             <property name="enabled" >
              <bool>false</bool>
             </property>
@@ -141,12 +141,12 @@
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
             <property name="buddy" >
-             <cstring>kcfg_Height</cstring>
+             <cstring>kcfg_NxHeight</cstring>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QSpinBox" name="kcfg_Height" >
+           <widget class="QSpinBox" name="kcfg_NxHeight" >
             <property name="enabled" >
              <bool>false</bool>
             </property>
@@ -171,12 +171,12 @@
          <string>Desktop &amp;type:</string>
         </property>
         <property name="buddy" >
-         <cstring>kcfg_DesktopType</cstring>
+         <cstring>kcfg_NxDesktopType</cstring>
         </property>
        </widget>
       </item>
       <item row="1" column="1" >
-       <widget class="KComboBox" name="kcfg_DesktopType" >
+       <widget class="KComboBox" name="kcfg_NxDesktopType" >
         <property name="minimumSize" >
          <size>
           <width>280</width>
@@ -214,12 +214,12 @@
          <string>&amp;Keyboard layout:</string>
         </property>
         <property name="buddy" >
-         <cstring>kcfg_KeyboardLayout</cstring>
+         <cstring>kcfg_NxKeyboardLayout</cstring>
         </property>
        </widget>
       </item>
       <item row="2" column="1" >
-       <widget class="KComboBox" name="kcfg_KeyboardLayout" >
+       <widget class="KComboBox" name="kcfg_NxKeyboardLayout" >
         <property name="minimumSize" >
          <size>
           <width>280</width>
@@ -453,7 +453,7 @@
      </property>
      <layout class="QGridLayout" >
       <item row="0" column="1" >
-       <widget class="QTextEdit" name="kcfg_PrivateKey" >
+       <widget class="QTextEdit" name="kcfg_NxPrivateKey" >
         <property name="sizePolicy" >
          <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
           <horstretch>0</horstretch>
@@ -522,9 +522,9 @@
  </customwidgets>
  <tabstops>
   <tabstop>resolutionComboBox</tabstop>
-  <tabstop>kcfg_Width</tabstop>
-  <tabstop>kcfg_Height</tabstop>
-  <tabstop>kcfg_KeyboardLayout</tabstop>
+  <tabstop>kcfg_NxWidth</tabstop>
+  <tabstop>kcfg_NxHeight</tabstop>
+  <tabstop>kcfg_NxKeyboardLayout</tabstop>
  </tabstops>
  <resources/>
  <connections/>

@@ -23,14 +23,21 @@
 
 #include "nxclientthread.h"
 
+#include <kglobal.h>
+#include <kstandarddirs.h>
+
 #include <QDesktopWidget>
 #include <QApplication>
+
+#include <fstream>
+#include <sstream>
 
 NxClientThread::NxClientThread(QObject *parent)
         : QThread(parent),
 	  m_host(std::string()),
 	  m_port(0),
 	  m_privateKey(std::string()),
+	  m_xid(0),
 	  m_stopped(false)
 {
     m_nxClient.setSessionData(&m_nxData);
@@ -129,10 +136,24 @@ void NxClientThread::stop()
 void NxClientThread::run()
 {
     if(m_privateKey.compare("default") == 0) {
-        m_nxClient.invokeNXSSH("default", m_host, true, "", m_port);
-    } else {
+        QString keyfilename = QString("default.dsa.key");
+    	QString keyfilepath = KGlobal::dirs()->findResource("appdata", keyfilename);
+	
+	std::ifstream keyfile(keyfilepath.toAscii().data());
+	std::stringstream ss;
+
+	if(keyfile) {
+	    std::string line;
+
+	    while (std::getline(keyfile, line))
+	        ss << line << std::endl;
+	    
+	    keyfile.close();
+	}
+
+        m_nxClient.invokeNXSSH("supplied", m_host, true, ss.str(), m_port);
+    } else 
         m_nxClient.invokeNXSSH("supplied", m_host, true, m_privateKey, m_port);
-    }
 
     m_nxClient.runSession();
 
@@ -146,6 +167,13 @@ void NxClientThread::run()
             p->probeProcess();
             p = m_nxClient.getNXProxyProcess();
             p->probeProcess();
+        }
+
+	if (!this->m_xid) {
+	    this->m_xid = m_nxClient.getXID();
+
+	    if(this->m_xid) 
+	        emit hasXid(this->m_xid);
         }
 
         usleep (1000);

@@ -31,6 +31,9 @@
 #ifdef BUILD_RDP
 #include "ui_rdppreferences.h"
 #endif
+#ifdef BUILD_NX
+#include "ui_nxpreferences.h"
+#endif
 
 PreferencesDialog::PreferencesDialog(QWidget *parent, KConfigSkeleton *skeleton)
         : KConfigDialog(parent, "preferences", skeleton)
@@ -64,5 +67,21 @@ PreferencesDialog::PreferencesDialog(QWidget *parent, KConfigSkeleton *skeleton)
     rdpUi.heightLabel->setEnabled(true);
     rdpUi.widthLabel->setEnabled(true);
     addPage(rdpPage, i18n("RDP"), "krdc", i18n("RDP Config"));
+#endif
+
+#ifdef BUILD_NX
+    QWidget *nxPage = new QWidget(this);
+    Ui::NxPreferences nxUi;
+    nxUi.setupUi(nxPage);
+    nxUi.resolutionComboBox->hide();
+    nxUi.checkboxDefaultPrivateKey->hide();
+    nxUi.buttonImportPrivateKey->hide();
+    nxUi.labelPrivateKey->hide();
+    nxUi.groupboxPrivateKey->hide();
+    nxUi.kcfg_NxHeight->setEnabled(true);
+    nxUi.kcfg_NxWidth->setEnabled(true);
+    nxUi.heightLabel->setEnabled(true);
+    nxUi.widthLabel->setEnabled(true);
+    addPage(nxPage, i18n("NX"), "krdc", i18n("NX Config"));    
 #endif
 }

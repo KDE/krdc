@@ -60,6 +60,14 @@ public:
 protected:
     void run();
 
+signals:
+    /**
+     * Emitted when the X Window ID of the main NX 
+     * window is received. 
+     * @param xid the X Window ID of the main NX window
+     */
+    void hasXid(int xid);
+
 private:
     nxcl::NXClientLib m_nxClient;
     nxcl::NXClientLibExternalCallbacks m_nxClientCallbacks;
@@ -68,6 +76,7 @@ private:
     std::string m_host;
     int m_port;
     std::string m_privateKey;
+    int m_xid;
 
     bool m_stopped;
     QMutex m_mutex;
