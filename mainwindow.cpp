@@ -533,8 +533,10 @@ void MainWindow::switchFullscreen()
 
         KToggleFullScreenAction::setFullScreen(m_fullscreenWindow, true);
 
-        // show the toolbar after we have switched to fullscreen mode
-        QTimer::singleShot(100, this, SLOT(showRemoteViewToolbar()));
+        // show the toolbar after we have switched to fullscreen mode                                      
+        // Note: there is a race condition here, if the timer fires before the window is 
+        // resized, the toolbar is not shown.
+        QTimer::singleShot(500, this, SLOT(showRemoteViewToolbar()));
 
         m_mainWindowGeometry = saveGeometry();
         hide();
