@@ -7,6 +7,7 @@ include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/vnc/
     ${CMAKE_CURRENT_SOURCE_DIR}/nx/
     ${CMAKE_CURRENT_SOURCE_DIR}/zeroconf/
+    ${CMAKE_CURRENT_SOURCE_DIR}/test/
 )
 
 if(Q_WS_X11)
@@ -64,7 +65,17 @@ if(LIBNXCL_FOUND)
     )
 endif(LIBNXCL_FOUND)
 
-set(krdc_SRCS ${krdc_zeroconf_SRCS} ${krdc_rdp_SRCS} ${krdc_vnc_SRCS} ${krdc_nx_SRCS}
+if(NOT NDEBUG)
+    set(BUILD_TEST true)
+endif(NOT NDEBUG)
+if(BUILD_TEST)
+    add_definitions(-DBUILD_TEST)
+    set(krdc_test_SRCS
+        test/testview.cpp
+    )
+endif(BUILD_TEST)
+
+set(krdc_SRCS ${krdc_zeroconf_SRCS} ${krdc_rdp_SRCS} ${krdc_vnc_SRCS} ${krdc_nx_SRCS} ${krdc_test_SRCS}
     hostpreferences.cpp
     config/hostpreferenceslist.cpp
     config/preferencesdialog.cpp

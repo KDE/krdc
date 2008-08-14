@@ -42,6 +42,9 @@
 #ifdef BUILD_ZEROCONF
 #include "zeroconfpage.h"
 #endif
+#ifdef BUILD_TEST
+#include "testview.h"
+#endif
 
 #include <KAction>
 #include <KActionCollection>
@@ -256,6 +259,9 @@ void MainWindow::setupActions()
 #ifdef BUILD_RDP
                                            << "rdp"
 #endif
+#ifdef BUILD_TEST
+                                           << "test"
+#endif
                                           );
     m_addressNavigator->setUrlEditable(Settings::normalUrlInputLine());
     connect(m_addressNavigator, SIGNAL(returnPressed()), SLOT(newConnection()));
@@ -323,6 +329,10 @@ void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConn
     } else if (url.scheme().compare("rdp", Qt::CaseInsensitive) == 0) {
 #ifdef BUILD_RDP
         view = new RdpView(this, url);
+#endif
+    } else if (url.scheme().compare("test", Qt::CaseInsensitive) == 0) {
+#ifdef BUILD_TEST
+        view = new TestView(this, url);
 #endif
     } else
     {
