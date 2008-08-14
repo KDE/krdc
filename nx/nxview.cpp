@@ -162,10 +162,7 @@ QSize NxView::sizeHint() const
 
 void NxView::switchFullscreen(bool on)
 {
-    if (on)
-        setGrabAllKeys(true);
-    else
-        setGrabAllKeys(false);
+    setGrabAllKeys(on);
 }
 
 void NxView::setGrabAllKeys(bool grabAllKeys)

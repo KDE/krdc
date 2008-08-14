@@ -431,7 +431,7 @@
         <item>
          <widget class="QCheckBox" name="checkboxDefaultPrivateKey" >
           <property name="whatsThis" >
-           <string>The authentification on the NX server requires a private key. By default, it is the NoMachine DSA key. Use this box to choose the default key, or configure it by importing from a file or editing directly the textbox. </string>
+           <string>The authentication on the NX server requires a private key. By default, it is the NoMachine DSA key. Use this box to choose the default key, or configure it by importing from a file or editing directly the textbox. </string>
           </property>
           <property name="text" >
            <string>NoMachine Key</string>
@@ -453,7 +453,7 @@
      </property>
      <layout class="QGridLayout" >
       <item row="0" column="1" >
-       <widget class="QTextEdit" name="kcfg_NxPrivateKey" >
+       <widget class="KTextEdit" name="kcfg_NxPrivateKey" >
         <property name="sizePolicy" >
          <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
           <horstretch>0</horstretch>
@@ -461,7 +461,7 @@
          </sizepolicy>
         </property>
         <property name="whatsThis" >
-         <string>Use this textbox to edit the private key for the authentification on the NX server.</string>
+         <string>Use this textbox to edit the private key for the authentication on the NX server.</string>
         </property>
        </widget>
       </item>

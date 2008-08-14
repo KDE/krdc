@@ -28,8 +28,8 @@
 
 #include <QDesktopWidget>
 #include <QApplication>
+#include <QFile>
 
-#include <fstream>
 #include <sstream>
 
 NxClientThread::NxClientThread(QObject *parent)
@@ -78,7 +78,8 @@ NxClientThread::~NxClientThread()
 void NxClientThread::setHost(const QString &host)
 {
     QMutexLocker locker(&m_mutex);
-    m_host = host.toAscii().data();
+    QByteArray tmp = host.toAscii();
+    m_host = tmp.data();
 }
 
 void NxClientThread::setPort(int port)
@@ -90,14 +91,16 @@ void NxClientThread::setPort(int port)
 void NxClientThread::setUserName(const QString &userName)
 {
     QMutexLocker locker(&m_mutex);
-    std::string strUserName = userName.toAscii().data();
+    QByteArray tmp = userName.toAscii();
+    std::string strUserName = tmp.data();
     m_nxClient.setUsername(strUserName);
 }
 
 void NxClientThread::setPassword(const QString &password)
 {
     QMutexLocker locker(&m_mutex);
-    std::string strPassword = password.toAscii().data();
+    QByteArray tmp = password.toAscii();
+    std::string strPassword = tmp.data();
     m_nxClient.setPassword(strPassword);
 }
 
@@ -112,19 +115,22 @@ void NxClientThread::setResolution(int width, int height)
 void NxClientThread::setDesktopType(const QString &desktopType)
 {
     QMutexLocker locker(&m_mutex);
-    m_nxData.sessionType = desktopType.toAscii().data();
+    QByteArray tmp = desktopType.toAscii();
+    m_nxData.sessionType = tmp.data();
 }
 
 void NxClientThread::setKeyboardLayout(const QString &keyboardLayout)
 {
     QMutexLocker locker(&m_mutex);
-    m_nxData.kbtype = keyboardLayout.toAscii().data();
+    QByteArray tmp = keyboardLayout.toAscii();
+    m_nxData.kbtype = tmp.data();
 }
 
 void NxClientThread::setPrivateKey(const QString &privateKey)
 {
     QMutexLocker locker(&m_mutex);
-    m_privateKey = privateKey.toAscii().data();
+    QByteArray tmp = privateKey.toAscii();
+    m_privateKey = tmp.data();
 }
 
 void NxClientThread::stop()
@@ -138,20 +144,16 @@ void NxClientThread::run()
     if(m_privateKey.compare("default") == 0) {
         QString keyfilename = QString("default.dsa.key");
     	QString keyfilepath = KGlobal::dirs()->findResource("appdata", keyfilename);
-	
-	std::ifstream keyfile(keyfilepath.toAscii().data());
-	std::stringstream ss;
 
-	if(keyfile) {
-	    std::string line;
+        QFile file(keyfilepath);
+        if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+            return;
 
-	    while (std::getline(keyfile, line))
-	        ss << line << std::endl;
-	    
-	    keyfile.close();
-	}
+        QByteArray key;
+        while (!file.atEnd())
+            key += file.readLine();
 
-        m_nxClient.invokeNXSSH("supplied", m_host, true, ss.str(), m_port);
+        m_nxClient.invokeNXSSH("supplied", m_host, true, key.data(), m_port);
     } else 
         m_nxClient.invokeNXSSH("supplied", m_host, true, m_privateKey, m_port);
 

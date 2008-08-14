@@ -26,11 +26,11 @@
 #include "settings.h"
 
 #include <KDebug>
+#include <kfiledialog.h>
 
 #include <QDesktopWidget>
 #include <QFile>
 #include <QByteArray>
-#include <QFileDialog>
 #include <QTextEdit>
 
 static QStringList keymaps = (QStringList()
@@ -241,7 +241,7 @@ void NxHostPreferences::updatePrivateKey()
 
 void NxHostPreferences::chooseKeyFile()
 {
-    QString fileName = QFileDialog::getOpenFileName(nxPage, i18n("Open DSA Key File"), QString("~/"), i18n("Key File (*.key);;All files (*.*)"));
+    QString fileName = KFileDialog::getOpenFileName(KUrl::fromPath("~/"), "*.key|" + i18n("Key Files (*.key)"), nxPage, i18n("Open DSA Key File"));
 
     QFile file(fileName);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
