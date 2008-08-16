@@ -91,17 +91,15 @@ void NxClientThread::setPort(int port)
 void NxClientThread::setUserName(const QString &userName)
 {
     QMutexLocker locker(&m_mutex);
-    QByteArray tmp = userName.toAscii();
-    std::string strUserName = tmp.data();
-    m_nxClient.setUsername(strUserName);
+    QByteArray userNameTmp = userName.toAscii();
+    m_nxClient.setUsername(userNameTmp.data());
 }
 
 void NxClientThread::setPassword(const QString &password)
 {
     QMutexLocker locker(&m_mutex);
-    QByteArray tmp = password.toAscii();
-    std::string strPassword = tmp.data();
-    m_nxClient.setPassword(strPassword);
+    QByteArray passwordTmp = password.toAscii();
+    m_nxClient.setPassword(passwordTmp.data());
 }
 
 void NxClientThread::setResolution(int width, int height)

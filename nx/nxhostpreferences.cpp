@@ -151,7 +151,7 @@ void NxHostPreferences::showDialog()
     nxUi.kcfg_NxDesktopType->setCurrentIndex(desktopType2int(desktopType()));
     nxUi.kcfg_NxKeyboardLayout->setCurrentIndex(keymap2int(keyboardLayout()));
 
-    if(privateKey() == "default") {
+    if (privateKey() == "default") {
         nxUi.checkboxDefaultPrivateKey->setChecked(true);
         nxUi.groupboxPrivateKey->setEnabled(false);
 	setDefaultPrivateKey(Qt::Checked);
@@ -241,7 +241,9 @@ void NxHostPreferences::updatePrivateKey()
 
 void NxHostPreferences::chooseKeyFile()
 {
-    QString fileName = KFileDialog::getOpenFileName(KUrl::fromPath("~/"), "*.key|" + i18n("Key Files (*.key)"), nxPage, i18n("Open DSA Key File"));
+    QString fileName = KFileDialog::getOpenFileName(KUrl(QDir::homePath()),
+                                                    "*.key|" + i18n("Key Files (*.key)"),
+                                                    nxPage, i18n("Open DSA Key File"));
 
     QFile file(fileName);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
