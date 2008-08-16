@@ -30,7 +30,7 @@ static QString outputErrorMessageString;
 
 static uint8_t *buf = 0;
 
-static rfbBool newclient(rfbClient *cl)
+rfbBool VncClientThread::newclient(rfbClient *cl)
 {
     int width = cl->width, height = cl->height, depth = cl->format.bitsPerPixel;
     int size = width * height * (depth / 8);
@@ -76,7 +76,7 @@ static rfbBool newclient(rfbClient *cl)
     return true;
 }
 
-extern void updatefb(rfbClient* cl, int x, int y, int w, int h)
+void VncClientThread::updatefb(rfbClient* cl, int x, int y, int w, int h)
 {
 //     kDebug(5011) << "updated client: x: " << x << ", y: " << y << ", w: " << w << ", h: " << h;
 
@@ -98,7 +98,7 @@ extern void updatefb(rfbClient* cl, int x, int y, int w, int h)
     t->emitUpdated(x, y, w, h);
 }
 
-extern void cuttext(rfbClient* cl, const char *text, int textlen)
+void VncClientThread::cuttext(rfbClient* cl, const char *text, int textlen)
 {
     QString cutText = QString::fromUtf8(text, textlen);
     kDebug(5011) << cutText;
