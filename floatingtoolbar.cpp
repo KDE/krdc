@@ -33,11 +33,21 @@
 #include <QPainter>
 #include <QTimer>
 
-#define iconSize 22
-#define toolBarRBMargin 2
-#define toolBarOpacity 0.8
-#define visiblePixelWhenAutoHidden 6
-#define autoHideTimeout 2000
+static const int actionIconSize = 22;
+static const int toolBarRBMargin = 2;
+static const double toolBarOpacity = 0.8;
+static const int visiblePixelWhenAutoHidden = 6;
+static const int autoHideTimeout = 500;
+static const int  initialAutoHideTimeout = 2000;
+
+/**
+ * Denotes the verious states of the animation.
+ */
+enum AnimState {
+    Hiding,
+    Showing,
+    Still
+};
 
 class FloatingToolBarPrivate
 {
@@ -63,7 +73,7 @@ public:
     QTimer *autoHideTimer;
     QPoint currentPosition;
     QPoint endPosition;
-    bool hiding;
+    AnimState animState;
     bool toDelete;
     bool visible;
     bool sticky;
@@ -79,10 +89,10 @@ FloatingToolBar::FloatingToolBar(QWidget *parent, QWidget *anchorWidget)
     addWidget(d->offsetPlaceHolder);
 
     setMouseTracking(true);
-    setIconSize(QSize(iconSize, iconSize));
+    setIconSize(QSize(actionIconSize, actionIconSize));
     d->anchorWidget = anchorWidget;
     d->anchorSide = Left;
-    d->hiding = false;
+    d->animState = Still;
     d->toDelete = false;
     d->visible = false;
     d->sticky = false;
@@ -93,7 +103,6 @@ FloatingToolBar::FloatingToolBar(QWidget *parent, QWidget *anchorWidget)
 
     d->autoHideTimer = new QTimer(this);
     connect(d->autoHideTimer, SIGNAL(timeout()), this, SLOT(hide()));
-    d->autoHideTimer->start(autoHideTimeout);
 
     // apply a filter to get notified when anchor changes geometry
     d->anchorWidget->installEventFilter(this);
@@ -128,13 +137,14 @@ void FloatingToolBar::setSticky(bool sticky)
 
     if (sticky)
         d->autoHideTimer->stop();
-    else
-        d->autoHideTimer->start(autoHideTimeout);
 }
 
 void FloatingToolBar::showAndAnimate()
 {
-    d->hiding = false;
+    if (d->animState == Showing)
+        return;
+
+    d->animState = Showing;
 
     show();
 
@@ -143,12 +153,19 @@ void FloatingToolBar::showAndAnimate()
 
     // start scrolling in
     d->animTimer->start(20);
+
+    // This permits to show the toolbar for a while when going full screen.
+    if (!d->sticky) 
+        d->autoHideTimer->start(initialAutoHideTimeout);
 }
 
 void FloatingToolBar::hideAndDestroy()
 {
+    if (d->animState == Hiding)
+        return;
+
     // set parameters for sliding out
-    d->hiding = true;
+    d->animState = Hiding;
     d->toDelete = true;
     d->endPosition = d->getOuterPoint();
 
@@ -158,6 +175,9 @@ void FloatingToolBar::hideAndDestroy()
 
 void FloatingToolBar::hide()
 {
+    if (underMouse()) 
+        return;
+
     if (d->visible) {
         QPoint diff;
         switch (d->anchorSide) {
@@ -174,12 +194,12 @@ void FloatingToolBar::hide()
             diff = QPoint(0, -visiblePixelWhenAutoHidden);
             break;
         }
-        d->hiding = true;
+        d->animState = Hiding;
         d->endPosition = d->getOuterPoint() + diff;
-    }
 
-    // start scrolling out
-    d->animTimer->start(20);
+        // start scrolling out
+        d->animTimer->start(20);
+    }
 }
 
 bool FloatingToolBar::eventFilter(QObject *obj, QEvent *e)
@@ -187,15 +207,11 @@ bool FloatingToolBar::eventFilter(QObject *obj, QEvent *e)
     // if anchorWidget changed geometry reposition toolbar
     if (obj == d->anchorWidget && e->type() == QEvent::Resize) {
         d->animTimer->stop();
-        if (d->hiding && d->toDelete)
+        if ((d->animState == Hiding || !d->visible) && d->toDelete)
             deleteLater();
         else
             d->reposition();
     }
-
-    // keep toolbar visible when mouse is on it
-    if (e->type() == QEvent::MouseMove && d->autoHideTimer->isActive())
-        d->autoHideTimer->start(autoHideTimeout);
 
     return false;
 }
@@ -220,19 +236,9 @@ void FloatingToolBar::mousePressEvent(QMouseEvent *e)
 
 void FloatingToolBar::mouseMoveEvent(QMouseEvent *e)
 {
-    // keep toolbar visible when mouse is on it
-    if (d->autoHideTimer->isActive())
-        d->autoHideTimer->start(autoHideTimeout);
-
     // show the toolbar again when it is auto-hidden
-    if (!d->visible && !d->animTimer->isActive()) {
-        d->hiding = false;
-        show();
-        d->endPosition = QPoint();
-        d->reposition();
-
-        d->animTimer->start(20);
-
+    if (!d->visible) {
+        showAndAnimate();
         return;
     }
 
@@ -258,6 +264,23 @@ void FloatingToolBar::mouseMoveEvent(QMouseEvent *e)
     emit orientationChanged((int)side);
 
     QToolBar::mouseMoveEvent(e);
+}
+
+void FloatingToolBar::enterEvent(QEvent *e)
+{
+    // Stop the autohide timer while the mouse is inside
+    d->autoHideTimer->stop();
+
+    if (!d->visible) 
+        showAndAnimate();
+    QToolBar::enterEvent(e);
+}
+
+void FloatingToolBar::leaveEvent(QEvent *e)
+{
+    if (!d->sticky) 
+        d->autoHideTimer->start(autoHideTimeout);
+    QToolBar::leaveEvent(e);
 }
 
 void FloatingToolBar::mouseReleaseEvent(QMouseEvent *e)
@@ -427,12 +450,20 @@ void FloatingToolBar::animate()
     // handle arrival to the end
     if (d->currentPosition == d->endPosition) {
         d->animTimer->stop();
-        if (d->hiding) {
+        switch (d->animState) {
+        case Hiding:
             d->visible = false;
+            d->animState = Still;
             if (d->toDelete)
                 deleteLater();
-        } else
+            break;
+        case Showing:
             d->visible = true;
+            d->animState = Still;
+            break;
+        default:
+            kDebug(5010) << "Illegal state";
+        }
     }
 }
 
