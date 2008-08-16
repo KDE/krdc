@@ -449,8 +449,8 @@ void VncView::wheelEvent(QWheelEvent *event)
     else
         eb |= 0x8;
 
-    int x = event->x();
-    int y = event->y();
+    int x = qRound(event->x() / m_horizontalFactor);
+    int y = qRound(event->y() / m_verticalFactor);
 
     vncThread.mouseEvent(x, y, eb | m_buttonMask);
     vncThread.mouseEvent(x, y, m_buttonMask);
