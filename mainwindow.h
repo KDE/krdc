@@ -50,6 +50,7 @@ public:
 
     QList<RemoteView *> remoteViewList() const;
     int currentRemoteView() const;
+    KActionCollection *mainWindowActionCollection() { return actionCollection(); };
 
 public slots:
     void newConnection(const KUrl &newUrl = KUrl(), bool switchFullscreenWhenConnected = false);

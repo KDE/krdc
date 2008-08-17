@@ -30,8 +30,13 @@
     #define error(parent, message, caption) \
         critical(parent, caption, message)
 #else
+    #include "mainwindow.h"
+
+    #include <KActionCollection>
     #include <KMessageBox>
     #include <KPasswordDialog>
+
+    #include <QAction>
 #endif
 
 #include <QApplication>
@@ -147,13 +152,27 @@ bool VncView::start()
 {
     vncThread.setHost(m_host);
     vncThread.setPort(m_port);
+    RemoteView::Quality quality;
 #ifdef QTONLY
     int quality = (QCoreApplication::arguments().count() > 2) ? QCoreApplication::arguments().at(2).toInt() : 2;
-    vncThread.setQuality((RemoteView::Quality)quality);
+    quality = (RemoteView::Quality)quality;
 #else
     m_hostPreferences = new VncHostPreferences(m_url.prettyUrl(KUrl::RemoveTrailingSlash), false, this);
-    vncThread.setQuality(m_hostPreferences->quality());
+    quality = m_hostPreferences->quality();
 #endif
+
+    vncThread.setQuality(quality);
+
+    // set local cursor on by default because low quality mostly means slow internet connection
+    if (quality == RemoteView::Low) {
+        showDotCursor(RemoteView::CursorOn);
+#ifndef QTONLY
+        // KRDC does always just have one main window, so at(0) is safe
+        MainWindow *mainWindow = qobject_cast<MainWindow*>(KMainWindow::memberList().at(0));
+        if (mainWindow)
+            mainWindow->mainWindowActionCollection()->action("show_local_cursor")->setChecked(true);
+#endif
+    }
 
     setStatus(Connecting);
 
