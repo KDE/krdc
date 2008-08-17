@@ -25,7 +25,7 @@
 #define NXVIEW_H
 
 #include "remoteview.h"
-
+#include "nxcallbacks.h"
 #include "nxclientthread.h"
 #include "nxhostpreferences.h"
 
@@ -57,13 +57,19 @@ virtual void setGrabAllKeys(bool grabAllKeys);
 public slots:
     void switchFullscreen(bool on);
     void hasXid(int xid);
+    void handleProgress(int id, QString msg);
+    void handleSuspendedSessions(QList<nxcl::NXResumeData> sessions);
+    void handleNoSessions();
+    void handleAtCapacity();
 
 protected:
     bool eventFilter(QObject *obj, QEvent *event);
 
 private:
     // Thread that manage NX connection
-    NxClientThread nxClientThread;
+    NxClientThread m_nxClientThread;
+    // NX Callbacks
+    NxCallbacks m_nxCallbacks;
     // If we are currently closing the connection
     bool m_quitFlag;
     // Widget which contains the NX Window

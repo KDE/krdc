@@ -22,6 +22,7 @@
 ****************************************************************************/
 
 #include "nxclientthread.h"
+#include "nxcallbacks.h"
 
 #include <kglobal.h>
 #include <kstandarddirs.h>
@@ -41,7 +42,6 @@ NxClientThread::NxClientThread(QObject *parent)
 	  m_stopped(false)
 {
     m_nxClient.setSessionData(&m_nxData);
-    m_nxClient.setExternalCallbacks(&m_nxClientCallbacks);
     
     QDesktopWidget *desktop = QApplication::desktop();
     int currentScreen = desktop->screenNumber();
@@ -75,6 +75,11 @@ NxClientThread::~NxClientThread()
     wait(500);
 }
 
+void NxClientThread::setCallbacks(NxCallbacks *callbacks) 
+{
+    m_nxClient.setExternalCallbacks((nxcl::NXClientLibExternalCallbacks *)callbacks);
+}
+
 void NxClientThread::setHost(const QString &host)
 {
     QMutexLocker locker(&m_mutex);
@@ -92,14 +97,16 @@ void NxClientThread::setUserName(const QString &userName)
 {
     QMutexLocker locker(&m_mutex);
     QByteArray userNameTmp = userName.toAscii();
-    m_nxClient.setUsername(userNameTmp.data());
+    std::string userNameStr = std::string(userNameTmp.data());
+    m_nxClient.setUsername(userNameStr);
 }
 
 void NxClientThread::setPassword(const QString &password)
 {
     QMutexLocker locker(&m_mutex);
     QByteArray passwordTmp = password.toAscii();
-    m_nxClient.setPassword(passwordTmp.data());
+    std::string passwordStr = std::string(passwordTmp);
+    m_nxClient.setPassword(passwordStr);
 }
 
 void NxClientThread::setResolution(int width, int height)

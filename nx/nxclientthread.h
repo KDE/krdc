@@ -39,6 +39,8 @@
 #include <nxcl/nxclientlib.h>
 #include <nxcl/nxdata.h>
 
+class NxCallbacks;
+
 class NxClientThread: public QThread
 {
     Q_OBJECT
@@ -47,6 +49,7 @@ public:
     explicit NxClientThread(QObject *parent = 0);
     ~NxClientThread();
 
+    void setCallbacks(NxCallbacks *callbacks);
     void setHost(const QString &host);
     void setPort(int port);
     void setUserName(const QString &userName);
@@ -70,7 +73,6 @@ signals:
 
 private:
     nxcl::NXClientLib m_nxClient;
-    nxcl::NXClientLibExternalCallbacks m_nxClientCallbacks;
     nxcl::NXSessionData m_nxData;
     
     std::string m_host;

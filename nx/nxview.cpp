@@ -22,8 +22,9 @@
 ****************************************************************************/
 
 #include "nxview.h"
-
 #include "settings.h"
+
+#include <nxcl/nxdata.h>
 
 #include <KInputDialog>
 #include <KMessageBox>
@@ -45,7 +46,11 @@ NxView::NxView(QWidget *parent, const KUrl &url)
     m_container = new QX11EmbedContainer(this);
     m_container->installEventFilter(this);
 
-    connect(&nxClientThread, SIGNAL(hasXid(int)), this, SLOT(hasXid(int)));
+    connect(&m_nxClientThread, SIGNAL(hasXid(int)), this, SLOT(hasXid(int)));
+    connect(&m_nxCallbacks, SIGNAL(progress(int, QString)), this, SLOT(handleProgress(int, QString)));
+    connect(&m_nxCallbacks, SIGNAL(suspendedSessions(QList<nxcl::NXResumeData>)), this, SLOT(handleSuspendedSessions(QList<nxcl::NXResumeData>)));
+    connect(&m_nxCallbacks, SIGNAL(noSessions()), this, SLOT(handleNoSessions()));
+    connect(&m_nxCallbacks, SIGNAL(atCapacity()), this, SLOT(handleAtCapacity()));
 }
 
 NxView::~NxView()
@@ -78,11 +83,11 @@ void NxView::startQuitting()
     m_quitFlag = true;
 
     if (connected)
-        nxClientThread.stop();
+        m_nxClientThread.stop();
     else
-        nxClientThread.quit();
+        m_nxClientThread.quit();
 
-    nxClientThread.wait(500);
+    m_nxClientThread.wait(500);
     setStatus(Disconnected);
     m_container->discardClient();
 }
@@ -96,10 +101,10 @@ bool NxView::start()
 {
     m_hostPreferences = new NxHostPreferences(m_url.prettyUrl(KUrl::RemoveTrailingSlash), false, this);
 
-    nxClientThread.setResolution(m_hostPreferences->width(), m_hostPreferences->height());
-    nxClientThread.setDesktopType(m_hostPreferences->desktopType());
-    nxClientThread.setKeyboardLayout(m_hostPreferences->keyboardLayout());
-    nxClientThread.setPrivateKey(m_hostPreferences->privateKey());
+    m_nxClientThread.setResolution(m_hostPreferences->width(), m_hostPreferences->height());
+    m_nxClientThread.setDesktopType(m_hostPreferences->desktopType());
+    m_nxClientThread.setKeyboardLayout(m_hostPreferences->keyboardLayout());
+    m_nxClientThread.setPrivateKey(m_hostPreferences->privateKey());
     
     m_container->show();
 
@@ -134,14 +139,15 @@ bool NxView::start()
         }
     }
 
-    nxClientThread.setHost(m_host);
-    nxClientThread.setPort(m_port);
-    nxClientThread.setUserName(m_url.userName());
-    nxClientThread.setPassword(m_url.password());
-    nxClientThread.setResolution(m_hostPreferences->width(), m_hostPreferences->height());
+    m_nxClientThread.setHost(m_host);
+    m_nxClientThread.setPort(m_port);
+    m_nxClientThread.setUserName(m_url.userName());
+    m_nxClientThread.setPassword(m_url.password());
+    m_nxClientThread.setResolution(m_hostPreferences->width(), m_hostPreferences->height());
+    m_nxClientThread.setCallbacks(&m_nxCallbacks);
 
     setStatus(Connecting);
-    nxClientThread.start();
+    m_nxClientThread.start();
 
     connect(m_container, SIGNAL(clientIsEmbedded()), SLOT(connectionOpened()));
     connect(m_container, SIGNAL(clientClosed()), SLOT(connectionClosed()));
@@ -179,6 +185,41 @@ void NxView::setGrabAllKeys(bool grabAllKeys)
 void NxView::hasXid(int xid) 
 {
     m_container->embedClient(xid);
+}
+
+void NxView::handleProgress(int id, QString msg)
+{
+    switch (id) {
+        case NXCL_AUTH_FAILED:
+            KMessageBox::error(this, i18n("The authentification key is invalid."), i18n("Invalid authentification key"), 0);
+            break;
+        case NXCL_LOGIN_FAILED:
+            KMessageBox::error(this, i18n("The username or password that you have entered is not a valid."), i18n("Invalid username or password"), 0);
+            break;
+        case NXCL_HOST_KEY_VERIFAILED:
+            KMessageBox::error(this, i18n("The host key verification has failed."), i18n("Host key verification failed"), 0);
+            break;
+        case NXCL_PROCESS_ERROR:
+            KMessageBox::error(this, i18n("An error has occurred during the connection to the NX server."), i18n("Process error"), 0);
+            break;
+        default:
+            break;
+    }
+}
+
+void NxView::handleSuspendedSessions(QList<nxcl::NXResumeData> sessions)
+{
+
+}
+
+void NxView::handleNoSessions()
+{
+
+}
+
+void NxView::handleAtCapacity()
+{
+    KMessageBox::error(this, i18n("This NX server is running at capacity."), i18n("Server at capacity"), 0);
 }
 
 void NxView::connectionOpened()

@@ -58,10 +58,13 @@ if(LIBNXCL_FOUND)
         nx/nxhostpreferences.cpp
 	nx/nxview.cpp
 	nx/nxclientthread.cpp
+	nx/nxcallbacks.cpp
+	nx/nxresumesessions.cpp
     )
 
     kde4_add_ui_files(krdc_nx_SRCS
         nx/nxpreferences.ui
+	nx/nxresumesessions.ui
     )
 endif(LIBNXCL_FOUND)
 
