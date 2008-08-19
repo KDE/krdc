@@ -41,32 +41,32 @@ NxClientThread::NxClientThread(QObject *parent)
 	  m_xid(0),
 	  m_stopped(false)
 {
-    m_nxClient.setSessionData(&m_nxData);
+    m_client.setSessionData(&m_data);
     
     QDesktopWidget *desktop = QApplication::desktop();
     int currentScreen = desktop->screenNumber();
     QRect rect = desktop->screenGeometry(currentScreen);
-    m_nxClient.setResolution(rect.width(), rect.height());
-    m_nxClient.setDepth(24);
-    m_nxClient.setRender(true);
+    m_client.setResolution(rect.width(), rect.height());
+    m_client.setDepth(24);
+    m_client.setRender(true);
 				 
-    m_nxData.sessionName = "krdcSession";
-    m_nxData.cache = 8;
-    m_nxData.images = 32;
-    m_nxData.linkType = "adsl";
-    m_nxData.render = true;
-    m_nxData.backingstore = "when_requested";
-    m_nxData.imageCompressionMethod = 2;
-    m_nxData.keyboard = "defkeymap";
-    m_nxData.media = false;
-    m_nxData.agentServer = "";
-    m_nxData.agentUser = "";
-    m_nxData.agentPass = "";
-    m_nxData.cups = 0;
-    m_nxData.suspended = false;
-    m_nxData.fullscreen = false;
-    m_nxData.encryption = true;
-    m_nxData.terminate = false;
+    m_data.sessionName = "krdcSession";
+    m_data.cache = 8;
+    m_data.images = 32;
+    m_data.linkType = "adsl";
+    m_data.render = true;
+    m_data.backingstore = "when_requested";
+    m_data.imageCompressionMethod = 2;
+    m_data.keyboard = "defkeymap";
+    m_data.media = false;
+    m_data.agentServer = "";
+    m_data.agentUser = "";
+    m_data.agentPass = "";
+    m_data.cups = 0;
+    m_data.suspended = false;
+    m_data.fullscreen = false;
+    m_data.encryption = true;
+    m_data.terminate = false;
 }
 
 NxClientThread::~NxClientThread()
@@ -77,7 +77,7 @@ NxClientThread::~NxClientThread()
 
 void NxClientThread::setCallbacks(NxCallbacks *callbacks) 
 {
-    m_nxClient.setExternalCallbacks((nxcl::NXClientLibExternalCallbacks *)callbacks);
+    m_client.setExternalCallbacks(callbacks);
 }
 
 void NxClientThread::setHost(const QString &host)
@@ -98,7 +98,7 @@ void NxClientThread::setUserName(const QString &userName)
     QMutexLocker locker(&m_mutex);
     QByteArray userNameTmp = userName.toAscii();
     std::string userNameStr = std::string(userNameTmp.data());
-    m_nxClient.setUsername(userNameStr);
+    m_client.setUsername(userNameStr);
 }
 
 void NxClientThread::setPassword(const QString &password)
@@ -106,7 +106,7 @@ void NxClientThread::setPassword(const QString &password)
     QMutexLocker locker(&m_mutex);
     QByteArray passwordTmp = password.toAscii();
     std::string passwordStr = std::string(passwordTmp);
-    m_nxClient.setPassword(passwordStr);
+    m_client.setPassword(passwordStr);
 }
 
 void NxClientThread::setResolution(int width, int height)
@@ -114,21 +114,21 @@ void NxClientThread::setResolution(int width, int height)
     QMutexLocker locker(&m_mutex);
     stringstream ss;
     ss << width << "x" << height << "+0+0";
-    m_nxData.geometry = ss.str();
+    m_data.geometry = ss.str();
 }
 
 void NxClientThread::setDesktopType(const QString &desktopType)
 {
     QMutexLocker locker(&m_mutex);
     QByteArray tmp = desktopType.toAscii();
-    m_nxData.sessionType = tmp.data();
+    m_data.sessionType = tmp.data();
 }
 
 void NxClientThread::setKeyboardLayout(const QString &keyboardLayout)
 {
     QMutexLocker locker(&m_mutex);
     QByteArray tmp = keyboardLayout.toAscii();
-    m_nxData.kbtype = tmp.data();
+    m_data.kbtype = tmp.data();
 }
 
 void NxClientThread::setPrivateKey(const QString &privateKey)
@@ -136,6 +136,19 @@ void NxClientThread::setPrivateKey(const QString &privateKey)
     QMutexLocker locker(&m_mutex);
     QByteArray tmp = privateKey.toAscii();
     m_privateKey = tmp.data();
+}
+
+void NxClientThread::setSuspended(bool suspended) 
+{
+    QMutexLocker locker(&m_mutex);
+    m_data.suspended = suspended;
+}
+
+void NxClientThread::setId(const QString &id)
+{
+    QMutexLocker locker(&m_mutex);
+    QByteArray tmp = id.toAscii();
+    m_data.id = tmp.data();
 }
 
 void NxClientThread::stop()
@@ -146,7 +159,7 @@ void NxClientThread::stop()
 
 void NxClientThread::run()
 {
-    if(m_privateKey.compare("default") == 0) {
+    if (m_privateKey.compare("default") == 0) {
         QString keyfilename = QString("default.dsa.key");
     	QString keyfilepath = KGlobal::dirs()->findResource("appdata", keyfilename);
 
@@ -157,34 +170,37 @@ void NxClientThread::run()
         QByteArray key;
         while (!file.atEnd())
             key += file.readLine();
-
-        m_nxClient.invokeNXSSH("supplied", m_host, true, key.data(), m_port);
+        
+	m_client.invokeNXSSH("supplied", m_host, true, key.data(), m_port);
     } else 
-        m_nxClient.invokeNXSSH("supplied", m_host, true, m_privateKey, m_port);
-
-    m_nxClient.runSession();
-
+        m_client.invokeNXSSH("supplied", m_host, true, m_privateKey, m_port);
+    
     nxcl::notQProcess* p;
-    while ((m_nxClient.getIsFinished()) == false && !m_stopped) {
-        if (m_nxClient.getReadyForProxy() == false) {
-            p = m_nxClient.getNXSSHProcess();
+    while (!m_client.getIsFinished() && !m_stopped) {
+        if (!m_client.getReadyForProxy()) {
+            p = m_client.getNXSSHProcess();
             p->probeProcess();
         } else {
-            p = m_nxClient.getNXSSHProcess();
+            p = m_client.getNXSSHProcess();
             p->probeProcess();
-            p = m_nxClient.getNXProxyProcess();
+            p = m_client.getNXProxyProcess();
             p->probeProcess();
         }
 
 	if (!this->m_xid) {
-	    this->m_xid = m_nxClient.getXID();
+	    this->m_xid = m_client.getXID();
 
-	    if(this->m_xid) 
+	    if (this->m_xid) 
 	        emit hasXid(this->m_xid);
         }
 
         usleep (1000);
     }
+}
+
+void NxClientThread::startSession()
+{
+    m_client.runSession();
 }
 
 #include "moc_nxclientthread.cpp"

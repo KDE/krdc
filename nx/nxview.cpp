@@ -31,10 +31,13 @@
 #include <KPasswordDialog>
 
 #include <QEvent>
+#include <QMetaType>
 
 NxView::NxView(QWidget *parent, const KUrl &url)
         : RemoteView(parent),
-        m_quitFlag(false)
+        m_quitFlag(false),
+	m_container(NULL),
+	m_hostPreferences(NULL)
 {
     m_url = url;
     m_host = url.host();
@@ -46,16 +49,31 @@ NxView::NxView(QWidget *parent, const KUrl &url)
     m_container = new QX11EmbedContainer(this);
     m_container->installEventFilter(this);
 
-    connect(&m_nxClientThread, SIGNAL(hasXid(int)), this, SLOT(hasXid(int)));
-    connect(&m_nxCallbacks, SIGNAL(progress(int, QString)), this, SLOT(handleProgress(int, QString)));
-    connect(&m_nxCallbacks, SIGNAL(suspendedSessions(QList<nxcl::NXResumeData>)), this, SLOT(handleSuspendedSessions(QList<nxcl::NXResumeData>)));
-    connect(&m_nxCallbacks, SIGNAL(noSessions()), this, SLOT(handleNoSessions()));
-    connect(&m_nxCallbacks, SIGNAL(atCapacity()), this, SLOT(handleAtCapacity()));
+    qRegisterMetaType<QList<nxcl::NXResumeData> >("QList<nxcl::NXResumeData>");
+
+    m_clientThread.setCallbacks(&m_callbacks);
+    
+    connect(&m_clientThread, SIGNAL(hasXid(int)), this, SLOT(hasXid(int)));
+    connect(&m_callbacks, SIGNAL(progress(int, QString)), this, SLOT(handleProgress(int, QString)));
+    connect(&m_callbacks, SIGNAL(suspendedSessions(QList<nxcl::NXResumeData>)), this, SLOT(handleSuspendedSessions(QList<nxcl::NXResumeData>)));
+    connect(&m_callbacks, SIGNAL(noSessions()), this, SLOT(handleNoSessions()));
+    connect(&m_callbacks, SIGNAL(atCapacity()), this, SLOT(handleAtCapacity()));
+    connect(&m_resumeSessions, SIGNAL(newSession()), this, SLOT(handleNewSession()));
+    connect(&m_resumeSessions, SIGNAL(resumeSession(QString)), this, SLOT(handleResumeSesssion(QString)));
 }
 
 NxView::~NxView()
 {
-    startQuitting();
+    if (m_container) {
+        startQuitting();
+	delete m_container;
+	m_container = NULL;
+    }
+
+    if (m_hostPreferences) {
+        delete m_hostPreferences;
+	m_hostPreferences = NULL;
+    }
 }
 
 // filter out key and mouse events to the container if we are view only
@@ -71,6 +89,7 @@ bool NxView::eventFilter(QObject *obj, QEvent *event)
                 event->type() == QEvent::MouseMove)
             return true;
     }
+
     return RemoteView::eventFilter(obj, event);
 }
 
@@ -83,11 +102,11 @@ void NxView::startQuitting()
     m_quitFlag = true;
 
     if (connected)
-        m_nxClientThread.stop();
+        m_clientThread.stop();
     else
-        m_nxClientThread.quit();
+        m_clientThread.quit();
 
-    m_nxClientThread.wait(500);
+    m_clientThread.wait(500);
     setStatus(Disconnected);
     m_container->discardClient();
 }
@@ -101,10 +120,10 @@ bool NxView::start()
 {
     m_hostPreferences = new NxHostPreferences(m_url.prettyUrl(KUrl::RemoveTrailingSlash), false, this);
 
-    m_nxClientThread.setResolution(m_hostPreferences->width(), m_hostPreferences->height());
-    m_nxClientThread.setDesktopType(m_hostPreferences->desktopType());
-    m_nxClientThread.setKeyboardLayout(m_hostPreferences->keyboardLayout());
-    m_nxClientThread.setPrivateKey(m_hostPreferences->privateKey());
+    m_clientThread.setResolution(m_hostPreferences->width(), m_hostPreferences->height());
+    m_clientThread.setDesktopType(m_hostPreferences->desktopType());
+    m_clientThread.setKeyboardLayout(m_hostPreferences->keyboardLayout());
+    m_clientThread.setPrivateKey(m_hostPreferences->privateKey());
     
     m_container->show();
 
@@ -139,15 +158,14 @@ bool NxView::start()
         }
     }
 
-    m_nxClientThread.setHost(m_host);
-    m_nxClientThread.setPort(m_port);
-    m_nxClientThread.setUserName(m_url.userName());
-    m_nxClientThread.setPassword(m_url.password());
-    m_nxClientThread.setResolution(m_hostPreferences->width(), m_hostPreferences->height());
-    m_nxClientThread.setCallbacks(&m_nxCallbacks);
+    m_clientThread.setHost(m_host);
+    m_clientThread.setPort(m_port);
+    m_clientThread.setUserName(m_url.userName());
+    m_clientThread.setPassword(m_url.password());
+    m_clientThread.setResolution(m_hostPreferences->width(), m_hostPreferences->height());
 
     setStatus(Connecting);
-    m_nxClientThread.start();
+    m_clientThread.start();
 
     connect(m_container, SIGNAL(clientIsEmbedded()), SLOT(connectionOpened()));
     connect(m_container, SIGNAL(clientClosed()), SLOT(connectionClosed()));
@@ -209,17 +227,35 @@ void NxView::handleProgress(int id, QString msg)
 
 void NxView::handleSuspendedSessions(QList<nxcl::NXResumeData> sessions)
 {
+    if (!m_resumeSessions.empty())
+        m_resumeSessions.clear();
 
+    m_resumeSessions.addSessions(sessions);
+    m_resumeSessions.show();
 }
 
 void NxView::handleNoSessions()
 {
-
+    m_clientThread.setSuspended(false);
+    m_clientThread.startSession();
 }
 
 void NxView::handleAtCapacity()
 {
     KMessageBox::error(this, i18n("This NX server is running at capacity."), i18n("Server at capacity"), 0);
+}
+
+void NxView::handleNewSession() 
+{
+    m_clientThread.setSuspended(false);
+    m_clientThread.startSession();
+}
+
+void NxView::handleResumeSession(QString id)
+{
+    m_clientThread.setId(id);
+    m_clientThread.setSuspended(true);
+    m_clientThread.startSession();
 }
 
 void NxView::connectionOpened()

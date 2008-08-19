@@ -58,7 +58,10 @@ public:
     void setDesktopType(const QString &desktopType);
     void setKeyboardLayout(const QString &keyboardLayout);
     void setPrivateKey(const QString &privateKey);
+    void setSuspended(bool suspended);
+    void setId(const QString &id);
     void stop();
+    void startSession();
 
 protected:
     void run();
@@ -72,8 +75,8 @@ signals:
     void hasXid(int xid);
 
 private:
-    nxcl::NXClientLib m_nxClient;
-    nxcl::NXSessionData m_nxData;
+    nxcl::NXClientLib m_client;
+    nxcl::NXSessionData m_data;
     
     std::string m_host;
     int m_port;

@@ -33,10 +33,12 @@ NxCallbacks::~NxCallbacks()
 
 void NxCallbacks::write(std::string msg)
 {
+std::cout << "WRITE " << msg << std::endl;
 }
 
 void NxCallbacks::write(int num, std::string msg)
 {
+std::cout << "WRITE " << num << " - " << msg << std::endl;
     emit progress(num, QString(msg.c_str()));
 }
 
@@ -66,7 +68,7 @@ void NxCallbacks::resumeSessionsSignal(std::list<nxcl::NXResumeData> sessions)
 
     for(std::list<nxcl::NXResumeData>::const_iterator it = sessions.begin(); it != sessions.end(); it++) 
         qsessions << (*it);
-
+std::cout << "RESUME" << std::endl;
     emit suspendedSessions(qsessions);
 }
 

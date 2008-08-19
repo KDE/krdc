@@ -28,6 +28,7 @@
 #include "nxcallbacks.h"
 #include "nxclientthread.h"
 #include "nxhostpreferences.h"
+#include "nxresumesessions.h"
 
 #include <QX11EmbedContainer>
 
@@ -52,7 +53,7 @@ public:
     virtual QSize framebufferSize();
     // Returns the suggested size of the remote view
     QSize sizeHint() const;
-virtual void setGrabAllKeys(bool grabAllKeys);
+    virtual void setGrabAllKeys(bool grabAllKeys);
 
 public slots:
     void switchFullscreen(bool on);
@@ -61,25 +62,27 @@ public slots:
     void handleSuspendedSessions(QList<nxcl::NXResumeData> sessions);
     void handleNoSessions();
     void handleAtCapacity();
+    void handleNewSession();
+    void handleResumeSession(QString id);
+    void connectionOpened();
+    void connectionClosed();
 
 protected:
     bool eventFilter(QObject *obj, QEvent *event);
 
 private:
     // Thread that manage NX connection
-    NxClientThread m_nxClientThread;
+    NxClientThread m_clientThread;
     // NX Callbacks
-    NxCallbacks m_nxCallbacks;
+    NxCallbacks m_callbacks;
     // If we are currently closing the connection
     bool m_quitFlag;
     // Widget which contains the NX Window
     QX11EmbedContainer *m_container;   
     // Dialog which allows user to choose NX preferences.
     NxHostPreferences *m_hostPreferences;
-
-private slots:
-    void connectionOpened();
-    void connectionClosed();
+    // Dialog which allows user to resume NX sessions.
+    NxResumeSessions m_resumeSessions;
 };
 
 #endif

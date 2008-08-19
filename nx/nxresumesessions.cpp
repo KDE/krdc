@@ -26,13 +26,32 @@
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
 
-NxResumeSessions::NxResumeSessions(QList<nxcl::NXResumeData> sessions) 
+NxResumeSessions::NxResumeSessions() 
 {
     nxUi.setupUi(this);
 
     connect(nxUi.buttonNew, SIGNAL(pressed()), this, SLOT(pressedNew()));
     connect(nxUi.buttonResume, SIGNAL(pressed()), this, SLOT(pressedResume()));
+}
 
+NxResumeSessions::~NxResumeSessions()
+{
+    if(!empty())
+        clear();
+}
+
+bool NxResumeSessions::empty() const
+{
+    return false;
+}
+
+void NxResumeSessions::clear()
+{
+
+}
+
+void NxResumeSessions::addSessions(QList<nxcl::NXResumeData> sessions) 
+{
     QTreeWidgetItem *tmp = NULL;
 
     for(int i = 0; i < sessions.size(); i++)
@@ -49,18 +68,15 @@ NxResumeSessions::NxResumeSessions(QList<nxcl::NXResumeData> sessions)
     }
 }
 
-NxResumeSessions::~NxResumeSessions()
-{
-}
-
-
 void NxResumeSessions::pressedNew()
 {
     emit newSession();
+    hide();
 }
 
 void NxResumeSessions::pressedResume()
 {
     emit resumeSession(QString(""));
+    hide();
 }
 

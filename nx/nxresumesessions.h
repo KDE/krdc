@@ -26,7 +26,8 @@
 
 #include "ui_nxresumesessions.h"
 
-#include <QDialog>
+#include <QList>
+#include <QWidget>
 #include <KDialog>
 #include <nxcl/nxdata.h>
 
@@ -35,8 +36,11 @@ class NxResumeSessions : public KDialog
     Q_OBJECT
 
 public:
-    explicit NxResumeSessions(QList<nxcl::NXResumeData> sessions);
+    explicit NxResumeSessions();
     ~NxResumeSessions();
+    bool empty() const;
+    void clear();
+    void addSessions(QList<nxcl::NXResumeData> sessions);
 
 private:
     Ui::NxSessions nxUi;
