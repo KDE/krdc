@@ -788,6 +788,12 @@ void MainWindow::updateConfiguration()
         palette.setColor(QPalette::Dark, Settings::backgroundColor());
         m_tabWidget->widget(i)->setPalette(palette);
     }
+    
+    // Send update configuration message to all views
+    for (int i = 0; i < m_remoteViewList.count(); i++) {
+        m_remoteViewList.at(i)->updateConfiguration();
+    }
+
 }
 
 void MainWindow::quit()

@@ -23,6 +23,8 @@
 
 #include "vncview.h"
 
+#include "settings.h"
+
 #ifdef QTONLY
     #include <QMessageBox>
     #include <QInputDialog>
@@ -118,8 +120,27 @@ QSize VncView::minimumSizeHint() const
 void VncView::scaleResize(int w, int h)
 {
     kDebug(5011) << w << h;
-    if (m_scale)
-        resize(w, h);
+    if (m_scale) {
+        m_verticalFactor = (qreal) h / m_frame.height();
+        m_horizontalFactor = (qreal) w / m_frame.width();
+
+        if (Settings::keepAspectRatio()) {
+            m_verticalFactor = m_horizontalFactor = qMin(m_verticalFactor, m_horizontalFactor);
+        }
+
+        qreal newW = m_frame.width() * m_horizontalFactor;
+        qreal newH = m_frame.height() * m_verticalFactor;
+        setMaximumSize(newW, newH); //This is a hack to force Qt to center the view in the scroll area
+        resize(newW, newH);
+    }
+}
+
+void VncView::updateConfiguration()
+{
+    RemoteView::updateConfiguration();
+
+    // Update the scaling mode in case KeepAspectRatio changed
+    scaleResize(parentWidget()->width(), parentWidget()->height());
 }
 
 void VncView::startQuitting()
@@ -330,9 +351,14 @@ void VncView::enableScaling(bool scale)
     RemoteView::enableScaling(scale);
 
     if (scale) {
+        setMaximumSize(QSize(QWIDGETSIZE_MAX, QWIDGETSIZE_MAX));
         if (parentWidget())
-            resize(parentWidget()->width(), parentWidget()->height());
+            scaleResize(parentWidget()->width(), parentWidget()->height());
     } else {
+        m_verticalFactor = 1.0;
+        m_horizontalFactor = 1.0;
+
+        setMaximumSize(m_frame.width(), m_frame.height()); //This is a hack to force Qt to center the view in the scroll area
         resize(m_frame.width(), m_frame.height());
         emit changeSize(m_frame.width(), m_frame.height());
     }
@@ -368,8 +394,9 @@ void VncView::paintEvent(QPaintEvent *event)
                                                                   Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
     } else {
 //         kDebug(5011) << "resize repaint";
-        painter.drawImage(QRect(0, 0, width(), height()), m_frame.scaled(width(), height(),
-                                                                         Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+        painter.drawImage(QRect(0, 0, width(), height()), 
+                          m_frame.scaled(m_frame.width() * m_horizontalFactor, m_frame.height() * m_verticalFactor,
+                                         Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
     }
 
     RemoteView::paintEvent(event);
@@ -378,10 +405,6 @@ void VncView::paintEvent(QPaintEvent *event)
 void VncView::resizeEvent(QResizeEvent *event)
 {
     RemoteView::resizeEvent(event);
-
-    m_verticalFactor = (qreal) height() / m_frame.height();
-    m_horizontalFactor = (qreal) width() / m_frame.width();
-
     update();
 }
 

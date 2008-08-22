@@ -122,6 +122,10 @@ int RemoteView::port()
     return m_port;
 }
 
+void RemoteView::updateConfiguration()
+{
+}
+
 void RemoteView::keyEvent(QKeyEvent *)
 {
 }
