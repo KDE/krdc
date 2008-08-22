@@ -209,7 +209,7 @@ void NxView::handleProgress(int id, QString msg)
 {
     switch (id) {
         case NXCL_AUTH_FAILED:
-            KMessageBox::error(this, i18n("The authentification key is invalid."), i18n("Invalid authentification key"), 0);
+            KMessageBox::error(this, i18n("The authentication key is invalid."), i18n("Invalid authentication key"), 0);
             break;
         case NXCL_LOGIN_FAILED:
             KMessageBox::error(this, i18n("The username or password that you have entered is not a valid."), i18n("Invalid username or password"), 0);
