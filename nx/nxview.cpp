@@ -59,21 +59,11 @@ NxView::NxView(QWidget *parent, const KUrl &url)
     connect(&m_callbacks, SIGNAL(noSessions()), this, SLOT(handleNoSessions()));
     connect(&m_callbacks, SIGNAL(atCapacity()), this, SLOT(handleAtCapacity()));
     connect(&m_resumeSessions, SIGNAL(newSession()), this, SLOT(handleNewSession()));
-    connect(&m_resumeSessions, SIGNAL(resumeSession(QString)), this, SLOT(handleResumeSesssion(QString)));
+    connect(&m_resumeSessions, SIGNAL(resumeSession(QString)), this, SLOT(handleResumeSession(QString)));
 }
 
 NxView::~NxView()
 {
-    if (m_container) {
-        startQuitting();
-	delete m_container;
-	m_container = NULL;
-    }
-
-    if (m_hostPreferences) {
-        delete m_hostPreferences;
-	m_hostPreferences = NULL;
-    }
 }
 
 // filter out key and mouse events to the container if we are view only

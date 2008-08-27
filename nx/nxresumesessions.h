@@ -41,10 +41,10 @@ public:
     bool empty() const;
     void clear();
     void addSessions(QList<nxcl::NXResumeData> sessions);
+    void show();
 
 private:
     Ui::NxSessions nxUi;
-    QWidget *nxPage;
 
 private slots:
     void pressedNew();

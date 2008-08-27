@@ -25,10 +25,29 @@
 
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
+#include <QVBoxLayout>
+
+#include <KTitleWidget>
 
 NxResumeSessions::NxResumeSessions() 
 {
-    nxUi.setupUi(this);
+    QWidget *nxPage = new QWidget();
+    nxUi.setupUi(nxPage);
+
+    setCaption(i18n("Available NX Sessions"));
+    setButtons(KDialog::None);
+
+    QVBoxLayout *layout = new QVBoxLayout();
+
+    KTitleWidget *titleWidget = new KTitleWidget();
+    titleWidget->setText(i18n("Available NX Sessions"));
+    titleWidget->setPixmap(KIcon("krdc"));
+    layout->addWidget(titleWidget);
+    layout->addWidget(nxPage);
+
+    QWidget *mainWidget = new QWidget();
+    mainWidget->setLayout(layout);
+    setMainWidget(mainWidget);
 
     connect(nxUi.buttonNew, SIGNAL(pressed()), this, SLOT(pressedNew()));
     connect(nxUi.buttonResume, SIGNAL(pressed()), this, SLOT(pressedResume()));
@@ -42,12 +61,12 @@ NxResumeSessions::~NxResumeSessions()
 
 bool NxResumeSessions::empty() const
 {
-    return false;
+    return nxUi.sessionsList->topLevelItemCount() == 0;
 }
 
 void NxResumeSessions::clear()
 {
-
+    nxUi.sessionsList->clear();
 }
 
 void NxResumeSessions::addSessions(QList<nxcl::NXResumeData> sessions) 
@@ -68,15 +87,21 @@ void NxResumeSessions::addSessions(QList<nxcl::NXResumeData> sessions)
     }
 }
 
+void NxResumeSessions::show()
+{
+    adjustSize();
+
+    if (exec() == KDialog::Rejected)
+        pressedNew();
+}
+
 void NxResumeSessions::pressedNew()
 {
     emit newSession();
-    hide();
 }
 
 void NxResumeSessions::pressedResume()
 {
     emit resumeSession(QString(""));
-    hide();
 }
 
