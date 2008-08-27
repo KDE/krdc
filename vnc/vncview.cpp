@@ -394,9 +394,22 @@ void VncView::paintEvent(QPaintEvent *event)
                                                                   Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
     } else {
 //         kDebug(5011) << "resize repaint";
-        painter.drawImage(QRect(0, 0, width(), height()), 
-                          m_frame.scaled(m_frame.width() * m_horizontalFactor, m_frame.height() * m_verticalFactor,
-                                         Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+        QRect rect = event->rect();
+        if (rect.width() != width() || rect.height() != height()) {
+            kDebug() << "Partial repaint";
+            int sx = rect.x()/m_horizontalFactor;
+            int sy = rect.y()/m_verticalFactor;
+            int sw = rect.width()/m_horizontalFactor;
+            int sh = rect.height()/m_verticalFactor;
+            painter.drawImage(rect, 
+                              m_frame.copy(sx, sy, sw, sh).scaled(rect.width(), rect.height(),
+                                                                  Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+        } else {
+            kDebug() << "Full repaint";
+            painter.drawImage(QRect(0, 0, width(), height()), 
+                              m_frame.scaled(m_frame.width() * m_horizontalFactor, m_frame.height() * m_verticalFactor,
+                                             Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+        }
     }
 
     RemoteView::paintEvent(event);
