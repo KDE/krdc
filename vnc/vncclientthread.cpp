@@ -28,16 +28,14 @@
 
 static QString outputErrorMessageString;
 
-static uint8_t *buf = 0;
-
 static rfbBool newclient(rfbClient *cl)
 {
     int width = cl->width, height = cl->height, depth = cl->format.bitsPerPixel;
     int size = width * height * (depth / 8);
     if (cl->frameBuffer)
-        delete [] buf; // do not leak if we get a new framebuffer size
-    buf = new uint8_t[size];
-    memset(buf, '\0', size);
+        delete [] cl->frameBuffer; // do not leak if we get a new framebuffer size
+    cl->frameBuffer = new uint8_t[size];
+    memset(cl->frameBuffer, '\0', size);
     cl->frameBuffer = buf;
     cl->format.bitsPerPixel = 32;
     cl->format.redShift = 16;
@@ -309,7 +307,6 @@ void VncClientThread::run()
     delete [] cl->frameBuffer;
     cl->frameBuffer = 0;
     rfbClientCleanup(cl);
-    buf = 0;
     m_stopped = true;
 }
 

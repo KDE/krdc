@@ -76,6 +76,12 @@ VncView::VncView(QWidget *parent, const KUrl &url)
 
 VncView::~VncView()
 {
+    // Disconnect all signals so that we don't get any more callbacks from the client thread
+    disconnect(&vncThread, SIGNAL(imageUpdated(int, int, int, int)), this, SLOT(updateImage(int, int, int, int)));
+    disconnect(&vncThread, SIGNAL(gotCut(const QString&)), this, SLOT(setCut(const QString&)));
+    disconnect(&vncThread, SIGNAL(passwordRequest()), this, SLOT(requestPassword()));
+    disconnect(&vncThread, SIGNAL(outputErrorMessage(QString)), this, SLOT(outputErrorMessage(QString)));
+
     startQuitting();
 }
 
