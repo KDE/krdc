@@ -23,8 +23,6 @@
 
 #include "vncview.h"
 
-#include "settings.h"
-
 #ifdef QTONLY
     #include <QMessageBox>
     #include <QInputDialog>
@@ -33,7 +31,7 @@
         critical(parent, caption, message)
 #else
     #include "mainwindow.h"
-
+    #include "settings.h"
     #include <KActionCollection>
     #include <KMessageBox>
     #include <KPasswordDialog>
@@ -130,9 +128,13 @@ void VncView::scaleResize(int w, int h)
         m_verticalFactor = (qreal) h / m_frame.height();
         m_horizontalFactor = (qreal) w / m_frame.width();
 
+#ifndef QTONLY
         if (Settings::keepAspectRatio()) {
             m_verticalFactor = m_horizontalFactor = qMin(m_verticalFactor, m_horizontalFactor);
         }
+#else
+        m_verticalFactor = m_horizontalFactor = qMin(m_verticalFactor, m_horizontalFactor);
+#endif
 
         qreal newW = m_frame.width() * m_horizontalFactor;
         qreal newH = m_frame.height() * m_verticalFactor;
