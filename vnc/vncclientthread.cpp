@@ -36,7 +36,6 @@ static rfbBool newclient(rfbClient *cl)
         delete [] cl->frameBuffer; // do not leak if we get a new framebuffer size
     cl->frameBuffer = new uint8_t[size];
     memset(cl->frameBuffer, '\0', size);
-    cl->frameBuffer = buf;
     cl->format.bitsPerPixel = 32;
     cl->format.redShift = 16;
     cl->format.greenShift = 8;
