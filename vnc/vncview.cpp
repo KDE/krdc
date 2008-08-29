@@ -404,7 +404,7 @@ void VncView::paintEvent(QPaintEvent *event)
 //         kDebug(5011) << "resize repaint";
         QRect rect = event->rect();
         if (rect.width() != width() || rect.height() != height()) {
-            kDebug() << "Partial repaint";
+            kDebug(5011) << "Partial repaint";
             int sx = rect.x()/m_horizontalFactor;
             int sy = rect.y()/m_verticalFactor;
             int sw = rect.width()/m_horizontalFactor;
@@ -413,7 +413,7 @@ void VncView::paintEvent(QPaintEvent *event)
                               m_frame.copy(sx, sy, sw, sh).scaled(rect.width(), rect.height(),
                                                                   Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
         } else {
-            kDebug() << "Full repaint";
+            kDebug(5011) << "Full repaint";
             painter.drawImage(QRect(0, 0, width(), height()), 
                               m_frame.scaled(m_frame.width() * m_horizontalFactor, m_frame.height() * m_verticalFactor,
                                              Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
