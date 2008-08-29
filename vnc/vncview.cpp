@@ -285,7 +285,7 @@ void VncView::updateImage(int x, int y, int w, int h)
 #endif
     }
 
-    if ((y == 0 && x == 0) && (m_frame.size() != size())) {
+    if (!m_scale && (y == 0 && x == 0) && (m_frame.size() != size())) {
         resize(m_frame.width(), m_frame.height());
         emit changeSize(m_frame.width(), m_frame.height());
     }
