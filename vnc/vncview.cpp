@@ -661,4 +661,6 @@ void VncView::clipboardDataChanged()
     vncThread.clientCut(text);
 }
 
+#ifndef QTONLY
 #include "moc_vncview.cpp"
+#endif

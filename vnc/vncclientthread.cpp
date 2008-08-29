@@ -355,4 +355,6 @@ void VncClientThread::clientCut(const QString &text)
     m_eventQueue.enqueue(new ClientCutEvent(strdup(text.toUtf8())));
 }
 
+#ifndef QTONLY
 #include "moc_vncclientthread.cpp"
+#endif
