@@ -183,8 +183,8 @@ bool VncView::start()
     vncThread.setPort(m_port);
     RemoteView::Quality quality;
 #ifdef QTONLY
-    int quality = (QCoreApplication::arguments().count() > 2) ? QCoreApplication::arguments().at(2).toInt() : 2;
-    quality = (RemoteView::Quality)quality;
+    quality = (RemoteView::Quality)((QCoreApplication::arguments().count() > 2) ?
+        QCoreApplication::arguments().at(2).toInt() : 2);
 #else
     m_hostPreferences = new VncHostPreferences(m_url.prettyUrl(KUrl::RemoveTrailingSlash), false, this);
     quality = m_hostPreferences->quality();
@@ -283,7 +283,10 @@ void VncView::outputErrorMessage(const QString &message)
 
     startQuitting();
 
+#ifndef QTONLY
     KMessageBox::error(this, message, i18n("VNC failure"));
+#endif
+    emit errorMessage(i18n("VNC failure"), message);
 }
 
 void VncView::updateImage(int x, int y, int w, int h)
