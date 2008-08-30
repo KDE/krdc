@@ -53,7 +53,6 @@ public:
     bool start();
     bool supportsScaling() const;
     bool supportsLocalCursor() const;
-    void keyEvent(QKeyEvent *e);
     void setViewOnly(bool viewOnly);
     void showDotCursor(DotCursorState state);
     void enableScaling(bool scale);
@@ -65,15 +64,8 @@ public slots:
 
 protected:
     void paintEvent(QPaintEvent *event);
+    bool event(QEvent *event);
     void resizeEvent(QResizeEvent *event);
-    void focusOutEvent(QFocusEvent *event);
-    void mouseMoveEvent(QMouseEvent *event);
-    void mousePressEvent(QMouseEvent *event);
-    void mouseDoubleClickEvent(QMouseEvent *event);
-    void mouseReleaseEvent(QMouseEvent *event);
-    void wheelEvent(QWheelEvent *event);
-    void keyPressEvent(QKeyEvent *event);
-    void keyReleaseEvent(QKeyEvent *event);
     bool eventFilter(QObject *obj, QEvent *event);
 
 private:
@@ -96,12 +88,15 @@ private:
     QImage m_frame;
     bool m_forceLocalCursor;
 
+    void keyEventHandler(QKeyEvent *e);
+    void wheelEventHandler(QWheelEvent *event);
+    void mouseEventHandler(QMouseEvent *event);
+    
 private slots:
     void updateImage(int x, int y, int w, int h);
     void setCut(const QString &text);
     void requestPassword();
     void outputErrorMessage(const QString &message);
-    void mouseEvent(QMouseEvent *event);
     void clipboardSelectionChanged();
     void clipboardDataChanged();
 };
