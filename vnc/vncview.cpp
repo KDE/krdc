@@ -372,58 +372,34 @@ void VncView::resizeEvent(QResizeEvent *event)
     update();
 }
 
-void VncView::focusOutEvent(QFocusEvent *event)
+bool VncView::event(QEvent *event)
 {
-//     kDebug(5011) << "focusOutEvent";
-
-    if (event->reason() == Qt::TabFocusReason || event->reason() == Qt::BacktabFocusReason) {
-//         kDebug(5011) << "event->reason() == Qt::TabFocusReason";
-        event->ignore();
-        setFocus(); // get focus back and send tab key event to remote desktop
-        vncThread.keyEvent(XK_Tab, true);
-        vncThread.keyEvent(XK_Tab, false);
+    switch (event->type()) {
+    case QEvent::KeyPress:
+    case QEvent::KeyRelease:
+//         kDebug(5011) << "keyEvent";
+        keyEventHandler(static_cast<QKeyEvent*>(event));
+        return true;
+        break;
+    case QEvent::MouseButtonDblClick:
+    case QEvent::MouseButtonPress:
+    case QEvent::MouseButtonRelease:
+    case QEvent::MouseMove:
+//         kDebug(5011) << "mouseEvent";
+        mouseEventHandler(static_cast<QMouseEvent*>(event));
+        return true;
+        break;
+    case QEvent::Wheel:
+//         kDebug(5011) << "wheelEvent";
+        wheelEventHandler(static_cast<QWheelEvent*>(event));
+        return true;
+        break;
+    default:
+        return RemoteView::event(event);
     }
-
-    RemoteView::focusOutEvent(event);
 }
 
-void VncView::mouseMoveEvent(QMouseEvent *event)
-{
-//     kDebug(5011) << "mouse move";
-
-    mouseEvent(event);
-
-    RemoteView::mouseMoveEvent(event);
-}
-
-void VncView::mousePressEvent(QMouseEvent *event)
-{
-//     kDebug(5011) << "mouse press";
-
-    mouseEvent(event);
-
-    RemoteView::mousePressEvent(event);
-}
-
-void VncView::mouseDoubleClickEvent(QMouseEvent *event)
-{
-//     kDebug(5011) << "mouse double click";
-
-    mouseEvent(event);
-
-    RemoteView::mouseDoubleClickEvent(event);
-}
-
-void VncView::mouseReleaseEvent(QMouseEvent *event)
-{
-//     kDebug(5011) << "mouse release";
-
-    mouseEvent(event);
-
-    RemoteView::mouseReleaseEvent(event);
-}
-
-void VncView::mouseEvent(QMouseEvent *e)
+void VncView::mouseEventHandler(QMouseEvent *e)
 {
     if (e->type() != QEvent::MouseMove) {
         if ((e->type() == QEvent::MouseButtonPress) ||
@@ -447,7 +423,7 @@ void VncView::mouseEvent(QMouseEvent *e)
     vncThread.mouseEvent(qRound(e->x() / m_horizontalFactor), qRound(e->y() / m_verticalFactor), m_buttonMask);
 }
 
-void VncView::wheelEvent(QWheelEvent *event)
+void VncView::wheelEventHandler(QWheelEvent *event)
 {
     int eb = 0;
     if (event->delta() < 0)
@@ -460,16 +436,15 @@ void VncView::wheelEvent(QWheelEvent *event)
 
     vncThread.mouseEvent(x, y, eb | m_buttonMask);
     vncThread.mouseEvent(x, y, m_buttonMask);
-
-    RemoteView::wheelEvent(event);
 }
 
-void VncView::keyEvent(QKeyEvent *e)
+void VncView::keyEventHandler(QKeyEvent *e)
 {
     int mask = 0;
     
     rfbKeySym k = 0;
     switch (e->key()) {
+    case Qt::Key_Backtab: k = XK_Tab; break;
     case Qt::Key_Backspace: k = XK_BackSpace; break;
     case Qt::Key_Tab: k = XK_Tab; break;
     case Qt::Key_Clear: k = XK_Clear; break;
@@ -553,25 +528,6 @@ void VncView::keyEvent(QKeyEvent *e)
     //rfbClientLog("Key event(%s): orig: 0x%x, sent: 0x%x\n", pressed ? "P" : "R", e->key(), k);
 
     vncThread.keyEvent(k, pressed);
-    RemoteView::keyEvent(e);
-}
-
-void VncView::keyPressEvent(QKeyEvent *event)
-{
-//     kDebug(5011) << "key press" << event->key();
-
-    keyEvent(event);
-
-    RemoteView::keyPressEvent(event);
-}
-
-void VncView::keyReleaseEvent(QKeyEvent *event)
-{
-//     kDebug(5011) << "key release" << event->key();
-
-    keyEvent(event);
-
-    RemoteView::keyReleaseEvent(event);
 }
 
 void VncView::clipboardSelectionChanged()
