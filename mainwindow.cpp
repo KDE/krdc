@@ -57,6 +57,7 @@
 #include <KMenuBar>
 #include <KMessageBox>
 #include <KNotifyConfigWidget>
+#include <KProcess>
 #include <KPushButton>
 #include <KShortcut>
 #include <KShortcutsDialog>
@@ -913,11 +914,12 @@ void MainWindow::createStartPage()
     nxConnectButton->setVisible(false);
 #endif
 
-    KPushButton *rdpConnectButton = new KPushButton(this);
+    rdpConnectButton = new KPushButton(this);
     rdpConnectButton->setStyleSheet("KPushButton { padding: 12px; margin: 10px; }");
     rdpConnectButton->setIcon(KIcon(actionCollection()->action("new_rdp_connection")->icon()));
     rdpConnectButton->setText(i18n("Connect to a Windows Remote Desktop (RDP)"));
     connect(rdpConnectButton, SIGNAL(clicked()), SLOT(newRdpConnection()));
+    QMetaObject::invokeMethod(this, "checkRdektopAvailability");
 #ifndef BUILD_RDP
     rdpConnectButton->setVisible(false);
 #endif
@@ -997,6 +999,15 @@ void MainWindow::closeZeroconfPage()
     m_zeroconfPage = 0;
     tabChanged(index); // force update again because m_zeroconfPage was not null before
 #endif
+}
+
+void MainWindow::checkRdektopAvailability()
+{
+    if (KProcess::execute("rdesktop") < 0) { //-2 if the process could not be started, -1 if it crashed, otherwise its exit code 
+        rdpConnectButton->setEnabled(false);
+        rdpConnectButton->setText(rdpConnectButton->text() + '\n' + 
+                                  i18n("\"rdesktop\" cannot be found on your system; make sure it is properly installed."));
+    }
 }
 
 QList<RemoteView *> MainWindow::remoteViewList() const

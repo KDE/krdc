@@ -28,6 +28,7 @@
 
 #include <KXmlGuiWindow>
 
+class KPushButton;
 class KToggleAction;
 class KTabWidget;
 class KUrlNavigator;
@@ -87,6 +88,7 @@ private slots:
     void createZeroconfPage();
     void closeZeroconfPage();
     void openFromDockWidget(const QModelIndex &index);
+    void checkRdektopAvailability();
 
 private:
     void setupActions();
@@ -114,6 +116,7 @@ private:
 
     SystemTrayIcon *m_systemTrayIcon;
     ZeroconfPage *m_zeroconfPage;
+    KPushButton *rdpConnectButton;
 };
 
 #include <QApplication>
