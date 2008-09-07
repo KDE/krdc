@@ -59,6 +59,7 @@ public:
     virtual void startQuitting();            // start closing the connection
     virtual bool isQuitting();               // are we currently closing the connection?
     virtual bool start();                    // open a connection
+    void setGrabAllKeys(bool grabAllKeys);
 
 public slots:
     virtual void switchFullscreen(bool on);

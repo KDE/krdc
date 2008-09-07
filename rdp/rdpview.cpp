@@ -270,4 +270,10 @@ void RdpView::receivedStandardError()
     }
 }
 
+void RdpView::setGrabAllKeys(bool grabAllKeys)
+{
+    Q_UNUSED(grabAllKeys);
+    // do nothing.. grabKeyboard seems not to be supported in QX11EmbedContainer
+}
+
 #include "rdpview.moc"
