@@ -225,18 +225,13 @@ void MainWindow::setupActions()
 
     QAction *quitAction = KStandardAction::quit(this, SLOT(quit()), actionCollection());
     actionCollection()->addAction("quit", quitAction);
-    QAction *preferencesAction = KStandardAction::preferences(this, SLOT(preferences()), actionCollection());
-    actionCollection()->addAction("preferences", preferencesAction);
-    QAction *configToolbarAction = KStandardAction::configureToolbars(this, SLOT(configureToolbars()), actionCollection());
-    actionCollection()->addAction("configure_toolbars", configToolbarAction);
-    QAction *keyBindingsAction = KStandardAction::keyBindings(this, SLOT(configureKeys()), actionCollection());
-    actionCollection()->addAction("configure_keys", keyBindingsAction);
+    KStandardAction::preferences(this, SLOT(preferences()), actionCollection());
+    KStandardAction::configureToolbars(this, SLOT(configureToolbars()), actionCollection());
+    KStandardAction::keyBindings(this, SLOT(configureKeys()), actionCollection());
     QAction *cinfigNotifyAction = KStandardAction::configureNotifications(this, SLOT(configureNotifications()), actionCollection());
     cinfigNotifyAction->setVisible(false);
-    actionCollection()->addAction("configure_notifications", cinfigNotifyAction);
     m_menubarAction = KStandardAction::showMenubar(this, SLOT(showMenubar()), actionCollection());
     m_menubarAction->setChecked(!menuBar()->isHidden());
-    actionCollection()->addAction("settings_showmenubar", m_menubarAction);
 
     QString initialProtocol;
 #ifdef BUILD_RDP
