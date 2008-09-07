@@ -118,6 +118,8 @@ void RdpHostPreferences::showDialog()
     QWidget *rdpPage = new QWidget();
     rdpUi.setupUi(rdpPage);
 
+    rdpUi.loginGroupBox->setVisible(false);
+
     KDialog *dialog = createDialog(rdpPage);
 
     rdpUi.kcfg_Height->setValue(height());

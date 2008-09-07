@@ -120,14 +120,16 @@ bool RdpView::start()
 
             userName = KInputDialog::getText(i18n("Enter Username"),
                                              i18n("Please enter the username you would like to use for login."),
-                                             QString(), &ok, this);
+                                             Settings::defaultRdpUserName(), &ok, this);
 
             if (ok)
                 m_url.setUserName(userName);
         }
 
         if (!m_url.userName().isEmpty()) {
-            QString walletPassword = readWalletPassword();
+            bool useLdapLogin = Settings::recognizeLdapLogins() && m_url.userName().contains('\\');
+            kDebug(5012) << "Is LDAP login:" << useLdapLogin << m_url.userName();
+            QString walletPassword = readWalletPassword(useLdapLogin);
 
             if (!walletPassword.isNull())
                 m_url.setPassword(walletPassword);
@@ -138,7 +140,7 @@ bool RdpView::start()
                     m_url.setPassword(dialog.password());
 
                     if (m_hostPreferences->walletSupport())
-                        saveWalletPassword(dialog.password());
+                        saveWalletPassword(dialog.password(), useLdapLogin);
                 }
             }
         }
@@ -153,7 +155,7 @@ bool RdpView::start()
 
     if (!m_url.userName().isEmpty())
         arguments << "-u" << m_url.userName();
-    else if (!Settings::sendCurrentUserName())
+    else
         arguments << "-u" << "";
 
     if (!m_url.password().isNull())
@@ -234,8 +236,8 @@ void RdpView::processError(QProcess::ProcessError error)
         setStatus(Disconnected);
 
         if (error == QProcess::FailedToStart) {
-            KMessageBox::error(0, i18n("Could not start rdesktop; make sure rdesktop is properly installed."),
-                               i18n("rdesktop Failure"));
+            KMessageBox::error(0, i18n("Could not start \"rdesktop\"; make sure rdesktop is properly installed."),
+                               i18n("RDP Failure"));
             return;
         }
 
@@ -243,9 +245,9 @@ void RdpView::processError(QProcess::ProcessError error)
             KMessageBox::error(0, i18n("Connection attempt to host failed."),
                                i18n("Connection Failure"));
         } else {
-            KMessageBox::error(0, i18n("The version of rdesktop you are using (%1) is too old:\n"
+            KMessageBox::error(0, i18n("The version of \"rdesktop\" you are using (%1) is too old:\n"
                                        "rdesktop 1.3.2 or greater is required.", m_clientVersion),
-                               i18n("rdesktop Failure"));
+                               i18n("RDP Failure"));
         }
         emit disconnectedError();
     }

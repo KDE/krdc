@@ -388,8 +388,8 @@ protected:
     KUrl m_url;
 
 #ifndef QTONLY
-    QString readWalletPassword();
-    void saveWalletPassword(const QString &password);
+    QString readWalletPassword(bool fromUserNameOnly = false);
+    void saveWalletPassword(const QString &password, bool fromUserNameOnly = false);
     KWallet::Wallet *m_wallet;
 #endif
 
