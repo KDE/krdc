@@ -148,7 +148,7 @@ void ZeroconfPage::rowSelected()
 
 void ZeroconfPage::newConnection()
 {
-    int currentRow = m_serviceTable->currentRow();
+    const int currentRow = m_serviceTable->currentRow();
     KUrl url;
     url.setProtocol(m_serviceTable->item(currentRow, 0)->text().toLower());
     url.setHost(m_serviceTable->item(currentRow, 1)->text());

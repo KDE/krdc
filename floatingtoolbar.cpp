@@ -246,9 +246,9 @@ void FloatingToolBar::mouseMoveEvent(QMouseEvent *e)
         return;
 
     // compute the nearest side to attach the widget to
-    QPoint parentPos = mapToParent(e->pos());
-    float nX = (float)parentPos.x() / (float)d->anchorWidget->width();
-    float nY = (float)parentPos.y() / (float)d->anchorWidget->height();
+    const QPoint parentPos = mapToParent(e->pos());
+    const float nX = (float)parentPos.x() / (float)d->anchorWidget->width();
+    const float nY = (float)parentPos.y() / (float)d->anchorWidget->height();
     if (nX > 0.3 && nX < 0.7 && nY > 0.3 && nY < 0.7)
         return;
     bool LT = nX < (1.0 - nY);
@@ -295,7 +295,7 @@ void FloatingToolBar::wheelEvent(QWheelEvent *e)
 {
     e->accept();
 
-    qreal diff = e->delta() / 100.0 / 15.0;
+    const qreal diff = e->delta() / 100.0 / 15.0;
 //     kDebug(5010) << diff;
     if (((d->opacity <= 1) && (diff > 0)) || ((d->opacity >= 0) && (diff < 0)))
         d->opacity += diff;
@@ -307,12 +307,12 @@ void FloatingToolBar::wheelEvent(QWheelEvent *e)
 
 void FloatingToolBarPrivate::buildToolBar()
 {
-    bool prevUpdates = q->updatesEnabled();
+    const bool prevUpdates = q->updatesEnabled();
     q->setUpdatesEnabled(false);
 
     // 1. init numbers we are going to use
-    bool topLeft = anchorSide == FloatingToolBar::Left || anchorSide == FloatingToolBar::Top;
-    bool vertical = anchorSide == FloatingToolBar::Left || anchorSide == FloatingToolBar::Right;
+    const bool topLeft = anchorSide == FloatingToolBar::Left || anchorSide == FloatingToolBar::Top;
+    const bool vertical = anchorSide == FloatingToolBar::Left || anchorSide == FloatingToolBar::Right;
 
     if (anchorSide == FloatingToolBar::Left || anchorSide == FloatingToolBar::Right) {
         offsetPlaceHolder->setFixedSize(1, 7);
@@ -323,8 +323,8 @@ void FloatingToolBarPrivate::buildToolBar()
     }
 
     // 2. compute widget size
-    int myWidth = q->sizeHint().width() - 1;
-    int myHeight = q->sizeHint().height() - 1;
+    const int myWidth = q->sizeHint().width() - 1;
+    const int myHeight = q->sizeHint().height() - 1;
 
     // 3. resize pixmap, mask and widget
     QBitmap mask(myWidth + 1, myHeight + 1);

@@ -108,7 +108,7 @@ void HostPreferencesList::configureHost()
     QList<QListWidgetItem *> selectedItems = hostList->selectedItems();
 
     foreach(QListWidgetItem *selectedItem, selectedItems) {
-        QString url = selectedItem->text();
+        const QString url = selectedItem->text();
 
         kDebug(5010) << "Configure host: " << url;
 
@@ -135,7 +135,7 @@ void HostPreferencesList::configureHost()
 
 void HostPreferencesList::removeHost()
 {
-    QList<QListWidgetItem *> selectedItems = hostList->selectedItems();
+    const QList<QListWidgetItem *> selectedItems = hostList->selectedItems();
 
     foreach(QListWidgetItem *selectedItem, selectedItems) {
         kDebug(5010) << "Remove host: " <<  selectedItem->text();
@@ -163,7 +163,7 @@ void HostPreferencesList::removeHost()
 
 void HostPreferencesList::selectionChanged()
 {
-    bool enabled = hostList->selectedItems().isEmpty() ? false : true;
+    const bool enabled = hostList->selectedItems().isEmpty() ? false : true;
 
     configureButton->setEnabled(enabled);
     removeButton->setEnabled(enabled);

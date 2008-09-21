@@ -33,7 +33,7 @@
 #include <QByteArray>
 #include <QTextEdit>
 
-static QStringList keymaps = (QStringList()
+static const QStringList keymaps = (QStringList()
     << "ar"
     << "cs"
     << "da"
@@ -77,7 +77,7 @@ static const int defaultKeymap = 7; // en-us
 
 inline int keymap2int(const QString &keymap)
 {
-    int index = keymaps.lastIndexOf(keymap);
+    const int index = keymaps.lastIndexOf(keymap);
     return (index == -1) ? defaultKeymap : index;
 }
 
@@ -89,7 +89,7 @@ inline QString int2keymap(int layout)
         return keymaps.at(defaultKeymap);
 }
 
-static QStringList desktopTypes = (QStringList()
+static const QStringList desktopTypes = (QStringList()
     << "unix-kde" 
     << "unix-gnome"
     << "unix-cde" 
@@ -100,7 +100,7 @@ static const int defaultDesktopType = 0;
 
 inline int desktopType2int(const QString &desktopType)
 {
-    int index = desktopTypes.lastIndexOf(desktopType);
+    const int index = desktopTypes.lastIndexOf(desktopType);
     return (index == -1) ? defaultDesktopType : index;
 }
 
@@ -166,8 +166,8 @@ void NxHostPreferences::showDialog()
     connect(nxUi.buttonImportPrivateKey, SIGNAL(pressed()), SLOT(chooseKeyFile()));
     connect(nxUi.kcfg_NxPrivateKey, SIGNAL(textChanged()), SLOT(updatePrivateKey()));
 
-    QString resolutionString = QString::number(width()) + 'x' + QString::number(height());
-    int resolutionIndex = nxUi.resolutionComboBox->findText(resolutionString, Qt::MatchContains);
+    const QString resolutionString = QString::number(width()) + 'x' + QString::number(height());
+    const int resolutionIndex = nxUi.resolutionComboBox->findText(resolutionString, Qt::MatchContains);
     nxUi.resolutionComboBox->setCurrentIndex((resolutionIndex == -1) ? 5 : resolutionIndex);
 
     if (dialog->exec() == KDialog::Accepted) {
@@ -241,7 +241,7 @@ void NxHostPreferences::updatePrivateKey()
 
 void NxHostPreferences::chooseKeyFile()
 {
-    QString fileName = KFileDialog::getOpenFileName(KUrl(QDir::homePath()),
+    const QString fileName = KFileDialog::getOpenFileName(KUrl(QDir::homePath()),
                                                     "*.key|" + i18n("Key Files (*.key)"),
                                                     nxPage, i18n("Open DSA Key File"));
 

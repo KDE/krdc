@@ -36,7 +36,7 @@ TestView::TestView(QWidget *parent, const KUrl &url)
     pal.setColor(QPalette::Dark, Qt::yellow);
     setPalette(pal);
 
-    QSize size = QSize(640, 480);
+    const QSize size = QSize(640, 480);
     setStatus(Connected);
     setFixedSize(size);
     setFixedSize(size);

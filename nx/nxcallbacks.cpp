@@ -64,7 +64,7 @@ void NxCallbacks::resumeSessionsSignal(std::list<nxcl::NXResumeData> sessions)
 {
     QList<nxcl::NXResumeData> qsessions;
 
-    for(std::list<nxcl::NXResumeData>::const_iterator it = sessions.begin(); it != sessions.end(); it++) 
+    for(std::list<nxcl::NXResumeData>::const_iterator it = sessions.begin(); it != sessions.end(); ++it) 
         qsessions << (*it);
     
     emit suspendedSessions(qsessions);

@@ -36,7 +36,7 @@ BookmarkManager::BookmarkManager(KActionCollection *collection, KMenu *menu, Mai
 {
     m_menu = menu;
 
-    QString file = KStandardDirs::locateLocal("data", "krdc/bookmarks.xml");
+    const QString file = KStandardDirs::locateLocal("data", "krdc/bookmarks.xml");
 
     m_manager = KBookmarkManager::managerForFile(file, "krdc");
 
@@ -140,7 +140,7 @@ QList<QPair<QString, QString> > BookmarkManager::currentBookmarkList() const
 
     while (iter.hasNext()) {
         RemoteView *next = iter.next();
-        QString url = next->url().prettyUrl(KUrl::RemoveTrailingSlash);
+        const QString url = next->url().prettyUrl(KUrl::RemoveTrailingSlash);
         list << QPair<QString, QString>(url, url);
     }
 

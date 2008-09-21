@@ -37,7 +37,7 @@ RemoteDesktopsModel::RemoteDesktopsModel(QObject *parent)
 {
     rootItem = new RemoteDesktopsItem(QList<QVariant>() << "Remote desktops");
 
-    QString file = KStandardDirs::locateLocal("data", "krdc/bookmarks.xml");
+    const QString file = KStandardDirs::locateLocal("data", "krdc/bookmarks.xml");
 
     m_manager = KBookmarkManager::managerForFile(file, "krdc");
     m_manager->setUpdate(true);

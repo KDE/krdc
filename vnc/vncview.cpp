@@ -136,8 +136,8 @@ void VncView::scaleResize(int w, int h)
         m_verticalFactor = m_horizontalFactor = qMin(m_verticalFactor, m_horizontalFactor);
 #endif
 
-        qreal newW = m_frame.width() * m_horizontalFactor;
-        qreal newH = m_frame.height() * m_verticalFactor;
+        const qreal newW = m_frame.width() * m_horizontalFactor;
+        const qreal newH = m_frame.height() * m_verticalFactor;
         setMaximumSize(newW, newH); //This is a hack to force Qt to center the view in the scroll area
         resize(newW, newH);
     }
@@ -155,7 +155,7 @@ void VncView::startQuitting()
 {
     kDebug(5011) << "about to quit";
 
-    bool connected = status() == RemoteView::Connected;
+    const bool connected = status() == RemoteView::Connected;
 
     setStatus(Disconnecting);
 
@@ -408,10 +408,10 @@ void VncView::paintEvent(QPaintEvent *event)
         QRect rect = event->rect();
         if (rect.width() != width() || rect.height() != height()) {
             kDebug(5011) << "Partial repaint";
-            int sx = rect.x()/m_horizontalFactor;
-            int sy = rect.y()/m_verticalFactor;
-            int sw = rect.width()/m_horizontalFactor;
-            int sh = rect.height()/m_verticalFactor;
+            const int sx = rect.x()/m_horizontalFactor;
+            const int sy = rect.y()/m_verticalFactor;
+            const int sw = rect.width()/m_horizontalFactor;
+            const int sh = rect.height()/m_verticalFactor;
             painter.drawImage(rect, 
                               m_frame.copy(sx, sy, sw, sh).scaled(rect.width(), rect.height(),
                                                                   Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
@@ -491,8 +491,8 @@ void VncView::wheelEventHandler(QWheelEvent *event)
     else
         eb |= 0x8;
 
-    int x = qRound(event->x() / m_horizontalFactor);
-    int y = qRound(event->y() / m_verticalFactor);
+    const int x = qRound(event->x() / m_horizontalFactor);
+    const int y = qRound(event->y() / m_verticalFactor);
 
     vncThread.mouseEvent(x, y, eb | m_buttonMask);
     vncThread.mouseEvent(x, y, m_buttonMask);
@@ -559,12 +559,12 @@ void VncView::keyEventHandler(QKeyEvent *e)
         k = e->key() - Qt::Key_Dead_Grave + XK_dead_grave;
     }
     
-    bool pressed = (e->type() == QEvent::KeyPress) ? true : false;
+    const bool pressed = (e->type() == QEvent::KeyPress) ? true : false;
     m_modifiersMask = pressed ? m_modifiersMask | mask : m_modifiersMask & ~mask;
 
-    bool hasShift = m_modifiersMask & KMOD_Shift_L;
-    bool hasOtherMod = m_modifiersMask & (KMOD_Alt_R | KMOD_Alt_L | KMOD_Meta_L | KMOD_Control_L);
-    bool isUpper = e->key() >= 'A' && e->key() <= 'Z';
+    const bool hasShift = m_modifiersMask & KMOD_Shift_L;
+    const bool hasOtherMod = m_modifiersMask & (KMOD_Alt_R | KMOD_Alt_L | KMOD_Meta_L | KMOD_Control_L);
+    const bool isUpper = e->key() >= 'A' && e->key() <= 'Z';
     // bool isLower = e->key() >= 'a' && e->key() <= 'z';
     // bool isLetter = isLower || isUpper;
     
@@ -600,7 +600,7 @@ void VncView::clipboardSelectionChanged()
     if (m_clipboard->ownsSelection() || m_dontSendClipboard)
         return;
 
-    QString text = m_clipboard->text(QClipboard::Selection);
+    const QString text = m_clipboard->text(QClipboard::Selection);
 
     vncThread.clientCut(text);
 }
@@ -615,7 +615,7 @@ void VncView::clipboardDataChanged()
     if (m_clipboard->ownsClipboard() || m_dontSendClipboard)
         return;
 
-    QString text = m_clipboard->text(QClipboard::Clipboard);
+    const QString text = m_clipboard->text(QClipboard::Clipboard);
 
     vncThread.clientCut(text);
 }

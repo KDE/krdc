@@ -71,17 +71,16 @@ void NxResumeSessions::clear()
 
 void NxResumeSessions::addSessions(QList<nxcl::NXResumeData> sessions) 
 {
-    QTreeWidgetItem *tmp = NULL;
-
-    for(int i = 0; i < sessions.size(); i++)
+    for(int i = 0; i < sessions.size(); ++i)
     {
-        tmp = new QTreeWidgetItem();
-	tmp->setText(0, QString::number(sessions.at(i).display));
-	tmp->setText(1, QString(sessions.at(i).sessionType.c_str()));
-	tmp->setText(2, QString(sessions.at(i).sessionID.c_str()));
-	tmp->setText(3, QString::number(sessions.at(i).depth));
-	tmp->setText(4, QString(sessions.at(i).screen.c_str()));
-	tmp->setText(5, QString(sessions.at(i).sessionName.c_str()));
+        const nxcl::NXResumeData session = sessions.at(i);
+        QTreeWidgetItem *tmp = new QTreeWidgetItem();
+        tmp->setText(0, QString::number(session.display));
+        tmp->setText(1, QString(session.sessionType.c_str()));
+        tmp->setText(2, QString(session.sessionID.c_str()));
+        tmp->setText(3, QString::number(session.depth));
+        tmp->setText(4, QString(session.screen.c_str()));
+        tmp->setText(5, QString(session.sessionName.c_str()));
 
         nxUi.sessionsList->addTopLevelItem(tmp);
     }

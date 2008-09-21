@@ -287,9 +287,9 @@ void MainWindow::setupActions()
 
 void MainWindow::restoreOpenSessions()
 {
-    QStringList list = Settings::openSessions();
-    QStringList::Iterator it = list.begin();
-    QStringList::Iterator end = list.end();
+    const QStringList list = Settings::openSessions();
+    QStringList::ConstIterator it = list.begin();
+    QStringList::ConstIterator end = list.end();
     while (it != end) {
         newConnection(*it);
         ++it;
@@ -300,7 +300,7 @@ void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConn
 {
     m_switchFullscreenWhenConnected = switchFullscreenWhenConnected;
 
-    KUrl url = newUrl.isEmpty() ? m_addressNavigator->uncommittedUrl() : newUrl;
+    const KUrl url = newUrl.isEmpty() ? m_addressNavigator->uncommittedUrl() : newUrl;
 
     if (!url.isValid() || (url.host().isEmpty() && url.port() < 0)
             || !url.path().isEmpty()) {
@@ -360,7 +360,7 @@ void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConn
 
     QScrollArea *scrollArea = createScrollArea(m_tabWidget, m_remoteViewList.at(m_remoteViewList.count() - 1));
 
-    int newIndex = m_tabWidget->addTab(scrollArea, KIcon("krdc"), url.prettyUrl(KUrl::RemoveTrailingSlash));
+    const int newIndex = m_tabWidget->addTab(scrollArea, KIcon("krdc"), url.prettyUrl(KUrl::RemoveTrailingSlash));
     m_tabWidget->setCurrentIndex(newIndex);
     tabChanged(newIndex); // force to update m_currentRemoteView (tabChanged is not emitted when start page has been disabled)
 
@@ -369,11 +369,11 @@ void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConn
 
 void MainWindow::openFromDockWidget(const QModelIndex &index)
 {
-    QString data = index.data(Qt::UserRole).toString();
+    const QString data = index.data(Qt::UserRole).toString();
     if (!data.isEmpty()) {
-        KUrl url(data);
+        const KUrl url(data);
         // first check if url has already been opened; in case show the tab
-        for (int i = 0; i < m_remoteViewList.count(); i++) {
+        for (int i = 0; i < m_remoteViewList.count(); ++i) {
             if (m_remoteViewList.at(i)->url() == url) {
                 int numNonRemoteView = 0;
                 if (m_showStartPage)
@@ -401,12 +401,12 @@ void MainWindow::resizeTabWidget(int w, int h)
         kDebug(5010) << "tabwidget border: w: " << m_leftRightBorder << ", h: " << m_topBottomBorder;
     }
 
-    int newTabWidth = w + m_leftRightBorder;
-    int newTabHeight = h + m_topBottomBorder;
+    const int newTabWidth = w + m_leftRightBorder;
+    const int newTabHeight = h + m_topBottomBorder;
 
-    QSize newWindowSize = size() - m_tabWidget->size() + QSize(newTabWidth, newTabHeight);
+    const QSize newWindowSize = size() - m_tabWidget->size() + QSize(newTabWidth, newTabHeight);
 
-    QSize desktopSize = QSize(QApplication::desktop()->availableGeometry().width(),
+    const QSize desktopSize = QSize(QApplication::desktop()->availableGeometry().width(),
                               QApplication::desktop()->availableGeometry().height());
 
     if ((newWindowSize.height() >= desktopSize.height()) || (newWindowSize.width() >= desktopSize.width())) {
@@ -430,7 +430,7 @@ void MainWindow::statusChanged(RemoteView::RemoteStatus status)
     if (status == RemoteView::Disconnecting || status == RemoteView::Disconnected)
         return;
 
-    QString host = m_remoteViewList.at(m_currentRemoteView)->host();
+    const QString host = m_remoteViewList.at(m_currentRemoteView)->host();
 
     QString iconName = "krdc";
     QString message;
@@ -471,7 +471,7 @@ void MainWindow::statusChanged(RemoteView::RemoteStatus status)
 
 void MainWindow::takeScreenshot()
 {
-    QPixmap snapshot = QPixmap::grabWidget(m_remoteViewList.at(m_currentRemoteView));
+    const QPixmap snapshot = QPixmap::grabWidget(m_remoteViewList.at(m_currentRemoteView));
 
     QApplication::clipboard()->setPixmap(snapshot);
 }
@@ -489,7 +489,7 @@ void MainWindow::switchFullscreen()
 
         QScrollArea *scrollArea = createScrollArea(m_tabWidget, m_remoteViewList.at(m_currentRemoteView));
 
-        int currentTab = m_tabWidget->currentIndex();
+        const int currentTab = m_tabWidget->currentIndex();
         m_tabWidget->insertTab(currentTab, scrollArea, m_tabWidget->tabIcon(currentTab), m_tabWidget->tabText(currentTab));
         m_tabWidget->removeTab(m_tabWidget->currentIndex());
         m_tabWidget->setCurrentIndex(currentTab);
@@ -575,7 +575,7 @@ void MainWindow::disconnect()
 
 void MainWindow::closeTab(QWidget *widget)
 {
-    int index = m_tabWidget->indexOf(widget);
+    const int index = m_tabWidget->indexOf(widget);
 
     kDebug(5010) << index;
 
@@ -779,14 +779,14 @@ void MainWindow::updateConfiguration()
         numNonRemoteView++;
     if (m_zeroconfPage)
         numNonRemoteView++;
-    for (int i = numNonRemoteView; i < m_tabWidget->count(); i++) {
+    for (int i = numNonRemoteView; i < m_tabWidget->count(); ++i) {
         QPalette palette = m_tabWidget->widget(i)->palette();
         palette.setColor(QPalette::Dark, Settings::backgroundColor());
         m_tabWidget->widget(i)->setPalette(palette);
     }
     
     // Send update configuration message to all views
-    for (int i = 0; i < m_remoteViewList.count(); i++) {
+    for (int i = 0; i < m_remoteViewList.count(); ++i) {
         m_remoteViewList.at(i)->updateConfiguration();
     }
 
@@ -794,7 +794,7 @@ void MainWindow::updateConfiguration()
 
 void MainWindow::quit()
 {
-    bool haveRemoteConnections = m_remoteViewList.count();
+    const bool haveRemoteConnections = !m_remoteViewList.isEmpty();
     if (!haveRemoteConnections || KMessageBox::warningContinueCancel(this,
                                            i18n("Are you sure you want to quit the KDE Remote Desktop Client?"),
                                            i18n("Confirm Quit"),
@@ -803,7 +803,7 @@ void MainWindow::quit()
 
         if (Settings::rememberSessions()) { // remember open remote views for next startup
             QStringList list;
-            for (int i = 0; i < m_remoteViewList.count(); i++) {
+            for (int i = 0; i < m_remoteViewList.count(); ++i) {
                 kDebug(5010) << m_remoteViewList.at(i)->url();
                 list.append(m_remoteViewList.at(i)->url().prettyUrl(KUrl::RemoveTrailingSlash));
             }
@@ -864,7 +864,7 @@ void MainWindow::tabChanged(int index)
 
     m_currentRemoteView = index - numNonRemoteView;
 
-    QString tabTitle = m_tabWidget->tabText(index).remove('&');
+    const QString tabTitle = m_tabWidget->tabText(index).remove('&');
 
     setCaption(tabTitle == i18n("Start Page") ? QString() : tabTitle);
 

@@ -29,7 +29,7 @@
 
 #include <QDesktopWidget>
 
-static QStringList keymaps = (QStringList()
+static const QStringList keymaps = (QStringList()
     << "ar"
     << "cs"
     << "da"
@@ -73,7 +73,7 @@ static const int defaultKeymap = 7; // en-us
 
 inline int keymap2int(const QString &keymap)
 {
-    int index = keymaps.lastIndexOf(keymap);
+    const int index = keymaps.lastIndexOf(keymap);
     return (index == -1) ? defaultKeymap : index;
 }
 
@@ -131,8 +131,8 @@ void RdpHostPreferences::showDialog()
 
     connect(rdpUi.resolutionComboBox, SIGNAL(currentIndexChanged(int)), SLOT(updateWidthHeight(int)));
 
-    QString resolutionString = QString::number(width()) + 'x' + QString::number(height());
-    int resolutionIndex = rdpUi.resolutionComboBox->findText(resolutionString, Qt::MatchContains);
+    const QString resolutionString = QString::number(width()) + 'x' + QString::number(height());
+    const int resolutionIndex = rdpUi.resolutionComboBox->findText(resolutionString, Qt::MatchContains);
     rdpUi.resolutionComboBox->setCurrentIndex((resolutionIndex == -1) ? 5 : resolutionIndex);
 
     if (dialog->exec() == KDialog::Accepted) {
@@ -182,7 +182,7 @@ void RdpHostPreferences::updateWidthHeight(int index)
         break;
     }
 
-    bool enabled = (index == 6) ? true : false;
+    const bool enabled = (index == 6) ? true : false;
 
     rdpUi.kcfg_Height->setEnabled(enabled);
     rdpUi.kcfg_Width->setEnabled(enabled);

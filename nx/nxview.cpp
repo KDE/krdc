@@ -87,7 +87,7 @@ void NxView::startQuitting()
 {
     kDebug(5013) << "about to quit";
 
-    bool connected = status() == RemoteView::Connected;
+    const bool connected = status() == RemoteView::Connected;
     setStatus(Disconnecting);
     m_quitFlag = true;
 
@@ -120,7 +120,7 @@ bool NxView::start()
     if (m_hostPreferences->walletSupport()) {
         if (m_url.userName().isEmpty()) {
             QString userName;
-            bool ok = true;
+            bool ok = false;
 
             userName = KInputDialog::getText(i18n("Enter Username"),
                                              i18n("Please enter the username you would like to use for login."),
@@ -252,7 +252,7 @@ void NxView::connectionOpened()
 {
     kDebug(5013) << "Connection opened";
     QSize size(m_hostPreferences->width(), m_hostPreferences->height());
-    kDebug(5013) << "Size hint: " << size.width() << " " << size.height();
+    kDebug(5013) << "Size hint: " << size.width() << size.height();
     setStatus(Connected);
     setFixedSize(size);
     resize(size);

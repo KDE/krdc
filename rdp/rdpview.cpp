@@ -116,7 +116,7 @@ bool RdpView::start()
     if (m_hostPreferences->walletSupport()) {
         if (m_url.userName().isEmpty()) {
             QString userName;
-            bool ok = true;
+            bool ok = false;
 
             userName = KInputDialog::getText(i18n("Enter Username"),
                                              i18n("Please enter the username you would like to use for login."),
@@ -127,7 +127,7 @@ bool RdpView::start()
         }
 
         if (!m_url.userName().isEmpty()) {
-            bool useLdapLogin = Settings::recognizeLdapLogins() && m_url.userName().contains('\\');
+            const bool useLdapLogin = Settings::recognizeLdapLogins() && m_url.userName().contains('\\');
             kDebug(5012) << "Is LDAP login:" << useLdapLogin << m_url.userName();
             QString walletPassword = readWalletPassword(useLdapLogin);
 
@@ -179,7 +179,7 @@ bool RdpView::start()
     arguments << "-r" << "sound:" + sound;
 
     if (!m_hostPreferences->extraOptions().isEmpty()) {
-        QStringList additionalArguments = m_hostPreferences->extraOptions().split(' ');
+        const QStringList additionalArguments = m_hostPreferences->extraOptions().split(' ');
         arguments += additionalArguments;
     }
 
@@ -209,7 +209,7 @@ void RdpView::switchFullscreen(bool on)
 void RdpView::connectionOpened()
 {
     kDebug(5012) << "Connection opened";
-    QSize size = m_container->minimumSizeHint();
+    const QSize size = m_container->minimumSizeHint();
     kDebug(5012) << "Size hint: " << size.width() << " " << size.height();
     setStatus(Connected);
     setFixedSize(size);
@@ -255,7 +255,7 @@ void RdpView::processError(QProcess::ProcessError error)
 
 void RdpView::receivedStandardError()
 {
-    QString output(m_process->readAllStandardError());
+    const QString output(m_process->readAllStandardError());
     QString line;
     int i = 0;
     while (!(line = output.section('\n', i, i)).isEmpty()) {

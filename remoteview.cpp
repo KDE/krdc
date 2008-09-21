@@ -78,7 +78,7 @@ void RemoteView::setStatus(RemoteView::RemoteStatus s)
             }
             // smooth state transition
             RemoteStatus origState = m_status;
-            for (int i = origState; i < s; i++) {
+            for (int i = origState; i < s; ++i) {
                 m_status = (RemoteStatus) i;
                 emit statusChanged((RemoteStatus) i);
             }
