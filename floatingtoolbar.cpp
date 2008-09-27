@@ -29,6 +29,7 @@
 
 #include <QApplication>
 #include <QBitmap>
+#include <QDesktopWidget>
 #include <QMouseEvent>
 #include <QPainter>
 #include <QTimer>
@@ -53,7 +54,15 @@ class FloatingToolBarPrivate
 {
 public:
     FloatingToolBarPrivate(FloatingToolBar *qq)
-            : q(qq) {
+            : q(qq)
+            , anchorSide(FloatingToolBar::Left)
+            , offsetPlaceHolder(new QWidget(qq))
+            , animState(Still)
+            , toDelete(false)
+            , visible(false)
+            , sticky(false)
+            , opacity(toolBarOpacity)
+            , queuedShow(false) {
     }
 
     // rebuild contents and reposition then widget
@@ -78,6 +87,7 @@ public:
     bool visible;
     bool sticky;
     qreal opacity;
+    bool queuedShow;
 
     QPixmap backgroundPixmap;
 };
@@ -85,18 +95,12 @@ public:
 FloatingToolBar::FloatingToolBar(QWidget *parent, QWidget *anchorWidget)
         : QToolBar(parent), d(new FloatingToolBarPrivate(this))
 {
-    d->offsetPlaceHolder = new QWidget(this);
+    ;
     addWidget(d->offsetPlaceHolder);
 
     setMouseTracking(true);
     setIconSize(QSize(actionIconSize, actionIconSize));
     d->anchorWidget = anchorWidget;
-    d->anchorSide = Left;
-    d->animState = Still;
-    d->toDelete = false;
-    d->visible = false;
-    d->sticky = false;
-    d->opacity = toolBarOpacity;
 
     d->animTimer = new QTimer(this);
     connect(d->animTimer, SIGNAL(timeout()), this, SLOT(animate()));
@@ -141,6 +145,13 @@ void FloatingToolBar::setSticky(bool sticky)
 
 void FloatingToolBar::showAndAnimate()
 {
+    QDesktopWidget *desktop = QApplication::desktop();
+    int currentScreen = desktop->screenNumber(d->anchorWidget);
+    if ((d->anchorWidget->size() != desktop->screenGeometry(currentScreen).size())) {
+        kDebug(5010) << "anchorWidget not fullscreen yet";
+        d->queuedShow = true;
+        return;
+    }
     if (d->animState == Showing)
         return;
 
@@ -204,8 +215,14 @@ void FloatingToolBar::hide()
 
 bool FloatingToolBar::eventFilter(QObject *obj, QEvent *e)
 {
-    // if anchorWidget changed geometry reposition toolbar
     if (obj == d->anchorWidget && e->type() == QEvent::Resize) {
+        if (d->queuedShow) { // if the toolbar is not visible yet, try to show it if the anchor widget is in fullscreen already
+            d->queuedShow = false;
+            showAndAnimate();
+            return true;
+        }
+        
+        // if anchorWidget changed geometry reposition toolbar
         d->animTimer->stop();
         if ((d->animState == Hiding || !d->visible) && d->toDelete)
             deleteLater();
@@ -213,7 +230,7 @@ bool FloatingToolBar::eventFilter(QObject *obj, QEvent *e)
             d->reposition();
     }
 
-    return false;
+    return QToolBar::eventFilter(obj, e);
 }
 
 void FloatingToolBar::paintEvent(QPaintEvent *e)
