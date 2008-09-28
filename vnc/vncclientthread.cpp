@@ -321,7 +321,7 @@ void KeyClientEvent::fire(rfbClient* cl)
 
 void ClientCutEvent::fire(rfbClient* cl)
 {
-    SendClientCutText(cl, text, qstrlen(text));
+    SendClientCutText(cl, strdup(text.toUtf8().constData()), text.size());
 }
 
 void VncClientThread::mouseEvent(int x, int y, int buttonMask)
@@ -348,7 +348,7 @@ void VncClientThread::clientCut(const QString &text)
     if (m_stopped)
         return;
 
-    m_eventQueue.enqueue(new ClientCutEvent(strdup(text.toUtf8())));
+    m_eventQueue.enqueue(new ClientCutEvent(text));
 }
 
 #ifndef QTONLY
