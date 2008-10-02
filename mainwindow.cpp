@@ -687,6 +687,13 @@ void MainWindow::showRemoteViewToolbar()
     m_toolBar->showAndAnimate();
 }
 
+void setActionStatus(QAction* action, bool enabled, bool visible, bool checked) 
+{
+    action->setEnabled(enabled);
+    action->setVisible(visible);
+    action->setChecked(checked);
+}
+
 void MainWindow::updateActionStatus()
 {
     kDebug(5010) << m_tabWidget->currentIndex();
@@ -702,32 +709,31 @@ void MainWindow::updateActionStatus()
     else
         enabled = true;
 
+    RemoteView* view = m_currentRemoteView >= 0 ? m_remoteViewList.at(m_currentRemoteView) : NULL;
+    
     actionCollection()->action("switch_fullscreen")->setEnabled(enabled);
     actionCollection()->action("take_screenshot")->setEnabled(enabled);
-    actionCollection()->action("view_only")->setEnabled(enabled);
-    actionCollection()->action("grab_all_keys")->setEnabled(enabled);
-    actionCollection()->action("scale")->setEnabled(enabled);
     actionCollection()->action("disconnect")->setEnabled(enabled);
 
-    bool viewOnlyChecked = false;
-    if (m_currentRemoteView >= 0)
-        viewOnlyChecked = enabled && m_remoteViewList.at(m_currentRemoteView)->viewOnly();
-    actionCollection()->action("view_only")->setChecked(viewOnlyChecked);
+    setActionStatus(actionCollection()->action("view_only"),
+                    enabled, 
+                    true,
+                    view ? view->viewOnly() : false);
+                       
+    setActionStatus(actionCollection()->action("show_local_cursor"),
+                    enabled, 
+                    view ? view->supportsLocalCursor() : false,
+                    view ? view->dotCursorState() == RemoteView::CursorOn : false);
 
-    bool showLocalCursorChecked = false;
-    if (m_currentRemoteView >= 0)
-        showLocalCursorChecked = enabled && m_remoteViewList.at(m_currentRemoteView)->dotCursorState() == RemoteView::CursorOn;
-    actionCollection()->action("show_local_cursor")->setChecked(showLocalCursorChecked);
-
-    bool showLocalCursorVisible = false;
-    if (m_currentRemoteView >= 0)
-        showLocalCursorVisible = enabled && m_remoteViewList.at(m_currentRemoteView)->supportsLocalCursor();
-    actionCollection()->action("show_local_cursor")->setVisible(showLocalCursorVisible);
-
-    bool scaleVisible = false;
-    if (m_currentRemoteView >= 0)
-        scaleVisible = enabled && m_remoteViewList.at(m_currentRemoteView)->supportsScaling();
-    actionCollection()->action("scale")->setVisible(scaleVisible);
+    setActionStatus(actionCollection()->action("scale"),
+                    enabled,
+                    view ? view->supportsScaling() : false,
+                    view ? view->scaling() : false);
+                       
+    setActionStatus(actionCollection()->action("grab_all_keys"),
+                    enabled,
+                    enabled,
+                    view ? view->grabAllKeys() : false);
 }
 
 void MainWindow::preferences()
