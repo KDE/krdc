@@ -35,6 +35,7 @@
 
 RdpView::RdpView(QWidget *parent,
                  const KUrl &url,
+                 KConfigGroup configGroup,
                  const QString &user, const QString &password,
                  int flags, const QString &domain,
                  const QString &shell, const QString &directory)
@@ -58,6 +59,8 @@ RdpView::RdpView(QWidget *parent,
 
     m_container = new QX11EmbedContainer(this);
     m_container->installEventFilter(this);
+    
+    m_hostPreferences = new RdpHostPreferences(configGroup, this);
 }
 
 RdpView::~RdpView()
@@ -109,8 +112,6 @@ bool RdpView::isQuitting()
 
 bool RdpView::start()
 {
-    m_hostPreferences = new RdpHostPreferences(m_url.prettyUrl(KUrl::RemoveTrailingSlash), false, this);
-
     m_container->show();
 
     if (m_hostPreferences->walletSupport()) {
@@ -197,6 +198,11 @@ bool RdpView::start()
     m_process->start("rdesktop", arguments);
 
     return true;
+}
+
+HostPreferences* RdpView::hostPreferences()
+{
+    return m_hostPreferences;
 }
 
 void RdpView::switchFullscreen(bool on)

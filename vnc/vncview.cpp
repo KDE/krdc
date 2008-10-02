@@ -51,7 +51,7 @@
 #define KMOD_Control_L 	0x08
 #define KMOD_Shift_L	0x10
 
-VncView::VncView(QWidget *parent, const KUrl &url)
+VncView::VncView(QWidget *parent, const KUrl &url, KConfigGroup configGroup)
         : RemoteView(parent),
         m_initDone(false),
         m_buttonMask(0),
@@ -77,6 +77,10 @@ VncView::VncView(QWidget *parent, const KUrl &url)
     m_clipboard = QApplication::clipboard();
     connect(m_clipboard, SIGNAL(selectionChanged()), this, SLOT(clipboardSelectionChanged()));
     connect(m_clipboard, SIGNAL(dataChanged()), this, SLOT(clipboardDataChanged()));
+    
+#ifndef QTONLY
+    m_hostPreferences = new VncHostPreferences(configGroup, this);
+#endif
 }
 
 VncView::~VncView()
@@ -123,6 +127,8 @@ QSize VncView::minimumSizeHint() const
 
 void VncView::scaleResize(int w, int h)
 {
+    RemoteView::scaleResize(w, h);
+    
     kDebug(5011) << w << h;
     if (m_scale) {
         m_verticalFactor = (qreal) h / m_frame.height();
@@ -140,7 +146,7 @@ void VncView::scaleResize(int w, int h)
         const qreal newH = m_frame.height() * m_verticalFactor;
         setMaximumSize(newW, newH); //This is a hack to force Qt to center the view in the scroll area
         resize(newW, newH);
-    }
+    } 
 }
 
 void VncView::updateConfiguration()
@@ -186,7 +192,6 @@ bool VncView::start()
     quality = (RemoteView::Quality)((QCoreApplication::arguments().count() > 2) ?
         QCoreApplication::arguments().at(2).toInt() : 2);
 #else
-    m_hostPreferences = new VncHostPreferences(m_url.prettyUrl(KUrl::RemoveTrailingSlash), false, this);
     quality = m_hostPreferences->quality();
 #endif
 
@@ -289,9 +294,16 @@ void VncView::outputErrorMessage(const QString &message)
     emit errorMessage(i18n("VNC failure"), message);
 }
 
+#ifndef QTONLY
+HostPreferences* VncView::hostPreferences()
+{
+    return m_hostPreferences;
+}
+#endif
+
 void VncView::updateImage(int x, int y, int w, int h)
 {
-//     kDebug(5011) << "got update";
+//     kDebug(5011) << "got update" << width() << height();
 
     m_x = x;
     m_y = y;
@@ -317,10 +329,15 @@ void VncView::updateImage(int x, int y, int w, int h)
 
         setMouseTracking(true); // get mouse events even when there is no mousebutton pressed
         setFocusPolicy(Qt::WheelFocus);
-        resize(m_frame.width(), m_frame.height());
         setStatus(Connected);
-        emit changeSize(m_frame.width(), m_frame.height());
+//         emit changeSize(m_frame.width(), m_frame.height());
         emit connected();
+        
+        if (m_scale) {
+            if (parentWidget())
+                scaleResize(parentWidget()->width(), parentWidget()->height());
+        } 
+        
         m_initDone = true;
 
 #ifndef QTONLY
@@ -330,8 +347,16 @@ void VncView::updateImage(int x, int y, int w, int h)
 #endif
     }
 
-    if (!m_scale && (y == 0 && x == 0) && (m_frame.size() != size())) {
-        resize(m_frame.width(), m_frame.height());
+    if ((y == 0 && x == 0) && (m_frame.size() != size())) {
+        kDebug(5011) << "Updating framebuffer size";
+        if (m_scale) {
+            setMaximumSize(QSize(QWIDGETSIZE_MAX, QWIDGETSIZE_MAX));
+        } else {
+            kDebug(5011) << "Resizing: " << m_frame.width() << m_frame.height();
+            resize(m_frame.width(), m_frame.height());
+            setMaximumSize(m_frame.width(), m_frame.height()); //This is a hack to force Qt to center the view in the scroll area
+            setMinimumSize(m_frame.width(), m_frame.height());
+        }
         emit changeSize(m_frame.width(), m_frame.height());
     }
 
@@ -363,6 +388,7 @@ void VncView::enableScaling(bool scale)
 
     if (scale) {
         setMaximumSize(QSize(QWIDGETSIZE_MAX, QWIDGETSIZE_MAX));
+        setMinimumSize(1, 1);
         if (parentWidget())
             scaleResize(parentWidget()->width(), parentWidget()->height());
     } else {
@@ -370,8 +396,8 @@ void VncView::enableScaling(bool scale)
         m_horizontalFactor = 1.0;
 
         setMaximumSize(m_frame.width(), m_frame.height()); //This is a hack to force Qt to center the view in the scroll area
+        setMinimumSize(m_frame.width(), m_frame.height());
         resize(m_frame.width(), m_frame.height());
-        emit changeSize(m_frame.width(), m_frame.height());
     }
 }
 
@@ -407,7 +433,7 @@ void VncView::paintEvent(QPaintEvent *event)
 //         kDebug(5011) << "resize repaint";
         QRect rect = event->rect();
         if (rect.width() != width() || rect.height() != height()) {
-            kDebug(5011) << "Partial repaint";
+//             kDebug(5011) << "Partial repaint";
             const int sx = rect.x()/m_horizontalFactor;
             const int sy = rect.y()/m_verticalFactor;
             const int sw = rect.width()/m_horizontalFactor;
@@ -416,7 +442,7 @@ void VncView::paintEvent(QPaintEvent *event)
                               m_frame.copy(sx, sy, sw, sh).scaled(rect.width(), rect.height(),
                                                                   Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
         } else {
-            kDebug(5011) << "Full repaint";
+//             kDebug(5011) << "Full repaint" << width() << height() << m_frame.width() << m_frame.height();
             painter.drawImage(QRect(0, 0, width(), height()), 
                               m_frame.scaled(m_frame.width() * m_horizontalFactor, m_frame.height() * m_verticalFactor,
                                              Qt::IgnoreAspectRatio, Qt::SmoothTransformation));

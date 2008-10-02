@@ -32,7 +32,7 @@ class RdpHostPreferences : public HostPreferences
     Q_OBJECT
 
 public:
-    explicit RdpHostPreferences(const QString &url, bool forceShow = false, QObject *parent = 0);
+    explicit RdpHostPreferences(KConfigGroup configGroup, QObject *parent = 0);
     ~RdpHostPreferences();
 
     void setHeight(int height);
@@ -49,17 +49,10 @@ public:
     QString extraOptions() const;
 
 protected:
-    void showDialog();
-    void readProtocolSpecificConfig();
-    void saveProtocolSpecificConfig();
+    QWidget* createProtocolSpecificConfigPage();
+    void acceptConfig();
 
 private:
-    int m_height;
-    int m_width;
-    int m_colorDepth;
-    QString m_keyboardLayout;
-    int m_sound;
-    QString m_extraOptions;
     Ui::RdpPreferences rdpUi;
 
 private slots:

@@ -58,6 +58,8 @@ public slots:
 
 protected:
     virtual void closeEvent(QCloseEvent *event);
+    virtual void saveProperties(KConfigGroup &group);
+    void saveHostPrefs();
 
 private slots:
     void restoreOpenSessions();

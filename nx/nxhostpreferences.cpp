@@ -112,39 +112,19 @@ inline QString int2desktopType(int index)
         return desktopTypes.at(defaultDesktopType);
 }
 
-NxHostPreferences::NxHostPreferences(const QString &url, bool forceShow, QObject *parent)
-  : HostPreferences(url, parent),
-    m_height(600),
-    m_width(800),
-    m_desktopType("unix-kde"),
-    m_keyboardLayout("en-us"),
-    m_privateKey("default")
+NxHostPreferences::NxHostPreferences(KConfigGroup configGroup, QObject *parent)
+  : HostPreferences(configGroup, parent)
 {
-    if (hostConfigured()) {
-        if (showConfigAgain() || forceShow) {
-            kDebug(5013) << "Show config dialog again";
-            showDialog();
-        } else
-            return; // no changes, no need to save
-    } else {
-        kDebug(5013) << "No config found, create new";
-        if (Settings::showPreferencesForNewConnections())
-            showDialog();
-    }
-
-    saveConfig();
 }
 
 NxHostPreferences::~NxHostPreferences()
 {
 }
 
-void NxHostPreferences::showDialog()
+QWidget* NxHostPreferences::createProtocolSpecificConfigPage()
 {
     nxPage = new QWidget();
     nxUi.setupUi(nxPage);
-
-    KDialog *dialog = createDialog(nxPage);
 
     nxUi.kcfg_NxHeight->setValue(height());
     nxUi.kcfg_NxWidth->setValue(width());
@@ -170,14 +150,7 @@ void NxHostPreferences::showDialog()
     const int resolutionIndex = nxUi.resolutionComboBox->findText(resolutionString, Qt::MatchContains);
     nxUi.resolutionComboBox->setCurrentIndex((resolutionIndex == -1) ? 5 : resolutionIndex);
 
-    if (dialog->exec() == KDialog::Accepted) {
-        kDebug(5013) << "NxHostPreferences config dialog accepted";
-
-        setHeight(nxUi.kcfg_NxHeight->value());
-        setWidth(nxUi.kcfg_NxWidth->value());
-        setDesktopType(int2desktopType(nxUi.kcfg_NxDesktopType->currentIndex()));
-        setKeyboardLayout(int2keymap(nxUi.kcfg_NxKeyboardLayout->currentIndex()));
-    }
+    return nxPage;
 }
 
 void NxHostPreferences::updateWidthHeight(int index)
@@ -257,100 +230,69 @@ void NxHostPreferences::chooseKeyFile()
     setPrivateKey(QString(key));
 }
 
-void NxHostPreferences::readProtocolSpecificConfig()
+void NxHostPreferences::acceptConfig()
 {
-    kDebug(5013) << "NxHostPreferences::readProtocolSpecificConfig";
-
-    if (m_element.firstChildElement("height") != QDomElement())
-        setHeight(m_element.firstChildElement("height").text().toInt());
-    else
-        setHeight(Settings::nxHeight());
-
-    if (m_element.firstChildElement("width") != QDomElement())
-        setWidth(m_element.firstChildElement("width").text().toInt());
-    else
-        setWidth(Settings::nxWidth());
-
-    if (m_element.firstChildElement("desktopType") != QDomElement())
-        setDesktopType(int2desktopType(m_element.firstChildElement("desktopType").text().toInt()));
-    else
-        setDesktopType(int2desktopType(Settings::nxDesktopType()));
-
-    if (m_element.firstChildElement("keyboardLayout") != QDomElement())
-        setKeyboardLayout(int2keymap(m_element.firstChildElement("keyboardLayout").text().toInt()));
-    else
-        setKeyboardLayout(int2keymap(Settings::nxKeyboardLayout()));
-
-    if (m_element.firstChildElement("privateKey") != QDomElement())
-        setPrivateKey(m_element.firstChildElement("privateKey").text());
-    else
-        setPrivateKey(Settings::nxPrivateKey());
-}
-
-void NxHostPreferences::saveProtocolSpecificConfig()
-{
-    kDebug(5013) << "NxHostPreferences::saveProtocolSpecificConfig";
-
-    updateElement("height", QString::number(height()));
-    updateElement("width", QString::number(width()));
-    updateElement("desktopType", QString::number(desktopType2int(desktopType())));
-    updateElement("keyboardLayout", QString::number(keymap2int(keyboardLayout())));
-    updateElement("privateKey", privateKey());
+    HostPreferences::acceptConfig();
+    
+    setHeight(nxUi.kcfg_NxHeight->value());
+    setWidth(nxUi.kcfg_NxWidth->value());
+    setDesktopType(int2desktopType(nxUi.kcfg_NxDesktopType->currentIndex()));
+    setKeyboardLayout(int2keymap(nxUi.kcfg_NxKeyboardLayout->currentIndex()));
 }
 
 void NxHostPreferences::setHeight(int height)
 {
     if (height >= 0)
-        m_height = height;
+        m_configGroup.writeEntry("height", height);
 }
 
 int NxHostPreferences::height()
 {
-    return m_height;
+    return m_configGroup.readEntry("height", Settings::nxHeight());
 }
 
 void NxHostPreferences::setWidth(int width)
 {
     if (width >= 0)
-        m_width = width;
+        m_configGroup.writeEntry("width", width);
 }
 
 int NxHostPreferences::width()
 {
-    return m_width;
+    return m_configGroup.readEntry("width", Settings::nxWidth());
 }
 
 void NxHostPreferences::setDesktopType(const QString &desktopType)
 {
     if (!desktopType.isNull())
-        m_desktopType = desktopType;
+        m_configGroup.writeEntry("desktopType", desktoptype2int(desktopType));
 }
 
 QString NxHostPreferences::desktopType() const
 {
-    return m_desktopType;
+    return int2desktopType(m_configGroup.readEntry("desktopType", Settings::nxDesktopType()));
 }
 
 void NxHostPreferences::setKeyboardLayout(const QString &keyboardLayout)
 {
     if (!keyboardLayout.isNull())
-        m_keyboardLayout = keyboardLayout;
+        m_configGroup.writeEntry("keyboardLayout", keymap2int(keyboardLayout));
 }
 
 QString NxHostPreferences::keyboardLayout() const
 {
-    return m_keyboardLayout;
+    return int2keymap(m_configGroup.readEntry("keyboardLayout", Settings::nxKeyboardLayout()));
 }
 
 void NxHostPreferences::setPrivateKey(const QString &privateKey)
 {
     if(!privateKey.isNull())
-	    m_privateKey = privateKey;
+        m_configGroup.writeEntry("privateKey", privateKey);
 }
 
 QString NxHostPreferences::privateKey() const
 {
-    return m_privateKey;
+    return m_configGroup.readEntry("privateKey", Settings::nxPrivateKey());
 }
 
 #include "nxhostpreferences.moc"

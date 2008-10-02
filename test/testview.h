@@ -42,6 +42,7 @@ public:
 
     virtual bool isQuitting();
     virtual bool start();
+    HostPreferences* hostPreferences();
 
 public slots:
     virtual void switchFullscreen(bool on);

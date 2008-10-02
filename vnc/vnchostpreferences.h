@@ -25,25 +25,26 @@
 #define VNCHOSTPREFERENCES_H
 
 #include "hostpreferences.h"
+#include "ui_vncpreferences.h"
 
 class VncHostPreferences : public HostPreferences
 {
     Q_OBJECT
 
 public:
-    explicit VncHostPreferences(const QString &url, bool forceShow = false, QObject *parent = 0);
+    explicit VncHostPreferences(KConfigGroup configGroup, QObject *parent = 0);
     ~VncHostPreferences();
 
     void setQuality(RemoteView::Quality quality);
     RemoteView::Quality quality();
 
 protected:
-    void showDialog();
-    void readProtocolSpecificConfig();
-    void saveProtocolSpecificConfig();
+    void acceptConfig();
+
+    virtual QWidget* createProtocolSpecificConfigPage();
 
 private:
-    RemoteView::Quality m_quality;
+    Ui::VncPreferences vncUi;
 };
 
 #endif

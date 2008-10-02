@@ -33,7 +33,7 @@
 #include <QEvent>
 #include <QMetaType>
 
-NxView::NxView(QWidget *parent, const KUrl &url)
+NxView::NxView(QWidget *parent, const KUrl &url, KConfigGroup configGroup)
         : RemoteView(parent),
         m_quitFlag(false),
 	m_container(NULL),
@@ -60,6 +60,8 @@ NxView::NxView(QWidget *parent, const KUrl &url)
     connect(&m_callbacks, SIGNAL(atCapacity()), this, SLOT(handleAtCapacity()));
     connect(&m_resumeSessions, SIGNAL(newSession()), this, SLOT(handleNewSession()));
     connect(&m_resumeSessions, SIGNAL(resumeSession(QString)), this, SLOT(handleResumeSession(QString)));
+    
+    m_hostPreferences = new NxHostPreferences(configGroup, this);
 }
 
 NxView::~NxView()
@@ -108,8 +110,6 @@ bool NxView::isQuitting()
 
 bool NxView::start()
 {
-    m_hostPreferences = new NxHostPreferences(m_url.prettyUrl(KUrl::RemoveTrailingSlash), false, this);
-
     m_clientThread.setResolution(m_hostPreferences->width(), m_hostPreferences->height());
     m_clientThread.setDesktopType(m_hostPreferences->desktopType());
     m_clientThread.setKeyboardLayout(m_hostPreferences->keyboardLayout());
@@ -161,6 +161,11 @@ bool NxView::start()
     connect(m_container, SIGNAL(clientClosed()), SLOT(connectionClosed()));
     
     return true;
+}
+
+HostPreferences* NxView::hostPreferences()
+{
+    return m_hostPreferences;
 }
 
 QSize NxView::framebufferSize()

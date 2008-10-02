@@ -32,7 +32,7 @@ class NxHostPreferences : public HostPreferences
     Q_OBJECT
 
 public:
-    explicit NxHostPreferences(const QString &url, bool forceShow = false, QObject *parent = 0);
+    explicit NxHostPreferences(KConfigGroup configGroup, QObject *parent = 0);
     ~NxHostPreferences();
 
     void setHeight(int height);
@@ -47,16 +47,10 @@ public:
     QString privateKey() const;
 
 protected:
-    void showDialog();
-    void readProtocolSpecificConfig();
-    void saveProtocolSpecificConfig();
+    QWidget* createProtocolSpecificConfigPage();
+    void acceptConfig();
 
 private:
-    int m_height;
-    int m_width;
-    QString m_desktopType;
-    QString m_keyboardLayout;
-    QString m_privateKey;
     Ui::NxPreferences nxUi;
     QWidget *nxPage;
 

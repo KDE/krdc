@@ -35,6 +35,8 @@
 
 #include <QWidget>
 
+class HostPreferences;
+
 /**
  * Generic widget that displays a remote framebuffer.
  * Implement this if you want to add another backend.
@@ -242,7 +244,14 @@ public:
      * The default implementation does nothing.
      */
     virtual void updateConfiguration();
-
+    
+#ifndef QTONLY
+    /**
+     * Returns the current host preferences of this view.
+     */
+    virtual HostPreferences* hostPreferences() = 0;
+#endif
+    
     /**
      * Returns the current status of the connection.
      * @return the status of the connection

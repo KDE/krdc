@@ -84,6 +84,11 @@ bool TestView::start()
     return true;
 }
 
+HostPreferences* TestView::hostPreferences()
+{
+    return 0;
+}
+
 void TestView::switchFullscreen(bool on)
 {
     Q_UNUSED(on);

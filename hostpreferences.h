@@ -30,41 +30,71 @@
 
 #include <QDomDocument>
 
+#include <QSize>
+
 class QCheckBox;
+class QWidget;
+class KConfig;
+class KConfigGroup;
 
 class HostPreferences : public QObject
 {
     Q_OBJECT
 
 public:
-    HostPreferences(const QString &url, QObject *parent);
+    HostPreferences(KConfigGroup configGroup, QObject *parent);
     ~HostPreferences();
+
+    KConfigGroup configGroup();
+    
     bool walletSupport();
+    
+    /** Whether scaling is enabled when session is full screen */
+    bool fullscreenScale();
+    void setFullscreenScale(bool scale);
+    
+    /** Whether scaling is enabled when session is not full screen */
+    bool windowedScale();
+    void setWindowedScale(bool scale);
+    
+    bool grabAllKeys();
+    void setGrabAllKeys(bool grab);
+    
+    bool showLocalCursor();
+    void setShowLocalCursor(bool show);
+    
+    bool viewOnly();
+    void setViewOnly(bool view);
+    
+    /** 
+     * Show the configuration dialog if needed, ie. if the user did 
+     * check "show this dialog again for this host".
+     * Returns true if user pressed ok. 
+     */
+    bool showDialogIfNeeded();
+    
+    /** Show the configuration dialog */
+    bool showDialog();
 
 protected:
-    virtual void showDialog() = 0;
-    virtual void readProtocolSpecificConfig() = 0;
-    virtual void saveProtocolSpecificConfig() = 0;
-    void updateElement(const QString &name, const QString &value);
-    void readConfig();
-    bool saveConfig();
+    virtual QWidget* createProtocolSpecificConfigPage() = 0;
+    
+    /** Called when the user validates the config dialog. */
+    virtual void acceptConfig();
+    
     bool hostConfigured();
     bool showConfigAgain();
-    KDialog *createDialog(QWidget *widget);
 
-    QDomElement m_element;
+    KConfigGroup m_configGroup;
 
 private:
     void setShowConfigAgain(bool show);
     void setWalletSupport(bool walletSupport);
 
-    QString m_filename;
-    QString m_url;
-    QDomDocument m_doc;
+    bool m_hostConfigured;
+
     QCheckBox *showAgainCheckBox;
     QCheckBox *walletSupportCheckBox;
-    bool m_showConfigAgain;
-    bool m_walletSupport;
 };
 
 #endif

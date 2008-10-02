@@ -39,13 +39,15 @@
 #include <KMessageBox>
 #include <KPushButton>
 #include <KStandardDirs>
+#include <KConfig>
 
 #include <QFile>
 #include <QLayout>
 #include <QListWidget>
 
-HostPreferencesList::HostPreferencesList(QWidget *parent)
-        : QWidget(parent)
+HostPreferencesList::HostPreferencesList(QWidget *parent, KConfig *hostPrefsConfig)
+        : QWidget(parent),
+        m_hostPrefsConfig(hostPrefsConfig)
 {
     hostList = new QListWidget(this);
     connect(hostList, SIGNAL(itemSelectionChanged()), SLOT(selectionChanged()));
@@ -83,24 +85,15 @@ HostPreferencesList::~HostPreferencesList()
 
 void HostPreferencesList::readConfig()
 {
-    m_filename = KStandardDirs::locateLocal("appdata", "hostpreferences.xml");
-
-    QFile file(m_filename);
-
-    if (!m_doc.setContent(&file)) {
-        kWarning(5010) << "Error reading " << m_filename;
-        return;
-    }
-
-    QDomElement root = m_doc.documentElement();
-    for (QDomNode n = root.firstChild(); !n.isNull(); n = n.nextSibling()) {
-        if (n.toElement().hasAttribute("url"))
-            hostList->addItem(new QListWidgetItem(n.toElement().attribute("url")));
-    }
+    QStringList urls = m_hostPrefsConfig->groupList();
+    
+    for (int i = 0; i < urls.size(); ++i) 
+        hostList->addItem(new QListWidgetItem(urls.at(i)));
 }
 
 void HostPreferencesList::saveSettings()
 {
+    m_hostPrefsConfig->sync();
 }
 
 void HostPreferencesList::configureHost()
@@ -112,24 +105,30 @@ void HostPreferencesList::configureHost()
 
         kDebug(5010) << "Configure host: " << url;
 
+        HostPreferences* prefs = 0;
 #ifdef BUILD_VNC
         if (url.startsWith("vnc", Qt::CaseInsensitive))
-            VncHostPreferences hostPreferences(url, true, this);
+            prefs = new VncHostPreferences(m_hostPrefsConfig->group(url), this);
         else
 #endif
 #ifdef BUILD_RDP
         if (url.startsWith("rdp", Qt::CaseInsensitive))
-            RdpHostPreferences hostPreferences(url, true, this);
+            prefs = new RdpHostPreferences(m_hostPrefsConfig->group(url), this);
         else
 #endif
 #ifdef BUILD_NX
         if (url.startsWith("nx", Qt::CaseInsensitive))
-            NxHostPreferences hostPreferences(url, true, this);
+            prefs = NxHostPreferences(m_hostPrefsConfig->group(url), this);
         else
 #endif
             KMessageBox::error(this,
                                i18n("The selected host cannot be handled."),
                                i18n("Unusable URL"));
+        
+        if (prefs) {
+            prefs->showDialog();
+            delete prefs;
+        }
     }
 }
 

@@ -30,6 +30,7 @@
 #include "bookmarkmanager.h"
 #include "remotedesktopsmodel.h"
 #include "systemtrayicon.h"
+
 #ifdef BUILD_RDP
 #include "rdpview.h"
 #endif
@@ -66,6 +67,7 @@
 #include <KToggleAction>
 #include <KToggleFullScreenAction>
 #include <KUrlNavigator>
+#include <KStandardDirs>
 
 #include <QClipboard>
 #include <QCloseEvent>
@@ -313,18 +315,19 @@ void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConn
     m_addressNavigator->setUrl(KUrl(url.scheme().toLower() + "://"));
 
     RemoteView *view = 0;
+    KConfigGroup configGroup = Settings::self()->config()->group(url.prettyUrl(KUrl::RemoveTrailingSlash));
 
     if (url.scheme().compare("vnc", Qt::CaseInsensitive) == 0) {
 #ifdef BUILD_VNC
-        view = new VncView(this, url);
+        view = new VncView(this, url, configGroup);
 #endif
     } else if (url.scheme().compare("nx", Qt::CaseInsensitive) == 0) {
 #ifdef BUILD_NX
-        view = new NxView(this, url);
+        view = new NxView(this, url, configGroup);
 #endif
     } else if (url.scheme().compare("rdp", Qt::CaseInsensitive) == 0) {
 #ifdef BUILD_RDP
-        view = new RdpView(this, url);
+        view = new RdpView(this, url, configGroup);
 #endif
     } else if (url.scheme().compare("test", Qt::CaseInsensitive) == 0) {
 #ifdef BUILD_TEST
@@ -344,21 +347,40 @@ void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConn
                 i18n("Unusable URL"));
         return;
     }
+    
+    // Configure the view
+    HostPreferences* prefs = view->hostPreferences();
+    if (! prefs->showDialogIfNeeded()) {
+        delete view;
+        return;
+    }
+    
+    saveHostPrefs();
+    
+    view->setGrabAllKeys(prefs->grabAllKeys());
+    view->showDotCursor(prefs->showLocalCursor() ? RemoteView::CursorOn : RemoteView::CursorOff);
+    view->setViewOnly(prefs->viewOnly());
+    if (! switchFullscreenWhenConnected) view->enableScaling(prefs->windowedScale()); 
 
     connect(view, SIGNAL(changeSize(int, int)), this, SLOT(resizeTabWidget(int, int)));
     connect(view, SIGNAL(statusChanged(RemoteView::RemoteStatus)), this, SLOT(statusChanged(RemoteView::RemoteStatus)));
 
     m_remoteViewList.append(view);
 
-    view->resize(0, 0);
+//     view->resize(0, 0);
  
     int numNonRemoteView = 0;
     if (m_showStartPage)
         numNonRemoteView++;
     if (m_zeroconfPage)
         numNonRemoteView++;
+    
+    if (m_remoteViewList.size() == 1) {
+        kDebug(5010) << "First connection, restoring window size)";
+        restoreWindowSize(view->hostPreferences()->configGroup());
+    }
 
-    QScrollArea *scrollArea = createScrollArea(m_tabWidget, m_remoteViewList.at(m_remoteViewList.count() - 1));
+    QScrollArea *scrollArea = createScrollArea(m_tabWidget, view);
 
     const int newIndex = m_tabWidget->addTab(scrollArea, KIcon("krdc"), url.prettyUrl(KUrl::RemoveTrailingSlash));
     m_tabWidget->setCurrentIndex(newIndex);
@@ -391,6 +413,9 @@ void MainWindow::openFromDockWidget(const QModelIndex &index)
 void MainWindow::resizeTabWidget(int w, int h)
 {
     kDebug(5010) << "tabwidget resize: w: " << w << ", h: " << h;
+    
+    RemoteView* view = m_currentRemoteView >= 0 ? m_remoteViewList.at(m_currentRemoteView) : NULL;
+    if (view && view->scaling()) return;
 
     if (m_topBottomBorder == 0) { // the values are not cached yet
         QScrollArea *tmp = qobject_cast<QScrollArea *>(m_tabWidget->currentWidget());
@@ -480,22 +505,25 @@ void MainWindow::switchFullscreen()
 {
     kDebug(5010);
 
+    RemoteView* view = m_remoteViewList.at(m_currentRemoteView);
+
     if (m_fullscreenWindow) {
+        // Leaving fullscreen mode
+        view->enableScaling(view->hostPreferences()->windowedScale());
         show();
         restoreGeometry(m_mainWindowGeometry);
 
         m_fullscreenWindow->setWindowState(0);
         m_fullscreenWindow->hide();
 
-        QScrollArea *scrollArea = createScrollArea(m_tabWidget, m_remoteViewList.at(m_currentRemoteView));
+        QScrollArea *scrollArea = createScrollArea(m_tabWidget, view);
 
         const int currentTab = m_tabWidget->currentIndex();
         m_tabWidget->insertTab(currentTab, scrollArea, m_tabWidget->tabIcon(currentTab), m_tabWidget->tabText(currentTab));
         m_tabWidget->removeTab(m_tabWidget->currentIndex());
         m_tabWidget->setCurrentIndex(currentTab);
 
-        resizeTabWidget(m_remoteViewList.at(m_currentRemoteView)->sizeHint().width(),
-                        m_remoteViewList.at(m_currentRemoteView)->sizeHint().height());
+        resizeTabWidget(view->sizeHint().width(), view->sizeHint().height());
 
         if (m_toolBar) {
             m_toolBar->hideAndDestroy();
@@ -510,11 +538,12 @@ void MainWindow::switchFullscreen()
 
         m_fullscreenWindow = 0;
     } else {
+        // Entering fullscreen mode
         m_fullscreenWindow = new QWidget(this, Qt::Window);
         m_fullscreenWindow->setWindowTitle(i18nc("window title when in fullscreen mode (for example displayed in tasklist)",
                                                  "KDE Remote Desktop Client (Fullscreen)"));
 
-        QScrollArea *scrollArea = createScrollArea(m_fullscreenWindow, m_remoteViewList.at(m_currentRemoteView));
+        QScrollArea *scrollArea = createScrollArea(m_fullscreenWindow, view);
         scrollArea->setFrameShape(QFrame::NoFrame);
 
         QVBoxLayout *fullscreenLayout = new QVBoxLayout(m_fullscreenWindow);
@@ -525,6 +554,8 @@ void MainWindow::switchFullscreen()
         minimizePixel->winId(); // force it to be a native widget (prevents problem with QX11EmbedContainer)
         connect(minimizePixel, SIGNAL(rightClicked()), m_fullscreenWindow, SLOT(showMinimized()));
 
+        view->enableScaling(view->hostPreferences()->fullscreenScale());
+                
         m_fullscreenWindow->show();
 
         KToggleFullScreenAction::setFullScreen(m_fullscreenWindow, true);
@@ -562,12 +593,11 @@ void MainWindow::disconnect()
     }
 
     QWidget *tmp = m_tabWidget->currentWidget();
-
     m_remoteViewList.removeAt(m_currentRemoteView);
-
     m_tabWidget->removeTab(m_tabWidget->currentIndex());
-
     tmp->deleteLater();
+    
+    saveHostPrefs();
 }
 
 void MainWindow::closeTab(QWidget *widget)
@@ -607,28 +637,44 @@ void MainWindow::showLocalCursor(bool showLocalCursor)
 {
     kDebug(5010) << showLocalCursor;
 
-    m_remoteViewList.at(m_currentRemoteView)->showDotCursor(showLocalCursor ? RemoteView::CursorOn : RemoteView::CursorOff);
+    RemoteView* view = m_remoteViewList.at(m_currentRemoteView);
+    view->showDotCursor(showLocalCursor ? RemoteView::CursorOn : RemoteView::CursorOff);
+    view->hostPreferences()->setViewOnly(showLocalCursor);
+    saveHostPrefs();
 }
 
 void MainWindow::viewOnly(bool viewOnly)
 {
     kDebug(5010) << viewOnly;
 
-    m_remoteViewList.at(m_currentRemoteView)->setViewOnly(viewOnly);
+    RemoteView* view = m_remoteViewList.at(m_currentRemoteView);
+    view->setViewOnly(viewOnly);
+    view->hostPreferences()->setViewOnly(viewOnly);
+    saveHostPrefs();
 }
 
 void MainWindow::grabAllKeys(bool grabAllKeys)
 {
     kDebug(5010);
 
-    m_remoteViewList.at(m_currentRemoteView)->setGrabAllKeys(grabAllKeys);
+    RemoteView* view = m_remoteViewList.at(m_currentRemoteView);
+    view->setGrabAllKeys(grabAllKeys);
+    view->hostPreferences()->setGrabAllKeys(grabAllKeys);
+    saveHostPrefs();
 }
 
 void MainWindow::scale(bool scale)
 {
     kDebug(5010);
 
-    m_remoteViewList.at(m_currentRemoteView)->enableScaling(scale);
+    RemoteView* view = m_remoteViewList.at(m_currentRemoteView);
+    view->enableScaling(scale);
+    if (m_fullscreenWindow) 
+        view->hostPreferences()->setFullscreenScale(scale);
+    else
+        view->hostPreferences()->setWindowedScale(scale);
+    
+    saveHostPrefs();
 }
 
 void MainWindow::showRemoteViewToolbar()
@@ -853,6 +899,25 @@ void MainWindow::closeEvent(QCloseEvent *event)
     } else {
         quit();
     }
+    
+    saveHostPrefs();
+}
+
+void MainWindow::saveProperties(KConfigGroup &group)
+{
+    kDebug(5010);
+    KMainWindow::saveProperties(group);
+    saveHostPrefs();
+}
+
+void MainWindow::saveHostPrefs()
+{
+    // Save default window size for currently active view
+    RemoteView* view = m_currentRemoteView >= 0 ? m_remoteViewList.at(m_currentRemoteView) : NULL;
+    if (view)
+        saveWindowSize(view->hostPreferences()->configGroup());
+    
+    Settings::self()->config()->sync();
 }
 
 void MainWindow::tabChanged(int index)
@@ -868,7 +933,6 @@ void MainWindow::tabChanged(int index)
     m_currentRemoteView = index - numNonRemoteView;
 
     const QString tabTitle = m_tabWidget->tabText(index).remove('&');
-
     setCaption(tabTitle == i18n("Start Page") ? QString() : tabTitle);
 
     updateActionStatus();

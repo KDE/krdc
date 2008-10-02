@@ -27,7 +27,9 @@
 #include "remoteview.h"
 #include "vncclientthread.h"
 
-#ifndef QTONLY
+#ifdef QTONLY
+    class KConfigGroup{};
+#else
     #include "vnchostpreferences.h"
 #endif
 
@@ -42,7 +44,7 @@ class VncView: public RemoteView
     Q_OBJECT
 
 public:
-    explicit VncView(QWidget *parent = 0, const KUrl &url = KUrl());
+    explicit VncView(QWidget *parent = 0, const KUrl &url = KUrl(), KConfigGroup configGroup = KConfigGroup());
     ~VncView();
 
     QSize framebufferSize();
@@ -53,6 +55,11 @@ public:
     bool start();
     bool supportsScaling() const;
     bool supportsLocalCursor() const;
+    
+#ifndef QTONLY
+    HostPreferences* hostPreferences();
+#endif
+
     void setViewOnly(bool viewOnly);
     void showDotCursor(DotCursorState state);
     void enableScaling(bool scale);

@@ -85,42 +85,21 @@ inline QString int2keymap(int layout)
         return keymaps.at(defaultKeymap);
 }
 
-RdpHostPreferences::RdpHostPreferences(const QString &url, bool forceShow, QObject *parent)
-  : HostPreferences(url, parent),
-    m_height(600),
-    m_width(800),
-    m_colorDepth(0),
-    m_keyboardLayout("en-us"),
-    m_sound(0),
-    m_extraOptions(QString())
+RdpHostPreferences::RdpHostPreferences(KConfigGroup configGroup, QObject *parent)
+  : HostPreferences(configGroup, parent)
 {
-    if (hostConfigured()) {
-        if (showConfigAgain() || forceShow) {
-            kDebug(5012) << "Show config dialog again";
-            showDialog();
-        } else
-            return; // no changes, no need to save
-    } else {
-        kDebug(5012) << "No config found, create new";
-        if (Settings::showPreferencesForNewConnections())
-            showDialog();
-    }
-
-    saveConfig();
 }
 
 RdpHostPreferences::~RdpHostPreferences()
 {
 }
 
-void RdpHostPreferences::showDialog()
+QWidget* RdpHostPreferences::createProtocolSpecificConfigPage()
 {
     QWidget *rdpPage = new QWidget();
     rdpUi.setupUi(rdpPage);
 
     rdpUi.loginGroupBox->setVisible(false);
-
-    KDialog *dialog = createDialog(rdpPage);
 
     rdpUi.kcfg_Height->setValue(height());
     rdpUi.kcfg_Width->setValue(width());
@@ -135,16 +114,7 @@ void RdpHostPreferences::showDialog()
     const int resolutionIndex = rdpUi.resolutionComboBox->findText(resolutionString, Qt::MatchContains);
     rdpUi.resolutionComboBox->setCurrentIndex((resolutionIndex == -1) ? 5 : resolutionIndex);
 
-    if (dialog->exec() == KDialog::Accepted) {
-        kDebug(5012) << "RdpHostPreferences config dialog accepted";
-
-        setHeight(rdpUi.kcfg_Height->value());
-        setWidth(rdpUi.kcfg_Width->value());
-        setColorDepth(rdpUi.kcfg_ColorDepth->currentIndex());
-        setKeyboardLayout(int2keymap(rdpUi.kcfg_KeyboardLayout->currentIndex()));
-        setSound(rdpUi.kcfg_Sound->currentIndex());
-        setExtraOptions(rdpUi.kcfg_ExtraOptions->text());
-    }
+    return rdpPage;
 }
 
 void RdpHostPreferences::updateWidthHeight(int index)
@@ -190,117 +160,82 @@ void RdpHostPreferences::updateWidthHeight(int index)
     rdpUi.widthLabel->setEnabled(enabled);
 }
 
-void RdpHostPreferences::readProtocolSpecificConfig()
+void RdpHostPreferences::acceptConfig()
 {
-    kDebug(5012) << "RdpHostPreferences::readProtocolSpecificConfig";
+    HostPreferences::acceptConfig();
 
-    if (m_element.firstChildElement("height") != QDomElement()) // not configured yet
-        setHeight(m_element.firstChildElement("height").text().toInt());
-    else
-        setHeight(Settings::height()); // get the proctocol default
-
-    if (m_element.firstChildElement("width") != QDomElement())
-        setWidth(m_element.firstChildElement("width").text().toInt());
-    else
-        setWidth(Settings::width());
-
-    if (m_element.firstChildElement("colorDepth") != QDomElement())
-        setColorDepth(m_element.firstChildElement("colorDepth").text().toInt());
-    else
-        setColorDepth(Settings::colorDepth());
-
-    if (m_element.firstChildElement("keyboardLayout") != QDomElement())
-        setKeyboardLayout(int2keymap(m_element.firstChildElement("keyboardLayout").text().toInt()));
-    else
-        setKeyboardLayout(int2keymap(Settings::keyboardLayout()));
-
-    if (m_element.firstChildElement("sound") != QDomElement())
-        setSound(m_element.firstChildElement("sound").text().toInt());
-    else
-        setSound(Settings::sound());
-
-    if (m_element.firstChildElement("extraOptions") != QDomElement())
-        setExtraOptions(m_element.firstChildElement("extraOptions").text());
-    else
-        setExtraOptions(Settings::extraOptions());
-}
-
-void RdpHostPreferences::saveProtocolSpecificConfig()
-{
-    kDebug(5012) << "RdpHostPreferences::saveProtocolSpecificConfig";
-
-    updateElement("height", QString::number(height()));
-    updateElement("width", QString::number(width()));
-    updateElement("colorDepth", QString::number(colorDepth()));
-    updateElement("keyboardLayout", QString::number(keymap2int(keyboardLayout())));
-    updateElement("sound", QString::number(sound()));
-    updateElement("extraOptions", extraOptions());
+    setHeight(rdpUi.kcfg_Height->value());
+    setWidth(rdpUi.kcfg_Width->value());
+    setColorDepth(rdpUi.kcfg_ColorDepth->currentIndex());
+    setKeyboardLayout(int2keymap(rdpUi.kcfg_KeyboardLayout->currentIndex()));
+    setSound(rdpUi.kcfg_Sound->currentIndex());
+    setExtraOptions(rdpUi.kcfg_ExtraOptions->text());
 }
 
 void RdpHostPreferences::setHeight(int height)
 {
     if (height >= 0)
-        m_height = height;
+        m_configGroup.writeEntry("height", height);
 }
 
 int RdpHostPreferences::height()
 {
-    return m_height;
+    return m_configGroup.readEntry("height", Settings::height());
 }
 
 void RdpHostPreferences::setWidth(int width)
 {
     if (width >= 0)
-        m_width = width;
+        m_configGroup.writeEntry("width", width);
 }
 
 int RdpHostPreferences::width()
 {
-    return m_width;
+    return m_configGroup.readEntry("width", Settings::width());
 }
 
 void RdpHostPreferences::setColorDepth(int colorDepth)
 {
     if (colorDepth >= 0)
-        m_colorDepth = colorDepth;
+        m_configGroup.writeEntry("colorDepth", colorDepth);
 }
 
 int RdpHostPreferences::colorDepth()
 {
-    return m_colorDepth;
+    return m_configGroup.readEntry("colorDepth", Settings::colorDepth());
 }
 
 void RdpHostPreferences::setKeyboardLayout(const QString &keyboardLayout)
 {
     if (!keyboardLayout.isNull())
-        m_keyboardLayout = keyboardLayout;
+        m_configGroup.writeEntry("keyboardLayout", keymap2int(keyboardLayout));
 }
 
 QString RdpHostPreferences::keyboardLayout() const
 {
-    return m_keyboardLayout;
+    return int2keymap(m_configGroup.readEntry("keyboardLayout", Settings::keyboardLayout()));
 }
 
 void RdpHostPreferences::setSound(int sound)
 {
     if (sound >= 0)
-        m_sound = sound;
+        m_configGroup.writeEntry("sound", sound);
 }
 
 int RdpHostPreferences::sound() const
 {
-    return m_sound;
+    return m_configGroup.readEntry("sound", Settings::sound());
 }
 
 void RdpHostPreferences::setExtraOptions(const QString &extraOptions)
 {
     if (!extraOptions.isNull())
-        m_extraOptions = extraOptions;
+        m_configGroup.writeEntry("extraOptions", extraOptions);
 }
 
 QString RdpHostPreferences::extraOptions() const
 {
-    return m_extraOptions;
+    return m_configGroup.readEntry("extraOptions", Settings::extraOptions());
 }
 
 #include "rdphostpreferences.moc"

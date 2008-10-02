@@ -35,6 +35,8 @@
 #include "ui_nxpreferences.h"
 #endif
 
+#include <KConfigSkeleton>
+
 PreferencesDialog::PreferencesDialog(QWidget *parent, KConfigSkeleton *skeleton)
         : KConfigDialog(parent, "preferences", skeleton)
 {
@@ -43,7 +45,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent, KConfigSkeleton *skeleton)
     generalUi.setupUi(generalPage);
     addPage(generalPage, i18nc("General Config", "General"), "krdc", i18n("General Config"));
 
-    HostPreferencesList *hostPreferencesList = new HostPreferencesList(this);
+    HostPreferencesList *hostPreferencesList = new HostPreferencesList(this, skeleton->config());
     addPage(hostPreferencesList, i18n("Hosts"), "krdc", i18n("Host Config"));
     setHelp(QString(),"krdc");
 #ifdef BUILD_VNC

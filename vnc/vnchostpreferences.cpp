@@ -23,77 +23,44 @@
 
 #include "vnchostpreferences.h"
 
-#include "ui_vncpreferences.h"
 #include "settings.h"
 
 #include <KDebug>
 
-VncHostPreferences::VncHostPreferences(const QString &url, bool forceShow, QObject *parent)
-        : HostPreferences(url, parent),
-        m_quality(RemoteView::Low)
+VncHostPreferences::VncHostPreferences(KConfigGroup configGroup, QObject *parent)
+        : HostPreferences(configGroup, parent)
 {
-    if (hostConfigured()) {
-        if (showConfigAgain() || forceShow) {
-            kDebug(5011) << "Show config dialog again";
-            showDialog();
-        } else
-            return; // no changes, no need to save
-    } else {
-        kDebug(5011) << "No config found, create new";
-        if (Settings::showPreferencesForNewConnections())
-            showDialog();
-    }
-
-    saveConfig();
 }
 
 VncHostPreferences::~VncHostPreferences()
 {
 }
 
-void VncHostPreferences::showDialog()
+QWidget* VncHostPreferences::createProtocolSpecificConfigPage()
 {
     QWidget *vncPage = new QWidget();
-    Ui::VncPreferences vncUi;
     vncUi.setupUi(vncPage);
 
-    KDialog *dialog = createDialog(vncPage);
-
     vncUi.kcfg_Quality->setCurrentIndex(quality() - 1);
-
-    if (dialog->exec() == KDialog::Accepted) {
-        kDebug(5011) << "VncHostPreferences config dialog accepted";
-
-        setQuality((RemoteView::Quality)(vncUi.kcfg_Quality->currentIndex() + 1));
-    }
+    
+    return vncPage;
 }
 
-void VncHostPreferences::readProtocolSpecificConfig()
+void VncHostPreferences::acceptConfig()
 {
-    kDebug(5011) << "VncHostPreferences::readProtocolSpecificConfig";
-
-    if (m_element.firstChildElement("quality") != QDomElement()) // not configured yet
-        setQuality((RemoteView::Quality)(m_element.firstChildElement("quality").text().toInt()));
-    else
-        setQuality((RemoteView::Quality)(Settings::quality() + 1)); // get the proctocol default
-}
-
-void VncHostPreferences::saveProtocolSpecificConfig()
-{
-    kDebug(5011) << "VncHostPreferences::saveProtocolSpecificConfig";
-
-    updateElement("quality", QString::number(quality()));
+    HostPreferences::acceptConfig();
+    setQuality((RemoteView::Quality)(vncUi.kcfg_Quality->currentIndex() + 1));
 }
 
 void VncHostPreferences::setQuality(RemoteView::Quality quality)
 {
     if (quality >= 0 && quality <= 3)
-        m_quality = quality;
+        m_configGroup.writeEntry("quality", (int) quality);
 }
 
 RemoteView::Quality VncHostPreferences::quality()
 {
-    return m_quality;
+    return (RemoteView::Quality) m_configGroup.readEntry("quality", (int) Settings::quality() + 1);
 }
 
 #include "vnchostpreferences.moc"

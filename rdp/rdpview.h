@@ -45,6 +45,7 @@ class RdpView : public RemoteView
 public:
     explicit RdpView(QWidget *parent = 0,
                      const KUrl &url = KUrl(),
+                     KConfigGroup configGroup = KConfigGroup(),
                      const QString &user = QString(), const QString &password = QString(),
                      int flags = RDP_LOGON_NORMAL, const QString &domain = QString(),
                      const QString &shell = QString(), const QString &directory = QString());
@@ -60,6 +61,8 @@ public:
     virtual bool isQuitting();               // are we currently closing the connection?
     virtual bool start();                    // open a connection
     void setGrabAllKeys(bool grabAllKeys);
+    
+    HostPreferences* hostPreferences();
 
 public slots:
     virtual void switchFullscreen(bool on);

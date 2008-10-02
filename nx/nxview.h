@@ -39,7 +39,7 @@ class NxView : public RemoteView
     Q_OBJECT
 
 public:
-    explicit NxView(QWidget *parent = 0, const KUrl &url = KUrl());
+    explicit NxView(QWidget *parent = 0, const KUrl &url = KUrl(), KConfigGroup configGroup = KConfigGroup());
     virtual ~NxView();
 
     // Start closing the connection
@@ -54,6 +54,8 @@ public:
     // Returns the suggested size of the remote view
     QSize sizeHint() const;
     virtual void setGrabAllKeys(bool grabAllKeys);
+    
+    HostPreferences* hostPreferences();
 
 public slots:
     void switchFullscreen(bool on);
