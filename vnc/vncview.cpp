@@ -330,7 +330,7 @@ void VncView::updateImage(int x, int y, int w, int h)
         setMouseTracking(true); // get mouse events even when there is no mousebutton pressed
         setFocusPolicy(Qt::WheelFocus);
         setStatus(Connected);
-//         emit changeSize(m_frame.width(), m_frame.height());
+//         emit framebufferSizeChanged(m_frame.width(), m_frame.height());
         emit connected();
         
         if (m_scale) {
@@ -357,7 +357,7 @@ void VncView::updateImage(int x, int y, int w, int h)
             setMaximumSize(m_frame.width(), m_frame.height()); //This is a hack to force Qt to center the view in the scroll area
             setMinimumSize(m_frame.width(), m_frame.height());
         }
-        emit changeSize(m_frame.width(), m_frame.height());
+        emit framebufferSizeChanged(m_frame.width(), m_frame.height());
     }
 
     m_repaint = true;

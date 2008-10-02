@@ -191,7 +191,7 @@ public:
      * Returns the resolution of the remote framebuffer.
      * It should return a null @ref QSize when the size
      * is not known.
-     * The backend must also emit a @ref changeSize()
+     * The backend must also emit a @ref framebufferSizeChanged()
      * when the size of the framebuffer becomes available
      * for the first time or the size changed.
      * @return the remote framebuffer size, a null QSize
@@ -320,7 +320,7 @@ signals:
      * @param x the width of the screen
      * @param y the height of the screen
      */
-    void changeSize(int w, int h);
+    void framebufferSizeChanged(int w, int h);
 
     /**
      * Emitted when the view connected successfully.

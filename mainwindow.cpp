@@ -362,7 +362,7 @@ void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConn
     view->setViewOnly(prefs->viewOnly());
     if (! switchFullscreenWhenConnected) view->enableScaling(prefs->windowedScale()); 
 
-    connect(view, SIGNAL(changeSize(int, int)), this, SLOT(resizeTabWidget(int, int)));
+    connect(view, SIGNAL(framebufferSizeChanged(int, int)), this, SLOT(resizeTabWidget(int, int)));
     connect(view, SIGNAL(statusChanged(RemoteView::RemoteStatus)), this, SLOT(statusChanged(RemoteView::RemoteStatus)));
 
     m_remoteViewList.append(view);

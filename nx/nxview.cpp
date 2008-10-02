@@ -262,7 +262,7 @@ void NxView::connectionOpened()
     setFixedSize(size);
     resize(size);
     m_container->setFixedSize(size);
-    emit changeSize(size.width(), size.height());
+    emit framebufferSizeChanged(size.width(), size.height());
     emit connected();
     setFocus();
 }

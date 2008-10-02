@@ -40,7 +40,7 @@ TestView::TestView(QWidget *parent, const KUrl &url)
     setStatus(Connected);
     setFixedSize(size);
     setFixedSize(size);
-    emit changeSize(size.width(), size.height());
+    emit framebufferSizeChanged(size.width(), size.height());
     emit connected();
 }
 
