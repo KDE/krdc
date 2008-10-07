@@ -112,7 +112,7 @@ QWidget* RdpHostPreferences::createProtocolSpecificConfigPage()
 
     const QString resolutionString = QString::number(width()) + 'x' + QString::number(height());
     const int resolutionIndex = rdpUi.resolutionComboBox->findText(resolutionString, Qt::MatchContains);
-    rdpUi.resolutionComboBox->setCurrentIndex((resolutionIndex == -1) ? 5 : resolutionIndex);
+    rdpUi.resolutionComboBox->setCurrentIndex((resolutionIndex == -1) ? rdpUi.resolutionComboBox->count() - 1 : resolutionIndex);
 
     return rdpPage;
 }
