@@ -131,7 +131,7 @@ void RdpHostPreferences::showDialog()
 
     QString resolutionString = QString::number(width()) + 'x' + QString::number(height());
     int resolutionIndex = rdpUi.resolutionComboBox->findText(resolutionString, Qt::MatchContains);
-    rdpUi.resolutionComboBox->setCurrentIndex((resolutionIndex == -1) ? 5 : resolutionIndex);
+    rdpUi.resolutionComboBox->setCurrentIndex((resolutionIndex == -1) ? rdpUi.resolutionComboBox->count() - 1 : resolutionIndex);
 
     if (dialog->exec() == KDialog::Accepted) {
         kDebug(5012) << "RdpHostPreferences config dialog accepted";
