@@ -24,11 +24,12 @@
 #ifndef HOSTPREFERENCESLIST_H
 #define HOSTPREFERENCESLIST_H
 
+#include <KConfigGroup>
+
 #include <QDomDocument>
 #include <QWidget>
 
 class KPushButton;
-class KConfig;
 
 class QListWidget;
 
@@ -37,7 +38,7 @@ class HostPreferencesList : public QWidget
     Q_OBJECT
 
 public:
-    HostPreferencesList(QWidget *parent, KConfig *hostPrefsConfig);
+    HostPreferencesList(QWidget *parent, KConfigGroup hostPrefsConfig);
     ~HostPreferencesList();
 
 private slots:
@@ -48,7 +49,7 @@ private slots:
     void selectionChanged();
 
 private:
-    KConfig *m_hostPrefsConfig;
+    KConfigGroup m_hostPrefsConfig;
 
     KPushButton *configureButton;
     KPushButton *removeButton;

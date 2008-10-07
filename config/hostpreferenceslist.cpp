@@ -39,13 +39,12 @@
 #include <KMessageBox>
 #include <KPushButton>
 #include <KStandardDirs>
-#include <KConfig>
 
 #include <QFile>
 #include <QLayout>
 #include <QListWidget>
 
-HostPreferencesList::HostPreferencesList(QWidget *parent, KConfig *hostPrefsConfig)
+HostPreferencesList::HostPreferencesList(QWidget *parent, KConfigGroup hostPrefsConfig)
         : QWidget(parent),
         m_hostPrefsConfig(hostPrefsConfig)
 {
@@ -85,7 +84,7 @@ HostPreferencesList::~HostPreferencesList()
 
 void HostPreferencesList::readConfig()
 {
-    QStringList urls = m_hostPrefsConfig->groupList();
+    QStringList urls = m_hostPrefsConfig.groupList();
     
     for (int i = 0; i < urls.size(); ++i) 
         hostList->addItem(new QListWidgetItem(urls.at(i)));
@@ -93,7 +92,7 @@ void HostPreferencesList::readConfig()
 
 void HostPreferencesList::saveSettings()
 {
-    m_hostPrefsConfig->sync();
+    m_hostPrefsConfig.sync();
 }
 
 void HostPreferencesList::configureHost()
@@ -108,17 +107,17 @@ void HostPreferencesList::configureHost()
         HostPreferences* prefs = 0;
 #ifdef BUILD_VNC
         if (url.startsWith("vnc", Qt::CaseInsensitive))
-            prefs = new VncHostPreferences(m_hostPrefsConfig->group(url), this);
+            prefs = new VncHostPreferences(m_hostPrefsConfig.group(url), this);
         else
 #endif
 #ifdef BUILD_RDP
         if (url.startsWith("rdp", Qt::CaseInsensitive))
-            prefs = new RdpHostPreferences(m_hostPrefsConfig->group(url), this);
+            prefs = new RdpHostPreferences(m_hostPrefsConfig.group(url), this);
         else
 #endif
 #ifdef BUILD_NX
         if (url.startsWith("nx", Qt::CaseInsensitive))
-            prefs = NxHostPreferences(m_hostPrefsConfig->group(url), this);
+            prefs = NxHostPreferences(m_hostPrefsConfig.group(url), this);
         else
 #endif
             KMessageBox::error(this,

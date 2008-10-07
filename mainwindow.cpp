@@ -315,7 +315,7 @@ void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConn
     m_addressNavigator->setUrl(KUrl(url.scheme().toLower() + "://"));
 
     RemoteView *view = 0;
-    KConfigGroup configGroup = Settings::self()->config()->group(url.prettyUrl(KUrl::RemoveTrailingSlash));
+    KConfigGroup configGroup = Settings::self()->config()->group("hostpreferences").group(url.prettyUrl(KUrl::RemoveTrailingSlash));
 
     if (url.scheme().compare("vnc", Qt::CaseInsensitive) == 0) {
 #ifdef BUILD_VNC

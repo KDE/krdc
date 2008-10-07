@@ -45,7 +45,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent, KConfigSkeleton *skeleton)
     generalUi.setupUi(generalPage);
     addPage(generalPage, i18nc("General Config", "General"), "krdc", i18n("General Config"));
 
-    HostPreferencesList *hostPreferencesList = new HostPreferencesList(this, skeleton->config());
+    HostPreferencesList *hostPreferencesList = new HostPreferencesList(this, skeleton->config()->group("hostpreferences"));
     addPage(hostPreferencesList, i18n("Hosts"), "krdc", i18n("Host Config"));
     setHelp(QString(),"krdc");
 #ifdef BUILD_VNC
