@@ -167,7 +167,7 @@ bool HostPreferences::showDialog()
 
     QWidget* widget = createProtocolSpecificConfigPage();
     
-    if (widget->layout())
+    if (widget && widget->layout())
         widget->layout()->setMargin(0);
 
     layout->addWidget(widget);

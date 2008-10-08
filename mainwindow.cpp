@@ -331,7 +331,7 @@ void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConn
 #endif
     } else if (url.scheme().compare("test", Qt::CaseInsensitive) == 0) {
 #ifdef BUILD_TEST
-        view = new TestView(this, url);
+        view = new TestView(this, url, configGroup);
 #endif
     } else
     {

@@ -25,9 +25,11 @@
 
 #include <QEvent>
 
-TestView::TestView(QWidget *parent, const KUrl &url)
+TestView::TestView(QWidget *parent, const KUrl &url, KConfigGroup configGroup)
         : RemoteView(parent)
 {
+    m_hostPreferences = new TestHostPreferences(configGroup, this);
+
     Q_UNUSED(url);
 
     setAutoFillBackground(true);
@@ -86,7 +88,7 @@ bool TestView::start()
 
 HostPreferences* TestView::hostPreferences()
 {
-    return 0;
+    return m_hostPreferences;
 }
 
 void TestView::switchFullscreen(bool on)
