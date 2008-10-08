@@ -225,13 +225,12 @@ void MainWindow::setupActions()
     scaleAction->setText(i18n("Scale remote screen to fit window size"));
     connect(scaleAction, SIGNAL(triggered(bool)), SLOT(scale(bool)));
 
-    QAction *quitAction = KStandardAction::quit(this, SLOT(quit()), actionCollection());
-    actionCollection()->addAction("quit", quitAction);
+    KStandardAction::quit(this, SLOT(quit()), actionCollection());
     KStandardAction::preferences(this, SLOT(preferences()), actionCollection());
     KStandardAction::configureToolbars(this, SLOT(configureToolbars()), actionCollection());
     KStandardAction::keyBindings(this, SLOT(configureKeys()), actionCollection());
-    QAction *cinfigNotifyAction = KStandardAction::configureNotifications(this, SLOT(configureNotifications()), actionCollection());
-    cinfigNotifyAction->setVisible(false);
+    QAction *configNotifyAction = KStandardAction::configureNotifications(this, SLOT(configureNotifications()), actionCollection());
+    configNotifyAction->setVisible(false);
     m_menubarAction = KStandardAction::showMenubar(this, SLOT(showMenubar()), actionCollection());
     m_menubarAction->setChecked(!menuBar()->isHidden());
 
