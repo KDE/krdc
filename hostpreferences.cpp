@@ -167,10 +167,12 @@ bool HostPreferences::showDialog()
 
     QWidget* widget = createProtocolSpecificConfigPage();
     
-    if (widget && widget->layout())
-        widget->layout()->setMargin(0);
+    if (widget) {
+        if (widget->layout())
+            widget->layout()->setMargin(0);
 
-    layout->addWidget(widget);
+        layout->addWidget(widget);
+    }
 
     showAgainCheckBox = new QCheckBox(mainWidget);
     showAgainCheckBox->setText(i18n("Show this dialog again for this host"));
