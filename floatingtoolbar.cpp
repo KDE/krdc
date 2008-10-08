@@ -26,6 +26,7 @@
 #include "floatingtoolbar.h"
 
 #include <KDebug>
+#include <KGlobalSettings>
 
 #include <QApplication>
 #include <QBitmap>
@@ -454,13 +455,17 @@ QPoint FloatingToolBarPrivate::getOuterPoint() const
 
 void FloatingToolBar::animate()
 {
-    // move currentPosition towards endPosition
-    int dX = d->endPosition.x() - d->currentPosition.x();
-    int dY = d->endPosition.y() - d->currentPosition.y();
-    dX = dX / 6 + qMax(-1, qMin(1, dX));
-    dY = dY / 6 + qMax(-1, qMin(1, dY));
-    d->currentPosition.setX(d->currentPosition.x() + dX);
-    d->currentPosition.setY(d->currentPosition.y() + dY);
+    if (KGlobalSettings::graphicEffectsLevel() & KGlobalSettings::SimpleAnimationEffects) {
+        // move currentPosition towards endPosition
+        int dX = d->endPosition.x() - d->currentPosition.x();
+        int dY = d->endPosition.y() - d->currentPosition.y();
+        dX = dX / 6 + qMax(-1, qMin(1, dX));
+        dY = dY / 6 + qMax(-1, qMin(1, dY));
+        d->currentPosition.setX(d->currentPosition.x() + dX);
+        d->currentPosition.setY(d->currentPosition.y() + dY);
+    } else {
+        d->currentPosition = d->endPosition;
+    }
 
     move(d->currentPosition);
 
