@@ -33,6 +33,7 @@ NxCallbacks::~NxCallbacks()
 
 void NxCallbacks::write(std::string msg)
 {
+    Q_UNUSED(msg);
 }
 
 void NxCallbacks::write(int num, std::string msg)
@@ -42,22 +43,27 @@ void NxCallbacks::write(int num, std::string msg)
 
 void NxCallbacks::error(std::string msg)
 {
+    Q_UNUSED(msg);
 }
 
 void NxCallbacks::debug(std::string msg)
 {
+    Q_UNUSED(msg);
 }
 
 void NxCallbacks::stdoutSignal(std::string msg) 
 {
+    Q_UNUSED(msg);
 }
 
 void NxCallbacks::stderrSignal(std::string msg)
 {
+    Q_UNUSED(msg);
 }
 
 void NxCallbacks::stdinSignal(std::string msg)
 {
+    Q_UNUSED(msg);
 }
 
 void NxCallbacks::resumeSessionsSignal(std::list<nxcl::NXResumeData> sessions)
@@ -83,4 +89,3 @@ void NxCallbacks::serverCapacitySignal()
 void NxCallbacks::connectedSuccessfullySignal()
 {
 }
-

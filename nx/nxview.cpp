@@ -202,6 +202,7 @@ void NxView::hasXid(int xid)
 
 void NxView::handleProgress(int id, QString msg)
 {
+    Q_UNUSED(msg);
     switch (id) {
         case NXCL_AUTH_FAILED:
             KMessageBox::error(this, i18n("The authentication key is invalid."), i18n("Invalid authentication key"), 0);

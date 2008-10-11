@@ -16,9 +16,6 @@
    </sizepolicy>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout" >
-   <property name="margin" >
-    <number>0</number>
-   </property>
    <item>
     <widget class="QGroupBox" name="connectionGroupBox" >
      <property name="title" >
@@ -518,6 +515,11 @@
    <class>KComboBox</class>
    <extends>QComboBox</extends>
    <header>kcombobox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KTextEdit</class>
+   <extends>QTextEdit</extends>
+   <header>ktextedit.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

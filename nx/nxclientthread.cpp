@@ -31,8 +31,6 @@
 #include <QApplication>
 #include <QFile>
 
-#include <sstream>
-
 NxClientThread::NxClientThread(QObject *parent)
         : QThread(parent),
 	  m_host(std::string()),
@@ -83,8 +81,7 @@ void NxClientThread::setCallbacks(NxCallbacks *callbacks)
 void NxClientThread::setHost(const QString &host)
 {
     QMutexLocker locker(&m_mutex);
-    QByteArray tmp = host.toAscii();
-    m_host = tmp.data();
+    m_host = host.toAscii().data();
 }
 
 void NxClientThread::setPort(int port)
@@ -96,46 +93,39 @@ void NxClientThread::setPort(int port)
 void NxClientThread::setUserName(const QString &userName)
 {
     QMutexLocker locker(&m_mutex);
-    QByteArray userNameTmp = userName.toAscii();
-    std::string userNameStr = std::string(userNameTmp.data());
+    std::string userNameStr = std::string(userName.toAscii().data());
     m_client.setUsername(userNameStr);
 }
 
 void NxClientThread::setPassword(const QString &password)
 {
     QMutexLocker locker(&m_mutex);
-    QByteArray passwordTmp = password.toAscii();
-    std::string passwordStr = std::string(passwordTmp);
+    std::string passwordStr = std::string(password.toAscii());
     m_client.setPassword(passwordStr);
 }
 
 void NxClientThread::setResolution(int width, int height)
 {
     QMutexLocker locker(&m_mutex);
-    stringstream ss;
-    ss << width << "x" << height << "+0+0";
-    m_data.geometry = ss.str();
+    m_data.geometry = width + 'x' + height + "+0+0";
 }
 
 void NxClientThread::setDesktopType(const QString &desktopType)
 {
     QMutexLocker locker(&m_mutex);
-    QByteArray tmp = desktopType.toAscii();
-    m_data.sessionType = tmp.data();
+    m_data.sessionType = desktopType.toAscii().data();
 }
 
 void NxClientThread::setKeyboardLayout(const QString &keyboardLayout)
 {
     QMutexLocker locker(&m_mutex);
-    QByteArray tmp = keyboardLayout.toAscii();
-    m_data.kbtype = tmp.data();
+    m_data.kbtype = keyboardLayout.toAscii().data();
 }
 
 void NxClientThread::setPrivateKey(const QString &privateKey)
 {
     QMutexLocker locker(&m_mutex);
-    QByteArray tmp = privateKey.toAscii();
-    m_privateKey = tmp.data();
+    m_privateKey = privateKey.toAscii().data();
 }
 
 void NxClientThread::setSuspended(bool suspended) 
@@ -147,8 +137,7 @@ void NxClientThread::setSuspended(bool suspended)
 void NxClientThread::setId(const QString &id)
 {
     QMutexLocker locker(&m_mutex);
-    QByteArray tmp = id.toAscii();
-    m_data.id = tmp.data();
+    m_data.id = id.toAscii().data();
 }
 
 void NxClientThread::stop()
@@ -160,8 +149,8 @@ void NxClientThread::stop()
 void NxClientThread::run()
 {
     if (m_privateKey.compare("default") == 0) {
-        QString keyfilename = QString("default.dsa.key");
-    	QString keyfilepath = KGlobal::dirs()->findResource("appdata", keyfilename);
+        const QString keyfilename = QString("default.dsa.key");
+        const QString keyfilepath = KGlobal::dirs()->findResource("appdata", keyfilename);
 
         QFile file(keyfilepath);
         if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
