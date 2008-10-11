@@ -68,8 +68,8 @@ protected:
 
 signals:
     /**
-     * Emitted when the X Window ID of the main NX 
-     * window is received. 
+     * Emitted when the X Window ID of the main NX
+     * window is received.
      * @param xid the X Window ID of the main NX window
      */
     void hasXid(int xid);
@@ -77,7 +77,7 @@ signals:
 private:
     nxcl::NXClientLib m_client;
     nxcl::NXSessionData m_data;
-    
+
     std::string m_host;
     int m_port;
     std::string m_privateKey;

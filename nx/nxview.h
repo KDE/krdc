@@ -54,7 +54,7 @@ public:
     // Returns the suggested size of the remote view
     QSize sizeHint() const;
     virtual void setGrabAllKeys(bool grabAllKeys);
-    
+
     HostPreferences* hostPreferences();
 
 public slots:
@@ -80,7 +80,7 @@ private:
     // If we are currently closing the connection
     bool m_quitFlag;
     // Widget which contains the NX Window
-    QX11EmbedContainer *m_container;   
+    QX11EmbedContainer *m_container;
     // Dialog which allows user to choose NX preferences.
     NxHostPreferences *m_hostPreferences;
     // Dialog which allows user to resume NX sessions.

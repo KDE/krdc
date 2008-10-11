@@ -33,21 +33,21 @@
 
 NxClientThread::NxClientThread(QObject *parent)
         : QThread(parent),
-	  m_host(std::string()),
-	  m_port(0),
-	  m_privateKey(std::string()),
-	  m_xid(0),
-	  m_stopped(false)
+        m_host(std::string()),
+        m_port(0),
+        m_privateKey(std::string()),
+        m_xid(0),
+        m_stopped(false)
 {
     m_client.setSessionData(&m_data);
-    
+
     QDesktopWidget *desktop = QApplication::desktop();
     int currentScreen = desktop->screenNumber();
     QRect rect = desktop->screenGeometry(currentScreen);
     m_client.setResolution(rect.width(), rect.height());
     m_client.setDepth(24);
     m_client.setRender(true);
-				 
+
     m_data.sessionName = "krdcSession";
     m_data.cache = 8;
     m_data.images = 32;
@@ -73,7 +73,7 @@ NxClientThread::~NxClientThread()
     wait(500);
 }
 
-void NxClientThread::setCallbacks(NxCallbacks *callbacks) 
+void NxClientThread::setCallbacks(NxCallbacks *callbacks)
 {
     m_client.setExternalCallbacks(callbacks);
 }
@@ -128,7 +128,7 @@ void NxClientThread::setPrivateKey(const QString &privateKey)
     m_privateKey = privateKey.toAscii().data();
 }
 
-void NxClientThread::setSuspended(bool suspended) 
+void NxClientThread::setSuspended(bool suspended)
 {
     QMutexLocker locker(&m_mutex);
     m_data.suspended = suspended;
@@ -159,11 +159,11 @@ void NxClientThread::run()
         QByteArray key;
         while (!file.atEnd())
             key += file.readLine();
-        
-	m_client.invokeNXSSH("supplied", m_host, true, key.data(), m_port);
-    } else 
+
+        m_client.invokeNXSSH("supplied", m_host, true, key.data(), m_port);
+    } else
         m_client.invokeNXSSH("supplied", m_host, true, m_privateKey, m_port);
-    
+
     nxcl::notQProcess* p;
     while (!m_client.getIsFinished() && !m_stopped) {
         if (!m_client.getReadyForProxy()) {
@@ -176,14 +176,14 @@ void NxClientThread::run()
             p->probeProcess();
         }
 
-	if (!this->m_xid) {
-	    this->m_xid = m_client.getXID();
+        if (!this->m_xid) {
+            this->m_xid = m_client.getXID();
 
-	    if (this->m_xid) 
-	        emit hasXid(this->m_xid);
+            if (this->m_xid)
+                emit hasXid(this->m_xid);
         }
 
-        usleep (1000);
+        usleep(1000);
     }
 }
 

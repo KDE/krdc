@@ -29,7 +29,7 @@
 
 #include <KTitleWidget>
 
-NxResumeSessions::NxResumeSessions() 
+NxResumeSessions::NxResumeSessions()
 {
     QWidget *nxPage = new QWidget();
     nxUi.setupUi(nxPage);
@@ -55,7 +55,7 @@ NxResumeSessions::NxResumeSessions()
 
 NxResumeSessions::~NxResumeSessions()
 {
-    if(!empty())
+    if (!empty())
         clear();
 }
 
@@ -69,10 +69,9 @@ void NxResumeSessions::clear()
     nxUi.sessionsList->clear();
 }
 
-void NxResumeSessions::addSessions(QList<nxcl::NXResumeData> sessions) 
+void NxResumeSessions::addSessions(QList<nxcl::NXResumeData> sessions)
 {
-    for(int i = 0; i < sessions.size(); ++i)
-    {
+    for (int i = 0; i < sessions.size(); ++i) {
         const nxcl::NXResumeData session = sessions.at(i);
         QTreeWidgetItem *tmp = new QTreeWidgetItem();
         tmp->setText(0, QString::number(session.display));

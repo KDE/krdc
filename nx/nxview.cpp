@@ -36,8 +36,8 @@
 NxView::NxView(QWidget *parent, const KUrl &url, KConfigGroup configGroup)
         : RemoteView(parent),
         m_quitFlag(false),
-	m_container(NULL),
-	m_hostPreferences(NULL)
+        m_container(NULL),
+        m_hostPreferences(NULL)
 {
     m_url = url;
     m_host = url.host();
@@ -52,7 +52,7 @@ NxView::NxView(QWidget *parent, const KUrl &url, KConfigGroup configGroup)
     qRegisterMetaType<QList<nxcl::NXResumeData> >("QList<nxcl::NXResumeData>");
 
     m_clientThread.setCallbacks(&m_callbacks);
-    
+
     connect(&m_clientThread, SIGNAL(hasXid(int)), this, SLOT(hasXid(int)));
     connect(&m_callbacks, SIGNAL(progress(int, QString)), this, SLOT(handleProgress(int, QString)));
     connect(&m_callbacks, SIGNAL(suspendedSessions(QList<nxcl::NXResumeData>)), this, SLOT(handleSuspendedSessions(QList<nxcl::NXResumeData>)));
@@ -60,7 +60,7 @@ NxView::NxView(QWidget *parent, const KUrl &url, KConfigGroup configGroup)
     connect(&m_callbacks, SIGNAL(atCapacity()), this, SLOT(handleAtCapacity()));
     connect(&m_resumeSessions, SIGNAL(newSession()), this, SLOT(handleNewSession()));
     connect(&m_resumeSessions, SIGNAL(resumeSession(QString)), this, SLOT(handleResumeSession(QString)));
-    
+
     m_hostPreferences = new NxHostPreferences(configGroup, this);
 }
 
@@ -114,7 +114,7 @@ bool NxView::start()
     m_clientThread.setDesktopType(m_hostPreferences->desktopType());
     m_clientThread.setKeyboardLayout(m_hostPreferences->keyboardLayout());
     m_clientThread.setPrivateKey(m_hostPreferences->privateKey());
-    
+
     m_container->show();
 
     if (m_hostPreferences->walletSupport()) {
@@ -135,7 +135,7 @@ bool NxView::start()
 
             if (!walletPassword.isNull())
                 m_url.setPassword(walletPassword);
-	    else {
+            else {
                 KPasswordDialog dialog(this);
                 dialog.setPrompt(i18n("Access to the system requires a password."));
                 if (dialog.exec() == KPasswordDialog::Accepted) {
@@ -159,7 +159,7 @@ bool NxView::start()
 
     connect(m_container, SIGNAL(clientIsEmbedded()), SLOT(connectionOpened()));
     connect(m_container, SIGNAL(clientClosed()), SLOT(connectionClosed()));
-    
+
     return true;
 }
 
@@ -195,7 +195,7 @@ void NxView::setGrabAllKeys(bool grabAllKeys)
         m_container->releaseKeyboard();
 }
 
-void NxView::hasXid(int xid) 
+void NxView::hasXid(int xid)
 {
     m_container->embedClient(xid);
 }
@@ -241,7 +241,7 @@ void NxView::handleAtCapacity()
     KMessageBox::error(this, i18n("This NX server is running at capacity."), i18n("Server at capacity"), 0);
 }
 
-void NxView::handleNewSession() 
+void NxView::handleNewSession()
 {
     m_clientThread.setSuspended(false);
     m_clientThread.startSession();

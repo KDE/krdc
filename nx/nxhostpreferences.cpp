@@ -90,9 +90,9 @@ inline QString int2keymap(int layout)
 }
 
 static const QStringList desktopTypes = (QStringList()
-    << "unix-kde" 
+    << "unix-kde"
     << "unix-gnome"
-    << "unix-cde" 
+    << "unix-cde"
     << "unix-xdm"
 );
 
@@ -106,14 +106,14 @@ inline int desktopType2int(const QString &desktopType)
 
 inline QString int2desktopType(int index)
 {
-    if(index >=0 && index < desktopTypes.count())
+    if (index >= 0 && index < desktopTypes.count())
         return desktopTypes.at(index);
     else
         return desktopTypes.at(defaultDesktopType);
 }
 
 NxHostPreferences::NxHostPreferences(KConfigGroup configGroup, QObject *parent)
-  : HostPreferences(configGroup, parent)
+        : HostPreferences(configGroup, parent)
 {
 }
 
@@ -134,11 +134,11 @@ QWidget* NxHostPreferences::createProtocolSpecificConfigPage()
     if (privateKey() == "default") {
         nxUi.checkboxDefaultPrivateKey->setChecked(true);
         nxUi.groupboxPrivateKey->setEnabled(false);
-	setDefaultPrivateKey(Qt::Checked);
+        setDefaultPrivateKey(Qt::Checked);
     } else {
         nxUi.checkboxDefaultPrivateKey->setChecked(false);
         nxUi.groupboxPrivateKey->setEnabled(true);
-	setDefaultPrivateKey(Qt::Unchecked);
+        setDefaultPrivateKey(Qt::Unchecked);
     }
 
     connect(nxUi.resolutionComboBox, SIGNAL(currentIndexChanged(int)), SLOT(updateWidthHeight(int)));
@@ -198,16 +198,16 @@ void NxHostPreferences::updateWidthHeight(int index)
 
 void NxHostPreferences::setDefaultPrivateKey(int state)
 {
-    if(state == Qt::Checked) {
+    if (state == Qt::Checked) {
         setPrivateKey("default");
         nxUi.groupboxPrivateKey->setEnabled(false);
-    } else if(state == Qt::Unchecked) {
+    } else if (state == Qt::Unchecked) {
         setPrivateKey("");
         nxUi.groupboxPrivateKey->setEnabled(true);
     }
 }
 
-void NxHostPreferences::updatePrivateKey() 
+void NxHostPreferences::updatePrivateKey()
 {
     m_privateKey = nxUi.kcfg_NxPrivateKey->toPlainText();
 }
@@ -215,8 +215,8 @@ void NxHostPreferences::updatePrivateKey()
 void NxHostPreferences::chooseKeyFile()
 {
     const QString fileName = KFileDialog::getOpenFileName(KUrl(QDir::homePath()),
-                                                    "*.key|" + i18n("Key Files (*.key)"),
-                                                    nxPage, i18n("Open DSA Key File"));
+                                                          "*.key|" + i18n("Key Files (*.key)"),
+                                                          nxPage, i18n("Open DSA Key File"));
 
     QFile file(fileName);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -233,7 +233,7 @@ void NxHostPreferences::chooseKeyFile()
 void NxHostPreferences::acceptConfig()
 {
     HostPreferences::acceptConfig();
-    
+
     setHeight(nxUi.kcfg_NxHeight->value());
     setWidth(nxUi.kcfg_NxWidth->value());
     setDesktopType(int2desktopType(nxUi.kcfg_NxDesktopType->currentIndex()));
@@ -286,7 +286,7 @@ QString NxHostPreferences::keyboardLayout() const
 
 void NxHostPreferences::setPrivateKey(const QString &privateKey)
 {
-    if(!privateKey.isNull())
+    if (!privateKey.isNull())
         m_configGroup.writeEntry("privateKey", privateKey);
 }
 
