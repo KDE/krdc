@@ -205,16 +205,16 @@ void NxView::handleProgress(int id, QString msg)
     Q_UNUSED(msg);
     switch (id) {
         case NXCL_AUTH_FAILED:
-            KMessageBox::error(this, i18n("The authentication key is invalid."), i18n("Invalid authentication key"), 0);
+            KMessageBox::error(this, i18n("The authentication key is invalid."), i18n("Invalid authentication key"));
             break;
         case NXCL_LOGIN_FAILED:
-            KMessageBox::error(this, i18n("The username or password that you have entered is not a valid."), i18n("Invalid username or password"), 0);
+            KMessageBox::error(this, i18n("The username or password that you have entered is not a valid."), i18n("Invalid username or password"));
             break;
         case NXCL_HOST_KEY_VERIFAILED:
-            KMessageBox::error(this, i18n("The host key verification has failed."), i18n("Host key verification failed"), 0);
+            KMessageBox::error(this, i18n("The host key verification has failed."), i18n("Host key verification failed"));
             break;
         case NXCL_PROCESS_ERROR:
-            KMessageBox::error(this, i18n("An error has occurred during the connection to the NX server."), i18n("Process error"), 0);
+            KMessageBox::error(this, i18n("An error has occurred during the connection to the NX server."), i18n("Process error"));
             break;
         default:
             break;
@@ -238,7 +238,7 @@ void NxView::handleNoSessions()
 
 void NxView::handleAtCapacity()
 {
-    KMessageBox::error(this, i18n("This NX server is running at capacity."), i18n("Server at capacity"), 0);
+    KMessageBox::error(this, i18n("This NX server is running at capacity."), i18n("Server at capacity"));
 }
 
 void NxView::handleNewSession()
