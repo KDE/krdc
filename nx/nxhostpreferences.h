@@ -51,6 +51,7 @@ protected:
     void acceptConfig();
 
 private:
+    QString m_privateKey;
     Ui::NxPreferences nxUi;
     QWidget *nxPage;
 

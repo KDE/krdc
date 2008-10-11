@@ -265,7 +265,7 @@ int NxHostPreferences::width()
 void NxHostPreferences::setDesktopType(const QString &desktopType)
 {
     if (!desktopType.isNull())
-        m_configGroup.writeEntry("desktopType", desktoptype2int(desktopType));
+        m_configGroup.writeEntry("desktopType", desktopType2int(desktopType));
 }
 
 QString NxHostPreferences::desktopType() const

@@ -117,7 +117,7 @@ void HostPreferencesList::configureHost()
 #endif
 #ifdef BUILD_NX
         if (url.startsWith("nx", Qt::CaseInsensitive))
-            prefs = NxHostPreferences(m_hostPrefsConfig.group(url), this);
+            prefs = new NxHostPreferences(m_hostPrefsConfig.group(url), this);
         else
 #endif
             KMessageBox::error(this,
