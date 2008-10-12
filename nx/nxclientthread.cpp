@@ -81,7 +81,8 @@ void NxClientThread::setCallbacks(NxCallbacks *callbacks)
 void NxClientThread::setHost(const QString &host)
 {
     QMutexLocker locker(&m_mutex);
-    m_host = host.toAscii().data();
+    QByteArray tmp = host.toAscii();
+    m_host = tmp.data();
 }
 
 void NxClientThread::setPort(int port)
@@ -113,19 +114,22 @@ void NxClientThread::setResolution(int width, int height)
 void NxClientThread::setDesktopType(const QString &desktopType)
 {
     QMutexLocker locker(&m_mutex);
-    m_data.sessionType = desktopType.toAscii().data();
+    QByteArray tmp = desktopType.toAscii();
+    m_data.sessionType = tmp.data();
 }
 
 void NxClientThread::setKeyboardLayout(const QString &keyboardLayout)
 {
     QMutexLocker locker(&m_mutex);
-    m_data.kbtype = keyboardLayout.toAscii().data();
+    QByteArray tmp = keyboardLayout.toAscii();
+    m_data.kbtype = tmp.data();
 }
 
 void NxClientThread::setPrivateKey(const QString &privateKey)
 {
     QMutexLocker locker(&m_mutex);
-    m_privateKey = privateKey.toAscii().data();
+    QByteArray tmp = privateKey.toAscii();
+    m_privateKey = tmp.data();
 }
 
 void NxClientThread::setSuspended(bool suspended)
@@ -137,7 +141,8 @@ void NxClientThread::setSuspended(bool suspended)
 void NxClientThread::setId(const QString &id)
 {
     QMutexLocker locker(&m_mutex);
-    m_data.id = id.toAscii().data();
+    QByteArray tmp = id.toAscii();
+    m_data.id = tmp.data();
 }
 
 void NxClientThread::stop()
