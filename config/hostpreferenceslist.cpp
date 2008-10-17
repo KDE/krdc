@@ -22,6 +22,7 @@
 ****************************************************************************/
 
 #include "hostpreferenceslist.h"
+#include "hostpreferences.h"
 
 #ifdef BUILD_VNC
 #include "vnchostpreferences.h"
