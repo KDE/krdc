@@ -26,12 +26,10 @@ if(HAVE_RDESKTOP)
     )
 endif(HAVE_RDESKTOP)
 
-if(DNSSD_FOUND)
-    add_definitions(-DBUILD_ZEROCONF)
-    set(krdc_zeroconf_SRCS
-        zeroconf/zeroconfpage.cpp
-    )
-endif(DNSSD_FOUND)
+add_definitions(-DBUILD_ZEROCONF)
+set(krdc_zeroconf_SRCS
+	zeroconf/zeroconfpage.cpp
+)
 
 if(LIBVNCSERVER_FOUND)
     add_definitions(-DBUILD_VNC)
@@ -110,9 +108,7 @@ if(LIBVNCSERVER_FOUND)
     endif(JPEG_FOUND)
 endif(LIBVNCSERVER_FOUND)
 
-if(DNSSD_FOUND)
-   target_link_libraries(krdc ${KDE4_KDNSSD_LIBS})
-endif(DNSSD_FOUND)
+target_link_libraries(krdc ${KDE4_KDNSSD_LIBS})
 
 if(LIBNXCL_FOUND)
    target_link_libraries(krdc ${LIBNXCL_LIBRARIES})
