@@ -63,7 +63,7 @@ protected:
 
 private slots:
     void restoreOpenSessions();
-    void quit();
+    void quit(bool systemEvent = false);
     void preferences();
     void configureNotifications();
     void configureKeys();
