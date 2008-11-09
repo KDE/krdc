@@ -777,10 +777,10 @@ void MainWindow::updateConfiguration()
     }
 }
 
-void MainWindow::quit()
+void MainWindow::quit(bool systemEvent)
 {
     bool haveRemoteConnections = m_remoteViewList.count();
-    if (!haveRemoteConnections || KMessageBox::warningContinueCancel(this,
+    if (systemEvent || !haveRemoteConnections || KMessageBox::warningContinueCancel(this,
                                            i18n("Are you sure you want to quit the KDE Remote Desktop Client?"),
                                            i18n("Confirm Quit"),
                                            KStandardGuiItem::quit(), KStandardGuiItem::cancel(),
@@ -828,12 +828,15 @@ void MainWindow::showMenubar()
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
-    event->ignore();
-
-    if (Settings::systemTrayIcon()) {
-        hide(); // just hide the mainwindow, keep it in systemtray
+    if (event->spontaneous()) { // Returns true if the event originated outside the application (a system event); otherwise returns false.
+        event->ignore();
+        if (Settings::systemTrayIcon()) {
+            hide(); // just hide the mainwindow, keep it in systemtray
+        } else {
+            quit();
+        }
     } else {
-        quit();
+        quit(true);
     }
 }
 
