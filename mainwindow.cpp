@@ -1061,7 +1061,6 @@ void MainWindow::closeZeroconfPage()
     m_tabWidget->removeTab(index);
     m_zeroconfPage->deleteLater();
     m_zeroconfPage = 0;
-    tabChanged(index); // force update again because m_zeroconfPage was not null before
 #endif
 }
 
