@@ -1,6 +1,7 @@
 /****************************************************************************
 **
 ** Copyright (C) 2008 Magnus Romnes <romnes @ stud.ntnu.no>
+** Copyright (C) 2008 Urs Wolfer <uwolfer @ kde.org>
 **
 ** This file is part of KDE.
 **
@@ -30,12 +31,12 @@
 #include <KIcon>
 #include <KLocale>
 
+#include <dnssd/servicemodel.h>
+
 ZeroconfPage::ZeroconfPage(QWidget* parent):
         QWidget(parent),
         m_browser(0),
-        m_numServices(0),
-        m_selectedHost(0),
-        m_serviceTable(0),
+        m_servicesView(0),
         m_connectButton(0)
 {
     // Add RDP and NX if they start announcing via Zeroconf:
@@ -64,23 +65,21 @@ ZeroconfPage::ZeroconfPage(QWidget* parent):
     QHBoxLayout* contentLayout = new QHBoxLayout;
     contentLayout->setMargin(20);
 
-    m_serviceTable = new QTableWidget(0, 4, this);
-    m_serviceTable->setShowGrid(false);
-    m_serviceTable->setHorizontalHeaderItem(0, new QTableWidgetItem(i18n("Type")));
-    m_serviceTable->setHorizontalHeaderItem(1, new QTableWidgetItem(i18n("Host")));
-    m_serviceTable->setHorizontalHeaderItem(2, new QTableWidgetItem(i18n("Port")));
-    m_serviceTable->setHorizontalHeaderItem(3, new QTableWidgetItem(i18n("Description")));
-    m_serviceTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    m_serviceTable->setTabKeyNavigation(true);
-    m_serviceTable->setAlternatingRowColors(true);
-    m_serviceTable->setSelectionMode(QAbstractItemView::SingleSelection);
-    m_serviceTable->setSelectionBehavior(QAbstractItemView::SelectRows);
-    m_serviceTable->setSortingEnabled(false);
-    m_serviceTable->setEnabled(false);
-    m_serviceTable->setCornerButtonEnabled(false);
-    m_serviceTable->verticalHeader()->hide();
-    m_serviceTable->horizontalHeader()->setStretchLastSection(true);
-    contentLayout->addWidget(m_serviceTable);
+    m_servicesView = new QTableView(this);
+    m_servicesView->setShowGrid(false);
+    m_servicesView->setSortingEnabled(false);
+    m_servicesView->setAlternatingRowColors(true);
+    m_servicesView->setSelectionMode(QAbstractItemView::SingleSelection);
+    m_servicesView->setEnabled(false);
+    m_servicesView->setCornerButtonEnabled(false);
+    m_servicesView->verticalHeader()->hide();
+    m_servicesView->horizontalHeader()->setStretchLastSection(true);
+    DNSSD::ServiceModel *mdl = new DNSSD::ServiceModel(new DNSSD::ServiceBrowser("_rfb._tcp", true), m_servicesView);
+    m_servicesView->setModel(mdl);
+    m_servicesView->setSelectionBehavior(QAbstractItemView::SelectRows);
+    connect(m_servicesView->selectionModel(), SIGNAL(currentRowChanged(const QModelIndex&, const QModelIndex&)), SLOT(rowSelected()));
+    connect(m_servicesView, SIGNAL(doubleClicked(const QModelIndex&)), SLOT(serviceSelected(const QModelIndex&)));
+    contentLayout->addWidget(m_servicesView);
 
     // Buttons:
     QVBoxLayout *buttonLayout = new QVBoxLayout;
@@ -104,11 +103,8 @@ ZeroconfPage::ZeroconfPage(QWidget* parent):
     if(DNSSD::ServiceBrowser::isAvailable() == DNSSD::ServiceBrowser::Working)
     {
         headerString.append(i18n("<b>Note:</b> KRDC can only locate Remote Desktop Services that announce themself using Zeroconf (also known as Bonjour)."));
-        m_serviceTable->setEnabled(true);
+        m_servicesView->setEnabled(true);
         connect(m_connectButton, SIGNAL(clicked()), this, SLOT(newConnection()));
-        connect(m_serviceTable, SIGNAL(itemSelectionChanged()), this, SLOT(rowSelected()));
-        connect(m_serviceTable, SIGNAL(itemDoubleClicked(QTableWidgetItem*)), this, SLOT(newConnection()));
-        startBrowse();
     }
     else
     {
@@ -121,23 +117,16 @@ ZeroconfPage::~ZeroconfPage()
 {
 }
 
-void ZeroconfPage::startBrowse()
+void ZeroconfPage::serviceSelected(const QModelIndex& idx) 
 {
-    // Something has to be done here if we are to browse for more than one service (like adding RDP and NX)
-    m_browser = new DNSSD::ServiceBrowser("_rfb._tcp", true);
-    connect(m_browser, SIGNAL(serviceAdded(DNSSD::RemoteService::Ptr)), this, SLOT(addService(DNSSD::RemoteService::Ptr)));
-    m_browser->startBrowse();
-}
+    DNSSD::RemoteService::Ptr srv = idx.data(DNSSD::ServiceModel::ServicePtrRole).value<DNSSD::RemoteService::Ptr>();
+    if (srv && srv->resolve()) {
+        KUrl url;
+        url.setProtocol(m_protocols[srv->type()].toLower());
+        url.setHost(srv->hostName());
+        url.setPort(srv->port());
 
-void ZeroconfPage::addService(DNSSD::RemoteService::Ptr rs)
-{
-    if (rs->resolve()) {
-        m_numServices++;
-        m_serviceTable->setRowCount(m_numServices);
-        m_serviceTable->setItem(m_numServices - 1, 0, new QTableWidgetItem(m_protocols[rs->type()].toUpper()));
-        m_serviceTable->setItem(m_numServices - 1, 1, new QTableWidgetItem(rs->hostName()));
-        m_serviceTable->setItem(m_numServices - 1, 2, new QTableWidgetItem(QString().setNum(rs->port())));
-        m_serviceTable->setItem(m_numServices - 1, 3, new QTableWidgetItem(rs->serviceName()));
+        emit newConnection(url, false);
     }
 }
 
@@ -148,10 +137,5 @@ void ZeroconfPage::rowSelected()
 
 void ZeroconfPage::newConnection()
 {
-    const int currentRow = m_serviceTable->currentRow();
-    KUrl url;
-    url.setProtocol(m_serviceTable->item(currentRow, 0)->text().toLower());
-    url.setHost(m_serviceTable->item(currentRow, 1)->text());
-    url.setPort(m_serviceTable->item(currentRow, 2)->text().toInt());
-    emit newConnection(url, false);
+    serviceSelected(m_servicesView->selectionModel()->selectedRows().at(0));
 }

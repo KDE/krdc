@@ -1,6 +1,7 @@
 /****************************************************************************
 **
 ** Copyright (C) 2008 Magnus Romnes <romnes @ stud.ntnu.no>
+** Copyright (C) 2008 Urs Wolfer <uwolfer @ kde.org>
 **
 ** This file is part of KDE.
 **
@@ -24,15 +25,12 @@
 #ifndef ZEROCONFPAGE_H
 #define ZEROCONFPAGE_H
 
-#include <QWidget>
-#include <QTableWidget>
-#include <QHash>
+#include <QTableView>
 
 #include <KUrl>
 #include <KPushButton>
 
 #include <dnssd/servicebrowser.h>
-#include <dnssd/remoteservice.h>
 
 class ZeroconfPage : public QWidget
 {
@@ -41,18 +39,15 @@ class ZeroconfPage : public QWidget
 public:
     ZeroconfPage(QWidget *parent = 0);
     ~ZeroconfPage();
-    void startBrowse();
 
 public slots:
-    void addService(DNSSD::RemoteService::Ptr);
     void rowSelected();
     void newConnection();
+    void serviceSelected(const QModelIndex& idx);
 
 private:
     DNSSD::ServiceBrowser* m_browser;
-    int m_numServices;
-    QString m_selectedHost;
-    QTableWidget* m_serviceTable;
+    QTableView* m_servicesView;
     KPushButton* m_connectButton;
     QHash<QString, QString> m_protocols;
 
