@@ -54,8 +54,6 @@ private:
     KPushButton *configureButton;
     KPushButton *removeButton;
     QListWidget *hostList;
-    QDomDocument m_doc;
-    QString m_filename;
 };
 
 #endif
