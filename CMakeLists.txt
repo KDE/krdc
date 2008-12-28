@@ -117,11 +117,19 @@ endif(LIBNXCL_FOUND)
 install(TARGETS krdc ${INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES krdcui.rc DESTINATION ${DATA_INSTALL_DIR}/krdc)
 install(FILES krdc.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
-install(FILES vnc.protocol rdp.protocol DESTINATION ${SERVICES_INSTALL_DIR})
-install(FILES smb2rdc.desktop DESTINATION ${SERVICES_INSTALL_DIR}/ServiceMenus)
 install(FILES pointcursor.png pointcursormask.png DESTINATION ${DATA_INSTALL_DIR}/krdc/pics)
+
+if(LIBVNCSERVER_FOUND)
+   install(FILES vnc/vnc.protocol DESTINATION ${SERVICES_INSTALL_DIR})
+endif(LIBVNCSERVER_FOUND)
+
+if(HAVE_RDESKTOP)
+   install(FILES rdp/rdp.protocol DESTINATION ${SERVICES_INSTALL_DIR})
+   install(FILES rdp/smb2rdc.desktop DESTINATION ${SERVICES_INSTALL_DIR}/ServiceMenus)
+endif(HAVE_RDESKTOP)
 
 if(LIBNXCL_FOUND)
    install(FILES nx/default.dsa.key DESTINATION ${DATA_INSTALL_DIR}/krdc)
+   install(FILES nx/nx.protocol DESTINATION ${SERVICES_INSTALL_DIR})
 endif(LIBNXCL_FOUND)
 
