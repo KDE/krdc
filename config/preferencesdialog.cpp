@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007 Urs Wolfer <uwolfer @ kde.org>
+** Copyright (C) 2007 - 2008 Urs Wolfer <uwolfer @ kde.org>
 **
 ** This file is part of KDE.
 **
@@ -25,65 +25,59 @@
 
 #include "hostpreferenceslist.h"
 #include "ui_general.h"
-#ifdef BUILD_VNC
-#include "ui_vncpreferences.h"
-#endif
-#ifdef BUILD_RDP
-#include "ui_rdppreferences.h"
-#endif
-#ifdef BUILD_NX
-#include "ui_nxpreferences.h"
-#endif
 
 #include <KConfigSkeleton>
+#include <KDebug>
+#include <KPluginSelector>
+#include <KService>
+#include <KServiceTypeTrader>
+#include <KPluginInfo>
 
 PreferencesDialog::PreferencesDialog(QWidget *parent, KConfigSkeleton *skeleton)
         : KConfigDialog(parent, "preferences", skeleton)
+        , m_settingsChanged(false)
 {
     QWidget *generalPage = new QWidget(this);
     Ui::General generalUi;
     generalUi.setupUi(generalPage);
-    addPage(generalPage, i18nc("General Config", "General"), "krdc", i18n("General Config"));
+    addPage(generalPage, i18nc("General Config", "General"), "krdc", i18n("General Configuration"));
 
-    HostPreferencesList *hostPreferencesList = new HostPreferencesList(this, skeleton->config()->group("hostpreferences"));
-    addPage(hostPreferencesList, i18n("Hosts"), "krdc", i18n("Host Config"));
-    setHelp(QString(),"krdc");
-#ifdef BUILD_VNC
-    QWidget *vncPage = new QWidget(this);
-    Ui::VncPreferences vncUi;
-    vncUi.setupUi(vncPage);
-    addPage(vncPage, i18n("VNC"), "krdc", i18n("VNC Config"));
-#endif
+    HostPreferencesList *hostPreferencesList = new HostPreferencesList(this,
+                                                                       qobject_cast<MainWindow *>(parent),
+                                                                       skeleton->config()->group("hostpreferences"));
+    addPage(hostPreferencesList, i18n("Hosts"), "krdc", i18n("Host Configuration"));
+    
+    m_pluginSelector = new KPluginSelector();
+    KService::List offers = KServiceTypeTrader::self()->query("KRDC/Plugin");
+    m_pluginSelector->addPlugins(KPluginInfo::fromServices(offers), KPluginSelector::ReadConfigFile,
+                               i18n("Plugins"), "Service", KGlobal::config());
+    m_pluginSelector->load();
+    addPage(m_pluginSelector, i18n("Plugins"), "preferences-plugin", i18n("Plugin Configuration"));
 
-#ifdef BUILD_RDP
-    QWidget *rdpPage = new QWidget(this);
-    Ui::RdpPreferences rdpUi;
-    rdpUi.setupUi(rdpPage);
-    // would need a lot of code duplication. find a solution, bit it's not
-    // that imporant because you will not change this configuration each day...
-    // see rdp/rdphostpreferences.cpp
-    rdpUi.resolutionComboBox->hide();
-    rdpUi.resolutionDummyLabel->hide();
-    rdpUi.kcfg_Height->setEnabled(true);
-    rdpUi.kcfg_Width->setEnabled(true);
-    rdpUi.heightLabel->setEnabled(true);
-    rdpUi.widthLabel->setEnabled(true);
-    addPage(rdpPage, i18n("RDP"), "krdc", i18n("RDP Config"));
-#endif
+    connect(this, SIGNAL(accepted()), SLOT(saveState()));
+    connect(this, SIGNAL(defaultClicked()), SLOT(loadDefaults()));
+    connect(m_pluginSelector, SIGNAL(changed(bool)), SLOT(settingsChanged()));
+}
 
-#ifdef BUILD_NX
-    QWidget *nxPage = new QWidget(this);
-    Ui::NxPreferences nxUi;
-    nxUi.setupUi(nxPage);
-    nxUi.resolutionComboBox->hide();
-    nxUi.checkboxDefaultPrivateKey->hide();
-    nxUi.buttonImportPrivateKey->hide();
-    nxUi.labelPrivateKey->hide();
-    nxUi.groupboxPrivateKey->hide();
-    nxUi.kcfg_NxHeight->setEnabled(true);
-    nxUi.kcfg_NxWidth->setEnabled(true);
-    nxUi.heightLabel->setEnabled(true);
-    nxUi.widthLabel->setEnabled(true);
-    addPage(nxPage, i18n("NX"), "krdc", i18n("NX Config"));    
-#endif
+void PreferencesDialog::saveState()
+{
+    //TODO: relaod plugins at runtime?
+    m_pluginSelector->save();
+}
+
+void PreferencesDialog::loadDefaults()
+{
+    m_pluginSelector->defaults();
+    enableButton(Default, false);
+}
+
+void PreferencesDialog::settingsChanged()
+{
+    enableButton(Apply, true);
+    enableButton(Default, true);
+}
+
+bool PreferencesDialog::isDefault()
+{
+    return KConfigDialog::isDefault() && m_pluginSelector->isDefault();
 }

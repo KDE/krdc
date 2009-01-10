@@ -30,21 +30,10 @@
 #include "bookmarkmanager.h"
 #include "remotedesktopsmodel.h"
 #include "systemtrayicon.h"
+#include "hostpreferences.h"
 
-#ifdef BUILD_RDP
-#include "rdpview.h"
-#endif
-#ifdef BUILD_NX
-#include "nxview.h"
-#endif
-#ifdef BUILD_VNC
-#include "vncview.h"
-#endif
 #ifdef BUILD_ZEROCONF
-#include "zeroconfpage.h"
-#endif
-#ifdef BUILD_TEST
-#include "testview.h"
+#include "zeroconf/zeroconfpage.h"
 #endif
 
 #include <KAction>
@@ -58,7 +47,7 @@
 #include <KMenuBar>
 #include <KMessageBox>
 #include <KNotifyConfigWidget>
-#include <KProcess>
+#include <KPluginInfo>
 #include <KPushButton>
 #include <KShortcut>
 #include <KShortcutsDialog>
@@ -67,6 +56,7 @@
 #include <KToggleAction>
 #include <KToggleFullScreenAction>
 #include <KUrlNavigator>
+#include <KServiceTypeTrader>
 #include <KStandardDirs>
 
 #include <QClipboard>
@@ -94,6 +84,8 @@ MainWindow::MainWindow(QWidget *parent)
         m_systemTrayIcon(0),
         m_zeroconfPage(0)
 {
+    loadAllPlugins();
+
     setupActions();
 
     setStandardToolBarMenuEnabled(true);
@@ -154,29 +146,14 @@ MainWindow::~MainWindow()
 
 void MainWindow::setupActions()
 {
-    QAction *vncConnectionAction = actionCollection()->addAction("new_vnc_connection");
-    vncConnectionAction->setText(i18n("New VNC Connection..."));
-    vncConnectionAction->setIcon(KIcon("network-connect"));
-    connect(vncConnectionAction, SIGNAL(triggered()), SLOT(newVncConnection()));
-#ifndef BUILD_VNC
-    vncConnectionAction->deleteLater();
-#endif
-
-    QAction *nxConnectionAction = actionCollection()->addAction("new_nx_connection");
-    nxConnectionAction->setText(i18n("New NX Connection..."));
-    nxConnectionAction->setIcon(KIcon("network-connect"));
-    connect(nxConnectionAction, SIGNAL(triggered()), SLOT(newNxConnection()));
-#ifndef BUILD_NX
-    nxConnectionAction->deleteLater();
-#endif
-
-    QAction *rdpConnectionAction = actionCollection()->addAction("new_rdp_connection");
-    rdpConnectionAction->setText(i18n("New RDP Connection..."));
-    rdpConnectionAction->setIcon(KIcon("network-connect"));
-    connect(rdpConnectionAction, SIGNAL(triggered()), SLOT(newRdpConnection()));
-#ifndef BUILD_RDP
-    rdpConnectionAction->deleteLater();
-#endif
+    foreach(RemoteViewFactory *factory, m_remoteViewFactories) {
+        QAction *connectionAction = actionCollection()->addAction("new_" + factory->scheme() + "_connection");
+        connectionAction->setProperty("schemeString", factory->scheme());
+        connectionAction->setProperty("toolTipString", factory->connectToolTipText());
+        connectionAction->setText(factory->connectActionText());
+        connectionAction->setIcon(KIcon("network-connect"));
+        connect(connectionAction, SIGNAL(triggered()), SLOT(newConnectionToolTip()));
+    }
 
     QAction *zeroconfAction = actionCollection()->addAction("zeroconf_page");
     zeroconfAction->setText(i18n("Browse Remote Desktop Services on Local Network..."));
@@ -234,32 +211,15 @@ void MainWindow::setupActions()
     m_menubarAction = KStandardAction::showMenubar(this, SLOT(showMenubar()), actionCollection());
     m_menubarAction->setChecked(!menuBar()->isHidden());
 
-    QString initialProtocol;
-#ifdef BUILD_RDP
-    initialProtocol = "rdp";
-#endif
-#ifdef BUILD_NX
-    initialProtocol = "nx";
-#endif
-#ifdef BUILD_VNC
-    initialProtocol = "vnc";
-#endif
-
+    const QString initialProtocol(!m_remoteViewFactories.isEmpty() ? (*m_remoteViewFactories.begin())->scheme() : QString());
     m_addressNavigator = new KUrlNavigator(0, KUrl(initialProtocol + "://"), this);
-    m_addressNavigator->setCustomProtocols(QStringList()
-#ifdef BUILD_VNC
-                                           << "vnc"
-#endif
-#ifdef BUILD_NX
-                                           << "nx"
-#endif
-#ifdef BUILD_RDP
-                                           << "rdp"
-#endif
-#ifdef BUILD_TEST
-                                           << "test"
-#endif
-                                          );
+
+    QStringList schemes;
+    foreach(RemoteViewFactory *factory, m_remoteViewFactories) {
+        schemes << factory->scheme();
+    }
+    m_addressNavigator->setCustomProtocols(schemes);
+
     m_addressNavigator->setUrlEditable(Settings::normalUrlInputLine());
     connect(m_addressNavigator, SIGNAL(returnPressed()), SLOT(newConnection()));
 
@@ -284,6 +244,57 @@ void MainWindow::setupActions()
     m_bookmarkManager = new BookmarkManager(actionCollection(), bookmarkMenu->menu(), this);
     actionCollection()->addAction("bookmark" , bookmarkMenu);
     connect(m_bookmarkManager, SIGNAL(openUrl(KUrl)), SLOT(newConnection(KUrl)));
+}
+
+void MainWindow::loadAllPlugins()
+{
+    const KService::List offers = KServiceTypeTrader::self()->query("KRDC/Plugin");
+
+    KConfigGroup conf(KGlobal::config(), "Plugins");
+
+    for (int i = 0; i < offers.size(); i++) {
+        KService::Ptr offer = offers[i];
+
+        RemoteViewFactory *remoteView;
+
+        KPluginInfo description(offer);
+        description.load(conf);
+
+        const bool selected = description.isPluginEnabled();
+
+        if (selected) {
+            if ((remoteView = createPluginFromService(offer)) != 0) {
+                kDebug(5010) << "### Plugin " + description.name() + " found ###";
+                kDebug(5010) << "# Version:" << description.version();
+                kDebug(5010) << "# Description:" << description.comment();
+                kDebug(5010) << "# Author:" << description.author();
+                const int sorting = offer->property("X-KDE-KRDC-Sorting").toInt();
+                kDebug(5010) << "# Sorting:" << sorting;
+
+                m_remoteViewFactories.insert(sorting, remoteView);
+            } else {
+                kDebug(5010) << "Error loading KRDC plugin (" << (offers[i])->library() << ')';
+            }
+        } else {
+            kDebug(5010) << "# Plugin " + description.name() + " found, however it's not activated, skipping...";
+            continue;
+        }
+    }
+}
+
+RemoteViewFactory *MainWindow::createPluginFromService(const KService::Ptr &service)
+{
+    //try to load the specified library
+    KPluginFactory *factory = KPluginLoader(service->library()).factory();
+
+    if (!factory) {
+        kError(5010) << "KPluginFactory could not load the plugin:" << service->library();
+        return 0;
+    }
+
+    RemoteViewFactory *plugin = factory->create<RemoteViewFactory>();
+
+    return plugin;
 }
 
 void MainWindow::restoreOpenSessions()
@@ -316,34 +327,18 @@ void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConn
     RemoteView *view = 0;
     KConfigGroup configGroup = Settings::self()->config()->group("hostpreferences").group(url.prettyUrl(KUrl::RemoveTrailingSlash));
 
-    if (url.scheme().compare("vnc", Qt::CaseInsensitive) == 0) {
-#ifdef BUILD_VNC
-        view = new VncView(this, url, configGroup);
-#endif
-    } else if (url.scheme().compare("nx", Qt::CaseInsensitive) == 0) {
-#ifdef BUILD_NX
-        view = new NxView(this, url, configGroup);
-#endif
-    } else if (url.scheme().compare("rdp", Qt::CaseInsensitive) == 0) {
-#ifdef BUILD_RDP
-        view = new RdpView(this, url, configGroup);
-#endif
-    } else if (url.scheme().compare("test", Qt::CaseInsensitive) == 0) {
-#ifdef BUILD_TEST
-        view = new TestView(this, url, configGroup);
-#endif
-    } else
-    {
-        KMessageBox::error(this,
-                           i18n("The entered address cannot be handled."),
-                           i18n("Unusable URL"));
-        return;
+    foreach(RemoteViewFactory *factory, m_remoteViewFactories) {
+        if (factory->supportsUrl(url)) {
+            view = factory->createView(this, url, configGroup);
+            kDebug(5010) << "Found plugin to handle url (" + url.url() + "): " + view->metaObject()->className();
+            break;
+        }
     }
 
     if (!view) {
-        KMessageBox::error(this, i18n("Support for %1:// has not been enabled during build.",
-                    url.scheme().toLower()),
-                i18n("Unusable URL"));
+        KMessageBox::error(this,
+                           i18n("The entered address cannot be handled."),
+                           i18n("Unusable URL"));
         return;
     }
     
@@ -959,34 +954,18 @@ void MainWindow::createStartPage()
     headerLayout->setMargin(20);
     headerLayout->addWidget(headerLabel, 1, Qt::AlignTop);
     headerLayout->addWidget(headerIconLabel);
+    startLayout->addLayout(headerLayout);
 
-    KPushButton *vncConnectButton = new KPushButton(this);
-    vncConnectButton->setStyleSheet("KPushButton { padding: 12px; margin: 10px; }");
-    vncConnectButton->setIcon(KIcon(actionCollection()->action("new_vnc_connection")->icon()));
-    vncConnectButton->setText(i18n("Connect to a VNC Remote Desktop"));
-    connect(vncConnectButton, SIGNAL(clicked()), SLOT(newVncConnection()));
-#ifndef BUILD_VNC
-    vncConnectButton->setVisible(false);
-#endif
-
-    KPushButton *nxConnectButton = new KPushButton(this);
-    nxConnectButton->setStyleSheet("KPushButton { padding: 12px; margin: 10px; }");
-    nxConnectButton->setIcon(KIcon(actionCollection()->action("new_nx_connection")->icon()));
-    nxConnectButton->setText(i18n("Connect to a NX Remote Desktop"));
-    connect(nxConnectButton, SIGNAL(clicked()), SLOT(newNxConnection()));
-#ifndef BUILD_NX
-    nxConnectButton->setVisible(false);
-#endif
-
-    rdpConnectButton = new KPushButton(this);
-    rdpConnectButton->setStyleSheet("KPushButton { padding: 12px; margin: 10px; }");
-    rdpConnectButton->setIcon(KIcon(actionCollection()->action("new_rdp_connection")->icon()));
-    rdpConnectButton->setText(i18n("Connect to a Windows Remote Desktop (RDP)"));
-    connect(rdpConnectButton, SIGNAL(clicked()), SLOT(newRdpConnection()));
-    QMetaObject::invokeMethod(this, "checkRdektopAvailability");
-#ifndef BUILD_RDP
-    rdpConnectButton->setVisible(false);
-#endif
+    foreach(RemoteViewFactory *factory, m_remoteViewFactories) {
+        KPushButton *connectButton = new KPushButton(this);
+        connectButton->setProperty("schemeString", factory->scheme());
+        connectButton->setProperty("toolTipString", factory->connectToolTipText());
+        connectButton->setStyleSheet("KPushButton { padding: 12px; margin: 10px; }");
+        connectButton->setIcon(KIcon(actionCollection()->action("new_" + factory->scheme() + "_connection")->icon()));
+        connectButton->setText(factory->connectButtonText());
+        connect(connectButton, SIGNAL(clicked()), SLOT(newConnectionToolTip()));
+        startLayout->addWidget(connectButton);
+    }
 
     KPushButton *zeroconfButton = new KPushButton(this);
     zeroconfButton->setStyleSheet("KPushButton { padding: 12px; margin: 10px; }");
@@ -997,47 +976,24 @@ void MainWindow::createStartPage()
     zeroconfButton->setVisible(false);
 #endif
 
-    startLayout->addLayout(headerLayout);
-    startLayout->addWidget(vncConnectButton);
-    startLayout->addWidget(nxConnectButton);
-    startLayout->addWidget(rdpConnectButton);
     startLayout->addWidget(zeroconfButton);
     startLayout->addStretch();
 
     m_tabWidget->insertTab(0, startWidget, KIcon("krdc"), i18n("Start Page"));
 }
 
-void MainWindow::newVncConnection()
+void MainWindow::newConnectionToolTip()
 {
-    m_addressNavigator->setUrl(KUrl("vnc://"));
+    QObject *senderObject = qobject_cast<QObject*>(sender());
+    const QString toolTip(senderObject->property("toolTipString").toString());
+    const QString scheme(senderObject->property("schemeString").toString());
+
+    m_addressNavigator->setUrl(KUrl(scheme + "://"));
     m_addressNavigator->setFocus();
 
     QToolTip::showText(m_addressNavigator->pos() + pos() + QPoint(m_addressNavigator->width(),
-                                                                  m_addressNavigator->height() + 20),
-                       i18n("<html>Enter the address here.<br />"
-                            "<i>Example: vncserver:1 (host:port / screen)</i></html>"), this);
-}
-
-void MainWindow::newNxConnection()
-{
-    m_addressNavigator->setUrl(KUrl("nx://"));
-    m_addressNavigator->setFocus();
-
-    QToolTip::showText(m_addressNavigator->pos() + pos() + QPoint(m_addressNavigator->width(),
-                                                                  m_addressNavigator->height() + 20),
-                       i18n("<html>Enter the address here.<br />"
-                            "<i>Example: nxserver (host)</i></html>"), this);
-}
-
-void MainWindow::newRdpConnection()
-{
-    m_addressNavigator->setUrl(KUrl("rdp://"));
-    m_addressNavigator->setFocus();
-
-    QToolTip::showText(m_addressNavigator->pos() + pos() + QPoint(m_addressNavigator->width(),
-                                                                  m_addressNavigator->height() + 20),
-                       i18n("<html>Enter the address here. Port is optional.<br />"
-                            "<i>Example: rdpserver:3389 (host:port)</i></html>"), this);
+                                                                  m_addressNavigator->height() / 2),
+                       toolTip, this);
 }
 
 void MainWindow::createZeroconfPage()
@@ -1049,7 +1005,7 @@ void MainWindow::createZeroconfPage()
     m_zeroconfPage = new ZeroconfPage(this);
     connect(m_zeroconfPage, SIGNAL(newConnection(const KUrl, bool)), this, SLOT(newConnection(const KUrl, bool)));
     connect(m_zeroconfPage, SIGNAL(closeZeroconfPage()), this, SLOT(closeZeroconfPage()));
-    int zeroconfTabIndex = m_tabWidget->insertTab(m_showStartPage ? 1 : 0, m_zeroconfPage, KIcon("krdc"), i18n("Browse Local Network"));
+    const int zeroconfTabIndex = m_tabWidget->insertTab(m_showStartPage ? 1 : 0, m_zeroconfPage, KIcon("krdc"), i18n("Browse Local Network"));
     m_tabWidget->setCurrentIndex(zeroconfTabIndex);
 #endif
 }
@@ -1057,25 +1013,21 @@ void MainWindow::createZeroconfPage()
 void MainWindow::closeZeroconfPage()
 {
 #ifdef BUILD_ZEROCONF
-    int index = m_tabWidget->indexOf(m_zeroconfPage);
+    const int index = m_tabWidget->indexOf(m_zeroconfPage);
     m_tabWidget->removeTab(index);
     m_zeroconfPage->deleteLater();
     m_zeroconfPage = 0;
 #endif
 }
 
-void MainWindow::checkRdektopAvailability()
-{
-    if (KProcess::execute("rdesktop") < 0) { //-2 if the process could not be started, -1 if it crashed, otherwise its exit code 
-        rdpConnectButton->setEnabled(false);
-        rdpConnectButton->setText(rdpConnectButton->text() + '\n' + 
-                                  i18n("\"rdesktop\" cannot be found on your system; make sure it is properly installed."));
-    }
-}
-
 QList<RemoteView *> MainWindow::remoteViewList() const
 {
     return m_remoteViewList;
+}
+
+QList<RemoteViewFactory *> MainWindow::remoteViewFactoriesList() const
+{
+    return m_remoteViewFactories.values();
 }
 
 int MainWindow::currentRemoteView() const

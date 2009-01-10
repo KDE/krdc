@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007 Urs Wolfer <uwolfer @ kde.org>
+** Copyright (C) 2008 Urs Wolfer <uwolfer @ kde.org>
 **
 ** This file is part of KDE.
 **
@@ -21,42 +21,36 @@
 **
 ****************************************************************************/
 
-#ifndef HOSTPREFERENCESLIST_H
-#define HOSTPREFERENCESLIST_H
+#ifndef VNCVIEWFACTORY_H
+#define VNCVIEWFACTORY_H
 
-#include "mainwindow.h"
+#include "remoteviewfactory.h"
 
-#include <KConfigGroup>
+#include "vncview.h"
+#include "vncpreferences.h"
 
-#include <QDomDocument>
-#include <QWidget>
-
-class KPushButton;
-
-class QListWidget;
-
-class HostPreferencesList : public QWidget
+class VncViewFactory : public RemoteViewFactory
 {
     Q_OBJECT
 
 public:
-    HostPreferencesList(QWidget *parent, MainWindow *mainWindow, KConfigGroup hostPrefsConfig);
-    ~HostPreferencesList();
+    explicit VncViewFactory(QObject *parent, const QVariantList &args);
 
-private slots:
-    void readConfig();
-    void saveSettings();
-    void configureHost();
-    void removeHost();
-    void selectionChanged();
+    virtual ~VncViewFactory();
 
-private:
-    KConfigGroup m_hostPrefsConfig;
+    virtual bool supportsUrl(const KUrl &url) const;
 
-    KPushButton *configureButton;
-    KPushButton *removeButton;
-    QListWidget *hostList;
-    MainWindow *m_mainWindow;
+    virtual RemoteView *createView(QWidget *parent, const KUrl &url, KConfigGroup configGroup);
+
+    virtual HostPreferences *createHostPreferences(KConfigGroup configGroup, QWidget *parent);
+
+    virtual QString scheme() const;
+
+    virtual QString connectActionText() const;
+    
+    virtual QString connectButtonText() const;
+
+    virtual QString connectToolTipText() const;
 };
 
-#endif // HOSTPREFERENCESLIST_H
+#endif // VNCVIEWFACTORY_H

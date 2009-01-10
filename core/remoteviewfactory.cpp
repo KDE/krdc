@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007 Urs Wolfer <uwolfer @ kde.org>
+** Copyright (C) 2008 Urs Wolfer <uwolfer @ kde.org>
 **
 ** This file is part of KDE.
 **
@@ -21,42 +21,17 @@
 **
 ****************************************************************************/
 
-#ifndef HOSTPREFERENCESLIST_H
-#define HOSTPREFERENCESLIST_H
+#include "remoteviewfactory.h"
 
-#include "mainwindow.h"
+#include <KDebug>
 
-#include <KConfigGroup>
-
-#include <QDomDocument>
-#include <QWidget>
-
-class KPushButton;
-
-class QListWidget;
-
-class HostPreferencesList : public QWidget
+RemoteViewFactory::RemoteViewFactory(QObject *parent)
+        : QObject(parent)
 {
-    Q_OBJECT
+}
 
-public:
-    HostPreferencesList(QWidget *parent, MainWindow *mainWindow, KConfigGroup hostPrefsConfig);
-    ~HostPreferencesList();
+RemoteViewFactory::~RemoteViewFactory()
+{
+}
 
-private slots:
-    void readConfig();
-    void saveSettings();
-    void configureHost();
-    void removeHost();
-    void selectionChanged();
-
-private:
-    KConfigGroup m_hostPrefsConfig;
-
-    KPushButton *configureButton;
-    KPushButton *removeButton;
-    QListWidget *hostList;
-    MainWindow *m_mainWindow;
-};
-
-#endif // HOSTPREFERENCESLIST_H
+#include "moc_remoteviewfactory.cpp"

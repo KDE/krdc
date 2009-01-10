@@ -54,7 +54,7 @@ class HostPreferences;
  *     MotionNotify events will be forwarded.
  *
  */
-class RemoteView : public QWidget
+class KDE_EXPORT RemoteView : public QWidget
 {
     Q_OBJECT
 
@@ -125,8 +125,6 @@ public:
         ServerBlocked,
         Authentication
     };
-
-    RemoteView(QWidget *parent = 0);
 
     virtual ~RemoteView();
 
@@ -364,6 +362,8 @@ signals:
     void mouseStateChanged(int x, int y, int buttonMask);
 
 protected:
+    RemoteView(QWidget *parent = 0);
+
     void focusInEvent(QFocusEvent *event);
     void focusOutEvent(QFocusEvent *event);
 

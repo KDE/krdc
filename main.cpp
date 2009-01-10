@@ -1,7 +1,7 @@
 /****************************************************************************
 **
 ** Copyright (C) 2001-2003 Tim Jansen <tim@tjansen.de>
-** Copyright (C) 2007 Urs Wolfer <uwolfer @ kde.org>
+** Copyright (C) 2007 - 2008 Urs Wolfer <uwolfer @ kde.org>
 **
 ** This file is part of KDE.
 **
@@ -30,8 +30,12 @@
 #include <KAboutData>
 #include <KDebug>
 
+#include <QTime>
+
 int main(int argc, char **argv)
 {
+    QTime startupTimer;;
+    startupTimer.start();
     KAboutData aboutData("krdc", 0, ki18n("KRDC"), KDE_VERSION_STRING,
                          ki18n("KDE remote desktop connection"), KAboutData::License_GPL,
                          ki18n("(c) 2007-2008, Urs Wolfer\n"
@@ -91,6 +95,8 @@ int main(int argc, char **argv)
             mainwindow->newConnection(u, ((args->isSet("fullscreen")) && (args->count() == 1)));
         }
     }
+    
+    kDebug(5010) << "########## KRDC ready:" << startupTimer.elapsed()<< "ms ##########";
 
     return app.exec();
 }

@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007 Urs Wolfer <uwolfer @ kde.org>
+** Copyright (C) 2008 Urs Wolfer <uwolfer @ kde.org>
 **
 ** This file is part of KDE.
 **
@@ -21,42 +21,24 @@
 **
 ****************************************************************************/
 
-#ifndef HOSTPREFERENCESLIST_H
-#define HOSTPREFERENCESLIST_H
+#ifndef VNCPREFERENCES_H
+#define VNCPREFERENCES_H
 
-#include "mainwindow.h"
+#include "vnchostpreferences.h"
 
-#include <KConfigGroup>
+#include <KCModule>
 
-#include <QDomDocument>
-#include <QWidget>
-
-class KPushButton;
-
-class QListWidget;
-
-class HostPreferencesList : public QWidget
+class VncPreferences : public KCModule
 {
     Q_OBJECT
 
 public:
-    HostPreferencesList(QWidget *parent, MainWindow *mainWindow, KConfigGroup hostPrefsConfig);
-    ~HostPreferencesList();
+    explicit VncPreferences(QWidget *parent = 0, const QVariantList &args = QVariantList());
+    ~VncPreferences();
 
-private slots:
-    void readConfig();
-    void saveSettings();
-    void configureHost();
-    void removeHost();
-    void selectionChanged();
+    virtual void save();
+    virtual void load();
 
-private:
-    KConfigGroup m_hostPrefsConfig;
-
-    KPushButton *configureButton;
-    KPushButton *removeButton;
-    QListWidget *hostList;
-    MainWindow *m_mainWindow;
 };
 
-#endif // HOSTPREFERENCESLIST_H
+#endif // VNCPREFERENCES_H

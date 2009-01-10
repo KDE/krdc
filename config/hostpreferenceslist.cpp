@@ -24,16 +24,6 @@
 #include "hostpreferenceslist.h"
 #include "hostpreferences.h"
 
-#ifdef BUILD_VNC
-#include "vnchostpreferences.h"
-#endif
-#ifdef BUILD_RDP
-#include "rdphostpreferences.h"
-#endif
-#ifdef BUILD_NX
-#include "nxhostpreferences.h"
-#endif
-
 #include <KDebug>
 #include <KIcon>
 #include <KLocale>
@@ -45,9 +35,10 @@
 #include <QLayout>
 #include <QListWidget>
 
-HostPreferencesList::HostPreferencesList(QWidget *parent, KConfigGroup hostPrefsConfig)
-        : QWidget(parent),
-        m_hostPrefsConfig(hostPrefsConfig)
+HostPreferencesList::HostPreferencesList(QWidget *parent, MainWindow *mainWindow, KConfigGroup hostPrefsConfig)
+        : QWidget(parent)
+        , m_hostPrefsConfig(hostPrefsConfig)
+        , m_mainWindow(mainWindow)
 {
     hostList = new QListWidget(this);
     connect(hostList, SIGNAL(itemSelectionChanged()), SLOT(selectionChanged()));
@@ -106,28 +97,26 @@ void HostPreferencesList::configureHost()
         kDebug(5010) << "Configure host: " << url;
 
         HostPreferences* prefs = 0;
-#ifdef BUILD_VNC
-        if (url.startsWith("vnc", Qt::CaseInsensitive))
-            prefs = new VncHostPreferences(m_hostPrefsConfig.group(url), this);
-        else
-#endif
-#ifdef BUILD_RDP
-        if (url.startsWith("rdp", Qt::CaseInsensitive))
-            prefs = new RdpHostPreferences(m_hostPrefsConfig.group(url), this);
-        else
-#endif
-#ifdef BUILD_NX
-        if (url.startsWith("nx", Qt::CaseInsensitive))
-            prefs = new NxHostPreferences(m_hostPrefsConfig.group(url), this);
-        else
-#endif
-            KMessageBox::error(this,
-                               i18n("The selected host cannot be handled."),
-                               i18n("Unusable URL"));
         
+        const QList<RemoteViewFactory *> remoteViewFactories(m_mainWindow->remoteViewFactoriesList());
+        foreach(RemoteViewFactory *factory, remoteViewFactories) {
+            if (factory->supportsUrl(url)) {
+                prefs = factory->createHostPreferences(m_hostPrefsConfig.group(url), this);
+                if (prefs) {
+                    kDebug(5010) << "Found plugin to handle url (" + url + "): " + prefs->metaObject()->className();
+                } else {
+                    kDebug(5010) << "Found plugin to handle url (" + url + "), but plugin does not provide preferences";
+                }
+            }
+        }
+
         if (prefs) {
             prefs->showDialog();
             delete prefs;
+        } else {
+            KMessageBox::error(this,
+                               i18n("The selected host cannot be handled."),
+                               i18n("Unusable URL"));
         }
     }
 }

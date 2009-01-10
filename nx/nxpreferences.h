@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007 Urs Wolfer <uwolfer @ kde.org>
+** Copyright (C) 2008 Urs Wolfer <uwolfer @ kde.org>
 **
 ** This file is part of KDE.
 **
@@ -21,42 +21,24 @@
 **
 ****************************************************************************/
 
-#ifndef HOSTPREFERENCESLIST_H
-#define HOSTPREFERENCESLIST_H
+#ifndef NXPREFERENCES_H
+#define NXPREFERENCES_H
 
-#include "mainwindow.h"
+#include "nxhostpreferences.h"
 
-#include <KConfigGroup>
+#include <KCModule>
 
-#include <QDomDocument>
-#include <QWidget>
-
-class KPushButton;
-
-class QListWidget;
-
-class HostPreferencesList : public QWidget
+class NxPreferences : public KCModule
 {
     Q_OBJECT
 
 public:
-    HostPreferencesList(QWidget *parent, MainWindow *mainWindow, KConfigGroup hostPrefsConfig);
-    ~HostPreferencesList();
+    explicit NxPreferences(QWidget *parent = 0, const QVariantList &args = QVariantList());
+    ~NxPreferences();
 
-private slots:
-    void readConfig();
-    void saveSettings();
-    void configureHost();
-    void removeHost();
-    void selectionChanged();
+    virtual void save();
+    virtual void load();
 
-private:
-    KConfigGroup m_hostPrefsConfig;
-
-    KPushButton *configureButton;
-    KPushButton *removeButton;
-    QListWidget *hostList;
-    MainWindow *m_mainWindow;
 };
 
-#endif // HOSTPREFERENCESLIST_H
+#endif // NXPREFERENCES_H

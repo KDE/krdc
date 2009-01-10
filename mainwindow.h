@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007 Urs Wolfer <uwolfer @ kde.org>
+** Copyright (C) 2007 - 2008 Urs Wolfer <uwolfer @ kde.org>
 **
 ** This file is part of KDE.
 **
@@ -25,7 +25,9 @@
 #define MAINWINDOW_H
 
 #include "remoteview.h"
+#include "remoteviewfactory.h"
 
+#include <KService>
 #include <KXmlGuiWindow>
 
 class KPushButton;
@@ -50,8 +52,8 @@ public:
     ~MainWindow();
 
     QList<RemoteView *> remoteViewList() const;
+    QList<RemoteViewFactory *> remoteViewFactoriesList() const;
     int currentRemoteView() const;
-    KActionCollection *mainWindowActionCollection() { return actionCollection(); };
 
 public slots:
     void newConnection(const KUrl &newUrl = KUrl(), bool switchFullscreenWhenConnected = false);
@@ -84,16 +86,16 @@ private slots:
     void updateConfiguration();
     void tabChanged(int index);
     void createStartPage();
-    void newVncConnection();
-    void newNxConnection();
-    void newRdpConnection();
+    void newConnectionToolTip();
     void createZeroconfPage();
     void closeZeroconfPage();
     void openFromDockWidget(const QModelIndex &index);
-    void checkRdektopAvailability();
 
 private:
     void setupActions();
+    void loadAllPlugins();
+    RemoteViewFactory *createPluginFromService(const KService::Ptr &service);
+    
     QScrollArea *createScrollArea(QWidget *parent, RemoteView *remoteView);
 
     QWidget *m_fullscreenWindow;
@@ -108,6 +110,7 @@ private:
     BookmarkManager *m_bookmarkManager;
 
     QList<RemoteView *> m_remoteViewList;
+    QMap<int, RemoteViewFactory *> m_remoteViewFactories;
 
     int m_topBottomBorder; // tabwidget borders
     int m_leftRightBorder;
@@ -118,7 +121,6 @@ private:
 
     SystemTrayIcon *m_systemTrayIcon;
     ZeroconfPage *m_zeroconfPage;
-    KPushButton *rdpConnectButton;
 };
 
 #include <QApplication>

@@ -26,6 +26,8 @@
 
 #include "remoteview.h"
 
+#include <kdemacros.h>
+
 #include <KDialog>
 
 #include <QDomDocument>
@@ -37,12 +39,11 @@ class QWidget;
 class KConfig;
 class KConfigGroup;
 
-class HostPreferences : public QObject
+class KDE_EXPORT HostPreferences : public QObject
 {
     Q_OBJECT
 
 public:
-    HostPreferences(KConfigGroup configGroup, QObject *parent);
     ~HostPreferences();
 
     KConfigGroup configGroup();
@@ -77,6 +78,8 @@ public:
     bool showDialog();
 
 protected:
+    HostPreferences(KConfigGroup configGroup, QObject *parent);
+
     virtual QWidget* createProtocolSpecificConfigPage() = 0;
     
     /** Called when the user validates the config dialog. */

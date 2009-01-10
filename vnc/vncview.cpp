@@ -30,13 +30,12 @@
     #define error(parent, message, caption) \
         critical(parent, caption, message)
 #else
-    #include "mainwindow.h"
     #include "settings.h"
     #include <KActionCollection>
+    #include <KMainWindow>
     #include <KMessageBox>
     #include <KPasswordDialog>
-
-    #include <QAction>
+    #include <KXMLGUIClient>
 #endif
 
 #include <QApplication>
@@ -202,9 +201,9 @@ bool VncView::start()
         showDotCursor(RemoteView::CursorOn);
 #ifndef QTONLY
         // KRDC does always just have one main window, so at(0) is safe
-        MainWindow *mainWindow = qobject_cast<MainWindow*>(KMainWindow::memberList().at(0));
+        KXMLGUIClient *mainWindow = dynamic_cast<KXMLGUIClient*>(KMainWindow::memberList().at(0));
         if (mainWindow)
-            mainWindow->mainWindowActionCollection()->action("show_local_cursor")->setChecked(true);
+            mainWindow->actionCollection()->action("show_local_cursor")->setChecked(true);
 #endif
     }
 

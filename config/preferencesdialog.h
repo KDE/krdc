@@ -26,13 +26,27 @@
 
 #include <KConfigDialog>
 
-class QWidget;
 class KConfigSkeleton;
+class KPluginSelector;
 
 class PreferencesDialog : public KConfigDialog
 {
+    Q_OBJECT
+
 public:
     PreferencesDialog(QWidget *parent, KConfigSkeleton *config);
+
+protected:
+    virtual bool isDefault();
+    
+private slots:
+    void saveState();
+    void loadDefaults();
+    void settingsChanged();
+
+private:
+    KPluginSelector *m_pluginSelector;
+    bool m_settingsChanged;
 };
 
 #endif
