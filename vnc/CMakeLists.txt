@@ -2,7 +2,10 @@
 if(LIBVNCSERVER_FOUND)
     add_definitions(-DKDE_DEFAULT_DEBUG_AREA=5011)
 
-    include_directories(${LIBVNCCLIENT_INCLUDE_DIR})
+    include_directories(
+        ${CMAKE_CURRENT_BINARY_DIR}
+        ${LIBVNCCLIENT_INCLUDE_DIR}
+    )
 
     set(vncplugin_SRCS
         vnchostpreferences.cpp

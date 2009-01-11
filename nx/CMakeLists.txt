@@ -2,7 +2,10 @@
 if(LIBNXCL_FOUND)
     add_definitions(-DKDE_DEFAULT_DEBUG_AREA=5013)
 
-    include_directories(${LIBNXCL_INCLUDE_DIR})
+    include_directories(
+        ${CMAKE_CURRENT_BINARY_DIR}
+        ${LIBNXCL_INCLUDE_DIR}
+    )
 
     set(nxplugin_SRCS
         nxhostpreferences.cpp

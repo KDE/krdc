@@ -3,6 +3,11 @@ if(NOT NDEBUG)
     set(BUILD_TEST true)
 endif(NOT NDEBUG)
 if(BUILD_TEST)
+
+    include_directories(
+        ${CMAKE_CURRENT_BINARY_DIR}
+    )
+
     set(testplugin_SRCS
         testviewfactory.cpp
         testview.cpp
