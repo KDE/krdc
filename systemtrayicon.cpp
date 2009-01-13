@@ -36,7 +36,7 @@ SystemTrayIcon::SystemTrayIcon(MainWindow *parent)
         m_mainWindow(parent)
 {
     setIcon(KIcon("krdc"));
-    setToolTip("KDE Remote Desktop Client");
+    setToolTip(i18n("KDE Remote Desktop Client"));
 
     contextMenu()->addSeparator();
     contextMenu()->addAction(parent->actionCollection()->action("bookmark"));
