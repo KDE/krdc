@@ -28,6 +28,7 @@
 #include <KActionCollection>
 #include <KDebug>
 #include <KIcon>
+#include <KLocale>
 
 #include <QMenu>
 
