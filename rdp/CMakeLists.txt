@@ -39,6 +39,8 @@ if(HAVE_RDESKTOP)
         krdccore
     )
 
+    add_dependencies(kcm_krdc_rdpplugin krdc_rdpplugin)
+
     install(TARGETS kcm_krdc_rdpplugin DESTINATION ${PLUGIN_INSTALL_DIR})
     install(TARGETS krdc_rdpplugin DESTINATION ${PLUGIN_INSTALL_DIR})
 

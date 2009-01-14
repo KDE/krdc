@@ -42,6 +42,8 @@ if(LIBVNCSERVER_FOUND)
         krdccore
     )
 
+    add_dependencies(kcm_krdc_vncplugin krdc_vncplugin)
+
     install(TARGETS kcm_krdc_vncplugin DESTINATION ${PLUGIN_INSTALL_DIR})
     install(TARGETS krdc_vncplugin DESTINATION ${PLUGIN_INSTALL_DIR})
 

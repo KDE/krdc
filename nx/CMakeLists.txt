@@ -42,6 +42,8 @@ if(LIBNXCL_FOUND)
         krdccore
     )
 
+    add_dependencies(kcm_krdc_nxplugin krdc_nxplugin)
+
     install(TARGETS kcm_krdc_nxplugin DESTINATION ${PLUGIN_INSTALL_DIR})
     install(TARGETS krdc_nxplugin DESTINATION ${PLUGIN_INSTALL_DIR})
 
