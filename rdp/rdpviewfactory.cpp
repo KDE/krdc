@@ -24,7 +24,7 @@
 #include "rdpviewfactory.h"
 
 #include <KDebug>
-#include <KProcess>
+#include <KStandardDirs>
 
 KRDC_PLUGIN_EXPORT(RdpViewFactory)
 
@@ -82,7 +82,7 @@ QString RdpViewFactory::connectToolTipText() const
 
 void RdpViewFactory::checkRdektopAvailability()
 {
-    if (KProcess::execute("rdesktop") < 0) { //-2 if the process could not be started, -1 if it crashed, otherwise its exit code
+    if (KStandardDirs::findExe("rdesktop").isEmpty()) {
         m_connectToolTipString += '\n' + i18n("The application\"rdesktop\" cannot be found on your system; make sure it is properly installed "
                                               "if you need RDP support.");
     }
