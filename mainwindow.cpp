@@ -1066,7 +1066,7 @@ void MainWindow::closeZeroconfPage()
 
 void MainWindow::checkRdektopAvailability()
 {
-    if (KProcess::execute("rdesktop") < 0) { //-2 if the process could not be started, -1 if it crashed, otherwise its exit code 
+    if (KStandardDirs::findExe("rdesktop").isEmpty()) {
         rdpConnectButton->setEnabled(false);
         rdpConnectButton->setText(rdpConnectButton->text() + '\n' + 
                                   i18n("\"rdesktop\" cannot be found on your system; make sure it is properly installed."));
