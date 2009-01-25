@@ -195,7 +195,9 @@ QString RemoteView::readWalletPassword(bool fromUserNameOnly)
 {
     const QString KRDCFOLDER = "KRDC";
 
+    window()->setDisabled(true); // WORKAROUND: disable inputs so users cannot close the current tab (see #181230)
     m_wallet = KWallet::Wallet::openWallet(KWallet::Wallet::NetworkWallet(), window()->winId());
+    window()->setDisabled(false);
 
     if (m_wallet) {
         bool walletOK = m_wallet->hasFolder(KRDCFOLDER);
