@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007 - 2008 Urs Wolfer <uwolfer @ kde.org>
+** Copyright (C) 2007 - 2009 Urs Wolfer <uwolfer @ kde.org>
 **
 ** This file is part of KDE.
 **
@@ -44,6 +44,7 @@
 #include <KEditToolBar>
 #include <KIcon>
 #include <KLocale>
+#include <KMenu>
 #include <KMenuBar>
 #include <KMessageBox>
 #include <KNotifyConfigWidget>
@@ -91,8 +92,17 @@ MainWindow::MainWindow(QWidget *parent)
     setStandardToolBarMenuEnabled(true);
 
     m_tabWidget = new KTabWidget(this);
-    m_tabWidget->setCloseButtonEnabled(true);
+    m_tabWidget->setTabPosition((KTabWidget::TabPosition) Settings::tabPosition());
+
+    m_tabWidget->setCloseButtonEnabled(Settings::tabCloseButton());
+
     connect(m_tabWidget, SIGNAL(closeRequest(QWidget *)), SLOT(closeTab(QWidget *)));
+
+    if (Settings::tabMiddleClick())
+        connect(m_tabWidget, SIGNAL(mouseMiddleClick(QWidget *)), SLOT(closeTab(QWidget *)));
+
+    connect(m_tabWidget, SIGNAL(mouseDoubleClick(QWidget *)), SLOT(openTabSettings(QWidget *)));
+    connect(m_tabWidget, SIGNAL(contextMenu(QWidget *, const QPoint &)), SLOT(tabContextMenu(QWidget *, const QPoint &)));
 
     m_tabWidget->setMinimumSize(600, 400);
     setCentralWidget(m_tabWidget);
@@ -182,7 +192,7 @@ void MainWindow::setupActions()
     QAction *disconnectAction = actionCollection()->addAction("disconnect");
     disconnectAction->setText(i18n("Disconnect"));
     disconnectAction->setIcon(KIcon("system-log-out"));
-    connect(disconnectAction, SIGNAL(triggered()), SLOT(disconnect()));
+    connect(disconnectAction, SIGNAL(triggered()), SLOT(disconnectHost()));
 
     QAction *showLocalCursorAction = actionCollection()->addAction("show_local_cursor");
     showLocalCursorAction->setCheckable(true);
@@ -578,7 +588,7 @@ QScrollArea *MainWindow::createScrollArea(QWidget *parent, RemoteView *remoteVie
     return scrollArea;
 }
 
-void MainWindow::disconnect()
+void MainWindow::disconnectHost()
 {
     kDebug(5010);
 
@@ -625,6 +635,65 @@ void MainWindow::closeTab(QWidget *widget)
     m_tabWidget->removeTab(index);
 
     widget->deleteLater();
+}
+
+void MainWindow::openTabSettings(QWidget *widget)
+{
+    RemoteViewScrollArea *scrollArea = qobject_cast<RemoteViewScrollArea*>(widget);
+    if (!scrollArea) return;
+    RemoteView *view = qobject_cast<RemoteView*>(scrollArea->widget());
+    if (!view) return;
+
+    const QString url = view->url().url();
+    kDebug(5010) << url;
+
+    HostPreferences *prefs = 0;
+
+    foreach(RemoteViewFactory *factory, remoteViewFactoriesList()) {
+        if (factory->supportsUrl(url)) {
+            prefs = factory->createHostPreferences(Settings::self()->config()->group("hostpreferences").group(url), this);
+            if (prefs) {
+                kDebug(5010) << "Found plugin to handle url (" + url + "): " + prefs->metaObject()->className();
+            } else {
+                kDebug(5010) << "Found plugin to handle url (" + url + "), but plugin does not provide preferences";
+            }
+        }
+    }
+
+    if (prefs) {
+        prefs->setShownWhileConnected(true);
+        prefs->showDialog();
+        delete prefs;
+    } else {
+        KMessageBox::error(this,
+                           i18n("The selected host cannot be handled."),
+                           i18n("Unusable URL"));
+    }
+}
+
+void MainWindow::tabContextMenu(QWidget *widget, const QPoint &point)
+{
+    RemoteViewScrollArea *scrollArea = qobject_cast<RemoteViewScrollArea*>(widget);
+    if (!scrollArea) return;
+    RemoteView *view = qobject_cast<RemoteView*>(scrollArea->widget());
+    if (!view) return;
+
+    const QString url = view->url().url();
+    kDebug(5010) << url;
+
+    KMenu *menu = new KMenu(this);
+    menu->addTitle(url);
+    QAction *bookmarkAction = menu->addAction(KIcon("bookmark-new"), i18n("Add Bookmark"));
+    QAction *closeAction = menu->addAction(KIcon("tab-close"), i18n("Close Tab"));
+    QAction *selectedAction = menu->exec(point);
+    if (selectedAction) {
+        if (selectedAction == closeAction) {
+            closeTab(widget);
+        } else if (selectedAction == bookmarkAction) {
+            m_bookmarkManager->addManualBookmark(url, url);
+        }
+    }
+    menu->deleteLater();
 }
 
 void MainWindow::showLocalCursor(bool showLocalCursor)
@@ -799,6 +868,12 @@ void MainWindow::preferences()
 void MainWindow::updateConfiguration()
 {
     m_addressNavigator->setUrlEditable(Settings::normalUrlInputLine());
+
+    m_tabWidget->setTabPosition((KTabWidget::TabPosition) Settings::tabPosition());
+    m_tabWidget->setCloseButtonEnabled(Settings::tabCloseButton());
+    disconnect(m_tabWidget, SIGNAL(mouseMiddleClick(QWidget *)), this, SLOT(closeTab(QWidget *))); // just be sure it is not connected twice
+    if (Settings::tabMiddleClick())
+        connect(m_tabWidget, SIGNAL(mouseMiddleClick(QWidget *)), SLOT(closeTab(QWidget *)));
 
     if (Settings::systemTrayIcon() && !m_systemTrayIcon) {
         m_systemTrayIcon = new SystemTrayIcon(this);

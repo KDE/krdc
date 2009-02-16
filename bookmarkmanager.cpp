@@ -69,7 +69,7 @@ BookmarkManager::~BookmarkManager()
 
 void BookmarkManager::addHistoryBookmark()
 {
-    kDebug(5010) << "addHistoryBookmark";
+    kDebug(5010);
 
     KBookmark bm = m_historyGroup.first();
     while (!bm.isNull()) {
@@ -145,6 +145,12 @@ QList<QPair<QString, QString> > BookmarkManager::currentBookmarkList() const
     }
 
     return list;
+}
+
+void BookmarkManager::addManualBookmark(const QString &url, const QString &text)
+{
+    m_manager->root().addBookmark(url, text);
+    emit m_manager->emitChanged();
 }
 
 #include "bookmarkmanager.moc"

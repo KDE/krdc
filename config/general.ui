@@ -1,79 +1,80 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>General</class>
- <widget class="QWidget" name="General" >
-  <property name="geometry" >
+ <widget class="QWidget" name="General">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>344</width>
-    <height>269</height>
+    <height>385</height>
    </rect>
   </property>
-  <layout class="QVBoxLayout" >
+  <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
-    <widget class="QCheckBox" name="kcfg_RememberSessions" >
-     <property name="text" >
+    <widget class="QCheckBox" name="kcfg_RememberSessions">
+     <property name="text">
       <string>Remember open sessions for next startup</string>
      </property>
     </widget>
    </item>
    <item>
-    <widget class="QCheckBox" name="kcfg_NormalUrlInputLine" >
-     <property name="text" >
+    <widget class="QCheckBox" name="kcfg_NormalUrlInputLine">
+     <property name="text">
       <string>Use normal inputline for address input</string>
      </property>
     </widget>
    </item>
    <item>
-    <widget class="QCheckBox" name="kcfg_ShowPreferencesForNewConnections" >
-     <property name="text" >
+    <widget class="QCheckBox" name="kcfg_ShowPreferencesForNewConnections">
+     <property name="text">
       <string>Show the preferences dialog for new connections</string>
      </property>
     </widget>
    </item>
    <item>
-    <widget class="QCheckBox" name="kcfg_ShowStartPage" >
-     <property name="text" >
+    <widget class="QCheckBox" name="kcfg_ShowStartPage">
+     <property name="text">
       <string>Show start page</string>
      </property>
     </widget>
    </item>
    <item>
-    <widget class="QCheckBox" name="kcfg_WalletSupport" >
-     <property name="text" >
+    <widget class="QCheckBox" name="kcfg_WalletSupport">
+     <property name="text">
       <string>Remember passwords (KWallet)</string>
      </property>
     </widget>
    </item>
    <item>
-    <widget class="QCheckBox" name="kcfg_SystemTrayIcon" >
-     <property name="text" >
+    <widget class="QCheckBox" name="kcfg_SystemTrayIcon">
+     <property name="text">
       <string>Enable System Tray Icon</string>
      </property>
     </widget>
    </item>
    <item>
-    <widget class="QCheckBox" name="kcfg_KeepAspectRatio" >
-     <property name="text" >
+    <widget class="QCheckBox" name="kcfg_KeepAspectRatio">
+     <property name="text">
       <string>Keep aspect ratio when scaling</string>
      </property>
     </widget>
    </item>
    <item>
-    <layout class="QHBoxLayout" >
+    <layout class="QHBoxLayout">
      <item>
-      <widget class="QLabel" name="backgroundLabel" >
-       <property name="text" >
+      <widget class="QLabel" name="backgroundLabel">
+       <property name="text">
         <string>Background color of empty place:</string>
        </property>
       </widget>
      </item>
      <item>
       <spacer>
-       <property name="orientation" >
+       <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
-       <property name="sizeHint" stdset="0" >
+       <property name="sizeHint" stdset="0">
         <size>
          <width>40</width>
          <height>20</height>
@@ -82,9 +83,9 @@
       </spacer>
      </item>
      <item>
-      <widget class="KColorButton" name="kcfg_BackgroundColor" >
-       <property name="sizePolicy" >
-        <sizepolicy vsizetype="Fixed" hsizetype="MinimumExpanding" >
+      <widget class="KColorButton" name="kcfg_BackgroundColor">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
@@ -94,11 +95,69 @@
     </layout>
    </item>
    <item>
+    <widget class="QGroupBox" name="tabGroupBox">
+     <property name="title">
+      <string>Tab Settings</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QCheckBox" name="kcfg_TabCloseButton">
+        <property name="text">
+         <string>Show close button on tabs</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="kcfg_TabMiddleClick">
+        <property name="text">
+         <string>Middle-click on a tab closes it</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QLabel" name="tabOrientationLabel">
+          <property name="text">
+           <string>Tab position:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="KComboBox" name="kcfg_TabPosition">
+          <item>
+           <property name="text">
+            <string>Top</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Bottom</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Left</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Right</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
     <spacer>
-     <property name="orientation" >
+     <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
-     <property name="sizeHint" stdset="0" >
+     <property name="sizeHint" stdset="0">
       <size>
        <width>20</width>
        <height>40</height>
@@ -113,6 +172,11 @@
    <class>KColorButton</class>
    <extends>QPushButton</extends>
    <header>kcolorbutton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kcombobox.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

@@ -76,8 +76,10 @@ private slots:
     void showRemoteViewToolbar();
     void takeScreenshot();
     void switchFullscreen();
-    void disconnect();
+    void disconnectHost();
     void closeTab(QWidget *widget);
+    void openTabSettings(QWidget *widget);
+    void tabContextMenu(QWidget *widget, const QPoint &point);
     void viewOnly(bool viewOnly);
     void showLocalCursor(bool showLocalCursor);
     void grabAllKeys(bool grabAllKeys);

@@ -77,6 +77,9 @@ public:
     /** Show the configuration dialog */
     bool showDialog();
 
+    /** If @p connected is true, a message is shown that settings might only apply after a reconnect. */
+    void setShownWhileConnected(bool connected);
+
 protected:
     HostPreferences(KConfigGroup configGroup, QObject *parent);
 
@@ -95,6 +98,7 @@ private:
     void setWalletSupport(bool walletSupport);
 
     bool m_hostConfigured;
+    bool m_connected;
 
     QCheckBox *showAgainCheckBox;
     QCheckBox *walletSupportCheckBox;

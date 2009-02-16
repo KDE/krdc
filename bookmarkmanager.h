@@ -48,6 +48,7 @@ public:
     virtual bool supportsTabs() const;
     virtual QList<QPair<QString, QString> > currentBookmarkList() const;
     void addHistoryBookmark();
+    void addManualBookmark(const QString &url, const QString &text);
 
 signals:
     void openUrl(const KUrl &url);

@@ -37,6 +37,7 @@
 HostPreferences::HostPreferences(KConfigGroup configGroup, QObject *parent)
         : QObject(parent),
         m_configGroup(configGroup),
+        m_connected(false),
         showAgainCheckBox(0),
         walletSupportCheckBox(0)
 {
@@ -162,6 +163,10 @@ bool HostPreferences::showDialog()
 
     KTitleWidget *titleWidget = new KTitleWidget(dialog);
     titleWidget->setText(i18n("Host Configuration"));
+    if (m_connected) {
+        titleWidget->setComment(QString("<i>%1</i>").arg(
+            i18n("Note that settings might only apply when you connect next time to this host.")));
+    }
     titleWidget->setPixmap(KIcon("krdc"));
     layout->addWidget(titleWidget);
 
@@ -197,6 +202,11 @@ bool HostPreferences::showDialog()
     } else {
         return false;
     }
+}
+
+void HostPreferences::setShownWhileConnected(bool connected)
+{
+    m_connected = connected;
 }
 
 #include "hostpreferences.moc"
