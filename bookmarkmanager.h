@@ -58,7 +58,6 @@ private slots:
     void openFolderinTabs(const KBookmarkGroup &bookmarkGroup);
 
 private:
-    KMenu *m_menu;
     KBookmarkMenu *m_bookmarkMenu;
     KBookmarkManager *m_manager;
     KBookmarkGroup m_historyGroup;

@@ -34,15 +34,13 @@ BookmarkManager::BookmarkManager(KActionCollection *collection, KMenu *menu, Mai
         KBookmarkOwner(),
         m_mainWindow(parent)
 {
-    m_menu = menu;
-
     const QString file = KStandardDirs::locateLocal("data", "krdc/bookmarks.xml");
 
     m_manager = KBookmarkManager::managerForFile(file, "krdc");
 
     m_manager->setUpdate(true);
 
-    m_bookmarkMenu = new KBookmarkMenu(m_manager, this, m_menu, collection);
+    m_bookmarkMenu = new KBookmarkMenu(m_manager, this, menu, collection);
 
     KBookmarkGroup root = m_manager->root();
     KBookmark bm = root.first();
