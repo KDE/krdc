@@ -24,6 +24,6 @@ set(krdccore_HDRS
     hostpreferences.h
 )
 
-install(FILES ${krdccore_HDRS} DESTINATION ${INCLUDE_INSTALL_DIR}/krdc)
+install(FILES ${krdccore_HDRS} DESTINATION ${INCLUDE_INSTALL_DIR}/krdc COMPONENT Devel)
 install(FILES krdc_plugin.desktop DESTINATION ${SERVICETYPES_INSTALL_DIR})
 install(FILES krdc.kcfg DESTINATION ${KCFG_INSTALL_DIR})
