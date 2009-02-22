@@ -265,7 +265,7 @@ void RdpView::receivedStandardError()
     QString line;
     int i = 0;
     while (!(line = output.section('\n', i, i)).isEmpty()) {
-        if (line.startsWith("Version ")) {
+        if (line.startsWith(QLatin1String("Version "))) {
             m_clientVersion = line.section(' ', 1, 1);
             m_clientVersion = m_clientVersion.left(m_clientVersion.length() - 1);
             return;
