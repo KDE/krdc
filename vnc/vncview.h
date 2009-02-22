@@ -80,7 +80,7 @@ private:
     QClipboard *m_clipboard;
     bool m_initDone;
     int m_buttonMask;
-    int m_modifiersMask; // Stores the currently pressed modifier keys
+    QMap<unsigned int, bool> m_mods;
     int m_x, m_y, m_w, m_h;
     bool m_repaint;
     bool m_quitFlag;
@@ -96,6 +96,7 @@ private:
     bool m_forceLocalCursor;
 
     void keyEventHandler(QKeyEvent *e);
+    void unpressModifiers();
     void wheelEventHandler(QWheelEvent *event);
     void mouseEventHandler(QMouseEvent *event);
     
