@@ -160,10 +160,10 @@ VncClientThread::VncClientThread(QObject *parent)
     QMutexLocker locker(&mutex);
     m_stopped = false;
 
-    QTimer outputErrorMessagesCheckTimer;
-    outputErrorMessagesCheckTimer.setInterval(500);
-    connect(&outputErrorMessagesCheckTimer, SIGNAL(timeout()), this, SLOT(checkOutputErrorMessage()));
-    outputErrorMessagesCheckTimer.start();
+    QTimer *outputErrorMessagesCheckTimer = new QTimer(this);
+    outputErrorMessagesCheckTimer->setInterval(500);
+    connect(outputErrorMessagesCheckTimer, SIGNAL(timeout()), this, SLOT(checkOutputErrorMessage()));
+    outputErrorMessagesCheckTimer->start();
 }
 
 VncClientThread::~VncClientThread()
