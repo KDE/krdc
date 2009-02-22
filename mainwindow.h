@@ -41,6 +41,7 @@ class ZeroconfPage;
 
 class QScrollArea;
 class QModelIndex;
+class QTreeView;
 
 class MainWindow : public KXmlGuiWindow
 {
@@ -91,6 +92,7 @@ private slots:
     void closeZeroconfPage();
     void openFromDockWidget(const QModelIndex &index);
     void checkRdektopAvailability();
+    void expandTreeViewItems();
 
 private:
     void setupActions();
@@ -119,6 +121,7 @@ private:
     SystemTrayIcon *m_systemTrayIcon;
     ZeroconfPage *m_zeroconfPage;
     KPushButton *rdpConnectButton;
+    QTreeView *m_remoteDesktopsTreeView;
 };
 
 #include <QApplication>

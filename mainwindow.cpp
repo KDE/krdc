@@ -112,16 +112,18 @@ MainWindow::MainWindow(QWidget *parent)
     remoteDesktopsDockWidget->setMinimumWidth(fontMetrics.width("vnc://192.168.100.100:6000"));
     actionCollection()->addAction("remote_desktop_dockwidget",
                                   remoteDesktopsDockWidget->toggleViewAction());
-    QTreeView *remoteDesktopsTreeView = new QTreeView(remoteDesktopsDockWidget);
+    m_remoteDesktopsTreeView = new QTreeView(remoteDesktopsDockWidget);
     RemoteDesktopsModel *remoteDesktopsModel = new RemoteDesktopsModel(this);
-    connect(remoteDesktopsModel, SIGNAL(modelReset()), remoteDesktopsTreeView, SLOT(expandAll()));
-    remoteDesktopsTreeView->setModel(remoteDesktopsModel);
-    remoteDesktopsTreeView->header()->hide();
-    remoteDesktopsTreeView->expandAll();
-    connect(remoteDesktopsTreeView, SIGNAL(doubleClicked(const QModelIndex &)),
+    connect(remoteDesktopsModel, SIGNAL(modelReset()), this, SLOT(expandTreeViewItems()));
+    m_remoteDesktopsTreeView->setModel(remoteDesktopsModel);
+    m_remoteDesktopsTreeView->header()->hide();
+    m_remoteDesktopsTreeView->expandAll();
+    m_remoteDesktopsTreeView->setItemsExpandable(false);
+    m_remoteDesktopsTreeView->setRootIsDecorated(false);
+    connect(m_remoteDesktopsTreeView, SIGNAL(doubleClicked(const QModelIndex &)),
                                     SLOT(openFromDockWidget(const QModelIndex &)));
 
-    remoteDesktopsDockWidget->setWidget(remoteDesktopsTreeView);
+    remoteDesktopsDockWidget->setWidget(m_remoteDesktopsTreeView);
     addDockWidget(Qt::LeftDockWidgetArea, remoteDesktopsDockWidget);
 
     createGUI("krdcui.rc");
@@ -1081,6 +1083,11 @@ QList<RemoteView *> MainWindow::remoteViewList() const
 int MainWindow::currentRemoteView() const
 {
     return m_currentRemoteView;
+}
+
+void MainWindow::expandTreeViewItems()
+{
+    metaObject()->invokeMethod(m_remoteDesktopsTreeView, "expandAll", Qt::QueuedConnection);
 }
 
 #include "mainwindow.moc"
