@@ -94,7 +94,11 @@ MainWindow::MainWindow(QWidget *parent)
     m_tabWidget = new KTabWidget(this);
     m_tabWidget->setTabPosition((KTabWidget::TabPosition) Settings::tabPosition());
 
+#if QT_VERSION <= 0x040500
+    m_tabWidget->setTabsClosable(Settings::tabCloseButton());
+#else
     m_tabWidget->setCloseButtonEnabled(Settings::tabCloseButton());
+#endif
 
     connect(m_tabWidget, SIGNAL(closeRequest(QWidget *)), SLOT(closeTab(QWidget *)));
 
@@ -870,7 +874,11 @@ void MainWindow::updateConfiguration()
     m_addressNavigator->setUrlEditable(Settings::normalUrlInputLine());
 
     m_tabWidget->setTabPosition((KTabWidget::TabPosition) Settings::tabPosition());
+#if QT_VERSION <= 0x040500
+    m_tabWidget->setTabsClosable(Settings::tabCloseButton());
+#else
     m_tabWidget->setCloseButtonEnabled(Settings::tabCloseButton());
+#endif
     disconnect(m_tabWidget, SIGNAL(mouseMiddleClick(QWidget *)), this, SLOT(closeTab(QWidget *))); // just be sure it is not connected twice
     if (Settings::tabMiddleClick())
         connect(m_tabWidget, SIGNAL(mouseMiddleClick(QWidget *)), SLOT(closeTab(QWidget *)));
