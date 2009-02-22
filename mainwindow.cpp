@@ -615,8 +615,11 @@ void MainWindow::closeTab(QWidget *widget)
     kDebug(5010) << index;
 
     if (m_showStartPage && index == 0) {
-        KMessageBox::information(this, i18n("The start page cannot be closed. "
-                                            "If you want to disable it, you can do so in the settings."));
+        KMessageBox::information(this, i18n("You can enable the start page in the settings again."));
+
+        Settings::setShowStartPage(false);
+        m_tabWidget->removeTab(0);
+        m_showStartPage = false;
         return;
     }
 
