@@ -199,7 +199,7 @@ void MainWindow::setupActions()
     QAction *disconnectAction = actionCollection()->addAction("disconnect");
     disconnectAction->setText(i18n("Disconnect"));
     disconnectAction->setIcon(KIcon("system-log-out"));
-    disconnectAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_W));
+    disconnectAction->setShortcut(QKeySequence::Close);
     connect(disconnectAction, SIGNAL(triggered()), SLOT(disconnectHost()));
 
     QAction *showLocalCursorAction = actionCollection()->addAction("show_local_cursor");
