@@ -275,6 +275,4 @@ void RemoteView::focusOutEvent(QFocusEvent *event)
     QWidget::focusOutEvent(event);
 }
 
-#ifndef QTONLY
 #include "moc_remoteview.cpp"
-#endif

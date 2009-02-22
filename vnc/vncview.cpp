@@ -78,6 +78,8 @@ VncView::VncView(QWidget *parent, const KUrl &url, KConfigGroup configGroup)
     
 #ifndef QTONLY
     m_hostPreferences = new VncHostPreferences(configGroup, this);
+#else
+    Q_UNUSED(configGroup);
 #endif
 }
 
@@ -598,6 +600,4 @@ void VncView::clipboardDataChanged()
     vncThread.clientCut(text);
 }
 
-#ifndef QTONLY
 #include "moc_vncview.cpp"
-#endif

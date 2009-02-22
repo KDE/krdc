@@ -28,6 +28,7 @@
 #ifdef QTONLY
     #include <QUrl>
     #define KUrl QUrl
+    #define KDE_EXPORT
 #else
     #include <KUrl>
     #include <KWallet/Wallet>
