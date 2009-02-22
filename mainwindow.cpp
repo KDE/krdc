@@ -92,6 +92,7 @@ MainWindow::MainWindow(QWidget *parent)
     setStandardToolBarMenuEnabled(true);
 
     m_tabWidget = new KTabWidget(this);
+    m_tabWidget->setTabBarHidden(!Settings::showTabBar());
     m_tabWidget->setTabPosition((KTabWidget::TabPosition) Settings::tabPosition());
 
 #if QT_VERSION <= 0x040500
@@ -198,6 +199,7 @@ void MainWindow::setupActions()
     QAction *disconnectAction = actionCollection()->addAction("disconnect");
     disconnectAction->setText(i18n("Disconnect"));
     disconnectAction->setIcon(KIcon("system-log-out"));
+    disconnectAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_W));
     connect(disconnectAction, SIGNAL(triggered()), SLOT(disconnectHost()));
 
     QAction *showLocalCursorAction = actionCollection()->addAction("show_local_cursor");
@@ -878,6 +880,7 @@ void MainWindow::updateConfiguration()
 {
     m_addressNavigator->setUrlEditable(Settings::normalUrlInputLine());
 
+    m_tabWidget->setTabBarHidden(!Settings::showTabBar());
     m_tabWidget->setTabPosition((KTabWidget::TabPosition) Settings::tabPosition());
 #if QT_VERSION <= 0x040500
     m_tabWidget->setTabsClosable(Settings::tabCloseButton());
