@@ -43,6 +43,7 @@ class ZeroconfPage;
 
 class QScrollArea;
 class QModelIndex;
+class QTreeView;
 
 class MainWindow : public KXmlGuiWindow
 {
@@ -92,6 +93,7 @@ private slots:
     void createZeroconfPage();
     void closeZeroconfPage();
     void openFromDockWidget(const QModelIndex &index);
+    void expandTreeViewItems();
 
 private:
     void setupActions();
@@ -123,6 +125,7 @@ private:
 
     SystemTrayIcon *m_systemTrayIcon;
     ZeroconfPage *m_zeroconfPage;
+    QTreeView *m_remoteDesktopsTreeView;
 };
 
 #include <QApplication>
