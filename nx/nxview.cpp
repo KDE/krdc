@@ -208,7 +208,7 @@ void NxView::handleProgress(int id, QString msg)
             KMessageBox::error(this, i18n("The authentication key is invalid."), i18n("Invalid authentication key"));
             break;
         case NXCL_LOGIN_FAILED:
-            KMessageBox::error(this, i18n("The username or password that you have entered is not a valid."), i18n("Invalid username or password"));
+            KMessageBox::error(this, i18n("The username or password that you have entered is invalid."), i18n("Invalid username or password"));
             break;
         case NXCL_HOST_KEY_VERIFAILED:
             KMessageBox::error(this, i18n("The host key verification has failed."), i18n("Host key verification failed"));
