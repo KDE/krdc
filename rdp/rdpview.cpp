@@ -29,6 +29,7 @@
 #include <KInputDialog>
 #include <KMessageBox>
 #include <KPasswordDialog>
+#include <KShell>
 
 #include <QX11EmbedContainer>
 #include <QEvent>
@@ -180,7 +181,7 @@ bool RdpView::start()
     arguments << "-r" << "sound:" + sound;
 
     if (!m_hostPreferences->extraOptions().isEmpty()) {
-        const QStringList additionalArguments = m_hostPreferences->extraOptions().split(' ');
+        const QStringList additionalArguments = KShell::splitArgs(m_hostPreferences->extraOptions());
         arguments += additionalArguments;
     }
 
