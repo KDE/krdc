@@ -962,48 +962,45 @@ void MainWindow::createStartPage()
     headerLayout->addWidget(headerLabel, 1, Qt::AlignTop);
     headerLayout->addWidget(headerIconLabel);
 
+    startLayout->addLayout(headerLayout);
+
+#ifdef BUILD_VNC
     KPushButton *vncConnectButton = new KPushButton(this);
     vncConnectButton->setStyleSheet("KPushButton { padding: 12px; margin: 10px; }");
     vncConnectButton->setIcon(KIcon(actionCollection()->action("new_vnc_connection")->icon()));
     vncConnectButton->setText(i18n("Connect to a VNC Remote Desktop"));
     connect(vncConnectButton, SIGNAL(clicked()), SLOT(newVncConnection()));
-#ifndef BUILD_VNC
-    vncConnectButton->setVisible(false);
+    startLayout->addWidget(vncConnectButton);
 #endif
 
+#ifdef BUILD_NX
     KPushButton *nxConnectButton = new KPushButton(this);
     nxConnectButton->setStyleSheet("KPushButton { padding: 12px; margin: 10px; }");
     nxConnectButton->setIcon(KIcon(actionCollection()->action("new_nx_connection")->icon()));
     nxConnectButton->setText(i18n("Connect to a NX Remote Desktop"));
     connect(nxConnectButton, SIGNAL(clicked()), SLOT(newNxConnection()));
-#ifndef BUILD_NX
-    nxConnectButton->setVisible(false);
+    startLayout->addWidget(nxConnectButton);
 #endif
 
+#ifdef BUILD_RDP
     rdpConnectButton = new KPushButton(this);
     rdpConnectButton->setStyleSheet("KPushButton { padding: 12px; margin: 10px; }");
     rdpConnectButton->setIcon(KIcon(actionCollection()->action("new_rdp_connection")->icon()));
     rdpConnectButton->setText(i18n("Connect to a Windows Remote Desktop (RDP)"));
     connect(rdpConnectButton, SIGNAL(clicked()), SLOT(newRdpConnection()));
     QMetaObject::invokeMethod(this, "checkRdektopAvailability");
-#ifndef BUILD_RDP
-    rdpConnectButton->setVisible(false);
+    startLayout->addWidget(rdpConnectButton);
 #endif
 
+#ifdef BUILD_ZEROCONF
     KPushButton *zeroconfButton = new KPushButton(this);
     zeroconfButton->setStyleSheet("KPushButton { padding: 12px; margin: 10px; }");
     zeroconfButton->setIcon(KIcon(actionCollection()->action("zeroconf_page")->icon()));
     zeroconfButton->setText(i18n("Browse Remote Desktop Services on Local Network"));
     connect(zeroconfButton, SIGNAL(clicked()), SLOT(createZeroconfPage()));
-#ifndef BUILD_ZEROCONF
-    zeroconfButton->setVisible(false);
+    startLayout->addWidget(zeroconfButton);
 #endif
 
-    startLayout->addLayout(headerLayout);
-    startLayout->addWidget(vncConnectButton);
-    startLayout->addWidget(nxConnectButton);
-    startLayout->addWidget(rdpConnectButton);
-    startLayout->addWidget(zeroconfButton);
     startLayout->addStretch();
 
     m_tabWidget->insertTab(0, startWidget, KIcon("krdc"), i18n("Start Page"));
