@@ -204,7 +204,7 @@ void MainWindow::setupActions()
     viewOnlyAction->setIcon(KIcon("document-preview"));
     connect(viewOnlyAction, SIGNAL(triggered(bool)), SLOT(viewOnly(bool)));
 
-    QAction *disconnectAction = actionCollection()->addAction("disconnect");
+    KAction *disconnectAction = actionCollection()->addAction("disconnect");
     disconnectAction->setText(i18n("Disconnect"));
     disconnectAction->setIcon(KIcon("system-log-out"));
     connect(disconnectAction, SIGNAL(triggered()), SLOT(disconnect()));
