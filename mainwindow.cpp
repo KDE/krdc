@@ -624,6 +624,7 @@ void MainWindow::closeTab(QWidget *widget)
         Settings::setShowStartPage(false);
         m_tabWidget->removeTab(0);
         m_showStartPage = false;
+	updateActionStatus();
         return;
     }
 
