@@ -376,7 +376,7 @@ void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConn
 
     connect(view, SIGNAL(framebufferSizeChanged(int, int)), this, SLOT(resizeTabWidget(int, int)));
     connect(view, SIGNAL(statusChanged(RemoteView::RemoteStatus)), this, SLOT(statusChanged(RemoteView::RemoteStatus)));
-    connect(view, SIGNAL(disconnected()), this, SLOT(disconnect()));
+    connect(view, SIGNAL(disconnected()), this, SLOT(disconnectHost()));
 
     m_remoteViewList.append(view);
 
