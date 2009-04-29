@@ -178,7 +178,7 @@ void RdpHostPreferences::setHeight(int height)
         m_configGroup.writeEntry("height", height);
 }
 
-int RdpHostPreferences::height()
+int RdpHostPreferences::height() const
 {
     return m_configGroup.readEntry("height", Settings::height());
 }
@@ -189,7 +189,7 @@ void RdpHostPreferences::setWidth(int width)
         m_configGroup.writeEntry("width", width);
 }
 
-int RdpHostPreferences::width()
+int RdpHostPreferences::width() const
 {
     return m_configGroup.readEntry("width", Settings::width());
 }
@@ -200,7 +200,7 @@ void RdpHostPreferences::setColorDepth(int colorDepth)
         m_configGroup.writeEntry("colorDepth", colorDepth);
 }
 
-int RdpHostPreferences::colorDepth()
+int RdpHostPreferences::colorDepth() const
 {
     return m_configGroup.readEntry("colorDepth", Settings::colorDepth());
 }
@@ -225,6 +225,16 @@ void RdpHostPreferences::setSound(int sound)
 int RdpHostPreferences::sound() const
 {
     return m_configGroup.readEntry("sound", Settings::sound());
+}
+
+void RdpHostPreferences::setConsole(bool console)
+{
+    m_configGroup.writeEntry("console", console);
+}
+
+bool RdpHostPreferences::console() const
+{
+    return m_configGroup.readEntry("console", Settings::console());
 }
 
 void RdpHostPreferences::setExtraOptions(const QString &extraOptions)

@@ -1,7 +1,8 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>RdpPreferences</class>
- <widget class="QWidget" name="RdpPreferences" >
-  <property name="geometry" >
+ <widget class="QWidget" name="RdpPreferences">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -9,145 +10,145 @@
     <height>406</height>
    </rect>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_2" >
+  <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
-    <widget class="QGroupBox" name="connectionGroupBox" >
-     <property name="title" >
+    <widget class="QGroupBox" name="connectionGroupBox">
+     <property name="title">
       <string>Connection</string>
      </property>
-     <layout class="QFormLayout" name="formLayout_2" >
-      <item row="0" column="0" >
-       <layout class="QVBoxLayout" >
+     <layout class="QFormLayout" name="formLayout_2">
+      <item row="0" column="0">
+       <layout class="QVBoxLayout">
         <item>
-         <widget class="QLabel" name="resolutionLabel" >
-          <property name="text" >
+         <widget class="QLabel" name="resolutionLabel">
+          <property name="text">
            <string>Desktop &amp;resolution:</string>
           </property>
-          <property name="buddy" >
+          <property name="buddy">
            <cstring>resolutionComboBox</cstring>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="resolutionDummyLabel" />
+         <widget class="QLabel" name="resolutionDummyLabel"/>
         </item>
        </layout>
       </item>
-      <item row="0" column="1" >
-       <layout class="QVBoxLayout" >
+      <item row="0" column="1">
+       <layout class="QVBoxLayout">
         <item>
-         <widget class="KComboBox" name="resolutionComboBox" >
-          <property name="minimumSize" >
+         <widget class="KComboBox" name="resolutionComboBox">
+          <property name="minimumSize">
            <size>
             <width>280</width>
             <height>0</height>
            </size>
           </property>
-          <property name="whatsThis" >
+          <property name="whatsThis">
            <string>Here you can specify the resolution of the remote desktop. This resolution determines the size of the desktop that will be presented to you.</string>
           </property>
-          <property name="currentIndex" >
+          <property name="currentIndex">
            <number>1</number>
           </property>
           <item>
-           <property name="text" >
+           <property name="text">
             <string>Minimal (640x480)</string>
            </property>
           </item>
           <item>
-           <property name="text" >
+           <property name="text">
             <string>Small (800x600)</string>
            </property>
           </item>
           <item>
-           <property name="text" >
+           <property name="text">
             <string>Normal (1024x768)</string>
            </property>
           </item>
           <item>
-           <property name="text" >
+           <property name="text">
             <string>Large (1280x1024)</string>
            </property>
           </item>
           <item>
-           <property name="text" >
+           <property name="text">
             <string>Very Large (1600x1200)</string>
            </property>
           </item>
           <item>
-           <property name="text" >
+           <property name="text">
             <string>Current screen resolution</string>
            </property>
           </item>
           <item>
-           <property name="text" >
+           <property name="text">
             <string>Custom resolution (...)</string>
            </property>
           </item>
          </widget>
         </item>
         <item>
-         <layout class="QHBoxLayout" >
+         <layout class="QHBoxLayout">
           <item>
-           <widget class="QLabel" name="widthLabel" >
-            <property name="enabled" >
+           <widget class="QLabel" name="widthLabel">
+            <property name="enabled">
              <bool>false</bool>
             </property>
-            <property name="text" >
+            <property name="text">
              <string>&amp;Width:</string>
             </property>
-            <property name="alignment" >
+            <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
-            <property name="buddy" >
+            <property name="buddy">
              <cstring>kcfg_Width</cstring>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QSpinBox" name="kcfg_Width" >
-            <property name="enabled" >
+           <widget class="QSpinBox" name="kcfg_Width">
+            <property name="enabled">
              <bool>false</bool>
             </property>
-            <property name="whatsThis" >
+            <property name="whatsThis">
              <string>This is the width of the remote desktop. You can only change this value manually if you select Custom as desktop resolution above.</string>
             </property>
-            <property name="maximum" >
+            <property name="maximum">
              <number>9999</number>
             </property>
-            <property name="value" >
+            <property name="value">
              <number>800</number>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="heightLabel" >
-            <property name="enabled" >
+           <widget class="QLabel" name="heightLabel">
+            <property name="enabled">
              <bool>false</bool>
             </property>
-            <property name="text" >
+            <property name="text">
              <string>H&amp;eight:</string>
             </property>
-            <property name="alignment" >
+            <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
-            <property name="buddy" >
+            <property name="buddy">
              <cstring>kcfg_Height</cstring>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QSpinBox" name="kcfg_Height" >
-            <property name="enabled" >
+           <widget class="QSpinBox" name="kcfg_Height">
+            <property name="enabled">
              <bool>false</bool>
             </property>
-            <property name="whatsThis" >
+            <property name="whatsThis">
              <string>This is the height of the remote desktop. You can only change this value manually if you select Custom as desktop resolution above.</string>
             </property>
-            <property name="maximum" >
+            <property name="maximum">
              <number>9999</number>
             </property>
-            <property name="value" >
+            <property name="value">
              <number>600</number>
             </property>
            </widget>
@@ -156,276 +157,276 @@
         </item>
        </layout>
       </item>
-      <item row="1" column="0" >
-       <widget class="QLabel" name="colorDepthLabel" >
-        <property name="text" >
+      <item row="1" column="0">
+       <widget class="QLabel" name="colorDepthLabel">
+        <property name="text">
          <string>Color &amp;depth:</string>
         </property>
-        <property name="buddy" >
+        <property name="buddy">
          <cstring>kcfg_ColorDepth</cstring>
         </property>
        </widget>
       </item>
-      <item row="1" column="1" >
-       <widget class="KComboBox" name="kcfg_ColorDepth" >
-        <property name="minimumSize" >
+      <item row="1" column="1">
+       <widget class="KComboBox" name="kcfg_ColorDepth">
+        <property name="minimumSize">
          <size>
           <width>280</width>
           <height>0</height>
          </size>
         </property>
         <item>
-         <property name="text" >
+         <property name="text">
           <string>Low Color (8 Bit)</string>
          </property>
         </item>
         <item>
-         <property name="text" >
+         <property name="text">
           <string>High Color (16 Bit)</string>
          </property>
         </item>
         <item>
-         <property name="text" >
+         <property name="text">
           <string>True Color (24 Bit)</string>
          </property>
         </item>
        </widget>
       </item>
-      <item row="2" column="0" >
-       <widget class="QLabel" name="layoutLabel" >
-        <property name="text" >
+      <item row="2" column="0">
+       <widget class="QLabel" name="layoutLabel">
+        <property name="text">
          <string>&amp;Keyboard layout:</string>
         </property>
-        <property name="buddy" >
+        <property name="buddy">
          <cstring>kcfg_KeyboardLayout</cstring>
         </property>
        </widget>
       </item>
-      <item row="2" column="1" >
-       <widget class="KComboBox" name="kcfg_KeyboardLayout" >
-        <property name="minimumSize" >
+      <item row="2" column="1">
+       <widget class="KComboBox" name="kcfg_KeyboardLayout">
+        <property name="minimumSize">
          <size>
           <width>280</width>
           <height>0</height>
          </size>
         </property>
-        <property name="whatsThis" >
+        <property name="whatsThis">
          <string>Use this to specify your keyboard layout. This layout setting is used to send the correct keyboard codes to the server.</string>
         </property>
-        <property name="currentIndex" >
+        <property name="currentIndex">
          <number>7</number>
         </property>
         <item>
-         <property name="text" >
+         <property name="text">
           <string>Arabic (ar)</string>
          </property>
         </item>
         <item>
-         <property name="text" >
+         <property name="text">
           <string>Czech (cs)</string>
          </property>
         </item>
         <item>
-         <property name="text" >
+         <property name="text">
           <string>Danish (da)</string>
          </property>
         </item>
         <item>
-         <property name="text" >
+         <property name="text">
           <string>German (de)</string>
          </property>
         </item>
         <item>
-         <property name="text" >
+         <property name="text">
           <string>Swiss German (de-ch)</string>
          </property>
         </item>
         <item>
-         <property name="text" >
+         <property name="text">
           <string>American Dvorak (en-dv)</string>
          </property>
         </item>
         <item>
-         <property name="text" >
+         <property name="text">
           <string>British English (en-gb)</string>
          </property>
         </item>
         <item>
-         <property name="text" >
+         <property name="text">
           <string>US English (en-us)</string>
          </property>
         </item>
         <item>
-         <property name="text" >
+         <property name="text">
           <string>Spanish (es)</string>
          </property>
         </item>
         <item>
-         <property name="text" >
+         <property name="text">
           <string>Estonian (et)</string>
          </property>
         </item>
         <item>
-         <property name="text" >
+         <property name="text">
           <string>Finnish (fi)</string>
          </property>
         </item>
         <item>
-         <property name="text" >
+         <property name="text">
           <string>Faroese (fo)</string>
          </property>
         </item>
         <item>
-         <property name="text" >
+         <property name="text">
           <string>French (fr)</string>
          </property>
         </item>
         <item>
-         <property name="text" >
+         <property name="text">
           <string>Belgian (fr-be)</string>
          </property>
         </item>
         <item>
-         <property name="text" >
+         <property name="text">
           <string>French Canadian (fr-ca)</string>
          </property>
         </item>
         <item>
-         <property name="text" >
+         <property name="text">
           <string>Swiss French (fr-ch)</string>
          </property>
         </item>
         <item>
-         <property name="text" >
+         <property name="text">
           <string>Hebrew (he)</string>
          </property>
         </item>
         <item>
-         <property name="text" >
+         <property name="text">
           <string>Croatian (hr)</string>
          </property>
         </item>
         <item>
-         <property name="text" >
+         <property name="text">
           <string>Hungarian (hu)</string>
          </property>
         </item>
         <item>
-         <property name="text" >
+         <property name="text">
           <string>Icelandic (is)</string>
          </property>
         </item>
         <item>
-         <property name="text" >
+         <property name="text">
           <string>Italian (it)</string>
          </property>
         </item>
         <item>
-         <property name="text" >
+         <property name="text">
           <string>Japanese (ja)</string>
          </property>
         </item>
         <item>
-         <property name="text" >
+         <property name="text">
           <string>Korean (ko)</string>
          </property>
         </item>
         <item>
-         <property name="text" >
+         <property name="text">
           <string>Lithuanian (lt)</string>
          </property>
         </item>
         <item>
-         <property name="text" >
+         <property name="text">
           <string>Latvian (lv)</string>
          </property>
         </item>
         <item>
-         <property name="text" >
+         <property name="text">
           <string>Macedonian (mk)</string>
          </property>
         </item>
         <item>
-         <property name="text" >
+         <property name="text">
           <string>Dutch (nl)</string>
          </property>
         </item>
         <item>
-         <property name="text" >
+         <property name="text">
           <string>Belgian Dutch (nl-be)</string>
          </property>
         </item>
         <item>
-         <property name="text" >
+         <property name="text">
           <string>Norwegian (no)</string>
          </property>
         </item>
         <item>
-         <property name="text" >
+         <property name="text">
           <string>Polish (pl)</string>
          </property>
         </item>
         <item>
-         <property name="text" >
+         <property name="text">
           <string>Portuguese (pt)</string>
          </property>
         </item>
         <item>
-         <property name="text" >
+         <property name="text">
           <string>Brazilian (pt-br)</string>
          </property>
         </item>
         <item>
-         <property name="text" >
+         <property name="text">
           <string>Russian (ru)</string>
          </property>
         </item>
         <item>
-         <property name="text" >
+         <property name="text">
           <string>Slovenian (sl)</string>
          </property>
         </item>
         <item>
-         <property name="text" >
+         <property name="text">
           <string>Swedish (sv)</string>
          </property>
         </item>
         <item>
-         <property name="text" >
+         <property name="text">
           <string>Thai (th)</string>
          </property>
         </item>
         <item>
-         <property name="text" >
+         <property name="text">
           <string>Turkish (tr)</string>
          </property>
         </item>
        </widget>
       </item>
-      <item row="3" column="0" >
-       <widget class="QLabel" name="soudLabel" >
-        <property name="text" >
-         <string comment="label for soundsettings in preferences dialog" >Sound:</string>
+      <item row="3" column="0">
+       <widget class="QLabel" name="soundLabel">
+        <property name="text">
+         <string comment="label for soundsettings in preferences dialog">Sound:</string>
         </property>
-        <property name="buddy" >
+        <property name="buddy">
          <cstring>kcfg_Sound</cstring>
         </property>
        </widget>
       </item>
-      <item row="3" column="1" >
-       <widget class="KComboBox" name="kcfg_Sound" >
+      <item row="3" column="1">
+       <widget class="KComboBox" name="kcfg_Sound">
         <item>
-         <property name="text" >
+         <property name="text">
           <string>On this computer</string>
          </property>
         </item>
         <item>
-         <property name="text" >
+         <property name="text">
           <string>On remote computer</string>
          </property>
         </item>
         <item>
-         <property name="text" >
+         <property name="text">
           <string>Disable sound</string>
          </property>
         </item>
@@ -435,39 +436,50 @@
     </widget>
    </item>
    <item>
-    <widget class="QGroupBox" name="expertGroupBox" >
-     <property name="title" >
+    <widget class="QGroupBox" name="expertGroupBox">
+     <property name="title">
       <string>Expert Options</string>
      </property>
-     <layout class="QFormLayout" name="formLayout" >
-      <item row="0" column="0" >
-       <widget class="QLabel" name="extraOptionsLabel" >
-        <property name="minimumSize" >
-         <size>
-          <width>116</width>
-          <height>0</height>
-         </size>
+     <layout class="QFormLayout" name="formLayout">
+      <item row="0" column="0">
+       <widget class="QLabel" name="consoleLabel">
+        <property name="text">
+         <string>Console login:</string>
         </property>
-        <property name="text" >
+        <property name="buddy">
+         <cstring>kcfg_Console</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QCheckBox" name="kcfg_Console">
+        <property name="text">
+         <string>Attach to Windows Server console</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="extraOptionsLabel">
+        <property name="text">
          <string>Extra options:</string>
         </property>
-        <property name="buddy" >
+        <property name="buddy">
          <cstring>kcfg_ExtraOptions</cstring>
         </property>
        </widget>
       </item>
-      <item row="0" column="1" >
-       <widget class="KLineEdit" name="kcfg_ExtraOptions" >
-        <property name="minimumSize" >
+      <item row="1" column="1">
+       <widget class="KLineEdit" name="kcfg_ExtraOptions">
+        <property name="minimumSize">
          <size>
           <width>280</width>
           <height>0</height>
          </size>
         </property>
-        <property name="whatsThis" >
+        <property name="whatsThis">
          <string>Here you can enter additional rdesktop options.</string>
         </property>
-        <property name="showClearButton" stdset="0" >
+        <property name="showClearButton" stdset="0">
          <bool>true</bool>
         </property>
        </widget>
@@ -476,26 +488,26 @@
     </widget>
    </item>
    <item>
-    <widget class="QGroupBox" name="loginGroupBox" >
-     <property name="title" >
+    <widget class="QGroupBox" name="loginGroupBox">
+     <property name="title">
       <string>Login</string>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout" >
+     <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <layout class="QFormLayout" name="formLayout_3" >
-        <item row="0" column="0" >
-         <widget class="QLabel" name="defaultUserLabel" >
-          <property name="text" >
+       <layout class="QFormLayout" name="formLayout_3">
+        <item row="1" column="0">
+         <widget class="QLabel" name="defaultUserLabel">
+          <property name="text">
            <string>Default user name:</string>
           </property>
          </widget>
         </item>
-        <item row="0" column="1" >
-         <widget class="KLineEdit" name="kcfg_DefaultRdpUserName" >
-          <property name="clickMessage" >
+        <item row="1" column="1">
+         <widget class="KLineEdit" name="kcfg_DefaultRdpUserName">
+          <property name="clickMessage">
            <string>No default user name</string>
           </property>
-          <property name="showClearButton" stdset="0" >
+          <property name="showClearButton" stdset="0">
            <bool>true</bool>
           </property>
          </widget>
@@ -503,9 +515,9 @@
        </layout>
       </item>
       <item>
-       <widget class="QCheckBox" name="kcfg_RecognizeLdapLogins" >
-        <property name="text" >
-         <string>Automatically recognize "LDAP"-Logins and share passwords</string>
+       <widget class="QCheckBox" name="kcfg_RecognizeLdapLogins">
+        <property name="text">
+         <string>Automatically recognize &quot;LDAP&quot;-Logins and share passwords</string>
         </property>
        </widget>
       </item>
@@ -514,10 +526,10 @@
    </item>
    <item>
     <spacer>
-     <property name="orientation" >
+     <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
-     <property name="sizeHint" stdset="0" >
+     <property name="sizeHint" stdset="0">
       <size>
        <width>428</width>
        <height>16</height>
@@ -529,14 +541,14 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>KComboBox</class>
-   <extends>QComboBox</extends>
-   <header>kcombobox.h</header>
-  </customwidget>
-  <customwidget>
    <class>KLineEdit</class>
    <extends>QLineEdit</extends>
    <header>klineedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kcombobox.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>
@@ -545,6 +557,11 @@
   <tabstop>kcfg_Height</tabstop>
   <tabstop>kcfg_ColorDepth</tabstop>
   <tabstop>kcfg_KeyboardLayout</tabstop>
+  <tabstop>kcfg_Sound</tabstop>
+  <tabstop>kcfg_Console</tabstop>
+  <tabstop>kcfg_ExtraOptions</tabstop>
+  <tabstop>kcfg_DefaultRdpUserName</tabstop>
+  <tabstop>kcfg_RecognizeLdapLogins</tabstop>
  </tabstops>
  <resources/>
  <connections/>

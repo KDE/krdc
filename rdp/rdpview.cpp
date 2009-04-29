@@ -180,6 +180,10 @@ bool RdpView::start()
     }
     arguments << "-r" << "sound:" + sound;
 
+    if (m_hostPreferences->console()) {
+        arguments << "-0";
+    }
+
     if (!m_hostPreferences->extraOptions().isEmpty()) {
         const QStringList additionalArguments = KShell::splitArgs(m_hostPreferences->extraOptions());
         arguments += additionalArguments;

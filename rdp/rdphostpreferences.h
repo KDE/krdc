@@ -36,15 +36,17 @@ public:
     ~RdpHostPreferences();
 
     void setHeight(int height);
-    int height();
+    int height() const;
     void setWidth(int width);
-    int width();
+    int width() const;
     void setColorDepth(int colorDepth);
-    int colorDepth();
+    int colorDepth() const;
     void setKeyboardLayout(const QString &keyboardLayout);
     QString keyboardLayout() const;
     void setSound(int sound);
     int sound() const;
+    void setConsole(bool console);
+    bool console() const;
     void setExtraOptions(const QString &extraOptions);
     QString extraOptions() const;
 
