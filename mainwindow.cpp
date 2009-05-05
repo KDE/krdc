@@ -114,7 +114,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     QDockWidget *remoteDesktopsDockWidget = new QDockWidget(this);
     remoteDesktopsDockWidget->setObjectName("remoteDesktopsDockWidget"); // required for saving position / state
-    remoteDesktopsDockWidget->setWindowTitle(i18n("Remote desktops"));
+    remoteDesktopsDockWidget->setWindowTitle(i18n("Remote Desktops"));
     QFontMetrics fontMetrics(remoteDesktopsDockWidget->font());
     remoteDesktopsDockWidget->setMinimumWidth(fontMetrics.width("vnc://192.168.100.100:6000"));
     actionCollection()->addAction("remote_desktop_dockwidget",
@@ -211,13 +211,13 @@ void MainWindow::setupActions()
     QAction *grabAllKeysAction = actionCollection()->addAction("grab_all_keys");
     grabAllKeysAction->setCheckable(true);
     grabAllKeysAction->setIcon(KIcon("configure-shortcuts"));
-    grabAllKeysAction->setText(i18n("Grab all possible keys"));
+    grabAllKeysAction->setText(i18n("Grab All Possible Keys"));
     connect(grabAllKeysAction, SIGNAL(triggered(bool)), SLOT(grabAllKeys(bool)));
 
     QAction *scaleAction = actionCollection()->addAction("scale");
     scaleAction->setCheckable(true);
     scaleAction->setIcon(KIcon("zoom-fit-best"));
-    scaleAction->setText(i18n("Scale remote screen to fit window size"));
+    scaleAction->setText(i18n("Scale Remote Screen to Fit Window Size"));
     connect(scaleAction, SIGNAL(triggered(bool)), SLOT(scale(bool)));
 
     KStandardAction::quit(this, SLOT(quit()), actionCollection());
