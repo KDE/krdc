@@ -87,21 +87,18 @@ QVariant RemoteDesktopsModel::data(const QModelIndex &index, int role) const
     case Qt::ToolTipRole:
         return item->data(index.column());
     case Qt::DecorationRole:
-        if (item->data(index.column()).toString().contains("://")) //TODO: clean impl
+        if (!item->data(1).toString().isEmpty()) // contains an url
             return KIcon("krdc");
 #if 0
-        else if (item->data(index.column()).toString() == "Local Network") //TODO: clean impl
+        else if (item->data(1).toString() == "Local Network")
             return KIcon("network-workgroup");
 #endif
-        else if (item->data(index.column()).toString() == "...") //TODO: clean impl
+        else if (item->data(1).toString() == "...")
             return KIcon("view-history");
         else
             return KIcon("folder-bookmarks");
-    case Qt::UserRole:
-        if (item->data(index.column() + 1).toString().contains("://"))
-            return QVariant(item->data(index.column() + 1).toString());
-        else
-            return QVariant();
+    case 10001: //url for dockwidget
+        return item->data(1);
     default:
         return QVariant();
     }
