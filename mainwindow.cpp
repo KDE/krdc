@@ -536,8 +536,6 @@ void MainWindow::switchFullscreen()
         m_tabWidget->removeTab(m_tabWidget->currentIndex());
         m_tabWidget->setCurrentIndex(currentTab);
 
-        resizeTabWidget(view->sizeHint().width(), view->sizeHint().height());
-
         if (m_toolBar) {
             m_toolBar->hideAndDestroy();
             m_toolBar->deleteLater();
