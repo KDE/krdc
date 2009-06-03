@@ -185,11 +185,6 @@ void MainWindow::setupActions()
     screenshotAction->setIcon(KIcon("ksnapshot"));
     connect(screenshotAction, SIGNAL(triggered()), SLOT(takeScreenshot()));
 
-    QAction *fullscreenAction = actionCollection()->addAction("switch_fullscreen");
-    fullscreenAction->setText(i18n("Switch to Fullscreen Mode"));
-    fullscreenAction->setIcon(KIcon("view-fullscreen"));
-    connect(fullscreenAction, SIGNAL(triggered()), SLOT(switchFullscreen()));
-
     QAction *viewOnlyAction = actionCollection()->addAction("view_only");
     viewOnlyAction->setCheckable(true);
     viewOnlyAction->setText(i18n("View Only"));
@@ -220,6 +215,7 @@ void MainWindow::setupActions()
     scaleAction->setText(i18n("Scale Remote Screen to Fit Window Size"));
     connect(scaleAction, SIGNAL(triggered(bool)), SLOT(scale(bool)));
 
+    KStandardAction::fullScreen(this, SLOT(switchFullscreen()), this, actionCollection());
     KStandardAction::quit(this, SLOT(quit()), actionCollection());
     KStandardAction::preferences(this, SLOT(preferences()), actionCollection());
     KStandardAction::configureToolbars(this, SLOT(configureToolbars()), actionCollection());
@@ -542,9 +538,6 @@ void MainWindow::switchFullscreen()
             m_toolBar = 0;
         }
 
-        actionCollection()->action("switch_fullscreen")->setIcon(KIcon("view-fullscreen"));
-        actionCollection()->action("switch_fullscreen")->setText(i18n("Switch to Fullscreen Mode"));
-
         m_fullscreenWindow->deleteLater();
 
         m_fullscreenWindow = 0;
@@ -756,9 +749,6 @@ void MainWindow::showRemoteViewToolbar()
     kDebug(5010);
 
     if (!m_toolBar) {
-        actionCollection()->action("switch_fullscreen")->setIcon(KIcon("view-restore"));
-        actionCollection()->action("switch_fullscreen")->setText(i18n("Switch to Window Mode"));
-
         m_toolBar = new FloatingToolBar(m_fullscreenWindow, m_fullscreenWindow);
         m_toolBar->winId(); // force it to be a native widget (prevents problem with QX11EmbedContainer)
         m_toolBar->setSide(FloatingToolBar::Top);
@@ -781,7 +771,7 @@ void MainWindow::showRemoteViewToolbar()
         m_toolBar->addWidget(sessionComboBox);
 #endif
 
-        m_toolBar->addAction(actionCollection()->action("switch_fullscreen"));
+        m_toolBar->addAction(actionCollection()->action("fullscreen"));
 
         QAction *minimizeAction = new QAction(m_toolBar);
         minimizeAction->setIcon(KIcon("window-suppressed"));
@@ -831,7 +821,7 @@ void MainWindow::updateActionStatus()
 
     RemoteView* view = m_currentRemoteView >= 0 ? m_remoteViewList.at(m_currentRemoteView) : NULL;
     
-    actionCollection()->action("switch_fullscreen")->setEnabled(enabled);
+    actionCollection()->action("fullscreen")->setEnabled(enabled);
     actionCollection()->action("take_screenshot")->setEnabled(enabled);
     actionCollection()->action("disconnect")->setEnabled(enabled);
 
