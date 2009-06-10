@@ -193,7 +193,7 @@ void MainWindow::setupActions()
 
     KAction *disconnectAction = actionCollection()->addAction("disconnect");
     disconnectAction->setText(i18n("Disconnect"));
-    disconnectAction->setIcon(KIcon("system-log-out"));
+    disconnectAction->setIcon(KIcon("network-disconnect"));
     disconnectAction->setShortcut(QKeySequence::Close);
     connect(disconnectAction, SIGNAL(triggered()), SLOT(disconnectHost()));
 
@@ -774,7 +774,7 @@ void MainWindow::showRemoteViewToolbar()
         m_toolBar->addAction(actionCollection()->action("fullscreen"));
 
         QAction *minimizeAction = new QAction(m_toolBar);
-        minimizeAction->setIcon(KIcon("window-suppressed"));
+        minimizeAction->setIcon(KIcon("go-down"));
         minimizeAction->setText(i18n("Minimize Fullscreen Window"));
         connect(minimizeAction, SIGNAL(triggered()), m_fullscreenWindow, SLOT(showMinimized()));
         m_toolBar->addAction(minimizeAction);
