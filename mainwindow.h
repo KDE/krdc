@@ -62,7 +62,7 @@ public slots:
 protected:
     virtual void closeEvent(QCloseEvent *event);
     virtual void saveProperties(KConfigGroup &group);
-    void saveHostPrefs();
+    void saveHostPrefs(RemoteView *view = 0);
 
 private slots:
     void restoreOpenSessions();

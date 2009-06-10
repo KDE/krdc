@@ -592,16 +592,27 @@ void MainWindow::disconnectHost()
 {
     kDebug(5010);
 
-    if (m_fullscreenWindow) { // first close fullscreen view
-        switchFullscreen();
-    }
+    RemoteView *view = qobject_cast<RemoteView*>(QObject::sender());
 
-    QWidget *tmp = m_tabWidget->currentWidget();
-    m_remoteViewList.removeAt(m_currentRemoteView);
-    m_tabWidget->removeTab(m_tabWidget->currentIndex());
-    tmp->deleteLater();
-    
-    saveHostPrefs();
+    if (view) {
+        QWidget *tmp = (QWidget*) view->parent()->parent();
+        m_remoteViewList.removeOne(view);
+        m_tabWidget->removePage(tmp);
+        tmp->deleteLater();
+
+        saveHostPrefs(view);
+    } else {
+        if (m_fullscreenWindow) { // first close fullscreen view
+            switchFullscreen();
+        }
+
+        QWidget *tmp = m_tabWidget->currentWidget();
+        m_remoteViewList.removeAt(m_currentRemoteView);
+        m_tabWidget->removeTab(m_tabWidget->currentIndex());
+        tmp->deleteLater();
+
+        saveHostPrefs();
+    }
 }
 
 void MainWindow::closeTab(QWidget *widget)
@@ -988,10 +999,12 @@ void MainWindow::saveProperties(KConfigGroup &group)
     saveHostPrefs();
 }
 
-void MainWindow::saveHostPrefs()
+void MainWindow::saveHostPrefs(RemoteView* view)
 {
     // Save default window size for currently active view
-    RemoteView* view = m_currentRemoteView >= 0 ? m_remoteViewList.at(m_currentRemoteView) : NULL;
+    if (!view)
+        view = m_currentRemoteView >= 0 ? m_remoteViewList.at(m_currentRemoteView) : NULL;
+
     if (view)
         saveWindowSize(view->hostPreferences()->configGroup());
     
