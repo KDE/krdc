@@ -400,7 +400,7 @@ void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConn
 
 void MainWindow::openFromDockWidget(const QModelIndex &index)
 {
-    const QString data = index.data(Qt::UserRole).toString();
+    const QString data = index.data(10001).toString();
     if (!data.isEmpty()) {
         const KUrl url(data);
         // first check if url has already been opened; in case show the tab
