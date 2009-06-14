@@ -355,6 +355,8 @@ void VncView::updateImage(int x, int y, int w, int h)
         kDebug(5011) << "Updating framebuffer size";
         if (m_scale) {
             setMaximumSize(QSize(QWIDGETSIZE_MAX, QWIDGETSIZE_MAX));
+            if (parentWidget())
+                scaleResize(parentWidget()->width(), parentWidget()->height());
         } else {
             kDebug(5011) << "Resizing: " << m_frame.width() << m_frame.height();
             resize(m_frame.width(), m_frame.height());
