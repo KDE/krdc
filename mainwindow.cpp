@@ -215,7 +215,7 @@ void MainWindow::setupActions()
     scaleAction->setText(i18n("Scale Remote Screen to Fit Window Size"));
     connect(scaleAction, SIGNAL(triggered(bool)), SLOT(scale(bool)));
 
-    KStandardAction::fullScreen(this, SLOT(switchFullscreen()), this, actionCollection());
+    KStandardAction::fullScreen(this, SLOT(switchFullscreen()), 0, actionCollection());
     KStandardAction::quit(this, SLOT(quit()), actionCollection());
     KStandardAction::preferences(this, SLOT(preferences()), actionCollection());
     KStandardAction::configureToolbars(this, SLOT(configureToolbars()), actionCollection());
