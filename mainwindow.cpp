@@ -717,7 +717,7 @@ void MainWindow::showLocalCursor(bool showLocalCursor)
 
     RemoteView* view = m_remoteViewList.at(m_currentRemoteView);
     view->showDotCursor(showLocalCursor ? RemoteView::CursorOn : RemoteView::CursorOff);
-    view->hostPreferences()->setViewOnly(showLocalCursor);
+    view->hostPreferences()->setShowLocalCursor(showLocalCursor);
     saveHostPrefs();
 }
 
