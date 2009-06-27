@@ -43,6 +43,7 @@ class ZeroconfPage;
 
 class QScrollArea;
 class QModelIndex;
+class QSortFilterProxyModel;
 class QTreeView;
 
 class MainWindow : public KXmlGuiWindow
@@ -94,12 +95,13 @@ private slots:
     void closeZeroconfPage();
     void openFromDockWidget(const QModelIndex &index);
     void expandTreeViewItems();
+    void updateFilter(const QString &text);
 
 private:
     void setupActions();
     void loadAllPlugins();
     RemoteViewFactory *createPluginFromService(const KService::Ptr &service);
-    
+
     QScrollArea *createScrollArea(QWidget *parent, RemoteView *remoteView);
 
     QWidget *m_fullscreenWindow;
@@ -126,6 +128,7 @@ private:
     SystemTrayIcon *m_systemTrayIcon;
     ZeroconfPage *m_zeroconfPage;
     QTreeView *m_remoteDesktopsTreeView;
+    QSortFilterProxyModel *m_remoteDesktopsModelProxy;
 };
 
 #include <QApplication>

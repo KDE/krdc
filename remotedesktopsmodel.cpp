@@ -81,24 +81,30 @@ QVariant RemoteDesktopsModel::data(const QModelIndex &index, int role) const
         return QVariant();
 
     RemoteDesktopsItem *item = static_cast<RemoteDesktopsItem*>(index.internalPointer());
+    const QString currentItemString = item->data(1).toString();
 
     switch (role) {
     case Qt::DisplayRole:
     case Qt::ToolTipRole:
         return item->data(index.column());
     case Qt::DecorationRole:
-        if (!item->data(1).toString().isEmpty()) // contains an url
+        if (!currentItemString.isEmpty()) // contains an url
             return KIcon("krdc");
 #if 0
-        else if (item->data(1).toString() == "Local Network")
+        else if (currentItemString == "Local Network")
             return KIcon("network-workgroup");
 #endif
-        else if (item->data(1).toString() == "...")
+        else if (currentItemString == "...")
             return KIcon("view-history");
         else
             return KIcon("folder-bookmarks");
     case 10001: //url for dockwidget
-        return item->data(1);
+        return currentItemString;
+    case 10002: //filter
+        if (!currentItemString.isEmpty())
+            return currentItemString + item->data(0).toString(); // return both uservisible and data
+        else
+            return "IGNORE";
     default:
         return QVariant();
     }

@@ -43,6 +43,7 @@
 #include <KComboBox>
 #include <KEditToolBar>
 #include <KIcon>
+#include <KLineEdit>
 #include <KLocale>
 #include <KMenu>
 #include <KMenuBar>
@@ -69,6 +70,7 @@
 #include <QLabel>
 #include <QLayout>
 #include <QScrollArea>
+#include <QSortFilterProxyModel>
 #include <QTimer>
 #include <QToolButton>
 #include <QToolTip>
@@ -113,16 +115,24 @@ MainWindow::MainWindow(QWidget *parent)
     setCentralWidget(m_tabWidget);
 
     QDockWidget *remoteDesktopsDockWidget = new QDockWidget(this);
+    QWidget *remoteDesktopsDockLayoutWidget = new QWidget(remoteDesktopsDockWidget);
+    QVBoxLayout *remoteDesktopsDockLayout = new QVBoxLayout(remoteDesktopsDockLayoutWidget);
     remoteDesktopsDockWidget->setObjectName("remoteDesktopsDockWidget"); // required for saving position / state
     remoteDesktopsDockWidget->setWindowTitle(i18n("Remote Desktops"));
     QFontMetrics fontMetrics(remoteDesktopsDockWidget->font());
     remoteDesktopsDockWidget->setMinimumWidth(fontMetrics.width("vnc://192.168.100.100:6000"));
     actionCollection()->addAction("remote_desktop_dockwidget",
                                   remoteDesktopsDockWidget->toggleViewAction());
-    m_remoteDesktopsTreeView = new QTreeView(remoteDesktopsDockWidget);
+    m_remoteDesktopsTreeView = new QTreeView(remoteDesktopsDockLayoutWidget);
     RemoteDesktopsModel *remoteDesktopsModel = new RemoteDesktopsModel(this);
+
+    m_remoteDesktopsModelProxy = new QSortFilterProxyModel(this);
+    m_remoteDesktopsModelProxy->setSourceModel(remoteDesktopsModel);
+    m_remoteDesktopsModelProxy->setFilterKeyColumn(0);
+    m_remoteDesktopsModelProxy->setFilterRole(10002);
+
     connect(remoteDesktopsModel, SIGNAL(modelReset()), this, SLOT(expandTreeViewItems()));
-    m_remoteDesktopsTreeView->setModel(remoteDesktopsModel);
+    m_remoteDesktopsTreeView->setModel(m_remoteDesktopsModelProxy);
     m_remoteDesktopsTreeView->header()->hide();
     m_remoteDesktopsTreeView->expandAll();
     m_remoteDesktopsTreeView->setItemsExpandable(false);
@@ -130,7 +140,13 @@ MainWindow::MainWindow(QWidget *parent)
     connect(m_remoteDesktopsTreeView, SIGNAL(doubleClicked(const QModelIndex &)),
                                     SLOT(openFromDockWidget(const QModelIndex &)));
 
-    remoteDesktopsDockWidget->setWidget(m_remoteDesktopsTreeView);
+    KLineEdit *filterLineEdit = new KLineEdit(remoteDesktopsDockLayoutWidget);
+    filterLineEdit->setClickMessage(i18n("Filter"));
+    filterLineEdit->setClearButtonShown(true);
+    connect(filterLineEdit, SIGNAL(textChanged(const QString &)), SLOT(updateFilter(const QString &)));
+    remoteDesktopsDockLayout->addWidget(filterLineEdit);
+    remoteDesktopsDockLayout->addWidget(m_remoteDesktopsTreeView);
+    remoteDesktopsDockWidget->setWidget(remoteDesktopsDockLayoutWidget);
     addDockWidget(Qt::LeftDockWidgetArea, remoteDesktopsDockWidget);
 
     createGUI("krdcui.rc");
@@ -1132,6 +1148,11 @@ int MainWindow::currentRemoteView() const
 void MainWindow::expandTreeViewItems()
 {
     metaObject()->invokeMethod(m_remoteDesktopsTreeView, "expandAll", Qt::QueuedConnection);
+}
+
+void MainWindow::updateFilter(const QString &text)
+{
+        m_remoteDesktopsModelProxy->setFilterRegExp(QRegExp("IGNORE|" + text, Qt::CaseInsensitive, QRegExp::RegExp));
 }
 
 #include "mainwindow.moc"
