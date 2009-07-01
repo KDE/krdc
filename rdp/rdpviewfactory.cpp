@@ -83,7 +83,7 @@ QString RdpViewFactory::connectToolTipText() const
 void RdpViewFactory::checkRdektopAvailability()
 {
     if (KStandardDirs::findExe("rdesktop").isEmpty()) {
-        m_connectToolTipString += '\n' + i18n("The application\"rdesktop\" cannot be found on your system; make sure it is properly installed "
+        m_connectToolTipString += '\n' + i18n("The application \"rdesktop\" cannot be found on your system; make sure it is properly installed "
                                               "if you need RDP support.");
     }
 }
