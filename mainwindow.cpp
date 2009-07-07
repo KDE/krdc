@@ -158,7 +158,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(m_tabWidget, SIGNAL(currentChanged(int)), SLOT(tabChanged(int)));
 
-    statusBar()->showMessage(i18n("KDE Remote Desktop Client started"));
+    if (Settings::showStatusBar())
+        statusBar()->showMessage(i18n("KDE Remote Desktop Client started"));
 
     updateActionStatus(); // disable remote view actions
 
@@ -516,7 +517,8 @@ void MainWindow::statusChanged(RemoteView::RemoteStatus status)
     }
 
     m_tabWidget->setTabIcon(m_tabWidget->currentIndex(), KIcon(iconName));
-    statusBar()->showMessage(message);
+    if (Settings::showStatusBar())
+        statusBar()->showMessage(message);
 }
 
 void MainWindow::takeScreenshot()
@@ -896,6 +898,11 @@ void MainWindow::preferences()
 void MainWindow::updateConfiguration()
 {
     m_addressNavigator->setUrlEditable(Settings::normalUrlInputLine());
+
+    if (!Settings::showStatusBar())
+        statusBar()->deleteLater();
+    else
+        statusBar()->showMessage(""); // force creation of statusbar
 
     m_tabWidget->setTabBarHidden(!Settings::showTabBar());
     m_tabWidget->setTabPosition((KTabWidget::TabPosition) Settings::tabPosition());

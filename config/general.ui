@@ -54,6 +54,13 @@
     </widget>
    </item>
    <item>
+    <widget class="QCheckBox" name="kcfg_ShowStatusBar">
+     <property name="text">
+      <string>Show status bar</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QCheckBox" name="kcfg_KeepAspectRatio">
      <property name="text">
       <string>Keep aspect ratio when scaling</string>
@@ -176,14 +183,14 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>KColorButton</class>
-   <extends>QPushButton</extends>
-   <header>kcolorbutton.h</header>
-  </customwidget>
-  <customwidget>
    <class>KComboBox</class>
    <extends>QComboBox</extends>
    <header>kcombobox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KColorButton</class>
+   <extends>QPushButton</extends>
+   <header>kcolorbutton.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
