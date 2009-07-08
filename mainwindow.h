@@ -122,6 +122,7 @@ private:
     int m_leftRightBorder;
 
     int m_currentRemoteView;
+    int m_numNonRemoteViewTabs;  //these tabs start at index 0
     bool m_showStartPage;
     bool m_switchFullscreenWhenConnected;
 

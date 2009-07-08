@@ -84,6 +84,7 @@ MainWindow::MainWindow(QWidget *parent)
         m_leftRightBorder(0),
         m_currentRemoteView(-1),
         m_showStartPage(false),
+        m_numNonRemoteViewTabs(0),
         m_systemTrayIcon(0),
         m_zeroconfPage(0)
 {
@@ -395,12 +396,6 @@ void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConn
 
 //     view->resize(0, 0);
  
-    int numNonRemoteView = 0;
-    if (m_showStartPage)
-        numNonRemoteView++;
-    if (m_zeroconfPage)
-        numNonRemoteView++;
-    
     if (m_remoteViewList.size() == 1) {
         kDebug(5010) << "First connection, restoring window size)";
         restoreWindowSize(view->hostPreferences()->configGroup());
@@ -423,12 +418,7 @@ void MainWindow::openFromDockWidget(const QModelIndex &index)
         // first check if url has already been opened; in case show the tab
         for (int i = 0; i < m_remoteViewList.count(); ++i) {
             if (m_remoteViewList.at(i)->url() == url) {
-                int numNonRemoteView = 0;
-                if (m_showStartPage)
-                    numNonRemoteView++;
-                if (m_zeroconfPage)
-                    numNonRemoteView++;
-                m_tabWidget->setCurrentIndex(i + numNonRemoteView);
+                m_tabWidget->setCurrentIndex(i + m_numNonRemoteViewTabs);
                 return;
             }
         }
@@ -643,6 +633,7 @@ void MainWindow::closeTab(QWidget *widget)
         KMessageBox::information(this, i18n("You can enable the start page in the settings again."));
 
         Settings::setShowStartPage(false);
+        m_numNonRemoteViewTabs--;
         m_tabWidget->removeTab(0);
         m_showStartPage = false;
 	updateActionStatus();
@@ -656,14 +647,8 @@ void MainWindow::closeTab(QWidget *widget)
     }
 #endif
 
-    int numNonRemoteView = 0;
-    if (m_showStartPage)
-        numNonRemoteView++;
-    if (m_zeroconfPage)
-        numNonRemoteView++;
-
-    if (index - numNonRemoteView >= 0)
-        m_remoteViewList.removeAt(index - numNonRemoteView);
+    if (index - m_numNonRemoteViewTabs >= 0)
+        m_remoteViewList.removeAt(index - m_numNonRemoteViewTabs);
 
     m_tabWidget->removeTab(index);
 
@@ -932,12 +917,7 @@ void MainWindow::updateConfiguration()
     updateActionStatus();
 
     // update the scroll areas background color
-    int numNonRemoteView = 0;
-    if (m_showStartPage)
-        numNonRemoteView++;
-    if (m_zeroconfPage)
-        numNonRemoteView++;
-    for (int i = numNonRemoteView; i < m_tabWidget->count(); ++i) {
+    for (int i = m_numNonRemoteViewTabs; i < m_tabWidget->count(); ++i) {
         QPalette palette = m_tabWidget->widget(i)->palette();
         palette.setColor(QPalette::Dark, Settings::backgroundColor());
         m_tabWidget->widget(i)->setPalette(palette);
@@ -1038,13 +1018,7 @@ void MainWindow::tabChanged(int index)
 {
     kDebug(5010) << index;
     
-    int numNonRemoteView = 0;
-    if (m_showStartPage)
-        numNonRemoteView++;
-    if (m_zeroconfPage)
-        numNonRemoteView++;
-
-    m_currentRemoteView = index - numNonRemoteView;
+    m_currentRemoteView = index - m_numNonRemoteViewTabs;
 
     const QString tabTitle = m_tabWidget->tabText(index).remove('&');
     setCaption(tabTitle == i18n("Start Page") ? QString() : tabTitle);
@@ -1096,6 +1070,7 @@ void MainWindow::createStartPage()
     startLayout->addWidget(zeroconfButton);
     startLayout->addStretch();
 
+    m_numNonRemoteViewTabs++;
     m_tabWidget->insertTab(0, startWidget, KIcon("krdc"), i18n("Start Page"));
 }
 
@@ -1122,6 +1097,8 @@ void MainWindow::createZeroconfPage()
     m_zeroconfPage = new ZeroconfPage(this);
     connect(m_zeroconfPage, SIGNAL(newConnection(const KUrl, bool)), this, SLOT(newConnection(const KUrl, bool)));
     connect(m_zeroconfPage, SIGNAL(closeZeroconfPage()), this, SLOT(closeZeroconfPage()));
+
+    m_numNonRemoteViewTabs++;
     const int zeroconfTabIndex = m_tabWidget->insertTab(m_showStartPage ? 1 : 0, m_zeroconfPage, KIcon("krdc"), i18n("Browse Local Network"));
     m_tabWidget->setCurrentIndex(zeroconfTabIndex);
 #endif
@@ -1131,6 +1108,8 @@ void MainWindow::closeZeroconfPage()
 {
 #ifdef BUILD_ZEROCONF
     const int index = m_tabWidget->indexOf(m_zeroconfPage);
+
+    m_numNonRemoteViewTabs--;
     m_tabWidget->removeTab(index);
     m_zeroconfPage->deleteLater();
     m_zeroconfPage = 0;
