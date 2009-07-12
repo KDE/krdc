@@ -83,8 +83,8 @@ MainWindow::MainWindow(QWidget *parent)
         m_topBottomBorder(0),
         m_leftRightBorder(0),
         m_currentRemoteView(-1),
-        m_showStartPage(false),
         m_numNonRemoteViewTabs(0),
+        m_showStartPage(false),
         m_systemTrayIcon(0),
         m_zeroconfPage(0)
 {
@@ -888,7 +888,7 @@ void MainWindow::updateConfiguration()
     else
         statusBar()->showMessage(""); // force creation of statusbar
 
-    m_tabWidget->setTabBarHidden(!Settings::showTabBar());
+    m_tabWidget->setTabBarHidden(m_tabWidget->count() <= 1 && !Settings::showTabBar());
     m_tabWidget->setTabPosition((KTabWidget::TabPosition) Settings::tabPosition());
 #if QT_VERSION <= 0x040500
     m_tabWidget->setTabsClosable(Settings::tabCloseButton());
@@ -1015,7 +1015,9 @@ void MainWindow::saveHostPrefs(RemoteView* view)
 void MainWindow::tabChanged(int index)
 {
     kDebug(5010) << index;
-    
+
+    m_tabWidget->setTabBarHidden(m_tabWidget->count() <= 1 && !Settings::showTabBar());
+
     m_currentRemoteView = index - m_numNonRemoteViewTabs;
 
     const QString tabTitle = m_tabWidget->tabText(index).remove('&');
