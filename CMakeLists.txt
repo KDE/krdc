@@ -44,6 +44,8 @@ include_directories(
     ${CMAKE_CURRENT_BINARY_DIR}
 )
 
+include_directories(${LIBKNOTIFICATIONITEM-1_INCLUDE_DIR})
+
 add_subdirectory(core)
 add_subdirectory(vnc)
 add_subdirectory(nx)
@@ -80,6 +82,7 @@ target_link_libraries(krdc
     ${KDE4_KIO_LIBS}
     ${KDE4_KNOTIFYCONFIG_LIBS}
     ${KDE4_KUTILS_LIBS}
+    ${LIBKNOTIFICATIONITEM-1_LIBRARIES} 
     krdccore
 )
 

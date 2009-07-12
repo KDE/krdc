@@ -29,15 +29,14 @@
 #include <KDebug>
 #include <KIcon>
 #include <KLocale>
-
-#include <QMenu>
+#include <KMenu>
 
 SystemTrayIcon::SystemTrayIcon(MainWindow *parent)
-        : KSystemTrayIcon(parent),
+        : Experimental::KNotificationItem(parent),
         m_mainWindow(parent)
 {
-    setIcon(KIcon("krdc"));
-    setToolTip(i18n("KDE Remote Desktop Client"));
+    setIconByPixmap(KIcon("krdc"));
+    setToolTipTitle(i18n("KDE Remote Desktop Client"));
 
     contextMenu()->addSeparator();
     contextMenu()->addAction(parent->actionCollection()->action("bookmark"));

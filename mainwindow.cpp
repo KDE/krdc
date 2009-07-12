@@ -154,7 +154,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     if (Settings::systemTrayIcon()) {
         m_systemTrayIcon = new SystemTrayIcon(this);
-        m_systemTrayIcon->setVisible(true);
     }
 
     connect(m_tabWidget, SIGNAL(currentChanged(int)), SLOT(tabChanged(int)));
@@ -902,7 +901,6 @@ void MainWindow::updateConfiguration()
 
     if (Settings::systemTrayIcon() && !m_systemTrayIcon) {
         m_systemTrayIcon = new SystemTrayIcon(this);
-        m_systemTrayIcon->setVisible(true);
     } else if (m_systemTrayIcon) {
         delete m_systemTrayIcon;
         m_systemTrayIcon = 0;
