@@ -185,6 +185,12 @@ void MainWindow::setupActions()
     screenshotAction->setIcon(KIcon("ksnapshot"));
     connect(screenshotAction, SIGNAL(triggered()), SLOT(takeScreenshot()));
 
+    KAction *fullscreenAction = actionCollection()->addAction("switch_fullscreen"); // note: please do not switch to KStandardShortcut unless you know what you are doing (see history of this file)
+    fullscreenAction->setText(i18n("Switch to Full Screen Mode"));
+    fullscreenAction->setIcon(KIcon("view-fullscreen"));
+    fullscreenAction->setShortcut(KStandardShortcut::fullScreen());
+    connect(fullscreenAction, SIGNAL(triggered()), SLOT(switchFullscreen()));
+
     QAction *viewOnlyAction = actionCollection()->addAction("view_only");
     viewOnlyAction->setCheckable(true);
     viewOnlyAction->setText(i18n("View Only"));
@@ -215,7 +221,6 @@ void MainWindow::setupActions()
     scaleAction->setText(i18n("Scale Remote Screen to Fit Window Size"));
     connect(scaleAction, SIGNAL(triggered(bool)), SLOT(scale(bool)));
 
-    KStandardAction::fullScreen(this, SLOT(switchFullscreen()), 0, actionCollection());
     KStandardAction::quit(this, SLOT(quit()), actionCollection());
     KStandardAction::preferences(this, SLOT(preferences()), actionCollection());
     KStandardAction::configureToolbars(this, SLOT(configureToolbars()), actionCollection());
@@ -517,7 +522,7 @@ void MainWindow::switchFullscreen()
     RemoteView* view = m_remoteViewList.at(m_currentRemoteView);
 
     if (m_fullscreenWindow) {
-        // Leaving fullscreen mode
+        // Leaving full screen mode
         view->enableScaling(view->hostPreferences()->windowedScale());
         show();
         restoreGeometry(m_mainWindowGeometry);
@@ -538,14 +543,17 @@ void MainWindow::switchFullscreen()
             m_toolBar = 0;
         }
 
+        actionCollection()->action("switch_fullscreen")->setIcon(KIcon("view-fullscreen"));
+        actionCollection()->action("switch_fullscreen")->setText(i18n("Switch to Full Screen Mode"));
+
         m_fullscreenWindow->deleteLater();
 
         m_fullscreenWindow = 0;
     } else {
-        // Entering fullscreen mode
+        // Entering full screen mode
         m_fullscreenWindow = new QWidget(this, Qt::Window);
-        m_fullscreenWindow->setWindowTitle(i18nc("window title when in fullscreen mode (for example displayed in tasklist)",
-                                                 "KDE Remote Desktop Client (Fullscreen)"));
+        m_fullscreenWindow->setWindowTitle(i18nc("window title when in full screen mode (for example displayed in tasklist)",
+                                                 "KDE Remote Desktop Client (Full Screen)"));
 
         QScrollArea *scrollArea = createScrollArea(m_fullscreenWindow, view);
         scrollArea->setFrameShape(QFrame::NoFrame);
@@ -602,7 +610,7 @@ void MainWindow::disconnectHost()
 
         saveHostPrefs(view);
     } else {
-        if (m_fullscreenWindow) { // first close fullscreen view
+        if (m_fullscreenWindow) { // first close full screen view
             switchFullscreen();
         }
 
@@ -760,6 +768,9 @@ void MainWindow::showRemoteViewToolbar()
     kDebug(5010);
 
     if (!m_toolBar) {
+        actionCollection()->action("switch_fullscreen")->setIcon(KIcon("view-restore"));
+        actionCollection()->action("switch_fullscreen")->setText(i18n("Switch to Window Mode"));
+
         m_toolBar = new FloatingToolBar(m_fullscreenWindow, m_fullscreenWindow);
         m_toolBar->winId(); // force it to be a native widget (prevents problem with QX11EmbedContainer)
         m_toolBar->setSide(FloatingToolBar::Top);
@@ -782,11 +793,11 @@ void MainWindow::showRemoteViewToolbar()
         m_toolBar->addWidget(sessionComboBox);
 #endif
 
-        m_toolBar->addAction(actionCollection()->action("fullscreen"));
+        m_toolBar->addAction(actionCollection()->action("switch_fullscreen"));
 
         QAction *minimizeAction = new QAction(m_toolBar);
         minimizeAction->setIcon(KIcon("go-down"));
-        minimizeAction->setText(i18n("Minimize Fullscreen Window"));
+        minimizeAction->setText(i18n("Minimize Full Screen Window"));
         connect(minimizeAction, SIGNAL(triggered()), m_fullscreenWindow, SLOT(showMinimized()));
         m_toolBar->addAction(minimizeAction);
 
@@ -832,7 +843,7 @@ void MainWindow::updateActionStatus()
 
     RemoteView* view = m_currentRemoteView >= 0 ? m_remoteViewList.at(m_currentRemoteView) : NULL;
     
-    actionCollection()->action("fullscreen")->setEnabled(enabled);
+    actionCollection()->action("switch_fullscreen")->setEnabled(enabled);
     actionCollection()->action("take_screenshot")->setEnabled(enabled);
     actionCollection()->action("disconnect")->setEnabled(enabled);
 
