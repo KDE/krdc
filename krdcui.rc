@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<gui name="krdc" version="6">
+<gui name="krdc" version="7">
 <MenuBar>
     <Menu name="file">
         <Action name="new_vnc_connection" />
@@ -9,7 +9,7 @@
         <Action name="zeroconf_page" />
     </Menu>
     <Menu noMerge="1" name="session"><text>&amp;Session</text>
-        <Action name="fullscreen" />
+        <Action name="switch_fullscreen" />
         <Action name="take_screenshot" />
         <Action name="view_only" />
         <Action name="show_local_cursor" />
@@ -23,7 +23,7 @@
     </Menu>
 </MenuBar>
 <ToolBar fullWidth="false" name="krdc_remote_view_toolbar" iconText="icononly" newline="false"><text>Remote View Toolbar</text>
-    <Action name="fullscreen" />
+    <Action name="switch_fullscreen" />
     <Action name="take_screenshot" />
     <Action name="view_only" />
     <Action name="show_local_cursor" />
