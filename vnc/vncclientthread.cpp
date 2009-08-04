@@ -83,8 +83,9 @@ void VncClientThread::updatefb(rfbClient* cl, int x, int y, int w, int h)
 
     const QImage img(cl->frameBuffer, width, height, QImage::Format_RGB32);
 
-    if (img.isNull())
+    if (img.isNull()) {
         kDebug(5011) << "image not loaded";
+    }
 
     VncClientThread *t = (VncClientThread*)rfbClientGetClientData(cl, 0);
     Q_ASSERT(t);
