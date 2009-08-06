@@ -1,6 +1,7 @@
 /****************************************************************************
 **
 ** Copyright (C) 2008 Urs Wolfer <uwolfer @ kde.org>
+** Copyright (C) 2009 Tony Murray <murraytony@gmail.com>
 **
 ** This file is part of KDE.
 **
@@ -25,6 +26,9 @@
 #define REMOTEDESKTOPSMODEL_H
 
 #include <QAbstractItemModel>
+#ifdef BUILD_ZEROCONF
+#include <dnssd/servicebrowser.h>
+#endif
 
 class KBookmarkGroup;
 class KBookmarkManager;
@@ -53,11 +57,17 @@ public:
 
 private:
     void buildModelFromBookmarkGroup(const KBookmarkGroup &group, RemoteDesktopsItem *item);
-    void scanLocalNetwork();
 
     KBookmarkManager *m_manager;
     RemoteDesktopsItem *rootItem;
+    RemoteDesktopsItem *bookmarkItem;
+#ifdef BUILD_ZEROCONF
+    RemoteDesktopsItem *zeroconfItem;
+    DNSSD::ServiceBrowser *zeroconfBrowser;
+    QHash<QString, QString> m_protocols;
+#endif
 #if 0
+    void scanLocalNetwork();
     RemoteDesktopsItem *localNetworkItem;
 
     KProcess *m_scanProcess;
@@ -66,7 +76,10 @@ private:
 #endif
 
 private slots:
-    void changed();
+    void bookmarksChanged();
+#ifdef BUILD_ZEROCONF
+    void servicesChanged();
+#endif
 #if 0
     void readInput();
 #endif

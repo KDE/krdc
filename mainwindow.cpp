@@ -136,7 +136,7 @@ MainWindow::MainWindow(QWidget *parent)
     m_remoteDesktopsTreeView->setModel(m_remoteDesktopsModelProxy);
     m_remoteDesktopsTreeView->header()->hide();
     m_remoteDesktopsTreeView->expandAll();
-    m_remoteDesktopsTreeView->setItemsExpandable(false);
+    m_remoteDesktopsTreeView->setItemsExpandable(true);
     m_remoteDesktopsTreeView->setRootIsDecorated(false);
     connect(m_remoteDesktopsTreeView, SIGNAL(doubleClicked(const QModelIndex &)),
                                     SLOT(openFromDockWidget(const QModelIndex &)));

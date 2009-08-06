@@ -1,6 +1,7 @@
 /****************************************************************************
 **
 ** Copyright (C) 2008 Urs Wolfer <uwolfer @ kde.org>
+** Copyright (C) 2009 Tony Murray <murraytony@gmail.com>
 **
 ** This file is part of KDE.
 **
@@ -32,19 +33,36 @@
 #include <KLocale>
 #include <KProcess>
 
+#ifdef BUILD_ZEROCONF
+#include <dnssd/remoteservice.h>
+#endif
+
 RemoteDesktopsModel::RemoteDesktopsModel(QObject *parent)
         : QAbstractItemModel(parent)
 {
     rootItem = new RemoteDesktopsItem(QList<QVariant>() << "Remote Desktops");
+    bookmarkItem = new RemoteDesktopsItem(QList<QVariant>() << "Bookmarks", rootItem);
+    rootItem->appendChild(bookmarkItem);
 
     const QString file = KStandardDirs::locateLocal("data", "krdc/bookmarks.xml");
 
     m_manager = KBookmarkManager::managerForFile(file, "krdc");
     m_manager->setUpdate(true);
-    connect(m_manager, SIGNAL(changed(const QString &, const QString &)), SLOT(changed()));
+    connect(m_manager, SIGNAL(changed(const QString &, const QString &)), SLOT(bookmarksChanged()));
 
-    buildModelFromBookmarkGroup(m_manager->root(), rootItem);
+    buildModelFromBookmarkGroup(m_manager->root(), bookmarkItem);
 
+#ifdef BUILD_ZEROCONF
+    // Add RDP and NX if they start announcing via Zeroconf:
+    m_protocols["_rfb._tcp"] = "vnc";
+
+    zeroconfItem = new RemoteDesktopsItem(QList<QVariant>() << "Discovered Network Servers", rootItem);
+    rootItem->appendChild(zeroconfItem);
+
+    zeroconfBrowser = new DNSSD::ServiceBrowser("_rfb._tcp", true);
+    connect(zeroconfBrowser, SIGNAL(finished()), this, SLOT(servicesChanged()));
+    zeroconfBrowser->startBrowse();
+#endif
 #if 0
     localNetworkItem = new RemoteDesktopsItem(QList<QVariant>() << "Local Network", rootItem);
     rootItem->appendChild(localNetworkItem);
@@ -59,12 +77,14 @@ RemoteDesktopsModel::~RemoteDesktopsModel()
 {
 }
 
-void RemoteDesktopsModel::changed()
+void RemoteDesktopsModel::bookmarksChanged()
 {
     kDebug(5010);
-    rootItem->clearChildren();
-    buildModelFromBookmarkGroup(m_manager->root(), rootItem);
+    emit layoutAboutToBeChanged();
+    bookmarkItem->clearChildren();
+    buildModelFromBookmarkGroup(m_manager->root(), bookmarkItem);
     reset();
+    emit layoutChanged();
 }
 
 int RemoteDesktopsModel::columnCount(const QModelIndex &parent) const
@@ -85,11 +105,16 @@ QVariant RemoteDesktopsModel::data(const QModelIndex &index, int role) const
 
     switch (role) {
     case Qt::DisplayRole:
-    case Qt::ToolTipRole:
         return item->data(index.column());
+    case Qt::ToolTipRole:
+        return item->data(1);  //use the url for the tooltip
     case Qt::DecorationRole:
         if (!currentItemString.isEmpty()) // contains an url
             return KIcon("krdc");
+#ifdef BUILD_ZEROCONF
+        else if (currentItemString == "Discovered Network Services")
+            return KIcon("network-workgroup");
+#endif
 #if 0
         else if (currentItemString == "Local Network")
             return KIcon("network-workgroup");
@@ -154,7 +179,7 @@ QModelIndex RemoteDesktopsModel::parent(const QModelIndex &index) const
     RemoteDesktopsItem *childItem = static_cast<RemoteDesktopsItem*>(index.internalPointer());
     RemoteDesktopsItem *parentItem = childItem->parent();
 
-    if (parentItem == rootItem)
+    if (parentItem == 0 || parentItem == rootItem)
         return QModelIndex();
 
     return createIndex(parentItem->row(), 0, parentItem);
@@ -186,6 +211,24 @@ void RemoteDesktopsModel::buildModelFromBookmarkGroup(const KBookmarkGroup &grou
     }
 }
 
+#ifdef BUILD_ZEROCONF
+void RemoteDesktopsModel::servicesChanged() {
+    //redo list because it is easier than finding and removing one
+    QList<DNSSD::RemoteService::Ptr> services = zeroconfBrowser->services();
+    KUrl url;
+    emit layoutAboutToBeChanged();
+    zeroconfItem->clearChildren();
+    foreach(DNSSD::RemoteService::Ptr service, services) {
+        url.setProtocol(m_protocols[service->type()].toLower());
+        url.setHost(service->hostName());
+        url.setPort(service->port());
+//tooltip        service->hostName()+"."+service->domain();
+        RemoteDesktopsItem *newItem = new RemoteDesktopsItem(QList<QVariant>() << service->serviceName() << url.url(), zeroconfItem);
+        zeroconfItem->appendChild(newItem);
+    }
+    emit layoutChanged();
+}
+#endif
 #if 0
 void RemoteDesktopsModel::scanLocalNetwork()
 {
