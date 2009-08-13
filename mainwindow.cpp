@@ -703,7 +703,7 @@ void MainWindow::tabContextMenu(QWidget *widget, const QPoint &point)
     RemoteView *view = qobject_cast<RemoteView*>(scrollArea->widget());
     if (!view) return;
 
-    const QString url = view->url().url();
+    const QString url = view->url().prettyUrl(KUrl::RemoveTrailingSlash);
     kDebug(5010) << url;
 
     KMenu *menu = new KMenu(this);
