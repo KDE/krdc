@@ -107,7 +107,7 @@ QVariant RemoteDesktopsModel::data(const QModelIndex &index, int role) const
     case Qt::DisplayRole:
         return item->data(index.column());
     case Qt::ToolTipRole:
-        return item->data(1);  //use the url for the tooltip
+        return currentItemString;  //use the url for the tooltip
     case Qt::DecorationRole:
         if (!currentItemString.isEmpty()) // contains an url
             return KIcon("krdc");
