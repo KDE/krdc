@@ -602,6 +602,10 @@ void MainWindow::disconnectHost()
 
     RemoteView *view = qobject_cast<RemoteView*>(QObject::sender());
 
+    if (m_fullscreenWindow) { // first close full screen view
+        switchFullscreen();
+    }
+
     if (view) {
         QWidget *tmp = (QWidget*) view->parent()->parent();
         m_remoteViewList.removeOne(view);
@@ -610,10 +614,6 @@ void MainWindow::disconnectHost()
 
         saveHostPrefs(view);
     } else {
-        if (m_fullscreenWindow) { // first close full screen view
-            switchFullscreen();
-        }
-
         QWidget *tmp = m_tabWidget->currentWidget();
         m_remoteViewList.removeAt(m_currentRemoteView);
         m_tabWidget->removeTab(m_tabWidget->currentIndex());
