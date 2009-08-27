@@ -39,7 +39,6 @@ class BookmarkManager;
 class FloatingToolBar;
 class RemoteView;
 class SystemTrayIcon;
-class ZeroconfPage;
 
 class QScrollArea;
 class QModelIndex;
@@ -89,13 +88,12 @@ private slots:
     void updateActionStatus();
     void updateConfiguration();
     void tabChanged(int index);
-    void createStartPage();
-    void newConnectionToolTip();
-    void createZeroconfPage();
-    void closeZeroconfPage();
+    QWidget* newConnectionWidget();
+    void newConnectionPage();
     void openFromDockWidget(const QModelIndex &index);
     void expandTreeViewItems();
     void updateFilter(const QString &text);
+    void createDockWidget();
 
 private:
     void setupActions();
@@ -122,14 +120,13 @@ private:
     int m_leftRightBorder;
 
     int m_currentRemoteView;
-    int m_numNonRemoteViewTabs;  //these tabs start at index 0
-    bool m_showStartPage;
     bool m_switchFullscreenWhenConnected;
 
     SystemTrayIcon *m_systemTrayIcon;
-    ZeroconfPage *m_zeroconfPage;
     QTreeView *m_remoteDesktopsTreeView;
+    QTreeView *m_remoteDesktopsNewConnectionTabTreeView;
     QSortFilterProxyModel *m_remoteDesktopsModelProxy;
+    QWidget *m_newConnectionWidget;
 };
 
 #include <QApplication>

@@ -32,10 +32,6 @@
 #include "systemtrayicon.h"
 #include "hostpreferences.h"
 
-#ifdef BUILD_ZEROCONF
-#include "zeroconf/zeroconfpage.h"
-#endif
-
 #include <KAction>
 #include <KActionCollection>
 #include <KActionMenu>
@@ -57,6 +53,7 @@
 #include <KTabWidget>
 #include <KToggleAction>
 #include <KToggleFullScreenAction>
+#include <KUrlComboBox>
 #include <KUrlNavigator>
 #include <KServiceTypeTrader>
 #include <KStandardDirs>
@@ -79,14 +76,15 @@
 MainWindow::MainWindow(QWidget *parent)
         : KXmlGuiWindow(parent),
         m_fullscreenWindow(0),
+        m_addressNavigator(0),
         m_toolBar(0),
         m_topBottomBorder(0),
         m_leftRightBorder(0),
         m_currentRemoteView(-1),
-        m_numNonRemoteViewTabs(0),
-        m_showStartPage(false),
         m_systemTrayIcon(0),
-        m_zeroconfPage(0)
+        m_remoteDesktopsTreeView(0),
+        m_remoteDesktopsNewConnectionTabTreeView(0),
+        m_newConnectionWidget(0)
 {
     loadAllPlugins();
 
@@ -95,7 +93,6 @@ MainWindow::MainWindow(QWidget *parent)
     setStandardToolBarMenuEnabled(true);
 
     m_tabWidget = new KTabWidget(this);
-    m_tabWidget->setTabBarHidden(!Settings::showTabBar());
     m_tabWidget->setTabPosition((KTabWidget::TabPosition) Settings::tabPosition());
 
 #if QT_VERSION <= 0x040500
@@ -115,40 +112,7 @@ MainWindow::MainWindow(QWidget *parent)
     m_tabWidget->setMinimumSize(600, 400);
     setCentralWidget(m_tabWidget);
 
-    QDockWidget *remoteDesktopsDockWidget = new QDockWidget(this);
-    QWidget *remoteDesktopsDockLayoutWidget = new QWidget(remoteDesktopsDockWidget);
-    QVBoxLayout *remoteDesktopsDockLayout = new QVBoxLayout(remoteDesktopsDockLayoutWidget);
-    remoteDesktopsDockWidget->setObjectName("remoteDesktopsDockWidget"); // required for saving position / state
-    remoteDesktopsDockWidget->setWindowTitle(i18n("Remote Desktops"));
-    QFontMetrics fontMetrics(remoteDesktopsDockWidget->font());
-    remoteDesktopsDockWidget->setMinimumWidth(fontMetrics.width("vnc://192.168.100.100:6000"));
-    actionCollection()->addAction("remote_desktop_dockwidget",
-                                  remoteDesktopsDockWidget->toggleViewAction());
-    m_remoteDesktopsTreeView = new QTreeView(remoteDesktopsDockLayoutWidget);
-    RemoteDesktopsModel *remoteDesktopsModel = new RemoteDesktopsModel(this);
-
-    m_remoteDesktopsModelProxy = new QSortFilterProxyModel(this);
-    m_remoteDesktopsModelProxy->setSourceModel(remoteDesktopsModel);
-    m_remoteDesktopsModelProxy->setFilterKeyColumn(0);
-    m_remoteDesktopsModelProxy->setFilterRole(10002);
-
-    connect(remoteDesktopsModel, SIGNAL(modelReset()), this, SLOT(expandTreeViewItems()));
-    m_remoteDesktopsTreeView->setModel(m_remoteDesktopsModelProxy);
-    m_remoteDesktopsTreeView->header()->hide();
-    m_remoteDesktopsTreeView->expandAll();
-    m_remoteDesktopsTreeView->setItemsExpandable(true);
-    m_remoteDesktopsTreeView->setRootIsDecorated(false);
-    connect(m_remoteDesktopsTreeView, SIGNAL(doubleClicked(const QModelIndex &)),
-                                    SLOT(openFromDockWidget(const QModelIndex &)));
-
-    KLineEdit *filterLineEdit = new KLineEdit(remoteDesktopsDockLayoutWidget);
-    filterLineEdit->setClickMessage(i18n("Filter"));
-    filterLineEdit->setClearButtonShown(true);
-    connect(filterLineEdit, SIGNAL(textChanged(const QString &)), SLOT(updateFilter(const QString &)));
-    remoteDesktopsDockLayout->addWidget(filterLineEdit);
-    remoteDesktopsDockLayout->addWidget(m_remoteDesktopsTreeView);
-    remoteDesktopsDockWidget->setWidget(remoteDesktopsDockLayoutWidget);
-    addDockWidget(Qt::LeftDockWidgetArea, remoteDesktopsDockWidget);
+    createDockWidget();
 
     createGUI("krdcui.rc");
 
@@ -163,12 +127,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     updateActionStatus(); // disable remote view actions
 
-    if (Settings::showStartPage())
-        createStartPage();
+    if (Settings::openSessions().count() == 0) // just create a new connection tab if there are no open sessions
+        m_tabWidget->addTab(newConnectionWidget(), "New Connection");
 
     setAutoSaveSettings(); // e.g toolbar position, mainwindow size, ...
-
-    m_addressNavigator->setFocus();
 
     if (Settings::rememberSessions()) // give some time to create and show the window first
         QTimer::singleShot(100, this, SLOT(restoreOpenSessions()));
@@ -180,30 +142,20 @@ MainWindow::~MainWindow()
 
 void MainWindow::setupActions()
 {
-    foreach(RemoteViewFactory *factory, m_remoteViewFactories) {
-        QAction *connectionAction = actionCollection()->addAction("new_" + factory->scheme() + "_connection");
-        connectionAction->setProperty("schemeString", factory->scheme());
-        connectionAction->setProperty("toolTipString", factory->connectToolTipText());
-        connectionAction->setText(factory->connectActionText());
-        connectionAction->setIcon(KIcon("network-connect"));
-        connect(connectionAction, SIGNAL(triggered()), SLOT(newConnectionToolTip()));
-    }
-
-    QAction *zeroconfAction = actionCollection()->addAction("zeroconf_page");
-    zeroconfAction->setText(i18n("Browse Remote Desktop Services on Local Network..."));
-    zeroconfAction->setIcon(KIcon("network-connect"));
-    connect(zeroconfAction, SIGNAL(triggered()), SLOT(createZeroconfPage()));
-#ifndef BUILD_ZEROCONF
-    zeroconfAction->deleteLater();
-#endif
+    QAction *connectionAction = actionCollection()->addAction("new_connection");
+    connectionAction->setText(i18n("New Connection"));
+    connectionAction->setIcon(KIcon("network-connect"));
+    connect(connectionAction, SIGNAL(triggered()), SLOT(newConnectionPage()));
 
     QAction *screenshotAction = actionCollection()->addAction("take_screenshot");
     screenshotAction->setText(i18n("Copy Screenshot to Clipboard"));
+    screenshotAction->setIconText(i18n("Screenshot"));
     screenshotAction->setIcon(KIcon("ksnapshot"));
     connect(screenshotAction, SIGNAL(triggered()), SLOT(takeScreenshot()));
 
     KAction *fullscreenAction = actionCollection()->addAction("switch_fullscreen"); // note: please do not switch to KStandardShortcut unless you know what you are doing (see history of this file)
     fullscreenAction->setText(i18n("Switch to Full Screen Mode"));
+    fullscreenAction->setIconText(i18n("Full Screen"));
     fullscreenAction->setIcon(KIcon("view-fullscreen"));
     fullscreenAction->setShortcut(KStandardShortcut::fullScreen());
     connect(fullscreenAction, SIGNAL(triggered()), SLOT(switchFullscreen()));
@@ -224,18 +176,21 @@ void MainWindow::setupActions()
     showLocalCursorAction->setCheckable(true);
     showLocalCursorAction->setIcon(KIcon("input-mouse"));
     showLocalCursorAction->setText(i18n("Show Local Cursor"));
+    showLocalCursorAction->setIconText(i18n("Local Cursor"));
     connect(showLocalCursorAction, SIGNAL(triggered(bool)), SLOT(showLocalCursor(bool)));
 
     QAction *grabAllKeysAction = actionCollection()->addAction("grab_all_keys");
     grabAllKeysAction->setCheckable(true);
     grabAllKeysAction->setIcon(KIcon("configure-shortcuts"));
     grabAllKeysAction->setText(i18n("Grab All Possible Keys"));
+    grabAllKeysAction->setIconText(i18n("Grab Keys"));
     connect(grabAllKeysAction, SIGNAL(triggered(bool)), SLOT(grabAllKeys(bool)));
 
     QAction *scaleAction = actionCollection()->addAction("scale");
     scaleAction->setCheckable(true);
     scaleAction->setIcon(KIcon("zoom-fit-best"));
     scaleAction->setText(i18n("Scale Remote Screen to Fit Window Size"));
+    scaleAction->setIconText(i18n("Scale"));
     connect(scaleAction, SIGNAL(triggered(bool)), SLOT(scale(bool)));
 
     KStandardAction::quit(this, SLOT(quit()), actionCollection());
@@ -246,35 +201,6 @@ void MainWindow::setupActions()
     configNotifyAction->setVisible(false);
     m_menubarAction = KStandardAction::showMenubar(this, SLOT(showMenubar()), actionCollection());
     m_menubarAction->setChecked(!menuBar()->isHidden());
-
-    const QString initialProtocol(!m_remoteViewFactories.isEmpty() ? (*m_remoteViewFactories.begin())->scheme() : QString());
-    m_addressNavigator = new KUrlNavigator(0, KUrl(initialProtocol + "://"), this);
-
-    QStringList schemes;
-    foreach(RemoteViewFactory *factory, m_remoteViewFactories) {
-        schemes << factory->scheme();
-    }
-    m_addressNavigator->setCustomProtocols(schemes);
-
-    m_addressNavigator->setUrlEditable(Settings::normalUrlInputLine());
-    connect(m_addressNavigator, SIGNAL(returnPressed()), SLOT(newConnection()));
-
-    QLabel *addressLabel = new QLabel(i18n("Remote desktop:"), this);
-
-    QWidget *addressWidget = new QWidget(this);
-    QHBoxLayout *addressLayout = new QHBoxLayout(addressWidget);
-    addressLayout->setMargin(0);
-    addressLayout->addWidget(addressLabel);
-    addressLayout->addWidget(m_addressNavigator, 1);
-
-    KAction *addressLineAction = new KAction(i18nc("Title for remote address input action", "Address"), this);
-    actionCollection()->addAction("address_line", addressLineAction);
-    addressLineAction->setDefaultWidget(addressWidget);
-
-    QAction *gotoAction = actionCollection()->addAction("goto_address");
-    gotoAction->setText(i18n("Goto Address"));
-    gotoAction->setIcon(KIcon("go-jump-locationbar"));
-    connect(gotoAction, SIGNAL(triggered()), SLOT(newConnection()));
 
     KActionMenu *bookmarkMenu = new KActionMenu(i18n("Bookmarks"), actionCollection());
     m_bookmarkManager = new BookmarkManager(actionCollection(), bookmarkMenu->menu(), this);
@@ -358,7 +284,8 @@ void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConn
         return;
     }
 
-    m_addressNavigator->setUrl(KUrl(url.scheme().toLower() + "://"));
+    if (m_addressNavigator)
+        m_addressNavigator->setUrl(KUrl(url.scheme().toLower() + "://"));
 
     RemoteView *view = 0;
     KConfigGroup configGroup = Settings::self()->config()->group("hostpreferences").group(url.prettyUrl(KUrl::RemoveTrailingSlash));
@@ -377,16 +304,16 @@ void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConn
                            i18n("Unusable URL"));
         return;
     }
-    
+
     // Configure the view
     HostPreferences* prefs = view->hostPreferences();
     if (! prefs->showDialogIfNeeded()) {
         delete view;
         return;
     }
-    
+
     saveHostPrefs();
-    
+
     view->setGrabAllKeys(prefs->grabAllKeys());
     view->showDotCursor(prefs->showLocalCursor() ? RemoteView::CursorOn : RemoteView::CursorOff);
     view->setViewOnly(prefs->viewOnly());
@@ -401,11 +328,15 @@ void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConn
 //     view->resize(0, 0);
  
     if (m_remoteViewList.size() == 1) {
-        kDebug(5010) << "First connection, restoring window size)";
+        kDebug(5010) << "First connection, restoring window size.";
         restoreWindowSize(view->hostPreferences()->configGroup());
     }
 
     QScrollArea *scrollArea = createScrollArea(m_tabWidget, view);
+
+    const int indexOfNewConnectionWidget = m_tabWidget->indexOf(m_newConnectionWidget);
+    if (indexOfNewConnectionWidget >= 0)
+        m_tabWidget->removeTab(indexOfNewConnectionWidget);
 
     const int newIndex = m_tabWidget->addTab(scrollArea, KIcon("krdc"), url.prettyUrl(KUrl::RemoveTrailingSlash));
     m_tabWidget->setCurrentIndex(newIndex);
@@ -422,7 +353,7 @@ void MainWindow::openFromDockWidget(const QModelIndex &index)
         // first check if url has already been opened; in case show the tab
         for (int i = 0; i < m_remoteViewList.count(); ++i) {
             if (m_remoteViewList.at(i)->url() == url) {
-                m_tabWidget->setCurrentIndex(i + m_numNonRemoteViewTabs);
+                m_tabWidget->setCurrentIndex(i);
                 return;
             }
         }
@@ -434,7 +365,7 @@ void MainWindow::resizeTabWidget(int w, int h)
 {
     kDebug(5010) << "tabwidget resize: w: " << w << ", h: " << h;
     
-    RemoteView* view = m_currentRemoteView >= 0 ? m_remoteViewList.at(m_currentRemoteView) : NULL;
+    RemoteView* view = m_currentRemoteView >= 0 ? m_remoteViewList.at(m_currentRemoteView) : 0;
     if (view && view->scaling()) return;
 
     if (m_topBottomBorder == 0) { // the values are not cached yet
@@ -552,6 +483,7 @@ void MainWindow::switchFullscreen()
 
         actionCollection()->action("switch_fullscreen")->setIcon(KIcon("view-fullscreen"));
         actionCollection()->action("switch_fullscreen")->setText(i18n("Switch to Full Screen Mode"));
+        actionCollection()->action("switch_fullscreen")->setIconText(i18n("Full Screen"));
 
         m_fullscreenWindow->deleteLater();
 
@@ -608,11 +540,10 @@ void MainWindow::disconnectHost()
     kDebug(5010);
 
     RemoteView *view = qobject_cast<RemoteView*>(QObject::sender());
-
     if (m_fullscreenWindow) { // first close full screen view
         switchFullscreen();
     }
-
+      
     if (view) {
         QWidget *tmp = (QWidget*) view->parent()->parent();
         m_remoteViewList.removeOne(view);
@@ -628,38 +559,29 @@ void MainWindow::disconnectHost()
 
         saveHostPrefs();
     }
+
+    if (m_tabWidget->count() == 0) {
+        newConnectionPage();
+    }
 }
 
 void MainWindow::closeTab(QWidget *widget)
 {
+    bool isNewConnectionPage = m_tabWidget->currentWidget() == m_newConnectionWidget;
     const int index = m_tabWidget->indexOf(widget);
 
     kDebug(5010) << index;
 
-    if (m_showStartPage && index == 0) {
-        KMessageBox::information(this, i18n("You can enable the start page in the settings again."));
-
-        Settings::setShowStartPage(false);
-        m_numNonRemoteViewTabs--;
-        m_tabWidget->removeTab(0);
-        m_showStartPage = false;
-	updateActionStatus();
-        return;
-    }
-
-#ifdef BUILD_ZEROCONF
-    if (widget == m_zeroconfPage) {
-        closeZeroconfPage();
-        return;
-    }
-#endif
-
-    if (index - m_numNonRemoteViewTabs >= 0)
-        m_remoteViewList.removeAt(index - m_numNonRemoteViewTabs);
-
     m_tabWidget->removeTab(index);
 
-    widget->deleteLater();
+    if (!isNewConnectionPage) {
+        m_remoteViewList.removeAt(index);
+        widget->deleteLater();
+    }
+
+    if (m_tabWidget->count() == 0) {
+        newConnectionPage();
+    }
 }
 
 void MainWindow::openTabSettings(QWidget *widget)
@@ -772,6 +694,7 @@ void MainWindow::showRemoteViewToolbar()
     if (!m_toolBar) {
         actionCollection()->action("switch_fullscreen")->setIcon(KIcon("view-restore"));
         actionCollection()->action("switch_fullscreen")->setText(i18n("Switch to Window Mode"));
+        actionCollection()->action("switch_fullscreen")->setIconText(i18n("Window Mode"));
 
         m_toolBar = new FloatingToolBar(m_fullscreenWindow, m_fullscreenWindow);
         m_toolBar->winId(); // force it to be a native widget (prevents problem with QX11EmbedContainer)
@@ -832,19 +755,13 @@ void MainWindow::updateActionStatus()
 {
     kDebug(5010) << m_tabWidget->currentIndex();
 
-    bool enabled;
+    bool enabled = true;
 
-    if ((m_showStartPage && (m_tabWidget->currentIndex() == 0)) || 
-#ifdef BUILD_ZEROCONF
-         (m_zeroconfPage && (m_tabWidget->currentIndex() == m_tabWidget->indexOf(m_zeroconfPage))) ||
-#endif
-         (!m_showStartPage && (m_tabWidget->currentIndex() < 0)))
+    if (m_tabWidget->currentWidget() == m_newConnectionWidget)
         enabled = false;
-    else
-        enabled = true;
 
-    RemoteView* view = m_currentRemoteView >= 0 ? m_remoteViewList.at(m_currentRemoteView) : NULL;
-    
+    RemoteView* view = (m_currentRemoteView >= 0 && enabled) ? m_remoteViewList.at(m_currentRemoteView) : 0;
+
     actionCollection()->action("switch_fullscreen")->setEnabled(enabled);
     actionCollection()->action("take_screenshot")->setEnabled(enabled);
     actionCollection()->action("disconnect")->setEnabled(enabled);
@@ -853,7 +770,7 @@ void MainWindow::updateActionStatus()
                     enabled, 
                     true,
                     view ? view->viewOnly() : false);
-                       
+
     setActionStatus(actionCollection()->action("show_local_cursor"),
                     enabled, 
                     view ? view->supportsLocalCursor() : false,
@@ -863,7 +780,7 @@ void MainWindow::updateActionStatus()
                     enabled,
                     view ? view->supportsScaling() : false,
                     view ? view->scaling() : false);
-                       
+
     setActionStatus(actionCollection()->action("grab_all_keys"),
                     enabled,
                     enabled,
@@ -892,7 +809,8 @@ void MainWindow::preferences()
 
 void MainWindow::updateConfiguration()
 {
-    m_addressNavigator->setUrlEditable(Settings::normalUrlInputLine());
+    if (m_addressNavigator)
+        m_addressNavigator->setUrlEditable(Settings::normalUrlInputLine());
 
     if (!Settings::showStatusBar())
         statusBar()->deleteLater();
@@ -917,21 +835,13 @@ void MainWindow::updateConfiguration()
         m_systemTrayIcon = 0;
     }
 
-    if (Settings::showStartPage() && !m_showStartPage)
-        createStartPage();
-    else if (!Settings::showStartPage() && m_showStartPage) {
-        m_tabWidget->removeTab(0);
-        m_showStartPage = false;
-    }
-    updateActionStatus();
-
     // update the scroll areas background color
-    for (int i = m_numNonRemoteViewTabs; i < m_tabWidget->count(); ++i) {
+    for (int i = 0; i < m_tabWidget->count(); ++i) {
         QPalette palette = m_tabWidget->widget(i)->palette();
         palette.setColor(QPalette::Dark, Settings::backgroundColor());
         m_tabWidget->widget(i)->setPalette(palette);
     }
-    
+
     // Send update configuration message to all views
     for (int i = 0; i < m_remoteViewList.count(); ++i) {
         m_remoteViewList.at(i)->updateConfiguration();
@@ -1015,11 +925,11 @@ void MainWindow::saveHostPrefs(RemoteView* view)
 {
     // Save default window size for currently active view
     if (!view)
-        view = m_currentRemoteView >= 0 ? m_remoteViewList.at(m_currentRemoteView) : NULL;
+        view = m_currentRemoteView >= 0 ? m_remoteViewList.at(m_currentRemoteView) : 0;
 
     if (view)
         saveWindowSize(view->hostPreferences()->configGroup());
-    
+
     Settings::self()->config()->sync();
 }
 
@@ -1029,22 +939,26 @@ void MainWindow::tabChanged(int index)
 
     m_tabWidget->setTabBarHidden(m_tabWidget->count() <= 1 && !Settings::showTabBar());
 
-    m_currentRemoteView = index - m_numNonRemoteViewTabs;
+    m_currentRemoteView = index;
+
+    if (m_tabWidget->currentWidget() == m_newConnectionWidget)
+        m_currentRemoteView = -1;
 
     const QString tabTitle = m_tabWidget->tabText(index).remove('&');
-    setCaption(tabTitle == i18n("Start Page") ? QString() : tabTitle);
+    setCaption(tabTitle == i18n("New Connection") ? QString() : tabTitle);
 
     updateActionStatus();
 }
 
-void MainWindow::createStartPage()
+QWidget* MainWindow::newConnectionWidget()
 {
-    m_showStartPage = true;
+    if (m_newConnectionWidget)
+        return m_newConnectionWidget;
 
-    QWidget *startWidget = new QWidget(this);
-    startWidget->setStyleSheet("QWidget { background-color: palette(base) }");
+    m_newConnectionWidget = new QWidget(this);
 
-    QVBoxLayout *startLayout = new QVBoxLayout(startWidget);
+    QVBoxLayout *startLayout = new QVBoxLayout(m_newConnectionWidget);
+    startLayout->setMargin(20);
 
     QLabel *headerLabel = new QLabel(this);
     headerLabel->setText(i18n("<h1>KDE Remote Desktop Client</h1><br /><br />What would you like to do?<br />"));
@@ -1053,78 +967,90 @@ void MainWindow::createStartPage()
     headerIconLabel->setPixmap(KIcon("krdc").pixmap(128));
 
     QHBoxLayout *headerLayout = new QHBoxLayout;
-    headerLayout->setMargin(20);
     headerLayout->addWidget(headerLabel, 1, Qt::AlignTop);
     headerLayout->addWidget(headerIconLabel);
     startLayout->addLayout(headerLayout);
 
-    foreach(RemoteViewFactory *factory, m_remoteViewFactories) {
+    {
+        QHBoxLayout *connectLayout = new QHBoxLayout;
+        const QString initialProtocol(!m_remoteViewFactories.isEmpty() ? (*m_remoteViewFactories.begin())->scheme() : QString());
+        m_addressNavigator = new KUrlNavigator(0, KUrl(initialProtocol + "://"), this);
+
+        QStringList schemes;
+        foreach(RemoteViewFactory *factory, m_remoteViewFactories) {
+            schemes << factory->scheme();
+        }
+        m_addressNavigator->setCustomProtocols(schemes);
+
+        m_addressNavigator->setUrlEditable(Settings::normalUrlInputLine());
+        connect(m_addressNavigator, SIGNAL(returnPressed()), SLOT(newConnection()));
+        m_addressNavigator->setFocus();
+
+        QLabel *addressLabel = new QLabel(i18n("Connect to:"), this);
+
         KPushButton *connectButton = new KPushButton(this);
-        connectButton->setProperty("schemeString", factory->scheme());
-        connectButton->setProperty("toolTipString", factory->connectToolTipText());
-        connectButton->setStyleSheet("KPushButton { padding: 12px; margin: 10px; }");
-        connectButton->setIcon(KIcon(actionCollection()->action("new_" + factory->scheme() + "_connection")->icon()));
-        connectButton->setText(factory->connectButtonText());
-        connect(connectButton, SIGNAL(clicked()), SLOT(newConnectionToolTip()));
-        startLayout->addWidget(connectButton);
+        connectButton->setToolTip(i18n("Goto Address"));
+        connectButton->setIcon(KIcon("go-jump-locationbar"));
+        connect(connectButton, SIGNAL(clicked()), SLOT(newConnection()));
+
+        connectLayout->addWidget(addressLabel);
+        connectLayout->addWidget(m_addressNavigator, 1);
+        connectLayout->addWidget(connectButton);
+        startLayout->addLayout(connectLayout);
     }
 
-    KPushButton *zeroconfButton = new KPushButton(this);
-    zeroconfButton->setStyleSheet("KPushButton { padding: 12px; margin: 10px; }");
-    zeroconfButton->setIcon(KIcon(actionCollection()->action("zeroconf_page")->icon()));
-    zeroconfButton->setText(i18n("Browse Remote Desktop Services on Local Network"));
-    connect(zeroconfButton, SIGNAL(clicked()), SLOT(createZeroconfPage()));
-#ifndef BUILD_ZEROCONF
-    zeroconfButton->setVisible(false);
-#endif
+    {
+        QWidget *remoteDesktopsDockLayoutWidget = new QWidget(this);
+        QVBoxLayout *remoteDesktopsDockLayout = new QVBoxLayout(remoteDesktopsDockLayoutWidget);
+        remoteDesktopsDockLayout->setMargin(0);
+        m_remoteDesktopsNewConnectionTabTreeView = new QTreeView(remoteDesktopsDockLayoutWidget);
 
-    startLayout->addWidget(zeroconfButton);
-    startLayout->addStretch();
+        m_remoteDesktopsNewConnectionTabTreeView->setModel(m_remoteDesktopsModelProxy);
+        m_remoteDesktopsNewConnectionTabTreeView->header()->hide();
+        m_remoteDesktopsNewConnectionTabTreeView->expandAll();
+        m_remoteDesktopsNewConnectionTabTreeView->setItemsExpandable(true);
+        m_remoteDesktopsNewConnectionTabTreeView->setRootIsDecorated(false);
+        connect(m_remoteDesktopsNewConnectionTabTreeView, SIGNAL(doubleClicked(const QModelIndex &)),
+                                        SLOT(openFromDockWidget(const QModelIndex &)));
 
-    m_numNonRemoteViewTabs++;
-    m_tabWidget->insertTab(0, startWidget, KIcon("krdc"), i18n("Start Page"));
+        KLineEdit *filterLineEdit = new KLineEdit(remoteDesktopsDockLayoutWidget);
+        filterLineEdit->setClickMessage(i18n("Filter"));
+        filterLineEdit->setClearButtonShown(true);
+        connect(filterLineEdit, SIGNAL(textChanged(const QString &)), SLOT(updateFilter(const QString &)));
+        remoteDesktopsDockLayout->addWidget(filterLineEdit);
+        remoteDesktopsDockLayout->addWidget(m_remoteDesktopsNewConnectionTabTreeView);
+        startLayout->addWidget(remoteDesktopsDockLayoutWidget);
+    }
+
+    return m_newConnectionWidget;
 }
 
-void MainWindow::newConnectionToolTip()
+
+void MainWindow::newConnectionPage()
 {
+    const int indexOfNewConnectionWidget = m_tabWidget->indexOf(m_newConnectionWidget);
+    if (indexOfNewConnectionWidget >= 0)
+        m_tabWidget->setCurrentIndex(indexOfNewConnectionWidget);
+    else {
+        const int index = m_tabWidget->addTab(newConnectionWidget(), "New Connection");
+        m_tabWidget->setCurrentIndex(index);
+    }
+#if 0 // not usable anymore, probably use it in another way? -uwolfer
     QObject *senderObject = qobject_cast<QObject*>(sender());
-    const QString toolTip(senderObject->property("toolTipString").toString());
-    const QString scheme(senderObject->property("schemeString").toString());
-
-    m_addressNavigator->setUrl(KUrl(scheme + "://"));
+    if (senderObject) {
+        const QString scheme(senderObject->property("schemeString").toString());
+        if (!scheme.isEmpty()) {
+            m_addressNavigator->setUrl(KUrl(scheme + "://"));
+        }
+        const QString toolTip(senderObject->property("toolTipString").toString());
+        if (!toolTip.isEmpty()) {
+            QToolTip::showText(m_addressNavigator->pos() + pos() + QPoint(m_addressNavigator->width() / 2,
+                                                                          m_addressNavigator->height() / 2),
+                            toolTip, this);
+        }
+    }
+#endif
     m_addressNavigator->setFocus();
-
-    QToolTip::showText(m_addressNavigator->pos() + pos() + QPoint(m_addressNavigator->width(),
-                                                                  m_addressNavigator->height() / 2),
-                       toolTip, this);
-}
-
-void MainWindow::createZeroconfPage()
-{
-#ifdef BUILD_ZEROCONF
-    if (m_zeroconfPage)
-        return;
-
-    m_zeroconfPage = new ZeroconfPage(this);
-    connect(m_zeroconfPage, SIGNAL(newConnection(const KUrl, bool)), this, SLOT(newConnection(const KUrl, bool)));
-    connect(m_zeroconfPage, SIGNAL(closeZeroconfPage()), this, SLOT(closeZeroconfPage()));
-
-    m_numNonRemoteViewTabs++;
-    const int zeroconfTabIndex = m_tabWidget->insertTab(m_showStartPage ? 1 : 0, m_zeroconfPage, KIcon("krdc"), i18n("Browse Local Network"));
-    m_tabWidget->setCurrentIndex(zeroconfTabIndex);
-#endif
-}
-
-void MainWindow::closeZeroconfPage()
-{
-#ifdef BUILD_ZEROCONF
-    const int index = m_tabWidget->indexOf(m_zeroconfPage);
-
-    m_numNonRemoteViewTabs--;
-    m_tabWidget->removeTab(index);
-    m_zeroconfPage->deleteLater();
-    m_zeroconfPage = 0;
-#endif
 }
 
 QList<RemoteView *> MainWindow::remoteViewList() const
@@ -1145,11 +1071,51 @@ int MainWindow::currentRemoteView() const
 void MainWindow::expandTreeViewItems()
 {
     metaObject()->invokeMethod(m_remoteDesktopsTreeView, "expandAll", Qt::QueuedConnection);
+    if (m_remoteDesktopsNewConnectionTabTreeView)
+        metaObject()->invokeMethod(m_remoteDesktopsNewConnectionTabTreeView, "expandAll", Qt::QueuedConnection);
 }
 
 void MainWindow::updateFilter(const QString &text)
 {
-        m_remoteDesktopsModelProxy->setFilterRegExp(QRegExp("IGNORE|" + text, Qt::CaseInsensitive, QRegExp::RegExp));
+    m_remoteDesktopsModelProxy->setFilterRegExp(QRegExp("IGNORE|" + text, Qt::CaseInsensitive, QRegExp::RegExp));
+}
+
+void MainWindow::createDockWidget()
+{
+    QDockWidget *remoteDesktopsDockWidget = new QDockWidget(this);
+    QWidget *remoteDesktopsDockLayoutWidget = new QWidget(remoteDesktopsDockWidget);
+    QVBoxLayout *remoteDesktopsDockLayout = new QVBoxLayout(remoteDesktopsDockLayoutWidget);
+    remoteDesktopsDockWidget->setObjectName("remoteDesktopsDockWidget"); // required for saving position / state
+    remoteDesktopsDockWidget->setWindowTitle(i18n("Remote Desktops"));
+    QFontMetrics fontMetrics(remoteDesktopsDockWidget->font());
+    remoteDesktopsDockWidget->setMinimumWidth(fontMetrics.width("vnc://192.168.100.100:6000"));
+    actionCollection()->addAction("remote_desktop_dockwidget",
+                                  remoteDesktopsDockWidget->toggleViewAction());
+    m_remoteDesktopsTreeView = new QTreeView(remoteDesktopsDockLayoutWidget);
+    RemoteDesktopsModel *remoteDesktopsModel = new RemoteDesktopsModel(this);
+
+    m_remoteDesktopsModelProxy = new QSortFilterProxyModel(this);
+    m_remoteDesktopsModelProxy->setSourceModel(remoteDesktopsModel);
+    m_remoteDesktopsModelProxy->setFilterKeyColumn(0);
+    m_remoteDesktopsModelProxy->setFilterRole(10002);
+
+    connect(remoteDesktopsModel, SIGNAL(modelReset()), this, SLOT(expandTreeViewItems()));
+    m_remoteDesktopsTreeView->setModel(m_remoteDesktopsModelProxy);
+    m_remoteDesktopsTreeView->header()->hide();
+    m_remoteDesktopsTreeView->expandAll();
+    m_remoteDesktopsTreeView->setItemsExpandable(true);
+    m_remoteDesktopsTreeView->setRootIsDecorated(false);
+    connect(m_remoteDesktopsTreeView, SIGNAL(doubleClicked(const QModelIndex &)),
+                                    SLOT(openFromDockWidget(const QModelIndex &)));
+
+    KLineEdit *filterLineEdit = new KLineEdit(remoteDesktopsDockLayoutWidget);
+    filterLineEdit->setClickMessage(i18n("Filter"));
+    filterLineEdit->setClearButtonShown(true);
+    connect(filterLineEdit, SIGNAL(textChanged(const QString &)), SLOT(updateFilter(const QString &)));
+    remoteDesktopsDockLayout->addWidget(filterLineEdit);
+    remoteDesktopsDockLayout->addWidget(m_remoteDesktopsTreeView);
+    remoteDesktopsDockWidget->setWidget(remoteDesktopsDockLayoutWidget);
+    addDockWidget(Qt::LeftDockWidgetArea, remoteDesktopsDockWidget);
 }
 
 #include "mainwindow.moc"

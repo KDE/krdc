@@ -55,11 +55,8 @@ add_subdirectory(test)
 add_definitions(-DKDE_DEFAULT_DEBUG_AREA=5010)
 
 add_definitions(-DBUILD_ZEROCONF)
-set(krdc_zeroconf_SRCS
-    zeroconf/zeroconfpage.cpp
-)
 
-set(krdc_SRCS ${krdc_zeroconf_SRCS}
+set(krdc_SRCS
     config/hostpreferenceslist.cpp
     config/preferencesdialog.cpp
     floatingtoolbar.cpp
