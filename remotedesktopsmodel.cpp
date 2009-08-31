@@ -101,7 +101,13 @@ QVariant RemoteDesktopsModel::data(const QModelIndex &index, int role) const
         return QVariant();
 
     RemoteDesktopsItem *item = static_cast<RemoteDesktopsItem*>(index.internalPointer());
+    const QString currentItemTitleString = item->data(0).toString();
     const QString currentItemString = item->data(1).toString();
+
+#ifdef BUILD_ZEROCONF
+    if (currentItemTitleString == "Discovered Network Servers" && zeroconfItem->childCount()<=0)
+        return QVariant();
+#endif
 
     switch (role) {
     case Qt::DisplayRole:
@@ -112,15 +118,15 @@ QVariant RemoteDesktopsModel::data(const QModelIndex &index, int role) const
         if (!currentItemString.isEmpty()) // contains an url
             return KIcon("krdc");
 #ifdef BUILD_ZEROCONF
-        else if (currentItemString == "Discovered Network Services")
+        else if (currentItemTitleString == "Discovered Network Servers")
             return KIcon("network-workgroup");
 #endif
 #if 0
-        else if (currentItemString == "Local Network")
+        else if (currentItemTitleString == "Local Network")
             return KIcon("network-workgroup");
-#endif
-        else if (currentItemString == "...")
+        else if (currentItemTitleString == "...")
             return KIcon("view-history");
+#endif
         else
             return KIcon("folder-bookmarks");
     case 10001: //url for dockwidget
