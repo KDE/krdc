@@ -31,7 +31,7 @@ class KMenu;
 
 class MainWindow;
 
-class SystemTrayIcon : public Experimental::KNotificationItem
+class SystemTrayIcon : public KNotificationItem
 {
     Q_OBJECT
 

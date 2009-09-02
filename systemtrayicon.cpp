@@ -32,7 +32,7 @@
 #include <KMenu>
 
 SystemTrayIcon::SystemTrayIcon(MainWindow *parent)
-        : Experimental::KNotificationItem(parent),
+        : KNotificationItem(parent),
         m_mainWindow(parent)
 {
     setIconByPixmap(KIcon("krdc"));
