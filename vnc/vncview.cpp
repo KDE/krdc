@@ -534,6 +534,10 @@ void VncView::wheelEventHandler(QWheelEvent *event)
 
 void VncView::keyEventHandler(QKeyEvent *e)
 {
+    // strip away autorepeating KeyRelease; see bug #206598
+    if (e->isAutoRepeat() && (e->type() == QEvent::KeyRelease))
+        return;
+
 // parts of this code are based on http://italc.sourcearchive.com/documentation/1.0.9.1/vncview_8cpp-source.html
     rfbKeySym k = e->nativeVirtualKey();
 
