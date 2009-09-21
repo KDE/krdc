@@ -1,6 +1,7 @@
 /****************************************************************************
 **
 ** Copyright (C) 2007 - 2009 Urs Wolfer <uwolfer @ kde.org>
+** Copyright (C) 2009 Tony Murray <murraytony @ gmail.com>
 **
 ** This file is part of KDE.
 **
@@ -30,6 +31,7 @@
 #include "bookmarkmanager.h"
 #include "remotedesktopsmodel.h"
 #include "systemtrayicon.h"
+#include "tabbedviewwidget.h"
 #include "hostpreferences.h"
 
 #include <KAction>
@@ -50,7 +52,6 @@
 #include <KShortcut>
 #include <KShortcutsDialog>
 #include <KStatusBar>
-#include <KTabWidget>
 #include <KToggleAction>
 #include <KToggleFullScreenAction>
 #include <KUrlComboBox>
@@ -92,7 +93,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     setStandardToolBarMenuEnabled(true);
 
-    m_tabWidget = new KTabWidget(this);
+    m_tabWidget = new TabbedViewWidget(this);
     m_tabWidget->setTabPosition((KTabWidget::TabPosition) Settings::tabPosition());
 
 #if QT_VERSION <= 0x040500
@@ -457,23 +458,21 @@ void MainWindow::switchFullscreen()
 {
     kDebug(5010);
 
-    RemoteView* view = m_remoteViewList.at(m_currentRemoteView);
-
     if (m_fullscreenWindow) {
         // Leaving full screen mode
-        view->enableScaling(view->hostPreferences()->windowedScale());
-        show();
-        restoreGeometry(m_mainWindowGeometry);
-
         m_fullscreenWindow->setWindowState(0);
         m_fullscreenWindow->hide();
 
-        QScrollArea *scrollArea = createScrollArea(m_tabWidget, view);
+        m_tabWidget->setTabBarHidden(false);
+        m_tabWidget->setDocumentMode(false);
+        setCentralWidget(m_tabWidget);
 
-        const int currentTab = m_tabWidget->currentIndex();
-        m_tabWidget->insertTab(currentTab, scrollArea, m_tabWidget->tabIcon(currentTab), m_tabWidget->tabText(currentTab));
-        m_tabWidget->removeTab(m_tabWidget->currentIndex());
-        m_tabWidget->setCurrentIndex(currentTab);
+        show();
+        restoreGeometry(m_mainWindowGeometry);
+
+        foreach (RemoteView *currentView, m_remoteViewList) {
+            currentView->enableScaling(currentView->hostPreferences()->windowedScale());
+        }
 
         if (m_toolBar) {
             m_toolBar->hideAndDestroy();
@@ -486,7 +485,6 @@ void MainWindow::switchFullscreen()
         actionCollection()->action("switch_fullscreen")->setIconText(i18n("Full Screen"));
 
         m_fullscreenWindow->deleteLater();
-
         m_fullscreenWindow = 0;
     } else {
         // Entering full screen mode
@@ -494,25 +492,27 @@ void MainWindow::switchFullscreen()
         m_fullscreenWindow->setWindowTitle(i18nc("window title when in full screen mode (for example displayed in tasklist)",
                                                  "KDE Remote Desktop Client (Full Screen)"));
 
-        QScrollArea *scrollArea = createScrollArea(m_fullscreenWindow, view);
-        scrollArea->setFrameShape(QFrame::NoFrame);
+        m_mainWindowGeometry = saveGeometry();
+        hide();
+
+        m_tabWidget->setTabBarHidden(true);
+        m_tabWidget->setDocumentMode(true);
+
+        foreach (RemoteView *currentView, m_remoteViewList) {
+            currentView->enableScaling(currentView->hostPreferences()->fullscreenScale());
+        }
 
         QVBoxLayout *fullscreenLayout = new QVBoxLayout(m_fullscreenWindow);
         fullscreenLayout->setMargin(0);
-        fullscreenLayout->addWidget(scrollArea);
+        fullscreenLayout->addWidget(m_tabWidget);
+
+        KToggleFullScreenAction::setFullScreen(m_fullscreenWindow, true);
 
         MinimizePixel *minimizePixel = new MinimizePixel(m_fullscreenWindow);
         minimizePixel->winId(); // force it to be a native widget (prevents problem with QX11EmbedContainer)
         connect(minimizePixel, SIGNAL(rightClicked()), m_fullscreenWindow, SLOT(showMinimized()));
 
-        view->enableScaling(view->hostPreferences()->fullscreenScale());
-                
         m_fullscreenWindow->show();
-
-        KToggleFullScreenAction::setFullScreen(m_fullscreenWindow, true);
-
-        m_mainWindowGeometry = saveGeometry();
-        hide();
 
         showRemoteViewToolbar();
     }
@@ -530,6 +530,8 @@ QScrollArea *MainWindow::createScrollArea(QWidget *parent, RemoteView *remoteVie
     scrollArea->setPalette(palette);
 
     scrollArea->setBackgroundRole(QPalette::Dark);
+    scrollArea->setFrameStyle(QFrame::NoFrame);
+
     scrollArea->setWidget(remoteView);
 
     return scrollArea;
@@ -540,10 +542,7 @@ void MainWindow::disconnectHost()
     kDebug(5010);
 
     RemoteView *view = qobject_cast<RemoteView*>(QObject::sender());
-    if (m_fullscreenWindow) { // first close full screen view
-        switchFullscreen();
-    }
-      
+
     if (view) {
         QWidget *tmp = (QWidget*) view->parent()->parent();
         m_remoteViewList.removeOne(view);
@@ -700,24 +699,15 @@ void MainWindow::showRemoteViewToolbar()
         m_toolBar->winId(); // force it to be a native widget (prevents problem with QX11EmbedContainer)
         m_toolBar->setSide(FloatingToolBar::Top);
 
-        QLabel *hostLabel = new QLabel(m_remoteViewList.at(m_currentRemoteView)->url().prettyUrl(KUrl::RemoveTrailingSlash), m_toolBar);
-        hostLabel->setMargin(4);
-        QFont font(hostLabel->font());
-        font.setBold(true);
-        hostLabel->setFont(font);
-        m_toolBar->addWidget(hostLabel);
-
-#if 0 //TODO: implement functionality
         KComboBox *sessionComboBox = new KComboBox(m_toolBar);
-        sessionComboBox->setEditable(false);
-        sessionComboBox->addItem(i18n("Switch to..."));
-        for (int i = 0; i < m_remoteViewList.count(); i++) {
-            sessionComboBox->addItem(m_remoteViewList.at(i)->url().prettyUrl(KUrl::RemoveTrailingSlash));
-        }
-        sessionComboBox->setVisible(m_remoteViewList.count() > 1); // just show it if there are sessions to switch
+        sessionComboBox->setStyleSheet("QComboBox:!editable{background:transparent;}");
+        sessionComboBox->setModel(m_tabWidget->getModel());
+        sessionComboBox->setCurrentIndex(m_tabWidget->currentIndex());
+        connect(sessionComboBox, SIGNAL(activated(int)), m_tabWidget, SLOT(setCurrentIndex(int)));
+        connect(m_tabWidget, SIGNAL(currentChanged(int)), sessionComboBox, SLOT(setCurrentIndex(int)));
         m_toolBar->addWidget(sessionComboBox);
-#endif
 
+        m_toolBar->addAction(actionCollection()->action("new_connection"));
         m_toolBar->addAction(actionCollection()->action("switch_fullscreen"));
 
         QAction *minimizeAction = new QAction(m_toolBar);
@@ -762,7 +752,6 @@ void MainWindow::updateActionStatus()
 
     RemoteView* view = (m_currentRemoteView >= 0 && enabled) ? m_remoteViewList.at(m_currentRemoteView) : 0;
 
-    actionCollection()->action("switch_fullscreen")->setEnabled(enabled);
     actionCollection()->action("take_screenshot")->setEnabled(enabled);
     actionCollection()->action("disconnect")->setEnabled(enabled);
 
@@ -937,7 +926,7 @@ void MainWindow::tabChanged(int index)
 {
     kDebug(5010) << index;
 
-    m_tabWidget->setTabBarHidden(m_tabWidget->count() <= 1 && !Settings::showTabBar());
+    m_tabWidget->setTabBarHidden((m_tabWidget->count() <= 1 && !Settings::showTabBar()) || m_fullscreenWindow);
 
     m_currentRemoteView = index;
 

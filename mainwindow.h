@@ -26,6 +26,7 @@
 
 #include "remoteview.h"
 #include "remoteviewfactory.h"
+#include "tabbedviewwidget.h"
 
 #include <KService>
 #include <KXmlGuiWindow>
@@ -39,6 +40,7 @@ class BookmarkManager;
 class FloatingToolBar;
 class RemoteView;
 class SystemTrayIcon;
+class TabbedViewWidget;
 
 class QScrollArea;
 class QModelIndex;
@@ -106,7 +108,7 @@ private:
     QByteArray m_mainWindowGeometry;
 
     KToggleAction *m_menubarAction;
-    KTabWidget *m_tabWidget;
+    TabbedViewWidget *m_tabWidget;
     KUrlNavigator *m_addressNavigator;
 
     FloatingToolBar *m_toolBar;

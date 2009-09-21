@@ -62,6 +62,7 @@ set(krdc_SRCS
     remotedesktopsitem.cpp
     remotedesktopsmodel.cpp
     systemtrayicon.cpp
+    tabbedviewwidget.cpp
     mainwindow.cpp
     main.cpp
 )
