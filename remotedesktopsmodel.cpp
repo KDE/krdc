@@ -80,11 +80,10 @@ RemoteDesktopsModel::~RemoteDesktopsModel()
 void RemoteDesktopsModel::bookmarksChanged()
 {
     kDebug(5010);
-    emit layoutAboutToBeChanged();
+
     bookmarkItem->clearChildren();
     buildModelFromBookmarkGroup(m_manager->root(), bookmarkItem);
     reset();
-    emit layoutChanged();
 }
 
 int RemoteDesktopsModel::columnCount(const QModelIndex &parent) const
@@ -222,7 +221,6 @@ void RemoteDesktopsModel::servicesChanged() {
     //redo list because it is easier than finding and removing one
     QList<DNSSD::RemoteService::Ptr> services = zeroconfBrowser->services();
     KUrl url;
-    emit layoutAboutToBeChanged();
     zeroconfItem->clearChildren();
     foreach(DNSSD::RemoteService::Ptr service, services) {
         url.setProtocol(m_protocols[service->type()].toLower());
@@ -232,7 +230,7 @@ void RemoteDesktopsModel::servicesChanged() {
         RemoteDesktopsItem *newItem = new RemoteDesktopsItem(QList<QVariant>() << service->serviceName() << url.url(), zeroconfItem);
         zeroconfItem->appendChild(newItem);
     }
-    emit layoutChanged();
+    reset();
 }
 #endif
 #if 0

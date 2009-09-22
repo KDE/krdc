@@ -60,6 +60,7 @@ public:
     int insertTab(int index, QWidget *page, const QString &label);
     int insertTab(int index, QWidget *page, const QIcon &icon, const QString &label);
     void removeTab(int index);
+    void removePage(QWidget *page);
     void moveTab(int from, int to);
     void setTabText(int index, const QString &label);
 private:

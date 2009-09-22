@@ -121,41 +121,51 @@ TabbedViewWidgetModel* TabbedViewWidget::getModel()
 
 int TabbedViewWidget::addTab(QWidget *page, const QString &label)
 {
-    m_model->emitLayoutAboutToBeChanged();
+    int count = KTabWidget::count();
+    m_model->beginInsertRows(QModelIndex(), count, count);
     int ret = KTabWidget::addTab(page, label);
-    m_model->emitLayoutChanged();
+    m_model->endInsertRows();
     return ret;
 }
 
 int TabbedViewWidget::addTab(QWidget *page, const QIcon &icon, const QString &label)
 {
-    m_model->emitLayoutAboutToBeChanged();
+    int count = KTabWidget::count();
+    m_model->beginInsertRows(QModelIndex(), count, count);
     int ret = KTabWidget::addTab(page, icon, label);
-    m_model->emitLayoutChanged();
+    m_model->endInsertRows();
     return ret;
 }
 
 int TabbedViewWidget::insertTab(int index, QWidget *page, const QString &label)
 {
-    m_model->emitLayoutAboutToBeChanged();
+    m_model->beginInsertRows(QModelIndex(), index, index);
     int ret = KTabWidget::insertTab(index, page, label);
-    m_model->emitLayoutChanged();
+    m_model->endInsertRows();
     return ret;
 }
 
 int TabbedViewWidget::insertTab(int index, QWidget *page, const QIcon &icon, const QString &label)
 {
-    m_model->emitLayoutAboutToBeChanged();
+    m_model->beginInsertRows(QModelIndex(), index, index);
     int ret = KTabWidget::insertTab(index, page, icon, label);
-    m_model->emitLayoutChanged();
+    m_model->endInsertRows();
     return ret;
+}
+
+void TabbedViewWidget::removePage(QWidget *page)
+{
+    int index = KTabWidget::indexOf(page);
+    m_model->beginRemoveRows(QModelIndex(), index, index);
+    KTabWidget::removePage(page);
+    m_model->endRemoveRows();
 }
 
 void TabbedViewWidget::removeTab(int index)
 {
-    m_model->emitLayoutAboutToBeChanged();
+    m_model->beginRemoveRows(QModelIndex(), index, index);
     KTabWidget::removeTab(index);
-    m_model->emitLayoutChanged();
+    m_model->endRemoveRows();
 }
 
 void TabbedViewWidget::moveTab(int from, int to)
