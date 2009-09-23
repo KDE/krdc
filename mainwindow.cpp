@@ -702,6 +702,7 @@ void MainWindow::showRemoteViewToolbar()
         KComboBox *sessionComboBox = new KComboBox(m_toolBar);
         sessionComboBox->setStyleSheet("QComboBox:!editable{background:transparent;}");
         sessionComboBox->setModel(m_tabWidget->getModel());
+        sessionComboBox->setSizeAdjustPolicy(QComboBox::AdjustToContents);
         sessionComboBox->setCurrentIndex(m_tabWidget->currentIndex());
         connect(sessionComboBox, SIGNAL(activated(int)), m_tabWidget, SLOT(setCurrentIndex(int)));
         connect(m_tabWidget, SIGNAL(currentChanged(int)), sessionComboBox, SLOT(setCurrentIndex(int)));
