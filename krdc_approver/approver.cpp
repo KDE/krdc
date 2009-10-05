@@ -33,11 +33,9 @@
 #include <TelepathyQt4/PendingReady>
 #include <TelepathyQt4/ChannelDispatchOperation>
 
-using namespace Tp;
-
-Approver::Approver(const MethodInvocationContextPtr<> &context,
-            const QList<ChannelPtr> &channels,
-            const ChannelDispatchOperationPtr &dispatchOperation,
+Approver::Approver(const Tp::MethodInvocationContextPtr<> &context,
+            const QList<Tp::ChannelPtr> &channels,
+            const Tp::ChannelDispatchOperationPtr &dispatchOperation,
             QObject *parent)
     : QObject(parent),
       m_context(context),
@@ -71,7 +69,7 @@ void Approver::onDispatchOperationReady(Tp::PendingOperation *op)
     notification->setText(i18n("%1 wants to share its desktop with you", contact->alias()));
     notification->setActions(QStringList() << i18n("Accept") << i18n("Reject"));
 
-    Client::ConnectionInterfaceAvatarsInterface *avatarIface =
+    Tp::Client::ConnectionInterfaceAvatarsInterface *avatarIface =
         m_dispatchOp->channels()[0]->connection()->avatarsInterface();
 
     if (avatarIface) {

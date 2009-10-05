@@ -28,8 +28,6 @@
 
 #include <KDebug>
 
-using namespace Tp;
-
 static inline Tp::ChannelClassList channelClassList()
 {
     QMap<QString, QDBusVariant> filter0;
@@ -51,7 +49,7 @@ TubesManager::TubesManager(QObject *parent)
     Tp::enableWarnings(true);
 
     /* Registering telepathy types */
-    registerTypes();
+    Tp::registerTypes();
 }
 
 TubesManager::~TubesManager()

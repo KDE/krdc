@@ -35,8 +35,6 @@
 
 #include <KDebug>
 
-using namespace Tp;
-
 static inline Tp::ChannelClassList channelClassList()
 {
     QMap<QString, QDBusVariant> filter0;
@@ -60,9 +58,9 @@ ApproverManager::~ApproverManager()
     kDebug() << "Destroying approver manager";
 }
 
-void ApproverManager::addDispatchOperation(const MethodInvocationContextPtr<> &context,
-        const QList<ChannelPtr> &channels,
-        const ChannelDispatchOperationPtr &dispatchOperation)
+void ApproverManager::addDispatchOperation(const Tp::MethodInvocationContextPtr<> &context,
+        const QList<Tp::ChannelPtr> &channels,
+        const Tp::ChannelDispatchOperationPtr &dispatchOperation)
 {
     kDebug() << "New channel for approving arrived";
 

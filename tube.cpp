@@ -31,8 +31,6 @@
 
 #include <KDebug>
 
-using namespace Tp;
-
 Tube::Tube(Tp::ChannelPtr channel, QObject *parent)
     : QObject(parent),
       m_channel(channel)
@@ -57,7 +55,7 @@ void Tube::close()
     m_channel->requestClose();
 }
 
-void Tube::onChannelReady(PendingOperation *op)
+void Tube::onChannelReady(Tp::PendingOperation *op)
 {
     kDebug() << "Channel is ready!";
 
