@@ -67,7 +67,7 @@ TubesManager::~TubesManager()
 bool TubesManager::bypassApproval() const
 {
     kDebug() << "bypassing";
-    return true;
+    return false;
 }
 
 void TubesManager::handleChannels(const Tp::MethodInvocationContextPtr<> & context,
