@@ -117,7 +117,7 @@ if(TELEPATHY_QT4_FOUND)
     install(FILES ${CMAKE_BINARY_DIR}/org.freedesktop.Telepathy.Client.krdc_rfb_handler.service
             DESTINATION ${DBUS_SERVICES_INSTALL_DIR})
 
-    install(FILES krdc_rfb_handler.client DESTINATION ${CMAKE_INSTALL_PREFIX}/share/telepathy/clients/)
+    install(FILES krdc_rfb_handler.client DESTINATION ${SHARE_INSTALL_PREFIX}/telepathy/clients/)
 endif(TELEPATHY_QT4_FOUND)
 
 if(NOT INSIDE_KDENETWORK)
