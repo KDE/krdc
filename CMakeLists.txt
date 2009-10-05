@@ -1,5 +1,5 @@
 
-project(krdc-telepathy)
+project(krdc)
 
 if(NOT INSIDE_KDENETWORK)
     message("Not building inside KDENetwork, loading KDE CMake Macros.")
