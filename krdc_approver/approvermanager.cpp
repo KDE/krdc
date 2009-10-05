@@ -33,6 +33,7 @@
 #include <TelepathyQt4/PendingReady>
 #include <TelepathyQt4/Debug>
 
+#include <KApplication>
 #include <KDebug>
 
 static inline Tp::ChannelClassList channelClassList()
@@ -80,6 +81,6 @@ void ApproverManager::onFinished()
 
     if (m_approvers.empty()) {
         kDebug() << "Quiting approver manager";
-        QCoreApplication::quit();
+        KApplication::kApplication()->quit();
     }
 }
