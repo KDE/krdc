@@ -60,7 +60,7 @@ void Tube::onChannelReady(Tp::PendingOperation *op)
     kDebug() << "Channel is ready!";
 
     if (op->isError()) {
-        qWarning() << "Connection cannot become ready";
+        kWarning() << "Connection cannot become ready";
         return;
     }
 

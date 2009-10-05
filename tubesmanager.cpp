@@ -77,8 +77,6 @@ void TubesManager::handleChannels(const Tp::MethodInvocationContextPtr<> & conte
     Q_UNUSED(userActionTime);
     Q_UNUSED(handlerInfo);
 
-    kDebug();
-
     foreach(const Tp::ChannelPtr &channel, channels) {
         kDebug() << "Handling new tube";
 
