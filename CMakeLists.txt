@@ -1,5 +1,5 @@
 
-project(krdc)
+project(krdc-telepathy)
 
 if(NOT INSIDE_KDENETWORK)
     message("Not building inside KDENetwork, loading KDE CMake Macros.")
@@ -20,6 +20,12 @@ if(NOT INSIDE_KDENETWORK)
     include(CheckTypeSize)
     include(MacroBoolTo01)
     include(MacroOptionalAddSubdirectory)
+
+    macro_optional_find_package(TelepathyQt4)
+    macro_log_feature(TELEPATHY_QT4_FOUND "telepathy-qt4" "Telepathy Qt Bindings" "https://telepathy.freedesktop.org" FALSE "0.18" "Needed to build Telepathy protocol plugin.")
+
+    macro_optional_find_package(LibKNotificationItem-1)
+    macro_log_feature(LIBKNOTIFICATIONITEM-1_FOUND "libknotificationitem" "The KDE4 implementation of the experimental next-gen systray protocol" "" FALSE "" "Provides enhanced systray in KGet.")
 
     set(CMAKE_REQUIRED_DEFINITIONS ${_KDE4_PLATFORM_DEFINITIONS})
     if(WIN32)
@@ -44,6 +50,13 @@ include_directories(
     ${CMAKE_CURRENT_BINARY_DIR}
 )
 
+if(TELEPATHY_QT4_FOUND)
+    add_definitions(-DTELEPATHY_SUPPORT)
+    include_directories(${TELEPATHY_QT4_INCLUDE_DIR})
+endif(TELEPATHY_QT4_FOUND)
+
+include_directories(${LIBKNOTIFICATIONITEM-1_INCLUDE_DIR})
+
 add_subdirectory(core)
 add_subdirectory(vnc)
 add_subdirectory(nx)
@@ -51,8 +64,6 @@ add_subdirectory(rdp)
 add_subdirectory(test)
 
 add_definitions(-DKDE_DEFAULT_DEBUG_AREA=5010)
-
-add_definitions(-DBUILD_ZEROCONF)
 
 set(krdc_SRCS
     config/hostpreferenceslist.cpp
@@ -80,6 +91,12 @@ target_link_libraries(krdc
     ${KDE4_KUTILS_LIBS}
     krdccore
 )
+
+if(TELEPATHY_QT4_FOUND)
+    target_link_libraries(krdc
+        ${TELEPATHY_QT4_LIBRARIES}
+    )
+endif(TELEPATHY_QT4_FOUND)
 
 target_link_libraries(krdc ${KDE4_KDNSSD_LIBS})
 
