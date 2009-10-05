@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2009 Collabora Ltd <http://www.collabora.co.uk>
+** Copyright (C) 2009 Collabora Ltd <info@collabora.co.uk>
 ** Copyright (C) 2009 Abner Silva <abner.silva@kdemail.net>
 **
 ** This file is part of KDE.
