@@ -137,7 +137,7 @@ void TubesManager::closeTube(KUrl url)
 void TubesManager::onTubeStateChanged(Tube::Status status)
 {
     kDebug() << "tube status changed:" << status;
-    Tube *tube = static_cast<Tube *>(sender());
+    Tube *tube = qobject_cast<Tube *>(sender());
 
     if (status == Tube::Open) {
         KUrl url = tube->url();
