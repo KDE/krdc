@@ -78,6 +78,13 @@ set(krdc_SRCS
     main.cpp
 )
 
+if(TELEPATHY_QT4_FOUND)
+    set(krdc_SRCS ${krdc_SRCS}
+        tubesmanager.cpp
+        tube.cpp
+    )
+endif(TELEPATHY_QT4_FOUND)
+
 kde4_add_ui_files(krdc_SRCS
     config/general.ui
 )
