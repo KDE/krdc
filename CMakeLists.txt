@@ -63,6 +63,10 @@ add_subdirectory(nx)
 add_subdirectory(rdp)
 add_subdirectory(test)
 
+if(TELEPATHY_QT4_FOUND)
+    add_subdirectory(krdc_approver)
+endif(TELEPATHY_QT4_FOUND)
+
 add_definitions(-DKDE_DEFAULT_DEBUG_AREA=5010)
 
 set(krdc_SRCS
