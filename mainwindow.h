@@ -31,6 +31,10 @@
 #include <KService>
 #include <KXmlGuiWindow>
 
+#ifdef TELEPATHY_SUPPORT
+#include <TelepathyQt4/ClientRegistrar>
+#endif
+
 class KPushButton;
 class KToggleAction;
 class KTabWidget;
@@ -46,6 +50,10 @@ class QScrollArea;
 class QModelIndex;
 class QSortFilterProxyModel;
 class QTreeView;
+
+#ifdef TELEPATHY_SUPPORT
+class TubesManager;
+#endif
 
 class MainWindow : public KXmlGuiWindow
 {
@@ -128,6 +136,10 @@ private:
     QTreeView *m_remoteDesktopsTreeView;
     QTreeView *m_remoteDesktopsNewConnectionTabTreeView;
     QSortFilterProxyModel *m_remoteDesktopsModelProxy;
+#ifdef TELEPATHY_SUPPORT
+    Tp::SharedPtr<TubesManager> m_tubesManager;
+    Tp::ClientRegistrarPtr m_registrar;
+#endif
     QWidget *m_newConnectionWidget;
 };
 

@@ -34,6 +34,10 @@
 #include "tabbedviewwidget.h"
 #include "hostpreferences.h"
 
+#ifdef TELEPATHY_SUPPORT
+#include "tubesmanager.h"
+#endif
+
 #include <KAction>
 #include <KActionCollection>
 #include <KActionMenu>
@@ -85,6 +89,9 @@ MainWindow::MainWindow(QWidget *parent)
         m_systemTrayIcon(0),
         m_remoteDesktopsTreeView(0),
         m_remoteDesktopsNewConnectionTabTreeView(0),
+#ifdef TELEPATHY_SUPPORT
+        m_tubesManager(0),
+#endif
         m_newConnectionWidget(0)
 {
     loadAllPlugins();
@@ -243,6 +250,17 @@ void MainWindow::loadAllPlugins()
             continue;
         }
     }
+
+#ifdef TELEPATHY_SUPPORT
+    /* Start tube handler */
+    m_tubesManager = Tp::SharedPtr<TubesManager>(new TubesManager(this));
+    connect(m_tubesManager.data(),
+            SIGNAL(newConnection(KUrl)),
+            SLOT(newConnection(KUrl)));
+
+    m_registrar = Tp::ClientRegistrar::create();
+    m_registrar->registerClient(Tp::AbstractClientPtr::dynamicCast(m_tubesManager), "krdc_rfb_handler");
+#endif
 }
 
 RemoteViewFactory *MainWindow::createPluginFromService(const KService::Ptr &service)
@@ -549,6 +567,9 @@ void MainWindow::disconnectHost()
         m_tabWidget->removePage(tmp);
         tmp->deleteLater();
 
+#ifdef TELEPATHY_SUPPORT
+        m_tubesManager->closeTube(view->url());
+#endif
         saveHostPrefs(view);
     } else {
         QWidget *tmp = m_tabWidget->currentWidget();
@@ -574,6 +595,10 @@ void MainWindow::closeTab(QWidget *widget)
     m_tabWidget->removeTab(index);
 
     if (!isNewConnectionPage) {
+#ifdef TELEPATHY_SUPPORT
+        m_tubesManager->closeTube(m_remoteViewList.value(
+                    index)->url());
+#endif
         m_remoteViewList.removeAt(index);
         widget->deleteLater();
     }
