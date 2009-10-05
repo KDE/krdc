@@ -22,10 +22,7 @@ if(NOT INSIDE_KDENETWORK)
     include(MacroOptionalAddSubdirectory)
 
     macro_optional_find_package(TelepathyQt4)
-    macro_log_feature(TELEPATHY_QT4_FOUND "telepathy-qt4" "Telepathy Qt Bindings" "https://telepathy.freedesktop.org" FALSE "0.18" "Needed to build Telepathy protocol plugin.")
-
-#    macro_optional_find_package(LibKNotificationItem-1)
-#    macro_log_feature(LIBKNOTIFICATIONITEM-1_FOUND "libknotificationitem" "The KDE4 implementation of the experimental next-gen systray protocol" "" FALSE "" "Provides enhanced systray in KGet.")
+    macro_log_feature(TELEPATHY_QT4_FOUND "telepathy-qt4" "Telepathy Qt Bindings" "https://telepathy.freedesktop.org" FALSE "0.18" "Needed to build Telepathy Tubes support.")
 
     set(CMAKE_REQUIRED_DEFINITIONS ${_KDE4_PLATFORM_DEFINITIONS})
     if(WIN32)
@@ -54,8 +51,6 @@ if(TELEPATHY_QT4_FOUND)
     add_definitions(-DTELEPATHY_SUPPORT)
     include_directories(${TELEPATHY_QT4_INCLUDE_DIR})
 endif(TELEPATHY_QT4_FOUND)
-
-include_directories(${LIBKNOTIFICATIONITEM-1_INCLUDE_DIR})
 
 add_subdirectory(core)
 add_subdirectory(vnc)
