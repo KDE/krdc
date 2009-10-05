@@ -35,8 +35,8 @@
 
 int main(int argc, char **argv)
 {
-    KAboutData aboutData("krdc_rfb_approver", "Krdc", ki18n("Krdc"), "0.1",
-            ki18n("Approver for Krdc"), KAboutData::License_GPL,
+    KAboutData aboutData("krdc_rfb_approver", "KRDC", ki18n("KRDC"), "0.1",
+            ki18n("Approver for KRDC"), KAboutData::License_GPL,
             ki18n("(C) 2009, Abner Silva"));
     aboutData.setProgramIconName("krdc");
     aboutData.addAuthor(ki18nc("@info:credit", "Abner Silva"), KLocalizedString(),
