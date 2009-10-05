@@ -66,7 +66,7 @@ void Approver::onDispatchOperationReady(Tp::PendingOperation *op)
 
     KNotification *notification = new KNotification("newrfb", NULL, KNotification::Persistent);
     notification->setTitle(i18n("Invitation to view remote desktop"));
-    notification->setText(i18n("%1 wants to share its desktop with you", contact->alias()));
+    notification->setText(i18n("%1 wants to share his/her desktop with you", contact->alias()));
     notification->setActions(QStringList() << i18n("Accept") << i18n("Reject"));
 
     Tp::Client::ConnectionInterfaceAvatarsInterface *avatarIface =
