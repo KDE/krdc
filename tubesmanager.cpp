@@ -42,10 +42,12 @@ static inline Tp::ChannelClassList channelClassList()
     filter0[TELEPATHY_INTERFACE_CHANNEL ".ChannelType"] =
             QDBusVariant(TELEPATHY_INTERFACE_CHANNEL_TYPE_STREAM_TUBE);
     filter0[TELEPATHY_INTERFACE_CHANNEL_TYPE_STREAM_TUBE ".Service"] = QDBusVariant("rfb");
+    filter0[TELEPATHY_INTERFACE_CHANNEL ".Requested"] = QDBusVariant(false);
 
     filter1[TELEPATHY_INTERFACE_CHANNEL ".ChannelType"] =
             QDBusVariant(TELEPATHY_INTERFACE_CHANNEL_TYPE_TUBES);
     filter1[TELEPATHY_INTERFACE_CHANNEL ".TargetHandleType"] = QDBusVariant(Tp::HandleTypeContact);
+    filter1[TELEPATHY_INTERFACE_CHANNEL ".Requested"] = QDBusVariant(false);
 
     return Tp::ChannelClassList() << Tp::ChannelClass(filter0) << Tp::ChannelClass(filter1);
 }
