@@ -44,7 +44,8 @@ int main(int argc, char **argv)
                                "(c) 2000-2002, Const Kaplinsky\n"
                                "(c) 2000, Tridia Corporation\n"
                                "(c) 1999, AT&T Laboratories Boston\n"
-                               "(c) 1999-2003, Matthew Chapman"));
+                               "(c) 1999-2003, Matthew Chapman\n"
+                               "(c) 2009, Collabora Ltd"));
 
     aboutData.addAuthor(ki18n("Urs Wolfer"), ki18n("Developer, Maintainer"), "uwolfer@kde.org");
     aboutData.addAuthor(ki18n("Tim Jansen"), ki18n("Former Developer"), "tim@tjansen.de");
@@ -53,6 +54,7 @@ int main(int argc, char **argv)
                         "bradh@frogmouth.net");
     aboutData.addCredit(ki18n("LibVNCServer / LibVNCClient developers"), ki18n("VNC client library"),
                         "libvncserver-common@lists.sf.net");
+    aboutData.addAuthor(ki18n("Abner Silva"), ki18n("Telepathy Tubes Integration"), "abner.silva@kdemail.net");
 
     KCmdLineArgs::init(argc, argv, &aboutData);
 
