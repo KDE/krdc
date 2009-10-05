@@ -58,6 +58,5 @@ Q_SIGNALS:
 
 private:
     QList<Tube *> m_tubes;
-    QList<Tp::ChannelPtr> m_trash;
 };
 #endif
