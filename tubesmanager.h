@@ -31,13 +31,6 @@
 
 #include <KUrl>
 
-class QDBusObjectPath;
-
-namespace Tp
-{
-    class PendingOperation;
-};
-
 class TubesManager : public QObject, public Tp::AbstractClientHandler
 {
     Q_OBJECT

@@ -24,12 +24,6 @@
 
 #include "tubesmanager.h"
 
-#include <QDBusObjectPath>
-#include <QDBusConnection>
-
-#include <TelepathyQt4/Connection>
-#include <TelepathyQt4/PendingOperation>
-#include <TelepathyQt4/PendingReady>
 #include <TelepathyQt4/Debug>
 
 #include <KDebug>
