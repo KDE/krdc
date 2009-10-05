@@ -20,4 +20,4 @@ install(FILES ${CMAKE_BINARY_DIR}/org.freedesktop.Telepathy.Client.krdc_rfb_appr
         DESTINATION ${DBUS_SERVICES_INSTALL_DIR})
 
 # FIXME any better macro for ${XDG_DATA_DIRS} ?
-install(FILES krdc_rfb_approver.client DESTINATION ${CMAKE_INSTALL_PREFIX}/share/telepathy/clients/)
+install(FILES krdc_rfb_approver.client DESTINATION ${SHARE_INSTALL_PREFIX}/telepathy/clients/)
