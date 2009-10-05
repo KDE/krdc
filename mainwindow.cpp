@@ -463,7 +463,7 @@ void MainWindow::switchFullscreen()
         m_fullscreenWindow->setWindowState(0);
         m_fullscreenWindow->hide();
 
-        m_tabWidget->setTabBarHidden(false);
+        m_tabWidget->setTabBarHidden(m_tabWidget->count() <= 1 && !Settings::showTabBar());
         m_tabWidget->setDocumentMode(false);
         setCentralWidget(m_tabWidget);
 
@@ -807,7 +807,7 @@ void MainWindow::updateConfiguration()
     else
         statusBar()->showMessage(""); // force creation of statusbar
 
-    m_tabWidget->setTabBarHidden(m_tabWidget->count() <= 1 && !Settings::showTabBar());
+    m_tabWidget->setTabBarHidden((m_tabWidget->count() <= 1 && !Settings::showTabBar()) || m_fullscreenWindow);
     m_tabWidget->setTabPosition((KTabWidget::TabPosition) Settings::tabPosition());
 #if QT_VERSION <= 0x040500
     m_tabWidget->setTabsClosable(Settings::tabCloseButton());
