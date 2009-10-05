@@ -53,9 +53,6 @@ ApproverManager::ApproverManager(QObject *parent)
       AbstractClientApprover(channelClassList())
 {
     kDebug() << "Initializing approver manager";
-
-    /* Registering telepathy types */
-    registerTypes();
 }
 
 ApproverManager::~ApproverManager()
