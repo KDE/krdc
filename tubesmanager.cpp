@@ -41,6 +41,7 @@ static inline Tp::ChannelClassList channelClassList()
     QMap<QString, QDBusVariant> filter0, filter1;
     filter0[TELEPATHY_INTERFACE_CHANNEL ".ChannelType"] =
             QDBusVariant(TELEPATHY_INTERFACE_CHANNEL_TYPE_STREAM_TUBE);
+    filter0[TELEPATHY_INTERFACE_CHANNEL_TYPE_STREAM_TUBE ".Service"] = QDBusVariant("rfb");
 
     filter1[TELEPATHY_INTERFACE_CHANNEL ".ChannelType"] =
             QDBusVariant(TELEPATHY_INTERFACE_CHANNEL_TYPE_TUBES);
