@@ -24,14 +24,14 @@
 #ifndef SYSTEMTRAYICON_H
 #define SYSTEMTRAYICON_H
 
-#include <knotificationitem.h>
+#include <kstatusnotifieritem.h>
 
 class KActionCollection;
 class KMenu;
 
 class MainWindow;
 
-class SystemTrayIcon : public KNotificationItem
+class SystemTrayIcon : public KStatusNotifierItem
 {
     Q_OBJECT
 

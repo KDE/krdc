@@ -32,12 +32,12 @@
 #include <KMenu>
 
 SystemTrayIcon::SystemTrayIcon(MainWindow *parent)
-        : KNotificationItem(parent),
+        : KStatusNotifierItem(parent),
         m_mainWindow(parent)
 {
     setIconByPixmap(KIcon("krdc"));
-    setStatus(KNotificationItem::Active);
-    setCategory(KNotificationItem::ApplicationStatus);
+    setStatus(KStatusNotifierItem::Active);
+    setCategory(KStatusNotifierItem::ApplicationStatus);
     setToolTipTitle(i18n("KDE Remote Desktop Client"));
 
     contextMenu()->addSeparator();
