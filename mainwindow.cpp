@@ -635,6 +635,9 @@ void MainWindow::closeTab(QWidget *widget)
         Settings::setShowStartPage(false);
         m_tabWidget->removeTab(0);
         m_showStartPage = false;
+        // HACK : call tabChanged since when the start page is closed and it's called, m_showStartPage is still true
+        // which lead to a crash if the user click on any button like "grab all keys"
+        tabChanged(m_tabWidget->currentIndex());
 	updateActionStatus();
         return;
     }
