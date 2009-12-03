@@ -163,6 +163,7 @@ bool RdpView::start()
     if (!m_url.password().isNull())
         arguments << "-p" << m_url.password();
 
+    arguments << "-D";  // request the window has no decorations
     arguments << "-X" << QString::number(m_container->winId());
     arguments << "-a" << QString::number((m_hostPreferences->colorDepth() + 1) * 8);
 
