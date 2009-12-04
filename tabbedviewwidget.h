@@ -45,14 +45,14 @@ protected:
     void emitLayoutChanged();
     void emitDataChanged(int index);
 private:
-    QTabWidget *m_tabWidget;
+    KTabWidget *m_tabWidget;
 };
 
 class TabbedViewWidget : public KTabWidget
 {
     Q_OBJECT
 public:
-    TabbedViewWidget(QWidget *parent = 0, Qt::WFlags flags = 0);
+    explicit TabbedViewWidget(QWidget *parent = 0, Qt::WFlags flags = 0);
     virtual ~TabbedViewWidget();
     TabbedViewWidgetModel* getModel();
     int addTab(QWidget *page, const QString &label);

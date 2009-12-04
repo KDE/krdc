@@ -79,7 +79,7 @@ QVariant TabbedViewWidgetModel::data(const QModelIndex &index, int role) const
     switch (role) {
     case Qt::EditRole:
     case Qt::DisplayRole:
-        return m_tabWidget->tabText(index.row()).replace(QRegExp("&(?!&)"),"");
+        return m_tabWidget->tabText(index.row()).remove(QRegExp("&(?!&)")); //remove accelerator string
     case Qt::ToolTipRole:
         return m_tabWidget->tabToolTip(index.row());
     case Qt::DecorationRole:
