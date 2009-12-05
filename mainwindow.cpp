@@ -511,7 +511,6 @@ void MainWindow::switchFullscreen()
                                                  "KDE Remote Desktop Client (Full Screen)"));
 
         m_mainWindowGeometry = saveGeometry();
-        hide();
 
         m_tabWidget->setTabBarHidden(true);
         m_tabWidget->setDocumentMode(true);
@@ -531,6 +530,7 @@ void MainWindow::switchFullscreen()
         connect(minimizePixel, SIGNAL(rightClicked()), m_fullscreenWindow, SLOT(showMinimized()));
 
         m_fullscreenWindow->show();
+        hide();  // hide after showing the new window so it stays on the same screen
 
         showRemoteViewToolbar();
     }
