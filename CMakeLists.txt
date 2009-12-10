@@ -36,6 +36,12 @@ if(NOT INSIDE_KDENETWORK)
     # NX support is not ready for KDE 4.2; disabled (uwolfer)
     # macro_optional_find_package(LibNXCL)
     # macro_log_feature(LIBNXCL_FOUND "libnxcl" "NX X compression client library" "http://svn.berlios.de/svnroot/repos/freenx/trunk/freenx-client/nxcl/" FALSE "1.0" "Needed to build Krdc with NX support")
+
+	if(TELEPATHY_QT4_FOUND)
+    	add_definitions(-DTELEPATHY_SUPPORT)
+    	include_directories(${TELEPATHY_QT4_INCLUDE_DIR})
+	endif(TELEPATHY_QT4_FOUND)
+
 endif(NOT INSIDE_KDENETWORK)
 
 include_directories(
@@ -44,11 +50,6 @@ include_directories(
     ${CMAKE_CURRENT_BINARY_DIR}/core/
     ${CMAKE_CURRENT_BINARY_DIR}
 )
-
-if(TELEPATHY_QT4_FOUND)
-    add_definitions(-DTELEPATHY_SUPPORT)
-    include_directories(${TELEPATHY_QT4_INCLUDE_DIR})
-endif(TELEPATHY_QT4_FOUND)
 
 add_subdirectory(core)
 add_subdirectory(vnc)
