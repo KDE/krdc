@@ -332,7 +332,7 @@ void FloatingToolBarPrivate::buildToolBar()
     const bool topLeft = anchorSide == FloatingToolBar::Left || anchorSide == FloatingToolBar::Top;
     const bool vertical = anchorSide == FloatingToolBar::Left || anchorSide == FloatingToolBar::Right;
 
-    if (anchorSide == FloatingToolBar::Left || anchorSide == FloatingToolBar::Right) {
+    if (vertical) {
         offsetPlaceHolder->setFixedSize(1, 7);
         q->setOrientation(Qt::Vertical);
     } else {
