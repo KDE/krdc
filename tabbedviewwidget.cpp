@@ -36,18 +36,18 @@ QModelIndex TabbedViewWidgetModel::index(int row, int column, const QModelIndex 
     return createIndex(row, column, m_tabWidget->widget(row));
 }
 
-QModelIndex TabbedViewWidgetModel::parent(const QModelIndex &index) const
+QModelIndex TabbedViewWidgetModel::parent(const QModelIndex &) const
 {
     return QModelIndex();
 }
 
-int TabbedViewWidgetModel::columnCount(const QModelIndex &parent) const
+int TabbedViewWidgetModel::columnCount(const QModelIndex &) const
 {
     return 1;
 }
 
 
-int TabbedViewWidgetModel::rowCount(const QModelIndex &parent) const
+int TabbedViewWidgetModel::rowCount(const QModelIndex &) const
 {
     return m_tabWidget->count();
 }
