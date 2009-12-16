@@ -62,6 +62,7 @@ if(TELEPATHY_QT4_FOUND)
 endif(TELEPATHY_QT4_FOUND)
 
 add_definitions(-DKDE_DEFAULT_DEBUG_AREA=5010)
+add_definitions(-DBUILD_ZEROCONF)
 
 set(krdc_SRCS
     config/hostpreferenceslist.cpp
