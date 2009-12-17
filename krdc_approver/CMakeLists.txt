@@ -15,8 +15,8 @@ install(TARGETS krdc_rfb_approver ${INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES krdc_rfb_approver.notifyrc DESTINATION ${DATA_INSTALL_DIR}/krdc_rfb_approver)
 
 configure_file(org.freedesktop.Telepathy.Client.krdc_rfb_approver.service.in
-                org.freedesktop.Telepathy.Client.krdc_rfb_approver.service)
-install(FILES ${CMAKE_BINARY_DIR}/org.freedesktop.Telepathy.Client.krdc_rfb_approver.service
+                ${CMAKE_CURRENT_BINARY_DIR}/org.freedesktop.Telepathy.Client.krdc_rfb_approver.service)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/org.freedesktop.Telepathy.Client.krdc_rfb_approver.service
         DESTINATION ${DBUS_SERVICES_INSTALL_DIR})
 
 # FIXME any better macro for ${XDG_DATA_DIRS} ?

@@ -113,8 +113,8 @@ install(FILES pointcursor.png pointcursormask.png DESTINATION ${DATA_INSTALL_DIR
 
 if(TELEPATHY_QT4_FOUND)
     configure_file(org.freedesktop.Telepathy.Client.krdc_rfb_handler.service.in
-                    org.freedesktop.Telepathy.Client.krdc_rfb_handler.service)
-    install(FILES ${CMAKE_BINARY_DIR}/org.freedesktop.Telepathy.Client.krdc_rfb_handler.service
+                    ${CMAKE_CURRENT_BINARY_DIR}/org.freedesktop.Telepathy.Client.krdc_rfb_handler.service)
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/org.freedesktop.Telepathy.Client.krdc_rfb_handler.service
             DESTINATION ${DBUS_SERVICES_INSTALL_DIR})
 
     install(FILES krdc_rfb_handler.client DESTINATION ${SHARE_INSTALL_PREFIX}/telepathy/clients/)
