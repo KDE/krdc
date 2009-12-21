@@ -76,6 +76,8 @@ void Approver::onDispatchOperationReady(Tp::PendingOperation *op)
         QDBusPendingReply<QByteArray, QString> reply = avatarIface->RequestAvatar(
                 contact->handle().takeFirst());
 
+        reply.waitForFinished();
+
         if (!reply.isError()) {
             QPixmap avatar;
             avatar.loadFromData(reply.value());
