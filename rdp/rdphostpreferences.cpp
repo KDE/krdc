@@ -106,6 +106,7 @@ QWidget* RdpHostPreferences::createProtocolSpecificConfigPage()
     rdpUi.kcfg_ColorDepth->setCurrentIndex(colorDepth());
     rdpUi.kcfg_KeyboardLayout->setCurrentIndex(keymap2int(keyboardLayout()));
     rdpUi.kcfg_Sound->setCurrentIndex(sound());
+    rdpUi.kcfg_Console->setChecked(console());
     rdpUi.kcfg_ExtraOptions->setText(extraOptions());
 
     connect(rdpUi.resolutionComboBox, SIGNAL(currentIndexChanged(int)), SLOT(updateWidthHeight(int)));
@@ -169,6 +170,7 @@ void RdpHostPreferences::acceptConfig()
     setColorDepth(rdpUi.kcfg_ColorDepth->currentIndex());
     setKeyboardLayout(int2keymap(rdpUi.kcfg_KeyboardLayout->currentIndex()));
     setSound(rdpUi.kcfg_Sound->currentIndex());
+    setConsole(rdpUi.kcfg_Console->isChecked());
     setExtraOptions(rdpUi.kcfg_ExtraOptions->text());
 }
 
