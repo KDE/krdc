@@ -29,8 +29,6 @@
 #include <KStandardDirs>
 #include <KDebug>
 
-#include <KDateTime>
-
 BookmarkManager::BookmarkManager(KActionCollection *collection, KMenu *menu, MainWindow *parent)
         : QObject(parent),
         KBookmarkOwner(),
@@ -71,14 +69,12 @@ void BookmarkManager::addHistoryBookmark()
 {
     kDebug(5010);
 
-    QString timestamp = KDateTime::currentUtcDateTime().toString();
-
     KBookmark bm = m_historyGroup.first();
     while (!bm.isNull()) {
         if (bm.url() == KUrl(currentUrl())) {
             kDebug(5010) << "Found URL. Move it at the history start.";
             m_historyGroup.moveBookmark(bm, KBookmark());
-            bm.setMetaDataItem("last-connection-time", timestamp);
+            bm.updateAccessMetadata();
             m_manager->emitChanged(m_historyGroup);
             return;
         }
@@ -88,7 +84,7 @@ void BookmarkManager::addHistoryBookmark()
     if (bm.isNull()) {
         kDebug(5010) << "Add new history bookmark.";
         bm = m_historyGroup.addBookmark(currentTitle(), currentUrl());
-        bm.setMetaDataItem("last-connection-time", timestamp);
+        bm.updateAccessMetadata();
         m_historyGroup.moveBookmark(bm, KBookmark());
         m_manager->emitChanged(m_historyGroup);
     }
