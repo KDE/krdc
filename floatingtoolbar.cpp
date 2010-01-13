@@ -163,6 +163,8 @@ void FloatingToolBar::showAndAnimate()
     // force update for case when toolbar has not been built yet
     d->reposition();
 
+    kDebug(5010) << "Toolbar shown at" << d->currentPosition << "on screen" << currentScreen;
+
     // start scrolling in
     d->animTimer->start(20);
 
