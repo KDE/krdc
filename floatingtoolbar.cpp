@@ -149,7 +149,8 @@ void FloatingToolBar::showAndAnimate()
     QDesktopWidget *desktop = QApplication::desktop();
     int currentScreen = desktop->screenNumber(d->anchorWidget);
     if ((d->anchorWidget->size() != desktop->screenGeometry(currentScreen).size())) {
-        kDebug(5010) << "anchorWidget not fullscreen yet";
+        kDebug(5010) << "anchorWidget not fullscreen yet on screen" << currentScreen;
+        kDebug(5010) << "Screen size mismatch, expected" << desktop->screenGeometry(currentScreen).size() << "got" << d->anchorWidget->size();
         d->queuedShow = true;
         return;
     }
