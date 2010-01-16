@@ -79,9 +79,5 @@ void PreferencesDialog::settingsChanged()
 
 bool PreferencesDialog::isDefault()
 {
-    return KConfigDialog::isDefault()
-#if KDE_IS_VERSION(4, 2, 61)
-        && m_pluginSelector->isDefault()
-#endif
-        ;
+    return KConfigDialog::isDefault() && m_pluginSelector->isDefault();
 }
