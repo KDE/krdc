@@ -26,7 +26,6 @@
 #include "mainwindow.h"
 
 #include <KActionCollection>
-#include <KDebug>
 #include <KIcon>
 #include <KLocale>
 #include <KMenu>

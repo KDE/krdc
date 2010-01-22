@@ -28,9 +28,6 @@
 #include <KStandardDirs>
 #include <KDebug>
 #include <KLocale>
-#include <QStringBuilder>
-
-class BookmarkManager;
 
 RemoteDesktopsModel::RemoteDesktopsModel(QObject *parent)
         : QAbstractTableModel(parent)

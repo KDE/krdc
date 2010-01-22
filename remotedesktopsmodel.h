@@ -35,8 +35,6 @@
 class KBookmarkGroup;
 class KBookmarkManager;
 
-class QByteArray;
-
 struct RemoteDesktop {
 public:
     enum Source { None = 0x0, Bookmarks = 0x1, History = 0x2, Zeroconf = 0x4 };

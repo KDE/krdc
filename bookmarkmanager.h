@@ -28,8 +28,6 @@
 
 class KActionCollection;
 class KBookmarkMenu;
-class KMenu;
-class KUrl;
 
 class MainWindow;
 

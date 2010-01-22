@@ -61,7 +61,6 @@
 #include <KServiceTypeTrader>
 
 #include <QClipboard>
-#include <QCloseEvent>
 #include <QDockWidget>
 #include <QFontMetrics>
 #include <QGroupBox>

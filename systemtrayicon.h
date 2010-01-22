@@ -26,9 +26,6 @@
 
 #include <kstatusnotifieritem.h>
 
-class KActionCollection;
-class KMenu;
-
 class MainWindow;
 
 class SystemTrayIcon : public KStatusNotifierItem

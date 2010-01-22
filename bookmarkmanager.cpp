@@ -65,8 +65,6 @@ BookmarkManager::~BookmarkManager()
 
 void BookmarkManager::addHistoryBookmark()
 {
-    kDebug(5010);
-
     KBookmark bm = m_historyGroup.first();
     while (!bm.isNull()) {
         if (bm.url() == KUrl(currentUrl())) {
