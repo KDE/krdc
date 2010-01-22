@@ -1032,10 +1032,10 @@ QWidget* MainWindow::newConnectionWidget()
     QVBoxLayout *startLayout = new QVBoxLayout(m_newConnectionWidget);
     startLayout->setContentsMargins(QMargins(8, 12, 8, 4));
 
-    QLabel *headerLabel = new QLabel(this);
+    QLabel *headerLabel = new QLabel(m_newConnectionWidget);
     headerLabel->setText(i18n("<h1>KDE Remote Desktop Client</h1><br />Enter or select the address of the desktop you would like to connect to."));
 
-    QLabel *headerIconLabel = new QLabel(this);
+    QLabel *headerIconLabel = new QLabel(m_newConnectionWidget);
     headerIconLabel->setPixmap(KIcon("krdc").pixmap(80));
 
     QHBoxLayout *headerLayout = new QHBoxLayout;
@@ -1046,7 +1046,7 @@ QWidget* MainWindow::newConnectionWidget()
     {
         QHBoxLayout *connectLayout = new QHBoxLayout;
         const QString initialProtocol(!m_remoteViewFactories.isEmpty() ? (*m_remoteViewFactories.begin())->scheme() : QString());
-        m_addressNavigator = new KUrlNavigator(0, KUrl(initialProtocol + "://"), this);
+        m_addressNavigator = new KUrlNavigator(0, KUrl(initialProtocol + "://"), m_newConnectionWidget);
 
         QStringList schemes;
         foreach(RemoteViewFactory *factory, m_remoteViewFactories) {
@@ -1059,9 +1059,9 @@ QWidget* MainWindow::newConnectionWidget()
         m_addressNavigator->setFocus();
         m_addressNavigator->setToolTip(i18n("Select connection method and type an IP or DNS Name here."));
 
-        QLabel *addressLabel = new QLabel(i18n("Connect to:"), this);
+        QLabel *addressLabel = new QLabel(i18n("Connect to:"), m_newConnectionWidget);
 
-        KPushButton *connectButton = new KPushButton(this);
+        KPushButton *connectButton = new KPushButton(m_newConnectionWidget);
         connectButton->setToolTip(i18n("Goto Address"));
         connectButton->setIcon(KIcon("go-jump-locationbar"));
         connect(connectButton, SIGNAL(clicked()), SLOT(newConnection()));
@@ -1074,13 +1074,13 @@ QWidget* MainWindow::newConnectionWidget()
     }
 
     {
-        QGroupBox *remoteDesktopsGroupWidget = new QGroupBox(this);
+        QGroupBox *remoteDesktopsGroupWidget = new QGroupBox(m_newConnectionWidget);
         QVBoxLayout *remoteDesktopsGroupLayout = new QVBoxLayout(remoteDesktopsGroupWidget);
         QHBoxLayout *filterLayout = new QHBoxLayout;
         m_newConnectionTableView = new QTableView(remoteDesktopsGroupWidget);
         m_newConnectionTableView->setModel(m_remoteDesktopsModelProxy);
 
-        m_newConnectionTableView->setItemDelegate(new ConnectionDelegate());
+        m_newConnectionTableView->setItemDelegate(new ConnectionDelegate(m_newConnectionTableView));
         m_newConnectionTableView->setShowGrid(false);
         m_newConnectionTableView->verticalHeader()->hide();
         m_newConnectionTableView->verticalHeader()->setDefaultSectionSize(
@@ -1097,7 +1097,7 @@ QWidget* MainWindow::newConnectionWidget()
         m_newConnectionTableView->setContextMenuPolicy(Qt::CustomContextMenu);
         connect(m_newConnectionTableView, SIGNAL(customContextMenuRequested(QPoint)), SLOT(showConnectionContextMenu(QPoint)));
 
-        QLabel *filterLabel = new QLabel(i18nc("Verb, to remove items that don't match", "Filter"));
+        QLabel *filterLabel = new QLabel(i18nc("Verb, to remove items that don't match", "Filter"), remoteDesktopsGroupWidget);
         KLineEdit *filterLineEdit = new KLineEdit(remoteDesktopsGroupWidget);
         filterLineEdit->setClickMessage(i18n("Type here to filter the connection list."));
         filterLineEdit->setClearButtonShown(true);
