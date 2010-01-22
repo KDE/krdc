@@ -73,6 +73,7 @@
 #include <QSortFilterProxyModel>
 #include <QTableView>
 #include <QTimer>
+#include <QToolBar>
 
 MainWindow::MainWindow(QWidget *parent)
         : KXmlGuiWindow(parent),
@@ -786,28 +787,32 @@ void MainWindow::showRemoteViewToolbar()
         connect(m_tabWidget, SIGNAL(currentChanged(int)), sessionComboBox, SLOT(setCurrentIndex(int)));
         m_toolBar->addWidget(sessionComboBox);
 
-        m_toolBar->addAction(actionCollection()->action("new_connection"));
-        m_toolBar->addAction(actionCollection()->action("switch_fullscreen"));
+        QToolBar *buttonBox = new QToolBar(m_toolBar);
+
+        buttonBox->addAction(actionCollection()->action("new_connection"));
+        buttonBox->addAction(actionCollection()->action("switch_fullscreen"));
 
         QAction *minimizeAction = new QAction(m_toolBar);
         minimizeAction->setIcon(KIcon("go-down"));
         minimizeAction->setText(i18n("Minimize Full Screen Window"));
         connect(minimizeAction, SIGNAL(triggered()), m_fullscreenWindow, SLOT(showMinimized()));
-        m_toolBar->addAction(minimizeAction);
+        buttonBox->addAction(minimizeAction);
 
-        m_toolBar->addAction(actionCollection()->action("take_screenshot"));
-        m_toolBar->addAction(actionCollection()->action("view_only"));
-        m_toolBar->addAction(actionCollection()->action("show_local_cursor"));
-        m_toolBar->addAction(actionCollection()->action("grab_all_keys"));
-        m_toolBar->addAction(actionCollection()->action("scale"));
-        m_toolBar->addAction(actionCollection()->action("disconnect"));
+        buttonBox->addAction(actionCollection()->action("take_screenshot"));
+        buttonBox->addAction(actionCollection()->action("view_only"));
+        buttonBox->addAction(actionCollection()->action("show_local_cursor"));
+        buttonBox->addAction(actionCollection()->action("grab_all_keys"));
+        buttonBox->addAction(actionCollection()->action("scale"));
+        buttonBox->addAction(actionCollection()->action("disconnect"));
 
         QAction *stickToolBarAction = new QAction(m_toolBar);
         stickToolBarAction->setCheckable(true);
         stickToolBarAction->setIcon(KIcon("object-locked"));
         stickToolBarAction->setText(i18n("Stick Toolbar"));
         connect(stickToolBarAction, SIGNAL(triggered(bool)), m_toolBar, SLOT(setSticky(bool)));
-        m_toolBar->addAction(stickToolBarAction);
+        buttonBox->addAction(stickToolBarAction);
+
+        m_toolBar->addWidget(buttonBox);
     }
 
     m_toolBar->showAndAnimate();
