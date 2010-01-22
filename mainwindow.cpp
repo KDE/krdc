@@ -333,7 +333,7 @@ void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConn
     view->setGrabAllKeys(prefs->grabAllKeys());
     view->showDotCursor(prefs->showLocalCursor() ? RemoteView::CursorOn : RemoteView::CursorOff);
     view->setViewOnly(prefs->viewOnly());
-    if (! switchFullscreenWhenConnected) view->enableScaling(prefs->windowedScale()); 
+    if (! switchFullscreenWhenConnected) view->enableScaling(prefs->windowedScale());
 
     connect(view, SIGNAL(framebufferSizeChanged(int, int)), this, SLOT(resizeTabWidget(int, int)));
     connect(view, SIGNAL(statusChanged(RemoteView::RemoteStatus)), this, SLOT(statusChanged(RemoteView::RemoteStatus)));
@@ -342,7 +342,7 @@ void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConn
     m_remoteViewList.append(view);
 
 //     view->resize(0, 0);
- 
+
     if (m_remoteViewList.size() == 1) {
         kDebug(5010) << "First connection, restoring window size.";
         restoreWindowSize(view->hostPreferences()->configGroup());
@@ -380,7 +380,7 @@ void MainWindow::openFromRemoteDesktopsModel(const QModelIndex &index)
 void MainWindow::resizeTabWidget(int w, int h)
 {
     kDebug(5010) << "tabwidget resize: w: " << w << ", h: " << h;
-    
+
     RemoteView* view = m_currentRemoteView >= 0 ? m_remoteViewList.at(m_currentRemoteView) : 0;
     if (view && view->scaling()) return;
 
@@ -399,7 +399,7 @@ void MainWindow::resizeTabWidget(int w, int h)
     const QSize newWindowSize = size() - m_tabWidget->size() + QSize(newTabWidth, newTabHeight);
 
     const QSize desktopSize = QSize(QApplication::desktop()->availableGeometry().width(),
-                              QApplication::desktop()->availableGeometry().height());
+                                    QApplication::desktop()->availableGeometry().height());
 
     if ((newWindowSize.height() >= desktopSize.height()) || (newWindowSize.width() >= desktopSize.width())) {
         kDebug(5010) << "remote desktop needs more place than available -> show window maximized";
@@ -485,7 +485,7 @@ void MainWindow::switchFullscreen()
         show();
         restoreGeometry(m_mainWindowGeometry);
 
-        foreach (RemoteView *currentView, m_remoteViewList) {
+        foreach(RemoteView *currentView, m_remoteViewList) {
             currentView->enableScaling(currentView->hostPreferences()->windowedScale());
         }
 
@@ -505,14 +505,14 @@ void MainWindow::switchFullscreen()
         // Entering full screen mode
         m_fullscreenWindow = new QWidget(this, Qt::Window);
         m_fullscreenWindow->setWindowTitle(i18nc("window title when in full screen mode (for example displayed in tasklist)",
-                                                 "KDE Remote Desktop Client (Full Screen)"));
+                                           "KDE Remote Desktop Client (Full Screen)"));
 
         m_mainWindowGeometry = saveGeometry();
 
         m_tabWidget->setTabBarHidden(true);
         m_tabWidget->setDocumentMode(true);
 
-        foreach (RemoteView *currentView, m_remoteViewList) {
+        foreach(RemoteView *currentView, m_remoteViewList) {
             currentView->enableScaling(currentView->hostPreferences()->fullscreenScale());
         }
 
@@ -594,7 +594,7 @@ void MainWindow::closeTab(QWidget *widget)
     if (!isNewConnectionPage) {
 #ifdef TELEPATHY_SUPPORT
         m_tubesManager->closeTube(m_remoteViewList.value(
-                    index)->url());
+                                      index)->url());
 #endif
         m_remoteViewList.removeAt(index);
         widget->deleteLater();
@@ -668,7 +668,7 @@ void MainWindow::showConnectionContextMenu(const QPoint &pos)
 
     // not very clean, but it works,
     if (!(source == i18nc("Where each displayed link comes from", "Bookmarks") ||
-        source == i18nc("Where each displayed link comes from", "History"))) {
+            source == i18nc("Where each displayed link comes from", "History"))) {
         renameAction->setEnabled(false);
         deleteAction->setEnabled(false);
     }
@@ -818,7 +818,7 @@ void MainWindow::showRemoteViewToolbar()
     m_toolBar->showAndAnimate();
 }
 
-void setActionStatus(QAction* action, bool enabled, bool visible, bool checked) 
+void setActionStatus(QAction* action, bool enabled, bool visible, bool checked)
 {
     action->setEnabled(enabled);
     action->setVisible(visible);
@@ -840,12 +840,12 @@ void MainWindow::updateActionStatus()
     actionCollection()->action("disconnect")->setEnabled(enabled);
 
     setActionStatus(actionCollection()->action("view_only"),
-                    enabled, 
+                    enabled,
                     true,
                     view ? view->viewOnly() : false);
 
     setActionStatus(actionCollection()->action("show_local_cursor"),
-                    enabled, 
+                    enabled,
                     view ? view->supportsLocalCursor() : false,
                     view ? view->dotCursorState() == RemoteView::CursorOn : false);
 
@@ -926,10 +926,10 @@ void MainWindow::quit(bool systemEvent)
 {
     const bool haveRemoteConnections = !m_remoteViewList.isEmpty();
     if (systemEvent || !haveRemoteConnections || KMessageBox::warningContinueCancel(this,
-                                           i18n("Are you sure you want to quit the KDE Remote Desktop Client?"),
-                                           i18n("Confirm Quit"),
-                                           KStandardGuiItem::quit(), KStandardGuiItem::cancel(),
-                                           "DoNotAskBeforeExit") == KMessageBox::Continue) {
+            i18n("Are you sure you want to quit the KDE Remote Desktop Client?"),
+            i18n("Confirm Quit"),
+            KStandardGuiItem::quit(), KStandardGuiItem::cancel(),
+            "DoNotAskBeforeExit") == KMessageBox::Continue) {
 
         if (Settings::rememberSessions()) { // remember open remote views for next startup
             QStringList list;
@@ -1140,8 +1140,7 @@ void MainWindow::newConnectionPage()
         const QString toolTip(senderObject->property("toolTipString").toString());
         if (!toolTip.isEmpty()) {
             QToolTip::showText(m_addressNavigator->pos() + pos() + QPoint(m_addressNavigator->width() / 2,
-                                                                          m_addressNavigator->height() / 2),
-                            toolTip, this);
+                               m_addressNavigator->height() / 2), toolTip, this);
         }
     }
 #endif

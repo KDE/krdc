@@ -101,7 +101,7 @@ void TabbedViewWidgetModel::emitLayoutChanged()
 
 void TabbedViewWidgetModel::emitDataChanged(int index)
 {
-    QModelIndex modelIndex = createIndex(index,1);
+    QModelIndex modelIndex = createIndex(index, 1);
     emit dataChanged(modelIndex, modelIndex);
 }
 

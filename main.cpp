@@ -97,8 +97,8 @@ int main(int argc, char **argv)
             mainwindow->newConnection(u, ((args->isSet("fullscreen")) && (args->count() == 1)));
         }
     }
-    
-    kDebug(5010) << "########## KRDC ready:" << startupTimer.elapsed()<< "ms ##########";
+
+    kDebug(5010) << "########## KRDC ready:" << startupTimer.elapsed() << "ms ##########";
 
     return app.exec();
 }
