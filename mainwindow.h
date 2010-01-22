@@ -49,7 +49,7 @@ class TabbedViewWidget;
 class QScrollArea;
 class QModelIndex;
 class QSortFilterProxyModel;
-class QTreeView;
+class QTableView;
 
 #ifdef TELEPATHY_SUPPORT
 class TubesManager;
@@ -100,16 +100,17 @@ private slots:
     void tabChanged(int index);
     QWidget* newConnectionWidget();
     void newConnectionPage();
-    void openFromDockWidget(const QModelIndex &index);
-    void expandTreeViewItems();
+    void openFromRemoteDesktopsModel(const QModelIndex &index);
     void updateFilter(const QString &text);
     void createDockWidget();
+    void showConnectionContextMenu(const QPoint &pos);
+    void saveConnectionListSort(const int logicalindex, const Qt::SortOrder order);
 
 private:
     void setupActions();
     void loadAllPlugins();
     RemoteViewFactory *createPluginFromService(const KService::Ptr &service);
-
+    void showSettingsDialog(const QString &url);
     QScrollArea *createScrollArea(QWidget *parent, RemoteView *remoteView);
 
     QWidget *m_fullscreenWindow;
@@ -133,8 +134,8 @@ private:
     bool m_switchFullscreenWhenConnected;
 
     SystemTrayIcon *m_systemTrayIcon;
-    QTreeView *m_remoteDesktopsTreeView;
-    QTreeView *m_remoteDesktopsNewConnectionTabTreeView;
+    QTableView *m_dockWidgetTableView;
+    QTableView *m_newConnectionTableView;
     QSortFilterProxyModel *m_remoteDesktopsModelProxy;
 #ifdef TELEPATHY_SUPPORT
     Tp::SharedPtr<TubesManager> m_tubesManager;

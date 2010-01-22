@@ -23,53 +23,32 @@
 ****************************************************************************/
 
 #include "remotedesktopsmodel.h"
+#include "bookmarkmanager.h"
 
-#include "remotedesktopsitem.h"
-
-#include <KBookmarkManager>
-#include <KIcon>
 #include <KStandardDirs>
 #include <KDebug>
 #include <KLocale>
-#include <KProcess>
+#include <QStringBuilder>
 
-#ifdef BUILD_ZEROCONF
-#include <dnssd/remoteservice.h>
-#endif
+class BookmarkManager;
 
 RemoteDesktopsModel::RemoteDesktopsModel(QObject *parent)
-        : QAbstractItemModel(parent)
+        : QAbstractTableModel(parent)
 {
-    rootItem = new RemoteDesktopsItem(QList<QVariant>() << "Remote Desktops");
-    bookmarkItem = new RemoteDesktopsItem(QList<QVariant>() << "Bookmarks", rootItem);
-    rootItem->appendChild(bookmarkItem);
-
     const QString file = KStandardDirs::locateLocal("data", "krdc/bookmarks.xml");
-
     m_manager = KBookmarkManager::managerForFile(file, "krdc");
     m_manager->setUpdate(true);
     connect(m_manager, SIGNAL(changed(const QString &, const QString &)), SLOT(bookmarksChanged()));
-
-    buildModelFromBookmarkGroup(m_manager->root(), bookmarkItem);
+    buildModelFromBookmarkGroup(m_manager->root());
 
 #ifdef BUILD_ZEROCONF
     // Add RDP and NX if they start announcing via Zeroconf:
     m_protocols["_rfb._tcp"] = "vnc";
 
-    zeroconfItem = new RemoteDesktopsItem(QList<QVariant>() << "Discovered Network Servers", rootItem);
-    rootItem->appendChild(zeroconfItem);
-
     zeroconfBrowser = new DNSSD::ServiceBrowser("_rfb._tcp", true);
     connect(zeroconfBrowser, SIGNAL(finished()), this, SLOT(servicesChanged()));
     zeroconfBrowser->startBrowse();
-#endif
-#if 0
-    localNetworkItem = new RemoteDesktopsItem(QList<QVariant>() << "Local Network", rootItem);
-    rootItem->appendChild(localNetworkItem);
-
-    scanLocalNetwork();
-
-    localNetworkItem->appendChild(new RemoteDesktopsItem(QList<QVariant>() << "...", localNetworkItem));
+    kDebug(5010) << "Browsing for zeroconf hosts.";
 #endif
 }
 
@@ -77,21 +56,43 @@ RemoteDesktopsModel::~RemoteDesktopsModel()
 {
 }
 
-void RemoteDesktopsModel::bookmarksChanged()
+int RemoteDesktopsModel::columnCount(const QModelIndex &) const
 {
-    kDebug(5010);
-
-    bookmarkItem->clearChildren();
-    buildModelFromBookmarkGroup(m_manager->root(), bookmarkItem);
-    reset();
+    return 4;  // same as count of RemoteDesktopsModel::DisplayItems enum
 }
 
-int RemoteDesktopsModel::columnCount(const QModelIndex &parent) const
+int RemoteDesktopsModel::rowCount(const QModelIndex &) const
 {
-    if (parent.isValid())
-        return static_cast<RemoteDesktopsItem*>(parent.internalPointer())->columnCount();
-    else
-        return rootItem->columnCount();
+    return remoteDesktops.size();
+}
+
+Qt::ItemFlags RemoteDesktopsModel::flags(const QModelIndex &index) const
+{
+    if (!index.isValid())
+        return 0;
+    if (index.column() == RemoteDesktopsModel::Favorite) {
+        return Qt::ItemIsEnabled | Qt::ItemIsUserCheckable;
+    }
+    return Qt::ItemIsEnabled;
+}
+
+bool RemoteDesktopsModel::setData(const QModelIndex &index, const QVariant &value, int role)
+{
+    if (index.isValid() && role == Qt::CheckStateRole && index.column() == RemoteDesktopsModel::Favorite) {
+        bool checked = (Qt::CheckState)value.toUInt() == Qt::Checked;
+        remoteDesktops[index.row()].favorite = checked;
+
+        RemoteDesktop rd = remoteDesktops.at(index.row());
+        if (checked) {
+            KBookmarkGroup root = m_manager->root();
+            root.addBookmark(rd.title, rd.url);
+            m_manager->emitChanged(root);
+        } else {
+            BookmarkManager::removeByUrl(m_manager, rd.url, true, rd.title);
+        }
+        return true;
+    }
+    return false;
 }
 
 QVariant RemoteDesktopsModel::data(const QModelIndex &index, int role) const
@@ -99,175 +100,153 @@ QVariant RemoteDesktopsModel::data(const QModelIndex &index, int role) const
     if (!index.isValid())
         return QVariant();
 
-    RemoteDesktopsItem *item = static_cast<RemoteDesktopsItem*>(index.internalPointer());
-    const QString currentItemTitleString = item->data(0).toString();
-    const QString currentItemString = item->data(1).toString();
-
-#ifdef BUILD_ZEROCONF
-    if (currentItemTitleString == "Discovered Network Servers" && zeroconfItem->childCount()<=0)
-        return QVariant();
-#endif
+    RemoteDesktop item = remoteDesktops.at(index.row());
 
     switch (role) {
     case Qt::DisplayRole:
-        return item->data(index.column());
+        switch (index.column()) {
+        case RemoteDesktopsModel::Favorite:
+            return item.favorite;
+        case RemoteDesktopsModel::Title:
+            return item.title;
+        case RemoteDesktopsModel::LastConnected:
+            return QVariant(item.lastConnected.dateTime());
+        case RemoteDesktopsModel::Source:
+            switch (item.source) {
+            case RemoteDesktop::Bookmarks:
+                return i18nc("Where each displayed link comes from", "Bookmarks");
+            case RemoteDesktop::History:
+                return i18nc("Where each displayed link comes from", "History");
+            case RemoteDesktop::Zeroconf:
+                return i18nc("Where each displayed link comes from", "Zeroconf");
+            case RemoteDesktop::None:
+                return i18nc("Where each displayed link comes from", "None");
+            }
+        default:
+            return QVariant();
+        }
+    case Qt::CheckStateRole:
+        if (index.column() == RemoteDesktopsModel::Favorite)
+            return item.favorite ? Qt::Checked : Qt::Unchecked;
+        return QVariant();
     case Qt::ToolTipRole:
-        return currentItemString;  //use the url for the tooltip
-    case Qt::DecorationRole:
-        if (!currentItemString.isEmpty()) // contains an url
-            return KIcon("krdc");
-#ifdef BUILD_ZEROCONF
-        else if (currentItemTitleString == "Discovered Network Servers")
-            return KIcon("network-workgroup");
-#endif
-#if 0
-        else if (currentItemTitleString == "Local Network")
-            return KIcon("network-workgroup");
-        else if (currentItemTitleString == "...")
-            return KIcon("view-history");
-#endif
-        else
-            return KIcon("folder-bookmarks");
+        if (index.column() == RemoteDesktopsModel::LastConnected && !item.lastConnected.isNull())
+            return KGlobal::locale()->formatDateTime(item.lastConnected.toLocalZone(), KLocale::FancyLongDate);
+        return item.url;  //use the url for the tooltip
     case 10001: //url for dockwidget
-        return currentItemString;
+        return item.url;
     case 10002: //filter
-        if (!currentItemString.isEmpty())
-            return currentItemString + item->data(0).toString(); // return both uservisible and data
-        else
-            return "IGNORE";
+        return item.url + item.title; // return both uservisible and data
     default:
         return QVariant();
     }
 }
 
-Qt::ItemFlags RemoteDesktopsModel::flags(const QModelIndex &index) const
-{
-    if (!index.isValid())
-        return 0;
-
-    return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
-}
-
 QVariant RemoteDesktopsModel::headerData(int section, Qt::Orientation orientation,
-                                         int role) const
+        int role) const
 {
-    if (orientation == Qt::Horizontal && role == Qt::DisplayRole)
-        return rootItem->data(section);
-
+    if (orientation == Qt::Horizontal && role == Qt::DisplayRole) {
+        switch (section) {
+        case RemoteDesktopsModel::Favorite:
+            return QVariant(); // the favorite column is to small for a header
+        case RemoteDesktopsModel::Title:
+            return i18nc("Header of the connections list", "Remote Desktop");
+        case RemoteDesktopsModel::LastConnected:
+            return i18nc("Header of the connections list", "Last Connected");
+        case RemoteDesktopsModel::Source:
+            return i18nc("Header of the connections list", "Source");
+        }
+    }
     return QVariant();
 }
 
-QModelIndex RemoteDesktopsModel::index(int row, int column, const QModelIndex &parent) const
+// does not trigger view update, you must do this by hand after using this function
+void RemoteDesktopsModel::removeAllItemsFromSources(RemoteDesktop::Sources sources)
 {
-    if (!hasIndex(row, column, parent))
-        return QModelIndex();
-
-    RemoteDesktopsItem *parentItem;
-
-    if (!parent.isValid())
-        parentItem = rootItem;
-    else
-        parentItem = static_cast<RemoteDesktopsItem*>(parent.internalPointer());
-
-    RemoteDesktopsItem *childItem = parentItem->child(row);
-    if (childItem)
-        return createIndex(row, column, childItem);
-    else
-        return QModelIndex();
+    QMutableListIterator<RemoteDesktop> iter(remoteDesktops);
+    while (iter.hasNext()) {
+        iter.next();
+        // if it matches any of the specified sources, remove it
+        if ((iter.value().source & sources) > 0)
+            iter.remove();
+    }
 }
 
-QModelIndex RemoteDesktopsModel::parent(const QModelIndex &index) const
+void RemoteDesktopsModel::bookmarksChanged()
 {
-    if (!index.isValid())
-        return QModelIndex();
-
-    RemoteDesktopsItem *childItem = static_cast<RemoteDesktopsItem*>(index.internalPointer());
-    RemoteDesktopsItem *parentItem = childItem->parent();
-
-    if (parentItem == 0 || parentItem == rootItem)
-        return QModelIndex();
-
-    return createIndex(parentItem->row(), 0, parentItem);
+    kDebug(5010);
+    removeAllItemsFromSources(RemoteDesktop::Bookmarks | RemoteDesktop::History);
+    buildModelFromBookmarkGroup(m_manager->root());
+    reset();
 }
 
-int RemoteDesktopsModel::rowCount(const QModelIndex &parent) const
-{
-    RemoteDesktopsItem *parentItem;
-    if (parent.column() > 0)
-        return 0;
-
-    if (!parent.isValid())
-        parentItem = rootItem;
-    else
-        parentItem = static_cast<RemoteDesktopsItem*>(parent.internalPointer());
-
-    return parentItem->childCount();
-}
-
-void RemoteDesktopsModel::buildModelFromBookmarkGroup(const KBookmarkGroup &group, RemoteDesktopsItem *item)
+void RemoteDesktopsModel::buildModelFromBookmarkGroup(const KBookmarkGroup &group)
 {
     KBookmark bm = group.first();
     while (!bm.isNull()) {
-        RemoteDesktopsItem *newItem = new RemoteDesktopsItem(QList<QVariant>() << bm.text() << bm.url().url(), item);
-        item->appendChild(newItem);
-        if (bm.isGroup())
-            buildModelFromBookmarkGroup(bm.toGroup(), newItem); //recursive
-        bm = group.next(bm);
+        if (bm.isGroup()) {
+            // recurse subfolders and treat it special if it is the history folder
+            buildModelFromBookmarkGroup(bm.toGroup());
+        } else { // not a group
+
+            RemoteDesktop item;
+            item.title = bm.text();
+            item.url = bm.url().url();
+            int index = remoteDesktops.indexOf(item);
+            bool newItem = index < 0;
+
+            // we want to merge all copies of a url into one link, so if the item exists, update it
+            if (group.metaDataItem("krdc-history") == "historyfolder") {
+                KDateTime connected = KDateTime();
+                bool ok = false;
+                connected.setTime_t(bm.metaDataItem("time_visited").toLongLong(&ok));
+                if (ok) {
+                    (newItem ? item : remoteDesktops[index]).lastConnected = connected;
+                }
+
+                item.source = RemoteDesktop::History;
+                item.favorite = false;
+            } else {
+                if (newItem) {
+                    item.lastConnected = KDateTime();
+                    item.favorite = true;
+                    item.source = RemoteDesktop::Bookmarks;
+                } else {
+                    remoteDesktops[index].title = bm.text();
+                    remoteDesktops[index].favorite = true;
+                    remoteDesktops[index].source = RemoteDesktop::Bookmarks; // Bookmarks trump other types
+                }
+            }
+            if (newItem)
+                remoteDesktops.append(item);
+        }
+        bm = group.next(bm); // next item in the group
     }
 }
 
 #ifdef BUILD_ZEROCONF
-void RemoteDesktopsModel::servicesChanged() {
-    //redo list because it is easier than finding and removing one
+void RemoteDesktopsModel::servicesChanged()
+{
+    //redo list because it is easier than finding and removing one that disappeared
     QList<DNSSD::RemoteService::Ptr> services = zeroconfBrowser->services();
     KUrl url;
-    zeroconfItem->clearChildren();
+    removeAllItemsFromSources(RemoteDesktop::Zeroconf);
     foreach(DNSSD::RemoteService::Ptr service, services) {
         url.setProtocol(m_protocols[service->type()].toLower());
         url.setHost(service->hostName());
         url.setPort(service->port());
-//tooltip        service->hostName()+"."+service->domain();
-        RemoteDesktopsItem *newItem = new RemoteDesktopsItem(QList<QVariant>() << service->serviceName() << url.url(), zeroconfItem);
-        zeroconfItem->appendChild(newItem);
-    }
-    reset();
-}
-#endif
-#if 0
-void RemoteDesktopsModel::scanLocalNetwork()
-{
-    m_scanProcess = new KProcess(this);
-    m_scanProcess->setOutputChannelMode(KProcess::SeparateChannels);
-    QStringList args(QStringList() << "-vv" << "-PN" << "-p5901" << "192.168.1.0-255");
-    connect(m_scanProcess, SIGNAL(readyReadStandardOutput()),
-                           SLOT(readInput()));
-    m_scanProcess->setProgram("nmap", args);
-    m_scanProcess->start();
-}
 
-void RemoteDesktopsModel::readInput()
-{
-    // we do not know if the output array ends in the middle of an utf-8 sequence
-    m_output += m_scanProcess->readAllStandardOutput();
+        RemoteDesktop item;
+        item.url = url.url();
 
-    int pos;
-    while ((pos = m_output.indexOf('\n')) != -1) {
-        QString line = QString::fromLocal8Bit(m_output, pos + 1);
-        m_output.remove(0, pos + 1);
-
-        if (line.contains("open port")) {
-            kDebug(5010) << line;
-
-            QString ip(line.mid(line.lastIndexOf(' ') + 1));
-            ip = ip.left(ip.length() - 1);
-
-            QString port(line.left(line.indexOf('/')));
-            port = port.mid(port.lastIndexOf(' ') + 1);
-            RemoteDesktopsItem *item = new RemoteDesktopsItem(QList<QVariant>() << "vnc://" + ip + ':' + port, localNetworkItem);
-            localNetworkItem->appendChild(item);
-            emit dataChanged(QModelIndex(), QModelIndex());
+        if (!remoteDesktops.contains(item)) {
+            item.title = service->serviceName();
+            item.source = RemoteDesktop::Zeroconf;
+            item.favorite = false;
+            remoteDesktops.append(item);
         }
     }
+    reset();
 }
 #endif
 

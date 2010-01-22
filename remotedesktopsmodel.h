@@ -25,19 +25,38 @@
 #ifndef REMOTEDESKTOPSMODEL_H
 #define REMOTEDESKTOPSMODEL_H
 
-#include <QAbstractItemModel>
+#include <QAbstractTableModel>
+#include <KDateTime>
+
 #ifdef BUILD_ZEROCONF
 #include <dnssd/servicebrowser.h>
 #endif
 
 class KBookmarkGroup;
 class KBookmarkManager;
-class RemoteDesktopsItem;
 
-class KProcess;
 class QByteArray;
 
-class RemoteDesktopsModel : public QAbstractItemModel
+struct RemoteDesktop {
+public:
+    enum Source { None = 0x0, Bookmarks = 0x1, History = 0x2, Zeroconf = 0x4 };
+    Q_DECLARE_FLAGS(Sources, Source)
+    QString title;
+    QString url;
+    KDateTime lastConnected;
+    RemoteDesktop::Source source;
+    bool favorite;
+    bool operator<(const RemoteDesktop &rd) const {
+        if (lastConnected == rd.lastConnected)
+            return url < rd.url;
+        return rd.lastConnected < lastConnected;  // seems backward but gets the desired result
+    }
+    bool operator==(const RemoteDesktop &rd) const {
+        return url == rd.url;
+    }
+};
+
+class RemoteDesktopsModel : public QAbstractTableModel
 {
     Q_OBJECT
 
@@ -45,34 +64,25 @@ public:
     RemoteDesktopsModel(QObject *parent);
     ~RemoteDesktopsModel();
 
-    QVariant data(const QModelIndex &index, int role) const;
-    Qt::ItemFlags flags(const QModelIndex &index) const;
-    QVariant headerData(int section, Qt::Orientation orientation,
-                        int role = Qt::DisplayRole) const;
-    QModelIndex index(int row, int column,
-                      const QModelIndex &parent = QModelIndex()) const;
-    QModelIndex parent(const QModelIndex &index) const;
+    enum DisplayItems { Favorite, Title, LastConnected, Source };
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     int columnCount(const QModelIndex &parent = QModelIndex()) const;
+    Qt::ItemFlags flags(const QModelIndex &index) const;
+    bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole);
+    QVariant data(const QModelIndex &index, int role) const;
+    QVariant headerData(int section, Qt::Orientation orientation,
+                        int role = Qt::DisplayRole) const;
 
 private:
-    void buildModelFromBookmarkGroup(const KBookmarkGroup &group, RemoteDesktopsItem *item);
-
+    QList<RemoteDesktop> remoteDesktops;
+    QString getLastConnectedString(KDateTime lastConnected, bool fuzzy = false) const;
+    void removeAllItemsFromSources(RemoteDesktop::Sources sources);
+    void buildModelFromBookmarkGroup(const KBookmarkGroup &group);
     KBookmarkManager *m_manager;
-    RemoteDesktopsItem *rootItem;
-    RemoteDesktopsItem *bookmarkItem;
+
 #ifdef BUILD_ZEROCONF
-    RemoteDesktopsItem *zeroconfItem;
     DNSSD::ServiceBrowser *zeroconfBrowser;
     QHash<QString, QString> m_protocols;
-#endif
-#if 0
-    void scanLocalNetwork();
-    RemoteDesktopsItem *localNetworkItem;
-
-    KProcess *m_scanProcess;
-    QString m_strBt;
-    QByteArray m_output;
 #endif
 
 private slots:
@@ -80,9 +90,8 @@ private slots:
 #ifdef BUILD_ZEROCONF
     void servicesChanged();
 #endif
-#if 0
-    void readInput();
-#endif
 };
+
+Q_DECLARE_OPERATORS_FOR_FLAGS(RemoteDesktop::Sources)
 
 #endif

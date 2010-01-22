@@ -37,9 +37,7 @@ BookmarkManager::BookmarkManager(KActionCollection *collection, KMenu *menu, Mai
     const QString file = KStandardDirs::locateLocal("data", "krdc/bookmarks.xml");
 
     m_manager = KBookmarkManager::managerForFile(file, "krdc");
-
     m_manager->setUpdate(true);
-
     m_bookmarkMenu = new KBookmarkMenu(m_manager, this, menu, collection);
 
     KBookmarkGroup root = m_manager->root();
@@ -152,6 +150,64 @@ void BookmarkManager::addManualBookmark(const QString &url, const QString &text)
 {
     m_manager->root().addBookmark(url, text);
     emit m_manager->emitChanged();
+}
+
+KBookmarkManager* BookmarkManager::getManager()
+{
+    return m_manager;
+}
+
+QStringList BookmarkManager::findBookmarkAddresses(KBookmarkManager *manager, const QString &url)
+{
+    QStringList bookmarkAddresses = QStringList();
+    findBookmarkAddressesRecursive(&bookmarkAddresses, manager->root(), url);
+    return bookmarkAddresses;
+}
+
+void BookmarkManager::findBookmarkAddressesRecursive(QStringList *bookmarkAddresses, const KBookmarkGroup &group, const QString &url)
+{
+    KBookmark bm = group.first();
+    while (!bm.isNull()) {
+        if (bm.isGroup())
+            findBookmarkAddressesRecursive(bookmarkAddresses, bm.toGroup(), url);
+
+        if (bm.url() == url) {
+            bookmarkAddresses->append(bm.address());
+        }
+        bm = group.next(bm);
+    }
+}
+
+void BookmarkManager::removeByUrl(KBookmarkManager *manager, const QString &url, bool ignoreHistory, const QString updateTitle)
+{
+    QStringList bookmarkAddresses = findBookmarkAddresses(manager, url);
+    foreach(QString address, bookmarkAddresses) {
+        KBookmark bm = manager->findByAddress(address);
+        if (ignoreHistory && bm.parentGroup().metaDataItem("krdc-history") == "historyfolder") {
+            if (!updateTitle.isEmpty()) {
+                kDebug(5010) << "Update" << bm.fullText();
+                bm.setFullText(updateTitle);
+            }
+        } else {
+            if (!bm.isGroup()) { // please don't delete groups... happened in testing
+                kDebug(5010) << "Delete" << bm.fullText();
+                bm.parentGroup().deleteBookmark(bm);
+            }
+        }
+    }
+
+    manager->emitChanged();
+}
+
+void BookmarkManager::updateTitle(KBookmarkManager *manager, const QString &url, const QString &title)
+{
+    QStringList bookmarkAddresses = findBookmarkAddresses(manager, url);
+    foreach(QString address, bookmarkAddresses) {
+        KBookmark bm = manager->findByAddress(address);
+        bm.setFullText(title);
+        kDebug(5010) << "Update" << bm.fullText();
+    }
+    manager->emitChanged();
 }
 
 #include "bookmarkmanager.moc"

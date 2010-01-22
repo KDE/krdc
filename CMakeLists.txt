@@ -69,7 +69,7 @@ set(krdc_SRCS
     config/preferencesdialog.cpp
     floatingtoolbar.cpp
     bookmarkmanager.cpp
-    remotedesktopsitem.cpp
+    connectiondelegate.cpp
     remotedesktopsmodel.cpp
     systemtrayicon.cpp
     tabbedviewwidget.cpp

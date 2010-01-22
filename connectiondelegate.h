@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2008 Urs Wolfer <uwolfer @ kde.org>
+** Copyright (C) 2009 Tony Murray <murraytony@gmail.com>
 **
 ** This file is part of KDE.
 **
@@ -21,32 +21,23 @@
 **
 ****************************************************************************/
 
-#ifndef REMOTEDESKTOPSITEM_H
-#define REMOTEDESKTOPSITEM_H
+#ifndef CONNECTIONDELEGATE_H
+#define CONNECTIONDELEGATE_H
 
-#include <QList>
-#include <QVariant>
+#include <QStyledItemDelegate>
 
-class RemoteDesktopsItem
+class ConnectionDelegate : public QStyledItemDelegate
 {
+    Q_OBJECT
 public:
-    explicit RemoteDesktopsItem(const QList<QVariant> &data, RemoteDesktopsItem *parent = 0);
-    ~RemoteDesktopsItem();
+    explicit ConnectionDelegate(QObject *parent = 0);
+    QString displayText(const QVariant &value, const QLocale& locale) const;
+    void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const;
+    QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const;
+signals:
 
-    void appendChild(RemoteDesktopsItem *child);
+public slots:
 
-    RemoteDesktopsItem *child(int row);
-    int childCount() const;
-    int columnCount() const;
-    QVariant data(int column) const;
-    int row() const;
-    RemoteDesktopsItem *parent();
-    void clearChildren();
-
-private:
-    QList<RemoteDesktopsItem*> childItems;
-    QList<QVariant> itemData;
-    RemoteDesktopsItem *parentItem;
 };
 
-#endif
+#endif // CONNECTIONDELEGATE_H

@@ -29,6 +29,7 @@
 #include "config/preferencesdialog.h"
 #include "floatingtoolbar.h"
 #include "bookmarkmanager.h"
+#include "connectiondelegate.h"
 #include "remotedesktopsmodel.h"
 #include "systemtrayicon.h"
 #include "tabbedviewwidget.h"
@@ -41,7 +42,6 @@
 #include <KAction>
 #include <KActionCollection>
 #include <KActionMenu>
-#include <KApplication>
 #include <KComboBox>
 #include <KEditToolBar>
 #include <KIcon>
@@ -53,30 +53,26 @@
 #include <KNotifyConfigWidget>
 #include <KPluginInfo>
 #include <KPushButton>
-#include <KShortcut>
 #include <KShortcutsDialog>
 #include <KStatusBar>
 #include <KToggleAction>
 #include <KToggleFullScreenAction>
-#include <KUrlComboBox>
 #include <KUrlNavigator>
 #include <KServiceTypeTrader>
-#include <KStandardDirs>
 
 #include <QClipboard>
 #include <QCloseEvent>
-#include <QDesktopWidget>
 #include <QDockWidget>
 #include <QFontMetrics>
+#include <QGroupBox>
 #include <QHeaderView>
+#include <QInputDialog>
 #include <QLabel>
 #include <QLayout>
 #include <QScrollArea>
 #include <QSortFilterProxyModel>
+#include <QTableView>
 #include <QTimer>
-#include <QToolButton>
-#include <QToolTip>
-#include <QTreeView>
 
 MainWindow::MainWindow(QWidget *parent)
         : KXmlGuiWindow(parent),
@@ -87,8 +83,8 @@ MainWindow::MainWindow(QWidget *parent)
         m_leftRightBorder(0),
         m_currentRemoteView(-1),
         m_systemTrayIcon(0),
-        m_remoteDesktopsTreeView(0),
-        m_remoteDesktopsNewConnectionTabTreeView(0),
+        m_dockWidgetTableView(0),
+        m_newConnectionTableView(0),
 #ifdef TELEPATHY_SUPPORT
         m_tubesManager(0),
 #endif
@@ -364,7 +360,7 @@ void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConn
     view->start();
 }
 
-void MainWindow::openFromDockWidget(const QModelIndex &index)
+void MainWindow::openFromRemoteDesktopsModel(const QModelIndex &index)
 {
     const QString data = index.data(10001).toString();
     if (!data.isEmpty()) {
@@ -520,7 +516,7 @@ void MainWindow::switchFullscreen()
         }
 
         QVBoxLayout *fullscreenLayout = new QVBoxLayout(m_fullscreenWindow);
-        fullscreenLayout->setMargin(0);
+        fullscreenLayout->setContentsMargins(QMargins(0, 0, 0, 0));
         fullscreenLayout->addWidget(m_tabWidget);
 
         KToggleFullScreenAction::setFullScreen(m_fullscreenWindow, true);
@@ -618,6 +614,11 @@ void MainWindow::openTabSettings(QWidget *widget)
     const QString url = view->url().url();
     kDebug(5010) << url;
 
+    showSettingsDialog(url);
+}
+
+void MainWindow::showSettingsDialog(const QString &url)
+{
     HostPreferences *prefs = 0;
 
     foreach(RemoteViewFactory *factory, remoteViewFactoriesList()) {
@@ -640,6 +641,58 @@ void MainWindow::openTabSettings(QWidget *widget)
                            i18n("The selected host cannot be handled."),
                            i18n("Unusable URL"));
     }
+}
+
+void MainWindow::showConnectionContextMenu(const QPoint &pos)
+{
+    // QTableView does not take headers into account when it does mapToGlobal(), so calculate the offset
+    QPoint offset = QPoint(m_newConnectionTableView->verticalHeader()->size().width(),
+                           m_newConnectionTableView->horizontalHeader()->size().height());
+    QModelIndex index = m_newConnectionTableView->indexAt(pos);
+
+    if (!index.isValid())
+        return;
+
+    const QString url = index.data(10001).toString();
+    const QString title = m_remoteDesktopsModelProxy->index(index.row(), RemoteDesktopsModel::Title).data(Qt::DisplayRole).toString();
+    const QString source = m_remoteDesktopsModelProxy->index(index.row(), RemoteDesktopsModel::Source).data(Qt::DisplayRole).toString();
+
+    KMenu *menu = new KMenu(m_newConnectionTableView);
+    menu->addTitle(url);
+
+    QAction *connectAction = menu->addAction(KIcon("network-connect"), i18n("Connect"));
+    QAction *renameAction = menu->addAction(KIcon("edit-rename"), i18n("Rename"));
+    QAction *settingsAction = menu->addAction(KIcon("configure"), i18n("Settings"));
+    QAction *deleteAction = menu->addAction(KIcon("edit-delete"), i18n("Delete"));
+
+    // not very clean, but it works,
+    if (!(source == i18nc("Where each displayed link comes from", "Bookmarks") ||
+        source == i18nc("Where each displayed link comes from", "History"))) {
+        renameAction->setEnabled(false);
+        deleteAction->setEnabled(false);
+    }
+
+    QAction *selectedAction = menu->exec(m_newConnectionTableView->mapToGlobal(pos + offset));
+
+    if (selectedAction == connectAction) {
+        openFromRemoteDesktopsModel(index);
+    } else if (selectedAction == renameAction) {
+        //TODO: use inline editor if possible
+        const QString newTitle = QInputDialog::getText(this, i18n("Rename %1", title), i18n("Rename %1 to", title));
+        if (!newTitle.isNull()) {
+            BookmarkManager::updateTitle(m_bookmarkManager->getManager(), url, newTitle);
+        }
+    } else if (selectedAction == settingsAction) {
+        showSettingsDialog(url);
+    } else if (selectedAction == deleteAction) {
+
+        if (KMessageBox::warningContinueCancel(this, i18n("Are you sure you want to delete %1?", url), i18n("Delete %1", title),
+                                               KStandardGuiItem::del()) == KMessageBox::Continue) {
+            BookmarkManager::removeByUrl(m_bookmarkManager->getManager(), url);
+        }
+    }
+
+    menu->deleteLater();
 }
 
 void MainWindow::tabContextMenu(QWidget *widget, const QPoint &point)
@@ -703,11 +756,11 @@ void MainWindow::scale(bool scale)
 
     RemoteView* view = m_remoteViewList.at(m_currentRemoteView);
     view->enableScaling(scale);
-    if (m_fullscreenWindow) 
+    if (m_fullscreenWindow)
         view->hostPreferences()->setFullscreenScale(scale);
     else
         view->hostPreferences()->setWindowedScale(scale);
-    
+
     saveHostPrefs();
 }
 
@@ -973,13 +1026,13 @@ QWidget* MainWindow::newConnectionWidget()
     m_newConnectionWidget = new QWidget(this);
 
     QVBoxLayout *startLayout = new QVBoxLayout(m_newConnectionWidget);
-    startLayout->setMargin(20);
+    startLayout->setContentsMargins(QMargins(8, 12, 8, 4));
 
     QLabel *headerLabel = new QLabel(this);
-    headerLabel->setText(i18n("<h1>KDE Remote Desktop Client</h1><br /><br />What would you like to do?<br />"));
+    headerLabel->setText(i18n("<h1>KDE Remote Desktop Client</h1><br />Enter or select the address of the desktop you would like to connect to."));
 
     QLabel *headerIconLabel = new QLabel(this);
-    headerIconLabel->setPixmap(KIcon("krdc").pixmap(128));
+    headerIconLabel->setPixmap(KIcon("krdc").pixmap(80));
 
     QHBoxLayout *headerLayout = new QHBoxLayout;
     headerLayout->addWidget(headerLabel, 1, Qt::AlignTop);
@@ -1000,6 +1053,7 @@ QWidget* MainWindow::newConnectionWidget()
         m_addressNavigator->setUrlEditable(Settings::normalUrlInputLine());
         connect(m_addressNavigator, SIGNAL(returnPressed()), SLOT(newConnection()));
         m_addressNavigator->setFocus();
+        m_addressNavigator->setToolTip(i18n("Select connection method and type an IP or DNS Name here."));
 
         QLabel *addressLabel = new QLabel(i18n("Connect to:"), this);
 
@@ -1011,35 +1065,56 @@ QWidget* MainWindow::newConnectionWidget()
         connectLayout->addWidget(addressLabel);
         connectLayout->addWidget(m_addressNavigator, 1);
         connectLayout->addWidget(connectButton);
+        connectLayout->setContentsMargins(QMargins(0, 6, 0, 10));
         startLayout->addLayout(connectLayout);
     }
 
     {
-        QWidget *remoteDesktopsDockLayoutWidget = new QWidget(this);
-        QVBoxLayout *remoteDesktopsDockLayout = new QVBoxLayout(remoteDesktopsDockLayoutWidget);
-        remoteDesktopsDockLayout->setMargin(0);
-        m_remoteDesktopsNewConnectionTabTreeView = new QTreeView(remoteDesktopsDockLayoutWidget);
+        QGroupBox *remoteDesktopsGroupWidget = new QGroupBox(this);
+        QVBoxLayout *remoteDesktopsGroupLayout = new QVBoxLayout(remoteDesktopsGroupWidget);
+        QHBoxLayout *filterLayout = new QHBoxLayout;
+        m_newConnectionTableView = new QTableView(remoteDesktopsGroupWidget);
+        m_newConnectionTableView->setModel(m_remoteDesktopsModelProxy);
 
-        m_remoteDesktopsNewConnectionTabTreeView->setModel(m_remoteDesktopsModelProxy);
-        m_remoteDesktopsNewConnectionTabTreeView->header()->hide();
-        m_remoteDesktopsNewConnectionTabTreeView->expandAll();
-        m_remoteDesktopsNewConnectionTabTreeView->setItemsExpandable(true);
-        m_remoteDesktopsNewConnectionTabTreeView->setRootIsDecorated(false);
-        connect(m_remoteDesktopsNewConnectionTabTreeView, SIGNAL(doubleClicked(const QModelIndex &)),
-                                        SLOT(openFromDockWidget(const QModelIndex &)));
+        m_newConnectionTableView->setItemDelegate(new ConnectionDelegate());
+        m_newConnectionTableView->setShowGrid(false);
+        m_newConnectionTableView->verticalHeader()->hide();
+        m_newConnectionTableView->verticalHeader()->setDefaultSectionSize(
+            m_newConnectionTableView->fontMetrics().height() + 3);
+        m_newConnectionTableView->horizontalHeader()->setStretchLastSection(true);
+        m_newConnectionTableView->resizeColumnsToContents();
+        m_newConnectionTableView->setAlternatingRowColors(true);
+        m_newConnectionTableView->setSortingEnabled(true);
+        m_newConnectionTableView->sortByColumn(Settings::connectionListSortColumn(), Qt::SortOrder(Settings::connectionListSortOrder()));
+        connect(m_newConnectionTableView->horizontalHeader(), SIGNAL(sortIndicatorChanged(const int, const Qt::SortOrder)),
+                SLOT(saveConnectionListSort(const int, const Qt::SortOrder)));
+        connect(m_newConnectionTableView, SIGNAL(doubleClicked(const QModelIndex &)),
+                SLOT(openFromRemoteDesktopsModel(const QModelIndex &)));
+        m_newConnectionTableView->setContextMenuPolicy(Qt::CustomContextMenu);
+        connect(m_newConnectionTableView, SIGNAL(customContextMenuRequested(QPoint)), SLOT(showConnectionContextMenu(QPoint)));
 
-        KLineEdit *filterLineEdit = new KLineEdit(remoteDesktopsDockLayoutWidget);
-        filterLineEdit->setClickMessage(i18n("Filter"));
+        QLabel *filterLabel = new QLabel(i18nc("Verb, to remove items that don't match", "Filter"));
+        KLineEdit *filterLineEdit = new KLineEdit(remoteDesktopsGroupWidget);
+        filterLineEdit->setClickMessage(i18n("Type here to filter the connection list."));
         filterLineEdit->setClearButtonShown(true);
         connect(filterLineEdit, SIGNAL(textChanged(const QString &)), SLOT(updateFilter(const QString &)));
-        remoteDesktopsDockLayout->addWidget(filterLineEdit);
-        remoteDesktopsDockLayout->addWidget(m_remoteDesktopsNewConnectionTabTreeView);
-        startLayout->addWidget(remoteDesktopsDockLayoutWidget);
+        filterLayout->addWidget(filterLabel);
+        filterLayout->addWidget(filterLineEdit);
+
+        remoteDesktopsGroupLayout->addLayout(filterLayout);
+        remoteDesktopsGroupLayout->addWidget(m_newConnectionTableView);
+        startLayout->addWidget(remoteDesktopsGroupWidget);
     }
 
     return m_newConnectionWidget;
 }
 
+void MainWindow::saveConnectionListSort(const int logicalindex, const Qt::SortOrder order)
+{
+    Settings::setConnectionListSortColumn(logicalindex);
+    Settings::setConnectionListSortOrder(order);
+    Settings::self()->writeConfig();
+}
 
 void MainWindow::newConnectionPage()
 {
@@ -1083,13 +1158,6 @@ int MainWindow::currentRemoteView() const
     return m_currentRemoteView;
 }
 
-void MainWindow::expandTreeViewItems()
-{
-    metaObject()->invokeMethod(m_remoteDesktopsTreeView, "expandAll", Qt::QueuedConnection);
-    if (m_remoteDesktopsNewConnectionTabTreeView)
-        metaObject()->invokeMethod(m_remoteDesktopsNewConnectionTabTreeView, "expandAll", Qt::QueuedConnection);
-}
-
 void MainWindow::updateFilter(const QString &text)
 {
     m_remoteDesktopsModelProxy->setFilterRegExp(QRegExp("IGNORE|" + text, Qt::CaseInsensitive, QRegExp::RegExp));
@@ -1106,29 +1174,34 @@ void MainWindow::createDockWidget()
     remoteDesktopsDockWidget->setMinimumWidth(fontMetrics.width("vnc://192.168.100.100:6000"));
     actionCollection()->addAction("remote_desktop_dockwidget",
                                   remoteDesktopsDockWidget->toggleViewAction());
-    m_remoteDesktopsTreeView = new QTreeView(remoteDesktopsDockLayoutWidget);
-    RemoteDesktopsModel *remoteDesktopsModel = new RemoteDesktopsModel(this);
 
+    m_dockWidgetTableView = new QTableView(remoteDesktopsDockLayoutWidget);
+    RemoteDesktopsModel *remoteDesktopsModel = new RemoteDesktopsModel(this);
     m_remoteDesktopsModelProxy = new QSortFilterProxyModel(this);
     m_remoteDesktopsModelProxy->setSourceModel(remoteDesktopsModel);
-    m_remoteDesktopsModelProxy->setFilterKeyColumn(0);
     m_remoteDesktopsModelProxy->setFilterRole(10002);
+    m_dockWidgetTableView->setModel(m_remoteDesktopsModelProxy);
 
-    connect(remoteDesktopsModel, SIGNAL(modelReset()), this, SLOT(expandTreeViewItems()));
-    m_remoteDesktopsTreeView->setModel(m_remoteDesktopsModelProxy);
-    m_remoteDesktopsTreeView->header()->hide();
-    m_remoteDesktopsTreeView->expandAll();
-    m_remoteDesktopsTreeView->setItemsExpandable(true);
-    m_remoteDesktopsTreeView->setRootIsDecorated(false);
-    connect(m_remoteDesktopsTreeView, SIGNAL(doubleClicked(const QModelIndex &)),
-                                    SLOT(openFromDockWidget(const QModelIndex &)));
+    m_dockWidgetTableView->setShowGrid(false);
+    m_dockWidgetTableView->verticalHeader()->hide();
+    m_dockWidgetTableView->verticalHeader()->setDefaultSectionSize(
+        m_dockWidgetTableView->fontMetrics().height() + 2);
+    m_dockWidgetTableView->horizontalHeader()->hide();
+    m_dockWidgetTableView->horizontalHeader()->setStretchLastSection(true);
+    m_dockWidgetTableView->hideColumn(RemoteDesktopsModel::Favorite);
+    m_dockWidgetTableView->hideColumn(RemoteDesktopsModel::LastConnected);
+    m_dockWidgetTableView->hideColumn(RemoteDesktopsModel::Source);
+    m_dockWidgetTableView->sortByColumn(RemoteDesktopsModel::Title, Qt::AscendingOrder);
+
+    connect(m_dockWidgetTableView, SIGNAL(doubleClicked(const QModelIndex &)),
+            SLOT(openFromRemoteDesktopsModel(const QModelIndex &)));
 
     KLineEdit *filterLineEdit = new KLineEdit(remoteDesktopsDockLayoutWidget);
     filterLineEdit->setClickMessage(i18n("Filter"));
     filterLineEdit->setClearButtonShown(true);
     connect(filterLineEdit, SIGNAL(textChanged(const QString &)), SLOT(updateFilter(const QString &)));
     remoteDesktopsDockLayout->addWidget(filterLineEdit);
-    remoteDesktopsDockLayout->addWidget(m_remoteDesktopsTreeView);
+    remoteDesktopsDockLayout->addWidget(m_dockWidgetTableView);
     remoteDesktopsDockWidget->setWidget(remoteDesktopsDockLayoutWidget);
     addDockWidget(Qt::LeftDockWidgetArea, remoteDesktopsDockWidget);
 }
