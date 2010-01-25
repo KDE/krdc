@@ -52,7 +52,7 @@ public:
     static void removeByUrl(KBookmarkManager *manager, const QString &url, bool ignoreHistory = false, const QString updateTitle = QString());
     static void updateTitle(KBookmarkManager *manager, const QString &url, const QString &title);
     // returns a QStringList for all bookmarks that point to this url using KBookmark::address()
-    static QStringList findBookmarkAddresses(KBookmarkManager *manager, const QString &url);
+    static const QStringList findBookmarkAddresses(const KBookmarkGroup &group, const QString &url);
 
 signals:
     void openUrl(const KUrl &url);
@@ -67,7 +67,6 @@ private:
     KBookmarkGroup m_historyGroup;
 
     MainWindow *m_mainWindow;
-    static void findBookmarkAddressesRecursive(QStringList *bookmarkAddresses, const KBookmarkGroup &group, const QString &url);
 };
 
 #endif

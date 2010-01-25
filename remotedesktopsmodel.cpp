@@ -122,18 +122,34 @@ QVariant RemoteDesktopsModel::data(const QModelIndex &index, int role) const
         default:
             return QVariant();
         }
+
     case Qt::CheckStateRole:
         if (index.column() == RemoteDesktopsModel::Favorite)
             return item.favorite ? Qt::Checked : Qt::Unchecked;
         return QVariant();
+
     case Qt::ToolTipRole:
-        if (index.column() == RemoteDesktopsModel::LastConnected && !item.lastConnected.isNull())
-            return KGlobal::locale()->formatDateTime(item.lastConnected.toLocalZone(), KLocale::FancyLongDate);
-        return item.url;  //use the url for the tooltip
+        switch(index.column()) {
+        case RemoteDesktopsModel::Favorite:
+            if (item.favorite) {
+                return i18nc("Remove the selected url from the bookarks menu", "Remove the bookmark for %1.", item.title);
+            } else {
+                return i18nc("Add the selected url to the bookmarks menu", "Bookmark %1.", item.title);
+            }
+        case RemoteDesktopsModel::LastConnected:
+            if (!item.lastConnected.isNull()) {
+                return KGlobal::locale()->formatDateTime(item.lastConnected.toLocalZone(), KLocale::FancyLongDate);
+            }  // else fall through to default
+        default:
+            return item.url;  //use the url for the tooltip
+        }
+
     case 10001: //url for dockwidget
         return item.url;
+
     case 10002: //filter
         return item.url + item.title; // return both uservisible and data
+
     default:
         return QVariant();
     }

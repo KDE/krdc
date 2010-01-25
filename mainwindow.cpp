@@ -1080,14 +1080,18 @@ QWidget* MainWindow::newConnectionWidget()
         m_newConnectionTableView = new QTableView(remoteDesktopsGroupWidget);
         m_newConnectionTableView->setModel(m_remoteDesktopsModelProxy);
 
+        // set up the view so it looks nice
         m_newConnectionTableView->setItemDelegate(new ConnectionDelegate(m_newConnectionTableView));
         m_newConnectionTableView->setShowGrid(false);
         m_newConnectionTableView->verticalHeader()->hide();
         m_newConnectionTableView->verticalHeader()->setDefaultSectionSize(
             m_newConnectionTableView->fontMetrics().height() + 3);
         m_newConnectionTableView->horizontalHeader()->setStretchLastSection(true);
-        m_newConnectionTableView->resizeColumnsToContents();
+//         m_newConnectionTableView->resizeColumnsToContents(); // not needed when resize mode is ResizeToContents
+        m_newConnectionTableView->horizontalHeader()->setResizeMode(QHeaderView::ResizeToContents);
         m_newConnectionTableView->setAlternatingRowColors(true);
+
+        // set up sorting and actions (double click open, right click custom menu)
         m_newConnectionTableView->setSortingEnabled(true);
         m_newConnectionTableView->sortByColumn(Settings::connectionListSortColumn(), Qt::SortOrder(Settings::connectionListSortOrder()));
         connect(m_newConnectionTableView->horizontalHeader(), SIGNAL(sortIndicatorChanged(const int, const Qt::SortOrder)),
@@ -1097,6 +1101,7 @@ QWidget* MainWindow::newConnectionWidget()
         m_newConnectionTableView->setContextMenuPolicy(Qt::CustomContextMenu);
         connect(m_newConnectionTableView, SIGNAL(customContextMenuRequested(QPoint)), SLOT(showConnectionContextMenu(QPoint)));
 
+        // set up the filter input field
         QLabel *filterLabel = new QLabel(i18nc("Verb, to remove items that don't match", "Filter"), remoteDesktopsGroupWidget);
         KLineEdit *filterLineEdit = new KLineEdit(remoteDesktopsGroupWidget);
         filterLineEdit->setClickMessage(i18n("Type here to filter the connection list."));

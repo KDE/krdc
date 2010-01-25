@@ -155,30 +155,26 @@ KBookmarkManager* BookmarkManager::getManager()
     return m_manager;
 }
 
-QStringList BookmarkManager::findBookmarkAddresses(KBookmarkManager *manager, const QString &url)
+const QStringList BookmarkManager::findBookmarkAddresses(const KBookmarkGroup &group, const QString &url)
 {
     QStringList bookmarkAddresses = QStringList();
-    findBookmarkAddressesRecursive(&bookmarkAddresses, manager->root(), url);
-    return bookmarkAddresses;
-}
-
-void BookmarkManager::findBookmarkAddressesRecursive(QStringList *bookmarkAddresses, const KBookmarkGroup &group, const QString &url)
-{
     KBookmark bm = group.first();
     while (!bm.isNull()) {
-        if (bm.isGroup())
-            findBookmarkAddressesRecursive(bookmarkAddresses, bm.toGroup(), url);
+        if (bm.isGroup()) {
+            bookmarkAddresses.append(findBookmarkAddresses(bm.toGroup(), url));
+        }
 
         if (bm.url() == url) {
-            bookmarkAddresses->append(bm.address());
+            bookmarkAddresses.append(bm.address());
         }
         bm = group.next(bm);
     }
+    return bookmarkAddresses;
 }
 
 void BookmarkManager::removeByUrl(KBookmarkManager *manager, const QString &url, bool ignoreHistory, const QString updateTitle)
 {
-    QStringList bookmarkAddresses = findBookmarkAddresses(manager, url);
+    const QStringList bookmarkAddresses = findBookmarkAddresses(manager->root(), url);
     foreach(QString address, bookmarkAddresses) {
         KBookmark bm = manager->findByAddress(address);
         if (ignoreHistory && bm.parentGroup().metaDataItem("krdc-history") == "historyfolder") {
@@ -199,7 +195,7 @@ void BookmarkManager::removeByUrl(KBookmarkManager *manager, const QString &url,
 
 void BookmarkManager::updateTitle(KBookmarkManager *manager, const QString &url, const QString &title)
 {
-    QStringList bookmarkAddresses = findBookmarkAddresses(manager, url);
+    const QStringList bookmarkAddresses = findBookmarkAddresses(manager->root(), url);
     foreach(QString address, bookmarkAddresses) {
         KBookmark bm = manager->findByAddress(address);
         bm.setFullText(title);
