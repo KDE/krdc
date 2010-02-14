@@ -240,11 +240,13 @@ void VncView::requestPassword()
     setStatus(Authenticating);
 
 #ifndef QTONLY
-    if (m_hostPreferences->walletSupport()) {
+    // just try to get the passwort from the wallet the first time, otherwise it will loop (see issue #226283)
+    if (m_firstPasswordTry && m_hostPreferences->walletSupport()) {
         QString walletPassword = readWalletPassword();
 
         if (!walletPassword.isNull()) {
             vncThread.setPassword(walletPassword);
+            m_firstPasswordTry = false;
             return;
         }
     }
