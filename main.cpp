@@ -34,11 +34,11 @@
 
 int main(int argc, char **argv)
 {
-    QTime startupTimer;;
+    QTime startupTimer;
     startupTimer.start();
     KAboutData aboutData("krdc", 0, ki18n("KRDC"), KDE_VERSION_STRING,
                          ki18n("KDE remote desktop connection"), KAboutData::License_GPL,
-                         ki18n("(c) 2007-2009, Urs Wolfer\n"
+                         ki18n("(c) 2007-2010, Urs Wolfer\n"
                                "(c) 2001-2003, Tim Jansen\n"
                                "(c) 2002-2003, Arend van Beelen jr.\n"
                                "(c) 2000-2002, Const Kaplinsky\n"
@@ -48,6 +48,7 @@ int main(int argc, char **argv)
                                "(c) 2009, Collabora Ltd"));
 
     aboutData.addAuthor(ki18n("Urs Wolfer"), ki18n("Developer, Maintainer"), "uwolfer@kde.org");
+    aboutData.addAuthor(ki18n("Tony Murray"), ki18n("Developer"), "murraytony@gmail.com");
     aboutData.addAuthor(ki18n("Tim Jansen"), ki18n("Former Developer"), "tim@tjansen.de");
     aboutData.addAuthor(ki18n("Arend van Beelen jr."), ki18n("Initial RDP backend"), "arend@auton.nl");
     aboutData.addCredit(ki18n("Brad Hards"), ki18n("Google Summer of Code 2007 KRDC project mentor"),

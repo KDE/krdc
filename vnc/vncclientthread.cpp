@@ -157,9 +157,9 @@ void VncClientThread::outputHandler(const char *format, ...)
 VncClientThread::VncClientThread(QObject *parent)
         : QThread(parent)
         , frameBuffer(0)
+        , m_stopped(false)
 {
     QMutexLocker locker(&mutex);
-    m_stopped = false;
 
     QTimer *outputErrorMessagesCheckTimer = new QTimer(this);
     outputErrorMessagesCheckTimer->setInterval(500);
@@ -174,7 +174,7 @@ VncClientThread::~VncClientThread()
     const bool quitSuccess = wait(500);
 
     kDebug(5011) << "Quit VNC thread success:" << quitSuccess;
-    
+
     delete [] frameBuffer;
 }
 
@@ -249,7 +249,9 @@ void VncClientThread::run()
     QMutexLocker locker(&mutex);
 
     while (!m_stopped) { // try to connect as long as the server allows
+        locker.relock();
         m_passwordError = false;
+        locker.unlock();
 
         rfbClientLog = outputHandler;
         rfbClientErr = outputHandler;
@@ -261,6 +263,7 @@ void VncClientThread::run()
         cl->GotXCutText = cuttext;
         rfbClientSetClientData(cl, 0, this);
 
+        locker.relock();
         cl->serverHost = strdup(m_host.toUtf8().constData());
 
         if (m_port < 0 || !m_port) // port is invalid or empty...
@@ -269,42 +272,43 @@ void VncClientThread::run()
         if (m_port >= 0 && m_port < 100) // the user most likely used the short form (e.g. :1)
             m_port += 5900;
         cl->serverPort = m_port;
+        locker.unlock();
 
         kDebug(5011) << "--------------------- trying init ---------------------";
 
         if (rfbInitClient(cl, 0, 0))
             break;
 
+        locker.relock();
         if (m_passwordError)
             continue;
 
         return;
     }
 
-    locker.unlock();
-
+    locker.relock();
     // Main VNC event loop
     while (!m_stopped) {
+        locker.unlock();
         const int i = WaitForMessage(cl, 500);
-        if (i < 0)
+        if (i < 0) {
             break;
-        if (i)
-            if (!HandleRFBServerMessage(cl))
+        }
+        if (i) {
+            if (!HandleRFBServerMessage(cl)) {
                 break;
-
-        locker.relock();
+            }
+        }
 
         while (!m_eventQueue.isEmpty()) {
             ClientEvent* clientEvent = m_eventQueue.dequeue();
             clientEvent->fire(cl);
             delete clientEvent;
         }
-
-        locker.unlock();
+        locker.relock();
     }
 
     // Cleanup allocated resources
-    locker.relock();
     rfbClientCleanup(cl);
     m_stopped = true;
 }
