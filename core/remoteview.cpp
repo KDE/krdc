@@ -235,7 +235,7 @@ void RemoteView::saveWalletPassword(const QString &password, bool fromUserNameOn
     else
         key = m_url.prettyUrl(KUrl::RemoveTrailingSlash);
 
-    if (m_wallet && m_wallet->isOpen() && !m_wallet->hasEntry(key)) {
+    if (m_wallet && m_wallet->isOpen()) {
         kDebug(5010) << "Write wallet password";
         m_wallet->writePassword(key, password);
     }
