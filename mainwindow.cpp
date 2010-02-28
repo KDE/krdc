@@ -450,7 +450,9 @@ void MainWindow::statusChanged(RemoteView::RemoteStatus status)
             switchFullscreen();
         }
 
-        m_bookmarkManager->addHistoryBookmark();
+        if (Settings::rememberHistory()) {
+            m_bookmarkManager->addHistoryBookmark();
+        }
 
         break;
     default:
