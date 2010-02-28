@@ -150,6 +150,9 @@ QVariant RemoteDesktopsModel::data(const QModelIndex &index, int role) const
     case 10002: //filter
         return item.url + item.title; // return both uservisible and data
 
+    case 10003: //url for dockwidget
+        return item.title;
+
     default:
         return QVariant();
     }

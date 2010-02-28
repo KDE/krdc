@@ -285,7 +285,7 @@ void MainWindow::restoreOpenSessions()
     }
 }
 
-void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConnected)
+void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConnected, const QString &tabName)
 {
     m_switchFullscreenWhenConnected = switchFullscreenWhenConnected;
 
@@ -353,7 +353,7 @@ void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConn
     if (indexOfNewConnectionWidget >= 0)
         m_tabWidget->removeTab(indexOfNewConnectionWidget);
 
-    const int newIndex = m_tabWidget->addTab(scrollArea, KIcon("krdc"), url.prettyUrl(KUrl::RemoveTrailingSlash));
+    const int newIndex = m_tabWidget->addTab(scrollArea, KIcon("krdc"), tabName.isEmpty() ? url.prettyUrl(KUrl::RemoveTrailingSlash) : tabName);
     m_tabWidget->setCurrentIndex(newIndex);
     tabChanged(newIndex); // force to update m_currentRemoteView (tabChanged is not emitted when start page has been disabled)
 
@@ -362,9 +362,10 @@ void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConn
 
 void MainWindow::openFromRemoteDesktopsModel(const QModelIndex &index)
 {
-    const QString data = index.data(10001).toString();
-    if (!data.isEmpty()) {
-        const KUrl url(data);
+    const QString urlString = index.data(10001).toString();
+    const QString nameString = index.data(10003).toString();
+    if (!urlString.isEmpty()) {
+        const KUrl url(urlString);
         // first check if url has already been opened; in case show the tab
         for (int i = 0; i < m_remoteViewList.count(); ++i) {
             if (m_remoteViewList.at(i)->url() == url) {
@@ -372,7 +373,7 @@ void MainWindow::openFromRemoteDesktopsModel(const QModelIndex &index)
                 return;
             }
         }
-        newConnection(url);
+        newConnection(url, false, nameString);
     }
 }
 
@@ -679,7 +680,7 @@ void MainWindow::showConnectionContextMenu(const QPoint &pos)
     } else if (selectedAction == renameAction) {
         //TODO: use inline editor if possible
         const QString newTitle = QInputDialog::getText(this, i18n("Rename %1", title), i18n("Rename %1 to", title));
-        if (!newTitle.isNull()) {
+        if (!newTitle.isEmpty()) {
             BookmarkManager::updateTitle(m_bookmarkManager->getManager(), url, newTitle);
         }
     } else if (selectedAction == settingsAction) {

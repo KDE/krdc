@@ -67,7 +67,7 @@ public:
     int currentRemoteView() const;
 
 public slots:
-    void newConnection(const KUrl &newUrl = KUrl(), bool switchFullscreenWhenConnected = false);
+    void newConnection(const KUrl &newUrl = KUrl(), bool switchFullscreenWhenConnected = false, const QString &tabName = QString());
 
 protected:
     virtual void closeEvent(QCloseEvent *event);
