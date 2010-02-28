@@ -35,7 +35,7 @@ SystemTrayIcon::SystemTrayIcon(MainWindow *parent)
         : KStatusNotifierItem(parent),
         m_mainWindow(parent)
 {
-    setIconByPixmap(KIcon("krdc"));
+    setIconByName("krdc");
     setStatus(KStatusNotifierItem::Active);
     setCategory(KStatusNotifierItem::ApplicationStatus);
     setToolTipTitle(i18n("KDE Remote Desktop Client"));
