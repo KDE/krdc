@@ -56,7 +56,7 @@ QString ConnectionDelegate::displayText(const QVariant &value, const QLocale& lo
             if (daysAgo < 30)
                 return i18np("Yesterday", "%1 days ago", daysAgo);
             if (daysAgo < 365)
-                return i18np("A month ago", "%1 months ago", daysAgo / 30);
+                return i18np("Over a month ago", "%1 months ago", daysAgo / 30);
             return i18np("A year ago", "%1 years ago", daysAgo / 365);
         }
 
