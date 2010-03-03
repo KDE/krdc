@@ -37,8 +37,8 @@ as Authors, publish date, the abstract, and Keywords -->
 
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2008-05-18</date>
-<releaseinfo>1.0.1</releaseinfo>
+<date>2010-02-09</date>
+<releaseinfo>4.4.00</releaseinfo>
 
 <copyright>
 <year>2003, 2008</year>
@@ -48,7 +48,7 @@ as Authors, publish date, the abstract, and Keywords -->
 <para>
 &krdc; is a client application that allows you to view or even control
 the desktop session on another machine that is running a compatible server.
-VNC and RDP is supported.
+<acronym>VNC</acronym> and <acronym>RDP</acronym> is supported.
 </para>
 </abstract>
 
@@ -79,7 +79,7 @@ server.
 </para>
 
 <para>
-You would typically use &krdc; with the &kde; VNC server (&krfb;), which is
+You would typically use &krdc; with the &kde; <acronym>VNC</acronym> server (&krfb;), which is
 also known as Krfb, since it closely matches the special features of &krdc;.
 </para>
 
@@ -172,7 +172,7 @@ servers. There are different ways to connect to those servers:
 <itemizedlist>
 <listitem>
 <para>Directly typing the server name (or IP address) into the
-<guilabel>Address:</guilabel> input.</para> 
+<guilabel>Connect to:</guilabel> input.</para> 
 </listitem>
 <listitem>
 <para>By using an invitation that you received. &krfb; uses
@@ -187,14 +187,14 @@ Let's look at each of these in turn.
 <sect2><title>Server name entry</title>
 <para>
 If you know the host name (or IP address) of the server you want to
-connect to, you can enter it directly into the <guilabel>Address:</guilabel> input.
+connect to, you can enter it directly into the <guilabel>Connect to:</guilabel> input.
 </para>
 
 <para>
 If you want to connect to a machine named megan, which is
 running a <acronym>VNC</acronym> server on screen 1 (5901), you can enter
-<userinput>megan:1</userinput> and choose VNC as the protocol in the 
-<guilabel>Address:</guilabel> input.
+<userinput>megan:1</userinput> and choose <guilabel>vnc</guilabel> as the protocol in the 
+drop down box.
 </para>
 
 <para>
@@ -213,9 +213,9 @@ running a <acronym>VNC</acronym> server on screen 1 (5901), you can enter
 
 <para>
 Similary, if you are using a <acronym>RDP</acronym> server on that
-machine, you can enter <userinput>megan</userinput>. Choose RDP as
-the protocol. RDP does not need the screen number to be specified.
-If the server runs the RDP server not on the default port, you may
+machine, you can enter <userinput>megan</userinput>. Choose <guilabel>rdp</guilabel> as
+the protocol. <acronym>RDP</acronym> does not need the screen number to be specified.
+If the server runs the <acronym>RDP</acronym> server not on the default port, you may
 specify it in the following way: <userinput>megan:3910</userinput>
 </para>
 
@@ -264,7 +264,7 @@ server, as shown below:
 </para>
 
 <para>
-There are three speed settings for the VNC protocol:
+There are three speed settings for the <acronym>VNC</acronym> protocol:
 </para>
 
 <itemizedlist>
@@ -280,7 +280,7 @@ Internet).</para></listitem>
 
 <para>
 If you always operate over the same link type, you can deselect the
-checkbox labelled <guilabel>Show this dialog again for this
+checkbox labeled <guilabel>Show this dialog again for this
 host</guilabel>, which means that you won't be asked about the
 connection type again for this host, providing you identify it in the
 same way. For example, if a host has two names, and deselect the
@@ -352,7 +352,7 @@ icons shown below.
 <screeninfo>&krdc; full screen mode selection</screeninfo>
 	<mediaobject>
 	  <imageobject>
-	    <imagedata fileref="fullscreen_button.png" format="PNG"/>
+	    <imagedata fileref="view-fullscreen.png" format="PNG"/>
 	  </imageobject>
 	  <textobject>
 	    <phrase>&krdc; full screen mode selection</phrase>
@@ -366,7 +366,7 @@ icons shown below.
 <screeninfo>&krdc; window mode selection</screeninfo>
 	<mediaobject>
 	  <imageobject>
-	    <imagedata fileref="windowmode_button.png" format="PNG"/>
+	    <imagedata fileref="view-restore.png" format="PNG"/>
 	  </imageobject>
 	  <textobject>
 	    <phrase>&krdc; window mode selection</phrase>
@@ -407,8 +407,9 @@ The transparency of the toolbar can be changed with scrollwheel.
 
 <para>
 &krdc; has the ability to manage bookmarks. If you need to connect often to
-the same remote desktop, you can add an entry for this conection to the
-bookmark list. You can do so with a click on <guibutton>Bookmarks -> Add Bookmark</guibutton>.
+the same remote desktop, you can add an entry for this connection to the
+bookmark list. You can do so with a click on <menuchoice><guimenu>Bookmarks</guimenu>
+<guimenuitem>Add Bookmark</guimenuitem></menuchoice>.
 </para>
 
 <para>
@@ -430,9 +431,9 @@ bookmark list. You can do so with a click on <guibutton>Bookmarks -> Add Bookmar
 
 <para>
 &krdc; saves last used remote desktop connections. You can access these special
-bookmarks at <guibutton>Bookmarks -> History</guibutton>. Of couse you can also
+bookmarks at <menuchoice><guimenu>Bookmarks</guimenu><guimenuitem>History</guimenuitem></menuchoice>. Of course you can also
 delete a bookmark of this list if you don't need it anymore in the list. Just click
-<guibutton>Delete</guibutton> which appears after a click with the right mouse button on
+<guibutton>Delete Bookmark</guibutton> which appears after a click with the right mouse button on
 the bookmark you would like to delete.
 </para>
 
@@ -442,20 +443,20 @@ the bookmark you would like to delete.
 
 <sect1 id="managing-configuration"><title>Managing &krdc; configuration</title>
 <para>
-Using <guibutton>Settings -> Configure KRDC...</guibutton>, you can open a dialog
-to modify the behaviour of &krdc;. Selecting that button brings up a
+Using <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure KRDC...</guimenuitem></menuchoice>, 
+you can open a dialog to modify the behavior of &krdc;. Selecting that button brings up a
 window as shown below:
 </para>
 
 <para>
 <screenshot>
-<screeninfo>&krdc; preferences - Host Profiles tab</screeninfo>
+<screeninfo>&krdc; preferences - General tab</screeninfo>
 	<mediaobject>
 	  <imageobject>
-	    <imagedata fileref="host_preferences.png" format="PNG"/>
+	    <imagedata fileref="general_preferences.png" format="PNG"/>
 	  </imageobject>
 	  <textobject>
-	    <phrase>&krdc; preferences - <guilabel>Host Profiles</guilabel> tab</phrase>
+	    <phrase>&krdc; preferences - <guilabel>General</guilabel> tab</phrase>
 	  </textobject>
 	</mediaobject>
 </screenshot>
@@ -516,10 +517,10 @@ application work. -->
 <qandaset id="faqlist">
 <qandaentry>
 <question>
-<para>Why does RDP support not work?</para>
+<para>Why does <acronym>RDP</acronym> support not work?</para>
 </question>
 <answer>
-<para>RDP support in &krdc; depends on rdesktop. Make sure that you have installed
+<para><acronym>RDP</acronym> support in &krdc; depends on rdesktop. Make sure that you have installed
 this runtime dependency.
 </para>
 </answer>
