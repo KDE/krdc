@@ -528,6 +528,7 @@ void MainWindow::switchFullscreen()
         MinimizePixel *minimizePixel = new MinimizePixel(m_fullscreenWindow);
         minimizePixel->winId(); // force it to be a native widget (prevents problem with QX11EmbedContainer)
         connect(minimizePixel, SIGNAL(rightClicked()), m_fullscreenWindow, SLOT(showMinimized()));
+        m_fullscreenWindow->installEventFilter(this);
 
         m_fullscreenWindow->show();
         hide();  // hide after showing the new window so it stays on the same screen
@@ -925,6 +926,16 @@ void MainWindow::showMenubar()
         menuBar()->show();
     else
         menuBar()->hide();
+}
+
+bool MainWindow::eventFilter(QObject *obj, QEvent *event)
+{
+    // check for close events from the fullscreen window.
+    if (obj == m_fullscreenWindow && event->type() == QEvent::Close) {
+        quit(true);
+    }
+    // allow other events to pass through.
+    return QObject::eventFilter(obj, event);
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
