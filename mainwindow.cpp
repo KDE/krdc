@@ -383,7 +383,11 @@ void MainWindow::openFromDockWidget(const QModelIndex &index)
 void MainWindow::resizeTabWidget(int w, int h)
 {
     kDebug(5010) << "tabwidget resize: w: " << w << ", h: " << h;
-    
+    if (m_fullscreenWindow) {
+        kDebug(5010) << "in fullscreen mode, refusing to resize";
+        return;
+    }
+
     RemoteView* view = m_currentRemoteView >= 0 ? m_remoteViewList.at(m_currentRemoteView) : 0;
     if (view && view->scaling()) return;
 
