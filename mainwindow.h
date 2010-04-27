@@ -71,6 +71,7 @@ public slots:
 
 protected:
     virtual void closeEvent(QCloseEvent *event);
+    bool eventFilter(QObject *obj, QEvent *event); // checks for close events on fs window
     virtual void saveProperties(KConfigGroup &group);
     void saveHostPrefs(RemoteView *view = 0);
 
