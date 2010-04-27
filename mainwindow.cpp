@@ -580,8 +580,14 @@ void MainWindow::disconnectHost()
         saveHostPrefs();
     }
 
+    // if closing the last connection, create new connection tab
     if (m_tabWidget->count() == 0) {
         newConnectionPage();
+    }
+
+    // if the newConnectionWidget is the only tab and we are fullscreen, switch to window mode
+    if (m_fullscreenWindow && m_tabWidget->count() == 1  && m_tabWidget->currentWidget() == m_newConnectionWidget) {
+        switchFullscreen();
     }
 }
 
@@ -603,8 +609,14 @@ void MainWindow::closeTab(QWidget *widget)
         widget->deleteLater();
     }
 
+    // if closing the last connection, create new connection tab
     if (m_tabWidget->count() == 0) {
         newConnectionPage();
+    }
+
+    // if the newConnectionWidget is the only tab and we are fullscreen, switch to window mode
+    if (m_fullscreenWindow && m_tabWidget->count() == 1  && m_tabWidget->currentWidget() == m_newConnectionWidget) {
+        switchFullscreen();
     }
 }
 
