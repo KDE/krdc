@@ -50,7 +50,7 @@ public:
     
     bool walletSupport();
     
-    /** Whether scaling is enabled when session is full screen */
+    /** Whether scaling is enabled when session is full screen. Note: only windowedScale seems to be used. */
     bool fullscreenScale();
     void setFullscreenScale(bool scale);
     
@@ -66,7 +66,14 @@ public:
     
     bool viewOnly();
     void setViewOnly(bool view);
-    
+
+    /** Saved height. Generally used for the viewsize. */
+    int height();
+    void setHeight(int height);
+    /** Saved width. Generally used for the viewsize. */
+    int width();
+    void setWidth(int width);
+
     /** 
      * Show the configuration dialog if needed, ie. if the user did 
      * check "show this dialog again for this host".

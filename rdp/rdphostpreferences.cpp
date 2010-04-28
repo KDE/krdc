@@ -174,28 +174,6 @@ void RdpHostPreferences::acceptConfig()
     setExtraOptions(rdpUi.kcfg_ExtraOptions->text());
 }
 
-void RdpHostPreferences::setHeight(int height)
-{
-    if (height >= 0)
-        m_configGroup.writeEntry("height", height);
-}
-
-int RdpHostPreferences::height() const
-{
-    return m_configGroup.readEntry("height", Settings::height());
-}
-
-void RdpHostPreferences::setWidth(int width)
-{
-    if (width >= 0)
-        m_configGroup.writeEntry("width", width);
-}
-
-int RdpHostPreferences::width() const
-{
-    return m_configGroup.readEntry("width", Settings::width());
-}
-
 void RdpHostPreferences::setColorDepth(int colorDepth)
 {
     if (colorDepth >= 0)

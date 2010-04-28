@@ -35,10 +35,6 @@ public:
     explicit RdpHostPreferences(KConfigGroup configGroup, QObject *parent = 0);
     ~RdpHostPreferences();
 
-    void setHeight(int height);
-    int height() const;
-    void setWidth(int width);
-    int width() const;
     void setColorDepth(int colorDepth);
     int colorDepth() const;
     void setKeyboardLayout(const QString &keyboardLayout);

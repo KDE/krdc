@@ -45,6 +45,11 @@ protected:
 
 private:
     Ui::VncPreferences vncUi;
+    void checkEnableCustomSize(int index);
+
+private slots:
+    void updateScalingWidthHeight(int index);
+    void updateScaling(bool enabled);
 };
 
 #endif

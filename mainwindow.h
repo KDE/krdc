@@ -128,9 +128,6 @@ private:
     QList<RemoteView *> m_remoteViewList;
     QMap<int, RemoteViewFactory *> m_remoteViewFactories;
 
-    int m_topBottomBorder; // tabwidget borders
-    int m_leftRightBorder;
-
     int m_currentRemoteView;
     bool m_switchFullscreenWhenConnected;
 

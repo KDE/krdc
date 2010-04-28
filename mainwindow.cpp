@@ -79,8 +79,6 @@ MainWindow::MainWindow(QWidget *parent)
         m_fullscreenWindow(0),
         m_addressNavigator(0),
         m_toolBar(0),
-        m_topBottomBorder(0),
-        m_leftRightBorder(0),
         m_currentRemoteView(-1),
         m_systemTrayIcon(0),
         m_dockWidgetTableView(0),
@@ -340,13 +338,6 @@ void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConn
 
     m_remoteViewList.append(view);
 
-//     view->resize(0, 0);
-
-    if (m_remoteViewList.size() == 1) {
-        kDebug(5010) << "First connection, restoring window size.";
-        restoreWindowSize(view->hostPreferences()->configGroup());
-    }
-
     QScrollArea *scrollArea = createScrollArea(m_tabWidget, view);
 
     const int indexOfNewConnectionWidget = m_tabWidget->indexOf(m_newConnectionWidget);
@@ -379,39 +370,34 @@ void MainWindow::openFromRemoteDesktopsModel(const QModelIndex &index)
 
 void MainWindow::resizeTabWidget(int w, int h)
 {
-    kDebug(5010) << "tabwidget resize: w: " << w << ", h: " << h;
-
-    RemoteView* view = m_currentRemoteView >= 0 ? m_remoteViewList.at(m_currentRemoteView) : 0;
-    if (view && view->scaling()) return;
-
-    if (m_topBottomBorder == 0) { // the values are not cached yet
-        QScrollArea *tmp = qobject_cast<QScrollArea *>(m_tabWidget->currentWidget());
-
-        m_leftRightBorder = m_tabWidget->width() - m_tabWidget->currentWidget()->width() + (2 * tmp->frameWidth());
-        m_topBottomBorder = m_tabWidget->height() - m_tabWidget->currentWidget()->height() + (2 * tmp->frameWidth());
-
-        kDebug(5010) << "tabwidget border: w: " << m_leftRightBorder << ", h: " << m_topBottomBorder;
+    kDebug(5010) << "tabwidget resize, view: w: " << w << ", h: " << h;
+    if (m_fullscreenWindow) {
+        kDebug(5010) << "in fullscreen mode, refusing to resize";
+        return;
     }
 
-    const int newTabWidth = w + m_leftRightBorder;
-    const int newTabHeight = h + m_topBottomBorder;
+    const QSize viewSize = QSize(w,h);
+    const QSize screenSize = QApplication::desktop()->size();
 
-    const QSize newWindowSize = size() - m_tabWidget->size() + QSize(newTabWidth, newTabHeight);
+    if (screenSize == viewSize) {
+        kDebug(5010) << "screen size equal to target view size -> switch to fullscreen mode";
+        switchFullscreen();
+        return;
+    }
 
-    const QSize desktopSize = QSize(QApplication::desktop()->availableGeometry().width(),
-                                    QApplication::desktop()->availableGeometry().height());
+    QWidget* currentWidget = m_tabWidget->currentWidget();
+    const QSize newWindowSize = size() - currentWidget->frameSize() + viewSize;
+    kDebug(5010) << "calculated new window Size: " << newWindowSize;
 
-    if ((newWindowSize.height() >= desktopSize.height()) || (newWindowSize.width() >= desktopSize.width())) {
-        kDebug(5010) << "remote desktop needs more place than available -> show window maximized";
+    const QSize desktopSize = QApplication::desktop()->availableGeometry().size();
+
+    if ((newWindowSize.width() >= desktopSize.width()) || (newWindowSize.height() >= desktopSize.height())) {
+        kDebug(5010) << "remote desktop needs more space than available -> show window maximized";
         setWindowState(windowState() | Qt::WindowMaximized);
         return;
     }
 
-    //WORKAROUND: QTabWidget resize problem. Let's see if there is a clean solution for this issue.
-    m_tabWidget->setMinimumSize(newTabWidth, newTabHeight);
-    m_tabWidget->adjustSize();
-    QCoreApplication::processEvents();
-    m_tabWidget->setMinimumSize(500, 400);
+    resize(newWindowSize);
 }
 
 void MainWindow::statusChanged(RemoteView::RemoteStatus status)
@@ -562,6 +548,7 @@ void MainWindow::disconnectHost()
     RemoteView *view = qobject_cast<RemoteView*>(QObject::sender());
 
     if (view) {
+        saveHostPrefs(view);
         QWidget *tmp = (QWidget*) view->parent()->parent();
         m_remoteViewList.removeOne(view);
         m_tabWidget->removePage(tmp);
@@ -570,14 +557,12 @@ void MainWindow::disconnectHost()
 #ifdef TELEPATHY_SUPPORT
         m_tubesManager->closeTube(view->url());
 #endif
-        saveHostPrefs(view);
     } else {
+        saveHostPrefs();
         QWidget *tmp = m_tabWidget->currentWidget();
         m_remoteViewList.removeAt(m_currentRemoteView);
         m_tabWidget->removeTab(m_tabWidget->currentIndex());
         tmp->deleteLater();
-
-        saveHostPrefs();
     }
 
     // if closing the last connection, create new connection tab
@@ -1025,8 +1010,13 @@ void MainWindow::saveHostPrefs(RemoteView* view)
     if (!view)
         view = m_currentRemoteView >= 0 ? m_remoteViewList.at(m_currentRemoteView) : 0;
 
-    if (view)
-        saveWindowSize(view->hostPreferences()->configGroup());
+    // should saving this be a user option?
+    if (view && view->scaling()) {
+        QSize viewSize = m_tabWidget->currentWidget()->size();
+        kDebug(5010) << "saving window size:" << viewSize;
+        view->hostPreferences()->setWidth(viewSize.width());
+        view->hostPreferences()->setHeight(viewSize.height());
+    }
 
     Settings::self()->config()->sync();
 }

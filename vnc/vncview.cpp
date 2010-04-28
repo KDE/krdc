@@ -336,14 +336,15 @@ void VncView::updateImage(int x, int y, int w, int h)
         setMouseTracking(true); // get mouse events even when there is no mousebutton pressed
         setFocusPolicy(Qt::WheelFocus);
         setStatus(Connected);
-//         emit framebufferSizeChanged(m_frame.width(), m_frame.height());
         emit connected();
         
         if (m_scale) {
-            if (parentWidget())
-                scaleResize(parentWidget()->width(), parentWidget()->height());
-        } 
-        
+            kDebug(5011) << "Setting initial size w:" <<m_hostPreferences->width() << " h:" << m_hostPreferences->height();
+            emit framebufferSizeChanged(m_hostPreferences->width(), m_hostPreferences->height());
+            scaleResize(m_hostPreferences->width(), m_hostPreferences->height());
+            kDebug() << "m_frame.size():" << m_frame.size() << "size()" << size();
+        }
+
         m_initDone = true;
 
 #ifndef QTONLY
@@ -351,21 +352,21 @@ void VncView::updateImage(int x, int y, int w, int h)
             saveWalletPassword(vncThread.password());
         }
 #endif
-    }
-
-    if ((y == 0 && x == 0) && (m_frame.size() != size())) {
-        kDebug(5011) << "Updating framebuffer size";
-        if (m_scale) {
-            setMaximumSize(QSize(QWIDGETSIZE_MAX, QWIDGETSIZE_MAX));
-            if (parentWidget())
-                scaleResize(parentWidget()->width(), parentWidget()->height());
-        } else {
-            kDebug(5011) << "Resizing: " << m_frame.width() << m_frame.height();
-            resize(m_frame.width(), m_frame.height());
-            setMaximumSize(m_frame.width(), m_frame.height()); //This is a hack to force Qt to center the view in the scroll area
-            setMinimumSize(m_frame.width(), m_frame.height());
+    } else {
+        if ((y == 0 && x == 0) && (m_frame.size() != size())) {
+            kDebug(5011) << "Updating framebuffer size";
+            if (m_scale) {
+                setMaximumSize(QSize(QWIDGETSIZE_MAX, QWIDGETSIZE_MAX));
+                if (parentWidget())
+                    scaleResize(parentWidget()->width(), parentWidget()->height());
+            } else {
+                kDebug(5011) << "Resizing: " << m_frame.width() << m_frame.height();
+                resize(m_frame.width(), m_frame.height());
+                setMaximumSize(m_frame.width(), m_frame.height()); //This is a hack to force Qt to center the view in the scroll area
+                setMinimumSize(m_frame.width(), m_frame.height());
+                emit framebufferSizeChanged(m_frame.width(), m_frame.height());
+            }
         }
-        emit framebufferSizeChanged(m_frame.width(), m_frame.height());
     }
 
     m_repaint = true;

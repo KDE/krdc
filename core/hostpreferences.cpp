@@ -84,6 +84,28 @@ bool HostPreferences::walletSupport()
     return m_configGroup.readEntry("walletSupport", true);
 }
 
+void HostPreferences::setHeight(int height)
+{
+    if (height >= 0)
+        m_configGroup.writeEntry("height", height);
+}
+
+int HostPreferences::height()
+{
+    return m_configGroup.readEntry("height", Settings::height());
+}
+
+void HostPreferences::setWidth(int width)
+{
+    if (width >= 0)
+        m_configGroup.writeEntry("width", width);
+}
+
+int HostPreferences::width()
+{
+    return m_configGroup.readEntry("width", Settings::width());
+}
+
 bool HostPreferences::fullscreenScale()
 {
     return m_configGroup.readEntry("fullscreenScale", false);
