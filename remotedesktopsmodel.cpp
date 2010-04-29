@@ -55,7 +55,7 @@ RemoteDesktopsModel::~RemoteDesktopsModel()
 
 int RemoteDesktopsModel::columnCount(const QModelIndex &) const
 {
-    return 4;  // same as count of RemoteDesktopsModel::DisplayItems enum
+    return 6;  // same as count of RemoteDesktopsModel::DisplayItems enum
 }
 
 int RemoteDesktopsModel::rowCount(const QModelIndex &) const
@@ -108,6 +108,11 @@ QVariant RemoteDesktopsModel::data(const QModelIndex &index, int role) const
             return item.title;
         case RemoteDesktopsModel::LastConnected:
             return QVariant(item.lastConnected.dateTime());
+        case RemoteDesktopsModel::VisitCount:
+            return item.visits;
+        case RemoteDesktopsModel::Created:
+            if (item.created.isNull()) return QVariant();
+            return KGlobal::locale()->formatDateTime(item.created.toLocalZone(), KLocale::FancyShortDate);
         case RemoteDesktopsModel::Source:
             switch (item.source) {
             case RemoteDesktop::Bookmarks:
@@ -139,18 +144,25 @@ QVariant RemoteDesktopsModel::data(const QModelIndex &index, int role) const
         case RemoteDesktopsModel::LastConnected:
             if (!item.lastConnected.isNull()) {
                 return KGlobal::locale()->formatDateTime(item.lastConnected.toLocalZone(), KLocale::FancyLongDate);
-            }  // else fall through to default
+            }
+            break; // else show default tooltip
+        case RemoteDesktopsModel::Created:
+            if (!item.created.isNull()) {
+                return KGlobal::locale()->formatDateTime(item.created.toLocalZone(), KLocale::FancyLongDate);
+            }
+            break; // else show default tooltip
         default:
-            return item.url;  //use the url for the tooltip
+            break;
         }
-
+        return item.url;  //use the url for the tooltip
+        
     case 10001: //url for dockwidget
         return item.url;
 
     case 10002: //filter
         return item.url + item.title; // return both uservisible and data
 
-    case 10003: //url for dockwidget
+    case 10003: //title for dockwidget
         return item.title;
 
     default:
@@ -166,11 +178,15 @@ QVariant RemoteDesktopsModel::headerData(int section, Qt::Orientation orientatio
         case RemoteDesktopsModel::Favorite:
             return QVariant(); // the favorite column is to small for a header
         case RemoteDesktopsModel::Title:
-            return i18nc("Header of the connections list", "Remote Desktop");
+            return i18nc("Header of the connections list, title/url for remote connection", "Remote Desktop");
         case RemoteDesktopsModel::LastConnected:
-            return i18nc("Header of the connections list", "Last Connected");
+            return i18nc("Header of the connections list, the last time this connection was initiated", "Last Connected");
+        case RemoteDesktopsModel::VisitCount:
+            return i18nc("Header of the connections list, the number of times this connection has been visited", "Visits");
+        case RemoteDesktopsModel::Created:
+            return i18nc("Header of the connections list, the time when this entry was created", "Created");
         case RemoteDesktopsModel::Source:
-            return i18nc("Header of the connections list", "Source");
+            return i18nc("Header of the connections list, where this entry comes from", "Source");
         }
     }
     return QVariant();
@@ -196,6 +212,7 @@ void RemoteDesktopsModel::bookmarksChanged()
     reset();
 }
 
+// Danger Will Roobinson, confusing code ahead!
 void RemoteDesktopsModel::buildModelFromBookmarkGroup(const KBookmarkGroup &group)
 {
     KBookmark bm = group.first();
@@ -208,31 +225,46 @@ void RemoteDesktopsModel::buildModelFromBookmarkGroup(const KBookmarkGroup &grou
             RemoteDesktop item;
             item.title = bm.text();
             item.url = bm.url().url();
-            int index = remoteDesktops.indexOf(item);
-            bool newItem = index < 0;
+            int index = remoteDesktops.indexOf(item); //search for this url to see if we need to update it
+            bool newItem = index < 0; // do we need to create a new item?
 
             // we want to merge all copies of a url into one link, so if the item exists, update it
             if (group.metaDataItem("krdc-history") == "historyfolder") {
-                KDateTime connected = KDateTime();
-                bool ok = false;
-                connected.setTime_t(bm.metaDataItem("time_visited").toLongLong(&ok));
-                if (ok) {
-                    (newItem ? item : remoteDesktops[index]).lastConnected = connected;
-                }
-
+                // set source and favorite (will override later if needed)
                 item.source = RemoteDesktop::History;
                 item.favorite = false;
+
+                // since we are in the history folder collect statitics and add them
+                KDateTime connected = KDateTime();
+                KDateTime created = KDateTime();
+                bool ok = false;
+                // first the created datetime
+                created.setTime_t(bm.metaDataItem("time_added").toLongLong(&ok));
+                if (ok) (newItem ? item : remoteDesktops[index]).created = created;
+                // then the last visited datetime
+                ok = false;
+                connected.setTime_t(bm.metaDataItem("time_visited").toLongLong(&ok));
+                if (ok) (newItem ? item : remoteDesktops[index]).lastConnected = connected;
+                // finally the visited count
+                ok = false;
+                int visits = bm.metaDataItem("visit_count").toInt(&ok);
+                if (ok) (newItem ? item : remoteDesktops[index]).visits = visits;
             } else {
                 if (newItem) {
+                    // if this is a new item, just add the rest of the required data
                     item.lastConnected = KDateTime();
+                    item.created = KDateTime();
+                    item.visits = 0;
                     item.favorite = true;
                     item.source = RemoteDesktop::Bookmarks;
                 } else {
+                    // otherwise override these fields with the info from the bookmark
                     remoteDesktops[index].title = bm.text();
                     remoteDesktops[index].favorite = true;
-                    remoteDesktops[index].source = RemoteDesktop::Bookmarks; // Bookmarks trump other types
+                    remoteDesktops[index].source = RemoteDesktop::Bookmarks;
                 }
             }
+            // if we have a new item, add it
             if (newItem)
                 remoteDesktops.append(item);
         }

@@ -1216,9 +1216,11 @@ void MainWindow::createDockWidget()
         m_dockWidgetTableView->fontMetrics().height() + 2);
     m_dockWidgetTableView->horizontalHeader()->hide();
     m_dockWidgetTableView->horizontalHeader()->setStretchLastSection(true);
-    m_dockWidgetTableView->hideColumn(RemoteDesktopsModel::Favorite);
-    m_dockWidgetTableView->hideColumn(RemoteDesktopsModel::LastConnected);
-    m_dockWidgetTableView->hideColumn(RemoteDesktopsModel::Source);
+    // hide all columns, then show the one we want
+    for (int i=0; i<m_remoteDesktopsModelProxy->columnCount(); i++) {
+        m_dockWidgetTableView->hideColumn(i);
+    }
+    m_dockWidgetTableView->showColumn(RemoteDesktopsModel::Title);
     m_dockWidgetTableView->sortByColumn(RemoteDesktopsModel::Title, Qt::AscendingOrder);
 
     connect(m_dockWidgetTableView, SIGNAL(doubleClicked(const QModelIndex &)),

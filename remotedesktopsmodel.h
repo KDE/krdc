@@ -42,6 +42,8 @@ public:
     QString title;
     QString url;
     KDateTime lastConnected;
+    KDateTime created;
+    int visits;
     RemoteDesktop::Source source;
     bool favorite;
     bool operator<(const RemoteDesktop &rd) const {
@@ -62,7 +64,7 @@ public:
     RemoteDesktopsModel(QObject *parent);
     ~RemoteDesktopsModel();
 
-    enum DisplayItems { Favorite, Title, LastConnected, Source };
+    enum DisplayItems { Favorite, Title, LastConnected, VisitCount, Created, Source };
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     int columnCount(const QModelIndex &parent = QModelIndex()) const;
     Qt::ItemFlags flags(const QModelIndex &index) const;
