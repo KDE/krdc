@@ -473,7 +473,7 @@ void MainWindow::switchFullscreen()
 
         show();
         restoreGeometry(m_mainWindowGeometry);
-        m_systemTrayIcon->setAssociatedWidget(this);
+        if (m_systemTrayIcon) m_systemTrayIcon->setAssociatedWidget(this);
 
         foreach(RemoteView *currentView, m_remoteViewList) {
             currentView->enableScaling(currentView->hostPreferences()->windowedScale());
@@ -520,7 +520,7 @@ void MainWindow::switchFullscreen()
         m_fullscreenWindow->show();
         hide();  // hide after showing the new window so it stays on the same screen
 
-        m_systemTrayIcon->setAssociatedWidget(m_fullscreenWindow);
+        if (m_systemTrayIcon) m_systemTrayIcon->setAssociatedWidget(m_fullscreenWindow);
         showRemoteViewToolbar();
     }
 }
