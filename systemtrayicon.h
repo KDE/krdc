@@ -39,6 +39,9 @@ public:
     SystemTrayIcon(MainWindow *parent);
     ~SystemTrayIcon();
 
+public slots:
+    void checkActivatedWindow(bool active);
+
 private:
     MainWindow *m_mainWindow;
 };

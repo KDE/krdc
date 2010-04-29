@@ -27,7 +27,6 @@
 
 #include <KActionCollection>
 #include <KDebug>
-#include <KIcon>
 #include <KLocale>
 #include <KMenu>
 
@@ -38,11 +37,23 @@ SystemTrayIcon::SystemTrayIcon(MainWindow *parent)
     setIconByName("krdc");
     setStatus(KStatusNotifierItem::Active);
     setCategory(KStatusNotifierItem::ApplicationStatus);
+
+    setToolTipIconByName("krdc");
     setToolTipTitle(i18n("KDE Remote Desktop Client"));
 
     contextMenu()->addSeparator();
     contextMenu()->addAction(parent->actionCollection()->action("bookmark"));
     contextMenu()->addSeparator();
+
+    connect(this, SIGNAL(activateRequested(bool,QPoint)), this, SLOT(checkActivatedWindow(bool)));
+}
+
+void SystemTrayIcon::checkActivatedWindow(bool active)
+{
+    // make sure the fullscreen window stays fullscreen by restoring the FullScreen state upon restore.
+    if(active && associatedWidget() != m_mainWindow) {
+        associatedWidget()->setWindowState(Qt::WindowFullScreen);
+    }
 }
 
 SystemTrayIcon::~SystemTrayIcon()
