@@ -120,6 +120,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     if (Settings::systemTrayIcon()) {
         m_systemTrayIcon = new SystemTrayIcon(this);
+        if(m_fullscreenWindow) m_systemTrayIcon->setAssociatedWidget(m_fullscreenWindow);
     }
 
     connect(m_tabWidget, SIGNAL(currentChanged(int)), SLOT(tabChanged(int)));
@@ -472,6 +473,7 @@ void MainWindow::switchFullscreen()
 
         show();
         restoreGeometry(m_mainWindowGeometry);
+        m_systemTrayIcon->setAssociatedWidget(this);
 
         foreach(RemoteView *currentView, m_remoteViewList) {
             currentView->enableScaling(currentView->hostPreferences()->windowedScale());
@@ -518,6 +520,7 @@ void MainWindow::switchFullscreen()
         m_fullscreenWindow->show();
         hide();  // hide after showing the new window so it stays on the same screen
 
+        m_systemTrayIcon->setAssociatedWidget(m_fullscreenWindow);
         showRemoteViewToolbar();
     }
 }
@@ -903,6 +906,7 @@ void MainWindow::updateConfiguration()
 
     if (Settings::systemTrayIcon() && !m_systemTrayIcon) {
         m_systemTrayIcon = new SystemTrayIcon(this);
+        if(m_fullscreenWindow) m_systemTrayIcon->setAssociatedWidget(m_fullscreenWindow);
     } else if (m_systemTrayIcon) {
         delete m_systemTrayIcon;
         m_systemTrayIcon = 0;
