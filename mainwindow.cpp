@@ -371,14 +371,16 @@ void MainWindow::openFromRemoteDesktopsModel(const QModelIndex &index)
 
 void MainWindow::resizeTabWidget(int w, int h)
 {
-    kDebug(5010) << "tabwidget resize, view: w: " << w << ", h: " << h;
+    kDebug(5010) << "tabwidget resize, view size: w: " << w << ", h: " << h;
     if (m_fullscreenWindow) {
         kDebug(5010) << "in fullscreen mode, refusing to resize";
         return;
     }
 
     const QSize viewSize = QSize(w,h);
-    const QSize screenSize = QApplication::desktop()->size();
+    QDesktopWidget *desktop = QApplication::desktop();
+    int currentScreen = desktop->screenNumber(this);
+    const QSize screenSize = desktop->screenGeometry(currentScreen).size();
 
     if (screenSize == viewSize) {
         kDebug(5010) << "screen size equal to target view size -> switch to fullscreen mode";
@@ -388,9 +390,9 @@ void MainWindow::resizeTabWidget(int w, int h)
 
     QWidget* currentWidget = m_tabWidget->currentWidget();
     const QSize newWindowSize = size() - currentWidget->frameSize() + viewSize;
-    kDebug(5010) << "calculated new window Size: " << newWindowSize;
 
-    const QSize desktopSize = QApplication::desktop()->availableGeometry().size();
+    const QSize desktopSize = desktop->availableGeometry().size();
+    kDebug(5010) << "new window size: " << newWindowSize << " available space:" << desktopSize;
 
     if ((newWindowSize.width() >= desktopSize.width()) || (newWindowSize.height() >= desktopSize.height())) {
         kDebug(5010) << "remote desktop needs more space than available -> show window maximized";
