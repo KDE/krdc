@@ -66,7 +66,6 @@
 #include <QFontMetrics>
 #include <QGroupBox>
 #include <QHeaderView>
-#include <QInputDialog>
 #include <QLabel>
 #include <QLayout>
 #include <QScrollArea>
