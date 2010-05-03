@@ -45,6 +45,7 @@
 #include <KComboBox>
 #include <KEditToolBar>
 #include <KIcon>
+#include <KInputDialog>
 #include <KLineEdit>
 #include <KLocale>
 #include <KMenu>
@@ -684,8 +685,9 @@ void MainWindow::showConnectionContextMenu(const QPoint &pos)
         openFromRemoteDesktopsModel(index);
     } else if (selectedAction == renameAction) {
         //TODO: use inline editor if possible
-        const QString newTitle = QInputDialog::getText(this, i18n("Rename %1", title), i18n("Rename %1 to", title));
-        if (!newTitle.isEmpty()) {
+        bool ok = false;
+        const QString newTitle = KInputDialog::getText(i18n("Rename %1", title), i18n("Rename %1 to", title), "", &ok, this);
+        if (ok && !newTitle.isEmpty()) {
             BookmarkManager::updateTitle(m_bookmarkManager->getManager(), url, newTitle);
         }
     } else if (selectedAction == settingsAction) {

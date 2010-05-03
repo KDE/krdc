@@ -112,7 +112,7 @@ QVariant RemoteDesktopsModel::data(const QModelIndex &index, int role) const
             return item.visits;
         case RemoteDesktopsModel::Created:
             if (item.created.isNull()) return QVariant();
-            return KGlobal::locale()->formatDateTime(item.created.toLocalZone(), KLocale::FancyShortDate);
+            return KGlobal::locale()->formatDateTime(item.created.toLocalZone(), KLocale::ShortDate);
         case RemoteDesktopsModel::Source:
             switch (item.source) {
             case RemoteDesktop::Bookmarks:
@@ -290,7 +290,9 @@ void RemoteDesktopsModel::servicesChanged()
         if (!remoteDesktops.contains(item)) {
             item.title = service->serviceName();
             item.source = RemoteDesktop::Zeroconf;
+            item.created = KDateTime::currentLocalDateTime();
             item.favorite = false;
+            item.visits = 0;
             remoteDesktops.append(item);
         }
     }
