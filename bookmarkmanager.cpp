@@ -174,8 +174,7 @@ const QStringList BookmarkManager::findBookmarkAddresses(const KBookmarkGroup &g
 
 void BookmarkManager::removeByUrl(KBookmarkManager *manager, const QString &url, bool ignoreHistory, const QString updateTitle)
 {
-    const QStringList bookmarkAddresses = findBookmarkAddresses(manager->root(), url);
-    foreach(QString address, bookmarkAddresses) {
+    foreach(QString address, findBookmarkAddresses(manager->root(), url)) {
         KBookmark bm = manager->findByAddress(address);
         if (ignoreHistory && bm.parentGroup().metaDataItem("krdc-history") == "historyfolder") {
             if (!updateTitle.isEmpty()) {
@@ -195,8 +194,7 @@ void BookmarkManager::removeByUrl(KBookmarkManager *manager, const QString &url,
 
 void BookmarkManager::updateTitle(KBookmarkManager *manager, const QString &url, const QString &title)
 {
-    const QStringList bookmarkAddresses = findBookmarkAddresses(manager->root(), url);
-    foreach(QString address, bookmarkAddresses) {
+    foreach(QString address, findBookmarkAddresses(manager->root(), url)) {
         KBookmark bm = manager->findByAddress(address);
         bm.setFullText(title);
         kDebug(5010) << "Update" << bm.fullText();
