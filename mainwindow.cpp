@@ -299,7 +299,7 @@ void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConn
     }
 
     if (m_addressNavigator)
-        m_addressNavigator->setUrl(KUrl(url.scheme().toLower() + "://"));
+        m_addressNavigator->setLocationUrl(KUrl(url.scheme().toLower() + "://"));
 
     RemoteView *view = 0;
     KConfigGroup configGroup = Settings::self()->config()->group("hostpreferences").group(url.prettyUrl(KUrl::RemoveTrailingSlash));
@@ -1080,7 +1080,7 @@ QWidget* MainWindow::newConnectionWidget()
         m_addressNavigator->setUrlEditable(Settings::normalUrlInputLine());
         connect(m_addressNavigator, SIGNAL(returnPressed()), SLOT(newConnection()));
         m_addressNavigator->setFocus();
-        m_addressNavigator->setToolTip(i18n("Select connection method and type an IP or DNS Name here."));
+        m_addressNavigator->setToolTip(i18n("Type an IP or DNS Name here. Clear the line to get a list of connection methods."));
 
         QLabel *addressLabel = new QLabel(i18n("Connect to:"), m_newConnectionWidget);
 
