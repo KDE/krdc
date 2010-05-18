@@ -379,28 +379,33 @@ void MainWindow::resizeTabWidget(int w, int h)
 
     const QSize viewSize = QSize(w,h);
     QDesktopWidget *desktop = QApplication::desktop();
-    int currentScreen = desktop->screenNumber(this);
-    const QSize screenSize = desktop->screenGeometry(currentScreen).size();
 
-    if (screenSize == viewSize) {
-        kDebug(5010) << "screen size equal to target view size -> switch to fullscreen mode";
-        switchFullscreen();
-        return;
+    if (Settings::fullscreenOnConnect()) {
+        int currentScreen = desktop->screenNumber(this);
+        const QSize screenSize = desktop->screenGeometry(currentScreen).size();
+
+        if (screenSize == viewSize) {
+            kDebug(5010) << "screen size equal to target view size -> switch to fullscreen mode";
+            switchFullscreen();
+            return;
+        }
     }
 
-    QWidget* currentWidget = m_tabWidget->currentWidget();
-    const QSize newWindowSize = size() - currentWidget->frameSize() + viewSize;
+    if (Settings::resizeOnConnect()) {
+        QWidget* currentWidget = m_tabWidget->currentWidget();
+        const QSize newWindowSize = size() - currentWidget->frameSize() + viewSize;
 
-    const QSize desktopSize = desktop->availableGeometry().size();
-    kDebug(5010) << "new window size: " << newWindowSize << " available space:" << desktopSize;
+        const QSize desktopSize = desktop->availableGeometry().size();
+        kDebug(5010) << "new window size: " << newWindowSize << " available space:" << desktopSize;
 
-    if ((newWindowSize.width() >= desktopSize.width()) || (newWindowSize.height() >= desktopSize.height())) {
-        kDebug(5010) << "remote desktop needs more space than available -> show window maximized";
-        setWindowState(windowState() | Qt::WindowMaximized);
-        return;
+        if ((newWindowSize.width() >= desktopSize.width()) || (newWindowSize.height() >= desktopSize.height())) {
+            kDebug(5010) << "remote desktop needs more space than available -> show window maximized";
+            setWindowState(windowState() | Qt::WindowMaximized);
+            return;
+        }
+
+        resize(newWindowSize);
     }
-
-    resize(newWindowSize);
 }
 
 void MainWindow::statusChanged(RemoteView::RemoteStatus status)

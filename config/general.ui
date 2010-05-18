@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>344</width>
-    <height>408</height>
+    <width>363</width>
+    <height>496</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -29,13 +29,6 @@
     <widget class="QCheckBox" name="kcfg_NormalUrlInputLine">
      <property name="text">
       <string>Use normal inputline for address input</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QCheckBox" name="kcfg_ShowPreferencesForNewConnections">
-     <property name="text">
-      <string>Show the preferences dialog for new connections</string>
      </property>
     </widget>
    </item>
@@ -100,6 +93,42 @@
       </widget>
      </item>
     </layout>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="connectionGroupBox">
+     <property name="title">
+      <string>When Connecting</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <item>
+       <widget class="QCheckBox" name="kcfg_ShowPreferencesForNewConnections">
+        <property name="text">
+         <string>Show the preferences dialog for new connections</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="kcfg_ResizeOnConnect">
+        <property name="toolTip">
+         <string>This option will resize the window to fit the connection size.  If it is too big, it will maximze the window.</string>
+        </property>
+        <property name="text">
+         <string>Resize to fit</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="kcfg_FullscreenOnConnect">
+        <property name="toolTip">
+         <string>This option switches to fullscreen only if the connection resolution is the same as the current screen resolution</string>
+        </property>
+        <property name="text">
+         <string>Switch to Fullscreen if appropriate</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
    </item>
    <item>
     <widget class="QGroupBox" name="tabGroupBox">
