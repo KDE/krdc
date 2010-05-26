@@ -170,11 +170,11 @@ VncClientThread::VncClientThread(QObject *parent)
 
 VncClientThread::~VncClientThread()
 {
-    stop();
-
-    const bool quitSuccess = wait(500);
-
-    kDebug(5011) << "Quit VNC thread success:" << quitSuccess;
+    if(isRunning()) {
+        stop();
+        const bool quitSuccess = wait(500);
+        kDebug(5011) << "Attempting to stop in deconstructor, will crash if this fails:" << quitSuccess;
+    }
 
     delete [] frameBuffer;
 }
