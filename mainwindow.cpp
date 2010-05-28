@@ -291,15 +291,16 @@ void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConn
     const KUrl url = newUrl.isEmpty() ? m_addressNavigator->uncommittedUrl() : newUrl;
 
     if (!url.isValid() || (url.host().isEmpty() && url.port() < 0)
-            || !url.path().isEmpty()) {
+        || (!url.path().isEmpty() && url.path() != QLatin1String("/"))) {
         KMessageBox::error(this,
                            i18n("The entered address does not have the required form."),
                            i18n("Malformed URL"));
         return;
     }
 
-    if (m_addressNavigator)
-        m_addressNavigator->setLocationUrl(KUrl(url.scheme().toLower() + "://"));
+    if (m_addressNavigator) {
+        m_addressNavigator->setLocationUrl(url);
+    }
 
     RemoteView *view = 0;
     KConfigGroup configGroup = Settings::self()->config()->group("hostpreferences").group(url.prettyUrl(KUrl::RemoveTrailingSlash));
@@ -1073,7 +1074,10 @@ QWidget* MainWindow::newConnectionWidget()
     {
         QHBoxLayout *connectLayout = new QHBoxLayout;
         const QString initialProtocol(!m_remoteViewFactories.isEmpty() ? (*m_remoteViewFactories.begin())->scheme() : QString());
-        m_addressNavigator = new KUrlNavigator(0, KUrl(initialProtocol + "://"), m_newConnectionWidget);
+        KUrl url;
+        url.setProtocol(initialProtocol);
+        url.setPath(QLatin1String("//"));
+        m_addressNavigator = new KUrlNavigator(0, url, m_newConnectionWidget);
 
         QStringList schemes;
         foreach(RemoteViewFactory *factory, m_remoteViewFactories) {
