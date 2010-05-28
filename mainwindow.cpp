@@ -569,24 +569,22 @@ void MainWindow::disconnectHost()
 
     RemoteView *view = qobject_cast<RemoteView*>(QObject::sender());
 
+    QWidget *widgetToDelete;
     if (view) {
-        QWidget *tmp = (QWidget*) view->parent()->parent();
+        widgetToDelete = (QWidget*) view->parent()->parent();
         m_remoteViewList.removeOne(view);
-        m_tabWidget->removePage(tmp);
-        tmp->deleteLater();
+    } else {
+        widgetToDelete = m_tabWidget->currentWidget();
+        view = m_remoteViewList.takeAt(m_currentRemoteView);
+    }
 
+    saveHostPrefs(view);
+    view->startQuitting();  // some deconstructors can't properly quit, so quit early
+    m_tabWidget->removePage(widgetToDelete);
+    widgetToDelete->deleteLater();
 #ifdef TELEPATHY_SUPPORT
         m_tubesManager->closeTube(view->url());
 #endif
-        saveHostPrefs(view);
-    } else {
-        QWidget *tmp = m_tabWidget->currentWidget();
-        m_remoteViewList.removeAt(m_currentRemoteView);
-        m_tabWidget->removeTab(m_tabWidget->currentIndex());
-        tmp->deleteLater();
-
-        saveHostPrefs();
-    }
 
     // if closing the last connection, create new connection tab
     if (m_tabWidget->count() == 0) {
@@ -606,16 +604,16 @@ void MainWindow::closeTab(QWidget *widget)
 
     kDebug(5010) << index;
 
-    m_tabWidget->removeTab(index);
-
     if (!isNewConnectionPage) {
+        RemoteView *view = m_remoteViewList.takeAt(m_currentRemoteView);
+        view->startQuitting();
 #ifdef TELEPATHY_SUPPORT
-        m_tubesManager->closeTube(m_remoteViewList.value(
-                    index)->url());
+        m_tubesManager->closeTube(view->url());
 #endif
-        m_remoteViewList.removeAt(index);
         widget->deleteLater();
     }
+
+    m_tabWidget->removeTab(index);
 
     // if closing the last connection, create new connection tab
     if (m_tabWidget->count() == 0) {
