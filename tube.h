@@ -33,14 +33,14 @@
 namespace Tp
 {
     class PendingOperation;
-};
+}
 
 struct StreamTubeAddress {
     QString address;
     uint port;
 };
 
-Q_DECLARE_METATYPE(StreamTubeAddress);
+Q_DECLARE_METATYPE(StreamTubeAddress)
 
 class Tube : public QObject
 {
