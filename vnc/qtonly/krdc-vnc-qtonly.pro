@@ -2,7 +2,7 @@ TEMPLATE = app
 TARGET = 
 DEPENDPATH += .
 INCLUDEPATH += .
-LIBS += -lvncclient
+LIBS += -lvncclient -lgnutls
 DEFINES += QTONLY
 
 HEADERS += remoteview.h vncclientthread.h vncview.h

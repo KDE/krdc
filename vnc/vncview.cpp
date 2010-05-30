@@ -339,10 +339,14 @@ void VncView::updateImage(int x, int y, int w, int h)
         emit connected();
         
         if (m_scale) {
+#ifndef QTONLY
             kDebug(5011) << "Setting initial size w:" <<m_hostPreferences->width() << " h:" << m_hostPreferences->height();
             emit framebufferSizeChanged(m_hostPreferences->width(), m_hostPreferences->height());
             scaleResize(m_hostPreferences->width(), m_hostPreferences->height());
             kDebug() << "m_frame.size():" << m_frame.size() << "size()" << size();
+#else
+//TODO: qtonly alternative
+#endif
         }
 
         m_initDone = true;
