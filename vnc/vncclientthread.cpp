@@ -70,10 +70,8 @@ rfbBool VncClientThread::newclient(rfbClient *cl)
         cl->appData.qualityLevel = 1;
     }
 
-    rfbBool success = SetFormatAndEncodings(cl);
-    kDebug(5011) << "Create client success?: " << (bool) success;
-
-    return success;
+    kDebug(5011) << "Client created";
+    return true;
 }
 
 void VncClientThread::updatefb(rfbClient* cl, int x, int y, int w, int h)
