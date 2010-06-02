@@ -37,6 +37,14 @@ VncPreferences::VncPreferences(QWidget *parent, const QVariantList &args)
     Ui::VncPreferences vncUi;
     vncUi.setupUi(this);
     
+    // copying the RDP preferences... need to create generic code for the plugins.
+    vncUi.resolutionDummyLabel->hide();
+    vncUi.resolutionComboBox->hide();
+    vncUi.kcfg_ScalingHeight->setEnabled(true);
+    vncUi.kcfg_ScalingWidth->setEnabled(true);
+    vncUi.heightLabel->setEnabled(true);
+    vncUi.widthLabel->setEnabled(true);
+
     addConfig(Settings::self(), this);
 }
 
