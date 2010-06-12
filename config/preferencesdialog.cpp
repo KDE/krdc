@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007 - 2008 Urs Wolfer <uwolfer @ kde.org>
+** Copyright (C) 2007 - 2010 Urs Wolfer <uwolfer @ kde.org>
 **
 ** This file is part of KDE.
 **
@@ -45,8 +45,8 @@ PreferencesDialog::PreferencesDialog(QWidget *parent, KConfigSkeleton *skeleton)
     HostPreferencesList *hostPreferencesList = new HostPreferencesList(this,
                                                                        qobject_cast<MainWindow *>(parent),
                                                                        skeleton->config()->group("hostpreferences"));
-    addPage(hostPreferencesList, i18n("Hosts"), "krdc", i18n("Host Configuration"));
-    
+    addPage(hostPreferencesList, i18n("Hosts"), "computer", i18n("Host Configuration"));
+
     m_pluginSelector = new KPluginSelector();
     KService::List offers = KServiceTypeTrader::self()->query("KRDC/Plugin");
     m_pluginSelector->addPlugins(KPluginInfo::fromServices(offers), KPluginSelector::ReadConfigFile,
