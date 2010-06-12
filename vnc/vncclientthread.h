@@ -107,6 +107,7 @@ public:
     void setHost(const QString &host);
     void setPort(int port);
     void setQuality(RemoteView::Quality quality);
+    void setUse8BitColors(bool use8BitColors);
     void setPassword(const QString &password) {
         m_password = password;
     }
@@ -115,6 +116,7 @@ public:
     }
 
     RemoteView::Quality quality() const;
+    bool use8BitColors() const;
     uint8_t *frameBuffer;
 
 signals:
@@ -132,6 +134,7 @@ protected:
     void run();
 
 private:
+    //these static methods are callback functions for libvncclient
     static rfbBool newclient(rfbClient *cl);
     static void updatefb(rfbClient *cl, int x, int y, int w, int h);
     static void cuttext(rfbClient *cl, const char *text, int textlen);
@@ -145,7 +148,10 @@ private:
     int m_port;
     QMutex mutex;
     RemoteView::Quality m_quality;
+    bool m_use8BitColors;
     QQueue<ClientEvent* > m_eventQueue;
+    //color table for 8bit indexed colors
+    static QVector<QRgb> m_colorTable;
 
     volatile bool m_stopped;
     volatile bool m_passwordError;

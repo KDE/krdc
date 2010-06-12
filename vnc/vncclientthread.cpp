@@ -26,12 +26,53 @@
 #include <QMutexLocker>
 #include <QTimer>
 
+//for detecting intel AMT KVM vnc server
+static const QString INTEL_AMT_KVM_STRING= "Intel(r) AMT KVM";
 static QString outputErrorMessageString;
+
+QVector<QRgb> VncClientThread::m_colorTable;
 
 rfbBool VncClientThread::newclient(rfbClient *cl)
 {
     VncClientThread *t = (VncClientThread*)rfbClientGetClientData(cl, 0);
     Q_ASSERT(t);
+    
+    //8bit color hack for Intel(r) AMT KVM "classic vnc" = vnc server built in in Intel Vpro chipsets.
+    if (INTEL_AMT_KVM_STRING == cl->desktopName) {
+        kDebug(5011) << "Intel(R) AMT KVM: switching to 8 bit color depth (workaround, recent libvncserver needed)";
+        t->setUse8BitColors(true);
+    }
+    if (t->use8BitColors()) {
+        if (m_colorTable.isEmpty()) {
+            m_colorTable.resize(256);
+            int r,g,b;
+            for (int i = 0; i < 256; ++i) {
+                //pick out the red (3 bits), green (3 bits) and blue (2 bits) bits and make them maximum significant in 8bits
+                //this gives a colortable for 8bit true colors
+                r= (i & 0x07) << 5;
+                g= (i & 0x38) << 2;
+                b= i & 0xc0;
+                m_colorTable[i] = qRgb(r, g, b);
+            }
+        }
+        cl->format.depth = 8;
+        cl->format.bitsPerPixel = 8;
+        cl->format.redShift = 0;
+        cl->format.greenShift = 3;
+        cl->format.blueShift = 6;
+        cl->format.redMax = 7;
+        cl->format.greenMax = 7;
+        cl->format.blueMax = 3;
+    } else {
+        cl->format.depth = 24;
+        cl->format.bitsPerPixel = 32;
+        cl->format.redShift = 16;
+        cl->format.greenShift = 8;
+        cl->format.blueShift = 0;
+        cl->format.redMax = 0xff;
+        cl->format.greenMax = 0xff;
+        cl->format.blueMax = 0xff;
+    }
 
     const int width = cl->width, height = cl->height, depth = cl->format.bitsPerPixel;
     const int size = width * height * (depth / 8);
@@ -40,23 +81,14 @@ rfbBool VncClientThread::newclient(rfbClient *cl)
     t->frameBuffer = new uint8_t[size];
     cl->frameBuffer = t->frameBuffer;
     memset(cl->frameBuffer, '\0', size);
-    cl->format.bitsPerPixel = 32;
-    cl->format.redShift = 16;
-    cl->format.greenShift = 8;
-    cl->format.blueShift = 0;
-    cl->format.redMax = 0xff;
-    cl->format.greenMax = 0xff;
-    cl->format.blueMax = 0xff;
 
     switch (t->quality()) {
     case RemoteView::High:
-        cl->appData.useBGR233 = 0;
         cl->appData.encodingsString = "copyrect hextile raw";
         cl->appData.compressLevel = 0;
         cl->appData.qualityLevel = 9;
         break;
     case RemoteView::Medium:
-        cl->appData.useBGR233 = 0;
         cl->appData.encodingsString = "tight zrle ultra copyrect hextile zlib corre rre raw";
         cl->appData.compressLevel = 5;
         cl->appData.qualityLevel = 7;
@@ -64,7 +96,6 @@ rfbBool VncClientThread::newclient(rfbClient *cl)
     case RemoteView::Low:
     case RemoteView::Unknown:
     default:
-        cl->appData.useBGR233 = 1;
         cl->appData.encodingsString = "tight zrle ultra copyrect hextile zlib corre rre raw";
         cl->appData.compressLevel = 9;
         cl->appData.qualityLevel = 1;
@@ -77,17 +108,21 @@ rfbBool VncClientThread::newclient(rfbClient *cl)
 void VncClientThread::updatefb(rfbClient* cl, int x, int y, int w, int h)
 {
 //     kDebug(5011) << "updated client: x: " << x << ", y: " << y << ", w: " << w << ", h: " << h;
+    VncClientThread *t = (VncClientThread*)rfbClientGetClientData(cl, 0);
+    Q_ASSERT(t);
 
     const int width = cl->width, height = cl->height;
-
-    const QImage img(cl->frameBuffer, width, height, QImage::Format_RGB32);
+    QImage img;
+    if (t->use8BitColors()) {
+        img = QImage(cl->frameBuffer, width, height, QImage::Format_Indexed8);
+        img.setColorTable(m_colorTable);
+    } else {
+        img = QImage(cl->frameBuffer, width, height, QImage::Format_RGB32);
+    }
 
     if (img.isNull()) {
         kDebug(5011) << "image not loaded";
     }
-
-    VncClientThread *t = (VncClientThread*)rfbClientGetClientData(cl, 0);
-    Q_ASSERT(t);
 
     t->setImage(img);
 
@@ -206,9 +241,19 @@ void VncClientThread::setQuality(RemoteView::Quality quality)
     m_quality = quality;
 }
 
+void VncClientThread::setUse8BitColors(bool use8BitColors)
+{
+    m_use8BitColors= use8BitColors;
+}
+
 RemoteView::Quality VncClientThread::quality() const
 {
     return m_quality;
+}
+
+bool VncClientThread::use8BitColors() const
+{
+    return m_use8BitColors;
 }
 
 void VncClientThread::setImage(const QImage &img)
@@ -254,6 +299,7 @@ void VncClientThread::run()
 
         rfbClientLog = outputHandler;
         rfbClientErr = outputHandler;
+        //24bit color dept in 32 bits per pixel = default. Will change colordepth and bpp later if needed
         cl = rfbGetClient(8, 3, 4);
         cl->MallocFrameBuffer = newclient;
         cl->canHandleNewFBSize = true;
@@ -286,7 +332,7 @@ void VncClientThread::run()
     }
 
     locker.relock();
-    // Main VNC event loop
+    kDebug(5011) << "--------------------- Starting main VNC event loop ---------------------";
     while (!m_stopped) {
         locker.unlock();
         const int i = WaitForMessage(cl, 500);
