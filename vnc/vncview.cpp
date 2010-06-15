@@ -362,20 +362,20 @@ void VncView::updateImage(int x, int y, int w, int h)
             saveWalletPassword(vncThread.password());
         }
 #endif
-    } else {
-        if ((y == 0 && x == 0) && (m_frame.size() != size())) {
-            kDebug(5011) << "Updating framebuffer size";
-            if (m_scale) {
-                setMaximumSize(QSize(QWIDGETSIZE_MAX, QWIDGETSIZE_MAX));
-                if (parentWidget())
-                    scaleResize(parentWidget()->width(), parentWidget()->height());
-            } else {
-                kDebug(5011) << "Resizing: " << m_frame.width() << m_frame.height();
-                resize(m_frame.width(), m_frame.height());
-                setMaximumSize(m_frame.width(), m_frame.height()); //This is a hack to force Qt to center the view in the scroll area
-                setMinimumSize(m_frame.width(), m_frame.height());
-                emit framebufferSizeChanged(m_frame.width(), m_frame.height());
-            }
+    }
+
+    if ((y == 0 && x == 0) && (m_frame.size() != size())) {
+        kDebug(5011) << "Updating framebuffer size";
+        if (m_scale) {
+            setMaximumSize(QSize(QWIDGETSIZE_MAX, QWIDGETSIZE_MAX));
+            if (parentWidget())
+                scaleResize(parentWidget()->width(), parentWidget()->height());
+        } else {
+            kDebug(5011) << "Resizing: " << m_frame.width() << m_frame.height();
+            resize(m_frame.width(), m_frame.height());
+            setMaximumSize(m_frame.width(), m_frame.height()); //This is a hack to force Qt to center the view in the scroll area
+            setMinimumSize(m_frame.width(), m_frame.height());
+            emit framebufferSizeChanged(m_frame.width(), m_frame.height());
         }
     }
 
