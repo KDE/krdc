@@ -605,7 +605,7 @@ void MainWindow::closeTab(QWidget *widget)
     kDebug(5010) << index;
 
     if (!isNewConnectionPage) {
-        RemoteView *view = m_remoteViewList.takeAt(m_currentRemoteView);
+        RemoteView *view = m_remoteViewList.takeAt(index);
         view->startQuitting();
 #ifdef TELEPATHY_SUPPORT
         m_tubesManager->closeTube(view->url());
@@ -613,7 +613,7 @@ void MainWindow::closeTab(QWidget *widget)
         widget->deleteLater();
     }
 
-    m_tabWidget->removeTab(index);
+    m_tabWidget->removePage(widget);
 
     // if closing the last connection, create new connection tab
     if (m_tabWidget->count() == 0) {
