@@ -205,7 +205,8 @@ VncClientThread::~VncClientThread()
 {
     if(isRunning()) {
         stop();
-        const bool quitSuccess = wait(500);
+        terminate();
+        const bool quitSuccess = wait(1000);
         kDebug(5011) << "Attempting to stop in deconstructor, will crash if this fails:" << quitSuccess;
     }
 
