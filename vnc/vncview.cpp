@@ -85,14 +85,6 @@ VncView::VncView(QWidget *parent, const KUrl &url, KConfigGroup configGroup)
 
 VncView::~VncView()
 {
-    unpressModifiers();
-
-    // Disconnect all signals so that we don't get any more callbacks from the client thread
-    disconnect(&vncThread, SIGNAL(imageUpdated(int, int, int, int)), this, SLOT(updateImage(int, int, int, int)));
-    disconnect(&vncThread, SIGNAL(gotCut(const QString&)), this, SLOT(setCut(const QString&)));
-    disconnect(&vncThread, SIGNAL(passwordRequest()), this, SLOT(requestPassword()));
-    disconnect(&vncThread, SIGNAL(outputErrorMessage(QString)), this, SLOT(outputErrorMessage(QString)));
-
     startQuitting();
 }
 
@@ -163,6 +155,16 @@ void VncView::startQuitting()
 {
     kDebug(5011) << "about to quit";
 
+    unpressModifiers();
+
+    // Disconnect all signals so that we don't get any more callbacks from the client thread
+    bool imageUpdatedDisconnect = disconnect(&vncThread, SIGNAL(imageUpdated(int, int, int, int)), this, SLOT(updateImage(int, int, int, int)));
+    bool gotCutDisconnect = disconnect(&vncThread, SIGNAL(gotCut(const QString&)), this, SLOT(setCut(const QString&)));
+    bool passwordRequestDisconnect = disconnect(&vncThread, SIGNAL(passwordRequest()), this, SLOT(requestPassword()));
+    bool outputErrorMessageDisconnect = disconnect(&vncThread, SIGNAL(outputErrorMessage(QString)), this, SLOT(outputErrorMessage(QString)));
+
+    kDebug(5011) << "Signals disconnected: imageUpdated: " << imageUpdatedDisconnect << "gotCut: " << gotCutDisconnect << "passwordRequest: " << passwordRequestDisconnect << "outputErrorMessage: " << outputErrorMessageDisconnect;
+
     const bool connected = status() == RemoteView::Connected;
 
     setStatus(Disconnecting);
@@ -175,7 +177,7 @@ void VncView::startQuitting()
 
     vncThread.quit();
 
-    const bool quitSuccess = vncThread.wait(500);
+    const bool quitSuccess = vncThread.wait(1000);
 
     kDebug(5011) << "Quit VNC thread success:" << quitSuccess;
 
