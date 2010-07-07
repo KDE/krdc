@@ -210,6 +210,9 @@ VncClientThread::~VncClientThread()
         kDebug(5011) << "Attempting to stop in deconstructor, will crash if this fails:" << quitSuccess;
     }
 
+    // Disconnect from vnc server & cleanup allocated resources
+    rfbClientCleanup(cl);
+
     delete [] frameBuffer;
 }
 
@@ -354,8 +357,6 @@ void VncClientThread::run()
         locker.relock();
     }
 
-    // Cleanup allocated resources
-    rfbClientCleanup(cl);
     m_stopped = true;
 }
 
