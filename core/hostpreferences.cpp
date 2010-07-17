@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007 Urs Wolfer <uwolfer @ kde.org>
+** Copyright (C) 2007 - 2010 Urs Wolfer <uwolfer @ kde.org>
 **
 ** This file is part of KDE.
 **
@@ -155,32 +155,32 @@ void HostPreferences::setViewOnly(bool view)
 {
     m_configGroup.writeEntry("viewOnly", view);
 }
-    
-bool HostPreferences::showDialogIfNeeded()
+
+bool HostPreferences::showDialogIfNeeded(QWidget *parent)
 {
     if (hostConfigured()) {
         if (showConfigAgain()) {
             kDebug(5010) << "Show config dialog again";
-            return showDialog();
+            return showDialog(parent);
         } else
             return true; // no changes, no need to save
     } else {
         kDebug(5010) << "No config found, create new";
         if (Settings::showPreferencesForNewConnections())
-            return showDialog();
+            return showDialog(parent);
         else
             return true;
     }
 }
 
 
-bool HostPreferences::showDialog()
+bool HostPreferences::showDialog(QWidget *parent)
 {
     // Prepare dialog
-    KDialog *dialog = new KDialog;
+    KDialog *dialog = new KDialog(parent);
     dialog->setCaption(i18n("Host Configuration"));
 
-    QWidget *mainWidget = new QWidget(dialog);
+    QWidget *mainWidget = dialog->mainWidget();
     QVBoxLayout *layout = new QVBoxLayout(mainWidget);
 
     KTitleWidget *titleWidget = new KTitleWidget(dialog);
@@ -193,7 +193,7 @@ bool HostPreferences::showDialog()
     layout->addWidget(titleWidget);
 
     QWidget* widget = createProtocolSpecificConfigPage();
-    
+
     if (widget) {
         if (widget->layout())
             widget->layout()->setMargin(0);
@@ -212,10 +212,15 @@ bool HostPreferences::showDialog()
     layout->addWidget(showAgainCheckBox);
     layout->addWidget(walletSupportCheckBox);
     layout->addStretch(1);
-    mainWidget->setLayout(layout);
 
-    dialog->setMainWidget(mainWidget);
-    
+    // WORKAROUND: it seems that KDialog does not set the minimum size properly in some cases.
+    // see for example issue #244539. also it looks like KTitleWidget returns a too small size hint when a comment is shown.
+    QSize minimumSize = dialog->sizeHint();
+    if (m_connected) {
+        minimumSize += QSize(0, 50);
+    }
+    dialog->setMinimumSize(minimumSize);
+
     // Show dialog
     if (dialog->exec() == KDialog::Accepted) {
         kDebug(5010) << "HostPreferences config dialog accepted";

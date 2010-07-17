@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007 - 2009 Urs Wolfer <uwolfer @ kde.org>
+** Copyright (C) 2007 - 2010 Urs Wolfer <uwolfer @ kde.org>
 ** Copyright (C) 2009 Tony Murray <murraytony @ gmail.com>
 **
 ** This file is part of KDE.
@@ -322,7 +322,7 @@ void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConn
 
     // Configure the view
     HostPreferences* prefs = view->hostPreferences();
-    if (! prefs->showDialogIfNeeded()) {
+    if (! prefs->showDialogIfNeeded(this)) {
         delete view;
         return;
     }
@@ -645,8 +645,7 @@ void MainWindow::showSettingsDialog(const QString &url)
 
     if (prefs) {
         prefs->setShownWhileConnected(true);
-        prefs->showDialog();
-        delete prefs;
+        prefs->showDialog(this);
     } else {
         KMessageBox::error(this,
                            i18n("The selected host cannot be handled."),
