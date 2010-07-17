@@ -79,10 +79,10 @@ public:
      * check "show this dialog again for this host".
      * Returns true if user pressed ok. 
      */
-    bool showDialogIfNeeded();
+    bool showDialogIfNeeded(QWidget *parent);
     
     /** Show the configuration dialog */
-    bool showDialog();
+    bool showDialog(QWidget *parent);
 
     /** If @p connected is true, a message is shown that settings might only apply after a reconnect. */
     void setShownWhileConnected(bool connected);

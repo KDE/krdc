@@ -111,7 +111,7 @@ void HostPreferencesList::configureHost()
         }
 
         if (prefs) {
-            prefs->showDialog();
+            prefs->showDialog(this);
             delete prefs;
         } else {
             KMessageBox::error(this,
