@@ -155,6 +155,8 @@ void VncView::startQuitting()
 {
     kDebug(5011) << "about to quit";
 
+    setStatus(Disconnecting);
+
     unpressModifiers();
 
     // Disconnect all signals so that we don't get any more callbacks from the client thread
@@ -166,8 +168,6 @@ void VncView::startQuitting()
     kDebug(5011) << "Signals disconnected: imageUpdated: " << imageUpdatedDisconnect << "gotCut: " << gotCutDisconnect << "passwordRequest: " << passwordRequestDisconnect << "outputErrorMessage: " << outputErrorMessageDisconnect;
 
     const bool connected = status() == RemoteView::Connected;
-
-    setStatus(Disconnecting);
 
     m_quitFlag = true;
 
