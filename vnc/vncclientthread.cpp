@@ -192,6 +192,7 @@ VncClientThread::VncClientThread(QObject *parent)
         : QThread(parent)
         , frameBuffer(0)
         , m_stopped(false)
+        , cl(0)
 {
     QMutexLocker locker(&mutex);
 
@@ -210,8 +211,10 @@ VncClientThread::~VncClientThread()
         kDebug(5011) << "Attempting to stop in deconstructor, will crash if this fails:" << quitSuccess;
     }
 
-    // Disconnect from vnc server & cleanup allocated resources
-    rfbClientCleanup(cl);
+    if (cl) {
+        // Disconnect from vnc server & cleanup allocated resources
+        rfbClientCleanup(cl);
+    }
 
     delete [] frameBuffer;
 }
