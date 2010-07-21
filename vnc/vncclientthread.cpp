@@ -330,6 +330,8 @@ void VncClientThread::run()
 
         if (rfbInitClient(cl, 0, 0))
             break;
+        else
+            cl = 0;
 
         locker.relock();
         if (m_passwordError)
