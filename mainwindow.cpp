@@ -131,7 +131,7 @@ MainWindow::MainWindow(QWidget *parent)
     updateActionStatus(); // disable remote view actions
 
     if (Settings::openSessions().count() == 0) // just create a new connection tab if there are no open sessions
-        m_tabWidget->addTab(newConnectionWidget(), "New Connection");
+        m_tabWidget->addTab(newConnectionWidget(), i18n("New Connection"));
 
     setAutoSaveSettings(); // e.g toolbar position, mainwindow size, ...
 
@@ -1161,7 +1161,7 @@ void MainWindow::newConnectionPage()
     if (indexOfNewConnectionWidget >= 0)
         m_tabWidget->setCurrentIndex(indexOfNewConnectionWidget);
     else {
-        const int index = m_tabWidget->addTab(newConnectionWidget(), "New Connection");
+        const int index = m_tabWidget->addTab(newConnectionWidget(), i18n("New Connection"));
         m_tabWidget->setCurrentIndex(index);
     }
 #if 0 // not usable anymore, probably use it in another way? -uwolfer
