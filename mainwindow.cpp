@@ -972,7 +972,7 @@ void MainWindow::configureKeys()
 void MainWindow::configureToolbars()
 {
     KEditToolBar edit(actionCollection());
-    connect(&edit, SIGNAL(newToolbarConfig()), this, SLOT(newToolbarConfig()));
+    connect(&edit, SIGNAL(newToolBarConfig()), this, SLOT(newToolbarConfig()));
     edit.exec();
 }
 
