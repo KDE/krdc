@@ -244,6 +244,11 @@ public:
      */
     virtual void updateConfiguration();
     
+    /**
+     * @return screenshot of the view
+     */
+    virtual QPixmap takeScreenshot();
+    
 #ifndef QTONLY
     /**
      * Returns the current host preferences of this view.

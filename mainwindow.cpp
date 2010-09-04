@@ -461,7 +461,7 @@ void MainWindow::statusChanged(RemoteView::RemoteStatus status)
 
 void MainWindow::takeScreenshot()
 {
-    const QPixmap snapshot = QPixmap::grabWidget(m_remoteViewList.at(m_currentRemoteView));
+    const QPixmap snapshot = m_remoteViewList.at(m_currentRemoteView)->takeScreenshot();
 
     QApplication::clipboard()->setPixmap(snapshot);
 }

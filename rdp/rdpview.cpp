@@ -232,6 +232,11 @@ void RdpView::connectionOpened()
     setFocus();
 }
 
+QPixmap RdpView::takeScreenshot()
+{
+    return QPixmap::grabWindow(m_container->clientWinId());
+}
+
 void RdpView::connectionClosed()
 {
     emit disconnected();
