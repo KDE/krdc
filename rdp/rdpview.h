@@ -63,6 +63,8 @@ public:
     void setGrabAllKeys(bool grabAllKeys);
     
     HostPreferences* hostPreferences();
+    
+    virtual QPixmap takeScreenshot();
 
 public slots:
     virtual void switchFullscreen(bool on);
