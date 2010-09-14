@@ -1,7 +1,7 @@
 /****************************************************************************
 **
 ** Copyright (C) 2007 - 2010 Urs Wolfer <uwolfer @ kde.org>
-** Copyright (C) 2009 Tony Murray <murraytony @ gmail.com>
+** Copyright (C) 2009 - 2010 Tony Murray <murraytony @ gmail.com>
 **
 ** This file is part of KDE.
 **
@@ -1106,21 +1106,31 @@ QWidget* MainWindow::newConnectionWidget()
     {
         QGroupBox *remoteDesktopsGroupWidget = new QGroupBox(m_newConnectionWidget);
         QVBoxLayout *remoteDesktopsGroupLayout = new QVBoxLayout(remoteDesktopsGroupWidget);
-        QHBoxLayout *filterLayout = new QHBoxLayout;
+
+        // set up the filter input field
+        QHBoxLayout *filterLayout = new QHBoxLayout(remoteDesktopsGroupWidget);
+        QLabel *filterLabel = new QLabel(i18nc("Verb, to remove items that don't match", "Filter"), remoteDesktopsGroupWidget);
+        KLineEdit *filterLineEdit = new KLineEdit(remoteDesktopsGroupWidget);
+        filterLineEdit->setClickMessage(i18n("Type here to filter the connection list."));
+        filterLineEdit->setClearButtonShown(true);
+        connect(filterLineEdit, SIGNAL(textChanged(const QString &)), SLOT(updateFilter(const QString &)));
+        filterLayout->addWidget(filterLabel);
+        filterLayout->addWidget(filterLineEdit);
+        remoteDesktopsGroupLayout->addLayout(filterLayout);
+
         m_newConnectionTableView = new QTableView(remoteDesktopsGroupWidget);
         m_newConnectionTableView->setModel(m_remoteDesktopsModelProxy);
 
         // set up the view so it looks nice
         m_newConnectionTableView->setItemDelegate(new ConnectionDelegate(m_newConnectionTableView));
         m_newConnectionTableView->setShowGrid(false);
+        m_newConnectionTableView->setSelectionMode(QAbstractItemView::NoSelection);
         m_newConnectionTableView->verticalHeader()->hide();
         m_newConnectionTableView->verticalHeader()->setDefaultSectionSize(
             m_newConnectionTableView->fontMetrics().height() + 3);
         m_newConnectionTableView->horizontalHeader()->setStretchLastSection(true);
-//         m_newConnectionTableView->resizeColumnsToContents(); // not needed when resize mode is ResizeToContents
         m_newConnectionTableView->horizontalHeader()->setResizeMode(QHeaderView::ResizeToContents);
         m_newConnectionTableView->setAlternatingRowColors(true);
-
         // set up sorting and actions (double click open, right click custom menu)
         m_newConnectionTableView->setSortingEnabled(true);
         m_newConnectionTableView->sortByColumn(Settings::connectionListSortColumn(), Qt::SortOrder(Settings::connectionListSortOrder()));
@@ -1130,18 +1140,8 @@ QWidget* MainWindow::newConnectionWidget()
                 SLOT(openFromRemoteDesktopsModel(const QModelIndex &)));
         m_newConnectionTableView->setContextMenuPolicy(Qt::CustomContextMenu);
         connect(m_newConnectionTableView, SIGNAL(customContextMenuRequested(QPoint)), SLOT(showConnectionContextMenu(QPoint)));
-
-        // set up the filter input field
-        QLabel *filterLabel = new QLabel(i18nc("Verb, to remove items that don't match", "Filter"), remoteDesktopsGroupWidget);
-        KLineEdit *filterLineEdit = new KLineEdit(remoteDesktopsGroupWidget);
-        filterLineEdit->setClickMessage(i18n("Type here to filter the connection list."));
-        filterLineEdit->setClearButtonShown(true);
-        connect(filterLineEdit, SIGNAL(textChanged(const QString &)), SLOT(updateFilter(const QString &)));
-        filterLayout->addWidget(filterLabel);
-        filterLayout->addWidget(filterLineEdit);
-
-        remoteDesktopsGroupLayout->addLayout(filterLayout);
         remoteDesktopsGroupLayout->addWidget(m_newConnectionTableView);
+
         startLayout->addWidget(remoteDesktopsGroupWidget);
     }
 
