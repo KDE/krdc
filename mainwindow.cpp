@@ -814,6 +814,7 @@ void MainWindow::showRemoteViewToolbar()
         buttonBox->addAction(actionCollection()->action("grab_all_keys"));
         buttonBox->addAction(actionCollection()->action("scale"));
         buttonBox->addAction(actionCollection()->action("disconnect"));
+        buttonBox->addAction(actionCollection()->action("file_quit"));
 
         QAction *stickToolBarAction = new QAction(m_toolBar);
         stickToolBarAction->setCheckable(true);
