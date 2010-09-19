@@ -304,7 +304,7 @@ void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConn
     if (!url.isValid() || (url.host().isEmpty() && url.port() < 0)
         || (!url.path().isEmpty() && url.path() != QLatin1String("/"))) {
         KMessageBox::error(this,
-                           i18n("The entered address does not have the required form."),
+                           i18n("The entered address does not have the required form.\n Syntax: [username@]host[:port]"),
                            i18n("Malformed URL"));
         return;
     }
