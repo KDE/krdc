@@ -80,7 +80,7 @@ void ApproverManager::onFinished()
     approver->deleteLater();
 
     if (m_approvers.empty()) {
-        kDebug() << "Quiting approver manager";
+        kDebug() << "Quitting approver manager";
         KApplication::kApplication()->quit();
     }
 }
