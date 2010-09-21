@@ -192,8 +192,6 @@ bool RdpView::start()
 
     arguments << (m_host + ':' + QString::number(m_port));
 
-    kDebug(5012) << arguments;
-
     setStatus(Connecting);
 
     connect(m_process, SIGNAL(error(QProcess::ProcessError)), SLOT(processError(QProcess::ProcessError)));
