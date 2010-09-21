@@ -1,6 +1,7 @@
 /****************************************************************************
 **
 ** Copyright (C) 2007 - 2008 Urs Wolfer <uwolfer @ kde.org>
+** Copyright (C) 2009 - 2010 Tony Murray <murraytony @ gmail.com>
 **
 ** This file is part of KDE.
 **
@@ -35,10 +36,11 @@
 #include <TelepathyQt4/ClientRegistrar>
 #endif
 
+class KComboBox;
+class KLineEdit;
 class KPushButton;
 class KToggleAction;
 class KTabWidget;
-class KUrlNavigator;
 
 class BookmarkManager;
 class FloatingToolBar;
@@ -113,13 +115,15 @@ private:
     RemoteViewFactory *createPluginFromService(const KService::Ptr &service);
     void showSettingsDialog(const QString &url);
     QScrollArea *createScrollArea(QWidget *parent, RemoteView *remoteView);
+    KUrl getInputUrl();
 
     QWidget *m_fullscreenWindow;
     QByteArray m_mainWindowGeometry;
 
     KToggleAction *m_menubarAction;
     TabbedViewWidget *m_tabWidget;
-    KUrlNavigator *m_addressNavigator;
+    KComboBox *m_protocolInput;
+    KLineEdit *m_addressInput;
 
     FloatingToolBar *m_toolBar;
 

@@ -58,13 +58,13 @@
 #include <KStatusBar>
 #include <KToggleAction>
 #include <KToggleFullScreenAction>
-#include <KUrlNavigator>
 #include <KServiceTypeTrader>
 
 #include <QClipboard>
 #include <QDockWidget>
 #include <QFontMetrics>
 #include <QGroupBox>
+#include <QHBoxLayout>
 #include <QHeaderView>
 #include <QLabel>
 #include <QLayout>
@@ -73,11 +73,13 @@
 #include <QTableView>
 #include <QTimer>
 #include <QToolBar>
+#include <QVBoxLayout>
 
 MainWindow::MainWindow(QWidget *parent)
         : KXmlGuiWindow(parent),
         m_fullscreenWindow(0),
-        m_addressNavigator(0),
+        m_protocolInput(0),
+        m_addressInput(0),
         m_toolBar(0),
         m_currentRemoteView(-1),
         m_systemTrayIcon(0),
@@ -284,11 +286,19 @@ void MainWindow::restoreOpenSessions()
     }
 }
 
+KUrl MainWindow::getInputUrl()
+{
+    KUrl inputUrl;
+    inputUrl.setAuthority(m_addressInput->text());
+    inputUrl.setProtocol(m_protocolInput->currentText());
+    return inputUrl;
+}
+
 void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConnected, const QString &tabName)
 {
     m_switchFullscreenWhenConnected = switchFullscreenWhenConnected;
 
-    const KUrl url = newUrl.isEmpty() ? m_addressNavigator->uncommittedUrl() : newUrl;
+    const KUrl url = newUrl.isEmpty() ? getInputUrl() : newUrl;
 
     if (!url.isValid() || (url.host().isEmpty() && url.port() < 0)
         || (!url.path().isEmpty() && url.path() != QLatin1String("/"))) {
@@ -298,8 +308,10 @@ void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConn
         return;
     }
 
-    if (m_addressNavigator) {
-        m_addressNavigator->setLocationUrl(url);
+    if (m_protocolInput && m_addressInput) {
+        int index = m_protocolInput->findText(url.protocol());
+        if (index>=0) m_protocolInput->setCurrentIndex(index);
+        m_addressInput->setText(url.authority());
     }
 
     RemoteView *view = 0;
@@ -892,9 +904,6 @@ void MainWindow::preferences()
 
 void MainWindow::updateConfiguration()
 {
-    if (m_addressNavigator)
-        m_addressNavigator->setUrlEditable(Settings::normalUrlInputLine());
-
     if (!Settings::showStatusBar())
         statusBar()->deleteLater();
     else
@@ -1072,24 +1081,19 @@ QWidget* MainWindow::newConnectionWidget()
 
     {
         QHBoxLayout *connectLayout = new QHBoxLayout;
-        const QString initialProtocol(!m_remoteViewFactories.isEmpty() ? (*m_remoteViewFactories.begin())->scheme() : QString());
-        KUrl url;
-        url.setProtocol(initialProtocol);
-        url.setPath(QLatin1String("//"));
-        m_addressNavigator = new KUrlNavigator(0, url, m_newConnectionWidget);
-
-        QStringList schemes;
-        foreach(RemoteViewFactory *factory, m_remoteViewFactories) {
-            schemes << factory->scheme();
-        }
-        m_addressNavigator->setCustomProtocols(schemes);
-
-        m_addressNavigator->setUrlEditable(Settings::normalUrlInputLine());
-        connect(m_addressNavigator, SIGNAL(returnPressed()), SLOT(newConnection()));
-        m_addressNavigator->setFocus();
-        m_addressNavigator->setToolTip(i18n("Type an IP or DNS Name here. Clear the line to get a list of connection methods."));
 
         QLabel *addressLabel = new QLabel(i18n("Connect to:"), m_newConnectionWidget);
+        m_protocolInput = new KComboBox(m_newConnectionWidget);
+        m_addressInput = new KLineEdit(m_newConnectionWidget);
+        m_addressInput->setClearButtonShown(true);
+
+        foreach(RemoteViewFactory *factory, m_remoteViewFactories) {
+            m_protocolInput->addItem(factory->scheme());
+        }
+
+        connect(m_addressInput, SIGNAL(returnPressed()), SLOT(newConnection()));
+        m_addressInput->setFocus();
+        m_addressInput->setToolTip(i18n("Type an IP or DNS Name here. Clear the line to get a list of connection methods."));
 
         KPushButton *connectButton = new KPushButton(m_newConnectionWidget);
         connectButton->setToolTip(i18n("Goto Address"));
@@ -1097,7 +1101,8 @@ QWidget* MainWindow::newConnectionWidget()
         connect(connectButton, SIGNAL(clicked()), SLOT(newConnection()));
 
         connectLayout->addWidget(addressLabel);
-        connectLayout->addWidget(m_addressNavigator, 1);
+        connectLayout->addWidget(m_protocolInput);
+        connectLayout->addWidget(m_addressInput, 1);
         connectLayout->addWidget(connectButton);
         connectLayout->setContentsMargins(QMargins(0, 6, 0, 10));
         startLayout->addLayout(connectLayout);
@@ -1164,21 +1169,7 @@ void MainWindow::newConnectionPage()
         const int index = m_tabWidget->addTab(newConnectionWidget(), i18n("New Connection"));
         m_tabWidget->setCurrentIndex(index);
     }
-#if 0 // not usable anymore, probably use it in another way? -uwolfer
-    QObject *senderObject = qobject_cast<QObject*>(sender());
-    if (senderObject) {
-        const QString scheme(senderObject->property("schemeString").toString());
-        if (!scheme.isEmpty()) {
-            m_addressNavigator->setUrl(KUrl(scheme + "://"));
-        }
-        const QString toolTip(senderObject->property("toolTipString").toString());
-        if (!toolTip.isEmpty()) {
-            QToolTip::showText(m_addressNavigator->pos() + pos() + QPoint(m_addressNavigator->width() / 2,
-                               m_addressNavigator->height() / 2), toolTip, this);
-        }
-    }
-#endif
-    m_addressNavigator->setFocus();
+    m_addressInput->setFocus();
 }
 
 QList<RemoteView *> MainWindow::remoteViewList() const
