@@ -299,7 +299,6 @@ void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConn
     m_switchFullscreenWhenConnected = switchFullscreenWhenConnected;
 
     const KUrl url = newUrl.isEmpty() ? getInputUrl() : newUrl;
-    kDebug(5010) << url.host();
 
     if (!url.isValid() || (url.host().isEmpty() && url.port() < 0)
         || (!url.path().isEmpty() && url.path() != QLatin1String("/"))) {
@@ -1088,6 +1087,8 @@ QWidget* MainWindow::newConnectionWidget()
         m_protocolInput = new KComboBox(m_newConnectionWidget);
         m_addressInput = new KLineEdit(m_newConnectionWidget);
         m_addressInput->setClearButtonShown(true);
+        m_addressInput->setClickMessage(i18n("Type here to connect to an address and filter the list."));
+        connect(m_addressInput, SIGNAL(textChanged(const QString &)), SLOT(updateFilter(const QString &)));
 
         foreach(RemoteViewFactory *factory, m_remoteViewFactories) {
             m_protocolInput->addItem(factory->scheme());
@@ -1111,21 +1112,7 @@ QWidget* MainWindow::newConnectionWidget()
     }
 
     {
-        QGroupBox *remoteDesktopsGroupWidget = new QGroupBox(m_newConnectionWidget);
-        QVBoxLayout *remoteDesktopsGroupLayout = new QVBoxLayout(remoteDesktopsGroupWidget);
-
-        // set up the filter input field
-        QHBoxLayout *filterLayout = new QHBoxLayout(remoteDesktopsGroupWidget);
-        QLabel *filterLabel = new QLabel(i18nc("Verb, to remove items that don't match", "Filter"), remoteDesktopsGroupWidget);
-        KLineEdit *filterLineEdit = new KLineEdit(remoteDesktopsGroupWidget);
-        filterLineEdit->setClickMessage(i18n("Type here to filter the connection list."));
-        filterLineEdit->setClearButtonShown(true);
-        connect(filterLineEdit, SIGNAL(textChanged(const QString &)), SLOT(updateFilter(const QString &)));
-        filterLayout->addWidget(filterLabel);
-        filterLayout->addWidget(filterLineEdit);
-        remoteDesktopsGroupLayout->addLayout(filterLayout);
-
-        m_newConnectionTableView = new QTableView(remoteDesktopsGroupWidget);
+        m_newConnectionTableView = new QTableView(m_newConnectionWidget);
         m_newConnectionTableView->setModel(m_remoteDesktopsModelProxy);
 
         // set up the view so it looks nice
@@ -1147,9 +1134,8 @@ QWidget* MainWindow::newConnectionWidget()
                 SLOT(openFromRemoteDesktopsModel(const QModelIndex &)));
         m_newConnectionTableView->setContextMenuPolicy(Qt::CustomContextMenu);
         connect(m_newConnectionTableView, SIGNAL(customContextMenuRequested(QPoint)), SLOT(showConnectionContextMenu(QPoint)));
-        remoteDesktopsGroupLayout->addWidget(m_newConnectionTableView);
 
-        startLayout->addWidget(remoteDesktopsGroupWidget);
+        startLayout->addWidget(m_newConnectionTableView);
     }
 
     return m_newConnectionWidget;
