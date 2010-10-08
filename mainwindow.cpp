@@ -543,6 +543,9 @@ void MainWindow::switchFullscreen()
         if (m_systemTrayIcon) m_systemTrayIcon->setAssociatedWidget(m_fullscreenWindow);
         showRemoteViewToolbar();
     }
+    if (m_tabWidget->currentWidget() == m_newConnectionWidget) {
+        m_addressInput->setFocus();
+    }
 }
 
 QScrollArea *MainWindow::createScrollArea(QWidget *parent, RemoteView *remoteView)
@@ -1050,8 +1053,10 @@ void MainWindow::tabChanged(int index)
 
     m_currentRemoteView = index;
 
-    if (m_tabWidget->currentWidget() == m_newConnectionWidget)
+    if (m_tabWidget->currentWidget() == m_newConnectionWidget) {
         m_currentRemoteView = -1;
+        m_addressInput->setFocus();
+    }
 
     const QString tabTitle = m_tabWidget->tabText(index).remove('&');
     setCaption(tabTitle == i18n("New Connection") ? QString() : tabTitle);
@@ -1095,7 +1100,6 @@ QWidget* MainWindow::newConnectionWidget()
         }
 
         connect(m_addressInput, SIGNAL(returnPressed()), SLOT(newConnection()));
-        m_addressInput->setFocus();
         m_addressInput->setToolTip(i18n("Type an IP or DNS Name here. Clear the line to get a list of connection methods."));
 
         KPushButton *connectButton = new KPushButton(m_newConnectionWidget);
