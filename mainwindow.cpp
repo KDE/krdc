@@ -1174,6 +1174,7 @@ void MainWindow::newConnectionPage()
         m_tabWidget->setCurrentIndex(index);
     }
     m_addressInput->setFocus();
+    m_addressInput->selectAll();
 }
 
 QList<RemoteView *> MainWindow::remoteViewList() const
