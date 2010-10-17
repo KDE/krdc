@@ -32,17 +32,10 @@ static QString outputErrorMessageString;
 
 QVector<QRgb> VncClientThread::m_colorTable;
 
-rfbBool VncClientThread::newclient(rfbClient *cl)
+void VncClientThread::setClientColorDepth(rfbClient* cl, VncClientThread::ColorDepth cd)
 {
-    VncClientThread *t = (VncClientThread*)rfbClientGetClientData(cl, 0);
-    Q_ASSERT(t);
-    
-    //8bit color hack for Intel(r) AMT KVM "classic vnc" = vnc server built in in Intel Vpro chipsets.
-    if (INTEL_AMT_KVM_STRING == cl->desktopName) {
-        kDebug(5011) << "Intel(R) AMT KVM: switching to 8 bit color depth (workaround, recent libvncserver needed)";
-        t->setUse8BitColors(true);
-    }
-    if (t->use8BitColors()) {
+    switch(cd) {
+    case bpp8:
         if (m_colorTable.isEmpty()) {
             m_colorTable.resize(256);
             int r,g,b;
@@ -63,7 +56,19 @@ rfbBool VncClientThread::newclient(rfbClient *cl)
         cl->format.redMax = 7;
         cl->format.greenMax = 7;
         cl->format.blueMax = 3;
-    } else {
+        break;
+    case bpp16:
+        cl->format.depth = 16;
+        cl->format.bitsPerPixel = 16;
+        cl->format.redShift = 11;
+        cl->format.greenShift = 5;
+        cl->format.blueShift = 0;
+        cl->format.redMax = 0x1f;
+        cl->format.greenMax = 0x3f;
+        cl->format.blueMax = 0x1f;
+        break;
+    case bpp32:
+    default:
         cl->format.depth = 24;
         cl->format.bitsPerPixel = 32;
         cl->format.redShift = 16;
@@ -73,6 +78,19 @@ rfbBool VncClientThread::newclient(rfbClient *cl)
         cl->format.greenMax = 0xff;
         cl->format.blueMax = 0xff;
     }
+}
+
+rfbBool VncClientThread::newclient(rfbClient *cl)
+{
+    VncClientThread *t = (VncClientThread*)rfbClientGetClientData(cl, 0);
+    Q_ASSERT(t);
+
+    //8bit color hack for Intel(r) AMT KVM "classic vnc" = vnc server built in in Intel Vpro chipsets.
+    if (INTEL_AMT_KVM_STRING == cl->desktopName) {
+        kDebug(5011) << "Intel(R) AMT KVM: switching to 8 bit color depth (workaround, recent libvncserver needed)";
+        t->setColorDepth(bpp8);
+    }
+    setClientColorDepth(cl, t->colorDepth());
 
     const int width = cl->width, height = cl->height, depth = cl->format.bitsPerPixel;
     const int size = width * height * (depth / 8);
@@ -113,11 +131,17 @@ void VncClientThread::updatefb(rfbClient* cl, int x, int y, int w, int h)
 
     const int width = cl->width, height = cl->height;
     QImage img;
-    if (t->use8BitColors()) {
+    switch(t->colorDepth()) {
+    case bpp8:
         img = QImage(cl->frameBuffer, width, height, QImage::Format_Indexed8);
         img.setColorTable(m_colorTable);
-    } else {
+        break;
+    case bpp16:
+        img = QImage(cl->frameBuffer, width, height, QImage::Format_RGB16);
+        break;
+    case bpp32:
         img = QImage(cl->frameBuffer, width, height, QImage::Format_RGB32);
+        break;
     }
 
     if (img.isNull()) {
@@ -191,8 +215,8 @@ void VncClientThread::outputHandler(const char *format, ...)
 VncClientThread::VncClientThread(QObject *parent)
         : QThread(parent)
         , frameBuffer(0)
-        , m_stopped(false)
         , cl(0)
+        , m_stopped(false)
 {
     QMutexLocker locker(&mutex);
 
@@ -246,11 +270,23 @@ void VncClientThread::setPort(int port)
 void VncClientThread::setQuality(RemoteView::Quality quality)
 {
     m_quality = quality;
+    //set color depth dependent on quality
+    switch(quality) {
+    case RemoteView::Low:
+        setColorDepth(bpp8);
+        break;
+    case RemoteView::High:
+        setColorDepth(bpp32);
+        break;
+    case RemoteView::Medium:
+    default:
+        setColorDepth(bpp16);
+    }
 }
 
-void VncClientThread::setUse8BitColors(bool use8BitColors)
+void VncClientThread::setColorDepth(ColorDepth colorDepth)
 {
-    m_use8BitColors= use8BitColors;
+    m_colorDepth= colorDepth;
 }
 
 RemoteView::Quality VncClientThread::quality() const
@@ -258,9 +294,9 @@ RemoteView::Quality VncClientThread::quality() const
     return m_quality;
 }
 
-bool VncClientThread::use8BitColors() const
+VncClientThread::ColorDepth VncClientThread::colorDepth() const
 {
-    return m_use8BitColors;
+    return m_colorDepth;
 }
 
 void VncClientThread::setImage(const QImage &img)
@@ -308,6 +344,7 @@ void VncClientThread::run()
         rfbClientErr = outputHandler;
         //24bit color dept in 32 bits per pixel = default. Will change colordepth and bpp later if needed
         cl = rfbGetClient(8, 3, 4);
+        setClientColorDepth(cl, this->colorDepth());
         cl->MallocFrameBuffer = newclient;
         cl->canHandleNewFBSize = true;
         cl->GetPassword = passwdHandler;

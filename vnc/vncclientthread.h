@@ -97,6 +97,14 @@ class VncClientThread: public QThread
     Q_OBJECT
 
 public:
+    Q_ENUMS(ColorDepth)
+
+    enum ColorDepth {
+        bpp32,
+        bpp16,
+        bpp8
+    };
+
     explicit VncClientThread(QObject *parent = 0);
     ~VncClientThread();
     const QImage image(int x = 0, int y = 0, int w = 0, int h = 0);
@@ -107,7 +115,6 @@ public:
     void setHost(const QString &host);
     void setPort(int port);
     void setQuality(RemoteView::Quality quality);
-    void setUse8BitColors(bool use8BitColors);
     void setPassword(const QString &password) {
         m_password = password;
     }
@@ -116,7 +123,7 @@ public:
     }
 
     RemoteView::Quality quality() const;
-    bool use8BitColors() const;
+    ColorDepth colorDepth() const;
     uint8_t *frameBuffer;
 
 signals:
@@ -134,6 +141,8 @@ protected:
     void run();
 
 private:
+    static void setClientColorDepth(rfbClient *cl, ColorDepth cd);
+    void setColorDepth(ColorDepth colorDepth);
     //these static methods are callback functions for libvncclient
     static rfbBool newclient(rfbClient *cl);
     static void updatefb(rfbClient *cl, int x, int y, int w, int h);
@@ -148,7 +157,7 @@ private:
     int m_port;
     QMutex mutex;
     RemoteView::Quality m_quality;
-    bool m_use8BitColors;
+    ColorDepth m_colorDepth;
     QQueue<ClientEvent* > m_eventQueue;
     //color table for 8bit indexed colors
     static QVector<QRgb> m_colorTable;

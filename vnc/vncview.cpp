@@ -194,20 +194,14 @@ bool VncView::start()
     vncThread.setHost(m_host);
     vncThread.setPort(m_port);
     RemoteView::Quality quality;
-    bool use8BitColors;
 #ifdef QTONLY
     quality = (RemoteView::Quality)((QCoreApplication::arguments().count() > 2) ?
         QCoreApplication::arguments().at(2).toInt() : 2);
-    use8BitColors = ((QCoreApplication::arguments().count() > 3) ?
-        (QCoreApplication::arguments().at(3) == "8bit") : false);
 #else
     quality = m_hostPreferences->quality();
-    //don't use 8bit colors by default
-    use8BitColors = false;
 #endif
 
     vncThread.setQuality(quality);
-    vncThread.setUse8BitColors(use8BitColors);
 
     // set local cursor on by default because low quality mostly means slow internet connection
     if (quality == RemoteView::Low) {

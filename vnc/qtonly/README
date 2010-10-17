@@ -17,10 +17,9 @@ Copy these files into a folder and run:
   make
 
 In order to try it out, type:
-  ./krdc-vnc-qtonly vnc://:password@server:1 1 [8bit]
-    (the 2nd argument defines the quality as second argument (1-3, where 1 is
-    the best). Default is 2.
-    optionally use a 3rd argument "8bit" to use only 8bit color. This lowers network traffic.)
+  ./krdc-vnc-qtonly vnc://:password@server:1 1
+  (the last argument defines the quality as second argument (1-3, where 1 is
+  the best). Default is 2.)
 
 If you use these code in your project, make sure that QTONLY is defined (see
 krdc-vnc-qtonly.pro).
