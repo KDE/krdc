@@ -108,7 +108,7 @@ target_link_libraries(krdc ${KDE4_KDNSSD_LIBS})
 
 install(TARGETS krdc ${INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES krdcui.rc DESTINATION ${DATA_INSTALL_DIR}/krdc)
-install(FILES krdc.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
+install(PROGRAMS krdc.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
 install(FILES pointcursor.png pointcursormask.png DESTINATION ${DATA_INSTALL_DIR}/krdc/pics)
 
 if(TELEPATHY_QT4_FOUND)
