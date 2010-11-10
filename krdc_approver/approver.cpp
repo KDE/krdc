@@ -62,6 +62,24 @@ void Approver::onDispatchOperationReady(Tp::PendingOperation *op)
 
     kDebug() << "DispatchOp ready!";
 
+    Tp::ChannelPtr channel = m_dispatchOp->channels()[0];
+    connect(channel->becomeReady(),
+            SIGNAL(finished(Tp::PendingOperation*)),
+            SLOT(onChannelReady(Tp::PendingOperation*)));
+}
+
+void Approver::onChannelReady(Tp::PendingOperation *op)
+{
+    if (op->isError()) {
+        kError() << "Channel failed to become ready"
+                << op->errorName() << op->errorMessage();
+        m_context->setFinishedWithError(op->errorName(), op->errorMessage());
+        emit finished();
+        return;
+    }
+
+    kDebug() << "Channel ready!";
+
     Tp::ContactPtr contact = m_dispatchOp->channels()[0]->initiatorContact();
 
     KNotification *notification = new KNotification("newrfb", NULL, KNotification::Persistent);

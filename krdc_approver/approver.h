@@ -43,6 +43,7 @@ private Q_SLOTS:
     void onAccepted();
     void onRejected();
     void onDispatchOperationReady(Tp::PendingOperation*);
+    void onChannelReady(Tp::PendingOperation*);
     void onClaimFinished(Tp::PendingOperation*);
 
 Q_SIGNALS:
