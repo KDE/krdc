@@ -4,7 +4,7 @@ project(krdc)
 if(NOT INSIDE_KDENETWORK)
     message("Not building inside KDENetwork, loading KDE CMake Macros.")
 
-    set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/../cmake/modules ${CMAKE_MODULE_PATH})
+    set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules ${CMAKE_MODULE_PATH})
 
     find_package(KDE4 REQUIRED)
 
