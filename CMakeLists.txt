@@ -98,7 +98,7 @@ target_link_libraries(krdc
     ${KDE4_KFILE_LIBS}
     ${KDE4_KIO_LIBS}
     ${KDE4_KNOTIFYCONFIG_LIBS}
-    ${KDE4_KUTILS_LIBS}
+    ${KDE4_KCMUTILS_LIBS}
     krdccore
 )
 
