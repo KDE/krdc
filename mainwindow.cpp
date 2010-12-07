@@ -75,6 +75,8 @@
 #include <QToolBar>
 #include <QVBoxLayout>
 
+static const QByteArray FILTER_EXCLUSIONS = "@/:";
+
 MainWindow::MainWindow(QWidget *parent)
         : KXmlGuiWindow(parent),
         m_fullscreenWindow(0),
@@ -1182,7 +1184,8 @@ int MainWindow::currentRemoteView() const
 
 void MainWindow::updateFilter(const QString &text)
 {
-    m_remoteDesktopsModelProxy->setFilterRegExp(QRegExp("IGNORE|" + text, Qt::CaseInsensitive, QRegExp::RegExp));
+    // use QUrl::toPercentEncoding() to match KUrl::prettyUrl()
+    m_remoteDesktopsModelProxy->setFilterRegExp(QRegExp("IGNORE|" + QUrl::toPercentEncoding(text, FILTER_EXCLUSIONS), Qt::CaseInsensitive, QRegExp::RegExp));
 }
 
 void MainWindow::createDockWidget()
