@@ -1057,7 +1057,7 @@ void MainWindow::tabChanged(int index)
 
     if (m_tabWidget->currentWidget() == m_newConnectionWidget) {
         m_currentRemoteView = -1;
-        m_addressInput->setFocus();
+        if(m_addressInput) m_addressInput->setFocus();
     }
 
     const QString tabTitle = m_tabWidget->tabText(index).remove('&');
