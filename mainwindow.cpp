@@ -617,7 +617,7 @@ void MainWindow::disconnectHost()
 
 void MainWindow::closeTab(QWidget *widget)
 {
-    bool isNewConnectionPage = m_tabWidget->currentWidget() == m_newConnectionWidget;
+    bool isNewConnectionPage = widget == m_newConnectionWidget;
     const int index = m_tabWidget->indexOf(widget);
 
     kDebug(5010) << index;
