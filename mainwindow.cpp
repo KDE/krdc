@@ -302,7 +302,7 @@ KUrl MainWindow::getInputUrl()
 
     // if the url contains @, set the username part. it needs to be utf8 encoded
     if(atLocation > 0) {
-        inputUrl.setUserName(enteredAddress.left(atLocation).toUtf8());
+        inputUrl.setUserName(enteredAddress.left(atLocation));
     }
 
     return inputUrl;
