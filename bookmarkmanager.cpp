@@ -121,7 +121,7 @@ QString BookmarkManager::currentUrl() const
 
 QString BookmarkManager::currentTitle() const
 {
-    return currentUrl();
+    return QUrl::fromPercentEncoding(currentUrl().toUtf8());
 }
 
 bool BookmarkManager::supportsTabs() const

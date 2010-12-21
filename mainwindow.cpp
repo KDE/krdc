@@ -75,8 +75,6 @@
 #include <QToolBar>
 #include <QVBoxLayout>
 
-static const QByteArray FILTER_EXCLUSIONS = "@/:";
-
 MainWindow::MainWindow(QWidget *parent)
         : KXmlGuiWindow(parent),
         m_fullscreenWindow(0),
@@ -1107,7 +1105,7 @@ QWidget* MainWindow::newConnectionWidget()
         m_addressInput = new KLineEdit(m_newConnectionWidget);
         m_addressInput->setClearButtonShown(true);
         m_addressInput->setClickMessage(i18n("Type here to connect to an address and filter the list."));
-        connect(m_addressInput, SIGNAL(textChanged(const QString &)), SLOT(updateFilter(const QString &)));
+        connect(m_addressInput, SIGNAL(textChanged(const QString &)), m_remoteDesktopsModelProxy, SLOT(setFilterFixedString(const QString &)));
 
         foreach(RemoteViewFactory *factory, m_remoteViewFactories) {
             m_protocolInput->addItem(factory->scheme());
@@ -1194,12 +1192,6 @@ int MainWindow::currentRemoteView() const
     return m_currentRemoteView;
 }
 
-void MainWindow::updateFilter(const QString &text)
-{
-    // use QUrl::toPercentEncoding() to match KUrl::prettyUrl()
-    m_remoteDesktopsModelProxy->setFilterRegExp(QRegExp("IGNORE|" + QUrl::toPercentEncoding(text, FILTER_EXCLUSIONS), Qt::CaseInsensitive, QRegExp::RegExp));
-}
-
 void MainWindow::createDockWidget()
 {
     QDockWidget *remoteDesktopsDockWidget = new QDockWidget(this);
@@ -1216,6 +1208,7 @@ void MainWindow::createDockWidget()
     RemoteDesktopsModel *remoteDesktopsModel = new RemoteDesktopsModel(this);
     m_remoteDesktopsModelProxy = new QSortFilterProxyModel(this);
     m_remoteDesktopsModelProxy->setSourceModel(remoteDesktopsModel);
+    m_remoteDesktopsModelProxy->setFilterCaseSensitivity(Qt::CaseInsensitive);
     m_remoteDesktopsModelProxy->setFilterRole(10002);
     m_dockWidgetTableView->setModel(m_remoteDesktopsModelProxy);
 
@@ -1238,7 +1231,7 @@ void MainWindow::createDockWidget()
     KLineEdit *filterLineEdit = new KLineEdit(remoteDesktopsDockLayoutWidget);
     filterLineEdit->setClickMessage(i18n("Filter"));
     filterLineEdit->setClearButtonShown(true);
-    connect(filterLineEdit, SIGNAL(textChanged(const QString &)), SLOT(updateFilter(const QString &)));
+    connect(filterLineEdit, SIGNAL(textChanged(const QString &)), m_remoteDesktopsModelProxy, SLOT(setFilterFixedString(const QString &)));
     remoteDesktopsDockLayout->addWidget(filterLineEdit);
     remoteDesktopsDockLayout->addWidget(m_dockWidgetTableView);
     remoteDesktopsDockWidget->setWidget(remoteDesktopsDockLayoutWidget);

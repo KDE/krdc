@@ -104,7 +104,6 @@ private slots:
     QWidget* newConnectionWidget();
     void newConnectionPage();
     void openFromRemoteDesktopsModel(const QModelIndex &index);
-    void updateFilter(const QString &text);
     void createDockWidget();
     void showConnectionContextMenu(const QPoint &pos);
     void saveConnectionListSort(const int logicalindex, const Qt::SortOrder order);

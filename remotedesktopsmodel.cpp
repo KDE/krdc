@@ -160,7 +160,7 @@ QVariant RemoteDesktopsModel::data(const QModelIndex &index, int role) const
         return item.url;
 
     case 10002: //filter
-        return item.url + item.title; // return both uservisible and data
+        return QUrl::fromPercentEncoding((item.url + item.title).toUtf8()); // return both user visible title and url data, percent encoded
 
     case 10003: //title for dockwidget
         return item.title;
@@ -223,7 +223,7 @@ void RemoteDesktopsModel::buildModelFromBookmarkGroup(const KBookmarkGroup &grou
         } else { // not a group
 
             RemoteDesktop item;
-            item.title = bm.text();
+            item.title = bm.fullText();
             item.url = bm.url().url();
             int index = remoteDesktops.indexOf(item); //search for this url to see if we need to update it
             bool newItem = index < 0; // do we need to create a new item?
@@ -259,7 +259,7 @@ void RemoteDesktopsModel::buildModelFromBookmarkGroup(const KBookmarkGroup &grou
                     item.source = RemoteDesktop::Bookmarks;
                 } else {
                     // otherwise override these fields with the info from the bookmark
-                    remoteDesktops[index].title = bm.text();
+                    remoteDesktops[index].title = bm.fullText();
                     remoteDesktops[index].favorite = true;
                     remoteDesktops[index].source = RemoteDesktop::Bookmarks;
                 }
