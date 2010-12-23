@@ -852,8 +852,6 @@ void MainWindow::showRemoteViewToolbar()
 
         m_toolBar->addWidget(buttonBox);
     }
-
-    m_toolBar->showAndAnimate();
 }
 
 void setActionStatus(QAction* action, bool enabled, bool visible, bool checked)

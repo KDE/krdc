@@ -63,7 +63,8 @@ public:
             , visible(false)
             , sticky(false)
             , opacity(toolBarOpacity)
-            , queuedShow(false) {
+            // set queuedShow to true so we show the toolbar if we get a resize event on the anchorWidget
+            , queuedShow(true) {
     }
 
     // rebuild contents and reposition then widget
@@ -146,13 +147,6 @@ void FloatingToolBar::setSticky(bool sticky)
 
 void FloatingToolBar::showAndAnimate()
 {
-    QDesktopWidget *desktop = QApplication::desktop();
-    int currentScreen = desktop->screenNumber(d->anchorWidget);
-    if ((d->anchorWidget->size() != desktop->screenGeometry(currentScreen).size())) {
-        kDebug(5010) << "anchorWidget not fullscreen yet";
-        d->queuedShow = true;
-        return;
-    }
     if (d->animState == Showing)
         return;
 
