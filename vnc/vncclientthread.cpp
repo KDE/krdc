@@ -102,23 +102,24 @@ rfbBool VncClientThread::newclient(rfbClient *cl)
 
     switch (t->quality()) {
     case RemoteView::High:
-        cl->appData.encodingsString = "copyrect hextile raw";
+        cl->appData.encodingsString = "copyrect zlib hextile raw";
         cl->appData.compressLevel = 0;
         cl->appData.qualityLevel = 9;
         break;
     case RemoteView::Medium:
-        cl->appData.encodingsString = "tight zrle ultra copyrect hextile zlib corre rre raw";
+        cl->appData.encodingsString = "copyrect tight zrle ultra zlib hextile corre rre raw";
         cl->appData.compressLevel = 5;
         cl->appData.qualityLevel = 7;
         break;
     case RemoteView::Low:
     case RemoteView::Unknown:
     default:
-        cl->appData.encodingsString = "tight zrle ultra copyrect hextile zlib corre rre raw";
+        cl->appData.encodingsString = "copyrect tight zrle ultra zlib hextile corre rre raw";
         cl->appData.compressLevel = 9;
         cl->appData.qualityLevel = 1;
     }
 
+    SetFormatAndEncodings(cl);
     kDebug(5011) << "Client created";
     return true;
 }
