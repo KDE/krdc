@@ -102,7 +102,7 @@ private slots:
     void updateConfiguration();
     void tabChanged(int index);
     QWidget* newConnectionWidget();
-    void newConnectionPage();
+    void newConnectionPage(bool clearInput = true);
     void openFromRemoteDesktopsModel(const QModelIndex &index);
     void createDockWidget();
     void showConnectionContextMenu(const QPoint &pos);
