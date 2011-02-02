@@ -604,7 +604,7 @@ void MainWindow::disconnectHost()
 
     // if closing the last connection, create new connection tab
     if (m_tabWidget->count() == 0) {
-        newConnectionPage();
+        newConnectionPage(false);
     }
 
     // if the newConnectionWidget is the only tab and we are fullscreen, switch to window mode
@@ -633,7 +633,7 @@ void MainWindow::closeTab(QWidget *widget)
 
     // if closing the last connection, create new connection tab
     if (m_tabWidget->count() == 0) {
-        newConnectionPage();
+        newConnectionPage(false);
     }
 
     // if the newConnectionWidget is the only tab and we are fullscreen, switch to window mode
@@ -1164,7 +1164,7 @@ void MainWindow::saveConnectionListSort(const int logicalindex, const Qt::SortOr
     Settings::self()->writeConfig();
 }
 
-void MainWindow::newConnectionPage()
+void MainWindow::newConnectionPage(bool clearInput)
 {
     const int indexOfNewConnectionWidget = m_tabWidget->indexOf(m_newConnectionWidget);
     if (indexOfNewConnectionWidget >= 0)
@@ -1173,8 +1173,12 @@ void MainWindow::newConnectionPage()
         const int index = m_tabWidget->addTab(newConnectionWidget(), i18n("New Connection"));
         m_tabWidget->setCurrentIndex(index);
     }
+    if(clearInput) {
+        m_addressInput->clear();
+    } else {
+        m_addressInput->selectAll();
+    }
     m_addressInput->setFocus();
-    m_addressInput->selectAll();
 }
 
 QList<RemoteView *> MainWindow::remoteViewList() const
