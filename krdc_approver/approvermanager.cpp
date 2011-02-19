@@ -28,28 +28,31 @@
 #include <QDBusObjectPath>
 #include <QDBusConnection>
 
+#include <KApplication>
+#include <KDebug>
+
+#include <TelepathyQt4/Account>
+#include <TelepathyQt4/ChannelClassSpecList>
+#include <TelepathyQt4/ChannelDispatchOperation>
 #include <TelepathyQt4/Connection>
 #include <TelepathyQt4/PendingOperation>
 #include <TelepathyQt4/PendingReady>
 #include <TelepathyQt4/Debug>
 
-#include <KApplication>
-#include <KDebug>
-
-static inline Tp::ChannelClassList channelClassList()
+static inline Tp::ChannelClassSpecList channelClassSpecList()
 {
-    QMap<QString, QDBusVariant> filter0;
-    filter0[TELEPATHY_INTERFACE_CHANNEL ".ChannelType"] =
-            QDBusVariant(TELEPATHY_INTERFACE_CHANNEL_TYPE_STREAM_TUBE);
-    filter0[TELEPATHY_INTERFACE_CHANNEL_TYPE_STREAM_TUBE ".Service"] = QDBusVariant("rfb");
-    filter0[TELEPATHY_INTERFACE_CHANNEL ".Requested"] = QDBusVariant(false);
-
-    return Tp::ChannelClassList() << Tp::ChannelClass(filter0);
+    Tp::ChannelClassSpec spec = Tp::ChannelClassSpec();
+    spec.setChannelType(TP_QT4_IFACE_CHANNEL_TYPE_STREAM_TUBE);
+    spec.setTargetHandleType(Tp::HandleTypeContact);
+    spec.setRequested(false);
+    spec.setProperty(QLatin1String(TP_QT4_IFACE_CHANNEL_TYPE_STREAM_TUBE ".Service"),
+                     QVariant("rfb"));
+    return Tp::ChannelClassSpecList() << spec;
 }
 
 ApproverManager::ApproverManager(QObject *parent)
     : QObject(parent),
-      AbstractClientApprover(channelClassList())
+      AbstractClientApprover(channelClassSpecList())
 {
     kDebug() << "Initializing approver manager";
 }
@@ -60,12 +63,11 @@ ApproverManager::~ApproverManager()
 }
 
 void ApproverManager::addDispatchOperation(const Tp::MethodInvocationContextPtr<> &context,
-        const QList<Tp::ChannelPtr> &channels,
         const Tp::ChannelDispatchOperationPtr &dispatchOperation)
 {
     kDebug() << "New channel for approving arrived";
 
-    Approver *approver = new Approver(context, channels, dispatchOperation, this);
+    Approver *approver = new Approver(context, dispatchOperation->channels(), dispatchOperation, this);
     connect(approver, SIGNAL(finished()), SLOT(onFinished()));
 
     m_approvers << approver;

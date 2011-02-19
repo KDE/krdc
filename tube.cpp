@@ -70,10 +70,10 @@ void Tube::onChannelReady(Tp::PendingOperation *op)
                  const QString&)));
 
     /* Interface used to control the tube state */
-    m_tubeInterface = m_channel->tubeInterface();
+    m_tubeInterface = m_channel->interface<Tp::Client::ChannelInterfaceTubeInterface>();
 
     /* Interface used to control stream tube */
-    m_streamTubeInterface = m_channel->streamTubeInterface();
+    m_streamTubeInterface = m_channel->interface<Tp::Client::ChannelTypeStreamTubeInterface>();
 
     if (m_streamTubeInterface && m_tubeInterface) {
         kDebug() << "Accepting tube";

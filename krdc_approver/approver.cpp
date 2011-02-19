@@ -88,7 +88,7 @@ void Approver::onChannelReady(Tp::PendingOperation *op)
     notification->setActions(QStringList() << i18n("Accept") << i18n("Reject"));
 
     Tp::Client::ConnectionInterfaceAvatarsInterface *avatarIface =
-        m_dispatchOp->channels()[0]->connection()->avatarsInterface();
+        m_dispatchOp->channels()[0]->connection()->optionalInterface<Tp::Client::ConnectionInterfaceAvatarsInterface>();
 
     if (avatarIface) {
         QDBusPendingReply<QByteArray, QString> reply = avatarIface->RequestAvatar(

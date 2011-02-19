@@ -38,7 +38,6 @@ public:
     virtual ~ApproverManager();
 
     virtual void addDispatchOperation(const Tp::MethodInvocationContextPtr<> &context,
-            const QList<Tp::ChannelPtr> &channels,
             const Tp::ChannelDispatchOperationPtr &dispatchOperation);
 
 private Q_SLOTS:
