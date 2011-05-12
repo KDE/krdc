@@ -58,7 +58,6 @@
 #include <KStatusBar>
 #include <KToggleAction>
 #include <KToggleFullScreenAction>
-#include <KToolBar>
 #include <KServiceTypeTrader>
 
 #include <QClipboard>
@@ -78,6 +77,7 @@
 
 MainWindow::MainWindow(QWidget *parent)
         : KXmlGuiWindow(parent),
+        m_fullscreenWindow(0),
         m_protocolInput(0),
         m_addressInput(0),
         m_toolBar(0),
@@ -122,6 +122,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     if (Settings::systemTrayIcon()) {
         m_systemTrayIcon = new SystemTrayIcon(this);
+        if(m_fullscreenWindow) m_systemTrayIcon->setAssociatedWidget(m_fullscreenWindow);
     }
 
     connect(m_tabWidget, SIGNAL(currentChanged(int)), SLOT(tabChanged(int)));
@@ -135,7 +136,6 @@ MainWindow::MainWindow(QWidget *parent)
         m_tabWidget->addTab(newConnectionWidget(), i18n("New Connection"));
 
     setAutoSaveSettings(); // e.g toolbar position, mainwindow size, ...
-    m_saveSettingsDisabled = false;
 
     if (Settings::rememberSessions()) // give some time to create and show the window first
         QTimer::singleShot(100, this, SLOT(restoreOpenSessions()));
@@ -157,6 +157,13 @@ void MainWindow::setupActions()
     screenshotAction->setIconText(i18n("Screenshot"));
     screenshotAction->setIcon(KIcon("ksnapshot"));
     connect(screenshotAction, SIGNAL(triggered()), SLOT(takeScreenshot()));
+
+    KAction *fullscreenAction = actionCollection()->addAction("switch_fullscreen"); // note: please do not switch to KStandardShortcut unless you know what you are doing (see history of this file)
+    fullscreenAction->setText(i18n("Switch to Full Screen Mode"));
+    fullscreenAction->setIconText(i18n("Full Screen"));
+    fullscreenAction->setIcon(KIcon("view-fullscreen"));
+    fullscreenAction->setShortcut(KStandardShortcut::fullScreen());
+    connect(fullscreenAction, SIGNAL(triggered()), SLOT(switchFullscreen()));
 
     QAction *viewOnlyAction = actionCollection()->addAction("view_only");
     viewOnlyAction->setCheckable(true);
@@ -191,9 +198,6 @@ void MainWindow::setupActions()
     scaleAction->setIconText(i18n("Scale"));
     connect(scaleAction, SIGNAL(triggered(bool)), SLOT(scale(bool)));
 
-    installEventFilter(this);
-
-    KStandardAction::fullScreen(this,SLOT(switchFullScreen(bool)),this, actionCollection());
     KStandardAction::quit(this, SLOT(quit()), actionCollection());
     KStandardAction::preferences(this, SLOT(preferences()), actionCollection());
     KStandardAction::configureToolbars(this, SLOT(configureToolbars()), actionCollection());
@@ -393,7 +397,7 @@ void MainWindow::openFromRemoteDesktopsModel(const QModelIndex &index)
 void MainWindow::resizeTabWidget(int w, int h)
 {
     kDebug(5010) << "tabwidget resize, view size: w: " << w << ", h: " << h;
-    if (isFullScreen()) {
+    if (m_fullscreenWindow) {
         kDebug(5010) << "in fullscreen mode, refusing to resize";
         return;
     }
@@ -407,7 +411,7 @@ void MainWindow::resizeTabWidget(int w, int h)
 
         if (screenSize == viewSize) {
             kDebug(5010) << "screen size equal to target view size -> switch to fullscreen mode";
-            switchFullScreen(true);
+            switchFullscreen();
             return;
         }
     }
@@ -462,7 +466,7 @@ void MainWindow::statusChanged(RemoteView::RemoteStatus status)
         // when started with command line fullscreen argument
         if (m_switchFullscreenWhenConnected) {
             m_switchFullscreenWhenConnected = false;
-            switchFullScreen(true);
+            switchFullscreen();
         }
 
         if (Settings::rememberHistory()) {
@@ -486,51 +490,70 @@ void MainWindow::takeScreenshot()
     QApplication::clipboard()->setPixmap(snapshot);
 }
 
-void MainWindow::switchFullScreen(bool makeFullScreen)
+void MainWindow::switchFullscreen()
 {
-    // save widget visibility if we aren't fullscreen
-    if (!m_saveSettingsDisabled) {
-        saveMainWindowSettings(KConfigGroup(KGlobal::config(), "MainWindow"));
-    }
-    KToggleFullScreenAction::setFullScreen(this, makeFullScreen);
-}
+    kDebug(5010);
 
-void MainWindow::fullScreenChanged()
-{
-    // hide/show widgets as needed for fullscreen
-    if (isFullScreen()) {
-        kDebug(5010) << "Entering full screen mode";
-        resetAutoSaveSettings(); //stop window/toolbar settings from being saved while in FS mode.
-        m_saveSettingsDisabled = true;
-        menuBar()->hide();
-        toolBar("krdc_remote_view_toolbar")->hide();
-        actionCollection()->action("remote_desktop_dockwidget")->parentWidget()->hide();
-        statusBar()->hide();
-        m_tabWidget->setTabBarHidden(true);
-        m_tabWidget->setDocumentMode(true);
-        foreach (RemoteView *currentView, m_remoteViewList) {
-            currentView->enableScaling(currentView->hostPreferences()->fullscreenScale());
-        }
+    if (m_fullscreenWindow) {
+        // Leaving full screen mode
+        m_fullscreenWindow->setWindowState(0);
+        m_fullscreenWindow->hide();
 
-        MinimizePixel *minimizePixel = new MinimizePixel(m_tabWidget);
-        //minimizePixel->winId(); // force it to be a native widget (prevents problem with QX11EmbedContainer)
-        connect(minimizePixel, SIGNAL(rightClicked()), this, SLOT(showMinimized()));
-        showRemoteViewToolbar();
-    } else {
-        kDebug(5010) << "Leaving full screen mode";
-        applyMainWindowSettings(KConfigGroup(KGlobal::config(), "MainWindow"));
-        m_saveSettingsDisabled = false;
-        setAutoSaveSettings(); // Allow settings to be saved again.
         m_tabWidget->setTabBarHidden(m_tabWidget->count() <= 1 && !Settings::showTabBar());
         m_tabWidget->setDocumentMode(false);
-        foreach (RemoteView *currentView, m_remoteViewList) {
+        setCentralWidget(m_tabWidget);
+
+        show();
+        restoreGeometry(m_mainWindowGeometry);
+        if (m_systemTrayIcon) m_systemTrayIcon->setAssociatedWidget(this);
+
+        foreach(RemoteView *currentView, m_remoteViewList) {
             currentView->enableScaling(currentView->hostPreferences()->windowedScale());
         }
+
         if (m_toolBar) {
             m_toolBar->hideAndDestroy();
             m_toolBar->deleteLater();
             m_toolBar = 0;
         }
+
+        actionCollection()->action("switch_fullscreen")->setIcon(KIcon("view-fullscreen"));
+        actionCollection()->action("switch_fullscreen")->setText(i18n("Switch to Full Screen Mode"));
+        actionCollection()->action("switch_fullscreen")->setIconText(i18n("Full Screen"));
+
+        m_fullscreenWindow->deleteLater();
+        m_fullscreenWindow = 0;
+    } else {
+        // Entering full screen mode
+        m_fullscreenWindow = new QWidget(this, Qt::Window);
+        m_fullscreenWindow->setWindowTitle(i18nc("window title when in full screen mode (for example displayed in tasklist)",
+                                           "KDE Remote Desktop Client (Full Screen)"));
+
+        m_mainWindowGeometry = saveGeometry();
+
+        m_tabWidget->setTabBarHidden(true);
+        m_tabWidget->setDocumentMode(true);
+
+        foreach(RemoteView *currentView, m_remoteViewList) {
+            currentView->enableScaling(currentView->hostPreferences()->fullscreenScale());
+        }
+
+        QVBoxLayout *fullscreenLayout = new QVBoxLayout(m_fullscreenWindow);
+        fullscreenLayout->setContentsMargins(QMargins(0, 0, 0, 0));
+        fullscreenLayout->addWidget(m_tabWidget);
+
+        KToggleFullScreenAction::setFullScreen(m_fullscreenWindow, true);
+
+        MinimizePixel *minimizePixel = new MinimizePixel(m_fullscreenWindow);
+        minimizePixel->winId(); // force it to be a native widget (prevents problem with QX11EmbedContainer)
+        connect(minimizePixel, SIGNAL(rightClicked()), m_fullscreenWindow, SLOT(showMinimized()));
+        m_fullscreenWindow->installEventFilter(this);
+
+        m_fullscreenWindow->show();
+        hide();  // hide after showing the new window so it stays on the same screen
+
+        if (m_systemTrayIcon) m_systemTrayIcon->setAssociatedWidget(m_fullscreenWindow);
+        showRemoteViewToolbar();
     }
     if (m_tabWidget->currentWidget() == m_newConnectionWidget) {
         m_addressInput->setFocus();
@@ -585,8 +608,8 @@ void MainWindow::disconnectHost()
     }
 
     // if the newConnectionWidget is the only tab and we are fullscreen, switch to window mode
-    if (isFullScreen() && m_tabWidget->count() == 1  && m_tabWidget->currentWidget() == m_newConnectionWidget) {
-        switchFullScreen(false);
+    if (m_fullscreenWindow && m_tabWidget->count() == 1  && m_tabWidget->currentWidget() == m_newConnectionWidget) {
+        switchFullscreen();
     }
 }
 
@@ -614,8 +637,8 @@ void MainWindow::closeTab(QWidget *widget)
     }
 
     // if the newConnectionWidget is the only tab and we are fullscreen, switch to window mode
-    if (isFullScreen() && m_tabWidget->count() == 1  && m_tabWidget->currentWidget() == m_newConnectionWidget) {
-        switchFullScreen(false);
+    if (m_fullscreenWindow && m_tabWidget->count() == 1  && m_tabWidget->currentWidget() == m_newConnectionWidget) {
+        switchFullscreen();
     }
 }
 
@@ -771,7 +794,7 @@ void MainWindow::scale(bool scale)
 
     RemoteView* view = m_remoteViewList.at(m_currentRemoteView);
     view->enableScaling(scale);
-    if (isFullScreen())
+    if (m_fullscreenWindow)
         view->hostPreferences()->setFullscreenScale(scale);
     else
         view->hostPreferences()->setWindowedScale(scale);
@@ -784,7 +807,11 @@ void MainWindow::showRemoteViewToolbar()
     kDebug(5010);
 
     if (!m_toolBar) {
-        m_toolBar = new FloatingToolBar(m_tabWidget, this);
+        actionCollection()->action("switch_fullscreen")->setIcon(KIcon("view-restore"));
+        actionCollection()->action("switch_fullscreen")->setText(i18n("Switch to Window Mode"));
+        actionCollection()->action("switch_fullscreen")->setIconText(i18n("Window Mode"));
+
+        m_toolBar = new FloatingToolBar(m_fullscreenWindow, m_fullscreenWindow);
         m_toolBar->winId(); // force it to be a native widget (prevents problem with QX11EmbedContainer)
         m_toolBar->setSide(FloatingToolBar::Top);
 
@@ -800,12 +827,12 @@ void MainWindow::showRemoteViewToolbar()
         QToolBar *buttonBox = new QToolBar(m_toolBar);
 
         buttonBox->addAction(actionCollection()->action("new_connection"));
-        buttonBox->addAction(actionCollection()->action("fullscreen"));
+        buttonBox->addAction(actionCollection()->action("switch_fullscreen"));
 
         QAction *minimizeAction = new QAction(m_toolBar);
         minimizeAction->setIcon(KIcon("go-down"));
         minimizeAction->setText(i18n("Minimize Full Screen Window"));
-        connect(minimizeAction, SIGNAL(triggered()), this, SLOT(showMinimized()));
+        connect(minimizeAction, SIGNAL(triggered()), m_fullscreenWindow, SLOT(showMinimized()));
         buttonBox->addAction(minimizeAction);
 
         buttonBox->addAction(actionCollection()->action("take_screenshot"));
@@ -896,7 +923,7 @@ void MainWindow::updateConfiguration()
     else
         statusBar()->showMessage(""); // force creation of statusbar
 
-    m_tabWidget->setTabBarHidden((m_tabWidget->count() <= 1 && !Settings::showTabBar()) || isFullScreen());
+    m_tabWidget->setTabBarHidden((m_tabWidget->count() <= 1 && !Settings::showTabBar()) || m_fullscreenWindow);
     m_tabWidget->setTabPosition((KTabWidget::TabPosition) Settings::tabPosition());
 #if QT_VERSION >= 0x040500
     m_tabWidget->setTabsClosable(Settings::tabCloseButton());
@@ -909,6 +936,7 @@ void MainWindow::updateConfiguration()
 
     if (Settings::systemTrayIcon() && !m_systemTrayIcon) {
         m_systemTrayIcon = new SystemTrayIcon(this);
+        if(m_fullscreenWindow) m_systemTrayIcon->setAssociatedWidget(m_fullscreenWindow);
     } else if (m_systemTrayIcon) {
         delete m_systemTrayIcon;
         m_systemTrayIcon = 0;
@@ -981,13 +1009,11 @@ void MainWindow::showMenubar()
 
 bool MainWindow::eventFilter(QObject *obj, QEvent *event)
 {
-    // catch fullscreen events, but only the ones switching between modes
-    if (event->type() == QEvent::WindowStateChange) {
-        QWindowStateChangeEvent *wscEvent = static_cast<QWindowStateChangeEvent *>(event);
-        if (isFullScreen() ^ (wscEvent->oldState() == Qt::WindowFullScreen)) {
-            fullScreenChanged();
-        }
+    // check for close events from the fullscreen window.
+    if (obj == m_fullscreenWindow && event->type() == QEvent::Close) {
+        quit(true);
     }
+    // allow other events to pass through.
     return QObject::eventFilter(obj, event);
 }
 
@@ -1033,7 +1059,7 @@ void MainWindow::tabChanged(int index)
 {
     kDebug(5010) << index;
 
-    m_tabWidget->setTabBarHidden((m_tabWidget->count() <= 1 && !Settings::showTabBar()) || isFullScreen());
+    m_tabWidget->setTabBarHidden((m_tabWidget->count() <= 1 && !Settings::showTabBar()) || m_fullscreenWindow);
 
     m_currentRemoteView = index;
 

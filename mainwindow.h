@@ -73,7 +73,7 @@ public slots:
 
 protected:
     virtual void closeEvent(QCloseEvent *event);
-    bool eventFilter(QObject *obj, QEvent *event); // checks for WM fullscreen events
+    bool eventFilter(QObject *obj, QEvent *event); // checks for close events on fs window
     virtual void saveProperties(KConfigGroup &group);
     void saveHostPrefs(RemoteView *view = 0);
 
@@ -89,8 +89,7 @@ private slots:
     void statusChanged(RemoteView::RemoteStatus status);
     void showRemoteViewToolbar();
     void takeScreenshot();
-    void switchFullScreen(bool makeFullScreen);
-    void fullScreenChanged();
+    void switchFullscreen();
     void disconnectHost();
     void closeTab(QWidget *widget);
     void openTabSettings(QWidget *widget);
@@ -117,7 +116,8 @@ private:
     QScrollArea *createScrollArea(QWidget *parent, RemoteView *remoteView);
     KUrl getInputUrl();
 
-    bool m_saveSettingsDisabled;
+    QWidget *m_fullscreenWindow;
+    QByteArray m_mainWindowGeometry;
 
     KToggleAction *m_menubarAction;
     TabbedViewWidget *m_tabWidget;
@@ -148,7 +148,6 @@ private:
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QMouseEvent>
-#include <KDebug>
 
 class MinimizePixel : public QWidget
 {
@@ -157,9 +156,7 @@ public:
     MinimizePixel(QWidget *parent)
             : QWidget(parent) {
         setFixedSize(1, 1);
-        move(0, 0);
-        kDebug(5010) << parent->width() << parent->x() << parent->y();
-//        move(QApplication::desktop()->screenGeometry().width() - 1, 0);
+        move(QApplication::desktop()->screenGeometry().width() - 1, 0);
     }
 
 signals:
