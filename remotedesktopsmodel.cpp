@@ -160,7 +160,7 @@ QVariant RemoteDesktopsModel::data(const QModelIndex &index, int role) const
         return item.url;
 
     case 10002: //filter
-        return QUrl::fromPercentEncoding((item.url + item.title).toUtf8()); // return both user visible title and url data, percent encoded
+        return QUrl::fromPercentEncoding(QString(item.url + item.title).toUtf8()); // return both user visible title and url data, percent encoded
 
     case 10003: //title for dockwidget
         return item.title;
