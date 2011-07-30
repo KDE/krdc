@@ -41,8 +41,8 @@ Tube::Tube(Tp::ChannelPtr channel, QObject *parent)
     qDBusRegisterMetaType<StreamTubeAddress>();
 
     connect(m_channel->becomeReady(),
-            SIGNAL(finished(Tp::PendingOperation *)),
-            SLOT(onChannelReady(Tp::PendingOperation *)));
+            SIGNAL(finished(Tp::PendingOperation*)),
+            SLOT(onChannelReady(Tp::PendingOperation*)));
 }
 
 Tube::~Tube()
@@ -65,7 +65,7 @@ void Tube::onChannelReady(Tp::PendingOperation *op)
     }
 
     connect(m_channel.data(),
-            SIGNAL(invalidated(Tp::DBusProxy*, const QString&, const QString&)),
+            SIGNAL(invalidated(Tp::DBusProxy*,QString,QString)),
             SLOT(onChannelInvalidated(Tp::DBusProxy*, const QString&,
                  const QString&)));
 

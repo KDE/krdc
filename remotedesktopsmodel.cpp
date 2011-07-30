@@ -35,7 +35,7 @@ RemoteDesktopsModel::RemoteDesktopsModel(QObject *parent)
     const QString file = KStandardDirs::locateLocal("data", "krdc/bookmarks.xml");
     m_manager = KBookmarkManager::managerForFile(file, "krdc");
     m_manager->setUpdate(true);
-    connect(m_manager, SIGNAL(changed(const QString &, const QString &)), SLOT(bookmarksChanged()));
+    connect(m_manager, SIGNAL(changed(QString,QString)), SLOT(bookmarksChanged()));
     buildModelFromBookmarkGroup(m_manager->root());
 
 #ifdef BUILD_ZEROCONF

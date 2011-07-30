@@ -105,13 +105,13 @@ MainWindow::MainWindow(QWidget *parent)
     m_tabWidget->setCloseButtonEnabled(Settings::tabCloseButton());
 #endif
 
-    connect(m_tabWidget, SIGNAL(closeRequest(QWidget *)), SLOT(closeTab(QWidget *)));
+    connect(m_tabWidget, SIGNAL(closeRequest(QWidget*)), SLOT(closeTab(QWidget*)));
 
     if (Settings::tabMiddleClick())
-        connect(m_tabWidget, SIGNAL(mouseMiddleClick(QWidget *)), SLOT(closeTab(QWidget *)));
+        connect(m_tabWidget, SIGNAL(mouseMiddleClick(QWidget*)), SLOT(closeTab(QWidget*)));
 
-    connect(m_tabWidget, SIGNAL(mouseDoubleClick(QWidget *)), SLOT(openTabSettings(QWidget *)));
-    connect(m_tabWidget, SIGNAL(contextMenu(QWidget *, const QPoint &)), SLOT(tabContextMenu(QWidget *, const QPoint &)));
+    connect(m_tabWidget, SIGNAL(mouseDoubleClick(QWidget*)), SLOT(openTabSettings(QWidget*)));
+    connect(m_tabWidget, SIGNAL(contextMenu(QWidget*,QPoint)), SLOT(tabContextMenu(QWidget*,QPoint)));
 
     m_tabWidget->setMinimumSize(600, 400);
     setCentralWidget(m_tabWidget);
@@ -358,7 +358,7 @@ void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConn
     view->setViewOnly(prefs->viewOnly());
     if (! switchFullscreenWhenConnected) view->enableScaling(prefs->windowedScale());
 
-    connect(view, SIGNAL(framebufferSizeChanged(int, int)), this, SLOT(resizeTabWidget(int, int)));
+    connect(view, SIGNAL(framebufferSizeChanged(int,int)), this, SLOT(resizeTabWidget(int,int)));
     connect(view, SIGNAL(statusChanged(RemoteView::RemoteStatus)), this, SLOT(statusChanged(RemoteView::RemoteStatus)));
     connect(view, SIGNAL(disconnected()), this, SLOT(disconnectHost()));
 
@@ -565,7 +565,7 @@ QScrollArea *MainWindow::createScrollArea(QWidget *parent, RemoteView *remoteVie
     RemoteViewScrollArea *scrollArea = new RemoteViewScrollArea(parent);
     scrollArea->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 
-    connect(scrollArea, SIGNAL(resized(int, int)), remoteView, SLOT(scaleResize(int, int)));
+    connect(scrollArea, SIGNAL(resized(int,int)), remoteView, SLOT(scaleResize(int,int)));
 
     QPalette palette = scrollArea->palette();
     palette.setColor(QPalette::Dark, Settings::backgroundColor());
@@ -910,7 +910,7 @@ void MainWindow::preferences()
 
     // User edited the configuration - update your local copies of the
     // configuration data
-    connect(dialog, SIGNAL(settingsChanged(const QString&)),
+    connect(dialog, SIGNAL(settingsChanged(QString)),
             this, SLOT(updateConfiguration()));
 
     dialog->show();
@@ -930,9 +930,9 @@ void MainWindow::updateConfiguration()
 #else
     m_tabWidget->setCloseButtonEnabled(Settings::tabCloseButton());
 #endif
-    disconnect(m_tabWidget, SIGNAL(mouseMiddleClick(QWidget *)), this, SLOT(closeTab(QWidget *))); // just be sure it is not connected twice
+    disconnect(m_tabWidget, SIGNAL(mouseMiddleClick(QWidget*)), this, SLOT(closeTab(QWidget*))); // just be sure it is not connected twice
     if (Settings::tabMiddleClick())
-        connect(m_tabWidget, SIGNAL(mouseMiddleClick(QWidget *)), SLOT(closeTab(QWidget *)));
+        connect(m_tabWidget, SIGNAL(mouseMiddleClick(QWidget*)), SLOT(closeTab(QWidget*)));
 
     if (Settings::systemTrayIcon() && !m_systemTrayIcon) {
         m_systemTrayIcon = new SystemTrayIcon(this);
@@ -1103,7 +1103,7 @@ QWidget* MainWindow::newConnectionWidget()
         m_addressInput = new KLineEdit(m_newConnectionWidget);
         m_addressInput->setClearButtonShown(true);
         m_addressInput->setClickMessage(i18n("Type here to connect to an address and filter the list."));
-        connect(m_addressInput, SIGNAL(textChanged(const QString &)), m_remoteDesktopsModelProxy, SLOT(setFilterFixedString(const QString &)));
+        connect(m_addressInput, SIGNAL(textChanged(QString)), m_remoteDesktopsModelProxy, SLOT(setFilterFixedString(QString)));
 
         foreach(RemoteViewFactory *factory, m_remoteViewFactories) {
             m_protocolInput->addItem(factory->scheme());
@@ -1142,10 +1142,10 @@ QWidget* MainWindow::newConnectionWidget()
         // set up sorting and actions (double click open, right click custom menu)
         m_newConnectionTableView->setSortingEnabled(true);
         m_newConnectionTableView->sortByColumn(Settings::connectionListSortColumn(), Qt::SortOrder(Settings::connectionListSortOrder()));
-        connect(m_newConnectionTableView->horizontalHeader(), SIGNAL(sortIndicatorChanged(const int, const Qt::SortOrder)),
-                SLOT(saveConnectionListSort(const int, const Qt::SortOrder)));
-        connect(m_newConnectionTableView, SIGNAL(doubleClicked(const QModelIndex &)),
-                SLOT(openFromRemoteDesktopsModel(const QModelIndex &)));
+        connect(m_newConnectionTableView->horizontalHeader(), SIGNAL(sortIndicatorChanged(int,Qt::SortOrder)),
+                SLOT(saveConnectionListSort(int,Qt::SortOrder)));
+        connect(m_newConnectionTableView, SIGNAL(doubleClicked(QModelIndex)),
+                SLOT(openFromRemoteDesktopsModel(QModelIndex)));
         m_newConnectionTableView->setContextMenuPolicy(Qt::CustomContextMenu);
         connect(m_newConnectionTableView, SIGNAL(customContextMenuRequested(QPoint)), SLOT(showConnectionContextMenu(QPoint)));
 
@@ -1227,13 +1227,13 @@ void MainWindow::createDockWidget()
     m_dockWidgetTableView->showColumn(RemoteDesktopsModel::Title);
     m_dockWidgetTableView->sortByColumn(RemoteDesktopsModel::Title, Qt::AscendingOrder);
 
-    connect(m_dockWidgetTableView, SIGNAL(doubleClicked(const QModelIndex &)),
-            SLOT(openFromRemoteDesktopsModel(const QModelIndex &)));
+    connect(m_dockWidgetTableView, SIGNAL(doubleClicked(QModelIndex)),
+            SLOT(openFromRemoteDesktopsModel(QModelIndex)));
 
     KLineEdit *filterLineEdit = new KLineEdit(remoteDesktopsDockLayoutWidget);
     filterLineEdit->setClickMessage(i18n("Filter"));
     filterLineEdit->setClearButtonShown(true);
-    connect(filterLineEdit, SIGNAL(textChanged(const QString &)), m_remoteDesktopsModelProxy, SLOT(setFilterFixedString(const QString &)));
+    connect(filterLineEdit, SIGNAL(textChanged(QString)), m_remoteDesktopsModelProxy, SLOT(setFilterFixedString(QString)));
     remoteDesktopsDockLayout->addWidget(filterLineEdit);
     remoteDesktopsDockLayout->addWidget(m_dockWidgetTableView);
     remoteDesktopsDockWidget->setWidget(remoteDesktopsDockLayoutWidget);

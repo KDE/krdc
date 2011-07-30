@@ -54,7 +54,7 @@ NxView::NxView(QWidget *parent, const KUrl &url, KConfigGroup configGroup)
     m_clientThread.setCallbacks(&m_callbacks);
 
     connect(&m_clientThread, SIGNAL(hasXid(int)), this, SLOT(hasXid(int)));
-    connect(&m_callbacks, SIGNAL(progress(int, QString)), this, SLOT(handleProgress(int, QString)));
+    connect(&m_callbacks, SIGNAL(progress(int,QString)), this, SLOT(handleProgress(int,QString)));
     connect(&m_callbacks, SIGNAL(suspendedSessions(QList<nxcl::NXResumeData>)), this, SLOT(handleSuspendedSessions(QList<nxcl::NXResumeData>)));
     connect(&m_callbacks, SIGNAL(noSessions()), this, SLOT(handleNoSessions()));
     connect(&m_callbacks, SIGNAL(atCapacity()), this, SLOT(handleAtCapacity()));

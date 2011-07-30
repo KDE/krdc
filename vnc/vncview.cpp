@@ -67,8 +67,8 @@ VncView::VncView(QWidget *parent, const KUrl &url, KConfigGroup configGroup)
     m_host = url.host();
     m_port = url.port();
 
-    connect(&vncThread, SIGNAL(imageUpdated(int, int, int, int)), this, SLOT(updateImage(int, int, int, int)), Qt::BlockingQueuedConnection);
-    connect(&vncThread, SIGNAL(gotCut(const QString&)), this, SLOT(setCut(const QString&)), Qt::BlockingQueuedConnection);
+    connect(&vncThread, SIGNAL(imageUpdated(int,int,int,int)), this, SLOT(updateImage(int,int,int,int)), Qt::BlockingQueuedConnection);
+    connect(&vncThread, SIGNAL(gotCut(QString)), this, SLOT(setCut(QString)), Qt::BlockingQueuedConnection);
     connect(&vncThread, SIGNAL(passwordRequest()), this, SLOT(requestPassword()), Qt::BlockingQueuedConnection);
     connect(&vncThread, SIGNAL(outputErrorMessage(QString)), this, SLOT(outputErrorMessage(QString)));
 
@@ -160,8 +160,8 @@ void VncView::startQuitting()
     unpressModifiers();
 
     // Disconnect all signals so that we don't get any more callbacks from the client thread
-    bool imageUpdatedDisconnect = disconnect(&vncThread, SIGNAL(imageUpdated(int, int, int, int)), this, SLOT(updateImage(int, int, int, int)));
-    bool gotCutDisconnect = disconnect(&vncThread, SIGNAL(gotCut(const QString&)), this, SLOT(setCut(const QString&)));
+    bool imageUpdatedDisconnect = disconnect(&vncThread, SIGNAL(imageUpdated(int,int,int,int)), this, SLOT(updateImage(int,int,int,int)));
+    bool gotCutDisconnect = disconnect(&vncThread, SIGNAL(gotCut(QString)), this, SLOT(setCut(QString)));
     bool passwordRequestDisconnect = disconnect(&vncThread, SIGNAL(passwordRequest()), this, SLOT(requestPassword()));
     bool outputErrorMessageDisconnect = disconnect(&vncThread, SIGNAL(outputErrorMessage(QString)), this, SLOT(outputErrorMessage(QString)));
 
