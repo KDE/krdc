@@ -97,6 +97,7 @@ MainWindow::MainWindow(QWidget *parent)
     setStandardToolBarMenuEnabled(true);
 
     m_tabWidget = new TabbedViewWidget(this);
+    m_tabWidget->setMovable(true);
     m_tabWidget->setTabPosition((KTabWidget::TabPosition) Settings::tabPosition());
 
 #if QT_VERSION >= 0x040500
