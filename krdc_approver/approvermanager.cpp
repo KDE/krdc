@@ -45,7 +45,7 @@ static inline Tp::ChannelClassSpecList channelClassSpecList()
     spec.setChannelType(TP_QT4_IFACE_CHANNEL_TYPE_STREAM_TUBE);
     spec.setTargetHandleType(Tp::HandleTypeContact);
     spec.setRequested(false);
-    spec.setProperty(QLatin1String(TP_QT4_IFACE_CHANNEL_TYPE_STREAM_TUBE ".Service"),
+    spec.setProperty(QString(TP_QT4_IFACE_CHANNEL_TYPE_STREAM_TUBE) + ".Service",
                      QVariant("rfb"));
     return Tp::ChannelClassSpecList() << spec;
 }
