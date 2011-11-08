@@ -392,12 +392,14 @@ void VncClientThread::run()
             }
         }
 
+        locker.relock();
         while (!m_eventQueue.isEmpty()) {
             ClientEvent* clientEvent = m_eventQueue.dequeue();
+            locker.unlock();
             clientEvent->fire(cl);
             delete clientEvent;
+            locker.relock();
         }
-        locker.relock();
     }
 
     m_stopped = true;
