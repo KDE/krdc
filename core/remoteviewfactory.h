@@ -49,7 +49,7 @@ class KUrl;
 /**
  * Factory to be implemented by any plugin.
  */
-class KDE_EXPORT RemoteViewFactory : public QObject
+class KRDCCORE_EXPORT RemoteViewFactory : public QObject
 {
     Q_OBJECT
 

@@ -28,10 +28,11 @@
 #ifdef QTONLY
     #include <QUrl>
     #define KUrl QUrl
-    #define KDE_EXPORT
+    #define KRDCCORE_EXPORT
 #else
     #include <KUrl>
     #include <KWallet/Wallet>
+    #include <krdc_export.h>
 #endif
 
 #include <QWidget>
@@ -55,7 +56,7 @@ class HostPreferences;
  *     MotionNotify events will be forwarded.
  *
  */
-class KDE_EXPORT RemoteView : public QWidget
+class KRDCCORE_EXPORT RemoteView : public QWidget
 {
     Q_OBJECT
 
