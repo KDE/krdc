@@ -39,7 +39,7 @@ class QWidget;
 class KConfig;
 class KConfigGroup;
 
-class KRDCCORE_EXPORT HostPreferences : public QObject
+class KDE_EXPORT HostPreferences : public QObject
 {
     Q_OBJECT
 
