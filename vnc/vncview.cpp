@@ -72,7 +72,6 @@ VncView::VncView(QWidget *parent, const KUrl &url, KConfigGroup configGroup)
     connect(&vncThread, SIGNAL(outputErrorMessage(QString)), this, SLOT(outputErrorMessage(QString)));
 
     m_clipboard = QApplication::clipboard();
-    connect(m_clipboard, SIGNAL(selectionChanged()), this, SLOT(clipboardSelectionChanged()));
     connect(m_clipboard, SIGNAL(dataChanged()), this, SLOT(clipboardDataChanged()));
     
 #ifndef QTONLY
@@ -413,7 +412,6 @@ void VncView::setCut(const QString &text)
 {
     m_dontSendClipboard = true;
     m_clipboard->setText(text, QClipboard::Clipboard);
-    m_clipboard->setText(text, QClipboard::Selection);
     m_dontSendClipboard = false;
 }
 
@@ -574,21 +572,6 @@ void VncView::unpressModifiers()
         it++;
     }
     m_mods.clear();
-}
-
-void VncView::clipboardSelectionChanged()
-{
-    kDebug(5011);
-
-    if (m_status != Connected)
-        return;
-
-    if (m_clipboard->ownsSelection() || m_dontSendClipboard)
-        return;
-
-    const QString text = m_clipboard->text(QClipboard::Selection);
-
-    vncThread.clientCut(text);
 }
 
 void VncView::clipboardDataChanged()
