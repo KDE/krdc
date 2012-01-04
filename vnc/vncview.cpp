@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007-2008 Urs Wolfer <uwolfer @ kde.org>
+** Copyright (C) 2007-2012 Urs Wolfer <uwolfer @ kde.org>
 **
 ** This file is part of KDE.
 **
@@ -57,7 +57,6 @@ VncView::VncView(QWidget *parent, const KUrl &url, KConfigGroup configGroup)
         m_repaint(false),
         m_quitFlag(false),
         m_firstPasswordTry(true),
-        m_authenticaionCanceled(false),
         m_dontSendClipboard(false),
         m_horizontalFactor(1.0),
         m_verticalFactor(1.0),
@@ -157,6 +156,10 @@ void VncView::startQuitting()
 
     setStatus(Disconnecting);
 
+    m_quitFlag = true;
+
+    vncThread.stop();
+
     unpressModifiers();
 
     // Disconnect all signals so that we don't get any more callbacks from the client thread
@@ -166,14 +169,6 @@ void VncView::startQuitting()
     bool outputErrorMessageDisconnect = disconnect(&vncThread, SIGNAL(outputErrorMessage(QString)), this, SLOT(outputErrorMessage(QString)));
 
     kDebug(5011) << "Signals disconnected: imageUpdated: " << imageUpdatedDisconnect << "gotCut: " << gotCutDisconnect << "passwordRequest: " << passwordRequestDisconnect << "outputErrorMessage: " << outputErrorMessageDisconnect;
-
-    const bool connected = status() == RemoteView::Connected;
-
-    m_quitFlag = true;
-
-    if (connected) {
-        vncThread.stop();
-    }
 
     vncThread.quit();
 
@@ -234,11 +229,6 @@ void VncView::requestPassword()
 {
     kDebug(5011) << "request password";
 
-    if (m_authenticaionCanceled) {
-        startQuitting();
-        return;
-    }
-
     setStatus(Authenticating);
 
 #ifndef QTONLY
@@ -254,8 +244,9 @@ void VncView::requestPassword()
     }
 #endif
 
-    if (!m_url.password().isNull()) {
+    if (m_firstPasswordTry && !m_url.password().isNull()) {
         vncThread.setPassword(m_url.password());
+        m_firstPasswordTry = false;
         return;
     }
 
@@ -269,7 +260,7 @@ void VncView::requestPassword()
     if (ok)
         vncThread.setPassword(password);
     else
-        m_authenticaionCanceled = true;
+        startQuitting();
 #else
     KPasswordDialog dialog(this);
     dialog.setPrompt(m_firstPasswordTry ? i18n("Access to the system requires a password.")
@@ -279,7 +270,7 @@ void VncView::requestPassword()
         vncThread.setPassword(dialog.password());
     } else {
         kDebug(5011) << "password dialog not accepted";
-        m_authenticaionCanceled = true;
+        startQuitting();
     }
 #endif
 }
