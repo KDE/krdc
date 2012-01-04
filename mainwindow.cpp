@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007 - 2010 Urs Wolfer <uwolfer @ kde.org>
+** Copyright (C) 2007 - 2012 Urs Wolfer <uwolfer @ kde.org>
 ** Copyright (C) 2009 - 2010 Tony Murray <murraytony @ gmail.com>
 **
 ** This file is part of KDE.
@@ -354,7 +354,6 @@ void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConn
 
     saveHostPrefs();
 
-    view->setGrabAllKeys(prefs->grabAllKeys());
     view->showDotCursor(prefs->showLocalCursor() ? RemoteView::CursorOn : RemoteView::CursorOff);
     view->setViewOnly(prefs->viewOnly());
     if (! switchFullscreenWhenConnected) view->enableScaling(prefs->windowedScale());
@@ -442,7 +441,8 @@ void MainWindow::statusChanged(RemoteView::RemoteStatus status)
     if (status == RemoteView::Disconnecting || status == RemoteView::Disconnected)
         return;
 
-    const QString host = m_remoteViewList.at(m_currentRemoteView)->host();
+    RemoteView *view = m_remoteViewList.at(m_currentRemoteView);
+    const QString host = view->host();
 
     QString iconName = "krdc";
     QString message;
@@ -463,6 +463,11 @@ void MainWindow::statusChanged(RemoteView::RemoteStatus status)
     case RemoteView::Connected:
         iconName = "krdc";
         message = i18n("Connected to %1", host);
+
+        if (view->grabAllKeys() != view->hostPreferences()->grabAllKeys()) {
+            view->setGrabAllKeys(view->hostPreferences()->grabAllKeys());
+            updateActionStatus();
+        }
 
         // when started with command line fullscreen argument
         if (m_switchFullscreenWhenConnected) {
