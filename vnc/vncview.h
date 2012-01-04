@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007-2008 Urs Wolfer <uwolfer @ kde.org>
+** Copyright (C) 2007-2012 Urs Wolfer <uwolfer @ kde.org>
 **
 ** This file is part of KDE.
 **
@@ -85,7 +85,6 @@ private:
     bool m_repaint;
     bool m_quitFlag;
     bool m_firstPasswordTry;
-    bool m_authenticaionCanceled;
     bool m_dontSendClipboard;
     qreal m_horizontalFactor;
     qreal m_verticalFactor;
