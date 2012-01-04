@@ -104,7 +104,6 @@ private slots:
     void setCut(const QString &text);
     void requestPassword();
     void outputErrorMessage(const QString &message);
-    void clipboardSelectionChanged();
     void clipboardDataChanged();
 };
 
