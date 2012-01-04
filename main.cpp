@@ -1,7 +1,7 @@
 /****************************************************************************
 **
 ** Copyright (C) 2001-2003 Tim Jansen <tim@tjansen.de>
-** Copyright (C) 2007 - 2008 Urs Wolfer <uwolfer @ kde.org>
+** Copyright (C) 2007 - 2012 Urs Wolfer <uwolfer @ kde.org>
 **
 ** This file is part of KDE.
 **
@@ -38,7 +38,7 @@ int main(int argc, char **argv)
     startupTimer.start();
     KAboutData aboutData("krdc", 0, ki18n("KRDC"), KDE_VERSION_STRING,
                          ki18n("KDE Remote Desktop Client"), KAboutData::License_GPL,
-                         ki18n("(c) 2007-2010, Urs Wolfer\n"
+                         ki18n("(c) 2007-2012, Urs Wolfer\n"
                                "(c) 2001-2003, Tim Jansen\n"
                                "(c) 2002-2003, Arend van Beelen jr.\n"
                                "(c) 2000-2002, Const Kaplinsky\n"
@@ -54,7 +54,7 @@ int main(int argc, char **argv)
     aboutData.addCredit(ki18n("Brad Hards"), ki18n("Google Summer of Code 2007 KRDC project mentor"),
                         "bradh@frogmouth.net");
     aboutData.addCredit(ki18n("LibVNCServer / LibVNCClient developers"), ki18n("VNC client library"),
-                        "libvncserver-common@lists.sf.net");
+                        "libvncserver-common@lists.sf.net", "http://libvncserver.sourceforge.net/");
     aboutData.addAuthor(ki18n("Abner Silva"), ki18n("Telepathy Tubes Integration"), "abner.silva@kdemail.net");
 
     KCmdLineArgs::init(argc, argv, &aboutData);
