@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2009 Collabora Ltd <info@collabora.co.uk>
+** Copyright (C) 2009-2011 Collabora Ltd <info@collabora.co.uk>
 ** Copyright (C) 2009 Abner Silva <abner.silva@kdemail.net>
 **
 ** This file is part of KDE.
@@ -25,13 +25,11 @@
 #ifndef TUBESMANAGER_H
 #define TUBESMANAGER_H
 
-#include "tube.h"
-
-#include <TelepathyQt4/AbstractClientHandler>
-
+#include <TelepathyQt4/StreamTubeClient>
+#include <QtNetwork/QHostAddress>
 #include <KUrl>
 
-class TubesManager : public QObject, public Tp::AbstractClientHandler
+class TubesManager : public QObject
 {
     Q_OBJECT
 
@@ -39,24 +37,23 @@ public:
     TubesManager(QObject *parent);
     virtual ~TubesManager();
 
-    void closeTube(KUrl url);
-
-    virtual bool bypassApproval() const;
-    virtual void handleChannels(const Tp::MethodInvocationContextPtr<> & context,
-            const Tp::AccountPtr & account,
-            const Tp::ConnectionPtr & connection,
-            const QList<Tp::ChannelPtr> & channels,
-            const QList<Tp::ChannelRequestPtr> & requestsSatisfied,
-            const QDateTime & userActionTime,
-            const Tp::AbstractClientHandler::HandlerInfo & handlerInfo);
-
-private Q_SLOTS:
-    void onTubeStateChanged(Tube::Status);
+    void closeTube(const KUrl & url);
 
 Q_SIGNALS:
     void newConnection(KUrl);
 
+private Q_SLOTS:
+    void onTubeAccepted(
+            const QHostAddress & listenAddress,
+            quint16 listenPort,
+            const QHostAddress & sourceAddress,
+            quint16 sourcePort,
+            const Tp::AccountPtr & account,
+            const Tp::IncomingStreamTubeChannelPtr & tube);
+
 private:
-    QList<Tube *> m_tubes;
+    Tp::StreamTubeClientPtr m_stubeClient;
+    QHash<KUrl, Tp::IncomingStreamTubeChannelPtr> m_tubes;
 };
+
 #endif

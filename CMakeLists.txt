@@ -84,7 +84,6 @@ set(krdc_SRCS
 if(BUILD_EXPERIMENTAL_TUBES_SUPPORT AND TELEPATHY_QT4_FOUND)
     set(krdc_SRCS ${krdc_SRCS}
         tubesmanager.cpp
-        tube.cpp
     )
 endif(BUILD_EXPERIMENTAL_TUBES_SUPPORT AND TELEPATHY_QT4_FOUND)
 

@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2009 Collabora Ltd <info@collabora.co.uk>
+** Copyright (C) 2009-2011 Collabora Ltd <info@collabora.co.uk>
 ** Copyright (C) 2009 Abner Silva <abner.silva@kdemail.net>
 **
 ** This file is part of KDE.
@@ -24,25 +24,14 @@
 
 #include "tubesmanager.h"
 
-#include <TelepathyQt4/ChannelClassSpecList>
+#include <TelepathyQt4/IncomingStreamTubeChannel>
 #include <TelepathyQt4/Debug>
 
 #include <KDebug>
 
-static inline Tp::ChannelClassSpecList channelClassSpecList()
-{
-    Tp::ChannelClassSpec spec = Tp::ChannelClassSpec();
-    spec.setChannelType(TP_QT4_IFACE_CHANNEL_TYPE_STREAM_TUBE);
-    spec.setTargetHandleType(Tp::HandleTypeContact);
-    spec.setRequested(false);
-    spec.setProperty(QString(TP_QT4_IFACE_CHANNEL_TYPE_STREAM_TUBE) + ".Service",
-                     QVariant("rfb"));
-    return Tp::ChannelClassSpecList() << spec;
-}
 
 TubesManager::TubesManager(QObject *parent)
-    : QObject(parent),
-      AbstractClientHandler(channelClassSpecList())
+    : QObject(parent)
 {
     kDebug() << "Initializing tubes manager";
 
@@ -51,82 +40,49 @@ TubesManager::TubesManager(QObject *parent)
 
     /* Registering telepathy types */
     Tp::registerTypes();
+
+    m_stubeClient = Tp::StreamTubeClient::create(
+            QStringList() << QLatin1String("rfb"),
+            QStringList(),
+            QLatin1String("krdc_rfb_handler"));
+
+    m_stubeClient->setToAcceptAsTcp();
+
+    connect(m_stubeClient.data(),
+            SIGNAL(tubeAcceptedAsTcp(QHostAddress,quint16,QHostAddress,quint16,
+                                     Tp::AccountPtr,Tp::IncomingStreamTubeChannelPtr)),
+            SLOT(onTubeAccepted(QHostAddress,quint16,QHostAddress,quint16,
+                                Tp::AccountPtr,Tp::IncomingStreamTubeChannelPtr)));
 }
 
 TubesManager::~TubesManager()
 {
-    kDebug() << "Destroying tube manager";
+    kDebug() << "Destroying tubes manager";
 }
 
-bool TubesManager::bypassApproval() const
+void TubesManager::closeTube(const KUrl& url)
 {
-    kDebug() << "bypassing";
-    return false;
+    if (m_tubes.contains(url)) {
+        m_tubes.take(url)->requestClose();
+    }
 }
 
-void TubesManager::handleChannels(const Tp::MethodInvocationContextPtr<> & context,
+void TubesManager::onTubeAccepted(
+        const QHostAddress & listenAddress, quint16 listenPort,
+        const QHostAddress & sourceAddress, quint16 sourcePort,
         const Tp::AccountPtr & account,
-        const Tp::ConnectionPtr & connection,
-        const QList<Tp::ChannelPtr> & channels,
-        const QList<Tp::ChannelRequestPtr> & requestsSatisfied,
-        const QDateTime & userActionTime,
-        const Tp::AbstractClientHandler::HandlerInfo & handlerInfo)
+        const Tp::IncomingStreamTubeChannelPtr & tube)
 {
+    Q_UNUSED(sourceAddress);
+    Q_UNUSED(sourcePort);
     Q_UNUSED(account);
-    Q_UNUSED(connection);
-    Q_UNUSED(requestsSatisfied);
-    Q_UNUSED(userActionTime);
-    Q_UNUSED(handlerInfo);
 
-    foreach(const Tp::ChannelPtr &channel, channels) {
-        kDebug() << "Handling new tube";
+    KUrl url;
+    url.setScheme("vnc");
+    url.setHost(listenAddress.toString());
+    url.setPort(listenPort);
 
-        QVariantMap properties = channel->immutableProperties();
-
-        if (properties[TELEPATHY_INTERFACE_CHANNEL ".ChannelType"] ==
-               TELEPATHY_INTERFACE_CHANNEL_TYPE_STREAM_TUBE) {
-
-            kDebug() << "Handling:" << TELEPATHY_INTERFACE_CHANNEL_TYPE_STREAM_TUBE;
-
-            /* New tube arrived */
-            Tube *tube = new Tube(channel, this);
-
-            /* Listening to tube status changed */
-            connect(tube,
-                    SIGNAL(statusChanged(Tube::Status)),
-                    SLOT(onTubeStateChanged(Tube::Status)));
-
-            m_tubes.append(tube);
-        }
-    }
-    context->setFinished();
-}
-
-void TubesManager::closeTube(KUrl url)
-{
-    kDebug() << "Closing tube:" << url;
-
-    foreach (Tube *tube, m_tubes)
-        if (tube->url() == url) {
-            m_tubes.removeOne(tube);
-            tube->close();
-        }
-}
-
-void TubesManager::onTubeStateChanged(Tube::Status status)
-{
-    kDebug() << "tube status changed:" << status;
-    Tube *tube = qobject_cast<Tube *>(sender());
-
-    if (status == Tube::Open) {
-        KUrl url = tube->url();
-        kDebug() << "newConnection:" << url;
-        emit newConnection(url);
-    }
-    else if (status == Tube::Close) {
-        kDebug() << "Tube:" << tube->url() << "closed";
-        m_tubes.removeOne(tube);
-        tube->deleteLater();
-        kDebug() << m_tubes;
-    }
+    kDebug() << "newConnection:" << url;
+    m_tubes.insert(url, tube);
+    emit newConnection(url);
 }

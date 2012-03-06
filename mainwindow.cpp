@@ -251,13 +251,8 @@ void MainWindow::loadAllPlugins()
 
 #ifdef TELEPATHY_SUPPORT
     /* Start tube handler */
-    m_tubesManager = Tp::SharedPtr<TubesManager>(new TubesManager(this));
-    connect(m_tubesManager.data(),
-            SIGNAL(newConnection(KUrl)),
-            SLOT(newConnection(KUrl)));
-
-    m_registrar = Tp::ClientRegistrar::create();
-    m_registrar->registerClient(Tp::AbstractClientPtr::dynamicCast(m_tubesManager), "krdc_rfb_handler");
+    m_tubesManager = new TubesManager(this);
+    connect(m_tubesManager, SIGNAL(newConnection(KUrl)), SLOT(newConnection(KUrl)));
 #endif
 }
 
@@ -605,7 +600,7 @@ void MainWindow::disconnectHost()
     m_tabWidget->removePage(widgetToDelete);
     widgetToDelete->deleteLater();
 #ifdef TELEPATHY_SUPPORT
-        m_tubesManager->closeTube(view->url());
+    m_tubesManager->closeTube(view->url());
 #endif
 
     // if closing the last connection, create new connection tab

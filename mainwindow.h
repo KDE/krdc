@@ -32,10 +32,6 @@
 #include <KService>
 #include <KXmlGuiWindow>
 
-#ifdef TELEPATHY_SUPPORT
-#include <TelepathyQt4/ClientRegistrar>
-#endif
-
 class KComboBox;
 class KLineEdit;
 class KPushButton;
@@ -139,8 +135,7 @@ private:
     QTableView *m_newConnectionTableView;
     QSortFilterProxyModel *m_remoteDesktopsModelProxy;
 #ifdef TELEPATHY_SUPPORT
-    Tp::SharedPtr<TubesManager> m_tubesManager;
-    Tp::ClientRegistrarPtr m_registrar;
+    TubesManager *m_tubesManager;
 #endif
     QWidget *m_newConnectionWidget;
 };
