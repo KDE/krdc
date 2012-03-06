@@ -27,11 +27,11 @@
 #include <KNotification>
 #include <KLocalizedString>
 
-#include <TelepathyQt4/Contact>
-#include <TelepathyQt4/Connection>
-#include <TelepathyQt4/ReferencedHandles>
-#include <TelepathyQt4/PendingReady>
-#include <TelepathyQt4/ChannelDispatchOperation>
+#include <TelepathyQt/Contact>
+#include <TelepathyQt/Connection>
+#include <TelepathyQt/ReferencedHandles>
+#include <TelepathyQt/PendingReady>
+#include <TelepathyQt/ChannelDispatchOperation>
 
 Approver::Approver(const Tp::MethodInvocationContextPtr<> &context,
             const QList<Tp::ChannelPtr> &channels,
@@ -122,7 +122,7 @@ Approver::~Approver()
 void Approver::onAccepted()
 {
     kDebug() << "Channel approved";
-    m_dispatchOp->handleWith(TELEPATHY_INTERFACE_CLIENT ".krdc_rfb_handler");
+    m_dispatchOp->handleWith(TP_QT_IFACE_CLIENT + ".krdc_rfb_handler");
 
     emit finished();
 }

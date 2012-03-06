@@ -31,21 +31,21 @@
 #include <KApplication>
 #include <KDebug>
 
-#include <TelepathyQt4/Account>
-#include <TelepathyQt4/ChannelClassSpecList>
-#include <TelepathyQt4/ChannelDispatchOperation>
-#include <TelepathyQt4/Connection>
-#include <TelepathyQt4/PendingOperation>
-#include <TelepathyQt4/PendingReady>
-#include <TelepathyQt4/Debug>
+#include <TelepathyQt/Account>
+#include <TelepathyQt/ChannelClassSpecList>
+#include <TelepathyQt/ChannelDispatchOperation>
+#include <TelepathyQt/Connection>
+#include <TelepathyQt/PendingOperation>
+#include <TelepathyQt/PendingReady>
+#include <TelepathyQt/Debug>
 
 static inline Tp::ChannelClassSpecList channelClassSpecList()
 {
     Tp::ChannelClassSpec spec = Tp::ChannelClassSpec();
-    spec.setChannelType(TP_QT4_IFACE_CHANNEL_TYPE_STREAM_TUBE);
+    spec.setChannelType(TP_QT_IFACE_CHANNEL_TYPE_STREAM_TUBE);
     spec.setTargetHandleType(Tp::HandleTypeContact);
     spec.setRequested(false);
-    spec.setProperty(QString(TP_QT4_IFACE_CHANNEL_TYPE_STREAM_TUBE) + ".Service",
+    spec.setProperty(TP_QT_IFACE_CHANNEL_TYPE_STREAM_TUBE + ".Service",
                      QVariant("rfb"));
     return Tp::ChannelClassSpecList() << spec;
 }

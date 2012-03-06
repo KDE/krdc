@@ -24,8 +24,8 @@
 
 #include "tubesmanager.h"
 
-#include <TelepathyQt4/IncomingStreamTubeChannel>
-#include <TelepathyQt4/Debug>
+#include <TelepathyQt/IncomingStreamTubeChannel>
+#include <TelepathyQt/Debug>
 
 #include <KDebug>
 

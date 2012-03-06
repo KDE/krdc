@@ -25,7 +25,7 @@
 #ifndef TUBESMANAGER_H
 #define TUBESMANAGER_H
 
-#include <TelepathyQt4/StreamTubeClient>
+#include <TelepathyQt/StreamTubeClient>
 #include <QtNetwork/QHostAddress>
 #include <KUrl>
 

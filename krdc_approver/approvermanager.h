@@ -25,7 +25,7 @@
 #ifndef APPROVERMANAGER_H
 #define APPROVERMANAGER_H
 
-#include <TelepathyQt4/AbstractClientApprover>
+#include <TelepathyQt/AbstractClientApprover>
 
 class Approver;
 

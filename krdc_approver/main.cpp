@@ -29,9 +29,9 @@
 #include <KLocalizedString>
 #include <KUniqueApplication>
 
-#include <TelepathyQt4/Types>
-#include <TelepathyQt4/Debug>
-#include <TelepathyQt4/ClientRegistrar>
+#include <TelepathyQt/Types>
+#include <TelepathyQt/Debug>
+#include <TelepathyQt/ClientRegistrar>
 
 int main(int argc, char **argv)
 {

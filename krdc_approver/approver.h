@@ -27,7 +27,7 @@
 
 #include <QObject>
 
-#include <TelepathyQt4/Channel>
+#include <TelepathyQt/Channel>
 
 class KNotification;
 
