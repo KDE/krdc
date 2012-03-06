@@ -35,12 +35,12 @@ if(NOT INSIDE_KDENETWORK)
         message(WARNING "You enabled experimental Tubes support. Expect breakage!!")
 
         macro_optional_find_package(TelepathyQt4)
-        macro_log_feature(TELEPATHY_QT4_FOUND "telepathy-qt4" "Telepathy Qt Bindings" "http://telepathy.freedesktop.org" FALSE "0.18" "Needed to build Telepathy Tubes support.")
+        macro_log_feature(TelepathyQt4_FOUND "telepathy-qt" "Telepathy Qt Bindings" "http://telepathy.freedesktop.org" FALSE "0.9" "Needed to build Telepathy Tubes support.")
 
-        if (TELEPATHY_QT4_FOUND)
+        if(TelepathyQt4_FOUND)
             add_definitions(-DTELEPATHY_SUPPORT)
             include_directories(${TELEPATHY_QT4_INCLUDE_DIR})
-        endif (TELEPATHY_QT4_FOUND)
+        endif()
     endif (BUILD_EXPERIMENTAL_TUBES_SUPPORT)
 
 endif(NOT INSIDE_KDENETWORK)
@@ -61,9 +61,9 @@ add_subdirectory(nx)
 add_subdirectory(rdp)
 add_subdirectory(test)
 
-if(BUILD_EXPERIMENTAL_TUBES_SUPPORT AND TELEPATHY_QT4_FOUND)
+if(BUILD_EXPERIMENTAL_TUBES_SUPPORT AND TelepathyQt4_FOUND)
     add_subdirectory(krdc_approver)
-endif(BUILD_EXPERIMENTAL_TUBES_SUPPORT AND TELEPATHY_QT4_FOUND)
+endif()
 
 add_definitions(-DKDE_DEFAULT_DEBUG_AREA=5010)
 add_definitions(-DBUILD_ZEROCONF)
@@ -81,11 +81,11 @@ set(krdc_SRCS
     main.cpp
 )
 
-if(BUILD_EXPERIMENTAL_TUBES_SUPPORT AND TELEPATHY_QT4_FOUND)
+if(BUILD_EXPERIMENTAL_TUBES_SUPPORT AND TelepathyQt4_FOUND)
     set(krdc_SRCS ${krdc_SRCS}
         tubesmanager.cpp
     )
-endif(BUILD_EXPERIMENTAL_TUBES_SUPPORT AND TELEPATHY_QT4_FOUND)
+endif()
 
 kde4_add_ui_files(krdc_SRCS
     config/general.ui
@@ -101,11 +101,11 @@ target_link_libraries(krdc
     krdccore
 )
 
-if(BUILD_EXPERIMENTAL_TUBES_SUPPORT AND TELEPATHY_QT4_FOUND)
+if(BUILD_EXPERIMENTAL_TUBES_SUPPORT AND TelepathyQt4_FOUND)
     target_link_libraries(krdc
         ${TELEPATHY_QT4_LIBRARIES}
     )
-endif(BUILD_EXPERIMENTAL_TUBES_SUPPORT AND TELEPATHY_QT4_FOUND)
+endif()
 
 target_link_libraries(krdc ${KDE4_KDNSSD_LIBS})
 
@@ -114,14 +114,14 @@ install(FILES krdcui.rc DESTINATION ${DATA_INSTALL_DIR}/krdc)
 install(PROGRAMS krdc.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
 install(FILES pointcursor.png pointcursormask.png DESTINATION ${DATA_INSTALL_DIR}/krdc/pics)
 
-if(BUILD_EXPERIMENTAL_TUBES_SUPPORT AND TELEPATHY_QT4_FOUND)
+if(BUILD_EXPERIMENTAL_TUBES_SUPPORT AND TelepathyQt4_FOUND)
     configure_file(org.freedesktop.Telepathy.Client.krdc_rfb_handler.service.in
                     ${CMAKE_CURRENT_BINARY_DIR}/org.freedesktop.Telepathy.Client.krdc_rfb_handler.service)
     install(FILES ${CMAKE_CURRENT_BINARY_DIR}/org.freedesktop.Telepathy.Client.krdc_rfb_handler.service
             DESTINATION ${DBUS_SERVICES_INSTALL_DIR})
 
     install(FILES krdc_rfb_handler.client DESTINATION ${SHARE_INSTALL_PREFIX}/telepathy/clients/)
-endif(BUILD_EXPERIMENTAL_TUBES_SUPPORT AND TELEPATHY_QT4_FOUND)
+endif()
 
 if(NOT INSIDE_KDENETWORK)
     macro_display_feature_log()
