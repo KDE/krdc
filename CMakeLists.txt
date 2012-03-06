@@ -31,22 +31,18 @@ if(NOT INSIDE_KDENETWORK)
     # macro_optional_find_package(LibNXCL)
     # macro_log_feature(LIBNXCL_FOUND "libnxcl" "NX X compression client library" "http://svn.berlios.de/svnroot/repos/freenx/trunk/freenx-client/nxcl/" FALSE "1.0" "Needed to build Krdc with NX support")
 
-    if (BUILD_EXPERIMENTAL_TUBES_SUPPORT)
-        message(WARNING "You enabled experimental Tubes support. Expect breakage!!")
-
-        macro_optional_find_package(TelepathyQt4)
-        macro_log_feature(TelepathyQt4_FOUND "telepathy-qt" "Telepathy Qt Bindings" "http://telepathy.freedesktop.org" FALSE "0.9" "Needed to build Telepathy Tubes support.")
-
-        if(TelepathyQt4_FOUND)
-            add_definitions(-DTELEPATHY_SUPPORT)
-            include_directories(${TELEPATHY_QT4_INCLUDE_DIR})
-        endif()
-    endif (BUILD_EXPERIMENTAL_TUBES_SUPPORT)
+    macro_optional_find_package(TelepathyQt4)
+    macro_log_feature(TelepathyQt4_FOUND "telepathy-qt" "Telepathy Qt Bindings" "http://telepathy.freedesktop.org" FALSE "0.9" "Needed to build Telepathy Tubes support.")
 
 endif(NOT INSIDE_KDENETWORK)
 
 macro_optional_find_package(LibVNCServer)
 macro_log_feature(LIBVNCSERVER_FOUND "libvncserver" "VNC Server library" "http://libvncserver.sourceforge.net/" FALSE "0.9" "Needed to build Krfb and VNC support in Krdc")
+
+if(TelepathyQt4_FOUND)
+    add_definitions(-DTELEPATHY_SUPPORT)
+    include_directories(${TELEPATHY_QT4_INCLUDE_DIR})
+endif()
 
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}
@@ -61,7 +57,7 @@ add_subdirectory(nx)
 add_subdirectory(rdp)
 add_subdirectory(test)
 
-if(BUILD_EXPERIMENTAL_TUBES_SUPPORT AND TelepathyQt4_FOUND)
+if(TelepathyQt4_FOUND)
     add_subdirectory(krdc_approver)
 endif()
 
@@ -81,7 +77,7 @@ set(krdc_SRCS
     main.cpp
 )
 
-if(BUILD_EXPERIMENTAL_TUBES_SUPPORT AND TelepathyQt4_FOUND)
+if(TelepathyQt4_FOUND)
     set(krdc_SRCS ${krdc_SRCS}
         tubesmanager.cpp
     )
@@ -101,7 +97,7 @@ target_link_libraries(krdc
     krdccore
 )
 
-if(BUILD_EXPERIMENTAL_TUBES_SUPPORT AND TelepathyQt4_FOUND)
+if(TelepathyQt4_FOUND)
     target_link_libraries(krdc
         ${TELEPATHY_QT4_LIBRARIES}
     )
@@ -114,7 +110,7 @@ install(FILES krdcui.rc DESTINATION ${DATA_INSTALL_DIR}/krdc)
 install(PROGRAMS krdc.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
 install(FILES pointcursor.png pointcursormask.png DESTINATION ${DATA_INSTALL_DIR}/krdc/pics)
 
-if(BUILD_EXPERIMENTAL_TUBES_SUPPORT AND TelepathyQt4_FOUND)
+if(TelepathyQt4_FOUND)
     configure_file(org.freedesktop.Telepathy.Client.krdc_rfb_handler.service.in
                     ${CMAKE_CURRENT_BINARY_DIR}/org.freedesktop.Telepathy.Client.krdc_rfb_handler.service)
     install(FILES ${CMAKE_CURRENT_BINARY_DIR}/org.freedesktop.Telepathy.Client.krdc_rfb_handler.service
