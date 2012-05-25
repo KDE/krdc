@@ -26,6 +26,7 @@
 #include <KParts/Part>
 #include <KPluginFactory>
 #include <KPluginLoader>
+#include <KService>
 #include <kde_terminal_interface.h>
 
 #include <QDir>
@@ -49,7 +50,11 @@ KonsoleView::KonsoleView(QWidget *parent, const KUrl &url, KConfigGroup configGr
     setFixedSize(size);
     emit framebufferSizeChanged(size.width(), size.height());
     
-    KPluginFactory* factory = KPluginLoader("libkonsolepart").factory();
+    KPluginFactory* factory = 0;
+    KService::Ptr service = KService::serviceByDesktopName("konsolepart");
+    if (service) {
+        factory = KPluginLoader(service->library()).factory();
+    }
     KParts::ReadOnlyPart* part = factory ? (factory->create<KParts::ReadOnlyPart>(this)) : 0;
     if (part != 0) {
 //         connect(part, SIGNAL(destroyed(QObject*)), this, SLOT(terminalExited()));
