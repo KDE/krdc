@@ -37,7 +37,7 @@ if(NOT INSIDE_KDENETWORK)
 endif(NOT INSIDE_KDENETWORK)
 
 macro_optional_find_package(LibVNCServer)
-macro_log_feature(LIBVNCSERVER_FOUND "libvncserver" "VNC Server library" "http://libvncserver.sourceforge.net/" FALSE "0.9" "Needed to build Krfb and VNC support in KRDC")
+macro_log_feature(LIBVNCSERVER_FOUND "libvncserver" "VNC server / client library" "http://libvncserver.sourceforge.net/" FALSE "0.9.8" "Needed to build VNC client support in KRDC")
 
 FIND_PROGRAM(FREERDP_EXECUTABLE xfreerdp)
 if(FREERDP_EXECUTABLE)
