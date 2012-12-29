@@ -37,7 +37,7 @@ RdpViewFactory::RdpViewFactory(QObject *parent, const QVariantList &args)
 
     m_connectToolTipString = i18n("Connect to a Windows Remote Desktop (RDP)");
 
-    QMetaObject::invokeMethod(this, "checkRdektopAvailability", Qt::DirectConnection);
+    QMetaObject::invokeMethod(this, "checkFreerdpAvailability", Qt::DirectConnection);
 }
 
 RdpViewFactory::~RdpViewFactory()
@@ -80,10 +80,10 @@ QString RdpViewFactory::connectToolTipText() const
                 "<i>Example: rdpserver:3389 (host:port)</i></html>");
 }
 
-void RdpViewFactory::checkRdektopAvailability()
+void RdpViewFactory::checkFreerdpAvailability()
 {
-    if (KStandardDirs::findExe("rdesktop").isEmpty()) {
-        m_connectToolTipString += '\n' + i18n("The application \"rdesktop\" cannot be found on your system; make sure it is properly installed "
+    if (KStandardDirs::findExe("xfreerdp").isEmpty()) {
+        m_connectToolTipString += '\n' + i18n("The application \"xfreerdp\" cannot be found on your system; make sure it is properly installed "
                                               "if you need RDP support.");
     }
 }

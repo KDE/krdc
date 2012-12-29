@@ -84,17 +84,18 @@ private:
 
     // other properties
     bool m_quitFlag;                // if set: die
-    QString m_clientVersion;           // version number returned by rdesktop
-    QX11EmbedContainer *m_container;   // container for the rdesktop window
-    QProcess *m_process;              // rdesktop process
+    QX11EmbedContainer *m_container;   // container for the xfreerdp window
+    QProcess *m_process;               // xfreerdp process
 
     RdpHostPreferences *m_hostPreferences;
 
 private slots:
-    void connectionOpened();           // called if rdesktop started
-    void connectionClosed();           // called if rdesktop quits
-    void processError(QProcess::ProcessError error); // called if rdesktop dies
-    void receivedStandardError();      // catches rdesktop debug output
+    void connectionOpened();           // called if xfreerdp started
+    void connectionClosed();           // called if xfreerdp quits
+    void connectionError();            // called if xfreerdp quits with error
+    void processError(QProcess::ProcessError error); // called if xfreerdp dies
+    void receivedStandardError();      // catches xfreerdp debug output
+    void receivedStandardOutput();     // catches xfreerdp output
 };
 
 #endif

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>484</width>
-    <height>406</height>
+    <height>452</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -420,6 +420,12 @@
       </item>
       <item row="3" column="1">
        <widget class="KComboBox" name="kcfg_Sound">
+        <property name="minimumSize">
+         <size>
+          <width>280</width>
+          <height>0</height>
+         </size>
+        </property>
         <item>
          <property name="text">
           <string>On This Computer</string>
@@ -435,6 +441,87 @@
           <string>Disable Sound</string>
          </property>
         </item>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="performanceLabel">
+        <property name="text">
+         <string comment="label for performance settings in preferences dialog">Performance:</string>
+        </property>
+        <property name="buddy">
+         <cstring>kcfg_Performance</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="KComboBox" name="kcfg_Performance">
+        <property name="minimumSize">
+         <size>
+          <width>280</width>
+          <height>0</height>
+         </size>
+        </property>
+        <item>
+         <property name="text">
+          <string>Modem</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Broadband</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>LAN</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="remoteFXLabel">
+        <property name="text">
+         <string>RemoteFX:</string>
+        </property>
+        <property name="buddy">
+         <cstring>kcfg_RemoteFX</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QCheckBox" name="kcfg_RemoteFX">
+        <property name="text">
+         <string>Enhanced visual experience</string>
+        </property>
+        <property name="whatsThis">
+         <string>RemoteFX covers a set of technologies that enhance visual experience of the Remote Desktop Protocol.</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="0">
+       <widget class="QLabel" name="shareMediaLabel">
+        <property name="text">
+         <string>Share Media:</string>
+        </property>
+        <property name="buddy">
+         <cstring>kcfg_ShareMedia</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="1">
+       <widget class="KLineEdit" name="kcfg_ShareMedia">
+        <property name="minimumSize">
+         <size>
+          <width>280</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="whatsThis">
+         <string>Share a local media directory with the remote host.</string>
+        </property>
+        <property name="showClearButton" stdset="0">
+         <bool>true</bool>
+        </property>
        </widget>
       </item>
      </layout>
@@ -546,14 +633,14 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>KLineEdit</class>
-   <extends>QLineEdit</extends>
-   <header>klineedit.h</header>
-  </customwidget>
-  <customwidget>
    <class>KComboBox</class>
    <extends>QComboBox</extends>
    <header>kcombobox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>klineedit.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>
@@ -563,6 +650,9 @@
   <tabstop>kcfg_ColorDepth</tabstop>
   <tabstop>kcfg_KeyboardLayout</tabstop>
   <tabstop>kcfg_Sound</tabstop>
+  <tabstop>kcfg_Performance</tabstop>
+  <tabstop>kcfg_RemoteFX</tabstop>
+  <tabstop>kcfg_ShareMedia</tabstop>
   <tabstop>kcfg_Console</tabstop>
   <tabstop>kcfg_ExtraOptions</tabstop>
   <tabstop>kcfg_DefaultRdpUserName</tabstop>

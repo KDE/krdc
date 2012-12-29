@@ -1,6 +1,7 @@
 /****************************************************************************
 **
-** Copyright (C) 2007 Urs Wolfer <uwolfer @ kde.org>
+** Copyright (C) 2007 - 2012 Urs Wolfer <uwolfer @ kde.org>
+** Copyright (C) 2012 AceLan Kao <acelan @ acelan.idv.tw>
 **
 ** This file is part of KDE.
 **
@@ -45,6 +46,12 @@ public:
     bool console() const;
     void setExtraOptions(const QString &extraOptions);
     QString extraOptions() const;
+    void setRemoteFX(bool remoteFX);
+    bool remoteFX() const;
+    void setPerformance(int performance);
+    int performance() const;
+    void setShareMedia(const QString &shareMedia);
+    QString shareMedia() const;
 
 protected:
     QWidget* createProtocolSpecificConfigPage();

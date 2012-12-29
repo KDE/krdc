@@ -1,7 +1,8 @@
 /****************************************************************************
 **
 ** Copyright (C) 2002 Arend van Beelen jr. <arend@auton.nl>
-** Copyright (C) 2007 Urs Wolfer <uwolfer @ kde.org>
+** Copyright (C) 2007 - 2012 Urs Wolfer <uwolfer @ kde.org>
+** Copyright (C) 2012 AceLan Kao <acelan @ acelan.idv.tw>
 **
 ** This file is part of KDE.
 **
@@ -176,22 +177,47 @@ bool RdpView::start()
     arguments << "-X" << QString::number(m_container->winId());
     arguments << "-a" << QString::number((m_hostPreferences->colorDepth() + 1) * 8);
 
-    QString sound;
     switch (m_hostPreferences->sound()) {
-    case 0:
-        sound = "local";
-        break;
     case 1:
-        sound = "remote";
+        arguments << "-o";
+        break;
+    case 0:
+        arguments << "--plugin" << "rdpsnd";
         break;
     case 2:
     default:
-        sound = "off";
+        break;
     }
-    arguments << "-r" << "sound:" + sound;
+
+    if (!m_hostPreferences->shareMedia().isEmpty()) {
+        QStringList shareMedia;
+        shareMedia << "--plugin" << "rdpdr" << "--data" << "disk:media:" + m_hostPreferences->shareMedia() << "--";
+        arguments += shareMedia;
+    }
+
+    QString performance;
+    switch (m_hostPreferences->performance()) {
+    case 0:
+        performance = "m";
+        break;
+    case 1:
+        performance = "b";
+        break;
+    case 2:
+        performance = "l";
+        break;
+    default:
+        break;
+    }
+
+    arguments << "-x" << performance;
 
     if (m_hostPreferences->console()) {
         arguments << "-0";
+    }
+
+    if (m_hostPreferences->remoteFX()) {
+        arguments << "--rfx";
     }
 
     if (!m_hostPreferences->extraOptions().isEmpty()) {
@@ -199,16 +225,27 @@ bool RdpView::start()
         arguments += additionalArguments;
     }
 
+    // krdc has no support for certificate management yet; it would not be possbile to connect to any host:
+    // "The host key for example.com has changed" ...
+    // "Add correct host key in ~/.freerdp/known_hosts to get rid of this message."
+    arguments << "--ignore-certificate";
+
+    // clipboard sharing is activated in KRDC; user can disable it at runtime
+    arguments << "--plugin" << "cliprdr";
+
     arguments << (m_host + ':' + QString::number(m_port));
+
+    kDebug(5012) << "Starting xfreerdp with arguments:" << arguments;
 
     setStatus(Connecting);
 
     connect(m_process, SIGNAL(error(QProcess::ProcessError)), SLOT(processError(QProcess::ProcessError)));
     connect(m_process, SIGNAL(readyReadStandardError()), SLOT(receivedStandardError()));
+    connect(m_process, SIGNAL(readyReadStandardOutput()), SLOT(receivedStandardOutput()));
     connect(m_container, SIGNAL(clientClosed()), SLOT(connectionClosed()));
     connect(m_container, SIGNAL(clientIsEmbedded()), SLOT(connectionOpened()));
 
-    m_process->start("rdesktop", arguments);
+    m_process->start("xfreerdp", arguments);
 
     return true;
 }
@@ -251,45 +288,85 @@ void RdpView::connectionClosed()
     m_quitFlag = true;
 }
 
+void RdpView::connectionError()
+{
+    emit disconnectedError();
+    connectionClosed();
+}
+
 void RdpView::processError(QProcess::ProcessError error)
 {
+    kDebug(5012) << "processError:" << error;
     if (m_quitFlag) // do not try to show error messages while quitting (prevent crashes)
         return;
 
     if (m_status == Connecting) {
-        setStatus(Disconnected);
-
         if (error == QProcess::FailedToStart) {
-            KMessageBox::error(0, i18n("Could not start \"rdesktop\"; make sure rdesktop is properly installed."),
+            KMessageBox::error(0, i18n("Could not start \"xfreerdp\"; make sure xfreerdp is properly installed."),
                                i18n("RDP Failure"));
+            connectionError();
             return;
         }
-
-        if (m_clientVersion.isEmpty()) {
-            KMessageBox::error(0, i18n("Connection attempt to host failed."),
-                               i18n("Connection Failure"));
-        } else {
-            KMessageBox::error(0, i18n("The version of \"rdesktop\" you are using (%1) is too old:\n"
-                                       "rdesktop 1.3.2 or greater is required.", m_clientVersion),
-                               i18n("RDP Failure"));
-        }
-        emit disconnectedError();
     }
 }
 
 void RdpView::receivedStandardError()
 {
     const QString output(m_process->readAllStandardError());
+    kDebug(5012) << "receivedStandardError:" << output;
     QString line;
     int i = 0;
     while (!(line = output.section('\n', i, i)).isEmpty()) {
-        if (line.startsWith(QLatin1String("Version "))) {
-            m_clientVersion = line.section(' ', 1, 1);
-            m_clientVersion = m_clientVersion.left(m_clientVersion.length() - 1);
+        
+        // the following error is issued by freerdp because of a bug in freerdp 1.0.1 and below;
+        // see: https://github.com/FreeRDP/FreeRDP/pull/576
+        //"X Error of failed request:  BadWindow (invalid Window parameter)
+        //   Major opcode of failed request:  7 (X_ReparentWindow)
+        //   Resource id in failed request:  0x71303348
+        //   Serial number of failed request:  36
+        //   Current serial number in output stream:  36"
+        if (line.contains(QLatin1String("X_ReparentWindow"))) {
+            KMessageBox::error(0, i18n("The version of \"xfreerdp\" you are using is too old.\n"
+                                       "xfreerdp 1.0.2 or greater is required."),
+                               i18n("RDP Failure"));
+            connectionError();
             return;
-        } else {
-            kDebug(5012) << "Process error output: " << line;
         }
+        i++;
+    }
+}
+
+void RdpView::receivedStandardOutput()
+{
+    const QString output(m_process->readAllStandardOutput());
+    kDebug(5012) << "receivedStandardOutput:" << output;
+    QString line;
+    int i = 0;
+    while (!(line = output.section('\n', i, i)).isEmpty()) {
+
+        // full xfreerdp message: "transport_connect: getaddrinfo (Name or service not known)"
+        if (line.contains(QLatin1String("Name or service not known"))) {
+            KMessageBox::error(0, i18n("Name or service not known."),
+                               i18n("Connection Failure"));
+            connectionError();
+            return;
+
+        // full xfreerdp message: "unable to connect to example.com:3389"
+        } else if (line.contains(QLatin1String("unable to connect to"))) {
+            KMessageBox::error(0, i18n("Connection attempt to host failed."),
+                               i18n("Connection Failure"));
+            connectionError();
+            return;
+
+        // looks like some generic xfreerdp error message, handle it if nothing was handled:
+        // "Error: protocol security negotiation failure"
+        } else if (line.contains(QLatin1String("Error: protocol security negotiation failure"))) {
+            KMessageBox::error(0, i18n("Connection attempt to host failed."),
+                               i18n("Connection Failure"));
+            connectionError();
+            return;
+        }
+
         i++;
     }
 }

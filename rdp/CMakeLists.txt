@@ -1,9 +1,9 @@
 
 if(Q_WS_X11)
-    set(HAVE_RDESKTOP true) # TODO: implement cmake check?
+    set(HAVE_XFREERDP true)
 endif(Q_WS_X11)
 
-if(HAVE_RDESKTOP)
+if(HAVE_XFREERDP)
     add_definitions(-DKDE_DEFAULT_DEBUG_AREA=5012)
 
     include_directories(
@@ -49,4 +49,4 @@ if(HAVE_RDESKTOP)
 
     install(FILES rdp.protocol DESTINATION ${SERVICES_INSTALL_DIR})
     install(FILES smb2rdc.desktop DESTINATION ${SERVICES_INSTALL_DIR}/ServiceMenus)
-endif(HAVE_RDESKTOP)
+endif(HAVE_XFREERDP)

@@ -1,6 +1,7 @@
 /****************************************************************************
 **
-** Copyright (C) 2007 Urs Wolfer <uwolfer @ kde.org>
+** Copyright (C) 2007 - 2012 Urs Wolfer <uwolfer @ kde.org>
+** Copyright (C) 2012 AceLan Kao <acelan @ acelan.idv.tw>
 **
 ** This file is part of KDE.
 **
@@ -108,6 +109,9 @@ QWidget* RdpHostPreferences::createProtocolSpecificConfigPage()
     rdpUi.kcfg_Sound->setCurrentIndex(sound());
     rdpUi.kcfg_Console->setChecked(console());
     rdpUi.kcfg_ExtraOptions->setText(extraOptions());
+    rdpUi.kcfg_RemoteFX->setChecked(remoteFX());
+    rdpUi.kcfg_Performance->setCurrentIndex(performance());
+    rdpUi.kcfg_ShareMedia->setText(shareMedia());
 
     connect(rdpUi.resolutionComboBox, SIGNAL(currentIndexChanged(int)), SLOT(updateWidthHeight(int)));
 
@@ -176,6 +180,9 @@ void RdpHostPreferences::acceptConfig()
     setSound(rdpUi.kcfg_Sound->currentIndex());
     setConsole(rdpUi.kcfg_Console->isChecked());
     setExtraOptions(rdpUi.kcfg_ExtraOptions->text());
+    setRemoteFX(rdpUi.kcfg_RemoteFX->isChecked());
+    setPerformance(rdpUi.kcfg_Performance->currentIndex());
+    setShareMedia(rdpUi.kcfg_ShareMedia->text());
 }
 
 void RdpHostPreferences::setColorDepth(int colorDepth)
@@ -230,6 +237,38 @@ void RdpHostPreferences::setExtraOptions(const QString &extraOptions)
 QString RdpHostPreferences::extraOptions() const
 {
     return m_configGroup.readEntry("extraOptions", Settings::extraOptions());
+}
+
+void RdpHostPreferences::setRemoteFX(bool remoteFX)
+{
+    m_configGroup.writeEntry("remoteFX", remoteFX);
+}
+
+bool RdpHostPreferences::remoteFX() const
+{
+    return m_configGroup.readEntry("remoteFX", Settings::remoteFX());
+}
+
+void RdpHostPreferences::setPerformance(int performance)
+{
+    if (performance >= 0)
+        m_configGroup.writeEntry("performance", performance);
+}
+
+int RdpHostPreferences::performance() const
+{
+    return m_configGroup.readEntry("performance", Settings::performance());
+}
+
+void RdpHostPreferences::setShareMedia(const QString &shareMedia)
+{
+    if (!shareMedia.isNull())
+        m_configGroup.writeEntry("shareMedia", shareMedia);
+}
+
+QString RdpHostPreferences::shareMedia() const
+{
+    return m_configGroup.readEntry("shareMedia", Settings::shareMedia());
 }
 
 #include "rdphostpreferences.moc"

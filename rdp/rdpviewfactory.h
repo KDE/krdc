@@ -53,7 +53,7 @@ public:
     virtual QString connectToolTipText() const;
 
 private Q_SLOTS:
-    void checkRdektopAvailability();
+    void checkFreerdpAvailability();
 
 private:
     QString m_connectToolTipString;

@@ -37,7 +37,13 @@ if(NOT INSIDE_KDENETWORK)
 endif(NOT INSIDE_KDENETWORK)
 
 macro_optional_find_package(LibVNCServer)
-macro_log_feature(LIBVNCSERVER_FOUND "libvncserver" "VNC Server library" "http://libvncserver.sourceforge.net/" FALSE "0.9" "Needed to build Krfb and VNC support in Krdc")
+macro_log_feature(LIBVNCSERVER_FOUND "libvncserver" "VNC Server library" "http://libvncserver.sourceforge.net/" FALSE "0.9" "Needed to build Krfb and VNC support in KRDC")
+
+FIND_PROGRAM(FREERDP_EXECUTABLE xfreerdp)
+if(FREERDP_EXECUTABLE)
+    set(FREERDP_EXECUTABLE_FOUND true)
+endif(FREERDP_EXECUTABLE)
+macro_log_feature(FREERDP_EXECUTABLE_FOUND "freerdp" "A free Remote Desktop Protocol (RDP) Implementation" "http://www.freerdp.com" FALSE "1.0.2" "Needed for RDP support in KRDC (at runtime)")
 
 if(TelepathyQt4_FOUND)
     add_definitions(-DTELEPATHY_SUPPORT)
