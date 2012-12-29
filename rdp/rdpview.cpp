@@ -151,8 +151,17 @@ bool RdpView::start()
     m_process = new QProcess(m_container);
 
     QStringList arguments;
-    arguments << "-g" << (QString::number(m_hostPreferences->width()) + 'x' +
-                          QString::number(m_hostPreferences->height()));
+
+    int width, height;
+    if (m_hostPreferences->width() > 0) {
+        width = m_hostPreferences->width();
+        height = m_hostPreferences->height();
+    } else {
+        width = this->parentWidget()->size().width();
+        height = this->parentWidget()->size().height();
+    }
+    arguments << "-g" << QString::number(width) + 'x' + QString::number(height);
+
     arguments << "-k" << m_hostPreferences->keyboardLayout();
 
     if (!m_url.userName().isEmpty())

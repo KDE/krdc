@@ -148,6 +148,10 @@ void RdpHostPreferences::updateWidthHeight(int index)
         rdpUi.kcfg_Width->setValue(desktop->screenGeometry(currentScreen).width());
         break;
     }
+    case 7:
+        rdpUi.kcfg_Height->setValue(0);
+        rdpUi.kcfg_Width->setValue(0);
+        break;
     case 6:
     default:
         break;
