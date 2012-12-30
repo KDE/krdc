@@ -24,6 +24,8 @@
 #ifndef BOOKMARKMANAGER_H
 #define BOOKMARKMANAGER_H
 
+#include "core/remoteview.h"
+
 #include <KBookmarkManager>
 
 class KActionCollection;
@@ -45,7 +47,7 @@ public:
     virtual bool editBookmarkEntry() const;
     virtual bool supportsTabs() const;
     virtual QList<QPair<QString, QString> > currentBookmarkList() const;
-    void addHistoryBookmark();
+    void addHistoryBookmark(RemoteView *view);
     void addManualBookmark(const QString &url, const QString &text);
     KBookmarkManager* getManager();
     // removes all bookmarks with url, possibly ignore the history folder and update it's title there if it's set
@@ -62,6 +64,9 @@ private slots:
     void openFolderinTabs(const KBookmarkGroup &bookmarkGroup);
 
 private:
+    QString urlForView(RemoteView *view) const;
+    QString titleForUrl(const QString &url) const;
+
     KBookmarkMenu *m_bookmarkMenu;
     KBookmarkManager *m_manager;
     KBookmarkGroup m_historyGroup;

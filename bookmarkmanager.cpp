@@ -63,11 +63,13 @@ BookmarkManager::~BookmarkManager()
     delete m_bookmarkMenu;
 }
 
-void BookmarkManager::addHistoryBookmark()
+void BookmarkManager::addHistoryBookmark(RemoteView *view)
 {
     KBookmark bm = m_historyGroup.first();
+    const QString urlString = urlForView(view);
+    const KUrl url = KUrl(urlString);
     while (!bm.isNull()) {
-        if (bm.url() == KUrl(currentUrl())) {
+        if (bm.url() == url) {
             kDebug(5010) << "Found URL. Move it at the history start.";
             m_historyGroup.moveBookmark(bm, KBookmark());
             bm.updateAccessMetadata();
@@ -79,7 +81,7 @@ void BookmarkManager::addHistoryBookmark()
 
     if (bm.isNull()) {
         kDebug(5010) << "Add new history bookmark.";
-        bm = m_historyGroup.addBookmark(currentTitle(), currentUrl());
+        bm = m_historyGroup.addBookmark(titleForUrl(urlString), urlString);
         bm.updateAccessMetadata();
         m_historyGroup.moveBookmark(bm, KBookmark());
         m_manager->emitChanged(m_historyGroup);
@@ -113,15 +115,26 @@ bool BookmarkManager::editBookmarkEntry() const
 QString BookmarkManager::currentUrl() const
 {
     if (m_mainWindow->currentRemoteView() >= 0)
-        return m_mainWindow->remoteViewList().at(m_mainWindow->currentRemoteView())
-               ->url().prettyUrl(KUrl::RemoveTrailingSlash);
+        return urlForView(m_mainWindow->remoteViewList().at(m_mainWindow->currentRemoteView()));
     else
         return QString();
 }
 
+QString BookmarkManager::urlForView(RemoteView *view) const
+{
+    return view->url().prettyUrl(KUrl::RemoveTrailingSlash);
+
+}
+
 QString BookmarkManager::currentTitle() const
 {
-    return QUrl::fromPercentEncoding(currentUrl().toUtf8());
+    return titleForUrl(currentUrl());
+}
+
+QString BookmarkManager::titleForUrl(const QString &url) const
+{
+    return QUrl::fromPercentEncoding(url.toUtf8());
+
 }
 
 bool BookmarkManager::supportsTabs() const
