@@ -471,7 +471,7 @@ void MainWindow::statusChanged(RemoteView::RemoteStatus status)
         }
 
         if (Settings::rememberHistory()) {
-            m_bookmarkManager->addHistoryBookmark();
+            m_bookmarkManager->addHistoryBookmark(view);
         }
 
         break;
