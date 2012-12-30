@@ -347,8 +347,6 @@ void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConn
         return;
     }
 
-    saveHostPrefs();
-
     view->showDotCursor(prefs->showLocalCursor() ? RemoteView::CursorOn : RemoteView::CursorOff);
     view->setViewOnly(prefs->viewOnly());
     if (! switchFullscreenWhenConnected) view->enableScaling(prefs->windowedScale());
@@ -766,7 +764,7 @@ void MainWindow::showLocalCursor(bool showLocalCursor)
     RemoteView* view = m_remoteViewList.at(m_currentRemoteView);
     view->showDotCursor(showLocalCursor ? RemoteView::CursorOn : RemoteView::CursorOff);
     view->hostPreferences()->setShowLocalCursor(showLocalCursor);
-    saveHostPrefs();
+    saveHostPrefs(view);
 }
 
 void MainWindow::viewOnly(bool viewOnly)
@@ -776,7 +774,7 @@ void MainWindow::viewOnly(bool viewOnly)
     RemoteView* view = m_remoteViewList.at(m_currentRemoteView);
     view->setViewOnly(viewOnly);
     view->hostPreferences()->setViewOnly(viewOnly);
-    saveHostPrefs();
+    saveHostPrefs(view);
 }
 
 void MainWindow::grabAllKeys(bool grabAllKeys)
@@ -786,7 +784,7 @@ void MainWindow::grabAllKeys(bool grabAllKeys)
     RemoteView* view = m_remoteViewList.at(m_currentRemoteView);
     view->setGrabAllKeys(grabAllKeys);
     view->hostPreferences()->setGrabAllKeys(grabAllKeys);
-    saveHostPrefs();
+    saveHostPrefs(view);
 }
 
 void MainWindow::scale(bool scale)
@@ -800,7 +798,7 @@ void MainWindow::scale(bool scale)
     else
         view->hostPreferences()->setWindowedScale(scale);
 
-    saveHostPrefs();
+    saveHostPrefs(view);
 }
 
 void MainWindow::showRemoteViewToolbar()
@@ -977,6 +975,10 @@ void MainWindow::quit(bool systemEvent)
 
         saveHostPrefs();
 
+        for (int i = 0; i < m_remoteViewList.count(); ++i) {
+            m_remoteViewList.at(i)->startQuitting();
+        }
+
         Settings::self()->writeConfig();
 
         qApp->quit();
@@ -1039,12 +1041,17 @@ void MainWindow::saveProperties(KConfigGroup &group)
     saveHostPrefs();
 }
 
+
+void MainWindow::saveHostPrefs()
+{
+    for (int i = 0; i < m_remoteViewList.count(); ++i) {
+        saveHostPrefs(m_remoteViewList.at(i));
+        m_remoteViewList.at(i)->startQuitting();
+    }
+}
+
 void MainWindow::saveHostPrefs(RemoteView* view)
 {
-    // Save default window size for currently active view
-    if (!view)
-        view = m_currentRemoteView >= 0 ? m_remoteViewList.at(m_currentRemoteView) : 0;
-
     // should saving this be a user option?
     if (view && view->scaling()) {
         QSize viewSize = m_tabWidget->currentWidget()->size();
