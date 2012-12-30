@@ -436,7 +436,7 @@ void MainWindow::statusChanged(RemoteView::RemoteStatus status)
     if (status == RemoteView::Disconnecting || status == RemoteView::Disconnected)
         return;
 
-    RemoteView *view = m_remoteViewList.at(m_currentRemoteView);
+    RemoteView *view = qobject_cast<RemoteView*>(QObject::sender());
     const QString host = view->host();
 
     QString iconName = "krdc";
@@ -479,7 +479,7 @@ void MainWindow::statusChanged(RemoteView::RemoteStatus status)
         break;
     }
 
-    m_tabWidget->setTabIcon(m_tabWidget->currentIndex(), KIcon(iconName));
+    m_tabWidget->setTabIcon(m_tabWidget->indexOf(view), KIcon(iconName));
     if (Settings::showStatusBar())
         statusBar()->showMessage(message);
 }
