@@ -148,6 +148,10 @@ void VncClientThread::updatefb(rfbClient* cl, int x, int y, int w, int h)
     if (img.isNull()) {
         kDebug(5011) << "image not loaded";
     }
+    
+    if (t->m_stopped) {
+        return; // sending data to a stopped thread is not a good idea
+    }
 
     t->setImage(img);
 
@@ -219,6 +223,7 @@ VncClientThread::VncClientThread(QObject *parent)
         , cl(0)
         , m_stopped(false)
 {
+    outputErrorMessageString.clear(); //don't deliver error messages of old instances...
     QMutexLocker locker(&mutex);
 
     QTimer *outputErrorMessagesCheckTimer = new QTimer(this);
@@ -383,7 +388,7 @@ void VncClientThread::run()
     while (!m_stopped) {
         locker.unlock();
         const int i = WaitForMessage(cl, 500);
-        if (i < 0) {
+        if (m_stopped || i < 0) {
             break;
         }
         if (i) {

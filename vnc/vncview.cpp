@@ -66,6 +66,7 @@ VncView::VncView(QWidget *parent, const KUrl &url, KConfigGroup configGroup)
     m_host = url.host();
     m_port = url.port();
 
+    // BlockingQueuedConnection can cause deadlocks when exiting, handled in startQuitting()
     connect(&vncThread, SIGNAL(imageUpdated(int,int,int,int)), this, SLOT(updateImage(int,int,int,int)), Qt::BlockingQueuedConnection);
     connect(&vncThread, SIGNAL(gotCut(QString)), this, SLOT(setCut(QString)), Qt::BlockingQueuedConnection);
     connect(&vncThread, SIGNAL(passwordRequest()), this, SLOT(requestPassword()), Qt::BlockingQueuedConnection);
@@ -83,7 +84,7 @@ VncView::VncView(QWidget *parent, const KUrl &url, KConfigGroup configGroup)
 
 VncView::~VncView()
 {
-    startQuitting();
+    if (!m_quitFlag) startQuitting();
 }
 
 bool VncView::eventFilter(QObject *obj, QEvent *event)
@@ -162,16 +163,20 @@ void VncView::startQuitting()
     unpressModifiers();
 
     // Disconnect all signals so that we don't get any more callbacks from the client thread
-    bool imageUpdatedDisconnect = disconnect(&vncThread, SIGNAL(imageUpdated(int,int,int,int)), this, SLOT(updateImage(int,int,int,int)));
-    bool gotCutDisconnect = disconnect(&vncThread, SIGNAL(gotCut(QString)), this, SLOT(setCut(QString)));
-    bool passwordRequestDisconnect = disconnect(&vncThread, SIGNAL(passwordRequest()), this, SLOT(requestPassword()));
-    bool outputErrorMessageDisconnect = disconnect(&vncThread, SIGNAL(outputErrorMessage(QString)), this, SLOT(outputErrorMessage(QString)));
-
-    kDebug(5011) << "Signals disconnected: imageUpdated: " << imageUpdatedDisconnect << "gotCut: " << gotCutDisconnect << "passwordRequest: " << passwordRequestDisconnect << "outputErrorMessage: " << outputErrorMessageDisconnect;
+    vncThread.disconnect();
 
     vncThread.quit();
 
-    const bool quitSuccess = vncThread.wait(1000);
+    const bool quitSuccess = vncThread.wait(500);
+    if (!quitSuccess) {
+        // happens when vncThread wants to call a slot via BlockingQueuedConnection,
+        // needs an event loop in this thread so execution continues after 'emit'
+        QEventLoop loop;
+        if (!loop.processEvents()) {
+            kDebug(5011) << "BUG: deadlocked, but no events to deliver?";
+        }
+        vncThread.wait(500);
+    }
 
     kDebug(5011) << "Quit VNC thread success:" << quitSuccess;
 
