@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007-2008 Urs Wolfer <uwolfer @ kde.org>
+** Copyright (C) 2007 - 2013 Urs Wolfer <uwolfer @ kde.org>
 **
 ** This file is part of KDE.
 **
@@ -121,6 +121,12 @@ public:
     const QString password() const {
         return m_password;
     }
+    void setUsername(const QString &username) {
+        m_username = username;
+    }
+    const QString username() const {
+        return m_username;
+    }
 
     RemoteView::Quality quality() const;
     ColorDepth colorDepth() const;
@@ -129,7 +135,7 @@ public:
 signals:
     void imageUpdated(int x, int y, int w, int h);
     void gotCut(const QString &text);
-    void passwordRequest();
+    void passwordRequest(bool includingUsername = false);
     void outputErrorMessage(const QString &message);
 
 public slots:
@@ -148,12 +154,14 @@ private:
     static void updatefb(rfbClient *cl, int x, int y, int w, int h);
     static void cuttext(rfbClient *cl, const char *text, int textlen);
     static char* passwdHandler(rfbClient *cl);
+    static rfbCredential* credentialHandler(rfbClient *cl, int credentialType);
     static void outputHandler(const char *format, ...);
 
     QImage m_image;
     rfbClient *cl;
     QString m_host;
     QString m_password;
+    QString m_username;
     int m_port;
     QMutex mutex;
     RemoteView::Quality m_quality;

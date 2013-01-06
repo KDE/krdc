@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007-2012 Urs Wolfer <uwolfer @ kde.org>
+** Copyright (C) 2007 - 2013 Urs Wolfer <uwolfer @ kde.org>
 **
 ** This file is part of KDE.
 **
@@ -23,6 +23,11 @@
 
 #include "vncview.h"
 
+#include <QApplication>
+#include <QImage>
+#include <QPainter>
+#include <QMouseEvent>
+
 #ifdef QTONLY
     #include <QMessageBox>
     #include <QInputDialog>
@@ -37,11 +42,6 @@
     #include <KPasswordDialog>
     #include <KXMLGUIClient>
 #endif
-
-#include <QApplication>
-#include <QImage>
-#include <QPainter>
-#include <QMouseEvent>
 
 // Definition of key modifier mask constants
 #define KMOD_Alt_R 	0x01
@@ -69,7 +69,7 @@ VncView::VncView(QWidget *parent, const KUrl &url, KConfigGroup configGroup)
     // BlockingQueuedConnection can cause deadlocks when exiting, handled in startQuitting()
     connect(&vncThread, SIGNAL(imageUpdated(int,int,int,int)), this, SLOT(updateImage(int,int,int,int)), Qt::BlockingQueuedConnection);
     connect(&vncThread, SIGNAL(gotCut(QString)), this, SLOT(setCut(QString)), Qt::BlockingQueuedConnection);
-    connect(&vncThread, SIGNAL(passwordRequest()), this, SLOT(requestPassword()), Qt::BlockingQueuedConnection);
+    connect(&vncThread, SIGNAL(passwordRequest(bool)), this, SLOT(requestPassword(bool)), Qt::BlockingQueuedConnection);
     connect(&vncThread, SIGNAL(outputErrorMessage(QString)), this, SLOT(outputErrorMessage(QString)));
 
     m_clipboard = QApplication::clipboard();
@@ -229,11 +229,15 @@ bool VncView::supportsLocalCursor() const
     return true;
 }
 
-void VncView::requestPassword()
+void VncView::requestPassword(bool includingUsername)
 {
     kDebug(5011) << "request password";
 
     setStatus(Authenticating);
+
+    if (m_firstPasswordTry && !m_url.userName().isNull()) {
+        vncThread.setUsername(m_url.userName());
+    }
 
 #ifndef QTONLY
     // just try to get the passwort from the wallet the first time, otherwise it will loop (see issue #226283)
@@ -256,22 +260,35 @@ void VncView::requestPassword()
 
 #ifdef QTONLY
     bool ok;
+    if (includingUsername) {
+        QString username = QInputDialog::getText(this, //krazy:exclude=qclasses (code not used in kde build)
+                                                 tr("Username required"),
+                                                 tr("Please enter the username for the remote desktop:"),
+                                                 QLineEdit::Normal, m_url.userName(), &ok); //krazy:exclude=qclasses
+        if (ok)
+            vncThread.setUsername(username);
+        else
+            startQuitting();
+    }
+
     QString password = QInputDialog::getText(this, //krazy:exclude=qclasses
                                              tr("Password required"),
                                              tr("Please enter the password for the remote desktop:"),
-                                             QLineEdit::Password, QString(), &ok);
+                                             QLineEdit::Password, QString(), &ok); //krazy:exclude=qclasses
     m_firstPasswordTry = false;
     if (ok)
         vncThread.setPassword(password);
     else
         startQuitting();
 #else
-    KPasswordDialog dialog(this);
+    KPasswordDialog dialog(this, includingUsername ? KPasswordDialog::ShowUsernameLine : KPasswordDialog::NoFlags);
     dialog.setPrompt(m_firstPasswordTry ? i18n("Access to the system requires a password.")
                                         : i18n("Authentication failed. Please try again."));
+    if (includingUsername) dialog.setUsername(m_url.userName());
     if (dialog.exec() == KPasswordDialog::Accepted) {
         m_firstPasswordTry = false;
         vncThread.setPassword(dialog.password());
+        if (includingUsername) vncThread.setUsername(dialog.username());
     } else {
         kDebug(5011) << "password dialog not accepted";
         startQuitting();
@@ -291,9 +308,8 @@ void VncView::outputErrorMessage(const QString &message)
 
     startQuitting();
 
-#ifndef QTONLY
     KMessageBox::error(this, message, i18n("VNC failure"));
-#endif
+
     emit errorMessage(i18n("VNC failure"), message);
 }
 
@@ -324,6 +340,9 @@ void VncView::updateImage(int x, int y, int w, int h)
     m_frame = vncThread.image();
 
     if (!m_initDone) {
+        if (!vncThread.username().isEmpty()) {
+            m_url.setUserName(vncThread.username());
+        }
         setAttribute(Qt::WA_StaticContents);
         setAttribute(Qt::WA_OpaquePaintEvent);
         installEventFilter(this);
