@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007-2012 Urs Wolfer <uwolfer @ kde.org>
+** Copyright (C) 2007 - 2013 Urs Wolfer <uwolfer @ kde.org>
 **
 ** This file is part of KDE.
 **
@@ -102,7 +102,7 @@ private:
 private slots:
     void updateImage(int x, int y, int w, int h);
     void setCut(const QString &text);
-    void requestPassword();
+    void requestPassword(bool includingUsername);
     void outputErrorMessage(const QString &message);
     void clipboardDataChanged();
 };

@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007-2008 Urs Wolfer <uwolfer @ kde.org>
+** Copyright (C) 2007 - 2013 Urs Wolfer <uwolfer @ kde.org>
 **
 ** This file is part of KDE.
 **
@@ -173,7 +173,7 @@ void VncClientThread::cuttext(rfbClient* cl, const char *text, int textlen)
 
 char *VncClientThread::passwdHandler(rfbClient *cl)
 {
-    kDebug(5011) << "password request" << kBacktrace();
+    kDebug(5011) << "password request";
 
     VncClientThread *t = (VncClientThread*)rfbClientGetClientData(cl, 0);
     Q_ASSERT(t);
@@ -181,7 +181,33 @@ char *VncClientThread::passwdHandler(rfbClient *cl)
     t->passwordRequest();
     t->m_passwordError = true;
 
-    return strdup(t->password().toLocal8Bit());
+    return strdup(t->password().toUtf8());
+}
+ 
+rfbCredential *VncClientThread::credentialHandler(rfbClient *cl, int credentialType)
+{
+    kDebug(5011) << "credential request" << credentialType;
+
+    VncClientThread *t = (VncClientThread*)rfbClientGetClientData(cl, 0);
+    Q_ASSERT(t);
+
+    rfbCredential *cred = 0;
+
+    switch (credentialType) {
+        case rfbCredentialTypeUser:
+            t->passwordRequest(true);
+            t->m_passwordError = true;
+
+            cred = new rfbCredential;
+            cred->userCredential.username = strdup(t->username().toUtf8());
+            cred->userCredential.password = strdup(t->password().toUtf8());
+            break;
+        default:
+            kError(5011) << "credential request failed, unspported credentialType:" << credentialType;
+            t->outputErrorMessage(i18n("VNC authentication failed."));
+            break;
+    }
+    return cred;
 }
 
 void VncClientThread::outputHandler(const char *format, ...)
@@ -354,6 +380,7 @@ void VncClientThread::run()
         cl->MallocFrameBuffer = newclient;
         cl->canHandleNewFBSize = true;
         cl->GetPassword = passwdHandler;
+        cl->GetCredential = credentialHandler;
         cl->GotFrameBufferUpdate = updatefb;
         cl->GotXCutText = cuttext;
         rfbClientSetClientData(cl, 0, this);
