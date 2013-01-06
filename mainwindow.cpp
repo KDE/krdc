@@ -675,8 +675,8 @@ void MainWindow::showConnectionContextMenu(const QPoint &pos)
         return;
 
     const QString url = index.data(10001).toString();
-    const QString title = m_remoteDesktopsModelProxy->index(index.row(), RemoteDesktopsModel::Title).data(Qt::DisplayRole).toString();
-    const QString source = m_remoteDesktopsModelProxy->index(index.row(), RemoteDesktopsModel::Source).data(Qt::DisplayRole).toString();
+    const QString title = m_remoteDesktopsModel->index(index.row(), RemoteDesktopsModel::Title).data(Qt::DisplayRole).toString();
+    const QString source = m_remoteDesktopsModel->index(index.row(), RemoteDesktopsModel::Source).data(Qt::DisplayRole).toString();
 
     KMenu *menu = new KMenu(m_newConnectionTableView);
     menu->addTitle(url);
@@ -1088,6 +1088,11 @@ QWidget* MainWindow::newConnectionWidget()
     headerLayout->addWidget(headerIconLabel);
     startLayout->addLayout(headerLayout);
 
+    QSortFilterProxyModel *remoteDesktopsModelProxy = new QSortFilterProxyModel(this);
+    remoteDesktopsModelProxy->setSourceModel(m_remoteDesktopsModel);
+    remoteDesktopsModelProxy->setFilterCaseSensitivity(Qt::CaseInsensitive);
+    remoteDesktopsModelProxy->setFilterRole(10002);
+
     {
         QHBoxLayout *connectLayout = new QHBoxLayout;
 
@@ -1096,7 +1101,7 @@ QWidget* MainWindow::newConnectionWidget()
         m_addressInput = new KLineEdit(m_newConnectionWidget);
         m_addressInput->setClearButtonShown(true);
         m_addressInput->setClickMessage(i18n("Type here to connect to an address and filter the list."));
-        connect(m_addressInput, SIGNAL(textChanged(QString)), m_remoteDesktopsModelProxy, SLOT(setFilterFixedString(QString)));
+        connect(m_addressInput, SIGNAL(textChanged(QString)), remoteDesktopsModelProxy, SLOT(setFilterFixedString(QString)));
 
         foreach(RemoteViewFactory *factory, m_remoteViewFactories) {
             m_protocolInput->addItem(factory->scheme());
@@ -1120,7 +1125,7 @@ QWidget* MainWindow::newConnectionWidget()
 
     {
         m_newConnectionTableView = new QTableView(m_newConnectionWidget);
-        m_newConnectionTableView->setModel(m_remoteDesktopsModelProxy);
+        m_newConnectionTableView->setModel(remoteDesktopsModelProxy);
 
         // set up the view so it looks nice
         m_newConnectionTableView->setItemDelegate(new ConnectionDelegate(m_newConnectionTableView));
@@ -1200,12 +1205,12 @@ void MainWindow::createDockWidget()
                                   remoteDesktopsDockWidget->toggleViewAction());
 
     m_dockWidgetTableView = new QTableView(remoteDesktopsDockLayoutWidget);
-    RemoteDesktopsModel *remoteDesktopsModel = new RemoteDesktopsModel(this);
-    m_remoteDesktopsModelProxy = new QSortFilterProxyModel(this);
-    m_remoteDesktopsModelProxy->setSourceModel(remoteDesktopsModel);
-    m_remoteDesktopsModelProxy->setFilterCaseSensitivity(Qt::CaseInsensitive);
-    m_remoteDesktopsModelProxy->setFilterRole(10002);
-    m_dockWidgetTableView->setModel(m_remoteDesktopsModelProxy);
+    m_remoteDesktopsModel = new RemoteDesktopsModel(this);
+    QSortFilterProxyModel *remoteDesktopsModelProxy = new QSortFilterProxyModel(this);
+    remoteDesktopsModelProxy->setSourceModel(m_remoteDesktopsModel);
+    remoteDesktopsModelProxy->setFilterCaseSensitivity(Qt::CaseInsensitive);
+    remoteDesktopsModelProxy->setFilterRole(10002);
+    m_dockWidgetTableView->setModel(remoteDesktopsModelProxy);
 
     m_dockWidgetTableView->setShowGrid(false);
     m_dockWidgetTableView->verticalHeader()->hide();
@@ -1214,7 +1219,7 @@ void MainWindow::createDockWidget()
     m_dockWidgetTableView->horizontalHeader()->hide();
     m_dockWidgetTableView->horizontalHeader()->setStretchLastSection(true);
     // hide all columns, then show the one we want
-    for (int i=0; i<m_remoteDesktopsModelProxy->columnCount(); i++) {
+    for (int i=0; i < remoteDesktopsModelProxy->columnCount(); i++) {
         m_dockWidgetTableView->hideColumn(i);
     }
     m_dockWidgetTableView->showColumn(RemoteDesktopsModel::Title);
@@ -1226,7 +1231,7 @@ void MainWindow::createDockWidget()
     KLineEdit *filterLineEdit = new KLineEdit(remoteDesktopsDockLayoutWidget);
     filterLineEdit->setClickMessage(i18n("Filter"));
     filterLineEdit->setClearButtonShown(true);
-    connect(filterLineEdit, SIGNAL(textChanged(QString)), m_remoteDesktopsModelProxy, SLOT(setFilterFixedString(QString)));
+    connect(filterLineEdit, SIGNAL(textChanged(QString)), remoteDesktopsModelProxy, SLOT(setFilterFixedString(QString)));
     remoteDesktopsDockLayout->addWidget(filterLineEdit);
     remoteDesktopsDockLayout->addWidget(m_dockWidgetTableView);
     remoteDesktopsDockWidget->setWidget(remoteDesktopsDockLayoutWidget);

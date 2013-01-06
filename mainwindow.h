@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007 - 2008 Urs Wolfer <uwolfer @ kde.org>
+** Copyright (C) 2007 - 2013 Urs Wolfer <uwolfer @ kde.org>
 ** Copyright (C) 2009 - 2010 Tony Murray <murraytony @ gmail.com>
 **
 ** This file is part of KDE.
@@ -27,7 +27,6 @@
 
 #include "remoteview.h"
 #include "remoteviewfactory.h"
-#include "tabbedviewwidget.h"
 
 #include <KService>
 #include <KXmlGuiWindow>
@@ -40,13 +39,13 @@ class KTabWidget;
 
 class BookmarkManager;
 class FloatingToolBar;
+class RemoteDesktopsModel;
 class RemoteView;
 class SystemTrayIcon;
 class TabbedViewWidget;
 
 class QScrollArea;
 class QModelIndex;
-class QSortFilterProxyModel;
 class QTableView;
 
 #ifdef TELEPATHY_SUPPORT
@@ -134,7 +133,7 @@ private:
     SystemTrayIcon *m_systemTrayIcon;
     QTableView *m_dockWidgetTableView;
     QTableView *m_newConnectionTableView;
-    QSortFilterProxyModel *m_remoteDesktopsModelProxy;
+    RemoteDesktopsModel *m_remoteDesktopsModel;
 #ifdef TELEPATHY_SUPPORT
     TubesManager *m_tubesManager;
 #endif
