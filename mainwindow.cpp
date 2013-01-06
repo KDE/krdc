@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2007 - 2012 Urs Wolfer <uwolfer @ kde.org>
+** Copyright (C) 2007 - 2013 Urs Wolfer <uwolfer @ kde.org>
 ** Copyright (C) 2009 - 2010 Tony Murray <murraytony @ gmail.com>
 **
 ** This file is part of KDE.
@@ -284,22 +284,7 @@ void MainWindow::restoreOpenSessions()
 
 KUrl MainWindow::getInputUrl()
 {
-    KUrl inputUrl;
-    inputUrl.setProtocol(m_protocolInput->currentText());
-
-    // Work around incorrect KUrl parsing of @
-    QString enteredAddress = m_addressInput->text();
-    int atLocation = enteredAddress.lastIndexOf(QLatin1Char('@'));
-
-    // set the non-username part of the url
-    inputUrl.setAuthority(enteredAddress.mid(atLocation + 1));
-
-    // if the url contains @, set the username part. it needs to be utf8 encoded
-    if(atLocation > 0) {
-        inputUrl.setUserName(enteredAddress.left(atLocation));
-    }
-
-    return inputUrl;
+    return KUrl(m_protocolInput->currentText() + "://" + m_addressInput->text());
 }
 
 void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConnected, const QString &tabName)
