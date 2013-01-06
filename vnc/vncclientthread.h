@@ -27,6 +27,7 @@
 #ifdef QTONLY
     #include <QDebug>
     #define kDebug(n) qDebug()
+    #define kError(n) qDebug()
     #define kBacktrace() ""
     #define i18n tr
 #else
@@ -83,7 +84,7 @@ private:
 class ClientCutEvent : public ClientEvent
 {
 public:
-    ClientCutEvent(const QString &text)
+    explicit ClientCutEvent(const QString &text)
             : text(text) {}
 
     void fire(rfbClient*);

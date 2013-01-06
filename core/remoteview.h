@@ -30,8 +30,8 @@
     #define KUrl QUrl
     #define KRDCCORE_EXPORT
 #else
-    #include <KUrl>
-    #include <KWallet/Wallet>
+    #include <KDE/KUrl>
+    #include <KDE/KWallet/Wallet>
     #include <krdc_export.h>
 #endif
 
@@ -318,7 +318,7 @@ public slots:
      */
     virtual void scaleResize(int w, int h);
 
-signals:
+Q_SIGNALS:
     /**
      * Emitted when the size of the remote screen changes. Also
      * called when the size is known for the first time.

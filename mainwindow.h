@@ -56,7 +56,7 @@ class MainWindow : public KXmlGuiWindow
 {
     Q_OBJECT
 public:
-    MainWindow(QWidget *parent = 0);
+    explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
     QList<RemoteView *> remoteViewList() const;
@@ -148,7 +148,7 @@ class MinimizePixel : public QWidget
 {
     Q_OBJECT
 public:
-    MinimizePixel(QWidget *parent)
+    explicit MinimizePixel(QWidget *parent)
             : QWidget(parent) {
         setFixedSize(1, 1);
         move(QApplication::desktop()->screenGeometry().width() - 1, 0);
@@ -170,7 +170,7 @@ class RemoteViewScrollArea : public QScrollArea
 {
     Q_OBJECT
 public:
-    RemoteViewScrollArea(QWidget *parent)
+    explicit RemoteViewScrollArea(QWidget *parent)
             : QScrollArea(parent) {
     }
 

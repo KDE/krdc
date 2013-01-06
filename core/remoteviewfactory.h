@@ -27,8 +27,8 @@
 #include "remoteview.h"
 
 #include <kdemacros.h>
-#include <KPluginFactory>
-#include <KPluginLoader>
+#include <KDE/KPluginFactory>
+#include <KDE/KPluginLoader>
 
 class KUrl;
 

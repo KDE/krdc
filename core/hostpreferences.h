@@ -28,7 +28,7 @@
 
 #include <kdemacros.h>
 
-#include <KDialog>
+#include <KDE/KDialog>
 
 #include <QDomDocument>
 

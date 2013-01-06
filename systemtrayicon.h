@@ -33,7 +33,7 @@ class SystemTrayIcon : public KStatusNotifierItem
     Q_OBJECT
 
 public:
-    SystemTrayIcon(MainWindow *parent);
+    explicit SystemTrayIcon(MainWindow *parent);
     ~SystemTrayIcon();
 
 public slots:

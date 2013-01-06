@@ -34,7 +34,7 @@ class TubesManager : public QObject
     Q_OBJECT
 
 public:
-    TubesManager(QObject *parent);
+    explicit TubesManager(QObject *parent);
     virtual ~TubesManager();
 
     void closeTube(const KUrl & url);

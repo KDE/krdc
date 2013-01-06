@@ -61,7 +61,7 @@ class RemoteDesktopsModel : public QAbstractTableModel
     Q_OBJECT
 
 public:
-    RemoteDesktopsModel(QObject *parent);
+    explicit RemoteDesktopsModel(QObject *parent);
     ~RemoteDesktopsModel();
 
     enum DisplayItems { Favorite, Title, LastConnected, VisitCount, Created, Source };

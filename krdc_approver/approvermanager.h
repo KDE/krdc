@@ -34,7 +34,7 @@ class ApproverManager : public QObject, public Tp::AbstractClientApprover
     Q_OBJECT
 
 public:
-    ApproverManager(QObject *parent);
+    explicit ApproverManager(QObject *parent);
     virtual ~ApproverManager();
 
     virtual void addDispatchOperation(const Tp::MethodInvocationContextPtr<> &context,

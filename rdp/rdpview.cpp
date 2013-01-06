@@ -198,13 +198,13 @@ bool RdpView::start()
     QString performance;
     switch (m_hostPreferences->performance()) {
     case 0:
-        performance = "m";
+        performance = 'm';
         break;
     case 1:
-        performance = "b";
+        performance = 'b';
         break;
     case 2:
-        performance = "l";
+        performance = 'l';
         break;
     default:
         break;

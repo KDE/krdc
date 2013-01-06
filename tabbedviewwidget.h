@@ -32,7 +32,7 @@ class TabbedViewWidgetModel : public QAbstractItemModel
     friend class TabbedViewWidget;
     Q_OBJECT
 public:
-    TabbedViewWidgetModel(KTabWidget *modelTarget);
+    explicit TabbedViewWidgetModel(KTabWidget *modelTarget);
     QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const;
     QModelIndex parent(const QModelIndex &index) const;
     int rowCount(const QModelIndex &parent = QModelIndex()) const;

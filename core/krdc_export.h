@@ -24,16 +24,16 @@
 #include <kdemacros.h>
 
 #ifndef KRDCCORE_EXPORT
-# if defined(MAKE_KRDCCORE_LIB)
+# if defined(KDELIBS_STATIC_LIBS)
+   /* No export/import for static libraries */
+#  define KRDCCORE_EXPORT
+# elif defined(MAKE_KRDCCORE_LIB)
    /* We are building this library */
 #  define KRDCCORE_EXPORT KDE_EXPORT
-#  define KRDCCORE_TEST_EXPORT KDE_EXPORT
 # else
    /* We are using this library */
 #  define KRDCCORE_EXPORT KDE_IMPORT
-#  define KRDCCORE_TEST_EXPORT KDE_IMPORT
 # endif
-#endif 
+#endif
 
-#endif 
-
+#endif
