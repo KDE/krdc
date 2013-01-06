@@ -38,7 +38,7 @@ int main(int argc, char **argv)
     startupTimer.start();
     KAboutData aboutData("krdc", 0, ki18n("KRDC"), KDE_VERSION_STRING,
                          ki18n("KDE Remote Desktop Client"), KAboutData::License_GPL,
-                         ki18n("(c) 2007-2012, Urs Wolfer\n"
+                         ki18n("(c) 2007-2013, Urs Wolfer\n"
                                "(c) 2001-2003, Tim Jansen\n"
                                "(c) 2002-2003, Arend van Beelen jr.\n"
                                "(c) 2000-2002, Const Kaplinsky\n"
