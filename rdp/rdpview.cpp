@@ -38,16 +38,10 @@
 RdpView::RdpView(QWidget *parent,
                  const KUrl &url,
                  KConfigGroup configGroup,
-                 const QString &user, const QString &password,
-                 int flags, const QString &domain,
-                 const QString &shell, const QString &directory)
+                 const QString &user, const QString &password)
         : RemoteView(parent),
         m_user(user),
         m_password(password),
-        m_flags(flags),
-        m_domain(domain),
-        m_shell(shell),
-        m_directory(directory),
         m_quitFlag(false),
         m_process(NULL)
 {
@@ -165,10 +159,18 @@ bool RdpView::start()
 
     arguments << "-k" << m_hostPreferences->keyboardLayout();
 
-    if (!m_url.userName().isEmpty())
-        arguments << "-u" << m_url.userName();
-    else
+    if (!m_url.userName().isEmpty()) {
+        // if username contains a domain, it needs to be set with another parameter
+        if (m_url.userName().contains('\\')) {
+            const QStringList splittedName = m_url.userName().split('\\');
+            arguments << "-d" << splittedName.at(0);
+            arguments << "-u" << splittedName.at(1);
+        } else {
+            arguments << "-u" << m_url.userName();
+        }
+    } else {
         arguments << "-u" << "";
+    }
 
     if (!m_url.password().isNull())
         arguments << "-p" << m_url.password();

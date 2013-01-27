@@ -32,7 +32,6 @@
 #include <QProcess>
 
 #define TCP_PORT_RDP 3389
-#define RDP_LOGON_NORMAL 0x33
 
 class RdpView;
 
@@ -46,9 +45,8 @@ public:
     explicit RdpView(QWidget *parent = 0,
                      const KUrl &url = KUrl(),
                      KConfigGroup configGroup = KConfigGroup(),
-                     const QString &user = QString(), const QString &password = QString(),
-                     int flags = RDP_LOGON_NORMAL, const QString &domain = QString(),
-                     const QString &shell = QString(), const QString &directory = QString());
+                     const QString &user = QString(),
+                     const QString &password = QString());
 
     virtual ~RdpView();
 
@@ -73,17 +71,11 @@ protected:
     bool eventFilter(QObject *obj, QEvent *event);
 
 private:
-    // properties used for setting up the connection
-    QString m_name;       // name of the connection
-    QString m_user;       // the user to use to log in
-    QString m_password;   // the password to use
-    int m_flags;      // flags which determine how the connection is set up
-    QString m_domain;     // the domain where the host is on
-    QString m_shell;      // the shell to use
-    QString m_directory;  // the working directory on the server
+    QString m_name;
+    QString m_user;
+    QString m_password;
 
-    // other properties
-    bool m_quitFlag;                // if set: die
+    bool m_quitFlag;
     QX11EmbedContainer *m_container;   // container for the xfreerdp window
     QProcess *m_process;               // xfreerdp process
 
