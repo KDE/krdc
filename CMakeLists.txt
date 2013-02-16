@@ -1,10 +1,7 @@
-
 project(krdc)
 
 if(NOT INSIDE_KDENETWORK)
     message("Not building inside KDENetwork, loading KDE CMake Macros.")
-
-    set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules ${CMAKE_MODULE_PATH})
 
     find_package(KDE4 REQUIRED)
 
@@ -25,19 +22,21 @@ if(NOT INSIDE_KDENETWORK)
        set(CMAKE_REQUIRED_INCLUDES  ${KDEWIN32_INCLUDES})
     endif(WIN32)
     add_definitions(${QT_DEFINITIONS} ${QT_QTDBUS_DEFINITIONS} ${KDE4_DEFINITIONS})
+    add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
     include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES})
-
-    # NX support is not ready for KDE 4.2; disabled (uwolfer)
-    # macro_optional_find_package(LibNXCL)
-    # macro_log_feature(LIBNXCL_FOUND "libnxcl" "NX X compression client library" "http://svn.berlios.de/svnroot/repos/freenx/trunk/freenx-client/nxcl/" FALSE "1.0" "Needed to build Krdc with NX support")
-
-    macro_optional_find_package(TelepathyQt4)
-    macro_log_feature(TelepathyQt4_FOUND "telepathy-qt" "Telepathy Qt Bindings" "http://telepathy.freedesktop.org" FALSE "0.9" "Needed to build Telepathy Tubes support.")
-
 endif(NOT INSIDE_KDENETWORK)
+
+set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules ${CMAKE_MODULE_PATH})
 
 macro_optional_find_package(LibVNCServer)
 macro_log_feature(LIBVNCSERVER_FOUND "libvncserver" "VNC Server library" "http://libvncserver.sourceforge.net/" FALSE "0.9" "Needed to build Krfb and VNC support in Krdc")
+
+# NX support is not ready for KDE 4.2; disabled (uwolfer)
+# macro_optional_find_package(LibNXCL)
+# macro_log_feature(LIBNXCL_FOUND "libnxcl" "NX X compression client library" "http://svn.berlios.de/svnroot/repos/freenx/trunk/freenx-client/nxcl/" FALSE "1.0" "Needed to build Krdc with NX support")
+
+macro_optional_find_package(TelepathyQt4)
+macro_log_feature(TelepathyQt4_FOUND "telepathy-qt" "Telepathy Qt Bindings" "http://telepathy.freedesktop.org" FALSE "0.9" "Needed to build Telepathy Tubes support.")
 
 if(TelepathyQt4_FOUND)
     add_definitions(-DTELEPATHY_SUPPORT)
