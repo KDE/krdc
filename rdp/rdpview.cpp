@@ -235,7 +235,8 @@ bool RdpView::start()
     // clipboard sharing is activated in KRDC; user can disable it at runtime
     arguments << "--plugin" << "cliprdr";
 
-    arguments << (m_host + ':' + QString::number(m_port));
+    arguments << "-t" << QString::number(m_port);
+    arguments << m_host;
 
     kDebug(5012) << "Starting xfreerdp with arguments:" << arguments;
 
