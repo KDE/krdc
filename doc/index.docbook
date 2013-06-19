@@ -37,8 +37,8 @@ as Authors, publish date, the abstract, and Keywords -->
 
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2010-02-09</date>
-<releaseinfo>4.4.00</releaseinfo>
+<date>2013-06-19</date>
+<releaseinfo>&kde; 4.11</releaseinfo>
 
 <copyright>
 <year>2003, 2008</year>
@@ -193,10 +193,10 @@ connect to, you can enter it directly into the <guilabel>Connect to:</guilabel> 
 <para>
 If you want to connect to a machine named megan, which is
 running a <acronym>VNC</acronym> server on screen 1 (5901), you can enter
-<userinput>megan:1</userinput> and choose <guilabel>vnc</guilabel> as the protocol in the 
+<userinput>megan:1</userinput> or <userinput>megan:5901</userinput> and 
+choose <guilabel>vnc</guilabel> as the protocol in the 
 drop down box.
 </para>
-
 <para>
 <screenshot>
 <screeninfo>Entering a hostname into &krdc;</screeninfo>
@@ -218,6 +218,10 @@ the protocol. <acronym>RDP</acronym> does not need the screen number to be speci
 If the server runs the <acronym>RDP</acronym> server not on the default port, you may
 specify it in the following way: <userinput>megan:3910</userinput>
 </para>
+<para>You need to enter an &URL; in percent encoded syntax, i.e. @ as %40, for &eg; 
+<userinput>username%40ad.domain.example</userinput>
+</para>
+<!--https://bugs.kde.org/show_bug.cgi?id=261076-->
 
 </sect2>
 
