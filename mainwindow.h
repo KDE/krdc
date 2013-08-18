@@ -78,8 +78,6 @@ private slots:
     void quit(bool systemEvent = false);
     void preferences();
     void configureNotifications();
-    void configureKeys();
-    void configureToolbars();
     void showMenubar();
     void resizeTabWidget(int w, int h);
     void statusChanged(RemoteView::RemoteStatus status);
