@@ -110,34 +110,37 @@ bool RdpView::start()
 {
     m_container->show();
 
-    if (m_hostPreferences->walletSupport()) {
-        if (m_url.userName().isEmpty()) {
-            QString userName;
-            bool ok = false;
+    if (m_url.userName().isEmpty()) {
+        QString userName;
+        bool ok = false;
 
-            userName = KInputDialog::getText(i18n("Enter Username"),
-                                             i18n("Please enter the username you would like to use for login."),
-                                             Settings::defaultRdpUserName(), &ok, this);
+        userName = KInputDialog::getText(i18n("Enter Username"),
+                                         i18n("Please enter the username you would like to use for login."),
+                                         Settings::defaultRdpUserName(), &ok, this);
 
-            if (ok)
-                m_url.setUserName(userName);
+        if (ok) {
+            m_url.setUserName(userName);
         }
+    }
 
-        if (!m_url.userName().isEmpty()) {
-            const bool useLdapLogin = Settings::recognizeLdapLogins() && m_url.userName().contains('\\');
-            kDebug(5012) << "Is LDAP login:" << useLdapLogin << m_url.userName();
-            QString walletPassword = readWalletPassword(useLdapLogin);
+    if (!m_url.userName().isEmpty()) {
+        const bool useLdapLogin = Settings::recognizeLdapLogins() && m_url.userName().contains('\\');
+        kDebug(5012) << "Is LDAP login:" << useLdapLogin << m_url.userName();
 
-            if (!walletPassword.isNull())
-                m_url.setPassword(walletPassword);
-            else {
-                KPasswordDialog dialog(this);
-                dialog.setPrompt(i18n("Access to the system requires a password."));
-                if (dialog.exec() == KPasswordDialog::Accepted) {
-                    m_url.setPassword(dialog.password());
+        QString walletPassword = QString();
+        if (m_hostPreferences->walletSupport()) {
+            walletPassword = readWalletPassword(useLdapLogin);
+        }
+        if (!walletPassword.isNull()) {
+            m_url.setPassword(walletPassword);
+        } else {
+            KPasswordDialog dialog(this);
+            dialog.setPrompt(i18n("Access to the system requires a password."));
+            if (dialog.exec() == KPasswordDialog::Accepted) {
+                m_url.setPassword(dialog.password());
 
-                    if (m_hostPreferences->walletSupport())
-                        saveWalletPassword(dialog.password(), useLdapLogin);
+                if (m_hostPreferences->walletSupport()) {
+                    saveWalletPassword(dialog.password(), useLdapLogin);
                 }
             }
         }
