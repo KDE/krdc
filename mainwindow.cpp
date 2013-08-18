@@ -43,7 +43,6 @@
 #include <KActionCollection>
 #include <KActionMenu>
 #include <KComboBox>
-#include <KEditToolBar>
 #include <KIcon>
 #include <KInputDialog>
 #include <KLineEdit>
@@ -54,7 +53,6 @@
 #include <KNotifyConfigWidget>
 #include <KPluginInfo>
 #include <KPushButton>
-#include <KShortcutsDialog>
 #include <KStatusBar>
 #include <KToggleAction>
 #include <KToggleFullScreenAction>
@@ -119,7 +117,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     createDockWidget();
 
-    createGUI("krdcui.rc");
+    setupGUI(ToolBar | Keys | Save | Create);
 
     if (Settings::systemTrayIcon()) {
         m_systemTrayIcon = new SystemTrayIcon(this);
@@ -135,8 +133,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     if (Settings::openSessions().count() == 0) // just create a new connection tab if there are no open sessions
         m_tabWidget->addTab(newConnectionWidget(), i18n("New Connection"));
-
-    setAutoSaveSettings(); // e.g toolbar position, mainwindow size, ...
 
     if (Settings::rememberSessions()) // give some time to create and show the window first
         QTimer::singleShot(100, this, SLOT(restoreOpenSessions()));
@@ -201,8 +197,6 @@ void MainWindow::setupActions()
 
     KStandardAction::quit(this, SLOT(quit()), actionCollection());
     KStandardAction::preferences(this, SLOT(preferences()), actionCollection());
-    KStandardAction::configureToolbars(this, SLOT(configureToolbars()), actionCollection());
-    KStandardAction::keyBindings(this, SLOT(configureKeys()), actionCollection());
     QAction *configNotifyAction = KStandardAction::configureNotifications(this, SLOT(configureNotifications()), actionCollection());
     configNotifyAction->setVisible(false);
     m_menubarAction = KStandardAction::showMenubar(this, SLOT(showMenubar()), actionCollection());
@@ -973,18 +967,6 @@ void MainWindow::quit(bool systemEvent)
 void MainWindow::configureNotifications()
 {
     KNotifyConfigWidget::configure(this);
-}
-
-void MainWindow::configureKeys()
-{
-    KShortcutsDialog::configure(actionCollection());
-}
-
-void MainWindow::configureToolbars()
-{
-    KEditToolBar edit(actionCollection());
-    connect(&edit, SIGNAL(newToolBarConfig()), this, SLOT(newToolbarConfig()));
-    edit.exec();
 }
 
 void MainWindow::showMenubar()
