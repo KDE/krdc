@@ -71,6 +71,9 @@ protected:
     bool eventFilter(QObject *obj, QEvent *event);
 
 private:
+    QString keymapToXfreerdp(const QString &keyboadLayout);
+    QHash<QString, QString> initKeymapToXfreerdp();
+
     QString m_name;
     QString m_user;
     QString m_password;
@@ -89,5 +92,7 @@ private slots:
     void receivedStandardError();      // catches xfreerdp debug output
     void receivedStandardOutput();     // catches xfreerdp output
 };
+
+static QHash<QString, QString> keymapToXfreerdpHash;
 
 #endif
