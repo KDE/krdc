@@ -185,6 +185,7 @@ private:
 
     volatile bool m_stopped;
     volatile bool m_passwordError;
+    void initialiseClient();
 
 private slots:
     void checkOutputErrorMessage();

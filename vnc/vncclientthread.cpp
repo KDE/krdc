@@ -416,29 +416,7 @@ void VncClientThread::run()
         m_passwordError = false;
         locker.unlock();
 
-        rfbClientLog = outputHandlerStatic;
-        rfbClientErr = outputHandlerStatic;
-        //24bit color dept in 32 bits per pixel = default. Will change colordepth and bpp later if needed
-        cl = rfbGetClient(8, 3, 4);
-        setClientColorDepth(cl, this->colorDepth());
-        cl->MallocFrameBuffer = newclientStatic;
-        cl->canHandleNewFBSize = true;
-        cl->GetPassword = passwdHandlerStatic;
-        cl->GetCredential = credentialHandlerStatic;
-        cl->GotFrameBufferUpdate = updatefbStatic;
-        cl->GotXCutText = cuttextStatic;
-        rfbClientSetClientData(cl, 0, this);
-
-        locker.relock();
-        cl->serverHost = strdup(m_host.toUtf8().constData());
-
-        if (m_port < 0 || !m_port) // port is invalid or empty...
-            m_port = 5900; // fallback: try an often used VNC port
-
-        if (m_port >= 0 && m_port < 100) // the user most likely used the short form (e.g. :1)
-            m_port += 5900;
-        cl->serverPort = m_port;
-        locker.unlock();
+        initialiseClient();
 
         kDebug(5011) << "--------------------- trying init ---------------------";
 
@@ -479,6 +457,36 @@ void VncClientThread::run()
     }
 
     m_stopped = true;
+}
+
+/**
+ * Factor out the initialisation of the VNC client library. Notice this has
+ * both static parts as in @see rfbClientLog and @see rfbClientErr,
+ * as well as instance local data @see rfbGetClient().
+ */
+void VncClientThread::initialiseClient()
+{
+    rfbClientLog = outputHandlerStatic;
+    rfbClientErr = outputHandlerStatic;
+    //24bit color dept in 32 bits per pixel = default. Will change colordepth and bpp later if needed
+    cl = rfbGetClient(8, 3, 4);
+    setClientColorDepth(cl, this->colorDepth());
+    cl->MallocFrameBuffer = newclientStatic;
+    cl->canHandleNewFBSize = true;
+    cl->GetPassword = passwdHandlerStatic;
+    cl->GetCredential = credentialHandlerStatic;
+    cl->GotFrameBufferUpdate = updatefbStatic;
+    cl->GotXCutText = cuttextStatic;
+    rfbClientSetClientData(cl, 0, this);
+
+    cl->serverHost = strdup(m_host.toUtf8().constData());
+
+    if (m_port < 0 || !m_port) // port is invalid or empty...
+        m_port = 5900; // fallback: try an often used VNC port
+
+    if (m_port >= 0 && m_port < 100) // the user most likely used the short form (e.g. :1)
+        m_port += 5900;
+    cl->serverPort = m_port;
 }
 
 ClientEvent::~ClientEvent()
