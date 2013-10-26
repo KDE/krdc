@@ -24,13 +24,68 @@
 #include "vncclientthread.h"
 
 #include <QMutexLocker>
+#include <QThreadStorage>
 #include <QTimer>
 
 //for detecting intel AMT KVM vnc server
 static const QString INTEL_AMT_KVM_STRING= "Intel(r) AMT KVM";
-static QString outputErrorMessageString;
+static QThreadStorage<VncClientThread **> instances;
 
-QVector<QRgb> VncClientThread::m_colorTable;
+// Dispatch from this static callback context to the member context.
+rfbBool VncClientThread::newclientStatic(rfbClient *cl)
+{
+    VncClientThread *t = (VncClientThread *)rfbClientGetClientData(cl, 0);
+    Q_ASSERT(t);
+
+    return t->newclient();
+}
+
+// Dispatch from this static callback context to the member context.
+void VncClientThread::updatefbStatic(rfbClient *cl, int x, int y, int w, int h)
+{
+    VncClientThread *t = (VncClientThread *)rfbClientGetClientData(cl, 0);
+    Q_ASSERT(t);
+
+    return t->updatefb(x, y, w, h);
+}
+
+// Dispatch from this static callback context to the member context.
+void VncClientThread::cuttextStatic(rfbClient *cl, const char *text, int textlen)
+{
+    VncClientThread *t = (VncClientThread *)rfbClientGetClientData(cl, 0);
+    Q_ASSERT(t);
+
+    t->cuttext(text, textlen);
+}
+
+// Dispatch from this static callback context to the member context.
+char *VncClientThread::passwdHandlerStatic(rfbClient *cl)
+{
+    VncClientThread *t = (VncClientThread *)rfbClientGetClientData(cl, 0);
+    Q_ASSERT(t);
+
+    return t->passwdHandler();
+}
+
+// Dispatch from this static callback context to the member context.
+rfbCredential *VncClientThread::credentialHandlerStatic(rfbClient *cl, int credentialType)
+{
+    VncClientThread *t = (VncClientThread *)rfbClientGetClientData(cl, 0);
+    Q_ASSERT(t);
+
+    return t->credentialHandler(credentialType);
+}
+
+// Dispatch from this static callback context to the member context.
+void VncClientThread::outputHandlerStatic(const char *format, ...)
+{
+    VncClientThread **t = instances.localData();
+
+    va_list args;
+    va_start(args, format);
+    (*t)->outputHandler(format, args);
+    va_end(args);
+}
 
 void VncClientThread::setClientColorDepth(rfbClient* cl, VncClientThread::ColorDepth cd)
 {
@@ -80,27 +135,24 @@ void VncClientThread::setClientColorDepth(rfbClient* cl, VncClientThread::ColorD
     }
 }
 
-rfbBool VncClientThread::newclient(rfbClient *cl)
+rfbBool VncClientThread::newclient()
 {
-    VncClientThread *t = (VncClientThread*)rfbClientGetClientData(cl, 0);
-    Q_ASSERT(t);
-
     //8bit color hack for Intel(r) AMT KVM "classic vnc" = vnc server built in in Intel Vpro chipsets.
     if (INTEL_AMT_KVM_STRING == cl->desktopName) {
         kDebug(5011) << "Intel(R) AMT KVM: switching to 8 bit color depth (workaround, recent libvncserver needed)";
-        t->setColorDepth(bpp8);
+        setColorDepth(bpp8);
     }
-    setClientColorDepth(cl, t->colorDepth());
+    setClientColorDepth(cl, colorDepth());
 
     const int width = cl->width, height = cl->height, depth = cl->format.bitsPerPixel;
     const int size = width * height * (depth / 8);
-    if (t->frameBuffer)
-        delete [] t->frameBuffer; // do not leak if we get a new framebuffer size
-    t->frameBuffer = new uint8_t[size];
-    cl->frameBuffer = t->frameBuffer;
+    if (frameBuffer)
+        delete [] frameBuffer; // do not leak if we get a new framebuffer size
+    frameBuffer = new uint8_t[size];
+    cl->frameBuffer = frameBuffer;
     memset(cl->frameBuffer, '\0', size);
 
-    switch (t->quality()) {
+    switch (quality()) {
     case RemoteView::High:
         cl->appData.encodingsString = "copyrect zlib hextile raw";
         cl->appData.compressLevel = 0;
@@ -124,15 +176,13 @@ rfbBool VncClientThread::newclient(rfbClient *cl)
     return true;
 }
 
-void VncClientThread::updatefb(rfbClient* cl, int x, int y, int w, int h)
+void VncClientThread::updatefb(int x, int y, int w, int h)
 {
 //     kDebug(5011) << "updated client: x: " << x << ", y: " << y << ", w: " << w << ", h: " << h;
-    VncClientThread *t = (VncClientThread*)rfbClientGetClientData(cl, 0);
-    Q_ASSERT(t);
 
     const int width = cl->width, height = cl->height;
     QImage img;
-    switch(t->colorDepth()) {
+    switch(colorDepth()) {
     case bpp8:
         img = QImage(cl->frameBuffer, width, height, QImage::Format_Indexed8);
         img.setColorTable(m_colorTable);
@@ -149,62 +199,53 @@ void VncClientThread::updatefb(rfbClient* cl, int x, int y, int w, int h)
         kDebug(5011) << "image not loaded";
     }
     
-    if (t->m_stopped) {
+    if (m_stopped) {
         return; // sending data to a stopped thread is not a good idea
     }
 
-    t->setImage(img);
+    setImage(img);
 
-    t->emitUpdated(x, y, w, h);
+    emitUpdated(x, y, w, h);
 }
 
-void VncClientThread::cuttext(rfbClient* cl, const char *text, int textlen)
+void VncClientThread::cuttext(const char *text, int textlen)
 {
     const QString cutText = QString::fromUtf8(text, textlen);
     kDebug(5011) << cutText;
 
     if (!cutText.isEmpty()) {
-        VncClientThread *t = (VncClientThread*)rfbClientGetClientData(cl, 0);
-        Q_ASSERT(t);
-
-        t->emitGotCut(cutText);
+        emitGotCut(cutText);
     }
 }
 
-char *VncClientThread::passwdHandler(rfbClient *cl)
+char *VncClientThread::passwdHandler()
 {
     kDebug(5011) << "password request";
 
-    VncClientThread *t = (VncClientThread*)rfbClientGetClientData(cl, 0);
-    Q_ASSERT(t);
+    passwordRequest();
+    m_passwordError = true;
 
-    t->passwordRequest();
-    t->m_passwordError = true;
-
-    return strdup(t->password().toUtf8());
+    return strdup(password().toUtf8());
 }
- 
-rfbCredential *VncClientThread::credentialHandler(rfbClient *cl, int credentialType)
+
+rfbCredential *VncClientThread::credentialHandler(int credentialType)
 {
     kDebug(5011) << "credential request" << credentialType;
-
-    VncClientThread *t = (VncClientThread*)rfbClientGetClientData(cl, 0);
-    Q_ASSERT(t);
 
     rfbCredential *cred = 0;
 
     switch (credentialType) {
         case rfbCredentialTypeUser:
-            t->passwordRequest(true);
-            t->m_passwordError = true;
+            passwordRequest(true);
+            m_passwordError = true;
 
             cred = new rfbCredential;
-            cred->userCredential.username = strdup(t->username().toUtf8());
-            cred->userCredential.password = strdup(t->password().toUtf8());
+            cred->userCredential.username = strdup(username().toUtf8());
+            cred->userCredential.password = strdup(password().toUtf8());
             break;
         default:
             kError(5011) << "credential request failed, unspported credentialType:" << credentialType;
-            t->outputErrorMessage(i18n("VNC authentication type is not supported."));
+            outputErrorMessage(i18n("VNC authentication type is not supported."));
             break;
     }
     return cred;
@@ -367,22 +408,25 @@ void VncClientThread::run()
 {
     QMutexLocker locker(&mutex);
 
+    VncClientThread **threadTls = new VncClientThread *();
+    *threadTls = this;
+    instances.setLocalData(threadTls);
     while (!m_stopped) { // try to connect as long as the server allows
         locker.relock();
         m_passwordError = false;
         locker.unlock();
 
-        rfbClientLog = outputHandler;
-        rfbClientErr = outputHandler;
+        rfbClientLog = outputHandlerStatic;
+        rfbClientErr = outputHandlerStatic;
         //24bit color dept in 32 bits per pixel = default. Will change colordepth and bpp later if needed
         cl = rfbGetClient(8, 3, 4);
         setClientColorDepth(cl, this->colorDepth());
-        cl->MallocFrameBuffer = newclient;
+        cl->MallocFrameBuffer = newclientStatic;
         cl->canHandleNewFBSize = true;
-        cl->GetPassword = passwdHandler;
-        cl->GetCredential = credentialHandler;
-        cl->GotFrameBufferUpdate = updatefb;
-        cl->GotXCutText = cuttext;
+        cl->GetPassword = passwdHandlerStatic;
+        cl->GetCredential = credentialHandlerStatic;
+        cl->GotFrameBufferUpdate = updatefbStatic;
+        cl->GotXCutText = cuttextStatic;
         rfbClientSetClientData(cl, 0, this);
 
         locker.relock();

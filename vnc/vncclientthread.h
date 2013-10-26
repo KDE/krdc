@@ -148,15 +148,26 @@ protected:
     void run();
 
 private:
-    static void setClientColorDepth(rfbClient *cl, ColorDepth cd);
+    void setClientColorDepth(rfbClient *cl, ColorDepth cd);
     void setColorDepth(ColorDepth colorDepth);
-    //these static methods are callback functions for libvncclient
-    static rfbBool newclient(rfbClient *cl);
-    static void updatefb(rfbClient *cl, int x, int y, int w, int h);
-    static void cuttext(rfbClient *cl, const char *text, int textlen);
-    static char* passwdHandler(rfbClient *cl);
-    static rfbCredential* credentialHandler(rfbClient *cl, int credentialType);
-    static void outputHandler(const char *format, ...);
+
+    // These static methods are callback functions for libvncclient. Each
+    // of them calls back into the corresponding member function via some
+    // TLS-based logic.
+    static rfbBool newclientStatic(rfbClient *cl);
+    static void updatefbStatic(rfbClient *cl, int x, int y, int w, int h);
+    static void cuttextStatic(rfbClient *cl, const char *text, int textlen);
+    static char *passwdHandlerStatic(rfbClient *cl);
+    static rfbCredential *credentialHandlerStatic(rfbClient *cl, int credentialType);
+    static void outputHandlerStatic(const char *format, ...);
+
+    // Member functions corresponding to the above static methods.
+    rfbBool newclient();
+    void updatefb(int x, int y, int w, int h);
+    void cuttext(const char *text, int textlen);
+    char *passwdHandler();
+    rfbCredential *credentialHandler(int credentialType);
+    void outputHandler(const char *format, ...);
 
     QImage m_image;
     rfbClient *cl;
@@ -169,7 +180,8 @@ private:
     ColorDepth m_colorDepth;
     QQueue<ClientEvent* > m_eventQueue;
     //color table for 8bit indexed colors
-    static QVector<QRgb> m_colorTable;
+    QVector<QRgb> m_colorTable;
+    QString outputErrorMessageString;
 
     volatile bool m_stopped;
     volatile bool m_passwordError;
