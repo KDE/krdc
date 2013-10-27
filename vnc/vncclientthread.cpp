@@ -271,10 +271,16 @@ void VncClientThread::outputHandler(const char *format, ...)
 
     if ((message.contains("Couldn't convert ")) ||
             (message.contains("Unable to connect to VNC server"))) {
-        if (m_keepalive.failed) {
-            kError(5011) << "connect failed" << m_host << ":" << m_port;
+        // Don't show a dialog if a reconnection is in progress.
+        QString tmp = i18n("Server not found.");
+        if (m_keepalive.set) {
+            m_keepalive.failed = true;
+            if (m_previousDetails != tmp) {
+                m_previousDetails = tmp;
+                clientStateChange(false, tmp);
+            }
         } else {
-            outputErrorMessageString = i18n("Server not found.");
+            outputErrorMessageString = tmp;
         }
     }
 
@@ -291,11 +297,13 @@ void VncClientThread::outputHandler(const char *format, ...)
     // If we are not going to attempt a reconnection, at least tell the user
     // the connection went away.
     if (message.contains("read (")) {
+        // Don't show a dialog if a reconnection is needed.
+        QString tmp = i18n("Disconnected: %1.", message);
         if (m_keepalive.set) {
             m_keepalive.failed = true;
-            kError(5011) << "disconnected" << m_host << ":" << m_port;
+            clientStateChange(false, tmp);
         } else {
-            outputErrorMessageString = i18n("VNC server error %1.", message);
+            outputErrorMessageString = tmp;
         }
     }
 
@@ -318,6 +326,7 @@ VncClientThread::VncClientThread(QObject *parent)
     m_keepalive.set = false;
     m_keepalive.failed = false;
     m_keepalive.password = QString::null;
+    m_previousDetails = QString::null;
     outputErrorMessageString.clear(); //don't deliver error messages of old instances...
     QMutexLocker locker(&mutex);
 
@@ -336,10 +345,7 @@ VncClientThread::~VncClientThread()
         kDebug(5011) << "Attempting to stop in deconstructor, will crash if this fails:" << quitSuccess;
     }
 
-    if (cl) {
-        // Disconnect from vnc server & cleanup allocated resources
-        rfbClientCleanup(cl);
-    }
+    clientDestroy();
 
     delete [] frameBuffer;
 }
@@ -444,7 +450,7 @@ void VncClientThread::run()
         m_passwordError = false;
         locker.unlock();
 
-        if (initialiseClient(false)) {
+        if (clientCreate(false)) {
             // The initial connection attempt worked!
             break;
         }
@@ -478,8 +484,9 @@ void VncClientThread::run()
                         // Reconnect after a short delay. That way, if the
                         // attempt fails very quickly, we don't sit in a very
                         // tight loop.
+                        clientDestroy();
                         msleep(100);
-                    } while (!initialiseClient(true));
+                    } while (!clientCreate(true));
                     continue;
                 }
                 kError(5011) << "HandleRFBServerMessage failed";
@@ -508,16 +515,10 @@ void VncClientThread::run()
  * On return from here, if cl is set, the connection will have been made else
  * cl will not be set.
  */
-bool VncClientThread::initialiseClient(bool reinitialising)
+bool VncClientThread::clientCreate(bool reinitialising)
 {
     rfbClientLog = outputHandlerStatic;
     rfbClientErr = outputHandlerStatic;
-
-    if (cl) {
-        // Disconnect from vnc server & cleanup allocated resources
-        rfbClientCleanup(cl);
-        cl = 0;
-    }
 
     //24bit color dept in 32 bits per pixel = default. Will change colordepth and bpp later if needed
     cl = rfbGetClient(8, 3, 4);
@@ -552,19 +553,32 @@ bool VncClientThread::initialiseClient(bool reinitialising)
     }
 
     if (reinitialising) {
-        kError(5011) << "reconnected" << m_host << ":" << m_port;
+        clientStateChange(true, i18n("Reconnected"));
     } else {
-        kError(5011) << "connected" << m_host << ":" << m_port;
+        clientStateChange(true, i18n("Connected"));
     }
-    setKeepalive();
+    clientSetKeepalive();
     return true;
+}
+
+/**
+ * Undo @see clientCreate().
+ */
+void VncClientThread::clientDestroy()
+{
+
+    if (cl) {
+        // Disconnect from vnc server & cleanup allocated resources
+        rfbClientCleanup(cl);
+        cl = 0;
+    }
 }
 
 /**
  * The VNC client library does not make use of keepalives. We go behind its
  * back to set it up.
  */
-void VncClientThread::setKeepalive()
+void VncClientThread::clientSetKeepalive()
 {
     // If keepalive is disabled, do nothing.
     m_keepalive.set = false;
@@ -601,6 +615,15 @@ void VncClientThread::setKeepalive()
     }
     m_keepalive.set = true;
     kDebug(5011) << "TCP keepalive set";
+}
+
+/**
+ * The VNC client state changed.
+ */
+void VncClientThread::clientStateChange(bool isConnected, const QString &details)
+{
+    kError(5011) << details << m_host << ":" << m_port;
+    emit clientStateChanged(isConnected, details);
 }
 
 ClientEvent::~ClientEvent()

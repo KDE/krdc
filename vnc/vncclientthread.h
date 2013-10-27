@@ -139,6 +139,14 @@ signals:
     void passwordRequest(bool includingUsername = false);
     void outputErrorMessage(const QString &message);
 
+    /**
+     * When we connect/disconnect/reconnect/etc., this signal will be emitted.
+     *
+     * @param isConnected       Is the client connected?
+     * @param details           A sentence describing what happened.
+     */
+    void clientStateChanged(bool isConnected, const QString &details);
+
 public slots:
     void mouseEvent(int x, int y, int buttonMask);
     void keyEvent(int key, bool pressed);
@@ -185,7 +193,6 @@ private:
 
     volatile bool m_stopped;
     volatile bool m_passwordError;
-    void initialiseClient();
 
     /**
      * Connection keepalive/reconnection support.
@@ -210,8 +217,19 @@ private:
         volatile bool failed;
         QString password;
     } m_keepalive;
-    void setKeepalive();
-    bool initialiseClient(bool reinitialising);
+
+    // Initialise the VNC client library object.
+    bool clientCreate(bool reinitialising);
+
+    // Uninitialise the VNC client library object.
+    void clientDestroy();
+
+    // Turn on keepalive support.
+    void clientSetKeepalive();
+
+    // Record a state change.
+    void clientStateChange(bool isConnected, const QString &details);
+    QString m_previousDetails;
 
 private slots:
     void checkOutputErrorMessage();
