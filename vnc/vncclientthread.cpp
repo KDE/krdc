@@ -23,6 +23,8 @@
 
 #include "vncclientthread.h"
 
+#include <cerrno>
+#include <netinet/tcp.h>
 #include <QMutexLocker>
 #include <QThreadStorage>
 #include <QTimer>
@@ -222,10 +224,12 @@ char *VncClientThread::passwdHandler()
 {
     kDebug(5011) << "password request";
 
-    passwordRequest();
-    m_passwordError = true;
-
-    return strdup(password().toUtf8());
+    if (QString::null == m_keepalive.password) {
+        passwordRequest();
+        m_passwordError = true;
+        m_keepalive.password = password();
+    }
+    return strdup(m_keepalive.password.toUtf8());
 }
 
 rfbCredential *VncClientThread::credentialHandler(int credentialType)
@@ -266,8 +270,13 @@ void VncClientThread::outputHandler(const char *format, ...)
     kDebug(5011) << message;
 
     if ((message.contains("Couldn't convert ")) ||
-            (message.contains("Unable to connect to VNC server")))
-        outputErrorMessageString = i18n("Server not found.");
+            (message.contains("Unable to connect to VNC server"))) {
+        if (m_keepalive.failed) {
+            kError(5011) << "connect failed" << m_host << ":" << m_port;
+        } else {
+            outputErrorMessageString = i18n("Server not found.");
+        }
+    }
 
     if ((message.contains("VNC connection failed: Authentication failed, too many tries")) ||
             (message.contains("VNC connection failed: Too many authentication failures")))
@@ -278,6 +287,17 @@ void VncClientThread::outputHandler(const char *format, ...)
 
     if (message.contains("VNC server closed connection"))
         outputErrorMessageString = i18n("VNC server closed connection.");
+
+    // If we are not going to attempt a reconnection, at least tell the user
+    // the connection went away.
+    if (message.contains("read (")) {
+        if (m_keepalive.set) {
+            m_keepalive.failed = true;
+            kError(5011) << "disconnected" << m_host << ":" << m_port;
+        } else {
+            outputErrorMessageString = i18n("VNC server error %1.", message);
+        }
+    }
 
     // internal messages, not displayed to user
     if (message.contains("VNC server supports protocol version 3.889")) // see http://bugs.kde.org/162640
@@ -290,6 +310,14 @@ VncClientThread::VncClientThread(QObject *parent)
         , cl(0)
         , m_stopped(false)
 {
+    // We choose a small value for interval...after all if the connection is
+    // supposed to sustain a VNC session, a reasonably frequent ping should
+    // be perfectly supportable.
+    m_keepalive.intervalSeconds = 1;
+    m_keepalive.failedProbes = 3;
+    m_keepalive.set = false;
+    m_keepalive.failed = false;
+    m_keepalive.password = QString::null;
     outputErrorMessageString.clear(); //don't deliver error messages of old instances...
     QMutexLocker locker(&mutex);
 
@@ -416,20 +444,22 @@ void VncClientThread::run()
         m_passwordError = false;
         locker.unlock();
 
-        initialiseClient();
-
-        kDebug(5011) << "--------------------- trying init ---------------------";
-
-        if (rfbInitClient(cl, 0, 0))
+        if (initialiseClient(false)) {
+            // The initial connection attempt worked!
             break;
-        else
-            cl = 0;
+        }
 
         locker.relock();
-        if (m_passwordError)
+        if (m_passwordError) {
+            locker.unlock();
+            // Try again.
             continue;
+        }
 
-        return;
+        // The initial connection attempt failed, and not because of a
+        // password problem. Bail out.
+        m_stopped = true;
+        locker.unlock();
     }
 
     locker.relock();
@@ -442,6 +472,17 @@ void VncClientThread::run()
         }
         if (i) {
             if (!HandleRFBServerMessage(cl)) {
+                if (m_keepalive.failed) {
+                    do {
+                        kDebug(5011) << "reconnecting" << m_host << ":" << m_port;
+                        // Reconnect after a short delay. That way, if the
+                        // attempt fails very quickly, we don't sit in a very
+                        // tight loop.
+                        msleep(100);
+                    } while (!initialiseClient(true));
+                    continue;
+                }
+                kError(5011) << "HandleRFBServerMessage failed";
                 break;
             }
         }
@@ -463,11 +504,21 @@ void VncClientThread::run()
  * Factor out the initialisation of the VNC client library. Notice this has
  * both static parts as in @see rfbClientLog and @see rfbClientErr,
  * as well as instance local data @see rfbGetClient().
+ *
+ * On return from here, if cl is set, the connection will have been made else
+ * cl will not be set.
  */
-void VncClientThread::initialiseClient()
+bool VncClientThread::initialiseClient(bool reinitialising)
 {
     rfbClientLog = outputHandlerStatic;
     rfbClientErr = outputHandlerStatic;
+
+    if (cl) {
+        // Disconnect from vnc server & cleanup allocated resources
+        rfbClientCleanup(cl);
+        cl = 0;
+    }
+
     //24bit color dept in 32 bits per pixel = default. Will change colordepth and bpp later if needed
     cl = rfbGetClient(8, 3, 4);
     setClientColorDepth(cl, this->colorDepth());
@@ -487,6 +538,69 @@ void VncClientThread::initialiseClient()
     if (m_port >= 0 && m_port < 100) // the user most likely used the short form (e.g. :1)
         m_port += 5900;
     cl->serverPort = m_port;
+
+    kDebug(5011) << "--------------------- trying init ---------------------";
+
+    if (!rfbInitClient(cl, 0, 0)) {
+        if (!reinitialising) {
+            // Don't whine on reconnection failure: presumably the network
+            // is simply still down.
+            kError(5011) << "rfbInitClient failed";
+        }
+        cl = 0;
+        return false;
+    }
+
+    if (reinitialising) {
+        kError(5011) << "reconnected" << m_host << ":" << m_port;
+    } else {
+        kError(5011) << "connected" << m_host << ":" << m_port;
+    }
+    setKeepalive();
+    return true;
+}
+
+/**
+ * The VNC client library does not make use of keepalives. We go behind its
+ * back to set it up.
+ */
+void VncClientThread::setKeepalive()
+{
+    // If keepalive is disabled, do nothing.
+    m_keepalive.set = false;
+    m_keepalive.failed = false;
+    if (!m_keepalive.intervalSeconds) {
+        return;
+    }
+    int optval;
+    socklen_t optlen = sizeof(optval);
+
+    // Try to set the option active
+    optval = 1;
+    if (setsockopt(cl->sock, SOL_SOCKET, SO_KEEPALIVE, &optval, optlen) < 0) {
+        kError(5011) << "setsockopt(SO_KEEPALIVE)" << strerror(errno);
+        return;
+    }
+
+    optval = m_keepalive.intervalSeconds;
+    if (setsockopt(cl->sock, SOL_TCP, TCP_KEEPIDLE, &optval, optlen) < 0) {
+        kError(5011) << "setsockopt(TCP_KEEPIDLE)" << strerror(errno);
+        return;
+    }
+
+    optval = m_keepalive.intervalSeconds;
+    if (setsockopt(cl->sock, SOL_TCP, TCP_KEEPINTVL, &optval, optlen) < 0) {
+        kError(5011) << "setsockopt(TCP_KEEPINTVL)" << strerror(errno);
+        return;
+    }
+
+    optval = m_keepalive.failedProbes;
+    if(setsockopt(cl->sock, SOL_TCP, TCP_KEEPCNT, &optval, optlen) < 0) {
+        kError(5011) << "setsockopt(TCP_KEEPCNT)" << strerror(errno);
+        return;
+    }
+    m_keepalive.set = true;
+    kDebug(5011) << "TCP keepalive set";
 }
 
 ClientEvent::~ClientEvent()

@@ -187,6 +187,32 @@ private:
     volatile bool m_passwordError;
     void initialiseClient();
 
+    /**
+     * Connection keepalive/reconnection support.
+     */
+    struct {
+        /**
+         * Number of seconds between probes. If zero, we will not attempt
+         * to enable it.
+         */
+        int intervalSeconds;
+        /**
+         * Number of failed probes required to recognise a disconnect.
+         */
+        int failedProbes;
+        /**
+         * Was keepalive successfully set?
+         */
+        bool set;
+        /**
+         * Did keepalive detect a disconnect?
+         */
+        volatile bool failed;
+        QString password;
+    } m_keepalive;
+    void setKeepalive();
+    bool initialiseClient(bool reinitialising);
+
 private slots:
     void checkOutputErrorMessage();
 };
