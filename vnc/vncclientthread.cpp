@@ -622,7 +622,7 @@ void VncClientThread::clientSetKeepalive()
  */
 void VncClientThread::clientStateChange(bool isConnected, const QString &details)
 {
-    kError(5011) << details << m_host << ":" << m_port;
+    kDebug(5011) << details << m_host << ":" << m_port;
     emit clientStateChanged(isConnected, details);
 }
 
