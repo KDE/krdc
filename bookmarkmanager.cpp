@@ -114,8 +114,9 @@ bool BookmarkManager::editBookmarkEntry() const
 
 QString BookmarkManager::currentUrl() const
 {
-    if (m_mainWindow->currentRemoteView() >= 0)
-        return urlForView(m_mainWindow->remoteViewList().at(m_mainWindow->currentRemoteView()));
+    RemoteView *view = m_mainWindow->currentRemoteView();
+    if (view)
+        return urlForView(view);
     else
         return QString();
 }
@@ -146,10 +147,10 @@ QList<QPair<QString, QString> > BookmarkManager::currentBookmarkList() const
 {
     QList<QPair<QString, QString> > list;
 
-    QListIterator<RemoteView *> iter(m_mainWindow->remoteViewList());
+    QMapIterator<QWidget *, RemoteView *> iter(m_mainWindow->remoteViewList());
 
     while (iter.hasNext()) {
-        RemoteView *next = iter.next();
+        RemoteView *next = iter.next().value();
         const QString url = next->url().prettyUrl(KUrl::RemoveTrailingSlash);
         list << QPair<QString, QString>(url, url);
     }
