@@ -277,7 +277,7 @@ void VncClientThread::outputHandler(const char *format, ...)
             m_keepalive.failed = true;
             if (m_previousDetails != tmp) {
                 m_previousDetails = tmp;
-                clientStateChange(false, tmp);
+                clientStateChange(RemoteView::Disconnected, tmp);
             }
         } else {
             outputErrorMessageString = tmp;
@@ -301,7 +301,7 @@ void VncClientThread::outputHandler(const char *format, ...)
         QString tmp = i18n("Disconnected: %1.", message);
         if (m_keepalive.set) {
             m_keepalive.failed = true;
-            clientStateChange(false, tmp);
+            clientStateChange(RemoteView::Disconnected, tmp);
         } else {
             outputErrorMessageString = tmp;
         }
@@ -480,12 +480,12 @@ void VncClientThread::run()
             if (!HandleRFBServerMessage(cl)) {
                 if (m_keepalive.failed) {
                     do {
-                        kDebug(5011) << "reconnecting" << m_host << ":" << m_port;
                         // Reconnect after a short delay. That way, if the
                         // attempt fails very quickly, we don't sit in a very
                         // tight loop.
                         clientDestroy();
                         msleep(100);
+                        clientStateChange(RemoteView::Connecting, i18n("Reconnecting."));
                     } while (!clientCreate(true));
                     continue;
                 }
@@ -553,9 +553,9 @@ bool VncClientThread::clientCreate(bool reinitialising)
     }
 
     if (reinitialising) {
-        clientStateChange(true, i18n("Reconnected"));
+        clientStateChange(RemoteView::Connected, i18n("Reconnected."));
     } else {
-        clientStateChange(true, i18n("Connected"));
+        clientStateChange(RemoteView::Connected, i18n("Connected."));
     }
     clientSetKeepalive();
     return true;
@@ -620,10 +620,10 @@ void VncClientThread::clientSetKeepalive()
 /**
  * The VNC client state changed.
  */
-void VncClientThread::clientStateChange(bool isConnected, const QString &details)
+void VncClientThread::clientStateChange(RemoteView::RemoteStatus status, const QString &details)
 {
-    kDebug(5011) << details << m_host << ":" << m_port;
-    emit clientStateChanged(isConnected, details);
+    kDebug(5011) << status << details << m_host << ":" << m_port;
+    emit clientStateChanged(status, details);
 }
 
 ClientEvent::~ClientEvent()

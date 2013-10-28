@@ -142,10 +142,10 @@ signals:
     /**
      * When we connect/disconnect/reconnect/etc., this signal will be emitted.
      *
-     * @param isConnected       Is the client connected?
+     * @param status            Is the client connected?
      * @param details           A sentence describing what happened.
      */
-    void clientStateChanged(bool isConnected, const QString &details);
+    void clientStateChanged(RemoteView::RemoteStatus status, const QString &details);
 
 public slots:
     void mouseEvent(int x, int y, int buttonMask);
@@ -228,7 +228,7 @@ private:
     void clientSetKeepalive();
 
     // Record a state change.
-    void clientStateChange(bool isConnected, const QString &details);
+    void clientStateChange(RemoteView::RemoteStatus status, const QString &details);
     QString m_previousDetails;
 
 private slots:
