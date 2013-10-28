@@ -224,7 +224,7 @@ char *VncClientThread::passwdHandler()
 {
     kDebug(5011) << "password request";
 
-    if (QString::null == m_keepalive.password) {
+    if (m_keepalive.password.isNull()) {
         passwordRequest();
         m_passwordError = true;
         m_keepalive.password = password();
