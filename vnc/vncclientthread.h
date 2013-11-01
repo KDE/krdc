@@ -215,7 +215,6 @@ private:
          * Did keepalive detect a disconnect?
          */
         volatile bool failed;
-        QString password;
     } m_keepalive;
 
     // Initialise the VNC client library object.

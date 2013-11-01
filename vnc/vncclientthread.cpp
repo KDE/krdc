@@ -224,12 +224,12 @@ char *VncClientThread::passwdHandler()
 {
     kDebug(5011) << "password request";
 
-    if (m_keepalive.password.isNull()) {
+    // Never request a password during a reconnect attempt.
+    if (!m_keepalive.failed) {
         passwordRequest();
         m_passwordError = true;
-        m_keepalive.password = password();
     }
-    return strdup(m_keepalive.password.toUtf8());
+    return strdup(m_password.toUtf8());
 }
 
 rfbCredential *VncClientThread::credentialHandler(int credentialType)
@@ -271,9 +271,10 @@ void VncClientThread::outputHandler(const char *format, ...)
 
     if ((message.contains("Couldn't convert ")) ||
             (message.contains("Unable to connect to VNC server"))) {
-        // Don't show a dialog if a reconnection is in progress.
+        // Don't show a dialog if a reconnection is needed. Never contemplate
+        // reconnection if we don't have a password.
         QString tmp = i18n("Server not found.");
-        if (m_keepalive.set) {
+        if (m_keepalive.set && !m_password.isNull()) {
             m_keepalive.failed = true;
             if (m_previousDetails != tmp) {
                 m_previousDetails = tmp;
@@ -284,12 +285,18 @@ void VncClientThread::outputHandler(const char *format, ...)
         }
     }
 
-    if ((message.contains("VNC connection failed: Authentication failed, too many tries")) ||
-            (message.contains("VNC connection failed: Too many authentication failures")))
-        outputErrorMessageString = i18n("VNC authentication failed because of too many authentication tries.");
-
-    if (message.contains("VNC connection failed: Authentication failed"))
+    // Process general authentication failures before more specific authentication
+    // failures. All authentication failures cancel any auto-reconnection that
+    // may be in progress.
+    if (message.contains("VNC connection failed: Authentication failed")) {
+        m_keepalive.failed = false;
         outputErrorMessageString = i18n("VNC authentication failed.");
+    }
+    if ((message.contains("VNC connection failed: Authentication failed, too many tries")) ||
+            (message.contains("VNC connection failed: Too many authentication failures"))) {
+        m_keepalive.failed = false;
+        outputErrorMessageString = i18n("VNC authentication failed because of too many authentication tries.");
+    }
 
     if (message.contains("VNC server closed connection"))
         outputErrorMessageString = i18n("VNC server closed connection.");
@@ -297,9 +304,10 @@ void VncClientThread::outputHandler(const char *format, ...)
     // If we are not going to attempt a reconnection, at least tell the user
     // the connection went away.
     if (message.contains("read (")) {
-        // Don't show a dialog if a reconnection is needed.
+        // Don't show a dialog if a reconnection is needed. Never contemplate
+        // reconnection if we don't have a password.
         QString tmp = i18n("Disconnected: %1.", message);
-        if (m_keepalive.set) {
+        if (m_keepalive.set && !m_password.isNull()) {
             m_keepalive.failed = true;
             clientStateChange(RemoteView::Disconnected, tmp);
         } else {
@@ -325,7 +333,6 @@ VncClientThread::VncClientThread(QObject *parent)
     m_keepalive.failedProbes = 3;
     m_keepalive.set = false;
     m_keepalive.failed = false;
-    m_keepalive.password = QString::null;
     m_previousDetails = QString::null;
     outputErrorMessageString.clear(); //don't deliver error messages of old instances...
     QMutexLocker locker(&mutex);
