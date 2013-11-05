@@ -491,7 +491,7 @@ void VncClientThread::run()
                         // attempt fails very quickly, we don't sit in a very
                         // tight loop.
                         clientDestroy();
-                        msleep(100);
+                        msleep(1000);
                         clientStateChange(RemoteView::Connecting, i18n("Reconnecting."));
                     } while (!clientCreate(true));
                     continue;
