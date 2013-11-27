@@ -334,8 +334,6 @@ void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConn
     connect(view, SIGNAL(statusChanged(RemoteView::RemoteStatus)), this, SLOT(statusChanged(RemoteView::RemoteStatus)));
     connect(view, SIGNAL(disconnected()), this, SLOT(disconnectHost()));
 
-    m_remoteViewList.append(view);
-
     QScrollArea *scrollArea = createScrollArea(m_tabWidget, view);
 
     const int indexOfNewConnectionWidget = m_tabWidget->indexOf(m_newConnectionWidget);
@@ -344,6 +342,7 @@ void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConn
 
     const int newIndex = m_tabWidget->addTab(scrollArea, KIcon("krdc"), tabName.isEmpty() ? url.prettyUrl(KUrl::RemoveTrailingSlash) : tabName);
     m_tabWidget->setCurrentIndex(newIndex);
+    m_remoteViewMap.insert(m_tabWidget->widget(newIndex), view);
     tabChanged(newIndex); // force to update m_currentRemoteView (tabChanged is not emitted when start page has been disabled)
 
     view->start();
@@ -356,12 +355,13 @@ void MainWindow::openFromRemoteDesktopsModel(const QModelIndex &index)
     if (!urlString.isEmpty()) {
         const KUrl url(urlString);
         // first check if url has already been opened; in case show the tab
-        for (int i = 0; i < m_remoteViewList.count(); ++i) {
-            if (m_remoteViewList.at(i)->url() == url) {
-                m_tabWidget->setCurrentIndex(i);
+        foreach (QWidget *widget, m_remoteViewMap.keys()) {
+            if (m_remoteViewMap.value(widget)->url() == url) {
+                m_tabWidget->setCurrentWidget(widget);
                 return;
             }
         }
+
         newConnection(url, false, nameString);
     }
 }
@@ -463,7 +463,7 @@ void MainWindow::statusChanged(RemoteView::RemoteStatus status)
 
 void MainWindow::takeScreenshot()
 {
-    const QPixmap snapshot = m_remoteViewList.at(m_currentRemoteView)->takeScreenshot();
+    const QPixmap snapshot = currentRemoteView()->takeScreenshot();
 
     QApplication::clipboard()->setPixmap(snapshot);
 }
@@ -485,8 +485,8 @@ void MainWindow::switchFullscreen()
         restoreGeometry(m_mainWindowGeometry);
         if (m_systemTrayIcon) m_systemTrayIcon->setAssociatedWidget(this);
 
-        foreach(RemoteView *currentView, m_remoteViewList) {
-            currentView->enableScaling(currentView->hostPreferences()->windowedScale());
+        foreach (RemoteView * view, m_remoteViewMap.values()) {
+            view->enableScaling(view->hostPreferences()->windowedScale());
         }
 
         if (m_toolBar) {
@@ -512,7 +512,7 @@ void MainWindow::switchFullscreen()
         m_tabWidget->setTabBarHidden(true);
         m_tabWidget->setDocumentMode(true);
 
-        foreach(RemoteView *currentView, m_remoteViewList) {
+        foreach(RemoteView *currentView, m_remoteViewMap) {
             currentView->enableScaling(currentView->hostPreferences()->fullscreenScale());
         }
 
@@ -566,10 +566,11 @@ void MainWindow::disconnectHost()
     QWidget *widgetToDelete;
     if (view) {
         widgetToDelete = (QWidget*) view->parent()->parent();
-        m_remoteViewList.removeOne(view);
+        m_remoteViewMap.remove(m_remoteViewMap.key(view));
     } else {
         widgetToDelete = m_tabWidget->currentWidget();
-        view = m_remoteViewList.takeAt(m_currentRemoteView);
+        view = currentRemoteView();
+        m_remoteViewMap.remove(m_remoteViewMap.key(view));
     }
 
     saveHostPrefs(view);
@@ -594,12 +595,10 @@ void MainWindow::disconnectHost()
 void MainWindow::closeTab(QWidget *widget)
 {
     bool isNewConnectionPage = widget == m_newConnectionWidget;
-    const int index = m_tabWidget->indexOf(widget);
-
-    kDebug(5010) << index;
 
     if (!isNewConnectionPage) {
-        RemoteView *view = m_remoteViewList.takeAt(index);
+        RemoteView *view = m_remoteViewMap.value(widget);
+        m_remoteViewMap.remove(m_remoteViewMap.key(view));
         view->startQuitting();
 #ifdef TELEPATHY_SUPPORT
         m_tubesManager->closeTube(view->url());
@@ -740,7 +739,7 @@ void MainWindow::showLocalCursor(bool showLocalCursor)
 {
     kDebug(5010) << showLocalCursor;
 
-    RemoteView* view = m_remoteViewList.at(m_currentRemoteView);
+    RemoteView* view = currentRemoteView();
     view->showDotCursor(showLocalCursor ? RemoteView::CursorOn : RemoteView::CursorOff);
     view->hostPreferences()->setShowLocalCursor(showLocalCursor);
     saveHostPrefs(view);
@@ -750,7 +749,7 @@ void MainWindow::viewOnly(bool viewOnly)
 {
     kDebug(5010) << viewOnly;
 
-    RemoteView* view = m_remoteViewList.at(m_currentRemoteView);
+    RemoteView* view = currentRemoteView();
     view->setViewOnly(viewOnly);
     view->hostPreferences()->setViewOnly(viewOnly);
     saveHostPrefs(view);
@@ -760,7 +759,7 @@ void MainWindow::grabAllKeys(bool grabAllKeys)
 {
     kDebug(5010);
 
-    RemoteView* view = m_remoteViewList.at(m_currentRemoteView);
+    RemoteView* view = currentRemoteView();
     view->setGrabAllKeys(grabAllKeys);
     view->hostPreferences()->setGrabAllKeys(grabAllKeys);
     saveHostPrefs(view);
@@ -770,7 +769,7 @@ void MainWindow::scale(bool scale)
 {
     kDebug(5010);
 
-    RemoteView* view = m_remoteViewList.at(m_currentRemoteView);
+    RemoteView* view = currentRemoteView();
     view->enableScaling(scale);
     if (m_fullscreenWindow)
         view->hostPreferences()->setFullscreenScale(scale);
@@ -848,7 +847,7 @@ void MainWindow::updateActionStatus()
     if (m_tabWidget->currentWidget() == m_newConnectionWidget)
         enabled = false;
 
-    RemoteView* view = (m_currentRemoteView >= 0 && enabled) ? m_remoteViewList.at(m_currentRemoteView) : 0;
+    RemoteView* view = (m_currentRemoteView >= 0 && enabled) ? currentRemoteView() : 0;
 
     actionCollection()->action("take_screenshot")->setEnabled(enabled);
     actionCollection()->action("disconnect")->setEnabled(enabled);
@@ -928,15 +927,15 @@ void MainWindow::updateConfiguration()
     }
 
     // Send update configuration message to all views
-    for (int i = 0; i < m_remoteViewList.count(); ++i) {
-        m_remoteViewList.at(i)->updateConfiguration();
+    foreach (RemoteView *view, m_remoteViewMap.values()) {
+        view->updateConfiguration();
     }
 
 }
 
 void MainWindow::quit(bool systemEvent)
 {
-    const bool haveRemoteConnections = !m_remoteViewList.isEmpty();
+    const bool haveRemoteConnections = !m_remoteViewMap.isEmpty();
     if (systemEvent || !haveRemoteConnections || KMessageBox::warningContinueCancel(this,
             i18n("Are you sure you want to quit the KDE Remote Desktop Client?"),
             i18n("Confirm Quit"),
@@ -945,17 +944,17 @@ void MainWindow::quit(bool systemEvent)
 
         if (Settings::rememberSessions()) { // remember open remote views for next startup
             QStringList list;
-            for (int i = 0; i < m_remoteViewList.count(); ++i) {
-                kDebug(5010) << m_remoteViewList.at(i)->url();
-                list.append(m_remoteViewList.at(i)->url().prettyUrl(KUrl::RemoveTrailingSlash));
+            foreach (RemoteView *view, m_remoteViewMap.values()) {
+                kDebug(5010) << view->url();
+                list.append(view->url().prettyUrl(KUrl::RemoveTrailingSlash));
             }
             Settings::setOpenSessions(list);
         }
 
         saveHostPrefs();
 
-        for (int i = 0; i < m_remoteViewList.count(); ++i) {
-            m_remoteViewList.at(i)->startQuitting();
+        foreach (RemoteView *view, m_remoteViewMap.values()) {
+            view->startQuitting();
         }
 
         Settings::self()->writeConfig();
@@ -1011,9 +1010,9 @@ void MainWindow::saveProperties(KConfigGroup &group)
 
 void MainWindow::saveHostPrefs()
 {
-    for (int i = 0; i < m_remoteViewList.count(); ++i) {
-        saveHostPrefs(m_remoteViewList.at(i));
-        m_remoteViewList.at(i)->startQuitting();
+    foreach (RemoteView *view, m_remoteViewMap.values()) {
+        saveHostPrefs(view);
+        view->startQuitting();
     }
 }
 
@@ -1159,9 +1158,9 @@ void MainWindow::newConnectionPage(bool clearInput)
     m_addressInput->setFocus();
 }
 
-QList<RemoteView *> MainWindow::remoteViewList() const
+QMap<QWidget *, RemoteView *> MainWindow::remoteViewList() const
 {
-    return m_remoteViewList;
+    return m_remoteViewMap;
 }
 
 QList<RemoteViewFactory *> MainWindow::remoteViewFactoriesList() const
@@ -1169,9 +1168,13 @@ QList<RemoteViewFactory *> MainWindow::remoteViewFactoriesList() const
     return m_remoteViewFactories.values();
 }
 
-int MainWindow::currentRemoteView() const
+RemoteView* MainWindow::currentRemoteView() const
 {
-    return m_currentRemoteView;
+    if (m_currentRemoteView >= 0) {
+        return m_remoteViewMap.value(m_tabWidget->widget(m_currentRemoteView));
+    } else {
+        return 0;
+    }
 }
 
 void MainWindow::createDockWidget()

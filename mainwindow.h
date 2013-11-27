@@ -59,9 +59,9 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    QList<RemoteView *> remoteViewList() const;
+    QMap<QWidget *, RemoteView *> remoteViewList() const;
     QList<RemoteViewFactory *> remoteViewFactoriesList() const;
-    int currentRemoteView() const;
+    RemoteView* currentRemoteView() const;
 
 public slots:
     void newConnection(const KUrl &newUrl = KUrl(), bool switchFullscreenWhenConnected = false, const QString &tabName = QString());
@@ -122,7 +122,7 @@ private:
 
     BookmarkManager *m_bookmarkManager;
 
-    QList<RemoteView *> m_remoteViewList;
+    QMap<QWidget *, RemoteView *> m_remoteViewMap;
     QMap<int, RemoteViewFactory *> m_remoteViewFactories;
 
     int m_currentRemoteView;
