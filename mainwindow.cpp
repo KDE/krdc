@@ -668,8 +668,8 @@ void MainWindow::showConnectionContextMenu(const QPoint &pos)
         return;
 
     const QString url = index.data(10001).toString();
-    const QString title = m_remoteDesktopsModel->index(index.row(), RemoteDesktopsModel::Title).data(Qt::DisplayRole).toString();
-    const QString source = m_remoteDesktopsModel->index(index.row(), RemoteDesktopsModel::Source).data(Qt::DisplayRole).toString();
+    const QString title = index.model()->index(index.row(), RemoteDesktopsModel::Title).data(Qt::DisplayRole).toString();
+    const QString source = index.model()->index(index.row(), RemoteDesktopsModel::Source).data(Qt::DisplayRole).toString();
 
     KMenu *menu = new KMenu(m_newConnectionTableView);
     menu->addTitle(url);
