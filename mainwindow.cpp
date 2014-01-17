@@ -334,6 +334,7 @@ void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConn
     connect(view, SIGNAL(statusChanged(RemoteView::RemoteStatus)), this, SLOT(statusChanged(RemoteView::RemoteStatus)));
     connect(view, SIGNAL(disconnected()), this, SLOT(disconnectHost()));
 
+    view->winId();  // native widget workaround for bug 253365
     QScrollArea *scrollArea = createScrollArea(m_tabWidget, view);
 
     const int indexOfNewConnectionWidget = m_tabWidget->indexOf(m_newConnectionWidget);
