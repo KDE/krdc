@@ -531,6 +531,10 @@ void MainWindow::switchFullscreen()
         hide();  // hide after showing the new window so it stays on the same screen
 
         if (m_systemTrayIcon) m_systemTrayIcon->setAssociatedWidget(m_fullscreenWindow);
+
+        actionCollection()->action("switch_fullscreen")->setIcon(KIcon("view-restore"));
+        actionCollection()->action("switch_fullscreen")->setText(i18n("Switch to Window Mode"));
+        actionCollection()->action("switch_fullscreen")->setIconText(i18n("Window Mode"));
         showRemoteViewToolbar();
     }
     if (m_tabWidget->currentWidget() == m_newConnectionWidget) {
@@ -784,10 +788,6 @@ void MainWindow::showRemoteViewToolbar()
     kDebug(5010);
 
     if (!m_toolBar) {
-        actionCollection()->action("switch_fullscreen")->setIcon(KIcon("view-restore"));
-        actionCollection()->action("switch_fullscreen")->setText(i18n("Switch to Window Mode"));
-        actionCollection()->action("switch_fullscreen")->setIconText(i18n("Window Mode"));
-
         m_toolBar = new FloatingToolBar(m_fullscreenWindow, m_fullscreenWindow);
         m_toolBar->winId(); // force it to be a native widget (prevents problem with QX11EmbedContainer)
         m_toolBar->setSide(FloatingToolBar::Top);
