@@ -24,7 +24,10 @@
 #include "vncclientthread.h"
 
 #include <cerrno>
+#include <netinet/in.h>
 #include <netinet/tcp.h>
+#include <sys/types.h>
+#include <sys/socket.h>
 #include <QMutexLocker>
 #include <QThreadStorage>
 #include <QTimer>
@@ -604,19 +607,19 @@ void VncClientThread::clientSetKeepalive()
     }
 
     optval = m_keepalive.intervalSeconds;
-    if (setsockopt(cl->sock, SOL_TCP, TCP_KEEPIDLE, &optval, optlen) < 0) {
+    if (setsockopt(cl->sock, IPPROTO_TCP, TCP_KEEPIDLE, &optval, optlen) < 0) {
         kError(5011) << "setsockopt(TCP_KEEPIDLE)" << strerror(errno);
         return;
     }
 
     optval = m_keepalive.intervalSeconds;
-    if (setsockopt(cl->sock, SOL_TCP, TCP_KEEPINTVL, &optval, optlen) < 0) {
+    if (setsockopt(cl->sock, IPPROTO_TCP, TCP_KEEPINTVL, &optval, optlen) < 0) {
         kError(5011) << "setsockopt(TCP_KEEPINTVL)" << strerror(errno);
         return;
     }
 
     optval = m_keepalive.failedProbes;
-    if(setsockopt(cl->sock, SOL_TCP, TCP_KEEPCNT, &optval, optlen) < 0) {
+    if(setsockopt(cl->sock, IPPROTO_TCP, TCP_KEEPCNT, &optval, optlen) < 0) {
         kError(5011) << "setsockopt(TCP_KEEPCNT)" << strerror(errno);
         return;
     }
