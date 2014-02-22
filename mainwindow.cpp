@@ -110,6 +110,7 @@ MainWindow::MainWindow(QWidget *parent)
         connect(m_tabWidget, SIGNAL(mouseMiddleClick(QWidget*)), SLOT(closeTab(QWidget*)));
 
     connect(m_tabWidget, SIGNAL(mouseDoubleClick(QWidget*)), SLOT(openTabSettings(QWidget*)));
+    connect(m_tabWidget, SIGNAL(mouseDoubleClick()), SLOT(newConnectionPage()));
     connect(m_tabWidget, SIGNAL(contextMenu(QWidget*,QPoint)), SLOT(tabContextMenu(QWidget*,QPoint)));
 
     m_tabWidget->setMinimumSize(600, 400);
