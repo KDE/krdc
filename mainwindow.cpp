@@ -699,7 +699,7 @@ void MainWindow::showConnectionContextMenu(const QPoint &pos)
     } else if (selectedAction == renameAction) {
         //TODO: use inline editor if possible
         bool ok = false;
-        const QString newTitle = KInputDialog::getText(i18n("Rename %1", title), i18n("Rename %1 to", title), "", &ok, this);
+        const QString newTitle = KInputDialog::getText(i18n("Rename %1", title), i18n("Rename %1 to", title), title, &ok, this);
         if (ok && !newTitle.isEmpty()) {
             BookmarkManager::updateTitle(m_bookmarkManager->getManager(), url, newTitle);
         }
