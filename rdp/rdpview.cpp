@@ -342,8 +342,6 @@ bool RdpView::start()
         if (!m_url.password().isNull()) {
             arguments << "/p:" + m_url.password();
         }
-        kDebug(5012) << "Starting xfreerdp with arguments: " << arguments.join(" ");
-
     }
 
     setStatus(Connecting);
