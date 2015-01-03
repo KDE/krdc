@@ -447,10 +447,8 @@ void RdpView::receivedStandardOutput()
 {
     const QString output(m_process->readAllStandardOutput());
     kDebug(5012) << output;
-    QString line;
-    int i = 0;
-    while (!(line = output.section('\n', i, i)).isEmpty()) {
-
+    QStringList splittedOutput = output.split('\n');
+    Q_FOREACH (const QString &line, splittedOutput) {
         // full xfreerdp message: "transport_connect: getaddrinfo (Name or service not known)"
         if (line.contains(QLatin1String("Name or service not known"))) {
             KMessageBox::error(0, i18n("Name or service not known."),
@@ -467,14 +465,13 @@ void RdpView::receivedStandardOutput()
 
         // looks like some generic xfreerdp error message, handle it if nothing was handled:
         // "Error: protocol security negotiation failure"
-        } else if (line.contains(QLatin1String("Error: protocol security negotiation failure"))) {
+        } else if (line.contains(QLatin1String("Error: protocol security negotiation failure")) || // xfreerdp 1.0
+            line.contains(QLatin1String("Error: protocol security negotiation or connection failure"))) { // xfreerdp 1.2
             KMessageBox::error(0, i18n("Connection attempt to host failed."),
                                i18n("Connection Failure"));
             connectionError();
             return;
         }
-
-        i++;
     }
 }
 
