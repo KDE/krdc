@@ -463,11 +463,17 @@ void RdpView::receivedStandardOutput()
             connectionError();
             return;
 
+        } else if (line.contains(QLatin1String("Authentication failure, check credentials"))) {
+            KMessageBox::error(0, i18n("Authentication failure, check credentials."),
+                               i18n("Connection Failure"));
+            connectionError();
+            return;
+
         // looks like some generic xfreerdp error message, handle it if nothing was handled:
         // "Error: protocol security negotiation failure"
         } else if (line.contains(QLatin1String("Error: protocol security negotiation failure")) || // xfreerdp 1.0
             line.contains(QLatin1String("Error: protocol security negotiation or connection failure"))) { // xfreerdp 1.2
-            KMessageBox::error(0, i18n("Connection attempt to host failed."),
+            KMessageBox::error(0, i18n("Connection attempt to host failed. Security negotiation or connection failure."),
                                i18n("Connection Failure"));
             connectionError();
             return;
