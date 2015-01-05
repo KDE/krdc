@@ -279,7 +279,16 @@ void MainWindow::restoreOpenSessions()
 
 KUrl MainWindow::getInputUrl()
 {
-    return KUrl(m_protocolInput->currentText() + "://" + m_addressInput->text());
+
+    QString userInput = m_addressInput->text();
+
+    // percent encode usernames so KUrl can parse it
+    int lastAtIndex = userInput.indexOf(QRegExp("@[^@]+$"));
+    if (lastAtIndex >0) {
+        userInput = KUrl::toPercentEncoding(userInput.left(lastAtIndex)) + userInput.mid(lastAtIndex);
+    }
+
+    return KUrl(m_protocolInput->currentText() + "://" + userInput);
 }
 
 void MainWindow::newConnection(const KUrl &newUrl, bool switchFullscreenWhenConnected, const QString &tabName)
