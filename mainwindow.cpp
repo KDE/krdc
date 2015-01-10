@@ -279,7 +279,6 @@ void MainWindow::restoreOpenSessions()
 
 KUrl MainWindow::getInputUrl()
 {
-
     QString userInput = m_addressInput->text();
 
     // percent encode usernames so KUrl can parse it
