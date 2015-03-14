@@ -1126,7 +1126,6 @@ QWidget* MainWindow::newConnectionWidget()
         m_newConnectionTableView->verticalHeader()->setDefaultSectionSize(
             m_newConnectionTableView->fontMetrics().height() + 3);
         m_newConnectionTableView->horizontalHeader()->setStretchLastSection(true);
-        m_newConnectionTableView->horizontalHeader()->setResizeMode(QHeaderView::ResizeToContents);
         m_newConnectionTableView->resizeColumnsToContents();
         m_newConnectionTableView->setAlternatingRowColors(true);
         // set up sorting and actions (double click open, right click custom menu)
