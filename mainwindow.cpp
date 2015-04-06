@@ -1126,11 +1126,11 @@ QWidget* MainWindow::newConnectionWidget()
         m_newConnectionTableView->verticalHeader()->setDefaultSectionSize(
             m_newConnectionTableView->fontMetrics().height() + 3);
         m_newConnectionTableView->horizontalHeader()->setStretchLastSection(true);
-        m_newConnectionTableView->resizeColumnsToContents();
         m_newConnectionTableView->setAlternatingRowColors(true);
         // set up sorting and actions (double click open, right click custom menu)
         m_newConnectionTableView->setSortingEnabled(true);
         m_newConnectionTableView->sortByColumn(Settings::connectionListSortColumn(), Qt::SortOrder(Settings::connectionListSortOrder()));
+        m_newConnectionTableView->resizeColumnsToContents();
         connect(m_newConnectionTableView->horizontalHeader(), SIGNAL(sortIndicatorChanged(int,Qt::SortOrder)),
                 SLOT(saveConnectionListSort(int,Qt::SortOrder)));
         connect(m_newConnectionTableView, SIGNAL(doubleClicked(QModelIndex)),
