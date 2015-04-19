@@ -652,7 +652,8 @@ void KeyClientEvent::fire(rfbClient* cl)
 
 void ClientCutEvent::fire(rfbClient* cl)
 {
-    SendClientCutText(cl, text.toUtf8().data(), text.size());
+    QByteArray toUtf8Converted = text.toUtf8();
+    SendClientCutText(cl, toUtf8Converted.data(), toUtf8Converted.length());
 }
 
 void VncClientThread::mouseEvent(int x, int y, int buttonMask)
