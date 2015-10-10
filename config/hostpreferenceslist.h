@@ -26,12 +26,11 @@
 
 #include "mainwindow.h"
 
-#include <KConfigGroup>
+#include <KConfigCore/KConfigGroup>
 
 #include <QDomDocument>
 #include <QWidget>
-
-class KPushButton;
+#include <QPushButton>
 
 class QListWidget;
 
@@ -43,7 +42,7 @@ public:
     HostPreferencesList(QWidget *parent, MainWindow *mainWindow, KConfigGroup hostPrefsConfig);
     ~HostPreferencesList();
 
-private slots:
+private Q_SLOTS:
     void readConfig();
     void saveSettings();
     void configureHost();
@@ -53,8 +52,8 @@ private slots:
 private:
     KConfigGroup m_hostPrefsConfig;
 
-    KPushButton *configureButton;
-    KPushButton *removeButton;
+    QPushButton *configureButton;
+    QPushButton *removeButton;
     QListWidget *hostList;
     MainWindow *m_mainWindow;
 };

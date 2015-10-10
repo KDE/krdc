@@ -25,8 +25,6 @@
 
 #include "settings.h"
 
-#include <KDebug>
-
 #include <QDesktopWidget>
 
 VncHostPreferences::VncHostPreferences(KConfigGroup configGroup, QObject *parent)
@@ -51,7 +49,7 @@ QWidget* VncHostPreferences::createProtocolSpecificConfigPage()
     connect(vncUi.resolutionComboBox, SIGNAL(currentIndexChanged(int)), SLOT(updateScalingWidthHeight(int)));
     connect(vncUi.kcfg_Scaling, SIGNAL(toggled(bool)), SLOT(updateScaling(bool)));
 
-    const QString resolutionString = QString::number(width()) + 'x' + QString::number(height());
+    const QString resolutionString = QString::number(width()) + QLatin1Char('x') + QString::number(height());
     const int resolutionIndex = vncUi.resolutionComboBox->findText(resolutionString, Qt::MatchContains);
     vncUi.resolutionComboBox->setCurrentIndex((resolutionIndex == -1) ? vncUi.resolutionComboBox->count() - 1 : resolutionIndex);
 
@@ -140,4 +138,3 @@ RemoteView::Quality VncHostPreferences::quality()
     return (RemoteView::Quality) m_configGroup.readEntry("quality", (int) Settings::quality() + 1);
 }
 
-#include "vnchostpreferences.moc"

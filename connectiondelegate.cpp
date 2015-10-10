@@ -24,11 +24,11 @@
 #include "connectiondelegate.h"
 #include "remotedesktopsmodel.h"
 
-#include <KDateTime>
-#include <KDebug>
-#include <KIcon>
-#include <KIconLoader>
-#include <KLocale>
+#include <KIconThemes/KIconLoader>
+#include <KI18n/KLocalizedString>
+
+#include <QDateTime>
+#include <QIcon>
 
 ConnectionDelegate::ConnectionDelegate(QObject *parent) :
         QStyledItemDelegate(parent)
@@ -38,8 +38,8 @@ ConnectionDelegate::ConnectionDelegate(QObject *parent) :
 QString ConnectionDelegate::displayText(const QVariant &value, const QLocale& locale) const
 {
     if (value.type() == QVariant::DateTime) {
-        KDateTime lastConnected = KDateTime(value.toDateTime());
-        KDateTime currentTime = KDateTime::currentUtcDateTime();
+        QDateTime lastConnected = QDateTime(value.toDateTime());
+        QDateTime currentTime = QDateTime::currentDateTimeUtc();
 
         int daysAgo = lastConnected.daysTo(currentTime);
         if (daysAgo <= 1 && lastConnected.secsTo(currentTime) < 86400) {
@@ -71,8 +71,8 @@ void ConnectionDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
         QVariant value = index.data(Qt::CheckStateRole);
         if (value.isValid()) {
             Qt::CheckState checkState = static_cast<Qt::CheckState>(value.toInt());
-            KIcon favIcon = KIcon("bookmarks");
-            KIcon::Mode mode = (checkState == Qt::Checked) ? KIcon::Active : KIcon::Disabled;
+            QIcon favIcon = QIcon(QLatin1String("bookmarks"));
+            QIcon::Mode mode = (checkState == Qt::Checked) ? QIcon::Active : QIcon::Disabled;
             favIcon.paint(painter, option.rect, option.decorationAlignment, mode);
 
         }

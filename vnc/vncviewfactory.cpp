@@ -22,29 +22,30 @@
 ****************************************************************************/
 
 #include "vncviewfactory.h"
+#include "remoteviewfactory.h"
 
-#include <KDebug>
+#include <KCoreAddons/KExportPlugin>
 
-KRDC_PLUGIN_EXPORT(VncViewFactory)
+K_PLUGIN_FACTORY_WITH_JSON(KrdcFactory, "krdc_vnc.json", registerPlugin<VncViewFactory>();)
 
 VncViewFactory::VncViewFactory(QObject *parent, const QVariantList &args)
         : RemoteViewFactory(parent)
 {
     Q_UNUSED(args);
 
-    KGlobal::locale()->insertCatalog("krdc");
+    KLocalizedString::setApplicationDomain("krdc");
 }
 
 VncViewFactory::~VncViewFactory()
 {
 }
 
-bool VncViewFactory::supportsUrl(const KUrl &url) const
+bool VncViewFactory::supportsUrl(const QUrl &url) const
 {
-    return (url.scheme().compare("vnc", Qt::CaseInsensitive) == 0);
+    return (url.scheme().compare(QLatin1String("vnc"), Qt::CaseInsensitive) == 0);
 }
 
-RemoteView *VncViewFactory::createView(QWidget *parent, const KUrl &url, KConfigGroup configGroup)
+RemoteView *VncViewFactory::createView(QWidget *parent, const QUrl &url, KConfigGroup configGroup)
 {
     return new VncView(parent, url, configGroup);
 }
@@ -56,7 +57,7 @@ HostPreferences *VncViewFactory::createHostPreferences(KConfigGroup configGroup,
 
 QString VncViewFactory::scheme() const
 {
-    return "vnc";
+    return QLatin1String("vnc");
 }
 
 QString VncViewFactory::connectActionText() const
@@ -75,4 +76,4 @@ QString VncViewFactory::connectToolTipText() const
                 "<i>Example: vncserver:1 (host:port / screen)</i></html>");
 }
 
-#include "moc_vncviewfactory.cpp"
+#include "vncviewfactory.moc"

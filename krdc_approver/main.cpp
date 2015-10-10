@@ -24,10 +24,10 @@
 
 #include "approvermanager.h"
 
-#include <KAboutData>
-#include <KCmdLineArgs>
-#include <KLocalizedString>
-#include <KUniqueApplication>
+#include <KCoreAddons/KAboutData>
+#include <KI18n/KLocalizedString>
+
+#include <QApplication>
 
 #include <TelepathyQt/Types>
 #include <TelepathyQt/Debug>
@@ -35,20 +35,19 @@
 
 int main(int argc, char **argv)
 {
-    KAboutData aboutData("krdc_rfb_approver", "KRDC", ki18n("KRDC"), "0.1",
-            ki18n("Approver for KRDC"), KAboutData::License_GPL,
-            ki18n("(C) 2009, Abner Silva"));
-    aboutData.setProgramIconName("krdc");
-    aboutData.addAuthor(ki18nc("@info:credit", "Abner Silva"), KLocalizedString(),
-            "abner.silva@kdemail.net");
+    QApplication app(argc, argv);
 
-    KCmdLineArgs::init(argc, argv, &aboutData);
+    KAboutData aboutData(QStringLiteral("krdc_rfb_approver"), i18n("KRDC"), i18n("Approver for KRDC"),
+                         i18n("0.1"), KAboutLicense::LicenseKey::GPL, i18n("(C) 2009, Abner Silva"));
 
-    if (!KUniqueApplication::start())
-        return 0;
+    aboutData.addCredit(i18n("Abner Silva"), i18n(""), QStringLiteral("abner.silva@kdemail.net"));
+    KAboutData::setApplicationData(aboutData);
 
-    KUniqueApplication app;
-    app.disableSessionManagement();
+    app.setApplicationName(aboutData.componentName());
+    app.setApplicationDisplayName(aboutData.displayName());
+    app.setOrganizationDomain(aboutData.organizationDomain());
+    app.setApplicationVersion(aboutData.version());
+    app.setQuitOnLastWindowClosed(false);
 
     Tp::registerTypes();
     Tp::enableDebug(true);
@@ -57,7 +56,7 @@ int main(int argc, char **argv)
     Tp::ClientRegistrarPtr registrar = Tp::ClientRegistrar::create();
     Tp::SharedPtr<ApproverManager> approverManager;
     approverManager = Tp::SharedPtr<ApproverManager>(new ApproverManager(0));
-    registrar->registerClient(Tp::AbstractClientPtr::dynamicCast(approverManager), "krdc_rfb_approver");
+    registrar->registerClient(Tp::AbstractClientPtr::dynamicCast(approverManager), QLatin1String("krdc_rfb_approver"));
 
     return app.exec();
 }

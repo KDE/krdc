@@ -28,8 +28,7 @@
 #include <QObject>
 
 #include <TelepathyQt/Channel>
-
-class KNotification;
+#include <KNotifications/KNotification>
 
 class Approver : public QObject
 {

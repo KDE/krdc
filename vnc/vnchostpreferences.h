@@ -47,7 +47,7 @@ private:
     Ui::VncPreferences vncUi;
     void checkEnableCustomSize(int index);
 
-private slots:
+private Q_SLOTS:
     void updateScalingWidthHeight(int index);
     void updateScaling(bool enabled);
 };

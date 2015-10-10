@@ -2,13 +2,18 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 set (krdc_rfb_approver_SRCS
     main.cpp
+    ../core/logging.cpp
     approvermanager.cpp
     approver.cpp
 )
 
-kde4_add_executable(krdc_rfb_approver ${krdc_rfb_approver_SRCS})
-target_link_libraries(krdc_rfb_approver ${KDE4_KDEUI_LIBS}
-                                    ${TELEPATHY_QT4_LIBRARIES}
+add_executable(krdc_rfb_approver ${krdc_rfb_approver_SRCS})
+target_link_libraries(krdc_rfb_approver
+    Qt5::Gui
+    KF5::Notifications
+    KF5::CoreAddons
+    KF5::I18n
+    ${TELEPATHY_QT5_LIBRARIES}
 )
 
 install(TARGETS krdc_rfb_approver ${INSTALL_TARGETS_DEFAULT_ARGS})

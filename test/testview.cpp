@@ -25,7 +25,7 @@
 
 #include <QEvent>
 
-TestView::TestView(QWidget *parent, const KUrl &url, KConfigGroup configGroup)
+TestView::TestView(QWidget *parent, const QUrl &url, KConfigGroup configGroup)
         : RemoteView(parent)
 {
     m_hostPreferences = new TestHostPreferences(configGroup, this);
@@ -96,4 +96,3 @@ void TestView::switchFullscreen(bool on)
     Q_UNUSED(on);
 }
 
-#include "testview.moc"

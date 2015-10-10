@@ -27,7 +27,8 @@
 
 #include <TelepathyQt/StreamTubeClient>
 #include <QtNetwork/QHostAddress>
-#include <KUrl>
+#include <QUrl>
+#include <QObject>
 
 class TubesManager : public QObject
 {
@@ -37,10 +38,10 @@ public:
     explicit TubesManager(QObject *parent);
     virtual ~TubesManager();
 
-    void closeTube(const KUrl & url);
+    void closeTube(const QUrl & url);
 
 Q_SIGNALS:
-    void newConnection(KUrl);
+    void newConnection(QUrl);
 
 private Q_SLOTS:
     void onTubeAccepted(
@@ -53,7 +54,7 @@ private Q_SLOTS:
 
 private:
     Tp::StreamTubeClientPtr m_stubeClient;
-    QHash<KUrl, Tp::IncomingStreamTubeChannelPtr> m_tubes;
+    QHash<QUrl, Tp::IncomingStreamTubeChannelPtr> m_tubes;
 };
 
 #endif

@@ -39,7 +39,7 @@ class KonsoleView : public RemoteView
     Q_OBJECT
 
 public:
-    explicit KonsoleView(QWidget *parent = 0, const KUrl &url = KUrl(), KConfigGroup configGroup = KConfigGroup());
+    explicit KonsoleView(QWidget *parent = 0, const QUrl &url = QUrl(), KConfigGroup configGroup = KConfigGroup());
 
     virtual ~KonsoleView();
 
@@ -50,12 +50,12 @@ public:
     virtual bool start();
     HostPreferences* hostPreferences();
 
-public slots:
+public Q_SLOTS:
     virtual void switchFullscreen(bool on);
 
 protected:
     bool eventFilter(QObject *obj, QEvent *event);
-    
+
 private:
     KonsoleHostPreferences *m_hostPreferences;
     TerminalInterface* m_terminal;
@@ -69,7 +69,7 @@ class KonsoleHostPreferences : public HostPreferences
 public:
     explicit KonsoleHostPreferences(KConfigGroup configGroup, QObject *parent = 0)
         : HostPreferences(configGroup, parent) {}
-        
+
 protected:
     virtual QWidget* createProtocolSpecificConfigPage() { return 0; };
 };

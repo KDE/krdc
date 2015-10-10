@@ -23,22 +23,34 @@
 ****************************************************************************/
 
 #include "mainwindow.h"
+#include "logging.h"
+#include "krdc_version.h"
 
-#include <KApplication>
-#include <KLocale>
-#include <KCmdLineArgs>
-#include <KAboutData>
-#include <KDebug>
-
+#include <KCoreAddons/KAboutData>
+#include <Kdelibs4ConfigMigrator>
+#include <KI18n/KLocalizedString>
 #include <QTime>
+#include <QCommandLineOption>
+#include <QCommandLineParser>
+#include <QPluginLoader>
 
 int main(int argc, char **argv)
 {
+    const QLatin1String appName("krdc");
+    QApplication app(argc, argv);
     QTime startupTimer;
     startupTimer.start();
-    KAboutData aboutData("krdc", 0, ki18n("KRDC"), KDE_VERSION_STRING,
-                         ki18n("KDE Remote Desktop Client"), KAboutData::License_GPL,
-                         ki18n("(c) 2007-2013, Urs Wolfer\n"
+
+    app.setAttribute(Qt::AA_UseHighDpiPixmaps, true);
+
+    Kdelibs4ConfigMigrator migrate(appName);
+    migrate.setConfigFiles(QStringList() << QLatin1String("krdcrc"));
+    migrate.migrate();
+
+    KAboutData aboutData(appName, i18n("KRDC"), QString(KRDC_VERSION),
+                         i18n("KDE Remote Desktop Client"), KAboutLicense::LicenseKey::GPL);
+
+    aboutData.setCopyrightStatement(i18n("(c) 2007-2013, Urs Wolfer\n"
                                "(c) 2001-2003, Tim Jansen\n"
                                "(c) 2002-2003, Arend van Beelen jr.\n"
                                "(c) 2000-2002, Const Kaplinsky\n"
@@ -47,59 +59,65 @@ int main(int argc, char **argv)
                                "(c) 1999-2003, Matthew Chapman\n"
                                "(c) 2009, Collabora Ltd"));
 
-    aboutData.addAuthor(ki18n("Urs Wolfer"), ki18n("Developer, Maintainer"), "uwolfer@kde.org");
-    aboutData.addAuthor(ki18n("Tony Murray"), ki18n("Developer"), "murraytony@gmail.com");
-    aboutData.addAuthor(ki18n("Tim Jansen"), ki18n("Former Developer"), "tim@tjansen.de");
-    aboutData.addAuthor(ki18n("Arend van Beelen jr."), ki18n("Initial RDP backend"), "arend@auton.nl");
-    aboutData.addCredit(ki18n("Brad Hards"), ki18n("Google Summer of Code 2007 KRDC project mentor"),
-                        "bradh@frogmouth.net");
-    aboutData.addCredit(ki18n("LibVNCServer / LibVNCClient developers"), ki18n("VNC client library"),
-                        "libvncserver-common@lists.sf.net", "http://libvncserver.sourceforge.net/");
-    aboutData.addAuthor(ki18n("Abner Silva"), ki18n("Telepathy Tubes Integration"), "abner.silva@kdemail.net");
+    aboutData.addAuthor(i18n("Urs Wolfer"), i18n("Developer, Maintainer"), QLatin1String("uwolfer@kde.org"));
+    aboutData.addAuthor(i18n("Tony Murray"), i18n("Developer"), QLatin1String("murraytony@gmail.com"));
+    aboutData.addAuthor(i18n("Tim Jansen"), i18n("Former Developer"), QLatin1String("tim@tjansen.de"));
+    aboutData.addAuthor(i18n("Arend van Beelen jr."), i18n("Initial RDP backend"), QLatin1String("arend@auton.nl"));
+    aboutData.addCredit(i18n("Brad Hards"), i18n("Google Summer of Code 2007 KRDC project mentor"),
+                        QLatin1String("bradh@frogmouth.net"));
+    aboutData.addCredit(i18n("LibVNCServer / LibVNCClient developers"), i18n("VNC client library"),
+                        QLatin1String("libvncserver-common@lists.sf.net"), QLatin1String("http://libvncserver.sourceforge.net/"));
+    aboutData.addAuthor(i18n("Abner Silva"), i18n("Telepathy Tubes Integration"), QLatin1String("abner.silva@kdemail.net"));
+    aboutData.setOrganizationDomain("kde.org");
+    KAboutData::setApplicationData(aboutData);
 
-    KCmdLineArgs::init(argc, argv, &aboutData);
+    app.setApplicationName(aboutData.componentName());
+    app.setApplicationDisplayName(aboutData.displayName());
+    app.setOrganizationDomain(aboutData.organizationDomain());
+    app.setApplicationVersion(aboutData.version());
+    app.setWindowIcon(QIcon::fromTheme(appName));
 
-    KCmdLineOptions options;
-    options.add("fullscreen", ki18n("Start KRDC with the provided URL in fullscreen mode (works only with one URL)"));
-    options.add("!+[URL]", ki18n("URLs to connect after startup"));
+    QCommandLineParser parser;
+    parser.addVersionOption();
+    parser.addHelpOption();
+    aboutData.setupCommandLine(&parser);
 
-    KCmdLineArgs::addCmdLineOptions(options);
+    // command line options
+    parser.addOption(QCommandLineOption(QStringList() << QLatin1String("fullscreen"),
+                                        i18n("Start KRDC with the provided URL in fullscreen mode (works only with one URL)")));
+    parser.addPositionalArgument(QLatin1String("url"), i18n("URLs to connect after startup"));
 
-    KApplication app;
-
+    parser.process(app);
+    aboutData.processCommandLine(&parser);
     MainWindow *mainwindow = new MainWindow;
     mainwindow->show();
+    const QStringList args = parser.positionalArguments();
+    if (args.length() > 0) {
+        for (int i = 0; i < args.length(); ++i) {
+            QUrl url = QUrl::fromLocalFile(args.at(i));
+            if (url.scheme().isEmpty() || url.host().isEmpty()) { // unusable url; try to recover it...
+                QString arg = args.at(i);
 
-    KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+                qCDebug(KRDC) << "unusable url; try to recover it:" << arg;
 
-    if (args->count() > 0) {
-        for (int i = 0; i < args->count(); ++i) {
-            KUrl u(args->url(i));
+                if (arg.lastIndexOf(QLatin1Char('/')) != 0)
+                    arg = arg.right(arg.length() - arg.lastIndexOf(QLatin1Char('/')) - 1);
 
-            if (u.scheme().isEmpty() || u.host().isEmpty()) { // unusable url; try to recover it...
-                QString arg(args->url(i).url());
+                if (!arg.contains(QLatin1String("://")))
+                    arg.prepend(QLatin1String("vnc://")); // vnc was default in kde3 times...
 
-                kDebug(5010) << "unusable url; try to recover it:" << arg;
+                qCDebug(KRDC) << "recovered url:" << arg;
 
-                if (arg.lastIndexOf('/') != 0)
-                    arg = arg.right(arg.length() - arg.lastIndexOf('/') - 1);
-
-                if (!arg.contains("://"))
-                    arg.prepend("vnc://"); // vnc was default in kde3 times...
-
-                kDebug(5010) << "recovered url:" << arg;
-
-                u = arg;
+                url = QUrl(arg);
+            }
+            if (!url.isValid()) {
+                continue;
             }
 
-            if (!u.isValid())
-                continue;
-
-            mainwindow->newConnection(u, ((args->isSet("fullscreen")) && (args->count() == 1)));
+            mainwindow->newConnection(url, parser.isSet(QLatin1String("fullscreen")));
         }
     }
-
-    kDebug(5010) << "########## KRDC ready:" << startupTimer.elapsed() << "ms ##########";
+    qCDebug(KRDC) << "########## KRDC ready:" << startupTimer.elapsed() << "ms ##########";
 
     return app.exec();
 }

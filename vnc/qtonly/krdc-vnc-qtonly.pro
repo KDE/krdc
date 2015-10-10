@@ -1,9 +1,11 @@
 TEMPLATE = app
-TARGET = 
+TARGET = krdc-vnc-qtonly
 DEPENDPATH += .
 INCLUDEPATH += .
 LIBS += -lvncclient -lgnutls
 DEFINES += QTONLY
 
-HEADERS += remoteview.h vncclientthread.h vncview.h
-SOURCES += main.cpp remoteview.cpp vncclientthread.cpp vncview.cpp
+QT += core gui widgets
+
+HEADERS += remoteview.h vncclientthread.h vncview.h logging.h
+SOURCES += main.cpp remoteview.cpp vncclientthread.cpp vncview.cpp logging.cpp

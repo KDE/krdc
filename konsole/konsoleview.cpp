@@ -24,6 +24,7 @@
 #include "konsoleview.h"
 
 #include <KParts/Part>
+#include <KParts/ReadOnlyPart>
 #include <KPluginFactory>
 #include <KPluginLoader>
 #include <KService>
@@ -34,7 +35,7 @@
 #include <QScrollArea>
 #include <QVBoxLayout>
 
-KonsoleView::KonsoleView(QWidget *parent, const KUrl &url, KConfigGroup configGroup)
+KonsoleView::KonsoleView(QWidget *parent, const QUrl &url, KConfigGroup configGroup)
         : RemoteView(parent)
 {
     m_url = url;
@@ -49,7 +50,7 @@ KonsoleView::KonsoleView(QWidget *parent, const KUrl &url, KConfigGroup configGr
     setFixedSize(size);
     setFixedSize(size);
     emit framebufferSizeChanged(size.width(), size.height());
-    
+
     KPluginFactory* factory = 0;
     KService::Ptr service = KService::serviceByDesktopName("konsolepart");
     if (service) {
@@ -65,7 +66,7 @@ KonsoleView::KonsoleView(QWidget *parent, const KUrl &url, KConfigGroup configGr
         mainLayout->addWidget(m_terminalWidget);
         m_terminal = qobject_cast<TerminalInterface *>(part);
         m_terminal->showShellInDir(QDir::homePath());
-        m_terminal->sendInput("echo " + url.user() + '@' + url.host()/* + ':' + url.port()*/ + '\n');
+        m_terminal->sendInput("echo " + url.userName() + '@' + url.host()/* + ':' + url.port()*/ + '\n');
 //         m_terminal->sendInput("clear\n");
         m_terminalWidget->resize(size);
     }
@@ -125,4 +126,3 @@ void KonsoleView::switchFullscreen(bool on)
     Q_UNUSED(on);
 }
 
-#include "konsoleview.moc"

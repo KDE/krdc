@@ -25,15 +25,15 @@
 #ifndef REMOTEDESKTOPSMODEL_H
 #define REMOTEDESKTOPSMODEL_H
 
+#include "bookmarkmanager.h"
+
 #include <QAbstractTableModel>
-#include <KDateTime>
+#include <QDateTime>
 
 #ifdef BUILD_ZEROCONF
-#include <dnssd/servicebrowser.h>
+#include <DNSSD/RemoteService>
+#include <DNSSD/ServiceBrowser>
 #endif
-
-class KBookmarkGroup;
-class KBookmarkManager;
 
 struct RemoteDesktop {
 public:
@@ -41,8 +41,8 @@ public:
     Q_DECLARE_FLAGS(Sources, Source)
     QString title;
     QString url;
-    KDateTime lastConnected;
-    KDateTime created;
+    QDateTime lastConnected;
+    QDateTime created;
     int visits;
     RemoteDesktop::Source source;
     bool favorite;
@@ -61,7 +61,7 @@ class RemoteDesktopsModel : public QAbstractTableModel
     Q_OBJECT
 
 public:
-    explicit RemoteDesktopsModel(QObject *parent);
+    explicit RemoteDesktopsModel(QObject *parent, KBookmarkManager *manager);
     ~RemoteDesktopsModel();
 
     enum DisplayItems { Favorite, Title, LastConnected, VisitCount, Created, Source };
@@ -75,17 +75,17 @@ public:
 
 private:
     QList<RemoteDesktop> remoteDesktops;
-    QString getLastConnectedString(KDateTime lastConnected, bool fuzzy = false) const;
+    QString getLastConnectedString(QDateTime lastConnected, bool fuzzy = false) const;
     void removeAllItemsFromSources(RemoteDesktop::Sources sources);
     void buildModelFromBookmarkGroup(const KBookmarkGroup &group);
     KBookmarkManager *m_manager;
 
 #ifdef BUILD_ZEROCONF
-    DNSSD::ServiceBrowser *zeroconfBrowser;
+    KDNSSD::ServiceBrowser *zeroconfBrowser;
     QHash<QString, QString> m_protocols;
 #endif
 
-private slots:
+private Q_SLOTS:
     void bookmarksChanged();
 #ifdef BUILD_ZEROCONF
     void servicesChanged();

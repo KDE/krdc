@@ -6,8 +6,6 @@
 # Redistribution and use is allowed according to the terms of the BSD license.
 # For details see the accompanying COPYING-CMAKE-SCRIPTS file.
 
-INCLUDE(CheckPointerMember)
-
 IF (LIBVNCSERVER_INCLUDE_DIR AND LIBVNCSERVER_LIBRARIES)
     # Already in cache, be silent
     SET(LIBVNCSERVER_FIND_QUIETLY TRUE)
@@ -25,7 +23,17 @@ FIND_LIBRARY(LIBVNCCLIENT_LIBRARIES NAMES vncclient libvncclient)
 
 IF (LIBVNCSERVER_INCLUDE_DIR AND LIBVNCSERVER_LIBRARIES)
    SET(CMAKE_REQUIRED_INCLUDES "${LIBVNCSERVER_INCLUDE_DIR}" "${CMAKE_REQUIRED_INCLUDES}")
-   CHECK_POINTER_MEMBER(rfbClient* GotXCutText rfb/rfbclient.h LIBVNCSERVER_FOUND)
+   SET(_TEST_SOURCE_CODE "
+#include <rfb/rfbclient.h>
+
+int main()
+{
+    rfbClient* tmp;
+    tmp->GotXCutText;
+    return 0;
+}
+    ")
+    CHECK_CXX_SOURCE_COMPILES("${_TEST_SOURCE_CODE}" LIBVNCSERVER_FOUND)
 ENDIF (LIBVNCSERVER_INCLUDE_DIR AND LIBVNCSERVER_LIBRARIES)
 
 IF (LIBVNCSERVER_FOUND)

@@ -24,7 +24,7 @@
 #ifndef SYSTEMTRAYICON_H
 #define SYSTEMTRAYICON_H
 
-#include <kstatusnotifieritem.h>
+#include <KNotifications/KStatusNotifierItem>
 
 class MainWindow;
 
@@ -36,7 +36,7 @@ public:
     explicit SystemTrayIcon(MainWindow *parent);
     ~SystemTrayIcon();
 
-public slots:
+public Q_SLOTS:
     void checkActivatedWindow(bool active);
 
 private:

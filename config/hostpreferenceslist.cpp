@@ -23,13 +23,11 @@
 
 #include "hostpreferenceslist.h"
 #include "hostpreferences.h"
+#include "logging.h"
 
-#include <KDebug>
-#include <KIcon>
-#include <KLocale>
-#include <KMessageBox>
-#include <KPushButton>
-#include <KStandardDirs>
+#include <QIcon>
+#include <KI18n/KLocalizedString>
+#include <KWidgetsAddons/KMessageBox>
 
 #include <QFile>
 #include <QLayout>
@@ -44,16 +42,16 @@ HostPreferencesList::HostPreferencesList(QWidget *parent, MainWindow *mainWindow
     connect(hostList, SIGNAL(itemSelectionChanged()), SLOT(selectionChanged()));
     connect(hostList, SIGNAL(itemDoubleClicked(QListWidgetItem*)), SLOT(configureHost()));
 
-    configureButton = new KPushButton(this);
+    configureButton = new QPushButton(this);
     configureButton->setEnabled(false);
     configureButton->setText(i18n("Configure..."));
-    configureButton->setIcon(KIcon("configure"));
+    configureButton->setIcon(QIcon::fromTheme(QLatin1String("configure")));
     connect(configureButton, SIGNAL(clicked()), SLOT(configureHost()));
 
-    removeButton = new KPushButton(this);
+    removeButton = new QPushButton(this);
     removeButton->setEnabled(false);
     removeButton->setText(i18n("Remove"));
-    removeButton->setIcon(KIcon("list-remove"));
+    removeButton->setIcon(QIcon::fromTheme(QLatin1String("list-remove")));
     connect(removeButton, SIGNAL(clicked()), SLOT(removeHost()));
 
     QVBoxLayout *buttonLayout = new QVBoxLayout;
@@ -77,8 +75,8 @@ HostPreferencesList::~HostPreferencesList()
 void HostPreferencesList::readConfig()
 {
     QStringList urls = m_hostPrefsConfig.groupList();
-    
-    for (int i = 0; i < urls.size(); ++i) 
+
+    for (int i = 0; i < urls.size(); ++i)
         hostList->addItem(new QListWidgetItem(urls.at(i)));
 }
 
@@ -92,20 +90,21 @@ void HostPreferencesList::configureHost()
     QList<QListWidgetItem *> selectedItems = hostList->selectedItems();
 
     foreach(QListWidgetItem *selectedItem, selectedItems) {
-        const QString url = selectedItem->text();
+        const QString urlString = selectedItem->text();
+        const QUrl url = QUrl(urlString);
 
-        kDebug(5010) << "Configure host: " << url;
+        qCDebug(KRDC) << "Configure host: " << urlString;
 
         HostPreferences* prefs = 0;
-        
+
         const QList<RemoteViewFactory *> remoteViewFactories(m_mainWindow->remoteViewFactoriesList());
         foreach(RemoteViewFactory *factory, remoteViewFactories) {
             if (factory->supportsUrl(url)) {
-                prefs = factory->createHostPreferences(m_hostPrefsConfig.group(url), this);
+                prefs = factory->createHostPreferences(m_hostPrefsConfig.group(urlString), this);
                 if (prefs) {
-                    kDebug(5010) << "Found plugin to handle url (" + url + "): " + prefs->metaObject()->className();
+                    qCDebug(KRDC) << "Found plugin to handle url (" << urlString << "): " << prefs->metaObject()->className();
                 } else {
-                    kDebug(5010) << "Found plugin to handle url (" + url + "), but plugin does not provide preferences";
+                    qCDebug(KRDC) << "Found plugin to handle url (" << urlString << "), but plugin does not provide preferences";
                 }
             }
         }
@@ -126,7 +125,7 @@ void HostPreferencesList::removeHost()
     const QList<QListWidgetItem *> selectedItems = hostList->selectedItems();
 
     foreach(QListWidgetItem *selectedItem, selectedItems) {
-        kDebug(5010) << "Remove host: " <<  selectedItem->text();
+        qCDebug(KRDC) << "Remove host: " <<  selectedItem->text();
 
         m_hostPrefsConfig.deleteGroup(selectedItem->text());
         delete(selectedItem);
@@ -144,4 +143,3 @@ void HostPreferencesList::selectionChanged()
     removeButton->setEnabled(enabled);
 }
 
-#include "hostpreferenceslist.moc"

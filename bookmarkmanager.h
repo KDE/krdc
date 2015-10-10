@@ -27,9 +27,10 @@
 #include "core/remoteview.h"
 
 #include <KBookmarkManager>
+#include <KXmlGui/KActionCollection>
+#include <KBookmarks/KBookmarkMenu>
 
-class KActionCollection;
-class KBookmarkMenu;
+#include <QMenu>
 
 class MainWindow;
 
@@ -38,17 +39,17 @@ class BookmarkManager : public QObject, public KBookmarkOwner
     Q_OBJECT
 
 public:
-    BookmarkManager(KActionCollection *collection, KMenu *menu, MainWindow *parent);
+    BookmarkManager(KActionCollection *collection, QMenu *menu, MainWindow *parent);
     ~BookmarkManager();
 
-    virtual QString currentUrl() const;
-    virtual QString currentTitle() const;
+    virtual QUrl currentUrl() const Q_DECL_OVERRIDE;
+    virtual QString currentTitle() const Q_DECL_OVERRIDE;
     virtual bool addBookmarkEntry() const;
     virtual bool editBookmarkEntry() const;
-    virtual bool supportsTabs() const;
-    virtual QList<QPair<QString, QString> > currentBookmarkList() const;
+    virtual bool supportsTabs() const Q_DECL_OVERRIDE;
+    virtual QList<KBookmarkOwner::FutureBookmark> currentBookmarkList() const Q_DECL_OVERRIDE;
     void addHistoryBookmark(RemoteView *view);
-    void addManualBookmark(const QString &url, const QString &text);
+    void addManualBookmark(const QUrl &url, const QString &text);
     KBookmarkManager* getManager();
     // removes all bookmarks with url, possibly ignore the history folder and update it's title there if it's set
     static void removeByUrl(KBookmarkManager *manager, const QString &url, bool ignoreHistory = false, const QString updateTitle = QString());
@@ -56,16 +57,16 @@ public:
     // returns a QStringList for all bookmarks that point to this url using KBookmark::address()
     static const QStringList findBookmarkAddresses(const KBookmarkGroup &group, const QString &url);
 
-signals:
-    void openUrl(const KUrl &url);
+Q_SIGNALS:
+    void openUrl(const QUrl &url);
 
-private slots:
+private Q_SLOTS:
     void openBookmark(const KBookmark &bm, Qt::MouseButtons, Qt::KeyboardModifiers);
     void openFolderinTabs(const KBookmarkGroup &bookmarkGroup);
 
 private:
     QString urlForView(RemoteView *view) const;
-    QString titleForUrl(const QString &url) const;
+    QString titleForUrl(const QUrl &url) const;
 
     KBookmarkMenu *m_bookmarkMenu;
     KBookmarkManager *m_manager;

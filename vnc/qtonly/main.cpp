@@ -24,12 +24,13 @@
 #include <QApplication>
 
 #include "vncview.h"
+#include "logging.h"
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
     if (QCoreApplication::arguments().count() < 2) {
-        qFatal("Please define an URL as argument. Example: vnc://:password@server:1\n"
+        qCritical(KRDC) << ("Please define an URL as argument. Example: vnc://:password@server:1\n"
                "Optionally, you can define the quality as second argument (1-3, where 1 is the best). Default is 2.");
         return 1;
     }

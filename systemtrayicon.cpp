@@ -22,26 +22,26 @@
 ****************************************************************************/
 
 #include "systemtrayicon.h"
-
 #include "mainwindow.h"
 
-#include <KActionCollection>
-#include <KLocale>
-#include <KMenu>
+#include <KXmlGui/KActionCollection>
+#include <KI18n/KLocalizedString>
+
+#include <QMenu>
 
 SystemTrayIcon::SystemTrayIcon(MainWindow *parent)
         : KStatusNotifierItem(parent),
         m_mainWindow(parent)
 {
-    setIconByName("krdc");
+    setIconByName(QLatin1String("krdc"));
     setStatus(KStatusNotifierItem::Active);
     setCategory(KStatusNotifierItem::ApplicationStatus);
 
-    setToolTipIconByName("krdc");
+    setToolTipIconByName(QLatin1String("krdc"));
     setToolTipTitle(i18n("KDE Remote Desktop Client"));
 
     contextMenu()->addSeparator();
-    contextMenu()->addAction(parent->actionCollection()->action("bookmark"));
+    contextMenu()->addAction(parent->actionCollection()->action(QLatin1String("bookmark")));
     contextMenu()->addSeparator();
 
     connect(this, SIGNAL(activateRequested(bool,QPoint)), this, SLOT(checkActivatedWindow(bool)));
@@ -59,4 +59,3 @@ SystemTrayIcon::~SystemTrayIcon()
 {
 }
 
-#include "systemtrayicon.moc"

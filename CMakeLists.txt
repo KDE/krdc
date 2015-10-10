@@ -1,53 +1,95 @@
-cmake_minimum_required(VERSION 2.8.9)
+cmake_minimum_required(VERSION 2.8.12)
 project(krdc)
 
-if(NOT INSIDE_KDENETWORK)
-    message("Not building inside KDENetwork, loading KDE CMake Macros.")
+set (KDE_APPLICATIONS_VERSION_MAJOR "15")
+set (KDE_APPLICATIONS_VERSION_MINOR "12")
+set (KDE_APPLICATIONS_VERSION_MICRO "0")
 
-    find_package(KDE4 REQUIRED)
+set (KDE_APPLICATIONS_VERSION "${KDE_APPLICATIONS_VERSION_MAJOR}.${KDE_APPLICATIONS_VERSION_MINOR}.${KDE_APPLICATIONS_VERSION_MICRO}")
 
-    include(KDE4Defaults)
-    include(MacroLibrary)
+find_package(ECM REQUIRED NO_MODULE)
+set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 
-    include(CheckIncludeFile)
-    include(CheckIncludeFiles)
-    include(CheckSymbolExists)
-    include(CheckFunctionExists)
-    include(CheckLibraryExists)
-    include(CheckPrototypeExists)
-    include(CheckTypeSize)
+find_package(KF5 REQUIRED COMPONENTS
+    Config
+    KCMUtils
+    DNSSD
+    NotifyConfig
+    Notifications
+    Bookmarks
+    IconThemes
+    XmlGui
+    Completion
+    Wallet
+    WidgetsAddons
+    NotifyConfig
+    I18n
+)
 
-    set(CMAKE_REQUIRED_DEFINITIONS ${_KDE4_PLATFORM_DEFINITIONS})
-    if(WIN32)
-       set(CMAKE_REQUIRED_LIBRARIES ${KDEWIN32_LIBRARIES})
-       set(CMAKE_REQUIRED_INCLUDES  ${KDEWIN32_INCLUDES})
-    endif(WIN32)
-    add_definitions(${QT_DEFINITIONS} ${QT_QTDBUS_DEFINITIONS} ${KDE4_DEFINITIONS})
-    add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
-    include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES})
-endif(NOT INSIDE_KDENETWORK)
+find_package(KF5 COMPONENTS  DocTools)
+
+include(ECMSetupVersion)
+include(KDEInstallDirs)
+include(KDECompilerSettings)
+include(KDECMakeSettings)
+include(FeatureSummary)
+
+# use sane compile flags
+add_definitions(
+  -DQT_USE_QSTRINGBUILDER
+  -DQT_NO_CAST_TO_ASCII
+  -DQT_NO_CAST_FROM_ASCII
+  -DQT_STRICT_ITERATORS
+  -DQT_NO_URL_CAST_FROM_STRING
+  -DQT_NO_CAST_FROM_BYTEARRAY
+  -DQT_NO_SIGNALS_SLOTS_KEYWORDS
+  -DQT_USE_FAST_OPERATOR_PLUS
+)
+ecm_setup_version(${KDE_APPLICATIONS_VERSION}
+    VARIABLE_PREFIX KRDC
+    SOVERSION 5
+    VERSION_HEADER krdc_version.h
+)
+
+if(WIN32)
+    set(CMAKE_REQUIRED_LIBRARIES ${KDEWIN32_LIBRARIES})
+    set(CMAKE_REQUIRED_INCLUDES  ${KDEWIN32_INCLUDES})
+endif(WIN32)
+add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
+include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR})
 
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules ${CMAKE_MODULE_PATH})
 
-macro_optional_find_package(LibVNCServer)
-macro_log_feature(LIBVNCSERVER_FOUND "libvncserver" "VNC server / client library" "http://libvncserver.sourceforge.net/" FALSE "0.9.8" "Needed to build VNC client support in KRDC")
+find_package(LibVNCServer)
+set_package_properties("libvncserver" PROPERTIES
+    DESCRIPTION "VNC server / client library"
+    URL "http://libvncserver.sourceforge.net/"
+    PURPOSE "Needed to build VNC client support in KRDC"
+)
 
-FIND_PROGRAM(FREERDP_EXECUTABLE xfreerdp)
-if(FREERDP_EXECUTABLE)
-    set(FREERDP_EXECUTABLE_FOUND true)
-endif(FREERDP_EXECUTABLE)
-macro_log_feature(FREERDP_EXECUTABLE_FOUND "freerdp" "A free Remote Desktop Protocol (RDP) Implementation" "http://www.freerdp.com" FALSE "1.0.2" "Needed for RDP support in KRDC (at runtime)")
-
+# Needs porting
+# FIND_PROGRAM(FREERDP_EXECUTABLE xfreerdp)
+# if(FREERDP_EXECUTABLE)
+#     set(FREERDP_EXECUTABLE_FOUND true)
+# endif(FREERDP_EXECUTABLE)
+#
+# set_package_properties("freerdp" PROPERTIES
+#         DESCRIPTION "A free Remote Desktop Protocol (RDP) Implementation"
+#         URL "http://www.freerdp.com"
+#         PURPOSE "Needed for RDP support in KRDC (at runtime)"
+#                                      )
 # NX support is not ready for KDE 4.2; disabled (uwolfer)
 # macro_optional_find_package(LibNXCL)
 # macro_log_feature(LIBNXCL_FOUND "libnxcl" "NX X compression client library" "http://svn.berlios.de/svnroot/repos/freenx/trunk/freenx-client/nxcl/" FALSE "1.0" "Needed to build Krdc with NX support")
 
-macro_optional_find_package(TelepathyQt4)
-macro_log_feature(TelepathyQt4_FOUND "telepathy-qt" "Telepathy Qt Bindings" "http://telepathy.freedesktop.org" FALSE "0.9" "Needed to build Telepathy Tubes support.")
+find_package(TelepathyQt5)
+set_package_properties("telepathy-qt" PROPERTIES
+        DESCRIPTION "Telepathy Qt Bindings"
+        URL "http://telepathy.freedesktop.org"
+        PURPOSE "Needed to build Telepathy Tubes support.")
 
-if(TelepathyQt4_FOUND)
+if(TelepathyQt5_FOUND)
     add_definitions(-DTELEPATHY_SUPPORT)
-    include_directories(${TELEPATHY_QT4_INCLUDE_DIR})
 endif()
 
 include_directories(
@@ -62,18 +104,19 @@ add_subdirectory(vnc)
 add_subdirectory(nx)
 add_subdirectory(rdp)
 add_subdirectory(test)
-add_subdirectory(doc)
 
-if(TelepathyQt4_FOUND)
-    add_subdirectory(krdc_approver)
+if(KF5DocTools_FOUND)
+    add_subdirectory(doc)
+else()
+    message("KF5DocTools not found. Not building documentation.")
 endif()
 
-add_definitions(-DKDE_DEFAULT_DEBUG_AREA=5010)
 add_definitions(-DBUILD_ZEROCONF)
 
 set(krdc_SRCS
     config/hostpreferenceslist.cpp
     config/preferencesdialog.cpp
+    core/logging.cpp
     floatingtoolbar.cpp
     bookmarkmanager.cpp
     connectiondelegate.cpp
@@ -84,42 +127,46 @@ set(krdc_SRCS
     main.cpp
 )
 
-if(TelepathyQt4_FOUND)
+if(TelepathyQt5_FOUND)
+    add_subdirectory(krdc_approver)
     set(krdc_SRCS ${krdc_SRCS}
         tubesmanager.cpp
     )
 endif()
 
-kde4_add_ui_files(krdc_SRCS
+ki18n_wrap_ui(krdc_SRCS
     config/general.ui
 )
 
-kde4_add_app_icon(krdc_SRCS "${KDE4_INSTALL_DIR}/share/icons/oxygen/*/apps/krdc.png")
-
-kde4_add_executable(krdc ${krdc_SRCS})
+add_executable(krdc ${krdc_SRCS})
 
 target_link_libraries(krdc
-    ${KDE4_KFILE_LIBS}
-    ${KDE4_KIO_LIBS}
-    ${KDE4_KNOTIFYCONFIG_LIBS}
-    ${KDE4_KCMUTILS_LIBS}
+    KF5::ConfigCore
+    KF5::KCMUtils
+    KF5::DNSSD
+    KF5::NotifyConfig
+    KF5::Bookmarks
+    KF5::IconThemes
+    KF5::XmlGui
+    KF5::Completion
+    KF5::WidgetsAddons
+    KF5::NotifyConfig
+    KF5::Notifications
     krdccore
 )
 
-if(TelepathyQt4_FOUND)
+if(TelepathyQt5_FOUND)
     target_link_libraries(krdc
-        ${TELEPATHY_QT4_LIBRARIES}
+        ${TELEPATHY_QT5_LIBRARIES}
     )
 endif()
 
-target_link_libraries(krdc ${KDE4_KDNSSD_LIBS})
-
 install(TARGETS krdc ${INSTALL_TARGETS_DEFAULT_ARGS})
-install(FILES krdcui.rc DESTINATION ${DATA_INSTALL_DIR}/krdc)
-install(PROGRAMS krdc.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
+install(FILES krdcui.rc DESTINATION ${KXMLGUI_INSTALL_DIR}/krdc)
+install(PROGRAMS org.kde.krdc.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
 install(FILES pointcursor.png pointcursormask.png DESTINATION ${DATA_INSTALL_DIR}/krdc/pics)
 
-if(TelepathyQt4_FOUND)
+if(TelepathyQt5_FOUND)
     configure_file(org.freedesktop.Telepathy.Client.krdc_rfb_handler.service.in
                     ${CMAKE_CURRENT_BINARY_DIR}/org.freedesktop.Telepathy.Client.krdc_rfb_handler.service)
     install(FILES ${CMAKE_CURRENT_BINARY_DIR}/org.freedesktop.Telepathy.Client.krdc_rfb_handler.service
@@ -128,6 +175,4 @@ if(TelepathyQt4_FOUND)
     install(FILES krdc_rfb_handler.client DESTINATION ${SHARE_INSTALL_PREFIX}/telepathy/clients/)
 endif()
 
-if(NOT INSIDE_KDENETWORK)
-    macro_display_feature_log()
-endif(NOT INSIDE_KDENETWORK)
+feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)

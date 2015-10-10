@@ -23,17 +23,16 @@
 ****************************************************************************/
 
 #include "tubesmanager.h"
+#include "logging.h"
 
 #include <TelepathyQt/IncomingStreamTubeChannel>
 #include <TelepathyQt/Debug>
-
-#include <KDebug>
-
+#include <TelepathyQt/Types>
 
 TubesManager::TubesManager(QObject *parent)
     : QObject(parent)
 {
-    kDebug() << "Initializing tubes manager";
+    qCDebug(KRDC) << "Initializing tubes manager";
 
     Tp::enableDebug(true);
     Tp::enableWarnings(true);
@@ -57,10 +56,10 @@ TubesManager::TubesManager(QObject *parent)
 
 TubesManager::~TubesManager()
 {
-    kDebug() << "Destroying tubes manager";
+    qCDebug(KRDC) << "Destroying tubes manager";
 }
 
-void TubesManager::closeTube(const KUrl& url)
+void TubesManager::closeTube(const QUrl& url)
 {
     if (m_tubes.contains(url)) {
         m_tubes.take(url)->requestClose();
@@ -77,12 +76,12 @@ void TubesManager::onTubeAccepted(
     Q_UNUSED(sourcePort);
     Q_UNUSED(account);
 
-    KUrl url;
-    url.setScheme("vnc");
+    QUrl url;
+    url.setScheme(QLatin1String("vnc"));
     url.setHost(listenAddress.toString());
     url.setPort(listenPort);
 
-    kDebug() << "newConnection:" << url;
+    qCDebug(KRDC) << "newConnection:" << url;
     m_tubes.insert(url, tube);
     emit newConnection(url);
 }

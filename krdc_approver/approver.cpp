@@ -22,8 +22,8 @@
 ****************************************************************************/
 
 #include "approver.h"
+#include "logging.h"
 
-#include <KDebug>
 #include <KNotification>
 #include <KLocalizedString>
 
@@ -43,7 +43,7 @@ Approver::Approver(const Tp::MethodInvocationContextPtr<> &context,
       m_dispatchOp(dispatchOperation),
       m_notification(0)
 {
-    kDebug() << "Initializing approver";
+    qCDebug(KRDC) << "Initializing approver";
 
     connect(m_dispatchOp->becomeReady(),
             SIGNAL(finished(Tp::PendingOperation*)),
@@ -53,14 +53,14 @@ Approver::Approver(const Tp::MethodInvocationContextPtr<> &context,
 void Approver::onDispatchOperationReady(Tp::PendingOperation *op)
 {
     if (op->isError()) {
-        kError() << "Dispatch operation failed to become ready"
+        qCritical(KRDC) << "Dispatch operation failed to become ready"
                 << op->errorName() << op->errorMessage();
         m_context->setFinishedWithError(op->errorName(), op->errorMessage());
         emit finished();
         return;
     }
 
-    kDebug() << "DispatchOp ready!";
+    qCDebug(KRDC) << "DispatchOp ready!";
 
     Tp::ChannelPtr channel = m_dispatchOp->channels()[0];
     connect(channel->becomeReady(),
@@ -71,18 +71,18 @@ void Approver::onDispatchOperationReady(Tp::PendingOperation *op)
 void Approver::onChannelReady(Tp::PendingOperation *op)
 {
     if (op->isError()) {
-        kError() << "Channel failed to become ready"
+        qCritical(KRDC) << "Channel failed to become ready"
                 << op->errorName() << op->errorMessage();
         m_context->setFinishedWithError(op->errorName(), op->errorMessage());
         emit finished();
         return;
     }
 
-    kDebug() << "Channel ready!";
+    qCDebug(KRDC) << "Channel ready!";
 
     Tp::ContactPtr contact = m_dispatchOp->channels()[0]->initiatorContact();
 
-    KNotification *notification = new KNotification("newrfb", NULL, KNotification::Persistent);
+    KNotification *notification = new KNotification(QLatin1String("newrfb"), NULL, KNotification::Persistent);
     notification->setTitle(i18n("Invitation to view remote desktop"));
     notification->setText(i18n("%1 wants to share his/her desktop with you", contact->alias()));
     notification->setActions(QStringList() << i18n("Accept") << i18n("Reject"));
@@ -116,20 +116,20 @@ void Approver::onChannelReady(Tp::PendingOperation *op)
 
 Approver::~Approver()
 {
-    kDebug() << "Destroying approver";
+    qCDebug(KRDC) << "Destroying approver";
 }
 
 void Approver::onAccepted()
 {
-    kDebug() << "Channel approved";
-    m_dispatchOp->handleWith(TP_QT_IFACE_CLIENT + ".krdc_rfb_handler");
+    qCDebug(KRDC) << "Channel approved";
+    m_dispatchOp->handleWith(TP_QT_IFACE_CLIENT + QLatin1String(".krdc_rfb_handler"));
 
     emit finished();
 }
 
 void Approver::onRejected()
 {
-    kDebug() << "Channel rejected";
+    qCDebug(KRDC) << "Channel rejected";
     connect(m_dispatchOp->claim(), SIGNAL(finished(Tp::PendingOperation*)),
             SLOT(onClaimFinished(Tp::PendingOperation*)));
 }
@@ -137,11 +137,10 @@ void Approver::onRejected()
 void Approver::onClaimFinished(Tp::PendingOperation *op)
 {
     if (op->isError()) {
-        kError() << "Claim operation failed"
+        qCritical(KRDC) << "Claim operation failed"
                 << op->errorName() << op->errorMessage();
         m_context->setFinishedWithError(op->errorName(), op->errorMessage());
-    }
-    else {
+    } else {
         foreach(const Tp::ChannelPtr &channel, m_channels)
             channel->requestClose();
     }

@@ -28,8 +28,8 @@
 #include "remoteview.h"
 #include "remoteviewfactory.h"
 
-#include <KService>
-#include <KXmlGuiWindow>
+#include <KXmlGui/KXmlGuiWindow>
+#include <KService/KPluginInfo>
 
 class KComboBox;
 class KLineEdit;
@@ -63,8 +63,8 @@ public:
     QList<RemoteViewFactory *> remoteViewFactoriesList() const;
     RemoteView* currentRemoteView() const;
 
-public slots:
-    void newConnection(const KUrl &newUrl = KUrl(), bool switchFullscreenWhenConnected = false, const QString &tabName = QString());
+public Q_SLOTS:
+    void newConnection(const QUrl &newUrl = QUrl(), bool switchFullscreenWhenConnected = false, const QString &tabName = QString());
 
 protected:
     virtual void closeEvent(QCloseEvent *event);
@@ -73,7 +73,7 @@ protected:
     void saveHostPrefs();
     void saveHostPrefs(RemoteView *view);
 
-private slots:
+private Q_SLOTS:
     void restoreOpenSessions();
     void quit(bool systemEvent = false);
     void preferences();
@@ -85,9 +85,9 @@ private slots:
     void takeScreenshot();
     void switchFullscreen();
     void disconnectHost();
-    void closeTab(QWidget *widget);
-    void openTabSettings(QWidget *widget);
-    void tabContextMenu(QWidget *widget, const QPoint &point);
+    void closeTab(int index);
+    void openTabSettings(int index);
+    void tabContextMenu(const QPoint &point);
     void viewOnly(bool viewOnly);
     void showLocalCursor(bool showLocalCursor);
     void grabAllKeys(bool grabAllKeys);
@@ -105,10 +105,10 @@ private slots:
 private:
     void setupActions();
     void loadAllPlugins();
-    RemoteViewFactory *createPluginFromService(const KService::Ptr &service);
+    RemoteViewFactory *createPluginFromInfo(const KPluginInfo &info);
     void showSettingsDialog(const QString &url);
     QScrollArea *createScrollArea(QWidget *parent, RemoteView *remoteView);
-    KUrl getInputUrl();
+    QUrl getInputUrl();
 
     QWidget *m_fullscreenWindow;
     QByteArray m_mainWindowGeometry;
@@ -152,7 +152,7 @@ public:
         move(QApplication::desktop()->screenGeometry().width() - 1, 0);
     }
 
-signals:
+Q_SIGNALS:
     void rightClicked();
 
 protected:
@@ -172,7 +172,7 @@ public:
             : QScrollArea(parent) {
     }
 
-signals:
+Q_SIGNALS:
     void resized(int w, int h);
 
 protected:

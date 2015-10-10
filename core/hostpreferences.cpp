@@ -22,16 +22,17 @@
 ****************************************************************************/
 
 #include "hostpreferences.h"
-
+#include "logging.h"
 #include "settings.h"
 
-#include <KDebug>
-#include <KLocale>
-#include <KStandardDirs>
-#include <KTitleWidget>
+#include <KI18n/KLocalizedString>
+#include <KWidgetsAddons/KPageDialog>
 
 #include <QCheckBox>
+#include <QDialog>
 #include <QFile>
+#include <QIcon>
+#include <QLabel>
 #include <QVBoxLayout>
 
 HostPreferences::HostPreferences(KConfigGroup configGroup, QObject *parent)
@@ -113,7 +114,7 @@ bool HostPreferences::fullscreenScale()
 
 void HostPreferences::setFullscreenScale(bool scale)
 {
-    m_configGroup.writeEntry("fullscreenScale", scale); 
+    m_configGroup.writeEntry("fullscreenScale", scale);
 }
 
 bool HostPreferences::windowedScale()
@@ -123,7 +124,7 @@ bool HostPreferences::windowedScale()
 
 void HostPreferences::setWindowedScale(bool scale)
 {
-    m_configGroup.writeEntry("windowedScale", scale); 
+    m_configGroup.writeEntry("windowedScale", scale);
 }
 
 bool HostPreferences::grabAllKeys()
@@ -133,7 +134,7 @@ bool HostPreferences::grabAllKeys()
 
 void HostPreferences::setGrabAllKeys(bool grab)
 {
-    m_configGroup.writeEntry("grabAllKeys", grab); 
+    m_configGroup.writeEntry("grabAllKeys", grab);
 }
 
 bool HostPreferences::showLocalCursor()
@@ -160,12 +161,12 @@ bool HostPreferences::showDialogIfNeeded(QWidget *parent)
 {
     if (hostConfigured()) {
         if (showConfigAgain()) {
-            kDebug(5010) << "Show config dialog again";
+            qCDebug(KRDC) << "Show config dialog again";
             return showDialog(parent);
         } else
             return true; // no changes, no need to save
     } else {
-        kDebug(5010) << "No config found, create new";
+        qCDebug(KRDC) << "No config found, create new";
         if (Settings::showPreferencesForNewConnections())
             return showDialog(parent);
         else
@@ -177,20 +178,19 @@ bool HostPreferences::showDialogIfNeeded(QWidget *parent)
 bool HostPreferences::showDialog(QWidget *parent)
 {
     // Prepare dialog
-    KDialog *dialog = new KDialog(parent);
-    dialog->setCaption(i18n("Host Configuration"));
+    KPageDialog *dialog = new KPageDialog(parent);
+    dialog->setWindowTitle(i18n("Host Configuration"));
 
-    QWidget *mainWidget = dialog->mainWidget();
+    QWidget *mainWidget = new QWidget(parent);
     QVBoxLayout *layout = new QVBoxLayout(mainWidget);
+    dialog->addPage(mainWidget, i18n("Host Configuration"));
 
-    KTitleWidget *titleWidget = new KTitleWidget(dialog);
-    titleWidget->setText(i18n("Host Configuration"));
     if (m_connected) {
-        titleWidget->setComment(QString("<i>%1</i>").arg(
-            i18n("Note that settings might only apply when you connect next time to this host.")));
+        const QString noteText  = i18n("Note that settings might only apply when you connect next time to this host.");
+        const QString format = QLatin1String("<i>%1</i>");
+        QLabel *commentLabel = new QLabel(format.arg(noteText), mainWidget);
+        layout->addWidget(commentLabel);
     }
-    titleWidget->setPixmap(KIcon("krdc"));
-    layout->addWidget(titleWidget);
 
     QWidget* widget = createProtocolSpecificConfigPage();
 
@@ -213,17 +213,9 @@ bool HostPreferences::showDialog(QWidget *parent)
     layout->addWidget(walletSupportCheckBox);
     layout->addStretch(1);
 
-    // WORKAROUND: it seems that KDialog does not set the minimum size properly in some cases.
-    // see for example issue #244539. also it looks like KTitleWidget returns a too small size hint when a comment is shown.
-    QSize minimumSize = dialog->sizeHint();
-    if (m_connected) {
-        minimumSize += QSize(0, 50);
-    }
-    dialog->setMinimumSize(minimumSize);
-
     // Show dialog
-    if (dialog->exec() == KDialog::Accepted) {
-        kDebug(5010) << "HostPreferences config dialog accepted";
+    if (dialog->exec() == QDialog::Accepted) {
+        qCDebug(KRDC) << "HostPreferences config dialog accepted";
         acceptConfig();
         return true;
     } else {
@@ -236,4 +228,3 @@ void HostPreferences::setShownWhileConnected(bool connected)
     m_connected = connected;
 }
 
-#include "hostpreferences.moc"

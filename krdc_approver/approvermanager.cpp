@@ -24,12 +24,12 @@
 
 #include "approvermanager.h"
 #include "approver.h"
+#include "logging.h"
 
 #include <QDBusObjectPath>
 #include <QDBusConnection>
-
-#include <KApplication>
-#include <KDebug>
+#include <QApplication>
+#include <QUrl>
 
 #include <TelepathyQt/Account>
 #include <TelepathyQt/ChannelClassSpecList>
@@ -45,8 +45,8 @@ static inline Tp::ChannelClassSpecList channelClassSpecList()
     spec.setChannelType(TP_QT_IFACE_CHANNEL_TYPE_STREAM_TUBE);
     spec.setTargetHandleType(Tp::HandleTypeContact);
     spec.setRequested(false);
-    spec.setProperty(TP_QT_IFACE_CHANNEL_TYPE_STREAM_TUBE + ".Service",
-                     QVariant("rfb"));
+    spec.setProperty(TP_QT_IFACE_CHANNEL_TYPE_STREAM_TUBE + QLatin1String(".Service"),
+                     QVariant(QLatin1String("rfb")));
     return Tp::ChannelClassSpecList() << spec;
 }
 
@@ -54,18 +54,18 @@ ApproverManager::ApproverManager(QObject *parent)
     : QObject(parent),
       AbstractClientApprover(channelClassSpecList())
 {
-    kDebug() << "Initializing approver manager";
+    qCDebug(KRDC) << "Initializing approver manager";
 }
 
 ApproverManager::~ApproverManager()
 {
-    kDebug() << "Destroying approver manager";
+    qCDebug(KRDC) << "Destroying approver manager";
 }
 
 void ApproverManager::addDispatchOperation(const Tp::MethodInvocationContextPtr<> &context,
         const Tp::ChannelDispatchOperationPtr &dispatchOperation)
 {
-    kDebug() << "New channel for approving arrived";
+    qCDebug(KRDC) << "New channel for approving arrived";
 
     Approver *approver = new Approver(context, dispatchOperation->channels(), dispatchOperation, this);
     connect(approver, SIGNAL(finished()), SLOT(onFinished()));
@@ -75,14 +75,14 @@ void ApproverManager::addDispatchOperation(const Tp::MethodInvocationContextPtr<
 
 void ApproverManager::onFinished()
 {
-    kDebug() << "Approver finished";
+    qCDebug(KRDC) << "Approver finished";
 
     Approver *approver = qobject_cast<Approver*>(sender());
     m_approvers.removeOne(approver);
     approver->deleteLater();
 
     if (m_approvers.empty()) {
-        kDebug() << "Quitting approver manager";
-        KApplication::kApplication()->quit();
+        qCDebug(KRDC) << "Quitting approver manager";
+        QApplication::quit();
     }
 }

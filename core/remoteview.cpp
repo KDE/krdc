@@ -23,13 +23,11 @@
 ****************************************************************************/
 
 #include "remoteview.h"
+#include "logging.h"
 
-#ifndef QTONLY
-    #include <KDebug>
-    #include <KStandardDirs>
-#endif
-
+#include <QUrl>
 #include <QBitmap>
+#include <QStandardPaths>
 
 RemoteView::RemoteView(QWidget *parent)
         : QWidget(parent),
@@ -157,7 +155,7 @@ void RemoteView::setGrabAllKeys(bool grabAllKeys)
     }
 }
 
-QPixmap RemoteView::takeScreenshot() 
+QPixmap RemoteView::takeScreenshot()
 {
     return QPixmap::grabWidget(this);
 }
@@ -190,7 +188,7 @@ void RemoteView::scaleResize(int, int)
 {
 }
 
-KUrl RemoteView::url()
+QUrl RemoteView::url()
 {
     return m_url;
 }
@@ -198,32 +196,32 @@ KUrl RemoteView::url()
 #ifndef QTONLY
 QString RemoteView::readWalletPassword(bool fromUserNameOnly)
 {
-    const QString KRDCFOLDER = "KRDC";
+    const QString KRDCFOLDER = QLatin1String("KRDC");
 
     window()->setDisabled(true); // WORKAROUND: disable inputs so users cannot close the current tab (see #181230)
-    m_wallet = KWallet::Wallet::openWallet(KWallet::Wallet::NetworkWallet(), window()->winId());
+    m_wallet = KWallet::Wallet::openWallet(KWallet::Wallet::NetworkWallet(), window()->winId(), KWallet::Wallet::OpenType::Synchronous);
     window()->setDisabled(false);
 
     if (m_wallet) {
         bool walletOK = m_wallet->hasFolder(KRDCFOLDER);
         if (!walletOK) {
             walletOK = m_wallet->createFolder(KRDCFOLDER);
-            kDebug(5010) << "Wallet folder created";
+            qCDebug(KRDC) << "Wallet folder created";
         }
         if (walletOK) {
-            kDebug(5010) << "Wallet OK";
+            qCDebug(KRDC) << "Wallet OK";
             m_wallet->setFolder(KRDCFOLDER);
             QString password;
-            
+
             QString key;
             if (fromUserNameOnly)
                 key = m_url.userName();
             else
-                key = m_url.prettyUrl(KUrl::RemoveTrailingSlash);
+                key = m_url.toDisplayString(QUrl::StripTrailingSlash);
 
             if (m_wallet->hasEntry(key) &&
                     !m_wallet->readPassword(key, password)) {
-                kDebug(5010) << "Password read OK";
+                qCDebug(KRDC) << "Password read OK";
 
                 return password;
             }
@@ -238,10 +236,10 @@ void RemoteView::saveWalletPassword(const QString &password, bool fromUserNameOn
     if (fromUserNameOnly)
         key = m_url.userName();
     else
-        key = m_url.prettyUrl(KUrl::RemoveTrailingSlash);
+        key = m_url.toDisplayString(QUrl::StripTrailingSlash);
 
     if (m_wallet && m_wallet->isOpen()) {
-        kDebug(5010) << "Write wallet password";
+        qCDebug(KRDC) << "Write wallet password";
         m_wallet->writePassword(key, password);
     }
 }
@@ -249,15 +247,13 @@ void RemoteView::saveWalletPassword(const QString &password, bool fromUserNameOn
 
 QCursor RemoteView::localDotCursor() const
 {
-#ifdef QTONLY
-    return QCursor(); //TODO
-#else
-    QBitmap cursorBitmap(KGlobal::dirs()->findResource("appdata",
-                                                       "pics/pointcursor.png"));
-    QBitmap cursorMask(KGlobal::dirs()->findResource("appdata",
-                                                     "pics/pointcursormask.png"));
+    QString cursorBitmapPath = QStandardPaths::locate(QStandardPaths::DataLocation, QLatin1String("pics/pointcursor.png"));
+    QBitmap cursorBitmap = QBitmap();
+    cursorBitmap.load(cursorBitmapPath);
+    QString cursorMaskPath = QStandardPaths::locate(QStandardPaths::DataLocation, QLatin1String("pics/pointcursormask.png"));
+    QBitmap cursorMask = QBitmap();
+    cursorMask.load(cursorMaskPath);
     return QCursor(cursorBitmap, cursorMask);
-#endif
 }
 
 void RemoteView::focusInEvent(QFocusEvent *event)
