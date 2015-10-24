@@ -82,16 +82,6 @@ set_package_properties("libvncserver" PROPERTIES
 # macro_optional_find_package(LibNXCL)
 # macro_log_feature(LIBNXCL_FOUND "libnxcl" "NX X compression client library" "http://svn.berlios.de/svnroot/repos/freenx/trunk/freenx-client/nxcl/" FALSE "1.0" "Needed to build Krdc with NX support")
 
-find_package(TelepathyQt5)
-set_package_properties("telepathy-qt" PROPERTIES
-        DESCRIPTION "Telepathy Qt Bindings"
-        URL "http://telepathy.freedesktop.org"
-        PURPOSE "Needed to build Telepathy Tubes support.")
-
-if(TelepathyQt5_FOUND)
-    add_definitions(-DTELEPATHY_SUPPORT)
-endif()
-
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}/core/
@@ -127,13 +117,6 @@ set(krdc_SRCS
     main.cpp
 )
 
-if(TelepathyQt5_FOUND)
-    add_subdirectory(krdc_approver)
-    set(krdc_SRCS ${krdc_SRCS}
-        tubesmanager.cpp
-    )
-endif()
-
 ki18n_wrap_ui(krdc_SRCS
     config/general.ui
 )
@@ -155,24 +138,9 @@ target_link_libraries(krdc
     krdccore
 )
 
-if(TelepathyQt5_FOUND)
-    target_link_libraries(krdc
-        ${TELEPATHY_QT5_LIBRARIES}
-    )
-endif()
-
 install(TARGETS krdc ${INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES krdcui.rc DESTINATION ${KXMLGUI_INSTALL_DIR}/krdc)
 install(PROGRAMS org.kde.krdc.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
 install(FILES pointcursor.png pointcursormask.png DESTINATION ${DATA_INSTALL_DIR}/krdc/pics)
-
-if(TelepathyQt5_FOUND)
-    configure_file(org.freedesktop.Telepathy.Client.krdc_rfb_handler.service.in
-                    ${CMAKE_CURRENT_BINARY_DIR}/org.freedesktop.Telepathy.Client.krdc_rfb_handler.service)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/org.freedesktop.Telepathy.Client.krdc_rfb_handler.service
-            DESTINATION ${DBUS_SERVICES_INSTALL_DIR})
-
-    install(FILES krdc_rfb_handler.client DESTINATION ${SHARE_INSTALL_PREFIX}/telepathy/clients/)
-endif()
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
