@@ -27,7 +27,7 @@
 #include "ui_general.h"
 
 #include <KConfigGui/KConfigSkeleton>
-#include <KI18n/KLocalizedString>
+#include <KLocalizedString>
 #include <KCMUtils/KPluginSelector>
 #include <KPluginTrader>
 #include <KService/KPluginInfo>

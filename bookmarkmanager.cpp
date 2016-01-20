@@ -26,7 +26,7 @@
 #include "logging.h"
 
 #include <KBookmarks/KBookmarkOwner>
-#include <KI18n/KLocalizedString>
+#include <KLocalizedString>
 
 #include <QStandardPaths>
 
@@ -69,7 +69,7 @@ void BookmarkManager::addHistoryBookmark(RemoteView *view)
 {
     KBookmark bm = m_historyGroup.first();
     const QString urlString = urlForView(view);
-    const QUrl url = QUrl(urlString);
+    const QUrl url = QUrl::fromLocalFile(urlString);
     while (!bm.isNull()) {
         if (bm.url() == url) {
             qCDebug(KRDC) << "Found URL. Move it at the history start.";

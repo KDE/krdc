@@ -28,7 +28,7 @@
 
 #include <KCoreAddons/KAboutData>
 #include <Kdelibs4ConfigMigrator>
-#include <KI18n/KLocalizedString>
+#include <KLocalizedString>
 #include <QTime>
 #include <QCommandLineOption>
 #include <QCommandLineParser>
@@ -36,7 +36,7 @@
 
 int main(int argc, char **argv)
 {
-    const QLatin1String appName("krdc");
+    const QString appName = QStringLiteral("krdc");
     QApplication app(argc, argv);
     QTime startupTimer;
     startupTimer.start();
@@ -44,7 +44,7 @@ int main(int argc, char **argv)
     app.setAttribute(Qt::AA_UseHighDpiPixmaps, true);
 
     Kdelibs4ConfigMigrator migrate(appName);
-    migrate.setConfigFiles(QStringList() << QLatin1String("krdcrc"));
+    migrate.setConfigFiles(QStringList() << QStringLiteral("krdcrc"));
     migrate.migrate();
 
     KAboutData aboutData(appName, i18n("KRDC"), QString(KRDC_VERSION),
@@ -59,15 +59,15 @@ int main(int argc, char **argv)
                                "(c) 1999-2003, Matthew Chapman\n"
                                "(c) 2009, Collabora Ltd"));
 
-    aboutData.addAuthor(i18n("Urs Wolfer"), i18n("Developer, Maintainer"), QLatin1String("uwolfer@kde.org"));
-    aboutData.addAuthor(i18n("Tony Murray"), i18n("Developer"), QLatin1String("murraytony@gmail.com"));
-    aboutData.addAuthor(i18n("Tim Jansen"), i18n("Former Developer"), QLatin1String("tim@tjansen.de"));
-    aboutData.addAuthor(i18n("Arend van Beelen jr."), i18n("Initial RDP backend"), QLatin1String("arend@auton.nl"));
+    aboutData.addAuthor(i18n("Urs Wolfer"), i18n("Developer, Maintainer"), QStringLiteral("uwolfer@kde.org"));
+    aboutData.addAuthor(i18n("Tony Murray"), i18n("Developer"), QStringLiteral("murraytony@gmail.com"));
+    aboutData.addAuthor(i18n("Tim Jansen"), i18n("Former Developer"), QStringLiteral("tim@tjansen.de"));
+    aboutData.addAuthor(i18n("Arend van Beelen jr."), i18n("Initial RDP backend"), QStringLiteral("arend@auton.nl"));
     aboutData.addCredit(i18n("Brad Hards"), i18n("Google Summer of Code 2007 KRDC project mentor"),
-                        QLatin1String("bradh@frogmouth.net"));
+                        QStringLiteral("bradh@frogmouth.net"));
     aboutData.addCredit(i18n("LibVNCServer / LibVNCClient developers"), i18n("VNC client library"),
-                        QLatin1String("libvncserver-common@lists.sf.net"), QLatin1String("http://libvncserver.sourceforge.net/"));
-    aboutData.addAuthor(i18n("Abner Silva"), i18n("Telepathy Tubes Integration"), QLatin1String("abner.silva@kdemail.net"));
+                        QStringLiteral("libvncserver-common@lists.sf.net"), QStringLiteral("http://libvncserver.sourceforge.net/"));
+    aboutData.addAuthor(i18n("Abner Silva"), i18n("Telepathy Tubes Integration"), QStringLiteral("abner.silva@kdemail.net"));
     aboutData.setOrganizationDomain("kde.org");
     KAboutData::setApplicationData(aboutData);
 
@@ -83,9 +83,9 @@ int main(int argc, char **argv)
     aboutData.setupCommandLine(&parser);
 
     // command line options
-    parser.addOption(QCommandLineOption(QStringList() << QLatin1String("fullscreen"),
+    parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("fullscreen"),
                                         i18n("Start KRDC with the provided URL in fullscreen mode (works only with one URL)")));
-    parser.addPositionalArgument(QLatin1String("url"), i18n("URLs to connect after startup"));
+    parser.addPositionalArgument(QStringLiteral("url"), i18n("URLs to connect after startup"));
 
     parser.process(app);
     aboutData.processCommandLine(&parser);
@@ -103,8 +103,8 @@ int main(int argc, char **argv)
                 if (arg.lastIndexOf(QLatin1Char('/')) != 0)
                     arg = arg.right(arg.length() - arg.lastIndexOf(QLatin1Char('/')) - 1);
 
-                if (!arg.contains(QLatin1String("://")))
-                    arg.prepend(QLatin1String("vnc://")); // vnc was default in kde3 times...
+                if (!arg.contains(QStringLiteral("://")))
+                    arg.prepend(QStringLiteral("vnc://")); // vnc was default in kde3 times...
 
                 qCDebug(KRDC) << "recovered url:" << arg;
 
@@ -114,7 +114,7 @@ int main(int argc, char **argv)
                 continue;
             }
 
-            mainwindow->newConnection(url, parser.isSet(QLatin1String("fullscreen")));
+            mainwindow->newConnection(url, parser.isSet(QStringLiteral("fullscreen")));
         }
     }
     qCDebug(KRDC) << "########## KRDC ready:" << startupTimer.elapsed() << "ms ##########";

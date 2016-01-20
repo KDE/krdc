@@ -23,7 +23,7 @@
 
 #include "testviewfactory.h"
 
-#include <KI18n/KLocalizedString>
+#include <KLocalizedString>
 
 K_PLUGIN_FACTORY_WITH_JSON(KrdcFactory, "krdc_test.json", registerPlugin<TestViewFactory>();)
 

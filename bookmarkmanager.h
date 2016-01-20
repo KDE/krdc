@@ -42,12 +42,12 @@ public:
     BookmarkManager(KActionCollection *collection, QMenu *menu, MainWindow *parent);
     ~BookmarkManager();
 
-    virtual QUrl currentUrl() const Q_DECL_OVERRIDE;
-    virtual QString currentTitle() const Q_DECL_OVERRIDE;
+    QUrl currentUrl() const Q_DECL_OVERRIDE;
+    QString currentTitle() const Q_DECL_OVERRIDE;
     virtual bool addBookmarkEntry() const;
     virtual bool editBookmarkEntry() const;
-    virtual bool supportsTabs() const Q_DECL_OVERRIDE;
-    virtual QList<KBookmarkOwner::FutureBookmark> currentBookmarkList() const Q_DECL_OVERRIDE;
+    bool supportsTabs() const Q_DECL_OVERRIDE;
+    QList<KBookmarkOwner::FutureBookmark> currentBookmarkList() const Q_DECL_OVERRIDE;
     void addHistoryBookmark(RemoteView *view);
     void addManualBookmark(const QUrl &url, const QString &text);
     KBookmarkManager* getManager();

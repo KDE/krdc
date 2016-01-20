@@ -27,7 +27,7 @@
 #ifdef QTONLY
     #define i18n tr
 #else
-    #include <KI18n/KLocalizedString>
+    #include <KLocalizedString>
 #endif
 
 #include "remoteview.h"

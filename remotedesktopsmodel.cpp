@@ -25,7 +25,7 @@
 #include "remotedesktopsmodel.h"
 #include "logging.h"
 
-#include <KI18n/KLocalizedString>
+#include <KLocalizedString>
 #include<KCoreAddons/KFormat>
 #include <DNSSD/ServiceBrowser>
 #include <QDateTime>

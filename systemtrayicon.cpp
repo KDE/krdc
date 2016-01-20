@@ -25,7 +25,7 @@
 #include "mainwindow.h"
 
 #include <KXmlGui/KActionCollection>
-#include <KI18n/KLocalizedString>
+#include <KLocalizedString>
 
 #include <QMenu>
 

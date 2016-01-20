@@ -25,7 +25,7 @@
 #include "logging.h"
 #include "settings.h"
 
-#include <KI18n/KLocalizedString>
+#include <KLocalizedString>
 #include <KWidgetsAddons/KPageDialog>
 
 #include <QCheckBox>

@@ -26,7 +26,7 @@
 #include "logging.h"
 
 #include <QIcon>
-#include <KI18n/KLocalizedString>
+#include <KLocalizedString>
 #include <KWidgetsAddons/KMessageBox>
 
 #include <QFile>
