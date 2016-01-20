@@ -28,11 +28,15 @@
 
 #include <KCoreAddons/KAboutData>
 #include <Kdelibs4ConfigMigrator>
+#include <Kdelibs4Migration>
 #include <KLocalizedString>
+#include <QDir>
+#include <QFile>
 #include <QTime>
 #include <QCommandLineOption>
 #include <QCommandLineParser>
 #include <QPluginLoader>
+#include <QStandardPaths>
 
 int main(int argc, char **argv)
 {
@@ -45,7 +49,27 @@ int main(int argc, char **argv)
 
     Kdelibs4ConfigMigrator migrate(appName);
     migrate.setConfigFiles(QStringList() << QStringLiteral("krdcrc"));
-    migrate.migrate();
+    if (migrate.migrate()) {
+        Kdelibs4Migration dataMigrator;
+        const QString sourceBasePath = dataMigrator.saveLocation("data", QStringLiteral("krdc"));
+        const QString targetBasePath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/krdc");
+        QString targetFilePath;
+        QDir sourceDir(sourceBasePath);
+        QDir targetDir(targetBasePath);
+        if (sourceDir.exists()) {
+            if (!targetDir.exists()) {
+                QDir().mkpath(targetBasePath);
+            }
+            QStringList fileNames = sourceDir.entryList(QDir::Files |
+                                    QDir::NoDotAndDotDot | QDir::NoSymLinks);
+            foreach (const QString &fileName, fileNames) {
+                targetFilePath = targetBasePath + fileName;
+                if (!QFile::exists(targetFilePath)) {
+                    QFile::copy(sourceBasePath + fileName, targetFilePath);
+                }
+            }
+        }
+    }
 
     KAboutData aboutData(appName, i18n("KRDC"), QString(KRDC_VERSION),
                          i18n("KDE Remote Desktop Client"), KAboutLicense::LicenseKey::GPL);
