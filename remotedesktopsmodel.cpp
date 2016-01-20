@@ -23,7 +23,7 @@
 ****************************************************************************/
 
 #include "remotedesktopsmodel.h"
-#include "logging.h"
+#include "krdc_debug.h"
 
 #include <KLocalizedString>
 #include<KCoreAddons/KFormat>

@@ -23,7 +23,7 @@
 ****************************************************************************/
 
 #include "mainwindow.h"
-#include "logging.h"
+#include "krdc_debug.h"
 #include "remoteview.h"
 #include "settings.h"
 #include "config/preferencesdialog.h"

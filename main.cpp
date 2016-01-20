@@ -23,7 +23,7 @@
 ****************************************************************************/
 
 #include "mainwindow.h"
-#include "logging.h"
+#include "krdc_debug.h"
 #include "krdc_version.h"
 
 #include <KCoreAddons/KAboutData>

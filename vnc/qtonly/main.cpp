@@ -24,7 +24,7 @@
 #include <QApplication>
 
 #include "vncview.h"
-#include "logging.h"
+#include "krdc_debug.h"
 
 int main(int argc, char *argv[])
 {

@@ -22,7 +22,7 @@
 ****************************************************************************/
 
 #include "hostpreferences.h"
-#include "logging.h"
+#include "krdc_debug.h"
 #include "settings.h"
 
 #include <KLocalizedString>

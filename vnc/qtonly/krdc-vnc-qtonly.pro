@@ -7,5 +7,5 @@ DEFINES += QTONLY
 
 QT += core gui widgets
 
-HEADERS += remoteview.h vncclientthread.h vncview.h logging.h
-SOURCES += main.cpp remoteview.cpp vncclientthread.cpp vncview.cpp logging.cpp
+HEADERS += remoteview.h vncclientthread.h vncview.h krdc_debug.h
+SOURCES += main.cpp remoteview.cpp vncclientthread.cpp vncview.cpp krdc_debug.cpp

@@ -29,6 +29,7 @@ find_package(KF5 REQUIRED COMPONENTS
 find_package(KF5 COMPONENTS  DocTools)
 
 include(ECMSetupVersion)
+include(ECMQtDeclareLoggingCategory)
 include(KDEInstallDirs)
 include(KDECompilerSettings)
 include(KDECMakeSettings)
@@ -106,7 +107,6 @@ add_definitions(-DBUILD_ZEROCONF)
 set(krdc_SRCS
     config/hostpreferenceslist.cpp
     config/preferencesdialog.cpp
-    core/logging.cpp
     floatingtoolbar.cpp
     bookmarkmanager.cpp
     connectiondelegate.cpp
@@ -120,6 +120,8 @@ set(krdc_SRCS
 ki18n_wrap_ui(krdc_SRCS
     config/general.ui
 )
+
+ecm_qt_declare_logging_category(krdc_SRCS HEADER krdc_debug.h IDENTIFIER KRDC CATEGORY_NAME KRDC)
 
 add_executable(krdc ${krdc_SRCS})
 

@@ -24,7 +24,7 @@
 ****************************************************************************/
 
 #include "floatingtoolbar.h"
-#include "logging.h"
+#include "krdc_debug.h"
 
 #include <QApplication>
 #include <QBitmap>

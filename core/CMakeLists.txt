@@ -4,11 +4,12 @@ include(GenerateExportHeader)
 set(krdccore_SRCS
     remoteviewfactory.cpp
     remoteview.cpp
-    logging.cpp
     hostpreferences.cpp
 )
 
 kconfig_add_kcfg_files(krdccore_SRCS settings.kcfgc)
+
+ecm_qt_declare_logging_category(krdccore_SRCS HEADER krdc_debug.h IDENTIFIER KRDC CATEGORY_NAME KRDC)
 
 add_library(krdccore SHARED ${krdccore_SRCS})
 

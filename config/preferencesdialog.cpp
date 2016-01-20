@@ -22,7 +22,7 @@
 ****************************************************************************/
 
 #include "preferencesdialog.h"
-#include "logging.h"
+#include "krdc_debug.h"
 #include "hostpreferenceslist.h"
 #include "ui_general.h"
 

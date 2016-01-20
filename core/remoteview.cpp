@@ -23,7 +23,7 @@
 ****************************************************************************/
 
 #include "remoteview.h"
-#include "logging.h"
+#include "krdc_debug.h"
 
 #include <QUrl>
 #include <QBitmap>

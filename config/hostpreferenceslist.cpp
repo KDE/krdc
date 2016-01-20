@@ -23,7 +23,7 @@
 
 #include "hostpreferenceslist.h"
 #include "hostpreferences.h"
-#include "logging.h"
+#include "krdc_debug.h"
 
 #include <QIcon>
 #include <KLocalizedString>

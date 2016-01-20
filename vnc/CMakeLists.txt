@@ -10,9 +10,10 @@ if(LIBVNCSERVER_FOUND)
         vnchostpreferences.cpp
         vncclientthread.cpp
         vncviewfactory.cpp
-        ../core/logging.cpp
         vncview.cpp
     )
+
+    ecm_qt_declare_logging_category(vncplugin_SRCS HEADER krdc_debug.h IDENTIFIER KRDC CATEGORY_NAME KRDC)
 
     ki18n_wrap_ui(vncplugin_SRCS
         vncpreferences.ui
