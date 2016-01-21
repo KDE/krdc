@@ -132,9 +132,6 @@ private:
     QTableView *m_dockWidgetTableView;
     QTableView *m_newConnectionTableView;
     RemoteDesktopsModel *m_remoteDesktopsModel;
-#ifdef TELEPATHY_SUPPORT
-    TubesManager *m_tubesManager;
-#endif
     QWidget *m_newConnectionWidget;
 };
 
