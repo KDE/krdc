@@ -81,6 +81,7 @@ private:
 
     bool m_quitFlag;
     QWindow *m_container;   // container for the xfreerdp window
+    QWidget *m_containerWidget; // Widget to contain the xfreerdp window.
     QProcess *m_process;               // xfreerdp process
 
     RdpHostPreferences *m_hostPreferences;

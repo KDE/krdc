@@ -55,6 +55,7 @@ RdpView::RdpView(QWidget *parent,
     }
 
     m_container = new QWindow();
+    m_containerWidget = QWidget::createWindowContainer(m_container, this);
     m_container->installEventFilter(this);
     
     m_hostPreferences = new RdpHostPreferences(configGroup, this);
@@ -83,7 +84,7 @@ bool RdpView::eventFilter(QObject *obj, QEvent *event)
 
 QSize RdpView::framebufferSize()
 {
-    return m_container->minimumSize();
+    return m_containerWidget->minimumSize();
 }
 
 QSize RdpView::sizeHint() const
@@ -109,7 +110,7 @@ bool RdpView::isQuitting()
 
 bool RdpView::start()
 {
-    m_container->show();
+    m_containerWidget->show();
 
     if (m_url.userName().isEmpty()) {
         QString userName;
@@ -158,17 +159,20 @@ bool RdpView::start()
 
     QStringList arguments;
 
+    int width, height;
+    if (m_hostPreferences->width() > 0) {
+        width = m_hostPreferences->width();
+        height = m_hostPreferences->height();
+    } else {
+        width = this->parentWidget()->size().width();
+        height = this->parentWidget()->size().height();
+    }
+    m_containerWidget->setFixedWidth(width);
+    m_containerWidget->setFixedHeight(height);
+    setMaximumSize(width, height);
     if (versionOutput.contains(QLatin1String(" 1.0"))) {
         qCDebug(KRDC) << "Use FreeRDP 1.0 compatible arguments";
 
-        int width, height;
-        if (m_hostPreferences->width() > 0) {
-            width = m_hostPreferences->width();
-            height = m_hostPreferences->height();
-        } else {
-            width = this->parentWidget()->size().width();
-            height = this->parentWidget()->size().height();
-        }
         arguments << QStringLiteral("-g") << QString::number(width) + QLatin1Char('x') + QString::number(height);
 
         arguments << QStringLiteral("-k") << keymapToXfreerdp(m_hostPreferences->keyboardLayout());
@@ -261,14 +265,6 @@ bool RdpView::start()
     } else {
         qCDebug(KRDC) << "Use FreeRDP 1.1+ compatible arguments";
 
-        int width, height;
-        if (m_hostPreferences->width() > 0) {
-            width = m_hostPreferences->width();
-            height = m_hostPreferences->height();
-        } else {
-            width = this->parentWidget()->size().width();
-            height = this->parentWidget()->size().height();
-        }
         arguments << QStringLiteral("-decorations");
         arguments << QStringLiteral("/w:") + QString::number(width);
         arguments << QStringLiteral("/h:") + QString::number(height);
@@ -375,13 +371,12 @@ void RdpView::switchFullscreen(bool on)
 void RdpView::connectionOpened()
 {
     qCDebug(KRDC) << "Connection opened";
-    const QSize size = m_container->minimumSize();
+    const QSize size = QSize(m_container->width(), m_container->height());
     qCDebug(KRDC) << "Size hint: " << size.width() << " " << size.height();
     setStatus(Connected);
     setFixedSize(size);
     resize(size);
-    m_container->setWidth(size.width());
-    m_container->setHeight(size.height());
+    m_containerWidget->setFixedSize(size);
     emit framebufferSizeChanged(size.width(), size.height());
     emit connected();
     setFocus();
