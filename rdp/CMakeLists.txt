@@ -1,4 +1,8 @@
-if(FREERDP_EXECUTABLE_FOUND)
+if(Q_WS_X11)
+    set(HAVE_XFREERDP true)
+endif(Q_WS_X11)
+
+if(HAVE_XFREERDP)
     add_definitions(-DKDE_DEFAULT_DEBUG_AREA=5012)
 
     include_directories(
