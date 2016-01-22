@@ -23,17 +23,18 @@
 
 #include "rdpviewfactory.h"
 
-#include <KDebug>
-#include <KStandardDirs>
+#include <QStandardPaths>
 
-KRDC_PLUGIN_EXPORT(RdpViewFactory)
+#include <KCoreAddons/KExportPlugin>
+
+K_PLUGIN_FACTORY_WITH_JSON(KrdcFactory, "krdc_rdp.json", registerPlugin<RdpViewFactory>();)
 
 RdpViewFactory::RdpViewFactory(QObject *parent, const QVariantList &args)
         : RemoteViewFactory(parent)
 {
     Q_UNUSED(args);
 
-    KGlobal::locale()->insertCatalog("krdc");
+    KLocalizedString::setApplicationDomain("krdc");
 
     m_connectToolTipString = i18n("Connect to a Windows Remote Desktop (RDP)");
 
@@ -44,12 +45,12 @@ RdpViewFactory::~RdpViewFactory()
 {
 }
 
-bool RdpViewFactory::supportsUrl(const KUrl &url) const
+bool RdpViewFactory::supportsUrl(const QUrl &url) const
 {
-    return (url.scheme().compare("rdp", Qt::CaseInsensitive) == 0);
+    return (url.scheme().compare(QStringLiteral("rdp"), Qt::CaseInsensitive) == 0);
 }
 
-RemoteView *RdpViewFactory::createView(QWidget *parent, const KUrl &url, KConfigGroup configGroup)
+RemoteView *RdpViewFactory::createView(QWidget *parent, const QUrl &url, KConfigGroup configGroup)
 {
     return new RdpView(parent, url, configGroup);
 }
@@ -61,7 +62,7 @@ HostPreferences *RdpViewFactory::createHostPreferences(KConfigGroup configGroup,
 
 QString RdpViewFactory::scheme() const
 {
-    return "rdp";
+    return QStringLiteral("rdp");
 }
 
 QString RdpViewFactory::connectActionText() const
@@ -82,10 +83,10 @@ QString RdpViewFactory::connectToolTipText() const
 
 void RdpViewFactory::checkFreerdpAvailability()
 {
-    if (KStandardDirs::findExe("xfreerdp").isEmpty()) {
-        m_connectToolTipString += '\n' + i18n("The application \"xfreerdp\" cannot be found on your system; make sure it is properly installed "
+    if (QStandardPaths::findExecutable(QStringLiteral("xfreerdp")).isEmpty()) {
+        m_connectToolTipString += QLatin1Char('\n') + i18n("The application \"xfreerdp\" cannot be found on your system; make sure it is properly installed "
                                               "if you need RDP support.");
     }
 }
 
-#include "moc_rdpviewfactory.cpp"
+#include "rdpviewfactory.moc"

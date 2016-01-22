@@ -27,12 +27,10 @@
 
 #include "ui_rdppreferences.h"
 
-#include <KDebug>
-
-KRDC_PLUGIN_EXPORT(RdpPreferences)
+K_PLUGIN_FACTORY_WITH_JSON(KrdcKcmFactory, "krdc_rdp_config.json", registerPlugin<RdpPreferences>();)
 
 RdpPreferences::RdpPreferences(QWidget *parent, const QVariantList &args)
-        : KCModule(KrdcFactory::componentData(), parent, args)
+        : KCModule(parent, args)
 {
     Ui::RdpPreferences rdpUi;
     rdpUi.setupUi(this);

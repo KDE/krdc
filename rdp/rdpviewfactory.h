@@ -38,9 +38,9 @@ public:
 
     virtual ~RdpViewFactory();
 
-    virtual bool supportsUrl(const KUrl &url) const;
+    virtual bool supportsUrl(const QUrl &url) const;
 
-    virtual RemoteView *createView(QWidget *parent, const KUrl &url, KConfigGroup configGroup);
+    virtual RemoteView *createView(QWidget *parent, const QUrl &url, KConfigGroup configGroup);
 
     virtual HostPreferences *createHostPreferences(KConfigGroup configGroup, QWidget *parent);
 

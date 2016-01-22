@@ -26,48 +26,46 @@
 
 #include "settings.h"
 
-#include <KDebug>
-
 #include <QDesktopWidget>
 
 static const QStringList keymaps = (QStringList()
-    << "ar"
-    << "cs"
-    << "da"
-    << "de"
-    << "de-ch"
-    << "en-dv"
-    << "en-gb"
-    << "en-us"
-    << "es"
-    << "et"
-    << "fi"
-    << "fo"
-    << "fr"
-    << "fr-be"
-    << "fr-ca"
-    << "fr-ch"
-    << "he"
-    << "hr"
-    << "hu"
-    << "is"
-    << "it"
-    << "ja"
-    << "ko"
-    << "lt"
-    << "lv"
-    << "mk"
-    << "nl"
-    << "nl-be"
-    << "no"
-    << "pl"
-    << "pt"
-    << "pt-br"
-    << "ru"
-    << "sl"
-    << "sv"
-    << "th"
-    << "tr"
+    << QStringLiteral("ar")
+    << QStringLiteral("cs")
+    << QStringLiteral("da")
+    << QStringLiteral("de")
+    << QStringLiteral("de-ch")
+    << QStringLiteral("en-dv")
+    << QStringLiteral("en-gb")
+    << QStringLiteral("en-us")
+    << QStringLiteral("es")
+    << QStringLiteral("et")
+    << QStringLiteral("fi")
+    << QStringLiteral("fo")
+    << QStringLiteral("fr")
+    << QStringLiteral("fr-be")
+    << QStringLiteral("fr-ca")
+    << QStringLiteral("fr-ch")
+    << QStringLiteral("he")
+    << QStringLiteral("hr")
+    << QStringLiteral("hu")
+    << QStringLiteral("is")
+    << QStringLiteral("it")
+    << QStringLiteral("ja")
+    << QStringLiteral("ko")
+    << QStringLiteral("lt")
+    << QStringLiteral("lv")
+    << QStringLiteral("mk")
+    << QStringLiteral("nl")
+    << QStringLiteral("nl-be")
+    << QStringLiteral("no")
+    << QStringLiteral("pl")
+    << QStringLiteral("pt")
+    << QStringLiteral("pt-br")
+    << QStringLiteral("ru")
+    << QStringLiteral("sl")
+    << QStringLiteral("sv")
+    << QStringLiteral("th")
+    << QStringLiteral("tr")
 );
 
 static const int defaultKeymap = 7; // en-us
@@ -115,7 +113,7 @@ QWidget* RdpHostPreferences::createProtocolSpecificConfigPage()
 
     connect(rdpUi.resolutionComboBox, SIGNAL(currentIndexChanged(int)), SLOT(updateWidthHeight(int)));
 
-    const QString resolutionString = QString::number(width()) + 'x' + QString::number(height());
+    const QString resolutionString = QString::number(width()) + QLatin1Char('x') + QString::number(height());
     const int resolutionIndex = rdpUi.resolutionComboBox->findText(resolutionString, Qt::MatchContains);
     rdpUi.resolutionComboBox->setCurrentIndex((resolutionIndex == -1) ? rdpUi.resolutionComboBox->count() - 2 : resolutionIndex); // - 2 is index of custom resolution
 

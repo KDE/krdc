@@ -1,9 +1,4 @@
-
-if(Q_WS_X11)
-    set(HAVE_XFREERDP true)
-endif(Q_WS_X11)
-
-if(HAVE_XFREERDP)
+if(FREERDP_EXECUTABLE_FOUND)
     add_definitions(-DKDE_DEFAULT_DEBUG_AREA=5012)
 
     include_directories(
@@ -16,15 +11,19 @@ if(HAVE_XFREERDP)
         rdpview.cpp
     )
 
-    kde4_add_ui_files(rdpplugin_SRCS
+    ki18n_wrap_ui(rdpplugin_SRCS
         rdppreferences.ui
     )
 
-    kde4_add_plugin(krdc_rdpplugin ${rdpplugin_SRCS})
+    ecm_qt_declare_logging_category(rdpplugin_SRCS HEADER krdc_debug.h IDENTIFIER KRDC CATEGORY_NAME KRDC)
 
+    add_library(krdc_rdpplugin ${rdpplugin_SRCS})
     target_link_libraries(krdc_rdpplugin 
-        ${KDE4_KDECORE_LIBS}
-        ${KDE4_KDEUI_LIBS}
+        Qt5::Core
+        Qt5::Gui
+        KF5::ConfigCore
+        KF5::CoreAddons
+        KF5::XmlGui
         krdccore
     )
 
@@ -32,19 +31,25 @@ if(HAVE_XFREERDP)
         rdppreferences.cpp
     )
 
-    kde4_add_plugin(kcm_krdc_rdpplugin ${kcm_krdc_rdpplugin_SRCS})
-
+    add_library(kcm_krdc_rdpplugin ${kcm_krdc_rdpplugin_SRCS})
     target_link_libraries(kcm_krdc_rdpplugin
-        ${KDE4_KDEUI_LIBS}
+        Qt5::Core
+        Qt5::Gui
+        KF5::Wallet
+        KF5::ConfigCore
+        KF5::CoreAddons
+        KF5::XmlGui
         krdccore
     )
 
+    kcoreaddons_desktop_to_json(krdc_rdpplugin krdc_rdp.desktop)
+    kcoreaddons_desktop_to_json(kcm_krdc_rdpplugin krdc_rdp_config.desktop)
+
     add_dependencies(kcm_krdc_rdpplugin krdc_rdpplugin)
 
-    install(TARGETS kcm_krdc_rdpplugin DESTINATION ${PLUGIN_INSTALL_DIR})
-    install(TARGETS krdc_rdpplugin DESTINATION ${PLUGIN_INSTALL_DIR})
+    install(TARGETS kcm_krdc_rdpplugin DESTINATION ${PLUGIN_INSTALL_DIR}/krdc/kcms)
+    install(TARGETS krdc_rdpplugin DESTINATION ${PLUGIN_INSTALL_DIR}/krdc)
 
-    install(FILES krdc_rdp.desktop DESTINATION ${SERVICES_INSTALL_DIR})
     install(FILES krdc_rdp_config.desktop DESTINATION ${SERVICES_INSTALL_DIR})
 
     install(FILES rdp.protocol DESTINATION ${SERVICES_INSTALL_DIR})

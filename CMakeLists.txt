@@ -69,16 +69,16 @@ set_package_properties("libvncserver" PROPERTIES
 )
 
 # Needs porting
-# FIND_PROGRAM(FREERDP_EXECUTABLE xfreerdp)
-# if(FREERDP_EXECUTABLE)
-#     set(FREERDP_EXECUTABLE_FOUND true)
-# endif(FREERDP_EXECUTABLE)
-#
-# set_package_properties("freerdp" PROPERTIES
-#         DESCRIPTION "A free Remote Desktop Protocol (RDP) Implementation"
-#         URL "http://www.freerdp.com"
-#         PURPOSE "Needed for RDP support in KRDC (at runtime)"
-#                                      )
+FIND_PROGRAM(FREERDP_EXECUTABLE xfreerdp)
+if(FREERDP_EXECUTABLE)
+    set(FREERDP_EXECUTABLE_FOUND true)
+endif(FREERDP_EXECUTABLE)
+
+set_package_properties("freerdp" PROPERTIES
+        DESCRIPTION "A free Remote Desktop Protocol (RDP) Implementation"
+        URL "http://www.freerdp.com"
+        PURPOSE "Needed for RDP support in KRDC (at runtime)"
+                                     )
 # NX support is not ready for KDE 4.2; disabled (uwolfer)
 # macro_optional_find_package(LibNXCL)
 # macro_log_feature(LIBNXCL_FOUND "libnxcl" "NX X compression client library" "http://svn.berlios.de/svnroot/repos/freenx/trunk/freenx-client/nxcl/" FALSE "1.0" "Needed to build Krdc with NX support")
