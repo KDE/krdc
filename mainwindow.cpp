@@ -252,7 +252,7 @@ QUrl MainWindow::getInputUrl()
     // percent encode usernames so QUrl can parse it
     int lastAtIndex = userInput.indexOf(QRegExp(QStringLiteral("@[^@]+$")));
     if (lastAtIndex >0) {
-        userInput = QUrl::fromLocalFile(userInput.left(lastAtIndex)).toString(QUrl::FullyEncoded) + userInput.mid(lastAtIndex);
+        userInput = QString::fromLatin1(QUrl::toPercentEncoding(userInput.left(lastAtIndex))) + userInput.mid(lastAtIndex);
         qCDebug(KRDC) << "input url " << userInput;
     }
 
