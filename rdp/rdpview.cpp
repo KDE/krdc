@@ -348,8 +348,8 @@ bool RdpView::start()
     connect(m_process, SIGNAL(error(QProcess::ProcessError)), SLOT(processError(QProcess::ProcessError)));
     connect(m_process, SIGNAL(readyReadStandardError()), SLOT(receivedStandardError()));
     connect(m_process, SIGNAL(readyReadStandardOutput()), SLOT(receivedStandardOutput()));
-    connect(m_container, SIGNAL(clientClosed()), SLOT(connectionClosed()));
-    connect(m_container, SIGNAL(clientIsEmbedded()), SLOT(connectionOpened()));
+    connect(m_process, SIGNAL(finished(int, QProcess::ExitStatus)), SLOT(connectionClosed()));
+    connect(m_process, SIGNAL(started()), SLOT(connectionOpened()));
 
     m_process->start(QStringLiteral("xfreerdp"), arguments);
 
