@@ -104,6 +104,7 @@ QWidget* RdpHostPreferences::createProtocolSpecificConfigPage()
 
     rdpUi.kcfg_Height->setValue(height());
     rdpUi.kcfg_Width->setValue(width());
+    rdpUi.kcfg_Resolution->setCurrentIndex(resolution());
     rdpUi.kcfg_ColorDepth->setCurrentIndex(colorDepth());
     rdpUi.kcfg_KeyboardLayout->setCurrentIndex(keymap2int(keyboardLayout()));
     rdpUi.kcfg_Sound->setCurrentIndex(sound());
@@ -113,11 +114,11 @@ QWidget* RdpHostPreferences::createProtocolSpecificConfigPage()
     rdpUi.kcfg_Performance->setCurrentIndex(performance());
     rdpUi.kcfg_ShareMedia->setText(shareMedia());
 
-    connect(rdpUi.resolutionComboBox, SIGNAL(currentIndexChanged(int)), SLOT(updateWidthHeight(int)));
+    // Have to call updateWidthHeight() here
+    // We leverage the final part of this function to enable/disable kcfg_Height and kcfg_Width
+    updateWidthHeight(resolution());
 
-    const QString resolutionString = QString::number(width()) + 'x' + QString::number(height());
-    const int resolutionIndex = rdpUi.resolutionComboBox->findText(resolutionString, Qt::MatchContains);
-    rdpUi.resolutionComboBox->setCurrentIndex((resolutionIndex == -1) ? rdpUi.resolutionComboBox->count() - 2 : resolutionIndex); // - 2 is index of custom resolution
+    connect(rdpUi.kcfg_Resolution, SIGNAL(currentIndexChanged(int)), SLOT(updateWidthHeight(int)));
 
     return rdpPage;
 }
@@ -175,6 +176,7 @@ void RdpHostPreferences::acceptConfig()
 
     setHeight(rdpUi.kcfg_Height->value());
     setWidth(rdpUi.kcfg_Width->value());
+    setResolution(rdpUi.kcfg_Resolution->currentIndex());
     setColorDepth(rdpUi.kcfg_ColorDepth->currentIndex());
     setKeyboardLayout(int2keymap(rdpUi.kcfg_KeyboardLayout->currentIndex()));
     setSound(rdpUi.kcfg_Sound->currentIndex());
@@ -183,6 +185,17 @@ void RdpHostPreferences::acceptConfig()
     setRemoteFX(rdpUi.kcfg_RemoteFX->isChecked());
     setPerformance(rdpUi.kcfg_Performance->currentIndex());
     setShareMedia(rdpUi.kcfg_ShareMedia->text());
+}
+
+void RdpHostPreferences::setResolution(int resolution)
+{
+    if (resolution >= 0)
+        m_configGroup.writeEntry("resolution", resolution);
+}
+
+int RdpHostPreferences::resolution() const
+{
+    return m_configGroup.readEntry("resolution", Settings::resolution());
 }
 
 void RdpHostPreferences::setColorDepth(int colorDepth)

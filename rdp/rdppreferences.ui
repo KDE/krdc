@@ -25,7 +25,7 @@
            <string>Desktop &amp;resolution:</string>
           </property>
           <property name="buddy">
-           <cstring>resolutionComboBox</cstring>
+           <cstring>kcfg_Resolution</cstring>
           </property>
          </widget>
         </item>
@@ -37,7 +37,7 @@
       <item row="0" column="1">
        <layout class="QVBoxLayout">
         <item>
-         <widget class="KComboBox" name="resolutionComboBox">
+         <widget class="KComboBox" name="kcfg_Resolution">
           <property name="minimumSize">
            <size>
             <width>280</width>
@@ -649,7 +649,7 @@
   </customwidget>
  </customwidgets>
  <tabstops>
-  <tabstop>resolutionComboBox</tabstop>
+  <tabstop>kcfg_Resolution</tabstop>
   <tabstop>kcfg_Width</tabstop>
   <tabstop>kcfg_Height</tabstop>
   <tabstop>kcfg_ColorDepth</tabstop>
