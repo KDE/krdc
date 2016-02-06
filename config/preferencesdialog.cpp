@@ -47,7 +47,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent, KConfigSkeleton *skeleton)
     addPage(hostPreferencesList, i18n("Hosts"), QLatin1String("computer"), i18n("Host Configuration"));
 
     m_pluginSelector = new KPluginSelector();
-    const KPluginInfo::List  offers = KPluginTrader::self()->query(QLatin1String("krdc/plugins"));
+    const KPluginInfo::List  offers = KPluginTrader::self()->query(QLatin1String("krdc"));
     m_pluginSelector->addPlugins(offers, KPluginSelector::ReadConfigFile,
                                     i18n("Plugins"), QLatin1String("Service"), KSharedConfig::openConfig());
     m_pluginSelector->load();
