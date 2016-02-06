@@ -70,7 +70,7 @@ void BookmarkManager::addHistoryBookmark(RemoteView *view)
 {
     KBookmark bm = m_historyGroup.first();
     const QString urlString = urlForView(view);
-    const QUrl url = QUrl::fromLocalFile(urlString);
+    const QUrl url = QUrl::fromUserInput(urlString);
     while (!bm.isNull()) {
         if (bm.url() == url) {
             qCDebug(KRDC) << "Found URL. Move it at the history start.";
@@ -181,7 +181,7 @@ const QStringList BookmarkManager::findBookmarkAddresses(const KBookmarkGroup &g
             bookmarkAddresses.append(findBookmarkAddresses(bm.toGroup(), url));
         }
 
-        if (bm.url() == QUrl::fromLocalFile(url)) {
+        if (bm.url() == QUrl::fromUserInput(url)) {
             bookmarkAddresses.append(bm.address());
         }
         bm = group.next(bm);
