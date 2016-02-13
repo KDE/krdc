@@ -864,7 +864,7 @@ void MainWindow::updateActionStatus()
 
     setActionStatus(actionCollection()->action("view_only"),
                     enabled,
-                    true,
+                    view ? view->supportsViewOnly() : false,
                     view ? view->viewOnly() : false);
 
     setActionStatus(actionCollection()->action("show_local_cursor"),

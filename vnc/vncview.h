@@ -55,6 +55,7 @@ public:
     bool start();
     bool supportsScaling() const;
     bool supportsLocalCursor() const;
+    bool supportsViewOnly() const;
     
 #ifndef QTONLY
     HostPreferences* hostPreferences();

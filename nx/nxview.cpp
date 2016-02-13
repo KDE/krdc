@@ -200,6 +200,11 @@ void NxView::hasXid(int xid)
     m_container->embedClient(xid);
 }
 
+bool NxView::supportsViewOnly() const
+{
+	return true;
+}
+
 void NxView::handleProgress(int id, QString msg)
 {
     Q_UNUSED(msg);

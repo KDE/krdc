@@ -98,6 +98,11 @@ bool RemoteView::supportsLocalCursor() const
     return false;
 }
 
+bool RemoteView::supportsViewOnly() const
+{
+    return false;
+}
+
 QString RemoteView::host()
 {
     return m_host;
