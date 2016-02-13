@@ -287,7 +287,18 @@ bool RdpView::start()
 
         arguments << "/parent-window:" + QString::number(m_container->winId());
         arguments << "/bpp:" + QString::number((m_hostPreferences->colorDepth() + 1) * 8);
+
         arguments << "/audio-mode:" + QString::number(m_hostPreferences->sound());
+        switch (m_hostPreferences->soundSystem()) {
+        case 0:
+            arguments << "/sound:sys:alsa";
+            break;
+        case 1:
+            arguments << "/sound:sys:pulse";
+            break;
+        default:
+            break;
+        }
 
         if (!m_hostPreferences->shareMedia().isEmpty()) {
             QStringList shareMedia;

@@ -100,6 +100,8 @@ QWidget* RdpHostPreferences::createProtocolSpecificConfigPage()
     QWidget *rdpPage = new QWidget();
     rdpUi.setupUi(rdpPage);
 
+    connect(rdpUi.kcfg_Sound, SIGNAL(currentIndexChanged(int)), SLOT(updateSoundSystem(int)));
+
     rdpUi.loginGroupBox->setVisible(false);
 
     rdpUi.kcfg_Height->setValue(height());
@@ -108,6 +110,7 @@ QWidget* RdpHostPreferences::createProtocolSpecificConfigPage()
     rdpUi.kcfg_ColorDepth->setCurrentIndex(colorDepth());
     rdpUi.kcfg_KeyboardLayout->setCurrentIndex(keymap2int(keyboardLayout()));
     rdpUi.kcfg_Sound->setCurrentIndex(sound());
+    rdpUi.kcfg_SoundSystem->setCurrentIndex(soundSystem());
     rdpUi.kcfg_Console->setChecked(console());
     rdpUi.kcfg_ExtraOptions->setText(extraOptions());
     rdpUi.kcfg_RemoteFX->setChecked(remoteFX());
@@ -170,6 +173,23 @@ void RdpHostPreferences::updateWidthHeight(int index)
     rdpUi.widthLabel->setEnabled(enabled);
 }
 
+void RdpHostPreferences::updateSoundSystem(int index)
+{
+    switch (index) {
+    case 0: /* On This Computer */
+        rdpUi.kcfg_SoundSystem->setCurrentIndex(soundSystem());
+        rdpUi.kcfg_SoundSystem->setEnabled(true);
+        break;
+    case 1: /* On Remote Computer */
+    case 2: /* Disable Sound */
+        rdpUi.kcfg_SoundSystem->setCurrentIndex(2);
+        rdpUi.kcfg_SoundSystem->setEnabled(false);
+        break;
+    default:
+        break;
+    }
+}
+
 void RdpHostPreferences::acceptConfig()
 {
     HostPreferences::acceptConfig();
@@ -180,6 +200,7 @@ void RdpHostPreferences::acceptConfig()
     setColorDepth(rdpUi.kcfg_ColorDepth->currentIndex());
     setKeyboardLayout(int2keymap(rdpUi.kcfg_KeyboardLayout->currentIndex()));
     setSound(rdpUi.kcfg_Sound->currentIndex());
+    setSoundSystem(rdpUi.kcfg_SoundSystem->currentIndex());
     setConsole(rdpUi.kcfg_Console->isChecked());
     setExtraOptions(rdpUi.kcfg_ExtraOptions->text());
     setRemoteFX(rdpUi.kcfg_RemoteFX->isChecked());
@@ -229,6 +250,17 @@ void RdpHostPreferences::setSound(int sound)
 int RdpHostPreferences::sound() const
 {
     return m_configGroup.readEntry("sound", Settings::sound());
+}
+
+void RdpHostPreferences::setSoundSystem(int sound)
+{
+    if (sound >= 0)
+        m_configGroup.writeEntry("soundSystem", sound);
+}
+
+int RdpHostPreferences::soundSystem() const
+{
+    return m_configGroup.readEntry("soundSystem", Settings::soundSystem());
 }
 
 void RdpHostPreferences::setConsole(bool console)

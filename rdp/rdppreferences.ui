@@ -414,39 +414,72 @@
        </widget>
       </item>
       <item row="3" column="0">
-       <widget class="QLabel" name="soundLabel">
-        <property name="text">
-         <string comment="label for soundsettings in preferences dialog">Sound:</string>
-        </property>
-        <property name="buddy">
-         <cstring>kcfg_Sound</cstring>
-        </property>
-       </widget>
+       <layout class="QHBoxLayout">
+        <item>
+        <widget class="QLabel" name="soundLabel">
+         <property name="text">
+          <string comment="label for soundsettings in preferences dialog">Sound:</string>
+         </property>
+         <property name="buddy">
+          <cstring>kcfg_Sound</cstring>
+         </property>
+        </widget>
+        </item>
+       </layout>
       </item>
       <item row="3" column="1">
-       <widget class="KComboBox" name="kcfg_Sound">
-        <property name="minimumSize">
-         <size>
-          <width>280</width>
-          <height>0</height>
-         </size>
-        </property>
+       <layout class="QHBoxLayout">
         <item>
-         <property name="text">
-          <string>On This Computer</string>
+        <widget class="KComboBox" name="kcfg_Sound">
+         <property name="minimumSize">
+          <size>
+           <width>280</width>
+           <height>0</height>
+          </size>
          </property>
+         <item>
+          <property name="text">
+           <string>On This Computer</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>On Remote Computer</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Disable Sound</string>
+          </property>
+         </item>
+        </widget>
         </item>
         <item>
-         <property name="text">
-          <string>On Remote Computer</string>
+        <widget class="KComboBox" name="kcfg_SoundSystem">
+         <property name="minimumSize">
+          <size>
+           <width>100</width>
+           <height>0</height>
+          </size>
          </property>
+         <item>
+          <property name="text">
+           <string>ALSA</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>PulseAudio</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>None</string>
+          </property>
+         </item>
+        </widget>
         </item>
-        <item>
-         <property name="text">
-          <string>Disable Sound</string>
-         </property>
-        </item>
-       </widget>
+       </layout>
       </item>
       <item row="4" column="0">
        <widget class="QLabel" name="performanceLabel">
@@ -655,6 +688,7 @@
   <tabstop>kcfg_ColorDepth</tabstop>
   <tabstop>kcfg_KeyboardLayout</tabstop>
   <tabstop>kcfg_Sound</tabstop>
+  <tabstop>kcfg_SoundSystem</tabstop>
   <tabstop>kcfg_Performance</tabstop>
   <tabstop>kcfg_RemoteFX</tabstop>
   <tabstop>kcfg_ShareMedia</tabstop>

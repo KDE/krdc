@@ -44,6 +44,8 @@ public:
     QString keyboardLayout() const;
     void setSound(int sound);
     int sound() const;
+    void setSoundSystem(int sound);
+    int soundSystem() const;
     void setConsole(bool console);
     bool console() const;
     void setExtraOptions(const QString &extraOptions);
@@ -64,6 +66,7 @@ private:
 
 private slots:
     void updateWidthHeight(int index);
+    void updateSoundSystem(int index);
 };
 
 #endif
