@@ -451,7 +451,6 @@ void RdpView::receivedStandardError()
         } else if(line.contains(QLatin1String("connection failure"))) {
             KMessageBox::error(0, i18n("Connection failed. You might have passed a wrong address or username."),
                                i18n("RDP Failure"));
-            connectionError();
             return;
         }
         i++;
