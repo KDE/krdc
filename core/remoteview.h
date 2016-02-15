@@ -175,6 +175,16 @@ public:
     virtual DotCursorState dotCursorState() const;
 
     /**
+     * Checks whether the backend supports the view only mode. The
+     * default implementation returns false.
+     * @return true if view-only mode is supported
+     * @see DotCursorState
+     * @see showDotCursor()
+     * @see dotCursorState()
+     */
+    virtual bool supportsViewOnly() const;
+
+    /**
      * Checks whether the view is in view-only mode. This means
      * that all input is ignored.
      */

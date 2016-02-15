@@ -286,7 +286,18 @@ bool RdpView::start()
 
         arguments << QStringLiteral("/parent-window:") + QString::number(m_container->winId());
         arguments << QStringLiteral("/bpp:") + QString::number((m_hostPreferences->colorDepth() + 1) * 8);
+
         arguments << QStringLiteral("/audio-mode:") + QString::number(m_hostPreferences->sound());
+        switch (m_hostPreferences->soundSystem()) {
+        case 0:
+            arguments << QStringLiteral("/sound:sys:alsa");
+            break;
+        case 1:
+            arguments << QStringLiteral("/sound:sys:pulse");
+            break;
+        default:
+            break;
+        }
 
         if (!m_hostPreferences->shareMedia().isEmpty()) {
             QStringList shareMedia;
@@ -434,6 +445,11 @@ void RdpView::receivedStandardError()
         if (line.contains(QLatin1String("X_ReparentWindow"))) {
             KMessageBox::error(0, i18n("The version of \"xfreerdp\" you are using is too old.\n"
                                        "xfreerdp 1.0.2 or greater is required."),
+                               i18n("RDP Failure"));
+            connectionError();
+            return;
+        } else if(line.contains(QLatin1String("connection failure"))) {
+            KMessageBox::error(0, i18n("Connection failed. You might have passed a wrong address or username."),
                                i18n("RDP Failure"));
             connectionError();
             return;

@@ -55,6 +55,8 @@ public:
     QSize sizeHint() const;
     virtual void setGrabAllKeys(bool grabAllKeys);
 
+    virtual bool supportsViewOnly() const;
+
     HostPreferences* hostPreferences();
 
 public slots:

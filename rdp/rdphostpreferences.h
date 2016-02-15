@@ -36,12 +36,16 @@ public:
     explicit RdpHostPreferences(KConfigGroup configGroup, QObject *parent = 0);
     ~RdpHostPreferences();
 
+    void setResolution(int resolution);
+    int resolution() const;
     void setColorDepth(int colorDepth);
     int colorDepth() const;
     void setKeyboardLayout(const QString &keyboardLayout);
     QString keyboardLayout() const;
     void setSound(int sound);
     int sound() const;
+    void setSoundSystem(int sound);
+    int soundSystem() const;
     void setConsole(bool console);
     bool console() const;
     void setExtraOptions(const QString &extraOptions);
@@ -62,6 +66,7 @@ private:
 
 private Q_SLOTS:
     void updateWidthHeight(int index);
+    void updateSoundSystem(int index);
 };
 
 #endif

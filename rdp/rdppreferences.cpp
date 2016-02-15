@@ -37,7 +37,7 @@ RdpPreferences::RdpPreferences(QWidget *parent, const QVariantList &args)
     // would need a lot of code duplication. find a solution, bit it's not
     // that important because you will not change this configuration each day...
     // see rdp/rdphostpreferences.cpp
-    rdpUi.resolutionComboBox->hide();
+    rdpUi.kcfg_Resolution->hide();
     rdpUi.resolutionDummyLabel->hide();
     rdpUi.kcfg_Height->setEnabled(true);
     rdpUi.kcfg_Width->setEnabled(true);

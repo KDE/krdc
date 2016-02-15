@@ -835,7 +835,7 @@ void MainWindow::updateActionStatus()
 
     setActionStatus(actionCollection()->action(QStringLiteral("view_only")),
                     enabled,
-                    true,
+                    view ? view->supportsViewOnly() : false,
                     view ? view->viewOnly() : false);
 
     setActionStatus(actionCollection()->action(QStringLiteral("show_local_cursor")),

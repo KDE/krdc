@@ -230,6 +230,11 @@ bool VncView::supportsLocalCursor() const
     return true;
 }
 
+bool VncView::supportsViewOnly() const
+{
+    return true;
+}
+
 void VncView::requestPassword(bool includingUsername)
 {
     qCritical(KRDC) << "request password";
