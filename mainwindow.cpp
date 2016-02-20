@@ -227,7 +227,7 @@ void MainWindow::loadAllPlugins()
 
 RemoteViewFactory *MainWindow::createPluginFromInfo(const KPluginInfo &info)
 {
-    RemoteViewFactory *plugin;
+    RemoteViewFactory *plugin = 0;
     KPluginLoader loader(info.libraryPath());
     KPluginFactory *factory = loader.factory();
     if (factory) {
