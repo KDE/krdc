@@ -64,7 +64,7 @@ protected:
 private:
     Ui::RdpPreferences rdpUi;
 
-private slots:
+private Q_SLOTS:
     void updateWidthHeight(int index);
     void updateSoundSystem(int index);
 };

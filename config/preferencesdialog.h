@@ -24,7 +24,9 @@
 #ifndef PREFERENCESDIALOG_H
 #define PREFERENCESDIALOG_H
 
-#include <KConfigDialog>
+#include <KConfigWidgets/KConfigDialog>
+
+#include <QDialogButtonBox>
 
 class KConfigSkeleton;
 class KPluginSelector;
@@ -38,8 +40,8 @@ public:
 
 protected:
     virtual bool isDefault();
-    
-private slots:
+
+private Q_SLOTS:
     void saveState();
     void loadDefaults();
     void settingsChanged();
@@ -47,6 +49,7 @@ private slots:
 private:
     KPluginSelector *m_pluginSelector;
     bool m_settingsChanged;
+    void enableButton(QDialogButtonBox::StandardButton standardButton);
 };
 
 #endif

@@ -23,29 +23,32 @@
 ****************************************************************************/
 
 #include "remotedesktopsmodel.h"
-#include "bookmarkmanager.h"
+#include "krdc_debug.h"
 
-#include <KStandardDirs>
-#include <KDebug>
-#include <KLocale>
+#include <KLocalizedString>
+#include<KCoreAddons/KFormat>
+#include <DNSSD/ServiceBrowser>
+#include <QDateTime>
+#include <QLoggingCategory>
+#include <QStandardPaths>
+#include <QObject>
 
-RemoteDesktopsModel::RemoteDesktopsModel(QObject *parent)
+RemoteDesktopsModel::RemoteDesktopsModel(QObject *parent, KBookmarkManager *manager)
         : QAbstractTableModel(parent)
 {
-    const QString file = KStandardDirs::locateLocal("data", "krdc/bookmarks.xml");
-    m_manager = KBookmarkManager::managerForFile(file, "krdc");
+    m_manager = manager;
     m_manager->setUpdate(true);
     connect(m_manager, SIGNAL(changed(QString,QString)), SLOT(bookmarksChanged()));
     buildModelFromBookmarkGroup(m_manager->root());
 
 #ifdef BUILD_ZEROCONF
     // Add RDP and NX if they start announcing via Zeroconf:
-    m_protocols["_rfb._tcp"] = "vnc";
+    m_protocols[QLatin1String("_rfb._tcp")] = QLatin1String("vnc");
 
-    zeroconfBrowser = new DNSSD::ServiceBrowser("_rfb._tcp", true);
+    zeroconfBrowser = new KDNSSD::ServiceBrowser(QLatin1String("_rfb._tcp"), true);
     connect(zeroconfBrowser, SIGNAL(finished()), this, SLOT(servicesChanged()));
     zeroconfBrowser->startBrowse();
-    kDebug(5010) << "Browsing for zeroconf hosts.";
+    qCDebug(KRDC) << "Browsing for zeroconf hosts.";
 #endif
 }
 
@@ -82,7 +85,7 @@ bool RemoteDesktopsModel::setData(const QModelIndex &index, const QVariant &valu
         RemoteDesktop rd = remoteDesktops.at(index.row());
         if (checked) {
             KBookmarkGroup root = m_manager->root();
-            root.addBookmark(rd.title, rd.url);
+            root.addBookmark(rd.title, QUrl(rd.url), QString());
             m_manager->emitChanged(root);
         } else {
             BookmarkManager::removeByUrl(m_manager, rd.url, true, rd.title);
@@ -107,12 +110,12 @@ QVariant RemoteDesktopsModel::data(const QModelIndex &index, int role) const
         case RemoteDesktopsModel::Title:
             return item.title;
         case RemoteDesktopsModel::LastConnected:
-            return QVariant(item.lastConnected.dateTime());
+            return QVariant(item.lastConnected);
         case RemoteDesktopsModel::VisitCount:
             return item.visits;
         case RemoteDesktopsModel::Created:
             if (item.created.isNull()) return QVariant();
-            return KGlobal::locale()->formatDateTime(item.created.toLocalZone(), KLocale::ShortDate);
+            return QLocale().toString(item.created.toLocalTime(), QLocale::FormatType::ShortFormat);
         case RemoteDesktopsModel::Source:
             switch (item.source) {
             case RemoteDesktop::Bookmarks:
@@ -143,19 +146,19 @@ QVariant RemoteDesktopsModel::data(const QModelIndex &index, int role) const
             }
         case RemoteDesktopsModel::LastConnected:
             if (!item.lastConnected.isNull()) {
-                return KGlobal::locale()->formatDateTime(item.lastConnected.toLocalZone(), KLocale::FancyLongDate);
+                return QLocale().toString(item.lastConnected.toLocalTime(), QLocale::FormatType::LongFormat);
             }
             break; // else show default tooltip
         case RemoteDesktopsModel::Created:
             if (!item.created.isNull()) {
-                return KGlobal::locale()->formatDateTime(item.created.toLocalZone(), KLocale::FancyLongDate);
+                return QLocale().toString(item.lastConnected.toLocalTime(), QLocale::FormatType::LongFormat);
             }
             break; // else show default tooltip
         default:
             break;
         }
         return item.url;  //use the url for the tooltip
-        
+
     case 10001: //url for dockwidget
         return item.url;
 
@@ -206,10 +209,10 @@ void RemoteDesktopsModel::removeAllItemsFromSources(RemoteDesktop::Sources sourc
 
 void RemoteDesktopsModel::bookmarksChanged()
 {
-    kDebug(5010);
     removeAllItemsFromSources(RemoteDesktop::Bookmarks | RemoteDesktop::History);
     buildModelFromBookmarkGroup(m_manager->root());
-    reset();
+    beginResetModel();
+    endResetModel();
 }
 
 // Danger Will Roobinson, confusing code ahead!
@@ -229,31 +232,31 @@ void RemoteDesktopsModel::buildModelFromBookmarkGroup(const KBookmarkGroup &grou
             bool newItem = index < 0; // do we need to create a new item?
 
             // we want to merge all copies of a url into one link, so if the item exists, update it
-            if (group.metaDataItem("krdc-history") == "historyfolder") {
+            if (group.metaDataItem(QLatin1String("krdc-history")) == QLatin1String("historyfolder")) {
                 // set source and favorite (will override later if needed)
                 item.source = RemoteDesktop::History;
                 item.favorite = false;
 
                 // since we are in the history folder collect statitics and add them
-                KDateTime connected = KDateTime();
-                KDateTime created = KDateTime();
+                QDateTime connected = QDateTime();
+                QDateTime created = QDateTime();
                 bool ok = false;
                 // first the created datetime
-                created.setTime_t(bm.metaDataItem("time_added").toLongLong(&ok));
+                created.setTime_t(bm.metaDataItem(QLatin1String("time_added")).toLongLong(&ok));
                 if (ok) (newItem ? item : remoteDesktops[index]).created = created;
                 // then the last visited datetime
                 ok = false;
-                connected.setTime_t(bm.metaDataItem("time_visited").toLongLong(&ok));
+                connected.setTime_t(bm.metaDataItem(QLatin1String("time_visited")).toLongLong(&ok));
                 if (ok) (newItem ? item : remoteDesktops[index]).lastConnected = connected;
                 // finally the visited count
                 ok = false;
-                int visits = bm.metaDataItem("visit_count").toInt(&ok);
+                int visits = bm.metaDataItem(QLatin1String("visit_count")).toInt(&ok);
                 if (ok) (newItem ? item : remoteDesktops[index]).visits = visits;
             } else {
                 if (newItem) {
                     // if this is a new item, just add the rest of the required data
-                    item.lastConnected = KDateTime();
-                    item.created = KDateTime();
+                    item.lastConnected = QDateTime();
+                    item.created = QDateTime();
                     item.visits = 0;
                     item.favorite = true;
                     item.source = RemoteDesktop::Bookmarks;
@@ -276,11 +279,11 @@ void RemoteDesktopsModel::buildModelFromBookmarkGroup(const KBookmarkGroup &grou
 void RemoteDesktopsModel::servicesChanged()
 {
     //redo list because it is easier than finding and removing one that disappeared
-    QList<DNSSD::RemoteService::Ptr> services = zeroconfBrowser->services();
-    KUrl url;
+    QList<KDNSSD::RemoteService::Ptr> services = zeroconfBrowser->services();
+    QUrl url;
     removeAllItemsFromSources(RemoteDesktop::Zeroconf);
-    foreach(DNSSD::RemoteService::Ptr service, services) {
-        url.setProtocol(m_protocols[service->type()].toLower());
+    foreach(KDNSSD::RemoteService::Ptr service, services) {
+        url.setScheme(m_protocols[service->type()].toLower());
         url.setHost(service->hostName());
         url.setPort(service->port());
 
@@ -290,14 +293,14 @@ void RemoteDesktopsModel::servicesChanged()
         if (!remoteDesktops.contains(item)) {
             item.title = service->serviceName();
             item.source = RemoteDesktop::Zeroconf;
-            item.created = KDateTime::currentLocalDateTime();
+            item.created = QDateTime::currentDateTime();
             item.favorite = false;
             item.visits = 0;
             remoteDesktops.append(item);
         }
     }
-    reset();
+    beginResetModel();
+    endResetModel();
 }
 #endif
 
-#include "remotedesktopsmodel.moc"

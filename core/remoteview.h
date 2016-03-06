@@ -25,16 +25,14 @@
 #ifndef REMOTEVIEW_H
 #define REMOTEVIEW_H
 
-#ifdef QTONLY
-    #include <QUrl>
-    #define KUrl QUrl
-    #define KRDCCORE_EXPORT
+#ifndef QTONLY
+    #include <KWallet/KWallet>
+    #include "krdccore_export.h"
 #else
-    #include <KDE/KUrl>
-    #include <KDE/KWallet/Wallet>
-    #include <krdc_export.h>
+    #define KRDCCORE_EXPORT
 #endif
 
+#include <QUrl>
 #include <QWidget>
 
 class HostPreferences;
@@ -248,25 +246,25 @@ public:
      * @see statusChanged()
      */
     virtual bool start() = 0;
-    
+
     /**
      * Called when the configuration is changed.
      * The default implementation does nothing.
      */
     virtual void updateConfiguration();
-    
+
     /**
      * @return screenshot of the view
      */
     virtual QPixmap takeScreenshot();
-    
+
 #ifndef QTONLY
     /**
      * Returns the current host preferences of this view.
      */
     virtual HostPreferences* hostPreferences() = 0;
 #endif
-    
+
     /**
      * Returns the current status of the connection.
      * @return the status of the connection
@@ -277,9 +275,9 @@ public:
     /**
      * @return the current url
      */
-    KUrl url();
+    QUrl url();
 
-public slots:
+public Q_SLOTS:
     /**
      * Called to enable or disable scaling.
      * Ignored if @ref supportsScaling() is false.
@@ -356,7 +354,7 @@ Q_SIGNALS:
      * Emitted when the view has a specific error.
      */
     void errorMessage(const QString &title, const QString &message);
- 
+
     /**
      * Emitted when the status of the view changed.
      * @param s the new status
@@ -411,7 +409,7 @@ protected:
     bool m_grabAllKeys;
     bool m_scale;
     bool m_keyboardIsGrabbed;
-    KUrl m_url;
+    QUrl m_url;
 
 #ifndef QTONLY
     QString readWalletPassword(bool fromUserNameOnly = false);

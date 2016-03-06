@@ -25,14 +25,9 @@
 #define VNCCLIENTTHREAD_H
 
 #ifdef QTONLY
-    #include <QDebug>
-    #define kDebug(n) qDebug()
-    #define kError(n) qDebug()
-    #define kBacktrace() ""
     #define i18n tr
 #else
-    #include <KDebug>
-    #include <KLocale>
+    #include <KLocalizedString>
 #endif
 
 #include "remoteview.h"
@@ -133,7 +128,7 @@ public:
     ColorDepth colorDepth() const;
     uint8_t *frameBuffer;
 
-signals:
+Q_SIGNALS:
     void imageUpdated(int x, int y, int w, int h);
     void gotCut(const QString &text);
     void passwordRequest(bool includingUsername = false);
@@ -147,7 +142,7 @@ signals:
      */
     void clientStateChanged(RemoteView::RemoteStatus status, const QString &details);
 
-public slots:
+public Q_SLOTS:
     void mouseEvent(int x, int y, int buttonMask);
     void keyEvent(int key, bool pressed);
     void clientCut(const QString &text);
@@ -230,7 +225,7 @@ private:
     void clientStateChange(RemoteView::RemoteStatus status, const QString &details);
     QString m_previousDetails;
 
-private slots:
+private Q_SLOTS:
     void checkOutputErrorMessage();
 };
 

@@ -30,6 +30,7 @@
 #include "rdphostpreferences.h"
 
 #include <QProcess>
+#include <QUrl>
 
 #define TCP_PORT_RDP 3389
 
@@ -43,7 +44,7 @@ class RdpView : public RemoteView
 
 public:
     explicit RdpView(QWidget *parent = 0,
-                     const KUrl &url = KUrl(),
+                     const QUrl &url = QUrl(),
                      KConfigGroup configGroup = KConfigGroup(),
                      const QString &user = QString(),
                      const QString &password = QString());
@@ -64,7 +65,7 @@ public:
     
     virtual QPixmap takeScreenshot();
 
-public slots:
+public Q_SLOTS:
     virtual void switchFullscreen(bool on);
 
 protected:
@@ -79,12 +80,13 @@ private:
     QString m_password;
 
     bool m_quitFlag;
-    QX11EmbedContainer *m_container;   // container for the xfreerdp window
+    QWindow *m_container;   // container for the xfreerdp window
+    QWidget *m_containerWidget; // Widget to contain the xfreerdp window.
     QProcess *m_process;               // xfreerdp process
 
     RdpHostPreferences *m_hostPreferences;
 
-private slots:
+private Q_SLOTS:
     void connectionOpened();           // called if xfreerdp started
     void connectionClosed();           // called if xfreerdp quits
     void connectionError();            // called if xfreerdp quits with error

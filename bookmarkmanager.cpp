@@ -22,36 +22,39 @@
 ****************************************************************************/
 
 #include "bookmarkmanager.h"
-
 #include "mainwindow.h"
+#include "krdc_debug.h"
 
-#include <KBookmarkMenu>
-#include <KStandardDirs>
-#include <KDebug>
+#include <KBookmarks/KBookmarkOwner>
+#include <KLocalizedString>
 
-BookmarkManager::BookmarkManager(KActionCollection *collection, KMenu *menu, MainWindow *parent)
+#include <QStandardPaths>
+
+BookmarkManager::BookmarkManager(KActionCollection *collection, QMenu *menu, MainWindow *parent)
         : QObject(parent),
         KBookmarkOwner(),
         m_mainWindow(parent)
 {
-    const QString file = KStandardDirs::locateLocal("data", "krdc/bookmarks.xml");
+    const QString dir = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QString(),
+                                               QStandardPaths::LocateOption::LocateDirectory);
+    const QString file = dir + QLatin1String("krdc/bookmarks.xml");
 
-    m_manager = KBookmarkManager::managerForFile(file, "krdc");
+    m_manager = KBookmarkManager::managerForFile(file, QLatin1String("krdc"));
     m_manager->setUpdate(true);
     m_bookmarkMenu = new KBookmarkMenu(m_manager, this, menu, collection);
 
     KBookmarkGroup root = m_manager->root();
     KBookmark bm = root.first();
     while (!bm.isNull()) {
-        if (bm.metaDataItem("krdc-history") == "historyfolder") // get it also when user renamed it
+        if (bm.metaDataItem(QLatin1String("krdc-history")) == QLatin1String("historyfolder")) // get it also when user renamed it
             break;
         bm = root.next(bm);
     }
 
     if (bm.isNull()) {
-        kDebug(5010) << "History folder not found. Create it.";
+        qCDebug(KRDC) << "History folder not found. Create it.";
         bm = m_manager->root().createNewFolder(i18n("History"));
-        bm.setMetaDataItem("krdc-history", "historyfolder");
+        bm.setMetaDataItem(QStringLiteral("krdc-history"), QStringLiteral("historyfolder"));
         m_manager->emitChanged();
     }
 
@@ -67,10 +70,10 @@ void BookmarkManager::addHistoryBookmark(RemoteView *view)
 {
     KBookmark bm = m_historyGroup.first();
     const QString urlString = urlForView(view);
-    const KUrl url = KUrl(urlString);
+    const QUrl url = QUrl::fromUserInput(urlString);
     while (!bm.isNull()) {
         if (bm.url() == url) {
-            kDebug(5010) << "Found URL. Move it at the history start.";
+            qCDebug(KRDC) << "Found URL. Move it at the history start.";
             m_historyGroup.moveBookmark(bm, KBookmark());
             bm.updateAccessMetadata();
             m_manager->emitChanged(m_historyGroup);
@@ -80,8 +83,8 @@ void BookmarkManager::addHistoryBookmark(RemoteView *view)
     }
 
     if (bm.isNull()) {
-        kDebug(5010) << "Add new history bookmark.";
-        bm = m_historyGroup.addBookmark(titleForUrl(urlString), urlString);
+        qCDebug(KRDC) << "Add new history bookmark.";
+        bm = m_historyGroup.addBookmark(titleForUrl(url), url, QString());
         bm.updateAccessMetadata();
         m_historyGroup.moveBookmark(bm, KBookmark());
         m_manager->emitChanged(m_historyGroup);
@@ -112,19 +115,18 @@ bool BookmarkManager::editBookmarkEntry() const
     return true;
 }
 
-QString BookmarkManager::currentUrl() const
+QUrl BookmarkManager::currentUrl() const
 {
     RemoteView *view = m_mainWindow->currentRemoteView();
     if (view)
-        return urlForView(view);
+        return QUrl(urlForView(view));
     else
-        return QString();
+        return QUrl();
 }
 
 QString BookmarkManager::urlForView(RemoteView *view) const
 {
-    return view->url().prettyUrl(KUrl::RemoveTrailingSlash);
-
+    return view->url().toDisplayString(QUrl::UrlFormattingOption::StripTrailingSlash);
 }
 
 QString BookmarkManager::currentTitle() const
@@ -132,10 +134,9 @@ QString BookmarkManager::currentTitle() const
     return titleForUrl(currentUrl());
 }
 
-QString BookmarkManager::titleForUrl(const QString &url) const
+QString BookmarkManager::titleForUrl(const QUrl &url) const
 {
-    return QUrl::fromPercentEncoding(url.toUtf8());
-
+    return url.toDisplayString(QUrl::UrlFormattingOption::StripTrailingSlash);
 }
 
 bool BookmarkManager::supportsTabs() const
@@ -143,24 +144,26 @@ bool BookmarkManager::supportsTabs() const
     return true;
 }
 
-QList<QPair<QString, QString> > BookmarkManager::currentBookmarkList() const
+QList<KBookmarkOwner::FutureBookmark> BookmarkManager::currentBookmarkList() const
 {
-    QList<QPair<QString, QString> > list;
+    QList<KBookmarkOwner::FutureBookmark>  list;
 
     QMapIterator<QWidget *, RemoteView *> iter(m_mainWindow->remoteViewList());
 
     while (iter.hasNext()) {
         RemoteView *next = iter.next().value();
-        const QString url = next->url().prettyUrl(KUrl::RemoveTrailingSlash);
-        list << QPair<QString, QString>(url, url);
+        const QUrl url = next->url();
+        const QString title = titleForUrl(url);
+        KBookmarkOwner::FutureBookmark bookmark = KBookmarkOwner::FutureBookmark(title, url, QString());
+        list.append(bookmark);
     }
 
     return list;
 }
 
-void BookmarkManager::addManualBookmark(const QString &url, const QString &text)
+void BookmarkManager::addManualBookmark(const QUrl &url, const QString &text)
 {
-    m_manager->root().addBookmark(url, text);
+    m_manager->root().addBookmark(text, url, QString());
     emit m_manager->emitChanged();
 }
 
@@ -178,7 +181,7 @@ const QStringList BookmarkManager::findBookmarkAddresses(const KBookmarkGroup &g
             bookmarkAddresses.append(findBookmarkAddresses(bm.toGroup(), url));
         }
 
-        if (bm.url() == url) {
+        if (bm.url() == QUrl::fromUserInput(url)) {
             bookmarkAddresses.append(bm.address());
         }
         bm = group.next(bm);
@@ -190,14 +193,14 @@ void BookmarkManager::removeByUrl(KBookmarkManager *manager, const QString &url,
 {
     foreach(const QString &address, findBookmarkAddresses(manager->root(), url)) {
         KBookmark bm = manager->findByAddress(address);
-        if (ignoreHistory && bm.parentGroup().metaDataItem("krdc-history") == "historyfolder") {
+        if (ignoreHistory && bm.parentGroup().metaDataItem(QLatin1String("krdc-history")) == QLatin1String("historyfolder")) {
             if (!updateTitle.isEmpty()) {
-                kDebug(5010) << "Update" << bm.fullText();
+                qCDebug(KRDC) << "Update" << bm.fullText();
                 bm.setFullText(updateTitle);
             }
         } else {
             if (!bm.isGroup()) { // please don't delete groups... happened in testing
-                kDebug(5010) << "Delete" << bm.fullText();
+                qCDebug(KRDC) << "Delete" << bm.fullText();
                 bm.parentGroup().deleteBookmark(bm);
             }
         }
@@ -211,9 +214,9 @@ void BookmarkManager::updateTitle(KBookmarkManager *manager, const QString &url,
     foreach(const QString &address, findBookmarkAddresses(manager->root(), url)) {
         KBookmark bm = manager->findByAddress(address);
         bm.setFullText(title);
-        kDebug(5010) << "Update" << bm.fullText();
+        qCDebug(KRDC) << "Update" << bm.fullText();
     }
     manager->emitChanged();
 }
 
-#include "bookmarkmanager.moc"
+

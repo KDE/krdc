@@ -26,17 +26,18 @@
 #include "rdpview.h"
 
 #include "settings.h"
+#include "krdc_debug.h"
 
-#include <KInputDialog>
 #include <KMessageBox>
 #include <KPasswordDialog>
 #include <KShell>
 
-#include <QX11EmbedContainer>
+#include <QWindow>
 #include <QEvent>
+#include <QInputDialog>
 
 RdpView::RdpView(QWidget *parent,
-                 const KUrl &url,
+                 const QUrl &url,
                  KConfigGroup configGroup,
                  const QString &user, const QString &password)
         : RemoteView(parent),
@@ -53,7 +54,8 @@ RdpView::RdpView(QWidget *parent,
         m_port = TCP_PORT_RDP;
     }
 
-    m_container = new QX11EmbedContainer(this);
+    m_container = new QWindow();
+    m_containerWidget = QWidget::createWindowContainer(m_container, this);
     m_container->installEventFilter(this);
     
     m_hostPreferences = new RdpHostPreferences(configGroup, this);
@@ -82,7 +84,7 @@ bool RdpView::eventFilter(QObject *obj, QEvent *event)
 
 QSize RdpView::framebufferSize()
 {
-    return m_container->minimumSizeHint();
+    return m_containerWidget->minimumSize();
 }
 
 QSize RdpView::sizeHint() const
@@ -92,12 +94,12 @@ QSize RdpView::sizeHint() const
 
 void RdpView::startQuitting()
 {
-    kDebug(5012) << "About to quit";
+    qCDebug(KRDC) << "About to quit";
     m_quitFlag = true;
     if (m_process) {
         m_process->terminate();
         m_process->waitForFinished(1000);
-        m_container->discardClient();
+        m_container->destroy();
     }
 }
 
@@ -108,15 +110,15 @@ bool RdpView::isQuitting()
 
 bool RdpView::start()
 {
-    m_container->show();
+    m_containerWidget->show();
 
     if (m_url.userName().isEmpty()) {
         QString userName;
         bool ok = false;
 
-        userName = KInputDialog::getText(i18n("Enter Username"),
+        userName = QInputDialog::getText(this, i18n("Enter Username"),
                                          i18n("Please enter the username you would like to use for login."),
-                                         Settings::defaultRdpUserName(), &ok, this);
+                                         QLineEdit::Normal, Settings::defaultRdpUserName(), &ok);
 
         if (ok) {
             m_url.setUserName(userName);
@@ -124,8 +126,8 @@ bool RdpView::start()
     }
 
     if (!m_url.userName().isEmpty()) {
-        const bool useLdapLogin = Settings::recognizeLdapLogins() && m_url.userName().contains('\\');
-        kDebug(5012) << "Is LDAP login:" << useLdapLogin << m_url.userName();
+        const bool useLdapLogin = Settings::recognizeLdapLogins() && m_url.userName().contains(QLatin1Char('\\'));
+        qCDebug(KRDC) << "Is LDAP login:" << useLdapLogin << m_url.userName();
 
         QString walletPassword = QString();
         if (m_hostPreferences->walletSupport()) {
@@ -148,53 +150,56 @@ bool RdpView::start()
 
     // Check the version of FreeRDP so we can use pre-1.1 switches if needed
     QProcess *xfreeRDPVersionCheck = new QProcess(this);
-    xfreeRDPVersionCheck->start("xfreerdp", QStringList("--version"));
+    xfreeRDPVersionCheck->start(QStringLiteral("xfreerdp"), QStringList(QStringLiteral("--version")));
     xfreeRDPVersionCheck->waitForFinished();
-    QString versionOutput = xfreeRDPVersionCheck->readAllStandardOutput();
+    QString versionOutput = QString::fromUtf8(xfreeRDPVersionCheck->readAllStandardOutput().constData());
     xfreeRDPVersionCheck->deleteLater();
 
     m_process = new QProcess(m_container);
 
     QStringList arguments;
 
+    int width, height;
+    if (m_hostPreferences->width() > 0) {
+        width = m_hostPreferences->width();
+        height = m_hostPreferences->height();
+    } else {
+        width = this->parentWidget()->size().width();
+        height = this->parentWidget()->size().height();
+    }
+    m_containerWidget->setFixedWidth(width);
+    m_containerWidget->setFixedHeight(height);
+    setMaximumSize(width, height);
     if (versionOutput.contains(QLatin1String(" 1.0"))) {
-        kDebug(5012) << "Use FreeRDP 1.0 compatible arguments";
+        qCDebug(KRDC) << "Use FreeRDP 1.0 compatible arguments";
 
-        int width, height;
-        if (m_hostPreferences->width() > 0) {
-            width = m_hostPreferences->width();
-            height = m_hostPreferences->height();
-        } else {
-            width = this->parentWidget()->size().width();
-            height = this->parentWidget()->size().height();
-        }
-        arguments << "-g" << QString::number(width) + 'x' + QString::number(height);
+        arguments << QStringLiteral("-g") << QString::number(width) + QLatin1Char('x') + QString::number(height);
 
-        arguments << "-k" << keymapToXfreerdp(m_hostPreferences->keyboardLayout());
+        arguments << QStringLiteral("-k") << keymapToXfreerdp(m_hostPreferences->keyboardLayout());
 
         if (!m_url.userName().isEmpty()) {
             // if username contains a domain, it needs to be set with another parameter
-            if (m_url.userName().contains('\\')) {
-                const QStringList splittedName = m_url.userName().split('\\');
-                arguments << "-d" << splittedName.at(0);
-                arguments << "-u" << splittedName.at(1);
+            if (m_url.userName().contains(QLatin1Char('\\'))) {
+                const QStringList splittedName = m_url.userName().split(QLatin1Char('\\'));
+                arguments << QStringLiteral("-d") << splittedName.at(0);
+                arguments << QStringLiteral("-u") << splittedName.at(1);
             } else {
-                arguments << "-u" << m_url.userName();
+                arguments << QStringLiteral("-u") << m_url.userName();
             }
         } else {
-            arguments << "-u" << "";
+            arguments << QStringLiteral("-u") << QStringLiteral("");
         }
 
-        arguments << "-D";  // request the window has no decorations
-        arguments << "-X" << QString::number(m_container->winId());
-        arguments << "-a" << QString::number((m_hostPreferences->colorDepth() + 1) * 8);
+        arguments << QStringLiteral("-D");  // request the window has no decorations
+        arguments << QStringLiteral("-X") << QString::number(m_container->winId());
+        arguments << QStringLiteral("-a") << QString::number((m_hostPreferences->colorDepth() + 1) * 8);
 
         switch (m_hostPreferences->sound()) {
         case 1:
-            arguments << "-o";
+            arguments << QStringLiteral("-o");
             break;
         case 0:
-            arguments << "--plugin" << "rdpsnd";
+            arguments << QStringLiteral("--plugin") << QStringLiteral("rdpsnd");
             break;
         case 2:
         default:
@@ -203,33 +208,35 @@ bool RdpView::start()
 
         if (!m_hostPreferences->shareMedia().isEmpty()) {
             QStringList shareMedia;
-            shareMedia << "--plugin" << "rdpdr" << "--data" << "disk:media:" + m_hostPreferences->shareMedia() << "--";
+            shareMedia << QStringLiteral("--plugin") << QStringLiteral("rdpdr")
+                       << QStringLiteral("--data") << QStringLiteral("disk:media:")
+                       + m_hostPreferences->shareMedia() << QStringLiteral("--");
             arguments += shareMedia;
         }
 
         QString performance;
         switch (m_hostPreferences->performance()) {
         case 0:
-            performance = 'm';
+            performance = QLatin1Char('m');
             break;
         case 1:
-            performance = 'b';
+            performance = QLatin1Char('b');
             break;
         case 2:
-            performance = 'l';
+            performance = QLatin1Char('l');
             break;
         default:
             break;
         }
 
-        arguments << "-x" << performance;
+        arguments << QStringLiteral("-x") << performance;
 
         if (m_hostPreferences->console()) {
-            arguments << "-0";
+            arguments << QStringLiteral("-0");
         }
 
         if (m_hostPreferences->remoteFX()) {
-            arguments << "--rfx";
+            arguments << QStringLiteral("--rfx");
         }
 
         if (!m_hostPreferences->extraOptions().isEmpty()) {
@@ -240,61 +247,53 @@ bool RdpView::start()
         // krdc has no support for certificate management yet; it would not be possbile to connect to any host:
         // "The host key for example.com has changed" ...
         // "Add correct host key in ~/.freerdp/known_hosts to get rid of this message."
-        arguments << "--ignore-certificate";
+        arguments << QStringLiteral("--ignore-certificate");
 
         // clipboard sharing is activated in KRDC; user can disable it at runtime
-        arguments << "--plugin" << "cliprdr";
+        arguments << QStringLiteral("--plugin") << QStringLiteral("cliprdr");
 
-        arguments << "-t" << QString::number(m_port);
+        arguments << QStringLiteral("-t") << QString::number(m_port);
         arguments << m_host;
 
-        kDebug(5012) << "Starting xfreerdp with arguments: " << arguments.join(" ");
+        qCDebug(KRDC) << "Starting xfreerdp with arguments: " << arguments.join(QStringLiteral(" "));
 
         arguments.removeLast(); // host must be last, remove and re-add it after the password
         if (!m_url.password().isNull())
-            arguments << "-p" << m_url.password();
+            arguments << QStringLiteral("-p") << m_url.password();
         arguments << m_host;
 
     } else {
-        kDebug(5012) << "Use FreeRDP 1.1+ compatible arguments";
+        qCDebug(KRDC) << "Use FreeRDP 1.1+ compatible arguments";
 
-        int width, height;
-        if (m_hostPreferences->width() > 0) {
-            width = m_hostPreferences->width();
-            height = m_hostPreferences->height();
-        } else {
-            width = this->parentWidget()->size().width();
-            height = this->parentWidget()->size().height();
-        }
-        arguments << "-decorations";
-        arguments << "/w:" + QString::number(width);
-        arguments << "/h:" + QString::number(height);
+        arguments << QStringLiteral("-decorations");
+        arguments << QStringLiteral("/w:") + QString::number(width);
+        arguments << QStringLiteral("/h:") + QString::number(height);
 
-        arguments << "/kbd:" + keymapToXfreerdp(m_hostPreferences->keyboardLayout());
+        arguments << QStringLiteral("/kbd:") + keymapToXfreerdp(m_hostPreferences->keyboardLayout());
 
         if (!m_url.userName().isEmpty()) {
             // if username contains a domain, it needs to be set with another parameter
-            if (m_url.userName().contains('\\')) {
-                const QStringList splittedName = m_url.userName().split('\\');
-                arguments << "/d:" + splittedName.at(0);
-                arguments << "/u:" + splittedName.at(1);
+            if (m_url.userName().contains(QLatin1Char('\\'))) {
+                const QStringList splittedName = m_url.userName().split(QLatin1Char('\\'));
+                arguments << QStringLiteral("/d:") + splittedName.at(0);
+                arguments << QStringLiteral("/u:") + splittedName.at(1);
             } else {
-                arguments << "/u:" + m_url.userName();
+                arguments << QStringLiteral("/u:") + m_url.userName();
             }
         } else {
-            arguments << "/u:";
+            arguments << QStringLiteral("/u:");
         }
 
-        arguments << "/parent-window:" + QString::number(m_container->winId());
-        arguments << "/bpp:" + QString::number((m_hostPreferences->colorDepth() + 1) * 8);
+        arguments << QStringLiteral("/parent-window:") + QString::number(m_container->winId());
+        arguments << QStringLiteral("/bpp:") + QString::number((m_hostPreferences->colorDepth() + 1) * 8);
 
-        arguments << "/audio-mode:" + QString::number(m_hostPreferences->sound());
+        arguments << QStringLiteral("/audio-mode:") + QString::number(m_hostPreferences->sound());
         switch (m_hostPreferences->soundSystem()) {
         case 0:
-            arguments << "/sound:sys:alsa";
+            arguments << QStringLiteral("/sound:sys:alsa");
             break;
         case 1:
-            arguments << "/sound:sys:pulse";
+            arguments << QStringLiteral("/sound:sys:pulse");
             break;
         default:
             break;
@@ -302,33 +301,33 @@ bool RdpView::start()
 
         if (!m_hostPreferences->shareMedia().isEmpty()) {
             QStringList shareMedia;
-            shareMedia << "/drive:media," + m_hostPreferences->shareMedia();
+            shareMedia << QStringLiteral("/drive:media,") + m_hostPreferences->shareMedia();
             arguments += shareMedia;
         }
 
         QString performance;
         switch (m_hostPreferences->performance()) {
         case 0:
-            performance = "modem";
+            performance = QStringLiteral("modem");
             break;
         case 1:
-            performance = "broadband";
+            performance = QStringLiteral("broadband");
             break;
         case 2:
-            performance = "lan";
+            performance = QStringLiteral("lan");
             break;
         default:
             break;
         }
 
-        arguments << "/network:" + performance;
+        arguments << QStringLiteral("/network:") + performance;
 
         if (m_hostPreferences->console()) {
-            arguments << "/admin";
+            arguments << QStringLiteral("/admin");
         }
 
         if (m_hostPreferences->remoteFX()) {
-            arguments << "/rfx";
+            arguments << QStringLiteral("/rfx");
         }
 
         if (!m_hostPreferences->extraOptions().isEmpty()) {
@@ -339,19 +338,19 @@ bool RdpView::start()
         // krdc has no support for certificate management yet; it would not be possbile to connect to any host:
         // "The host key for example.com has changed" ...
         // "Add correct host key in ~/.freerdp/known_hosts to get rid of this message."
-        arguments << "/cert-ignore";
+        arguments << QStringLiteral("/cert-ignore");
 
         // clipboard sharing is activated in KRDC; user can disable it at runtime
-        arguments << "+clipboard";
+        arguments << QStringLiteral("+clipboard");
 
-        arguments << "/port:" + QString::number(m_port);
-        arguments << "/v:" + m_host;
+        arguments << QStringLiteral("/port:") + QString::number(m_port);
+        arguments << QStringLiteral("/v:") + m_host;
 
-        kDebug(5012) << "Starting xfreerdp with arguments: " << arguments.join(" ");
+        qCDebug(KRDC) << "Starting xfreerdp with arguments: " << arguments.join(QStringLiteral(" "));
 
         //avoid printing the password in debug
         if (!m_url.password().isNull()) {
-            arguments << "/p:" + m_url.password();
+            arguments << QStringLiteral("/p:") + m_url.password();
         }
     }
 
@@ -360,10 +359,10 @@ bool RdpView::start()
     connect(m_process, SIGNAL(error(QProcess::ProcessError)), SLOT(processError(QProcess::ProcessError)));
     connect(m_process, SIGNAL(readyReadStandardError()), SLOT(receivedStandardError()));
     connect(m_process, SIGNAL(readyReadStandardOutput()), SLOT(receivedStandardOutput()));
-    connect(m_container, SIGNAL(clientClosed()), SLOT(connectionClosed()));
-    connect(m_container, SIGNAL(clientIsEmbedded()), SLOT(connectionOpened()));
+    connect(m_process, SIGNAL(finished(int, QProcess::ExitStatus)), SLOT(connectionClosed()));
+    connect(m_process, SIGNAL(started()), SLOT(connectionOpened()));
 
-    m_process->start("xfreerdp", arguments);
+    m_process->start(QStringLiteral("xfreerdp"), arguments);
 
     return true;
 }
@@ -376,19 +375,19 @@ HostPreferences* RdpView::hostPreferences()
 void RdpView::switchFullscreen(bool on)
 {
     if (on == true) {
-        m_container->grabKeyboard();
+        m_container->setKeyboardGrabEnabled(true);
     }
 }
 
 void RdpView::connectionOpened()
 {
-    kDebug(5012) << "Connection opened";
-    const QSize size = m_container->minimumSizeHint();
-    kDebug(5012) << "Size hint: " << size.width() << " " << size.height();
+    qCDebug(KRDC) << "Connection opened";
+    const QSize size = QSize(m_container->width(), m_container->height());
+    qCDebug(KRDC) << "Size hint: " << size.width() << " " << size.height();
     setStatus(Connected);
     setFixedSize(size);
     resize(size);
-    m_container->setFixedSize(size);
+    m_containerWidget->setFixedSize(size);
     emit framebufferSizeChanged(size.width(), size.height());
     emit connected();
     setFocus();
@@ -396,7 +395,7 @@ void RdpView::connectionOpened()
 
 QPixmap RdpView::takeScreenshot()
 {
-    return QPixmap::grabWindow(m_container->clientWinId());
+    return QPixmap::grabWindow(m_container->winId());
 }
 
 void RdpView::connectionClosed()
@@ -414,7 +413,7 @@ void RdpView::connectionError()
 
 void RdpView::processError(QProcess::ProcessError error)
 {
-    kDebug(5012) << error;
+    qCDebug(KRDC) << error;
     if (m_quitFlag) // do not try to show error messages while quitting (prevent crashes)
         return;
 
@@ -430,11 +429,11 @@ void RdpView::processError(QProcess::ProcessError error)
 
 void RdpView::receivedStandardError()
 {
-    const QString output(m_process->readAllStandardError());
-    kDebug(5012) << output;
+    const QString output = QString::fromUtf8(m_process->readAllStandardError().constData());
+    qCDebug(KRDC) << output;
     QString line;
     int i = 0;
-    while (!(line = output.section('\n', i, i)).isEmpty()) {
+    while (!(line = output.section(QLatin1Char('\n'), i, i)).isEmpty()) {
 
         // the following error is issued by freerdp because of a bug in freerdp 1.0.1 and below;
         // see: https://github.com/FreeRDP/FreeRDP/pull/576
@@ -452,7 +451,6 @@ void RdpView::receivedStandardError()
         } else if(line.contains(QLatin1String("connection failure"))) {
             KMessageBox::error(0, i18n("Connection failed. You might have passed a wrong address or username."),
                                i18n("RDP Failure"));
-            connectionError();
             return;
         }
         i++;
@@ -461,9 +459,9 @@ void RdpView::receivedStandardError()
 
 void RdpView::receivedStandardOutput()
 {
-    const QString output(m_process->readAllStandardOutput());
-    kDebug(5012) << output;
-    QStringList splittedOutput = output.split('\n');
+    const QString output = QString::fromUtf8(m_process->readAllStandardOutput().constData());
+    qCDebug(KRDC) << output;
+    QStringList splittedOutput = output.split(QLatin1Char('\n'));
     Q_FOREACH (const QString &line, splittedOutput) {
         // full xfreerdp message: "transport_connect: getaddrinfo (Name or service not known)"
         if (line.contains(QLatin1String("Name or service not known"))) {
@@ -519,48 +517,48 @@ QHash<QString, QString> RdpView::initKeymapToXfreerdp()
     QHash<QString, QString> keymapToXfreerdpHash;
 
     // Keyboard Layouts
-    keymapToXfreerdpHash["ar"] = "0x00000401";  // Arabic (101)
+    keymapToXfreerdpHash[QStringLiteral("ar")] = QStringLiteral("0x00000401");  // Arabic (101)
     // keymapToXfreerdpHash[""] = "0x00000402";  // Bulgarian
     // keymapToXfreerdpHash[""] = "0x00000404";  // Chinese (Traditional) - US Keyboard
-    keymapToXfreerdpHash["cs"] = "0x00000405";  // Czech
-    keymapToXfreerdpHash["da"] = "0x00000406";  // Danish
-    keymapToXfreerdpHash["fo"] = "0x00000406";  // Danish, Faroese; legacy for rdesktop
-    keymapToXfreerdpHash["de"] = "0x00000407";  // German
+    keymapToXfreerdpHash[QStringLiteral("cs")] = QStringLiteral("0x00000405");  // Czech
+    keymapToXfreerdpHash[QStringLiteral("da")] = QStringLiteral("0x00000406");  // Danish
+    keymapToXfreerdpHash[QStringLiteral("fo")] = QStringLiteral("0x00000406");  // Danish, Faroese; legacy for rdesktop
+    keymapToXfreerdpHash[QStringLiteral("de")] = QStringLiteral("0x00000407");  // German
     // keymapToXfreerdpHash[""] = "0x00000408";  // Greek
-    keymapToXfreerdpHash["en-us"] = "0x00000409";  // US
-    keymapToXfreerdpHash["es"] = "0x0000040A";  // Spanish
-    keymapToXfreerdpHash["fi"] = "0x0000040B";  // Finnish
-    keymapToXfreerdpHash["fr"] = "0x0000040C";  // French
-    keymapToXfreerdpHash["he"] = "0x0000040D";  // Hebrew
-    keymapToXfreerdpHash["hu"] = "0x0000040E";  // Hungarian
-    keymapToXfreerdpHash["is"] = "0x0000040F";  // Icelandic
-    keymapToXfreerdpHash["it"] = "0x00000410";  // Italian
-    keymapToXfreerdpHash["ja"] = "0x00000411";  // Japanese
-    keymapToXfreerdpHash["ko"] = "0x00000412";  // Korean
-    keymapToXfreerdpHash["nl"] = "0x00000413";  // Dutch
-    keymapToXfreerdpHash["no"] = "0x00000414";  // Norwegian
-    keymapToXfreerdpHash["pl"] = "0x00000415";  // Polish (Programmers)
-    keymapToXfreerdpHash["pt-br"] = "0x00000416";  // Portuguese (Brazilian ABNT)
+    keymapToXfreerdpHash[QStringLiteral("en-us")] = QStringLiteral("0x00000409");  // US
+    keymapToXfreerdpHash[QStringLiteral("es")] = QStringLiteral("0x0000040A");  // Spanish
+    keymapToXfreerdpHash[QStringLiteral("fi")] = QStringLiteral("0x0000040B");  // Finnish
+    keymapToXfreerdpHash[QStringLiteral("fr")] = QStringLiteral("0x0000040C");  // French
+    keymapToXfreerdpHash[QStringLiteral("he")] = QStringLiteral("0x0000040D");  // Hebrew
+    keymapToXfreerdpHash[QStringLiteral("hu")] = QStringLiteral("0x0000040E");  // Hungarian
+    keymapToXfreerdpHash[QStringLiteral("is")] = QStringLiteral("0x0000040F");  // Icelandic
+    keymapToXfreerdpHash[QStringLiteral("it")] = QStringLiteral("0x00000410");  // Italian
+    keymapToXfreerdpHash[QStringLiteral("ja")] = QStringLiteral("0x00000411");  // Japanese
+    keymapToXfreerdpHash[QStringLiteral("ko")] = QStringLiteral("0x00000412");  // Korean
+    keymapToXfreerdpHash[QStringLiteral("nl")] = QStringLiteral("0x00000413");  // Dutch
+    keymapToXfreerdpHash[QStringLiteral("no")] = QStringLiteral("0x00000414");  // Norwegian
+    keymapToXfreerdpHash[QStringLiteral("pl")] = QStringLiteral("0x00000415");  // Polish (Programmers)
+    keymapToXfreerdpHash[QStringLiteral("pt-br")] = QStringLiteral("0x00000416");  // Portuguese (Brazilian ABNT)
     // keymapToXfreerdpHash[""] = "0x00000418";  // Romanian
-    keymapToXfreerdpHash["ru"] = "0x00000419";  // Russian
-    keymapToXfreerdpHash["hr"] = "0x0000041A";  // Croatian
+    keymapToXfreerdpHash[QStringLiteral("ru")] = QStringLiteral("0x00000419");  // Russian
+    keymapToXfreerdpHash[QStringLiteral("hr")] = QStringLiteral("0x0000041A");  // Croatian
     // keymapToXfreerdpHash[""] = "0x0000041B";  // Slovak
     // keymapToXfreerdpHash[""] = "0x0000041C";  // Albanian
-    keymapToXfreerdpHash["sv"] = "0x0000041D";  // Swedish
-    keymapToXfreerdpHash["th"] = "0x0000041E";  // Thai Kedmanee
-    keymapToXfreerdpHash["tr"] = "0x0000041F";  // Turkish Q
+    keymapToXfreerdpHash[QStringLiteral("sv")] = QStringLiteral("0x0000041D");  // Swedish
+    keymapToXfreerdpHash[QStringLiteral("th")] = QStringLiteral("0x0000041E");  // Thai Kedmanee
+    keymapToXfreerdpHash[QStringLiteral("tr")] = QStringLiteral("0x0000041F");  // Turkish Q
     // keymapToXfreerdpHash[""] = "0x00000420";  // Urdu
     // keymapToXfreerdpHash[""] = "0x00000422";  // Ukrainian
     // keymapToXfreerdpHash[""] = "0x00000423";  // Belarusian
-    keymapToXfreerdpHash["sl"] = "0x00000424";  // Slovenian
-    keymapToXfreerdpHash["et"] = "0x00000425";  // Estonian
-    keymapToXfreerdpHash["lv"] = "0x00000426";  // Latvian
-    keymapToXfreerdpHash["lt"] = "0x00000427";  // Lithuanian IBM
+    keymapToXfreerdpHash[QStringLiteral("sl")] = QStringLiteral("0x00000424");  // Slovenian
+    keymapToXfreerdpHash[QStringLiteral("et")] = QStringLiteral("0x00000425");  // Estonian
+    keymapToXfreerdpHash[QStringLiteral("lv")] = QStringLiteral("0x00000426");  // Latvian
+    keymapToXfreerdpHash[QStringLiteral("lt")] = QStringLiteral("0x00000427");  // Lithuanian IBM
     // keymapToXfreerdpHash[""] = "0x00000429";  // Farsi
     // keymapToXfreerdpHash[""] = "0x0000042A";  // Vietnamese
     // keymapToXfreerdpHash[""] = "0x0000042B";  // Armenian Eastern
     // keymapToXfreerdpHash[""] = "0x0000042C";  // Azeri Latin
-    keymapToXfreerdpHash["mk"] = "0x0000042F";  // FYRO Macedonian
+    keymapToXfreerdpHash[QStringLiteral("mk")] = QStringLiteral("0x0000042F");  // FYRO Macedonian
     // keymapToXfreerdpHash[""] = "0x00000437";  // Georgian
     // keymapToXfreerdpHash[""] = "0x00000438";  // Faeroese
     // keymapToXfreerdpHash[""] = "0x00000439";  // Devanagari - INSCRIPT
@@ -586,12 +584,12 @@ QHash<QString, QString> RdpView::initKeymapToXfreerdp()
     // keymapToXfreerdpHash[""] = "0x0000046E";  // Luxembourgish
     // keymapToXfreerdpHash[""] = "0x00000481";  // Maori
     // keymapToXfreerdpHash[""] = "0x00000804";  // Chinese (Simplified) - US Keyboard
-    keymapToXfreerdpHash["de-ch"] = "0x00000807";  // Swiss German
-    keymapToXfreerdpHash["en-gb"] = "0x00000809";  // United Kingdom
+    keymapToXfreerdpHash[QStringLiteral("de-ch")] = QStringLiteral("0x00000807");  // Swiss German
+    keymapToXfreerdpHash[QStringLiteral("en-gb")] = QStringLiteral("0x00000809");  // United Kingdom
     // keymapToXfreerdpHash[""] = "0x0000080A";  // Latin American
-    keymapToXfreerdpHash["fr-be"] = "0x0000080C";  // Belgian French
-    keymapToXfreerdpHash["nl-be"] = "0x00000813";  // Belgian (Period)
-    keymapToXfreerdpHash["pt"] = "0x00000816";  // Portuguese
+    keymapToXfreerdpHash[QStringLiteral("fr-be")] = QStringLiteral("0x0000080C");  // Belgian French
+    keymapToXfreerdpHash[QStringLiteral("nl-be")] = QStringLiteral("0x00000813");  // Belgian (Period)
+    keymapToXfreerdpHash[QStringLiteral("pt")] = QStringLiteral("0x00000816");  // Portuguese
     // keymapToXfreerdpHash[""] = "0x0000081A";  // Serbian (Latin)
     // keymapToXfreerdpHash[""] = "0x0000082C";  // Azeri Cyrillic
     // keymapToXfreerdpHash[""] = "0x0000083B";  // Swedish with Sami
@@ -599,8 +597,8 @@ QHash<QString, QString> RdpView::initKeymapToXfreerdp()
     // keymapToXfreerdpHash[""] = "0x0000085D";  // Inuktitut Latin
     // keymapToXfreerdpHash[""] = "0x00000C0C";  // Canadian French (legacy)
     // keymapToXfreerdpHash[""] = "0x00000C1A";  // Serbian (Cyrillic)
-    keymapToXfreerdpHash["fr-ca"] = "0x00001009";  // Canadian French
-    keymapToXfreerdpHash["fr-ch"] = "0x0000100C";  // Swiss French
+    keymapToXfreerdpHash[QStringLiteral("fr-ca")] = QStringLiteral("0x00001009");  // Canadian French
+    keymapToXfreerdpHash[QStringLiteral("fr-ch")] = QStringLiteral("0x0000100C");  // Swiss French
     // keymapToXfreerdpHash[""] = "0x0000141A";  // Bosnian
     // keymapToXfreerdpHash[""] = "0x00001809";  // Irish
     // keymapToXfreerdpHash[""] = "0x0000201A";  // Bosnian Cyrillic
@@ -611,7 +609,7 @@ QHash<QString, QString> RdpView::initKeymapToXfreerdp()
     // keymapToXfreerdpHash[""] = "0x00010405";  // Czech (QWERTY)
     // keymapToXfreerdpHash[""] = "0x00010407";  // German (IBM)
     // keymapToXfreerdpHash[""] = "0x00010408";  // Greek (220)
-    keymapToXfreerdpHash["en-dv"] = "0x00010409";  // United States-Dvorak
+    keymapToXfreerdpHash[QStringLiteral("en-dv")] = QStringLiteral("0x00010409");  // United States-Dvorak
     // keymapToXfreerdpHash[""] = "0x0001040A";  // Spanish Variation
     // keymapToXfreerdpHash[""] = "0x0001040E";  // Hungarian 101-key
     // keymapToXfreerdpHash[""] = "0x00010410";  // Italian (142)

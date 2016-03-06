@@ -23,29 +23,28 @@
 
 #include "testviewfactory.h"
 
-#include <KDebug>
-#include <KLocale>
+#include <KLocalizedString>
 
-KRDC_PLUGIN_EXPORT(TestViewFactory)
+K_PLUGIN_FACTORY_WITH_JSON(KrdcFactory, "krdc_test.json", registerPlugin<TestViewFactory>();)
 
 TestViewFactory::TestViewFactory(QObject *parent, const QVariantList &args)
         : RemoteViewFactory(parent)
 {
     Q_UNUSED(args);
 
-    KGlobal::locale()->insertCatalog("krdc");
+    KLocalizedString::setApplicationDomain("krdc");
 }
 
 TestViewFactory::~TestViewFactory()
 {
 }
 
-bool TestViewFactory::supportsUrl(const KUrl &url) const
+bool TestViewFactory::supportsUrl(const QUrl &url) const
 {
-    return (url.scheme().compare("test", Qt::CaseInsensitive) == 0);
+    return (url.scheme().compare(QLatin1String("test"), Qt::CaseInsensitive) == 0);
 }
 
-RemoteView *TestViewFactory::createView(QWidget *parent, const KUrl &url, KConfigGroup configGroup)
+RemoteView *TestViewFactory::createView(QWidget *parent, const QUrl &url, KConfigGroup configGroup)
 {
     return new TestView(parent, url, configGroup);
 }
@@ -54,29 +53,29 @@ HostPreferences *TestViewFactory::createHostPreferences(KConfigGroup configGroup
 {
     Q_UNUSED(configGroup);
     Q_UNUSED(parent);
-    
+
     return 0;
 }
 
 QString TestViewFactory::scheme() const
 {
-    return "test";
+    return QLatin1String("test");
 }
 
 QString TestViewFactory::connectActionText() const
 {
-    return ("New Test Connection..."); // no i18n required, just internal test plugin!
+    return QLatin1String("New Test Connection..."); // no i18n required, just internal test plugin!
 }
 
 QString TestViewFactory::connectButtonText() const
 {
-    return ("KRDC Test Connection"); // no i18n required, just internal test plugin!
+    return QLatin1String("KRDC Test Connection"); // no i18n required, just internal test plugin!
 }
 
 QString TestViewFactory::connectToolTipText() const
 {
-    return ("<html>Enter the address here. Port is optional.<br />"
+    return QLatin1String("<html>Enter the address here. Port is optional.<br />"
             "<i>Example: testserver (host)</i></html>"); // no i18n required, just internal test plugin!
 }
 
-#include "moc_testviewfactory.cpp"
+#include "testviewfactory.moc"

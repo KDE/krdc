@@ -24,12 +24,10 @@
 #ifndef TESTVIEW_H
 #define TESTVIEW_H
 
-#include "testview.h"
-
 #include "remoteview.h"
 #include "hostpreferences.h"
 
-#include <KConfigGroup>
+#include <KConfigCore/KConfigGroup>
 
 class TestHostPreferences;
 
@@ -38,7 +36,7 @@ class TestView : public RemoteView
     Q_OBJECT
 
 public:
-    explicit TestView(QWidget *parent = 0, const KUrl &url = KUrl(), KConfigGroup configGroup = KConfigGroup());
+    explicit TestView(QWidget *parent = 0, const QUrl &url = QUrl(), KConfigGroup configGroup = KConfigGroup());
 
     virtual ~TestView();
 
@@ -49,12 +47,12 @@ public:
     virtual bool start();
     HostPreferences* hostPreferences();
 
-public slots:
+public Q_SLOTS:
     virtual void switchFullscreen(bool on);
 
 protected:
     bool eventFilter(QObject *obj, QEvent *event);
-    
+
 private:
     TestHostPreferences *m_hostPreferences;
 };
@@ -66,7 +64,7 @@ class TestHostPreferences : public HostPreferences
 public:
     explicit TestHostPreferences(KConfigGroup configGroup, QObject *parent = 0)
         : HostPreferences(configGroup, parent) {}
-        
+
 protected:
     virtual QWidget* createProtocolSpecificConfigPage() { return 0; };
 };

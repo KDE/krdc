@@ -1,5 +1,5 @@
 
-add_definitions(-DKDE_DEFAULT_DEBUG_AREA=5010)
+include(GenerateExportHeader)
 
 set(krdccore_SRCS
     remoteviewfactory.cpp
@@ -7,13 +7,28 @@ set(krdccore_SRCS
     hostpreferences.cpp
 )
 
-kde4_add_kcfg_files(krdccore_SRCS settings.kcfgc)
+kconfig_add_kcfg_files(krdccore_SRCS settings.kcfgc)
 
-kde4_add_library(krdccore SHARED ${krdccore_SRCS})
+ecm_qt_declare_logging_category(krdccore_SRCS HEADER krdc_debug.h IDENTIFIER KRDC CATEGORY_NAME KRDC)
 
-target_link_libraries(krdccore ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS})
+add_library(krdccore SHARED ${krdccore_SRCS})
 
-set_target_properties(krdccore PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
+kcoreaddons_desktop_to_json(krdccore krdc_plugin.desktop)
+generate_export_header(krdccore BASE_NAME krdccore)
+
+target_link_libraries(krdccore
+    Qt5::Core
+    KF5::Wallet
+    KF5::ConfigCore
+    KF5::CoreAddons
+    KF5::WidgetsAddons
+    KF5::I18n
+    KF5::ConfigGui
+    KF5::Completion
+    Qt5::Gui
+    Qt5::Widgets)
+
+set_target_properties(krdccore PROPERTIES VERSION ${KRDC_VERSION} SOVERSION ${KRDC_SOVERSION})
 
 install(TARGETS krdccore ${INSTALL_TARGETS_DEFAULT_ARGS})
 
@@ -25,5 +40,5 @@ set(krdccore_HDRS
 )
 
 install(FILES ${krdccore_HDRS} DESTINATION ${INCLUDE_INSTALL_DIR}/krdc COMPONENT Devel)
-install(FILES krdc_plugin.desktop DESTINATION ${SERVICETYPES_INSTALL_DIR})
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/krdccore_export.h DESTINATION ${KDE_INSTALL_INCLUDEDIR} COMPONENT Devel)
 install(FILES krdc.kcfg DESTINATION ${KCFG_INSTALL_DIR})

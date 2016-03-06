@@ -34,10 +34,6 @@ public:
     QString displayText(const QVariant &value, const QLocale& locale) const;
     void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const;
     QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const;
-signals:
-
-public slots:
-
 };
 
 #endif // CONNECTIONDELEGATE_H

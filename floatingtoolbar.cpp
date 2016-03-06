@@ -24,16 +24,14 @@
 ****************************************************************************/
 
 #include "floatingtoolbar.h"
-
-#include <KDebug>
-#include <KGlobalSettings>
+#include "krdc_debug.h"
 
 #include <QApplication>
 #include <QBitmap>
-#include <QDesktopWidget>
 #include <QMouseEvent>
 #include <QPainter>
 #include <QTimer>
+#include <QStyle>
 
 static const int actionIconSize = 22;
 static const int toolBarRBMargin = 2;
@@ -161,7 +159,7 @@ void FloatingToolBar::showAndAnimate()
     d->animTimer->start(20);
 
     // This permits to show the toolbar for a while when going full screen.
-    if (!d->sticky) 
+    if (!d->sticky)
         d->autoHideTimer->start(initialAutoHideTimeout);
 }
 
@@ -181,7 +179,7 @@ void FloatingToolBar::hideAndDestroy()
 
 void FloatingToolBar::hide()
 {
-    if (underMouse()) 
+    if (underMouse())
         return;
 
     if (d->visible) {
@@ -216,7 +214,7 @@ bool FloatingToolBar::eventFilter(QObject *obj, QEvent *e)
             showAndAnimate();
             return true;
         }
-        
+
         // if anchorWidget changed geometry reposition toolbar
         d->animTimer->stop();
         if ((d->animState == Hiding || !d->visible) && d->toDelete)
@@ -283,14 +281,14 @@ void FloatingToolBar::enterEvent(QEvent *e)
     // Stop the autohide timer while the mouse is inside
     d->autoHideTimer->stop();
 
-    if (!d->visible) 
+    if (!d->visible)
         showAndAnimate();
     QToolBar::enterEvent(e);
 }
 
 void FloatingToolBar::leaveEvent(QEvent *e)
 {
-    if (!d->sticky) 
+    if (!d->sticky)
         d->autoHideTimer->start(autoHideTimeout);
     QToolBar::leaveEvent(e);
 }
@@ -308,7 +306,7 @@ void FloatingToolBar::wheelEvent(QWheelEvent *e)
     e->accept();
 
     const qreal diff = e->delta() / 100.0 / 15.0;
-//     kDebug(5010) << diff;
+//    qCDebug(KRDC) << diff;
     if (((d->opacity <= 1) && (diff > 0)) || ((d->opacity >= 0) && (diff < 0)))
         d->opacity += diff;
 
@@ -449,7 +447,7 @@ QPoint FloatingToolBarPrivate::getOuterPoint() const
 
 void FloatingToolBar::animate()
 {
-    if (KGlobalSettings::graphicEffectsLevel() & KGlobalSettings::SimpleAnimationEffects) {
+    if (style()->styleHint(QStyle::SH_Widget_Animate, 0, this)) {
         // move currentPosition towards endPosition
         int dX = d->endPosition.x() - d->currentPosition.x();
         int dY = d->endPosition.y() - d->currentPosition.y();
@@ -478,9 +476,8 @@ void FloatingToolBar::animate()
             d->animState = Still;
             break;
         default:
-            kDebug(5010) << "Illegal state";
+            qCDebug(KRDC) << "Illegal state";
         }
     }
 }
 
-#include "floatingtoolbar.moc"

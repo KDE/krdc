@@ -27,16 +27,14 @@
 
 #include "ui_vncpreferences.h"
 
-#include <KDebug>
-
-KRDC_PLUGIN_EXPORT(VncPreferences)
+K_PLUGIN_FACTORY_WITH_JSON(KrdcKcmFactory, "krdc_vnc_config.json", registerPlugin<VncPreferences>();)
 
 VncPreferences::VncPreferences(QWidget *parent, const QVariantList &args)
-        : KCModule(KrdcFactory::componentData(), parent, args)
+        : KCModule(parent, args)
 {
     Ui::VncPreferences vncUi;
     vncUi.setupUi(this);
-    
+
     // copying the RDP preferences... need to create generic code for the plugins.
     vncUi.resolutionDummyLabel->hide();
     vncUi.resolutionComboBox->hide();

@@ -25,14 +25,15 @@
 #define TABBEDVIEWWIDGET_H
 
 #include <QAbstractItemModel>
-#include <KTabWidget>
+#include <QTabWidget>
+#include <QMouseEvent>
 
 class TabbedViewWidgetModel : public QAbstractItemModel
 {
     friend class TabbedViewWidget;
     Q_OBJECT
 public:
-    explicit TabbedViewWidgetModel(KTabWidget *modelTarget);
+    explicit TabbedViewWidgetModel(QTabWidget *modelTarget);
     QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const;
     QModelIndex parent(const QModelIndex &index) const;
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
@@ -44,15 +45,16 @@ protected:
     void emitLayoutAboutToBeChanged();
     void emitLayoutChanged();
     void emitDataChanged(int index);
+
 private:
-    KTabWidget *m_tabWidget;
+    QTabWidget *m_tabWidget;
 };
 
-class TabbedViewWidget : public KTabWidget
+class TabbedViewWidget : public QTabWidget
 {
     Q_OBJECT
 public:
-    explicit TabbedViewWidget(QWidget *parent = 0, Qt::WFlags flags = 0);
+    explicit TabbedViewWidget(QWidget *parent = 0);
     virtual ~TabbedViewWidget();
     TabbedViewWidgetModel* getModel();
     int addTab(QWidget *page, const QString &label);
@@ -63,8 +65,17 @@ public:
     void removePage(QWidget *page);
     void moveTab(int from, int to);
     void setTabText(int index, const QString &label);
+
+Q_SIGNALS:
+    void mouseMiddleClick(int index);
+
+protected:
+    void mouseDoubleClickEvent(QMouseEvent * event) Q_DECL_OVERRIDE;
+    void mouseReleaseEvent(QMouseEvent *) Q_DECL_OVERRIDE;
+
 private:
     TabbedViewWidgetModel *m_model;
+    bool isEmptyTabbarSpace(const QPoint &point) const;
 };
 
 #endif // FULLSCREENWINDOW_H

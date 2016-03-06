@@ -23,29 +23,27 @@
 
 #include "konsoleviewfactory.h"
 
-#include <KDebug>
-#include <KLocale>
+#include <KLocalizedString>
 
-KRDC_PLUGIN_EXPORT(KonsoleViewFactory)
+K_PLUGIN_FACTORY_WITH_JSON(KrdcFactory, "krdc_konsole.json", registerPlugin<KonsoleViewFactory>();)
 
 KonsoleViewFactory::KonsoleViewFactory(QObject *parent, const QVariantList &args)
         : RemoteViewFactory(parent)
 {
     Q_UNUSED(args);
-
-    KGlobal::locale()->insertCatalog("krdc");
+    KLocalizedString::setApplicationDomain("krdc");
 }
 
 KonsoleViewFactory::~KonsoleViewFactory()
 {
 }
 
-bool KonsoleViewFactory::supportsUrl(const KUrl &url) const
+bool KonsoleViewFactory::supportsUrl(const QUrl &url) const
 {
     return (url.scheme().compare("konsole", Qt::CaseInsensitive) == 0);
 }
 
-RemoteView *KonsoleViewFactory::createView(QWidget *parent, const KUrl &url, KConfigGroup configGroup)
+RemoteView *KonsoleViewFactory::createView(QWidget *parent, const QUrl &url, KConfigGroup configGroup)
 {
     return new KonsoleView(parent, url, configGroup);
 }
@@ -54,7 +52,7 @@ HostPreferences *KonsoleViewFactory::createHostPreferences(KConfigGroup configGr
 {
     Q_UNUSED(configGroup);
     Q_UNUSED(parent);
-    
+
     return 0;
 }
 
@@ -79,4 +77,4 @@ QString KonsoleViewFactory::connectToolTipText() const
                 "<i>Example: konsoleserver (host)</i></html>");
 }
 
-#include "moc_konsoleviewfactory.cpp"
+#include "konsoleviewfactory.moc"

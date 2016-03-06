@@ -22,6 +22,7 @@
 ****************************************************************************/
 
 #include "vncclientthread.h"
+#include "krdc_debug.h"
 
 #include <cerrno>
 #include <netinet/in.h>
@@ -33,7 +34,7 @@
 #include <QTimer>
 
 //for detecting intel AMT KVM vnc server
-static const QString INTEL_AMT_KVM_STRING= "Intel(r) AMT KVM";
+static const QString INTEL_AMT_KVM_STRING= QLatin1String("Intel(r) AMT KVM");
 static QThreadStorage<VncClientThread **> instances;
 
 // Dispatch from this static callback context to the member context.
@@ -143,8 +144,8 @@ void VncClientThread::setClientColorDepth(rfbClient* cl, VncClientThread::ColorD
 rfbBool VncClientThread::newclient()
 {
     //8bit color hack for Intel(r) AMT KVM "classic vnc" = vnc server built in in Intel Vpro chipsets.
-    if (INTEL_AMT_KVM_STRING == cl->desktopName) {
-        kDebug(5011) << "Intel(R) AMT KVM: switching to 8 bit color depth (workaround, recent libvncserver needed)";
+    if (INTEL_AMT_KVM_STRING == QLatin1String(cl->desktopName)) {
+        qCDebug(KRDC) << "Intel(R) AMT KVM: switching to 8 bit color depth (workaround, recent libvncserver needed)";
         setColorDepth(bpp8);
     }
     setClientColorDepth(cl, colorDepth());
@@ -177,13 +178,13 @@ rfbBool VncClientThread::newclient()
     }
 
     SetFormatAndEncodings(cl);
-    kDebug(5011) << "Client created";
+    qCDebug(KRDC) << "Client created";
     return true;
 }
 
 void VncClientThread::updatefb(int x, int y, int w, int h)
 {
-//     kDebug(5011) << "updated client: x: " << x << ", y: " << y << ", w: " << w << ", h: " << h;
+//     qCDebug(KRDC) << "updated client: x: " << x << ", y: " << y << ", w: " << w << ", h: " << h;
 
     const int width = cl->width, height = cl->height;
     QImage img;
@@ -201,9 +202,9 @@ void VncClientThread::updatefb(int x, int y, int w, int h)
     }
 
     if (img.isNull()) {
-        kDebug(5011) << "image not loaded";
+        qCDebug(KRDC) << "image not loaded";
     }
-    
+
     if (m_stopped) {
         return; // sending data to a stopped thread is not a good idea
     }
@@ -216,7 +217,7 @@ void VncClientThread::updatefb(int x, int y, int w, int h)
 void VncClientThread::cuttext(const char *text, int textlen)
 {
     const QString cutText = QString::fromUtf8(text, textlen);
-    kDebug(5011) << cutText;
+    qCDebug(KRDC) << cutText;
 
     if (!cutText.isEmpty()) {
         emitGotCut(cutText);
@@ -225,19 +226,19 @@ void VncClientThread::cuttext(const char *text, int textlen)
 
 char *VncClientThread::passwdHandler()
 {
-    kDebug(5011) << "password request";
+    qCDebug(KRDC) << "password request";
 
     // Never request a password during a reconnect attempt.
     if (!m_keepalive.failed) {
         passwordRequest();
         m_passwordError = true;
     }
-    return strdup(m_password.toUtf8());
+    return strdup(m_password.toUtf8().constData());
 }
 
 rfbCredential *VncClientThread::credentialHandler(int credentialType)
 {
-    kDebug(5011) << "credential request" << credentialType;
+    qCDebug(KRDC) << "credential request" << credentialType;
 
     rfbCredential *cred = 0;
 
@@ -247,11 +248,11 @@ rfbCredential *VncClientThread::credentialHandler(int credentialType)
             m_passwordError = true;
 
             cred = new rfbCredential;
-            cred->userCredential.username = strdup(username().toUtf8());
-            cred->userCredential.password = strdup(password().toUtf8());
+            cred->userCredential.username = strdup(username().toUtf8().constData());
+            cred->userCredential.password = strdup(password().toUtf8().constData());
             break;
         default:
-            kError(5011) << "credential request failed, unspported credentialType:" << credentialType;
+            qCritical(KRDC) << "credential request failed, unspported credentialType:" << credentialType;
             outputErrorMessage(i18n("VNC authentication type is not supported."));
             break;
     }
@@ -270,10 +271,10 @@ void VncClientThread::outputHandler(const char *format, ...)
 
     message = message.trimmed();
 
-    kDebug(5011) << message;
+    qCDebug(KRDC) << message;
 
-    if ((message.contains("Couldn't convert ")) ||
-            (message.contains("Unable to connect to VNC server"))) {
+    if ((message.contains(QLatin1String("Couldn't convert "))) ||
+            (message.contains(QLatin1String("Unable to connect to VNC server")))) {
         // Don't show a dialog if a reconnection is needed. Never contemplate
         // reconnection if we don't have a password.
         QString tmp = i18n("Server not found.");
@@ -291,22 +292,22 @@ void VncClientThread::outputHandler(const char *format, ...)
     // Process general authentication failures before more specific authentication
     // failures. All authentication failures cancel any auto-reconnection that
     // may be in progress.
-    if (message.contains("VNC connection failed: Authentication failed")) {
+    if (message.contains(QLatin1String("VNC connection failed: Authentication failed"))) {
         m_keepalive.failed = false;
         outputErrorMessageString = i18n("VNC authentication failed.");
     }
-    if ((message.contains("VNC connection failed: Authentication failed, too many tries")) ||
-            (message.contains("VNC connection failed: Too many authentication failures"))) {
+    if ((message.contains(QLatin1String("VNC connection failed: Authentication failed, too many tries"))) ||
+            (message.contains(QLatin1String("VNC connection failed: Too many authentication failures")))) {
         m_keepalive.failed = false;
         outputErrorMessageString = i18n("VNC authentication failed because of too many authentication tries.");
     }
 
-    if (message.contains("VNC server closed connection"))
+    if (message.contains(QLatin1String("VNC server closed connection")))
         outputErrorMessageString = i18n("VNC server closed connection.");
 
     // If we are not going to attempt a reconnection, at least tell the user
     // the connection went away.
-    if (message.contains("read (")) {
+    if (message.contains(QLatin1String("read ("))) {
         // Don't show a dialog if a reconnection is needed. Never contemplate
         // reconnection if we don't have a password.
         QString tmp = i18n("Disconnected: %1.", message);
@@ -319,8 +320,8 @@ void VncClientThread::outputHandler(const char *format, ...)
     }
 
     // internal messages, not displayed to user
-    if (message.contains("VNC server supports protocol version 3.889")) // see http://bugs.kde.org/162640
-        outputErrorMessageString = "INTERNAL:APPLE_VNC_COMPATIBILTY";
+    if (message.contains(QLatin1String("VNC server supports protocol version 3.889"))) // see http://bugs.kde.org/162640
+        outputErrorMessageString = QLatin1String("INTERNAL:APPLE_VNC_COMPATIBILTY");
 }
 
 VncClientThread::VncClientThread(QObject *parent)
@@ -352,7 +353,7 @@ VncClientThread::~VncClientThread()
         stop();
         terminate();
         const bool quitSuccess = wait(1000);
-        kDebug(5011) << "Attempting to stop in deconstructor, will crash if this fails:" << quitSuccess;
+        qCDebug(KRDC) << "Attempting to stop in deconstructor, will crash if this fails:" << quitSuccess;
     }
 
     clientDestroy();
@@ -363,7 +364,7 @@ VncClientThread::~VncClientThread()
 void VncClientThread::checkOutputErrorMessage()
 {
     if (!outputErrorMessageString.isEmpty()) {
-        kDebug(5011) << outputErrorMessageString;
+        qCDebug(KRDC) << outputErrorMessageString;
         QString errorMessage = outputErrorMessageString;
         outputErrorMessageString.clear();
         // show authentication failure error only after the 3rd unsuccessful try
@@ -479,7 +480,7 @@ void VncClientThread::run()
     }
 
     locker.relock();
-    kDebug(5011) << "--------------------- Starting main VNC event loop ---------------------";
+    qCDebug(KRDC) << "--------------------- Starting main VNC event loop ---------------------";
     while (!m_stopped) {
         locker.unlock();
         const int i = WaitForMessage(cl, 500);
@@ -499,7 +500,7 @@ void VncClientThread::run()
                     } while (!clientCreate(true));
                     continue;
                 }
-                kError(5011) << "HandleRFBServerMessage failed";
+                qCritical(KRDC) << "HandleRFBServerMessage failed";
                 break;
             }
         }
@@ -550,13 +551,13 @@ bool VncClientThread::clientCreate(bool reinitialising)
         m_port += 5900;
     cl->serverPort = m_port;
 
-    kDebug(5011) << "--------------------- trying init ---------------------";
+    qCDebug(KRDC) << "--------------------- trying init ---------------------";
 
     if (!rfbInitClient(cl, 0, 0)) {
         if (!reinitialising) {
             // Don't whine on reconnection failure: presumably the network
             // is simply still down.
-            kError(5011) << "rfbInitClient failed";
+            qCritical(KRDC) << "rfbInitClient failed";
         }
         cl = 0;
         return false;
@@ -602,29 +603,29 @@ void VncClientThread::clientSetKeepalive()
     // Try to set the option active
     optval = 1;
     if (setsockopt(cl->sock, SOL_SOCKET, SO_KEEPALIVE, &optval, optlen) < 0) {
-        kError(5011) << "setsockopt(SO_KEEPALIVE)" << strerror(errno);
+        qCritical(KRDC) << "setsockopt(SO_KEEPALIVE)" << strerror(errno);
         return;
     }
 
     optval = m_keepalive.intervalSeconds;
     if (setsockopt(cl->sock, IPPROTO_TCP, TCP_KEEPIDLE, &optval, optlen) < 0) {
-        kError(5011) << "setsockopt(TCP_KEEPIDLE)" << strerror(errno);
+        qCritical(KRDC) << "setsockopt(TCP_KEEPIDLE)" << strerror(errno);
         return;
     }
 
     optval = m_keepalive.intervalSeconds;
     if (setsockopt(cl->sock, IPPROTO_TCP, TCP_KEEPINTVL, &optval, optlen) < 0) {
-        kError(5011) << "setsockopt(TCP_KEEPINTVL)" << strerror(errno);
+        qCritical(KRDC) << "setsockopt(TCP_KEEPINTVL)" << strerror(errno);
         return;
     }
 
     optval = m_keepalive.failedProbes;
     if(setsockopt(cl->sock, IPPROTO_TCP, TCP_KEEPCNT, &optval, optlen) < 0) {
-        kError(5011) << "setsockopt(TCP_KEEPCNT)" << strerror(errno);
+        qCritical(KRDC) << "setsockopt(TCP_KEEPCNT)" << strerror(errno);
         return;
     }
     m_keepalive.set = true;
-    kDebug(5011) << "TCP keepalive set";
+    qCDebug(KRDC) << "TCP keepalive set";
 }
 
 /**
@@ -632,7 +633,7 @@ void VncClientThread::clientSetKeepalive()
  */
 void VncClientThread::clientStateChange(RemoteView::RemoteStatus status, const QString &details)
 {
-    kDebug(5011) << status << details << m_host << ":" << m_port;
+    qCDebug(KRDC) << status << details << m_host << ":" << m_port;
     emit clientStateChanged(status, details);
 }
 

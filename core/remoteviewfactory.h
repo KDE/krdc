@@ -25,26 +25,11 @@
 #define REMOTEVIEWFACTORY_H
 
 #include "remoteview.h"
+#include "krdccore_export.h"
 
-#include <kdemacros.h>
-#include <KDE/KPluginFactory>
-#include <KDE/KPluginLoader>
-
-class KUrl;
-
-/**
- * Convenience macros to export a KRDC plugin. Suppose you created the plugin
- * FooRemoteViewFactory. In FooRemoteViewFactory you will have to put the following line:
- *
- * @code
- * KRDC_PLUGIN_EXPORT(FooRemoteViewFactory)
- * @endcode
- *
- * The rest will be done for you.
- */
-#define KRDC_PLUGIN_EXPORT( c ) \
-    K_PLUGIN_FACTORY( KrdcFactory, registerPlugin< c >(); ) \
-    K_EXPORT_PLUGIN( KrdcFactory("c") )
+#include <KCoreAddons/KPluginFactory>
+#include <KConfigCore/KConfigGroup>
+#include <KCoreAddons/KPluginLoader>
 
 /**
  * Factory to be implemented by any plugin.
@@ -62,12 +47,12 @@ public:
     /**
      * Returns true if the provided @p url is supported by the current plugin.
      */
-    virtual bool supportsUrl(const KUrl &url) const = 0;
+    virtual bool supportsUrl(const QUrl &url) const = 0;
 
     /**
      * Returns a new RemoteView implementing object.
      */
-    virtual RemoteView *createView(QWidget *parent, const KUrl &url, KConfigGroup configGroup) = 0;
+    virtual RemoteView *createView(QWidget *parent, const QUrl &url, KConfigGroup configGroup) = 0;
 
     /**
      * Returns a new HostPreferences implementing object or 0 if no settings are available.
@@ -76,7 +61,7 @@ public:
 
     /**
      * Returns the supported scheme.
-     * @see KUrl::scheme()
+     * @see QUrl::scheme()
      */
     virtual QString scheme() const = 0;
 

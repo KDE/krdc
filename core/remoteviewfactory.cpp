@@ -23,8 +23,6 @@
 
 #include "remoteviewfactory.h"
 
-#include <KDebug>
-
 RemoteViewFactory::RemoteViewFactory(QObject *parent)
         : QObject(parent)
 {
@@ -34,4 +32,3 @@ RemoteViewFactory::~RemoteViewFactory()
 {
 }
 
-#include "moc_remoteviewfactory.cpp"

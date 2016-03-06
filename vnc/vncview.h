@@ -34,6 +34,7 @@
 #endif
 
 #include <QClipboard>
+#include <QMap>
 
 extern "C" {
 #include <rfb/rfbclient.h>
@@ -44,7 +45,7 @@ class VncView: public RemoteView
     Q_OBJECT
 
 public:
-    explicit VncView(QWidget *parent = 0, const KUrl &url = KUrl(), KConfigGroup configGroup = KConfigGroup());
+    explicit VncView(QWidget *parent = 0, const QUrl &url = QUrl(), KConfigGroup configGroup = KConfigGroup());
     ~VncView();
 
     QSize framebufferSize();
@@ -64,10 +65,10 @@ public:
     void setViewOnly(bool viewOnly);
     void showDotCursor(DotCursorState state);
     void enableScaling(bool scale);
-    
+
     virtual void updateConfiguration();
 
-public slots:
+public Q_SLOTS:
     void scaleResize(int w, int h);
 
 protected:
@@ -99,8 +100,8 @@ private:
     void unpressModifiers();
     void wheelEventHandler(QWheelEvent *event);
     void mouseEventHandler(QMouseEvent *event);
-    
-private slots:
+
+private Q_SLOTS:
     void updateImage(int x, int y, int w, int h);
     void setCut(const QString &text);
     void requestPassword(bool includingUsername);

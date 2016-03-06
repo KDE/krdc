@@ -1,6 +1,5 @@
 
 if(LIBVNCSERVER_FOUND)
-    add_definitions(-DKDE_DEFAULT_DEBUG_AREA=5011)
 
     include_directories(
         ${CMAKE_CURRENT_BINARY_DIR}
@@ -14,15 +13,19 @@ if(LIBVNCSERVER_FOUND)
         vncview.cpp
     )
 
-    kde4_add_ui_files(vncplugin_SRCS
+    ecm_qt_declare_logging_category(vncplugin_SRCS HEADER krdc_debug.h IDENTIFIER KRDC CATEGORY_NAME KRDC)
+
+    ki18n_wrap_ui(vncplugin_SRCS
         vncpreferences.ui
     )
 
-    kde4_add_plugin(krdc_vncplugin ${vncplugin_SRCS})
-
-    target_link_libraries(krdc_vncplugin 
-        ${KDE4_KDECORE_LIBS}
-        ${KDE4_KDEUI_LIBS}
+    add_library(krdc_vncplugin ${vncplugin_SRCS})
+    target_link_libraries(krdc_vncplugin
+        Qt5::Core
+        KF5::ConfigCore
+        KF5::CoreAddons
+        KF5::XmlGui
+        Qt5::Gui
         ${LIBVNCCLIENT_LIBRARIES}
         krdccore
     )
@@ -35,19 +38,27 @@ if(LIBVNCSERVER_FOUND)
         vncpreferences.cpp
     )
 
-    kde4_add_plugin(kcm_krdc_vncplugin ${kcm_krdc_vncplugin_SRCS})
+    add_library(kcm_krdc_vncplugin ${kcm_krdc_vncplugin_SRCS})
 
     target_link_libraries(kcm_krdc_vncplugin
-        ${KDE4_KDEUI_LIBS}
+        Qt5::Core
+        KF5::Wallet
+        KF5::ConfigCore
+        KF5::CoreAddons
+        KF5::XmlGui
+        Qt5::Gui
+        ${LIBVNCCLIENT_LIBRARIES}
         krdccore
     )
 
+    kcoreaddons_desktop_to_json(krdc_vncplugin krdc_vnc.desktop)
+    kcoreaddons_desktop_to_json(kcm_krdc_vncplugin krdc_vnc_config.desktop)
+
     add_dependencies(kcm_krdc_vncplugin krdc_vncplugin)
 
-    install(TARGETS kcm_krdc_vncplugin DESTINATION ${PLUGIN_INSTALL_DIR})
-    install(TARGETS krdc_vncplugin DESTINATION ${PLUGIN_INSTALL_DIR})
+    install(TARGETS kcm_krdc_vncplugin DESTINATION ${PLUGIN_INSTALL_DIR}/krdc/kcms)
+    install(TARGETS krdc_vncplugin DESTINATION ${PLUGIN_INSTALL_DIR}/krdc)
 
-    install(FILES krdc_vnc.desktop DESTINATION ${SERVICES_INSTALL_DIR})
     install(FILES krdc_vnc_config.desktop DESTINATION ${SERVICES_INSTALL_DIR})
 
     install(FILES vnc.protocol DESTINATION ${SERVICES_INSTALL_DIR})

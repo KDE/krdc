@@ -13,14 +13,18 @@ if(BUILD_TEST)
         testview.cpp
     )
 
-    kde4_add_plugin(krdc_testplugin ${testplugin_SRCS})
+    add_library(krdc_testplugin ${testplugin_SRCS})
 
-    target_link_libraries(krdc_testplugin 
-        ${KDE4_KDECORE_LIBS}
-        ${KDE4_KDEUI_LIBS}
+    kcoreaddons_desktop_to_json(krdc_testplugin krdc_test.desktop)
+
+    target_link_libraries(krdc_testplugin
+        Qt5::Core
+        KF5::Wallet
+        KF5::ConfigCore
+        KF5::I18n
+        KF5::CoreAddons
+        Qt5::Gui
         krdccore
     )
-    install(TARGETS krdc_testplugin DESTINATION ${PLUGIN_INSTALL_DIR})
-
-    install(FILES krdc_test.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+    install(TARGETS krdc_testplugin DESTINATION ${PLUGIN_INSTALL_DIR}/krdc)
 endif(BUILD_TEST)
