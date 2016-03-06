@@ -74,7 +74,7 @@ int main(int argc, char **argv)
     KAboutData aboutData(appName, i18n("KRDC"), QString(KRDC_VERSION),
                          i18n("KDE Remote Desktop Client"), KAboutLicense::LicenseKey::GPL);
 
-    aboutData.setCopyrightStatement(i18n("(c) 2007-2013, Urs Wolfer\n"
+    aboutData.setCopyrightStatement(i18n("(c) 2007-2016, Urs Wolfer\n"
                                "(c) 2001-2003, Tim Jansen\n"
                                "(c) 2002-2003, Arend van Beelen jr.\n"
                                "(c) 2000-2002, Const Kaplinsky\n"
