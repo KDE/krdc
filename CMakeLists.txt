@@ -31,7 +31,7 @@ find_package(KF5 COMPONENTS  DocTools)
 include(ECMSetupVersion)
 include(ECMQtDeclareLoggingCategory)
 include(KDEInstallDirs)
-include(KDECompilerSettings)
+include(KDECompilerSettings NO_POLICY_SCOPE)
 include(KDECMakeSettings)
 include(FeatureSummary)
 
