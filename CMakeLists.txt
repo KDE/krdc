@@ -26,7 +26,7 @@ find_package(KF5 REQUIRED COMPONENTS
     I18n
 )
 
-find_package(KF5 COMPONENTS  DocTools)
+find_package(KF5DocTools)
 
 include(ECMSetupVersion)
 include(ECMQtDeclareLoggingCategory)
