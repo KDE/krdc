@@ -55,6 +55,9 @@ protected:
 
 private:
     TestHostPreferences *m_hostPreferences;
+
+private Q_SLOTS:
+    void asyncConnect();
 };
 
 
