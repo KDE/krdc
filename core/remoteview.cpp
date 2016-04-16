@@ -43,6 +43,7 @@ RemoteView::RemoteView(QWidget *parent)
 #endif
         m_dotCursorState(CursorOff)
 {
+    resize(0, 0);
 }
 
 RemoteView::~RemoteView()
