@@ -52,7 +52,7 @@ int main(int argc, char **argv)
     if (migrate.migrate()) {
         Kdelibs4Migration dataMigrator;
         const QString sourceBasePath = dataMigrator.saveLocation("data", QStringLiteral("krdc"));
-        const QString targetBasePath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/krdc");
+        const QString targetBasePath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/krdc/");
         QString targetFilePath;
         QDir sourceDir(sourceBasePath);
         QDir targetDir(targetBasePath);
@@ -71,7 +71,7 @@ int main(int argc, char **argv)
         }
     }
 
-    KAboutData aboutData(appName, i18n("KRDC"), QString(KRDC_VERSION),
+    KAboutData aboutData(appName, i18n("KRDC"), QStringLiteral(KRDC_VERSION_STRING),
                          i18n("KDE Remote Desktop Client"), KAboutLicense::LicenseKey::GPL);
 
     aboutData.setCopyrightStatement(i18n("(c) 2007-2016, Urs Wolfer\n"

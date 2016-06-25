@@ -24,6 +24,7 @@
 #include "testview.h"
 
 #include <QEvent>
+#include <QTimer>
 
 TestView::TestView(QWidget *parent, const QUrl &url, KConfigGroup configGroup)
         : RemoteView(parent)
@@ -31,19 +32,6 @@ TestView::TestView(QWidget *parent, const QUrl &url, KConfigGroup configGroup)
     m_hostPreferences = new TestHostPreferences(configGroup, this);
 
     Q_UNUSED(url);
-
-    setAutoFillBackground(true);
-
-    QPalette pal = palette();
-    pal.setColor(QPalette::Dark, Qt::yellow);
-    setPalette(pal);
-
-    const QSize size = QSize(640, 480);
-    setStatus(Connected);
-    setFixedSize(size);
-    setFixedSize(size);
-    emit framebufferSizeChanged(size.width(), size.height());
-    emit connected();
 }
 
 TestView::~TestView()
@@ -66,6 +54,22 @@ bool TestView::eventFilter(QObject *obj, QEvent *event)
     return RemoteView::eventFilter(obj, event);
 }
 
+void TestView::asyncConnect()
+{
+    QPalette pal = palette();
+    pal.setColor(QPalette::Background, Qt::yellow);
+    setPalette(pal);
+    setAutoFillBackground(true);
+
+    const QSize size = QSize(640, 480);
+    setFixedSize(size);
+    resize(size);
+    setStatus(Connected);
+    emit framebufferSizeChanged(size.width(), size.height());
+    emit connected();
+    setFocus();
+}
+
 QSize TestView::framebufferSize()
 {
     return minimumSizeHint();
@@ -83,6 +87,9 @@ bool TestView::isQuitting()
 
 bool TestView::start()
 {
+    setStatus(Connecting);
+    // call it async in order to simulate real world behavior
+    QTimer::singleShot(1000, this, SLOT(asyncConnect()));
     return true;
 }
 
