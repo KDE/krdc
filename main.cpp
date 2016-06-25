@@ -52,7 +52,7 @@ int main(int argc, char **argv)
     if (migrate.migrate()) {
         Kdelibs4Migration dataMigrator;
         const QString sourceBasePath = dataMigrator.saveLocation("data", QStringLiteral("krdc"));
-        const QString targetBasePath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/krdc");
+        const QString targetBasePath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/krdc/");
         QString targetFilePath;
         QDir sourceDir(sourceBasePath);
         QDir targetDir(targetBasePath);
