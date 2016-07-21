@@ -989,7 +989,6 @@ void MainWindow::saveHostPrefs()
 {
     foreach (RemoteView *view, m_remoteViewMap.values()) {
         saveHostPrefs(view);
-        view->startQuitting();
     }
 }
 
