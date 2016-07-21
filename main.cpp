@@ -118,21 +118,13 @@ int main(int argc, char **argv)
     const QStringList args = parser.positionalArguments();
     if (args.length() > 0) {
         for (int i = 0; i < args.length(); ++i) {
-            QUrl url = QUrl::fromLocalFile(args.at(i));
-            if (url.scheme().isEmpty() || url.host().isEmpty()) { // unusable url; try to recover it...
-                QString arg = args.at(i);
-
-                qCDebug(KRDC) << "unusable url; try to recover it:" << arg;
-
-                if (arg.lastIndexOf(QLatin1Char('/')) != 0)
-                    arg = arg.right(arg.length() - arg.lastIndexOf(QLatin1Char('/')) - 1);
-
-                if (!arg.contains(QStringLiteral("://")))
-                    arg.prepend(QStringLiteral("vnc://")); // vnc was default in kde3 times...
-
-                qCDebug(KRDC) << "recovered url:" << arg;
-
-                url = QUrl(arg);
+            QUrl url = QUrl(args.at(i));
+            // no URL scheme, assume argument is only a hostname
+            // and default to vnc as protocol.
+            if (url.scheme().isEmpty()) {
+                url.setScheme(QStringLiteral("vnc"));
+                url.setHost(args.at(i));
+                url.setPath(QString());
             }
             if (!url.isValid()) {
                 continue;
