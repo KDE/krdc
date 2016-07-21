@@ -299,10 +299,7 @@ void MainWindow::newConnection(const QUrl &newUrl, bool switchFullscreenWhenConn
 
     // Configure the view
     HostPreferences* prefs = view->hostPreferences();
-    if (! prefs->showDialogIfNeeded(this)) {
-        delete view;
-        return;
-    }
+    prefs->showDialogIfNeeded(this);
 
     view->showDotCursor(prefs->showLocalCursor() ? RemoteView::CursorOn : RemoteView::CursorOff);
     view->setViewOnly(prefs->viewOnly());
