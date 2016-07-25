@@ -25,6 +25,7 @@
 #include "mainwindow.h"
 #include "krdc_debug.h"
 #include "krdc_version.h"
+#include "settings.h"
 
 #include <KCoreAddons/KAboutData>
 #include <Kdelibs4ConfigMigrator>
@@ -120,9 +121,9 @@ int main(int argc, char **argv)
         for (int i = 0; i < args.length(); ++i) {
             QUrl url = QUrl(args.at(i));
             // no URL scheme, assume argument is only a hostname
-            // and default to vnc as protocol.
             if (url.scheme().isEmpty()) {
-                url.setScheme(QStringLiteral("vnc"));
+                QString defaultProto = Settings::defaultProtocol();
+                url.setScheme(defaultProto);
                 url.setHost(args.at(i));
                 url.setPath(QString());
             }

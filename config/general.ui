@@ -120,6 +120,24 @@
         </property>
        </widget>
       </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayoutP">
+        <item>
+         <widget class="QLabel" name="defaultProtocolLabel">
+          <property name="text">
+           <string>Default protocol:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="kcfg_DefaultProtocol">
+          <property name="text">
+           <string>vnc</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
      </layout>
     </widget>
    </item>
