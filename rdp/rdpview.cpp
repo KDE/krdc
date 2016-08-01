@@ -400,15 +400,25 @@ QPixmap RdpView::takeScreenshot()
 
 void RdpView::connectionClosed()
 {
+    connectionClosed(NormalClose);
+}
+
+void RdpView::connectionClosed(CloseType closeType)
+{
+    if (m_quitFlag && closeType != ForceClose) {
+        return;
+    }
     emit disconnected();
     setStatus(Disconnected);
     m_quitFlag = true;
 }
 
-void RdpView::connectionError()
+void RdpView::connectionError(const QString &text, const QString &caption)
 {
+    m_quitFlag = true;
+    KMessageBox::error(0, text, caption);
     emit disconnectedError();
-    connectionClosed();
+    connectionClosed(ForceClose);
 }
 
 void RdpView::processError(QProcess::ProcessError error)
@@ -419,9 +429,8 @@ void RdpView::processError(QProcess::ProcessError error)
 
     if (m_status == Connecting) {
         if (error == QProcess::FailedToStart) {
-            KMessageBox::error(0, i18n("Could not start \"xfreerdp\"; make sure xfreerdp is properly installed."),
-                               i18n("RDP Failure"));
-            connectionError();
+            connectionError(i18n("Could not start \"xfreerdp\"; make sure xfreerdp is properly installed."),
+                            i18n("RDP Failure"));
             return;
         }
     }
@@ -443,10 +452,9 @@ void RdpView::receivedStandardError()
         //   Serial number of failed request:  36
         //   Current serial number in output stream:  36"
         if (line.contains(QLatin1String("X_ReparentWindow"))) {
-            KMessageBox::error(0, i18n("The version of \"xfreerdp\" you are using is too old.\n"
+            connectionError(i18n("The version of \"xfreerdp\" you are using is too old.\n"
                                        "xfreerdp 1.0.2 or greater is required."),
-                               i18n("RDP Failure"));
-            connectionError();
+                            i18n("RDP Failure"));
             return;
         } else if(line.contains(QLatin1String("connection failure"))) {
             KMessageBox::error(0, i18n("Connection failed. You might have passed a wrong address or username."),
@@ -465,31 +473,27 @@ void RdpView::receivedStandardOutput()
     Q_FOREACH (const QString &line, splittedOutput) {
         // full xfreerdp message: "transport_connect: getaddrinfo (Name or service not known)"
         if (line.contains(QLatin1String("Name or service not known"))) {
-            KMessageBox::error(0, i18n("Name or service not known."),
-                               i18n("Connection Failure"));
-            connectionError();
+            connectionError(i18n("Name or service not known."),
+                            i18n("Connection Failure"));
             return;
 
         // full xfreerdp message: "unable to connect to example.com:3389"
         } else if (line.contains(QLatin1String("unable to connect to"))) {
-            KMessageBox::error(0, i18n("Connection attempt to host failed."),
-                               i18n("Connection Failure"));
-            connectionError();
+            connectionError(i18n("Connection attempt to host failed."),
+                            i18n("Connection Failure"));
             return;
 
         } else if (line.contains(QLatin1String("Authentication failure, check credentials"))) {
-            KMessageBox::error(0, i18n("Authentication failure, check credentials."),
-                               i18n("Connection Failure"));
-            connectionError();
+            connectionError(i18n("Authentication failure, check credentials."),
+                            i18n("Connection Failure"));
             return;
 
         // looks like some generic xfreerdp error message, handle it if nothing was handled:
         // "Error: protocol security negotiation failure"
         } else if (line.contains(QLatin1String("Error: protocol security negotiation failure")) || // xfreerdp 1.0
             line.contains(QLatin1String("Error: protocol security negotiation or connection failure"))) { // xfreerdp 1.2
-            KMessageBox::error(0, i18n("Connection attempt to host failed. Security negotiation or connection failure."),
-                               i18n("Connection Failure"));
-            connectionError();
+            connectionError(i18n("Connection attempt to host failed. Security negotiation or connection failure."),
+                            i18n("Connection Failure"));
             return;
         }
     }

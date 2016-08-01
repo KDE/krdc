@@ -72,6 +72,16 @@ protected:
     bool eventFilter(QObject *obj, QEvent *event);
 
 private:
+    // Marks if connectionClosed should close the connection if m_quitFlag is true.
+    enum CloseType {
+        NormalClose,
+        ForceClose,
+    };
+
+    void connectionError(const QString &text,
+                         const QString &caption); // called if xfreerdp quits with error
+    void connectionClosed(CloseType closeType); // Signals the connection closed if not quiting or it is forced
+
     QString keymapToXfreerdp(const QString &keyboadLayout);
     QHash<QString, QString> initKeymapToXfreerdp();
 
@@ -89,7 +99,6 @@ private:
 private Q_SLOTS:
     void connectionOpened();           // called if xfreerdp started
     void connectionClosed();           // called if xfreerdp quits
-    void connectionError();            // called if xfreerdp quits with error
     void processError(QProcess::ProcessError error); // called if xfreerdp dies
     void receivedStandardError();      // catches xfreerdp debug output
     void receivedStandardOutput();     // catches xfreerdp output
