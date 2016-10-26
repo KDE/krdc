@@ -98,6 +98,7 @@ private Q_SLOTS:
     QWidget* newConnectionWidget();
     void newConnectionPage(bool clearInput = true);
     void openFromRemoteDesktopsModel(const QModelIndex &index);
+    void selectFromRemoteDesktopsModel(const QModelIndex &index);
     void createDockWidget();
     void showConnectionContextMenu(const QPoint &pos);
     void saveConnectionListSort(const int logicalindex, const Qt::SortOrder order);

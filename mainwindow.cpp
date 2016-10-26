@@ -299,7 +299,8 @@ void MainWindow::newConnection(const QUrl &newUrl, bool switchFullscreenWhenConn
 
     // Configure the view
     HostPreferences* prefs = view->hostPreferences();
-    prefs->showDialogIfNeeded(this);
+    // if the user press cancel
+    if (! prefs->showDialogIfNeeded(this)) return;
 
     view->showDotCursor(prefs->showLocalCursor() ? RemoteView::CursorOn : RemoteView::CursorOff);
     view->setViewOnly(prefs->viewOnly());
@@ -339,6 +340,18 @@ void MainWindow::openFromRemoteDesktopsModel(const QModelIndex &index)
         }
 
         newConnection(url, false, nameString);
+    }
+}
+
+void MainWindow::selectFromRemoteDesktopsModel(const QModelIndex &index)
+{
+    const QString urlString = index.data(10001).toString();
+
+    if (!urlString.isEmpty() && m_protocolInput && m_addressInput) {
+        const QUrl url(urlString);
+        m_addressInput->setText(url.authority());
+        int index = m_protocolInput->findText(url.scheme());
+        if (index>=0) m_protocolInput->setCurrentIndex(index);
     }
 }
 
@@ -1098,6 +1111,9 @@ QWidget* MainWindow::newConnectionWidget()
                 SLOT(saveConnectionListSort(int,Qt::SortOrder)));
         connect(m_newConnectionTableView, SIGNAL(doubleClicked(QModelIndex)),
                 SLOT(openFromRemoteDesktopsModel(QModelIndex)));
+        // useful to edit similar address
+        connect(m_newConnectionTableView, SIGNAL(clicked(QModelIndex)),
+                SLOT(selectFromRemoteDesktopsModel(QModelIndex)));
         m_newConnectionTableView->setContextMenuPolicy(Qt::CustomContextMenu);
         connect(m_newConnectionTableView, SIGNAL(customContextMenuRequested(QPoint)), SLOT(showConnectionContextMenu(QPoint)));
 
