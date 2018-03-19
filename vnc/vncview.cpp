@@ -123,7 +123,7 @@ void VncView::scaleResize(int w, int h)
 {
     RemoteView::scaleResize(w, h);
 
-    qCritical(KRDC) << w << h;
+    qCDebug(KRDC) << w << h;
     if (m_scale) {
         m_verticalFactor = (qreal) h / m_frame.height();
         m_horizontalFactor = (qreal) w / m_frame.width();
@@ -153,7 +153,7 @@ void VncView::updateConfiguration()
 
 void VncView::startQuitting()
 {
-    qCritical(KRDC) << "about to quit";
+    qCDebug(KRDC) << "about to quit";
 
     setStatus(Disconnecting);
 
@@ -174,12 +174,12 @@ void VncView::startQuitting()
         // needs an event loop in this thread so execution continues after 'emit'
         QEventLoop loop;
         if (!loop.processEvents()) {
-            qCritical(KRDC) << "BUG: deadlocked, but no events to deliver?";
+            qCDebug(KRDC) << "BUG: deadlocked, but no events to deliver?";
         }
         vncThread.wait(500);
     }
 
-    qCritical(KRDC) << "Quit VNC thread success:" << quitSuccess;
+    qCDebug(KRDC) << "Quit VNC thread success:" << quitSuccess;
 
     setStatus(Disconnected);
 }
@@ -237,7 +237,7 @@ bool VncView::supportsViewOnly() const
 
 void VncView::requestPassword(bool includingUsername)
 {
-    qCritical(KRDC) << "request password";
+    qCDebug(KRDC) << "request password";
 
     setStatus(Authenticating);
 
@@ -296,7 +296,7 @@ void VncView::requestPassword(bool includingUsername)
         vncThread.setPassword(dialog.password());
         if (includingUsername) vncThread.setUsername(dialog.username());
     } else {
-        qCritical(KRDC) << "password dialog not accepted";
+        qCDebug(KRDC) << "password dialog not accepted";
         startQuitting();
     }
 #endif
@@ -328,7 +328,7 @@ HostPreferences* VncView::hostPreferences()
 
 void VncView::updateImage(int x, int y, int w, int h)
 {
-//     qCritical(KRDC) << "got update" << width() << height();
+//     qCDebug(KRDC) << "got update" << width() << height();
 
     m_x = x;
     m_y = y;
@@ -362,7 +362,7 @@ void VncView::updateImage(int x, int y, int w, int h)
 
         if (m_scale) {
 #ifndef QTONLY
-            qCritical(KRDC) << "Setting initial size w:" <<m_hostPreferences->width() << " h:" << m_hostPreferences->height();
+            qCDebug(KRDC) << "Setting initial size w:" <<m_hostPreferences->width() << " h:" << m_hostPreferences->height();
             emit framebufferSizeChanged(m_hostPreferences->width(), m_hostPreferences->height());
             scaleResize(m_hostPreferences->width(), m_hostPreferences->height());
             qCDebug(KRDC) << "m_frame.size():" << m_frame.size() << "size()" << size();
@@ -381,13 +381,13 @@ void VncView::updateImage(int x, int y, int w, int h)
     }
 
     if ((y == 0 && x == 0) && (m_frame.size() != size())) {
-        qCritical(KRDC) << "Updating framebuffer size";
+        qCDebug(KRDC) << "Updating framebuffer size";
         if (m_scale) {
             setMaximumSize(QSize(QWIDGETSIZE_MAX, QWIDGETSIZE_MAX));
             if (parentWidget())
                 scaleResize(parentWidget()->width(), parentWidget()->height());
         } else {
-            qCritical(KRDC) << "Resizing: " << m_frame.width() << m_frame.height();
+            qCDebug(KRDC) << "Resizing: " << m_frame.width() << m_frame.height();
             resize(m_frame.width(), m_frame.height());
             setMaximumSize(m_frame.width(), m_frame.height()); //This is a hack to force Qt to center the view in the scroll area
             setMinimumSize(m_frame.width(), m_frame.height());
