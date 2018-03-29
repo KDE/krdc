@@ -338,7 +338,7 @@ bool RdpView::start()
         // krdc has no support for certificate management yet; it would not be possbile to connect to any host:
         // "The host key for example.com has changed" ...
         // "Add correct host key in ~/.freerdp/known_hosts to get rid of this message."
-        arguments << QStringLiteral("/cert-ignore");
+        arguments << QStringLiteral("/cert-tofu");
 
         // clipboard sharing is activated in KRDC; user can disable it at runtime
         arguments << QStringLiteral("+clipboard");
