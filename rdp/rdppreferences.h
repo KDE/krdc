@@ -33,7 +33,7 @@ class RdpPreferences : public KCModule
     Q_OBJECT
 
 public:
-    explicit RdpPreferences(QWidget *parent = 0, const QVariantList &args = QVariantList());
+    explicit RdpPreferences(QWidget *parent = nullptr, const QVariantList &args = QVariantList());
     ~RdpPreferences() override;
 
     void save() override;

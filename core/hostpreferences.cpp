@@ -39,8 +39,8 @@ HostPreferences::HostPreferences(KConfigGroup configGroup, QObject *parent)
         : QObject(parent),
         m_configGroup(configGroup),
         m_connected(false),
-        showAgainCheckBox(0),
-        walletSupportCheckBox(0)
+        showAgainCheckBox(nullptr),
+        walletSupportCheckBox(nullptr)
 {
     m_hostConfigured = m_configGroup.hasKey("showConfigAgain");
 }

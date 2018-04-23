@@ -447,7 +447,7 @@ QPoint FloatingToolBarPrivate::getOuterPoint() const
 
 void FloatingToolBar::animate()
 {
-    if (style()->styleHint(QStyle::SH_Widget_Animate, 0, this)) {
+    if (style()->styleHint(QStyle::SH_Widget_Animate, nullptr, this)) {
         // move currentPosition towards endPosition
         int dX = d->endPosition.x() - d->currentPosition.x();
         int dY = d->endPosition.y() - d->currentPosition.y();

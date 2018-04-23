@@ -54,7 +54,7 @@ HostPreferences *TestViewFactory::createHostPreferences(KConfigGroup configGroup
     Q_UNUSED(configGroup);
     Q_UNUSED(parent);
 
-    return 0;
+    return nullptr;
 }
 
 QString TestViewFactory::scheme() const

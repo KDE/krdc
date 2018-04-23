@@ -377,7 +377,7 @@ Q_SIGNALS:
     void mouseStateChanged(int x, int y, int buttonMask);
 
 protected:
-    RemoteView(QWidget *parent = 0);
+    RemoteView(QWidget *parent = nullptr);
 
     void focusInEvent(QFocusEvent *event) override;
     void focusOutEvent(QFocusEvent *event) override;

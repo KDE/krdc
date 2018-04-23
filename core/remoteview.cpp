@@ -39,7 +39,7 @@ RemoteView::RemoteView(QWidget *parent)
         m_scale(false),
         m_keyboardIsGrabbed(false),
 #ifndef QTONLY
-        m_wallet(0),
+        m_wallet(nullptr),
 #endif
         m_dotCursorState(CursorOff)
 {

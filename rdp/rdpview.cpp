@@ -44,7 +44,7 @@ RdpView::RdpView(QWidget *parent,
         m_user(user),
         m_password(password),
         m_quitFlag(false),
-        m_process(NULL)
+        m_process(nullptr)
 {
     m_url = url;
     m_host = url.host();
@@ -416,7 +416,7 @@ void RdpView::connectionClosed(CloseType closeType)
 void RdpView::connectionError(const QString &text, const QString &caption)
 {
     m_quitFlag = true;
-    KMessageBox::error(0, text, caption);
+    KMessageBox::error(nullptr, text, caption);
     emit disconnectedError();
     connectionClosed(ForceClose);
 }
@@ -457,7 +457,7 @@ void RdpView::receivedStandardError()
                             i18n("RDP Failure"));
             return;
         } else if(line.contains(QLatin1String("connection failure"))) {
-            KMessageBox::error(0, i18n("Connection failed. You might have passed a wrong address or username."),
+            KMessageBox::error(nullptr, i18n("Connection failed. You might have passed a wrong address or username."),
                                i18n("RDP Failure"));
             return;
         }

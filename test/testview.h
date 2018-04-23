@@ -36,7 +36,7 @@ class TestView : public RemoteView
     Q_OBJECT
 
 public:
-    explicit TestView(QWidget *parent = 0, const QUrl &url = QUrl(), KConfigGroup configGroup = KConfigGroup());
+    explicit TestView(QWidget *parent = nullptr, const QUrl &url = QUrl(), KConfigGroup configGroup = KConfigGroup());
 
     ~TestView() override;
 
@@ -65,11 +65,11 @@ class TestHostPreferences : public HostPreferences
 {
     Q_OBJECT
 public:
-    explicit TestHostPreferences(KConfigGroup configGroup, QObject *parent = 0)
+    explicit TestHostPreferences(KConfigGroup configGroup, QObject *parent = nullptr)
         : HostPreferences(configGroup, parent) {}
 
 protected:
-    QWidget* createProtocolSpecificConfigPage() override { return 0; };
+    QWidget* createProtocolSpecificConfigPage() override { return nullptr; };
 };
 
 #endif // TESTVIEW_H

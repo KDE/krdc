@@ -43,7 +43,7 @@ class RdpView : public RemoteView
     Q_OBJECT
 
 public:
-    explicit RdpView(QWidget *parent = 0,
+    explicit RdpView(QWidget *parent = nullptr,
                      const QUrl &url = QUrl(),
                      KConfigGroup configGroup = KConfigGroup(),
                      const QString &user = QString(),

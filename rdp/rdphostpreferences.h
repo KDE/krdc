@@ -33,7 +33,7 @@ class RdpHostPreferences : public HostPreferences
     Q_OBJECT
 
 public:
-    explicit RdpHostPreferences(KConfigGroup configGroup, QObject *parent = 0);
+    explicit RdpHostPreferences(KConfigGroup configGroup, QObject *parent = nullptr);
     ~RdpHostPreferences() override;
 
     void setResolution(int resolution);

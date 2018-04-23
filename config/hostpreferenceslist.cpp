@@ -95,7 +95,7 @@ void HostPreferencesList::configureHost()
 
         qCDebug(KRDC) << "Configure host: " << urlString;
 
-        HostPreferences* prefs = 0;
+        HostPreferences* prefs = nullptr;
 
         const QList<RemoteViewFactory *> remoteViewFactories(m_mainWindow->remoteViewFactoriesList());
         foreach(RemoteViewFactory *factory, remoteViewFactories) {

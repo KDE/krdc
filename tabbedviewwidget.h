@@ -54,7 +54,7 @@ class TabbedViewWidget : public QTabWidget
 {
     Q_OBJECT
 public:
-    explicit TabbedViewWidget(QWidget *parent = 0);
+    explicit TabbedViewWidget(QWidget *parent = nullptr);
     ~TabbedViewWidget() override;
     TabbedViewWidgetModel* getModel();
     int addTab(QWidget *page, const QString &label);

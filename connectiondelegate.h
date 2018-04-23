@@ -30,7 +30,7 @@ class ConnectionDelegate : public QStyledItemDelegate
 {
     Q_OBJECT
 public:
-    explicit ConnectionDelegate(QObject *parent = 0);
+    explicit ConnectionDelegate(QObject *parent = nullptr);
     QString displayText(const QVariant &value, const QLocale& locale) const override;
     void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
     QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const override;

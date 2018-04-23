@@ -72,15 +72,15 @@
 
 MainWindow::MainWindow(QWidget *parent)
         : KXmlGuiWindow(parent),
-        m_fullscreenWindow(0),
-        m_protocolInput(0),
-        m_addressInput(0),
-        m_toolBar(0),
+        m_fullscreenWindow(nullptr),
+        m_protocolInput(nullptr),
+        m_addressInput(nullptr),
+        m_toolBar(nullptr),
         m_currentRemoteView(-1),
-        m_systemTrayIcon(0),
-        m_dockWidgetTableView(0),
-        m_newConnectionTableView(0),
-        m_newConnectionWidget(0)
+        m_systemTrayIcon(nullptr),
+        m_dockWidgetTableView(nullptr),
+        m_newConnectionTableView(nullptr),
+        m_newConnectionWidget(nullptr)
 {
     loadAllPlugins();
 
@@ -212,7 +212,7 @@ void MainWindow::loadAllPlugins()
         const bool enabled = info.isPluginEnabled();
         if (enabled) {
             RemoteViewFactory *component = createPluginFromInfo(info);
-            if (component != 0) {
+            if (component != nullptr) {
                 const int sorting = info.property(QStringLiteral("X-KDE-KRDC-Sorting")).toInt();
                 m_remoteViewFactories.insert(sorting, component);
             } else {
@@ -227,7 +227,7 @@ void MainWindow::loadAllPlugins()
 
 RemoteViewFactory *MainWindow::createPluginFromInfo(const KPluginInfo &info)
 {
-    RemoteViewFactory *plugin = 0;
+    RemoteViewFactory *plugin = nullptr;
     KPluginLoader loader(info.libraryPath());
     KPluginFactory *factory = loader.factory();
     if (factory) {
@@ -279,7 +279,7 @@ void MainWindow::newConnection(const QUrl &newUrl, bool switchFullscreenWhenConn
         m_addressInput->setText(url.authority());
     }
 
-    RemoteView *view = 0;
+    RemoteView *view = nullptr;
     KConfigGroup configGroup = Settings::self()->config()->group(QStringLiteral("hostpreferences")).group(url.toDisplayString(QUrl::StripTrailingSlash));
 
     foreach(RemoteViewFactory *factory, m_remoteViewFactories) {
@@ -463,7 +463,7 @@ void MainWindow::switchFullscreen()
 
     if (m_fullscreenWindow) {
         // Leaving full screen mode
-        m_fullscreenWindow->setWindowState(0);
+        m_fullscreenWindow->setWindowState(nullptr);
         m_fullscreenWindow->hide();
 
         m_tabWidget->tabBar()->setHidden(m_tabWidget->count() <= 1 && !Settings::showTabBar());
@@ -481,7 +481,7 @@ void MainWindow::switchFullscreen()
         if (m_toolBar) {
             m_toolBar->hideAndDestroy();
             m_toolBar->deleteLater();
-            m_toolBar = 0;
+            m_toolBar = nullptr;
         }
 
         actionCollection()->action(QStringLiteral("switch_fullscreen"))->setIcon(QIcon::fromTheme(QStringLiteral("view-fullscreen")));
@@ -489,7 +489,7 @@ void MainWindow::switchFullscreen()
         actionCollection()->action(QStringLiteral("switch_fullscreen"))->setIconText(i18n("Full Screen"));
 
         m_fullscreenWindow->deleteLater();
-        m_fullscreenWindow = 0;
+        m_fullscreenWindow = nullptr;
     } else {
         // Entering full screen mode
         m_fullscreenWindow = new QWidget(this, Qt::Window);
@@ -629,7 +629,7 @@ void MainWindow::openTabSettings(int index)
 
 void MainWindow::showSettingsDialog(const QString &url)
 {
-    HostPreferences *prefs = 0;
+    HostPreferences *prefs = nullptr;
 
     foreach(RemoteViewFactory *factory, remoteViewFactoriesList()) {
         if (factory->supportsUrl(QUrl(url))) {
@@ -838,7 +838,7 @@ void MainWindow::updateActionStatus()
     if (m_tabWidget->currentWidget() == m_newConnectionWidget)
         enabled = false;
 
-    RemoteView* view = (m_currentRemoteView >= 0 && enabled) ? currentRemoteView() : 0;
+    RemoteView* view = (m_currentRemoteView >= 0 && enabled) ? currentRemoteView() : nullptr;
 
     actionCollection()->action(QStringLiteral("take_screenshot"))->setEnabled(enabled);
     actionCollection()->action(QStringLiteral("disconnect"))->setEnabled(enabled);
@@ -904,7 +904,7 @@ void MainWindow::updateConfiguration()
         if(m_fullscreenWindow) m_systemTrayIcon->setAssociatedWidget(m_fullscreenWindow);
     } else if (m_systemTrayIcon) {
         delete m_systemTrayIcon;
-        m_systemTrayIcon = 0;
+        m_systemTrayIcon = nullptr;
     }
 
     // update the scroll areas background color
@@ -1162,7 +1162,7 @@ RemoteView* MainWindow::currentRemoteView() const
     if (m_currentRemoteView >= 0) {
         return m_remoteViewMap.value(m_tabWidget->widget(m_currentRemoteView));
     } else {
-        return 0;
+        return nullptr;
     }
 }
 

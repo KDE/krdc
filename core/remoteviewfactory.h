@@ -85,7 +85,7 @@ protected:
     /**
      * Protected constructor so it cannot be instantiated.
      */
-    RemoteViewFactory(QObject *parent = 0);
+    RemoteViewFactory(QObject *parent = nullptr);
 
 };
 
