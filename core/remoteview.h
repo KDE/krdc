@@ -126,7 +126,7 @@ public:
         Authentication
     };
 
-    virtual ~RemoteView();
+    ~RemoteView() override;
 
     /**
      * Checks whether the backend supports scaling. The
@@ -379,8 +379,8 @@ Q_SIGNALS:
 protected:
     RemoteView(QWidget *parent = 0);
 
-    void focusInEvent(QFocusEvent *event);
-    void focusOutEvent(QFocusEvent *event);
+    void focusInEvent(QFocusEvent *event) override;
+    void focusOutEvent(QFocusEvent *event) override;
 
     /**
      * The status of the remote view.

@@ -49,27 +49,27 @@ public:
                      const QString &user = QString(),
                      const QString &password = QString());
 
-    virtual ~RdpView();
+    ~RdpView() override;
 
     // functions regarding the window
-    virtual QSize framebufferSize();         // returns the size of the remote view
-    QSize sizeHint() const;                  // returns the suggested size
+    QSize framebufferSize() override;         // returns the size of the remote view
+    QSize sizeHint() const override;                  // returns the suggested size
 
     // functions regarding the connection
-    virtual void startQuitting();            // start closing the connection
-    virtual bool isQuitting();               // are we currently closing the connection?
-    virtual bool start();                    // open a connection
-    void setGrabAllKeys(bool grabAllKeys);
+    void startQuitting() override;            // start closing the connection
+    bool isQuitting() override;               // are we currently closing the connection?
+    bool start() override;                    // open a connection
+    void setGrabAllKeys(bool grabAllKeys) override;
     
-    HostPreferences* hostPreferences();
+    HostPreferences* hostPreferences() override;
     
-    virtual QPixmap takeScreenshot();
+    QPixmap takeScreenshot() override;
 
 public Q_SLOTS:
-    virtual void switchFullscreen(bool on);
+    void switchFullscreen(bool on) override;
 
 protected:
-    bool eventFilter(QObject *obj, QEvent *event);
+    bool eventFilter(QObject *obj, QEvent *event) override;
 
 private:
     // Marks if connectionClosed should close the connection if m_quitFlag is true.

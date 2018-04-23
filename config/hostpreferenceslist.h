@@ -40,7 +40,7 @@ class HostPreferencesList : public QWidget
 
 public:
     HostPreferencesList(QWidget *parent, MainWindow *mainWindow, KConfigGroup hostPrefsConfig);
-    ~HostPreferencesList();
+    ~HostPreferencesList() override;
 
 private Q_SLOTS:
     void readConfig();

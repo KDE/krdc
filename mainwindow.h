@@ -57,7 +57,7 @@ class MainWindow : public KXmlGuiWindow
     Q_OBJECT
 public:
     explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
+    ~MainWindow() override;
 
     QMap<QWidget *, RemoteView *> remoteViewList() const;
     QList<RemoteViewFactory *> remoteViewFactoriesList() const;
@@ -67,9 +67,9 @@ public Q_SLOTS:
     void newConnection(const QUrl &newUrl = QUrl(), bool switchFullscreenWhenConnected = false, const QString &tabName = QString());
 
 protected:
-    virtual void closeEvent(QCloseEvent *event);
-    bool eventFilter(QObject *obj, QEvent *event); // checks for close events on fs window
-    virtual void saveProperties(KConfigGroup &group);
+    void closeEvent(QCloseEvent *event) override;
+    bool eventFilter(QObject *obj, QEvent *event) override; // checks for close events on fs window
+    void saveProperties(KConfigGroup &group) override;
     void saveHostPrefs();
     void saveHostPrefs(RemoteView *view);
 
@@ -154,7 +154,7 @@ Q_SIGNALS:
     void rightClicked();
 
 protected:
-    void mousePressEvent(QMouseEvent *event) {
+    void mousePressEvent(QMouseEvent *event) override {
         if (event->button() == Qt::RightButton)
             emit rightClicked();
     }
@@ -174,7 +174,7 @@ Q_SIGNALS:
     void resized(int w, int h);
 
 protected:
-    void resizeEvent(QResizeEvent *event) {
+    void resizeEvent(QResizeEvent *event) override {
         QScrollArea::resizeEvent(event);
         emit resized(width() - 2*frameWidth(), height() - 2*frameWidth());
     }

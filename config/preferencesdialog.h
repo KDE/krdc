@@ -39,7 +39,7 @@ public:
     PreferencesDialog(QWidget *parent, KConfigSkeleton *config);
 
 protected:
-    virtual bool isDefault();
+    bool isDefault() override;
 
 private Q_SLOTS:
     void saveState();

@@ -42,7 +42,7 @@ public:
     /**
      * Deconstructor.
      */
-    virtual ~RemoteViewFactory();
+    ~RemoteViewFactory() override;
 
     /**
      * Returns true if the provided @p url is supported by the current plugin.

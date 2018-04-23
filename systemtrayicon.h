@@ -34,7 +34,7 @@ class SystemTrayIcon : public KStatusNotifierItem
 
 public:
     explicit SystemTrayIcon(MainWindow *parent);
-    ~SystemTrayIcon();
+    ~SystemTrayIcon() override;
 
 public Q_SLOTS:
     void checkActivatedWindow(bool active);

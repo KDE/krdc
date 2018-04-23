@@ -40,7 +40,7 @@ class BookmarkManager : public QObject, public KBookmarkOwner
 
 public:
     BookmarkManager(KActionCollection *collection, QMenu *menu, MainWindow *parent);
-    ~BookmarkManager();
+    ~BookmarkManager() override;
 
     QUrl currentUrl() const Q_DECL_OVERRIDE;
     QString currentTitle() const Q_DECL_OVERRIDE;
@@ -61,8 +61,8 @@ Q_SIGNALS:
     void openUrl(const QUrl &url);
 
 private Q_SLOTS:
-    void openBookmark(const KBookmark &bm, Qt::MouseButtons, Qt::KeyboardModifiers);
-    void openFolderinTabs(const KBookmarkGroup &bookmarkGroup);
+    void openBookmark(const KBookmark &bm, Qt::MouseButtons, Qt::KeyboardModifiers) override;
+    void openFolderinTabs(const KBookmarkGroup &bookmarkGroup) override;
 
 private:
     QString urlForView(RemoteView *view) const;

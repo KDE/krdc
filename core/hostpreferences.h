@@ -37,7 +37,7 @@ class KRDCCORE_EXPORT HostPreferences : public QObject
     Q_OBJECT
 
 public:
-    ~HostPreferences();
+    ~HostPreferences() override;
 
     KConfigGroup configGroup();
 

@@ -40,7 +40,7 @@ class FloatingToolBar : public QToolBar
     Q_OBJECT
 public:
     FloatingToolBar(QWidget *parent, QWidget *anchorWidget);
-    ~FloatingToolBar();
+    ~FloatingToolBar() override;
 
     Q_ENUMS(Side)
     enum Side { Left = 0, Top = 1, Right = 2, Bottom = 3 };
@@ -57,14 +57,14 @@ public Q_SLOTS:
     void hideAndDestroy();
 
 protected:
-    bool eventFilter(QObject *o, QEvent *e);
-    void paintEvent(QPaintEvent *);
-    void mousePressEvent(QMouseEvent *e);
-    void mouseMoveEvent(QMouseEvent *e);
-    void enterEvent(QEvent *e);
-    void leaveEvent(QEvent *e);
-    void mouseReleaseEvent(QMouseEvent *e);
-    void wheelEvent(QWheelEvent *e);
+    bool eventFilter(QObject *o, QEvent *e) override;
+    void paintEvent(QPaintEvent *) override;
+    void mousePressEvent(QMouseEvent *e) override;
+    void mouseMoveEvent(QMouseEvent *e) override;
+    void enterEvent(QEvent *e) override;
+    void leaveEvent(QEvent *e) override;
+    void mouseReleaseEvent(QMouseEvent *e) override;
+    void wheelEvent(QWheelEvent *e) override;
 
 private:
     class FloatingToolBarPrivate *d;

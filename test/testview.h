@@ -38,20 +38,20 @@ class TestView : public RemoteView
 public:
     explicit TestView(QWidget *parent = 0, const QUrl &url = QUrl(), KConfigGroup configGroup = KConfigGroup());
 
-    virtual ~TestView();
+    ~TestView() override;
 
-    virtual QSize framebufferSize();
-    QSize sizeHint() const;
+    QSize framebufferSize() override;
+    QSize sizeHint() const override;
 
-    virtual bool isQuitting();
-    virtual bool start();
-    HostPreferences* hostPreferences();
+    bool isQuitting() override;
+    bool start() override;
+    HostPreferences* hostPreferences() override;
 
 public Q_SLOTS:
-    virtual void switchFullscreen(bool on);
+    void switchFullscreen(bool on) override;
 
 protected:
-    bool eventFilter(QObject *obj, QEvent *event);
+    bool eventFilter(QObject *obj, QEvent *event) override;
 
 private:
     TestHostPreferences *m_hostPreferences;
@@ -69,7 +69,7 @@ public:
         : HostPreferences(configGroup, parent) {}
 
 protected:
-    virtual QWidget* createProtocolSpecificConfigPage() { return 0; };
+    QWidget* createProtocolSpecificConfigPage() override { return 0; };
 };
 
 #endif // TESTVIEW_H

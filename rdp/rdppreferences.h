@@ -34,10 +34,10 @@ class RdpPreferences : public KCModule
 
 public:
     explicit RdpPreferences(QWidget *parent = 0, const QVariantList &args = QVariantList());
-    ~RdpPreferences();
+    ~RdpPreferences() override;
 
-    virtual void save();
-    virtual void load();
+    void save() override;
+    void load() override;
 
 };
 

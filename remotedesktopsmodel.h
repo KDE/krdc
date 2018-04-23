@@ -62,16 +62,16 @@ class RemoteDesktopsModel : public QAbstractTableModel
 
 public:
     explicit RemoteDesktopsModel(QObject *parent, KBookmarkManager *manager);
-    ~RemoteDesktopsModel();
+    ~RemoteDesktopsModel() override;
 
     enum DisplayItems { Favorite, Title, LastConnected, VisitCount, Created, Source };
-    int rowCount(const QModelIndex &parent = QModelIndex()) const;
-    int columnCount(const QModelIndex &parent = QModelIndex()) const;
-    Qt::ItemFlags flags(const QModelIndex &index) const;
-    bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole);
-    QVariant data(const QModelIndex &index, int role) const;
+    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+    int columnCount(const QModelIndex &parent = QModelIndex()) const override;
+    Qt::ItemFlags flags(const QModelIndex &index) const override;
+    bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole) override;
+    QVariant data(const QModelIndex &index, int role) const override;
     QVariant headerData(int section, Qt::Orientation orientation,
-                        int role = Qt::DisplayRole) const;
+                        int role = Qt::DisplayRole) const override;
 
 private:
     QList<RemoteDesktop> remoteDesktops;

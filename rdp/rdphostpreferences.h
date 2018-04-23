@@ -34,7 +34,7 @@ class RdpHostPreferences : public HostPreferences
 
 public:
     explicit RdpHostPreferences(KConfigGroup configGroup, QObject *parent = 0);
-    ~RdpHostPreferences();
+    ~RdpHostPreferences() override;
 
     void setResolution(int resolution);
     int resolution() const;
@@ -58,8 +58,8 @@ public:
     QString shareMedia() const;
 
 protected:
-    QWidget* createProtocolSpecificConfigPage();
-    void acceptConfig();
+    QWidget* createProtocolSpecificConfigPage() override;
+    void acceptConfig() override;
 
 private:
     Ui::RdpPreferences rdpUi;
