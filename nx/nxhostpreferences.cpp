@@ -295,4 +295,3 @@ QString NxHostPreferences::privateKey() const
     return m_configGroup.readEntry("privateKey", Settings::nxPrivateKey());
 }
 
-#include "nxhostpreferences.moc"

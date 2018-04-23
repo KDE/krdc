@@ -280,4 +280,3 @@ void NxView::connectionClosed()
     m_quitFlag = true;
 }
 
-#include "nxview.moc"
