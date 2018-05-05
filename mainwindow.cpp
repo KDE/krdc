@@ -1042,7 +1042,7 @@ QWidget* MainWindow::newConnectionWidget()
     m_newConnectionWidget = new QWidget(this);
 
     QVBoxLayout *startLayout = new QVBoxLayout(m_newConnectionWidget);
-    startLayout->setContentsMargins(QMargins(8, 12, 8, 4));
+    startLayout->setContentsMargins(QMargins(8, 4, 8, 4));
 
     QSortFilterProxyModel *remoteDesktopsModelProxy = new QSortFilterProxyModel(this);
     remoteDesktopsModelProxy->setSourceModel(m_remoteDesktopsModel);
