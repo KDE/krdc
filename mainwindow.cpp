@@ -1044,17 +1044,6 @@ QWidget* MainWindow::newConnectionWidget()
     QVBoxLayout *startLayout = new QVBoxLayout(m_newConnectionWidget);
     startLayout->setContentsMargins(QMargins(8, 12, 8, 4));
 
-    QLabel *headerLabel = new QLabel(m_newConnectionWidget);
-    headerLabel->setText(i18n("<h1>KDE Remote Desktop Client</h1><br />Enter or select the address of the desktop you would like to connect to."));
-
-    QLabel *headerIconLabel = new QLabel(m_newConnectionWidget);
-    headerIconLabel->setPixmap(QIcon::fromTheme(QStringLiteral("krdc")).pixmap(80));
-
-    QHBoxLayout *headerLayout = new QHBoxLayout;
-    headerLayout->addWidget(headerLabel, 1, Qt::AlignTop);
-    headerLayout->addWidget(headerIconLabel);
-    startLayout->addLayout(headerLayout);
-
     QSortFilterProxyModel *remoteDesktopsModelProxy = new QSortFilterProxyModel(this);
     remoteDesktopsModelProxy->setSourceModel(m_remoteDesktopsModel);
     remoteDesktopsModelProxy->setFilterCaseSensitivity(Qt::CaseInsensitive);
