@@ -127,6 +127,7 @@ QVariant RemoteDesktopsModel::data(const QModelIndex &index, int role) const
             case RemoteDesktop::None:
                 return i18nc("Where each displayed link comes from", "None");
             }
+            // fall-through
         default:
             return QVariant();
         }
