@@ -26,6 +26,12 @@ find_package(KF5 REQUIRED COMPONENTS
     I18n
 )
 
+if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    if (NOT CMAKE_CXX_COMPILER_VERSION VERSION_LESS "5.0.0")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wsuggest-override" )
+    endif()
+endif()
+
 find_package(KF5DocTools)
 
 include(ECMSetupVersion)

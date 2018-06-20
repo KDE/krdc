@@ -55,7 +55,7 @@ public:
     KeyClientEvent(int key, int pressed)
             : m_key(key), m_pressed(pressed) {}
 
-    void fire(rfbClient*);
+    void fire(rfbClient*) override;
 
 private:
     int m_key;
@@ -68,7 +68,7 @@ public:
     PointerClientEvent(int x, int y, int buttonMask)
             : m_x(x), m_y(y), m_buttonMask(buttonMask) {}
 
-    void fire(rfbClient*);
+    void fire(rfbClient*) override;
 
 private:
     int m_x;
@@ -82,7 +82,7 @@ public:
     explicit ClientCutEvent(const QString &text)
             : text(text) {}
 
-    void fire(rfbClient*);
+    void fire(rfbClient*) override;
 
 private:
     QString text;
@@ -148,7 +148,7 @@ public Q_SLOTS:
     void clientCut(const QString &text);
 
 protected:
-    void run();
+    void run() override;
 
 private:
     void setClientColorDepth(rfbClient *cl, ColorDepth cd);

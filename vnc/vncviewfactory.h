@@ -37,19 +37,19 @@ public:
 
     virtual ~VncViewFactory();
 
-    virtual bool supportsUrl(const QUrl &url) const;
+    bool supportsUrl(const QUrl &url) const override;
 
-    virtual RemoteView *createView(QWidget *parent, const QUrl &url, KConfigGroup configGroup);
+    RemoteView *createView(QWidget *parent, const QUrl &url, KConfigGroup configGroup) override;
 
-    virtual HostPreferences *createHostPreferences(KConfigGroup configGroup, QWidget *parent);
+    HostPreferences *createHostPreferences(KConfigGroup configGroup, QWidget *parent) override;
 
-    virtual QString scheme() const;
+    QString scheme() const override;
 
-    virtual QString connectActionText() const;
+    QString connectActionText() const override;
 
-    virtual QString connectButtonText() const;
+    QString connectButtonText() const override;
 
-    virtual QString connectToolTipText() const;
+    QString connectToolTipText() const override;
 };
 
 #endif // VNCVIEWFACTORY_H

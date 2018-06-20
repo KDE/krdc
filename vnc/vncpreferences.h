@@ -36,8 +36,8 @@ public:
     explicit VncPreferences(QWidget *parent = 0, const QVariantList &args = QVariantList());
     ~VncPreferences();
 
-    virtual void save();
-    virtual void load();
+    void save() override;
+    void load() override;
 
 };
 

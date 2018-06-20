@@ -39,9 +39,9 @@ public:
     RemoteView::Quality quality();
 
 protected:
-    void acceptConfig();
+    void acceptConfig() override;
 
-    virtual QWidget* createProtocolSpecificConfigPage();
+    QWidget* createProtocolSpecificConfigPage() override;
 
 private:
     Ui::VncPreferences vncUi;

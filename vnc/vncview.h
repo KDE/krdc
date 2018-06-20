@@ -48,34 +48,34 @@ public:
     explicit VncView(QWidget *parent = 0, const QUrl &url = QUrl(), KConfigGroup configGroup = KConfigGroup());
     ~VncView();
 
-    QSize framebufferSize();
-    QSize sizeHint() const;
-    QSize minimumSizeHint() const;
-    void startQuitting();
-    bool isQuitting();
-    bool start();
-    bool supportsScaling() const;
-    bool supportsLocalCursor() const;
-    bool supportsViewOnly() const;
+    QSize framebufferSize() override;
+    QSize sizeHint() const override;
+    QSize minimumSizeHint() const override;
+    void startQuitting() override;
+    bool isQuitting() override;
+    bool start() override;
+    bool supportsScaling() const override;
+    bool supportsLocalCursor() const override;
+    bool supportsViewOnly() const override;
     
 #ifndef QTONLY
-    HostPreferences* hostPreferences();
+    HostPreferences* hostPreferences() override;
 #endif
 
-    void setViewOnly(bool viewOnly);
-    void showDotCursor(DotCursorState state);
-    void enableScaling(bool scale);
+    void setViewOnly(bool viewOnly) override;
+    void showDotCursor(DotCursorState state) override;
+    void enableScaling(bool scale) override;
 
-    virtual void updateConfiguration();
+    void updateConfiguration() override;
 
 public Q_SLOTS:
-    void scaleResize(int w, int h);
+    void scaleResize(int w, int h) override;
 
 protected:
-    void paintEvent(QPaintEvent *event);
-    bool event(QEvent *event);
-    void resizeEvent(QResizeEvent *event);
-    bool eventFilter(QObject *obj, QEvent *event);
+    void paintEvent(QPaintEvent *event) override;
+    bool event(QEvent *event) override;
+    void resizeEvent(QResizeEvent *event) override;
+    bool eventFilter(QObject *obj, QEvent *event) override;
 
 private:
     VncClientThread vncThread;
