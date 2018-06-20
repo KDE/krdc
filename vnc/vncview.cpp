@@ -246,7 +246,7 @@ void VncView::requestPassword(bool includingUsername)
     }
 
 #ifndef QTONLY
-    // just try to get the passwort from the wallet the first time, otherwise it will loop (see issue #226283)
+    // just try to get the password from the wallet the first time, otherwise it will loop (see issue #226283)
     if (m_firstPasswordTry && m_hostPreferences->walletSupport()) {
         QString walletPassword = readWalletPassword();
 
