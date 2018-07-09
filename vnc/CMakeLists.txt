@@ -13,6 +13,12 @@ if(LIBVNCSERVER_FOUND)
         vncview.cpp
     )
 
+    if (LIBSSH_FOUND)
+        include_directories(${LIBSSH_INCLUDE_DIR})
+        add_definitions(-DLIBSSH_FOUND)
+        set(vncplugin_SRCS ${vncplugin_SRCS} vncsshtunnelthread.cpp)
+    endif()
+
     ecm_qt_declare_logging_category(vncplugin_SRCS HEADER krdc_debug.h IDENTIFIER KRDC CATEGORY_NAME KRDC)
 
     ki18n_wrap_ui(vncplugin_SRCS
@@ -33,6 +39,11 @@ if(LIBVNCSERVER_FOUND)
     if(JPEG_FOUND)
         target_link_libraries(krdc_vncplugin ${JPEG_LIBRARIES})
     endif(JPEG_FOUND)
+
+    if (LIBSSH_FOUND)
+        target_link_libraries(krdc_vncplugin ${LIBSSH_LIBRARIES})
+    endif()
+
 
     set(kcm_krdc_vncplugin_SRCS
         vncpreferences.cpp

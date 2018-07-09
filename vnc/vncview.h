@@ -33,6 +33,11 @@
     #include "vnchostpreferences.h"
 #endif
 
+#ifdef LIBSSH_FOUND
+    #include "vncsshtunnelthread.h"
+#endif
+
+
 #include <QClipboard>
 #include <QMap>
 
@@ -95,6 +100,12 @@ private:
 #endif
     QImage m_frame;
     bool m_forceLocalCursor;
+#ifdef LIBSSH_FOUND
+    VncSshTunnelThread *m_sshTunnelThread;
+
+    QString readWalletSshPassword();
+    void saveWalletSshPassword();
+#endif
 
     void keyEventHandler(QKeyEvent *e);
     void unpressModifiers();
@@ -105,7 +116,11 @@ private Q_SLOTS:
     void updateImage(int x, int y, int w, int h);
     void setCut(const QString &text);
     void requestPassword(bool includingUsername);
+#ifdef LIBSSH_FOUND
+    void sshRequestPassword(VncSshTunnelThread::PasswordRequestFlags flags);
+#endif
     void outputErrorMessage(const QString &message);
+    void sshErrorMessage(const QString &message);
     void clipboardDataChanged();
 };
 

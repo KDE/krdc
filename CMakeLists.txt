@@ -74,6 +74,13 @@ set_package_properties("libvncserver" PROPERTIES
     PURPOSE "Needed to build VNC client support in KRDC"
 )
 
+find_package(LibSSH)
+set_package_properties("libssh" PROPERTIES
+    DESCRIPTION "ssh library"
+    URL "http://libssh.org"
+    PURPOSE "Needed to build VNC+SSH tunnel support "
+)
+
 # Needs porting
 FIND_PROGRAM(FREERDP_EXECUTABLE xfreerdp)
 if(FREERDP_EXECUTABLE)

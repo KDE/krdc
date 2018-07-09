@@ -202,6 +202,16 @@ QUrl RemoteView::url()
 #ifndef QTONLY
 QString RemoteView::readWalletPassword(bool fromUserNameOnly)
 {
+    return readWalletPasswordForKey(fromUserNameOnly ? m_url.userName() : m_url.toDisplayString(QUrl::StripTrailingSlash));
+}
+
+void RemoteView::saveWalletPassword(const QString &password, bool fromUserNameOnly)
+{
+    saveWalletPasswordForKey(fromUserNameOnly ? m_url.userName() : m_url.toDisplayString(QUrl::StripTrailingSlash), password);
+}
+
+QString RemoteView::readWalletPasswordForKey(const QString &key)
+{
     const QString KRDCFOLDER = QLatin1String("KRDC");
 
     window()->setDisabled(true); // WORKAROUND: disable inputs so users cannot close the current tab (see #181230)
@@ -219,12 +229,6 @@ QString RemoteView::readWalletPassword(bool fromUserNameOnly)
             m_wallet->setFolder(KRDCFOLDER);
             QString password;
 
-            QString key;
-            if (fromUserNameOnly)
-                key = m_url.userName();
-            else
-                key = m_url.toDisplayString(QUrl::StripTrailingSlash);
-
             if (m_wallet->hasEntry(key) &&
                     !m_wallet->readPassword(key, password)) {
                 qCDebug(KRDC) << "Password read OK";
@@ -236,14 +240,8 @@ QString RemoteView::readWalletPassword(bool fromUserNameOnly)
     return QString();
 }
 
-void RemoteView::saveWalletPassword(const QString &password, bool fromUserNameOnly)
+void RemoteView::saveWalletPasswordForKey(const QString &key, const QString &password)
 {
-    QString key;
-    if (fromUserNameOnly)
-        key = m_url.userName();
-    else
-        key = m_url.toDisplayString(QUrl::StripTrailingSlash);
-
     if (m_wallet && m_wallet->isOpen()) {
         qCDebug(KRDC) << "Write wallet password";
         m_wallet->writePassword(key, password);

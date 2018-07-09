@@ -414,6 +414,8 @@ protected:
 #ifndef QTONLY
     QString readWalletPassword(bool fromUserNameOnly = false);
     void saveWalletPassword(const QString &password, bool fromUserNameOnly = false);
+    QString readWalletPasswordForKey(const QString &key);
+    void saveWalletPasswordForKey(const QString &key, const QString &password);
     KWallet::Wallet *m_wallet;
 #endif
 

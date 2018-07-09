@@ -544,11 +544,6 @@ bool VncClientThread::clientCreate(bool reinitialising)
 
     cl->serverHost = strdup(m_host.toUtf8().constData());
 
-    if (m_port < 0 || !m_port) // port is invalid or empty...
-        m_port = 5900; // fallback: try an often used VNC port
-
-    if (m_port >= 0 && m_port < 100) // the user most likely used the short form (e.g. :1)
-        m_port += 5900;
     cl->serverPort = m_port;
 
     qCDebug(KRDC) << "--------------------- trying init ---------------------";

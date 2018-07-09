@@ -62,10 +62,19 @@ VncView::VncView(QWidget *parent, const QUrl &url, KConfigGroup configGroup)
         m_horizontalFactor(1.0),
         m_verticalFactor(1.0),
         m_forceLocalCursor(false)
+#ifdef LIBSSH_FOUND
+        , m_sshTunnelThread(nullptr)
+#endif
 {
     m_url = url;
     m_host = url.host();
     m_port = url.port();
+
+    if (m_port <= 0) // port is invalid or empty...
+        m_port = 5900; // fallback: try an often used VNC port
+
+    if (m_port < 100) // the user most likely used the short form (e.g. :1)
+        m_port += 5900;
 
     // BlockingQueuedConnection can cause deadlocks when exiting, handled in startQuitting()
     connect(&vncThread, SIGNAL(imageUpdated(int,int,int,int)), this, SLOT(updateImage(int,int,int,int)), Qt::BlockingQueuedConnection);
@@ -168,6 +177,13 @@ void VncView::startQuitting()
 
     vncThread.quit();
 
+#ifdef LIBSSH_FOUND
+    if (m_sshTunnelThread) {
+        delete m_sshTunnelThread;
+        m_sshTunnelThread = nullptr;
+    }
+#endif
+
     const bool quitSuccess = vncThread.wait(500);
     if (!quitSuccess) {
         // happens when vncThread wants to call a slot via BlockingQueuedConnection,
@@ -191,8 +207,33 @@ bool VncView::isQuitting()
 
 bool VncView::start()
 {
-    vncThread.setHost(m_host);
-    vncThread.setPort(m_port);
+    QString vncHost = m_host;
+    int vncPort = m_port;
+#ifdef LIBSSH_FOUND
+    if (m_hostPreferences->useSshTunnel()) {
+        Q_ASSERT(!m_sshTunnelThread);
+
+        const int tunnelPort = 58219; // Just a random port
+
+        m_sshTunnelThread = new VncSshTunnelThread(m_host.toUtf8(),
+                                                   m_port,
+                                                   tunnelPort,
+                                                   m_hostPreferences->sshTunnelPort(),
+                                                   m_hostPreferences->sshTunnelUserName().toUtf8(),
+                                                   m_hostPreferences->useSshTunnelLoopback());
+        connect(m_sshTunnelThread, &VncSshTunnelThread::passwordRequest, this, &VncView::sshRequestPassword, Qt::BlockingQueuedConnection);
+        connect(m_sshTunnelThread, &VncSshTunnelThread::errorMessage, this, &VncView::sshErrorMessage);
+        m_sshTunnelThread->start();
+
+        if (m_hostPreferences->useSshTunnelLoopback()) {
+            vncHost = QStringLiteral("127.0.0.1");
+        }
+        vncPort = tunnelPort;
+    }
+#endif
+
+    vncThread.setHost(vncHost);
+    vncThread.setPort(vncPort);
     RemoteView::Quality quality;
 #ifdef QTONLY
     quality = (RemoteView::Quality)((QCoreApplication::arguments().count() > 2) ?
@@ -216,7 +257,15 @@ bool VncView::start()
 
     setStatus(Connecting);
 
-    vncThread.start();
+#ifdef LIBSSH_FOUND
+    if (m_hostPreferences->useSshTunnel()) {
+        connect(m_sshTunnelThread, &VncSshTunnelThread::listenReady, this, [this] { vncThread.start(); });
+    }
+    else
+#endif
+    {
+        vncThread.start();
+    }
     return true;
 }
 
@@ -302,6 +351,31 @@ void VncView::requestPassword(bool includingUsername)
 #endif
 }
 
+#ifdef LIBSSH_FOUND
+void VncView::sshRequestPassword(VncSshTunnelThread::PasswordRequestFlags flags)
+{
+    qCDebug(KRDC) << "request ssh password";
+
+    if (m_hostPreferences->walletSupport() && ((flags & VncSshTunnelThread::IgnoreWallet) != VncSshTunnelThread::IgnoreWallet)) {
+        const QString walletPassword = readWalletSshPassword();
+
+        if (!walletPassword.isNull()) {
+            m_sshTunnelThread->setPassword(walletPassword, VncSshTunnelThread::PasswordFromWallet);
+            return;
+        }
+    }
+
+    KPasswordDialog dialog(this);
+    dialog.setPrompt(i18n("Please enter the SSH password."));
+    if (dialog.exec() == KPasswordDialog::Accepted) {
+        m_sshTunnelThread->setPassword(dialog.password(), VncSshTunnelThread::PasswordFromDialog);
+    } else {
+        qCDebug(KRDC) << "ssh password dialog not accepted";
+        startQuitting();
+    }
+}
+#endif
+
 void VncView::outputErrorMessage(const QString &message)
 {
     qCritical(KRDC) << message;
@@ -317,6 +391,17 @@ void VncView::outputErrorMessage(const QString &message)
     KMessageBox::error(this, message, i18n("VNC failure"));
 
     emit errorMessage(i18n("VNC failure"), message);
+}
+
+void VncView::sshErrorMessage(const QString &message)
+{
+    qCritical(KRDC) << message;
+
+    startQuitting();
+
+    KMessageBox::error(this, message, i18n("SSH Tunnel failure"));
+
+    emit errorMessage(i18n("SSH Tunnel failure"), message);
 }
 
 #ifndef QTONLY
@@ -376,6 +461,11 @@ void VncView::updateImage(int x, int y, int w, int h)
 #ifndef QTONLY
         if (m_hostPreferences->walletSupport()) {
             saveWalletPassword(vncThread.password());
+#ifdef LIBSSH_FOUND
+            if (m_hostPreferences->useSshTunnel()) {
+                saveWalletSshPassword();
+            }
+#endif
         }
 #endif
     }
@@ -559,6 +649,18 @@ void VncView::wheelEventHandler(QWheelEvent *event)
     vncThread.mouseEvent(x, y, eb | m_buttonMask);
     vncThread.mouseEvent(x, y, m_buttonMask);
 }
+
+#ifdef LIBSSH_FOUND
+QString VncView::readWalletSshPassword()
+{
+    return readWalletPasswordForKey(QStringLiteral("SSHTUNNEL") + m_url.toDisplayString(QUrl::StripTrailingSlash));
+}
+
+void VncView::saveWalletSshPassword()
+{
+    saveWalletPasswordForKey(QStringLiteral("SSHTUNNEL") + m_url.toDisplayString(QUrl::StripTrailingSlash), m_sshTunnelThread->password());
+}
+#endif
 
 void VncView::keyEventHandler(QKeyEvent *e)
 {

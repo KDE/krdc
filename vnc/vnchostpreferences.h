@@ -38,12 +38,22 @@ public:
     void setQuality(RemoteView::Quality quality);
     RemoteView::Quality quality();
 
+    bool useSshTunnel() const;
+    bool useSshTunnelLoopback() const;
+    int sshTunnelPort() const;
+    QString sshTunnelUserName() const;
+
 protected:
     void acceptConfig() override;
 
     QWidget* createProtocolSpecificConfigPage() override;
 
 private:
+    void setUseSshTunnel(bool useSshTunnel);
+    void setUseSshTunnelLoopback(bool useSshTunnelLoopback);
+    void setSshTunnelPort(int port);
+    void setSshTunnelUserName(const QString &userName);
+
     Ui::VncPreferences vncUi;
     void checkEnableCustomSize(int index);
 
