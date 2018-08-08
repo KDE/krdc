@@ -54,6 +54,7 @@ public:
 
     QString password() const;
     void setPassword(const QString &password, PasswordOrigin origin);
+    void userCanceledPasswordRequest();
 
     void run() override;
 
@@ -71,6 +72,7 @@ private:
     bool m_loopback;
     QString m_password;
     PasswordOrigin m_passwordOrigin;
+    bool m_passwordRequestCanceledByUser;
 
     std::atomic_bool m_stop_thread;
 };
