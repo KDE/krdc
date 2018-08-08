@@ -28,6 +28,7 @@
 #include <QImage>
 #include <QPainter>
 #include <QMouseEvent>
+#include <QTimer>
 
 #ifdef QTONLY
     #include <QMessageBox>
@@ -371,7 +372,10 @@ void VncView::sshRequestPassword(VncSshTunnelThread::PasswordRequestFlags flags)
         m_sshTunnelThread->setPassword(dialog.password(), VncSshTunnelThread::PasswordFromDialog);
     } else {
         qCDebug(KRDC) << "ssh password dialog not accepted";
-        startQuitting();
+        m_sshTunnelThread->userCanceledPasswordRequest();
+        // We need to use a single shot because otherwise startQuitting deletes the thread
+        // but we're here from a blocked queued connection and thus we deadlock
+        QTimer::singleShot(0, this, &VncView::startQuitting);
     }
 }
 #endif

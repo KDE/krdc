@@ -66,6 +66,13 @@ void VncSshTunnelThread::setPassword(const QString &password, PasswordOrigin ori
     m_passwordOrigin = origin;
 }
 
+// This is called by the main thread, but from a slot connected to our signal via BlockingQueuedConnection
+// so this is safe even without a mutex, the semaphore in BlockingQueuedConnection takes care of the synchronization.
+void VncSshTunnelThread::userCanceledPasswordRequest()
+{
+    m_passwordRequestCanceledByUser = true;
+}
+
 void VncSshTunnelThread::run()
 {
     struct CleanupHelper
@@ -112,16 +119,21 @@ void VncSshTunnelThread::run()
     // First try authenticating via ssh agent
     res = ssh_userauth_agent(session, NULL);
 
+    m_passwordRequestCanceledByUser = false;
     if (res != SSH_AUTH_SUCCESS) {
         // If ssh agent didn't work, try with password
         emit passwordRequest(NoFlags); // This calls blockingly to the main thread which will call setPassword
         res = ssh_userauth_password(session, NULL, m_password.toUtf8().constData());
 
         // If password didn't work but came from the wallet, ask the user for the password
-        if (res != SSH_AUTH_SUCCESS && m_passwordOrigin == PasswordFromWallet) {
+        if (!m_passwordRequestCanceledByUser && res != SSH_AUTH_SUCCESS && m_passwordOrigin == PasswordFromWallet) {
             emit passwordRequest(IgnoreWallet); // This calls blockingly to the main thread which will call setPassword
             res = ssh_userauth_password(session, NULL, m_password.toUtf8().constData());
         }
+    }
+
+    if (m_passwordRequestCanceledByUser) {
+        return;
     }
 
     if (res != SSH_AUTH_SUCCESS) {
