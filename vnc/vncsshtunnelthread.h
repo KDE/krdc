@@ -23,8 +23,8 @@
 **
 ****************************************************************************/
 
-#ifndef VCNCSSHTUNNELTHREAD_H
-#define VCNCSSHTUNNELTHREAD_H
+#ifndef VNCSSHTUNNELTHREAD_H
+#define VNCSSHTUNNELTHREAD_H
 
 #include <QThread>
 

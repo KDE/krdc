@@ -252,7 +252,7 @@ rfbCredential *VncClientThread::credentialHandler(int credentialType)
             cred->userCredential.password = strdup(password().toUtf8().constData());
             break;
         default:
-            qCritical(KRDC) << "credential request failed, unspported credentialType:" << credentialType;
+            qCritical(KRDC) << "credential request failed, unsupported credentialType:" << credentialType;
             outputErrorMessage(i18n("VNC authentication type is not supported."));
             break;
     }

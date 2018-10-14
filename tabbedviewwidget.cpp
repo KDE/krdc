@@ -183,7 +183,7 @@ void TabbedViewWidget::setTabText(int index, const QString &label)
     m_model->emitDataChanged(index);
 }
 
-//This functinality is taken from  KTabWidget for comatibility.
+//This functionality is taken from  KTabWidget for compatibility.
 //KTabWidget has been moved to KdeLibs4Support and QTabWidget::tabBarDoubleClicked does not
 //work on empty space after tabs,
 bool TabbedViewWidget::isEmptyTabbarSpace(const QPoint &point) const

@@ -359,7 +359,7 @@ bool RdpView::start()
     connect(m_process, SIGNAL(error(QProcess::ProcessError)), SLOT(processError(QProcess::ProcessError)));
     connect(m_process, SIGNAL(readyReadStandardError()), SLOT(receivedStandardError()));
     connect(m_process, SIGNAL(readyReadStandardOutput()), SLOT(receivedStandardOutput()));
-    connect(m_process, SIGNAL(finished(int, QProcess::ExitStatus)), SLOT(connectionClosed()));
+    connect(m_process, SIGNAL(finished(int,QProcess::ExitStatus)), SLOT(connectionClosed()));
     connect(m_process, SIGNAL(started()), SLOT(connectionOpened()));
 
     m_process->start(QStringLiteral("xfreerdp"), arguments);
@@ -514,7 +514,7 @@ QString RdpView::keymapToXfreerdp(const QString &keyboadLayout)
 }
 
 // list of xfreerdp --kbd-list
-// this is a mapping for rdesktop comptibilty (old settings will still work)
+// this is a mapping for rdesktop compatibility (old settings will still work)
 // needs to be completed (when not in message freeze; needs new localization)
 QHash<QString, QString> RdpView::initKeymapToXfreerdp()
 {

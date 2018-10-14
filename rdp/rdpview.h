@@ -80,7 +80,7 @@ private:
 
     void connectionError(const QString &text,
                          const QString &caption); // called if xfreerdp quits with error
-    void connectionClosed(CloseType closeType); // Signals the connection closed if not quiting or it is forced
+    void connectionClosed(CloseType closeType); // Signals the connection closed if not quitting or it is forced
 
     QString keymapToXfreerdp(const QString &keyboadLayout);
     QHash<QString, QString> initKeymapToXfreerdp();

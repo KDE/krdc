@@ -41,7 +41,7 @@ static const int autoHideTimeout = 500;
 static const int  initialAutoHideTimeout = 2000;
 
 /**
- * Denotes the verious states of the animation.
+ * Denotes the various states of the animation.
  */
 enum AnimState {
     Hiding,
