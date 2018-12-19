@@ -238,7 +238,7 @@ void RemoteDesktopsModel::buildModelFromBookmarkGroup(const KBookmarkGroup &grou
                 item.source = RemoteDesktop::History;
                 item.favorite = false;
 
-                // since we are in the history folder collect statitics and add them
+                // since we are in the history folder collect statistics and add them
                 QDateTime connected = QDateTime();
                 QDateTime created = QDateTime();
                 bool ok = false;

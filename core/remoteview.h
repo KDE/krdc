@@ -73,7 +73,7 @@ public:
     * Describes the state of a local cursor, if there is such a concept in the backend.
     * With local cursors, there are two cursors: the cursor on the local machine (client),
     * and the cursor on the remote machine (server). Because there is usually some lag,
-    * some backends show both cursors simultanously. In the VNC backend the local cursor
+    * some backends show both cursors simultaneously. In the VNC backend the local cursor
     * is a dot and the remote cursor is the 'real' cursor, usually an arrow.
     */
 
@@ -282,7 +282,7 @@ public Q_SLOTS:
      * Called to enable or disable scaling.
      * Ignored if @ref supportsScaling() is false.
      * The default implementation does nothing.
-     * @param s true to enable, false to disable.
+     * @param scale true to enable, false to disable.
      * @see supportsScaling()
      * @see scaling()
      */
@@ -330,8 +330,8 @@ Q_SIGNALS:
     /**
      * Emitted when the size of the remote screen changes. Also
      * called when the size is known for the first time.
-     * @param x the width of the screen
-     * @param y the height of the screen
+     * @param w the width of the screen
+     * @param h the height of the screen
      */
     void framebufferSizeChanged(int w, int h);
 
@@ -391,7 +391,7 @@ protected:
      * Set the status of the connection.
      * Emits a statusChanged() signal.
      * Note that the states need to be set in a certain order,
-     * see @ref Status. setStatus() will try to do this
+     * see @ref RemoteStatus. setStatus() will try to do this
      * transition automatically, so if you are in Connecting
      * and call setStatus(Preparing), setStatus() will
      * emit a Authenticating and then Preparing.

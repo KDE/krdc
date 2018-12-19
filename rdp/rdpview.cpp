@@ -244,7 +244,7 @@ bool RdpView::start()
             arguments += additionalArguments;
         }
 
-        // krdc has no support for certificate management yet; it would not be possbile to connect to any host:
+        // krdc has no support for certificate management yet; it would not be possible to connect to any host:
         // "The host key for example.com has changed" ...
         // "Add correct host key in ~/.freerdp/known_hosts to get rid of this message."
         arguments << QStringLiteral("--ignore-certificate");
@@ -335,7 +335,7 @@ bool RdpView::start()
             arguments += additionalArguments;
         }
 
-        // krdc has no support for certificate management yet; it would not be possbile to connect to any host:
+        // krdc has no support for certificate management yet; it would not be possible to connect to any host:
         // "The host key for example.com has changed" ...
         // "Add correct host key in ~/.freerdp/known_hosts to get rid of this message."
         arguments << QStringLiteral("/cert-ignore");
