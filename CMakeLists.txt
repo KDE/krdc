@@ -81,7 +81,7 @@ set_package_properties("libssh" PROPERTIES
 )
 
 # Needs porting
-FIND_PROGRAM(FREERDP_EXECUTABLE xfreerdp)
+find_program(FREERDP_EXECUTABLE xfreerdp)
 if(FREERDP_EXECUTABLE)
     set(FREERDP_EXECUTABLE_FOUND true)
 endif(FREERDP_EXECUTABLE)
