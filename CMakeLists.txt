@@ -83,14 +83,22 @@ set_package_properties("libssh" PROPERTIES
 # Needs porting
 find_program(FREERDP_EXECUTABLE xfreerdp)
 if(FREERDP_EXECUTABLE)
+    set(FREERDP_FOUND true) # mark the package found
     set(FREERDP_EXECUTABLE_FOUND true)
 endif(FREERDP_EXECUTABLE)
 
-set_package_properties("freerdp" PROPERTIES
+# dud to allow the dep showing up in feature summary.
+# note that this must be after _FOUND is set so it doesn't incorrectly
+# set the metadata to not-found.
+find_package(freerdp QUIET)
+
+set_package_properties(freerdp PROPERTIES
         DESCRIPTION "A free Remote Desktop Protocol (RDP) Implementation"
         URL "http://www.freerdp.com"
-        PURPOSE "Needed for RDP support in KRDC (at runtime)"
-                                     )
+        PURPOSE "The xfreerdp binary is needed for RDP support in KRDC (at runtime)"
+        TYPE RUNTIME
+)
+
 # NX support is not ready for KDE 4.2; disabled (uwolfer)
 # macro_optional_find_package(LibNXCL)
 # macro_log_feature(LIBNXCL_FOUND "libnxcl" "NX X compression client library" "http://svn.berlios.de/svnroot/repos/freenx/trunk/freenx-client/nxcl/" FALSE "1.0" "Needed to build Krdc with NX support")
