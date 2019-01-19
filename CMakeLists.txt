@@ -7,10 +7,19 @@ set (KDE_APPLICATIONS_VERSION_MICRO "70")
 
 set (KDE_APPLICATIONS_VERSION "${KDE_APPLICATIONS_VERSION_MAJOR}.${KDE_APPLICATIONS_VERSION_MINOR}.${KDE_APPLICATIONS_VERSION_MICRO}")
 
-find_package(ECM REQUIRED NO_MODULE)
-set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
+set (KF_MIN_VERSION "5.18.0")
 
-find_package(KF5 REQUIRED COMPONENTS
+find_package(ECM ${KF_MIN_VERSION} REQUIRED NO_MODULE)
+set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules ${ECM_MODULE_PATH})
+
+include(KDEInstallDirs)
+include(KDECMakeSettings)
+include(KDECompilerSettings NO_POLICY_SCOPE)
+include(ECMSetupVersion)
+include(ECMQtDeclareLoggingCategory)
+include(FeatureSummary)
+
+find_package(KF5 ${KF_MIN_VERSION} REQUIRED COMPONENTS
     Config
     KCMUtils
     DNSSD
@@ -26,20 +35,14 @@ find_package(KF5 REQUIRED COMPONENTS
     I18n
 )
 
+find_package(KF5DocTools)
+
 if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     if (NOT CMAKE_CXX_COMPILER_VERSION VERSION_LESS "5.0.0")
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wsuggest-override" )
     endif()
 endif()
 
-find_package(KF5DocTools)
-
-include(ECMSetupVersion)
-include(ECMQtDeclareLoggingCategory)
-include(KDEInstallDirs)
-include(KDECompilerSettings NO_POLICY_SCOPE)
-include(KDECMakeSettings)
-include(FeatureSummary)
 
 # use sane compile flags
 add_definitions(
@@ -61,10 +64,6 @@ if(WIN32)
     set(CMAKE_REQUIRED_LIBRARIES ${KDEWIN32_LIBRARIES})
     set(CMAKE_REQUIRED_INCLUDES  ${KDEWIN32_INCLUDES})
 endif(WIN32)
-
-include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR})
-
-set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules ${CMAKE_MODULE_PATH})
 
 find_package(LibVNCServer)
 set_package_properties("libvncserver" PROPERTIES
