@@ -102,7 +102,7 @@ public:
     };
 
     explicit VncClientThread(QObject *parent = 0);
-    ~VncClientThread();
+    ~VncClientThread() override;
     const QImage image(int x = 0, int y = 0, int w = 0, int h = 0);
     void setImage(const QImage &img);
     void emitUpdated(int x, int y, int w, int h);

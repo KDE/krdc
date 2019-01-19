@@ -51,7 +51,7 @@ class VncView: public RemoteView
 
 public:
     explicit VncView(QWidget *parent = 0, const QUrl &url = QUrl(), KConfigGroup configGroup = KConfigGroup());
-    ~VncView();
+    ~VncView() override;
 
     QSize framebufferSize() override;
     QSize sizeHint() const override;

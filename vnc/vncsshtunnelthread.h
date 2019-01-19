@@ -40,7 +40,7 @@ class VncSshTunnelThread : public QThread
     Q_OBJECT
 public:
     VncSshTunnelThread(const QByteArray &host, int vncPort, int tunnelPort, int sshPort, const QByteArray &sshUserName, bool loopback);
-    ~VncSshTunnelThread();
+    ~VncSshTunnelThread() override;
 
     enum PasswordOrigin {
         PasswordFromWallet,

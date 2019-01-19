@@ -35,7 +35,7 @@ class VncViewFactory : public RemoteViewFactory
 public:
     explicit VncViewFactory(QObject *parent, const QVariantList &args);
 
-    virtual ~VncViewFactory();
+    ~VncViewFactory() override;
 
     bool supportsUrl(const QUrl &url) const override;
 

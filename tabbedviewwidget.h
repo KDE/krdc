@@ -70,8 +70,8 @@ Q_SIGNALS:
     void mouseMiddleClick(int index);
 
 protected:
-    void mouseDoubleClickEvent(QMouseEvent * event) Q_DECL_OVERRIDE;
-    void mouseReleaseEvent(QMouseEvent *) Q_DECL_OVERRIDE;
+    void mouseDoubleClickEvent(QMouseEvent * event) override;
+    void mouseReleaseEvent(QMouseEvent *) override;
 
 private:
     TabbedViewWidgetModel *m_model;

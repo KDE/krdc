@@ -34,7 +34,7 @@ class VncPreferences : public KCModule
 
 public:
     explicit VncPreferences(QWidget *parent = 0, const QVariantList &args = QVariantList());
-    ~VncPreferences();
+    ~VncPreferences() override;
 
     void save() override;
     void load() override;
