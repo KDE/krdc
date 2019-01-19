@@ -75,7 +75,7 @@ set_package_properties("libvncserver" PROPERTIES
 find_package(LibSSH)
 set_package_properties("libssh" PROPERTIES
     DESCRIPTION "ssh library"
-    URL "http://libssh.org"
+    URL "https://libssh.org/"
     PURPOSE "Needed to build VNC+SSH tunnel support "
 )
 
@@ -93,7 +93,7 @@ find_package(freerdp QUIET)
 
 set_package_properties(freerdp PROPERTIES
         DESCRIPTION "A free Remote Desktop Protocol (RDP) Implementation"
-        URL "http://www.freerdp.com"
+        URL "https://www.freerdp.com/"
         PURPOSE "The xfreerdp binary is needed for RDP support in KRDC (at runtime)"
         TYPE RUNTIME
 )

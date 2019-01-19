@@ -320,7 +320,7 @@ void VncClientThread::outputHandler(const char *format, ...)
     }
 
     // internal messages, not displayed to user
-    if (message.contains(QLatin1String("VNC server supports protocol version 3.889"))) // see http://bugs.kde.org/162640
+    if (message.contains(QLatin1String("VNC server supports protocol version 3.889"))) // see https://bugs.kde.org/162640
         outputErrorMessageString = QLatin1String("INTERNAL:APPLE_VNC_COMPATIBILTY");
 }
 
