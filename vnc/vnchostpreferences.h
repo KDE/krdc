@@ -32,7 +32,7 @@ class VncHostPreferences : public HostPreferences
     Q_OBJECT
 
 public:
-    explicit VncHostPreferences(KConfigGroup configGroup, QObject *parent = 0);
+    explicit VncHostPreferences(KConfigGroup configGroup, QObject *parent = nullptr);
     ~VncHostPreferences() override;
 
     void setQuality(RemoteView::Quality quality);

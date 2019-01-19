@@ -117,18 +117,18 @@ void VncSshTunnelThread::run()
     }
 
     // First try authenticating via ssh agent
-    res = ssh_userauth_agent(session, NULL);
+    res = ssh_userauth_agent(session, nullptr);
 
     m_passwordRequestCanceledByUser = false;
     if (res != SSH_AUTH_SUCCESS) {
         // If ssh agent didn't work, try with password
         emit passwordRequest(NoFlags); // This calls blockingly to the main thread which will call setPassword
-        res = ssh_userauth_password(session, NULL, m_password.toUtf8().constData());
+        res = ssh_userauth_password(session, nullptr, m_password.toUtf8().constData());
 
         // If password didn't work but came from the wallet, ask the user for the password
         if (!m_passwordRequestCanceledByUser && res != SSH_AUTH_SUCCESS && m_passwordOrigin == PasswordFromWallet) {
             emit passwordRequest(IgnoreWallet); // This calls blockingly to the main thread which will call setPassword
-            res = ssh_userauth_password(session, NULL, m_password.toUtf8().constData());
+            res = ssh_userauth_password(session, nullptr, m_password.toUtf8().constData());
         }
     }
 
@@ -222,8 +222,8 @@ void VncSshTunnelThread::run()
         fd_set set;
         FD_ZERO(&set);
         FD_SET(client_sock, &set);
-        ssh_channel channels[2] = { forwarding_channel, NULL };
-        ssh_channel channels_out[2] = { NULL, NULL };
+        ssh_channel channels[2] = { forwarding_channel, nullptr };
+        ssh_channel channels_out[2] = { nullptr, nullptr };
 
         res = ssh_select(channels, channels_out, client_sock + 1, &set, &timeout);
         if (res == SSH_EINTR) continue;

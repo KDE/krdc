@@ -36,8 +36,8 @@
 NxView::NxView(QWidget *parent, const KUrl &url, KConfigGroup configGroup)
         : RemoteView(parent),
         m_quitFlag(false),
-        m_container(NULL),
-        m_hostPreferences(NULL)
+        m_container(nullptr),
+        m_hostPreferences(nullptr)
 {
     m_url = url;
     m_host = url.host();

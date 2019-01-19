@@ -101,7 +101,7 @@ public:
         bpp8
     };
 
-    explicit VncClientThread(QObject *parent = 0);
+    explicit VncClientThread(QObject *parent = nullptr);
     ~VncClientThread() override;
     const QImage image(int x = 0, int y = 0, int w = 0, int h = 0);
     void setImage(const QImage &img);

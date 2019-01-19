@@ -40,7 +40,7 @@ static QThreadStorage<VncClientThread **> instances;
 // Dispatch from this static callback context to the member context.
 rfbBool VncClientThread::newclientStatic(rfbClient *cl)
 {
-    VncClientThread *t = (VncClientThread *)rfbClientGetClientData(cl, 0);
+    VncClientThread *t = (VncClientThread *)rfbClientGetClientData(cl, nullptr);
     Q_ASSERT(t);
 
     return t->newclient();
@@ -49,7 +49,7 @@ rfbBool VncClientThread::newclientStatic(rfbClient *cl)
 // Dispatch from this static callback context to the member context.
 void VncClientThread::updatefbStatic(rfbClient *cl, int x, int y, int w, int h)
 {
-    VncClientThread *t = (VncClientThread *)rfbClientGetClientData(cl, 0);
+    VncClientThread *t = (VncClientThread *)rfbClientGetClientData(cl, nullptr);
     Q_ASSERT(t);
 
     return t->updatefb(x, y, w, h);
@@ -58,7 +58,7 @@ void VncClientThread::updatefbStatic(rfbClient *cl, int x, int y, int w, int h)
 // Dispatch from this static callback context to the member context.
 void VncClientThread::cuttextStatic(rfbClient *cl, const char *text, int textlen)
 {
-    VncClientThread *t = (VncClientThread *)rfbClientGetClientData(cl, 0);
+    VncClientThread *t = (VncClientThread *)rfbClientGetClientData(cl, nullptr);
     Q_ASSERT(t);
 
     t->cuttext(text, textlen);
@@ -67,7 +67,7 @@ void VncClientThread::cuttextStatic(rfbClient *cl, const char *text, int textlen
 // Dispatch from this static callback context to the member context.
 char *VncClientThread::passwdHandlerStatic(rfbClient *cl)
 {
-    VncClientThread *t = (VncClientThread *)rfbClientGetClientData(cl, 0);
+    VncClientThread *t = (VncClientThread *)rfbClientGetClientData(cl, nullptr);
     Q_ASSERT(t);
 
     return t->passwdHandler();
@@ -76,7 +76,7 @@ char *VncClientThread::passwdHandlerStatic(rfbClient *cl)
 // Dispatch from this static callback context to the member context.
 rfbCredential *VncClientThread::credentialHandlerStatic(rfbClient *cl, int credentialType)
 {
-    VncClientThread *t = (VncClientThread *)rfbClientGetClientData(cl, 0);
+    VncClientThread *t = (VncClientThread *)rfbClientGetClientData(cl, nullptr);
     Q_ASSERT(t);
 
     return t->credentialHandler(credentialType);
@@ -240,7 +240,7 @@ rfbCredential *VncClientThread::credentialHandler(int credentialType)
 {
     qCDebug(KRDC) << "credential request" << credentialType;
 
-    rfbCredential *cred = 0;
+    rfbCredential *cred = nullptr;
 
     switch (credentialType) {
         case rfbCredentialTypeUser:
@@ -326,8 +326,8 @@ void VncClientThread::outputHandler(const char *format, ...)
 
 VncClientThread::VncClientThread(QObject *parent)
         : QThread(parent)
-        , frameBuffer(0)
-        , cl(0)
+        , frameBuffer(nullptr)
+        , cl(nullptr)
         , m_stopped(false)
 {
     // We choose a small value for interval...after all if the connection is
@@ -540,7 +540,7 @@ bool VncClientThread::clientCreate(bool reinitialising)
     cl->GetCredential = credentialHandlerStatic;
     cl->GotFrameBufferUpdate = updatefbStatic;
     cl->GotXCutText = cuttextStatic;
-    rfbClientSetClientData(cl, 0, this);
+    rfbClientSetClientData(cl, nullptr, this);
 
     cl->serverHost = strdup(m_host.toUtf8().constData());
 
@@ -548,13 +548,13 @@ bool VncClientThread::clientCreate(bool reinitialising)
 
     qCDebug(KRDC) << "--------------------- trying init ---------------------";
 
-    if (!rfbInitClient(cl, 0, 0)) {
+    if (!rfbInitClient(cl, nullptr, nullptr)) {
         if (!reinitialising) {
             // Don't whine on reconnection failure: presumably the network
             // is simply still down.
             qCritical(KRDC) << "rfbInitClient failed";
         }
-        cl = 0;
+        cl = nullptr;
         return false;
     }
 
@@ -576,7 +576,7 @@ void VncClientThread::clientDestroy()
     if (cl) {
         // Disconnect from vnc server & cleanup allocated resources
         rfbClientCleanup(cl);
-        cl = 0;
+        cl = nullptr;
     }
 }
 
