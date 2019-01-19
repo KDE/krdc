@@ -100,8 +100,6 @@ int main(int argc, char **argv)
     app.setWindowIcon(QIcon::fromTheme(appName));
 
     QCommandLineParser parser;
-    parser.addVersionOption();
-    parser.addHelpOption();
     aboutData.setupCommandLine(&parser);
 
     // command line options
