@@ -41,9 +41,9 @@
 
 int main(int argc, char **argv)
 {
-    KLocalizedString::setApplicationDomain("krdc");
     const QString appName = QStringLiteral("krdc");
     QApplication app(argc, argv);
+    KLocalizedString::setApplicationDomain("krdc");
     QTime startupTimer;
     startupTimer.start();
 
