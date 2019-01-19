@@ -95,12 +95,8 @@ int main(int argc, char **argv)
                         QStringLiteral("libvncserver-common@lists.sf.net"), QStringLiteral("http://libvncserver.sourceforge.net/"));
     aboutData.addAuthor(i18n("Abner Silva"), i18n("Telepathy Tubes Integration"), QStringLiteral("abner.silva@kdemail.net"));
     aboutData.setOrganizationDomain("kde.org");
-    KAboutData::setApplicationData(aboutData);
 
-    app.setApplicationName(aboutData.componentName());
-    app.setApplicationDisplayName(aboutData.displayName());
-    app.setOrganizationDomain(aboutData.organizationDomain());
-    app.setApplicationVersion(aboutData.version());
+    KAboutData::setApplicationData(aboutData);
     app.setWindowIcon(QIcon::fromTheme(appName));
 
     QCommandLineParser parser;
