@@ -31,6 +31,7 @@
 #include <KMessageBox>
 #include <KPasswordDialog>
 #include <KShell>
+#include <KWindowSystem>
 
 #include <QWindow>
 #include <QEvent>
@@ -362,7 +363,12 @@ bool RdpView::start()
     connect(m_process, SIGNAL(finished(int,QProcess::ExitStatus)), SLOT(connectionClosed()));
     connect(m_process, SIGNAL(started()), SLOT(connectionOpened()));
 
-    m_process->start(QStringLiteral("xfreerdp"), arguments);
+    if (KWindowSystem::platform() == KWindowSystem::Platform::Wayland) {
+        m_process->start(QStringLiteral("wlfreerdp"), arguments);
+    }
+    else {
+        m_process->start(QStringLiteral("xfreerdp"), arguments);
+    }
 
     return true;
 }
@@ -429,7 +435,16 @@ void RdpView::processError(QProcess::ProcessError error)
 
     if (m_status == Connecting) {
         if (error == QProcess::FailedToStart) {
-            connectionError(i18n("Could not start \"xfreerdp\"; make sure xfreerdp is properly installed."),
+            QString executable;
+            switch (KWindowSystem::platform()) {
+            case KWindowSystem::Platform::Wayland:
+                executable = QStringLiteral("wlfreerdp");
+                break;
+            case KWindowSystem::Platform::X11:
+            case KWindowSystem::Platform::Unknown:
+                executable = QStringLiteral("xfreerdp");
+            }
+            connectionError(i18n("Could not start \"%1\"; make sure %1 is properly installed.", executable),
                             i18n("RDP Failure"));
             return;
         }

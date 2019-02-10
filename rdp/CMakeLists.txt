@@ -27,6 +27,7 @@ if(HAVE_XFREERDP)
         Qt5::Gui
         KF5::ConfigCore
         KF5::CoreAddons
+        KF5::WindowSystem
         KF5::XmlGui
         krdccore
     )
