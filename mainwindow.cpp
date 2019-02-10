@@ -140,6 +140,7 @@ void MainWindow::setupActions()
     QAction *connectionAction = actionCollection()->addAction(QStringLiteral("new_connection"));
     connectionAction->setText(i18n("New Connection"));
     connectionAction->setIcon(QIcon::fromTheme(QStringLiteral("network-connect")));
+    actionCollection()->setDefaultShortcuts(connectionAction, KStandardShortcut::openNew());
     connect(connectionAction, SIGNAL(triggered()), SLOT(newConnectionPage()));
 
     QAction *screenshotAction = actionCollection()->addAction(QStringLiteral("take_screenshot"));
