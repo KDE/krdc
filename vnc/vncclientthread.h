@@ -170,7 +170,7 @@ private:
     void cuttext(const char *text, int textlen);
     char *passwdHandler();
     rfbCredential *credentialHandler(int credentialType);
-    void outputHandler(const char *format, ...);
+    void outputHandler(const char *format, va_list args);
 
     QImage m_image;
     rfbClient *cl;
