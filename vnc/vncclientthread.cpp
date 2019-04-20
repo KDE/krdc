@@ -190,14 +190,14 @@ void VncClientThread::updatefb(int x, int y, int w, int h)
     QImage img;
     switch(colorDepth()) {
     case bpp8:
-        img = QImage(cl->frameBuffer, width, height, QImage::Format_Indexed8);
+        img = QImage(cl->frameBuffer, width, height, width, QImage::Format_Indexed8);
         img.setColorTable(m_colorTable);
         break;
     case bpp16:
-        img = QImage(cl->frameBuffer, width, height, QImage::Format_RGB16);
+        img = QImage(cl->frameBuffer, width, height, 2*width, QImage::Format_RGB16);
         break;
     case bpp32:
-        img = QImage(cl->frameBuffer, width, height, QImage::Format_RGB32);
+        img = QImage(cl->frameBuffer, width, height, 4*width, QImage::Format_RGB32);
         break;
     }
 
