@@ -56,7 +56,6 @@ VncView::VncView(QWidget *parent, const QUrl &url, KConfigGroup configGroup)
         : RemoteView(parent),
         m_initDone(false),
         m_buttonMask(0),
-        m_repaint(false),
         m_quitFlag(false),
         m_firstPasswordTry(true),
         m_dontSendClipboard(false),
@@ -419,19 +418,6 @@ void VncView::updateImage(int x, int y, int w, int h)
 {
 //     qCDebug(KRDC) << "got update" << width() << height();
 
-    m_x = x;
-    m_y = y;
-    m_w = w;
-    m_h = h;
-
-    if (m_horizontalFactor != 1.0 || m_verticalFactor != 1.0) {
-        // If the view is scaled, grow the update rectangle to avoid artifacts
-        m_x-=1;
-        m_y-=1;
-        m_w+=2;
-        m_h+=2;
-    }
-
     m_frame = vncThread.image();
 
     if (!m_initDone) {
@@ -489,9 +475,7 @@ void VncView::updateImage(int x, int y, int w, int h)
         }
     }
 
-    m_repaint = true;
-    repaint(qRound(m_x * m_horizontalFactor), qRound(m_y * m_verticalFactor), qRound(m_w * m_horizontalFactor), qRound(m_h * m_verticalFactor));
-    m_repaint = false;
+    repaint(QRectF(x * m_horizontalFactor, y * m_verticalFactor, w * m_horizontalFactor, h * m_verticalFactor).toAlignedRect());
 }
 
 void VncView::setViewOnly(bool viewOnly)
@@ -551,33 +535,12 @@ void VncView::paintEvent(QPaintEvent *event)
     event->accept();
 
     QPainter painter(this);
+    painter.setRenderHint(QPainter::SmoothPixmapTransform);
 
-    if (m_repaint) {
-//         qCDebug(KRDC) << "normal repaint";
-        painter.drawImage(QRect(qRound(m_x*m_horizontalFactor), qRound(m_y*m_verticalFactor),
-                                qRound(m_w*m_horizontalFactor), qRound(m_h*m_verticalFactor)),
-                          m_frame.copy(m_x, m_y, m_w, m_h).scaled(qRound(m_w*m_horizontalFactor),
-                                                                  qRound(m_h*m_verticalFactor),
-                                                                  Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
-    } else {
-//         qCDebug(KRDC) << "resize repaint";
-        QRect rect = event->rect();
-        if (rect.width() != width() || rect.height() != height()) {
-//             qCDebug(KRDC) << "Partial repaint";
-            const int sx = rect.x()/m_horizontalFactor;
-            const int sy = rect.y()/m_verticalFactor;
-            const int sw = rect.width()/m_horizontalFactor;
-            const int sh = rect.height()/m_verticalFactor;
-            painter.drawImage(rect,
-                              m_frame.copy(sx, sy, sw, sh).scaled(rect.width(), rect.height(),
-                                                                  Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
-        } else {
-//             qCDebug(KRDC) << "Full repaint" << width() << height() << m_frame.width() << m_frame.height();
-            painter.drawImage(QRect(0, 0, width(), height()),
-                              m_frame.scaled(m_frame.width() * m_horizontalFactor, m_frame.height() * m_verticalFactor,
-                                             Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
-        }
-    }
+    const QRectF dstRect = event->rect();
+    const QRectF srcRect(dstRect.x() / m_horizontalFactor, dstRect.y() / m_verticalFactor,
+                         dstRect.width() / m_horizontalFactor, dstRect.height() / m_verticalFactor);
+    painter.drawImage(dstRect, m_frame, srcRect);
 
     RemoteView::paintEvent(event);
 }
