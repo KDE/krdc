@@ -99,9 +99,6 @@ set_package_properties(freerdp PROPERTIES
         PURPOSE "The xfreerdp binary is needed for RDP support in KRDC (at runtime)"
         TYPE RUNTIME
 )
-# NX support is not ready for KDE 4.2; disabled (uwolfer)
-# macro_optional_find_package(LibNXCL)
-# macro_log_feature(LIBNXCL_FOUND "libnxcl" "NX X compression client library" "http://svn.berlios.de/svnroot/repos/freenx/trunk/freenx-client/nxcl/" FALSE "1.0" "Needed to build Krdc with NX support")
 
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}
@@ -112,7 +109,6 @@ include_directories(
 
 add_subdirectory(core)
 add_subdirectory(vnc)
-add_subdirectory(nx)
 add_subdirectory(rdp)
 add_subdirectory(test)
 
