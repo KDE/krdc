@@ -42,8 +42,8 @@ public:
     FloatingToolBar(QWidget *parent, QWidget *anchorWidget);
     ~FloatingToolBar() override;
 
-    Q_ENUMS(Side)
     enum Side { Left = 0, Top = 1, Right = 2, Bottom = 3 };
+    Q_ENUM(Side)
 
     void addAction(QAction *action);
     void setSide(Side side);

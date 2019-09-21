@@ -93,13 +93,12 @@ class VncClientThread: public QThread
     Q_OBJECT
 
 public:
-    Q_ENUMS(ColorDepth)
-
     enum ColorDepth {
         bpp32,
         bpp16,
         bpp8
     };
+    Q_ENUM(ColorDepth)
 
     explicit VncClientThread(QObject *parent = nullptr);
     ~VncClientThread() override;

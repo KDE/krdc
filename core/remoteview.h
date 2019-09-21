@@ -60,14 +60,13 @@ class KRDCCORE_EXPORT RemoteView : public QWidget
 
 public:
 
-    Q_ENUMS(Quality)
-
     enum Quality {
         Unknown,
         High,
         Medium,
         Low
     };
+    Q_ENUM(Quality)
 
     /**
     * Describes the state of a local cursor, if there is such a concept in the backend.
@@ -77,14 +76,13 @@ public:
     * is a dot and the remote cursor is the 'real' cursor, usually an arrow.
     */
 
-    Q_ENUMS(DotCursorState)
-
     enum DotCursorState {
         CursorOn,  ///< Always show local cursor (and the remote one).
         CursorOff, ///< Never show local cursor, only the remote one.
         /// Try to measure the lag and enable the local cursor if the latency is too high.
         CursorAuto
     };
+    Q_ENUM(DotCursorState)
 
     /**
     * State of the connection. The state of the connection is returned
@@ -101,8 +99,6 @@ public:
     * (If you add/remove a state here, you must adapt it)
     */
 
-    Q_ENUMS(RemoteStatus)
-
     enum RemoteStatus {
         Connecting     = 0,
         Authenticating = 1,
@@ -111,8 +107,7 @@ public:
         Disconnecting  = -1,
         Disconnected   = -2
     };
-
-    Q_ENUMS(ErrorCode)
+    Q_ENUM(RemoteStatus)
 
     enum ErrorCode {
         None = 0,
@@ -125,6 +120,7 @@ public:
         ServerBlocked,
         Authentication
     };
+    Q_ENUM(ErrorCode)
 
     ~RemoteView() override;
 
