@@ -475,7 +475,7 @@ void MainWindow::switchFullscreen()
         restoreGeometry(m_mainWindowGeometry);
         if (m_systemTrayIcon) m_systemTrayIcon->setAssociatedWidget(this);
 
-        foreach (RemoteView * view, m_remoteViewMap.values()) {
+        foreach (RemoteView * view, m_remoteViewMap) {
             view->enableScaling(view->hostPreferences()->windowedScale());
         }
 
@@ -916,7 +916,7 @@ void MainWindow::updateConfiguration()
     }
 
     // Send update configuration message to all views
-    foreach (RemoteView *view, m_remoteViewMap.values()) {
+    foreach (RemoteView *view, m_remoteViewMap) {
         view->updateConfiguration();
     }
 }
@@ -932,7 +932,7 @@ void MainWindow::quit(bool systemEvent)
 
         if (Settings::rememberSessions()) { // remember open remote views for next startup
             QStringList list;
-            foreach (RemoteView *view, m_remoteViewMap.values()) {
+            foreach (RemoteView *view, m_remoteViewMap) {
                 qCDebug(KRDC) << view->url();
                 list.append(view->url().toDisplayString(QUrl::StripTrailingSlash));
             }
@@ -941,7 +941,7 @@ void MainWindow::quit(bool systemEvent)
 
         saveHostPrefs();
 
-        foreach (RemoteView *view, m_remoteViewMap.values()) {
+        foreach (RemoteView *view, m_remoteViewMap) {
             view->startQuitting();
         }
 
@@ -998,7 +998,7 @@ void MainWindow::saveProperties(KConfigGroup &group)
 
 void MainWindow::saveHostPrefs()
 {
-    foreach (RemoteView *view, m_remoteViewMap.values()) {
+    foreach (RemoteView *view, m_remoteViewMap) {
         saveHostPrefs(view);
     }
 }
