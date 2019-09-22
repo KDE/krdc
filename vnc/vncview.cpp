@@ -605,7 +605,7 @@ void VncView::mouseEventHandler(QMouseEvent *e)
 void VncView::wheelEventHandler(QWheelEvent *event)
 {
     int eb = 0;
-    if (event->delta() < 0)
+    if (event->angleDelta().y() < 0)
         eb |= 0x10;
     else
         eb |= 0x8;

@@ -57,7 +57,7 @@ bool TestView::eventFilter(QObject *obj, QEvent *event)
 void TestView::asyncConnect()
 {
     QPalette pal = palette();
-    pal.setColor(QPalette::Background, Qt::yellow);
+    pal.setColor(QPalette::Window, Qt::yellow);
     setPalette(pal);
     setAutoFillBackground(true);
 

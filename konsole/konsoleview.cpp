@@ -60,7 +60,7 @@ KonsoleView::KonsoleView(QWidget *parent, const QUrl &url, KConfigGroup configGr
     if (part != 0) {
 //         connect(part, SIGNAL(destroyed(QObject*)), this, SLOT(terminalExited()));
         QVBoxLayout *mainLayout = new QVBoxLayout(this);
-        mainLayout->setMargin(0);
+        mainLayout->setContentsMargins(0, 0, 0, 0);
         mainLayout->setSpacing(0);
         m_terminalWidget = part->widget();
         mainLayout->addWidget(m_terminalWidget);

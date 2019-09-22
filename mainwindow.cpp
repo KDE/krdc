@@ -540,7 +540,7 @@ QScrollArea *MainWindow::createScrollArea(QWidget *parent, RemoteView *remoteVie
     connect(scrollArea, SIGNAL(resized(int,int)), remoteView, SLOT(scaleResize(int,int)));
 
     QPalette palette = scrollArea->palette();
-    palette.setColor(QPalette::Background, Settings::backgroundColor());
+    palette.setColor(QPalette::Window, Settings::backgroundColor());
     scrollArea->setPalette(palette);
 
     scrollArea->setFrameStyle(QFrame::NoFrame);

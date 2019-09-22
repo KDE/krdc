@@ -305,7 +305,7 @@ void FloatingToolBar::wheelEvent(QWheelEvent *e)
 {
     e->accept();
 
-    const qreal diff = e->delta() / 100.0 / 15.0;
+    const qreal diff = e->angleDelta().y() / 100.0 / 15.0;
 //    qCDebug(KRDC) << diff;
     if (((d->opacity <= 1) && (diff > 0)) || ((d->opacity >= 0) && (diff < 0)))
         d->opacity += diff;

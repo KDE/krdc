@@ -196,7 +196,7 @@ bool HostPreferences::showDialog(QWidget *parent)
 
     if (widget) {
         if (widget->layout())
-            widget->layout()->setMargin(0);
+            widget->layout()->setContentsMargins(0, 0, 0, 0);
 
         layout->addWidget(widget);
     }

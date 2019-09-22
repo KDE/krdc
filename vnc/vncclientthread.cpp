@@ -332,7 +332,7 @@ VncClientThread::VncClientThread(QObject *parent)
     m_keepalive.failedProbes = 3;
     m_keepalive.set = false;
     m_keepalive.failed = false;
-    m_previousDetails = QString::null;
+    m_previousDetails = QString();
     outputErrorMessageString.clear(); //don't deliver error messages of old instances...
     QMutexLocker locker(&mutex);
 

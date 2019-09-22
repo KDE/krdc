@@ -33,7 +33,7 @@
 #include <KLocalizedString>
 #include <QDir>
 #include <QFile>
-#include <QTime>
+#include <QElapsedTimer>
 #include <QCommandLineOption>
 #include <QCommandLineParser>
 #include <QPluginLoader>
@@ -44,7 +44,7 @@ int main(int argc, char **argv)
     const QString appName = QStringLiteral("krdc");
     QApplication app(argc, argv);
     KLocalizedString::setApplicationDomain("krdc");
-    QTime startupTimer;
+    QElapsedTimer startupTimer;
     startupTimer.start();
 
     app.setAttribute(Qt::AA_UseHighDpiPixmaps, true);
