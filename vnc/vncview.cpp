@@ -635,7 +635,7 @@ void VncView::keyEventHandler(QKeyEvent *e)
     if (e->isAutoRepeat() && (e->type() == QEvent::KeyRelease))
         return;
 
-// parts of this code are based on http://italc.sourcearchive.com/documentation/1.0.9.1/vncview_8cpp-source.html
+// parts of this code are based on https://github.com/veyon/veyon/blob/master/core/src/VncView.cpp
     rfbKeySym k = e->nativeVirtualKey();
 
     // we do not handle Key_Backtab separately as the Shift-modifier
