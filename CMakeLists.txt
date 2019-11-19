@@ -99,7 +99,9 @@ set_package_properties(freerdp PROPERTIES
         PURPOSE "The xfreerdp binary is needed for RDP support in KRDC (at runtime)"
         TYPE RUNTIME
 )
-
+if (EXISTS "${CMAKE_SOURCE_DIR}/.git")
+   add_definitions(-DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x060000) 
+endif()
 # NX support is not ready for KDE 4.2; disabled (uwolfer)
 # macro_optional_find_package(LibNXCL)
 # macro_log_feature(LIBNXCL_FOUND "libnxcl" "NX X compression client library" "http://svn.berlios.de/svnroot/repos/freenx/trunk/freenx-client/nxcl/" FALSE "1.0" "Needed to build Krdc with NX support")

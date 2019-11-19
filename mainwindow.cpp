@@ -1056,7 +1056,7 @@ QWidget* MainWindow::newConnectionWidget()
         QLabel *addressLabel = new QLabel(i18n("Connect to:"), m_newConnectionWidget);
         m_protocolInput = new KComboBox(m_newConnectionWidget);
         m_addressInput = new KLineEdit(m_newConnectionWidget);
-        m_addressInput->setClearButtonShown(true);
+        m_addressInput->setClearButtonEnabled(true);
         m_addressInput->setPlaceholderText(i18n("Type here to connect to an address and filter the list."));
         connect(m_addressInput, SIGNAL(textChanged(QString)), remoteDesktopsModelProxy, SLOT(setFilterFixedString(QString)));
 
@@ -1194,7 +1194,7 @@ void MainWindow::createDockWidget()
 
     KLineEdit *filterLineEdit = new KLineEdit(remoteDesktopsDockLayoutWidget);
     filterLineEdit->setPlaceholderText(i18n("Filter"));
-    filterLineEdit->setClearButtonShown(true);
+    filterLineEdit->setClearButtonEnabled(true);
     connect(filterLineEdit, SIGNAL(textChanged(QString)), remoteDesktopsModelProxy, SLOT(setFilterFixedString(QString)));
     remoteDesktopsDockLayout->addWidget(filterLineEdit);
     remoteDesktopsDockLayout->addWidget(m_dockWidgetTableView);
