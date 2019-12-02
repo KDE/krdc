@@ -34,6 +34,7 @@
 #include <KWindowSystem>
 
 #include <QWindow>
+#include <QDir>
 #include <QEvent>
 #include <QInputDialog>
 
@@ -112,6 +113,14 @@ bool RdpView::isQuitting()
 bool RdpView::start()
 {
     m_containerWidget->show();
+
+    const QString shareMediaPath = m_hostPreferences->shareMedia();
+    if (!shareMediaPath.isEmpty()) {
+        if (!QDir(shareMediaPath).exists()) {
+            QMessageBox::critical(this, i18n("Media Folder does not Exist"), i18n("The folder %1 does not exist.\nPlease set an existing folder to share or empty the \"Share Media\" option if you do not want to share any folder.", shareMediaPath));
+            return false;
+        }
+    }
 
     if (m_url.userName().isEmpty()) {
         QString userName;
@@ -207,11 +216,11 @@ bool RdpView::start()
             break;
         }
 
-        if (!m_hostPreferences->shareMedia().isEmpty()) {
+        if (!shareMediaPath.isEmpty()) {
             QStringList shareMedia;
             shareMedia << QStringLiteral("--plugin") << QStringLiteral("rdpdr")
                        << QStringLiteral("--data") << QStringLiteral("disk:media:")
-                       + m_hostPreferences->shareMedia() << QStringLiteral("--");
+                       + shareMediaPath << QStringLiteral("--");
             arguments += shareMedia;
         }
 
@@ -300,9 +309,9 @@ bool RdpView::start()
             break;
         }
 
-        if (!m_hostPreferences->shareMedia().isEmpty()) {
+        if (!shareMediaPath.isEmpty()) {
             QStringList shareMedia;
-            shareMedia << QStringLiteral("/drive:media,") + m_hostPreferences->shareMedia();
+            shareMedia << QStringLiteral("/drive:media,") + shareMediaPath;
             arguments += shareMedia;
         }
 
