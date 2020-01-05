@@ -464,7 +464,7 @@ void MainWindow::switchFullscreen()
 
     if (m_fullscreenWindow) {
         // Leaving full screen mode
-        m_fullscreenWindow->setWindowState(nullptr);
+        m_fullscreenWindow->setWindowState(Qt::WindowNoState);
         m_fullscreenWindow->hide();
 
         m_tabWidget->tabBar()->setHidden(m_tabWidget->count() <= 1 && !Settings::showTabBar());
