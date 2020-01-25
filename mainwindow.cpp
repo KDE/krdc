@@ -527,7 +527,7 @@ void MainWindow::switchFullscreen()
         actionCollection()->action(QStringLiteral("switch_fullscreen"))->setIconText(i18n("Window Mode"));
         showRemoteViewToolbar();
     }
-    if (m_tabWidget->currentWidget() == m_newConnectionWidget) {
+    if (m_tabWidget->currentWidget() == m_newConnectionWidget && m_addressInput) {
         m_addressInput->setFocus();
     }
 }
