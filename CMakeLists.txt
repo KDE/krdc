@@ -100,7 +100,7 @@ set_package_properties(freerdp PROPERTIES
         TYPE RUNTIME
 )
 if (EXISTS "${CMAKE_SOURCE_DIR}/.git")
-   add_definitions(-DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x060000) 
+   add_definitions(-DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x053A00)
 endif()
 # NX support is not ready for KDE 4.2; disabled (uwolfer)
 # macro_optional_find_package(LibNXCL)
