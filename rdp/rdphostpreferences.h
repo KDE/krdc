@@ -28,6 +28,9 @@
 #include "hostpreferences.h"
 #include "ui_rdppreferences.h"
 
+#include <QDesktopWidget>
+#include <QFileDialog>
+
 class RdpHostPreferences : public HostPreferences
 {
     Q_OBJECT
@@ -67,6 +70,7 @@ private:
 private Q_SLOTS:
     void updateWidthHeight(int index);
     void updateSoundSystem(int index);
+    void browseMedia();
 };
 
 #endif

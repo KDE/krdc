@@ -43,6 +43,8 @@ RdpPreferences::RdpPreferences(QWidget *parent, const QVariantList &args)
     rdpUi.kcfg_Width->setEnabled(true);
     rdpUi.heightLabel->setEnabled(true);
     rdpUi.widthLabel->setEnabled(true);
+    rdpUi.browseMediaButton->hide();
+
     
     addConfig(Settings::self(), this);
 }

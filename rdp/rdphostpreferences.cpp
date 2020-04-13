@@ -26,8 +26,6 @@
 
 #include "settings.h"
 
-#include <QDesktopWidget>
-
 static const QStringList keymaps = (QStringList()
     << QStringLiteral("ar")
     << QStringLiteral("cs")
@@ -99,6 +97,7 @@ QWidget* RdpHostPreferences::createProtocolSpecificConfigPage()
     rdpUi.setupUi(rdpPage);
 
     connect(rdpUi.kcfg_Sound, SIGNAL(currentIndexChanged(int)), SLOT(updateSoundSystem(int)));
+    connect(rdpUi.browseMediaButton, SIGNAL(released()), SLOT(browseMedia()));
 
     rdpUi.loginGroupBox->setVisible(false);
 
@@ -185,6 +184,14 @@ void RdpHostPreferences::updateSoundSystem(int index)
         break;
     default:
         break;
+    }
+}
+
+void RdpHostPreferences::browseMedia()
+{
+    QString shareDir = QFileDialog::getExistingDirectory(rdpUi.browseMediaButton, i18n("Browse to media share path"), rdpUi.kcfg_ShareMedia->text());
+    if (!shareDir.isNull()) {
+        rdpUi.kcfg_ShareMedia->setText(shareDir);
     }
 }
 
