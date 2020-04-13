@@ -275,8 +275,7 @@ void MainWindow::newConnection(const QUrl &newUrl, bool switchFullscreenWhenConn
     }
 
     if (m_protocolInput && m_addressInput) {
-        int index = m_protocolInput->findText(url.scheme());
-        if (index>=0) m_protocolInput->setCurrentIndex(index);
+        m_protocolInput->setCurrentText(url.scheme());
         m_addressInput->setText(url.authority());
     }
 
@@ -353,8 +352,7 @@ void MainWindow::selectFromRemoteDesktopsModel(const QModelIndex &index)
         m_addressInput->blockSignals(true); // block signals so we don't filter the address list on click
         m_addressInput->setText(url.authority());
         m_addressInput->blockSignals(false);
-        int index = m_protocolInput->findText(url.scheme());
-        if (index>=0) m_protocolInput->setCurrentIndex(index);
+        m_protocolInput->setCurrentText(url.scheme());
     }
 }
 
@@ -917,6 +915,10 @@ void MainWindow::updateConfiguration()
         m_tabWidget->widget(i)->setPalette(palette);
     }
 
+    if (m_protocolInput) {
+        m_protocolInput->setCurrentText(Settings::defaultProtocol());
+    }
+
     // Send update configuration message to all views
     foreach (RemoteView *view, m_remoteViewMap) {
         view->updateConfiguration();
@@ -1065,6 +1067,7 @@ QWidget* MainWindow::newConnectionWidget()
         foreach(RemoteViewFactory *factory, m_remoteViewFactories) {
             m_protocolInput->addItem(factory->scheme());
         }
+        m_protocolInput->setCurrentText(Settings::defaultProtocol());
 
         connect(m_addressInput, SIGNAL(returnPressed()), SLOT(newConnection()));
         m_addressInput->setToolTip(i18n("Type an IP or DNS Name here. Clear the line to get a list of connection methods."));
