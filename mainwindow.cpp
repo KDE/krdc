@@ -350,7 +350,9 @@ void MainWindow::selectFromRemoteDesktopsModel(const QModelIndex &index)
 
     if (!urlString.isEmpty() && m_protocolInput && m_addressInput) {
         const QUrl url(urlString);
+        m_addressInput->blockSignals(true); // block signals so we don't filter the address list on click
         m_addressInput->setText(url.authority());
+        m_addressInput->blockSignals(false);
         int index = m_protocolInput->findText(url.scheme());
         if (index>=0) m_protocolInput->setCurrentIndex(index);
     }
