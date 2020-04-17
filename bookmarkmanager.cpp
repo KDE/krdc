@@ -25,6 +25,7 @@
 #include "mainwindow.h"
 #include "krdc_debug.h"
 
+#include <kbookmarks_version.h>
 #include <KBookmarks/KBookmarkOwner>
 #include <KLocalizedString>
 
@@ -41,7 +42,13 @@ BookmarkManager::BookmarkManager(KActionCollection *collection, QMenu *menu, Mai
 
     m_manager = KBookmarkManager::managerForFile(file, QLatin1String("krdc"));
     m_manager->setUpdate(true);
+
+#if KBOOKMARKS_VERSION < QT_VERSION_CHECK(5, 69, 0)
     m_bookmarkMenu = new KBookmarkMenu(m_manager, this, menu, collection);
+#else
+    m_bookmarkMenu = new KBookmarkMenu(m_manager, this, menu);
+    collection->addActions(menu->actions());
+#endif
 
     KBookmarkGroup root = m_manager->root();
     KBookmark bm = root.first();
