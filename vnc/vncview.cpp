@@ -162,6 +162,11 @@ void VncView::updateConfiguration()
 
 void VncView::startQuitting()
 {
+    // Already quitted. No need to clean up again and also avoid triggering
+    // `disconnected` signal below.
+    if (m_quitFlag)
+        return;
+
     qCDebug(KRDC) << "about to quit";
 
     setStatus(Disconnecting);
@@ -197,6 +202,10 @@ void VncView::startQuitting()
 
     qCDebug(KRDC) << "Quit VNC thread success:" << quitSuccess;
 
+    // emit the disconnect siginal only after all the events are handled.
+    // Otherwise some error messages might be thrown away without
+    // showing to the user.
+    emit disconnected();
     setStatus(Disconnected);
 }
 
@@ -207,6 +216,11 @@ bool VncView::isQuitting()
 
 bool VncView::start()
 {
+    // This flag is used to make sure `startQuitting` only run once.
+    // This should not matter for now but it is an easy way to make sure
+    // things works in case the object may get reused.
+    m_quitFlag = false;
+
     QString vncHost = m_host;
     int vncPort = m_port;
 #ifdef LIBSSH_FOUND
