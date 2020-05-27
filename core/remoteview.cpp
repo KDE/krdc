@@ -251,13 +251,7 @@ void RemoteView::saveWalletPasswordForKey(const QString &key, const QString &pas
 
 QCursor RemoteView::localDefaultCursor() const
 {
-    QString cursorBitmapPath = QStandardPaths::locate(QStandardPaths::DataLocation, QLatin1String("pics/pointcursor.png"));
-    QBitmap cursorBitmap = QBitmap();
-    cursorBitmap.load(cursorBitmapPath);
-    QString cursorMaskPath = QStandardPaths::locate(QStandardPaths::DataLocation, QLatin1String("pics/pointcursormask.png"));
-    QBitmap cursorMask = QBitmap();
-    cursorMask.load(cursorMaskPath);
-    return QCursor(cursorBitmap, cursorMask);
+    return QCursor(Qt::ArrowCursor);
 }
 
 void RemoteView::focusInEvent(QFocusEvent *event)
