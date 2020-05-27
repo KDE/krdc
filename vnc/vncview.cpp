@@ -260,7 +260,7 @@ bool VncView::start()
 
     // set local cursor on by default because low quality mostly means slow internet connection
     if (quality == RemoteView::Low) {
-        showDotCursor(RemoteView::CursorOn);
+        showLocalCursor(RemoteView::CursorOn);
 #ifndef QTONLY
         // KRDC does always just have one main window, so at(0) is safe
         KXMLGUIClient *mainWindow = dynamic_cast<KXMLGUIClient*>(KMainWindow::memberList().at(0));
@@ -398,7 +398,7 @@ void VncView::outputErrorMessage(const QString &message)
     qCritical(KRDC) << message;
 
     if (message == QLatin1String("INTERNAL:APPLE_VNC_COMPATIBILTY")) {
-        setCursor(localDotCursor());
+        setCursor(localDefaultCursor());
         m_forceLocalCursor = true;
         return;
     }
@@ -442,7 +442,7 @@ void VncView::updateImage(int x, int y, int w, int h)
         setAttribute(Qt::WA_OpaquePaintEvent);
         installEventFilter(this);
 
-        setCursor(((m_dotCursorState == CursorOn) || m_forceLocalCursor) ? localDotCursor() : Qt::BlankCursor);
+        setCursor(((m_localCursorState == CursorOn) || m_forceLocalCursor) ? localDefaultCursor() : Qt::BlankCursor);
 
         setMouseTracking(true); // get mouse events even when there is no mousebutton pressed
         setFocusPolicy(Qt::WheelFocus);
@@ -501,14 +501,14 @@ void VncView::setViewOnly(bool viewOnly)
     if (viewOnly)
         setCursor(Qt::ArrowCursor);
     else
-        setCursor(m_dotCursorState == CursorOn ? localDotCursor() : Qt::BlankCursor);
+        setCursor(m_localCursorState == CursorOn ? localDefaultCursor() : Qt::BlankCursor);
 }
 
-void VncView::showDotCursor(DotCursorState state)
+void VncView::showLocalCursor(LocalCursorState state)
 {
-    RemoteView::showDotCursor(state);
+    RemoteView::showLocalCursor(state);
 
-    setCursor(state == CursorOn ? localDotCursor() : Qt::BlankCursor);
+    setCursor(state == CursorOn ? localDefaultCursor() : Qt::BlankCursor);
 }
 
 void VncView::enableScaling(bool scale)

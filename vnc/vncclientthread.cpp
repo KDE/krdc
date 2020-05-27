@@ -65,7 +65,7 @@ void VncClientThread::cuttextStatic(rfbClient *cl, const char *text, int textlen
 // Dispatch from this static callback context to the member context.
 char *VncClientThread::passwdHandlerStatic(rfbClient *cl)
 {
-    VncClientThread *t = (VncClientThread *)rfbClientGetClientData(cl, nullptr);
+    VncClientThread *t = (VncClientThread *) rfbClientGetClientData(cl, nullptr);
     Q_ASSERT(t);
 
     return t->passwdHandler();
@@ -74,7 +74,7 @@ char *VncClientThread::passwdHandlerStatic(rfbClient *cl)
 // Dispatch from this static callback context to the member context.
 rfbCredential *VncClientThread::credentialHandlerStatic(rfbClient *cl, int credentialType)
 {
-    VncClientThread *t = (VncClientThread *)rfbClientGetClientData(cl, nullptr);
+    VncClientThread *t = (VncClientThread *) rfbClientGetClientData(cl, nullptr);
     Q_ASSERT(t);
 
     return t->credentialHandler(credentialType);
@@ -98,7 +98,7 @@ void VncClientThread::setClientColorDepth(rfbClient* cl, VncClientThread::ColorD
     case bpp8:
         if (m_colorTable.isEmpty()) {
             m_colorTable.resize(256);
-            int r,g,b;
+            int r, g, b;
             for (int i = 0; i < 256; ++i) {
                 //pick out the red (3 bits), green (3 bits) and blue (2 bits) bits and make them maximum significant in 8bits
                 //this gives a colortable for 8bit true colors
@@ -193,10 +193,10 @@ void VncClientThread::updatefb(int x, int y, int w, int h)
         img.setColorTable(m_colorTable);
         break;
     case bpp16:
-        img = QImage(cl->frameBuffer, width, height, 2*width, QImage::Format_RGB16);
+        img = QImage(cl->frameBuffer, width, height, 2 * width, QImage::Format_RGB16);
         break;
     case bpp32:
-        img = QImage(cl->frameBuffer, width, height, 4*width, QImage::Format_RGB32);
+        img = QImage(cl->frameBuffer, width, height, 4 * width, QImage::Format_RGB32);
         break;
     }
 
@@ -398,7 +398,7 @@ void VncClientThread::setQuality(RemoteView::Quality quality)
 
 void VncClientThread::setColorDepth(ColorDepth colorDepth)
 {
-    m_colorDepth= colorDepth;
+    m_colorDepth = colorDepth;
 }
 
 RemoteView::Quality VncClientThread::quality() const

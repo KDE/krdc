@@ -68,7 +68,7 @@ public:
 #endif
 
     void setViewOnly(bool viewOnly) override;
-    void showDotCursor(DotCursorState state) override;
+    void showLocalCursor(LocalCursorState state) override;
     void enableScaling(bool scale) override;
 
     void updateConfiguration() override;

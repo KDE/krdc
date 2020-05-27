@@ -76,13 +76,13 @@ public:
     * is a dot and the remote cursor is the 'real' cursor, usually an arrow.
     */
 
-    enum DotCursorState {
-        CursorOn,  ///< Always show local cursor (and the remote one).
+    enum LocalCursorState {
+        CursorOn,  ///< Always show local cursor based on remote one (or fallback to default).
         CursorOff, ///< Never show local cursor, only the remote one.
         /// Try to measure the lag and enable the local cursor if the latency is too high.
         CursorAuto
     };
-    Q_ENUM(DotCursorState)
+    Q_ENUM(LocalCursorState)
 
     /**
     * State of the connection. The state of the connection is returned
@@ -145,9 +145,9 @@ public:
      * Checks whether the backend supports the concept of local cursors. The
      * default implementation returns false.
      * @return true if local cursors are supported/known
-     * @see DotCursorState
-     * @see showDotCursor()
-     * @see dotCursorState()
+     * @see LocalCursorState
+     * @see showLocalCursor()
+     * @see localCursorState()
      */
     virtual bool supportsLocalCursor() const;
 
@@ -156,27 +156,27 @@ public:
      * The default implementation does nothing.
      * @param state the new state (CursorOn, CursorOff or
      *        CursorAuto)
-     * @see dotCursorState()
+     * @see localCursorState()
      * @see supportsLocalCursor()
      */
-    virtual void showDotCursor(DotCursorState state);
+    virtual void showLocalCursor(LocalCursorState state);
 
     /**
      * Returns the state of the local cursor. The default implementation returns
      * always CursorOff.
      * @return true if local cursors are supported/known
-     * @see showDotCursor()
+     * @see showLocalCursor()
      * @see supportsLocalCursor()
      */
-    virtual DotCursorState dotCursorState() const;
+    virtual LocalCursorState localCursorState() const;
 
     /**
      * Checks whether the backend supports the view only mode. The
      * default implementation returns false.
      * @return true if view-only mode is supported
-     * @see DotCursorState
-     * @see showDotCursor()
-     * @see dotCursorState()
+     * @see LocalCursorState
+     * @see showLocalCursor()
+     * @see localCursorState()
      */
     virtual bool supportsViewOnly() const;
 
@@ -397,7 +397,7 @@ protected:
      */
     virtual void setStatus(RemoteStatus s);
 
-    QCursor localDotCursor() const;
+    QCursor localDefaultCursor() const;
 
     QString m_host;
     int m_port;
@@ -415,7 +415,7 @@ protected:
     KWallet::Wallet *m_wallet;
 #endif
 
-    DotCursorState m_dotCursorState;
+    LocalCursorState m_localCursorState;
 };
 
 #endif

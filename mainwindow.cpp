@@ -302,7 +302,7 @@ void MainWindow::newConnection(const QUrl &newUrl, bool switchFullscreenWhenConn
     // if the user press cancel
     if (! prefs->showDialogIfNeeded(this)) return;
 
-    view->showDotCursor(prefs->showLocalCursor() ? RemoteView::CursorOn : RemoteView::CursorOff);
+    view->showLocalCursor(prefs->showLocalCursor() ? RemoteView::CursorOn : RemoteView::CursorOff);
     view->setViewOnly(prefs->viewOnly());
     if (! switchFullscreenWhenConnected) view->enableScaling(prefs->windowedScale());
 
@@ -736,7 +736,7 @@ void MainWindow::showLocalCursor(bool showLocalCursor)
     qCDebug(KRDC) << showLocalCursor;
 
     RemoteView* view = currentRemoteView();
-    view->showDotCursor(showLocalCursor ? RemoteView::CursorOn : RemoteView::CursorOff);
+    view->showLocalCursor(showLocalCursor ? RemoteView::CursorOn : RemoteView::CursorOff);
     view->hostPreferences()->setShowLocalCursor(showLocalCursor);
     saveHostPrefs(view);
 }
@@ -852,7 +852,7 @@ void MainWindow::updateActionStatus()
     setActionStatus(actionCollection()->action(QStringLiteral("show_local_cursor")),
                     enabled,
                     view ? view->supportsLocalCursor() : false,
-                    view ? view->dotCursorState() == RemoteView::CursorOn : false);
+                    view ? view->localCursorState() == RemoteView::CursorOn : false);
 
     setActionStatus(actionCollection()->action(QStringLiteral("scale")),
                     enabled,
