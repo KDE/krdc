@@ -30,12 +30,10 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <QMutexLocker>
-#include <QThreadStorage>
 #include <QTimer>
 
 //for detecting intel AMT KVM vnc server
-static const QString INTEL_AMT_KVM_STRING= QLatin1String("Intel(r) AMT KVM");
-static QThreadStorage<VncClientThread **> instances;
+static const QString INTEL_AMT_KVM_STRING = QLatin1String("Intel(r) AMT KVM");
 
 // Dispatch from this static callback context to the member context.
 rfbBool VncClientThread::newclientStatic(rfbClient *cl)
@@ -85,11 +83,12 @@ rfbCredential *VncClientThread::credentialHandlerStatic(rfbClient *cl, int crede
 // Dispatch from this static callback context to the member context.
 void VncClientThread::outputHandlerStatic(const char *format, ...)
 {
-    VncClientThread **t = instances.localData();
+    VncClientThread *t = qobject_cast<VncClientThread *>(QThread::currentThread());
+    Q_ASSERT(t);
 
     va_list args;
     va_start(args, format);
-    (*t)->outputHandler(format, args);
+    t->outputHandler(format, args);
     va_end(args);
 }
 
@@ -448,9 +447,6 @@ void VncClientThread::run()
 {
     QMutexLocker locker(&mutex);
 
-    VncClientThread **threadTls = new VncClientThread *();
-    *threadTls = this;
-    instances.setLocalData(threadTls);
     while (!m_stopped) { // try to connect as long as the server allows
         locker.relock();
         m_passwordError = false;
