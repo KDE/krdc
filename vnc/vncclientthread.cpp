@@ -31,6 +31,9 @@
 #include <sys/socket.h>
 #include <QMutexLocker>
 #include <QTimer>
+#include <QBitmap>
+#include <QPixmap>
+#include <QCursor>
 
 //for detecting intel AMT KVM vnc server
 static const QString INTEL_AMT_KVM_STRING = QLatin1String("Intel(r) AMT KVM");
@@ -90,6 +93,40 @@ void VncClientThread::outputHandlerStatic(const char *format, ...)
     va_start(args, format);
     t->outputHandler(format, args);
     va_end(args);
+}
+
+void VncClientThread::cursorShapeHandlerStatic(rfbClient *cl, int xhot, int yhot, int width, int height, int bpp) {
+    VncClientThread *t = (VncClientThread *) rfbClientGetClientData(cl, nullptr);
+    Q_ASSERT(t);
+
+    // get cursor shape from remote cursor field
+    // it's important to set stride for images, pictures in VNC are not always 32-bit aligned
+    QImage cursorImg;
+    switch (bpp) {
+    case 4:
+        cursorImg = QImage(cl->rcSource, width, height, bpp * width, QImage::Format_RGB32);
+        break;
+    case 2:
+        cursorImg = QImage(cl->rcSource, width, height, bpp * width, QImage::Format_RGB16);
+        break;
+    case 1:
+        cursorImg = QImage(cl->rcSource, width, height, bpp * width, QImage::Format_Indexed8);
+        cursorImg.setColorTable(t->m_colorTable);
+        break;
+    default:
+        qCWarning(KRDC) << "Unsupported bpp value for cursor shape:" << bpp;
+        return;
+    }
+
+    // get alpha channel
+    QImage alpha(cl->rcMask, width, height, 1 * width, QImage::Format_Indexed8);
+    alpha.setColorTable({qRgb(255, 255, 255), qRgb(0, 0, 0)});
+
+    // apply transparency mask
+    QPixmap cursorPixmap(QPixmap::fromImage(cursorImg));
+    cursorPixmap.setMask(QBitmap::fromImage(alpha));
+
+    emit t->gotCursor({cursorPixmap, xhot, yhot});
 }
 
 void VncClientThread::setClientColorDepth(rfbClient* cl, VncClientThread::ColorDepth cd)
@@ -379,6 +416,23 @@ void VncClientThread::setPort(int port)
     m_port = port;
 }
 
+void VncClientThread::setShowLocalCursor(bool show) {
+    QMutexLocker locker(&mutex);
+    m_showLocalCursor = show;
+
+    if (!cl) {
+        // no client yet, only store local value
+        return;
+    }
+
+    // from server point of view, "remote" cursor is the one local to the client
+    // so the meaning in AppData struct is inverted
+    cl->appData.useRemoteCursor = show;
+
+    // need to communicate this change to server or it won't stop painting cursor
+    m_eventQueue.enqueue(new ReconfigureEvent);
+}
+
 void VncClientThread::setQuality(RemoteView::Quality quality)
 {
     m_quality = quality;
@@ -531,7 +585,10 @@ bool VncClientThread::clientCreate(bool reinitialising)
     cl->GetCredential = credentialHandlerStatic;
     cl->GotFrameBufferUpdate = updatefbStatic;
     cl->GotXCutText = cuttextStatic;
+    cl->GotCursorShape = cursorShapeHandlerStatic;
     rfbClientSetClientData(cl, nullptr, this);
+
+    cl->appData.useRemoteCursor = m_showLocalCursor;
 
     cl->serverHost = strdup(m_host.toUtf8().constData());
 
@@ -625,6 +682,11 @@ void VncClientThread::clientStateChange(RemoteView::RemoteStatus status, const Q
 
 ClientEvent::~ClientEvent()
 {
+}
+
+void ReconfigureEvent::fire(rfbClient* cl)
+{
+    SetFormatAndEncodings(cl);
 }
 
 void PointerClientEvent::fire(rfbClient* cl)

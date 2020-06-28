@@ -49,6 +49,12 @@ public:
     virtual void fire(rfbClient*) = 0;
 };
 
+class ReconfigureEvent: public ClientEvent
+{
+public:
+    void fire(rfbClient*) override;
+};
+
 class KeyClientEvent : public ClientEvent
 {
 public:
@@ -113,6 +119,7 @@ public:
     void setPassword(const QString &password) {
         m_password = password;
     }
+    void setShowLocalCursor(bool show);
     const QString password() const {
         return m_password;
     }
@@ -130,6 +137,7 @@ public:
 Q_SIGNALS:
     void imageUpdated(int x, int y, int w, int h);
     void gotCut(const QString &text);
+    void gotCursor(const QCursor &cursor);
     void passwordRequest(bool includingUsername = false);
     void outputErrorMessage(const QString &message);
 
@@ -162,6 +170,7 @@ private:
     static char *passwdHandlerStatic(rfbClient *cl);
     static rfbCredential *credentialHandlerStatic(rfbClient *cl, int credentialType);
     static void outputHandlerStatic(const char *format, ...);
+    static void cursorShapeHandlerStatic(rfbClient *cl, int xhot, int yhot, int width, int height, int bpp);
 
     // Member functions corresponding to the above static methods.
     rfbBool newclient();
@@ -177,6 +186,7 @@ private:
     QString m_password;
     QString m_username;
     int m_port;
+    bool m_showLocalCursor;
     QMutex mutex;
     RemoteView::Quality m_quality;
     ColorDepth m_colorDepth;

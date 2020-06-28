@@ -81,6 +81,7 @@ VncView::VncView(QWidget *parent, const QUrl &url, KConfigGroup configGroup)
     connect(&vncThread, SIGNAL(gotCut(QString)), this, SLOT(setCut(QString)), Qt::BlockingQueuedConnection);
     connect(&vncThread, SIGNAL(passwordRequest(bool)), this, SLOT(requestPassword(bool)), Qt::BlockingQueuedConnection);
     connect(&vncThread, SIGNAL(outputErrorMessage(QString)), this, SLOT(outputErrorMessage(QString)));
+    connect(&vncThread, &VncClientThread::gotCursor, this, [this](QCursor cursor){ setCursor(cursor); });
 
     m_clipboard = QApplication::clipboard();
     connect(m_clipboard, SIGNAL(dataChanged()), this, SLOT(clipboardDataChanged()));
@@ -508,7 +509,15 @@ void VncView::showLocalCursor(LocalCursorState state)
 {
     RemoteView::showLocalCursor(state);
 
-    setCursor(state == CursorOn ? localDefaultCursor() : Qt::BlankCursor);
+    if (state == CursorOn) {
+        // show local cursor, hide remote one
+        setCursor(localDefaultCursor());
+        vncThread.setShowLocalCursor(true);
+    } else {
+        // hide local cursor, show remote one
+        setCursor(Qt::BlankCursor);
+        vncThread.setShowLocalCursor(false);
+    }
 }
 
 void VncView::enableScaling(bool scale)

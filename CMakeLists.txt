@@ -159,7 +159,6 @@ target_link_libraries(krdc
 install(TARGETS krdc ${INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES krdcui.rc DESTINATION ${KXMLGUI_INSTALL_DIR}/krdc)
 install(PROGRAMS org.kde.krdc.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
-install(FILES pointcursor.png pointcursormask.png DESTINATION ${DATA_INSTALL_DIR}/krdc/pics)
 install(FILES org.kde.krdc.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
