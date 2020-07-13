@@ -25,7 +25,9 @@
 
 #include "settings.h"
 
-#include <QDesktopWidget>
+#include <QScreen>
+#include <QWindow>
+#include <QGuiApplication>
 
 static const char quality_config_key[] = "quality";
 static const char use_ssh_tunnel_config_key[] = "use_ssh_tunnel";
@@ -101,10 +103,12 @@ void VncHostPreferences::updateScalingWidthHeight(int index)
         vncUi.kcfg_ScalingWidth->setValue(1600);
         break;
     case 5: {
-        QDesktopWidget *desktop = QApplication::desktop();
-        int currentScreen = desktop->screenNumber(vncUi.kcfg_ScalingHeight);
-        vncUi.kcfg_ScalingHeight->setValue(desktop->screenGeometry(currentScreen).height());
-        vncUi.kcfg_ScalingWidth->setValue(desktop->screenGeometry(currentScreen).width());
+        QWindow *window = vncUi.kcfg_ScalingWidth->window()->windowHandle();
+        QScreen *screen = window ? window->screen() : qGuiApp->primaryScreen();
+        const QSize size = screen->size() * screen->devicePixelRatio();
+
+        vncUi.kcfg_ScalingWidth->setValue(size.width());
+        vncUi.kcfg_ScalingHeight->setValue(size.height());
         break;
     }
     case 6:

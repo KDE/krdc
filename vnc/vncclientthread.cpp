@@ -245,6 +245,7 @@ void VncClientThread::updatefb(int x, int y, int w, int h)
         return; // sending data to a stopped thread is not a good idea
     }
 
+    img.setDevicePixelRatio(m_devicePixelRatio);
     setImage(img);
 
     emitUpdated(x, y, w, h);
@@ -359,6 +360,7 @@ VncClientThread::VncClientThread(QObject *parent)
         : QThread(parent)
         , frameBuffer(nullptr)
         , cl(nullptr)
+        , m_devicePixelRatio(1.0)
         , m_stopped(false)
 {
     // We choose a small value for interval...after all if the connection is
@@ -448,6 +450,11 @@ void VncClientThread::setQuality(RemoteView::Quality quality)
     default:
         setColorDepth(bpp16);
     }
+}
+
+void VncClientThread::setDevicePixelRatio(qreal dpr)
+{
+    m_devicePixelRatio = dpr;
 }
 
 void VncClientThread::setColorDepth(ColorDepth colorDepth)

@@ -28,7 +28,6 @@
 #include "hostpreferences.h"
 #include "ui_rdppreferences.h"
 
-#include <QDesktopWidget>
 #include <QFileDialog>
 
 class RdpHostPreferences : public HostPreferences

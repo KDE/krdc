@@ -169,21 +169,19 @@ bool RdpView::start()
 
     QStringList arguments;
 
-    int width, height;
+    QSize size;
+    const auto dpr = devicePixelRatioF();
     if (m_hostPreferences->width() > 0) {
-        width = m_hostPreferences->width();
-        height = m_hostPreferences->height();
+        size = QSize(m_hostPreferences->width(), m_hostPreferences->height());
     } else {
-        width = this->parentWidget()->size().width();
-        height = this->parentWidget()->size().height();
+        size = this->parentWidget()->size() * dpr;
     }
-    m_containerWidget->setFixedWidth(width);
-    m_containerWidget->setFixedHeight(height);
-    setMaximumSize(width, height);
+    m_containerWidget->setFixedSize(size / dpr);
+    setMaximumSize(size / dpr);
     if (versionOutput.contains(QLatin1String(" 1.0"))) {
         qCDebug(KRDC) << "Use FreeRDP 1.0 compatible arguments";
 
-        arguments << QStringLiteral("-g") << QString::number(width) + QLatin1Char('x') + QString::number(height);
+        arguments << QStringLiteral("-g") << QString::number(size.width()) + QLatin1Char('x') + QString::number(size.height());
 
         arguments << QStringLiteral("-k") << keymapToXfreerdp(m_hostPreferences->keyboardLayout());
 
@@ -276,8 +274,8 @@ bool RdpView::start()
         qCDebug(KRDC) << "Use FreeRDP 1.1+ compatible arguments";
 
         arguments << QStringLiteral("-decorations");
-        arguments << QStringLiteral("/w:") + QString::number(width);
-        arguments << QStringLiteral("/h:") + QString::number(height);
+        arguments << QStringLiteral("/w:") + QString::number(size.width());
+        arguments << QStringLiteral("/h:") + QString::number(size.height());
 
         arguments << QStringLiteral("/kbd:") + keymapToXfreerdp(m_hostPreferences->keyboardLayout());
 
