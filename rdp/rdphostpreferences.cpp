@@ -26,6 +26,10 @@
 
 #include "settings.h"
 
+#include <QScreen>
+#include <QWindow>
+#include <QGuiApplication>
+
 static const QStringList keymaps = (QStringList()
     << QStringLiteral("ar")
     << QStringLiteral("cs")
@@ -147,10 +151,12 @@ void RdpHostPreferences::updateWidthHeight(int index)
         rdpUi.kcfg_Width->setValue(1600);
         break;
     case 5: {
-        QDesktopWidget *desktop = QApplication::desktop();
-        int currentScreen = desktop->screenNumber(rdpUi.kcfg_Height);
-        rdpUi.kcfg_Height->setValue(desktop->screenGeometry(currentScreen).height());
-        rdpUi.kcfg_Width->setValue(desktop->screenGeometry(currentScreen).width());
+        QWindow *window = rdpUi.kcfg_Width->window()->windowHandle();
+        QScreen *screen = window ? window->screen() : qGuiApp->primaryScreen();
+        const QSize size = screen->size() * screen->devicePixelRatio();
+
+        rdpUi.kcfg_Width->setValue(size.width());
+        rdpUi.kcfg_Height->setValue(size.height());
         break;
     }
     case 7:

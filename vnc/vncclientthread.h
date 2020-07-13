@@ -116,6 +116,7 @@ public:
     void setHost(const QString &host);
     void setPort(int port);
     void setQuality(RemoteView::Quality quality);
+    void setDevicePixelRatio(qreal dpr);
     void setPassword(const QString &password) {
         m_password = password;
     }
@@ -189,6 +190,7 @@ private:
     bool m_showLocalCursor;
     QMutex mutex;
     RemoteView::Quality m_quality;
+    qreal m_devicePixelRatio;
     ColorDepth m_colorDepth;
     QQueue<ClientEvent* > m_eventQueue;
     //color table for 8bit indexed colors

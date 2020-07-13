@@ -116,7 +116,7 @@ bool VncView::eventFilter(QObject *obj, QEvent *event)
 
 QSize VncView::framebufferSize()
 {
-    return m_frame.size();
+    return m_frame.size() / devicePixelRatioF();
 }
 
 QSize VncView::sizeHint() const
@@ -135,8 +135,9 @@ void VncView::scaleResize(int w, int h)
 
     qCDebug(KRDC) << w << h;
     if (m_scale) {
-        m_verticalFactor = (qreal) h / m_frame.height();
-        m_horizontalFactor = (qreal) w / m_frame.width();
+        const QSize frameSize = m_frame.size() / m_frame.devicePixelRatio();
+        m_verticalFactor = (qreal) h / frameSize.height();
+        m_horizontalFactor = (qreal) w / frameSize.width();
 
 #ifndef QTONLY
         if (Settings::keepAspectRatio()) {
@@ -146,8 +147,8 @@ void VncView::scaleResize(int w, int h)
         m_verticalFactor = m_horizontalFactor = qMin(m_verticalFactor, m_horizontalFactor);
 #endif
 
-        const qreal newW = m_frame.width() * m_horizontalFactor;
-        const qreal newH = m_frame.height() * m_verticalFactor;
+        const qreal newW = frameSize.width() * m_horizontalFactor;
+        const qreal newH = frameSize.height() * m_verticalFactor;
         setMaximumSize(newW, newH); //This is a hack to force Qt to center the view in the scroll area
         resize(newW, newH);
     }
@@ -258,6 +259,7 @@ bool VncView::start()
 #endif
 
     vncThread.setQuality(quality);
+    vncThread.setDevicePixelRatio(devicePixelRatioF());
 
     // set local cursor on by default because low quality mostly means slow internet connection
     if (quality == RemoteView::Low) {
@@ -453,8 +455,9 @@ void VncView::updateImage(int x, int y, int w, int h)
         if (m_scale) {
 #ifndef QTONLY
             qCDebug(KRDC) << "Setting initial size w:" <<m_hostPreferences->width() << " h:" << m_hostPreferences->height();
-            emit framebufferSizeChanged(m_hostPreferences->width(), m_hostPreferences->height());
-            scaleResize(m_hostPreferences->width(), m_hostPreferences->height());
+            QSize frameSize = QSize(m_hostPreferences->width(), m_hostPreferences->height()) / devicePixelRatioF();
+            emit framebufferSizeChanged(frameSize.width(), frameSize.height());
+            scaleResize(frameSize.width(), frameSize.height());
             qCDebug(KRDC) << "m_frame.size():" << m_frame.size() << "size()" << size();
 #else
 //TODO: qtonly alternative
@@ -475,7 +478,8 @@ void VncView::updateImage(int x, int y, int w, int h)
 #endif
     }
 
-    if ((y == 0 && x == 0) && (m_frame.size() != size())) {
+    const QSize frameSize = m_frame.size() / m_frame.devicePixelRatio();
+    if ((y == 0 && x == 0) && (frameSize != size())) {
         qCDebug(KRDC) << "Updating framebuffer size";
         if (m_scale) {
             setMaximumSize(QSize(QWIDGETSIZE_MAX, QWIDGETSIZE_MAX));
@@ -483,14 +487,15 @@ void VncView::updateImage(int x, int y, int w, int h)
                 scaleResize(parentWidget()->width(), parentWidget()->height());
         } else {
             qCDebug(KRDC) << "Resizing: " << m_frame.width() << m_frame.height();
-            resize(m_frame.width(), m_frame.height());
-            setMaximumSize(m_frame.width(), m_frame.height()); //This is a hack to force Qt to center the view in the scroll area
-            setMinimumSize(m_frame.width(), m_frame.height());
-            emit framebufferSizeChanged(m_frame.width(), m_frame.height());
+            resize(frameSize);
+            setMaximumSize(frameSize); //This is a hack to force Qt to center the view in the scroll area
+            setMinimumSize(frameSize);
+            emit framebufferSizeChanged(frameSize.width(), frameSize.height());
         }
     }
 
-    repaint(QRectF(x * m_horizontalFactor, y * m_verticalFactor, w * m_horizontalFactor, h * m_verticalFactor).toAlignedRect());
+    const auto dpr = m_frame.devicePixelRatio();
+    repaint(QRectF(x / dpr * m_horizontalFactor, y / dpr * m_verticalFactor, w / dpr * m_horizontalFactor, h / dpr * m_verticalFactor).toAlignedRect());
 }
 
 void VncView::setViewOnly(bool viewOnly)
@@ -533,9 +538,10 @@ void VncView::enableScaling(bool scale)
         m_verticalFactor = 1.0;
         m_horizontalFactor = 1.0;
 
-        setMaximumSize(m_frame.width(), m_frame.height()); //This is a hack to force Qt to center the view in the scroll area
-        setMinimumSize(m_frame.width(), m_frame.height());
-        resize(m_frame.width(), m_frame.height());
+        const QSize frameSize = m_frame.size() / m_frame.devicePixelRatio();
+        setMaximumSize(frameSize); //This is a hack to force Qt to center the view in the scroll area
+        setMinimumSize(frameSize);
+        resize(frameSize);
     }
 }
 
@@ -560,9 +566,10 @@ void VncView::paintEvent(QPaintEvent *event)
     QPainter painter(this);
     painter.setRenderHint(QPainter::SmoothPixmapTransform);
 
+    const auto dpr = m_frame.devicePixelRatio();
     const QRectF dstRect = event->rect();
-    const QRectF srcRect(dstRect.x() / m_horizontalFactor, dstRect.y() / m_verticalFactor,
-                         dstRect.width() / m_horizontalFactor, dstRect.height() / m_verticalFactor);
+    const QRectF srcRect(dstRect.x() * dpr / m_horizontalFactor, dstRect.y() * dpr / m_verticalFactor,
+                         dstRect.width() * dpr / m_horizontalFactor, dstRect.height() * dpr / m_verticalFactor);
     painter.drawImage(dstRect, m_frame, srcRect);
 
     RemoteView::paintEvent(event);
@@ -622,7 +629,12 @@ void VncView::mouseEventHandler(QMouseEvent *e)
         }
     }
 
-    vncThread.mouseEvent(qRound(e->x() / m_horizontalFactor), qRound(e->y() / m_verticalFactor), m_buttonMask);
+    const auto dpr = devicePixelRatioF();
+    QPointF screenPos = e->screenPos();
+    // We need to restore mouse position in device coordinates.
+    // QMouseEvent::localPos() can be rounded (bug in Qt), but QMouseEvent::screenPos() is not.
+    QPointF pos = (e->pos() + (screenPos - screenPos.toPoint())) * dpr;
+    vncThread.mouseEvent(qRound(pos.x() / m_horizontalFactor), qRound(pos.y() / m_verticalFactor), m_buttonMask);
 }
 
 void VncView::wheelEventHandler(QWheelEvent *event)
