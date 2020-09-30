@@ -29,7 +29,7 @@
 #include <KConfigGui/KConfigSkeleton>
 #include <KLocalizedString>
 #include <KCMUtils/KPluginSelector>
-#include <KPluginTrader>
+#include <KPluginMetaData>
 #include <KService/KPluginInfo>
 
 PreferencesDialog::PreferencesDialog(QWidget *parent, KConfigSkeleton *skeleton)
@@ -47,7 +47,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent, KConfigSkeleton *skeleton)
     addPage(hostPreferencesList, i18n("Hosts"), QLatin1String("computer"), i18n("Host Configuration"));
 
     m_pluginSelector = new KPluginSelector();
-    const KPluginInfo::List  offers = KPluginTrader::self()->query(QLatin1String("krdc"));
+    const QList<KPluginInfo> offers = KPluginInfo::fromMetaData(KPluginLoader::findPlugins(QStringLiteral("krdc")));
     m_pluginSelector->addPlugins(offers, KPluginSelector::ReadConfigFile,
                                     i18n("Plugins"), QLatin1String("Service"), KSharedConfig::openConfig());
     m_pluginSelector->load();

@@ -42,9 +42,9 @@
 #include <KLocalizedString>
 #include <KMessageBox>
 #include <KNotifyConfigWidget>
+#include <KPluginMetaData>
 #include <KToggleAction>
 #include <KToggleFullScreenAction>
-#include <KPluginTrader>
 #include <QDebug>
 
 #include <QClipboard>
@@ -204,37 +204,31 @@ void MainWindow::setupActions()
 
 void MainWindow::loadAllPlugins()
 {
-    const KPluginInfo::List offers = KPluginTrader::self()->query(QStringLiteral("krdc"));
+    const QVector<KPluginMetaData> offers = KPluginLoader::findPlugins(QStringLiteral("krdc"));
     const KConfigGroup conf = KSharedConfig::openConfig()->group(QStringLiteral("Plugins"));
-    qCDebug(KRDC) << "Loading  Plugins ";
-    for (int i = 0; i < offers.size(); i++) {
-        KPluginInfo info = offers[i];
-        info.load(conf);
-        const bool enabled = info.isPluginEnabled();
+
+    for (const KPluginMetaData &plugin : offers) {
+
+        KPluginInfo pluginInfo = KPluginInfo::fromMetaData(plugin);
+        pluginInfo.load(conf);
+        const bool enabled = pluginInfo.isPluginEnabled();
+
         if (enabled) {
-            RemoteViewFactory *component = createPluginFromInfo(info);
-            if (component != nullptr) {
-                const int sorting = info.property(QStringLiteral("X-KDE-KRDC-Sorting")).toInt();
-                m_remoteViewFactories.insert(sorting, component);
-            } else {
-                qCDebug(KRDC) << "Error loading KRDC plugin (" << info.pluginName() << ')';
+            RemoteViewFactory *component = nullptr;
+
+            KPluginLoader loader(plugin.fileName());
+            KPluginFactory *factory = loader.factory();
+
+            if (factory) {
+                component = factory->create<RemoteViewFactory>();
             }
-        } else {
-            qCDebug(KRDC) << "# Plugin " << info.name() << " found, however it's not activated, skipping...";
-            continue;
+
+            if (component) {
+                const int sorting = plugin.value(QStringLiteral("X-KDE-KRDC-Sorting")).toInt();
+                m_remoteViewFactories.insert(sorting, component);
+            }
         }
     }
-}
-
-RemoteViewFactory *MainWindow::createPluginFromInfo(const KPluginInfo &info)
-{
-    RemoteViewFactory *plugin = nullptr;
-    KPluginLoader loader(info.libraryPath());
-    KPluginFactory *factory = loader.factory();
-    if (factory) {
-        plugin = factory->create<RemoteViewFactory>();
-    }
-    return plugin;
 }
 
 void MainWindow::restoreOpenSessions()

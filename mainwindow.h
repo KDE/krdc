@@ -106,7 +106,6 @@ private Q_SLOTS:
 private:
     void setupActions();
     void loadAllPlugins();
-    RemoteViewFactory *createPluginFromInfo(const KPluginInfo &info);
     void showSettingsDialog(const QString &url);
     QScrollArea *createScrollArea(QWidget *parent, RemoteView *remoteView);
     QUrl getInputUrl();
