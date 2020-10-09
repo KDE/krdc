@@ -645,8 +645,12 @@ void VncView::wheelEventHandler(QWheelEvent *event)
     else
         eb |= 0x8;
 
-    const int x = qRound(event->x() / m_horizontalFactor);
-    const int y = qRound(event->y() / m_verticalFactor);
+    const auto dpr = devicePixelRatioF();
+    // We need to restore mouse position in device coordinates.
+    const QPointF pos = event->position() * dpr;
+
+    const int x = qRound(pos.x() / m_horizontalFactor);
+    const int y = qRound(pos.y() / m_verticalFactor);
 
     vncThread.mouseEvent(x, y, eb | m_buttonMask);
     vncThread.mouseEvent(x, y, m_buttonMask);
