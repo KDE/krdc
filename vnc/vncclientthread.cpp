@@ -48,12 +48,21 @@ rfbBool VncClientThread::newclientStatic(rfbClient *cl)
 }
 
 // Dispatch from this static callback context to the member context.
-void VncClientThread::updatefbStatic(rfbClient *cl, int x, int y, int w, int h)
+void VncClientThread::updatefbStaticPartial(rfbClient *cl, int x, int y, int w, int h)
 {
     VncClientThread *t = (VncClientThread *)rfbClientGetClientData(cl, nullptr);
     Q_ASSERT(t);
 
-    return t->updatefb(x, y, w, h);
+    return t->updatefbPartial(x, y, w, h);
+}
+
+// Dispatch from this static callback context to the member context.
+void VncClientThread::updateFbStaticFinished(rfbClient *cl)
+{
+    VncClientThread *t = (VncClientThread *)rfbClientGetClientData(cl, nullptr);
+    Q_ASSERT(t);
+
+    return t->updatefbFinished();
 }
 
 // Dispatch from this static callback context to the member context.
@@ -218,10 +227,15 @@ rfbBool VncClientThread::newclient()
     return true;
 }
 
-void VncClientThread::updatefb(int x, int y, int w, int h)
+void VncClientThread::updatefbPartial(int x, int y, int w, int h)
 {
-//     qCDebug(KRDC) << "updated client: x: " << x << ", y: " << y << ", w: " << w << ", h: " << h;
+//    qCDebug(KRDC) << "updated client: x: " << x << ", y: " << y << ", w: " << w << ", h: " << h;
 
+    m_dirtyRect = m_dirtyRect.united(QRect(x, y, w, h));
+}
+
+void VncClientThread::updatefbFinished()
+{
     const int width = cl->width, height = cl->height;
     QImage img;
     switch(colorDepth()) {
@@ -248,7 +262,12 @@ void VncClientThread::updatefb(int x, int y, int w, int h)
     img.setDevicePixelRatio(m_devicePixelRatio);
     setImage(img);
 
-    emitUpdated(x, y, w, h);
+    // Compute bounding rect.
+    QRect updateRect = m_dirtyRect;
+    m_dirtyRect = QRect();
+
+//    qCDebug(KRDC) << Q_FUNC_INFO << updateRect;
+    emitUpdated(updateRect.x(), updateRect.y(), updateRect.width(), updateRect.height());
 }
 
 void VncClientThread::cuttext(const char *text, int textlen)
@@ -590,7 +609,8 @@ bool VncClientThread::clientCreate(bool reinitialising)
     cl->canHandleNewFBSize = true;
     cl->GetPassword = passwdHandlerStatic;
     cl->GetCredential = credentialHandlerStatic;
-    cl->GotFrameBufferUpdate = updatefbStatic;
+    cl->GotFrameBufferUpdate = updatefbStaticPartial;
+    cl->FinishedFrameBufferUpdate = updateFbStaticFinished;
     cl->GotXCutText = cuttextStatic;
     cl->GotCursorShape = cursorShapeHandlerStatic;
     rfbClientSetClientData(cl, nullptr, this);

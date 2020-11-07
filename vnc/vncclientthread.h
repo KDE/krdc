@@ -166,7 +166,8 @@ private:
     // of them calls back into the corresponding member function via some
     // TLS-based logic.
     static rfbBool newclientStatic(rfbClient *cl);
-    static void updatefbStatic(rfbClient *cl, int x, int y, int w, int h);
+    static void updatefbStaticPartial(rfbClient *cl, int x, int y, int w, int h);
+    static void updateFbStaticFinished(rfbClient *cl);
     static void cuttextStatic(rfbClient *cl, const char *text, int textlen);
     static char *passwdHandlerStatic(rfbClient *cl);
     static rfbCredential *credentialHandlerStatic(rfbClient *cl, int credentialType);
@@ -175,7 +176,8 @@ private:
 
     // Member functions corresponding to the above static methods.
     rfbBool newclient();
-    void updatefb(int x, int y, int w, int h);
+    void updatefbPartial(int x, int y, int w, int h);
+    void updatefbFinished();
     void cuttext(const char *text, int textlen);
     char *passwdHandler();
     rfbCredential *credentialHandler(int credentialType);
@@ -196,6 +198,8 @@ private:
     //color table for 8bit indexed colors
     QVector<QRgb> m_colorTable;
     QString outputErrorMessageString;
+
+    QRect m_dirtyRect;
 
     volatile bool m_stopped;
     volatile bool m_passwordError;
