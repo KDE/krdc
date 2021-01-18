@@ -647,7 +647,11 @@ void VncView::wheelEventHandler(QWheelEvent *event)
 
     const auto dpr = devicePixelRatioF();
     // We need to restore mouse position in device coordinates.
+#if QT_VERSION >= 0x050e00
     const QPointF pos = event->position() * dpr;
+#else
+    const QPointF pos = event->posF() * dpr;
+#endif
 
     const int x = qRound(pos.x() / m_horizontalFactor);
     const int y = qRound(pos.y() / m_verticalFactor);
