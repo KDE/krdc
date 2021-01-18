@@ -8,6 +8,7 @@ set (RELEASE_SERVICE_VERSION "${RELEASE_SERVICE_VERSION_MAJOR}.${RELEASE_SERVICE
 
 project(krdc VERSION ${RELEASE_SERVICE_VERSION})
 
+set (QT_MIN_VERSION "5.14.0")
 set (KF5_MIN_VERSION "5.25.0")
 
 find_package(ECM ${KF5_MIN_VERSION} REQUIRED NO_MODULE)
@@ -19,6 +20,8 @@ include(KDECompilerSettings NO_POLICY_SCOPE)
 include(ECMSetupVersion)
 include(ECMQtDeclareLoggingCategory)
 include(FeatureSummary)
+
+find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core)
 
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
     Config
