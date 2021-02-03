@@ -654,6 +654,8 @@ void VncView::wheelEventHandler(QWheelEvent *event)
 
     vncThread.mouseEvent(x, y, eb | m_buttonMask);
     vncThread.mouseEvent(x, y, m_buttonMask);
+
+    event->accept();
 }
 
 #ifdef LIBSSH_FOUND
