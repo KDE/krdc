@@ -26,5 +26,5 @@ if(BUILD_TEST)
         Qt5::Gui
         krdccore
     )
-    install(TARGETS krdc_testplugin DESTINATION ${PLUGIN_INSTALL_DIR}/krdc)
+    install(TARGETS krdc_testplugin DESTINATION ${KDE_INSTALL_PLUGINDIR}/krdc)
 endif(BUILD_TEST)

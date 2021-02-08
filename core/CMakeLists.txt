@@ -30,7 +30,7 @@ target_link_libraries(krdccore
 
 set_target_properties(krdccore PROPERTIES VERSION ${KRDC_VERSION} SOVERSION ${KRDC_SOVERSION})
 
-install(TARGETS krdccore ${INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS krdccore ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
 # Install headers
 set(krdccore_HDRS
@@ -39,6 +39,6 @@ set(krdccore_HDRS
     hostpreferences.h
 )
 
-install(FILES ${krdccore_HDRS} DESTINATION ${INCLUDE_INSTALL_DIR}/krdc COMPONENT Devel)
+install(FILES ${krdccore_HDRS} DESTINATION ${KDE_INSTALL_INCLUDEDIR}/krdc COMPONENT Devel)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/krdccore_export.h DESTINATION ${KDE_INSTALL_INCLUDEDIR} COMPONENT Devel)
-install(FILES krdc.kcfg DESTINATION ${KCFG_INSTALL_DIR})
+install(FILES krdc.kcfg DESTINATION ${KDE_INSTALL_KCFGDIR})

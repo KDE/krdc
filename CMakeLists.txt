@@ -159,9 +159,9 @@ target_link_libraries(krdc
     krdccore
 )
 
-install(TARGETS krdc ${INSTALL_TARGETS_DEFAULT_ARGS})
-install(FILES krdcui.rc DESTINATION ${KXMLGUI_INSTALL_DIR}/krdc)
-install(PROGRAMS org.kde.krdc.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
+install(TARGETS krdc ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
+install(FILES krdcui.rc DESTINATION ${KDE_INSTALL_KXMLGUI5DIR}/krdc)
+install(PROGRAMS org.kde.krdc.desktop DESTINATION ${KDE_INSTALL_APPDIR})
 install(FILES org.kde.krdc.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)

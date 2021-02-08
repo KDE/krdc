@@ -19,5 +19,5 @@ if (BUILD_KONSOLE)
           krdccore
       )
 
-   install(TARGETS krdc_konsoleplugin DESTINATION ${PLUGIN_INSTALL_DIR}/krdc)
+   install(TARGETS krdc_konsoleplugin DESTINATION ${KDE_INSTALL_PLUGINDIR}/krdc)
 endif(BUILD_KONSOLE)
