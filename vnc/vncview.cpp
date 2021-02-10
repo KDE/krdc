@@ -496,7 +496,7 @@ void VncView::updateImage(int x, int y, int w, int h)
     }
 
     const auto dpr = m_frame.devicePixelRatio();
-    repaint(QRectF(x / dpr * m_horizontalFactor, y / dpr * m_verticalFactor, w / dpr * m_horizontalFactor, h / dpr * m_verticalFactor).toAlignedRect());
+    repaint(QRectF(x / dpr * m_horizontalFactor, y / dpr * m_verticalFactor, w / dpr * m_horizontalFactor, h / dpr * m_verticalFactor).toAlignedRect().adjusted(-1,-1,1,1));
 }
 
 void VncView::setViewOnly(bool viewOnly)
