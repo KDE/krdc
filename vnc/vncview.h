@@ -81,6 +81,7 @@ protected:
     bool event(QEvent *event) override;
     void resizeEvent(QResizeEvent *event) override;
     bool eventFilter(QObject *obj, QEvent *event) override;
+    void focusOutEvent(QFocusEvent *event) override;
 
 private:
     VncClientThread vncThread;
