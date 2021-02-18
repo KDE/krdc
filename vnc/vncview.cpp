@@ -686,7 +686,8 @@ void VncView::keyEventHandler(QKeyEvent *e)
     const bool pressed = (e->type() == QEvent::KeyPress);
 
     // handle modifiers
-    if (k == XK_Shift_L || k == XK_Control_L || k == XK_Meta_L || k == XK_Alt_L) {
+    if (k == XK_Shift_L || k == XK_Control_L || k == XK_Meta_L || k == XK_Alt_L || XK_Super_L || XK_Hyper_L ||
+        k == XK_Shift_R || k == XK_Control_R || k == XK_Meta_R || k == XK_Alt_R || XK_Super_R || XK_Hyper_R) {
         if (pressed) {
             m_mods[k] = true;
         } else if (m_mods.contains(k)) {
@@ -706,6 +707,7 @@ void VncView::unpressModifiers()
     const QList<unsigned int> keys = m_mods.keys();
     QList<unsigned int>::const_iterator it = keys.constBegin();
     while (it != keys.end()) {
+        qCDebug(KRDC) << "VncView::unpressModifiers key=" << (*it);
         vncThread.keyEvent(*it, false);
         it++;
     }
@@ -723,6 +725,14 @@ void VncView::clipboardDataChanged()
     const QString text = m_clipboard->text(QClipboard::Clipboard);
 
     vncThread.clientCut(text);
+}
+
+void VncView::focusOutEvent(QFocusEvent *event)
+{
+    qCDebug(KRDC) << "VncView::focusOutEvent";
+    unpressModifiers();
+
+    RemoteView::focusOutEvent(event);
 }
 
 #include "moc_vncview.cpp"
