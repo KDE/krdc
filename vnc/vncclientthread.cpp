@@ -273,7 +273,7 @@ void VncClientThread::updatefbFinished()
 
 void VncClientThread::cuttext(const char *text, int textlen)
 {
-    const QString cutText = QString::fromUtf8(text, textlen);
+    const QString cutText = QString::fromLatin1(text, textlen);
     qCDebug(KRDC) << cutText;
 
     if (!cutText.isEmpty()) {
@@ -729,8 +729,8 @@ void KeyClientEvent::fire(rfbClient* cl)
 
 void ClientCutEvent::fire(rfbClient* cl)
 {
-    QByteArray toUtf8Converted = text.toUtf8();
-    SendClientCutText(cl, toUtf8Converted.data(), toUtf8Converted.length());
+    QByteArray toLatin1Converted = text.toLatin1();
+    SendClientCutText(cl, toLatin1Converted.data(), toLatin1Converted.length());
 }
 
 void VncClientThread::mouseEvent(int x, int y, int buttonMask)
