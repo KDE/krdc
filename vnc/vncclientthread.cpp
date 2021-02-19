@@ -208,7 +208,8 @@ rfbBool VncClientThread::newclient()
     case RemoteView::Low:
     case RemoteView::Unknown:
     default:
-        cl->appData.encodingsString = "copyrect tight zrle ultra zlib hextile corre rre raw";
+        // bpp8 and tight encoding is not supported in libvnc
+        cl->appData.encodingsString = "copyrect zrle ultra zlib hextile corre rre raw";
         cl->appData.compressLevel = 9;
         cl->appData.qualityLevel = 1;
     }
