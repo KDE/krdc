@@ -29,6 +29,7 @@
 #include <QPainter>
 #include <QMouseEvent>
 #include <QTimer>
+#include <QMimeData>
 
 #ifdef QTONLY
     #include <QMessageBox>
@@ -723,6 +724,14 @@ void VncView::clipboardDataChanged()
 
     if (m_clipboard->ownsClipboard() || m_dontSendClipboard)
         return;
+
+    if (m_hostPreferences->dontCopyPasswords()) {
+        const QMimeData* data = m_clipboard->mimeData();
+        if (data && data->hasFormat(QLatin1String("x-kde-passwordManagerHint"))) {
+            qCDebug(KRDC) << "VncView::clipboardDataChanged data hasFormat x-kde-passwordManagerHint -- ignoring";
+            return;
+        }
+    }
 
     const QString text = m_clipboard->text(QClipboard::Clipboard);
 

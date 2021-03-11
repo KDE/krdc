@@ -34,6 +34,7 @@ static const char use_ssh_tunnel_config_key[] = "use_ssh_tunnel";
 static const char use_ssh_tunnel_loopback_config_key[] = "use_ssh_tunnel_loopback";
 static const char ssh_tunnel_port_config_key[] = "ssh_tunnel_port";
 static const char ssh_tunnel_user_name_config_key[] = "ssh_tunnel_user_name";
+static const char dont_copy_passwords_config_key[] = "dont_copy_passwords";
 
 VncHostPreferences::VncHostPreferences(KConfigGroup configGroup, QObject *parent)
         : HostPreferences(configGroup, parent)
@@ -75,6 +76,8 @@ QWidget* VncHostPreferences::createProtocolSpecificConfigPage()
     vncUi.ssh_groupBox->hide();
     vncUi.use_ssh_tunnel->hide();
 #endif
+
+    vncUi.dont_copy_passwords->setChecked(dontCopyPasswords());
 
     return vncPage;
 }
@@ -153,6 +156,7 @@ void VncHostPreferences::acceptConfig()
     setUseSshTunnelLoopback(vncUi.use_loopback->isChecked());
     setSshTunnelPort(vncUi.ssh_tunnel_port->value());
     setSshTunnelUserName(vncUi.ssh_tunnel_user_name->text());
+    setDontCopyPasswords(vncUi.dont_copy_passwords->isChecked());
 }
 
 void VncHostPreferences::setQuality(RemoteView::Quality quality)
@@ -204,4 +208,14 @@ QString VncHostPreferences::sshTunnelUserName() const
 void VncHostPreferences::setSshTunnelUserName(const QString &userName)
 {
     m_configGroup.writeEntry(ssh_tunnel_user_name_config_key, userName);
+}
+
+bool VncHostPreferences::dontCopyPasswords() const
+{
+    return m_configGroup.readEntry(dont_copy_passwords_config_key, false);
+}
+
+void VncHostPreferences::setDontCopyPasswords(bool dontCopyPasswords)
+{
+    m_configGroup.writeEntry(dont_copy_passwords_config_key, dontCopyPasswords);
 }

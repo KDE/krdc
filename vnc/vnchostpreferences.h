@@ -42,6 +42,7 @@ public:
     bool useSshTunnelLoopback() const;
     int sshTunnelPort() const;
     QString sshTunnelUserName() const;
+    bool dontCopyPasswords() const;
 
 protected:
     void acceptConfig() override;
@@ -53,6 +54,7 @@ private:
     void setUseSshTunnelLoopback(bool useSshTunnelLoopback);
     void setSshTunnelPort(int port);
     void setSshTunnelUserName(const QString &userName);
+    void setDontCopyPasswords(bool dontCopyPasswords);
 
     Ui::VncPreferences vncUi;
     void checkEnableCustomSize(int index);

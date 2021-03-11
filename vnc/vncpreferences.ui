@@ -252,6 +252,16 @@
     </widget>
    </item>
    <item>
+    <widget class="QCheckBox" name="dont_copy_passwords">
+     <property name="text">
+      <string>Don't copy passwords from supported password managers to remote hosts</string>
+     </property>
+     <property name="toolTip">
+      <string>Supported password managers (like KeePassXC) mark copied passwords with an additional MIME type "x-kde-passwordManagerHint" which is used for filtering.</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <spacer name="verticalSpacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
