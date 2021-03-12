@@ -158,6 +158,9 @@ int TabbedViewWidget::insertTab(int index, QWidget *page, const QIcon &icon, con
 void TabbedViewWidget::removePage(QWidget *page)
 {
     int index = QTabWidget::indexOf(page);
+    if (index == -1) {
+        return;
+    }
     m_model->beginRemoveRows(QModelIndex(), index, index);
     QTabWidget::removeTab(index);
     m_model->endRemoveRows();
