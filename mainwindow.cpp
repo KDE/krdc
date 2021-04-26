@@ -2,6 +2,7 @@
 **
 ** Copyright (C) 2007 - 2013 Urs Wolfer <uwolfer @ kde.org>
 ** Copyright (C) 2009 - 2010 Tony Murray <murraytony @ gmail.com>
+** Copyright (C) 2021 Rafał Lalik <rafallalik @ gmail.com>
 **
 ** This file is part of KDE.
 **
@@ -34,6 +35,7 @@
 #include "systemtrayicon.h"
 #include "tabbedviewwidget.h"
 #include "hostpreferences.h"
+#include "factorwidget.h"
 
 #include <KActionCollection>
 #include <KActionMenu>
@@ -45,7 +47,7 @@
 #include <KPluginMetaData>
 #include <KToggleAction>
 #include <KToggleFullScreenAction>
-#include <QDebug>
+#include <KToolBar>
 
 #include <QClipboard>
 #include <QDockWidget>
@@ -189,6 +191,10 @@ void MainWindow::setupActions()
     scaleAction->setIconText(i18n("Scale"));
     connect(scaleAction, SIGNAL(triggered(bool)), SLOT(scale(bool)));
 
+    FactorWidget * m_scaleSlider = new FactorWidget(i18n("Scaling Factor"), this, actionCollection());
+    QAction * scaleFactorAction = actionCollection()->addAction(QStringLiteral("scale_factor"), m_scaleSlider);
+    scaleFactorAction->setIcon(QIcon::fromTheme(QStringLiteral("configure")));
+
     KStandardAction::quit(this, SLOT(quit()), actionCollection());
     KStandardAction::preferences(this, SLOT(preferences()), actionCollection());
     QAction *configNotifyAction = KStandardAction::configureNotifications(this, SLOT(configureNotifications()), actionCollection());
@@ -298,7 +304,11 @@ void MainWindow::newConnection(const QUrl &newUrl, bool switchFullscreenWhenConn
 
     view->showLocalCursor(prefs->showLocalCursor() ? RemoteView::CursorOn : RemoteView::CursorOff);
     view->setViewOnly(prefs->viewOnly());
-    if (! switchFullscreenWhenConnected) view->enableScaling(prefs->windowedScale());
+    bool scale_state = false;
+    if (switchFullscreenWhenConnected) scale_state = prefs->fullscreenScale();
+    else scale_state = prefs->windowedScale();
+
+    view->enableScaling(scale_state);
 
     connect(view, SIGNAL(framebufferSizeChanged(int,int)), this, SLOT(resizeTabWidget(int,int)));
     connect(view, SIGNAL(statusChanged(RemoteView::RemoteStatus)), this, SLOT(statusChanged(RemoteView::RemoteStatus)));
@@ -317,6 +327,10 @@ void MainWindow::newConnection(const QUrl &newUrl, bool switchFullscreenWhenConn
     tabChanged(newIndex); // force to update m_currentRemoteView (tabChanged is not emitted when start page has been disabled)
 
     view->start();
+    setFactor(view->hostPreferences()->scaleFactor());
+
+    emit factorUpdated(view->hostPreferences()->scaleFactor());
+    emit scaleUpdated(scale_state);
 }
 
 void MainWindow::openFromRemoteDesktopsModel(const QModelIndex &index)
@@ -456,6 +470,9 @@ void MainWindow::switchFullscreen()
 {
     qCDebug(KRDC);
 
+    RemoteView* view = currentRemoteView();
+    bool scale_state = false;
+
     if (m_fullscreenWindow) {
         // Leaving full screen mode
         m_fullscreenWindow->setWindowState(Qt::WindowNoState);
@@ -482,6 +499,8 @@ void MainWindow::switchFullscreen()
         actionCollection()->action(QStringLiteral("switch_fullscreen"))->setIcon(QIcon::fromTheme(QStringLiteral("view-fullscreen")));
         actionCollection()->action(QStringLiteral("switch_fullscreen"))->setText(i18n("Switch to Full Screen Mode"));
         actionCollection()->action(QStringLiteral("switch_fullscreen"))->setIconText(i18n("Full Screen"));
+        if (view)
+            scale_state = view->hostPreferences()->windowedScale();
 
         m_fullscreenWindow->deleteLater();
         m_fullscreenWindow = nullptr;
@@ -520,10 +539,18 @@ void MainWindow::switchFullscreen()
         actionCollection()->action(QStringLiteral("switch_fullscreen"))->setText(i18n("Switch to Window Mode"));
         actionCollection()->action(QStringLiteral("switch_fullscreen"))->setIconText(i18n("Window Mode"));
         showRemoteViewToolbar();
+        if (view)
+            scale_state = view->hostPreferences()->fullscreenScale();
     }
     if (m_tabWidget->currentWidget() == m_newConnectionWidget && m_addressInput) {
         m_addressInput->setFocus();
     }
+
+    if (view) {
+        emit factorUpdated(view->hostPreferences()->scaleFactor());
+        emit scaleUpdated(scale_state);
+    }
+    actionCollection()->action(QStringLiteral("scale"))->setChecked(scale_state);
 }
 
 QScrollArea *MainWindow::createScrollArea(QWidget *parent, RemoteView *remoteView)
@@ -755,6 +782,13 @@ void MainWindow::grabAllKeys(bool grabAllKeys)
     saveHostPrefs(view);
 }
 
+void setActionStatus(QAction* action, bool enabled, bool visible, bool checked)
+{
+    action->setEnabled(enabled);
+    action->setVisible(visible);
+    action->setChecked(checked);
+}
+
 void MainWindow::scale(bool scale)
 {
     qCDebug(KRDC);
@@ -767,6 +801,23 @@ void MainWindow::scale(bool scale)
         view->hostPreferences()->setWindowedScale(scale);
 
     saveHostPrefs(view);
+
+    emit scaleUpdated(scale);
+}
+
+void MainWindow::setFactor(int scale)
+{
+    float s = float(scale)/100.;
+
+    RemoteView* view = currentRemoteView();
+    if (view) {
+        view->setScaleFactor(s);
+
+        view->enableScaling(view->scaling());
+        view->hostPreferences()->setScaleFactor(scale);
+
+        saveHostPrefs(view);
+    }
 }
 
 void MainWindow::showRemoteViewToolbar()
@@ -803,6 +854,7 @@ void MainWindow::showRemoteViewToolbar()
         buttonBox->addAction(actionCollection()->action(QStringLiteral("show_local_cursor")));
         buttonBox->addAction(actionCollection()->action(QStringLiteral("grab_all_keys")));
         buttonBox->addAction(actionCollection()->action(QStringLiteral("scale")));
+        buttonBox->addAction(actionCollection()->action(QStringLiteral("scale_factor")));
         buttonBox->addAction(actionCollection()->action(QStringLiteral("disconnect")));
         buttonBox->addAction(actionCollection()->action(QStringLiteral("file_quit")));
 
@@ -815,13 +867,6 @@ void MainWindow::showRemoteViewToolbar()
 
         m_toolBar->addWidget(buttonBox);
     }
-}
-
-void setActionStatus(QAction* action, bool enabled, bool visible, bool checked)
-{
-    action->setEnabled(enabled);
-    action->setVisible(visible);
-    action->setChecked(checked);
 }
 
 void MainWindow::updateActionStatus()
@@ -852,6 +897,9 @@ void MainWindow::updateActionStatus()
                     enabled,
                     view ? view->supportsScaling() : false,
                     view ? view->scaling() : false);
+
+    actionCollection()->action(QStringLiteral("scale_factor"))->setEnabled(enabled);
+    actionCollection()->action(QStringLiteral("scale_factor"))->setVisible(view ? view->supportsScaling() : false);
 
     setActionStatus(actionCollection()->action(QStringLiteral("grab_all_keys")),
                     enabled,

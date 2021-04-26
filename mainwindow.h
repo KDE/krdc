@@ -2,6 +2,7 @@
 **
 ** Copyright (C) 2007 - 2013 Urs Wolfer <uwolfer @ kde.org>
 ** Copyright (C) 2009 - 2010 Tony Murray <murraytony @ gmail.com>
+** Copyright (C) 2021 Rafał Lalik <rafallalik @ gmail.com>
 **
 ** This file is part of KDE.
 **
@@ -65,6 +66,7 @@ public:
 
 public Q_SLOTS:
     void newConnection(const QUrl &newUrl = QUrl(), bool switchFullscreenWhenConnected = false, const QString &tabName = QString());
+    void setFactor(int scale);
 
 protected:
     void closeEvent(QCloseEvent *event) override;
@@ -133,6 +135,10 @@ private:
     QTableView *m_newConnectionTableView;
     RemoteDesktopsModel *m_remoteDesktopsModel;
     QWidget *m_newConnectionWidget;
+
+Q_SIGNALS:
+    void scaleUpdated(bool scale);  // scale state has changed
+    void factorUpdated(int factor); // factor havlue has changed
 };
 
 #include <QApplication>

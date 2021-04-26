@@ -2,6 +2,7 @@
 **
 ** Copyright (C) 2002-2003 Tim Jansen <tim@tjansen.de>
 ** Copyright (C) 2007-2008 Urs Wolfer <uwolfer @ kde.org>
+** Copyright (C) 2021 Rafał Lalik <rafallalik @ gmail.com>
 **
 ** This file is part of KDE.
 **
@@ -38,6 +39,7 @@ RemoteView::RemoteView(QWidget *parent)
         m_grabAllKeys(false),
         m_scale(false),
         m_keyboardIsGrabbed(false),
+        m_factor(0.),
 #ifndef QTONLY
         m_wallet(nullptr),
 #endif
@@ -184,6 +186,11 @@ bool RemoteView::scaling() const
 void RemoteView::enableScaling(bool scale)
 {
     m_scale = scale;
+}
+
+void RemoteView::setScaleFactor(float factor)
+{
+    m_factor = factor;
 }
 
 void RemoteView::switchFullscreen(bool)

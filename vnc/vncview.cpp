@@ -1,6 +1,7 @@
 /****************************************************************************
 **
 ** Copyright (C) 2007 - 2013 Urs Wolfer <uwolfer @ kde.org>
+** Copyright (C) 2021 Rafał Lalik <rafallalik @ gmail.com>
 **
 ** This file is part of KDE.
 **
@@ -137,8 +138,11 @@ void VncView::scaleResize(int w, int h)
     qCDebug(KRDC) << w << h;
     if (m_scale) {
         const QSize frameSize = m_frame.size() / m_frame.devicePixelRatio();
-        m_verticalFactor = (qreal) h / frameSize.height();
-        m_horizontalFactor = (qreal) w / frameSize.width();
+        const qreal _newW = (frameSize.width() - w) * m_factor + w;
+        const qreal _newH = (frameSize.height() - h) * m_factor + h;
+
+        m_verticalFactor = _newH / frameSize.height();
+        m_horizontalFactor = _newW / frameSize.width();
 
 #ifndef QTONLY
         if (Settings::keepAspectRatio()) {

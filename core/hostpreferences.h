@@ -1,6 +1,7 @@
 /****************************************************************************
 **
 ** Copyright (C) 2007 Urs Wolfer <uwolfer @ kde.org>
+** Copyright (C) 2021 Rafał Lalik <rafallalik @ gmail.com>
 **
 ** This file is part of KDE.
 **
@@ -50,6 +51,10 @@ public:
     /** Whether scaling is enabled when session is not full screen */
     bool windowedScale();
     void setWindowedScale(bool scale);
+
+    /** Whether scaling is enabled when session is full screen. Note: only windowedScale seems to be used. */
+    int scaleFactor();
+    void setScaleFactor(int factor);
 
     bool grabAllKeys();
     void setGrabAllKeys(bool grab);

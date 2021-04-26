@@ -2,6 +2,7 @@
 **
 ** Copyright (C) 2002-2003 Tim Jansen <tim@tjansen.de>
 ** Copyright (C) 2007-2008 Urs Wolfer <uwolfer @ kde.org>
+** Copyright (C) 2021 Rafał Lalik <rafallalik @ gmail.com>
 **
 ** This file is part of KDE.
 **
@@ -285,6 +286,16 @@ public Q_SLOTS:
     virtual void enableScaling(bool scale);
 
     /**
+     * Sets scaling factor for the view. If remote view has width R and
+     * the window has width W, then scaling factor (float, range 0-1) set the
+     * remote view width A to be: A = (R-W)*factor + W. For factor = 0, A=W,
+     * so no scalling, for factor=1, A=R.
+     *
+     * @param factor scaling factor in the range 0-1
+     */
+    virtual void setScaleFactor(float factor);
+
+    /**
      * Enables/disables the view-only mode.
      * Ignored if @ref supportsScaling() is false.
      * The default implementation does nothing.
@@ -319,6 +330,9 @@ public Q_SLOTS:
     /**
      * Called when the visible place changed so remote
      * view can resize itself.
+     *
+     * @param w width of the remote view
+     * @param h height of the remote view
      */
     virtual void scaleResize(int w, int h);
 
@@ -406,6 +420,7 @@ protected:
     bool m_scale;
     bool m_keyboardIsGrabbed;
     QUrl m_url;
+    qreal m_factor;
 
 #ifndef QTONLY
     QString readWalletPassword(bool fromUserNameOnly = false);

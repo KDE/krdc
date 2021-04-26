@@ -1,6 +1,7 @@
 /****************************************************************************
 **
 ** Copyright (C) 2007 - 2010 Urs Wolfer <uwolfer @ kde.org>
+** Copyright (C) 2021 Rafał Lalik <rafallalik @ gmail.com>
 **
 ** This file is part of KDE.
 **
@@ -125,6 +126,16 @@ bool HostPreferences::windowedScale()
 void HostPreferences::setWindowedScale(bool scale)
 {
     m_configGroup.writeEntry("windowedScale", scale);
+}
+
+int HostPreferences::scaleFactor()
+{
+    return m_configGroup.readEntry("scaleFactor", 100);
+}
+
+void HostPreferences::setScaleFactor(int factor)
+{
+    m_configGroup.writeEntry("scaleFactor", factor);
 }
 
 bool HostPreferences::grabAllKeys()
