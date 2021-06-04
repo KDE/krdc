@@ -57,6 +57,5 @@ if(HAVE_XFREERDP)
 
     install(FILES krdc_rdp_config.desktop DESTINATION ${KDE_INSTALL_KSERVICES5DIR})
 
-    install(FILES rdp.protocol DESTINATION ${KDE_INSTALL_KSERVICES5DIR})
     install(FILES smb2rdc.desktop DESTINATION ${KDE_INSTALL_KSERVICES5DIR}/ServiceMenus)
 endif(HAVE_XFREERDP)

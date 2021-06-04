@@ -71,6 +71,4 @@ if(LIBVNCSERVER_FOUND)
     install(TARGETS krdc_vncplugin DESTINATION ${KDE_INSTALL_PLUGINDIR}/krdc)
 
     install(FILES krdc_vnc_config.desktop DESTINATION ${KDE_INSTALL_KSERVICES5DIR})
-
-    install(FILES vnc.protocol DESTINATION ${KDE_INSTALL_KSERVICES5DIR})
 endif(LIBVNCSERVER_FOUND)
