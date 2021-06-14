@@ -1,23 +1,25 @@
 set(BUILD_KONSOLE true)
-if (BUILD_KONSOLE)
-  set(konsoleplugin_SRCS
-      konsoleviewfactory.cpp
-      konsoleview.cpp
-  )
+if (NOT BUILD_KONSOLE)
+    return()
+endif()
 
-  add_library(krdc_konsoleplugin ${konsoleplugin_SRCS})
+set(konsoleplugin_SRCS
+    konsoleviewfactory.cpp
+    konsoleview.cpp
+)
 
-  kcoreaddons_desktop_to_json(krdc_konsoleplugin krdc_test.desktop)
+add_library(krdc_konsoleplugin ${konsoleplugin_SRCS})
 
-  find_package(KF5 REQUIRED COMPONENTS Parts)
-  target_link_libraries(krdc_konsoleplugin
-          Qt5::Core
-          KF5::Wallet
-          KF5::ConfigCore
-          KF5::Parts
-          Qt5::Gui
-          krdccore
-      )
+kcoreaddons_desktop_to_json(krdc_konsoleplugin krdc_test.desktop)
 
-   install(TARGETS krdc_konsoleplugin DESTINATION ${KDE_INSTALL_PLUGINDIR}/krdc)
-endif(BUILD_KONSOLE)
+find_package(KF5 REQUIRED COMPONENTS Parts)
+target_link_libraries(krdc_konsoleplugin
+        Qt5::Core
+        KF5::Wallet
+        KF5::ConfigCore
+        KF5::Parts
+        Qt5::Gui
+        krdccore
+    )
+
+install(TARGETS krdc_konsoleplugin DESTINATION ${KDE_INSTALL_PLUGINDIR}/krdc)
