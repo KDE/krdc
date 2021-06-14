@@ -1214,7 +1214,7 @@ void MainWindow::createDockWidget()
     remoteDesktopsDockWidget->setObjectName(QStringLiteral("remoteDesktopsDockWidget")); // required for saving position / state
     remoteDesktopsDockWidget->setWindowTitle(i18n("Remote Desktops"));
     QFontMetrics fontMetrics(remoteDesktopsDockWidget->font());
-    remoteDesktopsDockWidget->setMinimumWidth(fontMetrics.width(QStringLiteral("vnc://192.168.100.100:6000")));
+    remoteDesktopsDockWidget->setMinimumWidth(fontMetrics.horizontalAdvance(QStringLiteral("vnc://192.168.100.100:6000")));
     actionCollection()->addAction(QStringLiteral("remote_desktop_dockwidget"),
                                   remoteDesktopsDockWidget->toggleViewAction());
 
