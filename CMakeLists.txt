@@ -143,6 +143,8 @@ ecm_qt_declare_logging_category(krdc
     HEADER krdc_debug.h
     IDENTIFIER KRDC
     CATEGORY_NAME KRDC
+    DESCRIPTION "KRDC"
+    EXPORT KRDC
 )
 
 target_link_libraries(krdc
@@ -163,5 +165,10 @@ target_link_libraries(krdc
 install(TARGETS krdc ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 install(PROGRAMS org.kde.krdc.desktop DESTINATION ${KDE_INSTALL_APPDIR})
 install(FILES org.kde.krdc.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
+
+ecm_qt_install_logging_categories(
+    EXPORT KRDC
+    DESTINATION "${KDE_INSTALL_LOGGINGCATEGORIESDIR}"
+)
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
