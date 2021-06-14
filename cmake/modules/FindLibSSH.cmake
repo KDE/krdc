@@ -5,12 +5,9 @@
 #  LIBSSH_INCLUDE_DIR - the LibSSH include directory
 #  LIBSSH_LIBRARIES - Link these to use LibSSH
 #
-#  Copyright (c) 2009-2014 Andreas Schneider <asn@cryptomilk.org>
+# SPDX-FileCopyrightText: 2009-2014 Andreas Schneider <asn@cryptomilk.org>
 #
-#  Redistribution and use is allowed according to the terms of the New
-#  BSD license.
-#  For details see the accompanying COPYING-CMAKE-SCRIPTS file.
-#
+# SPDX-License-Identifier: BSD-3-Clause
 
 find_path(LIBSSH_INCLUDE_DIR
   NAMES

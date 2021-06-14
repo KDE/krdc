@@ -1,10 +1,9 @@
 # cmake macro to test LIBVNCSERVER LIB
 
-# Copyright (c) 2006, Alessandro Praduroux <pradu@pradu.it>
-# Copyright (c) 2007, Urs Wolfer <uwolfer @ kde.org>
+# SPDX-FileCopyrightText: 2006 Alessandro Praduroux <pradu@pradu.it>
+# SPDX-FileCopyrightText: 2007 Urs Wolfer <uwolfer@kde.org>
 #
-# Redistribution and use is allowed according to the terms of the BSD license.
-# For details see the accompanying COPYING-CMAKE-SCRIPTS file.
+# SPDX-License-Identifier: BSD-3-Clause
 
 IF (LIBVNCSERVER_INCLUDE_DIR AND LIBVNCSERVER_LIBRARIES)
     # Already in cache, be silent
