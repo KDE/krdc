@@ -33,6 +33,7 @@
 #include <KShell>
 #include <KWindowSystem>
 
+#include <QScreen>
 #include <QWindow>
 #include <QDir>
 #include <QEvent>
@@ -408,7 +409,11 @@ void RdpView::connectionOpened()
 
 QPixmap RdpView::takeScreenshot()
 {
-    return QPixmap::grabWindow(m_container->winId());
+    QScreen *screen = m_container->screen();
+    if (!screen) {
+        return QPixmap();
+    }
+    return screen->grabWindow(m_container->winId());
 }
 
 void RdpView::connectionClosed()
