@@ -103,13 +103,6 @@ set_package_properties(freerdp PROPERTIES
         TYPE RUNTIME
 )
 
-include_directories(
-    ${CMAKE_CURRENT_SOURCE_DIR}
-    ${CMAKE_CURRENT_SOURCE_DIR}/core/
-    ${CMAKE_CURRENT_BINARY_DIR}/core/
-    ${CMAKE_CURRENT_BINARY_DIR}
-)
-
 add_subdirectory(core)
 add_subdirectory(vnc)
 add_subdirectory(rdp)

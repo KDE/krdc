@@ -2,7 +2,6 @@
 if(LIBVNCSERVER_FOUND)
 
     include_directories(
-        ${CMAKE_CURRENT_BINARY_DIR}
         ${LIBVNCCLIENT_INCLUDE_DIR}
     )
 

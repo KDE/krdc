@@ -5,10 +5,6 @@ endif(FREERDP_EXECUTABLE_FOUND)
 if(HAVE_XFREERDP)
     add_definitions(-DKDE_DEFAULT_DEBUG_AREA=5012)
 
-    include_directories(
-        ${CMAKE_CURRENT_BINARY_DIR}
-    )
-
     set(rdpplugin_SRCS
         rdphostpreferences.cpp
         rdpviewfactory.cpp
