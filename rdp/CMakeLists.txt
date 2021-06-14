@@ -3,8 +3,6 @@ if(FREERDP_EXECUTABLE_FOUND)
 endif(FREERDP_EXECUTABLE_FOUND)
 
 if(HAVE_XFREERDP)
-    add_definitions(-DKDE_DEFAULT_DEBUG_AREA=5012)
-
     set(rdpplugin_SRCS
         rdphostpreferences.cpp
         rdpviewfactory.cpp
