@@ -49,7 +49,7 @@ KonsoleView::KonsoleView(QWidget *parent, const QUrl &url, KConfigGroup configGr
     setStatus(Connected);
     setFixedSize(size);
     setFixedSize(size);
-    emit framebufferSizeChanged(size.width(), size.height());
+    Q_EMIT framebufferSizeChanged(size.width(), size.height());
 
     KPluginFactory* factory = 0;
     KService::Ptr service = KService::serviceByDesktopName("konsolepart");
@@ -74,7 +74,7 @@ KonsoleView::KonsoleView(QWidget *parent, const QUrl &url, KConfigGroup configGr
 
 KonsoleView::~KonsoleView()
 {
-    emit disconnected();
+    Q_EMIT disconnected();
     setStatus(Disconnected);
 }
 
@@ -111,7 +111,7 @@ bool KonsoleView::isQuitting()
 bool KonsoleView::start()
 {
     setStatus(Connected);
-    emit connected();
+    Q_EMIT connected();
     m_terminalWidget->setFocus();
     return true;
 }

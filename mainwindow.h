@@ -161,7 +161,7 @@ Q_SIGNALS:
 protected:
     void mousePressEvent(QMouseEvent *event) override {
         if (event->button() == Qt::RightButton)
-            emit rightClicked();
+            Q_EMIT rightClicked();
     }
 };
 
@@ -181,7 +181,7 @@ Q_SIGNALS:
 protected:
     void resizeEvent(QResizeEvent *event) override {
         QScrollArea::resizeEvent(event);
-        emit resized(width() - 2*frameWidth(), height() - 2*frameWidth());
+        Q_EMIT resized(width() - 2*frameWidth(), height() - 2*frameWidth());
     }
 };
 

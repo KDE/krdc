@@ -66,7 +66,7 @@ bool TabbedViewWidgetModel::setData(const QModelIndex &index, const QVariant &va
 {
     if (index.isValid() && role == Qt::EditRole) {
         m_tabWidget->setTabText(index.row(), value.toString());
-        emit dataChanged(index, index);
+        Q_EMIT dataChanged(index, index);
         return true;
     }
     return false;
@@ -93,18 +93,18 @@ QVariant TabbedViewWidgetModel::data(const QModelIndex &index, int role) const
 
 void TabbedViewWidgetModel::emitLayoutAboutToBeChanged()
 {
-    emit layoutAboutToBeChanged();
+    Q_EMIT layoutAboutToBeChanged();
 }
 
 void TabbedViewWidgetModel::emitLayoutChanged()
 {
-    emit layoutChanged();
+    Q_EMIT layoutChanged();
 }
 
 void TabbedViewWidgetModel::emitDataChanged(int index)
 {
     QModelIndex modelIndex = createIndex(index, 1);
-    emit dataChanged(modelIndex, modelIndex);
+    Q_EMIT dataChanged(modelIndex, modelIndex);
 }
 
 TabbedViewWidget::TabbedViewWidget(QWidget *parent)
@@ -233,7 +233,7 @@ void TabbedViewWidget::mouseDoubleClickEvent(QMouseEvent * event)
     }
 
     if (isEmptyTabbarSpace(event->pos())) {
-        emit(tabBarDoubleClicked(-1));
+        Q_EMIT tabBarDoubleClicked(-1);
         return;
     }
 
@@ -244,12 +244,12 @@ void TabbedViewWidget::mouseReleaseEvent(QMouseEvent *event)
 {
     if (event->button() == Qt::MidButton) {
         if (isEmptyTabbarSpace(event->pos())) {
-            emit(mouseMiddleClick(-1));
+            Q_EMIT mouseMiddleClick(-1);
             return;
         }
         int pos = tabBar()->tabAt(event->pos());
         if(pos != -1){
-            emit(mouseMiddleClick(pos));
+            Q_EMIT mouseMiddleClick(pos);
             return;
         }
     }

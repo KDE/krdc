@@ -36,7 +36,7 @@ TestView::TestView(QWidget *parent, const QUrl &url, KConfigGroup configGroup)
 
 TestView::~TestView()
 {
-    emit disconnected();
+    Q_EMIT disconnected();
     setStatus(Disconnected);
 }
 
@@ -65,8 +65,8 @@ void TestView::asyncConnect()
     setFixedSize(size);
     resize(size);
     setStatus(Connected);
-    emit framebufferSizeChanged(size.width(), size.height());
-    emit connected();
+    Q_EMIT framebufferSizeChanged(size.width(), size.height());
+    Q_EMIT connected();
     setFocus();
 }
 

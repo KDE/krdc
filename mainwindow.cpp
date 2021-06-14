@@ -329,8 +329,8 @@ void MainWindow::newConnection(const QUrl &newUrl, bool switchFullscreenWhenConn
     view->start();
     setFactor(view->hostPreferences()->scaleFactor());
 
-    emit factorUpdated(view->hostPreferences()->scaleFactor());
-    emit scaleUpdated(scale_state);
+    Q_EMIT factorUpdated(view->hostPreferences()->scaleFactor());
+    Q_EMIT scaleUpdated(scale_state);
 }
 
 void MainWindow::openFromRemoteDesktopsModel(const QModelIndex &index)
@@ -549,8 +549,8 @@ void MainWindow::switchFullscreen()
     }
 
     if (view) {
-        emit factorUpdated(view->hostPreferences()->scaleFactor());
-        emit scaleUpdated(scale_state);
+        Q_EMIT factorUpdated(view->hostPreferences()->scaleFactor());
+        Q_EMIT scaleUpdated(scale_state);
     }
     actionCollection()->action(QStringLiteral("scale"))->setChecked(scale_state);
 }
@@ -804,7 +804,7 @@ void MainWindow::scale(bool scale)
 
     saveHostPrefs(view);
 
-    emit scaleUpdated(scale);
+    Q_EMIT scaleUpdated(scale);
 }
 
 void MainWindow::setFactor(int scale)

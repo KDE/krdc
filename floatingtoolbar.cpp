@@ -271,7 +271,7 @@ void FloatingToolBar::mouseMoveEvent(QMouseEvent *e)
 
     d->anchorSide = side;
     d->reposition();
-    emit orientationChanged((int)side);
+    Q_EMIT orientationChanged((int)side);
 
     QToolBar::mouseMoveEvent(e);
 }

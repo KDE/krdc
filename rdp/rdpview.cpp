@@ -401,8 +401,8 @@ void RdpView::connectionOpened()
     setFixedSize(size);
     resize(size);
     m_containerWidget->setFixedSize(size);
-    emit framebufferSizeChanged(size.width(), size.height());
-    emit connected();
+    Q_EMIT framebufferSizeChanged(size.width(), size.height());
+    Q_EMIT connected();
     setFocus();
 }
 
@@ -421,7 +421,7 @@ void RdpView::connectionClosed(CloseType closeType)
     if (m_quitFlag && closeType != ForceClose) {
         return;
     }
-    emit disconnected();
+    Q_EMIT disconnected();
     setStatus(Disconnected);
     m_quitFlag = true;
 }
@@ -430,7 +430,7 @@ void RdpView::connectionError(const QString &text, const QString &caption)
 {
     m_quitFlag = true;
     KMessageBox::error(nullptr, text, caption);
-    emit disconnectedError();
+    Q_EMIT disconnectedError();
     connectionClosed(ForceClose);
 }
 

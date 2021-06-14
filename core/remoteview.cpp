@@ -75,18 +75,18 @@ void RemoteView::setStatus(RemoteView::RemoteStatus s)
             Q_ASSERT(((int) s) >= 0);
             if (m_status > s) {
                 m_status = Disconnected;
-                emit statusChanged(Disconnected);
+                Q_EMIT statusChanged(Disconnected);
             }
             // smooth state transition
             RemoteStatus origState = m_status;
             for (int i = origState; i < s; ++i) {
                 m_status = (RemoteStatus) i;
-                emit statusChanged((RemoteStatus) i);
+                Q_EMIT statusChanged((RemoteStatus) i);
             }
         }
     }
     m_status = s;
-    emit statusChanged(m_status);
+    Q_EMIT statusChanged(m_status);
 }
 
 bool RemoteView::supportsScaling() const

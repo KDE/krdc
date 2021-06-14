@@ -100,14 +100,14 @@ void BookmarkManager::addHistoryBookmark(RemoteView *view)
 
 void BookmarkManager::openBookmark(const KBookmark &bm, Qt::MouseButtons, Qt::KeyboardModifiers)
 {
-    emit openUrl(bm.url());
+    Q_EMIT openUrl(bm.url());
 }
 
 void BookmarkManager::openFolderinTabs(const KBookmarkGroup &bookmarkGroup)
 {
     KBookmark bm = bookmarkGroup.first();
     while (!bm.isNull()) {
-        emit openUrl(bm.url());
+        Q_EMIT openUrl(bm.url());
         bm = bookmarkGroup.next(bm);
     }
 }
@@ -171,7 +171,7 @@ QList<KBookmarkOwner::FutureBookmark> BookmarkManager::currentBookmarkList() con
 void BookmarkManager::addManualBookmark(const QUrl &url, const QString &text)
 {
     m_manager->root().addBookmark(text, url, QString());
-    emit m_manager->emitChanged();
+    Q_EMIT m_manager->emitChanged();
 }
 
 KBookmarkManager* BookmarkManager::getManager()

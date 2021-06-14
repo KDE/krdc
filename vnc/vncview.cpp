@@ -212,7 +212,7 @@ void VncView::startQuitting()
     // emit the disconnect siginal only after all the events are handled.
     // Otherwise some error messages might be thrown away without
     // showing to the user.
-    emit disconnected();
+    Q_EMIT disconnected();
     setStatus(Disconnected);
 }
 
@@ -415,7 +415,7 @@ void VncView::outputErrorMessage(const QString &message)
 
     KMessageBox::error(this, message, i18n("VNC failure"));
 
-    emit errorMessage(i18n("VNC failure"), message);
+    Q_EMIT errorMessage(i18n("VNC failure"), message);
 }
 
 void VncView::sshErrorMessage(const QString &message)
@@ -426,7 +426,7 @@ void VncView::sshErrorMessage(const QString &message)
 
     KMessageBox::error(this, message, i18n("SSH Tunnel failure"));
 
-    emit errorMessage(i18n("SSH Tunnel failure"), message);
+    Q_EMIT errorMessage(i18n("SSH Tunnel failure"), message);
 }
 
 #ifndef QTONLY
@@ -455,13 +455,13 @@ void VncView::updateImage(int x, int y, int w, int h)
         setMouseTracking(true); // get mouse events even when there is no mousebutton pressed
         setFocusPolicy(Qt::WheelFocus);
         setStatus(Connected);
-        emit connected();
+        Q_EMIT connected();
 
         if (m_scale) {
 #ifndef QTONLY
             qCDebug(KRDC) << "Setting initial size w:" <<m_hostPreferences->width() << " h:" << m_hostPreferences->height();
             QSize frameSize = QSize(m_hostPreferences->width(), m_hostPreferences->height()) / devicePixelRatioF();
-            emit framebufferSizeChanged(frameSize.width(), frameSize.height());
+            Q_EMIT framebufferSizeChanged(frameSize.width(), frameSize.height());
             scaleResize(frameSize.width(), frameSize.height());
             qCDebug(KRDC) << "m_frame.size():" << m_frame.size() << "size()" << size();
 #else
@@ -495,7 +495,7 @@ void VncView::updateImage(int x, int y, int w, int h)
             resize(frameSize);
             setMaximumSize(frameSize); //This is a hack to force Qt to center the view in the scroll area
             setMinimumSize(frameSize);
-            emit framebufferSizeChanged(frameSize.width(), frameSize.height());
+            Q_EMIT framebufferSizeChanged(frameSize.width(), frameSize.height());
         }
     }
 

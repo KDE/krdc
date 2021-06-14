@@ -112,7 +112,7 @@ void VncSshTunnelThread::run()
     int res = ssh_connect(session);
     if (res != SSH_OK)
     {
-        emit errorMessage(i18n("Error connecting to %1: %2", QString::fromUtf8(m_host), QString::fromLocal8Bit(ssh_get_error(session))));
+        Q_EMIT errorMessage(i18n("Error connecting to %1: %2", QString::fromUtf8(m_host), QString::fromLocal8Bit(ssh_get_error(session))));
         return;
     }
 
@@ -122,12 +122,12 @@ void VncSshTunnelThread::run()
     m_passwordRequestCanceledByUser = false;
     if (res != SSH_AUTH_SUCCESS) {
         // If ssh agent didn't work, try with password
-        emit passwordRequest(NoFlags); // This calls blockingly to the main thread which will call setPassword
+        Q_EMIT passwordRequest(NoFlags); // This calls blockingly to the main thread which will call setPassword
         res = ssh_userauth_password(session, nullptr, m_password.toUtf8().constData());
 
         // If password didn't work but came from the wallet, ask the user for the password
         if (!m_passwordRequestCanceledByUser && res != SSH_AUTH_SUCCESS && m_passwordOrigin == PasswordFromWallet) {
-            emit passwordRequest(IgnoreWallet); // This calls blockingly to the main thread which will call setPassword
+            Q_EMIT passwordRequest(IgnoreWallet); // This calls blockingly to the main thread which will call setPassword
             res = ssh_userauth_password(session, nullptr, m_password.toUtf8().constData());
         }
     }
@@ -137,13 +137,13 @@ void VncSshTunnelThread::run()
     }
 
     if (res != SSH_AUTH_SUCCESS) {
-        emit errorMessage(i18n("Error authenticating with password: %1", QString::fromLocal8Bit(ssh_get_error(session))));
+        Q_EMIT errorMessage(i18n("Error authenticating with password: %1", QString::fromLocal8Bit(ssh_get_error(session))));
         return;
     }
 
     const int server_sock = socket(AF_INET, SOCK_STREAM, 0);
     if (server_sock == -1) {
-        emit errorMessage(i18n("Error creating tunnel socket"));
+        Q_EMIT errorMessage(i18n("Error creating tunnel socket"));
         return;
     }
 
@@ -161,13 +161,13 @@ void VncSshTunnelThread::run()
         sin.sin_addr.s_addr = inet_addr("127.0.0.1");
 
         if (bind(server_sock, (struct sockaddr*)&sin, sizeof sin) == -1) {
-            emit errorMessage(i18n("Error creating tunnel socket"));
+            Q_EMIT errorMessage(i18n("Error creating tunnel socket"));
             return;
         }
     }
 
     if (listen(server_sock, 1) == -1) {
-        emit errorMessage(i18n("Error creating tunnel socket"));
+        Q_EMIT errorMessage(i18n("Error creating tunnel socket"));
         return;
     }
 
@@ -175,7 +175,7 @@ void VncSshTunnelThread::run()
         return;
     }
 
-    emit listenReady();
+    Q_EMIT listenReady();
     // After here we don't need to emit errorMessage anymore on error, qCDebug is enough
     // this is because the actual vnc thread will start because of this call and thus
     // any socket error here will be detected by the vnc thread and the usual error mechanisms

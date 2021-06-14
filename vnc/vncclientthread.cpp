@@ -135,7 +135,7 @@ void VncClientThread::cursorShapeHandlerStatic(rfbClient *cl, int xhot, int yhot
     QPixmap cursorPixmap(QPixmap::fromImage(cursorImg));
     cursorPixmap.setMask(QBitmap::fromImage(alpha));
 
-    emit t->gotCursor({cursorPixmap, xhot, yhot});
+    Q_EMIT t->gotCursor({cursorPixmap, xhot, yhot});
 }
 
 void VncClientThread::setClientColorDepth(rfbClient* cl, VncClientThread::ColorDepth cd)
@@ -510,12 +510,12 @@ const QImage VncClientThread::image(int x, int y, int w, int h)
 
 void VncClientThread::emitUpdated(int x, int y, int w, int h)
 {
-    emit imageUpdated(x, y, w, h);
+    Q_EMIT imageUpdated(x, y, w, h);
 }
 
 void VncClientThread::emitGotCut(const QString &text)
 {
-    emit gotCut(text);
+    Q_EMIT gotCut(text);
 }
 
 void VncClientThread::stop()
@@ -705,7 +705,7 @@ void VncClientThread::clientSetKeepalive()
 void VncClientThread::clientStateChange(RemoteView::RemoteStatus status, const QString &details)
 {
     qCDebug(KRDC) << status << details << m_host << ":" << m_port;
-    emit clientStateChanged(status, details);
+    Q_EMIT clientStateChanged(status, details);
 }
 
 ClientEvent::~ClientEvent()
