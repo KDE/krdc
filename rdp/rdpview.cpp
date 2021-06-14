@@ -491,8 +491,8 @@ void RdpView::receivedStandardOutput()
 {
     const QString output = QString::fromUtf8(m_process->readAllStandardOutput().constData());
     qCDebug(KRDC) << output;
-    QStringList splittedOutput = output.split(QLatin1Char('\n'));
-    Q_FOREACH (const QString &line, splittedOutput) {
+    const QStringList splittedOutput = output.split(QLatin1Char('\n'));
+    for (const QString &line : splittedOutput) {
         // full xfreerdp message: "transport_connect: getaddrinfo (Name or service not known)"
         if (line.contains(QLatin1String("Name or service not known"))) {
             connectionError(i18n("Name or service not known."),

@@ -62,9 +62,9 @@ int main(int argc, char **argv)
             if (!targetDir.exists()) {
                 QDir().mkpath(targetBasePath);
             }
-            QStringList fileNames = sourceDir.entryList(QDir::Files |
+            const QStringList fileNames = sourceDir.entryList(QDir::Files |
                                     QDir::NoDotAndDotDot | QDir::NoSymLinks);
-            foreach (const QString &fileName, fileNames) {
+            for (const QString &fileName : fileNames) {
                 targetFilePath = targetBasePath + fileName;
                 if (!QFile::exists(targetFilePath)) {
                     QFile::copy(sourceBasePath + fileName, targetFilePath);

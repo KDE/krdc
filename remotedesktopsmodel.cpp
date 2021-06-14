@@ -280,10 +280,10 @@ void RemoteDesktopsModel::buildModelFromBookmarkGroup(const KBookmarkGroup &grou
 void RemoteDesktopsModel::servicesChanged()
 {
     //redo list because it is easier than finding and removing one that disappeared
-    QList<KDNSSD::RemoteService::Ptr> services = zeroconfBrowser->services();
+    const QList<KDNSSD::RemoteService::Ptr> services = zeroconfBrowser->services();
     QUrl url;
     removeAllItemsFromSources(RemoteDesktop::Zeroconf);
-    foreach(KDNSSD::RemoteService::Ptr service, services) {
+    for (const KDNSSD::RemoteService::Ptr& service : services) {
         url.setScheme(m_protocols[service->type()].toLower());
         url.setHost(service->hostName());
         url.setPort(service->port());

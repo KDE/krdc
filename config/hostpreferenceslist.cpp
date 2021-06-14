@@ -87,9 +87,9 @@ void HostPreferencesList::saveSettings()
 
 void HostPreferencesList::configureHost()
 {
-    QList<QListWidgetItem *> selectedItems = hostList->selectedItems();
+    const QList<QListWidgetItem *> selectedItems = hostList->selectedItems();
 
-    foreach(QListWidgetItem *selectedItem, selectedItems) {
+    for (QListWidgetItem *selectedItem : selectedItems) {
         const QString urlString = selectedItem->text();
         const QUrl url = QUrl(urlString);
 
@@ -98,7 +98,7 @@ void HostPreferencesList::configureHost()
         HostPreferences* prefs = nullptr;
 
         const QList<RemoteViewFactory *> remoteViewFactories(m_mainWindow->remoteViewFactoriesList());
-        foreach(RemoteViewFactory *factory, remoteViewFactories) {
+        for (RemoteViewFactory *factory : remoteViewFactories) {
             if (factory->supportsUrl(url)) {
                 prefs = factory->createHostPreferences(m_hostPrefsConfig.group(urlString), this);
                 if (prefs) {
@@ -124,7 +124,7 @@ void HostPreferencesList::removeHost()
 {
     const QList<QListWidgetItem *> selectedItems = hostList->selectedItems();
 
-    foreach(QListWidgetItem *selectedItem, selectedItems) {
+    for (QListWidgetItem *selectedItem : selectedItems) {
         qCDebug(KRDC) << "Remove host: " <<  selectedItem->text();
 
         m_hostPrefsConfig.deleteGroup(selectedItem->text());

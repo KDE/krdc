@@ -282,7 +282,7 @@ void MainWindow::newConnection(const QUrl &newUrl, bool switchFullscreenWhenConn
     RemoteView *view = nullptr;
     KConfigGroup configGroup = Settings::self()->config()->group(QStringLiteral("hostpreferences")).group(url.toDisplayString(QUrl::StripTrailingSlash));
 
-    foreach(RemoteViewFactory *factory, m_remoteViewFactories) {
+    for (RemoteViewFactory *factory : qAsConst(m_remoteViewFactories)) {
         if (factory->supportsUrl(url)) {
             view = factory->createView(this, url, configGroup);
             qCDebug(KRDC) << "Found plugin to handle url (" << url.url() << "): " << view->metaObject()->className();
@@ -340,8 +340,10 @@ void MainWindow::openFromRemoteDesktopsModel(const QModelIndex &index)
     if (!urlString.isEmpty()) {
         const QUrl url(urlString);
         // first check if url has already been opened; in case show the tab
-        foreach (QWidget *widget, m_remoteViewMap.keys()) {
-            if (m_remoteViewMap.value(widget)->url() == url) {
+        for (auto it = m_remoteViewMap.constBegin(), end = m_remoteViewMap.constEnd(); it != end; ++it) {
+            RemoteView *view = it.value();
+            if (view->url() == url) {
+                QWidget *widget = it.key();
                 m_tabWidget->setCurrentWidget(widget);
                 return;
             }
@@ -486,7 +488,7 @@ void MainWindow::switchFullscreen()
         restoreGeometry(m_mainWindowGeometry);
         if (m_systemTrayIcon) m_systemTrayIcon->setAssociatedWidget(this);
 
-        foreach (RemoteView * view, m_remoteViewMap) {
+        for (RemoteView * view : qAsConst(m_remoteViewMap)) {
             view->enableScaling(view->hostPreferences()->windowedScale());
         }
 
@@ -515,7 +517,7 @@ void MainWindow::switchFullscreen()
         m_tabWidget->tabBar()->hide();
         m_tabWidget->setDocumentMode(true);
 
-        foreach(RemoteView *currentView, m_remoteViewMap) {
+        for (RemoteView *currentView : qAsConst(m_remoteViewMap)) {
             currentView->enableScaling(currentView->hostPreferences()->fullscreenScale());
         }
 
@@ -653,7 +655,7 @@ void MainWindow::showSettingsDialog(const QString &url)
 {
     HostPreferences *prefs = nullptr;
 
-    foreach(RemoteViewFactory *factory, remoteViewFactoriesList()) {
+    for (RemoteViewFactory *factory : qAsConst(m_remoteViewFactories)) {
         if (factory->supportsUrl(QUrl(url))) {
             prefs = factory->createHostPreferences(Settings::self()->config()->group(QStringLiteral("hostpreferences")).group(url), this);
             if (prefs) {
@@ -962,7 +964,7 @@ void MainWindow::updateConfiguration()
     }
 
     // Send update configuration message to all views
-    foreach (RemoteView *view, m_remoteViewMap) {
+    for (RemoteView *view : qAsConst(m_remoteViewMap)) {
         view->updateConfiguration();
     }
 }
@@ -978,7 +980,7 @@ void MainWindow::quit(bool systemEvent)
 
         if (Settings::rememberSessions()) { // remember open remote views for next startup
             QStringList list;
-            foreach (RemoteView *view, m_remoteViewMap) {
+            for (RemoteView *view : qAsConst(m_remoteViewMap)) {
                 qCDebug(KRDC) << view->url();
                 list.append(view->url().toDisplayString(QUrl::StripTrailingSlash));
             }
@@ -987,7 +989,8 @@ void MainWindow::quit(bool systemEvent)
 
         saveHostPrefs();
 
-        foreach (RemoteView *view, m_remoteViewMap) {
+        const QMap<QWidget *, RemoteView *> currentViews = m_remoteViewMap;
+        for (RemoteView *view : currentViews) {
             view->startQuitting();
         }
 
@@ -1044,7 +1047,7 @@ void MainWindow::saveProperties(KConfigGroup &group)
 
 void MainWindow::saveHostPrefs()
 {
-    foreach (RemoteView *view, m_remoteViewMap) {
+    for (RemoteView *view : qAsConst(m_remoteViewMap)) {
         saveHostPrefs(view);
     }
 }
@@ -1106,7 +1109,7 @@ QWidget* MainWindow::newConnectionWidget()
         m_addressInput->setPlaceholderText(i18n("Type here to connect to an address and filter the list."));
         connect(m_addressInput, SIGNAL(textChanged(QString)), remoteDesktopsModelProxy, SLOT(setFilterFixedString(QString)));
 
-        foreach(RemoteViewFactory *factory, m_remoteViewFactories) {
+        for (RemoteViewFactory *factory : qAsConst(m_remoteViewFactories)) {
             m_protocolInput->addItem(factory->scheme());
         }
         m_protocolInput->setCurrentText(Settings::defaultProtocol());
