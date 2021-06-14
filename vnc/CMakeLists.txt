@@ -44,10 +44,6 @@ if (LIBSSH_FOUND)
     target_link_libraries(krdc_vncplugin ${LIBSSH_LIBRARIES})
 endif()
 
-if(JPEG_FOUND)
-    target_link_libraries(krdc_vncplugin ${JPEG_LIBRARIES})
-endif(JPEG_FOUND)
-
 
 add_library(kcm_krdc_vncplugin)
 
