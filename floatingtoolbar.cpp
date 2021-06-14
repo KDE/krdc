@@ -348,9 +348,9 @@ void FloatingToolBarPrivate::buildToolBar()
     mask.fill(Qt::white);
     maskPainter.setBrush(Qt::black);
     if (vertical)
-        maskPainter.drawRoundRect(topLeft ? -10 : 0, 0, myWidth + 10, myHeight, 2000 / (myWidth + 10), 2000 / myHeight);
+        maskPainter.drawRoundedRect(topLeft ? -10 : 0, 0, myWidth + 10, myHeight, 2000 / (myWidth + 10), 2000 / myHeight, Qt::RelativeSize);
     else
-        maskPainter.drawRoundRect(0, topLeft ? -10 : 0, myWidth, myHeight + 10, 2000 / myWidth, 2000 / (myHeight + 10));
+        maskPainter.drawRoundedRect(0, topLeft ? -10 : 0, myWidth, myHeight + 10, 2000 / myWidth, 2000 / (myHeight + 10), Qt::RelativeSize);
     maskPainter.end();
     q->setMask(mask);
 
@@ -381,9 +381,9 @@ void FloatingToolBarPrivate::buildToolBar()
     bufferPainter.setPen( pal.color(QPalette::Active, QPalette::Dark).lighter(40));
     bufferPainter.setRenderHints(QPainter::Antialiasing);
     if (vertical)
-        bufferPainter.drawRoundRect(topLeft ? -10 : 0, 0, myWidth + 10, myHeight, 2000 / (myWidth + 10), 2000 / myHeight);
+        bufferPainter.drawRoundedRect(topLeft ? -10 : 0, 0, myWidth + 10, myHeight, 2000 / (myWidth + 10), 2000 / myHeight, Qt::RelativeSize);
     else
-        bufferPainter.drawRoundRect(0, topLeft ? -10 : 0, myWidth, myHeight + 10, 2000 / myWidth, 2000 / (myHeight + 10));
+        bufferPainter.drawRoundedRect(0, topLeft ? -10 : 0, myWidth, myHeight + 10, 2000 / myWidth, 2000 / (myHeight + 10), Qt::RelativeSize);
     // 5.3. draw handle
     bufferPainter.translate(-0.5, -0.5);
     bufferPainter.setPen(pal.color(QPalette::Active, QPalette::Mid));
