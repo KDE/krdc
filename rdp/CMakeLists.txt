@@ -2,19 +2,26 @@ if(NOT FREERDP_EXECUTABLE_FOUND)
     return()
 endif()
 
-set(rdpplugin_SRCS
+add_library(krdc_rdpplugin)
+
+target_sources(krdc_rdpplugin PRIVATE
     rdphostpreferences.cpp
     rdpviewfactory.cpp
     rdpview.cpp
 )
 
-ki18n_wrap_ui(rdpplugin_SRCS
+kcoreaddons_desktop_to_json(krdc_rdpplugin krdc_rdp.desktop)
+
+ki18n_wrap_ui(krdc_rdpplugin
     rdppreferences.ui
 )
 
-ecm_qt_declare_logging_category(rdpplugin_SRCS HEADER krdc_debug.h IDENTIFIER KRDC CATEGORY_NAME KRDC)
+ecm_qt_declare_logging_category(krdc_rdpplugin
+    HEADER krdc_debug.h
+    IDENTIFIER KRDC
+    CATEGORY_NAME KRDC
+)
 
-add_library(krdc_rdpplugin ${rdpplugin_SRCS})
 target_link_libraries(krdc_rdpplugin
     Qt5::Core
     Qt5::Gui
@@ -25,11 +32,14 @@ target_link_libraries(krdc_rdpplugin
     krdccore
 )
 
-set(kcm_krdc_rdpplugin_SRCS
+add_library(kcm_krdc_rdpplugin)
+
+kcoreaddons_desktop_to_json(kcm_krdc_rdpplugin krdc_rdp_config.desktop)
+
+target_sources(kcm_krdc_rdpplugin PRIVATE
     rdppreferences.cpp
 )
 
-add_library(kcm_krdc_rdpplugin ${kcm_krdc_rdpplugin_SRCS})
 target_link_libraries(kcm_krdc_rdpplugin
     Qt5::Core
     Qt5::Gui
@@ -39,9 +49,6 @@ target_link_libraries(kcm_krdc_rdpplugin
     KF5::XmlGui
     krdccore
 )
-
-kcoreaddons_desktop_to_json(krdc_rdpplugin krdc_rdp.desktop)
-kcoreaddons_desktop_to_json(kcm_krdc_rdpplugin krdc_rdp_config.desktop)
 
 add_dependencies(kcm_krdc_rdpplugin krdc_rdpplugin)
 

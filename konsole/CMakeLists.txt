@@ -3,12 +3,12 @@ if (NOT BUILD_KONSOLE)
     return()
 endif()
 
-set(konsoleplugin_SRCS
+add_library(krdc_konsoleplugin)
+
+target_sources(krdc_konsoleplugin PRIVATE
     konsoleviewfactory.cpp
     konsoleview.cpp
 )
-
-add_library(krdc_konsoleplugin ${konsoleplugin_SRCS})
 
 kcoreaddons_desktop_to_json(krdc_konsoleplugin krdc_test.desktop)
 

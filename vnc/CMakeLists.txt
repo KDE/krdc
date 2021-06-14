@@ -2,30 +2,31 @@ if(NOT LIBVNCSERVER_FOUND)
     return()
 endif()
 
-include_directories(
-    ${LIBVNCCLIENT_INCLUDE_DIR}
-)
+add_library(krdc_vncplugin)
 
-set(vncplugin_SRCS
+target_sources(krdc_vncplugin PRIVATE
     vnchostpreferences.cpp
     vncclientthread.cpp
     vncviewfactory.cpp
     vncview.cpp
 )
 
-if (LIBSSH_FOUND)
-    include_directories(${LIBSSH_INCLUDE_DIR})
-    add_definitions(-DLIBSSH_FOUND)
-    set(vncplugin_SRCS ${vncplugin_SRCS} vncsshtunnelthread.cpp)
-endif()
+kcoreaddons_desktop_to_json(krdc_vncplugin krdc_vnc.desktop)
 
-ecm_qt_declare_logging_category(vncplugin_SRCS HEADER krdc_debug.h IDENTIFIER KRDC CATEGORY_NAME KRDC)
+ecm_qt_declare_logging_category(krdc_vncplugin
+    HEADER krdc_debug.h
+    IDENTIFIER KRDC
+    CATEGORY_NAME KRDC
+)
 
-ki18n_wrap_ui(vncplugin_SRCS
+ki18n_wrap_ui(krdc_vncplugin
     vncpreferences.ui
 )
 
-add_library(krdc_vncplugin ${vncplugin_SRCS})
+target_include_directories(krdc_vncplugin PRIVATE
+    ${LIBVNCCLIENT_INCLUDE_DIR}
+)
+
 target_link_libraries(krdc_vncplugin
     Qt5::Core
     KF5::ConfigCore
@@ -36,20 +37,29 @@ target_link_libraries(krdc_vncplugin
     krdccore
 )
 
+if (LIBSSH_FOUND)
+    target_compile_definitions(krdc_vncplugin PRIVATE -DLIBSSH_FOUND)
+    target_sources(krdc_vncplugin PRIVATE vncsshtunnelthread.cpp)
+    target_include_directories(krdc_vncplugin PRIVATE ${LIBSSH_INCLUDE_DIR})
+    target_link_libraries(krdc_vncplugin ${LIBSSH_LIBRARIES})
+endif()
+
 if(JPEG_FOUND)
     target_link_libraries(krdc_vncplugin ${JPEG_LIBRARIES})
 endif(JPEG_FOUND)
 
-if (LIBSSH_FOUND)
-    target_link_libraries(krdc_vncplugin ${LIBSSH_LIBRARIES})
-endif()
 
+add_library(kcm_krdc_vncplugin)
 
-set(kcm_krdc_vncplugin_SRCS
+target_sources(kcm_krdc_vncplugin PRIVATE
     vncpreferences.cpp
 )
 
-add_library(kcm_krdc_vncplugin ${kcm_krdc_vncplugin_SRCS})
+kcoreaddons_desktop_to_json(kcm_krdc_vncplugin krdc_vnc_config.desktop)
+
+if (LIBSSH_FOUND)
+    target_compile_definitions(kcm_krdc_vncplugin PRIVATE -DLIBSSH_FOUND)
+endif()
 
 target_link_libraries(kcm_krdc_vncplugin
     Qt5::Core
@@ -61,9 +71,6 @@ target_link_libraries(kcm_krdc_vncplugin
     ${LIBVNCCLIENT_LIBRARIES}
     krdccore
 )
-
-kcoreaddons_desktop_to_json(krdc_vncplugin krdc_vnc.desktop)
-kcoreaddons_desktop_to_json(kcm_krdc_vncplugin krdc_vnc_config.desktop)
 
 add_dependencies(kcm_krdc_vncplugin krdc_vncplugin)
 

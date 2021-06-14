@@ -6,12 +6,12 @@ if(NOT BUILD_TEST)
     return()
 endif()
 
-set(testplugin_SRCS
+add_library(krdc_testplugin)
+
+target_sources(krdc_testplugin PRIVATE
     testviewfactory.cpp
     testview.cpp
 )
-
-add_library(krdc_testplugin ${testplugin_SRCS})
 
 kcoreaddons_desktop_to_json(krdc_testplugin krdc_test.desktop)
 
@@ -24,4 +24,5 @@ target_link_libraries(krdc_testplugin
     Qt5::Gui
     krdccore
 )
+
 install(TARGETS krdc_testplugin DESTINATION ${KDE_INSTALL_PLUGINDIR}/krdc)

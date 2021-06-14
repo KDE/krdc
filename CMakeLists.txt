@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.16)
 
 set (RELEASE_SERVICE_VERSION_MAJOR "21")
 set (RELEASE_SERVICE_VERSION_MINOR "07")
@@ -8,8 +8,8 @@ set (RELEASE_SERVICE_VERSION "${RELEASE_SERVICE_VERSION_MAJOR}.${RELEASE_SERVICE
 
 project(krdc VERSION ${RELEASE_SERVICE_VERSION})
 
-set (QT_MIN_VERSION "5.14.0")
-set (KF5_MIN_VERSION "5.62.0")
+set (QT_MIN_VERSION "5.15.0")
+set (KF5_MIN_VERSION "5.83.0")
 
 find_package(ECM ${KF5_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules ${ECM_MODULE_PATH})
@@ -114,9 +114,12 @@ else()
     message("KF5DocTools not found. Not building documentation.")
 endif()
 
-add_definitions(-DBUILD_ZEROCONF)
 
-set(krdc_SRCS
+add_executable(krdc)
+
+target_compile_definitions(krdc PRIVATE -DBUILD_ZEROCONF)
+
+target_sources(krdc PRIVATE
     config/hostpreferenceslist.cpp
     config/preferencesdialog.cpp
     floatingtoolbar.cpp
@@ -132,13 +135,15 @@ set(krdc_SRCS
     krdc.qrc
 )
 
-ki18n_wrap_ui(krdc_SRCS
+ki18n_wrap_ui(krdc
     config/general.ui
 )
 
-ecm_qt_declare_logging_category(krdc_SRCS HEADER krdc_debug.h IDENTIFIER KRDC CATEGORY_NAME KRDC)
-
-add_executable(krdc ${krdc_SRCS})
+ecm_qt_declare_logging_category(krdc
+    HEADER krdc_debug.h
+    IDENTIFIER KRDC
+    CATEGORY_NAME KRDC
+)
 
 target_link_libraries(krdc
     KF5::ConfigCore
