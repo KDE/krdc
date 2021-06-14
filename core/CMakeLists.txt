@@ -20,7 +20,6 @@ ecm_qt_declare_logging_category(krdccore
     CATEGORY_NAME KRDC
 )
 
-kcoreaddons_desktop_to_json(krdccore krdc_plugin.desktop)
 generate_export_header(krdccore BASE_NAME krdccore)
 
 target_link_libraries(krdccore
@@ -47,3 +46,4 @@ set(krdccore_HDRS
 install(FILES ${krdccore_HDRS} DESTINATION ${KDE_INSTALL_INCLUDEDIR}/krdc COMPONENT Devel)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/krdccore_export.h DESTINATION ${KDE_INSTALL_INCLUDEDIR} COMPONENT Devel)
 install(FILES krdc.kcfg DESTINATION ${KDE_INSTALL_KCFGDIR})
+install(FILES krdc_plugin.desktop DESTINATION ${KDE_INSTALL_KSERVICETYPES5DIR})
