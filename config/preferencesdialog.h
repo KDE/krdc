@@ -7,7 +7,7 @@
 #ifndef PREFERENCESDIALOG_H
 #define PREFERENCESDIALOG_H
 
-#include <KConfigWidgets/KConfigDialog>
+#include <KConfigDialog>
 
 #include <QDialogButtonBox>
 

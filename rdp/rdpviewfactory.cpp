@@ -8,7 +8,7 @@
 
 #include <QStandardPaths>
 
-#include <KCoreAddons/KExportPlugin>
+#include <KPluginFactory>
 
 K_PLUGIN_FACTORY_WITH_JSON(KrdcFactory, "krdc_rdp.json", registerPlugin<RdpViewFactory>();)
 

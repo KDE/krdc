@@ -10,9 +10,9 @@
 #include "remoteview.h"
 #include "krdccore_export.h"
 
-#include <KCoreAddons/KPluginFactory>
-#include <KConfigCore/KConfigGroup>
-#include <KCoreAddons/KPluginLoader>
+#include <KPluginFactory>
+#include <KConfigGroup>
+#include <KPluginLoader>
 
 /**
  * Factory to be implemented by any plugin.

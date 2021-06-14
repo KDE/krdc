@@ -10,7 +10,7 @@
 #include "settings.h"
 
 #include <KLocalizedString>
-#include <KWidgetsAddons/KPageDialog>
+#include <KPageDialog>
 
 #include <QCheckBox>
 #include <QDialog>

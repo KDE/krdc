@@ -10,7 +10,7 @@
 #define REMOTEVIEW_H
 
 #ifndef QTONLY
-    #include <KWallet/KWallet>
+    #include <KWallet>
     #include "krdccore_export.h"
 #else
     #define KRDCCORE_EXPORT

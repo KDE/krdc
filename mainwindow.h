@@ -12,8 +12,8 @@
 #include "remoteview.h"
 #include "remoteviewfactory.h"
 
-#include <KXmlGui/KXmlGuiWindow>
-#include <KService/KPluginInfo>
+#include <KXmlGuiWindow>
+#include <KPluginInfo>
 
 class KComboBox;
 class KLineEdit;

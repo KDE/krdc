@@ -10,7 +10,7 @@
 #include "remoteview.h"
 #include "hostpreferences.h"
 
-#include <KConfigCore/KConfigGroup>
+#include <KConfigGroup>
 
 class TestHostPreferences;
 

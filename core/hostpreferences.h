@@ -11,7 +11,7 @@
 #include "remoteview.h"
 #include "krdccore_export.h"
 
-#include <KConfigCore/KConfigGroup>
+#include <KConfigGroup>
 
 class QCheckBox;
 class QWidget;

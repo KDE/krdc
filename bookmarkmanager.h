@@ -10,8 +10,8 @@
 #include "core/remoteview.h"
 
 #include <KBookmarkManager>
-#include <KXmlGui/KActionCollection>
-#include <KBookmarks/KBookmarkMenu>
+#include <KActionCollection>
+#include <KBookmarkMenu>
 
 #include <QMenu>
 

@@ -7,7 +7,7 @@
 #include "systemtrayicon.h"
 #include "mainwindow.h"
 
-#include <KXmlGui/KActionCollection>
+#include <KActionCollection>
 #include <KLocalizedString>
 
 #include <QMenu>

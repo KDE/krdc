@@ -9,7 +9,7 @@
 
 #include "mainwindow.h"
 
-#include <KConfigCore/KConfigGroup>
+#include <KConfigGroup>
 
 #include <QDomDocument>
 #include <QWidget>

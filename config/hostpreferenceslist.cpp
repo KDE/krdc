@@ -10,7 +10,7 @@
 
 #include <QIcon>
 #include <KLocalizedString>
-#include <KWidgetsAddons/KMessageBox>
+#include <KMessageBox>
 
 #include <QFile>
 #include <QLayout>

@@ -24,10 +24,10 @@
 #else
     #include "settings.h"
     #include <KActionCollection>
-    #include <KXmlGui/KMainWindow>
-    #include <KWidgetsAddons/KMessageBox>
-    #include <KWidgetsAddons/KPasswordDialog>
-    #include <KXmlGui/KXMLGUIClient>
+    #include <KMainWindow>
+    #include <KMessageBox>
+    #include <KPasswordDialog>
+    #include <KXMLGUIClient>
 #endif
 
 // Definition of key modifier mask constants

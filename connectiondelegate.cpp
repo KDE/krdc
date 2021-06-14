@@ -7,7 +7,7 @@
 #include "connectiondelegate.h"
 #include "remotedesktopsmodel.h"
 
-#include <KIconThemes/KIconLoader>
+#include <KIconLoader>
 #include <KLocalizedString>
 
 #include <QDateTime>

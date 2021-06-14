@@ -9,11 +9,11 @@
 #include "hostpreferenceslist.h"
 #include "ui_general.h"
 
-#include <KConfigGui/KConfigSkeleton>
+#include <KConfigSkeleton>
 #include <KLocalizedString>
-#include <KCMUtils/KPluginSelector>
+#include <KPluginSelector>
 #include <KPluginMetaData>
-#include <KService/KPluginInfo>
+#include <KPluginInfo>
 
 PreferencesDialog::PreferencesDialog(QWidget *parent, KConfigSkeleton *skeleton)
         : KConfigDialog(parent, QLatin1String("preferences"), skeleton)

@@ -10,7 +10,7 @@
 #include "krdc_version.h"
 #include "settings.h"
 
-#include <KCoreAddons/KAboutData>
+#include <KAboutData>
 #include <Kdelibs4ConfigMigrator>
 #include <Kdelibs4Migration>
 #include <KLocalizedString>

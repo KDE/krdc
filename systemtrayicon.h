@@ -7,7 +7,7 @@
 #ifndef SYSTEMTRAYICON_H
 #define SYSTEMTRAYICON_H
 
-#include <KNotifications/KStatusNotifierItem>
+#include <KStatusNotifierItem>
 
 class MainWindow;
 

@@ -7,7 +7,7 @@
 #include "vncviewfactory.h"
 #include "remoteviewfactory.h"
 
-#include <KCoreAddons/KExportPlugin>
+#include <KPluginFactory>
 
 K_PLUGIN_FACTORY_WITH_JSON(KrdcFactory, "krdc_vnc.json", registerPlugin<VncViewFactory>();)
 
