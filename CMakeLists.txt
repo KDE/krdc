@@ -42,13 +42,6 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
 
 find_package(KF5DocTools)
 
-if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-    if (NOT CMAKE_CXX_COMPILER_VERSION VERSION_LESS "5.0.0")
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wsuggest-override" )
-    endif()
-endif()
-
-
 # use sane compile flags
 add_definitions(
   -DQT_USE_QSTRINGBUILDER
