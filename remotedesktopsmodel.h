@@ -14,8 +14,9 @@
 #include <QDateTime>
 
 #ifdef BUILD_ZEROCONF
-#include <DNSSD/RemoteService>
-#include <DNSSD/ServiceBrowser>
+namespace KDNSSD {
+class ServiceBrowser;
+}
 #endif
 
 struct RemoteDesktop {
