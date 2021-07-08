@@ -16,12 +16,12 @@ target_sources(krdc_testplugin PRIVATE
 kcoreaddons_desktop_to_json(krdc_testplugin krdc_test.desktop)
 
 target_link_libraries(krdc_testplugin
-    Qt5::Core
+    Qt::Core
     KF5::Wallet
     KF5::ConfigCore
     KF5::I18n
     KF5::CoreAddons
-    Qt5::Gui
+    Qt::Gui
     krdccore
 )
 

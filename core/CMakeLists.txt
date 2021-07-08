@@ -23,7 +23,7 @@ ecm_qt_declare_logging_category(krdccore
 generate_export_header(krdccore BASE_NAME krdccore)
 
 target_link_libraries(krdccore
-    Qt5::Core
+    Qt::Core
     KF5::Wallet
     KF5::ConfigCore
     KF5::CoreAddons
@@ -31,8 +31,8 @@ target_link_libraries(krdccore
     KF5::I18n
     KF5::ConfigGui
     KF5::Completion
-    Qt5::Gui
-    Qt5::Widgets)
+    Qt::Gui
+    Qt::Widgets)
 
 install(TARGETS krdccore ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 

@@ -28,11 +28,11 @@ target_include_directories(krdc_vncplugin PRIVATE
 )
 
 target_link_libraries(krdc_vncplugin
-    Qt5::Core
+    Qt::Core
     KF5::ConfigCore
     KF5::CoreAddons
     KF5::XmlGui
-    Qt5::Gui
+    Qt::Gui
     ${LIBVNCCLIENT_LIBRARIES}
     krdccore
 )
@@ -58,12 +58,12 @@ if (LIBSSH_FOUND)
 endif()
 
 target_link_libraries(kcm_krdc_vncplugin
-    Qt5::Core
+    Qt::Core
     KF5::Wallet
     KF5::ConfigCore
     KF5::CoreAddons
     KF5::XmlGui
-    Qt5::Gui
+    Qt::Gui
     ${LIBVNCCLIENT_LIBRARIES}
     krdccore
 )

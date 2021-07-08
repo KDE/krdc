@@ -23,8 +23,8 @@ ecm_qt_declare_logging_category(krdc_rdpplugin
 )
 
 target_link_libraries(krdc_rdpplugin
-    Qt5::Core
-    Qt5::Gui
+    Qt::Core
+    Qt::Gui
     KF5::ConfigCore
     KF5::CoreAddons
     KF5::WindowSystem
@@ -41,8 +41,8 @@ target_sources(kcm_krdc_rdpplugin PRIVATE
 )
 
 target_link_libraries(kcm_krdc_rdpplugin
-    Qt5::Core
-    Qt5::Gui
+    Qt::Core
+    Qt::Gui
     KF5::Wallet
     KF5::ConfigCore
     KF5::CoreAddons
