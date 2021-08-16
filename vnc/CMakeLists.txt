@@ -1,7 +1,3 @@
-if(NOT LIBVNCSERVER_FOUND)
-    return()
-endif()
-
 add_library(krdc_vncplugin)
 
 target_sources(krdc_vncplugin PRIVATE

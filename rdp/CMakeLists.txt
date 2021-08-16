@@ -1,7 +1,3 @@
-if(NOT FREERDP_EXECUTABLE_FOUND)
-    return()
-endif()
-
 add_library(krdc_rdpplugin)
 
 target_sources(krdc_rdpplugin PRIVATE

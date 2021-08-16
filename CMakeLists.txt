@@ -64,42 +64,43 @@ if(WIN32)
     set(CMAKE_REQUIRED_INCLUDES  ${KDEWIN32_INCLUDES})
 endif(WIN32)
 
-find_package(LibVNCServer)
-set_package_properties("libvncserver" PROPERTIES
-    DESCRIPTION "VNC server / client library"
-    URL "http://libvncserver.sourceforge.net/"
-    PURPOSE "Needed to build VNC client support in KRDC"
-)
+option(WITH_VNC "Enable VNC support." ON)
+add_feature_info(VNC WITH_VNC "Building with support for the VNC protocol. Disable with -DWITH_VNC=NO")
+option(WITH_RDP "Enable RDP support. Has additional runtime binary requirements!" ON)
+add_feature_info(RDP WITH_RDP "Building with support for the RDP protocol. Disable with -DWITH_RDP=NO")
 
-find_package(LibSSH)
-set_package_properties("libssh" PROPERTIES
-    DESCRIPTION "ssh library"
-    URL "https://libssh.org/"
-    PURPOSE "Needed to build VNC+SSH tunnel support "
-)
+add_subdirectory(core)
 
-# Needs porting
-find_program(FREERDP_EXECUTABLE xfreerdp)
-if(FREERDP_EXECUTABLE)
-    set(FREERDP_FOUND true) # mark the package found
-    set(FREERDP_EXECUTABLE_FOUND true)
-endif(FREERDP_EXECUTABLE)
+if(WITH_VNC)
+    find_package(LibVNCServer)
+    set_package_properties(LibVNCServer PROPERTIES
+        DESCRIPTION "VNC server / client library"
+        URL "http://libvncserver.sourceforge.net/"
+        PURPOSE "Needed to build VNC client support in KRDC"
+        TYPE REQUIRED
+    )
 
-# dud to allow the dep showing up in feature summary.
-# note that this must be after _FOUND is set so it doesn't incorrectly
-# set the metadata to not-found.
-find_package(freerdp QUIET)
+    find_package(LibSSH)
+    set_package_properties(LibSSH PROPERTIES
+        DESCRIPTION "ssh library"
+        URL "https://libssh.org/"
+        PURPOSE "Needed to build VNC+SSH tunnel support "
+        TYPE OPTIONAL
+    )
+    add_subdirectory(vnc)
+endif()
 
-set_package_properties(freerdp PROPERTIES
+if(WITH_RDP)
+    find_package(xfreerdp)
+    set_package_properties(xfreerdp PROPERTIES
         DESCRIPTION "A free Remote Desktop Protocol (RDP) Implementation"
         URL "https://www.freerdp.com/"
         PURPOSE "The xfreerdp binary is needed for RDP support in KRDC (at runtime)"
         TYPE RUNTIME
-)
+    )
+    add_subdirectory(rdp)
+endif()
 
-add_subdirectory(core)
-add_subdirectory(vnc)
-add_subdirectory(rdp)
 add_subdirectory(test)
 
 if(KF5DocTools_FOUND)
