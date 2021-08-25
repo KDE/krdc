@@ -40,6 +40,16 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
     I18n
 )
 
+find_package(KF5 ${KF5_MIN_VERSION} OPTIONAL_COMPONENTS Activities)
+set_package_properties(KF5Activities PROPERTIES DESCRIPTION "KActivities libraries"
+                       URL "https://www.kde.org"
+                       TYPE OPTIONAL
+                       PURPOSE "For tracking which remote desktops are frequently accessed"
+                      )
+if (KF5Activities_FOUND)
+    set(HAVE_KACTIVITIES TRUE)
+endif()
+
 find_package(KF5DocTools)
 
 # use sane compile flags
@@ -114,6 +124,8 @@ add_executable(krdc)
 
 target_compile_definitions(krdc PRIVATE -DBUILD_ZEROCONF)
 
+configure_file(config-kactivities.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-kactivities.h)
+
 target_sources(krdc PRIVATE
     config/hostpreferenceslist.cpp
     config/preferencesdialog.cpp
@@ -156,6 +168,10 @@ target_link_libraries(krdc
     KF5::Notifications
     krdccore
 )
+
+if (KF5Activities_FOUND)
+    target_link_libraries(krdc KF5::Activities)
+endif()
 
 install(TARGETS krdc ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 install(PROGRAMS org.kde.krdc.desktop DESTINATION ${KDE_INSTALL_APPDIR})
