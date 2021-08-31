@@ -12,13 +12,8 @@
 #include<KCoreAddons/KFormat>
 #ifdef BUILD_ZEROCONF
 #include <kdnssd_version.h>
-#if KDNSSD_VERSION >= QT_VERSION_CHECK(5, 84, 0)
 #include <KDNSSD/ServiceBrowser>
 #include <KDNSSD/RemoteService>
-#else
-#include <DNSSD/ServiceBrowser>
-#include <DNSSD/RemoteService>
-#endif
 #endif
 #include <QDateTime>
 #include <QLoggingCategory>
