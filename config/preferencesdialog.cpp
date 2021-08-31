@@ -16,25 +16,25 @@
 #include <KPluginInfo>
 
 PreferencesDialog::PreferencesDialog(QWidget *parent, KConfigSkeleton *skeleton)
-        : KConfigDialog(parent, QLatin1String("preferences"), skeleton)
+        : KConfigDialog(parent, QStringLiteral("preferences"), skeleton)
         , m_settingsChanged(false)
 {
     QWidget *generalPage = new QWidget(this);
     Ui::General generalUi;
     generalUi.setupUi(generalPage);
-    addPage(generalPage, i18nc("General Config", "General"), QLatin1String("krdc"), i18n("General Configuration"));
+    addPage(generalPage, i18nc("General Config", "General"), QStringLiteral("krdc"), i18n("General Configuration"));
 
     HostPreferencesList *hostPreferencesList = new HostPreferencesList(this,
                                                                        qobject_cast<MainWindow *>(parent),
                                                                        skeleton->config()->group("hostpreferences"));
-    addPage(hostPreferencesList, i18n("Hosts"), QLatin1String("computer"), i18n("Host Configuration"));
+    addPage(hostPreferencesList, i18n("Hosts"), QStringLiteral("computer"), i18n("Host Configuration"));
 
     m_pluginSelector = new KPluginSelector();
     const QList<KPluginInfo> offers = KPluginInfo::fromMetaData(KPluginLoader::findPlugins(QStringLiteral("krdc")));
     m_pluginSelector->addPlugins(offers, KPluginSelector::ReadConfigFile,
-                                    i18n("Plugins"), QLatin1String("Service"), KSharedConfig::openConfig());
+                                    i18n("Plugins"), QStringLiteral("Service"), KSharedConfig::openConfig());
     m_pluginSelector->load();
-    addPage(m_pluginSelector, i18n("Plugins"), QLatin1String("preferences-plugin"), i18n("Plugin Configuration"));
+    addPage(m_pluginSelector, i18n("Plugins"), QStringLiteral("preferences-plugin"), i18n("Plugin Configuration"));
 
     connect(this, SIGNAL(accepted()), SLOT(saveState()));
     QPushButton *defaultsButton = buttonBox()->button(QDialogButtonBox::RestoreDefaults);

@@ -54,7 +54,7 @@ void ConnectionDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
         QVariant value = index.data(Qt::CheckStateRole);
         if (value.isValid()) {
             Qt::CheckState checkState = static_cast<Qt::CheckState>(value.toInt());
-            QIcon favIcon = QIcon::fromTheme(QLatin1String("bookmarks"));
+            QIcon favIcon = QIcon::fromTheme(QStringLiteral("bookmarks"));
             QIcon::Mode mode = (checkState == Qt::Checked) ? QIcon::Active : QIcon::Disabled;
             favIcon.paint(painter, option.rect, option.decorationAlignment, mode);
 

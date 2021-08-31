@@ -149,7 +149,7 @@ QList<KBookmarkOwner::FutureBookmark> BookmarkManager::currentBookmarkList() con
 void BookmarkManager::addManualBookmark(const QUrl &url, const QString &text)
 {
     m_manager->root().addBookmark(text, url, QString());
-    Q_EMIT m_manager->emitChanged();
+    m_manager->emitChanged();
 }
 
 KBookmarkManager* BookmarkManager::getManager()
@@ -174,12 +174,12 @@ const QStringList BookmarkManager::findBookmarkAddresses(const KBookmarkGroup &g
     return bookmarkAddresses;
 }
 
-void BookmarkManager::removeByUrl(KBookmarkManager *manager, const QString &url, bool ignoreHistory, const QString updateTitle)
+void BookmarkManager::removeByUrl(KBookmarkManager *manager, const QString &url, bool ignoreHistory, const QString &updateTitle)
 {
     const QStringList addresses = findBookmarkAddresses(manager->root(), url);
     for (const QString &address : addresses) {
         KBookmark bm = manager->findByAddress(address);
-        if (ignoreHistory && bm.parentGroup().metaDataItem(QLatin1String("krdc-history")) == QLatin1String("historyfolder")) {
+        if (ignoreHistory && bm.parentGroup().metaDataItem(QStringLiteral("krdc-history")) == QLatin1String("historyfolder")) {
             if (!updateTitle.isEmpty()) {
                 qCDebug(KRDC) << "Update" << bm.fullText();
                 bm.setFullText(updateTitle);

@@ -917,7 +917,7 @@ void MainWindow::updateConfiguration()
     if (!Settings::showStatusBar())
         statusBar()->deleteLater();
     else
-        statusBar()->showMessage(QStringLiteral("")); // force creation of statusbar
+        statusBar()->showMessage({}); // force creation of statusbar
 
     m_tabWidget->tabBar()->setHidden((m_tabWidget->count() <= 1 && !Settings::showTabBar()) || m_fullscreenWindow);
     m_tabWidget->setTabPosition((QTabWidget::TabPosition) Settings::tabPosition());

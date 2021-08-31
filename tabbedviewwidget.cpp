@@ -225,7 +225,7 @@ void TabbedViewWidget::mouseDoubleClickEvent(QMouseEvent * event)
 
 void TabbedViewWidget::mouseReleaseEvent(QMouseEvent *event)
 {
-    if (event->button() == Qt::MidButton) {
+    if (event->button() == Qt::MiddleButton) {
         if (isEmptyTabbarSpace(event->pos())) {
             Q_EMIT mouseMiddleClick(-1);
             return;

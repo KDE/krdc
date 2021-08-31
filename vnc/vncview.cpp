@@ -603,14 +603,14 @@ void VncView::mouseEventHandler(QMouseEvent *e)
                 (e->type() == QEvent::MouseButtonDblClick)) {
             if (e->button() & Qt::LeftButton)
                 m_buttonMask |= 0x01;
-            if (e->button() & Qt::MidButton)
+            if (e->button() & Qt::MiddleButton)
                 m_buttonMask |= 0x02;
             if (e->button() & Qt::RightButton)
                 m_buttonMask |= 0x04;
         } else if (e->type() == QEvent::MouseButtonRelease) {
             if (e->button() & Qt::LeftButton)
                 m_buttonMask &= 0xfe;
-            if (e->button() & Qt::MidButton)
+            if (e->button() & Qt::MiddleButton)
                 m_buttonMask &= 0xfd;
             if (e->button() & Qt::RightButton)
                 m_buttonMask &= 0xfb;
