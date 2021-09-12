@@ -534,9 +534,10 @@ void VncView::enableScaling(bool scale)
 
 void VncView::setCut(const QString &text)
 {
+    const bool saved_dontSendClipboard = m_dontSendClipboard;
     m_dontSendClipboard = true;
     m_clipboard->setText(text, QClipboard::Clipboard);
-    m_dontSendClipboard = false;
+    m_dontSendClipboard = saved_dontSendClipboard;
 }
 
 void VncView::paintEvent(QPaintEvent *event)
