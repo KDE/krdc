@@ -34,6 +34,8 @@ public:
         IgnoreWallet
     };
 
+    int tunnelPort() const;
+
     QString password() const;
     void setPassword(const QString &password, PasswordOrigin origin);
     void userCanceledPasswordRequest();

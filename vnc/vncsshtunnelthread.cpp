@@ -35,6 +35,11 @@ VncSshTunnelThread::~VncSshTunnelThread()
 }
 
 
+int VncSshTunnelThread::tunnelPort() const
+{
+    return m_tunnelPort;
+}
+
 QString VncSshTunnelThread::password() const
 {
     return m_password;
@@ -145,6 +150,15 @@ void VncSshTunnelThread::run()
         if (bind(server_sock, (struct sockaddr*)&sin, sizeof sin) == -1) {
             Q_EMIT errorMessage(i18n("Error creating tunnel socket"));
             return;
+        }
+
+        if (m_tunnelPort == 0) {
+            socklen_t sin_len = sizeof sin;
+            if (getsockname(server_sock, (struct sockaddr *)&sin, &sin_len) == -1) {
+                Q_EMIT errorMessage(i18n("Error creating tunnel socket"));
+                return;
+            }
+            m_tunnelPort = ntohs(sin.sin_port);
         }
     }
 
