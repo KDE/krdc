@@ -212,16 +212,13 @@ bool VncView::start()
     m_quitFlag = false;
 
     QString vncHost = m_host;
-    int vncPort = m_port;
 #ifdef LIBSSH_FOUND
     if (m_hostPreferences->useSshTunnel()) {
         Q_ASSERT(!m_sshTunnelThread);
 
-        const int tunnelPort = 58219; // Just a random port
-
         m_sshTunnelThread = new VncSshTunnelThread(m_host.toUtf8(),
                                                    m_port,
-                                                   tunnelPort,
+                                                   /* tunnelPort */ 0,
                                                    m_hostPreferences->sshTunnelPort(),
                                                    m_hostPreferences->sshTunnelUserName().toUtf8(),
                                                    m_hostPreferences->useSshTunnelLoopback());
@@ -232,12 +229,10 @@ bool VncView::start()
         if (m_hostPreferences->useSshTunnelLoopback()) {
             vncHost = QStringLiteral("127.0.0.1");
         }
-        vncPort = tunnelPort;
     }
 #endif
 
     vncThread.setHost(vncHost);
-    vncThread.setPort(vncPort);
     RemoteView::Quality quality;
 #ifdef QTONLY
     quality = (RemoteView::Quality)((QCoreApplication::arguments().count() > 2) ?
@@ -264,11 +259,15 @@ bool VncView::start()
 
 #ifdef LIBSSH_FOUND
     if (m_hostPreferences->useSshTunnel()) {
-        connect(m_sshTunnelThread, &VncSshTunnelThread::listenReady, this, [this] { vncThread.start(); });
+        connect(m_sshTunnelThread, &VncSshTunnelThread::listenReady, this, [this] {
+            vncThread.setPort(m_sshTunnelThread->tunnelPort());
+            vncThread.start();
+        });
     }
     else
 #endif
     {
+        vncThread.setPort(m_port);
         vncThread.start();
     }
     return true;
