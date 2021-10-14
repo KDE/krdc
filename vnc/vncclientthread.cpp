@@ -180,6 +180,9 @@ rfbBool VncClientThread::newclient()
 
     const int width = cl->width, height = cl->height, depth = cl->format.bitsPerPixel;
     const int size = width * height * (depth / 8);
+    if (size <= 0) {
+        return false;
+    }
     if (frameBuffer)
         delete [] frameBuffer; // do not leak if we get a new framebuffer size
     frameBuffer = new uint8_t[size];
