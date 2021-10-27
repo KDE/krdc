@@ -28,7 +28,7 @@ class KRDCCORE_EXPORT FactorWidget : public QWidgetAction
 public:
     FactorWidget(QWidget *parent = nullptr);
     FactorWidget(const QString &text, MainWindow * receiver, QObject *parent = nullptr);
-    ~FactorWidget();
+    ~FactorWidget() override;
 
 protected:
     virtual QWidget * createWidget(QWidget * parent) override;
