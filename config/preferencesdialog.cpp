@@ -11,9 +11,8 @@
 
 #include <KConfigSkeleton>
 #include <KLocalizedString>
-#include <KPluginSelector>
+#include <KPluginWidget>
 #include <KPluginMetaData>
-#include <KPluginInfo>
 
 PreferencesDialog::PreferencesDialog(QWidget *parent, KConfigSkeleton *skeleton)
         : KConfigDialog(parent, QStringLiteral("preferences"), skeleton)
@@ -29,11 +28,10 @@ PreferencesDialog::PreferencesDialog(QWidget *parent, KConfigSkeleton *skeleton)
                                                                        skeleton->config()->group("hostpreferences"));
     addPage(hostPreferencesList, i18n("Hosts"), QStringLiteral("computer"), i18n("Host Configuration"));
 
-    m_pluginSelector = new KPluginSelector();
-    const QList<KPluginInfo> offers = KPluginInfo::fromMetaData(KPluginLoader::findPlugins(QStringLiteral("krdc")));
-    m_pluginSelector->addPlugins(offers, KPluginSelector::ReadConfigFile,
-                                    i18n("Plugins"), QStringLiteral("Service"), KSharedConfig::openConfig());
-    m_pluginSelector->load();
+    m_pluginSelector = new KPluginWidget();
+    const QVector<KPluginMetaData> offers = KPluginMetaData::findPlugins(QStringLiteral("krdc"));
+    m_pluginSelector->setConfig(KSharedConfig::openConfig()->group(QStringLiteral("Plugins")));
+    m_pluginSelector->addPlugins(offers, i18n("Plugins"));
     addPage(m_pluginSelector, i18n("Plugins"), QStringLiteral("preferences-plugin"), i18n("Plugin Configuration"));
 
     connect(this, SIGNAL(accepted()), SLOT(saveState()));

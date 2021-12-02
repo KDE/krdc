@@ -13,7 +13,6 @@
 #include "remoteviewfactory.h"
 
 #include <KXmlGuiWindow>
-#include <KPluginInfo>
 
 class KComboBox;
 class KLineEdit;

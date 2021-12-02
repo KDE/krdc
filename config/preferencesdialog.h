@@ -12,7 +12,7 @@
 #include <QDialogButtonBox>
 
 class KConfigSkeleton;
-class KPluginSelector;
+class KPluginWidget;
 
 class PreferencesDialog : public KConfigDialog
 {
@@ -30,7 +30,7 @@ private Q_SLOTS:
     void settingsChanged();
 
 private:
-    KPluginSelector *m_pluginSelector;
+    KPluginWidget *m_pluginSelector;
     bool m_settingsChanged;
     void enableButton(QDialogButtonBox::StandardButton standardButton);
 };

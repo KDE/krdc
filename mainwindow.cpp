@@ -193,26 +193,17 @@ void MainWindow::setupActions()
 
 void MainWindow::loadAllPlugins()
 {
-    const QVector<KPluginMetaData> offers = KPluginLoader::findPlugins(QStringLiteral("krdc"));
+    const QVector<KPluginMetaData> offers = KPluginMetaData::findPlugins(QStringLiteral("krdc"));
     const KConfigGroup conf = KSharedConfig::openConfig()->group(QStringLiteral("Plugins"));
 
     for (const KPluginMetaData &plugin : offers) {
-
-        KPluginInfo pluginInfo = KPluginInfo::fromMetaData(plugin);
-        pluginInfo.load(conf);
-        const bool enabled = pluginInfo.isPluginEnabled();
+        const bool enabled = plugin.isEnabled(conf);
 
         if (enabled) {
-            RemoteViewFactory *component = nullptr;
+            const auto result = KPluginFactory::instantiatePlugin<RemoteViewFactory>(plugin);
 
-            KPluginLoader loader(plugin.fileName());
-            KPluginFactory *factory = loader.factory();
-
-            if (factory) {
-                component = factory->create<RemoteViewFactory>();
-            }
-
-            if (component) {
+            if (result) {
+                RemoteViewFactory *component = result.plugin;
                 const int sorting = plugin.value(QStringLiteral("X-KDE-KRDC-Sorting")).toInt();
                 m_remoteViewFactories.insert(sorting, component);
             }
