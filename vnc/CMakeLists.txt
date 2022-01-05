@@ -47,8 +47,6 @@ target_sources(kcm_krdc_vncplugin PRIVATE
     vncpreferences.cpp
 )
 
-kcoreaddons_desktop_to_json(kcm_krdc_vncplugin krdc_vnc_config.desktop)
-
 if (LIBSSH_FOUND)
     target_compile_definitions(kcm_krdc_vncplugin PRIVATE -DLIBSSH_FOUND)
 endif()
@@ -68,5 +66,3 @@ add_dependencies(kcm_krdc_vncplugin krdc_vncplugin)
 
 install(TARGETS kcm_krdc_vncplugin DESTINATION ${KDE_INSTALL_PLUGINDIR}/krdc/kcms)
 install(TARGETS krdc_vncplugin DESTINATION ${KDE_INSTALL_PLUGINDIR}/krdc)
-
-install(FILES krdc_vnc_config.desktop DESTINATION ${KDE_INSTALL_KSERVICES5DIR})

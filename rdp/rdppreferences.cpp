@@ -10,7 +10,7 @@
 
 #include "ui_rdppreferences.h"
 
-K_PLUGIN_FACTORY_WITH_JSON(KrdcKcmFactory, "krdc_rdp_config.json", registerPlugin<RdpPreferences>();)
+K_PLUGIN_CLASS(RdpPreferences)
 
 RdpPreferences::RdpPreferences(QWidget *parent, const QVariantList &args)
         : KCModule(parent, args)

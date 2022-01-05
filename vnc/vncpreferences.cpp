@@ -10,7 +10,7 @@
 
 #include "ui_vncpreferences.h"
 
-K_PLUGIN_FACTORY_WITH_JSON(KrdcKcmFactory, "krdc_vnc_config.json", registerPlugin<VncPreferences>();)
+K_PLUGIN_CLASS(VncPreferences)
 
 VncPreferences::VncPreferences(QWidget *parent, const QVariantList &args)
         : KCModule(parent, args)
