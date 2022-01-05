@@ -10,7 +10,7 @@
 
 #include <KPluginFactory>
 
-K_PLUGIN_FACTORY_WITH_JSON(KrdcFactory, "krdc_rdp.json", registerPlugin<RdpViewFactory>();)
+K_PLUGIN_CLASS_WITH_JSON(RdpViewFactory, "krdc_rdp.json")
 
 RdpViewFactory::RdpViewFactory(QObject *parent, const QVariantList &args)
         : RemoteViewFactory(parent)

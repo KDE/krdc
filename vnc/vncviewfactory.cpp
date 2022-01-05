@@ -9,7 +9,7 @@
 
 #include <KPluginFactory>
 
-K_PLUGIN_FACTORY_WITH_JSON(KrdcFactory, "krdc_vnc.json", registerPlugin<VncViewFactory>();)
+K_PLUGIN_CLASS_WITH_JSON(VncViewFactory, "krdc_vnc.json")
 
 VncViewFactory::VncViewFactory(QObject *parent, const QVariantList &args)
         : RemoteViewFactory(parent)

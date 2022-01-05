@@ -8,7 +8,7 @@
 
 #include <KLocalizedString>
 
-K_PLUGIN_FACTORY_WITH_JSON(KrdcFactory, "krdc_test.json", registerPlugin<TestViewFactory>();)
+K_PLUGIN_CLASS_WITH_JSON(TestViewFactory, "krdc_test.json")
 
 TestViewFactory::TestViewFactory(QObject *parent, const QVariantList &args)
         : RemoteViewFactory(parent)

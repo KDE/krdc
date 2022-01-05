@@ -8,7 +8,7 @@
 
 #include <KLocalizedString>
 
-K_PLUGIN_FACTORY_WITH_JSON(KrdcFactory, "krdc_konsole.json", registerPlugin<KonsoleViewFactory>();)
+K_PLUGIN_CLASS_WITH_JSON(KonsoleViewFactory, "krdc_konsole.json")
 
 KonsoleViewFactory::KonsoleViewFactory(QObject *parent, const QVariantList &args)
         : RemoteViewFactory(parent)
