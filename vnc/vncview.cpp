@@ -359,7 +359,7 @@ void VncView::requestPassword(bool includingUsername)
 void VncView::sshRequestPassword(VncSshTunnelThread::PasswordRequestFlags flags)
 {
     qCDebug(KRDC) << "request ssh password";
-
+#ifndef QTONLY
     if (m_hostPreferences->walletSupport() && ((flags & VncSshTunnelThread::IgnoreWallet) != VncSshTunnelThread::IgnoreWallet)) {
         const QString walletPassword = readWalletSshPassword();
 
@@ -368,7 +368,7 @@ void VncView::sshRequestPassword(VncSshTunnelThread::PasswordRequestFlags flags)
             return;
         }
     }
-
+#endif
     KPasswordDialog dialog(this);
     dialog.setPrompt(i18n("Please enter the SSH password."));
     if (dialog.exec() == KPasswordDialog::Accepted) {
@@ -711,7 +711,7 @@ void VncView::clipboardDataChanged()
 
     if (m_clipboard->ownsClipboard() || m_dontSendClipboard)
         return;
-
+#ifndef QTONLY
     if (m_hostPreferences->dontCopyPasswords()) {
         const QMimeData* data = m_clipboard->mimeData();
         if (data && data->hasFormat(QLatin1String("x-kde-passwordManagerHint"))) {
@@ -719,7 +719,7 @@ void VncView::clipboardDataChanged()
             return;
         }
     }
-
+#endif
     const QString text = m_clipboard->text(QClipboard::Clipboard);
 
     vncThread.clientCut(text);
