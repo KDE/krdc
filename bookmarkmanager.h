@@ -12,6 +12,7 @@
 #include <KBookmarkManager>
 #include <KActionCollection>
 #include <KBookmarkMenu>
+#include <KBookmarkOwner>
 
 #include <QMenu>
 
