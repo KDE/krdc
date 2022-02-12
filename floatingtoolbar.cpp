@@ -259,7 +259,11 @@ void FloatingToolBar::mouseMoveEvent(QMouseEvent *e)
     QToolBar::mouseMoveEvent(e);
 }
 
-void FloatingToolBar::enterEvent(QEvent *e)
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    void FloatingToolBar::enterEvent(QEnterEvent *e)
+#else
+    void FloatingToolBar::enterEvent(QEvent *e)
+#endif
 {
     // Stop the autohide timer while the mouse is inside
     d->autoHideTimer->stop();

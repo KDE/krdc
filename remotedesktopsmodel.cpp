@@ -9,7 +9,7 @@
 #include "krdc_debug.h"
 
 #include <KLocalizedString>
-#include<KCoreAddons/KFormat>
+#include <KFormat>
 #ifdef BUILD_ZEROCONF
 #include <kdnssd_version.h>
 #include <KDNSSD/ServiceBrowser>
