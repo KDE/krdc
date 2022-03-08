@@ -17,7 +17,7 @@ RdpPreferences::RdpPreferences(QWidget *parent, const QVariantList &args)
 {
     Ui::RdpPreferences rdpUi;
     rdpUi.setupUi(this);
-    // would need a lot of code duplication. find a solution, bit it's not
+    // would need a lot of code duplication. find a solution, but it's not
     // that important because you will not change this configuration each day...
     // see rdp/rdphostpreferences.cpp
     rdpUi.kcfg_Resolution->hide();
