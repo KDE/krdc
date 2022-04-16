@@ -6,8 +6,6 @@ target_sources(krdc_rdpplugin PRIVATE
     rdpview.cpp
 )
 
-kcoreaddons_desktop_to_json(krdc_rdpplugin krdc_rdp.desktop)
-
 ki18n_wrap_ui(krdc_rdpplugin
     rdppreferences.ui
 )

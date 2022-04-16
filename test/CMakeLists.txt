@@ -13,8 +13,6 @@ target_sources(krdc_testplugin PRIVATE
     testview.cpp
 )
 
-kcoreaddons_desktop_to_json(krdc_testplugin krdc_test.desktop)
-
 target_link_libraries(krdc_testplugin
     Qt::Core
     KF5::Wallet

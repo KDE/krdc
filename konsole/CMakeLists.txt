@@ -10,8 +10,6 @@ target_sources(krdc_konsoleplugin PRIVATE
     konsoleview.cpp
 )
 
-kcoreaddons_desktop_to_json(krdc_konsoleplugin krdc_test.desktop)
-
 find_package(KF5 REQUIRED COMPONENTS Parts)
 target_link_libraries(krdc_konsoleplugin
         Qt::Core

@@ -7,8 +7,6 @@ target_sources(krdc_vncplugin PRIVATE
     vncview.cpp
 )
 
-kcoreaddons_desktop_to_json(krdc_vncplugin krdc_vnc.desktop)
-
 ecm_qt_declare_logging_category(krdc_vncplugin
     HEADER krdc_debug.h
     IDENTIFIER KRDC
