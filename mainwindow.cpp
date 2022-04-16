@@ -205,7 +205,7 @@ void MainWindow::loadAllPlugins()
 
             if (result) {
                 RemoteViewFactory *component = result.plugin;
-                const int sorting = plugin.value(QStringLiteral("X-KDE-KRDC-Sorting")).toInt();
+                const int sorting = plugin.value(QStringLiteral("X-KDE-KRDC-Sorting"), 0);
                 m_remoteViewFactories.insert(sorting, component);
             }
         }
