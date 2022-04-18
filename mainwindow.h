@@ -126,6 +126,7 @@ Q_SIGNALS:
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QMouseEvent>
+#include <QScreen>
 
 class MinimizePixel : public QWidget
 {
@@ -134,7 +135,7 @@ public:
     explicit MinimizePixel(QWidget *parent)
             : QWidget(parent) {
         setFixedSize(1, 1);
-        move(QApplication::desktop()->screenGeometry().width() - 1, 0);
+        move(QGuiApplication::screenAt(geometry().center())->geometry().width() - 1, 0);
     }
 
 Q_SIGNALS:

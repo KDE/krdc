@@ -36,6 +36,7 @@
 #include <QDockWidget>
 #include <QFontMetrics>
 #include <QGroupBox>
+#include <QGuiApplication>
 #include <QHBoxLayout>
 #include <QHeaderView>
 #include <QIcon>
@@ -349,11 +350,10 @@ void MainWindow::resizeTabWidget(int w, int h)
     }
 
     const QSize viewSize = QSize(w,h);
-    QDesktopWidget *desktop = QApplication::desktop();
+    QScreen *currentScreen = QGuiApplication::screenAt(geometry().center());
 
     if (Settings::fullscreenOnConnect()) {
-        int currentScreen = desktop->screenNumber(this);
-        const QSize screenSize = desktop->screenGeometry(currentScreen).size();
+        const QSize screenSize = currentScreen->availableGeometry().size();
 
         if (screenSize == viewSize) {
             qCDebug(KRDC) << "screen size equal to target view size -> switch to fullscreen mode";
@@ -366,7 +366,7 @@ void MainWindow::resizeTabWidget(int w, int h)
         QWidget* currentWidget = m_tabWidget->currentWidget();
         const QSize newWindowSize = size() - currentWidget->frameSize() + viewSize;
 
-        const QSize desktopSize = desktop->availableGeometry().size();
+        const QSize desktopSize = currentScreen->availableGeometry().size();
         qCDebug(KRDC) << "new window size: " << newWindowSize << " available space:" << desktopSize;
 
         if ((newWindowSize.width() >= desktopSize.width()) || (newWindowSize.height() >= desktopSize.height())) {

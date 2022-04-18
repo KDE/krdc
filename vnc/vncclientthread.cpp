@@ -305,7 +305,7 @@ rfbCredential *VncClientThread::credentialHandler(int credentialType)
 void VncClientThread::outputHandler(const char *format, va_list args)
 {
     QString message;
-    message.vsprintf(format, args);
+    message.vasprintf(format, args);
 
     message = message.trimmed();
 
