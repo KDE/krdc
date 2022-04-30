@@ -124,7 +124,6 @@ Q_SIGNALS:
 };
 
 #include <QApplication>
-#include <QDesktopWidget>
 #include <QMouseEvent>
 #include <QScreen>
 
