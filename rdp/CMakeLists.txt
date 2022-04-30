@@ -47,4 +47,4 @@ add_dependencies(kcm_krdc_rdpplugin krdc_rdpplugin)
 install(TARGETS kcm_krdc_rdpplugin DESTINATION ${KDE_INSTALL_PLUGINDIR}/krdc/kcms)
 install(TARGETS krdc_rdpplugin DESTINATION ${KDE_INSTALL_PLUGINDIR}/krdc)
 
-install(FILES smb2rdc.desktop DESTINATION ${KDE_INSTALL_KSERVICES5DIR}/ServiceMenus)
+install(FILES smb2rdc.desktop DESTINATION ${KDE_INSTALL_DATADIR}/kio/servicemenus)
