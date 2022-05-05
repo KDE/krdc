@@ -15,7 +15,6 @@
 #include <KDNSSD/ServiceBrowser>
 #include <KDNSSD/RemoteService>
 #endif
-#include <QDateTime>
 #include <QLoggingCategory>
 #include <QStandardPaths>
 #include <QObject>

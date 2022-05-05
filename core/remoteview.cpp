@@ -9,7 +9,6 @@
 #include "remoteview.h"
 #include "krdc_debug.h"
 
-#include <QUrl>
 #include <QBitmap>
 #include <QStandardPaths>
 

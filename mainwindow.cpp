@@ -8,7 +8,6 @@
 
 #include "mainwindow.h"
 #include "krdc_debug.h"
-#include "remoteview.h"
 #include "settings.h"
 #include "config/preferencesdialog.h"
 #include "floatingtoolbar.h"
@@ -46,7 +45,6 @@
 #include <QMenu>
 #include <QMenuBar>
 #include <QPushButton>
-#include <QScrollArea>
 #include <QSortFilterProxyModel>
 #include <QStatusBar>
 #include <QScrollBar>

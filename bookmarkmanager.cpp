@@ -8,7 +8,6 @@
 #include "mainwindow.h"
 #include "krdc_debug.h"
 
-#include <KBookmarkOwner>
 #include <KLocalizedString>
 
 #include <QStandardPaths>

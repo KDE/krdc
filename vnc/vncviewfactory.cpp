@@ -5,7 +5,6 @@
 */
 
 #include "vncviewfactory.h"
-#include "remoteviewfactory.h"
 
 #include <KPluginFactory>
 
