@@ -161,6 +161,11 @@ install(TARGETS krdc ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 install(PROGRAMS org.kde.krdc.desktop DESTINATION ${KDE_INSTALL_APPDIR})
 install(FILES org.kde.krdc.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
 
+ki18n_install(po)
+if(KF5DocTools_FOUND)
+    kdoctools_install(po)
+endif()
+
 ecm_qt_install_logging_categories(
     EXPORT KRDC
     DESTINATION "${KDE_INSTALL_LOGGINGCATEGORIESDIR}"
