@@ -118,7 +118,7 @@ void VncClientThread::cursorShapeHandlerStatic(rfbClient *cl, int xhot, int yhot
     QPixmap cursorPixmap(QPixmap::fromImage(cursorImg));
     cursorPixmap.setMask(QBitmap::fromImage(alpha));
 
-    Q_EMIT t->gotCursor({cursorPixmap, xhot, yhot});
+    Q_EMIT t->gotCursor(QCursor{cursorPixmap, xhot, yhot});
 }
 
 void VncClientThread::setClientColorDepth(rfbClient* cl, VncClientThread::ColorDepth cd)

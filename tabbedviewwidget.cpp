@@ -7,6 +7,7 @@
 #include "tabbedviewwidget.h"
 #include "krdc_debug.h"
 
+#include <QRegularExpression>
 #include <QTabBar>
 
 TabbedViewWidgetModel::TabbedViewWidgetModel(QTabWidget *modelTarget)
@@ -63,8 +64,10 @@ QVariant TabbedViewWidgetModel::data(const QModelIndex &index, int role) const
 
     switch (role) {
     case Qt::EditRole:
-    case Qt::DisplayRole:
-        return m_tabWidget->tabText(index.row()).remove(QRegExp(QLatin1String("&(?!&)"))); //remove accelerator string
+    case Qt::DisplayRole: {
+        static QRegularExpression reg(QStringLiteral("&(?!&)"));
+        return m_tabWidget->tabText(index.row()).remove(reg); //remove accelerator string
+    }
     case Qt::ToolTipRole:
         return m_tabWidget->tabToolTip(index.row());
     case Qt::DecorationRole:

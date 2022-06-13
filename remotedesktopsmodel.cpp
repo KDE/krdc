@@ -229,11 +229,11 @@ void RemoteDesktopsModel::buildModelFromBookmarkGroup(const KBookmarkGroup &grou
                 QDateTime created = QDateTime();
                 bool ok = false;
                 // first the created datetime
-                created.setTime_t(bm.metaDataItem(QLatin1String("time_added")).toLongLong(&ok));
+                created = QDateTime::fromMSecsSinceEpoch(bm.metaDataItem(QLatin1String("time_added")).toLongLong(&ok));
                 if (ok) (newItem ? item : remoteDesktops[index]).created = created;
                 // then the last visited datetime
                 ok = false;
-                connected.setTime_t(bm.metaDataItem(QLatin1String("time_visited")).toLongLong(&ok));
+                connected = QDateTime::fromMSecsSinceEpoch(bm.metaDataItem(QLatin1String("time_visited")).toLongLong(&ok));
                 if (ok) (newItem ? item : remoteDesktops[index]).lastConnected = connected;
                 // finally the visited count
                 ok = false;

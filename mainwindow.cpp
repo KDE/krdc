@@ -53,6 +53,7 @@
 #include <QTimer>
 #include <QToolBar>
 #include <QVBoxLayout>
+#include <QRegularExpression>
 
 MainWindow::MainWindow(QWidget *parent)
         : KXmlGuiWindow(parent),
@@ -224,7 +225,8 @@ QUrl MainWindow::getInputUrl()
     QString userInput = m_addressInput->text();
     qCDebug(KRDC) << "input url " << userInput;
     // percent encode usernames so QUrl can parse it
-    int lastAtIndex = userInput.indexOf(QRegExp(QStringLiteral("@[^@]+$")));
+    static QRegularExpression reg(QStringLiteral("@[^@]+$"));
+    int lastAtIndex = userInput.indexOf(reg);
     if (lastAtIndex >0) {
         userInput = QString::fromLatin1(QUrl::toPercentEncoding(userInput.left(lastAtIndex))) + userInput.mid(lastAtIndex);
         qCDebug(KRDC) << "input url " << userInput;
