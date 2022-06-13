@@ -11,8 +11,10 @@
 #include "settings.h"
 
 #include <KAboutData>
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #include <Kdelibs4ConfigMigrator>
 #include <Kdelibs4Migration>
+#endif
 #include <KLocalizedString>
 #include <QDir>
 #include <QFile>
@@ -29,7 +31,7 @@ int main(int argc, char **argv)
     KLocalizedString::setApplicationDomain("krdc");
     QElapsedTimer startupTimer;
     startupTimer.start();
-
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     app.setAttribute(Qt::AA_UseHighDpiPixmaps, true);
 
     Kdelibs4ConfigMigrator migrate(appName);
@@ -55,7 +57,7 @@ int main(int argc, char **argv)
             }
         }
     }
-
+#endif
     KAboutData aboutData(appName, i18n("KRDC"), QStringLiteral(KRDC_VERSION_STRING),
                          i18n("KDE Remote Desktop Client"), KAboutLicense::LicenseKey::GPL);
 
