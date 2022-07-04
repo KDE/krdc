@@ -12,7 +12,6 @@
 
 #include <KPluginFactory>
 #include <KConfigGroup>
-#include <KPluginLoader>
 
 /**
  * Factory to be implemented by any plugin.
