@@ -614,7 +614,7 @@ bool VncClientThread::clientCreate(bool reinitialising)
         if (!reinitialising) {
             // Don't whine on reconnection failure: presumably the network
             // is simply still down.
-            qCritical(KRDC) << "rfbInitClient failed";
+            qCCritical(KRDC) << "rfbInitClient failed";
         }
         cl = nullptr;
         return false;
