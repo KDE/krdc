@@ -598,8 +598,7 @@ void MainWindow::closeTab(int index)
     bool isNewConnectionPage = widget == m_newConnectionWidget;
 
     if (!isNewConnectionPage) {
-        RemoteView *view = m_remoteViewMap.value(widget);
-        m_remoteViewMap.remove(m_remoteViewMap.key(view));
+        RemoteView *view = m_remoteViewMap.take(widget);
         view->startQuitting();
         widget->deleteLater();
     }
