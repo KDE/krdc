@@ -295,7 +295,6 @@ void MainWindow::newConnection(const QUrl &newUrl, bool switchFullscreenWhenConn
     connect(view, SIGNAL(statusChanged(RemoteView::RemoteStatus)), this, SLOT(statusChanged(RemoteView::RemoteStatus)));
     connect(view, SIGNAL(disconnected()), this, SLOT(disconnectHost()));
 
-    view->winId();  // native widget workaround for bug 253365
     QScrollArea *scrollArea = createScrollArea(m_tabWidget, view);
 
     const int indexOfNewConnectionWidget = m_tabWidget->indexOf(m_newConnectionWidget);
@@ -512,7 +511,6 @@ void MainWindow::switchFullscreen()
         KToggleFullScreenAction::setFullScreen(m_fullscreenWindow, true);
 
         MinimizePixel *minimizePixel = new MinimizePixel(m_fullscreenWindow);
-        minimizePixel->winId(); // force it to be a native widget (prevents problem with QX11EmbedContainer)
         connect(minimizePixel, SIGNAL(rightClicked()), m_fullscreenWindow, SLOT(showMinimized()));
         m_fullscreenWindow->installEventFilter(this);
 
@@ -811,7 +809,6 @@ void MainWindow::showRemoteViewToolbar()
 
     if (!m_toolBar) {
         m_toolBar = new FloatingToolBar(m_fullscreenWindow, m_fullscreenWindow);
-        m_toolBar->winId(); // force it to be a native widget (prevents problem with QX11EmbedContainer)
         m_toolBar->setSide(FloatingToolBar::Top);
 
         KComboBox *sessionComboBox = new KComboBox(m_toolBar);
