@@ -19,8 +19,6 @@
 
 class RdpView;
 
-class QX11EmbedContainer;
-
 class RdpView : public RemoteView
 {
     Q_OBJECT
