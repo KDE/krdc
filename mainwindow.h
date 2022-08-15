@@ -134,7 +134,7 @@ public:
     explicit MinimizePixel(QWidget *parent)
             : QWidget(parent) {
         setFixedSize(1, 1);
-        move(QGuiApplication::screenAt(geometry().center())->geometry().width() - 1, 0);
+        move(screen()->geometry().width() - 1, 0);
     }
 
 Q_SIGNALS:
