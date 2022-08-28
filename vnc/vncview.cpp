@@ -121,11 +121,9 @@ void VncView::scaleResize(int w, int h)
     qCDebug(KRDC) << w << h;
     if (m_scale) {
         const QSize frameSize = m_frame.size() / m_frame.devicePixelRatio();
-        const qreal _newW = (frameSize.width() - w) * m_factor + w;
-        const qreal _newH = (frameSize.height() - h) * m_factor + h;
 
-        m_verticalFactor = _newH / frameSize.height();
-        m_horizontalFactor = _newW / frameSize.width();
+        m_verticalFactor = static_cast<qreal>(h) / frameSize.height() * m_factor;
+        m_horizontalFactor = static_cast<qreal>(w) / frameSize.width() * m_factor;
 
 #ifndef QTONLY
         if (Settings::keepAspectRatio()) {

@@ -43,7 +43,7 @@ QWidget * FactorWidget::createWidget(QWidget * parent)
     }
 
     QSlider * s = new QSlider(Qt::Horizontal, _parent);
-    s->setRange(0, 100);
+    s->setRange(100, 200);
     s->setMaximumWidth(100);
 
     connect(s, &QSlider::valueChanged, m_receiver, &MainWindow::setFactor);
