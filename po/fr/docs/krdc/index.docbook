@@ -1,0 +1,638 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % French "INCLUDE"
+> <!-- ONLY If you are writing non-English 
+                                     original documentation, change 
+                                     the language here -->
+    
+  <!-- Do not define any other entities; instead, use the entities
+       from entities/general.entities and $LANG/user.entities. -->
+]>
+<!-- Based on kdoctemplate v0.9 January 10 2003 -->
+
+<book id="krdc" lang="&language;">
+
+<!-- This header contains all of the meta-information for the document such
+as Authors, publish date, the abstract, and Keywords -->
+
+<bookinfo>
+<title
+>Manuel du client de bureau distant de KDE</title>
+
+<authorgroup>
+<author
+>&Brad.Hards; &Brad.Hards.mail; </author>
+<author
+><firstname
+>Urs</firstname
+> <surname
+>Wolfer</surname
+> <affiliation
+> <address
+><email
+>uwolfer @ kde.org</email
+></address>
+    </affiliation>
+</author>
+&traducteurJoelleCornavin;&traducteurYannNeveu;&relecteurLudovicGrossard; 
+</authorgroup>
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>25-07-2016</date>
+<releaseinfo
+>Applications 16.08</releaseinfo>
+
+<copyright>
+<year
+>2003, 2008</year>
+</copyright>
+
+<abstract>
+<para
+>&krdc; est une application cliente vous permettant d'afficher, voire de contrôler la session du bureau sur une autre machine, exécuta t un serveur compatible. Les protocoles <acronym
+>VNC</acronym
+> et <acronym
+>RDP</acronym
+> sont pris en charge. </para>
+</abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>kdenetwork</keyword>
+<keyword
+>krfb</keyword>
+<keyword
+>VNC</keyword>
+<keyword
+>RFB</keyword>
+<keyword
+>krdc</keyword>
+<keyword
+>Partage de bureaux</keyword>
+<keyword
+>Contrôle à distance</keyword>
+<keyword
+>Assistance à distance</keyword>
+<keyword
+>Bureau distant</keyword>
+<keyword
+>RDP</keyword>
+<keyword
+>Administration à distance</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Introduction</title>
+
+<para
+>KRDC est une application cliente permettant d'afficher, voire de contrôler la session du bureau sur une autre machine qui exécute un serveur compatible. </para>
+
+<para
+>Vous devriez utiliser généralement &krdc; avec le serveur de &kde; <acronym
+>VNC</acronym
+> (&krfb;), identifié aussi comme Krfb, puisqu'il correspond étroitement aux fonctionnalités spéciales de &krdc;. </para>
+
+<para
+>Si vous voulez démarrer &krdc; ) partir de la &konsole;, la commande est <userinput
+><command
+>krdc</command
+></userinput
+>. </para>
+
+<para
+>Veuillez signaler tout problème ou requête aux listes de diffusion de &kde; ou envoyer un rapport de bogue à <ulink url="https://bugs.kde.org"
+>https://bugs.kde.org</ulink
+>. </para>
+</chapter>
+
+<chapter id="what-is-RFB">
+<title
+>Le protocole <acronym
+>RFB</acronym
+> (<foreignphrase lang="en"
+>Remote Frame Buffer</foreignphrase
+>)</title>
+
+<para
+>Ce chapitre fournit une brève description du protocole <acronym
+>RFB</acronym
+> qu'utilise KRDC et tout autre système compatible. Si vous êtes déjà familiarisé avec le protocole <acronym
+>RFB</acronym
+>, vous pouvez sans risque sauter ce chapitre. </para>
+
+<para
+>La mise en œuvre de niveau élevé d'un système à l'aide du protocole <acronym
+>RFB</acronym
+> est connue sous l'appellation <emphasis
+>Virtual Network Computer</emphasis
+> ou, le plus souvent, juste <acronym
+>VNC</acronym
+>. </para>
+
+<para
+><acronym
+>RFB</acronym
+> est un protocole simple d'accès à distance à des interfaces graphiques utilisateur. Il fonctionne au niveau du tampon de trame qui correspond en gros à l'image d'écran rendue : cela signifie qu'il peut s'appliquer à tous les systèmes de fenêtrage (dont &MacOS; et &Microsoft; &Windows;). Les applications <acronym
+>RFB</acronym
+> existent pour de nombreuses plates-formes et peuvent être redistribuées librement. </para>
+
+<para
+>Dans le protocole <acronym
+>RFB</acronym
+>, l'application qui s'exécute sur la machine devant laquelle se trouve l'utilisateur (contenant l'affichage, le clavier et le pointeur) est appelée client. L'application qui tourne sur la machine où se trouve le tampon de trame (qui exécute le système de fenêtrage et les applications que l'utilisateur commande à distance) est appelée serveur. KRDC est le client de &kde; pour le protocole <acronym
+>RFB</acronym
+>. &krfb; est le serveur de &kde; pour le protocole <acronym
+>RFB</acronym
+>. </para>
+
+<para
+>Comme il prend un volume raisonnable de trafic réseau pour envoyer une image du tampon de trame, le <acronym
+>RFB</acronym
+> fonctionne mieux sur les liaisons à haut débit, telles qu'un réseau local (<acronym
+>LAN</acronym
+>. On peut aussi utiliser KRDC sur d'autres liaisons, mais les performances risquent d'être peu satisfaisantes. </para>
+
+</chapter>
+
+<chapter id="using-krdc">
+<title
+>Utilisation de KRDC</title>
+
+<para
+>KRDC est très facile à utiliser - il est doté d'une interface simple, comme le représente la capture d'écran ci-dessous. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Voici une capture d'écran de KRDC</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="krdc_mainwindow.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Fenêtre principale de KRDC</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<sect1 id="compatible-versions"
+><title
+>Connexion de KRDC à des serveurs compatibles</title>
+
+<para
+>&krdc; est un client. Il doit être utilisé avec des serveurs compatibles. Il y a différentes manières de se connecter à ces serveurs : </para>
+
+<itemizedlist>
+<listitem>
+<para
+>En saisissant directement le nom (ou l'adresse IP) du serveur dans la zone de saisie <guilabel
+>Se connecter à : </guilabel
+>.</para
+> 
+</listitem>
+<listitem>
+<para
+>en utilisant une invitation que vous avez reçue. Le client de bureau distant de KDE fait appel à des invitations, et peut les envoyer par courrier électronique.</para>
+</listitem>
+</itemizedlist>
+
+<para
+>Examinons alternativement chacune d'elles. </para>
+
+<sect2
+><title
+>Saisie du nom du serveur</title>
+<para
+>Si vous connaissez le nom d'hôte (ou l'adresse IP) du serveur auquel vous souhaitez vous connecter, veuillez le saisir directement dans la zone de saisie <guilabel
+>Se connecter à :</guilabel
+> </para>
+
+<para
+>Pour vous connecter à une machine nommée « megan », s'exécutant sur un serveur <acronym
+>VNC</acronym
+> sur l'écran 1 (5901), veuillez saisir <userinput
+>megan:1</userinput
+> ou <userinput
+>megan : 5901</userinput
+> puis choisissez <guilabel
+>vnc</guilabel
+> comme protocole dans la liste déroulante. </para>
+<para>
+<screenshot>
+<screeninfo
+>Saisie d'un nom d'hôte dans KRDC</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="address_input.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Saisie d'un nom d'hôte dans KRDC</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>De façon similaire, si vous utilisez un serveur <acronym
+>RDP</acronym
+> sur cette machine, vous pouvez saisir <userinput
+>megan</userinput
+>. Sélectionnez <guilabel
+>rdp</guilabel
+> comme protocole. <acronym
+>RDP</acronym
+> n'a pas besoin que le numéro d'écran soit spécifié. Si le serveur n'exécute pas <acronym
+>RDP</acronym
+> sur le port par défaut, vous pouvez le spécifier de cette façon : <userinput
+>megan:3910</userinput
+>. </para>
+<para
+>Vous avez besoin de saisir une &URL;, avec une syntaxe encodée avec des pourcentages, par exemple %40, for &pex; <userinput
+>username%40ad.domain.example</userinput
+>. </para>
+<!--https://bugs.kde.org/show_bug.cgi?id=261076-->
+
+</sect2>
+
+<sect2
+><title
+>En utilisant une invitation</title>
+<para
+>Dans le cadre d'une application serveur &krfb; il est possible d'envoyer des invitations par courrier électronique (voire par d'autres moyens, bien que le courrier électronique soit le plus utile). Si vous recevez ce type d'invitation par messagerie, cliquez simplement sur le lien contenu dans le message. Cette action démarrera KRDC s'il ne s'exécute pas déjà et permettra la connexion au serveur spécifié dans l'invitation. </para>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="connection"
+><title
+>Ce qui se passe quand vous vous connectez</title>
+
+<para
+>Remarque : avant la connexion, veuillez vous assurer que l'ordinateur cible (serveur) est accessible sur le réseau et, si nécessaire, que son pare-feu a été correctement configuré ou désactivé. </para>
+
+<para
+>Peut importe comment vous choisissez le serveur auquel vous vous connectez, &krdc; vous interroge ensuite au sujet de la connexion réseau au serveur, comme illustré ci-dessous : </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Sélection de la vitesse de connexion de KRDC</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="vnc_host_configuration.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Sélection de la vitesse de connexion de KRDC</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Il y a trois paramètres de vitesse pour le protocole <acronym
+>VNC</acronym
+> : </para>
+
+<itemizedlist>
+<listitem
+><para
+>Qualité élevée (réseau local, connexion directe), qui est le mode par défaut : évaluez l'efficacité de ce paramètre avant de choisir une option de performance inférieure, qui emploie moins de largeur de bande. </para
+></listitem>
+<listitem
+><para
+>Qualité moyenne (DSL, câble, Internet à haut débit).</para
+></listitem>
+<listitem
+><para
+>Qualité basse (modem, RNIS, Internet à bas débit).</para
+></listitem>
+</itemizedlist>
+
+<para
+>Si vous opérez toujours sur le même type de liaison, vous pouvez décocher la case intitulée <guilabel
+>Afficher de nouveau cette boîte de dialogue pour cet hôte</guilabel
+>. Cela signifie que vous ne serez pas ré-interrogé sur le type de connexion pour cet hôte, à condition de l'identifier de la même manière. Par exemple, lorsqu'un hôte a deux noms et que vous décochez la case quand vous vous connectez en utilisant un nom, on ne vous demandera pas si vous vous connectez en utilisant ce nom, alors que ce sera le cas si vous employez l'autre nom ou l'adresse IP. </para>
+
+<para
+>Vous sélectionnez le paramètre de vitesse approprié et sélectionnez the bouton <guibutton
+>Ok</guibutton
+> pour continuer. </para>
+
+<para
+>Vous pouvez voir l'état de la connexion dans l'icône de l'onglet. </para>
+
+<para
+>Selon la configuration du serveur, il se peut (et ce sera certainement le cas) que vous deviez fournir un mot de passe pour vous authentifier auprès du serveur. &krdc; prévoit une boîte de dialogue similaire à celle qui est représentée ci-dessous. </para>
+
+<para
+>&krdc; a la possibilité d'enregistrer le mot de passe pour les connexions ultérieures sur la même machine. Il utilise KWallet pour cela. Pour utiliser cette fonctionnalité, vous devez cocher la case <guibutton
+>Se rappeler le mot de passe (KWallet)</guibutton
+>. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Saisie du mot de passe de &krdc;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="password_entry.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Saisie du mot de passe de &krdc;</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Après authentification, vous serez connecté au serveur distant et pourrez commencer à utiliser KRDC pour observer ou contrôler le bureau distant. </para>
+
+</sect1>
+
+<sect1 id="controlling-remote"
+><title
+>Contrôle de la connexion au bureau distant</title>
+
+<para
+>Une fois connecté au serveur distant, utilisez normalement le clavier et la souris pour contrôler le système de fenêtrage et les applications présentes sur cette machine distante. </para>
+
+<para
+>Le bureau distant s'affiche soit en mode plein écran, soit sous forme de fenêtre sur le bureau local. Passez d'un mode à l'autre à l'aide des icônes représentées ci-dessous. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Sélection du mode plein écran de KRDC</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="view-fullscreen.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Sélection du mode plein écran de KRDC</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+<screenshot>
+<screeninfo
+>Sélection du mode fenêtre de KRDC</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="view-restore.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Sélection du mode fenêtre de KRDC</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Le mode plein écran est normalement préférable lorsque vous aidez un utilisateur distant car vous pouvez voir tout ce qu'il peut voir. Le mode fenêtre est le plus utile lorsque vous travaillez à la fois à distance et localement - peut-être en vous reportant à la documentation locale, puis en utilisant ces instructions sur la machine distante. </para>
+
+<sect2
+><title
+>Utilisation du mode fenêtre</title>
+
+<para
+>En mode fenêtre, vous pouvez mettre fin à la connexion en fermant la fenêtre ou en cliquant sur le bouton de déconnexion. </para>
+
+</sect2>
+
+<sect2
+><title
+>Utilisation du mode plein écran</title>
+
+<para
+>En mode plein écran, vous pouvez changer l'apparence de la barre d'outil. La transparence de la barre d'outil peut être changée en actionnant la molette de la souris. </para>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="bookmarks"
+><title
+>Signets</title>
+
+<para
+>&krdc; offre la possibilité de gérer des signets. Si vous avez besoin de vous connecter souvent au même bureau distant, vous pouvez ajouter une entrée pour cette connexion à la liste des signets. Pour cela, cliquer sur <menuchoice
+><guimenu
+>Signets</guimenu
+> <guimenuitem
+>Ajouter un signet</guimenuitem
+></menuchoice
+>. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Menu de signets de &krdc;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="bookmarks_menu.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Menu de signets de &krdc;</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+
+<sect2
+><title
+>Historique des signets</title>
+
+<para
+>&krdc; enregistre les dernières connexions aux bureaux distants. Vous pouvez accéder à ces signets spéciaux grâce à <menuchoice
+><guimenu
+>Signets</guimenu
+><guimenuitem
+>Historique</guimenuitem
+></menuchoice
+>. Vous pouvez bien sûr supprimer un signet de cette liste si vous n'en avez plus besoin. Dans la liste, cliquez sur <guibutton
+>Supprimer un signet</guibutton
+> qui apparaît après un appui avec le bouton droit de la souris sur le signet que vous voulez supprimer. </para>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="managing-configuration"
+><title
+>Gestion de la configuration de KRDC</title>
+<para
+>En utilisant <menuchoice
+><guimenu
+>Configuration</guimenu
+><guimenuitem
+>Configurer KRDC...</guimenuitem
+></menuchoice
+>, vous pouvez ouvrir une boîte de dialogue pour modifier le comportement de &krdc;. La sélection de ce bouton fait apparaître une fenêtre comme illustré ci-dessous : </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Préférences de &krdc; - Onglet général</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="general_preferences.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Onglet de préférences de &krdc; - <guilabel
+>Général</guilabel
+> </phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+<screenshot>
+<screeninfo
+>Préférences KRDC - Onglet <guilabel
+>Valeurs par défaut de VNC</guilabel
+></screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="vnc_preferences.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Préférences KRDC - Onglet <guilabel
+>Valeurs par défaut de VNC</guilabel
+></phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+<screenshot>
+<screeninfo
+>Préférences KRDC - Onglet <guilabel
+>Valeurs par défaut de RDP</guilabel
+></screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="rdp_preferences.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Préférences KRDC - Onglet <guilabel
+>Valeurs par défaut de RDP</guilabel
+></phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+
+</sect1>
+
+</chapter>
+
+<chapter id="faq">
+<title
+>Questions et réponses</title>
+
+<!-- (OPTIONAL but recommended) This chapter should include all of the silly
+(and not-so-silly) newbie questions that fill up your mailbox. This chapter
+should be reserved for BRIEF questions and answers! If one question uses more
+than a page or so then it should probably be part of the
+"Using this Application" chapter instead. You should use links to
+cross-reference questions to the parts of your documentation that answer them.
+This is also a great place to provide pointers to other FAQ's if your users
+must do some complicated configuration on other programs in order for your
+application work. -->
+
+<qandaset id="faqlist">
+<qandaentry>
+<question>
+<para
+>Pourquoi la prise en charge de <acronym
+>RDP</acronym
+> ne fonctionne pas ?</para>
+</question>
+<answer>
+<para
+>La prise en charge de<acronym
+>RDP</acronym
+> dans &krdc; dépend de « xfreerdp » (FreeRDP). Veuillez vous assurer que vous avez installé cette dépendance. </para>
+</answer>
+</qandaentry>
+</qandaset>
+
+</chapter>
+
+<chapter id="credits">
+
+<!-- Include credits for the programmers, documentation writers, and
+contributors here. The license for your software should then be included below
+the credits with a reference to the appropriate license file included in the K D E
+distribution. -->
+
+<title
+>Remerciements et licence</title>
+
+<para
+>&krdc; </para>
+<para
+>Le projet KRDC a été démarré par Tim Jansen <email
+>tim@tjansen.de</email
+>. Dans le cadre du projet Google Summer of Code 2007, Urs Wolfer <email
+>uwolfer @ kde.org</email
+> a complètement réécrit KRDC. Merci à Google pour avoir rendu cela possible et merci à l'excellent parrain pour ce projet Summer of Code, &Brad.Hards; &Brad.Hards.mail;. </para>
+
+<para
+>Documentation Copyright &copy; 2003 &Brad.Hards; &Brad.Hards.mail; Documentation Copyright &copy; 2007 Urs Wolfer <email
+>uwolfer @ kde.org</email
+> </para>
+
+<para
+>Traduction française par &JoelleCornavin;.</para
+><para
+>Yann Neveu<email
+>yann@gabuzomeu.fr</email
+></para
+> <para
+>Xavier Besnard<email
+>xavier.besnard@neuf.fr</email
+></para
+> &underFDL; &underGPL; </chapter>
+
+&documentation.index;
+</book>
+
+<!--
+Local Variables:
+mode: xml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+
+vim:tabstop=2:shiftwidth=2:expandtab 
+-->

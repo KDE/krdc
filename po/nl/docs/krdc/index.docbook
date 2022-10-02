@@ -1,0 +1,604 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Dutch "INCLUDE"
+> <!-- ONLY If you are writing non-English 
+                                     original documentation, change 
+                                     the language here -->
+    
+  <!-- Do not define any other entities; instead, use the entities
+       from entities/general.entities and $LANG/user.entities. -->
+]>
+<!-- Based on kdoctemplate v0.9 January 10 2003 -->
+
+<book id="krdc" lang="&language;">
+
+<!-- This header contains all of the meta-information for the document such
+as Authors, publish date, the abstract, and Keywords -->
+
+<bookinfo>
+<title
+>Het handboek van &krdc;</title>
+
+<authorgroup>
+<author
+>&Brad.Hards; &Brad.Hards.mail; </author>
+<author
+><firstname
+>Urs</firstname
+> <surname
+>Wolfer</surname
+> <affiliation
+> <address
+><email
+>uwolfer @ kde.org</email
+></address>
+    </affiliation>
+</author>
+&Freek.de.Kruijf; 
+</authorgroup>
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>2016-07-25</date>
+<releaseinfo
+>Applications 16.08</releaseinfo>
+
+<copyright>
+<year
+>2003, 2008</year>
+</copyright>
+
+<abstract>
+<para
+>&krdc; is een client-toepassing die u in staat stelt om de bureaubladsessie op een andere machine, waarop een compatibele server draait, te bekijken en zelfs te besturen. <acronym
+>VNC</acronym
+> en <acronym
+>RDP</acronym
+> worden ondersteund. </para>
+</abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>kdenetwork</keyword>
+<keyword
+>krfb</keyword>
+<keyword
+>VNC</keyword>
+<keyword
+>RFB</keyword>
+<keyword
+>krdc</keyword>
+<keyword
+>Bureaublad delen</keyword>
+<keyword
+>Afstandsbediening</keyword>
+<keyword
+>Assistentie op afstand</keyword>
+<keyword
+>Bureaublad op afstand</keyword>
+<keyword
+>RDP</keyword>
+<keyword
+>Remote beheer</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Inleiding</title>
+
+<para
+>&krdc; is een client-toepassing die u in staat stelt om de bureaubladsessie op een andere machine, waarop een compatibele server draait, te bekijken en zelfs te besturen. </para>
+
+<para
+>Typisch gebruik van &krdc; is met de &kde; <acronym
+>VNC</acronym
+>-server (&krfb;), die bekend staat als Krfb, omdat het dicht overeenkomt met de speciale mogelijkheden van &krdc;. </para>
+
+<para
+>Als u &krdc; vanaf de &konsole; wilt starten, dan is het commando <userinput
+><command
+>krdc</command
+></userinput
+>. </para>
+
+<para
+>Rapporteer problemen of verzoeken om extra functies voor &kde; aan e-maillijsten of rapporteer een bug op <ulink url="https://bugs.kde.org"
+>http://bugs.kde.org</ulink
+>. </para>
+</chapter>
+
+<chapter id="what-is-RFB">
+<title
+>Het Remote Frame Buffer-protocol</title>
+
+<para
+>Dit hoofdstuk biedt een beknopte beschrijving van het Remote Frame Buffer-protocol dat wordt gebruikt door &krdc; en door andere compatibele systemen. Als u al bekend bent met 'Remote Frame Buffer', dan kunt u dit hoofdstuk veilig overslaan. </para>
+
+<para
+>De hoog niveau implementatie van een systeem die gebruik maakt van het Remote Frame Buffer-protocol is bekend als Virtual Network Computer of vaker gewoon als <acronym
+>VNC</acronym
+>. </para>
+
+<para
+>Remote Frame Buffer (of afgekort <acronym
+>RFB</acronym
+>) is een eenvoudig protocol voor toegang op afstand tot grafische gebruikersinterfaces. Het werkt op het niveau van frame-buffers, die ruwweg overeenkomen met de opgebouwde schermafbeelding, wat betekent dat het kan worden toegepast op alle venstersystemen (inclusief X11, &MacOS; en &Microsoft; &Windows;). Toepassingen voor frame-buffers op afstand bestaan er voor vele platforms en kunnen vaak opnieuw vrij worden gedistribueerd. </para>
+
+<para
+>In het Remote-Frame-Buffer-protocol, wordt de toepassing die draait op de machine waar de gebruiker zit (met het scherm, toetsenbord en muis) de client genoemd. De toepassing die draait op de machine waar de framebuffer zich bevindt (die draait op het systeem met vensters en toepassingen die de gebruiker op afstand bestuurt) wordt de server genoemd. &krdc; is de &kde;-client voor het Remote-Frame-Buffer-protocol. &krfb; is de &kde;-server voor het Remote-Frame-Buffer-protocol. </para>
+
+<para
+>Het kost een behoorlijke hoeveelheid netwerkverkeer om een afbeelding van de framebuffer te verzenden, zodat Remote-Frame-Buffer het beste werkt over hoge bandbreedte verbindingen, zoals een 'local area network'. Het is nog steeds mogelijk om &krdc; te gebruiken over andere verbindingen, het is echter onwaarschijnlijk dat de prestaties even goed zijn. </para>
+
+</chapter>
+
+<chapter id="using-krdc">
+<title
+>&krdc; gebruiken</title>
+
+<para
+>Het is erg gemakkelijk om &krdc; te gebruiken - het heeft een eenvoudig interface, zoals in de onderstaande schermafdruk wordt getoond. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Hier is een schermafdruk van &krdc;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="krdc_mainwindow.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Hoofdvenster van &krdc;</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<sect1 id="compatible-versions"
+><title
+>&krdc; verbinden met compatibele servers</title>
+
+<para
+>&krdc; is een client en het moet worden gebruikt met compatibele servers. Er zijn verschillende manieren om met die servers een verbinding te maken: </para>
+
+<itemizedlist>
+<listitem>
+<para
+>Direct de servernaam (of IP-adres) invoeren in de invoer <guilabel
+>Verbinden met:</guilabel
+>.</para
+> 
+</listitem>
+<listitem>
+<para
+>Door een uitnodigingte gebruiken die u hebt ontvangen. &krfb; gebruikt uitnodigingen en kan deze verzenden per e-mail.</para>
+</listitem>
+</itemizedlist>
+
+<para
+>Laten we elk van hen op hun beurt bekijken. </para>
+
+<sect2
+><title
+>Servernaaminvoer</title>
+<para
+>Als u de hostnaam (of IP-adres) kent van de server waarmee u wilt verbinden, dan kunt u deze direct invoeren in de invoer <guilabel
+>Verbinden met:</guilabel
+>. </para>
+
+<para
+>Als u wilt verbinden met een machine genaamd megan, waarop een <acronym
+>VNC</acronym
+>-server draait op scherm 1 (5901), dan kunt u <userinput
+>megan:1</userinput
+> of <userinput
+>megan:5901</userinput
+> invoeren en <guilabel
+>vnc</guilabel
+> als protocol kiezen in het afrolvak. </para>
+<para>
+<screenshot>
+<screeninfo
+>Een hostnaam in &krdc; invoeren</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="address_input.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Een hostnaam in &krdc; invoeren</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Evenzo, als u een <acronym
+>RDP</acronym
+>-server op die machine gebruikt, dan kunt u <userinput
+>megan</userinput
+> invoeren. Kies <guilabel
+>rdp</guilabel
+> als het protocol. <acronym
+>RDP</acronym
+> heeft geen schermnummer nodig. Als de <acronym
+>RDP</acronym
+>-server niet draait op de standaard poort, dan kunt u het specificeren op de volgende manier <userinput
+>megan:3910</userinput
+> </para>
+<para
+>U moet een &URL; invoeren in procentcoderingssyntaxis, d.w.z. @ als %40, bijvoorbeeld <userinput
+>gebruikersnaam%40ad.domein.voorbeeld</userinput
+> </para>
+<!--https://bugs.kde.org/show_bug.cgi?id=261076-->
+
+</sect2>
+
+<sect2
+><title
+>Een uitnodiging gebruiken</title>
+<para
+>In de servertoepassing &krfb; is het mogelijk om via e-mail uitnodigingen te verzenden (en op andere manieren, hoewel e-mail de meest bruikbare is). Als u dit type nodiging per e-mailuit ontvangt, dan klikt u gewoon op de koppeling in het bericht. Dit zal &krdc; starten als het nog niet draait, en met de server verbinden die is gespecificeerd in de uitnodiging. </para>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="connection"
+><title
+>Wat gebeurt er wanneer u verbinding maakt</title>
+
+<para
+>Opmerking: Alvorens te verbinden, kijk of de doelcomputer (server) beschikbaar is in het network en, indien nodig, dat zijn firewall juist is ingesteld of uitgeschakeld. </para>
+
+<para
+>Ongeacht hoe u de server selecteert om mee te verbinden, het volgende is dat &krdc; u vraagt naar de netwerkverbinding met de server, zoals hieronder getoond: </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Selectie van verbindingssnelheid van &krdc;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="vnc_host_configuration.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Selectie van verbindingssnelheid van &krdc;</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Er zijn drie snelheidsinstellingen voor het <acronym
+>VNC</acronym
+>-protocol: </para>
+
+<itemizedlist>
+<listitem
+><para
+>Hoge kwaliteit (LAN, directe verbinding), wat de standaard is en u dient na te gaan hoe goed deze instelling zich gedraagt alvorens een optie met een lagere prestatie selecteert die minder bandbreedte gebruikt. </para
+></listitem>
+<listitem
+><para
+>Gemiddelde kwaliteit ((A)DSL, kabel, breedband internet).</para
+></listitem>
+<listitem
+><para
+>Lage kwaliteit (modem, ISDN, trage internetverbinding).</para
+></listitem>
+</itemizedlist>
+
+<para
+>Als u altijd over hetzelfde type koppeling werkt, dan kunt u het keuzevakje gelabeld <guilabel
+>Deze dialoog voor deze host opnieuw tonen</guilabel
+> deactiveren, wat betekent dat u geen vraag het type verbinding voor deze host meer krijgt, ten minste als u het op dezelfde manier identificeert. Bijvoorbeeld, als een host twee namen heeft en het keuzevakje deactiveert wanneer de verbinding maakt met de ene naam, dan wordt u niet gevraagd als u de verbinding maakt met diezelfde naam, maar wel zal worden gevraagd als u de andere naam gebruikt of het IP-adres. </para>
+
+<para
+>U selecteert de van toepassing zijnde snelheid en selecteert de knop <guibutton
+>OK</guibutton
+> om door te gaan. </para>
+
+<para
+>U kunt de verbindingsstatus zien in het pictogram in het tabblad. </para>
+
+<para
+>Afhankelijk van de instelling van de server, moet u (bijna zeker) een wachtwoord leveren om toegelaten te worden tot de server. &krdc; zal een dialoog voor het invoeren van het wachtwoord laten zien vergelijkbaar met wat hieronder wordt getoond. </para>
+
+<para
+>&krdc; heeft de mogelijkheid om het wachtwoord voor volgende verbindingen naar dezelfde host op te slaan. Het gebruikt hiervoor KWallet. Het is nodig om het keuzevakje <guibutton
+>Wachtwoord herinneren (KWallet)</guibutton
+> te activeren als u deze mogelijkheid wilt gebruiken. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Invoerveld van &krdc; voor wachtwoord</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="password_entry.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Invoerveld van &krdc; voor wachtwoord</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Na authenticatie, wordt u verbonden met de server op afstand en kunt u beginnen met &krdc; gebruiken om te kijken of het bureaublad op afstand te besturen. </para>
+
+</sect1>
+
+<sect1 id="controlling-remote"
+><title
+>Besturen van de verbinding met het bureaublad op afstand</title>
+
+<para
+>Nadat u met de server op afstand een verbinding hebt gemaakt, gebruikt u normaal het toetsenbord en muis om het systeem met vensters en toepassingen op die machine op afstand te besturen. </para>
+
+<para
+>U kunt het bureaublad op afstand ofwel als een volledig scherm of als een venster op het lokale bureaublad bekijken. U kunt tussen deze modi wisselen met de onderstaand getoonde pictogrammen. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Selectie van volledig schermmodus van &krdc;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="view-fullscreen.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Selectie van volledig schermmodus van &krdc;</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+<screenshot>
+<screeninfo
+>Selectie van venstermodus van &krdc;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="view-restore.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Selectie van venstermodus van &krdc;</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>DE modus volledig scherm is normaal beter wanneer u een gebruiker op afstand helpt, omdat u dan alles kan zien wat deze kan zien. Venstermodus is het meest bruikbaar wanneer u zowel lokaal als op afstand werkt - mogelijk gebruik makend van lokale documentatie en deze dan op de machine op afstand gebruiken. </para>
+
+<sect2
+><title
+>Venstermodus gebruiken</title>
+
+<para
+>In venstermodus kunt u de verbinding verbreken door het venster te sluiten door op de knop Afmelden te drukken. </para>
+
+</sect2>
+
+<sect2
+><title
+>Volledig schermmodus gebruiken</title>
+
+<para
+>In de modus volledig scherm kunt u het uiterlijk van de werkbalk wijzigen. De transparantie ervan kan gewijzigd worden met het muiswiel. </para>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="bookmarks"
+><title
+>Bladwijzers</title>
+
+<para
+>&krdc; heeft de mogelijkheid bladwijzers te beheren. Als het nodig is om vaak naar hetzelfde bureaublad te verbinden, dan kunt u een item voor deze verbinding aan de lijst met bladwijzers toevoegen. U kunt dat doen met een klik op <menuchoice
+><guimenu
+>Bladwijzers</guimenu
+> <guimenuitem
+>Bladwijzer toevoegen</guimenuitem
+></menuchoice
+>. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Bladwijzermenu van &krdc;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="bookmarks_menu.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Bladwijzermenu van &krdc;</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+
+<sect2
+><title
+>Bladwijzers van de geschiedenis</title>
+
+<para
+>&krdc; slaat de laatst gebruikte verbindingen met een bureaublad op afstand op. U kunt toegang tot deze speciale bladwijzers krijgen op <menuchoice
+><guimenu
+>Bladwijzers</guimenu
+><guimenuitem
+>Geschiedenis</guimenuitem
+></menuchoice
+>. Natuurlijk kunt u ook een bladwijzer uit deze lijst verwijderen wanneer u deze niet meer nodig hebt. Klik eenvoudig op <guibutton
+>Bladwijzer verwijderen</guibutton
+> die verschijnt na een klik met de rechter muisknop op de bladwijzer die u wilt verwijderen. </para>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="managing-configuration"
+><title
+>De &krdc;-instellingen beheren</title>
+<para
+>Met <menuchoice
+><guimenu
+>Instellingen</guimenu
+><guimenuitem
+>KRDC instellen...</guimenuitem
+></menuchoice
+>, kunt u een dialoog openen om het gedrag van &krdc; te wijzigen. Die knop selecteren brengt een venster zoals onderstaand getoond: </para>
+
+<para>
+<screenshot>
+<screeninfo
+>&krdc; voorkeuren - Algemeen tabblad</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="general_preferences.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>&krdc; voorkeuren - <guilabel
+>Algemeen</guilabel
+> tabblad</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+<screenshot>
+<screeninfo
+>&krdc; voorkeuren - <guilabel
+>Standaarden van VNC</guilabel
+> tabblad</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="vnc_preferences.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>&krdc; voorkeuren - <guilabel
+>Standaarden van VNC</guilabel
+> tabblad met profielen</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+<screenshot>
+<screeninfo
+>&krdc; voorkeuren - <guilabel
+>Standaarden van RDP</guilabel
+> tabblad</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="rdp_preferences.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>&krdc; voorkeuren - <guilabel
+>Standaarden van RDP</guilabel
+> tabblad met profielen</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+
+</sect1>
+
+</chapter>
+
+<chapter id="faq">
+<title
+>Vragen en antwoorden</title>
+
+<!-- (OPTIONAL but recommended) This chapter should include all of the silly
+(and not-so-silly) newbie questions that fill up your mailbox. This chapter
+should be reserved for BRIEF questions and answers! If one question uses more
+than a page or so then it should probably be part of the
+"Using this Application" chapter instead. You should use links to
+cross-reference questions to the parts of your documentation that answer them.
+This is also a great place to provide pointers to other FAQ's if your users
+must do some complicated configuration on other programs in order for your
+application work. -->
+
+<qandaset id="faqlist">
+<qandaentry>
+<question>
+<para
+>Waarom werkt de ondersteuning van <acronym
+>RDP</acronym
+> niet?</para>
+</question>
+<answer>
+<para
+>Ondersteuning van <acronym
+>RDP</acronym
+> in &krdc; is afhankelijk van xfreerdp (FreeRDP). Ga na dat u dit pakket hebt geïnstalleerd. </para>
+</answer>
+</qandaentry>
+</qandaset>
+
+</chapter>
+
+<chapter id="credits">
+
+<!-- Include credits for the programmers, documentation writers, and
+contributors here. The license for your software should then be included below
+the credits with a reference to the appropriate license file included in the K D E
+distribution. -->
+
+<title
+>Dankbetuiging en licentie</title>
+
+<para
+>&krdc; </para>
+<para
+>Het &krdc;-project is gestart door Tim Jansen <email
+>tim@tjansen.de</email
+>. Als een Google Summer of Code 2007 project, heeft Urs Wolfer <email
+>uwolfer @ kde.org</email
+> &krdc; volledig herschreven. Dank aan Google om dit mogelijk te maken en dank aan de fantastische mentor van dit Summer of Code project, &Brad.Hards; &Brad.Hards.mail;. </para>
+
+<para
+>Documentatie Copyright &copy; 2003 &Brad.Hards; &Brad.Hards.mail; Documentatie Copyright &copy; 2007 Urs Wolfer <email
+>uwolfer @ kde.org</email
+> </para>
+
+&meld.fouten;&vertaling.freek; &underFDL; &underGPL; </chapter>
+
+&documentation.index;
+</book>
+
+<!--
+Local Variables:
+mode: xml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+
+vim:tabstop=2:shiftwidth=2:expandtab 
+-->

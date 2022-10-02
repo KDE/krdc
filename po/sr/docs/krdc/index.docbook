@@ -1,0 +1,749 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Serbian "INCLUDE"
+> <!-- ONLY If you are writing non-English 
+                                     original documentation, change 
+                                     the language here -->
+    
+  <!-- Do not define any other entities; instead, use the entities
+       from entities/general.entities and $LANG/user.entities. -->
+]>
+<!-- Based on kdoctemplate v0.9 January 10 2003 -->
+
+<book id="krdc" lang="&language;">
+
+<!-- This header contains all of the meta-information for the document such
+as Authors, publish date, the abstract, and Keywords -->
+
+<bookinfo>
+<title
+>Приручник за <application
+>КРДЦ</application
+></title>
+
+<authorgroup>
+<author
+><personname
+><firstname
+>Бред</firstname
+> <surname
+>Хардс</surname
+></personname
+> &Brad.Hards.mail; </author>
+<author
+><firstname
+>Урс</firstname
+> <surname
+>Волфер</surname
+> <affiliation
+> <address
+><email
+>uwolfer @ kde.org</email
+></address>
+    </affiliation>
+</author>
+<othercredit role="translator"
+><firstname
+>Драган</firstname
+><surname
+>Пантелић</surname
+><affiliation
+><address
+><email
+>falcon-10@gmx.de</email
+></address
+></affiliation
+><contrib
+>превод</contrib
+></othercredit
+> 
+</authorgroup>
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>25. 7. 2016.</date>
+<releaseinfo
+>Програми КДЕ‑а 16.08</releaseinfo>
+
+<copyright>
+<year
+>2003, 2008</year>
+</copyright>
+
+<abstract>
+<para
+><application
+>КРДЦ</application
+> је клијентски програм којим можете да гледате, па чак и управљате сесијом површи на другом рачунару који извршава сагласан сервер. Подржани су ВНЦ и РДП. </para>
+</abstract>
+
+<keywordset>
+<keyword
+>КДЕ</keyword>
+<keyword
+>kdenetwork</keyword>
+<keyword
+>КРФБ</keyword>
+<keyword
+>ВНЦ</keyword>
+<keyword
+>РФБ</keyword>
+<keyword
+>КРДЦ</keyword>
+<keyword
+>дељење површи</keyword>
+<keyword
+>удаљено управљање</keyword>
+<keyword
+>удаљена помоћ</keyword>
+<keyword
+>удаљена површ</keyword>
+<keyword
+>РДП</keyword>
+<keyword
+>удаљена администрација</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Увод</title>
+
+<para
+><application
+>КРДЦ</application
+> је клијентски програм којим можете да гледате, па чак и управљате сесијом површи на другом рачунару који извршава сагласан сервер. </para>
+
+<para
+><application
+>КРДЦ</application
+> ћете обично користити у пару са КДЕ‑овим ВНЦ сервером <application
+>КРФБ‑ом</application
+>, пошто темељно подржава специјалне могућности <application
+>КРДЦ‑а</application
+>. </para>
+
+<para
+>Ако желите да покренете <application
+>КРДЦ</application
+> из <application
+>Конзоле</application
+>, наредба гласи <userinput
+><command
+>krdc</command
+></userinput
+>. </para>
+
+<para
+>Било какве проблеме или захтеве за могућностима пријавите на КДЕ‑ове поштанске листе, или поднесите извештај о грешци на <ulink url="http://bugs.kde.org"
+>http://bugs.kde.org</ulink
+>. </para>
+</chapter>
+
+<chapter id="what-is-RFB">
+<title
+>Протокол удаљеног кадробафера</title>
+
+<para
+>Ово поглавље даје кратак опис протокола удаљеног кадробафера, који користе <application
+>КРДЦ</application
+> и други сагласни системи. Ако вам је удаљени кадробафер већ познат, слободно можете прескочити ово поглавље. </para>
+
+<para
+>Изведба високог нивоа система који користи протокол удаљеног кадробафера назива се „виртуелним мрежним рачунаром“, чешће само акронимом ВНЦ. </para>
+
+<para
+>Удаљени кадробафер (скраћено РФБ) једноставан је протокол за удаљени приступ графичким корисничким сучељима. Ради на нивоу кадробафера, који у грубим цртама одговара рендерованој слици на екрану, што значи да се може применити на све прозорске системе (укључујући Икс11, МекОС и Виндоуз). Програми за удаљени кадробафер постоје за многе платформе и често се могу бесплатно дистрибуирати. </para>
+
+<para
+>У протоколу удаљеног кадробафера, програм који се извршава на рачунару за којим седи корисник (рачунар који даје екран, тастатуру и показивач) зове се клијент. Програм који се извршава на рачунару где се налази кадробафер (рачунар који извршава прозорски систем и програме којима корисник даљински управља) зове се сервер. <application
+>КРДЦ</application
+> је КДЕ‑ов клијент, а <application
+>КРФБ</application
+> КДЕ‑ов сервер за протокол удаљеног кадробафера. </para>
+
+<para
+>За слање слике из кадробафера неопходно је прилично мрежног саобраћаја, те протокол удаљеног кадробафера најбоље ради преко веза високе пропусности, попут локалне мреже. Могуће је користити <application
+>КРДЦ</application
+> и преко других веза, али је мало вероватно да ће учинак бити једнако добар. </para>
+
+</chapter>
+
+<chapter id="using-krdc">
+<title
+>Коришћење <application
+>КРДЦ‑а</application
+></title>
+
+<para
+><application
+>КРДЦ</application
+> је врло лак за употребу — има једноставно сучеље, приказано на наредном снимку екрана. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Снимак екрана <application
+>КРДЦ‑а</application
+>.</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="krdc_mainwindow.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Главни прозор <application
+>КРДЦ‑а</application
+>.</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<sect1 id="compatible-versions"
+><title
+>Повезивање <application
+>КРДЦ‑а</application
+> са сагласним серверима</title>
+
+<para
+><application
+>КРДЦ</application
+> је клијент, и треба да се користи са сагласним серверима. Постоји више начина да се повеже са њима: </para>
+
+<itemizedlist>
+<listitem>
+<para
+>Директним уписивањем имена сервера (или ИП адресе) у поље <guilabel
+>Повежи се са:</guilabel
+>.</para
+> 
+</listitem>
+<listitem>
+<para
+>Одговором на позивницу коју сте добили. <application
+>КРФБ</application
+> користи позивнице и може да их шаље е‑поштом.</para>
+</listitem>
+</itemizedlist>
+
+<para
+>Погледајмо редом оба ова начина. </para>
+
+<sect2
+><title
+>Унос имена сервера</title>
+<para
+>Ако знате име домаћина (или ИП адресу) сервера на који желите да се повежете, можете га директно унети у поље <guilabel
+>Повежи се са:</guilabel
+>. </para>
+
+<para
+>Ако желите да се повежете с рачунаром по имену <literal
+>kolubara</literal
+>, на којем ради ВНЦ сервер на екрану 1 (5901), у поље <guilabel
+>Адреса:</guilabel
+> унесите <userinput
+>kolubara:1</userinput
+> или <userinput
+>kolubara:5901</userinput
+> и са падајућег списка изаберите ВНЦ као протокол. </para>
+<para>
+<screenshot>
+<screeninfo
+>Уношење имена домаћина у <application
+>КРДЦ‑у</application
+>.</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="address_input.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Уношење имена домаћина у <application
+>КРДЦ‑у</application
+>.</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Слично, ако удаљени рачунар извршава РДП сервер, можете унети <userinput
+>kolubara</userinput
+> и изабрати РДП као протокол (РДП не тражи број екрана). Ако се РДП сервер не извршава на подразумеваном порту, можете га задати овако: <userinput
+>kolubara:3910</userinput
+> </para>
+<para
+>УРЛ‑ови морају да се уносе процентно кодирани, на пример @ као %40 у <userinput
+>korisnik%40neki.domen.primer</userinput
+>. </para>
+<!--https://bugs.kde.org/show_bug.cgi?id=261076-->
+
+</sect2>
+
+<sect2
+><title
+>Коришћење позивнице</title>
+<para
+>Из <application
+>КРФБ‑а</application
+>, као серверског програма, могуће је слати позивнице е‑поштом (и другачије, мада је е‑пошта најзгоднија). Ако добијете овакву позивницу е‑поштом, можете просто кликнути на везу дату у поруци. Тада ће се покренути <application
+>КРДЦ</application
+> (ако се већ не извршава) и повезати са сервером наведеним у позивници. </para>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="connection"
+><title
+>Шта се догађа током повезивања</title>
+
+<para
+>Пре повезивања, уверите се да је циљни рачунар (сервер) доступан на мрежи и, ако треба, да је заштитни зид правилно подешен или искључен. </para>
+
+<para
+>Како год да сте одабрали сервер за повезивање, прво следеће што ће вас <application
+>КРДЦ</application
+> питати јесте о мрежној вези са сервером, као што је приказано испод: </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Избор брзине везе у <application
+>КРДЦ‑у</application
+>.</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="vnc_host_configuration.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Избор брзине везе у <application
+>КРДЦ‑у</application
+>.</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Протокол ВНЦ даје три поставке брзине: </para>
+
+<itemizedlist>
+<listitem
+><para
+><guilabel
+>висок квалитет (ЛАН, директна веза)</guilabel
+>: подразумевана поставка. Требало би да оцените колико добро ради пре него што изаберете опцију мањих перформанси, која захтева мању пропусност. </para
+></listitem>
+<listitem
+><para
+><guilabel
+>средњи квалитет (ДСЛ, кабл, брзи интернет)</guilabel
+></para
+></listitem>
+<listitem
+><para
+><guilabel
+>низак квалитет (модем, ИСДН, спори интернет)</guilabel
+></para
+></listitem>
+</itemizedlist>
+
+<para
+>Ако увек користите исти тип везе, можете испразнити кућицу <guilabel
+>Прикажи овај дијалог поново за овај домаћин</guilabel
+>, када више нећете бити питани за тип везе с овим домаћином. Ово важи под условом да се домаћин идентификујете на исти начин. На пример, ако домаћин има два имена, а кућицу испразните пошто се повежете преко једног од њих, нећете бити питани при наредним повезивањима под тим именом, али хоћете при повезивању под другим именом или по ИП адреси. </para>
+
+<para
+>Изаберите одговарајућу поставку брзине и кликните на <guibutton
+>У реду</guibutton
+> да наставите. </para>
+
+<para
+>Стање везе можете видети преко иконице на језичку. </para>
+
+<para
+>У зависности од поставе сервера, може (и скоро сигурно ће) бити потребно да обезбедите лозинку за аутентификовање на сервер. <application
+>КРДЦ</application
+> ће издати дијалог лозинке сличан приказаном испод. </para>
+
+<para
+><application
+>КРДЦ</application
+> уме да сачува лозинку, за будућа повезивања на исти домаћин. За то користи К‑новчаник. Ако желите да користите ову могућност, попуните кућицу <guibutton
+>Запамти лозинку (К‑новчаник)</guibutton
+>. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Уношење лозинке у <application
+>КРДЦ‑у</application
+></screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="password_entry.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Уношење лозинке у <application
+>КРДЦ‑у</application
+></phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Након аутентификације бићете повезани са удаљеним сервером, и можете почети с коришћењем <application
+>КРДЦ‑а</application
+> за надгледање или управљање удаљеном површи. </para>
+
+</sect1>
+
+<sect1 id="controlling-remote"
+><title
+>Управљање везом са удаљеном површи</title>
+
+<para
+>Пошто сте се повезали на удаљени сервер, нормално бисте користили тастатуру и миш за управљање прозорским системом и програмима на том рачунару. </para>
+
+<para
+>Удаљену површ можете посматрати преко целог екрана, или као прозор на локалној површи. Можете пребацивати између ових режима помоћу иконица приказаних испод. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Избор режима целог екрана у <application
+>КРДЦ‑у</application
+></screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="view-fullscreen.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Избор режима целог екрана у <application
+>КРДЦ‑у</application
+></phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+<screenshot>
+<screeninfo
+>Избор прозорског режима у <application
+>КРДЦ‑у</application
+></screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="view-restore.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Избор прозорског режима у <application
+>КРДЦ‑у</application
+></phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Режим целог екрана обично је бољи када помажете удаљеним корисницима, јер можете видети све што они виде. Прозорски режим је најкориснији кад радите и удаљено и локално, на пример, читајући локалну документацију и упутства из ње примењујући на удаљеном рачунару. </para>
+
+<sect2
+><title
+>Коришћење прозорског режима</title>
+
+<para
+>У прозорском режиму, везу можете окончати затварањем прозора, кликом на дугме за одјављивање. </para>
+
+</sect2>
+
+<sect2
+><title
+>Коришћење режима целог екрана</title>
+
+<para
+>У режиму целог екрана можете мењати изглед траке алатки. Прозирност траке алатки може се изменити точкићем миша. </para>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="bookmarks"
+><title
+>Обележивачи</title>
+
+<para
+><application
+>КРДЦ</application
+> уме да управља обележивачима. Ако се често повезујете на исту удаљену површ, можете додати унос за ту везу у списак обележивача. То можете урадити кликом на <menuchoice
+><guimenu
+>Обележивачи</guimenu
+> <guimenuitem
+>Додај обележивач</guimenuitem
+></menuchoice
+>. </para>
+
+<para>
+<screenshot>
+<screeninfo
+><application
+>КРДЦ‑ов</application
+> мени обележивача</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="bookmarks_menu.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+><application
+>КРДЦ‑ов</application
+> мени обележивача</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+
+<sect2
+><title
+>Историјат обележивача</title>
+
+<para
+><application
+>КРДЦ</application
+> уписује последње коришћене везе ка удаљеним површима. Овим специјалним обележивачима можете приступити преко <menuchoice
+><guimenu
+>Обележивачи</guimenu
+> <guimenuitem
+>Историјат</guimenuitem
+></menuchoice
+>. Наравно, обележивач с овог списка можете и обрисати ако вам више није потребан. Само кликните на дугме <guibutton
+>Обриши</guibutton
+> које се појави по клику десним дугметом миша на обележивач који желите да обришете. </para>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="managing-configuration"
+><title
+>Управљање поставом <application
+>КРДЦ‑а</application
+></title>
+<para
+>Помоћу <menuchoice
+><guimenu
+>Поставке</guimenu
+> <guimenuitem
+>Подеси КРДЦ...</guimenuitem
+></menuchoice
+> можете отворити дијалог за подешавање <application
+>КРДЦ‑а</application
+>. Избором ове ставке менија добићете прозор попут овога: </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Поставке <application
+>КРДЦ‑а</application
+>, језичак <guilabel
+>Опште</guilabel
+>.</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="general_preferences.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Поставке <application
+>КРДЦ‑а</application
+>, језичак <guilabel
+>Опште</guilabel
+>.</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+<screenshot>
+<screeninfo
+>Поставке <application
+>КРДЦ‑а</application
+>, језичак <guilabel
+>Подразумевано за ВНЦ</guilabel
+>.</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="vnc_preferences.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Поставке <application
+>КРДЦ‑а</application
+>, језичак профила под <guilabel
+>Подразумевано за ВНЦ</guilabel
+>.</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+<screenshot>
+<screeninfo
+>Поставке <application
+>КРДЦ‑а</application
+>, језичак <guilabel
+>Подразумевано за РДП</guilabel
+>.</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="rdp_preferences.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Поставке <application
+>КРДЦ‑а</application
+>, језичак профила под <guilabel
+>Подразумевано за РДП</guilabel
+>.</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+
+</sect1>
+
+</chapter>
+
+<chapter id="faq">
+<title
+>Питања и одговори</title>
+
+<!-- (OPTIONAL but recommended) This chapter should include all of the silly
+(and not-so-silly) newbie questions that fill up your mailbox. This chapter
+should be reserved for BRIEF questions and answers! If one question uses more
+than a page or so then it should probably be part of the
+"Using this Application" chapter instead. You should use links to
+cross-reference questions to the parts of your documentation that answer them.
+This is also a great place to provide pointers to other FAQ's if your users
+must do some complicated configuration on other programs in order for your
+application work. -->
+
+<qandaset id="faqlist">
+<qandaentry>
+<question>
+<para
+>Зашто не ради подршка за РДП?</para>
+</question>
+<answer>
+<para
+>Подршка за РДП у <application
+>КРДЦ‑у</application
+> зависи од ФриРДП‑а (<command
+>xfreerdp</command
+>). Проверите да ли је ова зависност инсталирана. </para>
+</answer>
+</qandaentry>
+</qandaset>
+
+</chapter>
+
+<chapter id="credits">
+
+<!-- Include credits for the programmers, documentation writers, and
+contributors here. The license for your software should then be included below
+the credits with a reference to the appropriate license file included in the K D E
+distribution. -->
+
+<title
+>Заслуге и лиценца</title>
+
+<para
+><application
+>КРДЦ</application
+> </para>
+<para
+>Пројекат <application
+>КРДЦ</application
+> покренуо је <personname
+><firstname
+>Тима</firstname
+> <surname
+>Јансена</surname
+></personname
+> <email
+>tim@tjansen.de</email
+>. Током Гугловог „Лета кôда 2007“, <personname
+><firstname
+>Урс</firstname
+> <surname
+>Волфер</surname
+></personname
+> <email
+>uwolfer @ kde.org</email
+> <application
+>КРДЦ</application
+> је изнова написао <application
+>КРДЦ</application
+>. Хвала Гуглу што је ово омогућио, и сјајном ментору пројекта <personname
+><firstname
+>Бреду</firstname
+> <surname
+>Хардсу</surname
+></personname
+> &Brad.Hards.mail;. </para>
+
+<para
+>За документацију: © 2003, <personname
+><firstname
+>Бред</firstname
+> <surname
+>Хардс</surname
+></personname
+> &Brad.Hards.mail;; © 2007, <personname
+><firstname
+>Урс</firstname
+> <surname
+>Волфер</surname
+></personname
+> <email
+>uwolfer @ kde.org</email
+>. </para>
+
+<para
+>Превео Драган Пантелић <email
+>falcon-10@gmx.de</email
+>.</para
+> 
+&underFDL; &underGPL; </chapter>
+
+&documentation.index;
+</book>
+
+<!--
+Local Variables:
+mode: xml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+
+vim:tabstop=2:shiftwidth=2:expandtab 
+-->

@@ -1,0 +1,2062 @@
+# Irish translation of krdc
+# Copyright (C) 2009 This_file_is_part_of_KDE
+# This file is distributed under the same license as the krdc package.
+# Kevin Scannell <kscanne@gmail.com>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdenetwork/krdc.po\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-05 00:44+0000\n"
+"PO-Revision-Date: 2004-12-03 14:52-0500\n"
+"Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
+"Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
+"Language: ga\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=5; plural=n==1 ? 0 : n==2 ? 1 : n<7 ? 2 : n < 11 ? "
+"3 : 4\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Séamus Ó Ciardhuáin,Kevin Scannell"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "seoc@iolfree.ie,kscanne@gmail.com"
+
+#: bookmarkmanager.cpp:40
+#, kde-format
+msgid "History"
+msgstr "Stair"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RememberSessions)
+#: config/general.ui:17
+#, kde-format
+msgid "Remember open sessions for next startup"
+msgstr "Meabhraigh seisiúin oscailte le haghaidh an chéad tosaithe eile"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RememberHistory)
+#: config/general.ui:24
+#, kde-format
+msgid "Remember connection history"
+msgstr "Meabhraigh an stair cheangail"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_WalletSupport)
+#: config/general.ui:31
+#, kde-format
+msgid "Remember passwords (KWallet)"
+msgstr "Meabhraigh focail fhaire (KWallet)"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SystemTrayIcon)
+#: config/general.ui:38
+#, kde-format
+msgid "Enable system tray icon"
+msgstr "Cumasaigh deilbhín i dtráidire an chórais"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowStatusBar)
+#: config/general.ui:45
+#, kde-format
+msgid "Show status bar"
+msgstr "Taispeáin an barra stádais"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_KeepAspectRatio)
+#: config/general.ui:52
+#, kde-format
+msgid "Keep aspect ratio when scaling"
+msgstr "Caomhnaigh an cóimheas treoíochta le linn scálaithe"
+
+#. i18n: ectx: property (text), widget (QLabel, backgroundLabel)
+#: config/general.ui:61
+#, kde-format
+msgid "Background color of empty place:"
+msgstr "Dath an chúlra d'áit fholamh:"
+
+#. i18n: ectx: property (title), widget (QGroupBox, connectionGroupBox)
+#: config/general.ui:93
+#, kde-format
+msgid "When Connecting"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowPreferencesForNewConnections)
+#: config/general.ui:99
+#, kde-format
+msgid "Show the preferences dialog for new connections"
+msgstr "Taispeáin dialóg na sainroghanna nuair a bhunaítear ceangal nua"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_ResizeOnConnect)
+#: config/general.ui:106
+#, kde-format
+msgid ""
+"This option will resize the window to fit the connection size.  If it is too "
+"big, it will maximize the window."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ResizeOnConnect)
+#: config/general.ui:109
+#, kde-format
+msgid "Resize to fit"
+msgstr "Oiriúnaigh an mhéid"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_FullscreenOnConnect)
+#: config/general.ui:116
+#, kde-format
+msgid ""
+"This option switches to fullscreen only if the connection resolution is the "
+"same as the current screen resolution"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_FullscreenOnConnect)
+#: config/general.ui:119
+#, kde-format
+msgid "Switch to Fullscreen if appropriate"
+msgstr "Athraigh go mód lánscáileáin más oiriúnach"
+
+#. i18n: ectx: property (text), widget (QLabel, defaultProtocolLabel)
+#: config/general.ui:128
+#, kde-format
+msgid "Default protocol:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLineEdit, kcfg_DefaultProtocol)
+#: config/general.ui:135
+#, kde-format
+msgid "vnc"
+msgstr ""
+
+#. i18n: ectx: property (title), widget (QGroupBox, tabGroupBox)
+#: config/general.ui:147
+#, kde-format
+msgid "Tab Settings"
+msgstr "Socruithe Cluaisíní"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowTabBar)
+#: config/general.ui:153
+#, kde-format
+msgid "Always show tab bar"
+msgstr "Taispeáin barra na gcluaisíní i gcónaí"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabCloseButton)
+#: config/general.ui:160
+#, kde-format
+msgid "Show close button on tabs"
+msgstr "Taispeáin cnaipe dúnta ar chluaisíní"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabMiddleClick)
+#: config/general.ui:167
+#, kde-format
+msgid "Middle-click on a tab closes it"
+msgstr "Lárchliceáil ar chluaisín chun é a dhúnadh"
+
+#. i18n: ectx: property (text), widget (QLabel, tabOrientationLabel)
+#: config/general.ui:176
+#, kde-format
+msgid "Tab position:"
+msgstr "Ionad an chluaisín:"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TabPosition)
+#: config/general.ui:184
+#, kde-format
+msgid "Top"
+msgstr "Barr"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TabPosition)
+#: config/general.ui:189
+#, kde-format
+msgid "Bottom"
+msgstr "Bun"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TabPosition)
+#: config/general.ui:194
+#, kde-format
+msgid "Left"
+msgstr "Ar Chlé"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TabPosition)
+#: config/general.ui:199
+#, kde-format
+msgid "Right"
+msgstr "Ar Dheis"
+
+#: config/hostpreferenceslist.cpp:30
+#, kde-format
+msgid "Configure..."
+msgstr "Cumraigh..."
+
+#: config/hostpreferenceslist.cpp:36
+#, kde-format
+msgid "Remove"
+msgstr "Bain"
+
+#: config/hostpreferenceslist.cpp:100 mainwindow.cpp:655
+#, kde-format
+msgid "The selected host cannot be handled."
+msgstr "Ní féidir an t-óstríomhaire roghnaithe a láimhseáil."
+
+#: config/hostpreferenceslist.cpp:101 mainwindow.cpp:277 mainwindow.cpp:656
+#, kde-format
+msgid "Unusable URL"
+msgstr "URL do-úsáidte"
+
+#: config/preferencesdialog.cpp:24
+#, kde-format
+msgctxt "General Config"
+msgid "General"
+msgstr "Ginearálta"
+
+#: config/preferencesdialog.cpp:24
+#, kde-format
+msgid "General Configuration"
+msgstr "Cumraíocht Ghinearálta"
+
+#: config/preferencesdialog.cpp:29
+#, kde-format
+msgid "Hosts"
+msgstr "Óstríomhairí"
+
+#: config/preferencesdialog.cpp:29 core/hostpreferences.cpp:176
+#: core/hostpreferences.cpp:180
+#, kde-format
+msgid "Host Configuration"
+msgstr "Cumraíocht an Óstríomhaire"
+
+#: config/preferencesdialog.cpp:34 config/preferencesdialog.cpp:35
+#, kde-format
+msgid "Plugins"
+msgstr "Breiseáin"
+
+#: config/preferencesdialog.cpp:35
+#, kde-format
+msgid "Plugin Configuration"
+msgstr "Cumraíocht an Bhreiseáin"
+
+#: connectiondelegate.cpp:33
+#, kde-format
+msgid "Less than a minute ago"
+msgstr "Níos lú ná nóiméad ó shin"
+
+#: connectiondelegate.cpp:34
+#, kde-format
+msgid "A minute ago"
+msgid_plural "%1 minutes ago"
+msgstr[0] "Nóiméad ó shin"
+msgstr[1] "%1 nóiméad ó shin"
+msgstr[2] "%1 nóiméad ó shin"
+msgstr[3] "%1 nóiméad ó shin"
+msgstr[4] "%1 nóiméad ó shin"
+
+#: connectiondelegate.cpp:36
+#, kde-format
+msgid "An hour ago"
+msgid_plural "%1 hours ago"
+msgstr[0] "Uair ó shin"
+msgstr[1] "%1 uair ó shin"
+msgstr[2] "%1 huaire ó shin"
+msgstr[3] "%1 n-uaire ó shin"
+msgstr[4] "%1 uair ó shin"
+
+#: connectiondelegate.cpp:40
+#, kde-format
+msgid "Yesterday"
+msgid_plural "%1 days ago"
+msgstr[0] "Inné"
+msgstr[1] "%1 lá ó shin"
+msgstr[2] "%1 lá ó shin"
+msgstr[3] "%1 lá ó shin"
+msgstr[4] "%1 lá ó shin"
+
+#: connectiondelegate.cpp:42
+#, kde-format
+msgid "Over a month ago"
+msgid_plural "%1 months ago"
+msgstr[0] "Níos mó ná mí ó shin"
+msgstr[1] "%1 mhí ó shin"
+msgstr[2] "%1 mhí ó shin"
+msgstr[3] "%1 mí ó shin"
+msgstr[4] "%1 mí ó shin"
+
+#: connectiondelegate.cpp:43
+#, kde-format
+msgid "A year ago"
+msgid_plural "%1 years ago"
+msgstr[0] "Anuraidh"
+msgstr[1] "%1 bhliain ó shin"
+msgstr[2] "%1 bliana ó shin"
+msgstr[3] "%1 mbliana ó shin"
+msgstr[4] "%1 bliain ó shin"
+
+#: core/hostpreferences.cpp:183
+#, kde-format
+msgid ""
+"Note that settings might only apply when you connect next time to this host."
+msgstr ""
+"Tabhair faoi deara seans nach mbeidh na socruithe curtha i bhfeidhm go dtí "
+"an chéad uair eile a cheanglóidh tú leis an óstríomhaire seo."
+
+#: core/hostpreferences.cpp:199
+#, kde-format
+msgid "Show this dialog again for this host"
+msgstr "Taispeáin an dialóg seo arís le haghaidh an óstríomhaire seo"
+
+#: core/hostpreferences.cpp:203
+#, kde-format
+msgid "Remember password (KWallet)"
+msgstr "Meabhraigh an focal faire (KWallet)"
+
+#. i18n: ectx: label, entry (OpenSessions), group (General)
+#: core/krdc.kcfg:16
+#, kde-format
+msgid "Sessions"
+msgstr "Seisiúin"
+
+#. i18n: ectx: Menu (session)
+#: krdcui.rc:8
+#, kde-format
+msgid "&Session"
+msgstr "&Seisiún"
+
+#. i18n: ectx: ToolBar (krdc_remote_view_toolbar)
+#: krdcui.rc:22
+#, kde-format
+msgid "Remote View Toolbar"
+msgstr "Barra Amhairc Chianda"
+
+#: main.cpp:61
+#, kde-format
+msgid "KRDC"
+msgstr "KRDC"
+
+#: main.cpp:62 systemtrayicon.cpp:24
+#, kde-format
+msgid "KDE Remote Desktop Client"
+msgstr "Cliant Deisce Cianda KDE"
+
+#: main.cpp:64
+#, fuzzy, kde-format
+#| msgid ""
+#| "(c) 2007-2013, Urs Wolfer\n"
+#| "(c) 2001-2003, Tim Jansen\n"
+#| "(c) 2002-2003, Arend van Beelen jr.\n"
+#| "(c) 2000-2002, Const Kaplinsky\n"
+#| "(c) 2000, Tridia Corporation\n"
+#| "(c) 1999, AT&T Laboratories Boston\n"
+#| "(c) 1999-2003, Matthew Chapman\n"
+#| "(c) 2009, Collabora Ltd"
+msgid ""
+"(c) 2007-2016, Urs Wolfer\n"
+"(c) 2001-2003, Tim Jansen\n"
+"(c) 2002-2003, Arend van Beelen jr.\n"
+"(c) 2000-2002, Const Kaplinsky\n"
+"(c) 2000, Tridia Corporation\n"
+"(c) 1999, AT&T Laboratories Boston\n"
+"(c) 1999-2003, Matthew Chapman\n"
+"(c) 2009, Collabora Ltd"
+msgstr ""
+"© 2007-2013, Urs Wolfer\n"
+"© 2001-2003, Tim Jansen\n"
+"© 2002-2003, Arend van Beelen jr.\n"
+"© 2000-2002, Const Kaplinsky\n"
+"© 2000, Tridia Corporation\n"
+"© 1999, AT&T Laboratories Boston\n"
+"© 1999-2003, Matthew Chapman\n"
+"© 2009, Collabora Ltd"
+
+#: main.cpp:73
+#, kde-format
+msgid "Urs Wolfer"
+msgstr "Urs Wolfer"
+
+#: main.cpp:73
+#, kde-format
+msgid "Developer, Maintainer"
+msgstr "Forbróir, Cothaitheoir"
+
+#: main.cpp:74
+#, kde-format
+msgid "Tony Murray"
+msgstr "Tony Murray"
+
+#: main.cpp:74
+#, kde-format
+msgid "Developer"
+msgstr "Forbróir"
+
+#: main.cpp:75
+#, kde-format
+msgid "Tim Jansen"
+msgstr "Tim Jansen"
+
+#: main.cpp:75
+#, kde-format
+msgid "Former Developer"
+msgstr "Iarfhorbróir"
+
+#: main.cpp:76
+#, kde-format
+msgid "Arend van Beelen jr."
+msgstr "Arend van Beelen jr."
+
+#: main.cpp:76
+#, kde-format
+msgid "Initial RDP backend"
+msgstr "Buninneall RDP"
+
+#: main.cpp:77
+#, kde-format
+msgid "Brad Hards"
+msgstr "Brad Hards"
+
+#: main.cpp:77
+#, kde-format
+msgid "Google Summer of Code 2007 KRDC project mentor"
+msgstr "Meantóir an tionscadail KRDC le linn Google Summer of Code 2007"
+
+#: main.cpp:79
+#, kde-format
+msgid "LibVNCServer / LibVNCClient developers"
+msgstr "Forbróirí LibVNCServer / LibVNCClient"
+
+#: main.cpp:79
+#, kde-format
+msgid "VNC client library"
+msgstr "Leabharlann chliaint VNC"
+
+#: main.cpp:81
+#, kde-format
+msgid "Abner Silva"
+msgstr "Abner Silva"
+
+#: main.cpp:81
+#, kde-format
+msgid "Telepathy Tubes Integration"
+msgstr "Comhtháthú Tiúba Telepathy"
+
+#: main.cpp:92
+#, kde-format
+msgid ""
+"Start KRDC with the provided URL in fullscreen mode (works only with one URL)"
+msgstr ""
+"Tosaigh KRDC sa mhód lánscáileáin leis an URL sonraithe (le haon URL amháin)"
+
+#: main.cpp:93
+#, kde-format
+msgid "URLs to connect after startup"
+msgstr "URLanna ar chóir ceangal leo tar éis tosaithe"
+
+#: mainwindow.cpp:114
+#, kde-format
+msgid "KDE Remote Desktop Client started"
+msgstr "Tosaíodh an Cliant Deisce Cianda KDE"
+
+#: mainwindow.cpp:119 mainwindow.cpp:132 mainwindow.cpp:1062
+#: mainwindow.cpp:1159
+#, kde-format
+msgid "New Connection"
+msgstr "Ceangal Nua"
+
+#: mainwindow.cpp:138
+#, kde-format
+msgid "Copy Screenshot to Clipboard"
+msgstr "Cóipeáil Seat den Scáileán sa Ghearrthaisce"
+
+#: mainwindow.cpp:139
+#, kde-format
+msgid "Screenshot"
+msgstr "Seat den Scáileán"
+
+#: mainwindow.cpp:144 mainwindow.cpp:485
+#, kde-format
+msgid "Switch to Full Screen Mode"
+msgstr "Athraigh go Mód Lánscáileáin"
+
+#: mainwindow.cpp:145 mainwindow.cpp:486
+#, kde-format
+msgid "Full Screen"
+msgstr "Lánscáileán"
+
+#: mainwindow.cpp:152
+#, kde-format
+msgid "View Only"
+msgstr "Amharc Amháin"
+
+#: mainwindow.cpp:157
+#, kde-format
+msgid "Disconnect"
+msgstr "Dícheangail"
+
+#: mainwindow.cpp:165
+#, kde-format
+msgid "Show Local Cursor"
+msgstr "Taispeáin an Cúrsóir Logánta"
+
+#: mainwindow.cpp:166
+#, kde-format
+msgid "Local Cursor"
+msgstr "Cúrsóir Logánta"
+
+#: mainwindow.cpp:172
+#, kde-format
+msgid "Grab All Possible Keys"
+msgstr "Faigh gach eochair is féidir"
+
+#: mainwindow.cpp:173
+#, kde-format
+msgid "Grab Keys"
+msgstr "Faigh Eochracha"
+
+#: mainwindow.cpp:179
+#, kde-format
+msgid "Scale Remote Screen to Fit Window Size"
+msgstr "Scálaigh an scáileán cianda do mhéid na fuinneoige"
+
+#: mainwindow.cpp:180
+#, kde-format
+msgid "Scale"
+msgstr "Scála"
+
+#: mainwindow.cpp:183
+#, kde-format
+msgid "Scaling Factor"
+msgstr ""
+
+#: mainwindow.cpp:194
+#, kde-format
+msgid "Bookmarks"
+msgstr "Leabharmharcanna"
+
+#: mainwindow.cpp:253
+#, kde-format
+msgid ""
+"The entered address does not have the required form.\n"
+" Syntax: [username@]host[:port]"
+msgstr ""
+"Níl an seoladh san fhormáid cheart.\n"
+" Comhréir: [ainm@]óstríomhaire[:port]"
+
+#: mainwindow.cpp:254
+#, kde-format
+msgid "Malformed URL"
+msgstr "URL míchumtha"
+
+#: mainwindow.cpp:276
+#, kde-format
+msgid "The entered address cannot be handled."
+msgstr "Ní féidir an seoladh iontráilte a láimhseáil."
+
+#: mainwindow.cpp:408
+#, kde-format
+msgid "Connecting to %1"
+msgstr "Ag dul i dteagmháil le %1"
+
+#: mainwindow.cpp:412
+#, kde-format
+msgid "Authenticating at %1"
+msgstr "Fíordheimhniú ag %1"
+
+#: mainwindow.cpp:416
+#, kde-format
+msgid "Preparing connection to %1"
+msgstr "Ceangal le %1 á ullmhú"
+
+#: mainwindow.cpp:420
+#, kde-format
+msgid "Connected to %1"
+msgstr "Ceangailte le %1"
+
+#: mainwindow.cpp:496
+#, kde-format
+msgctxt ""
+"window title when in full screen mode (for example displayed in tasklist)"
+msgid "KDE Remote Desktop Client (Full Screen)"
+msgstr "Cliant Deisce Cianda KDE (Lánscáileán)"
+
+#: mainwindow.cpp:523
+#, kde-format
+msgid "Switch to Window Mode"
+msgstr "Athraigh go Mód Fuinneoige"
+
+#: mainwindow.cpp:524
+#, kde-format
+msgid "Window Mode"
+msgstr "Mód Fuinneoige"
+
+#: mainwindow.cpp:676
+#, kde-format
+msgid "Connect"
+msgstr "Ceangail"
+
+#: mainwindow.cpp:677
+#, kde-format
+msgid "Rename"
+msgstr "Athainmnigh"
+
+#: mainwindow.cpp:678
+#, kde-format
+msgid "Settings"
+msgstr "Socruithe"
+
+#: mainwindow.cpp:679
+#, kde-format
+msgid "Delete"
+msgstr "Scrios"
+
+#: mainwindow.cpp:682 remotedesktopsmodel.cpp:108
+#, kde-format
+msgctxt "Where each displayed link comes from"
+msgid "Bookmarks"
+msgstr "Leabharmharcanna"
+
+#: mainwindow.cpp:683 remotedesktopsmodel.cpp:110
+#, kde-format
+msgctxt "Where each displayed link comes from"
+msgid "History"
+msgstr "Stair"
+
+#: mainwindow.cpp:695
+#, kde-format
+msgid "Rename %1"
+msgstr "Athainmnigh %1"
+
+#: mainwindow.cpp:695
+#, kde-format
+msgid "Rename %1 to"
+msgstr "Athainmnigh %1 mar"
+
+#: mainwindow.cpp:703
+#, kde-format
+msgid "Are you sure you want to delete %1?"
+msgstr "An bhfuil tú cinnte gur mian leat %1 a scriosadh?"
+
+#: mainwindow.cpp:703
+#, kde-format
+msgid "Delete %1"
+msgstr "Scrios %1"
+
+#: mainwindow.cpp:725
+#, kde-format
+msgid "Add Bookmark"
+msgstr "Cuir Leabharmharc Leis"
+
+#: mainwindow.cpp:726
+#, kde-format
+msgid "Close Tab"
+msgstr "Dún Cluaisín"
+
+#: mainwindow.cpp:830
+#, kde-format
+msgid "Minimize Full Screen Window"
+msgstr "Íoslaghdaigh Fuinneog Lánscáileáin"
+
+#: mainwindow.cpp:846
+#, kde-format
+msgid "Stick Toolbar"
+msgstr "Greamaigh an Barra Uirlisí"
+
+#: mainwindow.cpp:956
+#, kde-format
+msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
+msgstr "An bhfuil tú cinnte gur mian leat an Cliant Deisce Cianda KDE a scor?"
+
+#: mainwindow.cpp:957
+#, kde-format
+msgid "Confirm Quit"
+msgstr "Deimhnigh Scor"
+
+#: mainwindow.cpp:1085
+#, kde-format
+msgid "Connect to:"
+msgstr "Ceangail le:"
+
+#: mainwindow.cpp:1089
+#, kde-format
+msgid "Type here to connect to an address and filter the list."
+msgstr "Clóscríobh anseo chun ceangal le seoladh agus an liosta a scagadh."
+
+#: mainwindow.cpp:1098
+#, kde-format
+msgid ""
+"Type an IP or DNS Name here. Clear the line to get a list of connection "
+"methods."
+msgstr ""
+"Cuir seoladh IP nó ainm DNS anseo. Glan an líne chun liosta de mhodhanna "
+"ceangail a fháil."
+
+#: mainwindow.cpp:1101
+#, kde-format
+msgid "Goto Address"
+msgstr "Téigh go Seoladh"
+
+#: mainwindow.cpp:1195
+#, kde-format
+msgid "Remote Desktops"
+msgstr "Deasca Cianda"
+
+#: mainwindow.cpp:1226
+#, kde-format
+msgid "Filter"
+msgstr "Scagaire"
+
+#: rdp/rdphostpreferences.cpp:181
+#, kde-format
+msgid "Browse to media share path"
+msgstr ""
+
+#. i18n: ectx: property (title), widget (QGroupBox, connectionGroupBox)
+#. i18n: ectx: property (title), widget (QGroupBox, vncGroupBox)
+#: rdp/rdppreferences.ui:17 vnc/vncpreferences.ui:17
+#, kde-format
+msgid "Connection"
+msgstr "Ceangal"
+
+#. i18n: ectx: property (text), widget (QLabel, resolutionLabel)
+#: rdp/rdppreferences.ui:25
+#, kde-format
+msgid "Desktop &resolution:"
+msgstr "Taifeach na &deisce:"
+
+#. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_Resolution)
+#. i18n: ectx: property (whatsThis), widget (KComboBox, resolutionComboBox)
+#: rdp/rdppreferences.ui:48 vnc/vncpreferences.ui:86
+#, kde-format
+msgid ""
+"Here you can specify the resolution of the remote desktop. This resolution "
+"determines the size of the desktop that will be presented to you."
+msgstr ""
+"Anseo is féidir leat taifeach na deisce cianda a roghnú. Socraíonn an "
+"taifeach seo méid na deisce a thaispeánfar duit."
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
+#: rdp/rdppreferences.ui:55 vnc/vncpreferences.ui:93
+#, kde-format
+msgid "Minimal (640x480)"
+msgstr "An-Bheag (640×480)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
+#: rdp/rdppreferences.ui:60 vnc/vncpreferences.ui:98
+#, kde-format
+msgid "Small (800x600)"
+msgstr "Beag (800×600)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
+#: rdp/rdppreferences.ui:65 vnc/vncpreferences.ui:103
+#, kde-format
+msgid "Normal (1024x768)"
+msgstr "Gnáthmhéid (1024×768)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
+#: rdp/rdppreferences.ui:70 vnc/vncpreferences.ui:108
+#, kde-format
+msgid "Large (1280x1024)"
+msgstr "Mór (1280×1024)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
+#: rdp/rdppreferences.ui:75 vnc/vncpreferences.ui:113
+#, kde-format
+msgid "Very Large (1600x1200)"
+msgstr "An-Mhór (1600×1200)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
+#: rdp/rdppreferences.ui:80 vnc/vncpreferences.ui:118
+#, kde-format
+msgid "Current Screen Resolution"
+msgstr "Taifeach Reatha"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
+#: rdp/rdppreferences.ui:85 vnc/vncpreferences.ui:123
+#, kde-format
+msgid "Custom Resolution (...)"
+msgstr "Taifeach Saincheaptha (...)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#: rdp/rdppreferences.ui:90
+#, kde-format
+msgid "Current KRDC Size"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, widthLabel)
+#: rdp/rdppreferences.ui:103 vnc/vncpreferences.ui:136
+#, kde-format
+msgid "&Width:"
+msgstr "&Leithead:"
+
+#. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Width)
+#. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_ScalingWidth)
+#: rdp/rdppreferences.ui:119 vnc/vncpreferences.ui:152
+#, kde-format
+msgid ""
+"This is the width of the remote desktop. You can only change this value "
+"manually if you select Custom as desktop resolution above."
+msgstr ""
+"Seo é leithead na deisce cianda. Níl cead agat an luach seo a athrú de láimh "
+"mura bhfuil 'Saincheaptha' roghnaithe agat mar thaifeach na deisce thuas."
+
+#. i18n: ectx: property (text), widget (QLabel, heightLabel)
+#: rdp/rdppreferences.ui:135 vnc/vncpreferences.ui:168
+#, kde-format
+msgid "H&eight:"
+msgstr "A&irde:"
+
+#. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Height)
+#. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_ScalingHeight)
+#: rdp/rdppreferences.ui:151 vnc/vncpreferences.ui:184
+#, kde-format
+msgid ""
+"This is the height of the remote desktop. You can only change this value "
+"manually if you select Custom as desktop resolution above."
+msgstr ""
+"Seo é airde na deisce cianda. Níl cead agat an luach seo a athrú de láimh "
+"mura bhfuil 'Saincheaptha' roghnaithe agat mar thaifeach na deisce thuas."
+
+# focal.ie
+#. i18n: ectx: property (text), widget (QLabel, colorDepthLabel)
+#: rdp/rdppreferences.ui:168
+#, kde-format
+msgid "Color &depth:"
+msgstr "&Doimhneacht datha:"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
+#: rdp/rdppreferences.ui:185
+#, kde-format
+msgid "Low Color (8 Bit)"
+msgstr "Ísealdhath (8-Giotán)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
+#: rdp/rdppreferences.ui:190
+#, kde-format
+msgid "High Color (16 Bit)"
+msgstr "Ard-Dath (16-Giotán)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
+#: rdp/rdppreferences.ui:195
+#, kde-format
+msgid "True Color (24 Bit)"
+msgstr "Fíordhathanna (24-Giotán)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
+#: rdp/rdppreferences.ui:200
+#, fuzzy, kde-format
+#| msgid "True Color (24 Bit)"
+msgid "True Color with Alpha (32 Bit)"
+msgstr "Fíordhathanna (24-Giotán)"
+
+#. i18n: ectx: property (text), widget (QLabel, layoutLabel)
+#: rdp/rdppreferences.ui:208
+#, kde-format
+msgid "&Keyboard layout:"
+msgstr "Leagan amach an &mhéarchláir:"
+
+#. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:224
+#, kde-format
+msgid ""
+"Use this to specify your keyboard layout. This layout setting is used to "
+"send the correct keyboard codes to the server."
+msgstr ""
+"Úsáid é seo chun leagan amach do mhéarchláir a roghnú. Úsáidtear an leagan "
+"amach seo chun na cóid chearta mhéarchláir a sheoladh chuig an bhfreastalaí."
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:231
+#, kde-format
+msgid "Arabic (ar)"
+msgstr "Araibis (ar)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:236
+#, kde-format
+msgid "Czech (cs)"
+msgstr "Seicis (cs)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:241
+#, kde-format
+msgid "Danish (da)"
+msgstr "Danmhairgis (da)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:246
+#, kde-format
+msgid "German (de)"
+msgstr "Gearmáinis (de)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:251
+#, kde-format
+msgid "Swiss German (de-ch)"
+msgstr "Gearmáinis Eilvéiseach (de-ch)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:256
+#, kde-format
+msgid "American Dvorak (en-dv)"
+msgstr "Dvorak Meiriceánach (en-dv)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:261
+#, kde-format
+msgid "British English (en-gb)"
+msgstr "Béarla na Sasanach (en-gb)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:266
+#, kde-format
+msgid "US English (en-us)"
+msgstr "Béarla S.A.M. (en-us)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:271
+#, kde-format
+msgid "Spanish (es)"
+msgstr "Spáinnis (es)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:276
+#, kde-format
+msgid "Estonian (et)"
+msgstr "Eastóinis (et)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:281
+#, kde-format
+msgid "Finnish (fi)"
+msgstr "Fionlainnis (fi)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:286
+#, kde-format
+msgid "Faroese (fo)"
+msgstr "Faróis (fo)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:291
+#, kde-format
+msgid "French (fr)"
+msgstr "Fraincis (fr)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:296
+#, kde-format
+msgid "Belgian (fr-be)"
+msgstr "Fraincis na Beilge (fr-be)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:301
+#, kde-format
+msgid "French Canadian (fr-ca)"
+msgstr "Fraincis Cheanadach (fr-ca)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:306
+#, kde-format
+msgid "Swiss French (fr-ch)"
+msgstr "Fraincis Eilvéiseach (fr-ch)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:311
+#, kde-format
+msgid "Hebrew (he)"
+msgstr "Eabhrais (he)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:316
+#, kde-format
+msgid "Croatian (hr)"
+msgstr "Cróitis (hr)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:321
+#, kde-format
+msgid "Hungarian (hu)"
+msgstr "Ungáiris (hu)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:326
+#, kde-format
+msgid "Icelandic (is)"
+msgstr "Íoslainnis (is)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:331
+#, kde-format
+msgid "Italian (it)"
+msgstr "Iodáilis (it)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:336
+#, kde-format
+msgid "Japanese (ja)"
+msgstr "Seapáinis (ja)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:341
+#, kde-format
+msgid "Korean (ko)"
+msgstr "Cóiréis (ko)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:346
+#, kde-format
+msgid "Lithuanian (lt)"
+msgstr "Liotuáinis (lt)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:351
+#, kde-format
+msgid "Latvian (lv)"
+msgstr "Laitvis (lv)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:356
+#, kde-format
+msgid "Macedonian (mk)"
+msgstr "Macadóinis (mk)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:361
+#, kde-format
+msgid "Dutch (nl)"
+msgstr "Ollainnis (nl)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:366
+#, kde-format
+msgid "Belgian Dutch (nl-be)"
+msgstr "Ollainnis Bheilgeach (nl-be)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:371
+#, kde-format
+msgid "Norwegian (no)"
+msgstr "Ioruais (no)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:376
+#, kde-format
+msgid "Polish (pl)"
+msgstr "Polainnis (pl)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:381
+#, kde-format
+msgid "Portuguese (pt)"
+msgstr "Portaingéilis (pt)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:386
+#, kde-format
+msgid "Brazilian (pt-br)"
+msgstr "Portaingéilis na Brasaíle (pt-br)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:391
+#, kde-format
+msgid "Russian (ru)"
+msgstr "Rúisis (ru)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:396
+#, kde-format
+msgid "Slovenian (sl)"
+msgstr "Slóivéinis (sl)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:401
+#, kde-format
+msgid "Swedish (sv)"
+msgstr "Sualainnis (sv)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:406
+#, kde-format
+msgid "Thai (th)"
+msgstr "Téalainnis (th)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:411
+#, kde-format
+msgid "Turkish (tr)"
+msgstr "Tuircis (tr)"
+
+#. i18n: ectx: property (text), widget (QLabel, soundLabel)
+#: rdp/rdppreferences.ui:421
+#, kde-format
+msgctxt "label for soundsettings in preferences dialog"
+msgid "Sound:"
+msgstr "Fuaim:"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
+#: rdp/rdppreferences.ui:442
+#, kde-format
+msgid "On This Computer"
+msgstr "Ar an Ríomhaire Seo"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
+#: rdp/rdppreferences.ui:447
+#, kde-format
+msgid "On Remote Computer"
+msgstr "Ar an Ríomhaire Cianda"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
+#: rdp/rdppreferences.ui:452
+#, kde-format
+msgid "Disable Sound"
+msgstr "Díchumasaigh Fuaim"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_SoundSystem)
+#: rdp/rdppreferences.ui:467
+#, kde-format
+msgid "ALSA"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_SoundSystem)
+#: rdp/rdppreferences.ui:472
+#, kde-format
+msgid "PulseAudio"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_SoundSystem)
+#: rdp/rdppreferences.ui:477
+#, kde-format
+msgid "None"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, performanceLabel)
+#: rdp/rdppreferences.ui:487
+#, kde-format
+msgctxt "label for performance settings in preferences dialog"
+msgid "Performance:"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Performance)
+#: rdp/rdppreferences.ui:504
+#, kde-format
+msgid "Modem"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Performance)
+#: rdp/rdppreferences.ui:509
+#, kde-format
+msgid "Broadband"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Performance)
+#: rdp/rdppreferences.ui:514
+#, kde-format
+msgid "LAN"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, remoteFXLabel)
+#: rdp/rdppreferences.ui:522
+#, kde-format
+msgid "RemoteFX:"
+msgstr "RemoteFX:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RemoteFX)
+#: rdp/rdppreferences.ui:532
+#, kde-format
+msgid "Enhanced visual experience"
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_RemoteFX)
+#: rdp/rdppreferences.ui:535
+#, kde-format
+msgid ""
+"RemoteFX covers a set of technologies that enhance visual experience of the "
+"Remote Desktop Protocol."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, shareMediaLabel)
+#: rdp/rdppreferences.ui:542
+#, kde-format
+msgid "Share Media:"
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (KLineEdit, kcfg_ShareMedia)
+#: rdp/rdppreferences.ui:560
+#, kde-format
+msgid "Share a local media directory with the remote host."
+msgstr ""
+
+#. i18n: ectx: property (title), widget (QGroupBox, expertGroupBox)
+#: rdp/rdppreferences.ui:585
+#, kde-format
+msgid "Expert Options"
+msgstr "Ardroghanna"
+
+#. i18n: ectx: property (text), widget (QLabel, consoleLabel)
+#: rdp/rdppreferences.ui:591
+#, kde-format
+msgid "Console login:"
+msgstr "Logáil isteach sa chonsól:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_Console)
+#: rdp/rdppreferences.ui:601
+#, kde-format
+msgid "Attach to Windows Server console"
+msgstr "Ceangail le consól Freastalaí Windows"
+
+#. i18n: ectx: property (text), widget (QLabel, extraOptionsLabel)
+#: rdp/rdppreferences.ui:608
+#, kde-format
+msgid "Extra options:"
+msgstr "Roghanna breise:"
+
+#. i18n: ectx: property (whatsThis), widget (KLineEdit, kcfg_ExtraOptions)
+#: rdp/rdppreferences.ui:624
+#, fuzzy, kde-format
+#| msgid "Here you can enter additional rdesktop options."
+msgid "Here you can enter additional xfreerdp (FreeRDP) options."
+msgstr "Anseo is féidir leat roghanna breise rdesktop a iontráil."
+
+#. i18n: ectx: property (title), widget (QGroupBox, loginGroupBox)
+#: rdp/rdppreferences.ui:637
+#, kde-format
+msgid "Login"
+msgstr "Logáil isteach"
+
+#. i18n: ectx: property (text), widget (QLabel, defaultUserLabel)
+#: rdp/rdppreferences.ui:645
+#, kde-format
+msgid "Default user name:"
+msgstr "Ainm úsáideora réamhshocraithe:"
+
+#. i18n: ectx: property (placeholderText), widget (KLineEdit, kcfg_DefaultRdpUserName)
+#: rdp/rdppreferences.ui:652
+#, kde-format
+msgid "No default user name"
+msgstr "Gan ainm úsáideora réamhshocraithe"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RecognizeLdapLogins)
+#: rdp/rdppreferences.ui:664
+#, kde-format
+msgid "Automatically recognize \"LDAP\"-Logins and share passwords"
+msgstr ""
+"Aithin logálacha isteach \"LDAP\" go huathoibríoch agus comhroinn focail "
+"fhaire"
+
+#: rdp/rdpview.cpp:104
+#, kde-format
+msgid "Media Folder does not Exist"
+msgstr ""
+
+#: rdp/rdpview.cpp:104
+#, kde-format
+msgid ""
+"The folder %1 does not exist.\n"
+"Please set an existing folder to share or empty the \"Share Media\" option "
+"if you do not want to share any folder."
+msgstr ""
+
+#: rdp/rdpview.cpp:113
+#, kde-format
+msgid "Enter Username"
+msgstr "Iontráil Ainm an Úsáideora"
+
+#: rdp/rdpview.cpp:114
+#, kde-format
+msgid "Please enter the username you would like to use for login."
+msgstr ""
+"Iontráil an t-ainm úsáideora ba mhaith leat a úsáid chun logáil isteach."
+
+#: rdp/rdpview.cpp:134 vnc/vncview.cpp:342
+#, kde-format
+msgid "Access to the system requires a password."
+msgstr "Tá focal faire de dhíth chun an córas a rochtain."
+
+#: rdp/rdpview.cpp:442
+#, fuzzy, kde-format
+#| msgid ""
+#| "Could not start \"rdesktop\"; make sure rdesktop is properly installed."
+msgid "Could not start \"%1\"; make sure %1 is properly installed."
+msgstr ""
+"Níorbh fhéidir \"rdesktop\" a thosú; féach an bhfuil rdesktop suiteáilte i "
+"gceart ar do chóras."
+
+#: rdp/rdpview.cpp:443 rdp/rdpview.cpp:467 rdp/rdpview.cpp:471
+#, kde-format
+msgid "RDP Failure"
+msgstr "Theip ar RDP"
+
+#: rdp/rdpview.cpp:465
+#, fuzzy, kde-format
+#| msgid ""
+#| "The version of \"rdesktop\" you are using (%1) is too old:\n"
+#| "rdesktop 1.3.2 or greater is required."
+msgid ""
+"The version of \"xfreerdp\" you are using is too old.\n"
+"xfreerdp 1.0.2 or greater is required."
+msgstr ""
+"Tá leagan róshean de \"rdesktop\" in úsáid agat (%1):\n"
+"Tá rdesktop 1.3.2 nó leagan níos nuaí de dhíth."
+
+#: rdp/rdpview.cpp:470
+#, kde-format
+msgid "Connection failed. You might have passed a wrong address or username."
+msgstr ""
+
+#: rdp/rdpview.cpp:486
+#, kde-format
+msgid "Name or service not known."
+msgstr ""
+
+#: rdp/rdpview.cpp:487 rdp/rdpview.cpp:493 rdp/rdpview.cpp:498
+#: rdp/rdpview.cpp:506
+#, kde-format
+msgid "Connection Failure"
+msgstr "Theip ar Cheangal"
+
+#: rdp/rdpview.cpp:492
+#, kde-format
+msgid "Connection attempt to host failed."
+msgstr "Theip ar cheangal leis an óstríomhaire."
+
+#: rdp/rdpview.cpp:497
+#, fuzzy, kde-format
+#| msgid "Authentication failed. Please try again."
+msgid "Authentication failure, check credentials."
+msgstr "Theip ar fhíordheimhniú. Bain triail eile as."
+
+#: rdp/rdpview.cpp:505
+#, fuzzy, kde-format
+#| msgid "Connection attempt to host failed."
+msgid ""
+"Connection attempt to host failed. Security negotiation or connection "
+"failure."
+msgstr "Theip ar cheangal leis an óstríomhaire."
+
+#: rdp/rdpviewfactory.cpp:22
+#, kde-format
+msgid "Connect to a Windows Remote Desktop (RDP)"
+msgstr "Ceangail le Deasc Chianda Windows (RDP)"
+
+#: rdp/rdpviewfactory.cpp:53
+#, kde-format
+msgid "New RDP Connection..."
+msgstr "Ceangal Nua RDP..."
+
+#: rdp/rdpviewfactory.cpp:63
+#, kde-format
+msgid ""
+"<html>Enter the address here. Port is optional.<br /><i>Example: "
+"rdpserver:3389 (host:port)</i></html>"
+msgstr ""
+"<html>Iontráil an seoladh anseo. Tá an port roghnach.<br /><i>Sampla: "
+"rdpserver:3389 (óstríomhaire:port)</i></html>"
+
+#: rdp/rdpviewfactory.cpp:70
+#, fuzzy, kde-format
+#| msgid ""
+#| "The application \"rdesktop\" cannot be found on your system; make sure it "
+#| "is properly installed if you need RDP support."
+msgid ""
+"The application \"xfreerdp\" cannot be found on your system; make sure it is "
+"properly installed if you need RDP support."
+msgstr ""
+"Ní féidir an feidhmchlár \"rdesktop\" a aimsiú ar do chóras; féach an bhfuil "
+"sé suiteáilte mar is ceart má tá tacaíocht RDP de dhíth ort."
+
+#: remotedesktopsmodel.cpp:112
+#, kde-format
+msgctxt "Where each displayed link comes from"
+msgid "Zeroconf"
+msgstr "Zeroconf"
+
+#: remotedesktopsmodel.cpp:114
+#, kde-format
+msgctxt "Where each displayed link comes from"
+msgid "None"
+msgstr ""
+
+#: remotedesktopsmodel.cpp:130
+#, kde-format
+msgctxt "Remove the selected url from the bookarks menu"
+msgid "Remove the bookmark for %1."
+msgstr ""
+
+#: remotedesktopsmodel.cpp:132
+#, kde-format
+msgctxt "Add the selected url to the bookmarks menu"
+msgid "Bookmark %1."
+msgstr ""
+
+#: remotedesktopsmodel.cpp:171
+#, kde-format
+msgctxt "Header of the connections list, title/url for remote connection"
+msgid "Remote Desktop"
+msgstr "Deasca Cianda"
+
+#: remotedesktopsmodel.cpp:173
+#, kde-format
+msgctxt ""
+"Header of the connections list, the last time this connection was initiated"
+msgid "Last Connected"
+msgstr ""
+
+#: remotedesktopsmodel.cpp:175
+#, kde-format
+msgctxt ""
+"Header of the connections list, the number of times this connection has been "
+"visited"
+msgid "Visits"
+msgstr ""
+
+#: remotedesktopsmodel.cpp:177
+#, kde-format
+msgctxt "Header of the connections list, the time when this entry was created"
+msgid "Created"
+msgstr "Cruthaithe"
+
+#: remotedesktopsmodel.cpp:179
+#, kde-format
+msgctxt "Header of the connections list, where this entry comes from"
+msgid "Source"
+msgstr "Foinse"
+
+#: vnc/vncclientthread.cpp:299
+#, fuzzy, kde-format
+#| msgid "VNC authentication failed."
+msgid "VNC authentication type is not supported."
+msgstr "Theip ar fhíordheimhniú VNC."
+
+#: vnc/vncclientthread.cpp:318
+#, kde-format
+msgid "Server not found."
+msgstr "Freastalaí gan aimsiú."
+
+#: vnc/vncclientthread.cpp:335 vnc/vncclientthread.cpp:410
+#, kde-format
+msgid "VNC authentication failed."
+msgstr "Theip ar fhíordheimhniú VNC."
+
+#: vnc/vncclientthread.cpp:340
+#, kde-format
+msgid "VNC authentication failed because of too many authentication tries."
+msgstr ""
+"Theip ar fhíordheimhniú VNC de bharr an iomarca iarrachtaí ar fhíordheimhniú."
+
+#: vnc/vncclientthread.cpp:344
+#, kde-format
+msgid "VNC server closed connection."
+msgstr "Dhún an freastalaí VNC an ceangal."
+
+#: vnc/vncclientthread.cpp:351
+#, fuzzy, kde-format
+#| msgid "Disconnect"
+msgid "Disconnected: %1."
+msgstr "Dícheangail"
+
+#: vnc/vncclientthread.cpp:557
+#, fuzzy, kde-format
+#| msgid "Connection"
+msgid "Reconnecting."
+msgstr "Ceangal"
+
+#: vnc/vncclientthread.cpp:624
+#, fuzzy, kde-format
+#| msgid "Disconnect"
+msgid "Reconnected."
+msgstr "Dícheangail"
+
+#: vnc/vncclientthread.cpp:626
+#, fuzzy, kde-format
+#| msgid "Connect"
+msgid "Connected."
+msgstr "Ceangail"
+
+#. i18n: ectx: property (text), widget (QLabel, connectionLabel)
+#: vnc/vncpreferences.ui:23
+#, fuzzy, kde-format
+#| msgid "Connection type:"
+msgid "Connection &type:"
+msgstr "Cineál an cheangail:"
+
+#. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_Quality)
+#: vnc/vncpreferences.ui:39
+#, kde-format
+msgid ""
+"Use this to specify the performance of your connection. Note that you should "
+"select the speed of the weakest link - even if you have a high speed "
+"connection, it will not help you if the remote computer uses a slow modem. "
+"Choosing a level of quality that is too high on a slow link will cause "
+"slower response times. Choosing a lower quality will increase latencies in "
+"high speed connections and results in lower image quality, especially in "
+"'Low Quality' mode."
+msgstr ""
+"Úsáid é seo chun cáilíocht do cheangail a roghnú. Tabhair faoi deara gur "
+"chóir duit luas na coda is moille a roghnú - fiú má tá ceangal ardluais "
+"agat, níl aon mhaith ann má bhaineann an ríomhaire cianda úsáid as móideim "
+"mhall. Má roghnaíonn tú leibhéal cáilíochta ró-ard le ceangal mall, cuirfidh "
+"sé moill ar an gceangal. Má roghnaíonn tú leibhéal cáilíochta ró-íseal le "
+"ceangal ardluais, méadóidh sé tréimhse folaigh agus beidh cáilíocht na n-"
+"íomhánna níos measa dá bharr sin, go háirithe sa mhód 'Cáilíocht Íseal'."
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Quality)
+#: vnc/vncpreferences.ui:43
+#, kde-format
+msgid "High Quality (LAN, direct connection)"
+msgstr "Ardcháilíocht (LAN, ceangal díreach)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Quality)
+#: vnc/vncpreferences.ui:48
+#, kde-format
+msgid "Medium Quality (DSL, Cable, fast Internet)"
+msgstr "Gnáthcháilíocht (DSL, Cábla, Idirlíon gasta)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Quality)
+#: vnc/vncpreferences.ui:53
+#, kde-format
+msgid "Low Quality (Modem, ISDN, slow Internet)"
+msgstr "Cáilíocht Íseal (Móideim, ISDN, Idirlíon mall)"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_Scaling)
+#: vnc/vncpreferences.ui:63
+#, kde-format
+msgid "Scale to Size:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, use_ssh_tunnel)
+#: vnc/vncpreferences.ui:204
+#, kde-format
+msgid "Connect via SSH tunnel"
+msgstr ""
+
+#. i18n: ectx: property (title), widget (QGroupBox, ssh_groupBox)
+#: vnc/vncpreferences.ui:211
+#, kde-format
+msgid "SSH tunnel options"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, use_loopback)
+#: vnc/vncpreferences.ui:217
+#, kde-format
+msgid "Tunnel via loopback address"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: vnc/vncpreferences.ui:224
+#, fuzzy, kde-format
+#| msgid "Port"
+msgid "Port:"
+msgstr "Port"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: vnc/vncpreferences.ui:244
+#, fuzzy, kde-format
+#| msgid "Enter Username"
+msgid "User name:"
+msgstr "Iontráil Ainm an Úsáideora"
+
+#. i18n: ectx: property (text), widget (QCheckBox, dont_copy_passwords)
+#: vnc/vncpreferences.ui:257
+#, kde-format
+msgid "Don't copy passwords from supported password managers to remote hosts"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, dont_copy_passwords)
+#: vnc/vncpreferences.ui:260
+#, kde-format
+msgid ""
+"Supported password managers (like KeePassXC) mark copied passwords with an "
+"additional MIME type \"x-kde-passwordManagerHint\" which is used for "
+"filtering."
+msgstr ""
+
+#: vnc/vncsshtunnelthread.cpp:102
+#, fuzzy, kde-format
+#| msgid "Connecting to %1"
+msgid "Error connecting to %1: %2"
+msgstr "Ag dul i dteagmháil le %1"
+
+#: vnc/vncsshtunnelthread.cpp:127
+#, fuzzy, kde-format
+#| msgid "Authenticating at %1"
+msgid "Error authenticating with password: %1"
+msgstr "Fíordheimhniú ag %1"
+
+#: vnc/vncsshtunnelthread.cpp:133 vnc/vncsshtunnelthread.cpp:151
+#: vnc/vncsshtunnelthread.cpp:158 vnc/vncsshtunnelthread.cpp:166
+#, kde-format
+msgid "Error creating tunnel socket"
+msgstr ""
+
+#: vnc/vncview.cpp:343
+#, kde-format
+msgid "Authentication failed. Please try again."
+msgstr "Theip ar fhíordheimhniú. Bain triail eile as."
+
+#: vnc/vncview.cpp:371
+#, fuzzy, kde-format
+#| msgid "Please enter the password."
+msgid "Please enter the SSH password."
+msgstr "Iontráil an focal faire, le do thoil."
+
+#: vnc/vncview.cpp:396 vnc/vncview.cpp:398
+#, kde-format
+msgid "VNC failure"
+msgstr "Theip ar VNC"
+
+#: vnc/vncview.cpp:407 vnc/vncview.cpp:409
+#, kde-format
+msgid "SSH Tunnel failure"
+msgstr ""
+
+#: vnc/vncviewfactory.cpp:47
+#, kde-format
+msgid "New VNC Connection..."
+msgstr "Ceangal Nua VNC..."
+
+#: vnc/vncviewfactory.cpp:52
+#, kde-format
+msgid "Connect to a VNC Remote Desktop"
+msgstr "Ceangail le Deasc Chianda VNC"
+
+#: vnc/vncviewfactory.cpp:57
+#, kde-format
+msgid ""
+"<html>Enter the address here.<br /><i>Example: vncserver:1 (host:port / "
+"screen)</i></html>"
+msgstr ""
+"<html>Iontráil an seoladh anseo.<br /><i>Sampla: vncserver:1 (ósta:port / "
+"scáileán)</i></html>"
+
+#~ msgid "New Konsole Connection..."
+#~ msgstr "Ceangal Nua Konsole..."
+
+#~ msgid "KRDC Konsole Connection"
+#~ msgstr "Ceangal Konsole KRDC"
+
+#~ msgid ""
+#~ "<html>Enter the address here. Port is optional.<br /><i>Example: "
+#~ "konsoleserver (host)</i></html>"
+#~ msgstr ""
+#~ "<html>Iontráil an seoladh anseo. Tá an port roghnach.<br /><i>Sampla: "
+#~ "konsoleserver (óstríomhaire)</i></html>"
+
+#~ msgid "Key Files (*.key)"
+#~ msgstr "Comhaid Eochrach (*.key)"
+
+#~ msgid "Open DSA Key File"
+#~ msgstr "Oscail Comhad Eochrach DSA"
+
+#~ msgid "Desktop &type:"
+#~ msgstr "Cineál na &deisce:"
+
+#~ msgid "Here you can specify the desktop environment of the remote desktop."
+#~ msgstr "Anseo is féidir timpeallacht na deisce cianda a roghnú."
+
+#~ msgid "KDE"
+#~ msgstr "KDE"
+
+#~ msgid "Gnome"
+#~ msgstr "Gnome"
+
+#~ msgid "CDE"
+#~ msgstr "CDE"
+
+#~ msgid "XDM"
+#~ msgstr "XDM"
+
+#~ msgctxt "label for soundsettings in preferences dialog"
+#~ msgid "Private key:"
+#~ msgstr "Eochair phríobháideach:"
+
+#~ msgid ""
+#~ "The authentication on the NX server requires a private key. By default, "
+#~ "it is the NoMachine DSA key. Use this box to choose the default key, or "
+#~ "configure it by importing from a file or editing directly the textbox. "
+#~ msgstr ""
+#~ "Tá eochair phríobháideach de dhíth chun fíordheimhniú a dhéanamh ar an "
+#~ "bhfreastalaí NX. De réir réamhshocraithe, seo é an eochair DSA NoMachine. "
+#~ "Úsáid an bosca seo chun an eochair réamhshocraithe a roghnú, nó cumraigh "
+#~ "é trí chomhad a iompórtáil nó an bosca téacs a chur in eagar go díreach. "
+
+#~ msgid "NoMachine Key"
+#~ msgstr "Eochair NoMachine"
+
+#~ msgid "Private Key Management"
+#~ msgstr "Bainisteoireacht Eochracha Príobháideacha"
+
+#~ msgid ""
+#~ "Use this textbox to edit the private key for the authentication on the NX "
+#~ "server."
+#~ msgstr ""
+#~ "Úsáid an bosca téacs seo chun an eochair phríobháideach a chur in eagar "
+#~ "le haghaidh fíordheimhnithe ar an bhfreastalaí NX."
+
+#~ msgid "Private DSA Key :"
+#~ msgstr "Eochair Phríobháideach DSA:"
+
+#~ msgid "Use this button to import the private key from a file."
+#~ msgstr ""
+#~ "Úsáid an cnaipe seo chun an eochair phríobháideach a iompórtáil ó chomhad."
+
+#~ msgid "Import ..."
+#~ msgstr "Iompórtáil..."
+
+#~ msgid "Available NX Sessions"
+#~ msgstr "Seisiúin NX Le Fáil"
+
+#~ msgid "Display"
+#~ msgstr "Taispeáint"
+
+#~ msgid "Type"
+#~ msgstr "Cineál"
+
+#~ msgid "Session ID"
+#~ msgstr "Aitheantas an tSeisiúin"
+
+#~ msgid "Colour Depth"
+#~ msgstr "Doimhneacht Datha"
+
+#~ msgid "Resolution"
+#~ msgstr "Taifeach"
+
+#~ msgid "Session Name"
+#~ msgstr "Ainm an tSeisiúin"
+
+#~ msgid "&New"
+#~ msgstr "&Nua"
+
+#~ msgid "&Resume"
+#~ msgstr "&Lean ar aghaidh"
+
+#~ msgid "The authentication key is invalid."
+#~ msgstr "Eochair neamhbhailí fhíordheimhnithe."
+
+#~ msgid "Invalid authentication key"
+#~ msgstr "Eochair neamhbhailí fhíordheimhnithe"
+
+#~ msgid "The username or password that you have entered is invalid."
+#~ msgstr ""
+#~ "Tá an t-ainm úsáideora nó an focal faire a d'iontráil tú neamhbhailí."
+
+#~ msgid "Invalid username or password"
+#~ msgstr "Ainm úsáideora nó focal faire neamhbhailí"
+
+#~ msgid "The host key verification has failed."
+#~ msgstr "Theip ar fhíorú eochair an óstríomhaire."
+
+#~ msgid "Host key verification failed"
+#~ msgstr "Theip ar fhíorú eochair an óstríomhaire"
+
+#~ msgid "An error has occurred during the connection to the NX server."
+#~ msgstr "Tharla earráid le linn ceangail leis an bhfreastalaí NX."
+
+#~ msgid "Process error"
+#~ msgstr "Earráid sa phróiseas"
+
+#~ msgid "This NX server is running at capacity."
+#~ msgstr "Tá an freastalaí NX seo ag rith chomh fada lena chumas."
+
+#~ msgid "Server at capacity"
+#~ msgstr "Freastalaí ag rith chomh fada lena chumas"
+
+#~ msgid "New NX Connection..."
+#~ msgstr "Ceangal Nua NX..."
+
+#~ msgid "Connect to a NX Remote Desktop"
+#~ msgstr "Ceangail le Deasc Chianda NX"
+
+#~ msgid ""
+#~ "<html>Enter the address here.<br /><i>Example: nxserver (host)</i></html>"
+#~ msgstr ""
+#~ "<html>Iontráil an seoladh anseo.<br /><i>Sampla: nxserver (ósta)</i></"
+#~ "html>"
+
+#~ msgid ""
+#~ "<h1>KDE Remote Desktop Client</h1><br />Enter or select the address of "
+#~ "the desktop you would like to connect to."
+#~ msgstr ""
+#~ "<h1>Cliant Deisce Cianda KDE</h1><br />Cad is mian leat a dhéanamh?<br />"
+
+#~ msgid "Invitation to view remote desktop"
+#~ msgstr "Cuireadh d'amharc ar an gciandeasc"
+
+#~ msgid "%1 wants to share his/her desktop with you"
+#~ msgstr "Tá %1 ag iarraidh a d(h)easc a chomhroinnt leat"
+
+#~ msgid "Accept"
+#~ msgstr "Glac Leis"
+
+#~ msgid "Reject"
+#~ msgstr "Diúltaigh"
+
+#~ msgid "Approver for KRDC"
+#~ msgstr "Deimhnitheoir KRDC"
+
+#~ msgid "(C) 2009, Abner Silva"
+#~ msgstr "© 2009, Abner Silva"
+
+#~ msgctxt "@info:credit"
+#~ msgid "Abner Silva"
+#~ msgstr "Abner Silva"
+
+#~ msgid "Use normal inputline for address input"
+#~ msgstr "Úsáid gnáthlíne ionchurtha chun seoladh a iontráil"
+
+#~ msgid "KDE remote desktop connection"
+#~ msgstr "Ceangal deisce cianda KDE"
+
+#~ msgid "Switch to..."
+#~ msgstr "Athraigh go..."
+
+#~ msgid "Browse Remote Desktop Services on Local Network..."
+#~ msgstr "Brabhsáil Seirbhísí Deisce Cianda ar an Líonra Logánta..."
+
+#~ msgid "Remote desktop:"
+#~ msgstr "Deasc chianda:"
+
+#~ msgctxt "Title for remote address input action"
+#~ msgid "Address"
+#~ msgstr "Seoladh"
+
+#~ msgid "You can enable the start page in the settings again."
+#~ msgstr "Is féidir leat an leathanach tosaigh a chumasú sna socruithe arís."
+
+#~ msgid "Start Page"
+#~ msgstr "Leathanach Tosaigh"
+
+#~ msgid "Browse Remote Desktop Services on Local Network"
+#~ msgstr "Brabhsáil Seirbhísí Deisce Cianda ar an Líonra Logánta"
+
+#~ msgid "Browse Local Network"
+#~ msgstr "Brabhsáil an Líonra Logánta"
+
+#~ msgid "Address Toolbar"
+#~ msgstr "Barra Uirlisí Seoltaí"
+
+#~ msgid "Show start page"
+#~ msgstr "Taispeáin leathanach tosaithe"
+
+#~ msgid "<h1>Remote Desktop Services Found on Your Local Network:</h1><br />"
+#~ msgstr ""
+#~ "<h1>Na Seirbhísí Deisce Cianda a Aimsíodh ar do Líonra Logánta:</h1><br />"
+
+#~ msgid ""
+#~ "<b>Note:</b> KRDC can only locate Remote Desktop Services that announce "
+#~ "themself using Zeroconf (also known as Bonjour)."
+#~ msgstr ""
+#~ "<b>Nóta:</b> Ní féidir le KRDC ach na Seirbhísí Deisce Cianda a "
+#~ "fhógraíonn iad féin trí Zeroconf (tugtar Bonjour air freisin) a aimsiú."
+
+#~ msgid ""
+#~ "<b>Error:</b> No active Zeroconf daemon could be detected on your "
+#~ "computer. Please start Avahi or mDNSd if you want to browse Remote "
+#~ "Desktop Services on your Local Network."
+#~ msgstr ""
+#~ "<b>Earráid:</b> Níor braitheadh aon deamhan gníomhach Zeroconf ar do "
+#~ "ríomhaire. Tosaigh Avahi nó mDNSd más mian leat Seirbhísí Deisce Cianda a "
+#~ "bhrabhsáil ar do Líonra Logánta."
+
+#~ msgid "Show tabs"
+#~ msgstr "Taispeáin cluaisíní"
+
+#~ msgid "Host Config"
+#~ msgstr "Cumraíocht an Óstríomhaire"
+
+#~ msgid "VNC"
+#~ msgstr "VNC"
+
+#~ msgid "VNC Config"
+#~ msgstr "Cumraíocht VNC"
+
+#~ msgid "RDP"
+#~ msgstr "RDP"
+
+#~ msgid "RDP Config"
+#~ msgstr "Cumraíocht RDP"
+
+#~ msgid "NX"
+#~ msgstr "NX"
+
+#~ msgid "NX Config"
+#~ msgstr "Cumraíocht NX"
+
+#~ msgid "Host"
+#~ msgstr "Óstríomhaire"
+
+#~ msgid "Description"
+#~ msgstr "Cur Síos"
+
+#~ msgid "&Help"
+#~ msgstr "Cab&hair"
+
+#~ msgid "Send current username to server"
+#~ msgstr "Seol ainm an úsáideora reatha chuig an bhfreastalaí"
+
+#~ msgid "rdesktop Failure"
+#~ msgstr "Theip ar rdesktop"
+
+#~ msgid "Log Out"
+#~ msgstr "Logáil Amach"
+
+#~ msgid "Open Special Keys Dialog..."
+#~ msgstr "Oscail Dialóg Eochracha Speisialta..."
+
+#~ msgid "Special Keys"
+#~ msgstr "Eochracha Speisialta"
+
+#~ msgid "Enter Key Combination"
+#~ msgstr "Iontráil Teaglaim Eochracha"
+
+#~ msgid "Establishing connection..."
+#~ msgstr "Ceangal á bhunú..."
+
+#~ msgid "Preparing desktop..."
+#~ msgstr "Deasc á hullmhú..."
+
+#~ msgid "Advanced"
+#~ msgstr "Casta"
+
+#~ msgid "Autohide"
+#~ msgstr "Uathfholú"
+
+#~ msgid "Autohide on/off"
+#~ msgstr "Uathfholaigh ann/as"
+
+#~ msgid "Minimize"
+#~ msgstr "Íoslaghdaigh"
+
+#~ msgid "Scale View"
+#~ msgstr "Scálaigh an tAmharc"
+
+#~ msgid "TightVNC encoding"
+#~ msgstr "Ionchódú TightVNC"
+
+#~ msgid "ZLib encoding"
+#~ msgstr "Ionchódú ZLib"
+
+#~ msgid "Start in regular window"
+#~ msgstr "Tosaigh i ngnáthfhuinneog"
+
+#~ msgid "Start VNC in scaled mode"
+#~ msgstr "Tosaigh VNC sa mhód scálaithe"
+
+#~ msgid "Show local cursor (VNC only)"
+#~ msgstr "Taispeáin an cúrsóir logánta (VNC amháin)"
+
+#~ msgid "Override VNC encoding list (e.g. 'hextile raw')"
+#~ msgstr "Sáraigh an liosta ionchóduithe VNC (m.sh. 'hextile raw')"
+
+#~ msgid "Provide the password in a file"
+#~ msgstr "Tabhair an focal faire i gcomhad"
+
+#~ msgid "The name of the host, e.g. 'localhost:1'"
+#~ msgstr "Ainm an óstríomhaire, m.sh. 'localhost:1'"
+
+#~ msgid "The password file '%1' does not exist."
+#~ msgstr "Níl comhad focal faire '%1' ann."
+
+#~ msgid "&Preferences"
+#~ msgstr "&Sainroghanna"
+
+#~ msgid "unknown"
+#~ msgstr "anaithnid"
+
+#~ msgid "Shared Desktop"
+#~ msgstr "Deasc Chomhroinnte"
+
+#~ msgid "Standalone Desktop"
+#~ msgstr "Deasc Shaorsheasaimh"
+
+#~ msgid "Browse >>"
+#~ msgstr "Brabhsáil >>"
+
+#~ msgid "Rescan"
+#~ msgstr "Athscan"
+
+#~ msgid "default"
+#~ msgstr "réamhshocraithe"
+
+#~ msgid ""
+#~ "Browsing the network is not possible. You probably did not install SLP "
+#~ "support correctly."
+#~ msgstr ""
+#~ "Ní féidir an líonra a bhrabhsáil.  Is dócha nach bhfuil tacaíocht SLP "
+#~ "suiteáilte i gceart."
+
+#~ msgid "Browsing Not Possible"
+#~ msgstr "Ní Féidir Brabhsáil"
+
+#~ msgid "Error While Scanning"
+#~ msgstr "Tharla earráid le linn scanadh"
+
+#~ msgid "Preferences"
+#~ msgstr "Sainroghanna"
+
+#~ msgid "&VNC Defaults"
+#~ msgstr "Réamhshocruithe &VNC"
+
+#~ msgid "RD&P Defaults"
+#~ msgstr "Réamhshocruithe RD&P"
+
+#~ msgid "&Remove Selected Host"
+#~ msgstr "Bain an tÓst&ríomhaire Roghnaithe"
+
+#~ msgid "Remove &All Hosts"
+#~ msgstr "Bain G&ach Óstríomhaire"
+
+#~ msgid "Removes all hosts from the list."
+#~ msgstr "Bain gach óstríomhaire ón liosta."
+
+#~ msgid "&Search:"
+#~ msgstr "&Cuardach:"
+
+#~ msgid "Enter a search term"
+#~ msgstr "Iontráil téarma cuardaigh"
+
+#~ msgid "Scop&e:"
+#~ msgstr "S&cóip:"
+
+#~ msgid "Enable this option to store your passwords with KWallet."
+#~ msgstr ""
+#~ "Cumasaigh an rogha seo chun do chuid fhocal faire a stóráil le KWallet."
+
+#~ msgid "Show this dialog &again for this host"
+#~ msgstr "Tai&speáin an dialóg seo arís le haghaidh an óstríomhaire seo"
+
+#~ msgid ""
+#~ "Show Preferences: %1, Resolution: %2x%3, Color Depth: %4, Keymap: %5, "
+#~ "KWallet: %6"
+#~ msgstr ""
+#~ "Taispeáin Sainroghanna: %1, Taifeach: %2×%3, Doimhneacht Datha: %4, "
+#~ "Eochairmhapáil: %5, KWallet: %6"
+
+#~ msgid "The connection to the host has been interrupted."
+#~ msgstr "Idirbhriseadh an ceangal leis an óstríomhaire."
+
+#~ msgid "Connection failed. The server does not accept new connections."
+#~ msgstr "Theip ar cheangal. Ní ghlacann an freastalaí le ceangail nua."
+
+#~ msgid "Unknown error."
+#~ msgstr "Earráid anaithnid."
+
+#~ msgid "Unknown Error"
+#~ msgstr "Earráid Anaithnid"
+
+#~ msgid "Medium"
+#~ msgstr "Measartha"
+
+#~ msgid "Low"
+#~ msgstr "Íseal"
+
+#~ msgid "Show Preferences: %1, Quality: %2, KWallet: %3"
+#~ msgstr "Taispeáin Sainroghanna: %1, Cáilíocht: %2, KWallet: %3"
+
+#~ msgid "Name"
+#~ msgstr "Ainm"
+
+#~ msgid "Protocol"
+#~ msgstr "Prótacal"
+
+#~ msgid "Medium (800x600)"
+#~ msgstr "Meán (800×600)"

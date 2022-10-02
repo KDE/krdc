@@ -1,0 +1,632 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY kappname "&krdc;">
+  <!ENTITY package "kdenetwork">
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Estonian  "INCLUDE"
+> <!-- ONLY If you are writing non-English 
+                                     original documentation, change 
+                                     the language here -->
+    
+  <!-- Do not define any other entities; instead, use the entities
+       from entities/general.entities and $LANG/user.entities. -->
+]>
+<!-- Based on kdoctemplate v0.9 January 10 2003 -->
+
+<book id="krdc" lang="&language;">
+
+<!-- This header contains all of the meta-information for the document such
+as Authors, publish date, the abstract, and Keywords -->
+
+<bookinfo>
+<title
+>&krdc; käsiraamat</title>
+
+<authorgroup>
+<author
+>&Brad.Hards; &Brad.Hards.mail; </author>
+<author
+><firstname
+>Urs</firstname
+> <surname
+>Wolfer</surname
+> <affiliation
+> <address
+><email
+>uwolfer @ kde.org</email
+></address>
+    </affiliation>
+</author>
+<othercredit role="translator"
+><firstname
+>Marek</firstname
+> <surname
+>Laane</surname
+> <affiliation
+><address
+><email
+>bald@starman.ee</email
+></address
+></affiliation
+><contrib
+>Tõlge eesti keelde</contrib
+></othercredit
+> 
+</authorgroup>
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>2013-06-19</date>
+<releaseinfo
+>&kde; 4.11</releaseinfo>
+
+<copyright>
+<year
+>2003, 2008</year>
+</copyright>
+
+<abstract>
+<para
+>&krdc; on klientrakendus, mis võimaldab vaadata või isegi kontrollida töölauaseanssi mõnel muul masinal, kus töötab ühilduv server. Toetatud on nii <acronym
+>VNC</acronym
+> kui ka <acronym
+>RDP</acronym
+>. </para>
+</abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>kdenetwork</keyword>
+<keyword
+>krfb</keyword>
+<keyword
+>VNC</keyword>
+<keyword
+>RFB</keyword>
+<keyword
+>krdc</keyword>
+<keyword
+>Töölaua jagamine</keyword>
+<keyword
+>Kaugjuhtimine</keyword>
+<keyword
+>Kaugabi</keyword>
+<keyword
+>Kaugtöölaud</keyword>
+<keyword
+>RDP</keyword>
+<keyword
+>Kaughaldus</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Sissejuhatus</title>
+
+<para
+>&krdc; on klientrakendus, mis võimaldab vaadata või isegi kontrollida töölauaseanssi mõnel muul masinal, kus töötab ühilduv server. </para>
+
+<para
+>Reeglina kasutatakse &krdc;-d koos &kde; <acronym
+>VNC</acronym
+> serveriga, mis kannab nimetust &krfb;, sest see sobib väga hästi kokku &krdc; pakutavate võimalustega. </para>
+
+<para
+>Kui soovid käivitada &krdc; &konsole;ist, on vajalik käsk <userinput
+><command
+>krdc</command
+></userinput
+>. </para>
+
+<para
+>Palun anna kõigist probleemidest või soovidest teada &kde; postiloendites või teata veast aadressil <ulink url="http://bugs.kde.org"
+>http://bugs.kde.org</ulink
+>. </para>
+</chapter>
+
+<chapter id="what-is-RFB">
+<title
+>Kaugekraani puhvri (Remote Frame Buffer, RFB) protokoll</title>
+
+<para
+>See peatükk kirjeldab lühidalt kaugekraani puhvri protokolli, mida kasutab&krdc; ja muud ühilduvad süsteemid. Kui sa oled selle protokolliga juba sina peal, võid peatüki vahele jätta. </para>
+
+<para
+>Kaugekraani puhvri protokolli teostav pealiskihisüsteem kannab nimetust <quote
+>virtuaalne võrguarvuti</quote
+> (Virtual Network Computer) ehk sagedamini lühendina <acronym
+>VNC</acronym
+>. </para>
+
+<para
+>Kaugekraani puhver (ehk lühendatult <acronym
+>RFB</acronym
+>) on lihtne protokoll graafilise kasutajaliidese kaugkontrolliks. See töötab ekraanipuhvri tasandil, mis enam-vähem tähendabki seda, mida arvuti ekraanil näha saab, nii et seda on võimalik rakendada kõigi akendesüsteemide juures (sealhulgas X11, &MacOS; ja &Microsoft; &Windows;). RFB rakendused on olemas paljudele platvormidele ning suurelt jaolt on nad vaba tarkvara. </para>
+
+<para
+>Kaugekraani puhvri protokollis nimetatakse rakendust, mis töötab masinas, mille taga istub kasutaja (ja millega on ühendatud kuvar, klaviatuur ning osutusseade), kliendiks. Rakendust aga, mis töötab masinas, kus asub ekraanipuhver (kus töötab aknasüstee ning rakendused, mida kasutaja eemalt juhib), nimetatakse serveriks. &krdc; on &kde; kaugekraani puhvri protokolli klient. &krfb; on &kde; kaugekraani puhvri protokolli server. </para>
+
+<para
+>Ekraanipuhvri liigutamine võrgus on päris mahukas tegevus, mistõttu RFB töötab paremini suure läbilaskevõime korral, eriti näiteks kohtvõrkudes. Siiski on võimalik &krdc; kasutamine ka üle interneti, kuid vaevalt on sel juhul põhjust oodata sama häid tulemusi. </para>
+
+</chapter>
+
+<chapter id="using-krdc">
+<title
+>&krdc; kasutamine</title>
+
+<para
+>&krdc; kasutamine on äärmiselt lihtne: selle kasutajaliides on väga selge ja üheseltmõistetav, nagu näha järgneval pildil. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>&krdc; pilt</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="krdc_mainwindow.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>&krdc; peaaken</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<sect1 id="compatible-versions"
+><title
+>&krdc; ühendumine ühilduvate serveritega</title>
+
+<para
+>&krdc; kui klient vajab korralikuks kasutamiseks ühilduvat serverit. Nendega saab ühenduda mitmel moel: </para>
+
+<itemizedlist>
+<listitem>
+<para
+>Sisestades serveri nime (või IP-aadressi) otse väljale <guilabel
+>Ühendumine</guilabel
+>.</para
+> 
+</listitem>
+<listitem>
+<para
+>Kasutades saadud kutset. Kutseid tarvitab näiteks &krfb; ning neid võib saada ka e-postiga.</para>
+</listitem>
+</itemizedlist>
+
+<para
+>Vaatame lähemalt kõiki kolme võimalust. </para>
+
+<sect2
+><title
+>Serveri nime määramine</title>
+<para
+>Kui tead serveri nime (või IP-aadressi), millega soovid ühendust võtta, võib selle sisestada otse väljale <guilabel
+>Ühendumine</guilabel
+>. </para>
+
+<para
+>Kui soovid näiteks võtta ühendust masinaga, mille nimi on megan ja kus <acronym
+>VNC</acronym
+> server töötab kuval 1 (5901), võib sisestada <userinput
+>megan:1</userinput
+> või <userinput
+>megan 5901</userinput
+> ja valida protokolliks <guilabel
+>vnc</guilabel
+>. </para>
+<para>
+<screenshot>
+<screeninfo
+>&krdc; masinanime sisestamine</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="address_input.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>&krdc; masinanime sisestamine</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Kui kasutad samal masinal <acronym
+>RDP</acronym
+> serverit, võib sisestada <userinput
+>megan</userinput
+> ja valida protokolliks <guilabel
+>rdp</guilabel
+>. <acronym
+>RDP</acronym
+> puhul ei ole vaja määrata kuva numbrit. Kui <acronym
+>RDP</acronym
+> server ei tööta vaikimisi pordis, tuleb ühendus määrata näiteks järgmiselt: <userinput
+>megan:3910</userinput
+> </para>
+<para
+>&URL; tuleb kirjutada protsente kasutava süntaksiga, st @ asemel peab seisma %40, nt. <userinput
+>username%40ad.domain.example</userinput
+> </para>
+<!--https://bugs.kde.org/show_bug.cgi?id=261076-->
+
+</sect2>
+
+<sect2
+><title
+>Kutse kasutamine</title>
+<para
+>&krfb; server võib saata kutseid ka e-postiga (ning muulgi moel, kuid e-post on vahest kõige kasulikum võimalus). Kui saad sellise kutse meiliga, piisab lihtsalt klõpsust kirjas leiduvale viidale. See käivitab &krdc;, kui see veel ei tööta, ning võtab ühendust kutses määratud serveriga. </para>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="connection"
+><title
+>Mis juhtub ühendumisel</title>
+
+<para
+>Märkus: enne ühendumist kontrolli, kas sihtarvuti (server) on ikka võrgus kättesaadav ja kui vaja, ka seda, kas selle tulemüür on korrektselt seadistatud või välja lülitatud. </para>
+
+<para
+>Mil moel sa ka ühendust ei looks, küsib &krdc; igatahes seejärel sinu seisukohta võrguühenduse kohta, nagu näha pildil: </para>
+
+<para>
+<screenshot>
+<screeninfo
+>&krdc; ühenduse kiiruse valimine</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="vnc_host_configuration.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>&krdc; ühenduse kiiruse valimine</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Kiiruse juures on <acronym
+>VNC</acronym
+> protokolli puhul kolm võimalust: </para>
+
+<itemizedlist>
+<listitem
+><para
+>Kõrge kvaliteet (LAN, otseühendus), mis on vaikeväärtus. Sa saad sellisel juhul hinnata, kuidas see sobib, enne kui valida mõni kehvem kiirus, mis küll ka võrku vähem koormab. </para
+></listitem>
+<listitem
+><para
+>Keskmine kvaliteet (DSL, kaabel, kiire internet).</para
+></listitem>
+<listitem
+><para
+>Madal kvaliteet (modem, ISDN, aeglane internet).</para
+></listitem>
+</itemizedlist>
+
+<para
+>Kui kasutad alati üht ja sama ühendust, võid eemaldada märke kastist <guilabel
+>Selle masina korral näidatakse dialoogi uuesti</guilabel
+>, misjärel edaspidi antud masina korral enam ühenduse tüübi kohta küsimusi ei esitata, seda muidugi juhul, kui ei muutu selle nimi. Kui näiteks masinal on kaks nime ja sa eemaldad sellest kastist märke, siis edaspidistel ühendustel tolle masinaga ajal, mil ta kannab sama nime, dialoogi enam ei näidata, küll aga näidatakse seda siis, kui sama masin kasutab muud nime või IP aadressi. </para>
+
+<para
+>Vali kohane kiirus ja klõpsa jätkamiseks nupule <guibutton
+>OK</guibutton
+>. </para>
+
+<para
+>Ühenduse olekut näeb kaardil asuva ikooni järgi. </para>
+
+<para
+>Sõltuvalt serveri seadistustest võidakse sinu käest küsida (tegelikult peaaegu kindlasti küsitaksegi), parooli enda autentimiseks serveril. &krdc; paroolidialoog näeb välja selline. </para>
+
+<para
+>&krdc; võib salvestada parooli tulevasteks ühendusteks sama masinaga. Selleks kasutatakse KDE turvalaeka KWallet abi. Kui soovid seda, märgi ära kastike <guibutton
+>Parool jäetakse meelde (KWallet)</guibutton
+>. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>&krdc; parooli sisestamine</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="password_entry.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>&krdc; parooli sisestamine</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Pärast edukat autentimist luuakse ühendus kaugmasinaga ning võid asuda &krdc; abil kaugtöölauda uurima või ka seal tegutsema. </para>
+
+</sect1>
+
+<sect1 id="controlling-remote"
+><title
+>Kaugtöölaua ühenduse juhtimine</title>
+
+<para
+>Tavaliselt on kaugmasinaga ühendudes võimalik kasutada klaviatuuri ja hiirt sealse aknasüsteemi ja rakenduste juhtimiseks. </para>
+
+<para
+>Kaugtöölauda võib näha kas täisekraanina või aknana oma ekraanil. Nende režiimide vahel saab lülitada alltoodud ikoone kasutades. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>&krdc; täisekraanirežiimi valimine</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="view-fullscreen.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>&krdc; täisekraanirežiimi valimine</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+<screenshot>
+<screeninfo
+>&krdc; aknarežiimi valimine</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="view-restore.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>&krdc; aknarežiimi valimine</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Täisekraan on tavaliselt mõttekas, kui abistad kaugmasina kasutajat, sest nii näed kõike seda, mida temagi. Aknarežiim on kasulik siis, kui töötad nii kaug- kui kohalikul masinal, näiteks uurid dokumentatsiooni kohalikul masinal ja rakendad seejärel leitud juhiseid kaugmasinal. </para>
+
+<sect2
+><title
+>Aknarežiimi kasutamine</title>
+
+<para
+>Aknarežiimis saab ühenduse lõpetada akent sulgedes, klõpsates väljalogimisnupule. </para>
+
+</sect2>
+
+<sect2
+><title
+>Täisekraanirežiimi kasutamine</title>
+
+<para
+>Täisekraanirežiimis saab muuta tööriistariba välimust. Tööriistariba läbipaistvust saab muuta hiirerattaga. </para>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="bookmarks"
+><title
+>Järjehoidjad</title>
+
+<para
+>&krdc; pakub võimalust kasutada järjehoidjaid. Kui pead sageli ühenduma sama kaugtöölauaga, võid lisada ühenduse kirje järjehoidjate nimekirja. Seda saab teha, kui valid <menuchoice
+><guimenu
+>Järjehoidjad</guimenu
+> <guimenuitem
+>Lisa järjehoidja</guimenuitem
+></menuchoice
+>. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>&krdc; järjehoidjate menüü</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="bookmarks_menu.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>&krdc; järjehoidjate menüü</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+
+<sect2
+><title
+>Järjehoidjate ajalugu</title>
+
+<para
+>&krdc; salvestab viimati avatud kaugtöölaua ühendused. Neid spetsiaalseid järjehoidjaid näeb, kui valida <menuchoice
+><guimenu
+>Järjehoidjad</guimenu
+><guimenuitem
+>Ajalugu</guimenuitem
+></menuchoice
+>. Loomulikult võid nimekirjast järjehoidja ka kustutada, kui sa seda enam ei vaja. Vali selleks lihtsalt kirje <guibutton
+>Kustuta järjehoidja</guibutton
+>, mida näed siis, oled hiire parema nupuga klõpsanud järjehoidjale, mida soovid kustutada. </para>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="managing-configuration"
+><title
+>&krdc; seadistamine</title>
+<para
+>Valides <menuchoice
+><guimenu
+>Seadistused</guimenu
+><guimenuitem
+>KRDC seadistamine...</guimenuitem
+></menuchoice
+>, avaneb dialoog, kus saab muuta &krdc; käitumist. Ilmuv dialoog näeb välja selline: </para>
+
+<para>
+<screenshot>
+<screeninfo
+>&krdc; seadistused - üldiste seadistuste kaart</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="general_preferences.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>&krdc; seadistused - <guilabel
+>üldiste seadistuste</guilabel
+> kaart</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+<screenshot>
+<screeninfo
+>&krdc; seadistused - <guilabel
+>VNC vaikeväärtuste</guilabel
+> kaart</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="vnc_preferences.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>&krdc; seadistused - <guilabel
+>VNC vaikeväärtuste</guilabel
+> kaart</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+<screenshot>
+<screeninfo
+>&krdc; seadistused - <guilabel
+>RDP vaikeväärtuste</guilabel
+> kaart</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="rdp_preferences.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>&krdc; seadistused - <guilabel
+>RDP vaikeväärtuste</guilabel
+> kaart</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+
+</sect1>
+
+</chapter>
+
+<chapter id="faq">
+<title
+>Küsimused ja vastused</title>
+&reporting.bugs; &updating.documentation; <qandaset id="faqlist"
+> <qandaentry>
+<question>
+<para
+>Miks <acronym
+>RDP</acronym
+> toetus ei toimi?</para>
+</question>
+<answer>
+<para
+><acronym
+>RDP</acronym
+> toetus &krdc;-s sõltub programmist xfreerdp (FreeRDP). Kontrolli, kas see on ikka paigaldatud. </para>
+</answer>
+</qandaentry>
+</qandaset>
+
+</chapter>
+
+<chapter id="credits">
+
+<!-- Include credits for the programmers, documentation writers, and
+contributors here. The license for your software should then be included below
+the credits with a reference to the appropriate license file included in the K D E
+distribution. -->
+
+<title
+>Autorid ja litsents</title>
+
+<para
+>&krdc; </para>
+<para
+>&krdc; projektiga alustas Tim Jansen <email
+>tim@tjansen.de</email
+>. Google'i Summer of Code 2007 projekti raames kirjutas Urs Wolfer <email
+>uwolfer @ kde.org</email
+> &krdc; täiesti ümber. Google'ile kuulub tänu selle võimaldamise eest, samuti tuleb tänada selle projekti suurepärast mentorit: &Brad.Hards; &Brad.Hards.mail;. </para>
+
+<para
+>Dokumentatsiooni autoriõigus &copy; 2003: &Brad.Hards; &Brad.Hards.mail;Dokumentatsiooni autoriõigus &copy; 2007: Urs Wolfer <email
+>uwolfer @ kde.org</email
+> </para>
+
+<para
+>Tõlge eesti keelde: Marek Laane <email
+>bald@starman.ee</email
+></para
+> 
+&underFDL; &underGPL; </chapter>
+
+<appendix id="installation">
+<title
+>Paigaldamine</title>
+
+<sect1 id="getting-krdc">
+<title
+>&krdc; hankimine</title>
+&install.intro.documentation; </sect1>
+
+<sect1 id="compilation">
+<title
+>Kompileerimine ja paigaldamine</title>
+&install.compile.documentation; </sect1>
+
+</appendix>
+
+&documentation.index;
+</book>
+
+<!--
+Local Variables:
+mode: xml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+
+vim:tabstop=2:shiftwidth=2:expandtab 
+-->

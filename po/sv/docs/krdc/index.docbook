@@ -1,0 +1,622 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Swedish "INCLUDE"
+> <!-- ONLY If you are writing non-English 
+                                     original documentation, change 
+                                     the language here -->
+    
+  <!-- Do not define any other entities; instead, use the entities
+       from entities/general.entities and $LANG/user.entities. -->
+]>
+<!-- Based on kdoctemplate v0.9 January 10 2003 -->
+
+<book id="krdc" lang="&language;">
+
+<!-- This header contains all of the meta-information for the document such
+as Authors, publish date, the abstract, and Keywords -->
+
+<bookinfo>
+<title
+>Handbok Fjärranslutning till skrivbord</title>
+
+<authorgroup>
+<author
+>&Brad.Hards; &Brad.Hards.mail; </author>
+<author
+><firstname
+>Urs</firstname
+> <surname
+>Wolfer</surname
+> <affiliation
+> <address
+><email
+>uwolfer @ kde.org</email
+></address>
+    </affiliation>
+</author>
+<othercredit role="translator"
+><firstname
+>Stefan</firstname
+><surname
+>Asserhäll</surname
+><affiliation
+><address
+><email
+>stefan.asserhall@bredband.net</email
+></address
+></affiliation
+><contrib
+>Översättare</contrib
+></othercredit
+> 
+</authorgroup>
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>2016-07-25</date>
+<releaseinfo
+>Program 16.08</releaseinfo>
+
+<copyright>
+<year
+>2003, 2008</year>
+</copyright>
+
+<abstract>
+<para
+>Fjärranslutning till skrivbord är ett klientprogram som låter dig visa eller till och med styra skrivbordssessionen på en annan dator som kör en passande server. <acronym
+>VNC</acronym
+> och <acronym
+>RDP</acronym
+> stöds. </para>
+</abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>kdenetwork</keyword>
+<keyword
+>krfb</keyword>
+<keyword
+>VNC</keyword>
+<keyword
+>RFB</keyword>
+<keyword
+>krdc</keyword>
+<keyword
+>Dela ut skrivbord</keyword>
+<keyword
+>Fjärrkontroll</keyword>
+<keyword
+>Fjärrassistans</keyword>
+<keyword
+>Fjärrskrivbord</keyword>
+<keyword
+>RDP</keyword>
+<keyword
+>Fjärradministration</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Inledning</title>
+
+<para
+>Fjärranslutning till skrivbord är ett klientprogram som låter dig visa eller till och med styra skrivbordssessionen på en annan dator som kör en passande server. </para>
+
+<para
+>Du använder typiskt Fjärranslutning till skrivbord med &kde;:s <acronym
+>VNC</acronym
+>-server (Dela Skrivbord), eftersom den stämmer väl ihop med de speciella funktionerna i Fjärranslutning till skrivbord. </para>
+
+<para
+>Om du vill starta Fjärranslutning till skrivbord från en terminal, är kommandot <userinput
+><command
+>krdc</command
+></userinput
+>. </para>
+
+<para
+>Rapportera gärna eventuella problem eller önskemål till &kde;:s e-postlistor eller rapportera ett fel på <ulink url="https://bugs.kde.org"
+>https://bugs.kde.org</ulink
+>. </para>
+</chapter>
+
+<chapter id="what-is-RFB">
+<title
+>Protokollet Remote Frame Buffer</title>
+
+<para
+>Det här kapitlet tillhandahåller en kortfattad beskrivning av protokollet Remote Frame Buffer som används av Fjärranslutning till skrivbord och andra motsvarande system. Om du redan känner till protokollet, kan du utan problem hoppa över kapitlet. </para>
+
+<para
+>Högnivåimplementeringen av ett system som använder protokollet Remote Frame Buffer kallas virtuell nätverksdator, Virtual Network Computer, eller oftast bara <acronym
+>VNC</acronym
+>. </para>
+
+<para
+>Remote Frame Buffer (förkortat <acronym
+>RFB</acronym
+>) är ett enkelt protokoll för att fjärråtkomst av grafiska användargränssnitt. Det fungerar på rambuffernivå, som grovt sett motsvarar skärmbilden som ritas upp, vilket betyder att det kan användas för alla fönstersystem (inklusive X11, &MacOS; och &Microsoft; &Windows;). Program som använder Remote Frame Buffer finns för många datorer, och kan ofta distribueras fritt. </para>
+
+<para
+>I protokollet Remote Frame Buffer, kallas programmet som kör på datorn där användaren finns (med skärm, tangentbord och pekdon) för klienten. Programmet som kör på datorn där rambuffern finns (som kör fönstersystemet och programmen som användaren fjärrstyr) kallas för servern. Fjärranslutning till skrivbord är &kde;:s klient för protokollet Remote Frame Buffer. Dela Skrivbord är &kde;:s server för protokollet Remote Frame Buffer. </para>
+
+<para
+>Det går åt en viss mängd nätverkstrafik för att skicka en bild av rambuffern, så Remote Frame Buffer fungerar bäst via bredbandslänkar, som lokala nätverk. Det är ändå möjligt att använda Fjärranslutning till skrivbord via andra länkar, men prestanda är troligen inte så bra. </para>
+
+</chapter>
+
+<chapter id="using-krdc">
+<title
+>Använda Fjärranslutning till skrivbord</title>
+
+<para
+>Det är mycket enkelt att använda Fjärranslutning till skrivbord. Det har ett enkelt gränssnitt, som visas på skärmbilden nedan. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Här är en skärmbild av Fjärranslutning till skrivbord</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="krdc_mainwindow.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Huvudfönstret för Fjärranslutning till skrivbord</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<sect1 id="compatible-versions"
+><title
+>Ansluta Fjärranslutning till skrivbord till passande servrar</title>
+
+<para
+>Fjärranslutning till skrivbord är en klient, och den måste användas tillsammans med passande servar. Det finns olika sätt att ansluta till dessa servrar: </para>
+
+<itemizedlist>
+<listitem>
+<para
+>Genom att direkt skriva in servernamnet (eller IP-adressen) i rutan <guilabel
+>Anslut till:</guilabel
+>.</para
+> 
+</listitem>
+<listitem>
+<para
+>Genom att använda en inbjudan som du tog emot. Dela Skrivbord använder inbjudningar, och kan skicka dem med e-post.</para>
+</listitem>
+</itemizedlist>
+
+<para
+>Låt oss ta en titt på var och en av dem i tur och ordning. </para>
+
+<sect2
+><title
+>Inmatning av servernamn</title>
+<para
+>Om du känner till värddatornamn (eller IP-adress) för servern du vill ansluta till, kan du skriva in det direkt i rutan <guilabel
+>Anslut till:</guilabel
+>. </para>
+
+<para
+>Om du vill ansluta till en dator som heter megan, som kör en <acronym
+>VNC</acronym
+>-server på skärm 1 (5901), kan du skriva in <userinput
+>megan:1</userinput
+> eller <userinput
+>megan:5901</userinput
+> och välja <guilabel
+>VNC</guilabel
+> som protokoll i kombinationsrutan. </para>
+<para>
+<screenshot>
+<screeninfo
+>Skriva in ett värddatornamn i Fjärranslutning till skrivbord</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="address_input.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Skriva in ett värddatornamn i Fjärranslutning till skrivbord</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>På liknande sätt, om du använder en <acronym
+>RDP</acronym
+>-server på datorn, kan du skriva in <userinput
+>megan</userinput
+>. Välj <guilabel
+>RDP</guilabel
+> som protokoll. För <acronym
+>RDP</acronym
+> behöver inte skärmnumret anges. Om datorn kör <acronym
+>RDP</acronym
+>-servern på en annan port än standardporten, kan du ange den på följande sätt: <userinput
+>megan:3910</userinput
+>. </para>
+<para
+>Du måste skriva in en webbadress med procentkodad syntax, dvs. @ som %40, exempelvis <userinput
+>användarnamn%40www.exempel.se</userinput
+> </para>
+<!--https://bugs.kde.org/show_bug.cgi?id=261076-->
+
+</sect2>
+
+<sect2
+><title
+>Använda en inbjudan</title>
+<para
+>Inne i serverprogrammet Dela Skrivbord är det möjligt att skicka inbjudningar via e-post (och på andra sätt, även om e-post är det mest användbara). Om du tar emot den här sortens e-postinbjudan, kan du bara klicka på länken som tillhandahålls i brevet. Då startas Fjärranslutning till skrivbord, om det inte redan kör, och ansluter till servern som anges i inbjudan. </para>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="connection"
+><title
+>Vad händer när du ansluter</title>
+
+<para
+>Observera: Innan du ansluter, försäkra dig om att måldatorn (servern) är tillgänglig via nätverket och, om nödvändigt, att dess brandvägg har ställts in riktigt eller inaktiverats. </para>
+
+<para
+>Oberoende av hur du väljer servern att ansluta till, är det nästa som sker att Fjärranslutning till skrivbord frågar dig om nätverksanslutningen till servern, som visas nedan: </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Fjärranslutning till skrivbord val av anslutningshastighet</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="vnc_host_configuration.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Fjärranslutning till skrivbord val av anslutningshastighet</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Det finns tre hastighetsinställningar för <acronym
+>VNC</acronym
+>-protokollet: </para>
+
+<itemizedlist>
+<listitem
+><para
+>Hög kvalitet (LAN, direktanslutning), som är normalvärdet. Du bör utvärdera hur bra den här inställningen beter sig innan du väljer ett alternativ med lägre prestanda som använder mindre bandbredd. </para
+></listitem>
+<listitem
+><para
+>Mellankvalitet (DSL, kabel, snabb Internetanslutning)</para
+></listitem>
+<listitem
+><para
+>Låg kvalitet (Modem, ISDN, långsam Internetanslutning)</para
+></listitem>
+</itemizedlist>
+
+<para
+>Om du alltid använder samma typ av länk, kan du avmarkera kryssrutan <guilabel
+>Visa dialogrutan igen för den här värddatorn</guilabel
+>, vilket betyder att du inte blir tillfrågad om anslutningstyp igen för värddatorn, under förutsättning att du identifierar den på samma sätt. Om en värddator till exempel har två namn, och du avmarkerar kryssrutan när du ansluter med ett av namnen, blir du inte tillfrågad om du ansluter igen med det namnet, men du blir det om du använder det andra namnet, eller IP-adressen. </para>
+
+<para
+>Du väljer lämplig hastighetsinställning, och klickar på <guibutton
+>Ok</guibutton
+> för att fortsätta. </para>
+
+<para
+>Du kan se anslutningsstatus i flikens ikon. </para>
+
+<para
+>Beroende på serverinställningen, kan du (och nästan helt säkert behöver du) ange ett lösenord för att ge din behörighet till servern. Fjärranslutning till skrivbord visar en lösenordsdialogruta, som liknar den som visas nedan. </para>
+
+<para
+>Fjärranslutning till skrivbord har möjlighet att spara lösenordet för framtida anslutningar till samma värddator. Plånboken används för att göra det. Du måste markera kryssrutan <guibutton
+>Kom ihåg lösenord (i plånboken)</guibutton
+> om du vill använda funktionen. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Fjärranslutning till skrivbord inmatning av lösenord</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="password_entry.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Fjärranslutning till skrivbord inmatning av lösenord</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Efter behörighetskontroll, ansluts du till fjärrservern, och kan börja använda Fjärranslutning till skrivbord för att observera eller styra fjärrskrivbordet. </para>
+
+</sect1>
+
+<sect1 id="controlling-remote"
+><title
+>Hantera anslutningen till fjärrskrivbordet</title>
+
+<para
+>När du har anslutit till fjärrservern, använder du normalt tangentbord och mus för att styra fönstersystemet och programmen på den andra datorn. </para>
+
+<para
+>Du kan visa fjärrskrivbordet antingen i fullskärmsläge eller som ett fönster på det lokala skrivbordet. Du kan byta mellan dessa lägen med ikonerna som visas nedan. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Fjärranslutning till skrivbord val av fullskärmsläge</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="view-fullscreen.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Fjärranslutning till skrivbord val av fullskärmsläge</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+<screenshot>
+<screeninfo
+>Fjärranslutning till skrivbord val av fönsterläge</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="view-restore.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Fjärranslutning till skrivbord val av fönsterläge</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Fullskärmsläge är normalt bättre när du hjälper en fjärranvändare, eftersom du kan se allt som de kan se. Fönsterläge är mest användbart när du både arbetar på den andra datorn och lokalt, kanske medan du tittar i någon lokal dokumentation och därefter använder instruktionerna på den andra datorn. </para>
+
+<sect2
+><title
+>Använda fönsterläge</title>
+
+<para
+>I fönsterläge kan du avsluta anslutningen genom att stänga fönstret, genom att klicka på utloggningsknappen. </para>
+
+</sect2>
+
+<sect2
+><title
+>Använda fullskärmsläge</title>
+
+<para
+>Du kan ändra verktygsradens utseende i fullskärmsläge. Verktygsradens genomskinlighet kan ändras med mushjulet. </para>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="bookmarks"
+><title
+>Bokmärken</title>
+
+<para
+>Fjärranslutning till skrivbord har möjlighet att hantera bokmärken. Om du ofta behöver ansluta till samma fjärrskrivbord kan du lägga till en post för anslutningen i bokmärkeslistan. Du kan göra det genom att klicka på <menuchoice
+><guimenu
+>Bokmärken</guimenu
+><guimenuitem
+>Lägg till bokmärke</guimenuitem
+></menuchoice
+>. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Fjärranslutning till skrivbord bokmärkesmeny</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="bookmarks_menu.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Fjärranslutning till skrivbord bokmärkesmeny</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+
+<sect2
+><title
+>Historikbokmärken</title>
+
+<para
+>Fjärranslutning till skrivbord sparar de senast använda skrivbordsanslutningarna. Du kan komma åt dessa särskilda bokmärken med <menuchoice
+><guimenu
+>Bokmärken</guimenu
+><guimenuitem
+>Historik</guimenuitem
+></menuchoice
+>. Du kan naturligtvis också ta bort bokmärken från listan om du inte behöver dem längre. Klicka bara på <guibutton
+>Ta bort bokmärke</guibutton
+> som visas efter ett klick med höger musknapp på bokmärket som du vill ta bort. </para>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="managing-configuration"
+><title
+>Hantera inställning av Fjärranslutning till skrivbord</title>
+<para
+>Genom att använda <menuchoice
+><guimenu
+>Inställningar</guimenu
+> <guimenuitem
+>Anpassa KRDC...</guimenuitem
+></menuchoice
+>, kan du visa en dialogruta för att ändra beteende hos Fjärranslutning till skrivbord. Genom att klicka på knappen öppnas ett fönster som visas nedan: </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Inställning av Fjärranslutning till skrivbord - Fliken Allmänt</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="general_preferences.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Inställning av Fjärranslutning till skrivbord - Fliken <guilabel
+>Allmänt</guilabel
+></phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+<screenshot>
+<screeninfo
+>Inställning av Fjärranslutning till skrivbord - Fliken <guilabel
+>VNC-standard</guilabel
+></screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="vnc_preferences.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Inställning av Fjärranslutning till skrivbord - Fliken <guilabel
+>VNC-standard</guilabel
+>profiler</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+<screenshot>
+<screeninfo
+>Inställning av Fjärranslutning till skrivbord - Fliken <guilabel
+>RDP-standard</guilabel
+></screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="rdp_preferences.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Inställning av Fjärranslutning till skrivbord - Fliken <guilabel
+>RDP-standard</guilabel
+>profiler</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+
+</sect1>
+
+</chapter>
+
+<chapter id="faq">
+<title
+>Vanliga frågor</title>
+
+<!-- (OPTIONAL but recommended) This chapter should include all of the silly
+(and not-so-silly) newbie questions that fill up your mailbox. This chapter
+should be reserved for BRIEF questions and answers! If one question uses more
+than a page or so then it should probably be part of the
+"Using this Application" chapter instead. You should use links to
+cross-reference questions to the parts of your documentation that answer them.
+This is also a great place to provide pointers to other FAQ's if your users
+must do some complicated configuration on other programs in order for your
+application work. -->
+
+<qandaset id="faqlist">
+<qandaentry>
+<question>
+<para
+>Varför fungerar inte stöd för <acronym
+>RDP</acronym
+>?</para>
+</question>
+<answer>
+<para
+>Stöd för <acronym
+>RDP</acronym
+> i Fjärranslutning till skrivbord beror på xfreerdp (FreeRDP). Försäkra dig om att du har installerat det, som är ett beroende när du kör programmet. </para>
+</answer>
+</qandaentry>
+</qandaset>
+
+</chapter>
+
+<chapter id="credits">
+
+<!-- Include credits for the programmers, documentation writers, and
+contributors here. The license for your software should then be included below
+the credits with a reference to the appropriate license file included in the K D E
+distribution. -->
+
+<title
+>Tack till och licens</title>
+
+<para
+>Fjärranslutning till skrivbord </para>
+<para
+>&krdc;-projektet startades av Tim Jansen <email
+>tim@tjansen.de</email
+>. Som ett projekt under Google Summer of Code 2007 har Urs Wolfer <email
+>uwolfer @ kde.org</email
+> helt skrivit om &krdc;. Tack till Google för att ha gjort detta möjligt, och tack till projektets storartade mentor &Brad.Hards; &Brad.Hards.mail;. </para>
+
+<para
+>Dokumentation Copyright &copy; 2003 &Brad.Hards; &Brad.Hards.mail; Dokumentation Copyright &copy; 2007 Urs Wolfer <email
+>uwolfer @ kde.org</email
+> </para>
+
+<para
+>Översättning Stefan Asserhäll <email
+>stefan.asserhall@bredband.net</email
+></para
+> &underFDL; &underGPL; </chapter>
+
+&documentation.index;
+</book>
+
+<!--
+Local Variables:
+mode: xml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+
+vim:tabstop=2:shiftwidth=2:expandtab 
+-->

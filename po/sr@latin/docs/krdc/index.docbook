@@ -1,0 +1,749 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Serbian-Latin "INCLUDE"
+> <!-- ONLY If you are writing non-English 
+                                     original documentation, change 
+                                     the language here -->
+    
+  <!-- Do not define any other entities; instead, use the entities
+       from entities/general.entities and $LANG/user.entities. -->
+]>
+<!-- Based on kdoctemplate v0.9 January 10 2003 -->
+
+<book id="krdc" lang="&language;">
+
+<!-- This header contains all of the meta-information for the document such
+as Authors, publish date, the abstract, and Keywords -->
+
+<bookinfo>
+<title
+>Priručnik za <application
+>KRDC</application
+></title>
+
+<authorgroup>
+<author
+><personname
+><firstname
+>Bred</firstname
+> <surname
+>Hards</surname
+></personname
+> &Brad.Hards.mail; </author>
+<author
+><firstname
+>Urs</firstname
+> <surname
+>Volfer</surname
+> <affiliation
+> <address
+><email
+>uwolfer @ kde.org</email
+></address>
+    </affiliation>
+</author>
+<othercredit role="translator"
+><firstname
+>Dragan</firstname
+><surname
+>Pantelić</surname
+><affiliation
+><address
+><email
+>falcon-10@gmx.de</email
+></address
+></affiliation
+><contrib
+>prevod</contrib
+></othercredit
+> 
+</authorgroup>
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>25. 7. 2016.</date>
+<releaseinfo
+>Programi KDE‑a 16.08</releaseinfo>
+
+<copyright>
+<year
+>2003, 2008</year>
+</copyright>
+
+<abstract>
+<para
+><application
+>KRDC</application
+> je klijentski program kojim možete da gledate, pa čak i upravljate sesijom površi na drugom računaru koji izvršava saglasan server. Podržani su VNC i RDP. </para>
+</abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>kdenetwork</keyword>
+<keyword
+>KRFB</keyword>
+<keyword
+>VNC</keyword>
+<keyword
+>RFB</keyword>
+<keyword
+>KRDC</keyword>
+<keyword
+>deljenje površi</keyword>
+<keyword
+>udaljeno upravljanje</keyword>
+<keyword
+>udaljena pomoć</keyword>
+<keyword
+>udaljena površ</keyword>
+<keyword
+>RDP</keyword>
+<keyword
+>udaljena administracija</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Uvod</title>
+
+<para
+><application
+>KRDC</application
+> je klijentski program kojim možete da gledate, pa čak i upravljate sesijom površi na drugom računaru koji izvršava saglasan server. </para>
+
+<para
+><application
+>KRDC</application
+> ćete obično koristiti u paru sa KDE‑ovim VNC serverom <application
+>KRFB‑om</application
+>, pošto temeljno podržava specijalne mogućnosti <application
+>KRDC‑a</application
+>. </para>
+
+<para
+>Ako želite da pokrenete <application
+>KRDC</application
+> iz <application
+>Konsole</application
+>, naredba glasi <userinput
+><command
+>krdc</command
+></userinput
+>. </para>
+
+<para
+>Bilo kakve probleme ili zahteve za mogućnostima prijavite na KDE‑ove poštanske liste, ili podnesite izveštaj o grešci na <ulink url="http://bugs.kde.org"
+>http://bugs.kde.org</ulink
+>. </para>
+</chapter>
+
+<chapter id="what-is-RFB">
+<title
+>Protokol udaljenog kadrobafera</title>
+
+<para
+>Ovo poglavlje daje kratak opis protokola udaljenog kadrobafera, koji koriste <application
+>KRDC</application
+> i drugi saglasni sistemi. Ako vam je udaljeni kadrobafer već poznat, slobodno možete preskočiti ovo poglavlje. </para>
+
+<para
+>Izvedba visokog nivoa sistema koji koristi protokol udaljenog kadrobafera naziva se „virtuelnim mrežnim računarom“, češće samo akronimom VNC. </para>
+
+<para
+>Udaljeni kadrobafer (skraćeno RFB) jednostavan je protokol za udaljeni pristup grafičkim korisničkim sučeljima. Radi na nivou kadrobafera, koji u grubim crtama odgovara renderovanoj slici na ekranu, što znači da se može primeniti na sve prozorske sisteme (uključujući X11, MacOS i Windows). Programi za udaljeni kadrobafer postoje za mnoge platforme i često se mogu besplatno distribuirati. </para>
+
+<para
+>U protokolu udaljenog kadrobafera, program koji se izvršava na računaru za kojim sedi korisnik (računar koji daje ekran, tastaturu i pokazivač) zove se klijent. Program koji se izvršava na računaru gde se nalazi kadrobafer (računar koji izvršava prozorski sistem i programe kojima korisnik daljinski upravlja) zove se server. <application
+>KRDC</application
+> je KDE‑ov klijent, a <application
+>KRFB</application
+> KDE‑ov server za protokol udaljenog kadrobafera. </para>
+
+<para
+>Za slanje slike iz kadrobafera neophodno je prilično mrežnog saobraćaja, te protokol udaljenog kadrobafera najbolje radi preko veza visoke propusnosti, poput lokalne mreže. Moguće je koristiti <application
+>KRDC</application
+> i preko drugih veza, ali je malo verovatno da će učinak biti jednako dobar. </para>
+
+</chapter>
+
+<chapter id="using-krdc">
+<title
+>Korišćenje <application
+>KRDC‑a</application
+></title>
+
+<para
+><application
+>KRDC</application
+> je vrlo lak za upotrebu — ima jednostavno sučelje, prikazano na narednom snimku ekrana. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Snimak ekrana <application
+>KRDC‑a</application
+>.</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="krdc_mainwindow.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Glavni prozor <application
+>KRDC‑a</application
+>.</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<sect1 id="compatible-versions"
+><title
+>Povezivanje <application
+>KRDC‑a</application
+> sa saglasnim serverima</title>
+
+<para
+><application
+>KRDC</application
+> je klijent, i treba da se koristi sa saglasnim serverima. Postoji više načina da se poveže sa njima: </para>
+
+<itemizedlist>
+<listitem>
+<para
+>Direktnim upisivanjem imena servera (ili IP adrese) u polje <guilabel
+>Poveži se sa:</guilabel
+>.</para
+> 
+</listitem>
+<listitem>
+<para
+>Odgovorom na pozivnicu koju ste dobili. <application
+>KRFB</application
+> koristi pozivnice i može da ih šalje e‑poštom.</para>
+</listitem>
+</itemizedlist>
+
+<para
+>Pogledajmo redom oba ova načina. </para>
+
+<sect2
+><title
+>Unos imena servera</title>
+<para
+>Ako znate ime domaćina (ili IP adresu) servera na koji želite da se povežete, možete ga direktno uneti u polje <guilabel
+>Poveži se sa:</guilabel
+>. </para>
+
+<para
+>Ako želite da se povežete s računarom po imenu <literal
+>kolubara</literal
+>, na kojem radi VNC server na ekranu 1 (5901), u polje <guilabel
+>Adresa:</guilabel
+> unesite <userinput
+>kolubara:1</userinput
+> ili <userinput
+>kolubara:5901</userinput
+> i sa padajućeg spiska izaberite VNC kao protokol. </para>
+<para>
+<screenshot>
+<screeninfo
+>Unošenje imena domaćina u <application
+>KRDC‑u</application
+>.</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="address_input.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Unošenje imena domaćina u <application
+>KRDC‑u</application
+>.</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Slično, ako udaljeni računar izvršava RDP server, možete uneti <userinput
+>kolubara</userinput
+> i izabrati RDP kao protokol (RDP ne traži broj ekrana). Ako se RDP server ne izvršava na podrazumevanom portu, možete ga zadati ovako: <userinput
+>kolubara:3910</userinput
+> </para>
+<para
+>URL‑ovi moraju da se unose procentno kodirani, na primer @ kao %40 u <userinput
+>korisnik%40neki.domen.primer</userinput
+>. </para>
+<!--https://bugs.kde.org/show_bug.cgi?id=261076-->
+
+</sect2>
+
+<sect2
+><title
+>Korišćenje pozivnice</title>
+<para
+>Iz <application
+>KRFB‑a</application
+>, kao serverskog programa, moguće je slati pozivnice e‑poštom (i drugačije, mada je e‑pošta najzgodnija). Ako dobijete ovakvu pozivnicu e‑poštom, možete prosto kliknuti na vezu datu u poruci. Tada će se pokrenuti <application
+>KRDC</application
+> (ako se već ne izvršava) i povezati sa serverom navedenim u pozivnici. </para>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="connection"
+><title
+>Šta se događa tokom povezivanja</title>
+
+<para
+>Pre povezivanja, uverite se da je ciljni računar (server) dostupan na mreži i, ako treba, da je zaštitni zid pravilno podešen ili isključen. </para>
+
+<para
+>Kako god da ste odabrali server za povezivanje, prvo sledeće što će vas <application
+>KRDC</application
+> pitati jeste o mrežnoj vezi sa serverom, kao što je prikazano ispod: </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Izbor brzine veze u <application
+>KRDC‑u</application
+>.</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="vnc_host_configuration.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Izbor brzine veze u <application
+>KRDC‑u</application
+>.</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Protokol VNC daje tri postavke brzine: </para>
+
+<itemizedlist>
+<listitem
+><para
+><guilabel
+>visok kvalitet (LAN, direktna veza)</guilabel
+>: podrazumevana postavka. Trebalo bi da ocenite koliko dobro radi pre nego što izaberete opciju manjih performansi, koja zahteva manju propusnost. </para
+></listitem>
+<listitem
+><para
+><guilabel
+>srednji kvalitet (DSL, kabl, brzi internet)</guilabel
+></para
+></listitem>
+<listitem
+><para
+><guilabel
+>nizak kvalitet (modem, ISDN, spori internet)</guilabel
+></para
+></listitem>
+</itemizedlist>
+
+<para
+>Ako uvek koristite isti tip veze, možete isprazniti kućicu <guilabel
+>Prikaži ovaj dijalog ponovo za ovaj domaćin</guilabel
+>, kada više nećete biti pitani za tip veze s ovim domaćinom. Ovo važi pod uslovom da se domaćin identifikujete na isti način. Na primer, ako domaćin ima dva imena, a kućicu ispraznite pošto se povežete preko jednog od njih, nećete biti pitani pri narednim povezivanjima pod tim imenom, ali hoćete pri povezivanju pod drugim imenom ili po IP adresi. </para>
+
+<para
+>Izaberite odgovarajuću postavku brzine i kliknite na <guibutton
+>U redu</guibutton
+> da nastavite. </para>
+
+<para
+>Stanje veze možete videti preko ikonice na jezičku. </para>
+
+<para
+>U zavisnosti od postave servera, može (i skoro sigurno će) biti potrebno da obezbedite lozinku za autentifikovanje na server. <application
+>KRDC</application
+> će izdati dijalog lozinke sličan prikazanom ispod. </para>
+
+<para
+><application
+>KRDC</application
+> ume da sačuva lozinku, za buduća povezivanja na isti domaćin. Za to koristi K‑novčanik. Ako želite da koristite ovu mogućnost, popunite kućicu <guibutton
+>Zapamti lozinku (K‑novčanik)</guibutton
+>. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Unošenje lozinke u <application
+>KRDC‑u</application
+></screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="password_entry.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Unošenje lozinke u <application
+>KRDC‑u</application
+></phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Nakon autentifikacije bićete povezani sa udaljenim serverom, i možete početi s korišćenjem <application
+>KRDC‑a</application
+> za nadgledanje ili upravljanje udaljenom površi. </para>
+
+</sect1>
+
+<sect1 id="controlling-remote"
+><title
+>Upravljanje vezom sa udaljenom površi</title>
+
+<para
+>Pošto ste se povezali na udaljeni server, normalno biste koristili tastaturu i miš za upravljanje prozorskim sistemom i programima na tom računaru. </para>
+
+<para
+>Udaljenu površ možete posmatrati preko celog ekrana, ili kao prozor na lokalnoj površi. Možete prebacivati između ovih režima pomoću ikonica prikazanih ispod. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Izbor režima celog ekrana u <application
+>KRDC‑u</application
+></screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="view-fullscreen.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Izbor režima celog ekrana u <application
+>KRDC‑u</application
+></phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+<screenshot>
+<screeninfo
+>Izbor prozorskog režima u <application
+>KRDC‑u</application
+></screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="view-restore.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Izbor prozorskog režima u <application
+>KRDC‑u</application
+></phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Režim celog ekrana obično je bolji kada pomažete udaljenim korisnicima, jer možete videti sve što oni vide. Prozorski režim je najkorisniji kad radite i udaljeno i lokalno, na primer, čitajući lokalnu dokumentaciju i uputstva iz nje primenjujući na udaljenom računaru. </para>
+
+<sect2
+><title
+>Korišćenje prozorskog režima</title>
+
+<para
+>U prozorskom režimu, vezu možete okončati zatvaranjem prozora, klikom na dugme za odjavljivanje. </para>
+
+</sect2>
+
+<sect2
+><title
+>Korišćenje režima celog ekrana</title>
+
+<para
+>U režimu celog ekrana možete menjati izgled trake alatki. Prozirnost trake alatki može se izmeniti točkićem miša. </para>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="bookmarks"
+><title
+>Obeleživači</title>
+
+<para
+><application
+>KRDC</application
+> ume da upravlja obeleživačima. Ako se često povezujete na istu udaljenu površ, možete dodati unos za tu vezu u spisak obeleživača. To možete uraditi klikom na <menuchoice
+><guimenu
+>Obeleživači</guimenu
+> <guimenuitem
+>Dodaj obeleživač</guimenuitem
+></menuchoice
+>. </para>
+
+<para>
+<screenshot>
+<screeninfo
+><application
+>KRDC‑ov</application
+> meni obeleživača</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="bookmarks_menu.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+><application
+>KRDC‑ov</application
+> meni obeleživača</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+
+<sect2
+><title
+>Istorijat obeleživača</title>
+
+<para
+><application
+>KRDC</application
+> upisuje poslednje korišćene veze ka udaljenim površima. Ovim specijalnim obeleživačima možete pristupiti preko <menuchoice
+><guimenu
+>Obeleživači</guimenu
+> <guimenuitem
+>Istorijat</guimenuitem
+></menuchoice
+>. Naravno, obeleživač s ovog spiska možete i obrisati ako vam više nije potreban. Samo kliknite na dugme <guibutton
+>Obriši</guibutton
+> koje se pojavi po kliku desnim dugmetom miša na obeleživač koji želite da obrišete. </para>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="managing-configuration"
+><title
+>Upravljanje postavom <application
+>KRDC‑a</application
+></title>
+<para
+>Pomoću <menuchoice
+><guimenu
+>Postavke</guimenu
+> <guimenuitem
+>Podesi KRDC...</guimenuitem
+></menuchoice
+> možete otvoriti dijalog za podešavanje <application
+>KRDC‑a</application
+>. Izborom ove stavke menija dobićete prozor poput ovoga: </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Postavke <application
+>KRDC‑a</application
+>, jezičak <guilabel
+>Opšte</guilabel
+>.</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="general_preferences.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Postavke <application
+>KRDC‑a</application
+>, jezičak <guilabel
+>Opšte</guilabel
+>.</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+<screenshot>
+<screeninfo
+>Postavke <application
+>KRDC‑a</application
+>, jezičak <guilabel
+>Podrazumevano za VNC</guilabel
+>.</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="vnc_preferences.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Postavke <application
+>KRDC‑a</application
+>, jezičak profila pod <guilabel
+>Podrazumevano za VNC</guilabel
+>.</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+<screenshot>
+<screeninfo
+>Postavke <application
+>KRDC‑a</application
+>, jezičak <guilabel
+>Podrazumevano za RDP</guilabel
+>.</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="rdp_preferences.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Postavke <application
+>KRDC‑a</application
+>, jezičak profila pod <guilabel
+>Podrazumevano za RDP</guilabel
+>.</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+
+</sect1>
+
+</chapter>
+
+<chapter id="faq">
+<title
+>Pitanja i odgovori</title>
+
+<!-- (OPTIONAL but recommended) This chapter should include all of the silly
+(and not-so-silly) newbie questions that fill up your mailbox. This chapter
+should be reserved for BRIEF questions and answers! If one question uses more
+than a page or so then it should probably be part of the
+"Using this Application" chapter instead. You should use links to
+cross-reference questions to the parts of your documentation that answer them.
+This is also a great place to provide pointers to other FAQ's if your users
+must do some complicated configuration on other programs in order for your
+application work. -->
+
+<qandaset id="faqlist">
+<qandaentry>
+<question>
+<para
+>Zašto ne radi podrška za RDP?</para>
+</question>
+<answer>
+<para
+>Podrška za RDP u <application
+>KRDC‑u</application
+> zavisi od FreeRDP‑a (<command
+>xfreerdp</command
+>). Proverite da li je ova zavisnost instalirana. </para>
+</answer>
+</qandaentry>
+</qandaset>
+
+</chapter>
+
+<chapter id="credits">
+
+<!-- Include credits for the programmers, documentation writers, and
+contributors here. The license for your software should then be included below
+the credits with a reference to the appropriate license file included in the K D E
+distribution. -->
+
+<title
+>Zasluge i licenca</title>
+
+<para
+><application
+>KRDC</application
+> </para>
+<para
+>Projekat <application
+>KRDC</application
+> pokrenuo je <personname
+><firstname
+>Tima</firstname
+> <surname
+>Jansena</surname
+></personname
+> <email
+>tim@tjansen.de</email
+>. Tokom Googleovog „Leta kôda 2007“, <personname
+><firstname
+>Urs</firstname
+> <surname
+>Volfer</surname
+></personname
+> <email
+>uwolfer @ kde.org</email
+> <application
+>KRDC</application
+> je iznova napisao <application
+>KRDC</application
+>. Hvala Googleu što je ovo omogućio, i sjajnom mentoru projekta <personname
+><firstname
+>Bredu</firstname
+> <surname
+>Hardsu</surname
+></personname
+> &Brad.Hards.mail;. </para>
+
+<para
+>Za dokumentaciju: © 2003, <personname
+><firstname
+>Bred</firstname
+> <surname
+>Hards</surname
+></personname
+> &Brad.Hards.mail;; © 2007, <personname
+><firstname
+>Urs</firstname
+> <surname
+>Volfer</surname
+></personname
+> <email
+>uwolfer @ kde.org</email
+>. </para>
+
+<para
+>Preveo Dragan Pantelić <email
+>falcon-10@gmx.de</email
+>.</para
+> 
+&underFDL; &underGPL; </chapter>
+
+&documentation.index;
+</book>
+
+<!--
+Local Variables:
+mode: xml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+
+vim:tabstop=2:shiftwidth=2:expandtab 
+-->

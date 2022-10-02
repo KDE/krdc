@@ -1,0 +1,638 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Spanish "INCLUDE"
+> <!-- ONLY If you are writing non-English 
+                                     original documentation, change 
+                                     the language here -->
+    
+  <!-- Do not define any other entities; instead, use the entities
+       from entities/general.entities and $LANG/user.entities. -->
+]>
+<!-- Based on kdoctemplate v0.9 January 10 2003 -->
+
+<book id="krdc" lang="&language;">
+
+<!-- This header contains all of the meta-information for the document such
+as Authors, publish date, the abstract, and Keywords -->
+
+<bookinfo>
+<title
+>El manual de &krdc;</title>
+
+<authorgroup>
+<author
+>&Brad.Hards; &Brad.Hards.mail; </author>
+<author
+><firstname
+>Urs</firstname
+> <surname
+>Wolfer</surname
+> <affiliation
+> <address
+><email
+>uwolfer @ kde.org</email
+></address>
+    </affiliation>
+</author>
+<othercredit role="translator"
+><firstname
+>Rocío</firstname
+><surname
+>Gallego</surname
+><affiliation
+><address
+><email
+>traducciones@rociogallego.com</email
+></address
+></affiliation
+><contrib
+>Traductor</contrib
+></othercredit
+><othercredit role="translator"
+><firstname
+>Matías</firstname
+><surname
+>Costa</surname
+><affiliation
+><address
+><email
+>mcc3@alu.um.es</email
+></address
+></affiliation
+><contrib
+></contrib
+></othercredit
+> 
+</authorgroup>
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>2016-07-25</date>
+<releaseinfo
+>Aplicaciones 16.08</releaseinfo>
+
+<copyright>
+<year
+>2003, 2008</year>
+</copyright>
+
+<abstract>
+<para
+>&krdc; es una aplicación cliente que le permite ver o incluso controlar la sesión de escritorio en otro sistema que este ejecutando un servidor compatible. Se admiten <acronym
+>VNC</acronym
+> y <acronym
+>RDP </acronym
+>. </para>
+</abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>kdenetwork</keyword>
+<keyword
+>krfb</keyword>
+<keyword
+>VNC</keyword>
+<keyword
+>RFB</keyword>
+<keyword
+>krdc</keyword>
+<keyword
+>Compartición de escritorio</keyword>
+<keyword
+>Control remoto</keyword>
+<keyword
+>Asistencia remota</keyword>
+<keyword
+>Escritorio remoto</keyword>
+<keyword
+>RDP</keyword>
+<keyword
+>Administración remota</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Introducción</title>
+
+<para
+>&krdc; es una aplicación cliente que le permite ver o incluso controlar la sesión de escritorio en otro sistema que este ejecutando un servidor compatible. </para>
+
+<para
+>Normalmente, se usará &krdc; con el servidor <acronym
+>VNC</acronym
+> de &kde;, al que también se conoce como Krfb, ya que comparte muchas de las características especiales de &krdc;. </para>
+
+<para
+>Si quiere iniciar &krdc; desde &konsole;, la instrucción es <userinput
+><command
+>krdc</command
+></userinput
+>. </para>
+
+<para
+>Informe de cualquier problema o petición de característica a las listas de correo de &kde; o abra un fallo en <ulink url="https://bugs.kde.org"
+>https://www.bugs.kde.org</ulink
+>. </para>
+</chapter>
+
+<chapter id="what-is-RFB">
+<title
+>El protocolo Remote Frame Buffer</title>
+
+<para
+>Este capítulo proporciona una breve descripción del protocolo Remote Frame Buffer usado por &krdc; y por otros sistemas compatibles. Si ya está familiarizado con Remote Frame Buffer, puede saltarse tranquilamente este capítulo. </para>
+
+<para
+>La implementación a alto nivel de un sistema que utiliza el protocolo Remote Frame Buffer se conoce como Virtual Network Computer, o más frecuentemente como <acronym
+>VNC</acronym
+>. </para>
+
+<para
+>Remote Frame Buffer (o <acronym
+>RFB</acronym
+> para abreviar) es un sencillo protocolo de acceso remoto a interfaces gráficas de usuario. Funciona en el nivel de frame-buffer, lo cual corresponde aproximadamente a la presentación de la imagen de la pantalla, lo que significa que se puede aplicar a todos los sistemas de ventanas (incluyendo X11, &MacOS; y &Microsoft; &Windows;). Existen aplicaciones Remote Frame Buffer para muchas plataformas y normalmente se pueden redistribuir libremente. </para>
+
+<para
+>En el protocolo Remote Frame Buffer, la aplicación que se ejecuta en el equipo que utiliza el usuario (que contiene la pantalla, el teclado y el puntero) se llama cliente. La aplicación que se ejecuta en el equipo donde se encuentra el frame-buffer (el cual ejecutan el sistema de ventanas y aplicaciones que controla el usuario de manera remota) se llama servidor. &krdc; es el cliente de &kde; para el protocolo Remote Frame Buffer. &krfb; es el servidor &kde; para el protocolo Remote Frame Buffer. </para>
+
+<para
+>Lleva una cantidad razonable de tráfico de red enviar una imagen del frame-buffer, así Remote Frame Buffer funciona mejor sobre enlaces de banda ancha, como redes de área local. Aun así es posible usar &krdc; sobre otros enlaces, pero el rendimiento no será tan bueno. </para>
+
+</chapter>
+
+<chapter id="using-krdc">
+<title
+>Usando &krdc;</title>
+
+<para
+>Es muy fácil usar &krdc; - tiene una interfaz sencilla, como se ve en la captura de pantalla de más abajo. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Aquí tiene una captura de pantalla de &krdc;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="krdc_mainwindow.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Ventana principal de &krdc;</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<sect1 id="compatible-versions"
+><title
+>Conectar a servidores compatibles &krdc;</title>
+
+<para
+>&krdc; es un cliente, y necesita utilizarse con servidores compatibles. Hay distintas maneras de conectarse a dichos servidores: </para>
+
+<itemizedlist>
+<listitem>
+<para
+>Escribir directamente el nombre del servidor (o la dirección IP) en el campo <guilabel
+>Conectar a:</guilabel
+>.</para
+> 
+</listitem>
+<listitem>
+<para
+>Usando una invitación que halla recibido. &krfb; usa invitaciones y puede enviarlas por correo electrónico.</para>
+</listitem>
+</itemizedlist>
+
+<para
+>Veremos cada uno más tarde. </para>
+
+<sect2
+><title
+>Entrada del nombre del servidor</title>
+<para
+>Si sabe el nombre (o la dirección IP) del servidor al que se quiere conectar, puede escribirlo directamente en el campo <guilabel
+>Conectar a: </guilabel
+>. </para>
+
+<para
+>Si quiere conectar a una maquina llamada megan, que esta ejecutando un servidor <acronym
+>VNC</acronym
+> en la pantalla 1 (5901), puede introducir <userinput
+>megan:1</userinput
+> o <userinput
+>megan:5901</userinput
+> y elegir <guilabel
+>vnc</guilabel
+> como protocolo en la lista desplegable. </para>
+<para>
+<screenshot>
+<screeninfo
+>introduciendo un nombre de servidor en &krdc; </screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="address_input.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Introduciendo un nombre de servidor en &krdc; </phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>De forma similar, si está utilizando un servidor <acronym
+>RDP</acronym
+> en dicha máquina, puede introducir <userinput
+>megan</userinput
+>. Elija <guilabel
+> rdp</guilabel
+> como protocolo. <acronym
+>RDP</acronym
+> no necesita que se especifique el número de pantalla. Si el servidor ejecuta el servidor <acronym
+>RDP </acronym
+> en un puerto que no es el predeterminado, se debe especificar de la siguiente forma: <userinput
+>megan:3910</userinput
+> </para>
+<para
+>Tiene que introducir una &URL; en la sintaxis codificada con porcentajes, es decir, @ como %40, para &eg; <userinput
+>nombreusuario%40ad.dominio.ejemplo</userinput
+> </para>
+<!--https://bugs.kde.org/show_bug.cgi?id=261076-->
+
+</sect2>
+
+<sect2
+><title
+>Usando una invitación</title>
+<para
+>Con la aplicación &krfb; servidor, es posible enviar invitaciones por correo electrónico (y por otros medios, pero el correo electrónico es el más útil). Si recibe este tipo de invitación por correo electrónico, simplemente puede pulsar en el enlace proporcionado en el correo. Esto iniciará &krdc;, si no se está ejecutando actualmente, y conectará con el servidor especificado en la invitación. </para>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="connection"
+><title
+>Que pasa cuando se conecta</title>
+
+<para
+>Aviso: Antes de conectarse, asegúrese de que el equipo destino (servidor) está disponible en la red y, si es necesario, que su cortafuegos se ha configurado correctamente o se ha desactivado. </para>
+
+<para
+>No importa como seleccionó el servidor al que se conecta, lo siguiente que ocurre es que &krdc; le pregunta sobre la conexión de red al servidor, como se muestra abajo: </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Selección de velocidad de conexión de &krdc;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="vnc_host_configuration.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Selección de velocidad de conexión de &krdc;</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Hay tres preferencias de velocidad para el protocolo <acronym
+>VNC</acronym
+>: </para>
+
+<itemizedlist>
+<listitem
+><para
+>Alta calidad (LAN, conexión directa), que es la predeterminada, y que debería evaluar como se comporta antes de seleccionar otra opción de menor rendimiento que use menor ancho de banda. </para
+></listitem>
+<listitem
+><para
+>Calidad media (DSL, cable, Internet rápido).</para
+></listitem>
+<listitem
+><para
+>Baja calidad (módem, RDSI, Internet lento).</para
+></listitem>
+</itemizedlist>
+
+<para
+>Si siempre usa el mismo tipo de conexión, puede desmarcar la casilla de verificación <guilabel
+>Mostrar de nuevo este diálogo para este servidor </guilabel
+>, lo cual significa que no se le volverá a preguntar sobre el tipo de conexión para este equipo, siempre y cuando se identifique del mismo modo. Por ejemplo, si un servidor tiene dos nombres y al conectarse con un nombre desmarca esa casilla de verificación, si se vuelve a conectar con ese nombre, no se le volverá a preguntar. Sin embargo, si utiliza otro nombre o la dirección IP, sí se le preguntará. </para>
+
+<para
+>Seleccione la configuración adecuada para la velocidad y pulse el botón <guibutton
+>Aceptar</guibutton
+> para continuar. </para>
+
+<para
+>Puede ver el estado de la conexión en el icono de la pestaña. </para>
+
+<para
+>Dependiendo de la configuración del servidor, deberá (y con mucha probabilidad lo hará) proporcionar una contraseña para autenticarse frente al servidor. &krdc; le mostrara un dialogo parecido al mostrado abajo. </para>
+
+<para
+>Mediante KWallet, &krdc; tiene la capacidad de guardar la contraseña para futuras conexiones al mismo servidor. Si desea utilizar esta funcionalidad, es necesario que esté marcada la casilla de verificación <guibutton
+>Recordar contraseña (KWallet) </guibutton
+>. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Entrada de contraseña de &krdc;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="password_entry.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Entrada de contraseña de &krdc;</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Después de autenticarse, se conectará al servidor remoto y podrá empezar a usar &krdc; para observar o controlar el escritorio remoto. </para>
+
+</sect1>
+
+<sect1 id="controlling-remote"
+><title
+>Controlando la conexión al escritorio remoto</title>
+
+<para
+>Una vez que ha conectado con el servidor remoto, normalmente usa el teclado y el ratón para controlar el sistema de ventanas y las aplicaciones en el sistema remoto. </para>
+
+<para
+>Aquí puede ver el escritorio remoto en pantalla completa, o bien como una ventana en el escritorio local. Puede cambiar entre estos modos usando los iconos mostrados abajo. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>&krdc; en modo de pantalla completa</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="view-fullscreen.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>&krdc; en modo de pantalla completa</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+<screenshot>
+<screeninfo
+>&krdc; en modo ventana</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="view-restore.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>&krdc; en modo ventana</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Normalmente, el modo de pantalla completa mejor cuando se está ayudando a un usuario remoto, ya que se puede ver todo lo que él puede ver. El modo ventana es más útil cuando se está trabajando tanto de manera local como remota, por ejemplo, cuando se está revisando documentación local y usando dicha información en el sistema remoto. </para>
+
+<sect2
+><title
+>Usando el modo de ventana normal</title>
+
+<para
+>En modo ventana, puede terminar la conexión cerrando la ventana, o pulsando el botón de fin de sesión. </para>
+
+</sect2>
+
+<sect2
+><title
+>Usando el modo de pantalla completa</title>
+
+<para
+>En el modo de pantalla completa, puede cambiar el aspecto de la barra de herramientas. La transparencia de la barra de herramientas puede cambiarse con la rueda del ratón. </para>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="bookmarks"
+><title
+>Marcadores</title>
+
+<para
+>&krdc; tiene la capacidad de administrar marcadores. Si necesita conectarse con frecuencia al mismo escritorio remoto, puede añadir una entrada para esta conexión a la lista de marcadores. Puede hacerlo pulsando en <menuchoice
+> <guimenu
+>Marcadores</guimenu
+> <guimenuitem
+>Añadir marcadores </guimenuitem
+></menuchoice
+>. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Menú de marcadores de &krdc;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="bookmarks_menu.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Menú de marcadores de &krdc;</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+
+<sect2
+><title
+>Historial de marcadores</title>
+
+<para
+>&krdc; guarda las últimas conexiones a escritorios remotos. Se puede acceder a estos marcadores especiales en <menuchoice
+><guimenu
+>Marcadores </guimenu
+><guimenuitem
+>Historial</guimenuitem
+></menuchoice
+>. Por supuesto, puede borrar un marcador de esta lista si ya no lo va a necesitar más. Simplemente, pulse la opción <guibutton
+>Borrar marcador</guibutton
+> que aparece después de pulsar con el botón derecho del ratón sobre el marcador que desea borrar. </para>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="managing-configuration"
+><title
+>Gestionando la configuración de &krdc;</title>
+<para
+>Mediante <menuchoice
+><guimenu
+>Preferencias</guimenu
+><guimenuitem
+>Configurar KRDC...</guimenuitem
+></menuchoice
+>, puede abrir un diálogo para modificar el comportamiento de &krdc;. Si selecciona dicho botón aparecerá una ventana como la que se muestra a continuación: </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Preferencias de &krdc;: pestaña general</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="general_preferences.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Preferencias de &krdc;: pestaña <guilabel
+>General</guilabel
+></phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+<screenshot>
+<screeninfo
+>Preferencias de &krdc;: pestaña <guilabel
+>Opciones predeterminadas de VNC</guilabel
+></screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="vnc_preferences.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Preferencias de &krdc;: pestaña perfiles de <guilabel
+>Opciones predeterminadas de VNC</guilabel
+></phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+<screenshot>
+<screeninfo
+>Preferencias de &krdc;: pestaña <guilabel
+>Opciones predeterminadas de RDP</guilabel
+></screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="rdp_preferences.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Preferencias de &krdc;: pestaña perfiles de <guilabel
+>Opciones predeterminadas de RDP</guilabel
+></phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+
+</sect1>
+
+</chapter>
+
+<chapter id="faq">
+<title
+>Preguntas y respuestas</title>
+
+<!-- (OPTIONAL but recommended) This chapter should include all of the silly
+(and not-so-silly) newbie questions that fill up your mailbox. This chapter
+should be reserved for BRIEF questions and answers! If one question uses more
+than a page or so then it should probably be part of the
+"Using this Application" chapter instead. You should use links to
+cross-reference questions to the parts of your documentation that answer them.
+This is also a great place to provide pointers to other FAQ's if your users
+must do some complicated configuration on other programs in order for your
+application work. -->
+
+<qandaset id="faqlist">
+<qandaentry>
+<question>
+<para
+>¿Por qué no se admite <acronym
+>RDP</acronym
+>?</para>
+</question>
+<answer>
+<para
+>El uso de <acronym
+>RDP</acronym
+> en &krdc; depende de xfreerdp (FreeRDP). Asegúrese de que tiene instalada esta dependencia en tiempo de ejecución. </para>
+</answer>
+</qandaentry>
+</qandaset>
+
+</chapter>
+
+<chapter id="credits">
+
+<!-- Include credits for the programmers, documentation writers, and
+contributors here. The license for your software should then be included below
+the credits with a reference to the appropriate license file included in the K D E
+distribution. -->
+
+<title
+>Créditos y licencia</title>
+
+<para
+>&krdc; </para>
+<para
+>El proyecto &krdc; lo inició Tim Jansen <email
+>tim@tjansen.de</email
+>. Como proyecto para el Google Summer of Code 2007, Urs Wolfer <email
+>uwolfer @ kde.org</email
+> reescribió completamente &krdc;. Gracias a Google por hacerlo posible y gracias al gran mentor este proyecto Summer of Code, &Brad.Hards; &Brad.Hards.mail;. </para>
+
+<para
+>Derechos de autor de la documentación &copy; 2003 &Brad.Hards; &Brad.Hards.mail; Derechos de autor de la documentación &copy; 2007 Urs Wolfer <email
+>uwolfer @ kde.org</email
+> </para>
+
+<para
+>Traducido por Matías Costa<email
+>mcc3@alu.um.es</email
+> y Rocío Gallego <email
+>traducciones@rociogallego.com</email
+></para
+> &underFDL; &underGPL; </chapter>
+
+&documentation.index;
+</book>
+
+<!--
+Local Variables:
+mode: xml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+
+vim:tabstop=2:shiftwidth=2:expandtab 
+-->

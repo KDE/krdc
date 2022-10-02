@@ -1,0 +1,623 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Ukrainian "INCLUDE"
+> <!-- ONLY If you are writing non-English 
+                                     original documentation, change 
+                                     the language here -->
+    
+  <!-- Do not define any other entities; instead, use the entities
+       from entities/general.entities and $LANG/user.entities. -->
+]>
+<!-- Based on kdoctemplate v0.9 January 10 2003 -->
+
+<book id="krdc" lang="&language;">
+
+<!-- This header contains all of the meta-information for the document such
+as Authors, publish date, the abstract, and Keywords -->
+
+<bookinfo>
+<title
+>Підручник з &krdc;</title>
+
+<authorgroup>
+<author
+>&Brad.Hards; &Brad.Hards.mail; </author>
+<author
+><firstname
+>Urs</firstname
+> <surname
+>Wolfer</surname
+> <affiliation
+> <address
+><email
+>uwolfer @ kde.org</email
+></address>
+    </affiliation>
+</author>
+<othercredit role="translator"
+><firstname
+>Юрій</firstname
+><surname
+>Чорноіван</surname
+><affiliation
+><address
+><email
+>yurchor@ukr.net</email
+></address
+></affiliation
+><contrib
+>Переклад українською</contrib
+></othercredit
+> 
+</authorgroup>
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>25 липня 2016 року</date>
+<releaseinfo
+>Програми 16.08</releaseinfo>
+
+<copyright>
+<year
+>2003, 2008</year>
+</copyright>
+
+<abstract>
+<para
+>&krdc; — це клієнтська програма, яка надає вам змогу переглядати і навіть керувати стільничним сеансом на віддаленому комп’ютері, на якому запущено сумісний з клієнтом сервер. Серед серверів програма підтримує <acronym
+>VNC</acronym
+> і <acronym
+>RDP</acronym
+>. </para>
+</abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>kdenetwork</keyword>
+<keyword
+>krfb</keyword>
+<keyword
+>VNC</keyword>
+<keyword
+>RFB</keyword>
+<keyword
+>krdc</keyword>
+<keyword
+>Спільні стільниці</keyword>
+<keyword
+>Дистанційне керування</keyword>
+<keyword
+>Дистанційна допомога</keyword>
+<keyword
+>Віддалена стільниця</keyword>
+<keyword
+>RDP</keyword>
+<keyword
+>Віддалене адміністрування</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Вступ</title>
+
+<para
+>&krdc; — це клієнтська програма, яка надає вам змогу переглядати і навіть керувати стільничним сеансом на віддаленому комп’ютері, на якому запущено сумісний з клієнтом сервер. </para>
+
+<para
+>Типово, &krdc; використовують у зв’язці з сервером <acronym
+>VNC</acronym
+> &kde; (&krfb;), який відомий під назвою Krfb, оскільки можливості цього сервера тісно пов’язано з особливими можливостями &krdc;. </para>
+
+<para
+>Якщо ви бажаєте запустити &krdc; з &konsole;, вам потрібна буде команда <userinput
+><command
+>krdc</command
+></userinput
+>. </para>
+
+<para
+>Будь ласка, повідомляйте про будь-які проблеми, пов’язані з програмою, або запити щодо реалізації можливостей до списків листування &kde;. Повідомлення про вади можна залишити на сайті <ulink url="https://bugs.kde.org"
+>https://bugs.kde.org</ulink
+>. </para>
+</chapter>
+
+<chapter id="what-is-RFB">
+<title
+>Протокол віддаленого буфера кадрів (Remote Frame Buffer)</title>
+
+<para
+>У цьому розділі наведено короткий опис протоколу віддаленого буфера кадрів (Remote Frame Buffer), який використовується &krdc; та іншими сумісними системами. Якщо ви вже знайомі з протоколом віддаленого буфера кадрів, ви можете просто не читати цей розділ. </para>
+
+<para
+>Реалізація високого рівня системи, яка використовує протокол віддаленого буфера кадрів, відома як Virtual Network Computer (віртуальний мережевий комп’ютер), цю назву часто замінюють на абревіатуру <acronym
+>VNC</acronym
+>. </para>
+
+<para
+>Віддалений буфер кадрів (Remote Frame Buffer або скорочено <acronym
+>RFB</acronym
+>) — це простий протокол для віддаленого доступу до графічних інтерфейсів користувача. Це протокол працює на рівні буфера кадрів, грубо кажучи, відповідає за показ зображення з екрана, це означає, що його можна застосувати для всіх систем, які працюють з вікнами (зокрема, X11, &MacOS; і &Microsoft; &Windows;). Програми, що працюють з віддаленим буфером кадрів написано для багатьох платформ, часто ці програми можна вільно поширювати. </para>
+
+<para
+>У термінах протоколу віддаленого буфера кадрів програма, яку запущено на комп’ютері, на якому працює користувач (де міститься дисплей, клавіатура і пристрій вказівника), називається клієнтом. Програма, яку запущено на комп’ютері, де розташовано буфер кадрів (і де виконуються система керування вікнами і програмами, якою віддалено керує користувач) називається сервером. &krdc; — це клієнт протоколу віддаленого буфера кадрів для &kde;. &krfb; — це сервер протоколу віддаленого буфера кадрів для &kde;. </para>
+
+<para
+>Для надсилання зображення буфера кадрів потрібно передати досить значний об’єм інформації мережею, отже, віддалений буфер кадрів найкраще працює у відгалуженнях мережі з високоякісними з’єднаннями, зокрема у локальній мережевій системі. &krdc; можна використовувати і за інших умов з’єднання, але в такому разі швидкодія програми може залишати бажати кращого. </para>
+
+</chapter>
+
+<chapter id="using-krdc">
+<title
+>Користування &krdc;</title>
+
+<para
+>Користуватися &krdc; дуже просто, — програма має простий інтерфейс, який ви можете бачити на знімку вікна, розташованому нижче. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Ось знімок вікна &krdc;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="krdc_mainwindow.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Головне вікно &krdc;</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<sect1 id="compatible-versions"
+><title
+>Як з’єднати &krdc; з сумісними серверами</title>
+
+<para
+>&krdc; — програма-клієнт, її слід використовувати у зв’язці з сумісними серверами. Існує декілька різних способів з’єднатися з такими серверами: </para>
+
+<itemizedlist>
+<listitem>
+<para
+>Безпосередньо ввести назву (або IP-адресу) сервера до поля <guilabel
+>З’єднатися з:</guilabel
+>.</para
+> 
+</listitem>
+<listitem>
+<para
+>За допомогою отриманого запрошення. &krfb; використовує запрошення і ви можете надсилати такі запрошення електронною поштою.</para>
+</listitem>
+</itemizedlist>
+
+<para
+>Давайте розглянемо кожен з цих варіантів почергово. </para>
+
+<sect2
+><title
+>Запис назви сервера</title>
+<para
+>Якщо вам відома назва вузла (або IP-адреса) сервера, з яким ви бажаєте з’єднатися, ви можете ввести її безпосередньо до поля <guilabel
+>З’єднатися з:</guilabel
+>. </para>
+
+<para
+>Якщо ви бажаєте з’єднати ваш комп’ютер з комп’ютером з назвою megan, на якому запущено сервер <acronym
+>VNC</acronym
+> на екрані 1 (5901), вам слід ввести <userinput
+>megan:1</userinput
+> або <userinput
+>megan:5901</userinput
+> і вибрати як протокол <guilabel
+>vnc</guilabel
+> у спадному списку. </para>
+<para>
+<screenshot>
+<screeninfo
+>Введення назви вузла у &krdc;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="address_input.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Введення назви вузла у &krdc;</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Аналогічно, якщо ви користуєтеся сервером <acronym
+>RDP</acronym
+> на відповідному комп’ютері, ви можете ввести <userinput
+>megan</userinput
+>. В такому разі, слід вибрати протокол <guilabel
+>rdp</guilabel
+>. У <acronym
+>RDP</acronym
+> не потрібно вказувати номер екрана. Якщо <acronym
+>RDP</acronym
+> на сервері запущено на нетиповому порті, ви можете вказати цей порт так: <userinput
+>megan:3910</userinput
+> </para>
+<para
+>Вам слід вказати адресу з маскуванням спеціальних символів, тобто, наприклад, @ слід вказати як %40, тобто, вийде, наприклад,  <userinput
+>username%40ad.domain.example</userinput
+> </para>
+<!--https://bugs.kde.org/show_bug.cgi?id=261076-->
+
+</sect2>
+
+<sect2
+><title
+>Використання запрошення</title>
+<para
+>За допомогою програми сервера &krfb; можна надсилати запрошення електронною поштою (існують і інші способи надсилання, але електронна пошта є найпоширенішим). Якщо ви отримаєте електронною поштою запрошення такого типу, ви можете просто натиснути посилання, яке надійшло поштою. Стільничним середовищем буде запущено &krdc;, якщо цю програму ще не було запущено, і виконано з’єднання з сервером, вказаним у запрошенні. </para>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="connection"
+><title
+>Що відбувається після встановлення з’єднання</title>
+
+<para
+>Зауваження: перед спробою з’єднання вам слід переконатися, що комп’ютер призначення (сервер) доступний у мережі і, за потреби, що брандмауер на ньому налаштовано правильно або вимкнено. </para>
+
+<para
+>Байдуже, який спосіб з’єднання з сервером ви обрали, далі &krdc; запитає вас про мережеве з’єднання з сервером, як це показано нижче: </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Вибір швидкості з’єднання у &krdc;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="vnc_host_configuration.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Вибір швидкості з’єднання у &krdc;</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Для протоколу <acronym
+>VNC</acronym
+> існує три режими швидкості: </para>
+
+<itemizedlist>
+<listitem
+><para
+>Висока якість (локальна мережа, безпосереднє з’єднання), який є типовим. Вам слід оцінити швидкодію у цьому режимі, перш ніж обрати режим з нижчою швидкодією, який менше навантажує канал зв’язку. </para
+></listitem>
+<listitem
+><para
+>Середня якість (DSL, кабель, швидкісне з’єднання з мережею Інтернет).</para
+></listitem>
+<listitem
+><para
+>Низька якість (модем, ISDN, повільне з’єднання з мережею Інтернет).</para
+></listitem>
+</itemizedlist>
+
+<para
+>Якщо ви завжди працюєте з однаковим типом з’єднання, ви можете зняти позначку з поля з міткою <guilabel
+>Показувати це вікно знову для цього вузла</guilabel
+>, — це означатиме, що програма більше не питатиме вас про тип з’єднання з цим вузлом, вважаючи, що ви б вказали попереднє значення цього параметра. Наприклад, якщо у вашого вузла дві назви, а ви зняли позначку для з’єднання за одною з назв, програма не запитуватиме вас про тип під час з’єднання за цією назвою, але запитає про тип, якщо ви з’єднуватиметеся за іншою назвою або IP-адресою. </para>
+
+<para
+>Для продовження процедури вам слід обрати відповідний параметр швидкості і натиснути кнопку <guibutton
+>Гаразд</guibutton
+>. </para>
+
+<para
+>Ви можете спостерігати за станом з’єднання за допомогою піктограми на вкладці. </para>
+
+<para
+>Залежно від налаштувань сервера, вам може знадобитися (і, ймовірно, знадобиться) пароль для розпізнавання на сервері. У такому разі &krdc; відкриє діалогове вікно для введення пароля, схоже на показане нижче. </para>
+
+<para
+>&krdc; може зберігати паролі для наступних з’єднань з вузлами. Для цього програма використовує KWallet. Якщо ви бажаєте скористатися цією можливістю, вам слід позначити поле <guibutton
+>Запам’ятати пароль (KWallet)</guibutton
+>. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Запис пароля &krdc;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="password_entry.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Запис пароля &krdc;</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Після розпізнавання ваш комп’ютер буде з’єднано з віддаленим сервером, і ви зможете почати користуватися &krdc; для спостереження або керування віддаленою стільницею. </para>
+
+</sect1>
+
+<sect1 id="controlling-remote"
+><title
+>Керування з’єднанням з віддаленою стільницею</title>
+
+<para
+>Після встановлення з’єднання з віддаленим сервером ви, зазвичай, зможете скористатися клавіатурою і мишею для керування системою вікон і програм на цьому віддаленому комп’ютері. </para>
+
+<para
+>Ви можете здійснювати перегляд віддаленої стільниці або у повноекранному режимі, або за допомогою вікна у локальній стільниці. Перемикатися між цими двома режимами можна за допомогою піктограм, показаних нижче. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Вікно &krdc; за умови вибору повноекранного режиму</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="view-fullscreen.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Вікно &krdc; за умови вибору повноекранного режиму</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+<screenshot>
+<screeninfo
+>Вікно &krdc; за умови вибору режиму роботи у вікні</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="view-restore.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Вікно &krdc; за умови вибору режиму роботи у вікні</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Повноекранним режимом краще користуватися у випадку, коли ви допомагаєте віддаленому користувачеві, оскільки у такому разі ви бачитимете все, що бачить цей користувач. Режим вікна корисний, коли ви одночасно працюєте на двох стільницях, — локальній і віддаленій, — наприклад, читаючи локальну документацію, а потім використовуючи наведенні у ній настанови на віддаленому комп’ютері. </para>
+
+<sect2
+><title
+>Використання режиму вікна</title>
+
+<para
+>У режимі вікна ви можете перервати з’єднання закриттям вікна (натисканням кнопки виходу). </para>
+
+</sect2>
+
+<sect2
+><title
+>Використання повноекранного режиму</title>
+
+<para
+>За використання повноекранного режиму ви можете змінити вигляд панелі інструментів. Прозорість панелі інструмент можна змінити за допомогою коліщатка. </para>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="bookmarks"
+><title
+>Закладки</title>
+
+<para
+>У &krdc; передбачено можливість керування закладками. Якщо у вас виникла потреба у регулярному з’єднанні з віддаленою стільницею, ви можете додати запис про це з’єднання до списку закладок. Зробити це можна за допомогою пункту меню <menuchoice
+><guimenu
+>Закладки</guimenu
+> <guimenuitem
+>Додати закладку</guimenuitem
+></menuchoice
+>. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Меню закладок &krdc;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="bookmarks_menu.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Меню закладок &krdc;</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+
+<sect2
+><title
+>Закладки історії</title>
+
+<para
+>&krdc; зберігає список останніх віддалених з’єднань зі стільницями. Доступ до цих своєрідних закладок можна отримати за допомогою пункту меню <menuchoice
+><guimenu
+>Закладки</guimenu
+><guimenuitem
+>Журнал</guimenuitem
+></menuchoice
+>. Звичайно ж, ви також можете вилучити закладку з цього списку, якщо вона вам більше не потрібна. Для цього просто натисніть кнопку <guibutton
+>Вилучити закладку</guibutton
+>, яка з’являється після наведення вказівника миші на запис закладки, який ви бажаєте вилучити, з наступним клацанням правою кнопкою миші. </para>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="managing-configuration"
+><title
+>Керування параметрами &krdc;</title>
+<para
+>За допомогою пункту меню <menuchoice
+><guimenu
+>Параметри</guimenu
+><guimenuitem
+>Налаштувати KRDC...</guimenuitem
+></menuchoice
+> ви можете відкрити діалогове вікно, у якому можна змінити поведінку &krdc;. Вибір цього пункту призведе до відкриття вікна, схожого на показане нижче: </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Налаштування &krdc; — вкладка «Загальне»</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="general_preferences.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Налаштування &krdc; — вкладка <guilabel
+>Загальне</guilabel
+></phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+<screenshot>
+<screeninfo
+>Налаштування &krdc; — вкладка <guilabel
+>Налаштування VNC</guilabel
+></screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="vnc_preferences.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Налаштування &krdc; — вкладка профілів <guilabel
+>Налаштування VNC</guilabel
+></phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+<screenshot>
+<screeninfo
+>Налаштування &krdc; — вкладка <guilabel
+>Налаштування RDP</guilabel
+></screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="rdp_preferences.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Налаштування &krdc; — вкладка профілів <guilabel
+>Налаштування RDP</guilabel
+></phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+
+</sect1>
+
+</chapter>
+
+<chapter id="faq">
+<title
+>Запитання і відповіді</title>
+
+<!-- (OPTIONAL but recommended) This chapter should include all of the silly
+(and not-so-silly) newbie questions that fill up your mailbox. This chapter
+should be reserved for BRIEF questions and answers! If one question uses more
+than a page or so then it should probably be part of the
+"Using this Application" chapter instead. You should use links to
+cross-reference questions to the parts of your documentation that answer them.
+This is also a great place to provide pointers to other FAQ's if your users
+must do some complicated configuration on other programs in order for your
+application work. -->
+
+<qandaset id="faqlist">
+<qandaentry>
+<question>
+<para
+>Чому підтримка <acronym
+>RDP</acronym
+> не працює?</para>
+</question>
+<answer>
+<para
+>Підтримка <acronym
+>RDP</acronym
+> у &krdc; залежить від того, чи встановлено xfreerdp (FreeRDP). Не забудьте встановити цю програму, якщо вам потрібна така підтримка. </para>
+</answer>
+</qandaentry>
+</qandaset>
+
+</chapter>
+
+<chapter id="credits">
+
+<!-- Include credits for the programmers, documentation writers, and
+contributors here. The license for your software should then be included below
+the credits with a reference to the appropriate license file included in the K D E
+distribution. -->
+
+<title
+>Подяки і ліцензія</title>
+
+<para
+>&krdc; </para>
+<para
+>Роботу над проєктом &krdc; було розпочато Tim Jansen <email
+>tim@tjansen.de</email
+>. У рамках проєкту Google Summer of Code 2007 Urs Wolfer <email
+>uwolfer @ kde.org</email
+> повністю переписав &krdc;. Автор дякує компанії Google за те, що вона зробила це можливим, а також висловлює подяку чудовому наставнику цього проєкту Summer of Code, &Brad.Hards; &Brad.Hards.mail;. </para>
+
+<para
+>Авторські права на документацію &copy; 2003 &Brad.Hards; &Brad.Hards.mail; Авторські права на документацію &copy; 2007 Urs Wolfer <email
+>uwolfer @ kde.org</email
+> </para>
+
+<para
+>Юрій Чорноіван <email
+>yurchor@ukr.net</email
+></para
+> 
+&underFDL; &underGPL; </chapter>
+
+&documentation.index;
+</book>
+
+<!--
+Local Variables:
+mode: xml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+
+vim:tabstop=2:shiftwidth=2:expandtab 
+-->

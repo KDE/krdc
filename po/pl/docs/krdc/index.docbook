@@ -1,0 +1,626 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY kappname "&krdc;">
+  <!ENTITY package "kdenetwork">
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Polish "INCLUDE"
+> <!-- ONLY If you are writing non-English 
+                                     original documentation, change 
+                                     the language here -->
+    
+  <!-- Do not define any other entities; instead, use the entities
+       from entities/general.entities and $LANG/user.entities. -->
+]>
+<!-- Based on kdoctemplate v0.9 January 10 2003 -->
+
+<book lang="&language;">
+
+<!-- This header contains all of the meta-information for the document such
+as Authors, publish date, the abstract, and Keywords -->
+
+<bookinfo>
+<title
+>Podręcznik programu &krdc;</title>
+
+<authorgroup>
+<author
+>&Brad.Hards; &Brad.Hards.mail; </author>
+<author
+><firstname
+>Urs</firstname
+> <surname
+>Wolfer</surname
+> <affiliation
+> <address
+><email
+>uwolfer @ kde.org</email
+></address>
+    </affiliation>
+</author>
+<othercredit role="translator"
+><firstname
+>Krzysztof</firstname
+><surname
+>Woźniak</surname
+><affiliation
+><address
+><email
+>wozniakk@ceti.pl</email
+></address
+></affiliation
+><contrib
+>Polskie tłumaczenie</contrib
+></othercredit
+>  
+</authorgroup>
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>2010-02-09</date>
+<releaseinfo
+>4.4.00</releaseinfo>
+
+<copyright>
+<year
+>2003, 2008</year>
+</copyright>
+
+<abstract>
+<para
+>Zdalne połączenie z pulpitem (KDE Remote Desktop Connection, &krdc;), to program pozwalający na podgląd oraz zdalną obsługę innego komputera, na którym został uruchomiony program serwera zdalnego dostępu. Obsługiwane są protokoły <acronym
+>VNC</acronym
+> i <acronym
+>RDP</acronym
+>. </para>
+</abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>kdenetwork</keyword>
+<keyword
+>krfb</keyword>
+<keyword
+>VNC</keyword>
+<keyword
+>RFB</keyword>
+<keyword
+>krdc</keyword>
+<keyword
+>Udostępnianie pulpitu</keyword>
+<keyword
+>Zdalna kontrola</keyword>
+<keyword
+>Zdalna pomoc</keyword>
+<keyword
+>Zdalny pulpit</keyword>
+<keyword
+>RDP</keyword>
+<keyword
+>Zdalne administrowanie</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Wprowadzenie</title>
+
+<para
+>Zdalne połączenie z pulpitem (&krdc;) to program pozwalający na podgląd oraz zdalną kontrolę nad innym komputerem z uruchomionym odpowiednim programem serwera. </para>
+
+<para
+>Program &krdc; najczęściej jest stosowany do połączeń z serwerem <acronym
+>VNC</acronym
+> dla środowiska &kde;, który jest także znany jako &krfb;. Umożliwia on wykorzystanie wszystkich możliwości programu &krdc;. </para>
+
+<para
+>Jeżeli chcesz uruchomić &krdc; w programie &konsole;, należy użyć polecenia:<userinput
+><command
+>krdc</command
+></userinput
+>. </para>
+
+<para
+>Wszelkie problemy i propozycje rozwinięcia programu, powinny być zgłaszane na listy mailingowe &kde; lub poprzez system śledzenia błędów: <ulink url="http://bugs.kde.org"
+>http://bugs.kde.org</ulink
+>. </para>
+</chapter>
+
+<chapter id="what-is-RFB">
+<title
+>Wprowadzenie do protokołu RFB</title>
+
+<para
+>W tej części zamieszczono krótką charakterystykę protokołu RFB (Remote Frame Buffer) wykorzystywanego przed &krdc; jak też inne kompatybilne programy. Można opuścić ten rozdział, jeżeli zagadnienia związane z cechami tego protokołu są znane. </para>
+
+<para
+>Wysoki stopień implementacji protokołu RFB zapewnia system Virtual Network Computer, powszechnie znany jako <acronym
+>VNC</acronym
+>. </para>
+
+<para
+>Mechanizm "Remote Frame Buffer" (lub w skrócie <acronym
+>RFB</acronym
+>) jest prostym protokołem transmisji, wykorzystywanym do zdalnego dostępu do graficznego interfejsu użytkownika. Jego działanie odbywa się na poziomie bufora ramki, co jest tożsame z widocznym na ekranie obrazem. Pozwala to na wykorzystanie go w każdym okienkowym systemie (zarówno X11, jak też &MacOS; oraz &Microsoft; &Windows;). Programy wykorzystujące protokół RFB istnieją dla wielu platform systemowych i często mogą być swobodnie rozpowszechniane. </para>
+
+<para
+>Wykorzystanie protokołu Remote Frame Buffer (RFB) wymaga programu uruchomionego na komputerze użytkownika (wyposażonym w ekran, klawiaturę i urządzenie wskazujące, np. myszkę), który nazywamy klientem. Współpracuje on z programem uruchomionym na komputerze z buforem ramki (na którym działa także system okienkowy i aplikacje, z których użytkownik zdalnie korzysta), który nazywamy serwerem. W środowisku &kde; klientem protokołu RFB jest program &krdc;, natomiast serwerem jest program &krfb;. </para>
+
+<para
+>Ponieważ przesłanie obrazu z bufora ramki generuje spory ruch w sieci, protokół ten najlepiej się sprawuje na łączach o dużej przepustowości, takich jak sieć lokalna. Można korzystać z programu &krdc; na łączach o niższej szybkości, jednak jakość takiego połączenia nie będzie najlepsza. </para>
+
+</chapter>
+
+<chapter id="using-krdc">
+<title
+>Korzystanie z &krdc;</title>
+
+<para
+>Korzystanie z &krdc; jest bardzo proste, na poniższym zrzucie ekranu przedstawiony jest interfejs użytkownika. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Zrzut ekranu programu &krdc;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="krdc_mainwindow.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Główne okno &krdc;</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<sect1 id="compatible-versions"
+><title
+>Łączenie programu &krdc; ze zgodnymi serwerami</title>
+
+<para
+>Program &krdc; jest klientem, który wymaga do pracy połączenia ze zgodnym serwerem. Połączenie to może zostać nawiązane na różne sposoby: </para>
+
+<itemizedlist>
+<listitem>
+<para
+>Poprzez wpisanie nazwy serwera (lub jego adresu IP) w polu: <guilabel
+>Połącz z:</guilabel
+>.</para
+> 
+</listitem>
+<listitem>
+<para
+>Przez wykorzystanie otrzymanego poprzez e-mail zaproszenia, które w programie &krfb; utworzył i przesłał inny użytkownik.</para>
+</listitem>
+</itemizedlist>
+
+<para
+>Poniżej znajdują się przykłady każdego z wymienionych sposobów. </para>
+
+<sect2
+><title
+>Wpisanie nazwy serwera</title>
+<para
+>Jeżeli znana jest nazwa lub adres IP komputera, z którym inicjowane jest połączenie (serwera), należy te informacje wpisać w polu: <guilabel
+>Połącz z:</guilabel
+>. </para>
+
+<para
+>Na przykład, jeżeli połączenie ma zostać nawiązane z komputerem "megan", na którym pracuje serwer <acronym
+>VNC</acronym
+> na ekranie numer 1 (port 5901), należy w polu <guilabel
+>Połącz z:</guilabel
+> wpisać: <userinput
+>megan:1</userinput
+> i wybrać z rozwijanej listy protokół <guilabel
+>vnc</guilabel
+>. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Wprowadzanie nazwy komputera w programie &krdc;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="address_input.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Wprowadzanie nazwy komputera w programie &krdc;</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Podobnie, jeżeli połączenie następuje z komputerem, na którym pracuje serwer protokołu <acronym
+>RDP</acronym
+>, należy wpisać: <userinput
+>megan</userinput
+> i wybrać protokół <guilabel
+>rdp</guilabel
+>. Protokół <acronym
+>RDP</acronym
+> nie wymaga podania numeru ekranu. Jeżeli serwer <acronym
+>RDP</acronym
+> korzysta z innego portu, niż domyślny, można go podać bezpośrednio: <userinput
+>megan:3910</userinput
+>. </para>
+
+</sect2>
+
+<sect2
+><title
+>Korzystanie z zaproszeń</title>
+<para
+>Za pomocą programu &krfb;, który jest serwerem protokołu RFB, można wysyłać mailem (i na inne sposoby, z których jednak email jest najbardziej użyteczny) tzw. zaproszenia do połączenia. Jeżeli użytkownik otrzyma email z zaproszeniem, może klikając na dostarczony link, uruchomić program &krdc; (o ile nie jest już on uruchomiony wcześniej) i połączyć się z serwerem określonym w zaproszeniu. </para>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="connection"
+><title
+>Co dzieje się po połączeniu?</title>
+
+<para
+>Uwaga: Przed nawiązaniem połączenia, upewnij się że komputer docelowy (serwer) jest dostępny w sieci, oraz czy posiada on wyłączony lub poprawnie skonfigurowany firewall. </para>
+
+<para
+>Niezależnie od sposobu wybrania serwera, z którym ma zostać nawiązane połączenie, następną czynnością jest określenie parametrów jakości połączenia sieciowego do serwera, co przedstawiono poniżej: </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Wybór szybkości połączenia &krdc;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="vnc_host_configuration.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Wybór szybkości połączenia &krdc;</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Dla protokołu <acronym
+>VNC</acronym
+> dostępne są trzy ustawienia szybkości połączenia: </para>
+
+<itemizedlist>
+<listitem
+><para
+>Wysoka jakość (sieć lokalna, połączenie bezpośrednie). Jest to ustawienie domyślne. Przed ewentualnym wybraniem opcji wolniejszego połączenia należy sprawdzić, jak program się zachowuje przy tym ustawieniu. </para
+></listitem>
+<listitem
+><para
+>Średnia jakość (DSL, połączenie kablowe, szybkie połączenie internetowe)</para
+></listitem>
+<listitem
+><para
+>Niska jakość (modem, ISDN, wolne połączenie internetowe)</para
+></listitem>
+</itemizedlist>
+
+<para
+>Jeżeli użytkownik zawsze używa połączenia tego samego typu może wyczyścić pole wyboru:<guilabel
+>Pokaż to okienko dialogowe ponownie dla tego serwera </guilabel
+>. Dzięki temu przy kolejnych połączeniach z tym samym serwerem pytanie o typ połączenia nie będzie więcej zadawane o ile tylko serwer zostanie nazwany w ten sam sposób. Na przykład jeżeli serwer może być identyfikowany na różne sposoby (np. za pomocą nazwy lub za adresu IP), to w przypadku użycia tej samej nazwy pytanie o typ połączenia nie zostanie zadane, natomiast w przypadku użycia innej nazwy (np. adresu IP) pytanie o typ połączenia zostanie wyświetlone. </para>
+
+<para
+>Po wybraniu odpowiedniej szybkości połączenia, należy nacisnąć przycisk <guibutton
+>OK</guibutton
+> aby kontynuować. </para>
+
+<para
+>Stan połączenia widoczny jest jako ikona w zakładce. </para>
+
+<para
+>W zależności od konfiguracji serwera, może być niezbędne (i niemal zawsze jest) podanie hasła potwierdzającego tożsamość użytkownika. Program &krdc; wyświetli okno dialogowe z pytaniem o hasło, analogiczne jak widoczne poniżej. </para>
+
+<para
+>&krdc; has the ability to save the password for for further connections to the same host. It uses KWallet for doing this. You need to check the <guibutton
+>Remember password (KWallet)</guibutton
+> check box if you like to use this feature. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Wprowadzanie hasła w &krdc;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="password_entry.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Wprowadzanie hasła w &krdc;</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Po podaniu właściwego hasła, połączenie zostaje nawiązane, i możliwa jest obserwacja lub kontrola pulpitu znajdującego się na zdalnym komputerze. </para>
+
+</sect1>
+
+<sect1 id="controlling-remote"
+><title
+>Korzystanie z połączenia do zdalnego pulpitu</title>
+
+<para
+>Po połączeniu do zdalnego komputera, można korzystać z lokalnej klawiatury i myszki, do kontrolowania systemu i programów znajdujących się na nim. </para>
+
+<para
+>Możliwa jest praca na zdalnym pulpicie w trybie zarówno pełnoekranowym, jak też okienkowym (zdalny pulpit widoczny jest jako okno na lokalnym pulpicie). Możliwe jest przełączanie pomiędzy tymi trybami pracy, za pomocą pokazanych poniżej ikon. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Program &krdc; - wybór trybu pełnoekranowego</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="view-fullscreen.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Program &krdc; - wybór trybu pełnoekranowego</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+<screenshot>
+<screeninfo
+>Program &krdc; - wybór trybu okienkowego</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="view-restore.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Program &krdc; - wybór trybu okienkowego</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Tryb pełnoekranowy jest zwykle potrzebny, gdy użytkownik pomaga osobie pracującej na zdalnym komputerze, ponieważ widzi dokładnie to samo. Tryb okienkowy, jest przydatny gdy użytkownik pracuje jednocześnie lokalnie i zdalnie, na przykład czyta lokalnie dokumentację i korzysta z tych instrukcji przy konfiguracji zdalnego komputera. </para>
+
+<sect2
+><title
+>Korzystanie z trybu okienkowego</title>
+
+<para
+>W trybie okienkowym, połączenie można przerwać zamykając okno, lub klikając przycisk wyloguj. </para>
+
+</sect2>
+
+<sect2
+><title
+>Korzystanie z trybu pełnoekranowego</title>
+
+<para
+>W trybie pełnoekranowym, można zmieniać wygląd paska narzędzi. Przeźroczystość paska narzędzi może być zmieniona za pomocą kółka myszy. </para>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="bookmarks"
+><title
+>Zakładki</title>
+
+<para
+>Program &krdc; umożliwia zarządzanie zakładkami. Jeżeli często łączysz się z tym samym odległym komputerem można zapisać jego dane na liście zakładek. Można to zrobić klikając <menuchoice
+><guimenu
+>Zakładki</guimenu
+> <guimenuitem
+>Dodaj zakładkę</guimenuitem
+></menuchoice
+>. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Menu zakładek w &krdc;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="bookmarks_menu.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Menu zakładek w &krdc;</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+
+<sect2
+><title
+>Zakładki historii</title>
+
+<para
+>Program &krdc; zapamiętuje ostatnio nawiązywane połączenia w postaci swego rodzaju zakładek automatycznych. Dostęp do nich można uzyskać klikając <menuchoice
+><guimenu
+>Zakładki</guimenu
+> <guimenuitem
+>Historia</guimenuitem
+></menuchoice
+>. Oczywiście, niepotrzebne zakładki można z tej listy kasować . W tym celu należy wybrać opcję <guibutton
+>Usuń</guibutton
+>, która pojawi się po kliknięciu zakładki, którą chcesz usunąć, prawym przyciskiem myszy. </para>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="managing-configuration"
+><title
+>Konfiguracja programu &krdc;</title>
+<para
+>Naciśnięcie przycisku <menuchoice
+><guimenu
+>Ustawienia</guimenu
+> <guimenuitem
+>Konfiguruj...</guimenuitem
+></menuchoice
+>powoduje otwarcie przedstawione poniżej okna dialogowego, które umożliwia modyfikację zachowania programu &krdc;. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Ustawienia &krdc; - karta ustawienia ogólne</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="general_preferences.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Ustawienia &krdc; - karta <guilabel
+>ustawienia ogólne</guilabel
+></phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+<screenshot>
+<screeninfo
+>Ustawienia &krdc; - karta <guilabel
+>ustawienia domyślne VNC</guilabel
+></screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="vnc_preferences.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Ustawienia &krdc; - karta profilu <guilabel
+>ustawienia domyślne VNC</guilabel
+></phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+<screenshot>
+<screeninfo
+>Ustawienia &krdc; - karta <guilabel
+>ustawienia domyślne RDP</guilabel
+></screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="rdp_preferences.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Ustawienia &krdc; - karta profilu <guilabel
+>ustawienia domyślne RDP</guilabel
+></phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+
+</sect1>
+
+</chapter>
+
+<chapter id="faq">
+<title
+>Pytania i odpowiedzi</title>
+&reporting.bugs; &updating.documentation; <qandaset id="faqlist"
+> <qandaentry>
+<question>
+<para
+>Dlaczego nie działa protokół <acronym
+>RDP</acronym
+>?</para>
+</question>
+<answer>
+<para
+><acronym
+>RDP</acronym
+> support in &krdc; depends on rdesktop. Make sure that you have installed this runtime dependency. </para>
+</answer>
+</qandaentry>
+</qandaset>
+
+</chapter>
+
+<chapter id="credits">
+
+<!-- Include credits for the programmers, documentation writers, and
+contributors here. The license for your software should then be included below
+the credits with a reference to the appropriate license file included in the K D E
+distribution. -->
+
+<title
+>Zasługi i licencje</title>
+
+<para
+>&krdc; </para>
+<para
+>Projekt &krdc; zapoczątkował Tim Jansen <email
+>tim@tjansen.de</email
+>. W ramach projektu Google Summer of Code 2007, Urs Wolfer <email
+>uwolfer @ kde.org</email
+> całkowicie przepisał &krdc;. Stało się to możliwe dzięki firmie Google, duże podziękowania należą się też wielkiemu mentorowi projektu Summer of Code, którym jest: &Brad.Hards; &Brad.Hards.mail;. </para>
+
+<para
+>Prawa autorskie do dokumentacji: &copy; 2003 &Brad.Hards; &Brad.Hards.mail; Prawa autorskie do dokumentacji: &copy; 2007 Urs Wolfer <email
+>uwolfer @ kde.org</email
+> </para>
+
+<para
+> Polskie tłumaczenie dokumentacji: <email
+>wozniakk@ceti.pl</email
+></para
+> 
+&underFDL; &underGPL; </chapter>
+
+<appendix id="installation">
+<title
+>Instalacja</title>
+
+<sect1 id="getting-krdc">
+<title
+>Jak zdobyć &krdc;</title>
+&install.intro.documentation; </sect1>
+
+<sect1 id="compilation">
+<title
+>Kompilacja i instalacja</title>
+&install.compile.documentation; </sect1>
+
+</appendix>
+
+&documentation.index;
+</book>
+
+<!--
+Local Variables:
+mode: xml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+
+vim:tabstop=2:shiftwidth=2:expandtab 
+-->

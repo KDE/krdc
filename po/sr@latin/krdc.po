@@ -1,0 +1,1628 @@
+# Translation of krdc.po into Serbian.
+# Chusslove Illich <caslav.ilic@gmx.net>, 2003, 2004, 2005, 2006, 2009, 2010, 2011, 2012, 2013, 2015, 2016.
+# Toplica Tanaskovic <toptan@kde.org.yu>, 2003, 2004.
+# Marko Rosic <roske@kde.org.yu>, 2003.
+# Slobodan Simic <slsimic@gmail.com>, 2005, 2009.
+# Mladen Pejakovic <pejakm@gmail.com>, 2008.
+# Dalibor Djuric <daliborddjuric@gmail.com>, 2010, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: krdc\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2020-06-14 02:12+0200\n"
+"PO-Revision-Date: 2016-11-28 01:33+0100\n"
+"Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
+"Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
+"Language: sr@latin\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
+"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
+"X-Environment: kde\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Časlav Ilić,Mladen Pejaković"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "caslav.ilic@gmx.net,pejakm@gmail.com"
+
+#: bookmarkmanager.cpp:63
+#, kde-format
+msgid "History"
+msgstr "Istorijat"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RememberSessions)
+#: config/general.ui:17
+#, kde-format
+msgid "Remember open sessions for next startup"
+msgstr "Zapamti otvorene sesije za sledeće pokretanje"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RememberHistory)
+#: config/general.ui:24
+#, kde-format
+msgid "Remember connection history"
+msgstr "Pamti istorijat povezivanja"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_WalletSupport)
+#: config/general.ui:31
+#, kde-format
+msgid "Remember passwords (KWallet)"
+msgstr "Pamti lozinke (K‑novčanik)"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SystemTrayIcon)
+#: config/general.ui:38
+#, kde-format
+msgid "Enable system tray icon"
+msgstr "Ikonica u sistemskoj kaseti"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowStatusBar)
+#: config/general.ui:45
+#, kde-format
+msgid "Show status bar"
+msgstr "Traka stanja"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_KeepAspectRatio)
+#: config/general.ui:52
+#, kde-format
+msgid "Keep aspect ratio when scaling"
+msgstr "Zadrži odnos pri skaliranju"
+
+#. i18n: ectx: property (text), widget (QLabel, backgroundLabel)
+#: config/general.ui:61
+#, kde-format
+msgid "Background color of empty place:"
+msgstr "Boja pozadine praznog prostora:"
+
+#. i18n: ectx: property (title), widget (QGroupBox, connectionGroupBox)
+#: config/general.ui:93
+#, kde-format
+msgid "When Connecting"
+msgstr "Pri povezivanju"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowPreferencesForNewConnections)
+#: config/general.ui:99
+#, kde-format
+msgid "Show the preferences dialog for new connections"
+msgstr "Prikaži dijalog postavki za nove veze"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_ResizeOnConnect)
+#: config/general.ui:106
+#, kde-format
+msgid ""
+"This option will resize the window to fit the connection size.  If it is too "
+"big, it will maximize the window."
+msgstr ""
+"Ova opcija će uklopiti veličinu prozora u veličinu veze. Ako je prevelika, "
+"maksimizovaće prozor."
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ResizeOnConnect)
+#: config/general.ui:109
+#, kde-format
+msgid "Resize to fit"
+msgstr "Uklopi veličinu"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_FullscreenOnConnect)
+#: config/general.ui:116
+#, kde-format
+msgid ""
+"This option switches to fullscreen only if the connection resolution is the "
+"same as the current screen resolution"
+msgstr ""
+"Ova opcija prebacuje na ceo ekran samo ako je rezolucija veze ista kao "
+"tekućeg ekrana."
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_FullscreenOnConnect)
+#: config/general.ui:119
+#, kde-format
+msgid "Switch to Fullscreen if appropriate"
+msgstr "Preko celog ekrana ako odgovara"
+
+#. i18n: ectx: property (text), widget (QLabel, defaultProtocolLabel)
+#: config/general.ui:128
+#, kde-format
+msgid "Default protocol:"
+msgstr "Podrazumevani protokol:"
+
+# literal-segment: vnc
+#. i18n: ectx: property (text), widget (QLineEdit, kcfg_DefaultProtocol)
+#: config/general.ui:135
+#, kde-format
+msgid "vnc"
+msgstr "vnc"
+
+#. i18n: ectx: property (title), widget (QGroupBox, tabGroupBox)
+#: config/general.ui:147
+#, kde-format
+msgid "Tab Settings"
+msgstr "Postavke jezičaka"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowTabBar)
+#: config/general.ui:153
+#, kde-format
+msgid "Always show tab bar"
+msgstr "Uvek prikazuj jezičke"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabCloseButton)
+#: config/general.ui:160
+#, kde-format
+msgid "Show close button on tabs"
+msgstr "Dugme za zatvaranje na jezičku"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabMiddleClick)
+#: config/general.ui:167
+#, kde-format
+msgid "Middle-click on a tab closes it"
+msgstr "Srednji klik na jezičak zatvara ga"
+
+#. i18n: ectx: property (text), widget (QLabel, tabOrientationLabel)
+#: config/general.ui:176
+#, kde-format
+msgid "Tab position:"
+msgstr "Položaj jezičaka:"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TabPosition)
+#: config/general.ui:184
+#, kde-format
+msgid "Top"
+msgstr "vrh"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TabPosition)
+#: config/general.ui:189
+#, kde-format
+msgid "Bottom"
+msgstr "dno"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TabPosition)
+#: config/general.ui:194
+#, kde-format
+msgid "Left"
+msgstr "levo"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TabPosition)
+#: config/general.ui:199
+#, kde-format
+msgid "Right"
+msgstr "desno"
+
+#: config/hostpreferenceslist.cpp:47
+#, kde-format
+msgid "Configure..."
+msgstr "Podesi..."
+
+#: config/hostpreferenceslist.cpp:53
+#, kde-format
+msgid "Remove"
+msgstr "Ukloni"
+
+#: config/hostpreferenceslist.cpp:117 mainwindow.cpp:651
+#, kde-format
+msgid "The selected host cannot be handled."
+msgstr "Ne mogu da obradim izabrani domaćin."
+
+#: config/hostpreferenceslist.cpp:118 mainwindow.cpp:296 mainwindow.cpp:652
+#, kde-format
+msgid "Unusable URL"
+msgstr "Neupotrebljiv URL"
+
+#: config/preferencesdialog.cpp:42
+#, kde-format
+msgctxt "General Config"
+msgid "General"
+msgstr "Opšte"
+
+#: config/preferencesdialog.cpp:42
+#, kde-format
+msgid "General Configuration"
+msgstr "Opšte podešavanje"
+
+#: config/preferencesdialog.cpp:47
+#, kde-format
+msgid "Hosts"
+msgstr "Domaćini"
+
+#: config/preferencesdialog.cpp:47 core/hostpreferences.cpp:182
+#: core/hostpreferences.cpp:186
+#, kde-format
+msgid "Host Configuration"
+msgstr "Podešavanje domaćina"
+
+#: config/preferencesdialog.cpp:52 config/preferencesdialog.cpp:54
+#, kde-format
+msgid "Plugins"
+msgstr "Priključci"
+
+#: config/preferencesdialog.cpp:54
+#, kde-format
+msgid "Plugin Configuration"
+msgstr "Podešavanje priključaka"
+
+# >> @item
+#: connectiondelegate.cpp:50
+#, kde-format
+msgid "Less than a minute ago"
+msgstr "pre manje od minuta"
+
+# >> @item
+#: connectiondelegate.cpp:51
+#, kde-format
+msgid "A minute ago"
+msgid_plural "%1 minutes ago"
+msgstr[0] "pre %1 minut"
+msgstr[1] "pre %1 minuta"
+msgstr[2] "pre %1 minuta"
+msgstr[3] "pre minut"
+
+# >> @item
+#: connectiondelegate.cpp:53
+#, kde-format
+msgid "An hour ago"
+msgid_plural "%1 hours ago"
+msgstr[0] "pre %1 sat"
+msgstr[1] "pre %1 sata"
+msgstr[2] "pre %1 sati"
+msgstr[3] "pre sat"
+
+# >> @item
+#: connectiondelegate.cpp:57
+#, kde-format
+msgid "Yesterday"
+msgid_plural "%1 days ago"
+msgstr[0] "pre %1 dan"
+msgstr[1] "pre %1 dana"
+msgstr[2] "pre %1 dana"
+msgstr[3] "juče"
+
+# >> @item
+#: connectiondelegate.cpp:59
+#, kde-format
+msgid "Over a month ago"
+msgid_plural "%1 months ago"
+msgstr[0] "pre %1 mesec"
+msgstr[1] "pre %1 meseca"
+msgstr[2] "pre %1 meseci"
+msgstr[3] "pre više od meseca"
+
+# >> @item
+#: connectiondelegate.cpp:60
+#, kde-format
+msgid "A year ago"
+msgid_plural "%1 years ago"
+msgstr[0] "pre %1 godinu"
+msgstr[1] "pre %1 godine"
+msgstr[2] "pre %1 godina"
+msgstr[3] "pre godinu"
+
+#: core/hostpreferences.cpp:189
+#, kde-format
+msgid ""
+"Note that settings might only apply when you connect next time to this host."
+msgstr ""
+"Može biti da će se postavke primeniti tek pri sledećem povezivanju na ovaj "
+"domaćin."
+
+#: core/hostpreferences.cpp:205
+#, kde-format
+msgid "Show this dialog again for this host"
+msgstr "Prikaži ovaj dijalog ponovo za ovaj domaćin"
+
+#: core/hostpreferences.cpp:209
+#, kde-format
+msgid "Remember password (KWallet)"
+msgstr "Zapamti lozinku  (K‑novčanik)"
+
+#. i18n: ectx: label, entry (OpenSessions), group (General)
+#: core/krdc.kcfg:16
+#, kde-format
+msgid "Sessions"
+msgstr "Sesije"
+
+#: konsole/konsoleviewfactory.cpp:66
+#, kde-format
+msgid "New Konsole Connection..."
+msgstr "Nova veza Konsole..."
+
+#: konsole/konsoleviewfactory.cpp:71
+#, kde-format
+msgid "KRDC Konsole Connection"
+msgstr "Veza Konsole kroz KRDC"
+
+#: konsole/konsoleviewfactory.cpp:76
+#, kde-format
+msgid ""
+"<html>Enter the address here. Port is optional.<br /><i>Example: "
+"konsoleserver (host)</i></html>"
+msgstr ""
+"<html>Unesite adresu ovde. Port nije obavezan.<br /><i>Na primer: "
+"<tt>konsoleserver</tt> (domaćin)</i></html>"
+
+#. i18n: ectx: Menu (session)
+#: krdcui.rc:8
+#, kde-format
+msgid "&Session"
+msgstr "&Sesija"
+
+#. i18n: ectx: ToolBar (krdc_remote_view_toolbar)
+#: krdcui.rc:22
+#, kde-format
+msgid "Remote View Toolbar"
+msgstr "Traka alatki udaljenog prikaza"
+
+#: main.cpp:76
+#, kde-format
+msgid "KRDC"
+msgstr "KRDC"
+
+#: main.cpp:77 systemtrayicon.cpp:41
+#, kde-format
+msgid "KDE Remote Desktop Client"
+msgstr "KDE‑ov klijent udaljene površi"
+
+# well-spelled: Бостон
+#: main.cpp:79
+#, kde-format
+msgid ""
+"(c) 2007-2016, Urs Wolfer\n"
+"(c) 2001-2003, Tim Jansen\n"
+"(c) 2002-2003, Arend van Beelen jr.\n"
+"(c) 2000-2002, Const Kaplinsky\n"
+"(c) 2000, Tridia Corporation\n"
+"(c) 1999, AT&T Laboratories Boston\n"
+"(c) 1999-2003, Matthew Chapman\n"
+"(c) 2009, Collabora Ltd"
+msgstr ""
+"© 2007–2016, Urs Volfer\n"
+"© 2001–2003, Tim Jansen\n"
+"© 2002–2003, Arend van Belen\n"
+"© 2000–2002, Konstantin Kaplinski\n"
+"© 2000, kompanija Tridia\n"
+"© 1999, laboratorije AT&T‑a Boston\n"
+"© 1999-2003, Metju Čapman\n"
+"© 2009, Collabora"
+
+#: main.cpp:88
+#, kde-format
+msgid "Urs Wolfer"
+msgstr "Urs Volfer"
+
+#: main.cpp:88
+#, kde-format
+msgid "Developer, Maintainer"
+msgstr "Programer, održavalac"
+
+#: main.cpp:89
+#, kde-format
+msgid "Tony Murray"
+msgstr "Toni Mari"
+
+#: main.cpp:89
+#, kde-format
+msgid "Developer"
+msgstr "Programer"
+
+#: main.cpp:90
+#, kde-format
+msgid "Tim Jansen"
+msgstr "Tim Jansen"
+
+#: main.cpp:90
+#, kde-format
+msgid "Former Developer"
+msgstr "Bivši programer"
+
+#: main.cpp:91
+#, kde-format
+msgid "Arend van Beelen jr."
+msgstr "Arend van Belen"
+
+#: main.cpp:91
+#, kde-format
+msgid "Initial RDP backend"
+msgstr "Prvobitna pozadina RDP‑a"
+
+#: main.cpp:92
+#, kde-format
+msgid "Brad Hards"
+msgstr "Bred Hards"
+
+#: main.cpp:92
+#, kde-format
+msgid "Google Summer of Code 2007 KRDC project mentor"
+msgstr "Mentor projekta KRDC tokom Googleovog „Leta kôda 2007“"
+
+#: main.cpp:94
+#, kde-format
+msgid "LibVNCServer / LibVNCClient developers"
+msgstr "Programeri za LibVNCServer i LibVNCClient"
+
+#: main.cpp:94
+#, kde-format
+msgid "VNC client library"
+msgstr "Biblioteka VNC klijenta"
+
+#: main.cpp:96
+#, kde-format
+msgid "Abner Silva"
+msgstr "Abner Silva"
+
+#: main.cpp:96
+#, kde-format
+msgid "Telepathy Tubes Integration"
+msgstr "Uklapanje cevi Telepathyja"
+
+#: main.cpp:107
+#, kde-format
+msgid ""
+"Start KRDC with the provided URL in fullscreen mode (works only with one URL)"
+msgstr "Pokreni KRDC sa datim URL‑om preko celog ekrana (može samo jedan URL)"
+
+#: main.cpp:108
+#, kde-format
+msgid "URLs to connect after startup"
+msgstr "URL‑ovi za povezivanje nakon pokretanja"
+
+#: mainwindow.cpp:123
+#, kde-format
+msgid "KDE Remote Desktop Client started"
+msgstr "KDE‑ov klijent udaljene površi je pokrenut"
+
+#: mainwindow.cpp:128 mainwindow.cpp:141 mainwindow.cpp:1037
+#: mainwindow.cpp:1134
+#, kde-format
+msgid "New Connection"
+msgstr "Nova veza"
+
+#: mainwindow.cpp:147
+#, kde-format
+msgid "Copy Screenshot to Clipboard"
+msgstr "Kopiraj snimak ekrana u klipbord"
+
+#: mainwindow.cpp:148
+#, kde-format
+msgid "Screenshot"
+msgstr "Snimak ekrana"
+
+#: mainwindow.cpp:153 mainwindow.cpp:489
+#, kde-format
+msgid "Switch to Full Screen Mode"
+msgstr "Prebaci preko celog ekrana"
+
+#: mainwindow.cpp:154 mainwindow.cpp:490
+#, kde-format
+msgid "Full Screen"
+msgstr "Ceo ekran"
+
+#: mainwindow.cpp:161
+#, kde-format
+msgid "View Only"
+msgstr "Samo pregled"
+
+#: mainwindow.cpp:166
+#, kde-format
+msgid "Disconnect"
+msgstr "Prekini vezu"
+
+# skip-rule: t-cursor
+#: mainwindow.cpp:174
+#, kde-format
+msgid "Show Local Cursor"
+msgstr "Prikaži lokalni pokazivač"
+
+# skip-rule: t-cursor
+#: mainwindow.cpp:175
+#, kde-format
+msgid "Local Cursor"
+msgstr "Lokalni pokazivač"
+
+#: mainwindow.cpp:181
+#, kde-format
+msgid "Grab All Possible Keys"
+msgstr "Hvataj sve moguće tastere"
+
+#: mainwindow.cpp:182
+#, kde-format
+msgid "Grab Keys"
+msgstr "Hvataj tastere"
+
+#: mainwindow.cpp:188
+#, kde-format
+msgid "Scale Remote Screen to Fit Window Size"
+msgstr "Skaliraj udaljeni ekran da stane u prozor"
+
+#: mainwindow.cpp:189
+#, kde-format
+msgid "Scale"
+msgstr "Skaliraj"
+
+#: mainwindow.cpp:199
+#, kde-format
+msgid "Bookmarks"
+msgstr "Obeleživači"
+
+#: mainwindow.cpp:272
+#, kde-format
+msgid ""
+"The entered address does not have the required form.\n"
+" Syntax: [username@]host[:port]"
+msgstr ""
+"Uneta adresa nema zahtevani oblik.\n"
+"Sintaksa: [korisnik@]domaćin[:port]"
+
+#: mainwindow.cpp:273
+#, kde-format
+msgid "Malformed URL"
+msgstr "Loše formiran URL"
+
+#: mainwindow.cpp:295
+#, kde-format
+msgid "The entered address cannot be handled."
+msgstr "Ne mogu da obradim unetu adresu."
+
+#: mainwindow.cpp:415
+#, kde-format
+msgid "Connecting to %1"
+msgstr "Povezujem se sa %1"
+
+#: mainwindow.cpp:419
+#, kde-format
+msgid "Authenticating at %1"
+msgstr "Autentifikujem se kod %1"
+
+#: mainwindow.cpp:423
+#, kde-format
+msgid "Preparing connection to %1"
+msgstr "Pripremam vezu sa %1"
+
+#: mainwindow.cpp:427
+#, kde-format
+msgid "Connected to %1"
+msgstr "Povezan sa %1"
+
+#: mainwindow.cpp:498
+#, kde-format
+msgctxt ""
+"window title when in full screen mode (for example displayed in tasklist)"
+msgid "KDE Remote Desktop Client (Full Screen)"
+msgstr "KDE‑ov klijent udaljene površi (ceo ekran)"
+
+#: mainwindow.cpp:526
+#, kde-format
+msgid "Switch to Window Mode"
+msgstr "Prebaci na prozor"
+
+#: mainwindow.cpp:527
+#, kde-format
+msgid "Window Mode"
+msgstr "Prozor"
+
+#: mainwindow.cpp:672
+#, kde-format
+msgid "Connect"
+msgstr "Poveži"
+
+#: mainwindow.cpp:673
+#, kde-format
+msgid "Rename"
+msgstr "Preimenuj"
+
+#: mainwindow.cpp:674
+#, kde-format
+msgid "Settings"
+msgstr "Postavke"
+
+#: mainwindow.cpp:675
+#, kde-format
+msgid "Delete"
+msgstr "Obriši"
+
+#: mainwindow.cpp:678 remotedesktopsmodel.cpp:122
+#, kde-format
+msgctxt "Where each displayed link comes from"
+msgid "Bookmarks"
+msgstr "Obeleživači"
+
+#: mainwindow.cpp:679 remotedesktopsmodel.cpp:124
+#, kde-format
+msgctxt "Where each displayed link comes from"
+msgid "History"
+msgstr "Istorijat"
+
+# >> @title:window
+#: mainwindow.cpp:691
+#, kde-format
+msgid "Rename %1"
+msgstr "Preimenovanje „%1“"
+
+#: mainwindow.cpp:691
+#, kde-format
+msgid "Rename %1 to"
+msgstr "Preimenuj „%1“ u"
+
+#: mainwindow.cpp:699
+#, kde-format
+msgid "Are you sure you want to delete %1?"
+msgstr "Želite li zaista da obrišete „%1“?"
+
+# >> @title:window
+#: mainwindow.cpp:699
+#, kde-format
+msgid "Delete %1"
+msgstr "Brisanje „%1“"
+
+#: mainwindow.cpp:721
+#, kde-format
+msgid "Add Bookmark"
+msgstr "Dodaj obeleživač"
+
+#: mainwindow.cpp:722
+#, kde-format
+msgid "Close Tab"
+msgstr "Zatvori jezičak"
+
+#: mainwindow.cpp:803
+#, kde-format
+msgid "Minimize Full Screen Window"
+msgstr "Minimizuj prozor celog ekrana"
+
+#: mainwindow.cpp:818
+#, kde-format
+msgid "Stick Toolbar"
+msgstr "Zalepi traku alatki"
+
+#: mainwindow.cpp:932
+#, kde-format
+msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
+msgstr "Želite li zaista da napustite KDE‑ov klijent udaljene površi?"
+
+# >> @title:window
+#: mainwindow.cpp:933
+#, kde-format
+msgid "Confirm Quit"
+msgstr "Potvrda napuštanja"
+
+#: mainwindow.cpp:1060
+#, kde-format
+msgid "Connect to:"
+msgstr "Poveži se sa:"
+
+#: mainwindow.cpp:1064
+#, kde-format
+msgid "Type here to connect to an address and filter the list."
+msgstr "Kucajte ovde se povežete na adresu i filtrirate spisak."
+
+# rewrite-msgid: /line/field/
+#: mainwindow.cpp:1073
+#, kde-format
+msgid ""
+"Type an IP or DNS Name here. Clear the line to get a list of connection "
+"methods."
+msgstr ""
+"Ovde unesite IP ili DNS ime. Očistite polje da dobijete spisak metoda "
+"povezivanja."
+
+#: mainwindow.cpp:1076
+#, kde-format
+msgid "Goto Address"
+msgstr "Idi na adresu"
+
+#: mainwindow.cpp:1170
+#, kde-format
+msgid "Remote Desktops"
+msgstr "Udaljene površi"
+
+#: mainwindow.cpp:1201
+#, kde-format
+msgid "Filter"
+msgstr "Filter"
+
+#: rdp/rdphostpreferences.cpp:192
+#, kde-format
+msgid "Browse to media share path"
+msgstr ""
+
+#. i18n: ectx: property (title), widget (QGroupBox, connectionGroupBox)
+#. i18n: ectx: property (title), widget (QGroupBox, vncGroupBox)
+#: rdp/rdppreferences.ui:17 vnc/vncpreferences.ui:17
+#, kde-format
+msgid "Connection"
+msgstr "Veza"
+
+#. i18n: ectx: property (text), widget (QLabel, resolutionLabel)
+#: rdp/rdppreferences.ui:25
+#, kde-format
+msgid "Desktop &resolution:"
+msgstr "&Rezolucija površi:"
+
+#. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_Resolution)
+#. i18n: ectx: property (whatsThis), widget (KComboBox, resolutionComboBox)
+#: rdp/rdppreferences.ui:48 vnc/vncpreferences.ui:86
+#, kde-format
+msgid ""
+"Here you can specify the resolution of the remote desktop. This resolution "
+"determines the size of the desktop that will be presented to you."
+msgstr ""
+"Ovde možete navesti rezoluciju udaljene površi. Ona određuje veličinu površi "
+"koja će vam biti predstavljena."
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
+#: rdp/rdppreferences.ui:55 vnc/vncpreferences.ui:93
+#, kde-format
+msgid "Minimal (640x480)"
+msgstr "najmanja (640×480)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
+#: rdp/rdppreferences.ui:60 vnc/vncpreferences.ui:98
+#, kde-format
+msgid "Small (800x600)"
+msgstr "mala (800×600)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
+#: rdp/rdppreferences.ui:65 vnc/vncpreferences.ui:103
+#, kde-format
+msgid "Normal (1024x768)"
+msgstr "normalna (1024×768)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
+#: rdp/rdppreferences.ui:70 vnc/vncpreferences.ui:108
+#, kde-format
+msgid "Large (1280x1024)"
+msgstr "velika (1280×1024)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
+#: rdp/rdppreferences.ui:75 vnc/vncpreferences.ui:113
+#, kde-format
+msgid "Very Large (1600x1200)"
+msgstr "veoma velika (1600×1200)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
+#: rdp/rdppreferences.ui:80 vnc/vncpreferences.ui:118
+#, kde-format
+msgid "Current Screen Resolution"
+msgstr "tekuća rezolucija ekrana"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
+#: rdp/rdppreferences.ui:85 vnc/vncpreferences.ui:123
+#, kde-format
+msgid "Custom Resolution (...)"
+msgstr "posebna rezolucija (...)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#: rdp/rdppreferences.ui:90
+#, kde-format
+msgid "Current KRDC Size"
+msgstr "Trenutna veličina KRDC‑a"
+
+#. i18n: ectx: property (text), widget (QLabel, widthLabel)
+#: rdp/rdppreferences.ui:103 vnc/vncpreferences.ui:136
+#, kde-format
+msgid "&Width:"
+msgstr "Širi&na:"
+
+#. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Width)
+#. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_ScalingWidth)
+#: rdp/rdppreferences.ui:119 vnc/vncpreferences.ui:152
+#, kde-format
+msgid ""
+"This is the width of the remote desktop. You can only change this value "
+"manually if you select Custom as desktop resolution above."
+msgstr ""
+"Ovo je širina udaljene površi. Vrednost možete ručno postaviti samo ako gore "
+"odaberete posebnu rezoluciju."
+
+#. i18n: ectx: property (text), widget (QLabel, heightLabel)
+#: rdp/rdppreferences.ui:135 vnc/vncpreferences.ui:168
+#, kde-format
+msgid "H&eight:"
+msgstr "Vi&sina:"
+
+#. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Height)
+#. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_ScalingHeight)
+#: rdp/rdppreferences.ui:151 vnc/vncpreferences.ui:184
+#, kde-format
+msgid ""
+"This is the height of the remote desktop. You can only change this value "
+"manually if you select Custom as desktop resolution above."
+msgstr ""
+"Ovo je visina udaljene površi. Vrednost možete ručno postaviti samo ako gore "
+"odaberete posebnu rezoluciju."
+
+#. i18n: ectx: property (text), widget (QLabel, colorDepthLabel)
+#: rdp/rdppreferences.ui:168
+#, kde-format
+msgid "Color &depth:"
+msgstr "&Dubina boja:"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
+#: rdp/rdppreferences.ui:185
+#, kde-format
+msgid "Low Color (8 Bit)"
+msgstr "niska (8‑bitno)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
+#: rdp/rdppreferences.ui:190
+#, kde-format
+msgid "High Color (16 Bit)"
+msgstr "visoka (16‑bitno)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
+#: rdp/rdppreferences.ui:195
+#, kde-format
+msgid "True Color (24 Bit)"
+msgstr "pun kolor (24‑bitno)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
+#: rdp/rdppreferences.ui:200
+#, kde-format
+msgid "True Color with Alpha (32 Bit)"
+msgstr "pun kolor sa alfom (32‑bitno)"
+
+#. i18n: ectx: property (text), widget (QLabel, layoutLabel)
+#: rdp/rdppreferences.ui:208
+#, kde-format
+msgid "&Keyboard layout:"
+msgstr "Raspored &tastature:"
+
+#. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:224
+#, kde-format
+msgid ""
+"Use this to specify your keyboard layout. This layout setting is used to "
+"send the correct keyboard codes to the server."
+msgstr ""
+"Ovim navodite svoj raspored tastature. Ova postavka se koristi za slanje "
+"ispravnih kodova tastature serveru."
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:231
+#, kde-format
+msgid "Arabic (ar)"
+msgstr "arapski (ar)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:236
+#, kde-format
+msgid "Czech (cs)"
+msgstr "češki (cs)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:241
+#, kde-format
+msgid "Danish (da)"
+msgstr "danski (da)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:246
+#, kde-format
+msgid "German (de)"
+msgstr "nemački (de)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:251
+#, kde-format
+msgid "Swiss German (de-ch)"
+msgstr "švajcarski nemački (de-ch)"
+
+# well-spelled: дворак
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:256
+#, kde-format
+msgid "American Dvorak (en-dv)"
+msgstr "američki, dvorak (en-dv)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:261
+#, kde-format
+msgid "British English (en-gb)"
+msgstr "engleski, britanski (en-gb)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:266
+#, kde-format
+msgid "US English (en-us)"
+msgstr "engleski, američki (en-us)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:271
+#, kde-format
+msgid "Spanish (es)"
+msgstr "španski (es)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:276
+#, kde-format
+msgid "Estonian (et)"
+msgstr "estonski (et)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:281
+#, kde-format
+msgid "Finnish (fi)"
+msgstr "finski (fi)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:286
+#, kde-format
+msgid "Faroese (fo)"
+msgstr "farski (fo)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:291
+#, kde-format
+msgid "French (fr)"
+msgstr "francuski (fr)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:296
+#, kde-format
+msgid "Belgian (fr-be)"
+msgstr "belgijski (fr-be)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:301
+#, kde-format
+msgid "French Canadian (fr-ca)"
+msgstr "francuski, kanadski (fr-ca)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:306
+#, kde-format
+msgid "Swiss French (fr-ch)"
+msgstr "francuski, švajcarski (fr-ch)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:311
+#, kde-format
+msgid "Hebrew (he)"
+msgstr "hebrejski (he)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:316
+#, kde-format
+msgid "Croatian (hr)"
+msgstr "hrvatski (hr)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:321
+#, kde-format
+msgid "Hungarian (hu)"
+msgstr "mađarski (hu)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:326
+#, kde-format
+msgid "Icelandic (is)"
+msgstr "islandski (is)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:331
+#, kde-format
+msgid "Italian (it)"
+msgstr "italijanski (it)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:336
+#, kde-format
+msgid "Japanese (ja)"
+msgstr "japanski (ja)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:341
+#, kde-format
+msgid "Korean (ko)"
+msgstr "korejski (ko)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:346
+#, kde-format
+msgid "Lithuanian (lt)"
+msgstr "litvanski (lt)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:351
+#, kde-format
+msgid "Latvian (lv)"
+msgstr "letonski (lv)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:356
+#, kde-format
+msgid "Macedonian (mk)"
+msgstr "makedonski (mk)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:361
+#, kde-format
+msgid "Dutch (nl)"
+msgstr "holandski (nl)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:366
+#, kde-format
+msgid "Belgian Dutch (nl-be)"
+msgstr "holandski, belgijski (nl-be)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:371
+#, kde-format
+msgid "Norwegian (no)"
+msgstr "norveški (no)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:376
+#, kde-format
+msgid "Polish (pl)"
+msgstr "poljski (pl)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:381
+#, kde-format
+msgid "Portuguese (pt)"
+msgstr "portugalski (pt)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:386
+#, kde-format
+msgid "Brazilian (pt-br)"
+msgstr "portugalski, brazilski (pt-br)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:391
+#, kde-format
+msgid "Russian (ru)"
+msgstr "ruski (ru)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:396
+#, kde-format
+msgid "Slovenian (sl)"
+msgstr "slovenački (sl)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:401
+#, kde-format
+msgid "Swedish (sv)"
+msgstr "švedski (sv)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:406
+#, kde-format
+msgid "Thai (th)"
+msgstr "tajlandski (th)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:411
+#, kde-format
+msgid "Turkish (tr)"
+msgstr "turski (tr)"
+
+#. i18n: ectx: property (text), widget (QLabel, soundLabel)
+#: rdp/rdppreferences.ui:421
+#, kde-format
+msgctxt "label for soundsettings in preferences dialog"
+msgid "Sound:"
+msgstr "Zvuk:"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
+#: rdp/rdppreferences.ui:442
+#, kde-format
+msgid "On This Computer"
+msgstr "na ovom računaru"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
+#: rdp/rdppreferences.ui:447
+#, kde-format
+msgid "On Remote Computer"
+msgstr "na udaljenom računaru"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
+#: rdp/rdppreferences.ui:452
+#, kde-format
+msgid "Disable Sound"
+msgstr "bez zvuka"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_SoundSystem)
+#: rdp/rdppreferences.ui:467
+#, kde-format
+msgid "ALSA"
+msgstr "Alsa"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_SoundSystem)
+#: rdp/rdppreferences.ui:472
+#, kde-format
+msgid "PulseAudio"
+msgstr "PulseAudio"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_SoundSystem)
+#: rdp/rdppreferences.ui:477
+#, kde-format
+msgid "None"
+msgstr "nema"
+
+#. i18n: ectx: property (text), widget (QLabel, performanceLabel)
+#: rdp/rdppreferences.ui:487
+#, kde-format
+msgctxt "label for performance settings in preferences dialog"
+msgid "Performance:"
+msgstr "Performanse:"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Performance)
+#: rdp/rdppreferences.ui:504
+#, kde-format
+msgid "Modem"
+msgstr "modem"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Performance)
+#: rdp/rdppreferences.ui:509
+#, kde-format
+msgid "Broadband"
+msgstr "širokopojasna"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Performance)
+#: rdp/rdppreferences.ui:514
+#, kde-format
+msgid "LAN"
+msgstr "LAN"
+
+#. i18n: ectx: property (text), widget (QLabel, remoteFXLabel)
+#: rdp/rdppreferences.ui:522
+#, kde-format
+msgid "RemoteFX:"
+msgstr "RemoteFX:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RemoteFX)
+#: rdp/rdppreferences.ui:532
+#, kde-format
+msgid "Enhanced visual experience"
+msgstr "Poboljšan vizuelni doživljaj"
+
+# rewrite-msgid: /Remote Desktop Protocol/RDP/
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_RemoteFX)
+#: rdp/rdppreferences.ui:535
+#, kde-format
+msgid ""
+"RemoteFX covers a set of technologies that enhance visual experience of the "
+"Remote Desktop Protocol."
+msgstr ""
+"RemoteFX obuhvata skup tehnologija za poboljšavanje vizuelnog doživljaja "
+"preko protokola RDP."
+
+#. i18n: ectx: property (text), widget (QLabel, shareMediaLabel)
+#: rdp/rdppreferences.ui:542
+#, kde-format
+msgid "Share Media:"
+msgstr "Deljenje medijuma:"
+
+#. i18n: ectx: property (whatsThis), widget (KLineEdit, kcfg_ShareMedia)
+#: rdp/rdppreferences.ui:560
+#, kde-format
+msgid "Share a local media directory with the remote host."
+msgstr "Podelite lokalnu medija fasciklu sa udaljenim domaćinom."
+
+#. i18n: ectx: property (title), widget (QGroupBox, expertGroupBox)
+#: rdp/rdppreferences.ui:585
+#, kde-format
+msgid "Expert Options"
+msgstr "Znalačke opcije"
+
+#. i18n: ectx: property (text), widget (QLabel, consoleLabel)
+#: rdp/rdppreferences.ui:591
+#, kde-format
+msgid "Console login:"
+msgstr "Konzolna prijava:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_Console)
+#: rdp/rdppreferences.ui:601
+#, kde-format
+msgid "Attach to Windows Server console"
+msgstr "Prikači se na konzolu Windowsa Servera"
+
+#. i18n: ectx: property (text), widget (QLabel, extraOptionsLabel)
+#: rdp/rdppreferences.ui:608
+#, kde-format
+msgid "Extra options:"
+msgstr "Dodatne opcije:"
+
+#. i18n: ectx: property (whatsThis), widget (KLineEdit, kcfg_ExtraOptions)
+#: rdp/rdppreferences.ui:624
+#, kde-format
+msgid "Here you can enter additional xfreerdp (FreeRDP) options."
+msgstr "Ovde možete uneti dodatne opcije FreeRDP‑a (xfreerdp)."
+
+#. i18n: ectx: property (title), widget (QGroupBox, loginGroupBox)
+#: rdp/rdppreferences.ui:637
+#, kde-format
+msgid "Login"
+msgstr "Prijava"
+
+#. i18n: ectx: property (text), widget (QLabel, defaultUserLabel)
+#: rdp/rdppreferences.ui:645
+#, kde-format
+msgid "Default user name:"
+msgstr "Podrazumevano korisničko ime:"
+
+#. i18n: ectx: property (placeholderText), widget (KLineEdit, kcfg_DefaultRdpUserName)
+#: rdp/rdppreferences.ui:652
+#, kde-format
+msgid "No default user name"
+msgstr "Nema podrazumevanog korisničkog imena"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RecognizeLdapLogins)
+#: rdp/rdppreferences.ui:664
+#, kde-format
+msgid "Automatically recognize \"LDAP\"-Logins and share passwords"
+msgstr "Automatski prepoznaj LDAP-prijave i podeli lozinke"
+
+#: rdp/rdpview.cpp:120
+#, kde-format
+msgid "Media Folder does not Exist"
+msgstr ""
+
+#: rdp/rdpview.cpp:120
+#, kde-format
+msgid ""
+"The folder %1 does not exist.\n"
+"Please set an existing folder to share or empty the \"Share Media\" option "
+"if you do not want to share any folder."
+msgstr ""
+
+# >> @title:window
+#: rdp/rdpview.cpp:129
+#, kde-format
+msgid "Enter Username"
+msgstr "Unos korisničkog imena"
+
+#: rdp/rdpview.cpp:130
+#, kde-format
+msgid "Please enter the username you would like to use for login."
+msgstr "Unesite korisničko ime s kojim želite da se prijavite."
+
+#: rdp/rdpview.cpp:150 vnc/vncview.cpp:354
+#, kde-format
+msgid "Access to the system requires a password."
+msgstr "Pristup sistemu zahteva lozinku."
+
+#: rdp/rdpview.cpp:456
+#, fuzzy, kde-format
+#| msgid ""
+#| "Could not start \"xfreerdp\"; make sure xfreerdp is properly installed."
+msgid "Could not start \"%1\"; make sure %1 is properly installed."
+msgstr "Ne mogu da izvršim ‘xfreerdp’; proverite instalaciju."
+
+#: rdp/rdpview.cpp:457 rdp/rdpview.cpp:481 rdp/rdpview.cpp:485
+#, kde-format
+msgid "RDP Failure"
+msgstr "Krah RDP‑a"
+
+#: rdp/rdpview.cpp:479
+#, kde-format
+msgid ""
+"The version of \"xfreerdp\" you are using is too old.\n"
+"xfreerdp 1.0.2 or greater is required."
+msgstr ""
+"Koristite zastarelo izdanje ‘xfreerdp’.\n"
+"Potrebno je bar 1.0.2 ili novije."
+
+#: rdp/rdpview.cpp:484
+#, kde-format
+msgid "Connection failed. You might have passed a wrong address or username."
+msgstr "Povezivanje propalo. Možda ste uneli lošu adresu ili korisničko ime."
+
+#: rdp/rdpview.cpp:500
+#, kde-format
+msgid "Name or service not known."
+msgstr "Ime ili servis nisu poznati."
+
+#: rdp/rdpview.cpp:501 rdp/rdpview.cpp:507 rdp/rdpview.cpp:512
+#: rdp/rdpview.cpp:520
+#, kde-format
+msgid "Connection Failure"
+msgstr "Povezivanje nije uspelo"
+
+#: rdp/rdpview.cpp:506
+#, kde-format
+msgid "Connection attempt to host failed."
+msgstr "Pokušaj povezivanja sa domaćinom nije uspeo."
+
+#: rdp/rdpview.cpp:511
+#, kde-format
+msgid "Authentication failure, check credentials."
+msgstr "Autentifikacija propala, proverite akreditive."
+
+#: rdp/rdpview.cpp:519
+#, kde-format
+msgid ""
+"Connection attempt to host failed. Security negotiation or connection "
+"failure."
+msgstr ""
+"Pokušaj povezivanja sa domaćinom nije uspeo. Krah bezbednosnog pregovaranja "
+"ili veze."
+
+#: rdp/rdpviewfactory.cpp:39
+#, kde-format
+msgid "Connect to a Windows Remote Desktop (RDP)"
+msgstr "Poveži se na udaljenu windows površ (RDP)"
+
+#: rdp/rdpviewfactory.cpp:70
+#, kde-format
+msgid "New RDP Connection..."
+msgstr "Nova RDP veza..."
+
+#: rdp/rdpviewfactory.cpp:80
+#, kde-format
+msgid ""
+"<html>Enter the address here. Port is optional.<br /><i>Example: "
+"rdpserver:3389 (host:port)</i></html>"
+msgstr ""
+"<html>Unesite adresu ovde. Port nije obavezan.<br /><i>Na primer: "
+"<tt>rdpserver:3389</tt> (domaćin:port)</i></html>"
+
+# >> @info:tooltip/plain
+#: rdp/rdpviewfactory.cpp:87
+#, kde-format
+msgid ""
+"The application \"xfreerdp\" cannot be found on your system; make sure it is "
+"properly installed if you need RDP support."
+msgstr ""
+"Naredba ‘xfreerdp’ nije nađena na sistemu; ako želite podršku za RDP, "
+"proverite da li je pravilno instalirana"
+
+#: remotedesktopsmodel.cpp:126
+#, kde-format
+msgctxt "Where each displayed link comes from"
+msgid "Zeroconf"
+msgstr "ZeroConf"
+
+#: remotedesktopsmodel.cpp:128
+#, kde-format
+msgctxt "Where each displayed link comes from"
+msgid "None"
+msgstr "niotkud"
+
+# >> @info:tooltip
+#: remotedesktopsmodel.cpp:144
+#, kde-format
+msgctxt "Remove the selected url from the bookarks menu"
+msgid "Remove the bookmark for %1."
+msgstr "Uklonite obeleživač za „%1“."
+
+# >> @info:tooltip
+#: remotedesktopsmodel.cpp:146
+#, kde-format
+msgctxt "Add the selected url to the bookmarks menu"
+msgid "Bookmark %1."
+msgstr "Obeležite „%1“."
+
+# >> @title:column +
+#: remotedesktopsmodel.cpp:185
+#, kde-format
+msgctxt "Header of the connections list, title/url for remote connection"
+msgid "Remote Desktop"
+msgstr "udaljene površi"
+
+# >> @title:column +
+#: remotedesktopsmodel.cpp:187
+#, kde-format
+msgctxt ""
+"Header of the connections list, the last time this connection was initiated"
+msgid "Last Connected"
+msgstr "poslednja veza"
+
+# >> @title:column +
+#: remotedesktopsmodel.cpp:189
+#, kde-format
+msgctxt ""
+"Header of the connections list, the number of times this connection has been "
+"visited"
+msgid "Visits"
+msgstr "posetâ̂"
+
+# >> @title:column +
+#: remotedesktopsmodel.cpp:191
+#, kde-format
+msgctxt "Header of the connections list, the time when this entry was created"
+msgid "Created"
+msgstr "dodato"
+
+# >> @title:column +
+#: remotedesktopsmodel.cpp:193
+#, kde-format
+msgctxt "Header of the connections list, where this entry comes from"
+msgid "Source"
+msgstr "izvor"
+
+#: vnc/vncclientthread.cpp:255
+#, kde-format
+msgid "VNC authentication type is not supported."
+msgstr "Tip VNC autentifikacije nije podržan."
+
+#: vnc/vncclientthread.cpp:274
+#, kde-format
+msgid "Server not found."
+msgstr "Server nije nađen."
+
+#: vnc/vncclientthread.cpp:291 vnc/vncclientthread.cpp:365
+#, kde-format
+msgid "VNC authentication failed."
+msgstr "VNC autentifikacija nije uspela."
+
+#: vnc/vncclientthread.cpp:296
+#, kde-format
+msgid "VNC authentication failed because of too many authentication tries."
+msgstr "VNC autentifikacija nije uspela zbog previše ponovljenih pokušaja."
+
+#: vnc/vncclientthread.cpp:300
+#, kde-format
+msgid "VNC server closed connection."
+msgstr "VNC server je zatvorio vezu."
+
+#: vnc/vncclientthread.cpp:307
+#, kde-format
+msgid "Disconnected: %1."
+msgstr "Veza prekinuta: %1."
+
+#: vnc/vncclientthread.cpp:490
+#, kde-format
+msgid "Reconnecting."
+msgstr "Ponovo se povezujem.."
+
+#: vnc/vncclientthread.cpp:553
+#, kde-format
+msgid "Reconnected."
+msgstr "Ponovo povezan."
+
+#: vnc/vncclientthread.cpp:555
+#, kde-format
+msgid "Connected."
+msgstr "Povezan."
+
+#. i18n: ectx: property (text), widget (QLabel, connectionLabel)
+#: vnc/vncpreferences.ui:23
+#, fuzzy, kde-format
+#| msgid "Connection type:"
+msgid "Connection &type:"
+msgstr "Tip veze:"
+
+#. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_Quality)
+#: vnc/vncpreferences.ui:39
+#, kde-format
+msgid ""
+"Use this to specify the performance of your connection. Note that you should "
+"select the speed of the weakest link - even if you have a high speed "
+"connection, it will not help you if the remote computer uses a slow modem. "
+"Choosing a level of quality that is too high on a slow link will cause "
+"slower response times. Choosing a lower quality will increase latencies in "
+"high speed connections and results in lower image quality, especially in "
+"'Low Quality' mode."
+msgstr ""
+"Koristite ovo da biste naveli performanse veze. Trebalo bi da izaberete "
+"brzinu najslabije karike — čak i ako imate visokobrzinsku vezu, neće vam "
+"biti od pomoći ako udaljeni računar koristi spori modem. Odabir previsokog "
+"nivoa kvaliteta za sporu vezu izazvaće sporija vremena odziva. Odabir nižeg "
+"kvaliteta povećaće kašnjenje u visokobrzinskim vezama i rezultovaće sniženim "
+"kvalitetom slike, posebno u režimu niskog kvaliteta."
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Quality)
+#: vnc/vncpreferences.ui:43
+#, kde-format
+msgid "High Quality (LAN, direct connection)"
+msgstr "visok kvalitet (LAN, direktna veza)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Quality)
+#: vnc/vncpreferences.ui:48
+#, kde-format
+msgid "Medium Quality (DSL, Cable, fast Internet)"
+msgstr "srednji kvalitet (DSL, kabl, brzi internet)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Quality)
+#: vnc/vncpreferences.ui:53
+#, kde-format
+msgid "Low Quality (Modem, ISDN, slow Internet)"
+msgstr "nizak kvalitet (modem, ISDN, spori internet)"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_Scaling)
+#: vnc/vncpreferences.ui:63
+#, kde-format
+msgid "Scale to Size:"
+msgstr "Uklopi na veličinu:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, use_ssh_tunnel)
+#: vnc/vncpreferences.ui:204
+#, kde-format
+msgid "Connect via SSH tunnel"
+msgstr ""
+
+#. i18n: ectx: property (title), widget (QGroupBox, ssh_groupBox)
+#: vnc/vncpreferences.ui:211
+#, kde-format
+msgid "SSH tunnel options"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, use_loopback)
+#: vnc/vncpreferences.ui:217
+#, kde-format
+msgid "Tunnel via loopback address"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: vnc/vncpreferences.ui:224
+#, kde-format
+msgid "Port:"
+msgstr ""
+
+# >> @title:window
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: vnc/vncpreferences.ui:244
+#, fuzzy, kde-format
+#| msgid "Enter Username"
+msgid "User name:"
+msgstr "Unos korisničkog imena"
+
+#: vnc/vncsshtunnelthread.cpp:115
+#, fuzzy, kde-format
+#| msgid "Connecting to %1"
+msgid "Error connecting to %1: %2"
+msgstr "Povezujem se sa %1"
+
+#: vnc/vncsshtunnelthread.cpp:140
+#, fuzzy, kde-format
+#| msgid "Authenticating at %1"
+msgid "Error authenticating with password: %1"
+msgstr "Autentifikujem se kod %1"
+
+#: vnc/vncsshtunnelthread.cpp:146 vnc/vncsshtunnelthread.cpp:164
+#: vnc/vncsshtunnelthread.cpp:170
+#, kde-format
+msgid "Error creating tunnel socket"
+msgstr ""
+
+#: vnc/vncview.cpp:355
+#, kde-format
+msgid "Authentication failed. Please try again."
+msgstr "Autentifikacija nije uspela. Pokušajte ponovo."
+
+#: vnc/vncview.cpp:383
+#, kde-format
+msgid "Please enter the SSH password."
+msgstr ""
+
+#: vnc/vncview.cpp:408 vnc/vncview.cpp:410
+#, kde-format
+msgid "VNC failure"
+msgstr "Krah VNC‑a"
+
+#: vnc/vncview.cpp:419 vnc/vncview.cpp:421
+#, kde-format
+msgid "SSH Tunnel failure"
+msgstr ""
+
+#: vnc/vncviewfactory.cpp:65
+#, kde-format
+msgid "New VNC Connection..."
+msgstr "Nova VNC veza..."
+
+#: vnc/vncviewfactory.cpp:70
+#, kde-format
+msgid "Connect to a VNC Remote Desktop"
+msgstr "Poveži se na VNC udaljenu površ"
+
+#: vnc/vncviewfactory.cpp:75
+#, kde-format
+msgid ""
+"<html>Enter the address here.<br /><i>Example: vncserver:1 (host:port / "
+"screen)</i></html>"
+msgstr ""
+"<html>Unesite adresu ovde.<br /><i>Primer: <tt>vncserver:1</tt> (domaćin:"
+"port/ekran)</i></html>"

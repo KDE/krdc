@@ -1,0 +1,606 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Catalan  "INCLUDE"
+> <!-- ONLY If you are writing non-English 
+                                     original documentation, change 
+                                     the language here -->
+    
+  <!-- Do not define any other entities; instead, use the entities
+       from entities/general.entities and $LANG/user.entities. -->
+]>
+<!-- Based on kdoctemplate v0.9 January 10 2003 -->
+
+<book id="krdc" lang="&language;">
+
+<!-- This header contains all of the meta-information for the document such
+as Authors, publish date, the abstract, and Keywords -->
+
+<bookinfo>
+<title
+>El manual de la &krdc;</title>
+
+<authorgroup>
+<author
+>&Brad.Hards; &Brad.Hards.mail; </author>
+<author
+><firstname
+>Urs</firstname
+> <surname
+>Wolfer</surname
+> <affiliation
+> <address
+><email
+>uwolfer @ kde.org</email
+></address>
+    </affiliation>
+</author>
+&traductor.Antoni.Bella; 
+</authorgroup>
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>25 de juliol de 2016</date>
+<releaseinfo
+>Aplicacions 16.08</releaseinfo>
+
+<copyright>
+<year
+>2003, 2008</year>
+</copyright>
+
+<abstract>
+<para
+>La &krdc; és una aplicació client que permet veure o fins i tot controlar la sessió d'escriptori sobre una altra màquina que estigui executant un servidor compatible. Estan suportats <acronym
+>VNC</acronym
+> i <acronym
+>RDP</acronym
+>. </para>
+</abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>kdenetwork</keyword>
+<keyword
+>krfb</keyword>
+<keyword
+>VNC</keyword>
+<keyword
+>RFB</keyword>
+<keyword
+>krdc</keyword>
+<keyword
+>Compartició de l'escriptori</keyword>
+<keyword
+>Control remot</keyword>
+<keyword
+>Assistència remota</keyword>
+<keyword
+>Escriptori remot</keyword>
+<keyword
+>RDP</keyword>
+<keyword
+>Administració remota</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Introducció</title>
+
+<para
+>La &krdc; és una aplicació client que permet veure o fins i tot controlar la sessió d'escriptori sobre una altra màquina que romangui executant un servidor compatible. </para>
+
+<para
+>Normalment emprareu la &krdc; junt amb el servidor <acronym
+>VNC</acronym
+> del &kde; (&krfb;), el qual també es coneix com a Krfb, atès que comparteix moltes de les característiques especials de la &krdc;. </para>
+
+<para
+>Si voleu iniciar la &krdc; des del &konsole;, l'ordre és <userinput
+><command
+>krdc</command
+></userinput
+>. </para>
+
+<para
+>Si us plau, informeu de qualsevol problema o petició d'una nova característica a la llista de correu del &kde; o d'un error a <ulink url="https://bugs.kde.org"
+>https://www.bugs.kde.org</ulink
+>. </para>
+</chapter>
+
+<chapter id="what-is-RFB">
+<title
+>El protocol de Frame Buffer remot</title>
+
+<para
+>Aquest capítol proporciona una curta descripció del protocol de Frame Buffer remot emprada per la &krdc; i per altres sistemes compatibles. Si ja esteu familiaritzat amb el protocol de Frame Buffer remot, podeu ometre aquest capítol. </para>
+
+<para
+>La implementació a alt nivell d'un sistema emprant el protocol de Frame Buffer remot es coneix com a ordinador de xarxa virtual («Virtual Network Computer»), o més sovint conegut com a <acronym
+>VNC</acronym
+>. </para>
+
+<para
+>El Frame Buffer remot (o <acronym
+>RFB</acronym
+>) és un protocol simple per a l'accés remot a interfícies d'usuari gràfiques. Aquest treballa a escala del frame-buffer, el qual correspon asprament a la imatge renderitzada a la pantalla, el qual significa que es pot aplicar a tots els sistemes de finestres (incloent-hi X11, &MacOS; i &Microsoft; &Windows;). Les aplicacions de Frame Buffer remot existeixen per a moltes plataformes i sovint es poden redistribuir lliurement. </para>
+
+<para
+>En el protocol de Frame Buffer remot, l'aplicació que s'executa a la màquina a on l'usuari es troba assegut (que conté la pantalla, el teclat i el punter), s'anomena el client. L'aplicació que s'executa a la màquina a on està localitzat el frame-buffer (en la qual s'executa el sistema de finestres i les aplicacions que l'usuari està controlant en mode remot) s'anomena el servidor. La &krdc; és el client del &kde; per al protocol de Frame Buffer remot. El &krfb; és el servidor del &kde; per al protocol de Frame Buffer remot. </para>
+
+<para
+>Aquest ús comporta una raonable quantitat de trànsit en xarxa atès que s'envia una imatge del framebuffer, de manera que el Frame Buffer remot funciona millor sobre enllaços de banda ampla, així com una xarxa d'àrea local. Tot i això és possible utilitzar la &krdc; sobre d'altres enllaços, però el rendiment no serà tan bo. </para>
+
+</chapter>
+
+<chapter id="using-krdc">
+<title
+>Ús de la &krdc;</title>
+
+<para
+>Utilitzar la &krdc; és realment fàcil -aquest disposa d'una interfície simple, com la que mostra la captura de pantalla de sota-. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Aquesta és una captura de pantalla de la &krdc;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="krdc_mainwindow.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Finestra principal de la &krdc;</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<sect1 id="compatible-versions"
+><title
+>Connectar la &krdc; amb servidors compatibles</title>
+
+<para
+>La &krdc; és un client, i necessita utilitzar-se junt amb servidors compatibles. Aquí hi ha diferents maneres per a connectar amb aquests servidors: </para>
+
+<itemizedlist>
+<listitem>
+<para
+>Directament escrivint el nom del servidor (o adreça IP) a l'entrada <guilabel
+>Connecta a:</guilabel
+>.</para
+> 
+</listitem>
+<listitem>
+<para
+>Per utilitzar una invitació que heu rebut. El &krfb; utilitza invitacions, i en pot enviar per correu electrònic.</para>
+</listitem>
+</itemizedlist>
+
+<para
+>Veurem cadascuna d'aquestes més tard. </para>
+
+<sect2
+><title
+>Introduir el nom del servidor</title>
+<para
+>Si coneixeu el nom (o adreça IP) del servidor al qual voleu connectar, la podeu escriure directament en l'entrada <guilabel
+>Connecta a:</guilabel
+>. </para>
+
+<para
+>Si voleu connectar a una màquina anomenada «megan», la qual està executant un servidor <acronym
+>VNC</acronym
+> sobre la pantalla 1 (5901), podeu introduir <userinput
+>megan:1</userinput
+> o <userinput
+>megan:5901</userinput
+> i trieu <guilabel
+>vnc</guilabel
+> com a protocol a la llista desplegable. </para>
+<para>
+<screenshot>
+<screeninfo
+>Introduint un nom de màquina en la &krdc;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="address_input.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Introduint un nom de màquina en la &krdc;</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>De manera similar, si esteu utilitzant un servidor <acronym
+>RDP</acronym
+> sobre aquesta màquina, podeu introduir <userinput
+>megan</userinput
+>. Trieu <guilabel
+>RDP</guilabel
+> com al protocol. <acronym
+>RDP</acronym
+> farà que no calgui especificar un número de pantalla. Si el servidor no està executant un servidor <acronym
+>RDP</acronym
+> sobre el port per omissió, el podreu especificar de la següent manera: <userinput
+>megan:3910</userinput
+> </para>
+<para
+>Haureu d'introduir un &URL; en la sintaxi codificada amb percentatges, &ead;, @ com a %40, &pex; <userinput
+>nomusuari%40ad.domini.exemple</userinput
+> </para>
+<!--https://bugs.kde.org/show_bug.cgi?id=261076-->
+
+</sect2>
+
+<sect2
+><title
+>Usar una invitació</title>
+<para
+>Amb l'aplicació de servidor &krfb;, és possible enviar invitacions sobre correu electrònic (i d'altres maneres, tot i que el correu electrònic és la més utilitzada). Si rebeu aquest tipus d'invitació per correu electrònic, podreu fer clic a sobre de l'enllaç proporcionat en el correu. Aquest iniciarà la &krdc; si no està ja en execució, i connectarà al servidor especificat a la invitació. </para>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="connection"
+><title
+>Què passa quan es connecta</title>
+
+<para
+>Nota: abans de connectar, comproveu que l'ordinador de destinació (servidor) estigui disponible a la xarxa i, si cal, que el seu tallafoc estigui configurat correctament o desactivat. </para>
+
+<para
+>Tant hi fa com heu seleccionat el servidor al qual connectar, el següent que succeeix és que la &krdc; us demanarà quant a la connexió de xarxa cap al servidor, tal com es mostra a sota: </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Seleccionant la velocitat de connexió de la &krdc;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="vnc_host_configuration.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Seleccionant la velocitat de connexió de la &krdc;</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Aquestes són les tres opcions de la velocitat a establir per al protocol <acronym
+>VNC</acronym
+>: </para>
+
+<itemizedlist>
+<listitem
+><para
+>Alta qualitat (LAN, connexió directa), aquesta és la predeterminada, i hauríeu d'avaluar com es comporta aquesta opció abans de seleccionar-ne una de més baixa. </para
+></listitem>
+<listitem
+><para
+>Qualitat mitjana (DSL, cable, Internet ràpida).</para
+></listitem>
+<listitem
+><para
+>Baixa qualitat (Mòdem, XDSI, Internet lenta).</para
+></listitem>
+</itemizedlist>
+
+<para
+>Si sempre opera sobre el mateix tipus de connexió, podeu desseleccionar la casella de selecció <guilabel
+>Mostra aquest diàleg altra vegada per aquesta màquina</guilabel
+>, el qual voldrà dir que no se us tornarà a demanar sobre el tipus de connexió per aquesta màquina, identificant-se de la mateixa manera. Per exemple, si un equip té dos noms, i es desselecciona dita casella de selecció quan es connecta emprant un nom, no se us tornarà a preguntar si es realitza la connexió amb aquest nom. Tot i que se us preguntarà si s'empra un nom o adreça IP diferent. </para>
+
+<para
+>Seleccioneu l'opció de velocitat apropiada, i seleccioneu <guibutton
+>D'acord</guibutton
+> per a continuar. </para>
+
+<para
+>Podeu veure l'estat de la connexió a la icona de la pestanya. </para>
+
+<para
+>Depenent de la configuració del servidor, hauríeu (i certament que ho fareu) de proporcionar una contrasenya per autenticar amb el servidor. La &krdc; us mostrarà un diàleg similar al mostrat a sota. </para>
+
+<para
+>La &krdc; disposa de l'habilitat de desar la contrasenya per a properes connexions a la mateixa màquina. Per a fer-ho s'utilitza el KWallet. Si la voleu emprar necessitareu marcar la casella de selecció <guibutton
+>Recorda la contrasenya (KWallet)</guibutton
+>. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Introducció de la contrasenya a la &krdc;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="password_entry.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Introducció de la contrasenya a la &krdc;</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Després d'autenticar ja estareu connectats amb el servidor remot, i podreu començar a utilitzar la &krdc; per observar o controlar l'escriptori remot. </para>
+
+</sect1>
+
+<sect1 id="controlling-remote"
+><title
+>Controlar la connexió amb l'escriptori remot</title>
+
+<para
+>Esteu connectat al servidor remot, normalment hauríeu d'utilitzar el teclat i el ratolí per a controlar el sistema de finestres i les aplicacions que hi ha a la màquina remota. </para>
+
+<para
+>A l'escriptori local podeu veure l'escriptori remot en mode a pantalla completa o com a finestra. Podeu canviar entre aquests modes utilitzant les icones que es mostren a sota. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Seleccionant el mode a pantalla completa de la &krdc;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="view-fullscreen.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Seleccionant el mode a pantalla completa de la &krdc;</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+<screenshot>
+<screeninfo
+>Seleccionant el mode de finestra de la &krdc;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="view-restore.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Seleccionant el mode de finestra de la &krdc;</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>El mode a pantalla completa normalment és millor quan esteu ajudant a un usuari remot, atès que podeu veure tot el que ell pot veure. El mode a finestra atorga tanta utilitat tant si s'està treballant en mode local com remot -en referència es podria estar consultant un document local i emprant dita informació en la màquina remota-. </para>
+
+<sect2
+><title
+>Usar el mode de finestra</title>
+
+<para
+>En el mode de finestra podreu finalitzar la connexió tancant la finestra, fent clic sobre el botó de sortida. </para>
+
+</sect2>
+
+<sect2
+><title
+>Usar el mode a pantalla completa</title>
+
+<para
+>En el mode a pantalla completa podeu canviar l'aparença de la barra d'eines. La seva transparència es pot controlar amb la roda del ratolí. </para>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="bookmarks"
+><title
+>Adreces d'interès</title>
+
+<para
+>La &krdc; disposa de l'habilitat de gestionar les adreces d'interès. Si necessiteu connectar sovint amb el mateix escriptori remot, podeu afegir una entrada per a aquesta connexió a la llista d'adreces d'interès. Ho podeu fer amb un clic sobre <menuchoice
+><guimenu
+>Adreces d'interès</guimenu
+> <guimenuitem
+>Afegeix una adreça d'interès</guimenuitem
+></menuchoice
+>. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>El menú adreces d'interès de la &krdc;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="bookmarks_menu.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>El menú adreces d'interès de la &krdc;</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+
+<sect2
+><title
+>Adreces d'interès a l'historial</title>
+
+<para
+>La &krdc; desa les darreres connexions a l'escriptori remot emprades. Podeu accedir a aquestes adreces d'interès especials a <menuchoice
+><guimenu
+>Adreces d'interès</guimenu
+><guimenuitem
+>Historial</guimenuitem
+></menuchoice
+>. Per descomptat, també podeu eliminar una preferida d'aquesta llista si no la necessiteu més. Simplement feu clic a <guibutton
+>Esborra l'adreça d'interès</guibutton
+> que apareix després d'un clic amb el &BDR; sobre l'adreça d'interès que voleu eliminar. </para>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="managing-configuration"
+><title
+>Gestionar la configuració de la &krdc;</title>
+<para
+>Utilitzant <menuchoice
+><guimenu
+>Arranjament</guimenu
+><guimenuitem
+>Configura el KRDC...</guimenuitem
+></menuchoice
+>, obrireu un diàleg per a modificar-ne el comportament. Seleccionant aquest botó apareixerà una finestra com la de sota: </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Preferències de la &krdc; - La pestanya General</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="general_preferences.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Preferències de la &krdc; - La pestanya <guilabel
+>General</guilabel
+></phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+<screenshot>
+<screeninfo
+>Preferències de la &krdc; - La pestanya <guilabel
+>Preferències VNC</guilabel
+></screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="vnc_preferences.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Preferències de la &krdc; - La pestanya de perfils <guilabel
+>Preferències VNC</guilabel
+></phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+<screenshot>
+<screeninfo
+>Preferències de la &krdc; - La pestanya <guilabel
+>RDP per omissió</guilabel
+></screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="rdp_preferences.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Preferències de la &krdc; - La pestanya de perfils <guilabel
+>RDP per omissió</guilabel
+></phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+
+</sect1>
+
+</chapter>
+
+<chapter id="faq">
+<title
+>Preguntes i respostes</title>
+
+<!-- (OPTIONAL but recommended) This chapter should include all of the silly
+(and not-so-silly) newbie questions that fill up your mailbox. This chapter
+should be reserved for BRIEF questions and answers! If one question uses more
+than a page or so then it should probably be part of the
+"Using this Application" chapter instead. You should use links to
+cross-reference questions to the parts of your documentation that answer them.
+This is also a great place to provide pointers to other FAQ's if your users
+must do some complicated configuration on other programs in order for your
+application work. -->
+
+<qandaset id="faqlist">
+<qandaentry>
+<question>
+<para
+>Què fa que el suport <acronym
+>RDP</acronym
+> no funcioni?</para>
+</question>
+<answer>
+<para
+>El suport <acronym
+>RDP</acronym
+> a la &krdc; depèn de xfreerdp (FreeRDP). Assegureu-vos que teniu instal·lada aquesta dependència abans d'executar el programa. </para>
+</answer>
+</qandaentry>
+</qandaset>
+
+</chapter>
+
+<chapter id="credits">
+
+<!-- Include credits for the programmers, documentation writers, and
+contributors here. The license for your software should then be included below
+the credits with a reference to the appropriate license file included in the K D E
+distribution. -->
+
+<title
+>Crèdits i llicència</title>
+
+<para
+>&krdc; </para>
+<para
+>El projecte &krdc; el va iniciar en Tim Jansen <email
+>tim@tjansen.de</email
+>. Com a un projecte de la Google Summer of Code 2007, en Urs Wolfer <email
+>uwolfer @ kde.org</email
+> l'ha reescrit completament. Gràcies a Google fer això possible, i gràcies al mentor d'aquest projecte al Summer of Code, en &Brad.Hards; &Brad.Hards.mail;. </para>
+
+<para
+>Copyright de la documentació &copy; 2003 &Brad.Hards; &Brad.Hards.mail; Copyright de la documentació &copy; 2007 Urs Wolfer <email
+>uwolfer @ kde.org</email
+> </para>
+
+<para
+>Traductor/Revisor de la documentació: &credits.Antoni.Bella;</para
+> &underFDL; &underGPL; </chapter>
+
+&documentation.index;
+</book>
+
+<!--
+Local Variables:
+mode: xml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+
+vim:tabstop=2:shiftwidth=2:expandtab 
+-->

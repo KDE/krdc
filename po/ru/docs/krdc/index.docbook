@@ -1,0 +1,718 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY kappname "&krdc;">
+  <!ENTITY package "kdenetwork">
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Russian "INCLUDE"
+> <!-- ONLY If you are writing non-English 
+                                     original documentation, change 
+                                     the language here -->
+    
+  <!-- Do not define any other entities; instead, use the entities
+       from entities/general.entities and $LANG/user.entities. -->
+]>
+<!-- Based on kdoctemplate v0.9 January 10 2003 -->
+
+<book lang="&language;">
+
+<!-- This header contains all of the meta-information for the document such
+as Authors, publish date, the abstract, and Keywords -->
+
+<bookinfo>
+<title
+>Руководство &krdc;</title>
+
+<authorgroup>
+<author
+>&Brad.Hards; &Brad.Hards.mail; </author>
+</authorgroup>
+
+<othercredit role="translator"
+><firstname
+>Олег</firstname
+><surname
+>Баталов</surname
+><affiliation
+><address
+><email
+>olegbatalov@mail.ru</email
+></address
+></affiliation
+><contrib
+>Перевод на русский язык</contrib
+></othercredit
+> 
+
+<copyright>
+<year
+>2003</year>
+<holder
+>&Brad.Hards;</holder>
+</copyright>
+<!-- Translators: put here the copyright notice of the translation -->
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>2003-09-27</date>
+<releaseinfo
+>1.0.0</releaseinfo>
+
+<abstract>
+<para
+>&krdc; - клиентское приложение, которое позволяет вам просматривать и управлять сеансом на другом компьютере, где выполняется совместимый сервер (VNC). </para>
+</abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>kdenetwork</keyword>
+<keyword
+>krfb</keyword>
+<keyword
+>VNC</keyword>
+<keyword
+>RFB</keyword>
+<keyword
+>krdc</keyword>
+<keyword
+>Предоставление экрана</keyword>
+<keyword
+>Удалённое управление</keyword>
+<keyword
+>Удалённая помощь</keyword>
+<keyword
+>Удалённый экран</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Введение</title>
+
+<para
+>&krdc; - клиентское приложение, которое позволяет вам просматривать и управлять сеансом на другом компьютере, где выполняется совместимый сервер (VNC). </para>
+
+<para
+>Вы будете использовать &krdc; совместно с &krfb;, сервером VNC для &kde;, поскольку он наиболее полно соответствует особенностям &krdc;. </para>
+
+<para
+>Сообщайте о любых проблемах или необходимости новых возможностей в список рассылки &kde; или зарегистрируйте ошибку по адресу <ulink url="http://bugs.kde.org"
+>http://bugs.kde.org</ulink
+>. </para>
+</chapter>
+
+<chapter id="what-is-RFB">
+<title
+>Протокол удалённых кадровых буферов</title>
+
+<para
+>Этот раздел содержит краткое описание протокола удалённого буфера кадров, используемый в &krdc; и другими совместимыми системами. Если вы с ним уже знакомы -- можете пропустить этот раздел. </para>
+
+<para
+>Реализация системы высокого уровня, использующая протокол удалённого буфера кадров, известна как Виртуальный сетевой компьютер, или просто <acronym
+>VNC</acronym
+>. </para>
+
+<para
+>Удалённый буфер кадров (или, для краткости <acronym
+>RFB</acronym
+>) это простой протокол для удалённого доступа к графическому интерфейсу пользователя. Это работает как уровень буферов кадров, который грубо соответствует прорисованному изображения экрана, что означает что это может применяться ко всем оконным системам (включая X11, &MacOS; и &Microsoft; &Windows;). Приложение удалённого буфера кадров существуют для большинства платформ, и часто распространяются свободно. </para>
+
+<para
+>В протоколе удалённого буфера кадров, приложение, выполняемое на компьютере, где находится пользователь (включая экран, клавиатуру и мышь) называется клиентом. Приложение выполняемое на компьютере, где расположен буфер кадров (на котором работает оконная система и приложения, которыми пользователь управляет дистанционно) называется сервером. &krfb; является сервером &kde; для протокола удалённого буфера кадров. &krdc; является клиентом &kde; для протокола удалённого буфера кадров. </para>
+
+<para
+>Этому протоколу требуется значительный объём сетевого трафика для передачи изображений в буфер кадров, так что удалённый буфер кадров работает быстро в высокоскоростных локальных сетях. Вы можете использовать &krdc; и в других сетях, но его производительность вряд ли будет хорошей. </para>
+
+</chapter>
+
+<chapter id="using-krdc">
+<title
+>Использование &krdc;</title>
+
+<para
+>&krdc; очень удобен, и имеет простой интерфейс, как показано на снимке экрана ниже. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Снимок экрана &krdc;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="snapshot.png" format="PNG"/>
+	  </imageobject>
+	  <imageobject>
+	    <imagedata fileref="snapshot.eps" format="EPS"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Главное окно &krdc;</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Если вы нажимаете кнопку <guibutton
+>Обзор &lt;&lt;</guibutton
+>, вы получите простой интерфейс, как показано ниже. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Главное окно &krdc;, без функциональности обзора</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="snapshot_nobrowse.png" format="PNG"/>
+	  </imageobject>
+	  <imageobject>
+	    <imagedata fileref="snapshot_nobrowse.eps" format="EPS"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Главное окно &krdc;, без функциональности обзора</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Если в нажмёте кнопку <guibutton
+>Обзор &gt;&gt;</guibutton
+>, вы вернёте обычный интерфейс. </para>
+
+<sect1 id="compatible-versions"
+><title
+>Подключение с помощью &krdc; к совместимым серверам</title>
+
+<para
+>&krdc; является клиентом и должен использоваться совместно с серверами. Существует три способа подключиться к ним. </para>
+
+<itemizedlist>
+<listitem>
+<para
+>Непосредственно набрав имя сервера (или адрес IP) в поле <guilabel
+>Удалённая рабочая станция:</guilabel
+>.</para
+> 
+</listitem>
+<listitem>
+<para
+>Используя приглашение, которое вы получили. &krfb; использует приглашения и может посылать их по электронной почте.</para>
+</listitem>
+<listitem>
+<para
+>Используя просмотр с помощью протокола расположения сервисов.</para>
+</listitem>
+</itemizedlist>
+
+<para
+>Давайте рассмотрим каждый из них более подробно. </para>
+
+<sect2
+><title
+>Имя сервера</title>
+<para
+>Если вы знаете имя хоста (или его адрес IP) сервера, к которому вы хотите подключиться, вы можете ввести его непосредственно в поле <guilabel
+>Удалённая рабочая станция:</guilabel
+> </para>
+
+<para
+>Если вы хотите подключиться к машине с именем megan, на которой выполняется сервер <acronym
+>VNC</acronym
+> на экране 1, вы можете ввести <userinput
+>megan:1</userinput
+> или как альтернативу <userinput
+>vnc:/megan:1</userinput
+> в поле <guilabel
+>Удалённая рабочая станция:</guilabel
+>. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Ввод имени сервера в &krdc;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="snapshot_vncentry.png" format="PNG"/>
+	  </imageobject>
+	  <imageobject>
+	    <imagedata fileref="snapshot_vncentry.eps" format="EPS"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Ввод имени сервера в &krdc;</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Аналогично, если вы используете на этой машине  сервер <acronym
+>RFB</acronym
+>, вы можете ввести <userinput
+>rfb:/megan</userinput
+>. RFB не нуждается в указании номера экрана. </para>
+
+</sect2>
+
+<sect2
+><title
+>Использование приглашения</title>
+<para
+>В приложении сервера &krfb; позможно послать приглашение по электронной почте (и другими способами, хотя почта является наиболее полезной). Если вы получили этот тип приглашения, вы можете просто щёлкнуть на ссылке содержащейся в письме. Это запустит &krdc; если он ещё не выполняется, и подключится к серверу, указанному в приглашении. </para>
+
+</sect2>
+
+<sect2
+><title
+>Использование протокола расположения сервисов</title>
+<para
+>Третий способ использования &krdc; - это поиск с помощью протокола расположения сервисов. Список совместимых серверов, которые зарегистрированы в системе протокола расположения сервисов, представлены в списке, расположенном в центре главного окна: </para>
+
+<para>
+<screenshot>
+<screeninfo
+>&krdc; показывающий просмотр сервисов</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="snapshot.png" format="PNG"/>
+	  </imageobject>
+	  <imageobject>
+	    <imagedata fileref="snapshot.eps" format="EPS"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>&krdc; показывающий просмотр сервисов</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<note>
+<para
+>Если ваше главное окно не содержит этой таблицы, вы можете использовать <guibutton
+>Обзор &gt;&gt;</guibutton
+>, чтобы вернуться в полное окно &krdc;. Также не все совместимые сервера поддерживают автоматическую регистрацию - однако сервер &krfb;, входящий в &kde; это поддерживает. </para>
+</note>
+
+<para
+>Если вы щёлкаете на элементе таблицы, он становится выделенным и вы можете использовать <guibutton
+> Соединиться</guibutton
+> для подключения к этому серверу. Для быстрого подключения к серверу, вы можете дважды щёлкнуть на соответствующем элементе таблицы. </para>
+
+<para
+>Хотя протокол расположения сервисов автоматически обнаруживает новые  сервера, которые становятся доступными, вы также можете указать &krdc; начать сканирование новых серверов. Это делается нажатием <guibutton
+>Обновить</guibutton
+>. Когда вы запросили сканирование, кнопка блокируется (сереет), пока выполняется сканирование - обычно несколько секунд. </para>
+
+<para
+>При использовании протокола расположения сервисов, становится актуальна концепция областей. Если там представлены множество сервисов, просмотр их списка может стать затруднительным. Повторное сканирование будет создавать значительный объём сетевого трафика. Чтобы избежать этой проблемы, администраторы могут настроить протокол расположения сервисов с набором областей, и только регистрировать сервисы в некоторой области. Например, хост может быть зарегистрирован в областях "третий_этаж" и "логистика", но не в"технический" или "обслуживание". В небольших установках, все регистрируются только в области"ПО УМОЛЧАНИЮ". &krdc; поддерживает выбор областиотличной от "ПО УМОЛЧАНИЮ" с помощью выпадающего списка <guilabel
+>Область:</guilabel
+>, расположенного в правой верхней части главного окна. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="connection"
+><title
+>Что происходит когда вы подключились</title>
+
+<para
+>Не зависимо от того как вы выбираете сервер для подключения, следующим шагом станет запрос &krdc; о сетевом соединении, как показано ниже: </para>
+
+<para>
+<screenshot>
+<screeninfo
+>выбор скорости соединения &krdc;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="snapshot_connectionspeed.png" format="PNG"/>
+	  </imageobject>
+	  <imageobject>
+	    <imagedata fileref="snapshot_connectionspeed.eps" format="EPS"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>выбор скорости соединения &krdc;</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Существуют три параметра настройки скорости: </para>
+
+<itemizedlist>
+<listitem
+><para
+>Высокое качество (LAN, прямое соединение), является значением по умолчанию, и вы должны проверить как хорошо это работает, перед установкой более низкого значения скорости и использовании более низкой пропускной способности. </para
+></listitem>
+<listitem
+><para
+>Средняя скорость (DSL, кабель, скоростной интернет).</para
+></listitem>
+<listitem
+><para
+>Низкая скорость (модем, ISDN, медленный интернет).</para
+></listitem>
+</itemizedlist>
+
+<para
+>Если вы всегда работаете с одним типом связи, вы можете снять отметку с переключателя <guilabel
+>Показывать этот диалог для этого хоста в следующий раз</guilabel
+>, и у вас, при следующем подключении, не будет запрашиваться тип соединения, если вы идентифицируетесь тем же способом. Например, если хост имеет два имени, и переключатель не установлен, и при подключении используется одно имя, у вас не будет запрошена скорость при подключении с использованием одного имени. Хотя у вас будет запрошена скорость, если вы используете другое имя, или адрес IP. </para>
+
+<para
+>После выбора соответствующие настройки скорости, нажмите <guibutton
+>Соединиться</guibutton
+> для продолжения. </para>
+
+<para
+>После вы увидите небольшое окно содержащее индикатор прогресса, который заполняется пока &krdc; устанавливает соединение. </para>
+
+<para
+>В зависимости от настроек сервера, вы (почти наверняка) должны будете указать пароль для аутентификации на сервере. &krdc; предоставит диалог пароля, который показан ниже. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Пароль &krdc;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="authentication.png" format="PNG"/>
+	  </imageobject>
+	  <imageobject>
+	    <imagedata fileref="authentication.eps" format="EPS"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Пароль &krdc;</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>После идентификации, вы соединитесь с удалённым сервером, и сможете начать использовать &krdc;  для наблюдение или управления удалённым рабочим столом. </para>
+
+</sect1>
+
+<sect1 id="controlling-remote"
+><title
+>Управление подключением к удалённому рабочему столу</title>
+
+<para
+>Подключившись к удалённому серверу, обычно вы используете клавиатуру или мышь для управлением оконной системой и приложениями на удалённом компьютере. </para>
+
+<para
+>Вы можете видеть удалённый рабочий стол как полный экран, или как окно на локальном рабочем столе. Вы можете переключаться между этими режимами используя пиктограмму показанную ниже. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>выбор режима полного экрана в &krdc;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="window_fullscreen.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>выбор режима полного экрана в &krdc;</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+<screenshot>
+<screeninfo
+>выбор режима окна в &krdc;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="window_nofullscreen.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>выбор режима окна в &krdc;</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Полноэкранный режим является лучшим, когда вы помогаете отдельному пользователю, поскольку вы видите то-же что и он. Режим окна наиболее полезен, когда вы работаете одновременно дистанционно и на локальном компьютере, возможно с документацией на локальной машине, и затем выполняете действия на удалённой. </para>
+
+<sect2
+><title
+>Использование режима окна</title>
+
+<para
+>&krdc; в режиме окна выглядит подобно снимку экрана, представленному ниже. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Окно &krdc;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="krdc_window.png" format="PNG"/>
+	  </imageobject>
+	  <imageobject>
+	    <imagedata fileref="krdc_window.eps" format="EPS"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Окно &krdc;</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>В режиме окна, вы можете прервать подключение просто закрыв окно. </para>
+
+</sect2>
+
+<sect2
+><title
+>Использование режима полного экрана</title>
+
+<para
+>В режиме полного экрана вы можете прервать соединение выбрав красную пиктограмму "закрыть", как показано ниже. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Пиктограмма закрытия &krdc;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="close.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Пиктограмма закрытия &krdc;</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="managing-configuration"
+><title
+>Управление настройками &krdc;</title>
+<para
+>Используя кнопку <guibutton
+>Настройка...</guibutton
+> и нижней левой части главного окна &krdc;, вы можете открыть диалог для изменения поведения &krdc;. Нажатие этой кнопки откроетокно диалога как показано ниже: </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Настройки &krdc; - вкладка профили хостов</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="preferences_profilestab.png" format="PNG"/>
+	  </imageobject>
+	  <imageobject>
+	    <imagedata fileref="preferences_profilestab.eps" format="EPS"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Настройки &krdc; - вкладка <guilabel
+>Профили хостов</guilabel
+></phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+<screenshot>
+<screeninfo
+>Настройки &krdc; - вкладка <guilabel
+>Параметры VNC по умолчанию</guilabel
+></screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="preferences_vncdefaultstab.png" format="PNG"/>
+	  </imageobject>
+	  <imageobject>
+	    <imagedata fileref="preferences_vncdefaultstab.eps" format="EPS"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Настройки &krdc; - вкладка <guilabel
+>Параметры VNC по умолчанию</guilabel
+></phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+<screenshot>
+<screeninfo
+>Настройки &krdc; - вкладка <guilabel
+>Подробности RDP</guilabel
+></screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="preferences_rdpdefaultstab.png" format="PNG"/>
+	  </imageobject>
+	  <imageobject>
+	    <imagedata fileref="preferences_rdpdefaultstab.eps" format="EPS"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Настройки &krdc; - вкладка <guilabel
+>Подробности RDP</guilabel
+></phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+
+</sect1>
+
+</chapter>
+
+<chapter id="dcop">
+<title
+>Руководство разработчика &krdc;</title>
+
+<para
+>&krdc; поддерживает небольшое количество команд &DCOP;, которые описаны в этом разделе. Если вы не знакомы с &DCOP;, вы не должны об этом беспокоиться. Однако если вы хотите автоматизировать некоторые из действий &krdc; (или другого приложения  &kde;), &DCOP; является очень полезным инструментом. Вы можете узнать о &DCOP; больше в документации, и руководствах по адресу  <ulink url="http://developer.kde.org"
+>http://developer.kde.org</ulink
+>. </para>
+
+<para
+>Вы можете завершить работу приложения &krdc; используя команду выхода, как показано в примере ниже: </para>
+
+<informalexample>
+<screen
+><prompt
+>&percnt;</prompt
+>dcop krdc-25550 MainApplication-Interface quit
+</screen>
+</informalexample>
+
+<note>
+<para
+>Вы должны будете заменить <userinput
+>krdc-25550</userinput
+> в примере, чтобы соответствовать фактическому экземпляру &krdc;, работу которого вы хотите завершить. Если вы запустите <command
+>dcop</command
+> без опций, вы получите список всех приложений доступных через &DCOP;. </para>
+</note>
+
+</chapter>
+
+<chapter id="faq">
+<title
+>Вопросы и ответы</title>
+&reporting.bugs; &updating.documentation; <qandaset id="faqlist"
+> <qandaentry>
+<question>
+<para
+>Когда я запускаю &krdc;, получаю сообщение что <computeroutput
+>Просмотр сети невозможен. Вы вероятно некорректно установили поддержку SLP</computeroutput
+>. Что не так?</para
+> 
+</question>
+<answer>
+<para
+>SLP - протокол расположения сервисов, и обычно предоставляется <application
+>OpenSLP</application
+>, или  <application
+>The Knot</application
+>. </para>
+<para
+>Если вы скомпилировали &krdc; самостоятельно, это вероятнее всего означает что вы скомпилировали &krdc; с поддержкой библиотек SLP, но вероятно сервер (обычно <command
+>slpd </command
+> или <command
+>knotd</command
+>) не выполняется. Вам обычно необходимо запустить эти серверы от имени суперпользователя, что означает что вы должны запросить системного администратора сделать это, или можете сделать это самостоятельно. </para>
+<para
+>Если вы запускаете версию &krdc; из готового пакета, у вас могут отсутствовать некоторые зависимости. Существует множество способов этого, так что вы должны запросить поддержку у производителя пакета.</para>
+</answer>
+</qandaentry>
+</qandaset>
+
+</chapter>
+
+<chapter id="credits">
+
+<!-- Include credits for the programmers, documentation writers, and
+contributors here. The license for your software should then be included below
+the credits with a reference to the appropriate license file included in the KDE
+distribution. -->
+
+<title
+>Авторские права и лицензия</title>
+
+<para
+>&krdc; </para>
+<para
+>Авторское право на программу 2002 Tim Jansen <email
+>tim@tjansen.de</email
+> </para>
+<para
+>Участники: <itemizedlist
+> <listitem
+><para
+>Ian Reinhart Geiser <email
+>geiseri@kde.org</email
+></para>
+</listitem>
+</itemizedlist>
+</para>
+
+<para
+>Авторское право на документацию &copy; 2003 &Brad.Hards; &Brad.Hards.mail; </para>
+
+<para
+>Олег Баталов<email
+>olegbatalov@mail.ru</email
+> Перевод на русский язык</para
+> 
+&underFDL; &underGPL; </chapter>
+
+<appendix id="installation">
+<title
+>Установка</title>
+
+<sect1 id="getting-krdc">
+<title
+>Как получить &krdc;</title>
+&install.intro.documentation; </sect1>
+
+<sect1 id="compilation">
+<title
+>Компиляция и установка</title>
+&install.compile.documentation; </sect1>
+
+</appendix>
+
+&documentation.index;
+</book>
+
+<!--
+Local Variables:
+mode: xml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+
+vim:tabstop=2:shiftwidth=2:expandtab 
+-->
