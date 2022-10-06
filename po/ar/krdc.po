@@ -12,16 +12,16 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-09-05 00:44+0000\n"
-"PO-Revision-Date: 2022-08-23 22:25+0400\n"
+"PO-Revision-Date: 2022-10-05 19:11+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
-"Language-Team: Arabic <kde-l10n-ar@kde.org>\n"
+"Language-Team: ar\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
-"X-Generator: Lokalize 21.07.70\n"
+"X-Generator: Lokalize 21.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -46,9 +46,9 @@ msgstr "تذكّر الجلسات المفتوحة عند البدء التال�
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_RememberHistory)
 #: config/general.ui:24
-#, fuzzy, kde-format
+#, kde-format
 msgid "Remember connection history"
-msgstr "يحضر الاتصال بـ %1"
+msgstr "تذكر تاريخ الاتصال"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_WalletSupport)
 #: config/general.ui:31
@@ -99,12 +99,14 @@ msgid ""
 "This option will resize the window to fit the connection size.  If it is too "
 "big, it will maximize the window."
 msgstr ""
+"سيؤدي هذا الخيار إلى تغيير حجم النافذة لتناسب حجم الاتصال. إذا كانت كبيرة "
+"جدًا، فسيزيد النافذة إلى الحد الأقصى."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ResizeOnConnect)
 #: config/general.ui:109
 #, kde-format
 msgid "Resize to fit"
-msgstr ""
+msgstr "غير الحجم للملائمة"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_FullscreenOnConnect)
 #: config/general.ui:116
@@ -113,18 +115,20 @@ msgid ""
 "This option switches to fullscreen only if the connection resolution is the "
 "same as the current screen resolution"
 msgstr ""
+"يتحول هذا الخيار إلى ملء شاشة فقط إذا كانت دِقَّة الاتصال هي نفسها دِقَّة الشاشة "
+"الحالية"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_FullscreenOnConnect)
 #: config/general.ui:119
-#, fuzzy, kde-format
+#, kde-format
 msgid "Switch to Fullscreen if appropriate"
-msgstr "بدل لنمط ملء الشاشة"
+msgstr "بدل لنمط ملء الشاشة إذا كان مناسباً"
 
 #. i18n: ectx: property (text), widget (QLabel, defaultProtocolLabel)
 #: config/general.ui:128
 #, kde-format
 msgid "Default protocol:"
-msgstr ""
+msgstr "الميفاق المبدئي:"
 
 #. i18n: ectx: property (text), widget (QLineEdit, kcfg_DefaultProtocol)
 #: config/general.ui:135
@@ -241,29 +245,29 @@ msgstr "ضبط الملحقات"
 #: connectiondelegate.cpp:33
 #, kde-format
 msgid "Less than a minute ago"
-msgstr ""
+msgstr "قبل أقل من دقيقة"
 
 #: connectiondelegate.cpp:34
 #, kde-format
 msgid "A minute ago"
 msgid_plural "%1 minutes ago"
-msgstr[0] ""
-msgstr[1] "منذ دقيقة واحدة"
-msgstr[2] "منذ دقيقتان مضيتا"
-msgstr[3] "منذ %1 دقائق"
-msgstr[4] "منذ %1 دقيقة مضت"
-msgstr[5] "منذ %1 دقيقة مضت"
+msgstr[0] "قبل أقل من دقيقة"
+msgstr[1] "قبل دقيقة واحدة"
+msgstr[2] "قبل دقيقتين"
+msgstr[3] "قبل %1 دقائق"
+msgstr[4] "قبل %1 دقيقة مضت"
+msgstr[5] "قبل %1 دقيقة مضت"
 
 #: connectiondelegate.cpp:36
 #, kde-format
 msgid "An hour ago"
 msgid_plural "%1 hours ago"
-msgstr[0] ""
+msgstr[0] "قبل ساعة"
 msgstr[1] "قبل ساعة واحدة"
 msgstr[2] "قبل ساعتين"
 msgstr[3] "قبل %1 ساعات"
-msgstr[4] "منذ %1 ساعة مضت"
-msgstr[5] "منذ %1 ساعة مضت"
+msgstr[4] "قبل %1 ساعة"
+msgstr[5] "قبل %1 ساعة"
 
 #: connectiondelegate.cpp:40
 #, kde-format
@@ -280,29 +284,30 @@ msgstr[5] "قبل %1 يوم"
 #, kde-format
 msgid "Over a month ago"
 msgid_plural "%1 months ago"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
+msgstr[0] "قبل شهر"
+msgstr[1] "قبل شهر"
+msgstr[2] "قبل شهرين"
+msgstr[3] "قبل %1 أشهر"
+msgstr[4] "قبل %1 شهراً"
+msgstr[5] "قبل %1 شهر"
 
 #: connectiondelegate.cpp:43
 #, kde-format
 msgid "A year ago"
 msgid_plural "%1 years ago"
-msgstr[0] ""
-msgstr[1] "من 30 سنة"
-msgstr[2] "من 30 سنة"
-msgstr[3] "من 30 سنة"
-msgstr[4] "من 30 سنة"
-msgstr[5] "من 30 سنة"
+msgstr[0] "قبل سنة"
+msgstr[1] "قبل سنة"
+msgstr[2] "قبل ستنتين"
+msgstr[3] "قبل %1 سنوات"
+msgstr[4] "قبل %1 سنة"
+msgstr[5] "قبل %1 سنة"
 
 #: core/hostpreferences.cpp:183
 #, kde-format
 msgid ""
 "Note that settings might only apply when you connect next time to this host."
 msgstr ""
+"لاحظ أن الإعدادات قد تنطبق فقط عند الاتصال في المرة القادمة مع هذا المضيف."
 
 #: core/hostpreferences.cpp:199
 #, kde-format
@@ -338,12 +343,12 @@ msgid "KRDC"
 msgstr "كردس"
 
 #: main.cpp:62 systemtrayicon.cpp:24
-#, fuzzy, kde-format
+#, kde-format
 msgid "KDE Remote Desktop Client"
-msgstr "عميل سطح المكتب لكدي بدء"
+msgstr "عميل سطح المكتب كدي البعيد"
 
 #: main.cpp:64
-#, fuzzy, kde-format
+#, kde-format
 msgid ""
 "(c) 2007-2016, Urs Wolfer\n"
 "(c) 2001-2003, Tim Jansen\n"
@@ -354,13 +359,14 @@ msgid ""
 "(c) 1999-2003, Matthew Chapman\n"
 "(c) 2009, Collabora Ltd"
 msgstr ""
-"(c) 2007-2008, Urs Wolfer\n"
+"(c) 2007-2016, Urs Wolfer\n"
 "(c) 2001-2003, Tim Jansen\n"
 "(c) 2002-2003, Arend van Beelen jr.\n"
 "(c) 2000-2002, Const Kaplinsky\n"
 "(c) 2000, Tridia Corporation\n"
 "(c) 1999, AT&T Laboratories Boston\n"
-"(c) 1999-2003, Matthew Chapman"
+"(c) 1999-2003, Matthew Chapman\n"
+"(c) 2009, Collabora Ltd"
 
 #: main.cpp:73
 #, kde-format
@@ -425,12 +431,12 @@ msgstr "مكتبة عميل VNC"
 #: main.cpp:81
 #, kde-format
 msgid "Abner Silva"
-msgstr ""
+msgstr "أبنر سيلفا"
 
 #: main.cpp:81
 #, kde-format
 msgid "Telepathy Tubes Integration"
-msgstr ""
+msgstr "تكامل أنابيب التخاطر"
 
 #: main.cpp:92
 #, kde-format
@@ -490,22 +496,22 @@ msgid "Show Local Cursor"
 msgstr "اظهر المؤشر المحلي"
 
 #: mainwindow.cpp:166
-#, fuzzy, kde-format
+#, kde-format
 msgid "Local Cursor"
-msgstr "اظهر المؤشر المحلي"
+msgstr "المؤشر المحلي"
 
 #: mainwindow.cpp:172
-#, fuzzy, kde-format
+#, kde-format
 msgid "Grab All Possible Keys"
 msgstr "امسك كل المفاتيح الممكنة"
 
 #: mainwindow.cpp:173
 #, kde-format
 msgid "Grab Keys"
-msgstr ""
+msgstr "امسك المفاتيح"
 
 #: mainwindow.cpp:179
-#, fuzzy, kde-format
+#, kde-format
 msgid "Scale Remote Screen to Fit Window Size"
 msgstr "غيّر قياس الشاشة البعيدة لتناسب حجم النافذة"
 
@@ -517,7 +523,7 @@ msgstr "حجّم"
 #: mainwindow.cpp:183
 #, kde-format
 msgid "Scaling Factor"
-msgstr ""
+msgstr "عامل التحجيم"
 
 #: mainwindow.cpp:194
 #, kde-format
@@ -525,11 +531,13 @@ msgid "Bookmarks"
 msgstr "العلامات"
 
 #: mainwindow.cpp:253
-#, fuzzy, kde-format
+#, kde-format
 msgid ""
 "The entered address does not have the required form.\n"
 " Syntax: [username@]host[:port]"
-msgstr "العنوان المدخل لا يملك الشكل المطلوب."
+msgstr ""
+"العنوان المدخل لا يملك الشكل المطلوب.\n"
+" الصياغة: [اسم المستخدم@]المضيف[:المنفذ]"
 
 #: mainwindow.cpp:254
 #, kde-format
@@ -562,11 +570,11 @@ msgid "Connected to %1"
 msgstr "يتصل بـ %1"
 
 #: mainwindow.cpp:496
-#, fuzzy, kde-format
+#, kde-format
 msgctxt ""
 "window title when in full screen mode (for example displayed in tasklist)"
 msgid "KDE Remote Desktop Client (Full Screen)"
-msgstr "عميل سطح مكتب بعيد لكدي (ملء الشاشة)"
+msgstr "عميل سطح المكتب كدي البعيد(ملء الشاشة)"
 
 #: mainwindow.cpp:523
 #, kde-format
@@ -574,9 +582,9 @@ msgid "Switch to Window Mode"
 msgstr "بدل إلى نمط النافذة"
 
 #: mainwindow.cpp:524
-#, fuzzy, kde-format
+#, kde-format
 msgid "Window Mode"
-msgstr "بدل إلى نمط النافذة"
+msgstr "نمط النافذة"
 
 #: mainwindow.cpp:676
 #, kde-format
@@ -661,21 +669,21 @@ msgid "Confirm Quit"
 msgstr "أكد الإنهاء"
 
 #: mainwindow.cpp:1085
-#, fuzzy, kde-format
+#, kde-format
 msgid "Connect to:"
-msgstr "اتصل"
+msgstr "متصل ب:"
 
 #: mainwindow.cpp:1089
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
-msgstr ""
+msgstr "اكتب هنا للاتصال بعنوان وتصفية القائمة."
 
 #: mainwindow.cpp:1098
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
 "methods."
-msgstr ""
+msgstr "اكتب اسم IP أو DNS هنا. امسح الخط للحصول على قائمة بطُرق الاتصال."
 
 #: mainwindow.cpp:1101
 #, kde-format
@@ -683,7 +691,7 @@ msgid "Goto Address"
 msgstr "إذهب إلى العنوان"
 
 #: mainwindow.cpp:1195
-#, fuzzy, kde-format
+#, kde-format
 msgid "Remote Desktops"
 msgstr "أسطح المكتب البعيدة"
 
@@ -695,7 +703,7 @@ msgstr "المرشّح"
 #: rdp/rdphostpreferences.cpp:181
 #, kde-format
 msgid "Browse to media share path"
-msgstr ""
+msgstr "تصفح إلى مسار مشاركة الوسائط"
 
 #. i18n: ectx: property (title), widget (QGroupBox, connectionGroupBox)
 #. i18n: ectx: property (title), widget (QGroupBox, vncGroupBox)
@@ -759,14 +767,14 @@ msgstr "كبير جدا  (1600×1200)"
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
 #: rdp/rdppreferences.ui:80 vnc/vncpreferences.ui:118
-#, fuzzy, kde-format
+#, kde-format
 msgid "Current Screen Resolution"
 msgstr "دقة الشاشة الحالية"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
 #: rdp/rdppreferences.ui:85 vnc/vncpreferences.ui:123
-#, fuzzy, kde-format
+#, kde-format
 msgid "Custom Resolution (...)"
 msgstr "دقة مخصصة (...)"
 
@@ -774,7 +782,7 @@ msgstr "دقة مخصصة (...)"
 #: rdp/rdppreferences.ui:90
 #, kde-format
 msgid "Current KRDC Size"
-msgstr ""
+msgstr "حجم كردس الحالي"
 
 #. i18n: ectx: property (text), widget (QLabel, widthLabel)
 #: rdp/rdppreferences.ui:103 vnc/vncpreferences.ui:136
@@ -836,9 +844,9 @@ msgstr "لون حقيقي (24بت)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
 #: rdp/rdppreferences.ui:200
-#, fuzzy, kde-format
+#, kde-format
 msgid "True Color with Alpha (32 Bit)"
-msgstr "لون حقيقي (24بت)"
+msgstr "لون حقيقي مع ألفا (32بت)"
 
 #. i18n: ectx: property (text), widget (QLabel, layoutLabel)
 #: rdp/rdppreferences.ui:208
@@ -1087,19 +1095,19 @@ msgstr "الصوت:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
 #: rdp/rdppreferences.ui:442
-#, fuzzy, kde-format
+#, kde-format
 msgid "On This Computer"
 msgstr "على هذا الحاسوب"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
 #: rdp/rdppreferences.ui:447
-#, fuzzy, kde-format
+#, kde-format
 msgid "On Remote Computer"
 msgstr "على حاسوب بعيد"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
 #: rdp/rdppreferences.ui:452
-#, fuzzy, kde-format
+#, kde-format
 msgid "Disable Sound"
 msgstr "عطّل الصوت"
 
@@ -1113,7 +1121,7 @@ msgstr "ألزا"
 #: rdp/rdppreferences.ui:472
 #, kde-format
 msgid "PulseAudio"
-msgstr ""
+msgstr "بلس‌أوديو"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_SoundSystem)
 #: rdp/rdppreferences.ui:477
@@ -1148,15 +1156,15 @@ msgstr "شبكة سلكية"
 
 #. i18n: ectx: property (text), widget (QLabel, remoteFXLabel)
 #: rdp/rdppreferences.ui:522
-#, fuzzy, kde-format
+#, kde-format
 msgid "RemoteFX:"
-msgstr "أزل"
+msgstr "ريموت اف اكس:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_RemoteFX)
 #: rdp/rdppreferences.ui:532
 #, kde-format
 msgid "Enhanced visual experience"
-msgstr ""
+msgstr "تجربة بصرية محسنة"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_RemoteFX)
 #: rdp/rdppreferences.ui:535
@@ -1165,18 +1173,20 @@ msgid ""
 "RemoteFX covers a set of technologies that enhance visual experience of the "
 "Remote Desktop Protocol."
 msgstr ""
+"يغطي ريموت اف اكس مجموعة من التقنيات التي تعزز التجربة البصرية ليمفاق سطح "
+"المكتب البعيد."
 
 #. i18n: ectx: property (text), widget (QLabel, shareMediaLabel)
 #: rdp/rdppreferences.ui:542
 #, kde-format
 msgid "Share Media:"
-msgstr ""
+msgstr "الوسائط المُشَاركة:"
 
 #. i18n: ectx: property (whatsThis), widget (KLineEdit, kcfg_ShareMedia)
 #: rdp/rdppreferences.ui:560
 #, kde-format
 msgid "Share a local media directory with the remote host."
-msgstr ""
+msgstr "شارك دليل وسائط محلي مع مضيف بعيد."
 
 #. i18n: ectx: property (title), widget (QGroupBox, expertGroupBox)
 #: rdp/rdppreferences.ui:585
@@ -1188,13 +1198,13 @@ msgstr "خيارات الخبراء"
 #: rdp/rdppreferences.ui:591
 #, kde-format
 msgid "Console login:"
-msgstr ""
+msgstr "ولوج الطرفية:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_Console)
 #: rdp/rdppreferences.ui:601
-#, fuzzy, kde-format
+#, kde-format
 msgid "Attach to Windows Server console"
-msgstr "بدل إلى نمط النافذة"
+msgstr "التحق بطرفية ويندوز سيرفر"
 
 #. i18n: ectx: property (text), widget (QLabel, extraOptionsLabel)
 #: rdp/rdppreferences.ui:608
@@ -1204,9 +1214,9 @@ msgstr "الخيارات الإضافية:"
 
 #. i18n: ectx: property (whatsThis), widget (KLineEdit, kcfg_ExtraOptions)
 #: rdp/rdppreferences.ui:624
-#, fuzzy, kde-format
+#, kde-format
 msgid "Here you can enter additional xfreerdp (FreeRDP) options."
-msgstr "هنا يمكنك ادخال خيارات rdesktop الإضافية."
+msgstr "هنا يمكنك إدخال خيارات xfreerdp (FreeRDP) الإضافية."
 
 #. i18n: ectx: property (title), widget (QGroupBox, loginGroupBox)
 #: rdp/rdppreferences.ui:637
@@ -1235,7 +1245,7 @@ msgstr "تعرف تلقائي \"LDAP\" - الولوج و كلمات السرة �
 #: rdp/rdpview.cpp:104
 #, kde-format
 msgid "Media Folder does not Exist"
-msgstr ""
+msgstr "مجلد الوسائط غير موجود"
 
 #: rdp/rdpview.cpp:104
 #, kde-format
@@ -1244,6 +1254,9 @@ msgid ""
 "Please set an existing folder to share or empty the \"Share Media\" option "
 "if you do not want to share any folder."
 msgstr ""
+"المجلد %1 غير موجود. \n"
+"يرجى تعيين مجلد موجود لمشاركة أو إلغاء خيار \"مشاركة الوسائط\" إذا كنت لا "
+"ترغب في مشاركة أي مجلد."
 
 #: rdp/rdpview.cpp:113
 #, kde-format
@@ -1261,9 +1274,9 @@ msgid "Access to the system requires a password."
 msgstr "الدخول إلى النظام يتطلب كلمة مرور."
 
 #: rdp/rdpview.cpp:442
-#, fuzzy, kde-format
+#, kde-format
 msgid "Could not start \"%1\"; make sure %1 is properly installed."
-msgstr "لا يمكن بدء \"rdesktop\" ؛ تأكد من أنه مثبت بشكل صحيح."
+msgstr "لا يمكن بدء \"%1\"؛ تأكد من أن %1 مثبت بشكل صحيح."
 
 #: rdp/rdpview.cpp:443 rdp/rdpview.cpp:467 rdp/rdpview.cpp:471
 #, kde-format
@@ -1271,18 +1284,18 @@ msgid "RDP Failure"
 msgstr "فشل في RDP"
 
 #: rdp/rdpview.cpp:465
-#, fuzzy, kde-format
+#, kde-format
 msgid ""
 "The version of \"xfreerdp\" you are using is too old.\n"
 "xfreerdp 1.0.2 or greater is required."
 msgstr ""
-"الإصدارة   \"rdesktop\" التي تستخدمها من  (%1)  قديمة جدا:\n"
-"المطلوب rdesktop 1.3.2  أو أكبر."
+"الإصدارة   \"xfreerdp\" التي تستخدمها من قديمة جدا.\n"
+"المطلوب xfreerdp 1.0.2  أو أكبر."
 
 #: rdp/rdpview.cpp:470
 #, kde-format
 msgid "Connection failed. You might have passed a wrong address or username."
-msgstr ""
+msgstr "فشل الاتّصال. ربما مررت عنوان خاطئ أو اسم مستخدم خاطئ"
 
 #: rdp/rdpview.cpp:486
 #, kde-format
@@ -1301,18 +1314,16 @@ msgid "Connection attempt to host failed."
 msgstr "فشلت محاولة الاتصال بالمضيف"
 
 #: rdp/rdpview.cpp:497
-#, fuzzy, kde-format
-#| msgid "Authentication failed. Please try again."
+#, kde-format
 msgid "Authentication failure, check credentials."
 msgstr "الاستيثاق فشل. الرجاء المحاولة مرة أخرى."
 
 #: rdp/rdpview.cpp:505
-#, fuzzy, kde-format
-#| msgid "Connection attempt to host failed."
+#, kde-format
 msgid ""
 "Connection attempt to host failed. Security negotiation or connection "
 "failure."
-msgstr "فشلت محاولة الاتصال بالمضيف"
+msgstr "فشلت محاولة الاتصال بالمضيف. فشل في التفاوض الأمني أو فشل الاتصال."
 
 #: rdp/rdpviewfactory.cpp:22
 #, kde-format
@@ -1334,11 +1345,13 @@ msgstr ""
 "(المضيف:المنفذ)</i></html>"
 
 #: rdp/rdpviewfactory.cpp:70
-#, fuzzy, kde-format
+#, kde-format
 msgid ""
 "The application \"xfreerdp\" cannot be found on your system; make sure it is "
 "properly installed if you need RDP support."
-msgstr "لا يمكن إيجاد \"rdesktop\" على نظامك ، تأكد من أنه مثبت بشكل الصحيح."
+msgstr ""
+"لا يمكن العثور على \"xfreerdp\" على نظامك ، تأكد من أنه مثبت بشكل الصحيح إذا "
+"كنت تريد دعم RDP."
 
 #: remotedesktopsmodel.cpp:112
 #, kde-format
@@ -1356,7 +1369,7 @@ msgstr "بلا"
 #, kde-format
 msgctxt "Remove the selected url from the bookarks menu"
 msgid "Remove the bookmark for %1."
-msgstr ""
+msgstr "احذف العلامة لـ%1."
 
 #: remotedesktopsmodel.cpp:132
 #, kde-format
@@ -1371,11 +1384,11 @@ msgid "Remote Desktop"
 msgstr "سطح المكتب البعيد"
 
 #: remotedesktopsmodel.cpp:173
-#, fuzzy, kde-format
+#, kde-format
 msgctxt ""
 "Header of the connections list, the last time this connection was initiated"
 msgid "Last Connected"
-msgstr "يتصل بـ %1"
+msgstr "أخر اتصال"
 
 #: remotedesktopsmodel.cpp:175
 #, kde-format
@@ -1383,7 +1396,7 @@ msgctxt ""
 "Header of the connections list, the number of times this connection has been "
 "visited"
 msgid "Visits"
-msgstr ""
+msgstr "الزيارات"
 
 #: remotedesktopsmodel.cpp:177
 #, kde-format
@@ -1398,9 +1411,9 @@ msgid "Source"
 msgstr "المصدر"
 
 #: vnc/vncclientthread.cpp:299
-#, fuzzy, kde-format
+#, kde-format
 msgid "VNC authentication type is not supported."
-msgstr "فشل الاستيثاق من VNC."
+msgstr "نوع استيثاق VNC غير مدعوم."
 
 #: vnc/vncclientthread.cpp:318
 #, kde-format
@@ -1428,15 +1441,14 @@ msgid "Disconnected: %1."
 msgstr "قُطع الاتصال: %1."
 
 #: vnc/vncclientthread.cpp:557
-#, fuzzy, kde-format
+#, kde-format
 msgid "Reconnecting."
-msgstr "الاتصال"
+msgstr "يعيد الاتصال."
 
 #: vnc/vncclientthread.cpp:624
-#, fuzzy, kde-format
-#| msgid "Disconnect"
+#, kde-format
 msgid "Reconnected."
-msgstr "اقطع الاتصال"
+msgstr "أُعيد الاتصال"
 
 #: vnc/vncclientthread.cpp:626
 #, kde-format
@@ -1489,25 +1501,25 @@ msgstr "منخفض الجودة (مودم, ISDN, انترنت بطيء)"
 #: vnc/vncpreferences.ui:63
 #, kde-format
 msgid "Scale to Size:"
-msgstr ""
+msgstr "حجّم إلى المقاس :"
 
 #. i18n: ectx: property (text), widget (QCheckBox, use_ssh_tunnel)
 #: vnc/vncpreferences.ui:204
 #, kde-format
 msgid "Connect via SSH tunnel"
-msgstr ""
+msgstr "اتصل بنفق SSH"
 
 #. i18n: ectx: property (title), widget (QGroupBox, ssh_groupBox)
 #: vnc/vncpreferences.ui:211
 #, kde-format
 msgid "SSH tunnel options"
-msgstr ""
+msgstr "خيارات نفق SSH"
 
 #. i18n: ectx: property (text), widget (QCheckBox, use_loopback)
 #: vnc/vncpreferences.ui:217
 #, kde-format
 msgid "Tunnel via loopback address"
-msgstr ""
+msgstr "النفق عبر عنوان الاسترجاع"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: vnc/vncpreferences.ui:224
@@ -1525,7 +1537,7 @@ msgstr "اسم المستخدم:"
 #: vnc/vncpreferences.ui:257
 #, kde-format
 msgid "Don't copy passwords from supported password managers to remote hosts"
-msgstr ""
+msgstr "لا تنسخ كلمات السر من مدراء كلمات السر المدعومة إلى المضيف البعيد"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, dont_copy_passwords)
 #: vnc/vncpreferences.ui:260
@@ -1535,24 +1547,24 @@ msgid ""
 "additional MIME type \"x-kde-passwordManagerHint\" which is used for "
 "filtering."
 msgstr ""
+"يعلّم مدراء كلمة السر المدعومة (مثل KeepAssxc)  كلمات السر المنسوخة بنوع "
+"إضافي MIME \"x-kde-passwordManagerHint\" الذي يستخدم للتصفية."
 
 #: vnc/vncsshtunnelthread.cpp:102
-#, fuzzy, kde-format
-#| msgid "Connecting to %1"
+#, kde-format
 msgid "Error connecting to %1: %2"
-msgstr "يتصل بـ %1"
+msgstr "خطأ في  الاتّصال ب%1: %2"
 
 #: vnc/vncsshtunnelthread.cpp:127
-#, fuzzy, kde-format
-#| msgid "Authenticating at %1"
+#, kde-format
 msgid "Error authenticating with password: %1"
-msgstr "يستوثق عند %1"
+msgstr "خطأ في الاستيثاق بكلمة السر: %1"
 
 #: vnc/vncsshtunnelthread.cpp:133 vnc/vncsshtunnelthread.cpp:151
 #: vnc/vncsshtunnelthread.cpp:158 vnc/vncsshtunnelthread.cpp:166
 #, kde-format
 msgid "Error creating tunnel socket"
-msgstr ""
+msgstr "خطأ في إنشاء قابس النفق"
 
 #: vnc/vncview.cpp:343
 #, kde-format
@@ -1562,7 +1574,7 @@ msgstr "الاستيثاق فشل. الرجاء المحاولة مرة أخرى
 #: vnc/vncview.cpp:371
 #, kde-format
 msgid "Please enter the SSH password."
-msgstr ""
+msgstr "الرجاء إدخال كلمة السر SSH."
 
 #: vnc/vncview.cpp:396 vnc/vncview.cpp:398
 #, kde-format
@@ -1572,7 +1584,7 @@ msgstr "فشل VNC"
 #: vnc/vncview.cpp:407 vnc/vncview.cpp:409
 #, kde-format
 msgid "SSH Tunnel failure"
-msgstr ""
+msgstr "فشل نفق SSH"
 
 #: vnc/vncviewfactory.cpp:47
 #, kde-format
