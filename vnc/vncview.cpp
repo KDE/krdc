@@ -607,6 +607,8 @@ void VncView::mouseEventHandler(QMouseEvent *e)
                 m_buttonMask |= 0x02;
             if (e->button() & Qt::RightButton)
                 m_buttonMask |= 0x04;
+            if (e->button() & Qt::ExtraButton1)
+                m_buttonMask |= 0x80;
         } else if (e->type() == QEvent::MouseButtonRelease) {
             if (e->button() & Qt::LeftButton)
                 m_buttonMask &= 0xfe;
@@ -614,6 +616,8 @@ void VncView::mouseEventHandler(QMouseEvent *e)
                 m_buttonMask &= 0xfd;
             if (e->button() & Qt::RightButton)
                 m_buttonMask &= 0xfb;
+            if (e->button() & Qt::ExtraButton1)
+                m_buttonMask &= ~0x80;
         }
     }
 
