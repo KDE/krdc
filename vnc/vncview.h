@@ -77,6 +77,8 @@ private:
     bool m_dontSendClipboard;
     qreal m_horizontalFactor;
     qreal m_verticalFactor;
+    int m_wheelRemainderV;
+    int m_wheelRemainderH;
 #ifndef QTONLY
     VncHostPreferences *m_hostPreferences;
 #endif
