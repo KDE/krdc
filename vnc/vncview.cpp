@@ -46,6 +46,8 @@ VncView::VncView(QWidget *parent, const QUrl &url, KConfigGroup configGroup)
         m_dontSendClipboard(false),
         m_horizontalFactor(1.0),
         m_verticalFactor(1.0),
+        m_wheelRemainderV(0),
+        m_wheelRemainderH(0),
         m_forceLocalCursor(false)
 #ifdef LIBSSH_FOUND
         , m_sshTunnelThread(nullptr)
@@ -625,11 +627,15 @@ void VncView::mouseEventHandler(QMouseEvent *e)
 
 void VncView::wheelEventHandler(QWheelEvent *event)
 {
-    int eb = 0;
-    if (event->angleDelta().y() < 0)
-        eb |= 0x10;
-    else
-        eb |= 0x8;
+    const auto delta = event->angleDelta();
+    // Reset accumulation if direction changed
+    const int accV = (delta.y() < 0) == (m_wheelRemainderV < 0) ? m_wheelRemainderV : 0;
+    const int accH = (delta.x() < 0) == (m_wheelRemainderH < 0) ? m_wheelRemainderH : 0;
+    // A wheel tick is 15° or 120 eights of a degree
+    const int verTicks = (delta.y() + accV) / 120;
+    const int horTicks = (delta.x() + accH) / 120;
+    m_wheelRemainderV = (delta.y() + accV) % 120;
+    m_wheelRemainderH = (delta.x() + accH) % 120;
 
     const auto dpr = devicePixelRatioF();
     // We need to restore mouse position in device coordinates.
@@ -638,8 +644,18 @@ void VncView::wheelEventHandler(QWheelEvent *event)
     const int x = qRound(pos.x() / m_horizontalFactor);
     const int y = qRound(pos.y() / m_verticalFactor);
 
-    vncThread.mouseEvent(x, y, eb | m_buttonMask);
-    vncThread.mouseEvent(x, y, m_buttonMask);
+    // Fast movement might generate more than one tick, loop for each axis
+    int eb = verTicks < 0 ? 0x10 : 0x08;
+    for (int i = 0; i < std::abs(verTicks); i++) {
+        vncThread.mouseEvent(x, y, eb | m_buttonMask);
+        vncThread.mouseEvent(x, y, m_buttonMask);
+    }
+
+    eb = horTicks < 0 ? 0x40 : 0x20;
+    for (int i = 0; i < std::abs(horTicks); i++) {
+        vncThread.mouseEvent(x, y, eb | m_buttonMask);
+        vncThread.mouseEvent(x, y, m_buttonMask);
+    }
 
     event->accept();
 }
