@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-11 00:47+0000\n"
-"PO-Revision-Date: 2022-12-14 12:51+0100\n"
+"PO-Revision-Date: 2022-12-15 11:58+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -419,6 +419,7 @@ msgstr "Telepathy Tubes -ის ინტეგრაცია"
 msgid ""
 "Start KRDC with the provided URL in fullscreen mode (works only with one URL)"
 msgstr ""
+"KRDC-ის მითითებული URL-ით მთელ ეკრანზე გაშვება (მუშაობს მხოლოდ ერთ URL-ით)"
 
 #: main.cpp:93
 #, kde-format
@@ -638,6 +639,7 @@ msgstr "ხელსაწყოების პანელის მიწე�
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr ""
+"დარწმუნებული ბრძანდებით, რომ გნებავთ KDE Remote Desktop-ის კლიენტიდან გასვლა?"
 
 #: mainwindow.cpp:957
 #, kde-format
@@ -652,7 +654,7 @@ msgstr "დაკავშირება:"
 #: mainwindow.cpp:1089
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
-msgstr ""
+msgstr "მისამართთან მისაერთებლად და სიის გასაფილტრად აქ აკრიფეთ."
 
 #: mainwindow.cpp:1098
 #, kde-format
@@ -660,6 +662,8 @@ msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
 "methods."
 msgstr ""
+"აკრიფეთ IP ან DNS სახელი. მიერთების მეთოდების სიის მისაღებად კი გაასუფთავეთ "
+"ხაზი."
 
 #: mainwindow.cpp:1101
 #, kde-format
@@ -702,6 +706,8 @@ msgid ""
 "Here you can specify the resolution of the remote desktop. This resolution "
 "determines the size of the desktop that will be presented to you."
 msgstr ""
+"აქ შეგიძლიათ დაშორებული სამუშაო მაგიდის გაფართოება მიუთითოთ. ეს გაფართოება "
+"თქვენთვის წარმოდგენილი სამუშაო მაგიდის ზომას განსაზღვრავს."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
@@ -772,6 +778,8 @@ msgid ""
 "This is the width of the remote desktop. You can only change this value "
 "manually if you select Custom as desktop resolution above."
 msgstr ""
+"ეს დაშორებული სამუშაო მაგიდის სიგანეა. მისი შეცვლა ხელით მხოლოდ \"ხელით "
+"მითითების\" არჩევის შემდეგ შეგიძლიათ."
 
 #. i18n: ectx: property (text), widget (QLabel, heightLabel)
 #: rdp/rdppreferences.ui:135 vnc/vncpreferences.ui:168
@@ -787,6 +795,8 @@ msgid ""
 "This is the height of the remote desktop. You can only change this value "
 "manually if you select Custom as desktop resolution above."
 msgstr ""
+"ეს დაშორებული სამუშაო მაგიდის სიმაღლეა. მისი შეცვლა ხელით მხოლოდ \"ხელით "
+"მითითების\" არჩევის შემდეგ შეგიძლიათ."
 
 #. i18n: ectx: property (text), widget (QLabel, colorDepthLabel)
 #: rdp/rdppreferences.ui:168
@@ -831,6 +841,8 @@ msgid ""
 "Use this to specify your keyboard layout. This layout setting is used to "
 "send the correct keyboard codes to the server."
 msgstr ""
+"გამოიყენება კლავიატურის განლაგების მისათითებლად. პარამეტრი სერვერისთვის "
+"სწორი კლავიატურის კოდების გასაგზავნად გამოიყენება."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:231
@@ -1141,6 +1153,8 @@ msgid ""
 "RemoteFX covers a set of technologies that enhance visual experience of the "
 "Remote Desktop Protocol."
 msgstr ""
+"RemoteFX ტექნოლოგიების ნაკრებია, რომელიც RDP-ის ვიზუალურ შეგრძნებას "
+"აუმჯობესებს."
 
 #. i18n: ectx: property (text), widget (QLabel, shareMediaLabel)
 #: rdp/rdppreferences.ui:542
@@ -1444,6 +1458,12 @@ msgid ""
 "high speed connections and results in lower image quality, especially in "
 "'Low Quality' mode."
 msgstr ""
+"გამოიყენეთ თქვენი ქსელის მიერთების ხარისხის მისათითებლად. დაიმახსოვრეთ, რომ "
+"არჩევა უსუსტესიდან უნდა დაიწყოთ, მაშინაც კი, როცა ჩქაროსნული შეერთება "
+"გაგაჩნიათ. ის არ დაგეხმარებათ, თუ სერვერი მოდემს იყენებს. მეტისმეტად მაღალი "
+"ხარისხის არჩევით დაბალსიჩქარიან შეერთებაზე შეიძლება დაყოვნების პრობლემა "
+"შეგექმნათ. დაბალი ხარისხის არჩევა გაზრდის დაყოვნებას ჩქაროსნულ მიერთებისას, "
+"განსაკუთრებით \"დაბალი ხარისხის\" რეჟიმში."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Quality)
 #: vnc/vncpreferences.ui:43
@@ -1504,6 +1524,8 @@ msgstr "მომხმარებლის სახელი:"
 #, kde-format
 msgid "Don't copy passwords from supported password managers to remote hosts"
 msgstr ""
+"მხარდაჭერილი პაროლების მმართველებიდან პაროლები დაშორებულ ჰოსტებზე არ "
+"დაკოპირდება"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, dont_copy_passwords)
 #: vnc/vncpreferences.ui:260
@@ -1513,6 +1535,9 @@ msgid ""
 "additional MIME type \"x-kde-passwordManagerHint\" which is used for "
 "filtering."
 msgstr ""
+"მხარდაჭერილი პაროლების მმართველები (მაგ: KeePassXC) კოპირებულ პაროლებს "
+"დამატებითი MIME ტიპით, \"x-kde-passwordManagerHint\" ნიშნავს, რომელიც "
+"ფილტრაციისთვის გამოიყენება."
 
 #: vnc/vncsshtunnelthread.cpp:102
 #, kde-format
@@ -1522,7 +1547,7 @@ msgstr "%1-სთან მიერთების შეცდომა: %2"
 #: vnc/vncsshtunnelthread.cpp:127
 #, kde-format
 msgid "Error authenticating with password: %1"
-msgstr ""
+msgstr "შეცდომა პაროლით ავთენტიკაციისას: %1"
 
 #: vnc/vncsshtunnelthread.cpp:133 vnc/vncsshtunnelthread.cpp:151
 #: vnc/vncsshtunnelthread.cpp:158 vnc/vncsshtunnelthread.cpp:166
