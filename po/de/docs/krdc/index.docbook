@@ -1,8 +1,7 @@
 <?xml version="1.0" ?>
 <!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
   <!ENTITY % addindex "IGNORE">
-  <!ENTITY % German "INCLUDE"
-> <!-- ONLY If you are writing non-English 
+  <!ENTITY % English "INCLUDE"> <!-- ONLY If you are writing non-English 
                                      original documentation, change 
                                      the language here -->
     
@@ -17,402 +16,348 @@
 as Authors, publish date, the abstract, and Keywords -->
 
 <bookinfo>
-<title
->Handbuch zu &krdc;</title>
+<title>The &krdc; Handbook</title>
 
 <authorgroup>
-<author
->&Brad.Hards; &Brad.Hards.mail; </author>
-<author
-><firstname
->Urs</firstname
-> <surname
->Wolfer</surname
-> <affiliation
-> <address
-><email
->uwolfer@kde.org</email
-></address>
+<author>
+&Brad.Hards;
+&Brad.Hards.mail;
+</author>
+<author>
+    <firstname>Urs</firstname>
+    <surname>Wolfer</surname>
+    <affiliation>
+        <address><email>uwolfer @ kde.org</email></address>
     </affiliation>
 </author>
-<othercredit role="translator"
-><firstname
->Frank</firstname
-><surname
->Schütte</surname
-><affiliation
-><address
-><email
->F.Schuette@t-online.de</email
-></address
-></affiliation
-><contrib
->Deutsche Übersetzung</contrib
-></othercredit
-><othercredit role="translator"
-><firstname
->Thomas</firstname
-><surname
->Reitelbach</surname
-><affiliation
-><address
-><email
->tr@erdfunkstelle.de</email
-></address
-></affiliation
-><contrib
->Überarbeitung der deutschen Übersetzung</contrib
-></othercredit
-> 
+<!-- TRANS:ROLES_OF_TRANSLATORS -->
 </authorgroup>
 
-<legalnotice
->&FDLNotice;</legalnotice>
+<legalnotice>&FDLNotice;</legalnotice>
 
-<date
->2016-07-25</date>
-<releaseinfo
->Anwendungen 16.08</releaseinfo>
+<date>2016-07-25</date>
+<releaseinfo>Applications 16.08</releaseinfo>
 
 <copyright>
-<year
->2003, 2008</year>
+<year>2003, 2008</year>
 </copyright>
 
 <abstract>
-<para
->&krdc; ist eine Anwendung zur Anzeige und Fernsteuerung der Arbeitsfläche eines anderen Rechners, auf dem ein kompatibler Dienst läuft. Derzeit werden die Protokolle <acronym
->VNC</acronym
-> und <acronym
->RDP</acronym
-> unterstützt. </para>
+<para>
+&krdc; is a client application that allows you to view or even control
+the desktop session on another machine that is running a compatible server.
+<acronym>VNC</acronym> and <acronym>RDP</acronym> is supported.
+</para>
 </abstract>
 
 <keywordset>
-<keyword
->KDE</keyword>
-<keyword
->kdenetwork</keyword>
-<keyword
->krfb</keyword>
-<keyword
->VNC</keyword>
-<keyword
->RFB</keyword>
-<keyword
->krdc</keyword>
-<keyword
->Freigabe der Arbeitsfläche</keyword>
-<keyword
->Fernsteuerung</keyword>
-<keyword
->Fernunterstützung</keyword>
-<keyword
->Entfernte Arbeitsfläche</keyword>
-<keyword
->RDP</keyword>
-<keyword
->Fernverwaltung</keyword>
+<keyword>KDE</keyword>
+<keyword>kdenetwork</keyword>
+<keyword>krfb</keyword>
+<keyword>VNC</keyword>
+<keyword>RFB</keyword>
+<keyword>krdc</keyword>
+<keyword>Desktop Sharing</keyword>
+<keyword>Remote Control</keyword>
+<keyword>Remote Assistance</keyword>
+<keyword>Remote Desktop</keyword>
+<keyword>RDP</keyword>
+<keyword>Remote Administration</keyword>
 </keywordset>
 
 </bookinfo>
 
 <chapter id="introduction">
-<title
->Einleitung</title>
+<title>Introduction</title>
 
-<para
->&krdc; ist eine Anwendung zur Betrachtung und Fernsteuerung der Arbeitsfläche eines anderen Rechners, auf dem ein kompatibler Dienst läuft. </para>
+<para>
+&krdc; is a client application that allows you to view or even control
+the desktop session on another machine that is running a compatible
+server.
+</para>
 
-<para
->Üblicherweise wird &krdc; zusammen mit dem <acronym
->VNC</acronym
->-Server von &kde; (&krfb;) verwendet, da dessen Funktionen am besten zu den besonderen Fähigkeiten von &krdc; passen. </para>
+<para>
+You would typically use &krdc; with the &kde; <acronym>VNC</acronym> server (&krfb;), which is
+also known as Krfb, since it closely matches the special features of &krdc;.
+</para>
 
-<para
->Wenn Sie &krdc; von der &konsole; starten wollen, geben Sie den Befehl <userinput
-><command
->krdc</command
-></userinput
-> ein. </para>
+<para>
+If you want to start &krdc; from &konsole;, the command is <userinput><command>krdc</command></userinput>.
+</para>
 
-<para
->Bitte berichten Sie Fehler und Wünsche in einer der &kde;-Mailinglisten oder unter <ulink url="https://bugs.kde.org"
->https://bugs.kde.org</ulink
->. </para>
+<para>
+Please report any problems or feature requests to the &kde; mailing
+lists or file a bug at <ulink
+url="https://bugs.kde.org">https://bugs.kde.org</ulink>.
+</para>
 </chapter>
 
 <chapter id="what-is-RFB">
-<title
->Das <quote
->Remote Frame Buffer</quote
->-Protokoll</title>
+<title>The Remote Frame Buffer protocol</title>
 
-<para
->In diesem Kapitel finden Sie eine kurze Beschreibung des von &krdc; und kompatiblen Programmen verwendeten <quote
->Remote Frame Buffer</quote
->-Protokolls. Falls Sie sich damit bereits auskennen, können Sie dieses Kapitel überspringen. </para>
+<para>
+This chapter provides a brief description of the Remote Frame Buffer
+protocol used by &krdc; and by other compatible systems. If you are
+already familiar with Remote Frame Buffer, you can safely skip this
+chapter.
+</para>
 
-<para
->Es gibt eine umfangreiche Umsetzung des <quote
->Remote Frame Buffer</quote
->-Protokolls, bekannt unter dem Namen <acronym
->VNC</acronym
-> (<quote
->Virtual Network Computing</quote
->). </para>
+<para>
+The high level implementation of a system using the Remote Frame
+Buffer protocol is known as Virtual Network Computer, or more often
+just as <acronym>VNC</acronym>.
+</para>
 
-<para
-><quote
->Remote Frame Buffer</quote
-> (<acronym
->RFB</acronym
->) ist ein einfaches Protokoll für den entfernten Zugriff auf eine grafische Arbeitsfläche. Es arbeitet auf der Ebene des <quote
->Frame-buffers</quote
->, der grob der gerasterten Bildschirmdarstellung entspricht. Daher kann das Protokoll für alle Fenstersysteme (einschließlich X11, &MacOS; und &Microsoft; &Windows;) verwendet werden. <quote
->Remote Frame Buffer</quote
->-Programme finden sich für viele Plattformen und können meistens frei weitergegeben werden. </para>
+<para>
+Remote Frame Buffer (or <acronym>RFB</acronym> for short) is a simple
+protocol for remote access to graphical user interfaces. It works at
+the frame-buffer level, which roughly corresponds to the rendered
+screen image, which means that it can be applied to all windowing
+systems (including X11, &MacOS; and &Microsoft; &Windows;). Remote
+Frame Buffer applications exist for many platforms, and can often be
+free re-distributed.
+</para>
 
-<para
->Beim <quote
->Remote Frame Buffer</quote
->-Protokoll heißt die Anwendung auf dem Rechner, an dem der Benutzer sitzt (mit Bildschirm, Tastatur und Maus), Client. Das Programm auf dem entfernten Rechner (mit der Fensterverwaltung und den von fern kontrollierten Programmen) wird Server genannt. &krdc; ist der &kde;-Client und &krfb; ist der &kde;-Server für das <quote
->Remote Frame Buffer</quote
->-Protokoll. </para>
+<para>
+In the Remote Frame Buffer protocol, the application that runs on the
+machine where the user sits (containing the display, keyboard and
+pointer) is called the client. The application that runs on the
+machine where the framebuffer is located (which is running the
+windowing system and applications that the user is remotely
+controlling) is called the server. &krdc; is the &kde; client for the
+Remote Frame Buffer protocol. &krfb; is the &kde; server for the
+Remote Frame Buffer protocol. 
+</para>
 
-<para
->Es wird eine gewisse Bandbreite im Netzwerk benötigt, um die Bilder des <quote
->Remote Frame Buffer</quote
-> zu übertragen, daher sollte man das Protokoll möglichst in lokalen Netzwerken verwenden. Man kann &krdc; aber auch über langsamere Verbindungen verwenden (&eg; ISDN), muss aber eine verlangsamte Arbeitsgeschwindigkeit in Kauf nehmen. </para>
+<para>
+It takes a reasonable amount of network traffic to send an image of
+the framebuffer, so Remote Frame Buffer works best over high
+bandwidth links, such as a local area network. It is still possible to
+use &krdc; over other links, but performance is unlikely to be as good.
+</para>
 
 </chapter>
 
 <chapter id="using-krdc">
-<title
->Verwendung von &krdc;</title>
+<title>Using &krdc;</title>
 
-<para
->Die Verwendung von &krdc; ist einfach - die simple Programmoberfläche ist im Bildschirmfoto unten abgebildet. </para>
+<para>
+It is very easy to use &krdc; - it has a simple interface, as shown in
+the screenshot below.
+</para>
 
 <para>
 <screenshot>
-<screeninfo
->Bildschirmfoto von &krdc;</screeninfo>
+<screeninfo>Here's a screenshot of &krdc;</screeninfo>
 	<mediaobject>
 	  <imageobject>
 	    <imagedata fileref="krdc_mainwindow.png" format="PNG"/>
 	  </imageobject>
 	  <textobject>
-	    <phrase
->Hauptfenster von &krdc;</phrase>
+	    <phrase>&krdc; main window</phrase>
 	  </textobject>
 	</mediaobject>
 </screenshot>
 </para>
 
-<sect1 id="compatible-versions"
-><title
->Verbindungsaufbau mit &krdc; zu einem kompatiblen Dienst</title>
+<sect1 id="compatible-versions"><title>Connecting &krdc; to compatible servers</title>
 
-<para
->&krdc; ist ein Client-Programm zur Verwendung mit kompatiblen Dienstprogrammen. Die Verbindung zu einem solchen Dienst kann auf verschiedene Arten hergestellt werden. </para>
+<para>
+&krdc; is a client, and it needs to be used with compatible
+servers. There are different ways to connect to those servers:
+</para>
 
 <itemizedlist>
 <listitem>
-<para
->Geben Sie den Namen (oder die IP-Adresse) des Servers in das Auswahlfeld <guilabel
->Verbinden mit:</guilabel
-> ein.</para
-> 
+<para>Directly typing the server name (or IP address) into the
+<guilabel>Connect to:</guilabel> input.</para> 
 </listitem>
 <listitem>
-<para
->Unter Verwendung einer Einladung. &krfb; verwendet Einladungen und kann diese auch per E-Mail versenden.</para>
+<para>By using an invitation that you received. &krfb; uses
+invitations, and can send them by email.</para>
 </listitem>
 </itemizedlist>
 
-<para
->Im Folgenden werden diese Methoden vorgestellt. </para>
+<para>
+Let's look at each of these in turn.
+</para>
 
-<sect2
-><title
->Eintrag des Servernamens</title>
-<para
->Falls Sie den Rechnernamen (oder die IP-Adresse) des Servers kennen, können Sie diesen direkt in das Auswahlfeld <guilabel
->Verbinden mit:</guilabel
-> eintragen. </para>
+<sect2><title>Server name entry</title>
+<para>
+If you know the host name (or IP address) of the server you want to
+connect to, you can enter it directly into the <guilabel>Connect to:</guilabel> input.
+</para>
 
-<para
->Wenn &eg; die Verbindung zu einem Rechner namens <quote
->megan</quote
-> mit einem <acronym
->VNC</acronym
->-Server auf Bildschirm 1 (5901) hergestellt werden soll, geben Sie <userinput
->megan:1</userinput
-> oder <userinput
->megan:5901</userinput
-> ein und wählen <guilabel
->vnc</guilabel
-> als Protokoll im Auswahlfeld. </para>
+<para>
+If you want to connect to a machine named megan, which is
+running a <acronym>VNC</acronym> server on screen 1 (5901), you can enter
+<userinput>megan:1</userinput> or <userinput>megan:5901</userinput> and 
+choose <guilabel>vnc</guilabel> as the protocol in the 
+drop down box.
+</para>
 <para>
 <screenshot>
-<screeninfo
->&krdc;: Eingabe eines Rechnernamens</screeninfo>
+<screeninfo>Entering a hostname into &krdc;</screeninfo>
 	<mediaobject>
 	  <imageobject>
 	    <imagedata fileref="address_input.png" format="PNG"/>
 	  </imageobject>
 	  <textobject>
-	    <phrase
->&krdc;: Eingabe eines Rechnernamens</phrase>
+	    <phrase>Entering a hostname into &krdc;</phrase>
 	  </textobject>
 	</mediaobject>
 </screenshot>
 </para>
 
-<para
->Falls auf dem entfernten Rechner ein <acronym
->RDP</acronym
->-Server läuft, geben Sie stattdessen <userinput
->megan</userinput
-> ein. Wählen Sie <guilabel
->rdp</guilabel
-> als Protokoll. Bei <acronym
->RDP</acronym
-> kann auf die Angabe der Bildschirmnummer verzichtet werden. Wenn der RDP-Server auf einem besonderen Port hört, geben Sie die Portnummer auf folgende Art ein: <userinput
->megan:3910</userinput
->. </para>
-<para
->Eine &URL; muß in prozentkodierter Syntax eingegeben werden, zum Beispiel <userinput
->@</userinput
-> als <userinput
->%40</userinput
-> in  <userinput
->username%40ad.domain.example</userinput
->. </para>
+<para>
+Similary, if you are using a <acronym>RDP</acronym> server on that
+machine, you can enter <userinput>megan</userinput>. Choose <guilabel>rdp</guilabel> as
+the protocol. <acronym>RDP</acronym> does not need the screen number to be specified.
+If the server runs the <acronym>RDP</acronym> server not on the default port, you may
+specify it in the following way: <userinput>megan:3910</userinput>
+</para>
+<para>You need to enter an &URL; in percent encoded syntax, i.e. @ as %40, for &eg; 
+<userinput>username%40ad.domain.example</userinput>
+</para>
 <!--https://bugs.kde.org/show_bug.cgi?id=261076-->
 
 </sect2>
 
-<sect2
-><title
->Verwendung einer Einladung</title>
-<para
->Mit dem &krfb;-Server kann man Einladungen per E-Mail (und auf andere Arten) versenden. Falls Sie eine solche Einladung erhalten, müssen Sie lediglich auf die enthaltene Verknüpfung klicken. &krdc; startet und stellt eine Verbindung zum in der Einladung angegebenen Server her. </para>
+<sect2><title>Using an invitation</title>
+<para>
+Within the &krfb; server application, it is possible to send
+invitations over email (and in other ways, although email is the most
+useful). If you receive this type of email invitation, you can just
+click on the link provided in the mail.
+This will start &krdc; if it is not already running, and connect to
+the server specified in the invitation.
+</para>
 
 </sect2>
 
 </sect1>
 
-<sect1 id="connection"
-><title
->Was passiert beim Verbindungsaufbau?</title>
+<sect1 id="connection"><title>What happens when you connect</title>
 
-<para
->Überprüfen Sie vor dem Aufbau der Verbindung, ob der Zielrechner (Server) im Netzwerk erreichbar ist und dass eine eventuelle vorhandene Firewall richtig eingerichtet oder ausgeschaltet ist. </para>
+<para>
+Notice: Before connecting, ensure that the target computer (server) is
+available on the network and, if necessary, that its firewall has
+been correctly configured or disabled.
+</para>
 
-<para
->Unabhängig von der gewählten Verbindungsart fragt &krdc; als Nächstes nach der Verbindungsart zum Server: </para>
+<para>
+No matter how you select the server to connect to, the next thing that
+happens is that &krdc; asks you about the network connection to the
+server, as shown below:
+</para>
 
 <para>
 <screenshot>
-<screeninfo
->&krdc;: Auswahl der Geschwindigkeit der Verbindung</screeninfo>
+<screeninfo>&krdc; connection speed selection</screeninfo>
 	<mediaobject>
 	  <imageobject>
 	    <imagedata fileref="vnc_host_configuration.png" format="PNG"/>
 	  </imageobject>
 	  <textobject>
-	    <phrase
->&krdc;: Auswahl der Geschwindigkeit der Verbindung</phrase>
+	    <phrase>&krdc; connection speed selection</phrase>
 	  </textobject>
 	</mediaobject>
 </screenshot>
 </para>
 
-<para
->Es gibt drei Geschwindigkeitseinstellungen für das <acronym
->VNC</acronym
->-Protokoll: </para>
+<para>
+There are three speed settings for the <acronym>VNC</acronym> protocol:
+</para>
 
 <itemizedlist>
-<listitem
-><para
->Hohe Qualität (LAN, direkte Verbindung) ist die Voreinstellung. Sie sollten diese Einstellung zunächst in jedem Fall ausprobieren, bevor Sie eine Einstellung für niedrigere Geschwindigkeit wählen. </para
-></listitem>
-<listitem
-><para
->Mittlere Qualität (DSL, Kabelmodem, schnelle Internetverbindung)</para
-></listitem>
-<listitem
-><para
->Niedrige Qualität (Modem, ISDN, langsame Internetverbindung)</para
-></listitem>
+<listitem><para>High Quality (LAN, direct connection), which is the
+default, and you should evaluate how well this setting performs before
+selecting a lower performance option that uses less bandwidth.
+</para></listitem>
+<listitem><para>Medium Quality (DSL, Cable, fast
+Internet).</para></listitem>
+<listitem><para>Low Quality (Modem, ISDN, slow
+Internet).</para></listitem>
 </itemizedlist>
 
-<para
->Falls Sie immer dieselbe Verbindungsart wählen, können Sie die Markierung aus dem Ankreuzfeld <guilabel
->Diesen Dialog erneut für diesen Rechner anzeigen</guilabel
-> entfernen. Das bedeutet, Sie werden für diesen Server nicht erneut nach dem Verbindungstyp gefragt, vorausgesetzt, Sie verwenden dazu immer den gleichen Rechnernamen bzw. IP-Adresse. Falls der entfernte Rechner &eg; mehrere Namen hat und die Markierung des Ankreuzfeldes für einen der beiden Namen entfernt worden ist, werden Sie für diesen Namen nicht mehr gefragt, wohl aber für den anderen Namen oder die IP-Adresse. </para>
+<para>
+If you always operate over the same link type, you can deselect the
+checkbox labeled <guilabel>Show this dialog again for this
+host</guilabel>, which means that you won't be asked about the
+connection type again for this host, providing you identify it in the
+same way. For example, if a host has two names, and deselect the
+checkbox when connecting using one name, you won't get asked if you
+connect using that name, although you will be asked if you use the
+other name, or the IP address.
+</para>
 
-<para
->Wählen Sie die geeignete Geschwindigkeitseinstellung und klicken Sie auf <guibutton
->OK</guibutton
->. </para>
+<para>
+You select the appropriate speed setting, and select the
+<guibutton>OK</guibutton> to proceed.
+</para>
 
-<para
->Sie erkennen den derzeitigen Verbindungsstatus an dem Symbol neben dem Karteireiter des Unterfensters. </para>
+<para>
+You can see the connection status in the icon in the tab.
+</para>
 
-<para
->Abhängig von der Konfiguration des Servers ist manchmal (eigentlich fast immer) ein Passwort zur Authentifizierung gegenüber dem Server notwendig. &krdc; zeigt in solchen Fällen eine Passwortabfrage an. </para>
+<para>
+Depending on the configuration of the server, you may (and almost
+certainly will) need to provide a password to authenticate to the
+server. &krdc; will provide a password dialog similar to that shown
+below.
+</para>
 
-<para
->&krdc; kann das Passwort für Sie im Passwortspeicher speichern, damit Sie es später nicht erneut eingeben müssen. Dazu aktivieren Sie das Ankreuzfeld <guibutton
->Passwort speichern (KWallet)</guibutton
->. </para>
+<para>
+&krdc; has the ability to save the password for further connections
+to the same host. It uses KWallet for doing this. You need to check the
+<guibutton>Remember password (KWallet)</guibutton> check box if you like
+to use this feature.
+</para>
 
 <para>
 <screenshot>
-<screeninfo
->&krdc; Passworteingabe</screeninfo>
+<screeninfo>&krdc; password entry</screeninfo>
 	<mediaobject>
 	  <imageobject>
 	    <imagedata fileref="password_entry.png" format="PNG"/>
 	  </imageobject>
 	  <textobject>
-	    <phrase
->&krdc; Passworteingabe</phrase>
+	    <phrase>&krdc; password entry</phrase>
 	  </textobject>
 	</mediaobject>
 </screenshot>
 </para>
 
-<para
->Nach der Authentifizierung wird die Verbindung zum entfernten Rechner hergestellt und Sie können &krdc; verwenden, um die entfernte Arbeitsfläche zu beobachten oder zu kontrollieren. </para>
+<para>
+After authentication, you will be connected to the remote server, and
+can begin using &krdc; to observe or control the remote desktop.
+</para>
 
 </sect1>
 
-<sect1 id="controlling-remote"
-><title
->Fernsteuerung der entfernten Arbeitsfläche</title>
+<sect1 id="controlling-remote"><title>Controlling the remote desktop connection</title>
 
-<para
->Sobald die Verbindung aufgebaut ist, verwenden Sie Tastatur und Maus zur Fernsteuerung der Fenster und Anwendungen auf dem entfernten Rechner. </para>
+<para>
+Having connected to the remote server, you would normally use the
+keyboard and mouse to control the windowing system and applications on
+that remote machine.
+</para>
 
-<para
->Die Arbeitsfläche des entfernten Rechners kann Ihnen entweder als Vollbild oder als Fenster angezeigt werden. Zwischen diesen Modi können Sie mit Hilfe der unten gezeigten Symbole wechseln. </para>
+<para>
+You can view the remote desktop either as a full screen, or as a
+window on the local desktop. You can change between these modes using
+icons shown below.
+</para>
 
 <para>
 <screenshot>
-<screeninfo
->&krdc; Auswahl des Vollbildmodus</screeninfo>
+<screeninfo>&krdc; full screen mode selection</screeninfo>
 	<mediaobject>
 	  <imageobject>
 	    <imagedata fileref="view-fullscreen.png" format="PNG"/>
 	  </imageobject>
 	  <textobject>
-	    <phrase
->&krdc; Auswahl des Vollbildmodus</phrase>
+	    <phrase>&krdc; full screen mode selection</phrase>
 	  </textobject>
 	</mediaobject>
 </screenshot>
@@ -420,119 +365,100 @@ as Authors, publish date, the abstract, and Keywords -->
 
 <para>
 <screenshot>
-<screeninfo
->&krdc; Auswahl des Fenstermodus</screeninfo>
+<screeninfo>&krdc; window mode selection</screeninfo>
 	<mediaobject>
 	  <imageobject>
 	    <imagedata fileref="view-restore.png" format="PNG"/>
 	  </imageobject>
 	  <textobject>
-	    <phrase
->&krdc; Auswahl des Fenstermodus</phrase>
+	    <phrase>&krdc; window mode selection</phrase>
 	  </textobject>
 	</mediaobject>
 </screenshot>
 </para>
 
-<para
->Der Vollbildmodus eignet sich besser zur Unterstützung eines Benutzers am Fremdrechner, da Sie die gleichen Inhalte auf dem Bildschirm sehen können wie der Benutzer, dem Sie helfen möchten. Der Fenstermodus ist nützlich, wenn man sowohl auf dem Fremdgerät als auch lokal arbeitet - &eg; lokal eine Dokumentation konsultiert und die gegebenen Instruktionen auf dem Fremdgerät umsetzt. </para>
+<para>
+Full screen mode is normally better when you are helping a remote
+user, because you can see all of what they can see. Window mode is
+most useful when you are working both remotely and locally - perhaps
+referring to some local documentation and then using those
+instructions on the remote machine.
+</para>
 
-<sect2
-><title
->Verwendung des Fenstermodus</title>
+<sect2><title>Using window mode</title>
 
-<para
->Im Fenstermodus wird durch das Schließen des Fensters die Verbindung getrennt. Das Fenster können Sie schließen, indem Sie auf den Knopf <guibutton
->Abmelden</guibutton
-> klicken. </para>
+<para>
+In window mode, you can terminate the connection by closing the window, by clicking
+on the logout button.
+</para>
 
 </sect2>
 
-<sect2
-><title
->Verwendung des Vollbildmodus</title>
+<sect2><title>Using full screen mode</title>
 
-<para
->Im Vollbildmodus können Sie das Erscheinungsbild der Werkzeugleiste am oberen Bildschirmrand einstellen: Die Transparenz der Werkzeugleiste können Sie durch Betätigen des Mausrades darüber ändern. </para>
+<para>
+In full screen mode, you can change the appearance of the toolbar.
+The transparency of the toolbar can be changed with scrollwheel.
+</para>
 
 </sect2>
 
 </sect1>
 
-<sect1 id="bookmarks"
-><title
->Lesezeichen</title>
+<sect1 id="bookmarks"><title>Bookmarks</title>
 
-<para
->Wie viele andere KDE-Programme auch, unterstützt &krdc; sog. Lesezeichen. Wenn Sie eine bestimmte Verbindung öfters benötigen, erstellen Sie für diese am Besten ein Lesezeichen. Wählen Sie dazu aus dem Menü <menuchoice
-><guimenu
->Lesezeichen</guimenu
-><guimenuitem
->Lesezeichen hinzufügen</guimenuitem
-></menuchoice
->. </para>
+<para>
+&krdc; has the ability to manage bookmarks. If you need to connect often to
+the same remote desktop, you can add an entry for this connection to the
+bookmark list. You can do so with a click on <menuchoice><guimenu>Bookmarks</guimenu>
+<guimenuitem>Add Bookmark</guimenuitem></menuchoice>.
+</para>
 
 <para>
 <screenshot>
-<screeninfo
->&krdc; Lesezeichen-Menü</screeninfo>
+<screeninfo>&krdc; bookmarks menu</screeninfo>
 	<mediaobject>
 	  <imageobject>
 	    <imagedata fileref="bookmarks_menu.png" format="PNG"/>
 	  </imageobject>
 	  <textobject>
-	    <phrase
->&krdc; Lesezeichen-Menü</phrase>
+	    <phrase>&krdc; bookmarks menu</phrase>
 	  </textobject>
 	</mediaobject>
 </screenshot>
 </para>
 
 
-<sect2
-><title
->Verlauf-Lesezeichen</title>
+<sect2><title>History Bookmarks</title>
 
-<para
->&krdc; merkt sich die zuletzt verwendeten Verbindungen in Form von Lesezeichen. Diese besonderen Lesezeichen erreichen Sie über das Menü <menuchoice
-><guimenu
->Lesezeichen</guimenu
-><guimenuitem
->Verlauf</guimenuitem
-></menuchoice
->. Falls Sie ein solches Lesezeichen nicht mehr benötigen, können Sie es selbstverständlich auch löschen. Klicken Sie dazu mit der &RMBn; auf das überflüssige Lesezeichen und wählen dann aus dem Kontextmenü <guibutton
->Löschen</guibutton
->. </para>
+<para>
+&krdc; saves last used remote desktop connections. You can access these special
+bookmarks at <menuchoice><guimenu>Bookmarks</guimenu><guimenuitem>History</guimenuitem></menuchoice>. Of course you can also
+delete a bookmark of this list if you don't need it anymore in the list. Just click
+<guibutton>Delete Bookmark</guibutton> which appears after a click with the right mouse button on
+the bookmark you would like to delete.
+</para>
 
 </sect2>
 
 </sect1>
 
-<sect1 id="managing-configuration"
-><title
->Einrichtung von &krdc;</title>
-<para
->Über den Menüeintrag <menuchoice
-><guimenu
->Einstellungen</guimenu
-><guimenuitem
->KRDC einrichten&nbsp;...</guimenuitem
-></menuchoice
-> erreichen Sie den Einrichtungsdialog, mit dessen Hilfe Sie verschiedene Einstellungen von &krdc; anpassen können. Unten sehen Sie ein Bildschirmfoto des Einrichtungsdialogs: </para>
+<sect1 id="managing-configuration"><title>Managing &krdc; configuration</title>
+<para>
+Using <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure KRDC...</guimenuitem></menuchoice>, 
+you can open a dialog to modify the behavior of &krdc;. Selecting that button brings up a
+window as shown below:
+</para>
 
 <para>
 <screenshot>
-<screeninfo
->&krdc; Einstellungen - Allgemein</screeninfo>
+<screeninfo>&krdc; preferences - General tab</screeninfo>
 	<mediaobject>
 	  <imageobject>
 	    <imagedata fileref="general_preferences.png" format="PNG"/>
 	  </imageobject>
 	  <textobject>
-	    <phrase
->&krdc; Einstellungen - Karteikarte <guilabel
->Allgemein</guilabel
-></phrase>
+	    <phrase>&krdc; preferences - <guilabel>General</guilabel> tab</phrase>
 	  </textobject>
 	</mediaobject>
 </screenshot>
@@ -540,19 +466,14 @@ as Authors, publish date, the abstract, and Keywords -->
 
 <para>
 <screenshot>
-<screeninfo
->&krdc; Einstellungen - Abschnitt <guilabel
->VNC-Einrichtung</guilabel
-></screeninfo>
+<screeninfo>&krdc; preferences - <guilabel>VNC Defaults</guilabel> tab</screeninfo>
 	<mediaobject>
 	  <imageobject>
 	    <imagedata fileref="vnc_preferences.png" format="PNG"/>
 	  </imageobject>
 	  <textobject>
-	    <phrase
->&krdc; Einstellungen - Abschnitt <guilabel
->VNC-Einrichtung</guilabel
-></phrase>
+	    <phrase>&krdc; preferences - <guilabel>VNC
+Defaults</guilabel> profiles tab</phrase>
 	  </textobject>
 	</mediaobject>
 </screenshot>
@@ -560,19 +481,14 @@ as Authors, publish date, the abstract, and Keywords -->
 
 <para>
 <screenshot>
-<screeninfo
->&krdc; Einstellungen - Abschnitt <guilabel
->RDP-Einrichtung</guilabel
-></screeninfo>
+<screeninfo>&krdc; preferences - <guilabel>RDP Defaults</guilabel> tab</screeninfo>
 	<mediaobject>
 	  <imageobject>
 	    <imagedata fileref="rdp_preferences.png" format="PNG"/>
 	  </imageobject>
 	  <textobject>
-	    <phrase
->&krdc; Einstellungen - Abschnitt <guilabel
->RDP-Einrichtung</guilabel
-></phrase>
+	    <phrase>&krdc; preferences - <guilabel>RDP
+Defaults</guilabel> profiles tab</phrase>
 	  </textobject>
 	</mediaobject>
 </screenshot>
@@ -584,8 +500,7 @@ as Authors, publish date, the abstract, and Keywords -->
 </chapter>
 
 <chapter id="faq">
-<title
->Fragen und Antworten</title>
+<title>Questions and Answers</title>
 
 <!-- (OPTIONAL but recommended) This chapter should include all of the silly
 (and not-so-silly) newbie questions that fill up your mailbox. This chapter
@@ -600,16 +515,12 @@ application work. -->
 <qandaset id="faqlist">
 <qandaentry>
 <question>
-<para
->Warum funktioniert die Unterstützung für <acronym
->RDP</acronym
-> nicht?</para>
+<para>Why does <acronym>RDP</acronym> support not work?</para>
 </question>
 <answer>
-<para
->Die <acronym
->RDP</acronym
->-Unterstützung in &krdc; erfordert das Programm xfreerdp (FreeRDP). Stellen Sie bitte sicher, dass dieses Programm auf Ihrem System installiert ist. </para>
+<para><acronym>RDP</acronym> support in &krdc; depends on xfreerdp (FreeRDP). Make sure that you have installed
+this runtime dependency.
+</para>
 </answer>
 </qandaentry>
 </qandaset>
@@ -623,34 +534,30 @@ contributors here. The license for your software should then be included below
 the credits with a reference to the appropriate license file included in the K D E
 distribution. -->
 
-<title
->Danksagungen und Lizenz</title>
+<title>Credits and License</title>
 
-<para
->&krdc; </para>
-<para
->Das Projekt &krdc; wurde von Tim Jansen <email
->tim@tjansen.de</email
-> begonnen. Im Rahmen des Projektes <quote
->Google Summer of Code 2007</quote
-> wurde &krdc; von Urs Wolfer <email
->uwolfer@kde.org</email
-> vollkommen neu programmiert. Wir bedanken uns bei Google und dem Projekt-Mentor &Brad.Hards; &Brad.Hards.mail; für die Unterstützung. </para>
+<para>
+&krdc;
+</para>
+<para>
+The &krdc; project has been started by Tim Jansen <email>tim@tjansen.de</email>.
+As a Google Summer of Code 2007 project, Urs Wolfer <email>uwolfer @ kde.org</email>
+has completely rewritten &krdc;. Thanks to Google for making this possible, and thanks
+to the great mentor of this Summer of Code project, &Brad.Hards; &Brad.Hards.mail;.
+</para>
 
-<para
->Dokumentations-Copyright &copy; 2003 &Brad.Hards; &Brad.Hards.mail; Dokumentations-Copyright &copy; 2007 Urs Wolfer <email
->uwolfer @ kde.org</email
-> </para>
+<para>
+Documentation Copyright &copy; 2003 &Brad.Hards; &Brad.Hards.mail;
+Documentation Copyright &copy; 2007 Urs Wolfer <email>uwolfer @ kde.org</email>
+</para>
 
-<para
->Deutsche Übersetzung von Frank Schütte<email
->F.Schuette@t-online.de</email
-></para
-> <para
->Überarbeitung der deutschen Übersetzung von Thomas Reitelbach<email
->tr@erdfunkstelle.de</email
-></para
-> &underFDL; &underGPL; </chapter>
+<!-- TRANS:CREDIT_FOR_TRANSLATORS -->
+
+&underFDL;               <!-- FDL: do not remove -->
+
+&underGPL;        	 <!-- GPL License -->
+
+</chapter>
 
 &documentation.index;
 </book>
