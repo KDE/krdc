@@ -3,31 +3,31 @@
 #
 # Zlatko Popov <zlatkopopov@fsa-bg.org>, 2006, 2007.
 # Yasen Pramatarov <yasen@lindeas.com>, 2011.
-# Mincho Kondarev <mkondarev@yahoo.de>, 2022.
+# Mincho Kondarev <mkondarev@yahoo.de>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-11 02:42+0000\n"
-"PO-Revision-Date: 2022-10-17 10:27+0200\n"
+"PO-Revision-Date: 2023-01-09 21:29+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.08.2\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 22.12.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Ясен Праматаров,Златко Попов"
+msgstr "Ясен Праматаров,Златко Попов,Светослав Стефанов"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "yasen@lindeas.com,zlatkopopov@fsa-bg.org"
+msgstr "yasen@lindeas.com,zlatkopopov@fsa-bg.org,svetlisashkov@yahoo.com"
 
 #: bookmarkmanager.cpp:40
 #, kde-format
@@ -95,12 +95,14 @@ msgid ""
 "This option will resize the window to fit the connection size.  If it is too "
 "big, it will maximize the window."
 msgstr ""
+"Тази опция ще промени размера на прозореца, за да съответства на размера на "
+"връзката.  Ако той е твърде голям, тя ще увеличи прозореца до максимум."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ResizeOnConnect)
 #: config/general.ui:109
 #, kde-format
 msgid "Resize to fit"
-msgstr ""
+msgstr "Напасване"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_FullscreenOnConnect)
 #: config/general.ui:116
@@ -109,6 +111,8 @@ msgid ""
 "This option switches to fullscreen only if the connection resolution is the "
 "same as the current screen resolution"
 msgstr ""
+"Тази опция превключва на цял екран само ако разделителната способност на "
+"връзката е същата като текущата разделителна способност на екрана"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_FullscreenOnConnect)
 #: config/general.ui:119
@@ -120,7 +124,7 @@ msgstr "Превключване на пълен екран при възмож�
 #: config/general.ui:128
 #, kde-format
 msgid "Default protocol:"
-msgstr ""
+msgstr "Стандартен протокол:"
 
 #. i18n: ectx: property (text), widget (QLineEdit, kcfg_DefaultProtocol)
 #: config/general.ui:135
@@ -130,9 +134,9 @@ msgstr "vnc"
 
 #. i18n: ectx: property (title), widget (QGroupBox, tabGroupBox)
 #: config/general.ui:147
-#, fuzzy, kde-format
+#, kde-format
 msgid "Tab Settings"
-msgstr "Настройки"
+msgstr "Настройки на подпрозорец"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowTabBar)
 #: config/general.ui:153
@@ -150,7 +154,7 @@ msgstr "Показване на затварящ бутон в подпрозо�
 #: config/general.ui:167
 #, kde-format
 msgid "Middle-click on a tab closes it"
-msgstr ""
+msgstr "Средно щракване върху подпрозорец го затваря"
 
 #. i18n: ectx: property (text), widget (QLabel, tabOrientationLabel)
 #: config/general.ui:176
@@ -195,7 +199,7 @@ msgstr "Премахване"
 #: config/hostpreferenceslist.cpp:100 mainwindow.cpp:655
 #, kde-format
 msgid "The selected host cannot be handled."
-msgstr ""
+msgstr "Избраният хост не може да бъде обработен."
 
 #: config/hostpreferenceslist.cpp:101 mainwindow.cpp:277 mainwindow.cpp:656
 #, kde-format
@@ -279,11 +283,13 @@ msgstr[1] "Преди %1 години"
 msgid ""
 "Note that settings might only apply when you connect next time to this host."
 msgstr ""
+"Имайте предвид, че настройките може да се прилагат само при следващо "
+"свързване с този хост."
 
 #: core/hostpreferences.cpp:199
-#, fuzzy, kde-format
+#, kde-format
 msgid "Show this dialog again for this host"
-msgstr "Показване на &диалога за хоста"
+msgstr "Показване на този диалогов прозорец отново за този хост"
 
 #: core/hostpreferences.cpp:203
 #, kde-format
@@ -306,7 +312,7 @@ msgstr "&Сесия"
 #: krdcui.rc:22
 #, kde-format
 msgid "Remote View Toolbar"
-msgstr ""
+msgstr "Лента с инструменти за отдалечен преглед"
 
 #: main.cpp:61
 #, kde-format
@@ -319,7 +325,7 @@ msgid "KDE Remote Desktop Client"
 msgstr "Отдалечено работно място в KDE"
 
 #: main.cpp:64
-#, fuzzy, kde-format
+#, kde-format
 msgid ""
 "(c) 2007-2016, Urs Wolfer\n"
 "(c) 2001-2003, Tim Jansen\n"
@@ -330,7 +336,7 @@ msgid ""
 "(c) 1999-2003, Matthew Chapman\n"
 "(c) 2009, Collabora Ltd"
 msgstr ""
-"(c) 2007-2010, Urs Wolfer\n"
+"(c) 2007-2016, Urs Wolfer\n"
 "(c) 2001-2003, Tim Jansen\n"
 "(c) 2002-2003, Arend van Beelen jr.\n"
 "(c) 2000-2002, Const Kaplinsky\n"
@@ -407,18 +413,20 @@ msgstr "Abner Silva"
 #: main.cpp:81
 #, kde-format
 msgid "Telepathy Tubes Integration"
-msgstr ""
+msgstr "Интеграция на Telepathy Tubes"
 
 #: main.cpp:92
 #, kde-format
 msgid ""
 "Start KRDC with the provided URL in fullscreen mode (works only with one URL)"
 msgstr ""
+"Стартиране на KRDC с предоставения URL адрес в режим на цял екран (работи "
+"само с един URL адрес)"
 
 #: main.cpp:93
 #, kde-format
 msgid "URLs to connect after startup"
-msgstr ""
+msgstr "URL адреси за свързване след стартиране"
 
 #: mainwindow.cpp:114
 #, kde-format
@@ -474,18 +482,17 @@ msgstr "Локален показалец"
 #: mainwindow.cpp:172
 #, kde-format
 msgid "Grab All Possible Keys"
-msgstr ""
+msgstr "Прихващане на всички възможни ключове"
 
 #: mainwindow.cpp:173
 #, kde-format
 msgid "Grab Keys"
-msgstr ""
+msgstr "Прихващане на ключове"
 
 #: mainwindow.cpp:179
-#, fuzzy, kde-format
+#, kde-format
 msgid "Scale Remote Screen to Fit Window Size"
-msgstr ""
-"Мащабиране на отдалечения екран до съвпадение с размерите на прозореца."
+msgstr "Мащабиране на отдалечения екран според размера на прозореца"
 
 #: mainwindow.cpp:180
 #, kde-format
@@ -495,7 +502,7 @@ msgstr "Мащабиране"
 #: mainwindow.cpp:183
 #, kde-format
 msgid "Scaling Factor"
-msgstr ""
+msgstr "Фактор на мащабиране"
 
 #: mainwindow.cpp:194
 #, kde-format
@@ -519,7 +526,7 @@ msgstr "Неправилен URL-адрес"
 #: mainwindow.cpp:276
 #, kde-format
 msgid "The entered address cannot be handled."
-msgstr ""
+msgstr "Въведеният адрес не може да бъде обработен."
 
 #: mainwindow.cpp:408
 #, kde-format
@@ -628,7 +635,7 @@ msgstr "Минимизиране на прозорец"
 #: mainwindow.cpp:846
 #, kde-format
 msgid "Stick Toolbar"
-msgstr ""
+msgstr "Стик лента с инструменти"
 
 #: mainwindow.cpp:956
 #, kde-format
@@ -649,7 +656,7 @@ msgstr "Свързване с:"
 #: mainwindow.cpp:1089
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
-msgstr ""
+msgstr "Въведете тук, за да се свържете с даден адрес и да филтрирате списъка."
 
 #: mainwindow.cpp:1098
 #, kde-format
@@ -657,6 +664,8 @@ msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
 "methods."
 msgstr ""
+"Въведете IP адрес или DNS име. Изчистете реда, за да получите списък с "
+"методи за свързване."
 
 #: mainwindow.cpp:1101
 #, kde-format
@@ -676,7 +685,7 @@ msgstr "Филтриране"
 #: rdp/rdphostpreferences.cpp:181
 #, kde-format
 msgid "Browse to media share path"
-msgstr ""
+msgstr "Преминаване към пътя за споделяне на медия"
 
 #. i18n: ectx: property (title), widget (QGroupBox, connectionGroupBox)
 #. i18n: ectx: property (title), widget (QGroupBox, vncGroupBox)
@@ -753,7 +762,7 @@ msgstr "Потребителска разделителна способност
 #: rdp/rdppreferences.ui:90
 #, kde-format
 msgid "Current KRDC Size"
-msgstr ""
+msgstr "Текущ размер на KRDC"
 
 #. i18n: ectx: property (text), widget (QLabel, widthLabel)
 #: rdp/rdppreferences.ui:103 vnc/vncpreferences.ui:136
@@ -811,9 +820,9 @@ msgstr "Реални цветове (24 бита)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
 #: rdp/rdppreferences.ui:200
-#, fuzzy, kde-format
+#, kde-format
 msgid "True Color with Alpha (32 Bit)"
-msgstr "Реални цветове (24 бита)"
+msgstr "Истински цвят с прозрачност (32 бита)"
 
 #. i18n: ectx: property (text), widget (QLabel, layoutLabel)
 #: rdp/rdppreferences.ui:208
@@ -1082,7 +1091,7 @@ msgstr "Изключване на звука"
 #: rdp/rdppreferences.ui:467
 #, kde-format
 msgid "ALSA"
-msgstr ""
+msgstr "ALSA"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_SoundSystem)
 #: rdp/rdppreferences.ui:472
@@ -1092,9 +1101,9 @@ msgstr "PulseAudio"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_SoundSystem)
 #: rdp/rdppreferences.ui:477
-#, fuzzy, kde-format
+#, kde-format
 msgid "None"
-msgstr "Без"
+msgstr "Никои"
 
 #. i18n: ectx: property (text), widget (QLabel, performanceLabel)
 #: rdp/rdppreferences.ui:487
@@ -1113,7 +1122,7 @@ msgstr "Модем"
 #: rdp/rdppreferences.ui:509
 #, kde-format
 msgid "Broadband"
-msgstr ""
+msgstr "Широколентова"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Performance)
 #: rdp/rdppreferences.ui:514
@@ -1123,15 +1132,15 @@ msgstr "LAN"
 
 #. i18n: ectx: property (text), widget (QLabel, remoteFXLabel)
 #: rdp/rdppreferences.ui:522
-#, fuzzy, kde-format
+#, kde-format
 msgid "RemoteFX:"
-msgstr "Премахване"
+msgstr "RemoteFX:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_RemoteFX)
 #: rdp/rdppreferences.ui:532
 #, kde-format
 msgid "Enhanced visual experience"
-msgstr ""
+msgstr "Подобрено визуално изживяване"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_RemoteFX)
 #: rdp/rdppreferences.ui:535
@@ -1140,18 +1149,20 @@ msgid ""
 "RemoteFX covers a set of technologies that enhance visual experience of the "
 "Remote Desktop Protocol."
 msgstr ""
+"RemoteFX обхваща набор от технологии, които подобряват визуалното изживяване "
+"на протокола за отдалечен работен плот."
 
 #. i18n: ectx: property (text), widget (QLabel, shareMediaLabel)
 #: rdp/rdppreferences.ui:542
 #, kde-format
 msgid "Share Media:"
-msgstr ""
+msgstr "Споделяне на медия:"
 
 #. i18n: ectx: property (whatsThis), widget (KLineEdit, kcfg_ShareMedia)
 #: rdp/rdppreferences.ui:560
 #, kde-format
 msgid "Share a local media directory with the remote host."
-msgstr ""
+msgstr "Споделяне на локална медийна директория с отдалечения хост."
 
 #. i18n: ectx: property (title), widget (QGroupBox, expertGroupBox)
 #: rdp/rdppreferences.ui:585
@@ -1169,19 +1180,19 @@ msgstr "Конзолно включване:"
 #: rdp/rdppreferences.ui:601
 #, kde-format
 msgid "Attach to Windows Server console"
-msgstr ""
+msgstr "Присъединяване към конзолата на Windows Server"
 
 #. i18n: ectx: property (text), widget (QLabel, extraOptionsLabel)
 #: rdp/rdppreferences.ui:608
 #, kde-format
 msgid "Extra options:"
-msgstr "Допълнителни настройки"
+msgstr "Допълнителни настройки:"
 
 #. i18n: ectx: property (whatsThis), widget (KLineEdit, kcfg_ExtraOptions)
 #: rdp/rdppreferences.ui:624
-#, fuzzy, kde-format
+#, kde-format
 msgid "Here you can enter additional xfreerdp (FreeRDP) options."
-msgstr "Тук може да въведете допълнителни настройки за rdesktop."
+msgstr "Тук можете да въведете допълнителни настройки за xfreerdp (FreeRDP)."
 
 #. i18n: ectx: property (title), widget (QGroupBox, loginGroupBox)
 #: rdp/rdppreferences.ui:637
@@ -1205,12 +1216,12 @@ msgstr "Няма потребител по подразбиране"
 #: rdp/rdppreferences.ui:664
 #, kde-format
 msgid "Automatically recognize \"LDAP\"-Logins and share passwords"
-msgstr ""
+msgstr "Автоматично разпознаване на LDAP-входни данни и споделяне на пароли"
 
 #: rdp/rdpview.cpp:104
 #, kde-format
 msgid "Media Folder does not Exist"
-msgstr ""
+msgstr "Папката с медии не съществува"
 
 #: rdp/rdpview.cpp:104
 #, kde-format
@@ -1219,6 +1230,9 @@ msgid ""
 "Please set an existing folder to share or empty the \"Share Media\" option "
 "if you do not want to share any folder."
 msgstr ""
+"Папката %1 не съществува.\n"
+"Моля, задайте съществуваща папка за споделяне или изчистете настройката "
+"\"Споделяне на медии\", ако не искате да споделяте никаква папка."
 
 #: rdp/rdpview.cpp:113
 #, kde-format
@@ -1229,6 +1243,7 @@ msgstr "Въведете потребителско име"
 #, kde-format
 msgid "Please enter the username you would like to use for login."
 msgstr ""
+"Моля, въведете потребителското име, което искате да използвате за вход."
 
 #: rdp/rdpview.cpp:134 vnc/vncview.cpp:344
 #, kde-format
@@ -1236,11 +1251,10 @@ msgid "Access to the system requires a password."
 msgstr "Достъпът до системата изисква парола."
 
 #: rdp/rdpview.cpp:442
-#, fuzzy, kde-format
+#, kde-format
 msgid "Could not start \"%1\"; make sure %1 is properly installed."
 msgstr ""
-"Не може да бъде стартиран rdesktop. Моля, уверете се, че програмата rdesktop "
-"е инсталирана и настроена правилно."
+"\"%1\" не може да бъде стартирана; уверете се, че %1 е правилно инсталирана."
 
 #: rdp/rdpview.cpp:443 rdp/rdpview.cpp:467 rdp/rdpview.cpp:471
 #, kde-format
@@ -1248,23 +1262,25 @@ msgid "RDP Failure"
 msgstr "Грешка в RDP"
 
 #: rdp/rdpview.cpp:465
-#, fuzzy, kde-format
+#, kde-format
 msgid ""
 "The version of \"xfreerdp\" you are using is too old.\n"
 "xfreerdp 1.0.2 or greater is required."
 msgstr ""
-"Версията ви на \"rdesktop\" (%1) е твърде стара:\n"
-"изисква се rdesktop версия 1.3.2 или по-нова."
+"Версията ви на \"xfreerdp\" е твърде стара:\n"
+"изисква се xfreerdp версия 1.0.2 или по-нова."
 
 #: rdp/rdpview.cpp:470
-#, fuzzy, kde-format
+#, kde-format
 msgid "Connection failed. You might have passed a wrong address or username."
-msgstr "Връзката пропадна. Няма работещ сървър на зададения адрес и порт."
+msgstr ""
+"Връзката е неуспешна. Възможно е да сте подали грешен адрес или "
+"потребителско име."
 
 #: rdp/rdpview.cpp:486
 #, kde-format
 msgid "Name or service not known."
-msgstr "Името или услугата не е известно"
+msgstr "Името или услугата не са известни."
 
 #: rdp/rdpview.cpp:487 rdp/rdpview.cpp:493 rdp/rdpview.cpp:498
 #: rdp/rdpview.cpp:506
@@ -1278,16 +1294,18 @@ msgid "Connection attempt to host failed."
 msgstr "Неуспешен опит за връзка с хоста."
 
 #: rdp/rdpview.cpp:497
-#, fuzzy, kde-format
+#, kde-format
 msgid "Authentication failure, check credentials."
-msgstr "Неуспешно удостоверяване. Опитайте отново."
+msgstr "Неуспешно удостоверяване, проверете данните за вход."
 
 #: rdp/rdpview.cpp:505
-#, fuzzy, kde-format
+#, kde-format
 msgid ""
 "Connection attempt to host failed. Security negotiation or connection "
 "failure."
-msgstr "Неуспешен опит за връзка с хоста."
+msgstr ""
+"Опитът за свързване с хоста е неуспешен. Неуспешно договаряне на сигурността "
+"или неуспешна връзка."
 
 #: rdp/rdpviewfactory.cpp:22
 #, kde-format
@@ -1309,13 +1327,13 @@ msgstr ""
 "rdpserver:3389 (хост:порт)</i></html>"
 
 #: rdp/rdpviewfactory.cpp:70
-#, fuzzy, kde-format
+#, kde-format
 msgid ""
 "The application \"xfreerdp\" cannot be found on your system; make sure it is "
 "properly installed if you need RDP support."
 msgstr ""
-"Не може да бъде стартиран rdesktop. Моля, уверете се, че програмата rdesktop "
-"е инсталирана и настроена правилно."
+"Приложението \"xfreerdp\" не може да бъде намерено във вашата система; "
+"уверете се, че е правилно инсталирано, ако се нуждаете от поддръжка на RDP."
 
 #: remotedesktopsmodel.cpp:112
 #, kde-format
@@ -1345,7 +1363,7 @@ msgstr "Отмятане на %1."
 #, kde-format
 msgctxt "Header of the connections list, title/url for remote connection"
 msgid "Remote Desktop"
-msgstr "Отдалечено работно място:"
+msgstr "Отдалечено работно място"
 
 #: remotedesktopsmodel.cpp:173
 #, kde-format
@@ -1375,9 +1393,9 @@ msgid "Source"
 msgstr "Източник"
 
 #: vnc/vncclientthread.cpp:299
-#, fuzzy, kde-format
+#, kde-format
 msgid "VNC authentication type is not supported."
-msgstr "Грешка при удостоверяване на VNC."
+msgstr "Типът удостоверяване VNC не се поддържа."
 
 #: vnc/vncclientthread.cpp:318
 #, kde-format
@@ -1400,30 +1418,30 @@ msgid "VNC server closed connection."
 msgstr "Сърърът VNC затвори връзката."
 
 #: vnc/vncclientthread.cpp:351
-#, fuzzy, kde-format
+#, kde-format
 msgid "Disconnected: %1."
-msgstr "Прекъснат"
+msgstr "Прекъсната връзка: %1."
 
 #: vnc/vncclientthread.cpp:557
-#, fuzzy, kde-format
+#, kde-format
 msgid "Reconnecting."
-msgstr "При свързване"
+msgstr "Повторно свързване."
 
 #: vnc/vncclientthread.cpp:624
-#, fuzzy, kde-format
+#, kde-format
 msgid "Reconnected."
-msgstr "Изключване"
+msgstr "Връзката е възстановена."
 
 #: vnc/vncclientthread.cpp:626
-#, fuzzy, kde-format
+#, kde-format
 msgid "Connected."
-msgstr "Свързан"
+msgstr "Свързан."
 
 #. i18n: ectx: property (text), widget (QLabel, connectionLabel)
 #: vnc/vncpreferences.ui:23
-#, fuzzy, kde-format
+#, kde-format
 msgid "Connection &type:"
-msgstr "Вид на връзката:"
+msgstr "Вид на &връзката:"
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_Quality)
 #: vnc/vncpreferences.ui:39
@@ -1461,27 +1479,27 @@ msgstr "Ниско качество (бавна връзка - модем)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_Scaling)
 #: vnc/vncpreferences.ui:63
-#, fuzzy, kde-format
+#, kde-format
 msgid "Scale to Size:"
-msgstr "Мащабиране на отдалечения екран"
+msgstr "Напасване към размера:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, use_ssh_tunnel)
 #: vnc/vncpreferences.ui:204
 #, kde-format
 msgid "Connect via SSH tunnel"
-msgstr ""
+msgstr "Свързване чрез SSH тунел"
 
 #. i18n: ectx: property (title), widget (QGroupBox, ssh_groupBox)
 #: vnc/vncpreferences.ui:211
 #, kde-format
 msgid "SSH tunnel options"
-msgstr ""
+msgstr "Настройки за SSH тунел"
 
 #. i18n: ectx: property (text), widget (QCheckBox, use_loopback)
 #: vnc/vncpreferences.ui:217
 #, kde-format
 msgid "Tunnel via loopback address"
-msgstr ""
+msgstr "Тунел чрез обратен адрес"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: vnc/vncpreferences.ui:224
@@ -1500,6 +1518,8 @@ msgstr "Потребителско име:"
 #, kde-format
 msgid "Don't copy passwords from supported password managers to remote hosts"
 msgstr ""
+"Да не се копират пароли от поддържани мениджъри на пароли към отдалечени "
+"хостове"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, dont_copy_passwords)
 #: vnc/vncpreferences.ui:260
@@ -1509,22 +1529,25 @@ msgid ""
 "additional MIME type \"x-kde-passwordManagerHint\" which is used for "
 "filtering."
 msgstr ""
+"Поддържаните мениджъри на пароли (като KeePassXC) маркират копираните пароли "
+"с допълнителен MIME тип \"x-kde-passwordManagerHint\", който се използва за "
+"филтриране."
 
 #: vnc/vncsshtunnelthread.cpp:102
-#, fuzzy, kde-format
+#, kde-format
 msgid "Error connecting to %1: %2"
-msgstr "Свързване с %1"
+msgstr "Грешка при свързване с %1: %2"
 
 #: vnc/vncsshtunnelthread.cpp:127
-#, fuzzy, kde-format
+#, kde-format
 msgid "Error authenticating with password: %1"
-msgstr "Удостоверяване в %1"
+msgstr "Грешка при удостоверяване с парола: %1"
 
 #: vnc/vncsshtunnelthread.cpp:133 vnc/vncsshtunnelthread.cpp:151
 #: vnc/vncsshtunnelthread.cpp:158 vnc/vncsshtunnelthread.cpp:166
 #, kde-format
 msgid "Error creating tunnel socket"
-msgstr ""
+msgstr "Грешка при създаване на гнездо за тунел"
 
 #: vnc/vncview.cpp:345
 #, kde-format
@@ -1532,9 +1555,9 @@ msgid "Authentication failed. Please try again."
 msgstr "Неуспешно удостоверяване. Опитайте отново."
 
 #: vnc/vncview.cpp:373
-#, fuzzy, kde-format
+#, kde-format
 msgid "Please enter the SSH password."
-msgstr "Моля, въведете паролата."
+msgstr "Моля, въведете паролата за SSH."
 
 #: vnc/vncview.cpp:398 vnc/vncview.cpp:400
 #, kde-format
@@ -1544,7 +1567,7 @@ msgstr "Грешка във VNC"
 #: vnc/vncview.cpp:409 vnc/vncview.cpp:411
 #, kde-format
 msgid "SSH Tunnel failure"
-msgstr ""
+msgstr "Неуспех на SSH-тунела"
 
 #: vnc/vncviewfactory.cpp:47
 #, kde-format
