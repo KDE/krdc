@@ -1,20 +1,20 @@
 # Translation of krdc to Norwegian Nynorsk
 #
 # Gaute Hvoslef Kvalnes <gaute@verdsveven.com>, 2003, 2004, 2005.
-# Karl Ove Hufthammer <karl@huftis.org>, 2007, 2008, 2020.
+# Karl Ove Hufthammer <karl@huftis.org>, 2007, 2008, 2020, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-14 00:56+0000\n"
-"PO-Revision-Date: 2020-11-14 15:01+0100\n"
+"PO-Revision-Date: 2023-02-09 21:30+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 20.08.3\n"
+"X-Generator: Lokalize 22.12.2\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
@@ -33,19 +33,19 @@ msgstr "karl@huftis.org"
 #: bookmarkmanager.cpp:40
 #, kde-format
 msgid "History"
-msgstr ""
+msgstr "Tidlegare tilkoplingar"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_RememberSessions)
 #: config/general.ui:17
 #, kde-format
 msgid "Remember open sessions for next startup"
-msgstr ""
+msgstr "Hugs opne økter til neste programstart"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_RememberHistory)
 #: config/general.ui:24
 #, kde-format
 msgid "Remember connection history"
-msgstr ""
+msgstr "Hugs tilkoplingshistorikk"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_WalletSupport)
 #: config/general.ui:31
@@ -69,13 +69,13 @@ msgstr "Vis statuslinje"
 #: config/general.ui:52
 #, kde-format
 msgid "Keep aspect ratio when scaling"
-msgstr ""
+msgstr "Hald fast på høgd/breidd-forhold ved skalering"
 
 #. i18n: ectx: property (text), widget (QLabel, backgroundLabel)
 #: config/general.ui:61
 #, kde-format
 msgid "Background color of empty place:"
-msgstr ""
+msgstr "Bakgrunnsfarge for tomme flater:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, connectionGroupBox)
 #: config/general.ui:93
@@ -87,7 +87,7 @@ msgstr "Ved tilkopling"
 #: config/general.ui:99
 #, kde-format
 msgid "Show the preferences dialog for new connections"
-msgstr ""
+msgstr "Vis innstillingsvindauge for nye tilkoplingar"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_ResizeOnConnect)
 #: config/general.ui:106
@@ -96,12 +96,14 @@ msgid ""
 "This option will resize the window to fit the connection size.  If it is too "
 "big, it will maximize the window."
 msgstr ""
+"Endra vindaugs­storleiken til å vera i samsvar med ekstern "
+"vindaugs­storleik. Viss denne er for stor, vert vindauget maksimert."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ResizeOnConnect)
 #: config/general.ui:109
 #, kde-format
 msgid "Resize to fit"
-msgstr ""
+msgstr "Juster storleiken etter innhaldet"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_FullscreenOnConnect)
 #: config/general.ui:116
@@ -110,12 +112,14 @@ msgid ""
 "This option switches to fullscreen only if the connection resolution is the "
 "same as the current screen resolution"
 msgstr ""
+"Byt til fullskjerm berre viss oppløysinga på eksternt skrivebord er lik den "
+"lokale skjermoppløysinga."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_FullscreenOnConnect)
 #: config/general.ui:119
 #, kde-format
 msgid "Switch to Fullscreen if appropriate"
-msgstr ""
+msgstr "Byt til fullskjerm viss det høver"
 
 #. i18n: ectx: property (text), widget (QLabel, defaultProtocolLabel)
 #: config/general.ui:128
@@ -145,13 +149,13 @@ msgstr "Vis alltid fanelinja"
 #: config/general.ui:160
 #, kde-format
 msgid "Show close button on tabs"
-msgstr "Vis lukkeknappen på faner"
+msgstr "Vis lukkeknapp på faner"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabMiddleClick)
 #: config/general.ui:167
 #, kde-format
 msgid "Middle-click on a tab closes it"
-msgstr "Midtklikk på fane for å lukka ho"
+msgstr "Midtklikk på faner for å lukka dei"
 
 #. i18n: ectx: property (text), widget (QLabel, tabOrientationLabel)
 #: config/general.ui:176
@@ -163,13 +167,13 @@ msgstr "Plassering av fanelinje:"
 #: config/general.ui:184
 #, kde-format
 msgid "Top"
-msgstr "Øvst"
+msgstr "Oppe"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TabPosition)
 #: config/general.ui:189
 #, kde-format
 msgid "Bottom"
-msgstr "Nedst"
+msgstr "Nede"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TabPosition)
 #: config/general.ui:194
@@ -196,12 +200,12 @@ msgstr "Fjern"
 #: config/hostpreferenceslist.cpp:100 mainwindow.cpp:655
 #, kde-format
 msgid "The selected host cannot be handled."
-msgstr ""
+msgstr "Den valde verten kan ikkje handterast."
 
 #: config/hostpreferenceslist.cpp:101 mainwindow.cpp:277 mainwindow.cpp:656
 #, kde-format
 msgid "Unusable URL"
-msgstr ""
+msgstr "Ubrukeleg adresse"
 
 #: config/preferencesdialog.cpp:24
 #, kde-format
@@ -217,13 +221,13 @@ msgstr "Generelt oppsett"
 #: config/preferencesdialog.cpp:29
 #, kde-format
 msgid "Hosts"
-msgstr "Vert"
+msgstr "Vertar"
 
 #: config/preferencesdialog.cpp:29 core/hostpreferences.cpp:176
 #: core/hostpreferences.cpp:180
 #, kde-format
 msgid "Host Configuration"
-msgstr "Vertoppsett"
+msgstr "Vertsoppsett"
 
 #: config/preferencesdialog.cpp:34 config/preferencesdialog.cpp:35
 #, kde-format
@@ -280,16 +284,18 @@ msgstr[1] "%1 år sidan"
 msgid ""
 "Note that settings might only apply when you connect next time to this host."
 msgstr ""
+"Merk at nokre innstillingar ikkje trer i kraft før ved neste tilkopling til "
+"verten."
 
 #: core/hostpreferences.cpp:199
 #, kde-format
 msgid "Show this dialog again for this host"
-msgstr ""
+msgstr "Vis dette dialogvindauget på nytt for denne verten"
 
 #: core/hostpreferences.cpp:203
 #, kde-format
 msgid "Remember password (KWallet)"
-msgstr ""
+msgstr "Hugs passordet (KWallet)"
 
 #. i18n: ectx: label, entry (OpenSessions), group (General)
 #: core/krdc.kcfg:16
@@ -301,23 +307,23 @@ msgstr "Økter"
 #: krdcui.rc:8
 #, kde-format
 msgid "&Session"
-msgstr ""
+msgstr "&Økt"
 
 #. i18n: ectx: ToolBar (krdc_remote_view_toolbar)
 #: krdcui.rc:22
 #, kde-format
 msgid "Remote View Toolbar"
-msgstr ""
+msgstr "Verktøylinje for fjernvising"
 
 #: main.cpp:61
 #, kde-format
 msgid "KRDC"
-msgstr ""
+msgstr "KRDC"
 
 #: main.cpp:62 systemtrayicon.cpp:24
 #, kde-format
 msgid "KDE Remote Desktop Client"
-msgstr ""
+msgstr "KDE-klient for tilkopling til eksterne skrivebord"
 
 #: main.cpp:64
 #, kde-format
@@ -331,6 +337,14 @@ msgid ""
 "(c) 1999-2003, Matthew Chapman\n"
 "(c) 2009, Collabora Ltd"
 msgstr ""
+"© 2007–2016 Urs Wolfer\n"
+"© 2001–2003 Tim Jansen\n"
+"(©) 2002–2003 Arend van Beelen jr.\n"
+"(©) 2000–2002 Const Kaplinsky\n"
+"(©) 2000 Tridia Corporation\n"
+"(©) 1999 AT&T Laboratories Boston\n"
+"(©) 1999–2003 Matthew Chapman\n"
+"(©) 2009 Collabora Ltd"
 
 #: main.cpp:73
 #, kde-format
@@ -370,17 +384,18 @@ msgstr "Arend van Beelen jr."
 #: main.cpp:76
 #, kde-format
 msgid "Initial RDP backend"
-msgstr ""
+msgstr "Første implementasjon av RDP-motoren"
 
 #: main.cpp:77
 #, kde-format
 msgid "Brad Hards"
 msgstr "Brad Hards"
 
+# skip-rule: e-infinitiv
 #: main.cpp:77
 #, kde-format
 msgid "Google Summer of Code 2007 KRDC project mentor"
-msgstr ""
+msgstr "Mentor for Google Summer of Code 2007-prosjekt for KRDC"
 
 #: main.cpp:79
 #, kde-format
@@ -400,23 +415,27 @@ msgstr "Abner Silva"
 #: main.cpp:81
 #, kde-format
 msgid "Telepathy Tubes Integration"
-msgstr ""
+msgstr "Integrering med Telepathy Tubes"
 
+# Kommandolinjehjelp, og skal derfor ha avsluttande punktum.
 #: main.cpp:92
 #, kde-format
 msgid ""
 "Start KRDC with the provided URL in fullscreen mode (works only with one URL)"
 msgstr ""
+"Start KRDC med vald adresse i fullskjermsmodus (verkar berre med ei "
+"enkeltadresse)."
 
+# Kommandolinjehjelp, og skal derfor ha avsluttande punktum.
 #: main.cpp:93
 #, kde-format
 msgid "URLs to connect after startup"
-msgstr ""
+msgstr "Adresser å kopla til etter oppstart."
 
 #: mainwindow.cpp:114
 #, kde-format
 msgid "KDE Remote Desktop Client started"
-msgstr ""
+msgstr "Starta klient for tilkopling til eksterne skrivebord"
 
 #: mainwindow.cpp:119 mainwindow.cpp:132 mainwindow.cpp:1062
 #: mainwindow.cpp:1159
@@ -427,7 +446,7 @@ msgstr "Ny tilkopling"
 #: mainwindow.cpp:138
 #, kde-format
 msgid "Copy Screenshot to Clipboard"
-msgstr ""
+msgstr "Kopier skjermbilete til utklippstavla"
 
 #: mainwindow.cpp:139
 #, kde-format
@@ -437,7 +456,7 @@ msgstr "Skjermbilete"
 #: mainwindow.cpp:144 mainwindow.cpp:485
 #, kde-format
 msgid "Switch to Full Screen Mode"
-msgstr ""
+msgstr "Byt til fullskjermsmodus"
 
 #: mainwindow.cpp:145 mainwindow.cpp:486
 #, kde-format
@@ -447,7 +466,7 @@ msgstr "Fullskjerm"
 #: mainwindow.cpp:152
 #, kde-format
 msgid "View Only"
-msgstr ""
+msgstr "Berre vis"
 
 #: mainwindow.cpp:157
 #, kde-format
@@ -457,27 +476,27 @@ msgstr "Kopla frå"
 #: mainwindow.cpp:165
 #, kde-format
 msgid "Show Local Cursor"
-msgstr ""
+msgstr "Vis lokal musepeikar"
 
 #: mainwindow.cpp:166
 #, kde-format
 msgid "Local Cursor"
-msgstr ""
+msgstr "Lokal musepeikar"
 
 #: mainwindow.cpp:172
 #, kde-format
 msgid "Grab All Possible Keys"
-msgstr ""
+msgstr "Fang opp alle moglege tastetrykk"
 
 #: mainwindow.cpp:173
 #, kde-format
 msgid "Grab Keys"
-msgstr ""
+msgstr "Fang opp tastetrykk"
 
 #: mainwindow.cpp:179
 #, kde-format
 msgid "Scale Remote Screen to Fit Window Size"
-msgstr ""
+msgstr "Skaler fjernskjerm til å passa med vindaugsstorleiken"
 
 #: mainwindow.cpp:180
 #, kde-format
@@ -487,7 +506,7 @@ msgstr "Skalering"
 #: mainwindow.cpp:183
 #, kde-format
 msgid "Scaling Factor"
-msgstr ""
+msgstr "Skaleringsfaktor"
 
 #: mainwindow.cpp:194
 #, kde-format
@@ -500,16 +519,18 @@ msgid ""
 "The entered address does not have the required form.\n"
 " Syntax: [username@]host[:port]"
 msgstr ""
+"Adressa du skreiv inn, er på feil format.\n"
+" Rett format: [brukarnamn@]vert[:port]"
 
 #: mainwindow.cpp:254
 #, kde-format
 msgid "Malformed URL"
-msgstr ""
+msgstr "Ugyldig adresse"
 
 #: mainwindow.cpp:276
 #, kde-format
 msgid "The entered address cannot be handled."
-msgstr ""
+msgstr "Kan ikkje handtera den innskrivne adressa."
 
 #: mainwindow.cpp:408
 #, kde-format
@@ -536,12 +557,12 @@ msgstr "Kopla til %1"
 msgctxt ""
 "window title when in full screen mode (for example displayed in tasklist)"
 msgid "KDE Remote Desktop Client (Full Screen)"
-msgstr ""
+msgstr "KDE-klient for tilkopling til eksterne skrivebord (fullskjerm)"
 
 #: mainwindow.cpp:523
 #, kde-format
 msgid "Switch to Window Mode"
-msgstr ""
+msgstr "Byt til vindaugsmodus"
 
 #: mainwindow.cpp:524
 #, kde-format
@@ -578,7 +599,7 @@ msgstr "Bokmerke"
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
-msgstr "Logg"
+msgstr "Tidlegare tilkoplingar"
 
 #: mainwindow.cpp:695
 #, kde-format
@@ -593,7 +614,7 @@ msgstr "Endra namn på %1 til"
 #: mainwindow.cpp:703
 #, kde-format
 msgid "Are you sure you want to delete %1?"
-msgstr ""
+msgstr "Er du sikker på at du vil sletta %1?"
 
 #: mainwindow.cpp:703
 #, kde-format
@@ -613,17 +634,17 @@ msgstr "Lukk fane"
 #: mainwindow.cpp:830
 #, kde-format
 msgid "Minimize Full Screen Window"
-msgstr "Minimer alle fullskjermsvindauge"
+msgstr "Minimer fullskjermsvindauge"
 
 #: mainwindow.cpp:846
 #, kde-format
 msgid "Stick Toolbar"
-msgstr ""
+msgstr "Fest verktøylinja"
 
 #: mainwindow.cpp:956
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
-msgstr ""
+msgstr "Er du sikker på at du vil avslutta KRDC?"
 
 #: mainwindow.cpp:957
 #, kde-format
@@ -633,12 +654,13 @@ msgstr "Stadfest avslutting"
 #: mainwindow.cpp:1085
 #, kde-format
 msgid "Connect to:"
-msgstr "Kopla til: "
+msgstr "Kopla til:"
 
+# Ein kan bruka feltet til *anten* kopla til ei adresse eller til å filtrera lista over adresser. Bør derfor vera «eller», ikkje «og» her.
 #: mainwindow.cpp:1089
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
-msgstr ""
+msgstr "Trykk her for å kopla til ei adresse eller filtrera lista."
 
 #: mainwindow.cpp:1098
 #, kde-format
@@ -646,16 +668,18 @@ msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
 "methods."
 msgstr ""
+"Skriv inn IP-adresse/DNS-namn her. Tøm feltet for sjå oversikt over "
+"tilkoplingsmetodar."
 
 #: mainwindow.cpp:1101
 #, kde-format
 msgid "Goto Address"
-msgstr "Gå til adresse"
+msgstr "Kopla til adressa"
 
 #: mainwindow.cpp:1195
 #, kde-format
 msgid "Remote Desktops"
-msgstr "Nettverks­skrivebord"
+msgstr "Eksternt skrivebord"
 
 #: mainwindow.cpp:1226
 #, kde-format
@@ -665,20 +689,20 @@ msgstr "Filter"
 #: rdp/rdphostpreferences.cpp:181
 #, kde-format
 msgid "Browse to media share path"
-msgstr ""
+msgstr "Bla til mappe å dela"
 
 #. i18n: ectx: property (title), widget (QGroupBox, connectionGroupBox)
 #. i18n: ectx: property (title), widget (QGroupBox, vncGroupBox)
 #: rdp/rdppreferences.ui:17 vnc/vncpreferences.ui:17
 #, kde-format
 msgid "Connection"
-msgstr "Samband"
+msgstr "Tilkopling"
 
 #. i18n: ectx: property (text), widget (QLabel, resolutionLabel)
 #: rdp/rdppreferences.ui:25
 #, kde-format
 msgid "Desktop &resolution:"
-msgstr "Skje&rmoppløysing:"
+msgstr "&Skjermoppløysing:"
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_Resolution)
 #. i18n: ectx: property (whatsThis), widget (KComboBox, resolutionComboBox)
@@ -738,13 +762,13 @@ msgstr "Gjeldande skjermoppløysing"
 #: rdp/rdppreferences.ui:85 vnc/vncpreferences.ui:123
 #, kde-format
 msgid "Custom Resolution (...)"
-msgstr ""
+msgstr "Tilpassa oppløysing (…)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:90
 #, kde-format
 msgid "Current KRDC Size"
-msgstr ""
+msgstr "Gjeldande KRDC-storleik"
 
 #. i18n: ectx: property (text), widget (QLabel, widthLabel)
 #: rdp/rdppreferences.ui:103 vnc/vncpreferences.ui:136
@@ -761,7 +785,7 @@ msgid ""
 "manually if you select Custom as desktop resolution above."
 msgstr ""
 "Her kan du velja breidda på skrivebordet du koplar til. Denne verdien kan du "
-"berre endra dersom du vel «Tilpassa» oppløysing."
+"berre endra dersom du vel «Tilpassa oppløysing»."
 
 #. i18n: ectx: property (text), widget (QLabel, heightLabel)
 #: rdp/rdppreferences.ui:135 vnc/vncpreferences.ui:168
@@ -778,13 +802,13 @@ msgid ""
 "manually if you select Custom as desktop resolution above."
 msgstr ""
 "Her kan du velja høgda på skrivebordet du koplar til. Denne verdien kan du "
-"berre endra dersom du vel «Tilpassa» oppløysing."
+"berre endra dersom du vel «Tilpassa oppløysing»."
 
 #. i18n: ectx: property (text), widget (QLabel, colorDepthLabel)
 #: rdp/rdppreferences.ui:168
 #, kde-format
 msgid "Color &depth:"
-msgstr "Farge&djupn:"
+msgstr "&Fargedjupn:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
 #: rdp/rdppreferences.ui:185
@@ -808,7 +832,7 @@ msgstr "Sannfarge (24 bit)"
 #: rdp/rdppreferences.ui:200
 #, kde-format
 msgid "True Color with Alpha (32 Bit)"
-msgstr ""
+msgstr "Sannfarge med gjennomsikt (24 bit)"
 
 #. i18n: ectx: property (text), widget (QLabel, layoutLabel)
 #: rdp/rdppreferences.ui:208
@@ -823,8 +847,8 @@ msgid ""
 "Use this to specify your keyboard layout. This layout setting is used to "
 "send the correct keyboard codes to the server."
 msgstr ""
-"Her kan du velja tastaturoppsettet. Du må velja rett tastaturoppsett for at "
-"dei korrekte tastekodane skal verta sende til tenaren."
+"Her kan du velja tastatur­oppsettet som skal brukast. Du må velja rett "
+"tastatur­oppsett for at dei rette tastekodane skal verta sende til tenaren."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:231
@@ -836,7 +860,7 @@ msgstr "Arabisk (ar)"
 #: rdp/rdppreferences.ui:236
 #, kde-format
 msgid "Czech (cs)"
-msgstr ""
+msgstr "Tsjekkisk (cs)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:241
@@ -850,29 +874,31 @@ msgstr "Dansk (da)"
 msgid "German (de)"
 msgstr "Tysk (de)"
 
+# Vert feil å kalla dette «sveitsertysk», då det ikkje er snakk om eit språk, berre eit tastaturoppsett i eit land.
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:251
 #, kde-format
 msgid "Swiss German (de-ch)"
-msgstr ""
+msgstr "Tysk – Sveits (de-ch)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:256
 #, kde-format
 msgid "American Dvorak (en-dv)"
-msgstr ""
+msgstr "Amerikansk Dvorak (en-dv)"
 
+# skip-rule: eininggb
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:261
 #, kde-format
 msgid "British English (en-gb)"
-msgstr "Engelsk Storbritannia (en-gb)"
+msgstr "Engelsk – Storbritannia (en-gb)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:266
 #, kde-format
 msgid "US English (en-us)"
-msgstr "Engelsk USA (en-us)"
+msgstr "Engelsk – USA (en-us)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:271
@@ -884,7 +910,7 @@ msgstr "Spansk (es)"
 #: rdp/rdppreferences.ui:276
 #, kde-format
 msgid "Estonian (et)"
-msgstr ""
+msgstr "Estisk (et)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:281
@@ -896,7 +922,7 @@ msgstr "Finsk (fi)"
 #: rdp/rdppreferences.ui:286
 #, kde-format
 msgid "Faroese (fo)"
-msgstr ""
+msgstr "Færøysk (fo)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:291
@@ -904,35 +930,36 @@ msgstr ""
 msgid "French (fr)"
 msgstr "Fransk (fr)"
 
+# Mest konsistent om dette òg vert kalla «fransk». Det er jo det er, berre i ein Belgia-variant.
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:296
 #, kde-format
 msgid "Belgian (fr-be)"
-msgstr ""
+msgstr "Fransk – Belgia (fr-be)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:301
 #, kde-format
 msgid "French Canadian (fr-ca)"
-msgstr ""
+msgstr "Fransk – Canada (fr-ca)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:306
 #, kde-format
 msgid "Swiss French (fr-ch)"
-msgstr ""
+msgstr "Fransk – Sveits (fr)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:311
 #, kde-format
 msgid "Hebrew (he)"
-msgstr ""
+msgstr "Hebraisk (he)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:316
 #, kde-format
 msgid "Croatian (hr)"
-msgstr ""
+msgstr "Kroatisk (hr)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:321
@@ -944,7 +971,7 @@ msgstr "Ungarsk (hu)"
 #: rdp/rdppreferences.ui:326
 #, kde-format
 msgid "Icelandic (is)"
-msgstr ""
+msgstr "Islandsk (is)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:331
@@ -962,7 +989,7 @@ msgstr "Japansk (ja)"
 #: rdp/rdppreferences.ui:341
 #, kde-format
 msgid "Korean (ko)"
-msgstr ""
+msgstr "Koreansk (ko)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:346
@@ -986,13 +1013,13 @@ msgstr "Makedonsk (mk)"
 #: rdp/rdppreferences.ui:361
 #, kde-format
 msgid "Dutch (nl)"
-msgstr ""
+msgstr "Nederlandsk (nl)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:366
 #, kde-format
 msgid "Belgian Dutch (nl-be)"
-msgstr ""
+msgstr "Nederlandsk – Belgia (nl-be)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:371
@@ -1126,7 +1153,7 @@ msgstr "RemoteFX:"
 #: rdp/rdppreferences.ui:532
 #, kde-format
 msgid "Enhanced visual experience"
-msgstr ""
+msgstr "Forbetra visuell oppleving"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_RemoteFX)
 #: rdp/rdppreferences.ui:535
@@ -1135,18 +1162,21 @@ msgid ""
 "RemoteFX covers a set of technologies that enhance visual experience of the "
 "Remote Desktop Protocol."
 msgstr ""
+"RemoteFX er teknologi som gjev betre biletkvalitet når du brukar RDP-"
+"protokollen ved tilkopling til eksterne skrivebord."
 
+# Deler ei heilt vanleg mappe, ikkje eit medium (som eks. ein CD-ROM) eller mediefiler.
 #. i18n: ectx: property (text), widget (QLabel, shareMediaLabel)
 #: rdp/rdppreferences.ui:542
 #, kde-format
 msgid "Share Media:"
-msgstr "Del medium:"
+msgstr "Del mappe:"
 
 #. i18n: ectx: property (whatsThis), widget (KLineEdit, kcfg_ShareMedia)
 #: rdp/rdppreferences.ui:560
 #, kde-format
 msgid "Share a local media directory with the remote host."
-msgstr ""
+msgstr "Del ei lokal mappe med den eksterne maskina."
 
 #. i18n: ectx: property (title), widget (QGroupBox, expertGroupBox)
 #: rdp/rdppreferences.ui:585
@@ -1158,13 +1188,14 @@ msgstr "Ekspertval"
 #: rdp/rdppreferences.ui:591
 #, kde-format
 msgid "Console login:"
-msgstr "Konsoll-innlogging:"
+msgstr "Konsollinnlogging:"
 
+# skip-rule: server
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_Console)
 #: rdp/rdppreferences.ui:601
 #, kde-format
 msgid "Attach to Windows Server console"
-msgstr ""
+msgstr "Kopla til Windows Server-konsoll"
 
 #. i18n: ectx: property (text), widget (QLabel, extraOptionsLabel)
 #: rdp/rdppreferences.ui:608
@@ -1176,7 +1207,7 @@ msgstr "Tilleggsval:"
 #: rdp/rdppreferences.ui:624
 #, kde-format
 msgid "Here you can enter additional xfreerdp (FreeRDP) options."
-msgstr ""
+msgstr "Her kan du skriva inn fleire val for xfreerdp (FreeRDP)."
 
 #. i18n: ectx: property (title), widget (QGroupBox, loginGroupBox)
 #: rdp/rdppreferences.ui:637
@@ -1194,18 +1225,18 @@ msgstr "Standard brukarnamn:"
 #: rdp/rdppreferences.ui:652
 #, kde-format
 msgid "No default user name"
-msgstr ""
+msgstr "Inkje standard brukarnamn"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_RecognizeLdapLogins)
 #: rdp/rdppreferences.ui:664
 #, kde-format
 msgid "Automatically recognize \"LDAP\"-Logins and share passwords"
-msgstr ""
+msgstr "Oppdag automatisk LDAP-brukardata og del passord"
 
 #: rdp/rdpview.cpp:104
 #, kde-format
 msgid "Media Folder does not Exist"
-msgstr ""
+msgstr "Den lokale mappa finst ikkje"
 
 #: rdp/rdpview.cpp:104
 #, kde-format
@@ -1214,6 +1245,9 @@ msgid ""
 "Please set an existing folder to share or empty the \"Share Media\" option "
 "if you do not want to share any folder."
 msgstr ""
+"Mappa «%1» finst ikkje.\n"
+"Vel mappa du ønskjer å dela, eventuelt tøm «Del mappe»-feltet dersom du "
+"ikkje ønskjer å dela ei mappe."
 
 #: rdp/rdpview.cpp:113
 #, kde-format
@@ -1223,22 +1257,22 @@ msgstr "Skriv inn brukarnamn"
 #: rdp/rdpview.cpp:114
 #, kde-format
 msgid "Please enter the username you would like to use for login."
-msgstr ""
+msgstr "Skriv inn brukarnamnet du vil bruka til å logga inn."
 
 #: rdp/rdpview.cpp:134 vnc/vncview.cpp:344
 #, kde-format
 msgid "Access to the system requires a password."
-msgstr "Du treng passord for å få tilgang til dette systemet."
+msgstr "Du må oppgje passord for å få tilgang til dette systemet."
 
 #: rdp/rdpview.cpp:442
 #, kde-format
 msgid "Could not start \"%1\"; make sure %1 is properly installed."
-msgstr ""
+msgstr "Klarte ikkje starta «%1». Sjå til at %1 er rett installert."
 
 #: rdp/rdpview.cpp:443 rdp/rdpview.cpp:467 rdp/rdpview.cpp:471
 #, kde-format
 msgid "RDP Failure"
-msgstr ""
+msgstr "RDP-feil"
 
 #: rdp/rdpview.cpp:465
 #, kde-format
@@ -1246,32 +1280,37 @@ msgid ""
 "The version of \"xfreerdp\" you are using is too old.\n"
 "xfreerdp 1.0.2 or greater is required."
 msgstr ""
+"Versjonen din av «xfreerdp» er for gammal.\n"
+"Du treng versjon 1.0.2 eller nyare."
 
 #: rdp/rdpview.cpp:470
 #, kde-format
 msgid "Connection failed. You might have passed a wrong address or username."
 msgstr ""
+"Feil ved tilkopling. Sjå til at du har brukt rett adresse og brukarnamn."
 
 #: rdp/rdpview.cpp:486
 #, kde-format
 msgid "Name or service not known."
-msgstr ""
+msgstr "Ukjend namn eller teneste."
 
 #: rdp/rdpview.cpp:487 rdp/rdpview.cpp:493 rdp/rdpview.cpp:498
 #: rdp/rdpview.cpp:506
 #, kde-format
 msgid "Connection Failure"
-msgstr "Tilkopling mislukkast"
+msgstr "Feil ved tilkopling"
 
 #: rdp/rdpview.cpp:492
 #, kde-format
 msgid "Connection attempt to host failed."
-msgstr "Det lukkast ikkje å kopla til verten."
+msgstr "Klarte ikkje kopla til verten."
 
 #: rdp/rdpview.cpp:497
 #, kde-format
 msgid "Authentication failure, check credentials."
 msgstr ""
+"Feil ved brukargodkjenning. Sjå til at du har brukt rett brukarnamn og "
+"passord."
 
 #: rdp/rdpview.cpp:505
 #, kde-format
@@ -1279,16 +1318,18 @@ msgid ""
 "Connection attempt to host failed. Security negotiation or connection "
 "failure."
 msgstr ""
+"Klarte ikkje kopla til verten. Feil ved forhandling om tryggleiksprotokoll, "
+"eller fekk ikkje kontakt."
 
 #: rdp/rdpviewfactory.cpp:22
 #, kde-format
 msgid "Connect to a Windows Remote Desktop (RDP)"
-msgstr ""
+msgstr "Kopla til RDP-skrivebord (Windows Remote Desktop)"
 
 #: rdp/rdpviewfactory.cpp:53
 #, kde-format
 msgid "New RDP Connection..."
-msgstr ""
+msgstr "Ny RDP-tilkopling …"
 
 #: rdp/rdpviewfactory.cpp:63
 #, kde-format
@@ -1296,6 +1337,8 @@ msgid ""
 "<html>Enter the address here. Port is optional.<br /><i>Example: "
 "rdpserver:3389 (host:port)</i></html>"
 msgstr ""
+"<html>Skriv inn adressa her. Portnummeret kan sløyfast.<br /><i>Eksempel: "
+"rdpserver: (vert:port)</i></html>"
 
 #: rdp/rdpviewfactory.cpp:70
 #, kde-format
@@ -1303,43 +1346,45 @@ msgid ""
 "The application \"xfreerdp\" cannot be found on your system; make sure it is "
 "properly installed if you need RDP support."
 msgstr ""
+"Fann ikkje programmet «xfreerdp» på systemet. Sjå til det er installert "
+"dersom du treng RDP-støtte."
 
 #: remotedesktopsmodel.cpp:112
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Zeroconf"
-msgstr ""
+msgstr "Zeroconf"
 
 #: remotedesktopsmodel.cpp:114
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "None"
-msgstr ""
+msgstr "Ingen"
 
 #: remotedesktopsmodel.cpp:130
 #, kde-format
 msgctxt "Remove the selected url from the bookarks menu"
 msgid "Remove the bookmark for %1."
-msgstr ""
+msgstr "Fjern bokmerket for %1."
 
 #: remotedesktopsmodel.cpp:132
 #, kde-format
 msgctxt "Add the selected url to the bookmarks menu"
 msgid "Bookmark %1."
-msgstr ""
+msgstr "Lag bokmerke for %1."
 
 #: remotedesktopsmodel.cpp:171
 #, kde-format
 msgctxt "Header of the connections list, title/url for remote connection"
 msgid "Remote Desktop"
-msgstr ""
+msgstr "Eksternt skrivebord"
 
 #: remotedesktopsmodel.cpp:173
 #, kde-format
 msgctxt ""
 "Header of the connections list, the last time this connection was initiated"
 msgid "Last Connected"
-msgstr ""
+msgstr "Siste kopla til"
 
 #: remotedesktopsmodel.cpp:175
 #, kde-format
@@ -1347,70 +1392,71 @@ msgctxt ""
 "Header of the connections list, the number of times this connection has been "
 "visited"
 msgid "Visits"
-msgstr ""
+msgstr "Tilkoplingar"
 
 #: remotedesktopsmodel.cpp:177
 #, kde-format
 msgctxt "Header of the connections list, the time when this entry was created"
 msgid "Created"
-msgstr ""
+msgstr "Lagt til"
 
 #: remotedesktopsmodel.cpp:179
 #, kde-format
 msgctxt "Header of the connections list, where this entry comes from"
 msgid "Source"
-msgstr ""
+msgstr "Kjelde"
 
 #: vnc/vncclientthread.cpp:299
 #, kde-format
 msgid "VNC authentication type is not supported."
-msgstr ""
+msgstr "Typen VNC-brukargodkjenning er ikkje støtta."
 
 #: vnc/vncclientthread.cpp:317
 #, kde-format
 msgid "Server not found."
-msgstr ""
+msgstr "Fann ikkje tenaren."
 
 #: vnc/vncclientthread.cpp:334 vnc/vncclientthread.cpp:409
 #, kde-format
 msgid "VNC authentication failed."
-msgstr ""
+msgstr "Feil ved VNC-brukargodkjenning."
 
 #: vnc/vncclientthread.cpp:339
 #, kde-format
 msgid "VNC authentication failed because of too many authentication tries."
 msgstr ""
+"Feil ved VNC-brukargodkjenning på grunn av for mange godkjenningsforsøk."
 
 #: vnc/vncclientthread.cpp:343
 #, kde-format
 msgid "VNC server closed connection."
-msgstr ""
+msgstr "VNC-tenaren avslutta sambandet."
 
 #: vnc/vncclientthread.cpp:350
 #, kde-format
 msgid "Disconnected: %1."
-msgstr ""
+msgstr "Kopla frå: %1."
 
 #: vnc/vncclientthread.cpp:556
 #, kde-format
 msgid "Reconnecting."
-msgstr ""
+msgstr "Koplar til på nytt."
 
 #: vnc/vncclientthread.cpp:623
 #, kde-format
 msgid "Reconnected."
-msgstr ""
+msgstr "Kopla til på nytt."
 
 #: vnc/vncclientthread.cpp:625
 #, kde-format
 msgid "Connected."
-msgstr ""
+msgstr "Kopla til."
 
 #. i18n: ectx: property (text), widget (QLabel, connectionLabel)
 #: vnc/vncpreferences.ui:23
 #, kde-format
 msgid "Connection &type:"
-msgstr ""
+msgstr "Tilkoplings&type:"
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_Quality)
 #: vnc/vncpreferences.ui:39
@@ -1424,12 +1470,12 @@ msgid ""
 "high speed connections and results in lower image quality, especially in "
 "'Low Quality' mode."
 msgstr ""
-"Her kan du velja kor godt samband du har. Legg merke til at du bør velja "
-"farten ut frå det svakaste leddet. Dersom motparten har eit tregt modem, "
-"hjelper det ikkje mykje om du har rask tilkopling. Om du vel høg kvalitet på "
-"eit tregt samband, vert svartida lengre. Lågare kvalitet vil gje større "
-"forseinking på raske samband. Du vil òg få lågare biletkvalitet, særleg i "
-"lågaste modus."
+"Her kan du velja kor godt samband du har. Merk at du bør velja farten ut frå "
+"det svakaste leddet. Dersom motparten har eit tregt modem, hjelper det ikkje "
+"at du har raskt nettsamband. Om du vel høg kvalitet på eit tregt samband, "
+"vert svartida lengre. Lågare kvalitet vil gje større forseinking på raske "
+"samband. Du vil òg få lågare biletkvalitet, særleg merkbar for nivået «Låg "
+"kvalitet»."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Quality)
 #: vnc/vncpreferences.ui:43
@@ -1453,31 +1499,31 @@ msgstr "Låg kvalitet (modem, ISDN, tregt Internett)"
 #: vnc/vncpreferences.ui:63
 #, kde-format
 msgid "Scale to Size:"
-msgstr ""
+msgstr "Skaler til storleik:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, use_ssh_tunnel)
 #: vnc/vncpreferences.ui:204
 #, kde-format
 msgid "Connect via SSH tunnel"
-msgstr ""
+msgstr "Kopla til via SSH-tunell"
 
 #. i18n: ectx: property (title), widget (QGroupBox, ssh_groupBox)
 #: vnc/vncpreferences.ui:211
 #, kde-format
 msgid "SSH tunnel options"
-msgstr ""
+msgstr "Val for SSH-tunell"
 
 #. i18n: ectx: property (text), widget (QCheckBox, use_loopback)
 #: vnc/vncpreferences.ui:217
 #, kde-format
 msgid "Tunnel via loopback address"
-msgstr ""
+msgstr "Tunell via loopback-adresse"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: vnc/vncpreferences.ui:224
 #, kde-format
 msgid "Port:"
-msgstr "Port:"
+msgstr "Portnummer:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: vnc/vncpreferences.ui:244
@@ -1490,6 +1536,8 @@ msgstr "Brukarnamn:"
 #, kde-format
 msgid "Don't copy passwords from supported password managers to remote hosts"
 msgstr ""
+"Ikkje kopier passord til eksterne skrivebord (gjeld støtta "
+"passord­handsamarar)"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, dont_copy_passwords)
 #: vnc/vncpreferences.ui:260
@@ -1499,52 +1547,55 @@ msgid ""
 "additional MIME type \"x-kde-passwordManagerHint\" which is used for "
 "filtering."
 msgstr ""
+"Støtta passord­handsamarar (som KeePassXC) merkjer kopierte passord med ein "
+"ekstra MIME-type («x-kde-passwordManagerHint»), og desse vert då filtrerte "
+"ut."
 
 #: vnc/vncsshtunnelthread.cpp:102
 #, kde-format
 msgid "Error connecting to %1: %2"
-msgstr ""
+msgstr "Klarte ikkje kopla til %1: %2"
 
 #: vnc/vncsshtunnelthread.cpp:127
 #, kde-format
 msgid "Error authenticating with password: %1"
-msgstr ""
+msgstr "Feil ved brukargodkjenning med passord: %1"
 
 #: vnc/vncsshtunnelthread.cpp:133 vnc/vncsshtunnelthread.cpp:151
 #: vnc/vncsshtunnelthread.cpp:158 vnc/vncsshtunnelthread.cpp:166
 #, kde-format
 msgid "Error creating tunnel socket"
-msgstr ""
+msgstr "Klarte ikkje oppretta tunell-socket"
 
 #: vnc/vncview.cpp:345
 #, kde-format
 msgid "Authentication failed. Please try again."
-msgstr ""
+msgstr "Feil ved brukargodkjenning. Prøv på nytt."
 
 #: vnc/vncview.cpp:373
 #, kde-format
 msgid "Please enter the SSH password."
-msgstr ""
+msgstr "Skriv inn SSH-passordet."
 
 #: vnc/vncview.cpp:398 vnc/vncview.cpp:400
 #, kde-format
 msgid "VNC failure"
-msgstr ""
+msgstr "VNC-feil"
 
 #: vnc/vncview.cpp:409 vnc/vncview.cpp:411
 #, kde-format
 msgid "SSH Tunnel failure"
-msgstr ""
+msgstr "Feil ved SSH-tunell"
 
 #: vnc/vncviewfactory.cpp:47
 #, kde-format
 msgid "New VNC Connection..."
-msgstr ""
+msgstr "Ny VNC-tilkopling …"
 
 #: vnc/vncviewfactory.cpp:52
 #, kde-format
 msgid "Connect to a VNC Remote Desktop"
-msgstr ""
+msgstr "Kopla til VNC-skrivebord"
 
 #: vnc/vncviewfactory.cpp:57
 #, kde-format
@@ -1552,3 +1603,5 @@ msgid ""
 "<html>Enter the address here.<br /><i>Example: vncserver:1 (host:port / "
 "screen)</i></html>"
 msgstr ""
+"<html>Skriv inn adressa her.<br /><i>Eksempel: vncserver:1 (vert:port / "
+"skjerm)</i></html>"
