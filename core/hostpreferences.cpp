@@ -113,7 +113,7 @@ void HostPreferences::setWindowedScale(bool scale)
 
 int HostPreferences::scaleFactor()
 {
-    return m_configGroup.readEntry("scaleFactor", 100);
+    return m_configGroup.readEntry("scaleFactor", 0);
 }
 
 void HostPreferences::setScaleFactor(int factor)
