@@ -1,7 +1,5 @@
 <?xml version="1.0" ?>
 <!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
-  <!ENTITY kappname "&krdc;">
-  <!ENTITY package "kdenetwork">
   <!ENTITY % addindex "IGNORE">
   <!ENTITY % Brazilian-Portuguese "INCLUDE"
 > <!-- ONLY If you are writing non-English 
@@ -58,9 +56,9 @@ as Authors, publish date, the abstract, and Keywords -->
 >&FDLNotice;</legalnotice>
 
 <date
->19/06/2013</date>
+>25/07/2016</date>
 <releaseinfo
->&kde; 4.11</releaseinfo>
+>Applications 16.08</releaseinfo>
 
 <copyright>
 <year
@@ -125,8 +123,8 @@ as Authors, publish date, the abstract, and Keywords -->
 >. </para>
 
 <para
->Por favor comunique quaisquer problemas ou pedidos de funcionalidades para as listas de discussão do &kde; ou envie um erro para <ulink url="http://bugs.kde.org"
->http://bugs.kde.org</ulink
+>Por favor comunique quaisquer problemas ou pedidos de funcionalidades para as listas de discussão do &kde; ou envie um erro para <ulink url="https://bugs.kde.org"
+>https://bugs.kde.org</ulink
 >. </para>
 </chapter>
 
@@ -548,8 +546,19 @@ as Authors, publish date, the abstract, and Keywords -->
 <chapter id="faq">
 <title
 >Perguntas e respostas</title>
-&reporting.bugs; &updating.documentation; <qandaset id="faqlist"
-> <qandaentry>
+
+<!-- (OPTIONAL but recommended) This chapter should include all of the silly
+(and not-so-silly) newbie questions that fill up your mailbox. This chapter
+should be reserved for BRIEF questions and answers! If one question uses more
+than a page or so then it should probably be part of the
+"Using this Application" chapter instead. You should use links to
+cross-reference questions to the parts of your documentation that answer them.
+This is also a great place to provide pointers to other FAQ's if your users
+must do some complicated configuration on other programs in order for your
+application work. -->
+
+<qandaset id="faqlist">
+<qandaentry>
 <question>
 <para
 >Porque o suporte de <acronym
@@ -595,24 +604,7 @@ distribution. -->
 >Tradução de Marcus Gama <email
 >marcus.gama@gmail.com</email
 ></para
-> 
-&underFDL; &underGPL; </chapter>
-
-<appendix id="installation">
-<title
->Instalação</title>
-
-<sect1 id="getting-krdc">
-<title
->Como obter o &krdc;</title>
-&install.intro.documentation; </sect1>
-
-<sect1 id="compilation">
-<title
->Compilação e instalação</title>
-&install.compile.documentation; </sect1>
-
-</appendix>
+> &underFDL; &underGPL; </chapter>
 
 &documentation.index;
 </book>
