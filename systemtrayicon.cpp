@@ -33,9 +33,15 @@ SystemTrayIcon::SystemTrayIcon(MainWindow *parent)
 void SystemTrayIcon::checkActivatedWindow(bool active)
 {
     // make sure the fullscreen window stays fullscreen by restoring the FullScreen state upon restore.
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     if(active && associatedWidget() != m_mainWindow) {
         associatedWidget()->setWindowState(Qt::WindowFullScreen);
     }
+#else
+    if(active && associatedWindow() != m_mainWindow->windowHandle()) {
+        associatedWindow()->setWindowState(Qt::WindowFullScreen);
+    }
+#endif
 }
 
 SystemTrayIcon::~SystemTrayIcon()

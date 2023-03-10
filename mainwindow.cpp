@@ -105,7 +105,14 @@ MainWindow::MainWindow(QWidget *parent)
 
     if (Settings::systemTrayIcon()) {
         m_systemTrayIcon = new SystemTrayIcon(this);
-        if(m_fullscreenWindow) m_systemTrayIcon->setAssociatedWidget(m_fullscreenWindow);
+        if(m_fullscreenWindow) {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+            m_systemTrayIcon->setAssociatedWidget(m_fullscreenWindow);
+#else
+            m_systemTrayIcon->setAssociatedWindow(m_fullscreenWindow->windowHandle());
+#endif
+        }
+
     }
 
     connect(m_tabWidget, SIGNAL(currentChanged(int)), SLOT(tabChanged(int)));
@@ -469,7 +476,13 @@ void MainWindow::switchFullscreen()
 
         show();
         restoreGeometry(m_mainWindowGeometry);
-        if (m_systemTrayIcon) m_systemTrayIcon->setAssociatedWidget(this);
+        if (m_systemTrayIcon) {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+        m_systemTrayIcon->setAssociatedWidget(this);
+#else
+        m_systemTrayIcon->setAssociatedWindow(windowHandle());
+#endif
+        }
 
         for (RemoteView * view : qAsConst(m_remoteViewMap)) {
             view->enableScaling(view->hostPreferences()->windowedScale());
@@ -517,7 +530,13 @@ void MainWindow::switchFullscreen()
         m_fullscreenWindow->show();
         hide();  // hide after showing the new window so it stays on the same screen
 
-        if (m_systemTrayIcon) m_systemTrayIcon->setAssociatedWidget(m_fullscreenWindow);
+        if (m_systemTrayIcon) {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+        m_systemTrayIcon->setAssociatedWidget(m_fullscreenWindow);
+#else
+        m_systemTrayIcon->setAssociatedWindow(m_fullscreenWindow->windowHandle());
+#endif
+        }
 
         actionCollection()->action(QStringLiteral("switch_fullscreen"))->setIcon(QIcon::fromTheme(QStringLiteral("view-restore")));
         actionCollection()->action(QStringLiteral("switch_fullscreen"))->setText(i18n("Switch to Window Mode"));
@@ -928,7 +947,13 @@ void MainWindow::updateConfiguration()
 
     if (Settings::systemTrayIcon() && !m_systemTrayIcon) {
         m_systemTrayIcon = new SystemTrayIcon(this);
-        if(m_fullscreenWindow) m_systemTrayIcon->setAssociatedWidget(m_fullscreenWindow);
+        if (m_systemTrayIcon) {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+            m_systemTrayIcon->setAssociatedWidget(m_fullscreenWindow);
+#else
+            m_systemTrayIcon->setAssociatedWindow(m_fullscreenWindow->windowHandle());
+#endif
+        }
     } else if (m_systemTrayIcon) {
         delete m_systemTrayIcon;
         m_systemTrayIcon = nullptr;

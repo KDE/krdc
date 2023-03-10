@@ -9,9 +9,9 @@ set (RELEASE_SERVICE_VERSION "${RELEASE_SERVICE_VERSION_MAJOR}.${RELEASE_SERVICE
 project(krdc VERSION ${RELEASE_SERVICE_VERSION})
 
 set (QT_MIN_VERSION "5.15.2")
-set (KF5_MIN_VERSION "5.91.0")
+set (KF_MIN_VERSION "5.91.0")
 
-find_package(ECM ${KF5_MIN_VERSION} REQUIRED NO_MODULE)
+find_package(ECM ${KF_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules ${ECM_MODULE_PATH})
 
 include(KDEInstallDirs)
@@ -24,7 +24,7 @@ include(ECMDeprecationSettings)
 
 find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core)
 
-find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
+find_package(KF${QT_MAJOR_VERSION} ${KF_MIN_VERSION} REQUIRED COMPONENTS
     Config
     KCMUtils
     DNSSD
@@ -41,17 +41,17 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
     I18n
 )
 
-find_package(KF5 ${KF5_MIN_VERSION} OPTIONAL_COMPONENTS Activities)
-set_package_properties(KF5Activities PROPERTIES DESCRIPTION "KActivities libraries"
+find_package(KF${QT_MAJOR_VERSION} ${KF_MIN_VERSION} OPTIONAL_COMPONENTS Activities)
+set_package_properties(KF${QT_MAJOR_VERSION}Activities PROPERTIES DESCRIPTION "KActivities libraries"
                        URL "https://www.kde.org"
                        TYPE OPTIONAL
                        PURPOSE "For tracking which remote desktops are frequently accessed"
                       )
-if (KF5Activities_FOUND)
+if (KF${QT_MAJOR_VERSION}Activities_FOUND)
     set(HAVE_KACTIVITIES TRUE)
 endif()
 
-find_package(KF5DocTools)
+find_package(KF${QT_MAJOR_VERSION}DocTools)
 
 # use sane compile flags
 add_definitions(
@@ -119,10 +119,10 @@ endif()
 
 add_subdirectory(test)
 
-if(KF5DocTools_FOUND)
+if(KF${QT_MAJOR_VERSION}DocTools_FOUND)
     add_subdirectory(doc)
 else()
-    message("KF5DocTools not found. Not building documentation.")
+    message("KF${QT_MAJOR_VERSION}DocTools not found. Not building documentation.")
 endif()
 
 
@@ -161,22 +161,22 @@ ecm_qt_declare_logging_category(krdc
 )
 
 target_link_libraries(krdc
-    KF5::ConfigCore
-    KF5::KCMUtils
-    KF5::DNSSD
-    KF5::NotifyConfig
-    KF5::Bookmarks
-    KF5::IconThemes
-    KF5::XmlGui
-    KF5::Completion
-    KF5::WidgetsAddons
-    KF5::NotifyConfig
-    KF5::Notifications
+    KF${QT_MAJOR_VERSION}::ConfigCore
+    KF${QT_MAJOR_VERSION}::KCMUtils
+    KF${QT_MAJOR_VERSION}::DNSSD
+    KF${QT_MAJOR_VERSION}::NotifyConfig
+    KF${QT_MAJOR_VERSION}::Bookmarks
+    KF${QT_MAJOR_VERSION}::IconThemes
+    KF${QT_MAJOR_VERSION}::XmlGui
+    KF${QT_MAJOR_VERSION}::Completion
+    KF${QT_MAJOR_VERSION}::WidgetsAddons
+    KF${QT_MAJOR_VERSION}::NotifyConfig
+    KF${QT_MAJOR_VERSION}::Notifications
     krdccore
 )
 
-if (KF5Activities_FOUND)
-    target_link_libraries(krdc KF5::Activities)
+if (KF${QT_MAJOR_VERSION}Activities_FOUND)
+    target_link_libraries(krdc KF${QT_MAJOR_VERSION}::Activities)
 endif()
 
 install(TARGETS krdc ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
@@ -184,7 +184,7 @@ install(PROGRAMS org.kde.krdc.desktop DESTINATION ${KDE_INSTALL_APPDIR})
 install(FILES org.kde.krdc.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
 
 ki18n_install(po)
-if(KF5DocTools_FOUND)
+if(KF${QT_MAJOR_VERSION}DocTools_FOUND)
     kdoctools_install(po)
 endif()
 

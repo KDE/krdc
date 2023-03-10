@@ -23,13 +23,17 @@ target_include_directories(krdc_vncplugin PRIVATE
 
 target_link_libraries(krdc_vncplugin
     Qt::Core
-    KF5::ConfigCore
-    KF5::CoreAddons
-    KF5::XmlGui
+    KF${QT_MAJOR_VERSION}::ConfigCore
+    KF${QT_MAJOR_VERSION}::CoreAddons
+    KF${QT_MAJOR_VERSION}::XmlGui
     Qt::Gui
     ${LIBVNCCLIENT_LIBRARIES}
     krdccore
 )
+
+if(QT_MAJOR_VERSION STREQUAL "6")
+    target_link_libraries(krdc_vncplugin KF6::KCMUtils)
+endif()
 
 if (LIBSSH_FOUND)
     target_compile_definitions(krdc_vncplugin PRIVATE -DLIBSSH_FOUND)
@@ -51,14 +55,18 @@ endif()
 
 target_link_libraries(kcm_krdc_vncplugin
     Qt::Core
-    KF5::Wallet
-    KF5::ConfigCore
-    KF5::CoreAddons
-    KF5::XmlGui
+    KF${QT_MAJOR_VERSION}::Wallet
+    KF${QT_MAJOR_VERSION}::ConfigCore
+    KF${QT_MAJOR_VERSION}::CoreAddons
+    KF${QT_MAJOR_VERSION}::XmlGui
     Qt::Gui
     ${LIBVNCCLIENT_LIBRARIES}
     krdccore
 )
+
+if(QT_MAJOR_VERSION STREQUAL "6")
+    target_link_libraries(kcm_krdc_vncplugin KF6::KCMUtils)
+endif()
 
 add_dependencies(kcm_krdc_vncplugin krdc_vncplugin)
 

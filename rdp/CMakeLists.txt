@@ -19,12 +19,16 @@ ecm_qt_declare_logging_category(krdc_rdpplugin
 target_link_libraries(krdc_rdpplugin
     Qt::Core
     Qt::Gui
-    KF5::ConfigCore
-    KF5::CoreAddons
-    KF5::WindowSystem
-    KF5::XmlGui
+    KF${QT_MAJOR_VERSION}::ConfigCore
+    KF${QT_MAJOR_VERSION}::CoreAddons
+    KF${QT_MAJOR_VERSION}::WindowSystem
+    KF${QT_MAJOR_VERSION}::XmlGui
     krdccore
 )
+
+if(QT_MAJOR_VERSION STREQUAL "6")
+    target_link_libraries(krdc_rdpplugin KF6::KCMUtils)
+endif()
 
 add_library(kcm_krdc_rdpplugin)
 
@@ -35,12 +39,16 @@ target_sources(kcm_krdc_rdpplugin PRIVATE
 target_link_libraries(kcm_krdc_rdpplugin
     Qt::Core
     Qt::Gui
-    KF5::Wallet
-    KF5::ConfigCore
-    KF5::CoreAddons
-    KF5::XmlGui
+    KF${QT_MAJOR_VERSION}::Wallet
+    KF${QT_MAJOR_VERSION}::ConfigCore
+    KF${QT_MAJOR_VERSION}::CoreAddons
+    KF${QT_MAJOR_VERSION}::XmlGui
     krdccore
 )
+
+if(QT_MAJOR_VERSION STREQUAL "6")
+    target_link_libraries(kcm_krdc_rdpplugin KF6::KCMUtils)
+endif()
 
 add_dependencies(kcm_krdc_rdpplugin krdc_rdpplugin)
 

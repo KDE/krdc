@@ -15,10 +15,10 @@ target_sources(krdc_testplugin PRIVATE
 
 target_link_libraries(krdc_testplugin
     Qt::Core
-    KF5::Wallet
-    KF5::ConfigCore
-    KF5::I18n
-    KF5::CoreAddons
+    KF${QT_MAJOR_VERSION}::Wallet
+    KF${QT_MAJOR_VERSION}::ConfigCore
+    KF${QT_MAJOR_VERSION}::I18n
+    KF${QT_MAJOR_VERSION}::CoreAddons
     Qt::Gui
     krdccore
 )

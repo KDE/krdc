@@ -12,11 +12,19 @@
 
 K_PLUGIN_CLASS(RdpPreferences)
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 RdpPreferences::RdpPreferences(QWidget *parent, const QVariantList &args)
+#else
+RdpPreferences::RdpPreferences(QObject *parent, const QVariantList &args)
+#endif
         : KCModule(parent, args)
 {
     Ui::RdpPreferences rdpUi;
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     rdpUi.setupUi(this);
+#else
+    rdpUi.setupUi(widget());
+#endif
     // would need a lot of code duplication. find a solution, but it's not
     // that important because you will not change this configuration each day...
     // see rdp/rdphostpreferences.cpp
@@ -28,8 +36,11 @@ RdpPreferences::RdpPreferences(QWidget *parent, const QVariantList &args)
     rdpUi.widthLabel->setEnabled(true);
     rdpUi.browseMediaButton->hide();
 
-    
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     addConfig(Settings::self(), this);
+#else
+    addConfig(Settings::self(), widget());
+#endif
 }
 
 RdpPreferences::~RdpPreferences()
