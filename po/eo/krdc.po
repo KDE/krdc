@@ -6,8 +6,8 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-14 00:56+0000\n"
-"PO-Revision-Date: 2009-11-15 12:06+0100\n"
-"Last-Translator: Axel Rousseau <axel@esperanto-jeunes.org>\n"
+"PO-Revision-Date: 2023-03-25 16:19+0100\n"
+"Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
@@ -75,10 +75,9 @@ msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, connectionGroupBox)
 #: config/general.ui:93
-#, fuzzy, kde-format
-#| msgid "Connection"
+#, kde-format
 msgid "When Connecting"
-msgstr "Konekto"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowPreferencesForNewConnections)
 #: config/general.ui:99
@@ -212,9 +211,9 @@ msgid "General Configuration"
 msgstr ""
 
 #: config/preferencesdialog.cpp:29
-#, fuzzy, kde-format
+#, kde-format
 msgid "Hosts"
-msgstr "Montru konstelaciajn nomojn"
+msgstr ""
 
 #: config/preferencesdialog.cpp:29 core/hostpreferences.cpp:176
 #: core/hostpreferences.cpp:180
@@ -355,10 +354,9 @@ msgid "Tim Jansen"
 msgstr "Tim Jansen"
 
 #: main.cpp:75
-#, fuzzy, kde-format
-#| msgid "Developer"
+#, kde-format
 msgid "Former Developer"
-msgstr "Programinto"
+msgstr ""
 
 #: main.cpp:76
 #, kde-format
@@ -547,22 +545,19 @@ msgid "Window Mode"
 msgstr ""
 
 #: mainwindow.cpp:676
-#, fuzzy, kde-format
-#| msgid "Connection"
+#, kde-format
 msgid "Connect"
-msgstr "Konekto"
+msgstr ""
 
 #: mainwindow.cpp:677
-#, fuzzy, kde-format
-#| msgid "Remove"
+#, kde-format
 msgid "Rename"
-msgstr "Forigi"
+msgstr ""
 
 #: mainwindow.cpp:678
-#, fuzzy, kde-format
-#| msgid "Sessions"
+#, kde-format
 msgid "Settings"
-msgstr "Seancoj"
+msgstr ""
 
 #: mainwindow.cpp:679
 #, kde-format
@@ -570,8 +565,7 @@ msgid "Delete"
 msgstr "Forigi"
 
 #: mainwindow.cpp:682 remotedesktopsmodel.cpp:108
-#, fuzzy, kde-format
-#| msgid "Bookmarks"
+#, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "Legosignoj"
@@ -583,10 +577,9 @@ msgid "History"
 msgstr "Historio"
 
 #: mainwindow.cpp:695
-#, fuzzy, kde-format
-#| msgid "Remove"
+#, kde-format
 msgid "Rename %1"
-msgstr "Forigi"
+msgstr ""
 
 #: mainwindow.cpp:695
 #, kde-format
@@ -1082,9 +1075,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_SoundSystem)
 #: rdp/rdppreferences.ui:477
-#, fuzzy, kde-format
-#| msgctxt "Where each displayed link comes from"
-#| msgid "None"
+#, kde-format
 msgid "None"
 msgstr "Neniu"
 
@@ -1115,10 +1106,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, remoteFXLabel)
 #: rdp/rdppreferences.ui:522
-#, fuzzy, kde-format
-#| msgid "Remove"
+#, kde-format
 msgid "RemoteFX:"
-msgstr "Forigi"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_RemoteFX)
 #: rdp/rdppreferences.ui:532
@@ -1321,11 +1311,10 @@ msgid "Remove the bookmark for %1."
 msgstr ""
 
 #: remotedesktopsmodel.cpp:132
-#, fuzzy, kde-format
-#| msgid "Bookmarks"
+#, kde-format
 msgctxt "Add the selected url to the bookmarks menu"
 msgid "Bookmark %1."
-msgstr "Legosignoj"
+msgstr ""
 
 #: remotedesktopsmodel.cpp:171
 #, kde-format
@@ -1334,12 +1323,11 @@ msgid "Remote Desktop"
 msgstr ""
 
 #: remotedesktopsmodel.cpp:173
-#, fuzzy, kde-format
-#| msgid "Connection"
+#, kde-format
 msgctxt ""
 "Header of the connections list, the last time this connection was initiated"
 msgid "Last Connected"
-msgstr "Konekto"
+msgstr ""
 
 #: remotedesktopsmodel.cpp:175
 #, kde-format
@@ -1387,35 +1375,30 @@ msgid "VNC server closed connection."
 msgstr ""
 
 #: vnc/vncclientthread.cpp:350
-#, fuzzy, kde-format
-#| msgid "Disconnect"
+#, kde-format
 msgid "Disconnected: %1."
-msgstr "Malkonekti"
+msgstr ""
 
 #: vnc/vncclientthread.cpp:556
-#, fuzzy, kde-format
-#| msgid "Connection"
+#, kde-format
 msgid "Reconnecting."
-msgstr "Konekto"
+msgstr ""
 
 #: vnc/vncclientthread.cpp:623
-#, fuzzy, kde-format
-#| msgid "Disconnect"
+#, kde-format
 msgid "Reconnected."
-msgstr "Malkonekti"
+msgstr ""
 
 #: vnc/vncclientthread.cpp:625
-#, fuzzy, kde-format
-#| msgid "Connection"
+#, kde-format
 msgid "Connected."
-msgstr "Konekto"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, connectionLabel)
 #: vnc/vncpreferences.ui:23
-#, fuzzy, kde-format
-#| msgid "Connection"
+#, kde-format
 msgid "Connection &type:"
-msgstr "Konekto"
+msgstr ""
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_Quality)
 #: vnc/vncpreferences.ui:39
@@ -1480,10 +1463,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: vnc/vncpreferences.ui:244
-#, fuzzy, kde-format
-#| msgid "Default user name:"
+#, kde-format
 msgid "User name:"
-msgstr "Defaŭlta uzantonomo:"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, dont_copy_passwords)
 #: vnc/vncpreferences.ui:257
@@ -1501,10 +1483,9 @@ msgid ""
 msgstr ""
 
 #: vnc/vncsshtunnelthread.cpp:102
-#, fuzzy, kde-format
-#| msgid "Connecting to %1"
+#, kde-format
 msgid "Error connecting to %1: %2"
-msgstr "Konektante al %1"
+msgstr ""
 
 #: vnc/vncsshtunnelthread.cpp:127
 #, kde-format
@@ -1553,49 +1534,3 @@ msgid ""
 "<html>Enter the address here.<br /><i>Example: vncserver:1 (host:port / "
 "screen)</i></html>"
 msgstr ""
-
-#~ msgid "KDE"
-#~ msgstr "KDE"
-
-#~ msgid "Gnome"
-#~ msgstr "Gnome"
-
-#~ msgid "CDE"
-#~ msgstr "CDE"
-
-#~ msgid "XDM"
-#~ msgstr "XDM"
-
-#~ msgid "Display"
-#~ msgstr "Montri"
-
-#~ msgid "Type"
-#~ msgstr "Tipo"
-
-#~ msgid "Resolution"
-#~ msgstr "Difino"
-
-#~ msgid "Session Name"
-#~ msgstr "Seancnomo"
-
-#~ msgid "&New"
-#~ msgstr "&Nova"
-
-#~ msgid "&Resume"
-#~ msgstr "&Restarigi"
-
-#~ msgid "Accept"
-#~ msgstr "Akcepti"
-
-#~ msgid "Reject"
-#~ msgstr "Malakcepti"
-
-#~ msgctxt "@info:credit"
-#~ msgid "Abner Silva"
-#~ msgstr "Abner Silva"
-
-#, fuzzy
-#~| msgid "Filter"
-#~ msgctxt "Verb, to remove items that don't match"
-#~ msgid "Filter"
-#~ msgstr "Filtrilo"
