@@ -880,8 +880,10 @@ void MainWindow::updateActionStatus()
                     view ? view->supportsScaling() : false,
                     view ? view->scaling() : false);
 
-    actionCollection()->action(QStringLiteral("scale_factor"))->setEnabled(enabled);
     actionCollection()->action(QStringLiteral("scale_factor"))->setVisible(view ? view->supportsScaling() : false);
+    setFactor(view ? view->hostPreferences()->scaleFactor() : 0);
+    Q_EMIT factorUpdated(view ? view->hostPreferences()->scaleFactor() : 0);
+    Q_EMIT scaleUpdated(view ? view->scaling() : false);
 
     setActionStatus(actionCollection()->action(QStringLiteral("grab_all_keys")),
                     enabled,
