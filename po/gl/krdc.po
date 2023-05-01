@@ -11,14 +11,14 @@
 # Xosé <xosecalvo@gmail.com>, 2010.
 # Marce Villarino <mvillarino@kde-espana.es>, 2012, 2013, 2014.
 # Adrian Chaves Fernandez <adriyetichaves@gmail.com>, 2012, 2015, 2016, 2017.
-# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2017, 2018, 2019, 2020.
+# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2017, 2018, 2019, 2020, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-13 02:51+0000\n"
-"PO-Revision-Date: 2020-03-07 17:55+0100\n"
+"PO-Revision-Date: 2023-04-30 11:27+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -26,7 +26,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 19.08.3\n"
+"X-Generator: Lokalize 23.04.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -513,7 +513,7 @@ msgstr "Escala"
 #: mainwindow.cpp:183
 #, kde-format
 msgid "Scaling Factor"
-msgstr ""
+msgstr "Factor de cambio de escala"
 
 #: mainwindow.cpp:194
 #, kde-format
@@ -696,7 +696,7 @@ msgstr "Filtro"
 #: rdp/rdphostpreferences.cpp:181
 #, kde-format
 msgid "Browse to media share path"
-msgstr ""
+msgstr "Examinar a ruta de compartición multimedia"
 
 #. i18n: ectx: property (title), widget (QGroupBox, connectionGroupBox)
 #. i18n: ectx: property (title), widget (QGroupBox, vncGroupBox)
@@ -861,7 +861,7 @@ msgstr ""
 #: rdp/rdppreferences.ui:231
 #, kde-format
 msgid "Arabic (ar)"
-msgstr "Arábe (ar)"
+msgstr "Árabe (ar)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:236
@@ -1541,6 +1541,8 @@ msgstr "Nome de usuario:"
 #, kde-format
 msgid "Don't copy passwords from supported password managers to remote hosts"
 msgstr ""
+"Non copiar contrasinais de xestores de contrasinais compatíbeis a máquinas "
+"remotas"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, dont_copy_passwords)
 #: vnc/vncpreferences.ui:260
@@ -1550,6 +1552,9 @@ msgid ""
 "additional MIME type \"x-kde-passwordManagerHint\" which is used for "
 "filtering."
 msgstr ""
+"Os xestores de contrasinais compatíbeis (como KeePassXC) marcan os "
+"contrasinais copiados cun tipo MIME adicional «x-kde-passwordManagerHint» "
+"que se usa para filtrar."
 
 #: vnc/vncsshtunnelthread.cpp:102
 #, kde-format
