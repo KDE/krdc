@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-13 00:49+0000\n"
+"POT-Creation-Date: 2023-05-06 00:47+0000\n"
 "PO-Revision-Date: 2021-05-13 13:39+0200\n"
 "Last-Translator: Vit Pelcak <vpelcak@suse.cz>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -197,12 +197,12 @@ msgstr "Nastavit..."
 msgid "Remove"
 msgstr "Odstranit"
 
-#: config/hostpreferenceslist.cpp:100 mainwindow.cpp:655
+#: config/hostpreferenceslist.cpp:100 mainwindow.cpp:674
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr "Zvoleného hostitele nelze obsloužit."
 
-#: config/hostpreferenceslist.cpp:101 mainwindow.cpp:277 mainwindow.cpp:656
+#: config/hostpreferenceslist.cpp:101 mainwindow.cpp:284 mainwindow.cpp:675
 #, kde-format
 msgid "Unusable URL"
 msgstr "Nepoužitelné URL"
@@ -434,88 +434,88 @@ msgstr ""
 msgid "URLs to connect after startup"
 msgstr "URL k připojení při spuštění"
 
-#: mainwindow.cpp:114
+#: mainwindow.cpp:121
 #, kde-format
 msgid "KDE Remote Desktop Client started"
 msgstr "Klient vzdálené plochy pro KDE spuštěn"
 
-#: mainwindow.cpp:119 mainwindow.cpp:132 mainwindow.cpp:1064
-#: mainwindow.cpp:1161
+#: mainwindow.cpp:126 mainwindow.cpp:139 mainwindow.cpp:1089
+#: mainwindow.cpp:1186
 #, kde-format
 msgid "New Connection"
 msgstr "Nové spojení"
 
-#: mainwindow.cpp:138
+#: mainwindow.cpp:145
 #, kde-format
 msgid "Copy Screenshot to Clipboard"
 msgstr "Kopírovat snímek do schránky"
 
-#: mainwindow.cpp:139
+#: mainwindow.cpp:146
 #, kde-format
 msgid "Screenshot"
 msgstr "Snímek obrazovky"
 
-#: mainwindow.cpp:144 mainwindow.cpp:485
+#: mainwindow.cpp:151 mainwindow.cpp:498
 #, kde-format
 msgid "Switch to Full Screen Mode"
 msgstr "Přepnout do režimu na celou obrazovku"
 
-#: mainwindow.cpp:145 mainwindow.cpp:486
+#: mainwindow.cpp:152 mainwindow.cpp:499
 #, kde-format
 msgid "Full Screen"
 msgstr "Celá obrazovka"
 
-#: mainwindow.cpp:152
+#: mainwindow.cpp:159
 #, kde-format
 msgid "View Only"
 msgstr "Pouze pohled"
 
-#: mainwindow.cpp:157
+#: mainwindow.cpp:164
 #, kde-format
 msgid "Disconnect"
 msgstr "Odpojit"
 
-#: mainwindow.cpp:165
+#: mainwindow.cpp:172
 #, kde-format
 msgid "Show Local Cursor"
 msgstr "Zobrazit místní kurzor"
 
-#: mainwindow.cpp:166
+#: mainwindow.cpp:173
 #, kde-format
 msgid "Local Cursor"
 msgstr "Místní kurzor"
 
-#: mainwindow.cpp:172
+#: mainwindow.cpp:179
 #, kde-format
 msgid "Grab All Possible Keys"
 msgstr "Zachytit všechny možné klávesy"
 
-#: mainwindow.cpp:173
+#: mainwindow.cpp:180
 #, kde-format
 msgid "Grab Keys"
 msgstr "Zachytit klávesy"
 
-#: mainwindow.cpp:179
+#: mainwindow.cpp:186
 #, kde-format
 msgid "Scale Remote Screen to Fit Window Size"
 msgstr "Přizpůsobit vzdálenou obrazovku velikosti okna"
 
-#: mainwindow.cpp:180
+#: mainwindow.cpp:187
 #, kde-format
 msgid "Scale"
 msgstr "Měřítko"
 
-#: mainwindow.cpp:183
+#: mainwindow.cpp:190
 #, kde-format
 msgid "Scaling Factor"
 msgstr "Měřítko"
 
-#: mainwindow.cpp:194
+#: mainwindow.cpp:201
 #, kde-format
 msgid "Bookmarks"
 msgstr "Záložky"
 
-#: mainwindow.cpp:253
+#: mainwindow.cpp:260
 #, kde-format
 msgid ""
 "The entered address does not have the required form.\n"
@@ -524,146 +524,146 @@ msgstr ""
 "Zadaná adresa nemá požadovaný formát.\n"
 " Syntaxe: [uživatel@]hostitel[:port]"
 
-#: mainwindow.cpp:254
+#: mainwindow.cpp:261
 #, kde-format
 msgid "Malformed URL"
 msgstr "Neplatné URL"
 
-#: mainwindow.cpp:276
+#: mainwindow.cpp:283
 #, kde-format
 msgid "The entered address cannot be handled."
 msgstr "Se zadanou adresou nelze pracovat."
 
-#: mainwindow.cpp:408
+#: mainwindow.cpp:415
 #, kde-format
 msgid "Connecting to %1"
 msgstr "Připojuji se k %1"
 
-#: mainwindow.cpp:412
+#: mainwindow.cpp:419
 #, kde-format
 msgid "Authenticating at %1"
 msgstr "Probíhá ověřování na %1"
 
-#: mainwindow.cpp:416
+#: mainwindow.cpp:423
 #, kde-format
 msgid "Preparing connection to %1"
 msgstr "Probíhá příprava spojení s %1"
 
-#: mainwindow.cpp:420
+#: mainwindow.cpp:427
 #, kde-format
 msgid "Connected to %1"
 msgstr "Připojen k %1"
 
-#: mainwindow.cpp:496
+#: mainwindow.cpp:509
 #, kde-format
 msgctxt ""
 "window title when in full screen mode (for example displayed in tasklist)"
 msgid "KDE Remote Desktop Client (Full Screen)"
 msgstr "Klient vzdálené plochy pro KDE (celá obrazovka)"
 
-#: mainwindow.cpp:523
+#: mainwindow.cpp:542
 #, kde-format
 msgid "Switch to Window Mode"
 msgstr "Přepnout do okna"
 
-#: mainwindow.cpp:524
+#: mainwindow.cpp:543
 #, kde-format
 msgid "Window Mode"
 msgstr "Režim okna"
 
-#: mainwindow.cpp:676
+#: mainwindow.cpp:695
 #, kde-format
 msgid "Connect"
 msgstr "Připojit"
 
-#: mainwindow.cpp:677
+#: mainwindow.cpp:696
 #, kde-format
 msgid "Rename"
 msgstr "Přejmenovat"
 
-#: mainwindow.cpp:678
+#: mainwindow.cpp:697
 #, kde-format
 msgid "Settings"
 msgstr "Nastavení"
 
-#: mainwindow.cpp:679
+#: mainwindow.cpp:698
 #, kde-format
 msgid "Delete"
 msgstr "Smazat"
 
-#: mainwindow.cpp:682 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:701 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "Záložky"
 
-#: mainwindow.cpp:683 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:702 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "Historie"
 
-#: mainwindow.cpp:695
+#: mainwindow.cpp:714
 #, kde-format
 msgid "Rename %1"
 msgstr "Přejmenovat %1"
 
-#: mainwindow.cpp:695
+#: mainwindow.cpp:714
 #, kde-format
 msgid "Rename %1 to"
 msgstr "Přejmenovat %1 na"
 
-#: mainwindow.cpp:703
+#: mainwindow.cpp:722
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "Opravdu si přejete smazat %1?"
 
-#: mainwindow.cpp:703
+#: mainwindow.cpp:722
 #, kde-format
 msgid "Delete %1"
 msgstr "Smazat %1"
 
-#: mainwindow.cpp:725
+#: mainwindow.cpp:744
 #, kde-format
 msgid "Add Bookmark"
 msgstr "Přidat záložku"
 
-#: mainwindow.cpp:726
+#: mainwindow.cpp:745
 #, kde-format
 msgid "Close Tab"
 msgstr "Uzavřít záložku"
 
-#: mainwindow.cpp:830
+#: mainwindow.cpp:849
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr "Minimalizovat celoobrazovkové okno"
 
-#: mainwindow.cpp:846
+#: mainwindow.cpp:865
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "Přichytit panel nástrojů"
 
-#: mainwindow.cpp:958
+#: mainwindow.cpp:983
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr "Opravdu si přejete ukončit klienta vzdálené plochy pro KDE?"
 
-#: mainwindow.cpp:959
+#: mainwindow.cpp:984
 #, kde-format
 msgid "Confirm Quit"
 msgstr "Potvrdit ukončení"
 
-#: mainwindow.cpp:1087
+#: mainwindow.cpp:1112
 #, kde-format
 msgid "Connect to:"
 msgstr "Připojit se k:"
 
-#: mainwindow.cpp:1091
+#: mainwindow.cpp:1116
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr "Zde pište pro připojení k adrese nebo filtrování seznamu."
 
-#: mainwindow.cpp:1100
+#: mainwindow.cpp:1125
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
@@ -672,17 +672,17 @@ msgstr ""
 "Zde zadejte IP adresu nebo DNS název. Pro zobrazení způsobů připojení "
 "vymažte řádek."
 
-#: mainwindow.cpp:1103
+#: mainwindow.cpp:1128
 #, kde-format
 msgid "Goto Address"
 msgstr "Přejít na adresu"
 
-#: mainwindow.cpp:1197
+#: mainwindow.cpp:1222
 #, kde-format
 msgid "Remote Desktops"
 msgstr "Vzdálené plochy"
 
-#: mainwindow.cpp:1228
+#: mainwindow.cpp:1253
 #, kde-format
 msgid "Filter"
 msgstr "Filtr"
