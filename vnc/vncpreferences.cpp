@@ -14,10 +14,11 @@ K_PLUGIN_CLASS(VncPreferences)
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 VncPreferences::VncPreferences(QWidget *parent, const QVariantList &args)
+    : KCModule(parent, args)
 #else
-VncPreferences::VncPreferences(QObject *parent, const QVariantList &args)
+VncPreferences::VncPreferences(QObject *parent)
+    : KCModule(parent)
 #endif
-        : KCModule(parent, args)
 {
     Ui::VncPreferences vncUi;
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)

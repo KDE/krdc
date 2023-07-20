@@ -17,15 +17,14 @@ class VncPreferences : public KCModule
 
 public:
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    explicit VncPreferences(QWidget *parent = nullptr, const QVariantList &args = QVariantList());
+    explicit VncPreferences(QWidget *parent, const QVariantList &args);
 #else
-    explicit VncPreferences(QObject *parent = nullptr, const QVariantList &args = QVariantList());
+    explicit VncPreferences(QObject *parent);
 #endif
     ~VncPreferences() override;
 
     void save() override;
     void load() override;
-
 };
 
 #endif // VNCPREFERENCES_H

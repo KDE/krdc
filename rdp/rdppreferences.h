@@ -17,15 +17,14 @@ class RdpPreferences : public KCModule
 
 public:
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    explicit RdpPreferences(QWidget *parent = nullptr, const QVariantList &args = QVariantList());
+    explicit RdpPreferences(QWidget *parent, const QVariantList &args);
 #else
-    explicit RdpPreferences(QObject *parent = nullptr, const QVariantList &args = QVariantList());
+    explicit RdpPreferences(QObject *parent);
 #endif
     ~RdpPreferences() override;
 
     void save() override;
     void load() override;
-
 };
 
 #endif // RDPPREFERENCES_H

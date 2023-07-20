@@ -14,10 +14,11 @@ K_PLUGIN_CLASS(RdpPreferences)
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 RdpPreferences::RdpPreferences(QWidget *parent, const QVariantList &args)
+    : KCModule(parent, args)
 #else
-RdpPreferences::RdpPreferences(QObject *parent, const QVariantList &args)
+RdpPreferences::RdpPreferences(QObject *parent)
+    : KCModule(parent)
 #endif
-        : KCModule(parent, args)
 {
     Ui::RdpPreferences rdpUi;
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
