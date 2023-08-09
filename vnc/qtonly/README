@@ -5,17 +5,13 @@ In order to build it, you need the LibVNCClient (LibVNCServer)
 library (version 0.9.1 or newer required):
   http://sourceforge.net/project/showfiles.php?group_id=32584&package_id=24717
 
-The following files from KRDC are required:
-  krdc/core/remoteview.{cpp,h}
-  krdc/core/logging.{cpp,h}
-  krdc/vnc/vncview.{cpp,h}
-  krdc/vnc/vncclientthread.{cpp,h}
-  krdc/vnc/qtonly/main.cpp
-  krdc/vnc/qtonly/krdc-vnc-qtonly.pro
-
-Copy these files into a folder and run:
-  qmake
+To build, run
+  cmake
   make
+
+Note that the source directory MUST be under krdc/vnc, as files from krdc/vnc
+and krdc/core are used (in particular krdc/vnc/vncview.{cpp,h},
+krdc/vnc/vncclientthread.{cpp,h}, and krdc/core/remoteview.{cpp,h}).
 
 In order to try it out, type:
   ./krdc-vnc-qtonly vnc://:password@server:1 1
