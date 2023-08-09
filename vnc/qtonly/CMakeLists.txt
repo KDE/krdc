@@ -33,7 +33,7 @@ set_package_properties(LibVNCServer PROPERTIES
 
 add_executable(krdc-vnc-qtonly)
 
-add_compile_definitions(QTONLY)
+target_compile_definitions(krdc-vnc-qtonly PRIVATE QTONLY)
 
 target_include_directories(krdc-vnc-qtonly PRIVATE
     ${LIBVNCCLIENT_INCLUDE_DIR}
