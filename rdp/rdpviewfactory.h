@@ -35,9 +35,6 @@ public:
 
     QString connectToolTipText() const override;
 
-private Q_SLOTS:
-    void checkFreerdpAvailability();
-
 private:
     QString m_connectToolTipString;
 };

@@ -18,27 +18,51 @@ class RdpHostPreferences : public HostPreferences
     Q_OBJECT
 
 public:
+    enum class Resolution {
+        Small,
+        Medium,
+        Large,
+        MatchWindow,
+        MatchScreen,
+        Custom,
+    };
+
+    enum class Sound {
+        Local,
+        Remote,
+        Disabled,
+    };
+
+    enum class Acceleration {
+        Auto,
+        ForceGraphicsPipeline,
+        ForceRemoteFx,
+        Disabled,
+    };
+
     explicit RdpHostPreferences(KConfigGroup configGroup, QObject *parent = nullptr);
     ~RdpHostPreferences() override;
 
-    void setResolution(int resolution);
-    int resolution() const;
-    void setColorDepth(int colorDepth);
+    Resolution resolution() const;
+    void setResolution(Resolution resolution);
+
     int colorDepth() const;
-    void setKeyboardLayout(const QString &keyboardLayout);
+    void setColorDepth(int colorDepth);
+
     QString keyboardLayout() const;
-    void setSound(int sound);
-    int sound() const;
-    void setSoundSystem(int sound);
-    int soundSystem() const;
+    void setKeyboardLayout(const QString &keyboardLayout);
+
+    Sound sound() const;
+    void setSound(Sound sound);
+
+    Acceleration acceleration() const;
+    void setAcceleration(Acceleration acceleration);
+
     void setConsole(bool console);
     bool console() const;
-    void setExtraOptions(const QString &extraOptions);
-    QString extraOptions() const;
-    void setRemoteFX(bool remoteFX);
-    bool remoteFX() const;
     void setPerformance(int performance);
     int performance() const;
+
     void setShareMedia(const QString &shareMedia);
     QString shareMedia() const;
 
@@ -47,12 +71,9 @@ protected:
     void acceptConfig() override;
 
 private:
-    Ui::RdpPreferences rdpUi;
+    void updateWidthHeight(Resolution resolution);
 
-private Q_SLOTS:
-    void updateWidthHeight(int index);
-    void updateSoundSystem(int index);
-    void browseMedia();
+    Ui::RdpPreferences rdpUi;
 };
 
 #endif

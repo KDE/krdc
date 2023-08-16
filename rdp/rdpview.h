@@ -1,6 +1,7 @@
 /*
     SPDX-FileCopyrightText: 2002 Arend van Beelen jr. <arend@auton.nl>
     SPDX-FileCopyrightText: 2007 Urs Wolfer <uwolfer@kde.org>
+    SPDX-FileCopyrightText: 2023 Arjen Hiemstra <ahiemstra@heimr.nl>
 
     SPDX-License-Identifier: GPL-2.0-or-later
 */
@@ -12,12 +13,12 @@
 
 #include "rdphostpreferences.h"
 
-#include <QProcess>
+// #include <QProcess>
 #include <QUrl>
 
 #define TCP_PORT_RDP 3389
 
-class RdpView;
+class RdpSession;
 
 class RdpView : public RemoteView
 {
@@ -41,50 +42,37 @@ public:
     bool isQuitting() override;               // are we currently closing the connection?
     bool start() override;                    // open a connection
     void setGrabAllKeys(bool grabAllKeys) override;
-    
+
     HostPreferences* hostPreferences() override;
-    
+
     QPixmap takeScreenshot() override;
 
-public Q_SLOTS:
     void switchFullscreen(bool on) override;
 
 protected:
-    bool eventFilter(QObject *obj, QEvent *event) override;
+    void paintEvent(QPaintEvent *event) override;
+
+    void keyPressEvent(QKeyEvent *event) override;
+    void keyReleaseEvent(QKeyEvent *event) override;
+
+    void mousePressEvent(QMouseEvent *event) override;
+    void mouseReleaseEvent(QMouseEvent *event) override;
+    void mouseMoveEvent(QMouseEvent *event) override;
 
 private:
-    // Marks if connectionClosed should close the connection if m_quitFlag is true.
-    enum CloseType {
-        NormalClose,
-        ForceClose,
-    };
-
-    void connectionError(const QString &text,
-                         const QString &caption); // called if xfreerdp quits with error
-    void connectionClosed(CloseType closeType); // Signals the connection closed if not quitting or it is forced
-
-    QString keymapToXfreerdp(const QString &keyboadLayout);
-    QHash<QString, QString> initKeymapToXfreerdp();
+    void onRectangleUpdated(const QRect &rect);
 
     QString m_name;
     QString m_user;
     QString m_password;
+    //
+    bool m_quitting = false;
 
-    bool m_quitFlag;
-    QWindow *m_container;   // container for the xfreerdp window
-    QWidget *m_containerWidget; // Widget to contain the xfreerdp window.
-    QProcess *m_process;               // xfreerdp process
+    std::unique_ptr<RdpHostPreferences> m_hostPreferences;
+    std::unique_ptr<RdpSession> m_session;
 
-    RdpHostPreferences *m_hostPreferences;
-
-private Q_SLOTS:
-    void connectionOpened();           // called if xfreerdp started
-    void connectionClosed();           // called if xfreerdp quits
-    void processError(QProcess::ProcessError error); // called if xfreerdp dies
-    void receivedStandardError();      // catches xfreerdp debug output
-    void receivedStandardOutput();     // catches xfreerdp output
+    QRect m_pendingRectangle;
+    QImage m_pendingData;
 };
-
-static QHash<QString, QString> keymapToXfreerdpHash;
 
 #endif

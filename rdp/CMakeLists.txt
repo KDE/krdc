@@ -4,6 +4,7 @@ target_sources(krdc_rdpplugin PRIVATE
     rdphostpreferences.cpp
     rdpviewfactory.cpp
     rdpview.cpp
+    rdpsession.cpp
 )
 
 ki18n_wrap_ui(krdc_rdpplugin
@@ -16,6 +17,8 @@ ecm_qt_declare_logging_category(krdc_rdpplugin
     CATEGORY_NAME KRDC
 )
 
+target_include_directories(krdc_rdpplugin PUBLIC ${FreeRDP_INCLUDE_DIR} ${WinPR_INCLUDE_DIR})
+
 target_link_libraries(krdc_rdpplugin
     Qt::Core
     Qt::Gui
@@ -23,7 +26,11 @@ target_link_libraries(krdc_rdpplugin
     KF${QT_MAJOR_VERSION}::CoreAddons
     KF${QT_MAJOR_VERSION}::WindowSystem
     KF${QT_MAJOR_VERSION}::XmlGui
+    KF${QT_MAJOR_VERSION}::KIOWidgets
     krdccore
+    freerdp
+    freerdp-client
+    winpr
 )
 
 if(QT_MAJOR_VERSION STREQUAL "6")
@@ -43,6 +50,7 @@ target_link_libraries(kcm_krdc_rdpplugin
     KF${QT_MAJOR_VERSION}::ConfigCore
     KF${QT_MAJOR_VERSION}::CoreAddons
     KF${QT_MAJOR_VERSION}::XmlGui
+    KF${QT_MAJOR_VERSION}::KIOWidgets
     krdccore
 )
 
@@ -55,4 +63,4 @@ add_dependencies(kcm_krdc_rdpplugin krdc_rdpplugin)
 install(TARGETS kcm_krdc_rdpplugin DESTINATION ${KDE_INSTALL_PLUGINDIR}/krdc/kcms)
 install(TARGETS krdc_rdpplugin DESTINATION ${KDE_INSTALL_PLUGINDIR}/krdc)
 
-install(FILES smb2rdc.desktop DESTINATION ${KDE_INSTALL_DATADIR}/kio/servicemenus)
+# install(FILES smb2rdc.desktop DESTINATION ${KDE_INSTALL_DATADIR}/kio/servicemenus)

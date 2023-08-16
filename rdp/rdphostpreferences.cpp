@@ -83,57 +83,43 @@ QWidget* RdpHostPreferences::createProtocolSpecificConfigPage()
     QWidget *rdpPage = new QWidget();
     rdpUi.setupUi(rdpPage);
 
-    connect(rdpUi.kcfg_Sound, SIGNAL(currentIndexChanged(int)), SLOT(updateSoundSystem(int)));
-    connect(rdpUi.browseMediaButton, SIGNAL(released()), SLOT(browseMedia()));
-
-    rdpUi.loginGroupBox->setVisible(false);
-
     rdpUi.kcfg_Height->setValue(height());
     rdpUi.kcfg_Width->setValue(width());
-    rdpUi.kcfg_Resolution->setCurrentIndex(resolution());
+    rdpUi.kcfg_Resolution->setCurrentIndex(int(resolution()));
     rdpUi.kcfg_ColorDepth->setCurrentIndex(colorDepth());
     rdpUi.kcfg_KeyboardLayout->setCurrentIndex(keymap2int(keyboardLayout()));
-    rdpUi.kcfg_Sound->setCurrentIndex(sound());
-    rdpUi.kcfg_SoundSystem->setCurrentIndex(soundSystem());
-    rdpUi.kcfg_Console->setChecked(console());
-    rdpUi.kcfg_ExtraOptions->setText(extraOptions());
-    rdpUi.kcfg_RemoteFX->setChecked(remoteFX());
-    rdpUi.kcfg_Performance->setCurrentIndex(performance());
-    rdpUi.kcfg_ShareMedia->setText(shareMedia());
 
     // Have to call updateWidthHeight() here
     // We leverage the final part of this function to enable/disable kcfg_Height and kcfg_Width
     updateWidthHeight(resolution());
 
-    connect(rdpUi.kcfg_Resolution, SIGNAL(currentIndexChanged(int)), SLOT(updateWidthHeight(int)));
+    connect(rdpUi.kcfg_Resolution, &QComboBox::currentIndexChanged, this, [this](int index) {
+        updateWidthHeight(Resolution(index));
+    });
 
     return rdpPage;
 }
 
-void RdpHostPreferences::updateWidthHeight(int index)
+void RdpHostPreferences::updateWidthHeight(Resolution resolution)
 {
-    switch (index) {
-    case 0:
-        rdpUi.kcfg_Height->setValue(480);
-        rdpUi.kcfg_Width->setValue(640);
-        break;
-    case 1:
-        rdpUi.kcfg_Height->setValue(600);
-        rdpUi.kcfg_Width->setValue(800);
-        break;
-    case 2:
-        rdpUi.kcfg_Height->setValue(768);
-        rdpUi.kcfg_Width->setValue(1024);
-        break;
-    case 3:
-        rdpUi.kcfg_Height->setValue(1024);
+    switch (resolution) {
+    case Resolution::Small:
         rdpUi.kcfg_Width->setValue(1280);
+        rdpUi.kcfg_Height->setValue(720);
         break;
-    case 4:
-        rdpUi.kcfg_Height->setValue(1200);
-        rdpUi.kcfg_Width->setValue(1600);
+    case Resolution::Medium:
+        rdpUi.kcfg_Height->setValue(1600);
+        rdpUi.kcfg_Width->setValue(900);
         break;
-    case 5: {
+    case Resolution::Large:
+        rdpUi.kcfg_Height->setValue(1920);
+        rdpUi.kcfg_Width->setValue(1080);
+        break;
+    case Resolution::MatchWindow:
+        rdpUi.kcfg_Height->setValue(-1);
+        rdpUi.kcfg_Width->setValue(-1);
+        break;
+    case Resolution::MatchScreen: {
         QWindow *window = rdpUi.kcfg_Width->window()->windowHandle();
         QScreen *screen = window ? window->screen() : qGuiApp->primaryScreen();
         const QSize size = screen->size() * screen->devicePixelRatio();
@@ -142,46 +128,17 @@ void RdpHostPreferences::updateWidthHeight(int index)
         rdpUi.kcfg_Height->setValue(size.height());
         break;
     }
-    case 7:
-        rdpUi.kcfg_Height->setValue(0);
-        rdpUi.kcfg_Width->setValue(0);
-        break;
-    case 6:
+    case Resolution::Custom:
     default:
         break;
     }
 
-    const bool enabled = (index == 6) ? true : false;
+    const bool enabled = resolution == Resolution::Custom;
 
     rdpUi.kcfg_Height->setEnabled(enabled);
     rdpUi.kcfg_Width->setEnabled(enabled);
     rdpUi.heightLabel->setEnabled(enabled);
     rdpUi.widthLabel->setEnabled(enabled);
-}
-
-void RdpHostPreferences::updateSoundSystem(int index)
-{
-    switch (index) {
-    case 0: /* On This Computer */
-        rdpUi.kcfg_SoundSystem->setCurrentIndex(soundSystem());
-        rdpUi.kcfg_SoundSystem->setEnabled(true);
-        break;
-    case 1: /* On Remote Computer */
-    case 2: /* Disable Sound */
-        rdpUi.kcfg_SoundSystem->setCurrentIndex(2);
-        rdpUi.kcfg_SoundSystem->setEnabled(false);
-        break;
-    default:
-        break;
-    }
-}
-
-void RdpHostPreferences::browseMedia()
-{
-    QString shareDir = QFileDialog::getExistingDirectory(rdpUi.browseMediaButton, i18n("Browse to media share path"), rdpUi.kcfg_ShareMedia->text());
-    if (!shareDir.isNull()) {
-        rdpUi.kcfg_ShareMedia->setText(shareDir);
-    }
 }
 
 void RdpHostPreferences::acceptConfig()
@@ -190,33 +147,25 @@ void RdpHostPreferences::acceptConfig()
 
     setHeight(rdpUi.kcfg_Height->value());
     setWidth(rdpUi.kcfg_Width->value());
-    setResolution(rdpUi.kcfg_Resolution->currentIndex());
+    setResolution(Resolution(rdpUi.kcfg_Resolution->currentIndex()));
     setColorDepth(rdpUi.kcfg_ColorDepth->currentIndex());
     setKeyboardLayout(int2keymap(rdpUi.kcfg_KeyboardLayout->currentIndex()));
-    setSound(rdpUi.kcfg_Sound->currentIndex());
-    setSoundSystem(rdpUi.kcfg_SoundSystem->currentIndex());
-    setConsole(rdpUi.kcfg_Console->isChecked());
-    setExtraOptions(rdpUi.kcfg_ExtraOptions->text());
-    setRemoteFX(rdpUi.kcfg_RemoteFX->isChecked());
-    setPerformance(rdpUi.kcfg_Performance->currentIndex());
-    setShareMedia(rdpUi.kcfg_ShareMedia->text());
+    setSound(Sound(rdpUi.kcfg_Sound->currentIndex()));
 }
 
-void RdpHostPreferences::setResolution(int resolution)
+RdpHostPreferences::Resolution RdpHostPreferences::resolution() const
 {
-    if (resolution >= 0)
-        m_configGroup.writeEntry("resolution", resolution);
+    return Resolution(m_configGroup.readEntry("resolution", Settings::resolution()));
 }
 
-int RdpHostPreferences::resolution() const
+void RdpHostPreferences::setResolution(Resolution resolution)
 {
-    return m_configGroup.readEntry("resolution", Settings::resolution());
+    m_configGroup.writeEntry("resolution", int(resolution));
 }
 
 void RdpHostPreferences::setColorDepth(int colorDepth)
 {
-    if (colorDepth >= 0)
-        m_configGroup.writeEntry("colorDepth", colorDepth);
+    m_configGroup.writeEntry("colorDepth", colorDepth);
 }
 
 int RdpHostPreferences::colorDepth() const
@@ -235,26 +184,14 @@ QString RdpHostPreferences::keyboardLayout() const
     return int2keymap(m_configGroup.readEntry("keyboardLayout", Settings::keyboardLayout()));
 }
 
-void RdpHostPreferences::setSound(int sound)
+void RdpHostPreferences::setSound(Sound sound)
 {
-    if (sound >= 0)
-        m_configGroup.writeEntry("sound", sound);
+    m_configGroup.writeEntry("sound", int(sound));
 }
 
-int RdpHostPreferences::sound() const
+RdpHostPreferences::Sound RdpHostPreferences::sound() const
 {
-    return m_configGroup.readEntry("sound", Settings::sound());
-}
-
-void RdpHostPreferences::setSoundSystem(int sound)
-{
-    if (sound >= 0)
-        m_configGroup.writeEntry("soundSystem", sound);
-}
-
-int RdpHostPreferences::soundSystem() const
-{
-    return m_configGroup.readEntry("soundSystem", Settings::soundSystem());
+    return Sound(m_configGroup.readEntry("sound", Settings::sound()));
 }
 
 void RdpHostPreferences::setConsole(bool console)
@@ -265,27 +202,6 @@ void RdpHostPreferences::setConsole(bool console)
 bool RdpHostPreferences::console() const
 {
     return m_configGroup.readEntry("console", Settings::console());
-}
-
-void RdpHostPreferences::setExtraOptions(const QString &extraOptions)
-{
-    if (!extraOptions.isNull())
-        m_configGroup.writeEntry("extraOptions", extraOptions);
-}
-
-QString RdpHostPreferences::extraOptions() const
-{
-    return m_configGroup.readEntry("extraOptions", Settings::extraOptions());
-}
-
-void RdpHostPreferences::setRemoteFX(bool remoteFX)
-{
-    m_configGroup.writeEntry("remoteFX", remoteFX);
-}
-
-bool RdpHostPreferences::remoteFX() const
-{
-    return m_configGroup.readEntry("remoteFX", Settings::remoteFX());
 }
 
 void RdpHostPreferences::setPerformance(int performance)

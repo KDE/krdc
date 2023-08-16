@@ -30,12 +30,10 @@ RdpPreferences::RdpPreferences(QObject *parent)
     // that important because you will not change this configuration each day...
     // see rdp/rdphostpreferences.cpp
     rdpUi.kcfg_Resolution->hide();
-    rdpUi.resolutionDummyLabel->hide();
     rdpUi.kcfg_Height->setEnabled(true);
     rdpUi.kcfg_Width->setEnabled(true);
     rdpUi.heightLabel->setEnabled(true);
     rdpUi.widthLabel->setEnabled(true);
-    rdpUi.browseMediaButton->hide();
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     addConfig(Settings::self(), this);

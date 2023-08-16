@@ -20,8 +20,6 @@ RdpViewFactory::RdpViewFactory(QObject *parent, const QVariantList &args)
     KLocalizedString::setApplicationDomain("krdc");
 
     m_connectToolTipString = i18n("Connect to a Windows Remote Desktop (RDP)");
-
-    QMetaObject::invokeMethod(this, "checkFreerdpAvailability", Qt::DirectConnection);
 }
 
 RdpViewFactory::~RdpViewFactory()
@@ -62,14 +60,6 @@ QString RdpViewFactory::connectToolTipText() const
 {
     return i18n("<html>Enter the address here. Port is optional.<br />"
                 "<i>Example: rdpserver:3389 (host:port)</i></html>");
-}
-
-void RdpViewFactory::checkFreerdpAvailability()
-{
-    if (QStandardPaths::findExecutable(QStringLiteral("xfreerdp")).isEmpty()) {
-        m_connectToolTipString += QLatin1Char('\n') + i18n("The application \"xfreerdp\" cannot be found on your system; make sure it is properly installed "
-                                              "if you need RDP support.");
-    }
 }
 
 #include "rdpviewfactory.moc"

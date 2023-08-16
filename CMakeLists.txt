@@ -39,6 +39,7 @@ find_package(KF${QT_MAJOR_VERSION} ${KF_MIN_VERSION} REQUIRED COMPONENTS
     WindowSystem
     NotifyConfig
     I18n
+    KIO
 )
 
 if (QT_MAJOR_VERSION STREQUAL "6")
@@ -89,6 +90,8 @@ ecm_set_disabled_deprecation_versions(QT 5.15.2
     )
 
 
+set(CMAKE_CXX_STANDARD 20)
+
 add_subdirectory(core)
 
 if(WITH_VNC)
@@ -111,12 +114,26 @@ if(WITH_VNC)
 endif()
 
 if(WITH_RDP)
-    find_package(xfreerdp)
-    set_package_properties(xfreerdp PROPERTIES
+    find_package(FreeRDP 2.10)
+    set_package_properties(FreeRDP PROPERTIES
         DESCRIPTION "A free Remote Desktop Protocol (RDP) Implementation"
         URL "https://www.freerdp.com/"
-        PURPOSE "The xfreerdp binary is needed for RDP support in KRDC (at runtime)"
-        TYPE RUNTIME
+        PURPOSE "FreeRDP provides RDP support"
+        TYPE REQUIRED
+    )
+    find_package(WinPR)
+    set_package_properties(WinPR PROPERTIES
+        DESCRIPTION "Windows Portable Runtime"
+        URL "https://www.freerdp.com/"
+        PURPOSE "Runtime used by FreeRDP"
+        TYPE REQUIRED
+    )
+    find_package(FreeRDP-Client 2.10)
+    set_package_properties(FreeRDP-Client PROPERTIES
+        DESCRIPTION "A free Remote Desktop Protocol (RDP) Implementation, Client libraries"
+        URL "https://www.freerdp.com/"
+        PURPOSE "FreeRDP provides RDP support"
+        TYPE REQUIRED
     )
     add_subdirectory(rdp)
 endif()
@@ -162,6 +179,7 @@ ecm_qt_declare_logging_category(krdc
     CATEGORY_NAME KRDC
     DESCRIPTION "KRDC"
     EXPORT KRDC
+    DEFAULT_SEVERITY Debug
 )
 
 target_link_libraries(krdc

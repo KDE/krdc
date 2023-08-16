@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>484</width>
-    <height>452</height>
+    <width>488</width>
+    <height>362</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -20,17 +20,33 @@
       <item row="0" column="0">
        <layout class="QVBoxLayout">
         <item>
-         <widget class="QLabel" name="resolutionLabel">
-          <property name="text">
-           <string>Desktop &amp;resolution:</string>
+         <widget class="QCheckBox" name="kcfg_ScaleToSize">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
           </property>
-          <property name="buddy">
-           <cstring>kcfg_Resolution</cstring>
+          <property name="text">
+           <string>Scale to Size:</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="resolutionDummyLabel"/>
+         <spacer name="spacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
         </item>
        </layout>
       </item>
@@ -38,6 +54,12 @@
        <layout class="QVBoxLayout">
         <item>
          <widget class="KComboBox" name="kcfg_Resolution">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="minimumSize">
            <size>
             <width>280</width>
@@ -48,31 +70,21 @@
            <string>Here you can specify the resolution of the remote desktop. This resolution determines the size of the desktop that will be presented to you.</string>
           </property>
           <property name="currentIndex">
-           <number>1</number>
+           <number>4</number>
           </property>
           <item>
            <property name="text">
-            <string>Minimal (640x480)</string>
+            <string>Small (1280x720)</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>Small (800x600)</string>
+            <string>Medium (1600x900)</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>Normal (1024x768)</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Large (1280x1024)</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Very Large (1600x1200)</string>
+            <string>Large (1920x1080)</string>
            </property>
           </item>
           <item>
@@ -82,12 +94,12 @@
           </item>
           <item>
            <property name="text">
-            <string>Custom Resolution (...)</string>
+            <string>Current Window Size</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>Current KRDC Size</string>
+            <string>Custom Resolution (...)</string>
            </property>
           </item>
          </widget>
@@ -162,7 +174,7 @@
         </item>
        </layout>
       </item>
-      <item row="1" column="0">
+      <item row="3" column="0">
        <widget class="QLabel" name="colorDepthLabel">
         <property name="text">
          <string>Color &amp;depth:</string>
@@ -172,8 +184,14 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="1">
+      <item row="3" column="1">
        <widget class="KComboBox" name="kcfg_ColorDepth">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="minimumSize">
          <size>
           <width>280</width>
@@ -182,12 +200,12 @@
         </property>
         <item>
          <property name="text">
-          <string>Low Color (8 Bit)</string>
+          <string>Use Best Available</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>High Color (16 Bit)</string>
+          <string>True Color with Alpha (32 Bit)</string>
          </property>
         </item>
         <item>
@@ -197,12 +215,17 @@
         </item>
         <item>
          <property name="text">
-          <string>True Color with Alpha (32 Bit)</string>
+          <string>High Color (16 Bit)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Low Color (8 Bit)</string>
          </property>
         </item>
        </widget>
       </item>
-      <item row="2" column="0">
+      <item row="4" column="0">
        <widget class="QLabel" name="layoutLabel">
         <property name="text">
          <string>&amp;Keyboard layout:</string>
@@ -212,8 +235,14 @@
         </property>
        </widget>
       </item>
-      <item row="2" column="1">
+      <item row="4" column="1">
        <widget class="KComboBox" name="kcfg_KeyboardLayout">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="minimumSize">
          <size>
           <width>280</width>
@@ -413,86 +442,24 @@
         </item>
        </widget>
       </item>
-      <item row="3" column="0">
-       <layout class="QHBoxLayout">
-        <item>
-        <widget class="QLabel" name="soundLabel">
-         <property name="text">
-          <string comment="label for soundsettings in preferences dialog">Sound:</string>
-         </property>
-         <property name="buddy">
-          <cstring>kcfg_Sound</cstring>
-         </property>
-        </widget>
-        </item>
-       </layout>
-      </item>
-      <item row="3" column="1">
-       <layout class="QHBoxLayout">
-        <item>
-        <widget class="KComboBox" name="kcfg_Sound">
-         <property name="minimumSize">
-          <size>
-           <width>280</width>
-           <height>0</height>
-          </size>
-         </property>
-         <item>
-          <property name="text">
-           <string>On This Computer</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>On Remote Computer</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Disable Sound</string>
-          </property>
-         </item>
-        </widget>
-        </item>
-        <item>
-        <widget class="KComboBox" name="kcfg_SoundSystem">
-         <property name="minimumSize">
-          <size>
-           <width>100</width>
-           <height>0</height>
-          </size>
-         </property>
-         <item>
-          <property name="text">
-           <string>ALSA</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>PulseAudio</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>None</string>
-          </property>
-         </item>
-        </widget>
-        </item>
-       </layout>
-      </item>
-      <item row="4" column="0">
-       <widget class="QLabel" name="performanceLabel">
+      <item row="5" column="0">
+       <widget class="QLabel" name="soundLabel">
         <property name="text">
-         <string comment="label for performance settings in preferences dialog">Performance:</string>
+         <string comment="label for soundsettings in preferences dialog">Sound:</string>
         </property>
         <property name="buddy">
-         <cstring>kcfg_Performance</cstring>
+         <cstring>kcfg_Sound</cstring>
         </property>
        </widget>
       </item>
-      <item row="4" column="1">
-       <widget class="KComboBox" name="kcfg_Performance">
+      <item row="5" column="1">
+       <widget class="KComboBox" name="kcfg_Sound">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="minimumSize">
          <size>
           <width>280</width>
@@ -501,39 +468,19 @@
         </property>
         <item>
          <property name="text">
-          <string>Modem</string>
+          <string>On This Computer</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>Broadband</string>
+          <string>On Remote Computer</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>LAN</string>
+          <string>Disable Sound</string>
          </property>
         </item>
-       </widget>
-      </item>
-      <item row="5" column="0">
-       <widget class="QLabel" name="remoteFXLabel">
-        <property name="text">
-         <string>RemoteFX:</string>
-        </property>
-        <property name="buddy">
-         <cstring>kcfg_RemoteFX</cstring>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="1">
-       <widget class="QCheckBox" name="kcfg_RemoteFX">
-        <property name="text">
-         <string>Enhanced visual experience</string>
-        </property>
-        <property name="whatsThis">
-         <string>RemoteFX covers a set of technologies that enhance visual experience of the Remote Desktop Protocol.</string>
-        </property>
        </widget>
       </item>
       <item row="6" column="0">
@@ -541,127 +488,64 @@
         <property name="text">
          <string>Share Media:</string>
         </property>
-        <property name="buddy">
-         <cstring>kcfg_ShareMedia</cstring>
-        </property>
        </widget>
       </item>
       <item row="6" column="1">
-       <layout class="QHBoxLayout" name="mediaLayout">
-        <item>
-         <widget class="KLineEdit" name="kcfg_ShareMedia">
-          <property name="minimumSize">
-           <size>
-            <width>280</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="whatsThis">
-           <string>Share a local media directory with the remote host.</string>
-          </property>
-          <property name="showClearButton" stdset="0">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="browseMediaButton">
-          <property name="text">
-           <string/>
-          </property>
-          <property name="icon">
-           <iconset theme="folder"/>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item>
-    <widget class="QGroupBox" name="expertGroupBox">
-     <property name="title">
-      <string>Expert Options</string>
-     </property>
-     <layout class="QFormLayout" name="formLayout">
-      <item row="0" column="0">
-       <widget class="QLabel" name="consoleLabel">
-        <property name="text">
-         <string>Console login:</string>
+       <widget class="KUrlRequester" name="shareMediaRequester">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
         </property>
-        <property name="buddy">
-         <cstring>kcfg_Console</cstring>
+        <property name="mode">
+         <set>KFile::Directory|KFile::ExistingOnly|KFile::LocalOnly</set>
+        </property>
+        <property name="acceptMode">
+         <enum>QFileDialog::AcceptOpen</enum>
         </property>
        </widget>
       </item>
-      <item row="0" column="1">
-       <widget class="QCheckBox" name="kcfg_Console">
-        <property name="text">
-         <string>Attach to Windows Server console</string>
+      <item row="2" column="1">
+       <widget class="KComboBox" name="kcfg_Acceleration">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
         </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="extraOptionsLabel">
-        <property name="text">
-         <string>Extra options:</string>
-        </property>
-        <property name="buddy">
-         <cstring>kcfg_ExtraOptions</cstring>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="KLineEdit" name="kcfg_ExtraOptions">
         <property name="minimumSize">
          <size>
           <width>280</width>
           <height>0</height>
          </size>
         </property>
-        <property name="whatsThis">
-         <string>Here you can enter additional xfreerdp (FreeRDP) options.</string>
-        </property>
-        <property name="showClearButton" stdset="0">
-         <bool>true</bool>
-        </property>
+        <item>
+         <property name="text">
+          <string>Use Best Available</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Force H.264</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Force RemoteFX</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Disable All Acceleration</string>
+         </property>
+        </item>
        </widget>
       </item>
-     </layout>
-    </widget>
-   </item>
-   <item>
-    <widget class="QGroupBox" name="loginGroupBox">
-     <property name="title">
-      <string>Login</string>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout">
-      <item>
-       <layout class="QFormLayout" name="formLayout_3">
-        <item row="1" column="0">
-         <widget class="QLabel" name="defaultUserLabel">
-          <property name="text">
-           <string>Default user name:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1">
-         <widget class="KLineEdit" name="kcfg_DefaultRdpUserName">
-          <property name="placeholderText">
-           <string>No default user name</string>
-          </property>
-          <property name="showClearButton" stdset="0">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="kcfg_RecognizeLdapLogins">
+      <item row="2" column="0">
+       <widget class="QLabel" name="accelerationLabel">
         <property name="text">
-         <string>Automatically recognize &quot;LDAP&quot;-Logins and share passwords</string>
+         <string>Acceleration:</string>
         </property>
        </widget>
       </item>
@@ -690,9 +574,9 @@
    <header>kcombobox.h</header>
   </customwidget>
   <customwidget>
-   <class>KLineEdit</class>
-   <extends>QLineEdit</extends>
-   <header>klineedit.h</header>
+   <class>KUrlRequester</class>
+   <extends>QWidget</extends>
+   <header>kurlrequester.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>
@@ -701,15 +585,6 @@
   <tabstop>kcfg_Height</tabstop>
   <tabstop>kcfg_ColorDepth</tabstop>
   <tabstop>kcfg_KeyboardLayout</tabstop>
-  <tabstop>kcfg_Sound</tabstop>
-  <tabstop>kcfg_SoundSystem</tabstop>
-  <tabstop>kcfg_Performance</tabstop>
-  <tabstop>kcfg_RemoteFX</tabstop>
-  <tabstop>kcfg_ShareMedia</tabstop>
-  <tabstop>kcfg_Console</tabstop>
-  <tabstop>kcfg_ExtraOptions</tabstop>
-  <tabstop>kcfg_DefaultRdpUserName</tabstop>
-  <tabstop>kcfg_RecognizeLdapLogins</tabstop>
  </tabstops>
  <resources/>
  <connections/>
