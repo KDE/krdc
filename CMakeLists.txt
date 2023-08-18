@@ -41,6 +41,10 @@ find_package(KF${QT_MAJOR_VERSION} ${KF_MIN_VERSION} REQUIRED COMPONENTS
     I18n
 )
 
+if (QT_MAJOR_VERSION STREQUAL "6")
+    find_package(KF6StatusNotifierItem ${KF_MIN_VERSION} REQUIRED)
+endif()
+
 find_package(KF${QT_MAJOR_VERSION} ${KF_MIN_VERSION} OPTIONAL_COMPONENTS Activities)
 set_package_properties(KF${QT_MAJOR_VERSION}Activities PROPERTIES DESCRIPTION "KActivities libraries"
                        URL "https://www.kde.org"
@@ -174,6 +178,10 @@ target_link_libraries(krdc
     KF${QT_MAJOR_VERSION}::Notifications
     krdccore
 )
+
+if (QT_MAJOR_VERSION STREQUAL "6")
+    target_link_libraries(krdc KF6::StatusNotifierItem)
+endif()
 
 if (KF${QT_MAJOR_VERSION}Activities_FOUND)
     target_link_libraries(krdc KF${QT_MAJOR_VERSION}::Activities)
