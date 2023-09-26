@@ -16,6 +16,7 @@
 #include <freerdp/freerdp.h>
 
 class RdpSession;
+class RdpView;
 
 struct RdpContext {
     rdpContext _c;
@@ -57,7 +58,7 @@ public:
         AcceptPermanently,
     };
 
-    RdpSession();
+    RdpSession(RdpView *view);
     ~RdpSession() override;
 
     /**
@@ -117,6 +118,8 @@ private:
     bool onResizeDisplay();
 
     void run();
+
+    RdpView *m_view;
 
     freerdp *m_freerdp = nullptr;
     RdpContext *m_context = nullptr;

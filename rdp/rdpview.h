@@ -49,6 +49,8 @@ public:
 
     void switchFullscreen(bool on) override;
 
+    void savePassword(const QString &password);
+
 protected:
     void paintEvent(QPaintEvent *event) override;
 

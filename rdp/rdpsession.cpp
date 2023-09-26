@@ -31,6 +31,8 @@
 #include <freerdp/locale/keyboard.h>
 #endif
 
+#include "rdpview.h"
+
 #include "krdc_debug.h"
 
 BOOL preConnect(freerdp *rdp)
@@ -182,8 +184,9 @@ QString Certificate::toString() const
                  host, port, commonName, subject, issuer, fingerprint);
 }
 
-RdpSession::RdpSession()
+RdpSession::RdpSession(RdpView *view)
     : QObject(nullptr)
+    , m_view(view)
 {
 }
 
@@ -454,13 +457,15 @@ void RdpSession::onPostDisconnect()
 
 bool RdpSession::onAuthenticate(char **username, char **password, char **domain)
 {
+    Q_UNUSED(domain);
+
     std::unique_ptr<KPasswordDialog> dialog;
     bool hasUsername = qstrlen(*username) != 0;
     if (hasUsername) {
         dialog = std::make_unique<KPasswordDialog>(nullptr, KPasswordDialog::ShowKeepPassword);
         dialog->setPrompt(i18nc("@label", "Access to this system requires a password."));
     } else {
-        dialog = std::make_unique<KPasswordDialog>(nullptr, KPasswordDialog::ShowUsernameLine | KPasswordDialog::ShowDomainLine | KPasswordDialog::ShowKeepPassword);
+        dialog = std::make_unique<KPasswordDialog>(nullptr, KPasswordDialog::ShowUsernameLine | KPasswordDialog::ShowKeepPassword);
         dialog->setPrompt(i18nc("@label", "Access to this system requires a username and password."));
     }
 
@@ -472,10 +477,10 @@ bool RdpSession::onAuthenticate(char **username, char **password, char **domain)
 
     if (!hasUsername) {
         *username = qstrdup(dialog->username().toLocal8Bit().data());
+    }
 
-        if (!dialog->domain().isEmpty()) {
-            *domain = qstrdup(dialog->domain().toLocal8Bit().data());
-        }
+    if (dialog->keepPassword()) {
+        m_view->savePassword(dialog->password());
     }
 
     return true;

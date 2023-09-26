@@ -40,6 +40,14 @@ RdpView::RdpView(QWidget *parent,
     m_host = url.host();
     m_port = url.port();
 
+    if (m_user.isEmpty() && !m_url.userName().isEmpty()) {
+        m_user = m_url.userName();
+    }
+
+    if (m_password.isEmpty() && !m_url.password().isEmpty()) {
+        m_password = m_url.password();
+    }
+
     if (m_port <= 0) {
         m_port = TCP_PORT_RDP;
     }
@@ -87,11 +95,16 @@ bool RdpView::isQuitting()
 
 bool RdpView::start()
 {
-    m_session = std::make_unique<RdpSession>();
+    m_session = std::make_unique<RdpSession>(this);
     m_session->setHost(m_host);
     m_session->setPort(m_port);
     m_session->setUser(m_user);
-    m_session->setPassword(m_password);
+
+    if (m_password.isEmpty()) {
+        m_session->setPassword(readWalletPassword());
+    } else {
+        m_session->setPassword(m_password);
+    }
 
     connect(m_session.get(), &RdpSession::sizeChanged, this, [this]() {
         resize(m_session->size());
@@ -150,6 +163,11 @@ void RdpView::setGrabAllKeys(bool grabAllKeys)
     } else {
         clearFocus();
     }
+}
+
+void RdpView::savePassword(const QString& password)
+{
+    saveWalletPassword(password);
 }
 
 void RdpView::paintEvent(QPaintEvent *event)
