@@ -343,7 +343,6 @@ bool RdpSession::sendEvent(QEvent *event, QWidget *source)
     switch(event->type()) {
     case QEvent::KeyPress:
     case QEvent::KeyRelease: {
-        qDebug() << "send key event";
         auto keyEvent = static_cast<QKeyEvent *>(event);
         auto code = freerdp_keyboard_get_rdp_scancode_from_x11_keycode(keyEvent->nativeScanCode());
         freerdp_input_send_keyboard_event_ex(input, keyEvent->type() == QEvent::KeyPress, code);
@@ -360,12 +359,8 @@ bool RdpSession::sendEvent(QEvent *event, QWidget *source)
         auto y = (position.y() / sourceSize.height()) * m_size.height();
 
 
+        bool extendedEvent = false;
         UINT16 flags = 0;
-        if (mouseEvent->type() == QEvent::MouseButtonPress) {
-            flags |= PTR_FLAGS_DOWN;
-        } else if (mouseEvent->type() == QEvent::MouseMove) {
-            flags |= PTR_FLAGS_MOVE;
-        }
 
         switch (mouseEvent->button()) {
         case Qt::LeftButton:
@@ -377,12 +372,67 @@ bool RdpSession::sendEvent(QEvent *event, QWidget *source)
         case Qt::MiddleButton:
             flags |= PTR_FLAGS_BUTTON3;
             break;
+        case Qt::BackButton:
+            flags |= PTR_XFLAGS_BUTTON1;
+            extendedEvent = true;
+        case Qt::ForwardButton:
+            flags |= PTR_XFLAGS_BUTTON2;
+            extendedEvent = true;
         default:
             break;
         }
 
-        freerdp_input_send_mouse_event(input, flags, uint16_t(x), uint16_t(y));
+        if (mouseEvent->type() == QEvent::MouseButtonPress) {
+            if (extendedEvent) {
+                flags |= PTR_XFLAGS_DOWN;
+            } else {
+                flags |= PTR_FLAGS_DOWN;
+            }
+        } else if (mouseEvent->type() == QEvent::MouseMove) {
+            flags |= PTR_FLAGS_MOVE;
+        }
+
+        if (extendedEvent) {
+            freerdp_input_send_extended_mouse_event(input, flags, uint16_t(x), uint16_t(y));
+        } else {
+            freerdp_input_send_mouse_event(input, flags, uint16_t(x), uint16_t(y));
+        }
+
         return true;
+    }
+    case QEvent::Wheel: {
+        auto wheelEvent = static_cast<QWheelEvent *>(event);
+        auto delta = wheelEvent->angleDelta();
+
+        uint16_t flags = 0;
+        uint16_t value = 0;
+        if (delta.y() != 0) {
+            value = std::clamp(std::abs(delta.y()), 0, 0xFF);
+            flags |= PTR_FLAGS_WHEEL;
+            if (wheelEvent->angleDelta().y() < 0) {
+                flags |= PTR_FLAGS_WHEEL_NEGATIVE;
+                flags = (flags & 0xFF00) | (0x100 - value);
+            } else {
+                flags |= value;
+            }
+        } else if (wheelEvent->angleDelta().x() != 0) {
+            value = std::clamp(std::abs(delta.x()), 0, 0xFF);
+            flags |= PTR_FLAGS_HWHEEL;
+            if (wheelEvent->angleDelta().x() < 0) {
+                flags |= PTR_FLAGS_WHEEL_NEGATIVE;
+                flags = (flags & 0xFF00) | (0x100 - value);
+            } else {
+                flags |= value;
+            }
+        }
+
+        auto position = wheelEvent->position();
+        auto sourceSize = QSizeF{source->size()};
+
+        auto x = (position.x() / sourceSize.width()) * m_size.width();
+        auto y = (position.y() / sourceSize.height()) * m_size.height();
+
+        freerdp_input_send_mouse_event(input, flags, uint16_t(x), uint16_t(y));
     }
     default:
         break;

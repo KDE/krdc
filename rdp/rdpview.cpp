@@ -190,26 +190,37 @@ void RdpView::paintEvent(QPaintEvent *event)
 void RdpView::keyPressEvent(QKeyEvent *event)
 {
     m_session->sendEvent(event, this);
+    event->accept();
 }
 
 void RdpView::keyReleaseEvent(QKeyEvent *event)
 {
     m_session->sendEvent(event, this);
+    event->accept();
 }
 
 void RdpView::mousePressEvent(QMouseEvent *event)
 {
     m_session->sendEvent(event, this);
+    event->accept();
 }
 
 void RdpView::mouseReleaseEvent(QMouseEvent *event)
 {
     m_session->sendEvent(event, this);
+    event->accept();
 }
 
 void RdpView::mouseMoveEvent(QMouseEvent *event)
 {
     m_session->sendEvent(event, this);
+    event->accept();
+}
+
+void RdpView::wheelEvent(QWheelEvent* event)
+{
+    m_session->sendEvent(event, this);
+    event->accept();
 }
 
 void RdpView::onRectangleUpdated(const QRect &rect)

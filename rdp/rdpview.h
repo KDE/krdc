@@ -61,6 +61,8 @@ protected:
     void mouseReleaseEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;
 
+    void wheelEvent(QWheelEvent * event) override;
+
 private:
     void onRectangleUpdated(const QRect &rect);
 
