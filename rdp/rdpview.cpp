@@ -55,8 +55,6 @@ RdpView::RdpView(QWidget *parent,
     setMouseTracking(true);
 
     m_hostPreferences = std::make_unique<RdpHostPreferences>(configGroup);
-
-    resize(1920, 1080);
 }
 
 RdpView::~RdpView()
@@ -150,8 +148,8 @@ void RdpView::switchFullscreen(bool on)
 
 QPixmap RdpView::takeScreenshot()
 {
-    if (!m_pendingData.isNull()) {
-        return QPixmap::fromImage(m_pendingData);
+    if (!m_session->videoBuffer()->isNull()) {
+        return QPixmap::fromImage(*m_session->videoBuffer());
     }
     return QPixmap{};
 }
