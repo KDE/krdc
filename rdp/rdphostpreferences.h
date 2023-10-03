@@ -1,4 +1,4 @@
-/*
+                /*
     SPDX-FileCopyrightText: 2007-2012 Urs Wolfer <uwolfer@kde.org>
     SPDX-FileCopyrightText: 2012 AceLan Kao <acelan@acelan.idv.tw>
 
@@ -40,14 +40,22 @@ public:
         Disabled,
     };
 
+    enum class ColorDepth {
+        Auto,
+        Depth32,
+        Depth24,
+        Depth16,
+        Depth8,
+    };
+
     explicit RdpHostPreferences(KConfigGroup configGroup, QObject *parent = nullptr);
     ~RdpHostPreferences() override;
 
     Resolution resolution() const;
     void setResolution(Resolution resolution);
 
-    int colorDepth() const;
-    void setColorDepth(int colorDepth);
+    ColorDepth colorDepth() const;
+    void setColorDepth(ColorDepth colorDepth);
 
     QString keyboardLayout() const;
     void setKeyboardLayout(const QString &keyboardLayout);
@@ -58,11 +66,6 @@ public:
     Acceleration acceleration() const;
     void setAcceleration(Acceleration acceleration);
 
-    void setConsole(bool console);
-    bool console() const;
-    void setPerformance(int performance);
-    int performance() const;
-
     void setShareMedia(const QString &shareMedia);
     QString shareMedia() const;
 
@@ -72,6 +75,7 @@ protected:
 
 private:
     void updateWidthHeight(Resolution resolution);
+    void updateColorDepth(Acceleration acceleration);
 
     Ui::RdpPreferences rdpUi;
 };

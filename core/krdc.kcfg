@@ -80,43 +80,31 @@
   </group>
   <group name="RDP">
     <entry name="Width" type="Int">
-      <default>800</default>
+      <default>1920</default>
     </entry>
     <entry name="Height" type="Int">
-      <default>600</default>
+      <default>1080</default>
     </entry>
     <entry name="KeyboardLayout" type="Int">
       <default>7</default>
     </entry>
     <entry name="Resolution" type="Int">
-      <default>6</default>
+      <default>3</default>
+    </entry>
+    <entry name="Acceleration" type="Int">
+      <default>0</default>
     </entry>
     <entry name="ColorDepth" type="Int">
-      <default>2</default>
+      <default>0</default>
     </entry>
     <entry name="Sound" type="Int">
       <default>0</default>
-    </entry>
-    <entry name="SoundSystem" type="Int">
-      <default>0</default>
-    </entry>
-    <entry name="Console" type="Bool">
-      <default>false</default>
-    </entry>
-    <entry name="ExtraOptions" type="String">
-      <default></default>
     </entry>
     <entry name="DefaultRdpUserName" type="String">
       <default></default>
     </entry>
     <entry name="RecognizeLdapLogins" type="Bool">
       <default>true</default>
-    </entry>
-    <entry name="RemoteFX" type="Bool">
-      <default>true</default>
-    </entry>
-    <entry name="Performance" type="Int">
-      <default>2</default>
     </entry>
     <entry name="ShareMedia" type="String">
       <default>/media</default>

@@ -86,7 +86,8 @@ QWidget* RdpHostPreferences::createProtocolSpecificConfigPage()
     rdpUi.kcfg_Height->setValue(height());
     rdpUi.kcfg_Width->setValue(width());
     rdpUi.kcfg_Resolution->setCurrentIndex(int(resolution()));
-    rdpUi.kcfg_ColorDepth->setCurrentIndex(colorDepth());
+    rdpUi.kcfg_Acceleration->setCurrentIndex(int(acceleration()));
+    rdpUi.kcfg_ColorDepth->setCurrentIndex(int(colorDepth()));
     rdpUi.kcfg_KeyboardLayout->setCurrentIndex(keymap2int(keyboardLayout()));
 
     // Have to call updateWidthHeight() here
@@ -95,6 +96,13 @@ QWidget* RdpHostPreferences::createProtocolSpecificConfigPage()
 
     connect(rdpUi.kcfg_Resolution, &QComboBox::currentIndexChanged, this, [this](int index) {
         updateWidthHeight(Resolution(index));
+    });
+
+    // Color depth depends on acceleration method, with the better ones only working with 32-bit
+    // color. So ensure we reflect that in the settings UI.
+    updateColorDepth(acceleration());
+    connect(rdpUi.kcfg_Acceleration, &QComboBox::currentIndexChanged, this, [this](int index) {
+        updateColorDepth(Acceleration(index));
     });
 
     return rdpPage;
@@ -148,9 +156,11 @@ void RdpHostPreferences::acceptConfig()
     setHeight(rdpUi.kcfg_Height->value());
     setWidth(rdpUi.kcfg_Width->value());
     setResolution(Resolution(rdpUi.kcfg_Resolution->currentIndex()));
-    setColorDepth(rdpUi.kcfg_ColorDepth->currentIndex());
+    setAcceleration(Acceleration(rdpUi.kcfg_Acceleration->currentIndex()));
+    setColorDepth(ColorDepth(rdpUi.kcfg_ColorDepth->currentIndex()));
     setKeyboardLayout(int2keymap(rdpUi.kcfg_KeyboardLayout->currentIndex()));
     setSound(Sound(rdpUi.kcfg_Sound->currentIndex()));
+    setShareMedia(rdpUi.kcfg_shareMedia->text());
 }
 
 RdpHostPreferences::Resolution RdpHostPreferences::resolution() const
@@ -163,14 +173,24 @@ void RdpHostPreferences::setResolution(Resolution resolution)
     m_configGroup.writeEntry("resolution", int(resolution));
 }
 
-void RdpHostPreferences::setColorDepth(int colorDepth)
+RdpHostPreferences::Acceleration RdpHostPreferences::acceleration() const
 {
-    m_configGroup.writeEntry("colorDepth", colorDepth);
+    return Acceleration(m_configGroup.readEntry("acceleration", Settings::acceleration()));
 }
 
-int RdpHostPreferences::colorDepth() const
+void RdpHostPreferences::setAcceleration(Acceleration acceleration)
 {
-    return m_configGroup.readEntry("colorDepth", Settings::colorDepth());
+    m_configGroup.writeEntry("acceleration", int(acceleration));
+}
+
+void RdpHostPreferences::setColorDepth(ColorDepth colorDepth)
+{
+    m_configGroup.writeEntry("colorDepth", int(colorDepth));
+}
+
+RdpHostPreferences::ColorDepth RdpHostPreferences::colorDepth() const
+{
+    return ColorDepth(m_configGroup.readEntry("colorDepth", Settings::colorDepth()));
 }
 
 void RdpHostPreferences::setKeyboardLayout(const QString &keyboardLayout)
@@ -194,27 +214,6 @@ RdpHostPreferences::Sound RdpHostPreferences::sound() const
     return Sound(m_configGroup.readEntry("sound", Settings::sound()));
 }
 
-void RdpHostPreferences::setConsole(bool console)
-{
-    m_configGroup.writeEntry("console", console);
-}
-
-bool RdpHostPreferences::console() const
-{
-    return m_configGroup.readEntry("console", Settings::console());
-}
-
-void RdpHostPreferences::setPerformance(int performance)
-{
-    if (performance >= 0)
-        m_configGroup.writeEntry("performance", performance);
-}
-
-int RdpHostPreferences::performance() const
-{
-    return m_configGroup.readEntry("performance", Settings::performance());
-}
-
 void RdpHostPreferences::setShareMedia(const QString &shareMedia)
 {
     if (!shareMedia.isNull())
@@ -225,4 +224,19 @@ QString RdpHostPreferences::shareMedia() const
 {
     return m_configGroup.readEntry("shareMedia", Settings::shareMedia());
 }
+
+void RdpHostPreferences::updateColorDepth(Acceleration acceleration)
+{
+    switch (acceleration) {
+    case Acceleration::ForceGraphicsPipeline:
+    case Acceleration::ForceRemoteFx:
+        rdpUi.kcfg_ColorDepth->setEnabled(false);
+        rdpUi.kcfg_ColorDepth->setCurrentIndex(0);
+        break;
+    case Acceleration::Disabled:
+    case Acceleration::Auto:
+        rdpUi.kcfg_ColorDepth->setEnabled(true);
+    }
+}
+
 

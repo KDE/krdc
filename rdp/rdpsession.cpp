@@ -250,6 +250,16 @@ void RdpSession::setPort(int port)
     m_port = port;
 }
 
+RdpHostPreferences *RdpSession::preferences() const
+{
+    return m_preferences;
+}
+
+void RdpSession::setHostPreferences(RdpHostPreferences *preferences)
+{
+    m_preferences = preferences;
+}
+
 QSize RdpSession::size() const
 {
     return m_size;
@@ -292,17 +302,84 @@ bool RdpSession::start()
     settings->Username = qstrdup(m_user.toLocal8Bit().data());
     settings->Password = qstrdup(m_password.toLocal8Bit().data());
 
-    settings->SupportGraphicsPipeline = true;
-    settings->GfxAVC444 = true;
-    settings->GfxAVC444v2 = true;
-    settings->GfxH264 = true;
-    settings->RemoteFxCodec = true;
-    settings->ColorDepth = 32;
+    if (m_preferences->width() > 0 && m_preferences->height() > 0) {
+        settings->DesktopWidth = m_preferences->width();
+        settings->DesktopHeight = m_preferences->height();
+    }
+
+    switch (m_preferences->acceleration()) {
+    case RdpHostPreferences::Acceleration::ForceGraphicsPipeline:
+        settings->SupportGraphicsPipeline = true;
+        settings->GfxAVC444 = true;
+        settings->GfxAVC444v2 = true;
+        settings->GfxH264 = true;
+        settings->RemoteFxCodec = false;
+        settings->ColorDepth = 32;
+        break;
+    case RdpHostPreferences::Acceleration::ForceRemoteFx:
+        settings->SupportGraphicsPipeline = false;
+        settings->GfxAVC444 = false;
+        settings->GfxAVC444v2 = false;
+        settings->GfxH264 = false;
+        settings->RemoteFxCodec = true;
+        settings->ColorDepth = 32;
+        break;
+    case RdpHostPreferences::Acceleration::Disabled:
+        settings->SupportGraphicsPipeline = false;
+        settings->GfxAVC444 = false;
+        settings->GfxAVC444v2 = false;
+        settings->GfxH264 = false;
+        settings->RemoteFxCodec = false;
+        break;
+    case RdpHostPreferences::Acceleration::Auto:
+        settings->SupportGraphicsPipeline = true;
+        settings->GfxAVC444 = true;
+        settings->GfxAVC444v2 = true;
+        settings->GfxH264 = true;
+        settings->RemoteFxCodec = true;
+        settings->ColorDepth = 32;
+        break;
+    }
+
+    switch (m_preferences->colorDepth()) {
+    case RdpHostPreferences::ColorDepth::Auto:
+    case RdpHostPreferences::ColorDepth::Depth32:
+        settings->ColorDepth = 32;
+        break;
+    case RdpHostPreferences::ColorDepth::Depth24:
+        settings->ColorDepth = 24;
+        break;
+    case RdpHostPreferences::ColorDepth::Depth16:
+        settings->ColorDepth = 16;
+        break;
+    case RdpHostPreferences::ColorDepth::Depth8:
+        settings->ColorDepth = 8;
+    }
 
     settings->FastPathOutput = true;
+    settings->FastPathInput = true;
     settings->FrameMarkerCommandEnabled = true;
 
     settings->SupportDynamicChannels = true;
+
+    switch (m_preferences->sound()) {
+    case RdpHostPreferences::Sound::Local:
+        settings->AudioPlayback = true;
+        settings->AudioCapture = true;
+        break;
+    case RdpHostPreferences::Sound::Remote:
+        settings->RemoteConsoleAudio = true;
+        break;
+    case RdpHostPreferences::Sound::Disabled:
+        settings->AudioPlayback = false;
+        settings->AudioCapture = false;
+        break;
+    }
+
+    if (!m_preferences->shareMedia().isEmpty()) {
+        char* params[2] = {strdup("drive"), m_preferences->shareMedia().toLocal8Bit().data()};
+        freerdp_client_add_device_channel(settings, 1, params);
+    }
 
     if (!freerdp_connect(m_freerdp)) {
         qDebug(KRDC) << "Unable to connect";

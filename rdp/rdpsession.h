@@ -17,6 +17,7 @@
 
 class RdpSession;
 class RdpView;
+class RdpHostPreferences;
 
 struct RdpContext {
     rdpContext _c;
@@ -79,6 +80,9 @@ public:
     QString password() const;
     void setPassword(const QString &newPassword);
 
+    RdpHostPreferences *preferences() const;
+    void setHostPreferences(RdpHostPreferences *preferences);
+
     QSize size() const;
     Q_SIGNAL void sizeChanged();
 
@@ -136,4 +140,6 @@ private:
     std::thread m_thread;
 
     QImage m_videoBuffer;
+
+    RdpHostPreferences *m_preferences;
 };

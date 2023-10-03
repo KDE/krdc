@@ -94,6 +94,7 @@ bool RdpView::isQuitting()
 bool RdpView::start()
 {
     m_session = std::make_unique<RdpSession>(this);
+    m_session->setHostPreferences(m_hostPreferences.get());
     m_session->setHost(m_host);
     m_session->setPort(m_port);
     m_session->setUser(m_user);
