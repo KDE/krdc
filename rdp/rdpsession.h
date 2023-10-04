@@ -98,6 +98,8 @@ public:
 
     Q_SIGNAL void rectangleUpdated(const QRect &rectangle);
 
+    Q_SIGNAL void errorMessage(const QString &title, const QString &message);
+
 private:
     friend BOOL preConnect(freerdp*);
     friend BOOL postConnect(freerdp*);
@@ -122,6 +124,8 @@ private:
     bool onResizeDisplay();
 
     void run();
+
+    void emitErrorMessage();
 
     RdpView *m_view;
 

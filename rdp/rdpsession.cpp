@@ -384,7 +384,8 @@ bool RdpSession::start()
     settings->KeyboardLayout = m_preferences->rdpKeyboardLayout();
 
     if (!freerdp_connect(m_freerdp)) {
-        qDebug(KRDC) << "Unable to connect";
+        qWarning(KRDC) << "Unable to connect";
+        emitErrorMessage();
         return false;
     }
 
@@ -725,13 +726,78 @@ void RdpSession::run()
 
         auto status = WaitForMultipleObjects(count, handles, FALSE, INFINITE);
         if (status == WAIT_FAILED) {
+            emitErrorMessage();
             break;
         }
 
         if (freerdp_check_event_handles(rdpC) != TRUE) {
+            emitErrorMessage();
             break;
         }
     }
 
     freerdp_disconnect(m_freerdp);
+}
+
+void RdpSession::emitErrorMessage()
+{
+    auto error = freerdp_get_last_error(m_freerdp->context);
+
+    if (error == FREERDP_ERROR_CONNECT_CANCELLED) {
+        return;
+    }
+
+    auto name = freerdp_get_last_error_name(error);
+    auto description = freerdp_get_last_error_string(error);
+
+    qCWarning(KRDC) << name << description;
+
+    QString title;
+    QString message;
+
+    switch (error) {
+    case FREERDP_ERROR_AUTHENTICATION_FAILED:
+    case FREERDP_ERROR_CONNECT_LOGON_FAILURE:
+    case FREERDP_ERROR_CONNECT_WRONG_PASSWORD:
+        title = i18nc("@title:dialog", "Login Failure");
+        message = i18nc("@label", "Unable to login with the provided credentials. Please double check the user and password.");
+        break;
+    case FREERDP_ERROR_CONNECT_ACCOUNT_LOCKED_OUT:
+    case FREERDP_ERROR_CONNECT_ACCOUNT_EXPIRED:
+    case FREERDP_ERROR_CONNECT_ACCOUNT_DISABLED:
+    case FREERDP_ERROR_SERVER_INSUFFICIENT_PRIVILEGES:
+        title = i18nc("@title:dialog", "Account Problems");
+        message = i18nc("@label", "The provided account is not allowed to log in to this machine. Please contact your system administrator.");
+        break;
+    case FREERDP_ERROR_CONNECT_PASSWORD_EXPIRED:
+    case FREERDP_ERROR_CONNECT_PASSWORD_CERTAINLY_EXPIRED:
+    case FREERDP_ERROR_CONNECT_PASSWORD_MUST_CHANGE:
+        title = i18nc("@title:dialog", "Password Problems");
+        message = i18nc("@label", "Unable to login with the provided password. Please contact your system administrator to change it.");
+        break;
+    case FREERDP_ERROR_CONNECT_FAILED:
+        title = i18nc("@title:dialog", "Connection Lost");
+        message = i18nc("@label", "Lost connection to the server.");
+        break;
+    case FREERDP_ERROR_DNS_ERROR:
+    case FREERDP_ERROR_DNS_NAME_NOT_FOUND:
+        title = i18nc("@title:dialog", "Server not Found");
+        message = i18nc("@label", "Could not find the server.");
+        break;
+    case FREERDP_ERROR_SERVER_DENIED_CONNECTION:
+        title = i18nc("@title:dialog", "Connection Refused");
+        message = i18nc("@label", "The server refused the connection request.");
+        break;
+    case FREERDP_ERROR_TLS_CONNECT_FAILED:
+    case FREERDP_ERROR_CONNECT_TRANSPORT_FAILED:
+        title = i18nc("@title:dialog", "Could not Connect");
+        message = i18nc("@label", "Could not connect to the server.");
+        break;
+    default:
+        title = i18nc("@title:dialog", "Connection Failed");
+        message = i18nc("@label", "An unknown error occurred");
+        break;
+    }
+
+    Q_EMIT errorMessage(title, message);
 }

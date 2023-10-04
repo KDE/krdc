@@ -128,9 +128,18 @@ bool RdpView::start()
             break;
         }
     });
+    connect(m_session.get(), &RdpSession::errorMessage, this, [this](const QString &title, const QString &message) {
+        KMessageBox::error(this, message, title);
+    });
 
     setStatus(RdpView::Connecting);
-    return m_session->start();
+    if (!m_session->start()) {
+
+        Q_EMIT disconnected();
+        return false;
+    }
+
+    return true;
 }
 
 HostPreferences* RdpView::hostPreferences()
