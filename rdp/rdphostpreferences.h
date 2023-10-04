@@ -58,6 +58,7 @@ public:
     void setColorDepth(ColorDepth colorDepth);
 
     QString keyboardLayout() const;
+    int rdpKeyboardLayout() const;
     void setKeyboardLayout(const QString &keyboardLayout);
 
     Sound sound() const;

@@ -381,6 +381,8 @@ bool RdpSession::start()
         freerdp_client_add_device_channel(settings, 1, params);
     }
 
+    settings->KeyboardLayout = m_preferences->rdpKeyboardLayout();
+
     if (!freerdp_connect(m_freerdp)) {
         qDebug(KRDC) << "Unable to connect";
         return false;

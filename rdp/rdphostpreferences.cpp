@@ -13,6 +13,8 @@
 #include <QWindow>
 #include <QGuiApplication>
 
+#include <freerdp/locale/keyboard.h>
+
 static const QStringList keymaps = (QStringList()
     << QStringLiteral("ar")
     << QStringLiteral("cs")
@@ -52,6 +54,46 @@ static const QStringList keymaps = (QStringList()
     << QStringLiteral("th")
     << QStringLiteral("tr")
 );
+
+static const QHash<QString, int> rdpLayouts = {
+    {QStringLiteral("ar"), KBD_ARABIC_101},
+    {QStringLiteral("cs"), KBD_CZECH},
+    {QStringLiteral("da"), KBD_DANISH},
+    {QStringLiteral("de"), KBD_GERMAN},
+    {QStringLiteral("de-ch"), KBD_SWISS_GERMAN},
+    {QStringLiteral("en-dv"), KBD_UNITED_STATES_DVORAK},
+    {QStringLiteral("en-gb"), KBD_UNITED_KINGDOM},
+    {QStringLiteral("en-us"), KBD_UNITED_STATES_INTERNATIONAL},
+    {QStringLiteral("es"), KBD_SPANISH},
+    {QStringLiteral("et"), KBD_ESTONIAN},
+    {QStringLiteral("fi"), KBD_FINNISH},
+    {QStringLiteral("fo"), KBD_DANISH},
+    {QStringLiteral("fr"), KBD_FRENCH},
+    {QStringLiteral("fr-be"), KBD_BELGIAN_FRENCH},
+    {QStringLiteral("fr-ca"), KBD_CANADIAN_FRENCH},
+    {QStringLiteral("fr-ch"), KBD_SWISS_FRENCH},
+    {QStringLiteral("he"), KBD_HEBREW},
+    {QStringLiteral("hr"), KBD_CROATIAN},
+    {QStringLiteral("hu"), KBD_HUNGARIAN},
+    {QStringLiteral("is"), KBD_ICELANDIC},
+    {QStringLiteral("it"), KBD_ITALIAN},
+    {QStringLiteral("ja"), KBD_JAPANESE},
+    {QStringLiteral("ko"), KBD_KOREAN},
+    {QStringLiteral("lt"), KBD_LITHUANIAN_IBM},
+    {QStringLiteral("lv"), KBD_LATVIAN},
+    {QStringLiteral("mk"), KBD_FYRO_MACEDONIAN},
+    {QStringLiteral("nl"), KBD_DUTCH},
+    {QStringLiteral("nl-be"), KBD_BELGIAN_PERIOD},
+    {QStringLiteral("no"), KBD_NORWEGIAN},
+    {QStringLiteral("pl"), KBD_POLISH_PROGRAMMERS},
+    {QStringLiteral("pt"), KBD_PORTUGUESE},
+    {QStringLiteral("pt-br"), KBD_PORTUGUESE_BRAZILIAN_ABNT},
+    {QStringLiteral("ru"), KBD_RUSSIAN},
+    {QStringLiteral("sl"), KBD_SLOVENIAN},
+    {QStringLiteral("sv"), KBD_SWEDISH},
+    {QStringLiteral("th"), KBD_THAI_KEDMANEE},
+    {QStringLiteral("tr"), KBD_TURKISH_Q},
+};
 
 static const int defaultKeymap = 7; // en-us
 
@@ -202,6 +244,12 @@ void RdpHostPreferences::setKeyboardLayout(const QString &keyboardLayout)
 QString RdpHostPreferences::keyboardLayout() const
 {
     return int2keymap(m_configGroup.readEntry("keyboardLayout", Settings::keyboardLayout()));
+}
+
+int RdpHostPreferences::rdpKeyboardLayout() const
+{
+    auto layout = keyboardLayout();
+    return rdpLayouts.value(layout, KBD_UNITED_STATES_INTERNATIONAL);
 }
 
 void RdpHostPreferences::setSound(Sound sound)
