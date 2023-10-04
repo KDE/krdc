@@ -51,6 +51,9 @@ public:
     explicit RdpHostPreferences(KConfigGroup configGroup, QObject *parent = nullptr);
     ~RdpHostPreferences() override;
 
+    bool scaleToSize() const;
+    void setScaleToSize(bool scale);
+
     Resolution resolution() const;
     void setResolution(Resolution resolution);
 

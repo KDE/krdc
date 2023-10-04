@@ -73,11 +73,30 @@ QSize RdpView::framebufferSize()
 
 QSize RdpView::sizeHint() const
 {
-    if (m_session) {
+    if (!m_session) {
+        return QSize{};
+    }
+
+    if (!m_hostPreferences->scaleToSize()) {
         return m_session->size();
     }
 
-    return QSize{};
+    switch (m_hostPreferences->resolution()) {
+        case RdpHostPreferences::Resolution::Small:
+            return QSize{1280, 720};
+        case RdpHostPreferences::Resolution::Medium:
+            return QSize{1600, 900};
+        case RdpHostPreferences::Resolution::Large:
+            return QSize{1920, 1080};
+        case RdpHostPreferences::Resolution::MatchWindow:
+            return parentWidget()->size();
+        case RdpHostPreferences::Resolution::MatchScreen:
+            return window()->windowHandle()->screen()->size();
+        case RdpHostPreferences::Resolution::Custom:
+            return QSize{m_hostPreferences->width(), m_hostPreferences->height()};
+    }
+
+    return parentWidget()->size();
 }
 
 void RdpView::startQuitting()
@@ -106,7 +125,7 @@ bool RdpView::start()
     }
 
     connect(m_session.get(), &RdpSession::sizeChanged, this, [this]() {
-        resize(m_session->size());
+        resize(sizeHint());
         Q_EMIT framebufferSizeChanged(width(), height());
     });
     connect(m_session.get(), &RdpSession::rectangleUpdated, this, &RdpView::onRectangleUpdated);
@@ -173,6 +192,28 @@ void RdpView::setGrabAllKeys(bool grabAllKeys)
     }
 }
 
+bool RdpView::supportsScaling() const
+{
+    return true;
+}
+
+bool RdpView::scaling() const
+{
+    return m_hostPreferences->scaleToSize();
+}
+
+void RdpView::enableScaling(bool scale)
+{
+    m_hostPreferences->setScaleToSize(scale);
+    resize(sizeHint());
+    update();
+}
+
+void RdpView::setScaleFactor(float factor)
+{
+
+}
+
 void RdpView::savePassword(const QString& password)
 {
     saveWalletPassword(password);
@@ -191,7 +232,11 @@ void RdpView::paintEvent(QPaintEvent *event)
 
     auto image = *m_session->videoBuffer();
 
-    painter.drawImage(QPoint{0, 0}, image);
+    if (m_hostPreferences->scaleToSize()) {
+        painter.drawImage(QPoint{0, 0}, image.scaled(sizeHint(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    } else {
+        painter.drawImage(QPoint{0, 0}, image);
+    }
     painter.end();
 }
 

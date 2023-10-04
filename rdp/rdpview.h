@@ -45,6 +45,11 @@ public:
 
     HostPreferences* hostPreferences() override;
 
+    bool supportsScaling() const override;
+    bool scaling() const override;
+    void enableScaling(bool scale) override;
+    void setScaleFactor(float factor) override;
+
     QPixmap takeScreenshot() override;
 
     void switchFullscreen(bool on) override;

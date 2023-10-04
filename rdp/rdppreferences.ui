@@ -6,553 +6,141 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>488</width>
-    <height>362</height>
+    <width>560</width>
+    <height>340</height>
    </rect>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_2">
-   <item>
-    <widget class="QGroupBox" name="connectionGroupBox">
-     <property name="title">
-      <string>Connection</string>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="8" column="0">
+    <widget class="QLabel" name="shareMediaLabel">
+     <property name="text">
+      <string>Share Media:</string>
      </property>
-     <layout class="QFormLayout" name="formLayout_2">
-      <item row="0" column="0">
-       <layout class="QVBoxLayout">
-        <item>
-         <widget class="QCheckBox" name="kcfg_ScaleToSize">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>Scale to Size:</string>
-          </property>
-          <property name="checked">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="spacer">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>40</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-       </layout>
-      </item>
-      <item row="0" column="1">
-       <layout class="QVBoxLayout">
-        <item>
-         <widget class="KComboBox" name="kcfg_Resolution">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>280</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="whatsThis">
-           <string>Here you can specify the resolution of the remote desktop. This resolution determines the size of the desktop that will be presented to you.</string>
-          </property>
-          <property name="currentIndex">
-           <number>4</number>
-          </property>
-          <item>
-           <property name="text">
-            <string>Small (1280x720)</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Medium (1600x900)</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Large (1920x1080)</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Current Screen Resolution</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Current Window Size</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Custom Resolution (...)</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-        <item>
-         <layout class="QHBoxLayout">
-          <item>
-           <widget class="QLabel" name="widthLabel">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="text">
-             <string>&amp;Width:</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-            <property name="buddy">
-             <cstring>kcfg_Width</cstring>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QSpinBox" name="kcfg_Width">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="whatsThis">
-             <string>This is the width of the remote desktop. You can only change this value manually if you select Custom as desktop resolution above.</string>
-            </property>
-            <property name="maximum">
-             <number>9999</number>
-            </property>
-            <property name="value">
-             <number>800</number>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="heightLabel">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="text">
-             <string>H&amp;eight:</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-            <property name="buddy">
-             <cstring>kcfg_Height</cstring>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QSpinBox" name="kcfg_Height">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="whatsThis">
-             <string>This is the height of the remote desktop. You can only change this value manually if you select Custom as desktop resolution above.</string>
-            </property>
-            <property name="maximum">
-             <number>9999</number>
-            </property>
-            <property name="value">
-             <number>600</number>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-       </layout>
-      </item>
-      <item row="3" column="0">
-       <widget class="QLabel" name="colorDepthLabel">
-        <property name="text">
-         <string>Color &amp;depth:</string>
-        </property>
-        <property name="buddy">
-         <cstring>kcfg_ColorDepth</cstring>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1">
-       <widget class="KComboBox" name="kcfg_ColorDepth">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>280</width>
-          <height>0</height>
-         </size>
-        </property>
-        <item>
-         <property name="text">
-          <string>Use Best Available</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>True Color with Alpha (32 Bit)</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>True Color (24 Bit)</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>High Color (16 Bit)</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Low Color (8 Bit)</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-      <item row="4" column="0">
-       <widget class="QLabel" name="layoutLabel">
-        <property name="text">
-         <string>&amp;Keyboard layout:</string>
-        </property>
-        <property name="buddy">
-         <cstring>kcfg_KeyboardLayout</cstring>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="1">
-       <widget class="KComboBox" name="kcfg_KeyboardLayout">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>280</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="whatsThis">
-         <string>Use this to specify your keyboard layout. This layout setting is used to send the correct keyboard codes to the server.</string>
-        </property>
-        <property name="currentIndex">
-         <number>7</number>
-        </property>
-        <item>
-         <property name="text">
-          <string>Arabic (ar)</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Czech (cs)</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Danish (da)</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>German (de)</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Swiss German (de-ch)</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>American Dvorak (en-dv)</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>British English (en-gb)</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>US English (en-us)</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Spanish (es)</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Estonian (et)</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Finnish (fi)</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Faroese (fo)</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>French (fr)</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Belgian (fr-be)</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>French Canadian (fr-ca)</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Swiss French (fr-ch)</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Hebrew (he)</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Croatian (hr)</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Hungarian (hu)</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Icelandic (is)</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Italian (it)</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Japanese (ja)</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Korean (ko)</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Lithuanian (lt)</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Latvian (lv)</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Macedonian (mk)</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Dutch (nl)</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Belgian Dutch (nl-be)</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Norwegian (no)</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Polish (pl)</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Portuguese (pt)</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Brazilian (pt-br)</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Russian (ru)</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Slovenian (sl)</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Swedish (sv)</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Thai (th)</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Turkish (tr)</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-      <item row="5" column="0">
-       <widget class="QLabel" name="soundLabel">
-        <property name="text">
-         <string comment="label for soundsettings in preferences dialog">Sound:</string>
-        </property>
-        <property name="buddy">
-         <cstring>kcfg_Sound</cstring>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="1">
-       <widget class="KComboBox" name="kcfg_Sound">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>280</width>
-          <height>0</height>
-         </size>
-        </property>
-        <item>
-         <property name="text">
-          <string>On This Computer</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>On Remote Computer</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Disable Sound</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-      <item row="6" column="0">
-       <widget class="QLabel" name="shareMediaLabel">
-        <property name="text">
-         <string>Share Media:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="6" column="1">
-       <widget class="KUrlRequester" name="kcfg_shareMedia">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="mode">
-         <set>KFile::Directory|KFile::ExistingOnly|KFile::LocalOnly</set>
-        </property>
-        <property name="acceptMode">
-         <enum>QFileDialog::AcceptOpen</enum>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="KComboBox" name="kcfg_Acceleration">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>280</width>
-          <height>0</height>
-         </size>
-        </property>
-        <item>
-         <property name="text">
-          <string>Use Best Available</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Force H.264</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Force RemoteFX</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Disable All Acceleration</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="accelerationLabel">
-        <property name="text">
-         <string>Acceleration:</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
     </widget>
    </item>
-   <item>
+   <item row="5" column="1">
+    <widget class="KComboBox" name="kcfg_ColorDepth">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>280</width>
+       <height>0</height>
+      </size>
+     </property>
+     <item>
+      <property name="text">
+       <string>Use Best Available</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>True Color with Alpha (32 Bit)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>True Color (24 Bit)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>High Color (16 Bit)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Low Color (8 Bit)</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <layout class="QHBoxLayout">
+     <item>
+      <widget class="QLabel" name="widthLabel">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>&amp;Width:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="buddy">
+        <cstring>kcfg_Width</cstring>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSpinBox" name="kcfg_Width">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="whatsThis">
+        <string>This is the width of the remote desktop. You can only change this value manually if you select Custom as desktop resolution above.</string>
+       </property>
+       <property name="maximum">
+        <number>9999</number>
+       </property>
+       <property name="value">
+        <number>800</number>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="heightLabel">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>H&amp;eight:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="buddy">
+        <cstring>kcfg_Height</cstring>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSpinBox" name="kcfg_Height">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="whatsThis">
+        <string>This is the height of the remote desktop. You can only change this value manually if you select Custom as desktop resolution above.</string>
+       </property>
+       <property name="maximum">
+        <number>9999</number>
+       </property>
+       <property name="value">
+        <number>600</number>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="4" column="0">
+    <widget class="QLabel" name="accelerationLabel">
+     <property name="text">
+      <string>Acceleration:</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="1">
     <spacer>
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -564,6 +152,413 @@
       </size>
      </property>
     </spacer>
+   </item>
+   <item row="5" column="0">
+    <widget class="QLabel" name="colorDepthLabel">
+     <property name="text">
+      <string>Color &amp;depth:</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="buddy">
+      <cstring>kcfg_ColorDepth</cstring>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="resolutionLabel">
+     <property name="text">
+      <string>Resolution</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="0">
+    <widget class="QLabel" name="layoutLabel">
+     <property name="text">
+      <string>&amp;Keyboard layout:</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="buddy">
+      <cstring>kcfg_KeyboardLayout</cstring>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="1">
+    <widget class="KComboBox" name="kcfg_Sound">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>280</width>
+       <height>0</height>
+      </size>
+     </property>
+     <item>
+      <property name="text">
+       <string>On This Computer</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>On Remote Computer</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Disable Sound</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="KComboBox" name="kcfg_Resolution">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>280</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="whatsThis">
+      <string>Here you can specify the resolution of the remote desktop. This resolution determines the size of the desktop that will be presented to you.</string>
+     </property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <item>
+      <property name="text">
+       <string>Small (1280x720)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Medium (1600x900)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Large (1920x1080)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Current Window Size</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Current Screen Resolution</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Custom Resolution (...)</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="4" column="1">
+    <widget class="KComboBox" name="kcfg_Acceleration">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>280</width>
+       <height>0</height>
+      </size>
+     </property>
+     <item>
+      <property name="text">
+       <string>Use Best Available</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Force H.264</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Force RemoteFX</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Disable All Acceleration</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="6" column="1">
+    <widget class="KComboBox" name="kcfg_KeyboardLayout">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>280</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="whatsThis">
+      <string>Use this to specify your keyboard layout. This layout setting is used to send the correct keyboard codes to the server.</string>
+     </property>
+     <property name="currentIndex">
+      <number>7</number>
+     </property>
+     <item>
+      <property name="text">
+       <string>Arabic (ar)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Czech (cs)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Danish (da)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>German (de)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Swiss German (de-ch)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>American Dvorak (en-dv)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>British English (en-gb)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>US English (en-us)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Spanish (es)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Estonian (et)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Finnish (fi)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Faroese (fo)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>French (fr)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Belgian (fr-be)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>French Canadian (fr-ca)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Swiss French (fr-ch)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Hebrew (he)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Croatian (hr)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Hungarian (hu)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Icelandic (is)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Italian (it)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Japanese (ja)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Korean (ko)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Lithuanian (lt)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Latvian (lv)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Macedonian (mk)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Dutch (nl)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Belgian Dutch (nl-be)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Norwegian (no)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Polish (pl)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Portuguese (pt)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Brazilian (pt-br)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Russian (ru)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Slovenian (sl)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Swedish (sv)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Thai (th)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Turkish (tr)</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="QCheckBox" name="kcfg_ScaleToSize">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>Scale window contents to match resolution</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="1">
+    <widget class="KUrlRequester" name="kcfg_ShareMedia">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="mode">
+      <set>KFile::Directory|KFile::ExistingOnly|KFile::LocalOnly</set>
+     </property>
+     <property name="acceptMode">
+      <enum>QFileDialog::AcceptOpen</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="0">
+    <widget class="QLabel" name="soundLabel">
+     <property name="text">
+      <string comment="label for soundsettings in preferences dialog">Sound:</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="buddy">
+      <cstring>kcfg_Sound</cstring>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>
@@ -580,7 +575,6 @@
   </customwidget>
  </customwidgets>
  <tabstops>
-  <tabstop>kcfg_Resolution</tabstop>
   <tabstop>kcfg_Width</tabstop>
   <tabstop>kcfg_Height</tabstop>
   <tabstop>kcfg_ColorDepth</tabstop>

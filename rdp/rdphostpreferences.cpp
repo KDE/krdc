@@ -125,12 +125,14 @@ QWidget* RdpHostPreferences::createProtocolSpecificConfigPage()
     QWidget *rdpPage = new QWidget();
     rdpUi.setupUi(rdpPage);
 
+    rdpUi.kcfg_ScaleToSize->setChecked(scaleToSize());
     rdpUi.kcfg_Height->setValue(height());
     rdpUi.kcfg_Width->setValue(width());
     rdpUi.kcfg_Resolution->setCurrentIndex(int(resolution()));
     rdpUi.kcfg_Acceleration->setCurrentIndex(int(acceleration()));
     rdpUi.kcfg_ColorDepth->setCurrentIndex(int(colorDepth()));
     rdpUi.kcfg_KeyboardLayout->setCurrentIndex(keymap2int(keyboardLayout()));
+    rdpUi.kcfg_ShareMedia->setText(shareMedia());
 
     // Have to call updateWidthHeight() here
     // We leverage the final part of this function to enable/disable kcfg_Height and kcfg_Width
@@ -158,17 +160,22 @@ void RdpHostPreferences::updateWidthHeight(Resolution resolution)
         rdpUi.kcfg_Height->setValue(720);
         break;
     case Resolution::Medium:
-        rdpUi.kcfg_Height->setValue(1600);
-        rdpUi.kcfg_Width->setValue(900);
+        rdpUi.kcfg_Width->setValue(1600);
+        rdpUi.kcfg_Height->setValue(900);
         break;
     case Resolution::Large:
-        rdpUi.kcfg_Height->setValue(1920);
-        rdpUi.kcfg_Width->setValue(1080);
+        rdpUi.kcfg_Width->setValue(1920);
+        rdpUi.kcfg_Height->setValue(1080);
         break;
-    case Resolution::MatchWindow:
-        rdpUi.kcfg_Height->setValue(-1);
-        rdpUi.kcfg_Width->setValue(-1);
+    case Resolution::MatchWindow: {
+        auto *window = qApp->activeWindow();
+        if (window->parentWidget()) {
+            window = window->parentWidget();
+        }
+        rdpUi.kcfg_Width->setValue(window->width());
+        rdpUi.kcfg_Height->setValue(window->height());
         break;
+    }
     case Resolution::MatchScreen: {
         QWindow *window = rdpUi.kcfg_Width->window()->windowHandle();
         QScreen *screen = window ? window->screen() : qGuiApp->primaryScreen();
@@ -195,14 +202,25 @@ void RdpHostPreferences::acceptConfig()
 {
     HostPreferences::acceptConfig();
 
-    setHeight(rdpUi.kcfg_Height->value());
+    setScaleToSize(rdpUi.kcfg_ScaleToSize->isChecked());
     setWidth(rdpUi.kcfg_Width->value());
+    setHeight(rdpUi.kcfg_Height->value());
     setResolution(Resolution(rdpUi.kcfg_Resolution->currentIndex()));
     setAcceleration(Acceleration(rdpUi.kcfg_Acceleration->currentIndex()));
     setColorDepth(ColorDepth(rdpUi.kcfg_ColorDepth->currentIndex()));
     setKeyboardLayout(int2keymap(rdpUi.kcfg_KeyboardLayout->currentIndex()));
     setSound(Sound(rdpUi.kcfg_Sound->currentIndex()));
-    setShareMedia(rdpUi.kcfg_shareMedia->text());
+    setShareMedia(rdpUi.kcfg_ShareMedia->text());
+}
+
+bool RdpHostPreferences::scaleToSize() const
+{
+    return m_configGroup.readEntry("scaleToSize", true);
+}
+
+void RdpHostPreferences::setScaleToSize(bool scale)
+{
+    m_configGroup.writeEntry("scaleToSize", scale);
 }
 
 RdpHostPreferences::Resolution RdpHostPreferences::resolution() const

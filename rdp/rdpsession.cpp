@@ -537,9 +537,6 @@ bool RdpSession::onPreConnect()
     settings->OsMajorType = OSMAJORTYPE_UNIX;
     settings->OsMinorType = OSMINORTYPE_UNSPECIFIED;
 
-    settings->DesktopWidth = 1920;
-    settings->DesktopHeight = 1080;
-
     PubSub_SubscribeChannelConnected(m_freerdp->context->pubSub, channelConnected);
     PubSub_SubscribeChannelDisconnected(m_freerdp->context->pubSub, channelDisconnected);
 
