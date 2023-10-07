@@ -24,7 +24,7 @@ BookmarkManager::BookmarkManager(KActionCollection *collection, QMenu *menu, Mai
 #if QT_VERSION_MAJOR < 6
     m_manager = KBookmarkManager::managerForFile(file, QLatin1String("krdc"));
 #else
-    m_manager = KBookmarkManager::managerForFile(file);
+    m_manager = new KBookmarkManager(file, this);
 #endif
     m_manager->setUpdate(true);
 
