@@ -180,7 +180,7 @@ target_link_libraries(krdc
 )
 
 if (QT_MAJOR_VERSION STREQUAL "6")
-    target_link_libraries(krdc KF6::StatusNotifierItem)
+    target_link_libraries(krdc KF6::StatusNotifierItem KF6::BookmarksWidgets)
 endif()
 
 if (KF${QT_MAJOR_VERSION}Activities_FOUND)
