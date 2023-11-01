@@ -158,6 +158,8 @@ bool RdpView::start()
         return false;
     }
 
+    setFocus();
+
     return true;
 }
 
@@ -181,15 +183,6 @@ QPixmap RdpView::takeScreenshot()
         return QPixmap::fromImage(*m_session->videoBuffer());
     }
     return QPixmap{};
-}
-
-void RdpView::setGrabAllKeys(bool grabAllKeys)
-{
-    if (grabAllKeys) {
-        setFocus();
-    } else {
-        clearFocus();
-    }
 }
 
 bool RdpView::supportsScaling() const
@@ -254,6 +247,10 @@ void RdpView::keyReleaseEvent(QKeyEvent *event)
 
 void RdpView::mousePressEvent(QMouseEvent *event)
 {
+    if (!hasFocus()) {
+        setFocus();
+    }
+
     m_session->sendEvent(event, this);
     event->accept();
 }

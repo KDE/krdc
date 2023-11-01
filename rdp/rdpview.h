@@ -41,7 +41,6 @@ public:
     void startQuitting() override;            // start closing the connection
     bool isQuitting() override;               // are we currently closing the connection?
     bool start() override;                    // open a connection
-    void setGrabAllKeys(bool grabAllKeys) override;
 
     HostPreferences* hostPreferences() override;
 
