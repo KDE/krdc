@@ -438,7 +438,6 @@ bool RdpSession::sendEvent(QEvent *event, QWidget *source)
         auto x = (position.x() / sourceSize.width()) * m_size.width();
         auto y = (position.y() / sourceSize.height()) * m_size.height();
 
-
         bool extendedEvent = false;
         UINT16 flags = 0;
 
@@ -789,6 +788,12 @@ void RdpSession::emitErrorMessage()
     case FREERDP_ERROR_CONNECT_TRANSPORT_FAILED:
         title = i18nc("@title:dialog", "Could not Connect");
         message = i18nc("@label", "Could not connect to the server.");
+        break;
+    case FREERDP_ERROR_LOGOFF_BY_USER:
+    case FREERDP_ERROR_DISCONNECTED_BY_OTHER_CONNECTION:
+    case FREERDP_ERROR_BASE:
+        title = i18nc("@title:dialog", "Connection Closed");
+        message = i18nc("@label", "The connection to the server was closed.");
         break;
     default:
         title = i18nc("@title:dialog", "Connection Failed");
