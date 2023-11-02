@@ -709,7 +709,7 @@ void RdpSession::run()
 
     LARGE_INTEGER due;
     due.QuadPart = 0;
-    if (!SetWaitableTimer(timer, &due, 20, nullptr, nullptr, false)) {
+    if (!SetWaitableTimer(timer, &due, 1, nullptr, nullptr, false)) {
         return;
     }
 
