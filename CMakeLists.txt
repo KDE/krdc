@@ -179,7 +179,7 @@ ecm_qt_declare_logging_category(krdc
     CATEGORY_NAME KRDC
     DESCRIPTION "KRDC"
     EXPORT KRDC
-    DEFAULT_SEVERITY Debug
+    DEFAULT_SEVERITY Warning
 )
 
 target_link_libraries(krdc
