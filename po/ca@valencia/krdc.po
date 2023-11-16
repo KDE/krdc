@@ -203,7 +203,7 @@ msgstr "Elimina"
 #: config/hostpreferenceslist.cpp:100 mainwindow.cpp:674
 #, kde-format
 msgid "The selected host cannot be handled."
-msgstr "L'ordinador seleccionat no es pot gestionar."
+msgstr "L'amfitrió seleccionat no es pot gestionar."
 
 #: config/hostpreferenceslist.cpp:101 mainwindow.cpp:284 mainwindow.cpp:675
 #, kde-format
@@ -224,13 +224,13 @@ msgstr "Configuració general"
 #: config/preferencesdialog.cpp:29
 #, kde-format
 msgid "Hosts"
-msgstr "Ordinadors"
+msgstr "Amfitrions"
 
 #: config/preferencesdialog.cpp:29 core/hostpreferences.cpp:176
 #: core/hostpreferences.cpp:180
 #, kde-format
 msgid "Host Configuration"
-msgstr "Configureu l'ordinador"
+msgstr "Configureu l'amfitrió"
 
 #: config/preferencesdialog.cpp:34 config/preferencesdialog.cpp:35
 #, kde-format
@@ -288,12 +288,12 @@ msgid ""
 "Note that settings might only apply when you connect next time to this host."
 msgstr ""
 "Cal tindre present que la configuració podria no funcionar fins que us "
-"connecteu de nou amb este servidor."
+"connecteu de nou amb este amfitrió."
 
 #: core/hostpreferences.cpp:199
 #, kde-format
 msgid "Show this dialog again for this host"
-msgstr "Mostra este diàleg una altra vegada per a este ordinador"
+msgstr "Mostra este diàleg una altra vegada per a este amfitrió"
 
 #: core/hostpreferences.cpp:203
 #, kde-format
@@ -520,7 +520,7 @@ msgid ""
 " Syntax: [username@]host[:port]"
 msgstr ""
 "L'adreça introduïda no té la forma requerida.\n"
-" Sintaxi: [nomusuari@]ordinador[:port]"
+" Sintaxi: [nomusuari@]amfitrió[:port]"
 
 #: mainwindow.cpp:261
 #, kde-format
@@ -1172,7 +1172,7 @@ msgstr "Compartició de suports:"
 #: rdp/rdppreferences.ui:560
 #, kde-format
 msgid "Share a local media directory with the remote host."
-msgstr "Compartix un directori local de suports amb l'ordinador remot."
+msgstr "Compartix un directori local de suports amb l'amfitrió remot."
 
 #. i18n: ectx: property (title), widget (QGroupBox, expertGroupBox)
 #: rdp/rdppreferences.ui:585
@@ -1302,7 +1302,7 @@ msgstr "Falla en la connexió"
 #: rdp/rdpview.cpp:492
 #, kde-format
 msgid "Connection attempt to host failed."
-msgstr "No s'ha pogut fer l'intent de connexió amb l'ordinador."
+msgstr "No s'ha pogut fer l'intent de connexió amb l'amfitrió."
 
 #: rdp/rdpview.cpp:497
 #, kde-format
@@ -1315,7 +1315,7 @@ msgid ""
 "Connection attempt to host failed. Security negotiation or connection "
 "failure."
 msgstr ""
-"No s'ha pogut fer l'intent de connexió amb l'ordinador. Ha fallat la "
+"No s'ha pogut fer l'intent de connexió amb l'amfitrió. Ha fallat la "
 "seguretat en la negociació o en la connexió."
 
 #: rdp/rdpviewfactory.cpp:22
@@ -1335,7 +1335,7 @@ msgid ""
 "rdpserver:3389 (host:port)</i></html>"
 msgstr ""
 "<html>Introduïu l'adreça ací. El port és opcional.<br /><i>Exemple: "
-"rdpserver:3389 (ordinador:port)</i></html>"
+"rdpserver:3389 (amfitrió:port)</i></html>"
 
 #: rdp/rdpviewfactory.cpp:70
 #, kde-format
@@ -1536,8 +1536,8 @@ msgstr "Nom d'usuari:"
 #, kde-format
 msgid "Don't copy passwords from supported password managers to remote hosts"
 msgstr ""
-"No copieu contrasenyes des dels gestors de contrasenyes admesos a màquines "
-"remotes"
+"No copieu contrasenyes des dels gestors de contrasenyes admesos a amfitrions "
+"remots"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, dont_copy_passwords)
 #: vnc/vncpreferences.ui:260
@@ -1603,5 +1603,5 @@ msgid ""
 "<html>Enter the address here.<br /><i>Example: vncserver:1 (host:port / "
 "screen)</i></html>"
 msgstr ""
-"<html>Introduïu l'adreça ací.<br /><i>Exemple: vncserver:1 (ordinador:port / "
+"<html>Introduïu l'adreça ací.<br /><i>Exemple: vncserver:1 (amfitrió:port / "
 "pantalla)</i></html>"
