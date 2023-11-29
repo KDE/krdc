@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:32+0000\n"
+"POT-Creation-Date: 2023-11-29 00:42+0000\n"
 "PO-Revision-Date: 2023-11-25 02:29\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -664,97 +664,52 @@ msgstr "远程桌面"
 msgid "Filter"
 msgstr "过滤"
 
-#: rdp/rdphostpreferences.cpp:181
+#. i18n: ectx: property (text), widget (QLabel, shareMediaLabel)
+#: rdp/rdppreferences.ui:17
 #, kde-format
-msgid "Browse to media share path"
-msgstr "浏览媒体共享路径"
+msgid "Share Media:"
+msgstr "共享媒体"
 
-#. i18n: ectx: property (title), widget (QGroupBox, connectionGroupBox)
-#. i18n: ectx: property (title), widget (QGroupBox, vncGroupBox)
-#: rdp/rdppreferences.ui:17 vnc/vncpreferences.ui:17
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
+#: rdp/rdppreferences.ui:40 rdp/rdppreferences.ui:291
 #, kde-format
-msgid "Connection"
-msgstr "连接"
+msgid "Use Best Available"
+msgstr ""
 
-#. i18n: ectx: property (text), widget (QLabel, resolutionLabel)
-#: rdp/rdppreferences.ui:25
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
+#: rdp/rdppreferences.ui:45
 #, kde-format
-msgid "Desktop &resolution:"
-msgstr "桌面分辨率(&R)："
+msgid "True Color with Alpha (32 Bit)"
+msgstr "带 Alpha 通道的真彩色(32位)"
 
-#. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_Resolution)
-#. i18n: ectx: property (whatsThis), widget (KComboBox, resolutionComboBox)
-#: rdp/rdppreferences.ui:48 vnc/vncpreferences.ui:86
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
+#: rdp/rdppreferences.ui:50
 #, kde-format
-msgid ""
-"Here you can specify the resolution of the remote desktop. This resolution "
-"determines the size of the desktop that will be presented to you."
-msgstr "您可在此指定远程桌面的分辨率。此分辨率决定了您所能看到的桌面大小。"
+msgid "True Color (24 Bit)"
+msgstr "真彩色(24位)"
 
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
-#: rdp/rdppreferences.ui:55 vnc/vncpreferences.ui:93
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
+#: rdp/rdppreferences.ui:55
 #, kde-format
-msgid "Minimal (640x480)"
-msgstr "很小(640x480)"
+msgid "High Color (16 Bit)"
+msgstr "高彩色(16位)"
 
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
-#: rdp/rdppreferences.ui:60 vnc/vncpreferences.ui:98
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
+#: rdp/rdppreferences.ui:60
 #, kde-format
-msgid "Small (800x600)"
-msgstr "小(800x600)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
-#: rdp/rdppreferences.ui:65 vnc/vncpreferences.ui:103
-#, kde-format
-msgid "Normal (1024x768)"
-msgstr "普通(1024x768)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
-#: rdp/rdppreferences.ui:70 vnc/vncpreferences.ui:108
-#, kde-format
-msgid "Large (1280x1024)"
-msgstr "大(1280x1024)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
-#: rdp/rdppreferences.ui:75 vnc/vncpreferences.ui:113
-#, kde-format
-msgid "Very Large (1600x1200)"
-msgstr "很大(1600x1200)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
-#: rdp/rdppreferences.ui:80 vnc/vncpreferences.ui:118
-#, kde-format
-msgid "Current Screen Resolution"
-msgstr "当前屏幕分辨率"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
-#: rdp/rdppreferences.ui:85 vnc/vncpreferences.ui:123
-#, kde-format
-msgid "Custom Resolution (...)"
-msgstr "自定义分辨率(...)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#: rdp/rdppreferences.ui:90
-#, kde-format
-msgid "Current KRDC Size"
-msgstr "当前 KRDC 大小"
+msgid "Low Color (8 Bit)"
+msgstr "低彩色(8位)"
 
 #. i18n: ectx: property (text), widget (QLabel, widthLabel)
-#: rdp/rdppreferences.ui:103 vnc/vncpreferences.ui:136
+#: rdp/rdppreferences.ui:73 vnc/vncpreferences.ui:136
 #, kde-format
 msgid "&Width:"
 msgstr "宽度(&W)："
 
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Width)
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_ScalingWidth)
-#: rdp/rdppreferences.ui:119 vnc/vncpreferences.ui:152
+#: rdp/rdppreferences.ui:89 vnc/vncpreferences.ui:152
 #, kde-format
 msgid ""
 "This is the width of the remote desktop. You can only change this value "
@@ -764,14 +719,14 @@ msgstr ""
 "值。"
 
 #. i18n: ectx: property (text), widget (QLabel, heightLabel)
-#: rdp/rdppreferences.ui:135 vnc/vncpreferences.ui:168
+#: rdp/rdppreferences.ui:105 vnc/vncpreferences.ui:168
 #, kde-format
 msgid "H&eight:"
 msgstr "高度(&E)："
 
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Height)
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_ScalingHeight)
-#: rdp/rdppreferences.ui:151 vnc/vncpreferences.ui:184
+#: rdp/rdppreferences.ui:121 vnc/vncpreferences.ui:184
 #, kde-format
 msgid ""
 "This is the height of the remote desktop. You can only change this value "
@@ -780,44 +735,120 @@ msgstr ""
 "这是远程桌面的高度。只有当您在上面选择了自定义桌面分辨率时，才能手动更改此"
 "值。"
 
+#. i18n: ectx: property (text), widget (QLabel, accelerationLabel)
+#: rdp/rdppreferences.ui:136
+#, kde-format
+msgid "Acceleration:"
+msgstr ""
+
 #. i18n: ectx: property (text), widget (QLabel, colorDepthLabel)
-#: rdp/rdppreferences.ui:168
+#: rdp/rdppreferences.ui:159
 #, kde-format
 msgid "Color &depth:"
 msgstr "颜色深度(&D)："
 
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
-#: rdp/rdppreferences.ui:185
-#, kde-format
-msgid "Low Color (8 Bit)"
-msgstr "低彩色(8位)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
-#: rdp/rdppreferences.ui:190
-#, kde-format
-msgid "High Color (16 Bit)"
-msgstr "高彩色(16位)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
-#: rdp/rdppreferences.ui:195
-#, kde-format
-msgid "True Color (24 Bit)"
-msgstr "真彩色(24位)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
-#: rdp/rdppreferences.ui:200
-#, kde-format
-msgid "True Color with Alpha (32 Bit)"
-msgstr "带 Alpha 通道的真彩色(32位)"
+#. i18n: ectx: property (text), widget (QLabel, resolutionLabel)
+#: rdp/rdppreferences.ui:172
+#, fuzzy, kde-format
+#| msgid "Custom Resolution (...)"
+msgid "Resolution"
+msgstr "自定义分辨率(...)"
 
 #. i18n: ectx: property (text), widget (QLabel, layoutLabel)
-#: rdp/rdppreferences.ui:208
+#: rdp/rdppreferences.ui:182
 #, kde-format
 msgid "&Keyboard layout:"
 msgstr "键盘布局(&K)："
 
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
+#: rdp/rdppreferences.ui:208
+#, kde-format
+msgid "On This Computer"
+msgstr "在此电脑上播放"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
+#: rdp/rdppreferences.ui:213
+#, kde-format
+msgid "On Remote Computer"
+msgstr "在远程电脑上播放"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
+#: rdp/rdppreferences.ui:218
+#, kde-format
+msgid "Disable Sound"
+msgstr "禁用声音"
+
+#. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_Resolution)
+#. i18n: ectx: property (whatsThis), widget (KComboBox, resolutionComboBox)
+#: rdp/rdppreferences.ui:238 vnc/vncpreferences.ui:86
+#, kde-format
+msgid ""
+"Here you can specify the resolution of the remote desktop. This resolution "
+"determines the size of the desktop that will be presented to you."
+msgstr "您可在此指定远程桌面的分辨率。此分辨率决定了您所能看到的桌面大小。"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#: rdp/rdppreferences.ui:245
+#, fuzzy, kde-format
+#| msgid "Small (800x600)"
+msgid "Small (1280x720)"
+msgstr "小(800x600)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#: rdp/rdppreferences.ui:250
+#, kde-format
+msgid "Medium (1600x900)"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#: rdp/rdppreferences.ui:255
+#, fuzzy, kde-format
+#| msgid "Large (1280x1024)"
+msgid "Large (1920x1080)"
+msgstr "大(1280x1024)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#: rdp/rdppreferences.ui:260
+#, fuzzy, kde-format
+#| msgid "Current KRDC Size"
+msgid "Current Window Size"
+msgstr "当前 KRDC 大小"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
+#: rdp/rdppreferences.ui:265 vnc/vncpreferences.ui:118
+#, kde-format
+msgid "Current Screen Resolution"
+msgstr "当前屏幕分辨率"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
+#: rdp/rdppreferences.ui:270 vnc/vncpreferences.ui:123
+#, kde-format
+msgid "Custom Resolution (...)"
+msgstr "自定义分辨率(...)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
+#: rdp/rdppreferences.ui:296
+#, kde-format
+msgid "Force H.264"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
+#: rdp/rdppreferences.ui:301
+#, fuzzy, kde-format
+#| msgid "RemoteFX:"
+msgid "Force RemoteFX"
+msgstr "RemoteFX:"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
+#: rdp/rdppreferences.ui:306
+#, kde-format
+msgid "Disable All Acceleration"
+msgstr ""
+
 #. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:224
+#: rdp/rdppreferences.ui:326
 #, kde-format
 msgid ""
 "Use this to specify your keyboard layout. This layout setting is used to "
@@ -825,474 +856,443 @@ msgid ""
 msgstr "使用此处指定您的键盘布局。此布局设置用于向服务器发送正确的键盘代码。"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:231
+#: rdp/rdppreferences.ui:333
 #, kde-format
 msgid "Arabic (ar)"
 msgstr "阿拉伯语(ar)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:236
+#: rdp/rdppreferences.ui:338
 #, kde-format
 msgid "Czech (cs)"
 msgstr "捷克语(cs)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:241
+#: rdp/rdppreferences.ui:343
 #, kde-format
 msgid "Danish (da)"
 msgstr "丹麦语(da)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:246
+#: rdp/rdppreferences.ui:348
 #, kde-format
 msgid "German (de)"
 msgstr "德语(de)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:251
+#: rdp/rdppreferences.ui:353
 #, kde-format
 msgid "Swiss German (de-ch)"
 msgstr "瑞士德语(de-ch)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:256
+#: rdp/rdppreferences.ui:358
 #, kde-format
 msgid "American Dvorak (en-dv)"
 msgstr "美国德沃拉克(en-dv)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:261
+#: rdp/rdppreferences.ui:363
 #, kde-format
 msgid "British English (en-gb)"
 msgstr "英国英语(en-gb)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:266
+#: rdp/rdppreferences.ui:368
 #, kde-format
 msgid "US English (en-us)"
 msgstr "美国英语(en-us)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:271
+#: rdp/rdppreferences.ui:373
 #, kde-format
 msgid "Spanish (es)"
 msgstr "西班牙语(es)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:276
+#: rdp/rdppreferences.ui:378
 #, kde-format
 msgid "Estonian (et)"
 msgstr "爱沙尼亚语(et)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:281
+#: rdp/rdppreferences.ui:383
 #, kde-format
 msgid "Finnish (fi)"
 msgstr "芬兰语(fi)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:286
+#: rdp/rdppreferences.ui:388
 #, kde-format
 msgid "Faroese (fo)"
 msgstr "法罗语(fr)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:291
+#: rdp/rdppreferences.ui:393
 #, kde-format
 msgid "French (fr)"
 msgstr "法语(fr)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:296
+#: rdp/rdppreferences.ui:398
 #, kde-format
 msgid "Belgian (fr-be)"
 msgstr "比利时语(fr-be)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:301
+#: rdp/rdppreferences.ui:403
 #, kde-format
 msgid "French Canadian (fr-ca)"
 msgstr "法国加拿大语(fr)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:306
+#: rdp/rdppreferences.ui:408
 #, kde-format
 msgid "Swiss French (fr-ch)"
 msgstr "瑞士法语(fr)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:311
+#: rdp/rdppreferences.ui:413
 #, kde-format
 msgid "Hebrew (he)"
 msgstr "希伯莱语(he)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:316
+#: rdp/rdppreferences.ui:418
 #, kde-format
 msgid "Croatian (hr)"
 msgstr "克罗地亚语(hr)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:321
+#: rdp/rdppreferences.ui:423
 #, kde-format
 msgid "Hungarian (hu)"
 msgstr "匈牙利语(hu)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:326
+#: rdp/rdppreferences.ui:428
 #, kde-format
 msgid "Icelandic (is)"
 msgstr "冰岛语(is)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:331
+#: rdp/rdppreferences.ui:433
 #, kde-format
 msgid "Italian (it)"
 msgstr "意大利语(it)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:336
+#: rdp/rdppreferences.ui:438
 #, kde-format
 msgid "Japanese (ja)"
 msgstr "日语(ja)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:341
+#: rdp/rdppreferences.ui:443
 #, kde-format
 msgid "Korean (ko)"
 msgstr "韩语(no)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:346
+#: rdp/rdppreferences.ui:448
 #, kde-format
 msgid "Lithuanian (lt)"
 msgstr "立陶宛语(lt)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:351
+#: rdp/rdppreferences.ui:453
 #, kde-format
 msgid "Latvian (lv)"
 msgstr "拉脱维亚语(lv)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:356
+#: rdp/rdppreferences.ui:458
 #, kde-format
 msgid "Macedonian (mk)"
 msgstr "马其顿语(mk)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:361
+#: rdp/rdppreferences.ui:463
 #, kde-format
 msgid "Dutch (nl)"
 msgstr "荷兰语(nl)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:366
+#: rdp/rdppreferences.ui:468
 #, kde-format
 msgid "Belgian Dutch (nl-be)"
 msgstr "比利时荷兰语(fr-be)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:371
+#: rdp/rdppreferences.ui:473
 #, kde-format
 msgid "Norwegian (no)"
 msgstr "挪威语(no)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:376
+#: rdp/rdppreferences.ui:478
 #, kde-format
 msgid "Polish (pl)"
 msgstr "波兰语(pl)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:381
+#: rdp/rdppreferences.ui:483
 #, kde-format
 msgid "Portuguese (pt)"
 msgstr "葡萄牙语(pt)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:386
+#: rdp/rdppreferences.ui:488
 #, kde-format
 msgid "Brazilian (pt-br)"
 msgstr "巴西语(pt-br)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:391
+#: rdp/rdppreferences.ui:493
 #, kde-format
 msgid "Russian (ru)"
 msgstr "俄语(ru)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:396
+#: rdp/rdppreferences.ui:498
 #, kde-format
 msgid "Slovenian (sl)"
 msgstr "斯洛文尼亚语(sl)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:401
+#: rdp/rdppreferences.ui:503
 #, kde-format
 msgid "Swedish (sv)"
 msgstr "瑞典语(sv)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:406
+#: rdp/rdppreferences.ui:508
 #, kde-format
 msgid "Thai (th)"
 msgstr "泰语(th)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:411
+#: rdp/rdppreferences.ui:513
 #, kde-format
 msgid "Turkish (tr)"
 msgstr "土耳其语(tr)"
 
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ScaleToSize)
+#: rdp/rdppreferences.ui:527
+#, kde-format
+msgid "Scale window contents to match resolution"
+msgstr ""
+
 #. i18n: ectx: property (text), widget (QLabel, soundLabel)
-#: rdp/rdppreferences.ui:421
+#: rdp/rdppreferences.ui:553
 #, kde-format
 msgctxt "label for soundsettings in preferences dialog"
 msgid "Sound:"
 msgstr "声音："
 
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
-#: rdp/rdppreferences.ui:442
+#: rdp/rdpsession.cpp:142
 #, kde-format
-msgid "On This Computer"
-msgstr "在此电脑上播放"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
-#: rdp/rdppreferences.ui:447
-#, kde-format
-msgid "On Remote Computer"
-msgstr "在远程电脑上播放"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
-#: rdp/rdppreferences.ui:452
-#, kde-format
-msgid "Disable Sound"
-msgstr "禁用声音"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_SoundSystem)
-#: rdp/rdppreferences.ui:467
-#, kde-format
-msgid "ALSA"
-msgstr "ALSA"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_SoundSystem)
-#: rdp/rdppreferences.ui:472
-#, kde-format
-msgid "PulseAudio"
-msgstr "PulseAudio"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_SoundSystem)
-#: rdp/rdppreferences.ui:477
-#, kde-format
-msgid "None"
-msgstr "无"
-
-#. i18n: ectx: property (text), widget (QLabel, performanceLabel)
-#: rdp/rdppreferences.ui:487
-#, kde-format
-msgctxt "label for performance settings in preferences dialog"
-msgid "Performance:"
-msgstr "性能："
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Performance)
-#: rdp/rdppreferences.ui:504
-#, kde-format
-msgid "Modem"
-msgstr "调制解调器"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Performance)
-#: rdp/rdppreferences.ui:509
-#, kde-format
-msgid "Broadband"
-msgstr "宽带"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Performance)
-#: rdp/rdppreferences.ui:514
-#, kde-format
-msgid "LAN"
-msgstr "局域网"
-
-#. i18n: ectx: property (text), widget (QLabel, remoteFXLabel)
-#: rdp/rdppreferences.ui:522
-#, kde-format
-msgid "RemoteFX:"
-msgstr "RemoteFX:"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RemoteFX)
-#: rdp/rdppreferences.ui:532
-#, kde-format
-msgid "Enhanced visual experience"
-msgstr "增强视觉体验"
-
-#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_RemoteFX)
-#: rdp/rdppreferences.ui:535
-#, kde-format
-msgid ""
-"RemoteFX covers a set of technologies that enhance visual experience of the "
-"Remote Desktop Protocol."
-msgstr "RemoteFX 包含一系列增强远程桌面视觉体验的技术。"
-
-#. i18n: ectx: property (text), widget (QLabel, shareMediaLabel)
-#: rdp/rdppreferences.ui:542
-#, kde-format
-msgid "Share Media:"
-msgstr "共享媒体"
-
-#. i18n: ectx: property (whatsThis), widget (KLineEdit, kcfg_ShareMedia)
-#: rdp/rdppreferences.ui:560
-#, kde-format
-msgid "Share a local media directory with the remote host."
-msgstr "与远程主机共享本地媒体目录。"
-
-#. i18n: ectx: property (title), widget (QGroupBox, expertGroupBox)
-#: rdp/rdppreferences.ui:585
-#, kde-format
-msgid "Expert Options"
-msgstr "专家选项"
-
-#. i18n: ectx: property (text), widget (QLabel, consoleLabel)
-#: rdp/rdppreferences.ui:591
-#, kde-format
-msgid "Console login:"
-msgstr "控制台登录："
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_Console)
-#: rdp/rdppreferences.ui:601
-#, kde-format
-msgid "Attach to Windows Server console"
-msgstr "挂接到 Windows 服务器控制台"
-
-#. i18n: ectx: property (text), widget (QLabel, extraOptionsLabel)
-#: rdp/rdppreferences.ui:608
-#, kde-format
-msgid "Extra options:"
-msgstr "附加选项："
-
-#. i18n: ectx: property (whatsThis), widget (KLineEdit, kcfg_ExtraOptions)
-#: rdp/rdppreferences.ui:624
-#, kde-format
-msgid "Here you can enter additional xfreerdp (FreeRDP) options."
-msgstr "您可以在这里输入附加的  xfreerdp (FreeRDP) 选项。"
-
-#. i18n: ectx: property (title), widget (QGroupBox, loginGroupBox)
-#: rdp/rdppreferences.ui:637
-#, kde-format
-msgid "Login"
-msgstr "登录"
-
-#. i18n: ectx: property (text), widget (QLabel, defaultUserLabel)
-#: rdp/rdppreferences.ui:645
-#, kde-format
-msgid "Default user name:"
-msgstr "默认用户名："
-
-#. i18n: ectx: property (placeholderText), widget (KLineEdit, kcfg_DefaultRdpUserName)
-#: rdp/rdppreferences.ui:652
-#, kde-format
-msgid "No default user name"
-msgstr "无默认用户名"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RecognizeLdapLogins)
-#: rdp/rdppreferences.ui:664
-#, kde-format
-msgid "Automatically recognize \"LDAP\"-Logins and share passwords"
-msgstr "自动识别“LDAP”登录与共享密码"
-
-#: rdp/rdpview.cpp:104
-#, kde-format
-msgid "Media Folder does not Exist"
-msgstr "媒体文件夹不存在"
-
-#: rdp/rdpview.cpp:104
-#, kde-format
-msgid ""
-"The folder %1 does not exist.\n"
-"Please set an existing folder to share or empty the \"Share Media\" option "
-"if you do not want to share any folder."
+msgctxt "@title:dialog"
+msgid "Logon Error"
 msgstr ""
-"文件夹 %1 不存在。\n"
-"如果您不想分享任何文件夹，请设置一个已有文件夹来分享或清空\"共享媒体\"选项"
 
-#: rdp/rdpview.cpp:113
+#: rdp/rdpsession.cpp:183
 #, kde-format
-msgid "Enter Username"
-msgstr "输入用户名"
+msgctxt "@label"
+msgid ""
+"Host: %1:%2\n"
+"Common Name: %3\n"
+"Subject: %4\n"
+"Issuer: %5\n"
+"Fingerprint: %6\n"
+msgstr ""
 
-#: rdp/rdpview.cpp:114
-#, kde-format
-msgid "Please enter the username you would like to use for login."
-msgstr "请在此输入您将用于登录的用户名。"
-
-#: rdp/rdpview.cpp:134 vnc/vncview.cpp:344
-#, kde-format
-msgid "Access to the system requires a password."
+#: rdp/rdpsession.cpp:592
+#, fuzzy, kde-format
+#| msgid "Access to the system requires a password."
+msgctxt "@label"
+msgid "Access to this system requires a password."
 msgstr "访问此系统需要密码。"
 
-#: rdp/rdpview.cpp:442
-#, kde-format
-msgid "Could not start \"%1\"; make sure %1 is properly installed."
-msgstr "无法启动 %1 程序；请确定 %1 已被正确安装。"
+#: rdp/rdpsession.cpp:595
+#, fuzzy, kde-format
+#| msgid "Access to the system requires a password."
+msgctxt "@label"
+msgid "Access to this system requires a username and password."
+msgstr "访问此系统需要密码。"
 
-#: rdp/rdpview.cpp:443 rdp/rdpview.cpp:467 rdp/rdpview.cpp:471
+#: rdp/rdpsession.cpp:617
 #, kde-format
-msgid "RDP Failure"
-msgstr "RDP 失败"
-
-#: rdp/rdpview.cpp:465
-#, kde-format
-msgid ""
-"The version of \"xfreerdp\" you are using is too old.\n"
-"xfreerdp 1.0.2 or greater is required."
+msgctxt "@label"
+msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr ""
-"您正在使用的“rxfreerdp”版本太老了：\n"
-"需要xfreerdp 1.0.2 或更高版本。"
 
-#: rdp/rdpview.cpp:470
+#: rdp/rdpsession.cpp:618
 #, kde-format
-msgid "Connection failed. You might have passed a wrong address or username."
-msgstr "连接失败。您可能输入了错误的地址或用户名。"
+msgctxt "@title:dialog"
+msgid "Verify Certificate"
+msgstr ""
 
-#: rdp/rdpview.cpp:486
+#: rdp/rdpsession.cpp:623 rdp/rdpsession.cpp:646
 #, kde-format
-msgid "Name or service not known."
-msgstr "未知的名称或服务。"
+msgctxt "@label"
+msgid "Remember this certificate"
+msgstr ""
 
-#: rdp/rdpview.cpp:487 rdp/rdpview.cpp:493 rdp/rdpview.cpp:498
-#: rdp/rdpview.cpp:506
+#: rdp/rdpsession.cpp:640
 #, kde-format
-msgid "Connection Failure"
+msgctxt "@label"
+msgid "The certificate for this system has changed. Do you wish to continue?"
+msgstr ""
+
+#: rdp/rdpsession.cpp:641
+#, kde-format
+msgctxt "@title:dialog"
+msgid "Certificate has Changed"
+msgstr ""
+
+#: rdp/rdpsession.cpp:644
+#, kde-format
+msgctxt "@label"
+msgid ""
+"Previous certificate:\n"
+"%1\n"
+"New Certificate:\n"
+"%2"
+msgstr ""
+
+#: rdp/rdpsession.cpp:758
+#, fuzzy, kde-format
+#| msgid "Connection Failure"
+msgctxt "@title:dialog"
+msgid "Login Failure"
 msgstr "连接失败"
 
-#: rdp/rdpview.cpp:492
+#: rdp/rdpsession.cpp:759
 #, kde-format
-msgid "Connection attempt to host failed."
-msgstr "连接到主机失败。"
-
-#: rdp/rdpview.cpp:497
-#, kde-format
-msgid "Authentication failure, check credentials."
-msgstr "认证失败，请检查证书。"
-
-#: rdp/rdpview.cpp:505
-#, kde-format
+msgctxt "@label"
 msgid ""
-"Connection attempt to host failed. Security negotiation or connection "
-"failure."
-msgstr "连接到主机失败.安全握手或连接失败。"
+"Unable to login with the provided credentials. Please double check the user "
+"and password."
+msgstr ""
+
+#: rdp/rdpsession.cpp:765
+#, kde-format
+msgctxt "@title:dialog"
+msgid "Account Problems"
+msgstr ""
+
+#: rdp/rdpsession.cpp:766
+#, kde-format
+msgctxt "@label"
+msgid ""
+"The provided account is not allowed to log in to this machine. Please "
+"contact your system administrator."
+msgstr ""
+
+#: rdp/rdpsession.cpp:771
+#, kde-format
+msgctxt "@title:dialog"
+msgid "Password Problems"
+msgstr ""
+
+#: rdp/rdpsession.cpp:772
+#, kde-format
+msgctxt "@label"
+msgid ""
+"Unable to login with the provided password. Please contact your system "
+"administrator to change it."
+msgstr ""
+
+#: rdp/rdpsession.cpp:775
+#, fuzzy, kde-format
+#| msgid "Connection"
+msgctxt "@title:dialog"
+msgid "Connection Lost"
+msgstr "连接"
+
+#: rdp/rdpsession.cpp:776
+#, kde-format
+msgctxt "@label"
+msgid "Lost connection to the server."
+msgstr ""
+
+#: rdp/rdpsession.cpp:780
+#, fuzzy, kde-format
+#| msgid "Server not found."
+msgctxt "@title:dialog"
+msgid "Server not Found"
+msgstr "未找到服务器。"
+
+#: rdp/rdpsession.cpp:781
+#, kde-format
+msgctxt "@label"
+msgid "Could not find the server."
+msgstr ""
+
+#: rdp/rdpsession.cpp:784
+#, fuzzy, kde-format
+#| msgid "Connection Failure"
+msgctxt "@title:dialog"
+msgid "Connection Refused"
+msgstr "连接失败"
+
+#: rdp/rdpsession.cpp:785
+#, fuzzy, kde-format
+#| msgid "VNC server closed connection."
+msgctxt "@label"
+msgid "The server refused the connection request."
+msgstr "VNC 服务器端关闭了连接。"
+
+#: rdp/rdpsession.cpp:789
+#, kde-format
+msgctxt "@title:dialog"
+msgid "Could not Connect"
+msgstr ""
+
+#: rdp/rdpsession.cpp:790
+#, kde-format
+msgctxt "@label"
+msgid "Could not connect to the server."
+msgstr ""
+
+#: rdp/rdpsession.cpp:795
+#, fuzzy, kde-format
+#| msgid "Connection Failure"
+msgctxt "@title:dialog"
+msgid "Connection Closed"
+msgstr "连接失败"
+
+#: rdp/rdpsession.cpp:796
+#, kde-format
+msgctxt "@label"
+msgid "The connection to the server was closed."
+msgstr ""
+
+#: rdp/rdpsession.cpp:799
+#, fuzzy, kde-format
+#| msgid "Connection Failure"
+msgctxt "@title:dialog"
+msgid "Connection Failed"
+msgstr "连接失败"
+
+#: rdp/rdpsession.cpp:800
+#, kde-format
+msgctxt "@label"
+msgid "An unknown error occurred"
+msgstr ""
 
 #: rdp/rdpviewfactory.cpp:22
 #, kde-format
 msgid "Connect to a Windows Remote Desktop (RDP)"
 msgstr "连接到 Windows 远程桌面(RDP)"
 
-#: rdp/rdpviewfactory.cpp:53
+#: rdp/rdpviewfactory.cpp:51
 #, kde-format
 msgid "New RDP Connection..."
 msgstr "新建 RDP 连接..."
 
-#: rdp/rdpviewfactory.cpp:63
+#: rdp/rdpviewfactory.cpp:61
 #, kde-format
 msgid ""
 "<html>Enter the address here. Port is optional.<br /><i>Example: "
@@ -1300,15 +1300,6 @@ msgid ""
 msgstr ""
 "<html>在此输入地址，端口是可选字段。<br /><i>示例：rdpserver:3389 (主机:端"
 "口)</i></html>"
-
-#: rdp/rdpviewfactory.cpp:70
-#, kde-format
-msgid ""
-"The application \"xfreerdp\" cannot be found on your system; make sure it is "
-"properly installed if you need RDP support."
-msgstr ""
-"在您的系统上找不到“xfreerdp”程序；如果您需要 RDP 客户端支持，请确定它已经被正"
-"确安装。"
 
 #: remotedesktopsmodel.cpp:112
 #, kde-format
@@ -1412,6 +1403,12 @@ msgstr "已经重新连接。"
 msgid "Connected."
 msgstr "已连接."
 
+#. i18n: ectx: property (title), widget (QGroupBox, vncGroupBox)
+#: vnc/vncpreferences.ui:17
+#, kde-format
+msgid "Connection"
+msgstr "连接"
+
 #. i18n: ectx: property (text), widget (QLabel, connectionLabel)
 #: vnc/vncpreferences.ui:23
 #, kde-format
@@ -1458,6 +1455,36 @@ msgstr "低质量(调制解调器、ISDN、慢速 Internet)"
 #, kde-format
 msgid "Scale to Size:"
 msgstr "缩放为大小："
+
+#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
+#: vnc/vncpreferences.ui:93
+#, kde-format
+msgid "Minimal (640x480)"
+msgstr "很小(640x480)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
+#: vnc/vncpreferences.ui:98
+#, kde-format
+msgid "Small (800x600)"
+msgstr "小(800x600)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
+#: vnc/vncpreferences.ui:103
+#, kde-format
+msgid "Normal (1024x768)"
+msgstr "普通(1024x768)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
+#: vnc/vncpreferences.ui:108
+#, kde-format
+msgid "Large (1280x1024)"
+msgstr "大(1280x1024)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
+#: vnc/vncpreferences.ui:113
+#, kde-format
+msgid "Very Large (1600x1200)"
+msgstr "很大(1600x1200)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, use_ssh_tunnel)
 #: vnc/vncpreferences.ui:204
@@ -1522,6 +1549,11 @@ msgstr "使用密码认证时出错：%1"
 msgid "Error creating tunnel socket"
 msgstr "创建隧道插槽失败"
 
+#: vnc/vncview.cpp:344
+#, kde-format
+msgid "Access to the system requires a password."
+msgstr "访问此系统需要密码。"
+
 #: vnc/vncview.cpp:345
 #, kde-format
 msgid "Authentication failed. Please try again."
@@ -1559,3 +1591,124 @@ msgid ""
 "screen)</i></html>"
 msgstr ""
 "<html>在此输入地址。<br /><i>示例：vncserver:1 (主机:端口 /屏幕)</i></html>"
+
+#~ msgid "Browse to media share path"
+#~ msgstr "浏览媒体共享路径"
+
+#~ msgid "Desktop &resolution:"
+#~ msgstr "桌面分辨率(&R)："
+
+#~ msgid "ALSA"
+#~ msgstr "ALSA"
+
+#~ msgid "PulseAudio"
+#~ msgstr "PulseAudio"
+
+#~ msgid "None"
+#~ msgstr "无"
+
+#~ msgctxt "label for performance settings in preferences dialog"
+#~ msgid "Performance:"
+#~ msgstr "性能："
+
+#~ msgid "Modem"
+#~ msgstr "调制解调器"
+
+#~ msgid "Broadband"
+#~ msgstr "宽带"
+
+#~ msgid "LAN"
+#~ msgstr "局域网"
+
+#~ msgid "Enhanced visual experience"
+#~ msgstr "增强视觉体验"
+
+#~ msgid ""
+#~ "RemoteFX covers a set of technologies that enhance visual experience of "
+#~ "the Remote Desktop Protocol."
+#~ msgstr "RemoteFX 包含一系列增强远程桌面视觉体验的技术。"
+
+#~ msgid "Share a local media directory with the remote host."
+#~ msgstr "与远程主机共享本地媒体目录。"
+
+#~ msgid "Expert Options"
+#~ msgstr "专家选项"
+
+#~ msgid "Console login:"
+#~ msgstr "控制台登录："
+
+#~ msgid "Attach to Windows Server console"
+#~ msgstr "挂接到 Windows 服务器控制台"
+
+#~ msgid "Extra options:"
+#~ msgstr "附加选项："
+
+#~ msgid "Here you can enter additional xfreerdp (FreeRDP) options."
+#~ msgstr "您可以在这里输入附加的  xfreerdp (FreeRDP) 选项。"
+
+#~ msgid "Login"
+#~ msgstr "登录"
+
+#~ msgid "Default user name:"
+#~ msgstr "默认用户名："
+
+#~ msgid "No default user name"
+#~ msgstr "无默认用户名"
+
+#~ msgid "Automatically recognize \"LDAP\"-Logins and share passwords"
+#~ msgstr "自动识别“LDAP”登录与共享密码"
+
+#~ msgid "Media Folder does not Exist"
+#~ msgstr "媒体文件夹不存在"
+
+#~ msgid ""
+#~ "The folder %1 does not exist.\n"
+#~ "Please set an existing folder to share or empty the \"Share Media\" "
+#~ "option if you do not want to share any folder."
+#~ msgstr ""
+#~ "文件夹 %1 不存在。\n"
+#~ "如果您不想分享任何文件夹，请设置一个已有文件夹来分享或清空\"共享媒体\"选项"
+
+#~ msgid "Enter Username"
+#~ msgstr "输入用户名"
+
+#~ msgid "Please enter the username you would like to use for login."
+#~ msgstr "请在此输入您将用于登录的用户名。"
+
+#~ msgid "Could not start \"%1\"; make sure %1 is properly installed."
+#~ msgstr "无法启动 %1 程序；请确定 %1 已被正确安装。"
+
+#~ msgid "RDP Failure"
+#~ msgstr "RDP 失败"
+
+#~ msgid ""
+#~ "The version of \"xfreerdp\" you are using is too old.\n"
+#~ "xfreerdp 1.0.2 or greater is required."
+#~ msgstr ""
+#~ "您正在使用的“rxfreerdp”版本太老了：\n"
+#~ "需要xfreerdp 1.0.2 或更高版本。"
+
+#~ msgid ""
+#~ "Connection failed. You might have passed a wrong address or username."
+#~ msgstr "连接失败。您可能输入了错误的地址或用户名。"
+
+#~ msgid "Name or service not known."
+#~ msgstr "未知的名称或服务。"
+
+#~ msgid "Connection attempt to host failed."
+#~ msgstr "连接到主机失败。"
+
+#~ msgid "Authentication failure, check credentials."
+#~ msgstr "认证失败，请检查证书。"
+
+#~ msgid ""
+#~ "Connection attempt to host failed. Security negotiation or connection "
+#~ "failure."
+#~ msgstr "连接到主机失败.安全握手或连接失败。"
+
+#~ msgid ""
+#~ "The application \"xfreerdp\" cannot be found on your system; make sure it "
+#~ "is properly installed if you need RDP support."
+#~ msgstr ""
+#~ "在您的系统上找不到“xfreerdp”程序；如果您需要 RDP 客户端支持，请确定它已经"
+#~ "被正确安装。"

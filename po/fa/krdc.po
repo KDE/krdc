@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:32+0000\n"
+"POT-Creation-Date: 2023-11-29 00:42+0000\n"
 "PO-Revision-Date: 2007-08-22 18:26+0330\n"
 "Last-Translator: Nazanin Kazemi <kazemi@itland.ir>\n"
 "Language-Team: Persian <kde-i18n-fa@kde.org>\n"
@@ -683,100 +683,53 @@ msgstr "رومیزی دور:"
 msgid "Filter"
 msgstr "&پرونده‌"
 
-#: rdp/rdphostpreferences.cpp:181
+#. i18n: ectx: property (text), widget (QLabel, shareMediaLabel)
+#: rdp/rdppreferences.ui:17
 #, kde-format
-msgid "Browse to media share path"
+msgid "Share Media:"
 msgstr ""
 
-#. i18n: ectx: property (title), widget (QGroupBox, connectionGroupBox)
-#. i18n: ectx: property (title), widget (QGroupBox, vncGroupBox)
-#: rdp/rdppreferences.ui:17 vnc/vncpreferences.ui:17
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
+#: rdp/rdppreferences.ui:40 rdp/rdppreferences.ui:291
 #, kde-format
-msgid "Connection"
-msgstr "اتصال"
-
-#. i18n: ectx: property (text), widget (QLabel, resolutionLabel)
-#: rdp/rdppreferences.ui:25
-#, kde-format
-msgid "Desktop &resolution:"
-msgstr "&دقت رومیزی:‌"
-
-#. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_Resolution)
-#. i18n: ectx: property (whatsThis), widget (KComboBox, resolutionComboBox)
-#: rdp/rdppreferences.ui:48 vnc/vncpreferences.ui:86
-#, kde-format
-msgid ""
-"Here you can specify the resolution of the remote desktop. This resolution "
-"determines the size of the desktop that will be presented to you."
+msgid "Use Best Available"
 msgstr ""
-"اینجا می‌توانید دقت رومیزی راه دور را مشخص کنید. این وضوح اندازه رومیزی که "
-"برای شما ظاهر می‌شود را تعیین می‌کند."
 
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
-#: rdp/rdppreferences.ui:55 vnc/vncpreferences.ui:93
-#, kde-format
-msgid "Minimal (640x480)"
-msgstr "کمین )۶۴۰x۴۸۰("
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
-#: rdp/rdppreferences.ui:60 vnc/vncpreferences.ui:98
-#, kde-format
-msgid "Small (800x600)"
-msgstr "کوچک )۸۰۰x۶۰۰("
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
-#: rdp/rdppreferences.ui:65 vnc/vncpreferences.ui:103
-#, kde-format
-msgid "Normal (1024x768)"
-msgstr "عادی )۱۰۲۴x۷۶۸("
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
-#: rdp/rdppreferences.ui:70 vnc/vncpreferences.ui:108
-#, kde-format
-msgid "Large (1280x1024)"
-msgstr "بزرگ )۱۲۸۰x۱۰۲۴("
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
-#: rdp/rdppreferences.ui:75 vnc/vncpreferences.ui:113
-#, kde-format
-msgid "Very Large (1600x1200)"
-msgstr "بسیار بزرگ )۱۶۰۰x۱۲۰۰("
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
-#: rdp/rdppreferences.ui:80 vnc/vncpreferences.ui:118
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
+#: rdp/rdppreferences.ui:45
 #, fuzzy, kde-format
-#| msgid "Current screen resolution"
-msgid "Current Screen Resolution"
-msgstr "دقت پرده جاری"
+#| msgid "True Color (24 Bit)"
+msgid "True Color with Alpha (32 Bit)"
+msgstr "رنگ حقیقی )۲۴ بیتی("
 
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
-#: rdp/rdppreferences.ui:85 vnc/vncpreferences.ui:123
-#, fuzzy, kde-format
-msgid "Custom Resolution (...)"
-msgstr "سفارشی )...("
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#: rdp/rdppreferences.ui:90
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
+#: rdp/rdppreferences.ui:50
 #, kde-format
-msgid "Current KRDC Size"
-msgstr ""
+msgid "True Color (24 Bit)"
+msgstr "رنگ حقیقی )۲۴ بیتی("
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
+#: rdp/rdppreferences.ui:55
+#, kde-format
+msgid "High Color (16 Bit)"
+msgstr "رنگ زیاد )۱۶ بیتی("
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
+#: rdp/rdppreferences.ui:60
+#, kde-format
+msgid "Low Color (8 Bit)"
+msgstr "رنگ کم )۸ بیتی("
 
 #. i18n: ectx: property (text), widget (QLabel, widthLabel)
-#: rdp/rdppreferences.ui:103 vnc/vncpreferences.ui:136
+#: rdp/rdppreferences.ui:73 vnc/vncpreferences.ui:136
 #, kde-format
 msgid "&Width:"
 msgstr "&عرض‌:‌"
 
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Width)
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_ScalingWidth)
-#: rdp/rdppreferences.ui:119 vnc/vncpreferences.ui:152
+#: rdp/rdppreferences.ui:89 vnc/vncpreferences.ui:152
 #, kde-format
 msgid ""
 "This is the width of the remote desktop. You can only change this value "
@@ -786,14 +739,14 @@ msgstr ""
 "کنید،‌ این مقدار را فقط به طور دستی می‌توانید تغییر دهید."
 
 #. i18n: ectx: property (text), widget (QLabel, heightLabel)
-#: rdp/rdppreferences.ui:135 vnc/vncpreferences.ui:168
+#: rdp/rdppreferences.ui:105 vnc/vncpreferences.ui:168
 #, kde-format
 msgid "H&eight:"
 msgstr "&ارتفاع‌:‌"
 
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Height)
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_ScalingHeight)
-#: rdp/rdppreferences.ui:151 vnc/vncpreferences.ui:184
+#: rdp/rdppreferences.ui:121 vnc/vncpreferences.ui:184
 #, kde-format
 msgid ""
 "This is the height of the remote desktop. You can only change this value "
@@ -802,45 +755,125 @@ msgstr ""
 "این ارتفاع رومیزی راه دور است. اگر سفارشی را به عنوان دقت رومیزی از بالا "
 "انتخاب کنید،‌ این مقدار را فقط به طور دستی می‌توانید تغییر دهید."
 
+#. i18n: ectx: property (text), widget (QLabel, accelerationLabel)
+#: rdp/rdppreferences.ui:136
+#, kde-format
+msgid "Acceleration:"
+msgstr ""
+
 #. i18n: ectx: property (text), widget (QLabel, colorDepthLabel)
-#: rdp/rdppreferences.ui:168
+#: rdp/rdppreferences.ui:159
 #, kde-format
 msgid "Color &depth:"
 msgstr "&عمق‌ رنگ:‌"
 
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
-#: rdp/rdppreferences.ui:185
-#, kde-format
-msgid "Low Color (8 Bit)"
-msgstr "رنگ کم )۸ بیتی("
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
-#: rdp/rdppreferences.ui:190
-#, kde-format
-msgid "High Color (16 Bit)"
-msgstr "رنگ زیاد )۱۶ بیتی("
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
-#: rdp/rdppreferences.ui:195
-#, kde-format
-msgid "True Color (24 Bit)"
-msgstr "رنگ حقیقی )۲۴ بیتی("
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
-#: rdp/rdppreferences.ui:200
+#. i18n: ectx: property (text), widget (QLabel, resolutionLabel)
+#: rdp/rdppreferences.ui:172
 #, fuzzy, kde-format
-#| msgid "True Color (24 Bit)"
-msgid "True Color with Alpha (32 Bit)"
-msgstr "رنگ حقیقی )۲۴ بیتی("
+#| msgid "Desktop &resolution:"
+msgid "Resolution"
+msgstr "&دقت رومیزی:‌"
 
 #. i18n: ectx: property (text), widget (QLabel, layoutLabel)
-#: rdp/rdppreferences.ui:208
+#: rdp/rdppreferences.ui:182
 #, kde-format
 msgid "&Keyboard layout:"
 msgstr "طرح‌بندی &صفحه کلید:‌"
 
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
+#: rdp/rdppreferences.ui:208
+#, fuzzy, kde-format
+#| msgid "On this computer"
+msgid "On This Computer"
+msgstr "روی این رایانه"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
+#: rdp/rdppreferences.ui:213
+#, fuzzy, kde-format
+#| msgid "On remote computer"
+msgid "On Remote Computer"
+msgstr "روی رایانه دور"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
+#: rdp/rdppreferences.ui:218
+#, fuzzy, kde-format
+#| msgid "Disable sound"
+msgid "Disable Sound"
+msgstr "غیرفعال‌سازی صوت"
+
+#. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_Resolution)
+#. i18n: ectx: property (whatsThis), widget (KComboBox, resolutionComboBox)
+#: rdp/rdppreferences.ui:238 vnc/vncpreferences.ui:86
+#, kde-format
+msgid ""
+"Here you can specify the resolution of the remote desktop. This resolution "
+"determines the size of the desktop that will be presented to you."
+msgstr ""
+"اینجا می‌توانید دقت رومیزی راه دور را مشخص کنید. این وضوح اندازه رومیزی که "
+"برای شما ظاهر می‌شود را تعیین می‌کند."
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#: rdp/rdppreferences.ui:245
+#, fuzzy, kde-format
+#| msgid "Small (800x600)"
+msgid "Small (1280x720)"
+msgstr "کوچک )۸۰۰x۶۰۰("
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#: rdp/rdppreferences.ui:250
+#, kde-format
+msgid "Medium (1600x900)"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#: rdp/rdppreferences.ui:255
+#, fuzzy, kde-format
+#| msgid "Large (1280x1024)"
+msgid "Large (1920x1080)"
+msgstr "بزرگ )۱۲۸۰x۱۰۲۴("
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#: rdp/rdppreferences.ui:260
+#, kde-format
+msgid "Current Window Size"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
+#: rdp/rdppreferences.ui:265 vnc/vncpreferences.ui:118
+#, fuzzy, kde-format
+#| msgid "Current screen resolution"
+msgid "Current Screen Resolution"
+msgstr "دقت پرده جاری"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
+#: rdp/rdppreferences.ui:270 vnc/vncpreferences.ui:123
+#, fuzzy, kde-format
+msgid "Custom Resolution (...)"
+msgstr "سفارشی )...("
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
+#: rdp/rdppreferences.ui:296
+#, kde-format
+msgid "Force H.264"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
+#: rdp/rdppreferences.ui:301
+#, fuzzy, kde-format
+#| msgid "Remove"
+msgid "Force RemoteFX"
+msgstr "حذف"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
+#: rdp/rdppreferences.ui:306
+#, kde-format
+msgid "Disable All Acceleration"
+msgstr ""
+
 #. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:224
+#: rdp/rdppreferences.ui:326
 #, kde-format
 msgid ""
 "Use this to specify your keyboard layout. This layout setting is used to "
@@ -850,484 +883,442 @@ msgstr ""
 "برای ارسال کدهای صحیح صفحه کلید به کارساز استفاده خواهد شد."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:231
+#: rdp/rdppreferences.ui:333
 #, kde-format
 msgid "Arabic (ar)"
 msgstr "عربی )ar("
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:236
+#: rdp/rdppreferences.ui:338
 #, kde-format
 msgid "Czech (cs)"
 msgstr "چک )cs("
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:241
+#: rdp/rdppreferences.ui:343
 #, kde-format
 msgid "Danish (da)"
 msgstr "دانمارکی )da("
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:246
+#: rdp/rdppreferences.ui:348
 #, kde-format
 msgid "German (de)"
 msgstr "آلمانی )de("
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:251
+#: rdp/rdppreferences.ui:353
 #, kde-format
 msgid "Swiss German (de-ch)"
 msgstr "آلمانی سوئیسی )de-ch("
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:256
+#: rdp/rdppreferences.ui:358
 #, kde-format
 msgid "American Dvorak (en-dv)"
 msgstr "Dvorak آمریکایی (en-dv)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:261
+#: rdp/rdppreferences.ui:363
 #, kde-format
 msgid "British English (en-gb)"
 msgstr "انگلیسی بریتانیایی )en-gb("
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:266
+#: rdp/rdppreferences.ui:368
 #, kde-format
 msgid "US English (en-us)"
 msgstr "انگلیسی آمریکایی )en-us("
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:271
+#: rdp/rdppreferences.ui:373
 #, kde-format
 msgid "Spanish (es)"
 msgstr "اسپانیولی )es("
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:276
+#: rdp/rdppreferences.ui:378
 #, kde-format
 msgid "Estonian (et)"
 msgstr "استونی )et("
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:281
+#: rdp/rdppreferences.ui:383
 #, kde-format
 msgid "Finnish (fi)"
 msgstr "فنلاندی )fi("
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:286
+#: rdp/rdppreferences.ui:388
 #, kde-format
 msgid "Faroese (fo)"
 msgstr "فاروس (fo)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:291
+#: rdp/rdppreferences.ui:393
 #, kde-format
 msgid "French (fr)"
 msgstr "فرانسوی )fr("
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:296
+#: rdp/rdppreferences.ui:398
 #, kde-format
 msgid "Belgian (fr-be)"
 msgstr "بلژیکی )fr-be("
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:301
+#: rdp/rdppreferences.ui:403
 #, kde-format
 msgid "French Canadian (fr-ca)"
 msgstr "کانادایی فرانسوی )fr-ca("
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:306
+#: rdp/rdppreferences.ui:408
 #, kde-format
 msgid "Swiss French (fr-ch)"
 msgstr "فرانسوی سوئیسی )fr-ch("
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:311
+#: rdp/rdppreferences.ui:413
 #, kde-format
 msgid "Hebrew (he)"
 msgstr "عبری )he("
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:316
+#: rdp/rdppreferences.ui:418
 #, kde-format
 msgid "Croatian (hr)"
 msgstr "کرواسی )hr("
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:321
+#: rdp/rdppreferences.ui:423
 #, kde-format
 msgid "Hungarian (hu)"
 msgstr "مجارستانی )hu("
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:326
+#: rdp/rdppreferences.ui:428
 #, kde-format
 msgid "Icelandic (is)"
 msgstr "ایسلندی )is("
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:331
+#: rdp/rdppreferences.ui:433
 #, kde-format
 msgid "Italian (it)"
 msgstr "ایتالیایی )it("
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:336
+#: rdp/rdppreferences.ui:438
 #, kde-format
 msgid "Japanese (ja)"
 msgstr "ژاپنی )ja("
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:341
+#: rdp/rdppreferences.ui:443
 #, kde-format
 msgid "Korean (ko)"
 msgstr "کره‌ای )ko("
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:346
+#: rdp/rdppreferences.ui:448
 #, kde-format
 msgid "Lithuanian (lt)"
 msgstr "لیتوانی )lt("
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:351
+#: rdp/rdppreferences.ui:453
 #, kde-format
 msgid "Latvian (lv)"
 msgstr "لاتوینی )lv("
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:356
+#: rdp/rdppreferences.ui:458
 #, kde-format
 msgid "Macedonian (mk)"
 msgstr "مقدونی )mk("
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:361
+#: rdp/rdppreferences.ui:463
 #, kde-format
 msgid "Dutch (nl)"
 msgstr "هلندی )nl("
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:366
+#: rdp/rdppreferences.ui:468
 #, kde-format
 msgid "Belgian Dutch (nl-be)"
 msgstr "هلندی بلژیکی )nl-be("
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:371
+#: rdp/rdppreferences.ui:473
 #, kde-format
 msgid "Norwegian (no)"
 msgstr "نروژی )no("
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:376
+#: rdp/rdppreferences.ui:478
 #, kde-format
 msgid "Polish (pl)"
 msgstr "لهستانی )pl("
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:381
+#: rdp/rdppreferences.ui:483
 #, kde-format
 msgid "Portuguese (pt)"
 msgstr "پرتقالی )pt("
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:386
+#: rdp/rdppreferences.ui:488
 #, kde-format
 msgid "Brazilian (pt-br)"
 msgstr "برزیلی )pt-br("
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:391
+#: rdp/rdppreferences.ui:493
 #, kde-format
 msgid "Russian (ru)"
 msgstr "روسی )ru("
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:396
+#: rdp/rdppreferences.ui:498
 #, kde-format
 msgid "Slovenian (sl)"
 msgstr "اسلونیایی )sl("
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:401
+#: rdp/rdppreferences.ui:503
 #, kde-format
 msgid "Swedish (sv)"
 msgstr "سوئدی )sv("
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:406
+#: rdp/rdppreferences.ui:508
 #, kde-format
 msgid "Thai (th)"
 msgstr "تایلندی )th("
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:411
+#: rdp/rdppreferences.ui:513
 #, kde-format
 msgid "Turkish (tr)"
 msgstr "ترکی )tr("
 
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ScaleToSize)
+#: rdp/rdppreferences.ui:527
+#, kde-format
+msgid "Scale window contents to match resolution"
+msgstr ""
+
 #. i18n: ectx: property (text), widget (QLabel, soundLabel)
-#: rdp/rdppreferences.ui:421
+#: rdp/rdppreferences.ui:553
 #, fuzzy, kde-format
 msgctxt "label for soundsettings in preferences dialog"
 msgid "Sound:"
 msgstr "صوت:"
 
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
-#: rdp/rdppreferences.ui:442
-#, fuzzy, kde-format
-#| msgid "On this computer"
-msgid "On This Computer"
-msgstr "روی این رایانه"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
-#: rdp/rdppreferences.ui:447
-#, fuzzy, kde-format
-#| msgid "On remote computer"
-msgid "On Remote Computer"
-msgstr "روی رایانه دور"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
-#: rdp/rdppreferences.ui:452
-#, fuzzy, kde-format
-#| msgid "Disable sound"
-msgid "Disable Sound"
-msgstr "غیرفعال‌سازی صوت"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_SoundSystem)
-#: rdp/rdppreferences.ui:467
+#: rdp/rdpsession.cpp:142
 #, kde-format
-msgid "ALSA"
+msgctxt "@title:dialog"
+msgid "Logon Error"
 msgstr ""
 
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_SoundSystem)
-#: rdp/rdppreferences.ui:472
+#: rdp/rdpsession.cpp:183
 #, kde-format
-msgid "PulseAudio"
-msgstr ""
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_SoundSystem)
-#: rdp/rdppreferences.ui:477
-#, kde-format
-msgid "None"
-msgstr ""
-
-#. i18n: ectx: property (text), widget (QLabel, performanceLabel)
-#: rdp/rdppreferences.ui:487
-#, kde-format
-msgctxt "label for performance settings in preferences dialog"
-msgid "Performance:"
-msgstr ""
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Performance)
-#: rdp/rdppreferences.ui:504
-#, kde-format
-msgid "Modem"
-msgstr ""
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Performance)
-#: rdp/rdppreferences.ui:509
-#, kde-format
-msgid "Broadband"
-msgstr ""
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Performance)
-#: rdp/rdppreferences.ui:514
-#, kde-format
-msgid "LAN"
-msgstr ""
-
-#. i18n: ectx: property (text), widget (QLabel, remoteFXLabel)
-#: rdp/rdppreferences.ui:522
-#, fuzzy, kde-format
-#| msgid "Remove"
-msgid "RemoteFX:"
-msgstr "حذف"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RemoteFX)
-#: rdp/rdppreferences.ui:532
-#, kde-format
-msgid "Enhanced visual experience"
-msgstr ""
-
-#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_RemoteFX)
-#: rdp/rdppreferences.ui:535
-#, kde-format
+msgctxt "@label"
 msgid ""
-"RemoteFX covers a set of technologies that enhance visual experience of the "
-"Remote Desktop Protocol."
+"Host: %1:%2\n"
+"Common Name: %3\n"
+"Subject: %4\n"
+"Issuer: %5\n"
+"Fingerprint: %6\n"
 msgstr ""
 
-#. i18n: ectx: property (text), widget (QLabel, shareMediaLabel)
-#: rdp/rdppreferences.ui:542
-#, kde-format
-msgid "Share Media:"
-msgstr ""
-
-#. i18n: ectx: property (whatsThis), widget (KLineEdit, kcfg_ShareMedia)
-#: rdp/rdppreferences.ui:560
-#, kde-format
-msgid "Share a local media directory with the remote host."
-msgstr ""
-
-#. i18n: ectx: property (title), widget (QGroupBox, expertGroupBox)
-#: rdp/rdppreferences.ui:585
+#: rdp/rdpsession.cpp:592
 #, fuzzy, kde-format
-msgid "Expert Options"
-msgstr "گزینه‌های تخصصی"
-
-#. i18n: ectx: property (text), widget (QLabel, consoleLabel)
-#: rdp/rdppreferences.ui:591
-#, kde-format
-msgid "Console login:"
-msgstr ""
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_Console)
-#: rdp/rdppreferences.ui:601
-#, fuzzy, kde-format
-#| msgid "Switch to Window Mode"
-msgid "Attach to Windows Server console"
-msgstr "سودهی به حالت پنجره"
-
-#. i18n: ectx: property (text), widget (QLabel, extraOptionsLabel)
-#: rdp/rdppreferences.ui:608
-#, kde-format
-msgid "Extra options:"
-msgstr "گزینه‌های اضافی:"
-
-#. i18n: ectx: property (whatsThis), widget (KLineEdit, kcfg_ExtraOptions)
-#: rdp/rdppreferences.ui:624
-#, fuzzy, kde-format
-#| msgid "Here you can enter additional rdesktop options."
-msgid "Here you can enter additional xfreerdp (FreeRDP) options."
-msgstr "گزینه‌های رومیزی دور اختیاری را در اینجا می‌توانید وارد کنید."
-
-#. i18n: ectx: property (title), widget (QGroupBox, loginGroupBox)
-#: rdp/rdppreferences.ui:637
-#, kde-format
-msgid "Login"
-msgstr ""
-
-#. i18n: ectx: property (text), widget (QLabel, defaultUserLabel)
-#: rdp/rdppreferences.ui:645
-#, kde-format
-msgid "Default user name:"
-msgstr ""
-
-#. i18n: ectx: property (placeholderText), widget (KLineEdit, kcfg_DefaultRdpUserName)
-#: rdp/rdppreferences.ui:652
-#, kde-format
-msgid "No default user name"
-msgstr ""
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RecognizeLdapLogins)
-#: rdp/rdppreferences.ui:664
-#, kde-format
-msgid "Automatically recognize \"LDAP\"-Logins and share passwords"
-msgstr ""
-
-#: rdp/rdpview.cpp:104
-#, kde-format
-msgid "Media Folder does not Exist"
-msgstr ""
-
-#: rdp/rdpview.cpp:104
-#, kde-format
-msgid ""
-"The folder %1 does not exist.\n"
-"Please set an existing folder to share or empty the \"Share Media\" option "
-"if you do not want to share any folder."
-msgstr ""
-
-#: rdp/rdpview.cpp:113
-#, kde-format
-msgid "Enter Username"
-msgstr "وارد کردن نام پرونده"
-
-#: rdp/rdpview.cpp:114
-#, kde-format
-msgid "Please enter the username you would like to use for login."
-msgstr "لطفاً، نام کاربری را که می‌خواهید برای ورود استفاده کنید را وارد کنید."
-
-#: rdp/rdpview.cpp:134 vnc/vncview.cpp:344
-#, kde-format
-msgid "Access to the system requires a password."
+#| msgid "Access to the system requires a password."
+msgctxt "@label"
+msgid "Access to this system requires a password."
 msgstr "دستیابی به سیستم نیاز به اسم‌ رمز دارد."
 
-#: rdp/rdpview.cpp:442
+#: rdp/rdpsession.cpp:595
 #, fuzzy, kde-format
-#| msgid "Could not start rdesktop; make sure rdesktop is properly installed."
-msgid "Could not start \"%1\"; make sure %1 is properly installed."
-msgstr ""
-"رومیزی راه دور نتوانست آغاز شود؛ از نصب صحیح رومیزی راه دور مطمئن شوید."
+#| msgid "Access to the system requires a password."
+msgctxt "@label"
+msgid "Access to this system requires a username and password."
+msgstr "دستیابی به سیستم نیاز به اسم‌ رمز دارد."
 
-#: rdp/rdpview.cpp:443 rdp/rdpview.cpp:467 rdp/rdpview.cpp:471
+#: rdp/rdpsession.cpp:617
 #, kde-format
-msgid "RDP Failure"
+msgctxt "@label"
+msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr ""
 
-#: rdp/rdpview.cpp:465
-#, fuzzy, kde-format
-#| msgid ""
-#| "The version of rdesktop you are using (%1) is too old:\n"
-#| "rdesktop 1.3.2 or greater is required."
+#: rdp/rdpsession.cpp:618
+#, kde-format
+msgctxt "@title:dialog"
+msgid "Verify Certificate"
+msgstr ""
+
+#: rdp/rdpsession.cpp:623 rdp/rdpsession.cpp:646
+#, kde-format
+msgctxt "@label"
+msgid "Remember this certificate"
+msgstr ""
+
+#: rdp/rdpsession.cpp:640
+#, kde-format
+msgctxt "@label"
+msgid "The certificate for this system has changed. Do you wish to continue?"
+msgstr ""
+
+#: rdp/rdpsession.cpp:641
+#, kde-format
+msgctxt "@title:dialog"
+msgid "Certificate has Changed"
+msgstr ""
+
+#: rdp/rdpsession.cpp:644
+#, kde-format
+msgctxt "@label"
 msgid ""
-"The version of \"xfreerdp\" you are using is too old.\n"
-"xfreerdp 1.0.2 or greater is required."
-msgstr ""
-"نسخه رومیزی دوری که استفاده می‌کنید )%1(، بسیار قدیمی است:\n"
-"rdesktop ۱.۳.۲ یا بیشتر مورد نیاز است."
-
-#: rdp/rdpview.cpp:470
-#, kde-format
-msgid "Connection failed. You might have passed a wrong address or username."
+"Previous certificate:\n"
+"%1\n"
+"New Certificate:\n"
+"%2"
 msgstr ""
 
-#: rdp/rdpview.cpp:486
-#, kde-format
-msgid "Name or service not known."
-msgstr ""
-
-#: rdp/rdpview.cpp:487 rdp/rdpview.cpp:493 rdp/rdpview.cpp:498
-#: rdp/rdpview.cpp:506
-#, kde-format
-msgid "Connection Failure"
+#: rdp/rdpsession.cpp:758
+#, fuzzy, kde-format
+#| msgid "Connection Failure"
+msgctxt "@title:dialog"
+msgid "Login Failure"
 msgstr "خرابی اتصال"
 
-#: rdp/rdpview.cpp:492
+#: rdp/rdpsession.cpp:759
 #, kde-format
-msgid "Connection attempt to host failed."
-msgstr "خرابی تلاش برای اتصال به میزبان."
-
-#: rdp/rdpview.cpp:497
-#, fuzzy, kde-format
-msgid "Authentication failure, check credentials."
-msgstr "احراز هویت در %1"
-
-#: rdp/rdpview.cpp:505
-#, fuzzy, kde-format
-#| msgid "Connection attempt to host failed."
+msgctxt "@label"
 msgid ""
-"Connection attempt to host failed. Security negotiation or connection "
-"failure."
-msgstr "خرابی تلاش برای اتصال به میزبان."
+"Unable to login with the provided credentials. Please double check the user "
+"and password."
+msgstr ""
+
+#: rdp/rdpsession.cpp:765
+#, kde-format
+msgctxt "@title:dialog"
+msgid "Account Problems"
+msgstr ""
+
+#: rdp/rdpsession.cpp:766
+#, kde-format
+msgctxt "@label"
+msgid ""
+"The provided account is not allowed to log in to this machine. Please "
+"contact your system administrator."
+msgstr ""
+
+#: rdp/rdpsession.cpp:771
+#, kde-format
+msgctxt "@title:dialog"
+msgid "Password Problems"
+msgstr ""
+
+#: rdp/rdpsession.cpp:772
+#, kde-format
+msgctxt "@label"
+msgid ""
+"Unable to login with the provided password. Please contact your system "
+"administrator to change it."
+msgstr ""
+
+#: rdp/rdpsession.cpp:775
+#, fuzzy, kde-format
+#| msgid "Connection"
+msgctxt "@title:dialog"
+msgid "Connection Lost"
+msgstr "اتصال"
+
+#: rdp/rdpsession.cpp:776
+#, kde-format
+msgctxt "@label"
+msgid "Lost connection to the server."
+msgstr ""
+
+#: rdp/rdpsession.cpp:780
+#, kde-format
+msgctxt "@title:dialog"
+msgid "Server not Found"
+msgstr ""
+
+#: rdp/rdpsession.cpp:781
+#, kde-format
+msgctxt "@label"
+msgid "Could not find the server."
+msgstr ""
+
+#: rdp/rdpsession.cpp:784
+#, fuzzy, kde-format
+#| msgid "Connection Failure"
+msgctxt "@title:dialog"
+msgid "Connection Refused"
+msgstr "خرابی اتصال"
+
+#: rdp/rdpsession.cpp:785
+#, kde-format
+msgctxt "@label"
+msgid "The server refused the connection request."
+msgstr ""
+
+#: rdp/rdpsession.cpp:789
+#, fuzzy, kde-format
+#| msgid "KDE remote desktop connection"
+msgctxt "@title:dialog"
+msgid "Could not Connect"
+msgstr "اتصال رومیزی دور KDE"
+
+#: rdp/rdpsession.cpp:790
+#, kde-format
+msgctxt "@label"
+msgid "Could not connect to the server."
+msgstr ""
+
+#: rdp/rdpsession.cpp:795
+#, fuzzy, kde-format
+#| msgid "Connection Failure"
+msgctxt "@title:dialog"
+msgid "Connection Closed"
+msgstr "خرابی اتصال"
+
+#: rdp/rdpsession.cpp:796
+#, kde-format
+msgctxt "@label"
+msgid "The connection to the server was closed."
+msgstr ""
+
+#: rdp/rdpsession.cpp:799
+#, fuzzy, kde-format
+#| msgid "Connection Failure"
+msgctxt "@title:dialog"
+msgid "Connection Failed"
+msgstr "خرابی اتصال"
+
+#: rdp/rdpsession.cpp:800
+#, kde-format
+msgctxt "@label"
+msgid "An unknown error occurred"
+msgstr ""
 
 #: rdp/rdpviewfactory.cpp:22
 #, kde-format
 msgid "Connect to a Windows Remote Desktop (RDP)"
 msgstr "اتصال به رومیزی دور ویندوز )RDP(."
 
-#: rdp/rdpviewfactory.cpp:53
+#: rdp/rdpviewfactory.cpp:51
 #, fuzzy, kde-format
 msgid "New RDP Connection..."
 msgstr "اتصال RDP &جدید‌..."
 
-#: rdp/rdpviewfactory.cpp:63
+#: rdp/rdpviewfactory.cpp:61
 #, fuzzy, kde-format
 msgid ""
 "<html>Enter the address here. Port is optional.<br /><i>Example: "
@@ -1335,15 +1326,6 @@ msgid ""
 msgstr ""
 "نشانی را اینجا وارد کنید. درگاه اختیاری است.<br /><i>مثال: rdpserver:3389 "
 "(میزبان:درگاه)</i>"
-
-#: rdp/rdpviewfactory.cpp:70
-#, fuzzy, kde-format
-#| msgid "Could not start rdesktop; make sure rdesktop is properly installed."
-msgid ""
-"The application \"xfreerdp\" cannot be found on your system; make sure it is "
-"properly installed if you need RDP support."
-msgstr ""
-"رومیزی راه دور نتوانست آغاز شود؛ از نصب صحیح رومیزی راه دور مطمئن شوید."
 
 #: remotedesktopsmodel.cpp:112
 #, kde-format
@@ -1451,6 +1433,12 @@ msgstr "اتصال"
 msgid "Connected."
 msgstr "اتصال"
 
+#. i18n: ectx: property (title), widget (QGroupBox, vncGroupBox)
+#: vnc/vncpreferences.ui:17
+#, kde-format
+msgid "Connection"
+msgstr "اتصال"
+
 #. i18n: ectx: property (text), widget (QLabel, connectionLabel)
 #: vnc/vncpreferences.ui:23
 #, fuzzy, kde-format
@@ -1501,6 +1489,36 @@ msgstr "کیفیت پایین )مودم، ISDN، اینترنت با سرعت ک
 #, kde-format
 msgid "Scale to Size:"
 msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
+#: vnc/vncpreferences.ui:93
+#, kde-format
+msgid "Minimal (640x480)"
+msgstr "کمین )۶۴۰x۴۸۰("
+
+#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
+#: vnc/vncpreferences.ui:98
+#, kde-format
+msgid "Small (800x600)"
+msgstr "کوچک )۸۰۰x۶۰۰("
+
+#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
+#: vnc/vncpreferences.ui:103
+#, kde-format
+msgid "Normal (1024x768)"
+msgstr "عادی )۱۰۲۴x۷۶۸("
+
+#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
+#: vnc/vncpreferences.ui:108
+#, kde-format
+msgid "Large (1280x1024)"
+msgstr "بزرگ )۱۲۸۰x۱۰۲۴("
+
+#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
+#: vnc/vncpreferences.ui:113
+#, kde-format
+msgid "Very Large (1600x1200)"
+msgstr "بسیار بزرگ )۱۶۰۰x۱۲۰۰("
 
 #. i18n: ectx: property (text), widget (QCheckBox, use_ssh_tunnel)
 #: vnc/vncpreferences.ui:204
@@ -1566,6 +1584,11 @@ msgstr "احراز هویت در %1"
 msgid "Error creating tunnel socket"
 msgstr ""
 
+#: vnc/vncview.cpp:344
+#, kde-format
+msgid "Access to the system requires a password."
+msgstr "دستیابی به سیستم نیاز به اسم‌ رمز دارد."
+
 #: vnc/vncview.cpp:345
 #, fuzzy, kde-format
 msgid "Authentication failed. Please try again."
@@ -1605,14 +1628,75 @@ msgstr ""
 "نشانی را در اینجا وارد کنید.<br /><i>مثال: vncserver:1 (میزبان:درگاه / "
 "پرده)</i>"
 
+#~ msgid "Desktop &resolution:"
+#~ msgstr "&دقت رومیزی:‌"
+
+#, fuzzy
+#~ msgid "Expert Options"
+#~ msgstr "گزینه‌های تخصصی"
+
+#, fuzzy
+#~| msgid "Switch to Window Mode"
+#~ msgid "Attach to Windows Server console"
+#~ msgstr "سودهی به حالت پنجره"
+
+#~ msgid "Extra options:"
+#~ msgstr "گزینه‌های اضافی:"
+
+#, fuzzy
+#~| msgid "Here you can enter additional rdesktop options."
+#~ msgid "Here you can enter additional xfreerdp (FreeRDP) options."
+#~ msgstr "گزینه‌های رومیزی دور اختیاری را در اینجا می‌توانید وارد کنید."
+
+#~ msgid "Enter Username"
+#~ msgstr "وارد کردن نام پرونده"
+
+#~ msgid "Please enter the username you would like to use for login."
+#~ msgstr ""
+#~ "لطفاً، نام کاربری را که می‌خواهید برای ورود استفاده کنید را وارد کنید."
+
+#, fuzzy
+#~| msgid "Could not start rdesktop; make sure rdesktop is properly installed."
+#~ msgid "Could not start \"%1\"; make sure %1 is properly installed."
+#~ msgstr ""
+#~ "رومیزی راه دور نتوانست آغاز شود؛ از نصب صحیح رومیزی راه دور مطمئن شوید."
+
+#, fuzzy
+#~| msgid ""
+#~| "The version of rdesktop you are using (%1) is too old:\n"
+#~| "rdesktop 1.3.2 or greater is required."
+#~ msgid ""
+#~ "The version of \"xfreerdp\" you are using is too old.\n"
+#~ "xfreerdp 1.0.2 or greater is required."
+#~ msgstr ""
+#~ "نسخه رومیزی دوری که استفاده می‌کنید )%1(، بسیار قدیمی است:\n"
+#~ "rdesktop ۱.۳.۲ یا بیشتر مورد نیاز است."
+
+#~ msgid "Connection attempt to host failed."
+#~ msgstr "خرابی تلاش برای اتصال به میزبان."
+
+#, fuzzy
+#~ msgid "Authentication failure, check credentials."
+#~ msgstr "احراز هویت در %1"
+
+#, fuzzy
+#~| msgid "Connection attempt to host failed."
+#~ msgid ""
+#~ "Connection attempt to host failed. Security negotiation or connection "
+#~ "failure."
+#~ msgstr "خرابی تلاش برای اتصال به میزبان."
+
+#, fuzzy
+#~| msgid "Could not start rdesktop; make sure rdesktop is properly installed."
+#~ msgid ""
+#~ "The application \"xfreerdp\" cannot be found on your system; make sure it "
+#~ "is properly installed if you need RDP support."
+#~ msgstr ""
+#~ "رومیزی راه دور نتوانست آغاز شود؛ از نصب صحیح رومیزی راه دور مطمئن شوید."
+
 #, fuzzy
 #~ msgid "New Konsole Connection..."
 #~ msgstr "اتصال VNC &جدید‌..."
-
-#, fuzzy
-#~| msgid "KDE remote desktop connection"
-#~ msgid "KRDC Konsole Connection"
-#~ msgstr "اتصال رومیزی دور KDE"
 
 #, fuzzy
 #~ msgid ""
@@ -1636,11 +1720,6 @@ msgstr ""
 #~| msgid "Color &depth:"
 #~ msgid "Colour Depth"
 #~ msgstr "&عمق‌ رنگ:‌"
-
-#, fuzzy
-#~| msgid "Desktop &resolution:"
-#~ msgid "Resolution"
-#~ msgstr "&دقت رومیزی:‌"
 
 #, fuzzy
 #~| msgid "&Session"

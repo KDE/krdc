@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:32+0000\n"
+"POT-Creation-Date: 2023-11-29 00:42+0000\n"
 "PO-Revision-Date: 2014-02-24 01:33+0100\n"
 "Last-Translator: Sönke Dibbern <s_dibbern@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -690,99 +690,52 @@ msgstr "Feern Schriefdischen"
 msgid "Filter"
 msgstr "Filter"
 
-#: rdp/rdphostpreferences.cpp:181
+#. i18n: ectx: property (text), widget (QLabel, shareMediaLabel)
+#: rdp/rdppreferences.ui:17
 #, kde-format
-msgid "Browse to media share path"
+msgid "Share Media:"
+msgstr "Orner delen:"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
+#: rdp/rdppreferences.ui:40 rdp/rdppreferences.ui:291
+#, kde-format
+msgid "Use Best Available"
 msgstr ""
 
-#. i18n: ectx: property (title), widget (QGroupBox, connectionGroupBox)
-#. i18n: ectx: property (title), widget (QGroupBox, vncGroupBox)
-#: rdp/rdppreferences.ui:17 vnc/vncpreferences.ui:17
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
+#: rdp/rdppreferences.ui:45
 #, kde-format
-msgid "Connection"
-msgstr "Verbinnen"
+msgid "True Color with Alpha (32 Bit)"
+msgstr "Echtklören mit Alpha (32 Bit)"
 
-#. i18n: ectx: property (text), widget (QLabel, resolutionLabel)
-#: rdp/rdppreferences.ui:25
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
+#: rdp/rdppreferences.ui:50
 #, kde-format
-msgid "Desktop &resolution:"
-msgstr "Schriefdisch-&Oplösen"
+msgid "True Color (24 Bit)"
+msgstr "Echtklören (24 Bit)"
 
-#. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_Resolution)
-#. i18n: ectx: property (whatsThis), widget (KComboBox, resolutionComboBox)
-#: rdp/rdppreferences.ui:48 vnc/vncpreferences.ui:86
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
+#: rdp/rdppreferences.ui:55
 #, kde-format
-msgid ""
-"Here you can specify the resolution of the remote desktop. This resolution "
-"determines the size of the desktop that will be presented to you."
-msgstr ""
-"Hier kannst Du de Oplösen vun den annern Schriefdisch angeven. Disse Oplösen "
-"leggt fast, wo groot Di de Schriefdisch wiest warrt."
+msgid "High Color (16 Bit)"
+msgstr "Veelklören (16 Bit)"
 
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
-#: rdp/rdppreferences.ui:55 vnc/vncpreferences.ui:93
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
+#: rdp/rdppreferences.ui:60
 #, kde-format
-msgid "Minimal (640x480)"
-msgstr "Sietst (640x480)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
-#: rdp/rdppreferences.ui:60 vnc/vncpreferences.ui:98
-#, kde-format
-msgid "Small (800x600)"
-msgstr "Siet (800x600)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
-#: rdp/rdppreferences.ui:65 vnc/vncpreferences.ui:103
-#, kde-format
-msgid "Normal (1024x768)"
-msgstr "Normaal (1024x768)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
-#: rdp/rdppreferences.ui:70 vnc/vncpreferences.ui:108
-#, kde-format
-msgid "Large (1280x1024)"
-msgstr "Groot (1280x1024)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
-#: rdp/rdppreferences.ui:75 vnc/vncpreferences.ui:113
-#, kde-format
-msgid "Very Large (1600x1200)"
-msgstr "Bannig groot (1600x1200)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
-#: rdp/rdppreferences.ui:80 vnc/vncpreferences.ui:118
-#, kde-format
-msgid "Current Screen Resolution"
-msgstr "Schirmoplösen opstunns"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
-#: rdp/rdppreferences.ui:85 vnc/vncpreferences.ui:123
-#, kde-format
-msgid "Custom Resolution (...)"
-msgstr "Egen Oplösen (...)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#: rdp/rdppreferences.ui:90
-#, kde-format
-msgid "Current KRDC Size"
-msgstr "Aktuell KRDC-Grött"
+msgid "Low Color (8 Bit)"
+msgstr "Sietklören (8 Bit)"
 
 #. i18n: ectx: property (text), widget (QLabel, widthLabel)
-#: rdp/rdppreferences.ui:103 vnc/vncpreferences.ui:136
+#: rdp/rdppreferences.ui:73 vnc/vncpreferences.ui:136
 #, kde-format
 msgid "&Width:"
 msgstr "&Breed:"
 
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Width)
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_ScalingWidth)
-#: rdp/rdppreferences.ui:119 vnc/vncpreferences.ui:152
+#: rdp/rdppreferences.ui:89 vnc/vncpreferences.ui:152
 #, kde-format
 msgid ""
 "This is the width of the remote desktop. You can only change this value "
@@ -792,14 +745,14 @@ msgstr ""
 "ännern, wenn Du baven ünner Oplösen \"Egen\" instellst."
 
 #. i18n: ectx: property (text), widget (QLabel, heightLabel)
-#: rdp/rdppreferences.ui:135 vnc/vncpreferences.ui:168
+#: rdp/rdppreferences.ui:105 vnc/vncpreferences.ui:168
 #, kde-format
 msgid "H&eight:"
 msgstr "&Hööchde:"
 
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Height)
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_ScalingHeight)
-#: rdp/rdppreferences.ui:151 vnc/vncpreferences.ui:184
+#: rdp/rdppreferences.ui:121 vnc/vncpreferences.ui:184
 #, kde-format
 msgid ""
 "This is the height of the remote desktop. You can only change this value "
@@ -808,44 +761,121 @@ msgstr ""
 "Dit is de Hööchde vun den annern Schriefdisch. Du kannst dissen Weert bloots "
 "ännern, wenn Du baven ünner Oplösen \"Egen\" instellst."
 
+#. i18n: ectx: property (text), widget (QLabel, accelerationLabel)
+#: rdp/rdppreferences.ui:136
+#, kde-format
+msgid "Acceleration:"
+msgstr ""
+
 #. i18n: ectx: property (text), widget (QLabel, colorDepthLabel)
-#: rdp/rdppreferences.ui:168
+#: rdp/rdppreferences.ui:159
 #, kde-format
 msgid "Color &depth:"
 msgstr "Klöör&deepde:"
 
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
-#: rdp/rdppreferences.ui:185
+#. i18n: ectx: property (text), widget (QLabel, resolutionLabel)
+#: rdp/rdppreferences.ui:172
 #, kde-format
-msgid "Low Color (8 Bit)"
-msgstr "Sietklören (8 Bit)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
-#: rdp/rdppreferences.ui:190
-#, kde-format
-msgid "High Color (16 Bit)"
-msgstr "Veelklören (16 Bit)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
-#: rdp/rdppreferences.ui:195
-#, kde-format
-msgid "True Color (24 Bit)"
-msgstr "Echtklören (24 Bit)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
-#: rdp/rdppreferences.ui:200
-#, kde-format
-msgid "True Color with Alpha (32 Bit)"
-msgstr "Echtklören mit Alpha (32 Bit)"
+msgid "Resolution"
+msgstr "Oplösen"
 
 #. i18n: ectx: property (text), widget (QLabel, layoutLabel)
-#: rdp/rdppreferences.ui:208
+#: rdp/rdppreferences.ui:182
 #, kde-format
 msgid "&Keyboard layout:"
 msgstr "&Tasttoornen:"
 
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
+#: rdp/rdppreferences.ui:208
+#, kde-format
+msgid "On This Computer"
+msgstr "Op dissen Reekner"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
+#: rdp/rdppreferences.ui:213
+#, kde-format
+msgid "On Remote Computer"
+msgstr "Op feern Reekner"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
+#: rdp/rdppreferences.ui:218
+#, kde-format
+msgid "Disable Sound"
+msgstr "Kläng utmaken"
+
+#. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_Resolution)
+#. i18n: ectx: property (whatsThis), widget (KComboBox, resolutionComboBox)
+#: rdp/rdppreferences.ui:238 vnc/vncpreferences.ui:86
+#, kde-format
+msgid ""
+"Here you can specify the resolution of the remote desktop. This resolution "
+"determines the size of the desktop that will be presented to you."
+msgstr ""
+"Hier kannst Du de Oplösen vun den annern Schriefdisch angeven. Disse Oplösen "
+"leggt fast, wo groot Di de Schriefdisch wiest warrt."
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#: rdp/rdppreferences.ui:245
+#, fuzzy, kde-format
+#| msgid "Small (800x600)"
+msgid "Small (1280x720)"
+msgstr "Siet (800x600)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#: rdp/rdppreferences.ui:250
+#, kde-format
+msgid "Medium (1600x900)"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#: rdp/rdppreferences.ui:255
+#, fuzzy, kde-format
+#| msgid "Large (1280x1024)"
+msgid "Large (1920x1080)"
+msgstr "Groot (1280x1024)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#: rdp/rdppreferences.ui:260
+#, fuzzy, kde-format
+#| msgid "Current KRDC Size"
+msgid "Current Window Size"
+msgstr "Aktuell KRDC-Grött"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
+#: rdp/rdppreferences.ui:265 vnc/vncpreferences.ui:118
+#, kde-format
+msgid "Current Screen Resolution"
+msgstr "Schirmoplösen opstunns"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
+#: rdp/rdppreferences.ui:270 vnc/vncpreferences.ui:123
+#, kde-format
+msgid "Custom Resolution (...)"
+msgstr "Egen Oplösen (...)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
+#: rdp/rdppreferences.ui:296
+#, kde-format
+msgid "Force H.264"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
+#: rdp/rdppreferences.ui:301
+#, fuzzy, kde-format
+#| msgid "RemoteFX:"
+msgid "Force RemoteFX"
+msgstr "RemoteFX:"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
+#: rdp/rdppreferences.ui:306
+#, kde-format
+msgid "Disable All Acceleration"
+msgstr ""
+
 #. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:224
+#: rdp/rdppreferences.ui:326
 #, kde-format
 msgid ""
 "Use this to specify your keyboard layout. This layout setting is used to "
@@ -855,482 +885,446 @@ msgstr ""
 "de richtigen Tastkoden na den Server to sennen."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:231
+#: rdp/rdppreferences.ui:333
 #, kde-format
 msgid "Arabic (ar)"
 msgstr "Araabsch (ar)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:236
+#: rdp/rdppreferences.ui:338
 #, kde-format
 msgid "Czech (cs)"
 msgstr "Tschechsch (cs)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:241
+#: rdp/rdppreferences.ui:343
 #, kde-format
 msgid "Danish (da)"
 msgstr "Däänsch (da)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:246
+#: rdp/rdppreferences.ui:348
 #, kde-format
 msgid "German (de)"
 msgstr "Düütsch (de)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:251
+#: rdp/rdppreferences.ui:353
 #, kde-format
 msgid "Swiss German (de-ch)"
 msgstr "Swiezerdüütsch (de-ch)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:256
+#: rdp/rdppreferences.ui:358
 #, kde-format
 msgid "American Dvorak (en-dv)"
 msgstr "Amerikaansch Dvorak (en-dv)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:261
+#: rdp/rdppreferences.ui:363
 #, kde-format
 msgid "British English (en-gb)"
 msgstr "Britsch Engelsch (en-gb)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:266
+#: rdp/rdppreferences.ui:368
 #, kde-format
 msgid "US English (en-us)"
 msgstr "US-Engelsch (en-us)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:271
+#: rdp/rdppreferences.ui:373
 #, kde-format
 msgid "Spanish (es)"
 msgstr "Spaansch (es)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:276
+#: rdp/rdppreferences.ui:378
 #, kde-format
 msgid "Estonian (et)"
 msgstr "Eestlannsch (et)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:281
+#: rdp/rdppreferences.ui:383
 #, kde-format
 msgid "Finnish (fi)"
 msgstr "Finnsch (fi)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:286
+#: rdp/rdppreferences.ui:388
 #, kde-format
 msgid "Faroese (fo)"
 msgstr "Färöösch (fo)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:291
+#: rdp/rdppreferences.ui:393
 #, kde-format
 msgid "French (fr)"
 msgstr "Franzöösch (fr)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:296
+#: rdp/rdppreferences.ui:398
 #, kde-format
 msgid "Belgian (fr-be)"
 msgstr "Belgsch (fr-be)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:301
+#: rdp/rdppreferences.ui:403
 #, kde-format
 msgid "French Canadian (fr-ca)"
 msgstr "Franzöösch Kanaadsch (fr-ca)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:306
+#: rdp/rdppreferences.ui:408
 #, kde-format
 msgid "Swiss French (fr-ch)"
 msgstr "Swiezerfranzöösch (fr-ch)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:311
+#: rdp/rdppreferences.ui:413
 #, kde-format
 msgid "Hebrew (he)"
 msgstr "Hebrääsch (he)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:316
+#: rdp/rdppreferences.ui:418
 #, kde-format
 msgid "Croatian (hr)"
 msgstr "Kroaatsch (hr)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:321
+#: rdp/rdppreferences.ui:423
 #, kde-format
 msgid "Hungarian (hu)"
 msgstr "Ungaarsch (hu)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:326
+#: rdp/rdppreferences.ui:428
 #, kde-format
 msgid "Icelandic (is)"
 msgstr "Islannsch (is)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:331
+#: rdp/rdppreferences.ui:433
 #, kde-format
 msgid "Italian (it)"
 msgstr "Italieensch (it)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:336
+#: rdp/rdppreferences.ui:438
 #, kde-format
 msgid "Japanese (ja)"
 msgstr "Japaansch (ja)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:341
+#: rdp/rdppreferences.ui:443
 #, kde-format
 msgid "Korean (ko)"
 msgstr "Koreaansch (ko)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:346
+#: rdp/rdppreferences.ui:448
 #, kde-format
 msgid "Lithuanian (lt)"
 msgstr "Litausch (lt)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:351
+#: rdp/rdppreferences.ui:453
 #, kde-format
 msgid "Latvian (lv)"
 msgstr "Lettsch (lv)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:356
+#: rdp/rdppreferences.ui:458
 #, kde-format
 msgid "Macedonian (mk)"
 msgstr "Makedoonsch (mk)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:361
+#: rdp/rdppreferences.ui:463
 #, kde-format
 msgid "Dutch (nl)"
 msgstr "Nedderlannsch (nl)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:366
+#: rdp/rdppreferences.ui:468
 #, kde-format
 msgid "Belgian Dutch (nl-be)"
 msgstr "Belgsch Nedderlannsch (nl-be)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:371
+#: rdp/rdppreferences.ui:473
 #, kde-format
 msgid "Norwegian (no)"
 msgstr "Norweegsch (no)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:376
+#: rdp/rdppreferences.ui:478
 #, kde-format
 msgid "Polish (pl)"
 msgstr "Poolsch (pl)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:381
+#: rdp/rdppreferences.ui:483
 #, kde-format
 msgid "Portuguese (pt)"
 msgstr "Portugeesch (pt)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:386
+#: rdp/rdppreferences.ui:488
 #, kde-format
 msgid "Brazilian (pt-br)"
 msgstr "Brasiliaansch Portugeesch (pt-br)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:391
+#: rdp/rdppreferences.ui:493
 #, kde-format
 msgid "Russian (ru)"
 msgstr "Russ'sch (ru)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:396
+#: rdp/rdppreferences.ui:498
 #, kde-format
 msgid "Slovenian (sl)"
 msgstr "Sloweensch (sl)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:401
+#: rdp/rdppreferences.ui:503
 #, kde-format
 msgid "Swedish (sv)"
 msgstr "Sweedsch (sv)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:406
+#: rdp/rdppreferences.ui:508
 #, kde-format
 msgid "Thai (th)"
 msgstr "Thai (th)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:411
+#: rdp/rdppreferences.ui:513
 #, kde-format
 msgid "Turkish (tr)"
 msgstr "Törksch (tr)"
 
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ScaleToSize)
+#: rdp/rdppreferences.ui:527
+#, kde-format
+msgid "Scale window contents to match resolution"
+msgstr ""
+
 #. i18n: ectx: property (text), widget (QLabel, soundLabel)
-#: rdp/rdppreferences.ui:421
+#: rdp/rdppreferences.ui:553
 #, kde-format
 msgctxt "label for soundsettings in preferences dialog"
 msgid "Sound:"
 msgstr "Klang:"
 
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
-#: rdp/rdppreferences.ui:442
+#: rdp/rdpsession.cpp:142
 #, kde-format
-msgid "On This Computer"
-msgstr "Op dissen Reekner"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
-#: rdp/rdppreferences.ui:447
-#, kde-format
-msgid "On Remote Computer"
-msgstr "Op feern Reekner"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
-#: rdp/rdppreferences.ui:452
-#, kde-format
-msgid "Disable Sound"
-msgstr "Kläng utmaken"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_SoundSystem)
-#: rdp/rdppreferences.ui:467
-#, kde-format
-msgid "ALSA"
+msgctxt "@title:dialog"
+msgid "Logon Error"
 msgstr ""
 
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_SoundSystem)
-#: rdp/rdppreferences.ui:472
+#: rdp/rdpsession.cpp:183
 #, kde-format
-msgid "PulseAudio"
+msgctxt "@label"
+msgid ""
+"Host: %1:%2\n"
+"Common Name: %3\n"
+"Subject: %4\n"
+"Issuer: %5\n"
+"Fingerprint: %6\n"
 msgstr ""
 
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_SoundSystem)
-#: rdp/rdppreferences.ui:477
+#: rdp/rdpsession.cpp:592
 #, fuzzy, kde-format
-#| msgctxt "Where each displayed link comes from"
-#| msgid "None"
-msgid "None"
-msgstr "Keen"
-
-#. i18n: ectx: property (text), widget (QLabel, performanceLabel)
-#: rdp/rdppreferences.ui:487
-#, kde-format
-msgctxt "label for performance settings in preferences dialog"
-msgid "Performance:"
-msgstr "Leisten:"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Performance)
-#: rdp/rdppreferences.ui:504
-#, kde-format
-msgid "Modem"
-msgstr "Modem"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Performance)
-#: rdp/rdppreferences.ui:509
-#, kde-format
-msgid "Broadband"
-msgstr "Breedband"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Performance)
-#: rdp/rdppreferences.ui:514
-#, kde-format
-msgid "LAN"
-msgstr "LAN"
-
-#. i18n: ectx: property (text), widget (QLabel, remoteFXLabel)
-#: rdp/rdppreferences.ui:522
-#, kde-format
-msgid "RemoteFX:"
-msgstr "RemoteFX:"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RemoteFX)
-#: rdp/rdppreferences.ui:532
-#, kde-format
-msgid "Enhanced visual experience"
-msgstr "Verbetert Dorstellen"
-
-#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_RemoteFX)
-#: rdp/rdppreferences.ui:535
-#, kde-format
-msgid ""
-"RemoteFX covers a set of technologies that enhance visual experience of the "
-"Remote Desktop Protocol."
-msgstr ""
-"RemoteFX heet en Reeg vun Techniken, de de Dorstellen över RDP verbetert."
-
-#. i18n: ectx: property (text), widget (QLabel, shareMediaLabel)
-#: rdp/rdppreferences.ui:542
-#, kde-format
-msgid "Share Media:"
-msgstr "Orner delen:"
-
-#. i18n: ectx: property (whatsThis), widget (KLineEdit, kcfg_ShareMedia)
-#: rdp/rdppreferences.ui:560
-#, kde-format
-msgid "Share a local media directory with the remote host."
-msgstr "En lokaal Orner mit den feern Reekner delen."
-
-#. i18n: ectx: property (title), widget (QGroupBox, expertGroupBox)
-#: rdp/rdppreferences.ui:585
-#, kde-format
-msgid "Expert Options"
-msgstr "Fachlüüd-Optschonen"
-
-#. i18n: ectx: property (text), widget (QLabel, consoleLabel)
-#: rdp/rdppreferences.ui:591
-#, kde-format
-msgid "Console login:"
-msgstr "Konsool-Anmellen:"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_Console)
-#: rdp/rdppreferences.ui:601
-#, kde-format
-msgid "Attach to Windows Server console"
-msgstr "Na Konsool op Windows-Server anhangen"
-
-#. i18n: ectx: property (text), widget (QLabel, extraOptionsLabel)
-#: rdp/rdppreferences.ui:608
-#, kde-format
-msgid "Extra options:"
-msgstr "Verwiedert Optschonen:"
-
-#. i18n: ectx: property (whatsThis), widget (KLineEdit, kcfg_ExtraOptions)
-#: rdp/rdppreferences.ui:624
-#, kde-format
-msgid "Here you can enter additional xfreerdp (FreeRDP) options."
-msgstr ""
-"Hier kannst Du anner Optschonen för \"xfreerdp\" (FreeRDP) bito ingeven"
-
-#. i18n: ectx: property (title), widget (QGroupBox, loginGroupBox)
-#: rdp/rdppreferences.ui:637
-#, kde-format
-msgid "Login"
-msgstr "Anmellen"
-
-#. i18n: ectx: property (text), widget (QLabel, defaultUserLabel)
-#: rdp/rdppreferences.ui:645
-#, kde-format
-msgid "Default user name:"
-msgstr "Standard-Brukernaam:"
-
-#. i18n: ectx: property (placeholderText), widget (KLineEdit, kcfg_DefaultRdpUserName)
-#: rdp/rdppreferences.ui:652
-#, kde-format
-msgid "No default user name"
-msgstr "Keen Standard-Brukernaam"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RecognizeLdapLogins)
-#: rdp/rdppreferences.ui:664
-#, kde-format
-msgid "Automatically recognize \"LDAP\"-Logins and share passwords"
-msgstr "\"LDAP\"-Anmellen automaatsch opdecken un Passwöör tosamen bruken"
-
-#: rdp/rdpview.cpp:104
-#, kde-format
-msgid "Media Folder does not Exist"
-msgstr ""
-
-#: rdp/rdpview.cpp:104
-#, kde-format
-msgid ""
-"The folder %1 does not exist.\n"
-"Please set an existing folder to share or empty the \"Share Media\" option "
-"if you do not want to share any folder."
-msgstr ""
-
-#: rdp/rdpview.cpp:113
-#, kde-format
-msgid "Enter Username"
-msgstr "Brukernaam ingeven"
-
-#: rdp/rdpview.cpp:114
-#, kde-format
-msgid "Please enter the username you would like to use for login."
-msgstr "Giff bitte den Brukernaam in, den Du för't Anmellen bruken wullt"
-
-#: rdp/rdpview.cpp:134 vnc/vncview.cpp:344
-#, kde-format
-msgid "Access to the system requires a password."
+#| msgid "Access to the system requires a password."
+msgctxt "@label"
+msgid "Access to this system requires a password."
 msgstr "För den Togriep op dat Systeem is en Passwoort nödig."
 
-#: rdp/rdpview.cpp:442
+#: rdp/rdpsession.cpp:595
 #, fuzzy, kde-format
-#| msgid ""
-#| "Could not start \"xfreerdp\"; make sure xfreerdp is properly installed."
-msgid "Could not start \"%1\"; make sure %1 is properly installed."
+#| msgid "Access to the system requires a password."
+msgctxt "@label"
+msgid "Access to this system requires a username and password."
+msgstr "För den Togriep op dat Systeem is en Passwoort nödig."
+
+#: rdp/rdpsession.cpp:617
+#, kde-format
+msgctxt "@label"
+msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr ""
-"\"xfreerdp\" lett sik nich starten, bitte kiek, wat dat richtig installeert "
-"is."
 
-#: rdp/rdpview.cpp:443 rdp/rdpview.cpp:467 rdp/rdpview.cpp:471
+#: rdp/rdpsession.cpp:618
 #, kde-format
-msgid "RDP Failure"
-msgstr "RDP-Fehler"
+msgctxt "@title:dialog"
+msgid "Verify Certificate"
+msgstr ""
 
-#: rdp/rdpview.cpp:465
+#: rdp/rdpsession.cpp:623 rdp/rdpsession.cpp:646
 #, kde-format
+msgctxt "@label"
+msgid "Remember this certificate"
+msgstr ""
+
+#: rdp/rdpsession.cpp:640
+#, kde-format
+msgctxt "@label"
+msgid "The certificate for this system has changed. Do you wish to continue?"
+msgstr ""
+
+#: rdp/rdpsession.cpp:641
+#, kde-format
+msgctxt "@title:dialog"
+msgid "Certificate has Changed"
+msgstr ""
+
+#: rdp/rdpsession.cpp:644
+#, kde-format
+msgctxt "@label"
 msgid ""
-"The version of \"xfreerdp\" you are using is too old.\n"
-"xfreerdp 1.0.2 or greater is required."
-msgstr ""
-"Dien Verschoon vun \"xfreerdp\" is to oolt.\n"
-"Noot deit Verschoon 1.0.2 oder nieger."
-
-#: rdp/rdpview.cpp:470
-#, kde-format
-msgid "Connection failed. You might have passed a wrong address or username."
+"Previous certificate:\n"
+"%1\n"
+"New Certificate:\n"
+"%2"
 msgstr ""
 
-#: rdp/rdpview.cpp:486
-#, kde-format
-msgid "Name or service not known."
-msgstr "Naam oder Deenst nich begäng."
-
-#: rdp/rdpview.cpp:487 rdp/rdpview.cpp:493 rdp/rdpview.cpp:498
-#: rdp/rdpview.cpp:506
-#, kde-format
-msgid "Connection Failure"
+#: rdp/rdpsession.cpp:758
+#, fuzzy, kde-format
+#| msgid "Connection Failure"
+msgctxt "@title:dialog"
+msgid "Login Failure"
 msgstr "Tokoppeln fehlslaan"
 
-#: rdp/rdpview.cpp:492
+#: rdp/rdpsession.cpp:759
 #, kde-format
-msgid "Connection attempt to host failed."
-msgstr "Tokoppeln na Reekner fehlslaan"
-
-#: rdp/rdpview.cpp:497
-#, fuzzy, kde-format
-#| msgid "Authentication failed. Please try again."
-msgid "Authentication failure, check credentials."
-msgstr "De Identiteetprööv is fehlslaan. Versöök dat man nochmaal."
-
-#: rdp/rdpview.cpp:505
-#, fuzzy, kde-format
-#| msgid "Connection attempt to host failed."
+msgctxt "@label"
 msgid ""
-"Connection attempt to host failed. Security negotiation or connection "
-"failure."
-msgstr "Tokoppeln na Reekner fehlslaan"
+"Unable to login with the provided credentials. Please double check the user "
+"and password."
+msgstr ""
+
+#: rdp/rdpsession.cpp:765
+#, kde-format
+msgctxt "@title:dialog"
+msgid "Account Problems"
+msgstr ""
+
+#: rdp/rdpsession.cpp:766
+#, kde-format
+msgctxt "@label"
+msgid ""
+"The provided account is not allowed to log in to this machine. Please "
+"contact your system administrator."
+msgstr ""
+
+#: rdp/rdpsession.cpp:771
+#, kde-format
+msgctxt "@title:dialog"
+msgid "Password Problems"
+msgstr ""
+
+#: rdp/rdpsession.cpp:772
+#, kde-format
+msgctxt "@label"
+msgid ""
+"Unable to login with the provided password. Please contact your system "
+"administrator to change it."
+msgstr ""
+
+#: rdp/rdpsession.cpp:775
+#, fuzzy, kde-format
+#| msgid "Connection"
+msgctxt "@title:dialog"
+msgid "Connection Lost"
+msgstr "Verbinnen"
+
+#: rdp/rdpsession.cpp:776
+#, fuzzy, kde-format
+#| msgid "An error has occurred during the connection to the NX server."
+msgctxt "@label"
+msgid "Lost connection to the server."
+msgstr "Binnen de Verbinnen na den NX-Server hett dat en Fehler geven."
+
+#: rdp/rdpsession.cpp:780
+#, fuzzy, kde-format
+#| msgid "Server not found."
+msgctxt "@title:dialog"
+msgid "Server not Found"
+msgstr "Server nich funnen"
+
+#: rdp/rdpsession.cpp:781
+#, kde-format
+msgctxt "@label"
+msgid "Could not find the server."
+msgstr ""
+
+#: rdp/rdpsession.cpp:784
+#, fuzzy, kde-format
+#| msgid "Connection Failure"
+msgctxt "@title:dialog"
+msgid "Connection Refused"
+msgstr "Tokoppeln fehlslaan"
+
+#: rdp/rdpsession.cpp:785
+#, fuzzy, kde-format
+#| msgid "VNC server closed connection."
+msgctxt "@label"
+msgid "The server refused the connection request."
+msgstr "De VNC-Server hett de Verbinnen tomaakt."
+
+#: rdp/rdpsession.cpp:789
+#, fuzzy, kde-format
+#| msgid "KRDC Konsole Connection"
+msgctxt "@title:dialog"
+msgid "Could not Connect"
+msgstr "KRDC-Konsole-Verbinnen"
+
+#: rdp/rdpsession.cpp:790
+#, fuzzy, kde-format
+#| msgid "An error has occurred during the connection to the NX server."
+msgctxt "@label"
+msgid "Could not connect to the server."
+msgstr "Binnen de Verbinnen na den NX-Server hett dat en Fehler geven."
+
+#: rdp/rdpsession.cpp:795
+#, fuzzy, kde-format
+#| msgid "Connection Failure"
+msgctxt "@title:dialog"
+msgid "Connection Closed"
+msgstr "Tokoppeln fehlslaan"
+
+#: rdp/rdpsession.cpp:796
+#, kde-format
+msgctxt "@label"
+msgid "The connection to the server was closed."
+msgstr ""
+
+#: rdp/rdpsession.cpp:799
+#, fuzzy, kde-format
+#| msgid "Connection Failure"
+msgctxt "@title:dialog"
+msgid "Connection Failed"
+msgstr "Tokoppeln fehlslaan"
+
+#: rdp/rdpsession.cpp:800
+#, kde-format
+msgctxt "@label"
+msgid "An unknown error occurred"
+msgstr ""
 
 #: rdp/rdpviewfactory.cpp:22
 #, kde-format
 msgid "Connect to a Windows Remote Desktop (RDP)"
 msgstr "Na en feern Windows-Schriefdisch tokoppeln (RDP)"
 
-#: rdp/rdpviewfactory.cpp:53
+#: rdp/rdpviewfactory.cpp:51
 #, kde-format
 msgid "New RDP Connection..."
 msgstr "Nieg RDP-Verbinnen..."
 
-#: rdp/rdpviewfactory.cpp:63
+#: rdp/rdpviewfactory.cpp:61
 #, kde-format
 msgid ""
 "<html>Enter the address here. Port is optional.<br /><i>Example: "
@@ -1338,15 +1332,6 @@ msgid ""
 msgstr ""
 "<html>Giff hier de Adress in. De Port is wahlwies.<br /><i>Bispill: "
 "rdpserver:3389 (Reekner:Port)</i></html>"
-
-#: rdp/rdpviewfactory.cpp:70
-#, kde-format
-msgid ""
-"The application \"xfreerdp\" cannot be found on your system; make sure it is "
-"properly installed if you need RDP support."
-msgstr ""
-"Dat Programm \"xfreerdp\" lett sik op Dien Reekner nich finnen. Kiek bitte, "
-"wat dat richtig installeert is, wenn de RDP-Ünnerstütten noot deit."
 
 #: remotedesktopsmodel.cpp:112
 #, kde-format
@@ -1450,6 +1435,12 @@ msgstr "Weddertokoppelt."
 msgid "Connected."
 msgstr "Tokoppelt."
 
+#. i18n: ectx: property (title), widget (QGroupBox, vncGroupBox)
+#: vnc/vncpreferences.ui:17
+#, kde-format
+msgid "Connection"
+msgstr "Verbinnen"
+
 #. i18n: ectx: property (text), widget (QLabel, connectionLabel)
 #: vnc/vncpreferences.ui:23
 #, fuzzy, kde-format
@@ -1499,6 +1490,36 @@ msgstr "Siet Gööd (Modem, ISDN, langsam Internetverbinnen)"
 #, kde-format
 msgid "Scale to Size:"
 msgstr "Op Grött topassen:"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
+#: vnc/vncpreferences.ui:93
+#, kde-format
+msgid "Minimal (640x480)"
+msgstr "Sietst (640x480)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
+#: vnc/vncpreferences.ui:98
+#, kde-format
+msgid "Small (800x600)"
+msgstr "Siet (800x600)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
+#: vnc/vncpreferences.ui:103
+#, kde-format
+msgid "Normal (1024x768)"
+msgstr "Normaal (1024x768)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
+#: vnc/vncpreferences.ui:108
+#, kde-format
+msgid "Large (1280x1024)"
+msgstr "Groot (1280x1024)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
+#: vnc/vncpreferences.ui:113
+#, kde-format
+msgid "Very Large (1600x1200)"
+msgstr "Bannig groot (1600x1200)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, use_ssh_tunnel)
 #: vnc/vncpreferences.ui:204
@@ -1565,6 +1586,11 @@ msgstr "Identiteet warrt pröövt vun \"%1\""
 msgid "Error creating tunnel socket"
 msgstr ""
 
+#: vnc/vncview.cpp:344
+#, kde-format
+msgid "Access to the system requires a password."
+msgstr "För den Togriep op dat Systeem is en Passwoort nödig."
+
 #: vnc/vncview.cpp:345
 #, kde-format
 msgid "Authentication failed. Please try again."
@@ -1604,11 +1630,119 @@ msgstr ""
 "<html>Giff hier de Adress in.<br /><i>Bispill: vncserver:1 (Reekner:Port / "
 "Schirm)</i></html>"
 
+#~ msgid "Desktop &resolution:"
+#~ msgstr "Schriefdisch-&Oplösen"
+
+#, fuzzy
+#~| msgctxt "Where each displayed link comes from"
+#~| msgid "None"
+#~ msgid "None"
+#~ msgstr "Keen"
+
+#~ msgctxt "label for performance settings in preferences dialog"
+#~ msgid "Performance:"
+#~ msgstr "Leisten:"
+
+#~ msgid "Modem"
+#~ msgstr "Modem"
+
+#~ msgid "Broadband"
+#~ msgstr "Breedband"
+
+#~ msgid "LAN"
+#~ msgstr "LAN"
+
+#~ msgid "Enhanced visual experience"
+#~ msgstr "Verbetert Dorstellen"
+
+#~ msgid ""
+#~ "RemoteFX covers a set of technologies that enhance visual experience of "
+#~ "the Remote Desktop Protocol."
+#~ msgstr ""
+#~ "RemoteFX heet en Reeg vun Techniken, de de Dorstellen över RDP verbetert."
+
+#~ msgid "Share a local media directory with the remote host."
+#~ msgstr "En lokaal Orner mit den feern Reekner delen."
+
+#~ msgid "Expert Options"
+#~ msgstr "Fachlüüd-Optschonen"
+
+#~ msgid "Console login:"
+#~ msgstr "Konsool-Anmellen:"
+
+#~ msgid "Attach to Windows Server console"
+#~ msgstr "Na Konsool op Windows-Server anhangen"
+
+#~ msgid "Extra options:"
+#~ msgstr "Verwiedert Optschonen:"
+
+#~ msgid "Here you can enter additional xfreerdp (FreeRDP) options."
+#~ msgstr ""
+#~ "Hier kannst Du anner Optschonen för \"xfreerdp\" (FreeRDP) bito ingeven"
+
+#~ msgid "Login"
+#~ msgstr "Anmellen"
+
+#~ msgid "Default user name:"
+#~ msgstr "Standard-Brukernaam:"
+
+#~ msgid "No default user name"
+#~ msgstr "Keen Standard-Brukernaam"
+
+#~ msgid "Automatically recognize \"LDAP\"-Logins and share passwords"
+#~ msgstr "\"LDAP\"-Anmellen automaatsch opdecken un Passwöör tosamen bruken"
+
+#~ msgid "Enter Username"
+#~ msgstr "Brukernaam ingeven"
+
+#~ msgid "Please enter the username you would like to use for login."
+#~ msgstr "Giff bitte den Brukernaam in, den Du för't Anmellen bruken wullt"
+
+#, fuzzy
+#~| msgid ""
+#~| "Could not start \"xfreerdp\"; make sure xfreerdp is properly installed."
+#~ msgid "Could not start \"%1\"; make sure %1 is properly installed."
+#~ msgstr ""
+#~ "\"xfreerdp\" lett sik nich starten, bitte kiek, wat dat richtig "
+#~ "installeert is."
+
+#~ msgid "RDP Failure"
+#~ msgstr "RDP-Fehler"
+
+#~ msgid ""
+#~ "The version of \"xfreerdp\" you are using is too old.\n"
+#~ "xfreerdp 1.0.2 or greater is required."
+#~ msgstr ""
+#~ "Dien Verschoon vun \"xfreerdp\" is to oolt.\n"
+#~ "Noot deit Verschoon 1.0.2 oder nieger."
+
+#~ msgid "Name or service not known."
+#~ msgstr "Naam oder Deenst nich begäng."
+
+#~ msgid "Connection attempt to host failed."
+#~ msgstr "Tokoppeln na Reekner fehlslaan"
+
+#, fuzzy
+#~| msgid "Authentication failed. Please try again."
+#~ msgid "Authentication failure, check credentials."
+#~ msgstr "De Identiteetprööv is fehlslaan. Versöök dat man nochmaal."
+
+#, fuzzy
+#~| msgid "Connection attempt to host failed."
+#~ msgid ""
+#~ "Connection attempt to host failed. Security negotiation or connection "
+#~ "failure."
+#~ msgstr "Tokoppeln na Reekner fehlslaan"
+
+#~ msgid ""
+#~ "The application \"xfreerdp\" cannot be found on your system; make sure it "
+#~ "is properly installed if you need RDP support."
+#~ msgstr ""
+#~ "Dat Programm \"xfreerdp\" lett sik op Dien Reekner nich finnen. Kiek "
+#~ "bitte, wat dat richtig installeert is, wenn de RDP-Ünnerstütten noot deit."
+
 #~ msgid "New Konsole Connection..."
 #~ msgstr "Nieg Konsole-Verbinnen..."
-
-#~ msgid "KRDC Konsole Connection"
-#~ msgstr "KRDC-Konsole-Verbinnen"
 
 #~ msgid ""
 #~ "<html>Enter the address here. Port is optional.<br /><i>Example: "
@@ -1695,9 +1829,6 @@ msgstr ""
 #~ msgid "Colour Depth"
 #~ msgstr "Klöördeepde"
 
-#~ msgid "Resolution"
-#~ msgstr "Oplösen"
-
 #~ msgid "Session Name"
 #~ msgstr "Törnnaam"
 
@@ -1724,9 +1855,6 @@ msgstr ""
 
 #~ msgid "Host key verification failed"
 #~ msgstr "Pröven vun Reekner-Slötel fehlslaan"
-
-#~ msgid "An error has occurred during the connection to the NX server."
-#~ msgstr "Binnen de Verbinnen na den NX-Server hett dat en Fehler geven."
 
 #~ msgid "Process error"
 #~ msgstr "Perzessfehler"
