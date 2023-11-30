@@ -8,32 +8,34 @@
 # Pablo de Vicente <pablo.devicente@gmail.com>, 2006.
 # Israel Garcia <israelgarcia86@gmail.com>, 2008.
 # Israel Garcia Garcia <israelgarcia86@gmail.com>, 2008, 2009, 2010.
-# Eloy Cuadra <ecuadra@eloihr.net>, 2009, 2010, 2015, 2016, 2018, 2019, 2020, 2021.
+# SPDX-FileCopyrightText: 2009, 2010, 2015, 2016, 2018, 2019, 2020, 2021, 2023 Eloy Cuadra <ecuadra@eloihr.net>
 # Rocio Gallego <traducciones@rociogallego.com>, 2010, 2011, 2012, 2013, 2016.
 msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-29 00:42+0000\n"
-"PO-Revision-Date: 2021-10-07 15:12+0200\n"
+"PO-Revision-Date: 2023-11-30 01:04+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 21.08.1\n"
+"X-Generator: Lokalize 23.08.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Rocío Gallego,Israel García García,Jaime Robles"
+msgstr "Eloy Cuadra,Rocío Gallego,Israel García García,Jaime Robles"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "traducciones@rociogallego.com,israelgarcia86@gmail.com,jaime@kde.org"
+msgstr ""
+"ecuadra@eloihr.net,traducciones@rociogallego.com,israelgarcia86@gmail.com,"
+"jaime@kde.org"
 
 #: bookmarkmanager.cpp:44
 #, kde-format
@@ -699,7 +701,7 @@ msgstr "Compartir medio:"
 #: rdp/rdppreferences.ui:40 rdp/rdppreferences.ui:291
 #, kde-format
 msgid "Use Best Available"
-msgstr ""
+msgstr "Usar la mejor disponible"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
 #: rdp/rdppreferences.ui:45
@@ -765,7 +767,7 @@ msgstr ""
 #: rdp/rdppreferences.ui:136
 #, kde-format
 msgid "Acceleration:"
-msgstr ""
+msgstr "Aceleración:"
 
 #. i18n: ectx: property (text), widget (QLabel, colorDepthLabel)
 #: rdp/rdppreferences.ui:159
@@ -816,30 +818,27 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:245
-#, fuzzy, kde-format
-#| msgid "Small (800x600)"
+#, kde-format
 msgid "Small (1280x720)"
-msgstr "Pequeño (800x600)"
+msgstr "Pequeña (1280x720)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:250
 #, kde-format
 msgid "Medium (1600x900)"
-msgstr ""
+msgstr "Media (1600x900)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:255
-#, fuzzy, kde-format
-#| msgid "Large (1280x1024)"
+#, kde-format
 msgid "Large (1920x1080)"
-msgstr "Grande (1280x1024)"
+msgstr "Grande (1920x1080)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:260
-#, fuzzy, kde-format
-#| msgid "Current KRDC Size"
+#, kde-format
 msgid "Current Window Size"
-msgstr "Tamaño actual de KRDC"
+msgstr "Tamaño actual de la ventana"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
@@ -859,20 +858,19 @@ msgstr "Resolución personalizada (...)"
 #: rdp/rdppreferences.ui:296
 #, kde-format
 msgid "Force H.264"
-msgstr ""
+msgstr "Forzar H.264"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
 #: rdp/rdppreferences.ui:301
-#, fuzzy, kde-format
-#| msgid "RemoteFX:"
+#, kde-format
 msgid "Force RemoteFX"
-msgstr "RemoteFX:"
+msgstr "Forzar RemoteFX"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
 #: rdp/rdppreferences.ui:306
 #, kde-format
 msgid "Disable All Acceleration"
-msgstr ""
+msgstr "Desactivar toda aceleración"
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:326
@@ -1110,7 +1108,7 @@ msgstr "Turco (tr)"
 #: rdp/rdppreferences.ui:527
 #, kde-format
 msgid "Scale window contents to match resolution"
-msgstr ""
+msgstr "Escalar el contenido de la ventana para que se ajuste a la resolución"
 
 #. i18n: ectx: property (text), widget (QLabel, soundLabel)
 #: rdp/rdppreferences.ui:553
@@ -1123,7 +1121,7 @@ msgstr "Sonido:"
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Logon Error"
-msgstr ""
+msgstr "Error de inicio de sesión"
 
 #: rdp/rdpsession.cpp:183
 #, kde-format
@@ -1135,50 +1133,54 @@ msgid ""
 "Issuer: %5\n"
 "Fingerprint: %6\n"
 msgstr ""
+"Máquina: %1:%2\n"
+"Nombre común: %3\n"
+"Asunto: %4\n"
+"Emisor: %5\n"
+"Huella digital: %6\n"
 
 #: rdp/rdpsession.cpp:592
-#, fuzzy, kde-format
-#| msgid "Access to the system requires a password."
+#, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a password."
-msgstr "El acceso al sistema requiere una contraseña."
+msgstr "El acceso a este sistema necesita una contraseña."
 
 #: rdp/rdpsession.cpp:595
-#, fuzzy, kde-format
-#| msgid "Access to the system requires a password."
+#, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
-msgstr "El acceso al sistema requiere una contraseña."
+msgstr ""
+"El acceso a este sistema necesita un nombre de usuario y una contraseña."
 
 #: rdp/rdpsession.cpp:617
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
-msgstr ""
+msgstr "El certificado para este sistema es desconocido. ¿Desea continuar?"
 
 #: rdp/rdpsession.cpp:618
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
-msgstr ""
+msgstr "Verificar certificado"
 
 #: rdp/rdpsession.cpp:623 rdp/rdpsession.cpp:646
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
-msgstr ""
+msgstr "Recordar este certificado"
 
 #: rdp/rdpsession.cpp:640
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
-msgstr ""
+msgstr "El certificado para este sistema ha cambiado. ¿Desea continuar?"
 
 #: rdp/rdpsession.cpp:641
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
-msgstr ""
+msgstr "El certificado ha cambiado"
 
 #: rdp/rdpsession.cpp:644
 #, kde-format
@@ -1189,13 +1191,16 @@ msgid ""
 "New Certificate:\n"
 "%2"
 msgstr ""
+"Certificado anterior:\n"
+"%1\n"
+"Nuevo certificado:\n"
+"%2"
 
 #: rdp/rdpsession.cpp:758
-#, fuzzy, kde-format
-#| msgid "Connection Failure"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Login Failure"
-msgstr "Conexión fallida"
+msgstr "Fallo de inicio de sesión"
 
 #: rdp/rdpsession.cpp:759
 #, kde-format
@@ -1204,12 +1209,14 @@ msgid ""
 "Unable to login with the provided credentials. Please double check the user "
 "and password."
 msgstr ""
+"No se ha podido iniciar sesión con las credenciales proporcionadas. Vuelva a "
+"comprobar el usuario y la contraseña."
 
 #: rdp/rdpsession.cpp:765
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Account Problems"
-msgstr ""
+msgstr "Problemas con la cuenta"
 
 #: rdp/rdpsession.cpp:766
 #, kde-format
@@ -1218,12 +1225,14 @@ msgid ""
 "The provided account is not allowed to log in to this machine. Please "
 "contact your system administrator."
 msgstr ""
+"La cuenta proporcionada no tiene permitido iniciar sesión en esta máquina. "
+"Contacte con el administrador del sistema."
 
 #: rdp/rdpsession.cpp:771
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Password Problems"
-msgstr ""
+msgstr "Problemas con la contraseña"
 
 #: rdp/rdpsession.cpp:772
 #, kde-format
@@ -1232,78 +1241,71 @@ msgid ""
 "Unable to login with the provided password. Please contact your system "
 "administrator to change it."
 msgstr ""
+"No se puede iniciar sesión con la contraseña proporcionada. Contacte con el "
+"administrador del sistema para cambiarla."
 
 #: rdp/rdpsession.cpp:775
-#, fuzzy, kde-format
-#| msgid "Connection"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Lost"
-msgstr "Conexión"
+msgstr "Conexión perdida"
 
 #: rdp/rdpsession.cpp:776
-#, fuzzy, kde-format
-#| msgid "An error has occurred during the connection to the NX server."
+#, kde-format
 msgctxt "@label"
 msgid "Lost connection to the server."
-msgstr "Ha ocurrido un error durante la conexión al servidor NX."
+msgstr "Se ha perdido la conexión con el servidor."
 
 #: rdp/rdpsession.cpp:780
-#, fuzzy, kde-format
-#| msgid "Server not found."
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Server not Found"
-msgstr "Servidor no encontrado."
+msgstr "Servidor no encontrado"
 
 #: rdp/rdpsession.cpp:781
 #, kde-format
 msgctxt "@label"
 msgid "Could not find the server."
-msgstr ""
+msgstr "No se puede encontrar el servidor."
 
 #: rdp/rdpsession.cpp:784
-#, fuzzy, kde-format
-#| msgid "Connection Failure"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Refused"
-msgstr "Conexión fallida"
+msgstr "Conexión rechazada"
 
 #: rdp/rdpsession.cpp:785
-#, fuzzy, kde-format
-#| msgid "VNC server closed connection."
+#, kde-format
 msgctxt "@label"
 msgid "The server refused the connection request."
-msgstr "Conexión cerrada con el servidor VNC."
+msgstr "El servidor ha rechazado la solicitud de conexión."
 
 #: rdp/rdpsession.cpp:789
-#, fuzzy, kde-format
-#| msgid "KRDC Konsole Connection"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Could not Connect"
-msgstr "Conexiones de consola KRDC"
+msgstr "No se puede conectar"
 
 #: rdp/rdpsession.cpp:790
-#, fuzzy, kde-format
-#| msgid "An error has occurred during the connection to the NX server."
+#, kde-format
 msgctxt "@label"
 msgid "Could not connect to the server."
-msgstr "Ha ocurrido un error durante la conexión al servidor NX."
+msgstr "No se puede conectar con el servidor."
 
 #: rdp/rdpsession.cpp:795
-#, fuzzy, kde-format
-#| msgid "Connection Failure"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Closed"
-msgstr "Conexión fallida"
+msgstr "Conexión cerrada"
 
 #: rdp/rdpsession.cpp:796
 #, kde-format
 msgctxt "@label"
 msgid "The connection to the server was closed."
-msgstr ""
+msgstr "La conexión con el servidor se ha cerrado."
 
 #: rdp/rdpsession.cpp:799
-#, fuzzy, kde-format
-#| msgid "Connection Failure"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Failed"
 msgstr "Conexión fallida"
@@ -1312,7 +1314,7 @@ msgstr "Conexión fallida"
 #, kde-format
 msgctxt "@label"
 msgid "An unknown error occurred"
-msgstr ""
+msgstr "Ha ocurrido un error desconocido"
 
 #: rdp/rdpviewfactory.cpp:22
 #, kde-format

@@ -1,5 +1,7 @@
 # Translation of krdc into esperanto.
+# Copyright (C) 2009 Free Software Foundation, Inc.
 # Axel Rousseau <axel@esperanto-jeunes.org>, 2009.
+# Oliver Kellogg <okellogg@users.sourceforge.net>, 2023.
 #
 msgid ""
 msgstr ""
@@ -19,12 +21,12 @@ msgstr ""
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Axel Rousseau"
+msgstr "Axel Rousseau,Oliver Kellogg"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "axel@esperanto-jeunes.org"
+msgstr "axel@esperanto-jeunes.org,okellogg@users.sourceforge.net"
 
 #: bookmarkmanager.cpp:44
 #, kde-format
@@ -778,22 +780,21 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:245
-#, fuzzy, kde-format
-#| msgid "Normal (1024x768)"
+#, kde-format
 msgid "Small (1280x720)"
-msgstr "Normal (1024x768)"
+msgstr "Malgranda (1280x720)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:250
 #, kde-format
 msgid "Medium (1600x900)"
-msgstr ""
+msgstr "Meza (1600x900)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:255
 #, kde-format
 msgid "Large (1920x1080)"
-msgstr ""
+msgstr "Granda (1920x1080)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:260
@@ -1188,23 +1189,22 @@ msgid ""
 msgstr ""
 
 #: rdp/rdpsession.cpp:775
-#, fuzzy, kde-format
-#| msgid "Connection"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Lost"
-msgstr "Konekto"
+msgstr "Konekto Perdiĝis"
 
 #: rdp/rdpsession.cpp:776
 #, kde-format
 msgctxt "@label"
 msgid "Lost connection to the server."
-msgstr ""
+msgstr "Perdis konekton al la servilo."
 
 #: rdp/rdpsession.cpp:780
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Server not Found"
-msgstr ""
+msgstr "Servilo ne Trovita"
 
 #: rdp/rdpsession.cpp:781
 #, kde-format
@@ -1213,11 +1213,10 @@ msgid "Could not find the server."
 msgstr ""
 
 #: rdp/rdpsession.cpp:784
-#, fuzzy, kde-format
-#| msgid "Connection"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Refused"
-msgstr "Konekto"
+msgstr "Konekto Rifuzita"
 
 #: rdp/rdpsession.cpp:785
 #, kde-format
@@ -1229,7 +1228,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Could not Connect"
-msgstr ""
+msgstr "Ne Eblis Konekti"
 
 #: rdp/rdpsession.cpp:790
 #, kde-format
@@ -1238,11 +1237,10 @@ msgid "Could not connect to the server."
 msgstr ""
 
 #: rdp/rdpsession.cpp:795
-#, fuzzy, kde-format
-#| msgid "Connection"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Closed"
-msgstr "Konekto"
+msgstr "Konekto Fermita"
 
 #: rdp/rdpsession.cpp:796
 #, kde-format
@@ -1251,11 +1249,10 @@ msgid "The connection to the server was closed."
 msgstr ""
 
 #: rdp/rdpsession.cpp:799
-#, fuzzy, kde-format
-#| msgid "Connection"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Failed"
-msgstr "Konekto"
+msgstr "Konekto Malsukcesis"
 
 #: rdp/rdpsession.cpp:800
 #, kde-format
@@ -1563,12 +1560,3 @@ msgid ""
 "<html>Enter the address here.<br /><i>Example: vncserver:1 (host:port / "
 "screen)</i></html>"
 msgstr ""
-
-#~ msgid "None"
-#~ msgstr "Neniu"
-
-#~ msgid "Login"
-#~ msgstr "Ensaluti"
-
-#~ msgid "Default user name:"
-#~ msgstr "Defaŭlta uzantonomo:"
