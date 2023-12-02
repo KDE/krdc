@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-29 00:42+0000\n"
-"PO-Revision-Date: 2022-12-15 11:58+0100\n"
+"PO-Revision-Date: 2023-12-01 07:09+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -691,7 +691,7 @@ msgstr "მედის გაზიარება:"
 #: rdp/rdppreferences.ui:40 rdp/rdppreferences.ui:291
 #, kde-format
 msgid "Use Best Available"
-msgstr ""
+msgstr "საუკეთესო ხელმისაწვდომი"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
 #: rdp/rdppreferences.ui:45
@@ -755,7 +755,7 @@ msgstr ""
 #: rdp/rdppreferences.ui:136
 #, kde-format
 msgid "Acceleration:"
-msgstr ""
+msgstr "აჩქარება:"
 
 #. i18n: ectx: property (text), widget (QLabel, colorDepthLabel)
 #: rdp/rdppreferences.ui:159
@@ -765,10 +765,9 @@ msgstr "ფერის &სიღრმე:"
 
 #. i18n: ectx: property (text), widget (QLabel, resolutionLabel)
 #: rdp/rdppreferences.ui:172
-#, fuzzy, kde-format
-#| msgid "Custom Resolution (...)"
+#, kde-format
 msgid "Resolution"
-msgstr "გაფართოების მითითება (...)"
+msgstr "გაფართოება"
 
 #. i18n: ectx: property (text), widget (QLabel, layoutLabel)
 #: rdp/rdppreferences.ui:182
@@ -807,30 +806,27 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:245
-#, fuzzy, kde-format
-#| msgid "Small (800x600)"
+#, kde-format
 msgid "Small (1280x720)"
-msgstr "პატარა (800x600)"
+msgstr "პატარა (1280x720)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:250
 #, kde-format
 msgid "Medium (1600x900)"
-msgstr ""
+msgstr "საშუალო (1600x900)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:255
-#, fuzzy, kde-format
-#| msgid "Large (1280x1024)"
+#, kde-format
 msgid "Large (1920x1080)"
-msgstr "დიდი (1280x1024)"
+msgstr "დიდი (1920x1080)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:260
-#, fuzzy, kde-format
-#| msgid "Current KRDC Size"
+#, kde-format
 msgid "Current Window Size"
-msgstr "KRDC-ის მიმდინარე ზომა"
+msgstr "მიმდინარე ფანჯრის ზომა"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
@@ -850,20 +846,19 @@ msgstr "გაფართოების მითითება (...)"
 #: rdp/rdppreferences.ui:296
 #, kde-format
 msgid "Force H.264"
-msgstr ""
+msgstr "ნაძალადევი H.264"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
 #: rdp/rdppreferences.ui:301
-#, fuzzy, kde-format
-#| msgid "RemoteFX:"
+#, kde-format
 msgid "Force RemoteFX"
-msgstr "RemoteFX:"
+msgstr "ნაძალადევი RemoteFX"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
 #: rdp/rdppreferences.ui:306
 #, kde-format
 msgid "Disable All Acceleration"
-msgstr ""
+msgstr "აჩქარების სრულად გათიშვა"
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:326
@@ -1114,7 +1109,7 @@ msgstr "ხმა:"
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Logon Error"
-msgstr ""
+msgstr "შესვლის შეცდომა"
 
 #: rdp/rdpsession.cpp:183
 #, kde-format
@@ -1128,18 +1123,16 @@ msgid ""
 msgstr ""
 
 #: rdp/rdpsession.cpp:592
-#, fuzzy, kde-format
-#| msgid "Access to the system requires a password."
+#, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a password."
-msgstr "დაშორებულ სისტემაზე წვდომის პაროლი."
+msgstr "ამ სისტემაზე წვდომისთვის საჭიროა პაროლი."
 
 #: rdp/rdpsession.cpp:595
-#, fuzzy, kde-format
-#| msgid "Access to the system requires a password."
+#, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
-msgstr "დაშორებულ სისტემაზე წვდომის პაროლი."
+msgstr "ამ სისტემაზე წვდომისთვის საჭიროა მომხმარებლის სახელი და პაროლი."
 
 #: rdp/rdpsession.cpp:617
 #, kde-format
@@ -1151,13 +1144,13 @@ msgstr ""
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
-msgstr ""
+msgstr "სერტიფიკატის გადამოწმება"
 
 #: rdp/rdpsession.cpp:623 rdp/rdpsession.cpp:646
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
-msgstr ""
+msgstr "ამ სერტიფიკატის დამახსოვრება"
 
 #: rdp/rdpsession.cpp:640
 #, kde-format
@@ -1169,7 +1162,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
-msgstr ""
+msgstr "სერტიფიკატი შეიცვალა"
 
 #: rdp/rdpsession.cpp:644
 #, kde-format
@@ -1182,11 +1175,10 @@ msgid ""
 msgstr ""
 
 #: rdp/rdpsession.cpp:758
-#, fuzzy, kde-format
-#| msgid "Connection Failure"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Login Failure"
-msgstr "შეერთების შეცდომა"
+msgstr "შესვლა ჩავარდა"
 
 #: rdp/rdpsession.cpp:759
 #, kde-format
@@ -1200,7 +1192,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Account Problems"
-msgstr ""
+msgstr "ანგარიშის პრობლემები"
 
 #: rdp/rdpsession.cpp:766
 #, kde-format
@@ -1214,7 +1206,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Password Problems"
-msgstr ""
+msgstr "პაროლის პრობლემები"
 
 #: rdp/rdpsession.cpp:772
 #, kde-format
@@ -1225,82 +1217,76 @@ msgid ""
 msgstr ""
 
 #: rdp/rdpsession.cpp:775
-#, fuzzy, kde-format
-#| msgid "Connection"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Lost"
-msgstr "კავშირი"
+msgstr "კავშირი დაკარგულია"
 
 #: rdp/rdpsession.cpp:776
 #, kde-format
 msgctxt "@label"
 msgid "Lost connection to the server."
-msgstr ""
+msgstr "სერვერთან მიერთება გაწყდა."
 
 #: rdp/rdpsession.cpp:780
-#, fuzzy, kde-format
-#| msgid "Server not found."
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Server not Found"
-msgstr "სერვერი ვერ ვიპოვე."
+msgstr "სერვერი ვერ ვიპოვე"
 
 #: rdp/rdpsession.cpp:781
 #, kde-format
 msgctxt "@label"
 msgid "Could not find the server."
-msgstr ""
+msgstr "სერვერი ვერ ვიპოვე."
 
 #: rdp/rdpsession.cpp:784
-#, fuzzy, kde-format
-#| msgid "Connection Failure"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Refused"
-msgstr "შეერთების შეცდომა"
+msgstr "დაკავშირება უარყოფილია"
 
 #: rdp/rdpsession.cpp:785
-#, fuzzy, kde-format
-#| msgid "VNC server closed connection."
+#, kde-format
 msgctxt "@label"
 msgid "The server refused the connection request."
-msgstr "VNC სერვერმა კავშირი დახურა."
+msgstr "სერვერმა უარჰყო მიერთებს მოთხოვნა."
 
 #: rdp/rdpsession.cpp:789
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Could not Connect"
-msgstr ""
+msgstr "მიერთების პრობლემა"
 
 #: rdp/rdpsession.cpp:790
 #, kde-format
 msgctxt "@label"
 msgid "Could not connect to the server."
-msgstr ""
+msgstr "სერვერთან მიერთების შეცდომა."
 
 #: rdp/rdpsession.cpp:795
-#, fuzzy, kde-format
-#| msgid "Connection Failure"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Closed"
-msgstr "შეერთების შეცდომა"
+msgstr "კავშირი დაიხურა"
 
 #: rdp/rdpsession.cpp:796
 #, kde-format
 msgctxt "@label"
 msgid "The connection to the server was closed."
-msgstr ""
+msgstr "სერვერამდე კავშირი დაიხურა."
 
 #: rdp/rdpsession.cpp:799
-#, fuzzy, kde-format
-#| msgid "Connection Failure"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Failed"
-msgstr "შეერთების შეცდომა"
+msgstr "კავშირის შეცდომა"
 
 #: rdp/rdpsession.cpp:800
 #, kde-format
 msgctxt "@label"
 msgid "An unknown error occurred"
-msgstr ""
+msgstr "უცნობი შეცდომა"
 
 #: rdp/rdpviewfactory.cpp:22
 #, kde-format
