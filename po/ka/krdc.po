@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-29 00:42+0000\n"
-"PO-Revision-Date: 2023-12-01 07:09+0100\n"
+"PO-Revision-Date: 2023-12-06 06:20+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -1096,7 +1096,7 @@ msgstr "თურქული (tr)"
 #: rdp/rdppreferences.ui:527
 #, kde-format
 msgid "Scale window contents to match resolution"
-msgstr ""
+msgstr "ფანჯრის შემცველობის გადიდება ეკრანის გაფართოებამდე"
 
 #. i18n: ectx: property (text), widget (QLabel, soundLabel)
 #: rdp/rdppreferences.ui:553
@@ -1121,6 +1121,11 @@ msgid ""
 "Issuer: %5\n"
 "Fingerprint: %6\n"
 msgstr ""
+"ჰოსტი: %1:%2\n"
+"საერთო სახელი: %3\n"
+"სათაური: %4\n"
+"გამომცემელი: %5\n"
+"ანაბეჭდი: %6\n"
 
 #: rdp/rdpsession.cpp:592
 #, kde-format
@@ -1138,7 +1143,7 @@ msgstr "ამ სისტემაზე წვდომისთვის ს
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
-msgstr ""
+msgstr "სერტიფიკატი ამ სისტემისთვის უცნობია. გნებავთ, გააგრძელოთ?"
 
 #: rdp/rdpsession.cpp:618
 #, kde-format
@@ -1156,7 +1161,7 @@ msgstr "ამ სერტიფიკატის დამახსოვრ�
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
-msgstr ""
+msgstr "სერტიფიკატი ამ სისტემისთვის შეიცვალა. გნებავთ, გააგრძელოთ?"
 
 #: rdp/rdpsession.cpp:641
 #, kde-format
@@ -1173,6 +1178,10 @@ msgid ""
 "New Certificate:\n"
 "%2"
 msgstr ""
+"წინა სერტიფიკატი:\n"
+"%1\n"
+"ახალი სერტიფიკატი:\n"
+"%2"
 
 #: rdp/rdpsession.cpp:758
 #, kde-format
@@ -1187,6 +1196,8 @@ msgid ""
 "Unable to login with the provided credentials. Please double check the user "
 "and password."
 msgstr ""
+"მითითებული ავტორიზაციის დეტალებით შესვლა შეუძლებელია. გადაამოწმეთ "
+"მომხმარებლის სახელი და პაროლი."
 
 #: rdp/rdpsession.cpp:765
 #, kde-format
@@ -1201,6 +1212,8 @@ msgid ""
 "The provided account is not allowed to log in to this machine. Please "
 "contact your system administrator."
 msgstr ""
+"მითითებულ ანგარიშს ამ მანქანაზე შესვლის უფლება არ აქვს. დაუკავშირდით თქვენს "
+"სისტემურ ადმინისტრატორს."
 
 #: rdp/rdpsession.cpp:771
 #, kde-format
@@ -1215,6 +1228,8 @@ msgid ""
 "Unable to login with the provided password. Please contact your system "
 "administrator to change it."
 msgstr ""
+"მითითებული პაროლით შესვლა შეუძლებელია. პაროლის შესაცვლელად დაუკავშირდით "
+"თქვენს სისტემურ ადმინისტრატორს."
 
 #: rdp/rdpsession.cpp:775
 #, kde-format
