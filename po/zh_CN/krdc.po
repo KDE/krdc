@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-29 00:42+0000\n"
-"PO-Revision-Date: 2023-11-25 02:29\n"
+"PO-Revision-Date: 2023-12-09 09:27\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -130,7 +130,7 @@ msgstr "vnc"
 #: config/general.ui:147
 #, kde-format
 msgid "Tab Settings"
-msgstr "标签设置"
+msgstr "标签页设置"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowTabBar)
 #: config/general.ui:153
@@ -142,19 +142,19 @@ msgstr "总是显示标题栏"
 #: config/general.ui:160
 #, kde-format
 msgid "Show close button on tabs"
-msgstr "在标签上显示关闭按钮"
+msgstr "在标签页上显示关闭按钮"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabMiddleClick)
 #: config/general.ui:167
 #, kde-format
 msgid "Middle-click on a tab closes it"
-msgstr "中键点击标签可关闭它"
+msgstr "中键点击标签页可关闭它"
 
 #. i18n: ectx: property (text), widget (QLabel, tabOrientationLabel)
 #: config/general.ui:176
 #, kde-format
 msgid "Tab position:"
-msgstr "标签位置："
+msgstr "标签页位置："
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TabPosition)
 #: config/general.ui:184
@@ -610,7 +610,7 @@ msgstr "添加书签"
 #: mainwindow.cpp:745
 #, kde-format
 msgid "Close Tab"
-msgstr "关闭标签"
+msgstr "关闭标签页"
 
 #: mainwindow.cpp:849
 #, kde-format
@@ -675,7 +675,7 @@ msgstr "共享媒体"
 #: rdp/rdppreferences.ui:40 rdp/rdppreferences.ui:291
 #, kde-format
 msgid "Use Best Available"
-msgstr ""
+msgstr "使用可用的最佳方案"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
 #: rdp/rdppreferences.ui:45
@@ -739,7 +739,7 @@ msgstr ""
 #: rdp/rdppreferences.ui:136
 #, kde-format
 msgid "Acceleration:"
-msgstr ""
+msgstr "加速："
 
 #. i18n: ectx: property (text), widget (QLabel, colorDepthLabel)
 #: rdp/rdppreferences.ui:159
@@ -749,10 +749,9 @@ msgstr "颜色深度(&D)："
 
 #. i18n: ectx: property (text), widget (QLabel, resolutionLabel)
 #: rdp/rdppreferences.ui:172
-#, fuzzy, kde-format
-#| msgid "Custom Resolution (...)"
+#, kde-format
 msgid "Resolution"
-msgstr "自定义分辨率(...)"
+msgstr "分辨率"
 
 #. i18n: ectx: property (text), widget (QLabel, layoutLabel)
 #: rdp/rdppreferences.ui:182
@@ -789,30 +788,27 @@ msgstr "您可在此指定远程桌面的分辨率。此分辨率决定了您所
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:245
-#, fuzzy, kde-format
-#| msgid "Small (800x600)"
+#, kde-format
 msgid "Small (1280x720)"
-msgstr "小(800x600)"
+msgstr "小 (1280x720)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:250
 #, kde-format
 msgid "Medium (1600x900)"
-msgstr ""
+msgstr "中 (1600x900)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:255
-#, fuzzy, kde-format
-#| msgid "Large (1280x1024)"
+#, kde-format
 msgid "Large (1920x1080)"
-msgstr "大(1280x1024)"
+msgstr "大 (1920x1080)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:260
-#, fuzzy, kde-format
-#| msgid "Current KRDC Size"
+#, kde-format
 msgid "Current Window Size"
-msgstr "当前 KRDC 大小"
+msgstr "当前窗口大小"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
@@ -832,20 +828,19 @@ msgstr "自定义分辨率(...)"
 #: rdp/rdppreferences.ui:296
 #, kde-format
 msgid "Force H.264"
-msgstr ""
+msgstr "强制 H.264"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
 #: rdp/rdppreferences.ui:301
-#, fuzzy, kde-format
-#| msgid "RemoteFX:"
+#, kde-format
 msgid "Force RemoteFX"
-msgstr "RemoteFX:"
+msgstr "强制 RemoteFX"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
 #: rdp/rdppreferences.ui:306
 #, kde-format
 msgid "Disable All Acceleration"
-msgstr ""
+msgstr "禁用所有加速"
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:326
@@ -1081,7 +1076,7 @@ msgstr "土耳其语(tr)"
 #: rdp/rdppreferences.ui:527
 #, kde-format
 msgid "Scale window contents to match resolution"
-msgstr ""
+msgstr "缩放窗口内容以匹配分辨率"
 
 #. i18n: ectx: property (text), widget (QLabel, soundLabel)
 #: rdp/rdppreferences.ui:553
@@ -1094,7 +1089,7 @@ msgstr "声音："
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Logon Error"
-msgstr ""
+msgstr "登录错误"
 
 #: rdp/rdpsession.cpp:183
 #, kde-format
@@ -1106,50 +1101,53 @@ msgid ""
 "Issuer: %5\n"
 "Fingerprint: %6\n"
 msgstr ""
+"主机：%1：%2\n"
+"通用名称：%3\n"
+"主题：%4\n"
+"颁发机构：%5\n"
+"指纹：%6\n"
 
 #: rdp/rdpsession.cpp:592
-#, fuzzy, kde-format
-#| msgid "Access to the system requires a password."
+#, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a password."
 msgstr "访问此系统需要密码。"
 
 #: rdp/rdpsession.cpp:595
-#, fuzzy, kde-format
-#| msgid "Access to the system requires a password."
+#, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
-msgstr "访问此系统需要密码。"
+msgstr "访问此系统需要用户名和密码。"
 
 #: rdp/rdpsession.cpp:617
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
-msgstr ""
+msgstr "此系统的证书未知。您确定要继续吗？"
 
 #: rdp/rdpsession.cpp:618
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
-msgstr ""
+msgstr "验证证书"
 
 #: rdp/rdpsession.cpp:623 rdp/rdpsession.cpp:646
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
-msgstr ""
+msgstr "记住此证书"
 
 #: rdp/rdpsession.cpp:640
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
-msgstr ""
+msgstr "此系统的证书已经改变。您确定要继续吗？"
 
 #: rdp/rdpsession.cpp:641
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
-msgstr ""
+msgstr "证书已改变"
 
 #: rdp/rdpsession.cpp:644
 #, kde-format
@@ -1160,13 +1158,16 @@ msgid ""
 "New Certificate:\n"
 "%2"
 msgstr ""
+"以前的证书：\n"
+"%1\n"
+"新的证书：\n"
+"%2"
 
 #: rdp/rdpsession.cpp:758
-#, fuzzy, kde-format
-#| msgid "Connection Failure"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Login Failure"
-msgstr "连接失败"
+msgstr "登录失败"
 
 #: rdp/rdpsession.cpp:759
 #, kde-format
@@ -1174,13 +1175,13 @@ msgctxt "@label"
 msgid ""
 "Unable to login with the provided credentials. Please double check the user "
 "and password."
-msgstr ""
+msgstr "无法使用提供的凭据登录。请重新检查用户和密码。"
 
 #: rdp/rdpsession.cpp:765
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Account Problems"
-msgstr ""
+msgstr "账户问题"
 
 #: rdp/rdpsession.cpp:766
 #, kde-format
@@ -1188,13 +1189,13 @@ msgctxt "@label"
 msgid ""
 "The provided account is not allowed to log in to this machine. Please "
 "contact your system administrator."
-msgstr ""
+msgstr "提供的账户不允许登录此机器。请联系您的系统管理员。"
 
 #: rdp/rdpsession.cpp:771
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Password Problems"
-msgstr ""
+msgstr "密码问题"
 
 #: rdp/rdpsession.cpp:772
 #, kde-format
@@ -1202,76 +1203,70 @@ msgctxt "@label"
 msgid ""
 "Unable to login with the provided password. Please contact your system "
 "administrator to change it."
-msgstr ""
+msgstr "无法使用提供的密码登录。请联系您的系统管理员进行修改。"
 
 #: rdp/rdpsession.cpp:775
-#, fuzzy, kde-format
-#| msgid "Connection"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Lost"
-msgstr "连接"
+msgstr "连接丢失"
 
 #: rdp/rdpsession.cpp:776
 #, kde-format
 msgctxt "@label"
 msgid "Lost connection to the server."
-msgstr ""
+msgstr "与服务器失去连接。"
 
 #: rdp/rdpsession.cpp:780
-#, fuzzy, kde-format
-#| msgid "Server not found."
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Server not Found"
-msgstr "未找到服务器。"
+msgstr "找不到服务器"
 
 #: rdp/rdpsession.cpp:781
 #, kde-format
 msgctxt "@label"
 msgid "Could not find the server."
-msgstr ""
+msgstr "无法找到服务器。"
 
 #: rdp/rdpsession.cpp:784
-#, fuzzy, kde-format
-#| msgid "Connection Failure"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Refused"
-msgstr "连接失败"
+msgstr "连接被拒绝"
 
 #: rdp/rdpsession.cpp:785
-#, fuzzy, kde-format
-#| msgid "VNC server closed connection."
+#, kde-format
 msgctxt "@label"
 msgid "The server refused the connection request."
-msgstr "VNC 服务器端关闭了连接。"
+msgstr "服务器拒绝了连接请求。"
 
 #: rdp/rdpsession.cpp:789
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Could not Connect"
-msgstr ""
+msgstr "无法连接"
 
 #: rdp/rdpsession.cpp:790
 #, kde-format
 msgctxt "@label"
 msgid "Could not connect to the server."
-msgstr ""
+msgstr "无法连接到服务器。"
 
 #: rdp/rdpsession.cpp:795
-#, fuzzy, kde-format
-#| msgid "Connection Failure"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Closed"
-msgstr "连接失败"
+msgstr "连接关闭"
 
 #: rdp/rdpsession.cpp:796
 #, kde-format
 msgctxt "@label"
 msgid "The connection to the server was closed."
-msgstr ""
+msgstr "与服务器的连接已关闭。"
 
 #: rdp/rdpsession.cpp:799
-#, fuzzy, kde-format
-#| msgid "Connection Failure"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Failed"
 msgstr "连接失败"
@@ -1280,7 +1275,7 @@ msgstr "连接失败"
 #, kde-format
 msgctxt "@label"
 msgid "An unknown error occurred"
-msgstr ""
+msgstr "发生了未知错误"
 
 #: rdp/rdpviewfactory.cpp:22
 #, kde-format
@@ -1591,124 +1586,3 @@ msgid ""
 "screen)</i></html>"
 msgstr ""
 "<html>在此输入地址。<br /><i>示例：vncserver:1 (主机:端口 /屏幕)</i></html>"
-
-#~ msgid "Browse to media share path"
-#~ msgstr "浏览媒体共享路径"
-
-#~ msgid "Desktop &resolution:"
-#~ msgstr "桌面分辨率(&R)："
-
-#~ msgid "ALSA"
-#~ msgstr "ALSA"
-
-#~ msgid "PulseAudio"
-#~ msgstr "PulseAudio"
-
-#~ msgid "None"
-#~ msgstr "无"
-
-#~ msgctxt "label for performance settings in preferences dialog"
-#~ msgid "Performance:"
-#~ msgstr "性能："
-
-#~ msgid "Modem"
-#~ msgstr "调制解调器"
-
-#~ msgid "Broadband"
-#~ msgstr "宽带"
-
-#~ msgid "LAN"
-#~ msgstr "局域网"
-
-#~ msgid "Enhanced visual experience"
-#~ msgstr "增强视觉体验"
-
-#~ msgid ""
-#~ "RemoteFX covers a set of technologies that enhance visual experience of "
-#~ "the Remote Desktop Protocol."
-#~ msgstr "RemoteFX 包含一系列增强远程桌面视觉体验的技术。"
-
-#~ msgid "Share a local media directory with the remote host."
-#~ msgstr "与远程主机共享本地媒体目录。"
-
-#~ msgid "Expert Options"
-#~ msgstr "专家选项"
-
-#~ msgid "Console login:"
-#~ msgstr "控制台登录："
-
-#~ msgid "Attach to Windows Server console"
-#~ msgstr "挂接到 Windows 服务器控制台"
-
-#~ msgid "Extra options:"
-#~ msgstr "附加选项："
-
-#~ msgid "Here you can enter additional xfreerdp (FreeRDP) options."
-#~ msgstr "您可以在这里输入附加的  xfreerdp (FreeRDP) 选项。"
-
-#~ msgid "Login"
-#~ msgstr "登录"
-
-#~ msgid "Default user name:"
-#~ msgstr "默认用户名："
-
-#~ msgid "No default user name"
-#~ msgstr "无默认用户名"
-
-#~ msgid "Automatically recognize \"LDAP\"-Logins and share passwords"
-#~ msgstr "自动识别“LDAP”登录与共享密码"
-
-#~ msgid "Media Folder does not Exist"
-#~ msgstr "媒体文件夹不存在"
-
-#~ msgid ""
-#~ "The folder %1 does not exist.\n"
-#~ "Please set an existing folder to share or empty the \"Share Media\" "
-#~ "option if you do not want to share any folder."
-#~ msgstr ""
-#~ "文件夹 %1 不存在。\n"
-#~ "如果您不想分享任何文件夹，请设置一个已有文件夹来分享或清空\"共享媒体\"选项"
-
-#~ msgid "Enter Username"
-#~ msgstr "输入用户名"
-
-#~ msgid "Please enter the username you would like to use for login."
-#~ msgstr "请在此输入您将用于登录的用户名。"
-
-#~ msgid "Could not start \"%1\"; make sure %1 is properly installed."
-#~ msgstr "无法启动 %1 程序；请确定 %1 已被正确安装。"
-
-#~ msgid "RDP Failure"
-#~ msgstr "RDP 失败"
-
-#~ msgid ""
-#~ "The version of \"xfreerdp\" you are using is too old.\n"
-#~ "xfreerdp 1.0.2 or greater is required."
-#~ msgstr ""
-#~ "您正在使用的“rxfreerdp”版本太老了：\n"
-#~ "需要xfreerdp 1.0.2 或更高版本。"
-
-#~ msgid ""
-#~ "Connection failed. You might have passed a wrong address or username."
-#~ msgstr "连接失败。您可能输入了错误的地址或用户名。"
-
-#~ msgid "Name or service not known."
-#~ msgstr "未知的名称或服务。"
-
-#~ msgid "Connection attempt to host failed."
-#~ msgstr "连接到主机失败。"
-
-#~ msgid "Authentication failure, check credentials."
-#~ msgstr "认证失败，请检查证书。"
-
-#~ msgid ""
-#~ "Connection attempt to host failed. Security negotiation or connection "
-#~ "failure."
-#~ msgstr "连接到主机失败.安全握手或连接失败。"
-
-#~ msgid ""
-#~ "The application \"xfreerdp\" cannot be found on your system; make sure it "
-#~ "is properly installed if you need RDP support."
-#~ msgstr ""
-#~ "在您的系统上找不到“xfreerdp”程序；如果您需要 RDP 客户端支持，请确定它已经"
-#~ "被正确安装。"
