@@ -3,13 +3,13 @@
 #
 # Zlatko Popov <zlatkopopov@fsa-bg.org>, 2006, 2007.
 # Yasen Pramatarov <yasen@lindeas.com>, 2011.
-# Mincho Kondarev <mkondarev@yahoo.de>, 2022, 2023.
+# SPDX-FileCopyrightText: 2022, 2023 Mincho Kondarev <mkondarev@yahoo.de>
 msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-29 00:42+0000\n"
-"PO-Revision-Date: 2023-01-07 17:41+0100\n"
+"PO-Revision-Date: 2023-12-11 11:09+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.0\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -693,7 +693,7 @@ msgstr "Споделяне на медия:"
 #: rdp/rdppreferences.ui:40 rdp/rdppreferences.ui:291
 #, kde-format
 msgid "Use Best Available"
-msgstr ""
+msgstr "Използване на най-добрата"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
 #: rdp/rdppreferences.ui:45
@@ -753,7 +753,7 @@ msgstr "Височина на екрана на отдалеченото раб�
 #: rdp/rdppreferences.ui:136
 #, kde-format
 msgid "Acceleration:"
-msgstr ""
+msgstr "Ускорение:"
 
 #. i18n: ectx: property (text), widget (QLabel, colorDepthLabel)
 #: rdp/rdppreferences.ui:159
@@ -763,10 +763,9 @@ msgstr "Дълбочина на &цветовете:"
 
 #. i18n: ectx: property (text), widget (QLabel, resolutionLabel)
 #: rdp/rdppreferences.ui:172
-#, fuzzy, kde-format
-#| msgid "Custom Resolution (...)"
+#, kde-format
 msgid "Resolution"
-msgstr "Потребителска разделителна способност (...)"
+msgstr "Резолюция"
 
 #. i18n: ectx: property (text), widget (QLabel, layoutLabel)
 #: rdp/rdppreferences.ui:182
@@ -803,30 +802,27 @@ msgstr "Разделителна способност на екрана на о�
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:245
-#, fuzzy, kde-format
-#| msgid "Small (800x600)"
+#, kde-format
 msgid "Small (1280x720)"
-msgstr "Ниска (640x480)"
+msgstr "Ниска (1280x720)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:250
 #, kde-format
 msgid "Medium (1600x900)"
-msgstr ""
+msgstr "Средна (1600x900)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:255
-#, fuzzy, kde-format
-#| msgid "Large (1280x1024)"
+#, kde-format
 msgid "Large (1920x1080)"
-msgstr "Висока (1280x1024)"
+msgstr "Висока (1920x1080)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:260
-#, fuzzy, kde-format
-#| msgid "Current KRDC Size"
+#, kde-format
 msgid "Current Window Size"
-msgstr "Текущ размер на KRDC"
+msgstr "Текущ размер на прозореца"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
@@ -846,20 +842,19 @@ msgstr "Потребителска разделителна способност
 #: rdp/rdppreferences.ui:296
 #, kde-format
 msgid "Force H.264"
-msgstr ""
+msgstr "Принуждаване H.264"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
 #: rdp/rdppreferences.ui:301
-#, fuzzy, kde-format
-#| msgid "RemoteFX:"
+#, kde-format
 msgid "Force RemoteFX"
-msgstr "RemoteFX:"
+msgstr "Принуждаване RemoteFX"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
 #: rdp/rdppreferences.ui:306
 #, kde-format
 msgid "Disable All Acceleration"
-msgstr ""
+msgstr "Деактивиране на ускоренията"
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:326
@@ -1098,6 +1093,8 @@ msgstr "Турски (tr)"
 #, kde-format
 msgid "Scale window contents to match resolution"
 msgstr ""
+"Оразмеряване на съдържанието на прозореца, така че да съответства на "
+"резолюцията"
 
 #. i18n: ectx: property (text), widget (QLabel, soundLabel)
 #: rdp/rdppreferences.ui:553
@@ -1110,7 +1107,7 @@ msgstr "Звук:"
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Logon Error"
-msgstr ""
+msgstr "Грешка при регистрацията"
 
 #: rdp/rdpsession.cpp:183
 #, kde-format
@@ -1122,50 +1119,53 @@ msgid ""
 "Issuer: %5\n"
 "Fingerprint: %6\n"
 msgstr ""
+"Хост: %1:%2\n"
+"Common Name: %3\n"
+"Тема: %4\n"
+"Издател: %5\n"
+"Пръстов отпечатък: %6\n"
 
 #: rdp/rdpsession.cpp:592
-#, fuzzy, kde-format
-#| msgid "Access to the system requires a password."
+#, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a password."
 msgstr "Достъпът до системата изисква парола."
 
 #: rdp/rdpsession.cpp:595
-#, fuzzy, kde-format
-#| msgid "Access to the system requires a password."
+#, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
-msgstr "Достъпът до системата изисква парола."
+msgstr "Достъпът до системата изисква потребителско име и парола."
 
 #: rdp/rdpsession.cpp:617
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
-msgstr ""
+msgstr "Сертификатът за тази система е неизвестен. Да се продължи ли?"
 
 #: rdp/rdpsession.cpp:618
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
-msgstr ""
+msgstr "Проверка на сертификат"
 
 #: rdp/rdpsession.cpp:623 rdp/rdpsession.cpp:646
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
-msgstr ""
+msgstr "Запомняне на този сертификат"
 
 #: rdp/rdpsession.cpp:640
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
-msgstr ""
+msgstr "Сертификатът за тази система е променен Да се продължи ли?"
 
 #: rdp/rdpsession.cpp:641
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
-msgstr ""
+msgstr "Сертификатът е променен"
 
 #: rdp/rdpsession.cpp:644
 #, kde-format
@@ -1176,13 +1176,16 @@ msgid ""
 "New Certificate:\n"
 "%2"
 msgstr ""
+"Предишен сертификат:\n"
+"%1\n"
+"Нов сертификат:\n"
+"%2"
 
 #: rdp/rdpsession.cpp:758
-#, fuzzy, kde-format
-#| msgid "Connection Failure"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Login Failure"
-msgstr "Неуспешно свързване"
+msgstr "Неуспешно влизане"
 
 #: rdp/rdpsession.cpp:759
 #, kde-format
@@ -1191,12 +1194,14 @@ msgid ""
 "Unable to login with the provided credentials. Please double check the user "
 "and password."
 msgstr ""
+"Неуспешна регистрация със зададените парола и потребителско име. Моля, "
+"проверете ги отново."
 
 #: rdp/rdpsession.cpp:765
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Account Problems"
-msgstr ""
+msgstr "Проблеми с акаунта"
 
 #: rdp/rdpsession.cpp:766
 #, kde-format
@@ -1205,12 +1210,14 @@ msgid ""
 "The provided account is not allowed to log in to this machine. Please "
 "contact your system administrator."
 msgstr ""
+"Посоченият акаунт няма разрешение за достъп до тази машина. Моля, свържете "
+"се със системния си администратор."
 
 #: rdp/rdpsession.cpp:771
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Password Problems"
-msgstr ""
+msgstr "Проблеми с паролата"
 
 #: rdp/rdpsession.cpp:772
 #, kde-format
@@ -1219,23 +1226,23 @@ msgid ""
 "Unable to login with the provided password. Please contact your system "
 "administrator to change it."
 msgstr ""
+"Регистрацията със зададената парола е невъзможна. Моля, свържете се със "
+"системния администратор, за да я промените."
 
 #: rdp/rdpsession.cpp:775
-#, fuzzy, kde-format
-#| msgid "Connection"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Lost"
-msgstr "Връзка"
+msgstr "Връзката е прекъсната"
 
 #: rdp/rdpsession.cpp:776
 #, kde-format
 msgctxt "@label"
 msgid "Lost connection to the server."
-msgstr ""
+msgstr "Връзката със сървъра е прекъсната."
 
 #: rdp/rdpsession.cpp:780
-#, fuzzy, kde-format
-#| msgid "Server not found."
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Server not Found"
 msgstr "Сървърът  не е открит."
@@ -1244,59 +1251,55 @@ msgstr "Сървърът  не е открит."
 #, kde-format
 msgctxt "@label"
 msgid "Could not find the server."
-msgstr ""
+msgstr "Не може да се открие сървъра."
 
 #: rdp/rdpsession.cpp:784
-#, fuzzy, kde-format
-#| msgid "Connection Failure"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Refused"
-msgstr "Неуспешно свързване"
+msgstr "Връзката е отказана"
 
 #: rdp/rdpsession.cpp:785
-#, fuzzy, kde-format
-#| msgid "VNC server closed connection."
+#, kde-format
 msgctxt "@label"
 msgid "The server refused the connection request."
-msgstr "Сърърът VNC затвори връзката."
+msgstr "Сървърът отказа заявката за връзка."
 
 #: rdp/rdpsession.cpp:789
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Could not Connect"
-msgstr ""
+msgstr "Неуспешна връзка"
 
 #: rdp/rdpsession.cpp:790
 #, kde-format
 msgctxt "@label"
 msgid "Could not connect to the server."
-msgstr ""
+msgstr "Неуспешно свързване със сървъра ."
 
 #: rdp/rdpsession.cpp:795
-#, fuzzy, kde-format
-#| msgid "Connection Failure"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Closed"
-msgstr "Неуспешно свързване"
+msgstr "Връзката е прекъсната"
 
 #: rdp/rdpsession.cpp:796
 #, kde-format
 msgctxt "@label"
 msgid "The connection to the server was closed."
-msgstr ""
+msgstr "Връзката със сървъра беше затворена."
 
 #: rdp/rdpsession.cpp:799
-#, fuzzy, kde-format
-#| msgid "Connection Failure"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Failed"
-msgstr "Неуспешно свързване"
+msgstr "Свързването е неуспешно"
 
 #: rdp/rdpsession.cpp:800
 #, kde-format
 msgctxt "@label"
 msgid "An unknown error occurred"
-msgstr ""
+msgstr "Възникна неизвестна грешка"
 
 #: rdp/rdpviewfactory.cpp:22
 #, kde-format
