@@ -34,7 +34,11 @@
 #include <KToolBar>
 
 #if HAVE_KACTIVITIES
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #include <KActivities/ResourceInstance>
+#else
+#include <PlasmaActivities/ResourceInstance>
+#endif
 #endif
 
 #include <QClipboard>

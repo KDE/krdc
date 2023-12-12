@@ -44,16 +44,26 @@ find_package(KF${QT_MAJOR_VERSION} ${KF_MIN_VERSION} REQUIRED COMPONENTS
 
 if (QT_MAJOR_VERSION STREQUAL "6")
     find_package(KF6StatusNotifierItem ${KF_MIN_VERSION} REQUIRED)
-endif()
 
-find_package(KF${QT_MAJOR_VERSION} ${KF_MIN_VERSION} OPTIONAL_COMPONENTS Activities)
-set_package_properties(KF${QT_MAJOR_VERSION}Activities PROPERTIES DESCRIPTION "KActivities libraries"
-                       URL "https://www.kde.org"
-                       TYPE OPTIONAL
-                       PURPOSE "For tracking which remote desktops are frequently accessed"
-                      )
-if (KF${QT_MAJOR_VERSION}Activities_FOUND)
-    set(HAVE_KACTIVITIES TRUE)
+    find_package(PlasmaActivities)
+    set_package_properties(PlasmaActivities PROPERTIES DESCRIPTION "KActivities libraries"
+                        URL "https://www.kde.org"
+                        TYPE OPTIONAL
+                        PURPOSE "For tracking which remote desktops are frequently accessed"
+                        )
+    if (PlasmaActivities_FOUND)
+        set(HAVE_KACTIVITIES TRUE)
+    endif()
+else()
+    find_package(KF5 ${KF_MIN_VERSION} OPTIONAL_COMPONENTS Activities)
+    set_package_properties(KF5Activities PROPERTIES DESCRIPTION "KActivities libraries"
+                        URL "https://www.kde.org"
+                        TYPE OPTIONAL
+                        PURPOSE "For tracking which remote desktops are frequently accessed"
+                        )
+    if (KF5Activities_FOUND)
+        set(HAVE_KACTIVITIES TRUE)
+    endif()
 endif()
 
 find_package(KF${QT_MAJOR_VERSION}DocTools)
@@ -203,8 +213,13 @@ if (QT_MAJOR_VERSION STREQUAL "6")
     target_link_libraries(krdc KF6::StatusNotifierItem KF6::BookmarksWidgets)
 endif()
 
-if (KF${QT_MAJOR_VERSION}Activities_FOUND)
-    target_link_libraries(krdc KF${QT_MAJOR_VERSION}::Activities)
+if (HAVE_KACTIVITIES)
+
+    if (QT_MAJOR_VERSION STREQUAL "6")
+        target_link_libraries(krdc Plasma::Activities)
+    else()
+        target_link_libraries(krdc KF5::Activities)
+    endif()
 endif()
 
 install(TARGETS krdc ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
