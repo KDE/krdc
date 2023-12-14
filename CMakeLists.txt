@@ -58,6 +58,8 @@ endif()
 
 find_package(KF${QT_MAJOR_VERSION}DocTools)
 
+find_package(Threads REQUIRED)
+
 # use sane compile flags
 add_definitions(
   -DQT_USE_QSTRINGBUILDER

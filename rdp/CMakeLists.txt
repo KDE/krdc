@@ -27,6 +27,7 @@ target_link_libraries(krdc_rdpplugin
     KF${QT_MAJOR_VERSION}::WindowSystem
     KF${QT_MAJOR_VERSION}::XmlGui
     KF${QT_MAJOR_VERSION}::KIOWidgets
+    Threads::Threads
     krdccore
     freerdp
     freerdp-client
