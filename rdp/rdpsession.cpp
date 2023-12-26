@@ -454,9 +454,11 @@ bool RdpSession::sendEvent(QEvent *event, QWidget *source)
         case Qt::BackButton:
             flags |= PTR_XFLAGS_BUTTON1;
             extendedEvent = true;
+            break;
         case Qt::ForwardButton:
             flags |= PTR_XFLAGS_BUTTON2;
             extendedEvent = true;
+            break;
         default:
             break;
         }
