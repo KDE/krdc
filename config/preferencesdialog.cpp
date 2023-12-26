@@ -25,7 +25,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent, KConfigSkeleton *skeleton)
 
     HostPreferencesList *hostPreferencesList = new HostPreferencesList(this,
                                                                        qobject_cast<MainWindow *>(parent),
-                                                                       skeleton->config()->group("hostpreferences"));
+                                                                       skeleton->config()->group(QString::fromLatin1("hostpreferences")));
     addPage(hostPreferencesList, i18n("Hosts"), QStringLiteral("computer"), i18n("Host Configuration"));
 
     m_pluginSelector = new KPluginWidget();
