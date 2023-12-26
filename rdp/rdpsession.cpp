@@ -21,6 +21,7 @@
 #include <freerdp/input.h>
 #include <freerdp/client.h>
 #include <freerdp/client/channels.h>
+#include <freerdp/client/cliprdr.h>
 #include <freerdp/client/cmdline.h>
 #include <freerdp/client/rdpgfx.h>
 #include <freerdp/channels/rdpgfx.h>
@@ -167,7 +168,10 @@ void channelConnected(void* context, ChannelConnectedEventArgs* e)
     auto rdpC = reinterpret_cast<rdpContext*>(context);
     if (strcmp(e->name, RDPGFX_DVC_CHANNEL_NAME) == 0) {
 		gdi_graphics_pipeline_init(rdpC->gdi, (RdpgfxClientContext*)e->pInterface);
-	}
+    } else if (strcmp(e->name, CLIPRDR_SVC_CHANNEL_NAME) == 0) {
+        CliprdrClientContext* clip = (CliprdrClientContext*)e->pInterface;
+        clip->custom = context;
+    }
 }
 
 void channelDisconnected(void* context, ChannelDisconnectedEventArgs* e)
