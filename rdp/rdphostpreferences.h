@@ -48,6 +48,15 @@ public:
         Depth8,
     };
 
+    enum class TlsSecLevel {
+        Any,
+        Bit80,
+        Bit112,
+        Bit128,
+        Bit192,
+        Bit256,
+    };
+
     explicit RdpHostPreferences(KConfigGroup configGroup, QObject *parent = nullptr);
     ~RdpHostPreferences() override;
 
@@ -72,6 +81,9 @@ public:
 
     void setShareMedia(const QString &shareMedia);
     QString shareMedia() const;
+
+    TlsSecLevel tlsSecLevel() const;
+    void setTlsSecLevel(TlsSecLevel tlsSecLevel);
 
 protected:
     QWidget* createProtocolSpecificConfigPage() override;

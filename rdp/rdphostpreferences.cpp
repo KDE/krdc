@@ -133,6 +133,7 @@ QWidget* RdpHostPreferences::createProtocolSpecificConfigPage()
     rdpUi.kcfg_ColorDepth->setCurrentIndex(int(colorDepth()));
     rdpUi.kcfg_KeyboardLayout->setCurrentIndex(keymap2int(keyboardLayout()));
     rdpUi.kcfg_ShareMedia->setText(shareMedia());
+    rdpUi.kcfg_TlsSecLevel->setCurrentIndex(int(tlsSecLevel()));
 
     // Have to call updateWidthHeight() here
     // We leverage the final part of this function to enable/disable kcfg_Height and kcfg_Width
@@ -211,6 +212,7 @@ void RdpHostPreferences::acceptConfig()
     setKeyboardLayout(int2keymap(rdpUi.kcfg_KeyboardLayout->currentIndex()));
     setSound(Sound(rdpUi.kcfg_Sound->currentIndex()));
     setShareMedia(rdpUi.kcfg_ShareMedia->text());
+    setTlsSecLevel(TlsSecLevel(rdpUi.kcfg_TlsSecLevel->currentIndex()));
 }
 
 bool RdpHostPreferences::scaleToSize() const
@@ -305,4 +307,12 @@ void RdpHostPreferences::updateColorDepth(Acceleration acceleration)
     }
 }
 
+void RdpHostPreferences::setTlsSecLevel(TlsSecLevel tlsSecLevel)
+{
+    m_configGroup.writeEntry("tlsSecLevel", int(tlsSecLevel));
+}
 
+RdpHostPreferences::TlsSecLevel RdpHostPreferences::tlsSecLevel() const
+{
+    return TlsSecLevel(m_configGroup.readEntry("tlsSecLevel", Settings::tlsSecLevel()));
+}

@@ -383,6 +383,28 @@ bool RdpSession::start()
 
     settings->KeyboardLayout = m_preferences->rdpKeyboardLayout();
 
+    switch (m_preferences->tlsSecLevel()) {
+    case RdpHostPreferences::TlsSecLevel::Bit80:
+        settings->TlsSecLevel = 1;
+        break;
+    case RdpHostPreferences::TlsSecLevel::Bit112:
+        settings->TlsSecLevel = 2;
+        break;
+    case RdpHostPreferences::TlsSecLevel::Bit128:
+        settings->TlsSecLevel = 3;
+        break;
+    case RdpHostPreferences::TlsSecLevel::Bit192:
+        settings->TlsSecLevel = 4;
+        break;
+    case RdpHostPreferences::TlsSecLevel::Bit256:
+        settings->TlsSecLevel = 5;
+        break;
+    case RdpHostPreferences::TlsSecLevel::Any:
+    default:
+        settings->TlsSecLevel = 0;
+        break;
+    }
+
     if (!freerdp_connect(m_freerdp)) {
         qWarning(KRDC) << "Unable to connect";
         emitErrorMessage();
