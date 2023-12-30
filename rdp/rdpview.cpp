@@ -255,6 +255,16 @@ void RdpView::mousePressEvent(QMouseEvent *event)
     event->accept();
 }
 
+void RdpView::mouseDoubleClickEvent(QMouseEvent *event)
+{
+    if (!hasFocus()) {
+        setFocus();
+    }
+
+    m_session->sendEvent(event, this);
+    event->accept();
+}
+
 void RdpView::mouseReleaseEvent(QMouseEvent *event)
 {
     m_session->sendEvent(event, this);
