@@ -442,6 +442,7 @@ bool RdpSession::sendEvent(QEvent *event, QWidget *source)
     }
     case QEvent::MouseButtonPress:
     case QEvent::MouseButtonRelease:
+    case QEvent::MouseButtonDblClick:
     case QEvent::MouseMove: {
         auto mouseEvent = static_cast<QMouseEvent *>(event);
         auto position = mouseEvent->localPos();
@@ -475,7 +476,7 @@ bool RdpSession::sendEvent(QEvent *event, QWidget *source)
             break;
         }
 
-        if (mouseEvent->type() == QEvent::MouseButtonPress) {
+        if (mouseEvent->type() == QEvent::MouseButtonPress || mouseEvent->type() == QEvent::MouseButtonDblClick) {
             if (extendedEvent) {
                 flags |= PTR_XFLAGS_DOWN;
             } else {
