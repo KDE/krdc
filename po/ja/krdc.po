@@ -769,10 +769,9 @@ msgstr "色数(&D):"
 
 #. i18n: ectx: property (text), widget (QLabel, resolutionLabel)
 #: rdp/rdppreferences.ui:172
-#, fuzzy, kde-format
-#| msgid "Custom Resolution (...)"
+#, kde-format
 msgid "Resolution"
-msgstr "手動設定 (...)"
+msgstr "解像度"
 
 #. i18n: ectx: property (text), widget (QLabel, layoutLabel)
 #: rdp/rdppreferences.ui:182
@@ -1623,95 +1622,3 @@ msgid ""
 msgstr ""
 "<html>ここにアドレスを入力します。<br/>例: vncserver:1 (host:port / screen)</"
 "html>"
-
-#~ msgid "Desktop &resolution:"
-#~ msgstr "デスクトップの解像度(&R):"
-
-#, fuzzy
-#~| msgctxt "Where each displayed link comes from"
-#~| msgid "None"
-#~ msgid "None"
-#~ msgstr "なし"
-
-#~ msgid "Expert Options"
-#~ msgstr "上級者向けオプション"
-
-#~ msgid "Console login:"
-#~ msgstr "コンソールログイン:"
-
-#~ msgid "Attach to Windows Server console"
-#~ msgstr "WIndows サーバコンソールに接続"
-
-#~ msgid "Extra options:"
-#~ msgstr "追加オプション:"
-
-#, fuzzy
-#~| msgid "Here you can enter additional rdesktop options."
-#~ msgid "Here you can enter additional xfreerdp (FreeRDP) options."
-#~ msgstr "ここに rdesktop の追加オプションを入力できます。"
-
-#~ msgid "Login"
-#~ msgstr "ログイン"
-
-#~ msgid "Default user name:"
-#~ msgstr "デフォルトのユーザ名:"
-
-#~ msgid "No default user name"
-#~ msgstr "デフォルトのユーザ名なし"
-
-#~ msgid "Automatically recognize \"LDAP\"-Logins and share passwords"
-#~ msgstr "自動的に LDAP のログインを認識してパスワードを共有する"
-
-#~ msgid "Enter Username"
-#~ msgstr "ユーザ名を入力"
-
-#~ msgid "Please enter the username you would like to use for login."
-#~ msgstr "ログインに使用するユーザ名を入力してください。"
-
-#, fuzzy
-#~| msgid ""
-#~| "Could not start \"rdesktop\"; make sure rdesktop is properly installed."
-#~ msgid "Could not start \"%1\"; make sure %1 is properly installed."
-#~ msgstr ""
-#~ "<command>rdesktop</command> を起動できませんでした。正しくインストールされ"
-#~ "ているか確認してください。"
-
-#~ msgid "RDP Failure"
-#~ msgstr "RDP 失敗"
-
-#, fuzzy
-#~| msgid ""
-#~| "The version of \"rdesktop\" you are using (%1) is too old:\n"
-#~| "rdesktop 1.3.2 or greater is required."
-#~ msgid ""
-#~ "The version of \"xfreerdp\" you are using is too old.\n"
-#~ "xfreerdp 1.0.2 or greater is required."
-#~ msgstr ""
-#~ "お使いの <command>rdesktop</command> のバージョン (%1) は古すぎます。\n"
-#~ "1.3.2 またはそれ以降のバージョンが必要です。"
-
-#~ msgid "Connection attempt to host failed."
-#~ msgstr "ホストへの接続に失敗しました。"
-
-#, fuzzy
-#~| msgid "Authentication failed. Please try again."
-#~ msgid "Authentication failure, check credentials."
-#~ msgstr "認証に失敗しました。やり直してください。"
-
-#, fuzzy
-#~| msgid "Connection attempt to host failed."
-#~ msgid ""
-#~ "Connection attempt to host failed. Security negotiation or connection "
-#~ "failure."
-#~ msgstr "ホストへの接続に失敗しました。"
-
-#, fuzzy
-#~| msgid ""
-#~| "The application \"rdesktop\" cannot be found on your system; make sure "
-#~| "it is properly installed if you need RDP support."
-#~ msgid ""
-#~ "The application \"xfreerdp\" cannot be found on your system; make sure it "
-#~ "is properly installed if you need RDP support."
-#~ msgstr ""
-#~ "システム上に <command>rdesktop</command> が見つかりません。RDP サポートが"
-#~ "必要であれば正しくインストールされているか確認してください。"
