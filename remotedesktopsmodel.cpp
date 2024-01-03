@@ -23,7 +23,6 @@ RemoteDesktopsModel::RemoteDesktopsModel(QObject *parent, KBookmarkManager *mana
         : QAbstractTableModel(parent)
 {
     m_manager = manager;
-    m_manager->setUpdate(true);
     connect(m_manager, SIGNAL(changed(QString,QString)), SLOT(bookmarksChanged()));
     buildModelFromBookmarkGroup(m_manager->root());
 
