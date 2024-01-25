@@ -1226,8 +1226,9 @@ void MainWindow::createDockWidget()
     remoteDesktopsDockWidget->setWindowTitle(i18n("Remote Desktops"));
     QFontMetrics fontMetrics(remoteDesktopsDockWidget->font());
     remoteDesktopsDockWidget->setMinimumWidth(fontMetrics.horizontalAdvance(QStringLiteral("vnc://192.168.100.100:6000")));
-    actionCollection()->addAction(QStringLiteral("remote_desktop_dockwidget"),
+    QAction *dockAction = actionCollection()->addAction(QStringLiteral("remote_desktop_dockwidget"),
                                   remoteDesktopsDockWidget->toggleViewAction());
+    dockAction->setIcon(QIcon::fromTheme(QStringLiteral("view-sidetree")));
 
     m_dockWidgetTableView = new QTableView(remoteDesktopsDockLayoutWidget);
     m_remoteDesktopsModel = new RemoteDesktopsModel(this, m_bookmarkManager->getManager());
