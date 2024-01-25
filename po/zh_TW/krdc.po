@@ -8,30 +8,31 @@
 # Frank Weng (a.k.a. Franklin) <franklin@goodhorse.idv.tw>, 2009, 2015.
 # Jeff Huang <s8321414@gmail.com>, 2016.
 # pan93412 <pan93412@gmail.com>, 2018, 2019, 2020.
+# SPDX-FileCopyrightText: 2024 Kisaragi Hiu <mail@kisaragi-hiu.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-04 00:41+0000\n"
-"PO-Revision-Date: 2020-04-20 21:43+0800\n"
-"Last-Translator: Yi-Jyun Pan <pan93412@gmail.com>\n"
-"Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
+"POT-Creation-Date: 2024-01-25 01:35+0000\n"
+"PO-Revision-Date: 2024-01-24 21:46+0900\n"
+"Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
+"Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 19.12.3\n"
+"X-Generator: Lokalize 24.01.90\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Franklin Weng, Jeff Huang"
+msgstr "Franklin Weng, Jeff Huang, Kisaragi Hiu"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "franklin@goodhorse.idv.tw, s8321414@gmail.com"
+msgstr "franklin@goodhorse.idv.tw, s8321414@gmail.com, mail@kisaragi-hiu.com"
 
 #: bookmarkmanager.cpp:44
 #, kde-format
@@ -72,7 +73,7 @@ msgstr "顯示狀態列"
 #: config/general.ui:52
 #, kde-format
 msgid "Keep aspect ratio when scaling"
-msgstr "調整時保留外觀比例"
+msgstr "調整大小時維持寬高比"
 
 #. i18n: ectx: property (text), widget (QLabel, backgroundLabel)
 #: config/general.ui:61
@@ -443,7 +444,7 @@ msgstr "螢幕快照"
 #: mainwindow.cpp:155 mainwindow.cpp:502
 #, kde-format
 msgid "Switch to Full Screen Mode"
-msgstr "切換到全畫面模式"
+msgstr "切換到全螢幕模式"
 
 #: mainwindow.cpp:156 mainwindow.cpp:503
 #, kde-format
@@ -493,7 +494,7 @@ msgstr "尺度"
 #: mainwindow.cpp:194
 #, kde-format
 msgid "Scaling Factor"
-msgstr ""
+msgstr "縮放倍率"
 
 #: mainwindow.cpp:205
 #, kde-format
@@ -681,7 +682,7 @@ msgstr "分享媒體："
 #: rdp/rdppreferences.ui:40 rdp/rdppreferences.ui:291
 #, kde-format
 msgid "Use Best Available"
-msgstr ""
+msgstr "使用可用最好的"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
 #: rdp/rdppreferences.ui:45
@@ -741,7 +742,7 @@ msgstr "這是遠端桌面的高度。除非您選擇自定，您才能改變這
 #: rdp/rdppreferences.ui:136
 #, kde-format
 msgid "Acceleration:"
-msgstr ""
+msgstr "加速："
 
 #. i18n: ectx: property (text), widget (QLabel, colorDepthLabel)
 #: rdp/rdppreferences.ui:159
@@ -790,30 +791,27 @@ msgstr "您可以指定遠端桌面的解析度。這個解析度決定您這裡
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:245
-#, fuzzy, kde-format
-#| msgid "Small (800x600)"
+#, kde-format
 msgid "Small (1280x720)"
-msgstr "小（800x600）"
+msgstr "小 (1280x720)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:250
 #, kde-format
 msgid "Medium (1600x900)"
-msgstr ""
+msgstr "中 (1600x900)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:255
-#, fuzzy, kde-format
-#| msgid "Large (1280x1024)"
+#, kde-format
 msgid "Large (1920x1080)"
-msgstr "大（1280x1024）"
+msgstr "大 (1920x1080)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:260
-#, fuzzy, kde-format
-#| msgid "Current KRDC Size"
+#, kde-format
 msgid "Current Window Size"
-msgstr "目前的 KRDC 大小"
+msgstr "目前視窗大小"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
@@ -833,20 +831,19 @@ msgstr "自訂解析度（...）"
 #: rdp/rdppreferences.ui:296
 #, kde-format
 msgid "Force H.264"
-msgstr ""
+msgstr "強制使用 H.264"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
 #: rdp/rdppreferences.ui:301
-#, fuzzy, kde-format
-#| msgid "RemoteFX:"
+#, kde-format
 msgid "Force RemoteFX"
-msgstr "RemoteFX："
+msgstr "強制使用 RemoteFX"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
 #: rdp/rdppreferences.ui:306
 #, kde-format
 msgid "Disable All Acceleration"
-msgstr ""
+msgstr "關閉所有加速"
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:326
@@ -1082,7 +1079,7 @@ msgstr "土耳其語(tr)"
 #: rdp/rdppreferences.ui:527
 #, kde-format
 msgid "Scale window contents to match resolution"
-msgstr ""
+msgstr "縮放視窗內容來讓解析度符合"
 
 #. i18n: ectx: property (text), widget (QLabel, soundLabel)
 #: rdp/rdppreferences.ui:553
@@ -1091,13 +1088,13 @@ msgctxt "label for soundsettings in preferences dialog"
 msgid "Sound:"
 msgstr "音效："
 
-#: rdp/rdpsession.cpp:142
+#: rdp/rdpsession.cpp:143
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Logon Error"
-msgstr ""
+msgstr "登入錯誤"
 
-#: rdp/rdpsession.cpp:183
+#: rdp/rdpsession.cpp:187
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1107,52 +1104,55 @@ msgid ""
 "Issuer: %5\n"
 "Fingerprint: %6\n"
 msgstr ""
+"主機：%1:%2\n"
+"俗名：%3\n"
+"主旨：%4\n"
+"配發者：%5\n"
+"指紋：%6\n"
 
-#: rdp/rdpsession.cpp:592
-#, fuzzy, kde-format
-#| msgid "Access to the system requires a password."
+#: rdp/rdpsession.cpp:598
+#, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a password."
 msgstr "要存取此系統需要密碼。"
 
-#: rdp/rdpsession.cpp:595
-#, fuzzy, kde-format
-#| msgid "Access to the system requires a password."
+#: rdp/rdpsession.cpp:601
+#, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
-msgstr "要存取此系統需要密碼。"
+msgstr "要存取此系統需要使用者名稱和密碼。"
 
-#: rdp/rdpsession.cpp:617
+#: rdp/rdpsession.cpp:623
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
-msgstr ""
+msgstr "此系統的憑證未知。您希望繼續嗎？"
 
-#: rdp/rdpsession.cpp:618
+#: rdp/rdpsession.cpp:624
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
-msgstr ""
+msgstr "驗證憑證"
 
-#: rdp/rdpsession.cpp:623 rdp/rdpsession.cpp:646
+#: rdp/rdpsession.cpp:629 rdp/rdpsession.cpp:652
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
-msgstr ""
+msgstr "記住此憑證"
 
-#: rdp/rdpsession.cpp:640
+#: rdp/rdpsession.cpp:646
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
-msgstr ""
+msgstr "此系統的憑證已變更。您希望繼續嗎？"
 
-#: rdp/rdpsession.cpp:641
+#: rdp/rdpsession.cpp:647
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
-msgstr ""
+msgstr "憑證已變更"
 
-#: rdp/rdpsession.cpp:644
+#: rdp/rdpsession.cpp:650
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1161,130 +1161,124 @@ msgid ""
 "New Certificate:\n"
 "%2"
 msgstr ""
+"先前的憑證：\n"
+"%1\n"
+"新的憑證：\n"
+"%2"
 
-#: rdp/rdpsession.cpp:758
-#, fuzzy, kde-format
-#| msgid "Connection Failure"
+#: rdp/rdpsession.cpp:764
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Login Failure"
-msgstr "連線失敗"
+msgstr "登入失敗"
 
-#: rdp/rdpsession.cpp:759
+#: rdp/rdpsession.cpp:765
 #, kde-format
 msgctxt "@label"
 msgid ""
 "Unable to login with the provided credentials. Please double check the user "
 "and password."
-msgstr ""
-
-#: rdp/rdpsession.cpp:765
-#, kde-format
-msgctxt "@title:dialog"
-msgid "Account Problems"
-msgstr ""
-
-#: rdp/rdpsession.cpp:766
-#, kde-format
-msgctxt "@label"
-msgid ""
-"The provided account is not allowed to log in to this machine. Please "
-"contact your system administrator."
-msgstr ""
+msgstr "無法使用提供的認證資訊登入。請重新檢查使用者和密碼。"
 
 #: rdp/rdpsession.cpp:771
 #, kde-format
 msgctxt "@title:dialog"
-msgid "Password Problems"
-msgstr ""
+msgid "Account Problems"
+msgstr "帳號問題"
 
 #: rdp/rdpsession.cpp:772
 #, kde-format
 msgctxt "@label"
 msgid ""
+"The provided account is not allowed to log in to this machine. Please "
+"contact your system administrator."
+msgstr "提供的帳號不被允許登入此裝置。請與您的系統管理員聯絡。"
+
+#: rdp/rdpsession.cpp:777
+#, kde-format
+msgctxt "@title:dialog"
+msgid "Password Problems"
+msgstr "密碼問題"
+
+#: rdp/rdpsession.cpp:778
+#, kde-format
+msgctxt "@label"
+msgid ""
 "Unable to login with the provided password. Please contact your system "
 "administrator to change it."
-msgstr ""
-
-#: rdp/rdpsession.cpp:775
-#, fuzzy, kde-format
-#| msgid "Connection"
-msgctxt "@title:dialog"
-msgid "Connection Lost"
-msgstr "連線"
-
-#: rdp/rdpsession.cpp:776
-#, fuzzy, kde-format
-#| msgid "An error has occurred during the connection to the NX server."
-msgctxt "@label"
-msgid "Lost connection to the server."
-msgstr "連線到 NX 伺服器時發生錯誤。"
-
-#: rdp/rdpsession.cpp:780
-#, fuzzy, kde-format
-#| msgid "Server not found."
-msgctxt "@title:dialog"
-msgid "Server not Found"
-msgstr "伺服器找不到。"
+msgstr "無法使用提供的密碼登入。請聯絡您的系統管理員來變更它。"
 
 #: rdp/rdpsession.cpp:781
 #, kde-format
+msgctxt "@title:dialog"
+msgid "Connection Lost"
+msgstr "連線遺失"
+
+#: rdp/rdpsession.cpp:782
+#, kde-format
+msgctxt "@label"
+msgid "Lost connection to the server."
+msgstr "已喪失對伺服器的連線。"
+
+#: rdp/rdpsession.cpp:786
+#, kde-format
+msgctxt "@title:dialog"
+msgid "Server not Found"
+msgstr "找不到伺服器"
+
+#: rdp/rdpsession.cpp:787
+#, kde-format
 msgctxt "@label"
 msgid "Could not find the server."
-msgstr ""
-
-#: rdp/rdpsession.cpp:784
-#, fuzzy, kde-format
-#| msgid "Connection Failure"
-msgctxt "@title:dialog"
-msgid "Connection Refused"
-msgstr "連線失敗"
-
-#: rdp/rdpsession.cpp:785
-#, fuzzy, kde-format
-#| msgid "VNC server closed connection."
-msgctxt "@label"
-msgid "The server refused the connection request."
-msgstr "VNC 伺服器結束了連線。"
-
-#: rdp/rdpsession.cpp:789
-#, fuzzy, kde-format
-#| msgid "KRDC Konsole Connection"
-msgctxt "@title:dialog"
-msgid "Could not Connect"
-msgstr "KRDC Konsole 連線"
+msgstr "找不到伺服器。"
 
 #: rdp/rdpsession.cpp:790
-#, fuzzy, kde-format
-#| msgid "An error has occurred during the connection to the NX server."
+#, kde-format
+msgctxt "@title:dialog"
+msgid "Connection Refused"
+msgstr "連線被拒"
+
+#: rdp/rdpsession.cpp:791
+#, kde-format
 msgctxt "@label"
-msgid "Could not connect to the server."
-msgstr "連線到 NX 伺服器時發生錯誤。"
+msgid "The server refused the connection request."
+msgstr "伺服器回絕了連線請求。"
 
 #: rdp/rdpsession.cpp:795
-#, fuzzy, kde-format
-#| msgid "Connection Failure"
+#, kde-format
 msgctxt "@title:dialog"
-msgid "Connection Closed"
-msgstr "連線失敗"
+msgid "Could not Connect"
+msgstr "無法連線"
 
 #: rdp/rdpsession.cpp:796
 #, kde-format
 msgctxt "@label"
-msgid "The connection to the server was closed."
-msgstr ""
+msgid "Could not connect to the server."
+msgstr "無法連線到伺服器。"
 
-#: rdp/rdpsession.cpp:799
-#, fuzzy, kde-format
-#| msgid "Connection Failure"
+#: rdp/rdpsession.cpp:801
+#, kde-format
+msgctxt "@title:dialog"
+msgid "Connection Closed"
+msgstr "連線已關閉"
+
+#: rdp/rdpsession.cpp:802
+#, kde-format
+msgctxt "@label"
+msgid "The connection to the server was closed."
+msgstr "與伺服器的連線已被關閉。"
+
+#: rdp/rdpsession.cpp:805
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Failed"
 msgstr "連線失敗"
 
-#: rdp/rdpsession.cpp:800
+#: rdp/rdpsession.cpp:806
 #, kde-format
 msgctxt "@label"
 msgid "An unknown error occurred"
-msgstr ""
+msgstr "發生未知的錯誤"
 
 #: rdp/rdpviewfactory.cpp:22
 #, kde-format
@@ -1524,7 +1518,7 @@ msgstr "使用者名稱："
 #: vnc/vncpreferences.ui:257
 #, kde-format
 msgid "Don't copy passwords from supported password managers to remote hosts"
-msgstr ""
+msgstr "不要從支援的密碼管理員複製密碼到遠端主機"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, dont_copy_passwords)
 #: vnc/vncpreferences.ui:260
@@ -1534,6 +1528,8 @@ msgid ""
 "additional MIME type \"x-kde-passwordManagerHint\" which is used for "
 "filtering."
 msgstr ""
+"有些的密碼管理員會為密碼標記 KDE 用來過濾密碼的額外 MIME 類型 \"x-kde-"
+"passwordManagerHint\"，支援此機制的密碼管理員包含 KeePassXC 等。"
 
 #: vnc/vncsshtunnelthread.cpp:102
 #, kde-format
