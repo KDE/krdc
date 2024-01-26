@@ -179,6 +179,9 @@ void channelDisconnected(void* context, ChannelDisconnectedEventArgs* e)
     auto rdpC = reinterpret_cast<rdpContext*>(context);
     if (strcmp(e->name, RDPGFX_DVC_CHANNEL_NAME) == 0) {
 		gdi_graphics_pipeline_uninit(rdpC->gdi, (RdpgfxClientContext*)e->pInterface);
+	} else if (strcmp(e->name, CLIPRDR_SVC_CHANNEL_NAME) == 0) {
+		CliprdrClientContext* clip = (CliprdrClientContext*)e->pInterface;
+		clip->custom = NULL;
 	}
 }
 
