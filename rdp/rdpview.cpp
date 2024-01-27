@@ -84,7 +84,7 @@ QSize RdpView::sizeHint() const
         return m_session->size().scaled(parentWidget()->size(), Qt::KeepAspectRatio);
     }
 
-    return m_session->size();
+    return m_session->size() / devicePixelRatio();
 }
 
 void RdpView::startQuitting()
@@ -316,9 +316,10 @@ void RdpView::paintEvent(QPaintEvent *event)
     painter.setClipRect(event->rect());
 
     auto image = *m_session->videoBuffer();
+    image.setDevicePixelRatio(devicePixelRatio());
 
     if (m_hostPreferences->scaleToSize()) {
-        painter.drawImage(QPoint{0, 0}, image.scaled(size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        painter.drawImage(QPoint{0, 0}, image.scaled(size() * devicePixelRatio(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
     } else {
         painter.drawImage(QPoint{0, 0}, image);
     }
