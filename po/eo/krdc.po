@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-27 01:36+0000\n"
-"PO-Revision-Date: 2023-03-25 16:19+0100\n"
+"PO-Revision-Date: 2024-01-28 20:02+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -37,19 +37,19 @@ msgstr "Historio"
 #: config/general.ui:17
 #, kde-format
 msgid "Remember open sessions for next startup"
-msgstr ""
+msgstr "Memori malfermajn seancojn por venonta ekfunkciigo"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_RememberHistory)
 #: config/general.ui:24
 #, kde-format
 msgid "Remember connection history"
-msgstr ""
+msgstr "Memori historion de konekto"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_WalletSupport)
 #: config/general.ui:31
 #, kde-format
 msgid "Remember passwords (KWallet)"
-msgstr ""
+msgstr "Memori pasvortojn (KWallet)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SystemTrayIcon)
 #: config/general.ui:38
@@ -61,31 +61,31 @@ msgstr "Ebligi taskopletan piktogramon"
 #: config/general.ui:45
 #, kde-format
 msgid "Show status bar"
-msgstr ""
+msgstr "Montri statusbreton"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_KeepAspectRatio)
 #: config/general.ui:52
 #, kde-format
 msgid "Keep aspect ratio when scaling"
-msgstr ""
+msgstr "Konservi bildformaton dum skalado"
 
 #. i18n: ectx: property (text), widget (QLabel, backgroundLabel)
 #: config/general.ui:61
 #, kde-format
 msgid "Background color of empty place:"
-msgstr ""
+msgstr "Fonkoloro de malplena loko:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, connectionGroupBox)
 #: config/general.ui:93
 #, kde-format
 msgid "When Connecting"
-msgstr ""
+msgstr "Kiam Konekto"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowPreferencesForNewConnections)
 #: config/general.ui:99
 #, kde-format
 msgid "Show the preferences dialog for new connections"
-msgstr ""
+msgstr "Montri la dialogon de preferoj por novaj konektoj"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_ResizeOnConnect)
 #: config/general.ui:106
@@ -94,12 +94,14 @@ msgid ""
 "This option will resize the window to fit the connection size.  If it is too "
 "big, it will maximize the window."
 msgstr ""
+"Ĉi tiu opcio regrandigos la fenestron por konveni la konektan grandecon. Se "
+"ĝi estas tro granda, ĝi maksimumigos la fenestron."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ResizeOnConnect)
 #: config/general.ui:109
 #, kde-format
 msgid "Resize to fit"
-msgstr ""
+msgstr "Aligrandigi por konveni"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_FullscreenOnConnect)
 #: config/general.ui:116
@@ -108,54 +110,56 @@ msgid ""
 "This option switches to fullscreen only if the connection resolution is the "
 "same as the current screen resolution"
 msgstr ""
+"Ĉi tiu opcio ŝanĝas al plena ekrano nur se la koneksa rezolucio estas la "
+"sama kiel la nuna ekrana rezolucio"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_FullscreenOnConnect)
 #: config/general.ui:119
 #, kde-format
 msgid "Switch to Fullscreen if appropriate"
-msgstr ""
+msgstr "Ŝanĝi al Plenekrano se konvene"
 
 #. i18n: ectx: property (text), widget (QLabel, defaultProtocolLabel)
 #: config/general.ui:128
 #, kde-format
 msgid "Default protocol:"
-msgstr ""
+msgstr "Defaŭlta protokolo:"
 
 #. i18n: ectx: property (text), widget (QLineEdit, kcfg_DefaultProtocol)
 #: config/general.ui:135
 #, kde-format
 msgid "vnc"
-msgstr ""
+msgstr "vnc"
 
 #. i18n: ectx: property (title), widget (QGroupBox, tabGroupBox)
 #: config/general.ui:147
 #, kde-format
 msgid "Tab Settings"
-msgstr ""
+msgstr "Langetaj Agordoj"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowTabBar)
 #: config/general.ui:153
 #, kde-format
 msgid "Always show tab bar"
-msgstr ""
+msgstr "Ĉiam montri langeton"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabCloseButton)
 #: config/general.ui:160
 #, kde-format
 msgid "Show close button on tabs"
-msgstr ""
+msgstr "Montri fermbutonon sur langetoj"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabMiddleClick)
 #: config/general.ui:167
 #, kde-format
 msgid "Middle-click on a tab closes it"
-msgstr ""
+msgstr "Mez-klako sur langeto fermas ĝin"
 
 #. i18n: ectx: property (text), widget (QLabel, tabOrientationLabel)
 #: config/general.ui:176
 #, kde-format
 msgid "Tab position:"
-msgstr ""
+msgstr "Tab pozicio:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TabPosition)
 #: config/general.ui:184
@@ -194,12 +198,12 @@ msgstr "Forigi"
 #: config/hostpreferenceslist.cpp:100 mainwindow.cpp:678
 #, kde-format
 msgid "The selected host cannot be handled."
-msgstr ""
+msgstr "La elektita gastiganto ne povas esti pritraktata."
 
 #: config/hostpreferenceslist.cpp:101 mainwindow.cpp:288 mainwindow.cpp:679
 #, kde-format
 msgid "Unusable URL"
-msgstr ""
+msgstr "Neuzebla URL"
 
 #: config/preferencesdialog.cpp:24
 #, kde-format
@@ -210,18 +214,18 @@ msgstr "Ĝenerala"
 #: config/preferencesdialog.cpp:24
 #, kde-format
 msgid "General Configuration"
-msgstr ""
+msgstr "Ĝenerala Agordo"
 
 #: config/preferencesdialog.cpp:29
 #, kde-format
 msgid "Hosts"
-msgstr ""
+msgstr "Gastigantoj"
 
 #: config/preferencesdialog.cpp:29 core/hostpreferences.cpp:176
 #: core/hostpreferences.cpp:180
 #, kde-format
 msgid "Host Configuration"
-msgstr ""
+msgstr "Gastiganta Agordo"
 
 #: config/preferencesdialog.cpp:34 config/preferencesdialog.cpp:35
 #, kde-format
@@ -231,63 +235,65 @@ msgstr "Kromaĵoj"
 #: config/preferencesdialog.cpp:35
 #, kde-format
 msgid "Plugin Configuration"
-msgstr ""
+msgstr "Kromprogramo Agordo"
 
 #: connectiondelegate.cpp:33
 #, kde-format
 msgid "Less than a minute ago"
-msgstr ""
+msgstr "Antaŭ malpli ol unu minuto"
 
 #: connectiondelegate.cpp:34
 #, kde-format
 msgid "A minute ago"
 msgid_plural "%1 minutes ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Antaŭ unu minuto"
+msgstr[1] "Antaŭ %1 minutoj"
 
 #: connectiondelegate.cpp:36
 #, kde-format
 msgid "An hour ago"
 msgid_plural "%1 hours ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Antaŭ unu horo"
+msgstr[1] "Antaŭ %1 horoj"
 
 #: connectiondelegate.cpp:40
 #, kde-format
 msgid "Yesterday"
 msgid_plural "%1 days ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Antaŭ unu tago"
+msgstr[1] "Antaŭ %1 tagoj"
 
 #: connectiondelegate.cpp:42
 #, kde-format
 msgid "Over a month ago"
 msgid_plural "%1 months ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Antaŭ unu monato"
+msgstr[1] "Antaŭ %1 monatoj"
 
 #: connectiondelegate.cpp:43
 #, kde-format
 msgid "A year ago"
 msgid_plural "%1 years ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Antaŭ unu jaro"
+msgstr[1] "Antaŭ %1 jaroj"
 
 #: core/hostpreferences.cpp:183
 #, kde-format
 msgid ""
 "Note that settings might only apply when you connect next time to this host."
 msgstr ""
+"Notu, ke agordoj povus validi nur kiam vi venontfoje konektos al ĉi tiu "
+"gastiganto."
 
 #: core/hostpreferences.cpp:199
 #, kde-format
 msgid "Show this dialog again for this host"
-msgstr ""
+msgstr "Montri ĉi tiun dialogon denove por ĉi tiu gastiganto"
 
 #: core/hostpreferences.cpp:203
 #, kde-format
 msgid "Remember password (KWallet)"
-msgstr ""
+msgstr "Memori pasvorton (KWallet)"
 
 #. i18n: ectx: label, entry (OpenSessions), group (General)
 #: core/krdc.kcfg:16
@@ -299,13 +305,13 @@ msgstr "Seancoj"
 #: krdcui.rc:8
 #, kde-format
 msgid "&Session"
-msgstr ""
+msgstr "&Seanco"
 
 #. i18n: ectx: ToolBar (krdc_remote_view_toolbar)
 #: krdcui.rc:22
 #, kde-format
 msgid "Remote View Toolbar"
-msgstr ""
+msgstr "Fora Vida Ilobreto"
 
 #: main.cpp:61
 #, kde-format
@@ -315,7 +321,7 @@ msgstr "KRDC"
 #: main.cpp:62 systemtrayicon.cpp:24
 #, kde-format
 msgid "KDE Remote Desktop Client"
-msgstr ""
+msgstr "KDE Malproksima Labortabla Kliento"
 
 #: main.cpp:64
 #, kde-format
@@ -329,6 +335,14 @@ msgid ""
 "(c) 1999-2003, Matthew Chapman\n"
 "(c) 2009, Collabora Ltd"
 msgstr ""
+"(c) 2007-2016, Urs Wolfer\n"
+"(c) 2001-2003, Tim Jansen\n"
+"(c) 2002-2003, Arend van Beelen jr.\n"
+"(c) 2000-2002, Const Kaplinsky\n"
+"(c) 2000, Tridia Corporation\n"
+"(c) 1999, AT&T Laboratories Boston\n"
+"(c) 1999-2003, Matthew Chapman\n"
+"(c) 2009, Collabora Ltd"
 
 #: main.cpp:73
 #, kde-format
@@ -338,12 +352,12 @@ msgstr "Urs Wolfer"
 #: main.cpp:73
 #, kde-format
 msgid "Developer, Maintainer"
-msgstr ""
+msgstr "Ellaboranto, Prizorganto"
 
 #: main.cpp:74
 #, kde-format
 msgid "Tony Murray"
-msgstr ""
+msgstr "Tony Murray"
 
 #: main.cpp:74
 #, kde-format
@@ -358,7 +372,7 @@ msgstr "Tim Jansen"
 #: main.cpp:75
 #, kde-format
 msgid "Former Developer"
-msgstr ""
+msgstr "Iama programisto"
 
 #: main.cpp:76
 #, kde-format
@@ -368,7 +382,7 @@ msgstr "Arend van Beelen jr."
 #: main.cpp:76
 #, kde-format
 msgid "Initial RDP backend"
-msgstr ""
+msgstr "Komenca RDP-backend"
 
 #: main.cpp:77
 #, kde-format
@@ -378,17 +392,17 @@ msgstr "Brad Hards"
 #: main.cpp:77
 #, kde-format
 msgid "Google Summer of Code 2007 KRDC project mentor"
-msgstr ""
+msgstr "Guglo Somero de Kodo 2007 KRDC-projektmentoro"
 
 #: main.cpp:79
 #, kde-format
 msgid "LibVNCServer / LibVNCClient developers"
-msgstr ""
+msgstr "Programistoj de LibVNCServer / LibVNCClient"
 
 #: main.cpp:79
 #, kde-format
 msgid "VNC client library"
-msgstr ""
+msgstr "VNC-klienta biblioteko"
 
 #: main.cpp:81
 #, kde-format
@@ -398,44 +412,46 @@ msgstr "Abner Silva"
 #: main.cpp:81
 #, kde-format
 msgid "Telepathy Tubes Integration"
-msgstr ""
+msgstr "Telepatiaj Tuboj-Integriĝo"
 
 #: main.cpp:92
 #, kde-format
 msgid ""
 "Start KRDC with the provided URL in fullscreen mode (works only with one URL)"
 msgstr ""
+"Komenci KRDC kun la provizita URL en plenekrana reĝimo (funkcias nur kun unu "
+"URL)"
 
 #: main.cpp:93
 #, kde-format
 msgid "URLs to connect after startup"
-msgstr ""
+msgstr "URL-oj por konekti post ekfunkciigo"
 
 #: mainwindow.cpp:125
 #, kde-format
 msgid "KDE Remote Desktop Client started"
-msgstr ""
+msgstr "KDE Remote Desktop Kliento komenciĝis"
 
 #: mainwindow.cpp:130 mainwindow.cpp:143 mainwindow.cpp:1093
 #: mainwindow.cpp:1190
 #, kde-format
 msgid "New Connection"
-msgstr ""
+msgstr "Nova Konekto"
 
 #: mainwindow.cpp:149
 #, kde-format
 msgid "Copy Screenshot to Clipboard"
-msgstr ""
+msgstr "Kopii Ekrankapton al Tondujo"
 
 #: mainwindow.cpp:150
 #, kde-format
 msgid "Screenshot"
-msgstr ""
+msgstr "Ekrankopio"
 
 #: mainwindow.cpp:155 mainwindow.cpp:502
 #, kde-format
 msgid "Switch to Full Screen Mode"
-msgstr ""
+msgstr "Ŝalti al Plenekrana Reĝimo"
 
 #: mainwindow.cpp:156 mainwindow.cpp:503
 #, kde-format
@@ -445,7 +461,7 @@ msgstr "Plenekrano"
 #: mainwindow.cpp:163
 #, kde-format
 msgid "View Only"
-msgstr ""
+msgstr "Nur Vido"
 
 #: mainwindow.cpp:168
 #, kde-format
@@ -455,27 +471,27 @@ msgstr "Malkonekti"
 #: mainwindow.cpp:176
 #, kde-format
 msgid "Show Local Cursor"
-msgstr ""
+msgstr "Montri Lokan Kursoron"
 
 #: mainwindow.cpp:177
 #, kde-format
 msgid "Local Cursor"
-msgstr ""
+msgstr "Loka Kursoro"
 
 #: mainwindow.cpp:183
 #, kde-format
 msgid "Grab All Possible Keys"
-msgstr ""
+msgstr "Preni Ĉiujn Eblajn Klavojn"
 
 #: mainwindow.cpp:184
 #, kde-format
 msgid "Grab Keys"
-msgstr ""
+msgstr "Preni Klavojn"
 
 #: mainwindow.cpp:190
 #, kde-format
 msgid "Scale Remote Screen to Fit Window Size"
-msgstr ""
+msgstr "Skali Foran Ekranon por Konveni Fenestran Grandecon"
 
 #: mainwindow.cpp:191
 #, kde-format
@@ -485,7 +501,7 @@ msgstr "Etendite"
 #: mainwindow.cpp:194
 #, kde-format
 msgid "Scaling Factor"
-msgstr ""
+msgstr "Skalfaktoro"
 
 #: mainwindow.cpp:205
 #, kde-format
@@ -498,16 +514,18 @@ msgid ""
 "The entered address does not have the required form.\n"
 " Syntax: [username@]host[:port]"
 msgstr ""
+"La enigita adreso ne havas la bezonatan formon.\n"
+" Sintakso: [uzantnomo@]gastiganto[:porto]"
 
 #: mainwindow.cpp:265
 #, kde-format
 msgid "Malformed URL"
-msgstr ""
+msgstr "Misformita URL"
 
 #: mainwindow.cpp:287
 #, kde-format
 msgid "The entered address cannot be handled."
-msgstr ""
+msgstr "La enigita adreso ne povas esti pritraktata."
 
 #: mainwindow.cpp:419
 #, kde-format
@@ -517,49 +535,49 @@ msgstr "Konektante al %1"
 #: mainwindow.cpp:423
 #, kde-format
 msgid "Authenticating at %1"
-msgstr ""
+msgstr "Aŭtentikigo ĉe %1"
 
 #: mainwindow.cpp:427
 #, kde-format
 msgid "Preparing connection to %1"
-msgstr ""
+msgstr "Preparante konekton al %1"
 
 #: mainwindow.cpp:431
 #, kde-format
 msgid "Connected to %1"
-msgstr ""
+msgstr "Konektita al %1"
 
 #: mainwindow.cpp:513
 #, kde-format
 msgctxt ""
 "window title when in full screen mode (for example displayed in tasklist)"
 msgid "KDE Remote Desktop Client (Full Screen)"
-msgstr ""
+msgstr "KDE Malproksima Labortabla Kliento (Plena Ekrano)"
 
 #: mainwindow.cpp:546
 #, kde-format
 msgid "Switch to Window Mode"
-msgstr ""
+msgstr "Ŝanĝi al Fenestra Reĝimo"
 
 #: mainwindow.cpp:547
 #, kde-format
 msgid "Window Mode"
-msgstr ""
+msgstr "Fenestra Reĝimo"
 
 #: mainwindow.cpp:699
 #, kde-format
 msgid "Connect"
-msgstr ""
+msgstr "Konekti"
 
 #: mainwindow.cpp:700
 #, kde-format
 msgid "Rename"
-msgstr ""
+msgstr "Alinomi"
 
 #: mainwindow.cpp:701
 #, kde-format
 msgid "Settings"
-msgstr ""
+msgstr "Agordoj"
 
 #: mainwindow.cpp:702
 #, kde-format
@@ -581,22 +599,22 @@ msgstr "Historio"
 #: mainwindow.cpp:718
 #, kde-format
 msgid "Rename %1"
-msgstr ""
+msgstr "Alinomi %1"
 
 #: mainwindow.cpp:718
 #, kde-format
 msgid "Rename %1 to"
-msgstr ""
+msgstr "Alinomi %1 al"
 
 #: mainwindow.cpp:726
 #, kde-format
 msgid "Are you sure you want to delete %1?"
-msgstr ""
+msgstr "Ĉu vi certas, ke vi volas forigi %1?"
 
 #: mainwindow.cpp:726
 #, kde-format
 msgid "Delete %1"
-msgstr ""
+msgstr "Forigi %1"
 
 #: mainwindow.cpp:748
 #, kde-format
@@ -611,32 +629,32 @@ msgstr "Fermi la Langeton"
 #: mainwindow.cpp:853
 #, kde-format
 msgid "Minimize Full Screen Window"
-msgstr ""
+msgstr "Minimumigi Plenekranan Fenestron"
 
 #: mainwindow.cpp:869
 #, kde-format
 msgid "Stick Toolbar"
-msgstr ""
+msgstr "Stika Ilobreto"
 
 #: mainwindow.cpp:987
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
-msgstr ""
+msgstr "Ĉu vi certas, ke vi volas forlasi la KDE Remote Desktop Client?"
 
 #: mainwindow.cpp:988
 #, kde-format
 msgid "Confirm Quit"
-msgstr ""
+msgstr "Konfirmi Forlasi"
 
 #: mainwindow.cpp:1116
 #, kde-format
 msgid "Connect to:"
-msgstr ""
+msgstr "Konekti al:"
 
 #: mainwindow.cpp:1120
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
-msgstr ""
+msgstr "Tajpu ĉi tie por konektiĝi al adreso kaj filtri la liston."
 
 #: mainwindow.cpp:1129
 #, kde-format
@@ -644,16 +662,18 @@ msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
 "methods."
 msgstr ""
+"Tajpu IP aŭ DNS-Nomon ĉi tie. Forigu la linion por ricevi liston de "
+"konektometodoj."
 
 #: mainwindow.cpp:1132
 #, kde-format
 msgid "Goto Address"
-msgstr ""
+msgstr "Iri al Adreso"
 
 #: mainwindow.cpp:1226
 #, kde-format
 msgid "Remote Desktops"
-msgstr ""
+msgstr "Foraj Labortabloj"
 
 #: mainwindow.cpp:1257
 #, kde-format
@@ -664,38 +684,38 @@ msgstr "Filtrilo"
 #: rdp/rdppreferences.ui:17
 #, kde-format
 msgid "Share Media:"
-msgstr ""
+msgstr "Kunhavigi amaskomunikilaron:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
 #: rdp/rdppreferences.ui:40 rdp/rdppreferences.ui:291
 #, kde-format
 msgid "Use Best Available"
-msgstr ""
+msgstr "Uzi Plej Bonan Disponeblan"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
 #: rdp/rdppreferences.ui:45
 #, kde-format
 msgid "True Color with Alpha (32 Bit)"
-msgstr ""
+msgstr "Vera Koloro kun Alfa (32 Bitoj)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
 #: rdp/rdppreferences.ui:50
 #, kde-format
 msgid "True Color (24 Bit)"
-msgstr ""
+msgstr "Vera Koloro (24 Bitoj)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
 #: rdp/rdppreferences.ui:55
 #, kde-format
 msgid "High Color (16 Bit)"
-msgstr ""
+msgstr "Alta Koloro (16 Bitoj)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
 #: rdp/rdppreferences.ui:60
 #, kde-format
 msgid "Low Color (8 Bit)"
-msgstr ""
+msgstr "Malalta Koloro (8 Bitoj)"
 
 #. i18n: ectx: property (text), widget (QLabel, widthLabel)
 #: rdp/rdppreferences.ui:73 vnc/vncpreferences.ui:136
@@ -711,12 +731,14 @@ msgid ""
 "This is the width of the remote desktop. You can only change this value "
 "manually if you select Custom as desktop resolution above."
 msgstr ""
+"Ĉi tiu estas la larĝo de la fora labortablo. Vi nur povas ŝanĝi ĉi tiun "
+"valoron permane se vi elektas Propra kiel labortabla rezolucio supre."
 
 #. i18n: ectx: property (text), widget (QLabel, heightLabel)
 #: rdp/rdppreferences.ui:105 vnc/vncpreferences.ui:168
 #, kde-format
 msgid "H&eight:"
-msgstr ""
+msgstr "H&ok:"
 
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Height)
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_ScalingHeight)
@@ -726,48 +748,50 @@ msgid ""
 "This is the height of the remote desktop. You can only change this value "
 "manually if you select Custom as desktop resolution above."
 msgstr ""
+"Ĉi tiu estas la alteco de la fora labortablo. Vi nur povas ŝanĝi ĉi tiun "
+"valoron permane se vi elektas Propra kiel labortabla rezolucio supre."
 
 #. i18n: ectx: property (text), widget (QLabel, accelerationLabel)
 #: rdp/rdppreferences.ui:136
 #, kde-format
 msgid "Acceleration:"
-msgstr ""
+msgstr "Akcelo:"
 
 #. i18n: ectx: property (text), widget (QLabel, colorDepthLabel)
 #: rdp/rdppreferences.ui:159
 #, kde-format
 msgid "Color &depth:"
-msgstr ""
+msgstr "Koloro & profundo:"
 
 #. i18n: ectx: property (text), widget (QLabel, resolutionLabel)
 #: rdp/rdppreferences.ui:172
 #, kde-format
 msgid "Resolution"
-msgstr ""
+msgstr "Rezolucio"
 
 #. i18n: ectx: property (text), widget (QLabel, layoutLabel)
 #: rdp/rdppreferences.ui:182
 #, kde-format
 msgid "&Keyboard layout:"
-msgstr ""
+msgstr "&Klavara aranĝo:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
 #: rdp/rdppreferences.ui:208
 #, kde-format
 msgid "On This Computer"
-msgstr ""
+msgstr "Sur Ĉi tiu Komputilo"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
 #: rdp/rdppreferences.ui:213
 #, kde-format
 msgid "On Remote Computer"
-msgstr ""
+msgstr "Sur Fora Komputilo"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
 #: rdp/rdppreferences.ui:218
 #, kde-format
 msgid "Disable Sound"
-msgstr ""
+msgstr "Malebligi Sonon"
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_Resolution)
 #. i18n: ectx: property (whatsThis), widget (KComboBox, resolutionComboBox)
@@ -777,6 +801,9 @@ msgid ""
 "Here you can specify the resolution of the remote desktop. This resolution "
 "determines the size of the desktop that will be presented to you."
 msgstr ""
+"Ĉi tie vi povas specifi la rezolucion de la fora labortablo. Ĉi tiu "
+"rezolucio determinas la grandecon de la labortablo kiu estos prezentita al "
+"vi."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:245
@@ -800,39 +827,39 @@ msgstr "Granda (1920x1080)"
 #: rdp/rdppreferences.ui:260
 #, kde-format
 msgid "Current Window Size"
-msgstr ""
+msgstr "Nuna Fenestra Grandeco"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
 #: rdp/rdppreferences.ui:265 vnc/vncpreferences.ui:118
 #, kde-format
 msgid "Current Screen Resolution"
-msgstr ""
+msgstr "Nuna Ekran Rezolucio"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
 #: rdp/rdppreferences.ui:270 vnc/vncpreferences.ui:123
 #, kde-format
 msgid "Custom Resolution (...)"
-msgstr ""
+msgstr "Propra Rezolucio (...)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
 #: rdp/rdppreferences.ui:296
 #, kde-format
 msgid "Force H.264"
-msgstr ""
+msgstr "Forto H.264"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
 #: rdp/rdppreferences.ui:301
 #, kde-format
 msgid "Force RemoteFX"
-msgstr ""
+msgstr "Forto RemoteFX"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
 #: rdp/rdppreferences.ui:306
 #, kde-format
 msgid "Disable All Acceleration"
-msgstr ""
+msgstr "Malebligi Ĉian Akcelon"
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:326
@@ -841,247 +868,249 @@ msgid ""
 "Use this to specify your keyboard layout. This layout setting is used to "
 "send the correct keyboard codes to the server."
 msgstr ""
+"Uzu ĉi tion por specifi vian klavaran aranĝon. Ĉi tiu aranĝo estas uzata por "
+"sendi la ĝustajn klavarajn kodojn al la servilo."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:333
 #, kde-format
 msgid "Arabic (ar)"
-msgstr ""
+msgstr "Araba (ar)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:338
 #, kde-format
 msgid "Czech (cs)"
-msgstr ""
+msgstr "Ĉeĥa (cs)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:343
 #, kde-format
 msgid "Danish (da)"
-msgstr ""
+msgstr "Dana (da)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:348
 #, kde-format
 msgid "German (de)"
-msgstr ""
+msgstr "germana (de)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:353
 #, kde-format
 msgid "Swiss German (de-ch)"
-msgstr ""
+msgstr "Svisgermana (de-ch)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:358
 #, kde-format
 msgid "American Dvorak (en-dv)"
-msgstr ""
+msgstr "Amerika Dvorak (en-dv)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:363
 #, kde-format
 msgid "British English (en-gb)"
-msgstr ""
+msgstr "Brita angla (eo-gb)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:368
 #, kde-format
 msgid "US English (en-us)"
-msgstr ""
+msgstr "Usona angla (en-us)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:373
 #, kde-format
 msgid "Spanish (es)"
-msgstr ""
+msgstr "Hispana (es)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:378
 #, kde-format
 msgid "Estonian (et)"
-msgstr ""
+msgstr "Estona (et)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:383
 #, kde-format
 msgid "Finnish (fi)"
-msgstr ""
+msgstr "Finna (fi)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:388
 #, kde-format
 msgid "Faroese (fo)"
-msgstr ""
+msgstr "Feroa (fo)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:393
 #, kde-format
 msgid "French (fr)"
-msgstr ""
+msgstr "Franca (fr)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:398
 #, kde-format
 msgid "Belgian (fr-be)"
-msgstr ""
+msgstr "Belga (fr-be)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:403
 #, kde-format
 msgid "French Canadian (fr-ca)"
-msgstr ""
+msgstr "Franca kanada (fr-ca)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:408
 #, kde-format
 msgid "Swiss French (fr-ch)"
-msgstr ""
+msgstr "Svis-franca (fr-ch)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:413
 #, kde-format
 msgid "Hebrew (he)"
-msgstr ""
+msgstr "Hebrea (li)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:418
 #, kde-format
 msgid "Croatian (hr)"
-msgstr ""
+msgstr "Kroata (h)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:423
 #, kde-format
 msgid "Hungarian (hu)"
-msgstr ""
+msgstr "Hungara (hu)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:428
 #, kde-format
 msgid "Icelandic (is)"
-msgstr ""
+msgstr "Islanda (estas)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:433
 #, kde-format
 msgid "Italian (it)"
-msgstr ""
+msgstr "Itala (ĝi)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:438
 #, kde-format
 msgid "Japanese (ja)"
-msgstr ""
+msgstr "Japana (ja)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:443
 #, kde-format
 msgid "Korean (ko)"
-msgstr ""
+msgstr "Korea (ko)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:448
 #, kde-format
 msgid "Lithuanian (lt)"
-msgstr ""
+msgstr "Litova (lt)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:453
 #, kde-format
 msgid "Latvian (lv)"
-msgstr ""
+msgstr "Latva (lv)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:458
 #, kde-format
 msgid "Macedonian (mk)"
-msgstr ""
+msgstr "Makedona (mk)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:463
 #, kde-format
 msgid "Dutch (nl)"
-msgstr ""
+msgstr "Nederlanda (nl)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:468
 #, kde-format
 msgid "Belgian Dutch (nl-be)"
-msgstr ""
+msgstr "Belga nederlanda (nl-be)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:473
 #, kde-format
 msgid "Norwegian (no)"
-msgstr ""
+msgstr "norvega (ne)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:478
 #, kde-format
 msgid "Polish (pl)"
-msgstr ""
+msgstr "Pola (pl)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:483
 #, kde-format
 msgid "Portuguese (pt)"
-msgstr ""
+msgstr "Portugala (pt)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:488
 #, kde-format
 msgid "Brazilian (pt-br)"
-msgstr ""
+msgstr "Brazila (pt-br)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:493
 #, kde-format
 msgid "Russian (ru)"
-msgstr ""
+msgstr "Rusa (ru)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:498
 #, kde-format
 msgid "Slovenian (sl)"
-msgstr ""
+msgstr "Slovena (sl)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:503
 #, kde-format
 msgid "Swedish (sv)"
-msgstr ""
+msgstr "Sveda (sv)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:508
 #, kde-format
 msgid "Thai (th)"
-msgstr ""
+msgstr "Tajlanda (th)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:513
 #, kde-format
 msgid "Turkish (tr)"
-msgstr ""
+msgstr "Turka (tr)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ScaleToSize)
 #: rdp/rdppreferences.ui:527
 #, kde-format
 msgid "Scale window contents to match resolution"
-msgstr ""
+msgstr "Skali fenestroenhavon por kongrui kun rezolucio"
 
 #. i18n: ectx: property (text), widget (QLabel, soundLabel)
 #: rdp/rdppreferences.ui:553
 #, kde-format
 msgctxt "label for soundsettings in preferences dialog"
 msgid "Sound:"
-msgstr ""
+msgstr "Sono:"
 
 #: rdp/rdpsession.cpp:143
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Logon Error"
-msgstr ""
+msgstr "Ensaluta Eraro"
 
 #: rdp/rdpsession.cpp:190
 #, kde-format
@@ -1093,48 +1122,53 @@ msgid ""
 "Issuer: %5\n"
 "Fingerprint: %6\n"
 msgstr ""
+"Gastiganto: %1:%2\n"
+"Komuna Nomo: %3\n"
+"Temo: %4\n"
+"Eldonanto: %5\n"
+"Fingrosigno: %6\n"
 
 #: rdp/rdpsession.cpp:601
 #, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a password."
-msgstr ""
+msgstr "Aliro al ĉi tiu sistemo postulas pasvorton."
 
 #: rdp/rdpsession.cpp:604
 #, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
-msgstr ""
+msgstr "Aliro al ĉi tiu sistemo postulas uzantnomon kaj pasvorton."
 
 #: rdp/rdpsession.cpp:626
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
-msgstr ""
+msgstr "La atestilo por ĉi tiu sistemo estas nekonata. Ĉu vi volas daŭrigi?"
 
 #: rdp/rdpsession.cpp:627
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
-msgstr ""
+msgstr "Konfirmi Atestilon"
 
 #: rdp/rdpsession.cpp:632 rdp/rdpsession.cpp:655
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
-msgstr ""
+msgstr "Memori ĉi tiun atestilon"
 
 #: rdp/rdpsession.cpp:649
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
-msgstr ""
+msgstr "La atestilo por ĉi tiu sistemo ŝanĝiĝis. Ĉu vi volas daŭrigi?"
 
 #: rdp/rdpsession.cpp:650
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
-msgstr ""
+msgstr "Atestilo Ŝanĝiĝis"
 
 #: rdp/rdpsession.cpp:653
 #, kde-format
@@ -1145,12 +1179,16 @@ msgid ""
 "New Certificate:\n"
 "%2"
 msgstr ""
+"Antaŭa atestilo:\n"
+"%1\n"
+"Nova atestilo:\n"
+"%2"
 
 #: rdp/rdpsession.cpp:767
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Login Failure"
-msgstr ""
+msgstr "Malsukceso Ensaluti"
 
 #: rdp/rdpsession.cpp:768
 #, kde-format
@@ -1159,12 +1197,14 @@ msgid ""
 "Unable to login with the provided credentials. Please double check the user "
 "and password."
 msgstr ""
+"Ne eblas ensaluti kun la provizitaj akreditaĵoj. Bonvolu kontroli la uzanton "
+"kaj pasvorton."
 
 #: rdp/rdpsession.cpp:774
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Account Problems"
-msgstr ""
+msgstr "Kontaj Problemoj"
 
 #: rdp/rdpsession.cpp:775
 #, kde-format
@@ -1173,12 +1213,14 @@ msgid ""
 "The provided account is not allowed to log in to this machine. Please "
 "contact your system administrator."
 msgstr ""
+"La provizita konto ne rajtas ensaluti al ĉi tiu maŝino. Bonvolu kontakti "
+"vian sisteman administranton."
 
 #: rdp/rdpsession.cpp:780
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Password Problems"
-msgstr ""
+msgstr "Pasvortaj Problemoj"
 
 #: rdp/rdpsession.cpp:781
 #, kde-format
@@ -1187,6 +1229,8 @@ msgid ""
 "Unable to login with the provided password. Please contact your system "
 "administrator to change it."
 msgstr ""
+"Ne eblas ensaluti per la provizita pasvorto. Bonvolu kontakti vian sisteman "
+"administranton por ŝanĝi ĝin."
 
 #: rdp/rdpsession.cpp:784
 #, kde-format
@@ -1210,7 +1254,7 @@ msgstr "Servilo ne Trovita"
 #, kde-format
 msgctxt "@label"
 msgid "Could not find the server."
-msgstr ""
+msgstr "Ne eblis trovi la servilon."
 
 #: rdp/rdpsession.cpp:793
 #, kde-format
@@ -1222,7 +1266,7 @@ msgstr "Konekto Rifuzita"
 #, kde-format
 msgctxt "@label"
 msgid "The server refused the connection request."
-msgstr ""
+msgstr "La servilo rifuzis la konektopeton."
 
 #: rdp/rdpsession.cpp:798
 #, kde-format
@@ -1234,7 +1278,7 @@ msgstr "Ne Eblis Konekti"
 #, kde-format
 msgctxt "@label"
 msgid "Could not connect to the server."
-msgstr ""
+msgstr "Ne eblis konekti al la servilo."
 
 #: rdp/rdpsession.cpp:804
 #, kde-format
@@ -1246,7 +1290,7 @@ msgstr "Konekto Fermita"
 #, kde-format
 msgctxt "@label"
 msgid "The connection to the server was closed."
-msgstr ""
+msgstr "La konekto al la servilo estis fermita."
 
 #: rdp/rdpsession.cpp:808
 #, kde-format
@@ -1258,17 +1302,17 @@ msgstr "Konekto Malsukcesis"
 #, kde-format
 msgctxt "@label"
 msgid "An unknown error occurred"
-msgstr ""
+msgstr "Nekonata eraro okazis"
 
 #: rdp/rdpviewfactory.cpp:22
 #, kde-format
 msgid "Connect to a Windows Remote Desktop (RDP)"
-msgstr ""
+msgstr "Konekti al Vindoza Malproksima Labortablo (RDP)"
 
 #: rdp/rdpviewfactory.cpp:51
 #, kde-format
 msgid "New RDP Connection..."
-msgstr ""
+msgstr "Nova RDP-Konekto..."
 
 #: rdp/rdpviewfactory.cpp:61
 #, kde-format
@@ -1276,12 +1320,14 @@ msgid ""
 "<html>Enter the address here. Port is optional.<br /><i>Example: "
 "rdpserver:3389 (host:port)</i></html>"
 msgstr ""
+"<html>Enigu la adreson ĉi tie. Pordo estas nedeviga.<br /><i>Ekzemplo: "
+"rdpserver:3389 (gastiganto:porto)</i></html>"
 
 #: remotedesktopsmodel.cpp:111
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Zeroconf"
-msgstr ""
+msgstr "Zeroconf"
 
 #: remotedesktopsmodel.cpp:113
 #, kde-format
@@ -1293,26 +1339,26 @@ msgstr "Neniu"
 #, kde-format
 msgctxt "Remove the selected url from the bookarks menu"
 msgid "Remove the bookmark for %1."
-msgstr ""
+msgstr "Forigu la legosignon por %1."
 
 #: remotedesktopsmodel.cpp:131
 #, kde-format
 msgctxt "Add the selected url to the bookmarks menu"
 msgid "Bookmark %1."
-msgstr ""
+msgstr "Legomarko %1."
 
 #: remotedesktopsmodel.cpp:170
 #, kde-format
 msgctxt "Header of the connections list, title/url for remote connection"
 msgid "Remote Desktop"
-msgstr ""
+msgstr "Fora Labortablo"
 
 #: remotedesktopsmodel.cpp:172
 #, kde-format
 msgctxt ""
 "Header of the connections list, the last time this connection was initiated"
 msgid "Last Connected"
-msgstr ""
+msgstr "Laste Konektita"
 
 #: remotedesktopsmodel.cpp:174
 #, kde-format
@@ -1320,7 +1366,7 @@ msgctxt ""
 "Header of the connections list, the number of times this connection has been "
 "visited"
 msgid "Visits"
-msgstr ""
+msgstr "Vizitoj"
 
 #: remotedesktopsmodel.cpp:176
 #, kde-format
@@ -1337,47 +1383,47 @@ msgstr "Fonto"
 #: vnc/vncclientthread.cpp:299
 #, kde-format
 msgid "VNC authentication type is not supported."
-msgstr ""
+msgstr "VNC-aŭtentikigtipo ne estas subtenata."
 
 #: vnc/vncclientthread.cpp:317
 #, kde-format
 msgid "Server not found."
-msgstr ""
+msgstr "Servilo ne trovita."
 
 #: vnc/vncclientthread.cpp:334 vnc/vncclientthread.cpp:413
 #, kde-format
 msgid "VNC authentication failed."
-msgstr ""
+msgstr "VNC-aŭtentikigo malsukcesis."
 
 #: vnc/vncclientthread.cpp:339
 #, kde-format
 msgid "VNC authentication failed because of too many authentication tries."
-msgstr ""
+msgstr "VNC-aŭtentikigo malsukcesis pro tro multaj aŭtentikigprovoj."
 
 #: vnc/vncclientthread.cpp:343
 #, kde-format
 msgid "VNC server closed connection."
-msgstr ""
+msgstr "VNC-servilo fermis konekton."
 
 #: vnc/vncclientthread.cpp:351 vnc/vncclientthread.cpp:353
 #, kde-format
 msgid "Disconnected: %1."
-msgstr ""
+msgstr "Malkonektita: %1."
 
 #: vnc/vncclientthread.cpp:560
 #, kde-format
 msgid "Reconnecting."
-msgstr ""
+msgstr "Rekonekti."
 
 #: vnc/vncclientthread.cpp:627
 #, kde-format
 msgid "Reconnected."
-msgstr ""
+msgstr "Rekonektita."
 
 #: vnc/vncclientthread.cpp:629
 #, kde-format
 msgid "Connected."
-msgstr ""
+msgstr "Konektis."
 
 #. i18n: ectx: property (title), widget (QGroupBox, vncGroupBox)
 #: vnc/vncpreferences.ui:17
@@ -1389,7 +1435,7 @@ msgstr "Konekto"
 #: vnc/vncpreferences.ui:23
 #, kde-format
 msgid "Connection &type:"
-msgstr ""
+msgstr "&Tipo de konekto:"
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_Quality)
 #: vnc/vncpreferences.ui:39
@@ -1403,42 +1449,49 @@ msgid ""
 "high speed connections and results in lower image quality, especially in "
 "'Low Quality' mode."
 msgstr ""
+"Uzu ĉi tion por specifi la rendimenton de via konekto. Rimarku, ke vi devas "
+"elekti la rapidecon de la plej malforta ligilo - eĉ se vi havas altan "
+"rapidecan konekton, ĝi ne helpos vin se la fora komputilo uzas malrapidan "
+"modemon. Elekti nivelon de kvalito tro alta sur malrapida ligo kaŭzos pli "
+"malrapidajn respondtempojn. Elektante pli malaltan kvaliton pliigos "
+"latentecojn en altrapidaj konektoj kaj rezultigas pli malaltan bildkvaliton, "
+"precipe en \"Malaltkvalita\" reĝimo."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Quality)
 #: vnc/vncpreferences.ui:43
 #, kde-format
 msgid "High Quality (LAN, direct connection)"
-msgstr ""
+msgstr "Altkvalito (LAN, rekta konekto)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Quality)
 #: vnc/vncpreferences.ui:48
 #, kde-format
 msgid "Medium Quality (DSL, Cable, fast Internet)"
-msgstr ""
+msgstr "Mezkvalito (DSL, Kablo, rapida Interreto)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Quality)
 #: vnc/vncpreferences.ui:53
 #, kde-format
 msgid "Low Quality (Modem, ISDN, slow Internet)"
-msgstr ""
+msgstr "Malalta Kvalito (Modemo, ISDN, malrapida Interreto)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_Scaling)
 #: vnc/vncpreferences.ui:63
 #, kde-format
 msgid "Scale to Size:"
-msgstr ""
+msgstr "Skalo al Grandeco:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
 #: vnc/vncpreferences.ui:93
 #, kde-format
 msgid "Minimal (640x480)"
-msgstr ""
+msgstr "Minimuma (640x480)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
 #: vnc/vncpreferences.ui:98
 #, kde-format
 msgid "Small (800x600)"
-msgstr ""
+msgstr "Malgranda (800x600)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
 #: vnc/vncpreferences.ui:103
@@ -1450,49 +1503,50 @@ msgstr "Normal (1024x768)"
 #: vnc/vncpreferences.ui:108
 #, kde-format
 msgid "Large (1280x1024)"
-msgstr ""
+msgstr "Granda (1280x1024)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
 #: vnc/vncpreferences.ui:113
 #, kde-format
 msgid "Very Large (1600x1200)"
-msgstr ""
+msgstr "Tre Granda (1600x1200)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, use_ssh_tunnel)
 #: vnc/vncpreferences.ui:204
 #, kde-format
 msgid "Connect via SSH tunnel"
-msgstr ""
+msgstr "Konekti per SSH-tunelo"
 
 #. i18n: ectx: property (title), widget (QGroupBox, ssh_groupBox)
 #: vnc/vncpreferences.ui:211
 #, kde-format
 msgid "SSH tunnel options"
-msgstr ""
+msgstr "SSH-tunelebloj"
 
 #. i18n: ectx: property (text), widget (QCheckBox, use_loopback)
 #: vnc/vncpreferences.ui:217
 #, kde-format
 msgid "Tunnel via loopback address"
-msgstr ""
+msgstr "Tunelo per loopback adreso"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: vnc/vncpreferences.ui:224
 #, kde-format
 msgid "Port:"
-msgstr ""
+msgstr "Pordo:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: vnc/vncpreferences.ui:244
 #, kde-format
 msgid "User name:"
-msgstr ""
+msgstr "Uzantnomo:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, dont_copy_passwords)
 #: vnc/vncpreferences.ui:257
 #, kde-format
 msgid "Don't copy passwords from supported password managers to remote hosts"
 msgstr ""
+"Ne kopiu pasvortojn de subtenataj pasvortadministrantoj al foraj gastigantoj"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, dont_copy_passwords)
 #: vnc/vncpreferences.ui:260
@@ -1502,27 +1556,30 @@ msgid ""
 "additional MIME type \"x-kde-passwordManagerHint\" which is used for "
 "filtering."
 msgstr ""
+"Subtenataj pasvortadministrantoj (kiel KeePassXC) markas kopiitajn "
+"pasvortojn per kroma MIME-tipo \"x-kde-passwordManagerHint\" kiu estas uzata "
+"por filtrado."
 
 #: vnc/vncsshtunnelthread.cpp:102
 #, kde-format
 msgid "Error connecting to %1: %2"
-msgstr ""
+msgstr "Eraro konektante al %1: %2"
 
 #: vnc/vncsshtunnelthread.cpp:127
 #, kde-format
 msgid "Error authenticating with password: %1"
-msgstr ""
+msgstr "Eraro aŭtentikigante per pasvorto: %1"
 
 #: vnc/vncsshtunnelthread.cpp:133 vnc/vncsshtunnelthread.cpp:151
 #: vnc/vncsshtunnelthread.cpp:158 vnc/vncsshtunnelthread.cpp:166
 #, kde-format
 msgid "Error creating tunnel socket"
-msgstr ""
+msgstr "Eraro dum kreado de tunela ingo"
 
 #: vnc/vncview.cpp:344
 #, kde-format
 msgid "Access to the system requires a password."
-msgstr ""
+msgstr "Aliro al la sistemo postulas pasvorton."
 
 #: vnc/vncview.cpp:345
 #, kde-format
@@ -1532,27 +1589,27 @@ msgstr "La aŭtentigo fiaskis. Please try again."
 #: vnc/vncview.cpp:373
 #, kde-format
 msgid "Please enter the SSH password."
-msgstr ""
+msgstr "Bonvolu enigi la SSH-pasvorton."
 
 #: vnc/vncview.cpp:398 vnc/vncview.cpp:400
 #, kde-format
 msgid "VNC failure"
-msgstr ""
+msgstr "Fiasko de VNC"
 
 #: vnc/vncview.cpp:409 vnc/vncview.cpp:411
 #, kde-format
 msgid "SSH Tunnel failure"
-msgstr ""
+msgstr "Fiasko de SSH-tunelo"
 
 #: vnc/vncviewfactory.cpp:47
 #, kde-format
 msgid "New VNC Connection..."
-msgstr ""
+msgstr "Nova VNC-Konekto..."
 
 #: vnc/vncviewfactory.cpp:52
 #, kde-format
 msgid "Connect to a VNC Remote Desktop"
-msgstr ""
+msgstr "Konekti al Fora Labortablo de VNC"
 
 #: vnc/vncviewfactory.cpp:57
 #, kde-format
@@ -1560,3 +1617,5 @@ msgid ""
 "<html>Enter the address here.<br /><i>Example: vncserver:1 (host:port / "
 "screen)</i></html>"
 msgstr ""
+"<html>Enigu la adreson ĉi tie.<br /><i>Ekzemplo: vncserver:1 (gastiganto:"
+"pordo / ekrano)</i></html>"
