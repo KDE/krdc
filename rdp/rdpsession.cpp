@@ -178,11 +178,11 @@ void channelDisconnected(void* context, ChannelDisconnectedEventArgs* e)
 {
     auto rdpC = reinterpret_cast<rdpContext*>(context);
     if (strcmp(e->name, RDPGFX_DVC_CHANNEL_NAME) == 0) {
-		gdi_graphics_pipeline_uninit(rdpC->gdi, (RdpgfxClientContext*)e->pInterface);
-	} else if (strcmp(e->name, CLIPRDR_SVC_CHANNEL_NAME) == 0) {
-		CliprdrClientContext* clip = (CliprdrClientContext*)e->pInterface;
-		clip->custom = NULL;
-	}
+        gdi_graphics_pipeline_uninit(rdpC->gdi, (RdpgfxClientContext*)e->pInterface);
+    } else if (strcmp(e->name, CLIPRDR_SVC_CHANNEL_NAME) == 0) {
+        CliprdrClientContext* clip = (CliprdrClientContext*)e->pInterface;
+        clip->custom = nullptr;
+    }
 }
 
 QString Certificate::toString() const
@@ -272,6 +272,11 @@ QSize RdpSession::size() const
     return m_size;
 }
 
+void RdpSession::setSize(QSize size)
+{
+    m_size = size;
+}
+
 bool RdpSession::start()
 {
     setState(State::Starting);
@@ -309,9 +314,9 @@ bool RdpSession::start()
     settings->Username = qstrdup(m_user.toLocal8Bit().data());
     settings->Password = qstrdup(m_password.toLocal8Bit().data());
 
-    if (m_preferences->width() > 0 && m_preferences->height() > 0) {
-        settings->DesktopWidth = m_preferences->width();
-        settings->DesktopHeight = m_preferences->height();
+    if (m_size.width() > 0 && m_size.height() > 0) {
+        settings->DesktopWidth = m_size.width();
+        settings->DesktopHeight = m_size.height();
     }
 
     switch (m_preferences->acceleration()) {

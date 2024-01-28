@@ -84,6 +84,7 @@ public:
     void setHostPreferences(RdpHostPreferences *preferences);
 
     QSize size() const;
+    void setSize(QSize size);
     Q_SIGNAL void sizeChanged();
 
     int port() const;

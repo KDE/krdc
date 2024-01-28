@@ -55,7 +55,12 @@ public:
 
     void savePassword(const QString &password);
 
+public Q_SLOTS:
+    void scaleResize(int w, int h) override;
+
 protected:
+    QSize initialSize();
+
     void paintEvent(QPaintEvent *event) override;
 
     void keyPressEvent(QKeyEvent *event) override;
