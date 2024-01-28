@@ -9,8 +9,8 @@
 
 #include "core/remoteview.h"
 
-#include <KBookmarkManager>
 #include <KActionCollection>
+#include <KBookmarkManager>
 #include <KBookmarkMenu>
 #include <KBookmarkOwner>
 
@@ -34,7 +34,7 @@ public:
     QList<KBookmarkOwner::FutureBookmark> currentBookmarkList() const override;
     void addHistoryBookmark(RemoteView *view);
     void addManualBookmark(const QUrl &url, const QString &text);
-    KBookmarkManager* getManager();
+    KBookmarkManager *getManager();
     // removes all bookmarks with url, possibly ignore the history folder and update it's title there if it's set
     static void removeByUrl(KBookmarkManager *manager, const QString &url, bool ignoreHistory = false, const QString &updateTitle = QString());
     static void updateTitle(KBookmarkManager *manager, const QString &url, const QString &title);

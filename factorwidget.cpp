@@ -13,11 +13,12 @@
 
 #include <cstdio>
 
-FactorWidget::FactorWidget(QWidget *parent) : QWidgetAction(parent)
+FactorWidget::FactorWidget(QWidget *parent)
+    : QWidgetAction(parent)
 {
 }
 
-FactorWidget::FactorWidget(const QString& text, MainWindow * receiver, QObject* parent)
+FactorWidget::FactorWidget(const QString &text, MainWindow *receiver, QObject *parent)
     : QWidgetAction(parent)
     , m_receiver(receiver)
 {
@@ -35,14 +36,14 @@ FactorWidget::~FactorWidget()
  *
  * The widget has by default 100 steps, and width of 100.
  */
-QWidget * FactorWidget::createWidget(QWidget * parent)
+QWidget *FactorWidget::createWidget(QWidget *parent)
 {
     QToolBar *_parent = qobject_cast<QToolBar *>(parent);
     if (!_parent) {
         return QWidgetAction::createWidget(parent);
     }
 
-    QSlider * s = new QSlider(Qt::Horizontal, _parent);
+    QSlider *s = new QSlider(Qt::Horizontal, _parent);
     s->setRange(100, 200);
     s->setMaximumWidth(100);
 
@@ -53,7 +54,7 @@ QWidget * FactorWidget::createWidget(QWidget * parent)
     return s;
 }
 
-void FactorWidget::deleteWidget(QWidget* widget)
+void FactorWidget::deleteWidget(QWidget *widget)
 {
     disconnect(widget);
     QWidgetAction::deleteWidget(widget);

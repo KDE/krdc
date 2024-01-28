@@ -8,8 +8,8 @@
 #ifndef HOSTPREFERENCES_H
 #define HOSTPREFERENCES_H
 
-#include "remoteview.h"
 #include "krdccore_export.h"
+#include "remoteview.h"
 
 #include <KConfigGroup>
 
@@ -71,7 +71,7 @@ public:
 protected:
     HostPreferences(KConfigGroup configGroup, QObject *parent);
 
-    virtual QWidget* createProtocolSpecificConfigPage() = 0;
+    virtual QWidget *createProtocolSpecificConfigPage() = 0;
 
     /** Called when the user validates the config dialog. */
     virtual void acceptConfig();

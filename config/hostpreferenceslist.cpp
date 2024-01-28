@@ -8,22 +8,22 @@
 #include "hostpreferences.h"
 #include "krdc_debug.h"
 
-#include <QIcon>
 #include <KLocalizedString>
 #include <KMessageBox>
+#include <QIcon>
 
 #include <QFile>
 #include <QLayout>
 #include <QListWidget>
 
 HostPreferencesList::HostPreferencesList(QWidget *parent, MainWindow *mainWindow, KConfigGroup hostPrefsConfig)
-        : QWidget(parent)
-        , m_hostPrefsConfig(hostPrefsConfig)
-        , m_mainWindow(mainWindow)
+    : QWidget(parent)
+    , m_hostPrefsConfig(hostPrefsConfig)
+    , m_mainWindow(mainWindow)
 {
     hostList = new QListWidget(this);
     connect(hostList, SIGNAL(itemSelectionChanged()), SLOT(selectionChanged()));
-    connect(hostList, SIGNAL(itemDoubleClicked(QListWidgetItem*)), SLOT(configureHost()));
+    connect(hostList, SIGNAL(itemDoubleClicked(QListWidgetItem *)), SLOT(configureHost()));
 
     configureButton = new QPushButton(this);
     configureButton->setEnabled(false);
@@ -78,7 +78,7 @@ void HostPreferencesList::configureHost()
 
         qCDebug(KRDC) << "Configure host: " << urlString;
 
-        HostPreferences* prefs = nullptr;
+        HostPreferences *prefs = nullptr;
 
         const QList<RemoteViewFactory *> remoteViewFactories(m_mainWindow->remoteViewFactoriesList());
         for (RemoteViewFactory *factory : remoteViewFactories) {
@@ -96,9 +96,7 @@ void HostPreferencesList::configureHost()
             prefs->showDialog(this);
             delete prefs;
         } else {
-            KMessageBox::error(this,
-                               i18n("The selected host cannot be handled."),
-                               i18n("Unusable URL"));
+            KMessageBox::error(this, i18n("The selected host cannot be handled."), i18n("Unusable URL"));
         }
     }
 }
@@ -108,10 +106,10 @@ void HostPreferencesList::removeHost()
     const QList<QListWidgetItem *> selectedItems = hostList->selectedItems();
 
     for (QListWidgetItem *selectedItem : selectedItems) {
-        qCDebug(KRDC) << "Remove host: " <<  selectedItem->text();
+        qCDebug(KRDC) << "Remove host: " << selectedItem->text();
 
         m_hostPrefsConfig.deleteGroup(selectedItem->text());
-        delete(selectedItem);
+        delete (selectedItem);
     }
 
     saveSettings();
@@ -125,4 +123,3 @@ void HostPreferencesList::selectionChanged()
     configureButton->setEnabled(enabled);
     removeButton->setEnabled(enabled);
 }
-

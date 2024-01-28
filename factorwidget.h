@@ -8,9 +8,9 @@
 #define FACTORWIDGET_H
 
 #ifndef QTONLY
-    #include "krdccore_export.h"
+#include "krdccore_export.h"
 #else
-    #define KRDCCORE_EXPORT
+#define KRDCCORE_EXPORT
 #endif
 
 #include <QWidgetAction>
@@ -27,14 +27,14 @@ class KRDCCORE_EXPORT FactorWidget : public QWidgetAction
 
 public:
     FactorWidget(QWidget *parent = nullptr);
-    FactorWidget(const QString &text, MainWindow * receiver, QObject *parent = nullptr);
+    FactorWidget(const QString &text, MainWindow *receiver, QObject *parent = nullptr);
     ~FactorWidget() override;
 
 protected:
-    virtual QWidget * createWidget(QWidget * parent) override;
-    virtual void deleteWidget(QWidget * widget) override;
+    virtual QWidget *createWidget(QWidget *parent) override;
+    virtual void deleteWidget(QWidget *widget) override;
 
-    MainWindow * m_receiver;
+    MainWindow *m_receiver;
 };
 
 #endif

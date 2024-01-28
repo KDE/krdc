@@ -7,18 +7,18 @@
 #include "vncclientthread.h"
 #include "krdc_debug.h"
 
+#include <QBitmap>
+#include <QCursor>
+#include <QMutexLocker>
+#include <QPixmap>
+#include <QTimer>
 #include <cerrno>
 #include <netinet/in.h>
 #include <netinet/tcp.h>
-#include <sys/types.h>
 #include <sys/socket.h>
-#include <QMutexLocker>
-#include <QTimer>
-#include <QBitmap>
-#include <QPixmap>
-#include <QCursor>
+#include <sys/types.h>
 
-//for detecting intel AMT KVM vnc server
+// for detecting intel AMT KVM vnc server
 static const QString INTEL_AMT_KVM_STRING = QLatin1String("Intel(r) AMT KVM");
 
 // Dispatch from this static callback context to the member context.
@@ -60,7 +60,7 @@ void VncClientThread::cuttextStatic(rfbClient *cl, const char *text, int textlen
 // Dispatch from this static callback context to the member context.
 char *VncClientThread::passwdHandlerStatic(rfbClient *cl)
 {
-    VncClientThread *t = (VncClientThread *) rfbClientGetClientData(cl, nullptr);
+    VncClientThread *t = (VncClientThread *)rfbClientGetClientData(cl, nullptr);
     Q_ASSERT(t);
 
     return t->passwdHandler();
@@ -69,7 +69,7 @@ char *VncClientThread::passwdHandlerStatic(rfbClient *cl)
 // Dispatch from this static callback context to the member context.
 rfbCredential *VncClientThread::credentialHandlerStatic(rfbClient *cl, int credentialType)
 {
-    VncClientThread *t = (VncClientThread *) rfbClientGetClientData(cl, nullptr);
+    VncClientThread *t = (VncClientThread *)rfbClientGetClientData(cl, nullptr);
     Q_ASSERT(t);
 
     return t->credentialHandler(credentialType);
@@ -87,8 +87,9 @@ void VncClientThread::outputHandlerStatic(const char *format, ...)
     va_end(args);
 }
 
-void VncClientThread::cursorShapeHandlerStatic(rfbClient *cl, int xhot, int yhot, int width, int height, int bpp) {
-    VncClientThread *t = (VncClientThread *) rfbClientGetClientData(cl, nullptr);
+void VncClientThread::cursorShapeHandlerStatic(rfbClient *cl, int xhot, int yhot, int width, int height, int bpp)
+{
+    VncClientThread *t = (VncClientThread *)rfbClientGetClientData(cl, nullptr);
     Q_ASSERT(t);
 
     // get cursor shape from remote cursor field
@@ -121,19 +122,19 @@ void VncClientThread::cursorShapeHandlerStatic(rfbClient *cl, int xhot, int yhot
     Q_EMIT t->gotCursor(QCursor{cursorPixmap, xhot, yhot});
 }
 
-void VncClientThread::setClientColorDepth(rfbClient* cl, VncClientThread::ColorDepth cd)
+void VncClientThread::setClientColorDepth(rfbClient *cl, VncClientThread::ColorDepth cd)
 {
-    switch(cd) {
+    switch (cd) {
     case bpp8:
         if (m_colorTable.isEmpty()) {
             m_colorTable.resize(256);
             int r, g, b;
             for (int i = 0; i < 256; ++i) {
-                //pick out the red (3 bits), green (3 bits) and blue (2 bits) bits and make them maximum significant in 8bits
-                //this gives a colortable for 8bit true colors
-                r= (i & 0x07) << 5;
-                g= (i & 0x38) << 2;
-                b= i & 0xc0;
+                // pick out the red (3 bits), green (3 bits) and blue (2 bits) bits and make them maximum significant in 8bits
+                // this gives a colortable for 8bit true colors
+                r = (i & 0x07) << 5;
+                g = (i & 0x38) << 2;
+                b = i & 0xc0;
                 m_colorTable[i] = qRgb(r, g, b);
             }
         }
@@ -171,7 +172,7 @@ void VncClientThread::setClientColorDepth(rfbClient* cl, VncClientThread::ColorD
 
 rfbBool VncClientThread::newclient()
 {
-    //8bit color hack for Intel(r) AMT KVM "classic vnc" = vnc server built in in Intel Vpro chipsets.
+    // 8bit color hack for Intel(r) AMT KVM "classic vnc" = vnc server built in in Intel Vpro chipsets.
     if (INTEL_AMT_KVM_STRING == QLatin1String(cl->desktopName)) {
         qCDebug(KRDC) << "Intel(R) AMT KVM: switching to 8 bit color depth (workaround, recent libvncserver needed)";
         setColorDepth(bpp8);
@@ -184,7 +185,7 @@ rfbBool VncClientThread::newclient()
         return false;
     }
     if (frameBuffer)
-        delete [] frameBuffer; // do not leak if we get a new framebuffer size
+        delete[] frameBuffer; // do not leak if we get a new framebuffer size
     frameBuffer = new uint8_t[size];
     cl->frameBuffer = frameBuffer;
     memset(cl->frameBuffer, '\0', size);
@@ -216,7 +217,7 @@ rfbBool VncClientThread::newclient()
 
 void VncClientThread::updatefbPartial(int x, int y, int w, int h)
 {
-//    qCDebug(KRDC) << "updated client: x: " << x << ", y: " << y << ", w: " << w << ", h: " << h;
+    //    qCDebug(KRDC) << "updated client: x: " << x << ", y: " << y << ", w: " << w << ", h: " << h;
 
     m_dirtyRect = m_dirtyRect.united(QRect(x, y, w, h));
 }
@@ -225,7 +226,7 @@ void VncClientThread::updatefbFinished()
 {
     const int width = cl->width, height = cl->height;
     QImage img;
-    switch(colorDepth()) {
+    switch (colorDepth()) {
     case bpp8:
         img = QImage(cl->frameBuffer, width, height, width, QImage::Format_Indexed8);
         img.setColorTable(m_colorTable);
@@ -253,7 +254,7 @@ void VncClientThread::updatefbFinished()
     QRect updateRect = m_dirtyRect;
     m_dirtyRect = QRect();
 
-//    qCDebug(KRDC) << Q_FUNC_INFO << updateRect;
+    //    qCDebug(KRDC) << Q_FUNC_INFO << updateRect;
     emitUpdated(updateRect.x(), updateRect.y(), updateRect.width(), updateRect.height());
 }
 
@@ -286,32 +287,31 @@ rfbCredential *VncClientThread::credentialHandler(int credentialType)
     rfbCredential *cred = nullptr;
 
     switch (credentialType) {
-        case rfbCredentialTypeUser:
-            passwordRequest(true);
-            m_passwordError = true;
+    case rfbCredentialTypeUser:
+        passwordRequest(true);
+        m_passwordError = true;
 
-            cred = new rfbCredential;
-            cred->userCredential.username = strdup(username().toUtf8().constData());
-            cred->userCredential.password = strdup(password().toUtf8().constData());
-            break;
-        default:
-            qCritical(KRDC) << "credential request failed, unsupported credentialType:" << credentialType;
-            outputErrorMessage(i18n("VNC authentication type is not supported."));
-            break;
+        cred = new rfbCredential;
+        cred->userCredential.username = strdup(username().toUtf8().constData());
+        cred->userCredential.password = strdup(password().toUtf8().constData());
+        break;
+    default:
+        qCritical(KRDC) << "credential request failed, unsupported credentialType:" << credentialType;
+        outputErrorMessage(i18n("VNC authentication type is not supported."));
+        break;
     }
     return cred;
 }
 
 void VncClientThread::outputHandler(const char *format, va_list args)
 {
-    auto message =  QString::vasprintf(format, args);
+    auto message = QString::vasprintf(format, args);
 
     message = message.trimmed();
 
     qCDebug(KRDC) << message;
 
-    if ((message.contains(QLatin1String("Couldn't convert "))) ||
-            (message.contains(QLatin1String("Unable to connect to VNC server")))) {
+    if ((message.contains(QLatin1String("Couldn't convert "))) || (message.contains(QLatin1String("Unable to connect to VNC server")))) {
         // Don't show a dialog if a reconnection is needed. Never contemplate
         // reconnection if we don't have a password.
         QString tmp = i18n("Server not found.");
@@ -333,8 +333,8 @@ void VncClientThread::outputHandler(const char *format, va_list args)
         m_keepalive.failed = false;
         outputErrorMessageString = i18n("VNC authentication failed.");
     }
-    if ((message.contains(QLatin1String("VNC connection failed: Authentication failed, too many tries"))) ||
-            (message.contains(QLatin1String("VNC connection failed: Too many authentication failures")))) {
+    if ((message.contains(QLatin1String("VNC connection failed: Authentication failed, too many tries")))
+        || (message.contains(QLatin1String("VNC connection failed: Too many authentication failures")))) {
         m_keepalive.failed = false;
         outputErrorMessageString = i18n("VNC authentication failed because of too many authentication tries.");
     }
@@ -366,11 +366,11 @@ void VncClientThread::outputHandler(const char *format, va_list args)
 }
 
 VncClientThread::VncClientThread(QObject *parent)
-        : QThread(parent)
-        , frameBuffer(nullptr)
-        , cl(nullptr)
-        , m_devicePixelRatio(1.0)
-        , m_stopped(false)
+    : QThread(parent)
+    , frameBuffer(nullptr)
+    , cl(nullptr)
+    , m_devicePixelRatio(1.0)
+    , m_stopped(false)
 {
     // We choose a small value for interval...after all if the connection is
     // supposed to sustain a VNC session, a reasonably frequent ping should
@@ -380,7 +380,7 @@ VncClientThread::VncClientThread(QObject *parent)
     m_keepalive.set = false;
     m_keepalive.failed = false;
     m_previousDetails = QString();
-    outputErrorMessageString.clear(); //don't deliver error messages of old instances...
+    outputErrorMessageString.clear(); // don't deliver error messages of old instances...
     QMutexLocker locker(&mutex);
 
     QTimer *outputErrorMessagesCheckTimer = new QTimer(this);
@@ -391,7 +391,7 @@ VncClientThread::VncClientThread(QObject *parent)
 
 VncClientThread::~VncClientThread()
 {
-    if(isRunning()) {
+    if (isRunning()) {
         stop();
         terminate();
         const bool quitSuccess = wait(1000);
@@ -400,7 +400,7 @@ VncClientThread::~VncClientThread()
 
     clientDestroy();
 
-    delete [] frameBuffer;
+    delete[] frameBuffer;
 }
 
 void VncClientThread::checkOutputErrorMessage()
@@ -427,7 +427,8 @@ void VncClientThread::setPort(int port)
     m_port = port;
 }
 
-void VncClientThread::setShowLocalCursor(bool show) {
+void VncClientThread::setShowLocalCursor(bool show)
+{
     QMutexLocker locker(&mutex);
     m_showLocalCursor = show;
 
@@ -447,8 +448,8 @@ void VncClientThread::setShowLocalCursor(bool show) {
 void VncClientThread::setQuality(RemoteView::Quality quality)
 {
     m_quality = quality;
-    //set color depth dependent on quality
-    switch(quality) {
+    // set color depth dependent on quality
+    switch (quality) {
     case RemoteView::Low:
         setColorDepth(bpp8);
         break;
@@ -568,7 +569,7 @@ void VncClientThread::run()
 
         locker.relock();
         while (!m_eventQueue.isEmpty()) {
-            ClientEvent* clientEvent = m_eventQueue.dequeue();
+            ClientEvent *clientEvent = m_eventQueue.dequeue();
             locker.unlock();
             clientEvent->fire(cl);
             delete clientEvent;
@@ -592,7 +593,7 @@ bool VncClientThread::clientCreate(bool reinitialising)
     rfbClientLog = outputHandlerStatic;
     rfbClientErr = outputHandlerStatic;
 
-    //24bit color dept in 32 bits per pixel = default. Will change colordepth and bpp later if needed
+    // 24bit color dept in 32 bits per pixel = default. Will change colordepth and bpp later if needed
     cl = rfbGetClient(8, 3, 4);
     setClientColorDepth(cl, this->colorDepth());
     cl->MallocFrameBuffer = newclientStatic;
@@ -637,7 +638,6 @@ bool VncClientThread::clientCreate(bool reinitialising)
  */
 void VncClientThread::clientDestroy()
 {
-
     if (cl) {
         // Disconnect from vnc server & cleanup allocated resources
         rfbClientCleanup(cl);
@@ -680,7 +680,7 @@ void VncClientThread::clientSetKeepalive()
     }
 
     optval = m_keepalive.failedProbes;
-    if(setsockopt(cl->sock, IPPROTO_TCP, TCP_KEEPCNT, &optval, optlen) < 0) {
+    if (setsockopt(cl->sock, IPPROTO_TCP, TCP_KEEPCNT, &optval, optlen) < 0) {
         qCritical(KRDC) << "setsockopt(TCP_KEEPCNT)" << strerror(errno);
         return;
     }
@@ -701,22 +701,22 @@ ClientEvent::~ClientEvent()
 {
 }
 
-void ReconfigureEvent::fire(rfbClient* cl)
+void ReconfigureEvent::fire(rfbClient *cl)
 {
     SetFormatAndEncodings(cl);
 }
 
-void PointerClientEvent::fire(rfbClient* cl)
+void PointerClientEvent::fire(rfbClient *cl)
 {
     SendPointerEvent(cl, m_x, m_y, m_buttonMask);
 }
 
-void KeyClientEvent::fire(rfbClient* cl)
+void KeyClientEvent::fire(rfbClient *cl)
 {
     SendKeyEvent(cl, m_key, m_pressed);
 }
 
-void ClientCutEvent::fire(rfbClient* cl)
+void ClientCutEvent::fire(rfbClient *cl)
 {
     QByteArray toLatin1Converted = text.toLatin1();
     SendClientCutText(cl, toLatin1Converted.data(), toLatin1Converted.length());

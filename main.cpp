@@ -5,9 +5,9 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-#include "mainwindow.h"
 #include "krdc_debug.h"
 #include "krdc_version.h"
+#include "mainwindow.h"
 #include "settings.h"
 
 #include <KAboutData>
@@ -16,11 +16,11 @@
 #include <Kdelibs4Migration>
 #endif
 #include <KLocalizedString>
-#include <QDir>
-#include <QFile>
-#include <QElapsedTimer>
 #include <QCommandLineOption>
 #include <QCommandLineParser>
+#include <QDir>
+#include <QElapsedTimer>
+#include <QFile>
 #include <QPluginLoader>
 #include <QStandardPaths>
 
@@ -47,8 +47,7 @@ int main(int argc, char **argv)
             if (!targetDir.exists()) {
                 QDir().mkpath(targetBasePath);
             }
-            const QStringList fileNames = sourceDir.entryList(QDir::Files |
-                                    QDir::NoDotAndDotDot | QDir::NoSymLinks);
+            const QStringList fileNames = sourceDir.entryList(QDir::Files | QDir::NoDotAndDotDot | QDir::NoSymLinks);
             for (const QString &fileName : fileNames) {
                 targetFilePath = targetBasePath + fileName;
                 if (!QFile::exists(targetFilePath)) {
@@ -58,26 +57,27 @@ int main(int argc, char **argv)
         }
     }
 #endif
-    KAboutData aboutData(appName, i18n("KRDC"), QStringLiteral(KRDC_VERSION_STRING),
-                         i18n("KDE Remote Desktop Client"), KAboutLicense::LicenseKey::GPL);
+    KAboutData aboutData(appName, i18n("KRDC"), QStringLiteral(KRDC_VERSION_STRING), i18n("KDE Remote Desktop Client"), KAboutLicense::LicenseKey::GPL);
 
-    aboutData.setCopyrightStatement(i18n("(c) 2007-2016, Urs Wolfer\n"
-                               "(c) 2001-2003, Tim Jansen\n"
-                               "(c) 2002-2003, Arend van Beelen jr.\n"
-                               "(c) 2000-2002, Const Kaplinsky\n"
-                               "(c) 2000, Tridia Corporation\n"
-                               "(c) 1999, AT&T Laboratories Boston\n"
-                               "(c) 1999-2003, Matthew Chapman\n"
-                               "(c) 2009, Collabora Ltd"));
+    aboutData.setCopyrightStatement(
+        i18n("(c) 2007-2016, Urs Wolfer\n"
+             "(c) 2001-2003, Tim Jansen\n"
+             "(c) 2002-2003, Arend van Beelen jr.\n"
+             "(c) 2000-2002, Const Kaplinsky\n"
+             "(c) 2000, Tridia Corporation\n"
+             "(c) 1999, AT&T Laboratories Boston\n"
+             "(c) 1999-2003, Matthew Chapman\n"
+             "(c) 2009, Collabora Ltd"));
 
     aboutData.addAuthor(i18n("Urs Wolfer"), i18n("Developer, Maintainer"), QStringLiteral("uwolfer@kde.org"));
     aboutData.addAuthor(i18n("Tony Murray"), i18n("Developer"), QStringLiteral("murraytony@gmail.com"));
     aboutData.addAuthor(i18n("Tim Jansen"), i18n("Former Developer"), QStringLiteral("tim@tjansen.de"));
     aboutData.addAuthor(i18n("Arend van Beelen jr."), i18n("Initial RDP backend"), QStringLiteral("arend@auton.nl"));
-    aboutData.addCredit(i18n("Brad Hards"), i18n("Google Summer of Code 2007 KRDC project mentor"),
-                        QStringLiteral("bradh@frogmouth.net"));
-    aboutData.addCredit(i18n("LibVNCServer / LibVNCClient developers"), i18n("VNC client library"),
-                        QStringLiteral("libvncserver-common@lists.sf.net"), QStringLiteral("http://libvncserver.sourceforge.net/"));
+    aboutData.addCredit(i18n("Brad Hards"), i18n("Google Summer of Code 2007 KRDC project mentor"), QStringLiteral("bradh@frogmouth.net"));
+    aboutData.addCredit(i18n("LibVNCServer / LibVNCClient developers"),
+                        i18n("VNC client library"),
+                        QStringLiteral("libvncserver-common@lists.sf.net"),
+                        QStringLiteral("http://libvncserver.sourceforge.net/"));
     aboutData.addAuthor(i18n("Abner Silva"), i18n("Telepathy Tubes Integration"), QStringLiteral("abner.silva@kdemail.net"));
     aboutData.setOrganizationDomain("kde.org");
 

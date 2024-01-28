@@ -13,8 +13,8 @@
 #include <QMenu>
 
 SystemTrayIcon::SystemTrayIcon(MainWindow *parent)
-        : KStatusNotifierItem(parent),
-        m_mainWindow(parent)
+    : KStatusNotifierItem(parent)
+    , m_mainWindow(parent)
 {
     setIconByName(QLatin1String("krdc"));
     setStatus(KStatusNotifierItem::Active);
@@ -27,18 +27,18 @@ SystemTrayIcon::SystemTrayIcon(MainWindow *parent)
     contextMenu()->addAction(parent->actionCollection()->action(QLatin1String("bookmark")));
     contextMenu()->addSeparator();
 
-    connect(this, SIGNAL(activateRequested(bool,QPoint)), this, SLOT(checkActivatedWindow(bool)));
+    connect(this, SIGNAL(activateRequested(bool, QPoint)), this, SLOT(checkActivatedWindow(bool)));
 }
 
 void SystemTrayIcon::checkActivatedWindow(bool active)
 {
     // make sure the fullscreen window stays fullscreen by restoring the FullScreen state upon restore.
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    if(active && associatedWidget() != m_mainWindow) {
+    if (active && associatedWidget() != m_mainWindow) {
         associatedWidget()->setWindowState(Qt::WindowFullScreen);
     }
 #else
-    if(active && associatedWindow() != m_mainWindow->windowHandle()) {
+    if (active && associatedWindow() != m_mainWindow->windowHandle()) {
         associatedWindow()->setWindowState(Qt::WindowFullScreen);
     }
 #endif
@@ -47,4 +47,3 @@ void SystemTrayIcon::checkActivatedWindow(bool active)
 SystemTrayIcon::~SystemTrayIcon()
 {
 }
-

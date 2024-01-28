@@ -12,8 +12,8 @@
 #include <KConfigGroup>
 
 #include <QDomDocument>
-#include <QWidget>
 #include <QPushButton>
+#include <QWidget>
 
 class QListWidget;
 

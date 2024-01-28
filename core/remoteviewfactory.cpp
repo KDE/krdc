@@ -7,11 +7,10 @@
 #include "remoteviewfactory.h"
 
 RemoteViewFactory::RemoteViewFactory(QObject *parent)
-        : QObject(parent)
+    : QObject(parent)
 {
 }
 
 RemoteViewFactory::~RemoteViewFactory()
 {
 }
-

@@ -11,7 +11,8 @@
 #include <QTabBar>
 
 TabbedViewWidgetModel::TabbedViewWidgetModel(QTabWidget *modelTarget)
-        : QAbstractItemModel(modelTarget), m_tabWidget(modelTarget)
+    : QAbstractItemModel(modelTarget)
+    , m_tabWidget(modelTarget)
 {
 }
 
@@ -66,7 +67,7 @@ QVariant TabbedViewWidgetModel::data(const QModelIndex &index, int role) const
     case Qt::EditRole:
     case Qt::DisplayRole: {
         static QRegularExpression reg(QStringLiteral("&(?!&)"));
-        return m_tabWidget->tabText(index.row()).remove(reg); //remove accelerator string
+        return m_tabWidget->tabText(index.row()).remove(reg); // remove accelerator string
     }
     case Qt::ToolTipRole:
         return m_tabWidget->tabToolTip(index.row());
@@ -94,7 +95,8 @@ void TabbedViewWidgetModel::emitDataChanged(int index)
 }
 
 TabbedViewWidget::TabbedViewWidget(QWidget *parent)
-        : QTabWidget(parent), m_model(new TabbedViewWidgetModel(this))
+    : QTabWidget(parent)
+    , m_model(new TabbedViewWidgetModel(this))
 {
 }
 
@@ -102,7 +104,7 @@ TabbedViewWidget::~TabbedViewWidget()
 {
 }
 
-TabbedViewWidgetModel* TabbedViewWidget::getModel()
+TabbedViewWidgetModel *TabbedViewWidget::getModel()
 {
     return m_model;
 }
@@ -172,9 +174,9 @@ void TabbedViewWidget::setTabText(int index, const QString &label)
     m_model->emitDataChanged(index);
 }
 
-//This functionality is taken from  KTabWidget for compatibility.
-//KTabWidget has been moved to KdeLibs4Support and QTabWidget::tabBarDoubleClicked does not
-//work on empty space after tabs,
+// This functionality is taken from  KTabWidget for compatibility.
+// KTabWidget has been moved to KdeLibs4Support and QTabWidget::tabBarDoubleClicked does not
+// work on empty space after tabs,
 bool TabbedViewWidget::isEmptyTabbarSpace(const QPoint &point) const
 {
     if (count() == 0) {
@@ -184,9 +186,7 @@ bool TabbedViewWidget::isEmptyTabbarSpace(const QPoint &point) const
         return false;
     }
     QSize size(tabBar()->sizeHint());
-    if ((tabPosition() == QTabWidget::North && point.y() < size.height()) ||
-            (tabPosition() == QTabWidget::South && point.y() > (height() - size.height()))) {
-
+    if ((tabPosition() == QTabWidget::North && point.y() < size.height()) || (tabPosition() == QTabWidget::South && point.y() > (height() - size.height()))) {
         QWidget *rightcorner = cornerWidget(Qt::TopRightCorner);
         if (rightcorner && rightcorner->isVisible()) {
             if (point.x() >= width() - rightcorner->width()) {
@@ -212,7 +212,7 @@ bool TabbedViewWidget::isEmptyTabbarSpace(const QPoint &point) const
     return false;
 }
 
-void TabbedViewWidget::mouseDoubleClickEvent(QMouseEvent * event)
+void TabbedViewWidget::mouseDoubleClickEvent(QMouseEvent *event)
 {
     if (event->button() != Qt::LeftButton) {
         return;
@@ -234,7 +234,7 @@ void TabbedViewWidget::mouseReleaseEvent(QMouseEvent *event)
             return;
         }
         int pos = tabBar()->tabAt(event->pos());
-        if(pos != -1){
+        if (pos != -1) {
             Q_EMIT mouseMiddleClick(pos);
             return;
         }
@@ -242,4 +242,3 @@ void TabbedViewWidget::mouseReleaseEvent(QMouseEvent *event)
 
     QTabWidget::mouseReleaseEvent(event);
 }
-

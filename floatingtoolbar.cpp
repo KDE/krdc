@@ -13,39 +13,36 @@
 #include <QBitmap>
 #include <QMouseEvent>
 #include <QPainter>
-#include <QTimer>
 #include <QStyle>
+#include <QTimer>
 
 static const int actionIconSize = 22;
 static const int toolBarRBMargin = 2;
 static const double toolBarOpacity = 0.8;
 static const int visiblePixelWhenAutoHidden = 6;
 static const int autoHideTimeout = 500;
-static const int  initialAutoHideTimeout = 2000;
+static const int initialAutoHideTimeout = 2000;
 
 /**
  * Denotes the various states of the animation.
  */
-enum AnimState {
-    Hiding,
-    Showing,
-    Still
-};
+enum AnimState { Hiding, Showing, Still };
 
 class FloatingToolBarPrivate
 {
 public:
     FloatingToolBarPrivate(FloatingToolBar *qq)
-            : q(qq)
-            , anchorSide(FloatingToolBar::Left)
-            , offsetPlaceHolder(new QWidget(qq))
-            , animState(Still)
-            , toDelete(false)
-            , visible(false)
-            , sticky(false)
-            , opacity(toolBarOpacity)
-            // set queuedShow to true so we show the toolbar if we get a resize event on the anchorWidget
-            , queuedShow(true) {
+        : q(qq)
+        , anchorSide(FloatingToolBar::Left)
+        , offsetPlaceHolder(new QWidget(qq))
+        , animState(Still)
+        , toDelete(false)
+        , visible(false)
+        , sticky(false)
+        , opacity(toolBarOpacity)
+        // set queuedShow to true so we show the toolbar if we get a resize event on the anchorWidget
+        , queuedShow(true)
+    {
     }
 
     // rebuild contents and reposition then widget
@@ -76,7 +73,8 @@ public:
 };
 
 FloatingToolBar::FloatingToolBar(QWidget *parent, QWidget *anchorWidget)
-        : QToolBar(parent), d(new FloatingToolBarPrivate(this))
+    : QToolBar(parent)
+    , d(new FloatingToolBarPrivate(this))
 {
     ;
     addWidget(d->offsetPlaceHolder);
@@ -260,9 +258,9 @@ void FloatingToolBar::mouseMoveEvent(QMouseEvent *e)
 }
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    void FloatingToolBar::enterEvent(QEnterEvent *e)
+void FloatingToolBar::enterEvent(QEnterEvent *e)
 #else
-    void FloatingToolBar::enterEvent(QEvent *e)
+void FloatingToolBar::enterEvent(QEvent *e)
 #endif
 {
     // Stop the autohide timer while the mouse is inside
@@ -293,7 +291,7 @@ void FloatingToolBar::wheelEvent(QWheelEvent *e)
     e->accept();
 
     const qreal diff = e->angleDelta().y() / 100.0 / 15.0;
-//    qCDebug(KRDC) << diff;
+    //    qCDebug(KRDC) << diff;
     if (((d->opacity <= 1) && (diff > 0)) || ((d->opacity >= 0) && (diff < 0)))
         d->opacity += diff;
 
@@ -365,7 +363,7 @@ void FloatingToolBarPrivate::buildToolBar()
     grad.setColorAt(1, pal.color(QPalette::Active, QPalette::Light));
     bufferPainter.setBrush(QBrush(grad));
     // 5.2. draw rounded border
-    bufferPainter.setPen( pal.color(QPalette::Active, QPalette::Dark).lighter(40));
+    bufferPainter.setPen(pal.color(QPalette::Active, QPalette::Dark).lighter(40));
     bufferPainter.setRenderHints(QPainter::Antialiasing);
     if (vertical)
         bufferPainter.drawRoundedRect(topLeft ? -10 : 0, 0, myWidth + 10, myHeight, 2000 / (myWidth + 10), 2000 / myHeight, Qt::RelativeSize);
@@ -467,4 +465,3 @@ void FloatingToolBar::animate()
         }
     }
 }
-

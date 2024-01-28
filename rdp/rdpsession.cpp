@@ -16,17 +16,17 @@
 #include <KPasswordDialog>
 
 #include <freerdp/addin.h>
-#include <freerdp/event.h>
-#include <freerdp/freerdp.h>
-#include <freerdp/input.h>
+#include <freerdp/channels/rdpgfx.h>
 #include <freerdp/client.h>
 #include <freerdp/client/channels.h>
 #include <freerdp/client/cliprdr.h>
 #include <freerdp/client/cmdline.h>
 #include <freerdp/client/rdpgfx.h>
-#include <freerdp/channels/rdpgfx.h>
+#include <freerdp/event.h>
+#include <freerdp/freerdp.h>
 #include <freerdp/gdi/gdi.h>
 #include <freerdp/gdi/gfx.h>
+#include <freerdp/input.h>
 #include <winpr/synch.h>
 #ifdef Q_OS_UNIX
 #include <freerdp/locale/keyboard.h>
@@ -38,7 +38,7 @@
 
 BOOL preConnect(freerdp *rdp)
 {
-    auto session = reinterpret_cast<RdpContext*>(rdp->context)->session;
+    auto session = reinterpret_cast<RdpContext *>(rdp->context)->session;
     if (session->onPreConnect()) {
         return TRUE;
     }
@@ -47,7 +47,7 @@ BOOL preConnect(freerdp *rdp)
 
 BOOL postConnect(freerdp *rdp)
 {
-    auto session = reinterpret_cast<RdpContext*>(rdp->context)->session;
+    auto session = reinterpret_cast<RdpContext *>(rdp->context)->session;
     if (session->onPostConnect()) {
         return TRUE;
     }
@@ -56,13 +56,13 @@ BOOL postConnect(freerdp *rdp)
 
 void postDisconnect(freerdp *rdp)
 {
-    auto session = reinterpret_cast<RdpContext*>(rdp->context)->session;
+    auto session = reinterpret_cast<RdpContext *>(rdp->context)->session;
     session->onPostDisconnect();
 }
 
-BOOL authenticate(freerdp *rdp, char** username, char** password, char** domain)
+BOOL authenticate(freerdp *rdp, char **username, char **password, char **domain)
 {
-    auto session = reinterpret_cast<RdpContext*>(rdp->context)->session;
+    auto session = reinterpret_cast<RdpContext *>(rdp->context)->session;
     if (session->onAuthenticate(username, password, domain)) {
         return TRUE;
     }
@@ -70,11 +70,19 @@ BOOL authenticate(freerdp *rdp, char** username, char** password, char** domain)
     return FALSE;
 }
 
-DWORD verifyChangedCertificate(freerdp* rdp, const char* host, UINT16 port, const char* common_name, const char* subject,
-                               const char* issuer, const char* new_fingerprint, const char* old_subject, const char* old_issuer,
-                               const char* old_fingerprint, DWORD flags)
+DWORD verifyChangedCertificate(freerdp *rdp,
+                               const char *host,
+                               UINT16 port,
+                               const char *common_name,
+                               const char *subject,
+                               const char *issuer,
+                               const char *new_fingerprint,
+                               const char *old_subject,
+                               const char *old_issuer,
+                               const char *old_fingerprint,
+                               DWORD flags)
 {
-    auto session = reinterpret_cast<RdpContext*>(rdp->context)->session;
+    auto session = reinterpret_cast<RdpContext *>(rdp->context)->session;
 
     Certificate oldCertificate;
     oldCertificate.host = QString::fromLocal8Bit(host);
@@ -106,10 +114,16 @@ DWORD verifyChangedCertificate(freerdp* rdp, const char* host, UINT16 port, cons
     return 0;
 }
 
-DWORD verifyCertificate(freerdp* rdp, const char* host, UINT16 port, const char* common_name, const char* subject,
-                        const char* issuer, const char* fingerprint, DWORD flags)
+DWORD verifyCertificate(freerdp *rdp,
+                        const char *host,
+                        UINT16 port,
+                        const char *common_name,
+                        const char *subject,
+                        const char *issuer,
+                        const char *fingerprint,
+                        DWORD flags)
 {
-    auto session = reinterpret_cast<RdpContext*>(rdp->context)->session;
+    auto session = reinterpret_cast<RdpContext *>(rdp->context)->session;
 
     Certificate certificate;
     certificate.host = QString::fromLocal8Bit(host);
@@ -132,22 +146,22 @@ DWORD verifyCertificate(freerdp* rdp, const char* host, UINT16 port, const char*
     return 0;
 }
 
-int logonErrorInfo(freerdp* rdp, UINT32 data, UINT32 type)
+int logonErrorInfo(freerdp *rdp, UINT32 data, UINT32 type)
 {
-	auto dataString = QString::fromLocal8Bit(freerdp_get_logon_error_info_data(data));
-	auto typeString = QString::fromLocal8Bit(freerdp_get_logon_error_info_type(type));
+    auto dataString = QString::fromLocal8Bit(freerdp_get_logon_error_info_data(data));
+    auto typeString = QString::fromLocal8Bit(freerdp_get_logon_error_info_type(type));
 
-	if (!rdp || !rdp->context)
-		return -1;
+    if (!rdp || !rdp->context)
+        return -1;
 
     KMessageBox::error(nullptr, typeString + QStringLiteral(" ") + dataString, i18nc("@title:dialog", "Logon Error"));
 
-	return 1;
+    return 1;
 }
 
 BOOL endPaint(rdpContext *context)
 {
-    auto session = reinterpret_cast<RdpContext*>(context)->session;
+    auto session = reinterpret_cast<RdpContext *>(context)->session;
     if (session->onEndPaint()) {
         return TRUE;
     }
@@ -156,39 +170,38 @@ BOOL endPaint(rdpContext *context)
 
 BOOL resizeDisplay(rdpContext *context)
 {
-    auto session = reinterpret_cast<RdpContext*>(context)->session;
+    auto session = reinterpret_cast<RdpContext *>(context)->session;
     if (session->onResizeDisplay()) {
         return TRUE;
     }
     return FALSE;
 }
 
-void channelConnected(void* context, ChannelConnectedEventArgs* e)
+void channelConnected(void *context, ChannelConnectedEventArgs *e)
 {
-    auto rdpC = reinterpret_cast<rdpContext*>(context);
+    auto rdpC = reinterpret_cast<rdpContext *>(context);
     if (strcmp(e->name, RDPGFX_DVC_CHANNEL_NAME) == 0) {
-		gdi_graphics_pipeline_init(rdpC->gdi, (RdpgfxClientContext*)e->pInterface);
+        gdi_graphics_pipeline_init(rdpC->gdi, (RdpgfxClientContext *)e->pInterface);
     } else if (strcmp(e->name, CLIPRDR_SVC_CHANNEL_NAME) == 0) {
-        CliprdrClientContext* clip = (CliprdrClientContext*)e->pInterface;
+        CliprdrClientContext *clip = (CliprdrClientContext *)e->pInterface;
         clip->custom = context;
     }
 }
 
-void channelDisconnected(void* context, ChannelDisconnectedEventArgs* e)
+void channelDisconnected(void *context, ChannelDisconnectedEventArgs *e)
 {
-    auto rdpC = reinterpret_cast<rdpContext*>(context);
+    auto rdpC = reinterpret_cast<rdpContext *>(context);
     if (strcmp(e->name, RDPGFX_DVC_CHANNEL_NAME) == 0) {
-        gdi_graphics_pipeline_uninit(rdpC->gdi, (RdpgfxClientContext*)e->pInterface);
+        gdi_graphics_pipeline_uninit(rdpC->gdi, (RdpgfxClientContext *)e->pInterface);
     } else if (strcmp(e->name, CLIPRDR_SVC_CHANNEL_NAME) == 0) {
-        CliprdrClientContext* clip = (CliprdrClientContext*)e->pInterface;
+        CliprdrClientContext *clip = (CliprdrClientContext *)e->pInterface;
         clip->custom = nullptr;
     }
 }
 
 QString Certificate::toString() const
 {
-    return i18nc("@label", "Host: %1:%2\nCommon Name: %3\nSubject: %4\nIssuer: %5\nFingerprint: %6\n",
-                 host, port, commonName, subject, issuer, fingerprint);
+    return i18nc("@label", "Host: %1:%2\nCommon Name: %3\nSubject: %4\nIssuer: %5\nFingerprint: %6\n", host, port, commonName, subject, issuer, fingerprint);
 }
 
 RdpSession::RdpSession(RdpView *view)
@@ -232,7 +245,7 @@ QString RdpSession::domain() const
     return m_domain;
 }
 
-void RdpSession::setDomain(const QString& newDomain)
+void RdpSession::setDomain(const QString &newDomain)
 {
     m_domain = newDomain;
 }
@@ -300,7 +313,7 @@ bool RdpSession::start()
 
     freerdp_context_new(m_freerdp);
 
-    m_context = reinterpret_cast<RdpContext*>(m_freerdp->context);
+    m_context = reinterpret_cast<RdpContext *>(m_freerdp->context);
     m_context->session = this;
 
     if (freerdp_register_addin_provider(freerdp_channels_load_static_addin_entry, 0) != CHANNEL_RC_OK) {
@@ -389,7 +402,7 @@ bool RdpSession::start()
     }
 
     if (!m_preferences->shareMedia().isEmpty()) {
-        char* params[2] = {strdup("drive"), m_preferences->shareMedia().toLocal8Bit().data()};
+        char *params[2] = {strdup("drive"), m_preferences->shareMedia().toLocal8Bit().data()};
         freerdp_client_add_device_channel(settings, 1, params);
     }
 
@@ -454,7 +467,7 @@ bool RdpSession::sendEvent(QEvent *event, QWidget *source)
 {
     auto input = m_freerdp->context->input;
 
-    switch(event->type()) {
+    switch (event->type()) {
     case QEvent::KeyPress:
     case QEvent::KeyRelease: {
         auto keyEvent = static_cast<QKeyEvent *>(event);
@@ -577,7 +590,7 @@ bool RdpSession::onPreConnect()
     PubSub_SubscribeChannelDisconnected(m_freerdp->context->pubSub, channelDisconnected);
 
     if (!freerdp_client_load_addins(m_freerdp->context->channels, settings)) {
-		return false;
+        return false;
     }
 
     return true;
@@ -596,7 +609,7 @@ bool RdpSession::onPostConnect()
         return false;
     }
 
-    auto gdi = reinterpret_cast<rdpContext*>(m_context)->gdi;
+    auto gdi = reinterpret_cast<rdpContext *>(m_context)->gdi;
     if (!gdi || gdi->width < 0 || gdi->height < 0) {
         return false;
     }
@@ -701,7 +714,7 @@ bool RdpSession::onEndPaint()
         return false;
     }
 
-    auto gdi = reinterpret_cast<rdpContext*>(m_context)->gdi;
+    auto gdi = reinterpret_cast<rdpContext *>(m_context)->gdi;
     if (!gdi || !gdi->primary) {
         return false;
     }
@@ -719,12 +732,18 @@ bool RdpSession::onEndPaint()
 
 bool RdpSession::onResizeDisplay()
 {
-    auto gdi = reinterpret_cast<rdpContext*>(m_context)->gdi;
+    auto gdi = reinterpret_cast<rdpContext *>(m_context)->gdi;
     auto settings = m_freerdp->settings;
 
     m_videoBuffer = QImage(settings->DesktopWidth, settings->DesktopHeight, QImage::Format_RGBA8888);
 
-    if (!gdi_resize_ex(gdi, settings->DesktopWidth, settings->DesktopHeight, m_videoBuffer.bytesPerLine(), PIXEL_FORMAT_RGBA32, m_videoBuffer.bits(), nullptr)) {
+    if (!gdi_resize_ex(gdi,
+                       settings->DesktopWidth,
+                       settings->DesktopHeight,
+                       m_videoBuffer.bytesPerLine(),
+                       PIXEL_FORMAT_RGBA32,
+                       m_videoBuffer.bits(),
+                       nullptr)) {
         qCWarning(KRDC) << "Failed resizing GDI subsystem";
         return false;
     }
@@ -737,7 +756,7 @@ bool RdpSession::onResizeDisplay()
 
 void RdpSession::run()
 {
-    auto rdpC = reinterpret_cast<rdpContext*>(m_context);
+    auto rdpC = reinterpret_cast<rdpContext *>(m_context);
 
     auto timer = CreateWaitableTimerA(nullptr, FALSE, "rdp-session-timer");
     if (!timer) {

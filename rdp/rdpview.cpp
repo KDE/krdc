@@ -8,32 +8,29 @@
 
 #include "rdpview.h"
 
-#include "rdphostpreferences.h"
 #include "krdc_debug.h"
+#include "rdphostpreferences.h"
 
 #include <KMessageBox>
 #include <KPasswordDialog>
 #include <KShell>
 #include <KWindowSystem>
 
-#include <QScreen>
-#include <QWindow>
 #include <QDir>
 #include <QEvent>
 #include <QInputDialog>
-#include <QPainter>
 #include <QKeyEvent>
 #include <QMouseEvent>
+#include <QPainter>
+#include <QScreen>
+#include <QWindow>
 
 #include "rdpsession.h"
 
-RdpView::RdpView(QWidget *parent,
-                 const QUrl &url,
-                 KConfigGroup configGroup,
-                 const QString &user, const QString &password)
-        : RemoteView(parent),
-        m_user(user),
-        m_password(password)
+RdpView::RdpView(QWidget *parent, const QUrl &url, KConfigGroup configGroup, const QString &user, const QString &password)
+    : RemoteView(parent)
+    , m_user(user)
+    , m_password(password)
 {
     m_url = url;
     m_host = url.host();
@@ -148,7 +145,6 @@ bool RdpView::start()
 
     setStatus(RdpView::Connecting);
     if (!m_session->start()) {
-
         Q_EMIT disconnected();
         return false;
     }
@@ -158,7 +154,7 @@ bool RdpView::start()
     return true;
 }
 
-HostPreferences* RdpView::hostPreferences()
+HostPreferences *RdpView::hostPreferences()
 {
     return m_hostPreferences.get();
 }
@@ -200,30 +196,29 @@ void RdpView::enableScaling(bool scale)
 
 void RdpView::setScaleFactor(float factor)
 {
-
 }
 
 QSize RdpView::initialSize()
 {
     switch (m_hostPreferences->resolution()) {
-        case RdpHostPreferences::Resolution::Small:
-            return QSize{1280, 720};
-        case RdpHostPreferences::Resolution::Medium:
-            return QSize{1600, 900};
-        case RdpHostPreferences::Resolution::Large:
-            return QSize{1920, 1080};
-        case RdpHostPreferences::Resolution::MatchWindow:
-            return parentWidget()->size();
-        case RdpHostPreferences::Resolution::MatchScreen:
-            return window()->windowHandle()->screen()->size();
-        case RdpHostPreferences::Resolution::Custom:
-            return QSize{m_hostPreferences->width(), m_hostPreferences->height()};
+    case RdpHostPreferences::Resolution::Small:
+        return QSize{1280, 720};
+    case RdpHostPreferences::Resolution::Medium:
+        return QSize{1600, 900};
+    case RdpHostPreferences::Resolution::Large:
+        return QSize{1920, 1080};
+    case RdpHostPreferences::Resolution::MatchWindow:
+        return parentWidget()->size();
+    case RdpHostPreferences::Resolution::MatchScreen:
+        return window()->windowHandle()->screen()->size();
+    case RdpHostPreferences::Resolution::Custom:
+        return QSize{m_hostPreferences->width(), m_hostPreferences->height()};
     }
 
     return parentWidget()->size();
 }
 
-void RdpView::savePassword(const QString& password)
+void RdpView::savePassword(const QString &password)
 {
     saveWalletPassword(password);
 }
@@ -293,7 +288,7 @@ void RdpView::mouseMoveEvent(QMouseEvent *event)
     event->accept();
 }
 
-void RdpView::wheelEvent(QWheelEvent* event)
+void RdpView::wheelEvent(QWheelEvent *event)
 {
     m_session->sendEvent(event, this);
     event->accept();

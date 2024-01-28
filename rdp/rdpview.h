@@ -34,15 +34,15 @@ public:
     ~RdpView() override;
 
     // functions regarding the window
-    QSize framebufferSize() override;         // returns the size of the remote view
-    QSize sizeHint() const override;                  // returns the suggested size
+    QSize framebufferSize() override; // returns the size of the remote view
+    QSize sizeHint() const override; // returns the suggested size
 
     // functions regarding the connection
-    void startQuitting() override;            // start closing the connection
-    bool isQuitting() override;               // are we currently closing the connection?
-    bool start() override;                    // open a connection
+    void startQuitting() override; // start closing the connection
+    bool isQuitting() override; // are we currently closing the connection?
+    bool start() override; // open a connection
 
-    HostPreferences* hostPreferences() override;
+    HostPreferences *hostPreferences() override;
 
     bool supportsScaling() const override;
     bool scaling() const override;
@@ -71,7 +71,7 @@ protected:
     void mouseDoubleClickEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;
 
-    void wheelEvent(QWheelEvent * event) override;
+    void wheelEvent(QWheelEvent *event) override;
 
 private:
     void onRectangleUpdated(const QRect &rect);

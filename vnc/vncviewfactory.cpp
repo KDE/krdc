@@ -11,7 +11,7 @@
 K_PLUGIN_CLASS_WITH_JSON(VncViewFactory, "krdc_vnc.json")
 
 VncViewFactory::VncViewFactory(QObject *parent, const QVariantList &args)
-        : RemoteViewFactory(parent)
+    : RemoteViewFactory(parent)
 {
     Q_UNUSED(args);
 
@@ -54,8 +54,9 @@ QString VncViewFactory::connectButtonText() const
 
 QString VncViewFactory::connectToolTipText() const
 {
-    return i18n("<html>Enter the address here.<br />"
-                "<i>Example: vncserver:1 (host:port / screen)</i></html>");
+    return i18n(
+        "<html>Enter the address here.<br />"
+        "<i>Example: vncserver:1 (host:port / screen)</i></html>");
 }
 
 #include "vncviewfactory.moc"

@@ -13,19 +13,19 @@
 #include <QStandardPaths>
 
 RemoteView::RemoteView(QWidget *parent)
-        : QWidget(parent),
-        m_status(Disconnected),
-        m_host(QString()),
-        m_port(0),
-        m_viewOnly(false),
-        m_grabAllKeys(false),
-        m_scale(false),
-        m_keyboardIsGrabbed(false),
-        m_factor(0.),
+    : QWidget(parent)
+    , m_status(Disconnected)
+    , m_host(QString())
+    , m_port(0)
+    , m_viewOnly(false)
+    , m_grabAllKeys(false)
+    , m_scale(false)
+    , m_keyboardIsGrabbed(false)
+    , m_factor(0.)
 #ifndef QTONLY
-        m_wallet(nullptr),
+    , m_wallet(nullptr)
 #endif
-        m_localCursorState(CursorOff)
+    , m_localCursorState(CursorOff)
 {
     resize(0, 0);
 }
@@ -47,14 +47,14 @@ void RemoteView::setStatus(RemoteView::RemoteStatus s)
     if (m_status == s)
         return;
 
-    if (((1+ m_status) != s) && (s != Disconnected)) {
+    if (((1 + m_status) != s) && (s != Disconnected)) {
         // follow state transition rules
 
         if (s == Disconnecting) {
             if (m_status == Disconnected)
                 return;
         } else {
-            Q_ASSERT(((int) s) >= 0);
+            Q_ASSERT(((int)s) >= 0);
             if (m_status > s) {
                 m_status = Disconnected;
                 Q_EMIT statusChanged(Disconnected);
@@ -62,8 +62,8 @@ void RemoteView::setStatus(RemoteView::RemoteStatus s)
             // smooth state transition
             RemoteStatus origState = m_status;
             for (int i = origState; i < s; ++i) {
-                m_status = (RemoteStatus) i;
-                Q_EMIT statusChanged((RemoteStatus) i);
+                m_status = (RemoteStatus)i;
+                Q_EMIT statusChanged((RemoteStatus)i);
             }
         }
     }
@@ -218,8 +218,7 @@ QString RemoteView::readWalletPasswordForKey(const QString &key)
             m_wallet->setFolder(KRDCFOLDER);
             QString password;
 
-            if (m_wallet->hasEntry(key) &&
-                    !m_wallet->readPassword(key, password)) {
+            if (m_wallet->hasEntry(key) && !m_wallet->readPassword(key, password)) {
                 qCDebug(KRDC) << "Password read OK";
 
                 return password;

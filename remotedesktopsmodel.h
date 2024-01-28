@@ -14,7 +14,8 @@
 #include <QDateTime>
 
 #ifdef BUILD_ZEROCONF
-namespace KDNSSD {
+namespace KDNSSD
+{
 class ServiceBrowser;
 }
 #endif
@@ -30,12 +31,14 @@ public:
     int visits;
     RemoteDesktop::Source source;
     bool favorite;
-    bool operator<(const RemoteDesktop &rd) const {
+    bool operator<(const RemoteDesktop &rd) const
+    {
         if (lastConnected == rd.lastConnected)
             return url < rd.url;
-        return rd.lastConnected < lastConnected;  // seems backward but gets the desired result
+        return rd.lastConnected < lastConnected; // seems backward but gets the desired result
     }
-    bool operator==(const RemoteDesktop &rd) const {
+    bool operator==(const RemoteDesktop &rd) const
+    {
         return url == rd.url;
     }
 };
@@ -54,8 +57,7 @@ public:
     Qt::ItemFlags flags(const QModelIndex &index) const override;
     bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole) override;
     QVariant data(const QModelIndex &index, int role) const override;
-    QVariant headerData(int section, Qt::Orientation orientation,
-                        int role = Qt::DisplayRole) const override;
+    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
 
 private:
     QList<RemoteDesktop> remoteDesktops;

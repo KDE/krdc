@@ -9,8 +9,8 @@
 
 #include "remoteviewfactory.h"
 
-#include "rdpview.h"
 #include "rdppreferences.h"
+#include "rdpview.h"
 
 class RdpViewFactory : public RemoteViewFactory
 {
@@ -30,7 +30,7 @@ public:
     QString scheme() const override;
 
     QString connectActionText() const override;
-    
+
     QString connectButtonText() const override;
 
     QString connectToolTipText() const override;

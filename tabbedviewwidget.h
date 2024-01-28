@@ -8,8 +8,8 @@
 #define TABBEDVIEWWIDGET_H
 
 #include <QAbstractItemModel>
-#include <QTabWidget>
 #include <QMouseEvent>
+#include <QTabWidget>
 
 class TabbedViewWidgetModel : public QAbstractItemModel
 {
@@ -24,6 +24,7 @@ public:
     Qt::ItemFlags flags(const QModelIndex &index) const override;
     bool setData(const QModelIndex &index, const QVariant &value, int role) override;
     QVariant data(const QModelIndex &index, int role) const override;
+
 protected:
     void emitLayoutAboutToBeChanged();
     void emitLayoutChanged();
@@ -39,7 +40,7 @@ class TabbedViewWidget : public QTabWidget
 public:
     explicit TabbedViewWidget(QWidget *parent = nullptr);
     ~TabbedViewWidget() override;
-    TabbedViewWidgetModel* getModel();
+    TabbedViewWidgetModel *getModel();
     int addTab(QWidget *page, const QString &label);
     int addTab(QWidget *page, const QIcon &icon, const QString &label);
     int insertTab(int index, QWidget *page, const QString &label);
@@ -53,7 +54,7 @@ Q_SIGNALS:
     void mouseMiddleClick(int index);
 
 protected:
-    void mouseDoubleClickEvent(QMouseEvent * event) override;
+    void mouseDoubleClickEvent(QMouseEvent *event) override;
     void mouseReleaseEvent(QMouseEvent *) override;
 
 private:
@@ -62,4 +63,3 @@ private:
 };
 
 #endif // FULLSCREENWINDOW_H
-

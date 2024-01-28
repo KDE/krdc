@@ -7,8 +7,8 @@
 #ifndef TESTVIEW_H
 #define TESTVIEW_H
 
-#include "remoteview.h"
 #include "hostpreferences.h"
+#include "remoteview.h"
 
 #include <KConfigGroup>
 
@@ -28,7 +28,7 @@ public:
 
     bool isQuitting() override;
     bool start() override;
-    HostPreferences* hostPreferences() override;
+    HostPreferences *hostPreferences() override;
 
 public Q_SLOTS:
     void switchFullscreen(bool on) override;
@@ -43,16 +43,20 @@ private Q_SLOTS:
     void asyncConnect();
 };
 
-
 class TestHostPreferences : public HostPreferences
 {
     Q_OBJECT
 public:
     explicit TestHostPreferences(KConfigGroup configGroup, QObject *parent = nullptr)
-        : HostPreferences(configGroup, parent) {}
+        : HostPreferences(configGroup, parent)
+    {
+    }
 
 protected:
-    QWidget* createProtocolSpecificConfigPage() override { return nullptr; };
+    QWidget *createProtocolSpecificConfigPage() override
+    {
+        return nullptr;
+    };
 };
 
 #endif // TESTVIEW_H

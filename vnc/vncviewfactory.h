@@ -8,8 +8,8 @@
 #define VNCVIEWFACTORY_H
 
 #include "remoteviewfactory.h"
-#include "vncview.h"
 #include "vncpreferences.h"
+#include "vncview.h"
 
 class VncViewFactory : public RemoteViewFactory
 {

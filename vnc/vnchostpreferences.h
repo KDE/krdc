@@ -30,7 +30,7 @@ public:
 protected:
     void acceptConfig() override;
 
-    QWidget* createProtocolSpecificConfigPage() override;
+    QWidget *createProtocolSpecificConfigPage() override;
 
 private:
     void setUseSshTunnel(bool useSshTunnel);

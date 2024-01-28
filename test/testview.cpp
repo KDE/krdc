@@ -10,7 +10,7 @@
 #include <QTimer>
 
 TestView::TestView(QWidget *parent, const QUrl &url, KConfigGroup configGroup)
-        : RemoteView(parent)
+    : RemoteView(parent)
 {
     m_hostPreferences = new TestHostPreferences(configGroup, this);
 
@@ -26,12 +26,8 @@ TestView::~TestView()
 bool TestView::eventFilter(QObject *obj, QEvent *event)
 {
     if (m_viewOnly) {
-        if (event->type() == QEvent::KeyPress ||
-                event->type() == QEvent::KeyRelease ||
-                event->type() == QEvent::MouseButtonDblClick ||
-                event->type() == QEvent::MouseButtonPress ||
-                event->type() == QEvent::MouseButtonRelease ||
-                event->type() == QEvent::MouseMove)
+        if (event->type() == QEvent::KeyPress || event->type() == QEvent::KeyRelease || event->type() == QEvent::MouseButtonDblClick
+            || event->type() == QEvent::MouseButtonPress || event->type() == QEvent::MouseButtonRelease || event->type() == QEvent::MouseMove)
             return true;
     }
     return RemoteView::eventFilter(obj, event);
@@ -76,7 +72,7 @@ bool TestView::start()
     return true;
 }
 
-HostPreferences* TestView::hostPreferences()
+HostPreferences *TestView::hostPreferences()
 {
     return m_hostPreferences;
 }
@@ -85,4 +81,3 @@ void TestView::switchFullscreen(bool on)
 {
     Q_UNUSED(on);
 }
-

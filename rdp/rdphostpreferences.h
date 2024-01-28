@@ -1,8 +1,8 @@
-                /*
-    SPDX-FileCopyrightText: 2007-2012 Urs Wolfer <uwolfer@kde.org>
-    SPDX-FileCopyrightText: 2012 AceLan Kao <acelan@acelan.idv.tw>
+/*
+SPDX-FileCopyrightText: 2007-2012 Urs Wolfer <uwolfer@kde.org>
+SPDX-FileCopyrightText: 2012 AceLan Kao <acelan@acelan.idv.tw>
 
-    SPDX-License-Identifier: GPL-2.0-or-later
+SPDX-License-Identifier: GPL-2.0-or-later
 */
 
 #ifndef RDPHOSTPREFERENCES_H
@@ -86,7 +86,7 @@ public:
     void setTlsSecLevel(TlsSecLevel tlsSecLevel);
 
 protected:
-    QWidget* createProtocolSpecificConfigPage() override;
+    QWidget *createProtocolSpecificConfigPage() override;
     void acceptConfig() override;
 
 private:

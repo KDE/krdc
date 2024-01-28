@@ -25,7 +25,12 @@ public:
     FloatingToolBar(QWidget *parent, QWidget *anchorWidget);
     ~FloatingToolBar() override;
 
-    enum Side { Left = 0, Top = 1, Right = 2, Bottom = 3 };
+    enum Side {
+        Left = 0,
+        Top = 1,
+        Right = 2,
+        Bottom = 3,
+    };
     Q_ENUM(Side)
 
     void addAction(QAction *action);
@@ -47,7 +52,7 @@ protected:
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     void enterEvent(QEnterEvent *event) override;
 #else
-    void enterEvent(QEvent*) override;
+    void enterEvent(QEvent *) override;
 #endif
     void leaveEvent(QEvent *e) override;
     void mouseReleaseEvent(QMouseEvent *e) override;

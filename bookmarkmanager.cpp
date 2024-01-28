@@ -5,20 +5,19 @@
 */
 
 #include "bookmarkmanager.h"
-#include "mainwindow.h"
 #include "krdc_debug.h"
+#include "mainwindow.h"
 
 #include <KLocalizedString>
 
 #include <QStandardPaths>
 
 BookmarkManager::BookmarkManager(KActionCollection *collection, QMenu *menu, MainWindow *parent)
-        : QObject(parent),
-        KBookmarkOwner(),
-        m_mainWindow(parent)
+    : QObject(parent)
+    , KBookmarkOwner()
+    , m_mainWindow(parent)
 {
-    const QString dir = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QString(),
-                                               QStandardPaths::LocateOption::LocateDirectory);
+    const QString dir = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QString(), QStandardPaths::LocateOption::LocateDirectory);
     const QString file = dir + QLatin1String("krdc/bookmarks.xml");
 
 #if QT_VERSION_MAJOR < 6
@@ -134,7 +133,7 @@ bool BookmarkManager::supportsTabs() const
 
 QList<KBookmarkOwner::FutureBookmark> BookmarkManager::currentBookmarkList() const
 {
-    QList<KBookmarkOwner::FutureBookmark>  list;
+    QList<KBookmarkOwner::FutureBookmark> list;
 
     QMapIterator<QWidget *, RemoteView *> iter(m_mainWindow->remoteViewList());
 
@@ -155,7 +154,7 @@ void BookmarkManager::addManualBookmark(const QUrl &url, const QString &text)
     m_manager->emitChanged();
 }
 
-KBookmarkManager* BookmarkManager::getManager()
+KBookmarkManager *BookmarkManager::getManager()
 {
     return m_manager;
 }
@@ -208,5 +207,3 @@ void BookmarkManager::updateTitle(KBookmarkManager *manager, const QString &url,
     }
     manager->emitChanged();
 }
-
-

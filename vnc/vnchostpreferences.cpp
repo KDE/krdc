@@ -8,9 +8,9 @@
 
 #include "settings.h"
 
+#include <QGuiApplication>
 #include <QScreen>
 #include <QWindow>
-#include <QGuiApplication>
 
 static const char quality_config_key[] = "quality";
 static const char use_ssh_tunnel_config_key[] = "use_ssh_tunnel";
@@ -20,7 +20,7 @@ static const char ssh_tunnel_user_name_config_key[] = "ssh_tunnel_user_name";
 static const char dont_copy_passwords_config_key[] = "dont_copy_passwords";
 
 VncHostPreferences::VncHostPreferences(KConfigGroup configGroup, QObject *parent)
-        : HostPreferences(configGroup, parent)
+    : HostPreferences(configGroup, parent)
 {
 }
 
@@ -28,7 +28,7 @@ VncHostPreferences::~VncHostPreferences()
 {
 }
 
-QWidget* VncHostPreferences::createProtocolSpecificConfigPage()
+QWidget *VncHostPreferences::createProtocolSpecificConfigPage()
 {
     QWidget *vncPage = new QWidget();
     vncUi.setupUi(vncPage);
@@ -108,7 +108,7 @@ void VncHostPreferences::updateScalingWidthHeight(int index)
 void VncHostPreferences::updateScaling(bool enabled)
 {
     vncUi.resolutionComboBox->setEnabled(enabled);
-    if(enabled) {
+    if (enabled) {
         checkEnableCustomSize(vncUi.resolutionComboBox->currentIndex());
     } else {
         checkEnableCustomSize(-1);
@@ -130,7 +130,7 @@ void VncHostPreferences::acceptConfig()
     HostPreferences::acceptConfig();
     setQuality((RemoteView::Quality)(vncUi.kcfg_Quality->currentIndex() + 1));
     setWindowedScale(vncUi.kcfg_Scaling->isChecked());
-    if(vncUi.kcfg_Scaling->isChecked()) {
+    if (vncUi.kcfg_Scaling->isChecked()) {
         setHeight(vncUi.kcfg_ScalingHeight->value());
         setWidth(vncUi.kcfg_ScalingWidth->value());
     }
@@ -145,12 +145,12 @@ void VncHostPreferences::acceptConfig()
 void VncHostPreferences::setQuality(RemoteView::Quality quality)
 {
     if (quality >= 0 && quality <= 3)
-        m_configGroup.writeEntry(quality_config_key, (int) quality);
+        m_configGroup.writeEntry(quality_config_key, (int)quality);
 }
 
 RemoteView::Quality VncHostPreferences::quality()
 {
-    return (RemoteView::Quality) m_configGroup.readEntry(quality_config_key, (int) Settings::quality() + 1);
+    return (RemoteView::Quality)m_configGroup.readEntry(quality_config_key, (int)Settings::quality() + 1);
 }
 
 bool VncHostPreferences::useSshTunnel() const

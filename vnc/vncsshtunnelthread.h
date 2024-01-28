@@ -26,12 +26,12 @@ public:
 
     enum PasswordOrigin {
         PasswordFromWallet,
-        PasswordFromDialog
+        PasswordFromDialog,
     };
 
     enum PasswordRequestFlags {
         NoFlags,
-        IgnoreWallet
+        IgnoreWallet,
     };
 
     int tunnelPort() const;

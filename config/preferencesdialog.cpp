@@ -5,27 +5,26 @@
 */
 
 #include "preferencesdialog.h"
-#include "krdc_debug.h"
 #include "hostpreferenceslist.h"
+#include "krdc_debug.h"
 #include "ui_general.h"
 
 #include <KConfigSkeleton>
 #include <KLocalizedString>
-#include <KPluginWidget>
 #include <KPluginMetaData>
+#include <KPluginWidget>
 
 PreferencesDialog::PreferencesDialog(QWidget *parent, KConfigSkeleton *skeleton)
-        : KConfigDialog(parent, QStringLiteral("preferences"), skeleton)
-        , m_settingsChanged(false)
+    : KConfigDialog(parent, QStringLiteral("preferences"), skeleton)
+    , m_settingsChanged(false)
 {
     QWidget *generalPage = new QWidget(this);
     Ui::General generalUi;
     generalUi.setupUi(generalPage);
     addPage(generalPage, i18nc("General Config", "General"), QStringLiteral("krdc"), i18n("General Configuration"));
 
-    HostPreferencesList *hostPreferencesList = new HostPreferencesList(this,
-                                                                       qobject_cast<MainWindow *>(parent),
-                                                                       skeleton->config()->group(QStringLiteral("hostpreferences")));
+    HostPreferencesList *hostPreferencesList =
+        new HostPreferencesList(this, qobject_cast<MainWindow *>(parent), skeleton->config()->group(QStringLiteral("hostpreferences")));
     addPage(hostPreferencesList, i18n("Hosts"), QStringLiteral("computer"), i18n("Host Configuration"));
 
     m_pluginSelector = new KPluginWidget();
@@ -42,7 +41,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent, KConfigSkeleton *skeleton)
 
 void PreferencesDialog::saveState()
 {
-    //TODO: relaod plugins at runtime?
+    // TODO: relaod plugins at runtime?
     m_pluginSelector->save();
 }
 
@@ -64,9 +63,8 @@ bool PreferencesDialog::isDefault()
 
 void PreferencesDialog::enableButton(QDialogButtonBox::StandardButton standardButton)
 {
-    QPushButton *button =  buttonBox()->button(standardButton);
+    QPushButton *button = buttonBox()->button(standardButton);
     if (button) {
         button->setEnabled(true);
     }
 }
-

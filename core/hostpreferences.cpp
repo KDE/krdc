@@ -20,11 +20,11 @@
 #include <QVBoxLayout>
 
 HostPreferences::HostPreferences(KConfigGroup configGroup, QObject *parent)
-        : QObject(parent),
-        m_configGroup(configGroup),
-        m_connected(false),
-        showAgainCheckBox(nullptr),
-        walletSupportCheckBox(nullptr)
+    : QObject(parent)
+    , m_configGroup(configGroup)
+    , m_connected(false)
+    , showAgainCheckBox(nullptr)
+    , walletSupportCheckBox(nullptr)
 {
     m_hostConfigured = m_configGroup.hasKey("showConfigAgain");
 }
@@ -168,7 +168,6 @@ bool HostPreferences::showDialogIfNeeded(QWidget *parent)
     }
 }
 
-
 bool HostPreferences::showDialog(QWidget *parent)
 {
     // Prepare dialog
@@ -180,13 +179,13 @@ bool HostPreferences::showDialog(QWidget *parent)
     dialog->addPage(mainWidget, i18n("Host Configuration"));
 
     if (m_connected) {
-        const QString noteText  = i18n("Note that settings might only apply when you connect next time to this host.");
+        const QString noteText = i18n("Note that settings might only apply when you connect next time to this host.");
         const QString format = QLatin1String("<i>%1</i>");
         QLabel *commentLabel = new QLabel(format.arg(noteText), mainWidget);
         layout->addWidget(commentLabel);
     }
 
-    QWidget* widget = createProtocolSpecificConfigPage();
+    QWidget *widget = createProtocolSpecificConfigPage();
 
     if (widget) {
         if (widget->layout())
@@ -221,4 +220,3 @@ void HostPreferences::setShownWhileConnected(bool connected)
 {
     m_connected = connected;
 }
-

@@ -8,17 +8,17 @@
 #define VNCCLIENTTHREAD_H
 
 #ifdef QTONLY
-    #define i18n tr
+#define i18n tr
 #else
-    #include <KLocalizedString>
+#include <KLocalizedString>
 #endif
 
 #include "remoteview.h"
 
-#include <QQueue>
-#include <QThread>
 #include <QImage>
 #include <QMutex>
+#include <QQueue>
+#include <QThread>
 
 extern "C" {
 #include <rfb/rfbclient.h>
@@ -29,22 +29,25 @@ class ClientEvent
 public:
     virtual ~ClientEvent();
 
-    virtual void fire(rfbClient*) = 0;
+    virtual void fire(rfbClient *) = 0;
 };
 
-class ReconfigureEvent: public ClientEvent
+class ReconfigureEvent : public ClientEvent
 {
 public:
-    void fire(rfbClient*) override;
+    void fire(rfbClient *) override;
 };
 
 class KeyClientEvent : public ClientEvent
 {
 public:
     KeyClientEvent(int key, int pressed)
-            : m_key(key), m_pressed(pressed) {}
+        : m_key(key)
+        , m_pressed(pressed)
+    {
+    }
 
-    void fire(rfbClient*) override;
+    void fire(rfbClient *) override;
 
 private:
     int m_key;
@@ -55,9 +58,13 @@ class PointerClientEvent : public ClientEvent
 {
 public:
     PointerClientEvent(int x, int y, int buttonMask)
-            : m_x(x), m_y(y), m_buttonMask(buttonMask) {}
+        : m_x(x)
+        , m_y(y)
+        , m_buttonMask(buttonMask)
+    {
+    }
 
-    void fire(rfbClient*) override;
+    void fire(rfbClient *) override;
 
 private:
     int m_x;
@@ -69,15 +76,17 @@ class ClientCutEvent : public ClientEvent
 {
 public:
     explicit ClientCutEvent(const QString &text)
-            : text(text) {}
+        : text(text)
+    {
+    }
 
-    void fire(rfbClient*) override;
+    void fire(rfbClient *) override;
 
 private:
     QString text;
 };
 
-class VncClientThread: public QThread
+class VncClientThread : public QThread
 {
     Q_OBJECT
 
@@ -85,7 +94,7 @@ public:
     enum ColorDepth {
         bpp32,
         bpp16,
-        bpp8
+        bpp8,
     };
     Q_ENUM(ColorDepth)
 
@@ -100,17 +109,21 @@ public:
     void setPort(int port);
     void setQuality(RemoteView::Quality quality);
     void setDevicePixelRatio(qreal dpr);
-    void setPassword(const QString &password) {
+    void setPassword(const QString &password)
+    {
         m_password = password;
     }
     void setShowLocalCursor(bool show);
-    const QString password() const {
+    const QString password() const
+    {
         return m_password;
     }
-    void setUsername(const QString &username) {
+    void setUsername(const QString &username)
+    {
         m_username = username;
     }
-    const QString username() const {
+    const QString username() const
+    {
         return m_username;
     }
 
@@ -177,8 +190,8 @@ private:
     RemoteView::Quality m_quality;
     qreal m_devicePixelRatio;
     ColorDepth m_colorDepth;
-    QQueue<ClientEvent* > m_eventQueue;
-    //color table for 8bit indexed colors
+    QQueue<ClientEvent *> m_eventQueue;
+    // color table for 8bit indexed colors
     QVector<QRgb> m_colorTable;
     QString outputErrorMessageString;
 

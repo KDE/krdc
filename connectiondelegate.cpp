@@ -13,12 +13,12 @@
 #include <QDateTime>
 #include <QIcon>
 
-ConnectionDelegate::ConnectionDelegate(QObject *parent) :
-        QStyledItemDelegate(parent)
+ConnectionDelegate::ConnectionDelegate(QObject *parent)
+    : QStyledItemDelegate(parent)
 {
 }
 
-QString ConnectionDelegate::displayText(const QVariant &value, const QLocale& locale) const
+QString ConnectionDelegate::displayText(const QVariant &value, const QLocale &locale) const
 {
     if (value.type() == QVariant::DateTime) {
         QDateTime lastConnected = QDateTime(value.toDateTime());
@@ -42,7 +42,6 @@ QString ConnectionDelegate::displayText(const QVariant &value, const QLocale& lo
                 return i18np("Over a month ago", "%1 months ago", daysAgo / 30);
             return i18np("A year ago", "%1 years ago", daysAgo / 365);
         }
-
     }
     // These aren't the strings you're looking for, move along.
     return QStyledItemDelegate::displayText(value, locale);
@@ -57,7 +56,6 @@ void ConnectionDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
             QIcon favIcon = QIcon::fromTheme(QStringLiteral("bookmarks"));
             QIcon::Mode mode = (checkState == Qt::Checked) ? QIcon::Active : QIcon::Disabled;
             favIcon.paint(painter, option.rect, option.decorationAlignment, mode);
-
         }
     } else {
         QStyledItemDelegate::paint(painter, option, index);

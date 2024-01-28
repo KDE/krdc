@@ -102,12 +102,22 @@ public:
     Q_SIGNAL void errorMessage(const QString &title, const QString &message);
 
 private:
-    friend BOOL preConnect(freerdp*);
-    friend BOOL postConnect(freerdp*);
-    friend void postDisconnect(freerdp*);
-    friend BOOL authenticate(freerdp*, char**, char**, char**);
-    friend DWORD verifyCertificate(freerdp*, const char*, UINT16 port,const char*, const char*, const char*, const char*, DWORD);
-    friend DWORD verifyChangedCertificate(freerdp*, const char*, UINT16, const char*, const char*, const char*, const char*, const char* , const char*, const char*, DWORD);
+    friend BOOL preConnect(freerdp *);
+    friend BOOL postConnect(freerdp *);
+    friend void postDisconnect(freerdp *);
+    friend BOOL authenticate(freerdp *, char **, char **, char **);
+    friend DWORD verifyCertificate(freerdp *, const char *, UINT16 port, const char *, const char *, const char *, const char *, DWORD);
+    friend DWORD verifyChangedCertificate(freerdp *,
+                                          const char *,
+                                          UINT16,
+                                          const char *,
+                                          const char *,
+                                          const char *,
+                                          const char *,
+                                          const char *,
+                                          const char *,
+                                          const char *,
+                                          DWORD);
     friend BOOL endPaint(rdpContext *);
     friend BOOL resizeDisplay(rdpContext *);
 
@@ -117,7 +127,7 @@ private:
     bool onPostConnect();
     void onPostDisconnect();
 
-    bool onAuthenticate(char** username, char** password, char** domain);
+    bool onAuthenticate(char **username, char **password, char **domain);
     CertificateResult onVerifyCertificate(const Certificate &certificate);
     CertificateResult onVerifyChangedCertificate(const Certificate &oldCertificate, const Certificate &newCertificate);
 

@@ -44,7 +44,7 @@ public:
 
     QMap<QWidget *, RemoteView *> remoteViewList() const;
     QList<RemoteViewFactory *> remoteViewFactoriesList() const;
-    RemoteView* currentRemoteView() const;
+    RemoteView *currentRemoteView() const;
 
 public Q_SLOTS:
     void newConnection(const QUrl &newUrl = QUrl(), bool switchFullscreenWhenConnected = false, const QString &tabName = QString());
@@ -79,7 +79,7 @@ private Q_SLOTS:
     void updateActionStatus();
     void updateConfiguration();
     void tabChanged(int index);
-    QWidget* newConnectionWidget();
+    QWidget *newConnectionWidget();
     void newConnectionPage(bool clearInput = true);
     void openFromRemoteDesktopsModel(const QModelIndex &index);
     void selectFromRemoteDesktopsModel(const QModelIndex &index);
@@ -119,7 +119,7 @@ private:
     QWidget *m_newConnectionWidget;
 
 Q_SIGNALS:
-    void scaleUpdated(bool scale);  // scale state has changed
+    void scaleUpdated(bool scale); // scale state has changed
     void factorUpdated(int factor); // factor havlue has changed
 };
 
@@ -132,7 +132,8 @@ class MinimizePixel : public QWidget
     Q_OBJECT
 public:
     explicit MinimizePixel(QWidget *parent)
-            : QWidget(parent) {
+        : QWidget(parent)
+    {
         setFixedSize(1, 1);
         move(screen()->geometry().width() - 1, 0);
     }
@@ -141,7 +142,8 @@ Q_SIGNALS:
     void rightClicked();
 
 protected:
-    void mousePressEvent(QMouseEvent *event) override {
+    void mousePressEvent(QMouseEvent *event) override
+    {
         if (event->button() == Qt::RightButton)
             Q_EMIT rightClicked();
     }
@@ -154,16 +156,18 @@ class RemoteViewScrollArea : public QScrollArea
     Q_OBJECT
 public:
     explicit RemoteViewScrollArea(QWidget *parent)
-            : QScrollArea(parent) {
+        : QScrollArea(parent)
+    {
     }
 
 Q_SIGNALS:
     void resized(int w, int h);
 
 protected:
-    void resizeEvent(QResizeEvent *event) override {
+    void resizeEvent(QResizeEvent *event) override
+    {
         QScrollArea::resizeEvent(event);
-        Q_EMIT resized(width() - 2*frameWidth(), height() - 2*frameWidth());
+        Q_EMIT resized(width() - 2 * frameWidth(), height() - 2 * frameWidth());
     }
 };
 

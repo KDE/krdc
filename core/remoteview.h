@@ -10,10 +10,10 @@
 #define REMOTEVIEW_H
 
 #ifndef QTONLY
-    #include <KWallet>
-    #include "krdccore_export.h"
+#include "krdccore_export.h"
+#include <KWallet>
 #else
-    #define KRDCCORE_EXPORT
+#define KRDCCORE_EXPORT
 #endif
 
 #include <QUrl>
@@ -43,53 +43,52 @@ class KRDCCORE_EXPORT RemoteView : public QWidget
     Q_OBJECT
 
 public:
-
     enum Quality {
         Unknown,
         High,
         Medium,
-        Low
+        Low,
     };
     Q_ENUM(Quality)
 
     /**
-    * Describes the state of a local cursor, if there is such a concept in the backend.
-    * With local cursors, there are two cursors: the cursor on the local machine (client),
-    * and the cursor on the remote machine (server). Because there is usually some lag,
-    * some backends show both cursors simultaneously. In the VNC backend the local cursor
-    * is a dot and the remote cursor is the 'real' cursor, usually an arrow.
-    */
+     * Describes the state of a local cursor, if there is such a concept in the backend.
+     * With local cursors, there are two cursors: the cursor on the local machine (client),
+     * and the cursor on the remote machine (server). Because there is usually some lag,
+     * some backends show both cursors simultaneously. In the VNC backend the local cursor
+     * is a dot and the remote cursor is the 'real' cursor, usually an arrow.
+     */
 
     enum LocalCursorState {
-        CursorOn,  ///< Always show local cursor based on remote one (or fallback to default).
+        CursorOn, ///< Always show local cursor based on remote one (or fallback to default).
         CursorOff, ///< Never show local cursor, only the remote one.
         /// Try to measure the lag and enable the local cursor if the latency is too high.
-        CursorAuto
+        CursorAuto,
     };
     Q_ENUM(LocalCursorState)
 
     /**
-    * State of the connection. The state of the connection is returned
-    * by @ref RemoteView::status().
-    *
-    * Not every state transition is allowed. You are only allowed to transition
-    * a state to the following state, with three exceptions:
-    * @li You can move from every state directly to Disconnected
-    * @li You can move from every state except Disconnected to
-    *     Disconnecting
-    * @li You can move from Disconnected to Connecting
-    *
-    * @ref RemoteView::setStatus() will follow this rules for you.
-    * (If you add/remove a state here, you must adapt it)
-    */
+     * State of the connection. The state of the connection is returned
+     * by @ref RemoteView::status().
+     *
+     * Not every state transition is allowed. You are only allowed to transition
+     * a state to the following state, with three exceptions:
+     * @li You can move from every state directly to Disconnected
+     * @li You can move from every state except Disconnected to
+     *     Disconnecting
+     * @li You can move from Disconnected to Connecting
+     *
+     * @ref RemoteView::setStatus() will follow this rules for you.
+     * (If you add/remove a state here, you must adapt it)
+     */
 
     enum RemoteStatus {
-        Connecting     = 0,
+        Connecting = 0,
         Authenticating = 1,
-        Preparing      = 2,
-        Connected      = 3,
-        Disconnecting  = -1,
-        Disconnected   = -2
+        Preparing = 2,
+        Connected = 3,
+        Disconnecting = -1,
+        Disconnected = -2,
     };
     Q_ENUM(RemoteStatus)
 
@@ -102,7 +101,7 @@ public:
         Name,
         NoServer,
         ServerBlocked,
-        Authentication
+        Authentication,
     };
     Q_ENUM(ErrorCode)
 
@@ -242,7 +241,7 @@ public:
     /**
      * Returns the current host preferences of this view.
      */
-    virtual HostPreferences* hostPreferences() = 0;
+    virtual HostPreferences *hostPreferences() = 0;
 #endif
 
     /**
@@ -351,7 +350,7 @@ Q_SIGNALS:
     /**
      * Emitted when the status of the view changed.
      * @param s the new status
-        */
+     */
     void statusChanged(RemoteView::RemoteStatus s);
 
     /**

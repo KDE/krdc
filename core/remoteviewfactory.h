@@ -7,11 +7,11 @@
 #ifndef REMOTEVIEWFACTORY_H
 #define REMOTEVIEWFACTORY_H
 
-#include "remoteview.h"
 #include "krdccore_export.h"
+#include "remoteview.h"
 
-#include <KPluginFactory>
 #include <KConfigGroup>
+#include <KPluginFactory>
 
 /**
  * Factory to be implemented by any plugin.
@@ -68,7 +68,6 @@ protected:
      * Protected constructor so it cannot be instantiated.
      */
     RemoteViewFactory(QObject *parent = nullptr);
-
 };
 
 #endif // REMOTEVIEWFACTORY_H

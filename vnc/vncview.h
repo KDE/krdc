@@ -11,15 +11,16 @@
 #include "vncclientthread.h"
 
 #ifdef QTONLY
-    class KConfigGroup{};
+class KConfigGroup
+{
+};
 #else
-    #include "vnchostpreferences.h"
+#include "vnchostpreferences.h"
 #endif
 
 #ifdef LIBSSH_FOUND
-    #include "vncsshtunnelthread.h"
+#include "vncsshtunnelthread.h"
 #endif
-
 
 #include <QClipboard>
 #include <QMap>
@@ -28,7 +29,7 @@ extern "C" {
 #include <rfb/rfbclient.h>
 }
 
-class VncView: public RemoteView
+class VncView : public RemoteView
 {
     Q_OBJECT
 
@@ -45,9 +46,9 @@ public:
     bool supportsScaling() const override;
     bool supportsLocalCursor() const override;
     bool supportsViewOnly() const override;
-    
+
 #ifndef QTONLY
-    HostPreferences* hostPreferences() override;
+    HostPreferences *hostPreferences() override;
 #endif
 
     void setViewOnly(bool viewOnly) override;

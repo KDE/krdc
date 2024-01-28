@@ -13,7 +13,7 @@
 K_PLUGIN_CLASS_WITH_JSON(RdpViewFactory, "krdc_rdp.json")
 
 RdpViewFactory::RdpViewFactory(QObject *parent, const QVariantList &args)
-        : RemoteViewFactory(parent)
+    : RemoteViewFactory(parent)
 {
     Q_UNUSED(args);
 
@@ -58,8 +58,9 @@ QString RdpViewFactory::connectButtonText() const
 
 QString RdpViewFactory::connectToolTipText() const
 {
-    return i18n("<html>Enter the address here. Port is optional.<br />"
-                "<i>Example: rdpserver:3389 (host:port)</i></html>");
+    return i18n(
+        "<html>Enter the address here. Port is optional.<br />"
+        "<i>Example: rdpserver:3389 (host:port)</i></html>");
 }
 
 #include "rdpviewfactory.moc"

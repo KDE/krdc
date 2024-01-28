@@ -10,47 +10,46 @@
 
 #include <QApplication>
 #include <QImage>
-#include <QPainter>
-#include <QMouseEvent>
-#include <QTimer>
 #include <QMimeData>
+#include <QMouseEvent>
+#include <QPainter>
+#include <QTimer>
 
 #ifdef QTONLY
-    #include <QMessageBox>
-    #include <QInputDialog>
-    #define KMessageBox QMessageBox
-    #define error(parent, message, caption) \
-        critical(parent, caption, message)
+#include <QInputDialog>
+#include <QMessageBox>
+#define KMessageBox QMessageBox
+#define error(parent, message, caption) critical(parent, caption, message)
 #else
-    #include "settings.h"
-    #include <KActionCollection>
-    #include <KMainWindow>
-    #include <KMessageBox>
-    #include <KPasswordDialog>
-    #include <KXMLGUIClient>
+#include "settings.h"
+#include <KActionCollection>
+#include <KMainWindow>
+#include <KMessageBox>
+#include <KPasswordDialog>
+#include <KXMLGUIClient>
 #endif
 
 // Definition of key modifier mask constants
-#define KMOD_Alt_R 	0x01
-#define KMOD_Alt_L 	0x02
-#define KMOD_Meta_L 	0x04
-#define KMOD_Control_L 	0x08
-#define KMOD_Shift_L	0x10
+#define KMOD_Alt_R 0x01
+#define KMOD_Alt_L 0x02
+#define KMOD_Meta_L 0x04
+#define KMOD_Control_L 0x08
+#define KMOD_Shift_L 0x10
 
 VncView::VncView(QWidget *parent, const QUrl &url, KConfigGroup configGroup)
-        : RemoteView(parent),
-        m_initDone(false),
-        m_buttonMask(0),
-        m_quitFlag(false),
-        m_firstPasswordTry(true),
-        m_dontSendClipboard(false),
-        m_horizontalFactor(1.0),
-        m_verticalFactor(1.0),
-        m_wheelRemainderV(0),
-        m_wheelRemainderH(0),
-        m_forceLocalCursor(false)
+    : RemoteView(parent)
+    , m_initDone(false)
+    , m_buttonMask(0)
+    , m_quitFlag(false)
+    , m_firstPasswordTry(true)
+    , m_dontSendClipboard(false)
+    , m_horizontalFactor(1.0)
+    , m_verticalFactor(1.0)
+    , m_wheelRemainderV(0)
+    , m_wheelRemainderH(0)
+    , m_forceLocalCursor(false)
 #ifdef LIBSSH_FOUND
-        , m_sshTunnelThread(nullptr)
+    , m_sshTunnelThread(nullptr)
 #endif
 {
     m_url = url;
@@ -64,11 +63,13 @@ VncView::VncView(QWidget *parent, const QUrl &url, KConfigGroup configGroup)
         m_port += 5900;
 
     // BlockingQueuedConnection can cause deadlocks when exiting, handled in startQuitting()
-    connect(&vncThread, SIGNAL(imageUpdated(int,int,int,int)), this, SLOT(updateImage(int,int,int,int)), Qt::BlockingQueuedConnection);
+    connect(&vncThread, SIGNAL(imageUpdated(int, int, int, int)), this, SLOT(updateImage(int, int, int, int)), Qt::BlockingQueuedConnection);
     connect(&vncThread, SIGNAL(gotCut(QString)), this, SLOT(setCut(QString)), Qt::BlockingQueuedConnection);
     connect(&vncThread, SIGNAL(passwordRequest(bool)), this, SLOT(requestPassword(bool)), Qt::BlockingQueuedConnection);
     connect(&vncThread, SIGNAL(outputErrorMessage(QString)), this, SLOT(outputErrorMessage(QString)));
-    connect(&vncThread, &VncClientThread::gotCursor, this, [this](QCursor cursor){ setCursor(cursor); });
+    connect(&vncThread, &VncClientThread::gotCursor, this, [this](QCursor cursor) {
+        setCursor(cursor);
+    });
 
     m_clipboard = QApplication::clipboard();
     connect(m_clipboard, SIGNAL(dataChanged()), this, SLOT(clipboardDataChanged()));
@@ -82,19 +83,16 @@ VncView::VncView(QWidget *parent, const QUrl &url, KConfigGroup configGroup)
 
 VncView::~VncView()
 {
-    if (!m_quitFlag) startQuitting();
+    if (!m_quitFlag)
+        startQuitting();
 }
 
 bool VncView::eventFilter(QObject *obj, QEvent *event)
 {
     if (m_viewOnly) {
-        if (event->type() == QEvent::KeyPress ||
-                event->type() == QEvent::KeyRelease ||
-                event->type() == QEvent::MouseButtonDblClick ||
-                event->type() == QEvent::MouseButtonPress ||
-                event->type() == QEvent::MouseButtonRelease ||
-                event->type() == QEvent::Wheel ||
-                event->type() == QEvent::MouseMove)
+        if (event->type() == QEvent::KeyPress || event->type() == QEvent::KeyRelease || event->type() == QEvent::MouseButtonDblClick
+            || event->type() == QEvent::MouseButtonPress || event->type() == QEvent::MouseButtonRelease || event->type() == QEvent::Wheel
+            || event->type() == QEvent::MouseMove)
             return true;
     }
 
@@ -137,7 +135,7 @@ void VncView::scaleResize(int w, int h)
 
         const qreal newW = frameSize.width() * m_horizontalFactor;
         const qreal newH = frameSize.height() * m_verticalFactor;
-        setMaximumSize(newW, newH); //This is a hack to force Qt to center the view in the scroll area
+        setMaximumSize(newW, newH); // This is a hack to force Qt to center the view in the scroll area
         resize(newW, newH);
     }
 }
@@ -235,8 +233,7 @@ bool VncView::start()
     vncThread.setHost(vncHost);
     RemoteView::Quality quality;
 #ifdef QTONLY
-    quality = (RemoteView::Quality)((QCoreApplication::arguments().count() > 2) ?
-        QCoreApplication::arguments().at(2).toInt() : 2);
+    quality = (RemoteView::Quality)((QCoreApplication::arguments().count() > 2) ? QCoreApplication::arguments().at(2).toInt() : 2);
 #else
     quality = m_hostPreferences->quality();
 #endif
@@ -249,7 +246,7 @@ bool VncView::start()
         showLocalCursor(RemoteView::CursorOn);
 #ifndef QTONLY
         // KRDC does always just have one main window, so at(0) is safe
-        KXMLGUIClient *mainWindow = dynamic_cast<KXMLGUIClient*>(KMainWindow::memberList().at(0));
+        KXMLGUIClient *mainWindow = dynamic_cast<KXMLGUIClient *>(KMainWindow::memberList().at(0));
         if (mainWindow)
             mainWindow->actionCollection()->action(QLatin1String("show_local_cursor"))->setChecked(true);
 #endif
@@ -263,8 +260,7 @@ bool VncView::start()
             vncThread.setPort(m_sshTunnelThread->tunnelPort());
             vncThread.start();
         });
-    }
-    else
+    } else
 #endif
     {
         vncThread.setPort(m_port);
@@ -320,20 +316,24 @@ void VncView::requestPassword(bool includingUsername)
 #ifdef QTONLY
     bool ok;
     if (includingUsername) {
-        QString username = QInputDialog::getText(this, //krazy:exclude=qclasses (code not used in kde build)
+        QString username = QInputDialog::getText(this, // krazy:exclude=qclasses (code not used in kde build)
                                                  tr("Username required"),
                                                  tr("Please enter the username for the remote desktop:"),
-                                                 QLineEdit::Normal, m_url.userName(), &ok); //krazy:exclude=qclasses
+                                                 QLineEdit::Normal,
+                                                 m_url.userName(),
+                                                 &ok); // krazy:exclude=qclasses
         if (ok)
             vncThread.setUsername(username);
         else
             startQuitting();
     }
 
-    QString password = QInputDialog::getText(this, //krazy:exclude=qclasses
+    QString password = QInputDialog::getText(this, // krazy:exclude=qclasses
                                              tr("Password required"),
                                              tr("Please enter the password for the remote desktop:"),
-                                             QLineEdit::Password, QString(), &ok); //krazy:exclude=qclasses
+                                             QLineEdit::Password,
+                                             QString(),
+                                             &ok); // krazy:exclude=qclasses
     m_firstPasswordTry = false;
     if (ok)
         vncThread.setPassword(password);
@@ -341,13 +341,14 @@ void VncView::requestPassword(bool includingUsername)
         startQuitting();
 #else
     KPasswordDialog dialog(this, includingUsername ? KPasswordDialog::ShowUsernameLine : KPasswordDialog::NoFlags);
-    dialog.setPrompt(m_firstPasswordTry ? i18n("Access to the system requires a password.")
-                                        : i18n("Authentication failed. Please try again."));
-    if (includingUsername) dialog.setUsername(m_url.userName());
+    dialog.setPrompt(m_firstPasswordTry ? i18n("Access to the system requires a password.") : i18n("Authentication failed. Please try again."));
+    if (includingUsername)
+        dialog.setUsername(m_url.userName());
     if (dialog.exec() == KPasswordDialog::Accepted) {
         m_firstPasswordTry = false;
         vncThread.setPassword(dialog.password());
-        if (includingUsername) vncThread.setUsername(dialog.username());
+        if (includingUsername)
+            vncThread.setUsername(dialog.username());
     } else {
         qCDebug(KRDC) << "password dialog not accepted";
         startQuitting();
@@ -412,7 +413,7 @@ void VncView::sshErrorMessage(const QString &message)
 }
 
 #ifndef QTONLY
-HostPreferences* VncView::hostPreferences()
+HostPreferences *VncView::hostPreferences()
 {
     return m_hostPreferences;
 }
@@ -420,7 +421,7 @@ HostPreferences* VncView::hostPreferences()
 
 void VncView::updateImage(int x, int y, int w, int h)
 {
-//     qCDebug(KRDC) << "got update" << width() << height();
+    // qCDebug(KRDC) << "got update" << width() << height();
 
     m_frame = vncThread.image();
 
@@ -441,13 +442,13 @@ void VncView::updateImage(int x, int y, int w, int h)
 
         if (m_scale) {
 #ifndef QTONLY
-            qCDebug(KRDC) << "Setting initial size w:" <<m_hostPreferences->width() << " h:" << m_hostPreferences->height();
+            qCDebug(KRDC) << "Setting initial size w:" << m_hostPreferences->width() << " h:" << m_hostPreferences->height();
             QSize frameSize = QSize(m_hostPreferences->width(), m_hostPreferences->height()) / devicePixelRatioF();
             Q_EMIT framebufferSizeChanged(frameSize.width(), frameSize.height());
             scaleResize(frameSize.width(), frameSize.height());
             qCDebug(KRDC) << "m_frame.size():" << m_frame.size() << "size()" << size();
 #else
-//TODO: qtonly alternative
+// TODO: qtonly alternative
 #endif
         }
 
@@ -475,14 +476,16 @@ void VncView::updateImage(int x, int y, int w, int h)
         } else {
             qCDebug(KRDC) << "Resizing: " << m_frame.width() << m_frame.height();
             resize(frameSize);
-            setMaximumSize(frameSize); //This is a hack to force Qt to center the view in the scroll area
+            setMaximumSize(frameSize); // This is a hack to force Qt to center the view in the scroll area
             setMinimumSize(frameSize);
             Q_EMIT framebufferSizeChanged(frameSize.width(), frameSize.height());
         }
     }
 
     const auto dpr = m_frame.devicePixelRatio();
-    repaint(QRectF(x / dpr * m_horizontalFactor, y / dpr * m_verticalFactor, w / dpr * m_horizontalFactor, h / dpr * m_verticalFactor).toAlignedRect().adjusted(-1,-1,1,1));
+    repaint(QRectF(x / dpr * m_horizontalFactor, y / dpr * m_verticalFactor, w / dpr * m_horizontalFactor, h / dpr * m_verticalFactor)
+                .toAlignedRect()
+                .adjusted(-1, -1, 1, 1));
 }
 
 void VncView::setViewOnly(bool viewOnly)
@@ -526,7 +529,7 @@ void VncView::enableScaling(bool scale)
         m_horizontalFactor = 1.0;
 
         const QSize frameSize = m_frame.size() / m_frame.devicePixelRatio();
-        setMaximumSize(frameSize); //This is a hack to force Qt to center the view in the scroll area
+        setMaximumSize(frameSize); // This is a hack to force Qt to center the view in the scroll area
         setMinimumSize(frameSize);
         resize(frameSize);
     }
@@ -542,7 +545,7 @@ void VncView::setCut(const QString &text)
 
 void VncView::paintEvent(QPaintEvent *event)
 {
-//     qCDebug(KRDC) << "paint event: x: " << m_x << ", y: " << m_y << ", w: " << m_w << ", h: " << m_h;
+    // qCDebug(KRDC) << "paint event: x: " << m_x << ", y: " << m_y << ", w: " << m_w << ", h: " << m_h;
     if (m_frame.isNull() || m_frame.format() == QImage::Format_Invalid) {
         qCDebug(KRDC) << "no valid image to paint";
         RemoteView::paintEvent(event);
@@ -556,8 +559,10 @@ void VncView::paintEvent(QPaintEvent *event)
 
     const auto dpr = m_frame.devicePixelRatio();
     const QRectF dstRect = event->rect();
-    const QRectF srcRect(dstRect.x() * dpr / m_horizontalFactor, dstRect.y() * dpr / m_verticalFactor,
-                         dstRect.width() * dpr / m_horizontalFactor, dstRect.height() * dpr / m_verticalFactor);
+    const QRectF srcRect(dstRect.x() * dpr / m_horizontalFactor,
+                         dstRect.y() * dpr / m_verticalFactor,
+                         dstRect.width() * dpr / m_horizontalFactor,
+                         dstRect.height() * dpr / m_verticalFactor);
     painter.drawImage(dstRect, m_frame, srcRect);
 
     RemoteView::paintEvent(event);
@@ -574,21 +579,21 @@ bool VncView::event(QEvent *event)
     switch (event->type()) {
     case QEvent::KeyPress:
     case QEvent::KeyRelease:
-//         qCDebug(KRDC) << "keyEvent";
-        keyEventHandler(static_cast<QKeyEvent*>(event));
+        // qCDebug(KRDC) << "keyEvent";
+        keyEventHandler(static_cast<QKeyEvent *>(event));
         return true;
         break;
     case QEvent::MouseButtonDblClick:
     case QEvent::MouseButtonPress:
     case QEvent::MouseButtonRelease:
     case QEvent::MouseMove:
-//         qCDebug(KRDC) << "mouseEvent";
-        mouseEventHandler(static_cast<QMouseEvent*>(event));
+        // qCDebug(KRDC) << "mouseEvent";
+        mouseEventHandler(static_cast<QMouseEvent *>(event));
         return true;
         break;
     case QEvent::Wheel:
-//         qCDebug(KRDC) << "wheelEvent";
-        wheelEventHandler(static_cast<QWheelEvent*>(event));
+        // qCDebug(KRDC) << "wheelEvent";
+        wheelEventHandler(static_cast<QWheelEvent *>(event));
         return true;
         break;
     default:
@@ -599,8 +604,7 @@ bool VncView::event(QEvent *event)
 void VncView::mouseEventHandler(QMouseEvent *e)
 {
     if (e->type() != QEvent::MouseMove) {
-        if ((e->type() == QEvent::MouseButtonPress) ||
-                (e->type() == QEvent::MouseButtonDblClick)) {
+        if ((e->type() == QEvent::MouseButtonPress) || (e->type() == QEvent::MouseButtonDblClick)) {
             if (e->button() & Qt::LeftButton)
                 m_buttonMask |= 0x01;
             if (e->button() & Qt::MiddleButton)
@@ -682,7 +686,7 @@ void VncView::keyEventHandler(QKeyEvent *e)
     if (e->isAutoRepeat() && (e->type() == QEvent::KeyRelease))
         return;
 
-// parts of this code are based on https://github.com/veyon/veyon/blob/master/core/src/VncView.cpp
+    // parts of this code are based on https://github.com/veyon/veyon/blob/master/core/src/VncView.cpp
     rfbKeySym k = e->nativeVirtualKey();
 
     // we do not handle Key_Backtab separately as the Shift-modifier
@@ -694,8 +698,8 @@ void VncView::keyEventHandler(QKeyEvent *e)
     const bool pressed = (e->type() == QEvent::KeyPress);
 
     // handle modifiers
-    if (k == XK_Shift_L || k == XK_Control_L || k == XK_Meta_L || k == XK_Alt_L || XK_Super_L || XK_Hyper_L ||
-        k == XK_Shift_R || k == XK_Control_R || k == XK_Meta_R || k == XK_Alt_R || XK_Super_R || XK_Hyper_R) {
+    if (k == XK_Shift_L || k == XK_Control_L || k == XK_Meta_L || k == XK_Alt_L || XK_Super_L || XK_Hyper_L || k == XK_Shift_R || k == XK_Control_R
+        || k == XK_Meta_R || k == XK_Alt_R || XK_Super_R || XK_Hyper_R) {
         if (pressed) {
             m_mods[k] = true;
         } else if (m_mods.contains(k)) {
@@ -731,7 +735,7 @@ void VncView::clipboardDataChanged()
         return;
 #ifndef QTONLY
     if (m_hostPreferences->dontCopyPasswords()) {
-        const QMimeData* data = m_clipboard->mimeData();
+        const QMimeData *data = m_clipboard->mimeData();
         if (data && data->hasFormat(QLatin1String("x-kde-passwordManagerHint"))) {
             qCDebug(KRDC) << "VncView::clipboardDataChanged data hasFormat x-kde-passwordManagerHint -- ignoring";
             return;

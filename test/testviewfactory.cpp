@@ -11,7 +11,7 @@
 K_PLUGIN_CLASS_WITH_JSON(TestViewFactory, "krdc_test.json")
 
 TestViewFactory::TestViewFactory(QObject *parent, const QVariantList &args)
-        : RemoteViewFactory(parent)
+    : RemoteViewFactory(parent)
 {
     Q_UNUSED(args);
 
@@ -57,8 +57,9 @@ QString TestViewFactory::connectButtonText() const
 
 QString TestViewFactory::connectToolTipText() const
 {
-    return QLatin1String("<html>Enter the address here. Port is optional.<br />"
-            "<i>Example: testserver (host)</i></html>"); // no i18n required, just internal test plugin!
+    return QLatin1String(
+        "<html>Enter the address here. Port is optional.<br />"
+        "<i>Example: testserver (host)</i></html>"); // no i18n required, just internal test plugin!
 }
 
 #include "testviewfactory.moc"

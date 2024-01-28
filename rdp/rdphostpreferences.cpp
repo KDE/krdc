@@ -9,12 +9,13 @@
 
 #include "settings.h"
 
+#include <QGuiApplication>
 #include <QScreen>
 #include <QWindow>
-#include <QGuiApplication>
 
 #include <freerdp/locale/keyboard.h>
 
+// clang-format off
 static const QStringList keymaps = (QStringList()
     << QStringLiteral("ar")
     << QStringLiteral("cs")
@@ -54,6 +55,7 @@ static const QStringList keymaps = (QStringList()
     << QStringLiteral("th")
     << QStringLiteral("tr")
 );
+// clang-format on
 
 static const QHash<QString, int> rdpLayouts = {
     {QStringLiteral("ar"), KBD_ARABIC_101},
@@ -112,7 +114,7 @@ inline QString int2keymap(int layout)
 }
 
 RdpHostPreferences::RdpHostPreferences(KConfigGroup configGroup, QObject *parent)
-  : HostPreferences(configGroup, parent)
+    : HostPreferences(configGroup, parent)
 {
 }
 
@@ -120,7 +122,7 @@ RdpHostPreferences::~RdpHostPreferences()
 {
 }
 
-QWidget* RdpHostPreferences::createProtocolSpecificConfigPage()
+QWidget *RdpHostPreferences::createProtocolSpecificConfigPage()
 {
     QWidget *rdpPage = new QWidget();
     rdpUi.setupUi(rdpPage);

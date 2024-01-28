@@ -8,22 +8,22 @@
 #include "remotedesktopsmodel.h"
 #include "krdc_debug.h"
 
-#include <KLocalizedString>
 #include <KFormat>
+#include <KLocalizedString>
 #ifdef BUILD_ZEROCONF
-#include <kdnssd_version.h>
-#include <KDNSSD/ServiceBrowser>
 #include <KDNSSD/RemoteService>
+#include <KDNSSD/ServiceBrowser>
+#include <kdnssd_version.h>
 #endif
 #include <QLoggingCategory>
-#include <QStandardPaths>
 #include <QObject>
+#include <QStandardPaths>
 
 RemoteDesktopsModel::RemoteDesktopsModel(QObject *parent, KBookmarkManager *manager)
-        : QAbstractTableModel(parent)
+    : QAbstractTableModel(parent)
 {
     m_manager = manager;
-    connect(m_manager, SIGNAL(changed(QString,QString)), SLOT(bookmarksChanged()));
+    connect(m_manager, SIGNAL(changed(QString, QString)), SLOT(bookmarksChanged()));
     buildModelFromBookmarkGroup(m_manager->root());
 
 #ifdef BUILD_ZEROCONF
@@ -43,7 +43,7 @@ RemoteDesktopsModel::~RemoteDesktopsModel()
 
 int RemoteDesktopsModel::columnCount(const QModelIndex &) const
 {
-    return 6;  // same as count of RemoteDesktopsModel::DisplayItems enum
+    return 6; // same as count of RemoteDesktopsModel::DisplayItems enum
 }
 
 int RemoteDesktopsModel::rowCount(const QModelIndex &) const
@@ -99,7 +99,8 @@ QVariant RemoteDesktopsModel::data(const QModelIndex &index, int role) const
         case RemoteDesktopsModel::VisitCount:
             return item.visits;
         case RemoteDesktopsModel::Created:
-            if (item.created.isNull()) return QVariant();
+            if (item.created.isNull())
+                return QVariant();
             return QLocale().toString(item.created.toLocalTime(), QLocale::FormatType::ShortFormat);
         case RemoteDesktopsModel::Source:
             switch (item.source) {
@@ -123,7 +124,7 @@ QVariant RemoteDesktopsModel::data(const QModelIndex &index, int role) const
         return QVariant();
 
     case Qt::ToolTipRole:
-        switch(index.column()) {
+        switch (index.column()) {
         case RemoteDesktopsModel::Favorite:
             if (item.favorite) {
                 return i18nc("Remove the selected url from the bookarks menu", "Remove the bookmark for %1.", item.title);
@@ -143,15 +144,15 @@ QVariant RemoteDesktopsModel::data(const QModelIndex &index, int role) const
         default:
             break;
         }
-        return item.url;  //use the url for the tooltip
+        return item.url; // use the url for the tooltip
 
-    case 10001: //url for dockwidget
+    case 10001: // url for dockwidget
         return item.url;
 
-    case 10002: //filter
+    case 10002: // filter
         return QUrl::fromPercentEncoding(QString(item.url + item.title).toUtf8()); // return both user visible title and url data, percent encoded
 
-    case 10003: //title for dockwidget
+    case 10003: // title for dockwidget
         return item.title;
 
     default:
@@ -159,8 +160,7 @@ QVariant RemoteDesktopsModel::data(const QModelIndex &index, int role) const
     }
 }
 
-QVariant RemoteDesktopsModel::headerData(int section, Qt::Orientation orientation,
-        int role) const
+QVariant RemoteDesktopsModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
     if (orientation == Qt::Horizontal && role == Qt::DisplayRole) {
         switch (section) {
@@ -214,7 +214,7 @@ void RemoteDesktopsModel::buildModelFromBookmarkGroup(const KBookmarkGroup &grou
             RemoteDesktop item;
             item.title = bm.fullText();
             item.url = bm.url().url();
-            int index = remoteDesktops.indexOf(item); //search for this url to see if we need to update it
+            int index = remoteDesktops.indexOf(item); // search for this url to see if we need to update it
             bool newItem = index < 0; // do we need to create a new item?
 
             // we want to merge all copies of a url into one link, so if the item exists, update it
@@ -229,15 +229,18 @@ void RemoteDesktopsModel::buildModelFromBookmarkGroup(const KBookmarkGroup &grou
                 bool ok = false;
                 // first the created datetime
                 created = QDateTime::fromSecsSinceEpoch(bm.metaDataItem(QLatin1String("time_added")).toLongLong(&ok));
-                if (ok) (newItem ? item : remoteDesktops[index]).created = created;
+                if (ok)
+                    (newItem ? item : remoteDesktops[index]).created = created;
                 // then the last visited datetime
                 ok = false;
                 connected = QDateTime::fromSecsSinceEpoch(bm.metaDataItem(QLatin1String("time_visited")).toLongLong(&ok));
-                if (ok) (newItem ? item : remoteDesktops[index]).lastConnected = connected;
+                if (ok)
+                    (newItem ? item : remoteDesktops[index]).lastConnected = connected;
                 // finally the visited count
                 ok = false;
                 int visits = bm.metaDataItem(QLatin1String("visit_count")).toInt(&ok);
-                if (ok) (newItem ? item : remoteDesktops[index]).visits = visits;
+                if (ok)
+                    (newItem ? item : remoteDesktops[index]).visits = visits;
             } else {
                 if (newItem) {
                     // if this is a new item, just add the rest of the required data
@@ -264,11 +267,11 @@ void RemoteDesktopsModel::buildModelFromBookmarkGroup(const KBookmarkGroup &grou
 #ifdef BUILD_ZEROCONF
 void RemoteDesktopsModel::servicesChanged()
 {
-    //redo list because it is easier than finding and removing one that disappeared
+    // redo list because it is easier than finding and removing one that disappeared
     const QList<KDNSSD::RemoteService::Ptr> services = zeroconfBrowser->services();
     QUrl url;
     removeAllItemsFromSources(RemoteDesktop::Zeroconf);
-    for (const KDNSSD::RemoteService::Ptr& service : services) {
+    for (const KDNSSD::RemoteService::Ptr &service : services) {
         url.setScheme(m_protocols[service->type()].toLower());
         url.setHost(service->hostName());
         url.setPort(service->port());
@@ -289,4 +292,3 @@ void RemoteDesktopsModel::servicesChanged()
     endResetModel();
 }
 #endif
-
