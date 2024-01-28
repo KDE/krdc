@@ -9,7 +9,6 @@
 #include "rdpview.h"
 
 #include "rdphostpreferences.h"
-#include "settings.h"
 #include "krdc_debug.h"
 
 #include <KMessageBox>
@@ -71,32 +70,26 @@ QSize RdpView::framebufferSize()
     return QSize{};
 }
 
+void RdpView::scaleResize(int w, int h)
+{
+    RemoteView::scaleResize(w, h);
+
+    // handle window resizes
+    resize(sizeHint());
+}
+
 QSize RdpView::sizeHint() const
 {
     if (!m_session) {
         return QSize{};
     }
 
-    if (!m_hostPreferences->scaleToSize()) {
-        return m_session->size();
+    // when parent is resized and scaling is enabled, resize the view, preserving aspect ratio
+    if (m_hostPreferences->scaleToSize()) {
+        return m_session->size().scaled(parentWidget()->size(), Qt::KeepAspectRatio);
     }
 
-    switch (m_hostPreferences->resolution()) {
-        case RdpHostPreferences::Resolution::Small:
-            return QSize{1280, 720};
-        case RdpHostPreferences::Resolution::Medium:
-            return QSize{1600, 900};
-        case RdpHostPreferences::Resolution::Large:
-            return QSize{1920, 1080};
-        case RdpHostPreferences::Resolution::MatchWindow:
-            return parentWidget()->size();
-        case RdpHostPreferences::Resolution::MatchScreen:
-            return window()->windowHandle()->screen()->size();
-        case RdpHostPreferences::Resolution::Custom:
-            return QSize{m_hostPreferences->width(), m_hostPreferences->height()};
-    }
-
-    return parentWidget()->size();
+    return m_session->size();
 }
 
 void RdpView::startQuitting()
@@ -117,6 +110,7 @@ bool RdpView::start()
     m_session->setHost(m_host);
     m_session->setPort(m_port);
     m_session->setUser(m_user);
+    m_session->setSize(initialSize());
 
     if (m_password.isEmpty()) {
         m_session->setPassword(readWalletPassword());
@@ -126,6 +120,7 @@ bool RdpView::start()
 
     connect(m_session.get(), &RdpSession::sizeChanged, this, [this]() {
         resize(sizeHint());
+        qCDebug(KRDC) << "freerdp resized rdp view" << sizeHint();
         Q_EMIT framebufferSizeChanged(width(), height());
     });
     connect(m_session.get(), &RdpSession::rectangleUpdated, this, &RdpView::onRectangleUpdated);
@@ -198,6 +193,7 @@ bool RdpView::scaling() const
 void RdpView::enableScaling(bool scale)
 {
     m_hostPreferences->setScaleToSize(scale);
+    qCDebug(KRDC) << "Scaling changed" << scale;
     resize(sizeHint());
     update();
 }
@@ -205,6 +201,26 @@ void RdpView::enableScaling(bool scale)
 void RdpView::setScaleFactor(float factor)
 {
 
+}
+
+QSize RdpView::initialSize()
+{
+    switch (m_hostPreferences->resolution()) {
+        case RdpHostPreferences::Resolution::Small:
+            return QSize{1280, 720};
+        case RdpHostPreferences::Resolution::Medium:
+            return QSize{1600, 900};
+        case RdpHostPreferences::Resolution::Large:
+            return QSize{1920, 1080};
+        case RdpHostPreferences::Resolution::MatchWindow:
+            return parentWidget()->size();
+        case RdpHostPreferences::Resolution::MatchScreen:
+            return window()->windowHandle()->screen()->size();
+        case RdpHostPreferences::Resolution::Custom:
+            return QSize{m_hostPreferences->width(), m_hostPreferences->height()};
+    }
+
+    return parentWidget()->size();
 }
 
 void RdpView::savePassword(const QString& password)
@@ -226,7 +242,7 @@ void RdpView::paintEvent(QPaintEvent *event)
     auto image = *m_session->videoBuffer();
 
     if (m_hostPreferences->scaleToSize()) {
-        painter.drawImage(QPoint{0, 0}, image.scaled(sizeHint(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        painter.drawImage(QPoint{0, 0}, image.scaled(size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
     } else {
         painter.drawImage(QPoint{0, 0}, image);
     }
