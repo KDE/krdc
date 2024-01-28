@@ -625,10 +625,10 @@ bool RdpSession::onAuthenticate(char **username, char **password, char **domain)
     std::unique_ptr<KPasswordDialog> dialog;
     bool hasUsername = qstrlen(*username) != 0;
     if (hasUsername) {
-        dialog = std::make_unique<KPasswordDialog>(nullptr, KPasswordDialog::ShowKeepPassword);
+        dialog = std::make_unique<KPasswordDialog>(m_view, KPasswordDialog::ShowKeepPassword);
         dialog->setPrompt(i18nc("@label", "Access to this system requires a password."));
     } else {
-        dialog = std::make_unique<KPasswordDialog>(nullptr, KPasswordDialog::ShowUsernameLine | KPasswordDialog::ShowKeepPassword);
+        dialog = std::make_unique<KPasswordDialog>(m_view, KPasswordDialog::ShowUsernameLine | KPasswordDialog::ShowKeepPassword);
         dialog->setPrompt(i18nc("@label", "Access to this system requires a username and password."));
     }
 
@@ -651,7 +651,7 @@ bool RdpSession::onAuthenticate(char **username, char **password, char **domain)
 
 RdpSession::CertificateResult RdpSession::onVerifyCertificate(const Certificate &certificate)
 {
-    KMessageDialog dialog{KMessageDialog::QuestionTwoActions, i18nc("@label", "The certificate for this system is unknown. Do you wish to continue?")};
+    KMessageDialog dialog{KMessageDialog::QuestionTwoActions, i18nc("@label", "The certificate for this system is unknown. Do you wish to continue?"), m_view};
     dialog.setCaption(i18nc("@title:dialog", "Verify Certificate"));
     dialog.setIcon(QIcon::fromTheme(QStringLiteral("view-certficate")));
 
@@ -674,7 +674,7 @@ RdpSession::CertificateResult RdpSession::onVerifyCertificate(const Certificate 
 
 RdpSession::CertificateResult RdpSession::onVerifyChangedCertificate(const Certificate &oldCertificate, const Certificate &newCertificate)
 {
-    KMessageDialog dialog{KMessageDialog::QuestionTwoActions, i18nc("@label", "The certificate for this system has changed. Do you wish to continue?")};
+    KMessageDialog dialog{KMessageDialog::QuestionTwoActions, i18nc("@label", "The certificate for this system has changed. Do you wish to continue?"), m_view};
     dialog.setCaption(i18nc("@title:dialog", "Certificate has Changed"));
     dialog.setIcon(QIcon::fromTheme(QStringLiteral("view-certficate")));
 
