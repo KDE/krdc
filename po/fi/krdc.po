@@ -5,7 +5,7 @@
 # Teemu Rytilahti <teemu.rytilahti@kde-fi.org>, 2003.
 # Mikko Ikola <ikola@iki.fi>, 2005.
 # Lasse Liehu <lasse.liehu@gmail.com>, 2010, 2012, 2013, 2014, 2015, 2016.
-# Tommi Nieminen <translator@legisign.org>, 2011, 2016, 2018, 2019, 2020, 2021.
+# Tommi Nieminen <translator@legisign.org>, 2011, 2016, 2018, 2019, 2020, 2021, 2023.
 #
 # KDE Finnish translation sprint participants:
 # Author: Artnay
@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-29 01:36+0000\n"
-"PO-Revision-Date: 2021-05-07 14:27+0300\n"
+"PO-Revision-Date: 2023-12-11 15:42+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-POT-Import-Date: 2012-12-01 22:24:45+0000\n"
-"X-Generator: Lokalize 20.04.2\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -701,7 +701,7 @@ msgstr "Jaa media:"
 #: rdp/rdppreferences.ui:40 rdp/rdppreferences.ui:291
 #, kde-format
 msgid "Use Best Available"
-msgstr ""
+msgstr "Käytä parasta saatavilla olevaa"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
 #: rdp/rdppreferences.ui:45
@@ -765,7 +765,7 @@ msgstr ""
 #: rdp/rdppreferences.ui:136
 #, kde-format
 msgid "Acceleration:"
-msgstr ""
+msgstr "Kiihdytys:"
 
 #. i18n: ectx: property (text), widget (QLabel, colorDepthLabel)
 #: rdp/rdppreferences.ui:159
@@ -816,30 +816,27 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:245
-#, fuzzy, kde-format
-#| msgid "Small (800x600)"
+#, kde-format
 msgid "Small (1280x720)"
-msgstr "Pieni (800 × 600)"
+msgstr "Pieni (1280×720)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:250
 #, kde-format
 msgid "Medium (1600x900)"
-msgstr ""
+msgstr "Keskikokoinen (1600×900)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:255
-#, fuzzy, kde-format
-#| msgid "Large (1280x1024)"
+#, kde-format
 msgid "Large (1920x1080)"
-msgstr "Suuri (1280 × 1024)"
+msgstr "Suuri (1920×1080)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:260
-#, fuzzy, kde-format
-#| msgid "Current KRDC Size"
+#, kde-format
 msgid "Current Window Size"
-msgstr "KRDC:n nykyinen koko"
+msgstr "Ikkunan nykyinen koko"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
@@ -859,20 +856,19 @@ msgstr "Mukautettu tarkkuus (…)"
 #: rdp/rdppreferences.ui:296
 #, kde-format
 msgid "Force H.264"
-msgstr ""
+msgstr "Pakota H.264"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
 #: rdp/rdppreferences.ui:301
-#, fuzzy, kde-format
-#| msgid "RemoteFX:"
+#, kde-format
 msgid "Force RemoteFX"
-msgstr "RemoteFX:"
+msgstr "Pakota RemoteFX"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
 #: rdp/rdppreferences.ui:306
 #, kde-format
 msgid "Disable All Acceleration"
-msgstr ""
+msgstr "Poista kaikki kiihdytys käytöstä"
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:326
@@ -1110,7 +1106,7 @@ msgstr "Turkkilainen (tr)"
 #: rdp/rdppreferences.ui:527
 #, kde-format
 msgid "Scale window contents to match resolution"
-msgstr ""
+msgstr "Sovita ikkunan sisältö tarkkuuteen"
 
 #. i18n: ectx: property (text), widget (QLabel, soundLabel)
 #: rdp/rdppreferences.ui:553
@@ -1123,7 +1119,7 @@ msgstr "Ääni:"
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Logon Error"
-msgstr ""
+msgstr "Kirjautumisvirhe"
 
 #: rdp/rdpsession.cpp:190
 #, kde-format
@@ -1135,50 +1131,53 @@ msgid ""
 "Issuer: %5\n"
 "Fingerprint: %6\n"
 msgstr ""
+"Konenimi: %1:%2\n"
+"Yleinen nimi: %3\n"
+"Aihe: %4\n"
+"Myöntäjä: %5\n"
+"Sormenjälki: %6\n"
 
 #: rdp/rdpsession.cpp:607
-#, fuzzy, kde-format
-#| msgid "Access to the system requires a password."
+#, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a password."
 msgstr "Järjestelmän käyttö vaatii salasanan."
 
 #: rdp/rdpsession.cpp:610
-#, fuzzy, kde-format
-#| msgid "Access to the system requires a password."
+#, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
-msgstr "Järjestelmän käyttö vaatii salasanan."
+msgstr "Järjestelmän käyttö vaatii käyttäjätunnuksen ja salasanan."
 
 #: rdp/rdpsession.cpp:632
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
-msgstr ""
+msgstr "Tämän järjestelmän varmenne on tuntematon. Haluatko jatkaa?"
 
 #: rdp/rdpsession.cpp:633
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
-msgstr ""
+msgstr "Todenna varmenne"
 
 #: rdp/rdpsession.cpp:638 rdp/rdpsession.cpp:661
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
-msgstr ""
+msgstr "Muista tämä varmenne"
 
 #: rdp/rdpsession.cpp:655
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
-msgstr ""
+msgstr "Järjestelmän varmenne on muuttunut. Haluatko jatkaa?"
 
 #: rdp/rdpsession.cpp:656
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
-msgstr ""
+msgstr "Varmenne on muuttunut"
 
 #: rdp/rdpsession.cpp:659
 #, kde-format
@@ -1189,13 +1188,16 @@ msgid ""
 "New Certificate:\n"
 "%2"
 msgstr ""
+"Edellinen varmenne:\n"
+"%1\n"
+"Uusi varmenne:\n"
+"%2"
 
 #: rdp/rdpsession.cpp:773
-#, fuzzy, kde-format
-#| msgid "Connection Failure"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Login Failure"
-msgstr "Yhteysvirhe"
+msgstr "Kirjautumisvirhe"
 
 #: rdp/rdpsession.cpp:774
 #, kde-format
@@ -1204,12 +1206,14 @@ msgid ""
 "Unable to login with the provided credentials. Please double check the user "
 "and password."
 msgstr ""
+"Annetuilla tiedoilla ei kyetty kirjautumaan. Varmista käyttäjätunnus ja "
+"salasana."
 
 #: rdp/rdpsession.cpp:780
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Account Problems"
-msgstr ""
+msgstr "Tiliongelmia"
 
 #: rdp/rdpsession.cpp:781
 #, kde-format
@@ -1218,12 +1222,14 @@ msgid ""
 "The provided account is not allowed to log in to this machine. Please "
 "contact your system administrator."
 msgstr ""
+"Annetulla tilillä ei ole oikeutta kirjautua tähän koneeseen. Ota yhteyttä "
+"järjestelmän ylläpitoon."
 
 #: rdp/rdpsession.cpp:786
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Password Problems"
-msgstr ""
+msgstr "Salasanaongelmia"
 
 #: rdp/rdpsession.cpp:787
 #, kde-format
@@ -1232,87 +1238,80 @@ msgid ""
 "Unable to login with the provided password. Please contact your system "
 "administrator to change it."
 msgstr ""
+"Annetulla salasanalla ei kyetty kirjautumaan. Vaihda se ottamalla yhteyttä "
+"järjestelmän ylläpitoon."
 
 #: rdp/rdpsession.cpp:790
-#, fuzzy, kde-format
-#| msgid "Connection"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Lost"
-msgstr "Yhteys"
+msgstr "Yhteys poikki"
 
 #: rdp/rdpsession.cpp:791
-#, fuzzy, kde-format
-#| msgid "An error has occurred during the connection to the NX server."
+#, kde-format
 msgctxt "@label"
 msgid "Lost connection to the server."
-msgstr "NX-palvelimeen yhdistettäessä sattui virhe."
+msgstr "Palvelinyhteys katkesi."
 
 #: rdp/rdpsession.cpp:795
-#, fuzzy, kde-format
-#| msgid "Server not found."
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Server not Found"
-msgstr "Palvelinta ei löydetty."
+msgstr "Palvelinta ei löytynyt"
 
 #: rdp/rdpsession.cpp:796
 #, kde-format
 msgctxt "@label"
 msgid "Could not find the server."
-msgstr ""
+msgstr "Palvelinta ei löytynyt."
 
 #: rdp/rdpsession.cpp:799
-#, fuzzy, kde-format
-#| msgid "Connection Failure"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Refused"
-msgstr "Yhteysvirhe"
+msgstr "Yhteys torjuttiin"
 
 #: rdp/rdpsession.cpp:800
-#, fuzzy, kde-format
-#| msgid "VNC server closed connection."
+#, kde-format
 msgctxt "@label"
 msgid "The server refused the connection request."
-msgstr "VNC-palvelin sulki yhteyden."
+msgstr "Palvelin torjui yhteyspyynnön."
 
 #: rdp/rdpsession.cpp:804
-#, fuzzy, kde-format
-#| msgid "KRDC Konsole Connection"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Could not Connect"
-msgstr "KRDC-Konsole-istunto"
+msgstr "Ei voitu yhdistää"
 
 #: rdp/rdpsession.cpp:805
-#, fuzzy, kde-format
-#| msgid "An error has occurred during the connection to the NX server."
+#, kde-format
 msgctxt "@label"
 msgid "Could not connect to the server."
-msgstr "NX-palvelimeen yhdistettäessä sattui virhe."
+msgstr "Palvelimeen ei voitu yhdistää."
 
 #: rdp/rdpsession.cpp:810
-#, fuzzy, kde-format
-#| msgid "Connection Failure"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Closed"
-msgstr "Yhteysvirhe"
+msgstr "Yhteys suljettiin"
 
 #: rdp/rdpsession.cpp:811
 #, kde-format
 msgctxt "@label"
 msgid "The connection to the server was closed."
-msgstr ""
+msgstr "Palvelinyhteys suljettiin."
 
 #: rdp/rdpsession.cpp:814
-#, fuzzy, kde-format
-#| msgid "Connection Failure"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Failed"
-msgstr "Yhteysvirhe"
+msgstr "Yhdistäminen epäonnistui"
 
 #: rdp/rdpsession.cpp:815
 #, kde-format
 msgctxt "@label"
 msgid "An unknown error occurred"
-msgstr ""
+msgstr "Sattui tuntematon virhe"
 
 #: rdp/rdpviewfactory.cpp:22
 #, kde-format
