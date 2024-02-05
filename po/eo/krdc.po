@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-29 01:36+0000\n"
-"PO-Revision-Date: 2024-01-28 20:02+0100\n"
+"PO-Revision-Date: 2024-02-04 17:21+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -110,8 +110,8 @@ msgid ""
 "This option switches to fullscreen only if the connection resolution is the "
 "same as the current screen resolution"
 msgstr ""
-"Ĉi tiu opcio ŝanĝas al plena ekrano nur se la koneksa rezolucio estas la "
-"sama kiel la nuna ekrana rezolucio"
+"Ĉi tiu opcio ŝanĝas al plena ekrano nur se la koneksa distingivo estas la "
+"sama kiel la nuna ekrana distingivo"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_FullscreenOnConnect)
 #: config/general.ui:119
@@ -732,7 +732,7 @@ msgid ""
 "manually if you select Custom as desktop resolution above."
 msgstr ""
 "Ĉi tiu estas la larĝo de la fora labortablo. Vi nur povas ŝanĝi ĉi tiun "
-"valoron permane se vi elektas Propra kiel labortabla rezolucio supre."
+"valoron permane se vi elektas Propra kiel labortabla distingivo supre."
 
 #. i18n: ectx: property (text), widget (QLabel, heightLabel)
 #: rdp/rdppreferences.ui:105 vnc/vncpreferences.ui:168
@@ -749,7 +749,7 @@ msgid ""
 "manually if you select Custom as desktop resolution above."
 msgstr ""
 "Ĉi tiu estas la alteco de la fora labortablo. Vi nur povas ŝanĝi ĉi tiun "
-"valoron permane se vi elektas Propra kiel labortabla rezolucio supre."
+"valoron permane se vi elektas Propra kiel labortabla distingivo supre."
 
 #. i18n: ectx: property (text), widget (QLabel, accelerationLabel)
 #: rdp/rdppreferences.ui:136
@@ -761,13 +761,13 @@ msgstr "Akcelo:"
 #: rdp/rdppreferences.ui:159
 #, kde-format
 msgid "Color &depth:"
-msgstr "Koloro & profundo:"
+msgstr "Kolora profun&deco:"
 
 #. i18n: ectx: property (text), widget (QLabel, resolutionLabel)
 #: rdp/rdppreferences.ui:172
 #, kde-format
 msgid "Resolution"
-msgstr "Rezolucio"
+msgstr "Distingivo"
 
 #. i18n: ectx: property (text), widget (QLabel, layoutLabel)
 #: rdp/rdppreferences.ui:182
@@ -801,8 +801,8 @@ msgid ""
 "Here you can specify the resolution of the remote desktop. This resolution "
 "determines the size of the desktop that will be presented to you."
 msgstr ""
-"Ĉi tie vi povas specifi la rezolucion de la fora labortablo. Ĉi tiu "
-"rezolucio determinas la grandecon de la labortablo kiu estos prezentita al "
+"Ĉi tie vi povas specifi la distingivon de la fora labortablo. Ĉi tiu "
+"distingivo determinas la grandecon de la labortablo kiu estos prezentita al "
 "vi."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
@@ -834,14 +834,14 @@ msgstr "Nuna Fenestra Grandeco"
 #: rdp/rdppreferences.ui:265 vnc/vncpreferences.ui:118
 #, kde-format
 msgid "Current Screen Resolution"
-msgstr "Nuna Ekran Rezolucio"
+msgstr "Nuna Ekran Distingivo"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
 #: rdp/rdppreferences.ui:270 vnc/vncpreferences.ui:123
 #, kde-format
 msgid "Custom Resolution (...)"
-msgstr "Propra Rezolucio (...)"
+msgstr "Propra Distingivo (...)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
 #: rdp/rdppreferences.ui:296
@@ -1097,7 +1097,7 @@ msgstr "Turka (tr)"
 #: rdp/rdppreferences.ui:527
 #, kde-format
 msgid "Scale window contents to match resolution"
-msgstr "Skali fenestroenhavon por kongrui kun rezolucio"
+msgstr "Skali fenestroenhavon por kongrui kun distingivo"
 
 #. i18n: ectx: property (text), widget (QLabel, soundLabel)
 #: rdp/rdppreferences.ui:553
