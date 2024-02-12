@@ -1,25 +1,25 @@
 # translation of krdc.po to
-# Version: $Revision: 1671523 $
+# Version: $Revision: 1672995 $
 # Copyright (C) 2002, 2003, 2004, 2005, 2006, 2008, 2009 Free Software Foundation, Inc.
 #
 # Krzysztof Lichota <lichota@mimuw.edu.pl>, 2002, 2005, 2006.
 # Michal Rudolf <mrudolf@kdewebdev.org>, 2003, 2004.
 # Marta Rybczyńska <kde-i18n@rybczynska.net>, 2008, 2009, 2010, 2013.
 # Mirek Sabiniewicz <m.sabiniewicz@gmail.com>, 2010.
-# Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>, 2012, 2013, 2014, 2015, 2016, 2018, 2019, 2020, 2021.
+# SPDX-FileCopyrightText: 2012, 2013, 2014, 2015, 2016, 2018, 2019, 2020, 2021, 2024 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-29 01:36+0000\n"
-"PO-Revision-Date: 2021-12-30 13:26+0100\n"
+"PO-Revision-Date: 2024-02-11 11:48+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.03.70\n"
+"X-Generator: Lokalize 23.08.4\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 
@@ -700,7 +700,7 @@ msgstr "Współdziel media:"
 #: rdp/rdppreferences.ui:40 rdp/rdppreferences.ui:291
 #, kde-format
 msgid "Use Best Available"
-msgstr ""
+msgstr "Użyj najlepszej dostępnej"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
 #: rdp/rdppreferences.ui:45
@@ -764,7 +764,7 @@ msgstr ""
 #: rdp/rdppreferences.ui:136
 #, kde-format
 msgid "Acceleration:"
-msgstr ""
+msgstr "Przyspieszenie:"
 
 #. i18n: ectx: property (text), widget (QLabel, colorDepthLabel)
 #: rdp/rdppreferences.ui:159
@@ -815,30 +815,27 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:245
-#, fuzzy, kde-format
-#| msgid "Small (800x600)"
+#, kde-format
 msgid "Small (1280x720)"
-msgstr "Niska (800x600)"
+msgstr "Mała (1280x720)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:250
 #, kde-format
 msgid "Medium (1600x900)"
-msgstr ""
+msgstr "Średnia (1600x900)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:255
-#, fuzzy, kde-format
-#| msgid "Large (1280x1024)"
+#, kde-format
 msgid "Large (1920x1080)"
-msgstr "Wysoka (1280x1024)"
+msgstr "Duża (1920x1080)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:260
-#, fuzzy, kde-format
-#| msgid "Current KRDC Size"
+#, kde-format
 msgid "Current Window Size"
-msgstr "Obecny rozmiar KRDC"
+msgstr "Obecny rozmiar okna"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
@@ -858,20 +855,19 @@ msgstr "Własna rozdzielczość (...)"
 #: rdp/rdppreferences.ui:296
 #, kde-format
 msgid "Force H.264"
-msgstr ""
+msgstr "Wymuś H.264"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
 #: rdp/rdppreferences.ui:301
-#, fuzzy, kde-format
-#| msgid "RemoteFX:"
+#, kde-format
 msgid "Force RemoteFX"
-msgstr "RemoteFX:"
+msgstr "Wymuś RemoteFX"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
 #: rdp/rdppreferences.ui:306
 #, kde-format
 msgid "Disable All Acceleration"
-msgstr ""
+msgstr "Wyłącz jakiekolwiek przyspieszenie"
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:326
@@ -1109,7 +1105,7 @@ msgstr "Turecki (tr)"
 #: rdp/rdppreferences.ui:527
 #, kde-format
 msgid "Scale window contents to match resolution"
-msgstr ""
+msgstr "Przeskaluj treść okna, aby zmieścić się w rozdzielczości"
 
 #. i18n: ectx: property (text), widget (QLabel, soundLabel)
 #: rdp/rdppreferences.ui:553
@@ -1122,7 +1118,7 @@ msgstr "Dźwięk:"
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Logon Error"
-msgstr ""
+msgstr "Błąd logowania"
 
 #: rdp/rdpsession.cpp:190
 #, kde-format
@@ -1134,50 +1130,53 @@ msgid ""
 "Issuer: %5\n"
 "Fingerprint: %6\n"
 msgstr ""
+"Gospodarz: %1:%2\n"
+"Nazwa powszechna: %3\n"
+"Temat: %4\n"
+"Wydawca: %5\n"
+"Odcisk certyfikatu: %6\n"
 
 #: rdp/rdpsession.cpp:607
-#, fuzzy, kde-format
-#| msgid "Access to the system requires a password."
+#, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a password."
-msgstr "Dostęp do tego komputera wymaga podania hasła."
+msgstr "Dostęp do tego systemu wymaga wpisania hasła."
 
 #: rdp/rdpsession.cpp:610
-#, fuzzy, kde-format
-#| msgid "Access to the system requires a password."
+#, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
-msgstr "Dostęp do tego komputera wymaga podania hasła."
+msgstr "Dostęp do tego systemu wymaga wpisania nazwy użytkownika i jego hasła."
 
 #: rdp/rdpsession.cpp:632
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
-msgstr ""
+msgstr "Certyfikat dla tego systemu jest nieznany. Czy kontynuować?"
 
 #: rdp/rdpsession.cpp:633
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
-msgstr ""
+msgstr "Sprawdź certyfikat"
 
 #: rdp/rdpsession.cpp:638 rdp/rdpsession.cpp:661
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
-msgstr ""
+msgstr "Zapamiętaj ten certyfikat"
 
 #: rdp/rdpsession.cpp:655
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
-msgstr ""
+msgstr "Certyfikat dla tego systemu uległ zmianie. Czy kontynuować?"
 
 #: rdp/rdpsession.cpp:656
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
-msgstr ""
+msgstr "Certyfikaty uległ zmianie"
 
 #: rdp/rdpsession.cpp:659
 #, kde-format
@@ -1188,13 +1187,16 @@ msgid ""
 "New Certificate:\n"
 "%2"
 msgstr ""
+"Poprzedni certyfikat:\n"
+"%1\n"
+"Nowy certyfikat:\n"
+"%2"
 
 #: rdp/rdpsession.cpp:773
-#, fuzzy, kde-format
-#| msgid "Connection Failure"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Login Failure"
-msgstr "Błąd przy próbie połączenia"
+msgstr "Nie udało się zalogować"
 
 #: rdp/rdpsession.cpp:774
 #, kde-format
@@ -1203,12 +1205,14 @@ msgid ""
 "Unable to login with the provided credentials. Please double check the user "
 "and password."
 msgstr ""
+"Nie można się zalogować na wpisane dane dostępowe. Sprawdź dokładnie wpisaną "
+"nazwę użytkownika i jego hasło."
 
 #: rdp/rdpsession.cpp:780
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Account Problems"
-msgstr ""
+msgstr "Kłopoty z kontem"
 
 #: rdp/rdpsession.cpp:781
 #, kde-format
@@ -1217,12 +1221,14 @@ msgid ""
 "The provided account is not allowed to log in to this machine. Please "
 "contact your system administrator."
 msgstr ""
+"Danemu kontu nie wolno logować się na ten komputer. Napisz do administratora "
+"swojego systemu."
 
 #: rdp/rdpsession.cpp:786
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Password Problems"
-msgstr ""
+msgstr "Kłopoty z hasłem"
 
 #: rdp/rdpsession.cpp:787
 #, kde-format
@@ -1231,87 +1237,80 @@ msgid ""
 "Unable to login with the provided password. Please contact your system "
 "administrator to change it."
 msgstr ""
+"Nie można się zalogować na wpisane hasło. Napisz do administratora swojego "
+"systemu, aby to zmienić."
 
 #: rdp/rdpsession.cpp:790
-#, fuzzy, kde-format
-#| msgid "Connection"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Lost"
-msgstr "Połączenie"
+msgstr "Połączenie utracone"
 
 #: rdp/rdpsession.cpp:791
-#, fuzzy, kde-format
-#| msgid "An error has occurred during the connection to the NX server."
+#, kde-format
 msgctxt "@label"
 msgid "Lost connection to the server."
-msgstr "Wystąpił błąd podczas połączenia z serwerem NX."
+msgstr "Utracono połączenie z serwerem."
 
 #: rdp/rdpsession.cpp:795
-#, fuzzy, kde-format
-#| msgid "Server not found."
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Server not Found"
-msgstr "Nie znaleziono serwera."
+msgstr "Nie znaleziono serwera"
 
 #: rdp/rdpsession.cpp:796
 #, kde-format
 msgctxt "@label"
 msgid "Could not find the server."
-msgstr ""
+msgstr "Nie można znaleźć serwera."
 
 #: rdp/rdpsession.cpp:799
-#, fuzzy, kde-format
-#| msgid "Connection Failure"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Refused"
-msgstr "Błąd przy próbie połączenia"
+msgstr "Odmówiono połączenia."
 
 #: rdp/rdpsession.cpp:800
-#, fuzzy, kde-format
-#| msgid "VNC server closed connection."
+#, kde-format
 msgctxt "@label"
 msgid "The server refused the connection request."
-msgstr "Serwer VNC zakończył połączenie."
+msgstr "Serwer odmówił prośby o połączenie."
 
 #: rdp/rdpsession.cpp:804
-#, fuzzy, kde-format
-#| msgid "KRDC Konsole Connection"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Could not Connect"
-msgstr "Połączenie Konsoli KRDC"
+msgstr "Nie udało się połączyć"
 
 #: rdp/rdpsession.cpp:805
-#, fuzzy, kde-format
-#| msgid "An error has occurred during the connection to the NX server."
+#, kde-format
 msgctxt "@label"
 msgid "Could not connect to the server."
-msgstr "Wystąpił błąd podczas połączenia z serwerem NX."
+msgstr "Nie można połączyć z serwerem."
 
 #: rdp/rdpsession.cpp:810
-#, fuzzy, kde-format
-#| msgid "Connection Failure"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Closed"
-msgstr "Błąd przy próbie połączenia"
+msgstr "Połączenia zakończone"
 
 #: rdp/rdpsession.cpp:811
 #, kde-format
 msgctxt "@label"
 msgid "The connection to the server was closed."
-msgstr ""
+msgstr "Zamknięto połączenie do serwera."
 
 #: rdp/rdpsession.cpp:814
-#, fuzzy, kde-format
-#| msgid "Connection Failure"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Failed"
-msgstr "Błąd przy próbie połączenia"
+msgstr "Połączenie zawiodło"
 
 #: rdp/rdpsession.cpp:815
 #, kde-format
 msgctxt "@label"
 msgid "An unknown error occurred"
-msgstr ""
+msgstr "Wystąpił nieznany błąd"
 
 #: rdp/rdpviewfactory.cpp:22
 #, kde-format
