@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-04 00:41+0000\n"
+"POT-Creation-Date: 2024-02-16 01:40+0000\n"
 "PO-Revision-Date: 2012-06-08 14:52+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer\n"
@@ -27,7 +27,7 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "khoemsokhem@khmeros.info,​​evannak@khmeros.info,piseth_dv@khmeros.info"
 
-#: bookmarkmanager.cpp:44
+#: bookmarkmanager.cpp:43
 #, kde-format
 msgid "History"
 msgstr "ប្រវត្តិ​"
@@ -192,15 +192,15 @@ msgstr "កំណត់​រចនា​សម្ព័ន្ធ..."
 msgid "Remove"
 msgstr "យកចេញ"
 
-#: config/hostpreferenceslist.cpp:100 mainwindow.cpp:678
-#, kde-format
-msgid "The selected host cannot be handled."
-msgstr "ម៉ាស៊ីន​ដែល​បាន​ជ្រើស​មិន​អាច​ត្រូវ​បាន​គ្រប់គ្រង​ទេ ។"
-
-#: config/hostpreferenceslist.cpp:101 mainwindow.cpp:288 mainwindow.cpp:679
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:283 mainwindow.cpp:678
 #, kde-format
 msgid "Unusable URL"
 msgstr "URL មិន​អាច​ប្រើ​បាន"
+
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:678
+#, kde-format
+msgid "The selected host cannot be handled."
+msgstr "ម៉ាស៊ីន​ដែល​បាន​ជ្រើស​មិន​អាច​ត្រូវ​បាន​គ្រប់គ្រង​ទេ ។"
 
 #: config/preferencesdialog.cpp:24
 #, kde-format
@@ -213,23 +213,23 @@ msgstr "ទូទៅ"
 msgid "General Configuration"
 msgstr "កំណត់​រចនា​សម្ព័ន្ធ​ទូទៅ"
 
-#: config/preferencesdialog.cpp:29
+#: config/preferencesdialog.cpp:28
 #, kde-format
 msgid "Hosts"
 msgstr "ម៉ាស៊ីន"
 
-#: config/preferencesdialog.cpp:29 core/hostpreferences.cpp:176
-#: core/hostpreferences.cpp:180
+#: config/preferencesdialog.cpp:28 core/hostpreferences.cpp:175
+#: core/hostpreferences.cpp:179
 #, kde-format
 msgid "Host Configuration"
 msgstr "ការ​កំណត់​រចនា​សម្ព័ន្ធ​ម៉ាស៊ីន"
 
-#: config/preferencesdialog.cpp:34 config/preferencesdialog.cpp:35
+#: config/preferencesdialog.cpp:33 config/preferencesdialog.cpp:34
 #, kde-format
 msgid "Plugins"
 msgstr "កម្មវិធី​ជំនួយ"
 
-#: config/preferencesdialog.cpp:35
+#: config/preferencesdialog.cpp:34
 #, kde-format
 msgid "Plugin Configuration"
 msgstr "ការ​កំណត់​រចនា​សម្ព័ន្ធ​កម្មវិធី​ជំនួយ"
@@ -269,18 +269,18 @@ msgid "A year ago"
 msgid_plural "%1 years ago"
 msgstr[0] "%1 ឆ្នាំ​កន្លង​ទៅ"
 
-#: core/hostpreferences.cpp:183
+#: core/hostpreferences.cpp:182
 #, kde-format
 msgid ""
 "Note that settings might only apply when you connect next time to this host."
 msgstr "ចំណាំថា ការ​កំណត់​អាច​អនុវត្ត​តែ​នៅ​ពេល​ដែល​អ្នក​តភ្ជាប់​ពេលក្រោយ​ទៅកាន់​ម៉ាស៊ីន​នេះ​ប៉ុណ្ណោះ ។"
 
-#: core/hostpreferences.cpp:199
+#: core/hostpreferences.cpp:198
 #, kde-format
 msgid "Show this dialog again for this host"
 msgstr "បង្ហាញ​ប្រអប់​នេះ​ម្តង​ទៀត​សម្រាប់​ម៉ាស៊ីន​នេះ"
 
-#: core/hostpreferences.cpp:203
+#: core/hostpreferences.cpp:202
 #, kde-format
 msgid "Remember password (KWallet)"
 msgstr "ចង់ចាំ​ពាក្យ​សម្ងាត់ (KWallet)"
@@ -303,17 +303,17 @@ msgstr "សម័យ"
 msgid "Remote View Toolbar"
 msgstr "របារ​ឧបករណ៍​មើល​ពី​ចម្ងាយ"
 
-#: main.cpp:61
+#: main.cpp:60
 #, kde-format
 msgid "KRDC"
 msgstr "KRDC"
 
-#: main.cpp:62 systemtrayicon.cpp:24
+#: main.cpp:60 systemtrayicon.cpp:24
 #, kde-format
 msgid "KDE Remote Desktop Client"
 msgstr "ម៉ាស៊ីន​ភ្ញៀវ​​ផ្ទៃតុ​ពី​ចម្ងាយ​របស់ KDE"
 
-#: main.cpp:64
+#: main.cpp:63
 #, fuzzy, kde-format
 #| msgid ""
 #| "(c) 2007-2012, Urs Wolfer\n"
@@ -343,62 +343,62 @@ msgstr ""
 "រក្សា​សិទ្ធិ​ឆ្នាំ ១៩៩៩-២០០៣ ដោយ Matthew Chapman\n"
 "រក្សាសិទ្ធិ​ឆ្នាំ ២០០៩ ដោយ Collabora Ltd"
 
-#: main.cpp:73
+#: main.cpp:72
 #, kde-format
 msgid "Urs Wolfer"
 msgstr "Urs Wolfer"
 
-#: main.cpp:73
+#: main.cpp:72
 #, kde-format
 msgid "Developer, Maintainer"
 msgstr "អ្នក​អភិវឌ្ឍន៍ អ្នក​ថែទាំ"
 
-#: main.cpp:74
+#: main.cpp:73
 #, kde-format
 msgid "Tony Murray"
 msgstr "Tony Murray"
 
-#: main.cpp:74
+#: main.cpp:73
 #, kde-format
 msgid "Developer"
 msgstr "អ្នក​អភិវឌ្ឍន៍​"
 
-#: main.cpp:75
+#: main.cpp:74
 #, kde-format
 msgid "Tim Jansen"
 msgstr "Tim Jansen"
 
-#: main.cpp:75
+#: main.cpp:74
 #, kde-format
 msgid "Former Developer"
 msgstr "អ្នក​អភិវឌ្ឍន៍​ចាស់"
 
-#: main.cpp:76
+#: main.cpp:75
 #, kde-format
 msgid "Arend van Beelen jr."
 msgstr "Arend van Beelen jr."
 
-#: main.cpp:76
+#: main.cpp:75
 #, kde-format
 msgid "Initial RDP backend"
 msgstr "ចាប់ផ្ដើម​កម្មវិធី RDP ខាងក្រោយ"
 
-#: main.cpp:77
+#: main.cpp:76
 #, kde-format
 msgid "Brad Hards"
 msgstr "Brad Hards"
 
-#: main.cpp:77
+#: main.cpp:76
 #, kde-format
 msgid "Google Summer of Code 2007 KRDC project mentor"
 msgstr "អ្នក​ណែនាំ​គម្រោង KRDC Google Summer of Code 2007"
 
-#: main.cpp:79
+#: main.cpp:77
 #, kde-format
 msgid "LibVNCServer / LibVNCClient developers"
 msgstr "អ្នក​អភិវឌ្ឍន៍ LibVNCServer / LibVNCClient"
 
-#: main.cpp:79
+#: main.cpp:78
 #, kde-format
 msgid "VNC client library"
 msgstr "បណ្ណាល័យ​កម្មវិធី VNC"
@@ -424,33 +424,33 @@ msgstr "ចាប់ផ្ដើម KRDC ជាមួយ URL ដែល​ផ្�
 msgid "URLs to connect after startup"
 msgstr "URL ដើម្បី​តភ្ជាប់ បន្ទាប់​ពី​ពេល​ចាប់ផ្ដើម"
 
-#: mainwindow.cpp:125
+#: mainwindow.cpp:124
 #, kde-format
 msgid "KDE Remote Desktop Client started"
 msgstr "បាន​ចាប់ផ្ដើម​កម្មវិធី​មើល​ផ្ទៃតុ​ពី​ចម្ងាយ​របស់ KDE"
 
-#: mainwindow.cpp:130 mainwindow.cpp:143 mainwindow.cpp:1093
-#: mainwindow.cpp:1190
+#: mainwindow.cpp:129 mainwindow.cpp:142 mainwindow.cpp:1083
+#: mainwindow.cpp:1178
 #, kde-format
 msgid "New Connection"
 msgstr "ការ​​​តភ្ជាប់​​ថ្មី"
 
-#: mainwindow.cpp:149
+#: mainwindow.cpp:148
 #, kde-format
 msgid "Copy Screenshot to Clipboard"
 msgstr "ចម្លង​រូបថត​អេក្រង់​ទៅ​ក្ដារ​តម្បៀត​ខ្ទាស់"
 
-#: mainwindow.cpp:150
+#: mainwindow.cpp:149
 #, kde-format
 msgid "Screenshot"
 msgstr "រូបថតអេក្រង់"
 
-#: mainwindow.cpp:155 mainwindow.cpp:502
+#: mainwindow.cpp:155 mainwindow.cpp:501
 #, kde-format
 msgid "Switch to Full Screen Mode"
 msgstr "ប្ដូរ​ទៅ​របៀប​ពេញ​អេក្រង់"
 
-#: mainwindow.cpp:156 mainwindow.cpp:503
+#: mainwindow.cpp:156 mainwindow.cpp:502
 #, kde-format
 msgid "Full Screen"
 msgstr "អេក្រង់​ពេញ"
@@ -505,7 +505,7 @@ msgstr ""
 msgid "Bookmarks"
 msgstr "ចំណាំ"
 
-#: mainwindow.cpp:264
+#: mainwindow.cpp:262
 #, kde-format
 msgid ""
 "The entered address does not have the required form.\n"
@@ -514,163 +514,163 @@ msgstr ""
 "អាសយដ្ឋាន​ដែល​បាន​បញ្ចូល​មិន​មាន​សំណុំ​បែបបទ​ដែល​ទាមទារ​ទេ ។\n"
 " វាក្យសម្ព័ន្ធ ៖ [username@]host[:port]"
 
-#: mainwindow.cpp:265
+#: mainwindow.cpp:262
 #, kde-format
 msgid "Malformed URL"
 msgstr "URL ដែល​មាន​ទម្រង់​មិន​ត្រឹមត្រូវ"
 
-#: mainwindow.cpp:287
+#: mainwindow.cpp:283
 #, kde-format
 msgid "The entered address cannot be handled."
 msgstr "អាសយដ្ឋាន​ដែល​បញ្ចូល​មិន​អាច​ត្រូវ​បាន​ដោះស្រាយ​​ទេ ។"
 
-#: mainwindow.cpp:419
+#: mainwindow.cpp:418
 #, kde-format
 msgid "Connecting to %1"
 msgstr "តភ្ជាប់​ទៅ %1"
 
-#: mainwindow.cpp:423
+#: mainwindow.cpp:422
 #, kde-format
 msgid "Authenticating at %1"
 msgstr "កំពុង​ផ្ទៀងផ្ទាត់​ភាព​ត្រឹមត្រូវ​នៅ %1..."
 
-#: mainwindow.cpp:427
+#: mainwindow.cpp:426
 #, kde-format
 msgid "Preparing connection to %1"
 msgstr "កំពុង​រៀបចំ​ការ​តភ្ជាប់​ទៅ %1"
 
-#: mainwindow.cpp:431
+#: mainwindow.cpp:430
 #, kde-format
 msgid "Connected to %1"
 msgstr "បាន​តភ្ជាប់​ទៅ %1"
 
-#: mainwindow.cpp:513
+#: mainwindow.cpp:512
 #, kde-format
 msgctxt ""
 "window title when in full screen mode (for example displayed in tasklist)"
 msgid "KDE Remote Desktop Client (Full Screen)"
 msgstr "កម្មវិធី​មើល​ផ្ទៃតុ​ពី​ចម្ងាយ​របស់ KDE (ពេញ​អេក្រង់)"
 
-#: mainwindow.cpp:546
+#: mainwindow.cpp:545
 #, kde-format
 msgid "Switch to Window Mode"
 msgstr "ប្ដូរ​ទៅ​របៀប​បង្អួច"
 
-#: mainwindow.cpp:547
+#: mainwindow.cpp:546
 #, kde-format
 msgid "Window Mode"
 msgstr "ប្ដូរ​ទៅ​របៀប​បង្អួច"
 
-#: mainwindow.cpp:699
+#: mainwindow.cpp:697
 #, kde-format
 msgid "Connect"
 msgstr "តភ្ជាប់​"
 
-#: mainwindow.cpp:700
+#: mainwindow.cpp:698
 #, kde-format
 msgid "Rename"
 msgstr "ប្ដូរ​ឈ្មោះ"
 
-#: mainwindow.cpp:701
+#: mainwindow.cpp:699
 #, kde-format
 msgid "Settings"
 msgstr "ការ​កំណត់​"
 
-#: mainwindow.cpp:702
+#: mainwindow.cpp:700
 #, kde-format
 msgid "Delete"
 msgstr "លុប"
 
-#: mainwindow.cpp:705 remotedesktopsmodel.cpp:107
+#: mainwindow.cpp:703 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "ចំណាំ"
 
-#: mainwindow.cpp:706 remotedesktopsmodel.cpp:109
+#: mainwindow.cpp:703 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "ប្រវត្តិ​"
 
-#: mainwindow.cpp:718
+#: mainwindow.cpp:715
 #, kde-format
 msgid "Rename %1"
 msgstr "ប្ដូរ​ឈ្មោះ %1"
 
-#: mainwindow.cpp:718
+#: mainwindow.cpp:715
 #, kde-format
 msgid "Rename %1 to"
 msgstr "ប្ដូរ​ឈ្មោះ %1 ទៅ​ជា"
 
-#: mainwindow.cpp:726
+#: mainwindow.cpp:722
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "តើ​អ្នក​ប្រាកដ​ជា​ចង់​លុប %1 ឬ ?"
 
-#: mainwindow.cpp:726
+#: mainwindow.cpp:722
 #, kde-format
 msgid "Delete %1"
 msgstr "លុប %1"
 
-#: mainwindow.cpp:748
+#: mainwindow.cpp:746
 #, kde-format
 msgid "Add Bookmark"
 msgstr "បន្ថែម​ចំណាំ"
 
-#: mainwindow.cpp:749
+#: mainwindow.cpp:747
 #, kde-format
 msgid "Close Tab"
 msgstr "បិទផ្ទាំង"
 
-#: mainwindow.cpp:853
+#: mainwindow.cpp:851
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr "បង្រួម​​បង្អួច​​ពេញ​​អេក្រង់​អប្បបរមា"
 
-#: mainwindow.cpp:869
+#: mainwindow.cpp:867
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "របារ​ឧបករណ៍​ស្អិត"
 
-#: mainwindow.cpp:987
+#: mainwindow.cpp:976
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr "តើ​អ្នក​ពិត​ជា​ចង់​បិទ​កម្មវិធី​មើល​ផ្ទៃតុ​ពី​ចម្ងាយ​របស់ KDE ឬ ?"
 
-#: mainwindow.cpp:988
+#: mainwindow.cpp:977
 #, kde-format
 msgid "Confirm Quit"
 msgstr "អះអាង​ការ​ចេញ"
 
-#: mainwindow.cpp:1116
+#: mainwindow.cpp:1106
 #, kde-format
 msgid "Connect to:"
 msgstr "​តភ្ជាប់​ទៅ ៖​"
 
-#: mainwindow.cpp:1120
+#: mainwindow.cpp:1110
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr "វាយ​បញ្ចូល​ទីនេះ ដើម្បី​តភ្ជាប់​ទៅកាន់​អាសយដ្ឋាន និង​ត្រង​បញ្ជី ។"
 
-#: mainwindow.cpp:1129
+#: mainwindow.cpp:1119
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
 "methods."
 msgstr "វាយ​ឈ្មោះ IP ឬ DNS នៅ​ទីនេះ ។ ជម្រះ​បន្ទាត់​ ដើម្បី​ទទួល​បាន​បញ្ជី​វិធីសាស្ត្រ​តភ្ជាប់​ ។"
 
-#: mainwindow.cpp:1132
+#: mainwindow.cpp:1122
 #, kde-format
 msgid "Goto Address"
 msgstr "ទៅ​កាន់​អាសយដ្ឋាន"
 
-#: mainwindow.cpp:1226
+#: mainwindow.cpp:1214
 #, kde-format
 msgid "Remote Desktops"
 msgstr "​ផ្ទៃតុ​ពី​ចម្ងាយ"
 
-#: mainwindow.cpp:1257
+#: mainwindow.cpp:1243
 #, kde-format
 msgid "Filter"
 msgstr "តម្រង"
@@ -1104,13 +1104,55 @@ msgctxt "label for soundsettings in preferences dialog"
 msgid "Sound:"
 msgstr "សំឡេង ៖"
 
-#: rdp/rdpsession.cpp:142
+#. i18n: ectx: property (text), widget (QLabel, TlsSecLevelLabel)
+#: rdp/rdppreferences.ui:566
+#, kde-format
+msgid "TLS security level:"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
+#: rdp/rdppreferences.ui:592
+#, kde-format
+msgid "any"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
+#: rdp/rdppreferences.ui:597
+#, kde-format
+msgid "80 bit"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
+#: rdp/rdppreferences.ui:602
+#, kde-format
+msgid "112 bit"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
+#: rdp/rdppreferences.ui:607
+#, kde-format
+msgid "128 bit"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
+#: rdp/rdppreferences.ui:612
+#, kde-format
+msgid "192 bit"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
+#: rdp/rdppreferences.ui:617
+#, kde-format
+msgid "256 bit"
+msgstr ""
+
+#: rdp/rdpsession.cpp:157
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Logon Error"
 msgstr ""
 
-#: rdp/rdpsession.cpp:183
+#: rdp/rdpsession.cpp:204
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1121,51 +1163,51 @@ msgid ""
 "Fingerprint: %6\n"
 msgstr ""
 
-#: rdp/rdpsession.cpp:592
+#: rdp/rdpsession.cpp:642
 #, fuzzy, kde-format
 #| msgid "Access to the system requires a password."
 msgctxt "@label"
 msgid "Access to this system requires a password."
 msgstr "ចូល​ដំណើរ​ការ​ប្រព័ន្ធ​ទាមទារ​ពាក្យ​សម្ងាត់ ។"
 
-#: rdp/rdpsession.cpp:595
+#: rdp/rdpsession.cpp:645
 #, fuzzy, kde-format
 #| msgid "Access to the system requires a password."
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
 msgstr "ចូល​ដំណើរ​ការ​ប្រព័ន្ធ​ទាមទារ​ពាក្យ​សម្ងាត់ ។"
 
-#: rdp/rdpsession.cpp:617
+#: rdp/rdpsession.cpp:667
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr ""
 
-#: rdp/rdpsession.cpp:618
+#: rdp/rdpsession.cpp:668
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
 msgstr ""
 
-#: rdp/rdpsession.cpp:623 rdp/rdpsession.cpp:646
+#: rdp/rdpsession.cpp:673 rdp/rdpsession.cpp:696
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
 msgstr ""
 
-#: rdp/rdpsession.cpp:640
+#: rdp/rdpsession.cpp:690
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
 msgstr ""
 
-#: rdp/rdpsession.cpp:641
+#: rdp/rdpsession.cpp:691
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
 msgstr ""
 
-#: rdp/rdpsession.cpp:644
+#: rdp/rdpsession.cpp:694
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1175,14 +1217,14 @@ msgid ""
 "%2"
 msgstr ""
 
-#: rdp/rdpsession.cpp:758
+#: rdp/rdpsession.cpp:814
 #, fuzzy, kde-format
 #| msgid "Connection Failure"
 msgctxt "@title:dialog"
 msgid "Login Failure"
 msgstr "ការ​តភ្ជាប់​ទទួល​បរាជ័យ​"
 
-#: rdp/rdpsession.cpp:759
+#: rdp/rdpsession.cpp:815
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1190,13 +1232,13 @@ msgid ""
 "and password."
 msgstr ""
 
-#: rdp/rdpsession.cpp:765
+#: rdp/rdpsession.cpp:821
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Account Problems"
 msgstr ""
 
-#: rdp/rdpsession.cpp:766
+#: rdp/rdpsession.cpp:822
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1204,13 +1246,13 @@ msgid ""
 "contact your system administrator."
 msgstr ""
 
-#: rdp/rdpsession.cpp:771
+#: rdp/rdpsession.cpp:827
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Password Problems"
 msgstr ""
 
-#: rdp/rdpsession.cpp:772
+#: rdp/rdpsession.cpp:828
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1218,82 +1260,82 @@ msgid ""
 "administrator to change it."
 msgstr ""
 
-#: rdp/rdpsession.cpp:775
+#: rdp/rdpsession.cpp:831
 #, fuzzy, kde-format
 #| msgid "Connection"
 msgctxt "@title:dialog"
 msgid "Connection Lost"
 msgstr "ការ​តភ្ជាប់​"
 
-#: rdp/rdpsession.cpp:776
+#: rdp/rdpsession.cpp:832
 #, fuzzy, kde-format
 #| msgid "An error has occurred during the connection to the NX server."
 msgctxt "@label"
 msgid "Lost connection to the server."
 msgstr "កំហុស​បានកើត​ឡើង​កំឡុង​ពេល​តភ្ជាប់​ទៅ​កាន់​ម៉ាស៊ីនបម្រើ NX ។"
 
-#: rdp/rdpsession.cpp:780
+#: rdp/rdpsession.cpp:836
 #, fuzzy, kde-format
 #| msgid "Server not found."
 msgctxt "@title:dialog"
 msgid "Server not Found"
 msgstr "រក​មិន​ឃើញ​ម៉ាស៊ីន​បម្រើ ។"
 
-#: rdp/rdpsession.cpp:781
+#: rdp/rdpsession.cpp:837
 #, kde-format
 msgctxt "@label"
 msgid "Could not find the server."
 msgstr ""
 
-#: rdp/rdpsession.cpp:784
+#: rdp/rdpsession.cpp:840
 #, fuzzy, kde-format
 #| msgid "Connection Failure"
 msgctxt "@title:dialog"
 msgid "Connection Refused"
 msgstr "ការ​តភ្ជាប់​ទទួល​បរាជ័យ​"
 
-#: rdp/rdpsession.cpp:785
+#: rdp/rdpsession.cpp:841
 #, fuzzy, kde-format
 #| msgid "VNC server closed connection."
 msgctxt "@label"
 msgid "The server refused the connection request."
 msgstr "ម៉ាស៊ីន​បម្រើ VNC បិទ​ការ​តភ្ជាប់ ។"
 
-#: rdp/rdpsession.cpp:789
+#: rdp/rdpsession.cpp:845
 #, fuzzy, kde-format
 #| msgid "KRDC Konsole Connection"
 msgctxt "@title:dialog"
 msgid "Could not Connect"
 msgstr "ការ​តភ្ជាប់​កុងសូល KRDC"
 
-#: rdp/rdpsession.cpp:790
+#: rdp/rdpsession.cpp:846
 #, fuzzy, kde-format
 #| msgid "An error has occurred during the connection to the NX server."
 msgctxt "@label"
 msgid "Could not connect to the server."
 msgstr "កំហុស​បានកើត​ឡើង​កំឡុង​ពេល​តភ្ជាប់​ទៅ​កាន់​ម៉ាស៊ីនបម្រើ NX ។"
 
-#: rdp/rdpsession.cpp:795
+#: rdp/rdpsession.cpp:851
 #, fuzzy, kde-format
 #| msgid "Connection Failure"
 msgctxt "@title:dialog"
 msgid "Connection Closed"
 msgstr "ការ​តភ្ជាប់​ទទួល​បរាជ័យ​"
 
-#: rdp/rdpsession.cpp:796
+#: rdp/rdpsession.cpp:852
 #, kde-format
 msgctxt "@label"
 msgid "The connection to the server was closed."
 msgstr ""
 
-#: rdp/rdpsession.cpp:799
+#: rdp/rdpsession.cpp:855
 #, fuzzy, kde-format
 #| msgid "Connection Failure"
 msgctxt "@title:dialog"
 msgid "Connection Failed"
 msgstr "ការ​តភ្ជាប់​ទទួល​បរាជ័យ​"
 
-#: rdp/rdpsession.cpp:800
+#: rdp/rdpsession.cpp:856
 #, kde-format
 msgctxt "@label"
 msgid "An unknown error occurred"
@@ -1309,7 +1351,7 @@ msgstr "តភ្ជាប់​ទៅ​ផ្ទៃតុ​ពី​ចម្
 msgid "New RDP Connection..."
 msgstr "ការ​តភ្ជាប់ RDP ថ្មី..."
 
-#: rdp/rdpviewfactory.cpp:61
+#: rdp/rdpviewfactory.cpp:62
 #, kde-format
 msgid ""
 "<html>Enter the address here. Port is optional.<br /><i>Example: "
@@ -1318,25 +1360,25 @@ msgstr ""
 "<html>បញ្ចូល​អាសយដ្ឋាន​នៅ​ទីនេះ ។ ច្រក​គឺស្រេចចិត្ត ។<br /><i>ឧទាហរណ៍ ៖ rdpserver:3389 "
 "(ម៉ាស៊ីន ៖ ច្រក)</i></html>"
 
-#: remotedesktopsmodel.cpp:111
+#: remotedesktopsmodel.cpp:112
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Zeroconf"
 msgstr "Zeroconf"
 
-#: remotedesktopsmodel.cpp:113
+#: remotedesktopsmodel.cpp:114
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "None"
 msgstr "គ្មាន"
 
-#: remotedesktopsmodel.cpp:129
+#: remotedesktopsmodel.cpp:130
 #, kde-format
 msgctxt "Remove the selected url from the bookarks menu"
 msgid "Remove the bookmark for %1."
 msgstr "យក​ចំណាំ​​សម្រាប់ %1 ចេញ ។​"
 
-#: remotedesktopsmodel.cpp:131
+#: remotedesktopsmodel.cpp:132
 #, kde-format
 msgctxt "Add the selected url to the bookmarks menu"
 msgid "Bookmark %1."
@@ -1375,7 +1417,7 @@ msgctxt "Header of the connections list, where this entry comes from"
 msgid "Source"
 msgstr "ប្រភព"
 
-#: vnc/vncclientthread.cpp:299
+#: vnc/vncclientthread.cpp:300
 #, fuzzy, kde-format
 #| msgid "VNC authentication failed."
 msgid "VNC authentication type is not supported."
@@ -1408,19 +1450,19 @@ msgstr "ម៉ាស៊ីន​បម្រើ VNC បិទ​ការ​ត�
 msgid "Disconnected: %1."
 msgstr "ផ្ដាច់"
 
-#: vnc/vncclientthread.cpp:560
+#: vnc/vncclientthread.cpp:561
 #, fuzzy, kde-format
 #| msgid "When Connecting"
 msgid "Reconnecting."
 msgstr "នៅពេល​តភ្ជាប់"
 
-#: vnc/vncclientthread.cpp:627
+#: vnc/vncclientthread.cpp:628
 #, fuzzy, kde-format
 #| msgid "Disconnect"
 msgid "Reconnected."
 msgstr "ផ្ដាច់"
 
-#: vnc/vncclientthread.cpp:629
+#: vnc/vncclientthread.cpp:630
 #, fuzzy, kde-format
 #| msgid "Connect"
 msgid "Connected."
@@ -1557,20 +1599,20 @@ msgid ""
 "filtering."
 msgstr ""
 
-#: vnc/vncsshtunnelthread.cpp:102
+#: vnc/vncsshtunnelthread.cpp:99
 #, fuzzy, kde-format
 #| msgid "Connecting to %1"
 msgid "Error connecting to %1: %2"
 msgstr "តភ្ជាប់​ទៅ %1"
 
-#: vnc/vncsshtunnelthread.cpp:127
+#: vnc/vncsshtunnelthread.cpp:124
 #, fuzzy, kde-format
 #| msgid "Authenticating at %1"
 msgid "Error authenticating with password: %1"
 msgstr "កំពុង​ផ្ទៀងផ្ទាត់​ភាព​ត្រឹមត្រូវ​នៅ %1..."
 
-#: vnc/vncsshtunnelthread.cpp:133 vnc/vncsshtunnelthread.cpp:151
-#: vnc/vncsshtunnelthread.cpp:158 vnc/vncsshtunnelthread.cpp:166
+#: vnc/vncsshtunnelthread.cpp:130 vnc/vncsshtunnelthread.cpp:148
+#: vnc/vncsshtunnelthread.cpp:155 vnc/vncsshtunnelthread.cpp:163
 #, kde-format
 msgid "Error creating tunnel socket"
 msgstr ""
@@ -1580,22 +1622,22 @@ msgstr ""
 msgid "Access to the system requires a password."
 msgstr "ចូល​ដំណើរ​ការ​ប្រព័ន្ធ​ទាមទារ​ពាក្យ​សម្ងាត់ ។"
 
-#: vnc/vncview.cpp:345
+#: vnc/vncview.cpp:344
 #, kde-format
 msgid "Authentication failed. Please try again."
 msgstr "ការ​ផ្ទៀតផ្ទាត់​ភាព​ត្រឹមត្រូវ​បាន​បរជ័យ ។ សូម​ព្យាយាម​ម្ដង​ទៀត ។"
 
-#: vnc/vncview.cpp:373
+#: vnc/vncview.cpp:374
 #, kde-format
 msgid "Please enter the SSH password."
 msgstr ""
 
-#: vnc/vncview.cpp:398 vnc/vncview.cpp:400
+#: vnc/vncview.cpp:399 vnc/vncview.cpp:401
 #, kde-format
 msgid "VNC failure"
 msgstr "VNC បរាជ័យ"
 
-#: vnc/vncview.cpp:409 vnc/vncview.cpp:411
+#: vnc/vncview.cpp:410 vnc/vncview.cpp:412
 #, kde-format
 msgid "SSH Tunnel failure"
 msgstr ""
@@ -1610,7 +1652,7 @@ msgstr "ការ​តភ្ជាប់ VNC ថ្មី...​"
 msgid "Connect to a VNC Remote Desktop"
 msgstr "តភ្ជាប់​ទៅ​ផ្ទៃតុ​ពី​ចម្ងាយ VNC"
 
-#: vnc/vncviewfactory.cpp:57
+#: vnc/vncviewfactory.cpp:58
 #, kde-format
 msgid ""
 "<html>Enter the address here.<br /><i>Example: vncserver:1 (host:port / "

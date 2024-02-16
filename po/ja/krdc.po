@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-04 00:41+0000\n"
+"POT-Creation-Date: 2024-02-16 01:40+0000\n"
 "PO-Revision-Date: 2010-09-26 18:24-0700\n"
 "Last-Translator: Fumiaki Okushi <okushi@kde.gr.jp>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -32,7 +32,7 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "toyohiro@ksmplus.com,ybando@k6.dion.ne.jp"
 
-#: bookmarkmanager.cpp:44
+#: bookmarkmanager.cpp:43
 #, kde-format
 msgid "History"
 msgstr "履歴"
@@ -195,15 +195,15 @@ msgstr "設定..."
 msgid "Remove"
 msgstr "削除"
 
-#: config/hostpreferenceslist.cpp:100 mainwindow.cpp:678
-#, kde-format
-msgid "The selected host cannot be handled."
-msgstr "選択されたホストは処理できません。"
-
-#: config/hostpreferenceslist.cpp:101 mainwindow.cpp:288 mainwindow.cpp:679
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:283 mainwindow.cpp:678
 #, kde-format
 msgid "Unusable URL"
 msgstr "使用できない URL"
+
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:678
+#, kde-format
+msgid "The selected host cannot be handled."
+msgstr "選択されたホストは処理できません。"
 
 #: config/preferencesdialog.cpp:24
 #, kde-format
@@ -216,23 +216,23 @@ msgstr "全般"
 msgid "General Configuration"
 msgstr "全般設定"
 
-#: config/preferencesdialog.cpp:29
+#: config/preferencesdialog.cpp:28
 #, kde-format
 msgid "Hosts"
 msgstr "ホスト"
 
-#: config/preferencesdialog.cpp:29 core/hostpreferences.cpp:176
-#: core/hostpreferences.cpp:180
+#: config/preferencesdialog.cpp:28 core/hostpreferences.cpp:175
+#: core/hostpreferences.cpp:179
 #, kde-format
 msgid "Host Configuration"
 msgstr "ホストの設定"
 
-#: config/preferencesdialog.cpp:34 config/preferencesdialog.cpp:35
+#: config/preferencesdialog.cpp:33 config/preferencesdialog.cpp:34
 #, kde-format
 msgid "Plugins"
 msgstr "プラグイン"
 
-#: config/preferencesdialog.cpp:35
+#: config/preferencesdialog.cpp:34
 #, kde-format
 msgid "Plugin Configuration"
 msgstr "プラグインの設定"
@@ -272,18 +272,18 @@ msgid "A year ago"
 msgid_plural "%1 years ago"
 msgstr[0] "%1 年前"
 
-#: core/hostpreferences.cpp:183
+#: core/hostpreferences.cpp:182
 #, kde-format
 msgid ""
 "Note that settings might only apply when you connect next time to this host."
 msgstr "設定は次回このホストに接続したときからのみ適用される場合があります。"
 
-#: core/hostpreferences.cpp:199
+#: core/hostpreferences.cpp:198
 #, kde-format
 msgid "Show this dialog again for this host"
 msgstr "このホストにはこのダイアログを再び表示する"
 
-#: core/hostpreferences.cpp:203
+#: core/hostpreferences.cpp:202
 #, kde-format
 msgid "Remember password (KWallet)"
 msgstr "パスワードを KWallet に保存する"
@@ -307,17 +307,17 @@ msgstr "セッション(&N)"
 msgid "Remote View Toolbar"
 msgstr "リモートビューツールバー"
 
-#: main.cpp:61
+#: main.cpp:60
 #, kde-format
 msgid "KRDC"
 msgstr "KRDC"
 
-#: main.cpp:62 systemtrayicon.cpp:24
+#: main.cpp:60 systemtrayicon.cpp:24
 #, kde-format
 msgid "KDE Remote Desktop Client"
 msgstr "KDE リモートデスクトップクライアント"
 
-#: main.cpp:64
+#: main.cpp:63
 #, fuzzy, kde-format
 #| msgid ""
 #| "(c) 2007-2010, Urs Wolfer\n"
@@ -347,62 +347,62 @@ msgstr ""
 "(c) 1999-2003, Matthew Chapman\n"
 "(c) 2009, Collabora Ltd"
 
-#: main.cpp:73
+#: main.cpp:72
 #, kde-format
 msgid "Urs Wolfer"
 msgstr "Urs Wolfer"
 
-#: main.cpp:73
+#: main.cpp:72
 #, kde-format
 msgid "Developer, Maintainer"
 msgstr "開発者、メンテナ"
 
-#: main.cpp:74
+#: main.cpp:73
 #, kde-format
 msgid "Tony Murray"
 msgstr "Tony Murray"
 
-#: main.cpp:74
+#: main.cpp:73
 #, kde-format
 msgid "Developer"
 msgstr "開発者"
 
-#: main.cpp:75
+#: main.cpp:74
 #, kde-format
 msgid "Tim Jansen"
 msgstr "Tim Jansen"
 
-#: main.cpp:75
+#: main.cpp:74
 #, kde-format
 msgid "Former Developer"
 msgstr "以前の開発者"
 
-#: main.cpp:76
+#: main.cpp:75
 #, kde-format
 msgid "Arend van Beelen jr."
 msgstr "Arend van Beelen jr."
 
-#: main.cpp:76
+#: main.cpp:75
 #, kde-format
 msgid "Initial RDP backend"
 msgstr "最初の RDP バックエンド"
 
-#: main.cpp:77
+#: main.cpp:76
 #, kde-format
 msgid "Brad Hards"
 msgstr "Brad Hards"
 
-#: main.cpp:77
+#: main.cpp:76
 #, kde-format
 msgid "Google Summer of Code 2007 KRDC project mentor"
 msgstr "Google Summer of Code 2007 KRDC プロジェクトの顧問"
 
-#: main.cpp:79
+#: main.cpp:77
 #, kde-format
 msgid "LibVNCServer / LibVNCClient developers"
 msgstr "LibVNCServer / LibVNCClient の開発者"
 
-#: main.cpp:79
+#: main.cpp:78
 #, kde-format
 msgid "VNC client library"
 msgstr "VNC クライアントライブラリ"
@@ -431,33 +431,33 @@ msgstr ""
 msgid "URLs to connect after startup"
 msgstr "起動後に接続する URL (複数可)"
 
-#: mainwindow.cpp:125
+#: mainwindow.cpp:124
 #, kde-format
 msgid "KDE Remote Desktop Client started"
 msgstr "KDE リモートデスクトップクライアントが起動しました"
 
-#: mainwindow.cpp:130 mainwindow.cpp:143 mainwindow.cpp:1093
-#: mainwindow.cpp:1190
+#: mainwindow.cpp:129 mainwindow.cpp:142 mainwindow.cpp:1083
+#: mainwindow.cpp:1178
 #, kde-format
 msgid "New Connection"
 msgstr "新しい接続"
 
-#: mainwindow.cpp:149
+#: mainwindow.cpp:148
 #, kde-format
 msgid "Copy Screenshot to Clipboard"
 msgstr "スクリーンショットをクリップボードにコピー"
 
-#: mainwindow.cpp:150
+#: mainwindow.cpp:149
 #, kde-format
 msgid "Screenshot"
 msgstr "スクリーンショット"
 
-#: mainwindow.cpp:155 mainwindow.cpp:502
+#: mainwindow.cpp:155 mainwindow.cpp:501
 #, kde-format
 msgid "Switch to Full Screen Mode"
 msgstr "フルスクリーンモードに切り替え"
 
-#: mainwindow.cpp:156 mainwindow.cpp:503
+#: mainwindow.cpp:156 mainwindow.cpp:502
 #, kde-format
 msgid "Full Screen"
 msgstr "フルスクリーン"
@@ -512,7 +512,7 @@ msgstr ""
 msgid "Bookmarks"
 msgstr "ブックマーク"
 
-#: mainwindow.cpp:264
+#: mainwindow.cpp:262
 #, kde-format
 msgid ""
 "The entered address does not have the required form.\n"
@@ -521,164 +521,164 @@ msgstr ""
 "入力されたアドレスは正しい形式ではありません。\n"
 "[ユーザ名@]ホスト[:ポート]"
 
-#: mainwindow.cpp:265
+#: mainwindow.cpp:262
 #, kde-format
 msgid "Malformed URL"
 msgstr "不正な形式の URL"
 
-#: mainwindow.cpp:287
+#: mainwindow.cpp:283
 #, kde-format
 msgid "The entered address cannot be handled."
 msgstr "入力されたアドレスは処理できません。"
 
-#: mainwindow.cpp:419
+#: mainwindow.cpp:418
 #, kde-format
 msgid "Connecting to %1"
 msgstr "%1 に接続しています"
 
-#: mainwindow.cpp:423
+#: mainwindow.cpp:422
 #, kde-format
 msgid "Authenticating at %1"
 msgstr "%1 で認証中です"
 
-#: mainwindow.cpp:427
+#: mainwindow.cpp:426
 #, kde-format
 msgid "Preparing connection to %1"
 msgstr "%1 への接続を準備しています"
 
-#: mainwindow.cpp:431
+#: mainwindow.cpp:430
 #, kde-format
 msgid "Connected to %1"
 msgstr "%1 に接続しました"
 
-#: mainwindow.cpp:513
+#: mainwindow.cpp:512
 #, kde-format
 msgctxt ""
 "window title when in full screen mode (for example displayed in tasklist)"
 msgid "KDE Remote Desktop Client (Full Screen)"
 msgstr "KDE リモートデスクトップクライアント (フルスクリーン)"
 
-#: mainwindow.cpp:546
+#: mainwindow.cpp:545
 #, kde-format
 msgid "Switch to Window Mode"
 msgstr "ウィンドウモードに切り替え"
 
-#: mainwindow.cpp:547
+#: mainwindow.cpp:546
 #, kde-format
 msgid "Window Mode"
 msgstr "ウィンドウモード"
 
-#: mainwindow.cpp:699
+#: mainwindow.cpp:697
 #, kde-format
 msgid "Connect"
 msgstr "接続"
 
-#: mainwindow.cpp:700
+#: mainwindow.cpp:698
 #, kde-format
 msgid "Rename"
 msgstr "名前変更"
 
-#: mainwindow.cpp:701
+#: mainwindow.cpp:699
 #, kde-format
 msgid "Settings"
 msgstr "設定"
 
-#: mainwindow.cpp:702
+#: mainwindow.cpp:700
 #, kde-format
 msgid "Delete"
 msgstr "削除"
 
-#: mainwindow.cpp:705 remotedesktopsmodel.cpp:107
+#: mainwindow.cpp:703 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "ブックマーク"
 
-#: mainwindow.cpp:706 remotedesktopsmodel.cpp:109
+#: mainwindow.cpp:703 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "履歴"
 
-#: mainwindow.cpp:718
+#: mainwindow.cpp:715
 #, kde-format
 msgid "Rename %1"
 msgstr "%1 の名前を変更"
 
-#: mainwindow.cpp:718
+#: mainwindow.cpp:715
 #, kde-format
 msgid "Rename %1 to"
 msgstr "%1 の新しい名前"
 
-#: mainwindow.cpp:726
+#: mainwindow.cpp:722
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "本当に %1 を削除しますか？"
 
-#: mainwindow.cpp:726
+#: mainwindow.cpp:722
 #, kde-format
 msgid "Delete %1"
 msgstr "%1 を削除"
 
-#: mainwindow.cpp:748
+#: mainwindow.cpp:746
 #, kde-format
 msgid "Add Bookmark"
 msgstr "ブックマークを追加"
 
-#: mainwindow.cpp:749
+#: mainwindow.cpp:747
 #, kde-format
 msgid "Close Tab"
 msgstr "タブを閉じる"
 
-#: mainwindow.cpp:853
+#: mainwindow.cpp:851
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr "フルスクリーンのウィンドウを最小化"
 
-#: mainwindow.cpp:869
+#: mainwindow.cpp:867
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "ツールバーを固定"
 
-#: mainwindow.cpp:987
+#: mainwindow.cpp:976
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr "本当に KDE リモートデスクトップクライアントを終了しますか？"
 
-#: mainwindow.cpp:988
+#: mainwindow.cpp:977
 #, kde-format
 msgid "Confirm Quit"
 msgstr "終了の確認"
 
-#: mainwindow.cpp:1116
+#: mainwindow.cpp:1106
 #, kde-format
 msgid "Connect to:"
 msgstr "接続先:"
 
-#: mainwindow.cpp:1120
+#: mainwindow.cpp:1110
 #, fuzzy, kde-format
 #| msgid "Type here to filter the connection list."
 msgid "Type here to connect to an address and filter the list."
 msgstr "接続リストを絞り込む検索語を入力します。"
 
-#: mainwindow.cpp:1129
+#: mainwindow.cpp:1119
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
 "methods."
 msgstr ""
 
-#: mainwindow.cpp:1132
+#: mainwindow.cpp:1122
 #, kde-format
 msgid "Goto Address"
 msgstr "アドレスに移動"
 
-#: mainwindow.cpp:1226
+#: mainwindow.cpp:1214
 #, kde-format
 msgid "Remote Desktops"
 msgstr "リモートデスクトップ"
 
-#: mainwindow.cpp:1257
+#: mainwindow.cpp:1243
 #, kde-format
 msgid "Filter"
 msgstr "フィルタ"
@@ -1112,13 +1112,55 @@ msgctxt "label for soundsettings in preferences dialog"
 msgid "Sound:"
 msgstr "サウンド:"
 
-#: rdp/rdpsession.cpp:142
+#. i18n: ectx: property (text), widget (QLabel, TlsSecLevelLabel)
+#: rdp/rdppreferences.ui:566
+#, kde-format
+msgid "TLS security level:"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
+#: rdp/rdppreferences.ui:592
+#, kde-format
+msgid "any"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
+#: rdp/rdppreferences.ui:597
+#, kde-format
+msgid "80 bit"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
+#: rdp/rdppreferences.ui:602
+#, kde-format
+msgid "112 bit"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
+#: rdp/rdppreferences.ui:607
+#, kde-format
+msgid "128 bit"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
+#: rdp/rdppreferences.ui:612
+#, kde-format
+msgid "192 bit"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
+#: rdp/rdppreferences.ui:617
+#, kde-format
+msgid "256 bit"
+msgstr ""
+
+#: rdp/rdpsession.cpp:157
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Logon Error"
 msgstr ""
 
-#: rdp/rdpsession.cpp:183
+#: rdp/rdpsession.cpp:204
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1129,51 +1171,51 @@ msgid ""
 "Fingerprint: %6\n"
 msgstr ""
 
-#: rdp/rdpsession.cpp:592
+#: rdp/rdpsession.cpp:642
 #, fuzzy, kde-format
 #| msgid "Access to the system requires a password."
 msgctxt "@label"
 msgid "Access to this system requires a password."
 msgstr "システムへのアクセスにはパスワードが必要です。"
 
-#: rdp/rdpsession.cpp:595
+#: rdp/rdpsession.cpp:645
 #, fuzzy, kde-format
 #| msgid "Access to the system requires a password."
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
 msgstr "システムへのアクセスにはパスワードが必要です。"
 
-#: rdp/rdpsession.cpp:617
+#: rdp/rdpsession.cpp:667
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr ""
 
-#: rdp/rdpsession.cpp:618
+#: rdp/rdpsession.cpp:668
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
 msgstr ""
 
-#: rdp/rdpsession.cpp:623 rdp/rdpsession.cpp:646
+#: rdp/rdpsession.cpp:673 rdp/rdpsession.cpp:696
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
 msgstr ""
 
-#: rdp/rdpsession.cpp:640
+#: rdp/rdpsession.cpp:690
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
 msgstr ""
 
-#: rdp/rdpsession.cpp:641
+#: rdp/rdpsession.cpp:691
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
 msgstr ""
 
-#: rdp/rdpsession.cpp:644
+#: rdp/rdpsession.cpp:694
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1183,14 +1225,14 @@ msgid ""
 "%2"
 msgstr ""
 
-#: rdp/rdpsession.cpp:758
+#: rdp/rdpsession.cpp:814
 #, fuzzy, kde-format
 #| msgid "Connection Failure"
 msgctxt "@title:dialog"
 msgid "Login Failure"
 msgstr "接続失敗"
 
-#: rdp/rdpsession.cpp:759
+#: rdp/rdpsession.cpp:815
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1198,13 +1240,13 @@ msgid ""
 "and password."
 msgstr ""
 
-#: rdp/rdpsession.cpp:765
+#: rdp/rdpsession.cpp:821
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Account Problems"
 msgstr ""
 
-#: rdp/rdpsession.cpp:766
+#: rdp/rdpsession.cpp:822
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1212,13 +1254,13 @@ msgid ""
 "contact your system administrator."
 msgstr ""
 
-#: rdp/rdpsession.cpp:771
+#: rdp/rdpsession.cpp:827
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Password Problems"
 msgstr ""
 
-#: rdp/rdpsession.cpp:772
+#: rdp/rdpsession.cpp:828
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1226,79 +1268,79 @@ msgid ""
 "administrator to change it."
 msgstr ""
 
-#: rdp/rdpsession.cpp:775
+#: rdp/rdpsession.cpp:831
 #, fuzzy, kde-format
 #| msgid "Connection"
 msgctxt "@title:dialog"
 msgid "Connection Lost"
 msgstr "接続"
 
-#: rdp/rdpsession.cpp:776
+#: rdp/rdpsession.cpp:832
 #, kde-format
 msgctxt "@label"
 msgid "Lost connection to the server."
 msgstr ""
 
-#: rdp/rdpsession.cpp:780
+#: rdp/rdpsession.cpp:836
 #, fuzzy, kde-format
 #| msgid "Server not found."
 msgctxt "@title:dialog"
 msgid "Server not Found"
 msgstr "サーバが見つかりません。"
 
-#: rdp/rdpsession.cpp:781
+#: rdp/rdpsession.cpp:837
 #, kde-format
 msgctxt "@label"
 msgid "Could not find the server."
 msgstr ""
 
-#: rdp/rdpsession.cpp:784
+#: rdp/rdpsession.cpp:840
 #, fuzzy, kde-format
 #| msgid "Connection Failure"
 msgctxt "@title:dialog"
 msgid "Connection Refused"
 msgstr "接続失敗"
 
-#: rdp/rdpsession.cpp:785
+#: rdp/rdpsession.cpp:841
 #, fuzzy, kde-format
 #| msgid "VNC server closed connection."
 msgctxt "@label"
 msgid "The server refused the connection request."
 msgstr "VNC サーバが接続を閉じました。"
 
-#: rdp/rdpsession.cpp:789
+#: rdp/rdpsession.cpp:845
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Could not Connect"
 msgstr ""
 
-#: rdp/rdpsession.cpp:790
+#: rdp/rdpsession.cpp:846
 #, kde-format
 msgctxt "@label"
 msgid "Could not connect to the server."
 msgstr ""
 
-#: rdp/rdpsession.cpp:795
+#: rdp/rdpsession.cpp:851
 #, fuzzy, kde-format
 #| msgid "Connection Failure"
 msgctxt "@title:dialog"
 msgid "Connection Closed"
 msgstr "接続失敗"
 
-#: rdp/rdpsession.cpp:796
+#: rdp/rdpsession.cpp:852
 #, kde-format
 msgctxt "@label"
 msgid "The connection to the server was closed."
 msgstr ""
 
-#: rdp/rdpsession.cpp:799
+#: rdp/rdpsession.cpp:855
 #, fuzzy, kde-format
 #| msgid "Connection Failure"
 msgctxt "@title:dialog"
 msgid "Connection Failed"
 msgstr "接続失敗"
 
-#: rdp/rdpsession.cpp:800
+#: rdp/rdpsession.cpp:856
 #, kde-format
 msgctxt "@label"
 msgid "An unknown error occurred"
@@ -1314,7 +1356,7 @@ msgstr "Windows リモートデスクトップ (RDP) に接続"
 msgid "New RDP Connection..."
 msgstr "新しい RDP 接続..."
 
-#: rdp/rdpviewfactory.cpp:61
+#: rdp/rdpviewfactory.cpp:62
 #, kde-format
 msgid ""
 "<html>Enter the address here. Port is optional.<br /><i>Example: "
@@ -1323,25 +1365,25 @@ msgstr ""
 "<html>ここにアドレスを入力します。ポートは必須ではありません。<br/>例: "
 "rdpserver:3389 (host:port)</html>"
 
-#: remotedesktopsmodel.cpp:111
+#: remotedesktopsmodel.cpp:112
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Zeroconf"
 msgstr "Zeroconf"
 
-#: remotedesktopsmodel.cpp:113
+#: remotedesktopsmodel.cpp:114
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "None"
 msgstr "なし"
 
-#: remotedesktopsmodel.cpp:129
+#: remotedesktopsmodel.cpp:130
 #, kde-format
 msgctxt "Remove the selected url from the bookarks menu"
 msgid "Remove the bookmark for %1."
 msgstr "%1 をブックマークから削除します。"
 
-#: remotedesktopsmodel.cpp:131
+#: remotedesktopsmodel.cpp:132
 #, kde-format
 msgctxt "Add the selected url to the bookmarks menu"
 msgid "Bookmark %1."
@@ -1380,7 +1422,7 @@ msgctxt "Header of the connections list, where this entry comes from"
 msgid "Source"
 msgstr "ソース"
 
-#: vnc/vncclientthread.cpp:299
+#: vnc/vncclientthread.cpp:300
 #, fuzzy, kde-format
 #| msgid "VNC authentication failed."
 msgid "VNC authentication type is not supported."
@@ -1412,19 +1454,19 @@ msgstr "VNC サーバが接続を閉じました。"
 msgid "Disconnected: %1."
 msgstr "切断"
 
-#: vnc/vncclientthread.cpp:560
+#: vnc/vncclientthread.cpp:561
 #, fuzzy, kde-format
 #| msgid "When Connecting"
 msgid "Reconnecting."
 msgstr "接続時"
 
-#: vnc/vncclientthread.cpp:627
+#: vnc/vncclientthread.cpp:628
 #, fuzzy, kde-format
 #| msgid "Disconnect"
 msgid "Reconnected."
 msgstr "切断"
 
-#: vnc/vncclientthread.cpp:629
+#: vnc/vncclientthread.cpp:630
 #, fuzzy, kde-format
 #| msgid "Connect"
 msgid "Connected."
@@ -1561,20 +1603,20 @@ msgid ""
 "filtering."
 msgstr ""
 
-#: vnc/vncsshtunnelthread.cpp:102
+#: vnc/vncsshtunnelthread.cpp:99
 #, fuzzy, kde-format
 #| msgid "Connecting to %1"
 msgid "Error connecting to %1: %2"
 msgstr "%1 に接続しています"
 
-#: vnc/vncsshtunnelthread.cpp:127
+#: vnc/vncsshtunnelthread.cpp:124
 #, fuzzy, kde-format
 #| msgid "Authenticating at %1"
 msgid "Error authenticating with password: %1"
 msgstr "%1 で認証中です"
 
-#: vnc/vncsshtunnelthread.cpp:133 vnc/vncsshtunnelthread.cpp:151
-#: vnc/vncsshtunnelthread.cpp:158 vnc/vncsshtunnelthread.cpp:166
+#: vnc/vncsshtunnelthread.cpp:130 vnc/vncsshtunnelthread.cpp:148
+#: vnc/vncsshtunnelthread.cpp:155 vnc/vncsshtunnelthread.cpp:163
 #, kde-format
 msgid "Error creating tunnel socket"
 msgstr ""
@@ -1584,22 +1626,22 @@ msgstr ""
 msgid "Access to the system requires a password."
 msgstr "システムへのアクセスにはパスワードが必要です。"
 
-#: vnc/vncview.cpp:345
+#: vnc/vncview.cpp:344
 #, kde-format
 msgid "Authentication failed. Please try again."
 msgstr "認証に失敗しました。やり直してください。"
 
-#: vnc/vncview.cpp:373
+#: vnc/vncview.cpp:374
 #, kde-format
 msgid "Please enter the SSH password."
 msgstr ""
 
-#: vnc/vncview.cpp:398 vnc/vncview.cpp:400
+#: vnc/vncview.cpp:399 vnc/vncview.cpp:401
 #, kde-format
 msgid "VNC failure"
 msgstr "VNC 失敗"
 
-#: vnc/vncview.cpp:409 vnc/vncview.cpp:411
+#: vnc/vncview.cpp:410 vnc/vncview.cpp:412
 #, kde-format
 msgid "SSH Tunnel failure"
 msgstr ""
@@ -1614,7 +1656,7 @@ msgstr "新しい VNC 接続..."
 msgid "Connect to a VNC Remote Desktop"
 msgstr "VNC リモートデスクトップに接続"
 
-#: vnc/vncviewfactory.cpp:57
+#: vnc/vncviewfactory.cpp:58
 #, kde-format
 msgid ""
 "<html>Enter the address here.<br /><i>Example: vncserver:1 (host:port / "

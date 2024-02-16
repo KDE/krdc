@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-04 00:41+0000\n"
-"PO-Revision-Date: 2024-01-06 03:34\n"
+"POT-Creation-Date: 2024-02-16 01:40+0000\n"
+"PO-Revision-Date: 2024-02-05 11:40\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -27,7 +27,7 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "kde-china@kde.org"
 
-#: bookmarkmanager.cpp:44
+#: bookmarkmanager.cpp:43
 #, kde-format
 msgid "History"
 msgstr "历史"
@@ -190,15 +190,15 @@ msgstr "配置..."
 msgid "Remove"
 msgstr "删除"
 
-#: config/hostpreferenceslist.cpp:100 mainwindow.cpp:678
-#, kde-format
-msgid "The selected host cannot be handled."
-msgstr "无法处理选中的主机。"
-
-#: config/hostpreferenceslist.cpp:101 mainwindow.cpp:288 mainwindow.cpp:679
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:283 mainwindow.cpp:678
 #, kde-format
 msgid "Unusable URL"
 msgstr "不可用的 URL"
+
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:678
+#, kde-format
+msgid "The selected host cannot be handled."
+msgstr "无法处理选中的主机。"
 
 #: config/preferencesdialog.cpp:24
 #, kde-format
@@ -211,23 +211,23 @@ msgstr "常规"
 msgid "General Configuration"
 msgstr "常规配置"
 
-#: config/preferencesdialog.cpp:29
+#: config/preferencesdialog.cpp:28
 #, kde-format
 msgid "Hosts"
 msgstr "主机"
 
-#: config/preferencesdialog.cpp:29 core/hostpreferences.cpp:176
-#: core/hostpreferences.cpp:180
+#: config/preferencesdialog.cpp:28 core/hostpreferences.cpp:175
+#: core/hostpreferences.cpp:179
 #, kde-format
 msgid "Host Configuration"
 msgstr "主机配置"
 
-#: config/preferencesdialog.cpp:34 config/preferencesdialog.cpp:35
+#: config/preferencesdialog.cpp:33 config/preferencesdialog.cpp:34
 #, kde-format
 msgid "Plugins"
 msgstr "插件"
 
-#: config/preferencesdialog.cpp:35
+#: config/preferencesdialog.cpp:34
 #, kde-format
 msgid "Plugin Configuration"
 msgstr "插件配置"
@@ -267,18 +267,18 @@ msgid "A year ago"
 msgid_plural "%1 years ago"
 msgstr[0] "%1 年前"
 
-#: core/hostpreferences.cpp:183
+#: core/hostpreferences.cpp:182
 #, kde-format
 msgid ""
 "Note that settings might only apply when you connect next time to this host."
 msgstr "请注意，这些设置需在您下次登录到此主机时才会生效。"
 
-#: core/hostpreferences.cpp:199
+#: core/hostpreferences.cpp:198
 #, kde-format
 msgid "Show this dialog again for this host"
 msgstr "为此主机再次显示此对话框"
 
-#: core/hostpreferences.cpp:203
+#: core/hostpreferences.cpp:202
 #, kde-format
 msgid "Remember password (KWallet)"
 msgstr "记住密码 (KWallet 密码库)"
@@ -301,17 +301,17 @@ msgstr "会话(&S)"
 msgid "Remote View Toolbar"
 msgstr "远程视图工具栏"
 
-#: main.cpp:61
+#: main.cpp:60
 #, kde-format
 msgid "KRDC"
 msgstr "KRDC"
 
-#: main.cpp:62 systemtrayicon.cpp:24
+#: main.cpp:60 systemtrayicon.cpp:24
 #, kde-format
 msgid "KDE Remote Desktop Client"
 msgstr "KDE 远程桌面客户端"
 
-#: main.cpp:64
+#: main.cpp:63
 #, kde-format
 msgid ""
 "(c) 2007-2016, Urs Wolfer\n"
@@ -332,62 +332,62 @@ msgstr ""
 "(c) 1999-2003, Matthew Chapman\n"
 "(c) 2009, Collabora Ltd"
 
-#: main.cpp:73
+#: main.cpp:72
 #, kde-format
 msgid "Urs Wolfer"
 msgstr "Urs Wolfer"
 
-#: main.cpp:73
+#: main.cpp:72
 #, kde-format
 msgid "Developer, Maintainer"
 msgstr "开发者与维护者"
 
-#: main.cpp:74
+#: main.cpp:73
 #, kde-format
 msgid "Tony Murray"
 msgstr "Tony Murray"
 
-#: main.cpp:74
+#: main.cpp:73
 #, kde-format
 msgid "Developer"
 msgstr "开发者"
 
-#: main.cpp:75
+#: main.cpp:74
 #, kde-format
 msgid "Tim Jansen"
 msgstr "Tim Jansen"
 
-#: main.cpp:75
+#: main.cpp:74
 #, kde-format
 msgid "Former Developer"
 msgstr "先前开发者"
 
-#: main.cpp:76
+#: main.cpp:75
 #, kde-format
 msgid "Arend van Beelen jr."
 msgstr "Arend van Beelen jr."
 
-#: main.cpp:76
+#: main.cpp:75
 #, kde-format
 msgid "Initial RDP backend"
 msgstr "RDP 后端初步工作"
 
-#: main.cpp:77
+#: main.cpp:76
 #, kde-format
 msgid "Brad Hards"
 msgstr "Brad Hards"
 
-#: main.cpp:77
+#: main.cpp:76
 #, kde-format
 msgid "Google Summer of Code 2007 KRDC project mentor"
 msgstr "Google 代码之夏 2007 KRDC 项目导师"
 
-#: main.cpp:79
+#: main.cpp:77
 #, kde-format
 msgid "LibVNCServer / LibVNCClient developers"
 msgstr "LibVNCServer/LibVNCClient 开发者"
 
-#: main.cpp:79
+#: main.cpp:78
 #, kde-format
 msgid "VNC client library"
 msgstr "VNC 客户端库"
@@ -413,33 +413,33 @@ msgstr "在全屏模式下以指定 URL 启动 KRDC(只能对一个 URL 起效)"
 msgid "URLs to connect after startup"
 msgstr "启动后要连接的 URL"
 
-#: mainwindow.cpp:125
+#: mainwindow.cpp:124
 #, kde-format
 msgid "KDE Remote Desktop Client started"
 msgstr "KDE 远程桌面客户端已启动"
 
-#: mainwindow.cpp:130 mainwindow.cpp:143 mainwindow.cpp:1093
-#: mainwindow.cpp:1190
+#: mainwindow.cpp:129 mainwindow.cpp:142 mainwindow.cpp:1083
+#: mainwindow.cpp:1178
 #, kde-format
 msgid "New Connection"
 msgstr "新建连接"
 
-#: mainwindow.cpp:149
+#: mainwindow.cpp:148
 #, kde-format
 msgid "Copy Screenshot to Clipboard"
 msgstr "复制抓屏到剪贴板"
 
-#: mainwindow.cpp:150
+#: mainwindow.cpp:149
 #, kde-format
 msgid "Screenshot"
 msgstr "抓屏"
 
-#: mainwindow.cpp:155 mainwindow.cpp:502
+#: mainwindow.cpp:155 mainwindow.cpp:501
 #, kde-format
 msgid "Switch to Full Screen Mode"
 msgstr "切换到全屏模式"
 
-#: mainwindow.cpp:156 mainwindow.cpp:503
+#: mainwindow.cpp:156 mainwindow.cpp:502
 #, kde-format
 msgid "Full Screen"
 msgstr "全屏"
@@ -494,7 +494,7 @@ msgstr "缩放倍数"
 msgid "Bookmarks"
 msgstr "书签"
 
-#: mainwindow.cpp:264
+#: mainwindow.cpp:262
 #, kde-format
 msgid ""
 "The entered address does not have the required form.\n"
@@ -503,163 +503,163 @@ msgstr ""
 "输入的地址不符合所需的格式。\n"
 " 语法：[用户名@]主机[:端口]"
 
-#: mainwindow.cpp:265
+#: mainwindow.cpp:262
 #, kde-format
 msgid "Malformed URL"
 msgstr "URL 格式错误"
 
-#: mainwindow.cpp:287
+#: mainwindow.cpp:283
 #, kde-format
 msgid "The entered address cannot be handled."
 msgstr "输入的地址无法处理。"
 
-#: mainwindow.cpp:419
+#: mainwindow.cpp:418
 #, kde-format
 msgid "Connecting to %1"
 msgstr "正在连接到 %1"
 
-#: mainwindow.cpp:423
+#: mainwindow.cpp:422
 #, kde-format
 msgid "Authenticating at %1"
 msgstr "正在认证 %1..."
 
-#: mainwindow.cpp:427
+#: mainwindow.cpp:426
 #, kde-format
 msgid "Preparing connection to %1"
 msgstr "正在准备连接到 %1"
 
-#: mainwindow.cpp:431
+#: mainwindow.cpp:430
 #, kde-format
 msgid "Connected to %1"
 msgstr "已连接到 %1"
 
-#: mainwindow.cpp:513
+#: mainwindow.cpp:512
 #, kde-format
 msgctxt ""
 "window title when in full screen mode (for example displayed in tasklist)"
 msgid "KDE Remote Desktop Client (Full Screen)"
 msgstr "KDE 远程桌面客户端(全屏)"
 
-#: mainwindow.cpp:546
+#: mainwindow.cpp:545
 #, kde-format
 msgid "Switch to Window Mode"
 msgstr "切换到窗口模式"
 
-#: mainwindow.cpp:547
+#: mainwindow.cpp:546
 #, kde-format
 msgid "Window Mode"
 msgstr "窗口模式"
 
-#: mainwindow.cpp:699
+#: mainwindow.cpp:697
 #, kde-format
 msgid "Connect"
 msgstr "连接"
 
-#: mainwindow.cpp:700
+#: mainwindow.cpp:698
 #, kde-format
 msgid "Rename"
 msgstr "重命名"
 
-#: mainwindow.cpp:701
+#: mainwindow.cpp:699
 #, kde-format
 msgid "Settings"
 msgstr "设置"
 
-#: mainwindow.cpp:702
+#: mainwindow.cpp:700
 #, kde-format
 msgid "Delete"
 msgstr "删除"
 
-#: mainwindow.cpp:705 remotedesktopsmodel.cpp:107
+#: mainwindow.cpp:703 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "书签"
 
-#: mainwindow.cpp:706 remotedesktopsmodel.cpp:109
+#: mainwindow.cpp:703 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "历史"
 
-#: mainwindow.cpp:718
+#: mainwindow.cpp:715
 #, kde-format
 msgid "Rename %1"
 msgstr "重命名 %1"
 
-#: mainwindow.cpp:718
+#: mainwindow.cpp:715
 #, kde-format
 msgid "Rename %1 to"
 msgstr "将 %1 重命名为"
 
-#: mainwindow.cpp:726
+#: mainwindow.cpp:722
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "您确定要想要删除 %1 吗？"
 
-#: mainwindow.cpp:726
+#: mainwindow.cpp:722
 #, kde-format
 msgid "Delete %1"
 msgstr "删除 %1"
 
-#: mainwindow.cpp:748
+#: mainwindow.cpp:746
 #, kde-format
 msgid "Add Bookmark"
 msgstr "添加书签"
 
-#: mainwindow.cpp:749
+#: mainwindow.cpp:747
 #, kde-format
 msgid "Close Tab"
 msgstr "关闭标签页"
 
-#: mainwindow.cpp:853
+#: mainwindow.cpp:851
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr "最小化全屏窗口"
 
-#: mainwindow.cpp:869
+#: mainwindow.cpp:867
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "吸附工具栏"
 
-#: mainwindow.cpp:987
+#: mainwindow.cpp:976
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr "您确定要退出 KDE 远程桌面客户端吗？"
 
-#: mainwindow.cpp:988
+#: mainwindow.cpp:977
 #, kde-format
 msgid "Confirm Quit"
 msgstr "确认退出"
 
-#: mainwindow.cpp:1116
+#: mainwindow.cpp:1106
 #, kde-format
 msgid "Connect to:"
 msgstr "连接到："
 
-#: mainwindow.cpp:1120
+#: mainwindow.cpp:1110
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr "在此输入以连接到该地址并过滤列表。"
 
-#: mainwindow.cpp:1129
+#: mainwindow.cpp:1119
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
 "methods."
 msgstr "在此输入 IP 或 DNS 名称。清除整行可获得连接方式列表。"
 
-#: mainwindow.cpp:1132
+#: mainwindow.cpp:1122
 #, kde-format
 msgid "Goto Address"
 msgstr "前往地址"
 
-#: mainwindow.cpp:1226
+#: mainwindow.cpp:1214
 #, kde-format
 msgid "Remote Desktops"
 msgstr "远程桌面"
 
-#: mainwindow.cpp:1257
+#: mainwindow.cpp:1243
 #, kde-format
 msgid "Filter"
 msgstr "过滤"
@@ -1085,13 +1085,55 @@ msgctxt "label for soundsettings in preferences dialog"
 msgid "Sound:"
 msgstr "声音："
 
-#: rdp/rdpsession.cpp:142
+#. i18n: ectx: property (text), widget (QLabel, TlsSecLevelLabel)
+#: rdp/rdppreferences.ui:566
+#, kde-format
+msgid "TLS security level:"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
+#: rdp/rdppreferences.ui:592
+#, kde-format
+msgid "any"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
+#: rdp/rdppreferences.ui:597
+#, kde-format
+msgid "80 bit"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
+#: rdp/rdppreferences.ui:602
+#, kde-format
+msgid "112 bit"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
+#: rdp/rdppreferences.ui:607
+#, kde-format
+msgid "128 bit"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
+#: rdp/rdppreferences.ui:612
+#, kde-format
+msgid "192 bit"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
+#: rdp/rdppreferences.ui:617
+#, kde-format
+msgid "256 bit"
+msgstr ""
+
+#: rdp/rdpsession.cpp:157
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Logon Error"
 msgstr "登录错误"
 
-#: rdp/rdpsession.cpp:183
+#: rdp/rdpsession.cpp:204
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1107,49 +1149,49 @@ msgstr ""
 "颁发机构：%5\n"
 "指纹：%6\n"
 
-#: rdp/rdpsession.cpp:592
+#: rdp/rdpsession.cpp:642
 #, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a password."
 msgstr "访问此系统需要密码。"
 
-#: rdp/rdpsession.cpp:595
+#: rdp/rdpsession.cpp:645
 #, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
 msgstr "访问此系统需要用户名和密码。"
 
-#: rdp/rdpsession.cpp:617
+#: rdp/rdpsession.cpp:667
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr "此系统的证书未知。您确定要继续吗？"
 
-#: rdp/rdpsession.cpp:618
+#: rdp/rdpsession.cpp:668
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
 msgstr "验证证书"
 
-#: rdp/rdpsession.cpp:623 rdp/rdpsession.cpp:646
+#: rdp/rdpsession.cpp:673 rdp/rdpsession.cpp:696
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
 msgstr "记住此证书"
 
-#: rdp/rdpsession.cpp:640
+#: rdp/rdpsession.cpp:690
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
 msgstr "此系统的证书已经改变。您确定要继续吗？"
 
-#: rdp/rdpsession.cpp:641
+#: rdp/rdpsession.cpp:691
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
 msgstr "证书已改变"
 
-#: rdp/rdpsession.cpp:644
+#: rdp/rdpsession.cpp:694
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1163,13 +1205,13 @@ msgstr ""
 "新的证书：\n"
 "%2"
 
-#: rdp/rdpsession.cpp:758
+#: rdp/rdpsession.cpp:814
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Login Failure"
 msgstr "登录失败"
 
-#: rdp/rdpsession.cpp:759
+#: rdp/rdpsession.cpp:815
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1177,13 +1219,13 @@ msgid ""
 "and password."
 msgstr "无法使用提供的凭据登录。请重新检查用户和密码。"
 
-#: rdp/rdpsession.cpp:765
+#: rdp/rdpsession.cpp:821
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Account Problems"
 msgstr "账户问题"
 
-#: rdp/rdpsession.cpp:766
+#: rdp/rdpsession.cpp:822
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1191,13 +1233,13 @@ msgid ""
 "contact your system administrator."
 msgstr "提供的账户不允许登录此机器。请联系您的系统管理员。"
 
-#: rdp/rdpsession.cpp:771
+#: rdp/rdpsession.cpp:827
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Password Problems"
 msgstr "密码问题"
 
-#: rdp/rdpsession.cpp:772
+#: rdp/rdpsession.cpp:828
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1205,73 +1247,73 @@ msgid ""
 "administrator to change it."
 msgstr "无法使用提供的密码登录。请联系您的系统管理员进行修改。"
 
-#: rdp/rdpsession.cpp:775
+#: rdp/rdpsession.cpp:831
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Lost"
 msgstr "连接丢失"
 
-#: rdp/rdpsession.cpp:776
+#: rdp/rdpsession.cpp:832
 #, kde-format
 msgctxt "@label"
 msgid "Lost connection to the server."
 msgstr "与服务器失去连接。"
 
-#: rdp/rdpsession.cpp:780
+#: rdp/rdpsession.cpp:836
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Server not Found"
 msgstr "找不到服务器"
 
-#: rdp/rdpsession.cpp:781
+#: rdp/rdpsession.cpp:837
 #, kde-format
 msgctxt "@label"
 msgid "Could not find the server."
 msgstr "无法找到服务器。"
 
-#: rdp/rdpsession.cpp:784
+#: rdp/rdpsession.cpp:840
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Refused"
 msgstr "连接被拒绝"
 
-#: rdp/rdpsession.cpp:785
+#: rdp/rdpsession.cpp:841
 #, kde-format
 msgctxt "@label"
 msgid "The server refused the connection request."
 msgstr "服务器拒绝了连接请求。"
 
-#: rdp/rdpsession.cpp:789
+#: rdp/rdpsession.cpp:845
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Could not Connect"
 msgstr "无法连接"
 
-#: rdp/rdpsession.cpp:790
+#: rdp/rdpsession.cpp:846
 #, kde-format
 msgctxt "@label"
 msgid "Could not connect to the server."
 msgstr "无法连接到服务器。"
 
-#: rdp/rdpsession.cpp:795
+#: rdp/rdpsession.cpp:851
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Closed"
 msgstr "连接关闭"
 
-#: rdp/rdpsession.cpp:796
+#: rdp/rdpsession.cpp:852
 #, kde-format
 msgctxt "@label"
 msgid "The connection to the server was closed."
 msgstr "与服务器的连接已关闭。"
 
-#: rdp/rdpsession.cpp:799
+#: rdp/rdpsession.cpp:855
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Failed"
 msgstr "连接失败"
 
-#: rdp/rdpsession.cpp:800
+#: rdp/rdpsession.cpp:856
 #, kde-format
 msgctxt "@label"
 msgid "An unknown error occurred"
@@ -1287,7 +1329,7 @@ msgstr "连接到 Windows 远程桌面(RDP)"
 msgid "New RDP Connection..."
 msgstr "新建 RDP 连接..."
 
-#: rdp/rdpviewfactory.cpp:61
+#: rdp/rdpviewfactory.cpp:62
 #, kde-format
 msgid ""
 "<html>Enter the address here. Port is optional.<br /><i>Example: "
@@ -1296,25 +1338,25 @@ msgstr ""
 "<html>在此输入地址，端口是可选字段。<br /><i>示例：rdpserver:3389 (主机:端"
 "口)</i></html>"
 
-#: remotedesktopsmodel.cpp:111
+#: remotedesktopsmodel.cpp:112
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Zeroconf"
 msgstr "Zeroconf"
 
-#: remotedesktopsmodel.cpp:113
+#: remotedesktopsmodel.cpp:114
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "None"
 msgstr "无"
 
-#: remotedesktopsmodel.cpp:129
+#: remotedesktopsmodel.cpp:130
 #, kde-format
 msgctxt "Remove the selected url from the bookarks menu"
 msgid "Remove the bookmark for %1."
 msgstr "删除 %1 的书签。"
 
-#: remotedesktopsmodel.cpp:131
+#: remotedesktopsmodel.cpp:132
 #, kde-format
 msgctxt "Add the selected url to the bookmarks menu"
 msgid "Bookmark %1."
@@ -1353,7 +1395,7 @@ msgctxt "Header of the connections list, where this entry comes from"
 msgid "Source"
 msgstr "源"
 
-#: vnc/vncclientthread.cpp:299
+#: vnc/vncclientthread.cpp:300
 #, kde-format
 msgid "VNC authentication type is not supported."
 msgstr "不支持的 VNC 认证类型。"
@@ -1383,17 +1425,17 @@ msgstr "VNC 服务器端关闭了连接。"
 msgid "Disconnected: %1."
 msgstr "断开连接：%1."
 
-#: vnc/vncclientthread.cpp:560
+#: vnc/vncclientthread.cpp:561
 #, kde-format
 msgid "Reconnecting."
 msgstr "正在重新连接。"
 
-#: vnc/vncclientthread.cpp:627
+#: vnc/vncclientthread.cpp:628
 #, kde-format
 msgid "Reconnected."
 msgstr "已经重新连接。"
 
-#: vnc/vncclientthread.cpp:629
+#: vnc/vncclientthread.cpp:630
 #, kde-format
 msgid "Connected."
 msgstr "已连接."
@@ -1528,18 +1570,18 @@ msgstr ""
 "支持的密码管理器会对已复制的密码标记上“x-kde-passwordManagerHint”的附加 MIME "
 "类型，本功能会依此进行过滤。"
 
-#: vnc/vncsshtunnelthread.cpp:102
+#: vnc/vncsshtunnelthread.cpp:99
 #, kde-format
 msgid "Error connecting to %1: %2"
 msgstr "连接到 %1 时出错：%2"
 
-#: vnc/vncsshtunnelthread.cpp:127
+#: vnc/vncsshtunnelthread.cpp:124
 #, kde-format
 msgid "Error authenticating with password: %1"
 msgstr "使用密码认证时出错：%1"
 
-#: vnc/vncsshtunnelthread.cpp:133 vnc/vncsshtunnelthread.cpp:151
-#: vnc/vncsshtunnelthread.cpp:158 vnc/vncsshtunnelthread.cpp:166
+#: vnc/vncsshtunnelthread.cpp:130 vnc/vncsshtunnelthread.cpp:148
+#: vnc/vncsshtunnelthread.cpp:155 vnc/vncsshtunnelthread.cpp:163
 #, kde-format
 msgid "Error creating tunnel socket"
 msgstr "创建隧道插槽失败"
@@ -1549,22 +1591,22 @@ msgstr "创建隧道插槽失败"
 msgid "Access to the system requires a password."
 msgstr "访问此系统需要密码。"
 
-#: vnc/vncview.cpp:345
+#: vnc/vncview.cpp:344
 #, kde-format
 msgid "Authentication failed. Please try again."
 msgstr "认证失败，请再试一次。"
 
-#: vnc/vncview.cpp:373
+#: vnc/vncview.cpp:374
 #, kde-format
 msgid "Please enter the SSH password."
 msgstr "请输入 SSH 密码。"
 
-#: vnc/vncview.cpp:398 vnc/vncview.cpp:400
+#: vnc/vncview.cpp:399 vnc/vncview.cpp:401
 #, kde-format
 msgid "VNC failure"
 msgstr "VNC 失败"
 
-#: vnc/vncview.cpp:409 vnc/vncview.cpp:411
+#: vnc/vncview.cpp:410 vnc/vncview.cpp:412
 #, kde-format
 msgid "SSH Tunnel failure"
 msgstr "SSH 隧道失败"
@@ -1579,7 +1621,7 @@ msgstr "新建 VNC 连接..."
 msgid "Connect to a VNC Remote Desktop"
 msgstr "连接到 VNC 远程桌面"
 
-#: vnc/vncviewfactory.cpp:57
+#: vnc/vncviewfactory.cpp:58
 #, kde-format
 msgid ""
 "<html>Enter the address here.<br /><i>Example: vncserver:1 (host:port / "

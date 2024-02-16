@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-04 00:41+0000\n"
+"POT-Creation-Date: 2024-02-16 01:40+0000\n"
 "PO-Revision-Date: 2010-05-31 12:11+0000\n"
 "Last-Translator: Sveinn í Felli <sveinki@nett.is>\n"
 "Language-Team: Icelandic <kde-isl@molar.is>\n"
@@ -35,7 +35,7 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "pjetur@pjetur.net, stigur@vortex.is, ra@ra.is"
 
-#: bookmarkmanager.cpp:44
+#: bookmarkmanager.cpp:43
 #, fuzzy, kde-format
 msgid "History"
 msgstr "Ferill"
@@ -202,15 +202,15 @@ msgstr "Stilla..."
 msgid "Remove"
 msgstr "Fjarlægja"
 
-#: config/hostpreferenceslist.cpp:100 mainwindow.cpp:678
-#, fuzzy, kde-format
-msgid "The selected host cannot be handled."
-msgstr "Valda vél er ekki hægt að meðhöndla."
-
-#: config/hostpreferenceslist.cpp:101 mainwindow.cpp:288 mainwindow.cpp:679
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:283 mainwindow.cpp:678
 #, fuzzy, kde-format
 msgid "Unusable URL"
 msgstr "Ónothæf slóð (URL)"
+
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:678
+#, fuzzy, kde-format
+msgid "The selected host cannot be handled."
+msgstr "Valda vél er ekki hægt að meðhöndla."
 
 #: config/preferencesdialog.cpp:24
 #, fuzzy, kde-format
@@ -224,25 +224,25 @@ msgstr "Almennt"
 msgid "General Configuration"
 msgstr "&Vélasniðmát"
 
-#: config/preferencesdialog.cpp:29
+#: config/preferencesdialog.cpp:28
 #, fuzzy, kde-format
 #| msgid "Host"
 msgid "Hosts"
 msgstr "Tölva"
 
-#: config/preferencesdialog.cpp:29 core/hostpreferences.cpp:176
-#: core/hostpreferences.cpp:180
+#: config/preferencesdialog.cpp:28 core/hostpreferences.cpp:175
+#: core/hostpreferences.cpp:179
 #, fuzzy, kde-format
 #| msgid "&Host Profiles"
 msgid "Host Configuration"
 msgstr "&Vélasniðmát"
 
-#: config/preferencesdialog.cpp:34 config/preferencesdialog.cpp:35
+#: config/preferencesdialog.cpp:33 config/preferencesdialog.cpp:34
 #, fuzzy, kde-format
 msgid "Plugins"
 msgstr "Íforrit"
 
-#: config/preferencesdialog.cpp:35
+#: config/preferencesdialog.cpp:34
 #, fuzzy, kde-format
 #| msgid "&Host Profiles"
 msgid "Plugin Configuration"
@@ -288,7 +288,7 @@ msgid_plural "%1 years ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: core/hostpreferences.cpp:183
+#: core/hostpreferences.cpp:182
 #, fuzzy, kde-format
 msgid ""
 "Note that settings might only apply when you connect next time to this host."
@@ -296,13 +296,13 @@ msgstr ""
 "Athugaðu að stillingarnar gætu aðeins virkað næst þegar þú tengist þessari "
 "vél."
 
-#: core/hostpreferences.cpp:199
+#: core/hostpreferences.cpp:198
 #, fuzzy, kde-format
 #| msgid "&Show this dialog again for this host"
 msgid "Show this dialog again for this host"
 msgstr "&Sýna þennan glugga aftur fyrir þessa tölvu"
 
-#: core/hostpreferences.cpp:203
+#: core/hostpreferences.cpp:202
 #, fuzzy, kde-format
 msgid "Remember password (KWallet)"
 msgstr "Muna lykilorð (KWallet)"
@@ -325,18 +325,18 @@ msgstr "&Seta"
 msgid "Remote View Toolbar"
 msgstr "Áhaldaslá fyrir fjarlæga sýn"
 
-#: main.cpp:61
+#: main.cpp:60
 #, kde-format
 msgid "KRDC"
 msgstr "KRDC"
 
-#: main.cpp:62 systemtrayicon.cpp:24
+#: main.cpp:60 systemtrayicon.cpp:24
 #, fuzzy, kde-format
 #| msgid "Remote Desktop Connection"
 msgid "KDE Remote Desktop Client"
 msgstr "Fjartengt skjáborð"
 
-#: main.cpp:64
+#: main.cpp:63
 #, fuzzy, kde-format
 #| msgid ""
 #| "(c) 2007-2009, Urs Wolfer\n"
@@ -364,63 +364,63 @@ msgstr ""
 "(c) 1999, AT&T Laboratories Boston\n"
 "(c) 1999-2003, Matthew Chapman"
 
-#: main.cpp:73
+#: main.cpp:72
 #, fuzzy, kde-format
 msgid "Urs Wolfer"
 msgstr "Urs Wolfer"
 
-#: main.cpp:73
+#: main.cpp:72
 #, fuzzy, kde-format
 msgid "Developer, Maintainer"
 msgstr "Viðhaldsforritari"
 
-#: main.cpp:74
+#: main.cpp:73
 #, kde-format
 msgid "Tony Murray"
 msgstr ""
 
-#: main.cpp:74
+#: main.cpp:73
 #, fuzzy, kde-format
 msgid "Developer"
 msgstr "Fyrrverandi forritari"
 
-#: main.cpp:75
+#: main.cpp:74
 #, fuzzy, kde-format
 msgid "Tim Jansen"
 msgstr "Tim Jansen"
 
-#: main.cpp:75
+#: main.cpp:74
 #, fuzzy, kde-format
 msgid "Former Developer"
 msgstr "Fyrrverandi forritari"
 
-#: main.cpp:76
+#: main.cpp:75
 #, fuzzy, kde-format
 msgid "Arend van Beelen jr."
 msgstr "Arend van Beelen jr."
 
-#: main.cpp:76
+#: main.cpp:75
 #, fuzzy, kde-format
 #| msgid "RDP backend"
 msgid "Initial RDP backend"
 msgstr "RDP afturendi"
 
-#: main.cpp:77
+#: main.cpp:76
 #, fuzzy, kde-format
 msgid "Brad Hards"
 msgstr "Brad Hards"
 
-#: main.cpp:77
+#: main.cpp:76
 #, fuzzy, kde-format
 msgid "Google Summer of Code 2007 KRDC project mentor"
 msgstr "Umsjónarmaður Google Summer of Code 2007 KRDC verkefnis"
 
-#: main.cpp:79
+#: main.cpp:77
 #, fuzzy, kde-format
 msgid "LibVNCServer / LibVNCClient developers"
 msgstr "LibVNCServer / LibVNCClient forritarar"
 
-#: main.cpp:79
+#: main.cpp:78
 #, fuzzy, kde-format
 msgid "VNC client library"
 msgstr "VNC biðlaraaðgerðasafn"
@@ -448,35 +448,35 @@ msgstr ""
 msgid "URLs to connect after startup"
 msgstr "Slóðir (URL) til að tengjast eftir ræsingu"
 
-#: mainwindow.cpp:125
+#: mainwindow.cpp:124
 #, fuzzy, kde-format
 #| msgid "Remote Desktop Connection"
 msgid "KDE Remote Desktop Client started"
 msgstr "Fjartengt skjáborð"
 
-#: mainwindow.cpp:130 mainwindow.cpp:143 mainwindow.cpp:1093
-#: mainwindow.cpp:1190
+#: mainwindow.cpp:129 mainwindow.cpp:142 mainwindow.cpp:1083
+#: mainwindow.cpp:1178
 #, fuzzy, kde-format
 #| msgid "Connection"
 msgid "New Connection"
 msgstr "Tenging"
 
-#: mainwindow.cpp:149
+#: mainwindow.cpp:148
 #, fuzzy, kde-format
 msgid "Copy Screenshot to Clipboard"
 msgstr "Grípa gluggamynd á klippiborð"
 
-#: mainwindow.cpp:150
+#: mainwindow.cpp:149
 #, fuzzy, kde-format
 msgid "Screenshot"
 msgstr "Skjámynd"
 
-#: mainwindow.cpp:155 mainwindow.cpp:502
+#: mainwindow.cpp:155 mainwindow.cpp:501
 #, fuzzy, kde-format
 msgid "Switch to Full Screen Mode"
 msgstr "Skipta í skjáfylliham"
 
-#: mainwindow.cpp:156 mainwindow.cpp:503
+#: mainwindow.cpp:156 mainwindow.cpp:502
 #, fuzzy, kde-format
 msgid "Full Screen"
 msgstr "Fylla skjá"
@@ -536,7 +536,7 @@ msgstr ""
 msgid "Bookmarks"
 msgstr "Bókamerki"
 
-#: mainwindow.cpp:264
+#: mainwindow.cpp:262
 #, fuzzy, kde-format
 #| msgid "The entered host does not have the required form."
 msgid ""
@@ -544,41 +544,41 @@ msgid ""
 " Syntax: [username@]host[:port]"
 msgstr "Uppgefin vél er ekki með nauðsynlegt form."
 
-#: mainwindow.cpp:265
+#: mainwindow.cpp:262
 #, fuzzy, kde-format
 #| msgid "Malformed URL or Host"
 msgid "Malformed URL"
 msgstr "Gölluð slóð eða vél"
 
-#: mainwindow.cpp:287
+#: mainwindow.cpp:283
 #, fuzzy, kde-format
 msgid "The entered address cannot be handled."
 msgstr "Ekki er hægt að meðhöndla uppgefið vistfang."
 
-#: mainwindow.cpp:419
+#: mainwindow.cpp:418
 #, fuzzy, kde-format
 #| msgid "Connection"
 msgid "Connecting to %1"
 msgstr "Tenging"
 
-#: mainwindow.cpp:423
+#: mainwindow.cpp:422
 #, fuzzy, kde-format
 #| msgid "Authenticating..."
 msgid "Authenticating at %1"
 msgstr "Auðkenni..."
 
-#: mainwindow.cpp:427
+#: mainwindow.cpp:426
 #, fuzzy, kde-format
 msgid "Preparing connection to %1"
 msgstr "Undirbý tengingu við %1"
 
-#: mainwindow.cpp:431
+#: mainwindow.cpp:430
 #, fuzzy, kde-format
 #| msgid "Connection"
 msgid "Connected to %1"
 msgstr "Tenging"
 
-#: mainwindow.cpp:513
+#: mainwindow.cpp:512
 #, fuzzy, kde-format
 #| msgid "Remote Desktop Connection"
 msgctxt ""
@@ -586,132 +586,132 @@ msgctxt ""
 msgid "KDE Remote Desktop Client (Full Screen)"
 msgstr "Fjartengt skjáborð"
 
-#: mainwindow.cpp:546
+#: mainwindow.cpp:545
 #, fuzzy, kde-format
 msgid "Switch to Window Mode"
 msgstr "Skipta yfir í gluggaham"
 
-#: mainwindow.cpp:547
+#: mainwindow.cpp:546
 #, fuzzy, kde-format
 msgid "Window Mode"
 msgstr "Glugga viðmót"
 
-#: mainwindow.cpp:699
+#: mainwindow.cpp:697
 #, fuzzy, kde-format
 #| msgid "Connection"
 msgid "Connect"
 msgstr "Tenging"
 
-#: mainwindow.cpp:700
+#: mainwindow.cpp:698
 #, fuzzy, kde-format
 msgid "Rename"
 msgstr "Fjarlægja"
 
-#: mainwindow.cpp:701
+#: mainwindow.cpp:699
 #, fuzzy, kde-format
 #| msgid "Settings"
 msgid "Settings"
 msgstr "Stillingar"
 
-#: mainwindow.cpp:702
+#: mainwindow.cpp:700
 #, fuzzy, kde-format
 msgid "Delete"
 msgstr "Eyða"
 
-#: mainwindow.cpp:705 remotedesktopsmodel.cpp:107
+#: mainwindow.cpp:703 remotedesktopsmodel.cpp:108
 #, fuzzy, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "Bókamerki"
 
-#: mainwindow.cpp:706 remotedesktopsmodel.cpp:109
+#: mainwindow.cpp:703 remotedesktopsmodel.cpp:110
 #, fuzzy, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "Ferill"
 
-#: mainwindow.cpp:718
+#: mainwindow.cpp:715
 #, kde-format
 msgid "Rename %1"
 msgstr ""
 
-#: mainwindow.cpp:718
+#: mainwindow.cpp:715
 #, kde-format
 msgid "Rename %1 to"
 msgstr ""
 
-#: mainwindow.cpp:726
+#: mainwindow.cpp:722
 #, fuzzy, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "Ertu viss um að þú viljir eyða %1?"
 
-#: mainwindow.cpp:726
+#: mainwindow.cpp:722
 #, fuzzy, kde-format
 msgid "Delete %1"
 msgstr "Eyða %1"
 
-#: mainwindow.cpp:748
+#: mainwindow.cpp:746
 #, fuzzy, kde-format
 msgid "Add Bookmark"
 msgstr "Setja bókamerki"
 
-#: mainwindow.cpp:749
+#: mainwindow.cpp:747
 #, fuzzy, kde-format
 msgid "Close Tab"
 msgstr "Loka flipa"
 
-#: mainwindow.cpp:853
+#: mainwindow.cpp:851
 #, fuzzy, kde-format
 msgid "Minimize Full Screen Window"
 msgstr "Minnka heilskjásglugga"
 
-#: mainwindow.cpp:869
+#: mainwindow.cpp:867
 #, fuzzy, kde-format
 msgid "Stick Toolbar"
 msgstr "Festa tækjaslá"
 
-#: mainwindow.cpp:987
+#: mainwindow.cpp:976
 #, fuzzy, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr ""
 "Ertu viss um að þú viljir hætta í KDE forritinu fyrir fjarlæg skjáborð?"
 
-#: mainwindow.cpp:988
+#: mainwindow.cpp:977
 #, fuzzy, kde-format
 msgid "Confirm Quit"
 msgstr "Staðfesta að hætta"
 
-#: mainwindow.cpp:1116
+#: mainwindow.cpp:1106
 #, fuzzy, kde-format
 #| msgid "Connect"
 msgid "Connect to:"
 msgstr "Tengjast"
 
-#: mainwindow.cpp:1120
+#: mainwindow.cpp:1110
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr ""
 
-#: mainwindow.cpp:1129
+#: mainwindow.cpp:1119
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
 "methods."
 msgstr ""
 
-#: mainwindow.cpp:1132
+#: mainwindow.cpp:1122
 #, fuzzy, kde-format
 #| msgid "Address"
 msgid "Goto Address"
 msgstr "Vistfang"
 
-#: mainwindow.cpp:1226
+#: mainwindow.cpp:1214
 #, fuzzy, kde-format
 #| msgid "Remote &desktop:"
 msgid "Remote Desktops"
 msgstr "Fjarlægt &skjáborð:"
 
-#: mainwindow.cpp:1257
+#: mainwindow.cpp:1243
 #, fuzzy, kde-format
 msgid "Filter"
 msgstr "Sía"
@@ -1146,13 +1146,55 @@ msgctxt "label for soundsettings in preferences dialog"
 msgid "Sound:"
 msgstr "Hljóð:"
 
-#: rdp/rdpsession.cpp:142
+#. i18n: ectx: property (text), widget (QLabel, TlsSecLevelLabel)
+#: rdp/rdppreferences.ui:566
+#, kde-format
+msgid "TLS security level:"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
+#: rdp/rdppreferences.ui:592
+#, kde-format
+msgid "any"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
+#: rdp/rdppreferences.ui:597
+#, kde-format
+msgid "80 bit"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
+#: rdp/rdppreferences.ui:602
+#, kde-format
+msgid "112 bit"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
+#: rdp/rdppreferences.ui:607
+#, kde-format
+msgid "128 bit"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
+#: rdp/rdppreferences.ui:612
+#, kde-format
+msgid "192 bit"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
+#: rdp/rdppreferences.ui:617
+#, kde-format
+msgid "256 bit"
+msgstr ""
+
+#: rdp/rdpsession.cpp:157
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Logon Error"
 msgstr ""
 
-#: rdp/rdpsession.cpp:183
+#: rdp/rdpsession.cpp:204
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1163,51 +1205,51 @@ msgid ""
 "Fingerprint: %6\n"
 msgstr ""
 
-#: rdp/rdpsession.cpp:592
+#: rdp/rdpsession.cpp:642
 #, fuzzy, kde-format
 #| msgid "Access to the system requires a password."
 msgctxt "@label"
 msgid "Access to this system requires a password."
 msgstr "Aðgangur að kerfinu krefst lykilorðs."
 
-#: rdp/rdpsession.cpp:595
+#: rdp/rdpsession.cpp:645
 #, fuzzy, kde-format
 #| msgid "Access to the system requires a password."
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
 msgstr "Aðgangur að kerfinu krefst lykilorðs."
 
-#: rdp/rdpsession.cpp:617
+#: rdp/rdpsession.cpp:667
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr ""
 
-#: rdp/rdpsession.cpp:618
+#: rdp/rdpsession.cpp:668
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
 msgstr ""
 
-#: rdp/rdpsession.cpp:623 rdp/rdpsession.cpp:646
+#: rdp/rdpsession.cpp:673 rdp/rdpsession.cpp:696
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
 msgstr ""
 
-#: rdp/rdpsession.cpp:640
+#: rdp/rdpsession.cpp:690
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
 msgstr ""
 
-#: rdp/rdpsession.cpp:641
+#: rdp/rdpsession.cpp:691
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
 msgstr ""
 
-#: rdp/rdpsession.cpp:644
+#: rdp/rdpsession.cpp:694
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1217,14 +1259,14 @@ msgid ""
 "%2"
 msgstr ""
 
-#: rdp/rdpsession.cpp:758
+#: rdp/rdpsession.cpp:814
 #, fuzzy, kde-format
 #| msgid "Connection Failure"
 msgctxt "@title:dialog"
 msgid "Login Failure"
 msgstr "Tengivilla"
 
-#: rdp/rdpsession.cpp:759
+#: rdp/rdpsession.cpp:815
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1232,13 +1274,13 @@ msgid ""
 "and password."
 msgstr ""
 
-#: rdp/rdpsession.cpp:765
+#: rdp/rdpsession.cpp:821
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Account Problems"
 msgstr ""
 
-#: rdp/rdpsession.cpp:766
+#: rdp/rdpsession.cpp:822
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1246,13 +1288,13 @@ msgid ""
 "contact your system administrator."
 msgstr ""
 
-#: rdp/rdpsession.cpp:771
+#: rdp/rdpsession.cpp:827
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Password Problems"
 msgstr ""
 
-#: rdp/rdpsession.cpp:772
+#: rdp/rdpsession.cpp:828
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1260,80 +1302,80 @@ msgid ""
 "administrator to change it."
 msgstr ""
 
-#: rdp/rdpsession.cpp:775
+#: rdp/rdpsession.cpp:831
 #, fuzzy, kde-format
 #| msgid "Connection"
 msgctxt "@title:dialog"
 msgid "Connection Lost"
 msgstr "Tenging"
 
-#: rdp/rdpsession.cpp:776
+#: rdp/rdpsession.cpp:832
 #, fuzzy, kde-format
 #| msgid "An error occurred while scanning the network."
 msgctxt "@label"
 msgid "Lost connection to the server."
 msgstr "Villa kom upp meðan leitað var á neti."
 
-#: rdp/rdpsession.cpp:780
+#: rdp/rdpsession.cpp:836
 #, fuzzy, kde-format
 msgctxt "@title:dialog"
 msgid "Server not Found"
 msgstr "Miðlarinn finnst ekki."
 
-#: rdp/rdpsession.cpp:781
+#: rdp/rdpsession.cpp:837
 #, kde-format
 msgctxt "@label"
 msgid "Could not find the server."
 msgstr ""
 
-#: rdp/rdpsession.cpp:784
+#: rdp/rdpsession.cpp:840
 #, fuzzy, kde-format
 #| msgid "Connection Failure"
 msgctxt "@title:dialog"
 msgid "Connection Refused"
 msgstr "Tengivilla"
 
-#: rdp/rdpsession.cpp:785
+#: rdp/rdpsession.cpp:841
 #, fuzzy, kde-format
 msgctxt "@label"
 msgid "The server refused the connection request."
 msgstr "VNC miðlarinn lokaði tengingunni."
 
-#: rdp/rdpsession.cpp:789
+#: rdp/rdpsession.cpp:845
 #, fuzzy, kde-format
 #| msgid "Remote desktop connection"
 msgctxt "@title:dialog"
 msgid "Could not Connect"
 msgstr "Fjartengt skjáborð"
 
-#: rdp/rdpsession.cpp:790
+#: rdp/rdpsession.cpp:846
 #, fuzzy, kde-format
 #| msgid "An error occurred while scanning the network."
 msgctxt "@label"
 msgid "Could not connect to the server."
 msgstr "Villa kom upp meðan leitað var á neti."
 
-#: rdp/rdpsession.cpp:795
+#: rdp/rdpsession.cpp:851
 #, fuzzy, kde-format
 #| msgid "Connection Failure"
 msgctxt "@title:dialog"
 msgid "Connection Closed"
 msgstr "Tengivilla"
 
-#: rdp/rdpsession.cpp:796
+#: rdp/rdpsession.cpp:852
 #, kde-format
 msgctxt "@label"
 msgid "The connection to the server was closed."
 msgstr ""
 
-#: rdp/rdpsession.cpp:799
+#: rdp/rdpsession.cpp:855
 #, fuzzy, kde-format
 #| msgid "Connection Failure"
 msgctxt "@title:dialog"
 msgid "Connection Failed"
 msgstr "Tengivilla"
 
-#: rdp/rdpsession.cpp:800
+#: rdp/rdpsession.cpp:856
 #, kde-format
 msgctxt "@label"
 msgid "An unknown error occurred"
@@ -1350,7 +1392,7 @@ msgstr "Tengjast Windows Remote Desktop (RDP)"
 msgid "New RDP Connection..."
 msgstr "Tenging"
 
-#: rdp/rdpviewfactory.cpp:61
+#: rdp/rdpviewfactory.cpp:62
 #, fuzzy, kde-format
 msgid ""
 "<html>Enter the address here. Port is optional.<br /><i>Example: "
@@ -1359,25 +1401,25 @@ msgstr ""
 "<html>Settu inn vistfang hér. Auk þess má tilgreina gátt.<br /><i>Dæmi: "
 "rdpserver:3389 (vél:gátt)</i></html>"
 
-#: remotedesktopsmodel.cpp:111
+#: remotedesktopsmodel.cpp:112
 #, fuzzy, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Zeroconf"
 msgstr "ZeroConf"
 
-#: remotedesktopsmodel.cpp:113
+#: remotedesktopsmodel.cpp:114
 #, fuzzy, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "None"
 msgstr "Ekkert"
 
-#: remotedesktopsmodel.cpp:129
+#: remotedesktopsmodel.cpp:130
 #, kde-format
 msgctxt "Remove the selected url from the bookarks menu"
 msgid "Remove the bookmark for %1."
 msgstr ""
 
-#: remotedesktopsmodel.cpp:131
+#: remotedesktopsmodel.cpp:132
 #, fuzzy, kde-format
 msgctxt "Add the selected url to the bookmarks menu"
 msgid "Bookmark %1."
@@ -1418,7 +1460,7 @@ msgctxt "Header of the connections list, where this entry comes from"
 msgid "Source"
 msgstr "Uppruni"
 
-#: vnc/vncclientthread.cpp:299
+#: vnc/vncclientthread.cpp:300
 #, fuzzy, kde-format
 #| msgid "Authentication Failure"
 msgid "VNC authentication type is not supported."
@@ -1452,19 +1494,19 @@ msgstr "VNC miðlarinn lokaði tengingunni."
 msgid "Disconnected: %1."
 msgstr "Tengjast"
 
-#: vnc/vncclientthread.cpp:560
+#: vnc/vncclientthread.cpp:561
 #, fuzzy, kde-format
 #| msgid "Connection"
 msgid "Reconnecting."
 msgstr "Tenging"
 
-#: vnc/vncclientthread.cpp:627
+#: vnc/vncclientthread.cpp:628
 #, fuzzy, kde-format
 #| msgid "Connect"
 msgid "Reconnected."
 msgstr "Tengjast"
 
-#: vnc/vncclientthread.cpp:629
+#: vnc/vncclientthread.cpp:630
 #, fuzzy, kde-format
 #| msgid "Connection"
 msgid "Connected."
@@ -1601,20 +1643,20 @@ msgid ""
 "filtering."
 msgstr ""
 
-#: vnc/vncsshtunnelthread.cpp:102
+#: vnc/vncsshtunnelthread.cpp:99
 #, fuzzy, kde-format
 #| msgid "Connection"
 msgid "Error connecting to %1: %2"
 msgstr "Tenging"
 
-#: vnc/vncsshtunnelthread.cpp:127
+#: vnc/vncsshtunnelthread.cpp:124
 #, fuzzy, kde-format
 #| msgid "Authenticating..."
 msgid "Error authenticating with password: %1"
 msgstr "Auðkenni..."
 
-#: vnc/vncsshtunnelthread.cpp:133 vnc/vncsshtunnelthread.cpp:151
-#: vnc/vncsshtunnelthread.cpp:158 vnc/vncsshtunnelthread.cpp:166
+#: vnc/vncsshtunnelthread.cpp:130 vnc/vncsshtunnelthread.cpp:148
+#: vnc/vncsshtunnelthread.cpp:155 vnc/vncsshtunnelthread.cpp:163
 #, kde-format
 msgid "Error creating tunnel socket"
 msgstr ""
@@ -1624,23 +1666,23 @@ msgstr ""
 msgid "Access to the system requires a password."
 msgstr "Aðgangur að kerfinu krefst lykilorðs."
 
-#: vnc/vncview.cpp:345
+#: vnc/vncview.cpp:344
 #, fuzzy, kde-format
 #| msgid "Authentication Failure"
 msgid "Authentication failed. Please try again."
 msgstr "Auðkenning mistókst"
 
-#: vnc/vncview.cpp:373
+#: vnc/vncview.cpp:374
 #, kde-format
 msgid "Please enter the SSH password."
 msgstr ""
 
-#: vnc/vncview.cpp:398 vnc/vncview.cpp:400
+#: vnc/vncview.cpp:399 vnc/vncview.cpp:401
 #, fuzzy, kde-format
 msgid "VNC failure"
 msgstr "VNC villa"
 
-#: vnc/vncview.cpp:409 vnc/vncview.cpp:411
+#: vnc/vncview.cpp:410 vnc/vncview.cpp:412
 #, kde-format
 msgid "SSH Tunnel failure"
 msgstr ""
@@ -1656,7 +1698,7 @@ msgstr "Tenging"
 msgid "Connect to a VNC Remote Desktop"
 msgstr "Tengjast VNC fjarlægu skjáborði"
 
-#: vnc/vncviewfactory.cpp:57
+#: vnc/vncviewfactory.cpp:58
 #, fuzzy, kde-format
 msgid ""
 "<html>Enter the address here.<br /><i>Example: vncserver:1 (host:port / "
