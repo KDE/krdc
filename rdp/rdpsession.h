@@ -99,7 +99,7 @@ public:
 
     Q_SIGNAL void rectangleUpdated(const QRect &rectangle);
 
-    Q_SIGNAL void errorMessage(const QString &title, const QString &message);
+    Q_SIGNAL void errorMessage(unsigned int error);
 
 private:
     friend BOOL preConnect(freerdp *);

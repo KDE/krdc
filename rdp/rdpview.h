@@ -75,6 +75,7 @@ protected:
 
 private:
     void onRectangleUpdated(const QRect &rect);
+    void handleError(unsigned int error);
 
     QString m_name;
     QString m_user;

@@ -91,8 +91,17 @@ QSize RdpView::sizeHint() const
 
 void RdpView::startQuitting()
 {
+    if (m_quitting) {
+        return; // ignore repeated triggers
+    }
+
+    qCDebug(KRDC) << "Stopping RDP session";
     m_quitting = true;
     m_session->stop();
+
+    qCDebug(KRDC) << "RDP session stopped";
+    Q_EMIT disconnected();
+    setStatus(Disconnected);
 }
 
 bool RdpView::isQuitting()
@@ -139,9 +148,7 @@ bool RdpView::start()
             break;
         }
     });
-    connect(m_session.get(), &RdpSession::errorMessage, this, [this](const QString &title, const QString &message) {
-        KMessageBox::error(this, message, title);
-    });
+    connect(m_session.get(), &RdpSession::errorMessage, this, &RdpView::handleError);
 
     setStatus(RdpView::Connecting);
     if (!m_session->start()) {
@@ -152,6 +159,82 @@ bool RdpView::start()
     setFocus();
 
     return true;
+}
+
+void RdpView::handleError(const unsigned int error)
+{
+    QString title;
+    QString message;
+
+    switch (error) {
+    case FREERDP_ERROR_CONNECT_CANCELLED:
+        return; // user canceled connection, no need to show an error message
+    case FREERDP_ERROR_AUTHENTICATION_FAILED:
+    case FREERDP_ERROR_CONNECT_LOGON_FAILURE:
+    case FREERDP_ERROR_CONNECT_WRONG_PASSWORD:
+        title = i18nc("@title:dialog", "Login Failure");
+        message = i18nc("@label", "Unable to login with the provided credentials. Please double check the user and password.");
+        break;
+    case FREERDP_ERROR_CONNECT_ACCOUNT_LOCKED_OUT:
+    case FREERDP_ERROR_CONNECT_ACCOUNT_EXPIRED:
+    case FREERDP_ERROR_CONNECT_ACCOUNT_DISABLED:
+    case FREERDP_ERROR_SERVER_INSUFFICIENT_PRIVILEGES:
+        title = i18nc("@title:dialog", "Account Problems");
+        message = i18nc("@label", "The provided account is not allowed to log in to this machine. Please contact your system administrator.");
+        break;
+    case FREERDP_ERROR_CONNECT_PASSWORD_EXPIRED:
+    case FREERDP_ERROR_CONNECT_PASSWORD_CERTAINLY_EXPIRED:
+    case FREERDP_ERROR_CONNECT_PASSWORD_MUST_CHANGE:
+        title = i18nc("@title:dialog", "Password Problems");
+        message = i18nc("@label", "Unable to login with the provided password. Please contact your system administrator to change it.");
+        break;
+    case FREERDP_ERROR_CONNECT_FAILED:
+        title = i18nc("@title:dialog", "Connection Lost");
+        message = i18nc("@label", "Lost connection to the server.");
+        break;
+    case FREERDP_ERROR_DNS_ERROR:
+    case FREERDP_ERROR_DNS_NAME_NOT_FOUND:
+        title = i18nc("@title:dialog", "Server not Found");
+        message = i18nc("@label", "Could not find the server.");
+        break;
+    case FREERDP_ERROR_SERVER_DENIED_CONNECTION:
+        title = i18nc("@title:dialog", "Connection Refused");
+        message = i18nc("@label", "The server refused the connection request.");
+
+        break;
+    case FREERDP_ERROR_TLS_CONNECT_FAILED:
+    case FREERDP_ERROR_CONNECT_TRANSPORT_FAILED:
+        title = i18nc("@title:dialog", "Could not Connect");
+        message = i18nc("@label", "Could not connect to the server.");
+        break;
+    case FREERDP_ERROR_RPC_INITIATED_DISCONNECT:
+    case FREERDP_ERROR_RPC_INITIATED_LOGOFF:
+    case FREERDP_ERROR_RPC_INITIATED_DISCONNECT_BY_USER:
+    case FREERDP_ERROR_LOGOFF_BY_USER:
+        // user or admin initiated action, quit without error
+        startQuitting();
+        return;
+    case FREERDP_ERROR_DISCONNECTED_BY_OTHER_CONNECTION:
+        title = i18nc("@title:dialog", "Connection Closed");
+        message = QStringLiteral("Diconnected by other sesion");
+        break;
+    case FREERDP_ERROR_BASE:
+        title = i18nc("@title:dialog", "Connection Closed");
+        message = i18nc("@label", "The connection to the server was closed.");
+        break;
+    default:
+        qCDebug(KRDC) << "Unhandled error" << error;
+        title = i18nc("@title:dialog", "Connection Failed");
+        message = i18nc("@label", "An unknown error occurred");
+        break;
+    }
+
+    qCDebug(KRDC) << "error message" << title << message;
+    // TODO offer reconnect if approriate
+    KMessageBox::error(this, message, title);
+
+    // FIXME are there any situations we don't want to quit?
+    startQuitting();
 }
 
 HostPreferences *RdpView::hostPreferences()
