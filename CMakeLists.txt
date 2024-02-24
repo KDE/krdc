@@ -128,21 +128,21 @@ if(WITH_VNC)
 endif()
 
 if(WITH_RDP)
-    find_package(FreeRDP 2.10)
+	find_package(FreeRDP 3 REQUIRED)
     set_package_properties(FreeRDP PROPERTIES
         DESCRIPTION "A free Remote Desktop Protocol (RDP) Implementation"
         URL "https://www.freerdp.com/"
         PURPOSE "FreeRDP provides RDP support"
         TYPE REQUIRED
     )
-    find_package(WinPR)
+	find_package(WinPR 3 REQUIRED)
     set_package_properties(WinPR PROPERTIES
         DESCRIPTION "Windows Portable Runtime"
         URL "https://www.freerdp.com/"
         PURPOSE "Runtime used by FreeRDP"
         TYPE REQUIRED
     )
-    find_package(FreeRDP-Client 2.10)
+	find_package(FreeRDP-Client 3 REQUIRED)
     set_package_properties(FreeRDP-Client PROPERTIES
         DESCRIPTION "A free Remote Desktop Protocol (RDP) Implementation, Client libraries"
         URL "https://www.freerdp.com/"
