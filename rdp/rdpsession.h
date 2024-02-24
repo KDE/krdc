@@ -102,37 +102,51 @@ public:
     Q_SIGNAL void errorMessage(unsigned int error);
 
 private:
-    friend BOOL preConnect(freerdp *);
-    friend BOOL postConnect(freerdp *);
-    friend void postDisconnect(freerdp *);
-    friend BOOL authenticate(freerdp *, char **, char **, char **);
-    friend DWORD verifyCertificate(freerdp *, const char *, UINT16 port, const char *, const char *, const char *, const char *, DWORD);
-    friend DWORD verifyChangedCertificate(freerdp *,
-                                          const char *,
-                                          UINT16,
-                                          const char *,
-                                          const char *,
-                                          const char *,
-                                          const char *,
-                                          const char *,
-                                          const char *,
-                                          const char *,
-                                          DWORD);
-    friend BOOL endPaint(rdpContext *);
-    friend BOOL resizeDisplay(rdpContext *);
+    static BOOL preConnect(freerdp *);
+    static BOOL postConnect(freerdp *);
+    static void postDisconnect(freerdp *);
+    static void postFinalDisconnect(freerdp *);
+    static BOOL authenticateEx(freerdp *instance, char **username, char **password, char **domain, rdp_auth_reason reason);
+    static DWORD verifyCertificateEx(freerdp *, const char *, UINT16 port, const char *, const char *, const char *, const char *, DWORD);
+    static DWORD verifyChangedCertificateEx(freerdp *,
+                                            const char *,
+                                            UINT16,
+                                            const char *,
+                                            const char *,
+                                            const char *,
+                                            const char *,
+                                            const char *,
+                                            const char *,
+                                            const char *,
+                                            DWORD);
+    static BOOL endPaint(rdpContext *);
+    static BOOL resizeDisplay(rdpContext *);
 
+    static void channelConnected(void *context, const ChannelConnectedEventArgs *e);
+    static void channelDisconnected(void *context, const ChannelDisconnectedEventArgs *e);
+
+    static int logonErrorInfo(freerdp *rdp, UINT32 data, UINT32 type);
+    static BOOL presentGatewayMessage(freerdp *instance, UINT32 type, BOOL isDisplayMandatory, BOOL isConsentMandatory, size_t length, const WCHAR *message);
+    static BOOL chooseSmartcard(freerdp *instance, SmartcardCertInfo **cert_list, DWORD count, DWORD *choice, BOOL gateway);
+    static SSIZE_T retryDialog(freerdp *instance, const char *what, size_t current, void *userarg);
+
+    static BOOL client_global_init(void);
+    static void client_global_uninit(void);
+
+    static BOOL client_context_new(freerdp *instance, rdpContext *context);
+    static void client_context_free(freerdp *instance, rdpContext *context);
+
+    static int client_context_start(rdpContext *context);
+    static int client_context_stop(rdpContext *context);
+
+    static RDP_CLIENT_ENTRY_POINTS RdpClientEntry();
+
+private:
     void setState(State newState);
-
-    bool onPreConnect();
-    bool onPostConnect();
-    void onPostDisconnect();
 
     bool onAuthenticate(char **username, char **password, char **domain);
     CertificateResult onVerifyCertificate(const Certificate &certificate);
     CertificateResult onVerifyChangedCertificate(const Certificate &oldCertificate, const Certificate &newCertificate);
-
-    bool onEndPaint();
-    bool onResizeDisplay();
 
     void run();
 
@@ -140,8 +154,10 @@ private:
 
     RdpView *m_view;
 
-    freerdp *m_freerdp = nullptr;
-    RdpContext *m_context = nullptr;
+    union {
+        RdpContext *krdp;
+        rdpContext *rdp;
+    } m_context;
 
     State m_state = State::Initial;
 

@@ -5,6 +5,8 @@ target_sources(krdc_rdpplugin PRIVATE
     rdpviewfactory.cpp
     rdpview.cpp
     rdpsession.cpp
+	rdpaadview.cpp
+	rdpaadview.h
 )
 
 ki18n_wrap_ui(krdc_rdpplugin
