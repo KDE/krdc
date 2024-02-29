@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-29 01:36+0000\n"
+"POT-Creation-Date: 2024-02-24 01:34+0000\n"
 "PO-Revision-Date: 2023-02-09 21:30+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -30,7 +30,7 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "karl@huftis.org"
 
-#: bookmarkmanager.cpp:44
+#: bookmarkmanager.cpp:43
 #, kde-format
 msgid "History"
 msgstr "Tidlegare tilkoplingar"
@@ -197,15 +197,15 @@ msgstr "Set opp …"
 msgid "Remove"
 msgstr "Fjern"
 
-#: config/hostpreferenceslist.cpp:100 mainwindow.cpp:678
-#, kde-format
-msgid "The selected host cannot be handled."
-msgstr "Den valde verten kan ikkje handterast."
-
-#: config/hostpreferenceslist.cpp:101 mainwindow.cpp:288 mainwindow.cpp:679
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:283 mainwindow.cpp:678
 #, kde-format
 msgid "Unusable URL"
 msgstr "Ubrukeleg adresse"
+
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:678
+#, kde-format
+msgid "The selected host cannot be handled."
+msgstr "Den valde verten kan ikkje handterast."
 
 #: config/preferencesdialog.cpp:24
 #, kde-format
@@ -218,23 +218,23 @@ msgstr "Generelt"
 msgid "General Configuration"
 msgstr "Generelt oppsett"
 
-#: config/preferencesdialog.cpp:29
+#: config/preferencesdialog.cpp:28
 #, kde-format
 msgid "Hosts"
 msgstr "Vertar"
 
-#: config/preferencesdialog.cpp:29 core/hostpreferences.cpp:176
-#: core/hostpreferences.cpp:180
+#: config/preferencesdialog.cpp:28 core/hostpreferences.cpp:175
+#: core/hostpreferences.cpp:179
 #, kde-format
 msgid "Host Configuration"
 msgstr "Vertsoppsett"
 
-#: config/preferencesdialog.cpp:34 config/preferencesdialog.cpp:35
+#: config/preferencesdialog.cpp:33 config/preferencesdialog.cpp:34
 #, kde-format
 msgid "Plugins"
 msgstr "Programtillegg"
 
-#: config/preferencesdialog.cpp:35
+#: config/preferencesdialog.cpp:34
 #, kde-format
 msgid "Plugin Configuration"
 msgstr "Oppsett av programtillegg"
@@ -279,7 +279,7 @@ msgid_plural "%1 years ago"
 msgstr[0] "Eit år sidan"
 msgstr[1] "%1 år sidan"
 
-#: core/hostpreferences.cpp:183
+#: core/hostpreferences.cpp:182
 #, kde-format
 msgid ""
 "Note that settings might only apply when you connect next time to this host."
@@ -287,12 +287,12 @@ msgstr ""
 "Merk at nokre innstillingar ikkje trer i kraft før ved neste tilkopling til "
 "verten."
 
-#: core/hostpreferences.cpp:199
+#: core/hostpreferences.cpp:198
 #, kde-format
 msgid "Show this dialog again for this host"
 msgstr "Vis dette dialogvindauget på nytt for denne verten"
 
-#: core/hostpreferences.cpp:203
+#: core/hostpreferences.cpp:202
 #, kde-format
 msgid "Remember password (KWallet)"
 msgstr "Hugs passordet (KWallet)"
@@ -315,17 +315,17 @@ msgstr "&Økt"
 msgid "Remote View Toolbar"
 msgstr "Verktøylinje for fjernvising"
 
-#: main.cpp:61
+#: main.cpp:60
 #, kde-format
 msgid "KRDC"
 msgstr "KRDC"
 
-#: main.cpp:62 systemtrayicon.cpp:24
+#: main.cpp:60 systemtrayicon.cpp:24
 #, kde-format
 msgid "KDE Remote Desktop Client"
 msgstr "KDE-klient for tilkopling til eksterne skrivebord"
 
-#: main.cpp:64
+#: main.cpp:63
 #, kde-format
 msgid ""
 "(c) 2007-2016, Urs Wolfer\n"
@@ -346,63 +346,63 @@ msgstr ""
 "(©) 1999–2003 Matthew Chapman\n"
 "(©) 2009 Collabora Ltd"
 
-#: main.cpp:73
+#: main.cpp:72
 #, kde-format
 msgid "Urs Wolfer"
 msgstr "Urs Wolfer"
 
-#: main.cpp:73
+#: main.cpp:72
 #, kde-format
 msgid "Developer, Maintainer"
 msgstr "Utviklar og vedlikehaldar"
 
-#: main.cpp:74
+#: main.cpp:73
 #, kde-format
 msgid "Tony Murray"
 msgstr "Tony Murray"
 
-#: main.cpp:74
+#: main.cpp:73
 #, kde-format
 msgid "Developer"
 msgstr "Utviklar"
 
-#: main.cpp:75
+#: main.cpp:74
 #, kde-format
 msgid "Tim Jansen"
 msgstr "Tim Jansen"
 
-#: main.cpp:75
+#: main.cpp:74
 #, kde-format
 msgid "Former Developer"
 msgstr "Tidlegare utviklar"
 
-#: main.cpp:76
+#: main.cpp:75
 #, kde-format
 msgid "Arend van Beelen jr."
 msgstr "Arend van Beelen jr."
 
-#: main.cpp:76
+#: main.cpp:75
 #, kde-format
 msgid "Initial RDP backend"
 msgstr "Første implementasjon av RDP-motoren"
 
-#: main.cpp:77
+#: main.cpp:76
 #, kde-format
 msgid "Brad Hards"
 msgstr "Brad Hards"
 
 # skip-rule: e-infinitiv
-#: main.cpp:77
+#: main.cpp:76
 #, kde-format
 msgid "Google Summer of Code 2007 KRDC project mentor"
 msgstr "Mentor for Google Summer of Code 2007-prosjekt for KRDC"
 
-#: main.cpp:79
+#: main.cpp:77
 #, kde-format
 msgid "LibVNCServer / LibVNCClient developers"
 msgstr "LibVNCServer-/LibVNCClient-utviklarar"
 
-#: main.cpp:79
+#: main.cpp:78
 #, kde-format
 msgid "VNC client library"
 msgstr "VNC-klientbibliotek"
@@ -432,33 +432,33 @@ msgstr ""
 msgid "URLs to connect after startup"
 msgstr "Adresser å kopla til etter oppstart."
 
-#: mainwindow.cpp:125
+#: mainwindow.cpp:124
 #, kde-format
 msgid "KDE Remote Desktop Client started"
 msgstr "Starta klient for tilkopling til eksterne skrivebord"
 
-#: mainwindow.cpp:130 mainwindow.cpp:143 mainwindow.cpp:1093
-#: mainwindow.cpp:1190
+#: mainwindow.cpp:129 mainwindow.cpp:142 mainwindow.cpp:1083
+#: mainwindow.cpp:1178
 #, kde-format
 msgid "New Connection"
 msgstr "Ny tilkopling"
 
-#: mainwindow.cpp:149
+#: mainwindow.cpp:148
 #, kde-format
 msgid "Copy Screenshot to Clipboard"
 msgstr "Kopier skjermbilete til utklippstavla"
 
-#: mainwindow.cpp:150
+#: mainwindow.cpp:149
 #, kde-format
 msgid "Screenshot"
 msgstr "Skjermbilete"
 
-#: mainwindow.cpp:155 mainwindow.cpp:502
+#: mainwindow.cpp:155 mainwindow.cpp:501
 #, kde-format
 msgid "Switch to Full Screen Mode"
 msgstr "Byt til fullskjermsmodus"
 
-#: mainwindow.cpp:156 mainwindow.cpp:503
+#: mainwindow.cpp:156 mainwindow.cpp:502
 #, kde-format
 msgid "Full Screen"
 msgstr "Fullskjerm"
@@ -513,7 +513,7 @@ msgstr "Skaleringsfaktor"
 msgid "Bookmarks"
 msgstr "Bokmerke"
 
-#: mainwindow.cpp:264
+#: mainwindow.cpp:262
 #, kde-format
 msgid ""
 "The entered address does not have the required form.\n"
@@ -522,147 +522,147 @@ msgstr ""
 "Adressa du skreiv inn, er på feil format.\n"
 " Rett format: [brukarnamn@]vert[:port]"
 
-#: mainwindow.cpp:265
+#: mainwindow.cpp:262
 #, kde-format
 msgid "Malformed URL"
 msgstr "Ugyldig adresse"
 
-#: mainwindow.cpp:287
+#: mainwindow.cpp:283
 #, kde-format
 msgid "The entered address cannot be handled."
 msgstr "Kan ikkje handtera den innskrivne adressa."
 
-#: mainwindow.cpp:419
+#: mainwindow.cpp:418
 #, kde-format
 msgid "Connecting to %1"
 msgstr "Koplar til %1"
 
-#: mainwindow.cpp:423
+#: mainwindow.cpp:422
 #, kde-format
 msgid "Authenticating at %1"
 msgstr "Brukargodkjenning for %1"
 
-#: mainwindow.cpp:427
+#: mainwindow.cpp:426
 #, kde-format
 msgid "Preparing connection to %1"
 msgstr "Førebur tilkopling til %1"
 
-#: mainwindow.cpp:431
+#: mainwindow.cpp:430
 #, kde-format
 msgid "Connected to %1"
 msgstr "Kopla til %1"
 
-#: mainwindow.cpp:513
+#: mainwindow.cpp:512
 #, kde-format
 msgctxt ""
 "window title when in full screen mode (for example displayed in tasklist)"
 msgid "KDE Remote Desktop Client (Full Screen)"
 msgstr "KDE-klient for tilkopling til eksterne skrivebord (fullskjerm)"
 
-#: mainwindow.cpp:546
+#: mainwindow.cpp:545
 #, kde-format
 msgid "Switch to Window Mode"
 msgstr "Byt til vindaugsmodus"
 
-#: mainwindow.cpp:547
+#: mainwindow.cpp:546
 #, kde-format
 msgid "Window Mode"
 msgstr "Vindaugsmodus"
 
-#: mainwindow.cpp:699
+#: mainwindow.cpp:697
 #, kde-format
 msgid "Connect"
 msgstr "Kopla til"
 
-#: mainwindow.cpp:700
+#: mainwindow.cpp:698
 #, kde-format
 msgid "Rename"
 msgstr "Endra namn"
 
-#: mainwindow.cpp:701
+#: mainwindow.cpp:699
 #, kde-format
 msgid "Settings"
 msgstr "Innstillingar"
 
-#: mainwindow.cpp:702
+#: mainwindow.cpp:700
 #, kde-format
 msgid "Delete"
 msgstr "Slett"
 
-#: mainwindow.cpp:705 remotedesktopsmodel.cpp:107
+#: mainwindow.cpp:703 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "Bokmerke"
 
-#: mainwindow.cpp:706 remotedesktopsmodel.cpp:109
+#: mainwindow.cpp:703 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "Tidlegare tilkoplingar"
 
-#: mainwindow.cpp:718
+#: mainwindow.cpp:715
 #, kde-format
 msgid "Rename %1"
 msgstr "Endra namn på %1"
 
-#: mainwindow.cpp:718
+#: mainwindow.cpp:715
 #, kde-format
 msgid "Rename %1 to"
 msgstr "Endra namn på %1 til"
 
-#: mainwindow.cpp:726
+#: mainwindow.cpp:722
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "Er du sikker på at du vil sletta %1?"
 
-#: mainwindow.cpp:726
+#: mainwindow.cpp:722
 #, kde-format
 msgid "Delete %1"
 msgstr "Slett %1"
 
-#: mainwindow.cpp:748
+#: mainwindow.cpp:746
 #, kde-format
 msgid "Add Bookmark"
 msgstr "Legg til bokmerke"
 
-#: mainwindow.cpp:749
+#: mainwindow.cpp:747
 #, kde-format
 msgid "Close Tab"
 msgstr "Lukk fane"
 
-#: mainwindow.cpp:853
+#: mainwindow.cpp:851
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr "Minimer fullskjermsvindauge"
 
-#: mainwindow.cpp:869
+#: mainwindow.cpp:867
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "Fest verktøylinja"
 
-#: mainwindow.cpp:987
+#: mainwindow.cpp:976
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr "Er du sikker på at du vil avslutta KRDC?"
 
-#: mainwindow.cpp:988
+#: mainwindow.cpp:977
 #, kde-format
 msgid "Confirm Quit"
 msgstr "Stadfest avslutting"
 
-#: mainwindow.cpp:1116
+#: mainwindow.cpp:1106
 #, kde-format
 msgid "Connect to:"
 msgstr "Kopla til:"
 
 # Ein kan bruka feltet til *anten* kopla til ei adresse eller til å filtrera lista over adresser. Bør derfor vera «eller», ikkje «og» her.
-#: mainwindow.cpp:1120
+#: mainwindow.cpp:1110
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr "Trykk her for å kopla til ei adresse eller filtrera lista."
 
-#: mainwindow.cpp:1129
+#: mainwindow.cpp:1119
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
@@ -671,17 +671,17 @@ msgstr ""
 "Skriv inn IP-adresse/DNS-namn her. Tøm feltet for sjå oversikt over "
 "tilkoplingsmetodar."
 
-#: mainwindow.cpp:1132
+#: mainwindow.cpp:1122
 #, kde-format
 msgid "Goto Address"
 msgstr "Kopla til adressa"
 
-#: mainwindow.cpp:1226
+#: mainwindow.cpp:1214
 #, kde-format
 msgid "Remote Desktops"
 msgstr "Eksternt skrivebord"
 
-#: mainwindow.cpp:1257
+#: mainwindow.cpp:1243
 #, kde-format
 msgid "Filter"
 msgstr "Filter"
@@ -1115,13 +1115,55 @@ msgctxt "label for soundsettings in preferences dialog"
 msgid "Sound:"
 msgstr "Lyd:"
 
-#: rdp/rdpsession.cpp:143
+#. i18n: ectx: property (text), widget (QLabel, TlsSecLevelLabel)
+#: rdp/rdppreferences.ui:566
+#, kde-format
+msgid "TLS security level:"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
+#: rdp/rdppreferences.ui:592
+#, kde-format
+msgid "any"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
+#: rdp/rdppreferences.ui:597
+#, kde-format
+msgid "80 bit"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
+#: rdp/rdppreferences.ui:602
+#, kde-format
+msgid "112 bit"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
+#: rdp/rdppreferences.ui:607
+#, kde-format
+msgid "128 bit"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
+#: rdp/rdppreferences.ui:612
+#, kde-format
+msgid "192 bit"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
+#: rdp/rdppreferences.ui:617
+#, kde-format
+msgid "256 bit"
+msgstr ""
+
+#: rdp/rdpsession.cpp:162
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Logon Error"
 msgstr ""
 
-#: rdp/rdpsession.cpp:190
+#: rdp/rdpsession.cpp:209
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1132,49 +1174,49 @@ msgid ""
 "Fingerprint: %6\n"
 msgstr ""
 
-#: rdp/rdpsession.cpp:607
+#: rdp/rdpsession.cpp:647
 #, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a password."
 msgstr ""
 
-#: rdp/rdpsession.cpp:610
+#: rdp/rdpsession.cpp:650
 #, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
 msgstr ""
 
-#: rdp/rdpsession.cpp:632
+#: rdp/rdpsession.cpp:672
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr ""
 
-#: rdp/rdpsession.cpp:633
+#: rdp/rdpsession.cpp:673
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
 msgstr ""
 
-#: rdp/rdpsession.cpp:638 rdp/rdpsession.cpp:661
+#: rdp/rdpsession.cpp:678 rdp/rdpsession.cpp:701
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
 msgstr ""
 
-#: rdp/rdpsession.cpp:655
+#: rdp/rdpsession.cpp:695
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
 msgstr ""
 
-#: rdp/rdpsession.cpp:656
+#: rdp/rdpsession.cpp:696
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
 msgstr ""
 
-#: rdp/rdpsession.cpp:659
+#: rdp/rdpsession.cpp:699
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1184,13 +1226,13 @@ msgid ""
 "%2"
 msgstr ""
 
-#: rdp/rdpsession.cpp:773
+#: rdp/rdpview.cpp:175
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Login Failure"
 msgstr ""
 
-#: rdp/rdpsession.cpp:774
+#: rdp/rdpview.cpp:176
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1198,13 +1240,13 @@ msgid ""
 "and password."
 msgstr ""
 
-#: rdp/rdpsession.cpp:780
+#: rdp/rdpview.cpp:182
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Account Problems"
 msgstr ""
 
-#: rdp/rdpsession.cpp:781
+#: rdp/rdpview.cpp:183
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1212,13 +1254,13 @@ msgid ""
 "contact your system administrator."
 msgstr ""
 
-#: rdp/rdpsession.cpp:786
+#: rdp/rdpview.cpp:188
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Password Problems"
 msgstr ""
 
-#: rdp/rdpsession.cpp:787
+#: rdp/rdpview.cpp:189
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1226,73 +1268,73 @@ msgid ""
 "administrator to change it."
 msgstr ""
 
-#: rdp/rdpsession.cpp:790
+#: rdp/rdpview.cpp:192
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Lost"
 msgstr ""
 
-#: rdp/rdpsession.cpp:791
+#: rdp/rdpview.cpp:193
 #, kde-format
 msgctxt "@label"
 msgid "Lost connection to the server."
 msgstr ""
 
-#: rdp/rdpsession.cpp:795
+#: rdp/rdpview.cpp:197
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Server not Found"
 msgstr ""
 
-#: rdp/rdpsession.cpp:796
+#: rdp/rdpview.cpp:198
 #, kde-format
 msgctxt "@label"
 msgid "Could not find the server."
 msgstr ""
 
-#: rdp/rdpsession.cpp:799
+#: rdp/rdpview.cpp:201
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Refused"
 msgstr ""
 
-#: rdp/rdpsession.cpp:800
+#: rdp/rdpview.cpp:202
 #, kde-format
 msgctxt "@label"
 msgid "The server refused the connection request."
 msgstr ""
 
-#: rdp/rdpsession.cpp:804
+#: rdp/rdpview.cpp:207
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Could not Connect"
 msgstr ""
 
-#: rdp/rdpsession.cpp:805
+#: rdp/rdpview.cpp:208
 #, kde-format
 msgctxt "@label"
 msgid "Could not connect to the server."
 msgstr ""
 
-#: rdp/rdpsession.cpp:810
+#: rdp/rdpview.cpp:218 rdp/rdpview.cpp:222
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Closed"
 msgstr ""
 
-#: rdp/rdpsession.cpp:811
+#: rdp/rdpview.cpp:223
 #, kde-format
 msgctxt "@label"
 msgid "The connection to the server was closed."
 msgstr ""
 
-#: rdp/rdpsession.cpp:814
+#: rdp/rdpview.cpp:227
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Failed"
 msgstr ""
 
-#: rdp/rdpsession.cpp:815
+#: rdp/rdpview.cpp:228
 #, kde-format
 msgctxt "@label"
 msgid "An unknown error occurred"
@@ -1308,7 +1350,7 @@ msgstr "Kopla til RDP-skrivebord (Windows Remote Desktop)"
 msgid "New RDP Connection..."
 msgstr "Ny RDP-tilkopling …"
 
-#: rdp/rdpviewfactory.cpp:61
+#: rdp/rdpviewfactory.cpp:62
 #, kde-format
 msgid ""
 "<html>Enter the address here. Port is optional.<br /><i>Example: "
@@ -1317,25 +1359,25 @@ msgstr ""
 "<html>Skriv inn adressa her. Portnummeret kan sløyfast.<br /><i>Eksempel: "
 "rdpserver: (vert:port)</i></html>"
 
-#: remotedesktopsmodel.cpp:111
+#: remotedesktopsmodel.cpp:112
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Zeroconf"
 msgstr "Zeroconf"
 
-#: remotedesktopsmodel.cpp:113
+#: remotedesktopsmodel.cpp:114
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "None"
 msgstr "Ingen"
 
-#: remotedesktopsmodel.cpp:129
+#: remotedesktopsmodel.cpp:130
 #, kde-format
 msgctxt "Remove the selected url from the bookarks menu"
 msgid "Remove the bookmark for %1."
 msgstr "Fjern bokmerket for %1."
 
-#: remotedesktopsmodel.cpp:131
+#: remotedesktopsmodel.cpp:132
 #, kde-format
 msgctxt "Add the selected url to the bookmarks menu"
 msgid "Bookmark %1."
@@ -1374,7 +1416,7 @@ msgctxt "Header of the connections list, where this entry comes from"
 msgid "Source"
 msgstr "Kjelde"
 
-#: vnc/vncclientthread.cpp:299
+#: vnc/vncclientthread.cpp:300
 #, kde-format
 msgid "VNC authentication type is not supported."
 msgstr "Typen VNC-brukargodkjenning er ikkje støtta."
@@ -1405,17 +1447,17 @@ msgstr "VNC-tenaren avslutta sambandet."
 msgid "Disconnected: %1."
 msgstr "Kopla frå: %1."
 
-#: vnc/vncclientthread.cpp:560
+#: vnc/vncclientthread.cpp:561
 #, kde-format
 msgid "Reconnecting."
 msgstr "Koplar til på nytt."
 
-#: vnc/vncclientthread.cpp:627
+#: vnc/vncclientthread.cpp:628
 #, kde-format
 msgid "Reconnected."
 msgstr "Kopla til på nytt."
 
-#: vnc/vncclientthread.cpp:629
+#: vnc/vncclientthread.cpp:630
 #, kde-format
 msgid "Connected."
 msgstr "Kopla til."
@@ -1555,18 +1597,18 @@ msgstr ""
 "ekstra MIME-type («x-kde-passwordManagerHint»), og desse vert då filtrerte "
 "ut."
 
-#: vnc/vncsshtunnelthread.cpp:102
+#: vnc/vncsshtunnelthread.cpp:99
 #, kde-format
 msgid "Error connecting to %1: %2"
 msgstr "Klarte ikkje kopla til %1: %2"
 
-#: vnc/vncsshtunnelthread.cpp:127
+#: vnc/vncsshtunnelthread.cpp:124
 #, kde-format
 msgid "Error authenticating with password: %1"
 msgstr "Feil ved brukargodkjenning med passord: %1"
 
-#: vnc/vncsshtunnelthread.cpp:133 vnc/vncsshtunnelthread.cpp:151
-#: vnc/vncsshtunnelthread.cpp:158 vnc/vncsshtunnelthread.cpp:166
+#: vnc/vncsshtunnelthread.cpp:130 vnc/vncsshtunnelthread.cpp:148
+#: vnc/vncsshtunnelthread.cpp:155 vnc/vncsshtunnelthread.cpp:163
 #, kde-format
 msgid "Error creating tunnel socket"
 msgstr "Klarte ikkje oppretta tunell-socket"
@@ -1576,22 +1618,22 @@ msgstr "Klarte ikkje oppretta tunell-socket"
 msgid "Access to the system requires a password."
 msgstr "Du må oppgje passord for å få tilgang til dette systemet."
 
-#: vnc/vncview.cpp:345
+#: vnc/vncview.cpp:344
 #, kde-format
 msgid "Authentication failed. Please try again."
 msgstr "Feil ved brukargodkjenning. Prøv på nytt."
 
-#: vnc/vncview.cpp:373
+#: vnc/vncview.cpp:374
 #, kde-format
 msgid "Please enter the SSH password."
 msgstr "Skriv inn SSH-passordet."
 
-#: vnc/vncview.cpp:398 vnc/vncview.cpp:400
+#: vnc/vncview.cpp:399 vnc/vncview.cpp:401
 #, kde-format
 msgid "VNC failure"
 msgstr "VNC-feil"
 
-#: vnc/vncview.cpp:409 vnc/vncview.cpp:411
+#: vnc/vncview.cpp:410 vnc/vncview.cpp:412
 #, kde-format
 msgid "SSH Tunnel failure"
 msgstr "Feil ved SSH-tunell"
@@ -1606,7 +1648,7 @@ msgstr "Ny VNC-tilkopling …"
 msgid "Connect to a VNC Remote Desktop"
 msgstr "Kopla til VNC-skrivebord"
 
-#: vnc/vncviewfactory.cpp:57
+#: vnc/vncviewfactory.cpp:58
 #, kde-format
 msgid ""
 "<html>Enter the address here.<br /><i>Example: vncserver:1 (host:port / "
