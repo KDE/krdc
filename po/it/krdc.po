@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-29 01:36+0000\n"
+"POT-Creation-Date: 2024-03-02 03:07+0000\n"
 "PO-Revision-Date: 2023-11-30 14:31+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -1112,13 +1112,13 @@ msgctxt "label for soundsettings in preferences dialog"
 msgid "Sound:"
 msgstr "Suono:"
 
-#: rdp/rdpsession.cpp:143
+#: rdp/rdpsession.cpp:148
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Logon Error"
 msgstr "Errore di accesso"
 
-#: rdp/rdpsession.cpp:190
+#: rdp/rdpsession.cpp:195
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1134,49 +1134,49 @@ msgstr ""
 "Emittente: %5\n"
 "Impronta digitale: %6\n"
 
-#: rdp/rdpsession.cpp:607
+#: rdp/rdpsession.cpp:612
 #, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a password."
 msgstr "L'accesso a questo sistema richiede una password."
 
-#: rdp/rdpsession.cpp:610
+#: rdp/rdpsession.cpp:615
 #, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
 msgstr "L'accesso a questo sistema richiede un nome utente e una password."
 
-#: rdp/rdpsession.cpp:632
+#: rdp/rdpsession.cpp:637
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr "Il certificato per questo sistema è sconosciuto. Vuoi continuare?"
 
-#: rdp/rdpsession.cpp:633
+#: rdp/rdpsession.cpp:638
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
 msgstr "Verifica certificato"
 
-#: rdp/rdpsession.cpp:638 rdp/rdpsession.cpp:661
+#: rdp/rdpsession.cpp:643 rdp/rdpsession.cpp:666
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
 msgstr "Ricorda questo certificato"
 
-#: rdp/rdpsession.cpp:655
+#: rdp/rdpsession.cpp:660
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
 msgstr "Il certificato per questo sistema è cambiato. Vuoi continuare?"
 
-#: rdp/rdpsession.cpp:656
+#: rdp/rdpsession.cpp:661
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
 msgstr "Il certificato è cambiato"
 
-#: rdp/rdpsession.cpp:659
+#: rdp/rdpsession.cpp:664
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1190,13 +1190,13 @@ msgstr ""
 "Nuovo certificato:\n"
 "%2"
 
-#: rdp/rdpsession.cpp:773
+#: rdp/rdpview.cpp:179
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Login Failure"
 msgstr "Accesso non riuscito"
 
-#: rdp/rdpsession.cpp:774
+#: rdp/rdpview.cpp:180
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1206,13 +1206,13 @@ msgstr ""
 "Impossibile accedere con le credenziali fornite. Ricontrolla l'utente e la "
 "password."
 
-#: rdp/rdpsession.cpp:780
+#: rdp/rdpview.cpp:186
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Account Problems"
 msgstr "Problemi di account"
 
-#: rdp/rdpsession.cpp:781
+#: rdp/rdpview.cpp:187
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1222,13 +1222,13 @@ msgstr ""
 "L'account fornito non è autorizzato ad accedere a questa macchina. Contatta "
 "l'amministratore di sistema."
 
-#: rdp/rdpsession.cpp:786
+#: rdp/rdpview.cpp:192
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Password Problems"
 msgstr "Problemi di password"
 
-#: rdp/rdpsession.cpp:787
+#: rdp/rdpview.cpp:193
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1238,73 +1238,73 @@ msgstr ""
 "Impossibile accedere con la password fornita. Contatta l'amministratore di "
 "sistema per modificarlo."
 
-#: rdp/rdpsession.cpp:790
+#: rdp/rdpview.cpp:196
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Lost"
 msgstr "Connessione persa"
 
-#: rdp/rdpsession.cpp:791
+#: rdp/rdpview.cpp:197
 #, kde-format
 msgctxt "@label"
 msgid "Lost connection to the server."
 msgstr "Connessione al server persa"
 
-#: rdp/rdpsession.cpp:795
+#: rdp/rdpview.cpp:201
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Server not Found"
 msgstr "Server non trovato"
 
-#: rdp/rdpsession.cpp:796
+#: rdp/rdpview.cpp:202
 #, kde-format
 msgctxt "@label"
 msgid "Could not find the server."
 msgstr "Impossibile trovare il server."
 
-#: rdp/rdpsession.cpp:799
+#: rdp/rdpview.cpp:205
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Refused"
 msgstr "Connessione rifiutata"
 
-#: rdp/rdpsession.cpp:800
+#: rdp/rdpview.cpp:206
 #, kde-format
 msgctxt "@label"
 msgid "The server refused the connection request."
 msgstr "Il server ha rifiutato la richiesta di connessione."
 
-#: rdp/rdpsession.cpp:804
+#: rdp/rdpview.cpp:211
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Could not Connect"
 msgstr "Impossibile connettersi"
 
-#: rdp/rdpsession.cpp:805
+#: rdp/rdpview.cpp:212
 #, kde-format
 msgctxt "@label"
 msgid "Could not connect to the server."
 msgstr "Impossibile connettersi al server."
 
-#: rdp/rdpsession.cpp:810
+#: rdp/rdpview.cpp:222 rdp/rdpview.cpp:226
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Closed"
 msgstr "Connessione chiusa"
 
-#: rdp/rdpsession.cpp:811
+#: rdp/rdpview.cpp:227
 #, kde-format
 msgctxt "@label"
 msgid "The connection to the server was closed."
 msgstr "La connessione al server è stata chiusa."
 
-#: rdp/rdpsession.cpp:814
+#: rdp/rdpview.cpp:231
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Failed"
 msgstr "Connessione non riuscita"
 
-#: rdp/rdpsession.cpp:815
+#: rdp/rdpview.cpp:232
 #, kde-format
 msgctxt "@label"
 msgid "An unknown error occurred"
