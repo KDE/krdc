@@ -133,7 +133,7 @@ if(WITH_RDP)
         PURPOSE "FreeRDP provides RDP support"
         TYPE REQUIRED
     )
-    find_package(WinPR)
+    find_package(WinPR 2.10)
     set_package_properties(WinPR PROPERTIES
         DESCRIPTION "Windows Portable Runtime"
         URL "https://www.freerdp.com/"
