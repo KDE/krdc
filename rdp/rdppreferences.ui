@@ -609,7 +609,7 @@
    <item row="12" column="0" colspan="2">
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="proxySettingsTab">
       <attribute name="title">
@@ -625,12 +625,15 @@
            </property>
           </widget>
          </item>
-         <item row="3" column="0">
-          <widget class="QLabel" name="pHostLabel">
+         <item row="1" column="0">
+          <widget class="QLabel" name="pUsernameLabel">
            <property name="text">
-            <string>Host:</string>
+            <string>Username:</string>
            </property>
           </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="KLineEdit" name="pUsernameLineEdit"/>
          </item>
          <item row="2" column="0">
           <widget class="QLabel" name="pPasswordLabel">
@@ -639,18 +642,15 @@
            </property>
           </widget>
          </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="pUsernameLabel">
+         <item row="2" column="1">
+          <widget class="KPasswordLineEdit" name="pPasswordLineEdit"/>
+         </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="pHostLabel">
            <property name="text">
-            <string>Username:</string>
+            <string>Host:</string>
            </property>
           </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="KLineEdit" name="pProtocolLineEdit"/>
-         </item>
-         <item row="1" column="1">
-          <widget class="KLineEdit" name="pUsernameLineEdit"/>
          </item>
          <item row="3" column="1">
           <widget class="KLineEdit" name="pHostLineEdit">
@@ -659,8 +659,25 @@
            </property>
           </widget>
          </item>
-         <item row="2" column="1">
-          <widget class="KPasswordLineEdit" name="pPasswordLineEdit"/>
+         <item row="0" column="1">
+          <widget class="QComboBox" name="pProtocolBox">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <item>
+            <property name="text">
+             <string>HTTPS</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>SOCKS5</string>
+            </property>
+           </item>
+          </widget>
          </item>
         </layout>
        </item>
@@ -673,45 +690,77 @@
       <layout class="QVBoxLayout" name="verticalLayout_9">
        <item>
         <layout class="QFormLayout" name="gatewayFormLayout">
-         <item row="0" column="0">
+         <item row="1" column="0">
           <widget class="QLabel" name="gServerLabel">
            <property name="text">
             <string>Server:</string>
            </property>
           </widget>
          </item>
-         <item row="3" column="0">
+         <item row="4" column="0">
           <widget class="QLabel" name="gDomainLabel">
            <property name="text">
             <string>Domain:</string>
            </property>
           </widget>
          </item>
-         <item row="1" column="0">
+         <item row="2" column="0">
           <widget class="QLabel" name="gUsernameLabel">
            <property name="text">
             <string>Username:</string>
            </property>
           </widget>
          </item>
-         <item row="2" column="0">
+         <item row="3" column="0">
           <widget class="QLabel" name="gPasswordLabel">
            <property name="text">
             <string>Password:</string>
            </property>
           </widget>
          </item>
-         <item row="0" column="1">
+         <item row="1" column="1">
           <widget class="KLineEdit" name="gServerLineEdit"/>
          </item>
-         <item row="1" column="1">
+         <item row="2" column="1">
           <widget class="KLineEdit" name="gUsernameLineEdit"/>
          </item>
-         <item row="3" column="1">
+         <item row="4" column="1">
           <widget class="KLineEdit" name="gDomainLineEdit"/>
          </item>
-         <item row="2" column="1">
+         <item row="3" column="1">
           <widget class="KPasswordLineEdit" name="gPasswordLineEdit"/>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="gTransportTypeLabel">
+           <property name="text">
+            <string>Transport type:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QComboBox" name="qTransportTypeBox">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <item>
+            <property name="text">
+             <string>Auto</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>HTTP</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>RPC</string>
+            </property>
+           </item>
+          </widget>
          </item>
         </layout>
        </item>
