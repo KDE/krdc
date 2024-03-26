@@ -1,4 +1,4 @@
-add_library(krdc_vncplugin)
+add_library(krdc_vncplugin MODULE)
 
 target_sources(krdc_vncplugin PRIVATE
     vnchostpreferences.cpp

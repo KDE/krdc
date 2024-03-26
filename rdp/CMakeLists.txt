@@ -1,4 +1,4 @@
-add_library(krdc_rdpplugin)
+add_library(krdc_rdpplugin MODULE)
 
 target_sources(krdc_rdpplugin PRIVATE
     rdphostpreferences.cpp

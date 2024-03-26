@@ -6,7 +6,7 @@ if(NOT BUILD_TEST)
     return()
 endif()
 
-add_library(krdc_testplugin)
+add_library(krdc_testplugin MODULE)
 
 target_sources(krdc_testplugin PRIVATE
     testviewfactory.cpp
