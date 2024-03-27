@@ -607,7 +607,7 @@
     </widget>
    </item>
    <item row="12" column="0" colspan="2">
-    <widget class="QTabWidget" name="tabWidget">
+    <widget class="QTabWidget" name="advancedNetworkSettingsTabs">
      <property name="currentIndex">
       <number>0</number>
      </property>
@@ -633,7 +633,7 @@
           </widget>
          </item>
          <item row="1" column="1">
-          <widget class="KLineEdit" name="pUsernameLineEdit"/>
+          <widget class="KLineEdit" name="kcfg_ProxyUsername"/>
          </item>
          <item row="2" column="0">
           <widget class="QLabel" name="pPasswordLabel">
@@ -643,7 +643,7 @@
           </widget>
          </item>
          <item row="2" column="1">
-          <widget class="KPasswordLineEdit" name="pPasswordLineEdit"/>
+          <widget class="KPasswordLineEdit" name="kcfg_ProxyPassword"/>
          </item>
          <item row="3" column="0">
           <widget class="QLabel" name="pHostLabel">
@@ -653,14 +653,14 @@
           </widget>
          </item>
          <item row="3" column="1">
-          <widget class="KLineEdit" name="pHostLineEdit">
+          <widget class="KLineEdit" name="kcfg_ProxyHost">
            <property name="placeholderText">
             <string>host:port</string>
            </property>
           </widget>
          </item>
          <item row="0" column="1">
-          <widget class="QComboBox" name="pProtocolBox">
+          <widget class="QComboBox" name="kcfg_ProxyProtocol">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -719,16 +719,16 @@
           </widget>
          </item>
          <item row="1" column="1">
-          <widget class="KLineEdit" name="gServerLineEdit"/>
+          <widget class="KLineEdit" name="kcfg_GatewayServer"/>
          </item>
          <item row="2" column="1">
-          <widget class="KLineEdit" name="gUsernameLineEdit"/>
+          <widget class="KLineEdit" name="kcfg_GatewayUsername"/>
          </item>
          <item row="4" column="1">
-          <widget class="KLineEdit" name="gDomainLineEdit"/>
+          <widget class="KLineEdit" name="kcfg_GatewayDomain"/>
          </item>
          <item row="3" column="1">
-          <widget class="KPasswordLineEdit" name="gPasswordLineEdit"/>
+          <widget class="KPasswordLineEdit" name="kcfg_GatewayPassword"/>
          </item>
          <item row="0" column="0">
           <widget class="QLabel" name="gTransportTypeLabel">
@@ -738,7 +738,7 @@
           </widget>
          </item>
          <item row="0" column="1">
-          <widget class="QComboBox" name="qTransportTypeBox">
+          <widget class="QComboBox" name="kcfg_GatewayTransportType">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
              <horstretch>0</horstretch>
