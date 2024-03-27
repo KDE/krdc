@@ -136,6 +136,15 @@ QWidget *RdpHostPreferences::createProtocolSpecificConfigPage()
     rdpUi.kcfg_KeyboardLayout->setCurrentIndex(keymap2int(keyboardLayout()));
     rdpUi.kcfg_ShareMedia->setText(shareMedia());
     rdpUi.kcfg_TlsSecLevel->setCurrentIndex(int(tlsSecLevel()));
+    rdpUi.kcfg_ProxyProtocol->setCurrentIndex(int(proxyProtocol()));
+    rdpUi.kcfg_ProxyUsername->setText(proxyUsername());
+    rdpUi.kcfg_ProxyPassword->setPassword(proxyPassword());
+    rdpUi.kcfg_ProxyHost->setText(proxyHost());
+    rdpUi.kcfg_GatewayTransportType->setCurrentIndex(int(gatewayTransportType()));
+    rdpUi.kcfg_GatewayUsername->setText(gatewayUsername());
+    rdpUi.kcfg_GatewayPassword->setPassword(gatewayPassword());
+    rdpUi.kcfg_GatewayServer->setText(gatewayServer());
+    rdpUi.kcfg_GatewayDomain->setText(gatewayDomain());
 
     // Have to call updateWidthHeight() here
     // We leverage the final part of this function to enable/disable kcfg_Height and kcfg_Width
@@ -215,6 +224,15 @@ void RdpHostPreferences::acceptConfig()
     setSound(Sound(rdpUi.kcfg_Sound->currentIndex()));
     setShareMedia(rdpUi.kcfg_ShareMedia->text());
     setTlsSecLevel(TlsSecLevel(rdpUi.kcfg_TlsSecLevel->currentIndex()));
+    setProxyProtocol(ProxyProtocol(rdpUi.kcfg_ProxyProtocol->currentIndex()));
+    setProxyUsername(rdpUi.kcfg_ProxyUsername->text());
+    setProxyPassword(rdpUi.kcfg_ProxyPassword->password());
+    setProxyHost(rdpUi.kcfg_ProxyHost->text());
+    setGatewayTransportType(GatewayTransportType(rdpUi.kcfg_GatewayTransportType->currentIndex()));
+    setGatewayUsername(rdpUi.kcfg_GatewayUsername->text());
+    setGatewayPassword(rdpUi.kcfg_GatewayPassword->password());
+    setGatewayServer(rdpUi.kcfg_GatewayServer->text());
+    setGatewayDomain(rdpUi.kcfg_GatewayDomain->text());
 }
 
 bool RdpHostPreferences::scaleToSize() const
@@ -317,4 +335,88 @@ void RdpHostPreferences::setTlsSecLevel(TlsSecLevel tlsSecLevel)
 RdpHostPreferences::TlsSecLevel RdpHostPreferences::tlsSecLevel() const
 {
     return TlsSecLevel(m_configGroup.readEntry("tlsSecLevel", Settings::tlsSecLevel()));
+}
+
+// Proxy settings
+RdpHostPreferences::ProxyProtocol RdpHostPreferences::proxyProtocol() const
+{
+    return ProxyProtocol(m_configGroup.readEntry("proxyProtocol", Settings::proxyProtocol()));
+}
+
+void RdpHostPreferences::setProxyProtocol(RdpHostPreferences::ProxyProtocol proxyProtocol)
+{
+    m_configGroup.writeEntry("proxyProtocol", int(proxyProtocol));
+}
+
+QString RdpHostPreferences::proxyUsername() const
+{
+    return QString(m_configGroup.readEntry("proxyUsername", Settings::proxyUsername()));
+}
+void RdpHostPreferences::setProxyUsername(const QString &proxyUsername)
+{
+    m_configGroup.writeEntry("proxyUsername", proxyUsername);
+}
+
+QString RdpHostPreferences::proxyPassword() const
+{
+    return QString(m_configGroup.readEntry("proxyPassword", Settings::proxyPassword()));
+}
+void RdpHostPreferences::setProxyPassword(const QString &proxyPassword)
+{
+    m_configGroup.writeEntry("proxyPassword", proxyPassword);
+}
+
+QString RdpHostPreferences::proxyHost() const
+{
+    return QString(m_configGroup.readEntry("proxyHost", Settings::proxyHost()));
+}
+void RdpHostPreferences::setProxyHost(const QString &proxyHost)
+{
+    m_configGroup.writeEntry("proxyHost", proxyHost);
+}
+
+// Gateway settings
+RdpHostPreferences::GatewayTransportType RdpHostPreferences::gatewayTransportType() const
+{
+    return GatewayTransportType(m_configGroup.readEntry("gatewayTransportType", int(Settings::gatewayTransportType())));
+}
+void RdpHostPreferences::setGatewayTransportType(RdpHostPreferences::GatewayTransportType gatewayTransportType)
+{
+    m_configGroup.writeEntry("gatewayTransportType", int(gatewayTransportType));
+}
+
+QString RdpHostPreferences::gatewayUsername() const
+{
+    return QString(m_configGroup.readEntry("gatewayUsername", Settings::gatewayUsername()));
+}
+void RdpHostPreferences::setGatewayUsername(const QString &gatewayUsername)
+{
+    m_configGroup.writeEntry("gatewayUsername", gatewayUsername);
+}
+
+QString RdpHostPreferences::gatewayPassword() const
+{
+    return QString(m_configGroup.readEntry("gatewayPassword", Settings::gatewayPassword()));
+}
+void RdpHostPreferences::setGatewayPassword(const QString &gatewayPassword)
+{
+    m_configGroup.writeEntry("gatewayPassword", gatewayPassword);
+}
+
+QString RdpHostPreferences::gatewayServer() const
+{
+    return QString(m_configGroup.readEntry("gatewayServer", Settings::gatewayServer()));
+}
+void RdpHostPreferences::setGatewayServer(const QString &gatewayServer)
+{
+    m_configGroup.writeEntry("gatewayServer", gatewayServer);
+}
+
+QString RdpHostPreferences::gatewayDomain() const
+{
+    return QString(m_configGroup.readEntry("gatewayDomain", Settings::gatewayDomain()));
+}
+void RdpHostPreferences::setGatewayDomain(const QString &gatewayDomain)
+{
+    m_configGroup.writeEntry("gatewayDomain", gatewayDomain);
 }
