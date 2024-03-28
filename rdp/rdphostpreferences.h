@@ -57,7 +57,7 @@ public:
         Bit256,
     };
 
-    enum class ProxyProtocol { HTTPS, SOCKS5 };
+    enum class ProxyProtocol { HTTP, SOCKS };
 
     enum class GatewayTransportType { Auto, HTTP, RPC };
 
