@@ -625,40 +625,6 @@
            </property>
           </widget>
          </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="pUsernameLabel">
-           <property name="text">
-            <string>Username:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1">
-          <widget class="KLineEdit" name="kcfg_ProxyUsername"/>
-         </item>
-         <item row="2" column="0">
-          <widget class="QLabel" name="pPasswordLabel">
-           <property name="text">
-            <string>Password:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1">
-          <widget class="KPasswordLineEdit" name="kcfg_ProxyPassword"/>
-         </item>
-         <item row="3" column="0">
-          <widget class="QLabel" name="pHostLabel">
-           <property name="text">
-            <string>Host:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="1">
-          <widget class="KLineEdit" name="kcfg_ProxyHost">
-           <property name="placeholderText">
-            <string>host:port</string>
-           </property>
-          </widget>
-         </item>
          <item row="0" column="1">
           <widget class="QComboBox" name="kcfg_ProxyProtocol">
            <property name="sizePolicy">
@@ -679,6 +645,40 @@
            </item>
           </widget>
          </item>
+         <item row="2" column="1">
+          <widget class="KLineEdit" name="kcfg_ProxyUsername"/>
+         </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="pPasswordLabel">
+           <property name="text">
+            <string>Password:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="KPasswordLineEdit" name="kcfg_ProxyPassword"/>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="pUsernameLabel">
+           <property name="text">
+            <string>Username:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="pHostLabel">
+           <property name="text">
+            <string>Server:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="KLineEdit" name="kcfg_ProxyHost">
+           <property name="placeholderText">
+            <string>host:port</string>
+           </property>
+          </widget>
+         </item>
         </layout>
        </item>
       </layout>
@@ -697,21 +697,14 @@
            </property>
           </widget>
          </item>
-         <item row="4" column="0">
-          <widget class="QLabel" name="gDomainLabel">
-           <property name="text">
-            <string>Domain:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="0">
+         <item row="3" column="0">
           <widget class="QLabel" name="gUsernameLabel">
            <property name="text">
             <string>Username:</string>
            </property>
           </widget>
          </item>
-         <item row="3" column="0">
+         <item row="4" column="0">
           <widget class="QLabel" name="gPasswordLabel">
            <property name="text">
             <string>Password:</string>
@@ -725,13 +718,10 @@
            </property>
           </widget>
          </item>
-         <item row="2" column="1">
+         <item row="3" column="1">
           <widget class="KLineEdit" name="kcfg_GatewayUsername"/>
          </item>
          <item row="4" column="1">
-          <widget class="KLineEdit" name="kcfg_GatewayDomain"/>
-         </item>
-         <item row="3" column="1">
           <widget class="KPasswordLineEdit" name="kcfg_GatewayPassword"/>
          </item>
          <item row="0" column="0">
@@ -765,6 +755,16 @@
             </property>
            </item>
           </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="gDomainLabel">
+           <property name="text">
+            <string>Domain:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="KLineEdit" name="kcfg_GatewayDomain"/>
          </item>
         </layout>
        </item>
