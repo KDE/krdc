@@ -456,8 +456,10 @@ bool RdpSession::start()
     }
 
     // TODO gateway
-    if (!m_preferences->gatewayServer().isEmpty()) {
-        settings->GatewayHostname = m_preferences->gatewayServer().toLocal8Bit().data();
+    const auto gatewayServerAddress = QUrl(m_preferences->proxyHost());
+    if (!gatewayServerAddress.isEmpty()) {
+        settings->GatewayHostname = gatewayServerAddress.host().toLocal8Bit().data();
+        settings->GatewayPort = gatewayServerAddress.port();
         settings->GatewayUsername = m_preferences->gatewayUsername().toLocal8Bit().data();
         settings->GatewayPassword = m_preferences->gatewayPassword().toLocal8Bit().data();
         settings->GatewayDomain = m_preferences->gatewayDomain().toLocal8Bit().data();
