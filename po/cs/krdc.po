@@ -3,22 +3,22 @@
 # Vít Pelčák <vit@pelcak.org>, 2010, 2011, 2012, 2013, 2015, 2016, 2017, 2018, 2019.
 # Lukáš Tinkl <ltinkl@redhat.com>, 2010.
 # Tomáš Chvátal <tomas.chvatal@gmail.com>, 2012, 2013.
-# Vit Pelcak <vit@pelcak.org>, 2021.
+# SPDX-FileCopyrightText: 2021, 2024 Vit Pelcak <vit@pelcak.org>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-24 01:34+0000\n"
-"PO-Revision-Date: 2021-05-13 13:39+0200\n"
-"Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
+"PO-Revision-Date: 2024-04-03 11:49+0200\n"
+"Last-Translator: Vit Pelcak <vpelcak@suse.cz>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 21.04.0\n"
+"X-Generator: Lokalize 24.02.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -698,7 +698,7 @@ msgstr "Sdílet média:"
 #: rdp/rdppreferences.ui:40 rdp/rdppreferences.ui:291
 #, kde-format
 msgid "Use Best Available"
-msgstr ""
+msgstr "Použít nejlepší dostupné"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
 #: rdp/rdppreferences.ui:45
@@ -815,25 +815,25 @@ msgstr ""
 #: rdp/rdppreferences.ui:245
 #, kde-format
 msgid "Small (1280x720)"
-msgstr ""
+msgstr "Malé (1280x720)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:250
 #, kde-format
 msgid "Medium (1600x900)"
-msgstr ""
+msgstr "Střední (1600x900)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:255
 #, kde-format
 msgid "Large (1920x1080)"
-msgstr ""
+msgstr "Velké (1920x1080)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:260
 #, kde-format
 msgid "Current Window Size"
-msgstr ""
+msgstr "Současná velikost okna"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
@@ -853,19 +853,19 @@ msgstr "Vlastní rozlišení (...)"
 #: rdp/rdppreferences.ui:296
 #, kde-format
 msgid "Force H.264"
-msgstr ""
+msgstr "Vynutit H.264"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
 #: rdp/rdppreferences.ui:301
 #, kde-format
 msgid "Force RemoteFX"
-msgstr ""
+msgstr "Vynutit RemoteFX"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
 #: rdp/rdppreferences.ui:306
 #, kde-format
 msgid "Disable All Acceleration"
-msgstr ""
+msgstr "Vypnout veškerou akceleraci"
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:326
@@ -1103,7 +1103,7 @@ msgstr "Turecké (tr)"
 #: rdp/rdppreferences.ui:527
 #, kde-format
 msgid "Scale window contents to match resolution"
-msgstr ""
+msgstr "Upravit měřítko okna aby odpovídalo rozlišení"
 
 #. i18n: ectx: property (text), widget (QLabel, soundLabel)
 #: rdp/rdppreferences.ui:553
@@ -1128,13 +1128,13 @@ msgstr "cokoliv"
 #: rdp/rdppreferences.ui:597
 #, kde-format
 msgid "80 bit"
-msgstr ""
+msgstr "80 bit"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:602
 #, kde-format
 msgid "112 bit"
-msgstr ""
+msgstr "112 bit"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:607
@@ -1146,19 +1146,19 @@ msgstr "128 bit"
 #: rdp/rdppreferences.ui:612
 #, kde-format
 msgid "192 bit"
-msgstr ""
+msgstr "192 bit"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:617
 #, kde-format
 msgid "256 bit"
-msgstr ""
+msgstr "256 bit"
 
 #: rdp/rdpsession.cpp:162
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Logon Error"
-msgstr ""
+msgstr "Chyba při přihlašování"
 
 #: rdp/rdpsession.cpp:209
 #, kde-format
@@ -1170,18 +1170,23 @@ msgid ""
 "Issuer: %5\n"
 "Fingerprint: %6\n"
 msgstr ""
+"Hostitel: %1:%2\n"
+"Common Name: %3\n"
+"Předmět: %4\n"
+"Vydavatel: %5\n"
+"Otisk: %6\n"
 
 #: rdp/rdpsession.cpp:647
 #, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a password."
-msgstr ""
+msgstr "Přístup k tomuto systému vyžaduje heslo."
 
 #: rdp/rdpsession.cpp:650
 #, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
-msgstr ""
+msgstr "Přístup k tomuto systému vyžaduje přihlašovací jméno a heslo."
 
 #: rdp/rdpsession.cpp:672
 #, kde-format
@@ -1193,13 +1198,13 @@ msgstr ""
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
-msgstr ""
+msgstr "Ověřit certifikát"
 
 #: rdp/rdpsession.cpp:678 rdp/rdpsession.cpp:701
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
-msgstr ""
+msgstr "Zapamatovat si tento certifikát"
 
 #: rdp/rdpsession.cpp:695
 #, kde-format
@@ -1211,7 +1216,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
-msgstr ""
+msgstr "Certifikát byl změněn"
 
 #: rdp/rdpsession.cpp:699
 #, kde-format
@@ -1222,12 +1227,16 @@ msgid ""
 "New Certificate:\n"
 "%2"
 msgstr ""
+"Předchozí certifikát:\n"
+"%1\n"
+"Nový certifikát:\n"
+"%2"
 
 #: rdp/rdpview.cpp:175
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Login Failure"
-msgstr ""
+msgstr "Přihlášení selhalo"
 
 #: rdp/rdpview.cpp:176
 #, kde-format
@@ -1241,7 +1250,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Account Problems"
-msgstr ""
+msgstr "Problémy s účtem"
 
 #: rdp/rdpview.cpp:183
 #, kde-format
@@ -1269,7 +1278,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Lost"
-msgstr ""
+msgstr "Spojení ztraceno"
 
 #: rdp/rdpview.cpp:193
 #, kde-format
@@ -1281,7 +1290,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Server not Found"
-msgstr ""
+msgstr "Server nenalezen"
 
 #: rdp/rdpview.cpp:198
 #, kde-format
@@ -1293,7 +1302,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Refused"
-msgstr ""
+msgstr "Spojení bylo odmítnuto"
 
 #: rdp/rdpview.cpp:202
 #, kde-format
@@ -1305,37 +1314,37 @@ msgstr ""
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Could not Connect"
-msgstr ""
+msgstr "Nelze se připojit"
 
 #: rdp/rdpview.cpp:208
 #, kde-format
 msgctxt "@label"
 msgid "Could not connect to the server."
-msgstr ""
+msgstr "Na server se nelze připojit."
 
 #: rdp/rdpview.cpp:218 rdp/rdpview.cpp:222
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Closed"
-msgstr ""
+msgstr "Spojení ukončeno"
 
 #: rdp/rdpview.cpp:223
 #, kde-format
 msgctxt "@label"
 msgid "The connection to the server was closed."
-msgstr ""
+msgstr "Spojení se serverem bylo ukončeno."
 
 #: rdp/rdpview.cpp:227
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Failed"
-msgstr ""
+msgstr "Spojení selhalo"
 
 #: rdp/rdpview.cpp:228
 #, kde-format
 msgctxt "@label"
 msgid "An unknown error occurred"
-msgstr ""
+msgstr "Vyskytla se neznámá chyba"
 
 #: rdp/rdpviewfactory.cpp:22
 #, kde-format
