@@ -4,6 +4,7 @@
  */
 
 #include "rdpsession.h"
+#include "rdphostpreferences.h"
 
 #include <memory>
 
@@ -433,6 +434,55 @@ bool RdpSession::start()
     default:
         settings->TlsSecLevel = 0;
         break;
+    }
+
+    const auto proxyHostAddress = QUrl(m_preferences->proxyHost());
+    if (!proxyHostAddress.isEmpty()) {
+        int defaultPort = 8080;
+        switch (m_preferences->proxyProtocol()) {
+        case RdpHostPreferences::ProxyProtocol::HTTP:
+            settings->ProxyType = PROXY_TYPE_HTTP;
+            break;
+        case RdpHostPreferences::ProxyProtocol::SOCKS:
+            settings->ProxyType = PROXY_TYPE_SOCKS;
+            defaultPort = 1080;
+            break;
+        default:
+            settings->ProxyType = PROXY_TYPE_NONE;
+            break;
+        }
+        settings->ProxyHostname = proxyHostAddress.host().toLocal8Bit().data();
+        settings->ProxyUsername = m_preferences->proxyUsername().toLocal8Bit().data();
+        settings->ProxyPassword = m_preferences->proxyPassword().toLocal8Bit().data();
+        settings->ProxyPort = proxyHostAddress.port(defaultPort);
+    }
+
+    const auto gatewayServerAddress = QUrl(m_preferences->proxyHost());
+    if (!gatewayServerAddress.isEmpty()) {
+        settings->GatewayHostname = gatewayServerAddress.host().toLocal8Bit().data();
+        settings->GatewayPort = gatewayServerAddress.port(3389);
+        settings->GatewayUsername = m_preferences->gatewayUsername().toLocal8Bit().data();
+        settings->GatewayPassword = m_preferences->gatewayPassword().toLocal8Bit().data();
+        settings->GatewayDomain = m_preferences->gatewayDomain().toLocal8Bit().data();
+        switch (m_preferences->gatewayTransportType()) {
+        case RdpHostPreferences::GatewayTransportType::Auto:
+            settings->GatewayHttpTransport = true;
+            settings->GatewayRpcTransport = true;
+            break;
+        case RdpHostPreferences::GatewayTransportType::RPC:
+            settings->GatewayHttpTransport = false;
+            settings->GatewayRpcTransport = true;
+            break;
+        case RdpHostPreferences::GatewayTransportType::HTTP:
+            settings->GatewayHttpTransport = true;
+            settings->GatewayRpcTransport = false;
+            break;
+        default:
+            // Auto as default
+            settings->GatewayHttpTransport = true;
+            settings->GatewayRpcTransport = true;
+            break;
+        }
     }
 
     if (!freerdp_connect(m_freerdp)) {

@@ -57,6 +57,10 @@ public:
         Bit256,
     };
 
+    enum class ProxyProtocol { HTTP, SOCKS };
+
+    enum class GatewayTransportType { Auto, HTTP, RPC };
+
     explicit RdpHostPreferences(KConfigGroup configGroup, QObject *parent = nullptr);
     ~RdpHostPreferences() override;
 
@@ -84,6 +88,35 @@ public:
 
     TlsSecLevel tlsSecLevel() const;
     void setTlsSecLevel(TlsSecLevel tlsSecLevel);
+
+    // Proxy settings
+    ProxyProtocol proxyProtocol() const;
+    void setProxyProtocol(ProxyProtocol proxyProtocol);
+
+    QString proxyUsername() const;
+    void setProxyUsername(const QString &proxyUsername);
+
+    QString proxyPassword() const;
+    void setProxyPassword(const QString &proxyPassword);
+
+    QString proxyHost() const;
+    void setProxyHost(const QString &proxyHost);
+
+    // Gateway settings
+    GatewayTransportType gatewayTransportType() const;
+    void setGatewayTransportType(GatewayTransportType gatewayTransportType);
+
+    QString gatewayUsername() const;
+    void setGatewayUsername(const QString &gatewayUsername);
+
+    QString gatewayPassword() const;
+    void setGatewayPassword(const QString &gatewayPassword);
+
+    QString gatewayServer() const;
+    void setGatewayServer(const QString &gatewayServer);
+
+    QString gatewayDomain() const;
+    void setGatewayDomain(const QString &gatewayDomain);
 
 protected:
     QWidget *createProtocolSpecificConfigPage() override;
