@@ -48,8 +48,6 @@ RdpView::RdpView(QWidget *parent, const QUrl &url, KConfigGroup configGroup, con
         m_port = TCP_PORT_RDP;
     }
 
-    setMouseTracking(true);
-
     m_hostPreferences = std::make_unique<RdpHostPreferences>(configGroup);
 }
 
@@ -327,54 +325,19 @@ void RdpView::paintEvent(QPaintEvent *event)
     painter.end();
 }
 
-void RdpView::keyPressEvent(QKeyEvent *event)
+void RdpView::keyEventHandler(QKeyEvent *event)
 {
     m_session->sendEvent(event, this);
-    event->accept();
 }
 
-void RdpView::keyReleaseEvent(QKeyEvent *event)
+void RdpView::mouseEventHandler(QMouseEvent *event)
 {
     m_session->sendEvent(event, this);
-    event->accept();
 }
 
-void RdpView::mousePressEvent(QMouseEvent *event)
-{
-    if (!hasFocus()) {
-        setFocus();
-    }
-
-    m_session->sendEvent(event, this);
-    event->accept();
-}
-
-void RdpView::mouseDoubleClickEvent(QMouseEvent *event)
-{
-    if (!hasFocus()) {
-        setFocus();
-    }
-
-    m_session->sendEvent(event, this);
-    event->accept();
-}
-
-void RdpView::mouseReleaseEvent(QMouseEvent *event)
+void RdpView::wheelEventHandler(QWheelEvent *event)
 {
     m_session->sendEvent(event, this);
-    event->accept();
-}
-
-void RdpView::mouseMoveEvent(QMouseEvent *event)
-{
-    m_session->sendEvent(event, this);
-    event->accept();
-}
-
-void RdpView::wheelEvent(QWheelEvent *event)
-{
-    m_session->sendEvent(event, this);
-    event->accept();
 }
 
 void RdpView::onRectangleUpdated(const QRect &rect)

@@ -87,18 +87,6 @@ VncView::~VncView()
         startQuitting();
 }
 
-bool VncView::eventFilter(QObject *obj, QEvent *event)
-{
-    if (m_viewOnly) {
-        if (event->type() == QEvent::KeyPress || event->type() == QEvent::KeyRelease || event->type() == QEvent::MouseButtonDblClick
-            || event->type() == QEvent::MouseButtonPress || event->type() == QEvent::MouseButtonRelease || event->type() == QEvent::Wheel
-            || event->type() == QEvent::MouseMove)
-            return true;
-    }
-
-    return RemoteView::eventFilter(obj, event);
-}
-
 QSize VncView::framebufferSize()
 {
     return m_frame.size() / devicePixelRatioF();
@@ -431,11 +419,9 @@ void VncView::updateImage(int x, int y, int w, int h)
         }
         setAttribute(Qt::WA_StaticContents);
         setAttribute(Qt::WA_OpaquePaintEvent);
-        installEventFilter(this);
 
         setCursor(((m_localCursorState == CursorOn) || m_forceLocalCursor) ? localDefaultCursor() : Qt::BlankCursor);
 
-        setMouseTracking(true); // get mouse events even when there is no mousebutton pressed
         setFocusPolicy(Qt::WheelFocus);
         setStatus(Connected);
         Q_EMIT connected();
@@ -572,33 +558,6 @@ void VncView::resizeEvent(QResizeEvent *event)
 {
     RemoteView::resizeEvent(event);
     update();
-}
-
-bool VncView::event(QEvent *event)
-{
-    switch (event->type()) {
-    case QEvent::KeyPress:
-    case QEvent::KeyRelease:
-        // qCDebug(KRDC) << "keyEvent";
-        keyEventHandler(static_cast<QKeyEvent *>(event));
-        return true;
-        break;
-    case QEvent::MouseButtonDblClick:
-    case QEvent::MouseButtonPress:
-    case QEvent::MouseButtonRelease:
-    case QEvent::MouseMove:
-        // qCDebug(KRDC) << "mouseEvent";
-        mouseEventHandler(static_cast<QMouseEvent *>(event));
-        return true;
-        break;
-    case QEvent::Wheel:
-        // qCDebug(KRDC) << "wheelEvent";
-        wheelEventHandler(static_cast<QWheelEvent *>(event));
-        return true;
-        break;
-    default:
-        return RemoteView::event(event);
-    }
 }
 
 void VncView::mouseEventHandler(QMouseEvent *e)

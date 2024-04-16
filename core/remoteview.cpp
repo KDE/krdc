@@ -10,7 +10,11 @@
 #include "krdc_debug.h"
 
 #include <QBitmap>
+#include <QEvent>
+#include <QKeyEvent>
+#include <QMouseEvent>
 #include <QStandardPaths>
+#include <QWheelEvent>
 
 RemoteView::RemoteView(QWidget *parent)
     : QWidget(parent)
@@ -28,6 +32,8 @@ RemoteView::RemoteView(QWidget *parent)
     , m_localCursorState(CursorOff)
 {
     resize(0, 0);
+    installEventFilter(this);
+    setMouseTracking(true);
 }
 
 RemoteView::~RemoteView()
@@ -260,6 +266,45 @@ void RemoteView::focusOutEvent(QFocusEvent *event)
     }
 
     QWidget::focusOutEvent(event);
+}
+
+bool RemoteView::event(QEvent *event)
+{
+    switch (event->type()) {
+    case QEvent::KeyPress:
+    case QEvent::KeyRelease:
+        // qCDebug(KRDC) << "keyEvent";
+        keyEventHandler(static_cast<QKeyEvent *>(event));
+        return true;
+        break;
+    case QEvent::MouseButtonDblClick:
+    case QEvent::MouseButtonPress:
+    case QEvent::MouseButtonRelease:
+    case QEvent::MouseMove:
+        // qCDebug(KRDC) << "mouseEvent";
+        mouseEventHandler(static_cast<QMouseEvent *>(event));
+        return true;
+        break;
+    case QEvent::Wheel:
+        // qCDebug(KRDC) << "wheelEvent";
+        wheelEventHandler(static_cast<QWheelEvent *>(event));
+        return true;
+        break;
+    default:
+        return QWidget::event(event);
+    }
+}
+
+bool RemoteView::eventFilter(QObject *obj, QEvent *event)
+{
+    if (m_viewOnly) {
+        if (event->type() == QEvent::KeyPress || event->type() == QEvent::KeyRelease || event->type() == QEvent::MouseButtonDblClick
+            || event->type() == QEvent::MouseButtonPress || event->type() == QEvent::MouseButtonRelease || event->type() == QEvent::Wheel
+            || event->type() == QEvent::MouseMove)
+            return true;
+    }
+
+    return QWidget::eventFilter(obj, event);
 }
 
 #include "moc_remoteview.cpp"

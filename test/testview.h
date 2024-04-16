@@ -34,7 +34,9 @@ public Q_SLOTS:
     void switchFullscreen(bool on) override;
 
 protected:
-    bool eventFilter(QObject *obj, QEvent *event) override;
+    void keyEventHandler(QKeyEvent *event) override;
+    void wheelEventHandler(QWheelEvent *event) override;
+    void mouseEventHandler(QMouseEvent *event) override;
 
 private:
     TestHostPreferences *m_hostPreferences;

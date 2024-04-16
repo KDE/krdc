@@ -62,16 +62,9 @@ protected:
     QSize initialSize();
 
     void paintEvent(QPaintEvent *event) override;
-
-    void keyPressEvent(QKeyEvent *event) override;
-    void keyReleaseEvent(QKeyEvent *event) override;
-
-    void mousePressEvent(QMouseEvent *event) override;
-    void mouseReleaseEvent(QMouseEvent *event) override;
-    void mouseDoubleClickEvent(QMouseEvent *event) override;
-    void mouseMoveEvent(QMouseEvent *event) override;
-
-    void wheelEvent(QWheelEvent *event) override;
+    void keyEventHandler(QKeyEvent *event) override;
+    void wheelEventHandler(QWheelEvent *event) override;
+    void mouseEventHandler(QMouseEvent *event) override;
 
 private:
     void onRectangleUpdated(const QRect &rect);

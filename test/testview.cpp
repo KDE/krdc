@@ -23,14 +23,19 @@ TestView::~TestView()
     setStatus(Disconnected);
 }
 
-bool TestView::eventFilter(QObject *obj, QEvent *event)
+void TestView::keyEventHandler(QKeyEvent *event)
 {
-    if (m_viewOnly) {
-        if (event->type() == QEvent::KeyPress || event->type() == QEvent::KeyRelease || event->type() == QEvent::MouseButtonDblClick
-            || event->type() == QEvent::MouseButtonPress || event->type() == QEvent::MouseButtonRelease || event->type() == QEvent::MouseMove)
-            return true;
-    }
-    return RemoteView::eventFilter(obj, event);
+    Q_UNUSED(event);
+}
+
+void TestView::mouseEventHandler(QMouseEvent *event)
+{
+    Q_UNUSED(event);
+}
+
+void TestView::wheelEventHandler(QWheelEvent *event)
+{
+    Q_UNUSED(event);
 }
 
 void TestView::asyncConnect()
