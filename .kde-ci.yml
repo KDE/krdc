@@ -2,25 +2,6 @@
 # SPDX-License-Identifier: CC0-1.0
 
 Dependencies:
-- 'on': ['Linux/Qt5', 'FreeBSD/Qt5']
-  'require':
-    'frameworks/extra-cmake-modules': '@stable'
-    'frameworks/kconfig': '@stable'
-    'frameworks/kcmutils': '@stable'
-    'frameworks/kdnssd': '@stable'
-    'frameworks/knotifyconfig': '@stable'
-    'frameworks/knotifications': '@stable'
-    'frameworks/kbookmarks': '@stable'
-    'frameworks/kiconthemes': '@stable'
-    'frameworks/kxmlgui': '@stable'
-    'frameworks/kcompletion': '@stable'
-    'frameworks/kwallet': '@stable'
-    'frameworks/kwidgetsaddons': '@stable'
-    'frameworks/kwindowsystem': '@stable'
-    'frameworks/knotifyconfig': '@stable'
-    'frameworks/ki18n': '@stable'
-    'plasma/plasma-activities': '@stable'
-
 - 'on': ['Linux/Qt6', 'FreeBSD/Qt6']
   'require':
     'frameworks/extra-cmake-modules': '@latest-kf6'
@@ -36,7 +17,6 @@ Dependencies:
     'frameworks/kwallet': '@latest-kf6'
     'frameworks/kwidgetsaddons': '@latest-kf6'
     'frameworks/kwindowsystem': '@latest-kf6'
-    'frameworks/knotifyconfig': '@latest-kf6'
     'frameworks/ki18n': '@latest-kf6'
     'frameworks/kstatusnotifieritem': '@latest-kf6'
     'plasma/plasma-activities': '@latest-kf6'
