@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdenetwork\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-02 03:07+0000\n"
-"PO-Revision-Date: 2024-02-09 23:59+0100\n"
+"POT-Creation-Date: 2024-04-17 01:46+0000\n"
+"PO-Revision-Date: 2024-02-17 15:08+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -27,7 +27,7 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "kde@peremen.name"
 
-#: bookmarkmanager.cpp:44
+#: bookmarkmanager.cpp:43
 #, kde-format
 msgid "History"
 msgstr "과거 기록"
@@ -194,15 +194,15 @@ msgstr "설정..."
 msgid "Remove"
 msgstr "삭제"
 
-#: config/hostpreferenceslist.cpp:100 mainwindow.cpp:678
-#, kde-format
-msgid "The selected host cannot be handled."
-msgstr "선택한 호스트를 처리할 수 없습니다."
-
-#: config/hostpreferenceslist.cpp:101 mainwindow.cpp:288 mainwindow.cpp:679
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:283 mainwindow.cpp:678
 #, kde-format
 msgid "Unusable URL"
 msgstr "사용할 수 없는 URL"
+
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:678
+#, kde-format
+msgid "The selected host cannot be handled."
+msgstr "선택한 호스트를 처리할 수 없습니다."
 
 #: config/preferencesdialog.cpp:24
 #, kde-format
@@ -215,23 +215,23 @@ msgstr "일반"
 msgid "General Configuration"
 msgstr "일반 설정"
 
-#: config/preferencesdialog.cpp:29
+#: config/preferencesdialog.cpp:28
 #, kde-format
 msgid "Hosts"
 msgstr "호스트"
 
-#: config/preferencesdialog.cpp:29 core/hostpreferences.cpp:176
-#: core/hostpreferences.cpp:180
+#: config/preferencesdialog.cpp:28 core/hostpreferences.cpp:175
+#: core/hostpreferences.cpp:179
 #, kde-format
 msgid "Host Configuration"
 msgstr "호스트 설정"
 
-#: config/preferencesdialog.cpp:34 config/preferencesdialog.cpp:35
+#: config/preferencesdialog.cpp:33 config/preferencesdialog.cpp:34
 #, kde-format
 msgid "Plugins"
 msgstr "플러그인"
 
-#: config/preferencesdialog.cpp:35
+#: config/preferencesdialog.cpp:34
 #, kde-format
 msgid "Plugin Configuration"
 msgstr "플러그인 설정"
@@ -271,18 +271,18 @@ msgid "A year ago"
 msgid_plural "%1 years ago"
 msgstr[0] "%1년 전"
 
-#: core/hostpreferences.cpp:183
+#: core/hostpreferences.cpp:182
 #, kde-format
 msgid ""
 "Note that settings might only apply when you connect next time to this host."
 msgstr "다음에 호스트에 연결할 때 설정이 적용됩니다."
 
-#: core/hostpreferences.cpp:199
+#: core/hostpreferences.cpp:198
 #, kde-format
 msgid "Show this dialog again for this host"
 msgstr "이 호스트에서 이 대화 상자 다시 표시"
 
-#: core/hostpreferences.cpp:203
+#: core/hostpreferences.cpp:202
 #, kde-format
 msgid "Remember password (KWallet)"
 msgstr "암호 기억 (KWallet)"
@@ -305,17 +305,17 @@ msgstr "세션(&S)"
 msgid "Remote View Toolbar"
 msgstr "원격 보기 도구 모음"
 
-#: main.cpp:61
+#: main.cpp:60
 #, kde-format
 msgid "KRDC"
 msgstr "KRDC"
 
-#: main.cpp:62 systemtrayicon.cpp:24
+#: main.cpp:60 systemtrayicon.cpp:24
 #, kde-format
 msgid "KDE Remote Desktop Client"
 msgstr "KDE 원격 데스크톱 클라이언트"
 
-#: main.cpp:64
+#: main.cpp:63
 #, kde-format
 msgid ""
 "(c) 2007-2016, Urs Wolfer\n"
@@ -336,62 +336,62 @@ msgstr ""
 "(c) 1999-2003, Matthew Chapman\n"
 "(c) 2009, Collabora Ltd"
 
-#: main.cpp:73
+#: main.cpp:72
 #, kde-format
 msgid "Urs Wolfer"
 msgstr "Urs Wolfer"
 
-#: main.cpp:73
+#: main.cpp:72
 #, kde-format
 msgid "Developer, Maintainer"
 msgstr "개발자, 관리자"
 
-#: main.cpp:74
+#: main.cpp:73
 #, kde-format
 msgid "Tony Murray"
 msgstr "Tony Murray"
 
-#: main.cpp:74
+#: main.cpp:73
 #, kde-format
 msgid "Developer"
 msgstr "개발자"
 
-#: main.cpp:75
+#: main.cpp:74
 #, kde-format
 msgid "Tim Jansen"
 msgstr "Tim Jansen"
 
-#: main.cpp:75
+#: main.cpp:74
 #, kde-format
 msgid "Former Developer"
 msgstr "이전 개발자"
 
-#: main.cpp:76
+#: main.cpp:75
 #, kde-format
 msgid "Arend van Beelen jr."
 msgstr "Arend van Beelen jr."
 
-#: main.cpp:76
+#: main.cpp:75
 #, kde-format
 msgid "Initial RDP backend"
 msgstr "초기 RDP 백엔드"
 
-#: main.cpp:77
+#: main.cpp:76
 #, kde-format
 msgid "Brad Hards"
 msgstr "Brad Hards"
 
-#: main.cpp:77
+#: main.cpp:76
 #, kde-format
 msgid "Google Summer of Code 2007 KRDC project mentor"
 msgstr "Google Summer of Code 2007 KRDC 프로젝트 멘터"
 
-#: main.cpp:79
+#: main.cpp:77
 #, kde-format
 msgid "LibVNCServer / LibVNCClient developers"
 msgstr "LibVNCServer / LibVNCClient 개발자"
 
-#: main.cpp:79
+#: main.cpp:78
 #, kde-format
 msgid "VNC client library"
 msgstr "VNC 클라이언트 라이브러리"
@@ -418,33 +418,33 @@ msgstr ""
 msgid "URLs to connect after startup"
 msgstr "시작한 후에 연결할 URL"
 
-#: mainwindow.cpp:125
+#: mainwindow.cpp:124
 #, kde-format
 msgid "KDE Remote Desktop Client started"
 msgstr "KDE 원격 데스크톱 클라이언트 시작됨"
 
-#: mainwindow.cpp:130 mainwindow.cpp:143 mainwindow.cpp:1093
-#: mainwindow.cpp:1190
+#: mainwindow.cpp:129 mainwindow.cpp:142 mainwindow.cpp:1083
+#: mainwindow.cpp:1178
 #, kde-format
 msgid "New Connection"
 msgstr "새 연결"
 
-#: mainwindow.cpp:149
+#: mainwindow.cpp:148
 #, kde-format
 msgid "Copy Screenshot to Clipboard"
 msgstr "클립보드에 스크린샷 복사하기"
 
-#: mainwindow.cpp:150
+#: mainwindow.cpp:149
 #, kde-format
 msgid "Screenshot"
 msgstr "스크린샷"
 
-#: mainwindow.cpp:155 mainwindow.cpp:502
+#: mainwindow.cpp:155 mainwindow.cpp:501
 #, kde-format
 msgid "Switch to Full Screen Mode"
 msgstr "전체 화면 모드로 전환"
 
-#: mainwindow.cpp:156 mainwindow.cpp:503
+#: mainwindow.cpp:156 mainwindow.cpp:502
 #, kde-format
 msgid "Full Screen"
 msgstr "전체 화면"
@@ -499,7 +499,7 @@ msgstr "크기 조정 배율"
 msgid "Bookmarks"
 msgstr "책갈피"
 
-#: mainwindow.cpp:264
+#: mainwindow.cpp:262
 #, kde-format
 msgid ""
 "The entered address does not have the required form.\n"
@@ -508,146 +508,146 @@ msgstr ""
 "올바른 형식으로 주소를 입력하십시오.\n"
 " 형식: [사용자이름@]호스트[:포트]"
 
-#: mainwindow.cpp:265
+#: mainwindow.cpp:262
 #, kde-format
 msgid "Malformed URL"
 msgstr "잘못된 URL"
 
-#: mainwindow.cpp:287
+#: mainwindow.cpp:283
 #, kde-format
 msgid "The entered address cannot be handled."
 msgstr "입력한 주소를 처리할 수 없습니다."
 
-#: mainwindow.cpp:419
+#: mainwindow.cpp:418
 #, kde-format
 msgid "Connecting to %1"
 msgstr "%1에 연결하는 중"
 
-#: mainwindow.cpp:423
+#: mainwindow.cpp:422
 #, kde-format
 msgid "Authenticating at %1"
 msgstr "%1에서 인증하는 중..."
 
-#: mainwindow.cpp:427
+#: mainwindow.cpp:426
 #, kde-format
 msgid "Preparing connection to %1"
 msgstr "%1(으)로의 연결 준비하는 중"
 
-#: mainwindow.cpp:431
+#: mainwindow.cpp:430
 #, kde-format
 msgid "Connected to %1"
 msgstr "%1에 연결됨"
 
-#: mainwindow.cpp:513
+#: mainwindow.cpp:512
 #, kde-format
 msgctxt ""
 "window title when in full screen mode (for example displayed in tasklist)"
 msgid "KDE Remote Desktop Client (Full Screen)"
 msgstr "KDE 원격 데스크톱 클라이언트 (전체 화면)"
 
-#: mainwindow.cpp:546
+#: mainwindow.cpp:545
 #, kde-format
 msgid "Switch to Window Mode"
 msgstr "창 모드로 전환"
 
-#: mainwindow.cpp:547
+#: mainwindow.cpp:546
 #, kde-format
 msgid "Window Mode"
 msgstr "창 모드"
 
-#: mainwindow.cpp:699
+#: mainwindow.cpp:697
 #, kde-format
 msgid "Connect"
 msgstr "연결"
 
-#: mainwindow.cpp:700
+#: mainwindow.cpp:698
 #, kde-format
 msgid "Rename"
 msgstr "이름 바꾸기"
 
-#: mainwindow.cpp:701
+#: mainwindow.cpp:699
 #, kde-format
 msgid "Settings"
 msgstr "설정"
 
-#: mainwindow.cpp:702
+#: mainwindow.cpp:700
 #, kde-format
 msgid "Delete"
 msgstr "삭제"
 
-#: mainwindow.cpp:705 remotedesktopsmodel.cpp:107
+#: mainwindow.cpp:703 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "책갈피"
 
-#: mainwindow.cpp:706 remotedesktopsmodel.cpp:109
+#: mainwindow.cpp:703 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "과거 기록"
 
-#: mainwindow.cpp:718
+#: mainwindow.cpp:715
 #, kde-format
 msgid "Rename %1"
 msgstr "%1 이름 바꾸기"
 
-#: mainwindow.cpp:718
+#: mainwindow.cpp:715
 #, kde-format
 msgid "Rename %1 to"
 msgstr "%1의 이름을 다음으로 바꾸기"
 
-#: mainwindow.cpp:726
+#: mainwindow.cpp:722
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "%1을(를) 지우시겠습니까?"
 
-#: mainwindow.cpp:726
+#: mainwindow.cpp:722
 #, kde-format
 msgid "Delete %1"
 msgstr "%1 삭제"
 
-#: mainwindow.cpp:748
+#: mainwindow.cpp:746
 #, kde-format
 msgid "Add Bookmark"
 msgstr "책갈피 추가하기"
 
-#: mainwindow.cpp:749
+#: mainwindow.cpp:747
 #, kde-format
 msgid "Close Tab"
 msgstr "탭 닫기"
 
-#: mainwindow.cpp:853
+#: mainwindow.cpp:851
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr "전체 화면 창 최소화"
 
-#: mainwindow.cpp:869
+#: mainwindow.cpp:867
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "도구 모음 붙이기"
 
-#: mainwindow.cpp:987
+#: mainwindow.cpp:976
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr "KDE 원격 데스크톱 클라이언트를 종료하시겠습니까?"
 
-#: mainwindow.cpp:988
+#: mainwindow.cpp:977
 #, kde-format
 msgid "Confirm Quit"
 msgstr "종료 확인"
 
-#: mainwindow.cpp:1116
+#: mainwindow.cpp:1106
 #, kde-format
 msgid "Connect to:"
 msgstr "다음에 연결:"
 
-#: mainwindow.cpp:1120
+#: mainwindow.cpp:1110
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr "주소를 입력하거나 과거 기록에서 검색할 수 있습니다."
 
-#: mainwindow.cpp:1129
+#: mainwindow.cpp:1119
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
@@ -656,203 +656,73 @@ msgstr ""
 "IP 주소나 도메인 이름을 입력하십시오. 줄 내용을 지우면 연결할 수 있는 방법을 "
 "볼 수 있습니다."
 
-#: mainwindow.cpp:1132
+#: mainwindow.cpp:1122
 #, kde-format
 msgid "Goto Address"
 msgstr "주소로 가기"
 
-#: mainwindow.cpp:1226
+#: mainwindow.cpp:1214
 #, kde-format
 msgid "Remote Desktops"
 msgstr "원격 데스크톱"
 
-#: mainwindow.cpp:1257
+#: mainwindow.cpp:1243
 #, kde-format
 msgid "Filter"
 msgstr "필터"
 
-#. i18n: ectx: property (text), widget (QLabel, shareMediaLabel)
-#: rdp/rdppreferences.ui:17
-#, kde-format
-msgid "Share Media:"
-msgstr "공유 미디어:"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
-#: rdp/rdppreferences.ui:40 rdp/rdppreferences.ui:291
-#, kde-format
-msgid "Use Best Available"
-msgstr "최적 설정 사용"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
-#: rdp/rdppreferences.ui:45
-#, kde-format
-msgid "True Color with Alpha (32 Bit)"
-msgstr "투명도 있는 트루 컬러 (32비트)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
-#: rdp/rdppreferences.ui:50
-#, kde-format
-msgid "True Color (24 Bit)"
-msgstr "트루 컬러 (24비트)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
-#: rdp/rdppreferences.ui:55
-#, kde-format
-msgid "High Color (16 Bit)"
-msgstr "하이 컬러 (16비트)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
-#: rdp/rdppreferences.ui:60
-#, kde-format
-msgid "Low Color (8 Bit)"
-msgstr "낮음 (8비트)"
-
-#. i18n: ectx: property (text), widget (QLabel, widthLabel)
-#: rdp/rdppreferences.ui:73 vnc/vncpreferences.ui:136
-#, kde-format
-msgid "&Width:"
-msgstr "폭(&W):"
-
-#. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Width)
-#. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_ScalingWidth)
-#: rdp/rdppreferences.ui:89 vnc/vncpreferences.ui:152
-#, kde-format
-msgid ""
-"This is the width of the remote desktop. You can only change this value "
-"manually if you select Custom as desktop resolution above."
-msgstr ""
-"원격 데스크톱의 폭입니다. 해상도를 사용자 정의로 선택한 경우에만 이 값을 조정"
-"할 수 있습니다."
-
-#. i18n: ectx: property (text), widget (QLabel, heightLabel)
-#: rdp/rdppreferences.ui:105 vnc/vncpreferences.ui:168
-#, kde-format
-msgid "H&eight:"
-msgstr "높이(&E):"
-
-#. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Height)
-#. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_ScalingHeight)
-#: rdp/rdppreferences.ui:121 vnc/vncpreferences.ui:184
-#, kde-format
-msgid ""
-"This is the height of the remote desktop. You can only change this value "
-"manually if you select Custom as desktop resolution above."
-msgstr ""
-"원격 데스크톱의 너비입니다. 해상도를 사용자 정의로 선택한 경우에만 이 값을 조"
-"정할 수 있습니다."
-
-#. i18n: ectx: property (text), widget (QLabel, accelerationLabel)
-#: rdp/rdppreferences.ui:136
-#, kde-format
-msgid "Acceleration:"
-msgstr "가속:"
-
-#. i18n: ectx: property (text), widget (QLabel, colorDepthLabel)
-#: rdp/rdppreferences.ui:159
-#, kde-format
-msgid "Color &depth:"
-msgstr "색 농도(&D):"
-
 #. i18n: ectx: property (text), widget (QLabel, resolutionLabel)
-#: rdp/rdppreferences.ui:172
+#: rdp/rdppreferences.ui:30
 #, kde-format
 msgid "Resolution"
 msgstr "해상도"
 
-#. i18n: ectx: property (text), widget (QLabel, layoutLabel)
-#: rdp/rdppreferences.ui:182
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
+#: rdp/rdppreferences.ui:53 rdp/rdppreferences.ui:348
 #, kde-format
-msgid "&Keyboard layout:"
-msgstr "키보드 레이아웃(&K):"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
-#: rdp/rdppreferences.ui:208
-#, kde-format
-msgid "On This Computer"
-msgstr "이 컴퓨터에서"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
-#: rdp/rdppreferences.ui:213
-#, kde-format
-msgid "On Remote Computer"
-msgstr "원격 컴퓨터에서"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
-#: rdp/rdppreferences.ui:218
-#, kde-format
-msgid "Disable Sound"
-msgstr "소리 비활성화"
-
-#. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_Resolution)
-#. i18n: ectx: property (whatsThis), widget (KComboBox, resolutionComboBox)
-#: rdp/rdppreferences.ui:238 vnc/vncpreferences.ui:86
-#, kde-format
-msgid ""
-"Here you can specify the resolution of the remote desktop. This resolution "
-"determines the size of the desktop that will be presented to you."
-msgstr ""
-"이 곳에서 원격 데스크톱의 해상도를 지정할 수 있습니다. 표시할 데스크톱의 크기"
-"를 결정합니다."
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#: rdp/rdppreferences.ui:245
-#, kde-format
-msgid "Small (1280x720)"
-msgstr "작게(1280x720)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#: rdp/rdppreferences.ui:250
-#, kde-format
-msgid "Medium (1600x900)"
-msgstr "중간(1600x900)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#: rdp/rdppreferences.ui:255
-#, kde-format
-msgid "Large (1920x1080)"
-msgstr "크게(1920x1080)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#: rdp/rdppreferences.ui:260
-#, kde-format
-msgid "Current Window Size"
-msgstr "현재 창 크기"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
-#: rdp/rdppreferences.ui:265 vnc/vncpreferences.ui:118
-#, kde-format
-msgid "Current Screen Resolution"
-msgstr "현재 화면 해상도"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
-#: rdp/rdppreferences.ui:270 vnc/vncpreferences.ui:123
-#, kde-format
-msgid "Custom Resolution (...)"
-msgstr "사용자 정의 해상도 (...)"
+msgid "Use Best Available"
+msgstr "최적 설정 사용"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
-#: rdp/rdppreferences.ui:296
+#: rdp/rdppreferences.ui:58
 #, kde-format
 msgid "Force H.264"
 msgstr "H.264 강제"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
-#: rdp/rdppreferences.ui:301
+#: rdp/rdppreferences.ui:63
 #, kde-format
 msgid "Force RemoteFX"
 msgstr "RemoteFX 강제"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
-#: rdp/rdppreferences.ui:306
+#: rdp/rdppreferences.ui:68
 #, kde-format
 msgid "Disable All Acceleration"
 msgstr "모든 가속 비활성화"
 
+#. i18n: ectx: property (text), widget (QLabel, soundLabel)
+#: rdp/rdppreferences.ui:76
+#, kde-format
+msgctxt "label for soundsettings in preferences dialog"
+msgid "Sound:"
+msgstr "소리:"
+
+#. i18n: ectx: property (text), widget (QLabel, accelerationLabel)
+#: rdp/rdppreferences.ui:89
+#, kde-format
+msgid "Acceleration:"
+msgstr "가속:"
+
+#. i18n: ectx: property (text), widget (QLabel, TlsSecLevelLabel)
+#: rdp/rdppreferences.ui:99
+#, kde-format
+msgid "TLS security level:"
+msgstr "TLS 보안 수준:"
+
 #. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:326
+#: rdp/rdppreferences.ui:140
 #, kde-format
 msgid ""
 "Use this to specify your keyboard layout. This layout setting is used to "
@@ -862,247 +732,512 @@ msgstr ""
 "코드를 보내는 데 사용됩니다."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:333
+#: rdp/rdppreferences.ui:147
 #, kde-format
 msgid "Arabic (ar)"
 msgstr "아랍어 (ar)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:338
+#: rdp/rdppreferences.ui:152
 #, kde-format
 msgid "Czech (cs)"
 msgstr "체코어 (cs)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:343
+#: rdp/rdppreferences.ui:157
 #, kde-format
 msgid "Danish (da)"
 msgstr "덴마크어 (da)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:348
+#: rdp/rdppreferences.ui:162
 #, kde-format
 msgid "German (de)"
 msgstr "독일어 (de)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:353
+#: rdp/rdppreferences.ui:167
 #, kde-format
 msgid "Swiss German (de-ch)"
 msgstr "스위스식 독일어 (de-ch)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:358
+#: rdp/rdppreferences.ui:172
 #, kde-format
 msgid "American Dvorak (en-dv)"
 msgstr "미국 드보락 (en-dv)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:363
+#: rdp/rdppreferences.ui:177
 #, kde-format
 msgid "British English (en-gb)"
 msgstr "영국 영어 (en-gb)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:368
+#: rdp/rdppreferences.ui:182
 #, kde-format
 msgid "US English (en-us)"
 msgstr "미국 영어 (en-us)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:373
+#: rdp/rdppreferences.ui:187
 #, kde-format
 msgid "Spanish (es)"
 msgstr "스페인어 (es)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:378
+#: rdp/rdppreferences.ui:192
 #, kde-format
 msgid "Estonian (et)"
 msgstr "에스토니아어 (et)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:383
+#: rdp/rdppreferences.ui:197
 #, kde-format
 msgid "Finnish (fi)"
 msgstr "핀란드어 (fi)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:388
+#: rdp/rdppreferences.ui:202
 #, kde-format
 msgid "Faroese (fo)"
 msgstr "페로어 (fo)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:393
+#: rdp/rdppreferences.ui:207
 #, kde-format
 msgid "French (fr)"
 msgstr "프랑스어 (fr)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:398
+#: rdp/rdppreferences.ui:212
 #, kde-format
 msgid "Belgian (fr-be)"
 msgstr "벨기에 프랑스어 (fr-be)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:403
+#: rdp/rdppreferences.ui:217
 #, kde-format
 msgid "French Canadian (fr-ca)"
 msgstr "캐나다 프랑스어 (fr-ca)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:408
+#: rdp/rdppreferences.ui:222
 #, kde-format
 msgid "Swiss French (fr-ch)"
 msgstr "스위스 프랑스어 (fr-ch)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:413
+#: rdp/rdppreferences.ui:227
 #, kde-format
 msgid "Hebrew (he)"
 msgstr "히브리어 (he)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:418
+#: rdp/rdppreferences.ui:232
 #, kde-format
 msgid "Croatian (hr)"
 msgstr "크로아티아어 (hr)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:423
+#: rdp/rdppreferences.ui:237
 #, kde-format
 msgid "Hungarian (hu)"
 msgstr "헝가리어 (hu)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:428
+#: rdp/rdppreferences.ui:242
 #, kde-format
 msgid "Icelandic (is)"
 msgstr "아이슬란드어 (is)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:433
+#: rdp/rdppreferences.ui:247
 #, kde-format
 msgid "Italian (it)"
 msgstr "이탈리아어 (it)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:438
+#: rdp/rdppreferences.ui:252
 #, kde-format
 msgid "Japanese (ja)"
 msgstr "일본어 (ja)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:443
+#: rdp/rdppreferences.ui:257
 #, kde-format
 msgid "Korean (ko)"
 msgstr "한국어 (ko)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:448
+#: rdp/rdppreferences.ui:262
 #, kde-format
 msgid "Lithuanian (lt)"
 msgstr "리투아니아어 (lt)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:453
+#: rdp/rdppreferences.ui:267
 #, kde-format
 msgid "Latvian (lv)"
 msgstr "라트비아어 (lv)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:458
+#: rdp/rdppreferences.ui:272
 #, kde-format
 msgid "Macedonian (mk)"
 msgstr "마케도니아어 (mk)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:463
+#: rdp/rdppreferences.ui:277
 #, kde-format
 msgid "Dutch (nl)"
 msgstr "네덜란드어 (nl)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:468
+#: rdp/rdppreferences.ui:282
 #, kde-format
 msgid "Belgian Dutch (nl-be)"
 msgstr "벨기에 네덜란드어 (nl-be)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:473
+#: rdp/rdppreferences.ui:287
 #, kde-format
 msgid "Norwegian (no)"
 msgstr "노르웨이어 (no)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:478
+#: rdp/rdppreferences.ui:292
 #, kde-format
 msgid "Polish (pl)"
 msgstr "폴란드어 (pl)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:483
+#: rdp/rdppreferences.ui:297
 #, kde-format
 msgid "Portuguese (pt)"
 msgstr "포르투갈어 (pt)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:488
+#: rdp/rdppreferences.ui:302
 #, kde-format
 msgid "Brazilian (pt-br)"
 msgstr "브라질 포르투갈어 (pt-br)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:493
+#: rdp/rdppreferences.ui:307
 #, kde-format
 msgid "Russian (ru)"
 msgstr "러시아어 (ru)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:498
+#: rdp/rdppreferences.ui:312
 #, kde-format
 msgid "Slovenian (sl)"
 msgstr "슬로베니아어 (sl)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:503
+#: rdp/rdppreferences.ui:317
 #, kde-format
 msgid "Swedish (sv)"
 msgstr "스웨덴어 (sv)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:508
+#: rdp/rdppreferences.ui:322
 #, kde-format
 msgid "Thai (th)"
 msgstr "태국어 (th)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:513
+#: rdp/rdppreferences.ui:327
 #, kde-format
 msgid "Turkish (tr)"
 msgstr "튀르키예어 (tr)"
 
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
+#: rdp/rdppreferences.ui:353
+#, kde-format
+msgid "True Color with Alpha (32 Bit)"
+msgstr "투명도 있는 트루 컬러 (32비트)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
+#: rdp/rdppreferences.ui:358
+#, kde-format
+msgid "True Color (24 Bit)"
+msgstr "트루 컬러 (24비트)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
+#: rdp/rdppreferences.ui:363
+#, kde-format
+msgid "High Color (16 Bit)"
+msgstr "하이 컬러 (16비트)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
+#: rdp/rdppreferences.ui:368
+#, kde-format
+msgid "Low Color (8 Bit)"
+msgstr "낮음 (8비트)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
+#: rdp/rdppreferences.ui:389
+#, kde-format
+msgid "On This Computer"
+msgstr "이 컴퓨터에서"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
+#: rdp/rdppreferences.ui:394
+#, kde-format
+msgid "On Remote Computer"
+msgstr "원격 컴퓨터에서"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
+#: rdp/rdppreferences.ui:399
+#, kde-format
+msgid "Disable Sound"
+msgstr "소리 비활성화"
+
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ScaleToSize)
-#: rdp/rdppreferences.ui:527
+#: rdp/rdppreferences.ui:413
 #, kde-format
 msgid "Scale window contents to match resolution"
 msgstr "창 내용을 해상도와 일치하게 조정"
 
-#. i18n: ectx: property (text), widget (QLabel, soundLabel)
-#: rdp/rdppreferences.ui:553
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
+#: rdp/rdppreferences.ui:436
 #, kde-format
-msgctxt "label for soundsettings in preferences dialog"
-msgid "Sound:"
-msgstr "소리:"
+msgid "any"
+msgstr "임의"
 
-#: rdp/rdpsession.cpp:148
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
+#: rdp/rdppreferences.ui:441
+#, kde-format
+msgid "80 bit"
+msgstr "80비트"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
+#: rdp/rdppreferences.ui:446
+#, kde-format
+msgid "112 bit"
+msgstr "112비트"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
+#: rdp/rdppreferences.ui:451
+#, kde-format
+msgid "128 bit"
+msgstr "128비트"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
+#: rdp/rdppreferences.ui:456
+#, kde-format
+msgid "192 bit"
+msgstr "192비트"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
+#: rdp/rdppreferences.ui:461
+#, kde-format
+msgid "256 bit"
+msgstr "256비트"
+
+#. i18n: ectx: property (text), widget (QLabel, layoutLabel)
+#: rdp/rdppreferences.ui:469
+#, kde-format
+msgid "&Keyboard layout:"
+msgstr "키보드 레이아웃(&K):"
+
+#. i18n: ectx: property (text), widget (QLabel, widthLabel)
+#: rdp/rdppreferences.ui:487 vnc/vncpreferences.ui:136
+#, kde-format
+msgid "&Width:"
+msgstr "폭(&W):"
+
+#. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Width)
+#. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_ScalingWidth)
+#: rdp/rdppreferences.ui:503 vnc/vncpreferences.ui:152
+#, kde-format
+msgid ""
+"This is the width of the remote desktop. You can only change this value "
+"manually if you select Custom as desktop resolution above."
+msgstr ""
+"원격 데스크톱의 폭입니다. 해상도를 사용자 정의로 선택한 경우에만 이 값을 조정"
+"할 수 있습니다."
+
+#. i18n: ectx: property (text), widget (QLabel, heightLabel)
+#: rdp/rdppreferences.ui:519 vnc/vncpreferences.ui:168
+#, kde-format
+msgid "H&eight:"
+msgstr "높이(&E):"
+
+#. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Height)
+#. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_ScalingHeight)
+#: rdp/rdppreferences.ui:535 vnc/vncpreferences.ui:184
+#, kde-format
+msgid ""
+"This is the height of the remote desktop. You can only change this value "
+"manually if you select Custom as desktop resolution above."
+msgstr ""
+"원격 데스크톱의 너비입니다. 해상도를 사용자 정의로 선택한 경우에만 이 값을 조"
+"정할 수 있습니다."
+
+#. i18n: ectx: property (text), widget (QLabel, shareMediaLabel)
+#: rdp/rdppreferences.ui:550
+#, kde-format
+msgid "Share Media:"
+msgstr "공유 미디어:"
+
+#. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_Resolution)
+#. i18n: ectx: property (whatsThis), widget (KComboBox, resolutionComboBox)
+#: rdp/rdppreferences.ui:572 vnc/vncpreferences.ui:86
+#, kde-format
+msgid ""
+"Here you can specify the resolution of the remote desktop. This resolution "
+"determines the size of the desktop that will be presented to you."
+msgstr ""
+"이 곳에서 원격 데스크톱의 해상도를 지정할 수 있습니다. 표시할 데스크톱의 크기"
+"를 결정합니다."
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#: rdp/rdppreferences.ui:579
+#, kde-format
+msgid "Small (1280x720)"
+msgstr "작게(1280x720)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#: rdp/rdppreferences.ui:584
+#, kde-format
+msgid "Medium (1600x900)"
+msgstr "중간(1600x900)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#: rdp/rdppreferences.ui:589
+#, kde-format
+msgid "Large (1920x1080)"
+msgstr "크게(1920x1080)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#: rdp/rdppreferences.ui:594
+#, kde-format
+msgid "Current Window Size"
+msgstr "현재 창 크기"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
+#: rdp/rdppreferences.ui:599 vnc/vncpreferences.ui:118
+#, kde-format
+msgid "Current Screen Resolution"
+msgstr "현재 화면 해상도"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
+#: rdp/rdppreferences.ui:604 vnc/vncpreferences.ui:123
+#, kde-format
+msgid "Custom Resolution (...)"
+msgstr "사용자 정의 해상도 (...)"
+
+#. i18n: ectx: attribute (title), widget (QWidget, proxySettingsTab)
+#: rdp/rdppreferences.ui:616
+#, kde-format
+msgid "Proxy"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, protocolLabel)
+#: rdp/rdppreferences.ui:624
+#, fuzzy, kde-format
+#| msgid "Default protocol:"
+msgid "Protocol:"
+msgstr "기본 프로토콜:"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ProxyProtocol)
+#. i18n: ectx: property (text), item, widget (QComboBox, kcfg_GatewayTransportType)
+#: rdp/rdppreferences.ui:638 rdp/rdppreferences.ui:749
+#, kde-format
+msgid "HTTP"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ProxyProtocol)
+#: rdp/rdppreferences.ui:643
+#, kde-format
+msgid "SOCKS"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, pPasswordLabel)
+#. i18n: ectx: property (text), widget (QLabel, gPasswordLabel)
+#: rdp/rdppreferences.ui:654 rdp/rdppreferences.ui:710
+#, fuzzy, kde-format
+#| msgctxt "@title:dialog"
+#| msgid "Password Problems"
+msgid "Password:"
+msgstr "암호 문제"
+
+#. i18n: ectx: property (text), widget (QLabel, pUsernameLabel)
+#. i18n: ectx: property (text), widget (QLabel, gUsernameLabel)
+#: rdp/rdppreferences.ui:664 rdp/rdppreferences.ui:703
+#, fuzzy, kde-format
+#| msgid "User name:"
+msgid "Username:"
+msgstr "사용자 이름:"
+
+#. i18n: ectx: property (text), widget (QLabel, pHostLabel)
+#. i18n: ectx: property (text), widget (QLabel, gServerLabel)
+#: rdp/rdppreferences.ui:671 rdp/rdppreferences.ui:696
+#, kde-format
+msgid "Server:"
+msgstr ""
+
+#. i18n: ectx: property (placeholderText), widget (KLineEdit, kcfg_ProxyHost)
+#. i18n: ectx: property (placeholderText), widget (KLineEdit, kcfg_GatewayServer)
+#: rdp/rdppreferences.ui:678 rdp/rdppreferences.ui:717
+#, kde-format
+msgid "host:port"
+msgstr ""
+
+#. i18n: ectx: attribute (title), widget (QWidget, gatewaySettingsTab)
+#: rdp/rdppreferences.ui:688
+#, kde-format
+msgid "Gateway"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, gTransportTypeLabel)
+#: rdp/rdppreferences.ui:730
+#, kde-format
+msgid "Transport type:"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (QComboBox, kcfg_GatewayTransportType)
+#: rdp/rdppreferences.ui:744
+#, kde-format
+msgid "Auto"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (QComboBox, kcfg_GatewayTransportType)
+#: rdp/rdppreferences.ui:754
+#, kde-format
+msgid "RPC"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, gDomainLabel)
+#: rdp/rdppreferences.ui:762
+#, kde-format
+msgid "Domain:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, colorDepthLabel)
+#: rdp/rdppreferences.ui:778
+#, kde-format
+msgid "Color &depth:"
+msgstr "색 농도(&D):"
+
+#. i18n: ectx: property (text), widget (QLabel, advancedNetworkSettingsLabel)
+#: rdp/rdppreferences.ui:791
+#, kde-format
+msgid "Advanced Network Settings"
+msgstr ""
+
+#: rdp/rdpsession.cpp:163
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Logon Error"
 msgstr "로그온 오류"
 
-#: rdp/rdpsession.cpp:195
+#: rdp/rdpsession.cpp:210
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1118,49 +1253,49 @@ msgstr ""
 "발급자: %5\n"
 "지문: %6\n"
 
-#: rdp/rdpsession.cpp:612
+#: rdp/rdpsession.cpp:697
 #, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a password."
 msgstr "이 시스템에 접근하려면 암호가 필요합니다."
 
-#: rdp/rdpsession.cpp:615
+#: rdp/rdpsession.cpp:700
 #, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
 msgstr "이 시스템에 접근하려면 사용자 이름과 암호가 필요합니다."
 
-#: rdp/rdpsession.cpp:637
+#: rdp/rdpsession.cpp:722
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr "이 시스템의 충전기를 알 수 없습니다. 계속 진행하시겠습니까?"
 
-#: rdp/rdpsession.cpp:638
+#: rdp/rdpsession.cpp:723
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
 msgstr "인증서 검증"
 
-#: rdp/rdpsession.cpp:643 rdp/rdpsession.cpp:666
+#: rdp/rdpsession.cpp:728 rdp/rdpsession.cpp:751
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
 msgstr "이 인증서 기억"
 
-#: rdp/rdpsession.cpp:660
+#: rdp/rdpsession.cpp:745
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
 msgstr "시스템 인증서가 변경되었습니다. 계속 진행하시겠습니까?"
 
-#: rdp/rdpsession.cpp:661
+#: rdp/rdpsession.cpp:746
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
 msgstr "인증서가 변경됨"
 
-#: rdp/rdpsession.cpp:664
+#: rdp/rdpsession.cpp:749
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1174,13 +1309,13 @@ msgstr ""
 "새 인증서:\n"
 "%2"
 
-#: rdp/rdpview.cpp:179
+#: rdp/rdpview.cpp:175
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Login Failure"
 msgstr "로그인 실패"
 
-#: rdp/rdpview.cpp:180
+#: rdp/rdpview.cpp:176
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1190,13 +1325,13 @@ msgstr ""
 "지정한 자격 증명으로 로그인할 수 없습니다. 사용자 이름과 암호를 다시 확인하십"
 "시오."
 
-#: rdp/rdpview.cpp:186
+#: rdp/rdpview.cpp:182
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Account Problems"
 msgstr "계정 문제"
 
-#: rdp/rdpview.cpp:187
+#: rdp/rdpview.cpp:183
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1206,13 +1341,13 @@ msgstr ""
 "지정한 계정으로 이 시스템에 로그인할 수 없습니다. 시스템 관리자에게 연락하십"
 "시오."
 
-#: rdp/rdpview.cpp:192
+#: rdp/rdpview.cpp:188
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Password Problems"
 msgstr "암호 문제"
 
-#: rdp/rdpview.cpp:193
+#: rdp/rdpview.cpp:189
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1222,73 +1357,73 @@ msgstr ""
 "지정한 암호로 이 시스템에 로그인할 수 없습니다 시스템 관리자에게 연락하여 변"
 "경하십시오."
 
-#: rdp/rdpview.cpp:196
+#: rdp/rdpview.cpp:192
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Lost"
 msgstr "연결 끊김"
 
-#: rdp/rdpview.cpp:197
+#: rdp/rdpview.cpp:193
 #, kde-format
 msgctxt "@label"
 msgid "Lost connection to the server."
 msgstr "서버 연결이 끊어졌습니다."
 
-#: rdp/rdpview.cpp:201
+#: rdp/rdpview.cpp:197
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Server not Found"
 msgstr "서버를 찾을 수 없음"
 
-#: rdp/rdpview.cpp:202
+#: rdp/rdpview.cpp:198
 #, kde-format
 msgctxt "@label"
 msgid "Could not find the server."
 msgstr "서버를 찾을 수 없습니다."
 
-#: rdp/rdpview.cpp:205
+#: rdp/rdpview.cpp:201
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Refused"
 msgstr "연결 거부됨"
 
-#: rdp/rdpview.cpp:206
+#: rdp/rdpview.cpp:202
 #, kde-format
 msgctxt "@label"
 msgid "The server refused the connection request."
 msgstr "서버에서 연결 요청을 거부했습니다."
 
-#: rdp/rdpview.cpp:211
+#: rdp/rdpview.cpp:207
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Could not Connect"
 msgstr "연결할 수 없음"
 
-#: rdp/rdpview.cpp:212
+#: rdp/rdpview.cpp:208
 #, kde-format
 msgctxt "@label"
 msgid "Could not connect to the server."
 msgstr "서버에 연결할 수 없습니다."
 
-#: rdp/rdpview.cpp:222 rdp/rdpview.cpp:226
+#: rdp/rdpview.cpp:218 rdp/rdpview.cpp:222
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Closed"
 msgstr "연결이 닫힘"
 
-#: rdp/rdpview.cpp:227
+#: rdp/rdpview.cpp:223
 #, kde-format
 msgctxt "@label"
 msgid "The connection to the server was closed."
 msgstr "서버와의 연결이 끊어졌습니다."
 
-#: rdp/rdpview.cpp:231
+#: rdp/rdpview.cpp:227
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Failed"
 msgstr "연결 실패"
 
-#: rdp/rdpview.cpp:232
+#: rdp/rdpview.cpp:228
 #, kde-format
 msgctxt "@label"
 msgid "An unknown error occurred"
@@ -1304,7 +1439,7 @@ msgstr "Windows 원격 데스크톱에 연결하기 (RDP)"
 msgid "New RDP Connection..."
 msgstr "새 RDP 연결..."
 
-#: rdp/rdpviewfactory.cpp:61
+#: rdp/rdpviewfactory.cpp:62
 #, kde-format
 msgid ""
 "<html>Enter the address here. Port is optional.<br /><i>Example: "
@@ -1313,25 +1448,25 @@ msgstr ""
 "<html>여기에 주소를 입력하십시오. 포트는 선택 사항입니다.<br /><i>예제: "
 "rdpserver:3389 (호스트:포트)</i></html>"
 
-#: remotedesktopsmodel.cpp:111
+#: remotedesktopsmodel.cpp:112
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Zeroconf"
 msgstr "Zeroconf"
 
-#: remotedesktopsmodel.cpp:113
+#: remotedesktopsmodel.cpp:114
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "None"
 msgstr "없음"
 
-#: remotedesktopsmodel.cpp:129
+#: remotedesktopsmodel.cpp:130
 #, kde-format
 msgctxt "Remove the selected url from the bookarks menu"
 msgid "Remove the bookmark for %1."
 msgstr "책갈피 %1을(를) 삭제합니다."
 
-#: remotedesktopsmodel.cpp:131
+#: remotedesktopsmodel.cpp:132
 #, kde-format
 msgctxt "Add the selected url to the bookmarks menu"
 msgid "Bookmark %1."
@@ -1370,7 +1505,7 @@ msgctxt "Header of the connections list, where this entry comes from"
 msgid "Source"
 msgstr "원본"
 
-#: vnc/vncclientthread.cpp:299
+#: vnc/vncclientthread.cpp:300
 #, kde-format
 msgid "VNC authentication type is not supported."
 msgstr "VNC 인증 방식이 지원되지 않습니다."
@@ -1400,17 +1535,17 @@ msgstr "VNC 서버에서 연결을 닫았습니다."
 msgid "Disconnected: %1."
 msgstr "연결 끊김: %1."
 
-#: vnc/vncclientthread.cpp:560
+#: vnc/vncclientthread.cpp:561
 #, kde-format
 msgid "Reconnecting."
 msgstr "다시 연결 중."
 
-#: vnc/vncclientthread.cpp:627
+#: vnc/vncclientthread.cpp:628
 #, kde-format
 msgid "Reconnected."
 msgstr "다시 연결됨."
 
-#: vnc/vncclientthread.cpp:629
+#: vnc/vncclientthread.cpp:630
 #, kde-format
 msgid "Connected."
 msgstr "연결됨."
@@ -1546,18 +1681,18 @@ msgstr ""
 "KeePassXC와 같은 지원하는 암호 관리자에서는 암호를 복사할 때 \"x-kde-"
 "passwordManagerHint\"라는 추가 MIME 형식을 부여하여 필터링에 사용합니다."
 
-#: vnc/vncsshtunnelthread.cpp:102
+#: vnc/vncsshtunnelthread.cpp:99
 #, kde-format
 msgid "Error connecting to %1: %2"
 msgstr "%1에 연결하는 중 오류 발생: %2"
 
-#: vnc/vncsshtunnelthread.cpp:127
+#: vnc/vncsshtunnelthread.cpp:124
 #, kde-format
 msgid "Error authenticating with password: %1"
 msgstr "암호로 인증하는 중 오류 발생: %1"
 
-#: vnc/vncsshtunnelthread.cpp:133 vnc/vncsshtunnelthread.cpp:151
-#: vnc/vncsshtunnelthread.cpp:158 vnc/vncsshtunnelthread.cpp:166
+#: vnc/vncsshtunnelthread.cpp:130 vnc/vncsshtunnelthread.cpp:148
+#: vnc/vncsshtunnelthread.cpp:155 vnc/vncsshtunnelthread.cpp:163
 #, kde-format
 msgid "Error creating tunnel socket"
 msgstr "터널 소켓을 만드는 중 오류 발생"
@@ -1567,22 +1702,22 @@ msgstr "터널 소켓을 만드는 중 오류 발생"
 msgid "Access to the system requires a password."
 msgstr "이 시스템에 접근하려면 암호가 필요합니다."
 
-#: vnc/vncview.cpp:345
+#: vnc/vncview.cpp:344
 #, kde-format
 msgid "Authentication failed. Please try again."
 msgstr "인증에 실패했습니다. 다시 시도하십시오."
 
-#: vnc/vncview.cpp:373
+#: vnc/vncview.cpp:374
 #, kde-format
 msgid "Please enter the SSH password."
 msgstr "SSH 암호를 입력하십시오."
 
-#: vnc/vncview.cpp:398 vnc/vncview.cpp:400
+#: vnc/vncview.cpp:399 vnc/vncview.cpp:401
 #, kde-format
 msgid "VNC failure"
 msgstr "VNC 실패"
 
-#: vnc/vncview.cpp:409 vnc/vncview.cpp:411
+#: vnc/vncview.cpp:410 vnc/vncview.cpp:412
 #, kde-format
 msgid "SSH Tunnel failure"
 msgstr "SSH 터널 실패"
@@ -1597,7 +1732,7 @@ msgstr "새 VNC 연결..."
 msgid "Connect to a VNC Remote Desktop"
 msgstr "VNC 원격 데스크톱에 연결하기"
 
-#: vnc/vncviewfactory.cpp:57
+#: vnc/vncviewfactory.cpp:58
 #, kde-format
 msgid ""
 "<html>Enter the address here.<br /><i>Example: vncserver:1 (host:port / "

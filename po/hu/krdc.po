@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.1\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-02 03:07+0000\n"
+"POT-Creation-Date: 2024-04-17 01:46+0000\n"
 "PO-Revision-Date: 2021-09-22 09:35+0200\n"
 "Last-Translator: Kristof Kiszel <kiszel.kristof@gmail.com>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -29,7 +29,7 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "kiszel.kristof@gmail.com"
 
-#: bookmarkmanager.cpp:44
+#: bookmarkmanager.cpp:43
 #, kde-format
 msgid "History"
 msgstr "Előzmények"
@@ -196,15 +196,15 @@ msgstr "Beállítás…"
 msgid "Remove"
 msgstr "Eltávolítás"
 
-#: config/hostpreferenceslist.cpp:100 mainwindow.cpp:678
-#, kde-format
-msgid "The selected host cannot be handled."
-msgstr "A kiválasztott gép nem kezelhető."
-
-#: config/hostpreferenceslist.cpp:101 mainwindow.cpp:288 mainwindow.cpp:679
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:283 mainwindow.cpp:678
 #, kde-format
 msgid "Unusable URL"
 msgstr "Nem használható URL"
+
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:678
+#, kde-format
+msgid "The selected host cannot be handled."
+msgstr "A kiválasztott gép nem kezelhető."
 
 #: config/preferencesdialog.cpp:24
 #, kde-format
@@ -217,23 +217,23 @@ msgstr "Általános"
 msgid "General Configuration"
 msgstr "Általános beállítások"
 
-#: config/preferencesdialog.cpp:29
+#: config/preferencesdialog.cpp:28
 #, kde-format
 msgid "Hosts"
 msgstr "Gépek"
 
-#: config/preferencesdialog.cpp:29 core/hostpreferences.cpp:176
-#: core/hostpreferences.cpp:180
+#: config/preferencesdialog.cpp:28 core/hostpreferences.cpp:175
+#: core/hostpreferences.cpp:179
 #, kde-format
 msgid "Host Configuration"
 msgstr "Gépbeállítás"
 
-#: config/preferencesdialog.cpp:34 config/preferencesdialog.cpp:35
+#: config/preferencesdialog.cpp:33 config/preferencesdialog.cpp:34
 #, kde-format
 msgid "Plugins"
 msgstr "Bővítmények"
 
-#: config/preferencesdialog.cpp:35
+#: config/preferencesdialog.cpp:34
 #, kde-format
 msgid "Plugin Configuration"
 msgstr "Bővítmények beállítása"
@@ -278,7 +278,7 @@ msgid_plural "%1 years ago"
 msgstr[0] "Egy évvel ezelőtt"
 msgstr[1] "%1 évvel ezelőtt"
 
-#: core/hostpreferences.cpp:183
+#: core/hostpreferences.cpp:182
 #, kde-format
 msgid ""
 "Note that settings might only apply when you connect next time to this host."
@@ -286,12 +286,12 @@ msgstr ""
 "Lehetséges, hogy a beállítások csak a géphez való legközelebbi "
 "csatlakozáskor lépnek életbe."
 
-#: core/hostpreferences.cpp:199
+#: core/hostpreferences.cpp:198
 #, kde-format
 msgid "Show this dialog again for this host"
 msgstr "A párbeszédablak mindig jelenjen meg ennél a gépnévnél"
 
-#: core/hostpreferences.cpp:203
+#: core/hostpreferences.cpp:202
 #, kde-format
 msgid "Remember password (KWallet)"
 msgstr "Jelszó megjegyzése (KWallet)"
@@ -314,17 +314,17 @@ msgstr "&Munkamenet"
 msgid "Remote View Toolbar"
 msgstr "Távoli nézet eszköztár"
 
-#: main.cpp:61
+#: main.cpp:60
 #, kde-format
 msgid "KRDC"
 msgstr "KRDC"
 
-#: main.cpp:62 systemtrayicon.cpp:24
+#: main.cpp:60 systemtrayicon.cpp:24
 #, kde-format
 msgid "KDE Remote Desktop Client"
 msgstr "KDE távoli asztal kliens"
 
-#: main.cpp:64
+#: main.cpp:63
 #, kde-format
 msgid ""
 "(c) 2007-2016, Urs Wolfer\n"
@@ -345,62 +345,62 @@ msgstr ""
 "© Matthew Chapman, 1999-2003.\n"
 "© Collabora Ltd, 2009."
 
-#: main.cpp:73
+#: main.cpp:72
 #, kde-format
 msgid "Urs Wolfer"
 msgstr "Urs Wolfer"
 
-#: main.cpp:73
+#: main.cpp:72
 #, kde-format
 msgid "Developer, Maintainer"
 msgstr "Fejlesztő, karbantartó"
 
-#: main.cpp:74
+#: main.cpp:73
 #, kde-format
 msgid "Tony Murray"
 msgstr "Tony Murray"
 
-#: main.cpp:74
+#: main.cpp:73
 #, kde-format
 msgid "Developer"
 msgstr "Fejlesztő"
 
-#: main.cpp:75
+#: main.cpp:74
 #, kde-format
 msgid "Tim Jansen"
 msgstr "Tim Jansen"
 
-#: main.cpp:75
+#: main.cpp:74
 #, kde-format
 msgid "Former Developer"
 msgstr "Korábbi fejlesztő"
 
-#: main.cpp:76
+#: main.cpp:75
 #, kde-format
 msgid "Arend van Beelen jr."
 msgstr "Arend van Beelen jr."
 
-#: main.cpp:76
+#: main.cpp:75
 #, kde-format
 msgid "Initial RDP backend"
 msgstr "Kezdeti RDP-támogatás"
 
-#: main.cpp:77
+#: main.cpp:76
 #, kde-format
 msgid "Brad Hards"
 msgstr "Brad Hards"
 
-#: main.cpp:77
+#: main.cpp:76
 #, kde-format
 msgid "Google Summer of Code 2007 KRDC project mentor"
 msgstr "Google Summer of Code 2007 - a KRDC projekt mentora"
 
-#: main.cpp:79
+#: main.cpp:77
 #, kde-format
 msgid "LibVNCServer / LibVNCClient developers"
 msgstr "LibVNCServer-, illetve LibVNCClient-fejlesztők"
 
-#: main.cpp:79
+#: main.cpp:78
 #, kde-format
 msgid "VNC client library"
 msgstr "VNC-klienskönyvtár"
@@ -428,33 +428,33 @@ msgstr ""
 msgid "URLs to connect after startup"
 msgstr "Azon URL-címek, amelyekhez az elindulás után csatlakozni kell"
 
-#: mainwindow.cpp:125
+#: mainwindow.cpp:124
 #, kde-format
 msgid "KDE Remote Desktop Client started"
 msgstr "A KDE távoli asztal kliense elindult"
 
-#: mainwindow.cpp:130 mainwindow.cpp:143 mainwindow.cpp:1093
-#: mainwindow.cpp:1190
+#: mainwindow.cpp:129 mainwindow.cpp:142 mainwindow.cpp:1083
+#: mainwindow.cpp:1178
 #, kde-format
 msgid "New Connection"
 msgstr "Új kapcsolat"
 
-#: mainwindow.cpp:149
+#: mainwindow.cpp:148
 #, kde-format
 msgid "Copy Screenshot to Clipboard"
 msgstr "Képernyőkép másolása a vágólapra"
 
-#: mainwindow.cpp:150
+#: mainwindow.cpp:149
 #, kde-format
 msgid "Screenshot"
 msgstr "Képernyőkép"
 
-#: mainwindow.cpp:155 mainwindow.cpp:502
+#: mainwindow.cpp:155 mainwindow.cpp:501
 #, kde-format
 msgid "Switch to Full Screen Mode"
 msgstr "Váltás teljes képernyős módba"
 
-#: mainwindow.cpp:156 mainwindow.cpp:503
+#: mainwindow.cpp:156 mainwindow.cpp:502
 #, kde-format
 msgid "Full Screen"
 msgstr "Teljes képernyő"
@@ -509,7 +509,7 @@ msgstr "Skálázási tényező"
 msgid "Bookmarks"
 msgstr "Könyvjelzők"
 
-#: mainwindow.cpp:264
+#: mainwindow.cpp:262
 #, kde-format
 msgid ""
 "The entered address does not have the required form.\n"
@@ -518,146 +518,146 @@ msgstr ""
 "A megadott cím formátuma nem megfelelő.\n"
 " Szintaxis: [felhasználónév@]gépnév[:port]"
 
-#: mainwindow.cpp:265
+#: mainwindow.cpp:262
 #, kde-format
 msgid "Malformed URL"
 msgstr "Hibás formátumú URL"
 
-#: mainwindow.cpp:287
+#: mainwindow.cpp:283
 #, kde-format
 msgid "The entered address cannot be handled."
 msgstr "A megadott cím nem kezelhető."
 
-#: mainwindow.cpp:419
+#: mainwindow.cpp:418
 #, kde-format
 msgid "Connecting to %1"
 msgstr "Csatlakozás ehhez: %1"
 
-#: mainwindow.cpp:423
+#: mainwindow.cpp:422
 #, kde-format
 msgid "Authenticating at %1"
 msgstr "Felhasználóellenőrzés itt: %1"
 
-#: mainwindow.cpp:427
+#: mainwindow.cpp:426
 #, kde-format
 msgid "Preparing connection to %1"
 msgstr "A csatlakozás előkészítése: %1"
 
-#: mainwindow.cpp:431
+#: mainwindow.cpp:430
 #, kde-format
 msgid "Connected to %1"
 msgstr "Csatlakozva ehhez: %1"
 
-#: mainwindow.cpp:513
+#: mainwindow.cpp:512
 #, kde-format
 msgctxt ""
 "window title when in full screen mode (for example displayed in tasklist)"
 msgid "KDE Remote Desktop Client (Full Screen)"
 msgstr "KDE távoli asztal kliens (teljes képernyős)"
 
-#: mainwindow.cpp:546
+#: mainwindow.cpp:545
 #, kde-format
 msgid "Switch to Window Mode"
 msgstr "Váltás ablakos módba"
 
-#: mainwindow.cpp:547
+#: mainwindow.cpp:546
 #, kde-format
 msgid "Window Mode"
 msgstr "Ablakos mód"
 
-#: mainwindow.cpp:699
+#: mainwindow.cpp:697
 #, kde-format
 msgid "Connect"
 msgstr "Csatlakozás"
 
-#: mainwindow.cpp:700
+#: mainwindow.cpp:698
 #, kde-format
 msgid "Rename"
 msgstr "Átnevezés"
 
-#: mainwindow.cpp:701
+#: mainwindow.cpp:699
 #, kde-format
 msgid "Settings"
 msgstr "Beállítások"
 
-#: mainwindow.cpp:702
+#: mainwindow.cpp:700
 #, kde-format
 msgid "Delete"
 msgstr "Törlés"
 
-#: mainwindow.cpp:705 remotedesktopsmodel.cpp:107
+#: mainwindow.cpp:703 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "Könyvjelzők"
 
-#: mainwindow.cpp:706 remotedesktopsmodel.cpp:109
+#: mainwindow.cpp:703 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "Előzmények"
 
-#: mainwindow.cpp:718
+#: mainwindow.cpp:715
 #, kde-format
 msgid "Rename %1"
 msgstr "A(z) %1 átnevezése"
 
-#: mainwindow.cpp:718
+#: mainwindow.cpp:715
 #, kde-format
 msgid "Rename %1 to"
 msgstr "A(z) %1 átnevezése erre"
 
-#: mainwindow.cpp:726
+#: mainwindow.cpp:722
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "Biztosan törölni szeretné a következőt: %1?"
 
-#: mainwindow.cpp:726
+#: mainwindow.cpp:722
 #, kde-format
 msgid "Delete %1"
 msgstr "A(z) %1 törlése"
 
-#: mainwindow.cpp:748
+#: mainwindow.cpp:746
 #, kde-format
 msgid "Add Bookmark"
 msgstr "Könyvjelző hozzáadása"
 
-#: mainwindow.cpp:749
+#: mainwindow.cpp:747
 #, kde-format
 msgid "Close Tab"
 msgstr "Lap bezárása"
 
-#: mainwindow.cpp:853
+#: mainwindow.cpp:851
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr "Teljes képernyős ablak minimalizálása"
 
-#: mainwindow.cpp:869
+#: mainwindow.cpp:867
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "Eszköztár rögzítése"
 
-#: mainwindow.cpp:987
+#: mainwindow.cpp:976
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr "Biztosan be szeretné zárni a KRDC-t?"
 
-#: mainwindow.cpp:988
+#: mainwindow.cpp:977
 #, kde-format
 msgid "Confirm Quit"
 msgstr "Kilépés megerősítése"
 
-#: mainwindow.cpp:1116
+#: mainwindow.cpp:1106
 #, kde-format
 msgid "Connect to:"
 msgstr "Csatlakozás ehhez:"
 
-#: mainwindow.cpp:1120
+#: mainwindow.cpp:1110
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr "Ide írhat egy címhez csatlakozáshoz és a lista szűréséhez."
 
-#: mainwindow.cpp:1129
+#: mainwindow.cpp:1119
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
@@ -666,207 +666,74 @@ msgstr ""
 "Ide írhat egy IP-címet vagy DNS-venet. Törölje a sort a csatlakozási módok "
 "listájáért."
 
-#: mainwindow.cpp:1132
+#: mainwindow.cpp:1122
 #, kde-format
 msgid "Goto Address"
 msgstr "Ugrás a címre"
 
-#: mainwindow.cpp:1226
+#: mainwindow.cpp:1214
 #, kde-format
 msgid "Remote Desktops"
 msgstr "Távoli asztalok"
 
-#: mainwindow.cpp:1257
+#: mainwindow.cpp:1243
 #, kde-format
 msgid "Filter"
 msgstr "Szűrő"
 
-#. i18n: ectx: property (text), widget (QLabel, shareMediaLabel)
-#: rdp/rdppreferences.ui:17
-#, kde-format
-msgid "Share Media:"
-msgstr "Média megosztása:"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
-#: rdp/rdppreferences.ui:40 rdp/rdppreferences.ui:291
-#, kde-format
-msgid "Use Best Available"
-msgstr ""
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
-#: rdp/rdppreferences.ui:45
-#, kde-format
-msgid "True Color with Alpha (32 Bit)"
-msgstr "True Color alfával (32 bites)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
-#: rdp/rdppreferences.ui:50
-#, kde-format
-msgid "True Color (24 Bit)"
-msgstr "True Color (24 bites)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
-#: rdp/rdppreferences.ui:55
-#, kde-format
-msgid "High Color (16 Bit)"
-msgstr "High Color (16 bites)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
-#: rdp/rdppreferences.ui:60
-#, kde-format
-msgid "Low Color (8 Bit)"
-msgstr "256 szín (8 bites)"
-
-#. i18n: ectx: property (text), widget (QLabel, widthLabel)
-#: rdp/rdppreferences.ui:73 vnc/vncpreferences.ui:136
-#, kde-format
-msgid "&Width:"
-msgstr "Szél&esség:"
-
-#. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Width)
-#. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_ScalingWidth)
-#: rdp/rdppreferences.ui:89 vnc/vncpreferences.ui:152
-#, kde-format
-msgid ""
-"This is the width of the remote desktop. You can only change this value "
-"manually if you select Custom as desktop resolution above."
-msgstr ""
-"Ez a távoli asztal szélessége. Ez az érték közvetlenül csak akkor adható "
-"meg, ha a felbontásnál az Egyedi opciót választotta."
-
-#. i18n: ectx: property (text), widget (QLabel, heightLabel)
-#: rdp/rdppreferences.ui:105 vnc/vncpreferences.ui:168
-#, kde-format
-msgid "H&eight:"
-msgstr "Ma&gasság:"
-
-#. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Height)
-#. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_ScalingHeight)
-#: rdp/rdppreferences.ui:121 vnc/vncpreferences.ui:184
-#, kde-format
-msgid ""
-"This is the height of the remote desktop. You can only change this value "
-"manually if you select Custom as desktop resolution above."
-msgstr ""
-"Ez a távoli asztal magassága. Itt csak akkor lehet közvetlenül értéket "
-"beírni, ha feljebb, az asztal felbontásánál az Egyedi opciót választotta."
-
-#. i18n: ectx: property (text), widget (QLabel, accelerationLabel)
-#: rdp/rdppreferences.ui:136
-#, kde-format
-msgid "Acceleration:"
-msgstr ""
-
-#. i18n: ectx: property (text), widget (QLabel, colorDepthLabel)
-#: rdp/rdppreferences.ui:159
-#, kde-format
-msgid "Color &depth:"
-msgstr "Színmé&lység:"
-
 #. i18n: ectx: property (text), widget (QLabel, resolutionLabel)
-#: rdp/rdppreferences.ui:172
+#: rdp/rdppreferences.ui:30
 #, kde-format
 msgid "Resolution"
 msgstr "Felbontás"
 
-#. i18n: ectx: property (text), widget (QLabel, layoutLabel)
-#: rdp/rdppreferences.ui:182
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
+#: rdp/rdppreferences.ui:53 rdp/rdppreferences.ui:348
 #, kde-format
-msgid "&Keyboard layout:"
-msgstr "B&illentyűzetkiosztás:"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
-#: rdp/rdppreferences.ui:208
-#, kde-format
-msgid "On This Computer"
-msgstr "ezen a számítógépen"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
-#: rdp/rdppreferences.ui:213
-#, kde-format
-msgid "On Remote Computer"
-msgstr "a távoli számítógépen"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
-#: rdp/rdppreferences.ui:218
-#, kde-format
-msgid "Disable Sound"
-msgstr "a hang kikapcsolása"
-
-#. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_Resolution)
-#. i18n: ectx: property (whatsThis), widget (KComboBox, resolutionComboBox)
-#: rdp/rdppreferences.ui:238 vnc/vncpreferences.ui:86
-#, kde-format
-msgid ""
-"Here you can specify the resolution of the remote desktop. This resolution "
-"determines the size of the desktop that will be presented to you."
+msgid "Use Best Available"
 msgstr ""
-"Itt lehet megadni a távoli munkaasztal felbontását. Ez határozza meg, hogy a "
-"kliens gépről milyen méretű munkaasztal látszik."
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#: rdp/rdppreferences.ui:245
-#, fuzzy, kde-format
-#| msgid "Small (800x600)"
-msgid "Small (1280x720)"
-msgstr "Alacsony (800x600)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#: rdp/rdppreferences.ui:250
-#, kde-format
-msgid "Medium (1600x900)"
-msgstr ""
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#: rdp/rdppreferences.ui:255
-#, fuzzy, kde-format
-#| msgid "Large (1280x1024)"
-msgid "Large (1920x1080)"
-msgstr "Nagy (1280x1024)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#: rdp/rdppreferences.ui:260
-#, fuzzy, kde-format
-#| msgid "Current KRDC Size"
-msgid "Current Window Size"
-msgstr "Jelenlegi KRDC méret"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
-#: rdp/rdppreferences.ui:265 vnc/vncpreferences.ui:118
-#, kde-format
-msgid "Current Screen Resolution"
-msgstr "Jelenlegi képernyőfelbontás"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
-#: rdp/rdppreferences.ui:270 vnc/vncpreferences.ui:123
-#, kde-format
-msgid "Custom Resolution (...)"
-msgstr "Egyedi felbontás (…)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
-#: rdp/rdppreferences.ui:296
+#: rdp/rdppreferences.ui:58
 #, kde-format
 msgid "Force H.264"
 msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
-#: rdp/rdppreferences.ui:301
+#: rdp/rdppreferences.ui:63
 #, fuzzy, kde-format
 #| msgid "RemoteFX:"
 msgid "Force RemoteFX"
 msgstr "RemoteFX:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
-#: rdp/rdppreferences.ui:306
+#: rdp/rdppreferences.ui:68
 #, kde-format
 msgid "Disable All Acceleration"
 msgstr ""
 
+#. i18n: ectx: property (text), widget (QLabel, soundLabel)
+#: rdp/rdppreferences.ui:76
+#, kde-format
+msgctxt "label for soundsettings in preferences dialog"
+msgid "Sound:"
+msgstr "Hang:"
+
+#. i18n: ectx: property (text), widget (QLabel, accelerationLabel)
+#: rdp/rdppreferences.ui:89
+#, kde-format
+msgid "Acceleration:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, TlsSecLevelLabel)
+#: rdp/rdppreferences.ui:99
+#, kde-format
+msgid "TLS security level:"
+msgstr ""
+
 #. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:326
+#: rdp/rdppreferences.ui:140
 #, kde-format
 msgid ""
 "Use this to specify your keyboard layout. This layout setting is used to "
@@ -876,247 +743,514 @@ msgstr ""
 "el a kliens a megfelelő billentyűkódokat a távoli gépre."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:333
+#: rdp/rdppreferences.ui:147
 #, kde-format
 msgid "Arabic (ar)"
 msgstr "Arab (ar)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:338
+#: rdp/rdppreferences.ui:152
 #, kde-format
 msgid "Czech (cs)"
 msgstr "Cseh (cs)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:343
+#: rdp/rdppreferences.ui:157
 #, kde-format
 msgid "Danish (da)"
 msgstr "Dán (da)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:348
+#: rdp/rdppreferences.ui:162
 #, kde-format
 msgid "German (de)"
 msgstr "Német (de)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:353
+#: rdp/rdppreferences.ui:167
 #, kde-format
 msgid "Swiss German (de-ch)"
 msgstr "Német, svájci (de-ch)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:358
+#: rdp/rdppreferences.ui:172
 #, kde-format
 msgid "American Dvorak (en-dv)"
 msgstr "Dvorak, USA (en-dv)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:363
+#: rdp/rdppreferences.ui:177
 #, kde-format
 msgid "British English (en-gb)"
 msgstr "Angol, brit (en-gb)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:368
+#: rdp/rdppreferences.ui:182
 #, kde-format
 msgid "US English (en-us)"
 msgstr "Angol, amerikai (en-us)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:373
+#: rdp/rdppreferences.ui:187
 #, kde-format
 msgid "Spanish (es)"
 msgstr "Spanyol (es)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:378
+#: rdp/rdppreferences.ui:192
 #, kde-format
 msgid "Estonian (et)"
 msgstr "Észt (et)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:383
+#: rdp/rdppreferences.ui:197
 #, kde-format
 msgid "Finnish (fi)"
 msgstr "Finn (fi)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:388
+#: rdp/rdppreferences.ui:202
 #, kde-format
 msgid "Faroese (fo)"
 msgstr "Feröeri (fo)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:393
+#: rdp/rdppreferences.ui:207
 #, kde-format
 msgid "French (fr)"
 msgstr "Francia (fr)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:398
+#: rdp/rdppreferences.ui:212
 #, kde-format
 msgid "Belgian (fr-be)"
 msgstr "Belga (fr-be)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:403
+#: rdp/rdppreferences.ui:217
 #, kde-format
 msgid "French Canadian (fr-ca)"
 msgstr "Francia, kanadai (fr-ca)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:408
+#: rdp/rdppreferences.ui:222
 #, kde-format
 msgid "Swiss French (fr-ch)"
 msgstr "Francia, svájci (fr-ch)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:413
+#: rdp/rdppreferences.ui:227
 #, kde-format
 msgid "Hebrew (he)"
 msgstr "Héber (he)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:418
+#: rdp/rdppreferences.ui:232
 #, kde-format
 msgid "Croatian (hr)"
 msgstr "Horvát (hr)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:423
+#: rdp/rdppreferences.ui:237
 #, kde-format
 msgid "Hungarian (hu)"
 msgstr "Magyar (hu)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:428
+#: rdp/rdppreferences.ui:242
 #, kde-format
 msgid "Icelandic (is)"
 msgstr "Izlandi (is)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:433
+#: rdp/rdppreferences.ui:247
 #, kde-format
 msgid "Italian (it)"
 msgstr "Olasz (it)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:438
+#: rdp/rdppreferences.ui:252
 #, kde-format
 msgid "Japanese (ja)"
 msgstr "Japán (ja)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:443
+#: rdp/rdppreferences.ui:257
 #, kde-format
 msgid "Korean (ko)"
 msgstr "Koreai (ko)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:448
+#: rdp/rdppreferences.ui:262
 #, kde-format
 msgid "Lithuanian (lt)"
 msgstr "Litván (lt)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:453
+#: rdp/rdppreferences.ui:267
 #, kde-format
 msgid "Latvian (lv)"
 msgstr "Lett (lv)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:458
+#: rdp/rdppreferences.ui:272
 #, kde-format
 msgid "Macedonian (mk)"
 msgstr "Macedón (mk)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:463
+#: rdp/rdppreferences.ui:277
 #, kde-format
 msgid "Dutch (nl)"
 msgstr "Holland (nl)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:468
+#: rdp/rdppreferences.ui:282
 #, kde-format
 msgid "Belgian Dutch (nl-be)"
 msgstr "Holland, belga (nl-be)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:473
+#: rdp/rdppreferences.ui:287
 #, kde-format
 msgid "Norwegian (no)"
 msgstr "Norvég (no)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:478
+#: rdp/rdppreferences.ui:292
 #, kde-format
 msgid "Polish (pl)"
 msgstr "Lengyel (pl)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:483
+#: rdp/rdppreferences.ui:297
 #, kde-format
 msgid "Portuguese (pt)"
 msgstr "Portugál (pt)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:488
+#: rdp/rdppreferences.ui:302
 #, kde-format
 msgid "Brazilian (pt-br)"
 msgstr "Brazil (pt-br)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:493
+#: rdp/rdppreferences.ui:307
 #, kde-format
 msgid "Russian (ru)"
 msgstr "Orosz (ru)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:498
+#: rdp/rdppreferences.ui:312
 #, kde-format
 msgid "Slovenian (sl)"
 msgstr "Szlovén (sl)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:503
+#: rdp/rdppreferences.ui:317
 #, kde-format
 msgid "Swedish (sv)"
 msgstr "Svéd (sv)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:508
+#: rdp/rdppreferences.ui:322
 #, kde-format
 msgid "Thai (th)"
 msgstr "Thai (th)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:513
+#: rdp/rdppreferences.ui:327
 #, kde-format
 msgid "Turkish (tr)"
 msgstr "Török (tr)"
 
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
+#: rdp/rdppreferences.ui:353
+#, kde-format
+msgid "True Color with Alpha (32 Bit)"
+msgstr "True Color alfával (32 bites)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
+#: rdp/rdppreferences.ui:358
+#, kde-format
+msgid "True Color (24 Bit)"
+msgstr "True Color (24 bites)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
+#: rdp/rdppreferences.ui:363
+#, kde-format
+msgid "High Color (16 Bit)"
+msgstr "High Color (16 bites)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
+#: rdp/rdppreferences.ui:368
+#, kde-format
+msgid "Low Color (8 Bit)"
+msgstr "256 szín (8 bites)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
+#: rdp/rdppreferences.ui:389
+#, kde-format
+msgid "On This Computer"
+msgstr "ezen a számítógépen"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
+#: rdp/rdppreferences.ui:394
+#, kde-format
+msgid "On Remote Computer"
+msgstr "a távoli számítógépen"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
+#: rdp/rdppreferences.ui:399
+#, kde-format
+msgid "Disable Sound"
+msgstr "a hang kikapcsolása"
+
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ScaleToSize)
-#: rdp/rdppreferences.ui:527
+#: rdp/rdppreferences.ui:413
 #, kde-format
 msgid "Scale window contents to match resolution"
 msgstr ""
 
-#. i18n: ectx: property (text), widget (QLabel, soundLabel)
-#: rdp/rdppreferences.ui:553
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
+#: rdp/rdppreferences.ui:436
 #, kde-format
-msgctxt "label for soundsettings in preferences dialog"
-msgid "Sound:"
-msgstr "Hang:"
+msgid "any"
+msgstr ""
 
-#: rdp/rdpsession.cpp:148
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
+#: rdp/rdppreferences.ui:441
+#, kde-format
+msgid "80 bit"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
+#: rdp/rdppreferences.ui:446
+#, kde-format
+msgid "112 bit"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
+#: rdp/rdppreferences.ui:451
+#, kde-format
+msgid "128 bit"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
+#: rdp/rdppreferences.ui:456
+#, kde-format
+msgid "192 bit"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
+#: rdp/rdppreferences.ui:461
+#, kde-format
+msgid "256 bit"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, layoutLabel)
+#: rdp/rdppreferences.ui:469
+#, kde-format
+msgid "&Keyboard layout:"
+msgstr "B&illentyűzetkiosztás:"
+
+#. i18n: ectx: property (text), widget (QLabel, widthLabel)
+#: rdp/rdppreferences.ui:487 vnc/vncpreferences.ui:136
+#, kde-format
+msgid "&Width:"
+msgstr "Szél&esség:"
+
+#. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Width)
+#. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_ScalingWidth)
+#: rdp/rdppreferences.ui:503 vnc/vncpreferences.ui:152
+#, kde-format
+msgid ""
+"This is the width of the remote desktop. You can only change this value "
+"manually if you select Custom as desktop resolution above."
+msgstr ""
+"Ez a távoli asztal szélessége. Ez az érték közvetlenül csak akkor adható "
+"meg, ha a felbontásnál az Egyedi opciót választotta."
+
+#. i18n: ectx: property (text), widget (QLabel, heightLabel)
+#: rdp/rdppreferences.ui:519 vnc/vncpreferences.ui:168
+#, kde-format
+msgid "H&eight:"
+msgstr "Ma&gasság:"
+
+#. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Height)
+#. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_ScalingHeight)
+#: rdp/rdppreferences.ui:535 vnc/vncpreferences.ui:184
+#, kde-format
+msgid ""
+"This is the height of the remote desktop. You can only change this value "
+"manually if you select Custom as desktop resolution above."
+msgstr ""
+"Ez a távoli asztal magassága. Itt csak akkor lehet közvetlenül értéket "
+"beírni, ha feljebb, az asztal felbontásánál az Egyedi opciót választotta."
+
+#. i18n: ectx: property (text), widget (QLabel, shareMediaLabel)
+#: rdp/rdppreferences.ui:550
+#, kde-format
+msgid "Share Media:"
+msgstr "Média megosztása:"
+
+#. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_Resolution)
+#. i18n: ectx: property (whatsThis), widget (KComboBox, resolutionComboBox)
+#: rdp/rdppreferences.ui:572 vnc/vncpreferences.ui:86
+#, kde-format
+msgid ""
+"Here you can specify the resolution of the remote desktop. This resolution "
+"determines the size of the desktop that will be presented to you."
+msgstr ""
+"Itt lehet megadni a távoli munkaasztal felbontását. Ez határozza meg, hogy a "
+"kliens gépről milyen méretű munkaasztal látszik."
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#: rdp/rdppreferences.ui:579
+#, fuzzy, kde-format
+#| msgid "Small (800x600)"
+msgid "Small (1280x720)"
+msgstr "Alacsony (800x600)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#: rdp/rdppreferences.ui:584
+#, kde-format
+msgid "Medium (1600x900)"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#: rdp/rdppreferences.ui:589
+#, fuzzy, kde-format
+#| msgid "Large (1280x1024)"
+msgid "Large (1920x1080)"
+msgstr "Nagy (1280x1024)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#: rdp/rdppreferences.ui:594
+#, fuzzy, kde-format
+#| msgid "Current KRDC Size"
+msgid "Current Window Size"
+msgstr "Jelenlegi KRDC méret"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
+#: rdp/rdppreferences.ui:599 vnc/vncpreferences.ui:118
+#, kde-format
+msgid "Current Screen Resolution"
+msgstr "Jelenlegi képernyőfelbontás"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
+#: rdp/rdppreferences.ui:604 vnc/vncpreferences.ui:123
+#, kde-format
+msgid "Custom Resolution (...)"
+msgstr "Egyedi felbontás (…)"
+
+#. i18n: ectx: attribute (title), widget (QWidget, proxySettingsTab)
+#: rdp/rdppreferences.ui:616
+#, kde-format
+msgid "Proxy"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, protocolLabel)
+#: rdp/rdppreferences.ui:624
+#, fuzzy, kde-format
+#| msgid "Default protocol:"
+msgid "Protocol:"
+msgstr "Alapértelmezett protokoll:"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ProxyProtocol)
+#. i18n: ectx: property (text), item, widget (QComboBox, kcfg_GatewayTransportType)
+#: rdp/rdppreferences.ui:638 rdp/rdppreferences.ui:749
+#, kde-format
+msgid "HTTP"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ProxyProtocol)
+#: rdp/rdppreferences.ui:643
+#, kde-format
+msgid "SOCKS"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, pPasswordLabel)
+#. i18n: ectx: property (text), widget (QLabel, gPasswordLabel)
+#: rdp/rdppreferences.ui:654 rdp/rdppreferences.ui:710
+#, kde-format
+msgid "Password:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, pUsernameLabel)
+#. i18n: ectx: property (text), widget (QLabel, gUsernameLabel)
+#: rdp/rdppreferences.ui:664 rdp/rdppreferences.ui:703
+#, fuzzy, kde-format
+#| msgid "User name:"
+msgid "Username:"
+msgstr "Felhasználónév:"
+
+#. i18n: ectx: property (text), widget (QLabel, pHostLabel)
+#. i18n: ectx: property (text), widget (QLabel, gServerLabel)
+#: rdp/rdppreferences.ui:671 rdp/rdppreferences.ui:696
+#, kde-format
+msgid "Server:"
+msgstr ""
+
+#. i18n: ectx: property (placeholderText), widget (KLineEdit, kcfg_ProxyHost)
+#. i18n: ectx: property (placeholderText), widget (KLineEdit, kcfg_GatewayServer)
+#: rdp/rdppreferences.ui:678 rdp/rdppreferences.ui:717
+#, kde-format
+msgid "host:port"
+msgstr ""
+
+#. i18n: ectx: attribute (title), widget (QWidget, gatewaySettingsTab)
+#: rdp/rdppreferences.ui:688
+#, kde-format
+msgid "Gateway"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, gTransportTypeLabel)
+#: rdp/rdppreferences.ui:730
+#, kde-format
+msgid "Transport type:"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (QComboBox, kcfg_GatewayTransportType)
+#: rdp/rdppreferences.ui:744
+#, kde-format
+msgid "Auto"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (QComboBox, kcfg_GatewayTransportType)
+#: rdp/rdppreferences.ui:754
+#, fuzzy, kde-format
+#| msgid "RDP"
+msgid "RPC"
+msgstr "RDP"
+
+#. i18n: ectx: property (text), widget (QLabel, gDomainLabel)
+#: rdp/rdppreferences.ui:762
+#, kde-format
+msgid "Domain:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, colorDepthLabel)
+#: rdp/rdppreferences.ui:778
+#, kde-format
+msgid "Color &depth:"
+msgstr "Színmé&lység:"
+
+#. i18n: ectx: property (text), widget (QLabel, advancedNetworkSettingsLabel)
+#: rdp/rdppreferences.ui:791
+#, kde-format
+msgid "Advanced Network Settings"
+msgstr ""
+
+#: rdp/rdpsession.cpp:163
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Logon Error"
 msgstr ""
 
-#: rdp/rdpsession.cpp:195
+#: rdp/rdpsession.cpp:210
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1127,51 +1261,51 @@ msgid ""
 "Fingerprint: %6\n"
 msgstr ""
 
-#: rdp/rdpsession.cpp:612
+#: rdp/rdpsession.cpp:697
 #, fuzzy, kde-format
 #| msgid "Access to the system requires a password."
 msgctxt "@label"
 msgid "Access to this system requires a password."
 msgstr "A távoli gép eléréséhez jelszó megadása szükséges."
 
-#: rdp/rdpsession.cpp:615
+#: rdp/rdpsession.cpp:700
 #, fuzzy, kde-format
 #| msgid "Access to the system requires a password."
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
 msgstr "A távoli gép eléréséhez jelszó megadása szükséges."
 
-#: rdp/rdpsession.cpp:637
+#: rdp/rdpsession.cpp:722
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr ""
 
-#: rdp/rdpsession.cpp:638
+#: rdp/rdpsession.cpp:723
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
 msgstr ""
 
-#: rdp/rdpsession.cpp:643 rdp/rdpsession.cpp:666
+#: rdp/rdpsession.cpp:728 rdp/rdpsession.cpp:751
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
 msgstr ""
 
-#: rdp/rdpsession.cpp:660
+#: rdp/rdpsession.cpp:745
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
 msgstr ""
 
-#: rdp/rdpsession.cpp:661
+#: rdp/rdpsession.cpp:746
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
 msgstr ""
 
-#: rdp/rdpsession.cpp:664
+#: rdp/rdpsession.cpp:749
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1181,14 +1315,14 @@ msgid ""
 "%2"
 msgstr ""
 
-#: rdp/rdpview.cpp:179
+#: rdp/rdpview.cpp:175
 #, fuzzy, kde-format
 #| msgid "Connection Failure"
 msgctxt "@title:dialog"
 msgid "Login Failure"
 msgstr "Csatlakozási hiba"
 
-#: rdp/rdpview.cpp:180
+#: rdp/rdpview.cpp:176
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1196,13 +1330,13 @@ msgid ""
 "and password."
 msgstr ""
 
-#: rdp/rdpview.cpp:186
+#: rdp/rdpview.cpp:182
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Account Problems"
 msgstr ""
 
-#: rdp/rdpview.cpp:187
+#: rdp/rdpview.cpp:183
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1210,13 +1344,13 @@ msgid ""
 "contact your system administrator."
 msgstr ""
 
-#: rdp/rdpview.cpp:192
+#: rdp/rdpview.cpp:188
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Password Problems"
 msgstr ""
 
-#: rdp/rdpview.cpp:193
+#: rdp/rdpview.cpp:189
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1224,82 +1358,82 @@ msgid ""
 "administrator to change it."
 msgstr ""
 
-#: rdp/rdpview.cpp:196
+#: rdp/rdpview.cpp:192
 #, fuzzy, kde-format
 #| msgid "Connection"
 msgctxt "@title:dialog"
 msgid "Connection Lost"
 msgstr "Kapcsolat"
 
-#: rdp/rdpview.cpp:197
+#: rdp/rdpview.cpp:193
 #, fuzzy, kde-format
 #| msgid "An error has occurred during the connection to the NX server."
 msgctxt "@label"
 msgid "Lost connection to the server."
 msgstr "Hiba történt az NX-kiszolgáló elérésekor."
 
-#: rdp/rdpview.cpp:201
+#: rdp/rdpview.cpp:197
 #, fuzzy, kde-format
 #| msgid "Server not found."
 msgctxt "@title:dialog"
 msgid "Server not Found"
 msgstr "A kiszolgáló nem található."
 
-#: rdp/rdpview.cpp:202
+#: rdp/rdpview.cpp:198
 #, kde-format
 msgctxt "@label"
 msgid "Could not find the server."
 msgstr ""
 
-#: rdp/rdpview.cpp:205
+#: rdp/rdpview.cpp:201
 #, fuzzy, kde-format
 #| msgid "Connection Failure"
 msgctxt "@title:dialog"
 msgid "Connection Refused"
 msgstr "Csatlakozási hiba"
 
-#: rdp/rdpview.cpp:206
+#: rdp/rdpview.cpp:202
 #, fuzzy, kde-format
 #| msgid "VNC server closed connection."
 msgctxt "@label"
 msgid "The server refused the connection request."
 msgstr "A VNC-kiszolgáló lezárta a kapcsolatot."
 
-#: rdp/rdpview.cpp:211
+#: rdp/rdpview.cpp:207
 #, fuzzy, kde-format
 #| msgid "KRDC Konsole Connection"
 msgctxt "@title:dialog"
 msgid "Could not Connect"
 msgstr "KRDC konzolkapcsolat"
 
-#: rdp/rdpview.cpp:212
+#: rdp/rdpview.cpp:208
 #, fuzzy, kde-format
 #| msgid "An error has occurred during the connection to the NX server."
 msgctxt "@label"
 msgid "Could not connect to the server."
 msgstr "Hiba történt az NX-kiszolgáló elérésekor."
 
-#: rdp/rdpview.cpp:222 rdp/rdpview.cpp:226
+#: rdp/rdpview.cpp:218 rdp/rdpview.cpp:222
 #, fuzzy, kde-format
 #| msgid "Connection Failure"
 msgctxt "@title:dialog"
 msgid "Connection Closed"
 msgstr "Csatlakozási hiba"
 
-#: rdp/rdpview.cpp:227
+#: rdp/rdpview.cpp:223
 #, kde-format
 msgctxt "@label"
 msgid "The connection to the server was closed."
 msgstr ""
 
-#: rdp/rdpview.cpp:231
+#: rdp/rdpview.cpp:227
 #, fuzzy, kde-format
 #| msgid "Connection Failure"
 msgctxt "@title:dialog"
 msgid "Connection Failed"
 msgstr "Csatlakozási hiba"
 
-#: rdp/rdpview.cpp:232
+#: rdp/rdpview.cpp:228
 #, kde-format
 msgctxt "@label"
 msgid "An unknown error occurred"
@@ -1315,7 +1449,7 @@ msgstr "Csatlakozás egy windowsos távoli asztalhoz (RDP)"
 msgid "New RDP Connection..."
 msgstr "Új RDP-kapcsolat…"
 
-#: rdp/rdpviewfactory.cpp:61
+#: rdp/rdpviewfactory.cpp:62
 #, kde-format
 msgid ""
 "<html>Enter the address here. Port is optional.<br /><i>Example: "
@@ -1324,25 +1458,25 @@ msgstr ""
 "<html>Adja meg a címet itt. A port megadása nem kötelező.<br /><i>Például: "
 "rdpkiszolgalo:3389 (gépnév:port)</i></html>"
 
-#: remotedesktopsmodel.cpp:111
+#: remotedesktopsmodel.cpp:112
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Zeroconf"
 msgstr "Zeroconf"
 
-#: remotedesktopsmodel.cpp:113
+#: remotedesktopsmodel.cpp:114
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "None"
 msgstr "Nincs"
 
-#: remotedesktopsmodel.cpp:129
+#: remotedesktopsmodel.cpp:130
 #, kde-format
 msgctxt "Remove the selected url from the bookarks menu"
 msgid "Remove the bookmark for %1."
 msgstr "A(z) %1 eltávolítása a könyvjelzők közül."
 
-#: remotedesktopsmodel.cpp:131
+#: remotedesktopsmodel.cpp:132
 #, kde-format
 msgctxt "Add the selected url to the bookmarks menu"
 msgid "Bookmark %1."
@@ -1381,7 +1515,7 @@ msgctxt "Header of the connections list, where this entry comes from"
 msgid "Source"
 msgstr "Forrás"
 
-#: vnc/vncclientthread.cpp:299
+#: vnc/vncclientthread.cpp:300
 #, kde-format
 msgid "VNC authentication type is not supported."
 msgstr "A VNC hitelesítési típus nem támogatott."
@@ -1413,17 +1547,17 @@ msgstr "A VNC-kiszolgáló lezárta a kapcsolatot."
 msgid "Disconnected: %1."
 msgstr "Szétkapcsolva: %1."
 
-#: vnc/vncclientthread.cpp:560
+#: vnc/vncclientthread.cpp:561
 #, kde-format
 msgid "Reconnecting."
 msgstr "Újracsatlakozás."
 
-#: vnc/vncclientthread.cpp:627
+#: vnc/vncclientthread.cpp:628
 #, kde-format
 msgid "Reconnected."
 msgstr "Újrakapcsolódva."
 
-#: vnc/vncclientthread.cpp:629
+#: vnc/vncclientthread.cpp:630
 #, kde-format
 msgid "Connected."
 msgstr "Kapcsolódva."
@@ -1562,18 +1696,18 @@ msgstr ""
 "további MIME-típussal („x-kde-passwordManagerHint”) jelölik meg, amelyet "
 "szűrésre használnak."
 
-#: vnc/vncsshtunnelthread.cpp:102
+#: vnc/vncsshtunnelthread.cpp:99
 #, kde-format
 msgid "Error connecting to %1: %2"
 msgstr "Hiba a következőhöz csatlakozáskor: %1: %2"
 
-#: vnc/vncsshtunnelthread.cpp:127
+#: vnc/vncsshtunnelthread.cpp:124
 #, kde-format
 msgid "Error authenticating with password: %1"
 msgstr "Hiba a jelszóval hitelesítéskor: %1"
 
-#: vnc/vncsshtunnelthread.cpp:133 vnc/vncsshtunnelthread.cpp:151
-#: vnc/vncsshtunnelthread.cpp:158 vnc/vncsshtunnelthread.cpp:166
+#: vnc/vncsshtunnelthread.cpp:130 vnc/vncsshtunnelthread.cpp:148
+#: vnc/vncsshtunnelthread.cpp:155 vnc/vncsshtunnelthread.cpp:163
 #, kde-format
 msgid "Error creating tunnel socket"
 msgstr "Hiba az alagútcsatorna létrehozásakor"
@@ -1583,22 +1717,22 @@ msgstr "Hiba az alagútcsatorna létrehozásakor"
 msgid "Access to the system requires a password."
 msgstr "A távoli gép eléréséhez jelszó megadása szükséges."
 
-#: vnc/vncview.cpp:345
+#: vnc/vncview.cpp:344
 #, kde-format
 msgid "Authentication failed. Please try again."
 msgstr "Felhasználóazonosítási hiba. Próbáljon meg újra bejelentkezni."
 
-#: vnc/vncview.cpp:373
+#: vnc/vncview.cpp:374
 #, kde-format
 msgid "Please enter the SSH password."
 msgstr "Adja meg az SSH jelszót."
 
-#: vnc/vncview.cpp:398 vnc/vncview.cpp:400
+#: vnc/vncview.cpp:399 vnc/vncview.cpp:401
 #, kde-format
 msgid "VNC failure"
 msgstr "VNC-hiba"
 
-#: vnc/vncview.cpp:409 vnc/vncview.cpp:411
+#: vnc/vncview.cpp:410 vnc/vncview.cpp:412
 #, kde-format
 msgid "SSH Tunnel failure"
 msgstr "SSH-alagút hiba"
@@ -1613,7 +1747,7 @@ msgstr "Új VNC-kapcsolat…"
 msgid "Connect to a VNC Remote Desktop"
 msgstr "Csatlakozás egy VNC-s távoli asztalhoz"
 
-#: vnc/vncviewfactory.cpp:57
+#: vnc/vncviewfactory.cpp:58
 #, kde-format
 msgid ""
 "<html>Enter the address here.<br /><i>Example: vncserver:1 (host:port / "
@@ -1992,9 +2126,6 @@ msgstr ""
 
 #~ msgid "VNC Config"
 #~ msgstr "VNC-beállítások"
-
-#~ msgid "RDP"
-#~ msgstr "RDP"
 
 #~ msgid "RDP Config"
 #~ msgstr "RDP-beállítások"
