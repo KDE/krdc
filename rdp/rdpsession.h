@@ -13,16 +13,27 @@
 #include <QObject>
 #include <QSize>
 
+#include <winpr/clipboard.h>
+
+#include <freerdp/client/cliprdr.h>
 #include <freerdp/freerdp.h>
 
+class RdpClipboard;
 class RdpSession;
 class RdpView;
 class RdpHostPreferences;
+class QMimeData;
 
 struct RdpContext {
     rdpContext _c;
 
     RdpSession *session = nullptr;
+    wClipboard *clipboard;
+    UINT32 numServerFormats;
+    UINT32 requestedFormatId;
+    CLIPRDR_FORMAT *serverFormats;
+    CliprdrClientContext *cliprdr;
+    UINT32 clipboardCapabilities;
 };
 
 struct Certificate {
@@ -95,11 +106,20 @@ public:
 
     bool sendEvent(QEvent *event, QWidget *source);
 
+    void initializeClipboard(RdpContext *rdpC, CliprdrClientContext *cliprdr);
+    void destroyClipboard();
+    bool sendClipboard(const QMimeData *data);
+
     const QImage *videoBuffer() const;
 
     Q_SIGNAL void rectangleUpdated(const QRect &rectangle);
 
     Q_SIGNAL void errorMessage(unsigned int error);
+
+    RdpView *rdpView()
+    {
+        return m_view;
+    };
 
 private:
     friend BOOL preConnect(freerdp *);
@@ -144,6 +164,7 @@ private:
 
     freerdp *m_freerdp = nullptr;
     RdpContext *m_context = nullptr;
+    RdpClipboard *m_clipboard = nullptr;
 
     State m_state = State::Initial;
 

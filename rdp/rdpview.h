@@ -19,6 +19,7 @@
 #define TCP_PORT_RDP 3389
 
 class RdpSession;
+class QMimeData;
 
 class RdpView : public RemoteView
 {

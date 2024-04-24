@@ -349,5 +349,5 @@ void RdpView::onRectangleUpdated(const QRect &rect)
 
 void RdpView::handleLocalClipboardChanged(const QMimeData *data)
 {
-    // TBD in following commits
+    m_session->sendClipboard(data);
 }
