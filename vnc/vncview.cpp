@@ -560,7 +560,7 @@ void VncView::resizeEvent(QResizeEvent *event)
     update();
 }
 
-void VncView::mouseEventHandler(QMouseEvent *e)
+void VncView::handleMouseEvent(QMouseEvent *e)
 {
     if (e->type() != QEvent::MouseMove) {
         if ((e->type() == QEvent::MouseButtonPress) || (e->type() == QEvent::MouseButtonDblClick)) {
@@ -592,7 +592,7 @@ void VncView::mouseEventHandler(QMouseEvent *e)
     vncThread.mouseEvent(qRound(pos.x() / m_horizontalFactor), qRound(pos.y() / m_verticalFactor), m_buttonMask);
 }
 
-void VncView::wheelEventHandler(QWheelEvent *event)
+void VncView::handleWheelEvent(QWheelEvent *event)
 {
     const auto delta = event->angleDelta();
     // Reset accumulation if direction changed
@@ -639,7 +639,7 @@ void VncView::saveWalletSshPassword()
 }
 #endif
 
-void VncView::keyEventHandler(QKeyEvent *e)
+void VncView::handleKeyEvent(QKeyEvent *e)
 {
     // strip away autorepeating KeyRelease; see bug #206598
     if (e->isAutoRepeat() && (e->type() == QEvent::KeyRelease))

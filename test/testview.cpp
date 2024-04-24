@@ -23,17 +23,17 @@ TestView::~TestView()
     setStatus(Disconnected);
 }
 
-void TestView::keyEventHandler(QKeyEvent *event)
+void TestView::handleKeyEvent(QKeyEvent *event)
 {
     Q_UNUSED(event);
 }
 
-void TestView::mouseEventHandler(QMouseEvent *event)
+void TestView::handleMouseEvent(QMouseEvent *event)
 {
     Q_UNUSED(event);
 }
 
-void TestView::wheelEventHandler(QWheelEvent *event)
+void TestView::handleWheelEvent(QWheelEvent *event)
 {
     Q_UNUSED(event);
 }

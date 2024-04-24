@@ -375,9 +375,9 @@ protected:
     void focusOutEvent(QFocusEvent *event) override;
     bool event(QEvent *event) override;
     bool eventFilter(QObject *obj, QEvent *event) override;
-    virtual void keyEventHandler(QKeyEvent *event) = 0;
-    virtual void wheelEventHandler(QWheelEvent *event) = 0;
-    virtual void mouseEventHandler(QMouseEvent *event) = 0;
+    virtual void handleKeyEvent(QKeyEvent *event) = 0;
+    virtual void handleWheelEvent(QWheelEvent *event) = 0;
+    virtual void handleMouseEvent(QMouseEvent *event) = 0;
 
     /**
      * The status of the remote view.

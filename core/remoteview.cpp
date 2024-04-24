@@ -273,21 +273,18 @@ bool RemoteView::event(QEvent *event)
     switch (event->type()) {
     case QEvent::KeyPress:
     case QEvent::KeyRelease:
-        // qCDebug(KRDC) << "keyEvent";
-        keyEventHandler(static_cast<QKeyEvent *>(event));
+        handleKeyEvent(static_cast<QKeyEvent *>(event));
         return true;
         break;
     case QEvent::MouseButtonDblClick:
     case QEvent::MouseButtonPress:
     case QEvent::MouseButtonRelease:
     case QEvent::MouseMove:
-        // qCDebug(KRDC) << "mouseEvent";
-        mouseEventHandler(static_cast<QMouseEvent *>(event));
+        handleMouseEvent(static_cast<QMouseEvent *>(event));
         return true;
         break;
     case QEvent::Wheel:
-        // qCDebug(KRDC) << "wheelEvent";
-        wheelEventHandler(static_cast<QWheelEvent *>(event));
+        handleWheelEvent(static_cast<QWheelEvent *>(event));
         return true;
         break;
     default:

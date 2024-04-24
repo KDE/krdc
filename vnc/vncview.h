@@ -64,9 +64,9 @@ protected:
     void paintEvent(QPaintEvent *event) override;
     void resizeEvent(QResizeEvent *event) override;
     void focusOutEvent(QFocusEvent *event) override;
-    void keyEventHandler(QKeyEvent *event) override;
-    void wheelEventHandler(QWheelEvent *event) override;
-    void mouseEventHandler(QMouseEvent *event) override;
+    void handleKeyEvent(QKeyEvent *event) override;
+    void handleWheelEvent(QWheelEvent *event) override;
+    void handleMouseEvent(QMouseEvent *event) override;
 
 private:
     VncClientThread vncThread;

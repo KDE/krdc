@@ -325,17 +325,17 @@ void RdpView::paintEvent(QPaintEvent *event)
     painter.end();
 }
 
-void RdpView::keyEventHandler(QKeyEvent *event)
+void RdpView::handleKeyEvent(QKeyEvent *event)
 {
     m_session->sendEvent(event, this);
 }
 
-void RdpView::mouseEventHandler(QMouseEvent *event)
+void RdpView::handleMouseEvent(QMouseEvent *event)
 {
     m_session->sendEvent(event, this);
 }
 
-void RdpView::wheelEventHandler(QWheelEvent *event)
+void RdpView::handleWheelEvent(QWheelEvent *event)
 {
     m_session->sendEvent(event, this);
 }
