@@ -37,6 +37,7 @@ protected:
     void handleKeyEvent(QKeyEvent *event) override;
     void handleWheelEvent(QWheelEvent *event) override;
     void handleMouseEvent(QMouseEvent *event) override;
+    void handleLocalClipboardChanged(const QMimeData *data) override;
 
 private:
     TestHostPreferences *m_hostPreferences;

@@ -346,3 +346,8 @@ void RdpView::onRectangleUpdated(const QRect &rect)
     m_pendingRectangle = rect;
     update();
 }
+
+void RdpView::handleLocalClipboardChanged(const QMimeData *data)
+{
+    // TBD in following commits
+}

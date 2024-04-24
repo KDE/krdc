@@ -16,6 +16,7 @@
 #define KRDCCORE_EXPORT
 #endif
 
+#include <QClipboard>
 #include <QUrl>
 #include <QWidget>
 
@@ -318,6 +319,19 @@ public Q_SLOTS:
      */
     virtual void scaleResize(int w, int h);
 
+    /**
+     * Internal handling of local clipboard change
+     * Do not override in subclasses; implement handleLocalClipboardChanged() instead
+     */
+    void localClipboardChanged();
+
+    /**
+     * Internal handling of remote clipboard change
+     * Subclasses must use this method to update local clipboard contents
+     * Ownership of the data is transferred to the clipboard.
+     */
+    void remoteClipboardChanged(QMimeData *data);
+
 Q_SIGNALS:
     /**
      * Emitted when the size of the remote screen changes. Also
@@ -378,7 +392,7 @@ protected:
     virtual void handleKeyEvent(QKeyEvent *event) = 0;
     virtual void handleWheelEvent(QWheelEvent *event) = 0;
     virtual void handleMouseEvent(QMouseEvent *event) = 0;
-
+    virtual void handleLocalClipboardChanged(const QMimeData *data) = 0;
     /**
      * The status of the remote view.
      */
@@ -408,6 +422,8 @@ protected:
     bool m_keyboardIsGrabbed;
     QUrl m_url;
     qreal m_factor;
+    QClipboard *m_clipboard;
+    bool m_dontSendClipboard;
 
 #ifndef QTONLY
     QString readWalletPassword(bool fromUserNameOnly = false);

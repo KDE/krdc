@@ -22,7 +22,6 @@ class KConfigGroup
 #include "vncsshtunnelthread.h"
 #endif
 
-#include <QClipboard>
 #include <QMap>
 
 extern "C" {
@@ -67,16 +66,15 @@ protected:
     void handleKeyEvent(QKeyEvent *event) override;
     void handleWheelEvent(QWheelEvent *event) override;
     void handleMouseEvent(QMouseEvent *event) override;
+    void handleLocalClipboardChanged(const QMimeData *data) override;
 
 private:
     VncClientThread vncThread;
-    QClipboard *m_clipboard;
     bool m_initDone;
     int m_buttonMask;
     QMap<unsigned int, bool> m_mods;
     bool m_quitFlag;
     bool m_firstPasswordTry;
-    bool m_dontSendClipboard;
     qreal m_horizontalFactor;
     qreal m_verticalFactor;
     int m_wheelRemainderV;
@@ -104,7 +102,6 @@ private Q_SLOTS:
 #endif
     void outputErrorMessage(const QString &message);
     void sshErrorMessage(const QString &message);
-    void clipboardDataChanged();
 };
 
 #endif

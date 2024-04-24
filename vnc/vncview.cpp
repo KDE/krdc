@@ -42,7 +42,6 @@ VncView::VncView(QWidget *parent, const QUrl &url, KConfigGroup configGroup)
     , m_buttonMask(0)
     , m_quitFlag(false)
     , m_firstPasswordTry(true)
-    , m_dontSendClipboard(false)
     , m_horizontalFactor(1.0)
     , m_verticalFactor(1.0)
     , m_wheelRemainderV(0)
@@ -70,9 +69,6 @@ VncView::VncView(QWidget *parent, const QUrl &url, KConfigGroup configGroup)
     connect(&vncThread, &VncClientThread::gotCursor, this, [this](QCursor cursor) {
         setCursor(cursor);
     });
-
-    m_clipboard = QApplication::clipboard();
-    connect(m_clipboard, SIGNAL(dataChanged()), this, SLOT(clipboardDataChanged()));
 
 #ifndef QTONLY
     m_hostPreferences = new VncHostPreferences(configGroup, this);
@@ -523,10 +519,9 @@ void VncView::enableScaling(bool scale)
 
 void VncView::setCut(const QString &text)
 {
-    const bool saved_dontSendClipboard = m_dontSendClipboard;
-    m_dontSendClipboard = true;
-    m_clipboard->setText(text, QClipboard::Clipboard);
-    m_dontSendClipboard = saved_dontSendClipboard;
+    QMimeData *data = new QMimeData;
+    data->setText(text);
+    remoteClipboardChanged(data);
 }
 
 void VncView::paintEvent(QPaintEvent *event)
@@ -685,33 +680,30 @@ void VncView::unpressModifiers()
     m_mods.clear();
 }
 
-void VncView::clipboardDataChanged()
-{
-    if (m_status != Connected)
-        return;
-
-    if (m_clipboard->ownsClipboard() || m_dontSendClipboard)
-        return;
-#ifndef QTONLY
-    if (m_hostPreferences->dontCopyPasswords()) {
-        const QMimeData *data = m_clipboard->mimeData();
-        if (data && data->hasFormat(QLatin1String("x-kde-passwordManagerHint"))) {
-            qCDebug(KRDC) << "VncView::clipboardDataChanged data hasFormat x-kde-passwordManagerHint -- ignoring";
-            return;
-        }
-    }
-#endif
-    const QString text = m_clipboard->text(QClipboard::Clipboard);
-
-    vncThread.clientCut(text);
-}
-
 void VncView::focusOutEvent(QFocusEvent *event)
 {
     qCDebug(KRDC) << "VncView::focusOutEvent";
     unpressModifiers();
 
     RemoteView::focusOutEvent(event);
+}
+
+void VncView::handleLocalClipboardChanged(const QMimeData *data)
+{
+#ifndef QTONLY
+    if (m_hostPreferences->dontCopyPasswords()) {
+        if (data->hasFormat(QLatin1String("x-kde-passwordManagerHint"))) {
+            qCDebug(KRDC) << "VncView::clipboardDataChanged data hasFormat x-kde-passwordManagerHint -- ignoring";
+            return;
+        }
+    }
+#endif
+
+    // TODO: VNC backend doesn't support other formats like  hasImage(), hasHtml()
+    if (data->hasText()) {
+        const QString text = data->text();
+        vncThread.clientCut(text);
+    }
 }
 
 #include "moc_vncview.cpp"

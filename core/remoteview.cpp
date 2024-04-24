@@ -9,6 +9,7 @@
 #include "remoteview.h"
 #include "krdc_debug.h"
 
+#include <QApplication>
 #include <QBitmap>
 #include <QEvent>
 #include <QKeyEvent>
@@ -26,6 +27,8 @@ RemoteView::RemoteView(QWidget *parent)
     , m_scale(false)
     , m_keyboardIsGrabbed(false)
     , m_factor(0.)
+    , m_clipboard(nullptr)
+    , m_dontSendClipboard(false)
 #ifndef QTONLY
     , m_wallet(nullptr)
 #endif
@@ -34,6 +37,9 @@ RemoteView::RemoteView(QWidget *parent)
     resize(0, 0);
     installEventFilter(this);
     setMouseTracking(true);
+
+    m_clipboard = QApplication::clipboard();
+    connect(m_clipboard, SIGNAL(dataChanged()), this, SLOT(localClipboardChanged()));
 }
 
 RemoteView::~RemoteView()
@@ -302,6 +308,28 @@ bool RemoteView::eventFilter(QObject *obj, QEvent *event)
     }
 
     return QWidget::eventFilter(obj, event);
+}
+
+void RemoteView::localClipboardChanged()
+{
+    if (m_status != Connected)
+        return;
+
+    if (m_clipboard->ownsClipboard() || m_dontSendClipboard)
+        return;
+
+    const QMimeData *data = m_clipboard->mimeData(QClipboard::Clipboard);
+    if (data) {
+        handleLocalClipboardChanged(data);
+    }
+}
+
+void RemoteView::remoteClipboardChanged(QMimeData *data)
+{
+    const bool saved_dontSendClipboard = m_dontSendClipboard;
+    m_dontSendClipboard = true;
+    m_clipboard->setMimeData(data, QClipboard::Clipboard);
+    m_dontSendClipboard = saved_dontSendClipboard;
 }
 
 #include "moc_remoteview.cpp"

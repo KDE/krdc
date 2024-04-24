@@ -86,3 +86,8 @@ void TestView::switchFullscreen(bool on)
 {
     Q_UNUSED(on);
 }
+
+void TestView::handleLocalClipboardChanged(const QMimeData *data)
+{
+    Q_UNUSED(data);
+}
