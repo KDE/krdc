@@ -8,6 +8,7 @@
 
 #include <memory>
 
+#include <QApplication>
 #include <QKeyEvent>
 #include <QMouseEvent>
 
@@ -178,6 +179,16 @@ BOOL resizeDisplay(rdpContext *context)
 {
     auto session = reinterpret_cast<RdpContext *>(context)->session;
     if (session->onResizeDisplay()) {
+        return TRUE;
+    }
+    return FALSE;
+}
+
+BOOL playSound(rdpContext *context, const PLAY_SOUND_UPDATE *play_sound)
+{
+    Q_UNUSED(play_sound);
+    auto session = reinterpret_cast<RdpContext *>(context)->session;
+    if (session->onPlaySound()) {
         return TRUE;
     }
     return FALSE;
@@ -674,6 +685,7 @@ bool RdpSession::onPostConnect()
 
     m_freerdp->update->EndPaint = endPaint;
     m_freerdp->update->DesktopResize = resizeDisplay;
+    m_freerdp->update->PlaySound = playSound;
 
     freerdp_keyboard_init_ex(settings->KeyboardLayout, settings->KeyboardRemappingList);
 
@@ -806,6 +818,12 @@ bool RdpSession::onResizeDisplay()
     m_size = QSize(settings->DesktopWidth, settings->DesktopHeight);
     Q_EMIT sizeChanged();
 
+    return true;
+}
+
+bool RdpSession::onPlaySound()
+{
+    QApplication::beep();
     return true;
 }
 

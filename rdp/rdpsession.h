@@ -120,6 +120,7 @@ private:
                                           DWORD);
     friend BOOL endPaint(rdpContext *);
     friend BOOL resizeDisplay(rdpContext *);
+    friend BOOL playSound(rdpContext *, const PLAY_SOUND_UPDATE *);
 
     void setState(State newState);
 
@@ -133,6 +134,7 @@ private:
 
     bool onEndPaint();
     bool onResizeDisplay();
+    bool onPlaySound();
 
     void run();
 
