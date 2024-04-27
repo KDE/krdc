@@ -668,9 +668,9 @@ bool RdpSession::onPostConnect()
 
     auto settings = m_freerdp->settings;
 
-    m_videoBuffer = QImage(settings->DesktopWidth, settings->DesktopHeight, QImage::Format_RGBA8888);
+    m_videoBuffer = QImage(settings->DesktopWidth, settings->DesktopHeight, QImage::Format_RGBX8888);
 
-    if (!gdi_init_ex(m_freerdp, PIXEL_FORMAT_RGBA32, m_videoBuffer.bytesPerLine(), m_videoBuffer.bits(), nullptr)) {
+    if (!gdi_init_ex(m_freerdp, PIXEL_FORMAT_RGBX32, m_videoBuffer.bytesPerLine(), m_videoBuffer.bits(), nullptr)) {
         qCWarning(KRDC) << "Could not initialize GDI subsystem";
         return false;
     }
