@@ -316,13 +316,13 @@ QString RdpHostPreferences::shareMedia() const
 void RdpHostPreferences::updateColorDepth(Acceleration acceleration)
 {
     switch (acceleration) {
+    case Acceleration::Auto:
     case Acceleration::ForceGraphicsPipeline:
     case Acceleration::ForceRemoteFx:
         rdpUi.kcfg_ColorDepth->setEnabled(false);
         rdpUi.kcfg_ColorDepth->setCurrentIndex(0);
         break;
     case Acceleration::Disabled:
-    case Acceleration::Auto:
         rdpUi.kcfg_ColorDepth->setEnabled(true);
     }
 }

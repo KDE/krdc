@@ -349,6 +349,21 @@ bool RdpSession::start()
         settings->DesktopHeight = m_size.height();
     }
 
+    switch (m_preferences->colorDepth()) {
+    case RdpHostPreferences::ColorDepth::Auto:
+    case RdpHostPreferences::ColorDepth::Depth32:
+        settings->ColorDepth = 32;
+        break;
+    case RdpHostPreferences::ColorDepth::Depth24:
+        settings->ColorDepth = 24;
+        break;
+    case RdpHostPreferences::ColorDepth::Depth16:
+        settings->ColorDepth = 16;
+        break;
+    case RdpHostPreferences::ColorDepth::Depth8:
+        settings->ColorDepth = 8;
+    }
+
     switch (m_preferences->acceleration()) {
     case RdpHostPreferences::Acceleration::ForceGraphicsPipeline:
         settings->SupportGraphicsPipeline = true;
@@ -381,21 +396,6 @@ bool RdpSession::start()
         settings->RemoteFxCodec = true;
         settings->ColorDepth = 32;
         break;
-    }
-
-    switch (m_preferences->colorDepth()) {
-    case RdpHostPreferences::ColorDepth::Auto:
-    case RdpHostPreferences::ColorDepth::Depth32:
-        settings->ColorDepth = 32;
-        break;
-    case RdpHostPreferences::ColorDepth::Depth24:
-        settings->ColorDepth = 24;
-        break;
-    case RdpHostPreferences::ColorDepth::Depth16:
-        settings->ColorDepth = 16;
-        break;
-    case RdpHostPreferences::ColorDepth::Depth8:
-        settings->ColorDepth = 8;
     }
 
     settings->FastPathOutput = true;
