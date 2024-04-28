@@ -9,7 +9,7 @@ set (RELEASE_SERVICE_VERSION "${RELEASE_SERVICE_VERSION_MAJOR}.${RELEASE_SERVICE
 project(krdc VERSION ${RELEASE_SERVICE_VERSION})
 
 set (QT_MIN_VERSION "5.15.2")
-set (KF_MIN_VERSION "5.91.0")
+set (KF_MIN_VERSION "5.96.0")
 
 find_package(ECM ${KF_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules ${ECM_MODULE_PATH})
@@ -99,9 +99,9 @@ add_feature_info(VNC WITH_VNC "Building with support for the VNC protocol. Disab
 option(WITH_RDP "Enable RDP support. Has additional runtime binary requirements!" ON)
 add_feature_info(RDP WITH_RDP "Building with support for the RDP protocol. Disable with -DWITH_RDP=NO")
 
-ecm_set_disabled_deprecation_versions(QT 5.15.2
-     KF 5.102.0
-    )
+# ecm_set_disabled_deprecation_versions(QT 5.15.2
+#      KF 5.102.0
+#     )
 
 
 set(CMAKE_CXX_STANDARD 20)
