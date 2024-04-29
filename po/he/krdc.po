@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-17 01:46+0000\n"
+"POT-Creation-Date: 2024-04-29 00:39+0000\n"
 "PO-Revision-Date: 2017-05-16 07:03-0400\n"
 "Last-Translator: Copied by Zanata <copied-by-zanata@zanata.org>\n"
 "Language-Team: Hebrew <kde-l10n-he@kde.org>\n"
@@ -21,7 +21,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Zanata 3.9.6\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
+"n % 10 == 0) ? 2 : 3));\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -249,6 +250,8 @@ msgid "A minute ago"
 msgid_plural "%1 minutes ago"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
 
 #: connectiondelegate.cpp:36
 #, kde-format
@@ -256,6 +259,8 @@ msgid "An hour ago"
 msgid_plural "%1 hours ago"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
 
 #: connectiondelegate.cpp:40
 #, kde-format
@@ -263,6 +268,8 @@ msgid "Yesterday"
 msgid_plural "%1 days ago"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
 
 #: connectiondelegate.cpp:42
 #, kde-format
@@ -270,6 +277,8 @@ msgid "Over a month ago"
 msgid_plural "%1 months ago"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
 
 #: connectiondelegate.cpp:43
 #, kde-format
@@ -277,6 +286,8 @@ msgid "A year ago"
 msgid_plural "%1 years ago"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
 
 #: core/hostpreferences.cpp:182
 #, kde-format
@@ -1213,13 +1224,13 @@ msgstr ""
 msgid "Advanced Network Settings"
 msgstr ""
 
-#: rdp/rdpsession.cpp:163
+#: rdp/rdpsession.cpp:164
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Logon Error"
 msgstr ""
 
-#: rdp/rdpsession.cpp:210
+#: rdp/rdpsession.cpp:221
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1230,51 +1241,51 @@ msgid ""
 "Fingerprint: %6\n"
 msgstr ""
 
-#: rdp/rdpsession.cpp:697
+#: rdp/rdpsession.cpp:709
 #, fuzzy, kde-format
 #| msgid "Access to the system requires a password."
 msgctxt "@label"
 msgid "Access to this system requires a password."
 msgstr "הגישה אל המערכת דורשת סיסמה."
 
-#: rdp/rdpsession.cpp:700
+#: rdp/rdpsession.cpp:712
 #, fuzzy, kde-format
 #| msgid "Access to the system requires a password."
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
 msgstr "הגישה אל המערכת דורשת סיסמה."
 
-#: rdp/rdpsession.cpp:722
+#: rdp/rdpsession.cpp:734
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr ""
 
-#: rdp/rdpsession.cpp:723
+#: rdp/rdpsession.cpp:735
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
 msgstr ""
 
-#: rdp/rdpsession.cpp:728 rdp/rdpsession.cpp:751
+#: rdp/rdpsession.cpp:740 rdp/rdpsession.cpp:763
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
 msgstr ""
 
-#: rdp/rdpsession.cpp:745
+#: rdp/rdpsession.cpp:757
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
 msgstr ""
 
-#: rdp/rdpsession.cpp:746
+#: rdp/rdpsession.cpp:758
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
 msgstr ""
 
-#: rdp/rdpsession.cpp:749
+#: rdp/rdpsession.cpp:761
 #, kde-format
 msgctxt "@label"
 msgid ""
