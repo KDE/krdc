@@ -242,7 +242,7 @@ void VncClientThread::updatefbFinished()
         qCDebug(KRDC) << "image not loaded";
     }
 
-    if (m_stopped) {
+    if (isInterruptionRequested()) {
         return; // sending data to a stopped thread is not a good idea
     }
 
@@ -370,7 +370,6 @@ VncClientThread::VncClientThread(QObject *parent)
         , frameBuffer(nullptr)
         , cl(nullptr)
         , m_devicePixelRatio(1.0)
-        , m_stopped(false)
 {
     // We choose a small value for interval...after all if the connection is
     // supposed to sustain a VNC session, a reasonably frequent ping should
@@ -509,16 +508,13 @@ void VncClientThread::emitGotCut(const QString &text)
 
 void VncClientThread::stop()
 {
-    QMutexLocker locker(&mutex);
-    m_stopped = true;
+    requestInterruption();
 }
 
 void VncClientThread::run()
 {
-    QMutexLocker locker(&mutex);
-
-    while (!m_stopped) { // try to connect as long as the server allows
-        locker.relock();
+    while (!isInterruptionRequested()) { // try to connect as long as the server allows
+        QMutexLocker locker(&mutex);
         m_passwordError = false;
         locker.unlock();
 
@@ -529,23 +525,19 @@ void VncClientThread::run()
 
         locker.relock();
         if (m_passwordError) {
-            locker.unlock();
             // Try again.
             continue;
         }
 
         // The initial connection attempt failed, and not because of a
         // password problem. Bail out.
-        m_stopped = true;
-        locker.unlock();
+        return;
     }
 
-    locker.relock();
     qCDebug(KRDC) << "--------------------- Starting main VNC event loop ---------------------";
-    while (!m_stopped) {
-        locker.unlock();
+    while (!isInterruptionRequested()) {
         const int i = WaitForMessage(cl, 500);
-        if (m_stopped || i < 0) {
+        if (isInterruptionRequested() || i < 0) {
             break;
         }
         if (i) {
@@ -566,7 +558,7 @@ void VncClientThread::run()
             }
         }
 
-        locker.relock();
+        QMutexLocker locker(&mutex);
         while (!m_eventQueue.isEmpty()) {
             ClientEvent* clientEvent = m_eventQueue.dequeue();
             locker.unlock();
@@ -575,8 +567,6 @@ void VncClientThread::run()
             locker.relock();
         }
     }
-
-    m_stopped = true;
 }
 
 /**
@@ -724,28 +714,28 @@ void ClientCutEvent::fire(rfbClient* cl)
 
 void VncClientThread::mouseEvent(int x, int y, int buttonMask)
 {
-    QMutexLocker lock(&mutex);
-    if (m_stopped)
+    if (!isRunning())
         return;
 
+    QMutexLocker lock(&mutex);
     m_eventQueue.enqueue(new PointerClientEvent(x, y, buttonMask));
 }
 
 void VncClientThread::keyEvent(int key, bool pressed)
 {
-    QMutexLocker lock(&mutex);
-    if (m_stopped)
+    if (!isRunning())
         return;
 
+    QMutexLocker lock(&mutex);
     m_eventQueue.enqueue(new KeyClientEvent(key, pressed));
 }
 
 void VncClientThread::clientCut(const QString &text)
 {
-    QMutexLocker lock(&mutex);
-    if (m_stopped)
+    if (!isRunning())
         return;
 
+    QMutexLocker lock(&mutex);
     m_eventQueue.enqueue(new ClientCutEvent(text));
 }
 

@@ -184,7 +184,6 @@ private:
 
     QRect m_dirtyRect;
 
-    volatile bool m_stopped;
     volatile bool m_passwordError;
 
     /**
