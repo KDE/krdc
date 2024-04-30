@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-29 00:39+0000\n"
-"PO-Revision-Date: 2023-12-06 06:20+0100\n"
+"PO-Revision-Date: 2024-04-29 11:25+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -728,7 +728,7 @@ msgstr "აჩქარება:"
 #: rdp/rdppreferences.ui:99
 #, kde-format
 msgid "TLS security level:"
-msgstr ""
+msgstr "TLS უსაფრთხოების დონე:"
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:140
@@ -1014,37 +1014,37 @@ msgstr "ფანჯრის შემცველობის გადიდ�
 #: rdp/rdppreferences.ui:436
 #, kde-format
 msgid "any"
-msgstr ""
+msgstr "ნებისმიერი"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:441
 #, kde-format
 msgid "80 bit"
-msgstr ""
+msgstr "80-ბიტიანი"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:446
 #, kde-format
 msgid "112 bit"
-msgstr ""
+msgstr "112-ბიტიანი"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:451
 #, kde-format
 msgid "128 bit"
-msgstr ""
+msgstr "128-ბიტიანი"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:456
 #, kde-format
 msgid "192 bit"
-msgstr ""
+msgstr "192-ბიტიანი"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:461
 #, kde-format
 msgid "256 bit"
-msgstr ""
+msgstr "256-ბიტიანი"
 
 #. i18n: ectx: property (text), widget (QLabel, layoutLabel)
 #: rdp/rdppreferences.ui:469
@@ -1145,88 +1145,84 @@ msgstr "გაფართოების მითითება (...)"
 #: rdp/rdppreferences.ui:616
 #, kde-format
 msgid "Proxy"
-msgstr ""
+msgstr "პროქსი"
 
 #. i18n: ectx: property (text), widget (QLabel, protocolLabel)
 #: rdp/rdppreferences.ui:624
-#, fuzzy, kde-format
-#| msgid "Default protocol:"
+#, kde-format
 msgid "Protocol:"
-msgstr "ნაგულისხმები პროტოკოლი:"
+msgstr "პროტოკოლი:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ProxyProtocol)
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_GatewayTransportType)
 #: rdp/rdppreferences.ui:638 rdp/rdppreferences.ui:749
 #, kde-format
 msgid "HTTP"
-msgstr ""
+msgstr "HTTP"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ProxyProtocol)
 #: rdp/rdppreferences.ui:643
 #, kde-format
 msgid "SOCKS"
-msgstr ""
+msgstr "SOCKS"
 
 #. i18n: ectx: property (text), widget (QLabel, pPasswordLabel)
 #. i18n: ectx: property (text), widget (QLabel, gPasswordLabel)
 #: rdp/rdppreferences.ui:654 rdp/rdppreferences.ui:710
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Password Problems"
+#, kde-format
 msgid "Password:"
-msgstr "პაროლის პრობლემები"
+msgstr "პაროლი:"
 
 #. i18n: ectx: property (text), widget (QLabel, pUsernameLabel)
 #. i18n: ectx: property (text), widget (QLabel, gUsernameLabel)
 #: rdp/rdppreferences.ui:664 rdp/rdppreferences.ui:703
-#, fuzzy, kde-format
-#| msgid "User name:"
+#, kde-format
 msgid "Username:"
-msgstr "მომხმარებლის სახელი:"
+msgstr "მომხმარებელი:"
 
 #. i18n: ectx: property (text), widget (QLabel, pHostLabel)
 #. i18n: ectx: property (text), widget (QLabel, gServerLabel)
 #: rdp/rdppreferences.ui:671 rdp/rdppreferences.ui:696
 #, kde-format
 msgid "Server:"
-msgstr ""
+msgstr "სერვერი:"
 
 #. i18n: ectx: property (placeholderText), widget (KLineEdit, kcfg_ProxyHost)
 #. i18n: ectx: property (placeholderText), widget (KLineEdit, kcfg_GatewayServer)
 #: rdp/rdppreferences.ui:678 rdp/rdppreferences.ui:717
 #, kde-format
 msgid "host:port"
-msgstr ""
+msgstr "ჰოსტი:პორტი"
 
 #. i18n: ectx: attribute (title), widget (QWidget, gatewaySettingsTab)
 #: rdp/rdppreferences.ui:688
 #, kde-format
 msgid "Gateway"
-msgstr ""
+msgstr "ნაგულისხმები რაუტერი"
 
 #. i18n: ectx: property (text), widget (QLabel, gTransportTypeLabel)
 #: rdp/rdppreferences.ui:730
 #, kde-format
 msgid "Transport type:"
-msgstr ""
+msgstr "ტრანსპორტის ტიპი:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_GatewayTransportType)
 #: rdp/rdppreferences.ui:744
 #, kde-format
 msgid "Auto"
-msgstr ""
+msgstr "ავტო"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_GatewayTransportType)
 #: rdp/rdppreferences.ui:754
 #, kde-format
 msgid "RPC"
-msgstr ""
+msgstr "RPC"
 
 #. i18n: ectx: property (text), widget (QLabel, gDomainLabel)
 #: rdp/rdppreferences.ui:762
 #, kde-format
 msgid "Domain:"
-msgstr ""
+msgstr "დომენი:"
 
 #. i18n: ectx: property (text), widget (QLabel, colorDepthLabel)
 #: rdp/rdppreferences.ui:778
@@ -1238,7 +1234,7 @@ msgstr "ფერის &სიღრმე:"
 #: rdp/rdppreferences.ui:791
 #, kde-format
 msgid "Advanced Network Settings"
-msgstr ""
+msgstr "ქსელის დამატებითი პარამეტრები"
 
 #: rdp/rdpsession.cpp:164
 #, kde-format
