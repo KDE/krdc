@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-29 00:39+0000\n"
+"POT-Creation-Date: 2024-05-01 00:38+0000\n"
 "PO-Revision-Date: 2021-06-12 14:31+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
@@ -1314,14 +1314,14 @@ msgid ""
 "%2"
 msgstr ""
 
-#: rdp/rdpview.cpp:175
+#: rdp/rdpview.cpp:173
 #, fuzzy, kde-format
 #| msgid "Connection Failure"
 msgctxt "@title:dialog"
 msgid "Login Failure"
 msgstr "Connection Failure"
 
-#: rdp/rdpview.cpp:176
+#: rdp/rdpview.cpp:174
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1329,13 +1329,13 @@ msgid ""
 "and password."
 msgstr ""
 
-#: rdp/rdpview.cpp:182
+#: rdp/rdpview.cpp:180
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Account Problems"
 msgstr ""
 
-#: rdp/rdpview.cpp:183
+#: rdp/rdpview.cpp:181
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1343,13 +1343,13 @@ msgid ""
 "contact your system administrator."
 msgstr ""
 
-#: rdp/rdpview.cpp:188
+#: rdp/rdpview.cpp:186
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Password Problems"
 msgstr ""
 
-#: rdp/rdpview.cpp:189
+#: rdp/rdpview.cpp:187
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1357,83 +1357,83 @@ msgid ""
 "administrator to change it."
 msgstr ""
 
-#: rdp/rdpview.cpp:192
+#: rdp/rdpview.cpp:190
 #, fuzzy, kde-format
 #| msgid "Connection"
 msgctxt "@title:dialog"
 msgid "Connection Lost"
 msgstr "Connection"
 
-#: rdp/rdpview.cpp:193
+#: rdp/rdpview.cpp:191
 #, fuzzy, kde-format
 #| msgid "An error has occurred during the connection to the NX server."
 msgctxt "@label"
 msgid "Lost connection to the server."
 msgstr "An error has occurred during the connection to the NX server."
 
-#: rdp/rdpview.cpp:197
+#: rdp/rdpview.cpp:195
 #, fuzzy, kde-format
 #| msgid "Server not found."
 msgctxt "@title:dialog"
 msgid "Server not Found"
 msgstr "Server not found."
 
-#: rdp/rdpview.cpp:198
+#: rdp/rdpview.cpp:196
 #, kde-format
 msgctxt "@label"
 msgid "Could not find the server."
 msgstr ""
 
-#: rdp/rdpview.cpp:201
+#: rdp/rdpview.cpp:199
 #, fuzzy, kde-format
 #| msgid "Connection Failure"
 msgctxt "@title:dialog"
 msgid "Connection Refused"
 msgstr "Connection Failure"
 
-#: rdp/rdpview.cpp:202
+#: rdp/rdpview.cpp:200
 #, fuzzy, kde-format
 #| msgid "VNC server closed connection."
 msgctxt "@label"
 msgid "The server refused the connection request."
 msgstr "VNC server closed connection."
 
-#: rdp/rdpview.cpp:207
+#: rdp/rdpview.cpp:205
 #, fuzzy, kde-format
 #| msgid "KRDC Konsole Connection"
 msgctxt "@title:dialog"
 msgid "Could not Connect"
 msgstr "KRDC Konsole Connection"
 
-#: rdp/rdpview.cpp:208
+#: rdp/rdpview.cpp:206
 #, fuzzy, kde-format
 #| msgid "An error has occurred during the connection to the NX server."
 msgctxt "@label"
 msgid "Could not connect to the server."
 msgstr "An error has occurred during the connection to the NX server."
 
-#: rdp/rdpview.cpp:218 rdp/rdpview.cpp:222
+#: rdp/rdpview.cpp:216 rdp/rdpview.cpp:220
 #, fuzzy, kde-format
 #| msgid "Connection Failure"
 msgctxt "@title:dialog"
 msgid "Connection Closed"
 msgstr "Connection Failure"
 
-#: rdp/rdpview.cpp:223
+#: rdp/rdpview.cpp:221
 #, fuzzy, kde-format
 #| msgid "The connection to the host has been interrupted."
 msgctxt "@label"
 msgid "The connection to the server was closed."
 msgstr "The connection to the host has been interrupted."
 
-#: rdp/rdpview.cpp:227
+#: rdp/rdpview.cpp:225
 #, fuzzy, kde-format
 #| msgid "Connection Failure"
 msgctxt "@title:dialog"
 msgid "Connection Failed"
 msgstr "Connection Failure"
 
-#: rdp/rdpview.cpp:228
+#: rdp/rdpview.cpp:226
 #, fuzzy, kde-format
 #| msgid "Unknown error."
 msgctxt "@label"
@@ -1526,7 +1526,7 @@ msgstr "VNC authentication type is not supported."
 msgid "Server not found."
 msgstr "Server not found."
 
-#: vnc/vncclientthread.cpp:334 vnc/vncclientthread.cpp:413
+#: vnc/vncclientthread.cpp:334 vnc/vncclientthread.cpp:412
 #, kde-format
 msgid "VNC authentication failed."
 msgstr "VNC authentication failed."
@@ -1546,17 +1546,17 @@ msgstr "VNC server closed connection."
 msgid "Disconnected: %1."
 msgstr "Disconnected: %1."
 
-#: vnc/vncclientthread.cpp:561
+#: vnc/vncclientthread.cpp:553
 #, kde-format
 msgid "Reconnecting."
 msgstr "Reconnecting."
 
-#: vnc/vncclientthread.cpp:628
+#: vnc/vncclientthread.cpp:618
 #, kde-format
 msgid "Reconnected."
 msgstr "Reconnected."
 
-#: vnc/vncclientthread.cpp:630
+#: vnc/vncclientthread.cpp:620
 #, kde-format
 msgid "Connected."
 msgstr "Connected."
@@ -1711,27 +1711,27 @@ msgstr "Error authenticating with password: %1"
 msgid "Error creating tunnel socket"
 msgstr "Error creating tunnel socket"
 
-#: vnc/vncview.cpp:344
+#: vnc/vncview.cpp:332
 #, kde-format
 msgid "Access to the system requires a password."
 msgstr "Access to the system requires a password."
 
-#: vnc/vncview.cpp:344
+#: vnc/vncview.cpp:332
 #, kde-format
 msgid "Authentication failed. Please try again."
 msgstr "Authentication failed. Please try again."
 
-#: vnc/vncview.cpp:374
+#: vnc/vncview.cpp:362
 #, kde-format
 msgid "Please enter the SSH password."
 msgstr "Please enter the SSH password."
 
-#: vnc/vncview.cpp:399 vnc/vncview.cpp:401
+#: vnc/vncview.cpp:387 vnc/vncview.cpp:389
 #, kde-format
 msgid "VNC failure"
 msgstr "VNC failure"
 
-#: vnc/vncview.cpp:410 vnc/vncview.cpp:412
+#: vnc/vncview.cpp:398 vnc/vncview.cpp:400
 #, kde-format
 msgid "SSH Tunnel failure"
 msgstr "SSH Tunnel failure"

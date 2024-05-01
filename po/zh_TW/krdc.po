@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-29 00:39+0000\n"
+"POT-Creation-Date: 2024-05-01 00:38+0000\n"
 "PO-Revision-Date: 2024-02-29 03:24+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -1301,13 +1301,13 @@ msgstr ""
 "新的憑證：\n"
 "%2"
 
-#: rdp/rdpview.cpp:175
+#: rdp/rdpview.cpp:173
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Login Failure"
 msgstr "登入失敗"
 
-#: rdp/rdpview.cpp:176
+#: rdp/rdpview.cpp:174
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1315,13 +1315,13 @@ msgid ""
 "and password."
 msgstr "無法使用提供的認證資訊登入。請重新檢查使用者和密碼。"
 
-#: rdp/rdpview.cpp:182
+#: rdp/rdpview.cpp:180
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Account Problems"
 msgstr "帳號問題"
 
-#: rdp/rdpview.cpp:183
+#: rdp/rdpview.cpp:181
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1329,13 +1329,13 @@ msgid ""
 "contact your system administrator."
 msgstr "提供的帳號不被允許登入此裝置。請與您的系統管理員聯絡。"
 
-#: rdp/rdpview.cpp:188
+#: rdp/rdpview.cpp:186
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Password Problems"
 msgstr "密碼問題"
 
-#: rdp/rdpview.cpp:189
+#: rdp/rdpview.cpp:187
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1343,73 +1343,73 @@ msgid ""
 "administrator to change it."
 msgstr "無法使用提供的密碼登入。請聯絡您的系統管理員來變更它。"
 
-#: rdp/rdpview.cpp:192
+#: rdp/rdpview.cpp:190
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Lost"
 msgstr "連線遺失"
 
-#: rdp/rdpview.cpp:193
+#: rdp/rdpview.cpp:191
 #, kde-format
 msgctxt "@label"
 msgid "Lost connection to the server."
 msgstr "已喪失對伺服器的連線。"
 
-#: rdp/rdpview.cpp:197
+#: rdp/rdpview.cpp:195
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Server not Found"
 msgstr "找不到伺服器"
 
-#: rdp/rdpview.cpp:198
+#: rdp/rdpview.cpp:196
 #, kde-format
 msgctxt "@label"
 msgid "Could not find the server."
 msgstr "找不到伺服器。"
 
-#: rdp/rdpview.cpp:201
+#: rdp/rdpview.cpp:199
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Refused"
 msgstr "連線被拒"
 
-#: rdp/rdpview.cpp:202
+#: rdp/rdpview.cpp:200
 #, kde-format
 msgctxt "@label"
 msgid "The server refused the connection request."
 msgstr "伺服器回絕了連線請求。"
 
-#: rdp/rdpview.cpp:207
+#: rdp/rdpview.cpp:205
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Could not Connect"
 msgstr "無法連線"
 
-#: rdp/rdpview.cpp:208
+#: rdp/rdpview.cpp:206
 #, kde-format
 msgctxt "@label"
 msgid "Could not connect to the server."
 msgstr "無法連線到伺服器。"
 
-#: rdp/rdpview.cpp:218 rdp/rdpview.cpp:222
+#: rdp/rdpview.cpp:216 rdp/rdpview.cpp:220
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Closed"
 msgstr "連線已關閉"
 
-#: rdp/rdpview.cpp:223
+#: rdp/rdpview.cpp:221
 #, kde-format
 msgctxt "@label"
 msgid "The connection to the server was closed."
 msgstr "與伺服器的連線已被關閉。"
 
-#: rdp/rdpview.cpp:227
+#: rdp/rdpview.cpp:225
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Failed"
 msgstr "連線失敗"
 
-#: rdp/rdpview.cpp:228
+#: rdp/rdpview.cpp:226
 #, kde-format
 msgctxt "@label"
 msgid "An unknown error occurred"
@@ -1501,7 +1501,7 @@ msgstr "不支援 VNC 認證型態。"
 msgid "Server not found."
 msgstr "伺服器找不到。"
 
-#: vnc/vncclientthread.cpp:334 vnc/vncclientthread.cpp:413
+#: vnc/vncclientthread.cpp:334 vnc/vncclientthread.cpp:412
 #, kde-format
 msgid "VNC authentication failed."
 msgstr "VNC 認證失敗。"
@@ -1521,17 +1521,17 @@ msgstr "VNC 伺服器結束了連線。"
 msgid "Disconnected: %1."
 msgstr "已斷線：%1"
 
-#: vnc/vncclientthread.cpp:561
+#: vnc/vncclientthread.cpp:553
 #, kde-format
 msgid "Reconnecting."
 msgstr "重新連線中。"
 
-#: vnc/vncclientthread.cpp:628
+#: vnc/vncclientthread.cpp:618
 #, kde-format
 msgid "Reconnected."
 msgstr "已重新連線。"
 
-#: vnc/vncclientthread.cpp:630
+#: vnc/vncclientthread.cpp:620
 #, kde-format
 msgid "Connected."
 msgstr "已連線。"
@@ -1682,27 +1682,27 @@ msgstr "使用密碼認證時錯誤：%1"
 msgid "Error creating tunnel socket"
 msgstr "建立 tunnel 接口時發生錯誤"
 
-#: vnc/vncview.cpp:344
+#: vnc/vncview.cpp:332
 #, kde-format
 msgid "Access to the system requires a password."
 msgstr "要存取此系統需要密碼。"
 
-#: vnc/vncview.cpp:344
+#: vnc/vncview.cpp:332
 #, kde-format
 msgid "Authentication failed. Please try again."
 msgstr "認證失敗。請再試一次。"
 
-#: vnc/vncview.cpp:374
+#: vnc/vncview.cpp:362
 #, kde-format
 msgid "Please enter the SSH password."
 msgstr "請輸入 SSH 密碼。"
 
-#: vnc/vncview.cpp:399 vnc/vncview.cpp:401
+#: vnc/vncview.cpp:387 vnc/vncview.cpp:389
 #, kde-format
 msgid "VNC failure"
 msgstr "VNC 失敗"
 
-#: vnc/vncview.cpp:410 vnc/vncview.cpp:412
+#: vnc/vncview.cpp:398 vnc/vncview.cpp:400
 #, kde-format
 msgid "SSH Tunnel failure"
 msgstr "SSH Tunnel 錯誤"
