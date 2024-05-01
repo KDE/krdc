@@ -892,7 +892,7 @@ void RdpSession::initializeClipboard(RdpContext *rdpC, CliprdrClientContext *cli
 void RdpSession::destroyClipboard()
 {
     if (m_clipboard) {
-        m_clipboard->deleteLater();
+        delete m_clipboard;
         m_clipboard = nullptr;
     }
 }

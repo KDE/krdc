@@ -5,19 +5,16 @@
 
 #pragma once
 
-#include <QObject>
 #include <freerdp/client/cliprdr.h>
 
 struct RdpContext;
 class QMimeData;
 
-class RdpClipboard : public QObject
+class RdpClipboard
 {
-    Q_OBJECT
-
 public:
     RdpClipboard(RdpContext *rdpC, CliprdrClientContext *cliprdr);
-    ~RdpClipboard() override;
+    ~RdpClipboard();
 
     bool sendClipboard(const QMimeData *data);
 

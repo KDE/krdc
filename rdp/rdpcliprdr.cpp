@@ -323,8 +323,7 @@ static UINT krdc_cliprdr_server_file_contents_response(CliprdrClientContext *cli
 }
 
 RdpClipboard::RdpClipboard(RdpContext *rdpC, CliprdrClientContext *cliprdr)
-    : QObject(nullptr)
-    , m_rdpC(rdpC)
+    : m_rdpC(rdpC)
 {
     m_rdpC->cliprdr = cliprdr;
     m_rdpC->clipboard = ClipboardCreate();
