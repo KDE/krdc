@@ -358,8 +358,8 @@ bool RdpClipboard::sendClipboard(const QMimeData *data)
             ClipboardEmpty(m_rdpC->clipboard);
         } else {
             auto formatId = ClipboardRegisterFormat(m_rdpC->clipboard, "UTF8_STRING");
-            QByteArray data = text.toUtf8();
-            ClipboardSetData(m_rdpC->clipboard, formatId, data.data(), data.size() + 1);
+            QByteArray bytes = text.toUtf8();
+            ClipboardSetData(m_rdpC->clipboard, formatId, bytes.data(), bytes.size() + 1);
         }
 
         krdc_cliprdr_send_client_format_list(m_rdpC->cliprdr);
