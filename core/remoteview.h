@@ -427,8 +427,10 @@ protected:
 #ifndef QTONLY
     QString readWalletPassword(bool fromUserNameOnly = false);
     void saveWalletPassword(const QString &password, bool fromUserNameOnly = false);
+    void deleteWalletPassword(bool fromUserNameOnly = false);
     QString readWalletPasswordForKey(const QString &key);
     void saveWalletPasswordForKey(const QString &key, const QString &password);
+    void deleteWalletPasswordForKey(const QString &key);
     KWallet::Wallet *m_wallet;
 #endif
 

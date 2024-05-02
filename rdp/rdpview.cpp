@@ -172,6 +172,9 @@ void RdpView::handleError(const unsigned int error)
     case FREERDP_ERROR_CONNECT_WRONG_PASSWORD:
         title = i18nc("@title:dialog", "Login Failure");
         message = i18nc("@label", "Unable to login with the provided credentials. Please double check the user and password.");
+        if (m_password.isEmpty()) {
+            deleteWalletPassword();
+        }
         break;
     case FREERDP_ERROR_CONNECT_ACCOUNT_LOCKED_OUT:
     case FREERDP_ERROR_CONNECT_ACCOUNT_EXPIRED:

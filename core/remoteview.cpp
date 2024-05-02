@@ -212,6 +212,11 @@ void RemoteView::saveWalletPassword(const QString &password, bool fromUserNameOn
     saveWalletPasswordForKey(fromUserNameOnly ? m_url.userName() : m_url.toDisplayString(QUrl::StripTrailingSlash), password);
 }
 
+void RemoteView::deleteWalletPassword(bool fromUserNameOnly)
+{
+    deleteWalletPasswordForKey(fromUserNameOnly ? m_url.userName() : m_url.toDisplayString(QUrl::StripTrailingSlash));
+}
+
 QString RemoteView::readWalletPasswordForKey(const QString &key)
 {
     const QString KRDCFOLDER = QLatin1String("KRDC");
@@ -246,6 +251,14 @@ void RemoteView::saveWalletPasswordForKey(const QString &key, const QString &pas
     if (m_wallet && m_wallet->isOpen()) {
         qCDebug(KRDC) << "Write wallet password";
         m_wallet->writePassword(key, password);
+    }
+}
+
+void RemoteView::deleteWalletPasswordForKey(const QString &key)
+{
+    if (m_wallet && m_wallet->isOpen()) {
+        qCDebug(KRDC) << "Delete wallet password";
+        m_wallet->removeEntry(key);
     }
 }
 #endif
