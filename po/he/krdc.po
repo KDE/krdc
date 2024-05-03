@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-01 00:38+0000\n"
-"PO-Revision-Date: 2024-05-01 12:08+0300\n"
+"PO-Revision-Date: 2024-05-02 21:46+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -490,14 +490,14 @@ msgid "Grab Keys"
 msgstr ""
 
 #: mainwindow.cpp:190
-#, fuzzy, kde-format
+#, kde-format
 msgid "Scale Remote Screen to Fit Window Size"
-msgstr "אפשרות זו משנה את קנה המידה של המסך המרוחק כך שיתאים לגודל החלון שלך."
+msgstr "שינוי קנה המידה של המסך המרוחק כדי להתאים לגודל החלון"
 
 #: mainwindow.cpp:191
-#, fuzzy, kde-format
+#, kde-format
 msgid "Scale"
-msgstr "התאם קנה מידה"
+msgstr "התאמת קנה מידה"
 
 #: mainwindow.cpp:194
 #, kde-format
@@ -510,11 +510,13 @@ msgid "Bookmarks"
 msgstr ""
 
 #: mainwindow.cpp:262
-#, fuzzy, kde-format
+#, kde-format
 msgid ""
 "The entered address does not have the required form.\n"
 " Syntax: [username@]host[:port]"
-msgstr "המארח שהוזן אינו בתבנית הנדרשת."
+msgstr ""
+"הכתובת שמסרת אינה בתבנית המתאימה.\n"
+" תחביר: ‎[username@]host[:port]"
 
 #: mainwindow.cpp:262
 #, kde-format
@@ -1100,71 +1102,71 @@ msgstr ""
 #: rdp/rdppreferences.ui:579
 #, kde-format
 msgid "Small (1280x720)"
-msgstr ""
+msgstr "קטן (‎1280×720)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:584
 #, kde-format
 msgid "Medium (1600x900)"
-msgstr ""
+msgstr "בינוני (‎1600×900)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:589
 #, kde-format
 msgid "Large (1920x1080)"
-msgstr ""
+msgstr "גדול (‎1920×1080)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:594
 #, kde-format
 msgid "Current Window Size"
-msgstr ""
+msgstr "גודל החלון הנוכחי"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
 #: rdp/rdppreferences.ui:599 vnc/vncpreferences.ui:118
 #, kde-format
 msgid "Current Screen Resolution"
-msgstr ""
+msgstr "רזולוציית המסך הנוכחית"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
 #: rdp/rdppreferences.ui:604 vnc/vncpreferences.ui:123
 #, kde-format
 msgid "Custom Resolution (...)"
-msgstr ""
+msgstr "רזולוציה משלך (…)"
 
 #. i18n: ectx: attribute (title), widget (QWidget, proxySettingsTab)
 #: rdp/rdppreferences.ui:616
 #, kde-format
 msgid "Proxy"
-msgstr ""
+msgstr "מתווך"
 
 #. i18n: ectx: property (text), widget (QLabel, protocolLabel)
 #: rdp/rdppreferences.ui:624
 #, kde-format
 msgid "Protocol:"
-msgstr ""
+msgstr "פרוטוקול:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ProxyProtocol)
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_GatewayTransportType)
 #: rdp/rdppreferences.ui:638 rdp/rdppreferences.ui:749
 #, kde-format
 msgid "HTTP"
-msgstr ""
+msgstr "HTTP"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ProxyProtocol)
 #: rdp/rdppreferences.ui:643
 #, kde-format
 msgid "SOCKS"
-msgstr ""
+msgstr "SOCKS"
 
 #. i18n: ectx: property (text), widget (QLabel, pPasswordLabel)
 #. i18n: ectx: property (text), widget (QLabel, gPasswordLabel)
 #: rdp/rdppreferences.ui:654 rdp/rdppreferences.ui:710
 #, kde-format
 msgid "Password:"
-msgstr ""
+msgstr "סיסמה:"
 
 #. i18n: ectx: property (text), widget (QLabel, pUsernameLabel)
 #. i18n: ectx: property (text), widget (QLabel, gUsernameLabel)
@@ -1178,62 +1180,62 @@ msgstr "שם משתמש:"
 #: rdp/rdppreferences.ui:671 rdp/rdppreferences.ui:696
 #, kde-format
 msgid "Server:"
-msgstr ""
+msgstr "שרת:"
 
 #. i18n: ectx: property (placeholderText), widget (KLineEdit, kcfg_ProxyHost)
 #. i18n: ectx: property (placeholderText), widget (KLineEdit, kcfg_GatewayServer)
 #: rdp/rdppreferences.ui:678 rdp/rdppreferences.ui:717
 #, kde-format
 msgid "host:port"
-msgstr ""
+msgstr "host:port"
 
 #. i18n: ectx: attribute (title), widget (QWidget, gatewaySettingsTab)
 #: rdp/rdppreferences.ui:688
 #, kde-format
 msgid "Gateway"
-msgstr ""
+msgstr "שער גישה"
 
 #. i18n: ectx: property (text), widget (QLabel, gTransportTypeLabel)
 #: rdp/rdppreferences.ui:730
 #, kde-format
 msgid "Transport type:"
-msgstr ""
+msgstr "סוג תעבורה:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_GatewayTransportType)
 #: rdp/rdppreferences.ui:744
 #, kde-format
 msgid "Auto"
-msgstr ""
+msgstr "אוטומטי"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_GatewayTransportType)
 #: rdp/rdppreferences.ui:754
 #, kde-format
 msgid "RPC"
-msgstr ""
+msgstr "RPC"
 
 #. i18n: ectx: property (text), widget (QLabel, gDomainLabel)
 #: rdp/rdppreferences.ui:762
 #, kde-format
 msgid "Domain:"
-msgstr ""
+msgstr "שם תחום:"
 
 #. i18n: ectx: property (text), widget (QLabel, colorDepthLabel)
 #: rdp/rdppreferences.ui:778
 #, kde-format
 msgid "Color &depth:"
-msgstr ""
+msgstr "&עומק צבע:"
 
 #. i18n: ectx: property (text), widget (QLabel, advancedNetworkSettingsLabel)
 #: rdp/rdppreferences.ui:791
 #, kde-format
 msgid "Advanced Network Settings"
-msgstr ""
+msgstr "הגדרות רשת מתקדמות"
 
 #: rdp/rdpsession.cpp:164
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Logon Error"
-msgstr ""
+msgstr "שגיאת כניסה"
 
 #: rdp/rdpsession.cpp:221
 #, kde-format
@@ -1245,6 +1247,11 @@ msgid ""
 "Issuer: %5\n"
 "Fingerprint: %6\n"
 msgstr ""
+"מארח: %1:%2\n"
+"שם נפוץ: %3\n"
+"נושא: %4\n"
+"מנפיק: %5\n"
+"טביעת אצבע: %6\n"
 
 #: rdp/rdpsession.cpp:709
 #, kde-format
@@ -1262,31 +1269,31 @@ msgstr "הגישה למערכת דורשת שם משתמש וסיסמה."
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
-msgstr ""
+msgstr "האישור של המערכת הזה לא מוכר. להמשיך?"
 
 #: rdp/rdpsession.cpp:735
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
-msgstr ""
+msgstr "אימות אישור"
 
 #: rdp/rdpsession.cpp:740 rdp/rdpsession.cpp:763
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
-msgstr ""
+msgstr "שמירת האישור הזה"
 
 #: rdp/rdpsession.cpp:757
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
-msgstr ""
+msgstr "אישור המערכת השתנה. להמשיך?"
 
 #: rdp/rdpsession.cpp:758
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
-msgstr ""
+msgstr "האישור השתנה"
 
 #: rdp/rdpsession.cpp:761
 #, kde-format
@@ -1297,6 +1304,10 @@ msgid ""
 "New Certificate:\n"
 "%2"
 msgstr ""
+"אישור קודם:\n"
+"%1\n"
+"אישור חדש:\n"
+"%2"
 
 #: rdp/rdpview.cpp:173
 #, kde-format
@@ -1311,12 +1322,13 @@ msgid ""
 "Unable to login with the provided credentials. Please double check the user "
 "and password."
 msgstr ""
+"לא ניתן להיכנס עם פרטי הגישה שסופקו. נא לבדוק שנית את שם המשתמש והסיסמה."
 
 #: rdp/rdpview.cpp:180
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Account Problems"
-msgstr ""
+msgstr "בעיות חשבון"
 
 #: rdp/rdpview.cpp:181
 #, kde-format
@@ -1325,12 +1337,13 @@ msgid ""
 "The provided account is not allowed to log in to this machine. Please "
 "contact your system administrator."
 msgstr ""
+"החשבון שצוין אינו מורשה להיכנס למכונה הזאת. נא ליצור קשר עם הנהלת המערכת שלך."
 
 #: rdp/rdpview.cpp:186
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Password Problems"
-msgstr ""
+msgstr "בעיות סיסמה"
 
 #: rdp/rdpview.cpp:187
 #, kde-format
@@ -1339,6 +1352,8 @@ msgid ""
 "Unable to login with the provided password. Please contact your system "
 "administrator to change it."
 msgstr ""
+"לא ניתן להיכנס עם הסיסמה שסופקה. נא ליצור קשר עם הנהלת המערכת כדי להחליף "
+"אותה."
 
 #: rdp/rdpview.cpp:190
 #, kde-format
@@ -1356,13 +1371,13 @@ msgstr "החיבור האחרון לשרת."
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Server not Found"
-msgstr ""
+msgstr "השרת לא נמצא"
 
 #: rdp/rdpview.cpp:196
 #, kde-format
 msgctxt "@label"
 msgid "Could not find the server."
-msgstr ""
+msgstr "לא ניתן למצוא את השרת."
 
 #: rdp/rdpview.cpp:199
 #, kde-format
@@ -1374,7 +1389,7 @@ msgstr "החיבור סורב"
 #, kde-format
 msgctxt "@label"
 msgid "The server refused the connection request."
-msgstr ""
+msgstr "השרת סירב לבקשת החיבור."
 
 #: rdp/rdpview.cpp:205
 #, kde-format
@@ -1398,7 +1413,7 @@ msgstr "החיבור נסגר"
 #, kde-format
 msgctxt "@label"
 msgid "The connection to the server was closed."
-msgstr ""
+msgstr "החיבור לשרת נסגר."
 
 #: rdp/rdpview.cpp:225
 #, kde-format
@@ -1410,12 +1425,12 @@ msgstr "החיבור נכשל"
 #, kde-format
 msgctxt "@label"
 msgid "An unknown error occurred"
-msgstr ""
+msgstr "אירעה שגיאה בלתי ידועה"
 
 #: rdp/rdpviewfactory.cpp:22
 #, kde-format
 msgid "Connect to a Windows Remote Desktop (RDP)"
-msgstr ""
+msgstr "התחברות לשולחן עבודה מרוחק ב־Windows‏ (RDP)"
 
 #: rdp/rdpviewfactory.cpp:51
 #, kde-format
@@ -1428,30 +1443,32 @@ msgid ""
 "<html>Enter the address here. Port is optional.<br /><i>Example: "
 "rdpserver:3389 (host:port)</i></html>"
 msgstr ""
+"<html>נא למלא כאן קובץ. פתחה היא בגדר רשות.<br /><i>למשל: rdpserver:3389 "
+"(host:port)</i></html>"
 
 #: remotedesktopsmodel.cpp:112
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Zeroconf"
-msgstr ""
+msgstr "Zeroconf"
 
 #: remotedesktopsmodel.cpp:114
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "None"
-msgstr ""
+msgstr "אין"
 
 #: remotedesktopsmodel.cpp:130
 #, kde-format
 msgctxt "Remove the selected url from the bookarks menu"
 msgid "Remove the bookmark for %1."
-msgstr ""
+msgstr "הסרת %1 מהסימניות."
 
 #: remotedesktopsmodel.cpp:132
 #, kde-format
 msgctxt "Add the selected url to the bookmarks menu"
 msgid "Bookmark %1."
-msgstr ""
+msgstr "הוספת %1 לסימניות."
 
 #: remotedesktopsmodel.cpp:170
 #, kde-format
@@ -1472,19 +1489,19 @@ msgctxt ""
 "Header of the connections list, the number of times this connection has been "
 "visited"
 msgid "Visits"
-msgstr ""
+msgstr "ביקורים"
 
 #: remotedesktopsmodel.cpp:176
 #, kde-format
 msgctxt "Header of the connections list, the time when this entry was created"
 msgid "Created"
-msgstr ""
+msgstr "נוצר"
 
 #: remotedesktopsmodel.cpp:178
 #, kde-format
 msgctxt "Header of the connections list, where this entry comes from"
 msgid "Source"
-msgstr ""
+msgstr "מקור"
 
 #: vnc/vncclientthread.cpp:300
 #, kde-format
@@ -1494,7 +1511,7 @@ msgstr "סוג אימות ה־VNC לא נתמך."
 #: vnc/vncclientthread.cpp:317
 #, kde-format
 msgid "Server not found."
-msgstr ""
+msgstr "השרת לא נמצא."
 
 #: vnc/vncclientthread.cpp:334 vnc/vncclientthread.cpp:412
 #, kde-format
@@ -1509,7 +1526,7 @@ msgstr "אימות ה־VNC נכשל עקב ריבוי ניסיונות אימו�
 #: vnc/vncclientthread.cpp:343
 #, kde-format
 msgid "VNC server closed connection."
-msgstr ""
+msgstr "שרת ה־VNC סגר את החיבור."
 
 #: vnc/vncclientthread.cpp:351 vnc/vncclientthread.cpp:353
 #, kde-format
@@ -1590,55 +1607,55 @@ msgstr "התאמה לגודל:"
 #: vnc/vncpreferences.ui:93
 #, kde-format
 msgid "Minimal (640x480)"
-msgstr ""
+msgstr "מזערי (‎640×480)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
 #: vnc/vncpreferences.ui:98
 #, kde-format
 msgid "Small (800x600)"
-msgstr ""
+msgstr "קטן (‎800×600)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
 #: vnc/vncpreferences.ui:103
 #, kde-format
 msgid "Normal (1024x768)"
-msgstr ""
+msgstr "רגיל (‎1024×768)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
 #: vnc/vncpreferences.ui:108
 #, kde-format
 msgid "Large (1280x1024)"
-msgstr ""
+msgstr "גדול (‎1280×1024)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
 #: vnc/vncpreferences.ui:113
 #, kde-format
 msgid "Very Large (1600x1200)"
-msgstr ""
+msgstr "גדול מאוד (‎1600×1200)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, use_ssh_tunnel)
 #: vnc/vncpreferences.ui:204
 #, kde-format
 msgid "Connect via SSH tunnel"
-msgstr ""
+msgstr "התחברות דרך תעלת SSH"
 
 #. i18n: ectx: property (title), widget (QGroupBox, ssh_groupBox)
 #: vnc/vncpreferences.ui:211
 #, kde-format
 msgid "SSH tunnel options"
-msgstr ""
+msgstr "אפשרויות תעלת SSH"
 
 #. i18n: ectx: property (text), widget (QCheckBox, use_loopback)
 #: vnc/vncpreferences.ui:217
 #, kde-format
 msgid "Tunnel via loopback address"
-msgstr ""
+msgstr "תעלה דרך כתובת לולאה פנימית"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: vnc/vncpreferences.ui:224
 #, kde-format
 msgid "Port:"
-msgstr ""
+msgstr "פתחה:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: vnc/vncpreferences.ui:244
@@ -1650,7 +1667,7 @@ msgstr "שם משתמש:"
 #: vnc/vncpreferences.ui:257
 #, kde-format
 msgid "Don't copy passwords from supported password managers to remote hosts"
-msgstr ""
+msgstr "לא להעתיק סיסמאות ממנהלי סיסמאות נתמכים למארחים מרוחקים"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, dont_copy_passwords)
 #: vnc/vncpreferences.ui:260
@@ -1660,6 +1677,8 @@ msgid ""
 "additional MIME type \"x-kde-passwordManagerHint\" which is used for "
 "filtering."
 msgstr ""
+"מנהלי סיסמאות נתמכים (כגון KeePassXC) מסמנים סיסמאות שהועתקו בסוג תוכן נוסף "
+"„x-kde-passwordManagerHint” שמשמש לסימון."
 
 #: vnc/vncsshtunnelthread.cpp:99
 #, kde-format
@@ -1675,7 +1694,7 @@ msgstr "שגיאת אימות עם הסיסמה: %1"
 #: vnc/vncsshtunnelthread.cpp:155 vnc/vncsshtunnelthread.cpp:163
 #, kde-format
 msgid "Error creating tunnel socket"
-msgstr ""
+msgstr "שגיאה ביצירת שקע תעלת"
 
 #: vnc/vncview.cpp:332
 #, kde-format
@@ -1690,7 +1709,7 @@ msgstr "האימות נכשל. נא לנסות שוב."
 #: vnc/vncview.cpp:362
 #, kde-format
 msgid "Please enter the SSH password."
-msgstr ""
+msgstr "נא למלא את סיסמת ה־SSH."
 
 #: vnc/vncview.cpp:387 vnc/vncview.cpp:389
 #, kde-format
@@ -1700,7 +1719,7 @@ msgstr "כשל ב־VNC"
 #: vnc/vncview.cpp:398 vnc/vncview.cpp:400
 #, kde-format
 msgid "SSH Tunnel failure"
-msgstr ""
+msgstr "שגיאת תעלת SSH"
 
 #: vnc/vncviewfactory.cpp:47
 #, kde-format
@@ -1710,7 +1729,7 @@ msgstr "חיבור VNC חדש…"
 #: vnc/vncviewfactory.cpp:52
 #, kde-format
 msgid "Connect to a VNC Remote Desktop"
-msgstr ""
+msgstr "התחברות לשולחן עבודה מרוחק דרך VNC"
 
 #: vnc/vncviewfactory.cpp:58
 #, kde-format
@@ -1718,6 +1737,8 @@ msgid ""
 "<html>Enter the address here.<br /><i>Example: vncserver:1 (host:port / "
 "screen)</i></html>"
 msgstr ""
+"<html>נא למלא כאן את הכתובת.<br /><i>למשל: vncserver:1 (host:port / screen)</"
+"i></html>"
 
 #, fuzzy
 #~ msgid "Enter Username"
