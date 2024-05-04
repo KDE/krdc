@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-01 00:38+0000\n"
-"PO-Revision-Date: 2024-05-02 21:46+0300\n"
+"PO-Revision-Date: 2024-05-03 15:47+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -44,43 +44,43 @@ msgstr "היסטוריה"
 #: config/general.ui:17
 #, kde-format
 msgid "Remember open sessions for next startup"
-msgstr ""
+msgstr "לזכור הפעלות פתוחות עם ההפעלה הבאה"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_RememberHistory)
 #: config/general.ui:24
 #, kde-format
 msgid "Remember connection history"
-msgstr ""
+msgstr "שמירת היסטוריית החיבורים"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_WalletSupport)
 #: config/general.ui:31
 #, kde-format
 msgid "Remember passwords (KWallet)"
-msgstr ""
+msgstr "לזכור סיסמאות (KWallet)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SystemTrayIcon)
 #: config/general.ui:38
 #, kde-format
 msgid "Enable system tray icon"
-msgstr ""
+msgstr "הפעלת סמל בשורת המערכת"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowStatusBar)
 #: config/general.ui:45
 #, kde-format
 msgid "Show status bar"
-msgstr ""
+msgstr "הצגת שורת המצב"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_KeepAspectRatio)
 #: config/general.ui:52
 #, kde-format
 msgid "Keep aspect ratio when scaling"
-msgstr ""
+msgstr "לשמור על יחס גובה־רוחב בעת שינוי גודל"
 
 #. i18n: ectx: property (text), widget (QLabel, backgroundLabel)
 #: config/general.ui:61
 #, kde-format
 msgid "Background color of empty place:"
-msgstr ""
+msgstr "צבע רקע של מקום ריק:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, connectionGroupBox)
 #: config/general.ui:93
@@ -92,7 +92,7 @@ msgstr "בעת ההתחברות"
 #: config/general.ui:99
 #, kde-format
 msgid "Show the preferences dialog for new connections"
-msgstr ""
+msgstr "הצגת חלונית ההעדפות לחיבורים חדשים"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_ResizeOnConnect)
 #: config/general.ui:106
@@ -101,12 +101,14 @@ msgid ""
 "This option will resize the window to fit the connection size.  If it is too "
 "big, it will maximize the window."
 msgstr ""
+"האפשרות הזאת תשנה את גודל החלון כך שיתאים לגודל החיבור. אם הוא גדול מדי, היא "
+"תגדיל את החלון."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ResizeOnConnect)
 #: config/general.ui:109
 #, kde-format
 msgid "Resize to fit"
-msgstr ""
+msgstr "שינוי גודל להתאמה"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_FullscreenOnConnect)
 #: config/general.ui:116
@@ -115,6 +117,8 @@ msgid ""
 "This option switches to fullscreen only if the connection resolution is the "
 "same as the current screen resolution"
 msgstr ""
+"האפשרות הזאת מחליפה למצב מלא רק אם רזולוציית החיבור דומה לרזולוציית המסך "
+"הנוכחי"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_FullscreenOnConnect)
 #: config/general.ui:119
@@ -132,7 +136,7 @@ msgstr "פרוטוקול ברירת המחדל:"
 #: config/general.ui:135
 #, kde-format
 msgid "vnc"
-msgstr ""
+msgstr "vnc"
 
 #. i18n: ectx: property (title), widget (QGroupBox, tabGroupBox)
 #: config/general.ui:147
@@ -346,6 +350,14 @@ msgid ""
 "(c) 1999-2003, Matthew Chapman\n"
 "(c) 2009, Collabora Ltd"
 msgstr ""
+"(c) 2007‏-2016, אורס וולפר\n"
+"(c) 2001‏-2003, טים ג׳נסן\n"
+"(c) 2002‏-2003, ארנד ואן בילן הבן\n"
+"(c) 2000‏-2002, קונסט פקלינסקי\n"
+"(c) 2000, תאגיד Tridia\n"
+"(c) 1999, מעבדות AT&T בוסטון\n"
+"(c) 1999‏-2003, מת׳יו צ׳אפמן\n"
+"(c) 2009, Collabora בע״מ"
 
 #: main.cpp:72
 #, kde-format
@@ -380,7 +392,7 @@ msgstr "מפתח לשעבר"
 #: main.cpp:75
 #, kde-format
 msgid "Arend van Beelen jr."
-msgstr ""
+msgstr "ארנד ואן בילן הבן"
 
 #: main.cpp:75
 #, kde-format
@@ -395,7 +407,7 @@ msgstr "בראד הארדס"
 #: main.cpp:76
 #, kde-format
 msgid "Google Summer of Code 2007 KRDC project mentor"
-msgstr ""
+msgstr "חונך מטעם מיזם KRDC לטובת Google Summer of Code 2007"
 
 #: main.cpp:77
 #, kde-format
@@ -421,12 +433,12 @@ msgstr "שילוב מול Telepathy Tubes"
 #, kde-format
 msgid ""
 "Start KRDC with the provided URL in fullscreen mode (works only with one URL)"
-msgstr ""
+msgstr "הפעלת KRDC עם הכתובת שסופקה במסך מלא (עובד רק עם כתובת אחת)"
 
 #: main.cpp:93
 #, kde-format
 msgid "URLs to connect after startup"
-msgstr ""
+msgstr "כתובות להתחברות לאחר ההתחלה"
 
 #: mainwindow.cpp:124
 #, kde-format
@@ -442,12 +454,12 @@ msgstr "חיבור חדש"
 #: mainwindow.cpp:148
 #, kde-format
 msgid "Copy Screenshot to Clipboard"
-msgstr ""
+msgstr "העתקת צילום המסך ללוח הגזירים"
 
 #: mainwindow.cpp:149
 #, kde-format
 msgid "Screenshot"
-msgstr ""
+msgstr "צילום מסך"
 
 #: mainwindow.cpp:155 mainwindow.cpp:501
 #, kde-format
@@ -462,7 +474,7 @@ msgstr "מסך מלא"
 #: mainwindow.cpp:163
 #, kde-format
 msgid "View Only"
-msgstr ""
+msgstr "צפייה בלבד"
 
 #: mainwindow.cpp:168
 #, kde-format
@@ -472,22 +484,22 @@ msgstr "ניתוק"
 #: mainwindow.cpp:176
 #, kde-format
 msgid "Show Local Cursor"
-msgstr ""
+msgstr "הצגת הסמן המקומי"
 
 #: mainwindow.cpp:177
 #, kde-format
 msgid "Local Cursor"
-msgstr ""
+msgstr "סמן מקומי"
 
 #: mainwindow.cpp:183
 #, kde-format
 msgid "Grab All Possible Keys"
-msgstr ""
+msgstr "לכידת כל המקשים האפשריים"
 
 #: mainwindow.cpp:184
 #, kde-format
 msgid "Grab Keys"
-msgstr ""
+msgstr "לכידת מקשים"
 
 #: mainwindow.cpp:190
 #, kde-format
@@ -502,12 +514,12 @@ msgstr "התאמת קנה מידה"
 #: mainwindow.cpp:194
 #, kde-format
 msgid "Scaling Factor"
-msgstr ""
+msgstr "מקדם קנה מידה"
 
 #: mainwindow.cpp:205
 #, kde-format
 msgid "Bookmarks"
-msgstr ""
+msgstr "סימניות"
 
 #: mainwindow.cpp:262
 #, kde-format
@@ -526,7 +538,7 @@ msgstr "כתובת שגויה"
 #: mainwindow.cpp:283
 #, kde-format
 msgid "The entered address cannot be handled."
-msgstr ""
+msgstr "אי אפשר לטפל בכתובת שמולאה."
 
 #: mainwindow.cpp:418
 #, kde-format
@@ -1067,12 +1079,14 @@ msgid ""
 "This is the width of the remote desktop. You can only change this value "
 "manually if you select Custom as desktop resolution above."
 msgstr ""
+"זה רוחב שולחן העבודה המרוחק. אפשר לשנות את הערך הזה ידנית במקרה של בחירה "
+"בהתאמה אישית כרזולוצייה."
 
 #. i18n: ectx: property (text), widget (QLabel, heightLabel)
 #: rdp/rdppreferences.ui:519 vnc/vncpreferences.ui:168
 #, kde-format
 msgid "H&eight:"
-msgstr ""
+msgstr "&גובה:"
 
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Height)
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_ScalingHeight)
@@ -1082,12 +1096,14 @@ msgid ""
 "This is the height of the remote desktop. You can only change this value "
 "manually if you select Custom as desktop resolution above."
 msgstr ""
+"זה גובה שולחן העבודה המרוחק. אפשר לשנות את הערך הזה ידנית במקרה של בחירה "
+"בהתאמה אישית כרזולוצייה."
 
 #. i18n: ectx: property (text), widget (QLabel, shareMediaLabel)
 #: rdp/rdppreferences.ui:550
 #, kde-format
 msgid "Share Media:"
-msgstr ""
+msgstr "שיתוף מדיה:"
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_Resolution)
 #. i18n: ectx: property (whatsThis), widget (KComboBox, resolutionComboBox)
@@ -1097,6 +1113,8 @@ msgid ""
 "Here you can specify the resolution of the remote desktop. This resolution "
 "determines the size of the desktop that will be presented to you."
 msgstr ""
+"כאן אפשר לציין את רזולוציית שולחן העבודה המרוחק. הרזולוציה הזאת קובעת את "
+"גודל שולחן העבודה שיוצג בפניך."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:579
@@ -1562,7 +1580,7 @@ msgstr "&סוג חיבור:"
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_Quality)
 #: vnc/vncpreferences.ui:39
-#, fuzzy, kde-format
+#, kde-format
 msgid ""
 "Use this to specify the performance of your connection. Note that you should "
 "select the speed of the weakest link - even if you have a high speed "
@@ -1572,12 +1590,12 @@ msgid ""
 "high speed connections and results in lower image quality, especially in "
 "'Low Quality' mode."
 msgstr ""
-"השתמש באפשרות זו כדי לבחור את רמת הביצועים של החיבור שלך. שים לב כי יש לבחור "
-"את המהירות של החיבור האיטי מבין השניים - גם אם יש לך חיבור מהיר, זה לא יעזור "
-"לך אם המחשב המרוחק משתמש במודם איטי. בחירת איכות גבוהה מדיי עם קישור איטי "
-"תגרום לזמני תגובה איטיים יותר. בחירת איכות נמוכה יותר תגדיל את זמני ההמתנה "
-"בחיבורים בעלי מהירויות גבוהות ותביא לאיכות תמונה ירודה, במיוחד במצב \"איכות "
-"נמוכה\"."
+"יש השתמש באפשרות זו כדי לבחור את רמת הביצועים של החיבור שלך. נא לשים לב כי "
+"יש לבחור את המהירות של החיבור האיטי מבין השניים - גם אם יש לך חיבור מהיר, זה "
+"לא יעזור לך אם המחשב המרוחק משתמש במודם איטי. בחירה באיכות גבוהה מדי עם "
+"קישור איטי תגרום לזמני תגובה איטיים יותר. בחירת איכות נמוכה יותר תגדיל את "
+"זמני ההמתנה בחיבורים בעלי מהירויות גבוהות ותביא לאיכות תמונה ירודה, במיוחד "
+"במצב ‚איכות נמוכה’."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Quality)
 #: vnc/vncpreferences.ui:43
