@@ -20,7 +20,7 @@ build_vnc_qtonly:
     - apt-get update
     - apt-get install --yes eatmydata
     - eatmydata apt-get build-dep --yes --no-install-recommends krdc
-    - eatmydata apt-get install --yes --no-install-recommends ninja-build
+    - eatmydata apt-get install --yes --no-install-recommends ninja-build pkg-config
   script:
     - mkdir -p build && cd build
     - cmake -G Ninja ../vnc/qtonly/

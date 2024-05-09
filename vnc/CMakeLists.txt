@@ -17,17 +17,13 @@ ki18n_wrap_ui(krdc_vncplugin
     vncpreferences.ui
 )
 
-target_include_directories(krdc_vncplugin PRIVATE
-    ${LIBVNCCLIENT_INCLUDE_DIR}
-)
-
 target_link_libraries(krdc_vncplugin
     Qt::Core
     KF${QT_MAJOR_VERSION}::ConfigCore
     KF${QT_MAJOR_VERSION}::CoreAddons
     KF${QT_MAJOR_VERSION}::XmlGui
     Qt::Gui
-    ${LIBVNCCLIENT_LIBRARIES}
+    PkgConfig::VNCCLIENT
     krdccore
 )
 
@@ -60,7 +56,6 @@ target_link_libraries(kcm_krdc_vncplugin
     KF${QT_MAJOR_VERSION}::CoreAddons
     KF${QT_MAJOR_VERSION}::XmlGui
     Qt::Gui
-    ${LIBVNCCLIENT_LIBRARIES}
     krdccore
 )
 

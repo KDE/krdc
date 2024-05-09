@@ -23,20 +23,14 @@ include(FeatureSummary)
 include(ECMDeprecationSettings)
 
 find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core Gui Widgets)
-find_package(LibVNCServer)
-set_package_properties(LibVNCServer PROPERTIES
-    DESCRIPTION "VNC server / client library"
-    URL "http://libvncserver.sourceforge.net/"
-    PURPOSE "Provides core VNC functionality"
-    TYPE REQUIRED
-)
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(VNCCLIENT libvncclient REQUIRED IMPORTED_TARGET)
 
 add_executable(krdc-vnc-qtonly)
 
 target_compile_definitions(krdc-vnc-qtonly PRIVATE QTONLY)
 
 target_include_directories(krdc-vnc-qtonly PRIVATE
-    ${LIBVNCCLIENT_INCLUDE_DIR}
     ..
     ../../core
 )
@@ -53,7 +47,7 @@ target_link_libraries(krdc-vnc-qtonly
     Qt::Core
     Qt::Gui
     Qt::Widgets
-    ${LIBVNCCLIENT_LIBRARIES}
+    PkgConfig::VNCCLIENT
 )
 
 target_sources(krdc-vnc-qtonly PRIVATE

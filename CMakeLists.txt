@@ -109,13 +109,8 @@ set(CMAKE_CXX_STANDARD 20)
 add_subdirectory(core)
 
 if(WITH_VNC)
-    find_package(LibVNCServer)
-    set_package_properties(LibVNCServer PROPERTIES
-        DESCRIPTION "VNC server / client library"
-        URL "http://libvncserver.sourceforge.net/"
-        PURPOSE "Needed to build VNC client support in KRDC"
-        TYPE REQUIRED
-    )
+    find_package(PkgConfig REQUIRED)
+    pkg_check_modules(VNCCLIENT libvncclient REQUIRED IMPORTED_TARGET)
 
     find_package(LibSSH)
     set_package_properties(LibSSH PROPERTIES
