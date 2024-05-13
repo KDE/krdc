@@ -39,7 +39,7 @@ RemoteView::RemoteView(QWidget *parent)
     setMouseTracking(true);
 
     m_clipboard = QApplication::clipboard();
-    connect(m_clipboard, SIGNAL(dataChanged()), this, SLOT(localClipboardChanged()));
+    connect(m_clipboard, &QClipboard::dataChanged, this, &RemoteView::localClipboardChanged);
 }
 
 RemoteView::~RemoteView()
