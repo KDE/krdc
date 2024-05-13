@@ -164,7 +164,7 @@ private:
 
     freerdp *m_freerdp = nullptr;
     RdpContext *m_context = nullptr;
-    RdpClipboard *m_clipboard = nullptr;
+    std::unique_ptr<RdpClipboard> m_clipboard;
 
     State m_state = State::Initial;
 
