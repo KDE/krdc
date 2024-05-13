@@ -886,14 +886,13 @@ void RdpSession::initializeClipboard(RdpContext *rdpC, CliprdrClientContext *cli
     if (!rdpC || !cliprdr) {
         return;
     }
-    m_clipboard = new RdpClipboard(rdpC, cliprdr);
+    m_clipboard = std::make_unique<RdpClipboard>(rdpC, cliprdr);
 }
 
 void RdpSession::destroyClipboard()
 {
     if (m_clipboard) {
-        delete m_clipboard;
-        m_clipboard = nullptr;
+        m_clipboard.reset(nullptr);
     }
 }
 
