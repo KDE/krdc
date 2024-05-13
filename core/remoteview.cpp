@@ -56,15 +56,17 @@ RemoteView::RemoteStatus RemoteView::status()
 
 void RemoteView::setStatus(RemoteView::RemoteStatus s)
 {
-    if (m_status == s)
+    if (m_status == s) {
         return;
+    }
 
     if (((1 + m_status) != s) && (s != Disconnected)) {
         // follow state transition rules
 
         if (s == Disconnecting) {
-            if (m_status == Disconnected)
+            if (m_status == Disconnected) {
                 return;
+            }
         } else {
             Q_ASSERT(((int)s) >= 0);
             if (m_status > s) {
@@ -303,8 +305,9 @@ bool RemoteView::eventFilter(QObject *obj, QEvent *event)
     if (m_viewOnly) {
         if (event->type() == QEvent::KeyPress || event->type() == QEvent::KeyRelease || event->type() == QEvent::MouseButtonDblClick
             || event->type() == QEvent::MouseButtonPress || event->type() == QEvent::MouseButtonRelease || event->type() == QEvent::Wheel
-            || event->type() == QEvent::MouseMove)
+            || event->type() == QEvent::MouseMove) {
             return true;
+        }
     }
 
     return QWidget::eventFilter(obj, event);
@@ -312,11 +315,13 @@ bool RemoteView::eventFilter(QObject *obj, QEvent *event)
 
 void RemoteView::localClipboardChanged()
 {
-    if (m_status != Connected)
+    if (m_status != Connected) {
         return;
+    }
 
-    if (m_clipboard->ownsClipboard() || m_dontSendClipboard)
+    if (m_clipboard->ownsClipboard() || m_dontSendClipboard) {
         return;
+    }
 
     const QMimeData *data = m_clipboard->mimeData(QClipboard::Clipboard);
     if (data) {
