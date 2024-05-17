@@ -89,19 +89,13 @@ UINT krdc_cliprdr_server_file_contents_response(CliprdrClientContext *cliprdr, c
 
 UINT RdpClipboard::onSendClientFormatList()
 {
-    UINT32 formatId;
-    UINT32 numFormats;
-    UINT32 *pFormatIds = nullptr;
-    const char *formatName;
-    CLIPRDR_FORMAT *formats;
-    CLIPRDR_FORMAT_LIST formatList = {};
-
     if (!m_rdpC || !m_cliprdr) {
         return ERROR_INVALID_PARAMETER;
     }
 
-    numFormats = ClipboardGetFormatIds(m_clipboard, &pFormatIds);
-    formats = reinterpret_cast<CLIPRDR_FORMAT *>(calloc(numFormats, sizeof(CLIPRDR_FORMAT)));
+    UINT32 *pFormatIds = nullptr;
+    UINT32 numFormats = ClipboardGetFormatIds(m_clipboard, &pFormatIds);
+    CLIPRDR_FORMAT *formats = reinterpret_cast<CLIPRDR_FORMAT *>(calloc(numFormats, sizeof(CLIPRDR_FORMAT)));
 
     if (!formats) {
         free(pFormatIds);
@@ -110,8 +104,8 @@ UINT RdpClipboard::onSendClientFormatList()
     }
 
     for (UINT32 index = 0; index < numFormats; index++) {
-        formatId = pFormatIds[index];
-        formatName = ClipboardGetFormatName(m_clipboard, formatId);
+        UINT32 formatId = pFormatIds[index];
+        const char *formatName = ClipboardGetFormatName(m_clipboard, formatId);
         formats[index].formatId = formatId;
         formats[index].formatName = nullptr;
 
@@ -126,6 +120,7 @@ UINT RdpClipboard::onSendClientFormatList()
         }
     }
 
+    CLIPRDR_FORMAT_LIST formatList = {};
     formatList.msgFlags = CB_RESPONSE_OK;
     formatList.numFormats = numFormats;
     formatList.formats = formats;
@@ -145,12 +140,11 @@ UINT RdpClipboard::onSendClientFormatList()
 
 UINT RdpClipboard::onSendClientFormatDataRequest(UINT32 formatId)
 {
-    CLIPRDR_FORMAT_DATA_REQUEST formatDataRequest = {};
-
     if (!m_rdpC || !m_cliprdr->ClientFormatDataRequest) {
         return ERROR_INVALID_PARAMETER;
     }
 
+    CLIPRDR_FORMAT_DATA_REQUEST formatDataRequest = {};
     formatDataRequest.msgType = CB_FORMAT_DATA_REQUEST;
     formatDataRequest.msgFlags = 0;
     formatDataRequest.requestedFormatId = formatId;
@@ -160,13 +154,12 @@ UINT RdpClipboard::onSendClientFormatDataRequest(UINT32 formatId)
 
 UINT RdpClipboard::onSendClientCapabilities()
 {
-    CLIPRDR_CAPABILITIES capabilities;
-    CLIPRDR_GENERAL_CAPABILITY_SET generalCapabilitySet;
-
     if (!m_cliprdr || !m_cliprdr->ClientCapabilities) {
         return ERROR_INVALID_PARAMETER;
     }
 
+    CLIPRDR_GENERAL_CAPABILITY_SET generalCapabilitySet;
+    CLIPRDR_CAPABILITIES capabilities;
     capabilities.cCapabilitiesSets = 1;
     capabilities.capabilitySets = reinterpret_cast<CLIPRDR_CAPABILITY_SET *>(&(generalCapabilitySet));
     generalCapabilitySet.capabilitySetType = CB_CAPSTYPE_GENERAL;
@@ -178,12 +171,11 @@ UINT RdpClipboard::onSendClientCapabilities()
 
 UINT RdpClipboard::onMonitorReady(const CLIPRDR_MONITOR_READY *monitorReady)
 {
-    UINT rc;
-
     if (!m_rdpC || !m_cliprdr || !monitorReady) {
         return ERROR_INVALID_PARAMETER;
     }
 
+    UINT rc;
     if ((rc = onSendClientCapabilities()) != CHANNEL_RC_OK) {
         return rc;
     }
@@ -197,14 +189,12 @@ UINT RdpClipboard::onMonitorReady(const CLIPRDR_MONITOR_READY *monitorReady)
 
 UINT RdpClipboard::onServerCapabilities(const CLIPRDR_CAPABILITIES *capabilities)
 {
-    CLIPRDR_CAPABILITY_SET *capabilitySet;
-
     if (!m_rdpC || !m_cliprdr || !capabilities) {
         return ERROR_INVALID_PARAMETER;
     }
 
     for (UINT32 index = 0; index < capabilities->cCapabilitiesSets; index++) {
-        capabilitySet = &(capabilities->capabilitySets[index]);
+        CLIPRDR_CAPABILITY_SET *capabilitySet = &(capabilities->capabilitySets[index]);
 
         if ((capabilitySet->capabilitySetType == CB_CAPSTYPE_GENERAL) && (capabilitySet->capabilitySetLength >= CB_CAPSTYPE_GENERAL_LEN)) {
             CLIPRDR_GENERAL_CAPABILITY_SET *generalCapabilitySet = reinterpret_cast<CLIPRDR_GENERAL_CAPABILITY_SET *>(capabilitySet);
@@ -218,8 +208,6 @@ UINT RdpClipboard::onServerCapabilities(const CLIPRDR_CAPABILITIES *capabilities
 
 UINT RdpClipboard::onServerFormatList(const CLIPRDR_FORMAT_LIST *formatList)
 {
-    UINT rc;
-
     if (!m_rdpC || !m_cliprdr || !formatList) {
         return ERROR_INVALID_PARAMETER;
     }
@@ -247,6 +235,7 @@ UINT RdpClipboard::onServerFormatList(const CLIPRDR_FORMAT_LIST *formatList)
         m_serverFormats.append(format);
     }
 
+    UINT rc;
     for (auto format : m_serverFormats) {
         if (format->formatId == CF_UNICODETEXT) {
             if ((rc = onSendClientFormatDataRequest(CF_UNICODETEXT)) != CHANNEL_RC_OK)
@@ -293,14 +282,14 @@ UINT RdpClipboard::onServerUnlockClipboardData(const CLIPRDR_UNLOCK_CLIPBOARD_DA
 
 UINT RdpClipboard::onServerFormatDataRequest(const CLIPRDR_FORMAT_DATA_REQUEST *formatDataRequest)
 {
-    UINT32 size;
-    CLIPRDR_FORMAT_DATA_RESPONSE response = {};
-
     if (!m_rdpC || !m_cliprdr || !formatDataRequest || !m_cliprdr->ClientFormatDataResponse) {
         return ERROR_INVALID_PARAMETER;
     }
 
+    UINT32 size;
     auto data = reinterpret_cast<BYTE *>(ClipboardGetData(m_clipboard, formatDataRequest->requestedFormatId, &size));
+
+    CLIPRDR_FORMAT_DATA_RESPONSE response = {};
     if (data) {
         response.msgFlags = CB_RESPONSE_OK;
         response.dataLen = size;
@@ -318,14 +307,11 @@ UINT RdpClipboard::onServerFormatDataRequest(const CLIPRDR_FORMAT_DATA_REQUEST *
 
 UINT RdpClipboard::onServerFormatDataResponse(const CLIPRDR_FORMAT_DATA_RESPONSE *formatDataResponse)
 {
-    UINT32 size;
-    UINT32 formatId;
-    CLIPRDR_FORMAT *format = nullptr;
-
     if (!m_rdpC || !m_cliprdr || !formatDataResponse) {
         return ERROR_INVALID_PARAMETER;
     }
 
+    CLIPRDR_FORMAT *format = nullptr;
     for (auto tmpFormat : m_serverFormats) {
         if (m_requestedFormatId == tmpFormat->formatId) {
             format = tmpFormat;
@@ -336,14 +322,14 @@ UINT RdpClipboard::onServerFormatDataResponse(const CLIPRDR_FORMAT_DATA_RESPONSE
         return ERROR_INTERNAL_ERROR;
     }
 
+    UINT32 formatId;
     if (format->formatName) {
         formatId = ClipboardRegisterFormat(m_clipboard, format->formatName);
     } else {
         formatId = format->formatId;
     }
 
-    size = formatDataResponse->dataLen;
-
+    UINT32 size = formatDataResponse->dataLen;
     if (!ClipboardSetData(m_clipboard, formatId, formatDataResponse->requestedFormatData, size)) {
         return ERROR_INTERNAL_ERROR;
     }
