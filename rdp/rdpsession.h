@@ -13,8 +13,6 @@
 #include <QObject>
 #include <QSize>
 
-#include <winpr/clipboard.h>
-
 #include <freerdp/client/cliprdr.h>
 #include <freerdp/freerdp.h>
 
@@ -28,12 +26,7 @@ struct RdpContext {
     rdpContext _c;
 
     RdpSession *session = nullptr;
-    wClipboard *clipboard;
-    UINT32 numServerFormats;
-    UINT32 requestedFormatId;
-    CLIPRDR_FORMAT *serverFormats;
-    CliprdrClientContext *cliprdr;
-    UINT32 clipboardCapabilities;
+    RdpClipboard *clipboard = nullptr;
 };
 
 struct Certificate {
