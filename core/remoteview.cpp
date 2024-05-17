@@ -28,7 +28,6 @@ RemoteView::RemoteView(QWidget *parent)
     , m_keyboardIsGrabbed(false)
     , m_factor(0.)
     , m_clipboard(nullptr)
-    , m_dontSendClipboard(false)
 #ifndef QTONLY
     , m_wallet(nullptr)
 #endif
@@ -319,7 +318,7 @@ void RemoteView::localClipboardChanged()
         return;
     }
 
-    if (m_clipboard->ownsClipboard() || m_dontSendClipboard) {
+    if (m_clipboard->ownsClipboard() || m_viewOnly) {
         return;
     }
 
@@ -331,10 +330,10 @@ void RemoteView::localClipboardChanged()
 
 void RemoteView::remoteClipboardChanged(QMimeData *data)
 {
-    const bool saved_dontSendClipboard = m_dontSendClipboard;
-    m_dontSendClipboard = true;
+    if (m_viewOnly) {
+        return;
+    }
     m_clipboard->setMimeData(data, QClipboard::Clipboard);
-    m_dontSendClipboard = saved_dontSendClipboard;
 }
 
 #include "moc_remoteview.cpp"

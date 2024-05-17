@@ -423,7 +423,6 @@ protected:
     QUrl m_url;
     qreal m_factor;
     QClipboard *m_clipboard;
-    bool m_dontSendClipboard;
 
 #ifndef QTONLY
     QString readWalletPassword(bool fromUserNameOnly = false);

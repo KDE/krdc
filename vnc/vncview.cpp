@@ -474,8 +474,6 @@ void VncView::setViewOnly(bool viewOnly)
 {
     RemoteView::setViewOnly(viewOnly);
 
-    m_dontSendClipboard = viewOnly;
-
     if (viewOnly)
         setCursor(Qt::ArrowCursor);
     else
