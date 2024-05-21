@@ -648,42 +648,9 @@ void VncView::handleKeyEvent(QKeyEvent *e)
     }
 
     const bool pressed = (e->type() == QEvent::KeyPress);
-
-    // handle modifiers
-    if (k == XK_Shift_L || k == XK_Control_L || k == XK_Meta_L || k == XK_Alt_L || XK_Super_L || XK_Hyper_L || k == XK_Shift_R || k == XK_Control_R
-        || k == XK_Meta_R || k == XK_Alt_R || XK_Super_R || XK_Hyper_R) {
-        if (pressed) {
-            m_mods[k] = true;
-        } else if (m_mods.contains(k)) {
-            m_mods.remove(k);
-        } else {
-            unpressModifiers();
-        }
-    }
-
     if (k) {
         vncThread.keyEvent(k, pressed);
     }
-}
-
-void VncView::unpressModifiers()
-{
-    const QList<unsigned int> keys = m_mods.keys();
-    QList<unsigned int>::const_iterator it = keys.constBegin();
-    while (it != keys.end()) {
-        qCDebug(KRDC) << "VncView::unpressModifiers key=" << (*it);
-        vncThread.keyEvent(*it, false);
-        it++;
-    }
-    m_mods.clear();
-}
-
-void VncView::focusOutEvent(QFocusEvent *event)
-{
-    qCDebug(KRDC) << "VncView::focusOutEvent";
-    unpressModifiers();
-
-    RemoteView::focusOutEvent(event);
 }
 
 void VncView::handleLocalClipboardChanged(const QMimeData *data)

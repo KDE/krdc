@@ -17,6 +17,7 @@
 #endif
 
 #include <QClipboard>
+#include <QMap>
 #include <QUrl>
 #include <QWidget>
 
@@ -414,6 +415,8 @@ protected:
 
     QCursor localDefaultCursor() const;
 
+    void unpressModifiers();
+
     QString m_host;
     int m_port;
     bool m_viewOnly;
@@ -423,6 +426,7 @@ protected:
     QUrl m_url;
     qreal m_factor;
     QClipboard *m_clipboard;
+    QMap<int, quint32> m_modifiers;
 
 #ifndef QTONLY
     QString readWalletPassword(bool fromUserNameOnly = false);

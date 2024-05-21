@@ -285,6 +285,8 @@ void RemoteView::focusOutEvent(QFocusEvent *event)
         releaseKeyboard();
     }
 
+    unpressModifiers();
+
     QWidget::focusOutEvent(event);
 }
 
@@ -292,10 +294,35 @@ bool RemoteView::event(QEvent *event)
 {
     switch (event->type()) {
     case QEvent::KeyPress:
-    case QEvent::KeyRelease:
-        handleKeyEvent(static_cast<QKeyEvent *>(event));
+    case QEvent::KeyRelease: {
+        auto keyEvent = static_cast<QKeyEvent *>(event);
+        auto key = keyEvent->key();
+        switch (key) {
+        case Qt::Key_Shift:
+        case Qt::Key_Control:
+        case Qt::Key_Meta:
+        case Qt::Key_Alt:
+        case Qt::Key_AltGr:
+        case Qt::Key_Super_L:
+        case Qt::Key_Super_R:
+        case Qt::Key_Hyper_L:
+        case Qt::Key_Hyper_R:
+            if (event->type() == QEvent::KeyPress) {
+                m_modifiers[key] = keyEvent->nativeScanCode();
+            } else if (m_modifiers.contains(key)) {
+                m_modifiers.remove(key);
+            } else {
+                unpressModifiers();
+            }
+            break;
+        default:
+            break;
+        }
+
+        handleKeyEvent(keyEvent);
         return true;
         break;
+    }
     case QEvent::MouseButtonDblClick:
     case QEvent::MouseButtonPress:
     case QEvent::MouseButtonRelease:
@@ -347,6 +374,28 @@ void RemoteView::remoteClipboardChanged(QMimeData *data)
         return;
     }
     m_clipboard->setMimeData(data, QClipboard::Clipboard);
+}
+
+void RemoteView::unpressModifiers()
+{
+    for (auto it = m_modifiers.begin(); it != m_modifiers.end(); ++it) {
+        QKeyEvent *event = new QKeyEvent(QEvent::KeyRelease,
+                                         it.key(),
+                                         Qt::NoModifier,
+                                         it.value(),
+                                         0,
+                                         0,
+                                         QString(),
+                                         false,
+                                         1
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
+                                         ,
+                                         QInputDevice::primaryKeyboard()
+#endif
+        );
+        handleKeyEvent(event);
+    }
+    m_modifiers.clear();
 }
 
 #include "moc_remoteview.cpp"

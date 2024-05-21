@@ -62,7 +62,6 @@ public Q_SLOTS:
 protected:
     void paintEvent(QPaintEvent *event) override;
     void resizeEvent(QResizeEvent *event) override;
-    void focusOutEvent(QFocusEvent *event) override;
     void handleKeyEvent(QKeyEvent *event) override;
     void handleWheelEvent(QWheelEvent *event) override;
     void handleMouseEvent(QMouseEvent *event) override;
@@ -72,7 +71,6 @@ private:
     VncClientThread vncThread;
     bool m_initDone;
     int m_buttonMask;
-    QMap<unsigned int, bool> m_mods;
     bool m_quitFlag;
     bool m_firstPasswordTry;
     qreal m_horizontalFactor;
@@ -90,8 +88,6 @@ private:
     QString readWalletSshPassword();
     void saveWalletSshPassword();
 #endif
-
-    void unpressModifiers();
 
 private Q_SLOTS:
     void updateImage(int x, int y, int w, int h);

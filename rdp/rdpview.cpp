@@ -93,6 +93,8 @@ void RdpView::startQuitting()
         return; // ignore repeated triggers
     }
 
+    unpressModifiers();
+
     qCDebug(KRDC) << "Stopping RDP session";
     m_quitting = true;
     m_session->stop();
