@@ -17,6 +17,10 @@
 #include <QStandardPaths>
 #include <QWheelEvent>
 
+#ifdef HAVE_WAYLAND
+#include "waylandinhibition_p.h"
+#endif
+
 RemoteView::RemoteView(QWidget *parent)
     : QWidget(parent)
     , m_status(Disconnected)
@@ -39,10 +43,24 @@ RemoteView::RemoteView(QWidget *parent)
 
     m_clipboard = QApplication::clipboard();
     connect(m_clipboard, &QClipboard::dataChanged, this, &RemoteView::localClipboardChanged);
+
+#ifdef HAVE_WAYLAND
+    if (qGuiApp->platformName() == QLatin1String("wayland")) {
+        m_inhibition.reset(new WaylandInhibition(window()->windowHandle()));
+    }
+#endif
 }
 
 RemoteView::~RemoteView()
 {
+#ifdef HAVE_WAYLAND
+    if (qGuiApp->platformName() == QLatin1String("wayland")) {
+        if (m_inhibition && m_inhibition->shortcutsAreInhibited()) {
+            m_inhibition->disableInhibition();
+        }
+    }
+#endif
+
 #ifndef QTONLY
     delete m_wallet;
 #endif
@@ -396,6 +414,26 @@ void RemoteView::unpressModifiers()
         handleKeyEvent(event);
     }
     m_modifiers.clear();
+}
+
+void RemoteView::grabKeyboard()
+{
+    QWidget::grabKeyboard();
+#ifdef HAVE_WAYLAND
+    if (qGuiApp->platformName() == QLatin1String("wayland")) {
+        m_inhibition->enableInhibition();
+    }
+#endif
+}
+
+void RemoteView::releaseKeyboard()
+{
+#ifdef HAVE_WAYLAND
+    if (qGuiApp->platformName() == QLatin1String("wayland")) {
+        m_inhibition->disableInhibition();
+    }
+#endif
+    QWidget::releaseKeyboard();
 }
 
 #include "moc_remoteview.cpp"

@@ -26,6 +26,11 @@ include(KDEGitCommitHooks)
 
 find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core)
 
+if (UNIX AND NOT APPLE AND NOT ANDROID)
+    find_package(Qt${QT_MAJOR_VERSION}WaylandClient ${QT_MIN_VERSION} CONFIG)
+    set(HAVE_WAYLAND ${Qt6WaylandClient_FOUND})
+endif()
+
 find_package(KF${QT_MAJOR_VERSION} ${KF_MIN_VERSION} REQUIRED COMPONENTS
     Config
     KCMUtils

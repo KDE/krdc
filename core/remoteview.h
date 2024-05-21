@@ -21,6 +21,10 @@
 #include <QUrl>
 #include <QWidget>
 
+#ifdef HAVE_WAYLAND
+#include "shortcutinhibition_p.h"
+#endif
+
 class HostPreferences;
 
 /**
@@ -416,6 +420,8 @@ protected:
     QCursor localDefaultCursor() const;
 
     void unpressModifiers();
+    void grabKeyboard();
+    void releaseKeyboard();
 
     QString m_host;
     int m_port;
@@ -427,6 +433,9 @@ protected:
     qreal m_factor;
     QClipboard *m_clipboard;
     QMap<int, quint32> m_modifiers;
+#ifdef HAVE_WAYLAND
+    std::unique_ptr<ShortcutInhibition> m_inhibition;
+#endif
 
 #ifndef QTONLY
     QString readWalletPassword(bool fromUserNameOnly = false);
