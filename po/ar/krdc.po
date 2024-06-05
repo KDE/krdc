@@ -6,13 +6,13 @@
 # Mohamed Assar (محمد عَصَر) <aser@arabeyes.org>, 2003.
 # Ammar Tabbaa <atabba@kacst.edu.sa>, 2004.
 # Youssef Chahibi <chahibi@gmail.com>, 2007.
-# zayed <zayed.alsaidi@gmail.com>, 2009, 2021, 2022.
+# SPDX-FileCopyrightText: 2009, 2021, 2022, 2024 zayed <zayed.alsaidi@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-17 01:46+0000\n"
-"PO-Revision-Date: 2022-10-05 19:11+0400\n"
+"PO-Revision-Date: 2024-05-02 12:05+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -21,7 +21,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
-"X-Generator: Lokalize 21.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -711,26 +710,25 @@ msgstr "الدقة"
 #: rdp/rdppreferences.ui:53 rdp/rdppreferences.ui:348
 #, kde-format
 msgid "Use Best Available"
-msgstr ""
+msgstr "اختر أفضل المتاح"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
 #: rdp/rdppreferences.ui:58
 #, kde-format
 msgid "Force H.264"
-msgstr ""
+msgstr "افرض H.264"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
 #: rdp/rdppreferences.ui:63
-#, fuzzy, kde-format
-#| msgid "RemoteFX:"
+#, kde-format
 msgid "Force RemoteFX"
-msgstr "ريموت اف اكس:"
+msgstr "افرض ريموت اف اكس"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
 #: rdp/rdppreferences.ui:68
 #, kde-format
 msgid "Disable All Acceleration"
-msgstr ""
+msgstr "عطل كل التسريع"
 
 #. i18n: ectx: property (text), widget (QLabel, soundLabel)
 #: rdp/rdppreferences.ui:76
@@ -743,13 +741,13 @@ msgstr "الصوت:"
 #: rdp/rdppreferences.ui:89
 #, kde-format
 msgid "Acceleration:"
-msgstr ""
+msgstr "التّسريع:"
 
 #. i18n: ectx: property (text), widget (QLabel, TlsSecLevelLabel)
 #: rdp/rdppreferences.ui:99
 #, kde-format
 msgid "TLS security level:"
-msgstr ""
+msgstr "مستوى أمان TLS:"
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:140
@@ -1029,43 +1027,43 @@ msgstr "عطّل الصوت"
 #: rdp/rdppreferences.ui:413
 #, kde-format
 msgid "Scale window contents to match resolution"
-msgstr ""
+msgstr "لائم محتويات النافذة لتناسب الدقة"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:436
 #, kde-format
 msgid "any"
-msgstr ""
+msgstr "أي"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:441
 #, kde-format
 msgid "80 bit"
-msgstr ""
+msgstr "80 بتّة"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:446
 #, kde-format
 msgid "112 bit"
-msgstr ""
+msgstr "112 بتّة"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:451
 #, kde-format
 msgid "128 bit"
-msgstr ""
+msgstr "128 بتّة"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:456
 #, kde-format
 msgid "192 bit"
-msgstr ""
+msgstr "192 بتة"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:461
 #, kde-format
 msgid "256 bit"
-msgstr ""
+msgstr "256 بتة"
 
 #. i18n: ectx: property (text), widget (QLabel, layoutLabel)
 #: rdp/rdppreferences.ui:469
@@ -1126,30 +1124,27 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:579
-#, fuzzy, kde-format
-#| msgid "Small (800x600)"
+#, kde-format
 msgid "Small (1280x720)"
-msgstr "صغير (800×600)"
+msgstr "صغير (1280×720)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:584
 #, kde-format
 msgid "Medium (1600x900)"
-msgstr ""
+msgstr "متوسّطة (1600×900)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:589
-#, fuzzy, kde-format
-#| msgid "Large (1280x1024)"
+#, kde-format
 msgid "Large (1920x1080)"
-msgstr "كبير (1280×1024)"
+msgstr "كبير (1920×1080)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:594
-#, fuzzy, kde-format
-#| msgid "Current KRDC Size"
+#, kde-format
 msgid "Current Window Size"
-msgstr "حجم كردس الحالي"
+msgstr "حجم النافذة الحالي"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
@@ -1169,40 +1164,38 @@ msgstr "دقة مخصصة (...)"
 #: rdp/rdppreferences.ui:616
 #, kde-format
 msgid "Proxy"
-msgstr ""
+msgstr "الوسيط"
 
 #. i18n: ectx: property (text), widget (QLabel, protocolLabel)
 #: rdp/rdppreferences.ui:624
-#, fuzzy, kde-format
-#| msgid "Default protocol:"
+#, kde-format
 msgid "Protocol:"
-msgstr "الميفاق المبدئي:"
+msgstr "الميفاق:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ProxyProtocol)
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_GatewayTransportType)
 #: rdp/rdppreferences.ui:638 rdp/rdppreferences.ui:749
 #, kde-format
 msgid "HTTP"
-msgstr ""
+msgstr "HTTP"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ProxyProtocol)
 #: rdp/rdppreferences.ui:643
 #, kde-format
 msgid "SOCKS"
-msgstr ""
+msgstr "SOCKS"
 
 #. i18n: ectx: property (text), widget (QLabel, pPasswordLabel)
 #. i18n: ectx: property (text), widget (QLabel, gPasswordLabel)
 #: rdp/rdppreferences.ui:654 rdp/rdppreferences.ui:710
 #, kde-format
 msgid "Password:"
-msgstr ""
+msgstr "كلمة المرور:"
 
 #. i18n: ectx: property (text), widget (QLabel, pUsernameLabel)
 #. i18n: ectx: property (text), widget (QLabel, gUsernameLabel)
 #: rdp/rdppreferences.ui:664 rdp/rdppreferences.ui:703
-#, fuzzy, kde-format
-#| msgid "User name:"
+#, kde-format
 msgid "Username:"
 msgstr "اسم المستخدم:"
 
@@ -1211,45 +1204,44 @@ msgstr "اسم المستخدم:"
 #: rdp/rdppreferences.ui:671 rdp/rdppreferences.ui:696
 #, kde-format
 msgid "Server:"
-msgstr ""
+msgstr "الخادم:"
 
 #. i18n: ectx: property (placeholderText), widget (KLineEdit, kcfg_ProxyHost)
 #. i18n: ectx: property (placeholderText), widget (KLineEdit, kcfg_GatewayServer)
 #: rdp/rdppreferences.ui:678 rdp/rdppreferences.ui:717
 #, kde-format
 msgid "host:port"
-msgstr ""
+msgstr "منفذ المضيف:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, gatewaySettingsTab)
 #: rdp/rdppreferences.ui:688
 #, kde-format
 msgid "Gateway"
-msgstr ""
+msgstr "البوّابة"
 
 #. i18n: ectx: property (text), widget (QLabel, gTransportTypeLabel)
 #: rdp/rdppreferences.ui:730
 #, kde-format
 msgid "Transport type:"
-msgstr ""
+msgstr "نوع النقل:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_GatewayTransportType)
 #: rdp/rdppreferences.ui:744
 #, kde-format
 msgid "Auto"
-msgstr ""
+msgstr "آليّ"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_GatewayTransportType)
 #: rdp/rdppreferences.ui:754
-#, fuzzy, kde-format
-#| msgid "RDP"
+#, kde-format
 msgid "RPC"
-msgstr "RDP"
+msgstr "أر بيه سي"
 
 #. i18n: ectx: property (text), widget (QLabel, gDomainLabel)
 #: rdp/rdppreferences.ui:762
 #, kde-format
 msgid "Domain:"
-msgstr ""
+msgstr "المجال:"
 
 #. i18n: ectx: property (text), widget (QLabel, colorDepthLabel)
 #: rdp/rdppreferences.ui:778
@@ -1261,13 +1253,13 @@ msgstr "&عمق اللون:"
 #: rdp/rdppreferences.ui:791
 #, kde-format
 msgid "Advanced Network Settings"
-msgstr ""
+msgstr "إعدادات الشبكة متقدّمة"
 
 #: rdp/rdpsession.cpp:163
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Logon Error"
-msgstr ""
+msgstr "خطأ ولوج"
 
 #: rdp/rdpsession.cpp:210
 #, kde-format
@@ -1279,50 +1271,53 @@ msgid ""
 "Issuer: %5\n"
 "Fingerprint: %6\n"
 msgstr ""
+"المضيف: %1:%2\n"
+"الاسم الشائع: %3\n"
+"الموضوع: %4\n"
+"المُصدر: %5\n"
+"بصمة الإصبع: %6\n"
 
 #: rdp/rdpsession.cpp:697
-#, fuzzy, kde-format
-#| msgid "Access to the system requires a password."
+#, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a password."
-msgstr "الدخول إلى النظام يتطلب كلمة مرور."
+msgstr "الدخول إلى هذا النظام يتطلب كلمة مرور."
 
 #: rdp/rdpsession.cpp:700
-#, fuzzy, kde-format
-#| msgid "Access to the system requires a password."
+#, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
-msgstr "الدخول إلى النظام يتطلب كلمة مرور."
+msgstr "يتطلب الوصول إلى هذا النظام اسم مستخدم وكلمة مرور."
 
 #: rdp/rdpsession.cpp:722
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
-msgstr ""
+msgstr "الشهادة لهذا النظام غير معروفة. هل ترغب في الاستمرار؟"
 
 #: rdp/rdpsession.cpp:723
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
-msgstr ""
+msgstr "تحقق صحة الشهادة"
 
 #: rdp/rdpsession.cpp:728 rdp/rdpsession.cpp:751
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
-msgstr ""
+msgstr "تذكر هذه الشهادة"
 
 #: rdp/rdpsession.cpp:745
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
-msgstr ""
+msgstr "تغيرت الشهادة لهذا النظام. هل ترغب في الاستمرار؟"
 
 #: rdp/rdpsession.cpp:746
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
-msgstr ""
+msgstr "تغيرت الشهادة"
 
 #: rdp/rdpsession.cpp:749
 #, kde-format
@@ -1333,13 +1328,16 @@ msgid ""
 "New Certificate:\n"
 "%2"
 msgstr ""
+"الشهادة السابقة:\n"
+"%1\n"
+"الشهادة الجديدة:\n"
+"%2"
 
 #: rdp/rdpview.cpp:175
-#, fuzzy, kde-format
-#| msgid "Connection Failure"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Login Failure"
-msgstr "فشل الاتصال"
+msgstr "فشل الولوج"
 
 #: rdp/rdpview.cpp:176
 #, kde-format
@@ -1348,12 +1346,14 @@ msgid ""
 "Unable to login with the provided credentials. Please double check the user "
 "and password."
 msgstr ""
+"غير قادر على الولوج باستخدام بيانات الاعتماد المقدمة. يرجى التحقق مرة أخرى "
+"من المستخدم وكلمة المرور."
 
 #: rdp/rdpview.cpp:182
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Account Problems"
-msgstr ""
+msgstr "مشاكل الحساب"
 
 #: rdp/rdpview.cpp:183
 #, kde-format
@@ -1362,12 +1362,14 @@ msgid ""
 "The provided account is not allowed to log in to this machine. Please "
 "contact your system administrator."
 msgstr ""
+"الحساب المقدم غير مسموح له بالولوج إلى هذا الجهاز. من فضلك تواصل مع مسؤول "
+"نظامك."
 
 #: rdp/rdpview.cpp:188
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Password Problems"
-msgstr ""
+msgstr "مشاكل كلمة المرور"
 
 #: rdp/rdpview.cpp:189
 #, kde-format
@@ -1376,77 +1378,71 @@ msgid ""
 "Unable to login with the provided password. Please contact your system "
 "administrator to change it."
 msgstr ""
+"غير قادر على الولوج باستخدام كلمة المرور المقدمة. يرجى الاتصال بمسؤول النظام "
+"لتغييره."
 
 #: rdp/rdpview.cpp:192
-#, fuzzy, kde-format
-#| msgid "Connection"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Lost"
-msgstr "الاتصال"
+msgstr "الاتصال فقد"
 
 #: rdp/rdpview.cpp:193
-#, fuzzy, kde-format
-#| msgid "An error has occurred during the connection to the NX server."
+#, kde-format
 msgctxt "@label"
 msgid "Lost connection to the server."
-msgstr "حدث خطأ أثناء الاتصال بخادم NX."
+msgstr "فُقد الاتّصال بالخادوم."
 
 #: rdp/rdpview.cpp:197
-#, fuzzy, kde-format
-#| msgid "Server not found."
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Server not Found"
-msgstr "الخادم ليس موجود."
+msgstr "الخادم ليس موجود"
 
 #: rdp/rdpview.cpp:198
 #, kde-format
 msgctxt "@label"
 msgid "Could not find the server."
-msgstr ""
+msgstr "لم يعثر على الخادم."
 
 #: rdp/rdpview.cpp:201
-#, fuzzy, kde-format
-#| msgid "Connection Failure"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Refused"
-msgstr "فشل الاتصال"
+msgstr "رفض اتصال"
 
 #: rdp/rdpview.cpp:202
-#, fuzzy, kde-format
-#| msgid "VNC server closed connection."
+#, kde-format
 msgctxt "@label"
 msgid "The server refused the connection request."
-msgstr "أغلق خادم VNC الاتصال."
+msgstr "رفض الخادم طلب الاتصال."
 
 #: rdp/rdpview.cpp:207
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Could not Connect"
-msgstr "اتصال بسطح مكتب بعيد لكِيدِي"
+msgstr "تعذّر الاتّصال"
 
 #: rdp/rdpview.cpp:208
-#, fuzzy, kde-format
-#| msgid "An error has occurred during the connection to the NX server."
+#, kde-format
 msgctxt "@label"
 msgid "Could not connect to the server."
-msgstr "حدث خطأ أثناء الاتصال بخادم NX."
+msgstr "تعذّر الاتّصال بالخادم"
 
 #: rdp/rdpview.cpp:218 rdp/rdpview.cpp:222
-#, fuzzy, kde-format
-#| msgid "Connection Failure"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Closed"
-msgstr "فشل الاتصال"
+msgstr "الاتصال أغلق"
 
 #: rdp/rdpview.cpp:223
 #, kde-format
 msgctxt "@label"
 msgid "The connection to the server was closed."
-msgstr ""
+msgstr "أغلق الاتصال بالخادم."
 
 #: rdp/rdpview.cpp:227
-#, fuzzy, kde-format
-#| msgid "Connection Failure"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Failed"
 msgstr "فشل الاتصال"
@@ -1455,7 +1451,7 @@ msgstr "فشل الاتصال"
 #, kde-format
 msgctxt "@label"
 msgid "An unknown error occurred"
-msgstr ""
+msgstr "حدث خطأ مجهول"
 
 #: rdp/rdpviewfactory.cpp:22
 #, kde-format
