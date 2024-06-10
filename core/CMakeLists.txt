@@ -10,7 +10,6 @@ target_sources(krdccore PRIVATE
     remoteviewfactory.cpp
     remoteview.cpp
     hostpreferences.cpp
-    waylandinhibition.cpp
 )
 
 kconfig_add_kcfg_files(krdccore settings.kcfgc)
@@ -39,6 +38,9 @@ if(HAVE_WAYLAND)
     qt_generate_wayland_protocol_client_sources(krdccore
         FILES
             "${CMAKE_CURRENT_SOURCE_DIR}/keyboard-shortcuts-inhibit-unstable-v1.xml"
+    )
+    target_sources(krdccore PRIVATE
+        waylandinhibition.cpp
     )
     target_compile_definitions(krdccore PUBLIC -DHAVE_WAYLAND)
     target_link_libraries(krdccore Qt::GuiPrivate Qt::WaylandClient)
