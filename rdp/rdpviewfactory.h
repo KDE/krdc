@@ -23,6 +23,8 @@ public:
 
     bool supportsUrl(const QUrl &url) const override;
 
+    QUrl loadUrlFromFile(const QUrl &url) const override;
+
     RemoteView *createView(QWidget *parent, const QUrl &url, KConfigGroup configGroup) override;
 
     HostPreferences *createHostPreferences(KConfigGroup configGroup, QWidget *parent) override;

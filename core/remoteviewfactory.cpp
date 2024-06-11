@@ -14,3 +14,9 @@ RemoteViewFactory::RemoteViewFactory(QObject *parent)
 RemoteViewFactory::~RemoteViewFactory()
 {
 }
+
+QUrl RemoteViewFactory::loadUrlFromFile(const QUrl &url) const
+{
+    Q_UNUSED(url);
+    return {};
+}

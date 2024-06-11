@@ -210,6 +210,12 @@ install(TARGETS krdc ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 install(PROGRAMS org.kde.krdc.desktop DESTINATION ${KDE_INSTALL_APPDIR})
 install(FILES org.kde.krdc.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
 
+find_package(SharedMimeInfo)
+if(SharedMimeInfo_FOUND)
+    install(FILES org.kde.krdc-mime.xml DESTINATION ${KDE_INSTALL_MIMEDIR})
+    update_xdg_mimetypes(${KDE_INSTALL_MIMEDIR})
+endif()
+
 ki18n_install(po)
 if(KF6DocTools_FOUND)
     kdoctools_install(po)

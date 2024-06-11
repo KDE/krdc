@@ -256,7 +256,24 @@ void MainWindow::newConnection(const QUrl &newUrl, bool switchFullscreenWhenConn
 {
     m_switchFullscreenWhenConnected = switchFullscreenWhenConnected;
 
-    const QUrl url = newUrl.isEmpty() ? getInputUrl() : newUrl;
+    QUrl url = newUrl.isEmpty() ? getInputUrl() : newUrl;
+
+    if (url.isLocalFile()) {
+        QUrl loadedUrl;
+        for (RemoteViewFactory *factory : qAsConst(m_remoteViewFactories)) {
+            loadedUrl = factory->loadUrlFromFile(url);
+            if (loadedUrl.isValid()) {
+                qCDebug(KRDC) << "Loaded file (" << url.path() << ") resulted in url (" << loadedUrl << ") using " << factory->metaObject()->className();
+                break;
+            }
+        }
+        if (loadedUrl.isValid()) {
+            url = loadedUrl;
+        } else {
+            KMessageBox::error(this, i18n("Unable to load connection data from the provided file."), i18n("Load failed"));
+            return;
+        }
+    }
 
     if (!url.isValid() || (url.host().isEmpty() && url.port() < 0) || (!url.path().isEmpty() && url.path() != QStringLiteral("/"))) {
         KMessageBox::error(this, i18n("The entered address does not have the required form.\n Syntax: [username@]host[:port]"), i18n("Malformed URL"));

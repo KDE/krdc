@@ -18,7 +18,7 @@
 #include <QCommandLineParser>
 #include <QDir>
 #include <QElapsedTimer>
-#include <QFile>
+#include <QFileInfo>
 #include <QPluginLoader>
 #include <QStandardPaths>
 
@@ -74,7 +74,13 @@ int main(int argc, char **argv)
     const QStringList args = parser.positionalArguments();
     if (args.length() > 0) {
         for (int i = 0; i < args.length(); ++i) {
-            QUrl url = QUrl(args.at(i));
+            QUrl url;
+            QFileInfo fi(args.at(i));
+            if (fi.exists() && fi.isFile() && fi.isReadable()) {
+                url = QUrl::fromLocalFile(args.at(i));
+            } else {
+                url = QUrl(args.at(i));
+            }
             // no URL scheme, assume argument is only a hostname
             if (url.scheme().isEmpty()) {
                 QString defaultProto = Settings::defaultProtocol();

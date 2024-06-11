@@ -6,7 +6,10 @@
 
 #include "rdpviewfactory.h"
 
+#include <QFile>
 #include <QStandardPaths>
+#include <QStringList>
+#include <QTextStream>
 
 #include <KPluginFactory>
 
@@ -29,6 +32,53 @@ RdpViewFactory::~RdpViewFactory()
 bool RdpViewFactory::supportsUrl(const QUrl &url) const
 {
     return (url.scheme().compare(QStringLiteral("rdp"), Qt::CaseInsensitive) == 0);
+}
+
+QUrl RdpViewFactory::loadUrlFromFile(const QUrl &url) const
+{
+    QString filePath = url.toLocalFile();
+    if (!filePath.toLower().endsWith(QStringLiteral(".rdp"))) {
+        return {};
+    }
+
+    QFile file(filePath);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        return {};
+    }
+
+    QUrl loadedUrl;
+    loadedUrl.setScheme(QStringLiteral("rdp"));
+    loadedUrl.setPath(QString());
+
+    QTextStream in(&file);
+    while (!in.atEnd()) {
+        QStringList line = in.readLine().split(QLatin1Char(':'));
+        if (line.size() < 3) {
+            continue;
+        }
+        QString key = line.at(0).toLower();
+        // full address:s:hostname[:port]
+        if (key == QStringLiteral("full address")) {
+            loadedUrl.setHost(line.at(2));
+            if (line.size() > 3) {
+                bool ok;
+                uint port = line.at(3).toUInt(&ok);
+                if (ok) {
+                    loadedUrl.setPort(port);
+                }
+            }
+        }
+
+        if (key == QStringLiteral("username")) {
+            loadedUrl.setUserName(line.at(2));
+        }
+        if (key == QStringLiteral("password")) {
+            loadedUrl.setPassword(line.at(2));
+        }
+    }
+
+    file.close();
+    return loadedUrl;
 }
 
 RemoteView *RdpViewFactory::createView(QWidget *parent, const QUrl &url, KConfigGroup configGroup)

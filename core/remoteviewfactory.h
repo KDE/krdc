@@ -32,6 +32,11 @@ public:
     virtual bool supportsUrl(const QUrl &url) const = 0;
 
     /**
+     * Tries to load connection parameters from a file and returns the loaded QUrl.
+     */
+    virtual QUrl loadUrlFromFile(const QUrl &url) const;
+
+    /**
      * Returns a new RemoteView implementing object.
      */
     virtual RemoteView *createView(QWidget *parent, const QUrl &url, KConfigGroup configGroup) = 0;
