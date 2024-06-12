@@ -181,11 +181,13 @@ void RdpHostPreferences::updateWidthHeight(Resolution resolution)
         break;
     case Resolution::MatchWindow: {
         auto *window = qApp->activeWindow();
-        if (window->parentWidget()) {
+        if (window && window->parentWidget()) {
             window = window->parentWidget();
         }
-        rdpUi.kcfg_Width->setValue(window->width());
-        rdpUi.kcfg_Height->setValue(window->height());
+        if (window) {
+            rdpUi.kcfg_Width->setValue(window->width());
+            rdpUi.kcfg_Height->setValue(window->height());
+        }
         break;
     }
     case Resolution::MatchScreen: {
