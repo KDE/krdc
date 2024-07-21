@@ -548,7 +548,7 @@ bool RdpSession::sendEvent(QEvent *event, QWidget *source)
     case QEvent::MouseButtonDblClick:
     case QEvent::MouseMove: {
         auto mouseEvent = static_cast<QMouseEvent *>(event);
-        auto position = mouseEvent->localPos();
+        auto position = mouseEvent->position();
         auto sourceSize = QSizeF{source->size()};
 
         auto x = (position.x() / sourceSize.width()) * m_size.width();

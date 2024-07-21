@@ -578,7 +578,7 @@ void VncView::handleMouseEvent(QMouseEvent *e)
     }
 
     const auto dpr = devicePixelRatioF();
-    QPointF screenPos = e->screenPos();
+    QPointF screenPos = e->globalPosition();
     // We need to restore mouse position in device coordinates.
     // QMouseEvent::localPos() can be rounded (bug in Qt), but QMouseEvent::screenPos() is not.
     QPointF pos = (e->pos() + (screenPos - screenPos.toPoint())) * dpr;
