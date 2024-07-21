@@ -23,11 +23,11 @@ target_include_directories(krdc_rdpplugin PUBLIC ${FreeRDP_INCLUDE_DIR} ${WinPR_
 target_link_libraries(krdc_rdpplugin
     Qt::Core
     Qt::Gui
-    KF${QT_MAJOR_VERSION}::ConfigCore
-    KF${QT_MAJOR_VERSION}::CoreAddons
-    KF${QT_MAJOR_VERSION}::WindowSystem
-    KF${QT_MAJOR_VERSION}::XmlGui
-    KF${QT_MAJOR_VERSION}::KIOWidgets
+    KF6::ConfigCore
+    KF6::CoreAddons
+    KF6::WindowSystem
+    KF6::XmlGui
+    KF6::KIOWidgets
     Threads::Threads
     krdccore
     freerdp
@@ -48,11 +48,11 @@ target_sources(kcm_krdc_rdpplugin PRIVATE
 target_link_libraries(kcm_krdc_rdpplugin
     Qt::Core
     Qt::Gui
-    KF${QT_MAJOR_VERSION}::Wallet
-    KF${QT_MAJOR_VERSION}::ConfigCore
-    KF${QT_MAJOR_VERSION}::CoreAddons
-    KF${QT_MAJOR_VERSION}::XmlGui
-    KF${QT_MAJOR_VERSION}::KIOWidgets
+    KF6::Wallet
+    KF6::ConfigCore
+    KF6::CoreAddons
+    KF6::XmlGui
+    KF6::KIOWidgets
     krdccore
 )
 

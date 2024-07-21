@@ -19,9 +19,9 @@ ki18n_wrap_ui(krdc_vncplugin
 
 target_link_libraries(krdc_vncplugin
     Qt::Core
-    KF${QT_MAJOR_VERSION}::ConfigCore
-    KF${QT_MAJOR_VERSION}::CoreAddons
-    KF${QT_MAJOR_VERSION}::XmlGui
+    KF6::ConfigCore
+    KF6::CoreAddons
+    KF6::XmlGui
     Qt::Gui
     PkgConfig::VNCCLIENT
     krdccore
@@ -51,10 +51,10 @@ endif()
 
 target_link_libraries(kcm_krdc_vncplugin
     Qt::Core
-    KF${QT_MAJOR_VERSION}::Wallet
-    KF${QT_MAJOR_VERSION}::ConfigCore
-    KF${QT_MAJOR_VERSION}::CoreAddons
-    KF${QT_MAJOR_VERSION}::XmlGui
+    KF6::Wallet
+    KF6::ConfigCore
+    KF6::CoreAddons
+    KF6::XmlGui
     Qt::Gui
     krdccore
 )

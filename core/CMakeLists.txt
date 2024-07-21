@@ -24,13 +24,13 @@ generate_export_header(krdccore BASE_NAME krdccore)
 
 target_link_libraries(krdccore
     Qt::Core
-    KF${QT_MAJOR_VERSION}::Wallet
-    KF${QT_MAJOR_VERSION}::ConfigCore
-    KF${QT_MAJOR_VERSION}::CoreAddons
-    KF${QT_MAJOR_VERSION}::WidgetsAddons
-    KF${QT_MAJOR_VERSION}::I18n
-    KF${QT_MAJOR_VERSION}::ConfigGui
-    KF${QT_MAJOR_VERSION}::Completion
+    KF6::Wallet
+    KF6::ConfigCore
+    KF6::CoreAddons
+    KF6::WidgetsAddons
+    KF6::I18n
+    KF6::ConfigGui
+    KF6::Completion
     Qt::Gui
     Qt::Widgets)
 

@@ -24,14 +24,14 @@ include(ECMDeprecationSettings)
 include(KDEClangFormat)
 include(KDEGitCommitHooks)
 
-find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core)
+find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core)
 
 if (UNIX AND NOT APPLE AND NOT ANDROID)
-    find_package(Qt${QT_MAJOR_VERSION}WaylandClient ${QT_MIN_VERSION} CONFIG)
+    find_package(Qt6WaylandClient ${QT_MIN_VERSION} CONFIG)
     set(HAVE_WAYLAND ${Qt6WaylandClient_FOUND})
 endif()
 
-find_package(KF${QT_MAJOR_VERSION} ${KF_MIN_VERSION} REQUIRED COMPONENTS
+find_package(KF6 ${KF_MIN_VERSION} REQUIRED COMPONENTS
     Config
     KCMUtils
     DNSSD
@@ -49,7 +49,6 @@ find_package(KF${QT_MAJOR_VERSION} ${KF_MIN_VERSION} REQUIRED COMPONENTS
     KIO
 )
 
-if (QT_MAJOR_VERSION STREQUAL "6")
     find_package(KF6StatusNotifierItem ${KF_MIN_VERSION} REQUIRED)
 
     find_package(PlasmaActivities)
@@ -61,19 +60,7 @@ if (QT_MAJOR_VERSION STREQUAL "6")
     if (PlasmaActivities_FOUND)
         set(HAVE_KACTIVITIES TRUE)
     endif()
-else()
-    find_package(KF5 ${KF_MIN_VERSION} OPTIONAL_COMPONENTS Activities)
-    set_package_properties(KF5Activities PROPERTIES DESCRIPTION "KActivities libraries"
-                        URL "https://www.kde.org"
-                        TYPE OPTIONAL
-                        PURPOSE "For tracking which remote desktops are frequently accessed"
-                        )
-    if (KF5Activities_FOUND)
-        set(HAVE_KACTIVITIES TRUE)
-    endif()
-endif()
-
-find_package(KF${QT_MAJOR_VERSION}DocTools)
+find_package(KF6DocTools)
 
 find_package(Threads REQUIRED)
 
@@ -154,10 +141,10 @@ endif()
 
 add_subdirectory(test)
 
-if(KF${QT_MAJOR_VERSION}DocTools_FOUND)
+if(KF6DocTools_FOUND)
     add_subdirectory(doc)
 else()
-    message("KF${QT_MAJOR_VERSION}DocTools not found. Not building documentation.")
+    message("KF6DocTools not found. Not building documentation.")
 endif()
 
 
@@ -197,31 +184,24 @@ ecm_qt_declare_logging_category(krdc
 )
 
 target_link_libraries(krdc
-    KF${QT_MAJOR_VERSION}::ConfigCore
-    KF${QT_MAJOR_VERSION}::KCMUtils
-    KF${QT_MAJOR_VERSION}::DNSSD
-    KF${QT_MAJOR_VERSION}::NotifyConfig
-    KF${QT_MAJOR_VERSION}::Bookmarks
-    KF${QT_MAJOR_VERSION}::IconThemes
-    KF${QT_MAJOR_VERSION}::XmlGui
-    KF${QT_MAJOR_VERSION}::Completion
-    KF${QT_MAJOR_VERSION}::WidgetsAddons
-    KF${QT_MAJOR_VERSION}::NotifyConfig
-    KF${QT_MAJOR_VERSION}::Notifications
+    KF6::ConfigCore
+    KF6::KCMUtils
+    KF6::DNSSD
+    KF6::NotifyConfig
+    KF6::Bookmarks
+    KF6::IconThemes
+    KF6::XmlGui
+    KF6::Completion
+    KF6::WidgetsAddons
+    KF6::NotifyConfig
+    KF6::Notifications
     krdccore
 )
 
-if (QT_MAJOR_VERSION STREQUAL "6")
     target_link_libraries(krdc KF6::StatusNotifierItem KF6::BookmarksWidgets)
-endif()
 
 if (HAVE_KACTIVITIES)
-
-    if (QT_MAJOR_VERSION STREQUAL "6")
         target_link_libraries(krdc Plasma::Activities)
-    else()
-        target_link_libraries(krdc KF5::Activities)
-    endif()
 endif()
 
 install(TARGETS krdc ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
@@ -229,7 +209,7 @@ install(PROGRAMS org.kde.krdc.desktop DESTINATION ${KDE_INSTALL_APPDIR})
 install(FILES org.kde.krdc.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
 
 ki18n_install(po)
-if(KF${QT_MAJOR_VERSION}DocTools_FOUND)
+if(KF6DocTools_FOUND)
     kdoctools_install(po)
 endif()
 
