@@ -17,7 +17,10 @@ build_vnc_qtonly:
     - sed -i -e 's/# deb-src/deb-src/g' /etc/apt/sources.list
     - apt-get update
     - apt-get install --yes eatmydata
-    - eatmydata apt-get build-dep --yes --no-install-recommends krdc
+    # - eatmydata apt-get build-dep --yes --no-install-recommends krdc
+    # We need this while Ubuntu krdc is qt5 based, remove this and uncomment above
+    # once that is no longer true
+    - eatmydata apt-get install --yes cmake g++ extra-cmake-modules qt6-base-dev mesa-common-dev libvncserver-dev
     - eatmydata apt-get install --yes --no-install-recommends ninja-build pkg-config
   script:
     - mkdir -p build && cd build

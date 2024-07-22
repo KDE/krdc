@@ -8,8 +8,8 @@ set (RELEASE_SERVICE_VERSION "${RELEASE_SERVICE_VERSION_MAJOR}.${RELEASE_SERVICE
 
 project(krdc-vnc-qtonly VERSION ${RELEASE_SERVICE_VERSION})
 
-set (QT_MIN_VERSION "5.15.2")
-set (CMAKE_PREFIX_PATH "/usr/lib/x86_64-linux-gnu/qt5")
+set (QT_MIN_VERSION "6.2.0")
+set (CMAKE_PREFIX_PATH "/usr/lib/x86_64-linux-gnu/qt6")
 
 find_package(ECM REQUIRED NO_MODULE)
 set (CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../cmake/modules ${ECM_MODULE_PATH})
@@ -22,7 +22,7 @@ include(ECMQtDeclareLoggingCategory)
 include(FeatureSummary)
 include(ECMDeprecationSettings)
 
-find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core Gui Widgets)
+find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core Gui Widgets)
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(VNCCLIENT libvncclient REQUIRED IMPORTED_TARGET)
 
