@@ -11,7 +11,9 @@
 #include "settings.h"
 
 #include <KAboutData>
+#include <KCrash>
 #include <KLocalizedString>
+
 #include <QCommandLineOption>
 #include <QCommandLineParser>
 #include <QDir>
@@ -54,6 +56,8 @@ int main(int argc, char **argv)
 
     KAboutData::setApplicationData(aboutData);
     app.setWindowIcon(QIcon::fromTheme(appName));
+
+    KCrash::initialize();
 
     QCommandLineParser parser;
     aboutData.setupCommandLine(&parser);

@@ -47,6 +47,7 @@ find_package(KF6 ${KF_MIN_VERSION} REQUIRED COMPONENTS
     NotifyConfig
     I18n
     KIO
+    Crash
 )
 
     find_package(KF6StatusNotifierItem ${KF_MIN_VERSION} REQUIRED)
@@ -195,6 +196,7 @@ target_link_libraries(krdc
     KF6::WidgetsAddons
     KF6::NotifyConfig
     KF6::Notifications
+    KF6::Crash
     krdccore
 )
 
