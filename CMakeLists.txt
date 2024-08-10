@@ -50,17 +50,17 @@ find_package(KF6 ${KF_MIN_VERSION} REQUIRED COMPONENTS
     Crash
 )
 
-    find_package(KF6StatusNotifierItem ${KF_MIN_VERSION} REQUIRED)
+find_package(KF6StatusNotifierItem ${KF_MIN_VERSION} REQUIRED)
 
-    find_package(PlasmaActivities)
-    set_package_properties(PlasmaActivities PROPERTIES DESCRIPTION "KActivities libraries"
-                        URL "https://www.kde.org"
-                        TYPE OPTIONAL
-                        PURPOSE "For tracking which remote desktops are frequently accessed"
-                        )
-    if (PlasmaActivities_FOUND)
-        set(HAVE_KACTIVITIES TRUE)
-    endif()
+find_package(PlasmaActivities)
+set_package_properties(PlasmaActivities PROPERTIES DESCRIPTION "KActivities libraries"
+                    URL "https://www.kde.org"
+                    TYPE OPTIONAL
+                    PURPOSE "For tracking which remote desktops are frequently accessed"
+                    )
+if (PlasmaActivities_FOUND)
+    set(HAVE_KACTIVITIES TRUE)
+endif()
 find_package(KF6DocTools)
 
 find_package(Threads REQUIRED)
@@ -203,7 +203,7 @@ target_link_libraries(krdc
     target_link_libraries(krdc KF6::StatusNotifierItem KF6::BookmarksWidgets)
 
 if (HAVE_KACTIVITIES)
-        target_link_libraries(krdc Plasma::Activities)
+    target_link_libraries(krdc Plasma::Activities)
 endif()
 
 install(TARGETS krdc ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
