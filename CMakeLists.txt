@@ -93,7 +93,7 @@ option(WITH_RDP "Enable RDP support. Has additional runtime binary requirements!
 add_feature_info(RDP WITH_RDP "Building with support for the RDP protocol. Disable with -DWITH_RDP=NO")
 
 ecm_set_disabled_deprecation_versions(QT 5.15.2
-     KF 5.102.0
+     KF 6.5.0
     )
 
 
