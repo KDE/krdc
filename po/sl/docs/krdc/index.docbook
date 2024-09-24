@@ -1,0 +1,622 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Slovenian "INCLUDE"
+> <!-- ONLY If you are writing non-English 
+                                     original documentation, change 
+                                     the language here -->
+    
+  <!-- Do not define any other entities; instead, use the entities
+       from entities/general.entities and $LANG/user.entities. -->
+]>
+<!-- Based on kdoctemplate v0.9 January 10 2003 -->
+
+<book id="krdc" lang="&language;">
+
+<!-- This header contains all of the meta-information for the document such
+as Authors, publish date, the abstract, and Keywords -->
+
+<bookinfo>
+<title
+>Priročnik za &krdc;</title>
+
+<authorgroup>
+<author
+>&Brad.Hards; &Brad.Hards.mail; </author>
+<author
+><firstname
+>Urs</firstname
+> <surname
+>Wolfer</surname
+> <affiliation
+> <address
+><email
+>uwolfer @ kde.org</email
+></address>
+    </affiliation>
+</author>
+<othercredit role="translator"
+><firstname
+>Peter</firstname
+><surname
+>Žaucer</surname
+><affiliation
+><address
+><email
+>peter.zaucer@gmail.com</email
+></address
+></affiliation
+><contrib
+>Prevod</contrib
+></othercredit
+> 
+</authorgroup>
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>25.07.2016</date>
+<releaseinfo
+>Applications 16.08</releaseinfo>
+
+<copyright>
+<year
+>2003, 2008</year>
+</copyright>
+
+<abstract>
+<para
+>&krdc; je odjemalska aplikacija, ki vam omogoča ogled ali celo nadzor namizne seje na drugem računalniku, na katerem se izvaja združljiv strežnik. Podprta sta <acronym
+>VNC</acronym
+> in <acronym
+>RDP</acronym
+>. </para>
+</abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>kdenetwork</keyword>
+<keyword
+>krfb</keyword>
+<keyword
+>VNC</keyword>
+<keyword
+>RFB</keyword>
+<keyword
+>krdc</keyword>
+<keyword
+>Skupna raba namizja</keyword>
+<keyword
+>Oddaljen dostop</keyword>
+<keyword
+>Pomoč na daljavo</keyword>
+<keyword
+>Oddaljeno namizje</keyword>
+<keyword
+>RDP</keyword>
+<keyword
+>Oddaljeno upravljanje</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Uvod</title>
+
+<para
+>&krdc; je odjemalska aplikacija, ki vam omogoča ogled ali celo nadzor namizne seje na drugem računalniku, na katerem se izvaja združljiv strežnik. </para>
+
+<para
+>Običajno bi uporabili &krdc; z &kde; <acronym
+>VNC</acronym
+> strežnikom (&krfb;), ki je znan tudi kot Krfb, saj se zelo ujema s posebnimi funkcijami &krdc;ja. </para>
+
+<para
+>Če želite zagnati &krdc; iz &konsole;, uporabite ukaz <userinput
+><command
+>krdc</command
+></userinput
+>. </para>
+
+<para
+>Morebitne težave ali želje po funkcijah sporočite &kde; poštnemu seznamu ali prijavite napako na <ulink url="https://bugs.kde.org"
+>https://bugs.kde.org</ulink
+>. </para>
+</chapter>
+
+<chapter id="what-is-RFB">
+<title
+>Protokol Remote Frame Buffer</title>
+
+<para
+>V tem poglavju je kratek opis protokola Remote Frame Buffer, ki ga uporablja &krdc; in z drugimi združljivimi sistemi. Če že poznate Remote Frame Buffer, lahko mirno preskočite to poglavje. </para>
+
+<para
+>Izvedba sistema na visoki ravni, ki uporablja protokol Remote Frame Buffer, je znana kot navidezni omrežni računalnik ali bolj pogosto samo kot <acronym
+>VNC</acronym
+>. </para>
+
+<para
+>Remote Frame Buffer (ali na kratko <acronym
+>RFB</acronym
+>) je preprost protokol za oddaljeni dostop do grafičnih uporabniških vmesnikov. Deluje na ravni okvirnega medpomnilnika, ki približno ustreza upodobljeni sliki zaslona, kar pomeni, da ga je mogoče uporabiti za vse okenske sisteme (vključno z X11, &MacOS; in &Microsoft; &Windows;). Aplikacije Remote Frame Buffer obstajajo za številne platforme in jih je pogosto mogoče brezplačno ponovno distribuirati. </para>
+
+<para
+>V protokolu Remote Frame Buffer se aplikacija, ki se izvaja na napravi, kjer sedi uporabnik (ki vsebuje zaslon, tipkovnico in kazalec), imenuje odjemalec. Aplikacija, ki se izvaja na računalniku, kjer je medpomnilnik okvirjev (ki izvaja okenski sistem in aplikacije, ki jih uporabnik nadzoruje na daljavo), se imenuje strežnik. &krdc; je &kde; odjemalec za protokol Remote Frame Buffer. &krfb; je &kde; strežnik za protokol Remote Frame Buffer. </para>
+
+<para
+>Za pošiljanje slike medpomnilnika okvirjev je potrebna razumna količina omrežnega prometa, zato Remote Frame Buffer najbolje deluje prek povezav z visoko pasovno širino, kot je lokalno omrežje. Še vedno je mogoče uporabljati &krdc; nad drugimi povezavami, vendar učinkovitost verjetno ne bo tako dobra. </para>
+
+</chapter>
+
+<chapter id="using-krdc">
+<title
+>Uporaba &krdc;</title>
+
+<para
+>&krdc; je zelo enostaven za uporabo - ima preprost vmesnik, kot je prikazano na spodnjem posnetku zaslona. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>Tukaj je posnetek zaslona &krdc;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="krdc_mainwindow.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>glavno okno &krdc;</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<sect1 id="compatible-versions"
+><title
+>Povezovanje &krdc; na združljive strežnike</title>
+
+<para
+>&krdc; je odjemalec in ga je treba uporabljati z združljivimi strežniki. Na te strežnike se lahko povežete na različne načine: </para>
+
+<itemizedlist>
+<listitem>
+<para
+>Neposredno vnos imena strežnika (ali naslova IP) v vnos <guilabel
+>Poveži se z:</guilabel
+>.</para
+> 
+</listitem>
+<listitem>
+<para
+>Z uporabo povabila, ki ste ga prejeli. &krfb; uporablja vabila in jih lahko pošlje po e-pošti.</para>
+</listitem>
+</itemizedlist>
+
+<para
+>Poglejmo vsako od teh po vrsti. </para>
+
+<sect2
+><title
+>Vnos imena strežnika</title>
+<para
+>Če poznate ime gostitelja (ali naslov IP) strežnika, s katerim se želite povezati, ga lahko vnesete neposredno v vnos <guilabel
+>Poveži se z:</guilabel
+>. </para>
+
+<para
+>Če se želite povezati z računalnikom z imenom megan, ki izvaja strežnik <acronym
+>VNC</acronym
+> na zaslonu 1 (5901), lahko vnesete <userinput
+>megan:1</userinput
+> ali <userinput
+>megan:5901</userinput
+> in v spustnem polju izberite <guilabel
+>vnc</guilabel
+> kot protokol. </para>
+<para>
+<screenshot>
+<screeninfo
+>Vnos imena gostitelja v &krdc;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="address_input.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Vnos imena gostitelja v &krdc;</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Podobno, če na tem računalniku uporabljate strežnik <acronym
+>RDP</acronym
+>, lahko vnesete <userinput
+>megan</userinput
+>. Za protokol izberite <guilabel
+>rdp</guilabel
+>. <acronym
+>RDP</acronym
+> ne potrebuje podajanja številke zaslona. Če strežnik izvaja strežnik <acronym
+>RDP</acronym
+>, ki ni na privzetih vratih, ga lahko podate na naslednji način: <userinput
+>megan:3910</userinput
+> </para>
+<para
+>Vnesti morate &URL; v odstotno kodirani sintaksi, tj. @ kot %40, npr. <userinput
+>uporabniško ime%40ad.domain.example</userinput
+> </para>
+<!--https://bugs.kde.org/show_bug.cgi?id=261076-->
+
+</sect2>
+
+<sect2
+><title
+>Uporaba vabila</title>
+<para
+>Znotraj &krfb; strežniške aplikacije, je možno pošiljanje vabil preko e-pošte (in na druge načine, čeprav je e-pošta najbolj uporabna). Če prejmete tovrstno e-poštno povabilo, lahko preprosto kliknete povezavo, ki je navedena v e-pošti. To bo zagnalo &krdc; če se še ne izvaja, in se poveže s strežnikom, navedenim v povabilu. </para>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="connection"
+><title
+>Kaj se zgodi, ko se povežete</title>
+
+<para
+>Opozorilo: Pred povezavo se prepričajte, da je ciljni računalnik (strežnik) na voljo v omrežju in, če je potrebno, da je njegov požarni zid pravilno konfiguriran ali onemogočen. </para>
+
+<para
+>Ne glede na to, kako izberete strežnik za povezavo, je naslednja stvar, ki se zgodi, da vas &krdc; vpraša o omrežni povezavi s strežnikom, kot je prikazano spodaj: </para>
+
+<para>
+<screenshot>
+<screeninfo
+>&krdc; izbira hitrosti povezave</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="vnc_host_configuration.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>&krdc; izbira hitrosti povezave</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Obstajajo tri nastavitve hitrosti za protokol <acronym
+>VNC</acronym
+>: </para>
+
+<itemizedlist>
+<listitem
+><para
+>Visoka kakovost (LAN, neposredna povezava), kar je privzeto, in ocenite, kako dobro deluje ta nastavitev, preden izberete možnost nižje zmogljivosti, ki uporablja manj pasovne širine. </para
+></listitem>
+<listitem
+><para
+>Srednja kakovost (DSL, kabel, hiter internet).</para
+></listitem>
+<listitem
+><para
+>Nizka kakovost (modem, ISDN, počasen internet).</para
+></listitem>
+</itemizedlist>
+
+<para
+>Če vedno delujete prek iste vrste povezave, lahko počistite potrditveno polje z oznako <guilabel
+>Ponovno prikaži to pogovorno okno za tega gostitelja</guilabel
+>, kar pomeni, da ne boste več vprašani o vrsti povezave za tega gostitelja, če ga identificirate na enak način. Na primer, če ima gostitelj dve imeni in počistite potrditveno polje pri povezovanju z enim imenom, ne boste pozvani, če se povezujete s tem imenom, čeprav boste vprašani, ali uporabljate drugo ime ali naslov IP. </para>
+
+<para
+>Izberete ustrezno nastavitev hitrosti in izberete <guibutton
+>V redu</guibutton
+> za nadaljevanje. </para>
+
+<para
+>Stanje povezave lahko vidite v ikoni v zavihku. </para>
+
+<para
+>Odvisno od konfiguracije strežnika boste morda (in skoraj zagotovo boste) morali vnesti geslo za preverjanje pristnosti strežnika. &krdc; prikaže pogovorno okno za geslo, podobno tistemu, ki je prikazano spodaj. </para>
+
+<para
+>&krdc; ima možnost shranjevanja gesla za nadaljnje povezave z istim gostiteljem. Za to uporablja KWallet. Če želite uporabljati to funkcijo, potrdite polje <guibutton
+>Zapomni si geslo (KWallet)</guibutton
+>. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>&krdc; vnos gesla</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="password_entry.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>&krdc; vnos gesla</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Po preverjanju pristnosti boste povezani z oddaljenim strežnikom in lahko začnete uporabljati &krdc; za opazovanje ali nadzor oddaljenega namizja. </para>
+
+</sect1>
+
+<sect1 id="controlling-remote"
+><title
+>Nadzor povezave z oddaljenim namizjem</title>
+
+<para
+>Ko se povežete z oddaljenim strežnikom, bi običajno uporabljali tipkovnico in miško za nadzor okenskega sistema in aplikacij na tem oddaljenem računalniku. </para>
+
+<para
+>Oddaljeno namizje si lahko ogledate v celozaslonskem načinu ali kot okno na lokalnem namizju. Med temi načini lahko preklapljate z uporabo spodnjih ikon. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>&krdc; izbira celozaslonskega načina</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="view-fullscreen.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>&krdc; izbira celozaslonskega načina</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+<screenshot>
+<screeninfo
+>&krdc; izbira okenskega načina</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="view-restore.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>&krdc; izbira okenskega načina</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Celozaslonski način je običajno boljši, ko pomagate oddaljenemu uporabniku, saj lahko vidite vse, kar vidijo oni. Okenski način je najbolj uporaben, ko delate na daljavo in lokalno - morda se sklicujete na lokalno dokumentacijo in nato uporabite ta navodila na oddaljenem računalniku. </para>
+
+<sect2
+><title
+>Uporaba okenskega načina</title>
+
+<para
+>V okenskem načinu lahko prekinete povezavo tako, da zaprete okno, s klikom na gumb za odjavo. </para>
+
+</sect2>
+
+<sect2
+><title
+>Uporaba celozaslonskega načina</title>
+
+<para
+>V celozaslonskem načinu lahko spremenite videz orodne vrstice. Preglednost orodne vrstice lahko spremenite z drsnim kolescem. </para>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="bookmarks"
+><title
+>Zaznamki</title>
+
+<para
+>&krdc; ima možnost upravljanja zaznamkov. Če se morate pogosto povezovati z istim oddaljenim namizjem, lahko dodate vnos za to povezavo na seznam zaznamkov. To lahko storite s klikom na <menuchoice
+><guimenu
+>Zaznamki</guimenu
+> <guimenuitem
+>Dodaj zaznamek</guimenuitem
+></menuchoice
+>. </para>
+
+<para>
+<screenshot>
+<screeninfo
+>&krdc; meni z zaznamki</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="bookmarks_menu.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>&krdc; meni z zaznamki</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+
+<sect2
+><title
+>Zgodovina zaznamkov</title>
+
+<para
+>&krdc; shrani zadnje uporabljene povezave oddaljenega namizja. Do teh posebnih zaznamkov lahko dostopate v <menuchoice
+><guimenu
+>Zaznamki</guimenu
+><guimenuitem
+>Zgodovina</guimenuitem
+></menuchoice
+>. Seveda lahko tudi izbrišete zaznamek s tega seznama, če ga na seznamu ne potrebujete več. Samo kliknite <guibutton
+>Izbriši zaznamek</guibutton
+>, ki se prikaže po kliku z desnim gumbom miške na zaznamek, ki ga želite izbrisati. </para>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="managing-configuration"
+><title
+>Upravljanje &krdc; konfiguracije</title>
+<para
+>Z <menuchoice
+><guimenu
+>Nastavitve</guimenu
+><guimenuitem
+>Konfiguriraj KRDC...</guimenuitem
+></menuchoice
+> lahko odprete pogovorno okno za spreminjanje delovanja &krdc;. Če izberete ta gumb, se prikaže okno, kot je prikazano spodaj: </para>
+
+<para>
+<screenshot>
+<screeninfo
+>&krdc; nastavitve - zavihek Splošno</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="general_preferences.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>&krdc; nastavitve - zavihek <guilabel
+>Splošno</guilabel
+></phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+<screenshot>
+<screeninfo
+>&krdc; nastavitve - zavihek <guilabel
+>Privzete nastavitve VNC</guilabel
+></screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="vnc_preferences.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>&krdc; nastavitve - zavihek profilov <guilabel
+>Privzete nastavitve VNC</guilabel
+></phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>
+<screenshot>
+<screeninfo
+>&krdc; nastavitve - zavihek <guilabel
+>Privzete nastavitve RDP</guilabel
+></screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="rdp_preferences.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>&krdc; nastavitve - zavihek profilov <guilabel
+>Privzete nastavitve RDP</guilabel
+></phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+
+</sect1>
+
+</chapter>
+
+<chapter id="faq">
+<title
+>Vprašanja in odgovori</title>
+
+<!-- (OPTIONAL but recommended) This chapter should include all of the silly
+(and not-so-silly) newbie questions that fill up your mailbox. This chapter
+should be reserved for BRIEF questions and answers! If one question uses more
+than a page or so then it should probably be part of the
+"Using this Application" chapter instead. You should use links to
+cross-reference questions to the parts of your documentation that answer them.
+This is also a great place to provide pointers to other FAQ's if your users
+must do some complicated configuration on other programs in order for your
+application work. -->
+
+<qandaset id="faqlist">
+<qandaentry>
+<question>
+<para
+>Zakaj podpora <acronym
+>RDP</acronym
+> ne deluje?</para>
+</question>
+<answer>
+<para
+>Podpora <acronym
+>RDP</acronym
+> v &krdc; je odvisna od xfreerdp (FreeRDP). Prepričajte se, da ste namestili to odvisnost med izvajanjem. </para>
+</answer>
+</qandaentry>
+</qandaset>
+
+</chapter>
+
+<chapter id="credits">
+
+<!-- Include credits for the programmers, documentation writers, and
+contributors here. The license for your software should then be included below
+the credits with a reference to the appropriate license file included in the K D E
+distribution. -->
+
+<title
+>Zasluge in licenca</title>
+
+<para
+>&krdc; </para>
+<para
+>&krdc; projekt je začel Tim Jansen <email
+>tim@tjansen.de</email
+>. Kot projekt Google Summer of Code 2007 je Urs Wolfer <email
+>uwolfer @ kde.org</email
+> v celoti prepisal &krdc;. Hvala Googlu, da je to omogočil, in hvala velikemu mentorju tega projekta Summer of Code, &Brad.Hards; &Brad.Hards.mail;. </para>
+
+<para
+>Avtorske pravice dokumentacije &copy; 2003 &Brad.Hards; &Brad.Hards.mail; Avtorske pravice dokumentacije &copy; 2007 Urs Wolfer <email
+>uwolfer @ kde.org</email
+> </para>
+
+<para
+>Prevod: Peter Žaucer<email
+>peter.zaucer@gmail.com</email
+></para
+> &underFDL; &underGPL; </chapter>
+
+&documentation.index;
+</book>
+
+<!--
+Local Variables:
+mode: xml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+
+vim:tabstop=2:shiftwidth=2:expandtab 
+-->
