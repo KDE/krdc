@@ -30,9 +30,7 @@
 #include <freerdp/gdi/gfx.h>
 #include <freerdp/input.h>
 #include <winpr/synch.h>
-#ifdef Q_OS_UNIX
 #include <freerdp/locale/keyboard.h>
-#endif
 
 #include "rdpview.h"
 
@@ -505,7 +503,9 @@ bool RdpSession::start()
     }
 
     m_thread = std::thread(std::bind(&RdpSession::run, this));
+#ifndef _WIN32
     pthread_setname_np(m_thread.native_handle(), "rdp_session");
+#endif
 
     return true;
 }

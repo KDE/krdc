@@ -21,7 +21,7 @@ class MainWindow;
  * Widget Action to display slider in the action toolbar. Each time action is
  * add, the new QSlider widget is created via @ref createWidget() method.
  */
-class KRDCCORE_EXPORT FactorWidget : public QWidgetAction
+class FactorWidget : public QWidgetAction
 {
     Q_OBJECT
 
