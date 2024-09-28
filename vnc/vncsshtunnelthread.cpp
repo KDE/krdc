@@ -10,12 +10,27 @@
 
 #include <KLocalizedString>
 
+#ifdef Q_OS_WIN
+#define _WINSOCK_DEPRECATED_NO_WARNINGS
+#include <winsock2.h>
+#include <ws2tcpip.h>
+#include <windows.h>
+#include <io.h>
+#else
 #include <arpa/inet.h>
-#include <fcntl.h>
 #include <netinet/in.h>
 #include <sys/socket.h>
+#include <fcntl.h>
+//#include <unistd.h>
+#endif
 
 #include <QDebug>
+
+#ifdef Q_OS_WIN
+#define close closesocket
+#define read _read
+#define write _write
+#endif
 
 VncSshTunnelThread::VncSshTunnelThread(const QByteArray &host, int vncPort, int tunnelPort, int sshPort, const QByteArray &sshUserName, bool loopback)
     : m_host(host)
@@ -26,12 +41,19 @@ VncSshTunnelThread::VncSshTunnelThread(const QByteArray &host, int vncPort, int 
     , m_loopback(loopback)
     , m_stop_thread(false)
 {
+#ifdef Q_OS_WIN
+    WSADATA wsaData;
+    WSAStartup(MAKEWORD(2, 2), &wsaData);
+#endif
 }
 
 VncSshTunnelThread::~VncSshTunnelThread()
 {
     m_stop_thread = true;
     wait();
+#ifdef Q_OS_WIN
+    WSACleanup();
+#endif
 }
 
 int VncSshTunnelThread::tunnelPort() const
@@ -101,7 +123,8 @@ void VncSshTunnelThread::run()
     }
 
     // First try authenticating via ssh agent
-    res = ssh_userauth_agent(session, nullptr);
+    // res = ssh_userauth_agent(session, nullptr);
+    res = ssh_userauth_publickey_auto(session, nullptr, nullptr);
 
     m_passwordRequestCanceledByUser = false;
     if (res != SSH_AUTH_SUCCESS) {
@@ -134,7 +157,11 @@ void VncSshTunnelThread::run()
     cleanup.server_sock = server_sock;
 
     // so that we can bind more than once in case more than one tunnel is used
+#ifdef Q_OS_WIN
+    char sockopt = 1;
+#else
     int sockopt = 1;
+#endif
     setsockopt(server_sock, SOL_SOCKET, SO_REUSEADDR, &sockopt, sizeof(sockopt));
 
     {
@@ -186,8 +213,13 @@ void VncSshTunnelThread::run()
 
         cleanup.client_sock = client_sock;
 
+#ifdef Q_OS_WIN
+        u_long mode = 1;
+        ioctlsocket(client_sock, FIONBIO, &mode);
+#else
         int sock_flags = fcntl(client_sock, F_GETFL, 0);
         fcntl(client_sock, F_SETFL, sock_flags | O_NONBLOCK);
+#endif
     }
 
     ssh_channel forwarding_channel = ssh_channel_new(session);

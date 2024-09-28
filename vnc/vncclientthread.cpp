@@ -12,11 +12,19 @@
 #include <QMutexLocker>
 #include <QPixmap>
 #include <QTimer>
+
 #include <cerrno>
+
+#ifdef Q_OS_WIN
+#include <winsock2.h>
+#include <ws2tcpip.h>
+#include <mstcpip.h>
+#else
 #include <netinet/in.h>
 #include <netinet/tcp.h>
 #include <sys/socket.h>
 #include <sys/types.h>
+#endif
 
 // for detecting intel AMT KVM vnc server
 static const QString INTEL_AMT_KVM_STRING = QLatin1String("Intel(r) AMT KVM");
@@ -647,16 +655,37 @@ void VncClientThread::clientSetKeepalive()
     if (!m_keepalive.intervalSeconds) {
         return;
     }
+
+#ifdef Q_OS_WIN
+    DWORD optval;
+    int optlen = sizeof(optval);
+#else
     int optval;
     socklen_t optlen = sizeof(optval);
+#endif
 
     // Try to set the option active
     optval = 1;
+#ifdef Q_OS_WIN
+    if (setsockopt(cl->sock, SOL_SOCKET, SO_KEEPALIVE, reinterpret_cast<const char*>(&optval), optlen) < 0) {
+#else
     if (setsockopt(cl->sock, SOL_SOCKET, SO_KEEPALIVE, &optval, optlen) < 0) {
+#endif
         qCritical(KRDC) << "setsockopt(SO_KEEPALIVE)" << strerror(errno);
         return;
     }
 
+#ifdef Q_OS_WIN
+    tcp_keepalive alive;
+    alive.onoff = 1;
+    alive.keepalivetime = m_keepalive.intervalSeconds * 1000;
+    alive.keepaliveinterval = m_keepalive.intervalSeconds * 1000;
+    DWORD dwBytesRet = 0;
+    if (WSAIoctl(cl->sock, SIO_KEEPALIVE_VALS, &alive, sizeof(alive), NULL, 0, &dwBytesRet, NULL, NULL) == SOCKET_ERROR) {
+        qCritical(KRDC) << "WSAIoctl(SIO_KEEPALIVE_VALS)" << WSAGetLastError();
+        return;
+    }
+#else
     optval = m_keepalive.intervalSeconds;
     if (setsockopt(cl->sock, IPPROTO_TCP, TCP_KEEPIDLE, &optval, optlen) < 0) {
         qCritical(KRDC) << "setsockopt(TCP_KEEPIDLE)" << strerror(errno);
@@ -674,6 +703,8 @@ void VncClientThread::clientSetKeepalive()
         qCritical(KRDC) << "setsockopt(TCP_KEEPCNT)" << strerror(errno);
         return;
     }
+#endif
+
     m_keepalive.set = true;
     qCDebug(KRDC) << "TCP keepalive set";
 }
