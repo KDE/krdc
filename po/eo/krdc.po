@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-09 00:39+0000\n"
+"POT-Creation-Date: 2024-10-17 00:40+0000\n"
 "PO-Revision-Date: 2024-04-27 22:28+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -195,12 +195,12 @@ msgstr "Agordu..."
 msgid "Remove"
 msgstr "Forigi"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:283 mainwindow.cpp:678
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:300 mainwindow.cpp:695
 #, kde-format
 msgid "Unusable URL"
 msgstr "Neuzebla URL"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:678
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:695
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr "La elektita gastiganto ne povas esti pritraktata."
@@ -432,8 +432,8 @@ msgstr "URL-oj por konekti post ekfunkciigo"
 msgid "KDE Remote Desktop Client started"
 msgstr "KDE Remote Desktop Kliento komenciĝis"
 
-#: mainwindow.cpp:129 mainwindow.cpp:142 mainwindow.cpp:1083
-#: mainwindow.cpp:1178
+#: mainwindow.cpp:129 mainwindow.cpp:142 mainwindow.cpp:1100
+#: mainwindow.cpp:1195
 #, kde-format
 msgid "New Connection"
 msgstr "Nova Konekto"
@@ -448,12 +448,12 @@ msgstr "Kopii Ekrankapton al Tondujo"
 msgid "Screenshot"
 msgstr "Ekrankopio"
 
-#: mainwindow.cpp:155 mainwindow.cpp:501
+#: mainwindow.cpp:155 mainwindow.cpp:518
 #, kde-format
 msgid "Switch to Full Screen Mode"
 msgstr "Ŝalti al Plenekrana Reĝimo"
 
-#: mainwindow.cpp:156 mainwindow.cpp:502
+#: mainwindow.cpp:156 mainwindow.cpp:519
 #, kde-format
 msgid "Full Screen"
 msgstr "Plenekrano"
@@ -508,7 +508,17 @@ msgstr "Skalfaktoro"
 msgid "Bookmarks"
 msgstr "Legosignoj"
 
-#: mainwindow.cpp:262
+#: mainwindow.cpp:273
+#, kde-format
+msgid "Unable to load connection data from the provided file."
+msgstr ""
+
+#: mainwindow.cpp:273
+#, kde-format
+msgid "Load failed"
+msgstr ""
+
+#: mainwindow.cpp:279
 #, kde-format
 msgid ""
 "The entered address does not have the required form.\n"
@@ -517,146 +527,146 @@ msgstr ""
 "La enigita adreso ne havas la bezonatan formon.\n"
 " Sintakso: [uzantnomo@]gastiganto[:porto]"
 
-#: mainwindow.cpp:262
+#: mainwindow.cpp:279
 #, kde-format
 msgid "Malformed URL"
 msgstr "Misformita URL"
 
-#: mainwindow.cpp:283
+#: mainwindow.cpp:300
 #, kde-format
 msgid "The entered address cannot be handled."
 msgstr "La enigita adreso ne povas esti pritraktata."
 
-#: mainwindow.cpp:418
+#: mainwindow.cpp:435
 #, kde-format
 msgid "Connecting to %1"
 msgstr "Konektante al %1"
 
-#: mainwindow.cpp:422
+#: mainwindow.cpp:439
 #, kde-format
 msgid "Authenticating at %1"
 msgstr "Aŭtentikigo ĉe %1"
 
-#: mainwindow.cpp:426
+#: mainwindow.cpp:443
 #, kde-format
 msgid "Preparing connection to %1"
 msgstr "Preparante konekton al %1"
 
-#: mainwindow.cpp:430
+#: mainwindow.cpp:447
 #, kde-format
 msgid "Connected to %1"
 msgstr "Konektita al %1"
 
-#: mainwindow.cpp:512
+#: mainwindow.cpp:529
 #, kde-format
 msgctxt ""
 "window title when in full screen mode (for example displayed in tasklist)"
 msgid "KDE Remote Desktop Client (Full Screen)"
 msgstr "KDE Malproksima Labortabla Kliento (Plena Ekrano)"
 
-#: mainwindow.cpp:545
+#: mainwindow.cpp:562
 #, kde-format
 msgid "Switch to Window Mode"
 msgstr "Ŝanĝi al Fenestra Reĝimo"
 
-#: mainwindow.cpp:546
+#: mainwindow.cpp:563
 #, kde-format
 msgid "Window Mode"
 msgstr "Fenestra Reĝimo"
 
-#: mainwindow.cpp:697
+#: mainwindow.cpp:714
 #, kde-format
 msgid "Connect"
 msgstr "Konekti"
 
-#: mainwindow.cpp:698
+#: mainwindow.cpp:715
 #, kde-format
 msgid "Rename"
 msgstr "Alinomi"
 
-#: mainwindow.cpp:699
+#: mainwindow.cpp:716
 #, kde-format
 msgid "Settings"
 msgstr "Agordoj"
 
-#: mainwindow.cpp:700
+#: mainwindow.cpp:717
 #, kde-format
 msgid "Delete"
 msgstr "Forigi"
 
-#: mainwindow.cpp:703 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:720 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "Legosignoj"
 
-#: mainwindow.cpp:703 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:720 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "Historio"
 
-#: mainwindow.cpp:715
+#: mainwindow.cpp:732
 #, kde-format
 msgid "Rename %1"
 msgstr "Alinomi %1"
 
-#: mainwindow.cpp:715
+#: mainwindow.cpp:732
 #, kde-format
 msgid "Rename %1 to"
 msgstr "Alinomi %1 al"
 
-#: mainwindow.cpp:722
+#: mainwindow.cpp:739
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "Ĉu vi certas, ke vi volas forigi %1?"
 
-#: mainwindow.cpp:722
+#: mainwindow.cpp:739
 #, kde-format
 msgid "Delete %1"
 msgstr "Forigi %1"
 
-#: mainwindow.cpp:746
+#: mainwindow.cpp:763
 #, kde-format
 msgid "Add Bookmark"
 msgstr "Aldoni legosignon"
 
-#: mainwindow.cpp:747
+#: mainwindow.cpp:764
 #, kde-format
 msgid "Close Tab"
 msgstr "Fermi la Langeton"
 
-#: mainwindow.cpp:851
+#: mainwindow.cpp:868
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr "Minimumigi Plenekranan Fenestron"
 
-#: mainwindow.cpp:867
+#: mainwindow.cpp:884
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "Stika Ilobreto"
 
-#: mainwindow.cpp:976
+#: mainwindow.cpp:993
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr "Ĉu vi certas, ke vi volas forlasi la KDE Remote Desktop Client?"
 
-#: mainwindow.cpp:977
+#: mainwindow.cpp:994
 #, kde-format
 msgid "Confirm Quit"
 msgstr "Konfirmi Forlasi"
 
-#: mainwindow.cpp:1106
+#: mainwindow.cpp:1123
 #, kde-format
 msgid "Connect to:"
 msgstr "Konekti al:"
 
-#: mainwindow.cpp:1110
+#: mainwindow.cpp:1127
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr "Tajpu ĉi tie por konektiĝi al adreso kaj filtri la liston."
 
-#: mainwindow.cpp:1119
+#: mainwindow.cpp:1136
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
@@ -665,17 +675,17 @@ msgstr ""
 "Tajpu IP aŭ DNS-Nomon ĉi tie. Forigu la linion por ricevi liston de "
 "konektometodoj."
 
-#: mainwindow.cpp:1122
+#: mainwindow.cpp:1139
 #, kde-format
 msgid "Goto Address"
 msgstr "Iri al Adreso"
 
-#: mainwindow.cpp:1214
+#: mainwindow.cpp:1231
 #, kde-format
 msgid "Remote Desktops"
 msgstr "Foraj Labortabloj"
 
-#: mainwindow.cpp:1243
+#: mainwindow.cpp:1260
 #, kde-format
 msgid "Filter"
 msgstr "Filtrilo"
@@ -1435,17 +1445,17 @@ msgctxt "@label"
 msgid "An unknown error occurred"
 msgstr "Nekonata eraro okazis"
 
-#: rdp/rdpviewfactory.cpp:22
+#: rdp/rdpviewfactory.cpp:25
 #, kde-format
 msgid "Connect to a Windows Remote Desktop (RDP)"
 msgstr "Konekti al Vindoza Malproksima Labortablo (RDP)"
 
-#: rdp/rdpviewfactory.cpp:51
+#: rdp/rdpviewfactory.cpp:101
 #, kde-format
 msgid "New RDP Connection..."
 msgstr "Nova RDP-Konekto..."
 
-#: rdp/rdpviewfactory.cpp:62
+#: rdp/rdpviewfactory.cpp:112
 #, kde-format
 msgid ""
 "<html>Enter the address here. Port is optional.<br /><i>Example: "

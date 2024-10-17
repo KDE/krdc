@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-09 00:39+0000\n"
+"POT-Creation-Date: 2024-10-17 00:40+0000\n"
 "PO-Revision-Date: 2024-04-29 11:25+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -195,12 +195,12 @@ msgstr "მორგება..."
 msgid "Remove"
 msgstr "წაშლა"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:283 mainwindow.cpp:678
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:300 mainwindow.cpp:695
 #, kde-format
 msgid "Unusable URL"
 msgstr "გამოუყენებადი URL"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:678
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:695
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr "მითითებული ჰოსტის მართვა შეუძლებელია."
@@ -431,8 +431,8 @@ msgstr "ბმულები გაშვების შემდეგ მი
 msgid "KDE Remote Desktop Client started"
 msgstr "KDE Remote Desktop -ს კლიენტი გაეშვა"
 
-#: mainwindow.cpp:129 mainwindow.cpp:142 mainwindow.cpp:1083
-#: mainwindow.cpp:1178
+#: mainwindow.cpp:129 mainwindow.cpp:142 mainwindow.cpp:1100
+#: mainwindow.cpp:1195
 #, kde-format
 msgid "New Connection"
 msgstr "ახალი შეერთება"
@@ -447,12 +447,12 @@ msgstr "ეკრანის ანაბეჭდის ბუფერში 
 msgid "Screenshot"
 msgstr "ეკრანის ანაბეჭდი"
 
-#: mainwindow.cpp:155 mainwindow.cpp:501
+#: mainwindow.cpp:155 mainwindow.cpp:518
 #, kde-format
 msgid "Switch to Full Screen Mode"
 msgstr "სრულეკრანიანი რეჟიმზე გადასვლა"
 
-#: mainwindow.cpp:156 mainwindow.cpp:502
+#: mainwindow.cpp:156 mainwindow.cpp:519
 #, kde-format
 msgid "Full Screen"
 msgstr "სრულეკრანიანი რეჟიმი"
@@ -507,7 +507,17 @@ msgstr "გადიდების მასშტაბი"
 msgid "Bookmarks"
 msgstr "სანიშნები"
 
-#: mainwindow.cpp:262
+#: mainwindow.cpp:273
+#, kde-format
+msgid "Unable to load connection data from the provided file."
+msgstr ""
+
+#: mainwindow.cpp:273
+#, kde-format
+msgid "Load failed"
+msgstr ""
+
+#: mainwindow.cpp:279
 #, kde-format
 msgid ""
 "The entered address does not have the required form.\n"
@@ -516,147 +526,147 @@ msgstr ""
 "მითითებული მისამართის ფორმა არასწორია.\n"
 "სინტაქსი: [მომხმარებელი@]ჰოსტი[:პორტი]"
 
-#: mainwindow.cpp:262
+#: mainwindow.cpp:279
 #, kde-format
 msgid "Malformed URL"
 msgstr "არასწორი URL"
 
-#: mainwindow.cpp:283
+#: mainwindow.cpp:300
 #, kde-format
 msgid "The entered address cannot be handled."
 msgstr "შეყვანილი მისამართის დამუშავება შეუძლებელია."
 
-#: mainwindow.cpp:418
+#: mainwindow.cpp:435
 #, kde-format
 msgid "Connecting to %1"
 msgstr "%1-სთან შეერთება"
 
-#: mainwindow.cpp:422
+#: mainwindow.cpp:439
 #, kde-format
 msgid "Authenticating at %1"
 msgstr "%1-ზე ავთენტიკაცია"
 
-#: mainwindow.cpp:426
+#: mainwindow.cpp:443
 #, kde-format
 msgid "Preparing connection to %1"
 msgstr "%1-თან მიერთების მომზადება"
 
-#: mainwindow.cpp:430
+#: mainwindow.cpp:447
 #, kde-format
 msgid "Connected to %1"
 msgstr "შეერთებული %1-სთან"
 
-#: mainwindow.cpp:512
+#: mainwindow.cpp:529
 #, kde-format
 msgctxt ""
 "window title when in full screen mode (for example displayed in tasklist)"
 msgid "KDE Remote Desktop Client (Full Screen)"
 msgstr "KDE Remote Desktop -ის კლიენტი (მთელ ეკრანზე)"
 
-#: mainwindow.cpp:545
+#: mainwindow.cpp:562
 #, kde-format
 msgid "Switch to Window Mode"
 msgstr "ფანჯრის რეჟიმზე გადართვა"
 
-#: mainwindow.cpp:546
+#: mainwindow.cpp:563
 #, kde-format
 msgid "Window Mode"
 msgstr "ფანჯრის რეჟიმი"
 
-#: mainwindow.cpp:697
+#: mainwindow.cpp:714
 #, kde-format
 msgid "Connect"
 msgstr "დაკავშირება"
 
-#: mainwindow.cpp:698
+#: mainwindow.cpp:715
 #, kde-format
 msgid "Rename"
 msgstr "გადარქმევა"
 
-#: mainwindow.cpp:699
+#: mainwindow.cpp:716
 #, kde-format
 msgid "Settings"
 msgstr "მორგება"
 
-#: mainwindow.cpp:700
+#: mainwindow.cpp:717
 #, kde-format
 msgid "Delete"
 msgstr "წაშლა"
 
-#: mainwindow.cpp:703 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:720 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "სანიშნები"
 
-#: mainwindow.cpp:703 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:720 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "ისტორია"
 
-#: mainwindow.cpp:715
+#: mainwindow.cpp:732
 #, kde-format
 msgid "Rename %1"
 msgstr "%1-ის გადარქმევა"
 
-#: mainwindow.cpp:715
+#: mainwindow.cpp:732
 #, kde-format
 msgid "Rename %1 to"
 msgstr "%1-ის გადარქმევა"
 
-#: mainwindow.cpp:722
+#: mainwindow.cpp:739
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "დარწმუნებული ბრძანდებით, რომ გნებავთ %1-ის წაშლა?"
 
-#: mainwindow.cpp:722
+#: mainwindow.cpp:739
 #, kde-format
 msgid "Delete %1"
 msgstr "%1-ის წაშლა"
 
-#: mainwindow.cpp:746
+#: mainwindow.cpp:763
 #, kde-format
 msgid "Add Bookmark"
 msgstr "სანიშნის დამატება"
 
-#: mainwindow.cpp:747
+#: mainwindow.cpp:764
 #, kde-format
 msgid "Close Tab"
 msgstr "ჩანართის დახურვა"
 
-#: mainwindow.cpp:851
+#: mainwindow.cpp:868
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr "სრულეკრანიანი რეჟიმის ჩაკეცვა"
 
-#: mainwindow.cpp:867
+#: mainwindow.cpp:884
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "ხელსაწყოების პანელის მიწებება"
 
-#: mainwindow.cpp:976
+#: mainwindow.cpp:993
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr ""
 "დარწმუნებული ბრძანდებით, რომ გნებავთ KDE Remote Desktop-ის კლიენტიდან გასვლა?"
 
-#: mainwindow.cpp:977
+#: mainwindow.cpp:994
 #, kde-format
 msgid "Confirm Quit"
 msgstr "გასვლის დადასტურება"
 
-#: mainwindow.cpp:1106
+#: mainwindow.cpp:1123
 #, kde-format
 msgid "Connect to:"
 msgstr "დაკავშირება:"
 
-#: mainwindow.cpp:1110
+#: mainwindow.cpp:1127
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr "მისამართთან მისაერთებლად და სიის გასაფილტრად აქ აკრიფეთ."
 
-#: mainwindow.cpp:1119
+#: mainwindow.cpp:1136
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
@@ -665,17 +675,17 @@ msgstr ""
 "აკრიფეთ IP ან DNS სახელი. მიერთების მეთოდების სიის მისაღებად კი გაასუფთავეთ "
 "ხაზი."
 
-#: mainwindow.cpp:1122
+#: mainwindow.cpp:1139
 #, kde-format
 msgid "Goto Address"
 msgstr "მისამართზე გადასვლა"
 
-#: mainwindow.cpp:1214
+#: mainwindow.cpp:1231
 #, kde-format
 msgid "Remote Desktops"
 msgstr "დისტანციური სამუშაო მაგიდები"
 
-#: mainwindow.cpp:1243
+#: mainwindow.cpp:1260
 #, kde-format
 msgid "Filter"
 msgstr "ფილტრი"
@@ -1434,17 +1444,17 @@ msgctxt "@label"
 msgid "An unknown error occurred"
 msgstr "უცნობი შეცდომა"
 
-#: rdp/rdpviewfactory.cpp:22
+#: rdp/rdpviewfactory.cpp:25
 #, kde-format
 msgid "Connect to a Windows Remote Desktop (RDP)"
 msgstr "Windows Remote Desktop (RDP)-სთან დაკავშირება"
 
-#: rdp/rdpviewfactory.cpp:51
+#: rdp/rdpviewfactory.cpp:101
 #, kde-format
 msgid "New RDP Connection..."
 msgstr "ახალი RDP კავშირი..."
 
-#: rdp/rdpviewfactory.cpp:62
+#: rdp/rdpviewfactory.cpp:112
 #, kde-format
 msgid ""
 "<html>Enter the address here. Port is optional.<br /><i>Example: "

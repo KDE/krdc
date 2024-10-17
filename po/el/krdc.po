@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-09 00:39+0000\n"
+"POT-Creation-Date: 2024-10-17 00:40+0000\n"
 "PO-Revision-Date: 2024-09-20 09:33+0300\n"
 "Last-Translator: Antonis Geralis <capoiosct@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -199,12 +199,12 @@ msgstr "Διαμόρφωση..."
 msgid "Remove"
 msgstr "Αφαίρεση"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:283 mainwindow.cpp:678
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:300 mainwindow.cpp:695
 #, kde-format
 msgid "Unusable URL"
 msgstr "Μη χρήσιμο URL"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:678
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:695
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr "Ο επιλεγμένος υπολογιστής δεν μπορεί να χειριστεί."
@@ -436,8 +436,8 @@ msgstr "URL για σύνδεση μετά την έναρξη"
 msgid "KDE Remote Desktop Client started"
 msgstr "Ο πελάτης απομακρυσμένης επιφάνειας του KDE ξεκίνησε"
 
-#: mainwindow.cpp:129 mainwindow.cpp:142 mainwindow.cpp:1083
-#: mainwindow.cpp:1178
+#: mainwindow.cpp:129 mainwindow.cpp:142 mainwindow.cpp:1100
+#: mainwindow.cpp:1195
 #, kde-format
 msgid "New Connection"
 msgstr "Νέα σύνδεση"
@@ -452,12 +452,12 @@ msgstr "Αντιγραφή στιγμιότυπου οθόνης στο πρόχ
 msgid "Screenshot"
 msgstr "Στιγμιότυπο οθόνης"
 
-#: mainwindow.cpp:155 mainwindow.cpp:501
+#: mainwindow.cpp:155 mainwindow.cpp:518
 #, kde-format
 msgid "Switch to Full Screen Mode"
 msgstr "Εναλλαγή σε πλήρη οθόνη"
 
-#: mainwindow.cpp:156 mainwindow.cpp:502
+#: mainwindow.cpp:156 mainwindow.cpp:519
 #, kde-format
 msgid "Full Screen"
 msgstr "Πλήρης οθόνη"
@@ -512,7 +512,17 @@ msgstr "Παράγοντας κλιμάκωσης"
 msgid "Bookmarks"
 msgstr "Σελιδοδείκτες"
 
-#: mainwindow.cpp:262
+#: mainwindow.cpp:273
+#, kde-format
+msgid "Unable to load connection data from the provided file."
+msgstr ""
+
+#: mainwindow.cpp:273
+#, kde-format
+msgid "Load failed"
+msgstr ""
+
+#: mainwindow.cpp:279
 #, kde-format
 msgid ""
 "The entered address does not have the required form.\n"
@@ -521,151 +531,151 @@ msgstr ""
 "Η διεύθυνση που έχει εισαχθεί δεν έχει την απαιτούμενη μορφή.\n"
 "Σύνταξη: [όνομαχρήστη@]υπολογιστής[:θύρα]"
 
-#: mainwindow.cpp:262
+#: mainwindow.cpp:279
 #, kde-format
 msgid "Malformed URL"
 msgstr "Κακοδιατυπωμένο URL"
 
-#: mainwindow.cpp:283
+#: mainwindow.cpp:300
 #, kde-format
 msgid "The entered address cannot be handled."
 msgstr ""
 "Η διεύθυνση που έχει εισαχθεί δεν μπορεί να γίνει αντικείμενο χειρισμού."
 
-#: mainwindow.cpp:418
+#: mainwindow.cpp:435
 #, kde-format
 msgid "Connecting to %1"
 msgstr "Γίνεται σύνδεση με %1"
 
-#: mainwindow.cpp:422
+#: mainwindow.cpp:439
 #, kde-format
 msgid "Authenticating at %1"
 msgstr "Ταυτοποίηση με %1"
 
-#: mainwindow.cpp:426
+#: mainwindow.cpp:443
 #, kde-format
 msgid "Preparing connection to %1"
 msgstr "Προετοιμασία σύνδεσης με %1"
 
-#: mainwindow.cpp:430
+#: mainwindow.cpp:447
 #, kde-format
 msgid "Connected to %1"
 msgstr "Συνδέθηκε με %1"
 
-#: mainwindow.cpp:512
+#: mainwindow.cpp:529
 #, kde-format
 msgctxt ""
 "window title when in full screen mode (for example displayed in tasklist)"
 msgid "KDE Remote Desktop Client (Full Screen)"
 msgstr "Πελάτης απομακρυσμένης επιφάνειας του KDE (πλήρης οθόνη)"
 
-#: mainwindow.cpp:545
+#: mainwindow.cpp:562
 #, kde-format
 msgid "Switch to Window Mode"
 msgstr "Εναλλαγή σε λειτουργία παραθύρου"
 
-#: mainwindow.cpp:546
+#: mainwindow.cpp:563
 #, kde-format
 msgid "Window Mode"
 msgstr "Λειτουργία παραθύρου"
 
-#: mainwindow.cpp:697
+#: mainwindow.cpp:714
 #, kde-format
 msgid "Connect"
 msgstr "Σύνδεση"
 
-#: mainwindow.cpp:698
+#: mainwindow.cpp:715
 #, kde-format
 msgid "Rename"
 msgstr "Μετονομασία"
 
-#: mainwindow.cpp:699
+#: mainwindow.cpp:716
 #, kde-format
 msgid "Settings"
 msgstr "Ρυθμίσεις"
 
-#: mainwindow.cpp:700
+#: mainwindow.cpp:717
 #, kde-format
 msgid "Delete"
 msgstr "Διαγραφή"
 
-#: mainwindow.cpp:703 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:720 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "Σελιδοδείκτες"
 
-#: mainwindow.cpp:703 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:720 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "Ιστορικό"
 
-#: mainwindow.cpp:715
+#: mainwindow.cpp:732
 #, kde-format
 msgid "Rename %1"
 msgstr "Μετονομασία %1"
 
-#: mainwindow.cpp:715
+#: mainwindow.cpp:732
 #, kde-format
 msgid "Rename %1 to"
 msgstr "Μετονομασία του %1 σε"
 
-#: mainwindow.cpp:722
+#: mainwindow.cpp:739
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "Είστε βέβαιοι ότι επιθυμείτε να διαγράψετε το %1;"
 
-#: mainwindow.cpp:722
+#: mainwindow.cpp:739
 #, kde-format
 msgid "Delete %1"
 msgstr "Διαγραφή %1"
 
-#: mainwindow.cpp:746
+#: mainwindow.cpp:763
 #, kde-format
 msgid "Add Bookmark"
 msgstr "Προσθήκη σελιδοδείκτη"
 
-#: mainwindow.cpp:747
+#: mainwindow.cpp:764
 #, kde-format
 msgid "Close Tab"
 msgstr "Κλείσιμο καρτέλας"
 
-#: mainwindow.cpp:851
+#: mainwindow.cpp:868
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr "Ελαχιστοποίηση παραθύρου πλήρους οθόνης"
 
-#: mainwindow.cpp:867
+#: mainwindow.cpp:884
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "Κόλλημα γραμμής εργαλείων"
 
-#: mainwindow.cpp:976
+#: mainwindow.cpp:993
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr ""
 "Είστε σίγουροι ότι επιθυμείτε το κλείσιμο του πελάτη απομακρυσμένης "
 "επιφάνειας εργασίας του KDE;"
 
-#: mainwindow.cpp:977
+#: mainwindow.cpp:994
 #, kde-format
 msgid "Confirm Quit"
 msgstr "Επιβεβαίωση εξόδου"
 
-#: mainwindow.cpp:1106
+#: mainwindow.cpp:1123
 #, kde-format
 msgid "Connect to:"
 msgstr "Σύνδεση σε:"
 
-#: mainwindow.cpp:1110
+#: mainwindow.cpp:1127
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr ""
 "Πληκτρολογήστε εδώ για να συνδεθείτε σε μια διεύθυνση και να φιλτράρετε τη "
 "λίστα."
 
-#: mainwindow.cpp:1119
+#: mainwindow.cpp:1136
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
@@ -674,17 +684,17 @@ msgstr ""
 "Πληκτρολογήστε εδώ μια IP ή ένα όνομα DNS. Καθαρίστε τη γραμμή για να πάρετε "
 "μια λίστα από μεθόδους σύνδεσης."
 
-#: mainwindow.cpp:1122
+#: mainwindow.cpp:1139
 #, kde-format
 msgid "Goto Address"
 msgstr "Μετάβαση στη διεύθυνση"
 
-#: mainwindow.cpp:1214
+#: mainwindow.cpp:1231
 #, kde-format
 msgid "Remote Desktops"
 msgstr "Απομακρυσμένες επιφάνειες"
 
-#: mainwindow.cpp:1243
+#: mainwindow.cpp:1260
 #, kde-format
 msgid "Filter"
 msgstr "Φίλτρο"
@@ -1450,17 +1460,17 @@ msgctxt "@label"
 msgid "An unknown error occurred"
 msgstr ""
 
-#: rdp/rdpviewfactory.cpp:22
+#: rdp/rdpviewfactory.cpp:25
 #, kde-format
 msgid "Connect to a Windows Remote Desktop (RDP)"
 msgstr "Σύνδεση σε μια επιφάνεια εργασίας Windows (RDP)"
 
-#: rdp/rdpviewfactory.cpp:51
+#: rdp/rdpviewfactory.cpp:101
 #, kde-format
 msgid "New RDP Connection..."
 msgstr "Νέα σύνδεση RDP..."
 
-#: rdp/rdpviewfactory.cpp:62
+#: rdp/rdpviewfactory.cpp:112
 #, kde-format
 msgid ""
 "<html>Enter the address here. Port is optional.<br /><i>Example: "
