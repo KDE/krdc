@@ -23,68 +23,151 @@
 #include <freerdp/client.h>
 #include <freerdp/client/channels.h>
 #include <freerdp/client/cmdline.h>
+#include <freerdp/client/disp.h>
 #include <freerdp/client/rdpgfx.h>
 #include <freerdp/event.h>
 #include <freerdp/freerdp.h>
 #include <freerdp/gdi/gdi.h>
 #include <freerdp/gdi/gfx.h>
 #include <freerdp/input.h>
-#include <winpr/synch.h>
-#ifdef Q_OS_UNIX
 #include <freerdp/locale/keyboard.h>
-#endif
+#include <freerdp/utils/signal.h>
+#include <winpr/synch.h>
 
 #include "rdpview.h"
 
 #include "krdc_debug.h"
 
-BOOL preConnect(freerdp *rdp)
+BOOL RdpSession::preConnect(freerdp *rdp)
 {
-    auto session = reinterpret_cast<RdpContext *>(rdp->context)->session;
-    if (session->onPreConnect()) {
-        return TRUE;
+    WINPR_ASSERT(rdp);
+    auto ctx = rdp->context;
+    WINPR_ASSERT(ctx);
+
+    auto settings = ctx->settings;
+    WINPR_ASSERT(settings);
+
+    if (!freerdp_settings_set_uint32(settings, FreeRDP_OsMajorType, OSMAJORTYPE_UNIX)) {
+        return false;
     }
-    return FALSE;
-}
-
-BOOL postConnect(freerdp *rdp)
-{
-    auto session = reinterpret_cast<RdpContext *>(rdp->context)->session;
-    if (session->onPostConnect()) {
-        return TRUE;
+    if (!freerdp_settings_set_uint32(settings, FreeRDP_OsMajorType, OSMINORTYPE_UNSPECIFIED)) {
+        return false;
     }
-    return FALSE;
+
+    if (PubSub_SubscribeChannelConnected(ctx->pubSub, channelConnected) < 0) {
+        return false;
+    }
+    if (PubSub_SubscribeChannelDisconnected(ctx->pubSub, channelDisconnected) < 0) {
+        return false;
+    }
+
+#if FREERDP_VERSION_MAJOR == 2
+    if (!freerdp_client_load_addins(ctx->channels, settings)) {
+        return false;
+    }
+#endif
+    return true;
 }
 
-void postDisconnect(freerdp *rdp)
+BOOL RdpSession::postConnect(freerdp *rdp)
 {
-    auto session = reinterpret_cast<RdpContext *>(rdp->context)->session;
-    session->onPostDisconnect();
+    WINPR_ASSERT(rdp);
+    auto ctx = rdp->context;
+    WINPR_ASSERT(ctx);
+
+    auto rctx = reinterpret_cast<RdpContext *>(ctx);
+    WINPR_ASSERT(rctx);
+
+    auto session = rctx->session;
+    WINPR_ASSERT(session);
+
+    auto settings = ctx->settings;
+    WINPR_ASSERT(settings);
+
+    session->setState(State::Connected);
+
+    auto &buffer = session->m_videoBuffer;
+    buffer = QImage(settings->DesktopWidth, settings->DesktopHeight, QImage::Format_RGBX8888);
+
+    if (!gdi_init_ex(rdp, PIXEL_FORMAT_RGBX32, buffer.bytesPerLine(), buffer.bits(), nullptr)) {
+        qCWarning(KRDC) << "Could not initialize GDI subsystem";
+        return false;
+    }
+
+    auto gdi = ctx->gdi;
+    if (!gdi || gdi->width < 0 || gdi->height < 0) {
+        return false;
+    }
+
+    session->m_size = QSize(gdi->width, gdi->height);
+    Q_EMIT session->sizeChanged();
+
+    ctx->update->EndPaint = endPaint;
+    ctx->update->DesktopResize = resizeDisplay;
+    ctx->update->PlaySound = playSound;
+
+    auto keyboardLayout = freerdp_settings_get_uint32(settings, FreeRDP_KeyboardLayout);
+    auto keyboardRemappingList = freerdp_settings_get_string(settings, FreeRDP_KeyboardRemappingList);
+    freerdp_keyboard_init_ex(keyboardLayout, keyboardRemappingList);
+    return true;
 }
 
-BOOL authenticate(freerdp *rdp, char **username, char **password, char **domain)
+void RdpSession::postDisconnect(freerdp *rdp)
 {
-    auto session = reinterpret_cast<RdpContext *>(rdp->context)->session;
+    WINPR_ASSERT(rdp);
+    auto ctx = rdp->context;
+    WINPR_ASSERT(ctx);
+
+    auto session = reinterpret_cast<RdpContext *>(ctx)->session;
+    WINPR_ASSERT(session);
+
+    session->setState(State::Closed);
+    gdi_free(rdp);
+}
+
+#if FREERDP_VERSION_MAJOR == 3
+void RdpSession::postFinalDisconnect(freerdp *)
+{
+}
+#endif
+
+#if FREERDP_VERSION_MAJOR == 3
+BOOL RdpSession::authenticateEx(freerdp *instance, char **username, char **password, char **domain, rdp_auth_reason reason)
+#else
+BOOL RdpSession::authenticate(freerdp *instance, char **username, char **password, char **domain)
+#endif
+{
+    auto session = reinterpret_cast<RdpContext *>(instance->context)->session;
+    // TODO: this needs to handle:
+    // gateway
+    // user
+    // smartcard
+    // AAD
+    // needs new settings
     if (session->onAuthenticate(username, password, domain)) {
-        return TRUE;
+        return true;
     }
 
-    return FALSE;
+    return false;
 }
 
-DWORD verifyChangedCertificate(freerdp *rdp,
-                               const char *host,
-                               UINT16 port,
-                               const char *common_name,
-                               const char *subject,
-                               const char *issuer,
-                               const char *new_fingerprint,
-                               const char *old_subject,
-                               const char *old_issuer,
-                               const char *old_fingerprint,
-                               DWORD flags)
+DWORD RdpSession::verifyChangedCertificateEx(freerdp *rdp,
+                                             const char *host,
+                                             UINT16 port,
+                                             const char *common_name,
+                                             const char *subject,
+                                             const char *issuer,
+                                             const char *new_fingerprint,
+                                             const char *old_subject,
+                                             const char *old_issuer,
+                                             const char *old_fingerprint,
+                                             DWORD flags)
 {
     auto session = reinterpret_cast<RdpContext *>(rdp->context)->session;
+
+    // TODO: Update use or replace by whole custom cert handling
+    // TODO: This reuses FreeRDP internal certificate store
+    // TODO: Use VerifyX509Certificate for that and store the certificates with KRDC data
 
     Certificate oldCertificate;
     oldCertificate.host = QString::fromUtf8(host);
@@ -116,16 +199,20 @@ DWORD verifyChangedCertificate(freerdp *rdp,
     return 0;
 }
 
-DWORD verifyCertificate(freerdp *rdp,
-                        const char *host,
-                        UINT16 port,
-                        const char *common_name,
-                        const char *subject,
-                        const char *issuer,
-                        const char *fingerprint,
-                        DWORD flags)
+DWORD RdpSession::verifyCertificateEx(freerdp *rdp,
+                                      const char *host,
+                                      UINT16 port,
+                                      const char *common_name,
+                                      const char *subject,
+                                      const char *issuer,
+                                      const char *fingerprint,
+                                      DWORD flags)
 {
     auto session = reinterpret_cast<RdpContext *>(rdp->context)->session;
+
+    // TODO: Update use or replace by whole custom cert handling
+    // TODO: This reuses FreeRDP internal certificate store
+    // TODO: Use VerifyX509Certificate for that and store the certificates with KRDC data
 
     Certificate certificate;
     certificate.host = QString::fromUtf8(host);
@@ -148,7 +235,7 @@ DWORD verifyCertificate(freerdp *rdp,
     return 0;
 }
 
-int logonErrorInfo(freerdp *rdp, UINT32 data, UINT32 type)
+int RdpSession::logonErrorInfo(freerdp *rdp, UINT32 data, UINT32 type)
 {
     auto dataString = QString::fromUtf8(freerdp_get_logon_error_info_data(data));
     auto typeString = QString::fromUtf8(freerdp_get_logon_error_info_type(type));
@@ -162,59 +249,559 @@ int logonErrorInfo(freerdp *rdp, UINT32 data, UINT32 type)
         return 0;
 
     KMessageBox::error(nullptr, typeString + QStringLiteral(" ") + dataString, i18nc("@title:dialog", "Logon Error"));
-
     return 1;
 }
 
-BOOL endPaint(rdpContext *context)
+BOOL RdpSession::presentGatewayMessage(freerdp *instance, UINT32 type, BOOL isDisplayMandatory, BOOL isConsentMandatory, size_t length, const WCHAR *message)
 {
-    auto session = reinterpret_cast<RdpContext *>(context)->session;
-    if (session->onEndPaint()) {
-        return TRUE;
-    }
-    return FALSE;
+    // TODO: Implement
+    // TODO: run on UI thread
+    // TODO: Block, wait for result
+    return false;
 }
 
-BOOL resizeDisplay(rdpContext *context)
+#if FREERDP_VERSION_MAJOR == 3
+BOOL RdpSession::chooseSmartcard(freerdp *instance, SmartcardCertInfo **cert_list, DWORD count, DWORD *choice, BOOL gateway)
 {
-    auto session = reinterpret_cast<RdpContext *>(context)->session;
-    if (session->onResizeDisplay()) {
-        return TRUE;
-    }
-    return FALSE;
+    // TODO: Implement
+    // TODO: Move this to UI thread
+    // TODO: Block for result as this might be just a informative message
+    return false;
 }
 
-BOOL playSound(rdpContext *context, const PLAY_SOUND_UPDATE *play_sound)
+SSIZE_T RdpSession::retryDialog(freerdp *instance, const char *what, size_t current, void *userarg)
 {
-    Q_UNUSED(play_sound);
-    auto session = reinterpret_cast<RdpContext *>(context)->session;
-    if (session->onPlaySound()) {
-        return TRUE;
+    // TODO: Implement
+    // TODO: Move this to UI thread
+    // TODO: Block for result as this might be just a informative message
+    return -1;
+}
+#endif
+
+BOOL RdpSession::clientGlobalInit()
+{
+#if defined(_WIN32)
+    WSADATA wsaData = {0};
+    const DWORD wVersionRequested = MAKEWORD(1, 1);
+    const int rc = WSAStartup(wVersionRequested, &wsaData);
+    if (rc != 0) {
+        WLog_ERR(SDL_TAG, "WSAStartup failed with %s [%d]", gai_strerrorA(rc), rc);
+        return false;
     }
-    return FALSE;
+#endif
+    if (freerdp_handle_signals() != 0)
+        return false;
+
+    return true;
 }
 
-void channelConnected(void *context, ChannelConnectedEventArgs *e)
+void RdpSession::clientGlobalUninit()
 {
-    if (strcmp(e->name, RDPGFX_DVC_CHANNEL_NAME) == 0) {
-        rdpContext *rdpC = reinterpret_cast<rdpContext *>(context);
-        gdi_graphics_pipeline_init(rdpC->gdi, (RdpgfxClientContext *)e->pInterface);
-    } else if (strcmp(e->name, CLIPRDR_SVC_CHANNEL_NAME) == 0) {
+#if defined(_WIN32)
+    WSACleanup();
+#endif
+}
+
+BOOL RdpSession::clientContextNew(freerdp *instance, rdpContext *context)
+{
+    auto kctx = reinterpret_cast<RdpContext *>(context);
+    if (!instance || !context)
+        return false;
+
+    instance->PreConnect = preConnect;
+    instance->PostConnect = postConnect;
+    instance->PostDisconnect = postDisconnect;
+#if FREERDP_VERSION_MAJOR == 3
+    instance->PostFinalDisconnect = postFinalDisconnect;
+#endif
+#if FREERDP_VERSION_MAJOR == 3
+    instance->AuthenticateEx = authenticateEx;
+#else
+    instance->Authenticate = authenticate;
+#endif
+    instance->VerifyCertificateEx = verifyCertificateEx;
+    instance->VerifyChangedCertificateEx = verifyChangedCertificateEx;
+    instance->LogonErrorInfo = logonErrorInfo;
+    instance->PresentGatewayMessage = presentGatewayMessage;
+#if FREERDP_VERSION_MAJOR == 3
+    instance->ChooseSmartcard = chooseSmartcard;
+    instance->RetryDialog = retryDialog;
+#endif
+    // TODO
+    // instance->GetAccessToken = RdpAADView::getAccessToken;
+
+    return true;
+}
+
+void RdpSession::clientContextFree(freerdp *instance, rdpContext *context)
+{
+    auto ctx = reinterpret_cast<RdpContext *>(context);
+    if (!ctx)
+        return;
+    ctx->session = nullptr;
+}
+
+int RdpSession::clientContextStart(rdpContext *context)
+{
+    auto kcontext = reinterpret_cast<RdpContext *>(context);
+    WINPR_ASSERT(kcontext);
+
+    auto session = kcontext->session;
+    WINPR_ASSERT(session);
+
+    auto settings = context->settings;
+    WINPR_ASSERT(settings);
+
+    session->setState(State::Starting);
+
+    qCInfo(KRDC) << "Starting RDP session";
+
+    auto preferences = session->m_preferences;
+
+    if (!freerdp_settings_set_string(settings, FreeRDP_ServerHostname, session->m_host.toUtf8().data())) {
+        return -1;
+    }
+    if (!freerdp_settings_set_uint32(settings, FreeRDP_ServerPort, session->m_port)) {
+        return -1;
+    }
+
+    if (session->m_size.width() > 0 && session->m_size.height() > 0) {
+        if (!freerdp_settings_set_uint32(settings, FreeRDP_DesktopWidth, session->m_size.width())) {
+            return -1;
+        }
+        if (!freerdp_settings_set_uint32(settings, FreeRDP_DesktopHeight, session->m_size.height())) {
+            return -1;
+        }
+    }
+
+    switch (preferences->colorDepth()) {
+    case RdpHostPreferences::ColorDepth::Auto:
+    case RdpHostPreferences::ColorDepth::Depth32:
+        if (!freerdp_settings_set_uint32(settings, FreeRDP_ColorDepth, 32)) {
+            return -1;
+        }
+        break;
+    case RdpHostPreferences::ColorDepth::Depth24:
+        if (!freerdp_settings_set_uint32(settings, FreeRDP_ColorDepth, 24)) {
+            return -1;
+        }
+        break;
+    case RdpHostPreferences::ColorDepth::Depth16:
+        if (!freerdp_settings_set_uint32(settings, FreeRDP_ColorDepth, 16)) {
+            return -1;
+        }
+        break;
+    case RdpHostPreferences::ColorDepth::Depth8:
+        if (!freerdp_settings_set_uint32(settings, FreeRDP_ColorDepth, 8)) {
+            return -1;
+        }
+    }
+
+    switch (preferences->acceleration()) {
+    case RdpHostPreferences::Acceleration::ForceGraphicsPipeline:
+        if (!freerdp_settings_set_bool(settings, FreeRDP_SupportGraphicsPipeline, true)) {
+            return -1;
+        }
+        if (!freerdp_settings_set_bool(settings, FreeRDP_GfxAVC444, true)) {
+            return -1;
+        }
+        if (!freerdp_settings_set_bool(settings, FreeRDP_GfxAVC444v2, true)) {
+            return -1;
+        }
+        if (!freerdp_settings_set_bool(settings, FreeRDP_GfxH264, true)) {
+            return -1;
+        }
+        if (!freerdp_settings_set_bool(settings, FreeRDP_RemoteFxCodec, false)) {
+            return -1;
+        }
+        if (!freerdp_settings_set_uint32(settings, FreeRDP_ColorDepth, 32)) {
+            return -1;
+        }
+        break;
+    case RdpHostPreferences::Acceleration::ForceRemoteFx:
+        if (!freerdp_settings_set_bool(settings, FreeRDP_SupportGraphicsPipeline, false)) {
+            return -1;
+        }
+        if (!freerdp_settings_set_bool(settings, FreeRDP_GfxAVC444, false)) {
+            return -1;
+        }
+        if (!freerdp_settings_set_bool(settings, FreeRDP_GfxAVC444v2, false)) {
+            return -1;
+        }
+        if (!freerdp_settings_set_bool(settings, FreeRDP_GfxH264, false)) {
+            return -1;
+        }
+        if (!freerdp_settings_set_bool(settings, FreeRDP_RemoteFxCodec, true)) {
+            return -1;
+        }
+        if (!freerdp_settings_set_uint32(settings, FreeRDP_ColorDepth, 32)) {
+            return -1;
+        }
+        break;
+    case RdpHostPreferences::Acceleration::Disabled:
+        if (!freerdp_settings_set_bool(settings, FreeRDP_SupportGraphicsPipeline, false)) {
+            return -1;
+        }
+        if (!freerdp_settings_set_bool(settings, FreeRDP_GfxAVC444, false)) {
+            return -1;
+        }
+        if (!freerdp_settings_set_bool(settings, FreeRDP_GfxAVC444v2, false)) {
+            return -1;
+        }
+        if (!freerdp_settings_set_bool(settings, FreeRDP_GfxH264, false)) {
+            return -1;
+        }
+        if (!freerdp_settings_set_bool(settings, FreeRDP_RemoteFxCodec, false)) {
+            return -1;
+        }
+        break;
+    case RdpHostPreferences::Acceleration::Auto:
+        if (!freerdp_settings_set_bool(settings, FreeRDP_SupportGraphicsPipeline, true)) {
+            return -1;
+        }
+        if (!freerdp_settings_set_bool(settings, FreeRDP_GfxAVC444, true)) {
+            return -1;
+        }
+        if (!freerdp_settings_set_bool(settings, FreeRDP_GfxAVC444v2, true)) {
+            return -1;
+        }
+        if (!freerdp_settings_set_bool(settings, FreeRDP_GfxH264, true)) {
+            return -1;
+        }
+        if (!freerdp_settings_set_bool(settings, FreeRDP_RemoteFxCodec, true)) {
+            return -1;
+        }
+        if (!freerdp_settings_set_uint32(settings, FreeRDP_ColorDepth, 32)) {
+            return -1;
+        }
+        break;
+    }
+
+    if (!freerdp_settings_set_bool(settings, FreeRDP_FastPathOutput, true)) {
+        return -1;
+    }
+    if (!freerdp_settings_set_bool(settings, FreeRDP_FastPathInput, true)) {
+        return -1;
+    }
+    if (!freerdp_settings_set_bool(settings, FreeRDP_FrameMarkerCommandEnabled, true)) {
+        return -1;
+    }
+    if (!freerdp_settings_set_bool(settings, FreeRDP_SupportDynamicChannels, true)) {
+        return -1;
+    }
+
+    switch (preferences->sound()) {
+    case RdpHostPreferences::Sound::Local:
+        if (!freerdp_settings_set_bool(settings, FreeRDP_AudioPlayback, true)) {
+            return -1;
+        }
+        if (!freerdp_settings_set_bool(settings, FreeRDP_AudioCapture, true)) {
+            return -1;
+        }
+        break;
+    case RdpHostPreferences::Sound::Remote:
+        if (!freerdp_settings_set_bool(settings, FreeRDP_RemoteConsoleAudio, true)) {
+            return -1;
+        }
+        break;
+    case RdpHostPreferences::Sound::Disabled:
+        if (!freerdp_settings_set_bool(settings, FreeRDP_AudioPlayback, false)) {
+            return -1;
+        }
+        if (!freerdp_settings_set_bool(settings, FreeRDP_AudioCapture, false)) {
+            return -1;
+        }
+        break;
+    }
+
+    if (!preferences->shareMedia().isEmpty()) {
+        QByteArray name = "drive";
+        QByteArray value = preferences->shareMedia().toUtf8();
+#if FREERDP_VERSION_MAJOR == 3
+        const char *params[2] = {name.data(), value.data()};
+#else
+        char *params[2] = {name.data(), value.data()};
+#endif
+        freerdp_client_add_device_channel(settings, 2, params);
+    }
+
+    if (!freerdp_settings_set_uint32(settings, FreeRDP_KeyboardLayout, preferences->rdpKeyboardLayout())) {
+        return -1;
+    }
+
+    switch (preferences->tlsSecLevel()) {
+    case RdpHostPreferences::TlsSecLevel::Bit80:
+        if (!freerdp_settings_set_uint32(settings, FreeRDP_TlsSecLevel, 1)) {
+            return -1;
+        }
+        break;
+    case RdpHostPreferences::TlsSecLevel::Bit112:
+        if (!freerdp_settings_set_uint32(settings, FreeRDP_TlsSecLevel, 2)) {
+            return -1;
+        }
+        break;
+    case RdpHostPreferences::TlsSecLevel::Bit128:
+        if (!freerdp_settings_set_uint32(settings, FreeRDP_TlsSecLevel, 3)) {
+            return -1;
+        }
+        break;
+    case RdpHostPreferences::TlsSecLevel::Bit192:
+        if (!freerdp_settings_set_uint32(settings, FreeRDP_TlsSecLevel, 4)) {
+            return -1;
+        }
+        break;
+    case RdpHostPreferences::TlsSecLevel::Bit256:
+        if (!freerdp_settings_set_uint32(settings, FreeRDP_TlsSecLevel, 5)) {
+            return -1;
+        }
+        break;
+    case RdpHostPreferences::TlsSecLevel::Any:
+    default:
+        if (!freerdp_settings_set_uint32(settings, FreeRDP_TlsSecLevel, 0)) {
+            return -1;
+        }
+        break;
+    }
+
+    const auto proxyHostAddress = QUrl(preferences->proxyHost());
+    if (!proxyHostAddress.isEmpty()) {
+        int defaultPort = 8080;
+        switch (preferences->proxyProtocol()) {
+        case RdpHostPreferences::ProxyProtocol::HTTP:
+            if (!freerdp_settings_set_uint32(settings, FreeRDP_ProxyType, PROXY_TYPE_HTTP)) {
+                return -1;
+            }
+            break;
+        case RdpHostPreferences::ProxyProtocol::SOCKS:
+            if (!freerdp_settings_set_uint32(settings, FreeRDP_ProxyType, PROXY_TYPE_SOCKS)) {
+                return -1;
+            }
+            defaultPort = 1080;
+            break;
+        default:
+            if (!freerdp_settings_set_uint32(settings, FreeRDP_ProxyType, PROXY_TYPE_NONE)) {
+                return -1;
+            }
+            break;
+        }
+
+        if (!freerdp_settings_set_string(settings, FreeRDP_ProxyHostname, proxyHostAddress.host().toUtf8().data())) {
+            return -1;
+        }
+        if (!freerdp_settings_set_string(settings, FreeRDP_ProxyUsername, preferences->proxyUsername().toUtf8().data())) {
+            return -1;
+        }
+        if (!freerdp_settings_set_string(settings, FreeRDP_ProxyPassword, preferences->proxyPassword().toUtf8().data())) {
+            return -1;
+        }
+        if (!freerdp_settings_set_uint16(settings, FreeRDP_ProxyPort, proxyHostAddress.port(defaultPort))) {
+            return -1;
+        }
+    }
+
+    const auto gatewayServerAddress = QUrl(preferences->proxyHost());
+    if (!gatewayServerAddress.isEmpty()) {
+        if (!freerdp_settings_set_string(settings, FreeRDP_GatewayHostname, gatewayServerAddress.host().toUtf8().data())) {
+            return -1;
+        }
+        if (!freerdp_settings_set_uint32(settings, FreeRDP_GatewayPort, gatewayServerAddress.port(3389))) {
+            return -1;
+        }
+        if (!freerdp_settings_set_string(settings, FreeRDP_GatewayUsername, preferences->gatewayUsername().toUtf8().data())) {
+            return -1;
+        }
+        if (!freerdp_settings_set_string(settings, FreeRDP_GatewayPassword, preferences->gatewayPassword().toUtf8().data())) {
+            return -1;
+        }
+        if (!freerdp_settings_set_string(settings, FreeRDP_GatewayDomain, preferences->gatewayDomain().toUtf8().data())) {
+            return -1;
+        }
+
+        switch (preferences->gatewayTransportType()) {
+        case RdpHostPreferences::GatewayTransportType::RPC:
+            if (!freerdp_settings_set_bool(settings, FreeRDP_GatewayHttpTransport, false)) {
+                return -1;
+            }
+            if (!freerdp_settings_set_bool(settings, FreeRDP_GatewayRpcTransport, true)) {
+                return -1;
+            }
+            break;
+        case RdpHostPreferences::GatewayTransportType::HTTP:
+            if (!freerdp_settings_set_bool(settings, FreeRDP_GatewayHttpTransport, true)) {
+                return -1;
+            }
+            if (!freerdp_settings_set_bool(settings, FreeRDP_GatewayRpcTransport, false)) {
+                return -1;
+            }
+            break;
+        case RdpHostPreferences::GatewayTransportType::Auto:
+        default:
+            if (!freerdp_settings_set_bool(settings, FreeRDP_GatewayHttpTransport, true)) {
+                return -1;
+            }
+            if (!freerdp_settings_set_bool(settings, FreeRDP_GatewayRpcTransport, true)) {
+                return -1;
+            }
+            break;
+        }
+    }
+
+    if (!freerdp_connect(context->instance)) {
+        qWarning(KRDC) << "Unable to connect";
+        session->emitErrorMessage();
+        return -1;
+    }
+
+    session->m_thread = std::thread(std::bind(&RdpSession::run, session));
+    pthread_setname_np(session->m_thread.native_handle(), "rdp_session");
+
+    return 0;
+}
+
+int RdpSession::clientContextStop(rdpContext *context)
+{
+    auto kcontext = reinterpret_cast<RdpContext *>(context);
+    WINPR_ASSERT(kcontext);
+
+#if FREERDP_VERSION_MAJOR == 3
+    /* We do not want to use freerdp_abort_connect_context here.
+     * It would change the exit code and we do not want that. */
+    HANDLE event = freerdp_abort_event(context);
+    if (!SetEvent(event))
+        return -1;
+#else
+    freerdp_abort_connect(context->instance);
+#endif
+
+    WINPR_ASSERT(kcontext->session);
+    if (kcontext->session->m_thread.joinable()) {
+        kcontext->session->m_thread.join();
+    }
+
+    return 0;
+}
+
+RDP_CLIENT_ENTRY_POINTS RdpSession::RdpClientEntry()
+{
+    RDP_CLIENT_ENTRY_POINTS entry = {};
+
+    entry.Version = RDP_CLIENT_INTERFACE_VERSION;
+    entry.Size = sizeof(RDP_CLIENT_ENTRY_POINTS_V1);
+    entry.GlobalInit = clientGlobalInit;
+    entry.GlobalUninit = clientGlobalUninit;
+    entry.ContextSize = sizeof(RdpContext);
+    entry.ClientNew = clientContextNew;
+    entry.ClientFree = clientContextFree;
+    entry.ClientStart = clientContextStart;
+    entry.ClientStop = clientContextStop;
+
+    return entry;
+}
+
+BOOL RdpSession::endPaint(rdpContext *context)
+{
+    WINPR_ASSERT(context);
+    auto session = reinterpret_cast<RdpContext *>(context)->session;
+    WINPR_ASSERT(session);
+
+    auto gdi = context->gdi;
+    if (!gdi || !gdi->primary) {
+        return false;
+    }
+
+    auto invalid = gdi->primary->hdc->hwnd->invalid;
+    if (invalid->null) {
+        return true;
+    }
+
+    auto rect = QRect{invalid->x, invalid->y, invalid->w, invalid->h};
+    Q_EMIT session->rectangleUpdated(rect);
+    return true;
+}
+
+BOOL RdpSession::resizeDisplay(rdpContext *context)
+{
+    WINPR_ASSERT(context);
+    auto session = reinterpret_cast<RdpContext *>(context)->session;
+    WINPR_ASSERT(session);
+
+    auto gdi = context->gdi;
+    WINPR_ASSERT(gdi);
+
+    auto settings = context->settings;
+    WINPR_ASSERT(settings);
+
+    auto &buffer = session->m_videoBuffer;
+    buffer = QImage(settings->DesktopWidth, settings->DesktopHeight, QImage::Format_RGBX8888);
+
+    if (!gdi_resize_ex(gdi, settings->DesktopWidth, settings->DesktopHeight, buffer.bytesPerLine(), PIXEL_FORMAT_RGBX32, buffer.bits(), nullptr)) {
+        qCWarning(KRDC) << "Failed resizing GDI subsystem";
+        return false;
+    }
+
+    session->m_size = QSize(settings->DesktopWidth, settings->DesktopHeight);
+    Q_EMIT session->sizeChanged();
+
+    return true;
+}
+
+BOOL RdpSession::playSound(rdpContext *context, const PLAY_SOUND_UPDATE *play_sound)
+{
+    QApplication::beep();
+    return true;
+}
+
+#if FREERDP_VERSION_MAJOR == 3
+void RdpSession::channelConnected(void *context, const ChannelConnectedEventArgs *e)
+#else
+void RdpSession::channelConnected(void *context, ChannelConnectedEventArgs *e)
+#endif
+{
+    if (strcmp(e->name, CLIPRDR_SVC_CHANNEL_NAME) == 0) {
+        CliprdrClientContext *cliprdr = (CliprdrClientContext *)e->pInterface;
+
         auto session = reinterpret_cast<RdpContext *>(context)->session;
-        auto krdcContext = reinterpret_cast<RdpContext *>(context);
-        auto cliprdr = reinterpret_cast<CliprdrClientContext *>(e->pInterface);
-        session->initializeClipboard(krdcContext, cliprdr);
+        WINPR_ASSERT(session);
+
+        auto krdp = reinterpret_cast<RdpContext *>(context);
+        WINPR_ASSERT(krdp);
+
+        session->initializeClipboard(krdp, cliprdr);
+    } else if (strcmp(e->name, DISP_DVC_CHANNEL_NAME) == 0) {
+        auto disp = reinterpret_cast<DispClientContext *>(e->pInterface);
+        WINPR_ASSERT(disp);
+        // TODO: Implement display channel
+        // TODO: Should be fairly easy as you only need to provide monitor(=fullscreen or multimonitor) or window (=single monitor on RDP side) layout
+        // (orientation, resolution, dpi, ...) on size / dpi / ... change. word of advice: do not send more than one update per second (some windows servers
+        // crash the session otherwise)
+#if FREERDP_VERSION_MAJOR == 3
+    } else {
+        freerdp_client_OnChannelConnectedEventHandler(context, e);
+#endif
     }
 }
 
-void channelDisconnected(void *context, ChannelDisconnectedEventArgs *e)
+#if FREERDP_VERSION_MAJOR == 3
+void RdpSession::channelDisconnected(void *context, const ChannelDisconnectedEventArgs *e)
+#else
+void RdpSession::channelDisconnected(void *context, ChannelDisconnectedEventArgs *e)
+#endif
 {
-    if (strcmp(e->name, RDPGFX_DVC_CHANNEL_NAME) == 0) {
-        rdpContext *rdpC = reinterpret_cast<rdpContext *>(context);
-        gdi_graphics_pipeline_uninit(rdpC->gdi, (RdpgfxClientContext *)e->pInterface);
-    } else if (strcmp(e->name, CLIPRDR_SVC_CHANNEL_NAME) == 0) {
+    if (strcmp(e->name, CLIPRDR_SVC_CHANNEL_NAME) == 0) {
+        CliprdrClientContext *cliprdr = (CliprdrClientContext *)e->pInterface;
+
         auto session = reinterpret_cast<RdpContext *>(context)->session;
+        WINPR_ASSERT(session);
+
         session->destroyClipboard();
+    } else if (strcmp(e->name, DISP_DVC_CHANNEL_NAME) == 0) {
+        auto disp = reinterpret_cast<DispClientContext *>(e->pInterface);
+        WINPR_ASSERT(disp);
+        // TODO: Implement display channel
+#if FREERDP_VERSION_MAJOR == 3
+    } else {
+        freerdp_client_OnChannelDisconnectedEventHandler(context, e);
+#endif
     }
 }
 
@@ -226,12 +813,17 @@ QString Certificate::toString() const
 RdpSession::RdpSession(RdpView *view)
     : QObject(nullptr)
     , m_view(view)
+    , m_firstPasswordTry(true)
 {
+    auto entry = RdpClientEntry();
+    m_context.rdp = freerdp_client_context_new(&entry);
+    m_context.krdp->session = this;
 }
 
 RdpSession::~RdpSession()
 {
     stop();
+    freerdp_client_context_free(m_context.rdp);
 }
 
 RdpSession::State RdpSession::state() const
@@ -311,353 +903,17 @@ void RdpSession::setSize(QSize size)
 
 bool RdpSession::start()
 {
-    setState(State::Starting);
-
-    qCInfo(KRDC) << "Starting RDP session";
-
-    m_freerdp = freerdp_new();
-
-    m_freerdp->ContextSize = sizeof(RdpContext);
-    m_freerdp->ContextNew = nullptr;
-    m_freerdp->ContextFree = nullptr;
-
-    m_freerdp->Authenticate = authenticate;
-    m_freerdp->VerifyCertificateEx = verifyCertificate;
-    m_freerdp->VerifyChangedCertificateEx = verifyChangedCertificate;
-    m_freerdp->LogonErrorInfo = logonErrorInfo;
-
-    m_freerdp->PreConnect = preConnect;
-    m_freerdp->PostConnect = postConnect;
-    m_freerdp->PostDisconnect = postDisconnect;
-
-    freerdp_context_new(m_freerdp);
-
-    m_context = reinterpret_cast<RdpContext *>(m_freerdp->context);
-    m_context->session = this;
-
-    if (freerdp_register_addin_provider(freerdp_channels_load_static_addin_entry, 0) != CHANNEL_RC_OK) {
-        return false;
+    if (freerdp_client_start(m_context.rdp) == CHANNEL_RC_OK) {
+        return true;
     }
 
-    auto settings = m_freerdp->settings;
-    if (!freerdp_settings_set_string(settings, FreeRDP_ServerHostname, m_host.toUtf8().data())) {
-        return false;
-    }
-    if (!freerdp_settings_set_uint32(settings, FreeRDP_ServerPort, m_port)) {
-        return false;
-    }
-
-    if (!freerdp_settings_set_string(settings, FreeRDP_Username, m_user.toUtf8().data())) {
-        return false;
-    }
-    if (!freerdp_settings_set_string(settings, FreeRDP_Password, m_password.toUtf8().data())) {
-        return false;
-    }
-
-    if (m_size.width() > 0 && m_size.height() > 0) {
-        if (!freerdp_settings_set_uint32(settings, FreeRDP_DesktopWidth, m_size.width())) {
-            return false;
-        }
-        if (!freerdp_settings_set_uint32(settings, FreeRDP_DesktopHeight, m_size.height())) {
-            return false;
-        }
-    }
-
-    switch (m_preferences->colorDepth()) {
-    case RdpHostPreferences::ColorDepth::Auto:
-    case RdpHostPreferences::ColorDepth::Depth32:
-        if (!freerdp_settings_set_uint32(settings, FreeRDP_ColorDepth, 32)) {
-            return false;
-        }
-        break;
-    case RdpHostPreferences::ColorDepth::Depth24:
-        if (!freerdp_settings_set_uint32(settings, FreeRDP_ColorDepth, 24)) {
-            return false;
-        }
-        break;
-    case RdpHostPreferences::ColorDepth::Depth16:
-        if (!freerdp_settings_set_uint32(settings, FreeRDP_ColorDepth, 16)) {
-            return false;
-        }
-        break;
-    case RdpHostPreferences::ColorDepth::Depth8:
-        if (!freerdp_settings_set_uint32(settings, FreeRDP_ColorDepth, 8)) {
-            return false;
-        }
-    }
-
-    switch (m_preferences->acceleration()) {
-    case RdpHostPreferences::Acceleration::ForceGraphicsPipeline:
-        if (!freerdp_settings_set_bool(settings, FreeRDP_SupportGraphicsPipeline, true)) {
-            return false;
-        }
-        if (!freerdp_settings_set_bool(settings, FreeRDP_GfxAVC444, true)) {
-            return false;
-        }
-        if (!freerdp_settings_set_bool(settings, FreeRDP_GfxAVC444v2, true)) {
-            return false;
-        }
-        if (!freerdp_settings_set_bool(settings, FreeRDP_GfxH264, true)) {
-            return false;
-        }
-        if (!freerdp_settings_set_bool(settings, FreeRDP_RemoteFxCodec, false)) {
-            return false;
-        }
-        if (!freerdp_settings_set_uint32(settings, FreeRDP_ColorDepth, 32)) {
-            return false;
-        }
-        break;
-    case RdpHostPreferences::Acceleration::ForceRemoteFx:
-        if (!freerdp_settings_set_bool(settings, FreeRDP_SupportGraphicsPipeline, false)) {
-            return false;
-        }
-        if (!freerdp_settings_set_bool(settings, FreeRDP_GfxAVC444, false)) {
-            return false;
-        }
-        if (!freerdp_settings_set_bool(settings, FreeRDP_GfxAVC444v2, false)) {
-            return false;
-        }
-        if (!freerdp_settings_set_bool(settings, FreeRDP_GfxH264, false)) {
-            return false;
-        }
-        if (!freerdp_settings_set_bool(settings, FreeRDP_RemoteFxCodec, true)) {
-            return false;
-        }
-        if (!freerdp_settings_set_uint32(settings, FreeRDP_ColorDepth, 32)) {
-            return false;
-        }
-        break;
-    case RdpHostPreferences::Acceleration::Disabled:
-        if (!freerdp_settings_set_bool(settings, FreeRDP_SupportGraphicsPipeline, false)) {
-            return false;
-        }
-        if (!freerdp_settings_set_bool(settings, FreeRDP_GfxAVC444, false)) {
-            return false;
-        }
-        if (!freerdp_settings_set_bool(settings, FreeRDP_GfxAVC444v2, false)) {
-            return false;
-        }
-        if (!freerdp_settings_set_bool(settings, FreeRDP_GfxH264, false)) {
-            return false;
-        }
-        if (!freerdp_settings_set_bool(settings, FreeRDP_RemoteFxCodec, false)) {
-            return false;
-        }
-        break;
-    case RdpHostPreferences::Acceleration::Auto:
-        if (!freerdp_settings_set_bool(settings, FreeRDP_SupportGraphicsPipeline, true)) {
-            return false;
-        }
-        if (!freerdp_settings_set_bool(settings, FreeRDP_GfxAVC444, true)) {
-            return false;
-        }
-        if (!freerdp_settings_set_bool(settings, FreeRDP_GfxAVC444v2, true)) {
-            return false;
-        }
-        if (!freerdp_settings_set_bool(settings, FreeRDP_GfxH264, true)) {
-            return false;
-        }
-        if (!freerdp_settings_set_bool(settings, FreeRDP_RemoteFxCodec, true)) {
-            return false;
-        }
-        if (!freerdp_settings_set_uint32(settings, FreeRDP_ColorDepth, 32)) {
-            return false;
-        }
-        break;
-    }
-
-    if (!freerdp_settings_set_bool(settings, FreeRDP_FastPathOutput, true)) {
-        return false;
-    }
-    if (!freerdp_settings_set_bool(settings, FreeRDP_FastPathInput, true)) {
-        return false;
-    }
-    if (!freerdp_settings_set_bool(settings, FreeRDP_FrameMarkerCommandEnabled, true)) {
-        return false;
-    }
-    if (!freerdp_settings_set_bool(settings, FreeRDP_SupportDynamicChannels, true)) {
-        return false;
-    }
-
-    switch (m_preferences->sound()) {
-    case RdpHostPreferences::Sound::Local:
-        if (!freerdp_settings_set_bool(settings, FreeRDP_AudioPlayback, true)) {
-            return false;
-        }
-        if (!freerdp_settings_set_bool(settings, FreeRDP_AudioCapture, true)) {
-            return false;
-        }
-        break;
-    case RdpHostPreferences::Sound::Remote:
-        if (!freerdp_settings_set_bool(settings, FreeRDP_RemoteConsoleAudio, true)) {
-            return false;
-        }
-        break;
-    case RdpHostPreferences::Sound::Disabled:
-        if (!freerdp_settings_set_bool(settings, FreeRDP_AudioPlayback, false)) {
-            return false;
-        }
-        if (!freerdp_settings_set_bool(settings, FreeRDP_AudioCapture, false)) {
-            return false;
-        }
-        break;
-    }
-
-    if (!m_preferences->shareMedia().isEmpty()) {
-        QByteArray name = "drive";
-        QByteArray value = m_preferences->shareMedia().toLocal8Bit();
-
-        char *params[2] = {name.data(), value.data()};
-        freerdp_client_add_device_channel(settings, 2, params);
-    }
-
-    if (!freerdp_settings_set_uint32(settings, FreeRDP_KeyboardLayout, m_preferences->rdpKeyboardLayout())) {
-        return false;
-    }
-
-    switch (m_preferences->tlsSecLevel()) {
-    case RdpHostPreferences::TlsSecLevel::Bit80:
-        if (!freerdp_settings_set_uint32(settings, FreeRDP_TlsSecLevel, 1)) {
-            return false;
-        }
-        break;
-    case RdpHostPreferences::TlsSecLevel::Bit112:
-        if (!freerdp_settings_set_uint32(settings, FreeRDP_TlsSecLevel, 2)) {
-            return false;
-        }
-        break;
-    case RdpHostPreferences::TlsSecLevel::Bit128:
-        if (!freerdp_settings_set_uint32(settings, FreeRDP_TlsSecLevel, 3)) {
-            return false;
-        }
-        break;
-    case RdpHostPreferences::TlsSecLevel::Bit192:
-        if (!freerdp_settings_set_uint32(settings, FreeRDP_TlsSecLevel, 4)) {
-            return false;
-        }
-        break;
-    case RdpHostPreferences::TlsSecLevel::Bit256:
-        if (!freerdp_settings_set_uint32(settings, FreeRDP_TlsSecLevel, 5)) {
-            return false;
-        }
-        break;
-    case RdpHostPreferences::TlsSecLevel::Any:
-    default:
-        if (!freerdp_settings_set_uint32(settings, FreeRDP_TlsSecLevel, 0)) {
-            return false;
-        }
-        break;
-    }
-
-    const auto proxyHostAddress = QUrl(m_preferences->proxyHost());
-    if (!proxyHostAddress.isEmpty()) {
-        int defaultPort = 8080;
-        switch (m_preferences->proxyProtocol()) {
-        case RdpHostPreferences::ProxyProtocol::HTTP:
-            if (!freerdp_settings_set_uint32(settings, FreeRDP_ProxyType, PROXY_TYPE_HTTP)) {
-                return false;
-            }
-            break;
-        case RdpHostPreferences::ProxyProtocol::SOCKS:
-            if (!freerdp_settings_set_uint32(settings, FreeRDP_ProxyType, PROXY_TYPE_SOCKS)) {
-                return false;
-            }
-            defaultPort = 1080;
-            break;
-        default:
-            if (!freerdp_settings_set_uint32(settings, FreeRDP_ProxyType, PROXY_TYPE_NONE)) {
-                return false;
-            }
-            break;
-        }
-
-        if (!freerdp_settings_set_string(settings, FreeRDP_ProxyHostname, proxyHostAddress.host().toUtf8().data())) {
-            return false;
-        }
-        if (!freerdp_settings_set_string(settings, FreeRDP_ProxyUsername, m_preferences->proxyUsername().toUtf8().data())) {
-            return false;
-        }
-        if (!freerdp_settings_set_string(settings, FreeRDP_ProxyPassword, m_preferences->proxyPassword().toUtf8().data())) {
-            return false;
-        }
-        if (!freerdp_settings_set_uint32(settings, FreeRDP_ProxyPort, proxyHostAddress.port(defaultPort))) {
-            return false;
-        }
-    }
-
-    const auto gatewayServerAddress = QUrl(m_preferences->proxyHost());
-    if (!gatewayServerAddress.isEmpty()) {
-        if (!freerdp_settings_set_string(settings, FreeRDP_GatewayHostname, gatewayServerAddress.host().toUtf8().data())) {
-            return false;
-        }
-        if (!freerdp_settings_set_uint32(settings, FreeRDP_GatewayPort, gatewayServerAddress.port(3389))) {
-            return false;
-        }
-        if (!freerdp_settings_set_string(settings, FreeRDP_GatewayUsername, m_preferences->gatewayUsername().toUtf8().data())) {
-            return false;
-        }
-        if (!freerdp_settings_set_string(settings, FreeRDP_GatewayPassword, m_preferences->gatewayPassword().toUtf8().data())) {
-            return false;
-        }
-        if (!freerdp_settings_set_string(settings, FreeRDP_GatewayDomain, m_preferences->gatewayDomain().toUtf8().data())) {
-            return false;
-        }
-
-        switch (m_preferences->gatewayTransportType()) {
-        case RdpHostPreferences::GatewayTransportType::RPC:
-            if (!freerdp_settings_set_bool(settings, FreeRDP_GatewayHttpTransport, false)) {
-                return false;
-            }
-            if (!freerdp_settings_set_bool(settings, FreeRDP_GatewayRpcTransport, true)) {
-                return false;
-            }
-            break;
-        case RdpHostPreferences::GatewayTransportType::HTTP:
-            if (!freerdp_settings_set_bool(settings, FreeRDP_GatewayHttpTransport, true)) {
-                return false;
-            }
-            if (!freerdp_settings_set_bool(settings, FreeRDP_GatewayRpcTransport, false)) {
-                return false;
-            }
-            break;
-        case RdpHostPreferences::GatewayTransportType::Auto:
-        default:
-            if (!freerdp_settings_set_bool(settings, FreeRDP_GatewayHttpTransport, true)) {
-                return false;
-            }
-            if (!freerdp_settings_set_bool(settings, FreeRDP_GatewayRpcTransport, true)) {
-                return false;
-            }
-            break;
-        }
-    }
-
-    if (!freerdp_connect(m_freerdp)) {
-        qWarning(KRDC) << "Unable to connect";
-        emitErrorMessage();
-        return false;
-    }
-
-    m_thread = std::thread(std::bind(&RdpSession::run, this));
-    pthread_setname_np(m_thread.native_handle(), "rdp_session");
-
-    return true;
+    qWarning(KRDC) << "freerdp_client_start() failed";
+    return false;
 }
 
 void RdpSession::stop()
 {
-    freerdp_abort_connect(m_freerdp);
-    if (m_thread.joinable()) {
-        m_thread.join();
-    }
-
-    if (m_freerdp) {
-        freerdp_context_free(m_freerdp);
-        freerdp_free(m_freerdp);
-
-        m_context = nullptr;
-        m_freerdp = nullptr;
-    }
+    freerdp_client_stop(m_context.rdp);
 }
 
 const QImage *RdpSession::videoBuffer() const
@@ -667,14 +923,18 @@ const QImage *RdpSession::videoBuffer() const
 
 bool RdpSession::sendEvent(QEvent *event, QWidget *source)
 {
-    auto input = m_freerdp->context->input;
+    auto input = m_context.rdp->input;
 
     switch (event->type()) {
     case QEvent::KeyPress:
     case QEvent::KeyRelease: {
         auto keyEvent = static_cast<QKeyEvent *>(event);
         auto code = freerdp_keyboard_get_rdp_scancode_from_x11_keycode(keyEvent->nativeScanCode());
+#if FREERDP_VERSION_MAJOR == 3
+        freerdp_input_send_keyboard_event_ex(input, keyEvent->type() == QEvent::KeyPress, keyEvent->isAutoRepeat(), code);
+#else
         freerdp_input_send_keyboard_event_ex(input, keyEvent->type() == QEvent::KeyPress, code);
+#endif
         return true;
     }
     case QEvent::MouseButtonPress:
@@ -782,95 +1042,37 @@ void RdpSession::setState(RdpSession::State newState)
     Q_EMIT stateChanged();
 }
 
-bool RdpSession::onPreConnect()
-{
-    auto settings = m_freerdp->settings;
-    if (!freerdp_settings_set_uint32(settings, FreeRDP_OsMajorType, OSMAJORTYPE_UNIX)) {
-        return false;
-    }
-    if (!freerdp_settings_set_uint32(settings, FreeRDP_OsMajorType, OSMINORTYPE_UNSPECIFIED)) {
-        return false;
-    }
-
-    if (PubSub_SubscribeChannelConnected(m_freerdp->context->pubSub, channelConnected) < 0) {
-        return false;
-    }
-    if (PubSub_SubscribeChannelDisconnected(m_freerdp->context->pubSub, channelDisconnected) < 0) {
-        return false;
-    }
-
-    if (!freerdp_client_load_addins(m_freerdp->context->channels, settings)) {
-        return false;
-    }
-
-    return true;
-}
-
-bool RdpSession::onPostConnect()
-{
-    setState(State::Connected);
-
-    auto settings = m_freerdp->settings;
-    auto w = freerdp_settings_get_uint32(settings, FreeRDP_DesktopWidth);
-    auto h = freerdp_settings_get_uint32(settings, FreeRDP_DesktopHeight);
-    m_videoBuffer = QImage(w, h, QImage::Format_RGBX8888);
-
-    if (!gdi_init_ex(m_freerdp, PIXEL_FORMAT_RGBX32, m_videoBuffer.bytesPerLine(), m_videoBuffer.bits(), nullptr)) {
-        qCWarning(KRDC) << "Could not initialize GDI subsystem";
-        return false;
-    }
-
-    auto gdi = reinterpret_cast<rdpContext *>(m_context)->gdi;
-    if (!gdi || gdi->width < 0 || gdi->height < 0) {
-        return false;
-    }
-
-    m_size = QSize(gdi->width, gdi->height);
-    Q_EMIT sizeChanged();
-
-    m_freerdp->update->EndPaint = endPaint;
-    m_freerdp->update->DesktopResize = resizeDisplay;
-    m_freerdp->update->PlaySound = playSound;
-
-    auto keyboardLayout = freerdp_settings_get_uint32(settings, FreeRDP_KeyboardLayout);
-    auto keyboardRemappingList = freerdp_settings_get_string(settings, FreeRDP_KeyboardRemappingList);
-    freerdp_keyboard_init_ex(keyboardLayout, keyboardRemappingList);
-
-    return true;
-}
-
-void RdpSession::onPostDisconnect()
-{
-    setState(State::Closed);
-    gdi_free(m_freerdp);
-}
-
 bool RdpSession::onAuthenticate(char **username, char **password, char **domain)
 {
     Q_UNUSED(domain);
 
-    std::unique_ptr<KPasswordDialog> dialog;
-    bool hasUsername = qstrlen(*username) != 0;
-    if (hasUsername) {
-        dialog = std::make_unique<KPasswordDialog>(nullptr, KPasswordDialog::ShowKeepPassword);
-        dialog->setPrompt(i18nc("@label", "Access to this system requires a password."));
-    } else {
-        dialog = std::make_unique<KPasswordDialog>(nullptr, KPasswordDialog::ShowUsernameLine | KPasswordDialog::ShowKeepPassword);
-        dialog->setPrompt(i18nc("@label", "Access to this system requires a username and password."));
+    if (m_firstPasswordTry && m_user.size()) {
+        *username = qstrdup(m_user.toUtf8().data());
+        if (m_password.size()) {
+            *password = qstrdup(m_password.toUtf8().data());
+            m_firstPasswordTry = false;
+            return true;
+        }
     }
+
+    std::unique_ptr<KPasswordDialog> dialog;
+    dialog = std::make_unique<KPasswordDialog>(nullptr, KPasswordDialog::ShowUsernameLine | KPasswordDialog::ShowKeepPassword);
+    dialog->setPrompt(i18nc("@label", "Access to this system requires a username and password."));
+    dialog->setUsername(m_user);
+    dialog->setPassword(m_password);
 
     if (!dialog->exec()) {
         return false;
     }
 
-    *password = qstrdup(dialog->password().toUtf8().data());
+    m_user = dialog->username();
+    m_password = dialog->password();
 
-    if (!hasUsername) {
-        *username = qstrdup(dialog->username().toUtf8().data());
-    }
+    *username = qstrdup(m_user.toUtf8().data());
+    *password = qstrdup(m_password.toUtf8().data());
 
     if (dialog->keepPassword()) {
-        m_view->savePassword(dialog->password());
+        m_view->savePassword(m_password);
     }
 
     return true;
@@ -922,56 +1124,9 @@ RdpSession::CertificateResult RdpSession::onVerifyChangedCertificate(const Certi
     }
 }
 
-bool RdpSession::onEndPaint()
-{
-    if (!m_context) {
-        return false;
-    }
-
-    auto gdi = reinterpret_cast<rdpContext *>(m_context)->gdi;
-    if (!gdi || !gdi->primary) {
-        return false;
-    }
-
-    auto invalid = gdi->primary->hdc->hwnd->invalid;
-    if (invalid->null) {
-        return true;
-    }
-
-    auto rect = QRect{invalid->x, invalid->y, invalid->w, invalid->h};
-    Q_EMIT rectangleUpdated(rect);
-
-    return true;
-}
-
-bool RdpSession::onResizeDisplay()
-{
-    auto gdi = reinterpret_cast<rdpContext *>(m_context)->gdi;
-    auto settings = m_freerdp->settings;
-    auto w = freerdp_settings_get_uint32(settings, FreeRDP_DesktopWidth);
-    auto h = freerdp_settings_get_uint32(settings, FreeRDP_DesktopHeight);
-    m_videoBuffer = QImage(w, h, QImage::Format_RGBX8888);
-
-    if (!gdi_resize_ex(gdi, w, h, m_videoBuffer.bytesPerLine(), PIXEL_FORMAT_RGBX32, m_videoBuffer.bits(), nullptr)) {
-        qCWarning(KRDC) << "Failed resizing GDI subsystem";
-        return false;
-    }
-
-    m_size = QSize(w, h);
-    Q_EMIT sizeChanged();
-
-    return true;
-}
-
-bool RdpSession::onPlaySound()
-{
-    QApplication::beep();
-    return true;
-}
-
 void RdpSession::run()
 {
-    auto rdpC = reinterpret_cast<rdpContext *>(m_context);
+    auto instance = m_context.rdp->instance;
 
     auto timer = CreateWaitableTimerA(nullptr, FALSE, "rdp-session-timer");
     if (!timer) {
@@ -987,9 +1142,13 @@ void RdpSession::run()
     setState(State::Running);
 
     HANDLE handles[MAXIMUM_WAIT_OBJECTS] = {};
-    while (!freerdp_shall_disconnect(m_freerdp)) {
+#if FREERDP_VERSION_MAJOR == 3
+    while (!freerdp_shall_disconnect_context(m_context.rdp)) {
+#else
+    while (!freerdp_shall_disconnect(instance)) {
+#endif
         handles[0] = timer;
-        auto count = freerdp_get_event_handles(rdpC, &handles[1], ARRAYSIZE(handles) - 1);
+        auto count = freerdp_get_event_handles(m_context.rdp, &handles[1], ARRAYSIZE(handles) - 1);
 
         auto status = WaitForMultipleObjects(count, handles, FALSE, INFINITE);
         if (status == WAIT_FAILED) {
@@ -997,18 +1156,18 @@ void RdpSession::run()
             break;
         }
 
-        if (freerdp_check_event_handles(rdpC) != TRUE) {
+        if (freerdp_check_event_handles(m_context.rdp) != TRUE) {
             emitErrorMessage();
             break;
         }
     }
 
-    freerdp_disconnect(m_freerdp);
+    freerdp_disconnect(instance);
 }
 
 void RdpSession::emitErrorMessage()
 {
-    const unsigned int error = freerdp_get_last_error(m_freerdp->context);
+    const unsigned int error = freerdp_get_last_error(m_context.rdp);
 
     if (error == FREERDP_ERROR_CONNECT_CANCELLED) {
         return;
@@ -1021,12 +1180,12 @@ void RdpSession::emitErrorMessage()
     Q_EMIT errorMessage(error);
 }
 
-void RdpSession::initializeClipboard(RdpContext *rdpC, CliprdrClientContext *cliprdr)
+void RdpSession::initializeClipboard(RdpContext *krdp, CliprdrClientContext *cliprdr)
 {
-    if (!rdpC || !cliprdr) {
+    if (!krdp || !cliprdr) {
         return;
     }
-    m_clipboard = std::make_unique<RdpClipboard>(rdpC, cliprdr);
+    m_clipboard = std::make_unique<RdpClipboard>(krdp, cliprdr);
 }
 
 void RdpSession::destroyClipboard()

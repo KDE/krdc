@@ -8,93 +8,19 @@
 #include "rdpcliprdr.h"
 #include "rdpsession.h"
 #include "rdpview.h"
+#include <freerdp/version.h>
 
-UINT krdc_cliprdr_send_client_format_list(CliprdrClientContext *cliprdr)
+UINT RdpClipboard::onSendClientFormatList(CliprdrClientContext *cliprdr)
 {
-    auto clipboard = reinterpret_cast<RdpClipboard *>(cliprdr->custom);
-    return clipboard->onSendClientFormatList();
-}
+    auto kclip = reinterpret_cast<RdpClipboard *>(cliprdr->custom);
+    WINPR_ASSERT(kclip);
 
-UINT krdc_cliprdr_send_client_format_data_request(CliprdrClientContext *cliprdr, UINT32 formatId)
-{
-    auto clipboard = reinterpret_cast<RdpClipboard *>(cliprdr->custom);
-    return clipboard->onSendClientFormatDataRequest(formatId);
-}
-
-UINT krdc_cliprdr_send_client_capabilities(CliprdrClientContext *cliprdr)
-{
-    auto clipboard = reinterpret_cast<RdpClipboard *>(cliprdr->custom);
-    return clipboard->onSendClientCapabilities();
-}
-
-UINT krdc_cliprdr_monitor_ready(CliprdrClientContext *cliprdr, const CLIPRDR_MONITOR_READY *monitorReady)
-{
-    auto clipboard = reinterpret_cast<RdpClipboard *>(cliprdr->custom);
-    return clipboard->onMonitorReady(monitorReady);
-}
-
-UINT krdc_cliprdr_server_capabilities(CliprdrClientContext *cliprdr, const CLIPRDR_CAPABILITIES *capabilities)
-{
-    auto clipboard = reinterpret_cast<RdpClipboard *>(cliprdr->custom);
-    return clipboard->onServerCapabilities(capabilities);
-}
-
-UINT krdc_cliprdr_server_format_list(CliprdrClientContext *cliprdr, const CLIPRDR_FORMAT_LIST *formatList)
-{
-    auto clipboard = reinterpret_cast<RdpClipboard *>(cliprdr->custom);
-    return clipboard->onServerFormatList(formatList);
-}
-
-UINT krdc_cliprdr_server_format_list_response(CliprdrClientContext *cliprdr, const CLIPRDR_FORMAT_LIST_RESPONSE *formatListResponse)
-{
-    auto clipboard = reinterpret_cast<RdpClipboard *>(cliprdr->custom);
-    return clipboard->onServerFormatListResponse(formatListResponse);
-}
-
-UINT krdc_cliprdr_server_lock_clipboard_data(CliprdrClientContext *cliprdr, const CLIPRDR_LOCK_CLIPBOARD_DATA *lockClipboardData)
-{
-    auto clipboard = reinterpret_cast<RdpClipboard *>(cliprdr->custom);
-    return clipboard->onServerLockClipboardData(lockClipboardData);
-}
-
-UINT krdc_cliprdr_server_unlock_clipboard_data(CliprdrClientContext *cliprdr, const CLIPRDR_UNLOCK_CLIPBOARD_DATA *unlockClipboardData)
-{
-    auto clipboard = reinterpret_cast<RdpClipboard *>(cliprdr->custom);
-    return clipboard->onServerUnlockClipboardData(unlockClipboardData);
-}
-
-UINT krdc_cliprdr_server_format_data_request(CliprdrClientContext *cliprdr, const CLIPRDR_FORMAT_DATA_REQUEST *formatDataRequest)
-{
-    auto clipboard = reinterpret_cast<RdpClipboard *>(cliprdr->custom);
-    return clipboard->onServerFormatDataRequest(formatDataRequest);
-}
-
-UINT krdc_cliprdr_server_format_data_response(CliprdrClientContext *cliprdr, const CLIPRDR_FORMAT_DATA_RESPONSE *formatDataResponse)
-{
-    auto clipboard = reinterpret_cast<RdpClipboard *>(cliprdr->custom);
-    return clipboard->onServerFormatDataResponse(formatDataResponse);
-}
-
-UINT krdc_cliprdr_server_file_contents_request(CliprdrClientContext *cliprdr, const CLIPRDR_FILE_CONTENTS_REQUEST *fileContentsRequest)
-{
-    auto clipboard = reinterpret_cast<RdpClipboard *>(cliprdr->custom);
-    return clipboard->onServerFileContentsRequest(fileContentsRequest);
-}
-
-UINT krdc_cliprdr_server_file_contents_response(CliprdrClientContext *cliprdr, const CLIPRDR_FILE_CONTENTS_RESPONSE *fileContentsResponse)
-{
-    auto clipboard = reinterpret_cast<RdpClipboard *>(cliprdr->custom);
-    return clipboard->onServerFileContentsResponse(fileContentsResponse);
-}
-
-UINT RdpClipboard::onSendClientFormatList()
-{
-    if (!m_rdpC || !m_cliprdr) {
+    if (!cliprdr) {
         return ERROR_INVALID_PARAMETER;
     }
 
     UINT32 *pFormatIds = nullptr;
-    UINT32 numFormats = ClipboardGetFormatIds(m_clipboard, &pFormatIds);
+    UINT32 numFormats = ClipboardGetFormatIds(kclip->m_clipboard, &pFormatIds);
     CLIPRDR_FORMAT *formats = reinterpret_cast<CLIPRDR_FORMAT *>(calloc(numFormats, sizeof(CLIPRDR_FORMAT)));
 
     if (!formats) {
@@ -105,7 +31,7 @@ UINT RdpClipboard::onSendClientFormatList()
 
     for (UINT32 index = 0; index < numFormats; index++) {
         UINT32 formatId = pFormatIds[index];
-        const char *formatName = ClipboardGetFormatName(m_clipboard, formatId);
+        const char *formatName = ClipboardGetFormatName(kclip->m_clipboard, formatId);
         formats[index].formatId = formatId;
         formats[index].formatName = nullptr;
 
@@ -121,40 +47,54 @@ UINT RdpClipboard::onSendClientFormatList()
     }
 
     CLIPRDR_FORMAT_LIST formatList = {};
-    formatList.msgFlags = CB_RESPONSE_OK;
+#if FREERDP_VERSION_MAJOR == 3
+    formatList.common.msgType = CB_FORMAT_LIST;
+    formatList.common.msgFlags = 0;
+#else
+    formatList.msgType = CB_FORMAT_LIST;
+    formatList.msgFlags = 0;
+#endif
     formatList.numFormats = numFormats;
     formatList.formats = formats;
-    formatList.msgType = CB_FORMAT_LIST;
 
-    if (!m_cliprdr->ClientFormatList) {
+    if (!cliprdr->ClientFormatList) {
         free(pFormatIds);
         free(formats);
         return ERROR_INTERNAL_ERROR;
     }
 
-    auto rc = m_cliprdr->ClientFormatList(m_cliprdr, &formatList);
+    auto rc = cliprdr->ClientFormatList(cliprdr, &formatList);
     free(pFormatIds);
     free(formats);
     return rc;
 }
 
-UINT RdpClipboard::onSendClientFormatDataRequest(UINT32 formatId)
+UINT RdpClipboard::onSendClientFormatDataRequest(CliprdrClientContext *cliprdr, UINT32 formatId)
 {
-    if (!m_rdpC || !m_cliprdr->ClientFormatDataRequest) {
+    auto kclip = reinterpret_cast<RdpClipboard *>(cliprdr->custom);
+    WINPR_ASSERT(kclip);
+
+    if (!cliprdr->ClientFormatDataRequest) {
         return ERROR_INVALID_PARAMETER;
     }
 
     CLIPRDR_FORMAT_DATA_REQUEST formatDataRequest = {};
+#if FREERDP_VERSION_MAJOR == 3
+    formatDataRequest.common.msgType = CB_FORMAT_DATA_REQUEST;
+    formatDataRequest.common.msgFlags = 0;
+#else
     formatDataRequest.msgType = CB_FORMAT_DATA_REQUEST;
     formatDataRequest.msgFlags = 0;
+#endif
     formatDataRequest.requestedFormatId = formatId;
-    m_requestedFormatId = formatId;
-    return m_cliprdr->ClientFormatDataRequest(m_cliprdr, &formatDataRequest);
+
+    kclip->m_requestedFormatId = formatId;
+    return cliprdr->ClientFormatDataRequest(cliprdr, &formatDataRequest);
 }
 
-UINT RdpClipboard::onSendClientCapabilities()
+UINT RdpClipboard::onSendClientCapabilities(CliprdrClientContext *cliprdr)
 {
-    if (!m_cliprdr || !m_cliprdr->ClientCapabilities) {
+    if (!cliprdr || !cliprdr->ClientCapabilities) {
         return ERROR_INVALID_PARAMETER;
     }
 
@@ -166,30 +106,33 @@ UINT RdpClipboard::onSendClientCapabilities()
     generalCapabilitySet.capabilitySetLength = 12;
     generalCapabilitySet.version = CB_CAPS_VERSION_2;
     generalCapabilitySet.generalFlags = CB_USE_LONG_FORMAT_NAMES;
-    return m_cliprdr->ClientCapabilities(m_cliprdr, &capabilities);
+    return cliprdr->ClientCapabilities(cliprdr, &capabilities);
 }
 
-UINT RdpClipboard::onMonitorReady(const CLIPRDR_MONITOR_READY *monitorReady)
+UINT RdpClipboard::onMonitorReady(CliprdrClientContext *cliprdr, const CLIPRDR_MONITOR_READY *monitorReady)
 {
-    if (!m_rdpC || !m_cliprdr || !monitorReady) {
+    if (!cliprdr || !monitorReady) {
         return ERROR_INVALID_PARAMETER;
     }
 
     UINT rc;
-    if ((rc = onSendClientCapabilities()) != CHANNEL_RC_OK) {
+    if ((rc = onSendClientCapabilities(cliprdr)) != CHANNEL_RC_OK) {
         return rc;
     }
 
-    if ((rc = onSendClientFormatList()) != CHANNEL_RC_OK) {
+    if ((rc = onSendClientFormatList(cliprdr)) != CHANNEL_RC_OK) {
         return rc;
     }
 
     return CHANNEL_RC_OK;
 }
 
-UINT RdpClipboard::onServerCapabilities(const CLIPRDR_CAPABILITIES *capabilities)
+UINT RdpClipboard::onServerCapabilities(CliprdrClientContext *cliprdr, const CLIPRDR_CAPABILITIES *capabilities)
 {
-    if (!m_rdpC || !m_cliprdr || !capabilities) {
+    auto kclip = reinterpret_cast<RdpClipboard *>(cliprdr->custom);
+    WINPR_ASSERT(kclip);
+
+    if (!cliprdr || !capabilities) {
         return ERROR_INVALID_PARAMETER;
     }
 
@@ -198,7 +141,7 @@ UINT RdpClipboard::onServerCapabilities(const CLIPRDR_CAPABILITIES *capabilities
 
         if ((capabilitySet->capabilitySetType == CB_CAPSTYPE_GENERAL) && (capabilitySet->capabilitySetLength >= CB_CAPSTYPE_GENERAL_LEN)) {
             CLIPRDR_GENERAL_CAPABILITY_SET *generalCapabilitySet = reinterpret_cast<CLIPRDR_GENERAL_CAPABILITY_SET *>(capabilitySet);
-            m_clipboardCapabilities = generalCapabilitySet->generalFlags;
+            kclip->m_clipboardCapabilities = generalCapabilitySet->generalFlags;
             break;
         }
     }
@@ -206,14 +149,17 @@ UINT RdpClipboard::onServerCapabilities(const CLIPRDR_CAPABILITIES *capabilities
     return CHANNEL_RC_OK;
 }
 
-UINT RdpClipboard::onServerFormatList(const CLIPRDR_FORMAT_LIST *formatList)
+UINT RdpClipboard::onServerFormatList(CliprdrClientContext *cliprdr, const CLIPRDR_FORMAT_LIST *formatList)
 {
-    if (!m_rdpC || !m_cliprdr || !formatList) {
+    auto kclip = reinterpret_cast<RdpClipboard *>(cliprdr->custom);
+    WINPR_ASSERT(kclip);
+
+    if (!cliprdr || !formatList) {
         return ERROR_INVALID_PARAMETER;
     }
 
-    qDeleteAll(m_serverFormats);
-    m_serverFormats.clear();
+    qDeleteAll(kclip->m_serverFormats);
+    kclip->m_serverFormats.clear();
 
     if (formatList->numFormats < 1) {
         return CHANNEL_RC_OK;
@@ -232,18 +178,18 @@ UINT RdpClipboard::onServerFormatList(const CLIPRDR_FORMAT_LIST *formatList)
             }
         }
 
-        m_serverFormats.append(format);
+        kclip->m_serverFormats.append(format);
     }
 
     UINT rc;
-    for (auto format : m_serverFormats) {
+    for (auto format : kclip->m_serverFormats) {
         if (format->formatId == CF_UNICODETEXT) {
-            if ((rc = onSendClientFormatDataRequest(CF_UNICODETEXT)) != CHANNEL_RC_OK)
+            if ((rc = onSendClientFormatDataRequest(cliprdr, CF_UNICODETEXT)) != CHANNEL_RC_OK)
                 return rc;
 
             break;
         } else if (format->formatId == CF_TEXT) {
-            if ((rc = onSendClientFormatDataRequest(CF_TEXT)) != CHANNEL_RC_OK)
+            if ((rc = onSendClientFormatDataRequest(cliprdr, CF_TEXT)) != CHANNEL_RC_OK)
                 return rc;
 
             break;
@@ -253,134 +199,152 @@ UINT RdpClipboard::onServerFormatList(const CLIPRDR_FORMAT_LIST *formatList)
     return CHANNEL_RC_OK;
 }
 
-UINT RdpClipboard::onServerFormatListResponse(const CLIPRDR_FORMAT_LIST_RESPONSE *formatListResponse)
+UINT RdpClipboard::onServerFormatListResponse(CliprdrClientContext *cliprdr, const CLIPRDR_FORMAT_LIST_RESPONSE *formatListResponse)
 {
-    if (!m_cliprdr || !formatListResponse) {
+    if (!cliprdr || !formatListResponse) {
         return ERROR_INVALID_PARAMETER;
     }
 
     return CHANNEL_RC_OK;
 }
 
-UINT RdpClipboard::onServerLockClipboardData(const CLIPRDR_LOCK_CLIPBOARD_DATA *lockClipboardData)
+UINT RdpClipboard::onServerLockClipboardData(CliprdrClientContext *cliprdr, const CLIPRDR_LOCK_CLIPBOARD_DATA *lockClipboardData)
 {
-    if (!m_cliprdr || !lockClipboardData) {
+    if (!cliprdr || !lockClipboardData) {
         return ERROR_INVALID_PARAMETER;
     }
 
     return CHANNEL_RC_OK;
 }
 
-UINT RdpClipboard::onServerUnlockClipboardData(const CLIPRDR_UNLOCK_CLIPBOARD_DATA *unlockClipboardData)
+UINT RdpClipboard::onServerUnlockClipboardData(CliprdrClientContext *cliprdr, const CLIPRDR_UNLOCK_CLIPBOARD_DATA *unlockClipboardData)
 {
-    if (!m_cliprdr || !unlockClipboardData) {
+    if (!cliprdr || !unlockClipboardData) {
         return ERROR_INVALID_PARAMETER;
     }
 
     return CHANNEL_RC_OK;
 }
 
-UINT RdpClipboard::onServerFormatDataRequest(const CLIPRDR_FORMAT_DATA_REQUEST *formatDataRequest)
+UINT RdpClipboard::onServerFormatDataRequest(CliprdrClientContext *cliprdr, const CLIPRDR_FORMAT_DATA_REQUEST *formatDataRequest)
 {
-    if (!m_rdpC || !m_cliprdr || !formatDataRequest || !m_cliprdr->ClientFormatDataResponse) {
+    auto kclip = reinterpret_cast<RdpClipboard *>(cliprdr->custom);
+    WINPR_ASSERT(kclip);
+
+    if (!cliprdr || !formatDataRequest || !cliprdr->ClientFormatDataResponse) {
         return ERROR_INVALID_PARAMETER;
     }
 
     UINT32 size;
-    auto data = reinterpret_cast<BYTE *>(ClipboardGetData(m_clipboard, formatDataRequest->requestedFormatId, &size));
+    auto data = reinterpret_cast<BYTE *>(ClipboardGetData(kclip->m_clipboard, formatDataRequest->requestedFormatId, &size));
 
     CLIPRDR_FORMAT_DATA_RESPONSE response = {};
     if (data) {
+#if FREERDP_VERSION_MAJOR == 3
+        response.common.msgFlags = CB_RESPONSE_OK;
+        response.common.dataLen = size;
+#else
         response.msgFlags = CB_RESPONSE_OK;
         response.dataLen = size;
+#endif
         response.requestedFormatData = data;
     } else {
+#if FREERDP_VERSION_MAJOR == 3
+        response.common.msgFlags = CB_RESPONSE_FAIL;
+        response.common.dataLen = 0;
+#else
         response.msgFlags = CB_RESPONSE_FAIL;
         response.dataLen = 0;
+#endif
         response.requestedFormatData = nullptr;
     }
 
-    auto rc = m_cliprdr->ClientFormatDataResponse(m_cliprdr, &response);
+    auto rc = cliprdr->ClientFormatDataResponse(cliprdr, &response);
     free(data);
     return rc;
 }
 
-UINT RdpClipboard::onServerFormatDataResponse(const CLIPRDR_FORMAT_DATA_RESPONSE *formatDataResponse)
+UINT RdpClipboard::onServerFormatDataResponse(CliprdrClientContext *cliprdr, const CLIPRDR_FORMAT_DATA_RESPONSE *formatDataResponse)
 {
-    if (!m_rdpC || !m_cliprdr || !formatDataResponse) {
+    auto kclip = reinterpret_cast<RdpClipboard *>(cliprdr->custom);
+    WINPR_ASSERT(kclip);
+
+    if (!cliprdr || !formatDataResponse) {
         return ERROR_INVALID_PARAMETER;
     }
 
     CLIPRDR_FORMAT *format = nullptr;
-    for (auto tmpFormat : m_serverFormats) {
-        if (m_requestedFormatId == tmpFormat->formatId) {
+    for (auto tmpFormat : kclip->m_serverFormats) {
+        if (kclip->m_requestedFormatId == tmpFormat->formatId) {
             format = tmpFormat;
         }
     }
-
     if (!format) {
         return ERROR_INTERNAL_ERROR;
     }
 
     UINT32 formatId;
     if (format->formatName) {
-        formatId = ClipboardRegisterFormat(m_clipboard, format->formatName);
+        formatId = ClipboardRegisterFormat(kclip->m_clipboard, format->formatName);
     } else {
         formatId = format->formatId;
     }
 
+#if FREERDP_VERSION_MAJOR == 3
+    UINT32 size = formatDataResponse->common.dataLen;
+#else
     UINT32 size = formatDataResponse->dataLen;
-    if (!ClipboardSetData(m_clipboard, formatId, formatDataResponse->requestedFormatData, size)) {
+#endif
+    if (!ClipboardSetData(kclip->m_clipboard, formatId, formatDataResponse->requestedFormatData, size)) {
         return ERROR_INTERNAL_ERROR;
     }
 
     if ((formatId == CF_TEXT) || (formatId == CF_UNICODETEXT)) {
-        formatId = ClipboardRegisterFormat(m_clipboard, "UTF8_STRING");
-        auto data = reinterpret_cast<char *>(ClipboardGetData(m_clipboard, formatId, &size));
+        auto data = reinterpret_cast<char *>(ClipboardGetData(kclip->m_clipboard, CF_TEXT, &size));
         size = strnlen(data, size);
 
         QMimeData *mimeData = new QMimeData;
         mimeData->setText(QString::fromUtf8(data, size));
-        m_rdpC->session->rdpView()->remoteClipboardChanged(mimeData);
+        kclip->m_krdp->session->rdpView()->remoteClipboardChanged(mimeData);
     }
 
     return CHANNEL_RC_OK;
 }
 
-UINT RdpClipboard::onServerFileContentsRequest(const CLIPRDR_FILE_CONTENTS_REQUEST *fileContentsRequest)
+UINT RdpClipboard::onServerFileContentsRequest(CliprdrClientContext *cliprdr, const CLIPRDR_FILE_CONTENTS_REQUEST *fileContentsRequest)
 {
-    if (!m_cliprdr || !fileContentsRequest) {
+    if (!cliprdr || !fileContentsRequest) {
         return ERROR_INVALID_PARAMETER;
     }
 
     return CHANNEL_RC_OK;
 }
 
-UINT RdpClipboard::onServerFileContentsResponse(const CLIPRDR_FILE_CONTENTS_RESPONSE *fileContentsResponse)
+UINT RdpClipboard::onServerFileContentsResponse(CliprdrClientContext *cliprdr, const CLIPRDR_FILE_CONTENTS_RESPONSE *fileContentsResponse)
 {
-    if (!m_cliprdr || !fileContentsResponse) {
+    if (!cliprdr || !fileContentsResponse) {
         return ERROR_INVALID_PARAMETER;
     }
 
     return CHANNEL_RC_OK;
 }
 
-RdpClipboard::RdpClipboard(RdpContext *rdpC, CliprdrClientContext *cliprdr)
-    : m_rdpC(rdpC)
+RdpClipboard::RdpClipboard(RdpContext *krdp, CliprdrClientContext *cliprdr)
 {
-    m_cliprdr = cliprdr;
+    m_krdp = krdp;
     m_clipboard = ClipboardCreate();
-    m_cliprdr->custom = reinterpret_cast<void *>(this);
-    m_cliprdr->MonitorReady = krdc_cliprdr_monitor_ready;
-    m_cliprdr->ServerCapabilities = krdc_cliprdr_server_capabilities;
-    m_cliprdr->ServerFormatList = krdc_cliprdr_server_format_list;
-    m_cliprdr->ServerFormatListResponse = krdc_cliprdr_server_format_list_response;
-    m_cliprdr->ServerLockClipboardData = krdc_cliprdr_server_lock_clipboard_data;
-    m_cliprdr->ServerUnlockClipboardData = krdc_cliprdr_server_unlock_clipboard_data;
-    m_cliprdr->ServerFormatDataRequest = krdc_cliprdr_server_format_data_request;
-    m_cliprdr->ServerFormatDataResponse = krdc_cliprdr_server_format_data_response;
-    m_cliprdr->ServerFileContentsRequest = krdc_cliprdr_server_file_contents_request;
-    m_cliprdr->ServerFileContentsResponse = krdc_cliprdr_server_file_contents_response;
+    m_cliprdr = cliprdr;
+    cliprdr->custom = reinterpret_cast<void *>(this);
+    cliprdr->MonitorReady = onMonitorReady;
+    cliprdr->ServerCapabilities = onServerCapabilities;
+    cliprdr->ServerFormatList = onServerFormatList;
+    cliprdr->ServerFormatListResponse = onServerFormatListResponse;
+    cliprdr->ServerLockClipboardData = onServerLockClipboardData;
+    cliprdr->ServerUnlockClipboardData = onServerUnlockClipboardData;
+    cliprdr->ServerFormatDataRequest = onServerFormatDataRequest;
+    cliprdr->ServerFormatDataResponse = onServerFormatDataResponse;
+    cliprdr->ServerFileContentsRequest = onServerFileContentsRequest;
+    cliprdr->ServerFileContentsResponse = onServerFileContentsResponse;
 }
 
 RdpClipboard::~RdpClipboard()
@@ -391,7 +355,7 @@ RdpClipboard::~RdpClipboard()
     m_cliprdr->custom = nullptr;
     m_cliprdr = nullptr;
     ClipboardDestroy(m_clipboard);
-    m_rdpC->clipboard = nullptr;
+    m_krdp->clipboard = nullptr;
 }
 
 bool RdpClipboard::sendClipboard(const QMimeData *data)
@@ -403,12 +367,11 @@ bool RdpClipboard::sendClipboard(const QMimeData *data)
         if (text.isEmpty()) {
             ClipboardEmpty(m_clipboard);
         } else {
-            auto formatId = ClipboardRegisterFormat(m_clipboard, "UTF8_STRING");
             QByteArray bytes = text.toUtf8();
-            ClipboardSetData(m_clipboard, formatId, bytes.data(), bytes.size() + 1);
+            ClipboardSetData(m_clipboard, CF_TEXT, bytes.data(), bytes.size() + 1);
         }
 
-        onSendClientFormatList();
+        onSendClientFormatList(m_cliprdr);
         return true;
     }
 

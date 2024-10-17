@@ -15,6 +15,7 @@
 
 #include <freerdp/client/cliprdr.h>
 #include <freerdp/freerdp.h>
+#include <freerdp/version.h>
 
 class RdpClipboard;
 class RdpSession;
@@ -23,7 +24,7 @@ class RdpHostPreferences;
 class QMimeData;
 
 struct RdpContext {
-    rdpContext _c;
+    rdpClientContext _c;
 
     RdpSession *session = nullptr;
     RdpClipboard *clipboard = nullptr;
@@ -99,7 +100,7 @@ public:
 
     bool sendEvent(QEvent *event, QWidget *source);
 
-    void initializeClipboard(RdpContext *rdpC, CliprdrClientContext *cliprdr);
+    void initializeClipboard(RdpContext *krdp, CliprdrClientContext *cliprdr);
     void destroyClipboard();
     bool sendClipboard(const QMimeData *data);
 
@@ -114,40 +115,66 @@ public:
         return m_view;
     };
 
+    static BOOL preConnect(freerdp *);
+    static BOOL postConnect(freerdp *);
+    static void postDisconnect(freerdp *);
+#if FREERDP_VERSION_MAJOR == 3
+    static void postFinalDisconnect(freerdp *);
+#endif
+
+#if FREERDP_VERSION_MAJOR == 3
+    static BOOL authenticateEx(freerdp *instance, char **username, char **password, char **domain, rdp_auth_reason reason);
+#else
+    static BOOL authenticate(freerdp *instance, char **username, char **password, char **domain);
+#endif
+    static DWORD verifyCertificateEx(freerdp *, const char *, UINT16 port, const char *, const char *, const char *, const char *, DWORD);
+    static DWORD verifyChangedCertificateEx(freerdp *,
+                                            const char *,
+                                            UINT16,
+                                            const char *,
+                                            const char *,
+                                            const char *,
+                                            const char *,
+                                            const char *,
+                                            const char *,
+                                            const char *,
+                                            DWORD);
+    static BOOL endPaint(rdpContext *);
+    static BOOL resizeDisplay(rdpContext *);
+    static BOOL playSound(rdpContext *, const PLAY_SOUND_UPDATE *);
+
+#if FREERDP_VERSION_MAJOR == 3
+    static void channelConnected(void *context, const ChannelConnectedEventArgs *e);
+    static void channelDisconnected(void *context, const ChannelDisconnectedEventArgs *e);
+#else
+    static void channelConnected(void *context, ChannelConnectedEventArgs *e);
+    static void channelDisconnected(void *context, ChannelDisconnectedEventArgs *e);
+#endif
+
+    static int logonErrorInfo(freerdp *rdp, UINT32 data, UINT32 type);
+    static BOOL presentGatewayMessage(freerdp *instance, UINT32 type, BOOL isDisplayMandatory, BOOL isConsentMandatory, size_t length, const WCHAR *message);
+#if FREERDP_VERSION_MAJOR == 3
+    static BOOL chooseSmartcard(freerdp *instance, SmartcardCertInfo **cert_list, DWORD count, DWORD *choice, BOOL gateway);
+    static SSIZE_T retryDialog(freerdp *instance, const char *what, size_t current, void *userarg);
+#endif
+
+    static BOOL clientGlobalInit(void);
+    static void clientGlobalUninit(void);
+
+    static BOOL clientContextNew(freerdp *instance, rdpContext *context);
+    static void clientContextFree(freerdp *instance, rdpContext *context);
+
+    static int clientContextStart(rdpContext *context);
+    static int clientContextStop(rdpContext *context);
+
+    static RDP_CLIENT_ENTRY_POINTS RdpClientEntry();
+
 private:
-    friend BOOL preConnect(freerdp *);
-    friend BOOL postConnect(freerdp *);
-    friend void postDisconnect(freerdp *);
-    friend BOOL authenticate(freerdp *, char **, char **, char **);
-    friend DWORD verifyCertificate(freerdp *, const char *, UINT16 port, const char *, const char *, const char *, const char *, DWORD);
-    friend DWORD verifyChangedCertificate(freerdp *,
-                                          const char *,
-                                          UINT16,
-                                          const char *,
-                                          const char *,
-                                          const char *,
-                                          const char *,
-                                          const char *,
-                                          const char *,
-                                          const char *,
-                                          DWORD);
-    friend BOOL endPaint(rdpContext *);
-    friend BOOL resizeDisplay(rdpContext *);
-    friend BOOL playSound(rdpContext *, const PLAY_SOUND_UPDATE *);
-
     void setState(State newState);
-
-    bool onPreConnect();
-    bool onPostConnect();
-    void onPostDisconnect();
 
     bool onAuthenticate(char **username, char **password, char **domain);
     CertificateResult onVerifyCertificate(const Certificate &certificate);
     CertificateResult onVerifyChangedCertificate(const Certificate &oldCertificate, const Certificate &newCertificate);
-
-    bool onEndPaint();
-    bool onResizeDisplay();
-    bool onPlaySound();
 
     void run();
 
@@ -155,8 +182,13 @@ private:
 
     RdpView *m_view;
 
-    freerdp *m_freerdp = nullptr;
-    RdpContext *m_context = nullptr;
+    union {
+        // krdc's context
+        RdpContext *krdp;
+        // freerdp/s context
+        rdpContext *rdp;
+    } m_context;
+
     std::unique_ptr<RdpClipboard> m_clipboard;
 
     State m_state = State::Initial;
@@ -167,6 +199,7 @@ private:
     QString m_host;
     int m_port = -1;
     QSize m_size;
+    bool m_firstPasswordTry;
 
     std::thread m_thread;
 

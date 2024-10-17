@@ -89,8 +89,10 @@ endif(WIN32)
 
 option(WITH_VNC "Enable VNC support." ON)
 add_feature_info(VNC WITH_VNC "Building with support for the VNC protocol. Disable with -DWITH_VNC=NO")
-option(WITH_RDP "Enable RDP support. Has additional runtime binary requirements!" ON)
+option(WITH_RDP "Enable RDP support using FreeRDP version 2" ON)
 add_feature_info(RDP WITH_RDP "Building with support for the RDP protocol. Disable with -DWITH_RDP=NO")
+option(WITH_RDP3 "Enable RDP support using FreeRDP version 3" OFF)
+add_feature_info(RDP WITH_RDP "Building with support for the RDP protocol. Enable with -DWITH_RDP3=YES")
 
 ecm_set_disabled_deprecation_versions(QT 5.15.2
      KF 6.5.0
@@ -131,6 +133,29 @@ if(WITH_RDP)
         TYPE REQUIRED
     )
     find_package(FreeRDP-Client 2.10)
+    set_package_properties(FreeRDP-Client PROPERTIES
+        DESCRIPTION "A free Remote Desktop Protocol (RDP) Implementation, Client libraries"
+        URL "https://www.freerdp.com/"
+        PURPOSE "FreeRDP provides RDP support"
+        TYPE REQUIRED
+    )
+    add_subdirectory(rdp)
+elseif(WITH_RDP3)
+    find_package(FreeRDP 3)
+    set_package_properties(FreeRDP PROPERTIES
+        DESCRIPTION "A free Remote Desktop Protocol (RDP) Implementation"
+        URL "https://www.freerdp.com/"
+        PURPOSE "FreeRDP provides RDP support"
+        TYPE REQUIRED
+    )
+    find_package(WinPR 3)
+    set_package_properties(WinPR PROPERTIES
+        DESCRIPTION "Windows Portable Runtime"
+        URL "https://www.freerdp.com/"
+        PURPOSE "Runtime used by FreeRDP"
+        TYPE REQUIRED
+    )
+    find_package(FreeRDP-Client 3)
     set_package_properties(FreeRDP-Client PROPERTIES
         DESCRIPTION "A free Remote Desktop Protocol (RDP) Implementation, Client libraries"
         URL "https://www.freerdp.com/"

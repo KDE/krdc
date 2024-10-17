@@ -166,6 +166,9 @@ void RdpView::handleError(const unsigned int error)
     QString title;
     QString message;
 
+    if (m_quitting)
+        return;
+
     switch (error) {
     case FREERDP_ERROR_CONNECT_CANCELLED:
         return; // user canceled connection, no need to show an error message
