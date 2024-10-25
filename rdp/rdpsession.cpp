@@ -421,8 +421,8 @@ bool RdpSession::start()
     }
 
     if (!m_preferences->shareMedia().isEmpty()) {
-        char *params[2] = {strdup("drive"), m_preferences->shareMedia().toLocal8Bit().data()};
-        freerdp_client_add_device_channel(settings, 1, params);
+        char *params[2] = {QStringLiteral("drive").toLocal8Bit().data(), m_preferences->shareMedia().toLocal8Bit().data()};
+        freerdp_client_add_device_channel(settings, 2, params);
     }
 
     settings->KeyboardLayout = m_preferences->rdpKeyboardLayout();
