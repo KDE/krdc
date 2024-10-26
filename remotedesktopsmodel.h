@@ -22,7 +22,12 @@ class ServiceBrowser;
 
 struct RemoteDesktop {
 public:
-    enum Source { None = 0x0, Bookmarks = 0x1, History = 0x2, Zeroconf = 0x4 };
+    enum Source {
+        None = 0x0,
+        Bookmarks = 0x1,
+        History = 0x2,
+        Zeroconf = 0x4
+    };
     Q_DECLARE_FLAGS(Sources, Source)
     QString title;
     QString url;
@@ -51,7 +56,14 @@ public:
     explicit RemoteDesktopsModel(QObject *parent, KBookmarkManager *manager);
     ~RemoteDesktopsModel() override;
 
-    enum DisplayItems { Favorite, Title, LastConnected, VisitCount, Created, Source };
+    enum DisplayItems {
+        Favorite,
+        Title,
+        LastConnected,
+        VisitCount,
+        Created,
+        Source
+    };
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     int columnCount(const QModelIndex &parent = QModelIndex()) const override;
     Qt::ItemFlags flags(const QModelIndex &index) const override;

@@ -26,7 +26,11 @@ static const int initialAutoHideTimeout = 2000;
 /**
  * Denotes the various states of the animation.
  */
-enum AnimState { Hiding, Showing, Still };
+enum AnimState {
+    Hiding,
+    Showing,
+    Still
+};
 
 class FloatingToolBarPrivate
 {
