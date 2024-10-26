@@ -421,7 +421,10 @@ bool RdpSession::start()
     }
 
     if (!m_preferences->shareMedia().isEmpty()) {
-        char *params[2] = {QStringLiteral("drive").toLocal8Bit().data(), m_preferences->shareMedia().toLocal8Bit().data()};
+        QByteArray name = "drive";
+        QByteArray value = m_preferences->shareMedia().toLocal8Bit();
+
+        char *params[2] = {name.data(), value.data()};
         freerdp_client_add_device_channel(settings, 2, params);
     }
 
