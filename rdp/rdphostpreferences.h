@@ -125,6 +125,21 @@ public:
     QString gatewayDomain() const;
     void setGatewayDomain(const QString &gatewayDomain);
 
+    QString smartcardName() const;
+    void setSmartcardName(const QString &smartcardName);
+
+    bool securityNLA() const;
+    void setSecurityNLA(bool enabled);
+
+    bool securityTLS() const;
+    void setSecurityTLS(bool enabled);
+
+    bool securityRDP() const;
+    void setSecurityRDP(bool enabled);
+
+    bool securityEXT() const;
+    void setSecurityEXT(bool enabled);
+
 protected:
     QWidget *createProtocolSpecificConfigPage() override;
     void acceptConfig() override;

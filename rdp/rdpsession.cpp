@@ -525,6 +525,18 @@ int RdpSession::clientContextStart(rdpContext *context)
         freerdp_client_add_device_channel(settings, 2, params);
     }
 
+    if (!preferences->smartcardName().isEmpty()) {
+        QByteArray name = "smartcard";
+        QByteArray value = preferences->smartcardName().toLocal8Bit();
+
+#if FREERDP_VERSION_MAJOR == 3
+        const char *params[2] = {name.data(), value.data()};
+#else
+        char *params[2] = {name.data(), value.data()};
+#endif
+        freerdp_client_add_device_channel(settings, 2, params);
+    }
+
     if (!freerdp_settings_set_uint32(settings, FreeRDP_KeyboardLayout, preferences->rdpKeyboardLayout())) {
         return -1;
     }
@@ -561,6 +573,19 @@ int RdpSession::clientContextStart(rdpContext *context)
             return -1;
         }
         break;
+    }
+
+    if (!freerdp_settings_set_bool(settings, FreeRDP_NlaSecurity, preferences->securityNLA())) {
+        return -1;
+    }
+    if (!freerdp_settings_set_bool(settings, FreeRDP_TlsSecurity, preferences->securityTLS())) {
+        return -1;
+    }
+    if (!freerdp_settings_set_bool(settings, FreeRDP_RdpSecurity, preferences->securityRDP())) {
+        return -1;
+    }
+    if (!freerdp_settings_set_bool(settings, FreeRDP_ExtSecurity, preferences->securityEXT())) {
+        return -1;
     }
 
     const auto proxyHostAddress = QUrl(preferences->proxyHost());

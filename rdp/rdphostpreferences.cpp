@@ -145,6 +145,11 @@ QWidget *RdpHostPreferences::createProtocolSpecificConfigPage()
     rdpUi.kcfg_GatewayPassword->setPassword(gatewayPassword());
     rdpUi.kcfg_GatewayServer->setText(gatewayServer());
     rdpUi.kcfg_GatewayDomain->setText(gatewayDomain());
+    rdpUi.kcfg_SmartcardName->setText(smartcardName());
+    rdpUi.kcfg_NLASecurity->setChecked(securityNLA());
+    rdpUi.kcfg_TLSSecurity->setChecked(securityTLS());
+    rdpUi.kcfg_RDPSecurity->setChecked(securityRDP());
+    rdpUi.kcfg_EXTSecurity->setChecked(securityEXT());
 
     // Have to call updateWidthHeight() here
     // We leverage the final part of this function to enable/disable kcfg_Height and kcfg_Width
@@ -235,6 +240,11 @@ void RdpHostPreferences::acceptConfig()
     setGatewayPassword(rdpUi.kcfg_GatewayPassword->password());
     setGatewayServer(rdpUi.kcfg_GatewayServer->text());
     setGatewayDomain(rdpUi.kcfg_GatewayDomain->text());
+    setSmartcardName(rdpUi.kcfg_SmartcardName->text());
+    setSecurityNLA(rdpUi.kcfg_NLASecurity->isChecked());
+    setSecurityTLS(rdpUi.kcfg_TLSSecurity->isChecked());
+    setSecurityRDP(rdpUi.kcfg_RDPSecurity->isChecked());
+    setSecurityEXT(rdpUi.kcfg_EXTSecurity->isChecked());
 }
 
 bool RdpHostPreferences::scaleToSize() const
@@ -421,4 +431,44 @@ QString RdpHostPreferences::gatewayDomain() const
 void RdpHostPreferences::setGatewayDomain(const QString &gatewayDomain)
 {
     m_configGroup.writeEntry("gatewayDomain", gatewayDomain);
+}
+QString RdpHostPreferences::smartcardName() const
+{
+    return QString(m_configGroup.readEntry("smartcardName", Settings::smartcardName()));
+}
+void RdpHostPreferences::setSmartcardName(const QString &smartcardName)
+{
+    m_configGroup.writeEntry("smartcardName", smartcardName);
+}
+bool RdpHostPreferences::securityNLA() const
+{
+    return m_configGroup.readEntry("securityNLA", Settings::securityNLA());
+}
+void RdpHostPreferences::setSecurityNLA(bool enabled)
+{
+    m_configGroup.writeEntry("securityNLA", enabled);
+}
+bool RdpHostPreferences::securityTLS() const
+{
+    return m_configGroup.readEntry("securityTLS", Settings::securityTLS());
+}
+void RdpHostPreferences::setSecurityTLS(bool enabled)
+{
+    m_configGroup.writeEntry("securityTLS", enabled);
+}
+bool RdpHostPreferences::securityRDP() const
+{
+    return m_configGroup.readEntry("securityRDP", Settings::securityRDP());
+}
+void RdpHostPreferences::setSecurityRDP(bool enabled)
+{
+    m_configGroup.writeEntry("securityRDP", enabled);
+}
+bool RdpHostPreferences::securityEXT() const
+{
+    return m_configGroup.readEntry("securityEXT", Settings::securityEXT());
+}
+void RdpHostPreferences::setSecurityEXT(bool enabled)
+{
+    m_configGroup.writeEntry("securityEXT", enabled);
 }

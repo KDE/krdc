@@ -11,7 +11,7 @@
    </rect>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="9" column="1">
+   <item row="11" column="1">
     <spacer>
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -93,7 +93,7 @@
      </property>
     </widget>
    </item>
-   <item row="9" column="0">
+   <item row="11" column="0">
     <widget class="QLabel" name="TlsSecLevelLabel">
      <property name="text">
       <string>TLS security level:</string>
@@ -417,7 +417,7 @@
      </property>
     </widget>
    </item>
-   <item row="9" column="1">
+   <item row="11" column="1">
     <widget class="KComboBox" name="kcfg_TlsSecLevel">
      <property name="sizePolicy">
       <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -606,7 +606,7 @@
      </item>
     </widget>
    </item>
-   <item row="12" column="0" colspan="2">
+   <item row="14" column="0" colspan="2">
     <widget class="QTabWidget" name="advancedNetworkSettingsTabs">
      <property name="currentIndex">
       <number>0</number>
@@ -785,7 +785,7 @@
      </property>
     </widget>
    </item>
-   <item row="11" column="0" colspan="2" alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+   <item row="13" column="0" colspan="2" alignment="Qt::AlignHCenter|Qt::AlignVCenter">
     <widget class="QLabel" name="advancedNetworkSettingsLabel">
      <property name="text">
       <string>Advanced Network Settings</string>
@@ -795,7 +795,7 @@
      </property>
     </widget>
    </item>
-   <item row="10" column="0">
+   <item row="12" column="0">
     <spacer name="verticalSpacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -807,6 +807,61 @@
       </size>
      </property>
     </spacer>
+   </item>
+   <item row="9" column="0">
+    <widget class="QLabel" name="shareSmartcardLabel">
+     <property name="text">
+      <string>Share Smartcard:</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="1">
+    <widget class="KLineEdit" name="kcfg_SmartcardName"/>
+   </item>
+   <item row="10" column="0">
+    <widget class="QLabel" name="gSecurityLabel">
+     <property name="text">
+      <string>Security:</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="10" column="1">
+    <layout class="QHBoxLayout" name="securityLayout">
+     <item>
+      <widget class="QCheckBox" name="kcfg_NLASecurity">
+       <property name="text">
+        <string>NLA</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="kcfg_TLSSecurity">
+       <property name="text">
+        <string>TLS</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="kcfg_RDPSecurity">
+       <property name="text">
+        <string>RDP</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="kcfg_EXTSecurity">
+       <property name="text">
+        <string>Ext</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>
