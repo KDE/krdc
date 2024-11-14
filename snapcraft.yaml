@@ -40,9 +40,14 @@ parts:
     build-packages:
       - libvncserver-dev
       - libssh2-1-dev
+      - freerdp2-dev
+      - libwinpr2-dev
     stage-packages:
       - libvncclient1
       - freerdp2-x11
+      - freerdp2-wayland
+      - libfreerdp-client2
+      - libwinpr2
     cmake-parameters:
       - -DCMAKE_INSTALL_PREFIX=/usr
       - -DCMAKE_BUILD_TYPE=Release
