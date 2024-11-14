@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdenetwork-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-27 00:40+0000\n"
+"POT-Creation-Date: 2024-11-14 00:40+0000\n"
 "PO-Revision-Date: 2024-10-18 02:01+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -1255,13 +1255,52 @@ msgstr "Renk &derinliği:"
 msgid "Advanced Network Settings"
 msgstr "Gelişmiş Ağ Ayarları"
 
-#: rdp/rdpsession.cpp:164
+#. i18n: ectx: property (text), widget (QLabel, shareSmartcardLabel)
+#: rdp/rdppreferences.ui:814
+#, kde-format
+msgid "Share Smartcard:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, gSecurityLabel)
+#: rdp/rdppreferences.ui:827
+#, fuzzy, kde-format
+#| msgid "TLS security level:"
+msgid "Security:"
+msgstr "TLS güvenlik düzeyi:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_NLASecurity)
+#: rdp/rdppreferences.ui:839
+#, fuzzy, kde-format
+#| msgid "LAN"
+msgid "NLA"
+msgstr "LAN"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_TLSSecurity)
+#: rdp/rdppreferences.ui:846
+#, kde-format
+msgid "TLS"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RDPSecurity)
+#: rdp/rdppreferences.ui:853
+#, fuzzy, kde-format
+#| msgid "RPC"
+msgid "RDP"
+msgstr "RPC"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_EXTSecurity)
+#: rdp/rdppreferences.ui:860
+#, kde-format
+msgid "Ext"
+msgstr ""
+
+#: rdp/rdpsession.cpp:251
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Logon Error"
 msgstr "Oturum Açma Hatası"
 
-#: rdp/rdpsession.cpp:223
+#: rdp/rdpsession.cpp:835
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1277,49 +1316,43 @@ msgstr ""
 "Veren: %5\n"
 "Parmak izi: %6\n"
 
-#: rdp/rdpsession.cpp:714
-#, kde-format
-msgctxt "@label"
-msgid "Access to this system requires a password."
-msgstr "Bu sisteme erişim bir parola gerektiriyor."
-
-#: rdp/rdpsession.cpp:717
+#: rdp/rdpsession.cpp:1085
 #, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
 msgstr "Bu sisteme erişim bir kullanıcı adı ve parola gerektiriyor."
 
-#: rdp/rdpsession.cpp:739
+#: rdp/rdpsession.cpp:1108
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr "Bu sistem için olan sertifika bilinmiyor. Sürdürmek istiyor musunuz?"
 
-#: rdp/rdpsession.cpp:740
+#: rdp/rdpsession.cpp:1109
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
 msgstr "Sertifikayı Doğrula"
 
-#: rdp/rdpsession.cpp:745 rdp/rdpsession.cpp:768
+#: rdp/rdpsession.cpp:1114 rdp/rdpsession.cpp:1137
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
 msgstr "Bu sertifikayı anımsa"
 
-#: rdp/rdpsession.cpp:762
+#: rdp/rdpsession.cpp:1131
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
 msgstr "Bu sistem için olan sertifika değiştirildi. Sürdürmek istiyor musunuz?"
 
-#: rdp/rdpsession.cpp:763
+#: rdp/rdpsession.cpp:1132
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
 msgstr "Sertifika Değişti"
 
-#: rdp/rdpsession.cpp:766
+#: rdp/rdpsession.cpp:1135
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1332,13 +1365,13 @@ msgstr ""
 "%1\n"
 "Yeni sertifika:\\ %2"
 
-#: rdp/rdpview.cpp:175
+#: rdp/rdpview.cpp:178
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Login Failure"
 msgstr "Oturum Açma Hatası"
 
-#: rdp/rdpview.cpp:176
+#: rdp/rdpview.cpp:179
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1348,13 +1381,13 @@ msgstr ""
 "Sağlanan kimlik bilgileriyle oturum açılamıyor. Kullanıcı adını ve parolayı "
 "bir kez daha denetleyin."
 
-#: rdp/rdpview.cpp:185
+#: rdp/rdpview.cpp:188
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Account Problems"
 msgstr "Hesap Sorunları"
 
-#: rdp/rdpview.cpp:186
+#: rdp/rdpview.cpp:189
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1364,13 +1397,13 @@ msgstr ""
 "Sağlanan hesabın bu makineye erişimine izin yok. Lütfen sistem yöneticinizle "
 "iletişime geçin."
 
-#: rdp/rdpview.cpp:191
+#: rdp/rdpview.cpp:194
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Password Problems"
 msgstr "Parola Sorunları"
 
-#: rdp/rdpview.cpp:192
+#: rdp/rdpview.cpp:195
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1380,73 +1413,73 @@ msgstr ""
 "Sağlanan parolayla oturum açılamıyor. Değiştirmek için lütfen sistem "
 "yöneticinizle iletişime geçin."
 
-#: rdp/rdpview.cpp:195
+#: rdp/rdpview.cpp:198
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Lost"
 msgstr "Bağlantı Koptu"
 
-#: rdp/rdpview.cpp:196
+#: rdp/rdpview.cpp:199
 #, kde-format
 msgctxt "@label"
 msgid "Lost connection to the server."
 msgstr "Sunucuya olan bağlantı koptu."
 
-#: rdp/rdpview.cpp:200
+#: rdp/rdpview.cpp:203
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Server not Found"
 msgstr "Sunucu Bulunamadı"
 
-#: rdp/rdpview.cpp:201
+#: rdp/rdpview.cpp:204
 #, kde-format
 msgctxt "@label"
 msgid "Could not find the server."
 msgstr "Sunucu bulunamadı."
 
-#: rdp/rdpview.cpp:204
+#: rdp/rdpview.cpp:207
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Refused"
 msgstr "Bağlantı Reddedildi"
 
-#: rdp/rdpview.cpp:205
+#: rdp/rdpview.cpp:208
 #, kde-format
 msgctxt "@label"
 msgid "The server refused the connection request."
 msgstr "Sunucu, bağlantı isteğini geri çevirdi."
 
-#: rdp/rdpview.cpp:210
+#: rdp/rdpview.cpp:213
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Could not Connect"
 msgstr "Bağlanılamadı"
 
-#: rdp/rdpview.cpp:211
+#: rdp/rdpview.cpp:214
 #, kde-format
 msgctxt "@label"
 msgid "Could not connect to the server."
 msgstr "Sunucuya bağlanılamadı."
 
-#: rdp/rdpview.cpp:221 rdp/rdpview.cpp:225
+#: rdp/rdpview.cpp:224 rdp/rdpview.cpp:228
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Closed"
 msgstr "Bağlantı Kapatıldı"
 
-#: rdp/rdpview.cpp:226
+#: rdp/rdpview.cpp:229
 #, kde-format
 msgctxt "@label"
 msgid "The connection to the server was closed."
 msgstr "Sunucuya olan bağlantı kapatıldı."
 
-#: rdp/rdpview.cpp:230
+#: rdp/rdpview.cpp:233
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Failed"
 msgstr "Bağlantı Başarısız"
 
-#: rdp/rdpview.cpp:231
+#: rdp/rdpview.cpp:234
 #, kde-format
 msgctxt "@label"
 msgid "An unknown error occurred"
@@ -1770,6 +1803,10 @@ msgstr ""
 "<html>Adresi buraya girin.<br /><i>Örnek: vncsunucu:1 (makine:port / ekran)</"
 "i></html>"
 
+#~ msgctxt "@label"
+#~ msgid "Access to this system requires a password."
+#~ msgstr "Bu sisteme erişim bir parola gerektiriyor."
+
 #~ msgid "Browse to media share path"
 #~ msgstr "Ortam paylaşma yoluna göz atın"
 
@@ -1794,9 +1831,6 @@ msgstr ""
 
 #~ msgid "Broadband"
 #~ msgstr "Geniş Bant"
-
-#~ msgid "LAN"
-#~ msgstr "LAN"
 
 #~ msgid "Enhanced visual experience"
 #~ msgstr "İyileştirilmiş görsel deneyim"
