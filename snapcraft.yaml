@@ -37,6 +37,12 @@ parts:
     plugin: cmake
     source: .
     source-type: local
+    build-packages:
+      - libvncserver-dev
+      - libssh2-1-dev
+    stage-packages:
+      - libvncclient1
+      - freerdp2-x11
     cmake-parameters:
       - -DCMAKE_INSTALL_PREFIX=/usr
       - -DCMAKE_BUILD_TYPE=Release
