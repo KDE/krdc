@@ -51,7 +51,6 @@ int main(int argc, char **argv)
                         i18n("VNC client library"),
                         QStringLiteral("libvncserver-common@lists.sf.net"),
                         QStringLiteral("http://libvncserver.sourceforge.net/"));
-    aboutData.addAuthor(i18n("Abner Silva"), i18n("Telepathy Tubes Integration"), QStringLiteral("abner.silva@kdemail.net"));
     aboutData.setOrganizationDomain("kde.org");
 
     KAboutData::setApplicationData(aboutData);

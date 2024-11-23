@@ -31,10 +31,6 @@ class QScrollArea;
 class QModelIndex;
 class QTableView;
 
-#ifdef TELEPATHY_SUPPORT
-class TubesManager;
-#endif
-
 class MainWindow : public KXmlGuiWindow
 {
     Q_OBJECT
