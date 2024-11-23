@@ -1054,7 +1054,7 @@ bool RdpSession::sendEvent(QEvent *event, QWidget *source)
             } else {
                 flags |= value;
             }
-        } else if (wheelEvent->angleDelta().x() != 0) {
+        } else if (delta.x() != 0) {
             value = std::clamp(std::abs(delta.x()), 0, 0xFF);
             flags |= PTR_FLAGS_HWHEEL;
             if (wheelEvent->angleDelta().x() < 0) {
@@ -1063,6 +1063,8 @@ bool RdpSession::sendEvent(QEvent *event, QWidget *source)
             } else {
                 flags |= value;
             }
+        } else {
+            break;
         }
 
         auto position = wheelEvent->position();
