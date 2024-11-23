@@ -12,6 +12,7 @@
 
 #include <QDateTime>
 #include <QIcon>
+#include <QMetaType>
 
 ConnectionDelegate::ConnectionDelegate(QObject *parent)
     : QStyledItemDelegate(parent)
@@ -20,7 +21,7 @@ ConnectionDelegate::ConnectionDelegate(QObject *parent)
 
 QString ConnectionDelegate::displayText(const QVariant &value, const QLocale &locale) const
 {
-    if (value.type() == QVariant::DateTime) {
+    if (value.typeId() == QMetaType::QDateTime) {
         QDateTime lastConnected = QDateTime(value.toDateTime());
         QDateTime currentTime = QDateTime::currentDateTimeUtc();
 

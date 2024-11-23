@@ -87,7 +87,9 @@ BOOL RdpSession::postConnect(freerdp *rdp)
     session->setState(State::Connected);
 
     auto &buffer = session->m_videoBuffer;
-    buffer = QImage(settings->DesktopWidth, settings->DesktopHeight, QImage::Format_RGBX8888);
+    buffer = QImage(freerdp_settings_get_uint32(settings, FreeRDP_DesktopWidth),
+                    freerdp_settings_get_uint32(settings, FreeRDP_DesktopHeight),
+                    QImage::Format_RGBX8888);
 
     if (!gdi_init_ex(rdp, PIXEL_FORMAT_RGBX32, buffer.bytesPerLine(), buffer.bits(), nullptr)) {
         qCWarning(KRDC) << "Could not initialize GDI subsystem";
@@ -133,10 +135,12 @@ void RdpSession::postFinalDisconnect(freerdp *)
 
 #if FREERDP_VERSION_MAJOR == 3
 BOOL RdpSession::authenticateEx(freerdp *instance, char **username, char **password, char **domain, rdp_auth_reason reason)
+{
+    Q_UNUSED(reason);
 #else
 BOOL RdpSession::authenticate(freerdp *instance, char **username, char **password, char **domain)
-#endif
 {
+#endif
     auto session = reinterpret_cast<RdpContext *>(instance->context)->session;
     // TODO: this needs to handle:
     // gateway
@@ -254,6 +258,12 @@ int RdpSession::logonErrorInfo(freerdp *rdp, UINT32 data, UINT32 type)
 
 BOOL RdpSession::presentGatewayMessage(freerdp *instance, UINT32 type, BOOL isDisplayMandatory, BOOL isConsentMandatory, size_t length, const WCHAR *message)
 {
+    Q_UNUSED(instance);
+    Q_UNUSED(type);
+    Q_UNUSED(isDisplayMandatory);
+    Q_UNUSED(isConsentMandatory);
+    Q_UNUSED(length);
+    Q_UNUSED(message);
     // TODO: Implement
     // TODO: run on UI thread
     // TODO: Block, wait for result
@@ -263,6 +273,11 @@ BOOL RdpSession::presentGatewayMessage(freerdp *instance, UINT32 type, BOOL isDi
 #if FREERDP_VERSION_MAJOR == 3
 BOOL RdpSession::chooseSmartcard(freerdp *instance, SmartcardCertInfo **cert_list, DWORD count, DWORD *choice, BOOL gateway)
 {
+    Q_UNUSED(instance);
+    Q_UNUSED(cert_list);
+    Q_UNUSED(count);
+    Q_UNUSED(choice);
+    Q_UNUSED(gateway);
     // TODO: Implement
     // TODO: Move this to UI thread
     // TODO: Block for result as this might be just a informative message
@@ -271,6 +286,10 @@ BOOL RdpSession::chooseSmartcard(freerdp *instance, SmartcardCertInfo **cert_lis
 
 SSIZE_T RdpSession::retryDialog(freerdp *instance, const char *what, size_t current, void *userarg)
 {
+    Q_UNUSED(instance);
+    Q_UNUSED(what);
+    Q_UNUSED(current);
+    Q_UNUSED(userarg);
     // TODO: Implement
     // TODO: Move this to UI thread
     // TODO: Block for result as this might be just a informative message
@@ -304,7 +323,6 @@ void RdpSession::clientGlobalUninit()
 
 BOOL RdpSession::clientContextNew(freerdp *instance, rdpContext *context)
 {
-    auto kctx = reinterpret_cast<RdpContext *>(context);
     if (!instance || !context)
         return false;
 
@@ -335,6 +353,7 @@ BOOL RdpSession::clientContextNew(freerdp *instance, rdpContext *context)
 
 void RdpSession::clientContextFree(freerdp *instance, rdpContext *context)
 {
+    Q_UNUSED(instance);
     auto ctx = reinterpret_cast<RdpContext *>(context);
     if (!ctx)
         return;
@@ -757,14 +776,16 @@ BOOL RdpSession::resizeDisplay(rdpContext *context)
     WINPR_ASSERT(settings);
 
     auto &buffer = session->m_videoBuffer;
-    buffer = QImage(settings->DesktopWidth, settings->DesktopHeight, QImage::Format_RGBX8888);
+    buffer = QImage(freerdp_settings_get_uint32(settings, FreeRDP_DesktopWidth),
+                    freerdp_settings_get_uint32(settings, FreeRDP_DesktopHeight),
+                    QImage::Format_RGBX8888);
 
-    if (!gdi_resize_ex(gdi, settings->DesktopWidth, settings->DesktopHeight, buffer.bytesPerLine(), PIXEL_FORMAT_RGBX32, buffer.bits(), nullptr)) {
+    if (!gdi_resize_ex(gdi, buffer.width(), buffer.height(), buffer.bytesPerLine(), PIXEL_FORMAT_RGBX32, buffer.bits(), nullptr)) {
         qCWarning(KRDC) << "Failed resizing GDI subsystem";
         return false;
     }
 
-    session->m_size = QSize(settings->DesktopWidth, settings->DesktopHeight);
+    session->m_size = buffer.size();
     Q_EMIT session->sizeChanged();
 
     return true;
@@ -772,6 +793,8 @@ BOOL RdpSession::resizeDisplay(rdpContext *context)
 
 BOOL RdpSession::playSound(rdpContext *context, const PLAY_SOUND_UPDATE *play_sound)
 {
+    Q_UNUSED(context);
+    Q_UNUSED(play_sound);
     QApplication::beep();
     return true;
 }
@@ -795,6 +818,7 @@ void RdpSession::channelConnected(void *context, ChannelConnectedEventArgs *e)
     } else if (strcmp(e->name, DISP_DVC_CHANNEL_NAME) == 0) {
         auto disp = reinterpret_cast<DispClientContext *>(e->pInterface);
         WINPR_ASSERT(disp);
+        Q_UNUSED(disp);
         // TODO: Implement display channel
         // TODO: Should be fairly easy as you only need to provide monitor(=fullscreen or multimonitor) or window (=single monitor on RDP side) layout
         // (orientation, resolution, dpi, ...) on size / dpi / ... change. word of advice: do not send more than one update per second (some windows servers
@@ -813,8 +837,6 @@ void RdpSession::channelDisconnected(void *context, ChannelDisconnectedEventArgs
 #endif
 {
     if (strcmp(e->name, CLIPRDR_SVC_CHANNEL_NAME) == 0) {
-        CliprdrClientContext *cliprdr = (CliprdrClientContext *)e->pInterface;
-
         auto session = reinterpret_cast<RdpContext *>(context)->session;
         WINPR_ASSERT(session);
 
@@ -822,6 +844,7 @@ void RdpSession::channelDisconnected(void *context, ChannelDisconnectedEventArgs
     } else if (strcmp(e->name, DISP_DVC_CHANNEL_NAME) == 0) {
         auto disp = reinterpret_cast<DispClientContext *>(e->pInterface);
         WINPR_ASSERT(disp);
+        Q_UNUSED(disp);
         // TODO: Implement display channel
 #if FREERDP_VERSION_MAJOR == 3
     } else {

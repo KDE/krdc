@@ -283,10 +283,6 @@ void RdpView::enableScaling(bool scale)
     update();
 }
 
-void RdpView::setScaleFactor(float factor)
-{
-}
-
 QSize RdpView::initialSize()
 {
     switch (m_hostPreferences->resolution()) {
