@@ -643,7 +643,7 @@ int RdpSession::clientContextStart(rdpContext *context)
         }
     }
 
-    const auto gatewayServerAddress = QUrl(preferences->proxyHost());
+    const auto gatewayServerAddress = QUrl(preferences->gatewayServer());
     if (!gatewayServerAddress.isEmpty()) {
         if (!freerdp_settings_set_string(settings, FreeRDP_GatewayHostname, gatewayServerAddress.host().toUtf8().data())) {
             return -1;
