@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-14 00:40+0000\n"
+"POT-Creation-Date: 2024-11-24 00:40+0000\n"
 "PO-Revision-Date: 2024-10-19 20:09+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -239,36 +239,36 @@ msgstr "外掛程式"
 msgid "Plugin Configuration"
 msgstr "外掛程式設定"
 
-#: connectiondelegate.cpp:33
+#: connectiondelegate.cpp:34
 #, kde-format
 msgid "Less than a minute ago"
 msgstr "小於 1 分鐘之前"
 
-#: connectiondelegate.cpp:34
+#: connectiondelegate.cpp:35
 #, kde-format
 msgid "A minute ago"
 msgid_plural "%1 minutes ago"
 msgstr[0] "%1 分鐘之前"
 
-#: connectiondelegate.cpp:36
+#: connectiondelegate.cpp:37
 #, kde-format
 msgid "An hour ago"
 msgid_plural "%1 hours ago"
 msgstr[0] "%1 小時之前"
 
-#: connectiondelegate.cpp:40
+#: connectiondelegate.cpp:41
 #, kde-format
 msgid "Yesterday"
 msgid_plural "%1 days ago"
 msgstr[0] "%1 天之前"
 
-#: connectiondelegate.cpp:42
+#: connectiondelegate.cpp:43
 #, kde-format
 msgid "Over a month ago"
 msgid_plural "%1 months ago"
 msgstr[0] "%1 個月前"
 
-#: connectiondelegate.cpp:43
+#: connectiondelegate.cpp:44
 #, kde-format
 msgid "A year ago"
 msgid_plural "%1 years ago"
@@ -399,23 +399,13 @@ msgstr "LibVNCServer / LibVNCClient 開發者"
 msgid "VNC client library"
 msgstr "VNC 用戶端函式庫"
 
-#: main.cpp:54
-#, kde-format
-msgid "Abner Silva"
-msgstr "Abner Silva"
-
-#: main.cpp:54
-#, kde-format
-msgid "Telepathy Tubes Integration"
-msgstr "Telepathy Tubes 整合"
-
-#: main.cpp:67
+#: main.cpp:66
 #, kde-format
 msgid ""
 "Start KRDC with the provided URL in fullscreen mode (works only with one URL)"
 msgstr "啟動 KRDC 時以全畫面模式連線到指定的網址（只能指定一個網址）"
 
-#: main.cpp:68
+#: main.cpp:67
 #, kde-format
 msgid "URLs to connect after startup"
 msgstr "啟動時要連線的網址"
@@ -1270,13 +1260,13 @@ msgstr "RPC"
 msgid "Ext"
 msgstr ""
 
-#: rdp/rdpsession.cpp:251
+#: rdp/rdpsession.cpp:255
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Logon Error"
 msgstr "登入錯誤"
 
-#: rdp/rdpsession.cpp:835
+#: rdp/rdpsession.cpp:858
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1292,43 +1282,43 @@ msgstr ""
 "配發者：%5\n"
 "指紋：%6\n"
 
-#: rdp/rdpsession.cpp:1085
+#: rdp/rdpsession.cpp:1110
 #, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
 msgstr "要存取此系統需要使用者名稱和密碼。"
 
-#: rdp/rdpsession.cpp:1108
+#: rdp/rdpsession.cpp:1133
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr "此系統的憑證未知。您希望繼續嗎？"
 
-#: rdp/rdpsession.cpp:1109
+#: rdp/rdpsession.cpp:1134
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
 msgstr "驗證憑證"
 
-#: rdp/rdpsession.cpp:1114 rdp/rdpsession.cpp:1137
+#: rdp/rdpsession.cpp:1139 rdp/rdpsession.cpp:1162
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
 msgstr "記住此憑證"
 
-#: rdp/rdpsession.cpp:1131
+#: rdp/rdpsession.cpp:1156
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
 msgstr "此系統的憑證已變更。您希望繼續嗎？"
 
-#: rdp/rdpsession.cpp:1132
+#: rdp/rdpsession.cpp:1157
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
 msgstr "憑證已變更"
 
-#: rdp/rdpsession.cpp:1135
+#: rdp/rdpsession.cpp:1160
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1766,6 +1756,12 @@ msgid ""
 msgstr ""
 "<html>在此輸入位址。<br /><i>例如：vncserver 1 (host:port / screen)</i></"
 "html>"
+
+#~ msgid "Abner Silva"
+#~ msgstr "Abner Silva"
+
+#~ msgid "Telepathy Tubes Integration"
+#~ msgstr "Telepathy Tubes 整合"
 
 #~ msgctxt "@label"
 #~ msgid "Access to this system requires a password."

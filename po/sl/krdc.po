@@ -1,6 +1,6 @@
 # Slovenian translation of krdc
 # Copyright (C) 2002, 2003, 2004, 2005, 2006, 2007 Free Software Foundation, Inc.
-# $Id: krdc.po 1695169 2024-11-15 01:17:07Z scripty $
+# $Id: krdc.po 1695829 2024-11-24 01:17:05Z scripty $
 # $Source$
 #
 # Andrej Vernekar <andrej.vernekar@moj.net>, 2002, 2007, 2008.
@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-14 00:40+0000\n"
+"POT-Creation-Date: 2024-11-24 00:40+0000\n"
 "PO-Revision-Date: 2024-11-14 06:59+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -245,12 +245,12 @@ msgstr "Vstavki"
 msgid "Plugin Configuration"
 msgstr "Nastavitve vstavkov"
 
-#: connectiondelegate.cpp:33
+#: connectiondelegate.cpp:34
 #, kde-format
 msgid "Less than a minute ago"
 msgstr "Pred manj kot minuto"
 
-#: connectiondelegate.cpp:34
+#: connectiondelegate.cpp:35
 #, kde-format
 msgid "A minute ago"
 msgid_plural "%1 minutes ago"
@@ -259,7 +259,7 @@ msgstr[1] "Pred %1 minutama"
 msgstr[2] "Pred %1 minutami"
 msgstr[3] "Pred %1 minut"
 
-#: connectiondelegate.cpp:36
+#: connectiondelegate.cpp:37
 #, kde-format
 msgid "An hour ago"
 msgid_plural "%1 hours ago"
@@ -268,7 +268,7 @@ msgstr[1] "Pred %1 urama"
 msgstr[2] "Pred %1 urami"
 msgstr[3] "Pred %1 urami"
 
-#: connectiondelegate.cpp:40
+#: connectiondelegate.cpp:41
 #, kde-format
 msgid "Yesterday"
 msgid_plural "%1 days ago"
@@ -277,7 +277,7 @@ msgstr[1] "Pred %1 dnevoma"
 msgstr[2] "Pred %1 dnevi"
 msgstr[3] "Pred %1 dnevi"
 
-#: connectiondelegate.cpp:42
+#: connectiondelegate.cpp:43
 #, kde-format
 msgid "Over a month ago"
 msgid_plural "%1 months ago"
@@ -286,7 +286,7 @@ msgstr[1] "Pred %1 mesecema"
 msgstr[2] "Pred %1 meseci"
 msgstr[3] "Pred %1 meseci"
 
-#: connectiondelegate.cpp:43
+#: connectiondelegate.cpp:44
 #, kde-format
 msgid "A year ago"
 msgid_plural "%1 years ago"
@@ -422,17 +422,7 @@ msgstr "Razvijalci LibVNCServer / LibVNCClient"
 msgid "VNC client library"
 msgstr "Knjižnica odjemalca VNC"
 
-#: main.cpp:54
-#, kde-format
-msgid "Abner Silva"
-msgstr "Abner Silva"
-
-#: main.cpp:54
-#, kde-format
-msgid "Telepathy Tubes Integration"
-msgstr "Podpora cevem Telepathy"
-
-#: main.cpp:67
+#: main.cpp:66
 #, kde-format
 msgid ""
 "Start KRDC with the provided URL in fullscreen mode (works only with one URL)"
@@ -440,7 +430,7 @@ msgstr ""
 "Zaženi KRDC z vpisanim URL-jem v celozaslonskem načinu (deluje samo z enim "
 "URL-jem naenkrat)"
 
-#: main.cpp:68
+#: main.cpp:67
 #, kde-format
 msgid "URLs to connect after startup"
 msgstr "URL-ji za povezavo po zagonu"
@@ -1302,13 +1292,13 @@ msgstr "RDP"
 msgid "Ext"
 msgstr "Ext"
 
-#: rdp/rdpsession.cpp:251
+#: rdp/rdpsession.cpp:255
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Logon Error"
 msgstr "Napaka prijave"
 
-#: rdp/rdpsession.cpp:835
+#: rdp/rdpsession.cpp:858
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1324,43 +1314,43 @@ msgstr ""
 "Izdajatelj: %5\n"
 "Prstni odtis: %6\n"
 
-#: rdp/rdpsession.cpp:1085
+#: rdp/rdpsession.cpp:1110
 #, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
 msgstr "Za dostop do tega sistema sta potrebna uporabniško ime in geslo."
 
-#: rdp/rdpsession.cpp:1108
+#: rdp/rdpsession.cpp:1133
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr "Potrdilo za ta sistem ni znano. Želite nadaljevati?"
 
-#: rdp/rdpsession.cpp:1109
+#: rdp/rdpsession.cpp:1134
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
 msgstr "Preveri potrdilo"
 
-#: rdp/rdpsession.cpp:1114 rdp/rdpsession.cpp:1137
+#: rdp/rdpsession.cpp:1139 rdp/rdpsession.cpp:1162
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
 msgstr "Zaponi si to potrdilo"
 
-#: rdp/rdpsession.cpp:1131
+#: rdp/rdpsession.cpp:1156
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
 msgstr "Potrdilo za ta sistem je spremenjeno. Želite nadaljevati?"
 
-#: rdp/rdpsession.cpp:1132
+#: rdp/rdpsession.cpp:1157
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
 msgstr "Potrdilo se je spremenilo"
 
-#: rdp/rdpsession.cpp:1135
+#: rdp/rdpsession.cpp:1160
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1808,6 +1798,12 @@ msgid ""
 msgstr ""
 "<html>Sem vnesite naslov.<br /><i>Primer: strežnik_vnc:1 (gostitelj:vrata / "
 "zaslon)</i></html>"
+
+#~ msgid "Abner Silva"
+#~ msgstr "Abner Silva"
+
+#~ msgid "Telepathy Tubes Integration"
+#~ msgstr "Podpora cevem Telepathy"
 
 #~ msgctxt "@label"
 #~ msgid "Access to this system requires a password."

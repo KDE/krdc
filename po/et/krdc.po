@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-14 00:40+0000\n"
+"POT-Creation-Date: 2024-11-24 00:40+0000\n"
 "PO-Revision-Date: 2020-04-14 15:19+0300\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -238,40 +238,40 @@ msgstr "Pluginad"
 msgid "Plugin Configuration"
 msgstr "Pluginate seadistamine"
 
-#: connectiondelegate.cpp:33
+#: connectiondelegate.cpp:34
 #, kde-format
 msgid "Less than a minute ago"
 msgstr "Vähem kui minuti eest"
 
-#: connectiondelegate.cpp:34
+#: connectiondelegate.cpp:35
 #, kde-format
 msgid "A minute ago"
 msgid_plural "%1 minutes ago"
 msgstr[0] "Minuti eest"
 msgstr[1] "%1 minuti eest"
 
-#: connectiondelegate.cpp:36
+#: connectiondelegate.cpp:37
 #, kde-format
 msgid "An hour ago"
 msgid_plural "%1 hours ago"
 msgstr[0] "Tunni eest"
 msgstr[1] "%1 tunni eest"
 
-#: connectiondelegate.cpp:40
+#: connectiondelegate.cpp:41
 #, kde-format
 msgid "Yesterday"
 msgid_plural "%1 days ago"
 msgstr[0] "Eile"
 msgstr[1] "%1 päeva eest"
 
-#: connectiondelegate.cpp:42
+#: connectiondelegate.cpp:43
 #, kde-format
 msgid "Over a month ago"
 msgid_plural "%1 months ago"
 msgstr[0] "Kuu aja eest"
 msgstr[1] "%1 kuu eest"
 
-#: connectiondelegate.cpp:43
+#: connectiondelegate.cpp:44
 #, kde-format
 msgid "A year ago"
 msgid_plural "%1 years ago"
@@ -405,17 +405,7 @@ msgstr "LibVNCServeri / LibVNCClienti arendajad"
 msgid "VNC client library"
 msgstr "VNC kliendi teek"
 
-#: main.cpp:54
-#, kde-format
-msgid "Abner Silva"
-msgstr "Abner Silva"
-
-#: main.cpp:54
-#, kde-format
-msgid "Telepathy Tubes Integration"
-msgstr "Telepathy Tube'ide lõimimine"
-
-#: main.cpp:67
+#: main.cpp:66
 #, kde-format
 msgid ""
 "Start KRDC with the provided URL in fullscreen mode (works only with one URL)"
@@ -423,7 +413,7 @@ msgstr ""
 "KRDC käivitamine antud URL-iga täisekraanirežiimis (toimib ainult ühe URL-i "
 "korral)"
 
-#: main.cpp:68
+#: main.cpp:67
 #, kde-format
 msgid "URLs to connect after startup"
 msgstr "URL-id, millega luua ühendus käivitamisel"
@@ -1291,14 +1281,14 @@ msgstr "RDP"
 msgid "Ext"
 msgstr ""
 
-#: rdp/rdpsession.cpp:251
+#: rdp/rdpsession.cpp:255
 #, fuzzy, kde-format
 #| msgid "Unknown Error"
 msgctxt "@title:dialog"
 msgid "Logon Error"
 msgstr "Tundmatu viga"
 
-#: rdp/rdpsession.cpp:835
+#: rdp/rdpsession.cpp:858
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1309,44 +1299,44 @@ msgid ""
 "Fingerprint: %6\n"
 msgstr ""
 
-#: rdp/rdpsession.cpp:1085
+#: rdp/rdpsession.cpp:1110
 #, fuzzy, kde-format
 #| msgid "Access to the system requires a password."
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
 msgstr "Süsteemi kasutamiseks on vaja parooli."
 
-#: rdp/rdpsession.cpp:1108
+#: rdp/rdpsession.cpp:1133
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr ""
 
-#: rdp/rdpsession.cpp:1109
+#: rdp/rdpsession.cpp:1134
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
 msgstr ""
 
-#: rdp/rdpsession.cpp:1114 rdp/rdpsession.cpp:1137
+#: rdp/rdpsession.cpp:1139 rdp/rdpsession.cpp:1162
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
 msgstr ""
 
-#: rdp/rdpsession.cpp:1131
+#: rdp/rdpsession.cpp:1156
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
 msgstr ""
 
-#: rdp/rdpsession.cpp:1132
+#: rdp/rdpsession.cpp:1157
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
 msgstr ""
 
-#: rdp/rdpsession.cpp:1135
+#: rdp/rdpsession.cpp:1160
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1792,6 +1782,12 @@ msgid ""
 msgstr ""
 "<html>Kirjuta siia aadress.<br /><i>Näide: vncserver:1 (masin:port / kuva)</"
 "i></html>"
+
+#~ msgid "Abner Silva"
+#~ msgstr "Abner Silva"
+
+#~ msgid "Telepathy Tubes Integration"
+#~ msgstr "Telepathy Tube'ide lõimimine"
 
 #, fuzzy
 #~| msgid "Access to the system requires a password."

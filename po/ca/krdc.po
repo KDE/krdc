@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-14 00:40+0000\n"
+"POT-Creation-Date: 2024-11-24 00:40+0000\n"
 "PO-Revision-Date: 2024-11-14 09:43+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -242,40 +242,40 @@ msgstr "Connectors"
 msgid "Plugin Configuration"
 msgstr "Configuració de connector"
 
-#: connectiondelegate.cpp:33
+#: connectiondelegate.cpp:34
 #, kde-format
 msgid "Less than a minute ago"
 msgstr "Fa menys d'un minut"
 
-#: connectiondelegate.cpp:34
+#: connectiondelegate.cpp:35
 #, kde-format
 msgid "A minute ago"
 msgid_plural "%1 minutes ago"
 msgstr[0] "Fa un minut"
 msgstr[1] "Fa %1 minuts"
 
-#: connectiondelegate.cpp:36
+#: connectiondelegate.cpp:37
 #, kde-format
 msgid "An hour ago"
 msgid_plural "%1 hours ago"
 msgstr[0] "Fa una hora"
 msgstr[1] "Fa %1 hores"
 
-#: connectiondelegate.cpp:40
+#: connectiondelegate.cpp:41
 #, kde-format
 msgid "Yesterday"
 msgid_plural "%1 days ago"
 msgstr[0] "Ahir"
 msgstr[1] "Fa %1 dies"
 
-#: connectiondelegate.cpp:42
+#: connectiondelegate.cpp:43
 #, kde-format
 msgid "Over a month ago"
 msgid_plural "%1 months ago"
 msgstr[0] "Fa un mes"
 msgstr[1] "Fa %1 mesos"
 
-#: connectiondelegate.cpp:43
+#: connectiondelegate.cpp:44
 #, kde-format
 msgid "A year ago"
 msgid_plural "%1 years ago"
@@ -409,17 +409,7 @@ msgstr "Desenvolupadors de les LibVNCServer / LibVNCClient"
 msgid "VNC client library"
 msgstr "Biblioteca del client VNC"
 
-#: main.cpp:54
-#, kde-format
-msgid "Abner Silva"
-msgstr "Abner Silva"
-
-#: main.cpp:54
-#, kde-format
-msgid "Telepathy Tubes Integration"
-msgstr "Integració dels tubs del Telepathy"
-
-#: main.cpp:67
+#: main.cpp:66
 #, kde-format
 msgid ""
 "Start KRDC with the provided URL in fullscreen mode (works only with one URL)"
@@ -427,7 +417,7 @@ msgstr ""
 "Inicia el KRDC amb l'URL subministrat en mode de pantalla completa (funciona "
 "només amb un URL)"
 
-#: main.cpp:68
+#: main.cpp:67
 #, kde-format
 msgid "URLs to connect after startup"
 msgstr "URL a connectar després d'engegar"
@@ -1292,13 +1282,13 @@ msgstr "RDP"
 msgid "Ext"
 msgstr "Ext"
 
-#: rdp/rdpsession.cpp:251
+#: rdp/rdpsession.cpp:255
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Logon Error"
 msgstr "Error de connexió"
 
-#: rdp/rdpsession.cpp:835
+#: rdp/rdpsession.cpp:858
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1314,43 +1304,43 @@ msgstr ""
 "Emissor: %5\n"
 "Empremta digital: %6\n"
 
-#: rdp/rdpsession.cpp:1085
+#: rdp/rdpsession.cpp:1110
 #, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
 msgstr "L'accés al sistema requereix un nom d'usuari i una contrasenya."
 
-#: rdp/rdpsession.cpp:1108
+#: rdp/rdpsession.cpp:1133
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr "El certificat per a aquest sistema és desconegut. Voleu continuar?"
 
-#: rdp/rdpsession.cpp:1109
+#: rdp/rdpsession.cpp:1134
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
 msgstr "Verifica el certificat"
 
-#: rdp/rdpsession.cpp:1114 rdp/rdpsession.cpp:1137
+#: rdp/rdpsession.cpp:1139 rdp/rdpsession.cpp:1162
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
 msgstr "Recorda aquest certificat"
 
-#: rdp/rdpsession.cpp:1131
+#: rdp/rdpsession.cpp:1156
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
 msgstr "El certificat per a aquest sistema ha canviat. Voleu continuar?"
 
-#: rdp/rdpsession.cpp:1132
+#: rdp/rdpsession.cpp:1157
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
 msgstr "El certificat ha canviat"
 
-#: rdp/rdpsession.cpp:1135
+#: rdp/rdpsession.cpp:1160
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1801,6 +1791,12 @@ msgid ""
 msgstr ""
 "<html>Introduïu l'adreça aquí.<br /><i>Exemple: vncserver:1 (ordinador:"
 "port / pantalla)</i></html>"
+
+#~ msgid "Abner Silva"
+#~ msgstr "Abner Silva"
+
+#~ msgid "Telepathy Tubes Integration"
+#~ msgstr "Integració dels tubs del Telepathy"
 
 #~ msgctxt "@label"
 #~ msgid "Access to this system requires a password."

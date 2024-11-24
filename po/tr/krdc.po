@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdenetwork-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-14 00:40+0000\n"
+"POT-Creation-Date: 2024-11-24 00:40+0000\n"
 "PO-Revision-Date: 2024-11-15 21:34+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -247,40 +247,40 @@ msgstr "Eklentiler"
 msgid "Plugin Configuration"
 msgstr "Eklenti Yapılandırması"
 
-#: connectiondelegate.cpp:33
+#: connectiondelegate.cpp:34
 #, kde-format
 msgid "Less than a minute ago"
 msgstr "Bir dakikadan daha az"
 
-#: connectiondelegate.cpp:34
+#: connectiondelegate.cpp:35
 #, kde-format
 msgid "A minute ago"
 msgid_plural "%1 minutes ago"
 msgstr[0] "%1 dakika önce"
 msgstr[1] "%1 dakika önce"
 
-#: connectiondelegate.cpp:36
+#: connectiondelegate.cpp:37
 #, kde-format
 msgid "An hour ago"
 msgid_plural "%1 hours ago"
 msgstr[0] "%1 saat önce"
 msgstr[1] "%1 saat önce"
 
-#: connectiondelegate.cpp:40
+#: connectiondelegate.cpp:41
 #, kde-format
 msgid "Yesterday"
 msgid_plural "%1 days ago"
 msgstr[0] "Dün"
 msgstr[1] "%1 gün önce"
 
-#: connectiondelegate.cpp:42
+#: connectiondelegate.cpp:43
 #, kde-format
 msgid "Over a month ago"
 msgid_plural "%1 months ago"
 msgstr[0] "%1 ay önce"
 msgstr[1] "%1 ay önce"
 
-#: connectiondelegate.cpp:43
+#: connectiondelegate.cpp:44
 #, kde-format
 msgid "A year ago"
 msgid_plural "%1 years ago"
@@ -413,17 +413,7 @@ msgstr "LibVNCServer / LibVNCClient geliştiricileri"
 msgid "VNC client library"
 msgstr "VNC istemci kitaplığı"
 
-#: main.cpp:54
-#, kde-format
-msgid "Abner Silva"
-msgstr "Abner Silva"
-
-#: main.cpp:54
-#, kde-format
-msgid "Telepathy Tubes Integration"
-msgstr "Telepathy Tubes Bütünleşmesi"
-
-#: main.cpp:67
+#: main.cpp:66
 #, kde-format
 msgid ""
 "Start KRDC with the provided URL in fullscreen mode (works only with one URL)"
@@ -431,7 +421,7 @@ msgstr ""
 "KRDC uygulamasını verilen URL ile tam ekran olarak başlat (Yalnızca bir URL "
 "ile çalışır)"
 
-#: main.cpp:68
+#: main.cpp:67
 #, kde-format
 msgid "URLs to connect after startup"
 msgstr "Açılıştan sonra bağlanılacak URL'ler"
@@ -1291,13 +1281,13 @@ msgstr "RDP"
 msgid "Ext"
 msgstr "Ext"
 
-#: rdp/rdpsession.cpp:251
+#: rdp/rdpsession.cpp:255
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Logon Error"
 msgstr "Oturum Açma Hatası"
 
-#: rdp/rdpsession.cpp:835
+#: rdp/rdpsession.cpp:858
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1313,43 +1303,43 @@ msgstr ""
 "Veren: %5\n"
 "Parmak izi: %6\n"
 
-#: rdp/rdpsession.cpp:1085
+#: rdp/rdpsession.cpp:1110
 #, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
 msgstr "Bu sisteme erişim bir kullanıcı adı ve parola gerektiriyor."
 
-#: rdp/rdpsession.cpp:1108
+#: rdp/rdpsession.cpp:1133
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr "Bu sistem için olan sertifika bilinmiyor. Sürdürmek istiyor musunuz?"
 
-#: rdp/rdpsession.cpp:1109
+#: rdp/rdpsession.cpp:1134
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
 msgstr "Sertifikayı Doğrula"
 
-#: rdp/rdpsession.cpp:1114 rdp/rdpsession.cpp:1137
+#: rdp/rdpsession.cpp:1139 rdp/rdpsession.cpp:1162
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
 msgstr "Bu sertifikayı anımsa"
 
-#: rdp/rdpsession.cpp:1131
+#: rdp/rdpsession.cpp:1156
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
 msgstr "Bu sistem için olan sertifika değiştirildi. Sürdürmek istiyor musunuz?"
 
-#: rdp/rdpsession.cpp:1132
+#: rdp/rdpsession.cpp:1157
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
 msgstr "Sertifika Değişti"
 
-#: rdp/rdpsession.cpp:1135
+#: rdp/rdpsession.cpp:1160
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1799,6 +1789,12 @@ msgid ""
 msgstr ""
 "<html>Adresi buraya girin.<br /><i>Örnek: vncsunucu:1 (makine:port / ekran)</"
 "i></html>"
+
+#~ msgid "Abner Silva"
+#~ msgstr "Abner Silva"
+
+#~ msgid "Telepathy Tubes Integration"
+#~ msgstr "Telepathy Tubes Bütünleşmesi"
 
 #~ msgctxt "@label"
 #~ msgid "Access to this system requires a password."

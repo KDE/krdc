@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-14 00:40+0000\n"
+"POT-Creation-Date: 2024-11-24 00:40+0000\n"
 "PO-Revision-Date: 2024-11-14 02:49+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -237,40 +237,40 @@ msgstr "დამატებები"
 msgid "Plugin Configuration"
 msgstr "დამატების კონფიგურაცია"
 
-#: connectiondelegate.cpp:33
+#: connectiondelegate.cpp:34
 #, kde-format
 msgid "Less than a minute ago"
 msgstr "წუთზე ნაკლების წინ"
 
-#: connectiondelegate.cpp:34
+#: connectiondelegate.cpp:35
 #, kde-format
 msgid "A minute ago"
 msgid_plural "%1 minutes ago"
 msgstr[0] "1 წუთის წინ"
 msgstr[1] "%1 წუთის წინ"
 
-#: connectiondelegate.cpp:36
+#: connectiondelegate.cpp:37
 #, kde-format
 msgid "An hour ago"
 msgid_plural "%1 hours ago"
 msgstr[0] "1 საათის წინ"
 msgstr[1] "%1 საათის წინ"
 
-#: connectiondelegate.cpp:40
+#: connectiondelegate.cpp:41
 #, kde-format
 msgid "Yesterday"
 msgid_plural "%1 days ago"
 msgstr[0] "გუშინ"
 msgstr[1] "%1 დღის წინ"
 
-#: connectiondelegate.cpp:42
+#: connectiondelegate.cpp:43
 #, kde-format
 msgid "Over a month ago"
 msgid_plural "%1 months ago"
 msgstr[0] "1 თვის წინ"
 msgstr[1] "%1 თვის წინ"
 
-#: connectiondelegate.cpp:43
+#: connectiondelegate.cpp:44
 #, kde-format
 msgid "A year ago"
 msgid_plural "%1 years ago"
@@ -404,24 +404,14 @@ msgstr "LibVNCServer / LibVNCClient -ის პროგრამისტებ
 msgid "VNC client library"
 msgstr "VNC კლიენტის ბიბლიოთეკა"
 
-#: main.cpp:54
-#, kde-format
-msgid "Abner Silva"
-msgstr "Abner Silva"
-
-#: main.cpp:54
-#, kde-format
-msgid "Telepathy Tubes Integration"
-msgstr "Telepathy Tubes -ის ინტეგრაცია"
-
-#: main.cpp:67
+#: main.cpp:66
 #, kde-format
 msgid ""
 "Start KRDC with the provided URL in fullscreen mode (works only with one URL)"
 msgstr ""
 "KRDC-ის მითითებული URL-ით მთელ ეკრანზე გაშვება (მუშაობს მხოლოდ ერთ URL-ით)"
 
-#: main.cpp:68
+#: main.cpp:67
 #, kde-format
 msgid "URLs to connect after startup"
 msgstr "ბმულები გაშვების შემდეგ მისაერთებლად"
@@ -1282,13 +1272,13 @@ msgstr "RDP"
 msgid "Ext"
 msgstr "გაფ"
 
-#: rdp/rdpsession.cpp:251
+#: rdp/rdpsession.cpp:255
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Logon Error"
 msgstr "შესვლის შეცდომა"
 
-#: rdp/rdpsession.cpp:835
+#: rdp/rdpsession.cpp:858
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1304,43 +1294,43 @@ msgstr ""
 "გამომცემელი: %5\n"
 "ანაბეჭდი: %6\n"
 
-#: rdp/rdpsession.cpp:1085
+#: rdp/rdpsession.cpp:1110
 #, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
 msgstr "ამ სისტემაზე წვდომისთვის საჭიროა მომხმარებლის სახელი და პაროლი."
 
-#: rdp/rdpsession.cpp:1108
+#: rdp/rdpsession.cpp:1133
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr "სერტიფიკატი ამ სისტემისთვის უცნობია. გნებავთ, გააგრძელოთ?"
 
-#: rdp/rdpsession.cpp:1109
+#: rdp/rdpsession.cpp:1134
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
 msgstr "სერტიფიკატის გადამოწმება"
 
-#: rdp/rdpsession.cpp:1114 rdp/rdpsession.cpp:1137
+#: rdp/rdpsession.cpp:1139 rdp/rdpsession.cpp:1162
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
 msgstr "ამ სერტიფიკატის დამახსოვრება"
 
-#: rdp/rdpsession.cpp:1131
+#: rdp/rdpsession.cpp:1156
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
 msgstr "სერტიფიკატი ამ სისტემისთვის შეიცვალა. გნებავთ, გააგრძელოთ?"
 
-#: rdp/rdpsession.cpp:1132
+#: rdp/rdpsession.cpp:1157
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
 msgstr "სერტიფიკატი შეიცვალა"
 
-#: rdp/rdpsession.cpp:1135
+#: rdp/rdpsession.cpp:1160
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1790,6 +1780,12 @@ msgid ""
 msgstr ""
 "<html>აქ მისამართი შეიყვანეთ.<br /><i>მაგალითად: vncserver:1 (host:port / "
 "screen)</i></html>"
+
+#~ msgid "Abner Silva"
+#~ msgstr "Abner Silva"
+
+#~ msgid "Telepathy Tubes Integration"
+#~ msgstr "Telepathy Tubes -ის ინტეგრაცია"
 
 #~ msgctxt "@label"
 #~ msgid "Access to this system requires a password."

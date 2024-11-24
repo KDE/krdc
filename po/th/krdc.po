@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-14 00:40+0000\n"
+"POT-Creation-Date: 2024-11-24 00:40+0000\n"
 "PO-Revision-Date: 2010-03-04 21:54+0700\n"
 "Last-Translator: Thanomsub Noppaburana <donga.nb@gmail.com>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
@@ -236,30 +236,30 @@ msgstr "ส่วนเสริมต่าง ๆ"
 msgid "Plugin Configuration"
 msgstr "ปรับแต่งค่าส่วนเสริม"
 
-#: connectiondelegate.cpp:33
+#: connectiondelegate.cpp:34
 #, kde-format
 msgid "Less than a minute ago"
 msgstr "เมื่อไม่ถึงนาทีที่ผ่านมา"
 
-#: connectiondelegate.cpp:34
+#: connectiondelegate.cpp:35
 #, kde-format
 msgid "A minute ago"
 msgid_plural "%1 minutes ago"
 msgstr[0] "%1 นาทีก่อน"
 
-#: connectiondelegate.cpp:36
+#: connectiondelegate.cpp:37
 #, kde-format
 msgid "An hour ago"
 msgid_plural "%1 hours ago"
 msgstr[0] "%1 ชั่วโมงก่อน"
 
-#: connectiondelegate.cpp:40
+#: connectiondelegate.cpp:41
 #, kde-format
 msgid "Yesterday"
 msgid_plural "%1 days ago"
 msgstr[0] "%1 วันก่อน"
 
-#: connectiondelegate.cpp:42
+#: connectiondelegate.cpp:43
 #, fuzzy, kde-format
 #| msgid "A month ago"
 #| msgid_plural "%1 months ago"
@@ -267,7 +267,7 @@ msgid "Over a month ago"
 msgid_plural "%1 months ago"
 msgstr[0] "%1 เดือนก่อน"
 
-#: connectiondelegate.cpp:43
+#: connectiondelegate.cpp:44
 #, kde-format
 msgid "A year ago"
 msgid_plural "%1 years ago"
@@ -408,17 +408,7 @@ msgstr "กลุ่มผู้พัฒนา LibVNCServer / LibVNCClient"
 msgid "VNC client library"
 msgstr "ไลบรารีไคลเอนต์ VNC"
 
-#: main.cpp:54
-#, kde-format
-msgid "Abner Silva"
-msgstr "Abner Silva"
-
-#: main.cpp:54
-#, kde-format
-msgid "Telepathy Tubes Integration"
-msgstr "การผนวกรวม Telepathy Tubes เข้ามา"
-
-#: main.cpp:67
+#: main.cpp:66
 #, kde-format
 msgid ""
 "Start KRDC with the provided URL in fullscreen mode (works only with one URL)"
@@ -426,7 +416,7 @@ msgstr ""
 "เริ่มการทำงาน KRDC ด้วยที่อยู่ URL ที่กำหนดในแบบเต็มจอภาพ (ทำงานได้กับที่อยู่ URL "
 "ตัวเดียวเท่านั้น)"
 
-#: main.cpp:68
+#: main.cpp:67
 #, kde-format
 msgid "URLs to connect after startup"
 msgstr "ที่อยู่ URL ที่จะเชื่อมต่อไปเมื่อเริ่มการทำงาาน"
@@ -1291,13 +1281,13 @@ msgstr "การเชื่อมต่อแบบ RDP"
 msgid "Ext"
 msgstr ""
 
-#: rdp/rdpsession.cpp:251
+#: rdp/rdpsession.cpp:255
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Logon Error"
 msgstr ""
 
-#: rdp/rdpsession.cpp:835
+#: rdp/rdpsession.cpp:858
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1308,44 +1298,44 @@ msgid ""
 "Fingerprint: %6\n"
 msgstr ""
 
-#: rdp/rdpsession.cpp:1085
+#: rdp/rdpsession.cpp:1110
 #, fuzzy, kde-format
 #| msgid "Access to the system requires a password."
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
 msgstr "ต้องการรหัสผ่านในการเข้าใช้งานระบบ"
 
-#: rdp/rdpsession.cpp:1108
+#: rdp/rdpsession.cpp:1133
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr ""
 
-#: rdp/rdpsession.cpp:1109
+#: rdp/rdpsession.cpp:1134
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
 msgstr ""
 
-#: rdp/rdpsession.cpp:1114 rdp/rdpsession.cpp:1137
+#: rdp/rdpsession.cpp:1139 rdp/rdpsession.cpp:1162
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
 msgstr ""
 
-#: rdp/rdpsession.cpp:1131
+#: rdp/rdpsession.cpp:1156
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
 msgstr ""
 
-#: rdp/rdpsession.cpp:1132
+#: rdp/rdpsession.cpp:1157
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
 msgstr ""
 
-#: rdp/rdpsession.cpp:1135
+#: rdp/rdpsession.cpp:1160
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1805,6 +1795,12 @@ msgid ""
 msgstr ""
 "<html>ป้อนที่อยู่ที่นี่<br /><i>ตัวอย่าง: vncserver:1 (เครื่อง:พอร์ตเชื่อมต่อ/หมายเลขจอ)</i></"
 "html>"
+
+#~ msgid "Abner Silva"
+#~ msgstr "Abner Silva"
+
+#~ msgid "Telepathy Tubes Integration"
+#~ msgstr "การผนวกรวม Telepathy Tubes เข้ามา"
 
 #, fuzzy
 #~| msgid "Access to the system requires a password."

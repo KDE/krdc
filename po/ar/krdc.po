@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-14 00:40+0000\n"
+"POT-Creation-Date: 2024-11-24 00:40+0000\n"
 "PO-Revision-Date: 2024-10-24 06:38+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -242,12 +242,12 @@ msgstr "الملحقات"
 msgid "Plugin Configuration"
 msgstr "ضبط الملحقات"
 
-#: connectiondelegate.cpp:33
+#: connectiondelegate.cpp:34
 #, kde-format
 msgid "Less than a minute ago"
 msgstr "قبل أقل من دقيقة"
 
-#: connectiondelegate.cpp:34
+#: connectiondelegate.cpp:35
 #, kde-format
 msgid "A minute ago"
 msgid_plural "%1 minutes ago"
@@ -258,7 +258,7 @@ msgstr[3] "قبل %1 دقائق"
 msgstr[4] "قبل %1 دقيقة مضت"
 msgstr[5] "قبل %1 دقيقة مضت"
 
-#: connectiondelegate.cpp:36
+#: connectiondelegate.cpp:37
 #, kde-format
 msgid "An hour ago"
 msgid_plural "%1 hours ago"
@@ -269,7 +269,7 @@ msgstr[3] "قبل %1 ساعات"
 msgstr[4] "قبل %1 ساعة"
 msgstr[5] "قبل %1 ساعة"
 
-#: connectiondelegate.cpp:40
+#: connectiondelegate.cpp:41
 #, kde-format
 msgid "Yesterday"
 msgid_plural "%1 days ago"
@@ -280,7 +280,7 @@ msgstr[3] "قبل %1 أيام"
 msgstr[4] "قبل %1 يومًا"
 msgstr[5] "قبل %1 يوم"
 
-#: connectiondelegate.cpp:42
+#: connectiondelegate.cpp:43
 #, kde-format
 msgid "Over a month ago"
 msgid_plural "%1 months ago"
@@ -291,7 +291,7 @@ msgstr[3] "قبل %1 أشهر"
 msgstr[4] "قبل %1 شهراً"
 msgstr[5] "قبل %1 شهر"
 
-#: connectiondelegate.cpp:43
+#: connectiondelegate.cpp:44
 #, kde-format
 msgid "A year ago"
 msgid_plural "%1 years ago"
@@ -428,23 +428,13 @@ msgstr "مطور LibVNCServer / LibVNCClient "
 msgid "VNC client library"
 msgstr "مكتبة عميل VNC"
 
-#: main.cpp:54
-#, kde-format
-msgid "Abner Silva"
-msgstr "أبنر سيلفا"
-
-#: main.cpp:54
-#, kde-format
-msgid "Telepathy Tubes Integration"
-msgstr "تكامل أنابيب التخاطر"
-
-#: main.cpp:67
+#: main.cpp:66
 #, kde-format
 msgid ""
 "Start KRDC with the provided URL in fullscreen mode (works only with one URL)"
 msgstr "أبدء KRDC بالعنوان المعطى في نمط ملء الشاشة ( تعمل فقط مع عنوان واحد)"
 
-#: main.cpp:68
+#: main.cpp:67
 #, kde-format
 msgid "URLs to connect after startup"
 msgstr "عناوين جاهزة للإتصال بعد الإقلاع"
@@ -1305,13 +1295,13 @@ msgstr "أر بيه سي"
 msgid "Ext"
 msgstr ""
 
-#: rdp/rdpsession.cpp:251
+#: rdp/rdpsession.cpp:255
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Logon Error"
 msgstr "خطأ ولوج"
 
-#: rdp/rdpsession.cpp:835
+#: rdp/rdpsession.cpp:858
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1327,43 +1317,43 @@ msgstr ""
 "المُصدر: %5\n"
 "بصمة الإصبع: %6\n"
 
-#: rdp/rdpsession.cpp:1085
+#: rdp/rdpsession.cpp:1110
 #, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
 msgstr "يتطلب الوصول إلى هذا النظام اسم مستخدم وكلمة مرور."
 
-#: rdp/rdpsession.cpp:1108
+#: rdp/rdpsession.cpp:1133
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr "الشهادة لهذا النظام غير معروفة. هل ترغب في الاستمرار؟"
 
-#: rdp/rdpsession.cpp:1109
+#: rdp/rdpsession.cpp:1134
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
 msgstr "تحقق صحة الشهادة"
 
-#: rdp/rdpsession.cpp:1114 rdp/rdpsession.cpp:1137
+#: rdp/rdpsession.cpp:1139 rdp/rdpsession.cpp:1162
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
 msgstr "تذكر هذه الشهادة"
 
-#: rdp/rdpsession.cpp:1131
+#: rdp/rdpsession.cpp:1156
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
 msgstr "تغيرت الشهادة لهذا النظام. هل ترغب في الاستمرار؟"
 
-#: rdp/rdpsession.cpp:1132
+#: rdp/rdpsession.cpp:1157
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
 msgstr "تغيرت الشهادة"
 
-#: rdp/rdpsession.cpp:1135
+#: rdp/rdpsession.cpp:1160
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1808,6 +1798,12 @@ msgid ""
 msgstr ""
 "<html>أدخل العنوان هنا.<br /><i>مثال: vncserver:1 (المضيف:المنفذ / الشاشة)</"
 "i></html>"
+
+#~ msgid "Abner Silva"
+#~ msgstr "أبنر سيلفا"
+
+#~ msgid "Telepathy Tubes Integration"
+#~ msgstr "تكامل أنابيب التخاطر"
 
 #~ msgctxt "@label"
 #~ msgid "Access to this system requires a password."
