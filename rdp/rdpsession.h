@@ -18,6 +18,7 @@
 #include <freerdp/version.h>
 
 class RdpClipboard;
+class RdpGraphics;
 class RdpSession;
 class RdpView;
 class RdpHostPreferences;
@@ -190,6 +191,7 @@ private:
     } m_context;
 
     std::unique_ptr<RdpClipboard> m_clipboard;
+    std::unique_ptr<RdpGraphics> m_graphics;
 
     State m_state = State::Initial;
 

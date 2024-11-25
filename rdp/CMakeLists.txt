@@ -2,6 +2,7 @@ add_library(krdc_rdpplugin MODULE)
 
 target_sources(krdc_rdpplugin PRIVATE
     rdpcliprdr.cpp
+    rdpgraphics.cpp
     rdphostpreferences.cpp
     rdpviewfactory.cpp
     rdpview.cpp

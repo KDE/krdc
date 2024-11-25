@@ -5,6 +5,7 @@
 
 #include "rdpsession.h"
 #include "rdpcliprdr.h"
+#include "rdpgraphics.h"
 #include "rdphostpreferences.h"
 
 #include <memory>
@@ -111,6 +112,9 @@ BOOL RdpSession::postConnect(freerdp *rdp)
     auto keyboardLayout = freerdp_settings_get_uint32(settings, FreeRDP_KeyboardLayout);
     auto keyboardRemappingList = freerdp_settings_get_string(settings, FreeRDP_KeyboardRemappingList);
     freerdp_keyboard_init_ex(keyboardLayout, keyboardRemappingList);
+
+    session->m_graphics = std::make_unique<RdpGraphics>(ctx->graphics);
+
     return true;
 }
 
@@ -125,6 +129,10 @@ void RdpSession::postDisconnect(freerdp *rdp)
 
     session->setState(State::Closed);
     gdi_free(rdp);
+
+    if (session->m_graphics) {
+        session->m_graphics.reset(nullptr);
+    }
 }
 
 #if FREERDP_VERSION_MAJOR == 3
