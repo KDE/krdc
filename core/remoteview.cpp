@@ -40,6 +40,7 @@ RemoteView::RemoteView(QWidget *parent)
     resize(0, 0);
     installEventFilter(this);
     setMouseTracking(true);
+    setFocusPolicy(Qt::StrongFocus);
 
     m_clipboard = QApplication::clipboard();
     connect(m_clipboard, &QClipboard::dataChanged, this, &RemoteView::localClipboardChanged);
