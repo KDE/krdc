@@ -473,7 +473,7 @@ bool RdpSession::start()
         settings->ProxyPort = proxyHostAddress.port(defaultPort);
     }
 
-    const auto gatewayServerAddress = QUrl(m_preferences->proxyHost());
+    const auto gatewayServerAddress = QUrl(m_preferences->gatewayServer());
     if (!gatewayServerAddress.isEmpty()) {
         settings->GatewayHostname = gatewayServerAddress.host().toLocal8Bit().data();
         settings->GatewayPort = gatewayServerAddress.port(3389);
