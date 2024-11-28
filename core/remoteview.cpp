@@ -366,6 +366,11 @@ bool RemoteView::eventFilter(QObject *obj, QEvent *event)
             || event->type() == QEvent::MouseMove) {
             return true;
         }
+    } else {
+        if (m_grabAllKeys && event->type() == QEvent::ShortcutOverride) {
+            event->accept();
+            return true;
+        }
     }
 
     return QWidget::eventFilter(obj, event);
