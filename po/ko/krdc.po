@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdenetwork\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-24 00:40+0000\n"
-"PO-Revision-Date: 2024-08-19 23:55+0200\n"
+"POT-Creation-Date: 2024-11-29 00:40+0000\n"
+"PO-Revision-Date: 2024-11-29 00:30+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -492,12 +492,12 @@ msgstr "책갈피"
 #: mainwindow.cpp:273
 #, kde-format
 msgid "Unable to load connection data from the provided file."
-msgstr ""
+msgstr "지정한 파일에서 연결 데이터를 불러올 수 없습니다."
 
 #: mainwindow.cpp:273
 #, kde-format
 msgid "Load failed"
-msgstr ""
+msgstr "불러오기 실패"
 
 #: mainwindow.cpp:279
 #, kde-format
@@ -1231,48 +1231,45 @@ msgstr "고급 네트워크 설정"
 #: rdp/rdppreferences.ui:814
 #, kde-format
 msgid "Share Smartcard:"
-msgstr ""
+msgstr "스마트카드 공유:"
 
 #. i18n: ectx: property (text), widget (QLabel, gSecurityLabel)
 #: rdp/rdppreferences.ui:827
-#, fuzzy, kde-format
-#| msgid "TLS security level:"
+#, kde-format
 msgid "Security:"
-msgstr "TLS 보안 수준:"
+msgstr "보안:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_NLASecurity)
 #: rdp/rdppreferences.ui:839
-#, fuzzy, kde-format
-#| msgid "LAN"
+#, kde-format
 msgid "NLA"
-msgstr "LAN"
+msgstr "NLA"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TLSSecurity)
 #: rdp/rdppreferences.ui:846
 #, kde-format
 msgid "TLS"
-msgstr ""
+msgstr "TLS"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_RDPSecurity)
 #: rdp/rdppreferences.ui:853
-#, fuzzy, kde-format
-#| msgid "RPC"
+#, kde-format
 msgid "RDP"
-msgstr "RPC"
+msgstr "RDP"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EXTSecurity)
 #: rdp/rdppreferences.ui:860
 #, kde-format
 msgid "Ext"
-msgstr ""
+msgstr "확장자"
 
-#: rdp/rdpsession.cpp:255
+#: rdp/rdpsession.cpp:263
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Logon Error"
 msgstr "로그온 오류"
 
-#: rdp/rdpsession.cpp:858
+#: rdp/rdpsession.cpp:866
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1288,43 +1285,43 @@ msgstr ""
 "발급자: %5\n"
 "지문: %6\n"
 
-#: rdp/rdpsession.cpp:1110
+#: rdp/rdpsession.cpp:1118
 #, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
 msgstr "이 시스템에 접근하려면 사용자 이름과 암호가 필요합니다."
 
-#: rdp/rdpsession.cpp:1133
+#: rdp/rdpsession.cpp:1141
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr "이 시스템의 충전기를 알 수 없습니다. 계속 진행하시겠습니까?"
 
-#: rdp/rdpsession.cpp:1134
+#: rdp/rdpsession.cpp:1142
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
 msgstr "인증서 검증"
 
-#: rdp/rdpsession.cpp:1139 rdp/rdpsession.cpp:1162
+#: rdp/rdpsession.cpp:1147 rdp/rdpsession.cpp:1170
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
 msgstr "이 인증서 기억"
 
-#: rdp/rdpsession.cpp:1156
+#: rdp/rdpsession.cpp:1164
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
 msgstr "시스템 인증서가 변경되었습니다. 계속 진행하시겠습니까?"
 
-#: rdp/rdpsession.cpp:1157
+#: rdp/rdpsession.cpp:1165
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
 msgstr "인증서가 변경됨"
 
-#: rdp/rdpsession.cpp:1160
+#: rdp/rdpsession.cpp:1168
 #, kde-format
 msgctxt "@label"
 msgid ""
