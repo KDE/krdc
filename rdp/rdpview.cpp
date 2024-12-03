@@ -248,15 +248,6 @@ HostPreferences *RdpView::hostPreferences()
     return m_hostPreferences.get();
 }
 
-void RdpView::switchFullscreen(bool on)
-{
-    if (on) {
-        showFullScreen();
-    } else {
-        showNormal();
-    }
-}
-
 QPixmap RdpView::takeScreenshot()
 {
     if (!m_session->videoBuffer()->isNull()) {

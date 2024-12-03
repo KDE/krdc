@@ -505,6 +505,7 @@ void MainWindow::switchFullscreen()
         }
 
         for (RemoteView *view : qAsConst(m_remoteViewMap)) {
+            view->switchFullscreen(false);
             view->enableScaling(view->hostPreferences()->windowedScale());
         }
 
@@ -533,10 +534,6 @@ void MainWindow::switchFullscreen()
         m_tabWidget->tabBar()->hide();
         m_tabWidget->setDocumentMode(true);
 
-        for (RemoteView *currentView : qAsConst(m_remoteViewMap)) {
-            currentView->enableScaling(currentView->hostPreferences()->fullscreenScale());
-        }
-
         QVBoxLayout *fullscreenLayout = new QVBoxLayout(m_fullscreenWindow);
         fullscreenLayout->setContentsMargins(QMargins(0, 0, 0, 0));
         fullscreenLayout->addWidget(m_tabWidget);
@@ -549,6 +546,11 @@ void MainWindow::switchFullscreen()
 
         m_fullscreenWindow->show();
         hide(); // hide after showing the new window so it stays on the same screen
+
+        for (RemoteView *currentView : qAsConst(m_remoteViewMap)) {
+            currentView->enableScaling(currentView->hostPreferences()->fullscreenScale());
+            currentView->switchFullscreen(true);
+        }
 
         if (m_systemTrayIcon) {
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
@@ -572,6 +574,7 @@ void MainWindow::switchFullscreen()
     if (view) {
         Q_EMIT factorUpdated(view->hostPreferences()->scaleFactor());
         Q_EMIT scaleUpdated(scale_state);
+        view->setFocus();
     }
     actionCollection()->action(QStringLiteral("scale"))->setChecked(scale_state);
 }
