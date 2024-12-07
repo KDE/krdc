@@ -334,7 +334,8 @@ bool RemoteView::event(QEvent *event)
         case Qt::Key_Hyper_L:
         case Qt::Key_Hyper_R:
             if (event->type() == QEvent::KeyPress) {
-                m_modifiers[key] = keyEvent->nativeScanCode();
+                ModifierKey modifierToAdd = {keyEvent->nativeScanCode(), keyEvent->nativeVirtualKey()};
+                m_modifiers[key] = modifierToAdd;
             } else if (m_modifiers.contains(key)) {
                 m_modifiers.remove(key);
             } else {
@@ -410,11 +411,12 @@ void RemoteView::remoteClipboardChanged(QMimeData *data)
 void RemoteView::unpressModifiers()
 {
     for (auto it = m_modifiers.begin(); it != m_modifiers.end(); ++it) {
+        ModifierKey modifierToUnpress = it.value();
         QKeyEvent *event = new QKeyEvent(QEvent::KeyRelease,
                                          it.key(),
                                          Qt::NoModifier,
-                                         it.value(),
-                                         0,
+                                         modifierToUnpress.nativeScanCode,
+                                         modifierToUnpress.nativeVirtualKey,
                                          0,
                                          QString(),
                                          false,
