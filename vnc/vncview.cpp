@@ -470,16 +470,6 @@ void VncView::updateImage(int x, int y, int w, int h)
                 .adjusted(-1, -1, 1, 1));
 }
 
-void VncView::setViewOnly(bool viewOnly)
-{
-    RemoteView::setViewOnly(viewOnly);
-
-    if (viewOnly)
-        setCursor(Qt::ArrowCursor);
-    else
-        setCursor(m_localCursorState == CursorOn ? localDefaultCursor() : Qt::BlankCursor);
-}
-
 void VncView::showLocalCursor(LocalCursorState state)
 {
     RemoteView::showLocalCursor(state);

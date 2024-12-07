@@ -50,7 +50,6 @@ public:
     HostPreferences *hostPreferences() override;
 #endif
 
-    void setViewOnly(bool viewOnly) override;
     void showLocalCursor(LocalCursorState state) override;
     void enableScaling(bool scale) override;
 

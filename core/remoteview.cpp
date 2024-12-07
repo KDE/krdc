@@ -158,6 +158,11 @@ bool RemoteView::viewOnly()
 void RemoteView::setViewOnly(bool viewOnly)
 {
     m_viewOnly = viewOnly;
+
+    if (viewOnly)
+        setCursor(Qt::ArrowCursor);
+    else
+        setCursor(m_localCursorState == CursorOn ? localDefaultCursor() : Qt::BlankCursor);
 }
 
 bool RemoteView::grabAllKeys()
