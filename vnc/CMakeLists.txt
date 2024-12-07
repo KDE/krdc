@@ -27,6 +27,10 @@ target_link_libraries(krdc_vncplugin
     krdccore
 )
 
+if(HAIKU)
+    target_link_libraries(krdc_vncplugin network)
+endif()
+
 if(QT_MAJOR_VERSION STREQUAL "6")
     target_link_libraries(krdc_vncplugin KF6::KCMUtils)
 endif()

@@ -56,6 +56,10 @@ target_link_libraries(kcm_krdc_rdpplugin
     krdccore
 )
 
+if(HAIKU)
+    target_link_libraries(kcm_krdc_rdpplugin network)
+endif()
+
 if(QT_MAJOR_VERSION STREQUAL "6")
     target_link_libraries(kcm_krdc_rdpplugin KF6::KCMUtils)
 endif()
