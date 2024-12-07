@@ -423,12 +423,8 @@ void RemoteView::unpressModifiers()
                                          0,
                                          QString(),
                                          false,
-                                         1
-#if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
-                                         ,
-                                         QInputDevice::primaryKeyboard()
-#endif
-        );
+                                         1,
+                                         QInputDevice::primaryKeyboard());
         handleKeyEvent(event);
     }
     m_modifiers.clear();

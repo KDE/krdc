@@ -12,20 +12,11 @@
 
 K_PLUGIN_CLASS(VncPreferences)
 
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-VncPreferences::VncPreferences(QWidget *parent, const QVariantList &args)
-    : KCModule(parent, args)
-#else
 VncPreferences::VncPreferences(QObject *parent)
     : KCModule(parent)
-#endif
 {
     Ui::VncPreferences vncUi;
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    vncUi.setupUi(this);
-#else
     vncUi.setupUi(widget());
-#endif
 
     // copying the RDP preferences... need to create generic code for the plugins.
     vncUi.resolutionDummyLabel->hide();
@@ -35,11 +26,7 @@ VncPreferences::VncPreferences(QObject *parent)
     vncUi.heightLabel->setEnabled(true);
     vncUi.widthLabel->setEnabled(true);
 
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    addConfig(Settings::self(), this);
-#else
     addConfig(Settings::self(), widget());
-#endif
 }
 
 VncPreferences::~VncPreferences()

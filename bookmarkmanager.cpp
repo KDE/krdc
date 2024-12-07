@@ -20,13 +20,7 @@ BookmarkManager::BookmarkManager(KActionCollection *collection, QMenu *menu, Mai
     const QString dir = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QString(), QStandardPaths::LocateOption::LocateDirectory);
     const QString file = dir + QLatin1String("krdc/bookmarks.xml");
 
-#if QT_VERSION_MAJOR < 6
-    m_manager = KBookmarkManager::managerForFile(file, QLatin1String("krdc"));
-    m_manager->setUpdate(true);
-#else
     m_manager = new KBookmarkManager(file, this);
-#endif
-
     m_bookmarkMenu = new KBookmarkMenu(m_manager, this, menu);
     collection->addActions(menu->actions());
 

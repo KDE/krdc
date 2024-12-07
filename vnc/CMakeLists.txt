@@ -21,6 +21,7 @@ target_link_libraries(krdc_vncplugin
     Qt::Core
     KF6::ConfigCore
     KF6::CoreAddons
+    KF6::KCMUtils
     KF6::XmlGui
     Qt::Gui
     PkgConfig::VNCCLIENT
@@ -29,10 +30,6 @@ target_link_libraries(krdc_vncplugin
 
 if(HAIKU)
     target_link_libraries(krdc_vncplugin network)
-endif()
-
-if(QT_MAJOR_VERSION STREQUAL "6")
-    target_link_libraries(krdc_vncplugin KF6::KCMUtils)
 endif()
 
 if (LIBSSH_FOUND)
@@ -58,14 +55,11 @@ target_link_libraries(kcm_krdc_vncplugin
     KF6::Wallet
     KF6::ConfigCore
     KF6::CoreAddons
+    KF6::KCMUtils
     KF6::XmlGui
     Qt::Gui
     krdccore
 )
-
-if(QT_MAJOR_VERSION STREQUAL "6")
-    target_link_libraries(kcm_krdc_vncplugin KF6::KCMUtils)
-endif()
 
 add_dependencies(kcm_krdc_vncplugin krdc_vncplugin)
 

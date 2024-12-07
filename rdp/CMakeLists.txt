@@ -26,6 +26,7 @@ target_link_libraries(krdc_rdpplugin
     Qt::Gui
     KF6::ConfigCore
     KF6::CoreAddons
+    KF6::KCMUtils
     KF6::WindowSystem
     KF6::XmlGui
     KF6::KIOWidgets
@@ -35,10 +36,6 @@ target_link_libraries(krdc_rdpplugin
     freerdp-client
     winpr
 )
-
-if(QT_MAJOR_VERSION STREQUAL "6")
-    target_link_libraries(krdc_rdpplugin KF6::KCMUtils)
-endif()
 
 add_library(kcm_krdc_rdpplugin)
 
@@ -52,6 +49,7 @@ target_link_libraries(kcm_krdc_rdpplugin
     KF6::Wallet
     KF6::ConfigCore
     KF6::CoreAddons
+    KF6::KCMUtils
     KF6::XmlGui
     KF6::KIOWidgets
     krdccore
@@ -59,10 +57,6 @@ target_link_libraries(kcm_krdc_rdpplugin
 
 if(HAIKU)
     target_link_libraries(kcm_krdc_rdpplugin network)
-endif()
-
-if(QT_MAJOR_VERSION STREQUAL "6")
-    target_link_libraries(kcm_krdc_rdpplugin KF6::KCMUtils)
 endif()
 
 add_dependencies(kcm_krdc_rdpplugin krdc_rdpplugin)
