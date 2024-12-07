@@ -33,6 +33,7 @@
 #include <freerdp/input.h>
 #include <freerdp/locale/keyboard.h>
 #include <freerdp/utils/signal.h>
+#include <winpr/string.h>
 #include <winpr/synch.h>
 
 #include "rdpview.h"
@@ -1105,9 +1106,9 @@ bool RdpSession::onAuthenticate(char **username, char **password, char **domain)
     Q_UNUSED(domain);
 
     if (m_firstPasswordTry && m_user.size()) {
-        *username = qstrdup(m_user.toUtf8().data());
+        *username = _strdup(m_user.toUtf8().data());
         if (m_password.size()) {
-            *password = qstrdup(m_password.toUtf8().data());
+            *password = _strdup(m_password.toUtf8().data());
             m_firstPasswordTry = false;
             return true;
         }
@@ -1126,8 +1127,8 @@ bool RdpSession::onAuthenticate(char **username, char **password, char **domain)
     m_user = dialog->username();
     m_password = dialog->password();
 
-    *username = qstrdup(m_user.toUtf8().data());
-    *password = qstrdup(m_password.toUtf8().data());
+    *username = _strdup(m_user.toUtf8().data());
+    *password = _strdup(m_password.toUtf8().data());
 
     if (dialog->keepPassword()) {
         m_view->savePassword(m_password);
