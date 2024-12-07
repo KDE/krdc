@@ -13,7 +13,7 @@
 
 #include "rdphostpreferences.h"
 
-// #include <QProcess>
+#include <QCursor>
 #include <QUrl>
 
 #define TCP_PORT_RDP 3389
@@ -46,6 +46,11 @@ public:
     HostPreferences *hostPreferences() override;
 
     bool supportsScaling() const override;
+    bool supportsLocalCursor() const override;
+    bool supportsViewOnly() const override;
+
+    void setRemoteCursor(QCursor cursor);
+    void showLocalCursor(LocalCursorState state) override;
     bool scaling() const override;
     void enableScaling(bool scale) override;
 
@@ -80,6 +85,7 @@ private:
 
     QRect m_pendingRectangle;
     QImage m_pendingData;
+    QCursor m_remoteCursor;
 };
 
 #endif

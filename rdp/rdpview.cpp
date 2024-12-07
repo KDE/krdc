@@ -261,6 +261,37 @@ bool RdpView::supportsScaling() const
     return true;
 }
 
+bool RdpView::supportsLocalCursor() const
+{
+    return true;
+}
+
+bool RdpView::supportsViewOnly() const
+{
+    return true;
+}
+
+void RdpView::showLocalCursor(LocalCursorState state)
+{
+    RemoteView::showLocalCursor(state);
+
+    if (state == CursorOn) {
+        // show local cursor, hide remote one
+        setCursor(localDefaultCursor());
+    } else {
+        // hide local cursor, show remote one
+        setCursor(m_remoteCursor);
+    }
+}
+
+void RdpView::setRemoteCursor(QCursor cursor)
+{
+    m_remoteCursor = cursor;
+    if (m_localCursorState != CursorOn) {
+        setCursor(m_remoteCursor);
+    }
+}
+
 bool RdpView::scaling() const
 {
     return m_hostPreferences->scaleToSize();
