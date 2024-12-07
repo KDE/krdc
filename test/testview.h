@@ -30,9 +30,6 @@ public:
     bool start() override;
     HostPreferences *hostPreferences() override;
 
-public Q_SLOTS:
-    void switchFullscreen(bool on) override;
-
 protected:
     void handleKeyEvent(QKeyEvent *event) override;
     void handleWheelEvent(QWheelEvent *event) override;

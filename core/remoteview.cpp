@@ -207,8 +207,15 @@ void RemoteView::setScaleFactor(float factor)
     m_factor = factor;
 }
 
-void RemoteView::switchFullscreen(bool)
+void RemoteView::switchFullscreen(bool on)
 {
+    Q_UNUSED(on);
+#ifdef HAVE_WAYLAND
+    // fullscreen mode moves the widget to a temporary window, reinitialize inhibitor
+    if (qGuiApp->platformName() == QLatin1String("wayland")) {
+        m_inhibition.reset(new WaylandInhibition(window()->windowHandle()));
+    }
+#endif
 }
 
 void RemoteView::scaleResize(int, int)

@@ -52,8 +52,6 @@ public:
 
     QPixmap takeScreenshot() override;
 
-    void switchFullscreen(bool on) override;
-
     void savePassword(const QString &password);
 
 public Q_SLOTS:
