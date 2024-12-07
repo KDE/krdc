@@ -25,6 +25,11 @@
 #include "shortcutinhibition_p.h"
 #endif
 
+struct ModifierKey {
+    quint32 nativeScanCode;
+    quint32 nativeVirtualKey;
+};
+
 class HostPreferences;
 
 /**
@@ -432,7 +437,7 @@ protected:
     QUrl m_url;
     qreal m_factor;
     QClipboard *m_clipboard;
-    QMap<int, quint32> m_modifiers;
+    QMap<int, ModifierKey> m_modifiers;
 #ifdef HAVE_WAYLAND
     std::unique_ptr<ShortcutInhibition> m_inhibition;
 #endif
