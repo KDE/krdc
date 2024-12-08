@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.1\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-07 00:40+0000\n"
+"POT-Creation-Date: 2024-12-08 00:40+0000\n"
 "PO-Revision-Date: 2024-08-06 15:03+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -29,7 +29,7 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "ulysses@fsf.hu"
 
-#: bookmarkmanager.cpp:43
+#: bookmarkmanager.cpp:37
 #, kde-format
 msgid "History"
 msgstr "Előzmények"
@@ -196,12 +196,12 @@ msgstr "Beállítás…"
 msgid "Remove"
 msgstr "Eltávolítás"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:300 mainwindow.cpp:698
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:292 mainwindow.cpp:682
 #, kde-format
 msgid "Unusable URL"
 msgstr "Nem használható URL"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:698
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:682
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr "A kiválasztott gép nem kezelhető."
@@ -418,98 +418,98 @@ msgstr ""
 msgid "URLs to connect after startup"
 msgstr "Azon URL-címek, amelyekhez az elindulás után csatlakozni kell"
 
-#: mainwindow.cpp:124
+#: mainwindow.cpp:116
 #, kde-format
 msgid "KDE Remote Desktop Client started"
 msgstr "A KDE távoli asztal kliense elindult"
 
-#: mainwindow.cpp:129 mainwindow.cpp:142 mainwindow.cpp:1103
-#: mainwindow.cpp:1198
+#: mainwindow.cpp:121 mainwindow.cpp:134 mainwindow.cpp:1083
+#: mainwindow.cpp:1178
 #, kde-format
 msgid "New Connection"
 msgstr "Új kapcsolat"
 
-#: mainwindow.cpp:148
+#: mainwindow.cpp:140
 #, kde-format
 msgid "Copy Screenshot to Clipboard"
 msgstr "Képernyőkép másolása a vágólapra"
 
-#: mainwindow.cpp:149
+#: mainwindow.cpp:141
 #, kde-format
 msgid "Screenshot"
 msgstr "Képernyőkép"
 
-#: mainwindow.cpp:155 mainwindow.cpp:519
+#: mainwindow.cpp:147 mainwindow.cpp:507
 #, kde-format
 msgid "Switch to Full Screen Mode"
 msgstr "Váltás teljes képernyős módba"
 
-#: mainwindow.cpp:156 mainwindow.cpp:520
+#: mainwindow.cpp:148 mainwindow.cpp:508
 #, kde-format
 msgid "Full Screen"
 msgstr "Teljes képernyő"
 
-#: mainwindow.cpp:163
+#: mainwindow.cpp:155
 #, kde-format
 msgid "View Only"
 msgstr "Csak megtekintés"
 
-#: mainwindow.cpp:168
+#: mainwindow.cpp:160
 #, kde-format
 msgid "Disconnect"
 msgstr "Kapcsolat bontása"
 
-#: mainwindow.cpp:176
+#: mainwindow.cpp:168
 #, kde-format
 msgid "Show Local Cursor"
 msgstr "Helyi kurzor megjelenítése"
 
-#: mainwindow.cpp:177
+#: mainwindow.cpp:169
 #, kde-format
 msgid "Local Cursor"
 msgstr "Helyi kurzor"
 
-#: mainwindow.cpp:183
+#: mainwindow.cpp:175
 #, kde-format
 msgid "Grab All Possible Keys"
 msgstr "Minden lehetséges billentyű elfogása"
 
-#: mainwindow.cpp:184
+#: mainwindow.cpp:176
 #, kde-format
 msgid "Grab Keys"
 msgstr "Billentyűk elfogása"
 
-#: mainwindow.cpp:190
+#: mainwindow.cpp:182
 #, kde-format
 msgid "Scale Remote Screen to Fit Window Size"
 msgstr "Átméretezés a helyi ablakhoz"
 
-#: mainwindow.cpp:191
+#: mainwindow.cpp:183
 #, kde-format
 msgid "Scale"
 msgstr "Méretezés"
 
-#: mainwindow.cpp:194
+#: mainwindow.cpp:186
 #, kde-format
 msgid "Scaling Factor"
 msgstr "Skálázási tényező"
 
-#: mainwindow.cpp:205
+#: mainwindow.cpp:197
 #, kde-format
 msgid "Bookmarks"
 msgstr "Könyvjelzők"
 
-#: mainwindow.cpp:273
+#: mainwindow.cpp:265
 #, kde-format
 msgid "Unable to load connection data from the provided file."
 msgstr ""
 
-#: mainwindow.cpp:273
+#: mainwindow.cpp:265
 #, kde-format
 msgid "Load failed"
 msgstr ""
 
-#: mainwindow.cpp:279
+#: mainwindow.cpp:271
 #, kde-format
 msgid ""
 "The entered address does not have the required form.\n"
@@ -518,146 +518,146 @@ msgstr ""
 "A megadott cím formátuma nem megfelelő.\n"
 " Szintaxis: [felhasználónév@]gépnév[:port]"
 
-#: mainwindow.cpp:279
+#: mainwindow.cpp:271
 #, kde-format
 msgid "Malformed URL"
 msgstr "Hibás formátumú URL"
 
-#: mainwindow.cpp:300
+#: mainwindow.cpp:292
 #, kde-format
 msgid "The entered address cannot be handled."
 msgstr "A megadott cím nem kezelhető."
 
-#: mainwindow.cpp:435
+#: mainwindow.cpp:427
 #, kde-format
 msgid "Connecting to %1"
 msgstr "Csatlakozás ehhez: %1"
 
-#: mainwindow.cpp:439
+#: mainwindow.cpp:431
 #, kde-format
 msgid "Authenticating at %1"
 msgstr "Felhasználóellenőrzés itt: %1"
 
-#: mainwindow.cpp:443
+#: mainwindow.cpp:435
 #, kde-format
 msgid "Preparing connection to %1"
 msgstr "A csatlakozás előkészítése: %1"
 
-#: mainwindow.cpp:447
+#: mainwindow.cpp:439
 #, kde-format
 msgid "Connected to %1"
 msgstr "Csatlakozva ehhez: %1"
 
-#: mainwindow.cpp:530
+#: mainwindow.cpp:518
 #, kde-format
 msgctxt ""
 "window title when in full screen mode (for example displayed in tasklist)"
 msgid "KDE Remote Desktop Client (Full Screen)"
 msgstr "KDE távoli asztal kliens (teljes képernyős)"
 
-#: mainwindow.cpp:564
+#: mainwindow.cpp:548
 #, kde-format
 msgid "Switch to Window Mode"
 msgstr "Váltás ablakos módba"
 
-#: mainwindow.cpp:565
+#: mainwindow.cpp:549
 #, kde-format
 msgid "Window Mode"
 msgstr "Ablakos mód"
 
-#: mainwindow.cpp:717
+#: mainwindow.cpp:701
 #, kde-format
 msgid "Connect"
 msgstr "Csatlakozás"
 
-#: mainwindow.cpp:718
+#: mainwindow.cpp:702
 #, kde-format
 msgid "Rename"
 msgstr "Átnevezés"
 
-#: mainwindow.cpp:719
+#: mainwindow.cpp:703
 #, kde-format
 msgid "Settings"
 msgstr "Beállítások"
 
-#: mainwindow.cpp:720
+#: mainwindow.cpp:704
 #, kde-format
 msgid "Delete"
 msgstr "Törlés"
 
-#: mainwindow.cpp:723 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:707 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "Könyvjelzők"
 
-#: mainwindow.cpp:723 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:707 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "Előzmények"
 
-#: mainwindow.cpp:735
+#: mainwindow.cpp:719
 #, kde-format
 msgid "Rename %1"
 msgstr "A(z) %1 átnevezése"
 
-#: mainwindow.cpp:735
+#: mainwindow.cpp:719
 #, kde-format
 msgid "Rename %1 to"
 msgstr "A(z) %1 átnevezése erre"
 
-#: mainwindow.cpp:742
+#: mainwindow.cpp:726
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "Biztosan törölni szeretné a következőt: %1?"
 
-#: mainwindow.cpp:742
+#: mainwindow.cpp:726
 #, kde-format
 msgid "Delete %1"
 msgstr "A(z) %1 törlése"
 
-#: mainwindow.cpp:766
+#: mainwindow.cpp:750
 #, kde-format
 msgid "Add Bookmark"
 msgstr "Könyvjelző hozzáadása"
 
-#: mainwindow.cpp:767
+#: mainwindow.cpp:751
 #, kde-format
 msgid "Close Tab"
 msgstr "Lap bezárása"
 
-#: mainwindow.cpp:871
+#: mainwindow.cpp:855
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr "Teljes képernyős ablak minimalizálása"
 
-#: mainwindow.cpp:887
+#: mainwindow.cpp:871
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "Eszköztár rögzítése"
 
-#: mainwindow.cpp:996
+#: mainwindow.cpp:976
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr "Biztosan be szeretné zárni a KRDC-t?"
 
-#: mainwindow.cpp:997
+#: mainwindow.cpp:977
 #, kde-format
 msgid "Confirm Quit"
 msgstr "Kilépés megerősítése"
 
-#: mainwindow.cpp:1126
+#: mainwindow.cpp:1106
 #, kde-format
 msgid "Connect to:"
 msgstr "Csatlakozás ehhez:"
 
-#: mainwindow.cpp:1130
+#: mainwindow.cpp:1110
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr "Ide írhat egy címhez csatlakozáshoz és a lista szűréséhez."
 
-#: mainwindow.cpp:1139
+#: mainwindow.cpp:1119
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
@@ -666,17 +666,17 @@ msgstr ""
 "Ide írhat egy IP-címet vagy DNS-venet. Törölje a sort a csatlakozási módok "
 "listájáért."
 
-#: mainwindow.cpp:1142
+#: mainwindow.cpp:1122
 #, kde-format
 msgid "Goto Address"
 msgstr "Ugrás a címre"
 
-#: mainwindow.cpp:1234
+#: mainwindow.cpp:1214
 #, kde-format
 msgid "Remote Desktops"
 msgstr "Távoli asztalok"
 
-#: mainwindow.cpp:1263
+#: mainwindow.cpp:1243
 #, kde-format
 msgid "Filter"
 msgstr "Szűrő"
@@ -1276,13 +1276,13 @@ msgstr "RPC"
 msgid "Ext"
 msgstr ""
 
-#: rdp/rdpsession.cpp:263
+#: rdp/rdpsession.cpp:264
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Logon Error"
 msgstr "Bejelentkezési hiba"
 
-#: rdp/rdpsession.cpp:866
+#: rdp/rdpsession.cpp:867
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1298,43 +1298,43 @@ msgstr ""
 "Kibocsátó: %5\n"
 "Ujjlenyomat: %6\n"
 
-#: rdp/rdpsession.cpp:1118
+#: rdp/rdpsession.cpp:1119
 #, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
 msgstr "A távoli gép eléréséhez felhasználónév és jelszó megadása szükséges."
 
-#: rdp/rdpsession.cpp:1141
+#: rdp/rdpsession.cpp:1142
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr "A távoli gép tanúsítványa ismeretlen. Szeretné folytatni?"
 
-#: rdp/rdpsession.cpp:1142
+#: rdp/rdpsession.cpp:1143
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
 msgstr "Tanúsítvány ellenőrzése"
 
-#: rdp/rdpsession.cpp:1147 rdp/rdpsession.cpp:1170
+#: rdp/rdpsession.cpp:1148 rdp/rdpsession.cpp:1171
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
 msgstr "Tanúsítvány megjegyzése"
 
-#: rdp/rdpsession.cpp:1164
+#: rdp/rdpsession.cpp:1165
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
 msgstr "A távoli gép tanúsítványa megváltozott. Szeretné folytatni?"
 
-#: rdp/rdpsession.cpp:1165
+#: rdp/rdpsession.cpp:1166
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
 msgstr "A tanúsítvány megváltozott"
 
-#: rdp/rdpsession.cpp:1168
+#: rdp/rdpsession.cpp:1169
 #, kde-format
 msgctxt "@label"
 msgid ""
