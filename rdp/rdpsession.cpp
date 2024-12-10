@@ -832,6 +832,9 @@ void RdpSession::channelConnected(void *context, ChannelConnectedEventArgs *e)
         // TODO: Should be fairly easy as you only need to provide monitor(=fullscreen or multimonitor) or window (=single monitor on RDP side) layout
         // (orientation, resolution, dpi, ...) on size / dpi / ... change. word of advice: do not send more than one update per second (some windows servers
         // crash the session otherwise)
+    } else if (strcmp(e->name, RDPGFX_DVC_CHANNEL_NAME) == 0) {
+        rdpContext *rdpC = reinterpret_cast<rdpContext *>(context);
+        gdi_graphics_pipeline_init(rdpC->gdi, (RdpgfxClientContext *)e->pInterface);
 #if FREERDP_VERSION_MAJOR == 3
     } else {
         freerdp_client_OnChannelConnectedEventHandler(context, e);
@@ -855,6 +858,9 @@ void RdpSession::channelDisconnected(void *context, ChannelDisconnectedEventArgs
         WINPR_ASSERT(disp);
         Q_UNUSED(disp);
         // TODO: Implement display channel
+    } else if (strcmp(e->name, RDPGFX_DVC_CHANNEL_NAME) == 0) {
+        rdpContext *rdpC = reinterpret_cast<rdpContext *>(context);
+        gdi_graphics_pipeline_uninit(rdpC->gdi, (RdpgfxClientContext *)e->pInterface);
 #if FREERDP_VERSION_MAJOR == 3
     } else {
         freerdp_client_OnChannelDisconnectedEventHandler(context, e);
