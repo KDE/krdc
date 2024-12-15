@@ -3,29 +3,31 @@
 # This file is distributed under the same license as the krdc package.
 # Kali <EMAIL@ADDRESS>, 2024.
 #
+# SPDX-FileCopyrightText: 2024 kali <skkalwar999@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-11 00:40+0000\n"
-"PO-Revision-Date: 2024-12-13 19:09+0530\n"
-"Last-Translator: Kali <EMAIL@ADDRESS>\n"
-"Language-Team: Sanskrit\n"
+"PO-Revision-Date: 2024-12-14 01:42+0530\n"
+"Last-Translator: kali <skkalwar999@gmail.com>\n"
+"Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
 "Language: sa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n>2);\n"
+"X-Generator: Lokalize 24.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr ""
+msgstr "भवतः नामानि"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr ""
+msgstr "भवतः ईमेलपत्राणि"
 
 #: bookmarkmanager.cpp:37
 #, kde-format
@@ -207,7 +209,7 @@ msgstr "चयनितं होस्ट् सम्भालितुं न
 #, kde-format
 msgctxt "General Config"
 msgid "General"
-msgstr ""
+msgstr "सामान्य"
 
 #: config/preferencesdialog.cpp:24
 #, kde-format
@@ -244,36 +246,36 @@ msgstr "एकनिमेषात् न्यूनकालपूर्व�
 #, kde-format
 msgid "A minute ago"
 msgid_plural "%1 minutes ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "एकनिमेषपूर्वम्"
+msgstr[1] "%1 निमेषपूर्वम्"
 
 #: connectiondelegate.cpp:37
 #, kde-format
 msgid "An hour ago"
 msgid_plural "%1 hours ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "एकघण्टापूर्वम्"
+msgstr[1] "%1 घण्टापूर्वम्"
 
 #: connectiondelegate.cpp:41
 #, kde-format
 msgid "Yesterday"
 msgid_plural "%1 days ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ह्यः"
+msgstr[1] "%1 दिवसपूर्वम्"
 
 #: connectiondelegate.cpp:43
 #, kde-format
 msgid "Over a month ago"
 msgid_plural "%1 months ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "मासाधिकं पूर्वं"
+msgstr[1] "%1 मासपूर्वम्"
 
 #: connectiondelegate.cpp:44
 #, kde-format
 msgid "A year ago"
 msgid_plural "%1 years ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "एकवर्षपूर्वम्"
+msgstr[1] "%1 वर्षपूर्वम्"
 
 #: core/hostpreferences.cpp:182
 #, kde-format
@@ -548,7 +550,7 @@ msgstr "%1 इत्यनेन सह सम्बद्धम्"
 msgctxt ""
 "window title when in full screen mode (for example displayed in tasklist)"
 msgid "KDE Remote Desktop Client (Full Screen)"
-msgstr ""
+msgstr "KDE दूरस्थ डेस्कटॉप क्लायन्ट् (पूर्णपर्दे) ."
 
 #: mainwindow.cpp:548
 #, kde-format
@@ -710,7 +712,7 @@ msgstr "सर्वं त्वरणं निष्क्रियं कु
 #, kde-format
 msgctxt "label for soundsettings in preferences dialog"
 msgid "Sound:"
-msgstr ""
+msgstr "ध्वनि:"
 
 #. i18n: ectx: property (text), widget (QLabel, accelerationLabel)
 #: rdp/rdppreferences.ui:89
@@ -1270,7 +1272,7 @@ msgstr "एक्सटेंशन 1"
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Logon Error"
-msgstr ""
+msgstr "लॉगऑन त्रुटि"
 
 #: rdp/rdpsession.cpp:873
 #, kde-format
@@ -1282,42 +1284,47 @@ msgid ""
 "Issuer: %5\n"
 "Fingerprint: %6\n"
 msgstr ""
+"यजमानः %1:%2\n"
+"सामान्यं नाम: %3\n"
+"विषयः %4\n"
+"जारीकर्ता : %5\n"
+"अङ्गुलिचिह्नम् : %6\n"
 
 #: rdp/rdpsession.cpp:1125
 #, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
-msgstr ""
+msgstr "अस्मिन् प्रणाल्यां प्रवेशाय उपयोक्तृनाम गुप्तशब्दं च आवश्यकम् ।"
 
 #: rdp/rdpsession.cpp:1148
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
-msgstr ""
+msgstr "अस्य प्रणाल्याः प्रमाणपत्रम् अज्ञातम् अस्ति । किं भवन्तः अग्रे गन्तुं इच्छन्ति ?"
 
 #: rdp/rdpsession.cpp:1149
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
-msgstr ""
+msgstr "प्रमाणपत्रं सत्यापयन्तु"
 
 #: rdp/rdpsession.cpp:1154 rdp/rdpsession.cpp:1177
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
-msgstr ""
+msgstr "एतत् प्रमाणपत्रं स्मर्यताम्"
 
 #: rdp/rdpsession.cpp:1171
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
-msgstr ""
+msgstr "अस्य प्रणाल्याः प्रमाणपत्रं परिवर्तितम् अस्ति । किं भवन्तः अग्रे गन्तुं इच्छन्ति ?"
 
 #: rdp/rdpsession.cpp:1172
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
-msgstr ""
+msgstr "प्रमाणपत्रं परिवर्तितम् अस्ति"
 
 #: rdp/rdpsession.cpp:1175
 #, kde-format
@@ -1328,12 +1335,16 @@ msgid ""
 "New Certificate:\n"
 "%2"
 msgstr ""
+"पूर्वप्रमाणपत्रम् : १.\n"
+"%1\n"
+"नवीनं प्रमाणपत्रम् : १.\n"
+"%2"
 
 #: rdp/rdpview.cpp:178
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Login Failure"
-msgstr ""
+msgstr "प्रवेशविफलता"
 
 #: rdp/rdpview.cpp:179
 #, kde-format
@@ -1342,12 +1353,13 @@ msgid ""
 "Unable to login with the provided credentials. Please double check the user "
 "and password."
 msgstr ""
+"प्रदत्तप्रमाणपत्रैः सह प्रवेशं कर्तुं असमर्थः । कृपया उपयोक्तारं गुप्तशब्दं च द्विवारं पश्यन्तु।"
 
 #: rdp/rdpview.cpp:188
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Account Problems"
-msgstr ""
+msgstr "खाता समस्या"
 
 #: rdp/rdpview.cpp:189
 #, kde-format
@@ -1356,12 +1368,14 @@ msgid ""
 "The provided account is not allowed to log in to this machine. Please "
 "contact your system administrator."
 msgstr ""
+"प्रदत्तं खातं अस्मिन् यन्त्रे प्रवेशं कर्तुं न अनुमतम् । कृपया स्वस्य प्रणालीप्रशासकेन सह सम्पर्कं "
+"कुर्वन्तु।"
 
 #: rdp/rdpview.cpp:194
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Password Problems"
-msgstr ""
+msgstr "गुप्तशब्द समस्या"
 
 #: rdp/rdpview.cpp:195
 #, kde-format
@@ -1370,78 +1384,80 @@ msgid ""
 "Unable to login with the provided password. Please contact your system "
 "administrator to change it."
 msgstr ""
+"प्रदत्तगुप्तशब्देन प्रवेशं कर्तुं असमर्थः । तत् परिवर्तयितुं कृपया स्वस्य प्रणालीप्रशासकेन सह सम्पर्कं "
+"कुर्वन्तु ।"
 
 #: rdp/rdpview.cpp:198
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Lost"
-msgstr ""
+msgstr "संबन्धः नष्टः"
 
 #: rdp/rdpview.cpp:199
 #, kde-format
 msgctxt "@label"
 msgid "Lost connection to the server."
-msgstr ""
+msgstr "सर्वरेण सह संयोजनं नष्टम्।"
 
 #: rdp/rdpview.cpp:203
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Server not Found"
-msgstr ""
+msgstr "सर्वरः न लब्धः"
 
 #: rdp/rdpview.cpp:204
 #, kde-format
 msgctxt "@label"
 msgid "Could not find the server."
-msgstr ""
+msgstr "सर्वरं न प्राप्नोत्।"
 
 #: rdp/rdpview.cpp:207
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Refused"
-msgstr ""
+msgstr "संयोजनं अङ्गीकृतम्"
 
 #: rdp/rdpview.cpp:208
 #, kde-format
 msgctxt "@label"
 msgid "The server refused the connection request."
-msgstr ""
+msgstr "सर्वरः संयोजनानुरोधं अङ्गीकृतवान् ।"
 
 #: rdp/rdpview.cpp:213
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Could not Connect"
-msgstr ""
+msgstr "Connect कर्तुं न शक्तवान्"
 
 #: rdp/rdpview.cpp:214
 #, kde-format
 msgctxt "@label"
 msgid "Could not connect to the server."
-msgstr ""
+msgstr "सर्वरेण सह सम्बद्धं कर्तुं न शक्तवान्।"
 
 #: rdp/rdpview.cpp:224 rdp/rdpview.cpp:228
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Closed"
-msgstr ""
+msgstr "संयोजनं बन्दम्"
 
 #: rdp/rdpview.cpp:229
 #, kde-format
 msgctxt "@label"
 msgid "The connection to the server was closed."
-msgstr ""
+msgstr "सर्वरेण सह संयोजनं निरुद्धम् आसीत् ।"
 
 #: rdp/rdpview.cpp:233
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Failed"
-msgstr ""
+msgstr "संयोजनं विफलम्"
 
 #: rdp/rdpview.cpp:234
 #, kde-format
 msgctxt "@label"
 msgid "An unknown error occurred"
-msgstr ""
+msgstr "अज्ञातदोषः अभवत्"
 
 #: rdp/rdpviewfactory.cpp:25
 #, kde-format
@@ -1466,38 +1482,38 @@ msgstr ""
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Zeroconf"
-msgstr ""
+msgstr "शून्यसंकल्पः"
 
 #: remotedesktopsmodel.cpp:114
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "None"
-msgstr ""
+msgstr "न कश्चित्"
 
 #: remotedesktopsmodel.cpp:130
 #, kde-format
 msgctxt "Remove the selected url from the bookarks menu"
 msgid "Remove the bookmark for %1."
-msgstr ""
+msgstr "%1 कृते बुकमार्कं निष्कासयन्तु ।"
 
 #: remotedesktopsmodel.cpp:132
 #, kde-format
 msgctxt "Add the selected url to the bookmarks menu"
 msgid "Bookmark %1."
-msgstr ""
+msgstr "बुकमार्क %1."
 
 #: remotedesktopsmodel.cpp:170
 #, kde-format
 msgctxt "Header of the connections list, title/url for remote connection"
 msgid "Remote Desktop"
-msgstr ""
+msgstr "दूरस्थ डेस्कटॉप"
 
 #: remotedesktopsmodel.cpp:172
 #, kde-format
 msgctxt ""
 "Header of the connections list, the last time this connection was initiated"
 msgid "Last Connected"
-msgstr ""
+msgstr "अन्तिमः संयोजितः"
 
 #: remotedesktopsmodel.cpp:174
 #, kde-format
@@ -1505,19 +1521,19 @@ msgctxt ""
 "Header of the connections list, the number of times this connection has been "
 "visited"
 msgid "Visits"
-msgstr ""
+msgstr "भ्रमणम्"
 
 #: remotedesktopsmodel.cpp:176
 #, kde-format
 msgctxt "Header of the connections list, the time when this entry was created"
 msgid "Created"
-msgstr ""
+msgstr "निर्मितम्"
 
 #: remotedesktopsmodel.cpp:178
 #, kde-format
 msgctxt "Header of the connections list, where this entry comes from"
 msgid "Source"
-msgstr ""
+msgstr "स्रोतः"
 
 #: vnc/vncclientthread.cpp:300
 #, kde-format
