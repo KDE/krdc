@@ -23,6 +23,7 @@ include(FeatureSummary)
 include(ECMDeprecationSettings)
 include(KDEClangFormat)
 include(KDEGitCommitHooks)
+include(ECMInstallIcons)
 
 find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core)
 
@@ -234,6 +235,11 @@ endif()
 install(TARGETS krdc ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 install(PROGRAMS org.kde.krdc.desktop DESTINATION ${KDE_INSTALL_APPDIR})
 install(FILES org.kde.krdc.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
+
+ecm_install_icons(
+    ICONS sc-apps-krdc.svg
+    DESTINATION ${KDE_INSTALL_ICONDIR}
+)
 
 find_package(SharedMimeInfo)
 if(SharedMimeInfo_FOUND)
