@@ -29,6 +29,7 @@
 #include <freerdp/gdi/gdi.h>
 #include <freerdp/gdi/gfx.h>
 #include <freerdp/input.h>
+#include <winpr/string.h>
 #include <winpr/synch.h>
 #ifdef Q_OS_UNIX
 #include <freerdp/locale/keyboard.h>
@@ -340,11 +341,11 @@ bool RdpSession::start()
     }
 
     auto settings = m_freerdp->settings;
-    settings->ServerHostname = qstrdup(m_host.toLocal8Bit().data());
+    settings->ServerHostname = _strdup(m_host.toLocal8Bit().data());
     settings->ServerPort = m_port;
 
-    settings->Username = qstrdup(m_user.toLocal8Bit().data());
-    settings->Password = qstrdup(m_password.toLocal8Bit().data());
+    settings->Username = _strdup(m_user.toLocal8Bit().data());
+    settings->Password = _strdup(m_password.toLocal8Bit().data());
 
     if (m_size.width() > 0 && m_size.height() > 0) {
         settings->DesktopWidth = m_size.width();
@@ -467,19 +468,19 @@ bool RdpSession::start()
             settings->ProxyType = PROXY_TYPE_NONE;
             break;
         }
-        settings->ProxyHostname = proxyHostAddress.host().toLocal8Bit().data();
-        settings->ProxyUsername = m_preferences->proxyUsername().toLocal8Bit().data();
-        settings->ProxyPassword = m_preferences->proxyPassword().toLocal8Bit().data();
+        settings->ProxyHostname = _strdup(proxyHostAddress.host().toLocal8Bit().data());
+        settings->ProxyUsername = _strdup(m_preferences->proxyUsername().toLocal8Bit().data());
+        settings->ProxyPassword = _strdup(m_preferences->proxyPassword().toLocal8Bit().data());
         settings->ProxyPort = proxyHostAddress.port(defaultPort);
     }
 
     const auto gatewayServerAddress = QUrl(m_preferences->gatewayServer());
     if (!gatewayServerAddress.isEmpty()) {
-        settings->GatewayHostname = gatewayServerAddress.host().toLocal8Bit().data();
+        settings->GatewayHostname = _strdup(gatewayServerAddress.host().toLocal8Bit().data());
         settings->GatewayPort = gatewayServerAddress.port(3389);
-        settings->GatewayUsername = m_preferences->gatewayUsername().toLocal8Bit().data();
-        settings->GatewayPassword = m_preferences->gatewayPassword().toLocal8Bit().data();
-        settings->GatewayDomain = m_preferences->gatewayDomain().toLocal8Bit().data();
+        settings->GatewayUsername = _strdup(m_preferences->gatewayUsername().toLocal8Bit().data());
+        settings->GatewayPassword = _strdup(m_preferences->gatewayPassword().toLocal8Bit().data());
+        settings->GatewayDomain = _strdup(m_preferences->gatewayDomain().toLocal8Bit().data());
         switch (m_preferences->gatewayTransportType()) {
         case RdpHostPreferences::GatewayTransportType::Auto:
             settings->GatewayHttpTransport = true;
@@ -723,10 +724,10 @@ bool RdpSession::onAuthenticate(char **username, char **password, char **domain)
         return false;
     }
 
-    *password = qstrdup(dialog->password().toLocal8Bit().data());
+    *password = _strdup(dialog->password().toLocal8Bit().data());
 
     if (!hasUsername) {
-        *username = qstrdup(dialog->username().toLocal8Bit().data());
+        *username = _strdup(dialog->username().toLocal8Bit().data());
     }
 
     if (dialog->keepPassword()) {
