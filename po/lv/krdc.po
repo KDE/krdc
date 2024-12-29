@@ -4,31 +4,32 @@
 #
 # Viesturs Zarins <viesturs.zarins@mii.lu.lv>, 2008, 2010.
 # Viesturs Zariņš <viesturs.zarins@mii.lu.lv>, 2009.
+# SPDX-FileCopyrightText: 2024 Toms Trasuns <toms.trasuns@posteo.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-11 00:40+0000\n"
-"PO-Revision-Date: 2010-01-02 21:20+0200\n"
-"Last-Translator: Viesturs Zarins <viesturs.zarins@mii.lu.lv>\n"
-"Language-Team: Latvian <locale@laka.lv>\n"
+"PO-Revision-Date: 2024-12-17 18:45+0200\n"
+"Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
+"Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
 "Language: lv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.0\n"
+"X-Generator: Lokalize 24.12.0\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Viesturs Zariņš"
+msgstr "Viesturs Zariņš, Toms Trasūns"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "viesturs.zarins@mi.lu.lv"
+msgstr "viesturs.zarins@mi.lu.lv, toms.trasuns@posteo.net"
 
 #: bookmarkmanager.cpp:37
 #, kde-format
@@ -43,22 +44,21 @@ msgstr "Atcerēties atvērtās sesijas līdz nākamajai reizei"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_RememberHistory)
 #: config/general.ui:24
-#, fuzzy, kde-format
-#| msgid "Preparing connection to %1"
+#, kde-format
 msgid "Remember connection history"
-msgstr "Sagatavo savienojumu ar %1"
+msgstr "Atcerēties savienojuma vēsturi"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_WalletSupport)
 #: config/general.ui:31
 #, kde-format
 msgid "Remember passwords (KWallet)"
-msgstr "Atcerēties paroles (KWallet)"
+msgstr "Atcerēties paroles („KWallet“)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SystemTrayIcon)
 #: config/general.ui:38
 #, kde-format
 msgid "Enable system tray icon"
-msgstr "Rādīt sistēmas ikonu"
+msgstr "Rādīt sistēmas ikonu joslas ikonu"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowStatusBar)
 #: config/general.ui:45
@@ -80,16 +80,15 @@ msgstr "Tukšo vietu fona krāsa:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, connectionGroupBox)
 #: config/general.ui:93
-#, fuzzy, kde-format
-#| msgid "New Connection"
+#, kde-format
 msgid "When Connecting"
-msgstr "Jauns savienojums"
+msgstr "Savienojoties"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowPreferencesForNewConnections)
 #: config/general.ui:99
 #, kde-format
 msgid "Show the preferences dialog for new connections"
-msgstr "Rādīt konfigurācijas dialogu jauniem savienojumiem"
+msgstr "Jauniem savienojumiem rādīt konfigurācijas logu"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_ResizeOnConnect)
 #: config/general.ui:106
@@ -98,12 +97,14 @@ msgid ""
 "This option will resize the window to fit the connection size.  If it is too "
 "big, it will maximize the window."
 msgstr ""
+"Šī opcija mainīs loga izmēru, lai tas ietilptu savienojuma izmēram. Ja tas "
+"būs pārāk liels, logu maksimizēs."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ResizeOnConnect)
 #: config/general.ui:109
 #, kde-format
 msgid "Resize to fit"
-msgstr ""
+msgstr "Mainīt izmēru, lai ietilpinātu"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_FullscreenOnConnect)
 #: config/general.ui:116
@@ -112,25 +113,26 @@ msgid ""
 "This option switches to fullscreen only if the connection resolution is the "
 "same as the current screen resolution"
 msgstr ""
+"Šī opcija nosaka, ka uz pilnekrānu pārslēdzas tikai tad, ja savienojuma "
+"izšķirtspēja atbilst pašreizējās darbvirsmas izšķirtspējai"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_FullscreenOnConnect)
 #: config/general.ui:119
-#, fuzzy, kde-format
-#| msgid "Switch to Full Screen Mode"
+#, kde-format
 msgid "Switch to Fullscreen if appropriate"
-msgstr "Pārslēgties uz pilnekrāna režīmu"
+msgstr "Pārslēgties uz pilnekrānu, kad piemērots"
 
 #. i18n: ectx: property (text), widget (QLabel, defaultProtocolLabel)
 #: config/general.ui:128
 #, kde-format
 msgid "Default protocol:"
-msgstr ""
+msgstr "Noklusējuma protokols:"
 
 #. i18n: ectx: property (text), widget (QLineEdit, kcfg_DefaultProtocol)
 #: config/general.ui:135
 #, kde-format
 msgid "vnc"
-msgstr ""
+msgstr "vnc"
 
 #. i18n: ectx: property (title), widget (QGroupBox, tabGroupBox)
 #: config/general.ui:147
@@ -148,7 +150,7 @@ msgstr "Vienmēr rādīt ciļņu joslu"
 #: config/general.ui:160
 #, kde-format
 msgid "Show close button on tabs"
-msgstr "Rādīt cilnēs aizvēršanas pogas"
+msgstr "Cilnēs rādīt aizvēršanas pogas"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabMiddleClick)
 #: config/general.ui:167
@@ -160,7 +162,7 @@ msgstr "Vidējais klikšķis uz cilnes aizver to"
 #: config/general.ui:176
 #, kde-format
 msgid "Tab position:"
-msgstr "Cilnes novietojums:"
+msgstr "Ciļņu novietojums:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TabPosition)
 #: config/general.ui:184
@@ -194,7 +196,7 @@ msgstr "Konfigurēt..."
 #: config/hostpreferenceslist.cpp:36
 #, kde-format
 msgid "Remove"
-msgstr "Izmest"
+msgstr "Noņemt"
 
 #: config/hostpreferenceslist.cpp:99 mainwindow.cpp:292 mainwindow.cpp:682
 #, kde-format
@@ -204,7 +206,7 @@ msgstr "Nelietojams URL"
 #: config/hostpreferenceslist.cpp:99 mainwindow.cpp:682
 #, kde-format
 msgid "The selected host cannot be handled."
-msgstr "Nevar apstrādāt izvēlēto datoru."
+msgstr "Nevar sadarboties ar atlasīto datoru."
 
 #: config/preferencesdialog.cpp:24
 #, kde-format
@@ -220,13 +222,13 @@ msgstr "Pamata konfigurācija"
 #: config/preferencesdialog.cpp:28
 #, kde-format
 msgid "Hosts"
-msgstr "Datori"
+msgstr "Resursdatori"
 
 #: config/preferencesdialog.cpp:28 core/hostpreferences.cpp:175
 #: core/hostpreferences.cpp:179
 #, kde-format
 msgid "Host Configuration"
-msgstr "Servera konfigurācija"
+msgstr "Resursdatora konfigurācija"
 
 #: config/preferencesdialog.cpp:33 config/preferencesdialog.cpp:34
 #, kde-format
@@ -241,65 +243,65 @@ msgstr "Spraudņu konfigurācija"
 #: connectiondelegate.cpp:34
 #, kde-format
 msgid "Less than a minute ago"
-msgstr ""
+msgstr "Mazāk nekā pirms minūtes"
 
 #: connectiondelegate.cpp:35
 #, kde-format
 msgid "A minute ago"
 msgid_plural "%1 minutes ago"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Pirms %1 minūtes"
+msgstr[1] "Pirms %1 minūtēm"
+msgstr[2] "Pirms %1 minūtēm"
 
 #: connectiondelegate.cpp:37
 #, kde-format
 msgid "An hour ago"
 msgid_plural "%1 hours ago"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Pirms %1 stundas"
+msgstr[1] "Pirms %1 stundām"
+msgstr[2] "Pirms %1 stundām"
 
 #: connectiondelegate.cpp:41
 #, kde-format
 msgid "Yesterday"
 msgid_plural "%1 days ago"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Pirms %1 dienas"
+msgstr[1] "Pirms %1 dienām"
+msgstr[2] "Pirms %1 dienām"
 
 #: connectiondelegate.cpp:43
 #, kde-format
 msgid "Over a month ago"
 msgid_plural "%1 months ago"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Vairāk nekā pirms %1 mēneša"
+msgstr[1] "Vairāk nekā pirms %1 mēnešiem"
+msgstr[2] "Vairāk nekā pirms %1 mēnešiem"
 
 #: connectiondelegate.cpp:44
 #, kde-format
 msgid "A year ago"
 msgid_plural "%1 years ago"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Pirms %1 gada"
+msgstr[1] "Pirms %1 gadiem"
+msgstr[2] "Pirms %1 gadiem"
 
 #: core/hostpreferences.cpp:182
 #, kde-format
 msgid ""
 "Note that settings might only apply when you connect next time to this host."
 msgstr ""
-"Ņemiet vērā, ka iestatījumi stāsies spēkā tikai nākamreiz pieslēdzoties šim "
-"datoram."
+"Ievērojiet, ka iestatījumi stāsies spēkā tikai nākamreiz pieslēdzoties šim "
+"resursdatoram."
 
 #: core/hostpreferences.cpp:198
 #, kde-format
 msgid "Show this dialog again for this host"
-msgstr "Rādīt šo dalogu atkal šim datoram"
+msgstr "Arī nākamreiz šim resurdatoram rādīt šo lodziņu"
 
 #: core/hostpreferences.cpp:202
 #, kde-format
 msgid "Remember password (KWallet)"
-msgstr "Atcerēties paroli (KWallet)"
+msgstr "Atcerēties paroli („KWallet“)"
 
 #. i18n: ectx: label, entry (OpenSessions), group (General)
 #: core/krdc.kcfg:16
@@ -327,19 +329,10 @@ msgstr "KRDC"
 #: main.cpp:33 systemtrayicon.cpp:24
 #, kde-format
 msgid "KDE Remote Desktop Client"
-msgstr "KDE attālinātas darbvirsmas klients"
+msgstr "KDE attālās darbvirsmas klients"
 
 #: main.cpp:36
-#, fuzzy, kde-format
-#| msgid ""
-#| "(c) 2007-2009, Urs Wolfer\n"
-#| "(c) 2001-2003, Tim Jansen\n"
-#| "(c) 2002-2003, Arend van Beelen jr.\n"
-#| "(c) 2000-2002, Const Kaplinsky\n"
-#| "(c) 2000, Tridia Corporation\n"
-#| "(c) 1999, AT&T Laboratories Boston\n"
-#| "(c) 1999-2003, Matthew Chapman\n"
-#| "(c) 2009, Collabora Ltd"
+#, kde-format
 msgid ""
 "(c) 2007-2016, Urs Wolfer\n"
 "(c) 2001-2003, Tim Jansen\n"
@@ -350,13 +343,13 @@ msgid ""
 "(c) 1999-2003, Matthew Chapman\n"
 "(c) 2009, Collabora Ltd"
 msgstr ""
-"(c) 2007-2009, Urs Wolfer\n"
-"(c) 2001-2003, Tim Jansen\n"
-"(c) 2002-2003, Arend van Beelen jr.\n"
-"(c) 2000-2002, Const Kaplinsky\n"
+"(c) 2007—2016, Urs Wolfer\n"
+"(c) 2001—2003, Tim Jansen\n"
+"(c) 2002—2003, Arend van Beelen jr.\n"
+"(c) 2000—2002, Const Kaplinsky\n"
 "(c) 2000, Tridia Corporation\n"
 "(c) 1999, AT&T Laboratories Boston\n"
-"(c) 1999-2003, Matthew Chapman\n"
+"(c) 1999—2003, Matthew Chapman\n"
 "(c) 2009, Collabora Ltd"
 
 #: main.cpp:45
@@ -372,13 +365,12 @@ msgstr "Izstrādātas, uzturētājs"
 #: main.cpp:46
 #, kde-format
 msgid "Tony Murray"
-msgstr ""
+msgstr "Tony Murray"
 
 #: main.cpp:46
-#, fuzzy, kde-format
-#| msgid "Former Developer"
+#, kde-format
 msgid "Developer"
-msgstr "Ipriekšējais izstrādātājs"
+msgstr "Izstrādātājs"
 
 #: main.cpp:47
 #, kde-format
@@ -388,7 +380,7 @@ msgstr "Tim Jansen"
 #: main.cpp:47
 #, kde-format
 msgid "Former Developer"
-msgstr "Ipriekšējais izstrādātājs"
+msgstr "Agrākais izstrādātājs"
 
 #: main.cpp:48
 #, kde-format
@@ -398,7 +390,7 @@ msgstr "Arend van Beelen jr."
 #: main.cpp:48
 #, kde-format
 msgid "Initial RDP backend"
-msgstr "Sākotnējā RDP aizmugure"
+msgstr "Sākotnējā RDP aizmugursistēma"
 
 #: main.cpp:49
 #, kde-format
@@ -408,12 +400,12 @@ msgstr "Brad Hards"
 #: main.cpp:49
 #, kde-format
 msgid "Google Summer of Code 2007 KRDC project mentor"
-msgstr "Google Summer of Code 2007 KRDC projekta uzraugs"
+msgstr "„Google Summer of Code“ 2007 KRDC projekta mentors"
 
 #: main.cpp:50
 #, kde-format
 msgid "LibVNCServer / LibVNCClient developers"
-msgstr "LibVNCServer / LibVNCClient izstrādātāji"
+msgstr "„LibVNCServer“ / „LibVNCClient“ izstrādātāji"
 
 #: main.cpp:51
 #, kde-format
@@ -430,12 +422,12 @@ msgstr ""
 #: main.cpp:67
 #, kde-format
 msgid "URLs to connect after startup"
-msgstr "URLi, kam pieslēgties pēc palaišanas"
+msgstr "URL, kurām pieslēgties pēc palaišanas"
 
 #: mainwindow.cpp:116
 #, kde-format
 msgid "KDE Remote Desktop Client started"
-msgstr "KDE attālinātas darbvirsmas klients palaists"
+msgstr "KDE attālās darbvirsmas klients ir palaists"
 
 #: mainwindow.cpp:121 mainwindow.cpp:134 mainwindow.cpp:1083
 #: mainwindow.cpp:1178
@@ -446,7 +438,7 @@ msgstr "Jauns savienojums"
 #: mainwindow.cpp:140
 #, kde-format
 msgid "Copy Screenshot to Clipboard"
-msgstr "Nokopēt ekrānuzņēmumu uz starpliktuvi"
+msgstr "Nokopēt ekrānattēlu uz starpliktuvi"
 
 #: mainwindow.cpp:141
 #, kde-format
@@ -461,7 +453,7 @@ msgstr "Pārslēgties uz pilnekrāna režīmu"
 #: mainwindow.cpp:148 mainwindow.cpp:508
 #, kde-format
 msgid "Full Screen"
-msgstr "Pa visu ekrānu"
+msgstr "Pilnekrāns"
 
 #: mainwindow.cpp:155
 #, kde-format
@@ -471,7 +463,7 @@ msgstr "Tikai skatīšanās"
 #: mainwindow.cpp:160
 #, kde-format
 msgid "Disconnect"
-msgstr "Atslēgties"
+msgstr "Atvienoties"
 
 #: mainwindow.cpp:168
 #, kde-format
@@ -481,7 +473,7 @@ msgstr "Rādīt lokālo kursoru"
 #: mainwindow.cpp:169
 #, kde-format
 msgid "Local Cursor"
-msgstr "Lokāls kursors"
+msgstr "Lokālais kursors"
 
 #: mainwindow.cpp:175
 #, kde-format
@@ -496,7 +488,7 @@ msgstr "Sagrābt taustiņus"
 #: mainwindow.cpp:182
 #, kde-format
 msgid "Scale Remote Screen to Fit Window Size"
-msgstr "Mērogot attālināto ekrānu, lai tas ietilpst logā"
+msgstr "Mērogot attālo ekrānu, lai tas ietilptu logā"
 
 #: mainwindow.cpp:183
 #, kde-format
@@ -506,7 +498,7 @@ msgstr "Mērogot"
 #: mainwindow.cpp:186
 #, kde-format
 msgid "Scaling Factor"
-msgstr ""
+msgstr "Mērogošanas koeficients"
 
 #: mainwindow.cpp:197
 #, kde-format
@@ -516,20 +508,21 @@ msgstr "Grāmatzīmes"
 #: mainwindow.cpp:265
 #, kde-format
 msgid "Unable to load connection data from the provided file."
-msgstr ""
+msgstr "Neizdodas no sniegtās datnes ielādēt savienojuma datus."
 
 #: mainwindow.cpp:265
 #, kde-format
 msgid "Load failed"
-msgstr ""
+msgstr "Ielādes kļūda"
 
 #: mainwindow.cpp:271
-#, fuzzy, kde-format
-#| msgid "The entered address does not have the required form."
+#, kde-format
 msgid ""
 "The entered address does not have the required form.\n"
 " Syntax: [username@]host[:port]"
-msgstr "Ievadītā adrese nav pareizajā formā."
+msgstr ""
+"Ievadītā adrese neatbilst noteiktajai formai.\n"
+" Sintakse: [username@]host[:port]"
 
 #: mainwindow.cpp:271
 #, kde-format
@@ -544,29 +537,29 @@ msgstr "Ievadīto adresi nav iespējams apstrādāt."
 #: mainwindow.cpp:427
 #, kde-format
 msgid "Connecting to %1"
-msgstr "Savienojas ar %1"
+msgstr "Savienojas ar „%1“"
 
 #: mainwindow.cpp:431
 #, kde-format
 msgid "Authenticating at %1"
-msgstr "Autentificē uz %1"
+msgstr "Autentificējas „%1“"
 
 #: mainwindow.cpp:435
 #, kde-format
 msgid "Preparing connection to %1"
-msgstr "Sagatavo savienojumu ar %1"
+msgstr "Sagatavo savienojumu ar „%1“"
 
 #: mainwindow.cpp:439
 #, kde-format
 msgid "Connected to %1"
-msgstr "Savienots ar %1"
+msgstr "Savienots ar „%1“"
 
 #: mainwindow.cpp:518
 #, kde-format
 msgctxt ""
 "window title when in full screen mode (for example displayed in tasklist)"
 msgid "KDE Remote Desktop Client (Full Screen)"
-msgstr "KDE attālinātas darbvirsmas klients (pilnekrāna)"
+msgstr "KDE attālās darbvirsmas klients (pilnekrāna)"
 
 #: mainwindow.cpp:548
 #, kde-format
@@ -579,38 +572,33 @@ msgid "Window Mode"
 msgstr "Loga režīms"
 
 #: mainwindow.cpp:701
-#, fuzzy, kde-format
-#| msgid "Connection"
+#, kde-format
 msgid "Connect"
-msgstr "Savienojums"
+msgstr "Savienoties"
 
 #: mainwindow.cpp:702
-#, fuzzy, kde-format
-#| msgid "Remove"
+#, kde-format
 msgid "Rename"
-msgstr "Izmest"
+msgstr "Pārdēvēt"
 
 #: mainwindow.cpp:703
-#, fuzzy, kde-format
-#| msgid "Tab Settings"
+#, kde-format
 msgid "Settings"
-msgstr "Ciļņu iestatījumi"
+msgstr "Iestatījumi"
 
 #: mainwindow.cpp:704
 #, kde-format
 msgid "Delete"
-msgstr ""
+msgstr "Dzēst"
 
 #: mainwindow.cpp:707 remotedesktopsmodel.cpp:108
-#, fuzzy, kde-format
-#| msgid "Bookmarks"
+#, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "Grāmatzīmes"
 
 #: mainwindow.cpp:707 remotedesktopsmodel.cpp:110
-#, fuzzy, kde-format
-#| msgid "History"
+#, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "Vēsture"
@@ -618,25 +606,22 @@ msgstr "Vēsture"
 #: mainwindow.cpp:719
 #, kde-format
 msgid "Rename %1"
-msgstr ""
+msgstr "Pārdēvēt „%1“"
 
 #: mainwindow.cpp:719
 #, kde-format
 msgid "Rename %1 to"
-msgstr ""
+msgstr "Pārdēvēt „%1“ par"
 
 #: mainwindow.cpp:726
-#, fuzzy, kde-format
-#| msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
+#, kde-format
 msgid "Are you sure you want to delete %1?"
-msgstr ""
-"Vai esat pārliecināts, ka vēlaties iziet no KDE attālinātas darbvirsmas "
-"klienta?"
+msgstr "Vai tiešām vēlaties dzēst „%1“?"
 
 #: mainwindow.cpp:726
 #, kde-format
 msgid "Delete %1"
-msgstr ""
+msgstr "Dzēst „%1“"
 
 #: mainwindow.cpp:750
 #, kde-format
@@ -656,14 +641,12 @@ msgstr "Minimizēt pilnekrāna logu"
 #: mainwindow.cpp:871
 #, kde-format
 msgid "Stick Toolbar"
-msgstr "Piestiprināt rīkloslu"
+msgstr "Piestiprināt rīkjoslu"
 
 #: mainwindow.cpp:976
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
-msgstr ""
-"Vai esat pārliecināts, ka vēlaties iziet no KDE attālinātas darbvirsmas "
-"klienta?"
+msgstr "Vai tiešām vēlaties iziet no KDE attālās darbvirsmas klienta?"
 
 #: mainwindow.cpp:977
 #, kde-format
@@ -678,7 +661,7 @@ msgstr "Pieslēgties pie:"
 #: mainwindow.cpp:1110
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
-msgstr ""
+msgstr "Rakstiet, lai savienotos ar adresi un filtrētu sarakstu."
 
 #: mainwindow.cpp:1119
 #, kde-format
@@ -686,6 +669,8 @@ msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
 "methods."
 msgstr ""
+"Te ierakstiet IP vai DNS vārdu. Notīriet rindiņu, lai redzētu sarakstu ar "
+"savienojuma metodēm."
 
 #: mainwindow.cpp:1122
 #, kde-format
@@ -695,7 +680,7 @@ msgstr "Iet uz adresi"
 #: mainwindow.cpp:1214
 #, kde-format
 msgid "Remote Desktops"
-msgstr "Attālinātas darbvirsmas"
+msgstr "Attālās darbvirsmas"
 
 #: mainwindow.cpp:1243
 #, kde-format
@@ -713,26 +698,25 @@ msgstr "Izšķirtspēja"
 #: rdp/rdppreferences.ui:53 rdp/rdppreferences.ui:348
 #, kde-format
 msgid "Use Best Available"
-msgstr ""
+msgstr "Izmantot labāko pieejamo"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
 #: rdp/rdppreferences.ui:58
 #, kde-format
 msgid "Force H.264"
-msgstr ""
+msgstr "Piespiest H.264"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
 #: rdp/rdppreferences.ui:63
-#, fuzzy, kde-format
-#| msgid "Remove"
+#, kde-format
 msgid "Force RemoteFX"
-msgstr "Izmest"
+msgstr "Piespiest „RemoteFX“"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
 #: rdp/rdppreferences.ui:68
 #, kde-format
 msgid "Disable All Acceleration"
-msgstr ""
+msgstr "Izslēgt visu paātrināšanu"
 
 #. i18n: ectx: property (text), widget (QLabel, soundLabel)
 #: rdp/rdppreferences.ui:76
@@ -745,13 +729,13 @@ msgstr "Skaņa:"
 #: rdp/rdppreferences.ui:89
 #, kde-format
 msgid "Acceleration:"
-msgstr ""
+msgstr "Paātrināšana:"
 
 #. i18n: ectx: property (text), widget (QLabel, TlsSecLevelLabel)
 #: rdp/rdppreferences.ui:99
 #, kde-format
 msgid "TLS security level:"
-msgstr ""
+msgstr "TLS drošības līmenis:"
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:140
@@ -760,8 +744,8 @@ msgid ""
 "Use this to specify your keyboard layout. This layout setting is used to "
 "send the correct keyboard codes to the server."
 msgstr ""
-"Šeit jūs varat norādīt tastatūras izkārtojumu. Šis iestatījums tiek "
-"izmantots lai nosūtītu uz serveri pareizus tastatūras kodus."
+"Šeit varat norādīt tastatūras izkārtojumu. Šo iestatījumu programma izmanto, "
+"lai uz serveri nosūtītu pareizus tastatūras kodus."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:147
@@ -987,10 +971,9 @@ msgstr "Turku (tr)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
 #: rdp/rdppreferences.ui:353
-#, fuzzy, kde-format
-#| msgid "True Color (24 Bit)"
+#, kde-format
 msgid "True Color with Alpha (32 Bit)"
-msgstr "Pilnas krāsas (24 biti)"
+msgstr "Pilnas krāsas ar alfa (24 biti)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
 #: rdp/rdppreferences.ui:358
@@ -1020,55 +1003,55 @@ msgstr "Šajā datorā"
 #: rdp/rdppreferences.ui:394
 #, kde-format
 msgid "On Remote Computer"
-msgstr "Attālinātajā datorā"
+msgstr "Attālajā datorā"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
 #: rdp/rdppreferences.ui:399
 #, kde-format
 msgid "Disable Sound"
-msgstr "Atslēgt skaņu"
+msgstr "Izslēgt skaņu"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ScaleToSize)
 #: rdp/rdppreferences.ui:413
 #, kde-format
 msgid "Scale window contents to match resolution"
-msgstr ""
+msgstr "Mērogot loga saturu, lai atbilstu izšķirtspējai"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:436
 #, kde-format
 msgid "any"
-msgstr ""
+msgstr "jebkāda"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:441
 #, kde-format
 msgid "80 bit"
-msgstr ""
+msgstr "80 bitu"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:446
 #, kde-format
 msgid "112 bit"
-msgstr ""
+msgstr "112 bitu"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:451
 #, kde-format
 msgid "128 bit"
-msgstr ""
+msgstr "128 biti"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:456
 #, kde-format
 msgid "192 bit"
-msgstr ""
+msgstr "192 biti"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:461
 #, kde-format
 msgid "256 bit"
-msgstr ""
+msgstr "256 biti"
 
 #. i18n: ectx: property (text), widget (QLabel, layoutLabel)
 #: rdp/rdppreferences.ui:469
@@ -1090,8 +1073,8 @@ msgid ""
 "This is the width of the remote desktop. You can only change this value "
 "manually if you select Custom as desktop resolution above."
 msgstr ""
-"Šis ir attālinātās darbvirsmas platums. Jūs to varat mainīt tikai, ja "
-"izvēlaties Pielāgotu darbvirsmas izmēru."
+"Šis ir attālās darbvirsmas platums. Jūs to varat mainīt tikai tad, ja "
+"izvēlaties pielāgotu darbvirsmas izmēru."
 
 #. i18n: ectx: property (text), widget (QLabel, heightLabel)
 #: rdp/rdppreferences.ui:519 vnc/vncpreferences.ui:168
@@ -1108,13 +1091,13 @@ msgid ""
 "manually if you select Custom as desktop resolution above."
 msgstr ""
 "Šis ir attālinātās darbvirsmas augstums. Jūs to varat mainīt tikai, ja "
-"izvēlaties Pielāgotu darbvirsmas izmēru."
+"izvēlaties pielāgotu darbvirsmas izmēru."
 
 #. i18n: ectx: property (text), widget (QLabel, shareMediaLabel)
 #: rdp/rdppreferences.ui:550
 #, kde-format
 msgid "Share Media:"
-msgstr ""
+msgstr "Kopīgot multividi:"
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_Resolution)
 #. i18n: ectx: property (whatsThis), widget (KComboBox, resolutionComboBox)
@@ -1124,41 +1107,39 @@ msgid ""
 "Here you can specify the resolution of the remote desktop. This resolution "
 "determines the size of the desktop that will be presented to you."
 msgstr ""
-"Šeit jūs varat norādīt attālinātās darbvirsmas izmēru. Izmērs nosaka cik "
-"liela būs jums parādītā darbvirsma."
+"Šeit varat norādīt attālās darbvirsmas izmēru. Izmērs nosaka, cik liela būs "
+"jums parādītā darbvirsma."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:579
-#, fuzzy, kde-format
-#| msgid "Small (800x600)"
+#, kde-format
 msgid "Small (1280x720)"
-msgstr "Mazs (800x600)"
+msgstr "Maza (800×600)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:584
 #, kde-format
 msgid "Medium (1600x900)"
-msgstr ""
+msgstr "Vidēja (1600×900)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:589
-#, fuzzy, kde-format
-#| msgid "Large (1280x1024)"
+#, kde-format
 msgid "Large (1920x1080)"
-msgstr "Liels (1280x1024)"
+msgstr "Liela (1280×1024)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:594
 #, kde-format
 msgid "Current Window Size"
-msgstr ""
+msgstr "Pašreizējais loga izmērs"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
 #: rdp/rdppreferences.ui:599 vnc/vncpreferences.ui:118
 #, kde-format
 msgid "Current Screen Resolution"
-msgstr "Jūsu ekrāna izšķirtspēja"
+msgstr "Pašreizējā ekrāna izšķirtspēja"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
@@ -1171,86 +1152,84 @@ msgstr "Pielāgota izšķirtspēja (...)"
 #: rdp/rdppreferences.ui:616
 #, kde-format
 msgid "Proxy"
-msgstr ""
+msgstr "Starpniekserveris"
 
 #. i18n: ectx: property (text), widget (QLabel, protocolLabel)
 #: rdp/rdppreferences.ui:624
 #, kde-format
 msgid "Protocol:"
-msgstr ""
+msgstr "Protokols:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ProxyProtocol)
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_GatewayTransportType)
 #: rdp/rdppreferences.ui:638 rdp/rdppreferences.ui:749
 #, kde-format
 msgid "HTTP"
-msgstr ""
+msgstr "HTTP"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ProxyProtocol)
 #: rdp/rdppreferences.ui:643
 #, kde-format
 msgid "SOCKS"
-msgstr ""
+msgstr "SOCKS"
 
 #. i18n: ectx: property (text), widget (QLabel, pPasswordLabel)
 #. i18n: ectx: property (text), widget (QLabel, gPasswordLabel)
 #: rdp/rdppreferences.ui:654 rdp/rdppreferences.ui:710
 #, kde-format
 msgid "Password:"
-msgstr ""
+msgstr "Parole:"
 
 #. i18n: ectx: property (text), widget (QLabel, pUsernameLabel)
 #. i18n: ectx: property (text), widget (QLabel, gUsernameLabel)
 #: rdp/rdppreferences.ui:664 rdp/rdppreferences.ui:703
-#, fuzzy, kde-format
-#| msgid "Enter Username"
+#, kde-format
 msgid "Username:"
-msgstr "Ievadiet lietotājvārdu"
+msgstr "Lietotājvārds:"
 
 #. i18n: ectx: property (text), widget (QLabel, pHostLabel)
 #. i18n: ectx: property (text), widget (QLabel, gServerLabel)
 #: rdp/rdppreferences.ui:671 rdp/rdppreferences.ui:696
 #, kde-format
 msgid "Server:"
-msgstr ""
+msgstr "Serveris:"
 
 #. i18n: ectx: property (placeholderText), widget (KLineEdit, kcfg_ProxyHost)
 #. i18n: ectx: property (placeholderText), widget (KLineEdit, kcfg_GatewayServer)
 #: rdp/rdppreferences.ui:678 rdp/rdppreferences.ui:717
 #, kde-format
 msgid "host:port"
-msgstr ""
+msgstr "resursdators:ports"
 
 #. i18n: ectx: attribute (title), widget (QWidget, gatewaySettingsTab)
 #: rdp/rdppreferences.ui:688
 #, kde-format
 msgid "Gateway"
-msgstr ""
+msgstr "Vārteja"
 
 #. i18n: ectx: property (text), widget (QLabel, gTransportTypeLabel)
 #: rdp/rdppreferences.ui:730
 #, kde-format
 msgid "Transport type:"
-msgstr ""
+msgstr "Transporta tips:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_GatewayTransportType)
 #: rdp/rdppreferences.ui:744
 #, kde-format
 msgid "Auto"
-msgstr ""
+msgstr "Automātisks"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_GatewayTransportType)
 #: rdp/rdppreferences.ui:754
-#, fuzzy, kde-format
-#| msgid "RDP"
+#, kde-format
 msgid "RPC"
-msgstr "RDP"
+msgstr "RPC"
 
 #. i18n: ectx: property (text), widget (QLabel, gDomainLabel)
 #: rdp/rdppreferences.ui:762
 #, kde-format
 msgid "Domain:"
-msgstr ""
+msgstr "Domēns:"
 
 #. i18n: ectx: property (text), widget (QLabel, colorDepthLabel)
 #: rdp/rdppreferences.ui:778
@@ -1262,36 +1241,35 @@ msgstr "Krāsu &dziļums:"
 #: rdp/rdppreferences.ui:791
 #, kde-format
 msgid "Advanced Network Settings"
-msgstr ""
+msgstr "Paplašināti tīkla iestatījumi"
 
 #. i18n: ectx: property (text), widget (QLabel, shareSmartcardLabel)
 #: rdp/rdppreferences.ui:814
 #, kde-format
 msgid "Share Smartcard:"
-msgstr ""
+msgstr "Kopīgot viedkarti:"
 
 #. i18n: ectx: property (text), widget (QLabel, gSecurityLabel)
 #: rdp/rdppreferences.ui:827
 #, kde-format
 msgid "Security:"
-msgstr ""
+msgstr "Drošība:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_NLASecurity)
 #: rdp/rdppreferences.ui:839
 #, kde-format
 msgid "NLA"
-msgstr ""
+msgstr "NLA"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TLSSecurity)
 #: rdp/rdppreferences.ui:846
 #, kde-format
 msgid "TLS"
-msgstr ""
+msgstr "TLS"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_RDPSecurity)
 #: rdp/rdppreferences.ui:853
-#, fuzzy, kde-format
-#| msgid "RDP"
+#, kde-format
 msgid "RDP"
 msgstr "RDP"
 
@@ -1299,13 +1277,13 @@ msgstr "RDP"
 #: rdp/rdppreferences.ui:860
 #, kde-format
 msgid "Ext"
-msgstr ""
+msgstr "Ext"
 
 #: rdp/rdpsession.cpp:264
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Logon Error"
-msgstr ""
+msgstr "Ierakstīšanās kļūda"
 
 #: rdp/rdpsession.cpp:873
 #, kde-format
@@ -1317,43 +1295,47 @@ msgid ""
 "Issuer: %5\n"
 "Fingerprint: %6\n"
 msgstr ""
+"Resursdators: %1:%2\n"
+"Kopējais nosaukums: %3\n"
+"Temats: %4\n"
+"Izdevējs: %5\n"
+"Digitālnospiedums: %6\n"
 
 #: rdp/rdpsession.cpp:1125
-#, fuzzy, kde-format
-#| msgid "Access to the system requires a password."
+#, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
-msgstr "Lai piekļūtu šai sistēmai nepieciešama parole."
+msgstr "Lai piekļūtu šai sistēmai, nepieciešams lietotājvārds un parole."
 
 #: rdp/rdpsession.cpp:1148
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
-msgstr ""
+msgstr "Šīs sistēmas sertifikāts nav zināms. Vai vēlaties turpināt?"
 
 #: rdp/rdpsession.cpp:1149
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
-msgstr ""
+msgstr "Verificēt sertifikātu"
 
 #: rdp/rdpsession.cpp:1154 rdp/rdpsession.cpp:1177
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
-msgstr ""
+msgstr "Atcerēties šo sertifikātu"
 
 #: rdp/rdpsession.cpp:1171
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
-msgstr ""
+msgstr "Ir mainījies šīs sistēmas sertifikāts. Vai vēlaties turpināt?"
 
 #: rdp/rdpsession.cpp:1172
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
-msgstr ""
+msgstr "Sertifikāts ir mainījies"
 
 #: rdp/rdpsession.cpp:1175
 #, kde-format
@@ -1364,13 +1346,16 @@ msgid ""
 "New Certificate:\n"
 "%2"
 msgstr ""
+"Iepriekšējais sertifikāts:\n"
+"%1\n"
+"Jaunais sertifikāts:\n"
+"%2"
 
 #: rdp/rdpview.cpp:178
-#, fuzzy, kde-format
-#| msgid "Connection Failure"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Login Failure"
-msgstr "Savienojuma kļūda"
+msgstr "Ierakstīšanās kļūda"
 
 #: rdp/rdpview.cpp:179
 #, kde-format
@@ -1379,12 +1364,14 @@ msgid ""
 "Unable to login with the provided credentials. Please double check the user "
 "and password."
 msgstr ""
+"Neizdodas ierakstīties ar norādīto informāciju. Vēlreiz pārbaudiet "
+"lietotājvārdu un paroli."
 
 #: rdp/rdpview.cpp:188
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Account Problems"
-msgstr ""
+msgstr "Problēmas ar kontu"
 
 #: rdp/rdpview.cpp:189
 #, kde-format
@@ -1393,12 +1380,14 @@ msgid ""
 "The provided account is not allowed to log in to this machine. Please "
 "contact your system administrator."
 msgstr ""
+"Norādītajam kontam nav atļauts ierakstīties šajā iekārtā. Sazinieties ar "
+"sistēmas administratoru."
 
 #: rdp/rdpview.cpp:194
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Password Problems"
-msgstr ""
+msgstr "Problēma ar paroli"
 
 #: rdp/rdpview.cpp:195
 #, kde-format
@@ -1407,24 +1396,23 @@ msgid ""
 "Unable to login with the provided password. Please contact your system "
 "administrator to change it."
 msgstr ""
+"Nevar ierakstīties ar sniegto paroli. Lai to mainītu, sazinieties ar "
+"sistēmas administratoru."
 
 #: rdp/rdpview.cpp:198
-#, fuzzy, kde-format
-#| msgid "Connection"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Lost"
-msgstr "Savienojums"
+msgstr "Savienojums zudis"
 
 #: rdp/rdpview.cpp:199
-#, fuzzy, kde-format
-#| msgid "An error has occurred during the connection to the NX server."
+#, kde-format
 msgctxt "@label"
 msgid "Lost connection to the server."
-msgstr "Gadījās kļūda, mēģinot savienoties ar NX serveri."
+msgstr "Zaudēts savienojums ar serveri."
 
 #: rdp/rdpview.cpp:203
-#, fuzzy, kde-format
-#| msgid "Server not found."
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Server not Found"
 msgstr "Serveris nav atrasts."
@@ -1433,66 +1421,60 @@ msgstr "Serveris nav atrasts."
 #, kde-format
 msgctxt "@label"
 msgid "Could not find the server."
-msgstr ""
+msgstr "Nevarēja atrast serveri."
 
 #: rdp/rdpview.cpp:207
-#, fuzzy, kde-format
-#| msgid "Connection Failure"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Refused"
-msgstr "Savienojuma kļūda"
+msgstr "Savienojums ir noraidīts"
 
 #: rdp/rdpview.cpp:208
-#, fuzzy, kde-format
-#| msgid "VNC server closed connection."
+#, kde-format
 msgctxt "@label"
 msgid "The server refused the connection request."
-msgstr "VNC serveris pārtrauca savienojumu."
+msgstr "Serveris noraidīja savienojuma pieprasījumu."
 
 #: rdp/rdpview.cpp:213
-#, fuzzy, kde-format
-#| msgid "KRDC Konsole Connection"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Could not Connect"
-msgstr "KRDC Konsoles savienojums"
+msgstr "Nevar savienoties"
 
 #: rdp/rdpview.cpp:214
-#, fuzzy, kde-format
-#| msgid "An error has occurred during the connection to the NX server."
+#, kde-format
 msgctxt "@label"
 msgid "Could not connect to the server."
-msgstr "Gadījās kļūda, mēģinot savienoties ar NX serveri."
+msgstr "Nevarēja savienoties ar serveri."
 
 #: rdp/rdpview.cpp:224 rdp/rdpview.cpp:228
-#, fuzzy, kde-format
-#| msgid "Connection Failure"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Closed"
-msgstr "Savienojuma kļūda"
+msgstr "Savienojums ir slēgts"
 
 #: rdp/rdpview.cpp:229
 #, kde-format
 msgctxt "@label"
 msgid "The connection to the server was closed."
-msgstr ""
+msgstr "Savienojums ar serveri tika slēgts."
 
 #: rdp/rdpview.cpp:233
-#, fuzzy, kde-format
-#| msgid "Connection Failure"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Failed"
-msgstr "Savienojuma kļūda"
+msgstr "Savienojums neizdevās"
 
 #: rdp/rdpview.cpp:234
 #, kde-format
 msgctxt "@label"
 msgid "An unknown error occurred"
-msgstr ""
+msgstr "Sistēma saskārās ar nezināmu kļūdu"
 
 #: rdp/rdpviewfactory.cpp:25
 #, kde-format
 msgid "Connect to a Windows Remote Desktop (RDP)"
-msgstr "Pieslēgties Windows attālinātai darbvirsmai (RDP)"
+msgstr "Pieslēgties „Windows“ sistēmas attālai darbvirsmai (RDP)"
 
 #: rdp/rdpviewfactory.cpp:101
 #, kde-format
@@ -1505,48 +1487,45 @@ msgid ""
 "<html>Enter the address here. Port is optional.<br /><i>Example: "
 "rdpserver:3389 (host:port)</i></html>"
 msgstr ""
-"<html>Šeit ievadiet adresi. Ports nav obligāts<br /><i>Piemēram: "
-"rdpserver:3389 (resursdators:ports)</i></html>"
+"<html>Ievadiet adresi. Ports nav obligāts<br /><i>Piemēram: "
+"„rdpserver:3389“ (resursdators:ports)</i></html>"
 
 #: remotedesktopsmodel.cpp:112
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Zeroconf"
-msgstr ""
+msgstr "Zeroconf"
 
 #: remotedesktopsmodel.cpp:114
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "None"
-msgstr ""
+msgstr "Nav"
 
 #: remotedesktopsmodel.cpp:130
 #, kde-format
 msgctxt "Remove the selected url from the bookarks menu"
 msgid "Remove the bookmark for %1."
-msgstr ""
+msgstr "Noņemt „%1“ grāmatzīmi."
 
 #: remotedesktopsmodel.cpp:132
-#, fuzzy, kde-format
-#| msgid "Bookmarks"
+#, kde-format
 msgctxt "Add the selected url to the bookmarks menu"
 msgid "Bookmark %1."
-msgstr "Grāmatzīmes"
+msgstr "Pievienot „%1“ grāmatzīmēm"
 
 #: remotedesktopsmodel.cpp:170
-#, fuzzy, kde-format
-#| msgid "Remote Desktops"
+#, kde-format
 msgctxt "Header of the connections list, title/url for remote connection"
 msgid "Remote Desktop"
-msgstr "Attālinātas darbvirsmas"
+msgstr "Attālā darbvirsma"
 
 #: remotedesktopsmodel.cpp:172
-#, fuzzy, kde-format
-#| msgid "Connected to %1"
+#, kde-format
 msgctxt ""
 "Header of the connections list, the last time this connection was initiated"
 msgid "Last Connected"
-msgstr "Savienots ar %1"
+msgstr "Pēdējais savienojums"
 
 #: remotedesktopsmodel.cpp:174
 #, kde-format
@@ -1554,25 +1533,24 @@ msgctxt ""
 "Header of the connections list, the number of times this connection has been "
 "visited"
 msgid "Visits"
-msgstr ""
+msgstr "Apmeklējumi"
 
 #: remotedesktopsmodel.cpp:176
 #, kde-format
 msgctxt "Header of the connections list, the time when this entry was created"
 msgid "Created"
-msgstr ""
+msgstr "Izveidots"
 
 #: remotedesktopsmodel.cpp:178
 #, kde-format
 msgctxt "Header of the connections list, where this entry comes from"
 msgid "Source"
-msgstr ""
+msgstr "Avots"
 
 #: vnc/vncclientthread.cpp:300
-#, fuzzy, kde-format
-#| msgid "VNC authentication failed."
+#, kde-format
 msgid "VNC authentication type is not supported."
-msgstr "Neveiksmīga VNC autenficēšana."
+msgstr "VNC autentifikācijas tips nav atbalstīts."
 
 #: vnc/vncclientthread.cpp:317
 #, kde-format
@@ -1582,13 +1560,14 @@ msgstr "Serveris nav atrasts."
 #: vnc/vncclientthread.cpp:334 vnc/vncclientthread.cpp:412
 #, kde-format
 msgid "VNC authentication failed."
-msgstr "Neveiksmīga VNC autenficēšana."
+msgstr "Neveiksmīga VNC autentificēšanās."
 
 #: vnc/vncclientthread.cpp:339
 #, kde-format
 msgid "VNC authentication failed because of too many authentication tries."
 msgstr ""
-"Neveiksmīga VNC autenficēšana, jo pārāk daudz autentificēšanas mēģinājumu."
+"VNC autentificēšanās neizdevās, jo bija pārāk daudz autentificēšanās "
+"mēģinājumu."
 
 #: vnc/vncclientthread.cpp:343
 #, kde-format
@@ -1596,28 +1575,24 @@ msgid "VNC server closed connection."
 msgstr "VNC serveris pārtrauca savienojumu."
 
 #: vnc/vncclientthread.cpp:351 vnc/vncclientthread.cpp:353
-#, fuzzy, kde-format
-#| msgid "Disconnect"
+#, kde-format
 msgid "Disconnected: %1."
-msgstr "Atslēgties"
+msgstr "Atvienojās: „%1“."
 
 #: vnc/vncclientthread.cpp:553
-#, fuzzy, kde-format
-#| msgid "New Connection"
+#, kde-format
 msgid "Reconnecting."
-msgstr "Jauns savienojums"
+msgstr "Savienojas no jauna."
 
 #: vnc/vncclientthread.cpp:618
-#, fuzzy, kde-format
-#| msgid "Disconnect"
+#, kde-format
 msgid "Reconnected."
-msgstr "Atslēgties"
+msgstr "Savienojies no jauna."
 
 #: vnc/vncclientthread.cpp:620
-#, fuzzy, kde-format
-#| msgid "Connection"
+#, kde-format
 msgid "Connected."
-msgstr "Savienojums"
+msgstr "Savienojies."
 
 #. i18n: ectx: property (title), widget (QGroupBox, vncGroupBox)
 #: vnc/vncpreferences.ui:17
@@ -1627,10 +1602,9 @@ msgstr "Savienojums"
 
 #. i18n: ectx: property (text), widget (QLabel, connectionLabel)
 #: vnc/vncpreferences.ui:23
-#, fuzzy, kde-format
-#| msgid "Connection type:"
+#, kde-format
 msgid "Connection &type:"
-msgstr "Savienojuma tips:"
+msgstr "Savienojuma &tips:"
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_Quality)
 #: vnc/vncpreferences.ui:39
@@ -1644,12 +1618,12 @@ msgid ""
 "high speed connections and results in lower image quality, especially in "
 "'Low Quality' mode."
 msgstr ""
-"Izmantojiet šo lai norādītu jūsu tīkla pieslēguma ātrumu. Ņemiet vērā ka "
-"vajadzētu izvēlēties lēnākā posma ātrumu - pat ja jums ir ātrs pieslēgums, "
-"tas nepalīdzēs ja attālinātais dators izmanto lēnu modēmu. Nepiemēroti "
-"augsta ātruma izvēle izraisīs lēnu attālinātās darbvirsmas reakciju. "
+"Izmantojiet šo lai norādītu tīkla pieslēguma ātrumu. Ņemiet vērā, ka "
+"vajadzētu izvēlēties lēnākā savienojuma posma ātrumu — pat ja jums ir ātrs "
+"pieslēgums, jo tas nepalīdzēs ja attālais dators izmanto lēnu modemu. "
+"Nepiemēroti augsta ātruma izvēle izraisīs lēnu attālās darbvirsmas reakciju. "
 "Nepiemēroti zema ātruma izvēle padarīs reakcijas laiku lēnāku nekā tas "
-"varētu būt un samazinās attēlu kvalitāti, it īpaši 'Zemas kvalitātes' režīmā."
+"varētu būt un samazinās attēlu kvalitāti, it īpaši „Zemas kvalitātes“ režīmā."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Quality)
 #: vnc/vncpreferences.ui:43
@@ -1661,86 +1635,87 @@ msgstr "Augsta kvalitāte (LAN, tiešs savienojums)"
 #: vnc/vncpreferences.ui:48
 #, kde-format
 msgid "Medium Quality (DSL, Cable, fast Internet)"
-msgstr "Vidēja kvalitāte (DSL, Kabelis, ātrs Internets)"
+msgstr "Vidēja kvalitāte (DSL, kabelis, ātrs internets)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Quality)
 #: vnc/vncpreferences.ui:53
 #, kde-format
 msgid "Low Quality (Modem, ISDN, slow Internet)"
-msgstr "Zema kvalitāte (Modēms, ISDN, lēns Internets)"
+msgstr "Zema kvalitāte (Modems, ISDN, lēns internets)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_Scaling)
 #: vnc/vncpreferences.ui:63
 #, kde-format
 msgid "Scale to Size:"
-msgstr ""
+msgstr "Mērogot uz izmēru:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
 #: vnc/vncpreferences.ui:93
 #, kde-format
 msgid "Minimal (640x480)"
-msgstr "Niecīgs (640x480)"
+msgstr "Ļoti mazs (640×480)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
 #: vnc/vncpreferences.ui:98
 #, kde-format
 msgid "Small (800x600)"
-msgstr "Mazs (800x600)"
+msgstr "Mazs (800×600)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
 #: vnc/vncpreferences.ui:103
 #, kde-format
 msgid "Normal (1024x768)"
-msgstr "Normāls (1024x768)"
+msgstr "Normāls (1024×768)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
 #: vnc/vncpreferences.ui:108
 #, kde-format
 msgid "Large (1280x1024)"
-msgstr "Liels (1280x1024)"
+msgstr "Liels (1280×1024)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
 #: vnc/vncpreferences.ui:113
 #, kde-format
 msgid "Very Large (1600x1200)"
-msgstr "Ļoti liels (1600x1200)"
+msgstr "Ļoti liels (1600×1200)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, use_ssh_tunnel)
 #: vnc/vncpreferences.ui:204
 #, kde-format
 msgid "Connect via SSH tunnel"
-msgstr ""
+msgstr "Savienoties caur SSH tuneli"
 
 #. i18n: ectx: property (title), widget (QGroupBox, ssh_groupBox)
 #: vnc/vncpreferences.ui:211
 #, kde-format
 msgid "SSH tunnel options"
-msgstr ""
+msgstr "SSH tuneļa opcijas"
 
 #. i18n: ectx: property (text), widget (QCheckBox, use_loopback)
 #: vnc/vncpreferences.ui:217
 #, kde-format
 msgid "Tunnel via loopback address"
-msgstr ""
+msgstr "Tunelis caur atgriezeniskās cilpas adresi"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: vnc/vncpreferences.ui:224
 #, kde-format
 msgid "Port:"
-msgstr ""
+msgstr "Ports:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: vnc/vncpreferences.ui:244
-#, fuzzy, kde-format
-#| msgid "Enter Username"
+#, kde-format
 msgid "User name:"
-msgstr "Ievadiet lietotājvārdu"
+msgstr "Lietotājvārds:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, dont_copy_passwords)
 #: vnc/vncpreferences.ui:257
 #, kde-format
 msgid "Don't copy passwords from supported password managers to remote hosts"
 msgstr ""
+"Nekopēt paroles no atbalstītiem paroļu pārvaldniekiem uz attāliem "
+"resursdatoriem"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, dont_copy_passwords)
 #: vnc/vncpreferences.ui:260
@@ -1750,39 +1725,40 @@ msgid ""
 "additional MIME type \"x-kde-passwordManagerHint\" which is used for "
 "filtering."
 msgstr ""
+"Atbalstītie paroļu pārvaldnieki (piemēram, „KeePassXC“) kopētās paroles "
+"marķē ar papildu MIME tipu „x-kde-passwordManagerHint“, ko izmanto "
+"filtrēšanai."
 
 #: vnc/vncsshtunnelthread.cpp:99
-#, fuzzy, kde-format
-#| msgid "Connecting to %1"
+#, kde-format
 msgid "Error connecting to %1: %2"
-msgstr "Savienojas ar %1"
+msgstr "Kļūda, savienojoties ar „%1“: %2"
 
 #: vnc/vncsshtunnelthread.cpp:124
-#, fuzzy, kde-format
-#| msgid "Authenticating at %1"
+#, kde-format
 msgid "Error authenticating with password: %1"
-msgstr "Autentificē uz %1"
+msgstr "Kļūda, autentificējoties ar paroli: %1"
 
 #: vnc/vncsshtunnelthread.cpp:130 vnc/vncsshtunnelthread.cpp:148
 #: vnc/vncsshtunnelthread.cpp:155 vnc/vncsshtunnelthread.cpp:163
 #, kde-format
 msgid "Error creating tunnel socket"
-msgstr ""
+msgstr "Kļūda, veidojot tuneļa ligzdu"
 
 #: vnc/vncview.cpp:328
 #, kde-format
 msgid "Access to the system requires a password."
-msgstr "Lai piekļūtu šai sistēmai nepieciešama parole."
+msgstr "Lai piekļūtu šai sistēmai, nepieciešama parole."
 
 #: vnc/vncview.cpp:328
 #, kde-format
 msgid "Authentication failed. Please try again."
-msgstr "Neveiksmīga autenficēšana. Mēģiniet vēlreiz."
+msgstr "Neveiksmīga autentificēšanās. Mēģiniet vēlreiz."
 
 #: vnc/vncview.cpp:358
 #, kde-format
 msgid "Please enter the SSH password."
-msgstr ""
+msgstr "Ievadiet SSH paroli."
 
 #: vnc/vncview.cpp:383 vnc/vncview.cpp:385
 #, kde-format
@@ -1792,7 +1768,7 @@ msgstr "VNC kļūme"
 #: vnc/vncview.cpp:394 vnc/vncview.cpp:396
 #, kde-format
 msgid "SSH Tunnel failure"
-msgstr ""
+msgstr "SSH tuneļa kļūme"
 
 #: vnc/vncviewfactory.cpp:47
 #, kde-format
@@ -1802,7 +1778,7 @@ msgstr "Jauns VNC savienojums..."
 #: vnc/vncviewfactory.cpp:52
 #, kde-format
 msgid "Connect to a VNC Remote Desktop"
-msgstr "Pieslēgties VNC attālinātai darbvirsmai"
+msgstr "Pieslēgties VNC attālajai darbvirsmai"
 
 #: vnc/vncviewfactory.cpp:58
 #, kde-format
@@ -1810,8 +1786,8 @@ msgid ""
 "<html>Enter the address here.<br /><i>Example: vncserver:1 (host:port / "
 "screen)</i></html>"
 msgstr ""
-"<html>Šeit ievadiet adresi.<br /><i>Piemēram: vncserver:1 (adrese:ports / "
-"ekrāns )</i></html>"
+"<html>Šeit ievadiet adresi.<br /><i>Piemēram: „vncserver:1“ (resursdators:"
+"ports / ekrāns )</i></html>"
 
 #~ msgid "Abner Silva"
 #~ msgstr "Abner Silva"
