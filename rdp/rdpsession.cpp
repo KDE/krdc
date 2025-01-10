@@ -14,11 +14,6 @@
 #include <QKeyEvent>
 #include <QMouseEvent>
 
-#include <KLocalizedString>
-#include <KMessageBox>
-#include <KMessageDialog>
-#include <KPasswordDialog>
-
 #include <freerdp/addin.h>
 #include <freerdp/channels/rdpgfx.h>
 #include <freerdp/client.h>
@@ -200,7 +195,9 @@ DWORD RdpSession::verifyChangedCertificateEx(freerdp *rdp,
     newCertificate.fingerprint = QString::fromUtf8(new_fingerprint);
     newCertificate.flags = flags;
 
-    switch (session->onVerifyChangedCertificate(oldCertificate, newCertificate)) {
+    RdpSession::CertificateResult ret = RdpSession::CertificateResult::DoNotAccept;
+    Q_EMIT session->onVerifyChangedCertificate(&ret, oldCertificate.toString(), newCertificate.toString());
+    switch (ret) {
     case RdpSession::CertificateResult::DoNotAccept:
         return 0;
     case RdpSession::CertificateResult::AcceptTemporarily:
@@ -236,7 +233,9 @@ DWORD RdpSession::verifyCertificateEx(freerdp *rdp,
     certificate.fingerprint = QString::fromUtf8(fingerprint);
     certificate.flags = flags;
 
-    switch (session->onVerifyCertificate(certificate)) {
+    RdpSession::CertificateResult ret = RdpSession::CertificateResult::DoNotAccept;
+    Q_EMIT session->onVerifyCertificate(&ret, certificate.toString());
+    switch (ret) {
     case RdpSession::CertificateResult::DoNotAccept:
         return 0;
     case RdpSession::CertificateResult::AcceptTemporarily:
@@ -250,6 +249,7 @@ DWORD RdpSession::verifyCertificateEx(freerdp *rdp,
 
 int RdpSession::logonErrorInfo(freerdp *rdp, UINT32 data, UINT32 type)
 {
+    auto session = reinterpret_cast<RdpContext *>(rdp->context)->session;
     auto dataString = QString::fromUtf8(freerdp_get_logon_error_info_data(data));
     auto typeString = QString::fromUtf8(freerdp_get_logon_error_info_type(type));
 
@@ -261,7 +261,7 @@ int RdpSession::logonErrorInfo(freerdp *rdp, UINT32 data, UINT32 type)
     if (type == LOGON_MSG_SESSION_CONTINUE)
         return 0;
 
-    KMessageBox::error(nullptr, typeString + QStringLiteral(" ") + dataString, i18nc("@title:dialog", "Logon Error"));
+    Q_EMIT session->onLogonError(typeString + QStringLiteral(" ") + dataString);
     return 1;
 }
 
@@ -699,12 +699,6 @@ int RdpSession::clientContextStart(rdpContext *context)
         }
     }
 
-    if (!freerdp_connect(context->instance)) {
-        qWarning(KRDC) << "Unable to connect";
-        session->emitErrorMessage();
-        return -1;
-    }
-
     session->m_thread = std::thread(std::bind(&RdpSession::run, session));
     pthread_setname_np(session->m_thread.native_handle(), "rdp_session");
 
@@ -1120,78 +1114,23 @@ bool RdpSession::onAuthenticate(char **username, char **password, char **domain)
         }
     }
 
-    std::unique_ptr<KPasswordDialog> dialog;
-    dialog = std::make_unique<KPasswordDialog>(nullptr, KPasswordDialog::ShowUsernameLine | KPasswordDialog::ShowKeepPassword);
-    dialog->setPrompt(i18nc("@label", "Access to this system requires a username and password."));
-    dialog->setUsername(m_user);
-    dialog->setPassword(m_password);
-
-    if (!dialog->exec()) {
-        return false;
-    }
-
-    m_user = dialog->username();
-    m_password = dialog->password();
+    Q_EMIT onAuthRequested();
 
     *username = _strdup(m_user.toUtf8().data());
     *password = _strdup(m_password.toUtf8().data());
 
-    if (dialog->keepPassword()) {
-        m_view->savePassword(m_password);
-    }
-
     return true;
-}
-
-RdpSession::CertificateResult RdpSession::onVerifyCertificate(const Certificate &certificate)
-{
-    KMessageDialog dialog{KMessageDialog::QuestionTwoActions, i18nc("@label", "The certificate for this system is unknown. Do you wish to continue?")};
-    dialog.setCaption(i18nc("@title:dialog", "Verify Certificate"));
-    dialog.setIcon(QIcon::fromTheme(QStringLiteral("view-certficate")));
-
-    dialog.setDetails(certificate.toString());
-
-    dialog.setDontAskAgainText(i18nc("@label", "Remember this certificate"));
-
-    dialog.setButtons(KStandardGuiItem::cont(), KStandardGuiItem::cancel());
-
-    if (!dialog.exec()) {
-        return CertificateResult::DoNotAccept;
-    }
-
-    if (dialog.isDontAskAgainChecked()) {
-        return CertificateResult::AcceptPermanently;
-    } else {
-        return CertificateResult::AcceptTemporarily;
-    }
-}
-
-RdpSession::CertificateResult RdpSession::onVerifyChangedCertificate(const Certificate &oldCertificate, const Certificate &newCertificate)
-{
-    KMessageDialog dialog{KMessageDialog::QuestionTwoActions, i18nc("@label", "The certificate for this system has changed. Do you wish to continue?")};
-    dialog.setCaption(i18nc("@title:dialog", "Certificate has Changed"));
-    dialog.setIcon(QIcon::fromTheme(QStringLiteral("view-certficate")));
-
-    dialog.setDetails(i18nc("@label", "Previous certificate:\n%1\nNew Certificate:\n%2", oldCertificate.toString(), newCertificate.toString()));
-
-    dialog.setDontAskAgainText(i18nc("@label", "Remember this certificate"));
-
-    dialog.setButtons(KStandardGuiItem::cont(), KStandardGuiItem::cancel());
-
-    if (!dialog.exec()) {
-        return CertificateResult::DoNotAccept;
-    }
-
-    if (dialog.isDontAskAgainChecked()) {
-        return CertificateResult::AcceptPermanently;
-    } else {
-        return CertificateResult::AcceptTemporarily;
-    }
 }
 
 void RdpSession::run()
 {
     auto instance = m_context.rdp->instance;
+
+    if (!freerdp_connect(instance)) {
+        qWarning(KRDC) << "Unable to connect";
+        emitErrorMessage();
+        return;
+    }
 
     auto timer = CreateWaitableTimerA(nullptr, FALSE, "rdp-session-timer");
     if (!timer) {

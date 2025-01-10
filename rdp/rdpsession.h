@@ -110,6 +110,10 @@ public:
     Q_SIGNAL void rectangleUpdated(const QRect &rectangle);
 
     Q_SIGNAL void errorMessage(unsigned int error);
+    Q_SIGNAL void onAuthRequested();
+    Q_SIGNAL void onVerifyCertificate(RdpSession::CertificateResult *ret, const QString &certificate);
+    Q_SIGNAL void onVerifyChangedCertificate(RdpSession::CertificateResult *ret, const QString &oldCertificate, const QString &newCertificate);
+    Q_SIGNAL void onLogonError(const QString &error);
 
     RdpView *rdpView()
     {
@@ -174,8 +178,6 @@ private:
     void setState(State newState);
 
     bool onAuthenticate(char **username, char **password, char **domain);
-    CertificateResult onVerifyCertificate(const Certificate &certificate);
-    CertificateResult onVerifyChangedCertificate(const Certificate &oldCertificate, const Certificate &newCertificate);
 
     void run();
 

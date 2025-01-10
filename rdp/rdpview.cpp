@@ -12,6 +12,7 @@
 #include "rdphostpreferences.h"
 
 #include <KMessageBox>
+#include <KMessageDialog>
 #include <KPasswordDialog>
 #include <KShell>
 #include <KWindowSystem>
@@ -149,6 +150,10 @@ bool RdpView::start()
         }
     });
     connect(m_session.get(), &RdpSession::errorMessage, this, &RdpView::handleError);
+    connect(m_session.get(), &RdpSession::onLogonError, this, &RdpView::onLogonError);
+    connect(m_session.get(), &RdpSession::onAuthRequested, this, &RdpView::onAuthRequested, Qt::BlockingQueuedConnection);
+    connect(m_session.get(), &RdpSession::onVerifyCertificate, this, &RdpView::onVerifyCertificate, Qt::BlockingQueuedConnection);
+    connect(m_session.get(), &RdpSession::onVerifyChangedCertificate, this, &RdpView::onVerifyChangedCertificate, Qt::BlockingQueuedConnection);
 
     setStatus(RdpView::Connecting);
     if (!m_session->start()) {
@@ -159,6 +164,79 @@ bool RdpView::start()
     setFocus();
 
     return true;
+}
+
+void RdpView::onAuthRequested()
+{
+    std::unique_ptr<KPasswordDialog> dialog;
+    dialog = std::make_unique<KPasswordDialog>(nullptr, KPasswordDialog::ShowUsernameLine | KPasswordDialog::ShowKeepPassword);
+    dialog->setPrompt(i18nc("@label", "Access to this system requires a username and password."));
+    dialog->setUsername(m_user);
+    dialog->setPassword(m_password);
+
+    if (!dialog->exec()) {
+        return;
+    }
+
+    m_user = dialog->username();
+    m_password = dialog->password();
+
+    if (dialog->keepPassword()) {
+        savePassword(m_password);
+    }
+
+    m_session->setUser(m_user);
+    m_session->setPassword(m_password);
+}
+
+void RdpView::onVerifyCertificate(RdpSession::CertificateResult *ret, const QString &certificate)
+{
+    KMessageDialog dialog{KMessageDialog::WarningContinueCancel, i18nc("@label", "The certificate for this system is unknown. Do you wish to continue?")};
+    dialog.setCaption(i18nc("@title:dialog", "Verify Certificate"));
+    dialog.setIcon(QIcon::fromTheme(QStringLiteral("view-certficate")));
+
+    dialog.setDetails(certificate);
+
+    dialog.setDontAskAgainText(i18nc("@label", "Remember this certificate"));
+
+    dialog.setButtons(KStandardGuiItem::cont(), KGuiItem(), KStandardGuiItem::cancel());
+
+    const auto result = static_cast<KMessageDialog::ButtonType>(dialog.exec());
+    if (result == KMessageDialog::Cancel) {
+        *ret = RdpSession::CertificateResult::DoNotAccept;
+        return;
+    }
+
+    if (dialog.isDontAskAgainChecked()) {
+        *ret = RdpSession::CertificateResult::AcceptPermanently;
+    } else {
+        *ret = RdpSession::CertificateResult::AcceptTemporarily;
+    }
+}
+
+void RdpView::onVerifyChangedCertificate(RdpSession::CertificateResult *ret, const QString &oldCertificate, const QString &newCertificate)
+{
+    KMessageDialog dialog{KMessageDialog::WarningContinueCancel, i18nc("@label", "The certificate for this system has changed. Do you wish to continue?")};
+    dialog.setCaption(i18nc("@title:dialog", "Certificate has Changed"));
+    dialog.setIcon(QIcon::fromTheme(QStringLiteral("view-certficate")));
+
+    dialog.setDetails(i18nc("@label", "Previous certificate:\n%1\nNew Certificate:\n%2", oldCertificate, newCertificate));
+
+    dialog.setDontAskAgainText(i18nc("@label", "Remember this certificate"));
+
+    dialog.setButtons(KStandardGuiItem::cont(), KGuiItem(), KStandardGuiItem::cancel());
+
+    const auto result = static_cast<KMessageDialog::ButtonType>(dialog.exec());
+    if (result == KMessageDialog::Cancel) {
+        *ret = RdpSession::CertificateResult::DoNotAccept;
+        return;
+    }
+
+    if (dialog.isDontAskAgainChecked()) {
+        *ret = RdpSession::CertificateResult::AcceptPermanently;
+    } else {
+        *ret = RdpSession::CertificateResult::AcceptTemporarily;
+    }
 }
 
 void RdpView::handleError(const unsigned int error)
@@ -241,6 +319,11 @@ void RdpView::handleError(const unsigned int error)
 
     // FIXME are there any situations we don't want to quit?
     startQuitting();
+}
+
+void RdpView::onLogonError(const QString &error)
+{
+    KMessageBox::error(this, error, i18nc("@title:dialog", "Logon Error"));
 }
 
 HostPreferences *RdpView::hostPreferences()

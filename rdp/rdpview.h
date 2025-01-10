@@ -9,6 +9,7 @@
 #ifndef RDPVIEW_H
 #define RDPVIEW_H
 
+#include "rdpsession.h"
 #include "remoteview.h"
 
 #include "rdphostpreferences.h"
@@ -18,7 +19,6 @@
 
 #define TCP_PORT_RDP 3389
 
-class RdpSession;
 class QMimeData;
 
 class RdpView : public RemoteView
@@ -60,6 +60,10 @@ public:
 
 public Q_SLOTS:
     void scaleResize(int w, int h) override;
+    void onAuthRequested();
+    void onVerifyCertificate(RdpSession::CertificateResult *ret, const QString &certificate);
+    void onVerifyChangedCertificate(RdpSession::CertificateResult *ret, const QString &oldCertificate, const QString &newCertificate);
+    void onLogonError(const QString &error);
 
 protected:
     QSize initialSize();
