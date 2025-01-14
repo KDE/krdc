@@ -944,7 +944,7 @@ void MainWindow::updateConfiguration()
     if (Settings::systemTrayIcon() && !m_systemTrayIcon) {
         m_systemTrayIcon = new SystemTrayIcon(this);
         if (m_systemTrayIcon) {
-            m_systemTrayIcon->setAssociatedWindow(m_fullscreenWindow->windowHandle());
+            m_systemTrayIcon->setAssociatedWindow(m_fullscreenWindow ? m_fullscreenWindow->windowHandle() : nullptr);
         }
     } else if (m_systemTrayIcon) {
         delete m_systemTrayIcon;
