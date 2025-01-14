@@ -116,6 +116,13 @@ if(WITH_VNC)
 endif()
 
 if(WITH_RDP)
+    # Workaround https://github.com/FreeRDP/FreeRDP/issues/11072
+    if(CMAKE_SYSTEM_NAME MATCHES "FreeBSD|DragonFly")
+        list(APPEND CMAKE_PREFIX_PATH /usr/local/share/cmake/Modules/FreeRDP2)
+        list(APPEND CMAKE_PREFIX_PATH /usr/local/share/cmake/Modules/FreeRDP-Client2)
+        list(APPEND CMAKE_PREFIX_PATH /usr/local/share/cmake/Modules/WinPR2)
+    endif()
+
     find_package(FreeRDP 2.10)
     set_package_properties(FreeRDP PROPERTIES
         DESCRIPTION "A free Remote Desktop Protocol (RDP) Implementation"
