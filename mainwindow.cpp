@@ -963,7 +963,7 @@ void MainWindow::updateConfiguration()
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
             m_systemTrayIcon->setAssociatedWidget(m_fullscreenWindow);
 #else
-            m_systemTrayIcon->setAssociatedWindow(m_fullscreenWindow->windowHandle());
+            m_systemTrayIcon->setAssociatedWindow(m_fullscreenWindow ? m_fullscreenWindow->windowHandle() : nullptr);
 #endif
         }
     } else if (m_systemTrayIcon) {
