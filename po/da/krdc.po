@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-11 00:40+0000\n"
+"POT-Creation-Date: 2025-01-20 00:41+0000\n"
 "PO-Revision-Date: 2022-02-08 20:03+0100\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -1280,13 +1280,7 @@ msgstr ""
 msgid "Ext"
 msgstr ""
 
-#: rdp/rdpsession.cpp:264
-#, kde-format
-msgctxt "@title:dialog"
-msgid "Logon Error"
-msgstr ""
-
-#: rdp/rdpsession.cpp:873
+#: rdp/rdpsession.cpp:867
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1297,44 +1291,44 @@ msgid ""
 "Fingerprint: %6\n"
 msgstr ""
 
-#: rdp/rdpsession.cpp:1125
+#: rdp/rdpview.cpp:173
 #, fuzzy, kde-format
 #| msgid "Access to the system requires a password."
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
 msgstr "Adgang til systemet kræver en adgangskode."
 
-#: rdp/rdpsession.cpp:1148
+#: rdp/rdpview.cpp:194
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr ""
 
-#: rdp/rdpsession.cpp:1149
+#: rdp/rdpview.cpp:195
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
 msgstr ""
 
-#: rdp/rdpsession.cpp:1154 rdp/rdpsession.cpp:1177
+#: rdp/rdpview.cpp:200 rdp/rdpview.cpp:225
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
 msgstr ""
 
-#: rdp/rdpsession.cpp:1171
+#: rdp/rdpview.cpp:219
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
 msgstr ""
 
-#: rdp/rdpsession.cpp:1172
+#: rdp/rdpview.cpp:220
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
 msgstr ""
 
-#: rdp/rdpsession.cpp:1175
+#: rdp/rdpview.cpp:223
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1344,14 +1338,14 @@ msgid ""
 "%2"
 msgstr ""
 
-#: rdp/rdpview.cpp:178
+#: rdp/rdpview.cpp:256
 #, fuzzy, kde-format
 #| msgid "Connection Failure"
 msgctxt "@title:dialog"
 msgid "Login Failure"
 msgstr "Mislykket forbindelse"
 
-#: rdp/rdpview.cpp:179
+#: rdp/rdpview.cpp:257
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1359,13 +1353,13 @@ msgid ""
 "and password."
 msgstr ""
 
-#: rdp/rdpview.cpp:188
+#: rdp/rdpview.cpp:266
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Account Problems"
 msgstr ""
 
-#: rdp/rdpview.cpp:189
+#: rdp/rdpview.cpp:267
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1373,13 +1367,13 @@ msgid ""
 "contact your system administrator."
 msgstr ""
 
-#: rdp/rdpview.cpp:194
+#: rdp/rdpview.cpp:272
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Password Problems"
 msgstr ""
 
-#: rdp/rdpview.cpp:195
+#: rdp/rdpview.cpp:273
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1387,85 +1381,91 @@ msgid ""
 "administrator to change it."
 msgstr ""
 
-#: rdp/rdpview.cpp:198
+#: rdp/rdpview.cpp:276
 #, fuzzy, kde-format
 #| msgid "Connection"
 msgctxt "@title:dialog"
 msgid "Connection Lost"
 msgstr "Forbindelse"
 
-#: rdp/rdpview.cpp:199
+#: rdp/rdpview.cpp:277
 #, fuzzy, kde-format
 #| msgid "An error has occurred during the connection to the NX server."
 msgctxt "@label"
 msgid "Lost connection to the server."
 msgstr "En fejl opstod under forbindelse til NX-serveren."
 
-#: rdp/rdpview.cpp:203
+#: rdp/rdpview.cpp:281
 #, fuzzy, kde-format
 #| msgid "Server not found."
 msgctxt "@title:dialog"
 msgid "Server not Found"
 msgstr "Server ikke fundet."
 
-#: rdp/rdpview.cpp:204
+#: rdp/rdpview.cpp:282
 #, kde-format
 msgctxt "@label"
 msgid "Could not find the server."
 msgstr ""
 
-#: rdp/rdpview.cpp:207
+#: rdp/rdpview.cpp:285
 #, fuzzy, kde-format
 #| msgid "Connection Failure"
 msgctxt "@title:dialog"
 msgid "Connection Refused"
 msgstr "Mislykket forbindelse"
 
-#: rdp/rdpview.cpp:208
+#: rdp/rdpview.cpp:286
 #, fuzzy, kde-format
 #| msgid "VNC server closed connection."
 msgctxt "@label"
 msgid "The server refused the connection request."
 msgstr "VNC-serveren lukkede forbindelsen."
 
-#: rdp/rdpview.cpp:213
+#: rdp/rdpview.cpp:291
 #, fuzzy, kde-format
 #| msgid "KRDC Konsole Connection"
 msgctxt "@title:dialog"
 msgid "Could not Connect"
 msgstr "KRDC Konsole-forbindelse"
 
-#: rdp/rdpview.cpp:214
+#: rdp/rdpview.cpp:292
 #, fuzzy, kde-format
 #| msgid "An error has occurred during the connection to the NX server."
 msgctxt "@label"
 msgid "Could not connect to the server."
 msgstr "En fejl opstod under forbindelse til NX-serveren."
 
-#: rdp/rdpview.cpp:224 rdp/rdpview.cpp:228
+#: rdp/rdpview.cpp:302 rdp/rdpview.cpp:306
 #, fuzzy, kde-format
 #| msgid "Connection Failure"
 msgctxt "@title:dialog"
 msgid "Connection Closed"
 msgstr "Mislykket forbindelse"
 
-#: rdp/rdpview.cpp:229
+#: rdp/rdpview.cpp:307
 #, kde-format
 msgctxt "@label"
 msgid "The connection to the server was closed."
 msgstr ""
 
-#: rdp/rdpview.cpp:233
+#: rdp/rdpview.cpp:311
 #, fuzzy, kde-format
 #| msgid "Connection Failure"
 msgctxt "@title:dialog"
 msgid "Connection Failed"
 msgstr "Mislykket forbindelse"
 
-#: rdp/rdpview.cpp:234
+#: rdp/rdpview.cpp:312
 #, kde-format
 msgctxt "@label"
 msgid "An unknown error occurred"
+msgstr ""
+
+#: rdp/rdpview.cpp:326
+#, kde-format
+msgctxt "@title:dialog"
+msgid "Logon Error"
 msgstr ""
 
 #: rdp/rdpviewfactory.cpp:25

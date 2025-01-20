@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-11 00:40+0000\n"
+"POT-Creation-Date: 2025-01-20 00:41+0000\n"
 "PO-Revision-Date: 2024-11-14 09:43+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -1282,13 +1282,7 @@ msgstr "RDP"
 msgid "Ext"
 msgstr "Ext"
 
-#: rdp/rdpsession.cpp:264
-#, kde-format
-msgctxt "@title:dialog"
-msgid "Logon Error"
-msgstr "Error de connexió"
-
-#: rdp/rdpsession.cpp:873
+#: rdp/rdpsession.cpp:867
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1304,43 +1298,43 @@ msgstr ""
 "Emissor: %5\n"
 "Empremta digital: %6\n"
 
-#: rdp/rdpsession.cpp:1125
+#: rdp/rdpview.cpp:173
 #, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
 msgstr "L'accés al sistema requereix un nom d'usuari i una contrasenya."
 
-#: rdp/rdpsession.cpp:1148
+#: rdp/rdpview.cpp:194
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr "El certificat per a aquest sistema és desconegut. Voleu continuar?"
 
-#: rdp/rdpsession.cpp:1149
+#: rdp/rdpview.cpp:195
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
 msgstr "Verifica el certificat"
 
-#: rdp/rdpsession.cpp:1154 rdp/rdpsession.cpp:1177
+#: rdp/rdpview.cpp:200 rdp/rdpview.cpp:225
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
 msgstr "Recorda aquest certificat"
 
-#: rdp/rdpsession.cpp:1171
+#: rdp/rdpview.cpp:219
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
 msgstr "El certificat per a aquest sistema ha canviat. Voleu continuar?"
 
-#: rdp/rdpsession.cpp:1172
+#: rdp/rdpview.cpp:220
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
 msgstr "El certificat ha canviat"
 
-#: rdp/rdpsession.cpp:1175
+#: rdp/rdpview.cpp:223
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1354,13 +1348,13 @@ msgstr ""
 "Certificat nou:\n"
 "%2"
 
-#: rdp/rdpview.cpp:178
+#: rdp/rdpview.cpp:256
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Login Failure"
 msgstr "Fallada en iniciar la sessió"
 
-#: rdp/rdpview.cpp:179
+#: rdp/rdpview.cpp:257
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1370,13 +1364,13 @@ msgstr ""
 "No s'ha pogut iniciar la sessió amb les credencials proporcionades. "
 "Comproveu el nom d'usuari i la contrasenya."
 
-#: rdp/rdpview.cpp:188
+#: rdp/rdpview.cpp:266
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Account Problems"
 msgstr "Problemes del compte"
 
-#: rdp/rdpview.cpp:189
+#: rdp/rdpview.cpp:267
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1386,13 +1380,13 @@ msgstr ""
 "El compte proporcionat no té permès iniciar la sessió en aquesta màquina. "
 "Contacteu amb l'administrador del sistema."
 
-#: rdp/rdpview.cpp:194
+#: rdp/rdpview.cpp:272
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Password Problems"
 msgstr "Problemes de contrasenya"
 
-#: rdp/rdpview.cpp:195
+#: rdp/rdpview.cpp:273
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1402,77 +1396,83 @@ msgstr ""
 "No s'ha pogut iniciar la sessió amb la contrasenya proporcionada. Contacteu "
 "amb l'administrador del sistema per a canviar-la."
 
-#: rdp/rdpview.cpp:198
+#: rdp/rdpview.cpp:276
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Lost"
 msgstr "S'ha perdut la connexió"
 
-#: rdp/rdpview.cpp:199
+#: rdp/rdpview.cpp:277
 #, kde-format
 msgctxt "@label"
 msgid "Lost connection to the server."
 msgstr "S'ha perdut la connexió amb el servidor."
 
-#: rdp/rdpview.cpp:203
+#: rdp/rdpview.cpp:281
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Server not Found"
 msgstr "No s'ha trobat el servidor"
 
-#: rdp/rdpview.cpp:204
+#: rdp/rdpview.cpp:282
 #, kde-format
 msgctxt "@label"
 msgid "Could not find the server."
 msgstr "No s'ha pogut trobar el servidor."
 
-#: rdp/rdpview.cpp:207
+#: rdp/rdpview.cpp:285
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Refused"
 msgstr "S'ha rebutjat la connexió"
 
-#: rdp/rdpview.cpp:208
+#: rdp/rdpview.cpp:286
 #, kde-format
 msgctxt "@label"
 msgid "The server refused the connection request."
 msgstr "El servidor ha rebutjat la sol·licitud de connexió."
 
-#: rdp/rdpview.cpp:213
+#: rdp/rdpview.cpp:291
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Could not Connect"
 msgstr "No s'ha pogut connectar"
 
-#: rdp/rdpview.cpp:214
+#: rdp/rdpview.cpp:292
 #, kde-format
 msgctxt "@label"
 msgid "Could not connect to the server."
 msgstr "No s'ha pogut connectar amb el servidor."
 
-#: rdp/rdpview.cpp:224 rdp/rdpview.cpp:228
+#: rdp/rdpview.cpp:302 rdp/rdpview.cpp:306
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Closed"
 msgstr "S'ha tancat la connexió"
 
-#: rdp/rdpview.cpp:229
+#: rdp/rdpview.cpp:307
 #, kde-format
 msgctxt "@label"
 msgid "The connection to the server was closed."
 msgstr "S'ha tancat la connexió amb el servidor."
 
-#: rdp/rdpview.cpp:233
+#: rdp/rdpview.cpp:311
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Failed"
 msgstr "Ha fallat la connexió"
 
-#: rdp/rdpview.cpp:234
+#: rdp/rdpview.cpp:312
 #, kde-format
 msgctxt "@label"
 msgid "An unknown error occurred"
 msgstr "S'ha produït un error desconegut"
+
+#: rdp/rdpview.cpp:326
+#, kde-format
+msgctxt "@title:dialog"
+msgid "Logon Error"
+msgstr "Error de connexió"
 
 #: rdp/rdpviewfactory.cpp:25
 #, kde-format

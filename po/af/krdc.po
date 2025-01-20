@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc VERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-11 00:40+0000\n"
+"POT-Creation-Date: 2025-01-20 00:41+0000\n"
 "PO-Revision-Date: 2002-11-07 11:35+0200\n"
 "Last-Translator: WEB-Translator <http://kde.af.org.za>\n"
 "Language-Team: AFRIKAANS <AF@lia.org.za>\n"
@@ -1254,14 +1254,7 @@ msgstr ""
 msgid "Ext"
 msgstr ""
 
-#: rdp/rdpsession.cpp:264
-#, fuzzy, kde-format
-#| msgid "Unknown Error"
-msgctxt "@title:dialog"
-msgid "Logon Error"
-msgstr "Onbekende Fout"
-
-#: rdp/rdpsession.cpp:873
+#: rdp/rdpsession.cpp:867
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1272,44 +1265,44 @@ msgid ""
 "Fingerprint: %6\n"
 msgstr ""
 
-#: rdp/rdpsession.cpp:1125
+#: rdp/rdpview.cpp:173
 #, fuzzy, kde-format
 #| msgid "Access to the system requires a password."
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
 msgstr "Toegang verkry na die stelsel benodig 'n wagwoord."
 
-#: rdp/rdpsession.cpp:1148
+#: rdp/rdpview.cpp:194
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr ""
 
-#: rdp/rdpsession.cpp:1149
+#: rdp/rdpview.cpp:195
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
 msgstr ""
 
-#: rdp/rdpsession.cpp:1154 rdp/rdpsession.cpp:1177
+#: rdp/rdpview.cpp:200 rdp/rdpview.cpp:225
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
 msgstr ""
 
-#: rdp/rdpsession.cpp:1171
+#: rdp/rdpview.cpp:219
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
 msgstr ""
 
-#: rdp/rdpsession.cpp:1172
+#: rdp/rdpview.cpp:220
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
 msgstr ""
 
-#: rdp/rdpsession.cpp:1175
+#: rdp/rdpview.cpp:223
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1319,14 +1312,14 @@ msgid ""
 "%2"
 msgstr ""
 
-#: rdp/rdpview.cpp:178
+#: rdp/rdpview.cpp:256
 #, fuzzy, kde-format
 #| msgid "Connection Failure"
 msgctxt "@title:dialog"
 msgid "Login Failure"
 msgstr "Verbinding Vaaling"
 
-#: rdp/rdpview.cpp:179
+#: rdp/rdpview.cpp:257
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1334,13 +1327,13 @@ msgid ""
 "and password."
 msgstr ""
 
-#: rdp/rdpview.cpp:188
+#: rdp/rdpview.cpp:266
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Account Problems"
 msgstr ""
 
-#: rdp/rdpview.cpp:189
+#: rdp/rdpview.cpp:267
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1348,13 +1341,13 @@ msgid ""
 "contact your system administrator."
 msgstr ""
 
-#: rdp/rdpview.cpp:194
+#: rdp/rdpview.cpp:272
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Password Problems"
 msgstr ""
 
-#: rdp/rdpview.cpp:195
+#: rdp/rdpview.cpp:273
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1362,84 +1355,91 @@ msgid ""
 "administrator to change it."
 msgstr ""
 
-#: rdp/rdpview.cpp:198
+#: rdp/rdpview.cpp:276
 #, fuzzy, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Lost"
 msgstr "Konnekteer"
 
-#: rdp/rdpview.cpp:199
+#: rdp/rdpview.cpp:277
 #, fuzzy, kde-format
 #| msgid "An error occurred while scanning the network."
 msgctxt "@label"
 msgid "Lost connection to the server."
 msgstr "'n fout voorgekom terwyl skandering die netwerk."
 
-#: rdp/rdpview.cpp:203
+#: rdp/rdpview.cpp:281
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Server not Found"
 msgstr ""
 
-#: rdp/rdpview.cpp:204
+#: rdp/rdpview.cpp:282
 #, kde-format
 msgctxt "@label"
 msgid "Could not find the server."
 msgstr ""
 
-#: rdp/rdpview.cpp:207
+#: rdp/rdpview.cpp:285
 #, fuzzy, kde-format
 #| msgid "Connection Failure"
 msgctxt "@title:dialog"
 msgid "Connection Refused"
 msgstr "Verbinding Vaaling"
 
-#: rdp/rdpview.cpp:208
+#: rdp/rdpview.cpp:286
 #, kde-format
 msgctxt "@label"
 msgid "The server refused the connection request."
 msgstr ""
 
-#: rdp/rdpview.cpp:213
+#: rdp/rdpview.cpp:291
 #, fuzzy, kde-format
 msgctxt "@title:dialog"
 msgid "Could not Connect"
 msgstr "Afgeleë Werkskerm Verbinding"
 
-#: rdp/rdpview.cpp:214
+#: rdp/rdpview.cpp:292
 #, fuzzy, kde-format
 #| msgid "An error occurred while scanning the network."
 msgctxt "@label"
 msgid "Could not connect to the server."
 msgstr "'n fout voorgekom terwyl skandering die netwerk."
 
-#: rdp/rdpview.cpp:224 rdp/rdpview.cpp:228
+#: rdp/rdpview.cpp:302 rdp/rdpview.cpp:306
 #, fuzzy, kde-format
 #| msgid "Connection Failure"
 msgctxt "@title:dialog"
 msgid "Connection Closed"
 msgstr "Verbinding Vaaling"
 
-#: rdp/rdpview.cpp:229
+#: rdp/rdpview.cpp:307
 #, fuzzy, kde-format
 #| msgid "The connection to the host has been interrupted."
 msgctxt "@label"
 msgid "The connection to the server was closed."
 msgstr "Die verbinding na Die bediener het al geonderbreek."
 
-#: rdp/rdpview.cpp:233
+#: rdp/rdpview.cpp:311
 #, fuzzy, kde-format
 #| msgid "Connection Failure"
 msgctxt "@title:dialog"
 msgid "Connection Failed"
 msgstr "Verbinding Vaaling"
 
-#: rdp/rdpview.cpp:234
+#: rdp/rdpview.cpp:312
 #, fuzzy, kde-format
 #| msgid "Unknown error."
 msgctxt "@label"
 msgid "An unknown error occurred"
 msgstr "Onbekende fout."
+
+#: rdp/rdpview.cpp:326
+#, fuzzy, kde-format
+#| msgid "Unknown Error"
+msgctxt "@title:dialog"
+msgid "Logon Error"
+msgstr "Onbekende Fout"
 
 #: rdp/rdpviewfactory.cpp:25
 #, kde-format

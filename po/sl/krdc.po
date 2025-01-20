@@ -1,6 +1,6 @@
 # Slovenian translation of krdc
 # Copyright (C) 2002, 2003, 2004, 2005, 2006, 2007 Free Software Foundation, Inc.
-# $Id: krdc.po 1697237 2024-12-11 01:17:03Z scripty $
+# $Id: krdc.po 1700742 2025-01-20 01:19:37Z scripty $
 # $Source$
 #
 # Andrej Vernekar <andrej.vernekar@moj.net>, 2002, 2007, 2008.
@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-11 00:40+0000\n"
+"POT-Creation-Date: 2025-01-20 00:41+0000\n"
 "PO-Revision-Date: 2024-11-14 06:59+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -1292,13 +1292,7 @@ msgstr "RDP"
 msgid "Ext"
 msgstr "Ext"
 
-#: rdp/rdpsession.cpp:264
-#, kde-format
-msgctxt "@title:dialog"
-msgid "Logon Error"
-msgstr "Napaka prijave"
-
-#: rdp/rdpsession.cpp:873
+#: rdp/rdpsession.cpp:867
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1314,43 +1308,43 @@ msgstr ""
 "Izdajatelj: %5\n"
 "Prstni odtis: %6\n"
 
-#: rdp/rdpsession.cpp:1125
+#: rdp/rdpview.cpp:173
 #, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
 msgstr "Za dostop do tega sistema sta potrebna uporabniško ime in geslo."
 
-#: rdp/rdpsession.cpp:1148
+#: rdp/rdpview.cpp:194
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr "Potrdilo za ta sistem ni znano. Želite nadaljevati?"
 
-#: rdp/rdpsession.cpp:1149
+#: rdp/rdpview.cpp:195
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
 msgstr "Preveri potrdilo"
 
-#: rdp/rdpsession.cpp:1154 rdp/rdpsession.cpp:1177
+#: rdp/rdpview.cpp:200 rdp/rdpview.cpp:225
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
 msgstr "Zaponi si to potrdilo"
 
-#: rdp/rdpsession.cpp:1171
+#: rdp/rdpview.cpp:219
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
 msgstr "Potrdilo za ta sistem je spremenjeno. Želite nadaljevati?"
 
-#: rdp/rdpsession.cpp:1172
+#: rdp/rdpview.cpp:220
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
 msgstr "Potrdilo se je spremenilo"
 
-#: rdp/rdpsession.cpp:1175
+#: rdp/rdpview.cpp:223
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1364,13 +1358,13 @@ msgstr ""
 "Novo potrdilo:\n"
 "%2"
 
-#: rdp/rdpview.cpp:178
+#: rdp/rdpview.cpp:256
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Login Failure"
 msgstr "Napaka p"
 
-#: rdp/rdpview.cpp:179
+#: rdp/rdpview.cpp:257
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1380,13 +1374,13 @@ msgstr ""
 "Ni se mogoče prijaviti z navedenimi poverilnicami. Še enkrat preverite "
 "uporabnika in geslo."
 
-#: rdp/rdpview.cpp:188
+#: rdp/rdpview.cpp:266
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Account Problems"
 msgstr "Problemi z računom"
 
-#: rdp/rdpview.cpp:189
+#: rdp/rdpview.cpp:267
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1396,13 +1390,13 @@ msgstr ""
 "Podani račun nima dovoljenja za prijavo v to napravo. Prosim, da se obrnete "
 "na skrbnika sistema."
 
-#: rdp/rdpview.cpp:194
+#: rdp/rdpview.cpp:272
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Password Problems"
 msgstr "Problemi z geslom"
 
-#: rdp/rdpview.cpp:195
+#: rdp/rdpview.cpp:273
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1412,77 +1406,83 @@ msgstr ""
 "S podanim geslom se ni mogoče prijaviti. Obrnite se na skrbnika svojega "
 "sistema, da ga spremeni."
 
-#: rdp/rdpview.cpp:198
+#: rdp/rdpview.cpp:276
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Lost"
 msgstr "Povezava izgubljena"
 
-#: rdp/rdpview.cpp:199
+#: rdp/rdpview.cpp:277
 #, kde-format
 msgctxt "@label"
 msgid "Lost connection to the server."
 msgstr "Izgubljena povezava s strežnikom."
 
-#: rdp/rdpview.cpp:203
+#: rdp/rdpview.cpp:281
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Server not Found"
 msgstr "Strežnik ni bil najden"
 
-#: rdp/rdpview.cpp:204
+#: rdp/rdpview.cpp:282
 #, kde-format
 msgctxt "@label"
 msgid "Could not find the server."
 msgstr "Ni mogoče najti strežnika."
 
-#: rdp/rdpview.cpp:207
+#: rdp/rdpview.cpp:285
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Refused"
 msgstr "Povezava zavrnjena"
 
-#: rdp/rdpview.cpp:208
+#: rdp/rdpview.cpp:286
 #, kde-format
 msgctxt "@label"
 msgid "The server refused the connection request."
 msgstr "Strežnik je zavrnil zahtevo za povezavo."
 
-#: rdp/rdpview.cpp:213
+#: rdp/rdpview.cpp:291
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Could not Connect"
 msgstr "Ni bilo mogoče vzpostaviti povezave"
 
-#: rdp/rdpview.cpp:214
+#: rdp/rdpview.cpp:292
 #, kde-format
 msgctxt "@label"
 msgid "Could not connect to the server."
 msgstr "Ni bilo mogoče vzpostaviti povezave s strežnikom."
 
-#: rdp/rdpview.cpp:224 rdp/rdpview.cpp:228
+#: rdp/rdpview.cpp:302 rdp/rdpview.cpp:306
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Closed"
 msgstr "Povezava zaprta"
 
-#: rdp/rdpview.cpp:229
+#: rdp/rdpview.cpp:307
 #, kde-format
 msgctxt "@label"
 msgid "The connection to the server was closed."
 msgstr "Povezava do strežnika je bila zaprta."
 
-#: rdp/rdpview.cpp:233
+#: rdp/rdpview.cpp:311
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Failed"
 msgstr "Napaka povezave"
 
-#: rdp/rdpview.cpp:234
+#: rdp/rdpview.cpp:312
 #, kde-format
 msgctxt "@label"
 msgid "An unknown error occurred"
 msgstr "Prišlo je do neznane napake"
+
+#: rdp/rdpview.cpp:326
+#, kde-format
+msgctxt "@title:dialog"
+msgid "Logon Error"
+msgstr "Napaka prijave"
 
 #: rdp/rdpviewfactory.cpp:25
 #, kde-format
