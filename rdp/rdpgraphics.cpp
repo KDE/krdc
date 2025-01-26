@@ -78,8 +78,8 @@ BOOL RdpGraphics::onPointerSet(rdpContext *context, const rdpPointer *pointer)
     if (view && ptx->pixmap) {
         auto srcSize = QSizeF{session->size()};
         auto destSize = QSizeF{view->size()};
-        auto w = (pointer->width / srcSize.width()) * destSize.width();
-        auto cursor = QCursor(ptx->pixmap->scaledToWidth(w, Qt::SmoothTransformation));
+        auto scale = destSize.width() / srcSize.width();
+        auto cursor = QCursor(ptx->pixmap->scaledToWidth(pointer->width * scale, Qt::SmoothTransformation), pointer->xPos * scale, pointer->yPos * scale);
 
         view->setRemoteCursor(cursor);
         return true;
