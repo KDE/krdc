@@ -1117,6 +1117,7 @@ bool RdpSession::onAuthenticate(char **username, char **password, char **domain)
     Q_EMIT onAuthRequested();
 
     *username = _strdup(m_user.toUtf8().data());
+    *domain = _strdup(m_domain.toUtf8().data());
     *password = _strdup(m_password.toUtf8().data());
 
     return true;

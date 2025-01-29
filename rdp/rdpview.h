@@ -30,6 +30,7 @@ public:
                      const QUrl &url = QUrl(),
                      KConfigGroup configGroup = KConfigGroup(),
                      const QString &user = QString(),
+                     const QString &domain = QString(),
                      const QString &password = QString());
 
     ~RdpView() override;
@@ -80,6 +81,7 @@ private:
 
     QString m_name;
     QString m_user;
+    QString m_domain;
     QString m_password;
     //
     bool m_quitting = false;

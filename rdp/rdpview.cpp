@@ -24,13 +24,15 @@
 #include <QMouseEvent>
 #include <QPainter>
 #include <QScreen>
+#include <QUrlQuery>
 #include <QWindow>
 
 #include "rdpsession.h"
 
-RdpView::RdpView(QWidget *parent, const QUrl &url, KConfigGroup configGroup, const QString &user, const QString &password)
+RdpView::RdpView(QWidget *parent, const QUrl &url, KConfigGroup configGroup, const QString &user, const QString &domain, const QString &password)
     : RemoteView(parent)
     , m_user(user)
+    , m_domain(domain)
     , m_password(password)
 {
     m_url = url;
@@ -39,6 +41,14 @@ RdpView::RdpView(QWidget *parent, const QUrl &url, KConfigGroup configGroup, con
 
     if (m_user.isEmpty() && !m_url.userName().isEmpty()) {
         m_user = m_url.userName();
+    }
+
+    if (m_domain.isEmpty() && m_url.hasQuery()) {
+        QUrlQuery query(m_url);
+        QString queryDomain = query.queryItemValue(QStringLiteral("domain"));
+        if (!queryDomain.isEmpty()) {
+            m_domain = queryDomain;
+        }
     }
 
     if (m_password.isEmpty() && !m_url.password().isEmpty()) {
@@ -117,6 +127,8 @@ bool RdpView::start()
     m_session->setHost(m_host);
     m_session->setPort(m_port);
     m_session->setUser(m_user);
+    m_session->setDomain(m_domain);
+
     m_session->setSize(initialSize());
 
     if (m_password.isEmpty()) {
@@ -169,9 +181,11 @@ bool RdpView::start()
 void RdpView::onAuthRequested()
 {
     std::unique_ptr<KPasswordDialog> dialog;
-    dialog = std::make_unique<KPasswordDialog>(nullptr, KPasswordDialog::ShowUsernameLine | KPasswordDialog::ShowKeepPassword);
+    dialog =
+        std::make_unique<KPasswordDialog>(nullptr, KPasswordDialog::ShowUsernameLine | KPasswordDialog::ShowKeepPassword | KPasswordDialog::ShowDomainLine);
     dialog->setPrompt(i18nc("@label", "Access to this system requires a username and password."));
     dialog->setUsername(m_user);
+    dialog->setDomain(m_domain);
     dialog->setPassword(m_password);
 
     if (!dialog->exec()) {
@@ -179,13 +193,24 @@ void RdpView::onAuthRequested()
     }
 
     m_user = dialog->username();
+    m_domain = dialog->domain();
     m_password = dialog->password();
+
+    // update m_url so it gets saved correctly
+    m_url.setUserName(m_user);
+    QUrlQuery query(m_url);
+    query.removeQueryItem(QStringLiteral("domain"));
+    if (!m_domain.isEmpty()) {
+        query.addQueryItem(QStringLiteral("domain"), m_domain);
+    }
+    m_url.setQuery(query);
 
     if (dialog->keepPassword()) {
         savePassword(m_password);
     }
 
     m_session->setUser(m_user);
+    m_session->setDomain(m_domain);
     m_session->setPassword(m_password);
 }
 

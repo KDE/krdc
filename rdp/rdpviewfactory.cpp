@@ -10,6 +10,7 @@
 #include <QStandardPaths>
 #include <QStringList>
 #include <QTextStream>
+#include <QUrlQuery>
 
 #include <KPluginFactory>
 
@@ -47,6 +48,7 @@ QUrl RdpViewFactory::loadUrlFromFile(const QUrl &url) const
     }
 
     QUrl loadedUrl;
+    QUrlQuery query;
     loadedUrl.setScheme(QStringLiteral("rdp"));
     loadedUrl.setPath(QString());
 
@@ -72,11 +74,17 @@ QUrl RdpViewFactory::loadUrlFromFile(const QUrl &url) const
         if (key == QStringLiteral("username")) {
             loadedUrl.setUserName(line.at(2));
         }
+
+        if (key == QStringLiteral("domain")) {
+            query.addQueryItem(QStringLiteral("domain"), line.at(2));
+        }
+
         if (key == QStringLiteral("password")) {
             loadedUrl.setPassword(line.at(2));
         }
     }
 
+    loadedUrl.setQuery(query);
     file.close();
     return loadedUrl;
 }
