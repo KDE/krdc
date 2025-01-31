@@ -2,8 +2,8 @@
 # SPDX-License-Identifier: CC0-1.0
 
 Dependencies:
-- 'on': ['Linux/Qt6', 'FreeBSD/Qt6']
-  'require':
+ - 'on': ['Linux/Qt6', 'FreeBSD/Qt6']
+   'require':
     'frameworks/extra-cmake-modules': '@latest-kf6'
     'frameworks/kconfig': '@latest-kf6'
     'frameworks/kcmutils': '@latest-kf6'
@@ -23,4 +23,4 @@ Dependencies:
     'plasma/plasma-activities': '@latest-kf6'
 
 Options:
-  require-passing-tests-on: ['Linux', 'FreeBSD', 'Windows']
+ require-passing-tests-on: ['Linux', 'FreeBSD', 'Windows']
