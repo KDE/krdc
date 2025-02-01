@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-20 00:41+0000\n"
+"POT-Creation-Date: 2025-02-01 00:41+0000\n"
 "PO-Revision-Date: 2024-11-14 09:43+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -687,388 +687,78 @@ msgstr "Escriptoris remots"
 msgid "Filter"
 msgstr "Filtre"
 
+#. i18n: ectx: attribute (title), widget (QWidget, mainSettingsTab)
+#: rdp/rdppreferences.ui:21
+#, fuzzy, kde-format
+#| msgctxt "General Config"
+#| msgid "General"
+msgid "General"
+msgstr "General"
+
 #. i18n: ectx: property (text), widget (QLabel, resolutionLabel)
-#: rdp/rdppreferences.ui:30
+#: rdp/rdppreferences.ui:27
 #, kde-format
 msgid "Resolution"
 msgstr "Resolució"
 
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
-#: rdp/rdppreferences.ui:53 rdp/rdppreferences.ui:348
-#, kde-format
-msgid "Use Best Available"
-msgstr "Usa la millor disponible"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
-#: rdp/rdppreferences.ui:58
-#, kde-format
-msgid "Force H.264"
-msgstr "Força H.264"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
-#: rdp/rdppreferences.ui:63
-#, kde-format
-msgid "Force RemoteFX"
-msgstr "Força RemoteFX"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
-#: rdp/rdppreferences.ui:68
-#, kde-format
-msgid "Disable All Acceleration"
-msgstr "Desactiva tota l'acceleració"
-
-#. i18n: ectx: property (text), widget (QLabel, soundLabel)
-#: rdp/rdppreferences.ui:76
-#, kde-format
-msgctxt "label for soundsettings in preferences dialog"
-msgid "Sound:"
-msgstr "So:"
-
-#. i18n: ectx: property (text), widget (QLabel, accelerationLabel)
-#: rdp/rdppreferences.ui:89
-#, kde-format
-msgid "Acceleration:"
-msgstr "Acceleració:"
-
-#. i18n: ectx: property (text), widget (QLabel, TlsSecLevelLabel)
-#: rdp/rdppreferences.ui:99
-#, kde-format
-msgid "TLS security level:"
-msgstr "Nivell de seguretat TLS:"
-
-#. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:140
+#. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_Resolution)
+#. i18n: ectx: property (whatsThis), widget (KComboBox, resolutionComboBox)
+#: rdp/rdppreferences.ui:49 vnc/vncpreferences.ui:86
 #, kde-format
 msgid ""
-"Use this to specify your keyboard layout. This layout setting is used to "
-"send the correct keyboard codes to the server."
+"Here you can specify the resolution of the remote desktop. This resolution "
+"determines the size of the desktop that will be presented to you."
 msgstr ""
-"Useu això per a especificar la vostra disposició de teclat. Aquesta opció de "
-"la disposició serà emprada per a enviar els codis de teclat correctes cap al "
-"servidor."
+"Aquí podeu especificar la resolució de l'escriptori remot. Aquesta resolució "
+"determinarà la mida de l'escriptori que se us presentarà."
 
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:147
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#: rdp/rdppreferences.ui:56
 #, kde-format
-msgid "Arabic (ar)"
-msgstr "Àrab (ar)"
+msgid "Small (1280x720)"
+msgstr "Baixa (1280x720)"
 
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:152
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#: rdp/rdppreferences.ui:61
 #, kde-format
-msgid "Czech (cs)"
-msgstr "Txec (cs)"
+msgid "Medium (1600x900)"
+msgstr "Mitjana (1600x900)"
 
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:157
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#: rdp/rdppreferences.ui:66
 #, kde-format
-msgid "Danish (da)"
-msgstr "Danès (da)"
+msgid "Large (1920x1080)"
+msgstr "Gran (1920x1080)"
 
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:162
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#: rdp/rdppreferences.ui:71
 #, kde-format
-msgid "German (de)"
-msgstr "Alemany (de)"
+msgid "Current Window Size"
+msgstr "Mida actual de la finestra"
 
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:167
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
+#: rdp/rdppreferences.ui:76 vnc/vncpreferences.ui:118
 #, kde-format
-msgid "Swiss German (de-ch)"
-msgstr "Alemany suís (de-ch)"
+msgid "Current Screen Resolution"
+msgstr "Resolució actual de la pantalla"
 
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:172
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
+#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
+#: rdp/rdppreferences.ui:81 vnc/vncpreferences.ui:123
 #, kde-format
-msgid "American Dvorak (en-dv)"
-msgstr "Americà Dvorak (en-dv)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:177
-#, kde-format
-msgid "British English (en-gb)"
-msgstr "Anglès GB (en-gb)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:182
-#, kde-format
-msgid "US English (en-us)"
-msgstr "Anglès US (en-us)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:187
-#, kde-format
-msgid "Spanish (es)"
-msgstr "Espanyol (es)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:192
-#, kde-format
-msgid "Estonian (et)"
-msgstr "Estonià (et)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:197
-#, kde-format
-msgid "Finnish (fi)"
-msgstr "Finès (fi)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:202
-#, kde-format
-msgid "Faroese (fo)"
-msgstr "Feroès (fo)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:207
-#, kde-format
-msgid "French (fr)"
-msgstr "Francès (fr)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:212
-#, kde-format
-msgid "Belgian (fr-be)"
-msgstr "Belga (fr-be)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:217
-#, kde-format
-msgid "French Canadian (fr-ca)"
-msgstr "Francès canadenc (fr-ca)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:222
-#, kde-format
-msgid "Swiss French (fr-ch)"
-msgstr "Francès suís (fr-ch)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:227
-#, kde-format
-msgid "Hebrew (he)"
-msgstr "Hebreu (he)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:232
-#, kde-format
-msgid "Croatian (hr)"
-msgstr "Croat (hr)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:237
-#, kde-format
-msgid "Hungarian (hu)"
-msgstr "Hongarès (hu)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:242
-#, kde-format
-msgid "Icelandic (is)"
-msgstr "Islandès (is)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:247
-#, kde-format
-msgid "Italian (it)"
-msgstr "Italià (it)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:252
-#, kde-format
-msgid "Japanese (ja)"
-msgstr "Japonès (ja)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:257
-#, kde-format
-msgid "Korean (ko)"
-msgstr "Coreà (ko)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:262
-#, kde-format
-msgid "Lithuanian (lt)"
-msgstr "Lituà (lt)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:267
-#, kde-format
-msgid "Latvian (lv)"
-msgstr "Letó (lv)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:272
-#, kde-format
-msgid "Macedonian (mk)"
-msgstr "Macedoni (mk)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:277
-#, kde-format
-msgid "Dutch (nl)"
-msgstr "Neerlandès (nl)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:282
-#, kde-format
-msgid "Belgian Dutch (nl-be)"
-msgstr "Neerlandès belga (nl-be)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:287
-#, kde-format
-msgid "Norwegian (no)"
-msgstr "Noruec (no)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:292
-#, kde-format
-msgid "Polish (pl)"
-msgstr "Polonès (pl)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:297
-#, kde-format
-msgid "Portuguese (pt)"
-msgstr "Portuguès (pt)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:302
-#, kde-format
-msgid "Brazilian (pt-br)"
-msgstr "Brasiler (pt-br)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:307
-#, kde-format
-msgid "Russian (ru)"
-msgstr "Rus (ru)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:312
-#, kde-format
-msgid "Slovenian (sl)"
-msgstr "Eslovè (sl)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:317
-#, kde-format
-msgid "Swedish (sv)"
-msgstr "Suec (sv)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:322
-#, kde-format
-msgid "Thai (th)"
-msgstr "Tai (th)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:327
-#, kde-format
-msgid "Turkish (tr)"
-msgstr "Turc (tr)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
-#: rdp/rdppreferences.ui:353
-#, kde-format
-msgid "True Color with Alpha (32 Bit)"
-msgstr "Color real amb alfa (24 bits)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
-#: rdp/rdppreferences.ui:358
-#, kde-format
-msgid "True Color (24 Bit)"
-msgstr "Color real (24 bits)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
-#: rdp/rdppreferences.ui:363
-#, kde-format
-msgid "High Color (16 Bit)"
-msgstr "Color alt (16 bits)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
-#: rdp/rdppreferences.ui:368
-#, kde-format
-msgid "Low Color (8 Bit)"
-msgstr "Color reduït (8 bits)"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
-#: rdp/rdppreferences.ui:389
-#, kde-format
-msgid "On This Computer"
-msgstr "En aquest ordinador"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
-#: rdp/rdppreferences.ui:394
-#, kde-format
-msgid "On Remote Computer"
-msgstr "A un ordinador remot"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
-#: rdp/rdppreferences.ui:399
-#, kde-format
-msgid "Disable Sound"
-msgstr "Desactiva el so"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ScaleToSize)
-#: rdp/rdppreferences.ui:413
-#, kde-format
-msgid "Scale window contents to match resolution"
-msgstr "Escala el contingut de la finestra amb la resolució coincident"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
-#: rdp/rdppreferences.ui:436
-#, kde-format
-msgid "any"
-msgstr "qualsevol"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
-#: rdp/rdppreferences.ui:441
-#, kde-format
-msgid "80 bit"
-msgstr "80 bits"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
-#: rdp/rdppreferences.ui:446
-#, kde-format
-msgid "112 bit"
-msgstr "112 bits"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
-#: rdp/rdppreferences.ui:451
-#, kde-format
-msgid "128 bit"
-msgstr "128 bits"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
-#: rdp/rdppreferences.ui:456
-#, kde-format
-msgid "192 bit"
-msgstr "192 bits"
-
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
-#: rdp/rdppreferences.ui:461
-#, kde-format
-msgid "256 bit"
-msgstr "256 bits"
-
-#. i18n: ectx: property (text), widget (QLabel, layoutLabel)
-#: rdp/rdppreferences.ui:469
-#, kde-format
-msgid "&Keyboard layout:"
-msgstr "Disposició del &teclat:"
+msgid "Custom Resolution (...)"
+msgstr "Resolució personalitzada (...)"
 
 #. i18n: ectx: property (text), widget (QLabel, widthLabel)
-#: rdp/rdppreferences.ui:487 vnc/vncpreferences.ui:136
+#: rdp/rdppreferences.ui:94 vnc/vncpreferences.ui:136
 #, kde-format
 msgid "&Width:"
 msgstr "&Amplada:"
 
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Width)
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_ScalingWidth)
-#: rdp/rdppreferences.ui:503 vnc/vncpreferences.ui:152
+#: rdp/rdppreferences.ui:110 vnc/vncpreferences.ui:152
 #, kde-format
 msgid ""
 "This is the width of the remote desktop. You can only change this value "
@@ -1079,14 +769,14 @@ msgstr ""
 "l'escriptori, a sobre."
 
 #. i18n: ectx: property (text), widget (QLabel, heightLabel)
-#: rdp/rdppreferences.ui:519 vnc/vncpreferences.ui:168
+#: rdp/rdppreferences.ui:126 vnc/vncpreferences.ui:168
 #, kde-format
 msgid "H&eight:"
 msgstr "A&lçada:"
 
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Height)
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_ScalingHeight)
-#: rdp/rdppreferences.ui:535 vnc/vncpreferences.ui:184
+#: rdp/rdppreferences.ui:142 vnc/vncpreferences.ui:184
 #, kde-format
 msgid ""
 "This is the height of the remote desktop. You can only change this value "
@@ -1096,191 +786,503 @@ msgstr ""
 "manualment aquest valor si seleccioneu «A mida» com a resolució de "
 "l'escriptori, a dalt."
 
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ScaleToSize)
+#: rdp/rdppreferences.ui:163
+#, kde-format
+msgid "Scale window contents to match resolution"
+msgstr "Escala el contingut de la finestra amb la resolució coincident"
+
+#. i18n: ectx: property (text), widget (QLabel, accelerationLabel)
+#: rdp/rdppreferences.ui:173
+#, kde-format
+msgid "Acceleration:"
+msgstr "Acceleració:"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
+#: rdp/rdppreferences.ui:196 rdp/rdppreferences.ui:245
+#, kde-format
+msgid "Use Best Available"
+msgstr "Usa la millor disponible"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
+#: rdp/rdppreferences.ui:201
+#, kde-format
+msgid "Force H.264"
+msgstr "Força H.264"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
+#: rdp/rdppreferences.ui:206
+#, kde-format
+msgid "Force RemoteFX"
+msgstr "Força RemoteFX"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
+#: rdp/rdppreferences.ui:211
+#, kde-format
+msgid "Disable All Acceleration"
+msgstr "Desactiva tota l'acceleració"
+
+#. i18n: ectx: property (text), widget (QLabel, colorDepthLabel)
+#: rdp/rdppreferences.ui:219
+#, kde-format
+msgid "Color &depth:"
+msgstr "&Profunditat de color:"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
+#: rdp/rdppreferences.ui:250
+#, kde-format
+msgid "True Color with Alpha (32 Bit)"
+msgstr "Color real amb alfa (24 bits)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
+#: rdp/rdppreferences.ui:255
+#, kde-format
+msgid "True Color (24 Bit)"
+msgstr "Color real (24 bits)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
+#: rdp/rdppreferences.ui:260
+#, kde-format
+msgid "High Color (16 Bit)"
+msgstr "Color alt (16 bits)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
+#: rdp/rdppreferences.ui:265
+#, kde-format
+msgid "Low Color (8 Bit)"
+msgstr "Color reduït (8 bits)"
+
+#. i18n: ectx: property (text), widget (QLabel, layoutLabel)
+#: rdp/rdppreferences.ui:273
+#, kde-format
+msgid "&Keyboard layout:"
+msgstr "Disposició del &teclat:"
+
+#. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:298
+#, kde-format
+msgid ""
+"Use this to specify your keyboard layout. This layout setting is used to "
+"send the correct keyboard codes to the server."
+msgstr ""
+"Useu això per a especificar la vostra disposició de teclat. Aquesta opció de "
+"la disposició serà emprada per a enviar els codis de teclat correctes cap al "
+"servidor."
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:305
+#, kde-format
+msgid "Arabic (ar)"
+msgstr "Àrab (ar)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:310
+#, kde-format
+msgid "Czech (cs)"
+msgstr "Txec (cs)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:315
+#, kde-format
+msgid "Danish (da)"
+msgstr "Danès (da)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:320
+#, kde-format
+msgid "German (de)"
+msgstr "Alemany (de)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:325
+#, kde-format
+msgid "Swiss German (de-ch)"
+msgstr "Alemany suís (de-ch)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:330
+#, kde-format
+msgid "American Dvorak (en-dv)"
+msgstr "Americà Dvorak (en-dv)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:335
+#, kde-format
+msgid "British English (en-gb)"
+msgstr "Anglès GB (en-gb)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:340
+#, kde-format
+msgid "US English (en-us)"
+msgstr "Anglès US (en-us)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:345
+#, kde-format
+msgid "Spanish (es)"
+msgstr "Espanyol (es)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:350
+#, kde-format
+msgid "Estonian (et)"
+msgstr "Estonià (et)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:355
+#, kde-format
+msgid "Finnish (fi)"
+msgstr "Finès (fi)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:360
+#, kde-format
+msgid "Faroese (fo)"
+msgstr "Feroès (fo)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:365
+#, kde-format
+msgid "French (fr)"
+msgstr "Francès (fr)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:370
+#, kde-format
+msgid "Belgian (fr-be)"
+msgstr "Belga (fr-be)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:375
+#, kde-format
+msgid "French Canadian (fr-ca)"
+msgstr "Francès canadenc (fr-ca)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:380
+#, kde-format
+msgid "Swiss French (fr-ch)"
+msgstr "Francès suís (fr-ch)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:385
+#, kde-format
+msgid "Hebrew (he)"
+msgstr "Hebreu (he)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:390
+#, kde-format
+msgid "Croatian (hr)"
+msgstr "Croat (hr)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:395
+#, kde-format
+msgid "Hungarian (hu)"
+msgstr "Hongarès (hu)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:400
+#, kde-format
+msgid "Icelandic (is)"
+msgstr "Islandès (is)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:405
+#, kde-format
+msgid "Italian (it)"
+msgstr "Italià (it)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:410
+#, kde-format
+msgid "Japanese (ja)"
+msgstr "Japonès (ja)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:415
+#, kde-format
+msgid "Korean (ko)"
+msgstr "Coreà (ko)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:420
+#, kde-format
+msgid "Lithuanian (lt)"
+msgstr "Lituà (lt)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:425
+#, kde-format
+msgid "Latvian (lv)"
+msgstr "Letó (lv)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:430
+#, kde-format
+msgid "Macedonian (mk)"
+msgstr "Macedoni (mk)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:435
+#, kde-format
+msgid "Dutch (nl)"
+msgstr "Neerlandès (nl)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:440
+#, kde-format
+msgid "Belgian Dutch (nl-be)"
+msgstr "Neerlandès belga (nl-be)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:445
+#, kde-format
+msgid "Norwegian (no)"
+msgstr "Noruec (no)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:450
+#, kde-format
+msgid "Polish (pl)"
+msgstr "Polonès (pl)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:455
+#, kde-format
+msgid "Portuguese (pt)"
+msgstr "Portuguès (pt)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:460
+#, kde-format
+msgid "Brazilian (pt-br)"
+msgstr "Brasiler (pt-br)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:465
+#, kde-format
+msgid "Russian (ru)"
+msgstr "Rus (ru)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:470
+#, kde-format
+msgid "Slovenian (sl)"
+msgstr "Eslovè (sl)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:475
+#, kde-format
+msgid "Swedish (sv)"
+msgstr "Suec (sv)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:480
+#, kde-format
+msgid "Thai (th)"
+msgstr "Tai (th)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
+#: rdp/rdppreferences.ui:485
+#, kde-format
+msgid "Turkish (tr)"
+msgstr "Turc (tr)"
+
+#. i18n: ectx: property (text), widget (QLabel, soundLabel)
+#: rdp/rdppreferences.ui:493
+#, kde-format
+msgctxt "label for soundsettings in preferences dialog"
+msgid "Sound:"
+msgstr "So:"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
+#: rdp/rdppreferences.ui:519
+#, kde-format
+msgid "On This Computer"
+msgstr "En aquest ordinador"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
+#: rdp/rdppreferences.ui:524
+#, kde-format
+msgid "On Remote Computer"
+msgstr "A un ordinador remot"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
+#: rdp/rdppreferences.ui:529
+#, kde-format
+msgid "Disable Sound"
+msgstr "Desactiva el so"
+
 #. i18n: ectx: property (text), widget (QLabel, shareMediaLabel)
-#: rdp/rdppreferences.ui:550
+#: rdp/rdppreferences.ui:537
 #, kde-format
 msgid "Share Media:"
 msgstr "Compartició de suports:"
 
-#. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_Resolution)
-#. i18n: ectx: property (whatsThis), widget (KComboBox, resolutionComboBox)
-#: rdp/rdppreferences.ui:572 vnc/vncpreferences.ui:86
+#. i18n: ectx: property (text), widget (QLabel, shareSmartcardLabel)
+#: rdp/rdppreferences.ui:563
 #, kde-format
-msgid ""
-"Here you can specify the resolution of the remote desktop. This resolution "
-"determines the size of the desktop that will be presented to you."
-msgstr ""
-"Aquí podeu especificar la resolució de l'escriptori remot. Aquesta resolució "
-"determinarà la mida de l'escriptori que se us presentarà."
+msgid "Share Smartcard:"
+msgstr "Comparteix la targeta intel·ligent:"
 
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#: rdp/rdppreferences.ui:579
+#. i18n: ectx: property (text), widget (QLabel, gSecurityLabel)
+#: rdp/rdppreferences.ui:576
 #, kde-format
-msgid "Small (1280x720)"
-msgstr "Baixa (1280x720)"
+msgid "Security:"
+msgstr "Seguretat:"
 
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#: rdp/rdppreferences.ui:584
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_NLASecurity)
+#: rdp/rdppreferences.ui:588
 #, kde-format
-msgid "Medium (1600x900)"
-msgstr "Mitjana (1600x900)"
+msgid "NLA"
+msgstr "NLA"
 
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#: rdp/rdppreferences.ui:589
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_TLSSecurity)
+#: rdp/rdppreferences.ui:595
 #, kde-format
-msgid "Large (1920x1080)"
-msgstr "Gran (1920x1080)"
+msgid "TLS"
+msgstr "TLS"
 
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#: rdp/rdppreferences.ui:594
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RDPSecurity)
+#: rdp/rdppreferences.ui:602
 #, kde-format
-msgid "Current Window Size"
-msgstr "Mida actual de la finestra"
+msgid "RDP"
+msgstr "RDP"
 
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
-#: rdp/rdppreferences.ui:599 vnc/vncpreferences.ui:118
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_EXTSecurity)
+#: rdp/rdppreferences.ui:609
 #, kde-format
-msgid "Current Screen Resolution"
-msgstr "Resolució actual de la pantalla"
+msgid "Ext"
+msgstr "Ext"
 
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
-#: rdp/rdppreferences.ui:604 vnc/vncpreferences.ui:123
+#. i18n: ectx: property (text), widget (QLabel, TlsSecLevelLabel)
+#: rdp/rdppreferences.ui:618
 #, kde-format
-msgid "Custom Resolution (...)"
-msgstr "Resolució personalitzada (...)"
+msgid "TLS security level:"
+msgstr "Nivell de seguretat TLS:"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
+#: rdp/rdppreferences.ui:644
+#, kde-format
+msgid "any"
+msgstr "qualsevol"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
+#: rdp/rdppreferences.ui:649
+#, kde-format
+msgid "80 bit"
+msgstr "80 bits"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
+#: rdp/rdppreferences.ui:654
+#, kde-format
+msgid "112 bit"
+msgstr "112 bits"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
+#: rdp/rdppreferences.ui:659
+#, kde-format
+msgid "128 bit"
+msgstr "128 bits"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
+#: rdp/rdppreferences.ui:664
+#, kde-format
+msgid "192 bit"
+msgstr "192 bits"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
+#: rdp/rdppreferences.ui:669
+#, kde-format
+msgid "256 bit"
+msgstr "256 bits"
 
 #. i18n: ectx: attribute (title), widget (QWidget, proxySettingsTab)
-#: rdp/rdppreferences.ui:616
+#: rdp/rdppreferences.ui:691
 #, kde-format
 msgid "Proxy"
 msgstr "Servidor intermediari"
 
 #. i18n: ectx: property (text), widget (QLabel, protocolLabel)
-#: rdp/rdppreferences.ui:624
+#: rdp/rdppreferences.ui:699
 #, kde-format
 msgid "Protocol:"
 msgstr "Protocol:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ProxyProtocol)
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_GatewayTransportType)
-#: rdp/rdppreferences.ui:638 rdp/rdppreferences.ui:749
+#: rdp/rdppreferences.ui:713 rdp/rdppreferences.ui:824
 #, kde-format
 msgid "HTTP"
 msgstr "HTTP"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ProxyProtocol)
-#: rdp/rdppreferences.ui:643
+#: rdp/rdppreferences.ui:718
 #, kde-format
 msgid "SOCKS"
 msgstr "SOCKS"
 
 #. i18n: ectx: property (text), widget (QLabel, pPasswordLabel)
 #. i18n: ectx: property (text), widget (QLabel, gPasswordLabel)
-#: rdp/rdppreferences.ui:654 rdp/rdppreferences.ui:710
+#: rdp/rdppreferences.ui:729 rdp/rdppreferences.ui:785
 #, kde-format
 msgid "Password:"
 msgstr "Contrasenya:"
 
 #. i18n: ectx: property (text), widget (QLabel, pUsernameLabel)
 #. i18n: ectx: property (text), widget (QLabel, gUsernameLabel)
-#: rdp/rdppreferences.ui:664 rdp/rdppreferences.ui:703
+#: rdp/rdppreferences.ui:739 rdp/rdppreferences.ui:778
 #, kde-format
 msgid "Username:"
 msgstr "Nom d'usuari:"
 
 #. i18n: ectx: property (text), widget (QLabel, pHostLabel)
 #. i18n: ectx: property (text), widget (QLabel, gServerLabel)
-#: rdp/rdppreferences.ui:671 rdp/rdppreferences.ui:696
+#: rdp/rdppreferences.ui:746 rdp/rdppreferences.ui:771
 #, kde-format
 msgid "Server:"
 msgstr "Servidor:"
 
 #. i18n: ectx: property (placeholderText), widget (KLineEdit, kcfg_ProxyHost)
 #. i18n: ectx: property (placeholderText), widget (KLineEdit, kcfg_GatewayServer)
-#: rdp/rdppreferences.ui:678 rdp/rdppreferences.ui:717
+#: rdp/rdppreferences.ui:753 rdp/rdppreferences.ui:792
 #, kde-format
 msgid "host:port"
 msgstr "host:port"
 
 #. i18n: ectx: attribute (title), widget (QWidget, gatewaySettingsTab)
-#: rdp/rdppreferences.ui:688
+#: rdp/rdppreferences.ui:763
 #, kde-format
 msgid "Gateway"
 msgstr "Passarel·la"
 
 #. i18n: ectx: property (text), widget (QLabel, gTransportTypeLabel)
-#: rdp/rdppreferences.ui:730
+#: rdp/rdppreferences.ui:805
 #, kde-format
 msgid "Transport type:"
 msgstr "Tipus de transport:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_GatewayTransportType)
-#: rdp/rdppreferences.ui:744
+#: rdp/rdppreferences.ui:819
 #, kde-format
 msgid "Auto"
 msgstr "Automàtic"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_GatewayTransportType)
-#: rdp/rdppreferences.ui:754
+#: rdp/rdppreferences.ui:829
 #, kde-format
 msgid "RPC"
 msgstr "RPC"
 
 #. i18n: ectx: property (text), widget (QLabel, gDomainLabel)
-#: rdp/rdppreferences.ui:762
+#: rdp/rdppreferences.ui:837
 #, kde-format
 msgid "Domain:"
 msgstr "Domini:"
-
-#. i18n: ectx: property (text), widget (QLabel, colorDepthLabel)
-#: rdp/rdppreferences.ui:778
-#, kde-format
-msgid "Color &depth:"
-msgstr "&Profunditat de color:"
-
-#. i18n: ectx: property (text), widget (QLabel, advancedNetworkSettingsLabel)
-#: rdp/rdppreferences.ui:791
-#, kde-format
-msgid "Advanced Network Settings"
-msgstr "Configuració avançada de xarxa"
-
-#. i18n: ectx: property (text), widget (QLabel, shareSmartcardLabel)
-#: rdp/rdppreferences.ui:814
-#, kde-format
-msgid "Share Smartcard:"
-msgstr "Comparteix la targeta intel·ligent:"
-
-#. i18n: ectx: property (text), widget (QLabel, gSecurityLabel)
-#: rdp/rdppreferences.ui:827
-#, kde-format
-msgid "Security:"
-msgstr "Seguretat:"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_NLASecurity)
-#: rdp/rdppreferences.ui:839
-#, kde-format
-msgid "NLA"
-msgstr "NLA"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_TLSSecurity)
-#: rdp/rdppreferences.ui:846
-#, kde-format
-msgid "TLS"
-msgstr "TLS"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RDPSecurity)
-#: rdp/rdppreferences.ui:853
-#, kde-format
-msgid "RDP"
-msgstr "RDP"
-
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_EXTSecurity)
-#: rdp/rdppreferences.ui:860
-#, kde-format
-msgid "Ext"
-msgstr "Ext"
 
 #: rdp/rdpsession.cpp:867
 #, kde-format
@@ -1298,43 +1300,43 @@ msgstr ""
 "Emissor: %5\n"
 "Empremta digital: %6\n"
 
-#: rdp/rdpview.cpp:173
+#: rdp/rdpview.cpp:186
 #, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
 msgstr "L'accés al sistema requereix un nom d'usuari i una contrasenya."
 
-#: rdp/rdpview.cpp:194
+#: rdp/rdpview.cpp:219
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr "El certificat per a aquest sistema és desconegut. Voleu continuar?"
 
-#: rdp/rdpview.cpp:195
+#: rdp/rdpview.cpp:220
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
 msgstr "Verifica el certificat"
 
-#: rdp/rdpview.cpp:200 rdp/rdpview.cpp:225
+#: rdp/rdpview.cpp:225 rdp/rdpview.cpp:250
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
 msgstr "Recorda aquest certificat"
 
-#: rdp/rdpview.cpp:219
+#: rdp/rdpview.cpp:244
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
 msgstr "El certificat per a aquest sistema ha canviat. Voleu continuar?"
 
-#: rdp/rdpview.cpp:220
+#: rdp/rdpview.cpp:245
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
 msgstr "El certificat ha canviat"
 
-#: rdp/rdpview.cpp:223
+#: rdp/rdpview.cpp:248
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1348,13 +1350,13 @@ msgstr ""
 "Certificat nou:\n"
 "%2"
 
-#: rdp/rdpview.cpp:256
+#: rdp/rdpview.cpp:281
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Login Failure"
 msgstr "Fallada en iniciar la sessió"
 
-#: rdp/rdpview.cpp:257
+#: rdp/rdpview.cpp:282
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1364,13 +1366,13 @@ msgstr ""
 "No s'ha pogut iniciar la sessió amb les credencials proporcionades. "
 "Comproveu el nom d'usuari i la contrasenya."
 
-#: rdp/rdpview.cpp:266
+#: rdp/rdpview.cpp:291
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Account Problems"
 msgstr "Problemes del compte"
 
-#: rdp/rdpview.cpp:267
+#: rdp/rdpview.cpp:292
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1380,13 +1382,13 @@ msgstr ""
 "El compte proporcionat no té permès iniciar la sessió en aquesta màquina. "
 "Contacteu amb l'administrador del sistema."
 
-#: rdp/rdpview.cpp:272
+#: rdp/rdpview.cpp:297
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Password Problems"
 msgstr "Problemes de contrasenya"
 
-#: rdp/rdpview.cpp:273
+#: rdp/rdpview.cpp:298
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1396,95 +1398,95 @@ msgstr ""
 "No s'ha pogut iniciar la sessió amb la contrasenya proporcionada. Contacteu "
 "amb l'administrador del sistema per a canviar-la."
 
-#: rdp/rdpview.cpp:276
+#: rdp/rdpview.cpp:301
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Lost"
 msgstr "S'ha perdut la connexió"
 
-#: rdp/rdpview.cpp:277
+#: rdp/rdpview.cpp:302
 #, kde-format
 msgctxt "@label"
 msgid "Lost connection to the server."
 msgstr "S'ha perdut la connexió amb el servidor."
 
-#: rdp/rdpview.cpp:281
+#: rdp/rdpview.cpp:306
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Server not Found"
 msgstr "No s'ha trobat el servidor"
 
-#: rdp/rdpview.cpp:282
+#: rdp/rdpview.cpp:307
 #, kde-format
 msgctxt "@label"
 msgid "Could not find the server."
 msgstr "No s'ha pogut trobar el servidor."
 
-#: rdp/rdpview.cpp:285
+#: rdp/rdpview.cpp:310
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Refused"
 msgstr "S'ha rebutjat la connexió"
 
-#: rdp/rdpview.cpp:286
+#: rdp/rdpview.cpp:311
 #, kde-format
 msgctxt "@label"
 msgid "The server refused the connection request."
 msgstr "El servidor ha rebutjat la sol·licitud de connexió."
 
-#: rdp/rdpview.cpp:291
+#: rdp/rdpview.cpp:316
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Could not Connect"
 msgstr "No s'ha pogut connectar"
 
-#: rdp/rdpview.cpp:292
+#: rdp/rdpview.cpp:317
 #, kde-format
 msgctxt "@label"
 msgid "Could not connect to the server."
 msgstr "No s'ha pogut connectar amb el servidor."
 
-#: rdp/rdpview.cpp:302 rdp/rdpview.cpp:306
+#: rdp/rdpview.cpp:327 rdp/rdpview.cpp:331
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Closed"
 msgstr "S'ha tancat la connexió"
 
-#: rdp/rdpview.cpp:307
+#: rdp/rdpview.cpp:332
 #, kde-format
 msgctxt "@label"
 msgid "The connection to the server was closed."
 msgstr "S'ha tancat la connexió amb el servidor."
 
-#: rdp/rdpview.cpp:311
+#: rdp/rdpview.cpp:336
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Failed"
 msgstr "Ha fallat la connexió"
 
-#: rdp/rdpview.cpp:312
+#: rdp/rdpview.cpp:337
 #, kde-format
 msgctxt "@label"
 msgid "An unknown error occurred"
 msgstr "S'ha produït un error desconegut"
 
-#: rdp/rdpview.cpp:326
+#: rdp/rdpview.cpp:351
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Logon Error"
 msgstr "Error de connexió"
 
-#: rdp/rdpviewfactory.cpp:25
+#: rdp/rdpviewfactory.cpp:26
 #, kde-format
 msgid "Connect to a Windows Remote Desktop (RDP)"
 msgstr "Connecta amb un escriptori remot de Windows (RDP)"
 
-#: rdp/rdpviewfactory.cpp:101
+#: rdp/rdpviewfactory.cpp:109
 #, kde-format
 msgid "New RDP Connection..."
 msgstr "Connexió RDP nova..."
 
-#: rdp/rdpviewfactory.cpp:112
+#: rdp/rdpviewfactory.cpp:120
 #, kde-format
 msgid ""
 "<html>Enter the address here. Port is optional.<br /><i>Example: "
@@ -1791,6 +1793,9 @@ msgid ""
 msgstr ""
 "<html>Introduïu l'adreça aquí.<br /><i>Exemple: vncserver:1 (ordinador:"
 "port / pantalla)</i></html>"
+
+#~ msgid "Advanced Network Settings"
+#~ msgstr "Configuració avançada de xarxa"
 
 #~ msgid "Abner Silva"
 #~ msgstr "Abner Silva"
