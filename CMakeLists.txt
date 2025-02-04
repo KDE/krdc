@@ -126,20 +126,9 @@ if(WITH_RDP)
         list(APPEND CMAKE_PREFIX_PATH /usr/local/share/cmake/Modules/WinPR3)
     endif()
 
-    # Try to find FreeRDP 3, and if not found use FreeRDP 2
-    find_package(FreeRDP 3)
-    if (FreeRDP_FOUND)
-        find_package(WinPR 3)
-        find_package(FreeRDP-Client 3)
-    else()
-        find_package(FreeRDP 2)
-        find_package(WinPR 2)
-        find_package(FreeRDP-Client 2)
-    endif()
-
-    if (NOT FreeRDP_FOUND)
-        MESSAGE(FATAL_ERROR "RDP support is enabled but FreeRDP has not been found.")
-    endif()
+    find_package(FreeRDP 3 REQUIRED)
+    find_package(WinPR 3 REQUIRED)
+    find_package(FreeRDP-Client 3 REQUIRED)
 
     MESSAGE(STATUS "Found FreeRDP version ${FreeRDP_VERSION_MAJOR}.${FreeRDP_VERSION_MINOR}.${FreeRDP_VERSION_REVISION}")
 

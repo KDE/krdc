@@ -129,15 +129,9 @@ public:
     static BOOL preConnect(freerdp *);
     static BOOL postConnect(freerdp *);
     static void postDisconnect(freerdp *);
-#if FREERDP_VERSION_MAJOR == 3
     static void postFinalDisconnect(freerdp *);
-#endif
 
-#if FREERDP_VERSION_MAJOR == 3
     static BOOL authenticateEx(freerdp *instance, char **username, char **password, char **domain, rdp_auth_reason reason);
-#else
-    static BOOL authenticate(freerdp *instance, char **username, char **password, char **domain);
-#endif
     static DWORD verifyCertificateEx(freerdp *, const char *, UINT16 port, const char *, const char *, const char *, const char *, DWORD);
     static DWORD verifyChangedCertificateEx(freerdp *,
                                             const char *,
@@ -154,20 +148,13 @@ public:
     static BOOL resizeDisplay(rdpContext *);
     static BOOL playSound(rdpContext *, const PLAY_SOUND_UPDATE *);
 
-#if FREERDP_VERSION_MAJOR == 3
     static void channelConnected(void *context, const ChannelConnectedEventArgs *e);
     static void channelDisconnected(void *context, const ChannelDisconnectedEventArgs *e);
-#else
-    static void channelConnected(void *context, ChannelConnectedEventArgs *e);
-    static void channelDisconnected(void *context, ChannelDisconnectedEventArgs *e);
-#endif
 
     static int logonErrorInfo(freerdp *rdp, UINT32 data, UINT32 type);
     static BOOL presentGatewayMessage(freerdp *instance, UINT32 type, BOOL isDisplayMandatory, BOOL isConsentMandatory, size_t length, const WCHAR *message);
-#if FREERDP_VERSION_MAJOR == 3
     static BOOL chooseSmartcard(freerdp *instance, SmartcardCertInfo **cert_list, DWORD count, DWORD *choice, BOOL gateway);
     static SSIZE_T retryDialog(freerdp *instance, const char *what, size_t current, void *userarg);
-#endif
 
     static BOOL clientGlobalInit(void);
     static void clientGlobalUninit(void);

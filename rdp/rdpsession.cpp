@@ -59,11 +59,6 @@ BOOL RdpSession::preConnect(freerdp *rdp)
         return false;
     }
 
-#if FREERDP_VERSION_MAJOR == 2
-    if (!freerdp_client_load_addins(ctx->channels, settings)) {
-        return false;
-    }
-#endif
     return true;
 }
 
@@ -128,20 +123,13 @@ void RdpSession::postDisconnect(freerdp *rdp)
     }
 }
 
-#if FREERDP_VERSION_MAJOR == 3
 void RdpSession::postFinalDisconnect(freerdp *)
 {
 }
-#endif
 
-#if FREERDP_VERSION_MAJOR == 3
 BOOL RdpSession::authenticateEx(freerdp *instance, char **username, char **password, char **domain, rdp_auth_reason reason)
 {
     Q_UNUSED(reason);
-#else
-BOOL RdpSession::authenticate(freerdp *instance, char **username, char **password, char **domain)
-{
-#endif
     auto session = reinterpret_cast<RdpContext *>(instance->context)->session;
     // TODO: this needs to handle:
     // gateway
@@ -276,7 +264,6 @@ BOOL RdpSession::presentGatewayMessage(freerdp *instance, UINT32 type, BOOL isDi
     return false;
 }
 
-#if FREERDP_VERSION_MAJOR == 3
 BOOL RdpSession::chooseSmartcard(freerdp *instance, SmartcardCertInfo **cert_list, DWORD count, DWORD *choice, BOOL gateway)
 {
     Q_UNUSED(instance);
@@ -301,7 +288,6 @@ SSIZE_T RdpSession::retryDialog(freerdp *instance, const char *what, size_t curr
     // TODO: Block for result as this might be just a informative message
     return -1;
 }
-#endif
 
 BOOL RdpSession::clientGlobalInit()
 {
@@ -335,22 +321,14 @@ BOOL RdpSession::clientContextNew(freerdp *instance, rdpContext *context)
     instance->PreConnect = preConnect;
     instance->PostConnect = postConnect;
     instance->PostDisconnect = postDisconnect;
-#if FREERDP_VERSION_MAJOR == 3
     instance->PostFinalDisconnect = postFinalDisconnect;
-#endif
-#if FREERDP_VERSION_MAJOR == 3
     instance->AuthenticateEx = authenticateEx;
-#else
-    instance->Authenticate = authenticate;
-#endif
     instance->VerifyCertificateEx = verifyCertificateEx;
     instance->VerifyChangedCertificateEx = verifyChangedCertificateEx;
     instance->LogonErrorInfo = logonErrorInfo;
     instance->PresentGatewayMessage = presentGatewayMessage;
-#if FREERDP_VERSION_MAJOR == 3
     instance->ChooseSmartcard = chooseSmartcard;
     instance->RetryDialog = retryDialog;
-#endif
     // TODO
     // instance->GetAccessToken = RdpAADView::getAccessToken;
 
@@ -551,23 +529,14 @@ int RdpSession::clientContextStart(rdpContext *context)
     if (!preferences->shareMedia().isEmpty()) {
         QByteArray name = "drive";
         QByteArray value = preferences->shareMedia().toUtf8();
-#if FREERDP_VERSION_MAJOR == 3
         const char *params[2] = {name.data(), value.data()};
-#else
-        char *params[2] = {name.data(), value.data()};
-#endif
         freerdp_client_add_device_channel(settings, 2, params);
     }
 
     if (!preferences->smartcardName().isEmpty()) {
         QByteArray name = "smartcard";
         QByteArray value = preferences->smartcardName().toLocal8Bit();
-
-#if FREERDP_VERSION_MAJOR == 3
         const char *params[2] = {name.data(), value.data()};
-#else
-        char *params[2] = {name.data(), value.data()};
-#endif
         freerdp_client_add_device_channel(settings, 2, params);
     }
 
@@ -716,15 +685,11 @@ int RdpSession::clientContextStop(rdpContext *context)
     auto kcontext = reinterpret_cast<RdpContext *>(context);
     WINPR_ASSERT(kcontext);
 
-#if FREERDP_VERSION_MAJOR == 3
     /* We do not want to use freerdp_abort_connect_context here.
      * It would change the exit code and we do not want that. */
     HANDLE event = freerdp_abort_event(context);
     if (!SetEvent(event))
         return -1;
-#else
-    freerdp_abort_connect(context->instance);
-#endif
 
     WINPR_ASSERT(kcontext->session);
     if (kcontext->session->m_thread.joinable()) {
@@ -808,11 +773,7 @@ BOOL RdpSession::playSound(rdpContext *context, const PLAY_SOUND_UPDATE *play_so
     return true;
 }
 
-#if FREERDP_VERSION_MAJOR == 3
 void RdpSession::channelConnected(void *context, const ChannelConnectedEventArgs *e)
-#else
-void RdpSession::channelConnected(void *context, ChannelConnectedEventArgs *e)
-#endif
 {
     if (strcmp(e->name, CLIPRDR_SVC_CHANNEL_NAME) == 0) {
         CliprdrClientContext *cliprdr = (CliprdrClientContext *)e->pInterface;
@@ -835,21 +796,12 @@ void RdpSession::channelConnected(void *context, ChannelConnectedEventArgs *e)
         WINPR_ASSERT(disp);
 
         session->initializeDisplay(krdp, disp);
-    } else if (strcmp(e->name, RDPGFX_DVC_CHANNEL_NAME) == 0) {
-        rdpContext *rdpC = reinterpret_cast<rdpContext *>(context);
-        gdi_graphics_pipeline_init(rdpC->gdi, (RdpgfxClientContext *)e->pInterface);
-#if FREERDP_VERSION_MAJOR == 3
     } else {
         freerdp_client_OnChannelConnectedEventHandler(context, e);
-#endif
     }
 }
 
-#if FREERDP_VERSION_MAJOR == 3
 void RdpSession::channelDisconnected(void *context, const ChannelDisconnectedEventArgs *e)
-#else
-void RdpSession::channelDisconnected(void *context, ChannelDisconnectedEventArgs *e)
-#endif
 {
     if (strcmp(e->name, CLIPRDR_SVC_CHANNEL_NAME) == 0) {
         auto session = reinterpret_cast<RdpContext *>(context)->session;
@@ -864,13 +816,8 @@ void RdpSession::channelDisconnected(void *context, ChannelDisconnectedEventArgs
         WINPR_ASSERT(disp);
         Q_UNUSED(disp);
         session->destroyDisplay();
-    } else if (strcmp(e->name, RDPGFX_DVC_CHANNEL_NAME) == 0) {
-        rdpContext *rdpC = reinterpret_cast<rdpContext *>(context);
-        gdi_graphics_pipeline_uninit(rdpC->gdi, (RdpgfxClientContext *)e->pInterface);
-#if FREERDP_VERSION_MAJOR == 3
     } else {
         freerdp_client_OnChannelDisconnectedEventHandler(context, e);
-#endif
     }
 }
 
@@ -998,15 +945,9 @@ bool RdpSession::sendEvent(QEvent *event, QWidget *source)
     case QEvent::KeyPress:
     case QEvent::KeyRelease: {
         auto keyEvent = static_cast<QKeyEvent *>(event);
-#if FREERDP_VERSION_MAJOR == 3
         const DWORD vc = GetVirtualKeyCodeFromKeycode(keyEvent->nativeScanCode(), WINPR_KEYCODE_TYPE_XKB);
         const DWORD code = GetVirtualScanCodeFromVirtualKeyCode(vc, WINPR_KBD_TYPE_IBM_ENHANCED);
         freerdp_input_send_keyboard_event_ex(input, keyEvent->type() == QEvent::KeyPress, keyEvent->isAutoRepeat(), code);
-#else
-        const DWORD vc = GetVirtualKeyCodeFromKeycode(keyEvent->nativeScanCode(), KEYCODE_TYPE_EVDEV);
-        const DWORD code = GetVirtualScanCodeFromVirtualKeyCode(vc, 4); // chosen by fair dice roll
-        freerdp_input_send_keyboard_event_ex(input, keyEvent->type() == QEvent::KeyPress, code);
-#endif
         return true;
     }
     case QEvent::MouseButtonPress:
@@ -1162,11 +1103,7 @@ void RdpSession::run()
     setState(State::Running);
 
     HANDLE handles[MAXIMUM_WAIT_OBJECTS] = {};
-#if FREERDP_VERSION_MAJOR == 3
     while (!freerdp_shall_disconnect_context(m_context.rdp)) {
-#else
-    while (!freerdp_shall_disconnect(instance)) {
-#endif
         handles[0] = timer;
         auto count = freerdp_get_event_handles(m_context.rdp, &handles[1], ARRAYSIZE(handles) - 1);
 

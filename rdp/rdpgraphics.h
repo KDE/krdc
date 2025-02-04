@@ -16,11 +16,7 @@ public:
 
     static BOOL onPointerNew(rdpContext *context, rdpPointer *pointer);
     static void onPointerFree(rdpContext *context, rdpPointer *pointer);
-#if FREERDP_VERSION_MAJOR == 3
     static BOOL onPointerSet(rdpContext *context, rdpPointer *pointer);
-#else
-    static BOOL onPointerSet(rdpContext *context, const rdpPointer *pointer);
-#endif
     static BOOL onPointerSetNull(rdpContext *context);
     static BOOL onPointerSetDefault(rdpContext *context);
     static BOOL onPointerSetPosition(rdpContext *context, UINT32 x, UINT32 y);

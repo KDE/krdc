@@ -55,11 +55,7 @@ void RdpGraphics::onPointerFree(rdpContext *context, rdpPointer *pointer)
     }
 }
 
-#if FREERDP_VERSION_MAJOR == 3
 BOOL RdpGraphics::onPointerSet(rdpContext *context, rdpPointer *pointer)
-#else
-BOOL RdpGraphics::onPointerSet(rdpContext *context, const rdpPointer *pointer)
-#endif
 {
     auto rctx = reinterpret_cast<RdpContext *>(context);
     WINPR_ASSERT(rctx);
@@ -67,11 +63,7 @@ BOOL RdpGraphics::onPointerSet(rdpContext *context, const rdpPointer *pointer)
     auto session = rctx->session;
     WINPR_ASSERT(session);
 
-#if FREERDP_VERSION_MAJOR == 3
     auto ptx = reinterpret_cast<krdcPointer *>(pointer);
-#else
-    auto ptx = reinterpret_cast<const krdcPointer *>(pointer);
-#endif
     WINPR_ASSERT(ptx);
 
     auto view = session->rdpView();

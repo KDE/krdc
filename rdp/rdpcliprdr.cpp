@@ -47,13 +47,8 @@ UINT RdpClipboard::onSendClientFormatList(CliprdrClientContext *cliprdr)
     }
 
     CLIPRDR_FORMAT_LIST formatList = {};
-#if FREERDP_VERSION_MAJOR == 3
     formatList.common.msgType = CB_FORMAT_LIST;
     formatList.common.msgFlags = 0;
-#else
-    formatList.msgType = CB_FORMAT_LIST;
-    formatList.msgFlags = 0;
-#endif
     formatList.numFormats = numFormats;
     formatList.formats = formats;
 
@@ -79,13 +74,8 @@ UINT RdpClipboard::onSendClientFormatDataRequest(CliprdrClientContext *cliprdr, 
     }
 
     CLIPRDR_FORMAT_DATA_REQUEST formatDataRequest = {};
-#if FREERDP_VERSION_MAJOR == 3
     formatDataRequest.common.msgType = CB_FORMAT_DATA_REQUEST;
     formatDataRequest.common.msgFlags = 0;
-#else
-    formatDataRequest.msgType = CB_FORMAT_DATA_REQUEST;
-    formatDataRequest.msgFlags = 0;
-#endif
     formatDataRequest.requestedFormatId = formatId;
 
     kclip->m_requestedFormatId = formatId;
@@ -240,22 +230,12 @@ UINT RdpClipboard::onServerFormatDataRequest(CliprdrClientContext *cliprdr, cons
 
     CLIPRDR_FORMAT_DATA_RESPONSE response = {};
     if (data) {
-#if FREERDP_VERSION_MAJOR == 3
         response.common.msgFlags = CB_RESPONSE_OK;
         response.common.dataLen = size;
-#else
-        response.msgFlags = CB_RESPONSE_OK;
-        response.dataLen = size;
-#endif
         response.requestedFormatData = data;
     } else {
-#if FREERDP_VERSION_MAJOR == 3
         response.common.msgFlags = CB_RESPONSE_FAIL;
         response.common.dataLen = 0;
-#else
-        response.msgFlags = CB_RESPONSE_FAIL;
-        response.dataLen = 0;
-#endif
         response.requestedFormatData = nullptr;
     }
 
@@ -290,11 +270,7 @@ UINT RdpClipboard::onServerFormatDataResponse(CliprdrClientContext *cliprdr, con
         formatId = format->formatId;
     }
 
-#if FREERDP_VERSION_MAJOR == 3
     UINT32 size = formatDataResponse->common.dataLen;
-#else
-    UINT32 size = formatDataResponse->dataLen;
-#endif
     if (!ClipboardSetData(kclip->m_clipboard, formatId, formatDataResponse->requestedFormatData, size)) {
         return ERROR_INTERNAL_ERROR;
     }
