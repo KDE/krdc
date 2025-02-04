@@ -82,6 +82,10 @@ void RdpView::scaleResize(int w, int h)
 
     // handle window resizes
     resize(sizeHint());
+
+    if (m_session) {
+        m_session->sendResizeEvent(QSize(w, h) * devicePixelRatio());
+    }
 }
 
 QSize RdpView::sizeHint() const
@@ -358,7 +362,7 @@ HostPreferences *RdpView::hostPreferences()
 
 QPixmap RdpView::takeScreenshot()
 {
-    if (!m_session->videoBuffer()->isNull()) {
+    if (m_session && !m_session->videoBuffer()->isNull()) {
         return QPixmap::fromImage(*m_session->videoBuffer());
     }
     return QPixmap{};
@@ -422,15 +426,14 @@ QSize RdpView::initialSize()
         return QSize{1600, 900};
     case RdpHostPreferences::Resolution::Large:
         return QSize{1920, 1080};
-    case RdpHostPreferences::Resolution::MatchWindow:
-        return parentWidget()->size();
     case RdpHostPreferences::Resolution::MatchScreen:
         return window()->windowHandle()->screen()->size();
     case RdpHostPreferences::Resolution::Custom:
         return QSize{m_hostPreferences->width(), m_hostPreferences->height()};
+    case RdpHostPreferences::Resolution::MatchWindow:
+    default:
+        return parentWidget()->size() * devicePixelRatio();
     }
-
-    return parentWidget()->size();
 }
 
 void RdpView::savePassword(const QString &password)
@@ -440,7 +443,7 @@ void RdpView::savePassword(const QString &password)
 
 void RdpView::paintEvent(QPaintEvent *event)
 {
-    if (m_session->videoBuffer()->isNull()) {
+    if (!m_session || m_session->videoBuffer()->isNull()) {
         return;
     }
 
@@ -462,17 +465,23 @@ void RdpView::paintEvent(QPaintEvent *event)
 
 void RdpView::handleKeyEvent(QKeyEvent *event)
 {
-    m_session->sendEvent(event, this);
+    if (m_session) {
+        m_session->sendEvent(event, this);
+    }
 }
 
 void RdpView::handleMouseEvent(QMouseEvent *event)
 {
-    m_session->sendEvent(event, this);
+    if (m_session) {
+        m_session->sendEvent(event, this);
+    }
 }
 
 void RdpView::handleWheelEvent(QWheelEvent *event)
 {
-    m_session->sendEvent(event, this);
+    if (m_session) {
+        m_session->sendEvent(event, this);
+    }
 }
 
 void RdpView::onRectangleUpdated(const QRect &rect)
@@ -483,5 +492,7 @@ void RdpView::onRectangleUpdated(const QRect &rect)
 
 void RdpView::handleLocalClipboardChanged(const QMimeData *data)
 {
-    m_session->sendClipboard(data);
+    if (m_session) {
+        m_session->sendClipboard(data);
+    }
 }

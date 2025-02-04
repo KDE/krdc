@@ -190,8 +190,8 @@ void RdpHostPreferences::updateWidthHeight(Resolution resolution)
             window = window->parentWidget();
         }
         if (window) {
-            rdpUi.kcfg_Width->setValue(window->width());
-            rdpUi.kcfg_Height->setValue(window->height());
+            rdpUi.kcfg_Width->setValue(window->width() * window->devicePixelRatio());
+            rdpUi.kcfg_Height->setValue(window->height() * window->devicePixelRatio());
         }
         break;
     }

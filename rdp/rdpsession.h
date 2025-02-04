@@ -14,10 +14,12 @@
 #include <QSize>
 
 #include <freerdp/client/cliprdr.h>
+#include <freerdp/client/disp.h>
 #include <freerdp/freerdp.h>
 #include <freerdp/version.h>
 
 class RdpClipboard;
+class RdpDisplay;
 class RdpGraphics;
 class RdpSession;
 class RdpView;
@@ -29,6 +31,7 @@ struct RdpContext {
 
     RdpSession *session = nullptr;
     RdpClipboard *clipboard = nullptr;
+    RdpDisplay *display = nullptr;
 };
 
 struct Certificate {
@@ -102,8 +105,11 @@ public:
     bool sendEvent(QEvent *event, QWidget *source);
 
     void initializeClipboard(RdpContext *krdp, CliprdrClientContext *cliprdr);
+    void initializeDisplay(RdpContext *krdp, DispClientContext *disp);
     void destroyClipboard();
+    void destroyDisplay();
     bool sendClipboard(const QMimeData *data);
+    bool sendResizeEvent(const QSize newSize);
 
     const QImage *videoBuffer() const;
 
@@ -193,6 +199,7 @@ private:
     } m_context;
 
     std::unique_ptr<RdpClipboard> m_clipboard;
+    std::unique_ptr<RdpDisplay> m_display;
     std::unique_ptr<RdpGraphics> m_graphics;
 
     State m_state = State::Initial;

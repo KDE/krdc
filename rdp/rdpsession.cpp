@@ -5,6 +5,7 @@
 
 #include "rdpsession.h"
 #include "rdpcliprdr.h"
+#include "rdpdisp.h"
 #include "rdpgraphics.h"
 #include "rdphostpreferences.h"
 
@@ -398,6 +399,15 @@ int RdpSession::clientContextStart(rdpContext *context)
             return -1;
         }
         if (!freerdp_settings_set_uint32(settings, FreeRDP_DesktopHeight, session->m_size.height())) {
+            return -1;
+        }
+    }
+
+    if (preferences->resolution() == RdpHostPreferences::Resolution::MatchWindow) {
+        if (!freerdp_settings_set_bool(settings, FreeRDP_SupportDisplayControl, true)) {
+            return -1;
+        }
+        if (!freerdp_settings_set_bool(settings, FreeRDP_DynamicResolutionUpdate, true)) {
             return -1;
         }
     }
@@ -811,21 +821,24 @@ void RdpSession::channelConnected(void *context, ChannelConnectedEventArgs *e)
     if (strcmp(e->name, CLIPRDR_SVC_CHANNEL_NAME) == 0) {
         CliprdrClientContext *cliprdr = (CliprdrClientContext *)e->pInterface;
 
-        auto session = reinterpret_cast<RdpContext *>(context)->session;
-        WINPR_ASSERT(session);
-
         auto krdp = reinterpret_cast<RdpContext *>(context);
         WINPR_ASSERT(krdp);
 
+        auto session = krdp->session;
+        WINPR_ASSERT(session);
+
         session->initializeClipboard(krdp, cliprdr);
     } else if (strcmp(e->name, DISP_DVC_CHANNEL_NAME) == 0) {
+        auto krdp = reinterpret_cast<RdpContext *>(context);
+        WINPR_ASSERT(krdp);
+
+        auto session = krdp->session;
+        WINPR_ASSERT(session);
+
         auto disp = reinterpret_cast<DispClientContext *>(e->pInterface);
         WINPR_ASSERT(disp);
-        Q_UNUSED(disp);
-        // TODO: Implement display channel
-        // TODO: Should be fairly easy as you only need to provide monitor(=fullscreen or multimonitor) or window (=single monitor on RDP side) layout
-        // (orientation, resolution, dpi, ...) on size / dpi / ... change. word of advice: do not send more than one update per second (some windows servers
-        // crash the session otherwise)
+
+        session->initializeDisplay(krdp, disp);
     } else if (strcmp(e->name, RDPGFX_DVC_CHANNEL_NAME) == 0) {
         rdpContext *rdpC = reinterpret_cast<rdpContext *>(context);
         gdi_graphics_pipeline_init(rdpC->gdi, (RdpgfxClientContext *)e->pInterface);
@@ -848,10 +861,13 @@ void RdpSession::channelDisconnected(void *context, ChannelDisconnectedEventArgs
 
         session->destroyClipboard();
     } else if (strcmp(e->name, DISP_DVC_CHANNEL_NAME) == 0) {
+        auto session = reinterpret_cast<RdpContext *>(context)->session;
+        WINPR_ASSERT(session);
+
         auto disp = reinterpret_cast<DispClientContext *>(e->pInterface);
         WINPR_ASSERT(disp);
         Q_UNUSED(disp);
-        // TODO: Implement display channel
+        session->destroyDisplay();
     } else if (strcmp(e->name, RDPGFX_DVC_CHANNEL_NAME) == 0) {
         rdpContext *rdpC = reinterpret_cast<rdpContext *>(context);
         gdi_graphics_pipeline_uninit(rdpC->gdi, (RdpgfxClientContext *)e->pInterface);
@@ -1207,4 +1223,28 @@ bool RdpSession::sendClipboard(const QMimeData *data)
     }
 
     return m_clipboard->sendClipboard(data);
+}
+
+void RdpSession::initializeDisplay(RdpContext *krdp, DispClientContext *disp)
+{
+    if (!krdp || !disp) {
+        return;
+    }
+    m_display = std::make_unique<RdpDisplay>(krdp, disp);
+}
+
+void RdpSession::destroyDisplay()
+{
+    if (m_display) {
+        m_display.reset(nullptr);
+    }
+}
+
+bool RdpSession::sendResizeEvent(const QSize newSize)
+{
+    if (!m_display) {
+        return false;
+    }
+
+    return m_display->sendResizeEvent(newSize);
 }
