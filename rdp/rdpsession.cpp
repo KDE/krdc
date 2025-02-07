@@ -106,10 +106,6 @@ BOOL RdpSession::postConnect(freerdp *rdp)
     ctx->update->DesktopResize = resizeDisplay;
     ctx->update->PlaySound = playSound;
 
-    auto keyboardLayout = freerdp_settings_get_uint32(settings, FreeRDP_KeyboardLayout);
-    auto keyboardRemappingList = freerdp_settings_get_string(settings, FreeRDP_KeyboardRemappingList);
-    freerdp_keyboard_init_ex(keyboardLayout, keyboardRemappingList);
-
     session->m_graphics = std::make_unique<RdpGraphics>(ctx->graphics);
 
     return true;
@@ -1002,10 +998,13 @@ bool RdpSession::sendEvent(QEvent *event, QWidget *source)
     case QEvent::KeyPress:
     case QEvent::KeyRelease: {
         auto keyEvent = static_cast<QKeyEvent *>(event);
-        auto code = freerdp_keyboard_get_rdp_scancode_from_x11_keycode(keyEvent->nativeScanCode());
 #if FREERDP_VERSION_MAJOR == 3
+        const DWORD vc = GetVirtualKeyCodeFromKeycode(keyEvent->nativeScanCode(), WINPR_KEYCODE_TYPE_XKB);
+        const DWORD code = GetVirtualScanCodeFromVirtualKeyCode(vc, WINPR_KBD_TYPE_IBM_ENHANCED);
         freerdp_input_send_keyboard_event_ex(input, keyEvent->type() == QEvent::KeyPress, keyEvent->isAutoRepeat(), code);
 #else
+        const DWORD vc = GetVirtualKeyCodeFromKeycode(keyEvent->nativeScanCode(), KEYCODE_TYPE_EVDEV);
+        const DWORD code = GetVirtualScanCodeFromVirtualKeyCode(vc, 4); // chosen by fair dice roll
         freerdp_input_send_keyboard_event_ex(input, keyEvent->type() == QEvent::KeyPress, code);
 #endif
         return true;
