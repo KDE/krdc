@@ -17,6 +17,7 @@
 #include <KShell>
 #include <KWindowSystem>
 
+#include <QChar>
 #include <QDir>
 #include <QEvent>
 #include <QInputDialog>
@@ -43,11 +44,20 @@ RdpView::RdpView(QWidget *parent, const QUrl &url, KConfigGroup configGroup, con
         m_user = m_url.userName();
     }
 
-    if (m_domain.isEmpty() && m_url.hasQuery()) {
-        QUrlQuery query(m_url);
-        QString queryDomain = query.queryItemValue(QStringLiteral("domain"));
-        if (!queryDomain.isEmpty()) {
-            m_domain = queryDomain;
+    if (m_domain.isEmpty()) {
+        if (m_url.hasQuery()) {
+            QUrlQuery query(m_url);
+            QString queryDomain = query.queryItemValue(QStringLiteral("domain"));
+            if (!queryDomain.isEmpty()) {
+                m_domain = queryDomain;
+            }
+        } else {
+            // convert legacy DOMAIN\\user@host URLs
+            QStringList splitted = m_user.split(QChar::fromLatin1('\\'));
+            if (splitted.size() == 2) {
+                m_domain = splitted[0];
+                m_user = splitted[1];
+            }
         }
     }
 
