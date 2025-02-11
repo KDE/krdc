@@ -300,8 +300,6 @@ BOOL RdpSession::clientGlobalInit()
         return false;
     }
 #endif
-    if (freerdp_handle_signals() != 0)
-        return false;
 
     return true;
 }
