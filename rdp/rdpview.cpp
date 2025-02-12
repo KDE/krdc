@@ -181,6 +181,8 @@ bool RdpView::start()
     connect(m_session.get(), &RdpSession::onVerifyCertificate, this, &RdpView::onVerifyCertificate, Qt::BlockingQueuedConnection);
     connect(m_session.get(), &RdpSession::onVerifyChangedCertificate, this, &RdpView::onVerifyChangedCertificate, Qt::BlockingQueuedConnection);
 
+    connect(m_session.get(), &RdpSession::cursorChanged, this, &RdpView::setRemoteCursor);
+
     setStatus(RdpView::Connecting);
     if (!m_session->start()) {
         Q_EMIT disconnected();
@@ -406,7 +408,7 @@ void RdpView::showLocalCursor(LocalCursorState state)
     }
 }
 
-void RdpView::setRemoteCursor(QCursor cursor)
+void RdpView::setRemoteCursor(const QCursor cursor)
 {
     m_remoteCursor = cursor;
     if (m_localCursorState != CursorOn) {

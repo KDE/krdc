@@ -1182,3 +1182,8 @@ bool RdpSession::sendResizeEvent(const QSize newSize)
 
     return m_display->sendResizeEvent(newSize);
 }
+
+void RdpSession::setRemoteCursor(const QCursor &cursor)
+{
+    Q_EMIT cursorChanged(cursor);
+}

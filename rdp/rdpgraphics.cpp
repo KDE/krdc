@@ -73,7 +73,7 @@ BOOL RdpGraphics::onPointerSet(rdpContext *context, rdpPointer *pointer)
         auto scale = destSize.width() / srcSize.width();
         auto cursor = QCursor(ptx->pixmap->scaledToWidth(pointer->width * scale, Qt::SmoothTransformation), pointer->xPos * scale, pointer->yPos * scale);
 
-        view->setRemoteCursor(cursor);
+        session->setRemoteCursor(cursor);
         return true;
     }
     return false;
@@ -87,12 +87,8 @@ BOOL RdpGraphics::onPointerSetNull(rdpContext *context)
     auto session = rctx->session;
     WINPR_ASSERT(session);
 
-    auto view = session->rdpView();
-    if (view) {
-        view->setRemoteCursor(Qt::BlankCursor);
-        return true;
-    }
-    return false;
+    session->setRemoteCursor(Qt::BlankCursor);
+    return true;
 }
 
 BOOL RdpGraphics::onPointerSetDefault(rdpContext *context)
@@ -103,12 +99,8 @@ BOOL RdpGraphics::onPointerSetDefault(rdpContext *context)
     auto session = rctx->session;
     WINPR_ASSERT(session);
 
-    auto view = session->rdpView();
-    if (view) {
-        view->setRemoteCursor(Qt::ArrowCursor);
-        return true;
-    }
-    return false;
+    session->setRemoteCursor(Qt::ArrowCursor);
+    return true;
 }
 
 BOOL RdpGraphics::onPointerSetPosition(rdpContext *context, UINT32 x, UINT32 y)

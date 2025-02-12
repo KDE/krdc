@@ -110,6 +110,7 @@ public:
     void destroyDisplay();
     bool sendClipboard(const QMimeData *data);
     bool sendResizeEvent(const QSize newSize);
+    void setRemoteCursor(const QCursor &cursor);
 
     const QImage *videoBuffer() const;
 
@@ -120,6 +121,8 @@ public:
     Q_SIGNAL void onVerifyCertificate(RdpSession::CertificateResult *ret, const QString &certificate);
     Q_SIGNAL void onVerifyChangedCertificate(RdpSession::CertificateResult *ret, const QString &oldCertificate, const QString &newCertificate);
     Q_SIGNAL void onLogonError(const QString &error);
+
+    Q_SIGNAL void cursorChanged(const QCursor cursor);
 
     RdpView *rdpView()
     {

@@ -50,7 +50,6 @@ public:
     bool supportsLocalCursor() const override;
     bool supportsViewOnly() const override;
 
-    void setRemoteCursor(QCursor cursor);
     void showLocalCursor(LocalCursorState state) override;
     bool scaling() const override;
     void enableScaling(bool scale) override;
@@ -65,6 +64,7 @@ public Q_SLOTS:
     void onVerifyCertificate(RdpSession::CertificateResult *ret, const QString &certificate);
     void onVerifyChangedCertificate(RdpSession::CertificateResult *ret, const QString &oldCertificate, const QString &newCertificate);
     void onLogonError(const QString &error);
+    void setRemoteCursor(const QCursor cursor);
 
 protected:
     QSize initialSize();
