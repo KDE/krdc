@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-12 00:41+0000\n"
-"PO-Revision-Date: 2024-12-29 12:45+0100\n"
+"POT-Creation-Date: 2025-02-13 00:44+0000\n"
+"PO-Revision-Date: 2025-02-12 07:01+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -682,9 +682,7 @@ msgstr "Filtrilo"
 
 #. i18n: ectx: attribute (title), widget (QWidget, mainSettingsTab)
 #: rdp/rdppreferences.ui:21
-#, fuzzy, kde-format
-#| msgctxt "General Config"
-#| msgid "General"
+#, kde-format
 msgid "General"
 msgstr "Ĝenerala"
 
@@ -1275,7 +1273,7 @@ msgstr "RPC"
 msgid "Domain:"
 msgstr "Retregiono:"
 
-#: rdp/rdpsession.cpp:826
+#: rdp/rdpsession.cpp:824
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1291,43 +1289,43 @@ msgstr ""
 "Eldonanto: %5\n"
 "Fingrosigno: %6\n"
 
-#: rdp/rdpview.cpp:190
+#: rdp/rdpview.cpp:202
 #, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
 msgstr "Aliro al ĉi tiu sistemo postulas uzantnomon kaj pasvorton."
 
-#: rdp/rdpview.cpp:223
+#: rdp/rdpview.cpp:235
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr "La atestilo por ĉi tiu sistemo estas nekonata. Ĉu vi volas daŭrigi?"
 
-#: rdp/rdpview.cpp:224
+#: rdp/rdpview.cpp:236
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
 msgstr "Konfirmi Atestilon"
 
-#: rdp/rdpview.cpp:229 rdp/rdpview.cpp:254
+#: rdp/rdpview.cpp:241 rdp/rdpview.cpp:266
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
 msgstr "Memori ĉi tiun atestilon"
 
-#: rdp/rdpview.cpp:248
+#: rdp/rdpview.cpp:260
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
 msgstr "La atestilo por ĉi tiu sistemo ŝanĝiĝis. Ĉu vi volas daŭrigi?"
 
-#: rdp/rdpview.cpp:249
+#: rdp/rdpview.cpp:261
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
 msgstr "Atestilo Ŝanĝiĝis"
 
-#: rdp/rdpview.cpp:252
+#: rdp/rdpview.cpp:264
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1341,13 +1339,13 @@ msgstr ""
 "Nova atestilo:\n"
 "%2"
 
-#: rdp/rdpview.cpp:285
+#: rdp/rdpview.cpp:297
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Login Failure"
 msgstr "Malsukceso Ensaluti"
 
-#: rdp/rdpview.cpp:286
+#: rdp/rdpview.cpp:298
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1357,13 +1355,13 @@ msgstr ""
 "Ne eblas ensaluti kun la provizitaj akreditaĵoj. Bonvolu kontroli la uzanton "
 "kaj pasvorton."
 
-#: rdp/rdpview.cpp:295
+#: rdp/rdpview.cpp:307
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Account Problems"
 msgstr "Kontaj Problemoj"
 
-#: rdp/rdpview.cpp:296
+#: rdp/rdpview.cpp:308
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1373,13 +1371,13 @@ msgstr ""
 "La provizita konto ne rajtas ensaluti al ĉi tiu maŝino. Bonvolu kontakti "
 "vian sisteman administranton."
 
-#: rdp/rdpview.cpp:301
+#: rdp/rdpview.cpp:313
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Password Problems"
 msgstr "Pasvortaj Problemoj"
 
-#: rdp/rdpview.cpp:302
+#: rdp/rdpview.cpp:314
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1389,79 +1387,79 @@ msgstr ""
 "Ne eblas ensaluti per la provizita pasvorto. Bonvolu kontakti vian sisteman "
 "administranton por ŝanĝi ĝin."
 
-#: rdp/rdpview.cpp:305
+#: rdp/rdpview.cpp:317
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Lost"
 msgstr "Konekto Perdiĝis"
 
-#: rdp/rdpview.cpp:306
+#: rdp/rdpview.cpp:318
 #, kde-format
 msgctxt "@label"
 msgid "Lost connection to the server."
 msgstr "Perdis konekton al la servilo."
 
-#: rdp/rdpview.cpp:310
+#: rdp/rdpview.cpp:322
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Server not Found"
 msgstr "Servilo ne Trovita"
 
-#: rdp/rdpview.cpp:311
+#: rdp/rdpview.cpp:323
 #, kde-format
 msgctxt "@label"
 msgid "Could not find the server."
 msgstr "Ne eblis trovi la servilon."
 
-#: rdp/rdpview.cpp:314
+#: rdp/rdpview.cpp:326
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Refused"
 msgstr "Konekto Rifuzita"
 
-#: rdp/rdpview.cpp:315
+#: rdp/rdpview.cpp:327
 #, kde-format
 msgctxt "@label"
 msgid "The server refused the connection request."
 msgstr "La servilo rifuzis la konektopeton."
 
-#: rdp/rdpview.cpp:320
+#: rdp/rdpview.cpp:332
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Could not Connect"
 msgstr "Ne Eblis Konekti"
 
-#: rdp/rdpview.cpp:321
+#: rdp/rdpview.cpp:333
 #, kde-format
 msgctxt "@label"
 msgid "Could not connect to the server."
 msgstr "Ne eblis konekti al la servilo."
 
-#: rdp/rdpview.cpp:331 rdp/rdpview.cpp:335
+#: rdp/rdpview.cpp:343 rdp/rdpview.cpp:347
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Closed"
 msgstr "Konekto Fermita"
 
-#: rdp/rdpview.cpp:336
+#: rdp/rdpview.cpp:348
 #, kde-format
 msgctxt "@label"
 msgid "The connection to the server was closed."
 msgstr "La konekto al la servilo estis fermita."
 
-#: rdp/rdpview.cpp:340
+#: rdp/rdpview.cpp:352
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Failed"
 msgstr "Konekto Malsukcesis"
 
-#: rdp/rdpview.cpp:341
+#: rdp/rdpview.cpp:353
 #, kde-format
 msgctxt "@label"
 msgid "An unknown error occurred"
 msgstr "Nekonata eraro okazis"
 
-#: rdp/rdpview.cpp:355
+#: rdp/rdpview.cpp:367
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Logon Error"
@@ -1782,6 +1780,3 @@ msgid ""
 msgstr ""
 "<html>Enigu la adreson ĉi tie.<br /><i>Ekzemplo: vncserver:1 (gastiganto:"
 "pordo / ekrano)</i></html>"
-
-#~ msgid "Advanced Network Settings"
-#~ msgstr "Altnivelaj Retaj Agordoj"

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-12 00:41+0000\n"
+"POT-Creation-Date: 2025-02-13 00:44+0000\n"
 "PO-Revision-Date: 2025-02-01 09:53+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -1292,7 +1292,7 @@ msgstr "RPC"
 msgid "Domain:"
 msgstr "Домен:"
 
-#: rdp/rdpsession.cpp:826
+#: rdp/rdpsession.cpp:824
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1308,43 +1308,43 @@ msgstr ""
 "Видавець: %5\n"
 "Відбиток: %6\n"
 
-#: rdp/rdpview.cpp:190
+#: rdp/rdpview.cpp:202
 #, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
 msgstr "Для доступу до цієї системи потрібен ім'я користувача і пароль."
 
-#: rdp/rdpview.cpp:223
+#: rdp/rdpview.cpp:235
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr "Сертифікат для цієї системи є невідомим. Хочете продовжувати?"
 
-#: rdp/rdpview.cpp:224
+#: rdp/rdpview.cpp:236
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
 msgstr "Перевірка сертифіката"
 
-#: rdp/rdpview.cpp:229 rdp/rdpview.cpp:254
+#: rdp/rdpview.cpp:241 rdp/rdpview.cpp:266
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
 msgstr "Запам'ятати цей сертифікат"
 
-#: rdp/rdpview.cpp:248
+#: rdp/rdpview.cpp:260
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
 msgstr "Сертифікат для цієї системи було змінено. Хочете продовжувати?"
 
-#: rdp/rdpview.cpp:249
+#: rdp/rdpview.cpp:261
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
 msgstr "Сертифікат змінено"
 
-#: rdp/rdpview.cpp:252
+#: rdp/rdpview.cpp:264
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1358,13 +1358,13 @@ msgstr ""
 "Новий сертифікат:\n"
 "%2"
 
-#: rdp/rdpview.cpp:285
+#: rdp/rdpview.cpp:297
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Login Failure"
 msgstr "Помилка під час входу до системи"
 
-#: rdp/rdpview.cpp:286
+#: rdp/rdpview.cpp:298
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1374,13 +1374,13 @@ msgstr ""
 "Не вдалося увійти за допомогою наданих реєстраційних даних. Будь ласка, ще "
 "раз перевірте, чи правильно вказано користувача і пароль."
 
-#: rdp/rdpview.cpp:295
+#: rdp/rdpview.cpp:307
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Account Problems"
 msgstr "Проблеми з обліковим записом"
 
-#: rdp/rdpview.cpp:296
+#: rdp/rdpview.cpp:308
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1390,13 +1390,13 @@ msgstr ""
 "Наданому обліковому запису заборонено вхід до системи цього комп'ютера. Будь "
 "ласка, зверніться до адміністратора системи."
 
-#: rdp/rdpview.cpp:301
+#: rdp/rdpview.cpp:313
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Password Problems"
 msgstr "Проблеми з паролем"
 
-#: rdp/rdpview.cpp:302
+#: rdp/rdpview.cpp:314
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1406,79 +1406,79 @@ msgstr ""
 "Не вдалося увійти за допомогою наданого пароля. Будь ласка, зверніться до "
 "адміністратора системи, щоб його змінити."
 
-#: rdp/rdpview.cpp:305
+#: rdp/rdpview.cpp:317
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Lost"
 msgstr "З'єднання розірвано"
 
-#: rdp/rdpview.cpp:306
+#: rdp/rdpview.cpp:318
 #, kde-format
 msgctxt "@label"
 msgid "Lost connection to the server."
 msgstr "З'єднання з сервером розірвано."
 
-#: rdp/rdpview.cpp:310
+#: rdp/rdpview.cpp:322
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Server not Found"
 msgstr "Сервер не знайдено"
 
-#: rdp/rdpview.cpp:311
+#: rdp/rdpview.cpp:323
 #, kde-format
 msgctxt "@label"
 msgid "Could not find the server."
 msgstr "Не вдалося знайти сервер."
 
-#: rdp/rdpview.cpp:314
+#: rdp/rdpview.cpp:326
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Refused"
 msgstr "У з'єднанні відмовлено"
 
-#: rdp/rdpview.cpp:315
+#: rdp/rdpview.cpp:327
 #, kde-format
 msgctxt "@label"
 msgid "The server refused the connection request."
 msgstr "Сервером відмовлено у запиті щодо з'єднання"
 
-#: rdp/rdpview.cpp:320
+#: rdp/rdpview.cpp:332
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Could not Connect"
 msgstr "Не вдалося з'єднатися"
 
-#: rdp/rdpview.cpp:321
+#: rdp/rdpview.cpp:333
 #, kde-format
 msgctxt "@label"
 msgid "Could not connect to the server."
 msgstr "Не вдалося встановити з’єднання із сервером."
 
-#: rdp/rdpview.cpp:331 rdp/rdpview.cpp:335
+#: rdp/rdpview.cpp:343 rdp/rdpview.cpp:347
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Closed"
 msgstr "З'єднання закрито"
 
-#: rdp/rdpview.cpp:336
+#: rdp/rdpview.cpp:348
 #, kde-format
 msgctxt "@label"
 msgid "The connection to the server was closed."
 msgstr "З'єднання з сервером було розірвано."
 
-#: rdp/rdpview.cpp:340
+#: rdp/rdpview.cpp:352
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Failed"
 msgstr "Невдала спроба з’єднання"
 
-#: rdp/rdpview.cpp:341
+#: rdp/rdpview.cpp:353
 #, kde-format
 msgctxt "@label"
 msgid "An unknown error occurred"
 msgstr "Сталася невідома помилка"
 
-#: rdp/rdpview.cpp:355
+#: rdp/rdpview.cpp:367
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Logon Error"
