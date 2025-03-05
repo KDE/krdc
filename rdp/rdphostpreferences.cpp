@@ -150,6 +150,7 @@ QWidget *RdpHostPreferences::createProtocolSpecificConfigPage()
     rdpUi.kcfg_TLSSecurity->setChecked(securityTLS());
     rdpUi.kcfg_RDPSecurity->setChecked(securityRDP());
     rdpUi.kcfg_EXTSecurity->setChecked(securityEXT());
+    rdpUi.kcfg_AuthPkgList->setText(authPkgList());
 
     // Have to call updateWidthHeight() here
     // We leverage the final part of this function to enable/disable kcfg_Height and kcfg_Width
@@ -245,6 +246,7 @@ void RdpHostPreferences::acceptConfig()
     setSecurityTLS(rdpUi.kcfg_TLSSecurity->isChecked());
     setSecurityRDP(rdpUi.kcfg_RDPSecurity->isChecked());
     setSecurityEXT(rdpUi.kcfg_EXTSecurity->isChecked());
+    setAuthPkgList(rdpUi.kcfg_AuthPkgList->text());
 }
 
 bool RdpHostPreferences::scaleToSize() const
@@ -471,4 +473,12 @@ bool RdpHostPreferences::securityEXT() const
 void RdpHostPreferences::setSecurityEXT(bool enabled)
 {
     m_configGroup.writeEntry("securityEXT", enabled);
+}
+QString RdpHostPreferences::authPkgList() const
+{
+    return m_configGroup.readEntry("authPkgList", Settings::authPkgList());
+}
+void RdpHostPreferences::setAuthPkgList(const QString &authPkgList)
+{
+    m_configGroup.writeEntry("authPkgList", authPkgList);
 }

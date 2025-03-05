@@ -140,6 +140,9 @@ public:
     bool securityEXT() const;
     void setSecurityEXT(bool enabled);
 
+    QString authPkgList() const;
+    void setAuthPkgList(const QString &authPkgList);
+
 protected:
     QWidget *createProtocolSpecificConfigPage() override;
     void acceptConfig() override;

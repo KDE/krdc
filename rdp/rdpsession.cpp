@@ -589,6 +589,11 @@ int RdpSession::clientContextStart(rdpContext *context)
         return -1;
     }
 
+    if (!preferences->authPkgList().isEmpty()
+        && !freerdp_settings_set_string(settings, FreeRDP_AuthenticationPackageList, preferences->authPkgList().toUtf8().data())) {
+        return -1;
+    }
+
     const auto proxyHostAddress = QUrl(preferences->proxyHost());
     if (!proxyHostAddress.isEmpty()) {
         int defaultPort = 8080;
