@@ -68,6 +68,19 @@ public:
         RPC
     };
 
+    enum class DesktopScaleFactor {
+        Auto,
+        DoNotScale,
+        Custom
+    };
+
+    enum class DeviceScaleFactor {
+        Auto,
+        Factor100,
+        Factor140,
+        Factor180
+    };
+
     explicit RdpHostPreferences(KConfigGroup configGroup, QObject *parent = nullptr);
     ~RdpHostPreferences() override;
 
@@ -143,6 +156,15 @@ public:
     QString authPkgList() const;
     void setAuthPkgList(const QString &authPkgList);
 
+    DesktopScaleFactor desktopScaleFactor() const;
+    void setDesktopScaleFactor(DesktopScaleFactor desktopScaleFactor);
+
+    int desktopScaleFactorCustom() const;
+    void setDesktopScaleFactorCustom(int desktopScaleFactorCustom);
+
+    DeviceScaleFactor deviceScaleFactor() const;
+    void setDeviceScaleFactor(DeviceScaleFactor deviceScaleFactor);
+
 protected:
     QWidget *createProtocolSpecificConfigPage() override;
     void acceptConfig() override;
@@ -150,6 +172,7 @@ protected:
 private:
     void updateWidthHeight(Resolution resolution);
     void updateColorDepth(Acceleration acceleration);
+    void updateDesktopScaleFactor(DesktopScaleFactor desktopScaleFactor);
 
     Ui::RdpPreferences rdpUi;
 };

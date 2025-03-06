@@ -133,6 +133,9 @@ QWidget *RdpHostPreferences::createProtocolSpecificConfigPage()
     rdpUi.kcfg_Resolution->setCurrentIndex(int(resolution()));
     rdpUi.kcfg_Acceleration->setCurrentIndex(int(acceleration()));
     rdpUi.kcfg_ColorDepth->setCurrentIndex(int(colorDepth()));
+    rdpUi.kcfg_DesktopScaleFactor->setCurrentIndex(int(desktopScaleFactor()));
+    rdpUi.kcfg_DesktopScaleFactorCustom->setValue(desktopScaleFactorCustom());
+    rdpUi.kcfg_DeviceScaleFactor->setCurrentIndex(int(deviceScaleFactor()));
     rdpUi.kcfg_KeyboardLayout->setCurrentIndex(keymap2int(keyboardLayout()));
     rdpUi.kcfg_ShareMedia->setText(shareMedia());
     rdpUi.kcfg_TlsSecLevel->setCurrentIndex(int(tlsSecLevel()));
@@ -165,6 +168,12 @@ QWidget *RdpHostPreferences::createProtocolSpecificConfigPage()
     updateColorDepth(acceleration());
     connect(rdpUi.kcfg_Acceleration, &QComboBox::currentIndexChanged, this, [this](int index) {
         updateColorDepth(Acceleration(index));
+    });
+
+    // kcfg_DesktopScaleFactorCustom is enabled only when kcfg_DesktopScaleFactor = DesktopScaleFactor::Custom
+    updateDesktopScaleFactor(desktopScaleFactor());
+    connect(rdpUi.kcfg_DesktopScaleFactor, &QComboBox::currentIndexChanged, this, [this](int index) {
+        updateDesktopScaleFactor(DesktopScaleFactor(index));
     });
 
     return rdpPage;
@@ -228,6 +237,9 @@ void RdpHostPreferences::acceptConfig()
     setResolution(Resolution(rdpUi.kcfg_Resolution->currentIndex()));
     setAcceleration(Acceleration(rdpUi.kcfg_Acceleration->currentIndex()));
     setColorDepth(ColorDepth(rdpUi.kcfg_ColorDepth->currentIndex()));
+    setDesktopScaleFactor(DesktopScaleFactor(rdpUi.kcfg_DesktopScaleFactor->currentIndex()));
+    setDesktopScaleFactorCustom(rdpUi.kcfg_DesktopScaleFactorCustom->value());
+    setDeviceScaleFactor(DeviceScaleFactor(rdpUi.kcfg_DeviceScaleFactor->currentIndex()));
     setKeyboardLayout(int2keymap(rdpUi.kcfg_KeyboardLayout->currentIndex()));
     setSound(Sound(rdpUi.kcfg_Sound->currentIndex()));
     setShareMedia(rdpUi.kcfg_ShareMedia->text());
@@ -434,6 +446,7 @@ void RdpHostPreferences::setGatewayDomain(const QString &gatewayDomain)
 {
     m_configGroup.writeEntry("gatewayDomain", gatewayDomain);
 }
+
 QString RdpHostPreferences::smartcardName() const
 {
     return QString(m_configGroup.readEntry("smartcardName", Settings::smartcardName()));
@@ -442,6 +455,7 @@ void RdpHostPreferences::setSmartcardName(const QString &smartcardName)
 {
     m_configGroup.writeEntry("smartcardName", smartcardName);
 }
+
 bool RdpHostPreferences::securityNLA() const
 {
     return m_configGroup.readEntry("securityNLA", Settings::securityNLA());
@@ -474,6 +488,7 @@ void RdpHostPreferences::setSecurityEXT(bool enabled)
 {
     m_configGroup.writeEntry("securityEXT", enabled);
 }
+
 QString RdpHostPreferences::authPkgList() const
 {
     return m_configGroup.readEntry("authPkgList", Settings::authPkgList());
@@ -481,4 +496,42 @@ QString RdpHostPreferences::authPkgList() const
 void RdpHostPreferences::setAuthPkgList(const QString &authPkgList)
 {
     m_configGroup.writeEntry("authPkgList", authPkgList);
+}
+
+void RdpHostPreferences::updateDesktopScaleFactor(DesktopScaleFactor desktopScaleFactor)
+{
+    switch (desktopScaleFactor) {
+    case DesktopScaleFactor::Auto:
+    case DesktopScaleFactor::DoNotScale:
+        rdpUi.kcfg_DesktopScaleFactorCustom->setEnabled(false);
+        break;
+    case DesktopScaleFactor::Custom:
+        rdpUi.kcfg_DesktopScaleFactorCustom->setEnabled(true);
+        break;
+    }
+}
+
+RdpHostPreferences::DesktopScaleFactor RdpHostPreferences::desktopScaleFactor() const
+{
+    return DesktopScaleFactor(m_configGroup.readEntry("desktopScaleFactor", Settings::desktopScaleFactor()));
+}
+void RdpHostPreferences::setDesktopScaleFactor(DesktopScaleFactor desktopScaleFactor)
+{
+    m_configGroup.writeEntry("desktopScaleFactor", int(desktopScaleFactor));
+}
+int RdpHostPreferences::desktopScaleFactorCustom() const
+{
+    return m_configGroup.readEntry("desktopScaleFactorCustom", Settings::desktopScaleFactorCustom());
+}
+void RdpHostPreferences::setDesktopScaleFactorCustom(int desktopScaleFactorCustom)
+{
+    m_configGroup.writeEntry("desktopScaleFactorCustom", desktopScaleFactorCustom);
+}
+RdpHostPreferences::DeviceScaleFactor RdpHostPreferences::deviceScaleFactor() const
+{
+    return DeviceScaleFactor(m_configGroup.readEntry("deviceScaleFactor", Settings::deviceScaleFactor()));
+}
+void RdpHostPreferences::setDeviceScaleFactor(DeviceScaleFactor deviceScaleFactor)
+{
+    m_configGroup.writeEntry("deviceScaleFactor", int(deviceScaleFactor));
 }

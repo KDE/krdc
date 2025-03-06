@@ -9,6 +9,7 @@
 #include "rdpgraphics.h"
 #include "rdphostpreferences.h"
 
+#include <algorithm>
 #include <memory>
 
 #include <QApplication>
@@ -382,6 +383,42 @@ int RdpSession::clientContextStart(rdpContext *context)
         if (!freerdp_settings_set_bool(settings, FreeRDP_DynamicResolutionUpdate, true)) {
             return -1;
         }
+    }
+
+    switch (preferences->desktopScaleFactor()) {
+    case RdpHostPreferences::DesktopScaleFactor::Auto: {
+        int desktopScaleFactor = std::clamp((int)(session->m_view->devicePixelRatio() * 100), 100, 500);
+        if (!freerdp_settings_set_uint32(settings, FreeRDP_DesktopScaleFactor, desktopScaleFactor)) {
+            return -1;
+        }
+    } break;
+    case RdpHostPreferences::DesktopScaleFactor::DoNotScale:
+        break;
+    case RdpHostPreferences::DesktopScaleFactor::Custom:
+        if (!freerdp_settings_set_uint32(settings, FreeRDP_DesktopScaleFactor, preferences->desktopScaleFactorCustom())) {
+            return -1;
+        }
+        break;
+    }
+
+    switch (preferences->deviceScaleFactor()) {
+    case RdpHostPreferences::DeviceScaleFactor::Auto:
+        break;
+    case RdpHostPreferences::DeviceScaleFactor::Factor100:
+        if (!freerdp_settings_set_uint32(settings, FreeRDP_DeviceScaleFactor, 100)) {
+            return -1;
+        }
+        break;
+    case RdpHostPreferences::DeviceScaleFactor::Factor140:
+        if (!freerdp_settings_set_uint32(settings, FreeRDP_DeviceScaleFactor, 140)) {
+            return -1;
+        }
+        break;
+    case RdpHostPreferences::DeviceScaleFactor::Factor180:
+        if (!freerdp_settings_set_uint32(settings, FreeRDP_DeviceScaleFactor, 180)) {
+            return -1;
+        }
+        break;
     }
 
     switch (preferences->colorDepth()) {

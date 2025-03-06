@@ -21,7 +21,7 @@
        <string>General</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayoutMain">
-       <item row="1" column="0">
+       <item row="0" column="0">
         <widget class="QLabel" name="resolutionLabel">
          <property name="text">
           <string>Resolution</string>
@@ -31,7 +31,7 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="1">
+       <item row="0" column="1">
         <widget class="KComboBox" name="kcfg_Resolution">
          <property name="sizePolicy">
           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -83,7 +83,7 @@
          </item>
         </widget>
        </item>
-       <item row="2" column="1">
+       <item row="1" column="1">
         <layout class="QHBoxLayout">
          <item>
           <widget class="QLabel" name="widthLabel">
@@ -151,7 +151,7 @@
          </item>
         </layout>
        </item>
-       <item row="3" column="1">
+       <item row="2" column="1">
         <widget class="QCheckBox" name="kcfg_ScaleToSize">
          <property name="minimumSize">
           <size>
@@ -167,7 +167,7 @@
          </property>
         </widget>
        </item>
-       <item row="4" column="0">
+       <item row="3" column="0">
         <widget class="QLabel" name="accelerationLabel">
          <property name="text">
           <string>Acceleration:</string>
@@ -177,7 +177,7 @@
          </property>
         </widget>
        </item>
-       <item row="4" column="1">
+       <item row="3" column="1">
         <widget class="KComboBox" name="kcfg_Acceleration">
          <property name="sizePolicy">
           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -213,7 +213,7 @@
          </item>
         </widget>
        </item>
-       <item row="5" column="0">
+       <item row="4" column="0">
         <widget class="QLabel" name="colorDepthLabel">
          <property name="text">
           <string>Color &amp;depth:</string>
@@ -226,7 +226,7 @@
          </property>
         </widget>
        </item>
-       <item row="5" column="1">
+       <item row="4" column="1">
         <widget class="KComboBox" name="kcfg_ColorDepth">
          <property name="sizePolicy">
           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -267,7 +267,120 @@
          </item>
         </widget>
        </item>
+       <item row="5" column="0">
+        <widget class="QLabel" name="desktopScaleFactorLabel">
+         <property name="text">
+          <string>Desktop scale factor:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="buddy">
+          <cstring>kcfg_DesktopScaleFactorCustom</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1">
+        <layout class="QHBoxLayout">
+         <item>
+          <widget class="KComboBox" name="kcfg_DesktopScaleFactor">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <item>
+            <property name="text">
+             <string>Auto</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Do not scale</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Custom</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSpinBox" name="kcfg_DesktopScaleFactorCustom">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="minimum">
+            <number>100</number>
+           </property>
+           <property name="maximum">
+            <number>500</number>
+           </property>
+           <property name="value">
+            <number>100</number>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
        <item row="6" column="0">
+        <widget class="QLabel" name="deviceScaleFactorLabel">
+         <property name="text">
+          <string>Device scale factor:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="buddy">
+          <cstring>kcfg_DeviceScaleFactor</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="1">
+        <widget class="KComboBox" name="kcfg_DeviceScaleFactor">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>280</width>
+           <height>0</height>
+          </size>
+         </property>
+         <item>
+          <property name="text">
+           <string>Auto</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>100</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>140</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>180</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="7" column="0">
         <widget class="QLabel" name="layoutLabel">
          <property name="text">
           <string>&amp;Keyboard layout:</string>
@@ -280,7 +393,7 @@
          </property>
         </widget>
        </item>
-       <item row="6" column="1">
+       <item row="7" column="1">
         <widget class="KComboBox" name="kcfg_KeyboardLayout">
          <property name="sizePolicy">
           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -487,7 +600,7 @@
          </item>
         </widget>
        </item>
-       <item row="7" column="0">
+       <item row="8" column="0">
         <widget class="QLabel" name="soundLabel">
          <property name="text">
           <string comment="label for soundsettings in preferences dialog">Sound:</string>
@@ -500,7 +613,7 @@
          </property>
         </widget>
        </item>
-       <item row="7" column="1">
+       <item row="8" column="1">
         <widget class="KComboBox" name="kcfg_Sound">
          <property name="sizePolicy">
           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -531,7 +644,7 @@
          </item>
         </widget>
        </item>
-       <item row="8" column="0">
+       <item row="9" column="0">
         <widget class="QLabel" name="shareMediaLabel">
          <property name="text">
           <string>Share Media:</string>
@@ -541,7 +654,7 @@
          </property>
         </widget>
        </item>
-       <item row="8" column="1">
+       <item row="9" column="1">
         <widget class="KUrlRequester" name="kcfg_ShareMedia">
          <property name="sizePolicy">
           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
@@ -557,7 +670,7 @@
          </property>
         </widget>
        </item>
-       <item row="9" column="0">
+       <item row="10" column="0">
         <widget class="QLabel" name="shareSmartcardLabel">
          <property name="text">
           <string>Share Smartcard:</string>
@@ -567,122 +680,133 @@
          </property>
         </widget>
        </item>
-       <item row="9" column="1">
+       <item row="10" column="1">
         <widget class="KLineEdit" name="kcfg_SmartcardName"/>
        </item>
-       <item row="10" column="0">
-        <widget class="QLabel" name="gSecurityLabel">
-         <property name="text">
-          <string>Security:</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="10" column="1">
-        <layout class="QHBoxLayout" name="securityLayout">
-         <item>
-          <widget class="QCheckBox" name="kcfg_NLASecurity">
+      </layout>
+     </widget>
+     <widget class="QWidget" name="securitySettingsTab">
+      <attribute name="title">
+       <string>Security</string>
+      </attribute>
+      <layout class="QVBoxLayout">
+       <item>
+        <layout class="QFormLayout" name="securityFormLayout">
+         <item row="0" column="0">
+          <widget class="QLabel" name="gSecurityLabel">
            <property name="text">
-            <string>NLA</string>
+            <string>Security:</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
           </widget>
          </item>
-         <item>
-          <widget class="QCheckBox" name="kcfg_TLSSecurity">
+         <item row="0" column="1">
+          <layout class="QHBoxLayout" name="securityLayout">
+           <item>
+            <widget class="QCheckBox" name="kcfg_NLASecurity">
+             <property name="text">
+              <string>NLA</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="kcfg_TLSSecurity">
+             <property name="text">
+              <string>TLS</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="kcfg_RDPSecurity">
+             <property name="text">
+              <string>RDP</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="kcfg_EXTSecurity">
+             <property name="text">
+              <string>Ext</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="TlsSecLevelLabel">
            <property name="text">
-            <string>TLS</string>
+            <string>TLS security level:</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+           <property name="buddy">
+            <cstring>kcfg_TlsSecLevel</cstring>
            </property>
           </widget>
          </item>
-         <item>
-          <widget class="QCheckBox" name="kcfg_RDPSecurity">
+         <item row="1" column="1">
+          <widget class="KComboBox" name="kcfg_TlsSecLevel">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>280</width>
+             <height>0</height>
+            </size>
+           </property>
+           <item>
+            <property name="text">
+             <string>any</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>80 bit</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>112 bit</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>128 bit</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>192 bit</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>256 bit</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="authPkgListLabel">
            <property name="text">
-            <string>RDP</string>
+            <string>Authentication Package List:</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
           </widget>
          </item>
-         <item>
-          <widget class="QCheckBox" name="kcfg_EXTSecurity">
-           <property name="text">
-            <string>Ext</string>
-           </property>
-          </widget>
+         <item row="2" column="1">
+          <widget class="KLineEdit" name="kcfg_AuthPkgList"/>
          </item>
         </layout>
-       </item>
-       <item row="11" column="0">
-        <widget class="QLabel" name="TlsSecLevelLabel">
-         <property name="text">
-          <string>TLS security level:</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-         <property name="buddy">
-          <cstring>kcfg_TlsSecLevel</cstring>
-         </property>
-        </widget>
-       </item>
-       <item row="11" column="1">
-        <widget class="KComboBox" name="kcfg_TlsSecLevel">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>280</width>
-           <height>0</height>
-          </size>
-         </property>
-         <item>
-          <property name="text">
-           <string>any</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>80 bit</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>112 bit</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>128 bit</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>192 bit</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>256 bit</string>
-          </property>
-         </item>
-        </widget>
-       </item>
-       <item row="12" column="0">
-        <widget class="QLabel" name="authPkgListLabel">
-         <property name="text">
-          <string>Authentication Package List:</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="12" column="1">
-        <widget class="KLineEdit" name="kcfg_AuthPkgList"/>
        </item>
       </layout>
      </widget>
