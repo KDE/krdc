@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-13 00:44+0000\n"
+"POT-Creation-Date: 2025-03-06 00:41+0000\n"
 "PO-Revision-Date: 2025-02-01 10:29+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -1199,6 +1199,13 @@ msgstr "192 bits"
 msgid "256 bit"
 msgstr "256 bits"
 
+#. i18n: ectx: property (text), widget (QLabel, authPkgListLabel)
+#: rdp/rdppreferences.ui:677
+#, fuzzy, kde-format
+#| msgid "Authenticating at %1"
+msgid "Authentication Package List:"
+msgstr "Autenticant-se a %1"
+
 #. i18n: ectx: attribute (title), widget (QWidget, proxySettingsTab)
 #: rdp/rdppreferences.ui:691
 #, kde-format
@@ -1282,7 +1289,7 @@ msgstr "RPC"
 msgid "Domain:"
 msgstr "Domini:"
 
-#: rdp/rdpsession.cpp:824
+#: rdp/rdpsession.cpp:829
 #, kde-format
 msgctxt "@label"
 msgid ""

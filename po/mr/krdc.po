@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-13 00:44+0000\n"
+"POT-Creation-Date: 2025-03-06 00:41+0000\n"
 "PO-Revision-Date: 2013-04-01 11:09+0530\n"
 "Last-Translator: Chetan Khona <chetan@kompkin.com>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
@@ -1166,6 +1166,13 @@ msgstr ""
 msgid "256 bit"
 msgstr ""
 
+#. i18n: ectx: property (text), widget (QLabel, authPkgListLabel)
+#: rdp/rdppreferences.ui:677
+#, fuzzy, kde-format
+#| msgid "Authentication failed. Please try again."
+msgid "Authentication Package List:"
+msgstr "अधिप्रमाणन असफल. कृपया पुन्हा प्रयत्न करा"
+
 #. i18n: ectx: attribute (title), widget (QWidget, proxySettingsTab)
 #: rdp/rdppreferences.ui:691
 #, kde-format
@@ -1250,7 +1257,7 @@ msgstr ""
 msgid "Domain:"
 msgstr ""
 
-#: rdp/rdpsession.cpp:824
+#: rdp/rdpsession.cpp:829
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1769,11 +1776,6 @@ msgstr ""
 
 #~ msgid "Name or service not known."
 #~ msgstr "नाव किंवा सेवा परिचीत नाही."
-
-#, fuzzy
-#~| msgid "Authentication failed. Please try again."
-#~ msgid "Authentication failure, check credentials."
-#~ msgstr "अधिप्रमाणन असफल. कृपया पुन्हा प्रयत्न करा"
 
 #~ msgid "KDE"
 #~ msgstr "केडीई"

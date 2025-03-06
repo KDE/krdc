@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdenetwork\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-13 00:44+0000\n"
+"POT-Creation-Date: 2025-03-06 00:41+0000\n"
 "PO-Revision-Date: 2024-11-29 00:30+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -1182,6 +1182,13 @@ msgstr "192비트"
 msgid "256 bit"
 msgstr "256비트"
 
+#. i18n: ectx: property (text), widget (QLabel, authPkgListLabel)
+#: rdp/rdppreferences.ui:677
+#, fuzzy, kde-format
+#| msgid "Authenticating at %1"
+msgid "Authentication Package List:"
+msgstr "%1에서 인증하는 중..."
+
 #. i18n: ectx: attribute (title), widget (QWidget, proxySettingsTab)
 #: rdp/rdppreferences.ui:691
 #, kde-format
@@ -1265,7 +1272,7 @@ msgstr "RPC"
 msgid "Domain:"
 msgstr "도메인:"
 
-#: rdp/rdpsession.cpp:824
+#: rdp/rdpsession.cpp:829
 #, kde-format
 msgctxt "@label"
 msgid ""
