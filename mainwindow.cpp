@@ -63,7 +63,6 @@
 
 MainWindow::MainWindow(QWidget *parent)
     : KXmlGuiWindow(parent)
-    , m_fullscreenWindow(nullptr)
     , m_protocolInput(nullptr)
     , m_addressInput(nullptr)
     , m_toolBar(nullptr)
@@ -72,6 +71,7 @@ MainWindow::MainWindow(QWidget *parent)
     , m_dockWidgetTableView(nullptr)
     , m_newConnectionTableView(nullptr)
     , m_newConnectionWidget(nullptr)
+    , m_remoteDesktopsDockWidget(nullptr)
 {
     loadAllPlugins();
 
@@ -102,13 +102,6 @@ MainWindow::MainWindow(QWidget *parent)
     createDockWidget();
 
     setupGUI(ToolBar | Keys | Save | Create);
-
-    if (Settings::systemTrayIcon()) {
-        m_systemTrayIcon = new SystemTrayIcon(this);
-        if (m_fullscreenWindow) {
-            m_systemTrayIcon->setAssociatedWindow(m_fullscreenWindow->windowHandle());
-        }
-    }
 
     connect(m_tabWidget, SIGNAL(currentChanged(int)), SLOT(tabChanged(int)));
 
@@ -372,7 +365,7 @@ void MainWindow::selectFromRemoteDesktopsModel(const QModelIndex &index)
 void MainWindow::resizeTabWidget(int w, int h)
 {
     qCDebug(KRDC) << "tabwidget resize, view size: w: " << w << ", h: " << h;
-    if (m_fullscreenWindow) {
+    if (isFullScreen()) {
         qCDebug(KRDC) << "in fullscreen mode, refusing to resize";
         return;
     }
@@ -477,20 +470,17 @@ void MainWindow::switchFullscreen()
     RemoteView *view = currentRemoteView();
     bool scale_state = false;
 
-    if (m_fullscreenWindow) {
+    if (isFullScreen()) {
         // Leaving full screen mode
-        m_fullscreenWindow->setWindowState(Qt::WindowNoState);
-        m_fullscreenWindow->hide();
+        m_remoteDesktopsDockWidget->setVisible(m_guiItemsState.dockWidget);
+        menuBar()->setVisible(m_guiItemsState.menuBar);
+        statusBar()->setVisible(m_guiItemsState.statusBar);
+        toolBars().first()->setVisible(m_guiItemsState.toolBar);
 
         m_tabWidget->tabBar()->setHidden(m_tabWidget->count() <= 1 && !Settings::showTabBar());
         m_tabWidget->setDocumentMode(false);
-        setCentralWidget(m_tabWidget);
 
-        show();
-        restoreGeometry(m_mainWindowGeometry);
-        if (m_systemTrayIcon) {
-            m_systemTrayIcon->setAssociatedWindow(windowHandle());
-        }
+        KToggleFullScreenAction::setFullScreen(this, false);
 
         for (RemoteView *view : qAsConst(m_remoteViewMap)) {
             view->switchFullscreen(false);
@@ -509,39 +499,29 @@ void MainWindow::switchFullscreen()
         if (view)
             scale_state = view->hostPreferences()->windowedScale();
 
-        m_fullscreenWindow->deleteLater();
-        m_fullscreenWindow = nullptr;
     } else {
         // Entering full screen mode
-        m_fullscreenWindow = new QWidget(this, Qt::Window);
-        m_fullscreenWindow->setWindowTitle(
-            i18nc("window title when in full screen mode (for example displayed in tasklist)", "KDE Remote Desktop Client (Full Screen)"));
+        m_guiItemsState = {.dockWidget = m_remoteDesktopsDockWidget->isVisible(),
+                           .menuBar = menuBar()->isVisible(),
+                           .statusBar = statusBar()->isVisible(),
+                           .toolBar = toolBars().first()->isVisible()};
 
-        m_mainWindowGeometry = saveGeometry();
+        m_remoteDesktopsDockWidget->setVisible(false);
+        menuBar()->setVisible(false);
+        statusBar()->setVisible(false);
+        toolBars().first()->setVisible(false);
 
         m_tabWidget->tabBar()->hide();
         m_tabWidget->setDocumentMode(true);
 
-        QVBoxLayout *fullscreenLayout = new QVBoxLayout(m_fullscreenWindow);
-        fullscreenLayout->setContentsMargins(QMargins(0, 0, 0, 0));
-        fullscreenLayout->addWidget(m_tabWidget);
+        KToggleFullScreenAction::setFullScreen(this, true);
 
-        KToggleFullScreenAction::setFullScreen(m_fullscreenWindow, true);
-
-        MinimizePixel *minimizePixel = new MinimizePixel(m_fullscreenWindow);
-        connect(minimizePixel, SIGNAL(rightClicked()), m_fullscreenWindow, SLOT(showMinimized()));
-        m_fullscreenWindow->installEventFilter(this);
-
-        m_fullscreenWindow->show();
-        hide(); // hide after showing the new window so it stays on the same screen
+        MinimizePixel *minimizePixel = new MinimizePixel(this);
+        connect(minimizePixel, SIGNAL(rightClicked()), this, SLOT(showMinimized()));
 
         for (RemoteView *currentView : qAsConst(m_remoteViewMap)) {
             currentView->enableScaling(currentView->hostPreferences()->fullscreenScale());
             currentView->switchFullscreen(true);
-        }
-
-        if (m_systemTrayIcon) {
-            m_systemTrayIcon->setAssociatedWindow(m_fullscreenWindow->windowHandle());
         }
 
         actionCollection()->action(QStringLiteral("switch_fullscreen"))->setIcon(QIcon::fromTheme(QStringLiteral("view-restore")));
@@ -608,7 +588,7 @@ void MainWindow::disconnectHost()
     }
 
     // if the newConnectionWidget is the only tab and we are fullscreen, switch to window mode
-    if (m_fullscreenWindow && m_tabWidget->count() == 1 && m_tabWidget->currentWidget() == m_newConnectionWidget) {
+    if (isFullScreen() && m_tabWidget->count() == 1 && m_tabWidget->currentWidget() == m_newConnectionWidget) {
         switchFullscreen();
     }
 }
@@ -635,7 +615,7 @@ void MainWindow::closeTab(int index)
     }
 
     // if the newConnectionWidget is the only tab and we are fullscreen, switch to window mode
-    if (m_fullscreenWindow && m_tabWidget->count() == 1 && m_tabWidget->currentWidget() == m_newConnectionWidget) {
+    if (isFullScreen() && m_tabWidget->count() == 1 && m_tabWidget->currentWidget() == m_newConnectionWidget) {
         switchFullscreen();
     }
 }
@@ -803,7 +783,7 @@ void MainWindow::scale(bool scale)
 
     RemoteView *view = currentRemoteView();
     view->enableScaling(scale);
-    if (m_fullscreenWindow)
+    if (isFullScreen())
         view->hostPreferences()->setFullscreenScale(scale);
     else
         view->hostPreferences()->setWindowedScale(scale);
@@ -833,7 +813,7 @@ void MainWindow::showRemoteViewToolbar()
     qCDebug(KRDC);
 
     if (!m_toolBar) {
-        m_toolBar = new FloatingToolBar(m_fullscreenWindow, m_fullscreenWindow);
+        m_toolBar = new FloatingToolBar(this, this);
         m_toolBar->setSide(FloatingToolBar::Top);
 
         KComboBox *sessionComboBox = new KComboBox(m_toolBar);
@@ -853,7 +833,7 @@ void MainWindow::showRemoteViewToolbar()
         QAction *minimizeAction = new QAction(m_toolBar);
         minimizeAction->setIcon(QIcon::fromTheme(QStringLiteral("go-down")));
         minimizeAction->setText(i18n("Minimize Full Screen Window"));
-        connect(minimizeAction, SIGNAL(triggered()), m_fullscreenWindow, SLOT(showMinimized()));
+        connect(minimizeAction, SIGNAL(triggered()), this, SLOT(showMinimized()));
         buttonBox->addAction(minimizeAction);
 
         buttonBox->addAction(actionCollection()->action(QStringLiteral("take_screenshot")));
@@ -929,11 +909,11 @@ void MainWindow::preferences()
 void MainWindow::updateConfiguration()
 {
     if (!Settings::showStatusBar())
-        statusBar()->deleteLater();
+        statusBar()->hide();
     else
         statusBar()->showMessage({}); // force creation of statusbar
 
-    m_tabWidget->tabBar()->setHidden((m_tabWidget->count() <= 1 && !Settings::showTabBar()) || m_fullscreenWindow);
+    m_tabWidget->tabBar()->setHidden((m_tabWidget->count() <= 1 && !Settings::showTabBar()) || isFullScreen());
     m_tabWidget->setTabPosition((QTabWidget::TabPosition)Settings::tabPosition());
     m_tabWidget->setTabsClosable(Settings::tabCloseButton());
 
@@ -943,9 +923,6 @@ void MainWindow::updateConfiguration()
 
     if (Settings::systemTrayIcon() && !m_systemTrayIcon) {
         m_systemTrayIcon = new SystemTrayIcon(this);
-        if (m_systemTrayIcon) {
-            m_systemTrayIcon->setAssociatedWindow(m_fullscreenWindow ? m_fullscreenWindow->windowHandle() : nullptr);
-        }
     } else if (m_systemTrayIcon) {
         delete m_systemTrayIcon;
         m_systemTrayIcon = nullptr;
@@ -988,6 +965,15 @@ void MainWindow::quit(bool systemEvent)
             Settings::setOpenSessions(list);
         }
 
+        if (isFullScreen()) {
+            // restore widget status and save settings
+            m_remoteDesktopsDockWidget->setVisible(m_guiItemsState.dockWidget);
+            menuBar()->setVisible(m_guiItemsState.menuBar);
+            statusBar()->setVisible(m_guiItemsState.statusBar);
+            toolBars().first()->setVisible(m_guiItemsState.toolBar);
+            saveAutoSaveSettings();
+        }
+
         saveHostPrefs();
 
         const QMap<QWidget *, RemoteView *> currentViews = m_remoteViewMap;
@@ -1012,16 +998,6 @@ void MainWindow::showMenubar()
         menuBar()->show();
     else
         menuBar()->hide();
-}
-
-bool MainWindow::eventFilter(QObject *obj, QEvent *event)
-{
-    // check for close events from the fullscreen window.
-    if (obj == m_fullscreenWindow && event->type() == QEvent::Close) {
-        quit(true);
-    }
-    // allow other events to pass through.
-    return QObject::eventFilter(obj, event);
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
@@ -1069,7 +1045,7 @@ void MainWindow::tabChanged(int index)
 {
     qCDebug(KRDC) << index;
 
-    m_tabWidget->tabBar()->setHidden((m_tabWidget->count() <= 1 && !Settings::showTabBar()) || m_fullscreenWindow);
+    m_tabWidget->tabBar()->setHidden((m_tabWidget->count() <= 1 && !Settings::showTabBar()) || isFullScreen());
 
     m_currentRemoteView = index;
 
@@ -1207,14 +1183,14 @@ RemoteView *MainWindow::currentRemoteView() const
 
 void MainWindow::createDockWidget()
 {
-    QDockWidget *remoteDesktopsDockWidget = new QDockWidget(this);
-    QWidget *remoteDesktopsDockLayoutWidget = new QWidget(remoteDesktopsDockWidget);
+    m_remoteDesktopsDockWidget = new QDockWidget(this);
+    QWidget *remoteDesktopsDockLayoutWidget = new QWidget(m_remoteDesktopsDockWidget);
     QVBoxLayout *remoteDesktopsDockLayout = new QVBoxLayout(remoteDesktopsDockLayoutWidget);
-    remoteDesktopsDockWidget->setObjectName(QStringLiteral("remoteDesktopsDockWidget")); // required for saving position / state
-    remoteDesktopsDockWidget->setWindowTitle(i18n("Remote Desktops"));
-    QFontMetrics fontMetrics(remoteDesktopsDockWidget->font());
-    remoteDesktopsDockWidget->setMinimumWidth(fontMetrics.horizontalAdvance(QStringLiteral("vnc://192.168.100.100:6000")));
-    QAction *dockAction = actionCollection()->addAction(QStringLiteral("remote_desktop_dockwidget"), remoteDesktopsDockWidget->toggleViewAction());
+    m_remoteDesktopsDockWidget->setObjectName(QStringLiteral("remoteDesktopsDockWidget")); // required for saving position / state
+    m_remoteDesktopsDockWidget->setWindowTitle(i18n("Remote Desktops"));
+    QFontMetrics fontMetrics(m_remoteDesktopsDockWidget->font());
+    m_remoteDesktopsDockWidget->setMinimumWidth(fontMetrics.horizontalAdvance(QStringLiteral("vnc://192.168.100.100:6000")));
+    QAction *dockAction = actionCollection()->addAction(QStringLiteral("remote_desktop_dockwidget"), m_remoteDesktopsDockWidget->toggleViewAction());
     dockAction->setIcon(QIcon::fromTheme(QStringLiteral("view-sidetree")));
 
     m_dockWidgetTableView = new QTableView(remoteDesktopsDockLayoutWidget);
@@ -1245,6 +1221,6 @@ void MainWindow::createDockWidget()
     connect(filterLineEdit, SIGNAL(textChanged(QString)), remoteDesktopsModelProxy, SLOT(setFilterFixedString(QString)));
     remoteDesktopsDockLayout->addWidget(filterLineEdit);
     remoteDesktopsDockLayout->addWidget(m_dockWidgetTableView);
-    remoteDesktopsDockWidget->setWidget(remoteDesktopsDockLayoutWidget);
-    addDockWidget(Qt::LeftDockWidgetArea, remoteDesktopsDockWidget);
+    m_remoteDesktopsDockWidget->setWidget(remoteDesktopsDockLayoutWidget);
+    addDockWidget(Qt::LeftDockWidgetArea, m_remoteDesktopsDockWidget);
 }

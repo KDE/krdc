@@ -27,6 +27,7 @@ class RemoteView;
 class SystemTrayIcon;
 class TabbedViewWidget;
 
+class QDockWidget;
 class QScrollArea;
 class QModelIndex;
 class QTableView;
@@ -48,7 +49,6 @@ public Q_SLOTS:
 
 protected:
     void closeEvent(QCloseEvent *event) override;
-    bool eventFilter(QObject *obj, QEvent *event) override; // checks for close events on fs window
     void saveProperties(KConfigGroup &group) override;
     void saveHostPrefs();
     void saveHostPrefs(RemoteView *view);
@@ -90,7 +90,6 @@ private:
     QScrollArea *createScrollArea(QWidget *parent, RemoteView *remoteView);
     QUrl getInputUrl();
 
-    QWidget *m_fullscreenWindow;
     QByteArray m_mainWindowGeometry;
 
     KToggleAction *m_menubarAction;
@@ -113,6 +112,15 @@ private:
     QTableView *m_newConnectionTableView;
     RemoteDesktopsModel *m_remoteDesktopsModel;
     QWidget *m_newConnectionWidget;
+    QDockWidget *m_remoteDesktopsDockWidget;
+
+    struct GuiItemsState {
+        bool dockWidget;
+        bool menuBar;
+        bool statusBar;
+        bool toolBar;
+    };
+    GuiItemsState m_guiItemsState;
 
 Q_SIGNALS:
     void scaleUpdated(bool scale); // scale state has changed
