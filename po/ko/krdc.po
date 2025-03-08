@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdenetwork\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-06 00:41+0000\n"
+"POT-Creation-Date: 2025-03-08 00:43+0000\n"
 "PO-Revision-Date: 2024-11-29 00:30+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -835,14 +835,66 @@ msgstr "하이 컬러 (16비트)"
 msgid "Low Color (8 Bit)"
 msgstr "낮음 (8비트)"
 
-#. i18n: ectx: property (text), widget (QLabel, layoutLabel)
+#. i18n: ectx: property (text), widget (QLabel, desktopScaleFactorLabel)
 #: rdp/rdppreferences.ui:273
+#, fuzzy, kde-format
+#| msgid "Desktop &resolution:"
+msgid "Desktop scale factor:"
+msgstr "데스크톱 해상도(&R):"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DesktopScaleFactor)
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DeviceScaleFactor)
+#. i18n: ectx: property (text), item, widget (QComboBox, kcfg_GatewayTransportType)
+#: rdp/rdppreferences.ui:295 rdp/rdppreferences.ui:363
+#: rdp/rdppreferences.ui:943
+#, kde-format
+msgid "Auto"
+msgstr "자동"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DesktopScaleFactor)
+#: rdp/rdppreferences.ui:300
+#, kde-format
+msgid "Do not scale"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DesktopScaleFactor)
+#: rdp/rdppreferences.ui:305
+#, kde-format
+msgid "Custom"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, deviceScaleFactorLabel)
+#: rdp/rdppreferences.ui:337
+#, kde-format
+msgid "Device scale factor:"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DeviceScaleFactor)
+#: rdp/rdppreferences.ui:368
+#, kde-format
+msgid "100"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DeviceScaleFactor)
+#: rdp/rdppreferences.ui:373
+#, kde-format
+msgid "140"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DeviceScaleFactor)
+#: rdp/rdppreferences.ui:378
+#, kde-format
+msgid "180"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, layoutLabel)
+#: rdp/rdppreferences.ui:386
 #, kde-format
 msgid "&Keyboard layout:"
 msgstr "키보드 레이아웃(&K):"
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:298
+#: rdp/rdppreferences.ui:411
 #, kde-format
 msgid ""
 "Use this to specify your keyboard layout. This layout setting is used to "
@@ -852,427 +904,428 @@ msgstr ""
 "코드를 보내는 데 사용됩니다."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:305
+#: rdp/rdppreferences.ui:418
 #, kde-format
 msgid "Arabic (ar)"
 msgstr "아랍어 (ar)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:310
+#: rdp/rdppreferences.ui:423
 #, kde-format
 msgid "Czech (cs)"
 msgstr "체코어 (cs)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:315
+#: rdp/rdppreferences.ui:428
 #, kde-format
 msgid "Danish (da)"
 msgstr "덴마크어 (da)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:320
+#: rdp/rdppreferences.ui:433
 #, kde-format
 msgid "German (de)"
 msgstr "독일어 (de)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:325
+#: rdp/rdppreferences.ui:438
 #, kde-format
 msgid "Swiss German (de-ch)"
 msgstr "스위스식 독일어 (de-ch)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:330
+#: rdp/rdppreferences.ui:443
 #, kde-format
 msgid "American Dvorak (en-dv)"
 msgstr "미국 드보락 (en-dv)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:335
+#: rdp/rdppreferences.ui:448
 #, kde-format
 msgid "British English (en-gb)"
 msgstr "영국 영어 (en-gb)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:340
+#: rdp/rdppreferences.ui:453
 #, kde-format
 msgid "US English (en-us)"
 msgstr "미국 영어 (en-us)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:345
+#: rdp/rdppreferences.ui:458
 #, kde-format
 msgid "Spanish (es)"
 msgstr "스페인어 (es)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:350
+#: rdp/rdppreferences.ui:463
 #, kde-format
 msgid "Estonian (et)"
 msgstr "에스토니아어 (et)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:355
+#: rdp/rdppreferences.ui:468
 #, kde-format
 msgid "Finnish (fi)"
 msgstr "핀란드어 (fi)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:360
+#: rdp/rdppreferences.ui:473
 #, kde-format
 msgid "Faroese (fo)"
 msgstr "페로어 (fo)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:365
+#: rdp/rdppreferences.ui:478
 #, kde-format
 msgid "French (fr)"
 msgstr "프랑스어 (fr)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:370
+#: rdp/rdppreferences.ui:483
 #, kde-format
 msgid "Belgian (fr-be)"
 msgstr "벨기에 프랑스어 (fr-be)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:375
+#: rdp/rdppreferences.ui:488
 #, kde-format
 msgid "French Canadian (fr-ca)"
 msgstr "캐나다 프랑스어 (fr-ca)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:380
+#: rdp/rdppreferences.ui:493
 #, kde-format
 msgid "Swiss French (fr-ch)"
 msgstr "스위스 프랑스어 (fr-ch)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:385
+#: rdp/rdppreferences.ui:498
 #, kde-format
 msgid "Hebrew (he)"
 msgstr "히브리어 (he)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:390
+#: rdp/rdppreferences.ui:503
 #, kde-format
 msgid "Croatian (hr)"
 msgstr "크로아티아어 (hr)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:395
+#: rdp/rdppreferences.ui:508
 #, kde-format
 msgid "Hungarian (hu)"
 msgstr "헝가리어 (hu)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:400
+#: rdp/rdppreferences.ui:513
 #, kde-format
 msgid "Icelandic (is)"
 msgstr "아이슬란드어 (is)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:405
+#: rdp/rdppreferences.ui:518
 #, kde-format
 msgid "Italian (it)"
 msgstr "이탈리아어 (it)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:410
+#: rdp/rdppreferences.ui:523
 #, kde-format
 msgid "Japanese (ja)"
 msgstr "일본어 (ja)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:415
+#: rdp/rdppreferences.ui:528
 #, kde-format
 msgid "Korean (ko)"
 msgstr "한국어 (ko)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:420
+#: rdp/rdppreferences.ui:533
 #, kde-format
 msgid "Lithuanian (lt)"
 msgstr "리투아니아어 (lt)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:425
+#: rdp/rdppreferences.ui:538
 #, kde-format
 msgid "Latvian (lv)"
 msgstr "라트비아어 (lv)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:430
+#: rdp/rdppreferences.ui:543
 #, kde-format
 msgid "Macedonian (mk)"
 msgstr "마케도니아어 (mk)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:435
+#: rdp/rdppreferences.ui:548
 #, kde-format
 msgid "Dutch (nl)"
 msgstr "네덜란드어 (nl)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:440
+#: rdp/rdppreferences.ui:553
 #, kde-format
 msgid "Belgian Dutch (nl-be)"
 msgstr "벨기에 네덜란드어 (nl-be)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:445
+#: rdp/rdppreferences.ui:558
 #, kde-format
 msgid "Norwegian (no)"
 msgstr "노르웨이어 (no)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:450
+#: rdp/rdppreferences.ui:563
 #, kde-format
 msgid "Polish (pl)"
 msgstr "폴란드어 (pl)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:455
+#: rdp/rdppreferences.ui:568
 #, kde-format
 msgid "Portuguese (pt)"
 msgstr "포르투갈어 (pt)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:460
+#: rdp/rdppreferences.ui:573
 #, kde-format
 msgid "Brazilian (pt-br)"
 msgstr "브라질 포르투갈어 (pt-br)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:465
+#: rdp/rdppreferences.ui:578
 #, kde-format
 msgid "Russian (ru)"
 msgstr "러시아어 (ru)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:470
+#: rdp/rdppreferences.ui:583
 #, kde-format
 msgid "Slovenian (sl)"
 msgstr "슬로베니아어 (sl)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:475
+#: rdp/rdppreferences.ui:588
 #, kde-format
 msgid "Swedish (sv)"
 msgstr "스웨덴어 (sv)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:480
+#: rdp/rdppreferences.ui:593
 #, kde-format
 msgid "Thai (th)"
 msgstr "태국어 (th)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
-#: rdp/rdppreferences.ui:485
+#: rdp/rdppreferences.ui:598
 #, kde-format
 msgid "Turkish (tr)"
 msgstr "튀르키예어 (tr)"
 
 #. i18n: ectx: property (text), widget (QLabel, soundLabel)
-#: rdp/rdppreferences.ui:493
+#: rdp/rdppreferences.ui:606
 #, kde-format
 msgctxt "label for soundsettings in preferences dialog"
 msgid "Sound:"
 msgstr "소리:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
-#: rdp/rdppreferences.ui:519
+#: rdp/rdppreferences.ui:632
 #, kde-format
 msgid "On This Computer"
 msgstr "이 컴퓨터에서"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
-#: rdp/rdppreferences.ui:524
+#: rdp/rdppreferences.ui:637
 #, kde-format
 msgid "On Remote Computer"
 msgstr "원격 컴퓨터에서"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
-#: rdp/rdppreferences.ui:529
+#: rdp/rdppreferences.ui:642
 #, kde-format
 msgid "Disable Sound"
 msgstr "소리 비활성화"
 
 #. i18n: ectx: property (text), widget (QLabel, shareMediaLabel)
-#: rdp/rdppreferences.ui:537
+#: rdp/rdppreferences.ui:650
 #, kde-format
 msgid "Share Media:"
 msgstr "공유 미디어:"
 
 #. i18n: ectx: property (text), widget (QLabel, shareSmartcardLabel)
-#: rdp/rdppreferences.ui:563
+#: rdp/rdppreferences.ui:676
 #, kde-format
 msgid "Share Smartcard:"
 msgstr "스마트카드 공유:"
 
+#. i18n: ectx: attribute (title), widget (QWidget, securitySettingsTab)
+#: rdp/rdppreferences.ui:690
+#, fuzzy, kde-format
+#| msgid "Security:"
+msgid "Security"
+msgstr "보안:"
+
 #. i18n: ectx: property (text), widget (QLabel, gSecurityLabel)
-#: rdp/rdppreferences.ui:576
+#: rdp/rdppreferences.ui:698
 #, kde-format
 msgid "Security:"
 msgstr "보안:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_NLASecurity)
-#: rdp/rdppreferences.ui:588
+#: rdp/rdppreferences.ui:710
 #, kde-format
 msgid "NLA"
 msgstr "NLA"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TLSSecurity)
-#: rdp/rdppreferences.ui:595
+#: rdp/rdppreferences.ui:717
 #, kde-format
 msgid "TLS"
 msgstr "TLS"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_RDPSecurity)
-#: rdp/rdppreferences.ui:602
+#: rdp/rdppreferences.ui:724
 #, kde-format
 msgid "RDP"
 msgstr "RDP"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EXTSecurity)
-#: rdp/rdppreferences.ui:609
+#: rdp/rdppreferences.ui:731
 #, kde-format
 msgid "Ext"
 msgstr "확장자"
 
 #. i18n: ectx: property (text), widget (QLabel, TlsSecLevelLabel)
-#: rdp/rdppreferences.ui:618
+#: rdp/rdppreferences.ui:740
 #, kde-format
 msgid "TLS security level:"
 msgstr "TLS 보안 수준:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
-#: rdp/rdppreferences.ui:644
+#: rdp/rdppreferences.ui:766
 #, kde-format
 msgid "any"
 msgstr "임의"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
-#: rdp/rdppreferences.ui:649
+#: rdp/rdppreferences.ui:771
 #, kde-format
 msgid "80 bit"
 msgstr "80비트"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
-#: rdp/rdppreferences.ui:654
+#: rdp/rdppreferences.ui:776
 #, kde-format
 msgid "112 bit"
 msgstr "112비트"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
-#: rdp/rdppreferences.ui:659
+#: rdp/rdppreferences.ui:781
 #, kde-format
 msgid "128 bit"
 msgstr "128비트"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
-#: rdp/rdppreferences.ui:664
+#: rdp/rdppreferences.ui:786
 #, kde-format
 msgid "192 bit"
 msgstr "192비트"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
-#: rdp/rdppreferences.ui:669
+#: rdp/rdppreferences.ui:791
 #, kde-format
 msgid "256 bit"
 msgstr "256비트"
 
 #. i18n: ectx: property (text), widget (QLabel, authPkgListLabel)
-#: rdp/rdppreferences.ui:677
+#: rdp/rdppreferences.ui:799
 #, fuzzy, kde-format
 #| msgid "Authenticating at %1"
 msgid "Authentication Package List:"
 msgstr "%1에서 인증하는 중..."
 
 #. i18n: ectx: attribute (title), widget (QWidget, proxySettingsTab)
-#: rdp/rdppreferences.ui:691
+#: rdp/rdppreferences.ui:815
 #, kde-format
 msgid "Proxy"
 msgstr "프록시"
 
 #. i18n: ectx: property (text), widget (QLabel, protocolLabel)
-#: rdp/rdppreferences.ui:699
+#: rdp/rdppreferences.ui:823
 #, kde-format
 msgid "Protocol:"
 msgstr "프로토콜:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ProxyProtocol)
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_GatewayTransportType)
-#: rdp/rdppreferences.ui:713 rdp/rdppreferences.ui:824
+#: rdp/rdppreferences.ui:837 rdp/rdppreferences.ui:948
 #, kde-format
 msgid "HTTP"
 msgstr "HTTP"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ProxyProtocol)
-#: rdp/rdppreferences.ui:718
+#: rdp/rdppreferences.ui:842
 #, kde-format
 msgid "SOCKS"
 msgstr "SOCKS"
 
 #. i18n: ectx: property (text), widget (QLabel, pPasswordLabel)
 #. i18n: ectx: property (text), widget (QLabel, gPasswordLabel)
-#: rdp/rdppreferences.ui:729 rdp/rdppreferences.ui:785
+#: rdp/rdppreferences.ui:853 rdp/rdppreferences.ui:909
 #, kde-format
 msgid "Password:"
 msgstr "암호:"
 
 #. i18n: ectx: property (text), widget (QLabel, pUsernameLabel)
 #. i18n: ectx: property (text), widget (QLabel, gUsernameLabel)
-#: rdp/rdppreferences.ui:739 rdp/rdppreferences.ui:778
+#: rdp/rdppreferences.ui:863 rdp/rdppreferences.ui:902
 #, kde-format
 msgid "Username:"
 msgstr "사용자 이름:"
 
 #. i18n: ectx: property (text), widget (QLabel, pHostLabel)
 #. i18n: ectx: property (text), widget (QLabel, gServerLabel)
-#: rdp/rdppreferences.ui:746 rdp/rdppreferences.ui:771
+#: rdp/rdppreferences.ui:870 rdp/rdppreferences.ui:895
 #, kde-format
 msgid "Server:"
 msgstr "서버:"
 
 #. i18n: ectx: property (placeholderText), widget (KLineEdit, kcfg_ProxyHost)
 #. i18n: ectx: property (placeholderText), widget (KLineEdit, kcfg_GatewayServer)
-#: rdp/rdppreferences.ui:753 rdp/rdppreferences.ui:792
+#: rdp/rdppreferences.ui:877 rdp/rdppreferences.ui:916
 #, kde-format
 msgid "host:port"
 msgstr "host:port"
 
 #. i18n: ectx: attribute (title), widget (QWidget, gatewaySettingsTab)
-#: rdp/rdppreferences.ui:763
+#: rdp/rdppreferences.ui:887
 #, kde-format
 msgid "Gateway"
 msgstr "게이트웨이"
 
 #. i18n: ectx: property (text), widget (QLabel, gTransportTypeLabel)
-#: rdp/rdppreferences.ui:805
+#: rdp/rdppreferences.ui:929
 #, kde-format
 msgid "Transport type:"
 msgstr "전송 형식:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_GatewayTransportType)
-#: rdp/rdppreferences.ui:819
-#, kde-format
-msgid "Auto"
-msgstr "자동"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, kcfg_GatewayTransportType)
-#: rdp/rdppreferences.ui:829
+#: rdp/rdppreferences.ui:953
 #, kde-format
 msgid "RPC"
 msgstr "RPC"
 
 #. i18n: ectx: property (text), widget (QLabel, gDomainLabel)
-#: rdp/rdppreferences.ui:837
+#: rdp/rdppreferences.ui:961
 #, kde-format
 msgid "Domain:"
 msgstr "도메인:"
 
-#: rdp/rdpsession.cpp:829
+#: rdp/rdpsession.cpp:866
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1791,9 +1844,6 @@ msgstr ""
 
 #~ msgid "Browse to media share path"
 #~ msgstr "미디어 공유 경로 찾아보기"
-
-#~ msgid "Desktop &resolution:"
-#~ msgstr "데스크톱 해상도(&R):"
 
 #~ msgid "ALSA"
 #~ msgstr "ALSA"
