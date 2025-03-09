@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-08 00:43+0000\n"
+"POT-Creation-Date: 2025-03-09 00:41+0000\n"
 "PO-Revision-Date: 2022-02-08 20:03+0100\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -197,12 +197,12 @@ msgstr "Indstil..."
 msgid "Remove"
 msgstr "Fjern"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:292 mainwindow.cpp:682
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:285 mainwindow.cpp:662
 #, kde-format
 msgid "Unusable URL"
 msgstr "Ubrugelig URL"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:682
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:662
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr "Den valgte værk kan ikke håndteres."
@@ -418,98 +418,98 @@ msgstr ""
 msgid "URLs to connect after startup"
 msgstr "URL'er der skal forbinde efter opstart"
 
-#: mainwindow.cpp:116
+#: mainwindow.cpp:109
 #, kde-format
 msgid "KDE Remote Desktop Client started"
 msgstr "KDE's klient til fjernskrivebord startet"
 
-#: mainwindow.cpp:121 mainwindow.cpp:134 mainwindow.cpp:1083
-#: mainwindow.cpp:1178
+#: mainwindow.cpp:114 mainwindow.cpp:127 mainwindow.cpp:1059
+#: mainwindow.cpp:1154
 #, kde-format
 msgid "New Connection"
 msgstr "Ny forbindelse"
 
-#: mainwindow.cpp:140
+#: mainwindow.cpp:133
 #, kde-format
 msgid "Copy Screenshot to Clipboard"
 msgstr "Kopiér skærmbillede til udklipsholderen"
 
-#: mainwindow.cpp:141
+#: mainwindow.cpp:134
 #, kde-format
 msgid "Screenshot"
 msgstr "Skærmbillede"
 
-#: mainwindow.cpp:147 mainwindow.cpp:507
+#: mainwindow.cpp:140 mainwindow.cpp:497
 #, kde-format
 msgid "Switch to Full Screen Mode"
 msgstr "Skift til fuldskærmstilstand"
 
-#: mainwindow.cpp:148 mainwindow.cpp:508
+#: mainwindow.cpp:141 mainwindow.cpp:498
 #, kde-format
 msgid "Full Screen"
 msgstr "Fuldskærm"
 
-#: mainwindow.cpp:155
+#: mainwindow.cpp:148
 #, kde-format
 msgid "View Only"
 msgstr "Vis kun"
 
-#: mainwindow.cpp:160
+#: mainwindow.cpp:153
 #, kde-format
 msgid "Disconnect"
 msgstr "Afbryd forbindelse"
 
-#: mainwindow.cpp:168
+#: mainwindow.cpp:161
 #, kde-format
 msgid "Show Local Cursor"
 msgstr "Vis lokal markør"
 
-#: mainwindow.cpp:169
+#: mainwindow.cpp:162
 #, kde-format
 msgid "Local Cursor"
 msgstr "Lokal markør"
 
-#: mainwindow.cpp:175
+#: mainwindow.cpp:168
 #, kde-format
 msgid "Grab All Possible Keys"
 msgstr "Opfang alle mulige taster"
 
-#: mainwindow.cpp:176
+#: mainwindow.cpp:169
 #, kde-format
 msgid "Grab Keys"
 msgstr "Opfang taster"
 
-#: mainwindow.cpp:182
+#: mainwindow.cpp:175
 #, kde-format
 msgid "Scale Remote Screen to Fit Window Size"
 msgstr "Skalér ekstern skærm så den passer til vinduestørrelsen"
 
-#: mainwindow.cpp:183
+#: mainwindow.cpp:176
 #, kde-format
 msgid "Scale"
 msgstr "Skalér"
 
-#: mainwindow.cpp:186
+#: mainwindow.cpp:179
 #, kde-format
 msgid "Scaling Factor"
 msgstr "Skaleringsfaktor"
 
-#: mainwindow.cpp:197
+#: mainwindow.cpp:190
 #, kde-format
 msgid "Bookmarks"
 msgstr "Bogmærker"
 
-#: mainwindow.cpp:265
+#: mainwindow.cpp:258
 #, kde-format
 msgid "Unable to load connection data from the provided file."
 msgstr ""
 
-#: mainwindow.cpp:265
+#: mainwindow.cpp:258
 #, kde-format
 msgid "Load failed"
 msgstr ""
 
-#: mainwindow.cpp:271
+#: mainwindow.cpp:264
 #, kde-format
 msgid ""
 "The entered address does not have the required form.\n"
@@ -518,146 +518,139 @@ msgstr ""
 "Den indtastede adresse har ikke det krævede format.\n"
 " Syntaks: [brugernavn@]vært[:port]"
 
-#: mainwindow.cpp:271
+#: mainwindow.cpp:264
 #, kde-format
 msgid "Malformed URL"
 msgstr "Misdannet URL"
 
-#: mainwindow.cpp:292
+#: mainwindow.cpp:285
 #, kde-format
 msgid "The entered address cannot be handled."
 msgstr "Den indtastede adresse kan ikke håndteres."
 
-#: mainwindow.cpp:427
+#: mainwindow.cpp:420
 #, kde-format
 msgid "Connecting to %1"
 msgstr "Forbinder til %1"
 
-#: mainwindow.cpp:431
+#: mainwindow.cpp:424
 #, kde-format
 msgid "Authenticating at %1"
 msgstr "Godkender ved %1"
 
-#: mainwindow.cpp:435
+#: mainwindow.cpp:428
 #, kde-format
 msgid "Preparing connection to %1"
 msgstr "Forbereder forbindelse til %1"
 
-#: mainwindow.cpp:439
+#: mainwindow.cpp:432
 #, kde-format
 msgid "Connected to %1"
 msgstr "Forbundet til %1"
 
-#: mainwindow.cpp:518
-#, kde-format
-msgctxt ""
-"window title when in full screen mode (for example displayed in tasklist)"
-msgid "KDE Remote Desktop Client (Full Screen)"
-msgstr "KDE's klient til fjernskrivebord (fuldskærm)"
-
-#: mainwindow.cpp:548
+#: mainwindow.cpp:528
 #, kde-format
 msgid "Switch to Window Mode"
 msgstr "Skift til vinduestilstand"
 
-#: mainwindow.cpp:549
+#: mainwindow.cpp:529
 #, kde-format
 msgid "Window Mode"
 msgstr "Vinduestilstand"
 
-#: mainwindow.cpp:701
+#: mainwindow.cpp:681
 #, kde-format
 msgid "Connect"
 msgstr "Forbind"
 
-#: mainwindow.cpp:702
+#: mainwindow.cpp:682
 #, kde-format
 msgid "Rename"
 msgstr "Omdøb"
 
-#: mainwindow.cpp:703
+#: mainwindow.cpp:683
 #, kde-format
 msgid "Settings"
 msgstr "Indstillinger"
 
-#: mainwindow.cpp:704
+#: mainwindow.cpp:684
 #, kde-format
 msgid "Delete"
 msgstr "Slet"
 
-#: mainwindow.cpp:707 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:687 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "Bogmærker"
 
-#: mainwindow.cpp:707 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:687 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "Historik"
 
-#: mainwindow.cpp:719
+#: mainwindow.cpp:699
 #, kde-format
 msgid "Rename %1"
 msgstr "Omdøb %1"
 
-#: mainwindow.cpp:719
+#: mainwindow.cpp:699
 #, kde-format
 msgid "Rename %1 to"
 msgstr "Omdøb %1 til"
 
-#: mainwindow.cpp:726
+#: mainwindow.cpp:706
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "Vil du virkelig slette %1?"
 
-#: mainwindow.cpp:726
+#: mainwindow.cpp:706
 #, kde-format
 msgid "Delete %1"
 msgstr "Slet %1"
 
-#: mainwindow.cpp:750
+#: mainwindow.cpp:730
 #, kde-format
 msgid "Add Bookmark"
 msgstr "Tilføj bogmærke"
 
-#: mainwindow.cpp:751
+#: mainwindow.cpp:731
 #, kde-format
 msgid "Close Tab"
 msgstr "Luk faneblad"
 
-#: mainwindow.cpp:855
+#: mainwindow.cpp:835
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr "Minimér fuldskærmsvindue"
 
-#: mainwindow.cpp:871
+#: mainwindow.cpp:851
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "Klistr værktøjslinje"
 
-#: mainwindow.cpp:976
+#: mainwindow.cpp:953
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr "Vil du virkelig afslutte KDE's klient til fjernskrivebord?"
 
-#: mainwindow.cpp:977
+#: mainwindow.cpp:954
 #, kde-format
 msgid "Confirm Quit"
 msgstr "Bekræft afslutning"
 
-#: mainwindow.cpp:1106
+#: mainwindow.cpp:1082
 #, kde-format
 msgid "Connect to:"
 msgstr "Forbind til:"
 
-#: mainwindow.cpp:1110
+#: mainwindow.cpp:1086
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr "Skriv her for at forbinde til en adresse og filtrere listen."
 
-#: mainwindow.cpp:1119
+#: mainwindow.cpp:1095
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
@@ -666,17 +659,17 @@ msgstr ""
 "Angiv en IP eller et DNS-navn her. Ryd linjen for at få en liste over "
 "forbindelsesmetoder."
 
-#: mainwindow.cpp:1122
+#: mainwindow.cpp:1098
 #, kde-format
 msgid "Goto Address"
 msgstr "Gå til adresse"
 
-#: mainwindow.cpp:1214
+#: mainwindow.cpp:1190
 #, kde-format
 msgid "Remote Desktops"
 msgstr "Fjernskriveborde"
 
-#: mainwindow.cpp:1243
+#: mainwindow.cpp:1219
 #, kde-format
 msgid "Filter"
 msgstr "Filter"
@@ -1845,6 +1838,11 @@ msgid ""
 msgstr ""
 "<html>Indtast adressen her.<br /><i>Eksempel: vncserver:1 (vært:port / "
 "skærm)</i></html>"
+
+#~ msgctxt ""
+#~ "window title when in full screen mode (for example displayed in tasklist)"
+#~ msgid "KDE Remote Desktop Client (Full Screen)"
+#~ msgstr "KDE's klient til fjernskrivebord (fuldskærm)"
 
 #~ msgid "Abner Silva"
 #~ msgstr "Abner Silva"
