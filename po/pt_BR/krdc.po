@@ -13,34 +13,35 @@
 # André Marcelo Alvarenga <alvarenga@kde.org>, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2018.
 # Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2009, 2010, 2016, 2017, 2019, 2020, 2021.
 # Marcus Vinícius de Andrade Gama <marcus.gama@gmail.com>, 2010, 2012.
+# SPDX-FileCopyrightText: 2025 Geraldo Simiao <geraldosimiao@fedoraproject.org>
 msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-08 00:43+0000\n"
-"PO-Revision-Date: 2021-05-06 14:06-0300\n"
-"Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
+"PO-Revision-Date: 2025-03-09 00:30-0300\n"
+"Last-Translator: Geraldo Simiao <geraldosimiao@fedoraproject.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 20.04.2\n"
+"X-Generator: Lokalize 24.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr ""
 "Waldemar Silva Júnior, Antonio Sergio de Mello e Souza, Henrique Marks, "
-"André Marcelo Alvarenga"
+"André Marcelo Alvarenga, Geraldo Simião"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr ""
 "wsjunior@gmail.com, asergioz@bol.com.br, henriquemarks@gmail.com, "
-"alvarenga@kde.org"
+"alvarenga@kde.org, geraldosimiao@fedoraproject.org"
 
 #: bookmarkmanager.cpp:37
 #, kde-format
@@ -519,7 +520,7 @@ msgstr ""
 #: mainwindow.cpp:265
 #, kde-format
 msgid "Load failed"
-msgstr ""
+msgstr "Carregamento falhou"
 
 #: mainwindow.cpp:271
 #, kde-format
@@ -696,9 +697,7 @@ msgstr "Filtro"
 
 #. i18n: ectx: attribute (title), widget (QWidget, mainSettingsTab)
 #: rdp/rdppreferences.ui:21
-#, fuzzy, kde-format
-#| msgctxt "General Config"
-#| msgid "General"
+#, kde-format
 msgid "General"
 msgstr "Geral"
 
@@ -722,30 +721,27 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:56
-#, fuzzy, kde-format
-#| msgid "Small (800x600)"
+#, kde-format
 msgid "Small (1280x720)"
-msgstr "Pequena (800x600)"
+msgstr "Pequena (1280x720)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:61
 #, kde-format
 msgid "Medium (1600x900)"
-msgstr ""
+msgstr "Médio (1600x900)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:66
-#, fuzzy, kde-format
-#| msgid "Large (1280x1024)"
+#, kde-format
 msgid "Large (1920x1080)"
-msgstr "Grande (1280x1024)"
+msgstr "Grande (1920x1080)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:71
-#, fuzzy, kde-format
-#| msgid "Current KRDC Size"
+#, kde-format
 msgid "Current Window Size"
-msgstr "Tamanho atual do KRDC"
+msgstr "Tamanho atual da janela"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
@@ -807,33 +803,32 @@ msgstr ""
 #: rdp/rdppreferences.ui:173
 #, kde-format
 msgid "Acceleration:"
-msgstr ""
+msgstr "Aceleração:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
 #: rdp/rdppreferences.ui:196 rdp/rdppreferences.ui:245
 #, kde-format
 msgid "Use Best Available"
-msgstr ""
+msgstr "Utilizar a melhor disponível"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
 #: rdp/rdppreferences.ui:201
 #, kde-format
 msgid "Force H.264"
-msgstr ""
+msgstr "Forçar H.264"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
 #: rdp/rdppreferences.ui:206
-#, fuzzy, kde-format
-#| msgid "RemoteFX:"
+#, kde-format
 msgid "Force RemoteFX"
-msgstr "RemoteFX:"
+msgstr "Forçar RemoteFX:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
 #: rdp/rdppreferences.ui:211
 #, kde-format
 msgid "Disable All Acceleration"
-msgstr ""
+msgstr "Desative toda aceleração"
 
 #. i18n: ectx: property (text), widget (QLabel, colorDepthLabel)
 #: rdp/rdppreferences.ui:219
@@ -879,7 +874,7 @@ msgstr "Resolução da área de &trabalho:"
 #: rdp/rdppreferences.ui:943
 #, kde-format
 msgid "Auto"
-msgstr ""
+msgstr "Automático"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DesktopScaleFactor)
 #: rdp/rdppreferences.ui:300
@@ -891,31 +886,31 @@ msgstr ""
 #: rdp/rdppreferences.ui:305
 #, kde-format
 msgid "Custom"
-msgstr ""
+msgstr "Personalizado"
 
 #. i18n: ectx: property (text), widget (QLabel, deviceScaleFactorLabel)
 #: rdp/rdppreferences.ui:337
 #, kde-format
 msgid "Device scale factor:"
-msgstr ""
+msgstr "Fator de escala do dispositivo:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DeviceScaleFactor)
 #: rdp/rdppreferences.ui:368
 #, kde-format
 msgid "100"
-msgstr ""
+msgstr "100"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DeviceScaleFactor)
 #: rdp/rdppreferences.ui:373
 #, kde-format
 msgid "140"
-msgstr ""
+msgstr "140"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DeviceScaleFactor)
 #: rdp/rdppreferences.ui:378
 #, kde-format
 msgid "180"
-msgstr ""
+msgstr "180"
 
 #. i18n: ectx: property (text), widget (QLabel, layoutLabel)
 #: rdp/rdppreferences.ui:386
@@ -1190,44 +1185,43 @@ msgstr "Compartilhar mídia:"
 #: rdp/rdppreferences.ui:676
 #, kde-format
 msgid "Share Smartcard:"
-msgstr ""
+msgstr "Compartilhar Smartcard:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, securitySettingsTab)
 #: rdp/rdppreferences.ui:690
 #, kde-format
 msgid "Security"
-msgstr ""
+msgstr "Segurança"
 
 #. i18n: ectx: property (text), widget (QLabel, gSecurityLabel)
 #: rdp/rdppreferences.ui:698
 #, kde-format
 msgid "Security:"
-msgstr ""
+msgstr "Segurança:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_NLASecurity)
 #: rdp/rdppreferences.ui:710
-#, fuzzy, kde-format
-#| msgid "LAN"
+#, kde-format
 msgid "NLA"
-msgstr "LAN"
+msgstr "NLA"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TLSSecurity)
 #: rdp/rdppreferences.ui:717
 #, kde-format
 msgid "TLS"
-msgstr ""
+msgstr "TLS"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_RDPSecurity)
 #: rdp/rdppreferences.ui:724
 #, kde-format
 msgid "RDP"
-msgstr ""
+msgstr "RDP"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EXTSecurity)
 #: rdp/rdppreferences.ui:731
 #, kde-format
 msgid "Ext"
-msgstr ""
+msgstr "Ext"
 
 #. i18n: ectx: property (text), widget (QLabel, TlsSecLevelLabel)
 #: rdp/rdppreferences.ui:740
@@ -1239,7 +1233,7 @@ msgstr ""
 #: rdp/rdppreferences.ui:766
 #, kde-format
 msgid "any"
-msgstr ""
+msgstr "qualquer"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:771
@@ -1282,34 +1276,33 @@ msgstr "Autenticando em %1"
 #: rdp/rdppreferences.ui:815
 #, kde-format
 msgid "Proxy"
-msgstr ""
+msgstr "Proxy"
 
 #. i18n: ectx: property (text), widget (QLabel, protocolLabel)
 #: rdp/rdppreferences.ui:823
-#, fuzzy, kde-format
-#| msgid "Default protocol:"
+#, kde-format
 msgid "Protocol:"
-msgstr "Protocolo padrão:"
+msgstr "Protocolo:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ProxyProtocol)
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_GatewayTransportType)
 #: rdp/rdppreferences.ui:837 rdp/rdppreferences.ui:948
 #, kde-format
 msgid "HTTP"
-msgstr ""
+msgstr "HTTP"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ProxyProtocol)
 #: rdp/rdppreferences.ui:842
 #, kde-format
 msgid "SOCKS"
-msgstr ""
+msgstr "SOCKS"
 
 #. i18n: ectx: property (text), widget (QLabel, pPasswordLabel)
 #. i18n: ectx: property (text), widget (QLabel, gPasswordLabel)
 #: rdp/rdppreferences.ui:853 rdp/rdppreferences.ui:909
 #, kde-format
 msgid "Password:"
-msgstr ""
+msgstr "Senha:"
 
 #. i18n: ectx: property (text), widget (QLabel, pUsernameLabel)
 #. i18n: ectx: property (text), widget (QLabel, gUsernameLabel)
@@ -1324,7 +1317,7 @@ msgstr "Nome de usuário:"
 #: rdp/rdppreferences.ui:870 rdp/rdppreferences.ui:895
 #, kde-format
 msgid "Server:"
-msgstr ""
+msgstr "Servidor:"
 
 #. i18n: ectx: property (placeholderText), widget (KLineEdit, kcfg_ProxyHost)
 #. i18n: ectx: property (placeholderText), widget (KLineEdit, kcfg_GatewayServer)
@@ -1337,7 +1330,7 @@ msgstr ""
 #: rdp/rdppreferences.ui:887
 #, kde-format
 msgid "Gateway"
-msgstr ""
+msgstr "Gateway"
 
 #. i18n: ectx: property (text), widget (QLabel, gTransportTypeLabel)
 #: rdp/rdppreferences.ui:929
@@ -1349,13 +1342,13 @@ msgstr ""
 #: rdp/rdppreferences.ui:953
 #, kde-format
 msgid "RPC"
-msgstr ""
+msgstr "RPC"
 
 #. i18n: ectx: property (text), widget (QLabel, gDomainLabel)
 #: rdp/rdppreferences.ui:961
 #, kde-format
 msgid "Domain:"
-msgstr ""
+msgstr "Domínio:"
 
 #: rdp/rdpsession.cpp:866
 #, kde-format
@@ -1385,7 +1378,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
-msgstr ""
+msgstr "Verificar certificado"
 
 #: rdp/rdpview.cpp:241 rdp/rdpview.cpp:266
 #, kde-format
