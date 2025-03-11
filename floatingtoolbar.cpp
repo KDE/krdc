@@ -44,8 +44,6 @@ public:
         , visible(false)
         , sticky(false)
         , opacity(toolBarOpacity)
-        // set queuedShow to true so we show the toolbar if we get a resize event on the anchorWidget
-        , queuedShow(true)
     {
     }
 
@@ -71,7 +69,6 @@ public:
     bool visible;
     bool sticky;
     qreal opacity;
-    bool queuedShow;
 
     QPixmap backgroundPixmap;
 };
@@ -194,18 +191,8 @@ void FloatingToolBar::hide()
 bool FloatingToolBar::eventFilter(QObject *obj, QEvent *e)
 {
     if (obj == d->anchorWidget && e->type() == QEvent::Resize) {
-        if (d->queuedShow) { // if the toolbar is not visible yet, try to show it if the anchor widget is in fullscreen already
-            d->queuedShow = false;
-            showAndAnimate();
-            return true;
-        }
-
-        // if anchorWidget changed geometry reposition toolbar
-        d->animTimer->stop();
-        if ((d->animState == Hiding || !d->visible) && d->toDelete)
-            deleteLater();
-        else
-            d->reposition();
+        showAndAnimate();
+        return true;
     }
 
     return QToolBar::eventFilter(obj, e);
