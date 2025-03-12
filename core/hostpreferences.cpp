@@ -19,9 +19,21 @@
 #include <QLabel>
 #include <QVBoxLayout>
 
+#ifdef USE_SSH_TUNNEL
+#include "sshtunnelwidget.h"
+
+static const char use_ssh_tunnel_config_key[] = "use_ssh_tunnel";
+static const char use_ssh_tunnel_loopback_config_key[] = "use_ssh_tunnel_loopback";
+static const char ssh_tunnel_port_config_key[] = "ssh_tunnel_port";
+static const char ssh_tunnel_user_name_config_key[] = "ssh_tunnel_user_name";
+#endif
+
 HostPreferences::HostPreferences(KConfigGroup configGroup, QObject *parent)
     : QObject(parent)
     , m_configGroup(configGroup)
+#ifdef USE_SSH_TUNNEL
+    , sshTunnelWidget(nullptr)
+#endif
     , m_connected(false)
     , showAgainCheckBox(nullptr)
     , walletSupportCheckBox(nullptr)
@@ -40,6 +52,15 @@ KConfigGroup HostPreferences::configGroup()
 
 void HostPreferences::acceptConfig()
 {
+#ifdef USE_SSH_TUNNEL
+    if (sshTunnelWidget) {
+        setUseSshTunnel(sshTunnelWidget->useSshTunnel());
+        setUseSshTunnelLoopback(sshTunnelWidget->useSshTunnelLoopback());
+        setSshTunnelPort(sshTunnelWidget->sshTunnelPort());
+        setSshTunnelUserName(sshTunnelWidget->sshTunnelUserName());
+    }
+#endif
+
     setShowConfigAgain(showAgainCheckBox->isChecked());
     setWalletSupport(walletSupportCheckBox->isChecked());
 }
@@ -185,7 +206,20 @@ bool HostPreferences::showDialog(QWidget *parent)
         layout->addWidget(commentLabel);
     }
 
-    QWidget *widget = createProtocolSpecificConfigPage();
+#ifdef USE_SSH_TUNNEL
+    sshTunnelWidget = new SshTunnelWidget;
+    sshTunnelWidget->setUseSshTunnel(useSshTunnel());
+    sshTunnelWidget->setUseSshTunnelLoopback(useSshTunnelLoopback());
+    sshTunnelWidget->setSshTunnelPort(sshTunnelPort());
+    sshTunnelWidget->setSshTunnelUserName(sshTunnelUserName());
+    QWidget *widget = createProtocolSpecificConfigPage(sshTunnelWidget);
+    if (!widget) {
+        delete sshTunnelWidget;
+        sshTunnelWidget = nullptr;
+    }
+#else
+    QWidget *widget = createProtocolSpecificConfigPage(nullptr);
+#endif
 
     if (widget) {
         if (widget->layout())
@@ -220,3 +254,45 @@ void HostPreferences::setShownWhileConnected(bool connected)
 {
     m_connected = connected;
 }
+
+#ifdef USE_SSH_TUNNEL
+bool HostPreferences::useSshTunnel() const
+{
+    return m_configGroup.readEntry(use_ssh_tunnel_config_key, false);
+}
+
+void HostPreferences::setUseSshTunnel(bool useSshTunnel)
+{
+    m_configGroup.writeEntry(use_ssh_tunnel_config_key, useSshTunnel);
+}
+
+bool HostPreferences::useSshTunnelLoopback() const
+{
+    return m_configGroup.readEntry(use_ssh_tunnel_loopback_config_key, false);
+}
+
+void HostPreferences::setUseSshTunnelLoopback(bool useSshTunnelLoopback)
+{
+    m_configGroup.writeEntry(use_ssh_tunnel_loopback_config_key, useSshTunnelLoopback);
+}
+
+int HostPreferences::sshTunnelPort() const
+{
+    return m_configGroup.readEntry(ssh_tunnel_port_config_key, 22);
+}
+
+void HostPreferences::setSshTunnelPort(int port)
+{
+    m_configGroup.writeEntry(ssh_tunnel_port_config_key, port);
+}
+
+QString HostPreferences::sshTunnelUserName() const
+{
+    return m_configGroup.readEntry(ssh_tunnel_user_name_config_key, QString());
+}
+
+void HostPreferences::setSshTunnelUserName(const QString &userName)
+{
+    m_configGroup.writeEntry(ssh_tunnel_user_name_config_key, userName);
+}
+#endif

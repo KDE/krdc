@@ -69,7 +69,7 @@ bool TestView::isQuitting()
     return false;
 }
 
-bool TestView::start()
+bool TestView::startConnection()
 {
     setStatus(Connecting);
     // call it async in order to simulate real world behavior
@@ -80,6 +80,10 @@ bool TestView::start()
 HostPreferences *TestView::hostPreferences()
 {
     return m_hostPreferences;
+}
+
+void TestView::startQuittingConnection()
+{
 }
 
 void TestView::handleLocalClipboardChanged(const QMimeData *data)

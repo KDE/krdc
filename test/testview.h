@@ -27,10 +27,12 @@ public:
     QSize sizeHint() const override;
 
     bool isQuitting() override;
-    bool start() override;
     HostPreferences *hostPreferences() override;
 
 protected:
+    bool startConnection() override;
+    void startQuittingConnection() override;
+
     void handleKeyEvent(QKeyEvent *event) override;
     void handleWheelEvent(QWheelEvent *event) override;
     void handleMouseEvent(QMouseEvent *event) override;
@@ -53,7 +55,7 @@ public:
     }
 
 protected:
-    QWidget *createProtocolSpecificConfigPage() override
+    QWidget *createProtocolSpecificConfigPage(QWidget *) override
     {
         return nullptr;
     };

@@ -5,7 +5,7 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-#include "vncsshtunnelthread.h"
+#include "sshtunnelthread.h"
 #include "krdc_debug.h"
 
 #include <KLocalizedString>
@@ -17,9 +17,9 @@
 
 #include <QDebug>
 
-VncSshTunnelThread::VncSshTunnelThread(const QByteArray &host, int vncPort, int tunnelPort, int sshPort, const QByteArray &sshUserName, bool loopback)
+SshTunnelThread::SshTunnelThread(const QByteArray &host, int port, int tunnelPort, int sshPort, const QByteArray &sshUserName, bool loopback)
     : m_host(host)
-    , m_vncPort(vncPort)
+    , m_port(port)
     , m_tunnelPort(tunnelPort)
     , m_sshPort(sshPort)
     , m_sshUserName(sshUserName)
@@ -28,25 +28,25 @@ VncSshTunnelThread::VncSshTunnelThread(const QByteArray &host, int vncPort, int 
 {
 }
 
-VncSshTunnelThread::~VncSshTunnelThread()
+SshTunnelThread::~SshTunnelThread()
 {
     m_stop_thread = true;
     wait();
 }
 
-int VncSshTunnelThread::tunnelPort() const
+int SshTunnelThread::tunnelPort() const
 {
     return m_tunnelPort;
 }
 
-QString VncSshTunnelThread::password() const
+QString SshTunnelThread::password() const
 {
     return m_password;
 }
 
 // This is called by the main thread, but from a slot connected to our signal via BlockingQueuedConnection
 // so this is safe even without a mutex, the semaphore in BlockingQueuedConnection takes care of the synchronization.
-void VncSshTunnelThread::setPassword(const QString &password, PasswordOrigin origin)
+void SshTunnelThread::setPassword(const QString &password, PasswordOrigin origin)
 {
     m_password = password;
     m_passwordOrigin = origin;
@@ -54,12 +54,12 @@ void VncSshTunnelThread::setPassword(const QString &password, PasswordOrigin ori
 
 // This is called by the main thread, but from a slot connected to our signal via BlockingQueuedConnection
 // so this is safe even without a mutex, the semaphore in BlockingQueuedConnection takes care of the synchronization.
-void VncSshTunnelThread::userCanceledPasswordRequest()
+void SshTunnelThread::userCanceledPasswordRequest()
 {
     m_passwordRequestCanceledByUser = true;
 }
 
-void VncSshTunnelThread::run()
+void SshTunnelThread::run()
 {
     struct CleanupHelper {
         int server_sock = -1;
@@ -170,8 +170,8 @@ void VncSshTunnelThread::run()
 
     Q_EMIT listenReady();
     // After here we don't need to emit errorMessage anymore on error, qCDebug is enough
-    // this is because the actual vnc thread will start because of this call and thus
-    // any socket error here will be detected by the vnc thread and the usual error mechanisms
+    // this is because the actual vnc or rdp thread will start because of this call and thus
+    // any socket error here will be detected by the vnc or rdp thread and the usual error mechanisms
     // there will warn the user interface
 
     int client_sock;
@@ -193,7 +193,7 @@ void VncSshTunnelThread::run()
     ssh_channel forwarding_channel = ssh_channel_new(session);
     {
         const char *forward_remote_host = m_loopback ? "127.0.0.1" : m_host.constData();
-        res = ssh_channel_open_forward(forwarding_channel, forward_remote_host, m_vncPort, "127.0.0.1", 0);
+        res = ssh_channel_open_forward(forwarding_channel, forward_remote_host, m_port, "127.0.0.1", 0);
         if (res != SSH_OK || !ssh_channel_is_open(forwarding_channel)) {
             qCDebug(KRDC) << "SSH channel open error" << ssh_get_error(session);
             return;

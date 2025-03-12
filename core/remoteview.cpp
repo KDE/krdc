@@ -15,10 +15,19 @@
 #include <QKeyEvent>
 #include <QMouseEvent>
 #include <QStandardPaths>
+#include <QTimer>
 #include <QWheelEvent>
 
 #ifdef HAVE_WAYLAND
 #include "waylandinhibition_p.h"
+#endif
+
+#ifdef USE_SSH_TUNNEL
+#include <KLocalizedString>
+#include <KMessageBox>
+#include <KPasswordDialog>
+
+#include "hostpreferences.h"
 #endif
 
 RemoteView::RemoteView(QWidget *parent)
@@ -36,6 +45,9 @@ RemoteView::RemoteView(QWidget *parent)
     , m_wallet(nullptr)
 #endif
     , m_localCursorState(CursorOff)
+#ifdef USE_SSH_TUNNEL
+    , m_sshTunnelThread(nullptr)
+#endif
 {
     resize(0, 0);
     installEventFilter(this);
@@ -130,6 +142,14 @@ QSize RemoteView::framebufferSize()
 
 void RemoteView::startQuitting()
 {
+    startQuittingConnection();
+
+#ifdef USE_SSH_TUNNEL
+    if (m_sshTunnelThread) {
+        delete m_sshTunnelThread;
+        m_sshTunnelThread = nullptr;
+    }
+#endif
 }
 
 bool RemoteView::isQuitting()
@@ -140,6 +160,40 @@ bool RemoteView::isQuitting()
 int RemoteView::port()
 {
     return m_port;
+}
+
+bool RemoteView::start()
+{
+#ifdef USE_SSH_TUNNEL
+    HostPreferences *prefs = hostPreferences();
+    if (prefs->useSshTunnel()) {
+        Q_ASSERT(!m_sshTunnelThread);
+
+        m_sshTunnelThread = new SshTunnelThread(m_host.toUtf8(),
+                                                m_port,
+                                                /* tunnelPort */ 0,
+                                                prefs->sshTunnelPort(),
+                                                prefs->sshTunnelUserName().toUtf8(),
+                                                prefs->useSshTunnelLoopback());
+        connect(m_sshTunnelThread, &SshTunnelThread::passwordRequest, this, &RemoteView::sshRequestPassword, Qt::BlockingQueuedConnection);
+        connect(m_sshTunnelThread, &SshTunnelThread::errorMessage, this, &RemoteView::sshErrorMessage);
+
+        if (prefs->useSshTunnelLoopback()) {
+            m_host = QStringLiteral("127.0.0.1");
+        }
+
+        connect(m_sshTunnelThread, &SshTunnelThread::listenReady, this, [this, prefs] {
+            if (prefs->walletSupport()) {
+                saveWalletSshPassword();
+            }
+            m_port = m_sshTunnelThread->tunnelPort();
+            startConnection();
+        });
+        m_sshTunnelThread->start();
+        return true;
+    }
+#endif
+    return startConnection();
 }
 
 void RemoteView::updateConfiguration()
@@ -449,5 +503,54 @@ void RemoteView::releaseKeyboard()
 #endif
     QWidget::releaseKeyboard();
 }
+
+#ifdef USE_SSH_TUNNEL
+QString RemoteView::readWalletSshPassword()
+{
+    return readWalletPasswordForKey(QStringLiteral("SSHTUNNEL") + m_url.toDisplayString(QUrl::StripTrailingSlash));
+}
+
+void RemoteView::saveWalletSshPassword()
+{
+    saveWalletPasswordForKey(QStringLiteral("SSHTUNNEL") + m_url.toDisplayString(QUrl::StripTrailingSlash), m_sshTunnelThread->password());
+}
+
+void RemoteView::sshRequestPassword(SshTunnelThread::PasswordRequestFlags flags)
+{
+    qCDebug(KRDC) << "request ssh password";
+
+    if (hostPreferences()->walletSupport() && ((flags & SshTunnelThread::IgnoreWallet) != SshTunnelThread::IgnoreWallet)) {
+        const QString walletPassword = readWalletSshPassword();
+
+        if (!walletPassword.isNull()) {
+            m_sshTunnelThread->setPassword(walletPassword, SshTunnelThread::PasswordFromWallet);
+            return;
+        }
+    }
+
+    KPasswordDialog dialog(this);
+    dialog.setPrompt(i18n("Please enter the SSH password."));
+    if (dialog.exec() == KPasswordDialog::Accepted) {
+        m_sshTunnelThread->setPassword(dialog.password(), SshTunnelThread::PasswordFromDialog);
+    } else {
+        qCDebug(KRDC) << "ssh password dialog not accepted";
+        m_sshTunnelThread->userCanceledPasswordRequest();
+        // We need to use a single shot because otherwise startQuitting deletes the thread
+        // but we're here from a blocked queued connection and thus we deadlock
+        QTimer::singleShot(0, this, &RemoteView::startQuitting);
+    }
+}
+
+void RemoteView::sshErrorMessage(const QString &message)
+{
+    qCritical(KRDC) << message;
+
+    startQuitting();
+
+    KMessageBox::error(this, message, i18n("SSH Tunnel failure"));
+
+    Q_EMIT errorMessage(i18n("SSH Tunnel failure"), message);
+}
+#endif
 
 #include "moc_remoteview.cpp"

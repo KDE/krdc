@@ -13,10 +13,6 @@
 #include <QWindow>
 
 static const char quality_config_key[] = "quality";
-static const char use_ssh_tunnel_config_key[] = "use_ssh_tunnel";
-static const char use_ssh_tunnel_loopback_config_key[] = "use_ssh_tunnel_loopback";
-static const char ssh_tunnel_port_config_key[] = "ssh_tunnel_port";
-static const char ssh_tunnel_user_name_config_key[] = "ssh_tunnel_user_name";
 static const char dont_copy_passwords_config_key[] = "dont_copy_passwords";
 
 VncHostPreferences::VncHostPreferences(KConfigGroup configGroup, QObject *parent)
@@ -28,10 +24,13 @@ VncHostPreferences::~VncHostPreferences()
 {
 }
 
-QWidget *VncHostPreferences::createProtocolSpecificConfigPage()
+QWidget *VncHostPreferences::createProtocolSpecificConfigPage(QWidget *sshTunnelWidget)
 {
     QWidget *vncPage = new QWidget();
     vncUi.setupUi(vncPage);
+    if (sshTunnelWidget) {
+        vncUi.sshTunnelLayout->addWidget(sshTunnelWidget);
+    }
 
     vncUi.kcfg_Quality->setCurrentIndex(quality() - 1);
     vncUi.kcfg_Scaling->setChecked(windowedScale());
@@ -46,19 +45,6 @@ QWidget *VncHostPreferences::createProtocolSpecificConfigPage()
     vncUi.resolutionComboBox->setCurrentIndex((resolutionIndex == -1) ? vncUi.resolutionComboBox->count() - 1 : resolutionIndex);
 
     updateScaling(windowedScale());
-
-#ifdef LIBSSH_FOUND
-    connect(vncUi.use_ssh_tunnel, &QCheckBox::toggled, vncUi.ssh_groupBox, &QWidget::setVisible);
-
-    vncUi.ssh_groupBox->setVisible(useSshTunnel());
-    vncUi.use_ssh_tunnel->setChecked(useSshTunnel());
-    vncUi.use_loopback->setChecked(useSshTunnelLoopback());
-    vncUi.ssh_tunnel_port->setValue(sshTunnelPort());
-    vncUi.ssh_tunnel_user_name->setText(sshTunnelUserName());
-#else
-    vncUi.ssh_groupBox->hide();
-    vncUi.use_ssh_tunnel->hide();
-#endif
 
     vncUi.dont_copy_passwords->setChecked(dontCopyPasswords());
 
@@ -134,12 +120,6 @@ void VncHostPreferences::acceptConfig()
         setHeight(vncUi.kcfg_ScalingHeight->value());
         setWidth(vncUi.kcfg_ScalingWidth->value());
     }
-
-    setUseSshTunnel(vncUi.use_ssh_tunnel->isChecked());
-    setUseSshTunnelLoopback(vncUi.use_loopback->isChecked());
-    setSshTunnelPort(vncUi.ssh_tunnel_port->value());
-    setSshTunnelUserName(vncUi.ssh_tunnel_user_name->text());
-    setDontCopyPasswords(vncUi.dont_copy_passwords->isChecked());
 }
 
 void VncHostPreferences::setQuality(RemoteView::Quality quality)
@@ -151,46 +131,6 @@ void VncHostPreferences::setQuality(RemoteView::Quality quality)
 RemoteView::Quality VncHostPreferences::quality()
 {
     return (RemoteView::Quality)m_configGroup.readEntry(quality_config_key, (int)Settings::quality() + 1);
-}
-
-bool VncHostPreferences::useSshTunnel() const
-{
-    return m_configGroup.readEntry(use_ssh_tunnel_config_key, false);
-}
-
-void VncHostPreferences::setUseSshTunnel(bool useSshTunnel)
-{
-    m_configGroup.writeEntry(use_ssh_tunnel_config_key, useSshTunnel);
-}
-
-bool VncHostPreferences::useSshTunnelLoopback() const
-{
-    return m_configGroup.readEntry(use_ssh_tunnel_loopback_config_key, false);
-}
-
-void VncHostPreferences::setUseSshTunnelLoopback(bool useSshTunnelLoopback)
-{
-    m_configGroup.writeEntry(use_ssh_tunnel_loopback_config_key, useSshTunnelLoopback);
-}
-
-int VncHostPreferences::sshTunnelPort() const
-{
-    return m_configGroup.readEntry(ssh_tunnel_port_config_key, 22);
-}
-
-void VncHostPreferences::setSshTunnelPort(int port)
-{
-    m_configGroup.writeEntry(ssh_tunnel_port_config_key, port);
-}
-
-QString VncHostPreferences::sshTunnelUserName() const
-{
-    return m_configGroup.readEntry(ssh_tunnel_user_name_config_key, QString());
-}
-
-void VncHostPreferences::setSshTunnelUserName(const QString &userName)
-{
-    m_configGroup.writeEntry(ssh_tunnel_user_name_config_key, userName);
 }
 
 bool VncHostPreferences::dontCopyPasswords() const

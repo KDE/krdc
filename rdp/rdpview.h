@@ -39,10 +39,7 @@ public:
     QSize framebufferSize() override; // returns the size of the remote view
     QSize sizeHint() const override; // returns the suggested size
 
-    // functions regarding the connection
-    void startQuitting() override; // start closing the connection
     bool isQuitting() override; // are we currently closing the connection?
-    bool start() override; // open a connection
 
     HostPreferences *hostPreferences() override;
 
@@ -67,6 +64,9 @@ public Q_SLOTS:
     void setRemoteCursor(const QCursor cursor);
 
 protected:
+    bool startConnection() override;
+    void startQuittingConnection() override;
+
     QSize initialSize();
 
     void paintEvent(QPaintEvent *event) override;

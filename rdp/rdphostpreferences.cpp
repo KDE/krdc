@@ -122,10 +122,13 @@ RdpHostPreferences::~RdpHostPreferences()
 {
 }
 
-QWidget *RdpHostPreferences::createProtocolSpecificConfigPage()
+QWidget *RdpHostPreferences::createProtocolSpecificConfigPage(QWidget *sshTunnelWidget)
 {
     QWidget *rdpPage = new QWidget();
     rdpUi.setupUi(rdpPage);
+    if (sshTunnelWidget) {
+        rdpUi.settingsTabs->addTab(sshTunnelWidget, sshTunnelWidget->windowTitle());
+    }
 
     rdpUi.kcfg_ScaleToSize->setChecked(scaleToSize());
     rdpUi.kcfg_Height->setValue(height());

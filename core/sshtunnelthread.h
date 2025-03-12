@@ -5,8 +5,8 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-#ifndef VNCSSHTUNNELTHREAD_H
-#define VNCSSHTUNNELTHREAD_H
+#ifndef SSHTUNNELTHREAD_H
+#define SSHTUNNELTHREAD_H
 
 #include <QThread>
 
@@ -17,12 +17,14 @@
 
 #include <libssh/libssh.h>
 
-class VncSshTunnelThread : public QThread
+#include "krdccore_export.h"
+
+class KRDCCORE_EXPORT SshTunnelThread : public QThread
 {
     Q_OBJECT
 public:
-    VncSshTunnelThread(const QByteArray &host, int vncPort, int tunnelPort, int sshPort, const QByteArray &sshUserName, bool loopback);
-    ~VncSshTunnelThread() override;
+    SshTunnelThread(const QByteArray &host, int port, int tunnelPort, int sshPort, const QByteArray &sshUserName, bool loopback);
+    ~SshTunnelThread() override;
 
     enum PasswordOrigin {
         PasswordFromWallet,
@@ -49,7 +51,7 @@ Q_SIGNALS:
 
 private:
     QByteArray m_host;
-    int m_vncPort;
+    int m_port;
     int m_tunnelPort;
     int m_sshPort;
     QByteArray m_sshUserName;

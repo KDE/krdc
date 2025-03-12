@@ -16,6 +16,10 @@
 class QCheckBox;
 class QWidget;
 
+#ifdef USE_SSH_TUNNEL
+class SshTunnelWidget;
+#endif
+
 class KRDCCORE_EXPORT HostPreferences : public QObject
 {
     Q_OBJECT
@@ -68,10 +72,17 @@ public:
     /** If @p connected is true, a message is shown that settings might only apply after a reconnect. */
     void setShownWhileConnected(bool connected);
 
+#ifdef USE_SSH_TUNNEL
+    bool useSshTunnel() const;
+    bool useSshTunnelLoopback() const;
+    int sshTunnelPort() const;
+    QString sshTunnelUserName() const;
+#endif
+
 protected:
     HostPreferences(KConfigGroup configGroup, QObject *parent);
 
-    virtual QWidget *createProtocolSpecificConfigPage() = 0;
+    virtual QWidget *createProtocolSpecificConfigPage(QWidget *sshTunnelWidget) = 0;
 
     /** Called when the user validates the config dialog. */
     virtual void acceptConfig();
@@ -84,6 +95,15 @@ protected:
 private:
     void setShowConfigAgain(bool show);
     void setWalletSupport(bool walletSupport);
+
+#ifdef USE_SSH_TUNNEL
+    void setUseSshTunnel(bool useSshTunnel);
+    void setUseSshTunnelLoopback(bool useSshTunnelLoopback);
+    void setSshTunnelPort(int port);
+    void setSshTunnelUserName(const QString &userName);
+
+    SshTunnelWidget *sshTunnelWidget;
+#endif
 
     bool m_hostConfigured;
     bool m_connected;

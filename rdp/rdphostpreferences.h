@@ -166,7 +166,7 @@ public:
     void setDeviceScaleFactor(DeviceScaleFactor deviceScaleFactor);
 
 protected:
-    QWidget *createProtocolSpecificConfigPage() override;
+    QWidget *createProtocolSpecificConfigPage(QWidget *sshTunnelWidget) override;
     void acceptConfig() override;
 
 private:

@@ -25,6 +25,11 @@
 #include "shortcutinhibition_p.h"
 #endif
 
+#if defined(LIBSSH_FOUND) && !defined(QTONLY)
+#define USE_SSH_TUNNEL
+#include "sshtunnelthread.h"
+#endif
+
 struct ModifierKey {
     quint32 nativeScanCode;
     quint32 nativeVirtualKey;
@@ -202,7 +207,7 @@ public:
      * immediately. The call must not block.
      * @see isQuitting()
      */
-    virtual void startQuitting();
+    void startQuitting();
 
     /**
      * Checks whether the view is currently quitting.
@@ -235,7 +240,7 @@ public:
      * @see disconnectedError()
      * @see statusChanged()
      */
-    virtual bool start() = 0;
+    bool start();
 
     /**
      * Called when the configuration is changed.
@@ -395,6 +400,9 @@ Q_SIGNALS:
 protected:
     RemoteView(QWidget *parent = nullptr);
 
+    virtual bool startConnection() = 0;
+    virtual void startQuittingConnection() = 0;
+
     void focusInEvent(QFocusEvent *event) override;
     void focusOutEvent(QFocusEvent *event) override;
     bool event(QEvent *event) override;
@@ -453,6 +461,18 @@ protected:
 #endif
 
     LocalCursorState m_localCursorState;
+
+#ifdef USE_SSH_TUNNEL
+private:
+    SshTunnelThread *m_sshTunnelThread;
+
+    QString readWalletSshPassword();
+    void saveWalletSshPassword();
+
+private Q_SLOTS:
+    void sshRequestPassword(SshTunnelThread::PasswordRequestFlags flags);
+    void sshErrorMessage(const QString &message);
+#endif
 };
 
 #endif

@@ -102,19 +102,20 @@ ecm_set_disabled_deprecation_versions(QT 5.15.2
 
 set(CMAKE_CXX_STANDARD 20)
 
+find_package(LibSSH)
+set_package_properties(LibSSH PROPERTIES
+    DESCRIPTION "ssh library"
+    URL "https://libssh.org/"
+    PURPOSE "Needed to build SSH tunnel support "
+    TYPE OPTIONAL
+)
+
 add_subdirectory(core)
 
 if(WITH_VNC)
     find_package(PkgConfig REQUIRED)
     pkg_check_modules(VNCCLIENT libvncclient REQUIRED IMPORTED_TARGET)
 
-    find_package(LibSSH)
-    set_package_properties(LibSSH PROPERTIES
-        DESCRIPTION "ssh library"
-        URL "https://libssh.org/"
-        PURPOSE "Needed to build VNC+SSH tunnel support "
-        TYPE OPTIONAL
-    )
     add_subdirectory(vnc)
 endif()
 

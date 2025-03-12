@@ -46,6 +46,19 @@ if(HAVE_WAYLAND)
     target_link_libraries(krdccore Qt::GuiPrivate Qt::WaylandClient)
 endif()
 
+if (LIBSSH_FOUND)
+    target_compile_definitions(krdccore PUBLIC -DLIBSSH_FOUND)
+    target_sources(krdccore PRIVATE
+        sshtunnelthread.cpp
+        sshtunnelwidget.cpp
+    )
+    ki18n_wrap_ui(krdccore
+        sshtunnelwidget.ui
+    )
+    target_include_directories(krdccore PRIVATE ${LIBSSH_INCLUDE_DIR})
+    target_link_libraries(krdccore ${LIBSSH_LIBRARIES})
+endif()
+
 install(TARGETS krdccore ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
 # Install headers

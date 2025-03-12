@@ -32,23 +32,11 @@ if(HAIKU)
     target_link_libraries(krdc_vncplugin network)
 endif()
 
-if (LIBSSH_FOUND)
-    target_compile_definitions(krdc_vncplugin PRIVATE -DLIBSSH_FOUND)
-    target_sources(krdc_vncplugin PRIVATE vncsshtunnelthread.cpp)
-    target_include_directories(krdc_vncplugin PRIVATE ${LIBSSH_INCLUDE_DIR})
-    target_link_libraries(krdc_vncplugin ${LIBSSH_LIBRARIES})
-endif()
-
-
 add_library(kcm_krdc_vncplugin)
 
 target_sources(kcm_krdc_vncplugin PRIVATE
     vncpreferences.cpp
 )
-
-if (LIBSSH_FOUND)
-    target_compile_definitions(kcm_krdc_vncplugin PRIVATE -DLIBSSH_FOUND)
-endif()
 
 target_link_libraries(kcm_krdc_vncplugin
     Qt::Core

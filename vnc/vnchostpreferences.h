@@ -21,22 +21,14 @@ public:
     void setQuality(RemoteView::Quality quality);
     RemoteView::Quality quality();
 
-    bool useSshTunnel() const;
-    bool useSshTunnelLoopback() const;
-    int sshTunnelPort() const;
-    QString sshTunnelUserName() const;
     bool dontCopyPasswords() const;
 
 protected:
     void acceptConfig() override;
 
-    QWidget *createProtocolSpecificConfigPage() override;
+    QWidget *createProtocolSpecificConfigPage(QWidget *sshTunnelWidget) override;
 
 private:
-    void setUseSshTunnel(bool useSshTunnel);
-    void setUseSshTunnelLoopback(bool useSshTunnelLoopback);
-    void setSshTunnelPort(int port);
-    void setSshTunnelUserName(const QString &userName);
     void setDontCopyPasswords(bool dontCopyPasswords);
 
     Ui::VncPreferences vncUi;

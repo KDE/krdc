@@ -18,10 +18,6 @@ class KConfigGroup
 #include "vnchostpreferences.h"
 #endif
 
-#ifdef LIBSSH_FOUND
-#include "vncsshtunnelthread.h"
-#endif
-
 #include <QMap>
 
 extern "C" {
@@ -39,9 +35,7 @@ public:
     QSize framebufferSize() override;
     QSize sizeHint() const override;
     QSize minimumSizeHint() const override;
-    void startQuitting() override;
     bool isQuitting() override;
-    bool start() override;
     bool supportsScaling() const override;
     bool supportsLocalCursor() const override;
     bool supportsViewOnly() const override;
@@ -59,6 +53,9 @@ public Q_SLOTS:
     void scaleResize(int w, int h) override;
 
 protected:
+    bool startConnection() override;
+    void startQuittingConnection() override;
+
     void paintEvent(QPaintEvent *event) override;
     void resizeEvent(QResizeEvent *event) override;
     void handleKeyEvent(QKeyEvent *event) override;
@@ -81,22 +78,12 @@ private:
 #endif
     QImage m_frame;
     bool m_forceLocalCursor;
-#ifdef LIBSSH_FOUND
-    VncSshTunnelThread *m_sshTunnelThread;
-
-    QString readWalletSshPassword();
-    void saveWalletSshPassword();
-#endif
 
 private Q_SLOTS:
     void updateImage(int x, int y, int w, int h);
     void setCut(const QString &text);
     void requestPassword(bool includingUsername);
-#ifdef LIBSSH_FOUND
-    void sshRequestPassword(VncSshTunnelThread::PasswordRequestFlags flags);
-#endif
     void outputErrorMessage(const QString &message);
-    void sshErrorMessage(const QString &message);
 };
 
 #endif

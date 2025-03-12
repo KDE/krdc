@@ -112,7 +112,7 @@ QSize RdpView::sizeHint() const
     return m_session->size() / devicePixelRatio();
 }
 
-void RdpView::startQuitting()
+void RdpView::startQuittingConnection()
 {
     if (m_quitting) {
         return; // ignore repeated triggers
@@ -122,7 +122,9 @@ void RdpView::startQuitting()
 
     qCDebug(KRDC) << "Stopping RDP session";
     m_quitting = true;
-    m_session->stop();
+    if (m_session) {
+        m_session->stop();
+    }
 
     qCDebug(KRDC) << "RDP session stopped";
     Q_EMIT disconnected();
@@ -134,7 +136,7 @@ bool RdpView::isQuitting()
     return m_quitting;
 }
 
-bool RdpView::start()
+bool RdpView::startConnection()
 {
     m_session = std::make_unique<RdpSession>(this);
     m_session->setHostPreferences(m_hostPreferences.get());
