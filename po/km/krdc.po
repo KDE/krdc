@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-08 00:43+0000\n"
+"POT-Creation-Date: 2025-03-12 02:35+0000\n"
 "PO-Revision-Date: 2012-06-08 14:52+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer\n"
@@ -192,12 +192,12 @@ msgstr "កំណត់​រចនា​សម្ព័ន្ធ..."
 msgid "Remove"
 msgstr "យកចេញ"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:292 mainwindow.cpp:682
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:285 mainwindow.cpp:662
 #, kde-format
 msgid "Unusable URL"
 msgstr "URL មិន​អាច​ប្រើ​បាន"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:682
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:662
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr "ម៉ាស៊ីន​ដែល​បាន​ជ្រើស​មិន​អាច​ត្រូវ​បាន​គ្រប់គ្រង​ទេ ។"
@@ -414,98 +414,98 @@ msgstr "ចាប់ផ្ដើម KRDC ជាមួយ URL ដែល​ផ្�
 msgid "URLs to connect after startup"
 msgstr "URL ដើម្បី​តភ្ជាប់ បន្ទាប់​ពី​ពេល​ចាប់ផ្ដើម"
 
-#: mainwindow.cpp:116
+#: mainwindow.cpp:109
 #, kde-format
 msgid "KDE Remote Desktop Client started"
 msgstr "បាន​ចាប់ផ្ដើម​កម្មវិធី​មើល​ផ្ទៃតុ​ពី​ចម្ងាយ​របស់ KDE"
 
-#: mainwindow.cpp:121 mainwindow.cpp:134 mainwindow.cpp:1083
-#: mainwindow.cpp:1178
+#: mainwindow.cpp:114 mainwindow.cpp:127 mainwindow.cpp:1059
+#: mainwindow.cpp:1154
 #, kde-format
 msgid "New Connection"
 msgstr "ការ​​​តភ្ជាប់​​ថ្មី"
 
-#: mainwindow.cpp:140
+#: mainwindow.cpp:133
 #, kde-format
 msgid "Copy Screenshot to Clipboard"
 msgstr "ចម្លង​រូបថត​អេក្រង់​ទៅ​ក្ដារ​តម្បៀត​ខ្ទាស់"
 
-#: mainwindow.cpp:141
+#: mainwindow.cpp:134
 #, kde-format
 msgid "Screenshot"
 msgstr "រូបថតអេក្រង់"
 
-#: mainwindow.cpp:147 mainwindow.cpp:507
+#: mainwindow.cpp:140 mainwindow.cpp:497
 #, kde-format
 msgid "Switch to Full Screen Mode"
 msgstr "ប្ដូរ​ទៅ​របៀប​ពេញ​អេក្រង់"
 
-#: mainwindow.cpp:148 mainwindow.cpp:508
+#: mainwindow.cpp:141 mainwindow.cpp:498
 #, kde-format
 msgid "Full Screen"
 msgstr "អេក្រង់​ពេញ"
 
-#: mainwindow.cpp:155
+#: mainwindow.cpp:148
 #, kde-format
 msgid "View Only"
 msgstr "បាន​តែ​មើល"
 
-#: mainwindow.cpp:160
+#: mainwindow.cpp:153
 #, kde-format
 msgid "Disconnect"
 msgstr "ផ្ដាច់"
 
-#: mainwindow.cpp:168
+#: mainwindow.cpp:161
 #, kde-format
 msgid "Show Local Cursor"
 msgstr "បង្ហាញ​ទស្សន៍​ទ្រនិច​មូលដ្ឋាន"
 
-#: mainwindow.cpp:169
+#: mainwindow.cpp:162
 #, kde-format
 msgid "Local Cursor"
 msgstr "ទស្សន៍​ទ្រនិច​មូលដ្ឋាន"
 
-#: mainwindow.cpp:175
+#: mainwindow.cpp:168
 #, kde-format
 msgid "Grab All Possible Keys"
 msgstr "យក​សោ​ដែល​អាច​ប្រើ​បាន​ទាំង​អស់"
 
-#: mainwindow.cpp:176
+#: mainwindow.cpp:169
 #, kde-format
 msgid "Grab Keys"
 msgstr "យក​សោ"
 
-#: mainwindow.cpp:182
+#: mainwindow.cpp:175
 #, kde-format
 msgid "Scale Remote Screen to Fit Window Size"
 msgstr "ធ្វើ​មាត្រដ្ឋាន​អេក្រង់​ពី​ចម្ងាយ​ឲ្យ​សម​នឹង​ទំហំ​បង្អួច"
 
-#: mainwindow.cpp:183
+#: mainwindow.cpp:176
 #, kde-format
 msgid "Scale"
 msgstr "មាត្រដ្ឋាន"
 
-#: mainwindow.cpp:186
+#: mainwindow.cpp:179
 #, kde-format
 msgid "Scaling Factor"
 msgstr ""
 
-#: mainwindow.cpp:197
+#: mainwindow.cpp:190
 #, kde-format
 msgid "Bookmarks"
 msgstr "ចំណាំ"
 
-#: mainwindow.cpp:265
+#: mainwindow.cpp:258
 #, kde-format
 msgid "Unable to load connection data from the provided file."
 msgstr ""
 
-#: mainwindow.cpp:265
+#: mainwindow.cpp:258
 #, kde-format
 msgid "Load failed"
 msgstr ""
 
-#: mainwindow.cpp:271
+#: mainwindow.cpp:264
 #, kde-format
 msgid ""
 "The entered address does not have the required form.\n"
@@ -514,163 +514,156 @@ msgstr ""
 "អាសយដ្ឋាន​ដែល​បាន​បញ្ចូល​មិន​មាន​សំណុំ​បែបបទ​ដែល​ទាមទារ​ទេ ។\n"
 " វាក្យសម្ព័ន្ធ ៖ [username@]host[:port]"
 
-#: mainwindow.cpp:271
+#: mainwindow.cpp:264
 #, kde-format
 msgid "Malformed URL"
 msgstr "URL ដែល​មាន​ទម្រង់​មិន​ត្រឹមត្រូវ"
 
-#: mainwindow.cpp:292
+#: mainwindow.cpp:285
 #, kde-format
 msgid "The entered address cannot be handled."
 msgstr "អាសយដ្ឋាន​ដែល​បញ្ចូល​មិន​អាច​ត្រូវ​បាន​ដោះស្រាយ​​ទេ ។"
 
-#: mainwindow.cpp:427
+#: mainwindow.cpp:420
 #, kde-format
 msgid "Connecting to %1"
 msgstr "តភ្ជាប់​ទៅ %1"
 
-#: mainwindow.cpp:431
+#: mainwindow.cpp:424
 #, kde-format
 msgid "Authenticating at %1"
 msgstr "កំពុង​ផ្ទៀងផ្ទាត់​ភាព​ត្រឹមត្រូវ​នៅ %1..."
 
-#: mainwindow.cpp:435
+#: mainwindow.cpp:428
 #, kde-format
 msgid "Preparing connection to %1"
 msgstr "កំពុង​រៀបចំ​ការ​តភ្ជាប់​ទៅ %1"
 
-#: mainwindow.cpp:439
+#: mainwindow.cpp:432
 #, kde-format
 msgid "Connected to %1"
 msgstr "បាន​តភ្ជាប់​ទៅ %1"
 
-#: mainwindow.cpp:518
-#, kde-format
-msgctxt ""
-"window title when in full screen mode (for example displayed in tasklist)"
-msgid "KDE Remote Desktop Client (Full Screen)"
-msgstr "កម្មវិធី​មើល​ផ្ទៃតុ​ពី​ចម្ងាយ​របស់ KDE (ពេញ​អេក្រង់)"
-
-#: mainwindow.cpp:548
+#: mainwindow.cpp:528
 #, kde-format
 msgid "Switch to Window Mode"
 msgstr "ប្ដូរ​ទៅ​របៀប​បង្អួច"
 
-#: mainwindow.cpp:549
+#: mainwindow.cpp:529
 #, kde-format
 msgid "Window Mode"
 msgstr "ប្ដូរ​ទៅ​របៀប​បង្អួច"
 
-#: mainwindow.cpp:701
+#: mainwindow.cpp:681
 #, kde-format
 msgid "Connect"
 msgstr "តភ្ជាប់​"
 
-#: mainwindow.cpp:702
+#: mainwindow.cpp:682
 #, kde-format
 msgid "Rename"
 msgstr "ប្ដូរ​ឈ្មោះ"
 
-#: mainwindow.cpp:703
+#: mainwindow.cpp:683
 #, kde-format
 msgid "Settings"
 msgstr "ការ​កំណត់​"
 
-#: mainwindow.cpp:704
+#: mainwindow.cpp:684
 #, kde-format
 msgid "Delete"
 msgstr "លុប"
 
-#: mainwindow.cpp:707 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:687 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "ចំណាំ"
 
-#: mainwindow.cpp:707 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:687 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "ប្រវត្តិ​"
 
-#: mainwindow.cpp:719
+#: mainwindow.cpp:699
 #, kde-format
 msgid "Rename %1"
 msgstr "ប្ដូរ​ឈ្មោះ %1"
 
-#: mainwindow.cpp:719
+#: mainwindow.cpp:699
 #, kde-format
 msgid "Rename %1 to"
 msgstr "ប្ដូរ​ឈ្មោះ %1 ទៅ​ជា"
 
-#: mainwindow.cpp:726
+#: mainwindow.cpp:706
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "តើ​អ្នក​ប្រាកដ​ជា​ចង់​លុប %1 ឬ ?"
 
-#: mainwindow.cpp:726
+#: mainwindow.cpp:706
 #, kde-format
 msgid "Delete %1"
 msgstr "លុប %1"
 
-#: mainwindow.cpp:750
+#: mainwindow.cpp:730
 #, kde-format
 msgid "Add Bookmark"
 msgstr "បន្ថែម​ចំណាំ"
 
-#: mainwindow.cpp:751
+#: mainwindow.cpp:731
 #, kde-format
 msgid "Close Tab"
 msgstr "បិទផ្ទាំង"
 
-#: mainwindow.cpp:855
+#: mainwindow.cpp:835
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr "បង្រួម​​បង្អួច​​ពេញ​​អេក្រង់​អប្បបរមា"
 
-#: mainwindow.cpp:871
+#: mainwindow.cpp:851
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "របារ​ឧបករណ៍​ស្អិត"
 
-#: mainwindow.cpp:976
+#: mainwindow.cpp:953
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr "តើ​អ្នក​ពិត​ជា​ចង់​បិទ​កម្មវិធី​មើល​ផ្ទៃតុ​ពី​ចម្ងាយ​របស់ KDE ឬ ?"
 
-#: mainwindow.cpp:977
+#: mainwindow.cpp:954
 #, kde-format
 msgid "Confirm Quit"
 msgstr "អះអាង​ការ​ចេញ"
 
-#: mainwindow.cpp:1106
+#: mainwindow.cpp:1082
 #, kde-format
 msgid "Connect to:"
 msgstr "​តភ្ជាប់​ទៅ ៖​"
 
-#: mainwindow.cpp:1110
+#: mainwindow.cpp:1086
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr "វាយ​បញ្ចូល​ទីនេះ ដើម្បី​តភ្ជាប់​ទៅកាន់​អាសយដ្ឋាន និង​ត្រង​បញ្ជី ។"
 
-#: mainwindow.cpp:1119
+#: mainwindow.cpp:1095
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
 "methods."
 msgstr "វាយ​ឈ្មោះ IP ឬ DNS នៅ​ទីនេះ ។ ជម្រះ​បន្ទាត់​ ដើម្បី​ទទួល​បាន​បញ្ជី​វិធីសាស្ត្រ​តភ្ជាប់​ ។"
 
-#: mainwindow.cpp:1122
+#: mainwindow.cpp:1098
 #, kde-format
 msgid "Goto Address"
 msgstr "ទៅ​កាន់​អាសយដ្ឋាន"
 
-#: mainwindow.cpp:1214
+#: mainwindow.cpp:1190
 #, kde-format
 msgid "Remote Desktops"
 msgstr "​ផ្ទៃតុ​ពី​ចម្ងាយ"
 
-#: mainwindow.cpp:1243
+#: mainwindow.cpp:1219
 #, kde-format
 msgid "Filter"
 msgstr "តម្រង"
@@ -1840,6 +1833,11 @@ msgid ""
 msgstr ""
 "<html>បញ្ចូល​អាសយដ្ឋាន​នៅទីនេះ ៖<br /><i>ឧទាហរណ៍ ៖ vncserver:1 (ម៉ាស៊ីន ៖ ច្រក / "
 "អេក្រង់)</i></html>"
+
+#~ msgctxt ""
+#~ "window title when in full screen mode (for example displayed in tasklist)"
+#~ msgid "KDE Remote Desktop Client (Full Screen)"
+#~ msgstr "កម្មវិធី​មើល​ផ្ទៃតុ​ពី​ចម្ងាយ​របស់ KDE (ពេញ​អេក្រង់)"
 
 #~ msgid "Abner Silva"
 #~ msgstr "Abner Silva"

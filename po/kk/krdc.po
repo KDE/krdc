@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-08 00:43+0000\n"
+"POT-Creation-Date: 2025-03-12 02:35+0000\n"
 "PO-Revision-Date: 2013-10-31 04:17+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -196,12 +196,12 @@ msgstr "Баптау..."
 msgid "Remove"
 msgstr "Өшіру"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:292 mainwindow.cpp:682
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:285 mainwindow.cpp:662
 #, kde-format
 msgid "Unusable URL"
 msgstr "URL пайдалануға келмейді"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:682
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:662
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr "Таңдалған хост жарамсыз."
@@ -422,98 +422,98 @@ msgstr ""
 msgid "URLs to connect after startup"
 msgstr "Жұмысты бастаған соң косылатын URL-дары"
 
-#: mainwindow.cpp:116
+#: mainwindow.cpp:109
 #, kde-format
 msgid "KDE Remote Desktop Client started"
 msgstr "KDE қашық үстел клиенті істей бастады"
 
-#: mainwindow.cpp:121 mainwindow.cpp:134 mainwindow.cpp:1083
-#: mainwindow.cpp:1178
+#: mainwindow.cpp:114 mainwindow.cpp:127 mainwindow.cpp:1059
+#: mainwindow.cpp:1154
 #, kde-format
 msgid "New Connection"
 msgstr "Жаңа қосылым"
 
-#: mainwindow.cpp:140
+#: mainwindow.cpp:133
 #, kde-format
 msgid "Copy Screenshot to Clipboard"
 msgstr "Экранды алмасу буферіне түсіріп алу"
 
-#: mainwindow.cpp:141
+#: mainwindow.cpp:134
 #, kde-format
 msgid "Screenshot"
 msgstr "Экранды түсіріп алу"
 
-#: mainwindow.cpp:147 mainwindow.cpp:507
+#: mainwindow.cpp:140 mainwindow.cpp:497
 #, kde-format
 msgid "Switch to Full Screen Mode"
 msgstr "Толық экранды режіміне ауысу"
 
-#: mainwindow.cpp:148 mainwindow.cpp:508
+#: mainwindow.cpp:141 mainwindow.cpp:498
 #, kde-format
 msgid "Full Screen"
 msgstr "Толық экран"
 
-#: mainwindow.cpp:155
+#: mainwindow.cpp:148
 #, kde-format
 msgid "View Only"
 msgstr "Тек көру ғана"
 
-#: mainwindow.cpp:160
+#: mainwindow.cpp:153
 #, kde-format
 msgid "Disconnect"
 msgstr "Ажырату"
 
-#: mainwindow.cpp:168
+#: mainwindow.cpp:161
 #, kde-format
 msgid "Show Local Cursor"
 msgstr "Жергілікті меңзерді көрсету"
 
-#: mainwindow.cpp:169
+#: mainwindow.cpp:162
 #, kde-format
 msgid "Local Cursor"
 msgstr "Жергілікті меңзер"
 
-#: mainwindow.cpp:175
+#: mainwindow.cpp:168
 #, kde-format
 msgid "Grab All Possible Keys"
 msgstr "Мүмкіндігінше барлық перне басуын қағып алу"
 
-#: mainwindow.cpp:176
+#: mainwindow.cpp:169
 #, kde-format
 msgid "Grab Keys"
 msgstr "Перне басуын қағып алу"
 
-#: mainwindow.cpp:182
+#: mainwindow.cpp:175
 #, kde-format
 msgid "Scale Remote Screen to Fit Window Size"
 msgstr "Қашықтағы экранын терезесіне шақтап масштабтау"
 
-#: mainwindow.cpp:183
+#: mainwindow.cpp:176
 #, kde-format
 msgid "Scale"
 msgstr "Масштабтау"
 
-#: mainwindow.cpp:186
+#: mainwindow.cpp:179
 #, kde-format
 msgid "Scaling Factor"
 msgstr ""
 
-#: mainwindow.cpp:197
+#: mainwindow.cpp:190
 #, kde-format
 msgid "Bookmarks"
 msgstr "Бетбелгілері"
 
-#: mainwindow.cpp:265
+#: mainwindow.cpp:258
 #, kde-format
 msgid "Unable to load connection data from the provided file."
 msgstr ""
 
-#: mainwindow.cpp:265
+#: mainwindow.cpp:258
 #, kde-format
 msgid "Load failed"
 msgstr ""
 
-#: mainwindow.cpp:271
+#: mainwindow.cpp:264
 #, kde-format
 msgid ""
 "The entered address does not have the required form.\n"
@@ -522,147 +522,140 @@ msgstr ""
 "Келтірілген адрес керек пішімінде емес.\n"
 " Синтаксисі: [username@]host[:port]"
 
-#: mainwindow.cpp:271
+#: mainwindow.cpp:264
 #, kde-format
 msgid "Malformed URL"
 msgstr "Жарамсыз URL"
 
-#: mainwindow.cpp:292
+#: mainwindow.cpp:285
 #, kde-format
 msgid "The entered address cannot be handled."
 msgstr "Келтірілген адрес жарамсыз."
 
-#: mainwindow.cpp:427
+#: mainwindow.cpp:420
 #, kde-format
 msgid "Connecting to %1"
 msgstr "%1 дегенге қосылу"
 
-#: mainwindow.cpp:431
+#: mainwindow.cpp:424
 #, kde-format
 msgid "Authenticating at %1"
 msgstr "%1 дегенде аутентификациялану"
 
-#: mainwindow.cpp:435
+#: mainwindow.cpp:428
 #, kde-format
 msgid "Preparing connection to %1"
 msgstr "%1  дегенге қосылуға дайындалу"
 
-#: mainwindow.cpp:439
+#: mainwindow.cpp:432
 #, kde-format
 msgid "Connected to %1"
 msgstr "%1 дегенге қосылу"
 
-#: mainwindow.cpp:518
-#, kde-format
-msgctxt ""
-"window title when in full screen mode (for example displayed in tasklist)"
-msgid "KDE Remote Desktop Client (Full Screen)"
-msgstr "KDE қашық үстел клиенті (толық экранды)"
-
-#: mainwindow.cpp:548
+#: mainwindow.cpp:528
 #, kde-format
 msgid "Switch to Window Mode"
 msgstr "Терезелі режіміне ауысу"
 
-#: mainwindow.cpp:549
+#: mainwindow.cpp:529
 #, kde-format
 msgid "Window Mode"
 msgstr "Терезелі режім"
 
-#: mainwindow.cpp:701
+#: mainwindow.cpp:681
 #, kde-format
 msgid "Connect"
 msgstr "Қосылым"
 
-#: mainwindow.cpp:702
+#: mainwindow.cpp:682
 #, kde-format
 msgid "Rename"
 msgstr "Қайта атау"
 
-#: mainwindow.cpp:703
+#: mainwindow.cpp:683
 #, kde-format
 msgid "Settings"
 msgstr "Параметрлері"
 
-#: mainwindow.cpp:704
+#: mainwindow.cpp:684
 #, kde-format
 msgid "Delete"
 msgstr "Өшіру"
 
-#: mainwindow.cpp:707 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:687 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "Бетбелгілері"
 
-#: mainwindow.cpp:707 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:687 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "Журналы"
 
-#: mainwindow.cpp:719
+#: mainwindow.cpp:699
 #, kde-format
 msgid "Rename %1"
 msgstr "%1 дегеннің атауын өзгерту"
 
-#: mainwindow.cpp:719
+#: mainwindow.cpp:699
 #, kde-format
 msgid "Rename %1 to"
 msgstr "%1 дегеннің жаңа атауы:"
 
-#: mainwindow.cpp:726
+#: mainwindow.cpp:706
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "%1 дегенді шын өшірмексіз бе?"
 
-#: mainwindow.cpp:726
+#: mainwindow.cpp:706
 #, kde-format
 msgid "Delete %1"
 msgstr "%1 дегенді өшіру"
 
-#: mainwindow.cpp:750
+#: mainwindow.cpp:730
 #, kde-format
 msgid "Add Bookmark"
 msgstr "Бетбелгілеу"
 
-#: mainwindow.cpp:751
+#: mainwindow.cpp:731
 #, kde-format
 msgid "Close Tab"
 msgstr "Қойындыны жабу"
 
-#: mainwindow.cpp:855
+#: mainwindow.cpp:835
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr "Толық экран терезесін түю"
 
-#: mainwindow.cpp:871
+#: mainwindow.cpp:851
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "Құралдар панелін жапсыру"
 
-#: mainwindow.cpp:976
+#: mainwindow.cpp:953
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr "KDE қашық үстел клиентінен шықпақсыз ба?"
 
-#: mainwindow.cpp:977
+#: mainwindow.cpp:954
 #, kde-format
 msgid "Confirm Quit"
 msgstr "Шығуды құптау"
 
-#: mainwindow.cpp:1106
+#: mainwindow.cpp:1082
 #, kde-format
 msgid "Connect to:"
 msgstr "Келесіге қосылу:"
 
-#: mainwindow.cpp:1110
+#: mainwindow.cpp:1086
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr ""
 "Адреспен байланыс ету я тізімінің сүзгілеу үшін дерегін осында келтіріңіз."
 
-#: mainwindow.cpp:1119
+#: mainwindow.cpp:1095
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
@@ -671,17 +664,17 @@ msgstr ""
 "Мұнда IP не DNS бойынша атауын келтіріңіз. Қосылу әдістерінің тізімін алу "
 "үшін жолын тазалаңыз."
 
-#: mainwindow.cpp:1122
+#: mainwindow.cpp:1098
 #, kde-format
 msgid "Goto Address"
 msgstr "Баратын адрес"
 
-#: mainwindow.cpp:1214
+#: mainwindow.cpp:1190
 #, kde-format
 msgid "Remote Desktops"
 msgstr "Қашықтағылары"
 
-#: mainwindow.cpp:1243
+#: mainwindow.cpp:1219
 #, kde-format
 msgid "Filter"
 msgstr "Сүзгі"
@@ -1847,6 +1840,11 @@ msgid ""
 msgstr ""
 "<html>Мұнда адресін келтіріңіз. Керек болса, портымен қоса.<br /> <i>Мысал:"
 "vncserver:1 (хост:порты / экраны)</i></html>"
+
+#~ msgctxt ""
+#~ "window title when in full screen mode (for example displayed in tasklist)"
+#~ msgid "KDE Remote Desktop Client (Full Screen)"
+#~ msgstr "KDE қашық үстел клиенті (толық экранды)"
 
 #~ msgid "Abner Silva"
 #~ msgstr "Abner Silva"
