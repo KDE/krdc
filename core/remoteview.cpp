@@ -178,9 +178,7 @@ bool RemoteView::start()
         connect(m_sshTunnelThread, &SshTunnelThread::passwordRequest, this, &RemoteView::sshRequestPassword, Qt::BlockingQueuedConnection);
         connect(m_sshTunnelThread, &SshTunnelThread::errorMessage, this, &RemoteView::sshErrorMessage);
 
-        if (prefs->useSshTunnelLoopback()) {
-            m_host = QStringLiteral("127.0.0.1");
-        }
+        m_host = QStringLiteral("127.0.0.1");
 
         connect(m_sshTunnelThread, &SshTunnelThread::listenReady, this, [this, prefs] {
             if (prefs->walletSupport()) {
