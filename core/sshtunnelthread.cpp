@@ -125,7 +125,7 @@ void SshTunnelThread::run()
         return;
     }
 
-    const int server_sock = socket(AF_INET, SOCK_STREAM, 0);
+    const int server_sock = socket(AF_INET, SOCK_STREAM | SOCK_NONBLOCK, 0);
     if (server_sock == -1) {
         Q_EMIT errorMessage(i18n("Error creating tunnel socket"));
         return;
@@ -174,14 +174,20 @@ void SshTunnelThread::run()
     // any socket error here will be detected by the vnc or rdp thread and the usual error mechanisms
     // there will warn the user interface
 
-    int client_sock;
+    int client_sock = -1;
     {
         struct sockaddr_in client_sin;
         socklen_t client_sin_len = sizeof client_sin;
-        client_sock = accept(server_sock, (struct sockaddr *)&client_sin, &client_sin_len);
-        if (client_sock == -1) {
-            qCDebug(KRDC) << "Error on tunnel socket accept";
-            return;
+        while (client_sock == -1) {
+            if (m_stop_thread) {
+                return;
+            }
+
+            client_sock = accept(server_sock, (struct sockaddr *)&client_sin, &client_sin_len);
+            if (client_sock == -1 && errno != EAGAIN) {
+                qCDebug(KRDC) << "Error on tunnel socket accept";
+                return;
+            }
         }
 
         cleanup.client_sock = client_sock;
