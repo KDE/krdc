@@ -1,6 +1,6 @@
 # Slovenian translation of krdc
 # Copyright (C) 2002, 2003, 2004, 2005, 2006, 2007 Free Software Foundation, Inc.
-# $Id: krdc.po 1704564 2025-03-09 01:20:34Z scripty $
+# $Id: krdc.po 1705806 2025-03-25 01:21:08Z scripty $
 # $Source$
 #
 # Andrej Vernekar <andrej.vernekar@moj.net>, 2002, 2007, 2008.
@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-09 00:41+0000\n"
+"POT-Creation-Date: 2025-03-25 00:41+0000\n"
 "PO-Revision-Date: 2025-03-08 07:22+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -229,8 +229,8 @@ msgstr "Splošne nastavitve"
 msgid "Hosts"
 msgstr "Gostitelji"
 
-#: config/preferencesdialog.cpp:28 core/hostpreferences.cpp:175
-#: core/hostpreferences.cpp:179
+#: config/preferencesdialog.cpp:28 core/hostpreferences.cpp:196
+#: core/hostpreferences.cpp:200
 #, kde-format
 msgid "Host Configuration"
 msgstr "Nastavitve gostiteljev"
@@ -295,7 +295,7 @@ msgstr[1] "Pred %1 letoma"
 msgstr[2] "Pred %1 leti"
 msgstr[3] "Pred %1 leti"
 
-#: core/hostpreferences.cpp:182
+#: core/hostpreferences.cpp:203
 #, kde-format
 msgid ""
 "Note that settings might only apply when you connect next time to this host."
@@ -303,12 +303,12 @@ msgstr ""
 "Zapomnite si, da bodo nastavitve morda uveljavljene šele, ko se naslednjič "
 "povežete s tem gostiteljem."
 
-#: core/hostpreferences.cpp:198
+#: core/hostpreferences.cpp:232
 #, kde-format
 msgid "Show this dialog again for this host"
 msgstr "Spet prikaži to pogovorno okno za tega gostitelja"
 
-#: core/hostpreferences.cpp:202
+#: core/hostpreferences.cpp:236
 #, kde-format
 msgid "Remember password (KWallet)"
 msgstr "Zapomni si geslo (Listnica)"
@@ -318,6 +318,69 @@ msgstr "Zapomni si geslo (Listnica)"
 #, kde-format
 msgid "Sessions"
 msgstr "Seje"
+
+#: core/remoteview.cpp:532
+#, kde-format
+msgid "Please enter the SSH password."
+msgstr "Prosim vnesite geslo za SSH."
+
+#: core/remoteview.cpp:550 core/remoteview.cpp:552
+#, kde-format
+msgid "SSH Tunnel failure"
+msgstr "Izpad tunela SSH"
+
+#: core/sshtunnelthread.cpp:99
+#, kde-format
+msgid "Error connecting to %1: %2"
+msgstr "Napaka pri povezovanju na %1: %2"
+
+#: core/sshtunnelthread.cpp:124
+#, kde-format
+msgid "Error authenticating with password: %1"
+msgstr "Napaka pri overjanju z geslom: %1"
+
+#: core/sshtunnelthread.cpp:130 core/sshtunnelthread.cpp:148
+#: core/sshtunnelthread.cpp:155 core/sshtunnelthread.cpp:163
+#, kde-format
+msgid "Error creating tunnel socket"
+msgstr "Napaka pri ustvarjanju vtičnice za tunel"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, SshTunnelWidget)
+#: core/sshtunnelwidget.ui:14
+#, fuzzy, kde-format
+#| msgid "SSH tunnel options"
+msgid "SSH tunnel"
+msgstr "Možnosti tunela SSH"
+
+#. i18n: ectx: property (text), widget (QCheckBox, use_ssh_tunnel)
+#: core/sshtunnelwidget.ui:32
+#, kde-format
+msgid "Connect via SSH tunnel"
+msgstr "Poveži se prek tunela SSH"
+
+#. i18n: ectx: property (title), widget (QGroupBox, ssh_groupBox)
+#: core/sshtunnelwidget.ui:39
+#, kde-format
+msgid "SSH tunnel options"
+msgstr "Možnosti tunela SSH"
+
+#. i18n: ectx: property (text), widget (QCheckBox, use_loopback)
+#: core/sshtunnelwidget.ui:45
+#, kde-format
+msgid "Tunnel via loopback address"
+msgstr "Tunel z naslovom povratne zanke"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: core/sshtunnelwidget.ui:52
+#, kde-format
+msgid "Port:"
+msgstr "Vrata:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: core/sshtunnelwidget.ui:75
+#, kde-format
+msgid "User name:"
+msgstr "Uporabniško ime:"
 
 #. i18n: ectx: Menu (session)
 #: krdcui.rc:8
@@ -1358,43 +1421,43 @@ msgstr ""
 "Izdajatelj: %5\n"
 "Prstni odtis: %6\n"
 
-#: rdp/rdpview.cpp:202
+#: rdp/rdpview.cpp:204
 #, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
 msgstr "Za dostop do tega sistema sta potrebna uporabniško ime in geslo."
 
-#: rdp/rdpview.cpp:235
+#: rdp/rdpview.cpp:237
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr "Potrdilo za ta sistem ni znano. Želite nadaljevati?"
 
-#: rdp/rdpview.cpp:236
+#: rdp/rdpview.cpp:238
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
 msgstr "Preveri potrdilo"
 
-#: rdp/rdpview.cpp:241 rdp/rdpview.cpp:266
+#: rdp/rdpview.cpp:243 rdp/rdpview.cpp:268
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
 msgstr "Zaponi si to potrdilo"
 
-#: rdp/rdpview.cpp:260
+#: rdp/rdpview.cpp:262
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
 msgstr "Potrdilo za ta sistem je spremenjeno. Želite nadaljevati?"
 
-#: rdp/rdpview.cpp:261
+#: rdp/rdpview.cpp:263
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
 msgstr "Potrdilo se je spremenilo"
 
-#: rdp/rdpview.cpp:264
+#: rdp/rdpview.cpp:266
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1408,13 +1471,13 @@ msgstr ""
 "Novo potrdilo:\n"
 "%2"
 
-#: rdp/rdpview.cpp:297
+#: rdp/rdpview.cpp:299
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Login Failure"
 msgstr "Napaka p"
 
-#: rdp/rdpview.cpp:298
+#: rdp/rdpview.cpp:300
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1424,13 +1487,13 @@ msgstr ""
 "Ni se mogoče prijaviti z navedenimi poverilnicami. Še enkrat preverite "
 "uporabnika in geslo."
 
-#: rdp/rdpview.cpp:307
+#: rdp/rdpview.cpp:309
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Account Problems"
 msgstr "Problemi z računom"
 
-#: rdp/rdpview.cpp:308
+#: rdp/rdpview.cpp:310
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1440,13 +1503,13 @@ msgstr ""
 "Podani račun nima dovoljenja za prijavo v to napravo. Prosim, da se obrnete "
 "na skrbnika sistema."
 
-#: rdp/rdpview.cpp:313
+#: rdp/rdpview.cpp:315
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Password Problems"
 msgstr "Problemi z geslom"
 
-#: rdp/rdpview.cpp:314
+#: rdp/rdpview.cpp:316
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1456,79 +1519,79 @@ msgstr ""
 "S podanim geslom se ni mogoče prijaviti. Obrnite se na skrbnika svojega "
 "sistema, da ga spremeni."
 
-#: rdp/rdpview.cpp:317
+#: rdp/rdpview.cpp:319
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Lost"
 msgstr "Povezava izgubljena"
 
-#: rdp/rdpview.cpp:318
+#: rdp/rdpview.cpp:320
 #, kde-format
 msgctxt "@label"
 msgid "Lost connection to the server."
 msgstr "Izgubljena povezava s strežnikom."
 
-#: rdp/rdpview.cpp:322
+#: rdp/rdpview.cpp:324
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Server not Found"
 msgstr "Strežnik ni bil najden"
 
-#: rdp/rdpview.cpp:323
+#: rdp/rdpview.cpp:325
 #, kde-format
 msgctxt "@label"
 msgid "Could not find the server."
 msgstr "Ni mogoče najti strežnika."
 
-#: rdp/rdpview.cpp:326
+#: rdp/rdpview.cpp:328
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Refused"
 msgstr "Povezava zavrnjena"
 
-#: rdp/rdpview.cpp:327
+#: rdp/rdpview.cpp:329
 #, kde-format
 msgctxt "@label"
 msgid "The server refused the connection request."
 msgstr "Strežnik je zavrnil zahtevo za povezavo."
 
-#: rdp/rdpview.cpp:332
+#: rdp/rdpview.cpp:334
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Could not Connect"
 msgstr "Ni bilo mogoče vzpostaviti povezave"
 
-#: rdp/rdpview.cpp:333
+#: rdp/rdpview.cpp:335
 #, kde-format
 msgctxt "@label"
 msgid "Could not connect to the server."
 msgstr "Ni bilo mogoče vzpostaviti povezave s strežnikom."
 
-#: rdp/rdpview.cpp:343 rdp/rdpview.cpp:347
+#: rdp/rdpview.cpp:345 rdp/rdpview.cpp:349
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Closed"
 msgstr "Povezava zaprta"
 
-#: rdp/rdpview.cpp:348
+#: rdp/rdpview.cpp:350
 #, kde-format
 msgctxt "@label"
 msgid "The connection to the server was closed."
 msgstr "Povezava do strežnika je bila zaprta."
 
-#: rdp/rdpview.cpp:352
+#: rdp/rdpview.cpp:354
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Failed"
 msgstr "Napaka povezave"
 
-#: rdp/rdpview.cpp:353
+#: rdp/rdpview.cpp:355
 #, kde-format
 msgctxt "@label"
 msgid "An unknown error occurred"
 msgstr "Prišlo je do neznane napake"
 
-#: rdp/rdpview.cpp:367
+#: rdp/rdpview.cpp:369
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Logon Error"
@@ -1740,45 +1803,15 @@ msgstr "Velika (1280x1024)"
 msgid "Very Large (1600x1200)"
 msgstr "Zelo velika (1600x1200)"
 
-#. i18n: ectx: property (text), widget (QCheckBox, use_ssh_tunnel)
-#: vnc/vncpreferences.ui:204
-#, kde-format
-msgid "Connect via SSH tunnel"
-msgstr "Poveži se prek tunela SSH"
-
-#. i18n: ectx: property (title), widget (QGroupBox, ssh_groupBox)
-#: vnc/vncpreferences.ui:211
-#, kde-format
-msgid "SSH tunnel options"
-msgstr "Možnosti tunela SSH"
-
-#. i18n: ectx: property (text), widget (QCheckBox, use_loopback)
-#: vnc/vncpreferences.ui:217
-#, kde-format
-msgid "Tunnel via loopback address"
-msgstr "Tunel z naslovom povratne zanke"
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: vnc/vncpreferences.ui:224
-#, kde-format
-msgid "Port:"
-msgstr "Vrata:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_2)
-#: vnc/vncpreferences.ui:244
-#, kde-format
-msgid "User name:"
-msgstr "Uporabniško ime:"
-
 #. i18n: ectx: property (text), widget (QCheckBox, dont_copy_passwords)
-#: vnc/vncpreferences.ui:257
+#: vnc/vncpreferences.ui:211
 #, kde-format
 msgid "Don't copy passwords from supported password managers to remote hosts"
 msgstr ""
 "Ne kopirajte gesel iz podprtih upraviteljev gesel na oddaljene gostitelje"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, dont_copy_passwords)
-#: vnc/vncpreferences.ui:260
+#: vnc/vncpreferences.ui:214
 #, kde-format
 msgid ""
 "Supported password managers (like KeePassXC) mark copied passwords with an "
@@ -1789,46 +1822,20 @@ msgstr ""
 "dodatnim tipom MIME \"x-kde-passwordManagerHint\", ki se uporablja za "
 "filtriranje."
 
-#: vnc/vncsshtunnelthread.cpp:99
-#, kde-format
-msgid "Error connecting to %1: %2"
-msgstr "Napaka pri povezovanju na %1: %2"
-
-#: vnc/vncsshtunnelthread.cpp:124
-#, kde-format
-msgid "Error authenticating with password: %1"
-msgstr "Napaka pri overjanju z geslom: %1"
-
-#: vnc/vncsshtunnelthread.cpp:130 vnc/vncsshtunnelthread.cpp:148
-#: vnc/vncsshtunnelthread.cpp:155 vnc/vncsshtunnelthread.cpp:163
-#, kde-format
-msgid "Error creating tunnel socket"
-msgstr "Napaka pri ustvarjanju vtičnice za tunel"
-
-#: vnc/vncview.cpp:328
+#: vnc/vncview.cpp:286
 #, kde-format
 msgid "Access to the system requires a password."
 msgstr "Dostop do sistem zahteva geslo."
 
-#: vnc/vncview.cpp:328
+#: vnc/vncview.cpp:286
 #, kde-format
 msgid "Authentication failed. Please try again."
 msgstr "Overitev ni uspela. Poskusite znova."
 
-#: vnc/vncview.cpp:358
-#, kde-format
-msgid "Please enter the SSH password."
-msgstr "Prosim vnesite geslo za SSH."
-
-#: vnc/vncview.cpp:383 vnc/vncview.cpp:385
+#: vnc/vncview.cpp:313 vnc/vncview.cpp:315
 #, kde-format
 msgid "VNC failure"
 msgstr "Napaka VNC"
-
-#: vnc/vncview.cpp:394 vnc/vncview.cpp:396
-#, kde-format
-msgid "SSH Tunnel failure"
-msgstr "Izpad tunela SSH"
 
 #: vnc/vncviewfactory.cpp:47
 #, kde-format

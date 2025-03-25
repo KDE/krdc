@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-09 00:41+0000\n"
+"POT-Creation-Date: 2025-03-25 00:41+0000\n"
 "PO-Revision-Date: 2009-04-22 00:08+0530\n"
 "Last-Translator: Sangeeta Kumari <sangeeta09@gmail.com>\n"
 "Language-Team: Maithili <maithili.sf.net>\n"
@@ -219,8 +219,8 @@ msgstr ""
 msgid "Hosts"
 msgstr "होस्ट"
 
-#: config/preferencesdialog.cpp:28 core/hostpreferences.cpp:175
-#: core/hostpreferences.cpp:179
+#: config/preferencesdialog.cpp:28 core/hostpreferences.cpp:196
+#: core/hostpreferences.cpp:200
 #, kde-format
 msgid "Host Configuration"
 msgstr ""
@@ -275,18 +275,18 @@ msgid_plural "%1 years ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: core/hostpreferences.cpp:182
+#: core/hostpreferences.cpp:203
 #, kde-format
 msgid ""
 "Note that settings might only apply when you connect next time to this host."
 msgstr ""
 
-#: core/hostpreferences.cpp:198
+#: core/hostpreferences.cpp:232
 #, kde-format
 msgid "Show this dialog again for this host"
 msgstr ""
 
-#: core/hostpreferences.cpp:202
+#: core/hostpreferences.cpp:236
 #, kde-format
 msgid "Remember password (KWallet)"
 msgstr ""
@@ -296,6 +296,68 @@ msgstr ""
 #, fuzzy, kde-format
 msgid "Sessions"
 msgstr "सत्र"
+
+#: core/remoteview.cpp:532
+#, kde-format
+msgid "Please enter the SSH password."
+msgstr ""
+
+#: core/remoteview.cpp:550 core/remoteview.cpp:552
+#, kde-format
+msgid "SSH Tunnel failure"
+msgstr ""
+
+#: core/sshtunnelthread.cpp:99
+#, kde-format
+msgid "Error connecting to %1: %2"
+msgstr ""
+
+#: core/sshtunnelthread.cpp:124
+#, kde-format
+msgid "Error authenticating with password: %1"
+msgstr ""
+
+#: core/sshtunnelthread.cpp:130 core/sshtunnelthread.cpp:148
+#: core/sshtunnelthread.cpp:155 core/sshtunnelthread.cpp:163
+#, kde-format
+msgid "Error creating tunnel socket"
+msgstr ""
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, SshTunnelWidget)
+#: core/sshtunnelwidget.ui:14
+#, kde-format
+msgid "SSH tunnel"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, use_ssh_tunnel)
+#: core/sshtunnelwidget.ui:32
+#, kde-format
+msgid "Connect via SSH tunnel"
+msgstr ""
+
+#. i18n: ectx: property (title), widget (QGroupBox, ssh_groupBox)
+#: core/sshtunnelwidget.ui:39
+#, kde-format
+msgid "SSH tunnel options"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, use_loopback)
+#: core/sshtunnelwidget.ui:45
+#, kde-format
+msgid "Tunnel via loopback address"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: core/sshtunnelwidget.ui:52
+#, kde-format
+msgid "Port:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: core/sshtunnelwidget.ui:75
+#, fuzzy, kde-format
+msgid "User name:"
+msgstr "डिफाल्ट प्रयोक्ता नामः"
 
 #. i18n: ectx: Menu (session)
 #: krdcui.rc:8
@@ -1307,43 +1369,43 @@ msgid ""
 "Fingerprint: %6\n"
 msgstr ""
 
-#: rdp/rdpview.cpp:202
+#: rdp/rdpview.cpp:204
 #, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
 msgstr ""
 
-#: rdp/rdpview.cpp:235
+#: rdp/rdpview.cpp:237
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr ""
 
-#: rdp/rdpview.cpp:236
+#: rdp/rdpview.cpp:238
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
 msgstr ""
 
-#: rdp/rdpview.cpp:241 rdp/rdpview.cpp:266
+#: rdp/rdpview.cpp:243 rdp/rdpview.cpp:268
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
 msgstr ""
 
-#: rdp/rdpview.cpp:260
+#: rdp/rdpview.cpp:262
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
 msgstr ""
 
-#: rdp/rdpview.cpp:261
+#: rdp/rdpview.cpp:263
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
 msgstr ""
 
-#: rdp/rdpview.cpp:264
+#: rdp/rdpview.cpp:266
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1353,13 +1415,13 @@ msgid ""
 "%2"
 msgstr ""
 
-#: rdp/rdpview.cpp:297
+#: rdp/rdpview.cpp:299
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Login Failure"
 msgstr ""
 
-#: rdp/rdpview.cpp:298
+#: rdp/rdpview.cpp:300
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1367,13 +1429,13 @@ msgid ""
 "and password."
 msgstr ""
 
-#: rdp/rdpview.cpp:307
+#: rdp/rdpview.cpp:309
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Account Problems"
 msgstr ""
 
-#: rdp/rdpview.cpp:308
+#: rdp/rdpview.cpp:310
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1381,13 +1443,13 @@ msgid ""
 "contact your system administrator."
 msgstr ""
 
-#: rdp/rdpview.cpp:313
+#: rdp/rdpview.cpp:315
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Password Problems"
 msgstr ""
 
-#: rdp/rdpview.cpp:314
+#: rdp/rdpview.cpp:316
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1395,79 +1457,79 @@ msgid ""
 "administrator to change it."
 msgstr ""
 
-#: rdp/rdpview.cpp:317
+#: rdp/rdpview.cpp:319
 #, fuzzy, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Lost"
 msgstr "कनेक्शन"
 
-#: rdp/rdpview.cpp:318
+#: rdp/rdpview.cpp:320
 #, kde-format
 msgctxt "@label"
 msgid "Lost connection to the server."
 msgstr ""
 
-#: rdp/rdpview.cpp:322
+#: rdp/rdpview.cpp:324
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Server not Found"
 msgstr ""
 
-#: rdp/rdpview.cpp:323
+#: rdp/rdpview.cpp:325
 #, kde-format
 msgctxt "@label"
 msgid "Could not find the server."
 msgstr ""
 
-#: rdp/rdpview.cpp:326
+#: rdp/rdpview.cpp:328
 #, fuzzy, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Refused"
 msgstr "कनेक्शन"
 
-#: rdp/rdpview.cpp:327
+#: rdp/rdpview.cpp:329
 #, kde-format
 msgctxt "@label"
 msgid "The server refused the connection request."
 msgstr ""
 
-#: rdp/rdpview.cpp:332
+#: rdp/rdpview.cpp:334
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Could not Connect"
 msgstr ""
 
-#: rdp/rdpview.cpp:333
+#: rdp/rdpview.cpp:335
 #, kde-format
 msgctxt "@label"
 msgid "Could not connect to the server."
 msgstr ""
 
-#: rdp/rdpview.cpp:343 rdp/rdpview.cpp:347
+#: rdp/rdpview.cpp:345 rdp/rdpview.cpp:349
 #, fuzzy, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Closed"
 msgstr "कनेक्शन"
 
-#: rdp/rdpview.cpp:348
+#: rdp/rdpview.cpp:350
 #, kde-format
 msgctxt "@label"
 msgid "The connection to the server was closed."
 msgstr ""
 
-#: rdp/rdpview.cpp:352
+#: rdp/rdpview.cpp:354
 #, fuzzy, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Failed"
 msgstr "कनेक्शन"
 
-#: rdp/rdpview.cpp:353
+#: rdp/rdpview.cpp:355
 #, kde-format
 msgctxt "@label"
 msgid "An unknown error occurred"
 msgstr ""
 
-#: rdp/rdpview.cpp:367
+#: rdp/rdpview.cpp:369
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Logon Error"
@@ -1671,44 +1733,14 @@ msgstr ""
 msgid "Very Large (1600x1200)"
 msgstr ""
 
-#. i18n: ectx: property (text), widget (QCheckBox, use_ssh_tunnel)
-#: vnc/vncpreferences.ui:204
-#, kde-format
-msgid "Connect via SSH tunnel"
-msgstr ""
-
-#. i18n: ectx: property (title), widget (QGroupBox, ssh_groupBox)
-#: vnc/vncpreferences.ui:211
-#, kde-format
-msgid "SSH tunnel options"
-msgstr ""
-
-#. i18n: ectx: property (text), widget (QCheckBox, use_loopback)
-#: vnc/vncpreferences.ui:217
-#, kde-format
-msgid "Tunnel via loopback address"
-msgstr ""
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: vnc/vncpreferences.ui:224
-#, kde-format
-msgid "Port:"
-msgstr ""
-
-#. i18n: ectx: property (text), widget (QLabel, label_2)
-#: vnc/vncpreferences.ui:244
-#, fuzzy, kde-format
-msgid "User name:"
-msgstr "डिफाल्ट प्रयोक्ता नामः"
-
 #. i18n: ectx: property (text), widget (QCheckBox, dont_copy_passwords)
-#: vnc/vncpreferences.ui:257
+#: vnc/vncpreferences.ui:211
 #, kde-format
 msgid "Don't copy passwords from supported password managers to remote hosts"
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, dont_copy_passwords)
-#: vnc/vncpreferences.ui:260
+#: vnc/vncpreferences.ui:214
 #, kde-format
 msgid ""
 "Supported password managers (like KeePassXC) mark copied passwords with an "
@@ -1716,45 +1748,19 @@ msgid ""
 "filtering."
 msgstr ""
 
-#: vnc/vncsshtunnelthread.cpp:99
-#, kde-format
-msgid "Error connecting to %1: %2"
-msgstr ""
-
-#: vnc/vncsshtunnelthread.cpp:124
-#, kde-format
-msgid "Error authenticating with password: %1"
-msgstr ""
-
-#: vnc/vncsshtunnelthread.cpp:130 vnc/vncsshtunnelthread.cpp:148
-#: vnc/vncsshtunnelthread.cpp:155 vnc/vncsshtunnelthread.cpp:163
-#, kde-format
-msgid "Error creating tunnel socket"
-msgstr ""
-
-#: vnc/vncview.cpp:328
+#: vnc/vncview.cpp:286
 #, kde-format
 msgid "Access to the system requires a password."
 msgstr ""
 
-#: vnc/vncview.cpp:328
+#: vnc/vncview.cpp:286
 #, kde-format
 msgid "Authentication failed. Please try again."
 msgstr ""
 
-#: vnc/vncview.cpp:358
-#, kde-format
-msgid "Please enter the SSH password."
-msgstr ""
-
-#: vnc/vncview.cpp:383 vnc/vncview.cpp:385
+#: vnc/vncview.cpp:313 vnc/vncview.cpp:315
 #, kde-format
 msgid "VNC failure"
-msgstr ""
-
-#: vnc/vncview.cpp:394 vnc/vncview.cpp:396
-#, kde-format
-msgid "SSH Tunnel failure"
 msgstr ""
 
 #: vnc/vncviewfactory.cpp:47

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.1\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-09 00:41+0000\n"
+"POT-Creation-Date: 2025-03-25 00:41+0000\n"
 "PO-Revision-Date: 2025-01-27 21:09+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -222,8 +222,8 @@ msgstr "Általános beállítások"
 msgid "Hosts"
 msgstr "Gépek"
 
-#: config/preferencesdialog.cpp:28 core/hostpreferences.cpp:175
-#: core/hostpreferences.cpp:179
+#: config/preferencesdialog.cpp:28 core/hostpreferences.cpp:196
+#: core/hostpreferences.cpp:200
 #, kde-format
 msgid "Host Configuration"
 msgstr "Gépbeállítás"
@@ -278,7 +278,7 @@ msgid_plural "%1 years ago"
 msgstr[0] "Egy évvel ezelőtt"
 msgstr[1] "%1 évvel ezelőtt"
 
-#: core/hostpreferences.cpp:182
+#: core/hostpreferences.cpp:203
 #, kde-format
 msgid ""
 "Note that settings might only apply when you connect next time to this host."
@@ -286,12 +286,12 @@ msgstr ""
 "Lehetséges, hogy a beállítások csak a géphez való legközelebbi "
 "csatlakozáskor lépnek életbe."
 
-#: core/hostpreferences.cpp:198
+#: core/hostpreferences.cpp:232
 #, kde-format
 msgid "Show this dialog again for this host"
 msgstr "A párbeszédablak mindig jelenjen meg ennél a gépnévnél"
 
-#: core/hostpreferences.cpp:202
+#: core/hostpreferences.cpp:236
 #, kde-format
 msgid "Remember password (KWallet)"
 msgstr "Jelszó megjegyzése (KWallet)"
@@ -301,6 +301,69 @@ msgstr "Jelszó megjegyzése (KWallet)"
 #, kde-format
 msgid "Sessions"
 msgstr "Munkamenetek"
+
+#: core/remoteview.cpp:532
+#, kde-format
+msgid "Please enter the SSH password."
+msgstr "Adja meg az SSH jelszót."
+
+#: core/remoteview.cpp:550 core/remoteview.cpp:552
+#, kde-format
+msgid "SSH Tunnel failure"
+msgstr "SSH-alagút hiba"
+
+#: core/sshtunnelthread.cpp:99
+#, kde-format
+msgid "Error connecting to %1: %2"
+msgstr "Hiba a következőhöz csatlakozáskor: %1: %2"
+
+#: core/sshtunnelthread.cpp:124
+#, kde-format
+msgid "Error authenticating with password: %1"
+msgstr "Hiba a jelszóval hitelesítéskor: %1"
+
+#: core/sshtunnelthread.cpp:130 core/sshtunnelthread.cpp:148
+#: core/sshtunnelthread.cpp:155 core/sshtunnelthread.cpp:163
+#, kde-format
+msgid "Error creating tunnel socket"
+msgstr "Hiba az alagútcsatorna létrehozásakor"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, SshTunnelWidget)
+#: core/sshtunnelwidget.ui:14
+#, fuzzy, kde-format
+#| msgid "SSH tunnel options"
+msgid "SSH tunnel"
+msgstr "SSH-alagútbeállítások"
+
+#. i18n: ectx: property (text), widget (QCheckBox, use_ssh_tunnel)
+#: core/sshtunnelwidget.ui:32
+#, kde-format
+msgid "Connect via SSH tunnel"
+msgstr "Csatlakozás SSH-alagúton át"
+
+#. i18n: ectx: property (title), widget (QGroupBox, ssh_groupBox)
+#: core/sshtunnelwidget.ui:39
+#, kde-format
+msgid "SSH tunnel options"
+msgstr "SSH-alagútbeállítások"
+
+#. i18n: ectx: property (text), widget (QCheckBox, use_loopback)
+#: core/sshtunnelwidget.ui:45
+#, kde-format
+msgid "Tunnel via loopback address"
+msgstr "Alagút visszacsatolási címen át"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: core/sshtunnelwidget.ui:52
+#, kde-format
+msgid "Port:"
+msgstr "Port:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: core/sshtunnelwidget.ui:75
+#, kde-format
+msgid "User name:"
+msgstr "Felhasználónév:"
 
 #. i18n: ectx: Menu (session)
 #: krdcui.rc:8
@@ -1347,43 +1410,43 @@ msgstr ""
 "Kibocsátó: %5\n"
 "Ujjlenyomat: %6\n"
 
-#: rdp/rdpview.cpp:202
+#: rdp/rdpview.cpp:204
 #, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
 msgstr "A távoli gép eléréséhez felhasználónév és jelszó megadása szükséges."
 
-#: rdp/rdpview.cpp:235
+#: rdp/rdpview.cpp:237
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr "A távoli gép tanúsítványa ismeretlen. Szeretné folytatni?"
 
-#: rdp/rdpview.cpp:236
+#: rdp/rdpview.cpp:238
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
 msgstr "Tanúsítvány ellenőrzése"
 
-#: rdp/rdpview.cpp:241 rdp/rdpview.cpp:266
+#: rdp/rdpview.cpp:243 rdp/rdpview.cpp:268
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
 msgstr "Tanúsítvány megjegyzése"
 
-#: rdp/rdpview.cpp:260
+#: rdp/rdpview.cpp:262
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
 msgstr "A távoli gép tanúsítványa megváltozott. Szeretné folytatni?"
 
-#: rdp/rdpview.cpp:261
+#: rdp/rdpview.cpp:263
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
 msgstr "A tanúsítvány megváltozott"
 
-#: rdp/rdpview.cpp:264
+#: rdp/rdpview.cpp:266
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1397,13 +1460,13 @@ msgstr ""
 "Új tanúsítvány:\n"
 "%2"
 
-#: rdp/rdpview.cpp:297
+#: rdp/rdpview.cpp:299
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Login Failure"
 msgstr "Bejelentkezési hiba"
 
-#: rdp/rdpview.cpp:298
+#: rdp/rdpview.cpp:300
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1413,13 +1476,13 @@ msgstr ""
 "Nem sikerült bejelentkezni a megadott hitelesítő adatokkal. Kérjük, "
 "ellenőrizze kétszer a felhasználónevét és jelszavát."
 
-#: rdp/rdpview.cpp:307
+#: rdp/rdpview.cpp:309
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Account Problems"
 msgstr "Fiókprobléma"
 
-#: rdp/rdpview.cpp:308
+#: rdp/rdpview.cpp:310
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1429,13 +1492,13 @@ msgstr ""
 "A megadott fiók nem léphet be erre a gépre. Kérjük,  forduljon a "
 "rendszergazdához."
 
-#: rdp/rdpview.cpp:313
+#: rdp/rdpview.cpp:315
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Password Problems"
 msgstr "Jelszóhiba"
 
-#: rdp/rdpview.cpp:314
+#: rdp/rdpview.cpp:316
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1445,79 +1508,79 @@ msgstr ""
 "Nem sikerült bejelentkezni a megadott jelszóval. Kérjük, lépjen kapcsolatba "
 "a rendszergazdával a módosításához."
 
-#: rdp/rdpview.cpp:317
+#: rdp/rdpview.cpp:319
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Lost"
 msgstr "A kapcsolat megszakadt"
 
-#: rdp/rdpview.cpp:318
+#: rdp/rdpview.cpp:320
 #, kde-format
 msgctxt "@label"
 msgid "Lost connection to the server."
 msgstr "Megszakadt a kapcsolat a kiszolgálóval."
 
-#: rdp/rdpview.cpp:322
+#: rdp/rdpview.cpp:324
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Server not Found"
 msgstr "A kiszolgáló nem található"
 
-#: rdp/rdpview.cpp:323
+#: rdp/rdpview.cpp:325
 #, kde-format
 msgctxt "@label"
 msgid "Could not find the server."
 msgstr "A kiszolgáló nem található."
 
-#: rdp/rdpview.cpp:326
+#: rdp/rdpview.cpp:328
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Refused"
 msgstr "Kapcsolat visszautasítva"
 
-#: rdp/rdpview.cpp:327
+#: rdp/rdpview.cpp:329
 #, kde-format
 msgctxt "@label"
 msgid "The server refused the connection request."
 msgstr "A kiszolgáló elutasította a csatlakozási kérést."
 
-#: rdp/rdpview.cpp:332
+#: rdp/rdpview.cpp:334
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Could not Connect"
 msgstr "Sikertelen csatlakozás"
 
-#: rdp/rdpview.cpp:333
+#: rdp/rdpview.cpp:335
 #, kde-format
 msgctxt "@label"
 msgid "Could not connect to the server."
 msgstr "Nem sikerült csatlakozni a kiszolgálóhoz."
 
-#: rdp/rdpview.cpp:343 rdp/rdpview.cpp:347
+#: rdp/rdpview.cpp:345 rdp/rdpview.cpp:349
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Closed"
 msgstr "Kapcsolat lezárva"
 
-#: rdp/rdpview.cpp:348
+#: rdp/rdpview.cpp:350
 #, kde-format
 msgctxt "@label"
 msgid "The connection to the server was closed."
 msgstr "A kiszolgálóval való kapcsolat lezárult."
 
-#: rdp/rdpview.cpp:352
+#: rdp/rdpview.cpp:354
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Failed"
 msgstr "Kapcsolódás meghiúsult"
 
-#: rdp/rdpview.cpp:353
+#: rdp/rdpview.cpp:355
 #, kde-format
 msgctxt "@label"
 msgid "An unknown error occurred"
 msgstr "Ismeretlen hiba történt"
 
-#: rdp/rdpview.cpp:367
+#: rdp/rdpview.cpp:369
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Logon Error"
@@ -1732,44 +1795,14 @@ msgstr "Nagy (1280x1024)"
 msgid "Very Large (1600x1200)"
 msgstr "Nagyon nagy (1600x1200)"
 
-#. i18n: ectx: property (text), widget (QCheckBox, use_ssh_tunnel)
-#: vnc/vncpreferences.ui:204
-#, kde-format
-msgid "Connect via SSH tunnel"
-msgstr "Csatlakozás SSH-alagúton át"
-
-#. i18n: ectx: property (title), widget (QGroupBox, ssh_groupBox)
-#: vnc/vncpreferences.ui:211
-#, kde-format
-msgid "SSH tunnel options"
-msgstr "SSH-alagútbeállítások"
-
-#. i18n: ectx: property (text), widget (QCheckBox, use_loopback)
-#: vnc/vncpreferences.ui:217
-#, kde-format
-msgid "Tunnel via loopback address"
-msgstr "Alagút visszacsatolási címen át"
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: vnc/vncpreferences.ui:224
-#, kde-format
-msgid "Port:"
-msgstr "Port:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_2)
-#: vnc/vncpreferences.ui:244
-#, kde-format
-msgid "User name:"
-msgstr "Felhasználónév:"
-
 #. i18n: ectx: property (text), widget (QCheckBox, dont_copy_passwords)
-#: vnc/vncpreferences.ui:257
+#: vnc/vncpreferences.ui:211
 #, kde-format
 msgid "Don't copy passwords from supported password managers to remote hosts"
 msgstr "Ne másoljon jelszavakat a támogatott jelszókezelőkből távoli gépekre"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, dont_copy_passwords)
-#: vnc/vncpreferences.ui:260
+#: vnc/vncpreferences.ui:214
 #, kde-format
 msgid ""
 "Supported password managers (like KeePassXC) mark copied passwords with an "
@@ -1780,46 +1813,20 @@ msgstr ""
 "további MIME-típussal („x-kde-passwordManagerHint”) jelölik meg, amelyet "
 "szűrésre használnak."
 
-#: vnc/vncsshtunnelthread.cpp:99
-#, kde-format
-msgid "Error connecting to %1: %2"
-msgstr "Hiba a következőhöz csatlakozáskor: %1: %2"
-
-#: vnc/vncsshtunnelthread.cpp:124
-#, kde-format
-msgid "Error authenticating with password: %1"
-msgstr "Hiba a jelszóval hitelesítéskor: %1"
-
-#: vnc/vncsshtunnelthread.cpp:130 vnc/vncsshtunnelthread.cpp:148
-#: vnc/vncsshtunnelthread.cpp:155 vnc/vncsshtunnelthread.cpp:163
-#, kde-format
-msgid "Error creating tunnel socket"
-msgstr "Hiba az alagútcsatorna létrehozásakor"
-
-#: vnc/vncview.cpp:328
+#: vnc/vncview.cpp:286
 #, kde-format
 msgid "Access to the system requires a password."
 msgstr "A távoli gép eléréséhez jelszó megadása szükséges."
 
-#: vnc/vncview.cpp:328
+#: vnc/vncview.cpp:286
 #, kde-format
 msgid "Authentication failed. Please try again."
 msgstr "Felhasználóazonosítási hiba. Próbáljon meg újra bejelentkezni."
 
-#: vnc/vncview.cpp:358
-#, kde-format
-msgid "Please enter the SSH password."
-msgstr "Adja meg az SSH jelszót."
-
-#: vnc/vncview.cpp:383 vnc/vncview.cpp:385
+#: vnc/vncview.cpp:313 vnc/vncview.cpp:315
 #, kde-format
 msgid "VNC failure"
 msgstr "VNC-hiba"
-
-#: vnc/vncview.cpp:394 vnc/vncview.cpp:396
-#, kde-format
-msgid "SSH Tunnel failure"
-msgstr "SSH-alagút hiba"
 
 #: vnc/vncviewfactory.cpp:47
 #, kde-format

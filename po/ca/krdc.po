@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-09 00:41+0000\n"
+"POT-Creation-Date: 2025-03-25 00:41+0000\n"
 "PO-Revision-Date: 2025-03-08 10:31+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -226,8 +226,8 @@ msgstr "Configuració general"
 msgid "Hosts"
 msgstr "Ordinadors"
 
-#: config/preferencesdialog.cpp:28 core/hostpreferences.cpp:175
-#: core/hostpreferences.cpp:179
+#: config/preferencesdialog.cpp:28 core/hostpreferences.cpp:196
+#: core/hostpreferences.cpp:200
 #, kde-format
 msgid "Host Configuration"
 msgstr "Configuració de l'ordinador"
@@ -282,7 +282,7 @@ msgid_plural "%1 years ago"
 msgstr[0] "Fa un any"
 msgstr[1] "Fa %1 anys"
 
-#: core/hostpreferences.cpp:182
+#: core/hostpreferences.cpp:203
 #, kde-format
 msgid ""
 "Note that settings might only apply when you connect next time to this host."
@@ -290,12 +290,12 @@ msgstr ""
 "Cal tenir present que la configuració podria no funcionar fins que us "
 "connecteu de nou amb aquest servidor."
 
-#: core/hostpreferences.cpp:198
+#: core/hostpreferences.cpp:232
 #, kde-format
 msgid "Show this dialog again for this host"
 msgstr "Mostra aquest diàleg una altra vegada per a aquest ordinador"
 
-#: core/hostpreferences.cpp:202
+#: core/hostpreferences.cpp:236
 #, kde-format
 msgid "Remember password (KWallet)"
 msgstr "Recorda la contrasenya (KWallet)"
@@ -305,6 +305,69 @@ msgstr "Recorda la contrasenya (KWallet)"
 #, kde-format
 msgid "Sessions"
 msgstr "Sessions"
+
+#: core/remoteview.cpp:532
+#, kde-format
+msgid "Please enter the SSH password."
+msgstr "Si us plau, introduïu la contrasenya del SSH."
+
+#: core/remoteview.cpp:550 core/remoteview.cpp:552
+#, kde-format
+msgid "SSH Tunnel failure"
+msgstr "Ha fallat el túnel SSH"
+
+#: core/sshtunnelthread.cpp:99
+#, kde-format
+msgid "Error connecting to %1: %2"
+msgstr "Error en connectar amb %1: %2"
+
+#: core/sshtunnelthread.cpp:124
+#, kde-format
+msgid "Error authenticating with password: %1"
+msgstr "Error en autenticar amb la contrasenya: %1"
+
+#: core/sshtunnelthread.cpp:130 core/sshtunnelthread.cpp:148
+#: core/sshtunnelthread.cpp:155 core/sshtunnelthread.cpp:163
+#, kde-format
+msgid "Error creating tunnel socket"
+msgstr "Error en crear el sòcol del túnel"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, SshTunnelWidget)
+#: core/sshtunnelwidget.ui:14
+#, fuzzy, kde-format
+#| msgid "SSH tunnel options"
+msgid "SSH tunnel"
+msgstr "Opcions del túnel SSH"
+
+#. i18n: ectx: property (text), widget (QCheckBox, use_ssh_tunnel)
+#: core/sshtunnelwidget.ui:32
+#, kde-format
+msgid "Connect via SSH tunnel"
+msgstr "Connecta a través del túnel SSH"
+
+#. i18n: ectx: property (title), widget (QGroupBox, ssh_groupBox)
+#: core/sshtunnelwidget.ui:39
+#, kde-format
+msgid "SSH tunnel options"
+msgstr "Opcions del túnel SSH"
+
+#. i18n: ectx: property (text), widget (QCheckBox, use_loopback)
+#: core/sshtunnelwidget.ui:45
+#, kde-format
+msgid "Tunnel via loopback address"
+msgstr "Túnel a través de l'adreça del bucle tancat"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: core/sshtunnelwidget.ui:52
+#, kde-format
+msgid "Port:"
+msgstr "Port:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: core/sshtunnelwidget.ui:75
+#, kde-format
+msgid "User name:"
+msgstr "Nom d'usuari:"
 
 #. i18n: ectx: Menu (session)
 #: krdcui.rc:8
@@ -1348,43 +1411,43 @@ msgstr ""
 "Emissor: %5\n"
 "Empremta digital: %6\n"
 
-#: rdp/rdpview.cpp:202
+#: rdp/rdpview.cpp:204
 #, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
 msgstr "L'accés al sistema requereix un nom d'usuari i una contrasenya."
 
-#: rdp/rdpview.cpp:235
+#: rdp/rdpview.cpp:237
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr "El certificat per a aquest sistema és desconegut. Voleu continuar?"
 
-#: rdp/rdpview.cpp:236
+#: rdp/rdpview.cpp:238
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
 msgstr "Verifica el certificat"
 
-#: rdp/rdpview.cpp:241 rdp/rdpview.cpp:266
+#: rdp/rdpview.cpp:243 rdp/rdpview.cpp:268
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
 msgstr "Recorda aquest certificat"
 
-#: rdp/rdpview.cpp:260
+#: rdp/rdpview.cpp:262
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
 msgstr "El certificat per a aquest sistema ha canviat. Voleu continuar?"
 
-#: rdp/rdpview.cpp:261
+#: rdp/rdpview.cpp:263
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
 msgstr "El certificat ha canviat"
 
-#: rdp/rdpview.cpp:264
+#: rdp/rdpview.cpp:266
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1398,13 +1461,13 @@ msgstr ""
 "Certificat nou:\n"
 "%2"
 
-#: rdp/rdpview.cpp:297
+#: rdp/rdpview.cpp:299
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Login Failure"
 msgstr "Fallada en iniciar la sessió"
 
-#: rdp/rdpview.cpp:298
+#: rdp/rdpview.cpp:300
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1414,13 +1477,13 @@ msgstr ""
 "No s'ha pogut iniciar la sessió amb les credencials proporcionades. "
 "Comproveu el nom d'usuari i la contrasenya."
 
-#: rdp/rdpview.cpp:307
+#: rdp/rdpview.cpp:309
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Account Problems"
 msgstr "Problemes del compte"
 
-#: rdp/rdpview.cpp:308
+#: rdp/rdpview.cpp:310
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1430,13 +1493,13 @@ msgstr ""
 "El compte proporcionat no té permès iniciar la sessió en aquesta màquina. "
 "Contacteu amb l'administrador del sistema."
 
-#: rdp/rdpview.cpp:313
+#: rdp/rdpview.cpp:315
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Password Problems"
 msgstr "Problemes de contrasenya"
 
-#: rdp/rdpview.cpp:314
+#: rdp/rdpview.cpp:316
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1446,79 +1509,79 @@ msgstr ""
 "No s'ha pogut iniciar la sessió amb la contrasenya proporcionada. Contacteu "
 "amb l'administrador del sistema per a canviar-la."
 
-#: rdp/rdpview.cpp:317
+#: rdp/rdpview.cpp:319
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Lost"
 msgstr "S'ha perdut la connexió"
 
-#: rdp/rdpview.cpp:318
+#: rdp/rdpview.cpp:320
 #, kde-format
 msgctxt "@label"
 msgid "Lost connection to the server."
 msgstr "S'ha perdut la connexió amb el servidor."
 
-#: rdp/rdpview.cpp:322
+#: rdp/rdpview.cpp:324
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Server not Found"
 msgstr "No s'ha trobat el servidor"
 
-#: rdp/rdpview.cpp:323
+#: rdp/rdpview.cpp:325
 #, kde-format
 msgctxt "@label"
 msgid "Could not find the server."
 msgstr "No s'ha pogut trobar el servidor."
 
-#: rdp/rdpview.cpp:326
+#: rdp/rdpview.cpp:328
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Refused"
 msgstr "S'ha rebutjat la connexió"
 
-#: rdp/rdpview.cpp:327
+#: rdp/rdpview.cpp:329
 #, kde-format
 msgctxt "@label"
 msgid "The server refused the connection request."
 msgstr "El servidor ha rebutjat la sol·licitud de connexió."
 
-#: rdp/rdpview.cpp:332
+#: rdp/rdpview.cpp:334
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Could not Connect"
 msgstr "No s'ha pogut connectar"
 
-#: rdp/rdpview.cpp:333
+#: rdp/rdpview.cpp:335
 #, kde-format
 msgctxt "@label"
 msgid "Could not connect to the server."
 msgstr "No s'ha pogut connectar amb el servidor."
 
-#: rdp/rdpview.cpp:343 rdp/rdpview.cpp:347
+#: rdp/rdpview.cpp:345 rdp/rdpview.cpp:349
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Closed"
 msgstr "S'ha tancat la connexió"
 
-#: rdp/rdpview.cpp:348
+#: rdp/rdpview.cpp:350
 #, kde-format
 msgctxt "@label"
 msgid "The connection to the server was closed."
 msgstr "S'ha tancat la connexió amb el servidor."
 
-#: rdp/rdpview.cpp:352
+#: rdp/rdpview.cpp:354
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Failed"
 msgstr "Ha fallat la connexió"
 
-#: rdp/rdpview.cpp:353
+#: rdp/rdpview.cpp:355
 #, kde-format
 msgctxt "@label"
 msgid "An unknown error occurred"
 msgstr "S'ha produït un error desconegut"
 
-#: rdp/rdpview.cpp:367
+#: rdp/rdpview.cpp:369
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Logon Error"
@@ -1732,38 +1795,8 @@ msgstr "Gran (1280x1024)"
 msgid "Very Large (1600x1200)"
 msgstr "Molt gran (1600x1200)"
 
-#. i18n: ectx: property (text), widget (QCheckBox, use_ssh_tunnel)
-#: vnc/vncpreferences.ui:204
-#, kde-format
-msgid "Connect via SSH tunnel"
-msgstr "Connecta a través del túnel SSH"
-
-#. i18n: ectx: property (title), widget (QGroupBox, ssh_groupBox)
-#: vnc/vncpreferences.ui:211
-#, kde-format
-msgid "SSH tunnel options"
-msgstr "Opcions del túnel SSH"
-
-#. i18n: ectx: property (text), widget (QCheckBox, use_loopback)
-#: vnc/vncpreferences.ui:217
-#, kde-format
-msgid "Tunnel via loopback address"
-msgstr "Túnel a través de l'adreça del bucle tancat"
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: vnc/vncpreferences.ui:224
-#, kde-format
-msgid "Port:"
-msgstr "Port:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_2)
-#: vnc/vncpreferences.ui:244
-#, kde-format
-msgid "User name:"
-msgstr "Nom d'usuari:"
-
 #. i18n: ectx: property (text), widget (QCheckBox, dont_copy_passwords)
-#: vnc/vncpreferences.ui:257
+#: vnc/vncpreferences.ui:211
 #, kde-format
 msgid "Don't copy passwords from supported password managers to remote hosts"
 msgstr ""
@@ -1771,7 +1804,7 @@ msgstr ""
 "remotes"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, dont_copy_passwords)
-#: vnc/vncpreferences.ui:260
+#: vnc/vncpreferences.ui:214
 #, kde-format
 msgid ""
 "Supported password managers (like KeePassXC) mark copied passwords with an "
@@ -1782,46 +1815,20 @@ msgstr ""
 "contrasenyes copiades amb un tipus MIME addicional «x-kde-"
 "passwordManagerHint» que s'usa per a filtrar."
 
-#: vnc/vncsshtunnelthread.cpp:99
-#, kde-format
-msgid "Error connecting to %1: %2"
-msgstr "Error en connectar amb %1: %2"
-
-#: vnc/vncsshtunnelthread.cpp:124
-#, kde-format
-msgid "Error authenticating with password: %1"
-msgstr "Error en autenticar amb la contrasenya: %1"
-
-#: vnc/vncsshtunnelthread.cpp:130 vnc/vncsshtunnelthread.cpp:148
-#: vnc/vncsshtunnelthread.cpp:155 vnc/vncsshtunnelthread.cpp:163
-#, kde-format
-msgid "Error creating tunnel socket"
-msgstr "Error en crear el sòcol del túnel"
-
-#: vnc/vncview.cpp:328
+#: vnc/vncview.cpp:286
 #, kde-format
 msgid "Access to the system requires a password."
 msgstr "L'accés al sistema requereix una contrasenya."
 
-#: vnc/vncview.cpp:328
+#: vnc/vncview.cpp:286
 #, kde-format
 msgid "Authentication failed. Please try again."
 msgstr "Ha fallat en l'autenticació. Torneu a intentar-ho."
 
-#: vnc/vncview.cpp:358
-#, kde-format
-msgid "Please enter the SSH password."
-msgstr "Si us plau, introduïu la contrasenya del SSH."
-
-#: vnc/vncview.cpp:383 vnc/vncview.cpp:385
+#: vnc/vncview.cpp:313 vnc/vncview.cpp:315
 #, kde-format
 msgid "VNC failure"
 msgstr "Error del VNC"
-
-#: vnc/vncview.cpp:394 vnc/vncview.cpp:396
-#, kde-format
-msgid "SSH Tunnel failure"
-msgstr "Ha fallat el túnel SSH"
 
 #: vnc/vncviewfactory.cpp:47
 #, kde-format

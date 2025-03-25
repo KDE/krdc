@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-09 00:41+0000\n"
+"POT-Creation-Date: 2025-03-25 00:41+0000\n"
 "PO-Revision-Date: 2025-03-08 10:52+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -228,8 +228,8 @@ msgstr "Algemene configuratie"
 msgid "Hosts"
 msgstr "Hosts"
 
-#: config/preferencesdialog.cpp:28 core/hostpreferences.cpp:175
-#: core/hostpreferences.cpp:179
+#: config/preferencesdialog.cpp:28 core/hostpreferences.cpp:196
+#: core/hostpreferences.cpp:200
 #, kde-format
 msgid "Host Configuration"
 msgstr "Host-configuratie"
@@ -284,7 +284,7 @@ msgid_plural "%1 years ago"
 msgstr[0] "Een jaar geleden"
 msgstr[1] "%1 jaren geleden"
 
-#: core/hostpreferences.cpp:182
+#: core/hostpreferences.cpp:203
 #, kde-format
 msgid ""
 "Note that settings might only apply when you connect next time to this host."
@@ -292,12 +292,12 @@ msgstr ""
 "Merk op dat instellingen mogelijk alleen van toepassing zijn bij het de "
 "volgende keer verbinden met deze host."
 
-#: core/hostpreferences.cpp:198
+#: core/hostpreferences.cpp:232
 #, kde-format
 msgid "Show this dialog again for this host"
 msgstr "Dit dialoogvenster opnieuw tonen voor deze host"
 
-#: core/hostpreferences.cpp:202
+#: core/hostpreferences.cpp:236
 #, kde-format
 msgid "Remember password (KWallet)"
 msgstr "Wachtwoord onthouden (KWallet)"
@@ -307,6 +307,69 @@ msgstr "Wachtwoord onthouden (KWallet)"
 #, kde-format
 msgid "Sessions"
 msgstr "Sessies"
+
+#: core/remoteview.cpp:532
+#, kde-format
+msgid "Please enter the SSH password."
+msgstr "Voer het SSH-wachtwoord in."
+
+#: core/remoteview.cpp:550 core/remoteview.cpp:552
+#, kde-format
+msgid "SSH Tunnel failure"
+msgstr "Fout met SSH-tunnel"
+
+#: core/sshtunnelthread.cpp:99
+#, kde-format
+msgid "Error connecting to %1: %2"
+msgstr "Fout bij verbinden met %1: %2"
+
+#: core/sshtunnelthread.cpp:124
+#, kde-format
+msgid "Error authenticating with password: %1"
+msgstr "Fout bij authenticeren met wachtwoord: %1"
+
+#: core/sshtunnelthread.cpp:130 core/sshtunnelthread.cpp:148
+#: core/sshtunnelthread.cpp:155 core/sshtunnelthread.cpp:163
+#, kde-format
+msgid "Error creating tunnel socket"
+msgstr "Fout bij aanmaken van tunnelsocket"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, SshTunnelWidget)
+#: core/sshtunnelwidget.ui:14
+#, fuzzy, kde-format
+#| msgid "SSH tunnel options"
+msgid "SSH tunnel"
+msgstr "Opties voor SSH-tunnel "
+
+#. i18n: ectx: property (text), widget (QCheckBox, use_ssh_tunnel)
+#: core/sshtunnelwidget.ui:32
+#, kde-format
+msgid "Connect via SSH tunnel"
+msgstr "Verbinden via SSH-tunnel"
+
+#. i18n: ectx: property (title), widget (QGroupBox, ssh_groupBox)
+#: core/sshtunnelwidget.ui:39
+#, kde-format
+msgid "SSH tunnel options"
+msgstr "Opties voor SSH-tunnel "
+
+#. i18n: ectx: property (text), widget (QCheckBox, use_loopback)
+#: core/sshtunnelwidget.ui:45
+#, kde-format
+msgid "Tunnel via loopback address"
+msgstr "Tunnel via loopback-adres"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: core/sshtunnelwidget.ui:52
+#, kde-format
+msgid "Port:"
+msgstr "Poort:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: core/sshtunnelwidget.ui:75
+#, kde-format
+msgid "User name:"
+msgstr "Gebruikersnaam:"
 
 #. i18n: ectx: Menu (session)
 #: krdcui.rc:8
@@ -1345,43 +1408,43 @@ msgstr ""
 "Indiener: %5\n"
 "Vingerafdruk: %6\n"
 
-#: rdp/rdpview.cpp:202
+#: rdp/rdpview.cpp:204
 #, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
 msgstr "Toegang tot dit systeem vereist een gebruikersnaam en wachtwoord."
 
-#: rdp/rdpview.cpp:235
+#: rdp/rdpview.cpp:237
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr "Het servercertificaat voor dit systeem is onbekend. Wilt u doorgaan?"
 
-#: rdp/rdpview.cpp:236
+#: rdp/rdpview.cpp:238
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
 msgstr "Certificaat verifiëren"
 
-#: rdp/rdpview.cpp:241 rdp/rdpview.cpp:266
+#: rdp/rdpview.cpp:243 rdp/rdpview.cpp:268
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
 msgstr "Dit certificaat onthouden"
 
-#: rdp/rdpview.cpp:260
+#: rdp/rdpview.cpp:262
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
 msgstr "Het certificaat voor dit systeem is gewijzigd. Wilt u doorgaan?"
 
-#: rdp/rdpview.cpp:261
+#: rdp/rdpview.cpp:263
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
 msgstr "Certificaat is gewijzigd"
 
-#: rdp/rdpview.cpp:264
+#: rdp/rdpview.cpp:266
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1395,13 +1458,13 @@ msgstr ""
 "Nieuw certificaat:\n"
 "%2"
 
-#: rdp/rdpview.cpp:297
+#: rdp/rdpview.cpp:299
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Login Failure"
 msgstr "Aanmeldfout"
 
-#: rdp/rdpview.cpp:298
+#: rdp/rdpview.cpp:300
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1411,13 +1474,13 @@ msgstr ""
 "Aanmelden lukt niet met de geleverde credentials. Controleer nog eens de "
 "gebruiker en het wachtwoord."
 
-#: rdp/rdpview.cpp:307
+#: rdp/rdpview.cpp:309
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Account Problems"
 msgstr "Accountproblemen"
 
-#: rdp/rdpview.cpp:308
+#: rdp/rdpview.cpp:310
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1427,13 +1490,13 @@ msgstr ""
 "Het geleverde account mag zich niet aanmelden in deze machine. Neem contact "
 "op met uw systeembeheerder."
 
-#: rdp/rdpview.cpp:313
+#: rdp/rdpview.cpp:315
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Password Problems"
 msgstr "Wachtwoordproblemen"
 
-#: rdp/rdpview.cpp:314
+#: rdp/rdpview.cpp:316
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1443,79 +1506,79 @@ msgstr ""
 "Aanmelden met het geleverde wachtwoord lukt niet. Neem contact op met uw "
 "systeembeheerder om het te wijzigen."
 
-#: rdp/rdpview.cpp:317
+#: rdp/rdpview.cpp:319
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Lost"
 msgstr "Verbinding verbroken"
 
-#: rdp/rdpview.cpp:318
+#: rdp/rdpview.cpp:320
 #, kde-format
 msgctxt "@label"
 msgid "Lost connection to the server."
 msgstr "Verbinding met de server is verbroken."
 
-#: rdp/rdpview.cpp:322
+#: rdp/rdpview.cpp:324
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Server not Found"
 msgstr "Server niet gevonden"
 
-#: rdp/rdpview.cpp:323
+#: rdp/rdpview.cpp:325
 #, kde-format
 msgctxt "@label"
 msgid "Could not find the server."
 msgstr "Kon de server niet vinden."
 
-#: rdp/rdpview.cpp:326
+#: rdp/rdpview.cpp:328
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Refused"
 msgstr "Verbinding geweigerd"
 
-#: rdp/rdpview.cpp:327
+#: rdp/rdpview.cpp:329
 #, kde-format
 msgctxt "@label"
 msgid "The server refused the connection request."
 msgstr "De server weigerde het verzoek om verbinding."
 
-#: rdp/rdpview.cpp:332
+#: rdp/rdpview.cpp:334
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Could not Connect"
 msgstr "Kon niet verbinden"
 
-#: rdp/rdpview.cpp:333
+#: rdp/rdpview.cpp:335
 #, kde-format
 msgctxt "@label"
 msgid "Could not connect to the server."
 msgstr "Kon niet verbinden met de server."
 
-#: rdp/rdpview.cpp:343 rdp/rdpview.cpp:347
+#: rdp/rdpview.cpp:345 rdp/rdpview.cpp:349
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Closed"
 msgstr "Verbinding gesloten"
 
-#: rdp/rdpview.cpp:348
+#: rdp/rdpview.cpp:350
 #, kde-format
 msgctxt "@label"
 msgid "The connection to the server was closed."
 msgstr "Verbinding met de server is gesloten."
 
-#: rdp/rdpview.cpp:352
+#: rdp/rdpview.cpp:354
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Failed"
 msgstr "Verbinding is mislukt"
 
-#: rdp/rdpview.cpp:353
+#: rdp/rdpview.cpp:355
 #, kde-format
 msgctxt "@label"
 msgid "An unknown error occurred"
 msgstr "Er is een onbekende fout opgetreden"
 
-#: rdp/rdpview.cpp:367
+#: rdp/rdpview.cpp:369
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Logon Error"
@@ -1728,38 +1791,8 @@ msgstr "Groot (1280x1024)"
 msgid "Very Large (1600x1200)"
 msgstr "Heel groot (1600x1200)"
 
-#. i18n: ectx: property (text), widget (QCheckBox, use_ssh_tunnel)
-#: vnc/vncpreferences.ui:204
-#, kde-format
-msgid "Connect via SSH tunnel"
-msgstr "Verbinden via SSH-tunnel"
-
-#. i18n: ectx: property (title), widget (QGroupBox, ssh_groupBox)
-#: vnc/vncpreferences.ui:211
-#, kde-format
-msgid "SSH tunnel options"
-msgstr "Opties voor SSH-tunnel "
-
-#. i18n: ectx: property (text), widget (QCheckBox, use_loopback)
-#: vnc/vncpreferences.ui:217
-#, kde-format
-msgid "Tunnel via loopback address"
-msgstr "Tunnel via loopback-adres"
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: vnc/vncpreferences.ui:224
-#, kde-format
-msgid "Port:"
-msgstr "Poort:"
-
-#. i18n: ectx: property (text), widget (QLabel, label_2)
-#: vnc/vncpreferences.ui:244
-#, kde-format
-msgid "User name:"
-msgstr "Gebruikersnaam:"
-
 #. i18n: ectx: property (text), widget (QCheckBox, dont_copy_passwords)
-#: vnc/vncpreferences.ui:257
+#: vnc/vncpreferences.ui:211
 #, kde-format
 msgid "Don't copy passwords from supported password managers to remote hosts"
 msgstr ""
@@ -1767,7 +1800,7 @@ msgstr ""
 "op afstand"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, dont_copy_passwords)
-#: vnc/vncpreferences.ui:260
+#: vnc/vncpreferences.ui:214
 #, kde-format
 msgid ""
 "Supported password managers (like KeePassXC) mark copied passwords with an "
@@ -1778,46 +1811,20 @@ msgstr ""
 "wachtwoorden met een additioneel MIME-type \"x-kde-passwordManagerHint\" die "
 "gebruikt wordt voor filteren."
 
-#: vnc/vncsshtunnelthread.cpp:99
-#, kde-format
-msgid "Error connecting to %1: %2"
-msgstr "Fout bij verbinden met %1: %2"
-
-#: vnc/vncsshtunnelthread.cpp:124
-#, kde-format
-msgid "Error authenticating with password: %1"
-msgstr "Fout bij authenticeren met wachtwoord: %1"
-
-#: vnc/vncsshtunnelthread.cpp:130 vnc/vncsshtunnelthread.cpp:148
-#: vnc/vncsshtunnelthread.cpp:155 vnc/vncsshtunnelthread.cpp:163
-#, kde-format
-msgid "Error creating tunnel socket"
-msgstr "Fout bij aanmaken van tunnelsocket"
-
-#: vnc/vncview.cpp:328
+#: vnc/vncview.cpp:286
 #, kde-format
 msgid "Access to the system requires a password."
 msgstr "De toegang tot het systeem vereist een wachtwoord."
 
-#: vnc/vncview.cpp:328
+#: vnc/vncview.cpp:286
 #, kde-format
 msgid "Authentication failed. Please try again."
 msgstr "Authenticatie is mislukt. Probeer het opnieuw."
 
-#: vnc/vncview.cpp:358
-#, kde-format
-msgid "Please enter the SSH password."
-msgstr "Voer het SSH-wachtwoord in."
-
-#: vnc/vncview.cpp:383 vnc/vncview.cpp:385
+#: vnc/vncview.cpp:313 vnc/vncview.cpp:315
 #, kde-format
 msgid "VNC failure"
 msgstr "VNC-fout"
-
-#: vnc/vncview.cpp:394 vnc/vncview.cpp:396
-#, kde-format
-msgid "SSH Tunnel failure"
-msgstr "Fout met SSH-tunnel"
 
 #: vnc/vncviewfactory.cpp:47
 #, kde-format
