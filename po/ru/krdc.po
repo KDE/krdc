@@ -10,13 +10,13 @@
 # Azamat H. Hackimov <azamat.hackimov@gmail.com>, 2010.
 # Alexander Lakhin <exclusion@gmail.com>, 2013.
 # Alexander Yavorsky <kekcuha@gmail.com>, 2019.
-# SPDX-FileCopyrightText: 2022, 2024 Olesya Gerasimenko <translation-team@basealt.ru>
+# SPDX-FileCopyrightText: 2022, 2024, 2025 Olesya Gerasimenko <translation-team@basealt.ru>
 msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-25 00:41+0000\n"
-"PO-Revision-Date: 2024-10-29 11:56+0300\n"
+"POT-Creation-Date: 2025-03-26 00:42+0000\n"
+"PO-Revision-Date: 2025-03-25 14:13+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
 "Language: ru\n"
@@ -327,12 +327,12 @@ msgstr "Сохранить пароль (KWallet)"
 msgid "Sessions"
 msgstr "Сеансы"
 
-#: core/remoteview.cpp:532
+#: core/remoteview.cpp:530
 #, kde-format
 msgid "Please enter the SSH password."
 msgstr "Введите пароль SSH-соединения."
 
-#: core/remoteview.cpp:550 core/remoteview.cpp:552
+#: core/remoteview.cpp:548 core/remoteview.cpp:550
 #, kde-format
 msgid "SSH Tunnel failure"
 msgstr "Ошибка туннелирования SSH"
@@ -356,7 +356,6 @@ msgstr "Ошибка создания сокета туннеля"
 #. i18n: ectx: property (windowTitle), widget (QWidget, SshTunnelWidget)
 #: core/sshtunnelwidget.ui:14
 #, fuzzy, kde-format
-#| msgid "SSH tunnel options"
 msgid "SSH tunnel"
 msgstr "Параметры SSH-туннеля"
 
@@ -589,12 +588,12 @@ msgstr "Закладки"
 #: mainwindow.cpp:258
 #, kde-format
 msgid "Unable to load connection data from the provided file."
-msgstr ""
+msgstr "Не удалось загрузить данные соединения из предоставленного файла."
 
 #: mainwindow.cpp:258
 #, kde-format
 msgid "Load failed"
-msgstr ""
+msgstr "Ошибка загрузки"
 
 #: mainwindow.cpp:264
 #, kde-format
@@ -763,11 +762,9 @@ msgstr "Фильтр"
 
 #. i18n: ectx: attribute (title), widget (QWidget, mainSettingsTab)
 #: rdp/rdppreferences.ui:21
-#, fuzzy, kde-format
-#| msgctxt "General Config"
-#| msgid "General"
+#, kde-format
 msgid "General"
-msgstr "Общие"
+msgstr "Основное"
 
 #. i18n: ectx: property (text), widget (QLabel, resolutionLabel)
 #: rdp/rdppreferences.ui:27
@@ -927,10 +924,10 @@ msgstr "Low Color (8 бит)"
 
 #. i18n: ectx: property (text), widget (QLabel, desktopScaleFactorLabel)
 #: rdp/rdppreferences.ui:273
-#, fuzzy, kde-format
-#| msgid "Desktop &resolution:"
+#, kde-format
 msgid "Desktop scale factor:"
-msgstr "Разрешение &экрана:"
+msgstr ""
+"Коэффициент масштабирования рабочего стола и приложений рабочего стола:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DesktopScaleFactor)
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DeviceScaleFactor)
@@ -945,37 +942,37 @@ msgstr "Автоматически"
 #: rdp/rdppreferences.ui:300
 #, kde-format
 msgid "Do not scale"
-msgstr ""
+msgstr "Не масштабировать"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DesktopScaleFactor)
 #: rdp/rdppreferences.ui:305
 #, kde-format
 msgid "Custom"
-msgstr ""
+msgstr "Другой"
 
 #. i18n: ectx: property (text), widget (QLabel, deviceScaleFactorLabel)
 #: rdp/rdppreferences.ui:337
 #, kde-format
 msgid "Device scale factor:"
-msgstr ""
+msgstr "Коэффициент масштабирования приложений из магазина:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DeviceScaleFactor)
 #: rdp/rdppreferences.ui:368
 #, kde-format
 msgid "100"
-msgstr ""
+msgstr "100"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DeviceScaleFactor)
 #: rdp/rdppreferences.ui:373
 #, kde-format
 msgid "140"
-msgstr ""
+msgstr "140"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DeviceScaleFactor)
 #: rdp/rdppreferences.ui:378
 #, kde-format
 msgid "180"
-msgstr ""
+msgstr "180"
 
 #. i18n: ectx: property (text), widget (QLabel, layoutLabel)
 #: rdp/rdppreferences.ui:386
@@ -1250,47 +1247,43 @@ msgstr "Общий ресурс:"
 #: rdp/rdppreferences.ui:676
 #, kde-format
 msgid "Share Smartcard:"
-msgstr ""
+msgstr "Общий доступ к смарт-карте:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, securitySettingsTab)
 #: rdp/rdppreferences.ui:690
-#, fuzzy, kde-format
-#| msgid "TLS security level:"
+#, kde-format
 msgid "Security"
-msgstr "Уровень защиты TLS:"
+msgstr "Защита"
 
 #. i18n: ectx: property (text), widget (QLabel, gSecurityLabel)
 #: rdp/rdppreferences.ui:698
-#, fuzzy, kde-format
-#| msgid "TLS security level:"
+#, kde-format
 msgid "Security:"
-msgstr "Уровень защиты TLS:"
+msgstr "Защита:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_NLASecurity)
 #: rdp/rdppreferences.ui:710
-#, fuzzy, kde-format
-#| msgid "LAN"
+#, kde-format
 msgid "NLA"
-msgstr "Локальная сеть"
+msgstr "NLA"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TLSSecurity)
 #: rdp/rdppreferences.ui:717
 #, kde-format
 msgid "TLS"
-msgstr ""
+msgstr "TLS"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_RDPSecurity)
 #: rdp/rdppreferences.ui:724
-#, fuzzy, kde-format
-#| msgid "RPC"
+#, kde-format
 msgid "RDP"
-msgstr "RPC"
+msgstr "RDP"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EXTSecurity)
 #: rdp/rdppreferences.ui:731
 #, kde-format
 msgid "Ext"
-msgstr ""
+msgstr "Ext"
 
 #. i18n: ectx: property (text), widget (QLabel, TlsSecLevelLabel)
 #: rdp/rdppreferences.ui:740
@@ -1336,10 +1329,9 @@ msgstr "256 бит"
 
 #. i18n: ectx: property (text), widget (QLabel, authPkgListLabel)
 #: rdp/rdppreferences.ui:799
-#, fuzzy, kde-format
-#| msgid "Authenticating at %1"
+#, kde-format
 msgid "Authentication Package List:"
-msgstr "Аутентификация в %1"
+msgstr "Список пакета аутентификации:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, proxySettingsTab)
 #: rdp/rdppreferences.ui:815

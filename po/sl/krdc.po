@@ -1,6 +1,6 @@
 # Slovenian translation of krdc
 # Copyright (C) 2002, 2003, 2004, 2005, 2006, 2007 Free Software Foundation, Inc.
-# $Id: krdc.po 1705806 2025-03-25 01:21:08Z scripty $
+# $Id: krdc.po 1705867 2025-03-26 01:21:30Z scripty $
 # $Source$
 #
 # Andrej Vernekar <andrej.vernekar@moj.net>, 2002, 2007, 2008.
@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-25 00:41+0000\n"
-"PO-Revision-Date: 2025-03-08 07:22+0100\n"
+"POT-Creation-Date: 2025-03-26 00:42+0000\n"
+"PO-Revision-Date: 2025-03-25 06:55+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -319,12 +319,12 @@ msgstr "Zapomni si geslo (Listnica)"
 msgid "Sessions"
 msgstr "Seje"
 
-#: core/remoteview.cpp:532
+#: core/remoteview.cpp:530
 #, kde-format
 msgid "Please enter the SSH password."
 msgstr "Prosim vnesite geslo za SSH."
 
-#: core/remoteview.cpp:550 core/remoteview.cpp:552
+#: core/remoteview.cpp:548 core/remoteview.cpp:550
 #, kde-format
 msgid "SSH Tunnel failure"
 msgstr "Izpad tunela SSH"
@@ -347,10 +347,9 @@ msgstr "Napaka pri ustvarjanju vtičnice za tunel"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, SshTunnelWidget)
 #: core/sshtunnelwidget.ui:14
-#, fuzzy, kde-format
-#| msgid "SSH tunnel options"
+#, kde-format
 msgid "SSH tunnel"
-msgstr "Možnosti tunela SSH"
+msgstr "Tunel SSH"
 
 #. i18n: ectx: property (text), widget (QCheckBox, use_ssh_tunnel)
 #: core/sshtunnelwidget.ui:32
