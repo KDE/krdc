@@ -5,7 +5,6 @@
 # SPDX-FileCopyrightText: 2004 Pablo de Vicente <vicente@oan.es>
 # SPDX-FileCopyrightText: 2005 Matias Costa <mcc3@alu.um.es>
 # SPDX-FileCopyrightText: 2006 Pablo de Vicente <pablo.devicente@gmail.com>
-# SPDX-FileCopyrightText: 2008 Israel Garcia <israelgarcia86@gmail.com>
 # SPDX-FileCopyrightText: 2008, 2009, 2010 Israel Garcia Garcia <israelgarcia86@gmail.com>
 # SPDX-FileCopyrightText: 2009, 2010, 2015, 2016, 2018, 2019, 2020, 2021, 2023, 2024, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 # SPDX-FileCopyrightText: 2010, 2011, 2012, 2013, 2016 Rocio Gallego <traducciones@rociogallego.com>
@@ -14,14 +13,14 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-26 00:42+0000\n"
-"PO-Revision-Date: 2025-03-09 00:50+0100\n"
+"PO-Revision-Date: 2025-03-26 02:41+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.12.2\n"
+"X-Generator: Lokalize 24.12.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -337,10 +336,9 @@ msgstr "Ha ocurrido un error al crear el socket del túnel"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, SshTunnelWidget)
 #: core/sshtunnelwidget.ui:14
-#, fuzzy, kde-format
-#| msgid "SSH tunnel options"
+#, kde-format
 msgid "SSH tunnel"
-msgstr "Opciones del túnel SSH"
+msgstr "Túnel SSH"
 
 #. i18n: ectx: property (text), widget (QCheckBox, use_ssh_tunnel)
 #: core/sshtunnelwidget.ui:32
@@ -1850,8 +1848,3 @@ msgid ""
 msgstr ""
 "<html>Introducir la dirección aquí.<br /><i>Ejemplo: vncserver:1 (host:"
 "port / screen)</i></html>"
-
-#~ msgctxt ""
-#~ "window title when in full screen mode (for example displayed in tasklist)"
-#~ msgid "KDE Remote Desktop Client (Full Screen)"
-#~ msgstr "Cliente de escritorio remoto KDE (pantalla completa)"
