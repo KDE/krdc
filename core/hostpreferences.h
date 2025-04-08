@@ -39,7 +39,7 @@ public:
     bool windowedScale();
     void setWindowedScale(bool scale);
 
-    /** Whether scaling is enabled when session is full screen. Note: only windowedScale seems to be used. */
+    /** Value from 100->200 (translates to 1x->2x) which scales the view. This only has an effect if scaling is enabled. */
     int scaleFactor();
     void setScaleFactor(int factor);
 
