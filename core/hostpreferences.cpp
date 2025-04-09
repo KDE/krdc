@@ -27,6 +27,13 @@ HostPreferences::HostPreferences(KConfigGroup configGroup, QObject *parent)
     , walletSupportCheckBox(nullptr)
 {
     m_hostConfigured = m_configGroup.hasKey("showConfigAgain");
+
+    // Previous versions of KRDC had an invalid default value for "scaleFactor" of 0.
+    // This doesn't make any sense, see MainWindow::setFactor where it divides it by 100.
+    // See BUG: 485094 which is caused by this being set to 0.
+    if (m_configGroup.readEntry("scaleFactor").toInt() < 100) {
+        m_configGroup.deleteEntry("scaleFactor");
+    }
 }
 
 HostPreferences::~HostPreferences()
@@ -113,7 +120,7 @@ void HostPreferences::setWindowedScale(bool scale)
 
 int HostPreferences::scaleFactor()
 {
-    return m_configGroup.readEntry("scaleFactor", 0);
+    return m_configGroup.readEntry("scaleFactor", 100);
 }
 
 void HostPreferences::setScaleFactor(int factor)
