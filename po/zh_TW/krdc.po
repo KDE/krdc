@@ -8,20 +8,20 @@
 # Frank Weng (a.k.a. Franklin) <franklin@goodhorse.idv.tw>, 2009, 2015.
 # Jeff Huang <s8321414@gmail.com>, 2016.
 # pan93412 <pan93412@gmail.com>, 2018, 2019, 2020.
-# SPDX-FileCopyrightText: 2024 Kisaragi Hiu <mail@kisaragi-hiu.com>
+# SPDX-FileCopyrightText: 2024, 2025 Kisaragi Hiu <mail@kisaragi-hiu.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-10 00:41+0000\n"
-"PO-Revision-Date: 2024-10-19 20:09+0900\n"
+"PO-Revision-Date: 2025-04-19 15:54+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.08.2\n"
+"X-Generator: Lokalize 24.12.3\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #, kde-format
@@ -324,10 +324,9 @@ msgstr "建立 tunnel 接口時發生錯誤"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, SshTunnelWidget)
 #: core/sshtunnelwidget.ui:14
-#, fuzzy, kde-format
-#| msgid "SSH tunnel options"
+#, kde-format
 msgid "SSH tunnel"
-msgstr "SSH tunnel 選項"
+msgstr "SSH tunnel"
 
 #. i18n: ectx: property (text), widget (QCheckBox, use_ssh_tunnel)
 #: core/sshtunnelwidget.ui:32
@@ -729,9 +728,7 @@ msgstr "過濾器"
 
 #. i18n: ectx: attribute (title), widget (QWidget, mainSettingsTab)
 #: rdp/rdppreferences.ui:21
-#, fuzzy, kde-format
-#| msgctxt "General Config"
-#| msgid "General"
+#, kde-format
 msgid "General"
 msgstr "一般"
 
@@ -889,10 +886,9 @@ msgstr "低彩（八位元）"
 
 #. i18n: ectx: property (text), widget (QLabel, desktopScaleFactorLabel)
 #: rdp/rdppreferences.ui:273
-#, fuzzy, kde-format
-#| msgid "Desktop &resolution:"
+#, kde-format
 msgid "Desktop scale factor:"
-msgstr "桌面解析度(&R)："
+msgstr "桌面縮放係數："
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DesktopScaleFactor)
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DeviceScaleFactor)
@@ -907,37 +903,37 @@ msgstr "自動"
 #: rdp/rdppreferences.ui:300
 #, kde-format
 msgid "Do not scale"
-msgstr ""
+msgstr "不要縮放"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DesktopScaleFactor)
 #: rdp/rdppreferences.ui:305
 #, kde-format
 msgid "Custom"
-msgstr ""
+msgstr "自訂"
 
 #. i18n: ectx: property (text), widget (QLabel, deviceScaleFactorLabel)
 #: rdp/rdppreferences.ui:337
 #, kde-format
 msgid "Device scale factor:"
-msgstr ""
+msgstr "裝置縮放係數："
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DeviceScaleFactor)
 #: rdp/rdppreferences.ui:368
 #, kde-format
 msgid "100"
-msgstr ""
+msgstr "100"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DeviceScaleFactor)
 #: rdp/rdppreferences.ui:373
 #, kde-format
 msgid "140"
-msgstr ""
+msgstr "140"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DeviceScaleFactor)
 #: rdp/rdppreferences.ui:378
 #, kde-format
 msgid "180"
-msgstr ""
+msgstr "180"
 
 #. i18n: ectx: property (text), widget (QLabel, layoutLabel)
 #: rdp/rdppreferences.ui:386
@@ -1210,47 +1206,43 @@ msgstr "分享媒體："
 #: rdp/rdppreferences.ui:676
 #, kde-format
 msgid "Share Smartcard:"
-msgstr ""
+msgstr "分享智慧卡："
 
 #. i18n: ectx: attribute (title), widget (QWidget, securitySettingsTab)
 #: rdp/rdppreferences.ui:690
-#, fuzzy, kde-format
-#| msgid "TLS security level:"
+#, kde-format
 msgid "Security"
-msgstr "TLS 安全性等級："
+msgstr "安全性"
 
 #. i18n: ectx: property (text), widget (QLabel, gSecurityLabel)
 #: rdp/rdppreferences.ui:698
-#, fuzzy, kde-format
-#| msgid "TLS security level:"
+#, kde-format
 msgid "Security:"
-msgstr "TLS 安全性等級："
+msgstr "安全性："
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_NLASecurity)
 #: rdp/rdppreferences.ui:710
-#, fuzzy, kde-format
-#| msgid "LAN"
+#, kde-format
 msgid "NLA"
-msgstr "區域網路"
+msgstr "NLA"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TLSSecurity)
 #: rdp/rdppreferences.ui:717
 #, kde-format
 msgid "TLS"
-msgstr ""
+msgstr "TLS"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_RDPSecurity)
 #: rdp/rdppreferences.ui:724
-#, fuzzy, kde-format
-#| msgid "RPC"
+#, kde-format
 msgid "RDP"
-msgstr "RPC"
+msgstr "RDP"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EXTSecurity)
 #: rdp/rdppreferences.ui:731
 #, kde-format
 msgid "Ext"
-msgstr ""
+msgstr "Ext"
 
 #. i18n: ectx: property (text), widget (QLabel, TlsSecLevelLabel)
 #: rdp/rdppreferences.ui:740
@@ -1296,10 +1288,9 @@ msgstr "256 位元"
 
 #. i18n: ectx: property (text), widget (QLabel, authPkgListLabel)
 #: rdp/rdppreferences.ui:799
-#, fuzzy, kde-format
-#| msgid "Authenticating at %1"
+#, kde-format
 msgid "Authentication Package List:"
-msgstr "於 %1 認證中"
+msgstr "認證軟體包列表："
 
 #. i18n: ectx: attribute (title), widget (QWidget, proxySettingsTab)
 #: rdp/rdppreferences.ui:815
