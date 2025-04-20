@@ -2,7 +2,7 @@
     "id": "org.kde.krdc",
     "branch": "master",
     "runtime": "org.kde.Platform",
-    "runtime-version": "6.7",
+    "runtime-version": "6.9",
     "sdk": "org.kde.Sdk",
     "command": "krdc",
     "tags": ["nightly"],
@@ -99,6 +99,11 @@
                 {
                     "name": "pkcs11-helper",
                     "buildsystem": "autotools",
+                    "build-options": {
+                    "env": {
+                        "CFLAGS": "-Wno-incompatible-pointer-types"
+                        }
+                    },
                     "sources": [
                         {
                             "type": "archive",
