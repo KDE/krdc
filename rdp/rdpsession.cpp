@@ -1103,6 +1103,9 @@ bool RdpSession::onAuthenticate(char **username, char **password, char **domain)
 
     if (m_firstPasswordTry && m_user.size()) {
         *username = _strdup(m_user.toUtf8().data());
+        if (m_domain.size()) {
+            *domain = _strdup(m_domain.toUtf8().data());
+        }
         if (m_password.size()) {
             *password = _strdup(m_password.toUtf8().data());
             m_firstPasswordTry = false;
