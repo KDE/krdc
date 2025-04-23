@@ -171,7 +171,7 @@ bool RdpView::startConnection()
             setStatus(Connected);
             break;
         case RdpSession::State::Closed:
-            setStatus(Disconnected);
+            startQuitting();
             break;
         default:
             break;
