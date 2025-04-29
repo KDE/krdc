@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-10 00:41+0000\n"
-"PO-Revision-Date: 2024-12-07 01:26+0200\n"
+"PO-Revision-Date: 2025-04-28 14:01+0300\n"
 "Last-Translator: Liudas Ališauskas <liudas@akmc.lt>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
 "Language: lt\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.5\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -342,10 +342,9 @@ msgstr "Klaida kuriant tunelio lizdą"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, SshTunnelWidget)
 #: core/sshtunnelwidget.ui:14
-#, fuzzy, kde-format
-#| msgid "SSH tunnel options"
+#, kde-format
 msgid "SSH tunnel"
-msgstr "SSH tunelio parinktys"
+msgstr "SSH tunelis"
 
 #. i18n: ectx: property (text), widget (QCheckBox, use_ssh_tunnel)
 #: core/sshtunnelwidget.ui:32
@@ -751,9 +750,7 @@ msgstr "Filtras"
 
 #. i18n: ectx: attribute (title), widget (QWidget, mainSettingsTab)
 #: rdp/rdppreferences.ui:21
-#, fuzzy, kde-format
-#| msgctxt "General Config"
-#| msgid "General"
+#, kde-format
 msgid "General"
 msgstr "Bendra"
 
@@ -915,10 +912,9 @@ msgstr "Mažai spalvų (8 bitų)"
 
 #. i18n: ectx: property (text), widget (QLabel, desktopScaleFactorLabel)
 #: rdp/rdppreferences.ui:273
-#, fuzzy, kde-format
-#| msgid "Desktop &resolution:"
+#, kde-format
 msgid "Desktop scale factor:"
-msgstr "S&kiriamoji raiška:"
+msgstr "Darbalaukio mastelio koeficientas:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DesktopScaleFactor)
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DeviceScaleFactor)
@@ -933,37 +929,37 @@ msgstr "Automatinis"
 #: rdp/rdppreferences.ui:300
 #, kde-format
 msgid "Do not scale"
-msgstr ""
+msgstr "Nekeisti mastelio"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DesktopScaleFactor)
 #: rdp/rdppreferences.ui:305
 #, kde-format
 msgid "Custom"
-msgstr ""
+msgstr "Tinkintas"
 
 #. i18n: ectx: property (text), widget (QLabel, deviceScaleFactorLabel)
 #: rdp/rdppreferences.ui:337
 #, kde-format
 msgid "Device scale factor:"
-msgstr ""
+msgstr "Įrenginio mastelio koeficientas:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DeviceScaleFactor)
 #: rdp/rdppreferences.ui:368
 #, kde-format
 msgid "100"
-msgstr ""
+msgstr "100"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DeviceScaleFactor)
 #: rdp/rdppreferences.ui:373
 #, kde-format
 msgid "140"
-msgstr ""
+msgstr "140"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DeviceScaleFactor)
 #: rdp/rdppreferences.ui:378
 #, kde-format
 msgid "180"
-msgstr ""
+msgstr "180"
 
 #. i18n: ectx: property (text), widget (QLabel, layoutLabel)
 #: rdp/rdppreferences.ui:386
@@ -1242,10 +1238,9 @@ msgstr "Bendrinti lustinę kortelę:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, securitySettingsTab)
 #: rdp/rdppreferences.ui:690
-#, fuzzy, kde-format
-#| msgid "Security:"
+#, kde-format
 msgid "Security"
-msgstr "Saugumas:"
+msgstr "Saugumas"
 
 #. i18n: ectx: property (text), widget (QLabel, gSecurityLabel)
 #: rdp/rdppreferences.ui:698
@@ -1321,10 +1316,9 @@ msgstr "256 bitai"
 
 #. i18n: ectx: property (text), widget (QLabel, authPkgListLabel)
 #: rdp/rdppreferences.ui:799
-#, fuzzy, kde-format
-#| msgid "Authenticating at %1"
+#, kde-format
 msgid "Authentication Package List:"
-msgstr "Nustatoma tapatybė ties %1"
+msgstr "Tapatybės nustatymo paketų sąrašas:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, proxySettingsTab)
 #: rdp/rdppreferences.ui:815
