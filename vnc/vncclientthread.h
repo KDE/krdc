@@ -165,6 +165,7 @@ private:
     static void updatefbStaticPartial(rfbClient *cl, int x, int y, int w, int h);
     static void updateFbStaticFinished(rfbClient *cl);
     static void cuttextStatic(rfbClient *cl, const char *text, int textlen);
+    static void cuttextUtf8Static(rfbClient *cl, const char *text, int textlen);
     static char *passwdHandlerStatic(rfbClient *cl);
     static rfbCredential *credentialHandlerStatic(rfbClient *cl, int credentialType);
     static void outputHandlerStatic(const char *format, ...);
@@ -174,7 +175,7 @@ private:
     rfbBool newclient();
     void updatefbPartial(int x, int y, int w, int h);
     void updatefbFinished();
-    void cuttext(const char *text, int textlen);
+    void cuttext(const char *text, int textlen, bool utf8);
     char *passwdHandler();
     rfbCredential *credentialHandler(int credentialType);
     void outputHandler(const char *format, va_list args);

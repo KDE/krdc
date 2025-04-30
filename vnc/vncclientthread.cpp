@@ -54,7 +54,16 @@ void VncClientThread::cuttextStatic(rfbClient *cl, const char *text, int textlen
     VncClientThread *t = (VncClientThread *)rfbClientGetClientData(cl, nullptr);
     Q_ASSERT(t);
 
-    t->cuttext(text, textlen);
+    t->cuttext(text, textlen, false);
+}
+
+// Dispatch from this static callback context to the member context.
+void VncClientThread::cuttextUtf8Static(rfbClient *cl, const char *text, int textlen)
+{
+    VncClientThread *t = (VncClientThread *)rfbClientGetClientData(cl, nullptr);
+    Q_ASSERT(t);
+
+    t->cuttext(text, textlen, true);
 }
 
 // Dispatch from this static callback context to the member context.
@@ -258,9 +267,15 @@ void VncClientThread::updatefbFinished()
     emitUpdated(updateRect.x(), updateRect.y(), updateRect.width(), updateRect.height());
 }
 
-void VncClientThread::cuttext(const char *text, int textlen)
+void VncClientThread::cuttext(const char *text, int textlen, bool utf8)
 {
-    const QString cutText = QString::fromLatin1(text, textlen);
+    QString cutText;
+    if (utf8) {
+        // The last byte is a null terminator
+        cutText = QString::fromUtf8(text, textlen - 1);
+    } else {
+        cutText = QString::fromLatin1(text, textlen);
+    }
     qCDebug(KRDC) << cutText;
 
     if (!cutText.isEmpty()) {
@@ -593,6 +608,7 @@ bool VncClientThread::clientCreate(bool reinitialising)
     cl->GotFrameBufferUpdate = updatefbStaticPartial;
     cl->FinishedFrameBufferUpdate = updateFbStaticFinished;
     cl->GotXCutText = cuttextStatic;
+    cl->GotXCutTextUTF8 = cuttextUtf8Static;
     cl->GotCursorShape = cursorShapeHandlerStatic;
     rfbClientSetClientData(cl, nullptr, this);
 
@@ -708,8 +724,17 @@ void KeyClientEvent::fire(rfbClient *cl)
 
 void ClientCutEvent::fire(rfbClient *cl)
 {
-    QByteArray toLatin1Converted = text.toLatin1();
-    SendClientCutText(cl, toLatin1Converted.data(), toLatin1Converted.length());
+    QByteArray latin1Bytes = text.toLatin1();
+    QByteArray utf8Bytes = text.toUtf8();
+    rfbBool sendUtf8Result = SendClientCutTextUTF8(cl, utf8Bytes.data(), utf8Bytes.length());
+    if (!sendUtf8Result) {
+        // Some VNC servers may not support UTF-8 cut text, fallback to Latin1 if needed.
+        qCDebug(KRDC) << "SendClientCutTextUTF8 failed, falling back to latin1";
+        rfbBool sendLatin1Result = SendClientCutText(cl, latin1Bytes.data(), latin1Bytes.length());
+        if (!sendLatin1Result) {
+            qCDebug(KRDC) << "SendClientCutText failed";
+        }
+    }
 }
 
 void VncClientThread::mouseEvent(int x, int y, int buttonMask)
