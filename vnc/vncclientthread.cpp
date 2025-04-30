@@ -608,7 +608,9 @@ bool VncClientThread::clientCreate(bool reinitialising)
     cl->GotFrameBufferUpdate = updatefbStaticPartial;
     cl->FinishedFrameBufferUpdate = updateFbStaticFinished;
     cl->GotXCutText = cuttextStatic;
+#if SUPPORT_UTF8_CLIPBOARD
     cl->GotXCutTextUTF8 = cuttextUtf8Static;
+#endif
     cl->GotCursorShape = cursorShapeHandlerStatic;
     rfbClientSetClientData(cl, nullptr, this);
 
@@ -726,6 +728,8 @@ void ClientCutEvent::fire(rfbClient *cl)
 {
     QByteArray latin1Bytes = text.toLatin1();
     QByteArray utf8Bytes = text.toUtf8();
+
+#if SUPPORT_UTF8_CLIPBOARD
     rfbBool sendUtf8Result = SendClientCutTextUTF8(cl, utf8Bytes.data(), utf8Bytes.length());
     if (!sendUtf8Result) {
         // Some VNC servers may not support UTF-8 cut text, fallback to Latin1 if needed.
@@ -735,6 +739,12 @@ void ClientCutEvent::fire(rfbClient *cl)
             qCDebug(KRDC) << "SendClientCutText failed";
         }
     }
+#else
+    rfbBool sendResult = SendClientCutText(cl, latin1Bytes.data(), latin1Bytes.length());
+    if (!sendResult) {
+        qCDebug(KRDC) << "SendClientCutText failed";
+    }
+#endif
 }
 
 void VncClientThread::mouseEvent(int x, int y, int buttonMask)

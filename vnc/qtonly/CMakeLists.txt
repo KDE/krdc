@@ -23,8 +23,17 @@ include(FeatureSummary)
 include(ECMDeprecationSettings)
 
 find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core Gui Widgets)
+
 find_package(PkgConfig REQUIRED)
-pkg_check_modules(VNCCLIENT libvncclient REQUIRED IMPORTED_TARGET)
+pkg_check_modules(VNCCLIENT libvncclient>=0.9.15 QUIET IMPORTED_TARGET)
+if(VNCCLIENT_FOUND)
+    add_definitions(-DSUPPORT_UTF8_CLIPBOARD=1)
+    message(STATUS "Found libvncclient version ${VNCCLIENT_VERSION}")
+else()
+    pkg_check_modules(VNCCLIENT libvncclient REQUIRED IMPORTED_TARGET)
+    add_definitions(-DSUPPORT_UTF8_CLIPBOARD=0)
+    message(WARNING "UTF-8 clipboard requires libvncclient>=0.9.15 (found ${VNCCLIENT_VERSION})")
+endif()
 
 add_executable(krdc-vnc-qtonly)
 
