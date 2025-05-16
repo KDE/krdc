@@ -631,7 +631,7 @@ int RdpSession::clientContextStart(rdpContext *context)
         return -1;
     }
 
-    const auto proxyHostAddress = QUrl(preferences->proxyHost());
+    const auto proxyHostAddress = QUrl::fromUserInput(preferences->proxyHost());
     if (!proxyHostAddress.isEmpty()) {
         int defaultPort = 8080;
         switch (preferences->proxyProtocol()) {
@@ -667,7 +667,7 @@ int RdpSession::clientContextStart(rdpContext *context)
         }
     }
 
-    const auto gatewayServerAddress = QUrl(preferences->gatewayServer());
+    const auto gatewayServerAddress = QUrl::fromUserInput(preferences->gatewayServer());
     if (!gatewayServerAddress.isEmpty()) {
         if (!freerdp_settings_set_string(settings, FreeRDP_GatewayHostname, gatewayServerAddress.host().toUtf8().data())) {
             return -1;
