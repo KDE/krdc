@@ -186,6 +186,16 @@ public:
     virtual bool viewOnly();
 
     /**
+     * Checks whether the backend supports clipboard sharing. The
+     * default implementation returns false.
+     * @return true if clipboard sharing is supported
+     * @see localClipboardChanged()
+     * @see remoteClipboardChanged()
+     * @see handleLocalClipboardChanged()
+     */
+    virtual bool supportsClipboardSharing() const;
+
+    /**
      * Checks whether grabbing all possible keys is enabled.
      */
     virtual bool grabAllKeys();

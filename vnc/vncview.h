@@ -39,6 +39,7 @@ public:
     bool supportsScaling() const override;
     bool supportsLocalCursor() const override;
     bool supportsViewOnly() const override;
+    bool supportsClipboardSharing() const override;
 
 #ifndef QTONLY
     HostPreferences *hostPreferences() override;

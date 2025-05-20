@@ -226,6 +226,11 @@ bool VncView::supportsViewOnly() const
     return true;
 }
 
+bool VncView::supportsClipboardSharing() const
+{
+    return true;
+}
+
 void VncView::requestPassword(bool includingUsername)
 {
     qCDebug(KRDC) << "request password";

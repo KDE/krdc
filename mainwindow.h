@@ -69,6 +69,7 @@ private Q_SLOTS:
     void openTabSettings(int index);
     void tabContextMenu(const QPoint &point);
     void viewOnly(bool viewOnly);
+    void clipboardSharing(bool clipboardSharing);
     void showLocalCursor(bool showLocalCursor);
     void grabAllKeys(bool grabAllKeys);
     void scale(bool scale);

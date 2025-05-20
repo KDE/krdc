@@ -46,6 +46,7 @@ public:
     bool supportsScaling() const override;
     bool supportsLocalCursor() const override;
     bool supportsViewOnly() const override;
+    bool supportsClipboardSharing() const override;
 
     void showLocalCursor(LocalCursorState state) override;
     bool scaling() const override;

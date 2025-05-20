@@ -151,6 +151,12 @@ void MainWindow::setupActions()
     viewOnlyAction->setIcon(QIcon::fromTheme(QStringLiteral("document-preview")));
     connect(viewOnlyAction, SIGNAL(triggered(bool)), SLOT(viewOnly(bool)));
 
+    QAction *clipboardSharingAction = actionCollection()->addAction(QStringLiteral("clipboard_sharing"));
+    clipboardSharingAction->setCheckable(true);
+    clipboardSharingAction->setText(i18n("Clipboard Sharing"));
+    clipboardSharingAction->setIcon(QIcon::fromTheme(QStringLiteral("edit-copy")));
+    connect(clipboardSharingAction, SIGNAL(triggered(bool)), SLOT(clipboardSharing(bool)));
+
     QAction *disconnectAction = actionCollection()->addAction(QStringLiteral("disconnect"));
     disconnectAction->setText(i18n("Disconnect"));
     disconnectAction->setIcon(QIcon::fromTheme(QStringLiteral("network-disconnect")));
@@ -762,6 +768,15 @@ void MainWindow::viewOnly(bool viewOnly)
     saveHostPrefs(view);
 }
 
+void MainWindow::clipboardSharing(bool clipboardSharing)
+{
+    qCDebug(KRDC) << clipboardSharing;
+
+    RemoteView *view = currentRemoteView();
+    view->hostPreferences()->setClipboardSharing(clipboardSharing);
+    saveHostPrefs(view);
+}
+
 void MainWindow::grabAllKeys(bool grabAllKeys)
 {
     qCDebug(KRDC);
@@ -840,6 +855,7 @@ void MainWindow::showRemoteViewToolbar()
 
         buttonBox->addAction(actionCollection()->action(QStringLiteral("take_screenshot")));
         buttonBox->addAction(actionCollection()->action(QStringLiteral("view_only")));
+        buttonBox->addAction(actionCollection()->action(QStringLiteral("clipboard_sharing")));
         buttonBox->addAction(actionCollection()->action(QStringLiteral("show_local_cursor")));
         buttonBox->addAction(actionCollection()->action(QStringLiteral("grab_all_keys")));
         buttonBox->addAction(actionCollection()->action(QStringLiteral("scale")));
@@ -873,6 +889,11 @@ void MainWindow::updateActionStatus()
     actionCollection()->action(QStringLiteral("disconnect"))->setEnabled(enabled);
 
     setActionStatus(actionCollection()->action(QStringLiteral("view_only")), enabled, view ? view->supportsViewOnly() : false, view ? view->viewOnly() : false);
+
+    setActionStatus(actionCollection()->action(QStringLiteral("clipboard_sharing")),
+                    enabled,
+                    view ? view->supportsClipboardSharing() : false,
+                    view ? view->hostPreferences()->clipboardSharing() : false);
 
     setActionStatus(actionCollection()->action(QStringLiteral("show_local_cursor")),
                     enabled,

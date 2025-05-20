@@ -52,6 +52,9 @@ public:
     bool viewOnly();
     void setViewOnly(bool view);
 
+    bool clipboardSharing();
+    void setClipboardSharing(bool share);
+
     /** Saved height. Generally used for the viewsize. */
     int height();
     void setHeight(int height);

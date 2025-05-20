@@ -397,6 +397,11 @@ bool RdpView::supportsViewOnly() const
     return true;
 }
 
+bool RdpView::supportsClipboardSharing() const
+{
+    return true;
+}
+
 void RdpView::showLocalCursor(LocalCursorState state)
 {
     RemoteView::showLocalCursor(state);

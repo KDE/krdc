@@ -179,6 +179,16 @@ void HostPreferences::setViewOnly(bool view)
     m_configGroup.writeEntry("viewOnly", view);
 }
 
+bool HostPreferences::clipboardSharing()
+{
+    return m_configGroup.readEntry("clipboardSharing", true);
+}
+
+void HostPreferences::setClipboardSharing(bool share)
+{
+    m_configGroup.writeEntry("clipboardSharing", share);
+}
+
 bool HostPreferences::showDialogIfNeeded(QWidget *parent)
 {
     if (hostConfigured()) {

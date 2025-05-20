@@ -26,7 +26,9 @@
 #include <KLocalizedString>
 #include <KMessageBox>
 #include <KPasswordDialog>
+#endif
 
+#ifndef QTONLY
 #include "hostpreferences.h"
 #endif
 
@@ -126,6 +128,11 @@ bool RemoteView::supportsLocalCursor() const
 }
 
 bool RemoteView::supportsViewOnly() const
+{
+    return false;
+}
+
+bool RemoteView::supportsClipboardSharing() const
 {
     return false;
 }
@@ -445,6 +452,12 @@ void RemoteView::localClipboardChanged()
         return;
     }
 
+#ifndef QTONLY
+    if (!hostPreferences()->clipboardSharing()) {
+        return;
+    }
+#endif
+
     if (m_clipboard->ownsClipboard() || m_viewOnly) {
         return;
     }
@@ -457,6 +470,12 @@ void RemoteView::localClipboardChanged()
 
 void RemoteView::remoteClipboardChanged(QMimeData *data)
 {
+#ifndef QTONLY
+    if (!hostPreferences()->clipboardSharing()) {
+        return;
+    }
+#endif
+
     if (m_viewOnly) {
         return;
     }
