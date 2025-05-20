@@ -131,6 +131,7 @@ QWidget *RdpHostPreferences::createProtocolSpecificConfigPage(QWidget *sshTunnel
     }
 
     rdpUi.kcfg_ScaleToSize->setChecked(scaleToSize());
+    rdpUi.kcfg_ConsoleMode->setChecked(consoleMode());
     rdpUi.kcfg_Height->setValue(height());
     rdpUi.kcfg_Width->setValue(width());
     rdpUi.kcfg_Resolution->setCurrentIndex(int(resolution()));
@@ -235,6 +236,7 @@ void RdpHostPreferences::acceptConfig()
     HostPreferences::acceptConfig();
 
     setScaleToSize(rdpUi.kcfg_ScaleToSize->isChecked());
+    setConsoleMode(rdpUi.kcfg_ConsoleMode->isChecked());
     setWidth(rdpUi.kcfg_Width->value());
     setHeight(rdpUi.kcfg_Height->value());
     setResolution(Resolution(rdpUi.kcfg_Resolution->currentIndex()));
@@ -272,6 +274,16 @@ bool RdpHostPreferences::scaleToSize() const
 void RdpHostPreferences::setScaleToSize(bool scale)
 {
     m_configGroup.writeEntry("scaleToSize", scale);
+}
+
+bool RdpHostPreferences::consoleMode() const
+{
+    return m_configGroup.readEntry("consoleMode", Settings::consoleMode());
+}
+
+void RdpHostPreferences::setConsoleMode(bool enabled)
+{
+    m_configGroup.writeEntry("consoleMode", enabled);
 }
 
 RdpHostPreferences::Resolution RdpHostPreferences::resolution() const

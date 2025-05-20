@@ -683,6 +683,23 @@
        <item row="10" column="1">
         <widget class="KLineEdit" name="kcfg_SmartcardName"/>
        </item>
+       <item row="11" column="0">
+        <widget class="QLabel" name="consoleModeLabel">
+         <property name="text">
+          <string>Alternate Session Type:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="11" column="1">
+        <widget class="QCheckBox" name="kcfg_ConsoleMode">
+         <property name="text">
+          <string>Admin (or console) session</string>
+         </property>
+        </widget>
+       </item>
       </layout>
      </widget>
      <widget class="QWidget" name="securitySettingsTab">

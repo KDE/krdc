@@ -87,6 +87,9 @@ public:
     bool scaleToSize() const;
     void setScaleToSize(bool scale);
 
+    bool consoleMode() const;
+    void setConsoleMode(bool enabled);
+
     Resolution resolution() const;
     void setResolution(Resolution resolution);
 

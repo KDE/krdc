@@ -625,6 +625,9 @@ int RdpSession::clientContextStart(rdpContext *context)
     if (!freerdp_settings_set_bool(settings, FreeRDP_ExtSecurity, preferences->securityEXT())) {
         return -1;
     }
+    if (!freerdp_settings_set_bool(settings, FreeRDP_ConsoleSession, preferences->consoleMode())) {
+        return -1;
+    }
 
     if (!preferences->authPkgList().isEmpty()
         && !freerdp_settings_set_string(settings, FreeRDP_AuthenticationPackageList, preferences->authPkgList().toUtf8().data())) {
