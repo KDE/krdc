@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-03 00:42+0000\n"
+"POT-Creation-Date: 2025-05-21 00:42+0000\n"
 "PO-Revision-Date: 2025-04-29 20:02+0800\n"
 "Last-Translator: Jeff Huang <s8321414@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@linux.org.tw>\n"
@@ -197,12 +197,12 @@ msgstr "設定..."
 msgid "Remove"
 msgstr "移除"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:287 mainwindow.cpp:664
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:293 mainwindow.cpp:670
 #, kde-format
 msgid "Unusable URL"
 msgstr "無法使用的網址"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:664
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:670
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr "無法處理選取的主機。"
@@ -223,8 +223,8 @@ msgstr "一般設定"
 msgid "Hosts"
 msgstr "主機"
 
-#: config/preferencesdialog.cpp:28 core/hostpreferences.cpp:203
-#: core/hostpreferences.cpp:207
+#: config/preferencesdialog.cpp:28 core/hostpreferences.cpp:213
+#: core/hostpreferences.cpp:217
 #, kde-format
 msgid "Host Configuration"
 msgstr "主機設定"
@@ -274,18 +274,18 @@ msgid "A year ago"
 msgid_plural "%1 years ago"
 msgstr[0] "%1 年前"
 
-#: core/hostpreferences.cpp:210
+#: core/hostpreferences.cpp:220
 #, kde-format
 msgid ""
 "Note that settings might only apply when you connect next time to this host."
 msgstr "注意，新設定值只會在下次連到此主機時生效。"
 
-#: core/hostpreferences.cpp:239
+#: core/hostpreferences.cpp:249
 #, kde-format
 msgid "Show this dialog again for this host"
 msgstr "對此主機再度顯示此對話框"
 
-#: core/hostpreferences.cpp:243
+#: core/hostpreferences.cpp:253
 #, kde-format
 msgid "Remember password (KWallet)"
 msgstr "記住密碼（KWallet）"
@@ -296,12 +296,12 @@ msgstr "記住密碼（KWallet）"
 msgid "Sessions"
 msgstr "工作階段"
 
-#: core/remoteview.cpp:530
+#: core/remoteview.cpp:549
 #, kde-format
 msgid "Please enter the SSH password."
 msgstr "請輸入 SSH 密碼。"
 
-#: core/remoteview.cpp:548 core/remoteview.cpp:550
+#: core/remoteview.cpp:567 core/remoteview.cpp:569
 #, kde-format
 msgid "SSH Tunnel failure"
 msgstr "SSH Tunnel 錯誤"
@@ -365,7 +365,7 @@ msgid "&Session"
 msgstr "工作階段(&S)"
 
 #. i18n: ectx: ToolBar (krdc_remote_view_toolbar)
-#: krdcui.rc:22
+#: krdcui.rc:23
 #, kde-format
 msgid "Remote View Toolbar"
 msgstr "遠端檢視工具列"
@@ -477,8 +477,8 @@ msgstr "啟動時要連線的網址"
 msgid "KDE Remote Desktop Client started"
 msgstr "KDE 遠端桌面連線已啟動"
 
-#: mainwindow.cpp:116 mainwindow.cpp:129 mainwindow.cpp:1061
-#: mainwindow.cpp:1156
+#: mainwindow.cpp:116 mainwindow.cpp:129 mainwindow.cpp:1082
+#: mainwindow.cpp:1177
 #, kde-format
 msgid "New Connection"
 msgstr "新增連線"
@@ -493,12 +493,12 @@ msgstr "將畫面快照存到剪貼簿中"
 msgid "Screenshot"
 msgstr "螢幕快照"
 
-#: mainwindow.cpp:142 mainwindow.cpp:499
+#: mainwindow.cpp:142 mainwindow.cpp:505
 #, kde-format
 msgid "Switch to Full Screen Mode"
 msgstr "切換到全螢幕模式"
 
-#: mainwindow.cpp:143 mainwindow.cpp:500
+#: mainwindow.cpp:143 mainwindow.cpp:506
 #, kde-format
 msgid "Full Screen"
 msgstr "全螢幕"
@@ -508,62 +508,67 @@ msgstr "全螢幕"
 msgid "View Only"
 msgstr "只檢視"
 
-#: mainwindow.cpp:155
+#: mainwindow.cpp:156
+#, kde-format
+msgid "Clipboard Sharing"
+msgstr ""
+
+#: mainwindow.cpp:161
 #, kde-format
 msgid "Disconnect"
 msgstr "斷線"
 
-#: mainwindow.cpp:163
+#: mainwindow.cpp:169
 #, kde-format
 msgid "Show Local Cursor"
 msgstr "顯示本地端游標"
 
-#: mainwindow.cpp:164
+#: mainwindow.cpp:170
 #, kde-format
 msgid "Local Cursor"
 msgstr "本地端游標"
 
-#: mainwindow.cpp:170
+#: mainwindow.cpp:176
 #, kde-format
 msgid "Grab All Possible Keys"
 msgstr "抓取所有可能的按鍵"
 
-#: mainwindow.cpp:171
+#: mainwindow.cpp:177
 #, kde-format
 msgid "Grab Keys"
 msgstr "抓取按鍵"
 
-#: mainwindow.cpp:177
+#: mainwindow.cpp:183
 #, kde-format
 msgid "Scale Remote Screen to Fit Window Size"
 msgstr "調整遠端螢幕以符合視窗大小"
 
-#: mainwindow.cpp:178
+#: mainwindow.cpp:184
 #, kde-format
 msgid "Scale"
 msgstr "尺度"
 
-#: mainwindow.cpp:181
+#: mainwindow.cpp:187
 #, kde-format
 msgid "Scaling Factor"
 msgstr "縮放倍率"
 
-#: mainwindow.cpp:192
+#: mainwindow.cpp:198
 #, kde-format
 msgid "Bookmarks"
 msgstr "書籤"
 
-#: mainwindow.cpp:260
+#: mainwindow.cpp:266
 #, kde-format
 msgid "Unable to load connection data from the provided file."
 msgstr "無法從提供的檔案載入連線資料。"
 
-#: mainwindow.cpp:260
+#: mainwindow.cpp:266
 #, kde-format
 msgid "Load failed"
 msgstr "載入失敗"
 
-#: mainwindow.cpp:266
+#: mainwindow.cpp:272
 #, kde-format
 msgid ""
 "The entered address does not have the required form.\n"
@@ -572,156 +577,156 @@ msgstr ""
 "輸入的位址格式不正確。\n"
 "語法應為：[帳號@]主機[:連接埠]"
 
-#: mainwindow.cpp:266
+#: mainwindow.cpp:272
 #, kde-format
 msgid "Malformed URL"
 msgstr "不正確的網址"
 
-#: mainwindow.cpp:287
+#: mainwindow.cpp:293
 #, kde-format
 msgid "The entered address cannot be handled."
 msgstr "無法處理輸入的位址。"
 
-#: mainwindow.cpp:422
+#: mainwindow.cpp:428
 #, kde-format
 msgid "Connecting to %1"
 msgstr "連線到 %1 中"
 
-#: mainwindow.cpp:426
+#: mainwindow.cpp:432
 #, kde-format
 msgid "Authenticating at %1"
 msgstr "於 %1 認證中"
 
-#: mainwindow.cpp:430
+#: mainwindow.cpp:436
 #, kde-format
 msgid "Preparing connection to %1"
 msgstr "準備連線到 %1 中"
 
-#: mainwindow.cpp:434
+#: mainwindow.cpp:440
 #, kde-format
 msgid "Connected to %1"
 msgstr "已連線到 %1"
 
-#: mainwindow.cpp:530
+#: mainwindow.cpp:536
 #, kde-format
 msgid "Switch to Window Mode"
 msgstr "切換到視窗模式"
 
-#: mainwindow.cpp:531
+#: mainwindow.cpp:537
 #, kde-format
 msgid "Window Mode"
 msgstr "視窗模式"
 
-#: mainwindow.cpp:683
+#: mainwindow.cpp:689
 #, kde-format
 msgid "Connect"
 msgstr "連線"
 
-#: mainwindow.cpp:684
+#: mainwindow.cpp:690
 #, kde-format
 msgid "Rename"
 msgstr "重新命名"
 
-#: mainwindow.cpp:685
+#: mainwindow.cpp:691
 #, kde-format
 msgid "Settings"
 msgstr "設定"
 
-#: mainwindow.cpp:686
+#: mainwindow.cpp:692
 #, kde-format
 msgid "Delete"
 msgstr "刪除"
 
-#: mainwindow.cpp:689 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:695 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "書籤"
 
-#: mainwindow.cpp:689 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:695 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "歷史"
 
-#: mainwindow.cpp:701
+#: mainwindow.cpp:707
 #, kde-format
 msgid "Rename %1"
 msgstr "重新命名 %1"
 
-#: mainwindow.cpp:701
+#: mainwindow.cpp:707
 #, kde-format
 msgid "Rename %1 to"
 msgstr "將 %1 重新命名為 "
 
-#: mainwindow.cpp:708
+#: mainwindow.cpp:714
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "您確定要刪除 %1 嗎？"
 
-#: mainwindow.cpp:708
+#: mainwindow.cpp:714
 #, kde-format
 msgid "Delete %1"
 msgstr "刪除 %1"
 
-#: mainwindow.cpp:732
+#: mainwindow.cpp:738
 #, kde-format
 msgid "Add Bookmark"
 msgstr "新增書籤"
 
-#: mainwindow.cpp:733
+#: mainwindow.cpp:739
 #, kde-format
 msgid "Close Tab"
 msgstr "關閉分頁"
 
-#: mainwindow.cpp:837
+#: mainwindow.cpp:852
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr "將全螢幕視窗最小化"
 
-#: mainwindow.cpp:853
+#: mainwindow.cpp:869
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "嵌入工具列"
 
-#: mainwindow.cpp:955
+#: mainwindow.cpp:976
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr "您確定要關閉 KRDC 嗎？"
 
-#: mainwindow.cpp:956
+#: mainwindow.cpp:977
 #, kde-format
 msgid "Confirm Quit"
 msgstr "確認離開"
 
-#: mainwindow.cpp:1084
+#: mainwindow.cpp:1105
 #, kde-format
 msgid "Connect to:"
 msgstr "連線到："
 
-#: mainwindow.cpp:1088
+#: mainwindow.cpp:1109
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr "在此輸入連線位址並過濾清單。"
 
-#: mainwindow.cpp:1097
+#: mainwindow.cpp:1118
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
 "methods."
 msgstr "在此輸入 IP 或 DNS 名稱。清除此行可取得連線方法的清單。"
 
-#: mainwindow.cpp:1100
+#: mainwindow.cpp:1121
 #, kde-format
 msgid "Goto Address"
 msgstr "到位址"
 
-#: mainwindow.cpp:1192
+#: mainwindow.cpp:1213
 #, kde-format
 msgid "Remote Desktops"
 msgstr "遠端桌面"
 
-#: mainwindow.cpp:1221
+#: mainwindow.cpp:1242
 #, kde-format
 msgid "Filter"
 msgstr "過濾器"
@@ -894,7 +899,7 @@ msgstr "桌面縮放係數："
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DeviceScaleFactor)
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_GatewayTransportType)
 #: rdp/rdppreferences.ui:295 rdp/rdppreferences.ui:363
-#: rdp/rdppreferences.ui:943
+#: rdp/rdppreferences.ui:960
 #, kde-format
 msgid "Auto"
 msgstr "自動"
@@ -1208,168 +1213,180 @@ msgstr "分享媒體："
 msgid "Share Smartcard:"
 msgstr "分享智慧卡："
 
+#. i18n: ectx: property (text), widget (QLabel, consoleModeLabel)
+#: rdp/rdppreferences.ui:689
+#, kde-format
+msgid "Alternate Session Type:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ConsoleMode)
+#: rdp/rdppreferences.ui:699
+#, kde-format
+msgid "Admin (or console) session"
+msgstr ""
+
 #. i18n: ectx: attribute (title), widget (QWidget, securitySettingsTab)
-#: rdp/rdppreferences.ui:690
+#: rdp/rdppreferences.ui:707
 #, kde-format
 msgid "Security"
 msgstr "安全性"
 
 #. i18n: ectx: property (text), widget (QLabel, gSecurityLabel)
-#: rdp/rdppreferences.ui:698
+#: rdp/rdppreferences.ui:715
 #, kde-format
 msgid "Security:"
 msgstr "安全性："
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityNLA)
-#: rdp/rdppreferences.ui:710
+#: rdp/rdppreferences.ui:727
 #, kde-format
 msgid "NLA"
 msgstr "NLA"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityTLS)
-#: rdp/rdppreferences.ui:717
+#: rdp/rdppreferences.ui:734
 #, kde-format
 msgid "TLS"
 msgstr "TLS"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityRDP)
-#: rdp/rdppreferences.ui:724
+#: rdp/rdppreferences.ui:741
 #, kde-format
 msgid "RDP"
 msgstr "RDP"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityEXT)
-#: rdp/rdppreferences.ui:731
+#: rdp/rdppreferences.ui:748
 #, kde-format
 msgid "Ext"
 msgstr "Ext"
 
 #. i18n: ectx: property (text), widget (QLabel, TlsSecLevelLabel)
-#: rdp/rdppreferences.ui:740
+#: rdp/rdppreferences.ui:757
 #, kde-format
 msgid "TLS security level:"
 msgstr "TLS 安全性等級："
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
-#: rdp/rdppreferences.ui:766
+#: rdp/rdppreferences.ui:783
 #, kde-format
 msgid "any"
 msgstr "任何"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
-#: rdp/rdppreferences.ui:771
+#: rdp/rdppreferences.ui:788
 #, kde-format
 msgid "80 bit"
 msgstr "80 位元"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
-#: rdp/rdppreferences.ui:776
+#: rdp/rdppreferences.ui:793
 #, kde-format
 msgid "112 bit"
 msgstr "112 位元"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
-#: rdp/rdppreferences.ui:781
+#: rdp/rdppreferences.ui:798
 #, kde-format
 msgid "128 bit"
 msgstr "128 位元"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
-#: rdp/rdppreferences.ui:786
+#: rdp/rdppreferences.ui:803
 #, kde-format
 msgid "192 bit"
 msgstr "192 位元"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
-#: rdp/rdppreferences.ui:791
+#: rdp/rdppreferences.ui:808
 #, kde-format
 msgid "256 bit"
 msgstr "256 位元"
 
 #. i18n: ectx: property (text), widget (QLabel, authPkgListLabel)
-#: rdp/rdppreferences.ui:799
+#: rdp/rdppreferences.ui:816
 #, kde-format
 msgid "Authentication Package List:"
 msgstr "認證軟體包列表："
 
 #. i18n: ectx: attribute (title), widget (QWidget, proxySettingsTab)
-#: rdp/rdppreferences.ui:815
+#: rdp/rdppreferences.ui:832
 #, kde-format
 msgid "Proxy"
 msgstr "代理伺服器"
 
 #. i18n: ectx: property (text), widget (QLabel, protocolLabel)
-#: rdp/rdppreferences.ui:823
+#: rdp/rdppreferences.ui:840
 #, kde-format
 msgid "Protocol:"
 msgstr "協定："
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ProxyProtocol)
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_GatewayTransportType)
-#: rdp/rdppreferences.ui:837 rdp/rdppreferences.ui:948
+#: rdp/rdppreferences.ui:854 rdp/rdppreferences.ui:965
 #, kde-format
 msgid "HTTP"
 msgstr "HTTP"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ProxyProtocol)
-#: rdp/rdppreferences.ui:842
+#: rdp/rdppreferences.ui:859
 #, kde-format
 msgid "SOCKS"
 msgstr "SOCKS"
 
 #. i18n: ectx: property (text), widget (QLabel, pPasswordLabel)
 #. i18n: ectx: property (text), widget (QLabel, gPasswordLabel)
-#: rdp/rdppreferences.ui:853 rdp/rdppreferences.ui:909
+#: rdp/rdppreferences.ui:870 rdp/rdppreferences.ui:926
 #, kde-format
 msgid "Password:"
 msgstr "密碼："
 
 #. i18n: ectx: property (text), widget (QLabel, pUsernameLabel)
 #. i18n: ectx: property (text), widget (QLabel, gUsernameLabel)
-#: rdp/rdppreferences.ui:863 rdp/rdppreferences.ui:902
+#: rdp/rdppreferences.ui:880 rdp/rdppreferences.ui:919
 #, kde-format
 msgid "Username:"
 msgstr "使用者名稱："
 
 #. i18n: ectx: property (text), widget (QLabel, pHostLabel)
 #. i18n: ectx: property (text), widget (QLabel, gServerLabel)
-#: rdp/rdppreferences.ui:870 rdp/rdppreferences.ui:895
+#: rdp/rdppreferences.ui:887 rdp/rdppreferences.ui:912
 #, kde-format
 msgid "Server:"
 msgstr "伺服器："
 
 #. i18n: ectx: property (placeholderText), widget (KLineEdit, kcfg_ProxyHost)
 #. i18n: ectx: property (placeholderText), widget (KLineEdit, kcfg_GatewayServer)
-#: rdp/rdppreferences.ui:877 rdp/rdppreferences.ui:916
+#: rdp/rdppreferences.ui:894 rdp/rdppreferences.ui:933
 #, kde-format
 msgid "host:port"
 msgstr "主機:連接埠"
 
 #. i18n: ectx: attribute (title), widget (QWidget, gatewaySettingsTab)
-#: rdp/rdppreferences.ui:887
+#: rdp/rdppreferences.ui:904
 #, kde-format
 msgid "Gateway"
 msgstr "閘道"
 
 #. i18n: ectx: property (text), widget (QLabel, gTransportTypeLabel)
-#: rdp/rdppreferences.ui:929
+#: rdp/rdppreferences.ui:946
 #, kde-format
 msgid "Transport type:"
 msgstr "傳輸型態："
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_GatewayTransportType)
-#: rdp/rdppreferences.ui:953
+#: rdp/rdppreferences.ui:970
 #, kde-format
 msgid "RPC"
 msgstr "RPC"
 
 #. i18n: ectx: property (text), widget (QLabel, gDomainLabel)
-#: rdp/rdppreferences.ui:961
+#: rdp/rdppreferences.ui:978
 #, kde-format
 msgid "Domain:"
 msgstr "網域："
 
-#: rdp/rdpsession.cpp:866
+#: rdp/rdpsession.cpp:869
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1776,17 +1793,17 @@ msgstr ""
 "有些的密碼管理員會為密碼標記 KDE 用來過濾密碼的額外 MIME 類型 \"x-kde-"
 "passwordManagerHint\"，支援此機制的密碼管理員包含 KeePassXC 等。"
 
-#: vnc/vncview.cpp:286
+#: vnc/vncview.cpp:291
 #, kde-format
 msgid "Access to the system requires a password."
 msgstr "要存取此系統需要密碼。"
 
-#: vnc/vncview.cpp:286
+#: vnc/vncview.cpp:291
 #, kde-format
 msgid "Authentication failed. Please try again."
 msgstr "認證失敗。請再試一次。"
 
-#: vnc/vncview.cpp:313 vnc/vncview.cpp:315
+#: vnc/vncview.cpp:318 vnc/vncview.cpp:320
 #, kde-format
 msgid "VNC failure"
 msgstr "VNC 失敗"

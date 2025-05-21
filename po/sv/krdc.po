@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-03 00:42+0000\n"
+"POT-Creation-Date: 2025-05-21 00:42+0000\n"
 "PO-Revision-Date: 2025-04-05 12:48+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -197,12 +197,12 @@ msgstr "Anpassa..."
 msgid "Remove"
 msgstr "Ta bort"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:287 mainwindow.cpp:664
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:293 mainwindow.cpp:670
 #, kde-format
 msgid "Unusable URL"
 msgstr "Oanvändbar webbadress"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:664
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:670
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr "Den valda värddatorn kan inte hanteras."
@@ -223,8 +223,8 @@ msgstr "Allmän inställning"
 msgid "Hosts"
 msgstr "Värddatorer"
 
-#: config/preferencesdialog.cpp:28 core/hostpreferences.cpp:203
-#: core/hostpreferences.cpp:207
+#: config/preferencesdialog.cpp:28 core/hostpreferences.cpp:213
+#: core/hostpreferences.cpp:217
 #, kde-format
 msgid "Host Configuration"
 msgstr "Inställning av värddator"
@@ -279,7 +279,7 @@ msgid_plural "%1 years ago"
 msgstr[0] "För ett år sedan"
 msgstr[1] "För %1 år sedan"
 
-#: core/hostpreferences.cpp:210
+#: core/hostpreferences.cpp:220
 #, kde-format
 msgid ""
 "Note that settings might only apply when you connect next time to this host."
@@ -287,12 +287,12 @@ msgstr ""
 "Observera att inställningar kanske bara gäller när du ansluter till samma "
 "värddator nästa gång."
 
-#: core/hostpreferences.cpp:239
+#: core/hostpreferences.cpp:249
 #, kde-format
 msgid "Show this dialog again for this host"
 msgstr "Visa den här dialogrutan igen för den här värddatorn"
 
-#: core/hostpreferences.cpp:243
+#: core/hostpreferences.cpp:253
 #, kde-format
 msgid "Remember password (KWallet)"
 msgstr "Kom ihåg lösenord (i plånboken)"
@@ -303,12 +303,12 @@ msgstr "Kom ihåg lösenord (i plånboken)"
 msgid "Sessions"
 msgstr "Sessioner"
 
-#: core/remoteview.cpp:530
+#: core/remoteview.cpp:549
 #, kde-format
 msgid "Please enter the SSH password."
 msgstr "Ange SSH-lösenordet."
 
-#: core/remoteview.cpp:548 core/remoteview.cpp:550
+#: core/remoteview.cpp:567 core/remoteview.cpp:569
 #, kde-format
 msgid "SSH Tunnel failure"
 msgstr "SSH-tunnel misslyckades"
@@ -372,7 +372,7 @@ msgid "&Session"
 msgstr "Sessi&on"
 
 #. i18n: ectx: ToolBar (krdc_remote_view_toolbar)
-#: krdcui.rc:22
+#: krdcui.rc:23
 #, kde-format
 msgid "Remote View Toolbar"
 msgstr "Fjärrvyverktygsrad"
@@ -486,8 +486,8 @@ msgstr "Webbadresser att ansluta till efter start"
 msgid "KDE Remote Desktop Client started"
 msgstr "KDE fjärranslutning till skrivbord startad"
 
-#: mainwindow.cpp:116 mainwindow.cpp:129 mainwindow.cpp:1061
-#: mainwindow.cpp:1156
+#: mainwindow.cpp:116 mainwindow.cpp:129 mainwindow.cpp:1082
+#: mainwindow.cpp:1177
 #, kde-format
 msgid "New Connection"
 msgstr "Ny anslutning"
@@ -502,12 +502,12 @@ msgstr "Kopiera skärmbild till klippbordet"
 msgid "Screenshot"
 msgstr "Skärmbild"
 
-#: mainwindow.cpp:142 mainwindow.cpp:499
+#: mainwindow.cpp:142 mainwindow.cpp:505
 #, kde-format
 msgid "Switch to Full Screen Mode"
 msgstr "Byt till fullskärmsläge"
 
-#: mainwindow.cpp:143 mainwindow.cpp:500
+#: mainwindow.cpp:143 mainwindow.cpp:506
 #, kde-format
 msgid "Full Screen"
 msgstr "Fullskärm"
@@ -517,62 +517,67 @@ msgstr "Fullskärm"
 msgid "View Only"
 msgstr "Visa endast"
 
-#: mainwindow.cpp:155
+#: mainwindow.cpp:156
+#, kde-format
+msgid "Clipboard Sharing"
+msgstr ""
+
+#: mainwindow.cpp:161
 #, kde-format
 msgid "Disconnect"
 msgstr "Koppla ner"
 
-#: mainwindow.cpp:163
+#: mainwindow.cpp:169
 #, kde-format
 msgid "Show Local Cursor"
 msgstr "Visa lokal markör"
 
-#: mainwindow.cpp:164
+#: mainwindow.cpp:170
 #, kde-format
 msgid "Local Cursor"
 msgstr "Lokal markör"
 
-#: mainwindow.cpp:170
+#: mainwindow.cpp:176
 #, kde-format
 msgid "Grab All Possible Keys"
 msgstr "Hämta alla tillgängliga tangenter"
 
-#: mainwindow.cpp:171
+#: mainwindow.cpp:177
 #, kde-format
 msgid "Grab Keys"
 msgstr "Använd tangenter"
 
-#: mainwindow.cpp:177
+#: mainwindow.cpp:183
 #, kde-format
 msgid "Scale Remote Screen to Fit Window Size"
 msgstr "Skala fjärrskärmen för att passa fönsterstorleken"
 
-#: mainwindow.cpp:178
+#: mainwindow.cpp:184
 #, kde-format
 msgid "Scale"
 msgstr "Skala"
 
-#: mainwindow.cpp:181
+#: mainwindow.cpp:187
 #, kde-format
 msgid "Scaling Factor"
 msgstr "Skalfaktor"
 
-#: mainwindow.cpp:192
+#: mainwindow.cpp:198
 #, kde-format
 msgid "Bookmarks"
 msgstr "Bokmärken"
 
-#: mainwindow.cpp:260
+#: mainwindow.cpp:266
 #, kde-format
 msgid "Unable to load connection data from the provided file."
 msgstr "Kunde inte läsa in anslutningsdata från den tillhandahållna filen."
 
-#: mainwindow.cpp:260
+#: mainwindow.cpp:266
 #, kde-format
 msgid "Load failed"
 msgstr "Inläsning misslyckades"
 
-#: mainwindow.cpp:266
+#: mainwindow.cpp:272
 #, kde-format
 msgid ""
 "The entered address does not have the required form.\n"
@@ -581,139 +586,139 @@ msgstr ""
 "Adressen som angavs har inte korrekt format.\n"
 " Syntax:  [användarnamn@]värddator[:port]"
 
-#: mainwindow.cpp:266
+#: mainwindow.cpp:272
 #, kde-format
 msgid "Malformed URL"
 msgstr "Felaktig webbadress"
 
-#: mainwindow.cpp:287
+#: mainwindow.cpp:293
 #, kde-format
 msgid "The entered address cannot be handled."
 msgstr "Den angivna adressen kan inte hanteras."
 
-#: mainwindow.cpp:422
+#: mainwindow.cpp:428
 #, kde-format
 msgid "Connecting to %1"
 msgstr "Ansluter till %1"
 
-#: mainwindow.cpp:426
+#: mainwindow.cpp:432
 #, kde-format
 msgid "Authenticating at %1"
 msgstr "Kontrollerar behörighet på %1"
 
-#: mainwindow.cpp:430
+#: mainwindow.cpp:436
 #, kde-format
 msgid "Preparing connection to %1"
 msgstr "Förbereder anslutning till %1"
 
-#: mainwindow.cpp:434
+#: mainwindow.cpp:440
 #, kde-format
 msgid "Connected to %1"
 msgstr "Ansluten till %1"
 
-#: mainwindow.cpp:530
+#: mainwindow.cpp:536
 #, kde-format
 msgid "Switch to Window Mode"
 msgstr "Byt till fönsterläge"
 
-#: mainwindow.cpp:531
+#: mainwindow.cpp:537
 #, kde-format
 msgid "Window Mode"
 msgstr "Fönsterläge"
 
-#: mainwindow.cpp:683
+#: mainwindow.cpp:689
 #, kde-format
 msgid "Connect"
 msgstr "Anslut"
 
-#: mainwindow.cpp:684
+#: mainwindow.cpp:690
 #, kde-format
 msgid "Rename"
 msgstr "Byt namn"
 
-#: mainwindow.cpp:685
+#: mainwindow.cpp:691
 #, kde-format
 msgid "Settings"
 msgstr "Inställningar"
 
-#: mainwindow.cpp:686
+#: mainwindow.cpp:692
 #, kde-format
 msgid "Delete"
 msgstr "Ta bort"
 
-#: mainwindow.cpp:689 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:695 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "Bokmärken"
 
-#: mainwindow.cpp:689 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:695 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "Historik"
 
-#: mainwindow.cpp:701
+#: mainwindow.cpp:707
 #, kde-format
 msgid "Rename %1"
 msgstr "Byt namn på %1"
 
-#: mainwindow.cpp:701
+#: mainwindow.cpp:707
 #, kde-format
 msgid "Rename %1 to"
 msgstr "Byt namn på %1 till"
 
-#: mainwindow.cpp:708
+#: mainwindow.cpp:714
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "Är du säker på att du vill ta bort %1?"
 
-#: mainwindow.cpp:708
+#: mainwindow.cpp:714
 #, kde-format
 msgid "Delete %1"
 msgstr "Ta bort %1"
 
-#: mainwindow.cpp:732
+#: mainwindow.cpp:738
 #, kde-format
 msgid "Add Bookmark"
 msgstr "Lägg till bokmärke"
 
-#: mainwindow.cpp:733
+#: mainwindow.cpp:739
 #, kde-format
 msgid "Close Tab"
 msgstr "Stäng flik"
 
-#: mainwindow.cpp:837
+#: mainwindow.cpp:852
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr "Minimera fullskärmsfönster"
 
-#: mainwindow.cpp:853
+#: mainwindow.cpp:869
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "Behåll verktygsrad"
 
-#: mainwindow.cpp:955
+#: mainwindow.cpp:976
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr "Är du säker på att du vill avsluta KDE fjärranslutning till skrivbord?"
 
-#: mainwindow.cpp:956
+#: mainwindow.cpp:977
 #, kde-format
 msgid "Confirm Quit"
 msgstr "Bekräfta avslutning"
 
-#: mainwindow.cpp:1084
+#: mainwindow.cpp:1105
 #, kde-format
 msgid "Connect to:"
 msgstr "Anslut till:"
 
-#: mainwindow.cpp:1088
+#: mainwindow.cpp:1109
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr "Skriv här för att ansluta till en adress och filtrera listan."
 
-#: mainwindow.cpp:1097
+#: mainwindow.cpp:1118
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
@@ -722,17 +727,17 @@ msgstr ""
 "Skriv in en IP-adress eller ett DNS-namn här. Rensa raden för att få en "
 "lista med anslutningsmetoder."
 
-#: mainwindow.cpp:1100
+#: mainwindow.cpp:1121
 #, kde-format
 msgid "Goto Address"
 msgstr "Gå till adress"
 
-#: mainwindow.cpp:1192
+#: mainwindow.cpp:1213
 #, kde-format
 msgid "Remote Desktops"
 msgstr "Fjärrskrivbord"
 
-#: mainwindow.cpp:1221
+#: mainwindow.cpp:1242
 #, kde-format
 msgid "Filter"
 msgstr "Filter"
@@ -909,7 +914,7 @@ msgstr "Skrivbordsskalfaktor:"
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DeviceScaleFactor)
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_GatewayTransportType)
 #: rdp/rdppreferences.ui:295 rdp/rdppreferences.ui:363
-#: rdp/rdppreferences.ui:943
+#: rdp/rdppreferences.ui:960
 #, kde-format
 msgid "Auto"
 msgstr "Automatisk"
@@ -1225,168 +1230,180 @@ msgstr "Dela media:"
 msgid "Share Smartcard:"
 msgstr "Dela smartkort:"
 
+#. i18n: ectx: property (text), widget (QLabel, consoleModeLabel)
+#: rdp/rdppreferences.ui:689
+#, kde-format
+msgid "Alternate Session Type:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ConsoleMode)
+#: rdp/rdppreferences.ui:699
+#, kde-format
+msgid "Admin (or console) session"
+msgstr ""
+
 #. i18n: ectx: attribute (title), widget (QWidget, securitySettingsTab)
-#: rdp/rdppreferences.ui:690
+#: rdp/rdppreferences.ui:707
 #, kde-format
 msgid "Security"
 msgstr "Säkerhet"
 
 #. i18n: ectx: property (text), widget (QLabel, gSecurityLabel)
-#: rdp/rdppreferences.ui:698
+#: rdp/rdppreferences.ui:715
 #, kde-format
 msgid "Security:"
 msgstr "Säkerhet:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityNLA)
-#: rdp/rdppreferences.ui:710
+#: rdp/rdppreferences.ui:727
 #, kde-format
 msgid "NLA"
 msgstr "NLA"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityTLS)
-#: rdp/rdppreferences.ui:717
+#: rdp/rdppreferences.ui:734
 #, kde-format
 msgid "TLS"
 msgstr "TLS"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityRDP)
-#: rdp/rdppreferences.ui:724
+#: rdp/rdppreferences.ui:741
 #, kde-format
 msgid "RDP"
 msgstr "RDP"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityEXT)
-#: rdp/rdppreferences.ui:731
+#: rdp/rdppreferences.ui:748
 #, kde-format
 msgid "Ext"
 msgstr "Ext"
 
 #. i18n: ectx: property (text), widget (QLabel, TlsSecLevelLabel)
-#: rdp/rdppreferences.ui:740
+#: rdp/rdppreferences.ui:757
 #, kde-format
 msgid "TLS security level:"
 msgstr "TLS-säkerhetsnivå:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
-#: rdp/rdppreferences.ui:766
+#: rdp/rdppreferences.ui:783
 #, kde-format
 msgid "any"
 msgstr "godtycklig"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
-#: rdp/rdppreferences.ui:771
+#: rdp/rdppreferences.ui:788
 #, kde-format
 msgid "80 bit"
 msgstr "80 bitar"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
-#: rdp/rdppreferences.ui:776
+#: rdp/rdppreferences.ui:793
 #, kde-format
 msgid "112 bit"
 msgstr "112 bitar"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
-#: rdp/rdppreferences.ui:781
+#: rdp/rdppreferences.ui:798
 #, kde-format
 msgid "128 bit"
 msgstr "128 bitar"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
-#: rdp/rdppreferences.ui:786
+#: rdp/rdppreferences.ui:803
 #, kde-format
 msgid "192 bit"
 msgstr "192 bitar"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
-#: rdp/rdppreferences.ui:791
+#: rdp/rdppreferences.ui:808
 #, kde-format
 msgid "256 bit"
 msgstr "256 bitar"
 
 #. i18n: ectx: property (text), widget (QLabel, authPkgListLabel)
-#: rdp/rdppreferences.ui:799
+#: rdp/rdppreferences.ui:816
 #, kde-format
 msgid "Authentication Package List:"
 msgstr "Paketlista för behörighetskontroll:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, proxySettingsTab)
-#: rdp/rdppreferences.ui:815
+#: rdp/rdppreferences.ui:832
 #, kde-format
 msgid "Proxy"
 msgstr "Proxy"
 
 #. i18n: ectx: property (text), widget (QLabel, protocolLabel)
-#: rdp/rdppreferences.ui:823
+#: rdp/rdppreferences.ui:840
 #, kde-format
 msgid "Protocol:"
 msgstr "Protokoll:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ProxyProtocol)
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_GatewayTransportType)
-#: rdp/rdppreferences.ui:837 rdp/rdppreferences.ui:948
+#: rdp/rdppreferences.ui:854 rdp/rdppreferences.ui:965
 #, kde-format
 msgid "HTTP"
 msgstr "HTTP"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ProxyProtocol)
-#: rdp/rdppreferences.ui:842
+#: rdp/rdppreferences.ui:859
 #, kde-format
 msgid "SOCKS"
 msgstr "SOCKS"
 
 #. i18n: ectx: property (text), widget (QLabel, pPasswordLabel)
 #. i18n: ectx: property (text), widget (QLabel, gPasswordLabel)
-#: rdp/rdppreferences.ui:853 rdp/rdppreferences.ui:909
+#: rdp/rdppreferences.ui:870 rdp/rdppreferences.ui:926
 #, kde-format
 msgid "Password:"
 msgstr "Lösenord:"
 
 #. i18n: ectx: property (text), widget (QLabel, pUsernameLabel)
 #. i18n: ectx: property (text), widget (QLabel, gUsernameLabel)
-#: rdp/rdppreferences.ui:863 rdp/rdppreferences.ui:902
+#: rdp/rdppreferences.ui:880 rdp/rdppreferences.ui:919
 #, kde-format
 msgid "Username:"
 msgstr "Användarnamn:"
 
 #. i18n: ectx: property (text), widget (QLabel, pHostLabel)
 #. i18n: ectx: property (text), widget (QLabel, gServerLabel)
-#: rdp/rdppreferences.ui:870 rdp/rdppreferences.ui:895
+#: rdp/rdppreferences.ui:887 rdp/rdppreferences.ui:912
 #, kde-format
 msgid "Server:"
 msgstr "Server:"
 
 #. i18n: ectx: property (placeholderText), widget (KLineEdit, kcfg_ProxyHost)
 #. i18n: ectx: property (placeholderText), widget (KLineEdit, kcfg_GatewayServer)
-#: rdp/rdppreferences.ui:877 rdp/rdppreferences.ui:916
+#: rdp/rdppreferences.ui:894 rdp/rdppreferences.ui:933
 #, kde-format
 msgid "host:port"
 msgstr "värddator:port"
 
 #. i18n: ectx: attribute (title), widget (QWidget, gatewaySettingsTab)
-#: rdp/rdppreferences.ui:887
+#: rdp/rdppreferences.ui:904
 #, kde-format
 msgid "Gateway"
 msgstr "Förmedlingsnod"
 
 #. i18n: ectx: property (text), widget (QLabel, gTransportTypeLabel)
-#: rdp/rdppreferences.ui:929
+#: rdp/rdppreferences.ui:946
 #, kde-format
 msgid "Transport type:"
 msgstr "Överföringstyp:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_GatewayTransportType)
-#: rdp/rdppreferences.ui:953
+#: rdp/rdppreferences.ui:970
 #, kde-format
 msgid "RPC"
 msgstr "RPC"
 
 #. i18n: ectx: property (text), widget (QLabel, gDomainLabel)
-#: rdp/rdppreferences.ui:961
+#: rdp/rdppreferences.ui:978
 #, kde-format
 msgid "Domain:"
 msgstr "Domän:"
 
-#: rdp/rdpsession.cpp:866
+#: rdp/rdpsession.cpp:869
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1804,17 +1821,17 @@ msgstr ""
 "en ytterligare Mime-typ \"x-kde-passwordManagerHint\", som används för "
 "filtrering."
 
-#: vnc/vncview.cpp:286
+#: vnc/vncview.cpp:291
 #, kde-format
 msgid "Access to the system requires a password."
 msgstr "Åtkomst till systemet kräver ett lösenord."
 
-#: vnc/vncview.cpp:286
+#: vnc/vncview.cpp:291
 #, kde-format
 msgid "Authentication failed. Please try again."
 msgstr "Behörighetskontroll misslyckades. Försök igen."
 
-#: vnc/vncview.cpp:313 vnc/vncview.cpp:315
+#: vnc/vncview.cpp:318 vnc/vncview.cpp:320
 #, kde-format
 msgid "VNC failure"
 msgstr "VNC misslyckades"
