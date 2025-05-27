@@ -149,10 +149,10 @@ QWidget *RdpHostPreferences::createProtocolSpecificConfigPage()
     rdpUi.kcfg_GatewayServer->setText(gatewayServer());
     rdpUi.kcfg_GatewayDomain->setText(gatewayDomain());
     rdpUi.kcfg_SmartcardName->setText(smartcardName());
-    rdpUi.kcfg_NLASecurity->setChecked(securityNLA());
-    rdpUi.kcfg_TLSSecurity->setChecked(securityTLS());
-    rdpUi.kcfg_RDPSecurity->setChecked(securityRDP());
-    rdpUi.kcfg_EXTSecurity->setChecked(securityEXT());
+    rdpUi.kcfg_SecurityNLA->setChecked(securityNLA());
+    rdpUi.kcfg_SecurityTLS->setChecked(securityTLS());
+    rdpUi.kcfg_SecurityRDP->setChecked(securityRDP());
+    rdpUi.kcfg_SecurityEXT->setChecked(securityEXT());
     rdpUi.kcfg_AuthPkgList->setText(authPkgList());
 
     // Have to call updateWidthHeight() here
@@ -254,10 +254,10 @@ void RdpHostPreferences::acceptConfig()
     setGatewayServer(rdpUi.kcfg_GatewayServer->text());
     setGatewayDomain(rdpUi.kcfg_GatewayDomain->text());
     setSmartcardName(rdpUi.kcfg_SmartcardName->text());
-    setSecurityNLA(rdpUi.kcfg_NLASecurity->isChecked());
-    setSecurityTLS(rdpUi.kcfg_TLSSecurity->isChecked());
-    setSecurityRDP(rdpUi.kcfg_RDPSecurity->isChecked());
-    setSecurityEXT(rdpUi.kcfg_EXTSecurity->isChecked());
+    setSecurityNLA(rdpUi.kcfg_SecurityNLA->isChecked());
+    setSecurityTLS(rdpUi.kcfg_SecurityTLS->isChecked());
+    setSecurityRDP(rdpUi.kcfg_SecurityRDP->isChecked());
+    setSecurityEXT(rdpUi.kcfg_SecurityEXT->isChecked());
     setAuthPkgList(rdpUi.kcfg_AuthPkgList->text());
 }
 
