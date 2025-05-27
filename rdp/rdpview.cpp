@@ -118,10 +118,11 @@ void RdpView::startQuittingConnection()
         return; // ignore repeated triggers
     }
 
-    unpressModifiers();
-
     qCDebug(KRDC) << "Stopping RDP session";
     m_quitting = true;
+
+    unpressModifiers();
+
     if (m_session) {
         m_session->stop();
     }
@@ -171,7 +172,8 @@ bool RdpView::startConnection()
             setStatus(Connected);
             break;
         case RdpSession::State::Closed:
-            startQuitting();
+            Q_EMIT disconnected();
+            setStatus(Disconnected);
             break;
         default:
             break;
@@ -339,7 +341,6 @@ void RdpView::handleError(const unsigned int error)
     case FREERDP_ERROR_RPC_INITIATED_DISCONNECT_BY_USER:
     case FREERDP_ERROR_LOGOFF_BY_USER:
         // user or admin initiated action, quit without error
-        startQuitting();
         return;
     case FREERDP_ERROR_DISCONNECTED_BY_OTHER_CONNECTION:
         title = i18nc("@title:dialog", "Connection Closed");
@@ -359,9 +360,6 @@ void RdpView::handleError(const unsigned int error)
     qCDebug(KRDC) << "error message" << title << message;
     // TODO offer reconnect if approriate
     KMessageBox::error(this, message, title);
-
-    // FIXME are there any situations we don't want to quit?
-    startQuitting();
 }
 
 void RdpView::onLogonError(const QString &error)
