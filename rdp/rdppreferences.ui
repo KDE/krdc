@@ -10,7 +10,7 @@
     <height>500</height>
    </rect>
   </property>
-   <layout class="QGridLayout" name="gridLayout">
+  <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
     <widget class="QTabWidget" name="settingsTabs">
      <property name="currentIndex">
@@ -27,7 +27,7 @@
           <string>Resolution</string>
          </property>
          <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
          </property>
         </widget>
        </item>
@@ -94,7 +94,7 @@
             <string>&amp;Width:</string>
            </property>
            <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
            </property>
            <property name="buddy">
             <cstring>kcfg_Width</cstring>
@@ -126,7 +126,7 @@
             <string>H&amp;eight:</string>
            </property>
            <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
            </property>
            <property name="buddy">
             <cstring>kcfg_Height</cstring>
@@ -173,7 +173,7 @@
           <string>Acceleration:</string>
          </property>
          <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
          </property>
         </widget>
        </item>
@@ -193,7 +193,7 @@
          </property>
          <item>
           <property name="text">
-           <string>Use Best Available</string>
+           <string comment="Use best acceleration supported by both the server and krdc">Use Best Available</string>
           </property>
          </item>
          <item>
@@ -219,7 +219,7 @@
           <string>Color &amp;depth:</string>
          </property>
          <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
          </property>
          <property name="buddy">
           <cstring>kcfg_ColorDepth</cstring>
@@ -242,7 +242,7 @@
          </property>
          <item>
           <property name="text">
-           <string>Use Best Available</string>
+           <string comment="Use best color depth supported by both the server and krdc">Use Best Available</string>
           </property>
          </item>
          <item>
@@ -273,7 +273,7 @@
           <string>Desktop scale factor:</string>
          </property>
          <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
          </property>
          <property name="buddy">
           <cstring>kcfg_DesktopScaleFactorCustom</cstring>
@@ -309,14 +309,14 @@
          </item>
          <item>
           <widget class="QSpinBox" name="kcfg_DesktopScaleFactorCustom">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="sizePolicy">
             <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
-           </property>
-           <property name="enabled">
-            <bool>false</bool>
            </property>
            <property name="minimum">
             <number>100</number>
@@ -337,7 +337,7 @@
           <string>Device scale factor:</string>
          </property>
          <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
          </property>
          <property name="buddy">
           <cstring>kcfg_DeviceScaleFactor</cstring>
@@ -386,7 +386,7 @@
           <string>&amp;Keyboard layout:</string>
          </property>
          <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
          </property>
          <property name="buddy">
           <cstring>kcfg_KeyboardLayout</cstring>
@@ -606,7 +606,7 @@
           <string comment="label for soundsettings in preferences dialog">Sound:</string>
          </property>
          <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
          </property>
          <property name="buddy">
           <cstring>kcfg_Sound</cstring>
@@ -650,7 +650,7 @@
           <string>Share Media:</string>
          </property>
          <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
          </property>
         </widget>
        </item>
@@ -663,10 +663,10 @@
           </sizepolicy>
          </property>
          <property name="mode">
-          <set>KFile::Directory|KFile::ExistingOnly|KFile::LocalOnly</set>
+          <set>KFile::Mode::Directory|KFile::Mode::ExistingOnly|KFile::Mode::LocalOnly</set>
          </property>
          <property name="acceptMode">
-          <enum>QFileDialog::AcceptOpen</enum>
+          <enum>QFileDialog::AcceptMode::AcceptOpen</enum>
          </property>
         </widget>
        </item>
@@ -676,7 +676,7 @@
           <string>Share Smartcard:</string>
          </property>
          <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
          </property>
         </widget>
        </item>
@@ -689,7 +689,7 @@
           <string>Alternate Session Type:</string>
          </property>
          <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
          </property>
         </widget>
        </item>
@@ -715,7 +715,7 @@
             <string>Security:</string>
            </property>
            <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
            </property>
           </widget>
          </item>
@@ -757,7 +757,7 @@
             <string>TLS security level:</string>
            </property>
            <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
            </property>
            <property name="buddy">
             <cstring>kcfg_TlsSecLevel</cstring>
@@ -816,7 +816,7 @@
             <string>Authentication Package List:</string>
            </property>
            <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
            </property>
           </widget>
          </item>
