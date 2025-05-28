@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-21 00:42+0000\n"
-"PO-Revision-Date: 2025-04-08 08:05+0300\n"
+"POT-Creation-Date: 2025-05-28 00:42+0000\n"
+"PO-Revision-Date: 2025-05-25 17:38+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -527,7 +527,7 @@ msgstr "Vain katsominen"
 #: mainwindow.cpp:156
 #, kde-format
 msgid "Clipboard Sharing"
-msgstr ""
+msgstr "Leikepöydän jakaminen"
 
 #: mainwindow.cpp:161
 #, kde-format
@@ -1241,13 +1241,13 @@ msgstr "Jaa älykortti:"
 #: rdp/rdppreferences.ui:689
 #, kde-format
 msgid "Alternate Session Type:"
-msgstr ""
+msgstr "Vaihtoehtoinen istuntotyyppi:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ConsoleMode)
 #: rdp/rdppreferences.ui:699
 #, kde-format
 msgid "Admin (or console) session"
-msgstr ""
+msgstr "Pääkäyttäjä- tai konsoli-istunto"
 
 #. i18n: ectx: attribute (title), widget (QWidget, securitySettingsTab)
 #: rdp/rdppreferences.ui:707
@@ -1426,43 +1426,43 @@ msgstr ""
 "Myöntäjä: %5\n"
 "Sormenjälki: %6\n"
 
-#: rdp/rdpview.cpp:204
+#: rdp/rdpview.cpp:206
 #, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
 msgstr "Järjestelmän käyttö vaatii käyttäjätunnuksen ja salasanan."
 
-#: rdp/rdpview.cpp:237
+#: rdp/rdpview.cpp:239
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr "Tämän järjestelmän varmenne on tuntematon. Haluatko jatkaa?"
 
-#: rdp/rdpview.cpp:238
+#: rdp/rdpview.cpp:240
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
 msgstr "Todenna varmenne"
 
-#: rdp/rdpview.cpp:243 rdp/rdpview.cpp:268
+#: rdp/rdpview.cpp:245 rdp/rdpview.cpp:270
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
 msgstr "Muista tämä varmenne"
 
-#: rdp/rdpview.cpp:262
+#: rdp/rdpview.cpp:264
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
 msgstr "Järjestelmän varmenne on muuttunut. Haluatko jatkaa?"
 
-#: rdp/rdpview.cpp:263
+#: rdp/rdpview.cpp:265
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
 msgstr "Varmenne on muuttunut"
 
-#: rdp/rdpview.cpp:266
+#: rdp/rdpview.cpp:268
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1476,13 +1476,13 @@ msgstr ""
 "Uusi varmenne:\n"
 "%2"
 
-#: rdp/rdpview.cpp:299
+#: rdp/rdpview.cpp:301
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Login Failure"
 msgstr "Kirjautumisvirhe"
 
-#: rdp/rdpview.cpp:300
+#: rdp/rdpview.cpp:302
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1492,13 +1492,13 @@ msgstr ""
 "Annetuilla tiedoilla ei kyetty kirjautumaan. Varmista käyttäjätunnus ja "
 "salasana."
 
-#: rdp/rdpview.cpp:309
+#: rdp/rdpview.cpp:311
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Account Problems"
 msgstr "Tiliongelmia"
 
-#: rdp/rdpview.cpp:310
+#: rdp/rdpview.cpp:312
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1508,13 +1508,13 @@ msgstr ""
 "Annetulla tilillä ei ole oikeutta kirjautua tähän koneeseen. Ota yhteyttä "
 "järjestelmän ylläpitoon."
 
-#: rdp/rdpview.cpp:315
+#: rdp/rdpview.cpp:317
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Password Problems"
 msgstr "Salasanaongelmia"
 
-#: rdp/rdpview.cpp:316
+#: rdp/rdpview.cpp:318
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1524,79 +1524,79 @@ msgstr ""
 "Annetulla salasanalla ei kyetty kirjautumaan. Vaihda se ottamalla yhteyttä "
 "järjestelmän ylläpitoon."
 
-#: rdp/rdpview.cpp:319
+#: rdp/rdpview.cpp:321
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Lost"
 msgstr "Yhteys poikki"
 
-#: rdp/rdpview.cpp:320
+#: rdp/rdpview.cpp:322
 #, kde-format
 msgctxt "@label"
 msgid "Lost connection to the server."
 msgstr "Palvelinyhteys katkesi."
 
-#: rdp/rdpview.cpp:324
+#: rdp/rdpview.cpp:326
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Server not Found"
 msgstr "Palvelinta ei löytynyt"
 
-#: rdp/rdpview.cpp:325
+#: rdp/rdpview.cpp:327
 #, kde-format
 msgctxt "@label"
 msgid "Could not find the server."
 msgstr "Palvelinta ei löytynyt."
 
-#: rdp/rdpview.cpp:328
+#: rdp/rdpview.cpp:330
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Refused"
 msgstr "Yhteys torjuttiin"
 
-#: rdp/rdpview.cpp:329
+#: rdp/rdpview.cpp:331
 #, kde-format
 msgctxt "@label"
 msgid "The server refused the connection request."
 msgstr "Palvelin torjui yhteyspyynnön."
 
-#: rdp/rdpview.cpp:334
+#: rdp/rdpview.cpp:336
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Could not Connect"
 msgstr "Ei voitu yhdistää"
 
-#: rdp/rdpview.cpp:335
+#: rdp/rdpview.cpp:337
 #, kde-format
 msgctxt "@label"
 msgid "Could not connect to the server."
 msgstr "Palvelimeen ei voitu yhdistää."
 
-#: rdp/rdpview.cpp:345 rdp/rdpview.cpp:349
+#: rdp/rdpview.cpp:346 rdp/rdpview.cpp:350
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Closed"
 msgstr "Yhteys suljettiin"
 
-#: rdp/rdpview.cpp:350
+#: rdp/rdpview.cpp:351
 #, kde-format
 msgctxt "@label"
 msgid "The connection to the server was closed."
 msgstr "Palvelinyhteys suljettiin."
 
-#: rdp/rdpview.cpp:354
+#: rdp/rdpview.cpp:355
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Failed"
 msgstr "Yhdistäminen epäonnistui"
 
-#: rdp/rdpview.cpp:355
+#: rdp/rdpview.cpp:356
 #, kde-format
 msgctxt "@label"
 msgid "An unknown error occurred"
 msgstr "Sattui tuntematon virhe"
 
-#: rdp/rdpview.cpp:369
+#: rdp/rdpview.cpp:367
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Logon Error"
