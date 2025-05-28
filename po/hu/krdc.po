@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.1\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-10 02:32+0000\n"
+"POT-Creation-Date: 2025-05-28 02:37+0000\n"
 "PO-Revision-Date: 2025-01-27 21:09+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -1179,27 +1179,27 @@ msgstr "TLS biztonsági szint:"
 msgid "Security:"
 msgstr "TLS biztonsági szint:"
 
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_NLASecurity)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityNLA)
 #: rdp/rdppreferences.ui:710
 #, fuzzy, kde-format
 #| msgid "LAN"
 msgid "NLA"
 msgstr "LAN"
 
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_TLSSecurity)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityTLS)
 #: rdp/rdppreferences.ui:717
 #, kde-format
 msgid "TLS"
 msgstr ""
 
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RDPSecurity)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityRDP)
 #: rdp/rdppreferences.ui:724
 #, fuzzy, kde-format
 #| msgid "RPC"
 msgid "RDP"
 msgstr "RPC"
 
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_EXTSecurity)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityEXT)
 #: rdp/rdppreferences.ui:731
 #, kde-format
 msgid "Ext"
@@ -1347,43 +1347,43 @@ msgstr ""
 "Kibocsátó: %5\n"
 "Ujjlenyomat: %6\n"
 
-#: rdp/rdpview.cpp:202
+#: rdp/rdpview.cpp:206
 #, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
 msgstr "A távoli gép eléréséhez felhasználónév és jelszó megadása szükséges."
 
-#: rdp/rdpview.cpp:235
+#: rdp/rdpview.cpp:239
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr "A távoli gép tanúsítványa ismeretlen. Szeretné folytatni?"
 
-#: rdp/rdpview.cpp:236
+#: rdp/rdpview.cpp:240
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
 msgstr "Tanúsítvány ellenőrzése"
 
-#: rdp/rdpview.cpp:241 rdp/rdpview.cpp:266
+#: rdp/rdpview.cpp:245 rdp/rdpview.cpp:270
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
 msgstr "Tanúsítvány megjegyzése"
 
-#: rdp/rdpview.cpp:260
+#: rdp/rdpview.cpp:264
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
 msgstr "A távoli gép tanúsítványa megváltozott. Szeretné folytatni?"
 
-#: rdp/rdpview.cpp:261
+#: rdp/rdpview.cpp:265
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
 msgstr "A tanúsítvány megváltozott"
 
-#: rdp/rdpview.cpp:264
+#: rdp/rdpview.cpp:268
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1397,13 +1397,13 @@ msgstr ""
 "Új tanúsítvány:\n"
 "%2"
 
-#: rdp/rdpview.cpp:297
+#: rdp/rdpview.cpp:301
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Login Failure"
 msgstr "Bejelentkezési hiba"
 
-#: rdp/rdpview.cpp:298
+#: rdp/rdpview.cpp:302
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1413,13 +1413,13 @@ msgstr ""
 "Nem sikerült bejelentkezni a megadott hitelesítő adatokkal. Kérjük, "
 "ellenőrizze kétszer a felhasználónevét és jelszavát."
 
-#: rdp/rdpview.cpp:307
+#: rdp/rdpview.cpp:311
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Account Problems"
 msgstr "Fiókprobléma"
 
-#: rdp/rdpview.cpp:308
+#: rdp/rdpview.cpp:312
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1429,13 +1429,13 @@ msgstr ""
 "A megadott fiók nem léphet be erre a gépre. Kérjük,  forduljon a "
 "rendszergazdához."
 
-#: rdp/rdpview.cpp:313
+#: rdp/rdpview.cpp:317
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Password Problems"
 msgstr "Jelszóhiba"
 
-#: rdp/rdpview.cpp:314
+#: rdp/rdpview.cpp:318
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1445,73 +1445,73 @@ msgstr ""
 "Nem sikerült bejelentkezni a megadott jelszóval. Kérjük, lépjen kapcsolatba "
 "a rendszergazdával a módosításához."
 
-#: rdp/rdpview.cpp:317
+#: rdp/rdpview.cpp:321
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Lost"
 msgstr "A kapcsolat megszakadt"
 
-#: rdp/rdpview.cpp:318
+#: rdp/rdpview.cpp:322
 #, kde-format
 msgctxt "@label"
 msgid "Lost connection to the server."
 msgstr "Megszakadt a kapcsolat a kiszolgálóval."
 
-#: rdp/rdpview.cpp:322
+#: rdp/rdpview.cpp:326
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Server not Found"
 msgstr "A kiszolgáló nem található"
 
-#: rdp/rdpview.cpp:323
+#: rdp/rdpview.cpp:327
 #, kde-format
 msgctxt "@label"
 msgid "Could not find the server."
 msgstr "A kiszolgáló nem található."
 
-#: rdp/rdpview.cpp:326
+#: rdp/rdpview.cpp:330
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Refused"
 msgstr "Kapcsolat visszautasítva"
 
-#: rdp/rdpview.cpp:327
+#: rdp/rdpview.cpp:331
 #, kde-format
 msgctxt "@label"
 msgid "The server refused the connection request."
 msgstr "A kiszolgáló elutasította a csatlakozási kérést."
 
-#: rdp/rdpview.cpp:332
+#: rdp/rdpview.cpp:336
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Could not Connect"
 msgstr "Sikertelen csatlakozás"
 
-#: rdp/rdpview.cpp:333
+#: rdp/rdpview.cpp:337
 #, kde-format
 msgctxt "@label"
 msgid "Could not connect to the server."
 msgstr "Nem sikerült csatlakozni a kiszolgálóhoz."
 
-#: rdp/rdpview.cpp:343 rdp/rdpview.cpp:347
+#: rdp/rdpview.cpp:346 rdp/rdpview.cpp:350
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Closed"
 msgstr "Kapcsolat lezárva"
 
-#: rdp/rdpview.cpp:348
+#: rdp/rdpview.cpp:351
 #, kde-format
 msgctxt "@label"
 msgid "The connection to the server was closed."
 msgstr "A kiszolgálóval való kapcsolat lezárult."
 
-#: rdp/rdpview.cpp:352
+#: rdp/rdpview.cpp:355
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Failed"
 msgstr "Kapcsolódás meghiúsult"
 
-#: rdp/rdpview.cpp:353
+#: rdp/rdpview.cpp:356
 #, kde-format
 msgctxt "@label"
 msgid "An unknown error occurred"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-10 02:32+0000\n"
+"POT-Creation-Date: 2025-05-28 02:37+0000\n"
 "PO-Revision-Date: 2024-04-22 16:04\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -1153,25 +1153,25 @@ msgstr "安全性"
 msgid "Security:"
 msgstr "安全性："
 
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_NLASecurity)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityNLA)
 #: rdp/rdppreferences.ui:710
 #, kde-format
 msgid "NLA"
 msgstr "NLA"
 
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_TLSSecurity)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityTLS)
 #: rdp/rdppreferences.ui:717
 #, kde-format
 msgid "TLS"
 msgstr "TLS"
 
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RDPSecurity)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityRDP)
 #: rdp/rdppreferences.ui:724
 #, kde-format
 msgid "RDP"
 msgstr "RDP"
 
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_EXTSecurity)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityEXT)
 #: rdp/rdppreferences.ui:731
 #, kde-format
 msgid "Ext"
@@ -1318,43 +1318,43 @@ msgstr ""
 "颁发机构：%5\n"
 "指纹：%6\n"
 
-#: rdp/rdpview.cpp:202
+#: rdp/rdpview.cpp:206
 #, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
 msgstr "访问此系统需要用户名和密码。"
 
-#: rdp/rdpview.cpp:235
+#: rdp/rdpview.cpp:239
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr "此系统的证书未知。您确定要继续吗？"
 
-#: rdp/rdpview.cpp:236
+#: rdp/rdpview.cpp:240
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
 msgstr "验证证书"
 
-#: rdp/rdpview.cpp:241 rdp/rdpview.cpp:266
+#: rdp/rdpview.cpp:245 rdp/rdpview.cpp:270
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
 msgstr "记住此证书"
 
-#: rdp/rdpview.cpp:260
+#: rdp/rdpview.cpp:264
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
 msgstr "此系统的证书已经改变。您确定要继续吗？"
 
-#: rdp/rdpview.cpp:261
+#: rdp/rdpview.cpp:265
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
 msgstr "证书已改变"
 
-#: rdp/rdpview.cpp:264
+#: rdp/rdpview.cpp:268
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1368,13 +1368,13 @@ msgstr ""
 "新的证书：\n"
 "%2"
 
-#: rdp/rdpview.cpp:297
+#: rdp/rdpview.cpp:301
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Login Failure"
 msgstr "登录失败"
 
-#: rdp/rdpview.cpp:298
+#: rdp/rdpview.cpp:302
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1382,13 +1382,13 @@ msgid ""
 "and password."
 msgstr "无法使用提供的凭据登录。请重新检查用户和密码。"
 
-#: rdp/rdpview.cpp:307
+#: rdp/rdpview.cpp:311
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Account Problems"
 msgstr "账户问题"
 
-#: rdp/rdpview.cpp:308
+#: rdp/rdpview.cpp:312
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1396,13 +1396,13 @@ msgid ""
 "contact your system administrator."
 msgstr "提供的账户不允许登录此机器。请联系您的系统管理员。"
 
-#: rdp/rdpview.cpp:313
+#: rdp/rdpview.cpp:317
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Password Problems"
 msgstr "密码问题"
 
-#: rdp/rdpview.cpp:314
+#: rdp/rdpview.cpp:318
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1410,73 +1410,73 @@ msgid ""
 "administrator to change it."
 msgstr "无法使用提供的密码登录。请联系您的系统管理员进行修改。"
 
-#: rdp/rdpview.cpp:317
+#: rdp/rdpview.cpp:321
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Lost"
 msgstr "连接丢失"
 
-#: rdp/rdpview.cpp:318
+#: rdp/rdpview.cpp:322
 #, kde-format
 msgctxt "@label"
 msgid "Lost connection to the server."
 msgstr "与服务器失去连接。"
 
-#: rdp/rdpview.cpp:322
+#: rdp/rdpview.cpp:326
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Server not Found"
 msgstr "找不到服务器"
 
-#: rdp/rdpview.cpp:323
+#: rdp/rdpview.cpp:327
 #, kde-format
 msgctxt "@label"
 msgid "Could not find the server."
 msgstr "无法找到服务器。"
 
-#: rdp/rdpview.cpp:326
+#: rdp/rdpview.cpp:330
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Refused"
 msgstr "连接被拒绝"
 
-#: rdp/rdpview.cpp:327
+#: rdp/rdpview.cpp:331
 #, kde-format
 msgctxt "@label"
 msgid "The server refused the connection request."
 msgstr "服务器拒绝了连接请求。"
 
-#: rdp/rdpview.cpp:332
+#: rdp/rdpview.cpp:336
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Could not Connect"
 msgstr "无法连接"
 
-#: rdp/rdpview.cpp:333
+#: rdp/rdpview.cpp:337
 #, kde-format
 msgctxt "@label"
 msgid "Could not connect to the server."
 msgstr "无法连接到服务器。"
 
-#: rdp/rdpview.cpp:343 rdp/rdpview.cpp:347
+#: rdp/rdpview.cpp:346 rdp/rdpview.cpp:350
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Closed"
 msgstr "连接关闭"
 
-#: rdp/rdpview.cpp:348
+#: rdp/rdpview.cpp:351
 #, kde-format
 msgctxt "@label"
 msgid "The connection to the server was closed."
 msgstr "与服务器的连接已关闭。"
 
-#: rdp/rdpview.cpp:352
+#: rdp/rdpview.cpp:355
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Failed"
 msgstr "连接失败"
 
-#: rdp/rdpview.cpp:353
+#: rdp/rdpview.cpp:356
 #, kde-format
 msgctxt "@label"
 msgid "An unknown error occurred"

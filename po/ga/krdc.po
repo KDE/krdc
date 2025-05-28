@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdenetwork/krdc.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-10 02:32+0000\n"
+"POT-Creation-Date: 2025-05-28 02:37+0000\n"
 "PO-Revision-Date: 2004-12-03 14:52-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -1201,26 +1201,26 @@ msgstr ""
 msgid "Security:"
 msgstr ""
 
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_NLASecurity)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityNLA)
 #: rdp/rdppreferences.ui:710
 #, kde-format
 msgid "NLA"
 msgstr ""
 
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_TLSSecurity)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityTLS)
 #: rdp/rdppreferences.ui:717
 #, kde-format
 msgid "TLS"
 msgstr ""
 
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RDPSecurity)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityRDP)
 #: rdp/rdppreferences.ui:724
 #, fuzzy, kde-format
 #| msgid "RDP"
 msgid "RDP"
 msgstr "RDP"
 
-#. i18n: ectx: property (text), widget (QCheckBox, kcfg_EXTSecurity)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityEXT)
 #: rdp/rdppreferences.ui:731
 #, kde-format
 msgid "Ext"
@@ -1366,44 +1366,44 @@ msgid ""
 "Fingerprint: %6\n"
 msgstr ""
 
-#: rdp/rdpview.cpp:202
+#: rdp/rdpview.cpp:206
 #, fuzzy, kde-format
 #| msgid "Access to the system requires a password."
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
 msgstr "Tá focal faire de dhíth chun an córas a rochtain."
 
-#: rdp/rdpview.cpp:235
+#: rdp/rdpview.cpp:239
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr ""
 
-#: rdp/rdpview.cpp:236
+#: rdp/rdpview.cpp:240
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
 msgstr ""
 
-#: rdp/rdpview.cpp:241 rdp/rdpview.cpp:266
+#: rdp/rdpview.cpp:245 rdp/rdpview.cpp:270
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
 msgstr ""
 
-#: rdp/rdpview.cpp:260
+#: rdp/rdpview.cpp:264
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
 msgstr ""
 
-#: rdp/rdpview.cpp:261
+#: rdp/rdpview.cpp:265
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
 msgstr ""
 
-#: rdp/rdpview.cpp:264
+#: rdp/rdpview.cpp:268
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1413,14 +1413,14 @@ msgid ""
 "%2"
 msgstr ""
 
-#: rdp/rdpview.cpp:297
+#: rdp/rdpview.cpp:301
 #, fuzzy, kde-format
 #| msgid "Connection Failure"
 msgctxt "@title:dialog"
 msgid "Login Failure"
 msgstr "Theip ar Cheangal"
 
-#: rdp/rdpview.cpp:298
+#: rdp/rdpview.cpp:302
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1428,13 +1428,13 @@ msgid ""
 "and password."
 msgstr ""
 
-#: rdp/rdpview.cpp:307
+#: rdp/rdpview.cpp:311
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Account Problems"
 msgstr ""
 
-#: rdp/rdpview.cpp:308
+#: rdp/rdpview.cpp:312
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1442,13 +1442,13 @@ msgid ""
 "contact your system administrator."
 msgstr ""
 
-#: rdp/rdpview.cpp:313
+#: rdp/rdpview.cpp:317
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Password Problems"
 msgstr ""
 
-#: rdp/rdpview.cpp:314
+#: rdp/rdpview.cpp:318
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1456,83 +1456,83 @@ msgid ""
 "administrator to change it."
 msgstr ""
 
-#: rdp/rdpview.cpp:317
+#: rdp/rdpview.cpp:321
 #, fuzzy, kde-format
 #| msgid "Connection"
 msgctxt "@title:dialog"
 msgid "Connection Lost"
 msgstr "Ceangal"
 
-#: rdp/rdpview.cpp:318
+#: rdp/rdpview.cpp:322
 #, fuzzy, kde-format
 #| msgid "An error has occurred during the connection to the NX server."
 msgctxt "@label"
 msgid "Lost connection to the server."
 msgstr "Tharla earráid le linn ceangail leis an bhfreastalaí NX."
 
-#: rdp/rdpview.cpp:322
+#: rdp/rdpview.cpp:326
 #, fuzzy, kde-format
 #| msgid "Server not found."
 msgctxt "@title:dialog"
 msgid "Server not Found"
 msgstr "Freastalaí gan aimsiú."
 
-#: rdp/rdpview.cpp:323
+#: rdp/rdpview.cpp:327
 #, kde-format
 msgctxt "@label"
 msgid "Could not find the server."
 msgstr ""
 
-#: rdp/rdpview.cpp:326
+#: rdp/rdpview.cpp:330
 #, fuzzy, kde-format
 #| msgid "Connection Failure"
 msgctxt "@title:dialog"
 msgid "Connection Refused"
 msgstr "Theip ar Cheangal"
 
-#: rdp/rdpview.cpp:327
+#: rdp/rdpview.cpp:331
 #, fuzzy, kde-format
 #| msgid "VNC server closed connection."
 msgctxt "@label"
 msgid "The server refused the connection request."
 msgstr "Dhún an freastalaí VNC an ceangal."
 
-#: rdp/rdpview.cpp:332
+#: rdp/rdpview.cpp:336
 #, fuzzy, kde-format
 #| msgid "KRDC Konsole Connection"
 msgctxt "@title:dialog"
 msgid "Could not Connect"
 msgstr "Ceangal Konsole KRDC"
 
-#: rdp/rdpview.cpp:333
+#: rdp/rdpview.cpp:337
 #, fuzzy, kde-format
 #| msgid "An error has occurred during the connection to the NX server."
 msgctxt "@label"
 msgid "Could not connect to the server."
 msgstr "Tharla earráid le linn ceangail leis an bhfreastalaí NX."
 
-#: rdp/rdpview.cpp:343 rdp/rdpview.cpp:347
+#: rdp/rdpview.cpp:346 rdp/rdpview.cpp:350
 #, fuzzy, kde-format
 #| msgid "Connection Failure"
 msgctxt "@title:dialog"
 msgid "Connection Closed"
 msgstr "Theip ar Cheangal"
 
-#: rdp/rdpview.cpp:348
+#: rdp/rdpview.cpp:351
 #, fuzzy, kde-format
 #| msgid "The connection to the host has been interrupted."
 msgctxt "@label"
 msgid "The connection to the server was closed."
 msgstr "Idirbhriseadh an ceangal leis an óstríomhaire."
 
-#: rdp/rdpview.cpp:352
+#: rdp/rdpview.cpp:355
 #, fuzzy, kde-format
 #| msgid "Connection Failure"
 msgctxt "@title:dialog"
 msgid "Connection Failed"
 msgstr "Theip ar Cheangal"
 
-#: rdp/rdpview.cpp:353
+#: rdp/rdpview.cpp:356
 #, fuzzy, kde-format
 #| msgid "Unknown error."
 msgctxt "@label"
