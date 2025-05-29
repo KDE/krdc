@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-28 00:42+0000\n"
+"POT-Creation-Date: 2025-05-29 00:42+0000\n"
 "PO-Revision-Date: 2013-09-08 07:05+0900\n"
 "Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -821,9 +821,9 @@ msgid "Acceleration:"
 msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
-#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
-#: rdp/rdppreferences.ui:196 rdp/rdppreferences.ui:245
+#: rdp/rdppreferences.ui:196
 #, kde-format
+msgctxt "Use best acceleration supported by both the server and krdc"
 msgid "Use Best Available"
 msgstr ""
 
@@ -849,6 +849,13 @@ msgstr ""
 #: rdp/rdppreferences.ui:219
 #, kde-format
 msgid "Color &depth:"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
+#: rdp/rdppreferences.ui:245
+#, kde-format
+msgctxt "Use best color depth supported by both the server and krdc"
+msgid "Use Best Available"
 msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
