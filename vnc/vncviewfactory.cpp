@@ -44,7 +44,7 @@ QString VncViewFactory::scheme() const
 
 QString VncViewFactory::connectActionText() const
 {
-    return i18n("New VNC Connection...");
+    return i18n("New VNC Connection…");
 }
 
 QString VncViewFactory::connectButtonText() const

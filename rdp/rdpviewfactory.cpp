@@ -106,7 +106,7 @@ QString RdpViewFactory::scheme() const
 
 QString RdpViewFactory::connectActionText() const
 {
-    return i18n("New RDP Connection...");
+    return i18n("New RDP Connection…");
 }
 
 QString RdpViewFactory::connectButtonText() const
