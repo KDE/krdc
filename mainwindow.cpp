@@ -372,6 +372,9 @@ void MainWindow::resizeTabWidget(int w, int h)
 
     const QSize viewSize = QSize(w, h);
     QScreen *currentScreen = QGuiApplication::screenAt(geometry().center());
+    if (!currentScreen) {
+        return;
+    }
 
     if (Settings::fullscreenOnConnect()) {
         const QSize screenSize = currentScreen->availableGeometry().size();
