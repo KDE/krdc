@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-29 00:42+0000\n"
+"POT-Creation-Date: 2025-06-08 00:42+0000\n"
 "PO-Revision-Date: 2025-03-09 00:30-0300\n"
 "Last-Translator: Geraldo Simiao <geraldosimiao@fedoraproject.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -201,8 +201,9 @@ msgid "Right"
 msgstr "Direita"
 
 #: config/hostpreferenceslist.cpp:30
-#, kde-format
-msgid "Configure..."
+#, fuzzy, kde-format
+#| msgid "Configure..."
+msgid "Configure…"
 msgstr "Configurar..."
 
 #: config/hostpreferenceslist.cpp:36
@@ -210,12 +211,12 @@ msgstr "Configurar..."
 msgid "Remove"
 msgstr "Remover"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:293 mainwindow.cpp:670
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:293 mainwindow.cpp:673
 #, kde-format
 msgid "Unusable URL"
 msgstr "URL inutilizável"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:670
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:673
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr "A máquina selecionada não pode ser gerenciada."
@@ -499,8 +500,8 @@ msgstr "URLs para conectar no início"
 msgid "KDE Remote Desktop Client started"
 msgstr "Conexão a Desktop Remoto do KDE iniciado"
 
-#: mainwindow.cpp:116 mainwindow.cpp:129 mainwindow.cpp:1082
-#: mainwindow.cpp:1177
+#: mainwindow.cpp:116 mainwindow.cpp:129 mainwindow.cpp:1085
+#: mainwindow.cpp:1180
 #, kde-format
 msgid "New Connection"
 msgstr "Nova conexão"
@@ -515,12 +516,12 @@ msgstr "Copiar captura de tela para a área de transferência"
 msgid "Screenshot"
 msgstr "Captura de tela"
 
-#: mainwindow.cpp:142 mainwindow.cpp:505
+#: mainwindow.cpp:142 mainwindow.cpp:508
 #, kde-format
 msgid "Switch to Full Screen Mode"
 msgstr "Alternar para o modo de tela inteira"
 
-#: mainwindow.cpp:143 mainwindow.cpp:506
+#: mainwindow.cpp:143 mainwindow.cpp:509
 #, kde-format
 msgid "Full Screen"
 msgstr "Tela inteira"
@@ -609,130 +610,130 @@ msgstr "URL inválida"
 msgid "The entered address cannot be handled."
 msgstr "O endereço fornecido não pode ser manipulado."
 
-#: mainwindow.cpp:428
+#: mainwindow.cpp:431
 #, kde-format
 msgid "Connecting to %1"
 msgstr "Conectando a %1"
 
-#: mainwindow.cpp:432
+#: mainwindow.cpp:435
 #, kde-format
 msgid "Authenticating at %1"
 msgstr "Autenticando em %1"
 
-#: mainwindow.cpp:436
+#: mainwindow.cpp:439
 #, kde-format
 msgid "Preparing connection to %1"
 msgstr "Preparando conexão para %1"
 
-#: mainwindow.cpp:440
+#: mainwindow.cpp:443
 #, kde-format
 msgid "Connected to %1"
 msgstr "Conectado a %1"
 
-#: mainwindow.cpp:536
+#: mainwindow.cpp:539
 #, kde-format
 msgid "Switch to Window Mode"
 msgstr "Alternar para o modo em janela"
 
-#: mainwindow.cpp:537
+#: mainwindow.cpp:540
 #, kde-format
 msgid "Window Mode"
 msgstr "Modo em janela"
 
-#: mainwindow.cpp:689
+#: mainwindow.cpp:692
 #, kde-format
 msgid "Connect"
 msgstr "Conectar"
 
-#: mainwindow.cpp:690
+#: mainwindow.cpp:693
 #, kde-format
 msgid "Rename"
 msgstr "Renomear"
 
-#: mainwindow.cpp:691
+#: mainwindow.cpp:694
 #, kde-format
 msgid "Settings"
 msgstr "Configurações"
 
-#: mainwindow.cpp:692
+#: mainwindow.cpp:695
 #, kde-format
 msgid "Delete"
 msgstr "Excluir"
 
-#: mainwindow.cpp:695 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:698 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "Favoritos"
 
-#: mainwindow.cpp:695 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:698 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "Histórico"
 
-#: mainwindow.cpp:707
+#: mainwindow.cpp:710
 #, kde-format
 msgid "Rename %1"
 msgstr "Renomear %1"
 
-#: mainwindow.cpp:707
+#: mainwindow.cpp:710
 #, kde-format
 msgid "Rename %1 to"
 msgstr "Renomear %1 para"
 
-#: mainwindow.cpp:714
+#: mainwindow.cpp:717
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "Deseja realmente excluir %1?"
 
-#: mainwindow.cpp:714
+#: mainwindow.cpp:717
 #, kde-format
 msgid "Delete %1"
 msgstr "Excluir %1"
 
-#: mainwindow.cpp:738
+#: mainwindow.cpp:741
 #, kde-format
 msgid "Add Bookmark"
 msgstr "Adicionar favorito"
 
-#: mainwindow.cpp:739
+#: mainwindow.cpp:742
 #, kde-format
 msgid "Close Tab"
 msgstr "Fechar aba"
 
-#: mainwindow.cpp:852
+#: mainwindow.cpp:855
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr "Minimizar a janela de tela inteira"
 
-#: mainwindow.cpp:869
+#: mainwindow.cpp:872
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "Pregar barra de ferramentas"
 
-#: mainwindow.cpp:976
+#: mainwindow.cpp:979
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr ""
 "Tem certeza de que deseja sair do cliente de área de trabalho remota do KDE?"
 
-#: mainwindow.cpp:977
+#: mainwindow.cpp:980
 #, kde-format
 msgid "Confirm Quit"
 msgstr "Confirmar saída"
 
-#: mainwindow.cpp:1105
+#: mainwindow.cpp:1108
 #, kde-format
 msgid "Connect to:"
 msgstr "Conectar a:"
 
-#: mainwindow.cpp:1109
+#: mainwindow.cpp:1112
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr "Digite aqui para conectar a um endereço e filtrar a lista."
 
-#: mainwindow.cpp:1118
+#: mainwindow.cpp:1121
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
@@ -741,17 +742,17 @@ msgstr ""
 "Digite aqui um nome DNS ou IP. Limpe a linha para obter uma lista de métodos "
 "de conexão."
 
-#: mainwindow.cpp:1121
+#: mainwindow.cpp:1124
 #, kde-format
 msgid "Goto Address"
 msgstr "Vá para o endereço"
 
-#: mainwindow.cpp:1213
+#: mainwindow.cpp:1216
 #, kde-format
 msgid "Remote Desktops"
 msgstr "Áreas de trabalho remotas"
 
-#: mainwindow.cpp:1242
+#: mainwindow.cpp:1245
 #, kde-format
 msgid "Filter"
 msgstr "Filtro"
@@ -814,8 +815,9 @@ msgstr "Resolução de tela atual"
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
 #: rdp/rdppreferences.ui:81 vnc/vncpreferences.ui:123
-#, kde-format
-msgid "Custom Resolution (...)"
+#, fuzzy, kde-format
+#| msgid "Custom Resolution (...)"
+msgid "Custom Resolution (…)"
 msgstr "Resolução personalizada (...)"
 
 #. i18n: ectx: property (text), widget (QLabel, widthLabel)
@@ -1626,8 +1628,9 @@ msgid "Connect to a Windows Remote Desktop (RDP)"
 msgstr "Conectar a uma área de trabalho remota Windows (RDP)"
 
 #: rdp/rdpviewfactory.cpp:109
-#, kde-format
-msgid "New RDP Connection..."
+#, fuzzy, kde-format
+#| msgid "New RDP Connection..."
+msgid "New RDP Connection…"
 msgstr "Nova conexão RDP..."
 
 #: rdp/rdpviewfactory.cpp:120
@@ -1865,8 +1868,9 @@ msgid "VNC failure"
 msgstr "Falha do VNC"
 
 #: vnc/vncviewfactory.cpp:47
-#, kde-format
-msgid "New VNC Connection..."
+#, fuzzy, kde-format
+#| msgid "New VNC Connection..."
+msgid "New VNC Connection…"
 msgstr "Nova conexão VNC..."
 
 #: vnc/vncviewfactory.cpp:52

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-29 00:42+0000\n"
+"POT-Creation-Date: 2025-06-08 00:42+0000\n"
 "PO-Revision-Date: 2010-03-04 21:54+0700\n"
 "Last-Translator: Thanomsub Noppaburana <donga.nb@gmail.com>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
@@ -185,8 +185,9 @@ msgid "Right"
 msgstr "ด้านขวา"
 
 #: config/hostpreferenceslist.cpp:30
-#, kde-format
-msgid "Configure..."
+#, fuzzy, kde-format
+#| msgid "Configure..."
+msgid "Configure…"
 msgstr "ปรับแต่ง..."
 
 #: config/hostpreferenceslist.cpp:36
@@ -194,12 +195,12 @@ msgstr "ปรับแต่ง..."
 msgid "Remove"
 msgstr "เอาออก"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:293 mainwindow.cpp:670
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:293 mainwindow.cpp:673
 #, kde-format
 msgid "Unusable URL"
 msgstr "ที่อยู่ URL ใช้ไม่ได้"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:670
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:673
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr "ไม่สามารถจัดการเครื่องปลายทางที่เลือกไว้ได้"
@@ -492,8 +493,8 @@ msgstr "ที่อยู่ URL ที่จะเชื่อมต่อไ�
 msgid "KDE Remote Desktop Client started"
 msgstr "เริ่มโปรแกรมเชื่อมต่อพื้นที่ทำงานทางไกลด้วย KDE แล้ว"
 
-#: mainwindow.cpp:116 mainwindow.cpp:129 mainwindow.cpp:1082
-#: mainwindow.cpp:1177
+#: mainwindow.cpp:116 mainwindow.cpp:129 mainwindow.cpp:1085
+#: mainwindow.cpp:1180
 #, kde-format
 msgid "New Connection"
 msgstr "การเชื่อมต่อใหม่"
@@ -508,12 +509,12 @@ msgstr "จับภาพไปไว้ยังคลิปบอร์ด"
 msgid "Screenshot"
 msgstr "จับภาพหน้าจอ"
 
-#: mainwindow.cpp:142 mainwindow.cpp:505
+#: mainwindow.cpp:142 mainwindow.cpp:508
 #, kde-format
 msgid "Switch to Full Screen Mode"
 msgstr "สลับเป็นโหมดเต็มจอภาพ"
 
-#: mainwindow.cpp:143 mainwindow.cpp:506
+#: mainwindow.cpp:143 mainwindow.cpp:509
 #, kde-format
 msgid "Full Screen"
 msgstr "เต็มจอภาพ"
@@ -601,147 +602,147 @@ msgstr "รูปแบบของที่อยู่ URL ไม่ถูก�
 msgid "The entered address cannot be handled."
 msgstr "ไม่สามารถจัดการที่อยู่ที่ป้อนได้"
 
-#: mainwindow.cpp:428
+#: mainwindow.cpp:431
 #, kde-format
 msgid "Connecting to %1"
 msgstr "กำลังเชื่อมต่อไปยัง %1"
 
-#: mainwindow.cpp:432
+#: mainwindow.cpp:435
 #, kde-format
 msgid "Authenticating at %1"
 msgstr "กำลังทำการตรวจสอบสิทธิ์กับ %1"
 
-#: mainwindow.cpp:436
+#: mainwindow.cpp:439
 #, kde-format
 msgid "Preparing connection to %1"
 msgstr "กำลังเตรียมการเชื่อมต่อไปยัง %1"
 
-#: mainwindow.cpp:440
+#: mainwindow.cpp:443
 #, kde-format
 msgid "Connected to %1"
 msgstr "เชื่อมต่อกับ %1 แล้ว"
 
-#: mainwindow.cpp:536
+#: mainwindow.cpp:539
 #, kde-format
 msgid "Switch to Window Mode"
 msgstr "สลับเป็นโหมดหน้าต่าง"
 
-#: mainwindow.cpp:537
+#: mainwindow.cpp:540
 #, kde-format
 msgid "Window Mode"
 msgstr "โหมดหน้าต่าง"
 
-#: mainwindow.cpp:689
+#: mainwindow.cpp:692
 #, kde-format
 msgid "Connect"
 msgstr "เชื่อมต่อ"
 
-#: mainwindow.cpp:690
+#: mainwindow.cpp:693
 #, kde-format
 msgid "Rename"
 msgstr "เปลี่ยนชื่อ"
 
-#: mainwindow.cpp:691
+#: mainwindow.cpp:694
 #, kde-format
 msgid "Settings"
 msgstr "ตั้งค่าต่าง ๆ"
 
-#: mainwindow.cpp:692
+#: mainwindow.cpp:695
 #, kde-format
 msgid "Delete"
 msgstr "ลบ"
 
-#: mainwindow.cpp:695 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:698 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "ที่คั่นหน้า"
 
-#: mainwindow.cpp:695 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:698 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "ประวัติการใช้งาน"
 
-#: mainwindow.cpp:707
+#: mainwindow.cpp:710
 #, kde-format
 msgid "Rename %1"
 msgstr "เปลี่ยนชื่อ %1"
 
-#: mainwindow.cpp:707
+#: mainwindow.cpp:710
 #, kde-format
 msgid "Rename %1 to"
 msgstr "เปลี่ยนชื่อ %1 ไปเป็น"
 
-#: mainwindow.cpp:714
+#: mainwindow.cpp:717
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "คุณแน่ใจหรือว่า ต้องการจะลบ %1 ?"
 
-#: mainwindow.cpp:714
+#: mainwindow.cpp:717
 #, kde-format
 msgid "Delete %1"
 msgstr "ลบ %1"
 
-#: mainwindow.cpp:738
+#: mainwindow.cpp:741
 #, kde-format
 msgid "Add Bookmark"
 msgstr "เพิ่มคั่นหน้า"
 
-#: mainwindow.cpp:739
+#: mainwindow.cpp:742
 #, kde-format
 msgid "Close Tab"
 msgstr "ปิดแท็บ"
 
-#: mainwindow.cpp:852
+#: mainwindow.cpp:855
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr "ย่อหน้าต่างที่แสดงผลเต็มจอภาพ"
 
-#: mainwindow.cpp:869
+#: mainwindow.cpp:872
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "ปักหมุดแถบเครื่องมือ"
 
-#: mainwindow.cpp:976
+#: mainwindow.cpp:979
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr "คุณแน่ใจหรือว่า ต้องการจะออกจากโปรแกรมเชื่อมต่อพื้นที่ทำงานทางไกลด้วย KDE ?"
 
-#: mainwindow.cpp:977
+#: mainwindow.cpp:980
 #, kde-format
 msgid "Confirm Quit"
 msgstr "ยืนยันการออกจากโปรแกรม"
 
-#: mainwindow.cpp:1105
+#: mainwindow.cpp:1108
 #, kde-format
 msgid "Connect to:"
 msgstr "เชื่อมต่อไปยัง:"
 
-#: mainwindow.cpp:1109
+#: mainwindow.cpp:1112
 #, fuzzy, kde-format
 #| msgid "Type here to filter the connection list."
 msgid "Type here to connect to an address and filter the list."
 msgstr "ป้อนการกรองรายการการเชื่อมต่อได้ที่นี่"
 
-#: mainwindow.cpp:1118
+#: mainwindow.cpp:1121
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
 "methods."
 msgstr ""
 
-#: mainwindow.cpp:1121
+#: mainwindow.cpp:1124
 #, kde-format
 msgid "Goto Address"
 msgstr "ไปยังที่อยู่"
 
-#: mainwindow.cpp:1213
+#: mainwindow.cpp:1216
 #, kde-format
 msgid "Remote Desktops"
 msgstr "พื้นที่ทำงานทางไกล"
 
-#: mainwindow.cpp:1242
+#: mainwindow.cpp:1245
 #, kde-format
 msgid "Filter"
 msgstr "ตัวกรอง"
@@ -807,8 +808,9 @@ msgstr "ความละเอียดจอภาพปัจจุบัน
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
 #: rdp/rdppreferences.ui:81 vnc/vncpreferences.ui:123
-#, kde-format
-msgid "Custom Resolution (...)"
+#, fuzzy, kde-format
+#| msgid "Custom Resolution (...)"
+msgid "Custom Resolution (…)"
 msgstr "กำหนดความละเอียดเอง (...)"
 
 #. i18n: ectx: property (text), widget (QLabel, widthLabel)
@@ -1619,8 +1621,9 @@ msgid "Connect to a Windows Remote Desktop (RDP)"
 msgstr "เชื่อมต่อไปยังพื้นที่ทำงานทางไกลแบบวินโดว์ส (RDP)"
 
 #: rdp/rdpviewfactory.cpp:109
-#, kde-format
-msgid "New RDP Connection..."
+#, fuzzy, kde-format
+#| msgid "New RDP Connection..."
+msgid "New RDP Connection…"
 msgstr "สร้างการเชื่อมต่อ RDP ใหม่..."
 
 #: rdp/rdpviewfactory.cpp:120
@@ -1862,8 +1865,9 @@ msgid "VNC failure"
 msgstr "เชื่อมต่อ VNC ล้มเหลว"
 
 #: vnc/vncviewfactory.cpp:47
-#, kde-format
-msgid "New VNC Connection..."
+#, fuzzy, kde-format
+#| msgid "New VNC Connection..."
+msgid "New VNC Connection…"
 msgstr "สร้างการเชื่อมต่อ VNC ใหม่..."
 
 #: vnc/vncviewfactory.cpp:52
