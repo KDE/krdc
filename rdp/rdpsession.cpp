@@ -776,7 +776,7 @@ BOOL RdpSession::endPaint(rdpContext *context)
     }
 
     auto rect = QRect{invalid->x, invalid->y, invalid->w, invalid->h};
-    Q_EMIT session->rectangleUpdated(rect);
+    Q_EMIT session->rectangleUpdated(rect, session->m_size);
     return true;
 }
 

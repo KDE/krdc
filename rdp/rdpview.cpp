@@ -501,10 +501,13 @@ void RdpView::handleWheelEvent(QWheelEvent *event)
     }
 }
 
-void RdpView::onRectangleUpdated(const QRect &rect)
+void RdpView::onRectangleUpdated(const QRect &remoteRect, const QSize &remoteSize)
 {
-    m_pendingRectangle = rect;
-    update();
+    // convert remoteRect based on remoteSize to local widget size()
+    auto ratio = (qreal)size().width() / remoteSize.width();
+    auto destRect =
+        QRect{qFloor(remoteRect.x() * ratio), qFloor(remoteRect.y() * ratio), qCeil(remoteRect.width() * ratio), qCeil(remoteRect.height() * ratio)};
+    update(destRect);
 }
 
 void RdpView::handleLocalClipboardChanged(const QMimeData *data)

@@ -114,7 +114,7 @@ public:
 
     const QImage *videoBuffer() const;
 
-    Q_SIGNAL void rectangleUpdated(const QRect &rectangle);
+    Q_SIGNAL void rectangleUpdated(const QRect &rectangle, const QSize &size);
 
     Q_SIGNAL void errorMessage(unsigned int error);
     Q_SIGNAL void onAuthRequested();
