@@ -141,6 +141,7 @@ QWidget *RdpHostPreferences::createProtocolSpecificConfigPage(QWidget *sshTunnel
     rdpUi.kcfg_DesktopScaleFactorCustom->setValue(desktopScaleFactorCustom());
     rdpUi.kcfg_DeviceScaleFactor->setCurrentIndex(int(deviceScaleFactor()));
     rdpUi.kcfg_KeyboardLayout->setCurrentIndex(keymap2int(keyboardLayout()));
+    rdpUi.kcfg_Sound->setCurrentIndex(int(sound()));
     rdpUi.kcfg_ShareMedia->setText(shareMedia());
     rdpUi.kcfg_TlsSecLevel->setCurrentIndex(int(tlsSecLevel()));
     rdpUi.kcfg_ProxyProtocol->setCurrentIndex(int(proxyProtocol()));
