@@ -16,14 +16,11 @@
 
 #ifdef QTONLY
 #include <QInputDialog>
-#include <QMessageBox>
-#define KMessageBox QMessageBox
 #define error(parent, message, caption) critical(parent, caption, message)
 #else
 #include "settings.h"
 #include <KActionCollection>
 #include <KMainWindow>
-#include <KMessageBox>
 #include <KPasswordDialog>
 #include <KXMLGUIClient>
 #endif
@@ -314,8 +311,6 @@ void VncView::outputErrorMessage(const QString &message)
     }
 
     startQuitting();
-
-    KMessageBox::error(this, message, i18n("VNC failure"));
 
     Q_EMIT errorMessage(i18n("VNC failure"), message);
 }

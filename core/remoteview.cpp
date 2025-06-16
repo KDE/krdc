@@ -24,7 +24,6 @@
 
 #ifdef USE_SSH_TUNNEL
 #include <KLocalizedString>
-#include <KMessageBox>
 #include <KPasswordDialog>
 #endif
 
@@ -563,8 +562,6 @@ void RemoteView::sshErrorMessage(const QString &message)
     qCritical(KRDC) << message;
 
     startQuitting();
-
-    KMessageBox::error(this, message, i18n("SSH Tunnel failure"));
 
     Q_EMIT errorMessage(i18n("SSH Tunnel failure"), message);
 }
