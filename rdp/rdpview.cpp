@@ -288,10 +288,9 @@ void RdpView::handleError(const unsigned int error)
     QString title;
     QString message;
 
-    if (m_quitting)
-        return;
-
     switch (error) {
+    case FREERDP_ERROR_BASE:
+        return; // no error, no need to show an error message
     case FREERDP_ERROR_CONNECT_CANCELLED:
         return; // user canceled connection, no need to show an error message
     case FREERDP_ERROR_AUTHENTICATION_FAILED:
@@ -317,8 +316,15 @@ void RdpView::handleError(const unsigned int error)
         message = i18nc("@label", "Unable to login with the provided password. Please contact your system administrator to change it.");
         break;
     case FREERDP_ERROR_CONNECT_FAILED:
-        title = i18nc("@title:dialog", "Connection Lost");
-        message = i18nc("@label", "Lost connection to the server.");
+    case FREERDP_ERROR_TLS_CONNECT_FAILED:
+    case FREERDP_ERROR_CONNECT_TRANSPORT_FAILED:
+        if (status() == Connected) {
+            title = i18nc("@title:dialog", "Connection Lost");
+            message = i18nc("@label", "Lost connection to the server.");
+        } else {
+            title = i18nc("@title:dialog", "Could not Connect");
+            message = i18nc("@label", "Could not connect to the server.");
+        }
         break;
     case FREERDP_ERROR_DNS_ERROR:
     case FREERDP_ERROR_DNS_NAME_NOT_FOUND:
@@ -330,11 +336,6 @@ void RdpView::handleError(const unsigned int error)
         message = i18nc("@label", "The server refused the connection request.");
 
         break;
-    case FREERDP_ERROR_TLS_CONNECT_FAILED:
-    case FREERDP_ERROR_CONNECT_TRANSPORT_FAILED:
-        title = i18nc("@title:dialog", "Could not Connect");
-        message = i18nc("@label", "Could not connect to the server.");
-        break;
     case FREERDP_ERROR_RPC_INITIATED_DISCONNECT:
     case FREERDP_ERROR_RPC_INITIATED_LOGOFF:
     case FREERDP_ERROR_RPC_INITIATED_DISCONNECT_BY_USER:
@@ -343,11 +344,7 @@ void RdpView::handleError(const unsigned int error)
         return;
     case FREERDP_ERROR_DISCONNECTED_BY_OTHER_CONNECTION:
         title = i18nc("@title:dialog", "Connection Closed");
-        message = QStringLiteral("Diconnected by other sesion");
-        break;
-    case FREERDP_ERROR_BASE:
-        title = i18nc("@title:dialog", "Connection Closed");
-        message = i18nc("@label", "The connection to the server was closed.");
+        message = QStringLiteral("Disconnected by other session");
         break;
     default:
         qCDebug(KRDC) << "Unhandled error" << error;
