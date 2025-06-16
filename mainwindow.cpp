@@ -305,6 +305,7 @@ void MainWindow::newConnection(const QUrl &newUrl, bool switchFullscreenWhenConn
     connect(view, SIGNAL(framebufferSizeChanged(int, int)), this, SLOT(resizeTabWidget(int, int)));
     connect(view, SIGNAL(statusChanged(RemoteView::RemoteStatus)), this, SLOT(statusChanged(RemoteView::RemoteStatus)));
     connect(view, SIGNAL(disconnected()), this, SLOT(disconnectHost()));
+    connect(view, SIGNAL(errorMessage(const QString &, const QString &)), this, SLOT(handleViewError(const QString &, const QString &)));
 
     QScrollArea *scrollArea = createScrollArea(m_tabWidget, view);
 
@@ -1226,4 +1227,9 @@ void MainWindow::createDockWidget()
     remoteDesktopsDockLayout->addWidget(m_dockWidgetTableView);
     m_remoteDesktopsDockWidget->setWidget(remoteDesktopsDockLayoutWidget);
     addDockWidget(Qt::LeftDockWidgetArea, m_remoteDesktopsDockWidget);
+}
+
+void MainWindow::handleViewError(const QString &title, const QString &message)
+{
+    KMessageBox::error(this, message, title);
 }

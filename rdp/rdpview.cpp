@@ -11,7 +11,6 @@
 #include "krdc_debug.h"
 #include "rdphostpreferences.h"
 
-#include <KMessageBox>
 #include <KMessageDialog>
 #include <KPasswordDialog>
 #include <KShell>
@@ -359,12 +358,12 @@ void RdpView::handleError(const unsigned int error)
 
     qCDebug(KRDC) << "error message" << title << message;
     // TODO offer reconnect if approriate
-    KMessageBox::error(this, message, title);
+    Q_EMIT errorMessage(title, message);
 }
 
 void RdpView::onLogonError(const QString &error)
 {
-    KMessageBox::error(this, error, i18nc("@title:dialog", "Logon Error"));
+    Q_EMIT errorMessage(i18nc("@title:dialog", "Logon Error"), error);
 }
 
 HostPreferences *RdpView::hostPreferences()

@@ -82,6 +82,7 @@ private Q_SLOTS:
     void createDockWidget();
     void showConnectionContextMenu(const QPoint &pos);
     void saveConnectionListSort(const int logicalindex, const Qt::SortOrder order);
+    void handleViewError(const QString &title, const QString &message);
 
 private:
     void setupActions();
