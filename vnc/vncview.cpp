@@ -338,6 +338,7 @@ void VncView::updateImage(int x, int y, int w, int h)
         setCursor(((m_localCursorState == CursorOn) || m_forceLocalCursor) ? localDefaultCursor() : Qt::BlankCursor);
 
         setFocusPolicy(Qt::WheelFocus);
+        setFocus();
         setStatus(Connected);
         Q_EMIT connected();
 
