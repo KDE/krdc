@@ -117,6 +117,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     if (Settings::rememberSessions()) // give some time to create and show the window first
         QTimer::singleShot(100, this, SLOT(restoreOpenSessions()));
+
+    if (Settings::systemTrayIcon()) {
+        m_systemTrayIcon = new SystemTrayIcon(this);
+    }
 }
 
 MainWindow::~MainWindow()
