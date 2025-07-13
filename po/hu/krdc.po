@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: KDE 4.1\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-19 00:42+0000\n"
-"PO-Revision-Date: 2025-01-27 21:09+0100\n"
+"PO-Revision-Date: 2025-07-12 22:25+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.12.1\n"
+"X-Generator: Lokalize 25.04.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -187,8 +187,7 @@ msgid "Right"
 msgstr "Jobbra"
 
 #: config/hostpreferenceslist.cpp:30
-#, fuzzy, kde-format
-#| msgid "Configure..."
+#, kde-format
 msgid "Configure…"
 msgstr "Beállítás…"
 
@@ -331,10 +330,9 @@ msgstr "Hiba az alagútcsatorna létrehozásakor"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, SshTunnelWidget)
 #: core/sshtunnelwidget.ui:14
-#, fuzzy, kde-format
-#| msgid "SSH tunnel options"
+#, kde-format
 msgid "SSH tunnel"
-msgstr "SSH-alagútbeállítások"
+msgstr "SSH-alagút"
 
 #. i18n: ectx: property (text), widget (QCheckBox, use_ssh_tunnel)
 #: core/sshtunnelwidget.ui:32
@@ -521,7 +519,7 @@ msgstr "Csak megtekintés"
 #: mainwindow.cpp:160
 #, kde-format
 msgid "Clipboard Sharing"
-msgstr ""
+msgstr "Vágólapmegosztás"
 
 #: mainwindow.cpp:165
 #, kde-format
@@ -745,9 +743,7 @@ msgstr "Szűrő"
 
 #. i18n: ectx: attribute (title), widget (QWidget, mainSettingsTab)
 #: rdp/rdppreferences.ui:21
-#, fuzzy, kde-format
-#| msgctxt "General Config"
-#| msgid "General"
+#, kde-format
 msgid "General"
 msgstr "Általános"
 
@@ -802,8 +798,7 @@ msgstr "Jelenlegi képernyőfelbontás"
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
 #: rdp/rdppreferences.ui:81 vnc/vncpreferences.ui:123
-#, fuzzy, kde-format
-#| msgid "Custom Resolution (...)"
+#, kde-format
 msgid "Custom Resolution (…)"
 msgstr "Egyedi felbontás (…)"
 
@@ -855,8 +850,7 @@ msgstr "Gyorsítás:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
 #: rdp/rdppreferences.ui:196
-#, fuzzy, kde-format
-#| msgid "Use Best Available"
+#, kde-format
 msgctxt "Use best acceleration supported by both the server and krdc"
 msgid "Use Best Available"
 msgstr "Elérhető legjobb használata"
@@ -887,8 +881,7 @@ msgstr "Színmé&lység:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
 #: rdp/rdppreferences.ui:245
-#, fuzzy, kde-format
-#| msgid "Use Best Available"
+#, kde-format
 msgctxt "Use best color depth supported by both the server and krdc"
 msgid "Use Best Available"
 msgstr "Elérhető legjobb használata"
@@ -919,10 +912,9 @@ msgstr "256 szín (8 bites)"
 
 #. i18n: ectx: property (text), widget (QLabel, desktopScaleFactorLabel)
 #: rdp/rdppreferences.ui:273
-#, fuzzy, kde-format
-#| msgid "Desktop &resolution:"
+#, kde-format
 msgid "Desktop scale factor:"
-msgstr "Az asztal felbon&tása:"
+msgstr "Asztal skálázási tényezője:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DesktopScaleFactor)
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DeviceScaleFactor)
@@ -937,37 +929,37 @@ msgstr "Automatikus"
 #: rdp/rdppreferences.ui:300
 #, kde-format
 msgid "Do not scale"
-msgstr ""
+msgstr "Ne skálázza"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DesktopScaleFactor)
 #: rdp/rdppreferences.ui:305
 #, kde-format
 msgid "Custom"
-msgstr ""
+msgstr "Egyéni"
 
 #. i18n: ectx: property (text), widget (QLabel, deviceScaleFactorLabel)
 #: rdp/rdppreferences.ui:337
 #, kde-format
 msgid "Device scale factor:"
-msgstr ""
+msgstr "Eszköz skálázási tényezője:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DeviceScaleFactor)
 #: rdp/rdppreferences.ui:368
 #, kde-format
 msgid "100"
-msgstr ""
+msgstr "100"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DeviceScaleFactor)
 #: rdp/rdppreferences.ui:373
 #, kde-format
 msgid "140"
-msgstr ""
+msgstr "140"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DeviceScaleFactor)
 #: rdp/rdppreferences.ui:378
 #, kde-format
 msgid "180"
-msgstr ""
+msgstr "180"
 
 #. i18n: ectx: property (text), widget (QLabel, layoutLabel)
 #: rdp/rdppreferences.ui:386
@@ -1242,59 +1234,55 @@ msgstr "Média megosztása:"
 #: rdp/rdppreferences.ui:676
 #, kde-format
 msgid "Share Smartcard:"
-msgstr ""
+msgstr "Intelligens kártya megosztása:"
 
 #. i18n: ectx: property (text), widget (QLabel, consoleModeLabel)
 #: rdp/rdppreferences.ui:689
 #, kde-format
 msgid "Alternate Session Type:"
-msgstr ""
+msgstr "Alternatív munkamenet típusa:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ConsoleMode)
 #: rdp/rdppreferences.ui:699
 #, kde-format
 msgid "Admin (or console) session"
-msgstr ""
+msgstr "Admin (vagy konzol) munkamenet"
 
 #. i18n: ectx: attribute (title), widget (QWidget, securitySettingsTab)
 #: rdp/rdppreferences.ui:707
-#, fuzzy, kde-format
-#| msgid "TLS security level:"
+#, kde-format
 msgid "Security"
-msgstr "TLS biztonsági szint:"
+msgstr "Biztonság"
 
 #. i18n: ectx: property (text), widget (QLabel, gSecurityLabel)
 #: rdp/rdppreferences.ui:715
-#, fuzzy, kde-format
-#| msgid "TLS security level:"
+#, kde-format
 msgid "Security:"
-msgstr "TLS biztonsági szint:"
+msgstr "Biztonság:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityNLA)
 #: rdp/rdppreferences.ui:727
-#, fuzzy, kde-format
-#| msgid "LAN"
+#, kde-format
 msgid "NLA"
-msgstr "LAN"
+msgstr "NLA"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityTLS)
 #: rdp/rdppreferences.ui:734
 #, kde-format
 msgid "TLS"
-msgstr ""
+msgstr "TLS"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityRDP)
 #: rdp/rdppreferences.ui:741
-#, fuzzy, kde-format
-#| msgid "RPC"
+#, kde-format
 msgid "RDP"
-msgstr "RPC"
+msgstr "RDP"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityEXT)
 #: rdp/rdppreferences.ui:748
 #, kde-format
 msgid "Ext"
-msgstr ""
+msgstr "Kit."
 
 #. i18n: ectx: property (text), widget (QLabel, TlsSecLevelLabel)
 #: rdp/rdppreferences.ui:757
@@ -1340,10 +1328,9 @@ msgstr "256 bites"
 
 #. i18n: ectx: property (text), widget (QLabel, authPkgListLabel)
 #: rdp/rdppreferences.ui:816
-#, fuzzy, kde-format
-#| msgid "Authenticating at %1"
+#, kde-format
 msgid "Authentication Package List:"
-msgstr "Felhasználóellenőrzés itt: %1"
+msgstr "Hitelesítési csomaglista:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, proxySettingsTab)
 #: rdp/rdppreferences.ui:832
@@ -1614,8 +1601,7 @@ msgid "Connect to a Windows Remote Desktop (RDP)"
 msgstr "Csatlakozás egy windowsos távoli asztalhoz (RDP)"
 
 #: rdp/rdpviewfactory.cpp:109
-#, fuzzy, kde-format
-#| msgid "New RDP Connection..."
+#, kde-format
 msgid "New RDP Connection…"
 msgstr "Új RDP-kapcsolat…"
 
@@ -1852,8 +1838,7 @@ msgid "VNC failure"
 msgstr "VNC-hiba"
 
 #: vnc/vncviewfactory.cpp:47
-#, fuzzy, kde-format
-#| msgid "New VNC Connection..."
+#, kde-format
 msgid "New VNC Connection…"
 msgstr "Új VNC-kapcsolat…"
 
