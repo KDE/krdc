@@ -103,6 +103,7 @@ public:
     void stop();
 
     bool sendEvent(QEvent *event, QWidget *source);
+    bool syncKeyState();
 
     void initializeClipboard(RdpContext *krdp, CliprdrClientContext *cliprdr);
     void initializeDisplay(RdpContext *krdp, DispClientContext *disp);
@@ -201,6 +202,7 @@ private:
     int m_port = -1;
     QSize m_size;
     bool m_firstPasswordTry;
+    bool m_needKeyStateSync = true;
 
     std::thread m_thread;
 

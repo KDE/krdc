@@ -31,6 +31,7 @@ target_link_libraries(krdccore
     KF6::I18n
     KF6::ConfigGui
     KF6::Completion
+    KF6::GuiAddons
     Qt::Gui
     Qt::Widgets)
 

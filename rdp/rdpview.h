@@ -75,6 +75,7 @@ protected:
     void handleWheelEvent(QWheelEvent *event) override;
     void handleMouseEvent(QMouseEvent *event) override;
     void handleLocalClipboardChanged(const QMimeData *data) override;
+    void focusInEvent(QFocusEvent *event) override;
 
 private:
     void onRectangleUpdated(const QRect &remoteRect, const QSize &remoteSize);

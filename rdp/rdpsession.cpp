@@ -987,6 +987,10 @@ bool RdpSession::sendEvent(QEvent *event, QWidget *source)
     switch (event->type()) {
     case QEvent::KeyPress:
     case QEvent::KeyRelease: {
+        if (m_needKeyStateSync) {
+            m_needKeyStateSync = false;
+            syncKeyState();
+        }
         auto keyEvent = static_cast<QKeyEvent *>(event);
         const DWORD vc = GetVirtualKeyCodeFromKeycode(keyEvent->nativeScanCode(), WINPR_KEYCODE_TYPE_XKB);
         const DWORD code = GetVirtualScanCodeFromVirtualKeyCode(vc, WINPR_KBD_TYPE_IBM_ENHANCED);
@@ -1088,6 +1092,26 @@ bool RdpSession::sendEvent(QEvent *event, QWidget *source)
     }
 
     return QObject::event(event);
+}
+
+bool RdpSession::syncKeyState()
+{
+    auto input = m_context.rdp->input;
+    if (!input) {
+        return false;
+    }
+
+    UINT16 flags = 0;
+
+    if (m_view->isCapsLockEnabled())
+        flags |= KBD_SYNC_CAPS_LOCK;
+    if (m_view->isNumLockEnabled())
+        flags |= KBD_SYNC_NUM_LOCK;
+    if (m_view->isScrollLockEnabled())
+        flags |= KBD_SYNC_SCROLL_LOCK;
+
+    qCDebug(KRDC) << "Sync key state: " << flags;
+    return freerdp_input_send_synchronize_event(input, flags);
 }
 
 void RdpSession::setState(RdpSession::State newState)

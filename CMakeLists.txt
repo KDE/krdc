@@ -51,6 +51,7 @@ find_package(KF6 ${KF_MIN_VERSION} REQUIRED COMPONENTS
     I18n
     KIO
     Crash
+    GuiAddons
 )
 
 find_package(KF6StatusNotifierItem ${KF_MIN_VERSION} REQUIRED)
@@ -230,7 +231,9 @@ if (HAVE_KACTIVITIES)
 endif()
 
 install(TARGETS krdc ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
-install(PROGRAMS org.kde.krdc.desktop DESTINATION ${KDE_INSTALL_APPDIR})
+configure_file(org.kde.krdc.desktop.cmake ${CMAKE_CURRENT_BINARY_DIR}/org.kde.krdc.desktop @ONLY)
+
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/org.kde.krdc.desktop DESTINATION ${KDE_INSTALL_APPDIR})
 install(FILES org.kde.krdc.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
 
 ecm_install_icons(

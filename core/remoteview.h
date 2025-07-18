@@ -36,6 +36,7 @@ struct ModifierKey {
 };
 
 class HostPreferences;
+class KModifierKeyInfo;
 
 /**
  * Generic widget that displays a remote framebuffer.
@@ -263,6 +264,19 @@ public:
      */
     virtual QPixmap takeScreenshot();
 
+    /**
+     * @return status of the caps lock key
+     */
+    bool isCapsLockEnabled();
+    /**
+     * @return status of the num lock key
+     */
+    bool isNumLockEnabled();
+    /**
+     * @return status of the scroll lock key
+     */
+    bool isScrollLockEnabled();
+
 #ifndef QTONLY
     /**
      * Returns the current host preferences of this view.
@@ -456,6 +470,8 @@ protected:
     qreal m_factor;
     QClipboard *m_clipboard;
     QMap<int, ModifierKey> m_modifiers;
+    KModifierKeyInfo *m_modifierKeyInfo;
+
 #ifdef HAVE_WAYLAND
     std::unique_ptr<ShortcutInhibition> m_inhibition;
 #endif

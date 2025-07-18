@@ -9,6 +9,9 @@
 #include "remoteview.h"
 #include "krdc_debug.h"
 
+#ifndef QTONLY
+#include <KModifierKeyInfo>
+#endif
 #include <QApplication>
 #include <QBitmap>
 #include <QEvent>
@@ -57,6 +60,10 @@ RemoteView::RemoteView(QWidget *parent)
 
     m_clipboard = QApplication::clipboard();
     connect(m_clipboard, &QClipboard::dataChanged, this, &RemoteView::localClipboardChanged);
+
+#ifndef QTONLY
+    m_modifierKeyInfo = new KModifierKeyInfo(this);
+#endif
 
 #ifdef HAVE_WAYLAND
     if (qGuiApp->platformName() == QLatin1String("wayland")) {
@@ -567,5 +574,32 @@ void RemoteView::sshErrorMessage(const QString &message)
     Q_EMIT errorMessage(i18n("SSH Tunnel failure"), message);
 }
 #endif
+
+bool RemoteView::isCapsLockEnabled()
+{
+#ifdef QTONLY
+    return false;
+#else
+    return m_modifierKeyInfo->isKeyLatched(Qt::Key_CapsLock) || m_modifierKeyInfo->isKeyLocked(Qt::Key_CapsLock);
+#endif
+}
+
+bool RemoteView::isNumLockEnabled()
+{
+#ifdef QTONLY
+    return false;
+#else
+    return m_modifierKeyInfo->isKeyLatched(Qt::Key_NumLock) || m_modifierKeyInfo->isKeyLocked(Qt::Key_NumLock);
+#endif
+}
+
+bool RemoteView::isScrollLockEnabled()
+{
+#ifdef QTONLY
+    return false;
+#else
+    return m_modifierKeyInfo->isKeyLatched(Qt::Key_ScrollLock) || m_modifierKeyInfo->isKeyLocked(Qt::Key_ScrollLock);
+#endif
+}
 
 #include "moc_remoteview.cpp"

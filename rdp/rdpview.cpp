@@ -512,3 +512,12 @@ void RdpView::handleLocalClipboardChanged(const QMimeData *data)
         m_session->sendClipboard(data);
     }
 }
+
+void RdpView::focusInEvent(QFocusEvent *event)
+{
+    if (m_session) {
+        m_session->syncKeyState();
+    }
+
+    RemoteView::focusInEvent(event);
+}

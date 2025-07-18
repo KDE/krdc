@@ -1,7 +1,7 @@
 # KDE Config File
 [Desktop Entry]
 Type=Application
-Exec=krdc -qwindowtitle %c %u
+Exec=@CMAKE_INSTALL_PREFIX@/bin/krdc -qwindowtitle %c %u
 Icon=krdc
 Terminal=false
 Name=KRDC
@@ -180,3 +180,4 @@ X-DocPath=krdc/index.html
 StartupWMClass=krdc
 MimeType=x-scheme-handler/vnc;x-scheme-handler/rdp;application/x-krdc;
 Categories=Qt;KDE;Network;RemoteAccess;
+X-KDE-Wayland-Interfaces=org_kde_kwin_keystate
