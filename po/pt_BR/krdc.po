@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-19 00:42+0000\n"
-"PO-Revision-Date: 2025-03-09 00:30-0300\n"
+"PO-Revision-Date: 2025-08-07 08:18-0300\n"
 "Last-Translator: Geraldo Simiao <geraldosimiao@fedoraproject.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -27,7 +27,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 24.12.3\n"
+"X-Generator: Lokalize 25.04.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -201,8 +201,7 @@ msgid "Right"
 msgstr "Direita"
 
 #: config/hostpreferenceslist.cpp:30
-#, fuzzy, kde-format
-#| msgid "Configure..."
+#, kde-format
 msgid "Configure…"
 msgstr "Configurar..."
 
@@ -345,10 +344,9 @@ msgstr "Erro ao criar o socket do túnel"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, SshTunnelWidget)
 #: core/sshtunnelwidget.ui:14
-#, fuzzy, kde-format
-#| msgid "SSH tunnel options"
+#, kde-format
 msgid "SSH tunnel"
-msgstr "Opções do túnel SSH"
+msgstr "Túnel SSH"
 
 #. i18n: ectx: property (text), widget (QCheckBox, use_ssh_tunnel)
 #: core/sshtunnelwidget.ui:32
@@ -534,7 +532,7 @@ msgstr "Somente ver"
 #: mainwindow.cpp:160
 #, kde-format
 msgid "Clipboard Sharing"
-msgstr ""
+msgstr "Compartilhamento de área de transferência"
 
 #: mainwindow.cpp:165
 #, kde-format
@@ -585,6 +583,7 @@ msgstr "Favoritos"
 #, kde-format
 msgid "Unable to load connection data from the provided file."
 msgstr ""
+"Não foi possível carregar os dados de conexão a partir do arquivo fornecido."
 
 #: mainwindow.cpp:270
 #, kde-format
@@ -815,8 +814,7 @@ msgstr "Resolução de tela atual"
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
 #: rdp/rdppreferences.ui:81 vnc/vncpreferences.ui:123
-#, fuzzy, kde-format
-#| msgid "Custom Resolution (...)"
+#, kde-format
 msgid "Custom Resolution (…)"
 msgstr "Resolução personalizada (...)"
 
@@ -860,7 +858,7 @@ msgstr ""
 #: rdp/rdppreferences.ui:163
 #, kde-format
 msgid "Scale window contents to match resolution"
-msgstr ""
+msgstr "Redimensionar o conteúdo da janela para corresponder à resolução"
 
 #. i18n: ectx: property (text), widget (QLabel, accelerationLabel)
 #: rdp/rdppreferences.ui:173
@@ -870,8 +868,7 @@ msgstr "Aceleração:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
 #: rdp/rdppreferences.ui:196
-#, fuzzy, kde-format
-#| msgid "Use Best Available"
+#, kde-format
 msgctxt "Use best acceleration supported by both the server and krdc"
 msgid "Use Best Available"
 msgstr "Utilizar a melhor disponível"
@@ -902,8 +899,7 @@ msgstr "Profundidade &de cores:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
 #: rdp/rdppreferences.ui:245
-#, fuzzy, kde-format
-#| msgid "Use Best Available"
+#, kde-format
 msgctxt "Use best color depth supported by both the server and krdc"
 msgid "Use Best Available"
 msgstr "Utilizar a melhor disponível"
@@ -934,10 +930,9 @@ msgstr "Poucas cores (8 bits)"
 
 #. i18n: ectx: property (text), widget (QLabel, desktopScaleFactorLabel)
 #: rdp/rdppreferences.ui:273
-#, fuzzy, kde-format
-#| msgid "Desktop &resolution:"
+#, kde-format
 msgid "Desktop scale factor:"
-msgstr "Resolução da área de &trabalho:"
+msgstr "Fator de escala da área de trabalho:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DesktopScaleFactor)
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DeviceScaleFactor)
@@ -952,7 +947,7 @@ msgstr "Automático"
 #: rdp/rdppreferences.ui:300
 #, kde-format
 msgid "Do not scale"
-msgstr ""
+msgstr "Não redimensionar"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DesktopScaleFactor)
 #: rdp/rdppreferences.ui:305
@@ -1263,13 +1258,13 @@ msgstr "Compartilhar Smartcard:"
 #: rdp/rdppreferences.ui:689
 #, kde-format
 msgid "Alternate Session Type:"
-msgstr ""
+msgstr "Alternar tipo de sessão:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ConsoleMode)
 #: rdp/rdppreferences.ui:699
 #, kde-format
 msgid "Admin (or console) session"
-msgstr ""
+msgstr "Sessão de administrador (ou console)"
 
 #. i18n: ectx: attribute (title), widget (QWidget, securitySettingsTab)
 #: rdp/rdppreferences.ui:707
@@ -1311,7 +1306,7 @@ msgstr "Ext"
 #: rdp/rdppreferences.ui:757
 #, kde-format
 msgid "TLS security level:"
-msgstr ""
+msgstr "Nível de segurança do TLS:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:783
@@ -1323,38 +1318,37 @@ msgstr "qualquer"
 #: rdp/rdppreferences.ui:788
 #, kde-format
 msgid "80 bit"
-msgstr ""
+msgstr "80 bit"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:793
 #, kde-format
 msgid "112 bit"
-msgstr ""
+msgstr "112 bit"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:798
 #, kde-format
 msgid "128 bit"
-msgstr ""
+msgstr "128 bit"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:803
 #, kde-format
 msgid "192 bit"
-msgstr ""
+msgstr "192 bit"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:808
 #, kde-format
 msgid "256 bit"
-msgstr ""
+msgstr "256 bit"
 
 #. i18n: ectx: property (text), widget (QLabel, authPkgListLabel)
 #: rdp/rdppreferences.ui:816
-#, fuzzy, kde-format
-#| msgid "Authenticating at %1"
+#, kde-format
 msgid "Authentication Package List:"
-msgstr "Autenticando em %1"
+msgstr "Lista de pacotes de autenticação:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, proxySettingsTab)
 #: rdp/rdppreferences.ui:832
@@ -1391,8 +1385,7 @@ msgstr "Senha:"
 #. i18n: ectx: property (text), widget (QLabel, pUsernameLabel)
 #. i18n: ectx: property (text), widget (QLabel, gUsernameLabel)
 #: rdp/rdppreferences.ui:880 rdp/rdppreferences.ui:919
-#, fuzzy, kde-format
-#| msgid "User name:"
+#, kde-format
 msgid "Username:"
 msgstr "Nome de usuário:"
 
@@ -1408,7 +1401,7 @@ msgstr "Servidor:"
 #: rdp/rdppreferences.ui:894 rdp/rdppreferences.ui:933
 #, kde-format
 msgid "host:port"
-msgstr ""
+msgstr "host:port"
 
 #. i18n: ectx: attribute (title), widget (QWidget, gatewaySettingsTab)
 #: rdp/rdppreferences.ui:904
@@ -1420,7 +1413,7 @@ msgstr "Gateway"
 #: rdp/rdppreferences.ui:946
 #, kde-format
 msgid "Transport type:"
-msgstr ""
+msgstr "Tipo de transporte:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_GatewayTransportType)
 #: rdp/rdppreferences.ui:970
@@ -1444,19 +1437,23 @@ msgid ""
 "Issuer: %5\n"
 "Fingerprint: %6\n"
 msgstr ""
+"Host: %1:%2\n"
+"Nome comum: %3\n"
+"Proprietário: %4\n"
+"Emissor: %5\n"
+"Impressão digital: %6\n"
 
 #: rdp/rdpview.cpp:205
-#, fuzzy, kde-format
-#| msgid "Access to the system requires a password."
+#, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
-msgstr "Acessar o sistema requer uma senha."
+msgstr "Acessar o sistema requer uma senha e nome de usuário."
 
 #: rdp/rdpview.cpp:238
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
-msgstr ""
+msgstr "O certificado para este sistema é desconhecido. Deseja continuar?"
 
 #: rdp/rdpview.cpp:239
 #, kde-format
@@ -1468,19 +1465,19 @@ msgstr "Verificar certificado"
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
-msgstr ""
+msgstr "Lembrar deste certificado"
 
 #: rdp/rdpview.cpp:263
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
-msgstr ""
+msgstr "O certificado para este sistema foi alterado. Deseja continuar?"
 
 #: rdp/rdpview.cpp:264
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
-msgstr ""
+msgstr "O certificado foi alterado"
 
 #: rdp/rdpview.cpp:267
 #, kde-format
@@ -1491,13 +1488,16 @@ msgid ""
 "New Certificate:\n"
 "%2"
 msgstr ""
+"Certificado anterior:\n"
+"%1\n"
+"Novo certificado:\n"
+"%2"
 
 #: rdp/rdpview.cpp:299
-#, fuzzy, kde-format
-#| msgid "Connection Failure"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Login Failure"
-msgstr "Falha na conexão"
+msgstr "Falha na autenticação"
 
 #: rdp/rdpview.cpp:300
 #, kde-format
@@ -1506,12 +1506,14 @@ msgid ""
 "Unable to login with the provided credentials. Please double check the user "
 "and password."
 msgstr ""
+"Não foi possível efetuar login com as credenciais fornecidas. Verifique "
+"novamente o usuário e a senha."
 
 #: rdp/rdpview.cpp:309
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Account Problems"
-msgstr ""
+msgstr "Problemas com a conta de usuário"
 
 #: rdp/rdpview.cpp:310
 #, kde-format
@@ -1520,12 +1522,14 @@ msgid ""
 "The provided account is not allowed to log in to this machine. Please "
 "contact your system administrator."
 msgstr ""
+"A conta fornecida não permite login nesta máquina. Entre em contato com o "
+"administrador do sistema."
 
 #: rdp/rdpview.cpp:315
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Password Problems"
-msgstr ""
+msgstr "Problemas com a senha"
 
 #: rdp/rdpview.cpp:316
 #, kde-format
@@ -1534,72 +1538,65 @@ msgid ""
 "Unable to login with the provided password. Please contact your system "
 "administrator to change it."
 msgstr ""
+"Não é possível efetuar login com a senha fornecida. Entre em contato com o "
+"administrador do sistema para alterá-la."
 
 #: rdp/rdpview.cpp:322
-#, fuzzy, kde-format
-#| msgid "Connection"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Lost"
-msgstr "Conexão"
+msgstr "Conexão perdida"
 
 #: rdp/rdpview.cpp:323
-#, fuzzy, kde-format
-#| msgid "An error has occurred during the connection to the NX server."
+#, kde-format
 msgctxt "@label"
 msgid "Lost connection to the server."
-msgstr "Um erro ocorreu durante a conexão com o servidor NX."
+msgstr "Conexão com o servidor perdida."
 
 #: rdp/rdpview.cpp:325
-#, fuzzy, kde-format
-#| msgid "KRDC Konsole Connection"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Could not Connect"
-msgstr "Conexão do Konsole do KRDC"
+msgstr "Não foi possível se conectar"
 
 #: rdp/rdpview.cpp:326
-#, fuzzy, kde-format
-#| msgid "An error has occurred during the connection to the NX server."
+#, kde-format
 msgctxt "@label"
 msgid "Could not connect to the server."
-msgstr "Um erro ocorreu durante a conexão com o servidor NX."
+msgstr "Não foi possível se conectar com o servidor."
 
 #: rdp/rdpview.cpp:331
-#, fuzzy, kde-format
-#| msgid "Server not found."
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Server not Found"
-msgstr "Servidor não encontrado."
+msgstr "Servidor não encontrado"
 
 #: rdp/rdpview.cpp:332
 #, kde-format
 msgctxt "@label"
 msgid "Could not find the server."
-msgstr ""
+msgstr "Não foi possível localizar o servidor."
 
 #: rdp/rdpview.cpp:335
-#, fuzzy, kde-format
-#| msgid "Connection Failure"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Refused"
-msgstr "Falha na conexão"
+msgstr "Conexão recusada"
 
 #: rdp/rdpview.cpp:336
-#, fuzzy, kde-format
-#| msgid "VNC server closed connection."
+#, kde-format
 msgctxt "@label"
 msgid "The server refused the connection request."
-msgstr "O servidor VNC fechou a conexão."
+msgstr "O servidor recusou a solicitação de conexão."
 
 #: rdp/rdpview.cpp:346
-#, fuzzy, kde-format
-#| msgid "Connection Failure"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Closed"
-msgstr "Falha na conexão"
+msgstr "Conexão encerrada"
 
 #: rdp/rdpview.cpp:351
-#, fuzzy, kde-format
-#| msgid "Connection Failure"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Failed"
 msgstr "Falha na conexão"
@@ -1608,13 +1605,13 @@ msgstr "Falha na conexão"
 #, kde-format
 msgctxt "@label"
 msgid "An unknown error occurred"
-msgstr ""
+msgstr "Ocorreu um erro desconhecido"
 
 #: rdp/rdpview.cpp:363
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Logon Error"
-msgstr ""
+msgstr "Erro de autenticação"
 
 #: rdp/rdpviewfactory.cpp:26
 #, kde-format
@@ -1622,8 +1619,7 @@ msgid "Connect to a Windows Remote Desktop (RDP)"
 msgstr "Conectar a uma área de trabalho remota Windows (RDP)"
 
 #: rdp/rdpviewfactory.cpp:109
-#, fuzzy, kde-format
-#| msgid "New RDP Connection..."
+#, kde-format
 msgid "New RDP Connection…"
 msgstr "Nova conexão RDP..."
 
@@ -1862,8 +1858,7 @@ msgid "VNC failure"
 msgstr "Falha do VNC"
 
 #: vnc/vncviewfactory.cpp:47
-#, fuzzy, kde-format
-#| msgid "New VNC Connection..."
+#, kde-format
 msgid "New VNC Connection…"
 msgstr "Nova conexão VNC..."
 
