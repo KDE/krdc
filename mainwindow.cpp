@@ -279,7 +279,7 @@ void MainWindow::newConnection(const QUrl &newUrl, bool switchFullscreenWhenConn
 
     if (m_protocolInput && m_addressInput) {
         m_protocolInput->setCurrentText(url.scheme());
-        m_addressInput->setText(url.authority());
+        m_addressInput->setText(url.toString(QUrl::RemoveScheme).remove(QRegularExpression(QStringLiteral("^/+"))));
     }
 
     RemoteView *view = nullptr;
@@ -369,7 +369,7 @@ void MainWindow::selectFromRemoteDesktopsModel(const QModelIndex &index)
     if (!urlString.isEmpty() && m_protocolInput && m_addressInput) {
         const QUrl url(urlString);
         m_addressInput->blockSignals(true); // block signals so we don't filter the address list on click
-        m_addressInput->setText(url.authority());
+        m_addressInput->setText(url.toString(QUrl::RemoveScheme).remove(QRegularExpression(QStringLiteral("^/+"))));
         m_addressInput->blockSignals(false);
         m_protocolInput->setCurrentText(url.scheme());
     }
