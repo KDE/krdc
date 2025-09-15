@@ -564,4 +564,9 @@ void VncView::handleLocalClipboardChanged(const QMimeData *data)
     }
 }
 
+void VncView::handleDevicePixelRatioChange()
+{
+    vncThread.setDevicePixelRatio(devicePixelRatioF());
+}
+
 #include "moc_vncview.cpp"

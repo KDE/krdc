@@ -63,6 +63,7 @@ protected:
     void handleWheelEvent(QWheelEvent *event) override;
     void handleMouseEvent(QMouseEvent *event) override;
     void handleLocalClipboardChanged(const QMimeData *data) override;
+    void handleDevicePixelRatioChange() override;
 
 private:
     VncClientThread vncThread;

@@ -479,6 +479,12 @@ void VncClientThread::setQuality(RemoteView::Quality quality)
 void VncClientThread::setDevicePixelRatio(qreal dpr)
 {
     m_devicePixelRatio = dpr;
+
+    if (!isRunning())
+        return;
+
+    QMutexLocker lock(&mutex);
+    m_eventQueue.enqueue(new FramebufferUpdateEvent());
 }
 
 void VncClientThread::setColorDepth(ColorDepth colorDepth)
@@ -707,6 +713,11 @@ void VncClientThread::clientStateChange(RemoteView::RemoteStatus status, const Q
 
 ClientEvent::~ClientEvent()
 {
+}
+
+void FramebufferUpdateEvent::fire(rfbClient *cl)
+{
+    SendFramebufferUpdateRequest(cl, 0, 0, cl->width, cl->height, FALSE);
 }
 
 void ReconfigureEvent::fire(rfbClient *cl)

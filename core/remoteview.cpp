@@ -424,6 +424,12 @@ bool RemoteView::event(QEvent *event)
         handleWheelEvent(static_cast<QWheelEvent *>(event));
         return true;
         break;
+#ifndef QTONLY
+    case QEvent::DevicePixelRatioChange:
+        handleDevicePixelRatioChange();
+        return QWidget::event(event);
+        break;
+#endif
     default:
         return QWidget::event(event);
     }

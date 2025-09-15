@@ -421,6 +421,7 @@ protected:
     virtual void handleWheelEvent(QWheelEvent *event) = 0;
     virtual void handleMouseEvent(QMouseEvent *event) = 0;
     virtual void handleLocalClipboardChanged(const QMimeData *data) = 0;
+    virtual void handleDevicePixelRatioChange() { };
     /**
      * The status of the remote view.
      */

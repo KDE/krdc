@@ -32,6 +32,12 @@ public:
     virtual void fire(rfbClient *) = 0;
 };
 
+class FramebufferUpdateEvent : public ClientEvent
+{
+public:
+    void fire(rfbClient *) override;
+};
+
 class ReconfigureEvent : public ClientEvent
 {
 public:
