@@ -362,11 +362,7 @@ void VncClientThread::outputHandler(const char *format, va_list args)
     if (message.contains(QLatin1String("read ("))) {
         // Don't show a dialog if a reconnection is needed. Never contemplate
         // reconnection if we don't have a password.
-#ifdef QTONLY
-        QString tmp = i18n("Disconnected: %1.", message.toStdString().c_str());
-#else
         QString tmp = i18n("Disconnected: %1.", message);
-#endif
         if (m_keepalive.set && !m_password.isNull()) {
             m_keepalive.failed = true;
             clientStateChange(RemoteView::Disconnected, tmp);
@@ -784,5 +780,3 @@ void VncClientThread::clientCut(const QString &text)
     QMutexLocker lock(&mutex);
     m_eventQueue.enqueue(new ClientCutEvent(text));
 }
-
-#include "moc_vncclientthread.cpp"

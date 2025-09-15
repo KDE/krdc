@@ -9,12 +9,8 @@
 #ifndef REMOTEVIEW_H
 #define REMOTEVIEW_H
 
-#ifndef QTONLY
 #include "krdccore_export.h"
 #include <KWallet>
-#else
-#define KRDCCORE_EXPORT
-#endif
 
 #include <QClipboard>
 #include <QMap>
@@ -25,7 +21,7 @@
 #include "shortcutinhibition_p.h"
 #endif
 
-#if defined(LIBSSH_FOUND) && !defined(QTONLY)
+#if defined(LIBSSH_FOUND)
 #define USE_SSH_TUNNEL
 #include "sshtunnelthread.h"
 #endif
@@ -277,12 +273,10 @@ public:
      */
     bool isScrollLockEnabled();
 
-#ifndef QTONLY
     /**
      * Returns the current host preferences of this view.
      */
     virtual HostPreferences *hostPreferences() = 0;
-#endif
 
     /**
      * Returns the current status of the connection.
@@ -477,7 +471,6 @@ protected:
     std::unique_ptr<ShortcutInhibition> m_inhibition;
 #endif
 
-#ifndef QTONLY
     QString readWalletPassword(bool fromUserNameOnly = false);
     void saveWalletPassword(const QString &password, bool fromUserNameOnly = false);
     void deleteWalletPassword(bool fromUserNameOnly = false);
@@ -485,7 +478,6 @@ protected:
     void saveWalletPasswordForKey(const QString &key, const QString &password);
     void deleteWalletPasswordForKey(const QString &key);
     KWallet::Wallet *m_wallet;
-#endif
 
     LocalCursorState m_localCursorState;
 

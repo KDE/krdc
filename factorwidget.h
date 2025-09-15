@@ -7,11 +7,7 @@
 #ifndef FACTORWIDGET_H
 #define FACTORWIDGET_H
 
-#ifndef QTONLY
 #include "krdccore_export.h"
-#else
-#define KRDCCORE_EXPORT
-#endif
 
 #include <QWidgetAction>
 

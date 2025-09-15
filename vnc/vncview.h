@@ -9,14 +9,7 @@
 
 #include "remoteview.h"
 #include "vncclientthread.h"
-
-#ifdef QTONLY
-class KConfigGroup
-{
-};
-#else
 #include "vnchostpreferences.h"
-#endif
 
 #include <QMap>
 
@@ -41,9 +34,7 @@ public:
     bool supportsViewOnly() const override;
     bool supportsClipboardSharing() const override;
 
-#ifndef QTONLY
     HostPreferences *hostPreferences() override;
-#endif
 
     void showLocalCursor(LocalCursorState state) override;
     void enableScaling(bool scale) override;
@@ -75,9 +66,7 @@ private:
     qreal m_verticalFactor;
     int m_wheelRemainderV;
     int m_wheelRemainderH;
-#ifndef QTONLY
     VncHostPreferences *m_hostPreferences;
-#endif
     QImage m_frame;
     bool m_forceLocalCursor;
 

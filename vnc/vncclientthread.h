@@ -7,11 +7,7 @@
 #ifndef VNCCLIENTTHREAD_H
 #define VNCCLIENTTHREAD_H
 
-#ifdef QTONLY
-#define i18n tr
-#else
 #include <KLocalizedString>
-#endif
 
 #include "remoteview.h"
 

@@ -14,16 +14,11 @@
 #include <QMouseEvent>
 #include <QPainter>
 
-#ifdef QTONLY
-#include <QInputDialog>
-#define error(parent, message, caption) critical(parent, caption, message)
-#else
 #include "settings.h"
 #include <KActionCollection>
 #include <KMainWindow>
 #include <KPasswordDialog>
 #include <KXMLGUIClient>
-#endif
 
 // Definition of key modifier mask constants
 #define KMOD_Alt_R 0x01
@@ -63,11 +58,7 @@ VncView::VncView(QWidget *parent, const QUrl &url, KConfigGroup configGroup)
         setCursor(cursor);
     });
 
-#ifndef QTONLY
     m_hostPreferences = new VncHostPreferences(configGroup, this);
-#else
-    Q_UNUSED(configGroup);
-#endif
 }
 
 VncView::~VncView()
@@ -102,13 +93,9 @@ void VncView::scaleResize(int w, int h)
         m_verticalFactor = static_cast<qreal>(h) / frameSize.height() * m_factor;
         m_horizontalFactor = static_cast<qreal>(w) / frameSize.width() * m_factor;
 
-#ifndef QTONLY
         if (Settings::keepAspectRatio()) {
             m_verticalFactor = m_horizontalFactor = qMin(m_verticalFactor, m_horizontalFactor);
         }
-#else
-        m_verticalFactor = m_horizontalFactor = qMin(m_verticalFactor, m_horizontalFactor);
-#endif
 
         const qreal newW = frameSize.width() * m_horizontalFactor;
         const qreal newH = frameSize.height() * m_verticalFactor;
@@ -181,11 +168,7 @@ bool VncView::startConnection()
 
     vncThread.setHost(m_host);
     RemoteView::Quality quality;
-#ifdef QTONLY
-    quality = (RemoteView::Quality)((QCoreApplication::arguments().count() > 2) ? QCoreApplication::arguments().at(2).toInt() : 2);
-#else
     quality = m_hostPreferences->quality();
-#endif
 
     vncThread.setQuality(quality);
     vncThread.setDevicePixelRatio(devicePixelRatioF());
@@ -193,12 +176,10 @@ bool VncView::startConnection()
     // set local cursor on by default because low quality mostly means slow internet connection
     if (quality == RemoteView::Low) {
         showLocalCursor(RemoteView::CursorOn);
-#ifndef QTONLY
         // KRDC does always just have one main window, so at(0) is safe
         KXMLGUIClient *mainWindow = dynamic_cast<KXMLGUIClient *>(KMainWindow::memberList().at(0));
         if (mainWindow)
             mainWindow->actionCollection()->action(QLatin1String("show_local_cursor"))->setChecked(true);
-#endif
     }
 
     setStatus(Connecting);
@@ -238,7 +219,6 @@ void VncView::requestPassword(bool includingUsername)
         vncThread.setUsername(m_url.userName());
     }
 
-#ifndef QTONLY
     // just try to get the password from the wallet the first time, otherwise it will loop (see issue #226283)
     if (m_firstPasswordTry && m_hostPreferences->walletSupport()) {
         QString walletPassword = readWalletPassword();
@@ -249,7 +229,6 @@ void VncView::requestPassword(bool includingUsername)
             return;
         }
     }
-#endif
 
     if (m_firstPasswordTry && !m_url.password().isNull()) {
         vncThread.setPassword(m_url.password());
@@ -257,33 +236,6 @@ void VncView::requestPassword(bool includingUsername)
         return;
     }
 
-#ifdef QTONLY
-    bool ok;
-    if (includingUsername) {
-        QString username = QInputDialog::getText(this, // krazy:exclude=qclasses (code not used in kde build)
-                                                 tr("Username required"),
-                                                 tr("Please enter the username for the remote desktop:"),
-                                                 QLineEdit::Normal,
-                                                 m_url.userName(),
-                                                 &ok); // krazy:exclude=qclasses
-        if (ok)
-            vncThread.setUsername(username);
-        else
-            startQuitting();
-    }
-
-    QString password = QInputDialog::getText(this, // krazy:exclude=qclasses
-                                             tr("Password required"),
-                                             tr("Please enter the password for the remote desktop:"),
-                                             QLineEdit::Password,
-                                             QString(),
-                                             &ok); // krazy:exclude=qclasses
-    m_firstPasswordTry = false;
-    if (ok)
-        vncThread.setPassword(password);
-    else
-        startQuitting();
-#else
     KPasswordDialog dialog(this, includingUsername ? KPasswordDialog::ShowUsernameLine : KPasswordDialog::NoFlags);
     dialog.setPrompt(m_firstPasswordTry ? i18n("Access to the system requires a password.") : i18n("Authentication failed. Please try again."));
     if (includingUsername)
@@ -297,7 +249,6 @@ void VncView::requestPassword(bool includingUsername)
         qCDebug(KRDC) << "password dialog not accepted";
         startQuitting();
     }
-#endif
 }
 
 void VncView::outputErrorMessage(const QString &message)
@@ -315,12 +266,10 @@ void VncView::outputErrorMessage(const QString &message)
     Q_EMIT errorMessage(i18n("VNC failure"), message);
 }
 
-#ifndef QTONLY
 HostPreferences *VncView::hostPreferences()
 {
     return m_hostPreferences;
 }
-#endif
 
 void VncView::updateImage(int x, int y, int w, int h)
 {
@@ -343,24 +292,18 @@ void VncView::updateImage(int x, int y, int w, int h)
         Q_EMIT connected();
 
         if (m_scale) {
-#ifndef QTONLY
             qCDebug(KRDC) << "Setting initial size w:" << m_hostPreferences->width() << " h:" << m_hostPreferences->height();
             QSize frameSize = QSize(m_hostPreferences->width(), m_hostPreferences->height()) / devicePixelRatioF();
             Q_EMIT framebufferSizeChanged(frameSize.width(), frameSize.height());
             scaleResize(frameSize.width(), frameSize.height());
             qCDebug(KRDC) << "m_frame.size():" << m_frame.size() << "size()" << size();
-#else
-// TODO: qtonly alternative
-#endif
         }
 
         m_initDone = true;
 
-#ifndef QTONLY
         if (m_hostPreferences->walletSupport()) {
             saveWalletPassword(vncThread.password());
         }
-#endif
     }
 
     const QSize frameSize = m_frame.size() / m_frame.devicePixelRatio();
@@ -548,14 +491,12 @@ void VncView::handleKeyEvent(QKeyEvent *e)
 
 void VncView::handleLocalClipboardChanged(const QMimeData *data)
 {
-#ifndef QTONLY
     if (m_hostPreferences->dontCopyPasswords()) {
         if (data->hasFormat(QLatin1String("x-kde-passwordManagerHint"))) {
             qCDebug(KRDC) << "VncView::clipboardDataChanged data hasFormat x-kde-passwordManagerHint -- ignoring";
             return;
         }
     }
-#endif
 
     // TODO: VNC backend doesn't support other formats like  hasImage(), hasHtml()
     if (data->hasText()) {
@@ -568,5 +509,3 @@ void VncView::handleDevicePixelRatioChange()
 {
     vncThread.setDevicePixelRatio(devicePixelRatioF());
 }
-
-#include "moc_vncview.cpp"

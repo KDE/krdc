@@ -9,9 +9,7 @@
 #include "remoteview.h"
 #include "krdc_debug.h"
 
-#ifndef QTONLY
 #include <KModifierKeyInfo>
-#endif
 #include <QApplication>
 #include <QBitmap>
 #include <QEvent>
@@ -30,9 +28,7 @@
 #include <KPasswordDialog>
 #endif
 
-#ifndef QTONLY
 #include "hostpreferences.h"
-#endif
 
 RemoteView::RemoteView(QWidget *parent)
     : QWidget(parent)
@@ -45,9 +41,7 @@ RemoteView::RemoteView(QWidget *parent)
     , m_keyboardIsGrabbed(false)
     , m_factor(0.)
     , m_clipboard(nullptr)
-#ifndef QTONLY
     , m_wallet(nullptr)
-#endif
     , m_localCursorState(CursorOff)
 #ifdef USE_SSH_TUNNEL
     , m_sshTunnelThread(nullptr)
@@ -61,9 +55,7 @@ RemoteView::RemoteView(QWidget *parent)
     m_clipboard = QApplication::clipboard();
     connect(m_clipboard, &QClipboard::dataChanged, this, &RemoteView::localClipboardChanged);
 
-#ifndef QTONLY
     m_modifierKeyInfo = new KModifierKeyInfo(this);
-#endif
 
 #ifdef HAVE_WAYLAND
     if (qGuiApp->platformName() == QLatin1String("wayland")) {
@@ -82,9 +74,7 @@ RemoteView::~RemoteView()
     }
 #endif
 
-#ifndef QTONLY
     delete m_wallet;
-#endif
 }
 
 RemoteView::RemoteStatus RemoteView::status()
@@ -298,7 +288,6 @@ QUrl RemoteView::url()
     return m_url;
 }
 
-#ifndef QTONLY
 QString RemoteView::readWalletPassword(bool fromUserNameOnly)
 {
     return readWalletPasswordForKey(fromUserNameOnly ? m_url.userName() : m_url.toDisplayString(QUrl::StripTrailingSlash));
@@ -358,7 +347,6 @@ void RemoteView::deleteWalletPasswordForKey(const QString &key)
         m_wallet->removeEntry(key);
     }
 }
-#endif
 
 QCursor RemoteView::localDefaultCursor() const
 {
@@ -432,12 +420,10 @@ bool RemoteView::event(QEvent *event)
         handleWheelEvent(static_cast<QWheelEvent *>(event));
         return true;
         break;
-#ifndef QTONLY
     case QEvent::DevicePixelRatioChange:
         handleDevicePixelRatioChange();
         return QWidget::event(event);
         break;
-#endif
     default:
         return QWidget::event(event);
     }
@@ -465,11 +451,9 @@ void RemoteView::localClipboardChanged()
         return;
     }
 
-#ifndef QTONLY
     if (!hostPreferences()->clipboardSharing()) {
         return;
     }
-#endif
 
     if (m_clipboard->ownsClipboard() || m_viewOnly) {
         return;
@@ -483,11 +467,9 @@ void RemoteView::localClipboardChanged()
 
 void RemoteView::remoteClipboardChanged(QMimeData *data)
 {
-#ifndef QTONLY
     if (!hostPreferences()->clipboardSharing()) {
         return;
     }
-#endif
 
     if (m_viewOnly) {
         return;
@@ -583,29 +565,15 @@ void RemoteView::sshErrorMessage(const QString &message)
 
 bool RemoteView::isCapsLockEnabled()
 {
-#ifdef QTONLY
-    return false;
-#else
     return m_modifierKeyInfo->isKeyLatched(Qt::Key_CapsLock) || m_modifierKeyInfo->isKeyLocked(Qt::Key_CapsLock);
-#endif
 }
 
 bool RemoteView::isNumLockEnabled()
 {
-#ifdef QTONLY
-    return false;
-#else
     return m_modifierKeyInfo->isKeyLatched(Qt::Key_NumLock) || m_modifierKeyInfo->isKeyLocked(Qt::Key_NumLock);
-#endif
 }
 
 bool RemoteView::isScrollLockEnabled()
 {
-#ifdef QTONLY
-    return false;
-#else
     return m_modifierKeyInfo->isKeyLatched(Qt::Key_ScrollLock) || m_modifierKeyInfo->isKeyLocked(Qt::Key_ScrollLock);
-#endif
 }
-
-#include "moc_remoteview.cpp"
