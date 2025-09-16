@@ -30,9 +30,9 @@ FactorWidget::~FactorWidget()
 }
 
 /**
- * Each time action is add, the new QSlider widget is created and retun. As
+ * Each time action is add, the new QSlider widget is created and return. As
  * the toolbar takes ownership of the widget, here we must take care of
- * conecting signals and slots to the MainWindow methods.
+ * connecting signals and slots to the MainWindow methods.
  *
  * The widget has by default 100 steps, and width of 100.
  */

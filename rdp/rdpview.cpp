@@ -354,7 +354,7 @@ void RdpView::handleError(const unsigned int error)
     }
 
     qCDebug(KRDC) << "error message" << title << message;
-    // TODO offer reconnect if approriate
+    // TODO offer reconnect if appropriate
     Q_EMIT errorMessage(title, message);
 }
 

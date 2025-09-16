@@ -127,7 +127,7 @@ void VncView::updateConfiguration()
 
 void VncView::startQuittingConnection()
 {
-    // Already quitted. No need to clean up again and also avoid triggering
+    // Already quit. No need to clean up again and also avoid triggering
     // `disconnected` signal below.
     if (m_quitFlag)
         return;

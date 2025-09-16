@@ -41,7 +41,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent, KConfigSkeleton *skeleton)
 
 void PreferencesDialog::saveState()
 {
-    // TODO: relaod plugins at runtime?
+    // TODO: reload plugins at runtime?
     m_pluginSelector->save();
 }
 
