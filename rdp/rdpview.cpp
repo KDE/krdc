@@ -9,7 +9,6 @@
 #include "rdpview.h"
 
 #include "krdc_debug.h"
-#include "rdphostpreferences.h"
 
 #include <KMessageDialog>
 #include <KPasswordDialog>
@@ -26,8 +25,6 @@
 #include <QScreen>
 #include <QUrlQuery>
 #include <QWindow>
-
-#include "rdpsession.h"
 
 RdpView::RdpView(QWidget *parent, const QUrl &url, KConfigGroup configGroup, const QString &user, const QString &domain, const QString &password)
     : RemoteView(parent)
