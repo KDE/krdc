@@ -90,6 +90,9 @@ public:
     bool consoleMode() const;
     void setConsoleMode(bool enabled);
 
+    bool preventSessionLock() const;
+    void setPreventSessionLock(bool enabled);
+
     Resolution resolution() const;
     void setResolution(Resolution resolution);
 

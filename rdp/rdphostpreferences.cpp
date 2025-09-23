@@ -132,6 +132,7 @@ QWidget *RdpHostPreferences::createProtocolSpecificConfigPage(QWidget *sshTunnel
 
     rdpUi.kcfg_ScaleToSize->setChecked(scaleToSize());
     rdpUi.kcfg_ConsoleMode->setChecked(consoleMode());
+    rdpUi.kcfg_PreventSessionLock->setChecked(preventSessionLock());
     rdpUi.kcfg_Height->setValue(height());
     rdpUi.kcfg_Width->setValue(width());
     rdpUi.kcfg_Resolution->setCurrentIndex(int(resolution()));
@@ -238,6 +239,7 @@ void RdpHostPreferences::acceptConfig()
 
     setScaleToSize(rdpUi.kcfg_ScaleToSize->isChecked());
     setConsoleMode(rdpUi.kcfg_ConsoleMode->isChecked());
+    setPreventSessionLock(rdpUi.kcfg_PreventSessionLock->isChecked());
     setWidth(rdpUi.kcfg_Width->value());
     setHeight(rdpUi.kcfg_Height->value());
     setResolution(Resolution(rdpUi.kcfg_Resolution->currentIndex()));
@@ -285,6 +287,16 @@ bool RdpHostPreferences::consoleMode() const
 void RdpHostPreferences::setConsoleMode(bool enabled)
 {
     m_configGroup.writeEntry("consoleMode", enabled);
+}
+
+bool RdpHostPreferences::preventSessionLock() const
+{
+    return m_configGroup.readEntry("PreventSessionLock", Settings::preventSessionLock());
+}
+
+void RdpHostPreferences::setPreventSessionLock(bool enabled)
+{
+    m_configGroup.writeEntry("PreventSessionLock", enabled);
 }
 
 RdpHostPreferences::Resolution RdpHostPreferences::resolution() const
