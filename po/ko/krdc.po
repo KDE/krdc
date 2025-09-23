@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdenetwork\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-16 00:41+0000\n"
+"POT-Creation-Date: 2025-09-23 00:42+0000\n"
 "PO-Revision-Date: 2025-06-10 23:15+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -293,12 +293,12 @@ msgstr "암호 기억 (KWallet)"
 msgid "Sessions"
 msgstr "세션"
 
-#: core/remoteview.cpp:562
+#: core/remoteview.cpp:544
 #, kde-format
 msgid "Please enter the SSH password."
 msgstr "SSH 암호를 입력하십시오."
 
-#: core/remoteview.cpp:580
+#: core/remoteview.cpp:562
 #, kde-format
 msgid "SSH Tunnel failure"
 msgstr "SSH 터널 실패"
@@ -1399,7 +1399,7 @@ msgstr "RPC"
 msgid "Domain:"
 msgstr "도메인:"
 
-#: rdp/rdpsession.cpp:869
+#: rdp/rdpsession.cpp:866
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1415,43 +1415,43 @@ msgstr ""
 "발급자: %5\n"
 "지문: %6\n"
 
-#: rdp/rdpview.cpp:205
+#: rdp/rdpview.cpp:202
 #, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
 msgstr "이 시스템에 접근하려면 사용자 이름과 암호가 필요합니다."
 
-#: rdp/rdpview.cpp:238
+#: rdp/rdpview.cpp:235
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr "이 시스템의 충전기를 알 수 없습니다. 계속 진행하시겠습니까?"
 
-#: rdp/rdpview.cpp:239
+#: rdp/rdpview.cpp:236
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
 msgstr "인증서 검증"
 
-#: rdp/rdpview.cpp:244 rdp/rdpview.cpp:269
+#: rdp/rdpview.cpp:241 rdp/rdpview.cpp:266
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
 msgstr "이 인증서 기억"
 
-#: rdp/rdpview.cpp:263
+#: rdp/rdpview.cpp:260
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
 msgstr "시스템 인증서가 변경되었습니다. 계속 진행하시겠습니까?"
 
-#: rdp/rdpview.cpp:264
+#: rdp/rdpview.cpp:261
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
 msgstr "인증서가 변경됨"
 
-#: rdp/rdpview.cpp:267
+#: rdp/rdpview.cpp:264
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1465,13 +1465,13 @@ msgstr ""
 "새 인증서:\n"
 "%2"
 
-#: rdp/rdpview.cpp:299
+#: rdp/rdpview.cpp:296
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Login Failure"
 msgstr "로그인 실패"
 
-#: rdp/rdpview.cpp:300
+#: rdp/rdpview.cpp:297
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1481,13 +1481,13 @@ msgstr ""
 "지정한 자격 증명으로 로그인할 수 없습니다. 사용자 이름과 암호를 다시 확인하십"
 "시오."
 
-#: rdp/rdpview.cpp:309
+#: rdp/rdpview.cpp:306
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Account Problems"
 msgstr "계정 문제"
 
-#: rdp/rdpview.cpp:310
+#: rdp/rdpview.cpp:307
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1497,13 +1497,13 @@ msgstr ""
 "지정한 계정으로 이 시스템에 로그인할 수 없습니다. 시스템 관리자에게 연락하십"
 "시오."
 
-#: rdp/rdpview.cpp:315
+#: rdp/rdpview.cpp:312
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Password Problems"
 msgstr "암호 문제"
 
-#: rdp/rdpview.cpp:316
+#: rdp/rdpview.cpp:313
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1513,73 +1513,73 @@ msgstr ""
 "지정한 암호로 이 시스템에 로그인할 수 없습니다 시스템 관리자에게 연락하여 변"
 "경하십시오."
 
-#: rdp/rdpview.cpp:322
+#: rdp/rdpview.cpp:319
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Lost"
 msgstr "연결 끊김"
 
-#: rdp/rdpview.cpp:323
+#: rdp/rdpview.cpp:320
 #, kde-format
 msgctxt "@label"
 msgid "Lost connection to the server."
 msgstr "서버 연결이 끊어졌습니다."
 
-#: rdp/rdpview.cpp:325
+#: rdp/rdpview.cpp:322
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Could not Connect"
 msgstr "연결할 수 없음"
 
-#: rdp/rdpview.cpp:326
+#: rdp/rdpview.cpp:323
 #, kde-format
 msgctxt "@label"
 msgid "Could not connect to the server."
 msgstr "서버에 연결할 수 없습니다."
 
-#: rdp/rdpview.cpp:331
+#: rdp/rdpview.cpp:328
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Server not Found"
 msgstr "서버를 찾을 수 없음"
 
-#: rdp/rdpview.cpp:332
+#: rdp/rdpview.cpp:329
 #, kde-format
 msgctxt "@label"
 msgid "Could not find the server."
 msgstr "서버를 찾을 수 없습니다."
 
-#: rdp/rdpview.cpp:335
+#: rdp/rdpview.cpp:332
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Refused"
 msgstr "연결 거부됨"
 
-#: rdp/rdpview.cpp:336
+#: rdp/rdpview.cpp:333
 #, kde-format
 msgctxt "@label"
 msgid "The server refused the connection request."
 msgstr "서버에서 연결 요청을 거부했습니다."
 
-#: rdp/rdpview.cpp:346
+#: rdp/rdpview.cpp:343
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Closed"
 msgstr "연결이 닫힘"
 
-#: rdp/rdpview.cpp:351
+#: rdp/rdpview.cpp:348
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Failed"
 msgstr "연결 실패"
 
-#: rdp/rdpview.cpp:352
+#: rdp/rdpview.cpp:349
 #, kde-format
 msgctxt "@label"
 msgid "An unknown error occurred"
 msgstr "알 수 없는 오류가 발생함"
 
-#: rdp/rdpview.cpp:363
+#: rdp/rdpview.cpp:360
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Logon Error"
@@ -1671,7 +1671,7 @@ msgstr "VNC 인증 방식이 지원되지 않습니다."
 msgid "Server not found."
 msgstr "서버를 찾을 수 없습니다."
 
-#: vnc/vncclientthread.cpp:349 vnc/vncclientthread.cpp:427
+#: vnc/vncclientthread.cpp:349 vnc/vncclientthread.cpp:423
 #, kde-format
 msgid "VNC authentication failed."
 msgstr "VNC 인증이 실패했습니다."
@@ -1686,22 +1686,22 @@ msgstr "너무 많은 인증 시도를 해서 VNC 인증이 실패했습니다."
 msgid "VNC server closed connection."
 msgstr "VNC 서버에서 연결을 닫았습니다."
 
-#: vnc/vncclientthread.cpp:366 vnc/vncclientthread.cpp:368
+#: vnc/vncclientthread.cpp:365
 #, kde-format
 msgid "Disconnected: %1."
 msgstr "연결 끊김: %1."
 
-#: vnc/vncclientthread.cpp:574
+#: vnc/vncclientthread.cpp:570
 #, kde-format
 msgid "Reconnecting."
 msgstr "다시 연결 중."
 
-#: vnc/vncclientthread.cpp:642
+#: vnc/vncclientthread.cpp:638
 #, kde-format
 msgid "Reconnected."
 msgstr "다시 연결됨."
 
-#: vnc/vncclientthread.cpp:644
+#: vnc/vncclientthread.cpp:640
 #, kde-format
 msgid "Connected."
 msgstr "연결됨."
@@ -1807,17 +1807,17 @@ msgstr ""
 "KeePassXC와 같은 지원하는 암호 관리자에서는 암호를 복사할 때 \"x-kde-"
 "passwordManagerHint\"라는 추가 MIME 형식을 부여하여 필터링에 사용합니다."
 
-#: vnc/vncview.cpp:288
+#: vnc/vncview.cpp:240
 #, kde-format
 msgid "Access to the system requires a password."
 msgstr "이 시스템에 접근하려면 암호가 필요합니다."
 
-#: vnc/vncview.cpp:288
+#: vnc/vncview.cpp:240
 #, kde-format
 msgid "Authentication failed. Please try again."
 msgstr "인증에 실패했습니다. 다시 시도하십시오."
 
-#: vnc/vncview.cpp:315
+#: vnc/vncview.cpp:266
 #, kde-format
 msgid "VNC failure"
 msgstr "VNC 실패"

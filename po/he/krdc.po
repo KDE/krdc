@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-16 00:41+0000\n"
+"POT-Creation-Date: 2025-09-23 00:42+0000\n"
 "PO-Revision-Date: 2025-09-19 15:19+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -316,12 +316,12 @@ msgstr "לזכור את הסיסמה (KWallet)"
 msgid "Sessions"
 msgstr "הפעלות"
 
-#: core/remoteview.cpp:562
+#: core/remoteview.cpp:544
 #, kde-format
 msgid "Please enter the SSH password."
 msgstr "נא למלא את סיסמת ה־SSH."
 
-#: core/remoteview.cpp:580
+#: core/remoteview.cpp:562
 #, kde-format
 msgid "SSH Tunnel failure"
 msgstr "שגיאת תעלת SSH"
@@ -1421,7 +1421,7 @@ msgstr "RPC"
 msgid "Domain:"
 msgstr "שם תחום:"
 
-#: rdp/rdpsession.cpp:869
+#: rdp/rdpsession.cpp:866
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1437,43 +1437,43 @@ msgstr ""
 "מנפיק: %5\n"
 "טביעת אצבע: %6\n"
 
-#: rdp/rdpview.cpp:205
+#: rdp/rdpview.cpp:202
 #, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
 msgstr "הגישה למערכת דורשת שם משתמש וסיסמה."
 
-#: rdp/rdpview.cpp:238
+#: rdp/rdpview.cpp:235
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr "האישור של המערכת הזה לא מוכר. להמשיך?"
 
-#: rdp/rdpview.cpp:239
+#: rdp/rdpview.cpp:236
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
 msgstr "אימות אישור"
 
-#: rdp/rdpview.cpp:244 rdp/rdpview.cpp:269
+#: rdp/rdpview.cpp:241 rdp/rdpview.cpp:266
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
 msgstr "שמירת האישור הזה"
 
-#: rdp/rdpview.cpp:263
+#: rdp/rdpview.cpp:260
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
 msgstr "אישור המערכת השתנה. להמשיך?"
 
-#: rdp/rdpview.cpp:264
+#: rdp/rdpview.cpp:261
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
 msgstr "האישור השתנה"
 
-#: rdp/rdpview.cpp:267
+#: rdp/rdpview.cpp:264
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1487,13 +1487,13 @@ msgstr ""
 "אישור חדש:\n"
 "%2"
 
-#: rdp/rdpview.cpp:299
+#: rdp/rdpview.cpp:296
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Login Failure"
 msgstr "הכניסה נכשלה"
 
-#: rdp/rdpview.cpp:300
+#: rdp/rdpview.cpp:297
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1502,13 +1502,13 @@ msgid ""
 msgstr ""
 "לא ניתן להיכנס עם פרטי הגישה שסופקו. נא לבדוק שנית את שם המשתמש והסיסמה."
 
-#: rdp/rdpview.cpp:309
+#: rdp/rdpview.cpp:306
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Account Problems"
 msgstr "בעיות חשבון"
 
-#: rdp/rdpview.cpp:310
+#: rdp/rdpview.cpp:307
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1517,13 +1517,13 @@ msgid ""
 msgstr ""
 "החשבון שצוין אינו מורשה להיכנס למכונה הזאת. נא ליצור קשר עם הנהלת המערכת שלך."
 
-#: rdp/rdpview.cpp:315
+#: rdp/rdpview.cpp:312
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Password Problems"
 msgstr "בעיות סיסמה"
 
-#: rdp/rdpview.cpp:316
+#: rdp/rdpview.cpp:313
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1533,73 +1533,73 @@ msgstr ""
 "לא ניתן להיכנס עם הסיסמה שסופקה. נא ליצור קשר עם הנהלת המערכת כדי להחליף "
 "אותה."
 
-#: rdp/rdpview.cpp:322
+#: rdp/rdpview.cpp:319
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Lost"
 msgstr "החיבור נקטע"
 
-#: rdp/rdpview.cpp:323
+#: rdp/rdpview.cpp:320
 #, kde-format
 msgctxt "@label"
 msgid "Lost connection to the server."
 msgstr "החיבור האחרון לשרת."
 
-#: rdp/rdpview.cpp:325
+#: rdp/rdpview.cpp:322
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Could not Connect"
 msgstr "לא ניתן להתחבר"
 
-#: rdp/rdpview.cpp:326
+#: rdp/rdpview.cpp:323
 #, kde-format
 msgctxt "@label"
 msgid "Could not connect to the server."
 msgstr "לא ניתן להתחבר לשרת."
 
-#: rdp/rdpview.cpp:331
+#: rdp/rdpview.cpp:328
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Server not Found"
 msgstr "השרת לא נמצא"
 
-#: rdp/rdpview.cpp:332
+#: rdp/rdpview.cpp:329
 #, kde-format
 msgctxt "@label"
 msgid "Could not find the server."
 msgstr "לא ניתן למצוא את השרת."
 
-#: rdp/rdpview.cpp:335
+#: rdp/rdpview.cpp:332
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Refused"
 msgstr "החיבור סורב"
 
-#: rdp/rdpview.cpp:336
+#: rdp/rdpview.cpp:333
 #, kde-format
 msgctxt "@label"
 msgid "The server refused the connection request."
 msgstr "השרת סירב לבקשת החיבור."
 
-#: rdp/rdpview.cpp:346
+#: rdp/rdpview.cpp:343
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Closed"
 msgstr "החיבור נסגר"
 
-#: rdp/rdpview.cpp:351
+#: rdp/rdpview.cpp:348
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Failed"
 msgstr "החיבור נכשל"
 
-#: rdp/rdpview.cpp:352
+#: rdp/rdpview.cpp:349
 #, kde-format
 msgctxt "@label"
 msgid "An unknown error occurred"
 msgstr "אירעה שגיאה בלתי ידועה"
 
-#: rdp/rdpview.cpp:363
+#: rdp/rdpview.cpp:360
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Logon Error"
@@ -1691,7 +1691,7 @@ msgstr "סוג אימות ה־VNC לא נתמך."
 msgid "Server not found."
 msgstr "השרת לא נמצא."
 
-#: vnc/vncclientthread.cpp:349 vnc/vncclientthread.cpp:427
+#: vnc/vncclientthread.cpp:349 vnc/vncclientthread.cpp:423
 #, kde-format
 msgid "VNC authentication failed."
 msgstr "אימות VNC נכשל."
@@ -1706,22 +1706,22 @@ msgstr "אימות ה־VNC נכשל עקב ריבוי ניסיונות אימו�
 msgid "VNC server closed connection."
 msgstr "שרת ה־VNC סגר את החיבור."
 
-#: vnc/vncclientthread.cpp:366 vnc/vncclientthread.cpp:368
+#: vnc/vncclientthread.cpp:365
 #, kde-format
 msgid "Disconnected: %1."
 msgstr "התנתקת: %1."
 
-#: vnc/vncclientthread.cpp:574
+#: vnc/vncclientthread.cpp:570
 #, kde-format
 msgid "Reconnecting."
 msgstr "התחברות מחדש."
 
-#: vnc/vncclientthread.cpp:642
+#: vnc/vncclientthread.cpp:638
 #, kde-format
 msgid "Reconnected."
 msgstr "התחברת מחדש."
 
-#: vnc/vncclientthread.cpp:644
+#: vnc/vncclientthread.cpp:640
 #, kde-format
 msgid "Connected."
 msgstr "התחברת."
@@ -1828,17 +1828,17 @@ msgstr ""
 "מנהלי סיסמאות נתמכים (כגון KeePassXC) מסמנים סיסמאות שהועתקו בסוג תוכן נוסף "
 "„x-kde-passwordManagerHint” שמשמש לסימון."
 
-#: vnc/vncview.cpp:288
+#: vnc/vncview.cpp:240
 #, kde-format
 msgid "Access to the system requires a password."
 msgstr "הגישה למערכת דורשת סיסמה."
 
-#: vnc/vncview.cpp:288
+#: vnc/vncview.cpp:240
 #, kde-format
 msgid "Authentication failed. Please try again."
 msgstr "האימות נכשל. נא לנסות שוב."
 
-#: vnc/vncview.cpp:315
+#: vnc/vncview.cpp:266
 #, kde-format
 msgid "VNC failure"
 msgstr "כשל ב־VNC"

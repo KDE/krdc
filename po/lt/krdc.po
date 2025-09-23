@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-16 00:41+0000\n"
+"POT-Creation-Date: 2025-09-23 00:42+0000\n"
 "PO-Revision-Date: 2025-09-02 15:05+0300\n"
 "Last-Translator: Liudas Ališauskas <liudas@akmc.lt>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -314,12 +314,12 @@ msgstr "Prisiminti slaptažodį (KWallet)"
 msgid "Sessions"
 msgstr "Seansai"
 
-#: core/remoteview.cpp:562
+#: core/remoteview.cpp:544
 #, kde-format
 msgid "Please enter the SSH password."
 msgstr "Įveskite SSH slaptažodį."
 
-#: core/remoteview.cpp:580
+#: core/remoteview.cpp:562
 #, kde-format
 msgid "SSH Tunnel failure"
 msgstr "SSH tunelio nesėkmė"
@@ -1421,7 +1421,7 @@ msgstr "RPC"
 msgid "Domain:"
 msgstr "Domenas:"
 
-#: rdp/rdpsession.cpp:869
+#: rdp/rdpsession.cpp:866
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1437,44 +1437,44 @@ msgstr ""
 "Išdavė: %5\n"
 "Kontrolinis kodas: %6\n"
 
-#: rdp/rdpview.cpp:205
+#: rdp/rdpview.cpp:202
 #, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
 msgstr ""
 "Prieigai prie šios sistemos reikia nurodyti naudotojo vardą ir slaptažodį."
 
-#: rdp/rdpview.cpp:238
+#: rdp/rdpview.cpp:235
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr "Šios sistemos liudijimas yra nežinomas. Ar norite tęsti?"
 
-#: rdp/rdpview.cpp:239
+#: rdp/rdpview.cpp:236
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
 msgstr "Patvirtinti liudijimą"
 
-#: rdp/rdpview.cpp:244 rdp/rdpview.cpp:269
+#: rdp/rdpview.cpp:241 rdp/rdpview.cpp:266
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
 msgstr "Prisiminti šį liudijimą"
 
-#: rdp/rdpview.cpp:263
+#: rdp/rdpview.cpp:260
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
 msgstr "Šios sistemos liudijimas pasikeitė. Ar norite tęsti?"
 
-#: rdp/rdpview.cpp:264
+#: rdp/rdpview.cpp:261
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
 msgstr "Liudijimas pasikeitė"
 
-#: rdp/rdpview.cpp:267
+#: rdp/rdpview.cpp:264
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1488,13 +1488,13 @@ msgstr ""
 "Naujas liudijimas:\n"
 "%2"
 
-#: rdp/rdpview.cpp:299
+#: rdp/rdpview.cpp:296
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Login Failure"
 msgstr "Prisijungimo nesėkmė"
 
-#: rdp/rdpview.cpp:300
+#: rdp/rdpview.cpp:297
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1504,13 +1504,13 @@ msgstr ""
 "Nepavyko prisijungti naudojant pateiktus prisijungimo duomenis. Dar kartą "
 "patikrinkite naudotoją ir slaptažodį."
 
-#: rdp/rdpview.cpp:309
+#: rdp/rdpview.cpp:306
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Account Problems"
 msgstr "Problemos su paskyra"
 
-#: rdp/rdpview.cpp:310
+#: rdp/rdpview.cpp:307
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1520,13 +1520,13 @@ msgstr ""
 "Pateiktai paskyrai neleidžiama prisijungti prie šio kompiuterio. Susisiekite "
 "su sistemos administratoriumi."
 
-#: rdp/rdpview.cpp:315
+#: rdp/rdpview.cpp:312
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Password Problems"
 msgstr "Problemos su slaptažodžiu"
 
-#: rdp/rdpview.cpp:316
+#: rdp/rdpview.cpp:313
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1536,73 +1536,73 @@ msgstr ""
 "Nepavyko prisijungti naudojant pateiktą slaptažodį. Susisiekite su sistemos "
 "administratoriumi, kad jį pakeistų."
 
-#: rdp/rdpview.cpp:322
+#: rdp/rdpview.cpp:319
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Lost"
 msgstr "Ryšys nutrūko"
 
-#: rdp/rdpview.cpp:323
+#: rdp/rdpview.cpp:320
 #, kde-format
 msgctxt "@label"
 msgid "Lost connection to the server."
 msgstr "Nutrūko ryšys su serveriu."
 
-#: rdp/rdpview.cpp:325
+#: rdp/rdpview.cpp:322
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Could not Connect"
 msgstr "Nepavyko prisijungti"
 
-#: rdp/rdpview.cpp:326
+#: rdp/rdpview.cpp:323
 #, kde-format
 msgctxt "@label"
 msgid "Could not connect to the server."
 msgstr "Nepavyko prisijungti prie serverio."
 
-#: rdp/rdpview.cpp:331
+#: rdp/rdpview.cpp:328
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Server not Found"
 msgstr "Serveris nerastas"
 
-#: rdp/rdpview.cpp:332
+#: rdp/rdpview.cpp:329
 #, kde-format
 msgctxt "@label"
 msgid "Could not find the server."
 msgstr "Nepavyko rasti serverio."
 
-#: rdp/rdpview.cpp:335
+#: rdp/rdpview.cpp:332
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Refused"
 msgstr "Ryšys atmestas"
 
-#: rdp/rdpview.cpp:336
+#: rdp/rdpview.cpp:333
 #, kde-format
 msgctxt "@label"
 msgid "The server refused the connection request."
 msgstr "Serveris atsisakė priimti užklausą užmegzti ryšį."
 
-#: rdp/rdpview.cpp:346
+#: rdp/rdpview.cpp:343
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Closed"
 msgstr "Ryšys nutrauktas"
 
-#: rdp/rdpview.cpp:351
+#: rdp/rdpview.cpp:348
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Failed"
 msgstr "Ryšys patyrė nesėkmę"
 
-#: rdp/rdpview.cpp:352
+#: rdp/rdpview.cpp:349
 #, kde-format
 msgctxt "@label"
 msgid "An unknown error occurred"
 msgstr "Įvyko nežinoma klaida"
 
-#: rdp/rdpview.cpp:363
+#: rdp/rdpview.cpp:360
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Logon Error"
@@ -1694,7 +1694,7 @@ msgstr "VNC tapatybės nustatymo tipas yra nepalaikomas."
 msgid "Server not found."
 msgstr "Serveris nerastas."
 
-#: vnc/vncclientthread.cpp:349 vnc/vncclientthread.cpp:427
+#: vnc/vncclientthread.cpp:349 vnc/vncclientthread.cpp:423
 #, kde-format
 msgid "VNC authentication failed."
 msgstr "VNC tapatybės nustatymas patyrė nesėkmę."
@@ -1711,22 +1711,22 @@ msgstr ""
 msgid "VNC server closed connection."
 msgstr "VNC serveris nutraukė ryšį."
 
-#: vnc/vncclientthread.cpp:366 vnc/vncclientthread.cpp:368
+#: vnc/vncclientthread.cpp:365
 #, kde-format
 msgid "Disconnected: %1."
 msgstr "Atsijungta: %1."
 
-#: vnc/vncclientthread.cpp:574
+#: vnc/vncclientthread.cpp:570
 #, kde-format
 msgid "Reconnecting."
 msgstr "Jungiamasi iš naujo."
 
-#: vnc/vncclientthread.cpp:642
+#: vnc/vncclientthread.cpp:638
 #, kde-format
 msgid "Reconnected."
 msgstr "Prisijungta iš naujo."
 
-#: vnc/vncclientthread.cpp:644
+#: vnc/vncclientthread.cpp:640
 #, kde-format
 msgid "Connected."
 msgstr "Prisijungta."
@@ -1837,17 +1837,17 @@ msgstr ""
 "nukopijuotus slaptažodžius papildomu MIME tipu „x-kde-passwordManagerHint“, "
 "kuris yra naudojamas filtravimui."
 
-#: vnc/vncview.cpp:288
+#: vnc/vncview.cpp:240
 #, kde-format
 msgid "Access to the system requires a password."
 msgstr "Prieigai prie kompiuterio reikia nurodyti slaptažodį."
 
-#: vnc/vncview.cpp:288
+#: vnc/vncview.cpp:240
 #, kde-format
 msgid "Authentication failed. Please try again."
 msgstr "Tapatybės nustatymas patyrė nesėkmę. Bandykite dar kartą."
 
-#: vnc/vncview.cpp:315
+#: vnc/vncview.cpp:266
 #, kde-format
 msgid "VNC failure"
 msgstr "VNC nesėkmė"

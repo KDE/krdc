@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-16 00:41+0000\n"
+"POT-Creation-Date: 2025-09-23 00:42+0000\n"
 "PO-Revision-Date: 2025-06-10 08:33+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -303,12 +303,12 @@ msgstr "Ricorda la password (KWallet)"
 msgid "Sessions"
 msgstr "Sessioni"
 
-#: core/remoteview.cpp:562
+#: core/remoteview.cpp:544
 #, kde-format
 msgid "Please enter the SSH password."
 msgstr "Digita la tua password SSH."
 
-#: core/remoteview.cpp:580
+#: core/remoteview.cpp:562
 #, kde-format
 msgid "SSH Tunnel failure"
 msgstr "Tunnel SSH non riuscito"
@@ -1415,7 +1415,7 @@ msgstr "RPC"
 msgid "Domain:"
 msgstr "Dominio:"
 
-#: rdp/rdpsession.cpp:869
+#: rdp/rdpsession.cpp:866
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1431,43 +1431,43 @@ msgstr ""
 "Emittente: %5\n"
 "Impronta digitale: %6\n"
 
-#: rdp/rdpview.cpp:205
+#: rdp/rdpview.cpp:202
 #, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
 msgstr "L'accesso a questo sistema richiede un nome utente e una password."
 
-#: rdp/rdpview.cpp:238
+#: rdp/rdpview.cpp:235
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr "Il certificato per questo sistema è sconosciuto. Vuoi continuare?"
 
-#: rdp/rdpview.cpp:239
+#: rdp/rdpview.cpp:236
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
 msgstr "Verifica certificato"
 
-#: rdp/rdpview.cpp:244 rdp/rdpview.cpp:269
+#: rdp/rdpview.cpp:241 rdp/rdpview.cpp:266
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
 msgstr "Ricorda questo certificato"
 
-#: rdp/rdpview.cpp:263
+#: rdp/rdpview.cpp:260
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
 msgstr "Il certificato per questo sistema è cambiato. Vuoi continuare?"
 
-#: rdp/rdpview.cpp:264
+#: rdp/rdpview.cpp:261
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
 msgstr "Il certificato è cambiato"
 
-#: rdp/rdpview.cpp:267
+#: rdp/rdpview.cpp:264
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1481,13 +1481,13 @@ msgstr ""
 "Nuovo certificato:\n"
 "%2"
 
-#: rdp/rdpview.cpp:299
+#: rdp/rdpview.cpp:296
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Login Failure"
 msgstr "Accesso non riuscito"
 
-#: rdp/rdpview.cpp:300
+#: rdp/rdpview.cpp:297
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1497,13 +1497,13 @@ msgstr ""
 "Impossibile accedere con le credenziali fornite. Ricontrolla l'utente e la "
 "password."
 
-#: rdp/rdpview.cpp:309
+#: rdp/rdpview.cpp:306
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Account Problems"
 msgstr "Problemi di account"
 
-#: rdp/rdpview.cpp:310
+#: rdp/rdpview.cpp:307
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1513,13 +1513,13 @@ msgstr ""
 "L'account fornito non è autorizzato ad accedere a questa macchina. Contatta "
 "l'amministratore di sistema."
 
-#: rdp/rdpview.cpp:315
+#: rdp/rdpview.cpp:312
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Password Problems"
 msgstr "Problemi di password"
 
-#: rdp/rdpview.cpp:316
+#: rdp/rdpview.cpp:313
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1529,73 +1529,73 @@ msgstr ""
 "Impossibile accedere con la password fornita. Contatta l'amministratore di "
 "sistema per modificarlo."
 
-#: rdp/rdpview.cpp:322
+#: rdp/rdpview.cpp:319
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Lost"
 msgstr "Connessione persa"
 
-#: rdp/rdpview.cpp:323
+#: rdp/rdpview.cpp:320
 #, kde-format
 msgctxt "@label"
 msgid "Lost connection to the server."
 msgstr "Connessione al server persa"
 
-#: rdp/rdpview.cpp:325
+#: rdp/rdpview.cpp:322
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Could not Connect"
 msgstr "Impossibile connettersi"
 
-#: rdp/rdpview.cpp:326
+#: rdp/rdpview.cpp:323
 #, kde-format
 msgctxt "@label"
 msgid "Could not connect to the server."
 msgstr "Impossibile connettersi al server."
 
-#: rdp/rdpview.cpp:331
+#: rdp/rdpview.cpp:328
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Server not Found"
 msgstr "Server non trovato"
 
-#: rdp/rdpview.cpp:332
+#: rdp/rdpview.cpp:329
 #, kde-format
 msgctxt "@label"
 msgid "Could not find the server."
 msgstr "Impossibile trovare il server."
 
-#: rdp/rdpview.cpp:335
+#: rdp/rdpview.cpp:332
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Refused"
 msgstr "Connessione rifiutata"
 
-#: rdp/rdpview.cpp:336
+#: rdp/rdpview.cpp:333
 #, kde-format
 msgctxt "@label"
 msgid "The server refused the connection request."
 msgstr "Il server ha rifiutato la richiesta di connessione."
 
-#: rdp/rdpview.cpp:346
+#: rdp/rdpview.cpp:343
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Closed"
 msgstr "Connessione chiusa"
 
-#: rdp/rdpview.cpp:351
+#: rdp/rdpview.cpp:348
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Failed"
 msgstr "Connessione non riuscita"
 
-#: rdp/rdpview.cpp:352
+#: rdp/rdpview.cpp:349
 #, kde-format
 msgctxt "@label"
 msgid "An unknown error occurred"
 msgstr "Si è verificato un errore sconosciuto"
 
-#: rdp/rdpview.cpp:363
+#: rdp/rdpview.cpp:360
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Logon Error"
@@ -1687,7 +1687,7 @@ msgstr "Tipo di autenticazione VNC non gestito."
 msgid "Server not found."
 msgstr "Server non trovato."
 
-#: vnc/vncclientthread.cpp:349 vnc/vncclientthread.cpp:427
+#: vnc/vncclientthread.cpp:349 vnc/vncclientthread.cpp:423
 #, kde-format
 msgid "VNC authentication failed."
 msgstr "Autenticazione VNC non riuscita."
@@ -1702,22 +1702,22 @@ msgstr "Autenticazione VNC non riuscita: troppi tentativi di autenticazione."
 msgid "VNC server closed connection."
 msgstr "Il server VNC ha chiuso la connessione."
 
-#: vnc/vncclientthread.cpp:366 vnc/vncclientthread.cpp:368
+#: vnc/vncclientthread.cpp:365
 #, kde-format
 msgid "Disconnected: %1."
 msgstr "Disconnesso: %1."
 
-#: vnc/vncclientthread.cpp:574
+#: vnc/vncclientthread.cpp:570
 #, kde-format
 msgid "Reconnecting."
 msgstr "Riconnessione."
 
-#: vnc/vncclientthread.cpp:642
+#: vnc/vncclientthread.cpp:638
 #, kde-format
 msgid "Reconnected."
 msgstr "Riconnesso."
 
-#: vnc/vncclientthread.cpp:644
+#: vnc/vncclientthread.cpp:640
 #, kde-format
 msgid "Connected."
 msgstr "Connesso."
@@ -1827,17 +1827,17 @@ msgstr ""
 "copiate con un tipo MIME aggiuntivo «x-kde-passwordManagerHint» utilizzato "
 "per il filtraggio."
 
-#: vnc/vncview.cpp:288
+#: vnc/vncview.cpp:240
 #, kde-format
 msgid "Access to the system requires a password."
 msgstr "L'accesso al sistema richiede una password."
 
-#: vnc/vncview.cpp:288
+#: vnc/vncview.cpp:240
 #, kde-format
 msgid "Authentication failed. Please try again."
 msgstr "Autenticazione non riuscita. Riprova."
 
-#: vnc/vncview.cpp:315
+#: vnc/vncview.cpp:266
 #, kde-format
 msgid "VNC failure"
 msgstr "Errore di VNC"

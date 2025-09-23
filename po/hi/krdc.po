@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-16 00:41+0000\n"
+"POT-Creation-Date: 2025-09-23 00:42+0000\n"
 "PO-Revision-Date: 2021-08-21 16:16+0530\n"
 "Last-Translator: Raghavendra Kamath <raghu@raghukamath.com>\n"
 "Language-Team: kde-hindi\n"
@@ -306,12 +306,12 @@ msgstr "पासवर्ड याद रखें (केवॉलेट)"
 msgid "Sessions"
 msgstr "सत्र"
 
-#: core/remoteview.cpp:562
+#: core/remoteview.cpp:544
 #, kde-format
 msgid "Please enter the SSH password."
 msgstr ""
 
-#: core/remoteview.cpp:580
+#: core/remoteview.cpp:562
 #, kde-format
 msgid "SSH Tunnel failure"
 msgstr ""
@@ -1455,7 +1455,7 @@ msgstr "आरडीपी"
 msgid "Domain:"
 msgstr ""
 
-#: rdp/rdpsession.cpp:869
+#: rdp/rdpsession.cpp:866
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1466,44 +1466,44 @@ msgid ""
 "Fingerprint: %6\n"
 msgstr ""
 
-#: rdp/rdpview.cpp:205
+#: rdp/rdpview.cpp:202
 #, fuzzy, kde-format
 #| msgid "Access to the system requires a password."
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
 msgstr "तंत्र पर पहुँच के लिए पासवर्ड की आवश्यकता है."
 
-#: rdp/rdpview.cpp:238
+#: rdp/rdpview.cpp:235
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr ""
 
-#: rdp/rdpview.cpp:239
+#: rdp/rdpview.cpp:236
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
 msgstr ""
 
-#: rdp/rdpview.cpp:244 rdp/rdpview.cpp:269
+#: rdp/rdpview.cpp:241 rdp/rdpview.cpp:266
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
 msgstr ""
 
-#: rdp/rdpview.cpp:263
+#: rdp/rdpview.cpp:260
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
 msgstr ""
 
-#: rdp/rdpview.cpp:264
+#: rdp/rdpview.cpp:261
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
 msgstr ""
 
-#: rdp/rdpview.cpp:267
+#: rdp/rdpview.cpp:264
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1513,14 +1513,14 @@ msgid ""
 "%2"
 msgstr ""
 
-#: rdp/rdpview.cpp:299
+#: rdp/rdpview.cpp:296
 #, fuzzy, kde-format
 #| msgid "Connection Failure"
 msgctxt "@title:dialog"
 msgid "Login Failure"
 msgstr "कनेक्शन असफल"
 
-#: rdp/rdpview.cpp:300
+#: rdp/rdpview.cpp:297
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1528,13 +1528,13 @@ msgid ""
 "and password."
 msgstr ""
 
-#: rdp/rdpview.cpp:309
+#: rdp/rdpview.cpp:306
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Account Problems"
 msgstr ""
 
-#: rdp/rdpview.cpp:310
+#: rdp/rdpview.cpp:307
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1542,13 +1542,13 @@ msgid ""
 "contact your system administrator."
 msgstr ""
 
-#: rdp/rdpview.cpp:315
+#: rdp/rdpview.cpp:312
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Password Problems"
 msgstr ""
 
-#: rdp/rdpview.cpp:316
+#: rdp/rdpview.cpp:313
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1556,80 +1556,80 @@ msgid ""
 "administrator to change it."
 msgstr ""
 
-#: rdp/rdpview.cpp:322
+#: rdp/rdpview.cpp:319
 #, fuzzy, kde-format
 #| msgid "Connection"
 msgctxt "@title:dialog"
 msgid "Connection Lost"
 msgstr "कनेक्शन"
 
-#: rdp/rdpview.cpp:323
+#: rdp/rdpview.cpp:320
 #, kde-format
 msgctxt "@label"
 msgid "Lost connection to the server."
 msgstr ""
 
-#: rdp/rdpview.cpp:325
+#: rdp/rdpview.cpp:322
 #, fuzzy, kde-format
 #| msgid "KDE remote desktop connection"
 msgctxt "@title:dialog"
 msgid "Could not Connect"
 msgstr "केडीई रिमोट डेस्कटॉप कनेक्शन"
 
-#: rdp/rdpview.cpp:326
+#: rdp/rdpview.cpp:323
 #, kde-format
 msgctxt "@label"
 msgid "Could not connect to the server."
 msgstr ""
 
-#: rdp/rdpview.cpp:331
+#: rdp/rdpview.cpp:328
 #, fuzzy, kde-format
 #| msgid "Server not found."
 msgctxt "@title:dialog"
 msgid "Server not Found"
 msgstr "सर्वर नहीं मिला."
 
-#: rdp/rdpview.cpp:332
+#: rdp/rdpview.cpp:329
 #, kde-format
 msgctxt "@label"
 msgid "Could not find the server."
 msgstr ""
 
-#: rdp/rdpview.cpp:335
+#: rdp/rdpview.cpp:332
 #, fuzzy, kde-format
 #| msgid "Connection Failure"
 msgctxt "@title:dialog"
 msgid "Connection Refused"
 msgstr "कनेक्शन असफल"
 
-#: rdp/rdpview.cpp:336
+#: rdp/rdpview.cpp:333
 #, fuzzy, kde-format
 #| msgid "VNC server closed connection."
 msgctxt "@label"
 msgid "The server refused the connection request."
 msgstr "वीएनसी सर्वर ने कनेक्शन बन्द किया."
 
-#: rdp/rdpview.cpp:346
+#: rdp/rdpview.cpp:343
 #, fuzzy, kde-format
 #| msgid "Connection Failure"
 msgctxt "@title:dialog"
 msgid "Connection Closed"
 msgstr "कनेक्शन असफल"
 
-#: rdp/rdpview.cpp:351
+#: rdp/rdpview.cpp:348
 #, fuzzy, kde-format
 #| msgid "Connection Failure"
 msgctxt "@title:dialog"
 msgid "Connection Failed"
 msgstr "कनेक्शन असफल"
 
-#: rdp/rdpview.cpp:352
+#: rdp/rdpview.cpp:349
 #, kde-format
 msgctxt "@label"
 msgid "An unknown error occurred"
 msgstr ""
 
-#: rdp/rdpview.cpp:363
+#: rdp/rdpview.cpp:360
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Logon Error"
@@ -1729,7 +1729,7 @@ msgstr "वीएनसी प्रमाणीकरण असफल."
 msgid "Server not found."
 msgstr "सर्वर नहीं मिला."
 
-#: vnc/vncclientthread.cpp:349 vnc/vncclientthread.cpp:427
+#: vnc/vncclientthread.cpp:349 vnc/vncclientthread.cpp:423
 #, kde-format
 msgid "VNC authentication failed."
 msgstr "वीएनसी प्रमाणीकरण असफल."
@@ -1744,25 +1744,25 @@ msgstr "वीएनसी प्रमाणीकरण असफल चूं
 msgid "VNC server closed connection."
 msgstr "वीएनसी सर्वर ने कनेक्शन बन्द किया."
 
-#: vnc/vncclientthread.cpp:366 vnc/vncclientthread.cpp:368
+#: vnc/vncclientthread.cpp:365
 #, fuzzy, kde-format
 #| msgid "Connection"
 msgid "Disconnected: %1."
 msgstr "कनेक्शन"
 
-#: vnc/vncclientthread.cpp:574
+#: vnc/vncclientthread.cpp:570
 #, fuzzy, kde-format
 #| msgid "Connection"
 msgid "Reconnecting."
 msgstr "कनेक्शन"
 
-#: vnc/vncclientthread.cpp:642
+#: vnc/vncclientthread.cpp:638
 #, fuzzy, kde-format
 #| msgid "Connection"
 msgid "Reconnected."
 msgstr "कनेक्शन"
 
-#: vnc/vncclientthread.cpp:644
+#: vnc/vncclientthread.cpp:640
 #, fuzzy, kde-format
 #| msgid "Connection"
 msgid "Connected."
@@ -1863,17 +1863,17 @@ msgid ""
 "filtering."
 msgstr ""
 
-#: vnc/vncview.cpp:288
+#: vnc/vncview.cpp:240
 #, kde-format
 msgid "Access to the system requires a password."
 msgstr "तंत्र पर पहुँच के लिए पासवर्ड की आवश्यकता है."
 
-#: vnc/vncview.cpp:288
+#: vnc/vncview.cpp:240
 #, kde-format
 msgid "Authentication failed. Please try again."
 msgstr "प्रमाणीकरण असफल. कृपया फिर से कोशिश करें."
 
-#: vnc/vncview.cpp:315
+#: vnc/vncview.cpp:266
 #, kde-format
 msgid "VNC failure"
 msgstr "वीएनसी असफल"
