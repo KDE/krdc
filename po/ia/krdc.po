@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-23 00:42+0000\n"
+"POT-Creation-Date: 2025-09-24 00:43+0000\n"
 "PO-Revision-Date: 2025-05-30 18:41+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -922,7 +922,7 @@ msgstr "Factor de scala de scriptorio:"
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DeviceScaleFactor)
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_GatewayTransportType)
 #: rdp/rdppreferences.ui:295 rdp/rdppreferences.ui:363
-#: rdp/rdppreferences.ui:960
+#: rdp/rdppreferences.ui:977
 #, kde-format
 msgid "Auto"
 msgstr "Auto"
@@ -1250,168 +1250,181 @@ msgstr "Typo de session alternate:"
 msgid "Admin (or console) session"
 msgstr "Session de Admin (o consolle)"
 
+#. i18n: ectx: property (text), widget (QLabel, preventSessionLockLabel)
+#: rdp/rdppreferences.ui:706
+#, fuzzy, kde-format
+#| msgid "Session ID"
+msgid "Session lock:"
+msgstr "ID de Session"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_PreventSessionLock)
+#: rdp/rdppreferences.ui:716
+#, kde-format
+msgid "Prevent remote session lock"
+msgstr ""
+
 #. i18n: ectx: attribute (title), widget (QWidget, securitySettingsTab)
-#: rdp/rdppreferences.ui:707
+#: rdp/rdppreferences.ui:724
 #, kde-format
 msgid "Security"
 msgstr "Securitate"
 
 #. i18n: ectx: property (text), widget (QLabel, gSecurityLabel)
-#: rdp/rdppreferences.ui:715
+#: rdp/rdppreferences.ui:732
 #, kde-format
 msgid "Security:"
 msgstr "Securitate:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityNLA)
-#: rdp/rdppreferences.ui:727
+#: rdp/rdppreferences.ui:744
 #, kde-format
 msgid "NLA"
 msgstr "NLA"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityTLS)
-#: rdp/rdppreferences.ui:734
+#: rdp/rdppreferences.ui:751
 #, kde-format
 msgid "TLS"
 msgstr "TLS"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityRDP)
-#: rdp/rdppreferences.ui:741
+#: rdp/rdppreferences.ui:758
 #, kde-format
 msgid "RDP"
 msgstr "RDP"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityEXT)
-#: rdp/rdppreferences.ui:748
+#: rdp/rdppreferences.ui:765
 #, kde-format
 msgid "Ext"
 msgstr "Ext"
 
 #. i18n: ectx: property (text), widget (QLabel, TlsSecLevelLabel)
-#: rdp/rdppreferences.ui:757
+#: rdp/rdppreferences.ui:774
 #, kde-format
 msgid "TLS security level:"
 msgstr "Nivello de securitate de TLS:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
-#: rdp/rdppreferences.ui:783
+#: rdp/rdppreferences.ui:800
 #, kde-format
 msgid "any"
 msgstr "ulle"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
-#: rdp/rdppreferences.ui:788
+#: rdp/rdppreferences.ui:805
 #, kde-format
 msgid "80 bit"
 msgstr "80 bit"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
-#: rdp/rdppreferences.ui:793
+#: rdp/rdppreferences.ui:810
 #, kde-format
 msgid "112 bit"
 msgstr "112 bit"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
-#: rdp/rdppreferences.ui:798
+#: rdp/rdppreferences.ui:815
 #, kde-format
 msgid "128 bit"
 msgstr "128 bit"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
-#: rdp/rdppreferences.ui:803
+#: rdp/rdppreferences.ui:820
 #, kde-format
 msgid "192 bit"
 msgstr "192 bit"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
-#: rdp/rdppreferences.ui:808
+#: rdp/rdppreferences.ui:825
 #, kde-format
 msgid "256 bit"
 msgstr "256 bit"
 
 #. i18n: ectx: property (text), widget (QLabel, authPkgListLabel)
-#: rdp/rdppreferences.ui:816
+#: rdp/rdppreferences.ui:833
 #, kde-format
 msgid "Authentication Package List:"
 msgstr "Lista de pacchetto de Authentication:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, proxySettingsTab)
-#: rdp/rdppreferences.ui:832
+#: rdp/rdppreferences.ui:849
 #, kde-format
 msgid "Proxy"
 msgstr "Proxy"
 
 #. i18n: ectx: property (text), widget (QLabel, protocolLabel)
-#: rdp/rdppreferences.ui:840
+#: rdp/rdppreferences.ui:857
 #, kde-format
 msgid "Protocol:"
 msgstr "Protocollo:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ProxyProtocol)
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_GatewayTransportType)
-#: rdp/rdppreferences.ui:854 rdp/rdppreferences.ui:965
+#: rdp/rdppreferences.ui:871 rdp/rdppreferences.ui:982
 #, kde-format
 msgid "HTTP"
 msgstr "HTTP"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ProxyProtocol)
-#: rdp/rdppreferences.ui:859
+#: rdp/rdppreferences.ui:876
 #, kde-format
 msgid "SOCKS"
 msgstr "Socks"
 
 #. i18n: ectx: property (text), widget (QLabel, pPasswordLabel)
 #. i18n: ectx: property (text), widget (QLabel, gPasswordLabel)
-#: rdp/rdppreferences.ui:870 rdp/rdppreferences.ui:926
+#: rdp/rdppreferences.ui:887 rdp/rdppreferences.ui:943
 #, kde-format
 msgid "Password:"
 msgstr "Contrasigno:"
 
 #. i18n: ectx: property (text), widget (QLabel, pUsernameLabel)
 #. i18n: ectx: property (text), widget (QLabel, gUsernameLabel)
-#: rdp/rdppreferences.ui:880 rdp/rdppreferences.ui:919
+#: rdp/rdppreferences.ui:897 rdp/rdppreferences.ui:936
 #, kde-format
 msgid "Username:"
 msgstr "Nomine de usator:"
 
 #. i18n: ectx: property (text), widget (QLabel, pHostLabel)
 #. i18n: ectx: property (text), widget (QLabel, gServerLabel)
-#: rdp/rdppreferences.ui:887 rdp/rdppreferences.ui:912
+#: rdp/rdppreferences.ui:904 rdp/rdppreferences.ui:929
 #, kde-format
 msgid "Server:"
 msgstr "Servitor:"
 
 #. i18n: ectx: property (placeholderText), widget (KLineEdit, kcfg_ProxyHost)
 #. i18n: ectx: property (placeholderText), widget (KLineEdit, kcfg_GatewayServer)
-#: rdp/rdppreferences.ui:894 rdp/rdppreferences.ui:933
+#: rdp/rdppreferences.ui:911 rdp/rdppreferences.ui:950
 #, kde-format
 msgid "host:port"
 msgstr "host:port"
 
 #. i18n: ectx: attribute (title), widget (QWidget, gatewaySettingsTab)
-#: rdp/rdppreferences.ui:904
+#: rdp/rdppreferences.ui:921
 #, kde-format
 msgid "Gateway"
 msgstr "Gateway"
 
 #. i18n: ectx: property (text), widget (QLabel, gTransportTypeLabel)
-#: rdp/rdppreferences.ui:946
+#: rdp/rdppreferences.ui:963
 #, kde-format
 msgid "Transport type:"
 msgstr "Typo de transporto:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_GatewayTransportType)
-#: rdp/rdppreferences.ui:970
+#: rdp/rdppreferences.ui:987
 #, kde-format
 msgid "RPC"
 msgstr "RPC"
 
 #. i18n: ectx: property (text), widget (QLabel, gDomainLabel)
-#: rdp/rdppreferences.ui:978
+#: rdp/rdppreferences.ui:995
 #, kde-format
 msgid "Domain:"
 msgstr "Dominio:"
 
-#: rdp/rdpsession.cpp:866
+#: rdp/rdpsession.cpp:869
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -2090,9 +2103,6 @@ msgstr ""
 
 #~ msgid "Type"
 #~ msgstr "Typo"
-
-#~ msgid "Session ID"
-#~ msgstr "ID de Session"
 
 #~ msgid "Colour Depth"
 #~ msgstr "Profunditate de color"
