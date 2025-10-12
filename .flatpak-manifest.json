@@ -1,14 +1,32 @@
 {
     "id": "org.kde.krdc",
-    "branch": "master",
     "runtime": "org.kde.Platform",
     "runtime-version": "6.9",
     "sdk": "org.kde.Sdk",
     "command": "krdc",
+    "rename-icon": "krdc",
+    "branch": "master",
     "tags": ["nightly"],
     "desktop-file-name-suffix": " (Nightly)",
-    "finish-args": ["--share=ipc", "--socket=fallback-x11", "--socket=wayland", "--share=network" ],
-
+    "cleanup": [
+        "/include",
+        "/lib/pkgconfig",
+        "/lib/*.a",
+        "/lib/*.la",
+        "/share/man"
+    ],
+    "finish-args": [
+        "--share=ipc",
+        "--socket=fallback-x11",
+        "--socket=wayland",
+        "--share=network",
+        "--device=dri",
+        "--socket=pulseaudio",
+        "--talk-name=org.kde.kwalletd5",
+        "--talk-name=org.kde.kwalletd6",
+        "--talk-name=org.kde.StatusNotifierWatcher",
+        "--env=OPENSSL_CONF=/app/share/legacy-openssl.cnf"
+    ],
     "add-extensions": {
         "org.freedesktop.Platform.ffmpeg-full": {
             "directory": "lib/ffmpeg",
@@ -17,28 +35,108 @@
             "autodownload": true
         }
     },
-
+    "cleanup-commands": [
+        "mkdir -p ${FLATPAK_DEST}/lib/ffmpeg"
+    ],
     "modules": [
         {
-            "name": "icon",
-            "buildsystem": "simple",
-            "build-commands": [
-                "mkdir -p /app/share/icons/hicolor/32x32/apps/",
-                "install -D /usr/share/icons/breeze/apps/48/krdc.svg /app/share/icons/hicolor/32x32/apps/"
+            "name": "libusb",
+            "config-opts": [
+                "--disable-static"
+            ],
+            "cleanup": [
+                "/lib/*.la",
+                "/lib/pkgconfig",
+                "/include"
+            ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://github.com/libusb/libusb/releases/download/v1.0.29/libusb-1.0.29.tar.bz2",
+                    "sha256": "5977fc950f8d1395ccea9bd48c06b3f808fd3c2c961b44b0c2e6e29fc3a70a85",
+                    "x-checker-data": {
+                        "type": "anitya",
+                        "project-id": 1749,
+                        "stable-only": true,
+                        "url-template": "https://github.com/libusb/libusb/releases/download/v$version/libusb-$version.tar.bz2"
+                    }
+                }
+            ],
+            "post-install": [
+                "install -Dm644 COPYING ${FLATPAK_DEST}/share/licenses/libusb/COPYING"
+            ]
+        },
+        {
+            "name": "libusb",
+            "config-opts": [ "--disable-static" ],
+            "cleanup": [
+                "/lib/*.la",
+                "/lib/pkgconfig",
+                "/include"
+            ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://github.com/libusb/libusb/releases/download/v1.0.26/libusb-1.0.26.tar.bz2",
+                    "sha256": "12ce7a61fc9854d1d2a1ffe095f7b5fac19ddba095c259e6067a46500381b5a5"
+                }
+            ],
+            "post-install": [
+                "install -Dm644 COPYING ${FLATPAK_DEST}/share/licenses/libusb/COPYING"
+            ]
+        },
+        {
+            "name": "libssh",
+            "buildsystem": "cmake-ninja",
+            "builddir": true,
+            "config-opts": [
+                "-DWITH_DEBUG_CALLTRACE:BOOL=OFF",
+                "-DWITH_EXAMPLES:BOOL=OFF",
+                "-DWITH_SERVER:BOOL=OFF"
+            ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://www.libssh.org/files/0.11/libssh-0.11.3.tar.xz",
+                    "sha256": "7d8a1361bb094ec3f511964e78a5a4dba689b5986e112afabe4f4d0d6c6125c3",
+                    "x-checker-data": {
+                        "type": "anitya",
+                        "project-id": 1729,
+                        "stable-only": true,
+                        "url-template": "https://www.libssh.org/files/$major.$minor/libssh-$version.tar.xz"
+                    }
+                }
             ]
         },
         {
             "name": "libvncserver",
             "buildsystem": "cmake-ninja",
+            "builddir": true,
+            "config-opts": [
+                "-DWITH_EXAMPLES:BOOL=OFF",
+                "-DWITH_GTK:BOOL=OFF",
+                "-DWITH_SDL:BOOL=OFF",
+                "-DWITH_SYSTEMD:BOOL=OFF",
+                "-DWITH_TESTS:BOOL=OFF"
+            ],
             "sources": [
-                { "type": "archive", "url": "https://github.com/LibVNC/libvncserver/archive/refs/tags/LibVNCServer-0.9.14.tar.gz", "sha256": "83104e4f7e28b02f8bf6b010d69b626fae591f887e949816305daebae527c9a5" }
+                {
+                    "type": "archive",
+                    "url": "https://github.com/LibVNC/libvncserver/archive/LibVNCServer-0.9.15.tar.gz",
+                    "sha256": "62352c7795e231dfce044beb96156065a05a05c974e5de9e023d688d8ff675d7",
+                    "x-checker-data": {
+                        "type": "anitya",
+                        "project-id": 1756,
+                        "stable-only": true,
+                        "url-template": "https://github.com/LibVNC/libvncserver/archive/LibVNCServer-$version.tar.gz"
+                    }
+                }
             ]
         },
-         {
+        {
             "name": "freerdp",
             "buildsystem": "cmake-ninja",
             "builddir": true,
-            "cleanup": [],
             "config-opts": [
                 "-DCMAKE_VERBOSE_MAKEFILE=ON",
                 "-DCMAKE_BUILD_TYPE:STRING=RelWithDebInfo",
@@ -62,13 +160,14 @@
                 "-DWITH_OSS=OFF",
                 "-DWITH_SDL_IMAGE_DIALOGS=ON",
                 "-DWITH_WEBVIEW=OFF",
-                "-DWITH_PULSE=ON"
+                "-DWITH_PULSE=ON",
+                "-DWITH_VAAPI:BOOL=ON"
             ],
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://github.com/FreeRDP/FreeRDP/archive/refs/tags/3.10.3.tar.gz",
-                    "sha256": "011b645e49401e59396ded91cccf9a0cdf68e6c43a3cb0bf6a9b6852c9c564a4",
+                    "url": "https://github.com/FreeRDP/FreeRDP/archive/refs/tags/3.17.2.tar.gz",
+                    "sha256": "04a2e8049602e7aba767880990959facf2ebf7b5fbeeb5120e81838d8c2d2f17",
                     "x-checker-data": {
                         "type": "anitya",
                         "project-id": 10442,
@@ -79,14 +178,14 @@
             ],
             "modules": [
                 {
-                    "name": "pkcs11-helper",
+                    "name": "krb5",
                     "buildsystem": "autotools",
                     "subdir": "src",
                     "sources": [
                         {
                             "type": "archive",
-                            "url": "https://kerberos.org/dist/krb5/1.21/krb5-1.21.1.tar.gz",
-                            "sha256": "7881c3aaaa1b329bd27dbc6bf2bf1c85c5d0b6c7358aff2b35d513ec2d50fa1f",
+                            "url": "https://kerberos.org/dist/krb5/1.22/krb5-1.22.1.tar.gz",
+                            "sha256": "1a8832b8cad923ebbf1394f67e2efcf41e3a49f460285a66e35adec8fa0053af",
                             "x-checker-data": {
                                 "type": "html",
                                 "url": "https://kerberos.org/dist/",
@@ -99,16 +198,17 @@
                 {
                     "name": "pkcs11-helper",
                     "buildsystem": "autotools",
-                    "build-options": {
-                    "env": {
-                        "CFLAGS": "-Wno-incompatible-pointer-types"
-                        }
-                    },
                     "sources": [
                         {
                             "type": "archive",
-                            "url": "https://github.com/OpenSC/pkcs11-helper/archive/refs/tags/pkcs11-helper-1.29.0.tar.gz",
-                            "sha256": "f87c4ce596ccf6211c0de34923e2977c8892bd773ace75d1261a1908979fc9e8"
+                            "url": "https://github.com/OpenSC/pkcs11-helper/archive/refs/tags/pkcs11-helper-1.30.0.tar.gz",
+                            "sha256": "076c9f664812a45f2da25efc157338b0b8bb1949117f0144050fec176b6fdf78",
+                            "x-checker-data": {
+                                "type": "anitya",
+                                "project-id": 91990,
+                                "stable-only": true,
+                                "url-template": "https://github.com/OpenSC/pkcs11-helper/archive/refs/tags/pkcs11-helper-$version.tar.gz"
+                            }
                         },
                         {
                             "type": "script",
@@ -118,31 +218,29 @@
                             ]
                         }
                     ]
-                },
-                {
-                    "name": "libusb",
-                    "config-opts": [ "--disable-static" ],
-                    "cleanup": [
-                        "/lib/*.la",
-                        "/lib/pkgconfig",
-                        "/include"
-                    ],
-                    "sources": [
-                        {
-                            "type": "archive",
-                            "url": "https://github.com/libusb/libusb/releases/download/v1.0.26/libusb-1.0.26.tar.bz2",
-                            "sha256": "12ce7a61fc9854d1d2a1ffe095f7b5fac19ddba095c259e6067a46500381b5a5"
-                        }
-                    ],
-                    "post-install": [
-                        "install -Dm644 COPYING ${FLATPAK_DEST}/share/licenses/libusb/COPYING"
-                    ]
                 }
             ]
         },
         {
             "name": "krdc",
             "buildsystem": "cmake-ninja",
+            "sources": [
+                {
+                    "type": "dir",
+                    "path": "."
+                }
+            ],
+            "post-install": [
+                "mkdir -p /app/share/icons/hicolor/scalable/apps/",
+                "install -D /usr/share/icons/breeze/apps/48/krdc.svg /app/share/icons/hicolor/scalable/apps/"
+            ]
+        },
+        {
+            "name": "legacy-openssl-cnf",
+            "buildsystem": "simple",
+            "build-commands": [
+                "install -D legacy-openssl.cnf $FLATPAK_DEST/share/legacy-openssl.cnf"
+            ],
             "sources": [
                 {
                     "type": "dir",
