@@ -1,5 +1,5 @@
 # translation of krdc.po to
-# Version: $Revision: 1718945 $
+# Version: $Revision: 1720818 $
 # Copyright (C) 2002, 2003, 2004, 2005, 2006, 2008, 2009 Free Software Foundation, Inc.
 # Krzysztof Lichota <lichota@mimuw.edu.pl>, 2002, 2005, 2006.
 # Michal Rudolf <mrudolf@kdewebdev.org>, 2003, 2004.
@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-24 00:43+0000\n"
+"POT-Creation-Date: 2025-10-22 00:43+0000\n"
 "PO-Revision-Date: 2025-03-15 10:46+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -200,12 +200,12 @@ msgstr "Ustawienia..."
 msgid "Remove"
 msgstr "Usuń"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:297 mainwindow.cpp:678
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:291 mainwindow.cpp:668
 #, kde-format
 msgid "Unusable URL"
 msgstr "Nieprawidłowy URL"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:678
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:668
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr "Nie można obsłużyć wybranego komputera."
@@ -490,103 +490,103 @@ msgstr ""
 msgid "URLs to connect after startup"
 msgstr "URL do połączenia się po starcie"
 
-#: mainwindow.cpp:111
+#: mainwindow.cpp:105
 #, kde-format
 msgid "KDE Remote Desktop Client started"
 msgstr "Uruchomiono klienta zdalnego połączenia z pulpitem"
 
-#: mainwindow.cpp:116 mainwindow.cpp:133 mainwindow.cpp:1090
-#: mainwindow.cpp:1185
+#: mainwindow.cpp:110 mainwindow.cpp:127 mainwindow.cpp:1080
+#: mainwindow.cpp:1175
 #, kde-format
 msgid "New Connection"
 msgstr "Nowe połączenie"
 
-#: mainwindow.cpp:139
+#: mainwindow.cpp:133
 #, kde-format
 msgid "Copy Screenshot to Clipboard"
 msgstr "Skopiuj zrzut ekranu do schowka"
 
-#: mainwindow.cpp:140
+#: mainwindow.cpp:134
 #, kde-format
 msgid "Screenshot"
 msgstr "Zrzut ekranu"
 
-#: mainwindow.cpp:146 mainwindow.cpp:513
+#: mainwindow.cpp:140 mainwindow.cpp:503
 #, kde-format
 msgid "Switch to Full Screen Mode"
 msgstr "Przełącz do trybu pełnoekranowego"
 
-#: mainwindow.cpp:147 mainwindow.cpp:514
+#: mainwindow.cpp:141 mainwindow.cpp:504
 #, kde-format
 msgid "Full Screen"
 msgstr "Pełny ekran"
 
-#: mainwindow.cpp:154
+#: mainwindow.cpp:148
 #, kde-format
 msgid "View Only"
 msgstr "Tylko podgląd"
 
-#: mainwindow.cpp:160
+#: mainwindow.cpp:154
 #, kde-format
 msgid "Clipboard Sharing"
 msgstr ""
 
-#: mainwindow.cpp:165
+#: mainwindow.cpp:159
 #, kde-format
 msgid "Disconnect"
 msgstr "Rozłącz"
 
-#: mainwindow.cpp:173
+#: mainwindow.cpp:167
 #, kde-format
 msgid "Show Local Cursor"
 msgstr "Pokazuj lokalny kursor"
 
-#: mainwindow.cpp:174
+#: mainwindow.cpp:168
 #, kde-format
 msgid "Local Cursor"
 msgstr "Kursor lokalny"
 
-#: mainwindow.cpp:180
+#: mainwindow.cpp:174
 #, kde-format
 msgid "Grab All Possible Keys"
 msgstr "Pobierz wszystkie możliwe klawisze"
 
-#: mainwindow.cpp:181
+#: mainwindow.cpp:175
 #, kde-format
 msgid "Grab Keys"
 msgstr "Przechwyć klawisze"
 
-#: mainwindow.cpp:187
+#: mainwindow.cpp:181
 #, kde-format
 msgid "Scale Remote Screen to Fit Window Size"
 msgstr "Skaluj zdalny ekran do rozmiaru okna"
 
-#: mainwindow.cpp:188
+#: mainwindow.cpp:182
 #, kde-format
 msgid "Scale"
 msgstr "Skaluj"
 
-#: mainwindow.cpp:191
+#: mainwindow.cpp:185
 #, kde-format
 msgid "Scaling Factor"
 msgstr "Współczynnik skalowania"
 
-#: mainwindow.cpp:202
+#: mainwindow.cpp:196
 #, kde-format
 msgid "Bookmarks"
 msgstr "Zakładki"
 
-#: mainwindow.cpp:270
+#: mainwindow.cpp:264
 #, kde-format
 msgid "Unable to load connection data from the provided file."
 msgstr "Nie można wczytać danych o połączeniu dla wskazanego pliku."
 
-#: mainwindow.cpp:270
+#: mainwindow.cpp:264
 #, kde-format
 msgid "Load failed"
 msgstr "Nie udało się wczytać"
 
-#: mainwindow.cpp:276
+#: mainwindow.cpp:270
 #, kde-format
 msgid ""
 "The entered address does not have the required form.\n"
@@ -595,139 +595,139 @@ msgstr ""
 "Niepoprawnie wpisano adres.\n"
 " Składnia to: [nawa_użytkownika@]gospodarz[:port]"
 
-#: mainwindow.cpp:276
+#: mainwindow.cpp:270
 #, kde-format
 msgid "Malformed URL"
 msgstr "Niepoprawnie wpisany adres URL"
 
-#: mainwindow.cpp:297
+#: mainwindow.cpp:291
 #, kde-format
 msgid "The entered address cannot be handled."
 msgstr "Wpisany adres nie może zostać użyty."
 
-#: mainwindow.cpp:436
+#: mainwindow.cpp:426
 #, kde-format
 msgid "Connecting to %1"
 msgstr "Łączenie z %1"
 
-#: mainwindow.cpp:440
+#: mainwindow.cpp:430
 #, kde-format
 msgid "Authenticating at %1"
 msgstr "Uwierzytelnianie %1"
 
-#: mainwindow.cpp:444
+#: mainwindow.cpp:434
 #, kde-format
 msgid "Preparing connection to %1"
 msgstr "Przygotowywanie połączenia z %1"
 
-#: mainwindow.cpp:448
+#: mainwindow.cpp:438
 #, kde-format
 msgid "Connected to %1"
 msgstr "Połączono z %1"
 
-#: mainwindow.cpp:544
+#: mainwindow.cpp:534
 #, kde-format
 msgid "Switch to Window Mode"
 msgstr "Przełącz do trybu okien"
 
-#: mainwindow.cpp:545
+#: mainwindow.cpp:535
 #, kde-format
 msgid "Window Mode"
 msgstr "Tryb okienkowy"
 
-#: mainwindow.cpp:697
+#: mainwindow.cpp:687
 #, kde-format
 msgid "Connect"
 msgstr "Połącz"
 
-#: mainwindow.cpp:698
+#: mainwindow.cpp:688
 #, kde-format
 msgid "Rename"
 msgstr "Zmień nazwę"
 
-#: mainwindow.cpp:699
+#: mainwindow.cpp:689
 #, kde-format
 msgid "Settings"
 msgstr "Ustawienia"
 
-#: mainwindow.cpp:700
+#: mainwindow.cpp:690
 #, kde-format
 msgid "Delete"
 msgstr "Usuń"
 
-#: mainwindow.cpp:703 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:693 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "Zakładki"
 
-#: mainwindow.cpp:703 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:693 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "Historia"
 
-#: mainwindow.cpp:715
+#: mainwindow.cpp:705
 #, kde-format
 msgid "Rename %1"
 msgstr "Zmień nazwę %1"
 
-#: mainwindow.cpp:715
+#: mainwindow.cpp:705
 #, kde-format
 msgid "Rename %1 to"
 msgstr "Zmień nazwę %1 na"
 
-#: mainwindow.cpp:722
+#: mainwindow.cpp:712
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "Na pewno usunąć %1?"
 
-#: mainwindow.cpp:722
+#: mainwindow.cpp:712
 #, kde-format
 msgid "Delete %1"
 msgstr "Usuń %1"
 
-#: mainwindow.cpp:746
+#: mainwindow.cpp:736
 #, kde-format
 msgid "Add Bookmark"
 msgstr "Dodaj zakładkę"
 
-#: mainwindow.cpp:747
+#: mainwindow.cpp:737
 #, kde-format
 msgid "Close Tab"
 msgstr "Zamknij kartę"
 
-#: mainwindow.cpp:860
+#: mainwindow.cpp:850
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr "Zminimalizuj tryb pełnoekranowy"
 
-#: mainwindow.cpp:877
+#: mainwindow.cpp:867
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "Pasek narzędzi przyklejony"
 
-#: mainwindow.cpp:984
+#: mainwindow.cpp:974
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr "Czy na pewno zakończyć klienta zdalnego pulpitu?"
 
-#: mainwindow.cpp:985
+#: mainwindow.cpp:975
 #, kde-format
 msgid "Confirm Quit"
 msgstr "Potwierdzenie zakończenia"
 
-#: mainwindow.cpp:1113
+#: mainwindow.cpp:1103
 #, kde-format
 msgid "Connect to:"
 msgstr "Połącz z:"
 
-#: mainwindow.cpp:1117
+#: mainwindow.cpp:1107
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr "Wpisz tutaj, aby połączyć się z adresem i przefiltrować listę."
 
-#: mainwindow.cpp:1126
+#: mainwindow.cpp:1116
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
@@ -735,17 +735,17 @@ msgid ""
 msgstr ""
 "Wpisz IP lub nazwę DNS. Wyczyść wiersz, aby otrzymać listę metod połączenia."
 
-#: mainwindow.cpp:1129
+#: mainwindow.cpp:1119
 #, kde-format
 msgid "Goto Address"
 msgstr "Idź do adresu"
 
-#: mainwindow.cpp:1221
+#: mainwindow.cpp:1211
 #, kde-format
 msgid "Remote Desktops"
 msgstr "Zdalne pulpity"
 
-#: mainwindow.cpp:1250
+#: mainwindow.cpp:1240
 #, kde-format
 msgid "Filter"
 msgstr "Filtr"

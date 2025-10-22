@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-24 00:43+0000\n"
+"POT-Creation-Date: 2025-10-22 00:43+0000\n"
 "PO-Revision-Date: 2025-09-26 13:47+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -197,12 +197,12 @@ msgstr "Anpassa…"
 msgid "Remove"
 msgstr "Ta bort"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:297 mainwindow.cpp:678
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:291 mainwindow.cpp:668
 #, kde-format
 msgid "Unusable URL"
 msgstr "Oanvändbar webbadress"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:678
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:668
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr "Den valda värddatorn kan inte hanteras."
@@ -481,103 +481,103 @@ msgstr ""
 msgid "URLs to connect after startup"
 msgstr "Webbadresser att ansluta till efter start"
 
-#: mainwindow.cpp:111
+#: mainwindow.cpp:105
 #, kde-format
 msgid "KDE Remote Desktop Client started"
 msgstr "KDE fjärranslutning till skrivbord startad"
 
-#: mainwindow.cpp:116 mainwindow.cpp:133 mainwindow.cpp:1090
-#: mainwindow.cpp:1185
+#: mainwindow.cpp:110 mainwindow.cpp:127 mainwindow.cpp:1080
+#: mainwindow.cpp:1175
 #, kde-format
 msgid "New Connection"
 msgstr "Ny anslutning"
 
-#: mainwindow.cpp:139
+#: mainwindow.cpp:133
 #, kde-format
 msgid "Copy Screenshot to Clipboard"
 msgstr "Kopiera skärmbild till klippbordet"
 
-#: mainwindow.cpp:140
+#: mainwindow.cpp:134
 #, kde-format
 msgid "Screenshot"
 msgstr "Skärmbild"
 
-#: mainwindow.cpp:146 mainwindow.cpp:513
+#: mainwindow.cpp:140 mainwindow.cpp:503
 #, kde-format
 msgid "Switch to Full Screen Mode"
 msgstr "Byt till fullskärmsläge"
 
-#: mainwindow.cpp:147 mainwindow.cpp:514
+#: mainwindow.cpp:141 mainwindow.cpp:504
 #, kde-format
 msgid "Full Screen"
 msgstr "Fullskärm"
 
-#: mainwindow.cpp:154
+#: mainwindow.cpp:148
 #, kde-format
 msgid "View Only"
 msgstr "Visa endast"
 
-#: mainwindow.cpp:160
+#: mainwindow.cpp:154
 #, kde-format
 msgid "Clipboard Sharing"
 msgstr "Klippbordsdelning"
 
-#: mainwindow.cpp:165
+#: mainwindow.cpp:159
 #, kde-format
 msgid "Disconnect"
 msgstr "Koppla ner"
 
-#: mainwindow.cpp:173
+#: mainwindow.cpp:167
 #, kde-format
 msgid "Show Local Cursor"
 msgstr "Visa lokal markör"
 
-#: mainwindow.cpp:174
+#: mainwindow.cpp:168
 #, kde-format
 msgid "Local Cursor"
 msgstr "Lokal markör"
 
-#: mainwindow.cpp:180
+#: mainwindow.cpp:174
 #, kde-format
 msgid "Grab All Possible Keys"
 msgstr "Hämta alla tillgängliga tangenter"
 
-#: mainwindow.cpp:181
+#: mainwindow.cpp:175
 #, kde-format
 msgid "Grab Keys"
 msgstr "Använd tangenter"
 
-#: mainwindow.cpp:187
+#: mainwindow.cpp:181
 #, kde-format
 msgid "Scale Remote Screen to Fit Window Size"
 msgstr "Skala fjärrskärmen för att passa fönsterstorleken"
 
-#: mainwindow.cpp:188
+#: mainwindow.cpp:182
 #, kde-format
 msgid "Scale"
 msgstr "Skala"
 
-#: mainwindow.cpp:191
+#: mainwindow.cpp:185
 #, kde-format
 msgid "Scaling Factor"
 msgstr "Skalfaktor"
 
-#: mainwindow.cpp:202
+#: mainwindow.cpp:196
 #, kde-format
 msgid "Bookmarks"
 msgstr "Bokmärken"
 
-#: mainwindow.cpp:270
+#: mainwindow.cpp:264
 #, kde-format
 msgid "Unable to load connection data from the provided file."
 msgstr "Kunde inte läsa in anslutningsdata från den tillhandahållna filen."
 
-#: mainwindow.cpp:270
+#: mainwindow.cpp:264
 #, kde-format
 msgid "Load failed"
 msgstr "Inläsning misslyckades"
 
-#: mainwindow.cpp:276
+#: mainwindow.cpp:270
 #, kde-format
 msgid ""
 "The entered address does not have the required form.\n"
@@ -586,139 +586,139 @@ msgstr ""
 "Adressen som angavs har inte korrekt format.\n"
 " Syntax:  [användarnamn@]värddator[:port]"
 
-#: mainwindow.cpp:276
+#: mainwindow.cpp:270
 #, kde-format
 msgid "Malformed URL"
 msgstr "Felaktig webbadress"
 
-#: mainwindow.cpp:297
+#: mainwindow.cpp:291
 #, kde-format
 msgid "The entered address cannot be handled."
 msgstr "Den angivna adressen kan inte hanteras."
 
-#: mainwindow.cpp:436
+#: mainwindow.cpp:426
 #, kde-format
 msgid "Connecting to %1"
 msgstr "Ansluter till %1"
 
-#: mainwindow.cpp:440
+#: mainwindow.cpp:430
 #, kde-format
 msgid "Authenticating at %1"
 msgstr "Kontrollerar behörighet på %1"
 
-#: mainwindow.cpp:444
+#: mainwindow.cpp:434
 #, kde-format
 msgid "Preparing connection to %1"
 msgstr "Förbereder anslutning till %1"
 
-#: mainwindow.cpp:448
+#: mainwindow.cpp:438
 #, kde-format
 msgid "Connected to %1"
 msgstr "Ansluten till %1"
 
-#: mainwindow.cpp:544
+#: mainwindow.cpp:534
 #, kde-format
 msgid "Switch to Window Mode"
 msgstr "Byt till fönsterläge"
 
-#: mainwindow.cpp:545
+#: mainwindow.cpp:535
 #, kde-format
 msgid "Window Mode"
 msgstr "Fönsterläge"
 
-#: mainwindow.cpp:697
+#: mainwindow.cpp:687
 #, kde-format
 msgid "Connect"
 msgstr "Anslut"
 
-#: mainwindow.cpp:698
+#: mainwindow.cpp:688
 #, kde-format
 msgid "Rename"
 msgstr "Byt namn"
 
-#: mainwindow.cpp:699
+#: mainwindow.cpp:689
 #, kde-format
 msgid "Settings"
 msgstr "Inställningar"
 
-#: mainwindow.cpp:700
+#: mainwindow.cpp:690
 #, kde-format
 msgid "Delete"
 msgstr "Ta bort"
 
-#: mainwindow.cpp:703 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:693 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "Bokmärken"
 
-#: mainwindow.cpp:703 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:693 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "Historik"
 
-#: mainwindow.cpp:715
+#: mainwindow.cpp:705
 #, kde-format
 msgid "Rename %1"
 msgstr "Byt namn på %1"
 
-#: mainwindow.cpp:715
+#: mainwindow.cpp:705
 #, kde-format
 msgid "Rename %1 to"
 msgstr "Byt namn på %1 till"
 
-#: mainwindow.cpp:722
+#: mainwindow.cpp:712
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "Är du säker på att du vill ta bort %1?"
 
-#: mainwindow.cpp:722
+#: mainwindow.cpp:712
 #, kde-format
 msgid "Delete %1"
 msgstr "Ta bort %1"
 
-#: mainwindow.cpp:746
+#: mainwindow.cpp:736
 #, kde-format
 msgid "Add Bookmark"
 msgstr "Lägg till bokmärke"
 
-#: mainwindow.cpp:747
+#: mainwindow.cpp:737
 #, kde-format
 msgid "Close Tab"
 msgstr "Stäng flik"
 
-#: mainwindow.cpp:860
+#: mainwindow.cpp:850
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr "Minimera fullskärmsfönster"
 
-#: mainwindow.cpp:877
+#: mainwindow.cpp:867
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "Behåll verktygsrad"
 
-#: mainwindow.cpp:984
+#: mainwindow.cpp:974
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr "Är du säker på att du vill avsluta KDE fjärranslutning till skrivbord?"
 
-#: mainwindow.cpp:985
+#: mainwindow.cpp:975
 #, kde-format
 msgid "Confirm Quit"
 msgstr "Bekräfta avslutning"
 
-#: mainwindow.cpp:1113
+#: mainwindow.cpp:1103
 #, kde-format
 msgid "Connect to:"
 msgstr "Anslut till:"
 
-#: mainwindow.cpp:1117
+#: mainwindow.cpp:1107
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr "Skriv här för att ansluta till en adress och filtrera listan."
 
-#: mainwindow.cpp:1126
+#: mainwindow.cpp:1116
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
@@ -727,17 +727,17 @@ msgstr ""
 "Skriv in en IP-adress eller ett DNS-namn här. Rensa raden för att få en "
 "lista med anslutningsmetoder."
 
-#: mainwindow.cpp:1129
+#: mainwindow.cpp:1119
 #, kde-format
 msgid "Goto Address"
 msgstr "Gå till adress"
 
-#: mainwindow.cpp:1221
+#: mainwindow.cpp:1211
 #, kde-format
 msgid "Remote Desktops"
 msgstr "Fjärrskrivbord"
 
-#: mainwindow.cpp:1250
+#: mainwindow.cpp:1240
 #, kde-format
 msgid "Filter"
 msgstr "Filter"

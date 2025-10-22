@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-24 00:43+0000\n"
+"POT-Creation-Date: 2025-10-22 00:43+0000\n"
 "PO-Revision-Date: 2016-11-28 01:33+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -202,12 +202,12 @@ msgstr "Подеси..."
 msgid "Remove"
 msgstr "Уклони"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:297 mainwindow.cpp:678
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:291 mainwindow.cpp:668
 #, kde-format
 msgid "Unusable URL"
 msgstr "Неупотребљив УРЛ"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:678
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:668
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr "Не могу да обрадим изабрани домаћин."
@@ -505,105 +505,105 @@ msgstr "Покрени КРДЦ са датим УРЛ‑ом преко цел�
 msgid "URLs to connect after startup"
 msgstr "УРЛ‑ови за повезивање након покретања"
 
-#: mainwindow.cpp:111
+#: mainwindow.cpp:105
 #, kde-format
 msgid "KDE Remote Desktop Client started"
 msgstr "КДЕ‑ов клијент удаљене површи је покренут"
 
-#: mainwindow.cpp:116 mainwindow.cpp:133 mainwindow.cpp:1090
-#: mainwindow.cpp:1185
+#: mainwindow.cpp:110 mainwindow.cpp:127 mainwindow.cpp:1080
+#: mainwindow.cpp:1175
 #, kde-format
 msgid "New Connection"
 msgstr "Нова веза"
 
-#: mainwindow.cpp:139
+#: mainwindow.cpp:133
 #, kde-format
 msgid "Copy Screenshot to Clipboard"
 msgstr "Копирај снимак екрана у клипборд"
 
-#: mainwindow.cpp:140
+#: mainwindow.cpp:134
 #, kde-format
 msgid "Screenshot"
 msgstr "Снимак екрана"
 
-#: mainwindow.cpp:146 mainwindow.cpp:513
+#: mainwindow.cpp:140 mainwindow.cpp:503
 #, kde-format
 msgid "Switch to Full Screen Mode"
 msgstr "Пребаци преко целог екрана"
 
-#: mainwindow.cpp:147 mainwindow.cpp:514
+#: mainwindow.cpp:141 mainwindow.cpp:504
 #, kde-format
 msgid "Full Screen"
 msgstr "Цео екран"
 
-#: mainwindow.cpp:154
+#: mainwindow.cpp:148
 #, kde-format
 msgid "View Only"
 msgstr "Само преглед"
 
-#: mainwindow.cpp:160
+#: mainwindow.cpp:154
 #, kde-format
 msgid "Clipboard Sharing"
 msgstr ""
 
-#: mainwindow.cpp:165
+#: mainwindow.cpp:159
 #, kde-format
 msgid "Disconnect"
 msgstr "Прекини везу"
 
 # skip-rule: t-cursor
-#: mainwindow.cpp:173
+#: mainwindow.cpp:167
 #, kde-format
 msgid "Show Local Cursor"
 msgstr "Прикажи локални показивач"
 
 # skip-rule: t-cursor
-#: mainwindow.cpp:174
+#: mainwindow.cpp:168
 #, kde-format
 msgid "Local Cursor"
 msgstr "Локални показивач"
 
-#: mainwindow.cpp:180
+#: mainwindow.cpp:174
 #, kde-format
 msgid "Grab All Possible Keys"
 msgstr "Хватај све могуће тастере"
 
-#: mainwindow.cpp:181
+#: mainwindow.cpp:175
 #, kde-format
 msgid "Grab Keys"
 msgstr "Хватај тастере"
 
-#: mainwindow.cpp:187
+#: mainwindow.cpp:181
 #, kde-format
 msgid "Scale Remote Screen to Fit Window Size"
 msgstr "Скалирај удаљени екран да стане у прозор"
 
-#: mainwindow.cpp:188
+#: mainwindow.cpp:182
 #, kde-format
 msgid "Scale"
 msgstr "Скалирај"
 
-#: mainwindow.cpp:191
+#: mainwindow.cpp:185
 #, kde-format
 msgid "Scaling Factor"
 msgstr ""
 
-#: mainwindow.cpp:202
+#: mainwindow.cpp:196
 #, kde-format
 msgid "Bookmarks"
 msgstr "Обележивачи"
 
-#: mainwindow.cpp:270
+#: mainwindow.cpp:264
 #, kde-format
 msgid "Unable to load connection data from the provided file."
 msgstr ""
 
-#: mainwindow.cpp:270
+#: mainwindow.cpp:264
 #, kde-format
 msgid "Load failed"
 msgstr ""
 
-#: mainwindow.cpp:276
+#: mainwindow.cpp:270
 #, kde-format
 msgid ""
 "The entered address does not have the required form.\n"
@@ -612,143 +612,143 @@ msgstr ""
 "Унета адреса нема захтевани облик.\n"
 "Синтакса: [корисник@]домаћин[:порт]"
 
-#: mainwindow.cpp:276
+#: mainwindow.cpp:270
 #, kde-format
 msgid "Malformed URL"
 msgstr "Лоше формиран УРЛ"
 
-#: mainwindow.cpp:297
+#: mainwindow.cpp:291
 #, kde-format
 msgid "The entered address cannot be handled."
 msgstr "Не могу да обрадим унету адресу."
 
-#: mainwindow.cpp:436
+#: mainwindow.cpp:426
 #, kde-format
 msgid "Connecting to %1"
 msgstr "Повезујем се са %1"
 
-#: mainwindow.cpp:440
+#: mainwindow.cpp:430
 #, kde-format
 msgid "Authenticating at %1"
 msgstr "Аутентификујем се код %1"
 
-#: mainwindow.cpp:444
+#: mainwindow.cpp:434
 #, kde-format
 msgid "Preparing connection to %1"
 msgstr "Припремам везу са %1"
 
-#: mainwindow.cpp:448
+#: mainwindow.cpp:438
 #, kde-format
 msgid "Connected to %1"
 msgstr "Повезан са %1"
 
-#: mainwindow.cpp:544
+#: mainwindow.cpp:534
 #, kde-format
 msgid "Switch to Window Mode"
 msgstr "Пребаци на прозор"
 
-#: mainwindow.cpp:545
+#: mainwindow.cpp:535
 #, kde-format
 msgid "Window Mode"
 msgstr "Прозор"
 
-#: mainwindow.cpp:697
+#: mainwindow.cpp:687
 #, kde-format
 msgid "Connect"
 msgstr "Повежи"
 
-#: mainwindow.cpp:698
+#: mainwindow.cpp:688
 #, kde-format
 msgid "Rename"
 msgstr "Преименуј"
 
-#: mainwindow.cpp:699
+#: mainwindow.cpp:689
 #, kde-format
 msgid "Settings"
 msgstr "Поставке"
 
-#: mainwindow.cpp:700
+#: mainwindow.cpp:690
 #, kde-format
 msgid "Delete"
 msgstr "Обриши"
 
-#: mainwindow.cpp:703 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:693 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "Обележивачи"
 
-#: mainwindow.cpp:703 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:693 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "Историјат"
 
 # >> @title:window
-#: mainwindow.cpp:715
+#: mainwindow.cpp:705
 #, kde-format
 msgid "Rename %1"
 msgstr "Преименовање „%1“"
 
-#: mainwindow.cpp:715
+#: mainwindow.cpp:705
 #, kde-format
 msgid "Rename %1 to"
 msgstr "Преименуј „%1“ у"
 
-#: mainwindow.cpp:722
+#: mainwindow.cpp:712
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "Желите ли заиста да обришете „%1“?"
 
 # >> @title:window
-#: mainwindow.cpp:722
+#: mainwindow.cpp:712
 #, kde-format
 msgid "Delete %1"
 msgstr "Брисање „%1“"
 
-#: mainwindow.cpp:746
+#: mainwindow.cpp:736
 #, kde-format
 msgid "Add Bookmark"
 msgstr "Додај обележивач"
 
-#: mainwindow.cpp:747
+#: mainwindow.cpp:737
 #, kde-format
 msgid "Close Tab"
 msgstr "Затвори језичак"
 
-#: mainwindow.cpp:860
+#: mainwindow.cpp:850
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr "Минимизуј прозор целог екрана"
 
-#: mainwindow.cpp:877
+#: mainwindow.cpp:867
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "Залепи траку алатки"
 
-#: mainwindow.cpp:984
+#: mainwindow.cpp:974
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr "Желите ли заиста да напустите КДЕ‑ов клијент удаљене површи?"
 
 # >> @title:window
-#: mainwindow.cpp:985
+#: mainwindow.cpp:975
 #, kde-format
 msgid "Confirm Quit"
 msgstr "Потврда напуштања"
 
-#: mainwindow.cpp:1113
+#: mainwindow.cpp:1103
 #, kde-format
 msgid "Connect to:"
 msgstr "Повежи се са:"
 
-#: mainwindow.cpp:1117
+#: mainwindow.cpp:1107
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr "Куцајте овде се повежете на адресу и филтрирате списак."
 
 # rewrite-msgid: /line/field/
-#: mainwindow.cpp:1126
+#: mainwindow.cpp:1116
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
@@ -757,17 +757,17 @@ msgstr ""
 "Овде унесите ИП или ДНС име. Очистите поље да добијете списак метода "
 "повезивања."
 
-#: mainwindow.cpp:1129
+#: mainwindow.cpp:1119
 #, kde-format
 msgid "Goto Address"
 msgstr "Иди на адресу"
 
-#: mainwindow.cpp:1221
+#: mainwindow.cpp:1211
 #, kde-format
 msgid "Remote Desktops"
 msgstr "Удаљене површи"
 
-#: mainwindow.cpp:1250
+#: mainwindow.cpp:1240
 #, kde-format
 msgid "Filter"
 msgstr "Филтер"

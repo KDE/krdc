@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-24 00:43+0000\n"
+"POT-Creation-Date: 2025-10-22 00:43+0000\n"
 "PO-Revision-Date: 2006-01-08 15:06+0800\n"
 "Last-Translator: Walter Cheuk <wwycheuk@netvigator.com>\n"
 "Language-Team: Chinese (Hong Kong) <community@linuxhall.org>\n"
@@ -193,12 +193,12 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:297 mainwindow.cpp:678
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:291 mainwindow.cpp:668
 #, kde-format
 msgid "Unusable URL"
 msgstr ""
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:678
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:668
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr ""
@@ -470,112 +470,112 @@ msgstr ""
 msgid "URLs to connect after startup"
 msgstr ""
 
-#: mainwindow.cpp:111
+#: mainwindow.cpp:105
 #, fuzzy, kde-format
 #| msgid "Remote Desktop Connection"
 msgid "KDE Remote Desktop Client started"
 msgstr "遠端桌面連線"
 
-#: mainwindow.cpp:116 mainwindow.cpp:133 mainwindow.cpp:1090
-#: mainwindow.cpp:1185
+#: mainwindow.cpp:110 mainwindow.cpp:127 mainwindow.cpp:1080
+#: mainwindow.cpp:1175
 #, fuzzy, kde-format
 #| msgid "Connection"
 msgid "New Connection"
 msgstr "連線"
 
-#: mainwindow.cpp:139
+#: mainwindow.cpp:133
 #, kde-format
 msgid "Copy Screenshot to Clipboard"
 msgstr ""
 
-#: mainwindow.cpp:140
+#: mainwindow.cpp:134
 #, kde-format
 msgid "Screenshot"
 msgstr ""
 
-#: mainwindow.cpp:146 mainwindow.cpp:513
+#: mainwindow.cpp:140 mainwindow.cpp:503
 #, fuzzy, kde-format
 #| msgid "Start in fullscreen mode"
 msgid "Switch to Full Screen Mode"
 msgstr "以全螢幕模式開啟"
 
-#: mainwindow.cpp:147 mainwindow.cpp:514
+#: mainwindow.cpp:141 mainwindow.cpp:504
 #, fuzzy, kde-format
 #| msgid "Fullscreen"
 msgid "Full Screen"
 msgstr "全螢幕"
 
-#: mainwindow.cpp:154
+#: mainwindow.cpp:148
 #, fuzzy, kde-format
 #| msgid "View Only"
 msgid "View Only"
 msgstr "只檢視"
 
-#: mainwindow.cpp:160
+#: mainwindow.cpp:154
 #, kde-format
 msgid "Clipboard Sharing"
 msgstr ""
 
-#: mainwindow.cpp:165
+#: mainwindow.cpp:159
 #, fuzzy, kde-format
 #| msgid "Connect"
 msgid "Disconnect"
 msgstr "連接"
 
-#: mainwindow.cpp:173
+#: mainwindow.cpp:167
 #, fuzzy, kde-format
 #| msgid "Always Show Local Cursor"
 msgid "Show Local Cursor"
 msgstr "必定顯示本機游標"
 
-#: mainwindow.cpp:174
+#: mainwindow.cpp:168
 #, fuzzy, kde-format
 #| msgid "Always Show Local Cursor"
 msgid "Local Cursor"
 msgstr "必定顯示本機游標"
 
-#: mainwindow.cpp:180
+#: mainwindow.cpp:174
 #, kde-format
 msgid "Grab All Possible Keys"
 msgstr ""
 
-#: mainwindow.cpp:181
+#: mainwindow.cpp:175
 #, kde-format
 msgid "Grab Keys"
 msgstr ""
 
-#: mainwindow.cpp:187
+#: mainwindow.cpp:181
 #, fuzzy, kde-format
 #| msgid "This option scales the remote screen to fit your window size."
 msgid "Scale Remote Screen to Fit Window Size"
 msgstr "此選項將遠端螢幕縮放至切合您的視窗大小。"
 
-#: mainwindow.cpp:188
+#: mainwindow.cpp:182
 #, kde-format
 msgid "Scale"
 msgstr "縮放"
 
-#: mainwindow.cpp:191
+#: mainwindow.cpp:185
 #, kde-format
 msgid "Scaling Factor"
 msgstr ""
 
-#: mainwindow.cpp:202
+#: mainwindow.cpp:196
 #, kde-format
 msgid "Bookmarks"
 msgstr ""
 
-#: mainwindow.cpp:270
+#: mainwindow.cpp:264
 #, kde-format
 msgid "Unable to load connection data from the provided file."
 msgstr ""
 
-#: mainwindow.cpp:270
+#: mainwindow.cpp:264
 #, kde-format
 msgid "Load failed"
 msgstr ""
 
-#: mainwindow.cpp:276
+#: mainwindow.cpp:270
 #, fuzzy, kde-format
 #| msgid "The entered host does not have the required form."
 msgid ""
@@ -583,168 +583,168 @@ msgid ""
 " Syntax: [username@]host[:port]"
 msgstr "輸入的主機沒有所需的表格。"
 
-#: mainwindow.cpp:276
+#: mainwindow.cpp:270
 #, fuzzy, kde-format
 #| msgid "Malformed URL or Host"
 msgid "Malformed URL"
 msgstr "格式不正確的 URL 或主機"
 
-#: mainwindow.cpp:297
+#: mainwindow.cpp:291
 #, kde-format
 msgid "The entered address cannot be handled."
 msgstr ""
 
-#: mainwindow.cpp:436
+#: mainwindow.cpp:426
 #, fuzzy, kde-format
 #| msgid "Connection"
 msgid "Connecting to %1"
 msgstr "連線"
 
-#: mainwindow.cpp:440
+#: mainwindow.cpp:430
 #, fuzzy, kde-format
 #| msgid "Authenticating..."
 msgid "Authenticating at %1"
 msgstr "正在進行認證..."
 
-#: mainwindow.cpp:444
+#: mainwindow.cpp:434
 #, kde-format
 msgid "Preparing connection to %1"
 msgstr ""
 
-#: mainwindow.cpp:448
+#: mainwindow.cpp:438
 #, fuzzy, kde-format
 #| msgid "Connection"
 msgid "Connected to %1"
 msgstr "連線"
 
-#: mainwindow.cpp:544
+#: mainwindow.cpp:534
 #, fuzzy, kde-format
 #| msgid "Start in fullscreen mode"
 msgid "Switch to Window Mode"
 msgstr "以全螢幕模式開啟"
 
-#: mainwindow.cpp:545
+#: mainwindow.cpp:535
 #, fuzzy, kde-format
 #| msgid "Start in fullscreen mode"
 msgid "Window Mode"
 msgstr "以全螢幕模式開啟"
 
-#: mainwindow.cpp:697
+#: mainwindow.cpp:687
 #, fuzzy, kde-format
 #| msgid "Connection"
 msgid "Connect"
 msgstr "連線"
 
-#: mainwindow.cpp:698
+#: mainwindow.cpp:688
 #, fuzzy, kde-format
 #| msgid "Name"
 msgid "Rename"
 msgstr "名稱"
 
-#: mainwindow.cpp:699
+#: mainwindow.cpp:689
 #, fuzzy, kde-format
 #| msgid "Settings"
 msgid "Settings"
 msgstr "設置"
 
-#: mainwindow.cpp:700
+#: mainwindow.cpp:690
 #, kde-format
 msgid "Delete"
 msgstr ""
 
-#: mainwindow.cpp:703 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:693 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr ""
 
-#: mainwindow.cpp:703 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:693 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr ""
 
-#: mainwindow.cpp:715
+#: mainwindow.cpp:705
 #, kde-format
 msgid "Rename %1"
 msgstr ""
 
-#: mainwindow.cpp:715
+#: mainwindow.cpp:705
 #, kde-format
 msgid "Rename %1 to"
 msgstr ""
 
-#: mainwindow.cpp:722
+#: mainwindow.cpp:712
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr ""
 
-#: mainwindow.cpp:722
+#: mainwindow.cpp:712
 #, kde-format
 msgid "Delete %1"
 msgstr ""
 
-#: mainwindow.cpp:746
+#: mainwindow.cpp:736
 #, kde-format
 msgid "Add Bookmark"
 msgstr ""
 
-#: mainwindow.cpp:747
+#: mainwindow.cpp:737
 #, kde-format
 msgid "Close Tab"
 msgstr ""
 
-#: mainwindow.cpp:860
+#: mainwindow.cpp:850
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr ""
 
-#: mainwindow.cpp:877
+#: mainwindow.cpp:867
 #, kde-format
 msgid "Stick Toolbar"
 msgstr ""
 
-#: mainwindow.cpp:984
+#: mainwindow.cpp:974
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr ""
 
-#: mainwindow.cpp:985
+#: mainwindow.cpp:975
 #, kde-format
 msgid "Confirm Quit"
 msgstr ""
 
-#: mainwindow.cpp:1113
+#: mainwindow.cpp:1103
 #, fuzzy, kde-format
 #| msgid "Connect"
 msgid "Connect to:"
 msgstr "連接"
 
-#: mainwindow.cpp:1117
+#: mainwindow.cpp:1107
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr ""
 
-#: mainwindow.cpp:1126
+#: mainwindow.cpp:1116
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
 "methods."
 msgstr ""
 
-#: mainwindow.cpp:1129
+#: mainwindow.cpp:1119
 #, fuzzy, kde-format
 #| msgid "Address"
 msgid "Goto Address"
 msgstr "位址"
 
-#: mainwindow.cpp:1221
+#: mainwindow.cpp:1211
 #, fuzzy, kde-format
 #| msgid "Remote &desktop:"
 msgid "Remote Desktops"
 msgstr "遠端桌面(&D):"
 
-#: mainwindow.cpp:1250
+#: mainwindow.cpp:1240
 #, kde-format
 msgid "Filter"
 msgstr ""
