@@ -86,16 +86,6 @@ void BookmarkManager::openFolderinTabs(const KBookmarkGroup &bookmarkGroup)
     }
 }
 
-bool BookmarkManager::addBookmarkEntry() const
-{
-    return true;
-}
-
-bool BookmarkManager::editBookmarkEntry() const
-{
-    return true;
-}
-
 QUrl BookmarkManager::currentUrl() const
 {
     RemoteView *view = m_mainWindow->currentRemoteView();
@@ -118,6 +108,17 @@ QString BookmarkManager::currentTitle() const
 QString BookmarkManager::titleForUrl(const QUrl &url) const
 {
     return url.toDisplayString(QUrl::UrlFormattingOption::StripTrailingSlash);
+}
+
+bool BookmarkManager::enableOption(KBookmarkOwner::BookmarkOption option) const
+{
+    switch (option) {
+    case KBookmarkOwner::ShowAddBookmark:
+    case KBookmarkOwner::ShowEditBookmark:
+        return false;
+    default:
+        return false;
+    }
 }
 
 bool BookmarkManager::supportsTabs() const

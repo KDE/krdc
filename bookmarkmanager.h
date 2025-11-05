@@ -28,8 +28,7 @@ public:
 
     QUrl currentUrl() const override;
     QString currentTitle() const override;
-    virtual bool addBookmarkEntry() const;
-    virtual bool editBookmarkEntry() const;
+    bool enableOption(KBookmarkOwner::BookmarkOption option) const override;
     bool supportsTabs() const override;
     QList<KBookmarkOwner::FutureBookmark> currentBookmarkList() const override;
     void addHistoryBookmark(RemoteView *view);
