@@ -766,7 +766,7 @@ BOOL RdpSession::endPaint(rdpContext *context)
     WINPR_ASSERT(session);
 
     auto gdi = context->gdi;
-    if (!gdi || !gdi->primary) {
+    if (!gdi || !gdi->primary || !gdi->primary->hdc || !gdi->primary->hdc->hwnd || !gdi->primary->hdc->hwnd->invalid) {
         return false;
     }
 
