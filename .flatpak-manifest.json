@@ -6,7 +6,9 @@
     "command": "krdc",
     "rename-icon": "krdc",
     "branch": "master",
-    "tags": ["nightly"],
+    "tags": [
+        "nightly"
+    ],
     "desktop-file-name-suffix": " (Nightly)",
     "cleanup": [
         "/include",
@@ -68,7 +70,9 @@
         },
         {
             "name": "libusb",
-            "config-opts": [ "--disable-static" ],
+            "config-opts": [
+                "--disable-static"
+            ],
             "cleanup": [
                 "/lib/*.la",
                 "/lib/pkgconfig",
@@ -166,8 +170,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://github.com/FreeRDP/FreeRDP/archive/refs/tags/3.17.2.tar.gz",
-                    "sha256": "04a2e8049602e7aba767880990959facf2ebf7b5fbeeb5120e81838d8c2d2f17",
+                    "url": "https://github.com/FreeRDP/FreeRDP/archive/refs/tags/3.19.0.tar.gz",
+                    "sha256": "8d3ada0d4f30dd5c3eef2613d266b420f1404fa2868983abdb4e3087a460ee78",
                     "x-checker-data": {
                         "type": "anitya",
                         "project-id": 10442,
@@ -201,8 +205,8 @@
                     "sources": [
                         {
                             "type": "archive",
-                            "url": "https://github.com/OpenSC/pkcs11-helper/archive/refs/tags/pkcs11-helper-1.30.0.tar.gz",
-                            "sha256": "076c9f664812a45f2da25efc157338b0b8bb1949117f0144050fec176b6fdf78",
+                            "url": "https://github.com/OpenSC/pkcs11-helper/archive/refs/tags/pkcs11-helper-1.31.0.tar.gz",
+                            "sha256": "585e0347892bdf45220b080c9eae9216b461f96369c19be1e4bb6d80a078dc6b",
                             "x-checker-data": {
                                 "type": "anitya",
                                 "project-id": 91990,
