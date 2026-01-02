@@ -1,26 +1,27 @@
 # translation of krdc.po to
-# Version: $Revision: 1723076 $
+# Version: $Revision: 1726322 $
 # Copyright (C) 2002, 2003, 2004, 2005, 2006, 2008, 2009 Free Software Foundation, Inc.
 # Krzysztof Lichota <lichota@mimuw.edu.pl>, 2002, 2005, 2006.
 # Michal Rudolf <mrudolf@kdewebdev.org>, 2003, 2004.
 # Marta Rybczyńska <kde-i18n@rybczynska.net>, 2008, 2009, 2010, 2013.
 # Mirek Sabiniewicz <m.sabiniewicz@gmail.com>, 2010.
-# SPDX-FileCopyrightText: 2012, 2013, 2014, 2015, 2016, 2018, 2019, 2020, 2021, 2024, 2025 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+# SPDX-FileCopyrightText: 2012, 2013, 2014, 2015, 2016, 2018, 2019, 2020, 2021, 2024, 2025, 2026 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:52+0000\n"
-"PO-Revision-Date: 2025-03-15 10:46+0100\n"
+"PO-Revision-Date: 2026-01-01 12:46+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
-"Language-Team: Polish <kde-i18n-doc@kde.org>\n"
+"Language-Team: pl\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
+"X-Generator: Lokalize 25.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -190,10 +191,9 @@ msgid "Right"
 msgstr "Po prawej"
 
 #: config/hostpreferenceslist.cpp:30
-#, fuzzy, kde-format
-#| msgid "Configure..."
+#, kde-format
 msgid "Configure…"
-msgstr "Ustawienia..."
+msgstr "Ustawienia…"
 
 #: config/hostpreferenceslist.cpp:36
 #, kde-format
@@ -339,10 +339,9 @@ msgstr "Błąd tworzenia gniazda tunelu"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, SshTunnelWidget)
 #: core/sshtunnelwidget.ui:14
-#, fuzzy, kde-format
-#| msgid "SSH tunnel options"
+#, kde-format
 msgid "SSH tunnel"
-msgstr "Opcje tunelu SSH"
+msgstr "Tunel SSH"
 
 #. i18n: ectx: property (text), widget (QCheckBox, use_ssh_tunnel)
 #: core/sshtunnelwidget.ui:32
@@ -354,7 +353,7 @@ msgstr "Połącz przez tunel SSH"
 #: core/sshtunnelwidget.ui:39
 #, kde-format
 msgid "SSH tunnel options"
-msgstr "Opcje tunelu SSH"
+msgstr "Ustawienia tunelu SSH"
 
 #. i18n: ectx: property (text), widget (QCheckBox, use_loopback)
 #: core/sshtunnelwidget.ui:45
@@ -529,7 +528,7 @@ msgstr "Tylko podgląd"
 #: mainwindow.cpp:154
 #, kde-format
 msgid "Clipboard Sharing"
-msgstr ""
+msgstr "Współdzielenie schowka"
 
 #: mainwindow.cpp:159
 #, kde-format
@@ -807,10 +806,9 @@ msgstr "Rozdzielczość bieżącego ekranu"
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
 #: rdp/rdppreferences.ui:81 vnc/vncpreferences.ui:123
-#, fuzzy, kde-format
-#| msgid "Custom Resolution (...)"
+#, kde-format
 msgid "Custom Resolution (…)"
-msgstr "Własna rozdzielczość (...)"
+msgstr "Własna rozdzielczość (…)"
 
 #. i18n: ectx: property (text), widget (QLabel, widthLabel)
 #: rdp/rdppreferences.ui:94 vnc/vncpreferences.ui:136
@@ -860,8 +858,7 @@ msgstr "Przyspieszenie:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
 #: rdp/rdppreferences.ui:196
-#, fuzzy, kde-format
-#| msgid "Use Best Available"
+#, kde-format
 msgctxt "Use best acceleration supported by both the server and krdc"
 msgid "Use Best Available"
 msgstr "Użyj najlepszej dostępnej"
@@ -892,8 +889,7 @@ msgstr "&Głębia kolorów:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
 #: rdp/rdppreferences.ui:245
-#, fuzzy, kde-format
-#| msgid "Use Best Available"
+#, kde-format
 msgctxt "Use best color depth supported by both the server and krdc"
 msgid "Use Best Available"
 msgstr "Użyj najlepszej dostępnej"
@@ -1252,26 +1248,25 @@ msgstr "Udostępnij kartę inteligentną:"
 #: rdp/rdppreferences.ui:689
 #, kde-format
 msgid "Alternate Session Type:"
-msgstr ""
+msgstr "Zamienny rodzaj posiedzenia:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ConsoleMode)
 #: rdp/rdppreferences.ui:699
 #, kde-format
 msgid "Admin (or console) session"
-msgstr ""
+msgstr "Posiedzenie administratora (lub konsoli)"
 
 #. i18n: ectx: property (text), widget (QLabel, preventSessionLockLabel)
 #: rdp/rdppreferences.ui:706
-#, fuzzy, kde-format
-#| msgid "Session ID"
+#, kde-format
 msgid "Session lock:"
-msgstr "ID sesji"
+msgstr "Blokada posiedzenia:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_PreventSessionLock)
 #: rdp/rdppreferences.ui:716
 #, kde-format
 msgid "Prevent remote session lock"
-msgstr ""
+msgstr "Zapobieganie zdalnemu blokowaniu posiedzenia"
 
 #. i18n: ectx: attribute (title), widget (QWidget, securitySettingsTab)
 #: rdp/rdppreferences.ui:724
@@ -1626,10 +1621,9 @@ msgid "Connect to a Windows Remote Desktop (RDP)"
 msgstr "Podłączyć się do zdalnego pulpitu Windows (RDP)"
 
 #: rdp/rdpviewfactory.cpp:109
-#, fuzzy, kde-format
-#| msgid "New RDP Connection..."
+#, kde-format
 msgid "New RDP Connection…"
-msgstr "Nowe połączenie RDP..."
+msgstr "Nowe połączenie RDP…"
 
 #: rdp/rdpviewfactory.cpp:120
 #, kde-format
@@ -1863,10 +1857,9 @@ msgid "VNC failure"
 msgstr "Błąd VNC"
 
 #: vnc/vncviewfactory.cpp:47
-#, fuzzy, kde-format
-#| msgid "New VNC Connection..."
+#, kde-format
 msgid "New VNC Connection…"
-msgstr "Nowe połączenie VNC..."
+msgstr "Nowe połączenie VNC…"
 
 #: vnc/vncviewfactory.cpp:52
 #, kde-format
