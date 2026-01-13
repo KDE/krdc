@@ -992,8 +992,9 @@ bool RdpSession::sendEvent(QEvent *event, QWidget *source)
             syncKeyState();
         }
         auto keyEvent = static_cast<QKeyEvent *>(event);
+        auto keyboardType = freerdp_settings_get_uint32(m_context.rdp->settings, FreeRDP_KeyboardType);
         const DWORD vc = GetVirtualKeyCodeFromKeycode(keyEvent->nativeScanCode(), WINPR_KEYCODE_TYPE_XKB);
-        const DWORD code = GetVirtualScanCodeFromVirtualKeyCode(vc, WINPR_KBD_TYPE_IBM_ENHANCED);
+        const DWORD code = GetVirtualScanCodeFromVirtualKeyCode(vc, keyboardType);
         freerdp_input_send_keyboard_event_ex(input, keyEvent->type() == QEvent::KeyPress, keyEvent->isAutoRepeat(), code);
         return true;
     }
