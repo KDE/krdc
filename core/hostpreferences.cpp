@@ -250,7 +250,7 @@ bool HostPreferences::showDialog(QWidget *parent)
     showAgainCheckBox->setChecked(showConfigAgain());
 
     walletSupportCheckBox = new QCheckBox(mainWidget);
-    walletSupportCheckBox->setText(i18n("Remember password (KWallet)"));
+    walletSupportCheckBox->setText(i18n("Remember password"));
     walletSupportCheckBox->setChecked(walletSupport());
 
     layout->addWidget(showAgainCheckBox);

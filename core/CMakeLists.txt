@@ -24,16 +24,17 @@ generate_export_header(krdccore BASE_NAME krdccore)
 
 target_link_libraries(krdccore
     Qt::Core
-    KF6::Wallet
+    Qt::Gui
+    Qt::Widgets
+    Qt6Keychain::Qt6Keychain
     KF6::ConfigCore
-    KF6::CoreAddons
-    KF6::WidgetsAddons
-    KF6::I18n
     KF6::ConfigGui
     KF6::Completion
+    KF6::CoreAddons
     KF6::GuiAddons
-    Qt::Gui
-    Qt::Widgets)
+    KF6::I18n
+    KF6::WidgetsAddons
+)
 
 if(HAVE_WAYLAND)
     qt_generate_wayland_protocol_client_sources(krdccore

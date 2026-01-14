@@ -1,7 +1,7 @@
 {
     "id": "org.kde.krdc",
     "runtime": "org.kde.Platform",
-    "runtime-version": "6.9",
+    "runtime-version": "6.10",
     "sdk": "org.kde.Sdk",
     "command": "krdc",
     "rename-icon": "krdc",
@@ -16,73 +16,87 @@
         "/share/man"
     ],
     "finish-args": [
-        "--share=ipc",
-        "--socket=fallback-x11",
-        "--socket=wayland",
-        "--share=network",
         "--device=dri",
+        "--env=OPENSSL_CONF=/app/share/legacy-openssl.cnf",
+        "--share=ipc",
+        "--share=network",
+        "--socket=fallback-x11",
         "--socket=pulseaudio",
-        "--talk-name=org.kde.kwalletd5",
-        "--talk-name=org.kde.kwalletd6",
+        "--socket=wayland",
+        "--talk-name=org.freedesktop.secrets",
         "--talk-name=org.kde.StatusNotifierWatcher",
-        "--env=OPENSSL_CONF=/app/share/legacy-openssl.cnf"
-    ],
-    "add-extensions": {
-        "org.freedesktop.Platform.ffmpeg-full": {
-            "directory": "lib/ffmpeg",
-            "add-ld-path": ".",
-            "version": "24.08",
-            "autodownload": true
-        }
-    },
-    "cleanup-commands": [
-        "mkdir -p ${FLATPAK_DEST}/lib/ffmpeg"
+        "--talk-name=org.kde.kwalletd5",
+        "--talk-name=org.kde.kwalletd6"
     ],
     "modules": [
         {
-            "name": "libusb",
+            "name": "libsecret",
+            "buildsystem": "meson",
             "config-opts": [
-                "--disable-static"
-            ],
-            "cleanup": [
-                "/lib/*.la",
-                "/lib/pkgconfig",
-                "/include"
+                "-Dmanpage=false",
+                "-Dvapi=false",
+                "-Dgtk_doc=false",
+                "-Dintrospection=false",
+                "-Dcrypto=disabled"
             ],
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://github.com/libusb/libusb/releases/download/v1.0.29/libusb-1.0.29.tar.bz2",
-                    "sha256": "5977fc950f8d1395ccea9bd48c06b3f808fd3c2c961b44b0c2e6e29fc3a70a85",
+                    "url": "https://download.gnome.org/sources/libsecret/0.21/libsecret-0.21.7.tar.xz",
+                    "sha256": "6b452e4750590a2b5617adc40026f28d2f4903de15f1250e1d1c40bfd68ed55e",
                     "x-checker-data": {
-                        "type": "anitya",
-                        "project-id": 1749,
-                        "stable-only": true,
-                        "url-template": "https://github.com/libusb/libusb/releases/download/v$version/libusb-$version.tar.bz2"
+                        "type": "gnome",
+                        "name": "libsecret",
+                        "stable-only": true
                     }
                 }
-            ],
-            "post-install": [
-                "install -Dm644 COPYING ${FLATPAK_DEST}/share/licenses/libusb/COPYING"
             ]
         },
         {
-            "name": "libusb",
-            "config-opts": [ "--disable-static" ],
-            "cleanup": [
-                "/lib/*.la",
-                "/lib/pkgconfig",
-                "/include"
+            "name": "qtkeychain",
+            "buildsystem": "cmake-ninja",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://github.com/frankosterfeld/qtkeychain/archive/refs/tags/0.15.0.tar.gz",
+                    "sha256": "f4254dc8f0933b06d90672d683eab08ef770acd8336e44dfa030ce041dc2ca22",
+                    "x-checker-data": {
+                        "type": "anitya",
+                        "project-id": 4138,
+                        "stable-only": true,
+                        "url-template": "https://github.com/frankosterfeld/qtkeychain/archive/refs/tags/$version.tar.gz"
+                    }
+                }
+            ],
+            "config-opts": [
+                "-DBUILD_WITH_QT6=ON",
+                "-DCMAKE_INSTALL_LIBDIR=/app/lib",
+                "-DLIB_INSTALL_DIR=/app/lib",
+                "-DBUILD_TRANSLATIONS=NO",
+                "-DBUILD_TESTING=OFF"
+            ]
+        },
+        {
+            "name": "libssh",
+            "buildsystem": "cmake-ninja",
+            "builddir": true,
+            "config-opts": [
+                "-DWITH_DEBUG_CALLTRACE:BOOL=OFF",
+                "-DWITH_EXAMPLES:BOOL=OFF",
+                "-DWITH_SERVER:BOOL=OFF"
             ],
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://github.com/libusb/libusb/releases/download/v1.0.26/libusb-1.0.26.tar.bz2",
-                    "sha256": "12ce7a61fc9854d1d2a1ffe095f7b5fac19ddba095c259e6067a46500381b5a5"
+                    "url": "https://www.libssh.org/files/0.11/libssh-0.11.3.tar.xz",
+                    "sha256": "7d8a1361bb094ec3f511964e78a5a4dba689b5986e112afabe4f4d0d6c6125c3",
+                    "x-checker-data": {
+                        "type": "anitya",
+                        "project-id": 1729,
+                        "stable-only": true,
+                        "url-template": "https://www.libssh.org/files/$major.$minor/libssh-$version.tar.xz"
+                    }
                 }
-            ],
-            "post-install": [
-                "install -Dm644 COPYING ${FLATPAK_DEST}/share/licenses/libusb/COPYING"
             ]
         },
         {
@@ -113,6 +127,7 @@
             "buildsystem": "cmake-ninja",
             "builddir": true,
             "config-opts": [
+                "-DCMAKE_POLICY_VERSION_MINIMUM=3.5",
                 "-DWITH_EXAMPLES:BOOL=OFF",
                 "-DWITH_GTK:BOOL=OFF",
                 "-DWITH_SDL:BOOL=OFF",
@@ -138,36 +153,39 @@
             "buildsystem": "cmake-ninja",
             "builddir": true,
             "config-opts": [
-                "-DCMAKE_VERBOSE_MAKEFILE=ON",
-                "-DCMAKE_BUILD_TYPE:STRING=RelWithDebInfo",
-                "-DCMAKE_INSTALL_LIBDIR:PATH=lib",
+                "-DBUILD_TESTING=OFF",
                 "-DCHANNEL_TSMF=OFF",
                 "-DCHANNEL_URBDRC=ON",
-                "-DBUILD_TESTING=OFF",
-                "-DWITH_MANPAGES=OFF",
-                "-DWITH_WAYLAND=ON",
-                "-DWITH_FUSE=OFF",
-                "-DWITH_PCSC=ON",
-                "-DWITH_PKCS11=ON",
-                "-DWITH_SWSCALE=ON",
-                "-DWITH_SERVER=ON",
-                "-DWITH_SAMPLE=ON",
+                "-DCMAKE_BUILD_TYPE:STRING=RelWithDebInfo",
+                "-DCMAKE_INSTALL_LIBDIR:PATH=lib",
+                "-DCMAKE_VERBOSE_MAKEFILE=ON",
+                "-DWITH_CLIENT_SDL:BOOL=OFF",
+                "-DWITH_CLIENT_SDL2:BOOL=OFF",
+                "-DWITH_CLIENT_SDL3:BOOL=OFF",
                 "-DWITH_CUPS=ON",
-                "-DWITH_FFMPEG=ON",
                 "-DWITH_DSP_FFMPEG=ON",
                 "-DWITH_FAAC=OFF",
                 "-DWITH_FAAD2=OFF",
+                "-DWITH_FFMPEG=ON",
+                "-DWITH_FUSE=OFF",
+                "-DWITH_MANPAGES=OFF",
                 "-DWITH_OSS=OFF",
-                "-DWITH_SDL_IMAGE_DIALOGS=ON",
-                "-DWITH_WEBVIEW=OFF",
+                "-DWITH_PCSC=ON",
+                "-DWITH_PKCS11=ON",
                 "-DWITH_PULSE=ON",
-                "-DWITH_VAAPI:BOOL=ON"
+                "-DWITH_SAMPLE=ON",
+                "-DWITH_SDL_IMAGE_DIALOGS=ON",
+                "-DWITH_SERVER=ON",
+                "-DWITH_SWSCALE=ON",
+                "-DWITH_VAAPI:BOOL=ON",
+                "-DWITH_WAYLAND=ON",
+                "-DWITH_WEBVIEW=OFF"
             ],
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://github.com/FreeRDP/FreeRDP/archive/refs/tags/3.17.2.tar.gz",
-                    "sha256": "04a2e8049602e7aba767880990959facf2ebf7b5fbeeb5120e81838d8c2d2f17",
+                    "url": "https://github.com/FreeRDP/FreeRDP/archive/refs/tags/3.20.0.tar.gz",
+                    "sha256": "7aef7cb22398ecdff0dd83071cbd17d20881751750b3879982af75b28042fd0d",
                     "x-checker-data": {
                         "type": "anitya",
                         "project-id": 10442,
@@ -176,7 +194,7 @@
                     }
                 }
             ],
-            "modules": [
+           "modules": [
                 {
                     "name": "krb5",
                     "buildsystem": "autotools",
@@ -201,8 +219,8 @@
                     "sources": [
                         {
                             "type": "archive",
-                            "url": "https://github.com/OpenSC/pkcs11-helper/archive/refs/tags/pkcs11-helper-1.30.0.tar.gz",
-                            "sha256": "076c9f664812a45f2da25efc157338b0b8bb1949117f0144050fec176b6fdf78",
+                            "url": "https://github.com/OpenSC/pkcs11-helper/archive/refs/tags/pkcs11-helper-1.31.0.tar.gz",
+                            "sha256": "585e0347892bdf45220b080c9eae9216b461f96369c19be1e4bb6d80a078dc6b",
                             "x-checker-data": {
                                 "type": "anitya",
                                 "project-id": 91990,

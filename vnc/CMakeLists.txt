@@ -40,7 +40,6 @@ target_sources(kcm_krdc_vncplugin PRIVATE
 
 target_link_libraries(kcm_krdc_vncplugin
     Qt::Core
-    KF6::Wallet
     KF6::ConfigCore
     KF6::CoreAddons
     KF6::KCMUtils

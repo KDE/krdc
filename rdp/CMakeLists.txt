@@ -47,7 +47,6 @@ target_sources(kcm_krdc_rdpplugin PRIVATE
 target_link_libraries(kcm_krdc_rdpplugin
     Qt::Core
     Qt::Gui
-    KF6::Wallet
     KF6::ConfigCore
     KF6::CoreAddons
     KF6::KCMUtils

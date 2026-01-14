@@ -10,7 +10,6 @@
 #define REMOTEVIEW_H
 
 #include "krdccore_export.h"
-#include <KWallet>
 
 #include <QClipboard>
 #include <QMap>
@@ -477,7 +476,6 @@ protected:
     QString readWalletPasswordForKey(const QString &key);
     void saveWalletPasswordForKey(const QString &key, const QString &password);
     void deleteWalletPasswordForKey(const QString &key);
-    KWallet::Wallet *m_wallet;
 
     LocalCursorState m_localCursorState;
 

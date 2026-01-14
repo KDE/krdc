@@ -9,6 +9,7 @@ set (RELEASE_SERVICE_VERSION "${RELEASE_SERVICE_VERSION_MAJOR}.${RELEASE_SERVICE
 project(krdc VERSION ${RELEASE_SERVICE_VERSION})
 
 set (QT_MIN_VERSION "6.6.0")
+set (QT_KEYCHAIN_MIN_VERSION "0.15.0")
 set (KF_MIN_VERSION "6.0.0")
 
 find_package(ECM ${KF_MIN_VERSION} REQUIRED NO_MODULE)
@@ -34,6 +35,8 @@ if (UNIX AND NOT APPLE AND NOT ANDROID)
     set(HAVE_WAYLAND ${Qt6WaylandClient_FOUND})
 endif()
 
+find_package(Qt6Keychain ${QT_KEYCHAIN_MIN_VERSION} REQUIRED)
+
 find_package(KF6 ${KF_MIN_VERSION} REQUIRED COMPONENTS
     Config
     KCMUtils
@@ -44,7 +47,6 @@ find_package(KF6 ${KF_MIN_VERSION} REQUIRED COMPONENTS
     IconThemes
     XmlGui
     Completion
-    Wallet
     WidgetsAddons
     WindowSystem
     NotifyConfig
@@ -198,22 +200,21 @@ ecm_qt_declare_logging_category(krdc
 )
 
 target_link_libraries(krdc
-    KF6::ConfigCore
-    KF6::KCMUtils
-    KF6::DNSSD
-    KF6::NotifyConfig
     KF6::Bookmarks
-    KF6::IconThemes
-    KF6::XmlGui
+    KF6::BookmarksWidgets
     KF6::Completion
-    KF6::WidgetsAddons
-    KF6::NotifyConfig
-    KF6::Notifications
+    KF6::ConfigCore
     KF6::Crash
+    KF6::DNSSD
+    KF6::IconThemes
+    KF6::KCMUtils
+    KF6::Notifications
+    KF6::NotifyConfig
+    KF6::StatusNotifierItem
+    KF6::WidgetsAddons
+    KF6::XmlGui
     krdccore
 )
-
-    target_link_libraries(krdc KF6::StatusNotifierItem KF6::BookmarksWidgets)
 
 install(TARGETS krdc ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 configure_file(org.kde.krdc.desktop.cmake ${CMAKE_CURRENT_BINARY_DIR}/org.kde.krdc.desktop @ONLY)

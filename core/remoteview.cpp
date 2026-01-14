@@ -19,6 +19,8 @@
 #include <QTimer>
 #include <QWheelEvent>
 
+#include <qt6keychain/keychain.h>
+
 #ifdef HAVE_WAYLAND
 #include "waylandinhibition_p.h"
 #endif
@@ -29,6 +31,8 @@
 #endif
 
 #include "hostpreferences.h"
+
+static const QString KEYCHAIN_SERVICE_NAME = QLatin1String("KRDC");
 
 RemoteView::RemoteView(QWidget *parent)
     : QWidget(parent)
@@ -41,7 +45,6 @@ RemoteView::RemoteView(QWidget *parent)
     , m_keyboardIsGrabbed(false)
     , m_factor(0.)
     , m_clipboard(nullptr)
-    , m_wallet(nullptr)
     , m_localCursorState(CursorOff)
 #ifdef USE_SSH_TUNNEL
     , m_sshTunnelThread(nullptr)
@@ -73,8 +76,6 @@ RemoteView::~RemoteView()
         }
     }
 #endif
-
-    delete m_wallet;
 }
 
 RemoteView::RemoteStatus RemoteView::status()
@@ -305,46 +306,69 @@ void RemoteView::deleteWalletPassword(bool fromUserNameOnly)
 
 QString RemoteView::readWalletPasswordForKey(const QString &key)
 {
-    const QString KRDCFOLDER = QLatin1String("KRDC");
+    QKeychain::ReadPasswordJob job(KEYCHAIN_SERVICE_NAME);
+    job.setAutoDelete(false);
+    job.setKey(key);
+    QEventLoop loop;
+    job.connect(&job, &QKeychain::Job::finished, &loop, &QEventLoop::quit);
 
     window()->setDisabled(true); // WORKAROUND: disable inputs so users cannot close the current tab (see #181230)
-    m_wallet = KWallet::Wallet::openWallet(KWallet::Wallet::NetworkWallet(), window()->winId(), KWallet::Wallet::OpenType::Synchronous);
+    job.start();
+    loop.exec();
     window()->setDisabled(false);
 
-    if (m_wallet) {
-        bool walletOK = m_wallet->hasFolder(KRDCFOLDER);
-        if (!walletOK) {
-            walletOK = m_wallet->createFolder(KRDCFOLDER);
-            qCDebug(KRDC) << "Wallet folder created";
-        }
-        if (walletOK) {
-            qCDebug(KRDC) << "Wallet OK";
-            m_wallet->setFolder(KRDCFOLDER);
-            QString password;
-
-            if (m_wallet->hasEntry(key) && !m_wallet->readPassword(key, password)) {
-                qCDebug(KRDC) << "Password read OK";
-
-                return password;
-            }
-        }
+    switch (job.error()) {
+    case QKeychain::NoError:
+        qCDebug(KRDC) << "Password read OK";
+        return job.textData();
+        break;
+    case QKeychain::EntryNotFound:
+        qCDebug(KRDC) << "Password not found";
+        break;
+    default:
+        qCDebug(KRDC) << "QtKeychain read error:" << job.errorString();
+        break;
     }
+
     return QString();
 }
 
 void RemoteView::saveWalletPasswordForKey(const QString &key, const QString &password)
 {
-    if (m_wallet && m_wallet->isOpen()) {
-        qCDebug(KRDC) << "Write wallet password";
-        m_wallet->writePassword(key, password);
+    QKeychain::WritePasswordJob job(KEYCHAIN_SERVICE_NAME);
+    job.setAutoDelete(false);
+    job.setKey(key);
+    job.setTextData(password);
+    QEventLoop loop;
+    job.connect(&job, &QKeychain::Job::finished, &loop, &QEventLoop::quit);
+    job.start();
+    loop.exec();
+    switch (job.error()) {
+    case QKeychain::NoError:
+        qCDebug(KRDC) << "Password write OK";
+        break;
+    default:
+        qCDebug(KRDC) << "QtKeychain write error:" << job.errorString();
+        break;
     }
 }
 
 void RemoteView::deleteWalletPasswordForKey(const QString &key)
 {
-    if (m_wallet && m_wallet->isOpen()) {
-        qCDebug(KRDC) << "Delete wallet password";
-        m_wallet->removeEntry(key);
+    QKeychain::DeletePasswordJob job(KEYCHAIN_SERVICE_NAME);
+    job.setAutoDelete(false);
+    job.setKey(key);
+    QEventLoop loop;
+    job.connect(&job, &QKeychain::Job::finished, &loop, &QEventLoop::quit);
+    job.start();
+    loop.exec();
+    switch (job.error()) {
+    case QKeychain::NoError:
+        qCDebug(KRDC) << "Password delete OK";
+        break;
+    default:
+        qCDebug(KRDC) << "QtKeychain delete error:" << job.errorString();
+        break;
     }
 }
 
