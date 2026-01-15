@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:52+0000\n"
+"POT-Creation-Date: 2026-01-15 00:42+0000\n"
 "PO-Revision-Date: 2023-02-09 21:30+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -49,8 +49,9 @@ msgstr "Hugs tilkoplingshistorikk"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_WalletSupport)
 #: config/general.ui:31
-#, kde-format
-msgid "Remember passwords (KWallet)"
+#, fuzzy, kde-format
+#| msgid "Remember passwords (KWallet)"
+msgid "Remember passwords"
 msgstr "Hugs passord (KWallet)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SystemTrayIcon)
@@ -294,8 +295,9 @@ msgid "Show this dialog again for this host"
 msgstr "Vis dette dialogvindauget på nytt for denne verten"
 
 #: core/hostpreferences.cpp:253
-#, kde-format
-msgid "Remember password (KWallet)"
+#, fuzzy, kde-format
+#| msgid "Remember password (KWallet)"
+msgid "Remember password"
 msgstr "Hugs passordet (KWallet)"
 
 #. i18n: ectx: label, entry (OpenSessions), group (General)
@@ -304,12 +306,12 @@ msgstr "Hugs passordet (KWallet)"
 msgid "Sessions"
 msgstr "Økter"
 
-#: core/remoteview.cpp:544
+#: core/remoteview.cpp:568
 #, kde-format
 msgid "Please enter the SSH password."
 msgstr "Skriv inn SSH-passordet."
 
-#: core/remoteview.cpp:562
+#: core/remoteview.cpp:586
 #, kde-format
 msgid "SSH Tunnel failure"
 msgstr "Feil ved SSH-tunell"

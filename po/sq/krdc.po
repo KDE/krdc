@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdenetwork\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:52+0000\n"
+"POT-Creation-Date: 2026-01-15 00:42+0000\n"
 "PO-Revision-Date: 2009-06-10 13:58+0000\n"
 "Last-Translator: Vilson Gjeci <vilsongjeci@gmail.com>\n"
 "Language-Team: Albanian <sq@li.org>\n"
@@ -48,9 +48,10 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_WalletSupport)
 #: config/general.ui:31
-#, kde-format
-msgid "Remember passwords (KWallet)"
-msgstr ""
+#, fuzzy, kde-format
+#| msgid "Remember password (KWallet)"
+msgid "Remember passwords"
+msgstr "Mba mend fjalëkalimin (KWallet)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SystemTrayIcon)
 #: config/general.ui:38
@@ -287,8 +288,9 @@ msgid "Show this dialog again for this host"
 msgstr "Shfaqe këtë dialog përsëri për këtë mbartës"
 
 #: core/hostpreferences.cpp:253
-#, kde-format
-msgid "Remember password (KWallet)"
+#, fuzzy, kde-format
+#| msgid "Remember password (KWallet)"
+msgid "Remember password"
 msgstr "Mba mend fjalëkalimin (KWallet)"
 
 #. i18n: ectx: label, entry (OpenSessions), group (General)
@@ -297,12 +299,12 @@ msgstr "Mba mend fjalëkalimin (KWallet)"
 msgid "Sessions"
 msgstr ""
 
-#: core/remoteview.cpp:544
+#: core/remoteview.cpp:568
 #, kde-format
 msgid "Please enter the SSH password."
 msgstr ""
 
-#: core/remoteview.cpp:562
+#: core/remoteview.cpp:586
 #, kde-format
 msgid "SSH Tunnel failure"
 msgstr ""

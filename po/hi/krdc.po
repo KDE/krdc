@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:52+0000\n"
+"POT-Creation-Date: 2026-01-15 00:42+0000\n"
 "PO-Revision-Date: 2021-08-21 16:16+0530\n"
 "Last-Translator: Raghavendra Kamath <raghu@raghukamath.com>\n"
 "Language-Team: kde-hindi\n"
@@ -49,8 +49,9 @@ msgstr "%1 से कनेक्शन किया जा रहा है"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_WalletSupport)
 #: config/general.ui:31
-#, kde-format
-msgid "Remember passwords (KWallet)"
+#, fuzzy, kde-format
+#| msgid "Remember passwords (KWallet)"
+msgid "Remember passwords"
 msgstr "पासवर्ड याद रखें (केवॉलेट)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SystemTrayIcon)
@@ -295,8 +296,9 @@ msgid "Show this dialog again for this host"
 msgstr "इस होस्ट के लिए इस संवाद को फिर से दिखाएँ "
 
 #: core/hostpreferences.cpp:253
-#, kde-format
-msgid "Remember password (KWallet)"
+#, fuzzy, kde-format
+#| msgid "Remember password (KWallet)"
+msgid "Remember password"
 msgstr "पासवर्ड याद रखें (केवॉलेट)"
 
 #. i18n: ectx: label, entry (OpenSessions), group (General)
@@ -306,12 +308,12 @@ msgstr "पासवर्ड याद रखें (केवॉलेट)"
 msgid "Sessions"
 msgstr "सत्र"
 
-#: core/remoteview.cpp:544
+#: core/remoteview.cpp:568
 #, kde-format
 msgid "Please enter the SSH password."
 msgstr ""
 
-#: core/remoteview.cpp:562
+#: core/remoteview.cpp:586
 #, kde-format
 msgid "SSH Tunnel failure"
 msgstr ""

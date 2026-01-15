@@ -1,5 +1,5 @@
 # translation of krdc.po to
-# Version: $Revision: 1726322 $
+# Version: $Revision: 1727692 $
 # Copyright (C) 2002, 2003, 2004, 2005, 2006, 2008, 2009 Free Software Foundation, Inc.
 # Krzysztof Lichota <lichota@mimuw.edu.pl>, 2002, 2005, 2006.
 # Michal Rudolf <mrudolf@kdewebdev.org>, 2003, 2004.
@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:52+0000\n"
+"POT-Creation-Date: 2026-01-15 00:42+0000\n"
 "PO-Revision-Date: 2026-01-01 12:46+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: pl\n"
@@ -52,8 +52,9 @@ msgstr "Pamiętaj historię połączenia"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_WalletSupport)
 #: config/general.ui:31
-#, kde-format
-msgid "Remember passwords (KWallet)"
+#, fuzzy, kde-format
+#| msgid "Remember passwords (KWallet)"
+msgid "Remember passwords"
 msgstr "Zapamiętuj hasła (Portfel)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SystemTrayIcon)
@@ -301,8 +302,9 @@ msgid "Show this dialog again for this host"
 msgstr "Pokaż to okienko dialogowe ponownie dla tego serwera"
 
 #: core/hostpreferences.cpp:253
-#, kde-format
-msgid "Remember password (KWallet)"
+#, fuzzy, kde-format
+#| msgid "Remember password (KWallet)"
+msgid "Remember password"
 msgstr "Zapamiętaj hasło (Portfel)"
 
 #. i18n: ectx: label, entry (OpenSessions), group (General)
@@ -311,12 +313,12 @@ msgstr "Zapamiętaj hasło (Portfel)"
 msgid "Sessions"
 msgstr "Posiedzenia"
 
-#: core/remoteview.cpp:544
+#: core/remoteview.cpp:568
 #, kde-format
 msgid "Please enter the SSH password."
 msgstr "Podaj hasło SSH."
 
-#: core/remoteview.cpp:562
+#: core/remoteview.cpp:586
 #, kde-format
 msgid "SSH Tunnel failure"
 msgstr "Błąd tunelu SSH"

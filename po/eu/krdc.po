@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:52+0000\n"
+"POT-Creation-Date: 2026-01-15 00:42+0000\n"
 "PO-Revision-Date: 2025-09-27 11:59+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -58,8 +58,9 @@ msgstr "Gogoratu konexioen historia"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_WalletSupport)
 #: config/general.ui:31
-#, kde-format
-msgid "Remember passwords (KWallet)"
+#, fuzzy, kde-format
+#| msgid "Remember passwords (KWallet)"
+msgid "Remember passwords"
 msgstr "Gogoratu pasahitzak (KWallet)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SystemTrayIcon)
@@ -302,8 +303,9 @@ msgid "Show this dialog again for this host"
 msgstr "Erakutsi elkarrizketa-koadroa berriro ostalari honentzat"
 
 #: core/hostpreferences.cpp:253
-#, kde-format
-msgid "Remember password (KWallet)"
+#, fuzzy, kde-format
+#| msgid "Remember password (KWallet)"
+msgid "Remember password"
 msgstr "Gogoratu pasahitza (KWallet)"
 
 #. i18n: ectx: label, entry (OpenSessions), group (General)
@@ -312,12 +314,12 @@ msgstr "Gogoratu pasahitza (KWallet)"
 msgid "Sessions"
 msgstr "Saioak"
 
-#: core/remoteview.cpp:544
+#: core/remoteview.cpp:568
 #, kde-format
 msgid "Please enter the SSH password."
 msgstr "Mesedez sartu SSH pasahitza."
 
-#: core/remoteview.cpp:562
+#: core/remoteview.cpp:586
 #, kde-format
 msgid "SSH Tunnel failure"
 msgstr "SSH tunelaren hutsegitea"

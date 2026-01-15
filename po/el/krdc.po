@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:52+0000\n"
+"POT-Creation-Date: 2026-01-15 00:42+0000\n"
 "PO-Revision-Date: 2024-09-20 09:33+0300\n"
 "Last-Translator: Antonis Geralis <capoiosct@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -51,8 +51,9 @@ msgstr "Απομνημόνευση ιστορικού σύνδεσης"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_WalletSupport)
 #: config/general.ui:31
-#, kde-format
-msgid "Remember passwords (KWallet)"
+#, fuzzy, kde-format
+#| msgid "Remember passwords (KWallet)"
+msgid "Remember passwords"
 msgstr "Απομνημόνευση κωδικών (KWallet)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SystemTrayIcon)
@@ -296,8 +297,9 @@ msgid "Show this dialog again for this host"
 msgstr "Εμφάνιση αυτού του διαλόγου ξανά για αυτόν τον κόμβο"
 
 #: core/hostpreferences.cpp:253
-#, kde-format
-msgid "Remember password (KWallet)"
+#, fuzzy, kde-format
+#| msgid "Remember password (KWallet)"
+msgid "Remember password"
 msgstr "Απομνημόνευση κωδικού (KWallet)"
 
 #. i18n: ectx: label, entry (OpenSessions), group (General)
@@ -306,12 +308,12 @@ msgstr "Απομνημόνευση κωδικού (KWallet)"
 msgid "Sessions"
 msgstr "Συνεδρίες"
 
-#: core/remoteview.cpp:544
+#: core/remoteview.cpp:568
 #, kde-format
 msgid "Please enter the SSH password."
 msgstr "Δώστε τον κωδικό πρόσβασης του SSH."
 
-#: core/remoteview.cpp:562
+#: core/remoteview.cpp:586
 #, kde-format
 msgid "SSH Tunnel failure"
 msgstr "Αποτυχία SSH διαύλου"
