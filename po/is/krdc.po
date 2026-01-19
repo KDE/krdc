@@ -6,20 +6,20 @@
 # Stígur Snæsson <stigur@vortex.is>, 2004.
 # Þröstur Svanbergsson <throstur@bylur.net>, 2004.
 # Arnar Leosson <leosson@frisurf.no>, 2004, 2005.
-# Sveinn í Felli <sveinki@nett.is>, 2009, 2010.
+# SPDX-FileCopyrightText: 2009, 2010, 2026 Sveinn í Felli <sveinki@nett.is>
 msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 14:40+0000\n"
-"PO-Revision-Date: 2010-05-31 12:11+0000\n"
-"Last-Translator: Sveinn í Felli <sveinki@nett.is>\n"
-"Language-Team: Icelandic <kde-isl@molar.is>\n"
+"PO-Revision-Date: 2026-01-18 07:58+0000\n"
+"Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
+"Language-Team: Icelandic\n"
 "Language: is\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Generator: Lokalize 23.08.5\n"
 "Plural-Forms: Plural-Forms: nplurals=2; plural=n != 1;\n"
 "\n"
 "\n"
@@ -147,7 +147,7 @@ msgstr "Stillingar"
 #: config/general.ui:153
 #, kde-format
 msgid "Always show tab bar"
-msgstr ""
+msgstr "Alltaf sýna flipastikuna"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabCloseButton)
 #: config/general.ui:160
@@ -257,15 +257,15 @@ msgstr "Minna en mínútu síðan"
 #, kde-format
 msgid "A minute ago"
 msgid_plural "%1 minutes ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Fyrir mínútu síðan"
+msgstr[1] "Fyrir %1 mínútum síðan"
 
 #: connectiondelegate.cpp:37
 #, kde-format
 msgid "An hour ago"
 msgid_plural "%1 hours ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Fyrir klukkustund síðan"
+msgstr[1] "Fyrir %1 klukkustundum síðan"
 
 #: connectiondelegate.cpp:41
 #, fuzzy, kde-format
@@ -278,15 +278,15 @@ msgstr[1] "Í gær"
 #, kde-format
 msgid "Over a month ago"
 msgid_plural "%1 months ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Fyrir mánuði síðan"
+msgstr[1] "Fyrir %1 mánuðum síðan"
 
 #: connectiondelegate.cpp:44
 #, kde-format
 msgid "A year ago"
 msgid_plural "%1 years ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Fyrir ári síðan"
+msgstr[1] "Fyrir %1 árum síðan"
 
 #: core/hostpreferences.cpp:220
 #, fuzzy, kde-format
@@ -316,12 +316,12 @@ msgstr "Setur"
 #: core/remoteview.cpp:544
 #, kde-format
 msgid "Please enter the SSH password."
-msgstr ""
+msgstr "Settu inn SSH-lykilorðið"
 
 #: core/remoteview.cpp:562
 #, kde-format
 msgid "SSH Tunnel failure"
-msgstr ""
+msgstr "SSH-göng mistókust"
 
 #: core/sshtunnelthread.cpp:99
 #, fuzzy, kde-format
@@ -345,19 +345,19 @@ msgstr ""
 #: core/sshtunnelwidget.ui:14
 #, kde-format
 msgid "SSH tunnel"
-msgstr ""
+msgstr "SSH-göng"
 
 #. i18n: ectx: property (text), widget (QCheckBox, use_ssh_tunnel)
 #: core/sshtunnelwidget.ui:32
 #, kde-format
 msgid "Connect via SSH tunnel"
-msgstr ""
+msgstr "Tengjast í gegnum SSH-göng"
 
 #. i18n: ectx: property (title), widget (QGroupBox, ssh_groupBox)
 #: core/sshtunnelwidget.ui:39
 #, kde-format
 msgid "SSH tunnel options"
-msgstr ""
+msgstr "Valkostir SSH-ganga"
 
 #. i18n: ectx: property (text), widget (QCheckBox, use_loopback)
 #: core/sshtunnelwidget.ui:45
@@ -544,7 +544,7 @@ msgstr "Einungis áhorf"
 #: mainwindow.cpp:154
 #, kde-format
 msgid "Clipboard Sharing"
-msgstr ""
+msgstr "Deiling klippispjalds"
 
 #: mainwindow.cpp:159
 #, fuzzy, kde-format
@@ -572,7 +572,7 @@ msgstr "Grípa alla mögulega lykla"
 #: mainwindow.cpp:175
 #, kde-format
 msgid "Grab Keys"
-msgstr ""
+msgstr "Ná í lykla"
 
 #: mainwindow.cpp:181
 #, fuzzy, kde-format
@@ -603,7 +603,7 @@ msgstr ""
 #: mainwindow.cpp:264
 #, kde-format
 msgid "Load failed"
-msgstr ""
+msgstr "Innhleðsla mistókst"
 
 #: mainwindow.cpp:270
 #, fuzzy, kde-format
@@ -694,12 +694,12 @@ msgstr "Ferill"
 #: mainwindow.cpp:705
 #, kde-format
 msgid "Rename %1"
-msgstr ""
+msgstr "Endurnefna %1"
 
 #: mainwindow.cpp:705
 #, kde-format
 msgid "Rename %1 to"
-msgstr ""
+msgstr "Endurnefna %1 sem"
 
 #: mainwindow.cpp:712
 #, fuzzy, kde-format
@@ -823,7 +823,7 @@ msgstr "Stór (1280x1024)"
 #: rdp/rdppreferences.ui:71
 #, kde-format
 msgid "Current Window Size"
-msgstr ""
+msgstr "Núverandi stærð glugga"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
@@ -884,14 +884,14 @@ msgstr ""
 #: rdp/rdppreferences.ui:173
 #, kde-format
 msgid "Acceleration:"
-msgstr ""
+msgstr "Hröðun:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
 #: rdp/rdppreferences.ui:196
 #, kde-format
 msgctxt "Use best acceleration supported by both the server and krdc"
 msgid "Use Best Available"
-msgstr ""
+msgstr "Nota besta sem er í boði"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
 #: rdp/rdppreferences.ui:201
@@ -909,7 +909,7 @@ msgstr "Fjarlægja"
 #: rdp/rdppreferences.ui:211
 #, kde-format
 msgid "Disable All Acceleration"
-msgstr ""
+msgstr "Gera alla hröðun óvirka"
 
 #. i18n: ectx: property (text), widget (QLabel, colorDepthLabel)
 #: rdp/rdppreferences.ui:219
@@ -922,7 +922,7 @@ msgstr "Lita&dýpt:"
 #, kde-format
 msgctxt "Use best color depth supported by both the server and krdc"
 msgid "Use Best Available"
-msgstr ""
+msgstr "Nota besta sem er í boði"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
 #: rdp/rdppreferences.ui:250
@@ -1270,13 +1270,13 @@ msgstr "Afvirkja hljóð"
 #: rdp/rdppreferences.ui:650
 #, kde-format
 msgid "Share Media:"
-msgstr ""
+msgstr "Deila myndefni:"
 
 #. i18n: ectx: property (text), widget (QLabel, shareSmartcardLabel)
 #: rdp/rdppreferences.ui:676
 #, kde-format
 msgid "Share Smartcard:"
-msgstr ""
+msgstr "Deila snjallkorti:"
 
 #. i18n: ectx: property (text), widget (QLabel, consoleModeLabel)
 #: rdp/rdppreferences.ui:689
