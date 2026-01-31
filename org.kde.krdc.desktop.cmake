@@ -148,6 +148,7 @@ Comment[gl]=Conectarse por RDP ou VNC a outro computador.
 Comment[he]=התחברות ל־RDP או ל־VNC במחשב אחר
 Comment[hu]=Csatlakozás másik számítógéphez RDP-vel vagy VNC-vel
 Comment[ia]=Connecte con RDP o VNC a un altere computator
+Comment[is]=Tengstu með RDP eða VNC við aðrar tölvur
 Comment[it]=Connessione via RDP o VNC ad un altro computer
 Comment[ka]=მიუერთდით მოშორებულ კომპიუტერზე RDP ან VNC პროტოკოლით
 Comment[ko]=다른 컴퓨터에 RDP나 VNC로 연결
