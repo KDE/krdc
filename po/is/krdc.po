@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-15 00:42+0000\n"
-"PO-Revision-Date: 2026-01-26 17:28+0000\n"
+"PO-Revision-Date: 2026-01-30 12:59+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
 "Language: is\n"
@@ -101,6 +101,8 @@ msgid ""
 "This option will resize the window to fit the connection size.  If it is too "
 "big, it will maximize the window."
 msgstr ""
+"Þessi valkostur mun breyta stærð gluggans til samræmis við upplausn "
+"tengingarinnar. Ef hún er of mikil verður glugginn hámarkaður."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ResizeOnConnect)
 #: config/general.ui:109
@@ -115,12 +117,14 @@ msgid ""
 "This option switches to fullscreen only if the connection resolution is the "
 "same as the current screen resolution"
 msgstr ""
+"Þessi valkostur mun skipta yfir í skjáfylli aðeins ef upplausn "
+"tengingarinnar er sú sama og fyrirliggjandi upplausn skjásins."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_FullscreenOnConnect)
 #: config/general.ui:119
 #, kde-format
 msgid "Switch to Fullscreen if appropriate"
-msgstr ""
+msgstr "Skipta yfir í skjáfylli ef við á"
 
 #. i18n: ectx: property (text), widget (QLabel, defaultProtocolLabel)
 #: config/general.ui:128
@@ -328,7 +332,7 @@ msgstr "Villa í auðkenningu með lykilorði: %1"
 #: core/sshtunnelthread.cpp:155 core/sshtunnelthread.cpp:163
 #, kde-format
 msgid "Error creating tunnel socket"
-msgstr ""
+msgstr "Villa við að búa til sökkul fyrir göng"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, SshTunnelWidget)
 #: core/sshtunnelwidget.ui:14
@@ -352,7 +356,7 @@ msgstr "Valkostir SSH-ganga"
 #: core/sshtunnelwidget.ui:45
 #, kde-format
 msgid "Tunnel via loopback address"
-msgstr ""
+msgstr "Göng í gegnum hringtengingarvistfang"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: core/sshtunnelwidget.ui:52
@@ -571,7 +575,7 @@ msgstr "Bókamerki"
 #: mainwindow.cpp:264
 #, kde-format
 msgid "Unable to load connection data from the provided file."
-msgstr ""
+msgstr "Tókst ekki að hlaða inn gögnum tengingar úr uppgefnu skránni."
 
 #: mainwindow.cpp:264
 #, kde-format
@@ -718,7 +722,7 @@ msgstr "Tengjast við:"
 #: mainwindow.cpp:1107
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
-msgstr ""
+msgstr "Skrifaðu hér til að tengjast vistfangi og sía listann."
 
 #: mainwindow.cpp:1116
 #, kde-format
@@ -726,6 +730,8 @@ msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
 "methods."
 msgstr ""
+"Skrifaðu hér IP-vistfang eða DNS-nafn. Hreinsaðu línuna til að fá fram lista "
+"yfir aðferðir til tenginga."
 
 #: mainwindow.cpp:1119
 #, kde-format
@@ -841,7 +847,7 @@ msgstr ""
 #: rdp/rdppreferences.ui:163
 #, kde-format
 msgid "Scale window contents to match resolution"
-msgstr ""
+msgstr "Kvarða innihald glugga til að samsvara upplausn"
 
 #. i18n: ectx: property (text), widget (QLabel, accelerationLabel)
 #: rdp/rdppreferences.ui:173
@@ -1241,13 +1247,13 @@ msgstr "Deila snjallkorti:"
 #: rdp/rdppreferences.ui:689
 #, kde-format
 msgid "Alternate Session Type:"
-msgstr ""
+msgstr "Önnur tegund setu:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ConsoleMode)
 #: rdp/rdppreferences.ui:699
 #, kde-format
 msgid "Admin (or console) session"
-msgstr ""
+msgstr "Seta stjórnanda (eða í skjáhermi)"
 
 #. i18n: ectx: property (text), widget (QLabel, preventSessionLockLabel)
 #: rdp/rdppreferences.ui:706
@@ -1259,7 +1265,7 @@ msgstr "Setulæsing:"
 #: rdp/rdppreferences.ui:716
 #, kde-format
 msgid "Prevent remote session lock"
-msgstr ""
+msgstr "Koma í veg fyrir læsingu fjartengdrar setu"
 
 #. i18n: ectx: attribute (title), widget (QWidget, securitySettingsTab)
 #: rdp/rdppreferences.ui:724
@@ -1432,6 +1438,11 @@ msgid ""
 "Issuer: %5\n"
 "Fingerprint: %6\n"
 msgstr ""
+"Hýsivél: %1:%2\n"
+"Almennt heiti (CN): %3\n"
+"Viðfangsefni: %4\n"
+"Útgefandi: %5\n"
+"Fingrafar: %6\n"
 
 #: rdp/rdpview.cpp:202
 #, kde-format
@@ -1443,7 +1454,7 @@ msgstr "Aðgangur að kerfinu krefst notandanafns og lykilorðs."
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
-msgstr ""
+msgstr "Skilríkið fyrir þetta kerfi er óþekkt. Viltu halda áfram?"
 
 #: rdp/rdpview.cpp:236
 #, kde-format
@@ -1461,7 +1472,7 @@ msgstr "Muna þetta skilríki"
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
-msgstr ""
+msgstr "Skilríkið fyrir þetta kerfi hefur breyst. Viltu halda áfram?"
 
 #: rdp/rdpview.cpp:261
 #, kde-format
@@ -1496,6 +1507,8 @@ msgid ""
 "Unable to login with the provided credentials. Please double check the user "
 "and password."
 msgstr ""
+"Tókst ekki að skrá inn með uppgefnum auðkennum. Athugaðu notandanafnið og "
+"lykilorðið."
 
 #: rdp/rdpview.cpp:306
 #, kde-format
@@ -1510,6 +1523,8 @@ msgid ""
 "The provided account is not allowed to log in to this machine. Please "
 "contact your system administrator."
 msgstr ""
+"Uppgefinn notandaaðgangur hefur ekki heimild til að skrá sig inn á þessa "
+"vél. Hafðu sambandi við kerfisstjórann þinn."
 
 #: rdp/rdpview.cpp:312
 #, kde-format
@@ -1524,6 +1539,8 @@ msgid ""
 "Unable to login with the provided password. Please contact your system "
 "administrator to change it."
 msgstr ""
+"Tókst ekki að skrá inn með uppgefna lykilorðinu. Hafðu samband við "
+"kerfisstjóra til að breyta því."
 
 #: rdp/rdpview.cpp:319
 #, kde-format
@@ -1559,7 +1576,7 @@ msgstr "Miðlarinn finnst ekki"
 #, kde-format
 msgctxt "@label"
 msgid "Could not find the server."
-msgstr ""
+msgstr "Þjónninn fannst ekki."
 
 #: rdp/rdpview.cpp:332
 #, kde-format
@@ -1589,7 +1606,7 @@ msgstr "Tenging mistókst"
 #, kde-format
 msgctxt "@label"
 msgid "An unknown error occurred"
-msgstr ""
+msgstr "Óþekkt villa kom upp"
 
 #: rdp/rdpview.cpp:360
 #, kde-format
@@ -1765,7 +1782,7 @@ msgstr "Meðalgæði (DSL, breiðband, hratt Internet)"
 #: vnc/vncpreferences.ui:53
 #, kde-format
 msgid "Low Quality (Modem, ISDN, slow Internet)"
-msgstr "Lággæði (Mótald, ISDN, hægt Internet)"
+msgstr "Lággæði (mótald, ISDN, hægt Internet)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_Scaling)
 #: vnc/vncpreferences.ui:63
@@ -1808,6 +1825,8 @@ msgstr "Mjög stór (1600x1200)"
 #, kde-format
 msgid "Don't copy passwords from supported password managers to remote hosts"
 msgstr ""
+"Ekki afrita lykilorð úr studdum lykilorðastjórum yfir á fjartengdar "
+"hýsitölvur"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, dont_copy_passwords)
 #: vnc/vncpreferences.ui:214
@@ -1817,6 +1836,8 @@ msgid ""
 "additional MIME type \"x-kde-passwordManagerHint\" which is used for "
 "filtering."
 msgstr ""
+"Studdir lykilorðastjórar (eins og KeePassXC) merkja afrituð lykilorð með "
+"aukalegri MIME-tegund \"x-kde-passwordManagerHint\" sem er notuð til síunar."
 
 #: vnc/vncview.cpp:240
 #, kde-format
