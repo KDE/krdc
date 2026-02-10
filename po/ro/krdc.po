@@ -1,15 +1,14 @@
 # Traducerea krdc.po în Română
 # Copyright (C) YEAR This_file_is_part_of_KDE
-# This file is distributed under the same license as the PACKAGE package.
-# Sergiu Bivol <sergiu@cip.md>, 2008.
-# Sergiu Bivol <sergiu@cip.md>, 2008, 2009, 2011, 2012, 2014, 2020, 2021, 2022, 2024.
+# This file is distributed under the same license as the krdc package.
+# SPDX-FileCopyrightText: 2008, 2009, 2011, 2012, 2014, 2020, 2021, 2022, 2024, 2026 Sergiu Bivol <sergiu@cip.md>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 14:40+0000\n"
-"PO-Revision-Date: 2024-06-09 14:50+0100\n"
+"PO-Revision-Date: 2026-02-04 17:36+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
 "Language: ro\n"
@@ -18,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2;\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -188,10 +187,9 @@ msgid "Right"
 msgstr "Dreapta"
 
 #: config/hostpreferenceslist.cpp:30
-#, fuzzy, kde-format
-#| msgid "Configure..."
+#, kde-format
 msgid "Configure…"
-msgstr "Configurare..."
+msgstr "Configurează…"
 
 #: config/hostpreferenceslist.cpp:36
 #, kde-format
@@ -337,10 +335,9 @@ msgstr "Eroare la crearea soclului tunelului"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, SshTunnelWidget)
 #: core/sshtunnelwidget.ui:14
-#, fuzzy, kde-format
-#| msgid "SSH tunnel options"
+#, kde-format
 msgid "SSH tunnel"
-msgstr "Opțiuni tunel SSH"
+msgstr "Tunel SSH"
 
 #. i18n: ectx: property (text), widget (QCheckBox, use_ssh_tunnel)
 #: core/sshtunnelwidget.ui:32
@@ -527,7 +524,7 @@ msgstr "Doar vizualizare"
 #: mainwindow.cpp:154
 #, kde-format
 msgid "Clipboard Sharing"
-msgstr ""
+msgstr "Partajare clipboard"
 
 #: mainwindow.cpp:159
 #, kde-format
@@ -577,12 +574,12 @@ msgstr "Semne de carte"
 #: mainwindow.cpp:264
 #, kde-format
 msgid "Unable to load connection data from the provided file."
-msgstr ""
+msgstr "Nu s-au putut încărca date despre conexiune din fișierul furnizat."
 
 #: mainwindow.cpp:264
 #, kde-format
 msgid "Load failed"
-msgstr ""
+msgstr "Încărcarea a eșuat"
 
 #: mainwindow.cpp:270
 #, kde-format
@@ -751,9 +748,7 @@ msgstr "Filtru"
 
 #. i18n: ectx: attribute (title), widget (QWidget, mainSettingsTab)
 #: rdp/rdppreferences.ui:21
-#, fuzzy, kde-format
-#| msgctxt "General Config"
-#| msgid "General"
+#, kde-format
 msgid "General"
 msgstr "Generale"
 
@@ -808,10 +803,9 @@ msgstr "Rezoluția actuală a ecranului"
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
 #: rdp/rdppreferences.ui:81 vnc/vncpreferences.ui:123
-#, fuzzy, kde-format
-#| msgid "Custom Resolution (...)"
+#, kde-format
 msgid "Custom Resolution (…)"
-msgstr "Rezoluție personalizată (...)"
+msgstr "Rezoluție personalizată (…)"
 
 #. i18n: ectx: property (text), widget (QLabel, widthLabel)
 #: rdp/rdppreferences.ui:94 vnc/vncpreferences.ui:136
@@ -861,8 +855,7 @@ msgstr "Accelerație:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
 #: rdp/rdppreferences.ui:196
-#, fuzzy, kde-format
-#| msgid "Use Best Available"
+#, kde-format
 msgctxt "Use best acceleration supported by both the server and krdc"
 msgid "Use Best Available"
 msgstr "Cea mai bună disponibilă"
@@ -893,8 +886,7 @@ msgstr "&Profunzime culoare:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
 #: rdp/rdppreferences.ui:245
-#, fuzzy, kde-format
-#| msgid "Use Best Available"
+#, kde-format
 msgctxt "Use best color depth supported by both the server and krdc"
 msgid "Use Best Available"
 msgstr "Cea mai bună disponibilă"
@@ -925,10 +917,9 @@ msgstr "Culori joase (8 bit)"
 
 #. i18n: ectx: property (text), widget (QLabel, desktopScaleFactorLabel)
 #: rdp/rdppreferences.ui:273
-#, fuzzy, kde-format
-#| msgid "Desktop &resolution:"
+#, kde-format
 msgid "Desktop scale factor:"
-msgstr "Rezoluție &birou:"
+msgstr "Factor de scalare a biroului:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DesktopScaleFactor)
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DeviceScaleFactor)
@@ -943,43 +934,43 @@ msgstr "Automat"
 #: rdp/rdppreferences.ui:300
 #, kde-format
 msgid "Do not scale"
-msgstr ""
+msgstr "Nu scala"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DesktopScaleFactor)
 #: rdp/rdppreferences.ui:305
 #, kde-format
 msgid "Custom"
-msgstr ""
+msgstr "Personalizat"
 
 #. i18n: ectx: property (text), widget (QLabel, deviceScaleFactorLabel)
 #: rdp/rdppreferences.ui:337
 #, kde-format
 msgid "Device scale factor:"
-msgstr ""
+msgstr "Factor de scalare a dispozitivului:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DeviceScaleFactor)
 #: rdp/rdppreferences.ui:368
 #, kde-format
 msgid "100"
-msgstr ""
+msgstr "100"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DeviceScaleFactor)
 #: rdp/rdppreferences.ui:373
 #, kde-format
 msgid "140"
-msgstr ""
+msgstr "140"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DeviceScaleFactor)
 #: rdp/rdppreferences.ui:378
 #, kde-format
 msgid "180"
-msgstr ""
+msgstr "180"
 
 #. i18n: ectx: property (text), widget (QLabel, layoutLabel)
 #: rdp/rdppreferences.ui:386
 #, kde-format
 msgid "&Keyboard layout:"
-msgstr "&Mapare de tastatură:"
+msgstr "Aranja&ment de tastatură:"
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:411
@@ -1249,72 +1240,67 @@ msgstr "Unitate partajată:"
 #: rdp/rdppreferences.ui:676
 #, kde-format
 msgid "Share Smartcard:"
-msgstr ""
+msgstr "Partajare SmartCard:"
 
 #. i18n: ectx: property (text), widget (QLabel, consoleModeLabel)
 #: rdp/rdppreferences.ui:689
 #, kde-format
 msgid "Alternate Session Type:"
-msgstr ""
+msgstr "Tip de sesiune alternativă:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ConsoleMode)
 #: rdp/rdppreferences.ui:699
 #, kde-format
 msgid "Admin (or console) session"
-msgstr ""
+msgstr "Sesiune de administrator (sau consolă)"
 
 #. i18n: ectx: property (text), widget (QLabel, preventSessionLockLabel)
 #: rdp/rdppreferences.ui:706
-#, fuzzy, kde-format
-#| msgid "Session ID"
+#, kde-format
 msgid "Session lock:"
-msgstr "Id. sesiune"
+msgstr "Blocarea sesiunii:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_PreventSessionLock)
 #: rdp/rdppreferences.ui:716
 #, kde-format
 msgid "Prevent remote session lock"
-msgstr ""
+msgstr "Previne blocarea sesiunii distante"
 
 #. i18n: ectx: attribute (title), widget (QWidget, securitySettingsTab)
 #: rdp/rdppreferences.ui:724
-#, fuzzy, kde-format
-#| msgid "TLS security level:"
+#, kde-format
 msgid "Security"
-msgstr "Nivel de securizare TLS:"
+msgstr "Securitate"
 
 #. i18n: ectx: property (text), widget (QLabel, gSecurityLabel)
 #: rdp/rdppreferences.ui:732
-#, fuzzy, kde-format
-#| msgid "TLS security level:"
+#, kde-format
 msgid "Security:"
-msgstr "Nivel de securizare TLS:"
+msgstr "Securitate:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityNLA)
 #: rdp/rdppreferences.ui:744
-#, fuzzy, kde-format
-#| msgid "LAN"
+#, kde-format
 msgid "NLA"
-msgstr "Rețea locală"
+msgstr "NLA"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityTLS)
 #: rdp/rdppreferences.ui:751
 #, kde-format
 msgid "TLS"
-msgstr ""
+msgstr "TLS"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityRDP)
 #: rdp/rdppreferences.ui:758
-#, fuzzy, kde-format
-#| msgid "RPC"
+#, kde-format
 msgid "RDP"
-msgstr "RPC"
+msgstr "RDP"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityEXT)
 #: rdp/rdppreferences.ui:765
 #, kde-format
 msgid "Ext"
-msgstr ""
+msgstr "Ext"
 
 #. i18n: ectx: property (text), widget (QLabel, TlsSecLevelLabel)
 #: rdp/rdppreferences.ui:774
@@ -1360,16 +1346,15 @@ msgstr "28 de biți"
 
 #. i18n: ectx: property (text), widget (QLabel, authPkgListLabel)
 #: rdp/rdppreferences.ui:833
-#, fuzzy, kde-format
-#| msgid "Authenticating at %1"
+#, kde-format
 msgid "Authentication Package List:"
-msgstr "Se autentifică pe %1"
+msgstr "Listă cu pachete de autentificare:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, proxySettingsTab)
 #: rdp/rdppreferences.ui:849
 #, kde-format
 msgid "Proxy"
-msgstr "Proxy"
+msgstr "Server de proximitate"
 
 #. i18n: ectx: property (text), widget (QLabel, protocolLabel)
 #: rdp/rdppreferences.ui:857
@@ -1634,10 +1619,9 @@ msgid "Connect to a Windows Remote Desktop (RDP)"
 msgstr "Conectare la un birou la distanță Windows (RDP)"
 
 #: rdp/rdpviewfactory.cpp:109
-#, fuzzy, kde-format
-#| msgid "New RDP Connection..."
+#, kde-format
 msgid "New RDP Connection…"
-msgstr "Conexiune RDP nouă..."
+msgstr "Conexiune RDP nouă…"
 
 #: rdp/rdpviewfactory.cpp:120
 #, kde-format
@@ -1871,10 +1855,9 @@ msgid "VNC failure"
 msgstr "Eșec VNC"
 
 #: vnc/vncviewfactory.cpp:47
-#, fuzzy, kde-format
-#| msgid "New VNC Connection..."
+#, kde-format
 msgid "New VNC Connection…"
-msgstr "Conexiune VNC nouă..."
+msgstr "Conexiune VNC nouă…"
 
 #: vnc/vncviewfactory.cpp:52
 #, kde-format
