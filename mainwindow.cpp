@@ -6,6 +6,7 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
+#include "mainwindow.h"
 #include "bookmarkmanager.h"
 #include "config/preferencesdialog.h"
 #include "connectiondelegate.h"
@@ -13,7 +14,6 @@
 #include "floatingtoolbar.h"
 #include "hostpreferences.h"
 #include "krdc_debug.h"
-#include "mainwindow.h"
 #include "remotedesktopsmodel.h"
 #include "settings.h"
 #include "systemtrayicon.h"
@@ -313,6 +313,22 @@ void MainWindow::newConnection(const QUrl &newUrl, bool switchFullscreenWhenConn
     connect(view, SIGNAL(statusChanged(RemoteView::RemoteStatus)), this, SLOT(statusChanged(RemoteView::RemoteStatus)));
     connect(view, SIGNAL(disconnected()), this, SLOT(disconnectHost()));
     connect(view, SIGNAL(errorMessage(const QString &, const QString &)), this, SLOT(handleViewError(const QString &, const QString &)));
+    connect(view, &RemoteView::fullScreenRequested, this, [this, view](QScreen *screen) {
+        if (view != currentRemoteView()) {
+            return;
+        }
+
+        if (screen) {
+            setScreen(screen);
+            move(screen->geometry().topLeft());
+        }
+
+        if (isMinimized() || isFullScreen()) {
+            showFullScreen();
+        } else {
+            switchFullscreen();
+        }
+    });
 
     QScrollArea *scrollArea = createScrollArea(m_tabWidget, view);
 
@@ -453,7 +469,9 @@ void MainWindow::statusChanged(RemoteView::RemoteStatus status)
         // when started with command line fullscreen argument
         if (m_switchFullscreenWhenConnected) {
             m_switchFullscreenWhenConnected = false;
-            switchFullscreen();
+            if (!isFullScreen()) {
+                switchFullscreen();
+            }
         }
 
         if (Settings::rememberHistory()) {
@@ -483,7 +501,6 @@ void MainWindow::switchFullscreen()
 
     RemoteView *view = currentRemoteView();
     bool scale_state = false;
-
     if (isFullScreen()) {
         // Leaving full screen mode
         setAutoSaveSettings();
@@ -542,7 +559,7 @@ void MainWindow::switchFullscreen()
         KToggleFullScreenAction::setFullScreen(this, true);
 
         MinimizePixel *minimizePixel = new MinimizePixel(this);
-        connect(minimizePixel, SIGNAL(rightClicked()), this, SLOT(showMinimized()));
+        connect(minimizePixel, SIGNAL(rightClicked()), this, SLOT(minimizeFullScreen()));
 
         for (RemoteView *currentView : std::as_const(m_remoteViewMap)) {
             currentView->enableScaling(currentView->hostPreferences()->fullscreenScale());
@@ -577,6 +594,14 @@ void MainWindow::switchFullscreen()
     }
     actionCollection()->action(QStringLiteral("scale"))->setChecked(scale_state);
     updateActionStatus();
+}
+
+void MainWindow::minimizeFullScreen()
+{
+    for (RemoteView *view : std::as_const(m_remoteViewMap)) {
+        view->setFullscreenMinimized(true);
+    }
+    showMinimized();
 }
 
 QScrollArea *MainWindow::createScrollArea(QWidget *parent, RemoteView *remoteView)
@@ -884,7 +909,7 @@ void MainWindow::showRemoteViewToolbar()
         QAction *minimizeAction = new QAction(m_toolBar);
         minimizeAction->setIcon(QIcon::fromTheme(QStringLiteral("go-down")));
         minimizeAction->setText(i18n("Minimize Full Screen Window"));
-        connect(minimizeAction, SIGNAL(triggered()), this, SLOT(showMinimized()));
+        connect(minimizeAction, SIGNAL(triggered()), this, SLOT(minimizeFullScreen()));
         buttonBox->addAction(minimizeAction);
 
         buttonBox->addAction(actionCollection()->action(QStringLiteral("take_screenshot")));
@@ -1063,6 +1088,20 @@ void MainWindow::changeEvent(QEvent *event)
         auto *stateEvent = static_cast<QWindowStateChangeEvent *>(event);
         bool wasFullScreen = stateEvent->oldState() & Qt::WindowFullScreen;
         bool nowFullScreen = windowState() & Qt::WindowFullScreen;
+        const bool wasMinimized = stateEvent->oldState() & Qt::WindowMinimized;
+        const bool nowMinimized = windowState() & Qt::WindowMinimized;
+
+        if (!wasMinimized && nowMinimized && (wasFullScreen || nowFullScreen)) {
+            for (RemoteView *view : std::as_const(m_remoteViewMap)) {
+                view->setFullscreenMinimized(true);
+            }
+        }
+
+        if (wasMinimized && !nowMinimized) {
+            for (RemoteView *view : std::as_const(m_remoteViewMap)) {
+                view->setFullscreenMinimized(false);
+            }
+        }
 
         if (!wasFullScreen && nowFullScreen) {
             // Entered fullscreen (possibly via window manager)
@@ -1083,6 +1122,19 @@ void MainWindow::changeEvent(QEvent *event)
             m_savedGrabStatesBeforeFullscreen.clear();
             updateActionStatus();
         }
+    } else if (event->type() == QEvent::ActivationChange) {
+        // Some window managers restore a minimized full-screen window by
+        // activating it without exposing a useful WindowStateChange. Check
+        // on the next event-loop iteration, once the active state is final.
+        QTimer::singleShot(0, this, [this]() {
+            if (!isActiveWindow()) {
+                return;
+            }
+
+            for (RemoteView *view : std::as_const(m_remoteViewMap)) {
+                view->setFullscreenMinimized(false);
+            }
+        });
     }
     KXmlGuiWindow::changeEvent(event);
 }

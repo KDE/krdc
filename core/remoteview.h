@@ -32,6 +32,8 @@ struct ModifierKey {
 
 class HostPreferences;
 class KModifierKeyInfo;
+class QScreen;
+class QWindow;
 
 /**
  * Generic widget that displays a remote framebuffer.
@@ -337,6 +339,12 @@ public Q_SLOTS:
     virtual void switchFullscreen(bool on);
 
     /**
+     * Called when the full screen window is minimized or restored.
+     * Backends using additional top-level windows can mirror the state there.
+     */
+    virtual void setFullscreenMinimized(bool minimized);
+
+    /**
      * Sends a QKeyEvent to the remote server.
      * @param event the key to send
      */
@@ -398,6 +406,13 @@ Q_SIGNALS:
      * @param s the new status
      */
     void statusChanged(RemoteView::RemoteStatus s);
+
+    /**
+     * Emitted when a backend needs the main window to enter or restore full
+     * screen mode on a particular local screen.
+     * @param screen the local screen that should contain the main window
+     */
+    void fullScreenRequested(QScreen *screen);
 
     /**
      * Emitted when the password dialog is shown or hidden.

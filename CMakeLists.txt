@@ -132,6 +132,7 @@ if(WITH_RDP)
     find_package(FreeRDP 3 REQUIRED)
     find_package(WinPR 3 REQUIRED)
     find_package(FreeRDP-Client 3 REQUIRED)
+    find_package(KF6Screen ${KF_MIN_VERSION})
 
     MESSAGE(STATUS "Found FreeRDP version ${FreeRDP_VERSION_MAJOR}.${FreeRDP_VERSION_MINOR}.${FreeRDP_VERSION_REVISION}")
 

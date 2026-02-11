@@ -281,6 +281,11 @@ void RemoteView::switchFullscreen(bool on)
 #endif
 }
 
+void RemoteView::setFullscreenMinimized(bool minimized)
+{
+    Q_UNUSED(minimized);
+}
+
 void RemoteView::scaleResize(int, int)
 {
 }

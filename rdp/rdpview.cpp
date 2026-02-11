@@ -9,6 +9,9 @@
 #include "rdpview.h"
 
 #include "krdc_debug.h"
+#include "rdpcursor.h"
+
+#include <algorithm>
 
 #include <KMessageDialog>
 #include <KPasswordDialog>
@@ -23,8 +26,12 @@
 #include <QMouseEvent>
 #include <QPainter>
 #include <QScreen>
+#include <QTimer>
 #include <QUrlQuery>
+#include <QVBoxLayout>
 #include <QWindow>
+
+#include "rdpmonitorview.h"
 
 RdpView::RdpView(QWidget *parent, const QUrl &url, KConfigGroup configGroup, const QString &user, const QString &domain, const QString &password)
     : RemoteView(parent)
@@ -90,7 +97,7 @@ void RdpView::scaleResize(int w, int h)
     resize(sizeHint());
 
     if (m_session) {
-        m_session->sendResizeEvent(QSize(w, h) * devicePixelRatio());
+        m_session->sendResizeEvent(QSize(w, h) * m_session->outputScale());
     }
 }
 
@@ -100,12 +107,14 @@ QSize RdpView::sizeHint() const
         return QSize{};
     }
 
+    const QSize remoteSize = m_fullscreenMonitorRect.isEmpty() ? m_session->size() : m_fullscreenMonitorRect.size();
+
     // when parent is resized and scaling is enabled, resize the view, preserving aspect ratio
     if (m_hostPreferences->scaleToSize()) {
-        return m_session->size().scaled(parentWidget()->size(), Qt::KeepAspectRatio);
+        return remoteSize.scaled(parentWidget()->size(), Qt::KeepAspectRatio);
     }
 
-    return m_session->size() / devicePixelRatio();
+    return remoteSize / m_session->outputScale();
 }
 
 void RdpView::startQuittingConnection()
@@ -118,6 +127,8 @@ void RdpView::startQuittingConnection()
     m_quitting = true;
 
     unpressModifiers();
+
+    destroyMonitorWindows();
 
     if (m_session) {
         m_session->stop();
@@ -165,6 +176,25 @@ bool RdpView::startConnection()
             setStatus(Preparing);
             break;
         case RdpSession::State::Running:
+            if (m_hostPreferences->resolution() == RdpHostPreferences::Resolution::AllScreens) {
+                QScreen *primaryScreen = nullptr;
+                const auto screens = QGuiApplication::screens();
+                for (const auto &monitor : m_session->monitors()) {
+                    if (monitor.primary && monitor.id >= 0 && monitor.id < screens.size()) {
+                        primaryScreen = screens.at(monitor.id);
+                        break;
+                    }
+                }
+                m_primaryScreen = primaryScreen;
+                Q_EMIT fullScreenRequested(primaryScreen);
+
+                // The main window may already have entered full screen while
+                // the connection was being established. In that case the
+                // monitor geometry was not available to switchFullscreen().
+                if (window()->isFullScreen() && m_fullscreenMonitorRect.isEmpty()) {
+                    switchFullscreen(true);
+                }
+            }
             setStatus(Connected);
             break;
         case RdpSession::State::Closed:
@@ -397,12 +427,18 @@ void RdpView::showLocalCursor(LocalCursorState state)
 {
     RemoteView::showLocalCursor(state);
 
+    for (QWidget *window : std::as_const(m_monitorWindows)) {
+        if (auto *monitorView = window->findChild<RdpMonitorView *>()) {
+            monitorView->showLocalCursor(state == CursorOn);
+        }
+    }
+
     if (state == CursorOn) {
         // show local cursor, hide remote one
         setCursor(localDefaultCursor());
     } else {
         // hide local cursor, show remote one
-        setCursor(m_remoteCursor);
+        updateRemoteCursor();
     }
 }
 
@@ -410,8 +446,26 @@ void RdpView::setRemoteCursor(const QCursor cursor)
 {
     m_remoteCursor = cursor;
     if (m_localCursorState != CursorOn) {
-        setCursor(m_remoteCursor);
+        updateRemoteCursor();
     }
+}
+
+void RdpView::updateRemoteCursor()
+{
+    if (!m_session) {
+        setCursor(m_remoteCursor);
+        return;
+    }
+
+    const QSize remoteSize = m_fullscreenMonitorRect.isEmpty() ? m_session->size() : m_fullscreenMonitorRect.size();
+    if (remoteSize.isEmpty()) {
+        setCursor(m_remoteCursor);
+        return;
+    }
+
+    const qreal sx = width() / static_cast<qreal>(remoteSize.width());
+    const qreal sy = height() / static_cast<qreal>(remoteSize.height());
+    setCursor(scaledRemoteCursor(m_remoteCursor, qMin(sx, sy)));
 }
 
 bool RdpView::scaling() const
@@ -425,6 +479,53 @@ void RdpView::enableScaling(bool scale)
     qCDebug(KRDC) << "Scaling changed" << scale;
     resize(sizeHint());
     update();
+}
+
+void RdpView::switchFullscreen(bool on)
+{
+    if (m_hostPreferences->resolution() != RdpHostPreferences::Resolution::AllScreens) {
+        RemoteView::switchFullscreen(on);
+        return;
+    }
+
+    if (on) {
+        m_fullscreenMonitorRect = primaryMonitorRect();
+        if (m_monitorWindows.isEmpty()) {
+            createMonitorWindows();
+        }
+    } else {
+        destroyMonitorWindows();
+        m_fullscreenMonitorRect = {};
+    }
+
+    resize(sizeHint());
+    update();
+
+    // Recreate shortcut inhibition and keyboard grab only after the target
+    // top-level window has changed.
+    RemoteView::switchFullscreen(on);
+}
+
+void RdpView::setFullscreenMinimized(bool minimized)
+{
+    if (m_monitorWindowsMinimized == minimized) {
+        return;
+    }
+
+    // Update this before changing the windows: showFullScreen() generates a
+    // WindowStateChange for every monitor and those events must not trigger
+    // another group restore.
+    m_monitorWindowsMinimized = minimized;
+    if (!minimized) {
+        Q_EMIT fullScreenRequested(m_primaryScreen ? m_primaryScreen.data() : QGuiApplication::primaryScreen());
+    }
+    for (QWidget *window : std::as_const(m_monitorWindows)) {
+        if (minimized) {
+            window->showMinimized();
+        } else {
+            showMonitorWindowFullScreen(window);
+        }
+    }
 }
 
 QSize RdpView::initialSize()
@@ -452,6 +553,12 @@ void RdpView::savePassword(const QString &password)
     saveWalletPassword(password);
 }
 
+void RdpView::resizeEvent(QResizeEvent *event)
+{
+    QWidget::resizeEvent(event);
+    updateRemoteCursor();
+}
+
 void RdpView::paintEvent(QPaintEvent *event)
 {
     if (!m_session || m_session->videoBuffer()->isNull()) {
@@ -463,13 +570,25 @@ void RdpView::paintEvent(QPaintEvent *event)
     painter.begin(this);
     painter.setClipRect(event->rect());
 
-    auto image = *m_session->videoBuffer();
-    image.setDevicePixelRatio(devicePixelRatio());
+    const auto &image = *m_session->videoBuffer();
+
+    if (!m_fullscreenMonitorRect.isEmpty()) {
+        const QRect sourceRect = m_fullscreenMonitorRect.intersected(image.rect());
+        if (!sourceRect.isEmpty()) {
+            painter.drawImage(rect(), image, sourceRect);
+        }
+        painter.end();
+        return;
+    }
+
+    auto scaledImage = image;
+    const qreal outputScale = m_session->outputScale();
+    scaledImage.setDevicePixelRatio(outputScale);
 
     if (m_hostPreferences->scaleToSize()) {
-        painter.drawImage(QPoint{0, 0}, image.scaled(size() * devicePixelRatio(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        painter.drawImage(QPoint{0, 0}, scaledImage.scaled(size() * outputScale, Qt::KeepAspectRatio, Qt::SmoothTransformation));
     } else {
-        painter.drawImage(QPoint{0, 0}, image);
+        painter.drawImage(QPoint{0, 0}, scaledImage);
     }
     painter.end();
 }
@@ -484,19 +603,43 @@ void RdpView::handleKeyEvent(QKeyEvent *event)
 void RdpView::handleMouseEvent(QMouseEvent *event)
 {
     if (m_session) {
-        m_session->sendEvent(event, this);
+        if (m_fullscreenMonitorRect.isEmpty()) {
+            m_session->sendEvent(event, this);
+        } else {
+            m_session->sendEvent(event, this, m_fullscreenMonitorRect);
+        }
     }
 }
 
 void RdpView::handleWheelEvent(QWheelEvent *event)
 {
     if (m_session) {
-        m_session->sendEvent(event, this);
+        if (m_fullscreenMonitorRect.isEmpty()) {
+            m_session->sendEvent(event, this);
+        } else {
+            m_session->sendEvent(event, this, m_fullscreenMonitorRect);
+        }
     }
 }
 
 void RdpView::onRectangleUpdated(const QRect &remoteRect, const QSize &remoteSize)
 {
+    if (!m_fullscreenMonitorRect.isEmpty()) {
+        const QRect intersection = remoteRect.intersected(m_fullscreenMonitorRect);
+        if (intersection.isEmpty()) {
+            return;
+        }
+
+        const qreal sx = width() / static_cast<qreal>(m_fullscreenMonitorRect.width());
+        const qreal sy = height() / static_cast<qreal>(m_fullscreenMonitorRect.height());
+        const QRectF localUpdate{(intersection.x() - m_fullscreenMonitorRect.x()) * sx,
+                                 (intersection.y() - m_fullscreenMonitorRect.y()) * sy,
+                                 intersection.width() * sx,
+                                 intersection.height() * sy};
+        update(localUpdate.toAlignedRect());
+        return;
+    }
+
     // convert remoteRect based on remoteSize to local widget size()
     auto ratio = (qreal)size().width() / remoteSize.width();
     auto destRect =
@@ -518,4 +661,145 @@ void RdpView::focusInEvent(QFocusEvent *event)
     }
 
     RemoteView::focusInEvent(event);
+}
+
+bool RdpView::eventFilter(QObject *watched, QEvent *event)
+{
+    auto *window = qobject_cast<QWidget *>(watched);
+    const bool isMonitorWindow = window && m_monitorWindows.contains(window);
+
+    bool scheduleGroupRestore = isMonitorWindow && m_monitorWindowsMinimized && event->type() == QEvent::WindowActivate;
+    if (isMonitorWindow && m_monitorWindowsMinimized && event->type() == QEvent::WindowStateChange) {
+        const auto *stateEvent = static_cast<QWindowStateChangeEvent *>(event);
+        scheduleGroupRestore = stateEvent->oldState() & Qt::WindowMinimized;
+    }
+    if (scheduleGroupRestore) {
+        // Event filters run before QWidget has applied the new window state.
+        // Inspect it on the next event-loop iteration instead.
+        QTimer::singleShot(0, this, &RdpView::restoreMonitorWindowsIfNeeded);
+    }
+
+    if (event->type() == QEvent::WindowActivate) {
+        if (isMonitorWindow && grabAllKeys()) {
+            // RemoteView releases the grab when its embedded widget loses
+            // focus. Reapply it when one of our external monitor windows
+            // becomes active.
+            setGrabAllKeys(true);
+        }
+    }
+    return RemoteView::eventFilter(watched, event);
+}
+
+void RdpView::restoreMonitorWindowsIfNeeded()
+{
+    if (!m_monitorWindowsMinimized) {
+        return;
+    }
+
+    for (const QWidget *window : std::as_const(m_monitorWindows)) {
+        if (!(window->windowState() & Qt::WindowMinimized)) {
+            setFullscreenMinimized(false);
+            return;
+        }
+    }
+}
+
+void RdpView::showMonitorWindowFullScreen(QWidget *window)
+{
+    if (!window) {
+        return;
+    }
+
+    if (QScreen *screen = m_monitorScreens.value(window)) {
+        window->setScreen(screen);
+        window->setGeometry(screen->geometry());
+    }
+    window->showFullScreen();
+}
+
+QRect RdpView::primaryMonitorRect() const
+{
+    if (!m_session) {
+        return {};
+    }
+
+    const auto &monitors = m_session->monitors();
+    const auto primary = std::find_if(monitors.cbegin(), monitors.cend(), [](const RdpSession::MonitorGeometry &monitor) {
+        return monitor.primary;
+    });
+    return primary == monitors.cend() ? QRect{} : primary->virtualRect;
+}
+
+void RdpView::createMonitorWindows()
+{
+    destroyMonitorWindows();
+    m_monitorWindowsMinimized = false;
+
+    if (!m_session) {
+        return;
+    }
+
+    const auto &monitors = m_session->monitors();
+    if (monitors.isEmpty()) {
+        return;
+    }
+
+    const auto screens = QGuiApplication::screens();
+
+    for (const auto &monitor : monitors) {
+        // The primary monitor is rendered by the RdpView embedded in the
+        // full-screen KRDC main window.
+        if (monitor.primary) {
+            continue;
+        }
+
+        if (monitor.id < 0 || monitor.id >= screens.size()) {
+            continue;
+        }
+
+        QScreen *screen = screens.at(monitor.id);
+        if (!screen) {
+            continue;
+        }
+
+        QWidget *window = new QWidget(nullptr, Qt::Window);
+        window->setAttribute(Qt::WA_DeleteOnClose);
+        window->setWindowTitle(i18nc("@title:window", "KRDC – Screen %1", monitor.id + 1));
+        window->installEventFilter(this);
+
+        auto *layout = new QVBoxLayout(window);
+        layout->setContentsMargins(0, 0, 0, 0);
+
+        auto *view = new RdpMonitorView(m_session.get(), monitor.virtualRect, window);
+        view->installEventFilter(this);
+        connect(view, &RdpMonitorView::keyEventReceived, this, [this](QKeyEvent *event) {
+            RemoteView::event(event);
+        });
+        connect(view, &RdpMonitorView::focusLost, this, [this]() {
+            unpressModifiers();
+        });
+        view->setRemoteCursor(m_remoteCursor);
+        view->showLocalCursor(m_localCursorState == CursorOn);
+        layout->addWidget(view);
+
+        window->setScreen(screen);
+        window->setGeometry(screen->geometry());
+        m_monitorWindows.push_back(window);
+        m_monitorScreens.insert(window, screen);
+        showMonitorWindowFullScreen(window);
+    }
+}
+
+void RdpView::destroyMonitorWindows()
+{
+    m_monitorWindowsMinimized = false;
+    for (QWidget *window : std::as_const(m_monitorWindows)) {
+        if (!window) {
+            continue;
+        }
+        window->close();
+        window->deleteLater();
+    }
+    m_monitorWindows.clear();
+    m_monitorScreens.clear();
 }

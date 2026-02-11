@@ -10,10 +10,18 @@
 #include "rdphostpreferences.h"
 
 #include <algorithm>
+#include <limits>
 
 #include <QApplication>
 #include <QKeyEvent>
 #include <QMouseEvent>
+#include <QScreen>
+
+#ifdef HAVE_KSCREEN
+#include <KScreen/Config>
+#include <KScreen/GetConfigOperation>
+#include <KScreen/Output>
+#endif
 
 #include <freerdp/addin.h>
 #include <freerdp/channels/rdpgfx.h>
@@ -33,6 +41,149 @@
 #include "rdpview.h"
 
 #include "krdc_debug.h"
+
+namespace
+{
+struct LocalScreenGeometry {
+    qsizetype id;
+    QScreen *screen;
+    QRect logicalRect;
+    QRect rdpRect;
+    qreal scale;
+    bool placed = false;
+};
+
+QHash<QString, qreal> outputScaleFactors()
+{
+    QHash<QString, qreal> result;
+#ifdef HAVE_KSCREEN
+    KScreen::GetConfigOperation operation{KScreen::ConfigOperation::NoEDID};
+    if (operation.exec()) {
+        const auto config = operation.config();
+        if (config) {
+            for (const auto &output : config->outputs()) {
+                if (output && output->isConnected() && output->isEnabled()) {
+                    result.insert(output->name(), output->scale());
+                }
+            }
+        }
+    } else {
+        qCWarning(KRDC) << "Unable to read output scale factors from KScreen:" << operation.errorString();
+    }
+#endif
+    return result;
+}
+
+int intervalGap(int firstStart, int firstLength, int secondStart, int secondLength)
+{
+    return std::max(0, std::max(firstStart, secondStart) - std::min(firstStart + firstLength, secondStart + secondLength));
+}
+
+int alignedPosition(int logicalStart, int logicalLength, int rdpLength, const LocalScreenGeometry &reference, bool horizontal)
+{
+    const int referenceLogicalStart = horizontal ? reference.logicalRect.x() : reference.logicalRect.y();
+    const int referenceLogicalLength = horizontal ? reference.logicalRect.width() : reference.logicalRect.height();
+    const int referenceRdpStart = horizontal ? reference.rdpRect.x() : reference.rdpRect.y();
+    const int referenceRdpLength = horizontal ? reference.rdpRect.width() : reference.rdpRect.height();
+
+    if (logicalStart == referenceLogicalStart) {
+        return referenceRdpStart;
+    }
+    if (logicalStart + logicalLength == referenceLogicalStart + referenceLogicalLength) {
+        return referenceRdpStart + referenceRdpLength - rdpLength;
+    }
+
+    const qreal scale = referenceRdpLength / static_cast<qreal>(referenceLogicalLength);
+    return referenceRdpStart + qRound((logicalStart - referenceLogicalStart) * scale);
+}
+
+void placeNextTo(LocalScreenGeometry &target, const LocalScreenGeometry &reference)
+{
+    const QRect &targetLogical = target.logicalRect;
+    const QRect &referenceLogical = reference.logicalRect;
+
+    if (targetLogical.x() >= referenceLogical.x() + referenceLogical.width()) {
+        target.rdpRect.moveLeft(reference.rdpRect.x() + reference.rdpRect.width());
+        target.rdpRect.moveTop(alignedPosition(targetLogical.y(), targetLogical.height(), target.rdpRect.height(), reference, false));
+    } else if (targetLogical.x() + targetLogical.width() <= referenceLogical.x()) {
+        target.rdpRect.moveLeft(reference.rdpRect.x() - target.rdpRect.width());
+        target.rdpRect.moveTop(alignedPosition(targetLogical.y(), targetLogical.height(), target.rdpRect.height(), reference, false));
+    } else if (targetLogical.y() >= referenceLogical.y() + referenceLogical.height()) {
+        target.rdpRect.moveTop(reference.rdpRect.y() + reference.rdpRect.height());
+        target.rdpRect.moveLeft(alignedPosition(targetLogical.x(), targetLogical.width(), target.rdpRect.width(), reference, true));
+    } else {
+        target.rdpRect.moveTop(reference.rdpRect.y() - target.rdpRect.height());
+        target.rdpRect.moveLeft(alignedPosition(targetLogical.x(), targetLogical.width(), target.rdpRect.width(), reference, true));
+    }
+
+    target.placed = true;
+}
+
+std::vector<LocalScreenGeometry> rdpScreenLayout(const QList<QScreen *> &screens, const QHash<QString, qreal> &scaleFactors)
+{
+    std::vector<LocalScreenGeometry> result;
+    result.reserve(screens.size());
+
+    QRect unitedLogicalGeometry;
+    for (qsizetype id = 0; id < screens.size(); ++id) {
+        QScreen *screen = screens.at(id);
+        const QRect logicalRect = screen->geometry();
+        if (!unitedLogicalGeometry.isNull() && unitedLogicalGeometry.intersects(logicalRect)) {
+            qCWarning(KRDC) << "Skipping mirrored screen:" << id << "/" << screens.size();
+            continue;
+        }
+        unitedLogicalGeometry = unitedLogicalGeometry.united(logicalRect);
+
+        // On fractional-scale Wayland, QScreen::devicePixelRatio() can describe
+        // the integer HiDPI backing buffer rather than the configured output
+        // scale. KScreen exposes the latter directly.
+        const qreal scale = scaleFactors.value(screen->name(), screen->devicePixelRatio());
+        const QSize rdpSize{qRound(logicalRect.width() * scale), qRound(logicalRect.height() * scale)};
+        result.push_back({id, screen, logicalRect, QRect{QPoint{}, rdpSize}, scale, false});
+    }
+
+    auto primary = std::find_if(result.begin(), result.end(), [](const LocalScreenGeometry &geometry) {
+        return geometry.screen == QGuiApplication::primaryScreen();
+    });
+    if (primary == result.end()) {
+        return {};
+    }
+
+    primary->rdpRect.moveTopLeft(QPoint{});
+    primary->placed = true;
+
+    for (size_t placedCount = 1; placedCount < result.size(); ++placedCount) {
+        LocalScreenGeometry *bestTarget = nullptr;
+        const LocalScreenGeometry *bestReference = nullptr;
+        int bestDistance = std::numeric_limits<int>::max();
+
+        for (auto &target : result) {
+            if (target.placed) {
+                continue;
+            }
+            for (const auto &reference : result) {
+                if (!reference.placed) {
+                    continue;
+                }
+                const int distance = intervalGap(target.logicalRect.x(), target.logicalRect.width(), reference.logicalRect.x(), reference.logicalRect.width())
+                    + intervalGap(target.logicalRect.y(), target.logicalRect.height(), reference.logicalRect.y(), reference.logicalRect.height());
+                if (distance < bestDistance) {
+                    bestDistance = distance;
+                    bestTarget = &target;
+                    bestReference = &reference;
+                }
+            }
+        }
+
+        if (!bestTarget || !bestReference) {
+            return {};
+        }
+        placeNextTo(*bestTarget, *bestReference);
+    }
+
+    return result;
+}
+} // namespace
 
 BOOL RdpSession::preConnect(freerdp *rdp)
 {
@@ -357,6 +508,8 @@ int RdpSession::clientContextStart(rdpContext *context)
 
     auto preferences = session->m_preferences;
 
+    session->m_monitors.clear();
+
     if (!freerdp_settings_set_string(settings, FreeRDP_ServerHostname, session->m_host.toUtf8().data())) {
         return -1;
     }
@@ -364,58 +517,14 @@ int RdpSession::clientContextStart(rdpContext *context)
         return -1;
     }
 
-    if (session->m_size.width() > 0 && session->m_size.height() > 0) {
-        if (!freerdp_settings_set_uint32(settings, FreeRDP_DesktopWidth, session->m_size.width())) {
+    if (preferences->resolution() == RdpHostPreferences::Resolution::AllScreens) {
+        if (initializeMultiMonitor(settings, session)) {
             return -1;
         }
-        if (!freerdp_settings_set_uint32(settings, FreeRDP_DesktopHeight, session->m_size.height())) {
+    } else {
+        if (initializeSingleMonitor(settings, session)) {
             return -1;
         }
-    }
-
-    if (preferences->resolution() == RdpHostPreferences::Resolution::MatchWindow) {
-        if (!freerdp_settings_set_bool(settings, FreeRDP_SupportDisplayControl, true)) {
-            return -1;
-        }
-        if (!freerdp_settings_set_bool(settings, FreeRDP_DynamicResolutionUpdate, true)) {
-            return -1;
-        }
-    }
-
-    switch (preferences->desktopScaleFactor()) {
-    case RdpHostPreferences::DesktopScaleFactor::Auto: {
-        int desktopScaleFactor = std::clamp((int)(session->m_view->devicePixelRatio() * 100), 100, 500);
-        if (!freerdp_settings_set_uint32(settings, FreeRDP_DesktopScaleFactor, desktopScaleFactor)) {
-            return -1;
-        }
-    } break;
-    case RdpHostPreferences::DesktopScaleFactor::DoNotScale:
-        break;
-    case RdpHostPreferences::DesktopScaleFactor::Custom:
-        if (!freerdp_settings_set_uint32(settings, FreeRDP_DesktopScaleFactor, preferences->desktopScaleFactorCustom())) {
-            return -1;
-        }
-        break;
-    }
-
-    switch (preferences->deviceScaleFactor()) {
-    case RdpHostPreferences::DeviceScaleFactor::Auto:
-        break;
-    case RdpHostPreferences::DeviceScaleFactor::Factor100:
-        if (!freerdp_settings_set_uint32(settings, FreeRDP_DeviceScaleFactor, 100)) {
-            return -1;
-        }
-        break;
-    case RdpHostPreferences::DeviceScaleFactor::Factor140:
-        if (!freerdp_settings_set_uint32(settings, FreeRDP_DeviceScaleFactor, 140)) {
-            return -1;
-        }
-        break;
-    case RdpHostPreferences::DeviceScaleFactor::Factor180:
-        if (!freerdp_settings_set_uint32(settings, FreeRDP_DeviceScaleFactor, 180)) {
-            return -1;
-        }
-        break;
     }
 
     switch (preferences->colorDepth()) {
@@ -726,6 +835,255 @@ int RdpSession::clientContextStart(rdpContext *context)
     return 0;
 }
 
+int RdpSession::initializeSingleMonitor(rdpSettings *settings, RdpSession *session)
+{
+    auto preferences = session->m_preferences;
+    const qreal outputScale = session->outputScale();
+
+    if (session->m_size.width() < 1 || session->m_size.height() < 1) {
+        return -1;
+    }
+
+    if (!freerdp_settings_set_uint32(settings, FreeRDP_DesktopWidth, session->m_size.width())) {
+        return -1;
+    }
+    if (!freerdp_settings_set_uint32(settings, FreeRDP_DesktopHeight, session->m_size.height())) {
+        return -1;
+    }
+
+    UINT32 desktopScaleFactor;
+    switch (preferences->desktopScaleFactor()) {
+    case RdpHostPreferences::DesktopScaleFactor::Auto: {
+        desktopScaleFactor = std::clamp(qRound(outputScale * 100), 100, 500);
+    } break;
+    case RdpHostPreferences::DesktopScaleFactor::DoNotScale:
+        desktopScaleFactor = 100;
+        break;
+    case RdpHostPreferences::DesktopScaleFactor::Custom:
+        desktopScaleFactor = preferences->desktopScaleFactorCustom();
+        break;
+    }
+
+    UINT32 deviceScaleFactor;
+    switch (preferences->deviceScaleFactor()) {
+    case RdpHostPreferences::DeviceScaleFactor::Auto:
+    case RdpHostPreferences::DeviceScaleFactor::Factor100:
+        deviceScaleFactor = 100;
+        break;
+    case RdpHostPreferences::DeviceScaleFactor::Factor140:
+        deviceScaleFactor = 140;
+        break;
+    case RdpHostPreferences::DeviceScaleFactor::Factor180:
+        deviceScaleFactor = 180;
+        break;
+    }
+
+    UINT32 rdp_orientation;
+    if (session->m_size.width() > session->m_size.height()) {
+        rdp_orientation = ORIENTATION_LANDSCAPE;
+    } else {
+        rdp_orientation = ORIENTATION_PORTRAIT;
+    }
+
+    std::vector<rdpMonitor> monitors;
+    rdpMonitor monitor = {};
+    monitor.orig_screen = 0;
+    monitor.x = 0;
+    monitor.y = 0;
+    monitor.width = session->m_size.width();
+    monitor.height = session->m_size.height();
+    monitor.is_primary = 1;
+    monitor.attributes.desktopScaleFactor = desktopScaleFactor;
+    monitor.attributes.deviceScaleFactor = deviceScaleFactor;
+    monitor.attributes.orientation = rdp_orientation;
+    monitor.attributes.physicalWidth = monitor.width;
+    monitor.attributes.physicalHeight = monitor.height;
+    monitors.emplace_back(monitor);
+
+    qCWarning(KRDC) << "Add single screen size:" << session->m_size << "output scale:" << outputScale << "dpr:" << session->m_view->devicePixelRatio()
+                    << "phy:" << monitor.attributes.physicalWidth << "x" << monitor.attributes.physicalHeight
+                    << "desktopScale:" << monitor.attributes.desktopScaleFactor << "deviceScale" << monitor.attributes.deviceScaleFactor;
+
+    if (!freerdp_settings_set_monitor_def_array_sorted(settings, monitors.data(), monitors.size())) {
+        return -1;
+    }
+
+    // Allocate MonitorIds
+    if (!freerdp_settings_set_pointer_len(settings, FreeRDP_MonitorIds, nullptr, monitors.size())) {
+        return -1;
+    }
+    for (auto monitor : monitors) {
+        if (!freerdp_settings_set_pointer_array(settings, FreeRDP_MonitorIds, monitor.orig_screen, &monitor.orig_screen)) {
+            return -1;
+        }
+    }
+    if (!freerdp_settings_set_uint32(settings, FreeRDP_NumMonitorIds, monitors.size())) {
+        return -1;
+    }
+    if (!freerdp_settings_set_uint32(settings, FreeRDP_MonitorCount, monitors.size())) {
+        return -1;
+    }
+
+    if (preferences->resolution() == RdpHostPreferences::Resolution::MatchWindow) {
+        if (!freerdp_settings_set_bool(settings, FreeRDP_SupportDisplayControl, true)) {
+            return -1;
+        }
+        if (!freerdp_settings_set_bool(settings, FreeRDP_DynamicResolutionUpdate, true)) {
+            return -1;
+        }
+    }
+
+    return 0;
+}
+
+int RdpSession::initializeMultiMonitor(rdpSettings *settings, RdpSession *session)
+{
+    auto preferences = session->m_preferences;
+
+    if (session->m_size.width() < 1 || session->m_size.height() < 1) {
+        return -1;
+    }
+
+    if (!freerdp_settings_set_bool(settings, FreeRDP_UseMultimon, TRUE)) {
+        return -1;
+    }
+
+    const auto screens = QGuiApplication::screens();
+    if (screens.isEmpty()) {
+        return -1;
+    }
+    const auto screenLayout = rdpScreenLayout(screens, session->m_outputScaleFactors);
+    if (screenLayout.empty()) {
+        return -1;
+    }
+
+    // Allocate monitors definitions
+    std::vector<rdpMonitor> monitors;
+    for (const auto &localScreen : screenLayout) {
+        rdpMonitor monitor = {};
+        QScreen *screen = localScreen.screen;
+        const QRect rect = localScreen.rdpRect;
+
+        UINT32 desktopScaleFactor;
+        switch (preferences->desktopScaleFactor()) {
+        case RdpHostPreferences::DesktopScaleFactor::Auto:
+            /* windows uses 96 dpi as 'default' and the scale factors are in percent. */
+            desktopScaleFactor = std::clamp(qRound(localScreen.scale * 100), 100, 500);
+            break;
+        case RdpHostPreferences::DesktopScaleFactor::DoNotScale:
+            desktopScaleFactor = 100;
+            break;
+        case RdpHostPreferences::DesktopScaleFactor::Custom:
+            desktopScaleFactor = preferences->desktopScaleFactorCustom();
+            break;
+        }
+
+        UINT32 deviceScaleFactor;
+        switch (preferences->deviceScaleFactor()) {
+        case RdpHostPreferences::DeviceScaleFactor::Auto:
+        case RdpHostPreferences::DeviceScaleFactor::Factor100:
+            deviceScaleFactor = 100;
+            break;
+        case RdpHostPreferences::DeviceScaleFactor::Factor140:
+            deviceScaleFactor = 140;
+            break;
+        case RdpHostPreferences::DeviceScaleFactor::Factor180:
+            deviceScaleFactor = 180;
+            break;
+        }
+
+        UINT32 rdp_orientation;
+        switch (screen->orientation()) {
+        case Qt::PortraitOrientation:
+            rdp_orientation = ORIENTATION_PORTRAIT;
+            break;
+        case Qt::InvertedPortraitOrientation:
+            rdp_orientation = ORIENTATION_PORTRAIT_FLIPPED;
+            break;
+        case Qt::InvertedLandscapeOrientation:
+            rdp_orientation = ORIENTATION_LANDSCAPE_FLIPPED;
+            break;
+        case Qt::LandscapeOrientation:
+        default:
+            rdp_orientation = ORIENTATION_LANDSCAPE;
+            break;
+        }
+
+        monitor.orig_screen = localScreen.id;
+        monitor.x = rect.x();
+        monitor.y = rect.y();
+        monitor.width = rect.width();
+        monitor.height = rect.height();
+        monitor.is_primary = (screen == QGuiApplication::primaryScreen());
+        monitor.attributes.desktopScaleFactor = desktopScaleFactor;
+        monitor.attributes.deviceScaleFactor = deviceScaleFactor;
+        monitor.attributes.orientation = rdp_orientation;
+        monitor.attributes.physicalWidth = static_cast<UINT32>(screen->physicalSize().width());
+        monitor.attributes.physicalHeight = static_cast<UINT32>(screen->physicalSize().height());
+        monitors.emplace_back(monitor);
+
+        qCWarning(KRDC) << "Add screen:" << localScreen.id << "/" << screenLayout.size() << "primary:" << monitor.is_primary
+                        << "logical geom:" << localScreen.logicalRect << "rdp geom:" << rect << "output scale:" << localScreen.scale
+                        << "dpr:" << screen->devicePixelRatio() << "phy:" << monitor.attributes.physicalWidth << "x" << monitor.attributes.physicalHeight
+                        << "scale:" << monitor.attributes.desktopScaleFactor << "deviceScale" << monitor.attributes.deviceScaleFactor;
+    }
+
+    if (!freerdp_settings_set_monitor_def_array_sorted(settings, monitors.data(), monitors.size())) {
+        return -1;
+    }
+
+    // FreeRDP moves the primary monitor to (0, 0). Build the framebuffer
+    // geometry from the translated definitions rather than from Qt's local
+    // desktop coordinates.
+    QRect framebufferGeometry;
+    for (size_t index = 0; index < monitors.size(); ++index) {
+        const auto *monitor = static_cast<const rdpMonitor *>(freerdp_settings_get_pointer_array(settings, FreeRDP_MonitorDefArray, index));
+        if (!monitor) {
+            return -1;
+        }
+        framebufferGeometry = framebufferGeometry.united(QRect{monitor->x, monitor->y, monitor->width, monitor->height});
+    }
+
+    if (!freerdp_settings_set_uint32(settings, FreeRDP_DesktopWidth, framebufferGeometry.width())) {
+        return -1;
+    }
+    if (!freerdp_settings_set_uint32(settings, FreeRDP_DesktopHeight, framebufferGeometry.height())) {
+        return -1;
+    }
+
+    // GDI exposes the framebuffer with its origin at the top-left. Keep
+    // normalized rectangles for painting and pointer input.
+    for (size_t index = 0; index < monitors.size(); ++index) {
+        const auto *monitor = static_cast<const rdpMonitor *>(freerdp_settings_get_pointer_array(settings, FreeRDP_MonitorDefArray, index));
+        if (!monitor) {
+            return -1;
+        }
+        RdpSession::MonitorGeometry geometry;
+        geometry.id = static_cast<int>(monitor->orig_screen);
+        geometry.virtualRect = QRect{monitor->x - framebufferGeometry.x(), monitor->y - framebufferGeometry.y(), monitor->width, monitor->height};
+        geometry.primary = monitor->is_primary != 0;
+        session->m_monitors.push_back(geometry);
+    }
+
+    // Allocate MonitorIds
+    if (!freerdp_settings_set_pointer_len(settings, FreeRDP_MonitorIds, nullptr, monitors.size())) {
+        return -1;
+    }
+    for (auto monitor : monitors) {
+        if (!freerdp_settings_set_pointer_array(settings, FreeRDP_MonitorIds, monitor.orig_screen, &monitor.orig_screen)) {
+            return -1;
+        }
+    }
+    if (!freerdp_settings_set_uint32(settings, FreeRDP_NumMonitorIds, monitors.size())) {
+        return -1;
+    }
+    if (!freerdp_settings_set_uint32(settings, FreeRDP_MonitorCount, monitors.size())) {
+        return -1;
+    }
+
+    return 0;
+}
+
 int RdpSession::clientContextStop(rdpContext *context)
 {
     auto kcontext = reinterpret_cast<RdpContext *>(context);
@@ -972,8 +1330,41 @@ void RdpSession::setSize(QSize size)
     m_size = size;
 }
 
+qreal RdpSession::outputScale() const
+{
+    QScreen *screen = m_view->screen();
+    if (!screen) {
+        return m_view->devicePixelRatio();
+    }
+    return m_outputScaleFactors.value(screen->name(), screen->devicePixelRatio());
+}
+
 bool RdpSession::start()
 {
+    // KScreen communicates with the compositor through D-Bus and must be
+    // queried from Qt's GUI thread, before FreeRDP starts its worker thread.
+    m_outputScaleFactors = outputScaleFactors();
+
+    const qreal scale = outputScale();
+    switch (m_preferences->resolution()) {
+    case RdpHostPreferences::Resolution::MatchScreen: {
+        if (QScreen *screen = m_view->screen()) {
+            const QSize logicalSize = screen->geometry().size();
+            m_size = QSize{qRound(logicalSize.width() * scale), qRound(logicalSize.height() * scale)};
+        }
+        break;
+    }
+    case RdpHostPreferences::Resolution::MatchWindow: {
+        if (QWidget *parent = m_view->parentWidget()) {
+            const QSize logicalSize = parent->size();
+            m_size = QSize{qRound(logicalSize.width() * scale), qRound(logicalSize.height() * scale)};
+        }
+        break;
+    }
+    default:
+        break;
+    }
+
     if (freerdp_client_start(m_context.rdp) == CHANNEL_RC_OK) {
         return true;
     }
@@ -993,6 +1384,11 @@ const QImage *RdpSession::videoBuffer() const
 }
 
 bool RdpSession::sendEvent(QEvent *event, QWidget *source)
+{
+    return sendEvent(event, source, QRect{0, 0, m_size.width(), m_size.height()});
+}
+
+bool RdpSession::sendEvent(QEvent *event, QWidget *source, const QRect &remoteRect)
 {
     auto input = m_context.rdp->input;
 
@@ -1018,8 +1414,11 @@ bool RdpSession::sendEvent(QEvent *event, QWidget *source)
         auto position = mouseEvent->position();
         auto sourceSize = QSizeF{source->size()};
 
-        auto x = (position.x() / sourceSize.width()) * m_size.width();
-        auto y = (position.y() / sourceSize.height()) * m_size.height();
+        const qreal nx = position.x() / sourceSize.width();
+        const qreal ny = position.y() / sourceSize.height();
+
+        const qreal x = remoteRect.x() + nx * remoteRect.width();
+        const qreal y = remoteRect.y() + ny * remoteRect.height();
 
         bool extendedEvent = false;
         UINT16 flags = 0;
@@ -1095,10 +1494,14 @@ bool RdpSession::sendEvent(QEvent *event, QWidget *source)
         auto position = wheelEvent->position();
         auto sourceSize = QSizeF{source->size()};
 
-        auto x = (position.x() / sourceSize.width()) * m_size.width();
-        auto y = (position.y() / sourceSize.height()) * m_size.height();
+        const qreal nx = position.x() / sourceSize.width();
+        const qreal ny = position.y() / sourceSize.height();
+
+        const qreal x = remoteRect.x() + nx * remoteRect.width();
+        const qreal y = remoteRect.y() + ny * remoteRect.height();
 
         freerdp_input_send_mouse_event(input, flags, uint16_t(x), uint16_t(y));
+        return true;
     }
     default:
         break;
@@ -1273,7 +1676,11 @@ void RdpSession::destroyDisplay()
 
 bool RdpSession::sendResizeEvent(const QSize newSize)
 {
-    if (!m_display) {
+    // The display-control resize path currently describes a single monitor.
+    // Sending it for a fixed-size or multi-monitor session replaces the
+    // negotiated monitor layout with NumMonitors=1. Dynamic resize is only
+    // enabled and meaningful for MatchWindow sessions.
+    if (!m_display || !m_preferences || m_preferences->resolution() != RdpHostPreferences::Resolution::MatchWindow) {
         return false;
     }
 

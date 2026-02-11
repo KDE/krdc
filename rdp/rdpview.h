@@ -15,11 +15,15 @@
 #include "rdphostpreferences.h"
 
 #include <QCursor>
+#include <QHash>
+#include <QPointer>
 #include <QUrl>
 
 #define TCP_PORT_RDP 3389
 
 class QMimeData;
+class QResizeEvent;
+class RdpMonitorView;
 
 class RdpView : public RemoteView
 {
@@ -51,6 +55,8 @@ public:
     void showLocalCursor(LocalCursorState state) override;
     bool scaling() const override;
     void enableScaling(bool scale) override;
+    void switchFullscreen(bool on) override;
+    void setFullscreenMinimized(bool minimized) override;
 
     QPixmap takeScreenshot() override;
 
@@ -71,15 +77,18 @@ protected:
     QSize initialSize();
 
     void paintEvent(QPaintEvent *event) override;
+    void resizeEvent(QResizeEvent *event) override;
     void handleKeyEvent(QKeyEvent *event) override;
     void handleWheelEvent(QWheelEvent *event) override;
     void handleMouseEvent(QMouseEvent *event) override;
     void handleLocalClipboardChanged(const QMimeData *data) override;
     void focusInEvent(QFocusEvent *event) override;
+    bool eventFilter(QObject *watched, QEvent *event) override;
 
 private:
     void onRectangleUpdated(const QRect &remoteRect, const QSize &remoteSize);
     void handleError(unsigned int error);
+    void updateRemoteCursor();
 
     QString m_name;
     QString m_user;
@@ -92,6 +101,17 @@ private:
     std::unique_ptr<RdpSession> m_session;
 
     QCursor m_remoteCursor;
+
+    void createMonitorWindows();
+    void destroyMonitorWindows();
+    void restoreMonitorWindowsIfNeeded();
+    void showMonitorWindowFullScreen(QWidget *window);
+    QRect primaryMonitorRect() const;
+    QVector<QWidget *> m_monitorWindows;
+    QHash<QWidget *, QPointer<QScreen>> m_monitorScreens;
+    QPointer<QScreen> m_primaryScreen;
+    QRect m_fullscreenMonitorRect;
+    bool m_monitorWindowsMinimized = false;
 };
 
 #endif

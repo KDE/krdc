@@ -65,6 +65,7 @@ private Q_SLOTS:
     void showRemoteViewToolbar();
     void takeScreenshot();
     void switchFullscreen();
+    void minimizeFullScreen();
     void disconnectHost();
     void closeTab(int index);
     void openTabSettings(int index);

@@ -4,6 +4,7 @@ target_sources(krdc_rdpplugin PRIVATE
     rdpcliprdr.cpp
     rdpdisp.cpp
     rdpgraphics.cpp
+    rdpmonitorview.cpp
     rdphostpreferences.cpp
     rdpviewfactory.cpp
     rdpview.cpp
@@ -37,6 +38,11 @@ target_link_libraries(krdc_rdpplugin
     freerdp-client
     winpr
 )
+
+if(KF6Screen_FOUND)
+    target_link_libraries(krdc_rdpplugin KF6::Screen)
+    target_compile_definitions(krdc_rdpplugin PRIVATE HAVE_KSCREEN)
+endif()
 
 add_library(kcm_krdc_rdpplugin)
 

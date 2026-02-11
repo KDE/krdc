@@ -9,9 +9,12 @@
 #include <memory>
 #include <thread>
 
+#include <QHash>
 #include <QImage>
 #include <QObject>
+#include <QRect>
 #include <QSize>
+#include <QVector>
 
 #include <freerdp/client/cliprdr.h>
 #include <freerdp/client/disp.h>
@@ -51,6 +54,12 @@ class RdpSession : public QObject
     Q_OBJECT
 
 public:
+    struct MonitorGeometry {
+        int id;
+        QRect virtualRect;
+        bool primary;
+    };
+
     /**
      * Session state.
      */
@@ -96,6 +105,8 @@ public:
     void setSize(QSize size);
     Q_SIGNAL void sizeChanged();
 
+    qreal outputScale() const;
+
     int port() const;
     void setPort(int port);
 
@@ -103,6 +114,7 @@ public:
     void stop();
 
     bool sendEvent(QEvent *event, QWidget *source);
+    bool sendEvent(QEvent *event, QWidget *source, const QRect &remoteRect);
     bool syncKeyState();
 
     void initializeClipboard(RdpContext *krdp, CliprdrClientContext *cliprdr);
@@ -129,6 +141,11 @@ public:
     {
         return m_view;
     };
+
+    const QVector<MonitorGeometry> &monitors() const
+    {
+        return m_monitors;
+    }
 
     static BOOL preConnect(freerdp *);
     static BOOL postConnect(freerdp *);
@@ -168,6 +185,9 @@ public:
 
     static int clientContextStart(rdpContext *context);
     static int clientContextStop(rdpContext *context);
+
+    static int initializeSingleMonitor(rdpSettings *settings, RdpSession *session);
+    static int initializeMultiMonitor(rdpSettings *settings, RdpSession *session);
 
     static RDP_CLIENT_ENTRY_POINTS RdpClientEntry();
 
@@ -209,4 +229,6 @@ private:
     QImage m_videoBuffer;
 
     RdpHostPreferences *m_preferences;
+    QVector<MonitorGeometry> m_monitors;
+    QHash<QString, qreal> m_outputScaleFactors;
 };

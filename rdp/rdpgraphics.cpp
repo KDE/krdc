@@ -9,7 +9,6 @@
 
 #include "rdpgraphics.h"
 #include "rdpsession.h"
-#include "rdpview.h"
 #include <freerdp/gdi/gfx.h>
 
 struct krdcPointer {
@@ -66,14 +65,10 @@ BOOL RdpGraphics::onPointerSet(rdpContext *context, rdpPointer *pointer)
     auto ptx = reinterpret_cast<krdcPointer *>(pointer);
     WINPR_ASSERT(ptx);
 
-    auto view = session->rdpView();
-    if (view && ptx->pixmap) {
-        auto srcSize = QSizeF{session->size()};
-        auto destSize = QSizeF{view->size()};
-        auto scale = destSize.width() / srcSize.width();
-        auto cursor = QCursor(ptx->pixmap->scaledToWidth(pointer->width * scale, Qt::SmoothTransformation), pointer->xPos * scale, pointer->yPos * scale);
-
-        session->setRemoteCursor(cursor);
+    if (ptx->pixmap) {
+        // Keep the cursor in remote pixel coordinates. The widget displaying
+        // it knows the scale of its local monitor and applies it there.
+        session->setRemoteCursor(QCursor{*ptx->pixmap, static_cast<int>(pointer->xPos), static_cast<int>(pointer->yPos)});
         return true;
     }
     return false;
