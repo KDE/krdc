@@ -25,6 +25,7 @@ public:
         MatchWindow,
         MatchScreen,
         Custom,
+        AllScreens,
     };
 
     enum class Sound {

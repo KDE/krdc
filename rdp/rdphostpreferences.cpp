@@ -211,7 +211,8 @@ void RdpHostPreferences::updateWidthHeight(Resolution resolution)
         }
         break;
     }
-    case Resolution::MatchScreen: {
+    case Resolution::MatchScreen:
+    case Resolution::AllScreens: {
         QWindow *window = rdpUi.kcfg_Width->window()->windowHandle();
         QScreen *screen = window ? window->screen() : qGuiApp->primaryScreen();
         const QSize size = screen->size() * screen->devicePixelRatio();

@@ -437,6 +437,7 @@ QSize RdpView::initialSize()
     case RdpHostPreferences::Resolution::Large:
         return QSize{1920, 1080};
     case RdpHostPreferences::Resolution::MatchScreen:
+    case RdpHostPreferences::Resolution::AllScreens:
         return window()->windowHandle()->screen()->size();
     case RdpHostPreferences::Resolution::Custom:
         return QSize{m_hostPreferences->width(), m_hostPreferences->height()};
