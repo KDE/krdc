@@ -773,13 +773,22 @@ BOOL RdpSession::endPaint(rdpContext *context)
         return false;
     }
 
-    auto invalid = gdi->primary->hdc->hwnd->invalid;
-    if (invalid->null) {
+    auto hwnd = gdi->primary->hdc->hwnd;
+    if (hwnd->invalid->null) {
         return true;
     }
 
-    auto rect = QRect{invalid->x, invalid->y, invalid->w, invalid->h};
-    Q_EMIT session->rectangleUpdated(rect, session->m_size);
+    const INT32 ninvalid = hwnd->ninvalid;
+    const GDI_RGN *cinvalid = hwnd->cinvalid;
+    if (ninvalid < 1) {
+        return true;
+    }
+
+    for (INT32 x = 0; x < ninvalid; x++) {
+        auto &rgn = cinvalid[x];
+        auto rect = QRect{rgn.x, rgn.y, rgn.w, rgn.h};
+        Q_EMIT session->rectangleUpdated(rect, session->m_size);
+    }
     return true;
 }
 
