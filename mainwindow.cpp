@@ -54,6 +54,7 @@
 #include <QTimer>
 #include <QToolBar>
 #include <QVBoxLayout>
+#include <QWindowStateChangeEvent>
 
 #include <utility>
 
@@ -442,6 +443,13 @@ void MainWindow::statusChanged(RemoteView::RemoteStatus status)
             updateActionStatus();
         }
 
+        // If already in fullscreen (e.g. fullscreenOnConnect), apply auto-grab
+        if (isFullScreen() && Settings::grabAllKeysOnFullscreen() && !view->grabAllKeys()) {
+            m_savedGrabStatesBeforeFullscreen.insert(view, view->grabAllKeys());
+            view->setGrabAllKeys(true);
+            updateActionStatus();
+        }
+
         // when started with command line fullscreen argument
         if (m_switchFullscreenWhenConnected) {
             m_switchFullscreenWhenConnected = false;
@@ -479,6 +487,13 @@ void MainWindow::switchFullscreen()
     if (isFullScreen()) {
         // Leaving full screen mode
         setAutoSaveSettings();
+
+        // Restore grab states that were saved when entering fullscreen
+        for (auto it = m_savedGrabStatesBeforeFullscreen.constBegin(); it != m_savedGrabStatesBeforeFullscreen.constEnd(); ++it) {
+            it.key()->setGrabAllKeys(it.value());
+        }
+        m_savedGrabStatesBeforeFullscreen.clear();
+
         m_remoteDesktopsDockWidget->setVisible(m_guiItemsState.dockWidget);
         menuBar()->setVisible(m_guiItemsState.menuBar);
         statusBar()->setVisible(m_guiItemsState.statusBar);
@@ -534,6 +549,16 @@ void MainWindow::switchFullscreen()
             currentView->switchFullscreen(true);
         }
 
+        // Auto-grab keys for views when the global setting is enabled
+        if (Settings::grabAllKeysOnFullscreen()) {
+            for (RemoteView *currentView : std::as_const(m_remoteViewMap)) {
+                if (!currentView->grabAllKeys()) {
+                    m_savedGrabStatesBeforeFullscreen.insert(currentView, false);
+                    currentView->setGrabAllKeys(true);
+                }
+            }
+        }
+
         actionCollection()->action(QStringLiteral("switch_fullscreen"))->setIcon(QIcon::fromTheme(QStringLiteral("view-restore")));
         actionCollection()->action(QStringLiteral("switch_fullscreen"))->setText(i18n("Switch to Window Mode"));
         actionCollection()->action(QStringLiteral("switch_fullscreen"))->setIconText(i18n("Window Mode"));
@@ -551,6 +576,7 @@ void MainWindow::switchFullscreen()
         view->setFocus();
     }
     actionCollection()->action(QStringLiteral("scale"))->setChecked(scale_state);
+    updateActionStatus();
 }
 
 QScrollArea *MainWindow::createScrollArea(QWidget *parent, RemoteView *remoteView)
@@ -785,6 +811,12 @@ void MainWindow::grabAllKeys(bool grabAllKeys)
 
     RemoteView *view = currentRemoteView();
     view->setGrabAllKeys(grabAllKeys);
+
+    // If the user manually changes grab state while auto-grab is active,
+    // remove the view from saved states so we don't override the user's choice
+    // when leaving fullscreen.
+    m_savedGrabStatesBeforeFullscreen.remove(view);
+
     view->hostPreferences()->setGrabAllKeys(grabAllKeys);
     saveHostPrefs(view);
 }
@@ -1023,6 +1055,36 @@ void MainWindow::showMenubar()
         menuBar()->show();
     else
         menuBar()->hide();
+}
+
+void MainWindow::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::WindowStateChange) {
+        auto *stateEvent = static_cast<QWindowStateChangeEvent *>(event);
+        bool wasFullScreen = stateEvent->oldState() & Qt::WindowFullScreen;
+        bool nowFullScreen = windowState() & Qt::WindowFullScreen;
+
+        if (!wasFullScreen && nowFullScreen) {
+            // Entered fullscreen (possibly via window manager)
+            if (Settings::grabAllKeysOnFullscreen()) {
+                for (RemoteView *view : std::as_const(m_remoteViewMap)) {
+                    if (!view->grabAllKeys()) {
+                        m_savedGrabStatesBeforeFullscreen.insert(view, false);
+                        view->setGrabAllKeys(true);
+                    }
+                }
+            }
+            updateActionStatus();
+        } else if (wasFullScreen && !nowFullScreen) {
+            // Left fullscreen (possibly via window manager)
+            for (auto it = m_savedGrabStatesBeforeFullscreen.constBegin(); it != m_savedGrabStatesBeforeFullscreen.constEnd(); ++it) {
+                it.key()->setGrabAllKeys(it.value());
+            }
+            m_savedGrabStatesBeforeFullscreen.clear();
+            updateActionStatus();
+        }
+    }
+    KXmlGuiWindow::changeEvent(event);
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)

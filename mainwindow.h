@@ -49,6 +49,7 @@ public Q_SLOTS:
 
 protected:
     void closeEvent(QCloseEvent *event) override;
+    void changeEvent(QEvent *event) override;
     void saveProperties(KConfigGroup &group) override;
     void saveHostPrefs();
     void saveHostPrefs(RemoteView *view);
@@ -123,6 +124,8 @@ private:
         bool toolBar;
     };
     GuiItemsState m_guiItemsState;
+
+    QMap<RemoteView *, bool> m_savedGrabStatesBeforeFullscreen;
 
 Q_SIGNALS:
     void scaleUpdated(bool scale); // scale state has changed

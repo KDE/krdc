@@ -121,6 +121,16 @@
        </widget>
       </item>
       <item>
+       <widget class="QCheckBox" name="kcfg_GrabAllKeysOnFullscreen">
+        <property name="toolTip">
+         <string>Automatically grab all keys when entering fullscreen mode and release them when leaving fullscreen</string>
+        </property>
+        <property name="text">
+         <string>Grab all keys when entering fullscreen</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <layout class="QHBoxLayout" name="horizontalLayoutP">
         <item>
          <widget class="QLabel" name="defaultProtocolLabel">
