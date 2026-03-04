@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-12 00:43+0000\n"
+"POT-Creation-Date: 2026-03-04 00:45+0000\n"
 "PO-Revision-Date: 2025-10-13 21:11+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -127,68 +127,82 @@ msgstr ""
 msgid "Switch to Fullscreen if appropriate"
 msgstr "Vaihda koko näytön tilaan, jos soveliasta"
 
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_GrabAllKeysOnFullscreen)
+#: config/general.ui:126
+#, kde-format
+msgid ""
+"Automatically grab all keys when entering fullscreen mode and release them "
+"when leaving fullscreen"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_GrabAllKeysOnFullscreen)
+#: config/general.ui:129
+#, kde-format
+msgid "Grab all keys when entering fullscreen"
+msgstr ""
+
 #. i18n: ectx: property (text), widget (QLabel, defaultProtocolLabel)
-#: config/general.ui:128
+#: config/general.ui:138
 #, kde-format
 msgid "Default protocol:"
 msgstr "Oletusyhteyskäytäntö:"
 
 #. i18n: ectx: property (text), widget (QLineEdit, kcfg_DefaultProtocol)
-#: config/general.ui:135
+#: config/general.ui:145
 #, kde-format
 msgid "vnc"
 msgstr "vnc"
 
 #. i18n: ectx: property (title), widget (QGroupBox, tabGroupBox)
-#: config/general.ui:147
+#: config/general.ui:157
 #, kde-format
 msgid "Tab Settings"
 msgstr "Välilehtiasetukset"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowTabBar)
-#: config/general.ui:153
+#: config/general.ui:163
 #, kde-format
 msgid "Always show tab bar"
 msgstr "Näytä välilehtipalkki aina"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabCloseButton)
-#: config/general.ui:160
+#: config/general.ui:170
 #, kde-format
 msgid "Show close button on tabs"
 msgstr "Näytä välilehdissä sulkemispainikkeet"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabMiddleClick)
-#: config/general.ui:167
+#: config/general.ui:177
 #, kde-format
 msgid "Middle-click on a tab closes it"
 msgstr "Hiiren keskipainikkeen painallus välilehdellä sulkee sen"
 
 #. i18n: ectx: property (text), widget (QLabel, tabOrientationLabel)
-#: config/general.ui:176
+#: config/general.ui:186
 #, kde-format
 msgid "Tab position:"
 msgstr "Välilehden sijainti:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TabPosition)
-#: config/general.ui:184
+#: config/general.ui:194
 #, kde-format
 msgid "Top"
 msgstr "Ylhäällä"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TabPosition)
-#: config/general.ui:189
+#: config/general.ui:199
 #, kde-format
 msgid "Bottom"
 msgstr "Alhaalla"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TabPosition)
-#: config/general.ui:194
+#: config/general.ui:204
 #, kde-format
 msgid "Left"
 msgstr "Vasemmalla"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TabPosition)
-#: config/general.ui:199
+#: config/general.ui:209
 #, kde-format
 msgid "Right"
 msgstr "Oikealla"
@@ -203,12 +217,12 @@ msgstr "Asetukset…"
 msgid "Remove"
 msgstr "Poista"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:291 mainwindow.cpp:672
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:292 mainwindow.cpp:698
 #, kde-format
 msgid "Unusable URL"
 msgstr "Kelvoton verkko-osoite"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:672
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:698
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr "Valittua konetta ei voida käsitellä."
@@ -490,103 +504,103 @@ msgstr ""
 msgid "URLs to connect after startup"
 msgstr "Osoitteet, joihin yhdistää käynnistyksen jälkeen"
 
-#: mainwindow.cpp:105
+#: mainwindow.cpp:106
 #, kde-format
 msgid "KDE Remote Desktop Client started"
 msgstr "KDE-etätyöpöytäasiakas käynnistettiin"
 
-#: mainwindow.cpp:110 mainwindow.cpp:127 mainwindow.cpp:1084
-#: mainwindow.cpp:1179
+#: mainwindow.cpp:111 mainwindow.cpp:128 mainwindow.cpp:1146
+#: mainwindow.cpp:1241
 #, kde-format
 msgid "New Connection"
 msgstr "Uusi yhteys"
 
-#: mainwindow.cpp:133
+#: mainwindow.cpp:134
 #, kde-format
 msgid "Copy Screenshot to Clipboard"
 msgstr "Kopioi kuvankaappaus leikepöydälle"
 
-#: mainwindow.cpp:134
+#: mainwindow.cpp:135
 #, kde-format
 msgid "Screenshot"
 msgstr "Kuvankaappaus"
 
-#: mainwindow.cpp:140 mainwindow.cpp:504
+#: mainwindow.cpp:141 mainwindow.cpp:519
 #, kde-format
 msgid "Switch to Full Screen Mode"
 msgstr "Vaihda koko näytön tilaan"
 
-#: mainwindow.cpp:141 mainwindow.cpp:505
+#: mainwindow.cpp:142 mainwindow.cpp:520
 #, kde-format
 msgid "Full Screen"
 msgstr "Koko näyttö"
 
-#: mainwindow.cpp:148
+#: mainwindow.cpp:149
 #, kde-format
 msgid "View Only"
 msgstr "Vain katsominen"
 
-#: mainwindow.cpp:154
+#: mainwindow.cpp:155
 #, kde-format
 msgid "Clipboard Sharing"
 msgstr "Leikepöydän jakaminen"
 
-#: mainwindow.cpp:159
+#: mainwindow.cpp:160
 #, kde-format
 msgid "Disconnect"
 msgstr "Katkaise yhteys"
 
-#: mainwindow.cpp:167
+#: mainwindow.cpp:168
 #, kde-format
 msgid "Show Local Cursor"
 msgstr "Näytä paikallinen kohdistin"
 
-#: mainwindow.cpp:168
+#: mainwindow.cpp:169
 #, kde-format
 msgid "Local Cursor"
 msgstr "Paikallinen kohdistin"
 
-#: mainwindow.cpp:174
+#: mainwindow.cpp:175
 #, kde-format
 msgid "Grab All Possible Keys"
 msgstr "Kaappaa kaikki mahdolliset näppäimet"
 
-#: mainwindow.cpp:175
+#: mainwindow.cpp:176
 #, kde-format
 msgid "Grab Keys"
 msgstr "Kaappaa näppäimet"
 
-#: mainwindow.cpp:181
+#: mainwindow.cpp:182
 #, kde-format
 msgid "Scale Remote Screen to Fit Window Size"
 msgstr "Sovita etänäyttö ikkunan kokoon"
 
-#: mainwindow.cpp:182
+#: mainwindow.cpp:183
 #, kde-format
 msgid "Scale"
 msgstr "Skaalaa"
 
-#: mainwindow.cpp:185
+#: mainwindow.cpp:186
 #, kde-format
 msgid "Scaling Factor"
 msgstr "Skaalauskerroin"
 
-#: mainwindow.cpp:196
+#: mainwindow.cpp:197
 #, kde-format
 msgid "Bookmarks"
 msgstr "Kirjanmerkit"
 
-#: mainwindow.cpp:264
+#: mainwindow.cpp:265
 #, kde-format
 msgid "Unable to load connection data from the provided file."
 msgstr "Yhteystietojen lataaminen annetusta tiedostosta ei onnistu."
 
-#: mainwindow.cpp:264
+#: mainwindow.cpp:265
 #, kde-format
 msgid "Load failed"
 msgstr "Lataus epäonnistui"
 
-#: mainwindow.cpp:270
+#: mainwindow.cpp:271
 #, kde-format
 msgid ""
 "The entered address does not have the required form.\n"
@@ -595,139 +609,139 @@ msgstr ""
 "Annettu osoite ei ole oikean muotoinen.\n"
 " Syntaksi: [käyttäjä@]kone[:portti]"
 
-#: mainwindow.cpp:270
+#: mainwindow.cpp:271
 #, kde-format
 msgid "Malformed URL"
 msgstr "Kelvoton verkko-osoite"
 
-#: mainwindow.cpp:291
+#: mainwindow.cpp:292
 #, kde-format
 msgid "The entered address cannot be handled."
 msgstr "Annettua osoitetta ei voida käsitellä."
 
-#: mainwindow.cpp:426
+#: mainwindow.cpp:427
 #, kde-format
 msgid "Connecting to %1"
 msgstr "Yhdistetään palvelimeen %1"
 
-#: mainwindow.cpp:430
+#: mainwindow.cpp:431
 #, kde-format
 msgid "Authenticating at %1"
 msgstr "Tunnistaudutaan palvelimeen %1"
 
-#: mainwindow.cpp:434
+#: mainwindow.cpp:435
 #, kde-format
 msgid "Preparing connection to %1"
 msgstr "Valmistellaan yhdistämistä palvelimeen %1"
 
-#: mainwindow.cpp:438
+#: mainwindow.cpp:439
 #, kde-format
 msgid "Connected to %1"
 msgstr "Yhdistetty palvelimeen %1"
 
-#: mainwindow.cpp:538
+#: mainwindow.cpp:563
 #, kde-format
 msgid "Switch to Window Mode"
 msgstr "Vaihda ikkunatilaan"
 
-#: mainwindow.cpp:539
+#: mainwindow.cpp:564
 #, kde-format
 msgid "Window Mode"
 msgstr "Ikkunatila"
 
-#: mainwindow.cpp:691
+#: mainwindow.cpp:717
 #, kde-format
 msgid "Connect"
 msgstr "Yhdistä"
 
-#: mainwindow.cpp:692
+#: mainwindow.cpp:718
 #, kde-format
 msgid "Rename"
 msgstr "Muuta nimeä"
 
-#: mainwindow.cpp:693
+#: mainwindow.cpp:719
 #, kde-format
 msgid "Settings"
 msgstr "Asetukset"
 
-#: mainwindow.cpp:694
+#: mainwindow.cpp:720
 #, kde-format
 msgid "Delete"
 msgstr "Poista"
 
-#: mainwindow.cpp:697 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:723 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "Kirjanmerkit"
 
-#: mainwindow.cpp:697 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:723 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "Historia"
 
-#: mainwindow.cpp:709
+#: mainwindow.cpp:735
 #, kde-format
 msgid "Rename %1"
 msgstr "Muuta kohteen %1 nimeä"
 
-#: mainwindow.cpp:709
+#: mainwindow.cpp:735
 #, kde-format
 msgid "Rename %1 to"
 msgstr "Muuta kohteen %1 nimeksi"
 
-#: mainwindow.cpp:716
+#: mainwindow.cpp:742
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "Haluatko varmasti poistaa kohteen %1?"
 
-#: mainwindow.cpp:716
+#: mainwindow.cpp:742
 #, kde-format
 msgid "Delete %1"
 msgstr "Poista %1"
 
-#: mainwindow.cpp:740
+#: mainwindow.cpp:766
 #, kde-format
 msgid "Add Bookmark"
 msgstr "Lisää kirjanmerkki"
 
-#: mainwindow.cpp:741
+#: mainwindow.cpp:767
 #, kde-format
 msgid "Close Tab"
 msgstr "Sulje välilehti"
 
-#: mainwindow.cpp:854
+#: mainwindow.cpp:886
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr "Pienennä koko näytön ikkuna"
 
-#: mainwindow.cpp:871
+#: mainwindow.cpp:903
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "Tahmea työkalurivi"
 
-#: mainwindow.cpp:978
+#: mainwindow.cpp:1010
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr "Haluatko varmasti lopettaa KDE-etätyöpöytäasiakkaan?"
 
-#: mainwindow.cpp:979
+#: mainwindow.cpp:1011
 #, kde-format
 msgid "Confirm Quit"
 msgstr "Vahvista lopettaminen"
 
-#: mainwindow.cpp:1107
+#: mainwindow.cpp:1169
 #, kde-format
 msgid "Connect to:"
 msgstr "Yhdistä kohteeseen:"
 
-#: mainwindow.cpp:1111
+#: mainwindow.cpp:1173
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr "Suodata luetteloa alkamalla kirjoittaa tähän osoitetta."
 
-#: mainwindow.cpp:1120
+#: mainwindow.cpp:1182
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
@@ -736,17 +750,17 @@ msgstr ""
 "Kirjoita tähän IP- tai DNS-nimi. Luettelon yhteystavoista saa tyhjentämällä "
 "rivin."
 
-#: mainwindow.cpp:1123
+#: mainwindow.cpp:1185
 #, kde-format
 msgid "Goto Address"
 msgstr "Siirry osoitteeseen"
 
-#: mainwindow.cpp:1215
+#: mainwindow.cpp:1277
 #, kde-format
 msgid "Remote Desktops"
 msgstr "Etätyöpöydät"
 
-#: mainwindow.cpp:1244
+#: mainwindow.cpp:1306
 #, kde-format
 msgid "Filter"
 msgstr "Suodatin"

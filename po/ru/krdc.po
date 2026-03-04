@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-12 00:43+0000\n"
+"POT-Creation-Date: 2026-03-04 00:45+0000\n"
 "PO-Revision-Date: 2026-01-31 11:11+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -135,68 +135,82 @@ msgstr ""
 msgid "Switch to Fullscreen if appropriate"
 msgstr "Переключаться по возможности в полноэкранный режим"
 
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_GrabAllKeysOnFullscreen)
+#: config/general.ui:126
+#, kde-format
+msgid ""
+"Automatically grab all keys when entering fullscreen mode and release them "
+"when leaving fullscreen"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_GrabAllKeysOnFullscreen)
+#: config/general.ui:129
+#, kde-format
+msgid "Grab all keys when entering fullscreen"
+msgstr ""
+
 #. i18n: ectx: property (text), widget (QLabel, defaultProtocolLabel)
-#: config/general.ui:128
+#: config/general.ui:138
 #, kde-format
 msgid "Default protocol:"
 msgstr "Протокол по умолчанию:"
 
 #. i18n: ectx: property (text), widget (QLineEdit, kcfg_DefaultProtocol)
-#: config/general.ui:135
+#: config/general.ui:145
 #, kde-format
 msgid "vnc"
 msgstr "vnc"
 
 #. i18n: ectx: property (title), widget (QGroupBox, tabGroupBox)
-#: config/general.ui:147
+#: config/general.ui:157
 #, kde-format
 msgid "Tab Settings"
 msgstr "Настройка вкладок"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowTabBar)
-#: config/general.ui:153
+#: config/general.ui:163
 #, kde-format
 msgid "Always show tab bar"
 msgstr "Всегда показывать панель вкладок"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabCloseButton)
-#: config/general.ui:160
+#: config/general.ui:170
 #, kde-format
 msgid "Show close button on tabs"
 msgstr "Отображать кнопки закрытия вкладок"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabMiddleClick)
-#: config/general.ui:167
+#: config/general.ui:177
 #, kde-format
 msgid "Middle-click on a tab closes it"
 msgstr "Закрывать вкладку щелчком средней кнопки мыши"
 
 #. i18n: ectx: property (text), widget (QLabel, tabOrientationLabel)
-#: config/general.ui:176
+#: config/general.ui:186
 #, kde-format
 msgid "Tab position:"
 msgstr "Позиция вкладки:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TabPosition)
-#: config/general.ui:184
+#: config/general.ui:194
 #, kde-format
 msgid "Top"
 msgstr "Сверху"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TabPosition)
-#: config/general.ui:189
+#: config/general.ui:199
 #, kde-format
 msgid "Bottom"
 msgstr "Снизу"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TabPosition)
-#: config/general.ui:194
+#: config/general.ui:204
 #, kde-format
 msgid "Left"
 msgstr "Слева"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TabPosition)
-#: config/general.ui:199
+#: config/general.ui:209
 #, kde-format
 msgid "Right"
 msgstr "Справа"
@@ -211,12 +225,12 @@ msgstr "Настроить…"
 msgid "Remove"
 msgstr "Удалить"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:291 mainwindow.cpp:672
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:292 mainwindow.cpp:698
 #, kde-format
 msgid "Unusable URL"
 msgstr "Неправильный URL"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:672
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:698
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr "Не удалось обработать адрес хоста."
@@ -504,103 +518,103 @@ msgstr ""
 msgid "URLs to connect after startup"
 msgstr "URL, к которым следует подключаться при запуске"
 
-#: mainwindow.cpp:105
+#: mainwindow.cpp:106
 #, kde-format
 msgid "KDE Remote Desktop Client started"
 msgstr "Клиент удалённого рабочего стола для KDE запущен"
 
-#: mainwindow.cpp:110 mainwindow.cpp:127 mainwindow.cpp:1084
-#: mainwindow.cpp:1179
+#: mainwindow.cpp:111 mainwindow.cpp:128 mainwindow.cpp:1146
+#: mainwindow.cpp:1241
 #, kde-format
 msgid "New Connection"
 msgstr "Новое соединение"
 
-#: mainwindow.cpp:133
+#: mainwindow.cpp:134
 #, kde-format
 msgid "Copy Screenshot to Clipboard"
 msgstr "Скопировать снимок экрана в буфер обмена"
 
-#: mainwindow.cpp:134
+#: mainwindow.cpp:135
 #, kde-format
 msgid "Screenshot"
 msgstr "Снимок экрана"
 
-#: mainwindow.cpp:140 mainwindow.cpp:504
+#: mainwindow.cpp:141 mainwindow.cpp:519
 #, kde-format
 msgid "Switch to Full Screen Mode"
 msgstr "Перейти в полноэкранный режим"
 
-#: mainwindow.cpp:141 mainwindow.cpp:505
+#: mainwindow.cpp:142 mainwindow.cpp:520
 #, kde-format
 msgid "Full Screen"
 msgstr "Полный экран"
 
-#: mainwindow.cpp:148
+#: mainwindow.cpp:149
 #, kde-format
 msgid "View Only"
 msgstr "Только просмотр"
 
-#: mainwindow.cpp:154
+#: mainwindow.cpp:155
 #, kde-format
 msgid "Clipboard Sharing"
 msgstr "Совместное использование буфера обмена"
 
-#: mainwindow.cpp:159
+#: mainwindow.cpp:160
 #, kde-format
 msgid "Disconnect"
 msgstr "Разъединить"
 
-#: mainwindow.cpp:167
+#: mainwindow.cpp:168
 #, kde-format
 msgid "Show Local Cursor"
 msgstr "Показывать локальный курсор"
 
-#: mainwindow.cpp:168
+#: mainwindow.cpp:169
 #, kde-format
 msgid "Local Cursor"
 msgstr "Локальный курсор"
 
-#: mainwindow.cpp:174
+#: mainwindow.cpp:175
 #, kde-format
 msgid "Grab All Possible Keys"
 msgstr "Перехватывать все нажатия клавиш"
 
-#: mainwindow.cpp:175
+#: mainwindow.cpp:176
 #, kde-format
 msgid "Grab Keys"
 msgstr "Перехватывать клавиши"
 
-#: mainwindow.cpp:181
+#: mainwindow.cpp:182
 #, kde-format
 msgid "Scale Remote Screen to Fit Window Size"
 msgstr "Масштабировать изображение с удалённой системы до размеров окна"
 
-#: mainwindow.cpp:182
+#: mainwindow.cpp:183
 #, kde-format
 msgid "Scale"
 msgstr "Масштаб"
 
-#: mainwindow.cpp:185
+#: mainwindow.cpp:186
 #, kde-format
 msgid "Scaling Factor"
 msgstr "Коэффициент масштабирования"
 
-#: mainwindow.cpp:196
+#: mainwindow.cpp:197
 #, kde-format
 msgid "Bookmarks"
 msgstr "Закладки"
 
-#: mainwindow.cpp:264
+#: mainwindow.cpp:265
 #, kde-format
 msgid "Unable to load connection data from the provided file."
 msgstr "Не удалось загрузить данные соединения из предоставленного файла."
 
-#: mainwindow.cpp:264
+#: mainwindow.cpp:265
 #, kde-format
 msgid "Load failed"
 msgstr "Ошибка загрузки"
 
-#: mainwindow.cpp:270
+#: mainwindow.cpp:271
 #, kde-format
 msgid ""
 "The entered address does not have the required form.\n"
@@ -609,139 +623,139 @@ msgstr ""
 "Введённый адрес имеет недопустимый формат.\n"
 "Синтаксис: [имя_пользователя@]хост[:порт]"
 
-#: mainwindow.cpp:270
+#: mainwindow.cpp:271
 #, kde-format
 msgid "Malformed URL"
 msgstr "Недопустимый URL"
 
-#: mainwindow.cpp:291
+#: mainwindow.cpp:292
 #, kde-format
 msgid "The entered address cannot be handled."
 msgstr "Введённый адрес не может быть обработан."
 
-#: mainwindow.cpp:426
+#: mainwindow.cpp:427
 #, kde-format
 msgid "Connecting to %1"
 msgstr "Подключение к %1"
 
-#: mainwindow.cpp:430
+#: mainwindow.cpp:431
 #, kde-format
 msgid "Authenticating at %1"
 msgstr "Аутентификация в %1"
 
-#: mainwindow.cpp:434
+#: mainwindow.cpp:435
 #, kde-format
 msgid "Preparing connection to %1"
 msgstr "Подготовка соединения с %1"
 
-#: mainwindow.cpp:438
+#: mainwindow.cpp:439
 #, kde-format
 msgid "Connected to %1"
 msgstr "Установлено соединение с %1"
 
-#: mainwindow.cpp:538
+#: mainwindow.cpp:563
 #, kde-format
 msgid "Switch to Window Mode"
 msgstr "Перейти в оконный режим"
 
-#: mainwindow.cpp:539
+#: mainwindow.cpp:564
 #, kde-format
 msgid "Window Mode"
 msgstr "Оконный режим"
 
-#: mainwindow.cpp:691
+#: mainwindow.cpp:717
 #, kde-format
 msgid "Connect"
 msgstr "Подключиться"
 
-#: mainwindow.cpp:692
+#: mainwindow.cpp:718
 #, kde-format
 msgid "Rename"
 msgstr "Переименовать"
 
-#: mainwindow.cpp:693
+#: mainwindow.cpp:719
 #, kde-format
 msgid "Settings"
 msgstr "Настройка"
 
-#: mainwindow.cpp:694
+#: mainwindow.cpp:720
 #, kde-format
 msgid "Delete"
 msgstr "Удалить"
 
-#: mainwindow.cpp:697 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:723 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "Закладки"
 
-#: mainwindow.cpp:697 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:723 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "Журнал"
 
-#: mainwindow.cpp:709
+#: mainwindow.cpp:735
 #, kde-format
 msgid "Rename %1"
 msgstr "Переименование %1"
 
-#: mainwindow.cpp:709
+#: mainwindow.cpp:735
 #, kde-format
 msgid "Rename %1 to"
 msgstr "Переименовать %1 в"
 
-#: mainwindow.cpp:716
+#: mainwindow.cpp:742
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "Вы уверены, что хотите удалить %1?"
 
-#: mainwindow.cpp:716
+#: mainwindow.cpp:742
 #, kde-format
 msgid "Delete %1"
 msgstr "Удаление %1"
 
-#: mainwindow.cpp:740
+#: mainwindow.cpp:766
 #, kde-format
 msgid "Add Bookmark"
 msgstr "Добавить закладку"
 
-#: mainwindow.cpp:741
+#: mainwindow.cpp:767
 #, kde-format
 msgid "Close Tab"
 msgstr "Закрыть вкладку"
 
-#: mainwindow.cpp:854
+#: mainwindow.cpp:886
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr "Свернуть полноэкранное окно"
 
-#: mainwindow.cpp:871
+#: mainwindow.cpp:903
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "Прикрепить панель инструментов"
 
-#: mainwindow.cpp:978
+#: mainwindow.cpp:1010
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr "Закрыть клиент удалённого рабочего стола для KDE?"
 
-#: mainwindow.cpp:979
+#: mainwindow.cpp:1011
 #, kde-format
 msgid "Confirm Quit"
 msgstr "Подтвердите выход"
 
-#: mainwindow.cpp:1107
+#: mainwindow.cpp:1169
 #, kde-format
 msgid "Connect to:"
 msgstr "Подключиться к:"
 
-#: mainwindow.cpp:1111
+#: mainwindow.cpp:1173
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr "Введите здесь текст для подключения к адресу или фильтрации списка."
 
-#: mainwindow.cpp:1120
+#: mainwindow.cpp:1182
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
@@ -750,17 +764,17 @@ msgstr ""
 "Введите здесь IP-адрес или имя хоста. Очистите строку, чтобы получить список "
 "способов подключения."
 
-#: mainwindow.cpp:1123
+#: mainwindow.cpp:1185
 #, kde-format
 msgid "Goto Address"
 msgstr "Перейти к адресу"
 
-#: mainwindow.cpp:1215
+#: mainwindow.cpp:1277
 #, kde-format
 msgid "Remote Desktops"
 msgstr "Удалённые системы"
 
-#: mainwindow.cpp:1244
+#: mainwindow.cpp:1306
 #, kde-format
 msgid "Filter"
 msgstr "Фильтр"

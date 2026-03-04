@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-12 00:43+0000\n"
+"POT-Creation-Date: 2026-03-04 00:45+0000\n"
 "PO-Revision-Date: 2013-06-23 12:46-0500\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi/Panjabi <punjabi-users@lists.sf.net>\n"
@@ -118,68 +118,82 @@ msgstr ""
 msgid "Switch to Fullscreen if appropriate"
 msgstr "ਜੇ ਲੋੜ ਹੋਵੇ ਤਾਂ ਪੂਰੀ ਸਕਰੀਨ ਲਈ ਬਦਲੋ"
 
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_GrabAllKeysOnFullscreen)
+#: config/general.ui:126
+#, kde-format
+msgid ""
+"Automatically grab all keys when entering fullscreen mode and release them "
+"when leaving fullscreen"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_GrabAllKeysOnFullscreen)
+#: config/general.ui:129
+#, kde-format
+msgid "Grab all keys when entering fullscreen"
+msgstr ""
+
 #. i18n: ectx: property (text), widget (QLabel, defaultProtocolLabel)
-#: config/general.ui:128
+#: config/general.ui:138
 #, kde-format
 msgid "Default protocol:"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLineEdit, kcfg_DefaultProtocol)
-#: config/general.ui:135
+#: config/general.ui:145
 #, kde-format
 msgid "vnc"
 msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, tabGroupBox)
-#: config/general.ui:147
+#: config/general.ui:157
 #, kde-format
 msgid "Tab Settings"
 msgstr "ਟੈਬ ਸੈਟਿੰਗ"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowTabBar)
-#: config/general.ui:153
+#: config/general.ui:163
 #, kde-format
 msgid "Always show tab bar"
 msgstr "ਟੈਬ ਬਾਰ ਹਮੇਸ਼ਾ ਵੇਖੋ"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabCloseButton)
-#: config/general.ui:160
+#: config/general.ui:170
 #, kde-format
 msgid "Show close button on tabs"
 msgstr "ਟੈਬ ਉੱਤੇ ਬੰਦ ਕਰੋ ਬਟਨ ਵੇਖੋ"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabMiddleClick)
-#: config/general.ui:167
+#: config/general.ui:177
 #, kde-format
 msgid "Middle-click on a tab closes it"
 msgstr "ਟੈਬ ਬੰਦ ਕਰਨ ਲਈ ਮਿਡਲ-ਕਲਿੱਕ ਕਰੋ"
 
 #. i18n: ectx: property (text), widget (QLabel, tabOrientationLabel)
-#: config/general.ui:176
+#: config/general.ui:186
 #, kde-format
 msgid "Tab position:"
 msgstr "ਟੈਬ ਸਥਿਤੀ:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TabPosition)
-#: config/general.ui:184
+#: config/general.ui:194
 #, kde-format
 msgid "Top"
 msgstr "ਉੱਤੇ"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TabPosition)
-#: config/general.ui:189
+#: config/general.ui:199
 #, kde-format
 msgid "Bottom"
 msgstr "ਹੇਠਾਂ"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TabPosition)
-#: config/general.ui:194
+#: config/general.ui:204
 #, kde-format
 msgid "Left"
 msgstr "ਖੱਬੇ"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TabPosition)
-#: config/general.ui:199
+#: config/general.ui:209
 #, kde-format
 msgid "Right"
 msgstr "ਸੱਜੇ"
@@ -195,12 +209,12 @@ msgstr "ਸੰਰਚਨਾ..."
 msgid "Remove"
 msgstr "ਹਟਾਓ"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:291 mainwindow.cpp:672
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:292 mainwindow.cpp:698
 #, kde-format
 msgid "Unusable URL"
 msgstr "ਗ਼ੈਰ-ਵਰਤਣ-ਯੋਗ URL"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:672
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:698
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr "ਚੁਣਿਆ ਹੋਸਟ ਹੈਂਡਲ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ।"
@@ -488,103 +502,103 @@ msgstr ""
 msgid "URLs to connect after startup"
 msgstr "ਸ਼ੁਰੂ ਸਮੇਂ ਕੁਨੈਕਟ ਕਰਨ ਲਈ URL"
 
-#: mainwindow.cpp:105
+#: mainwindow.cpp:106
 #, kde-format
 msgid "KDE Remote Desktop Client started"
 msgstr "KDE ਰਿਮੋਟ ਡੈਸਕਟਾਪ ਕੁਨੈਕਸ਼ਨ ਸ਼ੁਰੂ ਹੋਇਆ"
 
-#: mainwindow.cpp:110 mainwindow.cpp:127 mainwindow.cpp:1084
-#: mainwindow.cpp:1179
+#: mainwindow.cpp:111 mainwindow.cpp:128 mainwindow.cpp:1146
+#: mainwindow.cpp:1241
 #, kde-format
 msgid "New Connection"
 msgstr "ਨਵਾਂ ਕੁਨੈਕਸ਼ਨ"
 
-#: mainwindow.cpp:133
+#: mainwindow.cpp:134
 #, kde-format
 msgid "Copy Screenshot to Clipboard"
 msgstr "ਸਕਰੀਨਸ਼ਾਟ ਕਲਿੱਪਬੋਰਡ 'ਚ ਕਾਪੀ"
 
-#: mainwindow.cpp:134
+#: mainwindow.cpp:135
 #, kde-format
 msgid "Screenshot"
 msgstr "ਸਕਰੀਨਸ਼ਾਟ"
 
-#: mainwindow.cpp:140 mainwindow.cpp:504
+#: mainwindow.cpp:141 mainwindow.cpp:519
 #, kde-format
 msgid "Switch to Full Screen Mode"
 msgstr "ਪੂਰੀ ਸਕਰੀਨ ਮੋਡ 'ਚ ਬਦਲੋ"
 
-#: mainwindow.cpp:141 mainwindow.cpp:505
+#: mainwindow.cpp:142 mainwindow.cpp:520
 #, kde-format
 msgid "Full Screen"
 msgstr "ਪੂਰੀ ਸਕਰੀਨ"
 
-#: mainwindow.cpp:148
+#: mainwindow.cpp:149
 #, kde-format
 msgid "View Only"
 msgstr "ਸਿਰਫ਼ ਵੇਖਣ ਲਈ"
 
-#: mainwindow.cpp:154
+#: mainwindow.cpp:155
 #, kde-format
 msgid "Clipboard Sharing"
 msgstr ""
 
-#: mainwindow.cpp:159
+#: mainwindow.cpp:160
 #, kde-format
 msgid "Disconnect"
 msgstr "ਡਿਸ-ਕੁਨੈਕਟ"
 
-#: mainwindow.cpp:167
+#: mainwindow.cpp:168
 #, kde-format
 msgid "Show Local Cursor"
 msgstr "ਲੋਕਲ ਕਰਸਰ ਵੇਖੋ"
 
-#: mainwindow.cpp:168
+#: mainwindow.cpp:169
 #, kde-format
 msgid "Local Cursor"
 msgstr "ਲੋਕਲ ਕਰਸਰ"
 
-#: mainwindow.cpp:174
+#: mainwindow.cpp:175
 #, kde-format
 msgid "Grab All Possible Keys"
 msgstr "ਸਭ ਸੰਭਵ ਸਵਿੱਚਾਂ ਲਵੋ"
 
-#: mainwindow.cpp:175
+#: mainwindow.cpp:176
 #, kde-format
 msgid "Grab Keys"
 msgstr "ਸਵਿੱਚ ਲਵੋ"
 
-#: mainwindow.cpp:181
+#: mainwindow.cpp:182
 #, kde-format
 msgid "Scale Remote Screen to Fit Window Size"
 msgstr "ਰਿਮੋਟ ਸਕਰੀਨ ਵਿੰਡੋ ਸਾਈਜ਼ 'ਚ ਫਿੱਟ ਕਰਨ ਲਈ ਸਕੇਲ ਕਰੋ"
 
-#: mainwindow.cpp:182
+#: mainwindow.cpp:183
 #, kde-format
 msgid "Scale"
 msgstr "ਸਕੇਲ"
 
-#: mainwindow.cpp:185
+#: mainwindow.cpp:186
 #, kde-format
 msgid "Scaling Factor"
 msgstr ""
 
-#: mainwindow.cpp:196
+#: mainwindow.cpp:197
 #, kde-format
 msgid "Bookmarks"
 msgstr "ਬੁੱਕਮਾਰਕ"
 
-#: mainwindow.cpp:264
+#: mainwindow.cpp:265
 #, kde-format
 msgid "Unable to load connection data from the provided file."
 msgstr ""
 
-#: mainwindow.cpp:264
+#: mainwindow.cpp:265
 #, kde-format
 msgid "Load failed"
 msgstr ""
 
-#: mainwindow.cpp:270
+#: mainwindow.cpp:271
 #, kde-format
 msgid ""
 "The entered address does not have the required form.\n"
@@ -593,156 +607,156 @@ msgstr ""
 "ਦਿੱਤਾ ਐਡਰੈੱਸ ਲੋੜੀਦੇ ਰੂਪ ਵਿੱਚ ਨਹੀਂ ਹੈ।\n"
 " ਸੰਟੈਕਸ: [username@]host[:port]"
 
-#: mainwindow.cpp:270
+#: mainwindow.cpp:271
 #, kde-format
 msgid "Malformed URL"
 msgstr "ਨਿਕਾਰਾ URL"
 
-#: mainwindow.cpp:291
+#: mainwindow.cpp:292
 #, kde-format
 msgid "The entered address cannot be handled."
 msgstr "ਦਿੱਤਾ ਐਡਰੈੱਸ ਹੈਂਡਲ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ ਹੈ।"
 
-#: mainwindow.cpp:426
+#: mainwindow.cpp:427
 #, kde-format
 msgid "Connecting to %1"
 msgstr "%1 ਨਾਲ ਕੁਨੈਕਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
 
-#: mainwindow.cpp:430
+#: mainwindow.cpp:431
 #, kde-format
 msgid "Authenticating at %1"
 msgstr "%1 ਉੱਤੇ ਪਰਮਾਣਿਤ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
 
-#: mainwindow.cpp:434
+#: mainwindow.cpp:435
 #, kde-format
 msgid "Preparing connection to %1"
 msgstr "%1 ਨਾਲ ਕੁਨੈਕਸ਼ਨ ਲਈ ਤਿਆਰ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
 
-#: mainwindow.cpp:438
+#: mainwindow.cpp:439
 #, kde-format
 msgid "Connected to %1"
 msgstr "%1 ਨਾਲ ਕੁਨੈਕਟ ਹੈ"
 
-#: mainwindow.cpp:538
+#: mainwindow.cpp:563
 #, kde-format
 msgid "Switch to Window Mode"
 msgstr "ਵਿੰਡੋ ਮੋਡ ਬਦਲੋ"
 
-#: mainwindow.cpp:539
+#: mainwindow.cpp:564
 #, kde-format
 msgid "Window Mode"
 msgstr "ਵਿੰਡੋ ਮੋਡ"
 
-#: mainwindow.cpp:691
+#: mainwindow.cpp:717
 #, kde-format
 msgid "Connect"
 msgstr "ਕੁਨੈਕਟ ਕਰੋ"
 
-#: mainwindow.cpp:692
+#: mainwindow.cpp:718
 #, kde-format
 msgid "Rename"
 msgstr "ਨਾਂ ਬਦਲੋ"
 
-#: mainwindow.cpp:693
+#: mainwindow.cpp:719
 #, kde-format
 msgid "Settings"
 msgstr "ਸੈਟਿੰਗ"
 
-#: mainwindow.cpp:694
+#: mainwindow.cpp:720
 #, kde-format
 msgid "Delete"
 msgstr "ਹਟਾਓ"
 
-#: mainwindow.cpp:697 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:723 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "ਬੁੱਕਮਾਰਕ"
 
-#: mainwindow.cpp:697 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:723 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "ਅਤੀਤ"
 
-#: mainwindow.cpp:709
+#: mainwindow.cpp:735
 #, kde-format
 msgid "Rename %1"
 msgstr "%1 ਨਾਂ ਬਦਲੋ"
 
-#: mainwindow.cpp:709
+#: mainwindow.cpp:735
 #, kde-format
 msgid "Rename %1 to"
 msgstr "%1 ਦਾ ਨਾਂ ਬਦਲੋ"
 
-#: mainwindow.cpp:716
+#: mainwindow.cpp:742
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "ਕੀ ਤੁਸੀਂ %1 ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
 
-#: mainwindow.cpp:716
+#: mainwindow.cpp:742
 #, kde-format
 msgid "Delete %1"
 msgstr "%1 ਹਟਾਓ"
 
-#: mainwindow.cpp:740
+#: mainwindow.cpp:766
 #, kde-format
 msgid "Add Bookmark"
 msgstr "ਬੁੱਕਮਾਰਕ ਸ਼ਾਮਲ"
 
-#: mainwindow.cpp:741
+#: mainwindow.cpp:767
 #, kde-format
 msgid "Close Tab"
 msgstr "ਟੈਬ ਬੰਦ ਕਰੋ"
 
-#: mainwindow.cpp:854
+#: mainwindow.cpp:886
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr "ਪੂਰੀ ਸਕਰੀਨ ਵਿੰਡੋ ਘੱਟੋ-ਘੱਟ ਕਰੋ"
 
-#: mainwindow.cpp:871
+#: mainwindow.cpp:903
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "ਟੂਲਬਾਰ ਸਟਿੱਕ"
 
-#: mainwindow.cpp:978
+#: mainwindow.cpp:1010
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr "ਕੀ ਤੁਸੀਂ KDE ਰਿਮੋਟ ਡੈਸਕਟਾਪ ਕਲਾਇਟ ਬੰਦ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?"
 
-#: mainwindow.cpp:979
+#: mainwindow.cpp:1011
 #, kde-format
 msgid "Confirm Quit"
 msgstr "ਬੰਦ ਕਰਨ ਦੀ ਪੁਸ਼ਟੀ"
 
-#: mainwindow.cpp:1107
+#: mainwindow.cpp:1169
 #, kde-format
 msgid "Connect to:"
 msgstr "ਕੁਨੈਕਸ਼ਨ ਕਰੋ:"
 
-#: mainwindow.cpp:1111
+#: mainwindow.cpp:1173
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr "ਐਡਰੈਸ ਨਾਲ ਕੁਨੈਕਟ ਕਰਨ ਤੇ ਲਿਸਟ ਫਿਲਟਰ ਕਰਨ ਲਈ ਇੱਥੇ ਲਿਖੋ।"
 
-#: mainwindow.cpp:1120
+#: mainwindow.cpp:1182
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
 "methods."
 msgstr ""
 
-#: mainwindow.cpp:1123
+#: mainwindow.cpp:1185
 #, kde-format
 msgid "Goto Address"
 msgstr "ਐਡਰੈੱਸ ਉੱਤੇ ਜਾਓ"
 
-#: mainwindow.cpp:1215
+#: mainwindow.cpp:1277
 #, kde-format
 msgid "Remote Desktops"
 msgstr "ਰਿਮੋਟ ਡੈਸਕਟਾਪ"
 
-#: mainwindow.cpp:1244
+#: mainwindow.cpp:1306
 #, kde-format
 msgid "Filter"
 msgstr "ਫਿਲਟਰ"

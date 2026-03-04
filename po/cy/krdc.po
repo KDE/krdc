@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-12 00:43+0000\n"
+"POT-Creation-Date: 2026-03-04 00:45+0000\n"
 "PO-Revision-Date: 2004-02-25 12:40+0000\n"
 "Last-Translator: KD at KGyfieithu <kyfieithu@dotmon.com>\n"
 "Language-Team: Cymraeg <cy@li.org>\n"
@@ -119,69 +119,83 @@ msgstr ""
 msgid "Switch to Fullscreen if appropriate"
 msgstr "Dechrau yn y modd sgrîn lawn."
 
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_GrabAllKeysOnFullscreen)
+#: config/general.ui:126
+#, kde-format
+msgid ""
+"Automatically grab all keys when entering fullscreen mode and release them "
+"when leaving fullscreen"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_GrabAllKeysOnFullscreen)
+#: config/general.ui:129
+#, kde-format
+msgid "Grab all keys when entering fullscreen"
+msgstr ""
+
 #. i18n: ectx: property (text), widget (QLabel, defaultProtocolLabel)
-#: config/general.ui:128
+#: config/general.ui:138
 #, kde-format
 msgid "Default protocol:"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLineEdit, kcfg_DefaultProtocol)
-#: config/general.ui:135
+#: config/general.ui:145
 #, kde-format
 msgid "vnc"
 msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, tabGroupBox)
-#: config/general.ui:147
+#: config/general.ui:157
 #, fuzzy, kde-format
 #| msgid "Settings"
 msgid "Tab Settings"
 msgstr "Gosodiadau"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowTabBar)
-#: config/general.ui:153
+#: config/general.ui:163
 #, kde-format
 msgid "Always show tab bar"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabCloseButton)
-#: config/general.ui:160
+#: config/general.ui:170
 #, kde-format
 msgid "Show close button on tabs"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabMiddleClick)
-#: config/general.ui:167
+#: config/general.ui:177
 #, kde-format
 msgid "Middle-click on a tab closes it"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, tabOrientationLabel)
-#: config/general.ui:176
+#: config/general.ui:186
 #, kde-format
 msgid "Tab position:"
 msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TabPosition)
-#: config/general.ui:184
+#: config/general.ui:194
 #, kde-format
 msgid "Top"
 msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TabPosition)
-#: config/general.ui:189
+#: config/general.ui:199
 #, kde-format
 msgid "Bottom"
 msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TabPosition)
-#: config/general.ui:194
+#: config/general.ui:204
 #, kde-format
 msgid "Left"
 msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TabPosition)
-#: config/general.ui:199
+#: config/general.ui:209
 #, fuzzy, kde-format
 #| msgid "High"
 msgid "Right"
@@ -197,12 +211,12 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:291 mainwindow.cpp:672
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:292 mainwindow.cpp:698
 #, kde-format
 msgid "Unusable URL"
 msgstr ""
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:672
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:698
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr ""
@@ -478,110 +492,110 @@ msgstr ""
 msgid "URLs to connect after startup"
 msgstr ""
 
-#: mainwindow.cpp:105
+#: mainwindow.cpp:106
 #, fuzzy, kde-format
 #| msgid "Remote Desktop Connection"
 msgid "KDE Remote Desktop Client started"
 msgstr "Cysylltiad Penbwrdd Pell"
 
-#: mainwindow.cpp:110 mainwindow.cpp:127 mainwindow.cpp:1084
-#: mainwindow.cpp:1179
+#: mainwindow.cpp:111 mainwindow.cpp:128 mainwindow.cpp:1146
+#: mainwindow.cpp:1241
 #, fuzzy, kde-format
 #| msgid "Connection"
 msgid "New Connection"
 msgstr "Cysylltiad"
 
-#: mainwindow.cpp:133
+#: mainwindow.cpp:134
 #, kde-format
 msgid "Copy Screenshot to Clipboard"
 msgstr ""
 
-#: mainwindow.cpp:134
+#: mainwindow.cpp:135
 #, kde-format
 msgid "Screenshot"
 msgstr ""
 
-#: mainwindow.cpp:140 mainwindow.cpp:504
+#: mainwindow.cpp:141 mainwindow.cpp:519
 #, fuzzy, kde-format
 msgid "Switch to Full Screen Mode"
 msgstr "Dechrau yn y modd sgrîn lawn."
 
-#: mainwindow.cpp:141 mainwindow.cpp:505
+#: mainwindow.cpp:142 mainwindow.cpp:520
 #, fuzzy, kde-format
 #| msgid "Fullscreen"
 msgid "Full Screen"
 msgstr "Sgrîn-lawn"
 
-#: mainwindow.cpp:148
+#: mainwindow.cpp:149
 #, fuzzy, kde-format
 #| msgid "View Only"
 msgid "View Only"
 msgstr "Golwg yn Unig"
 
-#: mainwindow.cpp:154
+#: mainwindow.cpp:155
 #, kde-format
 msgid "Clipboard Sharing"
 msgstr ""
 
-#: mainwindow.cpp:159
+#: mainwindow.cpp:160
 #, fuzzy, kde-format
 #| msgid "Connect"
 msgid "Disconnect"
 msgstr "Cysylltu"
 
-#: mainwindow.cpp:167
+#: mainwindow.cpp:168
 #, kde-format
 msgid "Show Local Cursor"
 msgstr ""
 
-#: mainwindow.cpp:168
+#: mainwindow.cpp:169
 #, kde-format
 msgid "Local Cursor"
 msgstr ""
 
-#: mainwindow.cpp:174
+#: mainwindow.cpp:175
 #, kde-format
 msgid "Grab All Possible Keys"
 msgstr ""
 
-#: mainwindow.cpp:175
+#: mainwindow.cpp:176
 #, kde-format
 msgid "Grab Keys"
 msgstr ""
 
-#: mainwindow.cpp:181
+#: mainwindow.cpp:182
 #, fuzzy, kde-format
 #| msgid "This option scales the remote screen to fit your window size."
 msgid "Scale Remote Screen to Fit Window Size"
 msgstr ""
 "Mae'r dewisiad yma'n chwyddo'r sgrîn pell i ffitio maint eich ffenestr."
 
-#: mainwindow.cpp:182
+#: mainwindow.cpp:183
 #, kde-format
 msgid "Scale"
 msgstr "Chwyddo"
 
-#: mainwindow.cpp:185
+#: mainwindow.cpp:186
 #, kde-format
 msgid "Scaling Factor"
 msgstr ""
 
-#: mainwindow.cpp:196
+#: mainwindow.cpp:197
 #, kde-format
 msgid "Bookmarks"
 msgstr ""
 
-#: mainwindow.cpp:264
+#: mainwindow.cpp:265
 #, kde-format
 msgid "Unable to load connection data from the provided file."
 msgstr ""
 
-#: mainwindow.cpp:264
+#: mainwindow.cpp:265
 #, kde-format
 msgid "Load failed"
 msgstr ""
 
-#: mainwindow.cpp:270
+#: mainwindow.cpp:271
 #, fuzzy, kde-format
 #| msgid "The entered host does not have the required form."
 msgid ""
@@ -589,166 +603,166 @@ msgid ""
 " Syntax: [username@]host[:port]"
 msgstr "Nid oes gan y gwesteiwr a roddwyd y ffurf angenrheidiol."
 
-#: mainwindow.cpp:270
+#: mainwindow.cpp:271
 #, fuzzy, kde-format
 #| msgid "Malformed URL or Host"
 msgid "Malformed URL"
 msgstr "URL neu westeiwr wedi'i gamffurfio"
 
-#: mainwindow.cpp:291
+#: mainwindow.cpp:292
 #, kde-format
 msgid "The entered address cannot be handled."
 msgstr ""
 
-#: mainwindow.cpp:426
+#: mainwindow.cpp:427
 #, fuzzy, kde-format
 #| msgid "Connection"
 msgid "Connecting to %1"
 msgstr "Cysylltiad"
 
-#: mainwindow.cpp:430
+#: mainwindow.cpp:431
 #, fuzzy, kde-format
 #| msgid "Authenticating..."
 msgid "Authenticating at %1"
 msgstr "Yn dilysu..."
 
-#: mainwindow.cpp:434
+#: mainwindow.cpp:435
 #, kde-format
 msgid "Preparing connection to %1"
 msgstr ""
 
-#: mainwindow.cpp:438
+#: mainwindow.cpp:439
 #, fuzzy, kde-format
 #| msgid "Connection"
 msgid "Connected to %1"
 msgstr "Cysylltiad"
 
-#: mainwindow.cpp:538
+#: mainwindow.cpp:563
 #, fuzzy, kde-format
 msgid "Switch to Window Mode"
 msgstr "Dechrau yn y modd sgrîn lawn."
 
-#: mainwindow.cpp:539
+#: mainwindow.cpp:564
 #, fuzzy, kde-format
 msgid "Window Mode"
 msgstr "Dechrau yn y modd sgrîn lawn."
 
-#: mainwindow.cpp:691
+#: mainwindow.cpp:717
 #, fuzzy, kde-format
 #| msgid "Connection"
 msgid "Connect"
 msgstr "Cysylltiad"
 
-#: mainwindow.cpp:692
+#: mainwindow.cpp:718
 #, fuzzy, kde-format
 #| msgid "Name"
 msgid "Rename"
 msgstr "Enw"
 
-#: mainwindow.cpp:693
+#: mainwindow.cpp:719
 #, fuzzy, kde-format
 #| msgid "Settings"
 msgid "Settings"
 msgstr "Gosodiadau"
 
-#: mainwindow.cpp:694
+#: mainwindow.cpp:720
 #, kde-format
 msgid "Delete"
 msgstr ""
 
-#: mainwindow.cpp:697 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:723 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr ""
 
-#: mainwindow.cpp:697 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:723 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr ""
 
-#: mainwindow.cpp:709
+#: mainwindow.cpp:735
 #, kde-format
 msgid "Rename %1"
 msgstr ""
 
-#: mainwindow.cpp:709
+#: mainwindow.cpp:735
 #, kde-format
 msgid "Rename %1 to"
 msgstr ""
 
-#: mainwindow.cpp:716
+#: mainwindow.cpp:742
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr ""
 
-#: mainwindow.cpp:716
+#: mainwindow.cpp:742
 #, kde-format
 msgid "Delete %1"
 msgstr ""
 
-#: mainwindow.cpp:740
+#: mainwindow.cpp:766
 #, kde-format
 msgid "Add Bookmark"
 msgstr ""
 
-#: mainwindow.cpp:741
+#: mainwindow.cpp:767
 #, kde-format
 msgid "Close Tab"
 msgstr ""
 
-#: mainwindow.cpp:854
+#: mainwindow.cpp:886
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr ""
 
-#: mainwindow.cpp:871
+#: mainwindow.cpp:903
 #, kde-format
 msgid "Stick Toolbar"
 msgstr ""
 
-#: mainwindow.cpp:978
+#: mainwindow.cpp:1010
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr ""
 
-#: mainwindow.cpp:979
+#: mainwindow.cpp:1011
 #, kde-format
 msgid "Confirm Quit"
 msgstr ""
 
-#: mainwindow.cpp:1107
+#: mainwindow.cpp:1169
 #, fuzzy, kde-format
 #| msgid "Connect"
 msgid "Connect to:"
 msgstr "Cysylltu"
 
-#: mainwindow.cpp:1111
+#: mainwindow.cpp:1173
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr ""
 
-#: mainwindow.cpp:1120
+#: mainwindow.cpp:1182
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
 "methods."
 msgstr ""
 
-#: mainwindow.cpp:1123
+#: mainwindow.cpp:1185
 #, fuzzy, kde-format
 #| msgid "Address"
 msgid "Goto Address"
 msgstr "Cyfeiriad"
 
-#: mainwindow.cpp:1215
+#: mainwindow.cpp:1277
 #, fuzzy, kde-format
 #| msgid "Remote &desktop:"
 msgid "Remote Desktops"
 msgstr "&Penbwrdd pell"
 
-#: mainwindow.cpp:1244
+#: mainwindow.cpp:1306
 #, kde-format
 msgid "Filter"
 msgstr ""

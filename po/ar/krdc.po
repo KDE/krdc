@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-12 00:43+0000\n"
+"POT-Creation-Date: 2026-03-04 00:45+0000\n"
 "PO-Revision-Date: 2026-01-18 18:47+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -124,68 +124,82 @@ msgstr ""
 msgid "Switch to Fullscreen if appropriate"
 msgstr "بدل لنمط ملء الشاشة إذا كان مناسباً"
 
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_GrabAllKeysOnFullscreen)
+#: config/general.ui:126
+#, kde-format
+msgid ""
+"Automatically grab all keys when entering fullscreen mode and release them "
+"when leaving fullscreen"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_GrabAllKeysOnFullscreen)
+#: config/general.ui:129
+#, kde-format
+msgid "Grab all keys when entering fullscreen"
+msgstr ""
+
 #. i18n: ectx: property (text), widget (QLabel, defaultProtocolLabel)
-#: config/general.ui:128
+#: config/general.ui:138
 #, kde-format
 msgid "Default protocol:"
 msgstr "الميفاق المبدئي:"
 
 #. i18n: ectx: property (text), widget (QLineEdit, kcfg_DefaultProtocol)
-#: config/general.ui:135
+#: config/general.ui:145
 #, kde-format
 msgid "vnc"
 msgstr "vnc"
 
 #. i18n: ectx: property (title), widget (QGroupBox, tabGroupBox)
-#: config/general.ui:147
+#: config/general.ui:157
 #, kde-format
 msgid "Tab Settings"
 msgstr "إعدادات الألسنة"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowTabBar)
-#: config/general.ui:153
+#: config/general.ui:163
 #, kde-format
 msgid "Always show tab bar"
 msgstr "أظهر شريط الألسنة دائمًا"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabCloseButton)
-#: config/general.ui:160
+#: config/general.ui:170
 #, kde-format
 msgid "Show close button on tabs"
 msgstr "أظهر زر الإغلاق في الألسنة"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabMiddleClick)
-#: config/general.ui:167
+#: config/general.ui:177
 #, kde-format
 msgid "Middle-click on a tab closes it"
 msgstr "النقر الأوسط على لسان يُغلقه"
 
 #. i18n: ectx: property (text), widget (QLabel, tabOrientationLabel)
-#: config/general.ui:176
+#: config/general.ui:186
 #, kde-format
 msgid "Tab position:"
 msgstr "مكان الألسنة:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TabPosition)
-#: config/general.ui:184
+#: config/general.ui:194
 #, kde-format
 msgid "Top"
 msgstr "الأعلى"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TabPosition)
-#: config/general.ui:189
+#: config/general.ui:199
 #, kde-format
 msgid "Bottom"
 msgstr "الأسفل"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TabPosition)
-#: config/general.ui:194
+#: config/general.ui:204
 #, kde-format
 msgid "Left"
 msgstr "اليسار"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TabPosition)
-#: config/general.ui:199
+#: config/general.ui:209
 #, kde-format
 msgid "Right"
 msgstr "اليمين"
@@ -200,12 +214,12 @@ msgstr "اضبط…"
 msgid "Remove"
 msgstr "أزل"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:291 mainwindow.cpp:672
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:292 mainwindow.cpp:698
 #, kde-format
 msgid "Unusable URL"
 msgstr "عنوان غير صالح للاستعمال"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:672
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:698
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr "المضيف المنقى لا يمكن التعامل معه."
@@ -501,103 +515,103 @@ msgstr "أبدء KRDC بالعنوان المعطى في نمط ملء الشا�
 msgid "URLs to connect after startup"
 msgstr "عناوين جاهزة للإتصال بعد الإقلاع"
 
-#: mainwindow.cpp:105
+#: mainwindow.cpp:106
 #, kde-format
 msgid "KDE Remote Desktop Client started"
 msgstr "عميل سطح المكتب للكِيدِي بدء"
 
-#: mainwindow.cpp:110 mainwindow.cpp:127 mainwindow.cpp:1084
-#: mainwindow.cpp:1179
+#: mainwindow.cpp:111 mainwindow.cpp:128 mainwindow.cpp:1146
+#: mainwindow.cpp:1241
 #, kde-format
 msgid "New Connection"
 msgstr "اتصال جديد"
 
-#: mainwindow.cpp:133
+#: mainwindow.cpp:134
 #, kde-format
 msgid "Copy Screenshot to Clipboard"
 msgstr "انسخ لقطة الشاشة للحافظة"
 
-#: mainwindow.cpp:134
+#: mainwindow.cpp:135
 #, kde-format
 msgid "Screenshot"
 msgstr "لقطة شاشة"
 
-#: mainwindow.cpp:140 mainwindow.cpp:504
+#: mainwindow.cpp:141 mainwindow.cpp:519
 #, kde-format
 msgid "Switch to Full Screen Mode"
 msgstr "بدل لنمط ملء الشاشة"
 
-#: mainwindow.cpp:141 mainwindow.cpp:505
+#: mainwindow.cpp:142 mainwindow.cpp:520
 #, kde-format
 msgid "Full Screen"
 msgstr "ملء الشاشة"
 
-#: mainwindow.cpp:148
+#: mainwindow.cpp:149
 #, kde-format
 msgid "View Only"
 msgstr "اعرض فقط"
 
-#: mainwindow.cpp:154
+#: mainwindow.cpp:155
 #, kde-format
 msgid "Clipboard Sharing"
 msgstr "مشاركة الحافظة"
 
-#: mainwindow.cpp:159
+#: mainwindow.cpp:160
 #, kde-format
 msgid "Disconnect"
 msgstr "اقطع الاتصال"
 
-#: mainwindow.cpp:167
+#: mainwindow.cpp:168
 #, kde-format
 msgid "Show Local Cursor"
 msgstr "اظهر المؤشر المحلي"
 
-#: mainwindow.cpp:168
+#: mainwindow.cpp:169
 #, kde-format
 msgid "Local Cursor"
 msgstr "المؤشر المحلي"
 
-#: mainwindow.cpp:174
+#: mainwindow.cpp:175
 #, kde-format
 msgid "Grab All Possible Keys"
 msgstr "امسك كل المفاتيح الممكنة"
 
-#: mainwindow.cpp:175
+#: mainwindow.cpp:176
 #, kde-format
 msgid "Grab Keys"
 msgstr "امسك المفاتيح"
 
-#: mainwindow.cpp:181
+#: mainwindow.cpp:182
 #, kde-format
 msgid "Scale Remote Screen to Fit Window Size"
 msgstr "غيّر قياس الشاشة البعيدة لتناسب حجم النافذة"
 
-#: mainwindow.cpp:182
+#: mainwindow.cpp:183
 #, kde-format
 msgid "Scale"
 msgstr "حجّم"
 
-#: mainwindow.cpp:185
+#: mainwindow.cpp:186
 #, kde-format
 msgid "Scaling Factor"
 msgstr "عامل التحجيم"
 
-#: mainwindow.cpp:196
+#: mainwindow.cpp:197
 #, kde-format
 msgid "Bookmarks"
 msgstr "العلامات"
 
-#: mainwindow.cpp:264
+#: mainwindow.cpp:265
 #, kde-format
 msgid "Unable to load connection data from the provided file."
 msgstr "تعذر تحميل بيانات الاتصال من الملف المقدم."
 
-#: mainwindow.cpp:264
+#: mainwindow.cpp:265
 #, kde-format
 msgid "Load failed"
 msgstr "فشل التحميل"
 
-#: mainwindow.cpp:270
+#: mainwindow.cpp:271
 #, kde-format
 msgid ""
 "The entered address does not have the required form.\n"
@@ -606,156 +620,156 @@ msgstr ""
 "العنوان المدخل لا يملك الشكل المطلوب.\n"
 " الصياغة: [اسم المستخدم@]المضيف[:المنفذ]"
 
-#: mainwindow.cpp:270
+#: mainwindow.cpp:271
 #, kde-format
 msgid "Malformed URL"
 msgstr "عنوان مشوَّه"
 
-#: mainwindow.cpp:291
+#: mainwindow.cpp:292
 #, kde-format
 msgid "The entered address cannot be handled."
 msgstr "لا يمكن التعامل مع العنوان المدخل."
 
-#: mainwindow.cpp:426
+#: mainwindow.cpp:427
 #, kde-format
 msgid "Connecting to %1"
 msgstr "يتصل بـ %1"
 
-#: mainwindow.cpp:430
+#: mainwindow.cpp:431
 #, kde-format
 msgid "Authenticating at %1"
 msgstr "يستوثق عند %1"
 
-#: mainwindow.cpp:434
+#: mainwindow.cpp:435
 #, kde-format
 msgid "Preparing connection to %1"
 msgstr "يحضر الاتصال بـ %1"
 
-#: mainwindow.cpp:438
+#: mainwindow.cpp:439
 #, kde-format
 msgid "Connected to %1"
 msgstr "يتصل بـ %1"
 
-#: mainwindow.cpp:538
+#: mainwindow.cpp:563
 #, kde-format
 msgid "Switch to Window Mode"
 msgstr "بدل إلى نمط النافذة"
 
-#: mainwindow.cpp:539
+#: mainwindow.cpp:564
 #, kde-format
 msgid "Window Mode"
 msgstr "نمط النافذة"
 
-#: mainwindow.cpp:691
+#: mainwindow.cpp:717
 #, kde-format
 msgid "Connect"
 msgstr "اتّصل"
 
-#: mainwindow.cpp:692
+#: mainwindow.cpp:718
 #, kde-format
 msgid "Rename"
 msgstr "غيّر الاسم"
 
-#: mainwindow.cpp:693
+#: mainwindow.cpp:719
 #, kde-format
 msgid "Settings"
 msgstr "إعدادات"
 
-#: mainwindow.cpp:694
+#: mainwindow.cpp:720
 #, kde-format
 msgid "Delete"
 msgstr "احذف"
 
-#: mainwindow.cpp:697 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:723 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "العلامات"
 
-#: mainwindow.cpp:697 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:723 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "التاريخ"
 
-#: mainwindow.cpp:709
+#: mainwindow.cpp:735
 #, kde-format
 msgid "Rename %1"
 msgstr "غيّر الاسم %1"
 
-#: mainwindow.cpp:709
+#: mainwindow.cpp:735
 #, kde-format
 msgid "Rename %1 to"
 msgstr "أعد تسمية %1 إلى"
 
-#: mainwindow.cpp:716
+#: mainwindow.cpp:742
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "أمتأكّد من حذف %1؟"
 
-#: mainwindow.cpp:716
+#: mainwindow.cpp:742
 #, kde-format
 msgid "Delete %1"
 msgstr "احذف %1"
 
-#: mainwindow.cpp:740
+#: mainwindow.cpp:766
 #, kde-format
 msgid "Add Bookmark"
 msgstr "أضف علامة"
 
-#: mainwindow.cpp:741
+#: mainwindow.cpp:767
 #, kde-format
 msgid "Close Tab"
 msgstr "أغلق اللسان"
 
-#: mainwindow.cpp:854
+#: mainwindow.cpp:886
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr "صغر النافذة التي تملأ الشاشة"
 
-#: mainwindow.cpp:871
+#: mainwindow.cpp:903
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "ثبت شريط الأدوات"
 
-#: mainwindow.cpp:978
+#: mainwindow.cpp:1010
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr "هل ترغب في إنهاء عميل سطح المكتب البعيد للكِيدِي ؟"
 
-#: mainwindow.cpp:979
+#: mainwindow.cpp:1011
 #, kde-format
 msgid "Confirm Quit"
 msgstr "أكد الإنهاء"
 
-#: mainwindow.cpp:1107
+#: mainwindow.cpp:1169
 #, kde-format
 msgid "Connect to:"
 msgstr "متصل ب:"
 
-#: mainwindow.cpp:1111
+#: mainwindow.cpp:1173
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr "اكتب هنا للاتصال بعنوان وتصفية القائمة."
 
-#: mainwindow.cpp:1120
+#: mainwindow.cpp:1182
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
 "methods."
 msgstr "اكتب اسم IP أو DNS هنا. امحُ الخط للحصول على قائمة بطُرق الاتصال."
 
-#: mainwindow.cpp:1123
+#: mainwindow.cpp:1185
 #, kde-format
 msgid "Goto Address"
 msgstr "إذهب إلى العنوان"
 
-#: mainwindow.cpp:1215
+#: mainwindow.cpp:1277
 #, kde-format
 msgid "Remote Desktops"
 msgstr "أسطح المكتب البعيدة"
 
-#: mainwindow.cpp:1244
+#: mainwindow.cpp:1306
 #, kde-format
 msgid "Filter"
 msgstr "المرشّح"
