@@ -1,6 +1,6 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Vít Pelčák <vit@pelcak.org>, 2010, 2011, 2012, 2013, 2015, 2016, 2017, 2018, 2019.
+# SPDX-FileCopyrightText: 2010, 2011, 2012, 2013, 2015, 2016, 2017, 2018, 2019, 2026 Vít Pelčák <vit@pelcak.org>
 # Lukáš Tinkl <ltinkl@redhat.com>, 2010.
 # Tomáš Chvátal <tomas.chvatal@gmail.com>, 2012, 2013.
 # SPDX-FileCopyrightText: 2021, 2024 Vit Pelcak <vit@pelcak.org>
@@ -10,25 +10,25 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-03-04 00:45+0000\n"
-"PO-Revision-Date: 2024-04-29 08:45+0200\n"
-"Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
+"PO-Revision-Date: 2026-03-16 15:32+0100\n"
+"Last-Translator:  Vít Pelčák <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 24.02.2\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Lukáš Tinkl,Klára Cihlářová"
+msgstr "Lukáš Tinkl,Klára Cihlářová,Libor Filípek"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "lukas@kde.org,koty@seznam.cz"
+msgstr "lukas@kde.org,koty@seznam.cz,libor.filipek@gmail.com"
 
 #: bookmarkmanager.cpp:37
 #, kde-format
@@ -49,8 +49,7 @@ msgstr "Zapamatovat si historii spojení"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_WalletSupport)
 #: config/general.ui:31
-#, fuzzy, kde-format
-#| msgid "Remember password"
+#, kde-format
 msgid "Remember passwords"
 msgstr "Zapamatovat si heslo"
 
@@ -129,12 +128,14 @@ msgid ""
 "Automatically grab all keys when entering fullscreen mode and release them "
 "when leaving fullscreen"
 msgstr ""
+"Při přechodu do režimu celé obrazovky automaticky zachytávat všechny klávesy "
+"a vrátit to zpět při opuštění režimu"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_GrabAllKeysOnFullscreen)
 #: config/general.ui:129
 #, kde-format
 msgid "Grab all keys when entering fullscreen"
-msgstr ""
+msgstr "Při přechodu do režimu celé obrazovky zachytávat všechny klávesy"
 
 #. i18n: ectx: property (text), widget (QLabel, defaultProtocolLabel)
 #: config/general.ui:138
@@ -353,7 +354,7 @@ msgstr "Chyba při vytváření slotu tunelu"
 #: core/sshtunnelwidget.ui:14
 #, kde-format
 msgid "SSH tunnel"
-msgstr ""
+msgstr "SSH tunel"
 
 #. i18n: ectx: property (text), widget (QCheckBox, use_ssh_tunnel)
 #: core/sshtunnelwidget.ui:32
@@ -371,7 +372,7 @@ msgstr "Možnosti tunelu SSH"
 #: core/sshtunnelwidget.ui:45
 #, kde-format
 msgid "Tunnel via loopback address"
-msgstr ""
+msgstr "Tunel prostřednictvím smyčkové adresy"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: core/sshtunnelwidget.ui:52
@@ -540,7 +541,7 @@ msgstr "Pouze pohled"
 #: mainwindow.cpp:155
 #, kde-format
 msgid "Clipboard Sharing"
-msgstr ""
+msgstr "Sdílení schránky"
 
 #: mainwindow.cpp:160
 #, kde-format
@@ -590,12 +591,12 @@ msgstr "Záložky"
 #: mainwindow.cpp:265
 #, kde-format
 msgid "Unable to load connection data from the provided file."
-msgstr ""
+msgstr "Nelze načíst údaje o připojení z poskytnutého souboru."
 
 #: mainwindow.cpp:265
 #, kde-format
 msgid "Load failed"
-msgstr ""
+msgstr "Načtení selhalo"
 
 #: mainwindow.cpp:271
 #, kde-format
@@ -821,7 +822,7 @@ msgstr "Aktuální rozlišení obrazovky"
 #: rdp/rdppreferences.ui:81 vnc/vncpreferences.ui:123
 #, kde-format
 msgid "Custom Resolution (…)"
-msgstr ""
+msgstr "Vlastní rozlišení (…)"
 
 #. i18n: ectx: property (text), widget (QLabel, widthLabel)
 #: rdp/rdppreferences.ui:94 vnc/vncpreferences.ui:136
@@ -874,7 +875,7 @@ msgstr "Zrychlení:"
 #, kde-format
 msgctxt "Use best acceleration supported by both the server and krdc"
 msgid "Use Best Available"
-msgstr ""
+msgstr "Použijte nejlepší dostupné"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
 #: rdp/rdppreferences.ui:201
@@ -905,7 +906,7 @@ msgstr "Barevná &hloubka:"
 #, kde-format
 msgctxt "Use best color depth supported by both the server and krdc"
 msgid "Use Best Available"
-msgstr ""
+msgstr "Použijte nejlepší dostupné"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
 #: rdp/rdppreferences.ui:250
@@ -935,7 +936,7 @@ msgstr "Málo barev (8 bitů)"
 #: rdp/rdppreferences.ui:273
 #, kde-format
 msgid "Desktop scale factor:"
-msgstr ""
+msgstr "Faktor měřítka plochy:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DesktopScaleFactor)
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DeviceScaleFactor)
@@ -950,7 +951,7 @@ msgstr "Automaticky"
 #: rdp/rdppreferences.ui:300
 #, kde-format
 msgid "Do not scale"
-msgstr ""
+msgstr "Neměnit"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DesktopScaleFactor)
 #: rdp/rdppreferences.ui:305
@@ -962,7 +963,7 @@ msgstr "Vlastní"
 #: rdp/rdppreferences.ui:337
 #, kde-format
 msgid "Device scale factor:"
-msgstr ""
+msgstr "Faktor měřítka zařízení:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DeviceScaleFactor)
 #: rdp/rdppreferences.ui:368
@@ -974,7 +975,7 @@ msgstr "100"
 #: rdp/rdppreferences.ui:373
 #, kde-format
 msgid "140"
-msgstr ""
+msgstr "140"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DeviceScaleFactor)
 #: rdp/rdppreferences.ui:378
@@ -1255,31 +1256,31 @@ msgstr "Sdílet média:"
 #: rdp/rdppreferences.ui:676
 #, kde-format
 msgid "Share Smartcard:"
-msgstr ""
+msgstr "Sdílet čipovou kartu:"
 
 #. i18n: ectx: property (text), widget (QLabel, consoleModeLabel)
 #: rdp/rdppreferences.ui:689
 #, kde-format
 msgid "Alternate Session Type:"
-msgstr ""
+msgstr "Alternativní typ sezení:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ConsoleMode)
 #: rdp/rdppreferences.ui:699
 #, kde-format
 msgid "Admin (or console) session"
-msgstr ""
+msgstr "Správcovské (nebo konzolové) sezení"
 
 #. i18n: ectx: property (text), widget (QLabel, preventSessionLockLabel)
 #: rdp/rdppreferences.ui:706
 #, kde-format
 msgid "Session lock:"
-msgstr ""
+msgstr "Zámek sezení:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_PreventSessionLock)
 #: rdp/rdppreferences.ui:716
 #, kde-format
 msgid "Prevent remote session lock"
-msgstr ""
+msgstr "Zabránit uzamčení vzdálené relace"
 
 #. i18n: ectx: attribute (title), widget (QWidget, securitySettingsTab)
 #: rdp/rdppreferences.ui:724
@@ -1297,7 +1298,7 @@ msgstr "Zabezpečení:"
 #: rdp/rdppreferences.ui:744
 #, kde-format
 msgid "NLA"
-msgstr ""
+msgstr "NLA"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityTLS)
 #: rdp/rdppreferences.ui:751
@@ -1309,7 +1310,7 @@ msgstr "TLS"
 #: rdp/rdppreferences.ui:758
 #, kde-format
 msgid "RDP"
-msgstr ""
+msgstr "RDP"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityEXT)
 #: rdp/rdppreferences.ui:765
@@ -1321,7 +1322,7 @@ msgstr "Přípona"
 #: rdp/rdppreferences.ui:774
 #, kde-format
 msgid "TLS security level:"
-msgstr ""
+msgstr "Úroveň zabezpečení TLS:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:800
@@ -1363,7 +1364,7 @@ msgstr "256 bit"
 #: rdp/rdppreferences.ui:833
 #, kde-format
 msgid "Authentication Package List:"
-msgstr ""
+msgstr "Seznam autentizačních balíčků:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, proxySettingsTab)
 #: rdp/rdppreferences.ui:849
@@ -1468,7 +1469,7 @@ msgstr "Přístup k tomuto systému vyžaduje přihlašovací jméno a heslo."
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
-msgstr ""
+msgstr "Certifikát pro tento systém není znám. Chcete pokračovat?"
 
 #: rdp/rdpview.cpp:236
 #, kde-format
@@ -1486,7 +1487,7 @@ msgstr "Zapamatovat si tento certifikát"
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
-msgstr ""
+msgstr "Certifikát pro tento systém se změnil. Chcete pokračovat?"
 
 #: rdp/rdpview.cpp:261
 #, kde-format
@@ -1521,6 +1522,8 @@ msgid ""
 "Unable to login with the provided credentials. Please double check the user "
 "and password."
 msgstr ""
+"Nelze se přihlásit pomocí zadaných přihlašovacích údajů. Zkontrolujte prosím "
+"uživatelské jméno a heslo."
 
 #: rdp/rdpview.cpp:306
 #, kde-format
@@ -1535,12 +1538,14 @@ msgid ""
 "The provided account is not allowed to log in to this machine. Please "
 "contact your system administrator."
 msgstr ""
+"Zadaný účet nemá oprávnění k přihlášení k tomuto počítači. Obraťte se na "
+"správce systému."
 
 #: rdp/rdpview.cpp:312
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Password Problems"
-msgstr ""
+msgstr "Problémy s heslem"
 
 #: rdp/rdpview.cpp:313
 #, kde-format
@@ -1549,6 +1554,8 @@ msgid ""
 "Unable to login with the provided password. Please contact your system "
 "administrator to change it."
 msgstr ""
+"Nelze se přihlásit pomocí zadaného hesla. Obraťte se na správce systému a "
+"požádejte ho o změnu hesla."
 
 #: rdp/rdpview.cpp:319
 #, kde-format
@@ -1560,7 +1567,7 @@ msgstr "Spojení ztraceno"
 #, kde-format
 msgctxt "@label"
 msgid "Lost connection to the server."
-msgstr ""
+msgstr "Ztráta připojení k serveru."
 
 #: rdp/rdpview.cpp:322
 #, kde-format
@@ -1584,7 +1591,7 @@ msgstr "Server nenalezen"
 #, kde-format
 msgctxt "@label"
 msgid "Could not find the server."
-msgstr ""
+msgstr "Server nelze najít."
 
 #: rdp/rdpview.cpp:332
 #, kde-format
@@ -1596,7 +1603,7 @@ msgstr "Spojení bylo odmítnuto"
 #, kde-format
 msgctxt "@label"
 msgid "The server refused the connection request."
-msgstr ""
+msgstr "Server odmítl požadavek na připojení."
 
 #: rdp/rdpview.cpp:343
 #, kde-format
@@ -1630,7 +1637,7 @@ msgstr "Připojit se na vzdálenou plochu Windows (RDP)"
 #: rdp/rdpviewfactory.cpp:109
 #, kde-format
 msgid "New RDP Connection…"
-msgstr ""
+msgstr "Nové připojení RDP…"
 
 #: rdp/rdpviewfactory.cpp:120
 #, kde-format
@@ -1831,7 +1838,7 @@ msgstr "Velmi velké (1600x1200)"
 #: vnc/vncpreferences.ui:211
 #, kde-format
 msgid "Don't copy passwords from supported password managers to remote hosts"
-msgstr ""
+msgstr "Nekopírujte hesla z podporovaných správců hesel na vzdálené hostitele."
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, dont_copy_passwords)
 #: vnc/vncpreferences.ui:214
@@ -1841,6 +1848,9 @@ msgid ""
 "additional MIME type \"x-kde-passwordManagerHint\" which is used for "
 "filtering."
 msgstr ""
+"Podporovaní správci hesel (jako KeePassXC) označují zkopírovaná hesla "
+"dodatečným typem MIME „x-kde-passwordManagerHint“, který se používá pro "
+"filtrování."
 
 #: vnc/vncview.cpp:240
 #, kde-format
@@ -1860,7 +1870,7 @@ msgstr "VNC selhání"
 #: vnc/vncviewfactory.cpp:47
 #, kde-format
 msgid "New VNC Connection…"
-msgstr ""
+msgstr "Nové připojení VNC…"
 
 #: vnc/vncviewfactory.cpp:52
 #, kde-format
