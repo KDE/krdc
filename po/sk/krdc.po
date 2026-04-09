@@ -20,8 +20,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 23.08.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Lokalize 23.08.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -55,8 +55,7 @@ msgstr "Zapamätať si históriu pripojení"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_WalletSupport)
 #: config/general.ui:31
-#, fuzzy, kde-format
-#| msgid "Remember passwords (KWallet)"
+#, kde-format
 msgid "Remember passwords"
 msgstr "Zapamätať si heslá (KWallet)"
 
@@ -135,12 +134,14 @@ msgid ""
 "Automatically grab all keys when entering fullscreen mode and release them "
 "when leaving fullscreen"
 msgstr ""
+"Automaticky zachytiť všetky klávesy pri vstupe do režimu celej obrazovky a "
+"uvoľniť ich pri odchode z celej obrazovky"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_GrabAllKeysOnFullscreen)
 #: config/general.ui:129
 #, kde-format
 msgid "Grab all keys when entering fullscreen"
-msgstr ""
+msgstr "Zachytiť všetky klávesy pri vstupe do celej obrazovky"
 
 #. i18n: ectx: property (text), widget (QLabel, defaultProtocolLabel)
 #: config/general.ui:138
@@ -209,8 +210,7 @@ msgid "Right"
 msgstr "Vpravo"
 
 #: config/hostpreferenceslist.cpp:30
-#, fuzzy, kde-format
-#| msgid "Configure..."
+#, kde-format
 msgid "Configure…"
 msgstr "Nastaviť..."
 
@@ -320,8 +320,7 @@ msgid "Show this dialog again for this host"
 msgstr "Zobraziť toto dialógové okno znovu pre tohto hostiteľa"
 
 #: core/hostpreferences.cpp:253
-#, fuzzy, kde-format
-#| msgid "Remember password (KWallet)"
+#, kde-format
 msgid "Remember password"
 msgstr "Zapamätať si heslo (KWallet)"
 
@@ -359,8 +358,7 @@ msgstr "Pri vytváraní soketu tunela sa vyskytla chyba"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, SshTunnelWidget)
 #: core/sshtunnelwidget.ui:14
-#, fuzzy, kde-format
-#| msgid "SSH tunnel options"
+#, kde-format
 msgid "SSH tunnel"
 msgstr "Možnosti tunela SSH"
 
@@ -549,7 +547,7 @@ msgstr "Len zobraziť"
 #: mainwindow.cpp:155
 #, kde-format
 msgid "Clipboard Sharing"
-msgstr ""
+msgstr "Zdieľanie schránky"
 
 #: mainwindow.cpp:160
 #, kde-format
@@ -599,12 +597,12 @@ msgstr "Záložky"
 #: mainwindow.cpp:265
 #, kde-format
 msgid "Unable to load connection data from the provided file."
-msgstr ""
+msgstr "Nepodarilo sa načítať údaje o pripojení z poskytnutého súboru."
 
 #: mainwindow.cpp:265
 #, kde-format
 msgid "Load failed"
-msgstr ""
+msgstr "Načítanie zlyhalo"
 
 #: mainwindow.cpp:271
 #, kde-format
@@ -773,9 +771,7 @@ msgstr "Filter"
 
 #. i18n: ectx: attribute (title), widget (QWidget, mainSettingsTab)
 #: rdp/rdppreferences.ui:21
-#, fuzzy, kde-format
-#| msgctxt "General Config"
-#| msgid "General"
+#, kde-format
 msgid "General"
 msgstr "Všeobecné"
 
@@ -798,28 +794,25 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:56
-#, fuzzy, kde-format
-#| msgid "Small (800x600)"
+#, kde-format
 msgid "Small (1280x720)"
 msgstr "Malé (800x600)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:61
-#, fuzzy, kde-format
+#, kde-format
 msgid "Medium (1600x900)"
-msgstr "Stredná (%1x%2)"
+msgstr "Medium (1600x900)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:66
-#, fuzzy, kde-format
-#| msgid "Large (1280x1024)"
+#, kde-format
 msgid "Large (1920x1080)"
 msgstr "Veľké (1280x1024)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:71
-#, fuzzy, kde-format
-#| msgid "Current KRDC Size"
+#, kde-format
 msgid "Current Window Size"
 msgstr "Aktuálna veľkosť KRDC"
 
@@ -833,8 +826,7 @@ msgstr "Aktuálne rozlíšenie obrazovky"
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
 #: rdp/rdppreferences.ui:81 vnc/vncpreferences.ui:123
-#, fuzzy, kde-format
-#| msgid "Custom Resolution (...)"
+#, kde-format
 msgid "Custom Resolution (…)"
 msgstr "Vlastné rozlíšenie (...)"
 
@@ -876,7 +868,7 @@ msgstr ""
 #: rdp/rdppreferences.ui:163
 #, kde-format
 msgid "Scale window contents to match resolution"
-msgstr ""
+msgstr "Scale window contents to match resolution"
 
 #. i18n: ectx: property (text), widget (QLabel, accelerationLabel)
 #: rdp/rdppreferences.ui:173
@@ -889,18 +881,17 @@ msgstr "Zrýchlenie:"
 #, kde-format
 msgctxt "Use best acceleration supported by both the server and krdc"
 msgid "Use Best Available"
-msgstr ""
+msgstr "Use Best Available"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
 #: rdp/rdppreferences.ui:201
 #, kde-format
 msgid "Force H.264"
-msgstr ""
+msgstr "Force H.264"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
 #: rdp/rdppreferences.ui:206
-#, fuzzy, kde-format
-#| msgid "RemoteFX:"
+#, kde-format
 msgid "Force RemoteFX"
 msgstr "RemoteFX:"
 
@@ -908,7 +899,7 @@ msgstr "RemoteFX:"
 #: rdp/rdppreferences.ui:211
 #, kde-format
 msgid "Disable All Acceleration"
-msgstr ""
+msgstr "Disable All Acceleration"
 
 #. i18n: ectx: property (text), widget (QLabel, colorDepthLabel)
 #: rdp/rdppreferences.ui:219
@@ -921,7 +912,7 @@ msgstr "Fare&bná hĺbka:"
 #, kde-format
 msgctxt "Use best color depth supported by both the server and krdc"
 msgid "Use Best Available"
-msgstr ""
+msgstr "Use Best Available"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
 #: rdp/rdppreferences.ui:250
@@ -949,8 +940,7 @@ msgstr "Málo farieb (8 bitov)"
 
 #. i18n: ectx: property (text), widget (QLabel, desktopScaleFactorLabel)
 #: rdp/rdppreferences.ui:273
-#, fuzzy, kde-format
-#| msgid "Desktop &resolution:"
+#, kde-format
 msgid "Desktop scale factor:"
 msgstr "&Rozlíšenie plochy:"
 
@@ -961,43 +951,43 @@ msgstr "&Rozlíšenie plochy:"
 #: rdp/rdppreferences.ui:977
 #, kde-format
 msgid "Auto"
-msgstr ""
+msgstr "Automaticky"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DesktopScaleFactor)
 #: rdp/rdppreferences.ui:300
 #, kde-format
 msgid "Do not scale"
-msgstr ""
+msgstr "Do not scale"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DesktopScaleFactor)
 #: rdp/rdppreferences.ui:305
 #, kde-format
 msgid "Custom"
-msgstr ""
+msgstr "Vlastné"
 
 #. i18n: ectx: property (text), widget (QLabel, deviceScaleFactorLabel)
 #: rdp/rdppreferences.ui:337
 #, kde-format
 msgid "Device scale factor:"
-msgstr ""
+msgstr "Device scale factor:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DeviceScaleFactor)
 #: rdp/rdppreferences.ui:368
 #, kde-format
 msgid "100"
-msgstr ""
+msgstr "100"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DeviceScaleFactor)
 #: rdp/rdppreferences.ui:373
 #, kde-format
 msgid "140"
-msgstr ""
+msgstr "140"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DeviceScaleFactor)
 #: rdp/rdppreferences.ui:378
 #, kde-format
 msgid "180"
-msgstr ""
+msgstr "180"
 
 #. i18n: ectx: property (text), widget (QLabel, layoutLabel)
 #: rdp/rdppreferences.ui:386
@@ -1272,24 +1262,23 @@ msgstr "Zdieľať médium:"
 #: rdp/rdppreferences.ui:676
 #, kde-format
 msgid "Share Smartcard:"
-msgstr ""
+msgstr "Share Smartcard:"
 
 #. i18n: ectx: property (text), widget (QLabel, consoleModeLabel)
 #: rdp/rdppreferences.ui:689
 #, kde-format
 msgid "Alternate Session Type:"
-msgstr ""
+msgstr "Alternate Session Type:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ConsoleMode)
 #: rdp/rdppreferences.ui:699
 #, kde-format
 msgid "Admin (or console) session"
-msgstr ""
+msgstr "Admin (or console) session"
 
 #. i18n: ectx: property (text), widget (QLabel, preventSessionLockLabel)
 #: rdp/rdppreferences.ui:706
-#, fuzzy, kde-format
-#| msgid "Session ID"
+#, kde-format
 msgid "Session lock:"
 msgstr "ID sedenia"
 
@@ -1297,24 +1286,23 @@ msgstr "ID sedenia"
 #: rdp/rdppreferences.ui:716
 #, kde-format
 msgid "Prevent remote session lock"
-msgstr ""
+msgstr "Prevent remote session lock"
 
 #. i18n: ectx: attribute (title), widget (QWidget, securitySettingsTab)
 #: rdp/rdppreferences.ui:724
 #, kde-format
 msgid "Security"
-msgstr ""
+msgstr "Bezpečnosť"
 
 #. i18n: ectx: property (text), widget (QLabel, gSecurityLabel)
 #: rdp/rdppreferences.ui:732
 #, kde-format
 msgid "Security:"
-msgstr ""
+msgstr "Zabezpečenie:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityNLA)
 #: rdp/rdppreferences.ui:744
-#, fuzzy, kde-format
-#| msgid "LAN"
+#, kde-format
 msgid "NLA"
 msgstr "LAN"
 
@@ -1322,147 +1310,144 @@ msgstr "LAN"
 #: rdp/rdppreferences.ui:751
 #, kde-format
 msgid "TLS"
-msgstr ""
+msgstr "TLS"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityRDP)
 #: rdp/rdppreferences.ui:758
 #, kde-format
 msgid "RDP"
-msgstr ""
+msgstr "RDP"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityEXT)
 #: rdp/rdppreferences.ui:765
 #, kde-format
 msgid "Ext"
-msgstr ""
+msgstr "Ext"
 
 #. i18n: ectx: property (text), widget (QLabel, TlsSecLevelLabel)
 #: rdp/rdppreferences.ui:774
 #, kde-format
 msgid "TLS security level:"
-msgstr ""
+msgstr "TLS security level:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:800
 #, kde-format
 msgid "any"
-msgstr ""
+msgstr "any"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:805
 #, kde-format
 msgid "80 bit"
-msgstr ""
+msgstr "80 bit"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:810
 #, kde-format
 msgid "112 bit"
-msgstr ""
+msgstr "112 bit"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:815
 #, kde-format
 msgid "128 bit"
-msgstr ""
+msgstr "128 bitové"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:820
 #, kde-format
 msgid "192 bit"
-msgstr ""
+msgstr "192 bit"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:825
 #, kde-format
 msgid "256 bit"
-msgstr ""
+msgstr "256 bit"
 
 #. i18n: ectx: property (text), widget (QLabel, authPkgListLabel)
 #: rdp/rdppreferences.ui:833
-#, fuzzy, kde-format
-#| msgid "Authenticating at %1"
+#, kde-format
 msgid "Authentication Package List:"
-msgstr "Overuje sa na %1"
+msgstr "Authentication Package List:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, proxySettingsTab)
 #: rdp/rdppreferences.ui:849
 #, kde-format
 msgid "Proxy"
-msgstr ""
+msgstr "Proxy"
 
 #. i18n: ectx: property (text), widget (QLabel, protocolLabel)
 #: rdp/rdppreferences.ui:857
-#, fuzzy, kde-format
-#| msgid "Default protocol:"
+#, kde-format
 msgid "Protocol:"
-msgstr "Predvolený protokol:"
+msgstr "Protokol:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ProxyProtocol)
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_GatewayTransportType)
 #: rdp/rdppreferences.ui:871 rdp/rdppreferences.ui:982
 #, kde-format
 msgid "HTTP"
-msgstr ""
+msgstr "HTTP"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ProxyProtocol)
 #: rdp/rdppreferences.ui:876
 #, kde-format
 msgid "SOCKS"
-msgstr ""
+msgstr "SOCKS"
 
 #. i18n: ectx: property (text), widget (QLabel, pPasswordLabel)
 #. i18n: ectx: property (text), widget (QLabel, gPasswordLabel)
 #: rdp/rdppreferences.ui:887 rdp/rdppreferences.ui:943
 #, kde-format
 msgid "Password:"
-msgstr ""
+msgstr "Heslo:"
 
 #. i18n: ectx: property (text), widget (QLabel, pUsernameLabel)
 #. i18n: ectx: property (text), widget (QLabel, gUsernameLabel)
 #: rdp/rdppreferences.ui:897 rdp/rdppreferences.ui:936
-#, fuzzy, kde-format
-#| msgid "User name:"
+#, kde-format
 msgid "Username:"
-msgstr "Používateľské meno:"
+msgstr "Užívateľské meno:"
 
 #. i18n: ectx: property (text), widget (QLabel, pHostLabel)
 #. i18n: ectx: property (text), widget (QLabel, gServerLabel)
 #: rdp/rdppreferences.ui:904 rdp/rdppreferences.ui:929
 #, kde-format
 msgid "Server:"
-msgstr ""
+msgstr "Server:"
 
 #. i18n: ectx: property (placeholderText), widget (KLineEdit, kcfg_ProxyHost)
 #. i18n: ectx: property (placeholderText), widget (KLineEdit, kcfg_GatewayServer)
 #: rdp/rdppreferences.ui:911 rdp/rdppreferences.ui:950
 #, kde-format
 msgid "host:port"
-msgstr ""
+msgstr "host:port"
 
 #. i18n: ectx: attribute (title), widget (QWidget, gatewaySettingsTab)
 #: rdp/rdppreferences.ui:921
 #, kde-format
 msgid "Gateway"
-msgstr ""
+msgstr "Brána"
 
 #. i18n: ectx: property (text), widget (QLabel, gTransportTypeLabel)
 #: rdp/rdppreferences.ui:963
 #, kde-format
 msgid "Transport type:"
-msgstr ""
+msgstr "Transport type:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_GatewayTransportType)
 #: rdp/rdppreferences.ui:987
 #, kde-format
 msgid "RPC"
-msgstr ""
+msgstr "RPC"
 
 #. i18n: ectx: property (text), widget (QLabel, gDomainLabel)
 #: rdp/rdppreferences.ui:995
 #, kde-format
 msgid "Domain:"
-msgstr ""
+msgstr "Hostiteľ/Doména"
 
 #: rdp/rdpsession.cpp:869
 #, kde-format
@@ -1474,10 +1459,14 @@ msgid ""
 "Issuer: %5\n"
 "Fingerprint: %6\n"
 msgstr ""
+"Host: %1:%2\n"
+"Common Name: %3\n"
+"Subject: %4\n"
+"Issuer: %5\n"
+"Fingerprint: %6\n"
 
 #: rdp/rdpview.cpp:202
-#, fuzzy, kde-format
-#| msgid "Access to the system requires a password."
+#, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
 msgstr "Prístup k systému vyžaduje heslo."
@@ -1486,31 +1475,31 @@ msgstr "Prístup k systému vyžaduje heslo."
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
-msgstr ""
+msgstr "The certificate for this system is unknown. Do you wish to continue?"
 
 #: rdp/rdpview.cpp:236
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
-msgstr ""
+msgstr "Verify Certificate"
 
 #: rdp/rdpview.cpp:241 rdp/rdpview.cpp:266
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
-msgstr ""
+msgstr "Remember this certificate"
 
 #: rdp/rdpview.cpp:260
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
-msgstr ""
+msgstr "The certificate for this system has changed. Do you wish to continue?"
 
 #: rdp/rdpview.cpp:261
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
-msgstr ""
+msgstr "Certificate has Changed"
 
 #: rdp/rdpview.cpp:264
 #, kde-format
@@ -1521,10 +1510,13 @@ msgid ""
 "New Certificate:\n"
 "%2"
 msgstr ""
+"Previous certificate:\n"
+"%1\n"
+"New Certificate:\n"
+"%2"
 
 #: rdp/rdpview.cpp:296
-#, fuzzy, kde-format
-#| msgid "Connection Failure"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Login Failure"
 msgstr "Pripojenie zlyhalo"
@@ -1536,12 +1528,14 @@ msgid ""
 "Unable to login with the provided credentials. Please double check the user "
 "and password."
 msgstr ""
+"Unschopný login with the provided credentials. Please double check the user "
+"and password."
 
 #: rdp/rdpview.cpp:306
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Account Problems"
-msgstr ""
+msgstr "Account Problems"
 
 #: rdp/rdpview.cpp:307
 #, kde-format
@@ -1550,12 +1544,14 @@ msgid ""
 "The provided account is not allowed to log in to this machine. Please "
 "contact your system administrator."
 msgstr ""
+"The provided account is not allowed to log in to this machine. Please "
+"contact your system administrator."
 
 #: rdp/rdpview.cpp:312
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Password Problems"
-msgstr ""
+msgstr "Password Problems"
 
 #: rdp/rdpview.cpp:313
 #, kde-format
@@ -1564,6 +1560,8 @@ msgid ""
 "Unable to login with the provided password. Please contact your system "
 "administrator to change it."
 msgstr ""
+"Unschopný login with the provided password. Please contact your system "
+"administrator to change it."
 
 #: rdp/rdpview.cpp:319
 #, kde-format
@@ -1572,29 +1570,25 @@ msgid "Connection Lost"
 msgstr "Pripojenie stratené"
 
 #: rdp/rdpview.cpp:320
-#, fuzzy, kde-format
-#| msgid "An error has occurred during the connection to the NX server."
+#, kde-format
 msgctxt "@label"
 msgid "Lost connection to the server."
 msgstr "Počas pripájania k NX serveru nastala chyba."
 
 #: rdp/rdpview.cpp:322
-#, fuzzy, kde-format
-#| msgid "KRDC Konsole Connection"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Could not Connect"
 msgstr "KRDC konzolové pripojenie"
 
 #: rdp/rdpview.cpp:323
-#, fuzzy, kde-format
-#| msgid "An error has occurred during the connection to the NX server."
+#, kde-format
 msgctxt "@label"
 msgid "Could not connect to the server."
 msgstr "Počas pripájania k NX serveru nastala chyba."
 
 #: rdp/rdpview.cpp:328
-#, fuzzy, kde-format
-#| msgid "Server not found."
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Server not Found"
 msgstr "Server nebol nájdený."
@@ -1603,18 +1597,16 @@ msgstr "Server nebol nájdený."
 #, kde-format
 msgctxt "@label"
 msgid "Could not find the server."
-msgstr ""
+msgstr "Could not find the server."
 
 #: rdp/rdpview.cpp:332
-#, fuzzy, kde-format
-#| msgid "Connection Failure"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Refused"
 msgstr "Spojenie odmietnuté."
 
 #: rdp/rdpview.cpp:333
-#, fuzzy, kde-format
-#| msgid "VNC server closed connection."
+#, kde-format
 msgctxt "@label"
 msgid "The server refused the connection request."
 msgstr "VNC server ukončil pripojenie."
@@ -1641,7 +1633,7 @@ msgstr "Nastala neznáma chyba"
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Logon Error"
-msgstr ""
+msgstr "Logon Error"
 
 #: rdp/rdpviewfactory.cpp:26
 #, kde-format
@@ -1649,8 +1641,7 @@ msgid "Connect to a Windows Remote Desktop (RDP)"
 msgstr "Pripojiť sa k vzdialenej ploche systému Windows (RDP)"
 
 #: rdp/rdpviewfactory.cpp:109
-#, fuzzy, kde-format
-#| msgid "New RDP Connection..."
+#, kde-format
 msgid "New RDP Connection…"
 msgstr "Nové RDP pripojenie..."
 
@@ -1886,8 +1877,7 @@ msgid "VNC failure"
 msgstr "Zlyhanie VNC"
 
 #: vnc/vncviewfactory.cpp:47
-#, fuzzy, kde-format
-#| msgid "New VNC Connection..."
+#, kde-format
 msgid "New VNC Connection…"
 msgstr "Nové VNC pripojenie..."
 
@@ -1917,7 +1907,6 @@ msgstr ""
 #~ msgstr "Integrácia kanálov Telepathy"
 
 #, fuzzy
-#~| msgid "Access to the system requires a password."
 #~ msgctxt "@label"
 #~ msgid "Access to this system requires a password."
 #~ msgstr "Prístup k systému vyžaduje heslo."
