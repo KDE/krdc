@@ -39,7 +39,7 @@ void RdpDisplay::onUpdateTimer()
     auto settings = ctx->settings;
     WINPR_ASSERT(settings);
 
-    qCInfo(KRDC) << "RDP resize event:" << m_lastSize;
+    qCDebug(KRDC) << "RDP resize event:" << m_lastSize;
 
     // TODO Multi monitor, orientation and dpi support
 

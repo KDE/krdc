@@ -353,7 +353,7 @@ int RdpSession::clientContextStart(rdpContext *context)
 
     session->setState(State::Starting);
 
-    qCInfo(KRDC) << "Starting RDP session";
+    qCDebug(KRDC) << "Starting RDP session";
 
     auto preferences = session->m_preferences;
 
