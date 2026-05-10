@@ -171,6 +171,7 @@ Comment[sr@ijekavianlatin]=Povežite se RDP‑om ili VNC‑om sa drugim računar
 Comment[sr@latin]=Povežite se RDP‑om ili VNC‑om sa drugim računarom
 Comment[sv]=Anslut till en annan dator med RDP eller VNC
 Comment[tr]=Başka bir bilgisayara RDP veya VNC ile bağlan
+Comment[ug]=RDP ياكى VNC ئارقىلىق باشقا بىر كومپيۇتېرغا باغلىنىدۇ
 Comment[uk]=З'єднання з іншим комп'ютером за допомогою RDP або VNC
 Comment[zh_CN]=通过 RDP 或 VNC 连接到另一台计算机
 Comment[zh_TW]=以 RDP 或 VNC 連線到其他電腦
