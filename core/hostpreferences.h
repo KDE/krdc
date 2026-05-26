@@ -29,37 +29,37 @@ public:
 
     KConfigGroup configGroup();
 
-    bool walletSupport();
+    bool walletSupport() const;
 
     /** Whether scaling is enabled when session is full screen. Note: only windowedScale seems to be used. */
-    bool fullscreenScale();
+    bool fullscreenScale() const;
     void setFullscreenScale(bool scale);
 
     /** Whether scaling is enabled when session is not full screen */
-    bool windowedScale();
+    bool windowedScale() const;
     void setWindowedScale(bool scale);
 
     /** Value from 100->200 (translates to 1x->2x) which scales the view. This only has an effect if scaling is enabled. */
-    int scaleFactor();
+    int scaleFactor() const;
     void setScaleFactor(int factor);
 
-    bool grabAllKeys();
+    bool grabAllKeys() const;
     void setGrabAllKeys(bool grab);
 
-    bool showLocalCursor();
+    bool showLocalCursor() const;
     void setShowLocalCursor(bool show);
 
-    bool viewOnly();
+    bool viewOnly() const;
     void setViewOnly(bool view);
 
-    bool clipboardSharing();
+    bool clipboardSharing() const;
     void setClipboardSharing(bool share);
 
     /** Saved height. Generally used for the viewsize. */
-    int height();
+    int height() const;
     void setHeight(int height);
     /** Saved width. Generally used for the viewsize. */
-    int width();
+    int width() const;
     void setWidth(int width);
 
     /**
@@ -90,8 +90,8 @@ protected:
     /** Called when the user validates the config dialog. */
     virtual void acceptConfig();
 
-    bool hostConfigured();
-    bool showConfigAgain();
+    bool hostConfigured() const;
+    bool showConfigAgain() const;
 
     KConfigGroup m_configGroup;
 

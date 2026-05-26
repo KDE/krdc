@@ -75,7 +75,7 @@ add_definitions(
 )
 ecm_setup_version(${RELEASE_SERVICE_VERSION}
     VARIABLE_PREFIX KRDC
-    SOVERSION 5
+    SOVERSION 6
     VERSION_HEADER krdc_version.h
 )
 

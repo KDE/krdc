@@ -72,7 +72,7 @@ void HostPreferences::acceptConfig()
     setWalletSupport(walletSupportCheckBox->isChecked());
 }
 
-bool HostPreferences::hostConfigured()
+bool HostPreferences::hostConfigured() const
 {
     return m_hostConfigured;
 }
@@ -82,7 +82,7 @@ void HostPreferences::setShowConfigAgain(bool show)
     m_configGroup.writeEntry("showConfigAgain", show);
 }
 
-bool HostPreferences::showConfigAgain()
+bool HostPreferences::showConfigAgain() const
 {
     return m_configGroup.readEntry("showConfigAgain", true);
 }
@@ -92,7 +92,7 @@ void HostPreferences::setWalletSupport(bool walletSupport)
     m_configGroup.writeEntry("walletSupport", walletSupport);
 }
 
-bool HostPreferences::walletSupport()
+bool HostPreferences::walletSupport() const
 {
     return m_configGroup.readEntry("walletSupport", true);
 }
@@ -103,7 +103,7 @@ void HostPreferences::setHeight(int height)
         m_configGroup.writeEntry("height", height);
 }
 
-int HostPreferences::height()
+int HostPreferences::height() const
 {
     return m_configGroup.readEntry("height", Settings::height());
 }
@@ -114,12 +114,12 @@ void HostPreferences::setWidth(int width)
         m_configGroup.writeEntry("width", width);
 }
 
-int HostPreferences::width()
+int HostPreferences::width() const
 {
     return m_configGroup.readEntry("width", Settings::width());
 }
 
-bool HostPreferences::fullscreenScale()
+bool HostPreferences::fullscreenScale() const
 {
     return m_configGroup.readEntry("fullscreenScale", false);
 }
@@ -129,7 +129,7 @@ void HostPreferences::setFullscreenScale(bool scale)
     m_configGroup.writeEntry("fullscreenScale", scale);
 }
 
-bool HostPreferences::windowedScale()
+bool HostPreferences::windowedScale() const
 {
     return m_configGroup.readEntry("windowedScale", false);
 }
@@ -139,7 +139,7 @@ void HostPreferences::setWindowedScale(bool scale)
     m_configGroup.writeEntry("windowedScale", scale);
 }
 
-int HostPreferences::scaleFactor()
+int HostPreferences::scaleFactor() const
 {
     return m_configGroup.readEntry("scaleFactor", 100);
 }
@@ -149,7 +149,7 @@ void HostPreferences::setScaleFactor(int factor)
     m_configGroup.writeEntry("scaleFactor", factor);
 }
 
-bool HostPreferences::grabAllKeys()
+bool HostPreferences::grabAllKeys() const
 {
     return m_configGroup.readEntry("grabAllKeys", false);
 }
@@ -159,7 +159,7 @@ void HostPreferences::setGrabAllKeys(bool grab)
     m_configGroup.writeEntry("grabAllKeys", grab);
 }
 
-bool HostPreferences::showLocalCursor()
+bool HostPreferences::showLocalCursor() const
 {
     return m_configGroup.readEntry("showLocalCursor", false);
 }
@@ -169,7 +169,7 @@ void HostPreferences::setShowLocalCursor(bool show)
     m_configGroup.writeEntry("showLocalCursor", show);
 }
 
-bool HostPreferences::viewOnly()
+bool HostPreferences::viewOnly() const
 {
     return m_configGroup.readEntry("viewOnly", false);
 }
@@ -179,7 +179,7 @@ void HostPreferences::setViewOnly(bool view)
     m_configGroup.writeEntry("viewOnly", view);
 }
 
-bool HostPreferences::clipboardSharing()
+bool HostPreferences::clipboardSharing() const
 {
     return m_configGroup.readEntry("clipboardSharing", true);
 }
