@@ -53,6 +53,7 @@
 #include <QTableView>
 #include <QTimer>
 #include <QToolBar>
+#include <QUrlQuery>
 #include <QVBoxLayout>
 #include <QWindowStateChangeEvent>
 
@@ -246,6 +247,7 @@ QUrl MainWindow::getInputUrl()
 
 void MainWindow::newConnection(const QUrl &newUrl, bool switchFullscreenWhenConnected, const QString &tabName)
 {
+    bool skipPreferencesDialog = false;
     m_switchFullscreenWhenConnected = switchFullscreenWhenConnected;
 
     QUrl url = newUrl.isEmpty() ? getInputUrl() : newUrl;
@@ -272,6 +274,19 @@ void MainWindow::newConnection(const QUrl &newUrl, bool switchFullscreenWhenConn
         return;
     }
 
+    QUrlQuery query(url);
+    if (const QString key = QStringLiteral("fullscreen"); query.queryItemValue(key) == QLatin1String("true")) {
+        qCDebug(KRDC) << "URL query said to enter full screen when connected";
+        m_switchFullscreenWhenConnected = true;
+        query.removeQueryItem(key);
+    }
+    if (const QString key = QStringLiteral("skippreferencesdialog"); query.queryItemValue(key) == QLatin1String("true")) {
+        qCDebug(KRDC) << "URL query said to skip the preferences dialog";
+        skipPreferencesDialog = true;
+        query.removeQueryItem(key);
+    }
+    url.setQuery(query);
+
     if (m_protocolInput && m_addressInput) {
         m_protocolInput->setCurrentText(url.scheme());
         m_addressInput->setText(url.toString(QUrl::RemoveScheme).remove(QRegularExpression(QStringLiteral("^/+"))));
@@ -295,9 +310,13 @@ void MainWindow::newConnection(const QUrl &newUrl, bool switchFullscreenWhenConn
 
     // Configure the view
     HostPreferences *prefs = view->hostPreferences();
-    // if the user press cancel
-    if (!prefs->showDialogIfNeeded(this))
-        return;
+
+    if (prefs->shouldShowDialog() && !skipPreferencesDialog) {
+        // if the user presses cancel
+        if (!prefs->showDialogIfNeeded(this)) {
+            return;
+        }
+    }
 
     view->showLocalCursor(prefs->showLocalCursor() ? RemoteView::CursorOn : RemoteView::CursorOff);
     view->setViewOnly(prefs->viewOnly());

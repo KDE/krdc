@@ -69,6 +69,13 @@ public:
      */
     bool showDialogIfNeeded(QWidget *parent);
 
+    /**
+     * Whether the configuration dialog should be shown,
+     * eg. if it is not configured yet or the user did check
+     * "show this dialog again for this host".
+     */
+    bool shouldShowDialog() const;
+
     /** Show the configuration dialog */
     bool showDialog(QWidget *parent);
 

@@ -191,19 +191,28 @@ void HostPreferences::setClipboardSharing(bool share)
 
 bool HostPreferences::showDialogIfNeeded(QWidget *parent)
 {
+    if (shouldShowDialog()) {
+        return showDialog(parent);
+    } else {
+        return true; // no changes, no need to save
+    }
+}
+
+bool HostPreferences::shouldShowDialog() const
+{
     if (hostConfigured()) {
         if (showConfigAgain()) {
             qCDebug(KRDC) << "Show config dialog again";
-            return showDialog(parent);
-        } else
-            return true; // no changes, no need to save
+            return true;
+        }
     } else {
         qCDebug(KRDC) << "No config found, create new";
-        if (Settings::showPreferencesForNewConnections())
-            return showDialog(parent);
-        else
+        if (Settings::showPreferencesForNewConnections()) {
             return true;
+        }
     }
+
+    return false;
 }
 
 bool HostPreferences::showDialog(QWidget *parent)
