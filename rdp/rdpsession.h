@@ -112,6 +112,7 @@ public:
     bool sendClipboard(const QMimeData *data);
     bool sendResizeEvent(const QSize newSize);
     void setRemoteCursor(const QCursor &cursor);
+    void setRemoteCursorPosition(QPoint position);
 
     const QImage *videoBuffer() const;
 
@@ -124,6 +125,7 @@ public:
     Q_SIGNAL void onLogonError(const QString &error);
 
     Q_SIGNAL void cursorChanged(const QCursor cursor);
+    Q_SIGNAL void cursorPositionChanged(QPoint position);
 
     RdpView *rdpView()
     {

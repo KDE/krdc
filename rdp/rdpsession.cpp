@@ -717,6 +717,10 @@ int RdpSession::clientContextStart(rdpContext *context)
         }
     }
 
+    // Needed to receive pointer position events.
+    // TODO only when "remote cursor" is off.
+    freerdp_settings_set_bool(settings, FreeRDP_GrabMouse, true);
+
     session->m_thread = std::thread(std::bind(&RdpSession::run, session));
     pthread_setname_np(session->m_thread.native_handle(), "rdp_session");
 
@@ -1259,4 +1263,9 @@ bool RdpSession::sendResizeEvent(const QSize newSize)
 void RdpSession::setRemoteCursor(const QCursor &cursor)
 {
     Q_EMIT cursorChanged(cursor);
+}
+
+void RdpSession::setRemoteCursorPosition(QPoint position)
+{
+    Q_EMIT cursorPositionChanged(position);
 }

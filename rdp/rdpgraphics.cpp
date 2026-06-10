@@ -105,10 +105,13 @@ BOOL RdpGraphics::onPointerSetDefault(rdpContext *context)
 
 BOOL RdpGraphics::onPointerSetPosition(rdpContext *context, UINT32 x, UINT32 y)
 {
-    // Not implemented
-    Q_UNUSED(context);
-    Q_UNUSED(x);
-    Q_UNUSED(y);
+    auto rctx = reinterpret_cast<RdpContext *>(context);
+    WINPR_ASSERT(rctx);
+
+    auto session = rctx->session;
+    WINPR_ASSERT(session);
+
+    session->setRemoteCursorPosition(QPoint(x, y));
     return true;
 }
 

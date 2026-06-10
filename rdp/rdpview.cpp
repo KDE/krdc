@@ -2,6 +2,7 @@
     SPDX-FileCopyrightText: 2002 Arend van Beelen jr. <arend@auton.nl>
     SPDX-FileCopyrightText: 2007-2012 Urs Wolfer <uwolfer@kde.org>
     SPDX-FileCopyrightText: 2012 AceLan Kao <acelan@acelan.idv.tw>
+    SPDX-FileCopyrighttext: 2026 Kai Uwe Broulik <kde@broulik.de>
 
     SPDX-License-Identifier: GPL-2.0-or-later
 */
@@ -182,6 +183,7 @@ bool RdpView::startConnection()
     connect(m_session.get(), &RdpSession::onVerifyChangedCertificate, this, &RdpView::onVerifyChangedCertificate, Qt::BlockingQueuedConnection);
 
     connect(m_session.get(), &RdpSession::cursorChanged, this, &RdpView::setRemoteCursor);
+    connect(m_session.get(), &RdpSession::cursorPositionChanged, this, &RdpView::setRemoteCursorPosition);
 
     setStatus(RdpView::Connecting);
     if (!m_session->start()) {
@@ -402,7 +404,12 @@ void RdpView::showLocalCursor(LocalCursorState state)
         setCursor(localDefaultCursor());
     } else {
         // hide local cursor, show remote one
-        setCursor(m_remoteCursor);
+        setCursor(Qt::BlankCursor);
+    }
+
+    if (m_remoteCursorPosition) {
+        // TODO Don't repaint when remote cursor is blank.
+        update();
     }
 }
 
@@ -410,7 +417,28 @@ void RdpView::setRemoteCursor(const QCursor cursor)
 {
     m_remoteCursor = cursor;
     if (m_localCursorState != CursorOn) {
-        setCursor(m_remoteCursor);
+        // TODO update only region where the cursor is?
+        update();
+    }
+}
+
+void RdpView::setRemoteCursorPosition(QPoint position)
+{
+    if (m_remoteCursorPosition == position) {
+        return;
+    }
+
+    const bool remoteCursorOn = (m_localCursorState != CursorOn);
+
+    if (remoteCursorOn && m_remoteCursorPosition) {
+        // TODO repaint old location if we optimize this.
+    }
+
+    m_remoteCursorPosition = position;
+
+    if (remoteCursorOn) {
+        // TODO update only region where the cursor is?
+        update();
     }
 }
 
@@ -470,6 +498,14 @@ void RdpView::paintEvent(QPaintEvent *event)
     } else {
         painter.drawImage(QPoint{0, 0}, image);
     }
+
+    if (m_localCursorState != CursorOn && m_remoteCursorPosition) {
+        if (!m_remoteCursor.pixmap().isNull()) {
+            const QPoint effectiveCursorPosition = (*m_remoteCursorPosition - m_remoteCursor.hotSpot()) / devicePixelRatio();
+            painter.drawPixmap(effectiveCursorPosition, m_remoteCursor.pixmap());
+        }
+    }
+
     painter.end();
 }
 

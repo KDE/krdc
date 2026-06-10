@@ -15,7 +15,10 @@
 #include "rdphostpreferences.h"
 
 #include <QCursor>
+#include <QPoint>
 #include <QUrl>
+
+#include <optional>
 
 #define TCP_PORT_RDP 3389
 
@@ -63,6 +66,7 @@ public Q_SLOTS:
     void onVerifyChangedCertificate(RdpSession::CertificateResult *ret, const QString &oldCertificate, const QString &newCertificate);
     void onLogonError(const QString &error);
     void setRemoteCursor(const QCursor cursor);
+    void setRemoteCursorPosition(QPoint position);
 
 protected:
     bool startConnection() override;
@@ -92,6 +96,7 @@ private:
     std::unique_ptr<RdpSession> m_session;
 
     QCursor m_remoteCursor;
+    std::optional<QPoint> m_remoteCursorPosition;
 };
 
 #endif
