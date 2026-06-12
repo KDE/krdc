@@ -3,13 +3,13 @@
 # Arpad Biro <biro.arpad gmail>, 2008, 2009.
 # Kristóf Kiszel <ulysses@kubuntu.org>, 2012, 2021.
 # Balázs Úr <urbalazs@gmail.com>, 2013, 2015.
-# SPDX-FileCopyrightText: 2021, 2024, 2025 Kristof Kiszel <kiszel.kristof@gmail.com>
+# SPDX-FileCopyrightText: 2021, 2024-2026 Kristof Kiszel <kiszel.kristof@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.1\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-03-04 00:45+0000\n"
-"PO-Revision-Date: 2025-11-08 22:02+0100\n"
+"PO-Revision-Date: 2026-06-11 22:51+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.08.2\n"
+"X-Generator: Lokalize 26.04.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -48,10 +48,9 @@ msgstr "Csatlakozási előzmények megjegyzése"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_WalletSupport)
 #: config/general.ui:31
-#, fuzzy, kde-format
-#| msgid "Remember passwords (KWallet)"
+#, kde-format
 msgid "Remember passwords"
-msgstr "A jelszavak megjegyzése (KWallet)"
+msgstr "Jelszavak megjegyzése"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SystemTrayIcon)
 #: config/general.ui:38
@@ -128,12 +127,14 @@ msgid ""
 "Automatically grab all keys when entering fullscreen mode and release them "
 "when leaving fullscreen"
 msgstr ""
+"Összes billentyű elkapása teljes képernyős módba lépéskor, és elengedésük a "
+"teljes képernyős módból kilépéskor"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_GrabAllKeysOnFullscreen)
 #: config/general.ui:129
 #, kde-format
 msgid "Grab all keys when entering fullscreen"
-msgstr ""
+msgstr "Összes billentyű elkapása teljes képernyős módban"
 
 #. i18n: ectx: property (text), widget (QLabel, defaultProtocolLabel)
 #: config/general.ui:138
@@ -307,10 +308,9 @@ msgid "Show this dialog again for this host"
 msgstr "A párbeszédablak mindig jelenjen meg ennél a gépnévnél"
 
 #: core/hostpreferences.cpp:253
-#, fuzzy, kde-format
-#| msgid "Remember password (KWallet)"
+#, kde-format
 msgid "Remember password"
-msgstr "Jelszó megjegyzése (KWallet)"
+msgstr "Jelszó megjegyzése"
 
 #. i18n: ectx: label, entry (OpenSessions), group (General)
 #: core/krdc.kcfg:16
