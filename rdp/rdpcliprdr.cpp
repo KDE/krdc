@@ -10,6 +10,17 @@
 #include "rdpview.h"
 #include <freerdp/version.h>
 
+static void cliprdr_format_free(CLIPRDR_FORMAT *formats, size_t count)
+{
+    if (!formats)
+        return;
+
+    for (size_t x = 0; x < count; x++)
+        free(formats->formatName);
+
+    delete[] formats;
+}
+
 UINT RdpClipboard::onSendClientFormatList(CliprdrClientContext *cliprdr)
 {
     auto kclip = reinterpret_cast<RdpClipboard *>(cliprdr->custom);
@@ -21,11 +32,11 @@ UINT RdpClipboard::onSendClientFormatList(CliprdrClientContext *cliprdr)
 
     UINT32 *pFormatIds = nullptr;
     UINT32 numFormats = ClipboardGetFormatIds(kclip->m_clipboard, &pFormatIds);
-    CLIPRDR_FORMAT *formats = reinterpret_cast<CLIPRDR_FORMAT *>(calloc(numFormats, sizeof(CLIPRDR_FORMAT)));
+    auto formats = new CLIPRDR_FORMAT[numFormats];
 
     if (!formats) {
         free(pFormatIds);
-        free(formats);
+        cliprdr_format_free(formats, numFormats);
         return ERROR_INTERNAL_ERROR;
     }
 
@@ -40,7 +51,7 @@ UINT RdpClipboard::onSendClientFormatList(CliprdrClientContext *cliprdr)
 
             if (!formats[index].formatName) {
                 free(pFormatIds);
-                free(formats);
+                cliprdr_format_free(formats, numFormats);
                 return ERROR_INTERNAL_ERROR;
             }
         }
@@ -54,13 +65,19 @@ UINT RdpClipboard::onSendClientFormatList(CliprdrClientContext *cliprdr)
 
     if (!cliprdr->ClientFormatList) {
         free(pFormatIds);
+        if (formats)
+            free(formats->formatName);
         free(formats);
         return ERROR_INTERNAL_ERROR;
     }
 
     auto rc = cliprdr->ClientFormatList(cliprdr, &formatList);
     free(pFormatIds);
-    free(formats);
+    if (formats) {
+        for (size_t x = 0; x < numFormats; x++)
+            free(formats->formatName);
+    }
+    cliprdr_format_free(formats, numFormats);
     return rc;
 }
 

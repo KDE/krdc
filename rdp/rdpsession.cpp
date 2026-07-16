@@ -1130,10 +1130,17 @@ bool RdpSession::onAuthenticate(char **username, char **password, char **domain)
     Q_UNUSED(domain);
 
     if (m_firstPasswordTry && m_user.size()) {
+        free(*username);
         *username = _strdup(m_user.toUtf8().data());
+
+        free(*domain);
+        *domain = nullptr;
         if (m_domain.size()) {
             *domain = _strdup(m_domain.toUtf8().data());
         }
+
+        free(*password);
+        *password = nullptr;
         if (m_password.size()) {
             *password = _strdup(m_password.toUtf8().data());
             m_firstPasswordTry = false;
@@ -1143,8 +1150,11 @@ bool RdpSession::onAuthenticate(char **username, char **password, char **domain)
 
     Q_EMIT onAuthRequested();
 
+    free(*username);
     *username = _strdup(m_user.toUtf8().data());
+    free(*domain);
     *domain = _strdup(m_domain.toUtf8().data());
+    free(*password);
     *password = _strdup(m_password.toUtf8().data());
 
     return true;
@@ -1168,6 +1178,7 @@ void RdpSession::run()
     LARGE_INTEGER due;
     due.QuadPart = 0;
     if (!SetWaitableTimer(timer, &due, 1, nullptr, nullptr, false)) {
+        CloseHandle(timer);
         return;
     }
 
@@ -1191,6 +1202,7 @@ void RdpSession::run()
     }
 
     freerdp_disconnect(instance);
+    CloseHandle(timer);
 }
 
 void RdpSession::emitErrorMessage()
