@@ -65,9 +65,7 @@ UINT RdpClipboard::onSendClientFormatList(CliprdrClientContext *cliprdr)
 
     if (!cliprdr->ClientFormatList) {
         free(pFormatIds);
-        if (formats)
-            free(formats->formatName);
-        delete[] formats;
+        cliprdr_format_free(formats, numFormats);
         return ERROR_INTERNAL_ERROR;
     }
 
