@@ -15,8 +15,9 @@ static void cliprdr_format_free(CLIPRDR_FORMAT *formats, size_t count)
     if (!formats)
         return;
 
-    for (size_t x = 0; x < count; x++)
-        free(formats->formatName);
+    for (size_t x = 0; x < count; x++) {
+        free(formats[x].formatName);
+    }
 
     delete[] formats;
 }
