@@ -3,9 +3,11 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
+#include <QDir>
 #include <QFile>
 #include <QFileInfo>
 #include <QMimeData>
+#include <QTemporaryDir>
 #include <QUrl>
 #include <QtEndian>
 
@@ -25,6 +27,15 @@ static void cliprdr_format_free(CLIPRDR_FORMAT *formats, size_t count)
     }
 
     delete[] formats;
+}
+
+static bool isSafePastePath(const QString &relativePath)
+{
+    if (relativePath.isEmpty()) {
+        return false;
+    }
+    const QString clean = QDir::cleanPath(relativePath);
+    return !QDir::isAbsolutePath(clean) && clean != QLatin1String("..") && !clean.startsWith(QLatin1String("../"));
 }
 
 UINT RdpClipboard::onSendClientFormatList(CliprdrClientContext *cliprdr)
@@ -188,6 +199,14 @@ UINT RdpClipboard::onServerFormatList(CliprdrClientContext *cliprdr, const CLIPR
         kclip->m_serverFormats.append(format);
     }
 
+    // Prefer files over text: they are rarely advertised together, and when copying files
+    // the server also offers a textual rendering of the path we do not want.
+    for (auto format : kclip->m_serverFormats) {
+        if (format->formatName && qstrcmp(format->formatName, "FileGroupDescriptorW") == 0) {
+            return onSendClientFormatDataRequest(cliprdr, format->formatId);
+        }
+    }
+
     UINT rc;
     for (auto format : kclip->m_serverFormats) {
         if (format->formatId == CF_UNICODETEXT) {
@@ -290,6 +309,11 @@ UINT RdpClipboard::onServerFormatDataResponse(CliprdrClientContext *cliprdr, con
         return ERROR_INTERNAL_ERROR;
     }
 
+    if (format->formatName && qstrcmp(format->formatName, "FileGroupDescriptorW") == 0) {
+        kclip->beginFileFetch(formatDataResponse);
+        return CHANNEL_RC_OK;
+    }
+
     UINT32 formatId;
     if (format->formatName) {
         formatId = ClipboardRegisterFormat(kclip->m_clipboard, format->formatName);
@@ -352,10 +376,185 @@ UINT RdpClipboard::onServerFileContentsRequest(CliprdrClientContext *cliprdr, co
     return respond({}, false);
 }
 
+void RdpClipboard::beginFileFetch(const CLIPRDR_FORMAT_DATA_RESPONSE *descriptorData)
+{
+    FILEDESCRIPTORW *descriptors = nullptr;
+    UINT32 count = 0;
+    if (cliprdr_parse_file_list(descriptorData->requestedFormatData, descriptorData->common.dataLen, &descriptors, &count) != CHANNEL_RC_OK || count == 0) {
+        free(descriptors);
+        return;
+    }
+
+    auto dir = std::make_shared<QTemporaryDir>(QDir(QDir::tempPath()).filePath(QStringLiteral("krdc-clip-XXXXXX")));
+    if (!dir->isValid()) {
+        free(descriptors);
+        return;
+    }
+
+    FileFetch f;
+    f.dir = dir;
+    f.files.reserve(count);
+    for (UINT32 i = 0; i < count; ++i) {
+        const FILEDESCRIPTORW &fd = descriptors[i];
+        IncomingFile entry;
+        const auto *raw = reinterpret_cast<const char16_t *>(fd.cFileName);
+        int len = 0;
+        while (len < 260 && raw[len]) {
+            ++len;
+        }
+        entry.relativePath = QString::fromUtf16(raw, len);
+        entry.relativePath.replace(u'\\', u'/'); // Windows uses backslash separators
+        if (!isSafePastePath(entry.relativePath)) {
+            free(descriptors);
+            return;
+        }
+        entry.isDirectory = (fd.dwFlags & FD_ATTRIBUTES) && (fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY);
+        if (fd.dwFlags & FD_FILESIZE) {
+            entry.size = (quint64(fd.nFileSizeHigh) << 32) | fd.nFileSizeLow;
+        }
+        f.files.push_back(entry);
+    }
+    free(descriptors);
+
+    m_fetch = std::move(f);
+    advanceFetch();
+}
+
+void RdpClipboard::advanceFetch()
+{
+    while (m_fetch && m_fetch->index < int(m_fetch->files.size())) {
+        const IncomingFile &entry = m_fetch->files[m_fetch->index];
+        const QString absolute = m_fetch->dir->filePath(entry.relativePath);
+
+        if (entry.isDirectory) {
+            QDir().mkpath(absolute);
+            m_fetch->index++;
+            continue;
+        }
+
+        QDir().mkpath(QFileInfo(absolute).absolutePath());
+        if (entry.size == 0) {
+            (void)QFile(absolute).open(QIODevice::WriteOnly);
+            m_fetch->index++;
+            continue;
+        }
+
+        m_fetch->current = std::make_unique<QFile>(absolute);
+        if (!m_fetch->current->open(QIODevice::WriteOnly)) {
+            abortFetch();
+            return;
+        }
+        m_fetch->offset = 0;
+        requestChunk();
+        return; // wait for the server's response
+    }
+
+    finishFetch();
+}
+
+void RdpClipboard::requestChunk()
+{
+    const IncomingFile &entry = m_fetch->files[m_fetch->index];
+    const quint64 remaining = entry.size - m_fetch->offset;
+    const UINT32 chunk = UINT32(std::min<quint64>(remaining, s_fileChunkSize));
+
+    CLIPRDR_FILE_CONTENTS_REQUEST request = {};
+    request.common.msgType = CB_FILECONTENTS_REQUEST;
+    request.streamId = ++m_fetch->streamId;
+    request.listIndex = UINT32(m_fetch->index);
+    request.dwFlags = FILECONTENTS_RANGE;
+    request.nPositionLow = quint32(m_fetch->offset & 0xFFFFFFFFu);
+    request.nPositionHigh = quint32(m_fetch->offset >> 32);
+    request.cbRequested = chunk;
+    request.haveClipDataId = FALSE;
+    m_cliprdr->ClientFileContentsRequest(m_cliprdr, &request);
+}
+
+void RdpClipboard::finishFetch()
+{
+    if (!m_fetch) {
+        return;
+    }
+
+    // Publish the top-level entries (the first path component of each descriptor) as the
+    // client clipboard; subdirectories live underneath and come along with their parent.
+    QStringList tops;
+    QList<QUrl> urls;
+    for (const IncomingFile &entry : m_fetch->files) {
+        const QString top = entry.relativePath.section(u'/', 0, 0);
+        if (top.isEmpty() || tops.contains(top)) {
+            continue;
+        }
+        tops << top;
+        urls << QUrl::fromLocalFile(m_fetch->dir->filePath(top));
+    }
+
+    if (urls.isEmpty()) {
+        abortFetch();
+        return;
+    }
+
+    m_remoteFiles = m_fetch->dir; // keep the materialised files alive while they sit on the clipboard
+    QMimeData *mimeData = new QMimeData;
+    mimeData->setUrls(urls);
+
+    // GTK file managers (Nautilus, Caja, ...) only enable Paste for their own copied-files
+    // format, not the plain text/uri-list QMimeData::setUrls() sets. No trailing newline:
+    // it parses as an empty extra URI and crashes Caja's status-message formatting.
+    QStringList uriStrings;
+    for (const QUrl &url : urls) {
+        uriStrings << url.toString(QUrl::FullyEncoded);
+    }
+    const QByteArray copiedFiles = QByteArrayLiteral("copy\n") + uriStrings.join(QLatin1Char('\n')).toUtf8();
+    mimeData->setData(QStringLiteral("x-special/mate-copied-files"), copiedFiles);
+    mimeData->setData(QStringLiteral("x-special/gnome-copied-files"), copiedFiles);
+
+    m_fetch.reset();
+    m_krdp->session->rdpView()->remoteClipboardChanged(mimeData);
+}
+
+void RdpClipboard::abortFetch()
+{
+    if (m_fetch && m_fetch->current) {
+        m_fetch->current->close();
+    }
+    m_fetch.reset();
+}
+
 UINT RdpClipboard::onServerFileContentsResponse(CliprdrClientContext *cliprdr, const CLIPRDR_FILE_CONTENTS_RESPONSE *fileContentsResponse)
 {
+    auto kclip = reinterpret_cast<RdpClipboard *>(cliprdr->custom);
+    WINPR_ASSERT(kclip);
+
     if (!cliprdr || !fileContentsResponse) {
         return ERROR_INVALID_PARAMETER;
+    }
+
+    if (!kclip->m_fetch || !kclip->m_fetch->current) {
+        return CHANNEL_RC_OK;
+    }
+    if (!(fileContentsResponse->common.msgFlags & CB_RESPONSE_OK)) {
+        kclip->abortFetch();
+        return CHANNEL_RC_OK;
+    }
+
+    const UINT32 received = fileContentsResponse->cbRequested;
+    if (received > 0 && fileContentsResponse->requestedData) {
+        if (kclip->m_fetch->current->write(reinterpret_cast<const char *>(fileContentsResponse->requestedData), received) != qint64(received)) {
+            kclip->abortFetch();
+            return CHANNEL_RC_OK;
+        }
+        kclip->m_fetch->offset += received;
+    }
+
+    const IncomingFile &entry = kclip->m_fetch->files[kclip->m_fetch->index];
+    if (kclip->m_fetch->offset >= entry.size || received == 0) {
+        kclip->m_fetch->current->close();
+        kclip->m_fetch->current.reset();
+        kclip->m_fetch->index++;
+        kclip->advanceFetch();
+    } else {
+        kclip->requestChunk();
     }
 
     return CHANNEL_RC_OK;

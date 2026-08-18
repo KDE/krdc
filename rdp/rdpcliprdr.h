@@ -10,8 +10,14 @@
 #include <freerdp/client/cliprdr.h>
 #include <winpr/clipboard.h>
 
+#include <memory>
+#include <optional>
+#include <vector>
+
 struct RdpContext;
 class QMimeData;
+class QFile;
+class QTemporaryDir;
 
 class RdpClipboard
 {
@@ -36,6 +42,12 @@ public:
     static UINT onServerFileContentsResponse(CliprdrClientContext *cliprdr, const CLIPRDR_FILE_CONTENTS_RESPONSE *fileContentsResponse);
 
 private:
+    void beginFileFetch(const CLIPRDR_FORMAT_DATA_RESPONSE *descriptorData);
+    void advanceFetch();
+    void requestChunk();
+    void finishFetch();
+    void abortFetch();
+
     RdpContext *m_krdp;
 
     wClipboard *m_clipboard = nullptr;
@@ -44,4 +56,21 @@ private:
     CliprdrClientContext *m_cliprdr = nullptr;
     UINT32 m_clipboardCapabilities = 0;
     QStringList m_localFiles;
+
+    struct IncomingFile {
+        QString relativePath;
+        quint64 size = 0;
+        bool isDirectory = false;
+    };
+    struct FileFetch {
+        std::shared_ptr<QTemporaryDir> dir;
+        std::vector<IncomingFile> files;
+        int index = 0;
+        quint64 offset = 0;
+        std::unique_ptr<QFile> current;
+        UINT32 streamId = 0;
+    };
+    static constexpr quint64 s_fileChunkSize = 4 * 1024 * 1024;
+    std::optional<FileFetch> m_fetch;
+    std::shared_ptr<QTemporaryDir> m_remoteFiles; // keeps the last pulled files alive on the clipboard
 };
