@@ -3,11 +3,16 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
+#include <QFile>
+#include <QFileInfo>
 #include <QMimeData>
+#include <QUrl>
+#include <QtEndian>
 
 #include "rdpcliprdr.h"
 #include "rdpsession.h"
 #include "rdpview.h"
+#include <freerdp/utils/cliprdr_utils.h>
 #include <freerdp/version.h>
 
 static void cliprdr_format_free(CLIPRDR_FORMAT *formats, size_t count)
@@ -240,6 +245,16 @@ UINT RdpClipboard::onServerFormatDataRequest(CliprdrClientContext *cliprdr, cons
     UINT32 size;
     auto data = reinterpret_cast<BYTE *>(ClipboardGetData(kclip->m_clipboard, formatDataRequest->requestedFormatId, &size));
 
+    // WinPR hands back a raw FILEDESCRIPTORW array; the wire format needs a cItems prefix.
+    if (data && formatDataRequest->requestedFormatId == ClipboardGetFormatId(kclip->m_clipboard, "FileGroupDescriptorW")) {
+        BYTE *wireData = nullptr;
+        UINT32 wireSize = 0;
+        UINT error = cliprdr_serialize_file_list(reinterpret_cast<FILEDESCRIPTORW *>(data), size / sizeof(FILEDESCRIPTORW), &wireData, &wireSize);
+        free(data);
+        data = (error == NO_ERROR) ? wireData : nullptr;
+        size = wireSize;
+    }
+
     CLIPRDR_FORMAT_DATA_RESPONSE response = {};
     if (data) {
         response.common.msgFlags = CB_RESPONSE_OK;
@@ -301,11 +316,40 @@ UINT RdpClipboard::onServerFormatDataResponse(CliprdrClientContext *cliprdr, con
 
 UINT RdpClipboard::onServerFileContentsRequest(CliprdrClientContext *cliprdr, const CLIPRDR_FILE_CONTENTS_REQUEST *fileContentsRequest)
 {
-    if (!cliprdr || !fileContentsRequest) {
+    auto kclip = reinterpret_cast<RdpClipboard *>(cliprdr->custom);
+    WINPR_ASSERT(kclip);
+
+    if (!cliprdr || !fileContentsRequest || !cliprdr->ClientFileContentsResponse) {
         return ERROR_INVALID_PARAMETER;
     }
 
-    return CHANNEL_RC_OK;
+    const auto respond = [&](const QByteArray &payload, bool ok) {
+        CLIPRDR_FILE_CONTENTS_RESPONSE response = {};
+        response.common.msgFlags = ok ? CB_RESPONSE_OK : CB_RESPONSE_FAIL;
+        response.streamId = fileContentsRequest->streamId;
+        response.cbRequested = ok ? UINT32(payload.size()) : 0;
+        response.requestedData = ok ? reinterpret_cast<const BYTE *>(payload.constData()) : nullptr;
+        return cliprdr->ClientFileContentsResponse(cliprdr, &response);
+    };
+
+    QFile file(kclip->m_localFiles.value(int(fileContentsRequest->listIndex)));
+    if (!file.open(QIODevice::ReadOnly)) {
+        return respond({}, false);
+    }
+
+    if (fileContentsRequest->dwFlags & FILECONTENTS_SIZE) {
+        QByteArray sizeLe(8, Qt::Uninitialized);
+        qToLittleEndian<quint64>(quint64(file.size()), sizeLe.data());
+        return respond(sizeLe, true);
+    }
+    if (fileContentsRequest->dwFlags & FILECONTENTS_RANGE) {
+        const quint64 offset = (quint64(fileContentsRequest->nPositionHigh) << 32) | fileContentsRequest->nPositionLow;
+        if (!file.seek(offset)) {
+            return respond({}, false);
+        }
+        return respond(file.read(std::min<qint64>(fileContentsRequest->cbRequested, 4 * 1024 * 1024)), true);
+    }
+    return respond({}, false);
 }
 
 UINT RdpClipboard::onServerFileContentsResponse(CliprdrClientContext *cliprdr, const CLIPRDR_FILE_CONTENTS_RESPONSE *fileContentsResponse)
@@ -349,8 +393,30 @@ RdpClipboard::~RdpClipboard()
 bool RdpClipboard::sendClipboard(const QMimeData *data)
 {
     // TODO: add support for other formats like hasImage(), hasHtml()
+
+    if (data->hasUrls()) {
+        QStringList localFiles;
+        QByteArray uriList;
+        for (const QUrl &url : data->urls()) {
+            if (!url.isLocalFile() || !QFileInfo::exists(url.toLocalFile())) {
+                continue;
+            }
+            localFiles << url.toLocalFile();
+            uriList += url.toString(QUrl::FullyEncoded).toUtf8() + "\r\n";
+        }
+
+        if (!localFiles.isEmpty()) {
+            m_localFiles = localFiles;
+            ClipboardSetData(m_clipboard, ClipboardGetFormatId(m_clipboard, "text/uri-list"), uriList.constData(), UINT32(uriList.size()));
+            onSendClientFormatList(m_cliprdr);
+            return true;
+        }
+    }
+
     if (data->hasText()) {
         const QString text = data->text();
+
+        m_localFiles.clear();
 
         if (text.isEmpty()) {
             ClipboardEmpty(m_clipboard);

@@ -5,6 +5,8 @@
 
 #pragma once
 
+#include <QStringList>
+
 #include <freerdp/client/cliprdr.h>
 #include <winpr/clipboard.h>
 
@@ -41,4 +43,5 @@ private:
     QList<CLIPRDR_FORMAT *> m_serverFormats;
     CliprdrClientContext *m_cliprdr = nullptr;
     UINT32 m_clipboardCapabilities = 0;
+    QStringList m_localFiles;
 };
