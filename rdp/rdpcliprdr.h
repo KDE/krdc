@@ -71,6 +71,8 @@ private:
         UINT32 streamId = 0;
     };
     static constexpr quint64 s_fileChunkSize = 4 * 1024 * 1024;
+    // Never reset per-fetch, unlike FileFetch::streamId.
+    UINT32 m_nextFileContentsStreamId = 0;
     std::optional<FileFetch> m_fetch;
     std::shared_ptr<QTemporaryDir> m_remoteFiles; // keeps the last pulled files alive on the clipboard
 };

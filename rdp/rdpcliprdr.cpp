@@ -460,7 +460,7 @@ void RdpClipboard::requestChunk()
 
     CLIPRDR_FILE_CONTENTS_REQUEST request = {};
     request.common.msgType = CB_FILECONTENTS_REQUEST;
-    request.streamId = ++m_fetch->streamId;
+    request.streamId = m_fetch->streamId = ++m_nextFileContentsStreamId;
     request.listIndex = UINT32(m_fetch->index);
     request.dwFlags = FILECONTENTS_RANGE;
     request.nPositionLow = quint32(m_fetch->offset & 0xFFFFFFFFu);
@@ -530,7 +530,7 @@ UINT RdpClipboard::onServerFileContentsResponse(CliprdrClientContext *cliprdr, c
         return ERROR_INVALID_PARAMETER;
     }
 
-    if (!kclip->m_fetch || !kclip->m_fetch->current) {
+    if (!kclip->m_fetch || !kclip->m_fetch->current || fileContentsResponse->streamId != kclip->m_fetch->streamId) {
         return CHANNEL_RC_OK;
     }
     if (!(fileContentsResponse->common.msgFlags & CB_RESPONSE_OK)) {
