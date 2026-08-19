@@ -715,6 +715,9 @@ int RdpSession::clientContextStart(rdpContext *context)
             }
             break;
         }
+        if (!freerdp_settings_set_bool(settings, FreeRDP_GatewayEnabled, true)) {
+            return -1;
+        }
     }
 
     session->m_thread = std::thread(std::bind(&RdpSession::run, session));
