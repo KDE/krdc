@@ -92,6 +92,18 @@ UINT RdpClipboard::onSendClientFormatList(CliprdrClientContext *cliprdr)
     return rc;
 }
 
+UINT RdpClipboard::onSendClientFormatListResponse(CliprdrClientContext *cliprdr, bool ok)
+{
+    if (!cliprdr || !cliprdr->ClientFormatListResponse) {
+        return ERROR_INVALID_PARAMETER;
+    }
+
+    CLIPRDR_FORMAT_LIST_RESPONSE response = {};
+    response.common.msgType = CB_FORMAT_LIST_RESPONSE;
+    response.common.msgFlags = ok ? CB_RESPONSE_OK : CB_RESPONSE_FAIL;
+    return cliprdr->ClientFormatListResponse(cliprdr, &response);
+}
+
 UINT RdpClipboard::onSendClientFormatDataRequest(CliprdrClientContext *cliprdr, UINT32 formatId)
 {
     auto kclip = reinterpret_cast<RdpClipboard *>(cliprdr->custom);
@@ -180,7 +192,7 @@ UINT RdpClipboard::onServerFormatList(CliprdrClientContext *cliprdr, const CLIPR
     kclip->m_serverFormats.clear();
 
     if (formatList->numFormats < 1) {
-        return CHANNEL_RC_OK;
+        return onSendClientFormatListResponse(cliprdr, true);
     }
 
     for (UINT32 index = 0; index < formatList->numFormats; index++) {
@@ -192,11 +204,18 @@ UINT RdpClipboard::onServerFormatList(CliprdrClientContext *cliprdr, const CLIPR
             format->formatName = _strdup(formatList->formats[index].formatName);
 
             if (!format->formatName) {
+                delete format;
+                (void)onSendClientFormatListResponse(cliprdr, false);
                 return CHANNEL_RC_NO_MEMORY;
             }
         }
 
         kclip->m_serverFormats.append(format);
+    }
+
+    UINT rc = onSendClientFormatListResponse(cliprdr, true);
+    if (rc != CHANNEL_RC_OK) {
+        return rc;
     }
 
     // Prefer files over text: they are rarely advertised together, and when copying files
@@ -207,7 +226,6 @@ UINT RdpClipboard::onServerFormatList(CliprdrClientContext *cliprdr, const CLIPR
         }
     }
 
-    UINT rc;
     for (auto format : kclip->m_serverFormats) {
         if (format->formatId == CF_UNICODETEXT) {
             if ((rc = onSendClientFormatDataRequest(cliprdr, CF_UNICODETEXT)) != CHANNEL_RC_OK)

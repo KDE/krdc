@@ -28,6 +28,7 @@ public:
     bool sendClipboard(const QMimeData *data);
 
     static UINT onSendClientFormatList(CliprdrClientContext *cliprdr);
+    static UINT onSendClientFormatListResponse(CliprdrClientContext *cliprdr, bool ok);
     static UINT onSendClientFormatDataRequest(CliprdrClientContext *cliprdr, UINT32 formatId);
     static UINT onSendClientCapabilities(CliprdrClientContext *cliprdr);
     static UINT onMonitorReady(CliprdrClientContext *cliprdr, const CLIPRDR_MONITOR_READY *monitorReady);
