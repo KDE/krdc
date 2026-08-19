@@ -80,9 +80,9 @@ BOOL RdpSession::postConnect(freerdp *rdp)
     auto &buffer = session->m_videoBuffer;
     buffer = QImage(freerdp_settings_get_uint32(settings, FreeRDP_DesktopWidth),
                     freerdp_settings_get_uint32(settings, FreeRDP_DesktopHeight),
-                    QImage::Format_RGBX8888);
+                    QImage::Format_RGB32);
 
-    if (!gdi_init_ex(rdp, PIXEL_FORMAT_RGBX32, buffer.bytesPerLine(), buffer.bits(), nullptr)) {
+    if (!gdi_init_ex(rdp, PIXEL_FORMAT_BGRX32, buffer.bytesPerLine(), buffer.bits(), nullptr)) {
         qCWarning(KRDC) << "Could not initialize GDI subsystem";
         return false;
     }
@@ -798,9 +798,9 @@ BOOL RdpSession::resizeDisplay(rdpContext *context)
     auto &buffer = session->m_videoBuffer;
     buffer = QImage(freerdp_settings_get_uint32(settings, FreeRDP_DesktopWidth),
                     freerdp_settings_get_uint32(settings, FreeRDP_DesktopHeight),
-                    QImage::Format_RGBX8888);
+                    QImage::Format_RGB32);
 
-    if (!gdi_resize_ex(gdi, buffer.width(), buffer.height(), buffer.bytesPerLine(), PIXEL_FORMAT_RGBX32, buffer.bits(), nullptr)) {
+    if (!gdi_resize_ex(gdi, buffer.width(), buffer.height(), buffer.bytesPerLine(), PIXEL_FORMAT_BGRX32, buffer.bits(), nullptr)) {
         qCWarning(KRDC) << "Failed resizing GDI subsystem";
         return false;
     }
