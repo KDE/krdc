@@ -123,7 +123,7 @@ UINT RdpClipboard::onSendClientCapabilities(CliprdrClientContext *cliprdr)
     generalCapabilitySet.capabilitySetType = CB_CAPSTYPE_GENERAL;
     generalCapabilitySet.capabilitySetLength = 12;
     generalCapabilitySet.version = CB_CAPS_VERSION_2;
-    generalCapabilitySet.generalFlags = CB_USE_LONG_FORMAT_NAMES;
+    generalCapabilitySet.generalFlags = CB_USE_LONG_FORMAT_NAMES | CB_STREAM_FILECLIP_ENABLED | CB_FILECLIP_NO_FILE_PATHS;
     return cliprdr->ClientCapabilities(cliprdr, &capabilities);
 }
 
