@@ -356,6 +356,42 @@ UINT RdpClipboard::onServerFormatDataResponse(CliprdrClientContext *cliprdr, con
     return CHANNEL_RC_OK;
 }
 
+UINT RdpClipboard::sendFileContentsResponse(UINT32 streamId, const QByteArray &payload, bool ok)
+{
+    CLIPRDR_FILE_CONTENTS_RESPONSE response = {};
+    response.common.msgFlags = ok ? CB_RESPONSE_OK : CB_RESPONSE_FAIL;
+    response.streamId = streamId;
+    response.cbRequested = ok ? UINT32(payload.size()) : 0;
+    response.requestedData = ok ? reinterpret_cast<const BYTE *>(payload.constData()) : nullptr;
+    return m_cliprdr->ClientFileContentsResponse(m_cliprdr, &response);
+}
+
+UINT RdpClipboard::onDelegateFileSizeSuccess(wClipboardDelegate *delegate, const wClipboardFileSizeRequest *request, UINT64 fileSize)
+{
+    auto kclip = reinterpret_cast<RdpClipboard *>(delegate->custom);
+    QByteArray sizeLe(8, Qt::Uninitialized);
+    qToLittleEndian<quint64>(fileSize, sizeLe.data());
+    return kclip->sendFileContentsResponse(request->streamId, sizeLe, true);
+}
+
+UINT RdpClipboard::onDelegateFileSizeFailure(wClipboardDelegate *delegate, const wClipboardFileSizeRequest *request, UINT)
+{
+    auto kclip = reinterpret_cast<RdpClipboard *>(delegate->custom);
+    return kclip->sendFileContentsResponse(request->streamId, {}, false);
+}
+
+UINT RdpClipboard::onDelegateFileRangeSuccess(wClipboardDelegate *delegate, const wClipboardFileRangeRequest *request, const BYTE *data, UINT32 size)
+{
+    auto kclip = reinterpret_cast<RdpClipboard *>(delegate->custom);
+    return kclip->sendFileContentsResponse(request->streamId, QByteArray(reinterpret_cast<const char *>(data), int(size)), true);
+}
+
+UINT RdpClipboard::onDelegateFileRangeFailure(wClipboardDelegate *delegate, const wClipboardFileRangeRequest *request, UINT)
+{
+    auto kclip = reinterpret_cast<RdpClipboard *>(delegate->custom);
+    return kclip->sendFileContentsResponse(request->streamId, {}, false);
+}
+
 UINT RdpClipboard::onServerFileContentsRequest(CliprdrClientContext *cliprdr, const CLIPRDR_FILE_CONTENTS_REQUEST *fileContentsRequest)
 {
     auto kclip = reinterpret_cast<RdpClipboard *>(cliprdr->custom);
@@ -365,33 +401,30 @@ UINT RdpClipboard::onServerFileContentsRequest(CliprdrClientContext *cliprdr, co
         return ERROR_INVALID_PARAMETER;
     }
 
-    const auto respond = [&](const QByteArray &payload, bool ok) {
-        CLIPRDR_FILE_CONTENTS_RESPONSE response = {};
-        response.common.msgFlags = ok ? CB_RESPONSE_OK : CB_RESPONSE_FAIL;
-        response.streamId = fileContentsRequest->streamId;
-        response.cbRequested = ok ? UINT32(payload.size()) : 0;
-        response.requestedData = ok ? reinterpret_cast<const BYTE *>(payload.constData()) : nullptr;
-        return cliprdr->ClientFileContentsResponse(cliprdr, &response);
-    };
-
-    QFile file(kclip->m_localFiles.value(int(fileContentsRequest->listIndex)));
-    if (!file.open(QIODevice::ReadOnly)) {
-        return respond({}, false);
-    }
+    wClipboardDelegate *delegate = ClipboardGetDelegate(kclip->m_clipboard);
 
     if (fileContentsRequest->dwFlags & FILECONTENTS_SIZE) {
-        QByteArray sizeLe(8, Qt::Uninitialized);
-        qToLittleEndian<quint64>(quint64(file.size()), sizeLe.data());
-        return respond(sizeLe, true);
+        wClipboardFileSizeRequest request = {};
+        request.streamId = fileContentsRequest->streamId;
+        request.listIndex = fileContentsRequest->listIndex;
+        if (delegate->ClientRequestFileSize(delegate, &request) == CHANNEL_RC_OK) {
+            return CHANNEL_RC_OK;
+        }
+        return kclip->sendFileContentsResponse(fileContentsRequest->streamId, {}, false);
     }
     if (fileContentsRequest->dwFlags & FILECONTENTS_RANGE) {
-        const quint64 offset = (quint64(fileContentsRequest->nPositionHigh) << 32) | fileContentsRequest->nPositionLow;
-        if (!file.seek(offset)) {
-            return respond({}, false);
+        wClipboardFileRangeRequest request = {};
+        request.streamId = fileContentsRequest->streamId;
+        request.listIndex = fileContentsRequest->listIndex;
+        request.nPositionLow = fileContentsRequest->nPositionLow;
+        request.nPositionHigh = fileContentsRequest->nPositionHigh;
+        request.cbRequested = UINT32(std::min<UINT32>(fileContentsRequest->cbRequested, UINT32(s_fileChunkSize)));
+        if (delegate->ClientRequestFileRange(delegate, &request) == CHANNEL_RC_OK) {
+            return CHANNEL_RC_OK;
         }
-        return respond(file.read(std::min<qint64>(fileContentsRequest->cbRequested, 4 * 1024 * 1024)), true);
+        return kclip->sendFileContentsResponse(fileContentsRequest->streamId, {}, false);
     }
-    return respond({}, false);
+    return kclip->sendFileContentsResponse(fileContentsRequest->streamId, {}, false);
 }
 
 void RdpClipboard::beginFileFetch(const CLIPRDR_FORMAT_DATA_RESPONSE *descriptorData)
@@ -594,6 +627,13 @@ RdpClipboard::RdpClipboard(RdpContext *krdp, CliprdrClientContext *cliprdr)
     cliprdr->ServerFormatDataResponse = onServerFormatDataResponse;
     cliprdr->ServerFileContentsRequest = onServerFileContentsRequest;
     cliprdr->ServerFileContentsResponse = onServerFileContentsResponse;
+
+    wClipboardDelegate *delegate = ClipboardGetDelegate(m_clipboard);
+    delegate->custom = this;
+    delegate->ClipboardFileSizeSuccess = onDelegateFileSizeSuccess;
+    delegate->ClipboardFileSizeFailure = onDelegateFileSizeFailure;
+    delegate->ClipboardFileRangeSuccess = onDelegateFileRangeSuccess;
+    delegate->ClipboardFileRangeFailure = onDelegateFileRangeFailure;
 }
 
 RdpClipboard::~RdpClipboard()
@@ -612,18 +652,17 @@ bool RdpClipboard::sendClipboard(const QMimeData *data)
     // TODO: add support for other formats like hasImage(), hasHtml()
 
     if (data->hasUrls()) {
-        QStringList localFiles;
+        bool haveLocalFiles = false;
         QByteArray uriList;
         for (const QUrl &url : data->urls()) {
             if (!url.isLocalFile() || !QFileInfo::exists(url.toLocalFile())) {
                 continue;
             }
-            localFiles << url.toLocalFile();
+            haveLocalFiles = true;
             uriList += url.toString(QUrl::FullyEncoded).toUtf8() + "\r\n";
         }
 
-        if (!localFiles.isEmpty()) {
-            m_localFiles = localFiles;
+        if (haveLocalFiles) {
             ClipboardSetData(m_clipboard, ClipboardGetFormatId(m_clipboard, "text/uri-list"), uriList.constData(), UINT32(uriList.size()));
             onSendClientFormatList(m_cliprdr);
             return true;
@@ -632,8 +671,6 @@ bool RdpClipboard::sendClipboard(const QMimeData *data)
 
     if (data->hasText()) {
         const QString text = data->text();
-
-        m_localFiles.clear();
 
         if (text.isEmpty()) {
             ClipboardEmpty(m_clipboard);

@@ -5,7 +5,7 @@
 
 #pragma once
 
-#include <QStringList>
+#include <QString>
 
 #include <freerdp/client/cliprdr.h>
 #include <winpr/clipboard.h>
@@ -43,6 +43,13 @@ public:
     static UINT onServerFileContentsResponse(CliprdrClientContext *cliprdr, const CLIPRDR_FILE_CONTENTS_RESPONSE *fileContentsResponse);
 
 private:
+    // WinPR resolves listIndex against its own recursively-built file list.
+    static UINT onDelegateFileSizeSuccess(wClipboardDelegate *delegate, const wClipboardFileSizeRequest *request, UINT64 fileSize);
+    static UINT onDelegateFileSizeFailure(wClipboardDelegate *delegate, const wClipboardFileSizeRequest *request, UINT errorCode);
+    static UINT onDelegateFileRangeSuccess(wClipboardDelegate *delegate, const wClipboardFileRangeRequest *request, const BYTE *data, UINT32 size);
+    static UINT onDelegateFileRangeFailure(wClipboardDelegate *delegate, const wClipboardFileRangeRequest *request, UINT errorCode);
+    UINT sendFileContentsResponse(UINT32 streamId, const QByteArray &payload, bool ok);
+
     void beginFileFetch(const CLIPRDR_FORMAT_DATA_RESPONSE *descriptorData);
     void advanceFetch();
     void requestChunk();
@@ -56,7 +63,6 @@ private:
     QList<CLIPRDR_FORMAT *> m_serverFormats;
     CliprdrClientContext *m_cliprdr = nullptr;
     UINT32 m_clipboardCapabilities = 0;
-    QStringList m_localFiles;
 
     struct IncomingFile {
         QString relativePath;
