@@ -14,6 +14,7 @@
 #include <QBitmap>
 #include <QEvent>
 #include <QKeyEvent>
+#include <QMimeData>
 #include <QMouseEvent>
 #include <QStandardPaths>
 #include <QTimer>
@@ -491,11 +492,8 @@ void RemoteView::localClipboardChanged()
 
 void RemoteView::remoteClipboardChanged(QMimeData *data)
 {
-    if (!hostPreferences()->clipboardSharing()) {
-        return;
-    }
-
-    if (m_viewOnly) {
+    if (!hostPreferences()->clipboardSharing() || m_viewOnly) {
+        delete data;
         return;
     }
     m_clipboard->setMimeData(data, QClipboard::Clipboard);
