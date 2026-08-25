@@ -15,6 +15,8 @@
 #include <freerdp/utils/cliprdr_utils.h>
 #include <freerdp/version.h>
 
+#include "krdc_debug.h"
+
 static void cliprdr_format_free(CLIPRDR_FORMAT *formats, size_t count)
 {
     if (!formats)
@@ -310,7 +312,8 @@ UINT RdpClipboard::onServerFormatDataResponse(CliprdrClientContext *cliprdr, con
                                                      kclip->m_clipboard,
                                                      formatDataResponse->requestedFormatData,
                                                      formatDataResponse->common.dataLen)) {
-            return ERROR_INTERNAL_ERROR;
+            qCWarning(KRDC) << "File clipboard failed to update";
+            return CHANNEL_RC_OK;
         }
         ClipboardSetData(kclip->m_clipboard,
                          ClipboardGetFormatId(kclip->m_clipboard, "FileGroupDescriptorW"),
