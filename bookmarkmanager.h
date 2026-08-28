@@ -10,6 +10,7 @@
 #include "core/remoteview.h"
 
 #include <KActionCollection>
+#include <KBookmarkContextMenu>
 #include <KBookmarkManager>
 #include <KBookmarkMenu>
 #include <KBookmarkOwner>
@@ -17,6 +18,37 @@
 #include <QMenu>
 
 class MainWindow;
+class BookmarkManager;
+
+class BookmarkContextMenu : public KBookmarkContextMenu
+{
+    Q_OBJECT
+
+public:
+    BookmarkContextMenu(const KBookmark &bookmark, KBookmarkManager *manager, KBookmarkOwner *owner, QWidget *parent = nullptr);
+
+    void addActions() override;
+
+Q_SIGNALS:
+    void editBookmark(const QUrl &url);
+};
+
+class BookmarkMenu : public KBookmarkMenu
+{
+public:
+    BookmarkMenu(KBookmarkManager *manager, KBookmarkOwner *owner, QMenu *parentMenu, BookmarkManager *bookmarkManager);
+    BookmarkMenu(KBookmarkManager *manager, KBookmarkOwner *owner, QMenu *parentMenu, const QString &parentAddress, BookmarkManager *bookmarkManager);
+
+protected:
+    QMenu *contextMenu(QAction *action) override;
+    void refill() override;
+    QAction *actionForBookmark(const KBookmark &bookmark) override;
+
+private:
+    void removeAddBookmarkAction();
+
+    BookmarkManager *m_bookmarkManager;
+};
 
 class BookmarkManager : public QObject, public KBookmarkOwner
 {
@@ -28,7 +60,6 @@ public:
 
     QUrl currentUrl() const override;
     QString currentTitle() const override;
-    bool enableOption(KBookmarkOwner::BookmarkOption option) const override;
     bool supportsTabs() const override;
     QList<KBookmarkOwner::FutureBookmark> currentBookmarkList() const override;
     void addHistoryBookmark(RemoteView *view);
@@ -42,6 +73,7 @@ public:
 
 Q_SIGNALS:
     void openUrl(const QUrl &url);
+    void editBookmark(const QUrl &url);
 
 private Q_SLOTS:
     void openBookmark(const KBookmark &bm, Qt::MouseButtons, Qt::KeyboardModifiers) override;
@@ -51,7 +83,7 @@ private:
     QString urlForView(RemoteView *view) const;
     QString titleForUrl(const QUrl &url) const;
 
-    KBookmarkMenu *m_bookmarkMenu;
+    BookmarkMenu *m_bookmarkMenu;
     KBookmarkManager *m_manager;
     KBookmarkGroup m_historyGroup;
 

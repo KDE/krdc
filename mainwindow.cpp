@@ -198,6 +198,9 @@ void MainWindow::setupActions()
     m_bookmarkManager = new BookmarkManager(actionCollection(), bookmarkMenu->menu(), this);
     actionCollection()->addAction(QStringLiteral("bookmark"), bookmarkMenu);
     connect(m_bookmarkManager, SIGNAL(openUrl(QUrl)), SLOT(newConnection(QUrl)));
+    connect(m_bookmarkManager, &BookmarkManager::editBookmark, this, [this](const QUrl &url) {
+        showSettingsDialog(url.toString());
+    });
 }
 
 void MainWindow::loadAllPlugins()

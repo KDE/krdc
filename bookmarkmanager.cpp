@@ -8,9 +8,97 @@
 #include "krdc_debug.h"
 #include "mainwindow.h"
 
+#include <KBookmarkAction>
+#include <KBookmarkActionMenu>
 #include <KLocalizedString>
 
 #include <QStandardPaths>
+
+BookmarkContextMenu::BookmarkContextMenu(const KBookmark &bookmark, KBookmarkManager *manager, KBookmarkOwner *owner, QWidget *parent)
+    : KBookmarkContextMenu(bookmark, manager, owner, parent)
+{
+}
+
+void BookmarkContextMenu::addActions()
+{
+    if (bookmark().isGroup()) {
+        KBookmarkContextMenu::addActions();
+        return;
+    }
+
+    addAction(KBookmarkContextMenu::tr("Copy Link Address", "@action:inmenu"), this, &KBookmarkContextMenu::slotCopyLocation);
+    addAction(KBookmarkContextMenu::tr("Properties", "@action:inmenu"), this, [this]() {
+        Q_EMIT editBookmark(bookmark().url());
+    });
+
+    addSeparator();
+    addAction(QIcon::fromTheme(QStringLiteral("edit-delete")),
+              KBookmarkContextMenu::tr("Delete Bookmark", "@action:inmenu"),
+              this,
+              &KBookmarkContextMenu::slotRemove);
+}
+
+BookmarkMenu::BookmarkMenu(KBookmarkManager *manager, KBookmarkOwner *owner, QMenu *parentMenu, BookmarkManager *bookmarkManager)
+    : KBookmarkMenu(manager, owner, parentMenu)
+    , m_bookmarkManager(bookmarkManager)
+{
+    removeAddBookmarkAction();
+}
+
+BookmarkMenu::BookmarkMenu(KBookmarkManager *manager, KBookmarkOwner *owner, QMenu *parentMenu, const QString &parentAddress, BookmarkManager *bookmarkManager)
+    : KBookmarkMenu(manager, owner, parentMenu, parentAddress)
+    , m_bookmarkManager(bookmarkManager)
+{
+}
+
+QMenu *BookmarkMenu::contextMenu(QAction *action)
+{
+    auto *bookmarkAction = dynamic_cast<KBookmarkActionInterface *>(action);
+    if (!bookmarkAction) {
+        return nullptr;
+    }
+
+    auto *menu = new BookmarkContextMenu(bookmarkAction->bookmark(), manager(), owner());
+    connect(menu, &BookmarkContextMenu::editBookmark, m_bookmarkManager, &BookmarkManager::editBookmark);
+
+    return menu;
+}
+
+void BookmarkMenu::refill()
+{
+    KBookmarkMenu::refill();
+    removeAddBookmarkAction();
+}
+
+QAction *BookmarkMenu::actionForBookmark(const KBookmark &bookmark)
+{
+    if (bookmark.isGroup()) {
+        auto *actionMenu = new KBookmarkActionMenu(bookmark, this);
+        m_actions.append(actionMenu);
+
+        auto *subMenu = new BookmarkMenu(manager(), owner(), actionMenu->menu(), bookmark.address(), m_bookmarkManager);
+        m_lstSubMenus.append(subMenu);
+        return actionMenu;
+    }
+
+    if (bookmark.isSeparator()) {
+        auto *separator = new QAction(this);
+        separator->setSeparator(true);
+        m_actions.append(separator);
+        return separator;
+    }
+
+    auto *action = new KBookmarkAction(bookmark, owner(), this);
+    m_actions.append(action);
+    return action;
+}
+
+void BookmarkMenu::removeAddBookmarkAction()
+{
+    if (QAction *action = addBookmarkAction()) {
+        parentMenu()->removeAction(action);
+    }
+}
 
 BookmarkManager::BookmarkManager(KActionCollection *collection, QMenu *menu, MainWindow *parent)
     : QObject(parent)
@@ -21,7 +109,7 @@ BookmarkManager::BookmarkManager(KActionCollection *collection, QMenu *menu, Mai
     const QString file = dir + QLatin1String("krdc/bookmarks.xml");
 
     m_manager = new KBookmarkManager(file, this);
-    m_bookmarkMenu = new KBookmarkMenu(m_manager, this, menu);
+    m_bookmarkMenu = new BookmarkMenu(m_manager, this, menu, this);
     collection->addActions(menu->actions());
 
     KBookmarkGroup root = m_manager->root();
@@ -108,17 +196,6 @@ QString BookmarkManager::currentTitle() const
 QString BookmarkManager::titleForUrl(const QUrl &url) const
 {
     return url.toDisplayString(QUrl::UrlFormattingOption::StripTrailingSlash);
-}
-
-bool BookmarkManager::enableOption(KBookmarkOwner::BookmarkOption option) const
-{
-    switch (option) {
-    case KBookmarkOwner::ShowAddBookmark:
-    case KBookmarkOwner::ShowEditBookmark:
-        return false;
-    default:
-        return false;
-    }
 }
 
 bool BookmarkManager::supportsTabs() const
