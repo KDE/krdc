@@ -14,9 +14,13 @@
 
 #include <QCheckBox>
 #include <QDialog>
+#include <QDialogButtonBox>
 #include <QFile>
+#include <QFormLayout>
 #include <QIcon>
 #include <QLabel>
+#include <QLineEdit>
+#include <QPushButton>
 #include <QVBoxLayout>
 
 #ifdef USE_SSH_TUNNEL
@@ -35,8 +39,11 @@ HostPreferences::HostPreferences(KConfigGroup configGroup, QObject *parent)
     , sshTunnelWidget(nullptr)
 #endif
     , m_connected(false)
+    , m_editConnectionDetails(false)
     , showAgainCheckBox(nullptr)
     , walletSupportCheckBox(nullptr)
+    , connectionNameLineEdit(nullptr)
+    , connectionUrlLineEdit(nullptr)
 {
     m_hostConfigured = m_configGroup.hasKey("showConfigAgain");
 
@@ -216,6 +223,28 @@ bool HostPreferences::showDialog(QWidget *parent)
     QVBoxLayout *layout = new QVBoxLayout(mainWidget);
     dialog->addPage(mainWidget, i18n("Host Configuration"));
 
+    if (m_editConnectionDetails) {
+        auto *connectionLayout = new QFormLayout;
+        connectionNameLineEdit = new QLineEdit(m_connectionName, mainWidget);
+        connectionUrlLineEdit = new QLineEdit(m_connectionUrl.toDisplayString(QUrl::StripTrailingSlash), mainWidget);
+        connectionLayout->addRow(i18nc("@label:textbox Name of a remote connection", "Name:"), connectionNameLineEdit);
+        connectionLayout->addRow(i18nc("@label:textbox URL of a remote connection", "URL:"), connectionUrlLineEdit);
+        layout->addLayout(connectionLayout);
+
+        auto *dialogButtonBox = dialog->findChild<QDialogButtonBox *>();
+        Q_ASSERT(dialogButtonBox);
+        QPushButton *acceptButton = dialogButtonBox->button(QDialogButtonBox::Ok);
+        const auto updateAcceptButton = [acceptButton, this]() {
+            const QUrl url = QUrl::fromUserInput(connectionUrlLineEdit->text().trimmed());
+            const bool validUrl = url.isValid() && !url.scheme().isEmpty() && (!url.host().isEmpty() || url.port() >= 0)
+                && (url.path().isEmpty() || url.path() == QStringLiteral("/"));
+            acceptButton->setEnabled(!connectionNameLineEdit->text().trimmed().isEmpty() && validUrl);
+        };
+        connect(connectionNameLineEdit, &QLineEdit::textChanged, dialog, updateAcceptButton);
+        connect(connectionUrlLineEdit, &QLineEdit::textChanged, dialog, updateAcceptButton);
+        updateAcceptButton();
+    }
+
     if (m_connected) {
         const QString noteText = i18n("Note that settings might only apply when you connect next time to this host.");
         const QString format = QLatin1String("<i>%1</i>");
@@ -260,6 +289,10 @@ bool HostPreferences::showDialog(QWidget *parent)
     // Show dialog
     if (dialog->exec() == QDialog::Accepted) {
         qCDebug(KRDC) << "HostPreferences config dialog accepted";
+        if (m_editConnectionDetails) {
+            m_connectionName = connectionNameLineEdit->text().trimmed();
+            m_connectionUrl = QUrl::fromUserInput(connectionUrlLineEdit->text().trimmed());
+        }
         acceptConfig();
         return true;
     } else {
@@ -270,6 +303,23 @@ bool HostPreferences::showDialog(QWidget *parent)
 void HostPreferences::setShownWhileConnected(bool connected)
 {
     m_connected = connected;
+}
+
+void HostPreferences::setConnectionDetails(const QString &name, const QUrl &url)
+{
+    m_editConnectionDetails = true;
+    m_connectionName = name;
+    m_connectionUrl = url;
+}
+
+QString HostPreferences::connectionName() const
+{
+    return m_connectionName;
+}
+
+QUrl HostPreferences::connectionUrl() const
+{
+    return m_connectionUrl;
 }
 
 #ifdef USE_SSH_TUNNEL

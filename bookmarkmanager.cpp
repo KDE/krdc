@@ -28,7 +28,7 @@ void BookmarkContextMenu::addActions()
 
     addAction(KBookmarkContextMenu::tr("Copy Link Address", "@action:inmenu"), this, &KBookmarkContextMenu::slotCopyLocation);
     addAction(KBookmarkContextMenu::tr("Properties", "@action:inmenu"), this, [this]() {
-        Q_EMIT editBookmark(bookmark().url());
+        Q_EMIT editBookmark(bookmark().address(), bookmark().fullText(), bookmark().url());
     });
 
     addSeparator();
@@ -224,6 +224,18 @@ void BookmarkManager::addManualBookmark(const QUrl &url, const QString &text)
 {
     m_manager->root().addBookmark(text, url, QString());
     m_manager->emitChanged();
+}
+
+void BookmarkManager::updateBookmark(const QString &address, const QString &name, const QUrl &url)
+{
+    KBookmark bookmark = m_manager->findByAddress(address);
+    if (bookmark.isNull() || bookmark.isGroup()) {
+        return;
+    }
+
+    bookmark.setFullText(name);
+    bookmark.setUrl(url);
+    m_manager->emitChanged(bookmark.parentGroup());
 }
 
 KBookmarkManager *BookmarkManager::getManager()

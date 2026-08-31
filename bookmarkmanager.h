@@ -30,7 +30,7 @@ public:
     void addActions() override;
 
 Q_SIGNALS:
-    void editBookmark(const QUrl &url);
+    void editBookmark(const QString &address, const QString &name, const QUrl &url);
 };
 
 class BookmarkMenu : public KBookmarkMenu
@@ -64,6 +64,7 @@ public:
     QList<KBookmarkOwner::FutureBookmark> currentBookmarkList() const override;
     void addHistoryBookmark(RemoteView *view);
     void addManualBookmark(const QUrl &url, const QString &text);
+    void updateBookmark(const QString &address, const QString &name, const QUrl &url);
     KBookmarkManager *getManager();
     // removes all bookmarks with url, possibly ignore the history folder and update it's title there if it's set
     static void removeByUrl(KBookmarkManager *manager, const QString &url, bool ignoreHistory = false, const QString &updateTitle = QString());
@@ -73,7 +74,7 @@ public:
 
 Q_SIGNALS:
     void openUrl(const QUrl &url);
-    void editBookmark(const QUrl &url);
+    void editBookmark(const QString &address, const QString &name, const QUrl &url);
 
 private Q_SLOTS:
     void openBookmark(const KBookmark &bm, Qt::MouseButtons, Qt::KeyboardModifiers) override;

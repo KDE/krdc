@@ -198,8 +198,8 @@ void MainWindow::setupActions()
     m_bookmarkManager = new BookmarkManager(actionCollection(), bookmarkMenu->menu(), this);
     actionCollection()->addAction(QStringLiteral("bookmark"), bookmarkMenu);
     connect(m_bookmarkManager, SIGNAL(openUrl(QUrl)), SLOT(newConnection(QUrl)));
-    connect(m_bookmarkManager, &BookmarkManager::editBookmark, this, [this](const QUrl &url) {
-        showSettingsDialog(url.toString());
+    connect(m_bookmarkManager, &BookmarkManager::editBookmark, this, [this](const QString &address, const QString &name, const QUrl &url) {
+        showSettingsDialog(url.toString(), address, name);
     });
 }
 
@@ -704,24 +704,75 @@ void MainWindow::openTabSettings(int index)
     showSettingsDialog(url);
 }
 
-void MainWindow::showSettingsDialog(const QString &url)
+void MainWindow::showSettingsDialog(const QString &url, const QString &bookmarkAddress, const QString &bookmarkName)
 {
     HostPreferences *prefs = nullptr;
+    RemoteViewFactory *preferencesFactory = nullptr;
+    const QUrl originalUrl = QUrl::fromUserInput(url);
+    const QString originalUrlString = originalUrl.toDisplayString(QUrl::StripTrailingSlash);
+    QString selectedBookmarkAddress = bookmarkAddress;
+    QString selectedBookmarkName = bookmarkName;
+
+    if (selectedBookmarkAddress.isEmpty()) {
+        KBookmark fallbackBookmark;
+        const QStringList addresses = BookmarkManager::findBookmarkAddresses(m_bookmarkManager->getManager()->root(), originalUrlString);
+        for (const QString &address : addresses) {
+            const KBookmark bookmark = m_bookmarkManager->getManager()->findByAddress(address);
+            if (bookmark.isNull() || bookmark.isGroup()) {
+                continue;
+            }
+
+            if (fallbackBookmark.isNull()) {
+                fallbackBookmark = bookmark;
+            }
+            if (bookmark.parentGroup().metaDataItem(QStringLiteral("krdc-history")) != QLatin1String("historyfolder")) {
+                fallbackBookmark = bookmark;
+                break;
+            }
+        }
+
+        if (!fallbackBookmark.isNull()) {
+            selectedBookmarkAddress = fallbackBookmark.address();
+            selectedBookmarkName = fallbackBookmark.fullText();
+        }
+    }
 
     for (RemoteViewFactory *factory : std::as_const(m_remoteViewFactories)) {
-        if (factory->supportsUrl(QUrl(url))) {
-            prefs = factory->createHostPreferences(Settings::self()->config()->group(QStringLiteral("hostpreferences")).group(url), this);
+        if (factory->supportsUrl(originalUrl)) {
+            preferencesFactory = factory;
+            prefs = factory->createHostPreferences(Settings::self()->config()->group(QStringLiteral("hostpreferences")).group(originalUrlString), this);
             if (prefs) {
-                qCDebug(KRDC) << "Found plugin to handle url (" << url << "): " << prefs->metaObject()->className();
+                qCDebug(KRDC) << "Found plugin to handle url (" << originalUrlString << "): " << prefs->metaObject()->className();
             } else {
-                qCDebug(KRDC) << "Found plugin to handle url (" << url << "), but plugin does not provide preferences";
+                qCDebug(KRDC) << "Found plugin to handle url (" << originalUrlString << "), but plugin does not provide preferences";
             }
         }
     }
 
     if (prefs) {
         prefs->setShownWhileConnected(true);
-        prefs->showDialog(this);
+        if (!selectedBookmarkAddress.isEmpty()) {
+            prefs->setConnectionDetails(selectedBookmarkName, originalUrl);
+        }
+
+        if (prefs->showDialog(this) && !selectedBookmarkAddress.isEmpty()) {
+            const QUrl newUrl = prefs->connectionUrl();
+            if (!preferencesFactory->supportsUrl(newUrl)) {
+                KMessageBox::error(this, i18n("The entered address cannot be handled by this connection type."), i18n("Unusable URL"));
+                return;
+            }
+
+            const QString newUrlString = newUrl.toDisplayString(QUrl::StripTrailingSlash);
+            if (newUrlString != originalUrlString) {
+                KConfigGroup oldGroup = prefs->configGroup();
+                KConfigGroup newGroup = Settings::self()->config()->group(QStringLiteral("hostpreferences")).group(newUrlString);
+                oldGroup.copyTo(&newGroup);
+                oldGroup.deleteGroup();
+                Settings::self()->config()->sync();
+            }
+
+            m_bookmarkManager->updateBookmark(selectedBookmarkAddress, prefs->connectionName(), newUrl);
+        }
     } else {
         KMessageBox::error(this, i18n("The selected host cannot be handled."), i18n("Unusable URL"));
     }

@@ -14,6 +14,7 @@
 #include <KConfigGroup>
 
 class QCheckBox;
+class QLineEdit;
 class QWidget;
 
 #ifdef USE_SSH_TUNNEL
@@ -75,6 +76,11 @@ public:
     /** If @p connected is true, a message is shown that settings might only apply after a reconnect. */
     void setShownWhileConnected(bool connected);
 
+    /** Show editable connection identity fields in the configuration dialog. */
+    void setConnectionDetails(const QString &name, const QUrl &url);
+    QString connectionName() const;
+    QUrl connectionUrl() const;
+
 #ifdef USE_SSH_TUNNEL
     bool useSshTunnel() const;
     bool useSshTunnelLoopback() const;
@@ -110,9 +116,15 @@ private:
 
     bool m_hostConfigured;
     bool m_connected;
+    bool m_editConnectionDetails;
+
+    QString m_connectionName;
+    QUrl m_connectionUrl;
 
     QCheckBox *showAgainCheckBox;
     QCheckBox *walletSupportCheckBox;
+    QLineEdit *connectionNameLineEdit;
+    QLineEdit *connectionUrlLineEdit;
 };
 
 #endif

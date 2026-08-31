@@ -90,7 +90,7 @@ private Q_SLOTS:
 private:
     void setupActions();
     void loadAllPlugins();
-    void showSettingsDialog(const QString &url);
+    void showSettingsDialog(const QString &url, const QString &bookmarkAddress = QString(), const QString &bookmarkName = QString());
     QScrollArea *createScrollArea(QWidget *parent, RemoteView *remoteView);
     QUrl getInputUrl();
 
