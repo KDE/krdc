@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-28 00:45+0000\n"
+"POT-Creation-Date: 2026-09-04 00:43+0000\n"
 "PO-Revision-Date: 2026-05-31 19:32-0400\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -28,7 +28,7 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "sahranbay@gmail.com, gheyret@gmail.com"
 
-#: bookmarkmanager.cpp:37
+#: bookmarkmanager.cpp:125
 #, kde-format
 msgid "History"
 msgstr "تارىخ"
@@ -212,12 +212,13 @@ msgstr "سەپلە…"
 msgid "Remove"
 msgstr "چىقىرىۋەت"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:292 mainwindow.cpp:723
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:295 mainwindow.cpp:761
+#: mainwindow.cpp:777
 #, kde-format
 msgid "Unusable URL"
 msgstr "ئىشلەتكىلى بولمايدىغان تور ئادرېس"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:723
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:777
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr "تاللىغان مۇلازىمېتىرنى بىر تەرەپ قىلالمىدى."
@@ -238,8 +239,8 @@ msgstr "ئادەتتىكى سەپلىمە"
 msgid "Hosts"
 msgstr "مۇلازىمېتىر"
 
-#: config/preferencesdialog.cpp:28 core/hostpreferences.cpp:213
-#: core/hostpreferences.cpp:217
+#: config/preferencesdialog.cpp:28 core/hostpreferences.cpp:220
+#: core/hostpreferences.cpp:224
 #, kde-format
 msgid "Host Configuration"
 msgstr "مۇلازىمېتىر سەپلىمىسى"
@@ -289,7 +290,19 @@ msgid "A year ago"
 msgid_plural "%1 years ago"
 msgstr[0] "%1 يىل ئىلگىرى"
 
-#: core/hostpreferences.cpp:220
+#: core/hostpreferences.cpp:230
+#, kde-format
+msgctxt "@label:textbox Name of a remote connection"
+msgid "Name:"
+msgstr ""
+
+#: core/hostpreferences.cpp:231
+#, kde-format
+msgctxt "@label:textbox URL of a remote connection"
+msgid "URL:"
+msgstr ""
+
+#: core/hostpreferences.cpp:249
 #, kde-format
 msgid ""
 "Note that settings might only apply when you connect next time to this host."
@@ -297,12 +310,12 @@ msgstr ""
 "ئەسكەرتىش بۇ تەڭشەك كېيىنكى قېتىم مەزكۇر مۇلازىمېتىرغا باغلانغاندا ئاندىن "
 "كۈچكە ئىگە بولىدۇ."
 
-#: core/hostpreferences.cpp:249
+#: core/hostpreferences.cpp:278
 #, kde-format
 msgid "Show this dialog again for this host"
 msgstr "بۇ مۇلازىمېتىر ئۈچۈن مەزكۇر سۆزلەشكۈنى كۆرسەت"
 
-#: core/hostpreferences.cpp:253
+#: core/hostpreferences.cpp:282
 #, kde-format
 msgid "Remember password"
 msgstr "ئىم ئەستە تۇت"
@@ -496,8 +509,8 @@ msgstr "قوزغالغاندا باغلىنىدىغان تور ئادرېسى"
 msgid "KDE Remote Desktop Client started"
 msgstr "KDE يىراقتىكى ئۈستەلئۈستى خېرىدارى قوزغالدى"
 
-#: mainwindow.cpp:111 mainwindow.cpp:128 mainwindow.cpp:1198
-#: mainwindow.cpp:1293
+#: mainwindow.cpp:111 mainwindow.cpp:128 mainwindow.cpp:1252
+#: mainwindow.cpp:1347
 #, kde-format
 msgid "New Connection"
 msgstr "يېڭى باغلىنىش"
@@ -512,12 +525,12 @@ msgstr "ئېكران كۆرۈنۈشىنى چاپلاش تاختىسىغا كۆچ
 msgid "Screenshot"
 msgstr "ئېكران كۆرۈنۈشى"
 
-#: mainwindow.cpp:141 mainwindow.cpp:536
+#: mainwindow.cpp:141 mainwindow.cpp:539
 #, kde-format
 msgid "Switch to Full Screen Mode"
 msgstr "تولۇق ئېكران ھالىتىگە ئالماشتۇر"
 
-#: mainwindow.cpp:142 mainwindow.cpp:537
+#: mainwindow.cpp:142 mainwindow.cpp:540
 #, kde-format
 msgid "Full Screen"
 msgstr "تولۇق ئېكران"
@@ -577,17 +590,17 @@ msgstr "نىسبەت ھەسسىسى"
 msgid "Bookmarks"
 msgstr "خەتكۈش"
 
-#: mainwindow.cpp:265
+#: mainwindow.cpp:268
 #, kde-format
 msgid "Unable to load connection data from the provided file."
 msgstr "تەمىنلەنگەن ھۆججەتتىن باغلىنىش سانلىق مەلۇماتىنى يۈكلىيەلمىدى."
 
-#: mainwindow.cpp:265
+#: mainwindow.cpp:268
 #, kde-format
 msgid "Load failed"
 msgstr "يۈكلىيەلمىدى"
 
-#: mainwindow.cpp:271
+#: mainwindow.cpp:274
 #, kde-format
 msgid ""
 "The entered address does not have the required form.\n"
@@ -596,139 +609,145 @@ msgstr ""
 "كىرگۈزۈلگەن ئادرېس زۆرۈر پىچىمدا ئەمەس.\n"
 "تىلقۇرما: [username@]host[:port]"
 
-#: mainwindow.cpp:271
+#: mainwindow.cpp:274
 #, kde-format
 msgid "Malformed URL"
 msgstr "غەيرىي تور ئادرېسى"
 
-#: mainwindow.cpp:292
+#: mainwindow.cpp:295
 #, kde-format
 msgid "The entered address cannot be handled."
 msgstr "كىرگۈزۈلگەن ئادرېسنى بىر تەرەپ قىلالمىدى."
 
-#: mainwindow.cpp:443
+#: mainwindow.cpp:446
 #, kde-format
 msgid "Connecting to %1"
 msgstr "%1 غا باغلىنىۋاتىدۇ"
 
-#: mainwindow.cpp:447
+#: mainwindow.cpp:450
 #, kde-format
 msgid "Authenticating at %1"
 msgstr "%1 دا كىملىك دەلىللەۋاتىدۇ"
 
-#: mainwindow.cpp:451
+#: mainwindow.cpp:454
 #, kde-format
 msgid "Preparing connection to %1"
 msgstr "%1 باغلىنىشقا تەييارلىنىۋاتىدۇ"
 
-#: mainwindow.cpp:455
+#: mainwindow.cpp:458
 #, kde-format
 msgid "Connected to %1"
 msgstr "%1 غا باغلاندى"
 
-#: mainwindow.cpp:580
+#: mainwindow.cpp:583
 #, kde-format
 msgid "Switch to Window Mode"
 msgstr "كۆزنەك ھالىتىگە ئالماشتۇر"
 
-#: mainwindow.cpp:581
+#: mainwindow.cpp:584
 #, kde-format
 msgid "Window Mode"
 msgstr "كۆزنەك ھالىتى"
 
-#: mainwindow.cpp:742
+#: mainwindow.cpp:761
+#, fuzzy, kde-format
+#| msgid "The entered address cannot be handled."
+msgid "The entered address cannot be handled by this connection type."
+msgstr "كىرگۈزۈلگەن ئادرېسنى بىر تەرەپ قىلالمىدى."
+
+#: mainwindow.cpp:796
 #, kde-format
 msgid "Connect"
 msgstr "باغلان"
 
-#: mainwindow.cpp:743
+#: mainwindow.cpp:797
 #, kde-format
 msgid "Rename"
 msgstr "ئات ئۆزگەرت"
 
-#: mainwindow.cpp:744
+#: mainwindow.cpp:798
 #, kde-format
 msgid "Settings"
 msgstr "تەڭشەك"
 
-#: mainwindow.cpp:745
+#: mainwindow.cpp:799
 #, kde-format
 msgid "Delete"
 msgstr "ئۆچۈر"
 
-#: mainwindow.cpp:748 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:802 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "خەتكۈش"
 
-#: mainwindow.cpp:748 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:802 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "تارىخ"
 
-#: mainwindow.cpp:760
+#: mainwindow.cpp:814
 #, kde-format
 msgid "Rename %1"
 msgstr "%1 نىڭ ئاتىنى ئۆزگەرت"
 
-#: mainwindow.cpp:760
+#: mainwindow.cpp:814
 #, kde-format
 msgid "Rename %1 to"
 msgstr "%1 نىڭ ئاتىنى ئۆزگەرت"
 
-#: mainwindow.cpp:767
+#: mainwindow.cpp:821
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "راستتىنلا %1 نى ئۆچۈرەمسىز؟"
 
-#: mainwindow.cpp:767
+#: mainwindow.cpp:821
 #, kde-format
 msgid "Delete %1"
 msgstr "%1 ئۆچۈر"
 
-#: mainwindow.cpp:791
+#: mainwindow.cpp:845
 #, kde-format
 msgid "Add Bookmark"
 msgstr "خەتكۈش قوش"
 
-#: mainwindow.cpp:792
+#: mainwindow.cpp:846
 #, kde-format
 msgid "Close Tab"
 msgstr "بەتكۈچ ياپ"
 
-#: mainwindow.cpp:911
+#: mainwindow.cpp:965
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr "تولۇق ئېكران ھالىتىدىن چېكىن"
 
-#: mainwindow.cpp:928
+#: mainwindow.cpp:982
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "قورال بالداققا يېپىشتۇر"
 
-#: mainwindow.cpp:1035
+#: mainwindow.cpp:1089
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr "KDE يىراقتىكى ئۈستەلئۈستى خېرىدارىدىن راستتىنلا چېكىنەمسىز؟"
 
-#: mainwindow.cpp:1036
+#: mainwindow.cpp:1090
 #, kde-format
 msgid "Confirm Quit"
 msgstr "چېكىنىشنى جەزملە"
 
-#: mainwindow.cpp:1221
+#: mainwindow.cpp:1275
 #, kde-format
 msgid "Connect to:"
 msgstr "باغلىنىدىغىنى:"
 
-#: mainwindow.cpp:1225
+#: mainwindow.cpp:1279
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr "بۇ جايغا باغلىنىدىغان ئادرېس ۋە سۈزگۈچ تىزىمى كىرگۈزۈلىدۇ."
 
-#: mainwindow.cpp:1234
+#: mainwindow.cpp:1288
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
@@ -737,17 +756,17 @@ msgstr ""
 "بۇ جايغا IP ياكى DNS ئاتى كىرگۈزۈلىدۇ. پۈتۈن قۇر تازىلانسا باغلىنىش "
 "ئۇسۇلىنىڭ تىزىمىگە ئېرىشكىلى بولىدۇ."
 
-#: mainwindow.cpp:1237
+#: mainwindow.cpp:1291
 #, kde-format
 msgid "Goto Address"
 msgstr "ئادرېسقا يۆتكەل"
 
-#: mainwindow.cpp:1329
+#: mainwindow.cpp:1383
 #, kde-format
 msgid "Remote Desktops"
 msgstr "يىراقتىكى ئۈستەلئۈستى"
 
-#: mainwindow.cpp:1358
+#: mainwindow.cpp:1412
 #, kde-format
 msgid "Filter"
 msgstr "سۈزگۈچ"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-28 00:45+0000\n"
+"POT-Creation-Date: 2026-09-04 00:43+0000\n"
 "PO-Revision-Date: 2026-08-30 21:41+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -35,7 +35,7 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "kde-l10n-he@kde.org"
 
-#: bookmarkmanager.cpp:37
+#: bookmarkmanager.cpp:125
 #, kde-format
 msgid "History"
 msgstr "היסטוריה"
@@ -218,12 +218,13 @@ msgstr "הגדרה…"
 msgid "Remove"
 msgstr "הסרה"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:292 mainwindow.cpp:723
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:295 mainwindow.cpp:761
+#: mainwindow.cpp:777
 #, kde-format
 msgid "Unusable URL"
 msgstr "כתובת בלתי שמישה"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:723
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:777
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr "אי אפשר לטפל במארח הנבחר."
@@ -244,8 +245,8 @@ msgstr "הגדרות כלליות"
 msgid "Hosts"
 msgstr "מארחים"
 
-#: config/preferencesdialog.cpp:28 core/hostpreferences.cpp:213
-#: core/hostpreferences.cpp:217
+#: config/preferencesdialog.cpp:28 core/hostpreferences.cpp:220
+#: core/hostpreferences.cpp:224
 #, kde-format
 msgid "Host Configuration"
 msgstr "הגדרות מארח"
@@ -310,18 +311,30 @@ msgstr[1] "לפני שנתיים"
 msgstr[2] "לפני %1 שנה"
 msgstr[3] "לפני %1 שנים"
 
-#: core/hostpreferences.cpp:220
+#: core/hostpreferences.cpp:230
+#, kde-format
+msgctxt "@label:textbox Name of a remote connection"
+msgid "Name:"
+msgstr ""
+
+#: core/hostpreferences.cpp:231
+#, kde-format
+msgctxt "@label:textbox URL of a remote connection"
+msgid "URL:"
+msgstr ""
+
+#: core/hostpreferences.cpp:249
 #, kde-format
 msgid ""
 "Note that settings might only apply when you connect next time to this host."
 msgstr "נא לשים לב שההגדרה הזאת תחול רק בחיבור הבא למארח הזה."
 
-#: core/hostpreferences.cpp:249
+#: core/hostpreferences.cpp:278
 #, kde-format
 msgid "Show this dialog again for this host"
 msgstr "להציג את החלונית הזאת שוב למארח הזה"
 
-#: core/hostpreferences.cpp:253
+#: core/hostpreferences.cpp:282
 #, kde-format
 msgid "Remember password"
 msgstr "לזכור את הסיסמה"
@@ -513,8 +526,8 @@ msgstr "כתובות להתחברות לאחר ההתחלה"
 msgid "KDE Remote Desktop Client started"
 msgstr "לקוח שולחן עבודה מבית KDE הופעל"
 
-#: mainwindow.cpp:111 mainwindow.cpp:128 mainwindow.cpp:1198
-#: mainwindow.cpp:1293
+#: mainwindow.cpp:111 mainwindow.cpp:128 mainwindow.cpp:1252
+#: mainwindow.cpp:1347
 #, kde-format
 msgid "New Connection"
 msgstr "חיבור חדש"
@@ -529,12 +542,12 @@ msgstr "העתקת צילום המסך ללוח הגזירים"
 msgid "Screenshot"
 msgstr "צילום מסך"
 
-#: mainwindow.cpp:141 mainwindow.cpp:536
+#: mainwindow.cpp:141 mainwindow.cpp:539
 #, kde-format
 msgid "Switch to Full Screen Mode"
 msgstr "מעבר למצב מסך מלא"
 
-#: mainwindow.cpp:142 mainwindow.cpp:537
+#: mainwindow.cpp:142 mainwindow.cpp:540
 #, kde-format
 msgid "Full Screen"
 msgstr "מסך מלא"
@@ -594,17 +607,17 @@ msgstr "מקדם קנה מידה"
 msgid "Bookmarks"
 msgstr "סימניות"
 
-#: mainwindow.cpp:265
+#: mainwindow.cpp:268
 #, kde-format
 msgid "Unable to load connection data from the provided file."
 msgstr "לא ניתן לטעון את נתוני החיבור מהקובץ שסופק."
 
-#: mainwindow.cpp:265
+#: mainwindow.cpp:268
 #, kde-format
 msgid "Load failed"
 msgstr "הטעינה נכשלה"
 
-#: mainwindow.cpp:271
+#: mainwindow.cpp:274
 #, kde-format
 msgid ""
 "The entered address does not have the required form.\n"
@@ -613,139 +626,145 @@ msgstr ""
 "הכתובת שמסרת אינה בתבנית המתאימה.\n"
 " תחביר: ‎[username@]host[:port]"
 
-#: mainwindow.cpp:271
+#: mainwindow.cpp:274
 #, kde-format
 msgid "Malformed URL"
 msgstr "כתובת שגויה"
 
-#: mainwindow.cpp:292
+#: mainwindow.cpp:295
 #, kde-format
 msgid "The entered address cannot be handled."
 msgstr "אי אפשר לטפל בכתובת שמולאה."
 
-#: mainwindow.cpp:443
+#: mainwindow.cpp:446
 #, kde-format
 msgid "Connecting to %1"
 msgstr "חיבור אל %1"
 
-#: mainwindow.cpp:447
+#: mainwindow.cpp:450
 #, kde-format
 msgid "Authenticating at %1"
 msgstr "אימות מול %1"
 
-#: mainwindow.cpp:451
+#: mainwindow.cpp:454
 #, kde-format
 msgid "Preparing connection to %1"
 msgstr "בהכנות להתחברות אל %1"
 
-#: mainwindow.cpp:455
+#: mainwindow.cpp:458
 #, kde-format
 msgid "Connected to %1"
 msgstr "התחברת אל %1"
 
-#: mainwindow.cpp:580
+#: mainwindow.cpp:583
 #, kde-format
 msgid "Switch to Window Mode"
 msgstr "מעבר למצב חלון"
 
-#: mainwindow.cpp:581
+#: mainwindow.cpp:584
 #, kde-format
 msgid "Window Mode"
 msgstr "מצב חלון"
 
-#: mainwindow.cpp:742
+#: mainwindow.cpp:761
+#, fuzzy, kde-format
+#| msgid "The entered address cannot be handled."
+msgid "The entered address cannot be handled by this connection type."
+msgstr "אי אפשר לטפל בכתובת שמולאה."
+
+#: mainwindow.cpp:796
 #, kde-format
 msgid "Connect"
 msgstr "התחברות"
 
-#: mainwindow.cpp:743
+#: mainwindow.cpp:797
 #, kde-format
 msgid "Rename"
 msgstr "שינוי שם"
 
-#: mainwindow.cpp:744
+#: mainwindow.cpp:798
 #, kde-format
 msgid "Settings"
 msgstr "הגדרות"
 
-#: mainwindow.cpp:745
+#: mainwindow.cpp:799
 #, kde-format
 msgid "Delete"
 msgstr "מחיקה"
 
-#: mainwindow.cpp:748 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:802 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "סימניות"
 
-#: mainwindow.cpp:748 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:802 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "היסטוריה"
 
-#: mainwindow.cpp:760
+#: mainwindow.cpp:814
 #, kde-format
 msgid "Rename %1"
 msgstr "שינוי השם של %1"
 
-#: mainwindow.cpp:760
+#: mainwindow.cpp:814
 #, kde-format
 msgid "Rename %1 to"
 msgstr "שינוי השם של %1 לשם"
 
-#: mainwindow.cpp:767
+#: mainwindow.cpp:821
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "למחוק את %1?"
 
-#: mainwindow.cpp:767
+#: mainwindow.cpp:821
 #, kde-format
 msgid "Delete %1"
 msgstr "מחיקת %1"
 
-#: mainwindow.cpp:791
+#: mainwindow.cpp:845
 #, kde-format
 msgid "Add Bookmark"
 msgstr "הוספת סימנייה"
 
-#: mainwindow.cpp:792
+#: mainwindow.cpp:846
 #, kde-format
 msgid "Close Tab"
 msgstr "סגירת לשונית"
 
-#: mainwindow.cpp:911
+#: mainwindow.cpp:965
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr "מזעור חלון מסך מלא"
 
-#: mainwindow.cpp:928
+#: mainwindow.cpp:982
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "הצמדת סרגל כלים"
 
-#: mainwindow.cpp:1035
+#: mainwindow.cpp:1089
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr "לצאת מלקוח שולחנות העבודה המרוחקים מבית KDE?"
 
-#: mainwindow.cpp:1036
+#: mainwindow.cpp:1090
 #, kde-format
 msgid "Confirm Quit"
 msgstr "אישור יציאה"
 
-#: mainwindow.cpp:1221
+#: mainwindow.cpp:1275
 #, kde-format
 msgid "Connect to:"
 msgstr "התחברות אל:"
 
-#: mainwindow.cpp:1225
+#: mainwindow.cpp:1279
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr "נא להקליד כאן כדי להתחבר לכתובת ולסנן את הרשימה."
 
-#: mainwindow.cpp:1234
+#: mainwindow.cpp:1288
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
@@ -754,17 +773,17 @@ msgstr ""
 "אפשר להקליד כאן כתובת IP או שם מארח. אפשר למחוק את כל השורה כדי לקבל רשימת "
 "שיטות חיבור."
 
-#: mainwindow.cpp:1237
+#: mainwindow.cpp:1291
 #, kde-format
 msgid "Goto Address"
 msgstr "מעבר לכתובת"
 
-#: mainwindow.cpp:1329
+#: mainwindow.cpp:1383
 #, kde-format
 msgid "Remote Desktops"
 msgstr "שולחנות עבודה מרוחקים"
 
-#: mainwindow.cpp:1358
+#: mainwindow.cpp:1412
 #, kde-format
 msgid "Filter"
 msgstr "סינון"

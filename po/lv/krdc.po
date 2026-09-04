@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-28 00:45+0000\n"
+"POT-Creation-Date: 2026-09-04 00:43+0000\n"
 "PO-Revision-Date: 2025-11-11 18:45+0200\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -31,7 +31,7 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "viesturs.zarins@mi.lu.lv, toms.trasuns@posteo.net"
 
-#: bookmarkmanager.cpp:37
+#: bookmarkmanager.cpp:125
 #, kde-format
 msgid "History"
 msgstr "Vēsture"
@@ -213,12 +213,13 @@ msgstr "Konfigurēt…"
 msgid "Remove"
 msgstr "Noņemt"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:292 mainwindow.cpp:723
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:295 mainwindow.cpp:761
+#: mainwindow.cpp:777
 #, kde-format
 msgid "Unusable URL"
 msgstr "Nelietojams URL"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:723
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:777
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr "Nevar sadarboties ar atlasīto datoru."
@@ -239,8 +240,8 @@ msgstr "Pamata konfigurācija"
 msgid "Hosts"
 msgstr "Resursdatori"
 
-#: config/preferencesdialog.cpp:28 core/hostpreferences.cpp:213
-#: core/hostpreferences.cpp:217
+#: config/preferencesdialog.cpp:28 core/hostpreferences.cpp:220
+#: core/hostpreferences.cpp:224
 #, kde-format
 msgid "Host Configuration"
 msgstr "Resursdatora konfigurācija"
@@ -300,7 +301,19 @@ msgstr[0] "Pirms %1 gada"
 msgstr[1] "Pirms %1 gadiem"
 msgstr[2] "Pirms %1 gadiem"
 
-#: core/hostpreferences.cpp:220
+#: core/hostpreferences.cpp:230
+#, kde-format
+msgctxt "@label:textbox Name of a remote connection"
+msgid "Name:"
+msgstr ""
+
+#: core/hostpreferences.cpp:231
+#, kde-format
+msgctxt "@label:textbox URL of a remote connection"
+msgid "URL:"
+msgstr ""
+
+#: core/hostpreferences.cpp:249
 #, kde-format
 msgid ""
 "Note that settings might only apply when you connect next time to this host."
@@ -308,12 +321,12 @@ msgstr ""
 "Ievērojiet, ka iestatījumi stāsies spēkā tikai nākamreiz pieslēdzoties šim "
 "resursdatoram."
 
-#: core/hostpreferences.cpp:249
+#: core/hostpreferences.cpp:278
 #, kde-format
 msgid "Show this dialog again for this host"
 msgstr "Arī nākamreiz šim resurdatoram rādīt šo lodziņu"
 
-#: core/hostpreferences.cpp:253
+#: core/hostpreferences.cpp:282
 #, fuzzy, kde-format
 #| msgid "Remember password (KWallet)"
 msgid "Remember password"
@@ -507,8 +520,8 @@ msgstr "URL, kurām pieslēgties pēc palaišanas"
 msgid "KDE Remote Desktop Client started"
 msgstr "KDE attālās darbvirsmas klients ir palaists"
 
-#: mainwindow.cpp:111 mainwindow.cpp:128 mainwindow.cpp:1198
-#: mainwindow.cpp:1293
+#: mainwindow.cpp:111 mainwindow.cpp:128 mainwindow.cpp:1252
+#: mainwindow.cpp:1347
 #, kde-format
 msgid "New Connection"
 msgstr "Jauns savienojums"
@@ -523,12 +536,12 @@ msgstr "Nokopēt ekrānattēlu uz starpliktuvi"
 msgid "Screenshot"
 msgstr "Ekrānattēls"
 
-#: mainwindow.cpp:141 mainwindow.cpp:536
+#: mainwindow.cpp:141 mainwindow.cpp:539
 #, kde-format
 msgid "Switch to Full Screen Mode"
 msgstr "Pārslēgties uz pilnekrāna režīmu"
 
-#: mainwindow.cpp:142 mainwindow.cpp:537
+#: mainwindow.cpp:142 mainwindow.cpp:540
 #, kde-format
 msgid "Full Screen"
 msgstr "Pilnekrāns"
@@ -588,17 +601,17 @@ msgstr "Mērogošanas koeficients"
 msgid "Bookmarks"
 msgstr "Grāmatzīmes"
 
-#: mainwindow.cpp:265
+#: mainwindow.cpp:268
 #, kde-format
 msgid "Unable to load connection data from the provided file."
 msgstr "Neizdodas no sniegtās datnes ielādēt savienojuma datus."
 
-#: mainwindow.cpp:265
+#: mainwindow.cpp:268
 #, kde-format
 msgid "Load failed"
 msgstr "Ielādes kļūda"
 
-#: mainwindow.cpp:271
+#: mainwindow.cpp:274
 #, kde-format
 msgid ""
 "The entered address does not have the required form.\n"
@@ -607,139 +620,145 @@ msgstr ""
 "Ievadītā adrese neatbilst noteiktajai formai.\n"
 " Sintakse: [username@]host[:port]"
 
-#: mainwindow.cpp:271
+#: mainwindow.cpp:274
 #, kde-format
 msgid "Malformed URL"
 msgstr "Nekorekts URL"
 
-#: mainwindow.cpp:292
+#: mainwindow.cpp:295
 #, kde-format
 msgid "The entered address cannot be handled."
 msgstr "Ievadīto adresi nav iespējams apstrādāt."
 
-#: mainwindow.cpp:443
+#: mainwindow.cpp:446
 #, kde-format
 msgid "Connecting to %1"
 msgstr "Savienojas ar „%1“"
 
-#: mainwindow.cpp:447
+#: mainwindow.cpp:450
 #, kde-format
 msgid "Authenticating at %1"
 msgstr "Autentificējas „%1“"
 
-#: mainwindow.cpp:451
+#: mainwindow.cpp:454
 #, kde-format
 msgid "Preparing connection to %1"
 msgstr "Sagatavo savienojumu ar „%1“"
 
-#: mainwindow.cpp:455
+#: mainwindow.cpp:458
 #, kde-format
 msgid "Connected to %1"
 msgstr "Savienots ar „%1“"
 
-#: mainwindow.cpp:580
+#: mainwindow.cpp:583
 #, kde-format
 msgid "Switch to Window Mode"
 msgstr "Pārslēgties uz loga režīmu"
 
-#: mainwindow.cpp:581
+#: mainwindow.cpp:584
 #, kde-format
 msgid "Window Mode"
 msgstr "Loga režīms"
 
-#: mainwindow.cpp:742
+#: mainwindow.cpp:761
+#, fuzzy, kde-format
+#| msgid "The entered address cannot be handled."
+msgid "The entered address cannot be handled by this connection type."
+msgstr "Ievadīto adresi nav iespējams apstrādāt."
+
+#: mainwindow.cpp:796
 #, kde-format
 msgid "Connect"
 msgstr "Savienoties"
 
-#: mainwindow.cpp:743
+#: mainwindow.cpp:797
 #, kde-format
 msgid "Rename"
 msgstr "Pārdēvēt"
 
-#: mainwindow.cpp:744
+#: mainwindow.cpp:798
 #, kde-format
 msgid "Settings"
 msgstr "Iestatījumi"
 
-#: mainwindow.cpp:745
+#: mainwindow.cpp:799
 #, kde-format
 msgid "Delete"
 msgstr "Dzēst"
 
-#: mainwindow.cpp:748 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:802 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "Grāmatzīmes"
 
-#: mainwindow.cpp:748 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:802 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "Vēsture"
 
-#: mainwindow.cpp:760
+#: mainwindow.cpp:814
 #, kde-format
 msgid "Rename %1"
 msgstr "Pārdēvēt „%1“"
 
-#: mainwindow.cpp:760
+#: mainwindow.cpp:814
 #, kde-format
 msgid "Rename %1 to"
 msgstr "Pārdēvēt „%1“ par"
 
-#: mainwindow.cpp:767
+#: mainwindow.cpp:821
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "Vai tiešām vēlaties dzēst „%1“?"
 
-#: mainwindow.cpp:767
+#: mainwindow.cpp:821
 #, kde-format
 msgid "Delete %1"
 msgstr "Dzēst „%1“"
 
-#: mainwindow.cpp:791
+#: mainwindow.cpp:845
 #, kde-format
 msgid "Add Bookmark"
 msgstr "Pievienot grāmatzīmi"
 
-#: mainwindow.cpp:792
+#: mainwindow.cpp:846
 #, kde-format
 msgid "Close Tab"
 msgstr "Aizvērt cilni"
 
-#: mainwindow.cpp:911
+#: mainwindow.cpp:965
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr "Minimizēt pilnekrāna logu"
 
-#: mainwindow.cpp:928
+#: mainwindow.cpp:982
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "Piestiprināt rīkjoslu"
 
-#: mainwindow.cpp:1035
+#: mainwindow.cpp:1089
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr "Vai tiešām vēlaties iziet no KDE attālās darbvirsmas klienta?"
 
-#: mainwindow.cpp:1036
+#: mainwindow.cpp:1090
 #, kde-format
 msgid "Confirm Quit"
 msgstr "Aizvēršanas apstiprināšana"
 
-#: mainwindow.cpp:1221
+#: mainwindow.cpp:1275
 #, kde-format
 msgid "Connect to:"
 msgstr "Pieslēgties pie:"
 
-#: mainwindow.cpp:1225
+#: mainwindow.cpp:1279
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr "Rakstiet, lai savienotos ar adresi un filtrētu sarakstu."
 
-#: mainwindow.cpp:1234
+#: mainwindow.cpp:1288
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
@@ -748,17 +767,17 @@ msgstr ""
 "Te ierakstiet IP vai DNS vārdu. Notīriet rindiņu, lai redzētu sarakstu ar "
 "savienojuma metodēm."
 
-#: mainwindow.cpp:1237
+#: mainwindow.cpp:1291
 #, kde-format
 msgid "Goto Address"
 msgstr "Iet uz adresi"
 
-#: mainwindow.cpp:1329
+#: mainwindow.cpp:1383
 #, kde-format
 msgid "Remote Desktops"
 msgstr "Attālās darbvirsmas"
 
-#: mainwindow.cpp:1358
+#: mainwindow.cpp:1412
 #, kde-format
 msgid "Filter"
 msgstr "Filtrs"

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-28 00:45+0000\n"
+"POT-Creation-Date: 2026-09-04 00:43+0000\n"
 "PO-Revision-Date: 2026-02-25 16:08+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -35,7 +35,7 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "teemu.rytilahti@kde-fi.org,,,translator@legisign.org"
 
-#: bookmarkmanager.cpp:37
+#: bookmarkmanager.cpp:125
 #, kde-format
 msgid "History"
 msgstr "Historia"
@@ -216,12 +216,13 @@ msgstr "Asetukset…"
 msgid "Remove"
 msgstr "Poista"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:292 mainwindow.cpp:723
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:295 mainwindow.cpp:761
+#: mainwindow.cpp:777
 #, kde-format
 msgid "Unusable URL"
 msgstr "Kelvoton verkko-osoite"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:723
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:777
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr "Valittua konetta ei voida käsitellä."
@@ -242,8 +243,8 @@ msgstr "Yleisasetukset"
 msgid "Hosts"
 msgstr "Verkkolaitteet"
 
-#: config/preferencesdialog.cpp:28 core/hostpreferences.cpp:213
-#: core/hostpreferences.cpp:217
+#: config/preferencesdialog.cpp:28 core/hostpreferences.cpp:220
+#: core/hostpreferences.cpp:224
 #, kde-format
 msgid "Host Configuration"
 msgstr "Verkkolaitteen asetukset"
@@ -298,7 +299,19 @@ msgid_plural "%1 years ago"
 msgstr[0] "Vuosi sitten"
 msgstr[1] "%1 vuotta sitten"
 
-#: core/hostpreferences.cpp:220
+#: core/hostpreferences.cpp:230
+#, kde-format
+msgctxt "@label:textbox Name of a remote connection"
+msgid "Name:"
+msgstr ""
+
+#: core/hostpreferences.cpp:231
+#, kde-format
+msgctxt "@label:textbox URL of a remote connection"
+msgid "URL:"
+msgstr ""
+
+#: core/hostpreferences.cpp:249
 #, kde-format
 msgid ""
 "Note that settings might only apply when you connect next time to this host."
@@ -306,12 +319,12 @@ msgstr ""
 "Huomaa, että asetukset tulevat käyttöön vasta ottaessasi koneeseen uudelleen "
 "yhteyttä."
 
-#: core/hostpreferences.cpp:249
+#: core/hostpreferences.cpp:278
 #, kde-format
 msgid "Show this dialog again for this host"
 msgstr "Näytä tämä valintaikkuna uudelleen tälle verkkolaitteelle"
 
-#: core/hostpreferences.cpp:253
+#: core/hostpreferences.cpp:282
 #, kde-format
 msgid "Remember password"
 msgstr "Muista salasana"
@@ -507,8 +520,8 @@ msgstr "Osoitteet, joihin yhdistää käynnistyksen jälkeen"
 msgid "KDE Remote Desktop Client started"
 msgstr "KDE-etätyöpöytäasiakas käynnistettiin"
 
-#: mainwindow.cpp:111 mainwindow.cpp:128 mainwindow.cpp:1198
-#: mainwindow.cpp:1293
+#: mainwindow.cpp:111 mainwindow.cpp:128 mainwindow.cpp:1252
+#: mainwindow.cpp:1347
 #, kde-format
 msgid "New Connection"
 msgstr "Uusi yhteys"
@@ -523,12 +536,12 @@ msgstr "Kopioi kuvankaappaus leikepöydälle"
 msgid "Screenshot"
 msgstr "Kuvankaappaus"
 
-#: mainwindow.cpp:141 mainwindow.cpp:536
+#: mainwindow.cpp:141 mainwindow.cpp:539
 #, kde-format
 msgid "Switch to Full Screen Mode"
 msgstr "Vaihda koko näytön tilaan"
 
-#: mainwindow.cpp:142 mainwindow.cpp:537
+#: mainwindow.cpp:142 mainwindow.cpp:540
 #, kde-format
 msgid "Full Screen"
 msgstr "Koko näyttö"
@@ -588,17 +601,17 @@ msgstr "Skaalauskerroin"
 msgid "Bookmarks"
 msgstr "Kirjanmerkit"
 
-#: mainwindow.cpp:265
+#: mainwindow.cpp:268
 #, kde-format
 msgid "Unable to load connection data from the provided file."
 msgstr "Yhteystietojen lataaminen annetusta tiedostosta ei onnistu."
 
-#: mainwindow.cpp:265
+#: mainwindow.cpp:268
 #, kde-format
 msgid "Load failed"
 msgstr "Lataus epäonnistui"
 
-#: mainwindow.cpp:271
+#: mainwindow.cpp:274
 #, kde-format
 msgid ""
 "The entered address does not have the required form.\n"
@@ -607,139 +620,145 @@ msgstr ""
 "Annettu osoite ei ole oikean muotoinen.\n"
 " Syntaksi: [käyttäjä@]kone[:portti]"
 
-#: mainwindow.cpp:271
+#: mainwindow.cpp:274
 #, kde-format
 msgid "Malformed URL"
 msgstr "Kelvoton verkko-osoite"
 
-#: mainwindow.cpp:292
+#: mainwindow.cpp:295
 #, kde-format
 msgid "The entered address cannot be handled."
 msgstr "Annettua osoitetta ei voida käsitellä."
 
-#: mainwindow.cpp:443
+#: mainwindow.cpp:446
 #, kde-format
 msgid "Connecting to %1"
 msgstr "Yhdistetään palvelimeen %1"
 
-#: mainwindow.cpp:447
+#: mainwindow.cpp:450
 #, kde-format
 msgid "Authenticating at %1"
 msgstr "Tunnistaudutaan palvelimeen %1"
 
-#: mainwindow.cpp:451
+#: mainwindow.cpp:454
 #, kde-format
 msgid "Preparing connection to %1"
 msgstr "Valmistellaan yhdistämistä palvelimeen %1"
 
-#: mainwindow.cpp:455
+#: mainwindow.cpp:458
 #, kde-format
 msgid "Connected to %1"
 msgstr "Yhdistetty palvelimeen %1"
 
-#: mainwindow.cpp:580
+#: mainwindow.cpp:583
 #, kde-format
 msgid "Switch to Window Mode"
 msgstr "Vaihda ikkunatilaan"
 
-#: mainwindow.cpp:581
+#: mainwindow.cpp:584
 #, kde-format
 msgid "Window Mode"
 msgstr "Ikkunatila"
 
-#: mainwindow.cpp:742
+#: mainwindow.cpp:761
+#, fuzzy, kde-format
+#| msgid "The entered address cannot be handled."
+msgid "The entered address cannot be handled by this connection type."
+msgstr "Annettua osoitetta ei voida käsitellä."
+
+#: mainwindow.cpp:796
 #, kde-format
 msgid "Connect"
 msgstr "Yhdistä"
 
-#: mainwindow.cpp:743
+#: mainwindow.cpp:797
 #, kde-format
 msgid "Rename"
 msgstr "Muuta nimeä"
 
-#: mainwindow.cpp:744
+#: mainwindow.cpp:798
 #, kde-format
 msgid "Settings"
 msgstr "Asetukset"
 
-#: mainwindow.cpp:745
+#: mainwindow.cpp:799
 #, kde-format
 msgid "Delete"
 msgstr "Poista"
 
-#: mainwindow.cpp:748 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:802 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "Kirjanmerkit"
 
-#: mainwindow.cpp:748 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:802 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "Historia"
 
-#: mainwindow.cpp:760
+#: mainwindow.cpp:814
 #, kde-format
 msgid "Rename %1"
 msgstr "Muuta kohteen %1 nimeä"
 
-#: mainwindow.cpp:760
+#: mainwindow.cpp:814
 #, kde-format
 msgid "Rename %1 to"
 msgstr "Muuta kohteen %1 nimeksi"
 
-#: mainwindow.cpp:767
+#: mainwindow.cpp:821
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "Haluatko varmasti poistaa kohteen %1?"
 
-#: mainwindow.cpp:767
+#: mainwindow.cpp:821
 #, kde-format
 msgid "Delete %1"
 msgstr "Poista %1"
 
-#: mainwindow.cpp:791
+#: mainwindow.cpp:845
 #, kde-format
 msgid "Add Bookmark"
 msgstr "Lisää kirjanmerkki"
 
-#: mainwindow.cpp:792
+#: mainwindow.cpp:846
 #, kde-format
 msgid "Close Tab"
 msgstr "Sulje välilehti"
 
-#: mainwindow.cpp:911
+#: mainwindow.cpp:965
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr "Pienennä koko näytön ikkuna"
 
-#: mainwindow.cpp:928
+#: mainwindow.cpp:982
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "Tahmea työkalurivi"
 
-#: mainwindow.cpp:1035
+#: mainwindow.cpp:1089
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr "Haluatko varmasti lopettaa KDE-etätyöpöytäasiakkaan?"
 
-#: mainwindow.cpp:1036
+#: mainwindow.cpp:1090
 #, kde-format
 msgid "Confirm Quit"
 msgstr "Vahvista lopettaminen"
 
-#: mainwindow.cpp:1221
+#: mainwindow.cpp:1275
 #, kde-format
 msgid "Connect to:"
 msgstr "Yhdistä kohteeseen:"
 
-#: mainwindow.cpp:1225
+#: mainwindow.cpp:1279
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr "Suodata luetteloa alkamalla kirjoittaa tähän osoitetta."
 
-#: mainwindow.cpp:1234
+#: mainwindow.cpp:1288
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
@@ -748,17 +767,17 @@ msgstr ""
 "Kirjoita tähän IP- tai DNS-nimi. Luettelon yhteystavoista saa tyhjentämällä "
 "rivin."
 
-#: mainwindow.cpp:1237
+#: mainwindow.cpp:1291
 #, kde-format
 msgid "Goto Address"
 msgstr "Siirry osoitteeseen"
 
-#: mainwindow.cpp:1329
+#: mainwindow.cpp:1383
 #, kde-format
 msgid "Remote Desktops"
 msgstr "Etätyöpöydät"
 
-#: mainwindow.cpp:1358
+#: mainwindow.cpp:1412
 #, kde-format
 msgid "Filter"
 msgstr "Suodatin"

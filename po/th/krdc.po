@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-28 00:45+0000\n"
+"POT-Creation-Date: 2026-09-04 00:43+0000\n"
 "PO-Revision-Date: 2010-03-04 21:54+0700\n"
 "Last-Translator: Thanomsub Noppaburana <donga.nb@gmail.com>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
@@ -28,7 +28,7 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "donga.nb@gmail.com"
 
-#: bookmarkmanager.cpp:37
+#: bookmarkmanager.cpp:125
 #, kde-format
 msgid "History"
 msgstr "ประวัติการใช้งาน"
@@ -210,12 +210,13 @@ msgstr "ปรับแต่ง..."
 msgid "Remove"
 msgstr "เอาออก"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:292 mainwindow.cpp:723
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:295 mainwindow.cpp:761
+#: mainwindow.cpp:777
 #, kde-format
 msgid "Unusable URL"
 msgstr "ที่อยู่ URL ใช้ไม่ได้"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:723
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:777
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr "ไม่สามารถจัดการเครื่องปลายทางที่เลือกไว้ได้"
@@ -236,8 +237,8 @@ msgstr "ปรับแต่งค่าทั่วไป"
 msgid "Hosts"
 msgstr "เครื่องปลายทางต่าง ๆ"
 
-#: config/preferencesdialog.cpp:28 core/hostpreferences.cpp:213
-#: core/hostpreferences.cpp:217
+#: config/preferencesdialog.cpp:28 core/hostpreferences.cpp:220
+#: core/hostpreferences.cpp:224
 #, kde-format
 msgid "Host Configuration"
 msgstr "ปรับแต่งค่าเครื่องปลายทาง"
@@ -289,19 +290,31 @@ msgid "A year ago"
 msgid_plural "%1 years ago"
 msgstr[0] "%1 ปีก่อน"
 
-#: core/hostpreferences.cpp:220
+#: core/hostpreferences.cpp:230
+#, kde-format
+msgctxt "@label:textbox Name of a remote connection"
+msgid "Name:"
+msgstr ""
+
+#: core/hostpreferences.cpp:231
+#, kde-format
+msgctxt "@label:textbox URL of a remote connection"
+msgid "URL:"
+msgstr ""
+
+#: core/hostpreferences.cpp:249
 #, kde-format
 msgid ""
 "Note that settings might only apply when you connect next time to this host."
 msgstr ""
 "โปรดทราบ การตั้งค่าต่าง ๆ นั้น จะมีผลปรับใช้เมื่อคุณทำการเชื่อมต่อไปยังเครื่องปลายทางในครั้งถัดไป"
 
-#: core/hostpreferences.cpp:249
+#: core/hostpreferences.cpp:278
 #, kde-format
 msgid "Show this dialog again for this host"
 msgstr "แสดงกล่องโต้ตอบนี้อีกครั้งสำหรับเครื่องปลายทางนี้"
 
-#: core/hostpreferences.cpp:253
+#: core/hostpreferences.cpp:282
 #, fuzzy, kde-format
 #| msgid "Remember password (KWallet)"
 msgid "Remember password"
@@ -509,8 +522,8 @@ msgstr "ที่อยู่ URL ที่จะเชื่อมต่อไ�
 msgid "KDE Remote Desktop Client started"
 msgstr "เริ่มโปรแกรมเชื่อมต่อพื้นที่ทำงานทางไกลด้วย KDE แล้ว"
 
-#: mainwindow.cpp:111 mainwindow.cpp:128 mainwindow.cpp:1198
-#: mainwindow.cpp:1293
+#: mainwindow.cpp:111 mainwindow.cpp:128 mainwindow.cpp:1252
+#: mainwindow.cpp:1347
 #, kde-format
 msgid "New Connection"
 msgstr "การเชื่อมต่อใหม่"
@@ -525,12 +538,12 @@ msgstr "จับภาพไปไว้ยังคลิปบอร์ด"
 msgid "Screenshot"
 msgstr "จับภาพหน้าจอ"
 
-#: mainwindow.cpp:141 mainwindow.cpp:536
+#: mainwindow.cpp:141 mainwindow.cpp:539
 #, kde-format
 msgid "Switch to Full Screen Mode"
 msgstr "สลับเป็นโหมดเต็มจอภาพ"
 
-#: mainwindow.cpp:142 mainwindow.cpp:537
+#: mainwindow.cpp:142 mainwindow.cpp:540
 #, kde-format
 msgid "Full Screen"
 msgstr "เต็มจอภาพ"
@@ -590,17 +603,17 @@ msgstr ""
 msgid "Bookmarks"
 msgstr "ที่คั่นหน้า"
 
-#: mainwindow.cpp:265
+#: mainwindow.cpp:268
 #, kde-format
 msgid "Unable to load connection data from the provided file."
 msgstr ""
 
-#: mainwindow.cpp:265
+#: mainwindow.cpp:268
 #, kde-format
 msgid "Load failed"
 msgstr ""
 
-#: mainwindow.cpp:271
+#: mainwindow.cpp:274
 #, fuzzy, kde-format
 #| msgid "The entered address does not have the required form."
 msgid ""
@@ -608,157 +621,163 @@ msgid ""
 " Syntax: [username@]host[:port]"
 msgstr "ค่าที่อยู่ที่ป้อนมาอยู่ในรูปแบบที่ไม่ตรงกับความต้องการ"
 
-#: mainwindow.cpp:271
+#: mainwindow.cpp:274
 #, kde-format
 msgid "Malformed URL"
 msgstr "รูปแบบของที่อยู่ URL ไม่ถูกต้อง"
 
-#: mainwindow.cpp:292
+#: mainwindow.cpp:295
 #, kde-format
 msgid "The entered address cannot be handled."
 msgstr "ไม่สามารถจัดการที่อยู่ที่ป้อนได้"
 
-#: mainwindow.cpp:443
+#: mainwindow.cpp:446
 #, kde-format
 msgid "Connecting to %1"
 msgstr "กำลังเชื่อมต่อไปยัง %1"
 
-#: mainwindow.cpp:447
+#: mainwindow.cpp:450
 #, kde-format
 msgid "Authenticating at %1"
 msgstr "กำลังทำการตรวจสอบสิทธิ์กับ %1"
 
-#: mainwindow.cpp:451
+#: mainwindow.cpp:454
 #, kde-format
 msgid "Preparing connection to %1"
 msgstr "กำลังเตรียมการเชื่อมต่อไปยัง %1"
 
-#: mainwindow.cpp:455
+#: mainwindow.cpp:458
 #, kde-format
 msgid "Connected to %1"
 msgstr "เชื่อมต่อกับ %1 แล้ว"
 
-#: mainwindow.cpp:580
+#: mainwindow.cpp:583
 #, kde-format
 msgid "Switch to Window Mode"
 msgstr "สลับเป็นโหมดหน้าต่าง"
 
-#: mainwindow.cpp:581
+#: mainwindow.cpp:584
 #, kde-format
 msgid "Window Mode"
 msgstr "โหมดหน้าต่าง"
 
-#: mainwindow.cpp:742
+#: mainwindow.cpp:761
+#, fuzzy, kde-format
+#| msgid "The entered address cannot be handled."
+msgid "The entered address cannot be handled by this connection type."
+msgstr "ไม่สามารถจัดการที่อยู่ที่ป้อนได้"
+
+#: mainwindow.cpp:796
 #, kde-format
 msgid "Connect"
 msgstr "เชื่อมต่อ"
 
-#: mainwindow.cpp:743
+#: mainwindow.cpp:797
 #, kde-format
 msgid "Rename"
 msgstr "เปลี่ยนชื่อ"
 
-#: mainwindow.cpp:744
+#: mainwindow.cpp:798
 #, kde-format
 msgid "Settings"
 msgstr "ตั้งค่าต่าง ๆ"
 
-#: mainwindow.cpp:745
+#: mainwindow.cpp:799
 #, kde-format
 msgid "Delete"
 msgstr "ลบ"
 
-#: mainwindow.cpp:748 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:802 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "ที่คั่นหน้า"
 
-#: mainwindow.cpp:748 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:802 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "ประวัติการใช้งาน"
 
-#: mainwindow.cpp:760
+#: mainwindow.cpp:814
 #, kde-format
 msgid "Rename %1"
 msgstr "เปลี่ยนชื่อ %1"
 
-#: mainwindow.cpp:760
+#: mainwindow.cpp:814
 #, kde-format
 msgid "Rename %1 to"
 msgstr "เปลี่ยนชื่อ %1 ไปเป็น"
 
-#: mainwindow.cpp:767
+#: mainwindow.cpp:821
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "คุณแน่ใจหรือว่า ต้องการจะลบ %1 ?"
 
-#: mainwindow.cpp:767
+#: mainwindow.cpp:821
 #, kde-format
 msgid "Delete %1"
 msgstr "ลบ %1"
 
-#: mainwindow.cpp:791
+#: mainwindow.cpp:845
 #, kde-format
 msgid "Add Bookmark"
 msgstr "เพิ่มคั่นหน้า"
 
-#: mainwindow.cpp:792
+#: mainwindow.cpp:846
 #, kde-format
 msgid "Close Tab"
 msgstr "ปิดแท็บ"
 
-#: mainwindow.cpp:911
+#: mainwindow.cpp:965
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr "ย่อหน้าต่างที่แสดงผลเต็มจอภาพ"
 
-#: mainwindow.cpp:928
+#: mainwindow.cpp:982
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "ปักหมุดแถบเครื่องมือ"
 
-#: mainwindow.cpp:1035
+#: mainwindow.cpp:1089
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr "คุณแน่ใจหรือว่า ต้องการจะออกจากโปรแกรมเชื่อมต่อพื้นที่ทำงานทางไกลด้วย KDE ?"
 
-#: mainwindow.cpp:1036
+#: mainwindow.cpp:1090
 #, kde-format
 msgid "Confirm Quit"
 msgstr "ยืนยันการออกจากโปรแกรม"
 
-#: mainwindow.cpp:1221
+#: mainwindow.cpp:1275
 #, kde-format
 msgid "Connect to:"
 msgstr "เชื่อมต่อไปยัง:"
 
-#: mainwindow.cpp:1225
+#: mainwindow.cpp:1279
 #, fuzzy, kde-format
 #| msgid "Type here to filter the connection list."
 msgid "Type here to connect to an address and filter the list."
 msgstr "ป้อนการกรองรายการการเชื่อมต่อได้ที่นี่"
 
-#: mainwindow.cpp:1234
+#: mainwindow.cpp:1288
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
 "methods."
 msgstr ""
 
-#: mainwindow.cpp:1237
+#: mainwindow.cpp:1291
 #, kde-format
 msgid "Goto Address"
 msgstr "ไปยังที่อยู่"
 
-#: mainwindow.cpp:1329
+#: mainwindow.cpp:1383
 #, kde-format
 msgid "Remote Desktops"
 msgstr "พื้นที่ทำงานทางไกล"
 
-#: mainwindow.cpp:1358
+#: mainwindow.cpp:1412
 #, kde-format
 msgid "Filter"
 msgstr "ตัวกรอง"
