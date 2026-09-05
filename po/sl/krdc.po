@@ -1,6 +1,6 @@
 # Slovenian translation of krdc
 # Copyright (C) 2002, 2003, 2004, 2005, 2006, 2007 Free Software Foundation, Inc.
-# $Id: krdc.po 1745488 2026-09-04 01:29:46Z scripty $
+# $Id: krdc.po 1745577 2026-09-05 01:30:49Z scripty $
 # $Source$
 #
 # Andrej Vernekar <andrej.vernekar@moj.net>, 2002, 2007, 2008.
@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-04 00:43+0000\n"
-"PO-Revision-Date: 2026-08-28 07:08+0200\n"
+"PO-Revision-Date: 2026-09-04 09:06+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -316,13 +316,13 @@ msgstr[3] "Pred %1 leti"
 #, kde-format
 msgctxt "@label:textbox Name of a remote connection"
 msgid "Name:"
-msgstr ""
+msgstr "Ime:"
 
 #: core/hostpreferences.cpp:231
 #, kde-format
 msgctxt "@label:textbox URL of a remote connection"
 msgid "URL:"
-msgstr ""
+msgstr "URL:"
 
 #: core/hostpreferences.cpp:249
 #, kde-format
@@ -672,10 +672,9 @@ msgid "Window Mode"
 msgstr "Okenski način"
 
 #: mainwindow.cpp:761
-#, fuzzy, kde-format
-#| msgid "The entered address cannot be handled."
+#, kde-format
 msgid "The entered address cannot be handled by this connection type."
-msgstr "Vpisan naslov ne more biti obravnavan."
+msgstr "Vnesenega naslova ni mogoče obdelati s to vrsto povezave. "
 
 #: mainwindow.cpp:796
 #, kde-format
