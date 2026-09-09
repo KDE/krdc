@@ -3,8 +3,10 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
+#include <QBuffer>
 #include <QDir>
 #include <QFileInfo>
+#include <QImage>
 #include <QMimeData>
 #include <QUrl>
 #include <QtEndian>
@@ -14,6 +16,7 @@
 #include "rdpview.h"
 #include <freerdp/utils/cliprdr_utils.h>
 #include <freerdp/version.h>
+#include <winpr/image.h>
 
 #include "krdc_debug.h"
 
@@ -33,6 +36,267 @@ RdpClipboard *RdpClipboard::from(CliprdrClientContext *cliprdr)
 {
     return reinterpret_cast<RdpClipboard *>(cliprdr_file_context_get_context(reinterpret_cast<CliprdrFileContext *>(cliprdr->custom)));
 }
+
+namespace
+{
+// Qt's Format_RGB32 leaves the alpha byte undefined; a zero alpha byte makes
+// several Windows decoders treat the bitmap as fully transparent.
+QImage toOpaqueRgb32(const QImage &image)
+{
+    QImage converted = image.convertToFormat(QImage::Format_RGB32);
+    if (converted.isNull())
+        return converted;
+    for (int y = 0; y < converted.height(); ++y) {
+        uchar *line = converted.scanLine(y);
+        for (int x = 0; x < converted.width(); ++x)
+            line[x * 4 + 3] = 0xFF;
+    }
+    return converted;
+}
+
+// Decode a CF_DIB / CF_DIBV5 payload (40 or 124 byte header, optionally
+// BI_JPEG / BI_PNG compressed) into a QImage.
+QImage dibToQImage(const BYTE *data, UINT32 size)
+{
+    if (size < sizeof(WINPR_BITMAP_INFO_HEADER))
+        return QImage();
+
+    const auto *bmi = reinterpret_cast<const WINPR_BITMAP_INFO_HEADER *>(data);
+
+    if (bmi->biCompression == BI_JPEG || bmi->biCompression == BI_PNG) {
+        UINT32 headerSize = bmi->biSize;
+        if (headerSize > size)
+            return QImage();
+        return QImage::fromData(data + headerSize, size - headerSize);
+    }
+
+    WINPR_BITMAP_FILE_HEADER bmpHeader;
+    bmpHeader.bfType[0] = 'B';
+    bmpHeader.bfType[1] = 'M';
+
+    UINT32 pixelDataSize = bmi->biSizeImage;
+    if (pixelDataSize == 0 && bmi->biCompression == BI_RGB) {
+        UINT32 rowSize = ((bmi->biWidth * bmi->biBitCount + 31) / 32) * 4;
+        pixelDataSize = rowSize * abs(static_cast<INT32>(bmi->biHeight));
+    }
+
+    UINT32 colorTableSize = 0;
+    if (bmi->biBitCount == 1)
+        colorTableSize = 2 * sizeof(UINT32);
+    else if (bmi->biBitCount == 4)
+        colorTableSize = 16 * sizeof(UINT32);
+    else if (bmi->biBitCount == 8)
+        colorTableSize = 256 * sizeof(UINT32);
+
+    bmpHeader.bfOffBits = sizeof(WINPR_BITMAP_FILE_HEADER) + bmi->biSize + colorTableSize;
+    bmpHeader.bfSize = bmpHeader.bfOffBits + pixelDataSize;
+    bmpHeader.bfReserved1 = 0;
+    bmpHeader.bfReserved2 = 0;
+
+    QByteArray bmp;
+    bmp.append(reinterpret_cast<const char *>(&bmpHeader), sizeof(bmpHeader));
+    UINT32 copySize = std::min(size, UINT32(bmpHeader.bfSize - sizeof(bmpHeader)));
+    bmp.append(reinterpret_cast<const char *>(data), copySize);
+
+    return QImage::fromData(bmp, "BMP");
+}
+
+// Encode a QImage as a 32bpp bottom-up CF_DIB (40 byte header).
+QByteArray qImageToDib(const QImage &image)
+{
+    QImage converted = toOpaqueRgb32(image);
+    if (converted.isNull())
+        return QByteArray();
+
+    WINPR_BITMAP_INFO_HEADER bi;
+    memset(&bi, 0, sizeof(bi));
+    bi.biSize = sizeof(WINPR_BITMAP_INFO_HEADER);
+    bi.biWidth = converted.width();
+    bi.biHeight = converted.height();
+    bi.biPlanes = 1;
+    bi.biBitCount = 32;
+    bi.biCompression = BI_RGB;
+    bi.biSizeImage = converted.width() * converted.height() * 4;
+
+    QByteArray result;
+    result.resize(sizeof(WINPR_BITMAP_INFO_HEADER) + bi.biSizeImage);
+    memcpy(result.data(), &bi, sizeof(bi));
+
+    BYTE *pixelDest = reinterpret_cast<BYTE *>(result.data()) + sizeof(bi);
+    for (int y = converted.height() - 1; y >= 0; y--) {
+        const BYTE *srcRow = converted.constScanLine(y);
+        memcpy(pixelDest, srcRow, converted.width() * 4);
+        pixelDest += converted.width() * 4;
+    }
+
+    return result;
+}
+
+// Encode a QImage as a CF_DIBV5 payload (124 byte BITMAPV5HEADER). DIBV5 is
+// the canonical image clipboard format on modern Windows; legacy apps request
+// CF_DIB, which we serve through a synthesizer.
+QByteArray qImageToDibV5(const QImage &image)
+{
+    QImage converted = toOpaqueRgb32(image);
+    if (converted.isNull())
+        return QByteArray();
+
+    const UINT32 headerSize = 124;
+    const UINT32 pixelDataSize = converted.width() * converted.height() * 4;
+
+    QByteArray result;
+    result.resize(headerSize + pixelDataSize);
+    memset(result.data(), 0, headerSize);
+
+    BYTE *h = reinterpret_cast<BYTE *>(result.data());
+    memcpy(h, &headerSize, sizeof(UINT32)); // bV5Size
+    INT32 width = converted.width();
+    INT32 height = converted.height(); // positive = bottom-up, matches qImageToDib
+    memcpy(h + 4, &width, sizeof(INT32)); // bV5Width
+    memcpy(h + 8, &height, sizeof(INT32)); // bV5Height
+    UINT16 planes = 1;
+    UINT16 bitCount = 32;
+    memcpy(h + 12, &planes, sizeof(UINT16)); // bV5Planes
+    memcpy(h + 14, &bitCount, sizeof(UINT16)); // bV5BitCount
+    UINT32 compression = BI_RGB;
+    memcpy(h + 16, &compression, sizeof(UINT32)); // bV5Compression
+    memcpy(h + 20, &pixelDataSize, sizeof(UINT32)); // bV5SizeImage
+
+    BYTE *pixelDest = h + headerSize;
+    for (int y = converted.height() - 1; y >= 0; y--) {
+        const BYTE *srcRow = converted.constScanLine(y);
+        memcpy(pixelDest, srcRow, converted.width() * 4);
+        pixelDest += converted.width() * 4;
+    }
+
+    return result;
+}
+
+// Wrap a HTML fragment in the CF_HTML clipboard format (the version Windows
+// rich-text applications expect).
+QByteArray encodeHtmlClipboardFormat(const QString &html)
+{
+    QByteArray fragment = html.toUtf8();
+    const char headerFmt[] = "Version:0.9\n"
+                             "StartHTML:%010u\n"
+                             "EndHTML:%010u\n"
+                             "StartFragment:%010u\n"
+                             "EndFragment:%010u\n"
+                             "StartSelection:%010u\n"
+                             "EndSelection:%010u\n";
+
+    const char *prefix = "<html><body>\n<!--StartFragment-->";
+    const char *suffix = "<!--EndFragment-->\n</body></html>";
+
+    char header[256];
+    snprintf(header, sizeof(header), headerFmt, 0, 0, 0, 0, 0, 0);
+    UINT32 headerLen = strlen(header);
+
+    UINT32 startHtml = headerLen;
+    UINT32 startFragment = headerLen + strlen(prefix);
+    UINT32 endFragment = startFragment + fragment.size();
+    UINT32 endHtml = endFragment + strlen(suffix);
+
+    snprintf(header, sizeof(header), headerFmt, startHtml, endHtml, startFragment, endFragment, startFragment, endFragment);
+
+    QByteArray result;
+    result.resize(endHtml);
+    memcpy(result.data(), header, headerLen);
+    UINT32 offset = headerLen;
+    memcpy(result.data() + offset, prefix, strlen(prefix));
+    offset += strlen(prefix);
+    memcpy(result.data() + offset, fragment.data(), fragment.size());
+    offset += fragment.size();
+    memcpy(result.data() + offset, suffix, strlen(suffix));
+
+    return result;
+}
+
+QString decodeHtmlClipboardFormat(const BYTE *data, UINT32 size)
+{
+    QByteArray buf(reinterpret_cast<const char *>(data), size);
+    int startFragment = -1;
+    int endFragment = -1;
+
+    for (const auto &line : buf.split('\n')) {
+        if (line.startsWith("StartFragment:")) {
+            startFragment = line.mid(14).trimmed().toInt();
+        } else if (line.startsWith("EndFragment:")) {
+            endFragment = line.mid(12).trimmed().toInt();
+        }
+    }
+
+    if (startFragment >= 0 && endFragment >= startFragment && endFragment <= buf.size()) {
+        return QString::fromUtf8(buf.mid(startFragment, endFragment - startFragment));
+    }
+
+    int bodyStart = buf.indexOf("<body");
+    if (bodyStart < 0)
+        bodyStart = buf.indexOf("<html");
+    if (bodyStart >= 0)
+        return QString::fromUtf8(buf.mid(bodyStart));
+
+    return QString::fromUtf8(buf);
+}
+
+// Convert a CF_DIBV5 payload to CF_DIB. WinPR's built-in DIB<->DIBV5
+// synthesizers are only compiled in when WINPR_UTILS_IMAGE_DIBv5 is defined,
+// so register Qt-backed ones; ClipboardRegisterSynthesizer overwrites an
+// existing entry, which keeps this deterministic for any libwinpr build.
+void *synthesizeDibFromDibV5(wClipboard *clipboard, UINT32 formatId, const void *data, UINT32 *pSize)
+{
+    Q_UNUSED(clipboard);
+    Q_UNUSED(formatId);
+    if (!data || !pSize)
+        return nullptr;
+
+    QByteArray dib = qImageToDib(dibToQImage(static_cast<const BYTE *>(data), *pSize));
+    if (dib.isEmpty()) {
+        *pSize = 0;
+        return nullptr;
+    }
+
+    void *result = malloc(dib.size());
+    if (!result) {
+        *pSize = 0;
+        return nullptr;
+    }
+    memcpy(result, dib.constData(), dib.size());
+    *pSize = UINT32(dib.size());
+    return result;
+}
+
+void *synthesizePngFromDibV5(wClipboard *clipboard, UINT32 formatId, const void *data, UINT32 *pSize)
+{
+    Q_UNUSED(clipboard);
+    Q_UNUSED(formatId);
+    if (!data || !pSize)
+        return nullptr;
+
+    QImage image = dibToQImage(static_cast<const BYTE *>(data), *pSize);
+    if (image.isNull()) {
+        *pSize = 0;
+        return nullptr;
+    }
+
+    QByteArray png;
+    QBuffer buffer(&png);
+    buffer.open(QIODevice::WriteOnly);
+    if (!image.save(&buffer, "PNG") || png.isEmpty()) {
+        *pSize = 0;
+        return nullptr;
+    }
+
+    void *result = malloc(png.size());
+    if (!result) {
+        *pSize = 0;
+        return nullptr;
+    }
+    memcpy(result, png.constData(), png.size());
+    *pSize = UINT32(png.size());
+    return result;
+}
+} // namespace
 
 UINT RdpClipboard::onSendClientFormatList(CliprdrClientContext *cliprdr)
 {
@@ -229,12 +493,37 @@ UINT RdpClipboard::onServerFormatList(CliprdrClientContext *cliprdr, const CLIPR
             if ((rc = onSendClientFormatDataRequest(cliprdr, CF_UNICODETEXT)) != CHANNEL_RC_OK)
                 return rc;
 
-            break;
+            return CHANNEL_RC_OK;
         } else if (format->formatId == CF_TEXT) {
             if ((rc = onSendClientFormatDataRequest(cliprdr, CF_TEXT)) != CHANNEL_RC_OK)
                 return rc;
 
-            break;
+            return CHANNEL_RC_OK;
+        }
+    }
+
+    // No files or text advertised: request an image (or rich HTML) format.
+    // Windows applications announce a subset of CF_DIBV5/CF_DIB/"PNG"/HTML
+    // depending on the source, so walk the candidates.
+    for (auto format : kclip->m_serverFormats) {
+        if (format->formatId == CF_DIBV5 || format->formatId == CF_DIB) {
+            if ((rc = onSendClientFormatDataRequest(cliprdr, format->formatId)) != CHANNEL_RC_OK)
+                return rc;
+            return CHANNEL_RC_OK;
+        }
+    }
+    for (auto format : kclip->m_serverFormats) {
+        if (format->formatName && qstrcmp(format->formatName, "PNG") == 0) {
+            if ((rc = onSendClientFormatDataRequest(cliprdr, format->formatId)) != CHANNEL_RC_OK)
+                return rc;
+            return CHANNEL_RC_OK;
+        }
+    }
+    for (auto format : kclip->m_serverFormats) {
+        if (format->formatName && qstrcmp(format->formatName, "HTML Format") == 0) {
+            if ((rc = onSendClientFormatDataRequest(cliprdr, format->formatId)) != CHANNEL_RC_OK)
+                return rc;
+            return CHANNEL_RC_OK;
         }
     }
 
@@ -335,13 +624,40 @@ UINT RdpClipboard::onServerFormatDataResponse(CliprdrClientContext *cliprdr, con
         return ERROR_INTERNAL_ERROR;
     }
 
+    const BYTE *rawData = reinterpret_cast<const BYTE *>(formatDataResponse->requestedFormatData);
+
     if ((formatId == CF_TEXT) || (formatId == CF_UNICODETEXT)) {
         auto data = reinterpret_cast<char *>(ClipboardGetData(kclip->m_clipboard, CF_TEXT, &size));
-        size = strnlen(data, size);
+        if (!data) {
+            return CHANNEL_RC_OK;
+        }
+        const size_t textSize = strnlen(data, size);
 
         QMimeData *mimeData = new QMimeData;
-        mimeData->setText(QString::fromUtf8(data, size));
+        mimeData->setText(QString::fromUtf8(data, int(textSize)));
+        free(data);
         kclip->m_krdp->session->rdpView()->remoteClipboardChanged(mimeData);
+    } else if ((formatId == CF_DIB) || (formatId == CF_DIBV5)) {
+        QImage image = dibToQImage(rawData, size);
+        if (!image.isNull()) {
+            QMimeData *mimeData = new QMimeData;
+            mimeData->setImageData(image);
+            kclip->m_krdp->session->rdpView()->remoteClipboardChanged(mimeData);
+        }
+    } else if (format->formatName && qstrcmp(format->formatName, "PNG") == 0) {
+        QImage image = QImage::fromData(rawData, int(size), "PNG");
+        if (!image.isNull()) {
+            QMimeData *mimeData = new QMimeData;
+            mimeData->setImageData(image);
+            kclip->m_krdp->session->rdpView()->remoteClipboardChanged(mimeData);
+        }
+    } else if (format->formatName && qstrcmp(format->formatName, "HTML Format") == 0) {
+        QString html = decodeHtmlClipboardFormat(rawData, size);
+        if (!html.isEmpty()) {
+            QMimeData *mimeData = new QMimeData;
+            mimeData->setHtml(html);
+            kclip->m_krdp->session->rdpView()->remoteClipboardChanged(mimeData);
+        }
     }
 
     return CHANNEL_RC_OK;
@@ -452,6 +768,16 @@ RdpClipboard::RdpClipboard(RdpContext *krdp, CliprdrClientContext *cliprdr)
 {
     m_krdp = krdp;
     m_clipboard = ClipboardCreate();
+
+    // CF_DIBV5 is our canonical image payload. Register Qt-backed
+    // synthesizers so a single stored DIBV5 also answers CF_DIB and "PNG"
+    // requests regardless of how libwinpr was compiled (see comments above).
+    const UINT32 pngFormat = ClipboardRegisterFormat(m_clipboard, "PNG");
+    ClipboardRegisterSynthesizer(m_clipboard, CF_DIBV5, CF_DIB, synthesizeDibFromDibV5);
+    if (pngFormat) {
+        ClipboardRegisterSynthesizer(m_clipboard, CF_DIBV5, pngFormat, synthesizePngFromDibV5);
+    }
+
     m_cliprdr = cliprdr;
     cliprdr->MonitorReady = onMonitorReady;
     cliprdr->ServerCapabilities = onServerCapabilities;
@@ -520,6 +846,30 @@ bool RdpClipboard::sendClipboard(const QMimeData *data)
 
         onSendClientFormatList(m_cliprdr);
         return true;
+    }
+
+    // Pure-HTML copies (no plain-text rendition) go out as CF_HTML. The
+    // clipboard only holds one payload, so text above wins when both exist.
+    if (data->hasHtml()) {
+        QByteArray cfHtml = encodeHtmlClipboardFormat(data->html());
+        UINT32 htmlFormat = ClipboardGetFormatId(m_clipboard, "HTML Format");
+        if (!cfHtml.isEmpty() && htmlFormat && ClipboardSetData(m_clipboard, htmlFormat, cfHtml.constData(), UINT32(cfHtml.size()))) {
+            onSendClientFormatList(m_cliprdr);
+            return true;
+        }
+    }
+
+    // Images (e.g. screenshots) go out as CF_DIBV5; CF_DIB and "PNG"
+    // requests are answered by the synthesizers registered in the ctor.
+    if (data->hasImage()) {
+        const QImage image = qvariant_cast<QImage>(data->imageData());
+        if (!image.isNull()) {
+            QByteArray dibV5 = qImageToDibV5(image);
+            if (!dibV5.isEmpty() && ClipboardSetData(m_clipboard, CF_DIBV5, dibV5.constData(), UINT32(dibV5.size()))) {
+                onSendClientFormatList(m_cliprdr);
+                return true;
+            }
+        }
     }
 
     return false;
