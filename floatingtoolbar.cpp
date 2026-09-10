@@ -164,6 +164,17 @@ void FloatingToolBar::hide()
     if (underMouse())
         return;
 
+    // Delay the hide() if an open popup is parented to this toolbar
+    const auto topLevels = QApplication::topLevelWidgets();
+    for (QWidget *w : topLevels) {
+        if (w != this && w->isVisible() && w->parentWidget() && isAncestorOf(w->parentWidget())) {
+            if (!d->sticky) {
+                d->autoHideTimer->start(autoHideTimeout);
+            }
+            return;
+        }
+    }
+
     if (d->visible) {
         QPoint diff;
         switch (d->anchorSide) {
