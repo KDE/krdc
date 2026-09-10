@@ -955,35 +955,31 @@ void MainWindow::showRemoteViewToolbar()
         connect(m_tabWidget, SIGNAL(currentChanged(int)), sessionComboBox, SLOT(setCurrentIndex(int)));
         m_toolBar->addWidget(sessionComboBox);
 
-        QToolBar *buttonBox = new QToolBar(m_toolBar);
-
-        buttonBox->addAction(actionCollection()->action(QStringLiteral("new_connection")));
-        buttonBox->addAction(actionCollection()->action(QStringLiteral("switch_fullscreen")));
+        m_toolBar->addAction(actionCollection()->action(QStringLiteral("new_connection")));
+        m_toolBar->addAction(actionCollection()->action(QStringLiteral("switch_fullscreen")));
 
         QAction *minimizeAction = new QAction(m_toolBar);
         minimizeAction->setIcon(QIcon::fromTheme(QStringLiteral("go-down")));
         minimizeAction->setText(i18n("Minimize Full Screen Window"));
         connect(minimizeAction, SIGNAL(triggered()), this, SLOT(minimizeFullScreen()));
-        buttonBox->addAction(minimizeAction);
+        m_toolBar->addAction(minimizeAction);
 
-        buttonBox->addAction(actionCollection()->action(QStringLiteral("take_screenshot")));
-        buttonBox->addAction(actionCollection()->action(QStringLiteral("view_only")));
-        buttonBox->addAction(actionCollection()->action(QStringLiteral("clipboard_sharing")));
-        buttonBox->addAction(actionCollection()->action(QStringLiteral("show_local_cursor")));
-        buttonBox->addAction(actionCollection()->action(QStringLiteral("grab_all_keys")));
-        buttonBox->addAction(actionCollection()->action(QStringLiteral("scale")));
-        buttonBox->addAction(actionCollection()->action(QStringLiteral("scale_factor")));
-        buttonBox->addAction(actionCollection()->action(QStringLiteral("disconnect")));
-        buttonBox->addAction(actionCollection()->action(QStringLiteral("file_quit")));
+        m_toolBar->addAction(actionCollection()->action(QStringLiteral("take_screenshot")));
+        m_toolBar->addAction(actionCollection()->action(QStringLiteral("view_only")));
+        m_toolBar->addAction(actionCollection()->action(QStringLiteral("clipboard_sharing")));
+        m_toolBar->addAction(actionCollection()->action(QStringLiteral("show_local_cursor")));
+        m_toolBar->addAction(actionCollection()->action(QStringLiteral("grab_all_keys")));
+        m_toolBar->addAction(actionCollection()->action(QStringLiteral("scale")));
+        m_toolBar->addAction(actionCollection()->action(QStringLiteral("scale_factor")));
+        m_toolBar->addAction(actionCollection()->action(QStringLiteral("disconnect")));
+        m_toolBar->addAction(actionCollection()->action(QStringLiteral("file_quit")));
 
         QAction *stickToolBarAction = new QAction(m_toolBar);
         stickToolBarAction->setCheckable(true);
         stickToolBarAction->setIcon(QIcon::fromTheme(QStringLiteral("object-locked")));
         stickToolBarAction->setText(i18n("Stick Toolbar"));
         connect(stickToolBarAction, SIGNAL(triggered(bool)), m_toolBar, SLOT(setSticky(bool)));
-        buttonBox->addAction(stickToolBarAction);
-
-        m_toolBar->addWidget(buttonBox);
+        m_toolBar->addAction(stickToolBarAction);
     }
 }
 
