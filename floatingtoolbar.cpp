@@ -199,6 +199,18 @@ void FloatingToolBar::hide()
     }
 }
 
+bool FloatingToolBar::event(QEvent *e)
+{
+    switch (e->type()) {
+    case QEvent::MouseButtonPress:
+    case QEvent::MouseMove:
+    case QEvent::MouseButtonRelease:
+        return QWidget::event(e);
+    default:
+        return QToolBar::event(e);
+    }
+}
+
 bool FloatingToolBar::eventFilter(QObject *obj, QEvent *e)
 {
     if (obj == d->anchorWidget && e->type() == QEvent::Resize) {

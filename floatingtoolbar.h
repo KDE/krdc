@@ -45,6 +45,7 @@ public Q_SLOTS:
     void hideAndDestroy();
 
 protected:
+    bool event(QEvent *e) override;
     bool eventFilter(QObject *o, QEvent *e) override;
     void paintEvent(QPaintEvent *) override;
     void mousePressEvent(QMouseEvent *e) override;
