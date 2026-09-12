@@ -478,6 +478,7 @@ protected:
     QUrl m_url;
     qreal m_factor;
     QClipboard *m_clipboard;
+    quint64 m_clipboardSourceId;
     QMap<int, ModifierKey> m_modifiers;
     KModifierKeyInfo *m_modifierKeyInfo;
 

@@ -12,15 +12,21 @@
 #include <KModifierKeyInfo>
 #include <QApplication>
 #include <QBitmap>
+#include <QCryptographicHash>
 #include <QEvent>
+#include <QImage>
 #include <QKeyEvent>
 #include <QMimeData>
 #include <QMouseEvent>
 #include <QStandardPaths>
+#include <QThread>
 #include <QTimer>
 #include <QWheelEvent>
 
 #include <qt6keychain/keychain.h>
+
+#include <atomic>
+#include <memory>
 
 #ifdef HAVE_WAYLAND
 #include "waylandinhibition_p.h"
@@ -33,7 +39,30 @@
 
 #include "hostpreferences.h"
 
+// Tags clipboard data krdc sets with the RemoteView that received it
+static constexpr const char s_clipboardSourceMime[] = "application/x-krdc-source-view";
+
 static const QString KEYCHAIN_SERVICE_NAME = QLatin1String("KRDC");
+
+// Digest of the shareable content of clipboard data, ignoring krdc's tags
+static QByteArray clipboardFingerprint(const QMimeData *data)
+{
+    QCryptographicHash hash(QCryptographicHash::Sha1);
+    if (data->hasText()) {
+        // Line endings differ between platforms; do not let them look like new content
+        hash.addData(data->text().remove(QLatin1Char('\r')).toUtf8());
+    }
+    hash.addData(QByteArrayView("\0html\0", 7));
+    if (data->hasHtml()) {
+        hash.addData(data->html().toUtf8());
+    }
+    hash.addData(QByteArrayView("\0image\0", 8));
+    if (data->hasImage()) {
+        const QImage image = qvariant_cast<QImage>(data->imageData());
+        hash.addData(QByteArrayView(reinterpret_cast<const char *>(image.constBits()), image.sizeInBytes()));
+    }
+    return hash.result();
+}
 
 RemoteView::RemoteView(QWidget *parent)
     : QWidget(parent)
@@ -55,6 +84,9 @@ RemoteView::RemoteView(QWidget *parent)
     installEventFilter(this);
     setMouseTracking(true);
     setFocusPolicy(Qt::StrongFocus);
+
+    static std::atomic<quint64> clipboardSourceCounter{0};
+    m_clipboardSourceId = ++clipboardSourceCounter;
 
     m_clipboard = QApplication::clipboard();
     connect(m_clipboard, &QClipboard::dataChanged, this, &RemoteView::localClipboardChanged);
@@ -485,22 +517,68 @@ void RemoteView::localClipboardChanged()
         return;
     }
 
-    if (m_clipboard->ownsClipboard() || m_viewOnly) {
+    if (m_viewOnly) {
         return;
     }
 
     const QMimeData *data = m_clipboard->mimeData(QClipboard::Clipboard);
-    if (data) {
-        handleLocalClipboardChanged(data);
+    if (!data) {
+        return;
     }
+
+    if (m_clipboard->ownsClipboard()) {
+        // Set by krdc: relay data from other views, but never echo our own
+        const QByteArray source = data->data(QLatin1String(s_clipboardSourceMime));
+        if (source.isEmpty() || source.toULongLong() == m_clipboardSourceId) {
+            return;
+        }
+        // Files from another view live on that view's FreeRDP FUSE mount,
+        // whose path is fixed per process, so they cannot be relayed. Clear
+        // our remote clipboard instead of leaving whatever we relayed last,
+        // so a paste there produces nothing rather than stale content.
+        if (data->hasUrls()) {
+            QMimeData empty;
+            empty.setText(QString());
+            handleLocalClipboardChanged(&empty);
+            return;
+        }
+    }
+
+    handleLocalClipboardChanged(data);
 }
 
 void RemoteView::remoteClipboardChanged(QMimeData *data)
 {
+    // Backends may deliver clipboard data from their network thread
+    if (QThread::currentThread() != thread()) {
+        // Own the data in the functor so it is freed if the view is
+        // destroyed before the queued call runs
+        QMetaObject::invokeMethod(
+            this,
+            [this, owned = std::unique_ptr<QMimeData>(data)]() mutable {
+                remoteClipboardChanged(owned.release());
+            },
+            Qt::QueuedConnection);
+        return;
+    }
+
     if (!hostPreferences()->clipboardSharing() || m_viewOnly) {
         delete data;
         return;
     }
+
+    // Some servers announce back what the client just sent them. Dropping
+    // data that matches what krdc already holds keeps two sessions from
+    // relaying the same content to each other forever.
+    if (m_clipboard->ownsClipboard()) {
+        const QMimeData *current = m_clipboard->mimeData(QClipboard::Clipboard);
+        if (current && clipboardFingerprint(current) == clipboardFingerprint(data)) {
+            delete data;
+            return;
+        }
+    }
+
+    data->setData(QLatin1String(s_clipboardSourceMime), QByteArray::number(m_clipboardSourceId));
     m_clipboard->setMimeData(data, QClipboard::Clipboard);
 }
 
