@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-04 00:43+0000\n"
-"PO-Revision-Date: 2023-12-06 19:17+0100\n"
-"Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
+"PO-Revision-Date: 2026-09-14 20:10+0200\n"
+"Last-Translator: Roman Paholík <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
@@ -311,13 +311,13 @@ msgstr[2] "Pred %1 rokmi"
 #, kde-format
 msgctxt "@label:textbox Name of a remote connection"
 msgid "Name:"
-msgstr ""
+msgstr "Názov:"
 
 #: core/hostpreferences.cpp:231
 #, kde-format
 msgctxt "@label:textbox URL of a remote connection"
 msgid "URL:"
-msgstr ""
+msgstr "URL:"
 
 #: core/hostpreferences.cpp:249
 #, kde-format
@@ -667,10 +667,9 @@ msgid "Window Mode"
 msgstr "Režim okna"
 
 #: mainwindow.cpp:761
-#, fuzzy, kde-format
-#| msgid "The entered address cannot be handled."
+#, kde-format
 msgid "The entered address cannot be handled by this connection type."
-msgstr "Zadaná adresa sa nedá spracovať."
+msgstr "Zadanú adresu nedokáže tento typ pripojenia spracovať."
 
 #: mainwindow.cpp:796
 #, kde-format
@@ -851,10 +850,9 @@ msgstr "Vlastné rozlíšenie (...)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:86
-#, fuzzy, kde-format
-#| msgid "Current Screen Resolution"
+#, kde-format
 msgid "Use All Screens Resolution"
-msgstr "Aktuálne rozlíšenie obrazovky"
+msgstr "Použiť rozlíšenie všetkých obrazoviek"
 
 #. i18n: ectx: property (text), widget (QLabel, widthLabel)
 #: rdp/rdppreferences.ui:99 vnc/vncpreferences.ui:136
@@ -1665,7 +1663,7 @@ msgstr "Logon Error"
 #, kde-format
 msgctxt "@title:window"
 msgid "KRDC – Screen %1"
-msgstr ""
+msgstr "KRDC – obrazovka %1"
 
 #: rdp/rdpviewfactory.cpp:26
 #, kde-format
