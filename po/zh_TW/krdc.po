@@ -13,15 +13,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-04 00:43+0000\n"
-"PO-Revision-Date: 2026-03-16 16:29+0900\n"
+"POT-Creation-Date: 2026-09-16 00:45+0000\n"
+"PO-Revision-Date: 2026-09-15 15:35+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 26.03.70\n"
+"X-Generator: Lokalize 26.11.70\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #, kde-format
@@ -293,13 +293,13 @@ msgstr[0] "%1 年前"
 #, kde-format
 msgctxt "@label:textbox Name of a remote connection"
 msgid "Name:"
-msgstr ""
+msgstr "名稱："
 
 #: core/hostpreferences.cpp:231
 #, kde-format
 msgctxt "@label:textbox URL of a remote connection"
 msgid "URL:"
-msgstr ""
+msgstr "網址："
 
 #: core/hostpreferences.cpp:249
 #, kde-format
@@ -323,12 +323,12 @@ msgstr "記住密碼"
 msgid "Sessions"
 msgstr "工作階段"
 
-#: core/remoteview.cpp:571
+#: core/remoteview.cpp:649
 #, kde-format
 msgid "Please enter the SSH password."
 msgstr "請輸入 SSH 密碼。"
 
-#: core/remoteview.cpp:589
+#: core/remoteview.cpp:667
 #, kde-format
 msgid "SSH Tunnel failure"
 msgstr "SSH Tunnel 錯誤"
@@ -504,8 +504,8 @@ msgstr "啟動時要連線的網址"
 msgid "KDE Remote Desktop Client started"
 msgstr "KDE 遠端桌面連線已啟動"
 
-#: mainwindow.cpp:111 mainwindow.cpp:128 mainwindow.cpp:1252
-#: mainwindow.cpp:1347
+#: mainwindow.cpp:111 mainwindow.cpp:128 mainwindow.cpp:1248
+#: mainwindow.cpp:1343
 #, kde-format
 msgid "New Connection"
 msgstr "新增連線"
@@ -645,10 +645,9 @@ msgid "Window Mode"
 msgstr "視窗模式"
 
 #: mainwindow.cpp:761
-#, fuzzy, kde-format
-#| msgid "The entered address cannot be handled."
+#, kde-format
 msgid "The entered address cannot be handled by this connection type."
-msgstr "無法處理輸入的位址。"
+msgstr "輸入的位址無法被此連線類型所處理。"
 
 #: mainwindow.cpp:796
 #, kde-format
@@ -712,54 +711,54 @@ msgstr "新增書籤"
 msgid "Close Tab"
 msgstr "關閉分頁"
 
-#: mainwindow.cpp:965
+#: mainwindow.cpp:963
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr "將全螢幕視窗最小化"
 
-#: mainwindow.cpp:982
+#: mainwindow.cpp:980
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "嵌入工具列"
 
-#: mainwindow.cpp:1089
+#: mainwindow.cpp:1085
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr "您確定要關閉 KRDC 嗎？"
 
-#: mainwindow.cpp:1090
+#: mainwindow.cpp:1086
 #, kde-format
 msgid "Confirm Quit"
 msgstr "確認離開"
 
-#: mainwindow.cpp:1275
+#: mainwindow.cpp:1271
 #, kde-format
 msgid "Connect to:"
 msgstr "連線到："
 
-#: mainwindow.cpp:1279
+#: mainwindow.cpp:1275
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr "在此輸入連線位址並過濾清單。"
 
-#: mainwindow.cpp:1288
+#: mainwindow.cpp:1284
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
 "methods."
 msgstr "在此輸入 IP 或 DNS 名稱。清除此行可取得連線方法的清單。"
 
-#: mainwindow.cpp:1291
+#: mainwindow.cpp:1287
 #, kde-format
 msgid "Goto Address"
 msgstr "到位址"
 
-#: mainwindow.cpp:1383
+#: mainwindow.cpp:1379
 #, kde-format
 msgid "Remote Desktops"
 msgstr "遠端桌面"
 
-#: mainwindow.cpp:1412
+#: mainwindow.cpp:1408
 #, kde-format
 msgid "Filter"
 msgstr "過濾器"
@@ -825,10 +824,9 @@ msgstr "自訂解析度（…）"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:86
-#, fuzzy, kde-format
-#| msgid "Current Screen Resolution"
+#, kde-format
 msgid "Use All Screens Resolution"
-msgstr "目前螢幕解析度"
+msgstr "使用所有螢幕的解析度"
 
 #. i18n: ectx: property (text), widget (QLabel, widthLabel)
 #: rdp/rdppreferences.ui:99 vnc/vncpreferences.ui:136
@@ -1629,7 +1627,7 @@ msgstr "登入錯誤"
 #, kde-format
 msgctxt "@title:window"
 msgid "KRDC – Screen %1"
-msgstr ""
+msgstr "KRDC – 螢幕 %1"
 
 #: rdp/rdpviewfactory.cpp:26
 #, kde-format
