@@ -43,9 +43,21 @@ QWidget *FactorWidget::createWidget(QWidget *parent)
         return QWidgetAction::createWidget(parent);
     }
 
-    QSlider *s = new QSlider(Qt::Horizontal, _parent);
+    QSlider *s = new QSlider(_parent->orientation(), _parent);
     s->setRange(100, 200);
-    s->setMaximumWidth(100);
+
+    // Follow the toolbar's orientation and only limit the slider along that axis, so a
+    // toolbar docked left/right gets a short vertical slider instead of a wide one.
+    auto applyOrientation = [s](Qt::Orientation orientation) {
+        s->setOrientation(orientation);
+        if (orientation == Qt::Vertical) {
+            s->setMaximumSize(QWIDGETSIZE_MAX, 100);
+        } else {
+            s->setMaximumSize(100, QWIDGETSIZE_MAX);
+        }
+    };
+    applyOrientation(_parent->orientation());
+    connect(_parent, &QToolBar::orientationChanged, s, applyOrientation);
 
     connect(s, &QSlider::valueChanged, m_receiver, &MainWindow::setFactor);
     connect(m_receiver, &MainWindow::factorUpdated, s, &QSlider::setValue);

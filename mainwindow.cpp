@@ -31,6 +31,7 @@
 #include <KToggleFullScreenAction>
 #include <KToolBar>
 
+#include <QAbstractItemView>
 #include <QClipboard>
 #include <QDockWidget>
 #include <QFontMetrics>
@@ -980,6 +981,18 @@ void MainWindow::showRemoteViewToolbar()
         stickToolBarAction->setText(i18n("Stick Toolbar"));
         connect(stickToolBarAction, SIGNAL(triggered(bool)), m_toolBar, SLOT(setSticky(bool)));
         m_toolBar->addAction(stickToolBarAction);
+
+        // When docked left/right, shrink the session combobox to one toolbar button wide so
+        // the bar stays a slim column.
+        connect(m_toolBar, &QToolBar::orientationChanged, sessionComboBox, [this, sessionComboBox](Qt::Orientation orientation) {
+            const bool vertical = orientation == Qt::Vertical;
+            const QWidget *button = m_toolBar->widgetForAction(actionCollection()->action(QStringLiteral("switch_fullscreen")));
+            sessionComboBox->setSizeAdjustPolicy(vertical ? QComboBox::AdjustToMinimumContentsLengthWithIcon : QComboBox::AdjustToContents);
+            sessionComboBox->setMaximumWidth(vertical && button ? button->sizeHint().width() : QWIDGETSIZE_MAX);
+            // the dropdown list is only as wide as the combobox by default; keep the names readable
+            QAbstractItemView *list = sessionComboBox->view();
+            list->setMinimumWidth(vertical ? list->sizeHintForColumn(0) + 2 * list->frameWidth() : 0);
+        });
     }
 }
 
