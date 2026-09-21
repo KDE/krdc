@@ -214,7 +214,12 @@ bool FloatingToolBar::event(QEvent *e)
 bool FloatingToolBar::eventFilter(QObject *obj, QEvent *e)
 {
     if (obj == d->anchorWidget && e->type() == QEvent::Resize) {
-        showAndAnimate();
+        // showAndAnimate() ignores calls while already showing, which would drop a
+        // resize that arrives mid-animation and leave the bar placed for the old size
+        if (d->animState == Showing)
+            d->reposition();
+        else
+            showAndAnimate();
         return true;
     }
 
@@ -411,7 +416,7 @@ void FloatingToolBarPrivate::reposition()
         endPosition = getInnerPoint();
     } else {
         currentPosition = getInnerPoint();
-        endPosition = getOuterPoint();
+        endPosition = getInnerPoint();
     }
     q->move(currentPosition);
 }
