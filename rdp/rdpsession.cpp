@@ -867,6 +867,15 @@ int RdpSession::initializeSingleMonitor(rdpSettings *settings, RdpSession *sessi
     UINT32 deviceScaleFactor;
     switch (preferences->deviceScaleFactor()) {
     case RdpHostPreferences::DeviceScaleFactor::Auto:
+        /* Pick the nearest valid RDP device scale factor (100/140/180) for the output scale. */
+        if (outputScale >= 1.6) {
+            deviceScaleFactor = 180;
+        } else if (outputScale >= 1.2) {
+            deviceScaleFactor = 140;
+        } else {
+            deviceScaleFactor = 100;
+        }
+        break;
     case RdpHostPreferences::DeviceScaleFactor::Factor100:
         deviceScaleFactor = 100;
         break;
@@ -903,6 +912,17 @@ int RdpSession::initializeSingleMonitor(rdpSettings *settings, RdpSession *sessi
     qCWarning(KRDC) << "Add single screen size:" << session->m_size << "output scale:" << outputScale << "dpr:" << session->m_view->devicePixelRatio()
                     << "phy:" << monitor.attributes.physicalWidth << "x" << monitor.attributes.physicalHeight
                     << "desktopScale:" << monitor.attributes.desktopScaleFactor << "deviceScale" << monitor.attributes.deviceScaleFactor;
+
+    // Also set the scale factors as standalone settings so that rdpdisp and
+    // other FreeRDP subsystems that read FreeRDP_DesktopScaleFactor /
+    // FreeRDP_DeviceScaleFactor directly (e.g. dynamic resize via DISP channel)
+    // pick up the correct values.
+    if (!freerdp_settings_set_uint32(settings, FreeRDP_DesktopScaleFactor, desktopScaleFactor)) {
+        return -1;
+    }
+    if (!freerdp_settings_set_uint32(settings, FreeRDP_DeviceScaleFactor, deviceScaleFactor)) {
+        return -1;
+    }
 
     if (!freerdp_settings_set_monitor_def_array_sorted(settings, monitors.data(), monitors.size())) {
         return -1;
@@ -981,6 +1001,15 @@ int RdpSession::initializeMultiMonitor(rdpSettings *settings, RdpSession *sessio
         UINT32 deviceScaleFactor;
         switch (preferences->deviceScaleFactor()) {
         case RdpHostPreferences::DeviceScaleFactor::Auto:
+            /* Pick the nearest valid RDP device scale factor (100/140/180) for the output scale. */
+            if (localScreen.scale >= 1.6) {
+                deviceScaleFactor = 180;
+            } else if (localScreen.scale >= 1.2) {
+                deviceScaleFactor = 140;
+            } else {
+                deviceScaleFactor = 100;
+            }
+            break;
         case RdpHostPreferences::DeviceScaleFactor::Factor100:
             deviceScaleFactor = 100;
             break;
@@ -1026,6 +1055,22 @@ int RdpSession::initializeMultiMonitor(rdpSettings *settings, RdpSession *sessio
                         << "logical geom:" << localScreen.logicalRect << "rdp geom:" << rect << "output scale:" << localScreen.scale
                         << "dpr:" << screen->devicePixelRatio() << "phy:" << monitor.attributes.physicalWidth << "x" << monitor.attributes.physicalHeight
                         << "scale:" << monitor.attributes.desktopScaleFactor << "deviceScale" << monitor.attributes.deviceScaleFactor;
+    }
+
+    // Set the primary monitor's scale factors as standalone settings so that
+    // rdpdisp and other FreeRDP subsystems that read FreeRDP_DesktopScaleFactor /
+    // FreeRDP_DeviceScaleFactor directly (e.g. dynamic resize via DISP channel)
+    // pick up the correct values.
+    for (const auto &m : monitors) {
+        if (m.is_primary) {
+            if (!freerdp_settings_set_uint32(settings, FreeRDP_DesktopScaleFactor, m.attributes.desktopScaleFactor)) {
+                return -1;
+            }
+            if (!freerdp_settings_set_uint32(settings, FreeRDP_DeviceScaleFactor, m.attributes.deviceScaleFactor)) {
+                return -1;
+            }
+            break;
+        }
     }
 
     if (!freerdp_settings_set_monitor_def_array_sorted(settings, monitors.data(), monitors.size())) {
