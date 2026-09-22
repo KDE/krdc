@@ -544,8 +544,10 @@ void MainWindow::switchFullscreen()
 
     } else {
         // Entering full screen mode
-        setAutoSaveSettings(autoSaveConfigGroup(), false);
-        resetAutoSaveSettings();
+        if (autoSaveSettings()) {
+            setAutoSaveSettings(autoSaveConfigGroup(), false);
+            resetAutoSaveSettings();
+        }
 
         m_guiItemsState = {.dockWidget = m_remoteDesktopsDockWidget->isVisible(),
                            .menuBar = menuBar()->isVisible(),
