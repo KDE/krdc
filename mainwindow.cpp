@@ -632,15 +632,18 @@ void MainWindow::disconnectHost()
 
     RemoteView *view = qobject_cast<RemoteView *>(QObject::sender());
 
-    QWidget *widgetToDelete;
-    if (view) {
-        widgetToDelete = (QWidget *)view->parent()->parent();
-        m_remoteViewMap.remove(m_remoteViewMap.key(view));
-    } else {
-        widgetToDelete = m_tabWidget->currentWidget();
+    if (!view) {
         view = currentRemoteView();
-        m_remoteViewMap.remove(m_remoteViewMap.key(view));
     }
+
+    QWidget *widgetToDelete = m_remoteViewMap.key(view);
+    if (!view || !widgetToDelete) {
+        return; // The view is absent or its disconnection is already being handled.
+    }
+
+    // Remove the view before startQuitting(), which can emit disconnected() synchronously.
+    m_remoteViewMap.remove(widgetToDelete);
+    m_savedGrabStatesBeforeFullscreen.remove(view);
 
     saveHostPrefs(view);
     view->startQuitting(); // some deconstructors can't properly quit, so quit early
@@ -668,6 +671,10 @@ void MainWindow::closeTab(int index)
 
     if (!isNewConnectionPage) {
         RemoteView *view = m_remoteViewMap.take(widget);
+        if (!view) {
+            return;
+        }
+        m_savedGrabStatesBeforeFullscreen.remove(view);
         view->startQuitting();
         widget->deleteLater();
     }
