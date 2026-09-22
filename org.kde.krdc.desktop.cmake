@@ -61,7 +61,6 @@ Name[sr@ijekavianlatin]=KRDC
 Name[sr@latin]=KRDC
 Name[sv]=KRDC
 Name[tr]=KRDC
-Name[ug]=KRDC
 Name[uk]=KRDC
 Name[wa]=KRDC
 Name[zh_CN]=KRDC
