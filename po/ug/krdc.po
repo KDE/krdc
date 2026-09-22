@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-22 00:44+0000\n"
-"PO-Revision-Date: 2026-05-31 19:32-0400\n"
+"PO-Revision-Date: 2026-09-22 18:03+0900\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
-"Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
+"Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
 "Language: ug\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -94,8 +94,6 @@ msgid ""
 "This option will resize the window to fit the connection size.  If it is too "
 "big, it will maximize the window."
 msgstr ""
-"بۇ تاللانما كۆزنەك چوڭلۇقىنى تەڭشەپ باغلىنىش كۆزنىكىنىڭ چوڭلۇقىغا سىغدۇرىدۇ. "
-"ئەگەر بەك چوڭ بولسا ئۇنداقتا كۆزنەكنى ئەڭ چوڭ قىلىدۇ."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ResizeOnConnect)
 #: config/general.ui:109
@@ -146,7 +144,7 @@ msgstr "كۆڭۈلدىكى كېلىشىم:"
 #: config/general.ui:145
 #, kde-format
 msgid "vnc"
-msgstr "vnc"
+msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, tabGroupBox)
 #: config/general.ui:157
@@ -264,19 +262,19 @@ msgstr "بىر مىنۇتقا يەتمىگەن ۋاقىت ئىلگىرى"
 #, kde-format
 msgid "A minute ago"
 msgid_plural "%1 minutes ago"
-msgstr[0] "%1 مىنۇت ئىلگىرى"
+msgstr[0] "%1 مىنۇت بۇرۇن"
 
 #: connectiondelegate.cpp:37
 #, kde-format
 msgid "An hour ago"
 msgid_plural "%1 hours ago"
-msgstr[0] "%1 سائەت ئىلگىرى"
+msgstr[0] "%1 سائەت بۇرۇن"
 
 #: connectiondelegate.cpp:41
 #, kde-format
 msgid "Yesterday"
 msgid_plural "%1 days ago"
-msgstr[0] "%1 كۈن ئىلگىرى"
+msgstr[0] "%1 كۈن بۇرۇن"
 
 #: connectiondelegate.cpp:43
 #, kde-format
@@ -294,13 +292,13 @@ msgstr[0] "%1 يىل ئىلگىرى"
 #, kde-format
 msgctxt "@label:textbox Name of a remote connection"
 msgid "Name:"
-msgstr ""
+msgstr "ئاتى:"
 
 #: core/hostpreferences.cpp:231
 #, kde-format
 msgctxt "@label:textbox URL of a remote connection"
 msgid "URL:"
-msgstr ""
+msgstr "تور ئادرېسى:"
 
 #: core/hostpreferences.cpp:249
 #, kde-format
@@ -403,7 +401,7 @@ msgstr "يىراقتىكى كۆرۈنۈش قورال بالداق"
 #: main.cpp:33
 #, kde-format
 msgid "KRDC"
-msgstr "KRDC"
+msgstr ""
 
 #: main.cpp:33 systemtrayicon.cpp:24
 #, kde-format
@@ -422,19 +420,11 @@ msgid ""
 "(c) 1999-2003, Matthew Chapman\n"
 "(c) 2009, Collabora Ltd"
 msgstr ""
-"(c) 2007-2016, Urs Wolfer\n"
-"(c) 2001-2003, Tim Jansen\n"
-"(c) 2002-2003, Arend van Beelen jr.\n"
-"(c) 2000-2002, Const Kaplinsky\n"
-"(c) 2000, Tridia Corporation\n"
-"(c) 1999, AT&T Laboratories Boston\n"
-"(c) 1999-2003, Matthew Chapman\n"
-"(c) 2009, Collabora Ltd"
 
 #: main.cpp:45
 #, kde-format
 msgid "Urs Wolfer"
-msgstr "Urs Wolfer"
+msgstr ""
 
 #: main.cpp:45
 #, kde-format
@@ -444,7 +434,7 @@ msgstr "ئىجادكار ۋە ئاسرىغۇچى"
 #: main.cpp:46
 #, kde-format
 msgid "Tony Murray"
-msgstr "Tony Murray"
+msgstr ""
 
 #: main.cpp:46
 #, kde-format
@@ -454,7 +444,7 @@ msgstr "ئىجادكار"
 #: main.cpp:47
 #, kde-format
 msgid "Tim Jansen"
-msgstr "Tim Jansen"
+msgstr ""
 
 #: main.cpp:47
 #, kde-format
@@ -464,7 +454,7 @@ msgstr "سابىق ئىجادىيەتچى"
 #: main.cpp:48
 #, kde-format
 msgid "Arend van Beelen jr."
-msgstr "Arend van Beelen jr."
+msgstr ""
 
 #: main.cpp:48
 #, kde-format
@@ -474,7 +464,7 @@ msgstr "RDP ئارقا ئۇچ دەسلەپلەشتۈرۈش"
 #: main.cpp:49
 #, kde-format
 msgid "Brad Hards"
-msgstr "Brad Hards"
+msgstr ""
 
 #: main.cpp:49
 #, kde-format
@@ -606,8 +596,8 @@ msgid ""
 "The entered address does not have the required form.\n"
 " Syntax: [username@]host[:port]"
 msgstr ""
-"كىرگۈزۈلگەن ئادرېس زۆرۈر پىچىمدا ئەمەس.\n"
-"تىلقۇرما: [username@]host[:port]"
+"The entered address does not have the required form.\n"
+" Syntax: [username@]host[:port]"
 
 #: mainwindow.cpp:275
 #, kde-format
@@ -650,10 +640,9 @@ msgid "Window Mode"
 msgstr "كۆزنەك ھالىتى"
 
 #: mainwindow.cpp:762
-#, fuzzy, kde-format
-#| msgid "The entered address cannot be handled."
+#, kde-format
 msgid "The entered address cannot be handled by this connection type."
-msgstr "كىرگۈزۈلگەن ئادرېسنى بىر تەرەپ قىلالمىدى."
+msgstr ""
 
 #: mainwindow.cpp:797
 #, kde-format
@@ -753,8 +742,6 @@ msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
 "methods."
 msgstr ""
-"بۇ جايغا IP ياكى DNS ئاتى كىرگۈزۈلىدۇ. پۈتۈن قۇر تازىلانسا باغلىنىش "
-"ئۇسۇلىنىڭ تىزىمىگە ئېرىشكىلى بولىدۇ."
 
 #: mainwindow.cpp:1300
 #, kde-format
@@ -791,8 +778,6 @@ msgid ""
 "Here you can specify the resolution of the remote desktop. This resolution "
 "determines the size of the desktop that will be presented to you."
 msgstr ""
-"بۇ جايدا يىراقتىكى ئۈستەلئۈستىنىڭ ئېكران ئېنىقلىقىنى بەلگىلىيەلەيسىز. بۇ "
-"ئېنىقلىق كۆرەلەيدىغان ئۈستەلئۈستى چوڭلۇقىنى بەلگىلەيدۇ."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:56
@@ -834,10 +819,9 @@ msgstr "ئىختىيارىي ئېنىقلىق (…)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:86
-#, fuzzy, kde-format
-#| msgid "Current Screen Resolution"
+#, kde-format
 msgid "Use All Screens Resolution"
-msgstr "نۆۋەتتىكى ئېكران ئېنىقلىقى"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, widthLabel)
 #: rdp/rdppreferences.ui:99 vnc/vncpreferences.ui:136
@@ -853,8 +837,6 @@ msgid ""
 "This is the width of the remote desktop. You can only change this value "
 "manually if you select Custom as desktop resolution above."
 msgstr ""
-"بۇ يىراقتىكى ئۈستەلئۈستىنىڭ كەڭلىكى. پەقەت ئىختىيارى ئۈستەلئۈستى ئېنىقلىقىنى "
-"تاللىغاندىلا ئاندىن ئۇنىڭ قىممىتىنى قولدا ئۆزگەرتەلەيسىز."
 
 #. i18n: ectx: property (text), widget (QLabel, heightLabel)
 #: rdp/rdppreferences.ui:131 vnc/vncpreferences.ui:168
@@ -870,8 +852,6 @@ msgid ""
 "This is the height of the remote desktop. You can only change this value "
 "manually if you select Custom as desktop resolution above."
 msgstr ""
-"بۇ يىراقتىكى ئۈستەلئۈستىنىڭ ئېگىزلىكى. پەقەت ئىختىيارى ئۈستەلئۈستى "
-"ئېنىقلىقىنى تاللىغاندىلا ئاندىن ئۇنىڭ قىممىتىنى قولدا ئۆزگەرتەلەيسىز."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ScaleToSize)
 #: rdp/rdppreferences.ui:168
@@ -984,19 +964,19 @@ msgstr "ئۈسكۈنە نىسبەت ھەسسىسى:"
 #: rdp/rdppreferences.ui:373
 #, kde-format
 msgid "100"
-msgstr "100"
+msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DeviceScaleFactor)
 #: rdp/rdppreferences.ui:378
 #, kde-format
 msgid "140"
-msgstr "140"
+msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DeviceScaleFactor)
 #: rdp/rdppreferences.ui:383
 #, kde-format
 msgid "180"
-msgstr "180"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, layoutLabel)
 #: rdp/rdppreferences.ui:391
@@ -1011,8 +991,6 @@ msgid ""
 "Use this to specify your keyboard layout. This layout setting is used to "
 "send the correct keyboard codes to the server."
 msgstr ""
-"بۇ جايدا ھەرپتاختا جايلاشتۇرۇلۇشىنى بەلگىلىيەلەيسىز. بۇ جايلاشتۇرۇش تەڭشىكى "
-"مۇلازىمېتىرغا توغرا ھەرپتاختا كودى يوللاشقا ئىشلىتىلىدۇ."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:423
@@ -1313,19 +1291,19 @@ msgstr "بىخەتەرلىك:"
 #: rdp/rdppreferences.ui:749
 #, kde-format
 msgid "NLA"
-msgstr "NLA"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityTLS)
 #: rdp/rdppreferences.ui:756
 #, kde-format
 msgid "TLS"
-msgstr "TLS"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityRDP)
 #: rdp/rdppreferences.ui:763
 #, kde-format
 msgid "RDP"
-msgstr "RDP"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityEXT)
 #: rdp/rdppreferences.ui:770
@@ -1398,13 +1376,13 @@ msgstr "كېلىشىم:"
 #: rdp/rdppreferences.ui:876 rdp/rdppreferences.ui:987
 #, kde-format
 msgid "HTTP"
-msgstr "HTTP"
+msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ProxyProtocol)
 #: rdp/rdppreferences.ui:881
 #, kde-format
 msgid "SOCKS"
-msgstr "SOCKS"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, pPasswordLabel)
 #. i18n: ectx: property (text), widget (QLabel, gPasswordLabel)
@@ -1450,7 +1428,7 @@ msgstr "يەتكۈزۈش تۈرى:"
 #: rdp/rdppreferences.ui:992
 #, kde-format
 msgid "RPC"
-msgstr "RPC"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, gDomainLabel)
 #: rdp/rdppreferences.ui:1000
@@ -1484,7 +1462,7 @@ msgstr "بۇ سىستېمىنى زىيارەت قىلىش ئۈچۈن ئىشلە�
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
-msgstr "بۇ سىستېمىنىڭ گۇۋاھنامىسى يوچۇن. داۋاملاشتۇرامسىز؟"
+msgstr ""
 
 #: rdp/rdpview.cpp:266
 #, kde-format
@@ -1502,7 +1480,7 @@ msgstr "بۇ گۇۋاھنامىنى ئەستە تۇت"
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
-msgstr "بۇ سىستېمىنىڭ گۇۋاھنامىسى ئۆزگەرگەن. داۋاملاشتۇرامسىز؟"
+msgstr ""
 
 #: rdp/rdpview.cpp:291
 #, kde-format
@@ -1537,8 +1515,6 @@ msgid ""
 "Unable to login with the provided credentials. Please double check the user "
 "and password."
 msgstr ""
-"تەمىنلەنگەن ئىسپات بىلەن تىزىمغا كىرەلمىدى. ئىشلەتكۈچى ۋە ئىم ئۇچۇرىنى قايتا "
-"تەكشۈرۈڭ."
 
 #: rdp/rdpview.cpp:336
 #, kde-format
@@ -1553,8 +1529,8 @@ msgid ""
 "The provided account is not allowed to log in to this machine. Please "
 "contact your system administrator."
 msgstr ""
-"تەمىنلەنگەن ھېسابنىڭ بۇ ماشىنىغا تىزىمغا كىرىشىگە يول قويۇلمىغان. سىستېما "
-"باشقۇرغۇچىڭىز بىلەن ئالاقىلىشىڭ."
+"The provided account is not allowed to log in to this machine. سىستېما "
+"باشقۇرغۇچىسى بىلەن ئالاقىلىشىڭ."
 
 #: rdp/rdpview.cpp:342
 #, kde-format
@@ -1569,8 +1545,6 @@ msgid ""
 "Unable to login with the provided password. Please contact your system "
 "administrator to change it."
 msgstr ""
-"تەمىنلەنگەن ئىم بىلەن تىزىمغا كىرەلمىدى. سىستېما باشقۇرغۇچىڭىز بىلەن "
-"ئالاقىلىشىڭ."
 
 #: rdp/rdpview.cpp:349
 #, kde-format
@@ -1666,14 +1640,12 @@ msgid ""
 "<html>Enter the address here. Port is optional.<br /><i>Example: "
 "rdpserver:3389 (host:port)</i></html>"
 msgstr ""
-"<html>بۇ جايغا ئادرېس كىرگۈزۈلىدۇ. ئېغىز تاللاشچان.<br /><i>مەسىلەن: "
-"rdpserver:3389 (مۇلازىمېتىر:ئېغىز)</i></html>"
 
 #: remotedesktopsmodel.cpp:112
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Zeroconf"
-msgstr "Zeroconf"
+msgstr ""
 
 #: remotedesktopsmodel.cpp:114
 #, kde-format
@@ -1795,14 +1767,6 @@ msgid ""
 "high speed connections and results in lower image quality, especially in "
 "'Low Quality' mode."
 msgstr ""
-"بۇ تاللانما ئارقىلىق باغلىنىش ئۈنۈمى بەلگىلىنىدۇ. ئەسكەرتىش، ئەڭ ناچار "
-"باغلىنىش سۈرئىتى تاللىنىشى كېرەك -گەرچە يۇقىرى سۈرئەتلىك باغلىنىشىڭىز بولغان "
-"تەقدىردىمۇ، ئەمما ئەگەر قارشى تەرەپ ئاستا سۈرئەتلىك مودېم ئىشلەتكەن بولسا، "
-"يۇقىرى سۈرئەتلىك تور باغلىنىشىڭىز رولىنى جارى قىلدۇرالمايدۇ. تۆۋەن سۈرئەتلىك "
-"باغلىنىشتا يۇقىرى سۈپەتلىك باغلىنىش تاللانسا ئىنكاس قايتۇرۇش ۋاقتى ئاستىلاپ "
-"كېتىدۇ. تۆۋەنرەك سۈپەت تاللانسا يۇقىرى سۈرئەتلىك باغلىنىشنىڭ كۈتۈش ۋاقتىنى "
-"ئاشۇرۇپ تېخىمۇ تۆۋەن سۈپەتلىك سۈرەتنى پەيدا قىلىدۇ، بولۇپمۇ «تۆۋەن سۈپەت» "
-"ھالىتىدە."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Quality)
 #: vnc/vncpreferences.ui:43
@@ -1883,7 +1847,7 @@ msgstr "بۇ سىستېمىنى زىيارەت قىلىش ئۈچۈن ئىم تە
 #: vnc/vncview.cpp:240
 #, kde-format
 msgid "Authentication failed. Please try again."
-msgstr "كىملىك دەلىللىيەلمىدى. قايتا سىناڭ."
+msgstr "دەلىللىيەلمىدى. Please try again."
 
 #: vnc/vncview.cpp:266
 #, kde-format
