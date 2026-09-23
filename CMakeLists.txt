@@ -88,6 +88,8 @@ option(WITH_VNC "Enable VNC support." ON)
 add_feature_info(VNC WITH_VNC "Building with support for the VNC protocol. Disable with -DWITH_VNC=NO")
 option(WITH_RDP "Enable RDP support using FreeRDP" ON)
 add_feature_info(RDP WITH_RDP "Building with support for the RDP protocol. Disable with -DWITH_RDP=NO")
+option(WITH_SPICE "Enable SPICE support." ON)
+add_feature_info(SPICE WITH_SPICE "Building with support for the SPICE protocol. Disable with -DWITH_SPICE=NO")
 
 ecm_set_disabled_deprecation_versions(QT 6.8
      KF 6.12
@@ -156,6 +158,12 @@ if(WITH_RDP)
     )
 
     add_subdirectory(rdp)
+endif()
+
+if(WITH_SPICE)
+    find_package(Glib REQUIRED)
+    find_package(Spiceglib REQUIRED)
+    add_subdirectory(spice)
 endif()
 
 add_subdirectory(test)

@@ -44,6 +44,7 @@ parts:
       - freerdp3-dev
       - libwinpr3-dev
       - libxkbcommon-dev
+      - libspice-client-glib-2.0-dev
     stage-packages:
       - libvncclient1
       - freerdp3-x11
@@ -52,6 +53,7 @@ parts:
       - libwinpr3-3
       - libxkbcommon0
       - libssh-4
+      - libspice-client-glib-2.0-8
     cmake-parameters:
       - -DCMAKE_INSTALL_PREFIX=/usr
       - -DCMAKE_BUILD_TYPE=Release
