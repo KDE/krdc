@@ -13,7 +13,13 @@
 #include <arpa/inet.h>
 #include <fcntl.h>
 #include <netinet/in.h>
+#include <poll.h>
+#include <unistd.h>
+
+#include <cerrno>
+#include <memory>
 #include <sys/socket.h>
+#include <vector>
 
 #include <QDebug>
 
@@ -63,16 +69,15 @@ void SshTunnelThread::run()
 {
     struct CleanupHelper {
         int server_sock = -1;
-        int client_sock = -1;
         ssh_session session = nullptr;
-        ssh_channel forwarding_channel = nullptr;
+        ssh_event event = nullptr;
 
         ~CleanupHelper()
         {
             // the ssh functions just return if the param is null
-            ssh_channel_free(forwarding_channel);
-            if (client_sock != -1) {
-                close(client_sock);
+            if (event) {
+                ssh_event_remove_session(event, session);
+                ssh_event_free(event);
             }
             if (server_sock != -1) {
                 close(server_sock);
@@ -159,7 +164,7 @@ void SshTunnelThread::run()
         }
     }
 
-    if (listen(server_sock, 1) == -1) {
+    if (listen(server_sock, SOMAXCONN) == -1) {
         Q_EMIT errorMessage(i18n("Error creating tunnel socket"));
         return;
     }
@@ -168,128 +173,166 @@ void SshTunnelThread::run()
         return;
     }
 
+    // All channels share one SSH session, owned exclusively by this thread.
+    // Nonblocking operations prevent one slow connection from stalling the others.
+    ssh_set_blocking(session, 0);
+    cleanup.event = ssh_event_new();
+    if (!cleanup.event || ssh_event_add_session(cleanup.event, session) != SSH_OK) {
+        Q_EMIT errorMessage(i18n("Error creating tunnel socket"));
+        return;
+    }
+
+    struct ForwardedConnection {
+        int socket = -1;
+        ssh_channel channel = nullptr;
+        bool opened = false;
+        bool localEof = false;
+        bool eofSent = false;
+        bool remoteEof = false;
+        QByteArray toRemote;
+        QByteArray toLocal;
+
+        ~ForwardedConnection()
+        {
+            ssh_channel_free(channel);
+            if (socket != -1)
+                close(socket);
+        }
+    };
+    // Destroy channels before the session in CleanupHelper.
+    std::vector<std::unique_ptr<ForwardedConnection>> connections;
+    const char *remoteHost = m_loopback ? "127.0.0.1" : m_host.constData();
+    bool madeProgress = false;
     Q_EMIT listenReady();
-    // After here we don't need to emit errorMessage anymore on error, qCDebug is enough
-    // this is because the actual vnc or rdp thread will start because of this call and thus
-    // any socket error here will be detected by the vnc or rdp thread and the usual error mechanisms
-    // there will warn the user interface
 
-    int client_sock = -1;
-    {
-        struct sockaddr_in client_sin;
-        socklen_t client_sin_len = sizeof client_sin;
-        while (client_sock == -1) {
-            if (m_stop_thread) {
-                return;
-            }
-
-            client_sock = accept(server_sock, (struct sockaddr *)&client_sin, &client_sin_len);
-            if (client_sock == -1 && errno != EAGAIN) {
-                qCDebug(KRDC) << "Error on tunnel socket accept";
-                return;
-            }
+    while (!m_stop_thread && ssh_is_connected(session)) {
+        std::vector<pollfd> sockets;
+        sockets.push_back({server_sock, POLLIN, 0});
+        const short sshEvents = POLLIN | ((ssh_get_poll_flags(session) & SSH_WRITE_PENDING) ? POLLOUT : 0);
+        sockets.push_back({ssh_get_fd(session), sshEvents, 0});
+        for (const auto &connection : connections) {
+            short events = 0;
+            if (connection->opened && !connection->localEof && connection->toRemote.isEmpty())
+                events |= POLLIN;
+            if (!connection->toLocal.isEmpty())
+                events |= POLLOUT;
+            // Ignore sockets with no work until SSH makes progress (including
+            // sockets with a persistent POLLHUP while buffered data is drained).
+            sockets.push_back({events ? connection->socket : -1, events, 0});
         }
 
-        cleanup.client_sock = client_sock;
-
-        int sock_flags = fcntl(client_sock, F_GETFL, 0);
-        fcntl(client_sock, F_SETFL, sock_flags | O_NONBLOCK);
-    }
-
-    ssh_channel forwarding_channel = ssh_channel_new(session);
-    {
-        const char *forward_remote_host = m_loopback ? "127.0.0.1" : m_host.constData();
-        res = ssh_channel_open_forward(forwarding_channel, forward_remote_host, m_port, "127.0.0.1", 0);
-        if (res != SSH_OK || !ssh_channel_is_open(forwarding_channel)) {
-            qCDebug(KRDC) << "SSH channel open error" << ssh_get_error(session);
-            return;
+        res = poll(sockets.data(), sockets.size(), madeProgress ? 0 : 200);
+        madeProgress = false;
+        if (res < 0) {
+            if (errno == EINTR)
+                continue;
+            qCDebug(KRDC) << "Error polling tunnel sockets";
+            break;
         }
-        cleanup.forwarding_channel = forwarding_channel;
-    }
-
-    char client_read_buffer[40960];
-    char *channel_read_buffer = nullptr;
-    char *channel_read_buffer_ptr = nullptr;
-    int channel_read_buffer_to_write;
-    while (!m_stop_thread && !ssh_channel_is_eof(forwarding_channel)) {
-        struct timeval timeout;
-        timeout.tv_sec = 0;
-        timeout.tv_usec = 200000;
-
-        fd_set set;
-        FD_ZERO(&set);
-        FD_SET(client_sock, &set);
-        ssh_channel channels[2] = {forwarding_channel, nullptr};
-        ssh_channel channels_out[2] = {nullptr, nullptr};
-
-        res = ssh_select(channels, channels_out, client_sock + 1, &set, &timeout);
-        if (res == SSH_EINTR)
-            continue;
-        if (res == -1)
+        if (m_stop_thread)
+            break;
+        if (ssh_event_dopoll(cleanup.event, 0) == SSH_ERROR)
             break;
 
-        bool error = false;
-        if (FD_ISSET(client_sock, &set)) {
-            int bytes_read;
-            while (!error && (bytes_read = read(client_sock, client_read_buffer, sizeof client_read_buffer)) > 0) {
-                int bytes_written = 0;
-                int bytes_to_write = bytes_read;
-                for (char *ptr = client_read_buffer; bytes_to_write > 0; bytes_to_write -= bytes_written, ptr += bytes_written) {
-                    bytes_written = ssh_channel_write(forwarding_channel, ptr, bytes_to_write);
-                    if (bytes_written <= 0) {
-                        error = true;
-                        qCDebug(KRDC) << "error on ssh_channel_write";
-                        break;
-                    }
+        // Accept one connection per iteration so incoming clients cannot starve
+        // existing channels. SPICE opens separate TCP connections on this port.
+        if (sockets[0].revents & POLLIN) {
+            const int client = accept(server_sock, nullptr, nullptr);
+            if (client >= 0) {
+                auto connection = std::make_unique<ForwardedConnection>();
+                connection->socket = client;
+                const int flags = fcntl(client, F_GETFL, 0);
+                if (flags != -1 && fcntl(client, F_SETFL, flags | O_NONBLOCK) != -1) {
+                    connection->channel = ssh_channel_new(session);
+                    if (connection->channel)
+                        connections.push_back(std::move(connection));
                 }
-            }
-            if (bytes_read == 0) {
-                qCDebug(KRDC) << "error on tunnel read";
-                error = true;
-            }
-        }
-
-        // If on the previous iteration we successfully wrote all we read, we need to read again
-        if (!error && !channel_read_buffer) {
-            const int bytes_available = ssh_channel_poll(forwarding_channel, 0);
-            if (bytes_available == SSH_ERROR || bytes_available == SSH_EOF) {
-                qCDebug(KRDC) << "error on ssh_channel_poll";
-                error = true;
-            } else if (bytes_available > 0) {
-                channel_read_buffer = new char[bytes_available];
-                channel_read_buffer_ptr = channel_read_buffer;
-                const int bytes_read = ssh_channel_read_nonblocking(forwarding_channel, channel_read_buffer, bytes_available, 0);
-                if (bytes_read <= 0) {
-                    qCDebug(KRDC) << "error on ssh_channel_read_nonblocking";
-                    error = true;
-                } else {
-                    channel_read_buffer_to_write = bytes_read;
-                }
+                madeProgress = true;
+            } else if (errno != EAGAIN && errno != EINTR) {
+                qCDebug(KRDC) << "Error on tunnel socket accept";
+                break;
             }
         }
 
-        if (!error && channel_read_buffer) {
-            for (int bytes_written = 0; channel_read_buffer_to_write > 0;
-                 channel_read_buffer_to_write -= bytes_written, channel_read_buffer_ptr += bytes_written) {
-                bytes_written = write(client_sock, channel_read_buffer_ptr, channel_read_buffer_to_write);
-                if (bytes_written == -1 && errno == EAGAIN) {
-                    // socket is full, just carry on and we will write on the next iteration
-                    // that is why the previous code does 'if (!channel_read_buffer)'
-                    break;
+        for (auto it = connections.begin(); it != connections.end();) {
+            auto &connection = **it;
+            bool error = false;
+            if (!connection.opened) {
+                res = ssh_channel_open_forward(connection.channel, remoteHost, m_port, "127.0.0.1", 0);
+                if (res == SSH_AGAIN) {
+                    ++it;
+                    continue;
                 }
-                if (bytes_written <= 0) {
-                    qCDebug(KRDC) << "error on tunnel write";
+                if (res != SSH_OK) {
+                    qCDebug(KRDC) << "SSH channel open error" << ssh_get_error(session);
+                    it = connections.erase(it);
+                    continue;
+                }
+                connection.opened = true;
+                madeProgress = true;
+            }
+
+            // Bound each direction's pending data and perform at most one read
+            // and write per channel per iteration for fairness and backpressure.
+            char buffer[40960];
+            if (!connection.localEof && connection.toRemote.isEmpty()) {
+                const int count = read(connection.socket, buffer, sizeof buffer);
+                if (count > 0) {
+                    connection.toRemote.append(buffer, count);
+                    madeProgress = true;
+                } else if (count == 0) {
+                    connection.localEof = true;
+                } else if (errno != EAGAIN && errno != EINTR) {
                     error = true;
-                    break;
                 }
             }
-            if (channel_read_buffer_to_write <= 0) {
-                delete[] channel_read_buffer;
-                channel_read_buffer = nullptr;
+            if (!error && !connection.toRemote.isEmpty()) {
+                const int count = ssh_channel_write(connection.channel, connection.toRemote.constData(), connection.toRemote.size());
+                if (count > 0) {
+                    connection.toRemote.remove(0, count);
+                    madeProgress = true;
+                } else if (count != 0 && count != SSH_AGAIN) {
+                    error = true;
+                }
+            }
+            if (!error && connection.localEof && connection.toRemote.isEmpty() && !connection.eofSent) {
+                res = ssh_channel_send_eof(connection.channel);
+                if (res == SSH_OK) {
+                    connection.eofSent = true;
+                    madeProgress = true;
+                } else if (res != SSH_AGAIN) {
+                    error = true;
+                }
+            }
+            if (!error && !connection.remoteEof && connection.toLocal.isEmpty()) {
+                const int count = ssh_channel_read_nonblocking(connection.channel, buffer, sizeof buffer, 0);
+                if (count > 0) {
+                    connection.toLocal.append(buffer, count);
+                    madeProgress = true;
+                } else if (count == SSH_EOF || (count == 0 && ssh_channel_is_eof(connection.channel))) {
+                    connection.remoteEof = true;
+                    shutdown(connection.socket, SHUT_WR);
+                    madeProgress = true;
+                } else if (count == SSH_ERROR) {
+                    error = true;
+                }
+            }
+            if (!error && !connection.toLocal.isEmpty()) {
+                const int count = send(connection.socket, connection.toLocal.constData(), connection.toLocal.size(), MSG_NOSIGNAL);
+                if (count > 0) {
+                    connection.toLocal.remove(0, count);
+                    madeProgress = true;
+                } else if (count == 0 || (errno != EAGAIN && errno != EINTR)) {
+                    error = true;
+                }
+            }
+            if (error || (connection.remoteEof && connection.toLocal.isEmpty() && (connection.eofSent || ssh_channel_is_closed(connection.channel)))) {
+                if (error)
+                    qCDebug(KRDC) << "Error forwarding tunnel connection" << ssh_get_error(session);
+                it = connections.erase(it);
+            } else {
+                ++it;
             }
         }
     }
-
-    delete[] channel_read_buffer;
-    channel_read_buffer = nullptr;
 }
