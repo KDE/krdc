@@ -12,6 +12,7 @@
 #include "remoteview.h"
 #include "remoteviewfactory.h"
 
+#include <KConfigGroup>
 #include <KXmlGuiWindow>
 
 class KComboBox;
@@ -51,6 +52,7 @@ protected:
     void closeEvent(QCloseEvent *event) override;
     void changeEvent(QEvent *event) override;
     void saveProperties(KConfigGroup &group) override;
+    void applyMainWindowSettings(const KConfigGroup &group) override;
     void saveHostPrefs();
     void saveHostPrefs(RemoteView *view);
 
@@ -88,6 +90,7 @@ private Q_SLOTS:
     void handleViewError(const QString &title, const QString &message);
 
 private:
+    void applyFullscreenState(bool fullscreen);
     void setupActions();
     void loadAllPlugins();
     void showSettingsDialog(const QString &url, const QString &bookmarkAddress = QString(), const QString &bookmarkName = QString());
@@ -124,7 +127,11 @@ private:
         bool statusBar;
         bool toolBar;
     };
-    GuiItemsState m_guiItemsState;
+    GuiItemsState m_guiItemsState{};
+    bool m_fullscreenActive = false;
+    bool m_updatingFullscreen = false;
+    KConfigGroup m_windowedAutoSaveGroup;
+    QWidget *m_minimizePixel = nullptr;
 
     QMap<RemoteView *, bool> m_savedGrabStatesBeforeFullscreen;
 

@@ -47,6 +47,7 @@
 #include <QMenuBar>
 #include <QPushButton>
 #include <QRegularExpression>
+#include <QScopedValueRollback>
 #include <QScrollBar>
 #include <QSortFilterProxyModel>
 #include <QStatusBar>
@@ -389,8 +390,8 @@ void MainWindow::selectFromRemoteDesktopsModel(const QModelIndex &index)
 void MainWindow::resizeTabWidget(int w, int h)
 {
     qCDebug(KRDC) << "tabwidget resize, view size: w: " << w << ", h: " << h;
-    if (isFullScreen()) {
-        qCDebug(KRDC) << "in fullscreen mode, refusing to resize";
+    if (isFullScreen() || m_updatingFullscreen) {
+        qCDebug(KRDC) << "in fullscreen mode or changing state, refusing to resize";
         return;
     }
 
@@ -503,11 +504,35 @@ void MainWindow::switchFullscreen()
 {
     qCDebug(KRDC);
 
+    // WindowStateChange applies the same transition for our action and the window manager.
+    KToggleFullScreenAction::setFullScreen(this, !isFullScreen());
+}
+
+void MainWindow::applyMainWindowSettings(const KConfigGroup &group)
+{
+    // setAutoSaveSettings() also reloads the saved layout. During a fullscreen
+    // transition only change the autosave policy; we restore the live UI state ourselves.
+    if (!m_updatingFullscreen) {
+        KXmlGuiWindow::applyMainWindowSettings(group);
+    }
+}
+
+void MainWindow::applyFullscreenState(bool fullscreen)
+{
+    if (m_fullscreenActive == fullscreen) {
+        return;
+    }
+    m_fullscreenActive = fullscreen;
+    QScopedValueRollback<bool> updatingFullscreen(m_updatingFullscreen, true);
+
     RemoteView *view = currentRemoteView();
     bool scale_state = false;
-    if (isFullScreen()) {
+    if (!fullscreen) {
         // Leaving full screen mode
-        setAutoSaveSettings();
+        if (m_windowedAutoSaveGroup.isValid()) {
+            setAutoSaveSettings(m_windowedAutoSaveGroup);
+            m_windowedAutoSaveGroup = KConfigGroup();
+        }
 
         // Restore grab states that were saved when entering fullscreen
         for (auto it = m_savedGrabStatesBeforeFullscreen.constBegin(); it != m_savedGrabStatesBeforeFullscreen.constEnd(); ++it) {
@@ -523,12 +548,13 @@ void MainWindow::switchFullscreen()
         m_tabWidget->tabBar()->setHidden(m_tabWidget->count() <= 1 && !Settings::showTabBar());
         m_tabWidget->setDocumentMode(false);
 
-        KToggleFullScreenAction::setFullScreen(this, false);
-
         for (RemoteView *view : std::as_const(m_remoteViewMap)) {
             view->switchFullscreen(false);
             view->enableScaling(view->hostPreferences()->windowedScale());
         }
+
+        delete m_minimizePixel;
+        m_minimizePixel = nullptr;
 
         if (m_toolBar) {
             m_toolBar->hideAndDestroy();
@@ -544,15 +570,18 @@ void MainWindow::switchFullscreen()
 
     } else {
         // Entering full screen mode
-        if (autoSaveSettings()) {
-            setAutoSaveSettings(autoSaveConfigGroup(), false);
+        m_guiItemsState = {.dockWidget = !m_remoteDesktopsDockWidget->isHidden(),
+                           .menuBar = !menuBar()->isHidden(),
+                           .statusBar = !statusBar()->isHidden(),
+                           .toolBar = !toolBars().first()->isHidden()};
+
+        // Keep the group while autosaving is disabled: autoSaveConfigGroup()
+        // returns an invalid group until autosaving is enabled again.
+        m_windowedAutoSaveGroup = autoSaveConfigGroup();
+        if (m_windowedAutoSaveGroup.isValid()) {
+            setAutoSaveSettings(m_windowedAutoSaveGroup, false);
             resetAutoSaveSettings();
         }
-
-        m_guiItemsState = {.dockWidget = m_remoteDesktopsDockWidget->isVisible(),
-                           .menuBar = menuBar()->isVisible(),
-                           .statusBar = statusBar()->isVisible(),
-                           .toolBar = toolBars().first()->isVisible()};
 
         m_remoteDesktopsDockWidget->setVisible(false);
         menuBar()->setVisible(false);
@@ -562,10 +591,8 @@ void MainWindow::switchFullscreen()
         m_tabWidget->tabBar()->hide();
         m_tabWidget->setDocumentMode(true);
 
-        KToggleFullScreenAction::setFullScreen(this, true);
-
-        MinimizePixel *minimizePixel = new MinimizePixel(this);
-        connect(minimizePixel, SIGNAL(rightClicked()), this, SLOT(minimizeFullScreen()));
+        m_minimizePixel = new MinimizePixel(this);
+        connect(m_minimizePixel, SIGNAL(rightClicked()), this, SLOT(minimizeFullScreen()));
 
         for (RemoteView *currentView : std::as_const(m_remoteViewMap)) {
             currentView->enableScaling(currentView->hostPreferences()->fullscreenScale());
@@ -1003,6 +1030,9 @@ void MainWindow::showRemoteViewToolbar()
             list->setMinimumWidth(vertical ? list->sizeHintForColumn(0) + 2 * list->frameWidth() : 0);
         });
     }
+    // A window-manager transition may have resized the window before this
+    // toolbar existed, so do not rely on its resize event filter to show it.
+    m_toolBar->showAndAnimate();
 }
 
 void MainWindow::updateActionStatus()
@@ -1120,12 +1150,11 @@ void MainWindow::quit(bool systemEvent)
         }
 
         if (isFullScreen()) {
-            // restore widget status and save settings
-            m_remoteDesktopsDockWidget->setVisible(m_guiItemsState.dockWidget);
-            menuBar()->setVisible(m_guiItemsState.menuBar);
-            statusBar()->setVisible(m_guiItemsState.statusBar);
-            toolBars().first()->setVisible(m_guiItemsState.toolBar);
-            saveAutoSaveSettings();
+            // Use the normal exit path before saving the windowed settings.
+            switchFullscreen();
+            if (autoSaveSettings()) {
+                saveAutoSaveSettings();
+            }
         }
 
         saveHostPrefs();
@@ -1158,8 +1187,8 @@ void MainWindow::changeEvent(QEvent *event)
 {
     if (event->type() == QEvent::WindowStateChange) {
         auto *stateEvent = static_cast<QWindowStateChangeEvent *>(event);
-        bool wasFullScreen = stateEvent->oldState() & Qt::WindowFullScreen;
-        bool nowFullScreen = windowState() & Qt::WindowFullScreen;
+        const bool wasFullScreen = stateEvent->oldState() & Qt::WindowFullScreen;
+        const bool nowFullScreen = windowState() & Qt::WindowFullScreen;
         const bool wasMinimized = stateEvent->oldState() & Qt::WindowMinimized;
         const bool nowMinimized = windowState() & Qt::WindowMinimized;
 
@@ -1175,24 +1204,8 @@ void MainWindow::changeEvent(QEvent *event)
             }
         }
 
-        if (!wasFullScreen && nowFullScreen) {
-            // Entered fullscreen (possibly via window manager)
-            if (Settings::grabAllKeysOnFullscreen()) {
-                for (RemoteView *view : std::as_const(m_remoteViewMap)) {
-                    if (!view->grabAllKeys()) {
-                        m_savedGrabStatesBeforeFullscreen.insert(view, false);
-                        view->setGrabAllKeys(true);
-                    }
-                }
-            }
-            updateActionStatus();
-        } else if (wasFullScreen && !nowFullScreen) {
-            // Left fullscreen (possibly via window manager)
-            for (auto it = m_savedGrabStatesBeforeFullscreen.constBegin(); it != m_savedGrabStatesBeforeFullscreen.constEnd(); ++it) {
-                it.key()->setGrabAllKeys(it.value());
-            }
-            m_savedGrabStatesBeforeFullscreen.clear();
-            updateActionStatus();
+        if (wasFullScreen != nowFullScreen) {
+            applyFullscreenState(nowFullScreen);
         }
     } else if (event->type() == QEvent::ActivationChange) {
         // Some window managers restore a minimized full-screen window by
