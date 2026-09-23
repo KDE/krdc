@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-22 00:44+0000\n"
-"PO-Revision-Date: 2026-03-06 14:09+0200\n"
+"POT-Creation-Date: 2026-09-23 00:52+0000\n"
+"PO-Revision-Date: 2026-09-22 21:55+0200\n"
 "Last-Translator: Alexander Yavorskiy <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -227,13 +227,13 @@ msgstr "Настроить…"
 msgid "Remove"
 msgstr "Удалить"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:296 mainwindow.cpp:762
-#: mainwindow.cpp:778
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:296 mainwindow.cpp:769
+#: mainwindow.cpp:785
 #, kde-format
 msgid "Unusable URL"
 msgstr "Неправильный URL"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:778
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:785
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr "Не удалось обработать адрес хоста."
@@ -324,13 +324,13 @@ msgstr[3] "%1 год назад"
 #, kde-format
 msgctxt "@label:textbox Name of a remote connection"
 msgid "Name:"
-msgstr ""
+msgstr "Название:"
 
 #: core/hostpreferences.cpp:231
 #, kde-format
 msgctxt "@label:textbox URL of a remote connection"
 msgid "URL:"
-msgstr ""
+msgstr "Адрес:"
 
 #: core/hostpreferences.cpp:249
 #, kde-format
@@ -538,8 +538,8 @@ msgstr "URL, к которым следует подключаться при з
 msgid "KDE Remote Desktop Client started"
 msgstr "Клиент удалённого рабочего стола для KDE запущен"
 
-#: mainwindow.cpp:112 mainwindow.cpp:129 mainwindow.cpp:1261
-#: mainwindow.cpp:1356
+#: mainwindow.cpp:112 mainwindow.cpp:129 mainwindow.cpp:1268
+#: mainwindow.cpp:1363
 #, kde-format
 msgid "New Connection"
 msgstr "Новое соединение"
@@ -678,105 +678,104 @@ msgstr "Перейти в оконный режим"
 msgid "Window Mode"
 msgstr "Оконный режим"
 
-#: mainwindow.cpp:762
-#, fuzzy, kde-format
-#| msgid "The entered address cannot be handled."
+#: mainwindow.cpp:769
+#, kde-format
 msgid "The entered address cannot be handled by this connection type."
-msgstr "Введённый адрес не может быть обработан."
+msgstr "Введённый адрес не может быть обработан соединением этого типа."
 
-#: mainwindow.cpp:797
+#: mainwindow.cpp:804
 #, kde-format
 msgid "Connect"
 msgstr "Подключиться"
 
-#: mainwindow.cpp:798
+#: mainwindow.cpp:805
 #, kde-format
 msgid "Rename"
 msgstr "Переименовать"
 
-#: mainwindow.cpp:799
+#: mainwindow.cpp:806
 #, kde-format
 msgid "Settings"
 msgstr "Настройка"
 
-#: mainwindow.cpp:800
+#: mainwindow.cpp:807
 #, kde-format
 msgid "Delete"
 msgstr "Удалить"
 
-#: mainwindow.cpp:803 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:810 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "Закладки"
 
-#: mainwindow.cpp:803 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:810 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "Журнал"
 
-#: mainwindow.cpp:815
+#: mainwindow.cpp:822
 #, kde-format
 msgid "Rename %1"
 msgstr "Переименование %1"
 
-#: mainwindow.cpp:815
+#: mainwindow.cpp:822
 #, kde-format
 msgid "Rename %1 to"
 msgstr "Переименовать %1 в"
 
-#: mainwindow.cpp:822
+#: mainwindow.cpp:829
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "Вы уверены, что хотите удалить %1?"
 
-#: mainwindow.cpp:822
+#: mainwindow.cpp:829
 #, kde-format
 msgid "Delete %1"
 msgstr "Удаление %1"
 
-#: mainwindow.cpp:846
+#: mainwindow.cpp:853
 #, kde-format
 msgid "Add Bookmark"
 msgstr "Добавить закладку"
 
-#: mainwindow.cpp:847
+#: mainwindow.cpp:854
 #, kde-format
 msgid "Close Tab"
 msgstr "Закрыть вкладку"
 
-#: mainwindow.cpp:964
+#: mainwindow.cpp:971
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr "Свернуть полноэкранное окно"
 
-#: mainwindow.cpp:981
+#: mainwindow.cpp:988
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "Прикрепить панель инструментов"
 
-#: mainwindow.cpp:1098
+#: mainwindow.cpp:1105
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr "Закрыть клиент удалённого рабочего стола для KDE?"
 
-#: mainwindow.cpp:1099
+#: mainwindow.cpp:1106
 #, kde-format
 msgid "Confirm Quit"
 msgstr "Подтвердите выход"
 
-#: mainwindow.cpp:1284
+#: mainwindow.cpp:1291
 #, kde-format
 msgid "Connect to:"
 msgstr "Подключиться к:"
 
-#: mainwindow.cpp:1288
+#: mainwindow.cpp:1295
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr "Введите здесь текст для подключения к адресу или фильтрации списка."
 
-#: mainwindow.cpp:1297
+#: mainwindow.cpp:1304
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
@@ -785,17 +784,17 @@ msgstr ""
 "Введите здесь IP-адрес или имя хоста. Очистите строку, чтобы получить список "
 "способов подключения."
 
-#: mainwindow.cpp:1300
+#: mainwindow.cpp:1307
 #, kde-format
 msgid "Goto Address"
 msgstr "Перейти к адресу"
 
-#: mainwindow.cpp:1392
+#: mainwindow.cpp:1399
 #, kde-format
 msgid "Remote Desktops"
 msgstr "Удалённые системы"
 
-#: mainwindow.cpp:1421
+#: mainwindow.cpp:1428
 #, kde-format
 msgid "Filter"
 msgstr "Фильтр"
@@ -863,10 +862,9 @@ msgstr "Другое разрешение (…)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:86
-#, fuzzy, kde-format
-#| msgid "Current Screen Resolution"
+#, kde-format
 msgid "Use All Screens Resolution"
-msgstr "Текущее разрешение экрана"
+msgstr "Использовать разрешение всех экранов"
 
 #. i18n: ectx: property (text), widget (QLabel, widthLabel)
 #: rdp/rdppreferences.ui:99 vnc/vncpreferences.ui:136
@@ -1488,7 +1486,7 @@ msgstr "RPC"
 msgid "Domain:"
 msgstr "Домен:"
 
-#: rdp/rdpsession.cpp:1239
+#: rdp/rdpsession.cpp:1284
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1678,7 +1676,7 @@ msgstr "Ошибка входа"
 #, kde-format
 msgctxt "@title:window"
 msgid "KRDC – Screen %1"
-msgstr ""
+msgstr "KRDC — экран %1"
 
 #: rdp/rdpviewfactory.cpp:26
 #, kde-format

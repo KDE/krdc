@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-22 00:44+0000\n"
+"POT-Creation-Date: 2026-09-23 00:52+0000\n"
 "PO-Revision-Date: 2014-01-07 18:13+0100\n"
 "Last-Translator: Bjørn Steensrud <bjornst@skogkatt.homelinux.org>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@nuug.no>\n"
@@ -214,13 +214,13 @@ msgstr "Oppsett …"
 msgid "Remove"
 msgstr "Fjern"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:296 mainwindow.cpp:762
-#: mainwindow.cpp:778
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:296 mainwindow.cpp:769
+#: mainwindow.cpp:785
 #, kde-format
 msgid "Unusable URL"
 msgstr "Ubrukelig URL"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:778
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:785
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr "Den valgte verten kan ikke håndteres."
@@ -508,8 +508,8 @@ msgstr "URL-er det skal kobles til etter oppstart"
 msgid "KDE Remote Desktop Client started"
 msgstr "KDE Remote Desktop Client startet"
 
-#: mainwindow.cpp:112 mainwindow.cpp:129 mainwindow.cpp:1261
-#: mainwindow.cpp:1356
+#: mainwindow.cpp:112 mainwindow.cpp:129 mainwindow.cpp:1268
+#: mainwindow.cpp:1363
 #, kde-format
 msgid "New Connection"
 msgstr "Ny tilkobling"
@@ -648,105 +648,105 @@ msgstr "Bytt til vindusmodus"
 msgid "Window Mode"
 msgstr "Vindusmodus"
 
-#: mainwindow.cpp:762
+#: mainwindow.cpp:769
 #, fuzzy, kde-format
 #| msgid "The entered address cannot be handled."
 msgid "The entered address cannot be handled by this connection type."
 msgstr "Adressen som er oppgitt kan ikke behandles."
 
-#: mainwindow.cpp:797
+#: mainwindow.cpp:804
 #, kde-format
 msgid "Connect"
 msgstr "Koble til"
 
-#: mainwindow.cpp:798
+#: mainwindow.cpp:805
 #, kde-format
 msgid "Rename"
 msgstr "Endre navn"
 
-#: mainwindow.cpp:799
+#: mainwindow.cpp:806
 #, kde-format
 msgid "Settings"
 msgstr "Innstillinger"
 
-#: mainwindow.cpp:800
+#: mainwindow.cpp:807
 #, kde-format
 msgid "Delete"
 msgstr "Slett"
 
-#: mainwindow.cpp:803 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:810 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "Bokmerker"
 
-#: mainwindow.cpp:803 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:810 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "Historie"
 
-#: mainwindow.cpp:815
+#: mainwindow.cpp:822
 #, kde-format
 msgid "Rename %1"
 msgstr "Omnavn %1"
 
-#: mainwindow.cpp:815
+#: mainwindow.cpp:822
 #, kde-format
 msgid "Rename %1 to"
 msgstr "Endre navn på %1 til"
 
-#: mainwindow.cpp:822
+#: mainwindow.cpp:829
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "Er du sikker på at du vil slette %1?"
 
-#: mainwindow.cpp:822
+#: mainwindow.cpp:829
 #, kde-format
 msgid "Delete %1"
 msgstr "Fjern %1"
 
-#: mainwindow.cpp:846
+#: mainwindow.cpp:853
 #, kde-format
 msgid "Add Bookmark"
 msgstr "Legg til bokmerke"
 
-#: mainwindow.cpp:847
+#: mainwindow.cpp:854
 #, kde-format
 msgid "Close Tab"
 msgstr "Lukk fane"
 
-#: mainwindow.cpp:964
+#: mainwindow.cpp:971
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr "Minimer fullskjerm-vinduet"
 
-#: mainwindow.cpp:981
+#: mainwindow.cpp:988
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "Fest verktøylinja"
 
-#: mainwindow.cpp:1098
+#: mainwindow.cpp:1105
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr "Er du sikker på at du vil lukke KDE RD-klienten?"
 
-#: mainwindow.cpp:1099
+#: mainwindow.cpp:1106
 #, kde-format
 msgid "Confirm Quit"
 msgstr "Bekreft lukking"
 
-#: mainwindow.cpp:1284
+#: mainwindow.cpp:1291
 #, kde-format
 msgid "Connect to:"
 msgstr "Oppkobling til: "
 
-#: mainwindow.cpp:1288
+#: mainwindow.cpp:1295
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr "Skriv her for å koble til en adresse og filtrere lista."
 
-#: mainwindow.cpp:1297
+#: mainwindow.cpp:1304
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
@@ -755,17 +755,17 @@ msgstr ""
 "Skriv inn en IP-adresse eller DNS-navn her. Tøm linja for å få en liste over "
 "tilkoblingsmetoder."
 
-#: mainwindow.cpp:1300
+#: mainwindow.cpp:1307
 #, kde-format
 msgid "Goto Address"
 msgstr "Gå til adresse"
 
-#: mainwindow.cpp:1392
+#: mainwindow.cpp:1399
 #, kde-format
 msgid "Remote Desktops"
 msgstr "Fjernskrivebord"
 
-#: mainwindow.cpp:1421
+#: mainwindow.cpp:1428
 #, kde-format
 msgid "Filter"
 msgstr "Filter"
@@ -1459,7 +1459,7 @@ msgstr ""
 msgid "Domain:"
 msgstr ""
 
-#: rdp/rdpsession.cpp:1239
+#: rdp/rdpsession.cpp:1284
 #, kde-format
 msgctxt "@label"
 msgid ""

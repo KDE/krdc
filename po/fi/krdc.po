@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-22 00:44+0000\n"
+"POT-Creation-Date: 2026-09-23 00:52+0000\n"
 "PO-Revision-Date: 2026-02-25 16:08+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -216,13 +216,13 @@ msgstr "Asetukset…"
 msgid "Remove"
 msgstr "Poista"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:296 mainwindow.cpp:762
-#: mainwindow.cpp:778
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:296 mainwindow.cpp:769
+#: mainwindow.cpp:785
 #, kde-format
 msgid "Unusable URL"
 msgstr "Kelvoton verkko-osoite"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:778
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:785
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr "Valittua konetta ei voida käsitellä."
@@ -520,8 +520,8 @@ msgstr "Osoitteet, joihin yhdistää käynnistyksen jälkeen"
 msgid "KDE Remote Desktop Client started"
 msgstr "KDE-etätyöpöytäasiakas käynnistettiin"
 
-#: mainwindow.cpp:112 mainwindow.cpp:129 mainwindow.cpp:1261
-#: mainwindow.cpp:1356
+#: mainwindow.cpp:112 mainwindow.cpp:129 mainwindow.cpp:1268
+#: mainwindow.cpp:1363
 #, kde-format
 msgid "New Connection"
 msgstr "Uusi yhteys"
@@ -660,105 +660,105 @@ msgstr "Vaihda ikkunatilaan"
 msgid "Window Mode"
 msgstr "Ikkunatila"
 
-#: mainwindow.cpp:762
+#: mainwindow.cpp:769
 #, fuzzy, kde-format
 #| msgid "The entered address cannot be handled."
 msgid "The entered address cannot be handled by this connection type."
 msgstr "Annettua osoitetta ei voida käsitellä."
 
-#: mainwindow.cpp:797
+#: mainwindow.cpp:804
 #, kde-format
 msgid "Connect"
 msgstr "Yhdistä"
 
-#: mainwindow.cpp:798
+#: mainwindow.cpp:805
 #, kde-format
 msgid "Rename"
 msgstr "Muuta nimeä"
 
-#: mainwindow.cpp:799
+#: mainwindow.cpp:806
 #, kde-format
 msgid "Settings"
 msgstr "Asetukset"
 
-#: mainwindow.cpp:800
+#: mainwindow.cpp:807
 #, kde-format
 msgid "Delete"
 msgstr "Poista"
 
-#: mainwindow.cpp:803 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:810 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "Kirjanmerkit"
 
-#: mainwindow.cpp:803 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:810 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "Historia"
 
-#: mainwindow.cpp:815
+#: mainwindow.cpp:822
 #, kde-format
 msgid "Rename %1"
 msgstr "Muuta kohteen %1 nimeä"
 
-#: mainwindow.cpp:815
+#: mainwindow.cpp:822
 #, kde-format
 msgid "Rename %1 to"
 msgstr "Muuta kohteen %1 nimeksi"
 
-#: mainwindow.cpp:822
+#: mainwindow.cpp:829
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "Haluatko varmasti poistaa kohteen %1?"
 
-#: mainwindow.cpp:822
+#: mainwindow.cpp:829
 #, kde-format
 msgid "Delete %1"
 msgstr "Poista %1"
 
-#: mainwindow.cpp:846
+#: mainwindow.cpp:853
 #, kde-format
 msgid "Add Bookmark"
 msgstr "Lisää kirjanmerkki"
 
-#: mainwindow.cpp:847
+#: mainwindow.cpp:854
 #, kde-format
 msgid "Close Tab"
 msgstr "Sulje välilehti"
 
-#: mainwindow.cpp:964
+#: mainwindow.cpp:971
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr "Pienennä koko näytön ikkuna"
 
-#: mainwindow.cpp:981
+#: mainwindow.cpp:988
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "Tahmea työkalurivi"
 
-#: mainwindow.cpp:1098
+#: mainwindow.cpp:1105
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr "Haluatko varmasti lopettaa KDE-etätyöpöytäasiakkaan?"
 
-#: mainwindow.cpp:1099
+#: mainwindow.cpp:1106
 #, kde-format
 msgid "Confirm Quit"
 msgstr "Vahvista lopettaminen"
 
-#: mainwindow.cpp:1284
+#: mainwindow.cpp:1291
 #, kde-format
 msgid "Connect to:"
 msgstr "Yhdistä kohteeseen:"
 
-#: mainwindow.cpp:1288
+#: mainwindow.cpp:1295
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr "Suodata luetteloa alkamalla kirjoittaa tähän osoitetta."
 
-#: mainwindow.cpp:1297
+#: mainwindow.cpp:1304
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
@@ -767,17 +767,17 @@ msgstr ""
 "Kirjoita tähän IP- tai DNS-nimi. Luettelon yhteystavoista saa tyhjentämällä "
 "rivin."
 
-#: mainwindow.cpp:1300
+#: mainwindow.cpp:1307
 #, kde-format
 msgid "Goto Address"
 msgstr "Siirry osoitteeseen"
 
-#: mainwindow.cpp:1392
+#: mainwindow.cpp:1399
 #, kde-format
 msgid "Remote Desktops"
 msgstr "Etätyöpöydät"
 
-#: mainwindow.cpp:1421
+#: mainwindow.cpp:1428
 #, kde-format
 msgid "Filter"
 msgstr "Suodatin"
@@ -1470,7 +1470,7 @@ msgstr "RPC"
 msgid "Domain:"
 msgstr "Verkkoalue:"
 
-#: rdp/rdpsession.cpp:1239
+#: rdp/rdpsession.cpp:1284
 #, kde-format
 msgctxt "@label"
 msgid ""

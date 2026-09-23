@@ -1,5 +1,5 @@
 # translation of krdc.po to
-# Version: $Revision: 1747017 $
+# Version: $Revision: 1747419 $
 # Copyright (C) 2002, 2003, 2004, 2005, 2006, 2008, 2009 Free Software Foundation, Inc.
 # Krzysztof Lichota <lichota@mimuw.edu.pl>, 2002, 2005, 2006.
 # Michal Rudolf <mrudolf@kdewebdev.org>, 2003, 2004.
@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-22 00:44+0000\n"
+"POT-Creation-Date: 2026-09-23 00:52+0000\n"
 "PO-Revision-Date: 2026-03-21 05:52+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: pl\n"
@@ -218,13 +218,13 @@ msgstr "Ustawienia…"
 msgid "Remove"
 msgstr "Usuń"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:296 mainwindow.cpp:762
-#: mainwindow.cpp:778
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:296 mainwindow.cpp:769
+#: mainwindow.cpp:785
 #, kde-format
 msgid "Unusable URL"
 msgstr "Nieprawidłowy URL"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:778
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:785
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr "Nie można obsłużyć wybranego komputera."
@@ -525,8 +525,8 @@ msgstr "URL do połączenia się po starcie"
 msgid "KDE Remote Desktop Client started"
 msgstr "Uruchomiono klienta zdalnego połączenia z pulpitem"
 
-#: mainwindow.cpp:112 mainwindow.cpp:129 mainwindow.cpp:1261
-#: mainwindow.cpp:1356
+#: mainwindow.cpp:112 mainwindow.cpp:129 mainwindow.cpp:1268
+#: mainwindow.cpp:1363
 #, kde-format
 msgid "New Connection"
 msgstr "Nowe połączenie"
@@ -665,105 +665,105 @@ msgstr "Przełącz do trybu okien"
 msgid "Window Mode"
 msgstr "Tryb okienkowy"
 
-#: mainwindow.cpp:762
+#: mainwindow.cpp:769
 #, fuzzy, kde-format
 #| msgid "The entered address cannot be handled."
 msgid "The entered address cannot be handled by this connection type."
 msgstr "Wpisany adres nie może zostać użyty."
 
-#: mainwindow.cpp:797
+#: mainwindow.cpp:804
 #, kde-format
 msgid "Connect"
 msgstr "Połącz"
 
-#: mainwindow.cpp:798
+#: mainwindow.cpp:805
 #, kde-format
 msgid "Rename"
 msgstr "Zmień nazwę"
 
-#: mainwindow.cpp:799
+#: mainwindow.cpp:806
 #, kde-format
 msgid "Settings"
 msgstr "Ustawienia"
 
-#: mainwindow.cpp:800
+#: mainwindow.cpp:807
 #, kde-format
 msgid "Delete"
 msgstr "Usuń"
 
-#: mainwindow.cpp:803 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:810 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "Zakładki"
 
-#: mainwindow.cpp:803 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:810 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "Historia"
 
-#: mainwindow.cpp:815
+#: mainwindow.cpp:822
 #, kde-format
 msgid "Rename %1"
 msgstr "Zmień nazwę %1"
 
-#: mainwindow.cpp:815
+#: mainwindow.cpp:822
 #, kde-format
 msgid "Rename %1 to"
 msgstr "Zmień nazwę %1 na"
 
-#: mainwindow.cpp:822
+#: mainwindow.cpp:829
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "Na pewno usunąć %1?"
 
-#: mainwindow.cpp:822
+#: mainwindow.cpp:829
 #, kde-format
 msgid "Delete %1"
 msgstr "Usuń %1"
 
-#: mainwindow.cpp:846
+#: mainwindow.cpp:853
 #, kde-format
 msgid "Add Bookmark"
 msgstr "Dodaj zakładkę"
 
-#: mainwindow.cpp:847
+#: mainwindow.cpp:854
 #, kde-format
 msgid "Close Tab"
 msgstr "Zamknij kartę"
 
-#: mainwindow.cpp:964
+#: mainwindow.cpp:971
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr "Zminimalizuj tryb pełnoekranowy"
 
-#: mainwindow.cpp:981
+#: mainwindow.cpp:988
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "Pasek narzędzi przyklejony"
 
-#: mainwindow.cpp:1098
+#: mainwindow.cpp:1105
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr "Czy na pewno zakończyć klienta zdalnego pulpitu?"
 
-#: mainwindow.cpp:1099
+#: mainwindow.cpp:1106
 #, kde-format
 msgid "Confirm Quit"
 msgstr "Potwierdzenie zakończenia"
 
-#: mainwindow.cpp:1284
+#: mainwindow.cpp:1291
 #, kde-format
 msgid "Connect to:"
 msgstr "Połącz z:"
 
-#: mainwindow.cpp:1288
+#: mainwindow.cpp:1295
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr "Wpisz tutaj, aby połączyć się z adresem i przefiltrować listę."
 
-#: mainwindow.cpp:1297
+#: mainwindow.cpp:1304
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
@@ -771,17 +771,17 @@ msgid ""
 msgstr ""
 "Wpisz IP lub nazwę DNS. Wyczyść wiersz, aby otrzymać listę metod połączenia."
 
-#: mainwindow.cpp:1300
+#: mainwindow.cpp:1307
 #, kde-format
 msgid "Goto Address"
 msgstr "Idź do adresu"
 
-#: mainwindow.cpp:1392
+#: mainwindow.cpp:1399
 #, kde-format
 msgid "Remote Desktops"
 msgstr "Zdalne pulpity"
 
-#: mainwindow.cpp:1421
+#: mainwindow.cpp:1428
 #, kde-format
 msgid "Filter"
 msgstr "Filtr"
@@ -1473,7 +1473,7 @@ msgstr "RPC"
 msgid "Domain:"
 msgstr "Domena:"
 
-#: rdp/rdpsession.cpp:1239
+#: rdp/rdpsession.cpp:1284
 #, kde-format
 msgctxt "@label"
 msgid ""
