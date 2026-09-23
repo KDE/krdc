@@ -5,6 +5,7 @@
 */
 
 #include "spiceview.h"
+#include "evdev_to_xtkbd.h"
 #include "krdc_debug.h"
 
 #include <QApplication>
@@ -349,16 +350,28 @@ void SpiceView::handleKeyEvent(QKeyEvent *event)
     if (m_viewOnly || !m_inputsChannel)
         return;
 
-    // On Linux/X11, nativeScanCode() is the evdev keycode.
-    // SPICE uses XT (set-1) scan codes; evdev = XT + 8.
-    const guint scancode = event->nativeScanCode() - 8;
-    if (scancode == 0)
+    quint32 evdevScancode;
+    if (QGuiApplication::platformName() == QStringLiteral("xcb")) { // check if X11
+        evdevScancode = event->nativeScanCode();
+    } else { // wayland probably
+        evdevScancode = event->nativeScanCode() - x11WaylandEvdevOffset;
+    }
+
+    if (evdevScancode >= evdevToXtKbdMap.size()) {
+        qCWarning(KRDC) << "Scancode out of range:" << evdevScancode;
         return;
+    }
+
+    guint xtScancode = evdevToXtKbdMap[evdevScancode];
+    if (xtScancode == 0) {
+        qCWarning(KRDC) << "Unknown mapping for evdev scancode:" << evdevScancode;
+        return;
+    }
 
     if (event->type() == QEvent::KeyPress)
-        spice_inputs_channel_key_press(m_inputsChannel, scancode);
+        spice_inputs_channel_key_press(m_inputsChannel, xtScancode);
     else
-        spice_inputs_channel_key_release(m_inputsChannel, scancode);
+        spice_inputs_channel_key_release(m_inputsChannel, xtScancode);
 }
 
 void SpiceView::handleWheelEvent(QWheelEvent *event)

@@ -99,6 +99,10 @@ private:
 
     SpiceHostPreferences *m_hostPreferences;
 
+    // difference of 8 between x11 wayland.
+    // see: https://wayland-devel.freedesktop.narkive.com/6dOtsFGc/gtk-hardware-scancodes-for-wayland-detecting-xwayland
+    static constexpr quint32 x11WaylandEvdevOffset = 8;
+
     // GLib signal connection helpers
     void connectSession();
     void disconnectSession();
