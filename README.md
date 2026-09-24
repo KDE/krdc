@@ -4,7 +4,7 @@
   <img src="logo.png" alt="KRDC Logo" width="200">
 </p>
 
-KRDC is a remote desktop client for the KDE Plasma Desktop environment. It supports protocols like RDP and VNC, allowing users to connect to remote machines seamlessly. KRDC provides a user-friendly interface for accessing remote desktops, making it a powerful tool for remote administration or accessing your own machines from afar.
+KRDC is a remote desktop client for the KDE Plasma Desktop environment. It supports protocols like RDP, VNC, and SPICE, allowing users to connect to remote machines seamlessly. KRDC provides a user-friendly interface for accessing remote desktops, making it a powerful tool for remote administration or accessing your own machines from afar.
 
 For more detailed information, including user guides and technical documentation, check out the official KDE resources:
 - [KRDC Overview on KDE Apps](https://apps.kde.org/krdc/)
@@ -14,7 +14,7 @@ For more detailed information, including user guides and technical documentation
 
 ## Features
 
-- **Multi-Protocol Support:** Connect effortlessly using industry-standard protocols, including **RDP** (Remote Desktop Protocol) and **VNC** (Virtual Network Computing).
+- **Multi-Protocol Support:** Connect effortlessly using industry-standard protocols, including **RDP** (Remote Desktop Protocol), **VNC** (Virtual Network Computing), and **SPICE**.
 - **KDE Integration:** Seamlessly integrates with the KDE Plasma Desktop environment, providing a consistent and user-friendly experience.
 - **Session Management:** Easily manage and revisit your remote connections with session history and quick access to recent connections.
 - **Enhanced Security:** Secure your remote sessions with configurable encryption options, ensuring your data remains protected.
@@ -55,8 +55,8 @@ sudo make install
    ```
 
 2. **Connect to a remote machine:**
-   - Enter the remote host address (e.g., `rdp://192.168.1.10` or `vnc://hostname`).
-   - Choose the connection protocol (RDP or VNC).
+   - Enter the remote host address (e.g., `rdp://192.168.1.10`, `vnc://hostname`, or `spice://myhost:5900`).
+   - Choose the connection protocol (RDP, VNC, or SPICE).
    - Click **Connect**.
 
 3. **Session Management:**
