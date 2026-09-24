@@ -30,23 +30,31 @@ as Authors, publish date, the abstract, and Keywords -->
         <address><email>uwolfer @ kde.org</email></address>
     </affiliation>
 </author>
+<author>
+    <firstname>Fabio</firstname>
+    <surname>Bas</surname>
+    <affiliation>
+        <address><email>ctrlaltca @ gmail.com</email></address>
+    </affiliation>
+</author>
 <!-- TRANS:ROLES_OF_TRANSLATORS -->
 </authorgroup>
 
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2016-07-25</date>
-<releaseinfo>Applications 16.08</releaseinfo>
+<date>2026-09-24</date>
+<releaseinfo>KDE Gear 26.12.00</releaseinfo>
 
 <copyright>
-<year>2003, 2008</year>
+<year>2003, 2026</year>
 </copyright>
 
 <abstract>
 <para>
 &krdc; is a client application that allows you to view or even control
 the desktop session on another machine that is running a compatible server.
-<acronym>VNC</acronym> and <acronym>RDP</acronym> is supported.
+<acronym>VNC</acronym>, <acronym>RDP</acronym>, and <acronym>SPICE</acronym>
+are supported when the corresponding plugins are installed and enabled.
 </para>
 </abstract>
 
@@ -62,6 +70,7 @@ the desktop session on another machine that is running a compatible server.
 <keyword>Remote Assistance</keyword>
 <keyword>Remote Desktop</keyword>
 <keyword>RDP</keyword>
+<keyword>SPICE</keyword>
 <keyword>Remote Administration</keyword>
 </keywordset>
 
@@ -70,81 +79,95 @@ the desktop session on another machine that is running a compatible server.
 <chapter id="introduction">
 <title>Introduction</title>
 
-<para>
-&krdc; is a client application that allows you to view or even control
-the desktop session on another machine that is running a compatible
-server.
-</para>
+<para>&krdc; lets you view and control a desktop on another computer.
+You can use it to work on a remote machine or help another user. The computer
+you connect to must run a compatible remote desktop server; &krdc; is the
+client and does not enable desktop sharing on that computer.</para>
 
-<para>
-You would typically use &krdc; with the &kde; <acronym>VNC</acronym> server (&krfb;), which is
-also known as Krfb, since it closely matches the special features of &krdc;.
-</para>
+<para>&krdc; supports <acronym>VNC</acronym> (Virtual Network Computing),
+<acronym>RDP</acronym> (Remote Desktop Protocol), and <acronym>SPICE</acronym>.
+The protocols available in your installation depend on the installed and enabled
+plugins. For example, you can connect to a desktop shared by &krfb; using
+<acronym>VNC</acronym>, to a Remote Desktop server using <acronym>RDP</acronym>,
+or to a virtual machine with a <acronym>SPICE</acronym> server.</para>
 
-<para>
-If you want to start &krdc; from &konsole;, the command is <userinput><command>krdc</command></userinput>.
-</para>
-
-<para>
-Please report any problems or feature requests to the &kde; mailing
-lists or file a bug at <ulink
-url="https://bugs.kde.org">https://bugs.kde.org</ulink>.
-</para>
+<para>Start &krdc; from your application launcher or run
+<userinput><command>krdc</command></userinput> in a terminal.
+For command-line examples, see <xref linkend="command-line"/>.</para>
 </chapter>
 
-<chapter id="what-is-RFB">
-<title>The Remote Frame Buffer protocol</title>
+<chapter id="supported-protocols">
+<title>Supported Protocols</title>
 
-<para>
-This chapter provides a brief description of the Remote Frame Buffer
-protocol used by &krdc; and by other compatible systems. If you are
-already familiar with Remote Frame Buffer, you can safely skip this
-chapter.
-</para>
+<para>&krdc; supports <acronym>VNC</acronym>, <acronym>RDP</acronym>, and
+<acronym>SPICE</acronym> through protocol plugins. Select the protocol that
+matches the server on the remote computer. The client and server can run
+different operating systems.</para>
 
-<para>
-The high level implementation of a system using the Remote Frame
-Buffer protocol is known as Virtual Network Computer, or more often
-just as <acronym>VNC</acronym>.
-</para>
+<sect1 id="protocol-vnc">
+<title>VNC</title>
 
-<para>
-Remote Frame Buffer (or <acronym>RFB</acronym> for short) is a simple
-protocol for remote access to graphical user interfaces. It works at
-the frame-buffer level, which roughly corresponds to the rendered
-screen image, which means that it can be applied to all windowing
-systems (including X11, &MacOS; and &Microsoft; &Windows;). Remote
-Frame Buffer applications exist for many platforms, and can often be
-free re-distributed.
-</para>
+<para><acronym>VNC</acronym> uses the Remote Frame Buffer
+(<acronym>RFB</acronym>) protocol. The server sends updates of its desktop image
+to the client, and the client sends keyboard and pointer input back to the
+server. It is commonly used to share an existing desktop session.</para>
 
-<para>
-In the Remote Frame Buffer protocol, the application that runs on the
-machine where the user sits (containing the display, keyboard and
-pointer) is called the client. The application that runs on the
-machine where the framebuffer is located (which is running the
-windowing system and applications that the user is remotely
-controlling) is called the server. &krdc; is the &kde; client for the
-Remote Frame Buffer protocol. &krfb; is the &kde; server for the
-Remote Frame Buffer protocol. 
-</para>
+<para><ulink url="https://apps.kde.org/krfb/">&krfb;</ulink> is &kde;'s
+desktop sharing application and provides a <acronym>VNC</acronym> server for
+sharing a &plasma; desktop. Start and configure &krfb; on the computer whose
+desktop you want to share, then connect to it from &krdc; using
+<acronym>VNC</acronym>. Other compatible VNC servers can also be used.</para>
 
-<para>
-It takes a reasonable amount of network traffic to send an image of
-the framebuffer, so Remote Frame Buffer works best over high
-bandwidth links, such as a local area network. It is still possible to
-use &krdc; over other links, but performance is unlikely to be as good.
-</para>
+<para>Connection speed and the amount of change on the remote screen affect
+responsiveness. If updates are slow, try a lower <acronym>VNC</acronym> quality
+setting in <xref linkend="vnc-settings"/>.</para>
+</sect1>
 
+<sect1 id="protocol-rdp">
+<title>RDP</title>
+
+<para><acronym>RDP</acronym> (Remote Desktop Protocol) provides remote access
+to a desktop, with features such as audio playback and clipboard exchange.
+Available features depend on the server and its configuration.</para>
+
+<para>In &kde; &plasma;, <ulink url="https://invent.kde.org/plasma/krdp">
+<application>KRDP</application></ulink> provides an RDP server for sharing a
+Wayland desktop session. Configure remote desktop access in &plasma;'s
+&systemsettings;, then connect from &krdc; using <acronym>RDP</acronym>.</para>
+
+<para><acronym>RDP</acronym> is also used natively by &Microsoft; &Windows;
+Remote Desktop. You can connect to a Windows PC after enabling Remote Desktop
+on it. Hosting incoming connections requires a supported edition; Windows Home
+does not include the Remote Desktop server.</para>
+
+<para>For display, sound, sharing, gateway, and other connection options,
+see <xref linkend="rdp-settings"/>.</para>
+</sect1>
+
+<sect1 id="protocol-spice">
+<title>SPICE</title>
+
+<para><acronym>SPICE</acronym> is commonly used to access the graphical console
+of a virtual machine. <application>QEMU</application> can provide a SPICE server
+for a guest, and tools such as <application>virt-manager</application> can
+configure that server through <application>libvirt</application>.</para>
+
+<para>Enable a SPICE display for the virtual machine and obtain its listening
+address and port from the virtualization configuration. In &krdc;, connect to
+the host running QEMU and the port assigned to that virtual machine. This
+connects to the guest's console through the virtualization host, rather than
+to a remote desktop server running inside the guest.</para>
+
+<para>The guest agent, <application>spice-vdagent</application>, enables
+integration features such as clipboard sharing and dynamic resolution changes.
+See <xref linkend="spice-settings"/> for &krdc; options and the
+<ulink url="https://www.spice-space.org/spice-user-manual.html">SPICE User
+Manual</ulink> for QEMU, virt-manager, and guest configuration.</para>
+</sect1>
 </chapter>
 
 <chapter id="using-krdc">
 <title>Using &krdc;</title>
-
-<para>
-It is very easy to use &krdc; - it has a simple interface, as shown in
-the screenshot below.
-</para>
 
 <para>
 <screenshot>
@@ -160,41 +183,35 @@ the screenshot below.
 </screenshot>
 </para>
 
-<sect1 id="compatible-versions"><title>Connecting &krdc; to compatible servers</title>
+<sect1 id="compatible-versions">
+<title>Connecting &krdc; to compatible servers</title>
 
-<para>
-&krdc; is a client, and it needs to be used with compatible
-servers. There are different ways to connect to those servers:
-</para>
+<para>Before connecting, enable the appropriate remote desktop server on the
+remote computer and obtain its address and login details. The server must be
+reachable from your computer, and its firewall must allow the required
+connection.</para>
 
-<itemizedlist>
-<listitem>
-<para>Directly typing the server name (or IP address) into the
-<guilabel>Connect to:</guilabel> input.</para> 
-</listitem>
-<listitem>
-<para>By using an invitation that you received. &krfb; uses
-invitations, and can send them by email.</para>
-</listitem>
-</itemizedlist>
+<procedure>
+<step><para>Choose <menuchoice><guimenu>File</guimenu><guimenuitem>New
+Connection</guimenuitem></menuchoice> to open the connection page.</para></step>
+<step><para>Select <guilabel>vnc</guilabel>, <guilabel>rdp</guilabel>, or
+<guilabel>spice</guilabel> in the protocol selector next to
+<guilabel>Connect to:</guilabel>.</para></step>
+<step><para>Enter the server address in the form
+<userinput>[username@]host[:port]</userinput>, then press
+<keycap>Enter</keycap> or click the arrow button next to the address.
+The protocol is already selected, so do not prepend it to this field.</para></step>
+<step><para>Review the host settings if prompted, and enter the credentials
+required by the server. Each connection opens in a tab.</para></step>
+</procedure>
 
-<para>
-Let's look at each of these in turn.
-</para>
+<variablelist>
+<varlistentry><term><acronym>VNC</acronym></term>
+<listitem><para>Enter <userinput>megan</userinput> for the default port 5900.
+For display 1 on port 5901, enter <userinput>megan:1</userinput> or
+<userinput>megan:5901</userinput>. Port numbers below 100 are interpreted as
+<acronym>VNC</acronym> display numbers and added to 5900.</para>
 
-<sect2><title>Server name entry</title>
-<para>
-If you know the host name (or IP address) of the server you want to
-connect to, you can enter it directly into the <guilabel>Connect to:</guilabel> input.
-</para>
-
-<para>
-If you want to connect to a machine named megan, which is
-running a <acronym>VNC</acronym> server on screen 1 (5901), you can enter
-<userinput>megan:1</userinput> or <userinput>megan:5901</userinput> and 
-choose <guilabel>vnc</guilabel> as the protocol in the 
-drop down box.
-</para>
 <para>
 <screenshot>
 <screeninfo>Entering a hostname into &krdc;</screeninfo>
@@ -207,49 +224,33 @@ drop down box.
 	  </textobject>
 	</mediaobject>
 </screenshot>
-</para>
+</para></listitem></varlistentry>
+<varlistentry><term><acronym>RDP</acronym></term>
+<listitem><para>Enter <userinput>megan</userinput> for the default port 3389,
+or <userinput>megan:3390</userinput> for a different port. You can include a
+user name, for example <userinput>alice@megan</userinput>.</para></listitem></varlistentry>
+<varlistentry><term><acronym>SPICE</acronym></term>
+<listitem><para>Enter the host and port of the virtual machine's
+<acronym>SPICE</acronym> server, for example <userinput>vmhost:5902</userinput>.
+The default port is 5900.</para></listitem></varlistentry>
+</variablelist>
 
-<para>
-Similary, if you are using a <acronym>RDP</acronym> server on that
-machine, you can enter <userinput>megan</userinput>. Choose <guilabel>rdp</guilabel> as
-the protocol. <acronym>RDP</acronym> does not need the screen number to be specified.
-If the server runs the <acronym>RDP</acronym> server not on the default port, you may
-specify it in the following way: <userinput>megan:3910</userinput>
-</para>
-<para>You need to enter an &URL; in percent encoded syntax, i.e. @ as %40, for &eg; 
-<userinput>username%40ad.domain.example</userinput>
-</para>
-<!--https://bugs.kde.org/show_bug.cgi?id=261076-->
-
-</sect2>
-
-<sect2><title>Using an invitation</title>
-<para>
-Within the &krfb; server application, it is possible to send
-invitations over email (and in other ways, although email is the most
-useful). If you receive this type of email invitation, you can just
-click on the link provided in the mail.
-This will start &krdc; if it is not already running, and connect to
-the server specified in the invitation.
-</para>
-
-</sect2>
-
+<para>The connection page also lists bookmarks, connection history, and
+<acronym>VNC</acronym> services advertised on the local network through Zeroconf.
+Typing in the address field filters this list. You can select a listed connection
+and use <guimenuitem>Connect</guimenuitem> from its context menu.
+The <guilabel>Remote Desktops</guilabel> panel provides another way to find saved
+and discovered connections.</para>
 </sect1>
 
-<sect1 id="connection"><title>What happens when you connect</title>
+<sect1 id="connection">
+<title>What happens when you connect</title>
 
-<para>
-Notice: Before connecting, ensure that the target computer (server) is
-available on the network and, if necessary, that its firewall has
-been correctly configured or disabled.
-</para>
-
-<para>
-No matter how you select the server to connect to, the next thing that
-happens is that &krdc; asks you about the network connection to the
-server, as shown below:
-</para>
+<para>The <guilabel>Host Configuration</guilabel> dialog contains settings for
+the selected protocol. Clear <guilabel>Show this dialog again for this
+host</guilabel> to reuse them without being prompted on each connection.
+Settings are associated with the connection address; connecting by a different
+host name or IP address can use a different configuration.</para>
 
 <para>
 <screenshot>
@@ -265,54 +266,11 @@ server, as shown below:
 </screenshot>
 </para>
 
-<para>
-There are three speed settings for the <acronym>VNC</acronym> protocol:
-</para>
-
-<itemizedlist>
-<listitem><para>High Quality (LAN, direct connection), which is the
-default, and you should evaluate how well this setting performs before
-selecting a lower performance option that uses less bandwidth.
-</para></listitem>
-<listitem><para>Medium Quality (DSL, Cable, fast
-Internet).</para></listitem>
-<listitem><para>Low Quality (Modem, ISDN, slow
-Internet).</para></listitem>
-</itemizedlist>
-
-<para>
-If you always operate over the same link type, you can deselect the
-checkbox labeled <guilabel>Show this dialog again for this
-host</guilabel>, which means that you won't be asked about the
-connection type again for this host, providing you identify it in the
-same way. For example, if a host has two names, and deselect the
-checkbox when connecting using one name, you won't get asked if you
-connect using that name, although you will be asked if you use the
-other name, or the IP address.
-</para>
-
-<para>
-You select the appropriate speed setting, and select the
-<guibutton>OK</guibutton> to proceed.
-</para>
-
-<para>
-You can see the connection status in the icon in the tab.
-</para>
-
-<para>
-Depending on the configuration of the server, you may (and almost
-certainly will) need to provide a password to authenticate to the
-server. &krdc; will provide a password dialog similar to that shown
-below.
-</para>
-
-<para>
-&krdc; has the ability to save the password for further connections
-to the same host. It uses KWallet for doing this. You need to check the
-<guibutton>Remember password (KWallet)</guibutton> check box if you like
-to use this feature.
-</para>
+<para>When the server requests authentication, enter your password and, if
+requested, your user name. The <guilabel>Remember password</guilabel> option
+allows &krdc; to store credentials through the system credential store using
+QtKeychain. Password storage also depends on the global
+<guilabel>Remember passwords</guilabel> setting.</para>
 
 <para>
 <screenshot>
@@ -328,91 +286,104 @@ to use this feature.
 </screenshot>
 </para>
 
-<para>
-After authentication, you will be connected to the remote server, and
-can begin using &krdc; to observe or control the remote desktop.
-</para>
+<para>For <acronym>RDP</acronym>, &krdc; may ask you to verify an unknown or
+changed server certificate. Check the certificate details with the server
+administrator before accepting it. The dialog offers
+<guilabel>Remember this certificate</guilabel> for subsequent connections.</para>
 
+<para>The tab icon indicates connection status. After authentication succeeds,
+you can view or control the remote desktop.</para>
 </sect1>
 
-<sect1 id="controlling-remote"><title>Controlling the remote desktop connection</title>
+<sect1 id="controlling-remote">
+<title>Controlling the remote desktop connection</title>
 
-<para>
-Having connected to the remote server, you would normally use the
-keyboard and mouse to control the windowing system and applications on
-that remote machine.
-</para>
-
-<para>
-You can view the remote desktop either as a full screen, or as a
-window on the local desktop. You can change between these modes using
-icons shown below.
-</para>
+<para>Use the keyboard and mouse in a connected tab to work on the remote
+desktop. The toolbar shown below provides controls for opening connections,
+changing the view, and interacting with the remote desktop. Buttons may be
+unavailable depending on the protocol and connection state.</para>
 
 <para>
 <screenshot>
-<screeninfo>&krdc; full screen mode selection</screeninfo>
+<screeninfo>&krdc; toolbar</screeninfo>
 	<mediaobject>
 	  <imageobject>
-	    <imagedata fileref="view-fullscreen.png" format="PNG"/>
+	    <imagedata fileref="view-toolbar.png" format="PNG"/>
 	  </imageobject>
 	  <textobject>
-	    <phrase>&krdc; full screen mode selection</phrase>
+	    <phrase>&krdc; toolbar</phrase>
 	  </textobject>
 	</mediaobject>
 </screenshot>
 </para>
 
-<para>
-<screenshot>
-<screeninfo>&krdc; window mode selection</screeninfo>
-	<mediaobject>
-	  <imageobject>
-	    <imagedata fileref="view-restore.png" format="PNG"/>
-	  </imageobject>
-	  <textobject>
-	    <phrase>&krdc; window mode selection</phrase>
-	  </textobject>
-	</mediaobject>
-</screenshot>
-</para>
+<para>From left to right, the toolbar contains the following buttons:</para>
 
-<para>
-Full screen mode is normally better when you are helping a remote
-user, because you can see all of what they can see. Window mode is
-most useful when you are working both remotely and locally - perhaps
-referring to some local documentation and then using those
-instructions on the remote machine.
-</para>
-
-<sect2><title>Using window mode</title>
-
-<para>
-In window mode, you can terminate the connection by closing the window, by clicking
-on the logout button.
-</para>
-
-</sect2>
-
-<sect2><title>Using full screen mode</title>
-
-<para>
-In full screen mode, you can change the appearance of the toolbar.
-The transparency of the toolbar can be changed with scrollwheel.
-</para>
-
-</sect2>
-
+<variablelist>
+<varlistentry>
+<term><guibutton>New Connection</guibutton></term>
+<listitem><para>Open the connection page to choose a protocol and enter a server address.
+The new connection opens in a tab, so you can keep other sessions open.</para></listitem>
+</varlistentry>
+<varlistentry>
+<term><guibutton>Full Screen</guibutton></term>
+<listitem><para>Display the remote desktop in full screen. The button changes to
+<guibutton>Window Mode</guibutton>, which returns to the normal window.
+In full screen, use the floating toolbar to access session controls.
+<guimenuitem>Stick Toolbar</guimenuitem> keeps it visible, and
+<guimenuitem>Minimize Full Screen Window</guimenuitem> gives access to your local desktop.</para></listitem>
+</varlistentry>
+<varlistentry>
+<term><guibutton>Screenshot</guibutton></term>
+<listitem><para>Copy an image of the remote desktop to the local clipboard.
+Paste it into an image editor or another application to save it.</para></listitem>
+</varlistentry>
+<varlistentry>
+<term><guibutton>View Only</guibutton></term>
+<listitem><para>Observe the remote desktop without sending keyboard or mouse input.
+Clipboard sharing is also suppressed while this option is enabled.
+Click the button again to resume controlling the remote desktop.</para></listitem>
+</varlistentry>
+<varlistentry>
+<term><guibutton>Clipboard Sharing</guibutton></term>
+<listitem><para>Enable or disable clipboard exchange between your computer and the
+remote desktop. Supported content depends on the protocol and server.
+Clipboard exchange requires <guibutton>View Only</guibutton> to be turned off.</para></listitem>
+</varlistentry>
+<varlistentry>
+<term><guibutton>Local Cursor</guibutton></term>
+<listitem><para>Show a local mouse pointer to help track its position over the remote
+desktop. Click the button again to turn this option off.</para></listitem>
+</varlistentry>
+<varlistentry>
+<term><guibutton>Grab Keys</guibutton></term>
+<listitem><para>Send as many keyboard shortcuts as possible to the remote desktop.
+Some shortcuts may remain reserved by the local desktop or window system.
+Turn this option off to handle shortcuts locally again. Automatic keyboard
+grabbing on entering full screen can be enabled in the general settings.</para></listitem>
+</varlistentry>
+<varlistentry>
+<term><guibutton>Scale</guibutton></term>
+<listitem><para>Scale the remote image to fit the available window area.
+Turn this option off to view the desktop without scaling. &krdc; remembers
+separate scaling choices for window and full screen modes. This changes the
+displayed image size, rather than the remote desktop resolution.</para></listitem>
+</varlistentry>
+<varlistentry>
+<term><guibutton>Disconnect</guibutton></term>
+<listitem><para>Close the current connection. Closing its tab also disconnects it.
+This does not issue a logout or shutdown command to the remote computer;
+what happens to the remote session depends on the server.</para></listitem>
+</varlistentry>
+</variablelist>
 </sect1>
 
-<sect1 id="bookmarks"><title>Bookmarks</title>
+<sect1 id="bookmarks">
+<title>Bookmarks and connection history</title>
 
-<para>
-&krdc; has the ability to manage bookmarks. If you need to connect often to
-the same remote desktop, you can add an entry for this connection to the
-bookmark list. You can do so with a click on <menuchoice><guimenu>Bookmarks</guimenu>
-<guimenuitem>Add Bookmark</guimenuitem></menuchoice>.
-</para>
+<para>To save a connection, choose
+<menuchoice><guimenu>Bookmarks</guimenu><guimenuitem>Add Bookmark</guimenuitem></menuchoice>.
+Open it again from the <guimenu>Bookmarks</guimenu> menu or the connection list.</para>
 
 <para>
 <screenshot>
@@ -428,27 +399,23 @@ bookmark list. You can do so with a click on <menuchoice><guimenu>Bookmarks</gui
 </screenshot>
 </para>
 
+<para>When <guilabel>Remember connection history</guilabel> is enabled,
+successful connections are recorded under
+<menuchoice><guimenu>Bookmarks</guimenu><guimenuitem>History</guimenuitem></menuchoice>
+and appear in the connection list. Right-click a saved entry in the list to
+connect, rename it, change its settings, or delete it.</para>
 
-<sect2><title>History Bookmarks</title>
-
-<para>
-&krdc; saves last used remote desktop connections. You can access these special
-bookmarks at <menuchoice><guimenu>Bookmarks</guimenu><guimenuitem>History</guimenuitem></menuchoice>. Of course you can also
-delete a bookmark of this list if you don't need it anymore in the list. Just click
-<guibutton>Delete Bookmark</guibutton> which appears after a click with the right mouse button on
-the bookmark you would like to delete.
-</para>
-
-</sect2>
-
+<para>For a bookmarked connection, the settings dialog can also edit its
+<guilabel>Name:</guilabel> and <guilabel>URL:</guilabel>. Use a complete URL such
+as <userinput>rdp://alice@megan:3389</userinput>, keeping the same protocol.
+Changes to connection settings may take effect only when you reconnect.</para>
 </sect1>
 
-<sect1 id="managing-configuration"><title>Managing &krdc; configuration</title>
-<para>
-Using <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure KRDC...</guimenuitem></menuchoice>, 
-you can open a dialog to modify the behavior of &krdc;. Selecting that button brings up a
-window as shown below:
-</para>
+<sect1 id="managing-configuration">
+<title>Managing &krdc; configuration</title>
+
+<para>Open <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
+KRDC...</guimenuitem></menuchoice> to change application preferences.</para>
 
 <para>
 <screenshot>
@@ -464,75 +431,338 @@ window as shown below:
 </screenshot>
 </para>
 
+<variablelist>
+<varlistentry><term><guilabel>General</guilabel></term>
+<listitem><para>Choose whether to restore open sessions on startup, remember
+history and passwords, display a system tray icon or status bar, and preserve
+the aspect ratio when scaling. You can also configure the default protocol,
+initial host configuration dialog, window resizing, automatic full screen and
+keyboard grabbing, and tab appearance and closing behavior.</para></listitem></varlistentry>
+<varlistentry><term><guilabel>Hosts</guilabel></term>
+<listitem><para>Select a saved host and click <guibutton>Configure...</guibutton>
+to change its protocol settings. <guibutton>Remove</guibutton> deletes the
+saved host configuration. Bookmarks and connection history are managed
+separately.</para></listitem></varlistentry>
+<varlistentry><term><guilabel>Plugins</guilabel></term>
+<listitem><para>Enable or disable installed protocol plugins. Restart &krdc;
+after changing plugin availability. The configuration button of a protocol
+plugin opens its default settings.</para></listitem></varlistentry>
+</variablelist>
+</sect1>
+
+<sect1 id="vnc-settings">
+<title>VNC settings</title>
+
 <para>
 <screenshot>
-<screeninfo>&krdc; preferences - <guilabel>VNC Defaults</guilabel> tab</screeninfo>
+<screeninfo>&krdc; preferences - <guilabel>VNC</guilabel> tab</screeninfo>
 	<mediaobject>
 	  <imageobject>
 	    <imagedata fileref="vnc_preferences.png" format="PNG"/>
 	  </imageobject>
 	  <textobject>
-	    <phrase>&krdc; preferences - <guilabel>VNC
-Defaults</guilabel> profiles tab</phrase>
+	    <phrase>&krdc; preferences - <guilabel>VNC</guilabel> profiles tab</phrase>
 	  </textobject>
 	</mediaobject>
 </screenshot>
 </para>
+
+<para><guilabel>Connection type:</guilabel> offers
+<guilabel>High Quality (LAN, direct connection)</guilabel>,
+<guilabel>Medium Quality (DSL, Cable, fast Internet)</guilabel>, and
+<guilabel>Low Quality (Modem, ISDN, slow Internet)</guilabel>.
+Choose a quality appropriate to the whole connection, including the remote
+computer's network link. A lower quality can help on slow connections.</para>
+
+<para><guilabel>Scale to Size:</guilabel> sets the size used to display the
+remote desktop, with predefined and custom dimensions. The password-manager
+option prevents sending clipboard content marked as a password by supported
+password managers, such as KeePassXC. It cannot identify passwords copied by
+applications that do not provide that marker.</para>
+</sect1>
+
+<sect1 id="rdp-settings">
+<title>RDP settings</title>
+
+<para>The RDP configuration dialog contains the following tabs. Changes to
+connection settings may take effect only after reconnecting.</para>
+
+<para><emphasis role="bold">General</emphasis></para>
 
 <para>
 <screenshot>
-<screeninfo>&krdc; preferences - <guilabel>RDP Defaults</guilabel> tab</screeninfo>
+<screeninfo>&krdc; RDP preferences - General tab</screeninfo>
 	<mediaobject>
 	  <imageobject>
-	    <imagedata fileref="rdp_preferences.png" format="PNG"/>
+	    <imagedata fileref="rdp_preferences_general.png" format="PNG"/>
 	  </imageobject>
 	  <textobject>
-	    <phrase>&krdc; preferences - <guilabel>RDP
-Defaults</guilabel> profiles tab</phrase>
+	    <phrase>&krdc; preferences - <guilabel>RDP</guilabel> general tab</phrase>
 	  </textobject>
 	</mediaobject>
 </screenshot>
 </para>
 
+<para>The <guilabel>General</guilabel> tab controls the appearance of the
+remote desktop, input devices, and resources shared with the remote session.</para>
 
+<para><guilabel>Resolution</guilabel> selects the desktop size requested from
+the server. Choose a preset, the current window or screen size, or a custom
+width and height. <guilabel>Use All Screens Resolution</guilabel> requests a
+multi-monitor session; in full screen, the remote monitors are displayed on
+the corresponding local screens. Availability depends on the server and your
+local display configuration.</para>
+
+<para><guilabel>Scale window contents to match resolution</guilabel> controls
+local image scaling. <guilabel>Desktop scale factor:</guilabel> and
+<guilabel>Device scale factor:</guilabel> instead specify scaling information
+sent to the server. Use these to adjust the size of remote interface elements
+on high-resolution displays, where supported by the server.</para>
+
+<para><guilabel>Acceleration:</guilabel> selects the graphics encoding mode,
+including H.264, RemoteFX, or disabling acceleration.
+<guilabel>Color depth:</guilabel> controls the number of colors used for the
+remote desktop; some acceleration modes require 32-bit color.
+<guilabel>Keyboard layout:</guilabel> should match the keyboard you use so that
+key presses are interpreted correctly.</para>
+
+<para><guilabel>Sound:</guilabel> selects playback on this computer, playback
+on the remote computer, or no sound. <guilabel>Share Media:</guilabel> makes a
+local directory available to the remote session; leave it empty to disable
+drive sharing. <guilabel>Share Smartcard:</guilabel> specifies the smartcard
+name to redirect to the server.</para>
+
+<para><guilabel>Admin (or console) session</guilabel> requests an administrative
+session on servers that support it. <guilabel>Prevent remote session
+lock</guilabel> sends periodic simulated mouse activity to keep the session
+active; server policies may still enforce locking.</para>
+
+<para><emphasis role="bold">Security</emphasis></para>
+
+<para>
+<screenshot>
+<screeninfo>&krdc; RDP preferences - Security tab</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="rdp_preferences_security.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>&krdc; preferences - <guilabel>RDP</guilabel> security tab</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>The <guilabel>Security</guilabel> tab controls which security methods
+&krdc; offers when establishing the RDP connection. The
+<guilabel>NLA</guilabel>, <guilabel>TLS</guilabel>, <guilabel>RDP</guilabel>,
+and <guilabel>Ext</guilabel> check boxes enable the corresponding FreeRDP
+security modes. More than one can be enabled so that the client and server
+can negotiate a compatible method.</para>
+
+<para><guilabel>TLS security level:</guilabel> sets the cryptographic security
+level required for TLS connections. A higher level imposes stricter
+requirements and may prevent connections to older servers.</para>
+
+<para><guilabel>Authentication Package List:</guilabel> passes a custom
+selection of authentication packages to FreeRDP. Leave it empty to use the
+default behavior, or enter the value supplied by your administrator. Change
+security options to match the server's requirements.</para>
+
+<para><emphasis role="bold">Proxy</emphasis></para>
+
+<para>
+<screenshot>
+<screeninfo>&krdc; RDP preferences - Proxy tab</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="rdp_preferences_proxy.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>&krdc; preferences - <guilabel>RDP</guilabel> proxy tab</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>The <guilabel>Proxy</guilabel> tab configures a network proxy used for
+the connection. Select <guilabel>HTTP</guilabel> or <guilabel>SOCKS</guilabel>
+in <guilabel>Protocol:</guilabel>, then enter the proxy address in
+<guilabel>Server:</guilabel> using the form <userinput>host:port</userinput>.</para>
+
+<para>If the proxy requires authentication, fill in
+<guilabel>Username:</guilabel> and <guilabel>Password:</guilabel> with the proxy
+credentials. These may differ from the credentials for the remote desktop.
+Leave <guilabel>Server:</guilabel> empty when no proxy is needed. The target
+remote desktop address remains the address entered on the connection page.</para>
+
+<para><emphasis role="bold">Gateway</emphasis></para>
+
+<para>
+<screenshot>
+<screeninfo>&krdc; RDP preferences - Gateway tab</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="rdp_preferences_gateway.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>&krdc; preferences - <guilabel>RDP</guilabel> gateway tab</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>The <guilabel>Gateway</guilabel> tab configures access through an RDP
+gateway, which provides a route to a remote desktop on another network.
+Enter the gateway address in <guilabel>Server:</guilabel> as
+<userinput>host:port</userinput>, using the port supplied by your administrator.
+Keep the destination computer's address on the main connection page.</para>
+
+<para>Enter the gateway account's <guilabel>Domain:</guilabel>,
+<guilabel>Username:</guilabel>, and <guilabel>Password:</guilabel> as required.
+These fields authenticate access to the gateway; the remote desktop may
+require separate credentials.</para>
+
+<para><guilabel>Transport type:</guilabel> offers <guilabel>Auto</guilabel>,
+<guilabel>HTTP</guilabel>, and <guilabel>RPC</guilabel>. Use
+<guilabel>Auto</guilabel> unless your administrator specifies a transport.
+Leave the gateway <guilabel>Server:</guilabel> field empty when connecting
+without an RDP gateway.</para>
+
+<para>If SSH tunnel support is available, an additional
+<guilabel>SSH tunnel</guilabel> tab appears in the host configuration dialog.
+See <xref linkend="ssh-tunnels"/> for its options.</para>
 </sect1>
 
+<sect1 id="spice-settings">
+<title>SPICE settings</title>
+
+<para>
+<screenshot>
+<screeninfo>&krdc; preferences - <guilabel>SPICE</guilabel> tab</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="spice_preferences.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>&krdc; preferences - <guilabel>SPICE</guilabel> profiles tab</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>Choose the requested remote resolution from the presets, the current
+window or screen size, or custom dimensions. Dynamic resizing requires
+<application>spice-vdagent</application> in the guest. You can also enable local
+scaling and audio playback. Clipboard exchange depends on support in the guest.</para>
+</sect1>
+
+<sect1 id="ssh-tunnels">
+<title>SSH tunnels</title>
+
+<para>
+<screenshot>
+<screeninfo>&krdc; preferences - <guilabel>SSH</guilabel> tab</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="sshtunnel_preferences.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>&krdc; preferences - <guilabel>SSH</guilabel> tab</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para>If your installation includes SSH tunnel support, the host settings offer
+<guilabel>Connect via SSH tunnel</guilabel>. Enter the SSH port and user name
+for the same host as the remote desktop server. SSH authentication is separate
+from remote desktop authentication.</para>
+
+<para><guilabel>Tunnel via loopback address</guilabel> makes the tunnel connect
+to the remote desktop service through the remote host's loopback address.
+Use this when the service listens only on that address. The remote desktop port
+still comes from the connection address.</para>
+</sect1>
+
+
+<sect1 id="command-line">
+<title>Starting connections from the command line</title>
+<para>Pass a complete URL to connect directly:</para>
+<screen><userinput><command>krdc</command> rdp://alice@megan</userinput>
+<userinput><command>krdc</command> vnc://megan:5901</userinput>
+<userinput><command>krdc</command> spice://vmhost:5902</userinput></screen>
+
+<para>Use <option>--fullscreen</option> with one URL to start that connection
+in full screen. You can also pass several URLs to open multiple connections:</para>
+<screen><userinput><command>krdc</command> --fullscreen rdp://megan</userinput>
+<userinput><command>krdc</command> vnc://megan rdp://workstation</userinput></screen>
+
+<para>In a complete URL, percent-encode reserved characters in the user name.
+For example, use <userinput>rdp://alice%40example.org@megan</userinput> for the
+user name <literal>alice@example.org</literal>.</para>
+
+<para>&krdc; can read basic connection details from an <filename>.rdp</filename>
+file passed on the command line:</para>
+<screen><userinput><command>krdc</command> connection.rdp</userinput></screen>
+<para>This reads the server address, user name, domain, and a password field
+if present; it does not import every setting supported by other RDP clients.
+Use the host configuration dialog for other options. Run
+<userinput><command>krdc</command> <option>--help</option></userinput> for
+command-line help.</para>
+</sect1>
 </chapter>
 
 <chapter id="faq">
 <title>Questions and Answers</title>
-
-<!-- (OPTIONAL but recommended) This chapter should include all of the silly
-(and not-so-silly) newbie questions that fill up your mailbox. This chapter
-should be reserved for BRIEF questions and answers! If one question uses more
-than a page or so then it should probably be part of the
-"Using this Application" chapter instead. You should use links to
-cross-reference questions to the parts of your documentation that answer them.
-This is also a great place to provide pointers to other FAQ's if your users
-must do some complicated configuration on other programs in order for your
-application work. -->
-
 <qandaset id="faqlist">
 <qandaentry>
-<question>
-<para>Why does <acronym>RDP</acronym> support not work?</para>
-</question>
-<answer>
-<para><acronym>RDP</acronym> support in &krdc; depends on xfreerdp (FreeRDP). Make sure that you have installed
-this runtime dependency.
-</para>
-</answer>
+<question><para>Why is a protocol missing or an address rejected?</para></question>
+<answer><para>Check that the corresponding plugin is installed and enabled in
+<guilabel>Plugins</guilabel>, then restart &krdc;. Check the selected protocol
+and address syntax in <xref linkend="compatible-versions"/>.
+RDP support uses the FreeRDP libraries directly; it does not require launching
+an external <command>xfreerdp</command> executable.</para></answer>
+</qandaentry>
+<qandaentry>
+<question><para>Why can I not connect to the remote computer?</para></question>
+<answer><para>Check the host name, port, network or VPN connection, and whether
+the remote desktop server is running. Ensure its firewall permits the
+connection. For authentication failures, check your user name, password, domain,
+and permission to log in remotely. If you use a proxy, gateway, or SSH tunnel,
+check its settings and credentials too.</para></answer>
+</qandaentry>
+<qandaentry>
+<question><para>Why can I see the desktop but not control it?</para></question>
+<answer><para>Turn off <guimenuitem>View Only</guimenuitem> in the
+<guimenu>Session</guimenu> menu. The server may also restrict your connection
+to viewing; ask the person administering the remote desktop to check its
+permissions.</para></answer>
+</qandaentry>
+<qandaentry>
+<question><para>Why does copying and pasting not work?</para></question>
+<answer><para>Enable <guimenuitem>Clipboard Sharing</guimenuitem>, disable
+<guimenuitem>View Only</guimenuitem>, and check that the server supports the
+content you are copying. For VNC, the password-manager filter can deliberately
+block copied passwords. For SPICE, check the guest agent.</para></answer>
+</qandaentry>
+<qandaentry>
+<question><para>How can I change settings after hiding the host dialog?</para></question>
+<answer><para>Open <guilabel>Hosts</guilabel> in the application preferences,
+select the host, and click <guibutton>Configure...</guibutton>. You can enable
+<guilabel>Show this dialog again for this host</guilabel> there.</para></answer>
+</qandaentry>
+<qandaentry>
+<question><para>Where can I report a problem?</para></question>
+<answer><para>Report bugs at <ulink url="https://bugs.kde.org">the &kde; bug
+tracker</ulink>. Include your &krdc; version, protocol, local operating system,
+server software, and steps to reproduce the problem. Omit passwords and other
+private connection details.</para></answer>
 </qandaentry>
 </qandaset>
-
 </chapter>
 
 <chapter id="credits">
-
-<!-- Include credits for the programmers, documentation writers, and
-contributors here. The license for your software should then be included below
-the credits with a reference to the appropriate license file included in the K D E
-distribution. -->
 
 <title>Credits and License</title>
 
@@ -549,6 +779,7 @@ to the great mentor of this Summer of Code project, &Brad.Hards; &Brad.Hards.mai
 <para>
 Documentation Copyright &copy; 2003 &Brad.Hards; &Brad.Hards.mail;
 Documentation Copyright &copy; 2007 Urs Wolfer <email>uwolfer @ kde.org</email>
+Documentation Copyright &copy; 2026 Fabio Bas <email>ctrlaltca @ gmail.com</email>
 </para>
 
 <!-- TRANS:CREDIT_FOR_TRANSLATORS -->
