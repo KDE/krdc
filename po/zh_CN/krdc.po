@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-23 00:52+0000\n"
+"POT-Creation-Date: 2026-09-24 00:45+0000\n"
 "PO-Revision-Date: 2024-04-22 16:04\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -204,13 +204,13 @@ msgstr "配置…"
 msgid "Remove"
 msgstr "删除"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:296 mainwindow.cpp:769
-#: mainwindow.cpp:785
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:297 mainwindow.cpp:798
+#: mainwindow.cpp:814
 #, kde-format
 msgid "Unusable URL"
 msgstr "不可用的 URL"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:785
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:814
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr "无法处理选中的主机。"
@@ -326,18 +326,19 @@ msgstr "请输入 SSH 密码。"
 msgid "SSH Tunnel failure"
 msgstr "SSH 隧道失败"
 
-#: core/sshtunnelthread.cpp:99
+#: core/sshtunnelthread.cpp:104
 #, kde-format
 msgid "Error connecting to %1: %2"
 msgstr "连接到 %1 时出错：%2"
 
-#: core/sshtunnelthread.cpp:124
+#: core/sshtunnelthread.cpp:129
 #, kde-format
 msgid "Error authenticating with password: %1"
 msgstr "使用密码认证时出错：%1"
 
-#: core/sshtunnelthread.cpp:130 core/sshtunnelthread.cpp:148
-#: core/sshtunnelthread.cpp:155 core/sshtunnelthread.cpp:163
+#: core/sshtunnelthread.cpp:135 core/sshtunnelthread.cpp:153
+#: core/sshtunnelthread.cpp:160 core/sshtunnelthread.cpp:168
+#: core/sshtunnelthread.cpp:181
 #, kde-format
 msgid "Error creating tunnel socket"
 msgstr "创建隧道插槽失败"
@@ -492,103 +493,103 @@ msgstr "在全屏模式下以指定 URL 启动 KRDC(只能对一个 URL 起效)"
 msgid "URLs to connect after startup"
 msgstr "启动后要连接的 URL"
 
-#: mainwindow.cpp:107
+#: mainwindow.cpp:108
 #, kde-format
 msgid "KDE Remote Desktop Client started"
 msgstr "KDE 远程桌面客户端已启动"
 
-#: mainwindow.cpp:112 mainwindow.cpp:129 mainwindow.cpp:1268
-#: mainwindow.cpp:1363
+#: mainwindow.cpp:113 mainwindow.cpp:130 mainwindow.cpp:1283
+#: mainwindow.cpp:1378
 #, kde-format
 msgid "New Connection"
 msgstr "新建连接"
 
-#: mainwindow.cpp:135
+#: mainwindow.cpp:136
 #, kde-format
 msgid "Copy Screenshot to Clipboard"
 msgstr "复制抓屏到剪贴板"
 
-#: mainwindow.cpp:136
+#: mainwindow.cpp:137
 #, kde-format
 msgid "Screenshot"
 msgstr "抓屏"
 
-#: mainwindow.cpp:142 mainwindow.cpp:540
+#: mainwindow.cpp:143 mainwindow.cpp:566
 #, kde-format
 msgid "Switch to Full Screen Mode"
 msgstr "切换到全屏模式"
 
-#: mainwindow.cpp:143 mainwindow.cpp:541
+#: mainwindow.cpp:144 mainwindow.cpp:567
 #, kde-format
 msgid "Full Screen"
 msgstr "全屏"
 
-#: mainwindow.cpp:150
+#: mainwindow.cpp:151
 #, kde-format
 msgid "View Only"
 msgstr "只查看"
 
-#: mainwindow.cpp:156
+#: mainwindow.cpp:157
 #, kde-format
 msgid "Clipboard Sharing"
 msgstr "剪贴板共享"
 
-#: mainwindow.cpp:161
+#: mainwindow.cpp:162
 #, kde-format
 msgid "Disconnect"
 msgstr "断开连接"
 
-#: mainwindow.cpp:169
+#: mainwindow.cpp:170
 #, kde-format
 msgid "Show Local Cursor"
 msgstr "显示本地光标"
 
-#: mainwindow.cpp:170
+#: mainwindow.cpp:171
 #, kde-format
 msgid "Local Cursor"
 msgstr "本地光标"
 
-#: mainwindow.cpp:176
+#: mainwindow.cpp:177
 #, kde-format
 msgid "Grab All Possible Keys"
 msgstr "抢占全部按键"
 
-#: mainwindow.cpp:177
+#: mainwindow.cpp:178
 #, kde-format
 msgid "Grab Keys"
 msgstr "抓取键"
 
-#: mainwindow.cpp:183
+#: mainwindow.cpp:184
 #, kde-format
 msgid "Scale Remote Screen to Fit Window Size"
 msgstr "缩放远程屏幕窗口到适合尺寸"
 
-#: mainwindow.cpp:184
+#: mainwindow.cpp:185
 #, kde-format
 msgid "Scale"
 msgstr "缩放"
 
-#: mainwindow.cpp:187
+#: mainwindow.cpp:188
 #, kde-format
 msgid "Scaling Factor"
 msgstr "缩放倍数"
 
-#: mainwindow.cpp:198
+#: mainwindow.cpp:199
 #, kde-format
 msgid "Bookmarks"
 msgstr "书签"
 
-#: mainwindow.cpp:269
+#: mainwindow.cpp:270
 #, kde-format
 msgid "Unable to load connection data from the provided file."
 msgstr "无法从提供的文件加载连接数据。"
 
-#: mainwindow.cpp:269
+#: mainwindow.cpp:270
 #, kde-format
 msgid "Load failed"
 msgstr "加载失败"
 
-#: mainwindow.cpp:275
+#: mainwindow.cpp:276
 #, kde-format
 msgid ""
 "The entered address does not have the required form.\n"
@@ -597,161 +598,161 @@ msgstr ""
 "输入的地址不符合所需的格式。\n"
 " 语法：[用户名@]主机[:端口]"
 
-#: mainwindow.cpp:275
+#: mainwindow.cpp:276
 #, kde-format
 msgid "Malformed URL"
 msgstr "URL 格式错误"
 
-#: mainwindow.cpp:296
+#: mainwindow.cpp:297
 #, kde-format
 msgid "The entered address cannot be handled."
 msgstr "输入的地址无法处理。"
 
-#: mainwindow.cpp:447
+#: mainwindow.cpp:448
 #, kde-format
 msgid "Connecting to %1"
 msgstr "正在连接到 %1"
 
-#: mainwindow.cpp:451
+#: mainwindow.cpp:452
 #, kde-format
 msgid "Authenticating at %1"
 msgstr "正在 %1 上进行身份验证..."
 
-#: mainwindow.cpp:455
+#: mainwindow.cpp:456
 #, kde-format
 msgid "Preparing connection to %1"
 msgstr "正在准备连接到 %1"
 
-#: mainwindow.cpp:459
+#: mainwindow.cpp:460
 #, kde-format
 msgid "Connected to %1"
 msgstr "已连接到 %1"
 
-#: mainwindow.cpp:584
+#: mainwindow.cpp:613
 #, kde-format
 msgid "Switch to Window Mode"
 msgstr "切换到窗口模式"
 
-#: mainwindow.cpp:585
+#: mainwindow.cpp:614
 #, kde-format
 msgid "Window Mode"
 msgstr "窗口模式"
 
-#: mainwindow.cpp:769
+#: mainwindow.cpp:798
 #, kde-format
 msgid "The entered address cannot be handled by this connection type."
 msgstr "输入的地址无法通过此连接类型处理。"
 
-#: mainwindow.cpp:804
+#: mainwindow.cpp:833
 #, kde-format
 msgid "Connect"
 msgstr "连接"
 
-#: mainwindow.cpp:805
+#: mainwindow.cpp:834
 #, kde-format
 msgid "Rename"
 msgstr "重命名"
 
-#: mainwindow.cpp:806
+#: mainwindow.cpp:835
 #, kde-format
 msgid "Settings"
 msgstr "设置"
 
-#: mainwindow.cpp:807
+#: mainwindow.cpp:836
 #, kde-format
 msgid "Delete"
 msgstr "删除"
 
-#: mainwindow.cpp:810 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:839 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "书签"
 
-#: mainwindow.cpp:810 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:839 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "历史"
 
-#: mainwindow.cpp:822
+#: mainwindow.cpp:851
 #, kde-format
 msgid "Rename %1"
 msgstr "重命名 %1"
 
-#: mainwindow.cpp:822
+#: mainwindow.cpp:851
 #, kde-format
 msgid "Rename %1 to"
 msgstr "将 %1 重命名为"
 
-#: mainwindow.cpp:829
+#: mainwindow.cpp:858
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "您确定要想要删除 %1 吗？"
 
-#: mainwindow.cpp:829
+#: mainwindow.cpp:858
 #, kde-format
 msgid "Delete %1"
 msgstr "删除 %1"
 
-#: mainwindow.cpp:853
+#: mainwindow.cpp:882
 #, kde-format
 msgid "Add Bookmark"
 msgstr "添加书签"
 
-#: mainwindow.cpp:854
+#: mainwindow.cpp:883
 #, kde-format
 msgid "Close Tab"
 msgstr "关闭标签页"
 
-#: mainwindow.cpp:971
+#: mainwindow.cpp:1000
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr "最小化全屏窗口"
 
-#: mainwindow.cpp:988
+#: mainwindow.cpp:1017
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "吸附工具栏"
 
-#: mainwindow.cpp:1105
+#: mainwindow.cpp:1137
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr "您确定要退出 KDE 远程桌面客户端吗？"
 
-#: mainwindow.cpp:1106
+#: mainwindow.cpp:1138
 #, kde-format
 msgid "Confirm Quit"
 msgstr "确认退出"
 
-#: mainwindow.cpp:1291
+#: mainwindow.cpp:1306
 #, kde-format
 msgid "Connect to:"
 msgstr "连接到："
 
-#: mainwindow.cpp:1295
+#: mainwindow.cpp:1310
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr "在此输入以连接到该地址并过滤列表。"
 
-#: mainwindow.cpp:1304
+#: mainwindow.cpp:1319
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
 "methods."
 msgstr "在此输入 IP 或 DNS 名称。清除整行可获得连接方式列表。"
 
-#: mainwindow.cpp:1307
+#: mainwindow.cpp:1322
 #, kde-format
 msgid "Goto Address"
 msgstr "前往地址"
 
-#: mainwindow.cpp:1399
+#: mainwindow.cpp:1414
 #, kde-format
 msgid "Remote Desktops"
 msgstr "远程桌面"
 
-#: mainwindow.cpp:1428
+#: mainwindow.cpp:1443
 #, kde-format
 msgid "Filter"
 msgstr "过滤"
@@ -778,39 +779,41 @@ msgid ""
 msgstr "您可在此指定远程桌面的分辨率。此分辨率决定了您所能看到的桌面大小。"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#: rdp/rdppreferences.ui:56
+#: rdp/rdppreferences.ui:56 spice/spicepreferences.ui:46
 #, kde-format
 msgid "Small (1280x720)"
 msgstr "小 (1280x720)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#: rdp/rdppreferences.ui:61
+#: rdp/rdppreferences.ui:61 spice/spicepreferences.ui:51
 #, kde-format
 msgid "Medium (1600x900)"
 msgstr "中 (1600x900)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#: rdp/rdppreferences.ui:66
+#: rdp/rdppreferences.ui:66 spice/spicepreferences.ui:56
 #, kde-format
 msgid "Large (1920x1080)"
 msgstr "大 (1920x1080)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#: rdp/rdppreferences.ui:71
+#: rdp/rdppreferences.ui:71 spice/spicepreferences.ui:61
 #, kde-format
 msgid "Current Window Size"
 msgstr "当前窗口大小"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
-#: rdp/rdppreferences.ui:76 vnc/vncpreferences.ui:118
+#: rdp/rdppreferences.ui:76 spice/spicepreferences.ui:66
+#: vnc/vncpreferences.ui:118
 #, kde-format
 msgid "Current Screen Resolution"
 msgstr "当前屏幕分辨率"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
-#: rdp/rdppreferences.ui:81 vnc/vncpreferences.ui:123
+#: rdp/rdppreferences.ui:81 spice/spicepreferences.ui:71
+#: vnc/vncpreferences.ui:123
 #, kde-format
 msgid "Custom Resolution (…)"
 msgstr "自定义分辨率 (…)"
@@ -822,7 +825,8 @@ msgid "Use All Screens Resolution"
 msgstr "使用所有屏幕分辨率"
 
 #. i18n: ectx: property (text), widget (QLabel, widthLabel)
-#: rdp/rdppreferences.ui:99 vnc/vncpreferences.ui:136
+#: rdp/rdppreferences.ui:99 spice/spicepreferences.ui:84
+#: vnc/vncpreferences.ui:136
 #, kde-format
 msgid "&Width:"
 msgstr "宽度(&W)："
@@ -839,7 +843,8 @@ msgstr ""
 "值。"
 
 #. i18n: ectx: property (text), widget (QLabel, heightLabel)
-#: rdp/rdppreferences.ui:131 vnc/vncpreferences.ui:168
+#: rdp/rdppreferences.ui:131 spice/spicepreferences.ui:116
+#: vnc/vncpreferences.ui:168
 #, kde-format
 msgid "H&eight:"
 msgstr "高度(&E)："
@@ -856,7 +861,8 @@ msgstr ""
 "值。"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ScaleToSize)
-#: rdp/rdppreferences.ui:168
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ScaleToWindow)
+#: rdp/rdppreferences.ui:168 spice/spicepreferences.ui:147
 #, kde-format
 msgid "Scale window contents to match resolution"
 msgstr "缩放窗口内容以匹配分辨率"
@@ -1700,6 +1706,88 @@ msgctxt "Header of the connections list, where this entry comes from"
 msgid "Source"
 msgstr "源"
 
+#. i18n: ectx: property (title), widget (QGroupBox, displayGroupBox)
+#: spice/spicepreferences.ui:17
+#, kde-format
+msgid "Display"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, resolutionLabel)
+#: spice/spicepreferences.ui:23
+#, fuzzy, kde-format
+#| msgid "Resolution"
+msgid "Resolution:"
+msgstr "分辨率"
+
+#. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_Resolution)
+#: spice/spicepreferences.ui:39
+#, kde-format
+msgid ""
+"The resolution requested from the remote desktop. The guest must have spice-"
+"vdagent running for dynamic resize to work."
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Width)
+#: spice/spicepreferences.ui:100
+#, kde-format
+msgid ""
+"Custom desktop width. Only editable when Custom Resolution is selected above."
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Height)
+#: spice/spicepreferences.ui:132
+#, kde-format
+msgid ""
+"Custom desktop height. Only editable when Custom Resolution is selected "
+"above."
+msgstr ""
+
+#. i18n: ectx: property (title), widget (QGroupBox, spiceGroupBox)
+#. i18n: ectx: property (title), widget (QGroupBox, vncGroupBox)
+#: spice/spicepreferences.ui:160 vnc/vncpreferences.ui:17
+#, kde-format
+msgid "Connection"
+msgstr "连接"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableAudio)
+#: spice/spicepreferences.ui:166
+#, kde-format
+msgid "Enable &audio playback"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_EnableAudio)
+#: spice/spicepreferences.ui:169
+#, kde-format
+msgid "Play audio from the remote host on this machine."
+msgstr ""
+
+#: spice/spiceview.cpp:776
+#, kde-format
+msgid "Authentication is required to connect to <b>%1</b>."
+msgstr ""
+
+#: spice/spiceviewfactory.cpp:47
+#, fuzzy, kde-format
+#| msgid "New RDP Connection…"
+msgid "New SPICE Connection…"
+msgstr "新建 RDP 连接…"
+
+#: spice/spiceviewfactory.cpp:52
+#, fuzzy, kde-format
+#| msgid "Connect to a VNC Remote Desktop"
+msgid "Connect to a SPICE Remote Desktop"
+msgstr "连接到 VNC 远程桌面"
+
+#: spice/spiceviewfactory.cpp:58
+#, fuzzy, kde-format
+#| msgid ""
+#| "<html>Enter the address here.<br /><i>Example: vncserver:1 (host:port / "
+#| "screen)</i></html>"
+msgid ""
+"<html>Enter the address here.<br /><i>Example: spice://myhost:5900</i></html>"
+msgstr ""
+"<html>在此输入地址。<br /><i>示例：vncserver:1 (主机:端口 /屏幕)</i></html>"
+
 #: vnc/vncclientthread.cpp:315
 #, kde-format
 msgid "VNC authentication type is not supported."
@@ -1744,12 +1832,6 @@ msgstr "已经重新连接。"
 #, kde-format
 msgid "Connected."
 msgstr "已连接."
-
-#. i18n: ectx: property (title), widget (QGroupBox, vncGroupBox)
-#: vnc/vncpreferences.ui:17
-#, kde-format
-msgid "Connection"
-msgstr "连接"
 
 #. i18n: ectx: property (text), widget (QLabel, connectionLabel)
 #: vnc/vncpreferences.ui:23

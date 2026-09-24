@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-23 00:52+0000\n"
+"POT-Creation-Date: 2026-09-24 00:45+0000\n"
 "PO-Revision-Date: 2025-11-11 18:45+0200\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -213,13 +213,13 @@ msgstr "Konfigurēt…"
 msgid "Remove"
 msgstr "Noņemt"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:296 mainwindow.cpp:769
-#: mainwindow.cpp:785
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:297 mainwindow.cpp:798
+#: mainwindow.cpp:814
 #, kde-format
 msgid "Unusable URL"
 msgstr "Nelietojams URL"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:785
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:814
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr "Nevar sadarboties ar atlasīto datoru."
@@ -348,18 +348,19 @@ msgstr "Ievadiet SSH paroli."
 msgid "SSH Tunnel failure"
 msgstr "SSH tuneļa kļūme"
 
-#: core/sshtunnelthread.cpp:99
+#: core/sshtunnelthread.cpp:104
 #, kde-format
 msgid "Error connecting to %1: %2"
 msgstr "Kļūda, savienojoties ar „%1“: %2"
 
-#: core/sshtunnelthread.cpp:124
+#: core/sshtunnelthread.cpp:129
 #, kde-format
 msgid "Error authenticating with password: %1"
 msgstr "Kļūda, autentificējoties ar paroli: %1"
 
-#: core/sshtunnelthread.cpp:130 core/sshtunnelthread.cpp:148
-#: core/sshtunnelthread.cpp:155 core/sshtunnelthread.cpp:163
+#: core/sshtunnelthread.cpp:135 core/sshtunnelthread.cpp:153
+#: core/sshtunnelthread.cpp:160 core/sshtunnelthread.cpp:168
+#: core/sshtunnelthread.cpp:181
 #, kde-format
 msgid "Error creating tunnel socket"
 msgstr "Kļūda, veidojot tuneļa ligzdu"
@@ -515,103 +516,103 @@ msgstr ""
 msgid "URLs to connect after startup"
 msgstr "URL, kurām pieslēgties pēc palaišanas"
 
-#: mainwindow.cpp:107
+#: mainwindow.cpp:108
 #, kde-format
 msgid "KDE Remote Desktop Client started"
 msgstr "KDE attālās darbvirsmas klients ir palaists"
 
-#: mainwindow.cpp:112 mainwindow.cpp:129 mainwindow.cpp:1268
-#: mainwindow.cpp:1363
+#: mainwindow.cpp:113 mainwindow.cpp:130 mainwindow.cpp:1283
+#: mainwindow.cpp:1378
 #, kde-format
 msgid "New Connection"
 msgstr "Jauns savienojums"
 
-#: mainwindow.cpp:135
+#: mainwindow.cpp:136
 #, kde-format
 msgid "Copy Screenshot to Clipboard"
 msgstr "Nokopēt ekrānattēlu uz starpliktuvi"
 
-#: mainwindow.cpp:136
+#: mainwindow.cpp:137
 #, kde-format
 msgid "Screenshot"
 msgstr "Ekrānattēls"
 
-#: mainwindow.cpp:142 mainwindow.cpp:540
+#: mainwindow.cpp:143 mainwindow.cpp:566
 #, kde-format
 msgid "Switch to Full Screen Mode"
 msgstr "Pārslēgties uz pilnekrāna režīmu"
 
-#: mainwindow.cpp:143 mainwindow.cpp:541
+#: mainwindow.cpp:144 mainwindow.cpp:567
 #, kde-format
 msgid "Full Screen"
 msgstr "Pilnekrāns"
 
-#: mainwindow.cpp:150
+#: mainwindow.cpp:151
 #, kde-format
 msgid "View Only"
 msgstr "Tikai skatīšanās"
 
-#: mainwindow.cpp:156
+#: mainwindow.cpp:157
 #, kde-format
 msgid "Clipboard Sharing"
 msgstr "Starpliktuves kopīgošana"
 
-#: mainwindow.cpp:161
+#: mainwindow.cpp:162
 #, kde-format
 msgid "Disconnect"
 msgstr "Atvienoties"
 
-#: mainwindow.cpp:169
+#: mainwindow.cpp:170
 #, kde-format
 msgid "Show Local Cursor"
 msgstr "Rādīt lokālo kursoru"
 
-#: mainwindow.cpp:170
+#: mainwindow.cpp:171
 #, kde-format
 msgid "Local Cursor"
 msgstr "Lokālais kursors"
 
-#: mainwindow.cpp:176
+#: mainwindow.cpp:177
 #, kde-format
 msgid "Grab All Possible Keys"
 msgstr "Sagrābt visus iespējamos taustiņus"
 
-#: mainwindow.cpp:177
+#: mainwindow.cpp:178
 #, kde-format
 msgid "Grab Keys"
 msgstr "Sagrābt taustiņus"
 
-#: mainwindow.cpp:183
+#: mainwindow.cpp:184
 #, kde-format
 msgid "Scale Remote Screen to Fit Window Size"
 msgstr "Mērogot attālo ekrānu, lai tas ietilptu logā"
 
-#: mainwindow.cpp:184
+#: mainwindow.cpp:185
 #, kde-format
 msgid "Scale"
 msgstr "Mērogot"
 
-#: mainwindow.cpp:187
+#: mainwindow.cpp:188
 #, kde-format
 msgid "Scaling Factor"
 msgstr "Mērogošanas koeficients"
 
-#: mainwindow.cpp:198
+#: mainwindow.cpp:199
 #, kde-format
 msgid "Bookmarks"
 msgstr "Grāmatzīmes"
 
-#: mainwindow.cpp:269
+#: mainwindow.cpp:270
 #, kde-format
 msgid "Unable to load connection data from the provided file."
 msgstr "Neizdodas no sniegtās datnes ielādēt savienojuma datus."
 
-#: mainwindow.cpp:269
+#: mainwindow.cpp:270
 #, kde-format
 msgid "Load failed"
 msgstr "Ielādes kļūda"
 
-#: mainwindow.cpp:275
+#: mainwindow.cpp:276
 #, kde-format
 msgid ""
 "The entered address does not have the required form.\n"
@@ -620,145 +621,145 @@ msgstr ""
 "Ievadītā adrese neatbilst noteiktajai formai.\n"
 " Sintakse: [username@]host[:port]"
 
-#: mainwindow.cpp:275
+#: mainwindow.cpp:276
 #, kde-format
 msgid "Malformed URL"
 msgstr "Nekorekts URL"
 
-#: mainwindow.cpp:296
+#: mainwindow.cpp:297
 #, kde-format
 msgid "The entered address cannot be handled."
 msgstr "Ievadīto adresi nav iespējams apstrādāt."
 
-#: mainwindow.cpp:447
+#: mainwindow.cpp:448
 #, kde-format
 msgid "Connecting to %1"
 msgstr "Savienojas ar „%1“"
 
-#: mainwindow.cpp:451
+#: mainwindow.cpp:452
 #, kde-format
 msgid "Authenticating at %1"
 msgstr "Autentificējas „%1“"
 
-#: mainwindow.cpp:455
+#: mainwindow.cpp:456
 #, kde-format
 msgid "Preparing connection to %1"
 msgstr "Sagatavo savienojumu ar „%1“"
 
-#: mainwindow.cpp:459
+#: mainwindow.cpp:460
 #, kde-format
 msgid "Connected to %1"
 msgstr "Savienots ar „%1“"
 
-#: mainwindow.cpp:584
+#: mainwindow.cpp:613
 #, kde-format
 msgid "Switch to Window Mode"
 msgstr "Pārslēgties uz loga režīmu"
 
-#: mainwindow.cpp:585
+#: mainwindow.cpp:614
 #, kde-format
 msgid "Window Mode"
 msgstr "Loga režīms"
 
-#: mainwindow.cpp:769
+#: mainwindow.cpp:798
 #, fuzzy, kde-format
 #| msgid "The entered address cannot be handled."
 msgid "The entered address cannot be handled by this connection type."
 msgstr "Ievadīto adresi nav iespējams apstrādāt."
 
-#: mainwindow.cpp:804
+#: mainwindow.cpp:833
 #, kde-format
 msgid "Connect"
 msgstr "Savienoties"
 
-#: mainwindow.cpp:805
+#: mainwindow.cpp:834
 #, kde-format
 msgid "Rename"
 msgstr "Pārdēvēt"
 
-#: mainwindow.cpp:806
+#: mainwindow.cpp:835
 #, kde-format
 msgid "Settings"
 msgstr "Iestatījumi"
 
-#: mainwindow.cpp:807
+#: mainwindow.cpp:836
 #, kde-format
 msgid "Delete"
 msgstr "Dzēst"
 
-#: mainwindow.cpp:810 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:839 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "Grāmatzīmes"
 
-#: mainwindow.cpp:810 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:839 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "Vēsture"
 
-#: mainwindow.cpp:822
+#: mainwindow.cpp:851
 #, kde-format
 msgid "Rename %1"
 msgstr "Pārdēvēt „%1“"
 
-#: mainwindow.cpp:822
+#: mainwindow.cpp:851
 #, kde-format
 msgid "Rename %1 to"
 msgstr "Pārdēvēt „%1“ par"
 
-#: mainwindow.cpp:829
+#: mainwindow.cpp:858
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "Vai tiešām vēlaties dzēst „%1“?"
 
-#: mainwindow.cpp:829
+#: mainwindow.cpp:858
 #, kde-format
 msgid "Delete %1"
 msgstr "Dzēst „%1“"
 
-#: mainwindow.cpp:853
+#: mainwindow.cpp:882
 #, kde-format
 msgid "Add Bookmark"
 msgstr "Pievienot grāmatzīmi"
 
-#: mainwindow.cpp:854
+#: mainwindow.cpp:883
 #, kde-format
 msgid "Close Tab"
 msgstr "Aizvērt cilni"
 
-#: mainwindow.cpp:971
+#: mainwindow.cpp:1000
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr "Minimizēt pilnekrāna logu"
 
-#: mainwindow.cpp:988
+#: mainwindow.cpp:1017
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "Piestiprināt rīkjoslu"
 
-#: mainwindow.cpp:1105
+#: mainwindow.cpp:1137
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr "Vai tiešām vēlaties iziet no KDE attālās darbvirsmas klienta?"
 
-#: mainwindow.cpp:1106
+#: mainwindow.cpp:1138
 #, kde-format
 msgid "Confirm Quit"
 msgstr "Aizvēršanas apstiprināšana"
 
-#: mainwindow.cpp:1291
+#: mainwindow.cpp:1306
 #, kde-format
 msgid "Connect to:"
 msgstr "Pieslēgties pie:"
 
-#: mainwindow.cpp:1295
+#: mainwindow.cpp:1310
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr "Rakstiet, lai savienotos ar adresi un filtrētu sarakstu."
 
-#: mainwindow.cpp:1304
+#: mainwindow.cpp:1319
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
@@ -767,17 +768,17 @@ msgstr ""
 "Te ierakstiet IP vai DNS vārdu. Notīriet rindiņu, lai redzētu sarakstu ar "
 "savienojuma metodēm."
 
-#: mainwindow.cpp:1307
+#: mainwindow.cpp:1322
 #, kde-format
 msgid "Goto Address"
 msgstr "Iet uz adresi"
 
-#: mainwindow.cpp:1399
+#: mainwindow.cpp:1414
 #, kde-format
 msgid "Remote Desktops"
 msgstr "Attālās darbvirsmas"
 
-#: mainwindow.cpp:1428
+#: mainwindow.cpp:1443
 #, kde-format
 msgid "Filter"
 msgstr "Filtrs"
@@ -806,39 +807,41 @@ msgstr ""
 "jums parādītā darbvirsma."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#: rdp/rdppreferences.ui:56
+#: rdp/rdppreferences.ui:56 spice/spicepreferences.ui:46
 #, kde-format
 msgid "Small (1280x720)"
 msgstr "Maza (800×600)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#: rdp/rdppreferences.ui:61
+#: rdp/rdppreferences.ui:61 spice/spicepreferences.ui:51
 #, kde-format
 msgid "Medium (1600x900)"
 msgstr "Vidēja (1600×900)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#: rdp/rdppreferences.ui:66
+#: rdp/rdppreferences.ui:66 spice/spicepreferences.ui:56
 #, kde-format
 msgid "Large (1920x1080)"
 msgstr "Liela (1280×1024)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#: rdp/rdppreferences.ui:71
+#: rdp/rdppreferences.ui:71 spice/spicepreferences.ui:61
 #, kde-format
 msgid "Current Window Size"
 msgstr "Pašreizējais loga izmērs"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
-#: rdp/rdppreferences.ui:76 vnc/vncpreferences.ui:118
+#: rdp/rdppreferences.ui:76 spice/spicepreferences.ui:66
+#: vnc/vncpreferences.ui:118
 #, kde-format
 msgid "Current Screen Resolution"
 msgstr "Pašreizējā ekrāna izšķirtspēja"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
-#: rdp/rdppreferences.ui:81 vnc/vncpreferences.ui:123
+#: rdp/rdppreferences.ui:81 spice/spicepreferences.ui:71
+#: vnc/vncpreferences.ui:123
 #, kde-format
 msgid "Custom Resolution (…)"
 msgstr "Pielāgota izšķirtspēja (…)"
@@ -851,7 +854,8 @@ msgid "Use All Screens Resolution"
 msgstr "Pašreizējā ekrāna izšķirtspēja"
 
 #. i18n: ectx: property (text), widget (QLabel, widthLabel)
-#: rdp/rdppreferences.ui:99 vnc/vncpreferences.ui:136
+#: rdp/rdppreferences.ui:99 spice/spicepreferences.ui:84
+#: vnc/vncpreferences.ui:136
 #, kde-format
 msgid "&Width:"
 msgstr "&Platums:"
@@ -868,7 +872,8 @@ msgstr ""
 "izvēlaties pielāgotu darbvirsmas izmēru."
 
 #. i18n: ectx: property (text), widget (QLabel, heightLabel)
-#: rdp/rdppreferences.ui:131 vnc/vncpreferences.ui:168
+#: rdp/rdppreferences.ui:131 spice/spicepreferences.ui:116
+#: vnc/vncpreferences.ui:168
 #, kde-format
 msgid "H&eight:"
 msgstr "Au&gstums:"
@@ -885,7 +890,8 @@ msgstr ""
 "izvēlaties pielāgotu darbvirsmas izmēru."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ScaleToSize)
-#: rdp/rdppreferences.ui:168
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ScaleToWindow)
+#: rdp/rdppreferences.ui:168 spice/spicepreferences.ui:147
 #, kde-format
 msgid "Scale window contents to match resolution"
 msgstr "Mērogot loga saturu, lai atbilstu izšķirtspējai"
@@ -1737,6 +1743,88 @@ msgctxt "Header of the connections list, where this entry comes from"
 msgid "Source"
 msgstr "Avots"
 
+#. i18n: ectx: property (title), widget (QGroupBox, displayGroupBox)
+#: spice/spicepreferences.ui:17
+#, kde-format
+msgid "Display"
+msgstr "Attēls"
+
+#. i18n: ectx: property (text), widget (QLabel, resolutionLabel)
+#: spice/spicepreferences.ui:23
+#, fuzzy, kde-format
+#| msgid "Resolution"
+msgid "Resolution:"
+msgstr "Izšķirtspēja"
+
+#. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_Resolution)
+#: spice/spicepreferences.ui:39
+#, kde-format
+msgid ""
+"The resolution requested from the remote desktop. The guest must have spice-"
+"vdagent running for dynamic resize to work."
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Width)
+#: spice/spicepreferences.ui:100
+#, kde-format
+msgid ""
+"Custom desktop width. Only editable when Custom Resolution is selected above."
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Height)
+#: spice/spicepreferences.ui:132
+#, kde-format
+msgid ""
+"Custom desktop height. Only editable when Custom Resolution is selected "
+"above."
+msgstr ""
+
+#. i18n: ectx: property (title), widget (QGroupBox, spiceGroupBox)
+#. i18n: ectx: property (title), widget (QGroupBox, vncGroupBox)
+#: spice/spicepreferences.ui:160 vnc/vncpreferences.ui:17
+#, kde-format
+msgid "Connection"
+msgstr "Savienojums"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableAudio)
+#: spice/spicepreferences.ui:166
+#, kde-format
+msgid "Enable &audio playback"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_EnableAudio)
+#: spice/spicepreferences.ui:169
+#, kde-format
+msgid "Play audio from the remote host on this machine."
+msgstr ""
+
+#: spice/spiceview.cpp:776
+#, kde-format
+msgid "Authentication is required to connect to <b>%1</b>."
+msgstr ""
+
+#: spice/spiceviewfactory.cpp:47
+#, fuzzy, kde-format
+#| msgid "New RDP Connection…"
+msgid "New SPICE Connection…"
+msgstr "Jauns RDP savienojums…"
+
+#: spice/spiceviewfactory.cpp:52
+#, fuzzy, kde-format
+#| msgid "Connect to a VNC Remote Desktop"
+msgid "Connect to a SPICE Remote Desktop"
+msgstr "Pieslēgties VNC attālajai darbvirsmai"
+
+#: spice/spiceviewfactory.cpp:58
+#, fuzzy, kde-format
+#| msgid ""
+#| "<html>Enter the address here.<br /><i>Example: nxserver (host)</i></html>"
+msgid ""
+"<html>Enter the address here.<br /><i>Example: spice://myhost:5900</i></html>"
+msgstr ""
+"<html>Šeit ievadiet adresi.<br /><i>Piemēram: nxserver (resursdators)</i></"
+"html>"
+
 #: vnc/vncclientthread.cpp:315
 #, kde-format
 msgid "VNC authentication type is not supported."
@@ -1783,12 +1871,6 @@ msgstr "Savienojies no jauna."
 #, kde-format
 msgid "Connected."
 msgstr "Savienojies."
-
-#. i18n: ectx: property (title), widget (QGroupBox, vncGroupBox)
-#: vnc/vncpreferences.ui:17
-#, kde-format
-msgid "Connection"
-msgstr "Savienojums"
 
 #. i18n: ectx: property (text), widget (QLabel, connectionLabel)
 #: vnc/vncpreferences.ui:23
@@ -2102,9 +2184,6 @@ msgstr ""
 #~ msgid "Available NX Sessions"
 #~ msgstr "Pieejamās NX sesijas"
 
-#~ msgid "Display"
-#~ msgstr "Attēls"
-
 #~ msgid "Type"
 #~ msgstr "Tips"
 
@@ -2152,12 +2231,6 @@ msgstr ""
 
 #~ msgid "Connect to a NX Remote Desktop"
 #~ msgstr "Pieslēgties NX attālinātai darbvirsmai"
-
-#~ msgid ""
-#~ "<html>Enter the address here.<br /><i>Example: nxserver (host)</i></html>"
-#~ msgstr ""
-#~ "<html>Šeit ievadiet adresi.<br /><i>Piemēram: nxserver (resursdators)</"
-#~ "i></html>"
 
 #, fuzzy
 #~| msgid ""

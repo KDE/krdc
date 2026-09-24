@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-23 00:52+0000\n"
+"POT-Creation-Date: 2026-09-24 00:45+0000\n"
 "PO-Revision-Date: 2026-09-04 11:19+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -219,13 +219,13 @@ msgstr "Налаштувати…"
 msgid "Remove"
 msgstr "Вилучити"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:296 mainwindow.cpp:769
-#: mainwindow.cpp:785
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:297 mainwindow.cpp:798
+#: mainwindow.cpp:814
 #, kde-format
 msgid "Unusable URL"
 msgstr "Непридатна URL"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:785
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:814
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr "Неможливо опрацювати вибраний вузол."
@@ -358,18 +358,19 @@ msgstr "Будь ласка, введіть пароль SSH."
 msgid "SSH Tunnel failure"
 msgstr "Помилка тунелю SSH"
 
-#: core/sshtunnelthread.cpp:99
+#: core/sshtunnelthread.cpp:104
 #, kde-format
 msgid "Error connecting to %1: %2"
 msgstr "Помилка під час спроби з'єднатися з %1: %2"
 
-#: core/sshtunnelthread.cpp:124
+#: core/sshtunnelthread.cpp:129
 #, kde-format
 msgid "Error authenticating with password: %1"
 msgstr "Не вдалося пройти розпізнавання за допомогою пароля: %1"
 
-#: core/sshtunnelthread.cpp:130 core/sshtunnelthread.cpp:148
-#: core/sshtunnelthread.cpp:155 core/sshtunnelthread.cpp:163
+#: core/sshtunnelthread.cpp:135 core/sshtunnelthread.cpp:153
+#: core/sshtunnelthread.cpp:160 core/sshtunnelthread.cpp:168
+#: core/sshtunnelthread.cpp:181
 #, kde-format
 msgid "Error creating tunnel socket"
 msgstr "Помилка під час спроби створити сокет тунелю"
@@ -526,103 +527,103 @@ msgstr ""
 msgid "URLs to connect after startup"
 msgstr "Адреси URL, з якими з’єднатись після запуску"
 
-#: mainwindow.cpp:107
+#: mainwindow.cpp:108
 #, kde-format
 msgid "KDE Remote Desktop Client started"
 msgstr "Запущено клієнт віддаленої стільниці KDE"
 
-#: mainwindow.cpp:112 mainwindow.cpp:129 mainwindow.cpp:1268
-#: mainwindow.cpp:1363
+#: mainwindow.cpp:113 mainwindow.cpp:130 mainwindow.cpp:1283
+#: mainwindow.cpp:1378
 #, kde-format
 msgid "New Connection"
 msgstr "Нове з'єднання"
 
-#: mainwindow.cpp:135
+#: mainwindow.cpp:136
 #, kde-format
 msgid "Copy Screenshot to Clipboard"
 msgstr "Скопіювати знімок у кишеню"
 
-#: mainwindow.cpp:136
+#: mainwindow.cpp:137
 #, kde-format
 msgid "Screenshot"
 msgstr "Знімок вікна"
 
-#: mainwindow.cpp:142 mainwindow.cpp:540
+#: mainwindow.cpp:143 mainwindow.cpp:566
 #, kde-format
 msgid "Switch to Full Screen Mode"
 msgstr "Перемкнутися у повноекранний режим"
 
-#: mainwindow.cpp:143 mainwindow.cpp:541
+#: mainwindow.cpp:144 mainwindow.cpp:567
 #, kde-format
 msgid "Full Screen"
 msgstr "Весь екран"
 
-#: mainwindow.cpp:150
+#: mainwindow.cpp:151
 #, kde-format
 msgid "View Only"
 msgstr "Тільки перегляд"
 
-#: mainwindow.cpp:156
+#: mainwindow.cpp:157
 #, kde-format
 msgid "Clipboard Sharing"
 msgstr "Оприлюднення буфера обміну"
 
-#: mainwindow.cpp:161
+#: mainwindow.cpp:162
 #, kde-format
 msgid "Disconnect"
 msgstr "Роз’єднатись"
 
-#: mainwindow.cpp:169
+#: mainwindow.cpp:170
 #, kde-format
 msgid "Show Local Cursor"
 msgstr "Показувати локальний курсор"
 
-#: mainwindow.cpp:170
+#: mainwindow.cpp:171
 #, kde-format
 msgid "Local Cursor"
 msgstr "Локальний курсор"
 
-#: mainwindow.cpp:176
+#: mainwindow.cpp:177
 #, kde-format
 msgid "Grab All Possible Keys"
 msgstr "Перехоплювати усі можливі натискання клавіш"
 
-#: mainwindow.cpp:177
+#: mainwindow.cpp:178
 #, kde-format
 msgid "Grab Keys"
 msgstr "Перехоплювати натискання"
 
-#: mainwindow.cpp:183
+#: mainwindow.cpp:184
 #, kde-format
 msgid "Scale Remote Screen to Fit Window Size"
 msgstr "Масштабувати віддалений екран до розміру вікна"
 
-#: mainwindow.cpp:184
+#: mainwindow.cpp:185
 #, kde-format
 msgid "Scale"
 msgstr "Масштаб"
 
-#: mainwindow.cpp:187
+#: mainwindow.cpp:188
 #, kde-format
 msgid "Scaling Factor"
 msgstr "Коефіцієнт масштабування"
 
-#: mainwindow.cpp:198
+#: mainwindow.cpp:199
 #, kde-format
 msgid "Bookmarks"
 msgstr "Закладки"
 
-#: mainwindow.cpp:269
+#: mainwindow.cpp:270
 #, kde-format
 msgid "Unable to load connection data from the provided file."
 msgstr "Не вдалося завантажити дані з'єднання з наданого файла."
 
-#: mainwindow.cpp:269
+#: mainwindow.cpp:270
 #, kde-format
 msgid "Load failed"
 msgstr "Не вдалося завантажити"
 
-#: mainwindow.cpp:275
+#: mainwindow.cpp:276
 #, kde-format
 msgid ""
 "The entered address does not have the required form.\n"
@@ -631,146 +632,146 @@ msgstr ""
 "Адресу введено у помилковому форматі.\n"
 " Синтаксис: [користувач@]вузол[:порт]"
 
-#: mainwindow.cpp:275
+#: mainwindow.cpp:276
 #, kde-format
 msgid "Malformed URL"
 msgstr "Неправильно записана адреса URL"
 
-#: mainwindow.cpp:296
+#: mainwindow.cpp:297
 #, kde-format
 msgid "The entered address cannot be handled."
 msgstr "Неможливо опрацювати вибрану адресу."
 
-#: mainwindow.cpp:447
+#: mainwindow.cpp:448
 #, kde-format
 msgid "Connecting to %1"
 msgstr "З'єднання з %1"
 
-#: mainwindow.cpp:451
+#: mainwindow.cpp:452
 #, kde-format
 msgid "Authenticating at %1"
 msgstr "Автентифікація на %1"
 
-#: mainwindow.cpp:455
+#: mainwindow.cpp:456
 #, kde-format
 msgid "Preparing connection to %1"
 msgstr "Підготовка з'єднання з %1"
 
-#: mainwindow.cpp:459
+#: mainwindow.cpp:460
 #, kde-format
 msgid "Connected to %1"
 msgstr "З'єднано з %1"
 
-#: mainwindow.cpp:584
+#: mainwindow.cpp:613
 #, kde-format
 msgid "Switch to Window Mode"
 msgstr "Перемкнути в віконний режим"
 
-#: mainwindow.cpp:585
+#: mainwindow.cpp:614
 #, kde-format
 msgid "Window Mode"
 msgstr "Режим вікна"
 
-#: mainwindow.cpp:769
+#: mainwindow.cpp:798
 #, kde-format
 msgid "The entered address cannot be handled by this connection type."
 msgstr "Неможливо опрацювати введену адресу за цим типом з'єднання."
 
-#: mainwindow.cpp:804
+#: mainwindow.cpp:833
 #, kde-format
 msgid "Connect"
 msgstr "З'єднатися"
 
-#: mainwindow.cpp:805
+#: mainwindow.cpp:834
 #, kde-format
 msgid "Rename"
 msgstr "Перейменувати"
 
-#: mainwindow.cpp:806
+#: mainwindow.cpp:835
 #, kde-format
 msgid "Settings"
 msgstr "Параметри"
 
-#: mainwindow.cpp:807
+#: mainwindow.cpp:836
 #, kde-format
 msgid "Delete"
 msgstr "Вилучити"
 
-#: mainwindow.cpp:810 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:839 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "Закладки"
 
-#: mainwindow.cpp:810 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:839 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "Журнал"
 
-#: mainwindow.cpp:822
+#: mainwindow.cpp:851
 #, kde-format
 msgid "Rename %1"
 msgstr "Перейменувати %1"
 
-#: mainwindow.cpp:822
+#: mainwindow.cpp:851
 #, kde-format
 msgid "Rename %1 to"
 msgstr "Перейменувати %1 на"
 
-#: mainwindow.cpp:829
+#: mainwindow.cpp:858
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "Ви справді бажаєте вилучити %1?"
 
-#: mainwindow.cpp:829
+#: mainwindow.cpp:858
 #, kde-format
 msgid "Delete %1"
 msgstr "Вилучити %1"
 
-#: mainwindow.cpp:853
+#: mainwindow.cpp:882
 #, kde-format
 msgid "Add Bookmark"
 msgstr "Додати закладку"
 
-#: mainwindow.cpp:854
+#: mainwindow.cpp:883
 #, kde-format
 msgid "Close Tab"
 msgstr "Закрити вкладку"
 
-#: mainwindow.cpp:971
+#: mainwindow.cpp:1000
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr "Мінімізувати повноекранне вікно"
 
-#: mainwindow.cpp:988
+#: mainwindow.cpp:1017
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "Приліпити пенал"
 
-#: mainwindow.cpp:1105
+#: mainwindow.cpp:1137
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr "Закрити Клієнт віддалених стільниць KDE?"
 
-#: mainwindow.cpp:1106
+#: mainwindow.cpp:1138
 #, kde-format
 msgid "Confirm Quit"
 msgstr "Підтвердження виходу"
 
-#: mainwindow.cpp:1291
+#: mainwindow.cpp:1306
 #, kde-format
 msgid "Connect to:"
 msgstr "З'єднатися з:"
 
-#: mainwindow.cpp:1295
+#: mainwindow.cpp:1310
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr ""
 "Введіть сюди дані для встановлення з’єднання з певною адресою або "
 "фільтрування списку."
 
-#: mainwindow.cpp:1304
+#: mainwindow.cpp:1319
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
@@ -779,17 +780,17 @@ msgstr ""
 "Тут вам слід ввести IP-адресу або назву у DNS. Спорожніть рядок, щоб "
 "переглянути список способів з’єднання."
 
-#: mainwindow.cpp:1307
+#: mainwindow.cpp:1322
 #, kde-format
 msgid "Goto Address"
 msgstr "Перейти до адреси"
 
-#: mainwindow.cpp:1399
+#: mainwindow.cpp:1414
 #, kde-format
 msgid "Remote Desktops"
 msgstr "Віддалені стільниці"
 
-#: mainwindow.cpp:1428
+#: mainwindow.cpp:1443
 #, kde-format
 msgid "Filter"
 msgstr "Фільтр"
@@ -818,39 +819,41 @@ msgstr ""
 "здатністю визначається розмір стільниці, яка буде вам представлена."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#: rdp/rdppreferences.ui:56
+#: rdp/rdppreferences.ui:56 spice/spicepreferences.ui:46
 #, kde-format
 msgid "Small (1280x720)"
 msgstr "Малий (1280⨯720)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#: rdp/rdppreferences.ui:61
+#: rdp/rdppreferences.ui:61 spice/spicepreferences.ui:51
 #, kde-format
 msgid "Medium (1600x900)"
 msgstr "Середній (1600⨯900)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#: rdp/rdppreferences.ui:66
+#: rdp/rdppreferences.ui:66 spice/spicepreferences.ui:56
 #, kde-format
 msgid "Large (1920x1080)"
 msgstr "Великий (1920⨯1080)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#: rdp/rdppreferences.ui:71
+#: rdp/rdppreferences.ui:71 spice/spicepreferences.ui:61
 #, kde-format
 msgid "Current Window Size"
 msgstr "Поточний розмір вікна"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
-#: rdp/rdppreferences.ui:76 vnc/vncpreferences.ui:118
+#: rdp/rdppreferences.ui:76 spice/spicepreferences.ui:66
+#: vnc/vncpreferences.ui:118
 #, kde-format
 msgid "Current Screen Resolution"
 msgstr "Поточна роздільна здатність"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
-#: rdp/rdppreferences.ui:81 vnc/vncpreferences.ui:123
+#: rdp/rdppreferences.ui:81 spice/spicepreferences.ui:71
+#: vnc/vncpreferences.ui:123
 #, kde-format
 msgid "Custom Resolution (…)"
 msgstr "Нетипова роздільна здатність (…)"
@@ -862,7 +865,8 @@ msgid "Use All Screens Resolution"
 msgstr "Використати роздільну здатність усіх екранів"
 
 #. i18n: ectx: property (text), widget (QLabel, widthLabel)
-#: rdp/rdppreferences.ui:99 vnc/vncpreferences.ui:136
+#: rdp/rdppreferences.ui:99 spice/spicepreferences.ui:84
+#: vnc/vncpreferences.ui:136
 #, kde-format
 msgid "&Width:"
 msgstr "&Ширина:"
@@ -879,7 +883,8 @@ msgstr ""
 "якщо вище ви вибрали роздільну здатність стільниці як Нетипову."
 
 #. i18n: ectx: property (text), widget (QLabel, heightLabel)
-#: rdp/rdppreferences.ui:131 vnc/vncpreferences.ui:168
+#: rdp/rdppreferences.ui:131 spice/spicepreferences.ui:116
+#: vnc/vncpreferences.ui:168
 #, kde-format
 msgid "H&eight:"
 msgstr "В&исота:"
@@ -896,7 +901,8 @@ msgstr ""
 "якщо вище ви вибрали роздільну здатність стільниці як Нетипову."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ScaleToSize)
-#: rdp/rdppreferences.ui:168
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ScaleToWindow)
+#: rdp/rdppreferences.ui:168 spice/spicepreferences.ui:147
 #, kde-format
 msgid "Scale window contents to match resolution"
 msgstr "Масштабувати вміст вікна відповідно до роздільності"
@@ -1748,6 +1754,87 @@ msgctxt "Header of the connections list, where this entry comes from"
 msgid "Source"
 msgstr "Джерело"
 
+#. i18n: ectx: property (title), widget (QGroupBox, displayGroupBox)
+#: spice/spicepreferences.ui:17
+#, kde-format
+msgid "Display"
+msgstr "Показ"
+
+#. i18n: ectx: property (text), widget (QLabel, resolutionLabel)
+#: spice/spicepreferences.ui:23
+#, fuzzy, kde-format
+#| msgid "Resolution"
+msgid "Resolution:"
+msgstr "Роздільна здатність"
+
+#. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_Resolution)
+#: spice/spicepreferences.ui:39
+#, kde-format
+msgid ""
+"The resolution requested from the remote desktop. The guest must have spice-"
+"vdagent running for dynamic resize to work."
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Width)
+#: spice/spicepreferences.ui:100
+#, kde-format
+msgid ""
+"Custom desktop width. Only editable when Custom Resolution is selected above."
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Height)
+#: spice/spicepreferences.ui:132
+#, kde-format
+msgid ""
+"Custom desktop height. Only editable when Custom Resolution is selected "
+"above."
+msgstr ""
+
+#. i18n: ectx: property (title), widget (QGroupBox, spiceGroupBox)
+#. i18n: ectx: property (title), widget (QGroupBox, vncGroupBox)
+#: spice/spicepreferences.ui:160 vnc/vncpreferences.ui:17
+#, kde-format
+msgid "Connection"
+msgstr "З'єднання"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableAudio)
+#: spice/spicepreferences.ui:166
+#, kde-format
+msgid "Enable &audio playback"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_EnableAudio)
+#: spice/spicepreferences.ui:169
+#, kde-format
+msgid "Play audio from the remote host on this machine."
+msgstr ""
+
+#: spice/spiceview.cpp:776
+#, kde-format
+msgid "Authentication is required to connect to <b>%1</b>."
+msgstr ""
+
+#: spice/spiceviewfactory.cpp:47
+#, fuzzy, kde-format
+#| msgid "New RDP Connection…"
+msgid "New SPICE Connection…"
+msgstr "Нове з'єднання RDP…"
+
+#: spice/spiceviewfactory.cpp:52
+#, fuzzy, kde-format
+#| msgid "Connect to a VNC Remote Desktop"
+msgid "Connect to a SPICE Remote Desktop"
+msgstr "З'єднатись з Віддаленою стільницею VNC"
+
+#: spice/spiceviewfactory.cpp:58
+#, fuzzy, kde-format
+#| msgid ""
+#| "<html>Enter the address here.<br /><i>Example: nxserver (host)</i></html>"
+msgid ""
+"<html>Enter the address here.<br /><i>Example: spice://myhost:5900</i></html>"
+msgstr ""
+"<html>Введіть сюди адресу.<br /><i>Наприклад: nxserver (host)</i></html>"
+
 #: vnc/vncclientthread.cpp:315
 #, kde-format
 msgid "VNC authentication type is not supported."
@@ -1792,12 +1879,6 @@ msgstr "Встановлено повторне з’єднання."
 #, kde-format
 msgid "Connected."
 msgstr "З’єднано."
-
-#. i18n: ectx: property (title), widget (QGroupBox, vncGroupBox)
-#: vnc/vncpreferences.ui:17
-#, kde-format
-msgid "Connection"
-msgstr "З'єднання"
 
 #. i18n: ectx: property (text), widget (QLabel, connectionLabel)
 #: vnc/vncpreferences.ui:23
@@ -2157,9 +2238,6 @@ msgstr ""
 #~ msgid "Available NX Sessions"
 #~ msgstr "Доступні сеанси NX"
 
-#~ msgid "Display"
-#~ msgstr "Показ"
-
 #~ msgid "Type"
 #~ msgstr "Тип"
 
@@ -2207,11 +2285,6 @@ msgstr ""
 
 #~ msgid "Connect to a NX Remote Desktop"
 #~ msgstr "З'єднатись з Віддаленою стільницею NX"
-
-#~ msgid ""
-#~ "<html>Enter the address here.<br /><i>Example: nxserver (host)</i></html>"
-#~ msgstr ""
-#~ "<html>Введіть сюди адресу.<br /><i>Наприклад: nxserver (host)</i></html>"
 
 #~ msgid ""
 #~ "<h1>KDE Remote Desktop Client</h1><br />Enter or select the address of "

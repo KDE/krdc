@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-23 00:52+0000\n"
+"POT-Creation-Date: 2026-09-24 00:45+0000\n"
 "PO-Revision-Date: 2026-09-04 12:18+0200\n"
 "Last-Translator: Libor Filipek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -214,13 +214,13 @@ msgstr "Nastavit…"
 msgid "Remove"
 msgstr "Odstranit"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:296 mainwindow.cpp:769
-#: mainwindow.cpp:785
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:297 mainwindow.cpp:798
+#: mainwindow.cpp:814
 #, kde-format
 msgid "Unusable URL"
 msgstr "Nepoužitelné URL"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:785
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:814
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr "Zvoleného hostitele nelze obsloužit."
@@ -348,18 +348,19 @@ msgstr "Prosím, zadejte heslo SSH."
 msgid "SSH Tunnel failure"
 msgstr "Selhání tunelu SSH"
 
-#: core/sshtunnelthread.cpp:99
+#: core/sshtunnelthread.cpp:104
 #, kde-format
 msgid "Error connecting to %1: %2"
 msgstr "Chyba při připojení k %1: %2"
 
-#: core/sshtunnelthread.cpp:124
+#: core/sshtunnelthread.cpp:129
 #, kde-format
 msgid "Error authenticating with password: %1"
 msgstr "Chyba při ověřování heslem: %1"
 
-#: core/sshtunnelthread.cpp:130 core/sshtunnelthread.cpp:148
-#: core/sshtunnelthread.cpp:155 core/sshtunnelthread.cpp:163
+#: core/sshtunnelthread.cpp:135 core/sshtunnelthread.cpp:153
+#: core/sshtunnelthread.cpp:160 core/sshtunnelthread.cpp:168
+#: core/sshtunnelthread.cpp:181
 #, kde-format
 msgid "Error creating tunnel socket"
 msgstr "Chyba při vytváření slotu tunelu"
@@ -516,103 +517,103 @@ msgstr ""
 msgid "URLs to connect after startup"
 msgstr "URL k připojení při spuštění"
 
-#: mainwindow.cpp:107
+#: mainwindow.cpp:108
 #, kde-format
 msgid "KDE Remote Desktop Client started"
 msgstr "Klient vzdálené plochy pro KDE spuštěn"
 
-#: mainwindow.cpp:112 mainwindow.cpp:129 mainwindow.cpp:1268
-#: mainwindow.cpp:1363
+#: mainwindow.cpp:113 mainwindow.cpp:130 mainwindow.cpp:1283
+#: mainwindow.cpp:1378
 #, kde-format
 msgid "New Connection"
 msgstr "Nové spojení"
 
-#: mainwindow.cpp:135
+#: mainwindow.cpp:136
 #, kde-format
 msgid "Copy Screenshot to Clipboard"
 msgstr "Kopírovat snímek do schránky"
 
-#: mainwindow.cpp:136
+#: mainwindow.cpp:137
 #, kde-format
 msgid "Screenshot"
 msgstr "Snímek obrazovky"
 
-#: mainwindow.cpp:142 mainwindow.cpp:540
+#: mainwindow.cpp:143 mainwindow.cpp:566
 #, kde-format
 msgid "Switch to Full Screen Mode"
 msgstr "Přepnout do režimu na celou obrazovku"
 
-#: mainwindow.cpp:143 mainwindow.cpp:541
+#: mainwindow.cpp:144 mainwindow.cpp:567
 #, kde-format
 msgid "Full Screen"
 msgstr "Celá obrazovka"
 
-#: mainwindow.cpp:150
+#: mainwindow.cpp:151
 #, kde-format
 msgid "View Only"
 msgstr "Pouze pohled"
 
-#: mainwindow.cpp:156
+#: mainwindow.cpp:157
 #, kde-format
 msgid "Clipboard Sharing"
 msgstr "Sdílení schránky"
 
-#: mainwindow.cpp:161
+#: mainwindow.cpp:162
 #, kde-format
 msgid "Disconnect"
 msgstr "Odpojit"
 
-#: mainwindow.cpp:169
+#: mainwindow.cpp:170
 #, kde-format
 msgid "Show Local Cursor"
 msgstr "Zobrazit místní kurzor"
 
-#: mainwindow.cpp:170
+#: mainwindow.cpp:171
 #, kde-format
 msgid "Local Cursor"
 msgstr "Místní kurzor"
 
-#: mainwindow.cpp:176
+#: mainwindow.cpp:177
 #, kde-format
 msgid "Grab All Possible Keys"
 msgstr "Zachytit všechny možné klávesy"
 
-#: mainwindow.cpp:177
+#: mainwindow.cpp:178
 #, kde-format
 msgid "Grab Keys"
 msgstr "Zachytit klávesy"
 
-#: mainwindow.cpp:183
+#: mainwindow.cpp:184
 #, kde-format
 msgid "Scale Remote Screen to Fit Window Size"
 msgstr "Přizpůsobit vzdálenou obrazovku velikosti okna"
 
-#: mainwindow.cpp:184
+#: mainwindow.cpp:185
 #, kde-format
 msgid "Scale"
 msgstr "Měřítko"
 
-#: mainwindow.cpp:187
+#: mainwindow.cpp:188
 #, kde-format
 msgid "Scaling Factor"
 msgstr "Měřítko"
 
-#: mainwindow.cpp:198
+#: mainwindow.cpp:199
 #, kde-format
 msgid "Bookmarks"
 msgstr "Záložky"
 
-#: mainwindow.cpp:269
+#: mainwindow.cpp:270
 #, kde-format
 msgid "Unable to load connection data from the provided file."
 msgstr "Nelze načíst údaje o připojení z poskytnutého souboru."
 
-#: mainwindow.cpp:269
+#: mainwindow.cpp:270
 #, kde-format
 msgid "Load failed"
 msgstr "Načtení selhalo"
 
-#: mainwindow.cpp:275
+#: mainwindow.cpp:276
 #, kde-format
 msgid ""
 "The entered address does not have the required form.\n"
@@ -621,144 +622,144 @@ msgstr ""
 "Zadaná adresa nemá požadovaný formát.\n"
 " Syntaxe: [uživatel@]hostitel[:port]"
 
-#: mainwindow.cpp:275
+#: mainwindow.cpp:276
 #, kde-format
 msgid "Malformed URL"
 msgstr "Neplatné URL"
 
-#: mainwindow.cpp:296
+#: mainwindow.cpp:297
 #, kde-format
 msgid "The entered address cannot be handled."
 msgstr "Se zadanou adresou nelze pracovat."
 
-#: mainwindow.cpp:447
+#: mainwindow.cpp:448
 #, kde-format
 msgid "Connecting to %1"
 msgstr "Připojuji se k %1"
 
-#: mainwindow.cpp:451
+#: mainwindow.cpp:452
 #, kde-format
 msgid "Authenticating at %1"
 msgstr "Probíhá ověřování na %1"
 
-#: mainwindow.cpp:455
+#: mainwindow.cpp:456
 #, kde-format
 msgid "Preparing connection to %1"
 msgstr "Probíhá příprava spojení s %1"
 
-#: mainwindow.cpp:459
+#: mainwindow.cpp:460
 #, kde-format
 msgid "Connected to %1"
 msgstr "Připojen k %1"
 
-#: mainwindow.cpp:584
+#: mainwindow.cpp:613
 #, kde-format
 msgid "Switch to Window Mode"
 msgstr "Přepnout do okna"
 
-#: mainwindow.cpp:585
+#: mainwindow.cpp:614
 #, kde-format
 msgid "Window Mode"
 msgstr "Režim okna"
 
-#: mainwindow.cpp:769
+#: mainwindow.cpp:798
 #, kde-format
 msgid "The entered address cannot be handled by this connection type."
 msgstr "Tento typ připojení nedokáže zpracovat zadanou adresu."
 
-#: mainwindow.cpp:804
+#: mainwindow.cpp:833
 #, kde-format
 msgid "Connect"
 msgstr "Připojit"
 
-#: mainwindow.cpp:805
+#: mainwindow.cpp:834
 #, kde-format
 msgid "Rename"
 msgstr "Přejmenovat"
 
-#: mainwindow.cpp:806
+#: mainwindow.cpp:835
 #, kde-format
 msgid "Settings"
 msgstr "Nastavení"
 
-#: mainwindow.cpp:807
+#: mainwindow.cpp:836
 #, kde-format
 msgid "Delete"
 msgstr "Smazat"
 
-#: mainwindow.cpp:810 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:839 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "Záložky"
 
-#: mainwindow.cpp:810 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:839 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "Historie"
 
-#: mainwindow.cpp:822
+#: mainwindow.cpp:851
 #, kde-format
 msgid "Rename %1"
 msgstr "Přejmenovat %1"
 
-#: mainwindow.cpp:822
+#: mainwindow.cpp:851
 #, kde-format
 msgid "Rename %1 to"
 msgstr "Přejmenovat %1 na"
 
-#: mainwindow.cpp:829
+#: mainwindow.cpp:858
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "Opravdu si přejete smazat %1?"
 
-#: mainwindow.cpp:829
+#: mainwindow.cpp:858
 #, kde-format
 msgid "Delete %1"
 msgstr "Smazat %1"
 
-#: mainwindow.cpp:853
+#: mainwindow.cpp:882
 #, kde-format
 msgid "Add Bookmark"
 msgstr "Přidat záložku"
 
-#: mainwindow.cpp:854
+#: mainwindow.cpp:883
 #, kde-format
 msgid "Close Tab"
 msgstr "Uzavřít záložku"
 
-#: mainwindow.cpp:971
+#: mainwindow.cpp:1000
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr "Minimalizovat celoobrazovkové okno"
 
-#: mainwindow.cpp:988
+#: mainwindow.cpp:1017
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "Přichytit panel nástrojů"
 
-#: mainwindow.cpp:1105
+#: mainwindow.cpp:1137
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr "Opravdu si přejete ukončit klienta vzdálené plochy pro KDE?"
 
-#: mainwindow.cpp:1106
+#: mainwindow.cpp:1138
 #, kde-format
 msgid "Confirm Quit"
 msgstr "Potvrdit ukončení"
 
-#: mainwindow.cpp:1291
+#: mainwindow.cpp:1306
 #, kde-format
 msgid "Connect to:"
 msgstr "Připojit se k:"
 
-#: mainwindow.cpp:1295
+#: mainwindow.cpp:1310
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr "Zde pište pro připojení k adrese nebo filtrování seznamu."
 
-#: mainwindow.cpp:1304
+#: mainwindow.cpp:1319
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
@@ -767,17 +768,17 @@ msgstr ""
 "Zde zadejte IP adresu nebo DNS název. Pro zobrazení způsobů připojení "
 "vymažte řádek."
 
-#: mainwindow.cpp:1307
+#: mainwindow.cpp:1322
 #, kde-format
 msgid "Goto Address"
 msgstr "Přejít na adresu"
 
-#: mainwindow.cpp:1399
+#: mainwindow.cpp:1414
 #, kde-format
 msgid "Remote Desktops"
 msgstr "Vzdálené plochy"
 
-#: mainwindow.cpp:1428
+#: mainwindow.cpp:1443
 #, kde-format
 msgid "Filter"
 msgstr "Filtr"
@@ -806,39 +807,41 @@ msgstr ""
 "plochy, kterou uvidíte."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#: rdp/rdppreferences.ui:56
+#: rdp/rdppreferences.ui:56 spice/spicepreferences.ui:46
 #, kde-format
 msgid "Small (1280x720)"
 msgstr "Malé (1280x720)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#: rdp/rdppreferences.ui:61
+#: rdp/rdppreferences.ui:61 spice/spicepreferences.ui:51
 #, kde-format
 msgid "Medium (1600x900)"
 msgstr "Střední (1600x900)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#: rdp/rdppreferences.ui:66
+#: rdp/rdppreferences.ui:66 spice/spicepreferences.ui:56
 #, kde-format
 msgid "Large (1920x1080)"
 msgstr "Velké (1920x1080)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#: rdp/rdppreferences.ui:71
+#: rdp/rdppreferences.ui:71 spice/spicepreferences.ui:61
 #, kde-format
 msgid "Current Window Size"
 msgstr "Současná velikost okna"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
-#: rdp/rdppreferences.ui:76 vnc/vncpreferences.ui:118
+#: rdp/rdppreferences.ui:76 spice/spicepreferences.ui:66
+#: vnc/vncpreferences.ui:118
 #, kde-format
 msgid "Current Screen Resolution"
 msgstr "Aktuální rozlišení obrazovky"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
-#: rdp/rdppreferences.ui:81 vnc/vncpreferences.ui:123
+#: rdp/rdppreferences.ui:81 spice/spicepreferences.ui:71
+#: vnc/vncpreferences.ui:123
 #, kde-format
 msgid "Custom Resolution (…)"
 msgstr "Vlastní rozlišení (…)"
@@ -850,7 +853,8 @@ msgid "Use All Screens Resolution"
 msgstr "Použít všechna rozlišení obrazovek"
 
 #. i18n: ectx: property (text), widget (QLabel, widthLabel)
-#: rdp/rdppreferences.ui:99 vnc/vncpreferences.ui:136
+#: rdp/rdppreferences.ui:99 spice/spicepreferences.ui:84
+#: vnc/vncpreferences.ui:136
 #, kde-format
 msgid "&Width:"
 msgstr "Šíř&ka:"
@@ -867,7 +871,8 @@ msgstr ""
 "případě, že jste výše vybrali 'Vlastní' velikost."
 
 #. i18n: ectx: property (text), widget (QLabel, heightLabel)
-#: rdp/rdppreferences.ui:131 vnc/vncpreferences.ui:168
+#: rdp/rdppreferences.ui:131 spice/spicepreferences.ui:116
+#: vnc/vncpreferences.ui:168
 #, kde-format
 msgid "H&eight:"
 msgstr "Výš&ka:"
@@ -884,7 +889,8 @@ msgstr ""
 "případě, že jste výše vybrali 'Vlastní' velikost."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ScaleToSize)
-#: rdp/rdppreferences.ui:168
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ScaleToWindow)
+#: rdp/rdppreferences.ui:168 spice/spicepreferences.ui:147
 #, kde-format
 msgid "Scale window contents to match resolution"
 msgstr "Upravit měřítko okna aby odpovídalo rozlišení"
@@ -1736,6 +1742,89 @@ msgctxt "Header of the connections list, where this entry comes from"
 msgid "Source"
 msgstr "Zdroj"
 
+#. i18n: ectx: property (title), widget (QGroupBox, displayGroupBox)
+#: spice/spicepreferences.ui:17
+#, kde-format
+msgid "Display"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, resolutionLabel)
+#: spice/spicepreferences.ui:23
+#, fuzzy, kde-format
+#| msgid "Resolution"
+msgid "Resolution:"
+msgstr "Rozlišení"
+
+#. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_Resolution)
+#: spice/spicepreferences.ui:39
+#, kde-format
+msgid ""
+"The resolution requested from the remote desktop. The guest must have spice-"
+"vdagent running for dynamic resize to work."
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Width)
+#: spice/spicepreferences.ui:100
+#, kde-format
+msgid ""
+"Custom desktop width. Only editable when Custom Resolution is selected above."
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Height)
+#: spice/spicepreferences.ui:132
+#, kde-format
+msgid ""
+"Custom desktop height. Only editable when Custom Resolution is selected "
+"above."
+msgstr ""
+
+#. i18n: ectx: property (title), widget (QGroupBox, spiceGroupBox)
+#. i18n: ectx: property (title), widget (QGroupBox, vncGroupBox)
+#: spice/spicepreferences.ui:160 vnc/vncpreferences.ui:17
+#, kde-format
+msgid "Connection"
+msgstr "Připojení"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableAudio)
+#: spice/spicepreferences.ui:166
+#, kde-format
+msgid "Enable &audio playback"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_EnableAudio)
+#: spice/spicepreferences.ui:169
+#, kde-format
+msgid "Play audio from the remote host on this machine."
+msgstr ""
+
+#: spice/spiceview.cpp:776
+#, kde-format
+msgid "Authentication is required to connect to <b>%1</b>."
+msgstr ""
+
+#: spice/spiceviewfactory.cpp:47
+#, fuzzy, kde-format
+#| msgid "New RDP Connection…"
+msgid "New SPICE Connection…"
+msgstr "Nové připojení RDP…"
+
+#: spice/spiceviewfactory.cpp:52
+#, fuzzy, kde-format
+#| msgid "Connect to a VNC Remote Desktop"
+msgid "Connect to a SPICE Remote Desktop"
+msgstr "Připojit se na vzdálenou plochu VNC"
+
+#: spice/spiceviewfactory.cpp:58
+#, fuzzy, kde-format
+#| msgid ""
+#| "<html>Enter the address here.<br /><i>Example: vncserver:1 (host:port / "
+#| "screen)</i></html>"
+msgid ""
+"<html>Enter the address here.<br /><i>Example: spice://myhost:5900</i></html>"
+msgstr ""
+"<html>Zde zadejte adresu<br /><i>Např.: vncserver:1 (host:port / screen)</"
+"i></html>"
+
 #: vnc/vncclientthread.cpp:315
 #, kde-format
 msgid "VNC authentication type is not supported."
@@ -1780,12 +1869,6 @@ msgstr "Opakovaně připojen."
 #, kde-format
 msgid "Connected."
 msgstr "Připojen."
-
-#. i18n: ectx: property (title), widget (QGroupBox, vncGroupBox)
-#: vnc/vncpreferences.ui:17
-#, kde-format
-msgid "Connection"
-msgstr "Připojení"
 
 #. i18n: ectx: property (text), widget (QLabel, connectionLabel)
 #: vnc/vncpreferences.ui:23

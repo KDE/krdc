@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-23 00:52+0000\n"
+"POT-Creation-Date: 2026-09-24 00:45+0000\n"
 "PO-Revision-Date: 2015-02-22 22:25+0100\n"
 "Last-Translator: Samir Ribić <megaribi@epn.ba>\n"
 "Language-Team: Bosnian <lokal@lugbih.org>\n"
@@ -213,13 +213,13 @@ msgstr "Konfiguriranje..."
 msgid "Remove"
 msgstr "Ukloni"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:296 mainwindow.cpp:769
-#: mainwindow.cpp:785
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:297 mainwindow.cpp:798
+#: mainwindow.cpp:814
 #, kde-format
 msgid "Unusable URL"
 msgstr "Neupotrebljiv URL"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:785
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:814
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr "Naznačenim domaćinom se ne može rukovati."
@@ -348,20 +348,21 @@ msgstr ""
 msgid "SSH Tunnel failure"
 msgstr ""
 
-#: core/sshtunnelthread.cpp:99
+#: core/sshtunnelthread.cpp:104
 #, fuzzy, kde-format
 #| msgid "Connecting to %1"
 msgid "Error connecting to %1: %2"
 msgstr "Povezujem se na %1"
 
-#: core/sshtunnelthread.cpp:124
+#: core/sshtunnelthread.cpp:129
 #, fuzzy, kde-format
 #| msgid "Authenticating at %1"
 msgid "Error authenticating with password: %1"
 msgstr "Provjera autentičnosti na %1"
 
-#: core/sshtunnelthread.cpp:130 core/sshtunnelthread.cpp:148
-#: core/sshtunnelthread.cpp:155 core/sshtunnelthread.cpp:163
+#: core/sshtunnelthread.cpp:135 core/sshtunnelthread.cpp:153
+#: core/sshtunnelthread.cpp:160 core/sshtunnelthread.cpp:168
+#: core/sshtunnelthread.cpp:181
 #, kde-format
 msgid "Error creating tunnel socket"
 msgstr ""
@@ -528,103 +529,103 @@ msgstr ""
 msgid "URLs to connect after startup"
 msgstr "URL-ovi za povezivanje poslije podizanja"
 
-#: mainwindow.cpp:107
+#: mainwindow.cpp:108
 #, kde-format
 msgid "KDE Remote Desktop Client started"
 msgstr "KDE udaljeni desktop klijent pokrenut"
 
-#: mainwindow.cpp:112 mainwindow.cpp:129 mainwindow.cpp:1268
-#: mainwindow.cpp:1363
+#: mainwindow.cpp:113 mainwindow.cpp:130 mainwindow.cpp:1283
+#: mainwindow.cpp:1378
 #, kde-format
 msgid "New Connection"
 msgstr "Nova veza"
 
-#: mainwindow.cpp:135
+#: mainwindow.cpp:136
 #, kde-format
 msgid "Copy Screenshot to Clipboard"
 msgstr "Kopiraj sliku ekrana u međuspremnik"
 
-#: mainwindow.cpp:136
+#: mainwindow.cpp:137
 #, kde-format
 msgid "Screenshot"
 msgstr "Slika ekrana"
 
-#: mainwindow.cpp:142 mainwindow.cpp:540
+#: mainwindow.cpp:143 mainwindow.cpp:566
 #, kde-format
 msgid "Switch to Full Screen Mode"
 msgstr "Prebaci se u način rada cijelog ekrana"
 
-#: mainwindow.cpp:143 mainwindow.cpp:541
+#: mainwindow.cpp:144 mainwindow.cpp:567
 #, kde-format
 msgid "Full Screen"
 msgstr "Cijeli ekran"
 
-#: mainwindow.cpp:150
+#: mainwindow.cpp:151
 #, kde-format
 msgid "View Only"
 msgstr "Samo pregled"
 
-#: mainwindow.cpp:156
+#: mainwindow.cpp:157
 #, kde-format
 msgid "Clipboard Sharing"
 msgstr ""
 
-#: mainwindow.cpp:161
+#: mainwindow.cpp:162
 #, kde-format
 msgid "Disconnect"
 msgstr "Prekini vezu"
 
-#: mainwindow.cpp:169
+#: mainwindow.cpp:170
 #, kde-format
 msgid "Show Local Cursor"
 msgstr "Prikaži lokalni kursor"
 
-#: mainwindow.cpp:170
+#: mainwindow.cpp:171
 #, kde-format
 msgid "Local Cursor"
 msgstr "Lokalni kursor"
 
-#: mainwindow.cpp:176
+#: mainwindow.cpp:177
 #, kde-format
 msgid "Grab All Possible Keys"
 msgstr "Uzmi sve moguće klučeve"
 
-#: mainwindow.cpp:177
+#: mainwindow.cpp:178
 #, kde-format
 msgid "Grab Keys"
 msgstr "Uzmi ključeve"
 
-#: mainwindow.cpp:183
+#: mainwindow.cpp:184
 #, kde-format
 msgid "Scale Remote Screen to Fit Window Size"
 msgstr "Skaliranje daljinskog ekrana da bi stao u veličinu prozora"
 
-#: mainwindow.cpp:184
+#: mainwindow.cpp:185
 #, kde-format
 msgid "Scale"
 msgstr "Skaliraj"
 
-#: mainwindow.cpp:187
+#: mainwindow.cpp:188
 #, kde-format
 msgid "Scaling Factor"
 msgstr ""
 
-#: mainwindow.cpp:198
+#: mainwindow.cpp:199
 #, kde-format
 msgid "Bookmarks"
 msgstr "Zabilješke"
 
-#: mainwindow.cpp:269
+#: mainwindow.cpp:270
 #, kde-format
 msgid "Unable to load connection data from the provided file."
 msgstr ""
 
-#: mainwindow.cpp:269
+#: mainwindow.cpp:270
 #, kde-format
 msgid "Load failed"
 msgstr ""
 
-#: mainwindow.cpp:275
+#: mainwindow.cpp:276
 #, kde-format
 msgid ""
 "The entered address does not have the required form.\n"
@@ -633,146 +634,146 @@ msgstr ""
 "Unesena adresa nema potrebni oblik:.\n"
 " Sintaksa: [korisnik@]host[:port]"
 
-#: mainwindow.cpp:275
+#: mainwindow.cpp:276
 #, kde-format
 msgid "Malformed URL"
 msgstr "Loše oblikovan URL"
 
-#: mainwindow.cpp:296
+#: mainwindow.cpp:297
 #, kde-format
 msgid "The entered address cannot be handled."
 msgstr "Unijetom adresom se ne može rukovati."
 
-#: mainwindow.cpp:447
+#: mainwindow.cpp:448
 #, kde-format
 msgid "Connecting to %1"
 msgstr "Povezujem se na %1"
 
-#: mainwindow.cpp:451
+#: mainwindow.cpp:452
 #, kde-format
 msgid "Authenticating at %1"
 msgstr "Provjera autentičnosti na %1"
 
-#: mainwindow.cpp:455
+#: mainwindow.cpp:456
 #, kde-format
 msgid "Preparing connection to %1"
 msgstr "Priprema veze na %1"
 
-#: mainwindow.cpp:459
+#: mainwindow.cpp:460
 #, kde-format
 msgid "Connected to %1"
 msgstr "Povezan na %1"
 
-#: mainwindow.cpp:584
+#: mainwindow.cpp:613
 #, kde-format
 msgid "Switch to Window Mode"
 msgstr "Prebaci na prozorski režim rada"
 
-#: mainwindow.cpp:585
+#: mainwindow.cpp:614
 #, kde-format
 msgid "Window Mode"
 msgstr "Režim prozora"
 
-#: mainwindow.cpp:769
+#: mainwindow.cpp:798
 #, fuzzy, kde-format
 #| msgid "The entered address cannot be handled."
 msgid "The entered address cannot be handled by this connection type."
 msgstr "Unijetom adresom se ne može rukovati."
 
-#: mainwindow.cpp:804
+#: mainwindow.cpp:833
 #, kde-format
 msgid "Connect"
 msgstr "Poveži se"
 
-#: mainwindow.cpp:805
+#: mainwindow.cpp:834
 #, kde-format
 msgid "Rename"
 msgstr "Preimenuj"
 
-#: mainwindow.cpp:806
+#: mainwindow.cpp:835
 #, kde-format
 msgid "Settings"
 msgstr "Postavke"
 
-#: mainwindow.cpp:807
+#: mainwindow.cpp:836
 #, kde-format
 msgid "Delete"
 msgstr "Obriši"
 
-#: mainwindow.cpp:810 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:839 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "Zabilješke"
 
-#: mainwindow.cpp:810 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:839 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "Historija"
 
-#: mainwindow.cpp:822
+#: mainwindow.cpp:851
 #, kde-format
 msgid "Rename %1"
 msgstr "Preimenuj u %1"
 
-#: mainwindow.cpp:822
+#: mainwindow.cpp:851
 #, kde-format
 msgid "Rename %1 to"
 msgstr "Preimenuj %1 u"
 
-#: mainwindow.cpp:829
+#: mainwindow.cpp:858
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "Da li ste sigurni, da želite izbrisati %1?"
 
-#: mainwindow.cpp:829
+#: mainwindow.cpp:858
 #, kde-format
 msgid "Delete %1"
 msgstr "Obriši %1"
 
-#: mainwindow.cpp:853
+#: mainwindow.cpp:882
 #, kde-format
 msgid "Add Bookmark"
 msgstr "Dodaj zabilješku"
 
-#: mainwindow.cpp:854
+#: mainwindow.cpp:883
 #, kde-format
 msgid "Close Tab"
 msgstr "Zatvori karticu"
 
-#: mainwindow.cpp:971
+#: mainwindow.cpp:1000
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr "Minimiziraj cijeli ekran"
 
-#: mainwindow.cpp:988
+#: mainwindow.cpp:1017
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "Traka alata"
 
-#: mainwindow.cpp:1105
+#: mainwindow.cpp:1137
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr ""
 "Da li ste sigurni da želite odustati od KDE daljinskog desktop klijenta ?"
 
-#: mainwindow.cpp:1106
+#: mainwindow.cpp:1138
 #, kde-format
 msgid "Confirm Quit"
 msgstr "Potvrdite odustajanje"
 
-#: mainwindow.cpp:1291
+#: mainwindow.cpp:1306
 #, kde-format
 msgid "Connect to:"
 msgstr "Poveži sa :"
 
-#: mainwindow.cpp:1295
+#: mainwindow.cpp:1310
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr "Unesite ovdje da se povežete na adresu i filtrirate listu."
 
-#: mainwindow.cpp:1304
+#: mainwindow.cpp:1319
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
@@ -781,17 +782,17 @@ msgstr ""
 "Ukucajte IP ili DNS ime ovdje.Očistite liniju da bi dobili spisak metoda "
 "veze."
 
-#: mainwindow.cpp:1307
+#: mainwindow.cpp:1322
 #, kde-format
 msgid "Goto Address"
 msgstr "Idi na adresu"
 
-#: mainwindow.cpp:1399
+#: mainwindow.cpp:1414
 #, kde-format
 msgid "Remote Desktops"
 msgstr "Daljinske radne površine"
 
-#: mainwindow.cpp:1428
+#: mainwindow.cpp:1443
 #, kde-format
 msgid "Filter"
 msgstr "Filter"
@@ -822,27 +823,27 @@ msgstr ""
 "određuje veličinu radne površine koja će vam biti predstavljena."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#: rdp/rdppreferences.ui:56
+#: rdp/rdppreferences.ui:56 spice/spicepreferences.ui:46
 #, fuzzy, kde-format
 #| msgid "Small (800x600)"
 msgid "Small (1280x720)"
 msgstr "Mali (800x600)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#: rdp/rdppreferences.ui:61
+#: rdp/rdppreferences.ui:61 spice/spicepreferences.ui:51
 #, kde-format
 msgid "Medium (1600x900)"
 msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#: rdp/rdppreferences.ui:66
+#: rdp/rdppreferences.ui:66 spice/spicepreferences.ui:56
 #, fuzzy, kde-format
 #| msgid "Large (1280x1024)"
 msgid "Large (1920x1080)"
 msgstr "Veliki (1280x1024)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
-#: rdp/rdppreferences.ui:71
+#: rdp/rdppreferences.ui:71 spice/spicepreferences.ui:61
 #, fuzzy, kde-format
 #| msgid "Current KRDC Size"
 msgid "Current Window Size"
@@ -850,14 +851,16 @@ msgstr "Trenutna KRDC veličina"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
-#: rdp/rdppreferences.ui:76 vnc/vncpreferences.ui:118
+#: rdp/rdppreferences.ui:76 spice/spicepreferences.ui:66
+#: vnc/vncpreferences.ui:118
 #, kde-format
 msgid "Current Screen Resolution"
 msgstr "Trenutna rezolucija ekrana"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
-#: rdp/rdppreferences.ui:81 vnc/vncpreferences.ui:123
+#: rdp/rdppreferences.ui:81 spice/spicepreferences.ui:71
+#: vnc/vncpreferences.ui:123
 #, fuzzy, kde-format
 #| msgid "Custom Resolution (...)"
 msgid "Custom Resolution (…)"
@@ -871,7 +874,8 @@ msgid "Use All Screens Resolution"
 msgstr "Trenutna rezolucija ekrana"
 
 #. i18n: ectx: property (text), widget (QLabel, widthLabel)
-#: rdp/rdppreferences.ui:99 vnc/vncpreferences.ui:136
+#: rdp/rdppreferences.ui:99 spice/spicepreferences.ui:84
+#: vnc/vncpreferences.ui:136
 #, kde-format
 msgid "&Width:"
 msgstr "Širi&na:"
@@ -888,7 +892,8 @@ msgstr ""
 "samo ako gore odaberete posebnu rezoluciju."
 
 #. i18n: ectx: property (text), widget (QLabel, heightLabel)
-#: rdp/rdppreferences.ui:131 vnc/vncpreferences.ui:168
+#: rdp/rdppreferences.ui:131 spice/spicepreferences.ui:116
+#: vnc/vncpreferences.ui:168
 #, kde-format
 msgid "H&eight:"
 msgstr "Vi&sina:"
@@ -905,7 +910,8 @@ msgstr ""
 "samo ako gore odaberete posebnu rezoluciju."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ScaleToSize)
-#: rdp/rdppreferences.ui:168
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ScaleToWindow)
+#: rdp/rdppreferences.ui:168 spice/spicepreferences.ui:147
 #, kde-format
 msgid "Scale window contents to match resolution"
 msgstr ""
@@ -1760,6 +1766,87 @@ msgctxt "Header of the connections list, where this entry comes from"
 msgid "Source"
 msgstr "Izvor"
 
+#. i18n: ectx: property (title), widget (QGroupBox, displayGroupBox)
+#: spice/spicepreferences.ui:17
+#, kde-format
+msgid "Display"
+msgstr "Prikaz"
+
+#. i18n: ectx: property (text), widget (QLabel, resolutionLabel)
+#: spice/spicepreferences.ui:23
+#, fuzzy, kde-format
+#| msgid "Resolution"
+msgid "Resolution:"
+msgstr "Rezolucija"
+
+#. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_Resolution)
+#: spice/spicepreferences.ui:39
+#, kde-format
+msgid ""
+"The resolution requested from the remote desktop. The guest must have spice-"
+"vdagent running for dynamic resize to work."
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Width)
+#: spice/spicepreferences.ui:100
+#, kde-format
+msgid ""
+"Custom desktop width. Only editable when Custom Resolution is selected above."
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Height)
+#: spice/spicepreferences.ui:132
+#, kde-format
+msgid ""
+"Custom desktop height. Only editable when Custom Resolution is selected "
+"above."
+msgstr ""
+
+#. i18n: ectx: property (title), widget (QGroupBox, spiceGroupBox)
+#. i18n: ectx: property (title), widget (QGroupBox, vncGroupBox)
+#: spice/spicepreferences.ui:160 vnc/vncpreferences.ui:17
+#, kde-format
+msgid "Connection"
+msgstr "Veza"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableAudio)
+#: spice/spicepreferences.ui:166
+#, kde-format
+msgid "Enable &audio playback"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_EnableAudio)
+#: spice/spicepreferences.ui:169
+#, kde-format
+msgid "Play audio from the remote host on this machine."
+msgstr ""
+
+#: spice/spiceview.cpp:776
+#, kde-format
+msgid "Authentication is required to connect to <b>%1</b>."
+msgstr ""
+
+#: spice/spiceviewfactory.cpp:47
+#, fuzzy, kde-format
+#| msgid "New RDP Connection..."
+msgid "New SPICE Connection…"
+msgstr "Nova RDP veza..."
+
+#: spice/spiceviewfactory.cpp:52
+#, fuzzy, kde-format
+#| msgid "Connect to a VNC Remote Desktop"
+msgid "Connect to a SPICE Remote Desktop"
+msgstr "Poveži se sa VNC daljinskom radnom površinom"
+
+#: spice/spiceviewfactory.cpp:58
+#, fuzzy, kde-format
+#| msgid ""
+#| "<html>Enter the address here.<br /><i>Example: nxserver (host)</i></html>"
+msgid ""
+"<html>Enter the address here.<br /><i>Example: spice://myhost:5900</i></html>"
+msgstr ""
+"<html> Unesite adresu ovdje.<br /><i>Primjer: nxserver (host)</i></html>"
+
 #: vnc/vncclientthread.cpp:315
 #, kde-format
 msgid "VNC authentication type is not supported."
@@ -1804,12 +1891,6 @@ msgstr "Ponovo povezano."
 #, kde-format
 msgid "Connected."
 msgstr "Povezano."
-
-#. i18n: ectx: property (title), widget (QGroupBox, vncGroupBox)
-#: vnc/vncpreferences.ui:17
-#, kde-format
-msgid "Connection"
-msgstr "Veza"
 
 #. i18n: ectx: property (text), widget (QLabel, connectionLabel)
 #: vnc/vncpreferences.ui:23
@@ -2136,9 +2217,6 @@ msgstr ""
 #~ msgid "Available NX Sessions"
 #~ msgstr "Dostupne NX sesije"
 
-#~ msgid "Display"
-#~ msgstr "Prikaz"
-
 #~ msgid "Type"
 #~ msgstr "Vrsta"
 
@@ -2186,11 +2264,6 @@ msgstr ""
 
 #~ msgid "Connect to a NX Remote Desktop"
 #~ msgstr "Poveži se sa NX udaljenom radnom površinom"
-
-#~ msgid ""
-#~ "<html>Enter the address here.<br /><i>Example: nxserver (host)</i></html>"
-#~ msgstr ""
-#~ "<html> Unesite adresu ovdje.<br /><i>Primjer: nxserver (host)</i></html>"
 
 #~ msgid ""
 #~ "<h1>KDE Remote Desktop Client</h1><br />Enter or select the address of "
