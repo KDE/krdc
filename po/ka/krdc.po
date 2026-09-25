@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-24 00:45+0000\n"
-"PO-Revision-Date: 2026-09-04 07:13+0200\n"
+"PO-Revision-Date: 2026-09-24 03:49+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -785,7 +785,7 @@ msgstr "ზოგადი"
 #: rdp/rdppreferences.ui:27
 #, kde-format
 msgid "Resolution"
-msgstr "გაფართოება"
+msgstr "გარჩევადობა"
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_Resolution)
 #. i18n: ectx: property (whatsThis), widget (KComboBox, resolutionComboBox)
@@ -836,7 +836,7 @@ msgstr "მიმდინარე ეკრანის გაფართო�
 #: vnc/vncpreferences.ui:123
 #, kde-format
 msgid "Custom Resolution (…)"
-msgstr "გაფართოების მითითება (…)"
+msgstr "გარჩევადობის მითითება (…)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:86
@@ -1738,14 +1738,13 @@ msgstr "წყარო"
 #: spice/spicepreferences.ui:17
 #, kde-format
 msgid "Display"
-msgstr ""
+msgstr "ჩვენება"
 
 #. i18n: ectx: property (text), widget (QLabel, resolutionLabel)
 #: spice/spicepreferences.ui:23
-#, fuzzy, kde-format
-#| msgid "Resolution"
+#, kde-format
 msgid "Resolution:"
-msgstr "გაფართოება"
+msgstr "გარჩევადობა:"
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_Resolution)
 #: spice/spicepreferences.ui:39
@@ -1754,6 +1753,8 @@ msgid ""
 "The resolution requested from the remote desktop. The guest must have spice-"
 "vdagent running for dynamic resize to work."
 msgstr ""
+"დაშორებული სამუშაო მაგიდიდან მოთხოვნილი გარჩევადობა. სტუმარს სამუშაოდ spice-"
+"vdagent უნდა ჰქონდეს გაშვებული."
 
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Width)
 #: spice/spicepreferences.ui:100
@@ -1761,6 +1762,8 @@ msgstr ""
 msgid ""
 "Custom desktop width. Only editable when Custom Resolution is selected above."
 msgstr ""
+"სამუშაო მაგიდის მორგებული სიგანე. ჩასწორება, მხოლოდ, მაშინაა შესაძლებელი, "
+"როცა ზემოთ არჩეულია მორგებული გარჩევადობა."
 
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Height)
 #: spice/spicepreferences.ui:132
@@ -1769,6 +1772,8 @@ msgid ""
 "Custom desktop height. Only editable when Custom Resolution is selected "
 "above."
 msgstr ""
+"სამუშაო მაგიდის მორგებული სიმაღლე. ჩასწორება, მხოლოდ, მაშინაა შესაძლებელი, "
+"როცა ზემოთ არჩეულია მორგებული გარჩევადობა."
 
 #. i18n: ectx: property (title), widget (QGroupBox, spiceGroupBox)
 #. i18n: ectx: property (title), widget (QGroupBox, vncGroupBox)
@@ -1781,41 +1786,35 @@ msgstr "კავშირი"
 #: spice/spicepreferences.ui:166
 #, kde-format
 msgid "Enable &audio playback"
-msgstr ""
+msgstr "&აუდიოს დაკვრის ჩართვა"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_EnableAudio)
 #: spice/spicepreferences.ui:169
 #, kde-format
 msgid "Play audio from the remote host on this machine."
-msgstr ""
+msgstr "აუდიოს დაკვრა დაშორებული ჰოსტიდან ამ მანქანაზე."
 
 #: spice/spiceview.cpp:776
 #, kde-format
 msgid "Authentication is required to connect to <b>%1</b>."
-msgstr ""
+msgstr "<b>%1</b>-სთან დაკავშირებას ავთენტიკაცია სჭირდება."
 
 #: spice/spiceviewfactory.cpp:47
-#, fuzzy, kde-format
-#| msgid "New RDP Connection…"
+#, kde-format
 msgid "New SPICE Connection…"
-msgstr "ახალი RDP კავშირი…"
+msgstr "ახალი SPICE კავშირი…"
 
 #: spice/spiceviewfactory.cpp:52
-#, fuzzy, kde-format
-#| msgid "Connect to a VNC Remote Desktop"
+#, kde-format
 msgid "Connect to a SPICE Remote Desktop"
-msgstr "დაშორებულ სამუშაო მაგიდაზე VNC-ით მიერთება"
+msgstr "დაშორებულ სამუშაო მაგიდაზე SPICE-ით მიერთება"
 
 #: spice/spiceviewfactory.cpp:58
-#, fuzzy, kde-format
-#| msgid ""
-#| "<html>Enter the address here.<br /><i>Example: vncserver:1 (host:port / "
-#| "screen)</i></html>"
+#, kde-format
 msgid ""
 "<html>Enter the address here.<br /><i>Example: spice://myhost:5900</i></html>"
 msgstr ""
-"<html>აქ მისამართი შეიყვანეთ.<br /><i>მაგალითად: vncserver:1 (host:port / "
-"screen)</i></html>"
+"<html>აქ მისამართი შეიყვანეთ.<br /><i>მაგალითად: spice://5900</i></html>"
 
 #: vnc/vncclientthread.cpp:315
 #, kde-format

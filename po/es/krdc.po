@@ -14,14 +14,14 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-24 00:45+0000\n"
-"PO-Revision-Date: 2026-09-05 00:36+0200\n"
+"PO-Revision-Date: 2026-09-25 00:05+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 26.08.0\n"
+"X-Generator: Lokalize 26.08.1\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -1751,14 +1751,13 @@ msgstr "Fuente"
 #: spice/spicepreferences.ui:17
 #, kde-format
 msgid "Display"
-msgstr ""
+msgstr "Pantalla"
 
 #. i18n: ectx: property (text), widget (QLabel, resolutionLabel)
 #: spice/spicepreferences.ui:23
-#, fuzzy, kde-format
-#| msgid "Resolution"
+#, kde-format
 msgid "Resolution:"
-msgstr "Resolución"
+msgstr "Resolución:"
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_Resolution)
 #: spice/spicepreferences.ui:39
@@ -1767,6 +1766,9 @@ msgid ""
 "The resolution requested from the remote desktop. The guest must have spice-"
 "vdagent running for dynamic resize to work."
 msgstr ""
+"La resolución solicitada desde el escritorio remoto. El sistema invitado "
+"debe tener «spice-vdagent» en ejecución para que funcione el cambio de "
+"tamaño dinámico."
 
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Width)
 #: spice/spicepreferences.ui:100
@@ -1774,6 +1776,8 @@ msgstr ""
 msgid ""
 "Custom desktop width. Only editable when Custom Resolution is selected above."
 msgstr ""
+"Anchura de escritorio personalizada. Solo se puede modificar cuando se "
+"selecciona «Resolución personalizada» más arriba."
 
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Height)
 #: spice/spicepreferences.ui:132
@@ -1782,6 +1786,8 @@ msgid ""
 "Custom desktop height. Only editable when Custom Resolution is selected "
 "above."
 msgstr ""
+"Altura de escritorio personalizada. Solo se puede modificar cuando se "
+"selecciona «Resolución personalizada» más arriba."
 
 #. i18n: ectx: property (title), widget (QGroupBox, spiceGroupBox)
 #. i18n: ectx: property (title), widget (QGroupBox, vncGroupBox)
@@ -1794,41 +1800,36 @@ msgstr "Conexión"
 #: spice/spicepreferences.ui:166
 #, kde-format
 msgid "Enable &audio playback"
-msgstr ""
+msgstr "Activar reproducción de &sonido"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_EnableAudio)
 #: spice/spicepreferences.ui:169
 #, kde-format
 msgid "Play audio from the remote host on this machine."
-msgstr ""
+msgstr "Reproducir sonido del sistema remoto en esta máquina."
 
 #: spice/spiceview.cpp:776
 #, kde-format
 msgid "Authentication is required to connect to <b>%1</b>."
-msgstr ""
+msgstr "Se necesita autenticación para conectarse a <b>%1</b>."
 
 #: spice/spiceviewfactory.cpp:47
-#, fuzzy, kde-format
-#| msgid "New RDP Connection…"
+#, kde-format
 msgid "New SPICE Connection…"
-msgstr "Nueva conexión RDP…"
+msgstr "Nueva conexión SPICE…"
 
 #: spice/spiceviewfactory.cpp:52
-#, fuzzy, kde-format
-#| msgid "Connect to a VNC Remote Desktop"
+#, kde-format
 msgid "Connect to a SPICE Remote Desktop"
-msgstr "Conectar a un escritorio remoto VNC"
+msgstr "Conectar a un escritorio remoto SPICE"
 
 #: spice/spiceviewfactory.cpp:58
-#, fuzzy, kde-format
-#| msgid ""
-#| "<html>Enter the address here.<br /><i>Example: vncserver:1 (host:port / "
-#| "screen)</i></html>"
+#, kde-format
 msgid ""
 "<html>Enter the address here.<br /><i>Example: spice://myhost:5900</i></html>"
 msgstr ""
-"<html>Introduzca la dirección aquí.<br /><i>Ejemplo: servidorvnc:1 (máquina:"
-"puerto / pantalla)</i></html>"
+"<html>Introduzca la dirección aquí.<br /><i>Ejemplo: spice://máquina:5900</"
+"i></html>"
 
 #: vnc/vncclientthread.cpp:315
 #, kde-format

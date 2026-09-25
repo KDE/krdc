@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-24 00:45+0000\n"
-"PO-Revision-Date: 2026-09-04 11:19+0300\n"
+"PO-Revision-Date: 2026-09-24 09:13+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -27,12 +27,12 @@ msgstr ""
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "о. Іван Петрущак"
+msgstr "о. Іван Петрущак, Юрій Чорноіван"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "fr.ivan@ukrainian-orthodox.org"
+msgstr "fr.ivan@ukrainian-orthodox.org,yurchor@ukr.net"
 
 #: bookmarkmanager.cpp:125
 #, kde-format
@@ -1762,10 +1762,9 @@ msgstr "Показ"
 
 #. i18n: ectx: property (text), widget (QLabel, resolutionLabel)
 #: spice/spicepreferences.ui:23
-#, fuzzy, kde-format
-#| msgid "Resolution"
+#, kde-format
 msgid "Resolution:"
-msgstr "Роздільна здатність"
+msgstr "Роздільна здатність:"
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_Resolution)
 #: spice/spicepreferences.ui:39
@@ -1774,6 +1773,9 @@ msgid ""
 "The resolution requested from the remote desktop. The guest must have spice-"
 "vdagent running for dynamic resize to work."
 msgstr ""
+"Запит щодо роздільної здатності від віддаленої стільниці. Щоб працювала "
+"динамічна зміна розмірів, на гостьовій системі має бути запущено spice-"
+"vdagent."
 
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Width)
 #: spice/spicepreferences.ui:100
@@ -1781,6 +1783,8 @@ msgstr ""
 msgid ""
 "Custom desktop width. Only editable when Custom Resolution is selected above."
 msgstr ""
+"Нетипова ширина стільниці. Можна змінювати, лише якщо вище вибрано нетипову "
+"роздільну здатність."
 
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Height)
 #: spice/spicepreferences.ui:132
@@ -1789,6 +1793,8 @@ msgid ""
 "Custom desktop height. Only editable when Custom Resolution is selected "
 "above."
 msgstr ""
+"Нетипова висота стільниці. Можна змінювати, лише якщо вище вибрано нетипову "
+"роздільну здатність."
 
 #. i18n: ectx: property (title), widget (QGroupBox, spiceGroupBox)
 #. i18n: ectx: property (title), widget (QGroupBox, vncGroupBox)
@@ -1801,39 +1807,35 @@ msgstr "З'єднання"
 #: spice/spicepreferences.ui:166
 #, kde-format
 msgid "Enable &audio playback"
-msgstr ""
+msgstr "Увімкнути відтворення зв&уку"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_EnableAudio)
 #: spice/spicepreferences.ui:169
 #, kde-format
 msgid "Play audio from the remote host on this machine."
-msgstr ""
+msgstr "Відтворювати звукові дані з віддаленого вузла на цьому комп'ютері."
 
 #: spice/spiceview.cpp:776
 #, kde-format
 msgid "Authentication is required to connect to <b>%1</b>."
-msgstr ""
+msgstr "Для встановлення з'єднання з <b>%1</b> слід пройти розпізнавання."
 
 #: spice/spiceviewfactory.cpp:47
-#, fuzzy, kde-format
-#| msgid "New RDP Connection…"
+#, kde-format
 msgid "New SPICE Connection…"
-msgstr "Нове з'єднання RDP…"
+msgstr "Нове з'єднання SPICE…"
 
 #: spice/spiceviewfactory.cpp:52
-#, fuzzy, kde-format
-#| msgid "Connect to a VNC Remote Desktop"
+#, kde-format
 msgid "Connect to a SPICE Remote Desktop"
-msgstr "З'єднатись з Віддаленою стільницею VNC"
+msgstr "Встановити з'єднання з віддаленою стільницею SPICE"
 
 #: spice/spiceviewfactory.cpp:58
-#, fuzzy, kde-format
-#| msgid ""
-#| "<html>Enter the address here.<br /><i>Example: nxserver (host)</i></html>"
+#, kde-format
 msgid ""
 "<html>Enter the address here.<br /><i>Example: spice://myhost:5900</i></html>"
 msgstr ""
-"<html>Введіть сюди адресу.<br /><i>Наприклад: nxserver (host)</i></html>"
+"<html>Тут введіть адресу.<br /><i>Приклад: spice://myhost:5900</i></html>"
 
 #: vnc/vncclientthread.cpp:315
 #, kde-format

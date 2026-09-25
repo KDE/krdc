@@ -1,6 +1,6 @@
 # Slovenian translation of krdc
 # Copyright (C) 2002, 2003, 2004, 2005, 2006, 2007 Free Software Foundation, Inc.
-# $Id: krdc.po 1747629 2026-09-24 01:30:04Z scripty $
+# $Id: krdc.po 1747763 2026-09-25 01:30:55Z scripty $
 # $Source$
 #
 # Andrej Vernekar <andrej.vernekar@moj.net>, 2002, 2007, 2008.
@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-24 00:45+0000\n"
-"PO-Revision-Date: 2026-09-04 09:06+0200\n"
+"PO-Revision-Date: 2026-09-24 11:19+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -675,7 +675,7 @@ msgstr "Okenski način"
 #: mainwindow.cpp:798
 #, kde-format
 msgid "The entered address cannot be handled by this connection type."
-msgstr "Vnesenega naslova ni mogoče obdelati s to vrsto povezave. "
+msgstr "Vnesenega naslova ni mogoče obdelati s to vrsto povezave."
 
 #: mainwindow.cpp:833
 #, kde-format
@@ -1762,10 +1762,9 @@ msgstr "Prikaži"
 
 #. i18n: ectx: property (text), widget (QLabel, resolutionLabel)
 #: spice/spicepreferences.ui:23
-#, fuzzy, kde-format
-#| msgid "Resolution"
+#, kde-format
 msgid "Resolution:"
-msgstr "Ločljivost"
+msgstr "Ločljivost:"
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_Resolution)
 #: spice/spicepreferences.ui:39
@@ -1774,6 +1773,8 @@ msgid ""
 "The resolution requested from the remote desktop. The guest must have spice-"
 "vdagent running for dynamic resize to work."
 msgstr ""
+"Zahtevana ločljivost od oddaljenega namizja. Za dinamično spreminjanje "
+"velikosti mora biti v gostujočem sistemu zagnan spice-vdagent."
 
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Width)
 #: spice/spicepreferences.ui:100
@@ -1781,6 +1782,8 @@ msgstr ""
 msgid ""
 "Custom desktop width. Only editable when Custom Resolution is selected above."
 msgstr ""
+"Širina namizja po meri. Spreminjanje je mogoče le, če je zgoraj izbrana "
+"možnost »Ločljivost po meri«."
 
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Height)
 #: spice/spicepreferences.ui:132
@@ -1789,6 +1792,8 @@ msgid ""
 "Custom desktop height. Only editable when Custom Resolution is selected "
 "above."
 msgstr ""
+"Višina namizja po meri. Spreminjanje je mogoče le, če je zgoraj izbrana "
+"možnost »Ločljivost po meri«."
 
 #. i18n: ectx: property (title), widget (QGroupBox, spiceGroupBox)
 #. i18n: ectx: property (title), widget (QGroupBox, vncGroupBox)
@@ -1801,39 +1806,35 @@ msgstr "Povezava"
 #: spice/spicepreferences.ui:166
 #, kde-format
 msgid "Enable &audio playback"
-msgstr ""
+msgstr "Omogoči predvajanje zvoka"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_EnableAudio)
 #: spice/spicepreferences.ui:169
 #, kde-format
 msgid "Play audio from the remote host on this machine."
-msgstr ""
+msgstr "Predvajaj zvok z oddaljenega gostitelja na tem računalniku."
 
 #: spice/spiceview.cpp:776
 #, kde-format
 msgid "Authentication is required to connect to <b>%1</b>."
-msgstr ""
+msgstr "Potrebna je avtentikacija za povezavo z <b>%1</b>."
 
 #: spice/spiceviewfactory.cpp:47
-#, fuzzy, kde-format
-#| msgid "New RDP Connection…"
+#, kde-format
 msgid "New SPICE Connection…"
-msgstr "Nova povezava RDP…"
+msgstr "Nova povezava SPICE…"
 
 #: spice/spiceviewfactory.cpp:52
-#, fuzzy, kde-format
-#| msgid "Connect to a VNC Remote Desktop"
+#, kde-format
 msgid "Connect to a SPICE Remote Desktop"
-msgstr "Poveži se z oddaljenim namizjem VNC"
+msgstr "Poveži se z oddaljenim namizjem SPICE"
 
 #: spice/spiceviewfactory.cpp:58
-#, fuzzy, kde-format
-#| msgid ""
-#| "<html>Enter the address here.<br /><i>Example: nxserver (host)</i></html>"
+#, kde-format
 msgid ""
 "<html>Enter the address here.<br /><i>Example: spice://myhost:5900</i></html>"
 msgstr ""
-"<html>Sem vnesite naslov.<br /><i>Primer: nxserver (gostitelj)</i></html>"
+"<html>Sem vnesite naslov.<br /><i>Primer: spice://myhost:5900</i></html>"
 
 #: vnc/vncclientthread.cpp:315
 #, kde-format

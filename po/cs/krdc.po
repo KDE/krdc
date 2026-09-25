@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-24 00:45+0000\n"
-"PO-Revision-Date: 2026-09-04 12:18+0200\n"
+"PO-Revision-Date: 2026-09-24 12:31+0200\n"
 "Last-Translator: Libor Filipek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 26.08.0\n"
+"X-Generator: Lokalize 26.08.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1746,14 +1746,13 @@ msgstr "Zdroj"
 #: spice/spicepreferences.ui:17
 #, kde-format
 msgid "Display"
-msgstr ""
+msgstr "Zobrazení"
 
 #. i18n: ectx: property (text), widget (QLabel, resolutionLabel)
 #: spice/spicepreferences.ui:23
-#, fuzzy, kde-format
-#| msgid "Resolution"
+#, kde-format
 msgid "Resolution:"
-msgstr "Rozlišení"
+msgstr "Rozlišení:"
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_Resolution)
 #: spice/spicepreferences.ui:39
@@ -1762,6 +1761,8 @@ msgid ""
 "The resolution requested from the remote desktop. The guest must have spice-"
 "vdagent running for dynamic resize to work."
 msgstr ""
+"Rozlišení požadované ze vzdálené plochy. Aby fungovalo dynamické "
+"přizpůsobení velikosti okna, musí mít host spuštěný agent spice-vdagent."
 
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Width)
 #: spice/spicepreferences.ui:100
@@ -1769,6 +1770,8 @@ msgstr ""
 msgid ""
 "Custom desktop width. Only editable when Custom Resolution is selected above."
 msgstr ""
+"Vlastní šířka pracovní plochy. Lze upravit pouze v případě, že je výše "
+"vybrána možnost Vlastní rozlišení."
 
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Height)
 #: spice/spicepreferences.ui:132
@@ -1777,6 +1780,8 @@ msgid ""
 "Custom desktop height. Only editable when Custom Resolution is selected "
 "above."
 msgstr ""
+"Vlastní výška pracovní plochy. Lze upravit pouze v případě, že je výše "
+"vybrána možnost Vlastní rozlišení."
 
 #. i18n: ectx: property (title), widget (QGroupBox, spiceGroupBox)
 #. i18n: ectx: property (title), widget (QGroupBox, vncGroupBox)
@@ -1789,41 +1794,35 @@ msgstr "Připojení"
 #: spice/spicepreferences.ui:166
 #, kde-format
 msgid "Enable &audio playback"
-msgstr ""
+msgstr "Povolit přehrávání &zvuku"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_EnableAudio)
 #: spice/spicepreferences.ui:169
 #, kde-format
 msgid "Play audio from the remote host on this machine."
-msgstr ""
+msgstr "Přehrát zvuk ze vzdáleného hostitele na tomto počítači."
 
 #: spice/spiceview.cpp:776
 #, kde-format
 msgid "Authentication is required to connect to <b>%1</b>."
-msgstr ""
+msgstr "Pro připojení k <b>%1</b> je nutné ověření."
 
 #: spice/spiceviewfactory.cpp:47
-#, fuzzy, kde-format
-#| msgid "New RDP Connection…"
+#, kde-format
 msgid "New SPICE Connection…"
-msgstr "Nové připojení RDP…"
+msgstr "Nové připojení SPICE…"
 
 #: spice/spiceviewfactory.cpp:52
-#, fuzzy, kde-format
-#| msgid "Connect to a VNC Remote Desktop"
+#, kde-format
 msgid "Connect to a SPICE Remote Desktop"
-msgstr "Připojit se na vzdálenou plochu VNC"
+msgstr "Připojit se ke vzdálené ploše SPICE"
 
 #: spice/spiceviewfactory.cpp:58
-#, fuzzy, kde-format
-#| msgid ""
-#| "<html>Enter the address here.<br /><i>Example: vncserver:1 (host:port / "
-#| "screen)</i></html>"
+#, kde-format
 msgid ""
 "<html>Enter the address here.<br /><i>Example: spice://myhost:5900</i></html>"
 msgstr ""
-"<html>Zde zadejte adresu<br /><i>Např.: vncserver:1 (host:port / screen)</"
-"i></html>"
+"<html>Zde zadejte adresu.<br /><i>Příklad: spice://myhost:5900</i></html>"
 
 #: vnc/vncclientthread.cpp:315
 #, kde-format
