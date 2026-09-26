@@ -18,7 +18,7 @@ as Authors, publish date, the abstract, and Keywords -->
 
 <bookinfo>
 <title
->El manual de la &krdc;</title>
+>El manual del &krdc;</title>
 
 <authorgroup>
 <author
@@ -35,6 +35,18 @@ as Authors, publish date, the abstract, and Keywords -->
 ></address>
     </affiliation>
 </author>
+<author
+><firstname
+>Fabio</firstname
+> <surname
+>Bas</surname
+> <affiliation
+> <address
+><email
+>ctrlaltca @ gmail.com</email
+></address>
+    </affiliation>
+</author>
 &traductor.Antoni.Bella; 
 </authorgroup>
 
@@ -42,22 +54,24 @@ as Authors, publish date, the abstract, and Keywords -->
 >&FDLNotice;</legalnotice>
 
 <date
->25 de juliol de 2016</date>
+>24 de setembre de 2026</date>
 <releaseinfo
->Aplicacions 16.08</releaseinfo>
+>KDE Gear 26.12.00</releaseinfo>
 
 <copyright>
 <year
->2003, 2008</year>
+>2003, 2026</year>
 </copyright>
 
 <abstract>
 <para
->La &krdc; és una aplicació client que permet veure o fins i tot controlar la sessió d'escriptori sobre una altra màquina que estigui executant un servidor compatible. Estan suportats <acronym
+>El &krdc; és una aplicació client que permet veure o fins i tot controlar la sessió d'escriptori sobre una altra màquina que estigui executant un servidor compatible. S'admeten <acronym
 >VNC</acronym
-> i <acronym
+>, <acronym
 >RDP</acronym
->. </para>
+> i <acronym
+>SPICE</acronym
+> quan els connectors corresponents estan instal·lats i habilitats. </para>
 </abstract>
 
 <keywordset>
@@ -84,6 +98,8 @@ as Authors, publish date, the abstract, and Keywords -->
 <keyword
 >RDP</keyword>
 <keyword
+>SPICE</keyword>
+<keyword
 >Administració remota</keyword>
 </keywordset>
 
@@ -94,389 +110,530 @@ as Authors, publish date, the abstract, and Keywords -->
 >Introducció</title>
 
 <para
->La &krdc; és una aplicació client que permet veure o fins i tot controlar la sessió d'escriptori sobre una altra màquina que romangui executant un servidor compatible. </para>
+>El &krdc; us permet veure i controlar un escriptori en un altre ordinador. Podeu utilitzar-lo per treballar en una màquina remota o ajudar a un altre usuari. L'ordinador al qual us connecteu ha d'executar un servidor d'escriptori remot compatible; el &krdc; és el client i no permet compartir l'escriptori en aquest ordinador.</para>
 
 <para
->Normalment, emprareu la &krdc; junt amb el servidor <acronym
+>El &krdc; admet <acronym
 >VNC</acronym
-> del &kde; (&krfb;), el qual també es coneix com a Krfb, atès que comparteix moltes de les característiques especials de la &krdc;. </para>
+> (Computació de xarxa virtual), <acronym
+>RDP</acronym
+> (Protocol d'escriptori remot) i <acronym
+>SPICE</acronym
+>. Els protocols disponibles a la vostra instal·lació depenen dels connectors instal·lats i habilitats. Per exemple, podeu connectar-vos a un escriptori compartit pel &krfb; utilitzant <acronym
+>VNC</acronym
+>, a un servidor d'escriptori remot utilitzant <acronym
+>RDP</acronym
+> o a una màquina virtual amb un servidor <acronym
+>SPICE</acronym
+>.</para>
 
 <para
->Si voleu iniciar la &krdc; des del &konsole;, l'ordre és <userinput
+>Inicieu el &krdc; des del llançador d'aplicacions o executeu <userinput
 ><command
 >krdc</command
 ></userinput
->. </para>
-
-<para
->Si us plau, informeu de qualsevol problema o petició d'una nova característica a la llista de correu del &kde; o d'un error a <ulink url="https://bugs.kde.org"
->https://www.bugs.kde.org</ulink
->. </para>
+> en un terminal. Per a exemples de línia d'ordres, vegeu <xref linkend="command-line"/>.</para>
 </chapter>
 
-<chapter id="what-is-RFB">
+<chapter id="supported-protocols">
 <title
->El protocol de Frame Buffer remot</title>
+>Protocols acceptats</title>
 
 <para
->Aquest capítol proporciona una curta descripció del protocol de Frame Buffer remot emprada per la &krdc; i per altres sistemes compatibles. Si ja esteu familiaritzat amb el protocol de Frame Buffer remot, podeu ometre aquest capítol. </para>
-
-<para
->La implementació a alt nivell d'un sistema emprant el protocol de Frame Buffer remot es coneix com a ordinador de xarxa virtual («Virtual Network Computer»), o més sovint conegut com a <acronym
+>El &krdc; admet <acronym
 >VNC</acronym
->. </para>
+>, <acronym
+>RDP</acronym
+> i <acronym
+>SPICE</acronym
+> mitjançant connectors de protocol. Seleccioneu el protocol que coincideixi amb el servidor de l'ordinador remot. El client i el servidor poden executar sistemes operatius diferents.</para>
+
+<sect1 id="protocol-vnc">
+<title
+>VNC</title>
 
 <para
->El Frame Buffer remot (o <acronym
+>El <acronym
+>VNC</acronym
+> utilitza el protocol «Remote Frame Buffer» (<acronym
 >RFB</acronym
->) és un protocol simple per a l'accés remot a interfícies d'usuari gràfiques. Aquest treballa a escala del frame-buffer, el qual correspon asprament a la imatge renderitzada a la pantalla, el qual significa que es pot aplicar a tots els sistemes de finestres (incloent-hi X11, &MacOS; i &Microsoft; &Windows;). Les aplicacions de Frame Buffer remot existeixen per a moltes plataformes i sovint es poden redistribuir lliurement. </para>
+>). El servidor envia actualitzacions de la seva imatge d'escriptori al client i el client envia el teclat i l'entrada del punter al servidor. S'utilitza habitualment per compartir una sessió d'escriptori existent.</para>
 
 <para
->En el protocol de Frame Buffer remot, l'aplicació que s'executa a la màquina a on l'usuari es troba assegut (que conté la pantalla, el teclat i el punter), s'anomena el client. L'aplicació que s'executa a la màquina a on està localitzat el frame-buffer (en la qual s'executa el sistema de finestres i les aplicacions que l'usuari està controlant en mode remot) s'anomena el servidor. La &krdc; és el client del &kde; per al protocol de Frame Buffer remot. El &krfb; és el servidor del &kde; per al protocol de Frame Buffer remot. </para>
+>El <ulink url="https://apps.kde.org/krfb/"
+>&krfb;</ulink
+> és l'aplicació de compartició d'escriptori del &kde; i proporciona un servidor <acronym
+>VNC</acronym
+> per a compartir un escriptori &plasma;. Inicieu i configureu el &krfb; a l'ordinador l'escriptori del qual voleu compartir, després connecteu-vos-hi des del &krdc; utilitzant <acronym
+>VNC</acronym
+>. També es poden utilitzar altres servidors VNC compatibles.</para>
 
 <para
->Aquest ús comporta una raonable quantitat de trànsit en xarxa atès que s'envia una imatge del framebuffer, de manera que el Frame Buffer remot funciona millor sobre enllaços de banda ampla, així com una xarxa d'àrea local. Tot i això, és possible utilitzar la &krdc; sobre d'altres enllaços, però el rendiment no serà tan bo. </para>
+>La velocitat de connexió i la quantitat de canvis a la pantalla remota afecten la capacitat de resposta. Si les actualitzacions són lentes, proveu de reduir el paràmetre de qualitat del <acronym
+>VNC</acronym
+> a <xref linkend="vnc-settings"/>.</para>
+</sect1>
 
+<sect1 id="protocol-rdp">
+<title
+>RDP</title>
+
+<para
+>El <acronym
+>RDP</acronym
+> («Remote Desktop Protocol») proporciona accés remot a un escriptori, amb característiques com la reproducció d'àudio i l'intercanvi de porta-retalls. Les característiques disponibles depenen del servidor i de la seva configuració.</para>
+
+<para
+>En el &plasma; de &kde;, el <ulink url="https://invent.kde.org/plasma/krdp"
+> <application
+>KRDP</application
+></ulink
+> proporciona un servidor RDP per a compartir una sessió d'escriptori Wayland. Configureu l'accés a l'escriptori remot a l'&systemsettings; del &plasma;, després connecteu des del &krdc; utilitzant <acronym
+>RDP</acronym
+>.</para>
+
+<para
+>El <acronym
+>RDP</acronym
+> també és utilitzat de forma nativa pel «&Microsoft; &Windows; Remote Desktop». Podeu connectar-vos a un PC de Windows després d'activar l'escriptori remot. L'allotjament de les connexions entrants requereix una edició compatible; el Windows Home no inclou el servidor d'escriptori remot.</para>
+
+<para
+>Per a la visualització, so, compartició, passarel·la i altres opcions de connexió, vegeu <xref linkend="rdp-settings"/>.</para>
+</sect1>
+
+<sect1 id="protocol-spice">
+<title
+>SPICE</title>
+
+<para
+>El <acronym
+>SPICE</acronym
+> s'utilitza habitualment per accedir a la consola gràfica d'una màquina virtual. El <application
+>QEMU</application
+> pot proporcionar un servidor SPICE per a un convidat, i eines com <application
+>virt-manager</application
+> poden configurar aquest servidor mitjançant la <application
+>libvirt</application
+>.</para>
+
+<para
+>Habiliteu una pantalla SPICE per a la màquina virtual i obteniu la seva adreça d'escolta i port des de la configuració de virtualització. En el &krdc;, connecteu-vos al servidor que executa el QEMU i al port assignat a aquesta màquina virtual. Aquest es connecta a la consola del convidat mitjançant el servidor de virtualització, en lloc d'un servidor d'escriptori remot que s'executi dins del convidat.</para>
+
+<para
+>L'agent del convidat, <application
+>spice-vdagent</application
+>, permet funcions d'integració com compartir el porta-retalls i canvis dinàmics de resolució. Vegeu <xref linkend="spice-settings"/> per a les opcions del &krdc; i el <ulink url="https://www.spice-space.org/spice-user-manual.html"
+>Manual d'usuari del SPICE</ulink
+> del QEMU, virt-manager i la configuració del convidat.</para>
+</sect1>
 </chapter>
 
 <chapter id="using-krdc">
 <title
->Ús de la &krdc;</title>
-
-<para
->Utilitzar la &krdc; és realment fàcil -aquest disposa d'una interfície simple, com la que mostra la captura de pantalla de sota-. </para>
+>Ús del &krdc;</title>
 
 <para>
 <screenshot>
 <screeninfo
->Aquesta és una captura de pantalla de la &krdc;</screeninfo>
+>Aquesta és una captura de pantalla del &krdc;</screeninfo>
 	<mediaobject>
 	  <imageobject>
 	    <imagedata fileref="krdc_mainwindow.png" format="PNG"/>
 	  </imageobject>
 	  <textobject>
 	    <phrase
->Finestra principal de la &krdc;</phrase>
+>Finestra principal del &krdc;</phrase>
 	  </textobject>
 	</mediaobject>
 </screenshot>
 </para>
 
-<sect1 id="compatible-versions"
-><title
->Connectar la &krdc; amb servidors compatibles</title>
+<sect1 id="compatible-versions">
+<title
+>Connectar el &krdc; amb servidors compatibles</title>
 
 <para
->La &krdc; és un client, i necessita utilitzar-se junt amb servidors compatibles. Aquí hi ha diferents maneres per a connectar amb aquests servidors: </para>
+>Abans de connectar, activeu el servidor d'escriptori remot apropiat a l'ordinador remot i obtingueu la seva adreça i dades d'inici de sessió. El servidor ha de ser accessible des del vostre ordinador, i el seu tallafoc ha de permetre la connexió requerida.</para>
 
-<itemizedlist>
-<listitem>
-<para
->Directament escrivint el nom del servidor (o adreça IP) a l'entrada <guilabel
->Connecta a:</guilabel
+<procedure>
+<step
+><para
+>Trieu <menuchoice
+><guimenu
+>Fitxer</guimenu
+><guimenuitem
+>Connexió nova</guimenuitem
+></menuchoice
+> per obrir la pàgina de connexió.</para
+></step>
+<step
+><para
+>Seleccioneu <guilabel
+>vnc</guilabel
+>, <guilabel
+>rdp</guilabel
+> o <guilabel
+>spice</guilabel
+> en el selector de protocol al costat de <guilabel
+>Connecteu a:</guilabel
 >.</para
-> 
-</listitem>
-<listitem>
-<para
->Per a utilitzar una invitació que heu rebut. El &krfb; utilitza invitacions, i en pot enviar per correu electrònic.</para>
-</listitem>
-</itemizedlist>
+></step>
+<step
+><para
+>Introduïu l'adreça del servidor d'acord amb la forma <userinput
+>[nomusuari@]servidor[:port]</userinput
+>, després premeu <keycap
+>Retorn</keycap
+> o feu clic al botó de fletxa al costat de l'adreça. El protocol ja està seleccionat, així que no l'anteposeu a aquest camp.</para
+></step>
+<step
+><para
+>Reviseu la configuració del servidor si se us demana, i introduïu les credencials requerides pel servidor. Cada connexió s'obre en una pestanya.</para
+></step>
+</procedure>
 
-<para
->Veurem cadascuna d'aquestes més tard. </para>
-
-<sect2
-><title
->Introduir el nom del servidor</title>
-<para
->Si coneixeu el nom (o adreça IP) del servidor al qual voleu connectar, la podeu escriure directament en l'entrada <guilabel
->Connecta a:</guilabel
->. </para>
-
-<para
->Si voleu connectar a una màquina anomenada «megan», la qual està executant un servidor <acronym
+<variablelist>
+<varlistentry
+><term
+><acronym
 >VNC</acronym
-> sobre la pantalla 1 (5901), podeu introduir <userinput
+></term>
+<listitem
+><para
+>Introduïu <userinput
+>megan</userinput
+> per al port predeterminat 5900. Per a la visualització 1 al port 5901, introduïu <userinput
 >megan:1</userinput
 > o <userinput
 >megan:5901</userinput
-> i trieu <guilabel
->vnc</guilabel
-> com a protocol a la llista desplegable. </para>
+>. Els números de port inferiors a 100 s'interpreten com a números de pantalla del <acronym
+>VNC</acronym
+> i s'afegeixen a 5900.</para>
+
 <para>
 <screenshot>
 <screeninfo
->Introduint un nom de màquina en la &krdc;</screeninfo>
+>Introduint un nom de màquina al &krdc;</screeninfo>
 	<mediaobject>
 	  <imageobject>
 	    <imagedata fileref="address_input.png" format="PNG"/>
 	  </imageobject>
 	  <textobject>
 	    <phrase
->Introduint un nom de màquina en la &krdc;</phrase>
+>Introduint un nom de màquina al &krdc;</phrase>
 	  </textobject>
 	</mediaobject>
 </screenshot>
-</para>
-
-<para
->De manera similar, si esteu utilitzant un servidor <acronym
+</para
+></listitem
+></varlistentry>
+<varlistentry
+><term
+><acronym
 >RDP</acronym
-> sobre aquesta màquina, podeu introduir <userinput
+></term>
+<listitem
+><para
+>Introduïu <userinput
 >megan</userinput
->. Trieu <guilabel
->RDP</guilabel
-> com al protocol. <acronym
->RDP</acronym
-> farà que no calgui especificar un número de pantalla. Si el servidor no està executant un servidor <acronym
->RDP</acronym
-> sobre el port per omissió, el podreu especificar de la manera següent: <userinput
->megan:3910</userinput
-> </para>
+> per al port predeterminat 3389, o <userinput
+>megan:3390</userinput
+> per a un port diferent. Podeu incloure un nom d'usuari, per exemple <userinput
+>maria@megan</userinput
+>.</para
+></listitem
+></varlistentry>
+<varlistentry
+><term
+><acronym
+>SPICE</acronym
+></term>
+<listitem
+><para
+>Introduïu el servidor i el port de la màquina virtual del servidor <acronym
+>SPICE</acronym
+>, per exemple <userinput
+>vmhost:5902</userinput
+>. El port predeterminat és 5900.</para
+></listitem
+></varlistentry>
+</variablelist>
+
 <para
->Haureu d'introduir un &URL; en la sintaxi codificada amb percentatges, &ead;, @ com a %40, &pex; <userinput
->nomusuari%40ad.domini.exemple</userinput
-> </para>
-<!--https://bugs.kde.org/show_bug.cgi?id=261076-->
-
-</sect2>
-
-<sect2
-><title
->Usar una invitació</title>
-<para
->Amb l'aplicació de servidor &krfb;, és possible enviar invitacions sobre correu electrònic (i d'altres maneres, tot i que el correu electrònic és la més utilitzada). Si rebeu aquest tipus d'invitació per correu electrònic, podreu fer clic a sobre de l'enllaç proporcionat en el correu. Aquest iniciarà la &krdc; si no està ja en execució, i connectarà al servidor especificat a la invitació. </para>
-
-</sect2>
-
+>La pàgina de connexió també llista les adreces d'interès, l'historial de connexions i els serveis <acronym
+>VNC</acronym
+> anunciats a la xarxa local mitjançant Zeroconf. Escriure en el camp d'adreça filtra aquesta llista. Podeu seleccionar una connexió llistada i utilitzar <guimenuitem
+>Connecta</guimenuitem
+> des del seu menú contextual. El plafó <guilabel
+>Escriptoris remots</guilabel
+> proporciona una altra manera de trobar les connexions desades i descobertes.</para>
 </sect1>
 
-<sect1 id="connection"
-><title
+<sect1 id="connection">
+<title
 >Què passa quan es connecta</title>
 
 <para
->Nota: abans de connectar, comproveu que l'ordinador de destinació (servidor) estigui disponible a la xarxa i, si cal, que el seu tallafoc estigui configurat correctament o desactivat. </para>
-
-<para
->Tant hi fa com heu seleccionat el servidor al qual connectar, el següent que succeeix és que la &krdc; us demanarà quant a la connexió de xarxa cap al servidor, tal com es mostra a sota: </para>
+>El diàleg de <guilabel
+>Configuració del servidor</guilabel
+> conté la configuració del protocol seleccionat. Netegeu <guilabel
+>Mostra aquest diàleg una altra vegada per a aquest servidor</guilabel
+> per a reutilitzar-la sense que es demani en cada connexió. La configuració està associada amb l'adreça de connexió; connectar-se amb un nom de màquina o una adreça IP diferent pot utilitzar una configuració diferent.</para>
 
 <para>
 <screenshot>
 <screeninfo
->Seleccionant la velocitat de connexió de la &krdc;</screeninfo>
+>Seleccionant la velocitat de connexió del &krdc;</screeninfo>
 	<mediaobject>
 	  <imageobject>
 	    <imagedata fileref="vnc_host_configuration.png" format="PNG"/>
 	  </imageobject>
 	  <textobject>
 	    <phrase
->Seleccionant la velocitat de connexió de la &krdc;</phrase>
+>Seleccionant la velocitat de connexió del &krdc;</phrase>
 	  </textobject>
 	</mediaobject>
 </screenshot>
 </para>
 
 <para
->Aquestes són les tres opcions de la velocitat a establir per al protocol <acronym
->VNC</acronym
->: </para>
-
-<itemizedlist>
-<listitem
-><para
->Alta qualitat (LAN, connexió directa), aquesta és la predeterminada, i hauríeu d'avaluar com es comporta aquesta opció abans de seleccionar-ne una de més baixa. </para
-></listitem>
-<listitem
-><para
->Qualitat mitjana (DSL, cable, Internet ràpida).</para
-></listitem>
-<listitem
-><para
->Baixa qualitat (Mòdem, XDSI, Internet lenta).</para
-></listitem>
-</itemizedlist>
-
-<para
->Si sempre opera sobre el mateix tipus de connexió, podeu desseleccionar la casella de selecció <guilabel
->Mostra aquest diàleg altra vegada per aquesta màquina</guilabel
->, el qual voldrà dir que no se us tornarà a demanar sobre el tipus de connexió per aquesta màquina, identificant-se de la mateixa manera. Per exemple, si un equip té dos noms, i es desselecciona dita casella de selecció quan es connecta emprant un nom, no se us tornarà a preguntar si es realitza la connexió amb aquest nom. Tot i que se us preguntarà si s'empra un nom o adreça IP diferent. </para>
-
-<para
->Seleccioneu l'opció de velocitat apropiada, i seleccioneu <guibutton
->D'acord</guibutton
-> per a continuar. </para>
-
-<para
->Podeu veure l'estat de la connexió a la icona de la pestanya. </para>
-
-<para
->Depenent de la configuració del servidor, hauríeu (i certament que ho fareu) de proporcionar una contrasenya per a autenticar amb el servidor. La &krdc; us mostrarà un diàleg similar al mostrat a sota. </para>
-
-<para
->La &krdc; disposa de l'habilitat de desar la contrasenya per a properes connexions a la mateixa màquina. Per a fer-ho s'utilitza el KWallet. Si la voleu emprar necessitareu marcar la casella de selecció <guibutton
->Recorda la contrasenya (KWallet)</guibutton
->. </para>
+>Quan el servidor sol·liciti autenticació, introduïu la seva contrasenya i, si ho sol·licita, el seu nom d'usuari. L'opció <guilabel
+>Recorda la contrasenya</guilabel
+> permet al &krdc; emmagatzemar les credencials mitjançant el magatzem de credencials del sistema utilitzant QtKeychain. L'emmagatzematge de contrasenyes també depèn del paràmetre global <guilabel
+>Recorda les contrasenyes</guilabel
+>.</para>
 
 <para>
 <screenshot>
 <screeninfo
->Introducció de la contrasenya a la &krdc;</screeninfo>
+>Introducció de la contrasenya al &krdc;</screeninfo>
 	<mediaobject>
 	  <imageobject>
 	    <imagedata fileref="password_entry.png" format="PNG"/>
 	  </imageobject>
 	  <textobject>
 	    <phrase
->Introducció de la contrasenya a la &krdc;</phrase>
+>Introducció de la contrasenya al &krdc;</phrase>
 	  </textobject>
 	</mediaobject>
 </screenshot>
 </para>
 
 <para
->Després d'autenticar ja estareu connectats amb el servidor remot, i podreu començar a utilitzar la &krdc; per a observar o controlar l'escriptori remot. </para>
+>Per al <acronym
+>RDP</acronym
+>, el &krdc; us pot demanar que verifiqueu un certificat de servidor desconegut o canviat. Consulteu els detalls del certificat amb l'administrador del servidor abans d'acceptar-lo. El diàleg ofereix <guilabel
+>Recorda aquest certificat</guilabel
+> per a les connexions posteriors.</para>
 
+<para
+>La icona de la pestanya indica l'estat de la connexió. Després que l'autenticació sigui correcta, podreu veure o controlar l'escriptori remot.</para>
 </sect1>
 
-<sect1 id="controlling-remote"
-><title
+<sect1 id="controlling-remote">
+<title
 >Controlar la connexió amb l'escriptori remot</title>
 
 <para
->Esteu connectat al servidor remot, normalment hauríeu d'utilitzar el teclat i el ratolí per a controlar el sistema de finestres i les aplicacions que hi ha a la màquina remota. </para>
-
-<para
->A l'escriptori local podeu veure l'escriptori remot en mode a pantalla completa o com a finestra. Podeu canviar entre aquests modes utilitzant les icones que es mostren a sota. </para>
+>Utilitzeu el teclat i el ratolí en una pestanya connectada per treballar a l'escriptori remot. La barra d'eines que es mostra a continuació proporciona controls per obrir connexions, canviar la vista i interactuar amb l'escriptori remot. Els botons poden no estar disponibles depenent del protocol i de l'estat de connexió.</para>
 
 <para>
 <screenshot>
 <screeninfo
->Seleccionant el mode a pantalla completa de la &krdc;</screeninfo>
+>La barra d'eines del &krdc;</screeninfo>
 	<mediaobject>
 	  <imageobject>
-	    <imagedata fileref="view-fullscreen.png" format="PNG"/>
+	    <imagedata fileref="view-toolbar.png" format="PNG"/>
 	  </imageobject>
 	  <textobject>
 	    <phrase
->Seleccionant el mode a pantalla completa de la &krdc;</phrase>
-	  </textobject>
-	</mediaobject>
-</screenshot>
-</para>
-
-<para>
-<screenshot>
-<screeninfo
->Seleccionant el mode de finestra de la &krdc;</screeninfo>
-	<mediaobject>
-	  <imageobject>
-	    <imagedata fileref="view-restore.png" format="PNG"/>
-	  </imageobject>
-	  <textobject>
-	    <phrase
->Seleccionant el mode de finestra de la &krdc;</phrase>
+>La barra d'eines del &krdc;</phrase>
 	  </textobject>
 	</mediaobject>
 </screenshot>
 </para>
 
 <para
->El mode a pantalla completa normalment és millor quan esteu ajudant a un usuari remot, atès que podeu veure tot el que ell pot veure. El mode a finestra atorga tanta utilitat tant si s'està treballant en mode local com remot -en referència es podria estar consultant un document local i emprant dita informació en la màquina remota-. </para>
+>D'esquerra a dreta, la barra d'eines conté els botons següents:</para>
 
-<sect2
-><title
->Usar el mode de finestra</title>
-
-<para
->En el mode de finestra podreu finalitzar la connexió tancant la finestra, fent clic sobre el botó de sortida. </para>
-
-</sect2>
-
-<sect2
-><title
->Usar el mode a pantalla completa</title>
-
-<para
->En el mode a pantalla completa podeu canviar l'aparença de la barra d'eines. La seva transparència es pot controlar amb la roda del ratolí. </para>
-
-</sect2>
-
+<variablelist>
+<varlistentry>
+<term
+><guibutton
+>Connexió nova</guibutton
+></term>
+<listitem
+><para
+>Obre la pàgina de connexió per a triar un protocol i introduir una adreça de servidor. La connexió nova s'obre en una pestanya, de manera que podeu mantenir obertes altres sessions.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><guibutton
+>Pantalla completa</guibutton
+></term>
+<listitem
+><para
+>Mostra l'escriptori remot a pantalla completa. El botó canvia al <guibutton
+>Mode de finestra</guibutton
+>, que torna a la finestra normal. A pantalla completa utilitzeu la barra d'eines flotant per accedir als controls de sessió. <guimenuitem
+>Enganxa la barra d'eines</guimenuitem
+> la manté visible, i <guimenuitem
+>Minimitza la finestra de pantalla completa</guimenuitem
+> dona accés a l'escriptori local.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><guibutton
+>Captura de pantalla</guibutton
+></term>
+<listitem
+><para
+>Copia una imatge de l'escriptori remot al porta-retalls local. Enganxeu-lo a un editor d'imatges o a una altra aplicació per a desar-lo.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><guibutton
+>Només visualitzar</guibutton
+></term>
+<listitem
+><para
+>Observa l'escriptori remot sense enviar l'entrada del teclat ni la del ratolí. La compartició del porta-retalls també se suprimeix mentre aquesta opció està activada. Torneu a fer clic al botó per a reprendre el control de l'escriptori remot.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><guibutton
+>Compartició del porta-retalls</guibutton
+></term>
+<listitem
+><para
+>Activa o desactiva l'intercanvi del porta-retalls entre l'ordinador i l'escriptori remot. El contingut suportat depèn del protocol i del servidor. L'intercanvi del porta-retalls requereix que <guibutton
+>Només visualitzar</guibutton
+> estigui desactivat.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><guibutton
+>Cursor local</guibutton
+></term>
+<listitem
+><para
+>Mostra un punter de ratolí local per ajudar a fer un seguiment de la seva posició a l'escriptori remot. Torneu a fer clic al botó per a desactivar aquesta opció.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><guibutton
+>Captura de les tecles</guibutton
+></term>
+<listitem
+><para
+>Envia tantes dreceres de teclat com sigui possible a l'escriptori remot. Algunes dreceres poden romandre reservades per l'escriptori local o el sistema de finestres. Desactiveu aquesta opció per a gestionar les dreceres localment de nou. La captura automàtica del teclat en entrar a pantalla completa es pot habilitar a la configuració general.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><guibutton
+>Escala</guibutton
+></term>
+<listitem
+><para
+>Escala la imatge remota per a ajustar-la a l'àrea de finestra disponible. Desactiveu aquesta opció per a veure l'escriptori sense escalar. El &krdc; recorda les opcions d'escalat separades per als modes de finestra i pantalla completa. Això canvia la mida de la imatge que es mostra, en lloc de la resolució de l'escriptori remot.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><guibutton
+>Desconnecta</guibutton
+></term>
+<listitem
+><para
+>Tanca la connexió actual. Tancar la seva pestanya també la desconnecta. Això no emet una ordre de sortida o tancament a l'ordinador remot; el que passa a la sessió remota depèn del servidor.</para
+></listitem>
+</varlistentry>
+</variablelist>
 </sect1>
 
-<sect1 id="bookmarks"
-><title
->Adreces d'interès</title>
+<sect1 id="bookmarks">
+<title
+>Adreces d'interès i historial de connexions</title>
 
 <para
->La &krdc; disposa de l'habilitat de gestionar les adreces d'interès. Si necessiteu connectar sovint amb el mateix escriptori remot, podeu afegir una entrada per a aquesta connexió a la llista d'adreces d'interès. Ho podeu fer amb un clic sobre <menuchoice
+>Per a desar una connexió, trieu <menuchoice
 ><guimenu
 >Adreces d'interès</guimenu
-> <guimenuitem
+><guimenuitem
 >Afegeix una adreça d'interès</guimenuitem
 ></menuchoice
->. </para>
+>. Obriu-la de nou des del menú <guimenu
+>Adreces d'interès</guimenu
+> o de la llista de connexions.</para>
 
 <para>
 <screenshot>
 <screeninfo
->El menú adreces d'interès de la &krdc;</screeninfo>
+>El menú adreces d'interès del &krdc;</screeninfo>
 	<mediaobject>
 	  <imageobject>
 	    <imagedata fileref="bookmarks_menu.png" format="PNG"/>
 	  </imageobject>
 	  <textobject>
 	    <phrase
->El menú adreces d'interès de la &krdc;</phrase>
+>El menú adreces d'interès del &krdc;</phrase>
 	  </textobject>
 	</mediaobject>
 </screenshot>
 </para>
 
-
-<sect2
-><title
->Adreces d'interès a l'historial</title>
-
 <para
->La &krdc; desa les darreres connexions a l'escriptori remot emprades. Podeu accedir a aquestes adreces d'interès especials a <menuchoice
+>Quan <guilabel
+>Recorda l'historial de connexions</guilabel
+> està activat, les connexions correctes es registren a <menuchoice
 ><guimenu
 >Adreces d'interès</guimenu
 ><guimenuitem
 >Historial</guimenuitem
 ></menuchoice
->. Per descomptat, també podeu suprimir una preferida d'aquesta llista si no la necessiteu més. Simplement, feu clic a <guibutton
->Suprimeix l'adreça d'interès</guibutton
-> que apareix després d'un clic amb el &BDR; sobre l'adreça d'interès que voleu suprimir. </para>
+> i apareixen a la llista de connexions. Feu clic amb el botó dret a una entrada desada a la llista per a connectar-la, canviar-ne el nom, canviar-ne la configuració o suprimir-la.</para>
 
-</sect2>
-
+<para
+>Per a una connexió de les adreces d'interès, el diàleg de configuració també pot editar el seu <guilabel
+>Nom:</guilabel
+> i <guilabel
+>URL:</guilabel
+>. Utilitzeu un URL complet com <userinput
+>rdp://maria.megan:3389</userinput
+>, mantenint el mateix protocol. Els canvis a la configuració d'una connexió només podran tenir efecte quan torneu a connectar.</para>
 </sect1>
 
-<sect1 id="managing-configuration"
-><title
->Gestionar la configuració de la &krdc;</title>
+<sect1 id="managing-configuration">
+<title
+>Gestionar la configuració del &krdc;</title>
+
 <para
->Utilitzant <menuchoice
+>Obriu <menuchoice
 ><guimenu
 >Arranjament</guimenu
 ><guimenuitem
 >Configura el KRDC...</guimenuitem
 ></menuchoice
->, obrireu un diàleg per a modificar-ne el comportament. Seleccionant aquest botó apareixerà una finestra com la de sota: </para>
+> per canviar les preferències de l'aplicació.</para>
 
 <para>
 <screenshot>
 <screeninfo
->Preferències de la &krdc; - La pestanya General</screeninfo>
+>Preferències del &krdc; - La pestanya General</screeninfo>
 	<mediaobject>
 	  <imageobject>
 	    <imagedata fileref="general_preferences.png" format="PNG"/>
 	  </imageobject>
 	  <textobject>
 	    <phrase
->Preferències de la &krdc; - La pestanya <guilabel
+>Preferències del &krdc; - La pestanya <guilabel
 >General</guilabel
 ></phrase>
 	  </textobject>
@@ -484,11 +641,53 @@ as Authors, publish date, the abstract, and Keywords -->
 </screenshot>
 </para>
 
+<variablelist>
+<varlistentry
+><term
+><guilabel
+>General</guilabel
+></term>
+<listitem
+><para
+>Trieu si voleu restaurar les sessions obertes en iniciar, recordar l'historial i les contrasenyes, mostrar una icona de la safata del sistema o una barra d'estat i conservar la relació d'aspecte en canviar d'escala. També podeu configurar el protocol predeterminat, el diàleg de configuració inicial del servidor, el canvi de mida de la finestra, la captura automàtica de pantalla completa i el teclat i l'aparença i el comportament de tancament de les pestanyes.</para
+></listitem
+></varlistentry>
+<varlistentry
+><term
+><guilabel
+>Servidors</guilabel
+></term>
+<listitem
+><para
+>Seleccioneu un servidor desat i feu clic a <guibutton
+>Configura...</guibutton
+> per canviar la configuració del protocol. <guibutton
+>Elimina</guibutton
+> suprimeix la configuració desada del servidor. Les adreces d'interès i l'historial de connexions es gestionen per separat.</para
+></listitem
+></varlistentry>
+<varlistentry
+><term
+><guilabel
+>Connectors</guilabel
+></term>
+<listitem
+><para
+>Activa o desactiva els connectors de protocol instal·lats. Reinicieu el &krdc; després de canviar la disponibilitat del connector. El botó de configuració d'un connector de protocol obre la seva configuració predeterminada.</para
+></listitem
+></varlistentry>
+</variablelist>
+</sect1>
+
+<sect1 id="vnc-settings">
+<title
+>Configuració del VNC</title>
+
 <para>
 <screenshot>
 <screeninfo
->Preferències de la &krdc; - La pestanya <guilabel
->Preferències VNC</guilabel
+>Preferències del &krdc; - La pestanya <guilabel
+>VNC</guilabel
 ></screeninfo>
 	<mediaobject>
 	  <imageobject>
@@ -496,78 +695,479 @@ as Authors, publish date, the abstract, and Keywords -->
 	  </imageobject>
 	  <textobject>
 	    <phrase
->Preferències de la &krdc; - La pestanya de perfils <guilabel
->Preferències VNC</guilabel
+>Preferències del &krdc; - La pestanya de perfils <guilabel
+>VNC</guilabel
 ></phrase>
 	  </textobject>
 	</mediaobject>
 </screenshot>
 </para>
+
+<para
+><guilabel
+>Tipus de connexió:</guilabel
+> ofereix <guilabel
+>Alta qualitat (LAN, connexió directa)</guilabel
+>, <guilabel
+>Qualitat mitjana (DSL, Cable, Internet ràpid)</guilabel
+> i <guilabel
+>Baixa qualitat (Mòdem, XDSI, Internet lent)</guilabel
+>. Trieu una qualitat adequada a tota la connexió, incloent-hi l'enllaç de xarxa de l'ordinador remot. Una qualitat més baixa pot ajudar en les connexions lentes.</para>
+
+<para
+><guilabel
+>Escala a mida:</guilabel
+> estableix la mida utilitzada per a mostrar l'escriptori remot, amb dimensions predefinides i personalitzades. L'opció gestor de contrasenyes impedeix enviar contingut del porta-retalls marcat com a contrasenya pels gestors de contrasenyes admesos, com ara el KeePassXC. No pot identificar contrasenyes copiades per aplicacions que no proporcionen aquest marcador.</para>
+</sect1>
+
+<sect1 id="rdp-settings">
+<title
+>Configuració del RDP</title>
+
+<para
+>El diàleg de configuració RDP conté les pestanyes següents. Els canvis a la configuració de la connexió només poden tenir efecte després de tornar a connectar.</para>
+
+<para
+><emphasis role="bold"
+>General</emphasis
+></para>
 
 <para>
 <screenshot>
 <screeninfo
->Preferències de la &krdc; - La pestanya <guilabel
->RDP per omissió</guilabel
-></screeninfo>
+>Preferències RDP del &krdc; - La pestanya General</screeninfo>
 	<mediaobject>
 	  <imageobject>
-	    <imagedata fileref="rdp_preferences.png" format="PNG"/>
+	    <imagedata fileref="rdp_preferences_general.png" format="PNG"/>
 	  </imageobject>
 	  <textobject>
 	    <phrase
->Preferències de la &krdc; - La pestanya de perfils <guilabel
->RDP per omissió</guilabel
+>Preferències del &krdc; - La pestanya general del <guilabel
+>RDP</guilabel
 ></phrase>
 	  </textobject>
 	</mediaobject>
 </screenshot>
 </para>
 
+<para
+>La pestanya <guilabel
+>General</guilabel
+> controla l'aparença de l'escriptori remot, els dispositius d'entrada i els recursos compartits amb la sessió remota.</para>
 
+<para
+>La <guilabel
+>Resolució</guilabel
+> selecciona la mida de l'escriptori sol·licitat des del servidor. Trieu-ne una de predefinida, la mida actual de la finestra actual o la pantalla o una amplada i altura personalitzades. <guilabel
+>Usa la resolució de totes les pantalles</guilabel
+> sol·licita una sessió multimonitor; a pantalla completa, els monitors remots es mostren a les pantalles locals corresponents. La disponibilitat depèn del servidor i de la configuració de visualització local.</para>
+
+<para
+><guilabel
+>Escala el contingut de la finestra amb la resolució coincident</guilabel
+> controla l'escalat local de la imatge. En lloc d'això, <guilabel
+>Factor d'escala de l'escriptori:</guilabel
+> i <guilabel
+>Factor d'escala del dispositiu:</guilabel
+> especifiquen la informació d'escala que s'envia al servidor. Utilitzeu-los per ajustar la mida dels elements de la interfície remota en pantalles d'alta resolució, si és compatible amb el servidor.</para>
+
+<para
+>L'<guilabel
+>Acceleració:</guilabel
+> selecciona el mode de codificació gràfica, incloent H.264, RemoteFX o inhabilitant l'acceleració. La <guilabel
+>Profunditat de color:</guilabel
+> controla el nombre de colors utilitzats a l'escriptori remot; alguns modes d'acceleració requereixen un color de 32 bits. La <guilabel
+>Disposició del teclat:</guilabel
+> hauria de coincidir amb el teclat que utilitzeu perquè les tecles s'interpretin correctament.</para>
+
+<para
+><guilabel
+>So:</guilabel
+> selecciona la reproducció en aquest ordinador, la reproducció en l'ordinador remot o cap so. <guilabel
+>Compartició multimèdia:</guilabel
+> posa un directori local disponible per a la sessió remota; deixeu-lo buit per desactivar l'ús compartit de la unitat. <guilabel
+>Comparteix la targeta intel·ligent:</guilabel
+> especifica el nom de la targeta intel·ligent per redirigir al servidor.</para>
+
+<para
+>La <guilabel
+>Sessió d'administrador (o consola)</guilabel
+> sol·licita una sessió administrativa als servidors que la permeten. <guilabel
+>Evita el bloqueig de la sessió remota</guilabel
+> envia activitat periòdica simulada del ratolí per mantenir la sessió activa; les polítiques del servidor encara poden forçar el bloqueig.</para>
+
+<para
+><emphasis role="bold"
+>Seguretat</emphasis
+></para>
+
+<para>
+<screenshot>
+<screeninfo
+>Preferències RDP del &krdc; - La pestanya Seguretat</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="rdp_preferences_security.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Preferències del &krdc; - La pestanya de seguretat del <guilabel
+>RDP</guilabel
+></phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>La pestanya <guilabel
+>Seguretat</guilabel
+> controla quins mètodes de seguretat ofereix el &krdc; en establir la connexió RDP. Les caselles de selecció <guilabel
+>NLA</guilabel
+>, <guilabel
+>TLS</guilabel
+>, <guilabel
+>RDP</guilabel
+> i <guilabel
+>Ext</guilabel
+> activen els modes de seguretat corresponents del FreeRDP. Es pot habilitar més d'un perquè el client i el servidor puguin negociar un mètode compatible.</para>
+
+<para
+><guilabel
+>Nivell de seguretat TLS:</guilabel
+> estableix el nivell de seguretat criptogràfic requerit per a les connexions TLS. Un nivell més alt imposa requisits més estrictes i pot evitar connexions a servidors més antics.</para>
+
+<para
+><guilabel
+>Llista de paquets d'autenticació:</guilabel
+> passa una selecció personalitzada de paquets d'autenticació al FreeRDP. Deixeu-ho buit per utilitzar el comportament predeterminat o introduïu el valor proporcionat pel vostre administrador. Canvieu les opcions de seguretat perquè coincideixin amb els requisits del servidor.</para>
+
+<para
+><emphasis role="bold"
+>Servidor intermediari</emphasis
+></para>
+
+<para>
+<screenshot>
+<screeninfo
+>Preferències RDP del &krdc; - La pestanya de servidor intermediari</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="rdp_preferences_proxy.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Preferències del &krdc; - La pestanya de servidor intermediari del <guilabel
+>RDP</guilabel
+></phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>La pestanya <guilabel
+>Servidor intermediari</guilabel
+> configura un servidor intermediari de xarxa utilitzat per a la connexió. Seleccioneu <guilabel
+>HTTP</guilabel
+> o <guilabel
+>SOCKS</guilabel
+> a <guilabel
+>Protocol:</guilabel
+>, després introduïu l'adreça del servidor intermediari a <guilabel
+>Servidor:</guilabel
+> utilitzant la forma <userinput
+>servidor:port</userinput
+>.</para>
+
+<para
+>Si el servidor intermediari requereix autenticació, ompliu <guilabel
+>Nom d'usuari:</guilabel
+> i <guilabel
+>Contrasenya:</guilabel
+> amb les credencials del servidor intermediari. Aquestes poden diferir de les credencials de l'escriptori remot. Deixeu el <guilabel
+>Servidor:</guilabel
+> buit quan no calgui cap servidor intermediari. L'adreça de l'escriptori remot de destinació continua sent l'adreça introduïda a la pàgina de connexió.</para>
+
+<para
+><emphasis role="bold"
+>Passarel·la</emphasis
+></para>
+
+<para>
+<screenshot>
+<screeninfo
+>Preferències del &krdc; - La pestanya Passarel·la</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="rdp_preferences_gateway.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Preferències del &krdc; - La pestanya Passarel·la del <guilabel
+>RDP</guilabel
+></phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>La pestanya <guilabel
+>Passarel·la</guilabel
+> configura l'accés a través d'una passarel·la RDP, que proporciona una ruta a un escriptori remot en una altra xarxa. Introduïu l'adreça de la passarel·la a <guilabel
+>Servidor:</guilabel
+> com a <userinput
+>servidor:port</userinput
+>, utilitzant el port proporcionat pel vostre administrador. Manteniu l'adreça de l'ordinador de destinació a la pàgina de connexió principal.</para>
+
+<para
+>Introduïu el <guilabel
+>Domini:</guilabel
+> del compte de la passarel·la, el <guilabel
+>Nom d'usuari:</guilabel
+> i la <guilabel
+>Contrasenya:</guilabel
+> segons sigui necessari. Aquests camps autentiquen l'accés a la passarel·la; l'escriptori remot pot requerir credencials separades.</para>
+
+<para
+><guilabel
+>Tipus de transport:</guilabel
+> ofereix <guilabel
+>Automàtic</guilabel
+>, <guilabel
+>HTTP</guilabel
+> i <guilabel
+>RPC</guilabel
+>. Utilitzeu <guilabel
+>Automàtic</guilabel
+> llevat que el vostre administrador especifiqui un transport. Deixeu buit el camp <guilabel
+>Servidor:</guilabel
+> de la passarel·la quan es connecta sense cap passarel·la RDP.</para>
+
+<para
+>Si està disponible el suport de túnel SSH, apareix una pestanya addicional <guilabel
+>Túnel SSH</guilabel
+> al diàleg de configuració del servidor. Vegeu les seves opcions a <xref linkend="ssh-tunnels"/>.</para>
 </sect1>
 
+<sect1 id="spice-settings">
+<title
+>Configuració del SPICE</title>
+
+<para>
+<screenshot>
+<screeninfo
+>Preferències del &krdc; - La pestanya <guilabel
+>SPICE</guilabel
+></screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="spice_preferences.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Preferències del &krdc; - La pestanya de perfils del <guilabel
+>SPICE</guilabel
+></phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Trieu la resolució remota sol·licitada des dels predefinits, la finestra actual o la mida de la pantalla o les dimensions personalitzades. El redimensionament dinàmic requereix <application
+>spice-vdagent</application
+> en el convidat. També podeu habilitar l'escalat local i la reproducció d'àudio. L'intercanvi de porta-retalls depèn del suport al convidat.</para>
+</sect1>
+
+<sect1 id="ssh-tunnels">
+<title
+>Túnels SSH</title>
+
+<para>
+<screenshot>
+<screeninfo
+>Preferències del &krdc; - La pestanya <guilabel
+>SSH</guilabel
+></screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="sshtunnel_preferences.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Preferències del &krdc; - La pestanya <guilabel
+>SSH</guilabel
+></phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Si la vostra instal·lació inclou suport per túnels SSH, la configuració del servidor ofereix <guilabel
+>Connecta a través de túnel SSH</guilabel
+>. Introduïu el port SSH i el nom d'usuari per al mateix servidor que el servidor d'escriptori remot. L'autenticació SSH està separada de l'autenticació d'escriptori remot.</para>
+
+<para
+><guilabel
+>Túnel a través d'adreça de bucle tancat</guilabel
+> fa que el túnel es connecti al servei d'escriptori remot a través d'una adreça de bucle tancat del servidor remot. Useu això quan el servei només escolta en aquesta adreça. El port de l'escriptori remot encara prové de l'adreça de connexió.</para>
+</sect1>
+
+
+<sect1 id="command-line">
+<title
+>Inici de connexions des de la línia d'ordres</title>
+<para
+>Passeu un URL complet per a connectar-hi directament:</para>
+<screen
+><userinput
+><command
+>krdc</command
+> rdp://maria@megan</userinput>
+<userinput
+><command
+>krdc</command
+> vnc://megan:5901</userinput>
+<userinput
+><command
+>krdc</command
+> spice://vmhost:5902</userinput
+></screen>
+
+<para
+>Utilitzeu <option
+>--fullscreen</option
+> amb un URL per iniciar aquesta connexió a pantalla completa. També podeu passar diversos URL per obrir connexions múltiples:</para>
+<screen
+><userinput
+><command
+>krdc</command
+> --fullscreen rdp://megan</userinput>
+<userinput
+><command
+>krdc</command
+> vnc://megan rdp://workstation</userinput
+></screen>
+
+<para
+>En un URL complet, cal codificar amb tant per cent els caràcters reservats en el nom d'usuari. Per exemple, utilitzeu <userinput
+>rdp://maria%40exemple.org.megan</userinput
+> per al nom d'usuari <literal
+>maria@exemple.org</literal
+>.</para>
+
+<para
+>El &krdc; pot llegir els detalls bàsics de la connexió des d'un fitxer <filename
+>.rdp</filename
+> passat a la línia d'ordres:</para>
+<screen
+><userinput
+><command
+>krdc</command
+> connection.rdp</userinput
+></screen>
+<para
+>Això llegeix l'adreça del servidor, el nom d'usuari, el domini i un camp de contrasenya si hi és present; no importa tots els paràmetres admesos per altres clients RDP. Usa el diàleg de configuració del servidor per a altres opcions. Executeu <userinput
+><command
+>krdc</command
+> <option
+>--help</option
+></userinput
+> per a l'ajuda de la línia d'ordres.</para>
+</sect1>
 </chapter>
 
 <chapter id="faq">
 <title
 >Preguntes i respostes</title>
-
-<!-- (OPTIONAL but recommended) This chapter should include all of the silly
-(and not-so-silly) newbie questions that fill up your mailbox. This chapter
-should be reserved for BRIEF questions and answers! If one question uses more
-than a page or so then it should probably be part of the
-"Using this Application" chapter instead. You should use links to
-cross-reference questions to the parts of your documentation that answer them.
-This is also a great place to provide pointers to other FAQ's if your users
-must do some complicated configuration on other programs in order for your
-application work. -->
-
 <qandaset id="faqlist">
 <qandaentry>
-<question>
-<para
->Què fa que el suport <acronym
->RDP</acronym
-> no funcioni?</para>
-</question>
-<answer>
-<para
->El suport <acronym
->RDP</acronym
-> a la &krdc; depèn de xfreerdp (FreeRDP). Assegureu-vos que teniu instal·lada aquesta dependència abans d'executar el programa. </para>
-</answer>
+<question
+><para
+>Per què falta un protocol o es rebutja una adreça?</para
+></question>
+<answer
+><para
+>Comproveu que el connector corresponent estigui instal·lat i habilitat a <guilabel
+>Connectors</guilabel
+>, després reinicieu el &krdc;. Comproveu el protocol i la sintaxi de l'adreça seleccionats a <xref linkend="compatible-versions"/>. La implementació de RDP utilitza directament les biblioteques FreeRDP; no requereix llançar un executable extern <command
+>xfreerdp</command
+>.</para
+></answer>
+</qandaentry>
+<qandaentry>
+<question
+><para
+>Per què no puc connectar-me a l'ordinador remot?</para
+></question>
+<answer
+><para
+>Comproveu el nom de l'ordinador, el port, la xarxa o la connexió VPN, i si el servidor d'escriptori remot s'està executant. Assegureu-vos que el tallafoc permeti la connexió. Per als errors d'autenticació, comproveu el vostre nom d'usuari, contrasenya, domini i permís per iniciar sessió remotament. Si utilitzeu un servidor intermediari, una passarel·la o un túnel SSH, comproveu també la seva configuració i les seves credencials.</para
+></answer>
+</qandaentry>
+<qandaentry>
+<question
+><para
+>Per què puc veure l'escriptori però no controlar-lo?</para
+></question>
+<answer
+><para
+>Desactiveu <guimenuitem
+>Només visualitzar</guimenuitem
+> al menú <guimenu
+>Sessió</guimenu
+>. El servidor també pot restringir la vostra connexió a la visualització; demaneu a la persona que administra l'escriptori remot que comprovi els seus permisos.</para
+></answer>
+</qandaentry>
+<qandaentry>
+<question
+><para
+>Perquè no funciona copiar i enganxar?</para
+></question>
+<answer
+><para
+>Activeu <guimenuitem
+>Compartició del porta-retalls</guimenuitem
+>, desactiveu <guimenuitem
+>Només visualitzar</guimenuitem
+> i comproveu que el servidor admeti el contingut que esteu copiant. Per al VNC, el filtre gestor de contrasenyes pot bloquejar deliberadament les contrasenyes copiades. Per a SPICE, consulteu l'agent del convidat.</para
+></answer>
+</qandaentry>
+<qandaentry>
+<question
+><para
+>Com puc canviar la configuració després d'ocultar el diàleg del servidor?</para
+></question>
+<answer
+><para
+>Obriu <guilabel
+>Servidors</guilabel
+> a les preferències de l'aplicació, seleccioneu el servidor i feu clic a <guibutton
+>Configura...</guibutton
+>. Allí podeu activar <guilabel
+>Mostra aquest diàleg una altra vegada per a aquest servidor</guilabel
+>.</para
+></answer>
+</qandaentry>
+<qandaentry>
+<question
+><para
+>On puc informar d'un problema?</para
+></question>
+<answer
+><para
+>Informeu els errors a <ulink url="https://bugs.kde.org"
+>el seguidor d'errors de &kde;</ulink
+>. Inclogueu la versió del &krdc;, el protocol, el sistema operatiu local, el programari del servidor i els passos per a reproduir el problema. Ometeu les contrasenyes i altres detalls privats de la connexió.</para
+></answer>
 </qandaentry>
 </qandaset>
-
 </chapter>
 
 <chapter id="credits">
-
-<!-- Include credits for the programmers, documentation writers, and
-contributors here. The license for your software should then be included below
-the credits with a reference to the appropriate license file included in the K D E
-distribution. -->
 
 <title
 >Crèdits i llicència</title>
@@ -584,6 +1184,8 @@ distribution. -->
 <para
 >Copyright de la documentació &copy; 2003 &Brad.Hards; &Brad.Hards.mail; Copyright de la documentació &copy; 2007 Urs Wolfer <email
 >uwolfer @ kde.org</email
+> Copyright de la documentació &copy; 2026 Fabio Bas <email
+>ctrlaltca @ gmail.com</email
 > </para>
 
 <para

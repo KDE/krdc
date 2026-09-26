@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-24 00:45+0000\n"
-"PO-Revision-Date: 2026-09-24 09:25+0200\n"
+"PO-Revision-Date: 2026-09-25 21:34+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -225,7 +225,7 @@ msgstr "URL inservible"
 #: config/hostpreferenceslist.cpp:99 mainwindow.cpp:814
 #, kde-format
 msgid "The selected host cannot be handled."
-msgstr "L'ordinador seleccionat no es pot gestionar."
+msgstr "El servidor seleccionat no es pot gestionar."
 
 #: config/preferencesdialog.cpp:24
 #, kde-format
@@ -241,13 +241,13 @@ msgstr "Configuració general"
 #: config/preferencesdialog.cpp:28
 #, kde-format
 msgid "Hosts"
-msgstr "Ordinadors"
+msgstr "Servidors"
 
 #: config/preferencesdialog.cpp:28 core/hostpreferences.cpp:220
 #: core/hostpreferences.cpp:224
 #, kde-format
 msgid "Host Configuration"
-msgstr "Configuració de l'ordinador"
+msgstr "Configuració del servidor"
 
 #: config/preferencesdialog.cpp:33 config/preferencesdialog.cpp:34
 #, kde-format
@@ -322,7 +322,7 @@ msgstr ""
 #: core/hostpreferences.cpp:278
 #, kde-format
 msgid "Show this dialog again for this host"
-msgstr "Mostra aquest diàleg una altra vegada per a aquest ordinador"
+msgstr "Mostra aquest diàleg una altra vegada per a aquest servidor"
 
 #: core/hostpreferences.cpp:282
 #, kde-format
@@ -372,7 +372,7 @@ msgstr "Túnel SSH"
 #: core/sshtunnelwidget.ui:32
 #, kde-format
 msgid "Connect via SSH tunnel"
-msgstr "Connecta a través del túnel SSH"
+msgstr "Connecta a través de túnel SSH"
 
 #. i18n: ectx: property (title), widget (QGroupBox, ssh_groupBox)
 #: core/sshtunnelwidget.ui:39
@@ -384,7 +384,7 @@ msgstr "Opcions del túnel SSH"
 #: core/sshtunnelwidget.ui:45
 #, kde-format
 msgid "Tunnel via loopback address"
-msgstr "Túnel a través de l'adreça del bucle tancat"
+msgstr "Túnel a través d'adreça de bucle tancat"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: core/sshtunnelwidget.ui:52
@@ -612,6 +612,7 @@ msgstr ""
 msgid "Load failed"
 msgstr "Ha fallat la càrrega"
 
+# skip-rule: t-2p_sp
 #: mainwindow.cpp:276
 #, kde-format
 msgid ""
@@ -619,7 +620,7 @@ msgid ""
 " Syntax: [username@]host[:port]"
 msgstr ""
 "L'adreça introduïda no té la forma requerida.\n"
-" Sintaxi: [nomusuari@]ordinador[:port]"
+" Sintaxi: [nomusuari@]servidor[:port]"
 
 #: mainwindow.cpp:276
 #, kde-format
@@ -968,7 +969,7 @@ msgstr "Color reduït (8 bits)"
 #: rdp/rdppreferences.ui:278
 #, kde-format
 msgid "Desktop scale factor:"
-msgstr "Factor d'escala d'escriptori:"
+msgstr "Factor d'escala de l'escriptori:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DesktopScaleFactor)
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DeviceScaleFactor)
@@ -1283,7 +1284,7 @@ msgstr "Desactiva el so"
 #: rdp/rdppreferences.ui:655
 #, kde-format
 msgid "Share Media:"
-msgstr "Compartició de suports:"
+msgstr "Compartició multimèdia:"
 
 #. i18n: ectx: property (text), widget (QLabel, shareSmartcardLabel)
 #: rdp/rdppreferences.ui:681
@@ -1486,7 +1487,7 @@ msgid ""
 "Issuer: %5\n"
 "Fingerprint: %6\n"
 msgstr ""
-"Ordinador: %1:%2\n"
+"Servidor: %1:%2\n"
 "Nom comú: %3\n"
 "Assumpte: %4\n"
 "Emissor: %5\n"
@@ -1685,7 +1686,7 @@ msgid ""
 "rdpserver:3389 (host:port)</i></html>"
 msgstr ""
 "<html>Introduïu l'adreça aquí. El port és opcional.<br /><i>Exemple: "
-"rdpserver:3389 (ordinador:port)</i></html>"
+"rdpserver:3389 (servidor:port)</i></html>"
 
 #: remotedesktopsmodel.cpp:112
 #, kde-format
@@ -1958,8 +1959,8 @@ msgstr "Molt gran (1600x1200)"
 #, kde-format
 msgid "Don't copy passwords from supported password managers to remote hosts"
 msgstr ""
-"No copieu contrasenyes des dels gestors de contrasenyes admesos a màquines "
-"remotes"
+"No copieu contrasenyes des dels gestors de contrasenyes admesos a servidors "
+"remots"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, dont_copy_passwords)
 #: vnc/vncpreferences.ui:214
@@ -2004,5 +2005,5 @@ msgid ""
 "<html>Enter the address here.<br /><i>Example: vncserver:1 (host:port / "
 "screen)</i></html>"
 msgstr ""
-"<html>Introduïu l'adreça aquí.<br /><i>Exemple: vncserver:1 (ordinador:"
-"port / pantalla)</i></html>"
+"<html>Introduïu l'adreça aquí.<br /><i>Exemple: vncserver:1 (servidor:port / "
+"pantalla)</i></html>"

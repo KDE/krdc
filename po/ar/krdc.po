@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-24 00:45+0000\n"
-"PO-Revision-Date: 2026-09-09 18:17+0400\n"
+"PO-Revision-Date: 2026-09-25 16:47+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -1756,16 +1756,16 @@ msgstr "المصدر"
 
 #. i18n: ectx: property (title), widget (QGroupBox, displayGroupBox)
 #: spice/spicepreferences.ui:17
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Display"
 msgid "Display"
 msgstr "اعرض"
 
 #. i18n: ectx: property (text), widget (QLabel, resolutionLabel)
 #: spice/spicepreferences.ui:23
-#, fuzzy, kde-format
-#| msgid "Resolution"
+#, kde-format
 msgid "Resolution:"
-msgstr "الدقة"
+msgstr "الدقّة:"
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_Resolution)
 #: spice/spicepreferences.ui:39
@@ -1815,24 +1815,20 @@ msgid "Authentication is required to connect to <b>%1</b>."
 msgstr ""
 
 #: spice/spiceviewfactory.cpp:47
-#, fuzzy, kde-format
-#| msgid "New RDP Connection…"
+#, kde-format
 msgid "New SPICE Connection…"
-msgstr "اتصال RDP جديد…"
+msgstr "اتصال SPICE جديد…"
 
 #: spice/spiceviewfactory.cpp:52
-#, fuzzy, kde-format
-#| msgid "Connect to a VNC Remote Desktop"
+#, kde-format
 msgid "Connect to a SPICE Remote Desktop"
-msgstr "اتصل  بسطح المكتب VNC بعيد"
+msgstr "اتصل  بسطح المكتب SPICE بعيد"
 
 #: spice/spiceviewfactory.cpp:58
-#, fuzzy, kde-format
-#| msgid ""
-#| "<html>Enter the address here.<br /><i>Example: nxserver (host)</i></html>"
+#, kde-format
 msgid ""
 "<html>Enter the address here.<br /><i>Example: spice://myhost:5900</i></html>"
-msgstr "<html> ادخل العنوان هنا<br /><i> مثال: nxserver (المضيف)</i></html>"
+msgstr "<html>أدخل العنوان هنا.<br /><i>مثال: spice://myhost:5900</i></html>"
 
 #: vnc/vncclientthread.cpp:315
 #, kde-format

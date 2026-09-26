@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-24 00:45+0000\n"
-"PO-Revision-Date: 2026-09-05 12:29+0300\n"
+"PO-Revision-Date: 2026-09-25 22:15+0300\n"
 "Last-Translator: Liudas Ališauskas <liudas@akmc.lt>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
 "Language: lt\n"
@@ -113,8 +113,8 @@ msgid ""
 "This option switches to fullscreen only if the connection resolution is the "
 "same as the current screen resolution"
 msgstr ""
-"Ši parinktis perjungia į visą ekraną tik tuo atveju, jei ryšio raiška yra "
-"tokia pati, kaip esamo ekrano raiška"
+"Ši parinktis perjungia į visą ekraną tik tuo atveju, jei ryšio skiriamoji "
+"geba yra tokia pati, kaip esamo ekrano skiriamoji geba"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_FullscreenOnConnect)
 #: config/general.ui:119
@@ -798,7 +798,7 @@ msgstr "Bendra"
 #: rdp/rdppreferences.ui:27
 #, kde-format
 msgid "Resolution"
-msgstr "Raiška"
+msgstr "Skiriamoji geba"
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_Resolution)
 #. i18n: ectx: property (whatsThis), widget (KComboBox, resolutionComboBox)
@@ -808,8 +808,8 @@ msgid ""
 "Here you can specify the resolution of the remote desktop. This resolution "
 "determines the size of the desktop that will be presented to you."
 msgstr ""
-"Nurodykite nuotolinio darbalaukio raišką. Ši raiška nustato jums pateikiamo "
-"darbalaukio vaizdo dydį."
+"Nurodykite nuotolinio darbalaukio skiriamąją gebą. Ši skiriamoji geba "
+"nustato jums pateikiamo darbalaukio vaizdo dydį."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:56 spice/spicepreferences.ui:46
@@ -841,7 +841,7 @@ msgstr "Dabartinis lango dydis"
 #: vnc/vncpreferences.ui:118
 #, kde-format
 msgid "Current Screen Resolution"
-msgstr "Dabartinė ekrano raiška"
+msgstr "Dabartinė ekrano skiriamoji geba"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
@@ -849,13 +849,13 @@ msgstr "Dabartinė ekrano raiška"
 #: vnc/vncpreferences.ui:123
 #, kde-format
 msgid "Custom Resolution (…)"
-msgstr "Tinkinta raiška (…)"
+msgstr "Tinkinta skiriamoji geba (…)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:86
 #, kde-format
 msgid "Use All Screens Resolution"
-msgstr "Naudoti visų ekranų raišką"
+msgstr "Naudoti visų ekranų skiriamąją gebą"
 
 #. i18n: ectx: property (text), widget (QLabel, widthLabel)
 #: rdp/rdppreferences.ui:99 spice/spicepreferences.ui:84
@@ -873,7 +873,8 @@ msgid ""
 "manually if you select Custom as desktop resolution above."
 msgstr ""
 "Nuotolinio darbalaukio plotis. Šią reikšmę galite keisti tik rankiniu būdu, "
-"jei aukščiau nustatėte nuotolinio darbalaukio raišką kaip „Tinkintą raišką“."
+"jei aukščiau nustatėte nuotolinio darbalaukio skiriamąją gebą kaip „Tinkintą "
+"skiriamąją gebą“."
 
 #. i18n: ectx: property (text), widget (QLabel, heightLabel)
 #: rdp/rdppreferences.ui:131 spice/spicepreferences.ui:116
@@ -891,14 +892,15 @@ msgid ""
 "manually if you select Custom as desktop resolution above."
 msgstr ""
 "Nuotolinio darbalaukio aukštis. Šią reikšmę galite keisti tik rankiniu būdu, "
-"jei aukščiau nustatėte nuotolinio darbalaukio raišką kaip „Tinkintą raišką“."
+"jei aukščiau nustatėte nuotolinio darbalaukio skiriamąją gebą kaip „Tinkintą "
+"skiriamąją gebą“."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ScaleToSize)
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ScaleToWindow)
 #: rdp/rdppreferences.ui:168 spice/spicepreferences.ui:147
 #, kde-format
 msgid "Scale window contents to match resolution"
-msgstr "Keisti lango turinio dydį taip, kad atitiktų raišką"
+msgstr "Keisti lango turinio dydį taip, kad atitiktų skiriamąją gebą"
 
 #. i18n: ectx: property (text), widget (QLabel, accelerationLabel)
 #: rdp/rdppreferences.ui:178
@@ -1689,7 +1691,7 @@ msgid ""
 "rdpserver:3389 (host:port)</i></html>"
 msgstr ""
 "<html>Įrašykite adresą. Prievadas nebūtinas.<br /><i>Pavyzdys: "
-"rdpserver:3389 (mazgas:prievadas)</i></html>"
+"rdpserveris:3389 (mazgas:prievadas)</i></html>"
 
 #: remotedesktopsmodel.cpp:112
 #, kde-format
@@ -1756,10 +1758,9 @@ msgstr "Rodyti"
 
 #. i18n: ectx: property (text), widget (QLabel, resolutionLabel)
 #: spice/spicepreferences.ui:23
-#, fuzzy, kde-format
-#| msgid "Resolution"
+#, kde-format
 msgid "Resolution:"
-msgstr "Raiška"
+msgstr "Skiriamoji geba:"
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_Resolution)
 #: spice/spicepreferences.ui:39
@@ -1768,6 +1769,8 @@ msgid ""
 "The resolution requested from the remote desktop. The guest must have spice-"
 "vdagent running for dynamic resize to work."
 msgstr ""
+"Skiriamoji geba, kurios prašoma iš nuotolinio darbalaukio. Tam, kad veiktų "
+"dinaminis dydžio keitimas, svečias privalo būti paleidęs spice-vdagent."
 
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Width)
 #: spice/spicepreferences.ui:100
@@ -1775,6 +1778,8 @@ msgstr ""
 msgid ""
 "Custom desktop width. Only editable when Custom Resolution is selected above."
 msgstr ""
+"Tinkintas darbalaukio plotis. Prieinamas taisyti tik tada, kai aukščiau "
+"pasirinkta tinkinta skiriamoji geba."
 
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Height)
 #: spice/spicepreferences.ui:132
@@ -1783,6 +1788,8 @@ msgid ""
 "Custom desktop height. Only editable when Custom Resolution is selected "
 "above."
 msgstr ""
+"Tinkintas darbalaukio aukštis. Prieinamas taisyti tik tada, kai aukščiau "
+"pasirinkta tinkinta skiriamoji geba."
 
 #. i18n: ectx: property (title), widget (QGroupBox, spiceGroupBox)
 #. i18n: ectx: property (title), widget (QGroupBox, vncGroupBox)
@@ -1795,39 +1802,35 @@ msgstr "Prisijungimas"
 #: spice/spicepreferences.ui:166
 #, kde-format
 msgid "Enable &audio playback"
-msgstr ""
+msgstr "Įjungti g&arso atkūrimą"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_EnableAudio)
 #: spice/spicepreferences.ui:169
 #, kde-format
 msgid "Play audio from the remote host on this machine."
-msgstr ""
+msgstr "Atkurti šiame kompiuteryje garsą iš nuotolinio mazgo."
 
 #: spice/spiceview.cpp:776
 #, kde-format
 msgid "Authentication is required to connect to <b>%1</b>."
-msgstr ""
+msgstr "Norint prisijungti prie <b>%1</b>, reikia nustatyti tapatybę."
 
 #: spice/spiceviewfactory.cpp:47
-#, fuzzy, kde-format
-#| msgid "New RDP Connection…"
+#, kde-format
 msgid "New SPICE Connection…"
-msgstr "Naujas RDP ryšys…"
+msgstr "Naujas SPICE ryšys…"
 
 #: spice/spiceviewfactory.cpp:52
-#, fuzzy, kde-format
-#| msgid "Connect to a VNC Remote Desktop"
+#, kde-format
 msgid "Connect to a SPICE Remote Desktop"
-msgstr "Prisijungti prie nuotolinio VNC darbalaukio"
+msgstr "Prisijungti prie SPICE nuotolinio darbalaukio"
 
 #: spice/spiceviewfactory.cpp:58
-#, fuzzy, kde-format
-#| msgid ""
-#| "<html>Enter the address here.<br /><i>Example: nxserver (host)</i></html>"
+#, kde-format
 msgid ""
 "<html>Enter the address here.<br /><i>Example: spice://myhost:5900</i></html>"
 msgstr ""
-"<html>Įrašykite adresą.<br /><i>Pavyzdžiui: nxserver (mazgas)</i></html>"
+"<html>Įrašykite adresą.<br /><i>Pavyzdys: spice://manomazgas:5900</i></html>"
 
 #: vnc/vncclientthread.cpp:315
 #, kde-format
@@ -1999,7 +2002,7 @@ msgstr "Naujas VNC ryšys…"
 #: vnc/vncviewfactory.cpp:52
 #, kde-format
 msgid "Connect to a VNC Remote Desktop"
-msgstr "Prisijungti prie nuotolinio VNC darbalaukio"
+msgstr "Prisijungti prie VNC nuotolinio darbalaukio"
 
 #: vnc/vncviewfactory.cpp:58
 #, kde-format
@@ -2007,7 +2010,7 @@ msgid ""
 "<html>Enter the address here.<br /><i>Example: vncserver:1 (host:port / "
 "screen)</i></html>"
 msgstr ""
-"<html>Įrašykite adresą.<br /><i>Pavyzdžiui: vncserver:1 (mazgas:prievadas / "
+"<html>Įrašykite adresą.<br /><i>Pavyzdys: vncserveris:1 (mazgas:prievadas / "
 "ekranas)</i></html>"
 
 #~ msgctxt "@label"

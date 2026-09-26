@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-24 00:45+0000\n"
-"PO-Revision-Date: 2026-09-22 21:55+0200\n"
+"PO-Revision-Date: 2026-09-25 21:45+0200\n"
 "Last-Translator: Alexander Yavorskiy <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -1764,14 +1764,13 @@ msgstr "Источник"
 #: spice/spicepreferences.ui:17
 #, kde-format
 msgid "Display"
-msgstr "Показать"
+msgstr "Экран"
 
 #. i18n: ectx: property (text), widget (QLabel, resolutionLabel)
 #: spice/spicepreferences.ui:23
-#, fuzzy, kde-format
-#| msgid "Resolution"
+#, kde-format
 msgid "Resolution:"
-msgstr "Разрешение"
+msgstr "Разрешение:"
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_Resolution)
 #: spice/spicepreferences.ui:39
@@ -1780,6 +1779,8 @@ msgid ""
 "The resolution requested from the remote desktop. The guest must have spice-"
 "vdagent running for dynamic resize to work."
 msgstr ""
+"Разрешение, запрашиваемое у удалённого рабочего стола. Для изменения размера "
+"на лету в гостевой системе должен быть запущен spice-vdagent."
 
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Width)
 #: spice/spicepreferences.ui:100
@@ -1787,6 +1788,8 @@ msgstr ""
 msgid ""
 "Custom desktop width. Only editable when Custom Resolution is selected above."
 msgstr ""
+"Произвольная ширина рабочего стола. Доступна для изменения, только если выше "
+"выбран вариант «Другое разрешение»."
 
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Height)
 #: spice/spicepreferences.ui:132
@@ -1795,6 +1798,8 @@ msgid ""
 "Custom desktop height. Only editable when Custom Resolution is selected "
 "above."
 msgstr ""
+"Произвольная высота рабочего стола. Доступна для изменения, только если выше "
+"выбран вариант «Другое разрешение»."
 
 #. i18n: ectx: property (title), widget (QGroupBox, spiceGroupBox)
 #. i18n: ectx: property (title), widget (QGroupBox, vncGroupBox)
@@ -1807,38 +1812,35 @@ msgstr "Соединение"
 #: spice/spicepreferences.ui:166
 #, kde-format
 msgid "Enable &audio playback"
-msgstr ""
+msgstr "Включить воспроизведение &звука"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_EnableAudio)
 #: spice/spicepreferences.ui:169
 #, kde-format
 msgid "Play audio from the remote host on this machine."
-msgstr ""
+msgstr "Воспроизводить звук с удалённого узла на этом компьютере."
 
 #: spice/spiceview.cpp:776
 #, kde-format
 msgid "Authentication is required to connect to <b>%1</b>."
-msgstr ""
+msgstr "Для подключения к <b>%1</b> требуется проверка подлинности."
 
 #: spice/spiceviewfactory.cpp:47
-#, fuzzy, kde-format
-#| msgid "New RDP Connection…"
+#, kde-format
 msgid "New SPICE Connection…"
-msgstr "Подключиться по RDP…"
+msgstr "Подключиться по SPICE…"
 
 #: spice/spiceviewfactory.cpp:52
-#, fuzzy, kde-format
-#| msgid "Connect to a VNC Remote Desktop"
+#, kde-format
 msgid "Connect to a SPICE Remote Desktop"
-msgstr "Подключиться к удалённому рабочему столу по протоколу VNC"
+msgstr "Подключиться к удалённому рабочему столу по протоколу SPICE"
 
 #: spice/spiceviewfactory.cpp:58
-#, fuzzy, kde-format
-#| msgid ""
-#| "<html>Enter the address here.<br /><i>Example: nxserver (host)</i></html>"
+#, kde-format
 msgid ""
 "<html>Enter the address here.<br /><i>Example: spice://myhost:5900</i></html>"
-msgstr "<html>Введите здесь адрес.<br /><i>Пример: nxserver (хост)</i></html>"
+msgstr ""
+"<html>Введите здесь адрес.<br /><i>Пример: spice://myhost:5900</i></html>"
 
 #: vnc/vncclientthread.cpp:315
 #, kde-format
