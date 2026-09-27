@@ -43,6 +43,7 @@ SpiceView::SpiceView(QWidget *parent, const QUrl &url, KConfigGroup configGroup)
     , m_firstFrame(true)
     , m_quitFlag(false)
     , m_firstPasswordTry(true)
+    , m_walletPasswordUsed(false)
     , m_horizontalFactor(1.0)
     , m_verticalFactor(1.0)
     , m_buttonMask(0)
@@ -95,34 +96,7 @@ bool SpiceView::startConnection()
 
     // Apply saved resolution preference.  m_pendingResize is in logical pixels;
     // sendMonitorConfig() will scale by DPR when it fires after the first frame.
-    switch (m_hostPreferences->resolution()) {
-    case SpiceHostPreferences::Resolution::Small:
-        m_pendingResize = QSize(1280, 720);
-        break;
-    case SpiceHostPreferences::Resolution::Medium:
-        m_pendingResize = QSize(1600, 900);
-        break;
-    case SpiceHostPreferences::Resolution::Large:
-        m_pendingResize = QSize(1920, 1080);
-        break;
-    case SpiceHostPreferences::Resolution::MatchScreen: {
-        QScreen *screen = qGuiApp->primaryScreen();
-        const QSize physical = screen->size() * screen->devicePixelRatio();
-        m_pendingResize = QSize(physical.width(), physical.height());
-        break;
-    }
-    case SpiceHostPreferences::Resolution::Custom:
-        m_pendingResize = QSize(m_hostPreferences->width(), m_hostPreferences->height());
-        break;
-    case SpiceHostPreferences::Resolution::MatchWindow:
-        // The scroll-area viewport may not have its final size until Qt finishes
-        // the initial layout pass (which happens after startConnection returns).
-        // Leave m_pendingResize invalid here; scaleResize() will set it correctly
-        // when the scroll area fires its resized() signal during layout.
-        break;
-    default:
-        break;
-    }
+    m_pendingResize = resolveInitialSize();
 
     connectSession();
 
@@ -137,6 +111,32 @@ bool SpiceView::startConnection()
     }
 
     return true;
+}
+
+QSize SpiceView::resolveInitialSize() const
+{
+    switch (m_hostPreferences->resolution()) {
+    case SpiceHostPreferences::Resolution::Small:
+        return QSize(1280, 720);
+    case SpiceHostPreferences::Resolution::Medium:
+        return QSize(1600, 900);
+    case SpiceHostPreferences::Resolution::Large:
+        return QSize(1920, 1080);
+    case SpiceHostPreferences::Resolution::MatchScreen: {
+        QScreen *screen = qGuiApp->primaryScreen();
+        return screen->size() * screen->devicePixelRatio();
+    }
+    case SpiceHostPreferences::Resolution::Custom:
+        return QSize(m_hostPreferences->width(), m_hostPreferences->height());
+    case SpiceHostPreferences::Resolution::MatchWindow:
+        // The scroll-area viewport may not have its final size until Qt finishes
+        // the initial layout pass (which happens after startConnection returns).
+        // Return an invalid size here; scaleResize() will set it correctly when
+        // the scroll area fires its resized() signal during layout.
+        return QSize();
+    default:
+        return QSize();
+    }
 }
 
 void SpiceView::startQuittingConnection()
@@ -332,6 +332,20 @@ void SpiceView::resizeEvent(QResizeEvent *event)
 // Input handling
 // ---------------------------------------------------------------------------
 
+static gint toSpiceButton(Qt::MouseButton button)
+{
+    switch (button) {
+    case Qt::LeftButton:
+        return SPICE_MOUSE_BUTTON_LEFT;
+    case Qt::MiddleButton:
+        return SPICE_MOUSE_BUTTON_MIDDLE;
+    case Qt::RightButton:
+        return SPICE_MOUSE_BUTTON_RIGHT;
+    default:
+        return SPICE_MOUSE_BUTTON_INVALID;
+    }
+}
+
 // Map Qt::MouseButtons to the SPICE button mask bitmask
 gint SpiceView::qtButtonsToSpiceMask(Qt::MouseButtons buttons)
 {
@@ -397,8 +411,8 @@ void SpiceView::handleMouseEvent(QMouseEvent *event)
 
     // event->position() is in logical pixels.
     // factor = logicalW / physicalFrameW, so position in frame = pos / factor.
-    int x = static_cast<int>(event->position().x() / m_horizontalFactor);
-    int y = static_cast<int>(event->position().y() / m_verticalFactor);
+    const int x = static_cast<int>(event->position().x() / m_horizontalFactor);
+    const int y = static_cast<int>(event->position().y() / m_verticalFactor);
 
     m_buttonMask = qtButtonsToSpiceMask(event->buttons());
 
@@ -418,40 +432,13 @@ void SpiceView::handleMouseEvent(QMouseEvent *event)
     }
 
     // Also send explicit press/release for button state changes
-    if (event->type() == QEvent::MouseButtonPress || event->type() == QEvent::MouseButtonDblClick) {
-        gint button = SPICE_MOUSE_BUTTON_INVALID;
-        switch (event->button()) {
-        case Qt::LeftButton:
-            button = SPICE_MOUSE_BUTTON_LEFT;
-            break;
-        case Qt::MiddleButton:
-            button = SPICE_MOUSE_BUTTON_MIDDLE;
-            break;
-        case Qt::RightButton:
-            button = SPICE_MOUSE_BUTTON_RIGHT;
-            break;
-        default:
-            break;
-        }
-        if (button != SPICE_MOUSE_BUTTON_INVALID)
+    const gint button = toSpiceButton(event->button());
+    if (button != SPICE_MOUSE_BUTTON_INVALID) {
+        if (event->type() == QEvent::MouseButtonPress || event->type() == QEvent::MouseButtonDblClick) {
             spice_inputs_channel_button_press(m_inputsChannel, button, m_buttonMask);
-    } else if (event->type() == QEvent::MouseButtonRelease) {
-        gint button = SPICE_MOUSE_BUTTON_INVALID;
-        switch (event->button()) {
-        case Qt::LeftButton:
-            button = SPICE_MOUSE_BUTTON_LEFT;
-            break;
-        case Qt::MiddleButton:
-            button = SPICE_MOUSE_BUTTON_MIDDLE;
-            break;
-        case Qt::RightButton:
-            button = SPICE_MOUSE_BUTTON_RIGHT;
-            break;
-        default:
-            break;
-        }
-        if (button != SPICE_MOUSE_BUTTON_INVALID)
+        } else if (event->type() == QEvent::MouseButtonRelease) {
             spice_inputs_channel_button_release(m_inputsChannel, button, m_buttonMask);
+        }
     }
 }
 
@@ -459,10 +446,31 @@ void SpiceView::handleMouseEvent(QMouseEvent *event)
 // Session signal wiring
 // ---------------------------------------------------------------------------
 
+namespace
+{
+
+struct SignalBinding {
+    const char *name;
+    GCallback callback;
+};
+
+void connectSignals(gpointer instance, gpointer userData, std::initializer_list<SignalBinding> bindings)
+{
+    for (const auto &binding : bindings) {
+        g_signal_connect(instance, binding.name, binding.callback, userData);
+    }
+}
+
+} // namespace
+
 void SpiceView::connectSession()
 {
-    g_signal_connect(m_spiceSession, "channel-new", G_CALLBACK(cbChannelNew), this);
-    g_signal_connect(m_spiceSession, "channel-destroy", G_CALLBACK(cbChannelDestroy), this);
+    connectSignals(m_spiceSession,
+                   this,
+                   {
+                       {"channel-new", G_CALLBACK(cbChannelNew)},
+                       {"channel-destroy", G_CALLBACK(cbChannelDestroy)},
+                   });
 }
 
 void SpiceView::disconnectSession()
@@ -476,55 +484,76 @@ void SpiceView::disconnectSession()
 
 void SpiceView::cbChannelNew(SpiceSession * /*session*/, SpiceChannel *channel, gpointer data)
 {
+    Q_ASSERT(channel != nullptr);
+    Q_ASSERT(data != nullptr);
+
     auto *self = static_cast<SpiceView *>(data);
+    bool shouldConnect = true;
 
     if (SPICE_IS_MAIN_CHANNEL(channel)) {
         self->m_mainChannel = SPICE_MAIN_CHANNEL(channel);
-        g_signal_connect(channel, "channel-event", G_CALLBACK(cbChannelEvent), self);
-        // main-agent-update fires when the guest agent connects or disconnects.
-        // Use it to send a pending monitor config once the agent is available.
-        g_signal_connect(channel, "main-agent-update", G_CALLBACK(cbMainAgentUpdate), self);
-        g_signal_connect(channel, "main-mouse-update", G_CALLBACK(cbMainMouseUpdate), self);
-        // Clipboard: guest → client
-        g_signal_connect(channel, "main-clipboard-selection-grab", G_CALLBACK(cbClipboardGrab), self);
-        g_signal_connect(channel, "main-clipboard-selection-request", G_CALLBACK(cbClipboardRequest), self);
-        g_signal_connect(channel, "main-clipboard-selection", G_CALLBACK(cbClipboardData), self);
-        g_signal_connect(channel, "main-clipboard-selection-release", G_CALLBACK(cbClipboardRelease), self);
+        connectSignals(channel,
+                       self,
+                       {
+                           {"channel-event", G_CALLBACK(cbChannelEvent)},
+                           // main-agent-update fires when the guest agent connects or disconnects.
+                           // Use it to send a pending monitor config once the agent is available.
+                           {"main-agent-update", G_CALLBACK(cbMainAgentUpdate)},
+                           {"main-mouse-update", G_CALLBACK(cbMainMouseUpdate)},
+                           // Clipboard: guest → client
+                           {"main-clipboard-selection-grab", G_CALLBACK(cbClipboardGrab)},
+                           {"main-clipboard-selection-request", G_CALLBACK(cbClipboardRequest)},
+                           {"main-clipboard-selection", G_CALLBACK(cbClipboardData)},
+                           {"main-clipboard-selection-release", G_CALLBACK(cbClipboardRelease)},
+                       });
         // The main channel is connected by spice_session_connect(); don't call
         // spice_channel_connect() on it — that would start a duplicate connection.
+        shouldConnect = false;
 
     } else if (SPICE_IS_DISPLAY_CHANNEL(channel)) {
         self->m_displayChannel = SPICE_DISPLAY_CHANNEL(channel);
-        g_signal_connect(channel, "channel-event", G_CALLBACK(cbDisplayChannelEvent), self);
-        g_signal_connect(channel, "display-primary-create", G_CALLBACK(cbDisplayPrimary), self);
-        g_signal_connect(channel, "display-primary-destroy", G_CALLBACK(cbDisplayPrimaryDestroy), self);
-        g_signal_connect(channel, "display-invalidate", G_CALLBACK(cbDisplayInvalidate), self);
-        g_signal_connect(channel, "display-mark", G_CALLBACK(cbDisplayMark), self);
-        // Explicitly connect the channel — spice_session_connect only connects
-        // the main channel; all others must be connected manually.
-        spice_channel_connect(channel);
+        connectSignals(channel,
+                       self,
+                       {
+                           {"channel-event", G_CALLBACK(cbDisplayChannelEvent)},
+                           {"display-primary-create", G_CALLBACK(cbDisplayPrimary)},
+                           {"display-primary-destroy", G_CALLBACK(cbDisplayPrimaryDestroy)},
+                           {"display-invalidate", G_CALLBACK(cbDisplayInvalidate)},
+                           {"display-mark", G_CALLBACK(cbDisplayMark)},
+                       });
 
     } else if (SPICE_IS_CURSOR_CHANNEL(channel)) {
         self->m_cursorChannel = SPICE_CURSOR_CHANNEL(channel);
-        g_signal_connect(channel, "cursor-set", G_CALLBACK(cbCursorSet), self);
-        g_signal_connect(channel, "cursor-hide", G_CALLBACK(cbCursorHide), self);
-        g_signal_connect(channel, "cursor-reset", G_CALLBACK(cbCursorReset), self);
-        spice_channel_connect(channel);
+        connectSignals(channel,
+                       self,
+                       {
+                           {"cursor-set", G_CALLBACK(cbCursorSet)},
+                           {"cursor-hide", G_CALLBACK(cbCursorHide)},
+                           {"cursor-reset", G_CALLBACK(cbCursorReset)},
+                       });
 
     } else if (SPICE_IS_INPUTS_CHANNEL(channel)) {
         self->m_inputsChannel = SPICE_INPUTS_CHANNEL(channel);
-        spice_channel_connect(channel);
 
     } else if (SPICE_IS_PLAYBACK_CHANNEL(channel)) {
         self->m_playbackChannel = SPICE_PLAYBACK_CHANNEL(channel);
-        // SpiceAudio's channel-new handler runs after this callback. It must
-        // install its playback handlers before connecting the channel, and
-        // skips channels that are already connecting. Let it connect this one.
+        // SpiceAudio connects playback channel after installing its handlers
+        shouldConnect = false;
+    }
+
+    // spice_session_connect() handles the main channel; SpiceAudio connects the
+    // playback channel after installing its own handlers. All other channels
+    // must be connected explicitly here.
+    if (shouldConnect) {
+        spice_channel_connect(channel);
     }
 }
 
 void SpiceView::cbChannelDestroy(SpiceSession * /*session*/, SpiceChannel *channel, gpointer data)
 {
+    Q_ASSERT(channel != nullptr);
+    Q_ASSERT(data != nullptr);
+
     auto *self = static_cast<SpiceView *>(data);
 
     // Disconnect any per-channel signals we connected in cbChannelNew
@@ -741,33 +770,47 @@ void SpiceView::cbCursorReset(SpiceCursorChannel * /*channel*/, gpointer data)
 // Qt slots (GUI thread)
 // ---------------------------------------------------------------------------
 
+QString SpiceView::resolveSilentPassword()
+{
+    if (m_hostPreferences->walletSupport()) {
+        const QString walletPw = readWalletPassword();
+        if (!walletPw.isEmpty()) {
+            m_walletPasswordUsed = true;
+            return walletPw;
+        }
+    }
+    return m_url.password();
+}
+
+void SpiceView::applyPasswordAndConnect(const QString &password)
+{
+    g_object_set(m_spiceSession, "password", password.toUtf8().constData(), nullptr);
+    Q_EMIT showingPasswordDialog(false);
+    spice_session_connect(m_spiceSession);
+}
+
 void SpiceView::requestPassword()
 {
     setStatus(Authenticating);
     Q_EMIT showingPasswordDialog(true);
 
+    // If the wallet credential was used on the previous attempt and the server
+    // rejected it, the stored password is stale — remove it now so it won't be
+    // silently retried on a future reconnect.
+    if (m_walletPasswordUsed) {
+        m_walletPasswordUsed = false;
+        deleteWalletPassword();
+    }
+
     // First attempt: try wallet / URL credentials silently before showing UI.
     if (m_firstPasswordTry) {
         m_firstPasswordTry = false;
 
-        if (m_hostPreferences->walletSupport()) {
-            const QString walletPw = readWalletPassword();
-            if (!walletPw.isEmpty()) {
-                g_object_set(m_spiceSession, "password", walletPw.toUtf8().constData(), nullptr);
-                Q_EMIT showingPasswordDialog(false);
-                spice_session_connect(m_spiceSession);
-                return;
-            }
-        }
-
-        const QString urlPw = m_url.password();
-        if (!urlPw.isEmpty()) {
-            g_object_set(m_spiceSession, "password", urlPw.toUtf8().constData(), nullptr);
-            Q_EMIT showingPasswordDialog(false);
-            spice_session_connect(m_spiceSession);
+        const QString silentPw = resolveSilentPassword();
+        if (!silentPw.isEmpty()) {
+            applyPasswordAndConnect(silentPw);
             return;
         }
-
         // Neither wallet nor URL had a password — fall through to show the dialog.
     }
 
@@ -787,10 +830,7 @@ void SpiceView::requestPassword()
     if (dialog.keepPassword())
         saveWalletPassword(password);
 
-    g_object_set(m_spiceSession, "password", password.toUtf8().constData(), nullptr);
-
-    Q_EMIT showingPasswordDialog(false);
-    spice_session_connect(m_spiceSession);
+    applyPasswordAndConnect(password);
 }
 
 void SpiceView::onChannelConnected()

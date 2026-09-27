@@ -86,6 +86,10 @@ private:
 
     bool m_quitFlag;
     bool m_firstPasswordTry;
+    // True once a wallet password was silently applied; cleared when the user
+    // saves a new password via the dialog.  Used to delete a stale wallet entry
+    // on the next auth failure.
+    bool m_walletPasswordUsed;
     qreal m_horizontalFactor;
     qreal m_verticalFactor;
 
@@ -106,6 +110,12 @@ private:
     // GLib signal connection helpers
     void connectSession();
     void disconnectSession();
+
+    QString resolveSilentPassword();
+    void applyPasswordAndConnect(const QString &password);
+
+    // Compute the initial pending resize from host preferences
+    QSize resolveInitialSize() const;
 
     // Translate a Qt mouse button state into a SPICE button mask
     static gint qtButtonsToSpiceMask(Qt::MouseButtons buttons);
