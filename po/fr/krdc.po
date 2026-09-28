@@ -21,8 +21,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-24 00:45+0000\n"
-"PO-Revision-Date: 2026-09-04 11:17+0200\n"
+"POT-Creation-Date: 2026-09-28 00:45+0000\n"
+"PO-Revision-Date: 2026-09-25 08:53+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
@@ -32,7 +32,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Accelerator-Marker: &\n"
 "X-Environment: kde\n"
-"X-Generator: Lokalize 26.08.0\n"
+"X-Generator: Lokalize 26.08.1\n"
 "X-Text-Markup: kde4\n"
 
 #, kde-format
@@ -1775,10 +1775,9 @@ msgstr "Affichage"
 # unreviewed-context
 #. i18n: ectx: property (text), widget (QLabel, resolutionLabel)
 #: spice/spicepreferences.ui:23
-#, fuzzy, kde-format
-#| msgid "Resolution"
+#, kde-format
 msgid "Resolution:"
-msgstr "Résolution"
+msgstr "Résolution :"
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_Resolution)
 #: spice/spicepreferences.ui:39
@@ -1787,6 +1786,9 @@ msgid ""
 "The resolution requested from the remote desktop. The guest must have spice-"
 "vdagent running for dynamic resize to work."
 msgstr ""
+"La résolution demandée depuis le poste de travail distant. Du coté de "
+"l'invité, le module « spice-vdagent » doit être en cours d'exécution pour "
+"que le redimensionnement dynamique fonctionne."
 
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Width)
 #: spice/spicepreferences.ui:100
@@ -1794,6 +1796,8 @@ msgstr ""
 msgid ""
 "Custom desktop width. Only editable when Custom Resolution is selected above."
 msgstr ""
+"Largeur personnalisée de bureau. Elle n'est modifiable que lorsque la "
+"résolution personnalisée est sélectionnée ci-dessus."
 
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Height)
 #: spice/spicepreferences.ui:132
@@ -1802,6 +1806,8 @@ msgid ""
 "Custom desktop height. Only editable when Custom Resolution is selected "
 "above."
 msgstr ""
+"Hauteur personnalisée de bureau. Elle n'est modifiable que lorsque la "
+"résolution personnalisée est sélectionnée ci-dessus."
 
 #. i18n: ectx: property (title), widget (QGroupBox, spiceGroupBox)
 #. i18n: ectx: property (title), widget (QGroupBox, vncGroupBox)
@@ -1814,39 +1820,36 @@ msgstr "Connexion"
 #: spice/spicepreferences.ui:166
 #, kde-format
 msgid "Enable &audio playback"
-msgstr ""
+msgstr "Activer la lecture &audio"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_EnableAudio)
 #: spice/spicepreferences.ui:169
 #, kde-format
 msgid "Play audio from the remote host on this machine."
-msgstr ""
+msgstr "Lire l'audio de l'hôte distant sur cet ordinateur."
 
-#: spice/spiceview.cpp:776
+#: spice/spiceview.cpp:819
 #, kde-format
 msgid "Authentication is required to connect to <b>%1</b>."
-msgstr ""
+msgstr "L'authentification est requise pour se connecter à <b>%1</b>."
 
 #: spice/spiceviewfactory.cpp:47
-#, fuzzy, kde-format
-#| msgid "New RDP Connection…"
+#, kde-format
 msgid "New SPICE Connection…"
-msgstr "Nouvelle connexion RDP..."
+msgstr "Nouvelle connexion « SPICE »..."
 
 #: spice/spiceviewfactory.cpp:52
-#, fuzzy, kde-format
-#| msgid "Connect to a VNC Remote Desktop"
+#, kde-format
 msgid "Connect to a SPICE Remote Desktop"
-msgstr "Connexion à un hôte VNC « Remote Desktop »"
+msgstr "Connexion à un bureau distant  « SPICE »"
 
 #: spice/spiceviewfactory.cpp:58
-#, fuzzy, kde-format
-#| msgid ""
-#| "<html>Enter the address here.<br /><i>Example: nxserver (host)</i></html>"
+#, kde-format
 msgid ""
 "<html>Enter the address here.<br /><i>Example: spice://myhost:5900</i></html>"
 msgstr ""
-"<html>Indiquez l'adresse ici.<br /> <i>Exemple : nxserver (hôte)</i></html>"
+"<html>Veuillez saisir l'adresse ici.<br /> <i>Exemple : spice://myhost:5900</"
+"i></html>"
 
 #: vnc/vncclientthread.cpp:315
 #, kde-format
