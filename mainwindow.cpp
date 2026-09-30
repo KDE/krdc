@@ -199,7 +199,7 @@ void MainWindow::setupActions()
     KActionMenu *bookmarkMenu = new KActionMenu(i18n("Bookmarks"), actionCollection());
     m_bookmarkManager = new BookmarkManager(actionCollection(), bookmarkMenu->menu(), this);
     actionCollection()->addAction(QStringLiteral("bookmark"), bookmarkMenu);
-    connect(m_bookmarkManager, SIGNAL(openUrl(QUrl)), SLOT(newConnection(QUrl)));
+    connect(m_bookmarkManager, SIGNAL(openUrl(QUrl, bool, QString)), SLOT(newConnection(QUrl, bool, QString)));
     connect(m_bookmarkManager, &BookmarkManager::editBookmark, this, [this](const QString &address, const QString &name, const QUrl &url) {
         showSettingsDialog(url.toString(), address, name);
     });

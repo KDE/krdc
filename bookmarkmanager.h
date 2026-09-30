@@ -73,7 +73,7 @@ public:
     static const QStringList findBookmarkAddresses(const KBookmarkGroup &group, const QString &url);
 
 Q_SIGNALS:
-    void openUrl(const QUrl &url);
+    void openUrl(const QUrl &url, bool switchFullscreenWhenConnected, const QString &name);
     void editBookmark(const QString &address, const QString &name, const QUrl &url);
 
 private Q_SLOTS:
