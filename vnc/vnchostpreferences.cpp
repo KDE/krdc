@@ -37,8 +37,8 @@ QWidget *VncHostPreferences::createProtocolSpecificConfigPage(QWidget *sshTunnel
     vncUi.kcfg_ScalingWidth->setValue(width());
     vncUi.kcfg_ScalingHeight->setValue(height());
 
-    connect(vncUi.resolutionComboBox, SIGNAL(currentIndexChanged(int)), SLOT(updateScalingWidthHeight(int)));
-    connect(vncUi.kcfg_Scaling, SIGNAL(toggled(bool)), SLOT(updateScaling(bool)));
+    connect(vncUi.resolutionComboBox, &QComboBox::currentIndexChanged, this, &VncHostPreferences::updateScalingWidthHeight);
+    connect(vncUi.kcfg_Scaling, &QAbstractButton::toggled, this, &VncHostPreferences::updateScaling);
 
     const QString resolutionString = QString::number(width()) + QLatin1Char('x') + QString::number(height());
     const int resolutionIndex = vncUi.resolutionComboBox->findText(resolutionString, Qt::MatchContains);

@@ -395,7 +395,7 @@ VncClientThread::VncClientThread(QObject *parent)
 
     QTimer *outputErrorMessagesCheckTimer = new QTimer(this);
     outputErrorMessagesCheckTimer->setInterval(500);
-    connect(outputErrorMessagesCheckTimer, SIGNAL(timeout()), this, SLOT(checkOutputErrorMessage()));
+    connect(outputErrorMessagesCheckTimer, &QTimer::timeout, this, &VncClientThread::checkOutputErrorMessage);
     outputErrorMessagesCheckTimer->start();
 }
 

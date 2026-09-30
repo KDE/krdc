@@ -85,10 +85,10 @@ FloatingToolBar::FloatingToolBar(QWidget *parent, QWidget *anchorWidget)
     d->anchorWidget = anchorWidget;
 
     d->animTimer = new QTimer(this);
-    connect(d->animTimer, SIGNAL(timeout()), this, SLOT(animate()));
+    connect(d->animTimer, &QTimer::timeout, this, &FloatingToolBar::animate);
 
     d->autoHideTimer = new QTimer(this);
-    connect(d->autoHideTimer, SIGNAL(timeout()), this, SLOT(hide()));
+    connect(d->autoHideTimer, &QTimer::timeout, this, &FloatingToolBar::hide);
 
     // apply a filter to get notified when anchor changes geometry
     d->anchorWidget->installEventFilter(this);

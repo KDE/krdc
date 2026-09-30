@@ -22,20 +22,20 @@ HostPreferencesList::HostPreferencesList(QWidget *parent, MainWindow *mainWindow
     , m_mainWindow(mainWindow)
 {
     hostList = new QListWidget(this);
-    connect(hostList, SIGNAL(itemSelectionChanged()), SLOT(selectionChanged()));
-    connect(hostList, SIGNAL(itemDoubleClicked(QListWidgetItem *)), SLOT(configureHost()));
+    connect(hostList, &QListWidget::itemSelectionChanged, this, &HostPreferencesList::selectionChanged);
+    connect(hostList, &QListWidget::itemDoubleClicked, this, &HostPreferencesList::configureHost);
 
     configureButton = new QPushButton(this);
     configureButton->setEnabled(false);
     configureButton->setText(i18n("Configure…"));
     configureButton->setIcon(QIcon::fromTheme(QLatin1String("configure")));
-    connect(configureButton, SIGNAL(clicked()), SLOT(configureHost()));
+    connect(configureButton, &QPushButton::clicked, this, &HostPreferencesList::configureHost);
 
     removeButton = new QPushButton(this);
     removeButton->setEnabled(false);
     removeButton->setText(i18n("Remove"));
     removeButton->setIcon(QIcon::fromTheme(QLatin1String("list-remove")));
-    connect(removeButton, SIGNAL(clicked()), SLOT(removeHost()));
+    connect(removeButton, &QPushButton::clicked, this, &HostPreferencesList::removeHost);
 
     QVBoxLayout *buttonLayout = new QVBoxLayout;
     buttonLayout->addWidget(configureButton);

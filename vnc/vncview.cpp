@@ -50,10 +50,10 @@ VncView::VncView(QWidget *parent, const QUrl &url, KConfigGroup configGroup)
         m_port += 5900;
 
     // BlockingQueuedConnection can cause deadlocks when exiting, handled in startQuitting()
-    connect(&vncThread, SIGNAL(imageUpdated(int, int, int, int)), this, SLOT(updateImage(int, int, int, int)), Qt::BlockingQueuedConnection);
-    connect(&vncThread, SIGNAL(gotCut(QString)), this, SLOT(setCut(QString)), Qt::BlockingQueuedConnection);
-    connect(&vncThread, SIGNAL(passwordRequest(bool)), this, SLOT(requestPassword(bool)), Qt::BlockingQueuedConnection);
-    connect(&vncThread, SIGNAL(outputErrorMessage(QString)), this, SLOT(outputErrorMessage(QString)));
+    connect(&vncThread, &VncClientThread::imageUpdated, this, &VncView::updateImage, Qt::BlockingQueuedConnection);
+    connect(&vncThread, &VncClientThread::gotCut, this, &VncView::setCut, Qt::BlockingQueuedConnection);
+    connect(&vncThread, &VncClientThread::passwordRequest, this, &VncView::requestPassword, Qt::BlockingQueuedConnection);
+    connect(&vncThread, &VncClientThread::outputErrorMessage, this, &VncView::outputErrorMessage);
     connect(&vncThread, &VncClientThread::gotCursor, this, [this](QCursor cursor) {
         setCursor(cursor);
     });

@@ -23,7 +23,7 @@ RemoteDesktopsModel::RemoteDesktopsModel(QObject *parent, KBookmarkManager *mana
     : QAbstractTableModel(parent)
 {
     m_manager = manager;
-    connect(m_manager, SIGNAL(changed(QString)), SLOT(bookmarksChanged()));
+    connect(m_manager, &KBookmarkManager::changed, this, &RemoteDesktopsModel::bookmarksChanged);
     buildModelFromBookmarkGroup(m_manager->root());
 
 #ifdef BUILD_ZEROCONF
@@ -31,7 +31,7 @@ RemoteDesktopsModel::RemoteDesktopsModel(QObject *parent, KBookmarkManager *mana
     m_protocols[QLatin1String("_rfb._tcp")] = QLatin1String("vnc");
 
     zeroconfBrowser = new KDNSSD::ServiceBrowser(QLatin1String("_rfb._tcp"), true);
-    connect(zeroconfBrowser, SIGNAL(finished()), this, SLOT(servicesChanged()));
+    connect(zeroconfBrowser, &KDNSSD::ServiceBrowser::finished, this, &RemoteDesktopsModel::servicesChanged);
     zeroconfBrowser->startBrowse();
     qCDebug(KRDC) << "Browsing for zeroconf hosts.";
 #endif

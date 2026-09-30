@@ -27,7 +27,7 @@ SystemTrayIcon::SystemTrayIcon(MainWindow *parent)
     contextMenu()->addAction(parent->actionCollection()->action(QLatin1String("bookmark")));
     contextMenu()->addSeparator();
 
-    connect(this, SIGNAL(activateRequested(bool, QPoint)), this, SLOT(checkActivatedWindow(bool)));
+    connect(this, &KStatusNotifierItem::activateRequested, this, &SystemTrayIcon::checkActivatedWindow);
 }
 
 void SystemTrayIcon::checkActivatedWindow(bool active)

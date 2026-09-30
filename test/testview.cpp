@@ -73,7 +73,7 @@ bool TestView::startConnection()
 {
     setStatus(Connecting);
     // call it async in order to simulate real world behavior
-    QTimer::singleShot(1000, this, SLOT(asyncConnect()));
+    QTimer::singleShot(1000, this, &TestView::asyncConnect);
     return true;
 }
 

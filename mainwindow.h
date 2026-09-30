@@ -23,6 +23,7 @@ class KTabWidget;
 
 class BookmarkManager;
 class FloatingToolBar;
+class MinimizePixel;
 class RemoteDesktopsModel;
 class RemoteView;
 class SystemTrayIcon;
@@ -131,7 +132,7 @@ private:
     bool m_fullscreenActive = false;
     bool m_updatingFullscreen = false;
     KConfigGroup m_windowedAutoSaveGroup;
-    QWidget *m_minimizePixel = nullptr;
+    MinimizePixel *m_minimizePixel = nullptr;
 
     QMap<RemoteView *, bool> m_savedGrabStatesBeforeFullscreen;
 

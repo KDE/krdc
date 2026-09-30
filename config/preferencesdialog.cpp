@@ -33,10 +33,10 @@ PreferencesDialog::PreferencesDialog(QWidget *parent, KConfigSkeleton *skeleton)
     m_pluginSelector->addPlugins(offers, i18n("Plugins"));
     addPage(m_pluginSelector, i18n("Plugins"), QStringLiteral("preferences-plugin"), i18n("Plugin Configuration"));
 
-    connect(this, SIGNAL(accepted()), SLOT(saveState()));
+    connect(this, &QDialog::accepted, this, &PreferencesDialog::saveState);
     QPushButton *defaultsButton = buttonBox()->button(QDialogButtonBox::RestoreDefaults);
-    connect(defaultsButton, SIGNAL(clicked()), SLOT(loadDefaults()));
-    connect(m_pluginSelector, SIGNAL(changed(bool)), SLOT(settingsChanged()));
+    connect(defaultsButton, &QPushButton::clicked, this, &PreferencesDialog::loadDefaults);
+    connect(m_pluginSelector, &KPluginWidget::changed, this, &PreferencesDialog::settingsChanged);
 }
 
 void PreferencesDialog::saveState()

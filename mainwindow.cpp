@@ -85,15 +85,15 @@ MainWindow::MainWindow(QWidget *parent)
 
     m_tabWidget->setTabsClosable(Settings::tabCloseButton());
 
-    connect(m_tabWidget, SIGNAL(tabCloseRequested(int)), SLOT(closeTab(int)));
+    connect(m_tabWidget, &QTabWidget::tabCloseRequested, this, &MainWindow::closeTab);
 
     if (Settings::tabMiddleClick())
-        connect(m_tabWidget, SIGNAL(mouseMiddleClick(int)), SLOT(closeTab(int)));
+        connect(m_tabWidget, &TabbedViewWidget::mouseMiddleClick, this, &MainWindow::closeTab);
 
-    connect(m_tabWidget, SIGNAL(tabBarDoubleClicked(int)), SLOT(openTabSettings(int)));
+    connect(m_tabWidget, &QTabWidget::tabBarDoubleClicked, this, &MainWindow::openTabSettings);
 
     m_tabWidget->tabBar()->setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(m_tabWidget->tabBar(), SIGNAL(customContextMenuRequested(QPoint)), SLOT(tabContextMenu(QPoint)));
+    connect(m_tabWidget->tabBar(), &QWidget::customContextMenuRequested, this, &MainWindow::tabContextMenu);
 
     m_tabWidget->setMinimumSize(600, 400);
     setCentralWidget(m_tabWidget);
@@ -102,7 +102,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     setupGUI(ToolBar | Keys | Save | Create);
 
-    connect(m_tabWidget, SIGNAL(currentChanged(int)), SLOT(tabChanged(int)));
+    connect(m_tabWidget, &QTabWidget::currentChanged, this, &MainWindow::tabChanged);
 
     if (Settings::showStatusBar())
         statusBar()->showMessage(i18n("KDE Remote Desktop Client started"));
@@ -113,7 +113,7 @@ MainWindow::MainWindow(QWidget *parent)
         m_tabWidget->addTab(newConnectionWidget(), i18n("New Connection"));
 
     if (Settings::rememberSessions()) // give some time to create and show the window first
-        QTimer::singleShot(100, this, SLOT(restoreOpenSessions()));
+        QTimer::singleShot(100, this, &MainWindow::restoreOpenSessions);
 
     if (Settings::systemTrayIcon()) {
         m_systemTrayIcon = new SystemTrayIcon(this);
@@ -130,13 +130,15 @@ void MainWindow::setupActions()
     connectionAction->setText(i18n("New Connection"));
     connectionAction->setIcon(QIcon::fromTheme(QStringLiteral("network-connect")));
     actionCollection()->setDefaultShortcuts(connectionAction, KStandardShortcut::openNew());
-    connect(connectionAction, SIGNAL(triggered()), SLOT(newConnectionPage()));
+    connect(connectionAction, &QAction::triggered, this, [this]() {
+        newConnectionPage();
+    });
 
     QAction *screenshotAction = actionCollection()->addAction(QStringLiteral("take_screenshot"));
     screenshotAction->setText(i18n("Copy Screenshot to Clipboard"));
     screenshotAction->setIconText(i18n("Screenshot"));
     screenshotAction->setIcon(QIcon::fromTheme(QStringLiteral("ksnapshot")));
-    connect(screenshotAction, SIGNAL(triggered()), SLOT(takeScreenshot()));
+    connect(screenshotAction, &QAction::triggered, this, &MainWindow::takeScreenshot);
 
     QAction *fullscreenAction = actionCollection()->addAction(
         QStringLiteral("switch_fullscreen")); // note: please do not switch to KStandardShortcut unless you know what you are doing (see history of this file)
@@ -144,62 +146,62 @@ void MainWindow::setupActions()
     fullscreenAction->setIconText(i18n("Full Screen"));
     fullscreenAction->setIcon(QIcon::fromTheme(QStringLiteral("view-fullscreen")));
     actionCollection()->setDefaultShortcuts(fullscreenAction, KStandardShortcut::fullScreen());
-    connect(fullscreenAction, SIGNAL(triggered()), SLOT(switchFullscreen()));
+    connect(fullscreenAction, &QAction::triggered, this, &MainWindow::switchFullscreen);
 
     QAction *viewOnlyAction = actionCollection()->addAction(QStringLiteral("view_only"));
     viewOnlyAction->setCheckable(true);
     viewOnlyAction->setText(i18n("View Only"));
     viewOnlyAction->setIcon(QIcon::fromTheme(QStringLiteral("document-preview")));
-    connect(viewOnlyAction, SIGNAL(triggered(bool)), SLOT(viewOnly(bool)));
+    connect(viewOnlyAction, &QAction::triggered, this, &MainWindow::viewOnly);
 
     QAction *clipboardSharingAction = actionCollection()->addAction(QStringLiteral("clipboard_sharing"));
     clipboardSharingAction->setCheckable(true);
     clipboardSharingAction->setText(i18n("Clipboard Sharing"));
     clipboardSharingAction->setIcon(QIcon::fromTheme(QStringLiteral("edit-copy")));
-    connect(clipboardSharingAction, SIGNAL(triggered(bool)), SLOT(clipboardSharing(bool)));
+    connect(clipboardSharingAction, &QAction::triggered, this, &MainWindow::clipboardSharing);
 
     QAction *disconnectAction = actionCollection()->addAction(QStringLiteral("disconnect"));
     disconnectAction->setText(i18n("Disconnect"));
     disconnectAction->setIcon(QIcon::fromTheme(QStringLiteral("network-disconnect")));
     actionCollection()->setDefaultShortcuts(disconnectAction, KStandardShortcut::close());
-    connect(disconnectAction, SIGNAL(triggered()), SLOT(disconnectHost()));
+    connect(disconnectAction, &QAction::triggered, this, &MainWindow::disconnectHost);
 
     QAction *showLocalCursorAction = actionCollection()->addAction(QStringLiteral("show_local_cursor"));
     showLocalCursorAction->setCheckable(true);
     showLocalCursorAction->setIcon(QIcon::fromTheme(QStringLiteral("input-mouse")));
     showLocalCursorAction->setText(i18n("Show Local Cursor"));
     showLocalCursorAction->setIconText(i18n("Local Cursor"));
-    connect(showLocalCursorAction, SIGNAL(triggered(bool)), SLOT(showLocalCursor(bool)));
+    connect(showLocalCursorAction, &QAction::triggered, this, &MainWindow::showLocalCursor);
 
     QAction *grabAllKeysAction = actionCollection()->addAction(QStringLiteral("grab_all_keys"));
     grabAllKeysAction->setCheckable(true);
     grabAllKeysAction->setIcon(QIcon::fromTheme(QStringLiteral("configure-shortcuts")));
     grabAllKeysAction->setText(i18n("Grab All Possible Keys"));
     grabAllKeysAction->setIconText(i18n("Grab Keys"));
-    connect(grabAllKeysAction, SIGNAL(triggered(bool)), SLOT(grabAllKeys(bool)));
+    connect(grabAllKeysAction, &QAction::triggered, this, &MainWindow::grabAllKeys);
 
     QAction *scaleAction = actionCollection()->addAction(QStringLiteral("scale"));
     scaleAction->setCheckable(true);
     scaleAction->setIcon(QIcon::fromTheme(QStringLiteral("zoom-fit-best")));
     scaleAction->setText(i18n("Scale Remote Screen to Fit Window Size"));
     scaleAction->setIconText(i18n("Scale"));
-    connect(scaleAction, SIGNAL(triggered(bool)), SLOT(scale(bool)));
+    connect(scaleAction, &QAction::triggered, this, &MainWindow::scale);
 
     FactorWidget *m_scaleSlider = new FactorWidget(i18n("Scaling Factor"), this, actionCollection());
     QAction *scaleFactorAction = actionCollection()->addAction(QStringLiteral("scale_factor"), m_scaleSlider);
     scaleFactorAction->setIcon(QIcon::fromTheme(QStringLiteral("configure")));
 
-    KStandardAction::quit(this, SLOT(quit()), actionCollection());
-    KStandardAction::preferences(this, SLOT(preferences()), actionCollection());
-    QAction *configNotifyAction = KStandardAction::configureNotifications(this, SLOT(configureNotifications()), actionCollection());
+    KStandardAction::quit(this, &MainWindow::quit, actionCollection());
+    KStandardAction::preferences(this, &MainWindow::preferences, actionCollection());
+    QAction *configNotifyAction = KStandardAction::configureNotifications(this, &MainWindow::configureNotifications, actionCollection());
     configNotifyAction->setVisible(false);
-    m_menubarAction = KStandardAction::showMenubar(this, SLOT(showMenubar()), actionCollection());
+    m_menubarAction = KStandardAction::showMenubar(this, &MainWindow::showMenubar, actionCollection());
     m_menubarAction->setChecked(!menuBar()->isHidden());
 
     KActionMenu *bookmarkMenu = new KActionMenu(i18n("Bookmarks"), actionCollection());
     m_bookmarkManager = new BookmarkManager(actionCollection(), bookmarkMenu->menu(), this);
     actionCollection()->addAction(QStringLiteral("bookmark"), bookmarkMenu);
-    connect(m_bookmarkManager, SIGNAL(openUrl(QUrl, bool, QString)), SLOT(newConnection(QUrl, bool, QString)));
+    connect(m_bookmarkManager, &BookmarkManager::openUrl, this, &MainWindow::newConnection);
     connect(m_bookmarkManager, &BookmarkManager::editBookmark, this, [this](const QString &address, const QString &name, const QUrl &url) {
         showSettingsDialog(url.toString(), address, name);
     });
@@ -314,10 +316,10 @@ void MainWindow::newConnection(const QUrl &newUrl, bool switchFullscreenWhenConn
 
     view->enableScaling(scale_state);
 
-    connect(view, SIGNAL(framebufferSizeChanged(int, int)), this, SLOT(resizeTabWidget(int, int)));
-    connect(view, SIGNAL(statusChanged(RemoteView::RemoteStatus)), this, SLOT(statusChanged(RemoteView::RemoteStatus)));
-    connect(view, SIGNAL(disconnected()), this, SLOT(disconnectHost()));
-    connect(view, SIGNAL(errorMessage(const QString &, const QString &)), this, SLOT(handleViewError(const QString &, const QString &)));
+    connect(view, &RemoteView::framebufferSizeChanged, this, &MainWindow::resizeTabWidget);
+    connect(view, &RemoteView::statusChanged, this, &MainWindow::statusChanged);
+    connect(view, &RemoteView::disconnected, this, &MainWindow::disconnectHost);
+    connect(view, &RemoteView::errorMessage, this, &MainWindow::handleViewError);
     connect(view, &RemoteView::fullScreenRequested, this, [this, view](QScreen *screen) {
         if (view != currentRemoteView()) {
             return;
@@ -592,7 +594,7 @@ void MainWindow::applyFullscreenState(bool fullscreen)
         m_tabWidget->setDocumentMode(true);
 
         m_minimizePixel = new MinimizePixel(this);
-        connect(m_minimizePixel, SIGNAL(rightClicked()), this, SLOT(minimizeFullScreen()));
+        connect(m_minimizePixel, &MinimizePixel::rightClicked, this, &MainWindow::minimizeFullScreen);
 
         for (RemoteView *currentView : std::as_const(m_remoteViewMap)) {
             currentView->enableScaling(currentView->hostPreferences()->fullscreenScale());
@@ -642,7 +644,7 @@ QScrollArea *MainWindow::createScrollArea(QWidget *parent, RemoteView *remoteVie
     RemoteViewScrollArea *scrollArea = new RemoteViewScrollArea(parent);
     scrollArea->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 
-    connect(scrollArea, SIGNAL(resized(int, int)), remoteView, SLOT(scaleResize(int, int)));
+    connect(scrollArea, &RemoteViewScrollArea::resized, remoteView, &RemoteView::scaleResize);
 
     QPalette palette = scrollArea->palette();
     palette.setColor(QPalette::Window, Settings::backgroundColor());
@@ -988,8 +990,8 @@ void MainWindow::showRemoteViewToolbar()
         sessionComboBox->setModel(m_tabWidget->getModel());
         sessionComboBox->setSizeAdjustPolicy(QComboBox::AdjustToContents);
         sessionComboBox->setCurrentIndex(m_tabWidget->currentIndex());
-        connect(sessionComboBox, SIGNAL(activated(int)), m_tabWidget, SLOT(setCurrentIndex(int)));
-        connect(m_tabWidget, SIGNAL(currentChanged(int)), sessionComboBox, SLOT(setCurrentIndex(int)));
+        connect(sessionComboBox, &QComboBox::activated, m_tabWidget, &QTabWidget::setCurrentIndex);
+        connect(m_tabWidget, &QTabWidget::currentChanged, sessionComboBox, &QComboBox::setCurrentIndex);
         m_toolBar->addWidget(sessionComboBox);
 
         m_toolBar->addAction(actionCollection()->action(QStringLiteral("new_connection")));
@@ -998,7 +1000,7 @@ void MainWindow::showRemoteViewToolbar()
         QAction *minimizeAction = new QAction(m_toolBar);
         minimizeAction->setIcon(QIcon::fromTheme(QStringLiteral("go-down")));
         minimizeAction->setText(i18n("Minimize Full Screen Window"));
-        connect(minimizeAction, SIGNAL(triggered()), this, SLOT(minimizeFullScreen()));
+        connect(minimizeAction, &QAction::triggered, this, &MainWindow::minimizeFullScreen);
         m_toolBar->addAction(minimizeAction);
 
         m_toolBar->addAction(actionCollection()->action(QStringLiteral("take_screenshot")));
@@ -1015,7 +1017,7 @@ void MainWindow::showRemoteViewToolbar()
         stickToolBarAction->setCheckable(true);
         stickToolBarAction->setIcon(QIcon::fromTheme(QStringLiteral("object-locked")));
         stickToolBarAction->setText(i18n("Stick Toolbar"));
-        connect(stickToolBarAction, SIGNAL(triggered(bool)), m_toolBar, SLOT(setSticky(bool)));
+        connect(stickToolBarAction, &QAction::triggered, m_toolBar, &FloatingToolBar::setSticky);
         m_toolBar->addAction(stickToolBarAction);
 
         // When docked left/right, shrink the session combobox to one toolbar button wide so
@@ -1085,7 +1087,7 @@ void MainWindow::preferences()
 
     // User edited the configuration - update your local copies of the
     // configuration data
-    connect(dialog, SIGNAL(settingsChanged(QString)), this, SLOT(updateConfiguration()));
+    connect(dialog, &KConfigDialog::settingsChanged, this, &MainWindow::updateConfiguration);
 
     dialog->show();
 }
@@ -1101,9 +1103,9 @@ void MainWindow::updateConfiguration()
     m_tabWidget->setTabPosition((QTabWidget::TabPosition)Settings::tabPosition());
     m_tabWidget->setTabsClosable(Settings::tabCloseButton());
 
-    disconnect(m_tabWidget, SIGNAL(mouseMiddleClick(int)), this, SLOT(closeTab(int))); // just be sure it is not connected twice
+    disconnect(m_tabWidget, &TabbedViewWidget::mouseMiddleClick, this, &MainWindow::closeTab); // just be sure it is not connected twice
     if (Settings::tabMiddleClick())
-        connect(m_tabWidget, SIGNAL(mouseMiddleClick(int)), SLOT(closeTab(int)));
+        connect(m_tabWidget, &TabbedViewWidget::mouseMiddleClick, this, &MainWindow::closeTab);
 
     if (Settings::systemTrayIcon() && !m_systemTrayIcon) {
         m_systemTrayIcon = new SystemTrayIcon(this);
@@ -1308,20 +1310,24 @@ QWidget *MainWindow::newConnectionWidget()
         m_addressInput = new KLineEdit(m_newConnectionWidget);
         m_addressInput->setClearButtonEnabled(true);
         m_addressInput->setPlaceholderText(i18n("Type here to connect to an address and filter the list."));
-        connect(m_addressInput, SIGNAL(textChanged(QString)), remoteDesktopsModelProxy, SLOT(setFilterFixedString(QString)));
+        connect(m_addressInput, &QLineEdit::textChanged, remoteDesktopsModelProxy, &QSortFilterProxyModel::setFilterFixedString);
 
         for (RemoteViewFactory *factory : std::as_const(m_remoteViewFactories)) {
             m_protocolInput->addItem(factory->scheme());
         }
         m_protocolInput->setCurrentText(Settings::defaultProtocol());
 
-        connect(m_addressInput, SIGNAL(returnPressed()), SLOT(newConnection()));
+        connect(m_addressInput, &QLineEdit::returnPressed, this, [this]() {
+            newConnection();
+        });
         m_addressInput->setToolTip(i18n("Type an IP or DNS Name here. Clear the line to get a list of connection methods."));
 
         QPushButton *connectButton = new QPushButton(m_newConnectionWidget);
         connectButton->setToolTip(i18n("Goto Address"));
         connectButton->setIcon(QIcon::fromTheme(QStringLiteral("go-jump-locationbar")));
-        connect(connectButton, SIGNAL(clicked()), SLOT(newConnection()));
+        connect(connectButton, &QPushButton::clicked, this, [this]() {
+            newConnection();
+        });
 
         connectLayout->addWidget(addressLabel);
         connectLayout->addWidget(m_protocolInput);
@@ -1347,14 +1353,12 @@ QWidget *MainWindow::newConnectionWidget()
         m_newConnectionTableView->setSortingEnabled(true);
         m_newConnectionTableView->sortByColumn(Settings::connectionListSortColumn(), Qt::SortOrder(Settings::connectionListSortOrder()));
         m_newConnectionTableView->resizeColumnsToContents();
-        connect(m_newConnectionTableView->horizontalHeader(),
-                SIGNAL(sortIndicatorChanged(int, Qt::SortOrder)),
-                SLOT(saveConnectionListSort(int, Qt::SortOrder)));
-        connect(m_newConnectionTableView, SIGNAL(doubleClicked(QModelIndex)), SLOT(openFromRemoteDesktopsModel(QModelIndex)));
+        connect(m_newConnectionTableView->horizontalHeader(), &QHeaderView::sortIndicatorChanged, this, &MainWindow::saveConnectionListSort);
+        connect(m_newConnectionTableView, &QAbstractItemView::doubleClicked, this, &MainWindow::openFromRemoteDesktopsModel);
         // useful to edit similar address
-        connect(m_newConnectionTableView, SIGNAL(clicked(QModelIndex)), SLOT(selectFromRemoteDesktopsModel(QModelIndex)));
+        connect(m_newConnectionTableView, &QAbstractItemView::clicked, this, &MainWindow::selectFromRemoteDesktopsModel);
         m_newConnectionTableView->setContextMenuPolicy(Qt::CustomContextMenu);
-        connect(m_newConnectionTableView, SIGNAL(customContextMenuRequested(QPoint)), SLOT(showConnectionContextMenu(QPoint)));
+        connect(m_newConnectionTableView, &QWidget::customContextMenuRequested, this, &MainWindow::showConnectionContextMenu);
 
         startLayout->addWidget(m_newConnectionTableView);
     }
@@ -1437,12 +1441,12 @@ void MainWindow::createDockWidget()
     m_dockWidgetTableView->showColumn(RemoteDesktopsModel::Title);
     m_dockWidgetTableView->sortByColumn(RemoteDesktopsModel::Title, Qt::AscendingOrder);
 
-    connect(m_dockWidgetTableView, SIGNAL(doubleClicked(QModelIndex)), SLOT(openFromRemoteDesktopsModel(QModelIndex)));
+    connect(m_dockWidgetTableView, &QAbstractItemView::doubleClicked, this, &MainWindow::openFromRemoteDesktopsModel);
 
     KLineEdit *filterLineEdit = new KLineEdit(remoteDesktopsDockLayoutWidget);
     filterLineEdit->setPlaceholderText(i18n("Filter"));
     filterLineEdit->setClearButtonEnabled(true);
-    connect(filterLineEdit, SIGNAL(textChanged(QString)), remoteDesktopsModelProxy, SLOT(setFilterFixedString(QString)));
+    connect(filterLineEdit, &QLineEdit::textChanged, remoteDesktopsModelProxy, &QSortFilterProxyModel::setFilterFixedString);
     remoteDesktopsDockLayout->addWidget(filterLineEdit);
     remoteDesktopsDockLayout->addWidget(m_dockWidgetTableView);
     m_remoteDesktopsDockWidget->setWidget(remoteDesktopsDockLayoutWidget);
