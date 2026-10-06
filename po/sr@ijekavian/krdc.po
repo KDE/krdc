@@ -5,13 +5,14 @@
 # Slobodan Simic <slsimic@gmail.com>, 2005, 2009.
 # Mladen Pejakovic <pejakm@gmail.com>, 2008.
 # Dalibor Djuric <daliborddjuric@gmail.com>, 2010, 2011.
+# Nemanja Hiršl <nemhirsl@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-03-04 00:45+0000\n"
-"PO-Revision-Date: 2016-11-28 01:33+0100\n"
-"Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
+"PO-Revision-Date: 2026-10-05 12:49+0200\n"
+"Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
 "Language: sr@ijekavian\n"
 "MIME-Version: 1.0\n"
@@ -26,12 +27,12 @@ msgstr ""
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Часлав Илић,Младен Пејаковић"
+msgstr "Часлав Илић,Младен Пејаковић,Немања Хиршл"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "caslav.ilic@gmx.net,pejakm@gmail.com"
+msgstr "caslav.ilic@gmx.net,pejakm@gmail.com,nemhirsl@gmail.com"
 
 #: bookmarkmanager.cpp:37
 #, kde-format
@@ -52,10 +53,9 @@ msgstr "Памти историјат повезивања"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_WalletSupport)
 #: config/general.ui:31
-#, fuzzy, kde-format
-#| msgid "Remember passwords (KWallet)"
+#, kde-format
 msgid "Remember passwords"
-msgstr "Памти лозинке (К‑новчаник)"
+msgstr "Памти лозинке"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SystemTrayIcon)
 #: config/general.ui:38
@@ -132,18 +132,20 @@ msgid ""
 "Automatically grab all keys when entering fullscreen mode and release them "
 "when leaving fullscreen"
 msgstr ""
+"Аутоматски хватај све тастере при уласку у режим цијелог екрана и пуштај их "
+"при изласку из њега"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_GrabAllKeysOnFullscreen)
 #: config/general.ui:129
 #, kde-format
 msgid "Grab all keys when entering fullscreen"
-msgstr ""
+msgstr "Хватај све тастере при уласку у цио екран"
 
 #. i18n: ectx: property (text), widget (QLabel, defaultProtocolLabel)
 #: config/general.ui:138
 #, kde-format
 msgid "Default protocol:"
-msgstr "Подразумевани протокол:"
+msgstr "Подразумијевани протокол:"
 
 # literal-segment: vnc
 #. i18n: ectx: property (text), widget (QLineEdit, kcfg_DefaultProtocol)
@@ -207,10 +209,9 @@ msgid "Right"
 msgstr "десно"
 
 #: config/hostpreferenceslist.cpp:30
-#, fuzzy, kde-format
-#| msgid "Configure..."
+#, kde-format
 msgid "Configure…"
-msgstr "Подеси..."
+msgstr "Подеси…"
 
 #: config/hostpreferenceslist.cpp:36
 #, kde-format
@@ -329,10 +330,9 @@ msgid "Show this dialog again for this host"
 msgstr "Прикажи овај дијалог поново за овај домаћин"
 
 #: core/hostpreferences.cpp:253
-#, fuzzy, kde-format
-#| msgid "Remember password (KWallet)"
+#, kde-format
 msgid "Remember password"
-msgstr "Запамти лозинку  (К‑новчаник)"
+msgstr "Запамти лозинку"
 
 #. i18n: ectx: label, entry (OpenSessions), group (General)
 #: core/krdc.kcfg:16
@@ -343,68 +343,65 @@ msgstr "Сесије"
 #: core/remoteview.cpp:568
 #, kde-format
 msgid "Please enter the SSH password."
-msgstr ""
+msgstr "Унесите ССХ лозинку."
 
 #: core/remoteview.cpp:586
 #, kde-format
 msgid "SSH Tunnel failure"
-msgstr ""
+msgstr "Крах ССХ тунела"
 
 #: core/sshtunnelthread.cpp:99
-#, fuzzy, kde-format
-#| msgid "Connecting to %1"
+#, kde-format
 msgid "Error connecting to %1: %2"
-msgstr "Повезујем се са %1"
+msgstr "Грешка при повезивању са %1: %2"
 
 #: core/sshtunnelthread.cpp:124
-#, fuzzy, kde-format
-#| msgid "Authenticating at %1"
+#, kde-format
 msgid "Error authenticating with password: %1"
-msgstr "Аутентификујем се код %1"
+msgstr "Грешка при аутентификацији лозинком: %1"
 
 #: core/sshtunnelthread.cpp:130 core/sshtunnelthread.cpp:148
 #: core/sshtunnelthread.cpp:155 core/sshtunnelthread.cpp:163
 #, kde-format
 msgid "Error creating tunnel socket"
-msgstr ""
+msgstr "Грешка при стварању утичнице тунела"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, SshTunnelWidget)
 #: core/sshtunnelwidget.ui:14
 #, kde-format
 msgid "SSH tunnel"
-msgstr ""
+msgstr "ССХ тунел"
 
 #. i18n: ectx: property (text), widget (QCheckBox, use_ssh_tunnel)
 #: core/sshtunnelwidget.ui:32
 #, kde-format
 msgid "Connect via SSH tunnel"
-msgstr ""
+msgstr "Повежи се кроз ССХ тунел"
 
 #. i18n: ectx: property (title), widget (QGroupBox, ssh_groupBox)
 #: core/sshtunnelwidget.ui:39
 #, kde-format
 msgid "SSH tunnel options"
-msgstr ""
+msgstr "Опције ССХ тунела"
 
 #. i18n: ectx: property (text), widget (QCheckBox, use_loopback)
 #: core/sshtunnelwidget.ui:45
 #, kde-format
 msgid "Tunnel via loopback address"
-msgstr ""
+msgstr "Тунелуј преко адресе петље"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: core/sshtunnelwidget.ui:52
 #, kde-format
 msgid "Port:"
-msgstr ""
+msgstr "Порт:"
 
 # >> @title:window
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: core/sshtunnelwidget.ui:75
-#, fuzzy, kde-format
-#| msgid "Enter Username"
+#, kde-format
 msgid "User name:"
-msgstr "Унос корисничког имена"
+msgstr "Корисничко име:"
 
 #. i18n: ectx: Menu (session)
 #: krdcui.rc:8
@@ -561,7 +558,7 @@ msgstr "Само преглед"
 #: mainwindow.cpp:155
 #, kde-format
 msgid "Clipboard Sharing"
-msgstr ""
+msgstr "Дијељење клипборда"
 
 #: mainwindow.cpp:160
 #, kde-format
@@ -603,7 +600,7 @@ msgstr "Скалирај"
 #: mainwindow.cpp:186
 #, kde-format
 msgid "Scaling Factor"
-msgstr ""
+msgstr "Фактор скалирања"
 
 #: mainwindow.cpp:197
 #, kde-format
@@ -613,12 +610,12 @@ msgstr "Обиљеживачи"
 #: mainwindow.cpp:265
 #, kde-format
 msgid "Unable to load connection data from the provided file."
-msgstr ""
+msgstr "Не могу да учитам податке о вези из датог фајла."
 
 #: mainwindow.cpp:265
 #, kde-format
 msgid "Load failed"
-msgstr ""
+msgstr "Учитавање није успјело"
 
 #: mainwindow.cpp:271
 #, kde-format
@@ -741,7 +738,7 @@ msgstr "Минимизуј прозор цијелог екрана"
 #: mainwindow.cpp:903
 #, kde-format
 msgid "Stick Toolbar"
-msgstr "Залепи траку алатки"
+msgstr "Залијепи траку алатки"
 
 #: mainwindow.cpp:1010
 #, kde-format
@@ -791,18 +788,15 @@ msgstr "Филтер"
 
 #. i18n: ectx: attribute (title), widget (QWidget, mainSettingsTab)
 #: rdp/rdppreferences.ui:21
-#, fuzzy, kde-format
-#| msgctxt "General Config"
-#| msgid "General"
+#, kde-format
 msgid "General"
 msgstr "Опште"
 
 #. i18n: ectx: property (text), widget (QLabel, resolutionLabel)
 #: rdp/rdppreferences.ui:27
-#, fuzzy, kde-format
-#| msgid "Custom Resolution (...)"
+#, kde-format
 msgid "Resolution"
-msgstr "посебна резолуција (...)"
+msgstr "резолуција"
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_Resolution)
 #. i18n: ectx: property (whatsThis), widget (KComboBox, resolutionComboBox)
@@ -817,30 +811,27 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:56
-#, fuzzy, kde-format
-#| msgid "Small (800x600)"
+#, kde-format
 msgid "Small (1280x720)"
-msgstr "мала (800×600)"
+msgstr "мала (1280×720)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:61
 #, kde-format
 msgid "Medium (1600x900)"
-msgstr ""
+msgstr "средња (1600×900)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:66
-#, fuzzy, kde-format
-#| msgid "Large (1280x1024)"
+#, kde-format
 msgid "Large (1920x1080)"
-msgstr "велика (1280×1024)"
+msgstr "велика (1920×1080)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:71
-#, fuzzy, kde-format
-#| msgid "Current KRDC Size"
+#, kde-format
 msgid "Current Window Size"
-msgstr "Тренутна величина КРДЦ‑а"
+msgstr "тренутна величина прозора"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
@@ -852,10 +843,9 @@ msgstr "текућа резолуција екрана"
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
 #: rdp/rdppreferences.ui:81 vnc/vncpreferences.ui:123
-#, fuzzy, kde-format
-#| msgid "Custom Resolution (...)"
+#, kde-format
 msgid "Custom Resolution (…)"
-msgstr "посебна резолуција (...)"
+msgstr "посебна резолуција (…)"
 
 #. i18n: ectx: property (text), widget (QLabel, widthLabel)
 #: rdp/rdppreferences.ui:94 vnc/vncpreferences.ui:136
@@ -895,39 +885,38 @@ msgstr ""
 #: rdp/rdppreferences.ui:163
 #, kde-format
 msgid "Scale window contents to match resolution"
-msgstr ""
+msgstr "Скалирај садржај прозора према резолуцији"
 
 #. i18n: ectx: property (text), widget (QLabel, accelerationLabel)
 #: rdp/rdppreferences.ui:173
 #, kde-format
 msgid "Acceleration:"
-msgstr ""
+msgstr "Убрзање:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
 #: rdp/rdppreferences.ui:196
 #, kde-format
 msgctxt "Use best acceleration supported by both the server and krdc"
 msgid "Use Best Available"
-msgstr ""
+msgstr "најбоље доступно"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
 #: rdp/rdppreferences.ui:201
 #, kde-format
 msgid "Force H.264"
-msgstr ""
+msgstr "принудно Х.264"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
 #: rdp/rdppreferences.ui:206
-#, fuzzy, kde-format
-#| msgid "RemoteFX:"
+#, kde-format
 msgid "Force RemoteFX"
-msgstr "РимотФИкс:"
+msgstr "принудно римотФИкс"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
 #: rdp/rdppreferences.ui:211
 #, kde-format
 msgid "Disable All Acceleration"
-msgstr ""
+msgstr "без убрзања"
 
 #. i18n: ectx: property (text), widget (QLabel, colorDepthLabel)
 #: rdp/rdppreferences.ui:219
@@ -940,7 +929,7 @@ msgstr "&Дубина боја:"
 #, kde-format
 msgctxt "Use best color depth supported by both the server and krdc"
 msgid "Use Best Available"
-msgstr ""
+msgstr "најбоља доступна"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
 #: rdp/rdppreferences.ui:250
@@ -968,10 +957,9 @@ msgstr "ниска (8‑битно)"
 
 #. i18n: ectx: property (text), widget (QLabel, desktopScaleFactorLabel)
 #: rdp/rdppreferences.ui:273
-#, fuzzy, kde-format
-#| msgid "Desktop &resolution:"
+#, kde-format
 msgid "Desktop scale factor:"
-msgstr "&Резолуција површи:"
+msgstr "Фактор скалирања површи:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DesktopScaleFactor)
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DeviceScaleFactor)
@@ -980,43 +968,43 @@ msgstr "&Резолуција површи:"
 #: rdp/rdppreferences.ui:977
 #, kde-format
 msgid "Auto"
-msgstr ""
+msgstr "аутоматски"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DesktopScaleFactor)
 #: rdp/rdppreferences.ui:300
 #, kde-format
 msgid "Do not scale"
-msgstr ""
+msgstr "без скалирања"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DesktopScaleFactor)
 #: rdp/rdppreferences.ui:305
 #, kde-format
 msgid "Custom"
-msgstr ""
+msgstr "посебан"
 
 #. i18n: ectx: property (text), widget (QLabel, deviceScaleFactorLabel)
 #: rdp/rdppreferences.ui:337
 #, kde-format
 msgid "Device scale factor:"
-msgstr ""
+msgstr "Фактор скалирања уређаја:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DeviceScaleFactor)
 #: rdp/rdppreferences.ui:368
 #, kde-format
 msgid "100"
-msgstr ""
+msgstr "100"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DeviceScaleFactor)
 #: rdp/rdppreferences.ui:373
 #, kde-format
 msgid "140"
-msgstr ""
+msgstr "140"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DeviceScaleFactor)
 #: rdp/rdppreferences.ui:378
 #, kde-format
 msgid "180"
-msgstr ""
+msgstr "180"
 
 #. i18n: ectx: property (text), widget (QLabel, layoutLabel)
 #: rdp/rdppreferences.ui:386
@@ -1286,204 +1274,199 @@ msgstr "без звука"
 #: rdp/rdppreferences.ui:650
 #, kde-format
 msgid "Share Media:"
-msgstr "Дељење медијума:"
+msgstr "Дијељење медијума:"
 
 #. i18n: ectx: property (text), widget (QLabel, shareSmartcardLabel)
 #: rdp/rdppreferences.ui:676
 #, kde-format
 msgid "Share Smartcard:"
-msgstr ""
+msgstr "Дијељење смарт-картице:"
 
 #. i18n: ectx: property (text), widget (QLabel, consoleModeLabel)
 #: rdp/rdppreferences.ui:689
 #, kde-format
 msgid "Alternate Session Type:"
-msgstr ""
+msgstr "Алтернативни тип сесије:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ConsoleMode)
 #: rdp/rdppreferences.ui:699
 #, kde-format
 msgid "Admin (or console) session"
-msgstr ""
+msgstr "Администраторска (или конзолна) сесија"
 
 #. i18n: ectx: property (text), widget (QLabel, preventSessionLockLabel)
 #: rdp/rdppreferences.ui:706
-#, fuzzy, kde-format
-#| msgid "Sessions"
+#, kde-format
 msgid "Session lock:"
-msgstr "Сесије"
+msgstr "Закључавање сесије:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_PreventSessionLock)
 #: rdp/rdppreferences.ui:716
 #, kde-format
 msgid "Prevent remote session lock"
-msgstr ""
+msgstr "Спријечи закључавање удаљене сесије"
 
 #. i18n: ectx: attribute (title), widget (QWidget, securitySettingsTab)
 #: rdp/rdppreferences.ui:724
 #, kde-format
 msgid "Security"
-msgstr ""
+msgstr "Безбједност"
 
 #. i18n: ectx: property (text), widget (QLabel, gSecurityLabel)
 #: rdp/rdppreferences.ui:732
 #, kde-format
 msgid "Security:"
-msgstr ""
+msgstr "Безбједност:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityNLA)
 #: rdp/rdppreferences.ui:744
-#, fuzzy, kde-format
-#| msgid "LAN"
+#, kde-format
 msgid "NLA"
-msgstr "ЛАН"
+msgstr "NLA"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityTLS)
 #: rdp/rdppreferences.ui:751
 #, kde-format
 msgid "TLS"
-msgstr ""
+msgstr "ТЛС"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityRDP)
 #: rdp/rdppreferences.ui:758
 #, kde-format
 msgid "RDP"
-msgstr ""
+msgstr "РДП"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityEXT)
 #: rdp/rdppreferences.ui:765
 #, kde-format
 msgid "Ext"
-msgstr ""
+msgstr "Ext"
 
 #. i18n: ectx: property (text), widget (QLabel, TlsSecLevelLabel)
 #: rdp/rdppreferences.ui:774
 #, kde-format
 msgid "TLS security level:"
-msgstr ""
+msgstr "Ниво безбједности ТЛС‑а:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:800
 #, kde-format
 msgid "any"
-msgstr ""
+msgstr "било који"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:805
 #, kde-format
 msgid "80 bit"
-msgstr ""
+msgstr "80‑битни"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:810
 #, kde-format
 msgid "112 bit"
-msgstr ""
+msgstr "112‑битни"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:815
 #, kde-format
 msgid "128 bit"
-msgstr ""
+msgstr "128‑битни"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:820
 #, kde-format
 msgid "192 bit"
-msgstr ""
+msgstr "192‑битни"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:825
 #, kde-format
 msgid "256 bit"
-msgstr ""
+msgstr "256‑битни"
 
 #. i18n: ectx: property (text), widget (QLabel, authPkgListLabel)
 #: rdp/rdppreferences.ui:833
-#, fuzzy, kde-format
-#| msgid "Authenticating at %1"
+#, kde-format
 msgid "Authentication Package List:"
-msgstr "Аутентификујем се код %1"
+msgstr "Списак пакета за аутентификацију:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, proxySettingsTab)
 #: rdp/rdppreferences.ui:849
 #, kde-format
 msgid "Proxy"
-msgstr ""
+msgstr "Прокси"
 
 #. i18n: ectx: property (text), widget (QLabel, protocolLabel)
 #: rdp/rdppreferences.ui:857
-#, fuzzy, kde-format
-#| msgid "Default protocol:"
+#, kde-format
 msgid "Protocol:"
-msgstr "Подразумевани протокол:"
+msgstr "Протокол:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ProxyProtocol)
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_GatewayTransportType)
 #: rdp/rdppreferences.ui:871 rdp/rdppreferences.ui:982
 #, kde-format
 msgid "HTTP"
-msgstr ""
+msgstr "ХТТП"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ProxyProtocol)
 #: rdp/rdppreferences.ui:876
 #, kde-format
 msgid "SOCKS"
-msgstr ""
+msgstr "СОКС"
 
 #. i18n: ectx: property (text), widget (QLabel, pPasswordLabel)
 #. i18n: ectx: property (text), widget (QLabel, gPasswordLabel)
 #: rdp/rdppreferences.ui:887 rdp/rdppreferences.ui:943
 #, kde-format
 msgid "Password:"
-msgstr ""
+msgstr "Лозинка:"
 
 # >> @title:window
 #. i18n: ectx: property (text), widget (QLabel, pUsernameLabel)
 #. i18n: ectx: property (text), widget (QLabel, gUsernameLabel)
 #: rdp/rdppreferences.ui:897 rdp/rdppreferences.ui:936
-#, fuzzy, kde-format
-#| msgid "Enter Username"
+#, kde-format
 msgid "Username:"
-msgstr "Унос корисничког имена"
+msgstr "Корисничко име:"
 
 #. i18n: ectx: property (text), widget (QLabel, pHostLabel)
 #. i18n: ectx: property (text), widget (QLabel, gServerLabel)
 #: rdp/rdppreferences.ui:904 rdp/rdppreferences.ui:929
 #, kde-format
 msgid "Server:"
-msgstr ""
+msgstr "Сервер:"
 
 #. i18n: ectx: property (placeholderText), widget (KLineEdit, kcfg_ProxyHost)
 #. i18n: ectx: property (placeholderText), widget (KLineEdit, kcfg_GatewayServer)
 #: rdp/rdppreferences.ui:911 rdp/rdppreferences.ui:950
 #, kde-format
 msgid "host:port"
-msgstr ""
+msgstr "домаћин:порт"
 
 #. i18n: ectx: attribute (title), widget (QWidget, gatewaySettingsTab)
 #: rdp/rdppreferences.ui:921
 #, kde-format
 msgid "Gateway"
-msgstr ""
+msgstr "Мрежни излаз"
 
 #. i18n: ectx: property (text), widget (QLabel, gTransportTypeLabel)
 #: rdp/rdppreferences.ui:963
 #, kde-format
 msgid "Transport type:"
-msgstr ""
+msgstr "Тип транспорта:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_GatewayTransportType)
 #: rdp/rdppreferences.ui:987
 #, kde-format
 msgid "RPC"
-msgstr ""
+msgstr "РПЦ"
 
 #. i18n: ectx: property (text), widget (QLabel, gDomainLabel)
 #: rdp/rdppreferences.ui:995
 #, kde-format
 msgid "Domain:"
-msgstr ""
+msgstr "Домен:"
 
 #: rdp/rdpsession.cpp:869
 #, kde-format
@@ -1495,43 +1478,47 @@ msgid ""
 "Issuer: %5\n"
 "Fingerprint: %6\n"
 msgstr ""
+"Домаћин: %1:%2\n"
+"Уобичајено име: %3\n"
+"Предмет: %4\n"
+"Издавач: %5\n"
+"Отисак: %6\n"
 
 #: rdp/rdpview.cpp:202
-#, fuzzy, kde-format
-#| msgid "Access to the system requires a password."
+#, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
-msgstr "Приступ систему захтијева лозинку."
+msgstr "Приступ овом систему захтијева корисничко име и лозинку."
 
 #: rdp/rdpview.cpp:235
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
-msgstr ""
+msgstr "Сертификат за овај систем није познат. Желите ли да наставите?"
 
 #: rdp/rdpview.cpp:236
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
-msgstr ""
+msgstr "Провјера сертификата"
 
 #: rdp/rdpview.cpp:241 rdp/rdpview.cpp:266
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
-msgstr ""
+msgstr "Запамти овај сертификат"
 
 #: rdp/rdpview.cpp:260
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
-msgstr ""
+msgstr "Сертификат за овај систем се промијенио. Желите ли да наставите?"
 
 #: rdp/rdpview.cpp:261
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
-msgstr ""
+msgstr "Сертификат је промијењен"
 
 #: rdp/rdpview.cpp:264
 #, kde-format
@@ -1542,13 +1529,16 @@ msgid ""
 "New Certificate:\n"
 "%2"
 msgstr ""
+"Претходни сертификат:\n"
+"%1\n"
+"Нови сертификат:\n"
+"%2"
 
 #: rdp/rdpview.cpp:296
-#, fuzzy, kde-format
-#| msgid "Connection Failure"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Login Failure"
-msgstr "Повезивање није успјело"
+msgstr "Пријављивање није успјело"
 
 #: rdp/rdpview.cpp:297
 #, kde-format
@@ -1557,12 +1547,14 @@ msgid ""
 "Unable to login with the provided credentials. Please double check the user "
 "and password."
 msgstr ""
+"Не могу да се пријавим датим акредитивима. Још једном провјерите корисника и "
+"лозинку."
 
 #: rdp/rdpview.cpp:306
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Account Problems"
-msgstr ""
+msgstr "Проблеми са налогом"
 
 #: rdp/rdpview.cpp:307
 #, kde-format
@@ -1571,12 +1563,14 @@ msgid ""
 "The provided account is not allowed to log in to this machine. Please "
 "contact your system administrator."
 msgstr ""
+"Дати налог нема дозволу да се пријави на ову машину. Обратите се "
+"администратору система."
 
 #: rdp/rdpview.cpp:312
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Password Problems"
-msgstr ""
+msgstr "Проблеми са лозинком"
 
 #: rdp/rdpview.cpp:313
 #, kde-format
@@ -1585,70 +1579,65 @@ msgid ""
 "Unable to login with the provided password. Please contact your system "
 "administrator to change it."
 msgstr ""
+"Не могу да се пријавим датом лозинком. Обратите се администратору система да "
+"је промијени."
 
 #: rdp/rdpview.cpp:319
-#, fuzzy, kde-format
-#| msgid "Connection"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Lost"
-msgstr "Веза"
+msgstr "Веза је изгубљена"
 
 #: rdp/rdpview.cpp:320
 #, kde-format
 msgctxt "@label"
 msgid "Lost connection to the server."
-msgstr ""
+msgstr "Веза са сервером је изгубљена."
 
 #: rdp/rdpview.cpp:322
-#, fuzzy, kde-format
-#| msgid "KRDC Konsole Connection"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Could not Connect"
-msgstr "Веза Конзоле кроз КРДЦ"
+msgstr "Не могу да се повежем"
 
 #: rdp/rdpview.cpp:323
 #, kde-format
 msgctxt "@label"
 msgid "Could not connect to the server."
-msgstr ""
+msgstr "Не могу да се повежем са сервером."
 
 #: rdp/rdpview.cpp:328
-#, fuzzy, kde-format
-#| msgid "Server not found."
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Server not Found"
-msgstr "Сервер није нађен."
+msgstr "Сервер није нађен"
 
 #: rdp/rdpview.cpp:329
 #, kde-format
 msgctxt "@label"
 msgid "Could not find the server."
-msgstr ""
+msgstr "Не могу да нађем сервер."
 
 #: rdp/rdpview.cpp:332
-#, fuzzy, kde-format
-#| msgid "Connection Failure"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Refused"
-msgstr "Повезивање није успјело"
+msgstr "Веза је одбијена"
 
 #: rdp/rdpview.cpp:333
-#, fuzzy, kde-format
-#| msgid "VNC server closed connection."
+#, kde-format
 msgctxt "@label"
 msgid "The server refused the connection request."
-msgstr "ВНЦ сервер је затворио везу."
+msgstr "Сервер је одбио захтјев за везу."
 
 #: rdp/rdpview.cpp:343
-#, fuzzy, kde-format
-#| msgid "Connection Failure"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Closed"
-msgstr "Повезивање није успјело"
+msgstr "Веза је затворена"
 
 #: rdp/rdpview.cpp:348
-#, fuzzy, kde-format
-#| msgid "Connection Failure"
+#, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Failed"
 msgstr "Повезивање није успјело"
@@ -1657,13 +1646,13 @@ msgstr "Повезивање није успјело"
 #, kde-format
 msgctxt "@label"
 msgid "An unknown error occurred"
-msgstr ""
+msgstr "Дошло је до непознате грешке"
 
 #: rdp/rdpview.cpp:360
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Logon Error"
-msgstr ""
+msgstr "Грешка при пријављивању"
 
 #: rdp/rdpviewfactory.cpp:26
 #, kde-format
@@ -1671,10 +1660,9 @@ msgid "Connect to a Windows Remote Desktop (RDP)"
 msgstr "Повежи се на удаљену виндоуз површ (РДП)"
 
 #: rdp/rdpviewfactory.cpp:109
-#, fuzzy, kde-format
-#| msgid "New RDP Connection..."
+#, kde-format
 msgid "New RDP Connection…"
-msgstr "Нова РДП веза..."
+msgstr "Нова РДП веза…"
 
 #: rdp/rdpviewfactory.cpp:120
 #, kde-format
@@ -1682,7 +1670,7 @@ msgid ""
 "<html>Enter the address here. Port is optional.<br /><i>Example: "
 "rdpserver:3389 (host:port)</i></html>"
 msgstr ""
-"<html>Унесите адресу овдје. Порт није обавезан.<br /><i>На пример: "
+"<html>Унесите адресу овдје. Порт није обавезан.<br /><i>На примјер: "
 "<tt>rdpserver:3389</tt> (домаћин:порт)</i></html>"
 
 #: remotedesktopsmodel.cpp:112
@@ -1802,10 +1790,9 @@ msgstr "Веза"
 
 #. i18n: ectx: property (text), widget (QLabel, connectionLabel)
 #: vnc/vncpreferences.ui:23
-#, fuzzy, kde-format
-#| msgid "Connection type:"
+#, kde-format
 msgid "Connection &type:"
-msgstr "Тип везе:"
+msgstr "&Тип везе:"
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_Quality)
 #: vnc/vncpreferences.ui:39
@@ -1884,7 +1871,7 @@ msgstr "веома велика (1600×1200)"
 #: vnc/vncpreferences.ui:211
 #, kde-format
 msgid "Don't copy passwords from supported password managers to remote hosts"
-msgstr ""
+msgstr "Не копирај лозинке из подржаних менаџера лозинки на удаљене домаћине"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, dont_copy_passwords)
 #: vnc/vncpreferences.ui:214
@@ -1894,6 +1881,9 @@ msgid ""
 "additional MIME type \"x-kde-passwordManagerHint\" which is used for "
 "filtering."
 msgstr ""
+"Подржани менаџери лозинки (попут KeePassXC) означавају копиране лозинке "
+"додатним МИМЕ типом „x-kde-passwordManagerHint“, који се користи за "
+"филтрирање."
 
 #: vnc/vncview.cpp:240
 #, kde-format
@@ -1911,10 +1901,9 @@ msgid "VNC failure"
 msgstr "Крах ВНЦ‑а"
 
 #: vnc/vncviewfactory.cpp:47
-#, fuzzy, kde-format
-#| msgid "New VNC Connection..."
+#, kde-format
 msgid "New VNC Connection…"
-msgstr "Нова ВНЦ веза..."
+msgstr "Нова ВНЦ веза…"
 
 #: vnc/vncviewfactory.cpp:52
 #, kde-format
@@ -1927,143 +1916,5 @@ msgid ""
 "<html>Enter the address here.<br /><i>Example: vncserver:1 (host:port / "
 "screen)</i></html>"
 msgstr ""
-"<html>Унесите адресу овдје.<br /><i>Пример: <tt>vncserver:1</tt> (домаћин:"
+"<html>Унесите адресу овдје.<br /><i>Примјер: <tt>vncserver:1</tt> (домаћин:"
 "порт/екран)</i></html>"
-
-#~ msgctxt ""
-#~ "window title when in full screen mode (for example displayed in tasklist)"
-#~ msgid "KDE Remote Desktop Client (Full Screen)"
-#~ msgstr "КДЕ‑ов клијент удаљене површи (цио екран)"
-
-#~ msgid "Abner Silva"
-#~ msgstr "Абнер Силва"
-
-#~ msgid "Telepathy Tubes Integration"
-#~ msgstr "Уклапање цеви Телепатије"
-
-#, fuzzy
-#~| msgid "Access to the system requires a password."
-#~ msgctxt "@label"
-#~ msgid "Access to this system requires a password."
-#~ msgstr "Приступ систему захтијева лозинку."
-
-#~ msgid "New Konsole Connection..."
-#~ msgstr "Нова веза Конзоле..."
-
-#~ msgid ""
-#~ "<html>Enter the address here. Port is optional.<br /><i>Example: "
-#~ "konsoleserver (host)</i></html>"
-#~ msgstr ""
-#~ "<html>Унесите адресу овде. Порт није обавезан.<br /><i>На примјер: "
-#~ "<tt>konsoleserver</tt> (домаћин)</i></html>"
-
-#~ msgid "ALSA"
-#~ msgstr "Алса"
-
-#~ msgid "PulseAudio"
-#~ msgstr "Пулс‑аудио"
-
-#~ msgid "None"
-#~ msgstr "нема"
-
-#~ msgctxt "label for performance settings in preferences dialog"
-#~ msgid "Performance:"
-#~ msgstr "Перформансе:"
-
-#~ msgid "Modem"
-#~ msgstr "модем"
-
-#~ msgid "Broadband"
-#~ msgstr "широкопојасна"
-
-#~ msgid "Enhanced visual experience"
-#~ msgstr "Побољшан визуелни доживљај"
-
-# rewrite-msgid: /Remote Desktop Protocol/RDP/
-#~ msgid ""
-#~ "RemoteFX covers a set of technologies that enhance visual experience of "
-#~ "the Remote Desktop Protocol."
-#~ msgstr ""
-#~ "РимотФИкс обухвата скуп технологија за побољшавање визуелног доживљаја "
-#~ "преко протокола РДП."
-
-#~ msgid "Share a local media directory with the remote host."
-#~ msgstr "Поделите локалну медија фасциклу са удаљеним домаћином."
-
-#~ msgid "Expert Options"
-#~ msgstr "Зналачке опције"
-
-#~ msgid "Console login:"
-#~ msgstr "Конзолна пријава:"
-
-#~ msgid "Attach to Windows Server console"
-#~ msgstr "Прикачи се на конзолу Виндоуза сервера"
-
-#~ msgid "Extra options:"
-#~ msgstr "Додатне опције:"
-
-#~ msgid "Here you can enter additional xfreerdp (FreeRDP) options."
-#~ msgstr "Овдје можете унијети додатне опције ФриРДП‑а (xfreerdp)."
-
-#~ msgid "Login"
-#~ msgstr "Пријава"
-
-#~ msgid "Default user name:"
-#~ msgstr "Подразумијевано корисничко име:"
-
-#~ msgid "No default user name"
-#~ msgstr "Нема подразумијеваног корисничког имена"
-
-#~ msgid "Automatically recognize \"LDAP\"-Logins and share passwords"
-#~ msgstr "Аутоматски препознај ЛДАП‑пријаве и подијели лозинке"
-
-# >> @title:window
-#~ msgid "Enter Username"
-#~ msgstr "Унос корисничког имена"
-
-#~ msgid "Please enter the username you would like to use for login."
-#~ msgstr "Унесите корисничко име с којим желите да се пријавите."
-
-#, fuzzy
-#~| msgid ""
-#~| "Could not start \"xfreerdp\"; make sure xfreerdp is properly installed."
-#~ msgid "Could not start \"%1\"; make sure %1 is properly installed."
-#~ msgstr "Не могу да извршим ‘xfreerdp’; проверите инсталацију."
-
-#~ msgid "RDP Failure"
-#~ msgstr "Крах РДП‑а"
-
-#~ msgid ""
-#~ "The version of \"xfreerdp\" you are using is too old.\n"
-#~ "xfreerdp 1.0.2 or greater is required."
-#~ msgstr ""
-#~ "Користите застарјело издање ‘xfreerdp’.\n"
-#~ "Потребно је бар 1.0.2 или новије."
-
-#~ msgid ""
-#~ "Connection failed. You might have passed a wrong address or username."
-#~ msgstr "Повезивање пропало. Можда сте унели лошу адресу или корисничко име."
-
-#~ msgid "Name or service not known."
-#~ msgstr "Име или сервис нису познати."
-
-#~ msgid "Connection attempt to host failed."
-#~ msgstr "Покушај повезивања са домаћином није успио."
-
-#~ msgid "Authentication failure, check credentials."
-#~ msgstr "Аутентификација пропала, проверите акредитиве."
-
-#~ msgid ""
-#~ "Connection attempt to host failed. Security negotiation or connection "
-#~ "failure."
-#~ msgstr ""
-#~ "Покушај повезивања са домаћином није успио. Крах безбедносног преговарања "
-#~ "или везе."
-
-# >> @info:tooltip/plain
-#~ msgid ""
-#~ "The application \"xfreerdp\" cannot be found on your system; make sure it "
-#~ "is properly installed if you need RDP support."
-#~ msgstr ""
-#~ "Наредба ‘xfreerdp’ није нађена на систему; ако желите подршку за РДП, "
-#~ "провјерите да ли је правилно инсталирана"
