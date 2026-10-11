@@ -59,7 +59,7 @@ msgstr ""
 #: config/general.ui:24
 #, kde-format
 msgid "Remember connection history"
-msgstr "Сохранять журнал соединений"
+msgstr "Сохранять журнал подключений"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_WalletSupport)
 #: config/general.ui:31
@@ -101,7 +101,7 @@ msgstr "При подключении"
 #: config/general.ui:99
 #, kde-format
 msgid "Show the preferences dialog for new connections"
-msgstr "Предлагать менять параметры для новых соединений"
+msgstr "Предлагать менять параметры для новых подключений"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_ResizeOnConnect)
 #: config/general.ui:106
@@ -346,7 +346,7 @@ msgstr "Сеансы"
 #: core/remoteview.cpp:568
 #, kde-format
 msgid "Please enter the SSH password."
-msgstr "Введите пароль SSH-соединения."
+msgstr "Введите пароль SSH."
 
 #: core/remoteview.cpp:586
 #, kde-format
@@ -486,7 +486,7 @@ msgstr "Arend van Beelen jr."
 #: main.cpp:48
 #, kde-format
 msgid "Initial RDP backend"
-msgstr "Изначальная версия движка RDP"
+msgstr "Изначальная версия модуля RDP"
 
 #: main.cpp:49
 #, kde-format
@@ -529,7 +529,7 @@ msgstr "Клиент удалённого рабочего стола для KDE
 #: mainwindow.cpp:1241
 #, kde-format
 msgid "New Connection"
-msgstr "Новое соединение"
+msgstr "Новое подключение"
 
 #: mainwindow.cpp:134
 #, kde-format
@@ -609,7 +609,7 @@ msgstr "Закладки"
 #: mainwindow.cpp:265
 #, kde-format
 msgid "Unable to load connection data from the provided file."
-msgstr "Не удалось загрузить данные соединения из предоставленного файла."
+msgstr "Не удалось загрузить данные подключения из предоставленного файла."
 
 #: mainwindow.cpp:265
 #, kde-format
@@ -648,12 +648,12 @@ msgstr "Аутентификация в %1"
 #: mainwindow.cpp:435
 #, kde-format
 msgid "Preparing connection to %1"
-msgstr "Подготовка соединения с %1"
+msgstr "Подготовка подключения к %1"
 
 #: mainwindow.cpp:439
 #, kde-format
 msgid "Connected to %1"
-msgstr "Установлено соединение с %1"
+msgstr "Установлено подключение к %1"
 
 #: mainwindow.cpp:563
 #, kde-format
@@ -1580,13 +1580,13 @@ msgstr ""
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Lost"
-msgstr "Потеря соединения"
+msgstr "Потеря подключения"
 
 #: rdp/rdpview.cpp:320
 #, kde-format
 msgctxt "@label"
 msgid "Lost connection to the server."
-msgstr "Пропало соединение с сервером."
+msgstr "Потеряно подключение к серверу."
 
 #: rdp/rdpview.cpp:322
 #, kde-format
@@ -1628,7 +1628,7 @@ msgstr "Сервер отклонил запрос на подключение."
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Closed"
-msgstr "Закрытие соединения"
+msgstr "Закрытие подключения"
 
 #: rdp/rdpview.cpp:348
 #, kde-format
@@ -1747,7 +1747,7 @@ msgstr "Ошибка аутентификации в VNC. Слишком мно�
 #: vnc/vncclientthread.cpp:358
 #, kde-format
 msgid "VNC server closed connection."
-msgstr "Сервер VNC закрыл соединение."
+msgstr "Сервер VNC закрыл подключение."
 
 #: vnc/vncclientthread.cpp:365
 #, kde-format
@@ -1757,7 +1757,7 @@ msgstr "Разъединено: %1."
 #: vnc/vncclientthread.cpp:570
 #, kde-format
 msgid "Reconnecting."
-msgstr "Повторное соединение."
+msgstr "Повторное подключение."
 
 #: vnc/vncclientthread.cpp:638
 #, kde-format
@@ -1773,13 +1773,13 @@ msgstr "Подключено."
 #: vnc/vncpreferences.ui:17
 #, kde-format
 msgid "Connection"
-msgstr "Соединение"
+msgstr "Подключение"
 
 #. i18n: ectx: property (text), widget (QLabel, connectionLabel)
 #: vnc/vncpreferences.ui:23
 #, kde-format
 msgid "Connection &type:"
-msgstr "&Тип соединения:"
+msgstr "&Тип подключения:"
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_Quality)
 #: vnc/vncpreferences.ui:39
@@ -1793,8 +1793,8 @@ msgid ""
 "high speed connections and results in lower image quality, especially in "
 "'Low Quality' mode."
 msgstr ""
-"Укажите скорость соединения между компьютерами. Помните, что даже если у вас "
-"высокоскоростное подключение по выделенной сети, это не поможет, если "
+"Укажите скорость подключения между компьютерами. Помните, что даже если у "
+"вас высокоскоростное подключение по выделенной сети, это не поможет, если "
 "удалённый компьютер подключён через медленный модем. Слишком высокий уровень "
 "качества при медленном подключении увеличит задержку (время отклика). Выбор "
 "более низкого качества уменьшит задержку и проявится в низком качестве "
