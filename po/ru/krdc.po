@@ -51,9 +51,7 @@ msgstr "Журнал"
 #: config/general.ui:17
 #, kde-format
 msgid "Remember open sessions for next startup"
-msgstr ""
-"Запоминать открытые сеансы для их возобновления при следующем запуске "
-"программы"
+msgstr "Восстанавливать открытые сеансы при запуске"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_RememberHistory)
 #: config/general.ui:24
@@ -89,7 +87,7 @@ msgstr "Сохранять соотношение сторон при измен
 #: config/general.ui:61
 #, kde-format
 msgid "Background color of empty place:"
-msgstr "Цвет пустого места:"
+msgstr "Цвет фона вокруг экрана:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, connectionGroupBox)
 #: config/general.ui:93
@@ -101,7 +99,7 @@ msgstr "При подключении"
 #: config/general.ui:99
 #, kde-format
 msgid "Show the preferences dialog for new connections"
-msgstr "Предлагать менять параметры для новых подключений"
+msgstr "Показывать параметры для новых подключений"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_ResizeOnConnect)
 #: config/general.ui:106
@@ -117,7 +115,7 @@ msgstr ""
 #: config/general.ui:109
 #, kde-format
 msgid "Resize to fit"
-msgstr "Изменять до подходящего размера"
+msgstr "Подгонять размер окна"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_FullscreenOnConnect)
 #: config/general.ui:116
@@ -133,7 +131,7 @@ msgstr ""
 #: config/general.ui:119
 #, kde-format
 msgid "Switch to Fullscreen if appropriate"
-msgstr "Переключаться по возможности в полноэкранный режим"
+msgstr "Переходить в полноэкранный режим, если возможно"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_GrabAllKeysOnFullscreen)
 #: config/general.ui:126
@@ -149,7 +147,7 @@ msgstr ""
 #: config/general.ui:129
 #, kde-format
 msgid "Grab all keys when entering fullscreen"
-msgstr "Захватывать все клавиши в полноэкранном режиме"
+msgstr "Перехватывать все нажатия клавиш в полноэкранном режиме"
 
 #. i18n: ectx: property (text), widget (QLabel, defaultProtocolLabel)
 #: config/general.ui:138
@@ -179,7 +177,7 @@ msgstr "Всегда показывать панель вкладок"
 #: config/general.ui:170
 #, kde-format
 msgid "Show close button on tabs"
-msgstr "Отображать кнопки закрытия вкладок"
+msgstr "Показывать кнопки закрытия на вкладках"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabMiddleClick)
 #: config/general.ui:177
@@ -191,7 +189,7 @@ msgstr "Закрывать вкладку щелчком средней кноп
 #: config/general.ui:186
 #, kde-format
 msgid "Tab position:"
-msgstr "Позиция вкладки:"
+msgstr "Положение вкладок:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TabPosition)
 #: config/general.ui:194
@@ -343,7 +341,7 @@ msgstr ""
 #: core/hostpreferences.cpp:278
 #, kde-format
 msgid "Show this dialog again for this host"
-msgstr "Показывать это окно ещё раз для этого хоста"
+msgstr "Снова показать для этого хоста"
 
 #: core/hostpreferences.cpp:282
 #, kde-format
@@ -578,7 +576,7 @@ msgstr "Совместное использование буфера обмен�
 #: mainwindow.cpp:164
 #, kde-format
 msgid "Disconnect"
-msgstr "Разъединить"
+msgstr "Отключиться"
 
 #: mainwindow.cpp:172
 #, kde-format
@@ -827,19 +825,19 @@ msgstr ""
 #: rdp/rdppreferences.ui:56 spice/spicepreferences.ui:46
 #, kde-format
 msgid "Small (1280x720)"
-msgstr "Маленький (1280x720)"
+msgstr "Низкое (1280x720)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:61 spice/spicepreferences.ui:51
 #, kde-format
 msgid "Medium (1600x900)"
-msgstr "Средний (1600x900)"
+msgstr "Среднее (1600x900)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:66 spice/spicepreferences.ui:56
 #, kde-format
 msgid "Large (1920x1080)"
-msgstr "Большой (1920x1080)"
+msgstr "Высокое (1920x1080)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:71 spice/spicepreferences.ui:61
@@ -910,7 +908,7 @@ msgstr ""
 #: rdp/rdppreferences.ui:168 spice/spicepreferences.ui:147
 #, kde-format
 msgid "Scale window contents to match resolution"
-msgstr "Масштабировать содержимое окна в соответствии с разрешением"
+msgstr "Подгонять содержимое окна под разрешение"
 
 #. i18n: ectx: property (text), widget (QLabel, accelerationLabel)
 #: rdp/rdppreferences.ui:178
@@ -923,19 +921,19 @@ msgstr "Ускорение:"
 #, kde-format
 msgctxt "Use best acceleration supported by both the server and krdc"
 msgid "Use Best Available"
-msgstr "Использовать лучший доступный вариант"
+msgstr "Наилучшее доступное"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
 #: rdp/rdppreferences.ui:206
 #, kde-format
 msgid "Force H.264"
-msgstr "Принудительное использование H.264"
+msgstr "Только H.264"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
 #: rdp/rdppreferences.ui:211
 #, kde-format
 msgid "Force RemoteFX"
-msgstr "Принудительное использование RemoteFX"
+msgstr "Только RemoteFX"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Acceleration)
 #: rdp/rdppreferences.ui:216
@@ -954,7 +952,7 @@ msgstr "Глубина &цвета:"
 #, kde-format
 msgctxt "Use best color depth supported by both the server and krdc"
 msgid "Use Best Available"
-msgstr "Использовать лучший доступный вариант"
+msgstr "Наилучшая доступная"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
 #: rdp/rdppreferences.ui:255
@@ -966,7 +964,7 @@ msgstr "True Color с прозрачностью (32 бита)"
 #: rdp/rdppreferences.ui:260
 #, kde-format
 msgid "True Color (24 Bit)"
-msgstr "True Color (24 бит)"
+msgstr "True Color (24 бита)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
 #: rdp/rdppreferences.ui:265
@@ -984,8 +982,7 @@ msgstr "Low Color (8 бит)"
 #: rdp/rdppreferences.ui:278
 #, kde-format
 msgid "Desktop scale factor:"
-msgstr ""
-"Коэффициент масштабирования рабочего стола и приложений рабочего стола:"
+msgstr "Масштаб рабочего стола:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DesktopScaleFactor)
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DeviceScaleFactor)
@@ -1012,7 +1009,7 @@ msgstr "Другой"
 #: rdp/rdppreferences.ui:342
 #, kde-format
 msgid "Device scale factor:"
-msgstr "Коэффициент масштабирования приложений из магазина:"
+msgstr "Масштаб устройства:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DeviceScaleFactor)
 #: rdp/rdppreferences.ui:373
@@ -1275,7 +1272,7 @@ msgstr "Турецкая (tr)"
 #, kde-format
 msgctxt "label for soundsettings in preferences dialog"
 msgid "Sound:"
-msgstr "Звук:"
+msgstr "Воспроизведение звука:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Sound)
 #: rdp/rdppreferences.ui:637
@@ -1299,19 +1296,19 @@ msgstr "Отключить звук"
 #: rdp/rdppreferences.ui:655
 #, kde-format
 msgid "Share Media:"
-msgstr "Общий ресурс:"
+msgstr "Общая папка:"
 
 #. i18n: ectx: property (text), widget (QLabel, shareSmartcardLabel)
 #: rdp/rdppreferences.ui:681
 #, kde-format
 msgid "Share Smartcard:"
-msgstr "Общий доступ к смарт-карте:"
+msgstr "Смарт-карта:"
 
 #. i18n: ectx: property (text), widget (QLabel, consoleModeLabel)
 #: rdp/rdppreferences.ui:694
 #, kde-format
 msgid "Alternate Session Type:"
-msgstr "Альтернативный тип сеанса:"
+msgstr "Тип сеанса:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ConsoleMode)
 #: rdp/rdppreferences.ui:704
@@ -1870,7 +1867,7 @@ msgstr "Сервер VNC закрыл подключение."
 #: vnc/vncclientthread.cpp:365
 #, kde-format
 msgid "Disconnected: %1."
-msgstr "Разъединено: %1."
+msgstr "Отключено: %1."
 
 #: vnc/vncclientthread.cpp:570
 #, kde-format
@@ -1934,7 +1931,7 @@ msgstr "Низкое качество (модем, ISDN, медленный Ин
 #: vnc/vncpreferences.ui:63
 #, kde-format
 msgid "Scale to Size:"
-msgstr "Масштабировать к разрешению:"
+msgstr "Масштабировать до размера:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, resolutionComboBox)
 #: vnc/vncpreferences.ui:93
@@ -1970,8 +1967,7 @@ msgstr "Очень большое (1600x1200)"
 #: vnc/vncpreferences.ui:211
 #, kde-format
 msgid "Don't copy passwords from supported password managers to remote hosts"
-msgstr ""
-"Не копировать пароли из поддерживаемых диспетчеров паролей на удалённые хосты"
+msgstr "Не передавать на удалённый хост пароли из диспетчеров паролей"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, dont_copy_passwords)
 #: vnc/vncpreferences.ui:214
