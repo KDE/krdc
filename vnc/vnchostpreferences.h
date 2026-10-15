@@ -23,6 +23,9 @@ public:
 
     bool dontCopyPasswords() const;
 
+    int scrollMultiplier() const;
+    void setScrollMultiplier(int multiplier);
+
 protected:
     void acceptConfig() override;
 

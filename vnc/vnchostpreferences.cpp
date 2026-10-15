@@ -11,6 +11,10 @@
 
 static const char quality_config_key[] = "quality";
 static const char dont_copy_passwords_config_key[] = "dont_copy_passwords";
+static const char scroll_multiplier_config_key[] = "scroll_multiplier";
+
+static const int scroll_multiplier_min = 1;
+static const int scroll_multiplier_max = 128;
 
 VncHostPreferences::VncHostPreferences(KConfigGroup configGroup, QObject *parent)
     : HostPreferences(configGroup, parent)
@@ -36,6 +40,7 @@ QWidget *VncHostPreferences::createProtocolSpecificConfigPage(QWidget *sshTunnel
     vncUi.kcfg_ScalingWidth->setValue(width());
     vncUi.kcfg_ScalingHeight->setValue(height());
     vncUi.dont_copy_passwords->setChecked(dontCopyPasswords());
+    vncUi.kcfg_ScrollMultiplier->setValue(scrollMultiplier());
     setupVncSettingsForm(vncUi);
 
     return vncPage;
@@ -50,6 +55,7 @@ void VncHostPreferences::acceptConfig()
         setHeight(vncUi.kcfg_ScalingHeight->value());
         setWidth(vncUi.kcfg_ScalingWidth->value());
     }
+    setScrollMultiplier(vncUi.kcfg_ScrollMultiplier->value());
 }
 
 void VncHostPreferences::setQuality(RemoteView::Quality quality)
@@ -71,4 +77,15 @@ bool VncHostPreferences::dontCopyPasswords() const
 void VncHostPreferences::setDontCopyPasswords(bool dontCopyPasswords)
 {
     m_configGroup.writeEntry(dont_copy_passwords_config_key, dontCopyPasswords);
+}
+
+int VncHostPreferences::scrollMultiplier() const
+{
+    const int multiplier = m_configGroup.readEntry(scroll_multiplier_config_key, Settings::scrollMultiplier());
+    return qBound(scroll_multiplier_min, multiplier, scroll_multiplier_max);
+}
+
+void VncHostPreferences::setScrollMultiplier(int multiplier)
+{
+    m_configGroup.writeEntry(scroll_multiplier_config_key, qBound(scroll_multiplier_min, multiplier, scroll_multiplier_max));
 }

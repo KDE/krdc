@@ -40,6 +40,7 @@ VncView::VncView(QWidget *parent, const QUrl &url, KConfigGroup configGroup)
     , m_verticalFactor(1.0)
     , m_wheelRemainderV(0)
     , m_wheelRemainderH(0)
+    , m_scrollMultiplier(1)
     , m_forceLocalCursor(false)
 {
     m_url = url;
@@ -193,6 +194,7 @@ bool VncView::startConnection()
     quality = m_hostPreferences->quality();
 
     vncThread.setQuality(quality);
+    m_scrollMultiplier = m_hostPreferences->scrollMultiplier();
     vncThread.setDevicePixelRatio(devicePixelRatioF());
 
     // set local cursor on by default because low quality mostly means slow internet connection
@@ -535,15 +537,17 @@ void VncView::handleWheelEvent(QWheelEvent *event)
     const int x = qRound(pos.x() / m_horizontalFactor);
     const int y = qRound(pos.y() / m_verticalFactor);
 
-    // Fast movement might generate more than one tick, loop for each axis
+    // Fast movement might generate more than one tick, loop for each axis.
+    // Each tick is sent m_scrollMultiplier times, as some servers (e.g. macOS
+    // Screen Sharing) scroll very little per RFB wheel event.
     int eb = verTicks < 0 ? 0x10 : 0x08;
-    for (int i = 0; i < std::abs(verTicks); i++) {
+    for (int i = 0; i < std::abs(verTicks) * m_scrollMultiplier; i++) {
         vncThread.mouseEvent(x, y, eb | m_buttonMask);
         vncThread.mouseEvent(x, y, m_buttonMask);
     }
 
     eb = horTicks < 0 ? 0x40 : 0x20;
-    for (int i = 0; i < std::abs(horTicks); i++) {
+    for (int i = 0; i < std::abs(horTicks) * m_scrollMultiplier; i++) {
         vncThread.mouseEvent(x, y, eb | m_buttonMask);
         vncThread.mouseEvent(x, y, m_buttonMask);
     }

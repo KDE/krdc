@@ -67,6 +67,7 @@ private:
     qreal m_verticalFactor;
     int m_wheelRemainderV;
     int m_wheelRemainderH;
+    int m_scrollMultiplier;
     VncHostPreferences *m_hostPreferences;
     QImage m_frame;
     bool m_forceLocalCursor;
