@@ -245,9 +245,15 @@ void RdpView::onAuthRequested()
     // update m_url so it gets saved correctly
     m_url.setUserName(m_user);
     QUrlQuery query(m_url);
+    const bool hasDomainItem = query.hasQueryItem(QStringLiteral("domain"));
     query.removeQueryItem(QStringLiteral("domain"));
     if (!m_domain.isEmpty()) {
         query.addQueryItem(QStringLiteral("domain"), m_domain);
+    } else if (hasDomainItem) {
+        // Keep an empty domain= query item: the presence of the query is what
+        // disables the legacy DOMAIN\user username splitting when this URL is
+        // reloaded from a bookmark.
+        query.addQueryItem(QStringLiteral("domain"), QStringLiteral(""));
     }
     m_url.setQuery(query);
 
