@@ -1453,6 +1453,7 @@ void MainWindow::createDockWidget()
     remoteDesktopsDockLayout->addWidget(m_dockWidgetTableView);
     m_remoteDesktopsDockWidget->setWidget(remoteDesktopsDockLayoutWidget);
     addDockWidget(Qt::LeftDockWidgetArea, m_remoteDesktopsDockWidget);
+    m_remoteDesktopsDockWidget->hide();
 }
 
 void MainWindow::handleViewError(const QString &title, const QString &message)
