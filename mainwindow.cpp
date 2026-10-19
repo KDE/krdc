@@ -257,6 +257,16 @@ void MainWindow::newConnection(const QUrl &newUrl, bool switchFullscreenWhenConn
 {
     m_switchFullscreenWhenConnected = switchFullscreenWhenConnected;
 
+    // Bring the main window to the front when a connection is initiated from
+    // outside it (e.g. the system tray bookmark menu) so the user can see the
+    // connection progress and interact with any credential dialogs.
+    if (!isVisible() || isMinimized()) {
+        setWindowState((windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
+        show();
+        raise();
+        activateWindow();
+    }
+
     QUrl url = newUrl.isEmpty() ? getInputUrl() : newUrl;
 
     if (url.isLocalFile()) {
