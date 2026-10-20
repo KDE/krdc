@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-19 00:46+0000\n"
+"POT-Creation-Date: 2026-10-20 00:52+0000\n"
 "PO-Revision-Date: 2026-03-16 16:12+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -212,13 +212,13 @@ msgstr "Configurează…"
 msgid "Remove"
 msgstr "Elimină"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:301 mainwindow.cpp:802
-#: mainwindow.cpp:818
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:311 mainwindow.cpp:812
+#: mainwindow.cpp:828
 #, kde-format
 msgid "Unusable URL"
 msgstr "URL inutilizabil"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:818
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:828
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr "Gazda aleasă nu poate fi manipulată."
@@ -520,8 +520,8 @@ msgstr "URL-uri de conectat după lansare"
 msgid "KDE Remote Desktop Client started"
 msgstr "Clientul de Birou la distanță KDE a pornit"
 
-#: mainwindow.cpp:113 mainwindow.cpp:130 mainwindow.cpp:1287
-#: mainwindow.cpp:1384
+#: mainwindow.cpp:113 mainwindow.cpp:130 mainwindow.cpp:1297
+#: mainwindow.cpp:1394
 #, kde-format
 msgid "New Connection"
 msgstr "Conexiune nouă"
@@ -536,12 +536,12 @@ msgstr "Copiază captura de ecran în clipboard"
 msgid "Screenshot"
 msgstr "Captură de ecran"
 
-#: mainwindow.cpp:145 mainwindow.cpp:570
+#: mainwindow.cpp:145 mainwindow.cpp:580
 #, kde-format
 msgid "Switch to Full Screen Mode"
 msgstr "Schimbă la regim de ecran complet"
 
-#: mainwindow.cpp:146 mainwindow.cpp:571
+#: mainwindow.cpp:146 mainwindow.cpp:581
 #, kde-format
 msgid "Full Screen"
 msgstr "Ecran complet"
@@ -601,17 +601,17 @@ msgstr "Factor de scalare"
 msgid "Bookmarks"
 msgstr "Semne de carte"
 
-#: mainwindow.cpp:274
+#: mainwindow.cpp:284
 #, kde-format
 msgid "Unable to load connection data from the provided file."
 msgstr "Nu s-au putut încărca date despre conexiune din fișierul furnizat."
 
-#: mainwindow.cpp:274
+#: mainwindow.cpp:284
 #, kde-format
 msgid "Load failed"
 msgstr "Încărcarea a eșuat"
 
-#: mainwindow.cpp:280
+#: mainwindow.cpp:290
 #, kde-format
 msgid ""
 "The entered address does not have the required form.\n"
@@ -620,145 +620,145 @@ msgstr ""
 "Adresa introdusă nu are forma necesară.\n"
 " Sintaxă: [utilizator@]gazdă[:port]"
 
-#: mainwindow.cpp:280
+#: mainwindow.cpp:290
 #, kde-format
 msgid "Malformed URL"
 msgstr "URL incorect"
 
-#: mainwindow.cpp:301
+#: mainwindow.cpp:311
 #, kde-format
 msgid "The entered address cannot be handled."
 msgstr "Adresa introdusă nu poate fi manipulată."
 
-#: mainwindow.cpp:452
+#: mainwindow.cpp:462
 #, kde-format
 msgid "Connecting to %1"
 msgstr "Se conectează la %1"
 
-#: mainwindow.cpp:456
+#: mainwindow.cpp:466
 #, kde-format
 msgid "Authenticating at %1"
 msgstr "Se autentifică pe %1"
 
-#: mainwindow.cpp:460
+#: mainwindow.cpp:470
 #, kde-format
 msgid "Preparing connection to %1"
 msgstr "Se pregătește conexiunea la %1"
 
-#: mainwindow.cpp:464
+#: mainwindow.cpp:474
 #, kde-format
 msgid "Connected to %1"
 msgstr "Conectat la %1"
 
-#: mainwindow.cpp:617
+#: mainwindow.cpp:627
 #, kde-format
 msgid "Switch to Window Mode"
 msgstr "Schimbă la regimul ecran complet"
 
-#: mainwindow.cpp:618
+#: mainwindow.cpp:628
 #, kde-format
 msgid "Window Mode"
 msgstr "Regim fereastră"
 
-#: mainwindow.cpp:802
+#: mainwindow.cpp:812
 #, fuzzy, kde-format
 #| msgid "The entered address cannot be handled."
 msgid "The entered address cannot be handled by this connection type."
 msgstr "Adresa introdusă nu poate fi manipulată."
 
-#: mainwindow.cpp:837
+#: mainwindow.cpp:847
 #, kde-format
 msgid "Connect"
 msgstr "Conectează"
 
-#: mainwindow.cpp:838
+#: mainwindow.cpp:848
 #, kde-format
 msgid "Rename"
 msgstr "Redenumește"
 
-#: mainwindow.cpp:839
+#: mainwindow.cpp:849
 #, kde-format
 msgid "Settings"
 msgstr "Configurări"
 
-#: mainwindow.cpp:840
+#: mainwindow.cpp:850
 #, kde-format
 msgid "Delete"
 msgstr "Șterge"
 
-#: mainwindow.cpp:843 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:853 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "Semne de carte"
 
-#: mainwindow.cpp:843 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:853 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "Istoric"
 
-#: mainwindow.cpp:855
+#: mainwindow.cpp:865
 #, kde-format
 msgid "Rename %1"
 msgstr "Redenumește %1"
 
-#: mainwindow.cpp:855
+#: mainwindow.cpp:865
 #, kde-format
 msgid "Rename %1 to"
 msgstr "Redenumește %1 în"
 
-#: mainwindow.cpp:862
+#: mainwindow.cpp:872
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "Sigur doriți să ștergeți %1?"
 
-#: mainwindow.cpp:862
+#: mainwindow.cpp:872
 #, kde-format
 msgid "Delete %1"
 msgstr "Șterge %1"
 
-#: mainwindow.cpp:886
+#: mainwindow.cpp:896
 #, kde-format
 msgid "Add Bookmark"
 msgstr "Adaugă semn de carte"
 
-#: mainwindow.cpp:887
+#: mainwindow.cpp:897
 #, kde-format
 msgid "Close Tab"
 msgstr "Închide fila"
 
-#: mainwindow.cpp:1004
+#: mainwindow.cpp:1014
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr "Minimizează fereastra în ecran complet"
 
-#: mainwindow.cpp:1021
+#: mainwindow.cpp:1031
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "Lipește bara de unelte"
 
-#: mainwindow.cpp:1141
+#: mainwindow.cpp:1151
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr "Sigur părăsiți clientul de birou la distanță KDE?"
 
-#: mainwindow.cpp:1142
+#: mainwindow.cpp:1152
 #, kde-format
 msgid "Confirm Quit"
 msgstr "Confirmă ieșirea"
 
-#: mainwindow.cpp:1310
+#: mainwindow.cpp:1320
 #, kde-format
 msgid "Connect to:"
 msgstr "Conectează la:"
 
-#: mainwindow.cpp:1314
+#: mainwindow.cpp:1324
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr "Tastați aici pentru a vă conecta la o adresă și a filtra lista."
 
-#: mainwindow.cpp:1325
+#: mainwindow.cpp:1335
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
@@ -767,17 +767,17 @@ msgstr ""
 "Tastați aici un IP sau un nume DNS. Curățați linia pentru a obține o listă "
 "de metode de conectare."
 
-#: mainwindow.cpp:1328
+#: mainwindow.cpp:1338
 #, kde-format
 msgid "Goto Address"
 msgstr "Mergi la adresa"
 
-#: mainwindow.cpp:1420
+#: mainwindow.cpp:1430
 #, kde-format
 msgid "Remote Desktops"
 msgstr "Birouri distante"
 
-#: mainwindow.cpp:1449
+#: mainwindow.cpp:1459
 #, kde-format
 msgid "Filter"
 msgstr "Filtru"
