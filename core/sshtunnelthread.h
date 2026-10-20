@@ -36,6 +36,13 @@ public:
         IgnoreWallet,
     };
 
+    enum class Failure {
+        Connect, ///< Could not reach the SSH server
+        Authentication, ///< The SSH server rejected the credentials
+        LocalSocket, ///< Could not open the local end of the tunnel
+    };
+    Q_ENUM(Failure)
+
     int tunnelPort() const;
 
     QString password() const;
@@ -47,7 +54,7 @@ public:
 Q_SIGNALS:
     void passwordRequest(PasswordRequestFlags flags);
     void listenReady();
-    void errorMessage(const QString &message);
+    void errorMessage(const QString &message, SshTunnelThread::Failure failure);
 
 private:
     QByteArray m_host;

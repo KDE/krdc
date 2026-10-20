@@ -27,6 +27,9 @@
 #define KMOD_Control_L 0x08
 #define KMOD_Shift_L 0x10
 
+// Default VNC port, and the base of display numbers (:1 is port 5901)
+static constexpr int DEFAULT_VNC_PORT = 5900;
+
 VncView::VncView(QWidget *parent, const QUrl &url, KConfigGroup configGroup)
     : RemoteView(parent)
     , m_initDone(false)
@@ -44,16 +47,28 @@ VncView::VncView(QWidget *parent, const QUrl &url, KConfigGroup configGroup)
     m_port = url.port();
 
     if (m_port <= 0) // port is invalid or empty...
-        m_port = 5900; // fallback: try an often used VNC port
+        m_port = DEFAULT_VNC_PORT; // fallback: try an often used VNC port
 
     if (m_port < 100) // the user most likely used the short form (e.g. :1)
-        m_port += 5900;
+        m_port += DEFAULT_VNC_PORT;
 
     // BlockingQueuedConnection can cause deadlocks when exiting, handled in startQuitting()
     connect(&vncThread, &VncClientThread::imageUpdated, this, &VncView::updateImage, Qt::BlockingQueuedConnection);
     connect(&vncThread, &VncClientThread::gotCut, this, &VncView::setCut, Qt::BlockingQueuedConnection);
     connect(&vncThread, &VncClientThread::passwordRequest, this, &VncView::requestPassword, Qt::BlockingQueuedConnection);
     connect(&vncThread, &VncClientThread::outputErrorMessage, this, &VncView::outputErrorMessage);
+    connect(&vncThread, &VncClientThread::clientStateChanged, this, [this](RemoteView::RemoteStatus clientStatus, const QString &details) {
+        if ((clientStatus == Disconnected || clientStatus == Connecting) && status() == Connected && !m_reconnecting) {
+            m_reconnecting = true;
+            Q_EMIT reconnectingChanged(true, details);
+        } else if (clientStatus == Connected && m_reconnecting) {
+            m_reconnecting = false;
+            Q_EMIT reconnectingChanged(false, details);
+        } else if (clientStatus == Connected && status() >= Connecting && status() < Preparing) {
+            // The handshake is done; the view becomes Connected on the first framebuffer update.
+            setStatus(Preparing);
+        }
+    });
     connect(&vncThread, &VncClientThread::gotCursor, this, [this](QCursor cursor) {
         setCursor(cursor);
     });
@@ -247,23 +262,79 @@ void VncView::requestPassword(bool includingUsername)
             vncThread.setUsername(dialog.username());
     } else {
         qCDebug(KRDC) << "password dialog not accepted";
+        setCanceledByUser();
         startQuitting();
     }
 }
 
-void VncView::outputErrorMessage(const QString &message)
+void VncView::outputErrorMessage(VncClientThread::FailureReason reason, const QString &details)
 {
-    qCritical(KRDC) << message;
+    using Reason = VncClientThread::FailureReason;
 
-    if (message == QLatin1String("INTERNAL:APPLE_VNC_COMPATIBILTY")) {
+    qCritical(KRDC) << reason << details;
+
+    if (reason == Reason::AppleCompatibility) {
         setCursor(localDefaultCursor());
         m_forceLocalCursor = true;
         return;
     }
 
-    startQuitting();
+    // m_host may be a local SSH tunnel
 
-    Q_EMIT errorMessage(i18n("VNC failure"), message);
+    ConnectionError error;
+    switch (reason) {
+    case Reason::ServerNotFound:
+        error = ConnectionError::create(ConnectionError::Stage::NameResolution, i18nc("@label", "No IP address was found for this name."), details);
+        break;
+    case Reason::ConnectionRefused:
+        error = ConnectionError::networkFailure(ConnectionError::NetworkFailure::Refused, details);
+        break;
+    case Reason::NoResponse:
+        error = ConnectionError::networkFailure(ConnectionError::NetworkFailure::NoResponse, details);
+        break;
+    case Reason::NetworkUnreachable:
+        error = ConnectionError::networkFailure(ConnectionError::NetworkFailure::Unreachable, details);
+        break;
+    case Reason::CouldNotConnect:
+        error = ConnectionError::networkFailure(ConnectionError::NetworkFailure::Unknown, details);
+        break;
+    case Reason::AuthenticationFailed:
+        error = ConnectionError::create(ConnectionError::Stage::Authentication, QString(), details);
+        break;
+    case Reason::TooManyAuthenticationTries:
+        error = ConnectionError::create(ConnectionError::Stage::Authentication,
+                                        i18n("VNC authentication failed because of too many authentication tries."),
+                                        details);
+        error.steps = {
+            i18nc("@info", "Wait a few minutes. The server blocks logins for a while after several failed attempts."),
+            i18nc("@info", "Then connect again and enter the password carefully."),
+        };
+        error.actions = ConnectionError::Retry;
+        break;
+    case Reason::UnsupportedAuthenticationType:
+        error = ConnectionError::create(ConnectionError::Stage::Security,
+                                        i18nc("@label", "The server requires an authentication method that KRDC does not support."),
+                                        details);
+        error.steps = {i18nc("@info", "Configure the VNC server to use standard VNC password authentication, or connect through an SSH tunnel.")};
+        error.actions = ConnectionError::EditSettings;
+        break;
+    case Reason::ServerClosedConnection:
+        if (status() == Connected) {
+            error = ConnectionError::create(ConnectionError::Stage::SessionEnded, QString(), details);
+        } else {
+            error = ConnectionError::serverClosedDuringSetup(details);
+        }
+        break;
+    case Reason::ConnectionInterrupted:
+        error = ConnectionError::create(ConnectionError::Stage::ConnectionLost, QString(), details);
+        break;
+    case Reason::AppleCompatibility:
+        Q_UNREACHABLE();
+    }
+
+    // Report first: quitting emits disconnected().
+    reportError(error);
+    startQuitting();
 }
 
 HostPreferences *VncView::hostPreferences()

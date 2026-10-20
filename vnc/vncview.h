@@ -69,12 +69,13 @@ private:
     VncHostPreferences *m_hostPreferences;
     QImage m_frame;
     bool m_forceLocalCursor;
+    bool m_reconnecting = false;
 
 private Q_SLOTS:
     void updateImage(int x, int y, int w, int h);
     void setCut(const QString &text);
     void requestPassword(bool includingUsername);
-    void outputErrorMessage(const QString &message);
+    void outputErrorMessage(VncClientThread::FailureReason reason, const QString &details);
 };
 
 #endif

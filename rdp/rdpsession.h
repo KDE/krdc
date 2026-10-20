@@ -227,6 +227,7 @@ private:
     std::thread m_thread;
 
     QImage m_videoBuffer;
+    std::atomic_bool m_errorEmitted = false;
 
     RdpHostPreferences *m_preferences;
     QVector<MonitorGeometry> m_monitors;

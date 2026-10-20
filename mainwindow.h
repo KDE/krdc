@@ -9,6 +9,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "connectionstatuswidget.h"
 #include "remoteview.h"
 #include "remoteviewfactory.h"
 
@@ -22,6 +23,7 @@ class KToggleAction;
 class KTabWidget;
 
 class BookmarkManager;
+class ConnectionStatusWidget;
 class FloatingToolBar;
 class MinimizePixel;
 class RemoteDesktopsModel;
@@ -88,7 +90,7 @@ private Q_SLOTS:
     void createDockWidget();
     void showConnectionContextMenu(const QPoint &pos);
     void saveConnectionListSort(const int logicalindex, const Qt::SortOrder order);
-    void handleViewError(const QString &title, const QString &message);
+    void handleConnectionError(RemoteView *view, const ConnectionError &error);
 
 private:
     void applyFullscreenState(bool fullscreen);
@@ -97,6 +99,14 @@ private:
     void showSettingsDialog(const QString &url, const QString &bookmarkAddress = QString(), const QString &bookmarkName = QString());
     QScrollArea *createScrollArea(QWidget *parent, RemoteView *remoteView);
     QUrl getInputUrl();
+    void closeRemoteView(RemoteView *view);
+    void detachRemoteView(RemoteView *view);
+    void setAddressInput(const QUrl &url);
+    ConnectionStatusWidget *statusWidgetFor(RemoteView *view) const;
+    void reconnectInTab(QWidget *tab, const QUrl &url);
+    ConnectionError unexplainedDisconnect(const ConnectionStatusWidget *statusWidget) const;
+    RemoteViewFactory *factoryFor(const QUrl &url) const;
+    bool editHostSettings(const QUrl &url);
 
     QByteArray m_mainWindowGeometry;
 
@@ -135,6 +145,7 @@ private:
     MinimizePixel *m_minimizePixel = nullptr;
 
     QMap<RemoteView *, bool> m_savedGrabStatesBeforeFullscreen;
+    int m_insertTabIndex = -1; // where newConnection() puts its tab, for reconnecting in place
 
 Q_SIGNALS:
     void scaleUpdated(bool scale); // scale state has changed
@@ -178,6 +189,19 @@ public:
     {
     }
 
+    /** Connection progress and errors, shown over the remote view. */
+    void setStatusWidget(ConnectionStatusWidget *statusWidget)
+    {
+        m_statusWidget = statusWidget;
+        m_statusWidget->setGeometry(rect());
+        m_statusWidget->raise();
+    }
+
+    ConnectionStatusWidget *statusWidget() const
+    {
+        return m_statusWidget;
+    }
+
 Q_SIGNALS:
     void resized(int w, int h);
 
@@ -185,8 +209,14 @@ protected:
     void resizeEvent(QResizeEvent *event) override
     {
         QScrollArea::resizeEvent(event);
+        if (m_statusWidget) {
+            m_statusWidget->setGeometry(rect());
+        }
         Q_EMIT resized(width() - 2 * frameWidth(), height() - 2 * frameWidth());
     }
+
+private:
+    ConnectionStatusWidget *m_statusWidget = nullptr;
 };
 
 #endif

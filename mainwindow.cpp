@@ -10,6 +10,7 @@
 #include "bookmarkmanager.h"
 #include "config/preferencesdialog.h"
 #include "connectiondelegate.h"
+#include "connectionstatuswidget.h"
 #include "factorwidget.h"
 #include "floatingtoolbar.h"
 #include "hostpreferences.h"
@@ -45,6 +46,7 @@
 #include <QLayout>
 #include <QMenu>
 #include <QMenuBar>
+#include <QPointer>
 #include <QPushButton>
 #include <QRegularExpression>
 #include <QScopedValueRollback>
@@ -281,34 +283,44 @@ void MainWindow::newConnection(const QUrl &newUrl, bool switchFullscreenWhenConn
         if (loadedUrl.isValid()) {
             url = loadedUrl;
         } else {
-            KMessageBox::error(this, i18n("Unable to load connection data from the provided file."), i18n("Load failed"));
+            KMessageBox::error(
+                this,
+                i18n("Unable to load connection data from “%1”.\nThe file may be damaged, or it is in a format KRDC does not support.", url.toLocalFile()),
+                i18n("Load failed"));
             return;
         }
     }
 
     if (!url.isValid() || (url.host().isEmpty() && url.port() < 0) || (!url.path().isEmpty() && url.path() != QStringLiteral("/"))) {
-        KMessageBox::error(this, i18n("The entered address does not have the required form.\n Syntax: [username@]host[:port]"), i18n("Malformed URL"));
+        KMessageBox::error(this,
+                           i18n("“%1” is not a valid address.\n\nUse the form [username@]host[:port], for example: user@192.168.1.10:5900",
+                                newUrl.isEmpty() ? m_addressInput->text() : url.toDisplayString()),
+                           i18n("Malformed URL"));
+        if (m_addressInput) {
+            m_addressInput->setFocus();
+            m_addressInput->selectAll();
+        }
         return;
     }
 
-    if (m_protocolInput && m_addressInput) {
-        m_protocolInput->setCurrentText(url.scheme());
-        m_addressInput->setText(url.toString(QUrl::RemoveScheme).remove(QRegularExpression(QStringLiteral("^/+"))));
-    }
+    setAddressInput(url);
 
     RemoteView *view = nullptr;
     KConfigGroup configGroup = Settings::self()->config()->group(QStringLiteral("hostpreferences")).group(url.toDisplayString(QUrl::StripTrailingSlash));
 
-    for (RemoteViewFactory *factory : std::as_const(m_remoteViewFactories)) {
-        if (factory->supportsUrl(url)) {
-            view = factory->createView(this, url, configGroup);
-            qCDebug(KRDC) << "Found plugin to handle url (" << url.url() << "): " << view->metaObject()->className();
-            break;
-        }
+    if (RemoteViewFactory *factory = factoryFor(url)) {
+        view = factory->createView(this, url, configGroup);
+        qCDebug(KRDC) << "Found plugin to handle url (" << url.url() << "): " << view->metaObject()->className();
     }
 
     if (!view) {
-        KMessageBox::error(this, i18n("The entered address cannot be handled."), i18n("Unusable URL"));
+        QStringList schemes;
+        for (RemoteViewFactory *factory : std::as_const(m_remoteViewFactories)) {
+            schemes << factory->scheme();
+        }
+        KMessageBox::error(this,
+                           i18n("No installed plugin can handle the “%1” protocol.\nSupported protocols: %2", url.scheme(), schemes.join(QStringLiteral(", "))),
+                           i18n("Unusable URL"));
         return;
     }
 
@@ -331,7 +343,25 @@ void MainWindow::newConnection(const QUrl &newUrl, bool switchFullscreenWhenConn
     connect(view, &RemoteView::framebufferSizeChanged, this, &MainWindow::resizeTabWidget);
     connect(view, &RemoteView::statusChanged, this, &MainWindow::statusChanged);
     connect(view, &RemoteView::disconnected, this, &MainWindow::disconnectHost);
-    connect(view, &RemoteView::errorMessage, this, &MainWindow::handleViewError);
+    connect(view, &RemoteView::connectionError, this, [this, view](const ConnectionError &error) {
+        handleConnectionError(view, error);
+    });
+    connect(view, &RemoteView::reconnectingChanged, this, [this, view](bool reconnecting, const QString &details) {
+        ConnectionStatusWidget *statusWidget = statusWidgetFor(view);
+        if (!statusWidget) {
+            return;
+        }
+        if (reconnecting) {
+            statusWidget->show();
+            statusWidget->raise();
+        }
+        statusWidget->setReconnecting(reconnecting, details);
+        if (!reconnecting) {
+            statusWidget->hide();
+        }
+        m_tabWidget->setTabIcon(m_tabWidget->indexOf(m_remoteViewMap.key(view)),
+                                QIcon::fromTheme(reconnecting ? QStringLiteral("network-connect") : QStringLiteral("krdc")));
+    });
     connect(view, &RemoteView::fullScreenRequested, this, [this, view](QScreen *screen) {
         if (view != currentRemoteView()) {
             return;
@@ -349,14 +379,48 @@ void MainWindow::newConnection(const QUrl &newUrl, bool switchFullscreenWhenConn
         }
     });
 
-    QScrollArea *scrollArea = createScrollArea(m_tabWidget, view);
+    auto *scrollArea = static_cast<RemoteViewScrollArea *>(createScrollArea(m_tabWidget, view));
+
+    bool sshTunnel = false;
+#ifdef USE_SSH_TUNNEL
+    sshTunnel = prefs->useSshTunnel();
+#endif
+    auto *statusWidget = new ConnectionStatusWidget(url, sshTunnel, scrollArea);
+    scrollArea->setStatusWidget(statusWidget);
+    connect(statusWidget, &ConnectionStatusWidget::cancelRequested, this, [this, scrollArea, view = QPointer<RemoteView>(view)]() {
+        if (view && m_remoteViewMap.key(view)) {
+            closeRemoteView(view);
+        } else {
+            // The view failed already, and the page is still checking why.
+            closeTab(m_tabWidget->indexOf(scrollArea));
+        }
+    });
+    connect(statusWidget, &ConnectionStatusWidget::retryRequested, this, [this, scrollArea, url]() {
+        reconnectInTab(scrollArea, url);
+    });
+    connect(statusWidget, &ConnectionStatusWidget::editAddressRequested, this, [this, scrollArea, url]() {
+        closeTab(m_tabWidget->indexOf(scrollArea));
+        setAddressInput(url);
+        newConnectionPage(false);
+    });
+    connect(statusWidget, &ConnectionStatusWidget::editSettingsRequested, this, [this, scrollArea, url]() {
+        if (editHostSettings(url)) {
+            reconnectInTab(scrollArea, url);
+        }
+    });
+    connect(statusWidget, &ConnectionStatusWidget::closeRequested, this, [this, scrollArea]() {
+        closeTab(m_tabWidget->indexOf(scrollArea));
+    });
 
     const int indexOfNewConnectionWidget = m_tabWidget->indexOf(m_newConnectionWidget);
     if (indexOfNewConnectionWidget >= 0)
         m_tabWidget->removeTab(indexOfNewConnectionWidget);
 
+    const QString tabTitle = tabName.isEmpty() ? url.toDisplayString(QUrl::StripTrailingSlash) : tabName;
+    const QIcon tabIcon = QIcon::fromTheme(QStringLiteral("krdc"));
+    const int insertIndex = std::exchange(m_insertTabIndex, -1);
     const int newIndex =
-        m_tabWidget->addTab(scrollArea, QIcon::fromTheme(QStringLiteral("krdc")), tabName.isEmpty() ? url.toDisplayString(QUrl::StripTrailingSlash) : tabName);
+        insertIndex >= 0 ? m_tabWidget->insertTab(insertIndex, scrollArea, tabIcon, tabTitle) : m_tabWidget->addTab(scrollArea, tabIcon, tabTitle);
     m_tabWidget->setCurrentIndex(newIndex);
     m_remoteViewMap.insert(m_tabWidget->widget(newIndex), view);
     tabChanged(newIndex); // force to update m_currentRemoteView (tabChanged is not emitted when start page has been disabled)
@@ -451,7 +515,14 @@ void MainWindow::statusChanged(RemoteView::RemoteStatus status)
         return;
 
     RemoteView *view = qobject_cast<RemoteView *>(QObject::sender());
-    const QString host = view->host();
+    const QString host = view->url().host();
+    if (ConnectionStatusWidget *statusWidget = statusWidgetFor(view)) {
+        statusWidget->setStatus(status);
+        if (status == RemoteView::Connected) {
+            // Even after a non-fatal error: the session continued.
+            statusWidget->hide();
+        }
+    }
 
     QString iconName = QStringLiteral("krdc");
     QString message;
@@ -502,7 +573,7 @@ void MainWindow::statusChanged(RemoteView::RemoteStatus status)
         break;
     }
 
-    m_tabWidget->setTabIcon(m_tabWidget->indexOf(view), QIcon::fromTheme(iconName));
+    m_tabWidget->setTabIcon(m_tabWidget->indexOf(m_remoteViewMap.key(view)), QIcon::fromTheme(iconName));
     if (Settings::showStatusBar())
         statusBar()->showMessage(message);
 }
@@ -675,33 +746,74 @@ void MainWindow::disconnectHost()
 
     RemoteView *view = qobject_cast<RemoteView *>(QObject::sender());
 
+    // Keep the tab to show the error.
+    if (ConnectionStatusWidget *statusWidget = statusWidgetFor(view); statusWidget && statusWidget->hasFatalError()) {
+        detachRemoteView(view);
+        return;
+    }
+
+    // Explain an unrequested disconnect instead of closing the tab. The backend's
+    // reason may arrive just after, so wait one pass.
+    if (view && m_remoteViewMap.key(view)) {
+        QTimer::singleShot(0, this, [this, view = QPointer<RemoteView>(view)]() {
+            ConnectionStatusWidget *statusWidget = view ? statusWidgetFor(view) : nullptr;
+            if (!statusWidget || statusWidget->hasFatalError()) {
+                return;
+            }
+            if (view->canceledByUser()) {
+                closeRemoteView(view);
+                return;
+            }
+            // A non-fatal error shown during setup explains it, unless the session connected since.
+            if (statusWidget->hasError() && !statusWidget->wasConnected()) {
+                statusWidget->show();
+                detachRemoteView(view);
+                return;
+            }
+            handleConnectionError(view, unexplainedDisconnect(statusWidget));
+        });
+        return;
+    }
+
     if (!view) {
         view = currentRemoteView();
     }
 
-    QWidget *widgetToDelete = m_remoteViewMap.key(view);
-    if (!view || !widgetToDelete) {
+    closeRemoteView(view);
+}
+
+void MainWindow::detachRemoteView(RemoteView *view)
+{
+    QWidget *tab = m_remoteViewMap.key(view);
+    auto *scrollArea = qobject_cast<RemoteViewScrollArea *>(tab);
+    if (!view || !scrollArea) {
+        return;
+    }
+
+    m_remoteViewMap.remove(tab);
+    m_savedGrabStatesBeforeFullscreen.remove(view);
+    saveHostPrefs(view);
+    if (!view->isQuitting()) {
+        view->startQuitting();
+    }
+    scrollArea->takeWidget();
+    view->deleteLater();
+
+    if (isFullScreen() && m_tabWidget->currentWidget() == tab) {
+        switchFullscreen();
+    }
+    tabChanged(m_tabWidget->currentIndex());
+}
+
+void MainWindow::closeRemoteView(RemoteView *view)
+{
+    QWidget *tab = m_remoteViewMap.key(view);
+    if (!view || !tab) {
         return; // The view is absent or its disconnection is already being handled.
     }
 
-    // Remove the view before startQuitting(), which can emit disconnected() synchronously.
-    m_remoteViewMap.remove(widgetToDelete);
-    m_savedGrabStatesBeforeFullscreen.remove(view);
-
     saveHostPrefs(view);
-    view->startQuitting(); // some deconstructors can't properly quit, so quit early
-    m_tabWidget->removePage(widgetToDelete);
-    widgetToDelete->deleteLater();
-
-    // if closing the last connection, create new connection tab
-    if (m_tabWidget->count() == 0) {
-        newConnectionPage(false);
-    }
-
-    // if the newConnectionWidget is the only tab and we are fullscreen, switch to window mode
-    if (isFullScreen() && m_tabWidget->count() == 1 && m_tabWidget->currentWidget() == m_newConnectionWidget) {
-        switchFullscreen();
-    }
+    closeTab(m_tabWidget->indexOf(tab));
 }
 
 void MainWindow::closeTab(int index)
@@ -714,11 +826,13 @@ void MainWindow::closeTab(int index)
 
     if (!isNewConnectionPage) {
         RemoteView *view = m_remoteViewMap.take(widget);
-        if (!view) {
+        if (view) {
+            m_savedGrabStatesBeforeFullscreen.remove(view);
+            view->startQuitting();
+        } else if (!qobject_cast<RemoteViewScrollArea *>(widget)) {
             return;
         }
-        m_savedGrabStatesBeforeFullscreen.remove(view);
-        view->startQuitting();
+        // else: an error tab whose view is gone
         widget->deleteLater();
     }
 
@@ -1173,7 +1287,8 @@ void MainWindow::quit(bool systemEvent)
 
         saveHostPrefs();
 
-        const QMap<QWidget *, RemoteView *> currentViews = m_remoteViewMap;
+        // Detach first, so quitting is not reported as unexpected.
+        const QMap<QWidget *, RemoteView *> currentViews = std::exchange(m_remoteViewMap, {});
         for (RemoteView *view : currentViews) {
             view->startQuitting();
         }
@@ -1466,7 +1581,106 @@ void MainWindow::createDockWidget()
     m_remoteDesktopsDockWidget->hide();
 }
 
-void MainWindow::handleViewError(const QString &title, const QString &message)
+void MainWindow::setAddressInput(const QUrl &url)
 {
-    KMessageBox::error(this, message, title);
+    if (m_protocolInput && m_addressInput) {
+        m_protocolInput->setCurrentText(url.scheme());
+        m_addressInput->setText(url.toString(QUrl::RemoveScheme).remove(QRegularExpression(QStringLiteral("^/+"))));
+    }
+}
+
+ConnectionStatusWidget *MainWindow::statusWidgetFor(RemoteView *view) const
+{
+    auto *scrollArea = qobject_cast<RemoteViewScrollArea *>(m_remoteViewMap.key(view));
+    return scrollArea ? scrollArea->statusWidget() : nullptr;
+}
+
+void MainWindow::handleConnectionError(RemoteView *view, const ConnectionError &error)
+{
+    ConnectionStatusWidget *statusWidget = view ? statusWidgetFor(view) : nullptr;
+    // Only the first fatal error is the cause; the rest come from tearing down.
+    if (!statusWidget || statusWidget->hasFatalError() || view->canceledByUser()) {
+        qCDebug(KRDC) << "Ignoring error" << error.title << error.message;
+        return;
+    }
+
+    statusWidget->show();
+    statusWidget->raise();
+    statusWidget->setError(error);
+    m_tabWidget->setTabIcon(m_tabWidget->indexOf(m_remoteViewMap.key(view)), QIcon::fromTheme(QStringLiteral("dialog-error")));
+
+    setAddressInput(view->url());
+
+    if (error.fatal) {
+        // Not inside the backend's signal emission.
+        QTimer::singleShot(0, this, [this, view = QPointer<RemoteView>(view)]() {
+            if (view) {
+                detachRemoteView(view);
+            }
+        });
+    }
+}
+
+ConnectionError MainWindow::unexplainedDisconnect(const ConnectionStatusWidget *statusWidget) const
+{
+    if (statusWidget->wasConnected()) {
+        return ConnectionError::create(ConnectionError::Stage::SessionEnded, i18nc("@label", "The remote computer may have shut down or restarted."));
+    }
+
+    ConnectionError error = ConnectionError::create(ConnectionError::Stage::Unknown);
+    error.title = i18nc("@title connection error", "Closed before the session started");
+    return error;
+}
+
+void MainWindow::reconnectInTab(QWidget *tab, const QUrl &url)
+{
+    const int index = m_tabWidget->indexOf(tab);
+    if (index < 0 || !url.isValid()) {
+        return;
+    }
+
+    QString tabName = m_tabWidget->tabText(index).remove(QLatin1Char('&'));
+    if (tabName == url.toDisplayString(QUrl::StripTrailingSlash)) {
+        tabName.clear();
+    }
+
+    if (RemoteView *view = m_remoteViewMap.take(tab)) {
+        m_savedGrabStatesBeforeFullscreen.remove(view);
+        view->startQuitting();
+    }
+
+    m_insertTabIndex = index;
+    newConnection(url, false, tabName);
+    m_insertTabIndex = -1;
+
+    // Keep the error tab if the new connection was not opened, e.g. its settings dialog was canceled.
+    if (m_tabWidget->currentWidget() != tab) {
+        m_tabWidget->removePage(tab);
+        tab->deleteLater();
+    }
+}
+
+RemoteViewFactory *MainWindow::factoryFor(const QUrl &url) const
+{
+    for (RemoteViewFactory *factory : std::as_const(m_remoteViewFactories)) {
+        if (factory->supportsUrl(url)) {
+            return factory;
+        }
+    }
+    return nullptr;
+}
+
+bool MainWindow::editHostSettings(const QUrl &url)
+{
+    RemoteViewFactory *factory = factoryFor(url);
+    if (!factory) {
+        return false;
+    }
+    const KConfigGroup group = Settings::self()->config()->group(QStringLiteral("hostpreferences")).group(url.toDisplayString(QUrl::StripTrailingSlash));
+    std::unique_ptr<HostPreferences> prefs(factory->createHostPreferences(group, this));
+    if (!prefs || !prefs->showDialog(this)) {
+        return false;
+    }
+    Settings::self()->config()->sync();
+    return true;
 }

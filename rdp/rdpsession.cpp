@@ -264,6 +264,8 @@ void RdpSession::postDisconnect(freerdp *rdp)
     auto session = reinterpret_cast<RdpContext *>(ctx)->session;
     WINPR_ASSERT(session);
 
+    // Before Closed, so the error reaches the view while its tab exists.
+    session->emitErrorMessage();
     session->setState(State::Closed);
     gdi_free(rdp);
 
@@ -1389,6 +1391,7 @@ bool RdpSession::start()
     // KScreen communicates with the compositor through D-Bus and must be
     // queried from Qt's GUI thread, before FreeRDP starts its worker thread.
     m_outputScaleFactors = outputScaleFactors();
+    m_errorEmitted = false;
 
     const qreal scale = outputScale();
     switch (m_preferences->resolution()) {
@@ -1669,9 +1672,11 @@ void RdpSession::emitErrorMessage()
 {
     const unsigned int error = freerdp_get_last_error(m_context.rdp);
 
-    if (error == FREERDP_ERROR_CONNECT_CANCELLED) {
+    // Called from run() and again from postDisconnect(); report the first real error only.
+    if (error == FREERDP_ERROR_SUCCESS || error == FREERDP_ERROR_CONNECT_CANCELLED || m_errorEmitted) {
         return;
     }
+    m_errorEmitted = true;
 
     auto name = freerdp_get_last_error_name(error);
     auto description = freerdp_get_last_error_string(error);

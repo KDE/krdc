@@ -9,14 +9,20 @@
 
 #include <QBitmap>
 #include <QCursor>
+#include <QDeadlineTimer>
 #include <QMutexLocker>
 #include <QPixmap>
 #include <QTimer>
+#include <QUrl>
 #include <cerrno>
+#include <cstring>
+#include <netdb.h>
 #include <netinet/in.h>
 #include <netinet/tcp.h>
+#include <poll.h>
 #include <sys/socket.h>
 #include <sys/types.h>
+#include <unistd.h>
 
 // for detecting intel AMT KVM vnc server
 static const QString INTEL_AMT_KVM_STRING = QLatin1String("Intel(r) AMT KVM");
@@ -312,7 +318,7 @@ rfbCredential *VncClientThread::credentialHandler(int credentialType)
         break;
     default:
         qCritical(KRDC) << "credential request failed, unsupported credentialType:" << credentialType;
-        outputErrorMessage(i18n("VNC authentication type is not supported."));
+        outputErrorMessage(FailureReason::UnsupportedAuthenticationType, QString());
         break;
     }
     return cred;
@@ -326,36 +332,22 @@ void VncClientThread::outputHandler(const char *format, va_list args)
 
     qCDebug(KRDC) << message;
 
-    if ((message.contains(QLatin1String("Couldn't convert "))) || (message.contains(QLatin1String("Unable to connect to VNC server")))) {
-        // Don't show a dialog if a reconnection is needed. Never contemplate
-        // reconnection if we don't have a password.
-        QString tmp = i18n("Server not found.");
-        if (m_keepalive.set && !m_password.isNull()) {
-            m_keepalive.failed = true;
-            if (m_previousDetails != tmp) {
-                m_previousDetails = tmp;
-                clientStateChange(RemoteView::Disconnected, tmp);
-            }
-        } else {
-            outputErrorMessageString = tmp;
-        }
-    }
-
     // Process general authentication failures before more specific authentication
     // failures. All authentication failures cancel any auto-reconnection that
     // may be in progress.
     if (message.contains(QLatin1String("VNC connection failed: Authentication failed"))) {
         m_keepalive.failed = false;
-        outputErrorMessageString = i18n("VNC authentication failed.");
+        setPendingFailure(FailureReason::AuthenticationFailed, message);
     }
     if ((message.contains(QLatin1String("VNC connection failed: Authentication failed, too many tries")))
         || (message.contains(QLatin1String("VNC connection failed: Too many authentication failures")))) {
         m_keepalive.failed = false;
-        outputErrorMessageString = i18n("VNC authentication failed because of too many authentication tries.");
+        setPendingFailure(FailureReason::TooManyAuthenticationTries, message);
     }
 
-    if (message.contains(QLatin1String("VNC server closed connection")))
-        outputErrorMessageString = i18n("VNC server closed connection.");
+    if (message.contains(QLatin1String("VNC server closed connection"))) {
+        setPendingFailure(FailureReason::ServerClosedConnection, message);
+    }
 
     // If we are not going to attempt a reconnection, at least tell the user
     // the connection went away.
@@ -367,13 +359,14 @@ void VncClientThread::outputHandler(const char *format, va_list args)
             m_keepalive.failed = true;
             clientStateChange(RemoteView::Disconnected, tmp);
         } else {
-            outputErrorMessageString = tmp;
+            setPendingFailure(FailureReason::ConnectionInterrupted, message);
         }
     }
 
     // internal messages, not displayed to user
-    if (message.contains(QLatin1String("VNC server supports protocol version 3.889"))) // see https://bugs.kde.org/162640
-        outputErrorMessageString = QLatin1String("INTERNAL:APPLE_VNC_COMPATIBILTY");
+    if (message.contains(QLatin1String("VNC server supports protocol version 3.889"))) { // see https://bugs.kde.org/162640
+        setPendingFailure(FailureReason::AppleCompatibility, QString());
+    }
 }
 
 VncClientThread::VncClientThread(QObject *parent)
@@ -389,8 +382,7 @@ VncClientThread::VncClientThread(QObject *parent)
     m_keepalive.failedProbes = 3;
     m_keepalive.set = false;
     m_keepalive.failed = false;
-    m_previousDetails = QString();
-    outputErrorMessageString.clear(); // don't deliver error messages of old instances...
+    m_pendingFailure.reset(); // don't deliver error messages of old instances...
     QMutexLocker locker(&mutex);
 
     QTimer *outputErrorMessagesCheckTimer = new QTimer(this);
@@ -413,15 +405,27 @@ VncClientThread::~VncClientThread()
     delete[] frameBuffer;
 }
 
+void VncClientThread::setPendingFailure(FailureReason reason, const QString &details)
+{
+    QMutexLocker locker(&m_failureMutex);
+    m_pendingFailure = reason;
+    m_pendingFailureDetails = details;
+    m_failureSet = true;
+}
+
 void VncClientThread::checkOutputErrorMessage()
 {
-    if (!outputErrorMessageString.isEmpty()) {
-        qCDebug(KRDC) << outputErrorMessageString;
-        QString errorMessage = outputErrorMessageString;
-        outputErrorMessageString.clear();
+    QMutexLocker locker(&m_failureMutex);
+    const std::optional<FailureReason> pending = std::exchange(m_pendingFailure, std::nullopt);
+    const QString details = std::exchange(m_pendingFailureDetails, QString());
+    locker.unlock();
+
+    if (pending) {
+        const FailureReason reason = *pending;
+        qCDebug(KRDC) << reason << details;
         // show authentication failure error only after the 3rd unsuccessful try
-        if ((errorMessage != i18n("VNC authentication failed.")) || m_passwordError)
-            outputErrorMessage(errorMessage);
+        if (reason != FailureReason::AuthenticationFailed || m_passwordError)
+            outputErrorMessage(reason, details);
     }
 }
 
@@ -553,6 +557,10 @@ void VncClientThread::run()
     }
 
     qCDebug(KRDC) << "--------------------- Starting main VNC event loop ---------------------";
+    {
+        QMutexLocker locker(&m_failureMutex);
+        m_failureSet = false;
+    }
     while (!isInterruptionRequested()) {
         const int i = WaitForMessage(cl, 500);
         if (isInterruptionRequested() || i < 0) {
@@ -583,6 +591,16 @@ void VncClientThread::run()
             clientEvent->fire(cl);
             delete clientEvent;
             locker.relock();
+        }
+    }
+
+    // libvncclient logs only some failures in a way outputHandler() recognizes.
+    if (!isInterruptionRequested()) {
+        QMutexLocker locker(&m_failureMutex);
+        const bool failureSet = m_failureSet;
+        locker.unlock();
+        if (!failureSet) {
+            setPendingFailure(FailureReason::ConnectionInterrupted, QStringLiteral("The connection to the server failed."));
         }
     }
 }
@@ -624,7 +642,29 @@ bool VncClientThread::clientCreate(bool reinitialising)
 
     qCDebug(KRDC) << "--------------------- trying init ---------------------";
 
+    // Connect here rather than in libvncclient, which reports every connection failure the same way.
+    const int sock = connectToServer(cl->connectTimeout);
+    if (sock < 0) {
+        rfbClientCleanup(cl);
+        cl = nullptr;
+        return false;
+    }
+    cl->sock = sock;
+    cl->listenSpecified = TRUE; // makes rfbInitClient() use this socket instead of connecting
+    {
+        QMutexLocker locker(&m_failureMutex);
+        m_failureSet = false;
+    }
+
     if (!rfbInitClient(cl, nullptr, nullptr)) {
+        // With listenSpecified, libvncclient says nothing when the server closes the connection
+        // before sending its protocol version; that is still the server hanging up.
+        QMutexLocker locker(&m_failureMutex);
+        const bool failureSet = m_failureSet;
+        locker.unlock();
+        if (!failureSet && !m_passwordError && !isInterruptionRequested()) {
+            connectionFailed(FailureReason::ServerClosedConnection, QStringLiteral("The server closed the connection before sending its protocol version."));
+        }
         if (!reinitialising) {
             // Don't whine on reconnection failure: presumably the network
             // is simply still down.
@@ -641,6 +681,112 @@ bool VncClientThread::clientCreate(bool reinitialising)
     }
     clientSetKeepalive();
     return true;
+}
+
+// How much an errno from connect() says about the server: a refusal means it is up.
+static int failureRank(int error)
+{
+    switch (error) {
+    case ECONNREFUSED:
+        return 3;
+    case ETIMEDOUT:
+        return 2;
+    case EHOSTUNREACH:
+    case ENETUNREACH:
+        return 1;
+    default:
+        return 0;
+    }
+}
+
+int VncClientThread::connectToServer(int timeoutSeconds)
+{
+    addrinfo hints = {};
+    hints.ai_family = AF_UNSPEC;
+    hints.ai_socktype = SOCK_STREAM;
+    addrinfo *addresses = nullptr;
+    const QByteArray host = m_host.toUtf8();
+    const QByteArray port = QByteArray::number(m_port);
+    if (const int result = getaddrinfo(host.constData(), port.constData(), &hints, &addresses)) {
+        connectionFailed(FailureReason::ServerNotFound, QStringLiteral("getaddrinfo(%1): %2").arg(m_host, QString::fromLocal8Bit(gai_strerror(result))));
+        return -1;
+    }
+
+    int sock = -1;
+    int failure = 0; // the most telling error of all addresses tried
+    for (addrinfo *address = addresses; address && sock < 0 && !isInterruptionRequested(); address = address->ai_next) {
+        sock = socket(address->ai_family, address->ai_socktype | SOCK_NONBLOCK | SOCK_CLOEXEC, address->ai_protocol);
+        int error = sock < 0 ? errno : (::connect(sock, address->ai_addr, address->ai_addrlen) == 0 ? 0 : errno);
+        if (error == EINPROGRESS) {
+            error = waitForConnected(sock, timeoutSeconds);
+        }
+        if (error != 0) {
+            if (failureRank(error) >= failureRank(failure)) {
+                failure = error;
+            }
+            if (sock >= 0) {
+                close(sock);
+            }
+            sock = -1;
+        }
+    }
+    freeaddrinfo(addresses);
+
+    if (sock < 0) {
+        if (!isInterruptionRequested()) {
+            const FailureReason reason = failure == ECONNREFUSED    ? FailureReason::ConnectionRefused
+                : failure == ETIMEDOUT                              ? FailureReason::NoResponse
+                : failure == EHOSTUNREACH || failure == ENETUNREACH ? FailureReason::NetworkUnreachable
+                                                                    : FailureReason::CouldNotConnect;
+            QUrl address;
+            address.setHost(m_host);
+            address.setPort(m_port);
+            connectionFailed(reason, QStringLiteral("connect(%1): %2").arg(address.authority(), QString::fromLocal8Bit(strerror(failure))));
+        }
+        return -1;
+    }
+
+    // as libvncclient sets up its own connections
+    const int noDelay = 1;
+    setsockopt(sock, IPPROTO_TCP, TCP_NODELAY, &noDelay, sizeof(noDelay));
+    return sock;
+}
+
+int VncClientThread::waitForConnected(int sock, int timeoutSeconds)
+{
+    const QDeadlineTimer deadline = timeoutSeconds > 0 ? QDeadlineTimer(std::chrono::seconds(timeoutSeconds)) : QDeadlineTimer(QDeadlineTimer::Forever);
+    pollfd pending = {sock, POLLOUT, 0};
+    while (!deadline.hasExpired()) {
+        // short slices, so quitting does not wait for the connect timeout
+        if (isInterruptionRequested()) {
+            return ECANCELED;
+        }
+        const int ready = poll(&pending, 1, static_cast<int>(qMin<qint64>(deadline.remainingTime(), 500)));
+        if (ready < 0 && errno != EINTR) {
+            return errno;
+        }
+        if (ready > 0) {
+            int error = 0;
+            socklen_t length = sizeof(error);
+            getsockopt(sock, SOL_SOCKET, SO_ERROR, &error, &length);
+            return error;
+        }
+    }
+    return ETIMEDOUT;
+}
+
+void VncClientThread::connectionFailed(FailureReason reason, const QString &details)
+{
+    // While reconnecting after a dropped connection, keep trying quietly.
+    if (m_keepalive.set && !m_password.isNull()) {
+        m_keepalive.failed = true;
+        if (!m_reportedServerNotFound) {
+            m_reportedServerNotFound = true;
+            clientStateChange(RemoteView::Disconnected, i18n("Server not found."));
+        }
+        return;
+    }
+    setPendingFailure(reason, details);
 }
 
 /**

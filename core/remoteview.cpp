@@ -116,6 +116,38 @@ RemoteView::RemoteStatus RemoteView::status()
     return m_status;
 }
 
+void RemoteView::reportError(const ConnectionError &error)
+{
+    qCWarning(KRDC) << "Connection error at stage" << ConnectionError::stageName(error.stage) << ":" << error.message << error.details;
+    Q_EMIT connectionError(error);
+}
+
+void RemoteView::setCanceledByUser()
+{
+    m_canceledByUser = true;
+}
+
+bool RemoteView::canceledByUser() const
+{
+    return m_canceledByUser;
+}
+
+ConnectionError::Stage RemoteView::stageForCurrentStatus() const
+{
+    switch (m_status) {
+    case Connected:
+        return ConnectionError::Stage::ConnectionLost;
+    case Authenticating:
+        return ConnectionError::Stage::Authentication;
+    case Preparing:
+        return ConnectionError::Stage::Session;
+    case Connecting:
+        return ConnectionError::Stage::Network;
+    default:
+        return ConnectionError::Stage::Unknown;
+    }
+}
+
 void RemoteView::setStatus(RemoteView::RemoteStatus s)
 {
     if (m_status == s) {
@@ -652,19 +684,52 @@ void RemoteView::sshRequestPassword(SshTunnelThread::PasswordRequestFlags flags)
     } else {
         qCDebug(KRDC) << "ssh password dialog not accepted";
         m_sshTunnelThread->userCanceledPasswordRequest();
+        setCanceledByUser();
         // We need to use a single shot because otherwise startQuitting deletes the thread
         // but we're here from a blocked queued connection and thus we deadlock
         QTimer::singleShot(0, this, &RemoteView::startQuitting);
     }
 }
 
-void RemoteView::sshErrorMessage(const QString &message)
+void RemoteView::sshErrorMessage(const QString &message, SshTunnelThread::Failure failure)
 {
-    qCritical(KRDC) << message;
+    qCritical(KRDC) << failure << message;
 
+    HostPreferences *prefs = hostPreferences();
+    const QString sshPort = QString::number(prefs->sshTunnelPort());
+    ConnectionError error =
+        ConnectionError::create(ConnectionError::Stage::SshTunnel, i18nc("@label", "The SSH tunnel on port %1 could not be set up.", sshPort), message);
+    switch (failure) {
+    case SshTunnelThread::Failure::Connect:
+        error.title = i18nc("@title connection error", "SSH server not reachable");
+        error.message = i18nc("@label", "The SSH server did not accept a connection on port %1.", sshPort);
+        error.steps = {
+            i18nc("@info", "Make sure the SSH server is running and listens on port %1.", sshPort),
+            i18nc("@info", "Check the host name, and that the computer is reachable from this network."),
+            i18nc("@info", "Check that no firewall blocks SSH connections."),
+        };
+        break;
+    case SshTunnelThread::Failure::Authentication:
+        error.title = i18nc("@title connection error", "SSH login failed");
+        error.message = prefs->sshTunnelUserName().isEmpty() ? i18nc("@label", "The SSH server did not accept the login.")
+                                                             : i18nc("@label", "The SSH server did not accept the login for “%1”.", prefs->sshTunnelUserName());
+        error.steps = {
+            i18nc("@info", "Check the SSH user name in the host settings, and the password."),
+            i18nc("@info", "If you use key authentication, add the key to your SSH agent with ssh-add, and make sure it is authorized on the server."),
+            i18nc("@info", "If the SSH server does not allow password logins, set up key authentication."),
+        };
+        break;
+    case SshTunnelThread::Failure::LocalSocket:
+        error.message = i18nc("@label", "No free local port could be opened for the tunnel on this computer.");
+        error.steps = {
+            i18nc("@info", "Close other applications that open many network connections, then connect again."),
+        };
+        error.actions = ConnectionError::Retry;
+        break;
+    }
+    // Report first: quitting emits disconnected().
+    reportError(error);
     startQuitting();
-
-    Q_EMIT errorMessage(i18n("SSH Tunnel failure"), message);
 }
 #endif
 

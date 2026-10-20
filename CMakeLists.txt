@@ -26,7 +26,7 @@ include(KDEClangFormat)
 include(KDEGitCommitHooks)
 include(ECMInstallIcons)
 
-find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core Gui)
+find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core Gui Network)
 if (Qt6Gui_VERSION VERSION_GREATER_EQUAL "6.10.0")
     find_package(Qt6GuiPrivate ${QT_MIN_VERSION} REQUIRED NO_MODULE)
 endif()
@@ -75,7 +75,7 @@ add_definitions(
 )
 ecm_setup_version(${RELEASE_SERVICE_VERSION}
     VARIABLE_PREFIX KRDC
-    SOVERSION 5
+    SOVERSION 6
     VERSION_HEADER krdc_version.h
 )
 
@@ -185,6 +185,7 @@ target_sources(krdc PRIVATE
     floatingtoolbar.cpp
     bookmarkmanager.cpp
     connectiondelegate.cpp
+    connectionstatuswidget.cpp
     remotedesktopsmodel.cpp
     systemtrayicon.cpp
     tabbedviewwidget.cpp
@@ -208,6 +209,7 @@ ecm_qt_declare_logging_category(krdc
 )
 
 target_link_libraries(krdc
+    Qt::Network
     KF6::Bookmarks
     KF6::BookmarksWidgets
     KF6::Completion

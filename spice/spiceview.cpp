@@ -102,8 +102,8 @@ bool SpiceView::startConnection()
 
     if (!spice_session_connect(m_spiceSession)) {
         qCWarning(KRDC) << "SpiceView: spice_session_connect() failed for" << m_host << m_port;
+        reportError(ConnectionError::networkFailure(ConnectionError::NetworkFailure::Unknown));
         setStatus(Disconnected);
-        Q_EMIT errorMessage(tr("Connection failed"), tr("Could not connect to %1:%2").arg(m_host).arg(m_port));
         disconnectSession();
         g_object_unref(m_spiceSession);
         m_spiceSession = nullptr;
@@ -571,7 +571,7 @@ void SpiceView::cbChannelDestroy(SpiceSession * /*session*/, SpiceChannel *chann
         self->m_playbackChannel = nullptr;
 }
 
-void SpiceView::cbChannelEvent(SpiceChannel * /*channel*/, SpiceChannelEvent event, gpointer data)
+void SpiceView::cbChannelEvent(SpiceChannel *channel, SpiceChannelEvent event, gpointer data)
 {
     auto *self = static_cast<SpiceView *>(data);
 
@@ -588,9 +588,20 @@ void SpiceView::cbChannelEvent(SpiceChannel * /*channel*/, SpiceChannelEvent eve
     case SPICE_CHANNEL_ERROR_CONNECT:
     case SPICE_CHANNEL_ERROR_TLS:
     case SPICE_CHANNEL_ERROR_LINK:
-    case SPICE_CHANNEL_ERROR_IO:
-        QMetaObject::invokeMethod(self, "onChannelDisconnected", Qt::QueuedConnection);
+    case SPICE_CHANNEL_ERROR_IO: {
+        const GError *error = spice_channel_get_error(channel);
+        const QString details = error ? QString::fromUtf8(error->message) : QString();
+        const int ioErrorCode = error && error->domain == G_IO_ERROR ? error->code : -1;
+        const bool nameNotFound = error && error->domain == G_RESOLVER_ERROR;
+        QMetaObject::invokeMethod(self,
+                                  "onChannelError",
+                                  Qt::QueuedConnection,
+                                  Q_ARG(int, static_cast<int>(event)),
+                                  Q_ARG(int, ioErrorCode),
+                                  Q_ARG(bool, nameNotFound),
+                                  Q_ARG(QString, details));
         break;
+    }
     case SPICE_CHANNEL_ERROR_AUTH:
         // channel-event fires on the GUI thread (Qt uses QEventDispatcherGlib,
         // so the GLib default context IS the Qt event loop). We must not block
@@ -821,6 +832,7 @@ void SpiceView::requestPassword()
     if (dialog.exec() != KPasswordDialog::Accepted) {
         qCDebug(KRDC) << "SpiceView: password dialog cancelled";
         Q_EMIT showingPasswordDialog(false);
+        setCanceledByUser();
         startQuitting();
         return;
     }
@@ -848,6 +860,59 @@ void SpiceView::onChannelDisconnected()
         setStatus(Disconnected);
         Q_EMIT disconnected();
     }
+}
+
+static ConnectionError::NetworkFailure networkFailure(int ioErrorCode)
+{
+    switch (ioErrorCode) {
+    case G_IO_ERROR_CONNECTION_REFUSED:
+        return ConnectionError::NetworkFailure::Refused;
+    case G_IO_ERROR_TIMED_OUT:
+        return ConnectionError::NetworkFailure::NoResponse;
+    case G_IO_ERROR_HOST_UNREACHABLE:
+    case G_IO_ERROR_NETWORK_UNREACHABLE:
+        return ConnectionError::NetworkFailure::Unreachable;
+    default:
+        return ConnectionError::NetworkFailure::Unknown;
+    }
+}
+
+void SpiceView::onChannelError(int event, int ioErrorCode, bool nameNotFound, const QString &details)
+{
+    if (m_quitFlag) {
+        return;
+    }
+
+    ConnectionError error;
+    if (status() == Connected) {
+        error = ConnectionError::create(ConnectionError::Stage::ConnectionLost, QString(), details);
+    } else {
+        switch (static_cast<SpiceChannelEvent>(event)) {
+        case SPICE_CHANNEL_ERROR_TLS:
+            error = ConnectionError::create(ConnectionError::Stage::Security, i18nc("@label", "The TLS handshake failed."), details);
+            error.steps.prepend(i18nc("@info", "Check whether the server accepts TLS only on a separate port, and that its certificate is trusted."));
+            break;
+        case SPICE_CHANNEL_ERROR_LINK:
+            error = ConnectionError::create(ConnectionError::Stage::Session, i18nc("@label", "The server rejected the SPICE connection."), details);
+            error.steps.prepend(i18nc("@info", "Check that this port belongs to a SPICE server with a compatible protocol version."));
+            break;
+        default:
+            if (nameNotFound) {
+                error = ConnectionError::create(ConnectionError::Stage::NameResolution, i18nc("@label", "No IP address was found for this name."), details);
+                break;
+            }
+            const ConnectionError::NetworkFailure failure = networkFailure(ioErrorCode);
+            error = ConnectionError::networkFailure(failure, details);
+            if (failure != ConnectionError::NetworkFailure::Unreachable) {
+                error.steps << i18nc("@info", "Make sure the virtual machine is running, and its SPICE display listens on this address.");
+            }
+            break;
+        }
+    }
+    reportError(error);
+
+    setStatus(Disconnected);
+    Q_EMIT disconnected();
 }
 
 void SpiceView::onDisplayPrimary(QImage frame)

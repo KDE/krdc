@@ -170,7 +170,7 @@ bool RdpView::startConnection()
     connect(m_session.get(), &RdpSession::stateChanged, this, [this]() {
         switch (m_session->state()) {
         case RdpSession::State::Starting:
-            setStatus(Authenticating);
+            // Starts before connecting, so it is no evidence of reaching the server.
             break;
         case RdpSession::State::Connected:
             setStatus(Preparing);
@@ -235,6 +235,7 @@ void RdpView::onAuthRequested()
     dialog->setPassword(m_password);
 
     if (!dialog->exec()) {
+        setCanceledByUser();
         return;
     }
 
@@ -280,6 +281,7 @@ void RdpView::onVerifyCertificate(RdpSession::CertificateResult *ret, const QStr
 
     const auto result = static_cast<KMessageDialog::ButtonType>(dialog.exec());
     if (result == KMessageDialog::Cancel) {
+        setCanceledByUser();
         *ret = RdpSession::CertificateResult::DoNotAccept;
         return;
     }
@@ -305,6 +307,7 @@ void RdpView::onVerifyChangedCertificate(RdpSession::CertificateResult *ret, con
 
     const auto result = static_cast<KMessageDialog::ButtonType>(dialog.exec());
     if (result == KMessageDialog::Cancel) {
+        setCanceledByUser();
         *ret = RdpSession::CertificateResult::DoNotAccept;
         return;
     }
@@ -318,19 +321,34 @@ void RdpView::onVerifyChangedCertificate(RdpSession::CertificateResult *ret, con
 
 void RdpView::handleError(const unsigned int error)
 {
-    QString title;
-    QString message;
+    using Stage = ConnectionError::Stage;
 
     switch (error) {
     case FREERDP_ERROR_BASE:
         return; // no error, no need to show an error message
     case FREERDP_ERROR_CONNECT_CANCELLED:
         return; // user canceled connection, no need to show an error message
+    default:
+        break;
+    }
+
+    const QString details = QStringLiteral("%1 (0x%2): %3")
+                                .arg(QString::fromUtf8(freerdp_get_last_error_name(error)))
+                                .arg(error, 8, 16, QLatin1Char('0'))
+                                .arg(QString::fromUtf8(freerdp_get_last_error_string(error)));
+    ConnectionError report;
+
+    switch (error) {
     case FREERDP_ERROR_AUTHENTICATION_FAILED:
     case FREERDP_ERROR_CONNECT_LOGON_FAILURE:
     case FREERDP_ERROR_CONNECT_WRONG_PASSWORD:
-        title = i18nc("@title:dialog", "Login Failure");
-        message = i18nc("@label", "Unable to login with the provided credentials. Please double check the user and password.");
+    case FREERDP_ERROR_CONNECT_NO_OR_MISSING_CREDENTIALS:
+        report = ConnectionError::create(Stage::Authentication,
+                                         m_user.isEmpty() ? QString() : i18nc("@label", "The credentials for “%1” were not accepted.", m_user),
+                                         details);
+        if (!m_hostPreferences->gatewayServer().isEmpty()) {
+            report.steps << i18nc("@info", "Check the RD Gateway credentials in the host settings.");
+        }
         if (m_password.isEmpty()) {
             deleteWalletPassword();
         }
@@ -338,62 +356,136 @@ void RdpView::handleError(const unsigned int error)
     case FREERDP_ERROR_CONNECT_ACCOUNT_LOCKED_OUT:
     case FREERDP_ERROR_CONNECT_ACCOUNT_EXPIRED:
     case FREERDP_ERROR_CONNECT_ACCOUNT_DISABLED:
+    case FREERDP_ERROR_CONNECT_ACCOUNT_RESTRICTION:
+    case FREERDP_ERROR_CONNECT_LOGON_TYPE_NOT_GRANTED:
+    case FREERDP_ERROR_CONNECT_ACCESS_DENIED:
+    case FREERDP_ERROR_CONNECT_CLIENT_REVOKED:
+    case FREERDP_ERROR_INSUFFICIENT_PRIVILEGES:
     case FREERDP_ERROR_SERVER_INSUFFICIENT_PRIVILEGES:
-        title = i18nc("@title:dialog", "Account Problems");
-        message = i18nc("@label", "The provided account is not allowed to log in to this machine. Please contact your system administrator.");
+        report = ConnectionError::create(Stage::Authentication,
+                                         m_user.isEmpty() ? i18nc("@label", "This account may not log in remotely.")
+                                                          : i18nc("@label", "“%1” may not log in remotely.", m_user),
+                                         details);
+        report.title = i18nc("@title connection error", "Access denied");
+        report.steps = {
+            i18nc("@info", "Check whether the account is locked, disabled or expired."),
+            i18nc("@info",
+                  "Ask the administrator of the remote computer to add the account to the Remote Desktop Users group, or log in with a different account."),
+        };
         break;
     case FREERDP_ERROR_CONNECT_PASSWORD_EXPIRED:
     case FREERDP_ERROR_CONNECT_PASSWORD_CERTAINLY_EXPIRED:
     case FREERDP_ERROR_CONNECT_PASSWORD_MUST_CHANGE:
-        title = i18nc("@title:dialog", "Password Problems");
-        message = i18nc("@label", "Unable to login with the provided password. Please contact your system administrator to change it.");
+    case FREERDP_ERROR_SERVER_FRESH_CREDENTIALS_REQUIRED:
+        report =
+            ConnectionError::create(Stage::Authentication, i18nc("@label", "The password must be changed before it can be used to log in remotely."), details);
+        report.title = i18nc("@title connection error", "Password expired");
+        report.steps = {
+            i18nc("@info", "Change the password by logging in locally on the remote computer, or ask its administrator to reset it."),
+        };
+        report.actions = ConnectionError::Retry;
         break;
-    case FREERDP_ERROR_CONNECT_FAILED:
-    case FREERDP_ERROR_TLS_CONNECT_FAILED:
-    case FREERDP_ERROR_CONNECT_TRANSPORT_FAILED:
-        if (status() == Connected) {
-            title = i18nc("@title:dialog", "Connection Lost");
-            message = i18nc("@label", "Lost connection to the server.");
-        } else {
-            title = i18nc("@title:dialog", "Could not Connect");
-            message = i18nc("@label", "Could not connect to the server.");
-        }
+    case FREERDP_ERROR_CONNECT_KDC_UNREACHABLE:
+        report = ConnectionError::create(Stage::Authentication, i18nc("@label", "The Kerberos domain controller could not be reached."), details);
+        report.steps = {
+            i18nc("@info", "Check the domain you entered when logging in."),
+            i18nc("@info", "Connect to the network or VPN of the domain."),
+        };
         break;
     case FREERDP_ERROR_DNS_ERROR:
     case FREERDP_ERROR_DNS_NAME_NOT_FOUND:
-        title = i18nc("@title:dialog", "Server not Found");
-        message = i18nc("@label", "Could not find the server.");
+        report = ConnectionError::create(Stage::NameResolution, i18nc("@label", "No IP address was found for this name."), details);
+        break;
+    case FREERDP_ERROR_TLS_CONNECT_FAILED:
+    case FREERDP_ERROR_SECURITY_NEGO_CONNECT_FAILED:
+#ifdef FREERDP_ERROR_CONNECT_HYBRID_REQUIRED_BY_SERVER // FreeRDP >= 3.31
+    case FREERDP_ERROR_CONNECT_HYBRID_REQUIRED_BY_SERVER:
+#endif
+        if (status() == Connected) {
+            report = ConnectionError::create(Stage::ConnectionLost, QString(), details);
+            break;
+        }
+        report = ConnectionError::create(Stage::Security, i18nc("@label", "The server and KRDC could not agree on a security protocol."), details);
+        if (m_hostPreferences->tlsSecLevel() != RdpHostPreferences::TlsSecLevel::Any) {
+            report.steps.prepend(i18nc("@info", "Set the TLS security level in the host settings to “Any”. The server may not support the level selected."));
+        }
+#ifdef FREERDP_ERROR_CONNECT_HYBRID_REQUIRED_BY_SERVER
+        if (error == FREERDP_ERROR_CONNECT_HYBRID_REQUIRED_BY_SERVER) {
+            report.message = i18nc("@label", "The server requires Network Level Authentication (NLA).");
+            report.steps.prepend(i18nc("@info", "Enable NLA in the security settings for this host."));
+        }
+#endif
+        break;
+    case FREERDP_ERROR_CONNECT_FAILED:
+    case FREERDP_ERROR_CONNECT_TRANSPORT_FAILED:
+    case FREERDP_ERROR_MCS_CONNECT_INITIAL_ERROR:
+        if (status() == Connected) {
+            report = ConnectionError::create(Stage::ConnectionLost, QString(), details);
+        } else if (error == FREERDP_ERROR_CONNECT_FAILED) {
+            // refused, timed out or unreachable
+            report = ConnectionError::networkFailure(ConnectionError::NetworkFailure::Unknown, details);
+        } else {
+            // opened, then dropped by the server during the handshake
+            report = ConnectionError::serverClosedDuringSetup(details);
+        }
+        if (!m_hostPreferences->gatewayServer().isEmpty()) {
+            report.steps << i18nc("@info",
+                                  "Check the RD Gateway settings for this host. The gateway “%1” may be unreachable or reject the connection.",
+                                  m_hostPreferences->gatewayServer());
+        }
+        break;
+    case FREERDP_ERROR_CONNECT_ACTIVATION_TIMEOUT:
+    case FREERDP_ERROR_CONNECT_TARGET_BOOTING:
+    case FREERDP_ERROR_LOGON_TIMEOUT:
+        report = ConnectionError::create(Stage::Session, i18nc("@label", "The remote computer did not finish starting the session in time."), details);
+        report.steps = {i18nc("@info", "The remote computer may still be starting up or be under heavy load. Wait a minute, then connect again.")};
+        report.actions = ConnectionError::Retry;
         break;
     case FREERDP_ERROR_SERVER_DENIED_CONNECTION:
-        title = i18nc("@title:dialog", "Connection Refused");
-        message = i18nc("@label", "The server refused the connection request.");
-
+        report = ConnectionError::create(Stage::Session, i18nc("@label", "It accepted the connection, then refused to start a session."), details);
+        report.title = i18nc("@title connection error", "Session refused");
+        break;
+    case FREERDP_ERROR_PRE_CONNECT_FAILED:
+    case FREERDP_ERROR_POST_CONNECT_FAILED:
+        report = ConnectionError::create(Stage::Session, i18nc("@label", "The server did not accept the options selected for this host."), details);
         break;
     case FREERDP_ERROR_RPC_INITIATED_DISCONNECT:
+        report = ConnectionError::create(Stage::SessionEnded, i18nc("@label", "An administrator or another program disconnected this session."), details);
+        break;
     case FREERDP_ERROR_RPC_INITIATED_LOGOFF:
+        report = ConnectionError::create(Stage::SessionEnded, i18nc("@label", "An administrator signed this session out."), details);
+        break;
     case FREERDP_ERROR_RPC_INITIATED_DISCONNECT_BY_USER:
+        report = ConnectionError::create(Stage::SessionEnded, i18nc("@label", "The session was disconnected from the remote computer."), details);
+        break;
     case FREERDP_ERROR_LOGOFF_BY_USER:
-        // user or admin initiated action, quit without error
+        // The user signed out in the remote session: close quietly, as when disconnecting here.
+        setCanceledByUser();
         return;
     case FREERDP_ERROR_DISCONNECTED_BY_OTHER_CONNECTION:
-        title = i18nc("@title:dialog", "Connection Closed");
-        message = QStringLiteral("Disconnected by other session");
+        report = ConnectionError::create(Stage::SessionEnded, i18nc("@label", "Disconnected because someone else connected to this session."), details);
+        report.steps = {i18nc("@info", "Reconnect to take the session back. This disconnects the other user.")};
+        break;
+    case FREERDP_ERROR_IDLE_TIMEOUT:
+        report = ConnectionError::create(Stage::SessionEnded, i18nc("@label", "The session was closed after being idle for too long."), details);
+        report.steps = {i18nc("@info", "Reconnect to continue. The idle time limit is set by the administrator of the server.")};
         break;
     default:
         qCDebug(KRDC) << "Unhandled error" << error;
-        title = i18nc("@title:dialog", "Connection Failed");
-        message = i18nc("@label", "An unknown error occurred");
+        report = ConnectionError::create(stageForCurrentStatus(), QString(), details);
         break;
     }
 
-    qCDebug(KRDC) << "error message" << title << message;
-    // TODO offer reconnect if appropriate
-    Q_EMIT errorMessage(title, message);
+    reportError(report);
 }
 
 void RdpView::onLogonError(const QString &error)
 {
-    Q_EMIT errorMessage(i18nc("@title:dialog", "Logon Error"), error);
+    ConnectionError report =
+        ConnectionError::create(ConnectionError::Stage::Authentication, i18nc("@label", "The remote computer reported a problem while logging in."), error);
+    report.steps.prepend(i18nc("@info", "Check that this user may log in to the remote computer, and that the session is not busy."));
+    report.fatal = false;
+    reportError(report);
 }
 
 HostPreferences *RdpView::hostPreferences()

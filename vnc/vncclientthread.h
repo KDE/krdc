@@ -16,6 +16,8 @@
 #include <QQueue>
 #include <QThread>
 
+#include <optional>
+
 extern "C" {
 #include <rfb/rfbclient.h>
 }
@@ -100,6 +102,22 @@ public:
     };
     Q_ENUM(ColorDepth)
 
+    // Why the connection failed
+    enum class FailureReason {
+        ServerNotFound,
+        ConnectionRefused,
+        NoResponse,
+        NetworkUnreachable,
+        CouldNotConnect,
+        AuthenticationFailed,
+        TooManyAuthenticationTries,
+        UnsupportedAuthenticationType,
+        ServerClosedConnection,
+        ConnectionInterrupted,
+        AppleCompatibility, // not an error: the server needs a local cursor
+    };
+    Q_ENUM(FailureReason)
+
     explicit VncClientThread(QObject *parent = nullptr);
     ~VncClientThread() override;
     const QImage image(int x = 0, int y = 0, int w = 0, int h = 0);
@@ -138,7 +156,7 @@ Q_SIGNALS:
     void gotCut(const QString &text);
     void gotCursor(const QCursor &cursor);
     void passwordRequest(bool includingUsername = false);
-    void outputErrorMessage(const QString &message);
+    void outputErrorMessage(VncClientThread::FailureReason reason, const QString &details);
 
     /**
      * When we connect/disconnect/reconnect/etc., this signal will be emitted.
@@ -196,7 +214,12 @@ private:
     QQueue<ClientEvent *> m_eventQueue;
     // color table for 8bit indexed colors
     QVector<QRgb> m_colorTable;
-    QString outputErrorMessageString;
+    // Set on this thread, delivered from the GUI thread by checkOutputErrorMessage()
+    QMutex m_failureMutex;
+    std::optional<FailureReason> m_pendingFailure;
+    bool m_failureSet = false; // since the current connection attempt began
+    // raw libvncclient or operating system message for the pending failure
+    QString m_pendingFailureDetails;
 
     QRect m_dirtyRect;
 
@@ -228,6 +251,13 @@ private:
     // Initialise the VNC client library object.
     bool clientCreate(bool reinitialising);
 
+    // Open the TCP connection to the server; returns the socket, or -1 after reporting why it failed.
+    int connectToServer(int timeoutSeconds);
+    // Wait for a non-blocking connect(); returns 0 or the errno it failed with.
+    int waitForConnected(int sock, int timeoutSeconds);
+    void connectionFailed(FailureReason reason, const QString &details);
+    void setPendingFailure(FailureReason reason, const QString &details);
+
     // Uninitialise the VNC client library object.
     void clientDestroy();
 
@@ -236,7 +266,7 @@ private:
 
     // Record a state change.
     void clientStateChange(RemoteView::RemoteStatus status, const QString &details);
-    QString m_previousDetails;
+    bool m_reportedServerNotFound = false;
 
 private Q_SLOTS:
     void checkOutputErrorMessage();

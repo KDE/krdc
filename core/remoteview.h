@@ -9,6 +9,7 @@
 #ifndef REMOTEVIEW_H
 #define REMOTEVIEW_H
 
+#include "connectionerror.h"
 #include "krdccore_export.h"
 
 #include <QClipboard>
@@ -286,6 +287,9 @@ public:
      */
     RemoteStatus status();
 
+    /** Whether the user canceled a backend prompt. @see setCanceledByUser() */
+    bool canceledByUser() const;
+
     /**
      * @return the current url
      */
@@ -397,9 +401,13 @@ Q_SIGNALS:
     void disconnectedError();
 
     /**
-     * Emitted when the view has a specific error.
+     * Emitted when connecting failed or an established connection ended.
+     * The view may still be alive; the application closes it.
      */
-    void errorMessage(const QString &title, const QString &message);
+    void connectionError(const ConnectionError &error);
+
+    /** Emitted when the backend starts and finishes restoring a dropped connection. */
+    void reconnectingChanged(bool reconnecting, const QString &details);
 
     /**
      * Emitted when the status of the view changed.
@@ -463,6 +471,15 @@ protected:
      */
     virtual void setStatus(RemoteStatus s);
 
+    /** Emits connectionError(). */
+    void reportError(const ConnectionError &error);
+
+    /** Call before quitting because the user canceled a prompt, so no error is shown. */
+    void setCanceledByUser();
+
+    /** Best guess of the failing stage from the current status. */
+    ConnectionError::Stage stageForCurrentStatus() const;
+
     QCursor localDefaultCursor() const;
 
     void unpressModifiers();
@@ -471,6 +488,7 @@ protected:
 
     QString m_host;
     int m_port;
+    bool m_canceledByUser = false;
     bool m_viewOnly;
     bool m_grabAllKeys;
     bool m_scale;
@@ -504,7 +522,7 @@ private:
 
 private Q_SLOTS:
     void sshRequestPassword(SshTunnelThread::PasswordRequestFlags flags);
-    void sshErrorMessage(const QString &message);
+    void sshErrorMessage(const QString &message, SshTunnelThread::Failure failure);
 #endif
 };
 

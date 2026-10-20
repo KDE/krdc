@@ -149,6 +149,7 @@ private:
 private Q_SLOTS:
     void onChannelConnected();
     void onChannelDisconnected();
+    void onChannelError(int event, int ioErrorCode, bool nameNotFound, const QString &details);
     void requestPassword();
     void onDisplayPrimary(QImage frame);
     void onDisplayInvalidate(int x, int y, QImage patch);

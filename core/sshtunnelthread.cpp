@@ -101,7 +101,7 @@ void SshTunnelThread::run()
 
     int res = ssh_connect(session);
     if (res != SSH_OK) {
-        Q_EMIT errorMessage(i18n("Error connecting to %1: %2", QString::fromUtf8(m_host), QString::fromLocal8Bit(ssh_get_error(session))));
+        Q_EMIT errorMessage(i18n("Error connecting to %1: %2", QString::fromUtf8(m_host), QString::fromLocal8Bit(ssh_get_error(session))), Failure::Connect);
         return;
     }
 
@@ -126,13 +126,13 @@ void SshTunnelThread::run()
     }
 
     if (res != SSH_AUTH_SUCCESS) {
-        Q_EMIT errorMessage(i18n("Error authenticating with password: %1", QString::fromLocal8Bit(ssh_get_error(session))));
+        Q_EMIT errorMessage(i18n("Error authenticating with password: %1", QString::fromLocal8Bit(ssh_get_error(session))), Failure::Authentication);
         return;
     }
 
     const int server_sock = socket(AF_INET, SOCK_STREAM | SOCK_NONBLOCK, 0);
     if (server_sock == -1) {
-        Q_EMIT errorMessage(i18n("Error creating tunnel socket"));
+        Q_EMIT errorMessage(i18n("Error creating tunnel socket"), Failure::LocalSocket);
         return;
     }
 
@@ -150,14 +150,14 @@ void SshTunnelThread::run()
         sin.sin_addr.s_addr = inet_addr("127.0.0.1");
 
         if (bind(server_sock, (struct sockaddr *)&sin, sizeof sin) == -1) {
-            Q_EMIT errorMessage(i18n("Error creating tunnel socket"));
+            Q_EMIT errorMessage(i18n("Error creating tunnel socket"), Failure::LocalSocket);
             return;
         }
 
         if (m_tunnelPort == 0) {
             socklen_t sin_len = sizeof sin;
             if (getsockname(server_sock, (struct sockaddr *)&sin, &sin_len) == -1) {
-                Q_EMIT errorMessage(i18n("Error creating tunnel socket"));
+                Q_EMIT errorMessage(i18n("Error creating tunnel socket"), Failure::LocalSocket);
                 return;
             }
             m_tunnelPort = ntohs(sin.sin_port);
@@ -165,7 +165,7 @@ void SshTunnelThread::run()
     }
 
     if (listen(server_sock, SOMAXCONN) == -1) {
-        Q_EMIT errorMessage(i18n("Error creating tunnel socket"));
+        Q_EMIT errorMessage(i18n("Error creating tunnel socket"), Failure::LocalSocket);
         return;
     }
 
@@ -178,7 +178,7 @@ void SshTunnelThread::run()
     ssh_set_blocking(session, 0);
     cleanup.event = ssh_event_new();
     if (!cleanup.event || ssh_event_add_session(cleanup.event, session) != SSH_OK) {
-        Q_EMIT errorMessage(i18n("Error creating tunnel socket"));
+        Q_EMIT errorMessage(i18n("Error creating tunnel socket"), Failure::LocalSocket);
         return;
     }
 
