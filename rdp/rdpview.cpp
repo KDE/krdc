@@ -110,7 +110,7 @@ QSize RdpView::sizeHint() const
     const QSize remoteSize = m_fullscreenMonitorRect.isEmpty() ? m_session->size() : m_fullscreenMonitorRect.size();
 
     // when parent is resized and scaling is enabled, resize the view, preserving aspect ratio
-    if (m_hostPreferences->scaleToSize()) {
+    if (m_hostPreferences->scaleToSize() && parentWidget()) {
         return remoteSize.scaled(parentWidget()->size(), Qt::KeepAspectRatio);
     }
 

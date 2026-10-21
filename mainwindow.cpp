@@ -796,6 +796,8 @@ void MainWindow::detachRemoteView(RemoteView *view)
     if (!view->isQuitting()) {
         view->startQuitting();
     }
+    // Fullscreen teardown can resize the scroll area before the detached view is deleted.
+    disconnect(scrollArea, &RemoteViewScrollArea::resized, view, &RemoteView::scaleResize);
     scrollArea->takeWidget();
     view->deleteLater();
 
