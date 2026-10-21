@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-20 00:52+0000\n"
+"POT-Creation-Date: 2026-10-21 00:51+0000\n"
 "PO-Revision-Date: 2012-06-08 14:52+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer\n"
@@ -208,13 +208,13 @@ msgstr "កំណត់​រចនា​សម្ព័ន្ធ..."
 msgid "Remove"
 msgstr "យកចេញ"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:311 mainwindow.cpp:812
-#: mainwindow.cpp:828
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:323 mainwindow.cpp:926
+#: mainwindow.cpp:942
 #, kde-format
 msgid "Unusable URL"
 msgstr "URL មិន​អាច​ប្រើ​បាន"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:828
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:942
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr "ម៉ាស៊ីន​ដែល​បាន​ជ្រើស​មិន​អាច​ត្រូវ​បាន​គ្រប់គ្រង​ទេ ។"
@@ -286,6 +286,634 @@ msgid "A year ago"
 msgid_plural "%1 years ago"
 msgstr[0] "%1 ឆ្នាំ​កន្លង​ទៅ"
 
+#: connectionstatuswidget.cpp:64
+#, kde-format
+msgctxt "@info:status connection step"
+msgid "Not started"
+msgstr ""
+
+#: connectionstatuswidget.cpp:67
+#, kde-format
+msgctxt "@info:status connection step"
+msgid "Done"
+msgstr ""
+
+#: connectionstatuswidget.cpp:70
+#, kde-format
+msgctxt "@info:status connection step"
+msgid "Failed"
+msgstr ""
+
+#: connectionstatuswidget.cpp:73
+#, kde-format
+msgctxt "@info:status connection step"
+msgid "Information"
+msgstr ""
+
+#: connectionstatuswidget.cpp:250
+#, kde-format
+msgctxt "@info"
+msgid "Diagnostic information copied to the clipboard"
+msgstr ""
+
+#: connectionstatuswidget.cpp:257
+#, fuzzy, kde-format
+#| msgid "Connecting to %1"
+msgctxt "@title"
+msgid "Connecting to %1"
+msgstr "តភ្ជាប់​ទៅ %1"
+
+#: connectionstatuswidget.cpp:258
+#, fuzzy, kde-format
+#| msgid "Connecting to %1"
+msgctxt "@info diagnostic timeline"
+msgid "Connecting to %1"
+msgstr "តភ្ជាប់​ទៅ %1"
+
+#: connectionstatuswidget.cpp:274
+#, kde-format
+msgctxt "@action:button"
+msgid "Cancel"
+msgstr ""
+
+#: connectionstatuswidget.cpp:330
+#, kde-format
+msgctxt "@info:status connection step"
+msgid "In progress"
+msgstr ""
+
+#: connectionstatuswidget.cpp:406
+#, kde-format
+msgctxt "@info connection step"
+msgid "Looking up the server address"
+msgstr ""
+
+#: connectionstatuswidget.cpp:408
+#, kde-format
+msgctxt "@info connection step"
+msgid "Opening the SSH tunnel"
+msgstr ""
+
+#: connectionstatuswidget.cpp:410
+#, kde-format
+msgctxt "@info connection step"
+msgid "Opening a network connection"
+msgstr ""
+
+#: connectionstatuswidget.cpp:412
+#, fuzzy, kde-format
+#| msgid "Preparing connection to %1"
+msgctxt "@info connection step"
+msgid "Securing the connection"
+msgstr "កំពុង​រៀបចំ​ការ​តភ្ជាប់​ទៅ %1"
+
+#: connectionstatuswidget.cpp:414
+#, kde-format
+msgctxt "@info connection step"
+msgid "Logging in"
+msgstr ""
+
+#: connectionstatuswidget.cpp:416
+#, fuzzy, kde-format
+#| msgid "Invitation to view remote desktop"
+msgctxt "@info connection step"
+msgid "Starting the remote session"
+msgstr "អញ្ជើញ​ឲ្យ​​មើល​ផ្ទៃ​តុ​ពី​ចម្ងាយ"
+
+#: connectionstatuswidget.cpp:418
+#, fuzzy, kde-format
+#| msgid "When Connecting"
+msgctxt "@info connection step"
+msgid "Reconnecting"
+msgstr "នៅពេល​តភ្ជាប់"
+
+#: connectionstatuswidget.cpp:428
+#, kde-format
+msgctxt "@info connection step"
+msgid "Server address resolved"
+msgstr ""
+
+#: connectionstatuswidget.cpp:430
+#, kde-format
+msgctxt "@info connection step"
+msgid "SSH tunnel established"
+msgstr ""
+
+#: connectionstatuswidget.cpp:432
+#, kde-format
+msgctxt "@info connection step"
+msgid "Network connection established"
+msgstr ""
+
+#: connectionstatuswidget.cpp:434
+#, fuzzy, kde-format
+#| msgid "Connection Failure"
+msgctxt "@info connection step"
+msgid "Connection secured"
+msgstr "ការ​តភ្ជាប់​ទទួល​បរាជ័យ​"
+
+#: connectionstatuswidget.cpp:437
+#, kde-format
+msgctxt "@info connection step"
+msgid "Access granted"
+msgstr ""
+
+#: connectionstatuswidget.cpp:439
+#, fuzzy, kde-format
+#| msgid "KDE Remote Desktop Client started"
+msgctxt "@info connection step"
+msgid "Remote session started"
+msgstr "បាន​ចាប់ផ្ដើម​កម្មវិធី​មើល​ផ្ទៃតុ​ពី​ចម្ងាយ​របស់ KDE"
+
+#: connectionstatuswidget.cpp:449
+#, fuzzy, kde-format
+#| msgid "Connected to %1"
+msgctxt "@info"
+msgid "Resolved to %1."
+msgstr "បាន​តភ្ជាប់​ទៅ %1"
+
+#: connectionstatuswidget.cpp:461
+#, kde-format
+msgctxt "@info diagnostic timeline"
+msgid "Local address lookup failed: %1"
+msgstr ""
+
+#: connectionstatuswidget.cpp:466
+#, kde-format
+msgctxt "@info diagnostic timeline"
+msgid "%1 resolved to %2"
+msgstr ""
+
+#: connectionstatuswidget.cpp:498
+#, fuzzy, kde-format
+#| msgid "Connect to a NX Remote Desktop"
+msgctxt "@info diagnostic timeline"
+msgid "Connecting to the remote desktop service"
+msgstr "តភ្ជាប់​ទៅ​ផ្ទៃតុ​ពី​ចម្ងាយ NX"
+
+#: connectionstatuswidget.cpp:505
+#, fuzzy, kde-format
+#| msgid "Authenticating at %1"
+msgctxt "@info diagnostic timeline"
+msgid "Authenticating"
+msgstr "កំពុង​ផ្ទៀងផ្ទាត់​ភាព​ត្រឹមត្រូវ​នៅ %1..."
+
+#: connectionstatuswidget.cpp:509
+#, kde-format
+msgctxt "@info diagnostic timeline"
+msgid "Preparing the session"
+msgstr ""
+
+#: connectionstatuswidget.cpp:513
+#, fuzzy, kde-format
+#| msgid "Connect"
+msgctxt "@info diagnostic timeline"
+msgid "Connected"
+msgstr "តភ្ជាប់​"
+
+#: connectionstatuswidget.cpp:546
+#, kde-format
+msgctxt "@info diagnostic timeline"
+msgid "Connection dropped, reconnecting: %1"
+msgstr ""
+
+#: connectionstatuswidget.cpp:546
+#, fuzzy, kde-format
+#| msgid "Disconnect"
+msgctxt "@info diagnostic timeline"
+msgid "Reconnected"
+msgstr "ផ្ដាច់"
+
+#: connectionstatuswidget.cpp:559
+#, kde-format
+msgctxt "@info"
+msgid "KRDC keeps trying until the connection is back."
+msgstr ""
+
+#: connectionstatuswidget.cpp:563
+#, fuzzy, kde-format
+#| msgid "Connecting to %1"
+msgctxt "@title"
+msgid "Connection to %1 interrupted"
+msgstr "តភ្ជាប់​ទៅ %1"
+
+#: connectionstatuswidget.cpp:565
+#, fuzzy, kde-format
+#| msgid "Disconnect"
+msgctxt "@action:button"
+msgid "Disconnect"
+msgstr "ផ្ដាច់"
+
+#: connectionstatuswidget.cpp:575
+#, kde-format
+msgctxt "@info diagnostic timeline"
+msgid "Failed while: %1"
+msgstr ""
+
+#: connectionstatuswidget.cpp:656
+#, kde-format
+msgctxt "@title"
+msgid "Session with %1 ended"
+msgstr ""
+
+#: connectionstatuswidget.cpp:658
+#, fuzzy, kde-format
+#| msgid "Connecting to %1"
+msgctxt "@title"
+msgid "Connection to %1 lost"
+msgstr "តភ្ជាប់​ទៅ %1"
+
+#: connectionstatuswidget.cpp:660
+#, fuzzy, kde-format
+#| msgid "KRDC Konsole Connection"
+msgctxt "@title"
+msgid "Could not connect to %1"
+msgstr "ការ​តភ្ជាប់​កុងសូល KRDC"
+
+#: connectionstatuswidget.cpp:666
+#, fuzzy, kde-format
+#| msgid "Disconnect"
+msgctxt "@action:button"
+msgid "Reconnect"
+msgstr "ផ្ដាច់"
+
+#: connectionstatuswidget.cpp:666
+#, fuzzy, kde-format
+#| msgid "Connection"
+msgctxt "@action:button"
+msgid "Connect Again"
+msgstr "ការ​តភ្ជាប់​"
+
+#: connectionstatuswidget.cpp:671
+#, fuzzy, kde-format
+#| msgid "Goto Address"
+msgctxt "@action:button"
+msgid "Edit Address"
+msgstr "ទៅ​កាន់​អាសយដ្ឋាន"
+
+#: connectionstatuswidget.cpp:674
+#, kde-format
+msgctxt "@action:button"
+msgid "Edit Host Settings…"
+msgstr ""
+
+#: connectionstatuswidget.cpp:676
+#, fuzzy, kde-format
+#| msgid "Close Tab"
+msgctxt "@action:button"
+msgid "Close Tab"
+msgstr "បិទផ្ទាំង"
+
+#: connectionstatuswidget.cpp:714
+#, kde-format
+msgctxt "@action:button"
+msgid "Copy diagnostic information"
+msgstr ""
+
+#: connectionstatuswidget.cpp:719
+#, kde-format
+msgctxt "@action:button"
+msgid "Hide details"
+msgstr ""
+
+#: connectionstatuswidget.cpp:719
+#, fuzzy, kde-format
+#| msgctxt "EMAIL OF TRANSLATORS"
+#| msgid "Your emails"
+msgctxt "@action:button"
+msgid "Show details"
+msgstr "khoemsokhem@khmeros.info,​​evannak@khmeros.info,piseth_dv@khmeros.info"
+
+#: core/connectionerror.cpp:15
+#, kde-format
+msgctxt "@info connection stage"
+msgid "Setting up the SSH tunnel"
+msgstr ""
+
+#: core/connectionerror.cpp:17
+#, kde-format
+msgctxt "@info connection stage"
+msgid "Looking up the host name"
+msgstr ""
+
+#: core/connectionerror.cpp:19
+#, fuzzy, kde-format
+#| msgid "An error has occurred during the connection to the NX server."
+msgctxt "@info connection stage"
+msgid "Connecting to the server"
+msgstr "កំហុស​បានកើត​ឡើង​កំឡុង​ពេល​តភ្ជាប់​ទៅ​កាន់​ម៉ាស៊ីនបម្រើ NX ។"
+
+#: core/connectionerror.cpp:21
+#, fuzzy, kde-format
+#| msgid "Preparing connection to %1"
+msgctxt "@info connection stage"
+msgid "Securing the connection"
+msgstr "កំពុង​រៀបចំ​ការ​តភ្ជាប់​ទៅ %1"
+
+#: core/connectionerror.cpp:23
+#, kde-format
+msgctxt "@info connection stage"
+msgid "Logging in"
+msgstr ""
+
+#: core/connectionerror.cpp:25
+#, fuzzy, kde-format
+#| msgid "Invitation to view remote desktop"
+msgctxt "@info connection stage"
+msgid "Starting the remote session"
+msgstr "អញ្ជើញ​ឲ្យ​​មើល​ផ្ទៃ​តុ​ពី​ចម្ងាយ"
+
+#: core/connectionerror.cpp:27
+#, fuzzy, kde-format
+#| msgid "Connection Failure"
+msgctxt "@info connection stage"
+msgid "Connection interrupted"
+msgstr "ការ​តភ្ជាប់​ទទួល​បរាជ័យ​"
+
+#: core/connectionerror.cpp:29
+#, kde-format
+msgctxt "@info connection stage"
+msgid "Session ended remotely"
+msgstr ""
+
+#: core/connectionerror.cpp:33
+#, kde-format
+msgctxt "@info connection stage"
+msgid "Unknown"
+msgstr ""
+
+#: core/connectionerror.cpp:45
+#, kde-format
+msgctxt "@title connection error"
+msgid "SSH tunnel failed"
+msgstr ""
+
+#: core/connectionerror.cpp:47
+#, kde-format
+msgctxt "@info"
+msgid "Check the SSH tunnel user name and port in the host settings."
+msgstr ""
+
+#: core/connectionerror.cpp:48
+#, kde-format
+msgctxt "@info"
+msgid ""
+"Log in with an SSH client in a terminal to confirm that the server is "
+"reachable and your credentials work."
+msgstr ""
+
+#: core/connectionerror.cpp:49
+#, kde-format
+msgctxt "@info"
+msgid ""
+"If you use key authentication, add the key to your SSH agent with ssh-add."
+msgstr ""
+
+#: core/connectionerror.cpp:50
+#, kde-format
+msgctxt "@info"
+msgid "Make sure the SSH server allows port forwarding."
+msgstr ""
+
+#: core/connectionerror.cpp:54
+#, fuzzy, kde-format
+#| msgid "Server not found."
+msgctxt "@title connection error"
+msgid "Server not found"
+msgstr "រក​មិន​ឃើញ​ម៉ាស៊ីន​បម្រើ ។"
+
+#: core/connectionerror.cpp:56
+#, kde-format
+msgctxt "@info"
+msgid "Check the spelling of the address."
+msgstr ""
+
+#: core/connectionerror.cpp:57
+#, kde-format
+msgctxt "@info"
+msgid "Connect to the network or VPN the computer is on."
+msgstr ""
+
+#: core/connectionerror.cpp:58
+#, kde-format
+msgctxt "@info"
+msgid "Try the IP address of the computer instead of its name."
+msgstr ""
+
+#: core/connectionerror.cpp:63
+#, fuzzy, kde-format
+#| msgid "Server not found."
+msgctxt "@title connection error"
+msgid "Server not reachable"
+msgstr "រក​មិន​ឃើញ​ម៉ាស៊ីន​បម្រើ ។"
+
+#: core/connectionerror.cpp:65 core/connectionerror.cpp:145
+#, kde-format
+msgctxt "@info"
+msgid ""
+"Make sure the remote computer is turned on, awake and connected to the "
+"network."
+msgstr ""
+
+#: core/connectionerror.cpp:66 core/connectionerror.cpp:135
+#, kde-format
+msgctxt "@info"
+msgid "Check that remote desktop sharing is enabled on the remote computer."
+msgstr ""
+
+#: core/connectionerror.cpp:67 core/connectionerror.cpp:136
+#, kde-format
+msgctxt "@info"
+msgid ""
+"Check the port in the address. The defaults are 3389 for RDP and 5900 for "
+"VNC and SPICE."
+msgstr ""
+
+#: core/connectionerror.cpp:68 core/connectionerror.cpp:146
+#, kde-format
+msgctxt "@info"
+msgid "Check that no firewall blocks the connection."
+msgstr ""
+
+#: core/connectionerror.cpp:73
+#, fuzzy, kde-format
+#| msgid "Connection Failure"
+msgctxt "@title connection error"
+msgid "Secure connection failed"
+msgstr "ការ​តភ្ជាប់​ទទួល​បរាជ័យ​"
+
+#: core/connectionerror.cpp:75
+#, kde-format
+msgctxt "@info"
+msgid ""
+"Review the security settings for this host, or reset them to their defaults."
+msgstr ""
+
+#: core/connectionerror.cpp:76
+#, kde-format
+msgctxt "@info"
+msgid ""
+"If the server certificate changed unexpectedly, confirm the change with the "
+"server administrator before accepting it."
+msgstr ""
+
+#: core/connectionerror.cpp:80
+#, fuzzy, kde-format
+#| msgid "VNC authentication failed."
+msgctxt "@title connection error"
+msgid "Authentication failed"
+msgstr "ការ​ផ្ទៀងផ្ទាត់​ភាព​ត្រឹមត្រូវ VNC បាន​បរាជ័យ ។"
+
+#: core/connectionerror.cpp:82
+#, kde-format
+msgctxt "@info"
+msgid "Check the user name, password and domain, and that Caps Lock is off."
+msgstr ""
+
+#: core/connectionerror.cpp:83
+#, kde-format
+msgctxt "@info"
+msgid "If you use a saved password, enter it again. It may be out of date."
+msgstr ""
+
+#: core/connectionerror.cpp:84
+#, kde-format
+msgctxt "@info"
+msgid ""
+"If the account is locked or expired, contact the administrator of the remote "
+"computer."
+msgstr ""
+
+#: core/connectionerror.cpp:88
+#, fuzzy, kde-format
+#| msgid "Session Name"
+msgctxt "@title connection error"
+msgid "Session setup failed"
+msgstr "ឈ្មោះ​សម័យ"
+
+#: core/connectionerror.cpp:90
+#, kde-format
+msgctxt "@info"
+msgid ""
+"Reset advanced options in the host settings, such as graphics acceleration "
+"or color depth, to their defaults."
+msgstr ""
+
+#: core/connectionerror.cpp:91
+#, kde-format
+msgctxt "@info"
+msgid ""
+"Ask the administrator of the remote computer whether new sessions are "
+"allowed. The number of users may be limited."
+msgstr ""
+
+#: core/connectionerror.cpp:96
+#, kde-format
+msgctxt "@title connection error"
+msgid "Network connection interrupted"
+msgstr ""
+
+#: core/connectionerror.cpp:98
+#, kde-format
+msgctxt "@info"
+msgid "Check your network connection, then reconnect."
+msgstr ""
+
+#: core/connectionerror.cpp:99
+#, kde-format
+msgctxt "@info"
+msgid ""
+"If the remote computer restarted or went to sleep, wait until it is back, "
+"then reconnect."
+msgstr ""
+
+#: core/connectionerror.cpp:104
+#, fuzzy, kde-format
+#| msgid "An error has occurred during the connection to the NX server."
+msgctxt "@title connection error"
+msgid "Closed by the server"
+msgstr "កំហុស​បានកើត​ឡើង​កំឡុង​ពេល​តភ្ជាប់​ទៅ​កាន់​ម៉ាស៊ីនបម្រើ NX ។"
+
+#: core/connectionerror.cpp:109
+#, kde-format
+msgctxt "@title connection error"
+msgid "Unexpected error"
+msgstr ""
+
+#: core/connectionerror.cpp:118
+#, kde-format
+msgctxt "@label"
+msgid "It accepted the connection, then closed it before the session started."
+msgstr ""
+
+#: core/connectionerror.cpp:119
+#, fuzzy, kde-format
+#| msgid "VNC server closed connection."
+msgctxt "@title connection error"
+msgid "Server closed the connection"
+msgstr "ម៉ាស៊ីន​បម្រើ VNC បិទ​ការ​តភ្ជាប់ ។"
+
+#: core/connectionerror.cpp:121
+#, kde-format
+msgctxt "@info"
+msgid ""
+"If another viewer is connected, close it. Some servers allow only one at a "
+"time."
+msgstr ""
+
+#: core/connectionerror.cpp:122
+#, kde-format
+msgctxt "@info"
+msgid "Check that this port belongs to the remote desktop service you expect."
+msgstr ""
+
+#: core/connectionerror.cpp:123
+#, kde-format
+msgctxt "@info"
+msgid ""
+"Check the access and security settings of the server, or its log, for why it "
+"closed the connection."
+msgstr ""
+
+#: core/connectionerror.cpp:133
+#, fuzzy, kde-format
+#| msgid "Connection Failure"
+msgctxt "@title connection error"
+msgid "Connection refused"
+msgstr "ការ​តភ្ជាប់​ទទួល​បរាជ័យ​"
+
+#: core/connectionerror.cpp:137
+#, kde-format
+msgctxt "@info"
+msgid "Check that no firewall on the remote computer rejects the connection."
+msgstr ""
+
+#: core/connectionerror.cpp:143
+#, fuzzy, kde-format
+#| msgid "Server not found."
+msgctxt "@title connection error"
+msgid "Server not responding"
+msgstr "រក​មិន​ឃើញ​ម៉ាស៊ីន​បម្រើ ។"
+
+#: core/connectionerror.cpp:147 core/connectionerror.cpp:156
+#, kde-format
+msgctxt "@info"
+msgid "Check that the address is right."
+msgstr ""
+
+#: core/connectionerror.cpp:153
+#, fuzzy, kde-format
+#| msgid "An error has occurred during the connection to the NX server."
+msgctxt "@title connection error"
+msgid "No route to the server"
+msgstr "កំហុស​បានកើត​ឡើង​កំឡុង​ពេល​តភ្ជាប់​ទៅ​កាន់​ម៉ាស៊ីនបម្រើ NX ។"
+
+#: core/connectionerror.cpp:155
+#, kde-format
+msgctxt "@info"
+msgid "Connect to the network or VPN the remote computer is on."
+msgstr ""
+
 #: core/hostpreferences.cpp:230
 #, kde-format
 msgctxt "@label:textbox Name of a remote connection"
@@ -321,14 +949,101 @@ msgstr "ចង់ចាំ​ពាក្យ​សម្ងាត់ (KWallet)"
 msgid "Sessions"
 msgstr "សម័យ"
 
-#: core/remoteview.cpp:649
+#: core/remoteview.cpp:681
 #, kde-format
 msgid "Please enter the SSH password."
 msgstr ""
 
-#: core/remoteview.cpp:667
+#: core/remoteview.cpp:701
 #, kde-format
-msgid "SSH Tunnel failure"
+msgctxt "@label"
+msgid "The SSH tunnel on port %1 could not be set up."
+msgstr ""
+
+#: core/remoteview.cpp:704
+#, kde-format
+msgctxt "@title connection error"
+msgid "SSH server not reachable"
+msgstr ""
+
+#: core/remoteview.cpp:705
+#, fuzzy, kde-format
+#| msgid "VNC server closed connection."
+msgctxt "@label"
+msgid "The SSH server did not accept a connection on port %1."
+msgstr "ម៉ាស៊ីន​បម្រើ VNC បិទ​ការ​តភ្ជាប់ ។"
+
+#: core/remoteview.cpp:707
+#, kde-format
+msgctxt "@info"
+msgid "Make sure the SSH server is running and listens on port %1."
+msgstr ""
+
+#: core/remoteview.cpp:708
+#, kde-format
+msgctxt "@info"
+msgid ""
+"Check the host name, and that the computer is reachable from this network."
+msgstr ""
+
+#: core/remoteview.cpp:709
+#, kde-format
+msgctxt "@info"
+msgid "Check that no firewall blocks SSH connections."
+msgstr ""
+
+#: core/remoteview.cpp:713
+#, fuzzy, kde-format
+#| msgid "Connection Failure"
+msgctxt "@title connection error"
+msgid "SSH login failed"
+msgstr "ការ​តភ្ជាប់​ទទួល​បរាជ័យ​"
+
+#: core/remoteview.cpp:714
+#, kde-format
+msgctxt "@label"
+msgid "The SSH server did not accept the login."
+msgstr ""
+
+#: core/remoteview.cpp:715
+#, kde-format
+msgctxt "@label"
+msgid "The SSH server did not accept the login for “%1”."
+msgstr ""
+
+#: core/remoteview.cpp:717
+#, kde-format
+msgctxt "@info"
+msgid "Check the SSH user name in the host settings, and the password."
+msgstr ""
+
+#: core/remoteview.cpp:718
+#, kde-format
+msgctxt "@info"
+msgid ""
+"If you use key authentication, add the key to your SSH agent with ssh-add, "
+"and make sure it is authorized on the server."
+msgstr ""
+
+#: core/remoteview.cpp:719
+#, kde-format
+msgctxt "@info"
+msgid ""
+"If the SSH server does not allow password logins, set up key authentication."
+msgstr ""
+
+#: core/remoteview.cpp:723
+#, kde-format
+msgctxt "@label"
+msgid "No free local port could be opened for the tunnel on this computer."
+msgstr ""
+
+#: core/remoteview.cpp:725
+#, kde-format
+msgctxt "@info"
+msgid ""
+"Close other applications that open many network connections, then connect "
+"again."
 msgstr ""
 
 #: core/sshtunnelthread.cpp:104
@@ -510,270 +1225,285 @@ msgstr "ចាប់ផ្ដើម KRDC ជាមួយ URL ដែល​ផ្�
 msgid "URLs to connect after startup"
 msgstr "URL ដើម្បី​តភ្ជាប់ បន្ទាប់​ពី​ពេល​ចាប់ផ្ដើម"
 
-#: mainwindow.cpp:108
+#: mainwindow.cpp:110
 #, kde-format
 msgid "KDE Remote Desktop Client started"
 msgstr "បាន​ចាប់ផ្ដើម​កម្មវិធី​មើល​ផ្ទៃតុ​ពី​ចម្ងាយ​របស់ KDE"
 
-#: mainwindow.cpp:113 mainwindow.cpp:130 mainwindow.cpp:1297
-#: mainwindow.cpp:1394
+#: mainwindow.cpp:115 mainwindow.cpp:132 mainwindow.cpp:1412
+#: mainwindow.cpp:1509
 #, kde-format
 msgid "New Connection"
 msgstr "ការ​​​តភ្ជាប់​​ថ្មី"
 
-#: mainwindow.cpp:138
+#: mainwindow.cpp:140
 #, kde-format
 msgid "Copy Screenshot to Clipboard"
 msgstr "ចម្លង​រូបថត​អេក្រង់​ទៅ​ក្ដារ​តម្បៀត​ខ្ទាស់"
 
-#: mainwindow.cpp:139
+#: mainwindow.cpp:141
 #, kde-format
 msgid "Screenshot"
 msgstr "រូបថតអេក្រង់"
 
-#: mainwindow.cpp:145 mainwindow.cpp:580
+#: mainwindow.cpp:147 mainwindow.cpp:651
 #, kde-format
 msgid "Switch to Full Screen Mode"
 msgstr "ប្ដូរ​ទៅ​របៀប​ពេញ​អេក្រង់"
 
-#: mainwindow.cpp:146 mainwindow.cpp:581
+#: mainwindow.cpp:148 mainwindow.cpp:652
 #, kde-format
 msgid "Full Screen"
 msgstr "អេក្រង់​ពេញ"
 
-#: mainwindow.cpp:153
+#: mainwindow.cpp:155
 #, kde-format
 msgid "View Only"
 msgstr "បាន​តែ​មើល"
 
-#: mainwindow.cpp:159
+#: mainwindow.cpp:161
 #, kde-format
 msgid "Clipboard Sharing"
 msgstr ""
 
-#: mainwindow.cpp:164
+#: mainwindow.cpp:166
 #, kde-format
 msgid "Disconnect"
 msgstr "ផ្ដាច់"
 
-#: mainwindow.cpp:172
+#: mainwindow.cpp:174
 #, kde-format
 msgid "Show Local Cursor"
 msgstr "បង្ហាញ​ទស្សន៍​ទ្រនិច​មូលដ្ឋាន"
 
-#: mainwindow.cpp:173
+#: mainwindow.cpp:175
 #, kde-format
 msgid "Local Cursor"
 msgstr "ទស្សន៍​ទ្រនិច​មូលដ្ឋាន"
 
-#: mainwindow.cpp:179
+#: mainwindow.cpp:181
 #, kde-format
 msgid "Grab All Possible Keys"
 msgstr "យក​សោ​ដែល​អាច​ប្រើ​បាន​ទាំង​អស់"
 
-#: mainwindow.cpp:180
+#: mainwindow.cpp:182
 #, kde-format
 msgid "Grab Keys"
 msgstr "យក​សោ"
 
-#: mainwindow.cpp:186
+#: mainwindow.cpp:188
 #, kde-format
 msgid "Scale Remote Screen to Fit Window Size"
 msgstr "ធ្វើ​មាត្រដ្ឋាន​អេក្រង់​ពី​ចម្ងាយ​ឲ្យ​សម​នឹង​ទំហំ​បង្អួច"
 
-#: mainwindow.cpp:187
+#: mainwindow.cpp:189
 #, kde-format
 msgid "Scale"
 msgstr "មាត្រដ្ឋាន"
 
-#: mainwindow.cpp:190
+#: mainwindow.cpp:192
 #, kde-format
 msgid "Scaling Factor"
 msgstr ""
 
-#: mainwindow.cpp:201
+#: mainwindow.cpp:203
 #, kde-format
 msgid "Bookmarks"
 msgstr "ចំណាំ"
 
-#: mainwindow.cpp:284
+#: mainwindow.cpp:288
 #, kde-format
-msgid "Unable to load connection data from the provided file."
+msgid ""
+"Unable to load connection data from “%1”.\n"
+"The file may be damaged, or it is in a format KRDC does not support."
 msgstr ""
 
-#: mainwindow.cpp:284
+#: mainwindow.cpp:289
 #, kde-format
 msgid "Load failed"
 msgstr ""
 
-#: mainwindow.cpp:290
+#: mainwindow.cpp:296
 #, kde-format
 msgid ""
-"The entered address does not have the required form.\n"
-" Syntax: [username@]host[:port]"
+"“%1” is not a valid address.\n"
+"\n"
+"Use the form [username@]host[:port], for example: user@192.168.1.10:5900"
 msgstr ""
-"អាសយដ្ឋាន​ដែល​បាន​បញ្ចូល​មិន​មាន​សំណុំ​បែបបទ​ដែល​ទាមទារ​ទេ ។\n"
-" វាក្យសម្ព័ន្ធ ៖ [username@]host[:port]"
 
-#: mainwindow.cpp:290
+#: mainwindow.cpp:298
 #, kde-format
 msgid "Malformed URL"
 msgstr "URL ដែល​មាន​ទម្រង់​មិន​ត្រឹមត្រូវ"
 
-#: mainwindow.cpp:311
+#: mainwindow.cpp:322
 #, kde-format
-msgid "The entered address cannot be handled."
-msgstr "អាសយដ្ឋាន​ដែល​បញ្ចូល​មិន​អាច​ត្រូវ​បាន​ដោះស្រាយ​​ទេ ។"
+msgid ""
+"No installed plugin can handle the “%1” protocol.\n"
+"Supported protocols: %2"
+msgstr ""
 
-#: mainwindow.cpp:462
+#: mainwindow.cpp:533
 #, kde-format
 msgid "Connecting to %1"
 msgstr "តភ្ជាប់​ទៅ %1"
 
-#: mainwindow.cpp:466
+#: mainwindow.cpp:537
 #, kde-format
 msgid "Authenticating at %1"
 msgstr "កំពុង​ផ្ទៀងផ្ទាត់​ភាព​ត្រឹមត្រូវ​នៅ %1..."
 
-#: mainwindow.cpp:470
+#: mainwindow.cpp:541
 #, kde-format
 msgid "Preparing connection to %1"
 msgstr "កំពុង​រៀបចំ​ការ​តភ្ជាប់​ទៅ %1"
 
-#: mainwindow.cpp:474
+#: mainwindow.cpp:545
 #, kde-format
 msgid "Connected to %1"
 msgstr "បាន​តភ្ជាប់​ទៅ %1"
 
-#: mainwindow.cpp:627
+#: mainwindow.cpp:698
 #, kde-format
 msgid "Switch to Window Mode"
 msgstr "ប្ដូរ​ទៅ​របៀប​បង្អួច"
 
-#: mainwindow.cpp:628
+#: mainwindow.cpp:699
 #, kde-format
 msgid "Window Mode"
 msgstr "ប្ដូរ​ទៅ​របៀប​បង្អួច"
 
-#: mainwindow.cpp:812
+#: mainwindow.cpp:926
 #, fuzzy, kde-format
 #| msgid "The entered address cannot be handled."
 msgid "The entered address cannot be handled by this connection type."
 msgstr "អាសយដ្ឋាន​ដែល​បញ្ចូល​មិន​អាច​ត្រូវ​បាន​ដោះស្រាយ​​ទេ ។"
 
-#: mainwindow.cpp:847
+#: mainwindow.cpp:961
 #, kde-format
 msgid "Connect"
 msgstr "តភ្ជាប់​"
 
-#: mainwindow.cpp:848
+#: mainwindow.cpp:962
 #, kde-format
 msgid "Rename"
 msgstr "ប្ដូរ​ឈ្មោះ"
 
-#: mainwindow.cpp:849
+#: mainwindow.cpp:963
 #, kde-format
 msgid "Settings"
 msgstr "ការ​កំណត់​"
 
-#: mainwindow.cpp:850
+#: mainwindow.cpp:964
 #, kde-format
 msgid "Delete"
 msgstr "លុប"
 
-#: mainwindow.cpp:853 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:967 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "ចំណាំ"
 
-#: mainwindow.cpp:853 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:967 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "ប្រវត្តិ​"
 
-#: mainwindow.cpp:865
+#: mainwindow.cpp:979
 #, kde-format
 msgid "Rename %1"
 msgstr "ប្ដូរ​ឈ្មោះ %1"
 
-#: mainwindow.cpp:865
+#: mainwindow.cpp:979
 #, kde-format
 msgid "Rename %1 to"
 msgstr "ប្ដូរ​ឈ្មោះ %1 ទៅ​ជា"
 
-#: mainwindow.cpp:872
+#: mainwindow.cpp:986
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "តើ​អ្នក​ប្រាកដ​ជា​ចង់​លុប %1 ឬ ?"
 
-#: mainwindow.cpp:872
+#: mainwindow.cpp:986
 #, kde-format
 msgid "Delete %1"
 msgstr "លុប %1"
 
-#: mainwindow.cpp:896
+#: mainwindow.cpp:1010
 #, kde-format
 msgid "Add Bookmark"
 msgstr "បន្ថែម​ចំណាំ"
 
-#: mainwindow.cpp:897
+#: mainwindow.cpp:1011
 #, kde-format
 msgid "Close Tab"
 msgstr "បិទផ្ទាំង"
 
-#: mainwindow.cpp:1014
+#: mainwindow.cpp:1128
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr "បង្រួម​​បង្អួច​​ពេញ​​អេក្រង់​អប្បបរមា"
 
-#: mainwindow.cpp:1031
+#: mainwindow.cpp:1145
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "របារ​ឧបករណ៍​ស្អិត"
 
-#: mainwindow.cpp:1151
+#: mainwindow.cpp:1265
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr "តើ​អ្នក​ពិត​ជា​ចង់​បិទ​កម្មវិធី​មើល​ផ្ទៃតុ​ពី​ចម្ងាយ​របស់ KDE ឬ ?"
 
-#: mainwindow.cpp:1152
+#: mainwindow.cpp:1266
 #, kde-format
 msgid "Confirm Quit"
 msgstr "អះអាង​ការ​ចេញ"
 
-#: mainwindow.cpp:1320
+#: mainwindow.cpp:1435
 #, kde-format
 msgid "Connect to:"
 msgstr "​តភ្ជាប់​ទៅ ៖​"
 
-#: mainwindow.cpp:1324
+#: mainwindow.cpp:1439
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr "វាយ​បញ្ចូល​ទីនេះ ដើម្បី​តភ្ជាប់​ទៅកាន់​អាសយដ្ឋាន និង​ត្រង​បញ្ជី ។"
 
-#: mainwindow.cpp:1335
+#: mainwindow.cpp:1450
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
 "methods."
 msgstr "វាយ​ឈ្មោះ IP ឬ DNS នៅ​ទីនេះ ។ ជម្រះ​បន្ទាត់​ ដើម្បី​ទទួល​បាន​បញ្ជី​វិធីសាស្ត្រ​តភ្ជាប់​ ។"
 
-#: mainwindow.cpp:1338
+#: mainwindow.cpp:1453
 #, kde-format
 msgid "Goto Address"
 msgstr "ទៅ​កាន់​អាសយដ្ឋាន"
 
-#: mainwindow.cpp:1430
+#: mainwindow.cpp:1545
 #, kde-format
 msgid "Remote Desktops"
 msgstr "​ផ្ទៃតុ​ពី​ចម្ងាយ"
 
-#: mainwindow.cpp:1459
+#: mainwindow.cpp:1574
 #, kde-format
 msgid "Filter"
 msgstr "តម្រង"
+
+#: mainwindow.cpp:1627
+#, kde-format
+msgctxt "@label"
+msgid "The remote computer may have shut down or restarted."
+msgstr ""
+
+#: mainwindow.cpp:1631
+#, kde-format
+msgctxt "@title connection error"
+msgid "Closed before the session started"
+msgstr ""
 
 #. i18n: ectx: attribute (title), widget (QWidget, mainSettingsTab)
 #: rdp/rdppreferences.ui:21
@@ -1478,7 +2208,7 @@ msgstr ""
 msgid "Domain:"
 msgstr ""
 
-#: rdp/rdpsession.cpp:1284
+#: rdp/rdpsession.cpp:1286
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1496,37 +2226,37 @@ msgctxt "@label"
 msgid "Access to this system requires a username and password."
 msgstr "ចូល​ដំណើរ​ការ​ប្រព័ន្ធ​ទាមទារ​ពាក្យ​សម្ងាត់ ។"
 
-#: rdp/rdpview.cpp:271
+#: rdp/rdpview.cpp:272
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr ""
 
-#: rdp/rdpview.cpp:272
+#: rdp/rdpview.cpp:273
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
 msgstr ""
 
-#: rdp/rdpview.cpp:277 rdp/rdpview.cpp:302
+#: rdp/rdpview.cpp:278 rdp/rdpview.cpp:304
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
 msgstr ""
 
-#: rdp/rdpview.cpp:296
+#: rdp/rdpview.cpp:298
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
 msgstr ""
 
-#: rdp/rdpview.cpp:297
+#: rdp/rdpview.cpp:299
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
 msgstr ""
 
-#: rdp/rdpview.cpp:300
+#: rdp/rdpview.cpp:302
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -1536,131 +2266,220 @@ msgid ""
 "%2"
 msgstr ""
 
-#: rdp/rdpview.cpp:332
-#, fuzzy, kde-format
-#| msgid "Connection Failure"
-msgctxt "@title:dialog"
-msgid "Login Failure"
-msgstr "ការ​តភ្ជាប់​ទទួល​បរាជ័យ​"
-
-#: rdp/rdpview.cpp:333
+#: rdp/rdpview.cpp:347
 #, kde-format
 msgctxt "@label"
-msgid ""
-"Unable to login with the provided credentials. Please double check the user "
-"and password."
+msgid "The credentials for “%1” were not accepted."
 msgstr ""
 
-#: rdp/rdpview.cpp:342
+#: rdp/rdpview.cpp:350
 #, kde-format
-msgctxt "@title:dialog"
-msgid "Account Problems"
+msgctxt "@info"
+msgid "Check the RD Gateway credentials in the host settings."
 msgstr ""
 
-#: rdp/rdpview.cpp:343
+#: rdp/rdpview.cpp:366
 #, kde-format
 msgctxt "@label"
-msgid ""
-"The provided account is not allowed to log in to this machine. Please "
-"contact your system administrator."
+msgid "This account may not log in remotely."
 msgstr ""
 
-#: rdp/rdpview.cpp:348
-#, kde-format
-msgctxt "@title:dialog"
-msgid "Password Problems"
-msgstr ""
-
-#: rdp/rdpview.cpp:349
+#: rdp/rdpview.cpp:367
 #, kde-format
 msgctxt "@label"
-msgid ""
-"Unable to login with the provided password. Please contact your system "
-"administrator to change it."
+msgid "“%1” may not log in remotely."
 msgstr ""
-
-#: rdp/rdpview.cpp:355
-#, fuzzy, kde-format
-#| msgid "Connection"
-msgctxt "@title:dialog"
-msgid "Connection Lost"
-msgstr "ការ​តភ្ជាប់​"
-
-#: rdp/rdpview.cpp:356
-#, fuzzy, kde-format
-#| msgid "An error has occurred during the connection to the NX server."
-msgctxt "@label"
-msgid "Lost connection to the server."
-msgstr "កំហុស​បានកើត​ឡើង​កំឡុង​ពេល​តភ្ជាប់​ទៅ​កាន់​ម៉ាស៊ីនបម្រើ NX ។"
-
-#: rdp/rdpview.cpp:358
-#, fuzzy, kde-format
-#| msgid "KRDC Konsole Connection"
-msgctxt "@title:dialog"
-msgid "Could not Connect"
-msgstr "ការ​តភ្ជាប់​កុងសូល KRDC"
-
-#: rdp/rdpview.cpp:359
-#, fuzzy, kde-format
-#| msgid "An error has occurred during the connection to the NX server."
-msgctxt "@label"
-msgid "Could not connect to the server."
-msgstr "កំហុស​បានកើត​ឡើង​កំឡុង​ពេល​តភ្ជាប់​ទៅ​កាន់​ម៉ាស៊ីនបម្រើ NX ។"
-
-#: rdp/rdpview.cpp:364
-#, fuzzy, kde-format
-#| msgid "Server not found."
-msgctxt "@title:dialog"
-msgid "Server not Found"
-msgstr "រក​មិន​ឃើញ​ម៉ាស៊ីន​បម្រើ ។"
-
-#: rdp/rdpview.cpp:365
-#, kde-format
-msgctxt "@label"
-msgid "Could not find the server."
-msgstr ""
-
-#: rdp/rdpview.cpp:368
-#, fuzzy, kde-format
-#| msgid "Connection Failure"
-msgctxt "@title:dialog"
-msgid "Connection Refused"
-msgstr "ការ​តភ្ជាប់​ទទួល​បរាជ័យ​"
 
 #: rdp/rdpview.cpp:369
-#, fuzzy, kde-format
-#| msgid "VNC server closed connection."
-msgctxt "@label"
-msgid "The server refused the connection request."
-msgstr "ម៉ាស៊ីន​បម្រើ VNC បិទ​ការ​តភ្ជាប់ ។"
+#, kde-format
+msgctxt "@title connection error"
+msgid "Access denied"
+msgstr ""
 
-#: rdp/rdpview.cpp:379
-#, fuzzy, kde-format
-#| msgid "Connection Failure"
-msgctxt "@title:dialog"
-msgid "Connection Closed"
-msgstr "ការ​តភ្ជាប់​ទទួល​បរាជ័យ​"
+#: rdp/rdpview.cpp:371
+#, kde-format
+msgctxt "@info"
+msgid "Check whether the account is locked, disabled or expired."
+msgstr ""
+
+#: rdp/rdpview.cpp:373
+#, kde-format
+msgctxt "@info"
+msgid ""
+"Ask the administrator of the remote computer to add the account to the "
+"Remote Desktop Users group, or log in with a different account."
+msgstr ""
+
+#: rdp/rdpview.cpp:381
+#, kde-format
+msgctxt "@label"
+msgid "The password must be changed before it can be used to log in remotely."
+msgstr ""
+
+#: rdp/rdpview.cpp:382
+#, kde-format
+msgctxt "@title connection error"
+msgid "Password expired"
+msgstr ""
 
 #: rdp/rdpview.cpp:384
-#, fuzzy, kde-format
-#| msgid "Connection Failure"
-msgctxt "@title:dialog"
-msgid "Connection Failed"
-msgstr "ការ​តភ្ជាប់​ទទួល​បរាជ័យ​"
+#, kde-format
+msgctxt "@info"
+msgid ""
+"Change the password by logging in locally on the remote computer, or ask its "
+"administrator to reset it."
+msgstr ""
 
-#: rdp/rdpview.cpp:385
+#: rdp/rdpview.cpp:389
 #, kde-format
 msgctxt "@label"
-msgid "An unknown error occurred"
+msgid "The Kerberos domain controller could not be reached."
 msgstr ""
 
-#: rdp/rdpview.cpp:396
+#: rdp/rdpview.cpp:391
 #, kde-format
-msgctxt "@title:dialog"
-msgid "Logon Error"
+msgctxt "@info"
+msgid "Check the domain you entered when logging in."
 msgstr ""
 
-#: rdp/rdpview.cpp:773
+#: rdp/rdpview.cpp:392
+#, kde-format
+msgctxt "@info"
+msgid "Connect to the network or VPN of the domain."
+msgstr ""
+
+#: rdp/rdpview.cpp:397 spice/spiceview.cpp:901 vnc/vncview.cpp:287
+#, kde-format
+msgctxt "@label"
+msgid "No IP address was found for this name."
+msgstr ""
+
+#: rdp/rdpview.cpp:408
+#, kde-format
+msgctxt "@label"
+msgid "The server and KRDC could not agree on a security protocol."
+msgstr ""
+
+#: rdp/rdpview.cpp:410
+#, kde-format
+msgctxt "@info"
+msgid ""
+"Set the TLS security level in the host settings to “Any”. The server may not "
+"support the level selected."
+msgstr ""
+
+#: rdp/rdpview.cpp:414
+#, kde-format
+msgctxt "@label"
+msgid "The server requires Network Level Authentication (NLA)."
+msgstr ""
+
+#: rdp/rdpview.cpp:415
+#, kde-format
+msgctxt "@info"
+msgid "Enable NLA in the security settings for this host."
+msgstr ""
+
+#: rdp/rdpview.cpp:433
+#, kde-format
+msgctxt "@info"
+msgid ""
+"Check the RD Gateway settings for this host. The gateway “%1” may be "
+"unreachable or reject the connection."
+msgstr ""
+
+#: rdp/rdpview.cpp:440
+#, kde-format
+msgctxt "@label"
+msgid "The remote computer did not finish starting the session in time."
+msgstr ""
+
+#: rdp/rdpview.cpp:441
+#, kde-format
+msgctxt "@info"
+msgid ""
+"The remote computer may still be starting up or be under heavy load. Wait a "
+"minute, then connect again."
+msgstr ""
+
+#: rdp/rdpview.cpp:445
+#, kde-format
+msgctxt "@label"
+msgid "It accepted the connection, then refused to start a session."
+msgstr ""
+
+#: rdp/rdpview.cpp:446
+#, fuzzy, kde-format
+#| msgid "Sessions"
+msgctxt "@title connection error"
+msgid "Session refused"
+msgstr "សម័យ"
+
+#: rdp/rdpview.cpp:450
+#, kde-format
+msgctxt "@label"
+msgid "The server did not accept the options selected for this host."
+msgstr ""
+
+#: rdp/rdpview.cpp:453
+#, kde-format
+msgctxt "@label"
+msgid "An administrator or another program disconnected this session."
+msgstr ""
+
+#: rdp/rdpview.cpp:456
+#, kde-format
+msgctxt "@label"
+msgid "An administrator signed this session out."
+msgstr ""
+
+#: rdp/rdpview.cpp:459
+#, kde-format
+msgctxt "@label"
+msgid "The session was disconnected from the remote computer."
+msgstr ""
+
+#: rdp/rdpview.cpp:466
+#, kde-format
+msgctxt "@label"
+msgid "Disconnected because someone else connected to this session."
+msgstr ""
+
+#: rdp/rdpview.cpp:467
+#, kde-format
+msgctxt "@info"
+msgid "Reconnect to take the session back. This disconnects the other user."
+msgstr ""
+
+#: rdp/rdpview.cpp:470
+#, kde-format
+msgctxt "@label"
+msgid "The session was closed after being idle for too long."
+msgstr ""
+
+#: rdp/rdpview.cpp:471
+#, kde-format
+msgctxt "@info"
+msgid ""
+"Reconnect to continue. The idle time limit is set by the administrator of "
+"the server."
+msgstr ""
+
+#: rdp/rdpview.cpp:485
+#, kde-format
+msgctxt "@label"
+msgid "The remote computer reported a problem while logging in."
+msgstr ""
+
+#: rdp/rdpview.cpp:486
+#, kde-format
+msgctxt "@info"
+msgid ""
+"Check that this user may log in to the remote computer, and that the session "
+"is not busy."
+msgstr ""
+
+#: rdp/rdpview.cpp:865
 #, kde-format
 msgctxt "@title:window"
 msgid "KRDC – Screen %1"
@@ -1798,9 +2617,46 @@ msgstr ""
 msgid "Play audio from the remote host on this machine."
 msgstr ""
 
-#: spice/spiceview.cpp:819
+#: spice/spiceview.cpp:830
 #, kde-format
 msgid "Authentication is required to connect to <b>%1</b>."
+msgstr ""
+
+#: spice/spiceview.cpp:892
+#, kde-format
+msgctxt "@label"
+msgid "The TLS handshake failed."
+msgstr ""
+
+#: spice/spiceview.cpp:893
+#, kde-format
+msgctxt "@info"
+msgid ""
+"Check whether the server accepts TLS only on a separate port, and that its "
+"certificate is trusted."
+msgstr ""
+
+#: spice/spiceview.cpp:896
+#, fuzzy, kde-format
+#| msgid "VNC server closed connection."
+msgctxt "@label"
+msgid "The server rejected the SPICE connection."
+msgstr "ម៉ាស៊ីន​បម្រើ VNC បិទ​ការ​តភ្ជាប់ ។"
+
+#: spice/spiceview.cpp:897
+#, kde-format
+msgctxt "@info"
+msgid ""
+"Check that this port belongs to a SPICE server with a compatible protocol "
+"version."
+msgstr ""
+
+#: spice/spiceview.cpp:907
+#, kde-format
+msgctxt "@info"
+msgid ""
+"Make sure the virtual machine is running, and its SPICE display listens on "
+"this address."
 msgstr ""
 
 #: spice/spiceviewfactory.cpp:47
@@ -1823,56 +2679,34 @@ msgid ""
 "<html>Enter the address here.<br /><i>Example: spice://myhost:5900</i></html>"
 msgstr "<html>បញ្ចូល​អាសយដ្ឋាន​នៅទីនេះ ។<br /><i>ឧទាហរណ៍ ៖ nxserver (ម៉ាស៊ីន)</i></html>"
 
-#: vnc/vncclientthread.cpp:315
-#, fuzzy, kde-format
-#| msgid "VNC authentication failed."
-msgid "VNC authentication type is not supported."
-msgstr "ការ​ផ្ទៀងផ្ទាត់​ភាព​ត្រឹមត្រូវ VNC បាន​បរាជ័យ ។"
-
-#: vnc/vncclientthread.cpp:332
-#, kde-format
-msgid "Server not found."
-msgstr "រក​មិន​ឃើញ​ម៉ាស៊ីន​បម្រើ ។"
-
-#: vnc/vncclientthread.cpp:349 vnc/vncclientthread.cpp:423
-#, kde-format
-msgid "VNC authentication failed."
-msgstr "ការ​ផ្ទៀងផ្ទាត់​ភាព​ត្រឹមត្រូវ VNC បាន​បរាជ័យ ។"
-
-#: vnc/vncclientthread.cpp:354
-#, kde-format
-msgid "VNC authentication failed because of too many authentication tries."
-msgstr ""
-"ការ​ផ្ទៀតផ្ទាត់​ភាព​ត្រឹមត្រូវ VNC បាន​បរាជ័យ ពីព្រោះ​ការ​ព្យាយាម​ផ្ទៀតផ្ទាត់​ភាព​ត្រឹមត្រូវ​ច្រើន​ពេក ។"
-
-#: vnc/vncclientthread.cpp:358
-#, kde-format
-msgid "VNC server closed connection."
-msgstr "ម៉ាស៊ីន​បម្រើ VNC បិទ​ការ​តភ្ជាប់ ។"
-
-#: vnc/vncclientthread.cpp:365
+#: vnc/vncclientthread.cpp:357
 #, fuzzy, kde-format
 #| msgid "Disconnect"
 msgid "Disconnected: %1."
 msgstr "ផ្ដាច់"
 
-#: vnc/vncclientthread.cpp:570
+#: vnc/vncclientthread.cpp:578
 #, fuzzy, kde-format
 #| msgid "When Connecting"
 msgid "Reconnecting."
 msgstr "នៅពេល​តភ្ជាប់"
 
-#: vnc/vncclientthread.cpp:638
+#: vnc/vncclientthread.cpp:678
 #, fuzzy, kde-format
 #| msgid "Disconnect"
 msgid "Reconnected."
 msgstr "ផ្ដាច់"
 
-#: vnc/vncclientthread.cpp:640
+#: vnc/vncclientthread.cpp:680
 #, fuzzy, kde-format
 #| msgid "Connect"
 msgid "Connected."
 msgstr "តភ្ជាប់​"
+
+#: vnc/vncclientthread.cpp:785
+#, kde-format
+msgid "Server not found."
+msgstr "រក​មិន​ឃើញ​ម៉ាស៊ីន​បម្រើ ។"
 
 #. i18n: ectx: property (text), widget (QLabel, connectionLabel)
 #: vnc/vncpreferences.ui:23
@@ -1968,20 +2802,50 @@ msgid ""
 "filtering."
 msgstr ""
 
-#: vnc/vncview.cpp:240
+#: vnc/vncview.cpp:255
 #, kde-format
 msgid "Access to the system requires a password."
 msgstr "ចូល​ដំណើរ​ការ​ប្រព័ន្ធ​ទាមទារ​ពាក្យ​សម្ងាត់ ។"
 
-#: vnc/vncview.cpp:240
+#: vnc/vncview.cpp:255
 #, kde-format
 msgid "Authentication failed. Please try again."
 msgstr "ការ​ផ្ទៀតផ្ទាត់​ភាព​ត្រឹមត្រូវ​បាន​បរជ័យ ។ សូម​ព្យាយាម​ម្ដង​ទៀត ។"
 
-#: vnc/vncview.cpp:266
+#: vnc/vncview.cpp:306
 #, kde-format
-msgid "VNC failure"
-msgstr "VNC បរាជ័យ"
+msgid "VNC authentication failed because of too many authentication tries."
+msgstr ""
+"ការ​ផ្ទៀតផ្ទាត់​ភាព​ត្រឹមត្រូវ VNC បាន​បរាជ័យ ពីព្រោះ​ការ​ព្យាយាម​ផ្ទៀតផ្ទាត់​ភាព​ត្រឹមត្រូវ​ច្រើន​ពេក ។"
+
+#: vnc/vncview.cpp:309
+#, kde-format
+msgctxt "@info"
+msgid ""
+"Wait a few minutes. The server blocks logins for a while after several "
+"failed attempts."
+msgstr ""
+
+#: vnc/vncview.cpp:310
+#, kde-format
+msgctxt "@info"
+msgid "Then connect again and enter the password carefully."
+msgstr ""
+
+#: vnc/vncview.cpp:316
+#, kde-format
+msgctxt "@label"
+msgid ""
+"The server requires an authentication method that KRDC does not support."
+msgstr ""
+
+#: vnc/vncview.cpp:318
+#, kde-format
+msgctxt "@info"
+msgid ""
+"Configure the VNC server to use standard VNC password authentication, or "
+"connect through an SSH tunnel."
+msgstr ""
 
 #: vnc/vncviewfactory.cpp:47
 #, fuzzy, kde-format
@@ -2002,6 +2866,36 @@ msgid ""
 msgstr ""
 "<html>បញ្ចូល​អាសយដ្ឋាន​នៅទីនេះ ៖<br /><i>ឧទាហរណ៍ ៖ vncserver:1 (ម៉ាស៊ីន ៖ ច្រក / "
 "អេក្រង់)</i></html>"
+
+#~ msgid ""
+#~ "The entered address does not have the required form.\n"
+#~ " Syntax: [username@]host[:port]"
+#~ msgstr ""
+#~ "អាសយដ្ឋាន​ដែល​បាន​បញ្ចូល​មិន​មាន​សំណុំ​បែបបទ​ដែល​ទាមទារ​ទេ ។\n"
+#~ " វាក្យសម្ព័ន្ធ ៖ [username@]host[:port]"
+
+#~ msgid "The entered address cannot be handled."
+#~ msgstr "អាសយដ្ឋាន​ដែល​បញ្ចូល​មិន​អាច​ត្រូវ​បាន​ដោះស្រាយ​​ទេ ។"
+
+#, fuzzy
+#~| msgid "Connection"
+#~ msgctxt "@title:dialog"
+#~ msgid "Connection Lost"
+#~ msgstr "ការ​តភ្ជាប់​"
+
+#, fuzzy
+#~| msgid "Connection Failure"
+#~ msgctxt "@title:dialog"
+#~ msgid "Connection Closed"
+#~ msgstr "ការ​តភ្ជាប់​ទទួល​បរាជ័យ​"
+
+#, fuzzy
+#~| msgid "VNC authentication failed."
+#~ msgid "VNC authentication type is not supported."
+#~ msgstr "ការ​ផ្ទៀងផ្ទាត់​ភាព​ត្រឹមត្រូវ VNC បាន​បរាជ័យ ។"
+
+#~ msgid "VNC failure"
+#~ msgstr "VNC បរាជ័យ"
 
 #~ msgctxt ""
 #~ "window title when in full screen mode (for example displayed in tasklist)"
@@ -2185,9 +3079,6 @@ msgstr ""
 #~ msgid "Colour Depth"
 #~ msgstr "ជម្រៅពណ៌"
 
-#~ msgid "Session Name"
-#~ msgstr "ឈ្មោះ​សម័យ"
-
 #~ msgid "&New"
 #~ msgstr "ថ្មី"
 
@@ -2224,18 +3115,12 @@ msgstr ""
 #~ msgid "New NX Connection..."
 #~ msgstr "ការ​តភ្ជាប់ NX ថ្មី..."
 
-#~ msgid "Connect to a NX Remote Desktop"
-#~ msgstr "តភ្ជាប់​ទៅ​ផ្ទៃតុ​ពី​ចម្ងាយ NX"
-
 #~ msgid ""
 #~ "<h1>KDE Remote Desktop Client</h1><br />Enter or select the address of "
 #~ "the desktop you would like to connect to."
 #~ msgstr ""
 #~ "<h1>ម៉ាស៊ីន​ភ្ញៀវ​ផ្ទៃតុ​ពី​ចម្ងាយ​របស់ KDE​</h1><br />បញ្ចូល ​ឬ​ជ្រើស​អាសយដ្ឋាន​ផ្ទៃតុ​ដែល​អ្នក​ចង់​"
 #~ "តភ្ជាប់​ ។"
-
-#~ msgid "Invitation to view remote desktop"
-#~ msgstr "អញ្ជើញ​ឲ្យ​​មើល​ផ្ទៃ​តុ​ពី​ចម្ងាយ"
 
 #~ msgid "%1 wants to share his/her desktop with you"
 #~ msgstr "%1 ចង់​ចែករំលែក​ផ្ទៃ​តុ​របស់​គាត់​ជាមួយ​អ្នក"
