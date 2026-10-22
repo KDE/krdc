@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-03-04 00:45+0000\n"
-"PO-Revision-Date: 2026-08-02 00:37+0200\n"
+"PO-Revision-Date: 2026-10-22 02:24+0200\n"
 "Last-Translator: Libor Filípek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 26.08.1\n"
+"X-Generator: Lokalize 26.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -46,7 +46,7 @@ msgstr "Zapamatovat si otevřená sezení pro následující spuštění"
 #: config/general.ui:24
 #, kde-format
 msgid "Remember connection history"
-msgstr "Zapamatovat si historii spojení"
+msgstr "Zapamatovat si historii připojení"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_WalletSupport)
 #: config/general.ui:31
@@ -88,7 +88,7 @@ msgstr "Při připojení"
 #: config/general.ui:99
 #, kde-format
 msgid "Show the preferences dialog for new connections"
-msgstr "Zobrazit dialog předvoleb pro nová spojení"
+msgstr "Zobrazit dialog předvoleb pro nová připojení"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_ResizeOnConnect)
 #: config/general.ui:106
@@ -97,8 +97,8 @@ msgid ""
 "This option will resize the window to fit the connection size.  If it is too "
 "big, it will maximize the window."
 msgstr ""
-"Tato volba přizpůsobí velikost okna podle velikosti spojení. Pokud je příliš "
-"veliké, maximalizuje okno."
+"Tato volba přizpůsobí velikost okna podle velikosti připojení. Pokud je "
+"příliš veliké, maximalizuje okno."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ResizeOnConnect)
 #: config/general.ui:109
@@ -113,7 +113,7 @@ msgid ""
 "This option switches to fullscreen only if the connection resolution is the "
 "same as the current screen resolution"
 msgstr ""
-"Tato volba přepne na celou obrazovku jen tehdy, když je rozlišení spojení "
+"Tato volba přepne na celou obrazovku jen tehdy, když je rozlišení připojení "
 "stejné jako rozlišení aktuální obrazovky"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_FullscreenOnConnect)
@@ -512,7 +512,7 @@ msgstr "Klient vzdálené plochy pro KDE spuštěn"
 #: mainwindow.cpp:1241
 #, kde-format
 msgid "New Connection"
-msgstr "Nové spojení"
+msgstr "Nové připojení"
 
 #: mainwindow.cpp:134
 #, kde-format
@@ -631,7 +631,7 @@ msgstr "Probíhá ověřování na %1"
 #: mainwindow.cpp:435
 #, kde-format
 msgid "Preparing connection to %1"
-msgstr "Probíhá příprava spojení s %1"
+msgstr "Probíhá příprava připojení s %1"
 
 #: mainwindow.cpp:439
 #, kde-format
@@ -1281,7 +1281,7 @@ msgstr "Zámek sezení:"
 #: rdp/rdppreferences.ui:716
 #, kde-format
 msgid "Prevent remote session lock"
-msgstr "Zabránit uzamčení vzdálené relace"
+msgstr "Zabránit uzamčení vzdáleného sezení"
 
 #. i18n: ectx: attribute (title), widget (QWidget, securitySettingsTab)
 #: rdp/rdppreferences.ui:724
@@ -1562,7 +1562,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Lost"
-msgstr "Spojení ztraceno"
+msgstr "Připojení ztraceno"
 
 #: rdp/rdpview.cpp:320
 #, kde-format
@@ -1598,7 +1598,7 @@ msgstr "Server nelze najít."
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Refused"
-msgstr "Spojení bylo odmítnuto"
+msgstr "Připojení bylo odmítnuto"
 
 #: rdp/rdpview.cpp:333
 #, kde-format
@@ -1610,13 +1610,13 @@ msgstr "Server odmítl požadavek na připojení."
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Closed"
-msgstr "Spojení ukončeno"
+msgstr "Připojení ukončeno"
 
 #: rdp/rdpview.cpp:348
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Connection Failed"
-msgstr "Spojení selhalo"
+msgstr "Připojení selhalo"
 
 #: rdp/rdpview.cpp:349
 #, kde-format
@@ -1729,7 +1729,7 @@ msgstr "Ověření VNC selhalo z důvodu příliš mnoha neplatných pokusů."
 #: vnc/vncclientthread.cpp:358
 #, kde-format
 msgid "VNC server closed connection."
-msgstr "VNC server ukončil spojení."
+msgstr "VNC server ukončil připojení."
 
 #: vnc/vncclientthread.cpp:365
 #, kde-format
@@ -1775,17 +1775,17 @@ msgid ""
 "high speed connections and results in lower image quality, especially in "
 "'Low Quality' mode."
 msgstr ""
-"Toto použijte pro určení výkonnosti svého spojení. Uvědomte si, že byste "
+"Toto použijte pro určení výkonnosti svého připojení. Uvědomte si, že byste "
 "měli vybrat rychlost nejpomalejší části - pokud máte rychlé připojení, tak "
 "vám to nepomůže v případě, že vzdálený systém používá pomalý modem. Výběrem "
-"příliš vysoké kvality se spojení zpomalí a výsledkem bude nekvalitní obraz, "
-"hlavně v režimu 'Nízká kvalita'."
+"příliš vysoké kvality se připojení zpomalí a výsledkem bude nekvalitní "
+"obraz, hlavně v režimu 'Nízká kvalita'."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Quality)
 #: vnc/vncpreferences.ui:43
 #, kde-format
 msgid "High Quality (LAN, direct connection)"
-msgstr "Vysoká kvalita (LAN, přímé spojení)"
+msgstr "Vysoká kvalita (LAN, přímé připojení)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Quality)
 #: vnc/vncpreferences.ui:48
