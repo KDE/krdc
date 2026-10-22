@@ -12,14 +12,14 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-10-21 00:51+0000\n"
-"PO-Revision-Date: 2026-09-24 11:46+0200\n"
+"PO-Revision-Date: 2026-10-21 17:23+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 26.08.1\n"
+"X-Generator: Lokalize 26.08.2\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -303,204 +303,187 @@ msgstr[0] "Een jaar geleden"
 msgstr[1] "%1 jaren geleden"
 
 #: connectionstatuswidget.cpp:64
-#, fuzzy, kde-format
-#| msgid "Show start page"
+#, kde-format
 msgctxt "@info:status connection step"
 msgid "Not started"
-msgstr "Startpagina tonen"
+msgstr "Niet gestart"
 
 #: connectionstatuswidget.cpp:67
 #, kde-format
 msgctxt "@info:status connection step"
 msgid "Done"
-msgstr ""
+msgstr "Gereed"
 
 #: connectionstatuswidget.cpp:70
 #, kde-format
 msgctxt "@info:status connection step"
 msgid "Failed"
-msgstr ""
+msgstr "Mislukt"
 
 #: connectionstatuswidget.cpp:73
 #, kde-format
 msgctxt "@info:status connection step"
 msgid "Information"
-msgstr ""
+msgstr "Informatie"
 
 #: connectionstatuswidget.cpp:250
 #, kde-format
 msgctxt "@info"
 msgid "Diagnostic information copied to the clipboard"
-msgstr ""
+msgstr "Diagnostische informatie gekopieerd naar het klembord"
 
 #: connectionstatuswidget.cpp:257
-#, fuzzy, kde-format
-#| msgid "Connecting to %1"
+#, kde-format
 msgctxt "@title"
 msgid "Connecting to %1"
-msgstr "Verbindt met %1"
+msgstr "Verbinden met %1"
 
 #: connectionstatuswidget.cpp:258
-#, fuzzy, kde-format
-#| msgid "Connecting to %1"
+#, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Connecting to %1"
-msgstr "Verbindt met %1"
+msgstr "Verbinden met %1"
 
 #: connectionstatuswidget.cpp:274
 #, kde-format
 msgctxt "@action:button"
 msgid "Cancel"
-msgstr ""
+msgstr "Annuleren"
 
 #: connectionstatuswidget.cpp:330
 #, kde-format
 msgctxt "@info:status connection step"
 msgid "In progress"
-msgstr ""
+msgstr "In uitvoering"
 
 #: connectionstatuswidget.cpp:406
 #, kde-format
 msgctxt "@info connection step"
 msgid "Looking up the server address"
-msgstr ""
+msgstr "Het serveradres opzoeken"
 
 #: connectionstatuswidget.cpp:408
-#, fuzzy, kde-format
-#| msgid "Connect via SSH tunnel"
+#, kde-format
 msgctxt "@info connection step"
 msgid "Opening the SSH tunnel"
-msgstr "Verbinden via SSH-tunnel"
+msgstr "De SSH-tunnel wordt geopend"
 
 #: connectionstatuswidget.cpp:410
 #, kde-format
 msgctxt "@info connection step"
 msgid "Opening a network connection"
-msgstr ""
+msgstr "EEn netwerkverbinding wordt geopend"
 
 #: connectionstatuswidget.cpp:412
-#, fuzzy, kde-format
-#| msgid "Preparing connection to %1"
+#, kde-format
 msgctxt "@info connection step"
 msgid "Securing the connection"
-msgstr "Bereidt verbinding naar %1 voor"
+msgstr "De verbinding wordt beveiligd"
 
 #: connectionstatuswidget.cpp:414
 #, kde-format
 msgctxt "@info connection step"
 msgid "Logging in"
-msgstr ""
+msgstr "Aanmelden"
 
 #: connectionstatuswidget.cpp:416
-#, fuzzy, kde-format
-#| msgid "Prevent remote session lock"
+#, kde-format
 msgctxt "@info connection step"
 msgid "Starting the remote session"
-msgstr "Sessievergrendeling van afstand voorkomen"
+msgstr "De sessie op afstand starten"
 
 #: connectionstatuswidget.cpp:418
-#, fuzzy, kde-format
-#| msgid "Reconnecting."
+#, kde-format
 msgctxt "@info connection step"
 msgid "Reconnecting"
-msgstr "Bezig opnieuw te verbinden."
+msgstr "Opnieuw verbinden"
 
 #: connectionstatuswidget.cpp:428
 #, kde-format
 msgctxt "@info connection step"
 msgid "Server address resolved"
-msgstr ""
+msgstr "Serveradres opgelost"
 
 #: connectionstatuswidget.cpp:430
-#, fuzzy, kde-format
-#| msgid "SSH tunnel options"
+#, kde-format
 msgctxt "@info connection step"
 msgid "SSH tunnel established"
-msgstr "Opties voor SSH-tunnel "
+msgstr "SSH-tunnel tot stand gebracht"
 
 #: connectionstatuswidget.cpp:432
 #, kde-format
 msgctxt "@info connection step"
 msgid "Network connection established"
-msgstr ""
+msgstr "Netwerkverbinding tot stand gebracht"
 
 #: connectionstatuswidget.cpp:434
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Connection Refused"
+#, kde-format
 msgctxt "@info connection step"
 msgid "Connection secured"
-msgstr "Verbinding geweigerd"
+msgstr "Verbinding beveiligd"
 
 #: connectionstatuswidget.cpp:437
 #, kde-format
 msgctxt "@info connection step"
 msgid "Access granted"
-msgstr ""
+msgstr "Toegang toegestaan"
 
 #: connectionstatuswidget.cpp:439
-#, fuzzy, kde-format
-#| msgid "KDE Remote Desktop Client started"
+#, kde-format
 msgctxt "@info connection step"
 msgid "Remote session started"
-msgstr "Verbinding met bureaublad op afstand gestart"
+msgstr "Sessie op afstand gestart"
 
 #: connectionstatuswidget.cpp:449
-#, fuzzy, kde-format
-#| msgid "Connected to %1"
+#, kde-format
 msgctxt "@info"
 msgid "Resolved to %1."
-msgstr "Verbonden met %1"
+msgstr "Opgelost tot %1."
 
 #: connectionstatuswidget.cpp:461
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Local address lookup failed: %1"
-msgstr ""
+msgstr "Lokaal adres opzoeken is mislukt: %1"
 
 #: connectionstatuswidget.cpp:466
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "%1 resolved to %2"
-msgstr ""
+msgstr "%1 opgelost naar %2"
 
 #: connectionstatuswidget.cpp:498
-#, fuzzy, kde-format
-#| msgid "Connect to a NX Remote Desktop"
+#, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Connecting to the remote desktop service"
-msgstr "Verbinding maken met een NX-bureaublad op afstand"
+msgstr "Verbinding maken naar bureaubladservice op afstand"
 
 #: connectionstatuswidget.cpp:505
-#, fuzzy, kde-format
-#| msgid "Authenticating at %1"
+#, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Authenticating"
-msgstr "Authenticeert op %1"
+msgstr "Bezig met authenticatie"
 
 #: connectionstatuswidget.cpp:509
-#, fuzzy, kde-format
-#| msgid "Prevent remote session lock"
+#, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Preparing the session"
-msgstr "Sessievergrendeling van afstand voorkomen"
+msgstr "De sessie voorbereiden"
 
 #: connectionstatuswidget.cpp:513
-#, fuzzy, kde-format
-#| msgid "Connected."
+#, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Connected"
-msgstr "Verbonden."
+msgstr "Verbonden"
 
 #: connectionstatuswidget.cpp:546
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Connection dropped, reconnecting: %1"
-msgstr ""
+msgstr "Verbinding vervallen, opnieuw verbinden: %1"
 
 #: connectionstatuswidget.cpp:546
-#, fuzzy, kde-format
-#| msgid "Reconnected."
+#, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Reconnected"
 msgstr "Opnieuw verbonden"
@@ -509,18 +492,16 @@ msgstr "Opnieuw verbonden"
 #, kde-format
 msgctxt "@info"
 msgid "KRDC keeps trying until the connection is back."
-msgstr ""
+msgstr "KRDC blijft het proberen totdat de verbinding is hersteld."
 
 #: connectionstatuswidget.cpp:563
-#, fuzzy, kde-format
-#| msgid "Connecting to %1"
+#, kde-format
 msgctxt "@title"
 msgid "Connection to %1 interrupted"
-msgstr "Verbindt met %1"
+msgstr "Verbinding met %1 onderbroken"
 
 #: connectionstatuswidget.cpp:565
-#, fuzzy, kde-format
-#| msgid "Disconnect"
+#, kde-format
 msgctxt "@action:button"
 msgid "Disconnect"
 msgstr "Verbinding verbreken"
@@ -538,40 +519,34 @@ msgid "Session with %1 ended"
 msgstr ""
 
 #: connectionstatuswidget.cpp:658
-#, fuzzy, kde-format
-#| msgid "Connecting to %1"
+#, kde-format
 msgctxt "@title"
 msgid "Connection to %1 lost"
-msgstr "Verbindt met %1"
+msgstr "Verbinding met %1 verloren"
 
 #: connectionstatuswidget.cpp:660
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Could not Connect"
+#, kde-format
 msgctxt "@title"
 msgid "Could not connect to %1"
-msgstr "Kon niet verbinden"
+msgstr "Kon niet verbinden met %1"
 
 #: connectionstatuswidget.cpp:666
-#, fuzzy, kde-format
-#| msgid "Reconnected."
+#, kde-format
 msgctxt "@action:button"
 msgid "Reconnect"
-msgstr "Opnieuw verbonden"
+msgstr "Opnieuw verbinden"
 
 #: connectionstatuswidget.cpp:666
-#, fuzzy, kde-format
-#| msgid "Connection"
+#, kde-format
 msgctxt "@action:button"
 msgid "Connect Again"
-msgstr "Verbinding"
+msgstr "Opnieuw verbinden"
 
 #: connectionstatuswidget.cpp:671
-#, fuzzy, kde-format
-#| msgid "Goto Address"
+#, kde-format
 msgctxt "@action:button"
 msgid "Edit Address"
-msgstr "Ga naar adres"
+msgstr "Adres bewerken"
 
 #: connectionstatuswidget.cpp:674
 #, kde-format
@@ -580,8 +555,7 @@ msgid "Edit Host Settings…"
 msgstr ""
 
 #: connectionstatuswidget.cpp:676
-#, fuzzy, kde-format
-#| msgid "Close Tab"
+#, kde-format
 msgctxt "@action:button"
 msgid "Close Tab"
 msgstr "Tabblad sluiten"
@@ -596,14 +570,13 @@ msgstr ""
 #, kde-format
 msgctxt "@action:button"
 msgid "Hide details"
-msgstr ""
+msgstr "Details verbergen"
 
 #: connectionstatuswidget.cpp:719
-#, fuzzy, kde-format
-#| msgid "Show tabs"
+#, kde-format
 msgctxt "@action:button"
 msgid "Show details"
-msgstr "Tabs tonen"
+msgstr "Details tonen"
 
 #: core/connectionerror.cpp:15
 #, kde-format
@@ -618,40 +591,34 @@ msgid "Looking up the host name"
 msgstr ""
 
 #: core/connectionerror.cpp:19
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Lost connection to the server."
+#, kde-format
 msgctxt "@info connection stage"
 msgid "Connecting to the server"
-msgstr "Verbinding met de server is verbroken."
+msgstr "Bezig met verbinden met de server"
 
 #: core/connectionerror.cpp:21
-#, fuzzy, kde-format
-#| msgid "Preparing connection to %1"
+#, kde-format
 msgctxt "@info connection stage"
 msgid "Securing the connection"
-msgstr "Bereidt verbinding naar %1 voor"
+msgstr "Verbinding wordt beveiligd"
 
 #: core/connectionerror.cpp:23
 #, kde-format
 msgctxt "@info connection stage"
 msgid "Logging in"
-msgstr ""
+msgstr "Aanmelden"
 
 #: core/connectionerror.cpp:25
-#, fuzzy, kde-format
-#| msgid "Prevent remote session lock"
+#, kde-format
 msgctxt "@info connection stage"
 msgid "Starting the remote session"
-msgstr "Sessievergrendeling van afstand voorkomen"
+msgstr "De sessie op afstand starten"
 
 #: core/connectionerror.cpp:27
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Connection Refused"
+#, kde-format
 msgctxt "@info connection stage"
 msgid "Connection interrupted"
-msgstr "Verbinding geweigerd"
+msgstr "Verbinding onderbroken"
 
 #: core/connectionerror.cpp:29
 #, kde-format
@@ -663,14 +630,13 @@ msgstr ""
 #, kde-format
 msgctxt "@info connection stage"
 msgid "Unknown"
-msgstr ""
+msgstr "Onbekend"
 
 #: core/connectionerror.cpp:45
-#, fuzzy, kde-format
-#| msgid "SSH Tunnel failure"
+#, kde-format
 msgctxt "@title connection error"
 msgid "SSH tunnel failed"
-msgstr "Fout met SSH-tunnel"
+msgstr "SSH-tunnel is mislukt"
 
 #: core/connectionerror.cpp:47
 #, kde-format
@@ -700,11 +666,10 @@ msgid "Make sure the SSH server allows port forwarding."
 msgstr ""
 
 #: core/connectionerror.cpp:54
-#, fuzzy, kde-format
-#| msgid "Server not found."
+#, kde-format
 msgctxt "@title connection error"
 msgid "Server not found"
-msgstr "Server niet gevonden."
+msgstr "Server niet gevonden"
 
 #: core/connectionerror.cpp:56
 #, kde-format
@@ -725,12 +690,10 @@ msgid "Try the IP address of the computer instead of its name."
 msgstr ""
 
 #: core/connectionerror.cpp:63
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Server not Found"
+#, kde-format
 msgctxt "@title connection error"
 msgid "Server not reachable"
-msgstr "Server niet gevonden"
+msgstr "Server niet bereikbaar"
 
 #: core/connectionerror.cpp:65 core/connectionerror.cpp:145
 #, kde-format
@@ -761,12 +724,10 @@ msgid "Check that no firewall blocks the connection."
 msgstr ""
 
 #: core/connectionerror.cpp:73
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Connection Failed"
+#, kde-format
 msgctxt "@title connection error"
 msgid "Secure connection failed"
-msgstr "Verbinding is mislukt"
+msgstr "Veilige verbinding is mislukt"
 
 #: core/connectionerror.cpp:75
 #, kde-format
@@ -784,11 +745,10 @@ msgid ""
 msgstr ""
 
 #: core/connectionerror.cpp:80
-#, fuzzy, kde-format
-#| msgid "VNC authentication failed."
+#, kde-format
 msgctxt "@title connection error"
 msgid "Authentication failed"
-msgstr "VNC-authenticatie is mislukt."
+msgstr "Authenticatie is mislukt"
 
 #: core/connectionerror.cpp:82
 #, kde-format
@@ -811,11 +771,10 @@ msgid ""
 msgstr ""
 
 #: core/connectionerror.cpp:88
-#, fuzzy, kde-format
-#| msgid "Session Name"
+#, kde-format
 msgctxt "@title connection error"
 msgid "Session setup failed"
-msgstr "Sessienaam"
+msgstr "Opzetten van sessie is mislukt"
 
 #: core/connectionerror.cpp:90
 #, kde-format
@@ -854,18 +813,16 @@ msgid ""
 msgstr ""
 
 #: core/connectionerror.cpp:104
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Could not find the server."
+#, kde-format
 msgctxt "@title connection error"
 msgid "Closed by the server"
-msgstr "Kon de server niet vinden."
+msgstr "Gesloten door de server"
 
 #: core/connectionerror.cpp:109
 #, kde-format
 msgctxt "@title connection error"
 msgid "Unexpected error"
-msgstr ""
+msgstr "Onverwachte fout"
 
 #: core/connectionerror.cpp:118
 #, kde-format
@@ -874,11 +831,10 @@ msgid "It accepted the connection, then closed it before the session started."
 msgstr ""
 
 #: core/connectionerror.cpp:119
-#, fuzzy, kde-format
-#| msgid "VNC server closed connection."
+#, kde-format
 msgctxt "@title connection error"
 msgid "Server closed the connection"
-msgstr "VNC-server verbrak de verbinding."
+msgstr "Server sloot de verbinding"
 
 #: core/connectionerror.cpp:121
 #, kde-format
@@ -903,9 +859,7 @@ msgid ""
 msgstr ""
 
 #: core/connectionerror.cpp:133
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Connection Refused"
+#, kde-format
 msgctxt "@title connection error"
 msgid "Connection refused"
 msgstr "Verbinding geweigerd"
@@ -917,12 +871,10 @@ msgid "Check that no firewall on the remote computer rejects the connection."
 msgstr ""
 
 #: core/connectionerror.cpp:143
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Server not Found"
+#, kde-format
 msgctxt "@title connection error"
 msgid "Server not responding"
-msgstr "Server niet gevonden"
+msgstr "Server gaf geen antwoord"
 
 #: core/connectionerror.cpp:147 core/connectionerror.cpp:156
 #, kde-format
@@ -931,12 +883,10 @@ msgid "Check that the address is right."
 msgstr ""
 
 #: core/connectionerror.cpp:153
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Could not connect to the server."
+#, kde-format
 msgctxt "@title connection error"
 msgid "No route to the server"
-msgstr "Kon niet verbinden met de server."
+msgstr "Geen route naar de server"
 
 #: core/connectionerror.cpp:155
 #, kde-format
@@ -998,12 +948,10 @@ msgid "SSH server not reachable"
 msgstr ""
 
 #: core/remoteview.cpp:705
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "The server refused the connection request."
+#, kde-format
 msgctxt "@label"
 msgid "The SSH server did not accept a connection on port %1."
-msgstr "De server weigerde het verzoek om verbinding."
+msgstr "De SSH-server weigerde een verbinding op poort %1."
 
 #: core/remoteview.cpp:707
 #, kde-format
@@ -1025,11 +973,10 @@ msgid "Check that no firewall blocks SSH connections."
 msgstr ""
 
 #: core/remoteview.cpp:713
-#, fuzzy, kde-format
-#| msgid "SSH Tunnel failure"
+#, kde-format
 msgctxt "@title connection error"
 msgid "SSH login failed"
-msgstr "Fout met SSH-tunnel"
+msgstr "SSH-aanmelding is mislukt"
 
 #: core/remoteview.cpp:714
 #, kde-format
@@ -2314,7 +2261,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title connection error"
 msgid "Access denied"
-msgstr ""
+msgstr "Toegang geweigerd"
 
 #: rdp/rdpview.cpp:371
 #, kde-format
@@ -2337,12 +2284,10 @@ msgid "The password must be changed before it can be used to log in remotely."
 msgstr ""
 
 #: rdp/rdpview.cpp:382
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Password Problems"
+#, kde-format
 msgctxt "@title connection error"
 msgid "Password expired"
-msgstr "Wachtwoordproblemen"
+msgstr "Wachtwoord verlopen"
 
 #: rdp/rdpview.cpp:384
 #, kde-format
@@ -2431,11 +2376,10 @@ msgid "It accepted the connection, then refused to start a session."
 msgstr ""
 
 #: rdp/rdpview.cpp:446
-#, fuzzy, kde-format
-#| msgid "Sessions"
+#, kde-format
 msgctxt "@title connection error"
 msgid "Session refused"
-msgstr "Sessies"
+msgstr "Sessies geweigerd"
 
 #: rdp/rdpview.cpp:450
 #, kde-format
@@ -2663,12 +2607,10 @@ msgid ""
 msgstr ""
 
 #: spice/spiceview.cpp:896
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "The server refused the connection request."
+#, kde-format
 msgctxt "@label"
 msgid "The server rejected the SPICE connection."
-msgstr "De server weigerde het verzoek om verbinding."
+msgstr "De server weigerde de SPICE-verbinding."
 
 #: spice/spiceview.cpp:897
 #, kde-format

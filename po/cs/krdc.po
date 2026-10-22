@@ -11,15 +11,15 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-10-21 00:51+0000\n"
-"PO-Revision-Date: 2026-09-24 12:31+0200\n"
-"Last-Translator: Libor Filipek <libor.filipek@gmail.com>\n"
+"PO-Revision-Date: 2026-10-22 02:24+0200\n"
+"Last-Translator: Libor Filípek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 26.08.1\n"
+"X-Generator: Lokalize 26.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -46,7 +46,7 @@ msgstr "Zapamatovat si otevřená sezení pro následující spuštění"
 #: config/general.ui:24
 #, kde-format
 msgid "Remember connection history"
-msgstr "Zapamatovat si historii spojení"
+msgstr "Zapamatovat si historii připojení"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_WalletSupport)
 #: config/general.ui:31
@@ -88,7 +88,7 @@ msgstr "Při připojení"
 #: config/general.ui:99
 #, kde-format
 msgid "Show the preferences dialog for new connections"
-msgstr "Zobrazit dialog předvoleb pro nová spojení"
+msgstr "Zobrazit dialog předvoleb pro nová připojení"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_ResizeOnConnect)
 #: config/general.ui:106
@@ -97,8 +97,8 @@ msgid ""
 "This option will resize the window to fit the connection size.  If it is too "
 "big, it will maximize the window."
 msgstr ""
-"Tato volba přizpůsobí velikost okna podle velikosti spojení. Pokud je příliš "
-"veliké, maximalizuje okno."
+"Tato volba přizpůsobí velikost okna podle velikosti připojení. Pokud je "
+"příliš veliké, maximalizuje okno."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ResizeOnConnect)
 #: config/general.ui:109
@@ -113,7 +113,7 @@ msgid ""
 "This option switches to fullscreen only if the connection resolution is the "
 "same as the current screen resolution"
 msgstr ""
-"Tato volba přepne na celou obrazovku jen tehdy, když je rozlišení spojení "
+"Tato volba přepne na celou obrazovku jen tehdy, když je rozlišení připojení "
 "stejné jako rozlišení aktuální obrazovky"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_FullscreenOnConnect)
@@ -306,42 +306,40 @@ msgstr[2] "Před %1 lety"
 #, kde-format
 msgctxt "@info:status connection step"
 msgid "Not started"
-msgstr ""
+msgstr "Nespuštěno"
 
 #: connectionstatuswidget.cpp:67
 #, kde-format
 msgctxt "@info:status connection step"
 msgid "Done"
-msgstr ""
+msgstr "Hotovo"
 
 #: connectionstatuswidget.cpp:70
 #, kde-format
 msgctxt "@info:status connection step"
 msgid "Failed"
-msgstr ""
+msgstr "Selhalo"
 
 #: connectionstatuswidget.cpp:73
 #, kde-format
 msgctxt "@info:status connection step"
 msgid "Information"
-msgstr ""
+msgstr "Informace"
 
 #: connectionstatuswidget.cpp:250
 #, kde-format
 msgctxt "@info"
 msgid "Diagnostic information copied to the clipboard"
-msgstr ""
+msgstr "Diagnostické informace byly zkopírovány do schránky"
 
 #: connectionstatuswidget.cpp:257
-#, fuzzy, kde-format
-#| msgid "Connecting to %1"
+#, kde-format
 msgctxt "@title"
 msgid "Connecting to %1"
-msgstr "Připojuji se k %1"
+msgstr "Připojování k %1"
 
 #: connectionstatuswidget.cpp:258
-#, fuzzy, kde-format
-#| msgid "Connecting to %1"
+#, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Connecting to %1"
 msgstr "Připojuji se k %1"
@@ -350,324 +348,292 @@ msgstr "Připojuji se k %1"
 #, kde-format
 msgctxt "@action:button"
 msgid "Cancel"
-msgstr ""
+msgstr "Zrušit"
 
 #: connectionstatuswidget.cpp:330
 #, kde-format
 msgctxt "@info:status connection step"
 msgid "In progress"
-msgstr ""
+msgstr "Probíhá"
 
 #: connectionstatuswidget.cpp:406
 #, kde-format
 msgctxt "@info connection step"
 msgid "Looking up the server address"
-msgstr ""
+msgstr "Vyhledání adresy serveru"
 
 #: connectionstatuswidget.cpp:408
-#, fuzzy, kde-format
-#| msgid "Connect via SSH tunnel"
+#, kde-format
 msgctxt "@info connection step"
 msgid "Opening the SSH tunnel"
-msgstr "Připojit se přes tunel SSH"
+msgstr "Otevírání tunelu SSH"
 
 #: connectionstatuswidget.cpp:410
 #, kde-format
 msgctxt "@info connection step"
 msgid "Opening a network connection"
-msgstr ""
+msgstr "Navazování síťového připojení"
 
 #: connectionstatuswidget.cpp:412
-#, fuzzy, kde-format
-#| msgid "Preparing connection to %1"
+#, kde-format
 msgctxt "@info connection step"
 msgid "Securing the connection"
-msgstr "Probíhá příprava spojení s %1"
+msgstr "Zabezpečení připojení"
 
 #: connectionstatuswidget.cpp:414
 #, kde-format
 msgctxt "@info connection step"
 msgid "Logging in"
-msgstr ""
+msgstr "Přihlašování"
 
 #: connectionstatuswidget.cpp:416
-#, fuzzy, kde-format
-#| msgid "Prevent remote session lock"
+#, kde-format
 msgctxt "@info connection step"
 msgid "Starting the remote session"
-msgstr "Zabránit uzamčení vzdálené relace"
+msgstr "Spuštění vzdáleného sezení"
 
 #: connectionstatuswidget.cpp:418
-#, fuzzy, kde-format
-#| msgid "Reconnecting."
+#, kde-format
 msgctxt "@info connection step"
 msgid "Reconnecting"
-msgstr "Opakované připojování."
+msgstr "Opakované připojování"
 
 #: connectionstatuswidget.cpp:428
 #, kde-format
 msgctxt "@info connection step"
 msgid "Server address resolved"
-msgstr ""
+msgstr "Zjištěna adresa serveru"
 
 #: connectionstatuswidget.cpp:430
-#, fuzzy, kde-format
-#| msgid "SSH tunnel options"
+#, kde-format
 msgctxt "@info connection step"
 msgid "SSH tunnel established"
-msgstr "Možnosti tunelu SSH"
+msgstr "SSH tunel navázán"
 
 #: connectionstatuswidget.cpp:432
 #, kde-format
 msgctxt "@info connection step"
 msgid "Network connection established"
-msgstr ""
+msgstr "Síťové připojení navázáno"
 
 #: connectionstatuswidget.cpp:434
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Connection Refused"
+#, kde-format
 msgctxt "@info connection step"
 msgid "Connection secured"
-msgstr "Spojení bylo odmítnuto"
+msgstr "Připojení zabezpečeno"
 
 #: connectionstatuswidget.cpp:437
 #, kde-format
 msgctxt "@info connection step"
 msgid "Access granted"
-msgstr ""
+msgstr "Přístup povolen"
 
 #: connectionstatuswidget.cpp:439
-#, fuzzy, kde-format
-#| msgid "KDE Remote Desktop Client started"
+#, kde-format
 msgctxt "@info connection step"
 msgid "Remote session started"
-msgstr "Klient vzdálené plochy pro KDE spuštěn"
+msgstr "Vzdálené sezení spuštěno"
 
 #: connectionstatuswidget.cpp:449
-#, fuzzy, kde-format
-#| msgid "Connected to %1"
+#, kde-format
 msgctxt "@info"
 msgid "Resolved to %1."
-msgstr "Připojen k %1"
+msgstr "Převedeno na %1."
 
 #: connectionstatuswidget.cpp:461
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Local address lookup failed: %1"
-msgstr ""
+msgstr "Vyhledání místní adresy se nezdařilo: %1"
 
 #: connectionstatuswidget.cpp:466
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "%1 resolved to %2"
-msgstr ""
+msgstr "%1 převedeno na %2"
 
 #: connectionstatuswidget.cpp:498
-#, fuzzy, kde-format
-#| msgid "Connect to a VNC Remote Desktop"
+#, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Connecting to the remote desktop service"
-msgstr "Připojit se na vzdálenou plochu VNC"
+msgstr "Připojování ke službě vzdálené plochy"
 
 #: connectionstatuswidget.cpp:505
-#, fuzzy, kde-format
-#| msgid "Authenticating at %1"
+#, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Authenticating"
-msgstr "Probíhá ověřování na %1"
+msgstr "Ověřování"
 
 #: connectionstatuswidget.cpp:509
-#, fuzzy, kde-format
-#| msgid "Prevent remote session lock"
+#, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Preparing the session"
-msgstr "Zabránit uzamčení vzdálené relace"
+msgstr "Příprava sezení"
 
 #: connectionstatuswidget.cpp:513
-#, fuzzy, kde-format
-#| msgid "Connected."
+#, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Connected"
-msgstr "Připojen."
+msgstr "Připojeno"
 
 #: connectionstatuswidget.cpp:546
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Connection dropped, reconnecting: %1"
-msgstr ""
+msgstr "Připojení bylo přerušeno, probíhá opětovné připojení: %1"
 
 #: connectionstatuswidget.cpp:546
-#, fuzzy, kde-format
-#| msgid "Reconnected."
+#, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Reconnected"
-msgstr "Opakovaně připojen."
+msgstr "Opakovaně připojeno"
 
 #: connectionstatuswidget.cpp:559
 #, kde-format
 msgctxt "@info"
 msgid "KRDC keeps trying until the connection is back."
-msgstr ""
+msgstr "KRDC to zkouší tak dlouho, dokud se spojení neobnoví."
 
 #: connectionstatuswidget.cpp:563
-#, fuzzy, kde-format
-#| msgid "Connecting to %1"
+#, kde-format
 msgctxt "@title"
 msgid "Connection to %1 interrupted"
-msgstr "Připojuji se k %1"
+msgstr "Připojení k %1 bylo přerušeno"
 
 #: connectionstatuswidget.cpp:565
-#, fuzzy, kde-format
-#| msgid "Disconnect"
+#, kde-format
 msgctxt "@action:button"
 msgid "Disconnect"
-msgstr "Odpojit"
+msgstr "Odpojit se"
 
 #: connectionstatuswidget.cpp:575
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Failed while: %1"
-msgstr ""
+msgstr "Došlo k selhání při: %1"
 
 #: connectionstatuswidget.cpp:656
 #, kde-format
 msgctxt "@title"
 msgid "Session with %1 ended"
-msgstr ""
+msgstr "Sezení s %1 ukončeno"
 
 #: connectionstatuswidget.cpp:658
-#, fuzzy, kde-format
-#| msgid "Connecting to %1"
+#, kde-format
 msgctxt "@title"
 msgid "Connection to %1 lost"
-msgstr "Připojuji se k %1"
+msgstr "Připojení k %1 bylo přerušeno"
 
 #: connectionstatuswidget.cpp:660
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Could not Connect"
+#, kde-format
 msgctxt "@title"
 msgid "Could not connect to %1"
-msgstr "Nelze se připojit"
+msgstr "Nelze se připojit k %1"
 
 #: connectionstatuswidget.cpp:666
-#, fuzzy, kde-format
-#| msgid "Reconnected."
+#, kde-format
 msgctxt "@action:button"
 msgid "Reconnect"
-msgstr "Opakovaně připojen."
+msgstr "Znovu připojit"
 
 #: connectionstatuswidget.cpp:666
-#, fuzzy, kde-format
-#| msgid "Connection"
+#, kde-format
 msgctxt "@action:button"
 msgid "Connect Again"
-msgstr "Připojení"
+msgstr "Znovu se připojit"
 
 #: connectionstatuswidget.cpp:671
-#, fuzzy, kde-format
-#| msgid "Goto Address"
+#, kde-format
 msgctxt "@action:button"
 msgid "Edit Address"
-msgstr "Přejít na adresu"
+msgstr "Upravit adresu"
 
 #: connectionstatuswidget.cpp:674
 #, kde-format
 msgctxt "@action:button"
 msgid "Edit Host Settings…"
-msgstr ""
+msgstr "Upravit nastavení hostitele…"
 
 #: connectionstatuswidget.cpp:676
-#, fuzzy, kde-format
-#| msgid "Close Tab"
+#, kde-format
 msgctxt "@action:button"
 msgid "Close Tab"
-msgstr "Uzavřít záložku"
+msgstr "Zavřít kartu"
 
 #: connectionstatuswidget.cpp:714
 #, kde-format
 msgctxt "@action:button"
 msgid "Copy diagnostic information"
-msgstr ""
+msgstr "Zkopírovat diagnostické informace"
 
 #: connectionstatuswidget.cpp:719
 #, kde-format
 msgctxt "@action:button"
 msgid "Hide details"
-msgstr ""
+msgstr "Skrýt podrobnosti"
 
 #: connectionstatuswidget.cpp:719
-#, fuzzy, kde-format
-#| msgctxt "EMAIL OF TRANSLATORS"
-#| msgid "Your emails"
+#, kde-format
 msgctxt "@action:button"
 msgid "Show details"
-msgstr "lukas@kde.org,koty@seznam.cz,libor.filipek@gmail.com"
+msgstr "Zobrazit podrobnosti"
 
 #: core/connectionerror.cpp:15
 #, kde-format
 msgctxt "@info connection stage"
 msgid "Setting up the SSH tunnel"
-msgstr ""
+msgstr "Nastavování tunelu SSH"
 
 #: core/connectionerror.cpp:17
 #, kde-format
 msgctxt "@info connection stage"
 msgid "Looking up the host name"
-msgstr ""
+msgstr "Vyhledání názvu hostitele"
 
 #: core/connectionerror.cpp:19
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Lost connection to the server."
+#, kde-format
 msgctxt "@info connection stage"
 msgid "Connecting to the server"
-msgstr "Ztráta připojení k serveru."
+msgstr "Připojování k serveru"
 
 #: core/connectionerror.cpp:21
-#, fuzzy, kde-format
-#| msgid "Preparing connection to %1"
+#, kde-format
 msgctxt "@info connection stage"
 msgid "Securing the connection"
-msgstr "Probíhá příprava spojení s %1"
+msgstr "Zabezpečení připojení"
 
 #: core/connectionerror.cpp:23
 #, kde-format
 msgctxt "@info connection stage"
 msgid "Logging in"
-msgstr ""
+msgstr "Přihlašování"
 
 #: core/connectionerror.cpp:25
-#, fuzzy, kde-format
-#| msgid "Prevent remote session lock"
+#, kde-format
 msgctxt "@info connection stage"
 msgid "Starting the remote session"
-msgstr "Zabránit uzamčení vzdálené relace"
+msgstr "Spuštění vzdáleného sezení"
 
 #: core/connectionerror.cpp:27
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Connection Refused"
+#, kde-format
 msgctxt "@info connection stage"
 msgid "Connection interrupted"
-msgstr "Spojení bylo odmítnuto"
+msgstr "Připojení přerušeno"
 
 #: core/connectionerror.cpp:29
 #, kde-format
 msgctxt "@info connection stage"
 msgid "Session ended remotely"
-msgstr ""
+msgstr "Sezení vzdáleně ukončeno"
 
 #: core/connectionerror.cpp:33
 #, kde-format
 msgctxt "@info connection stage"
 msgid "Unknown"
-msgstr ""
+msgstr "Neznámé"
 
 #: core/connectionerror.cpp:45
-#, fuzzy, kde-format
-#| msgid "SSH Tunnel failure"
+#, kde-format
 msgctxt "@title connection error"
 msgid "SSH tunnel failed"
 msgstr "Selhání tunelu SSH"
@@ -677,6 +643,7 @@ msgstr "Selhání tunelu SSH"
 msgctxt "@info"
 msgid "Check the SSH tunnel user name and port in the host settings."
 msgstr ""
+"Zkontrolujte uživatelské jméno a port SSH tunelu v nastavení hostitele."
 
 #: core/connectionerror.cpp:48
 #, kde-format
@@ -685,6 +652,8 @@ msgid ""
 "Log in with an SSH client in a terminal to confirm that the server is "
 "reachable and your credentials work."
 msgstr ""
+"Přihlaste se pomocí SSH klienta v terminálu, abyste ověřili, že je server "
+"dostupný a že vaše přihlašovací údaje fungují."
 
 #: core/connectionerror.cpp:49
 #, kde-format
@@ -692,45 +661,44 @@ msgctxt "@info"
 msgid ""
 "If you use key authentication, add the key to your SSH agent with ssh-add."
 msgstr ""
+"Pokud používáte ověřování pomocí klíče, přidejte klíč do svého SSH agenta "
+"pomocí příkazu ssh-add."
 
 #: core/connectionerror.cpp:50
 #, kde-format
 msgctxt "@info"
 msgid "Make sure the SSH server allows port forwarding."
-msgstr ""
+msgstr "Ujistěte se, že server SSH povoluje přesměrování portů."
 
 #: core/connectionerror.cpp:54
-#, fuzzy, kde-format
-#| msgid "Server not found."
+#, kde-format
 msgctxt "@title connection error"
 msgid "Server not found"
-msgstr "Server nenalezen."
+msgstr "Server nenalezen"
 
 #: core/connectionerror.cpp:56
 #, kde-format
 msgctxt "@info"
 msgid "Check the spelling of the address."
-msgstr ""
+msgstr "Zkontrolujte, zda je adresa napsána správně."
 
 #: core/connectionerror.cpp:57
 #, kde-format
 msgctxt "@info"
 msgid "Connect to the network or VPN the computer is on."
-msgstr ""
+msgstr "Připojte se k síti nebo k síti VPN, ke které je počítač připojen."
 
 #: core/connectionerror.cpp:58
 #, kde-format
 msgctxt "@info"
 msgid "Try the IP address of the computer instead of its name."
-msgstr ""
+msgstr "Zkuste místo názvu počítače zadat jeho IP adresu."
 
 #: core/connectionerror.cpp:63
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Server not Found"
+#, kde-format
 msgctxt "@title connection error"
 msgid "Server not reachable"
-msgstr "Server nenalezen"
+msgstr "Server není dostupný"
 
 #: core/connectionerror.cpp:65 core/connectionerror.cpp:145
 #, kde-format
@@ -739,12 +707,15 @@ msgid ""
 "Make sure the remote computer is turned on, awake and connected to the "
 "network."
 msgstr ""
+"Ujistěte se, že je vzdálený počítač zapnutý, v aktivním režimu a připojený k "
+"síti."
 
 #: core/connectionerror.cpp:66 core/connectionerror.cpp:135
 #, kde-format
 msgctxt "@info"
 msgid "Check that remote desktop sharing is enabled on the remote computer."
 msgstr ""
+"Zkontrolujte, zda je na vzdáleném počítači povoleno sdílení pracovní plochy."
 
 #: core/connectionerror.cpp:67 core/connectionerror.cpp:136
 #, kde-format
@@ -753,20 +724,20 @@ msgid ""
 "Check the port in the address. The defaults are 3389 for RDP and 5900 for "
 "VNC and SPICE."
 msgstr ""
+"Zkontrolujte port v adrese. Výchozí hodnoty jsou 3389 pro RDP a 5900 pro VNC "
+"a SPICE."
 
 #: core/connectionerror.cpp:68 core/connectionerror.cpp:146
 #, kde-format
 msgctxt "@info"
 msgid "Check that no firewall blocks the connection."
-msgstr ""
+msgstr "Zkontrolujte, zda připojení neblokuje žádný firewall."
 
 #: core/connectionerror.cpp:73
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Connection Failed"
+#, kde-format
 msgctxt "@title connection error"
 msgid "Secure connection failed"
-msgstr "Spojení selhalo"
+msgstr "Zabezpečené připojení selhalo"
 
 #: core/connectionerror.cpp:75
 #, kde-format
@@ -774,6 +745,8 @@ msgctxt "@info"
 msgid ""
 "Review the security settings for this host, or reset them to their defaults."
 msgstr ""
+"Zkontrolujte nastavení zabezpečení tohoto hostitele nebo je obnovte na "
+"výchozí hodnoty."
 
 #: core/connectionerror.cpp:76
 #, kde-format
@@ -782,25 +755,30 @@ msgid ""
 "If the server certificate changed unexpectedly, confirm the change with the "
 "server administrator before accepting it."
 msgstr ""
+"Pokud došlo k neočekávané změně certifikátu serveru, před jeho přijetím si "
+"tuto změnu ověřte u správce serveru."
 
 #: core/connectionerror.cpp:80
-#, fuzzy, kde-format
-#| msgid "VNC authentication failed."
+#, kde-format
 msgctxt "@title connection error"
 msgid "Authentication failed"
-msgstr "Ověření VNC selhalo."
+msgstr "Ověření selhalo"
 
 #: core/connectionerror.cpp:82
 #, kde-format
 msgctxt "@info"
 msgid "Check the user name, password and domain, and that Caps Lock is off."
 msgstr ""
+"Zkontrolujte uživatelské jméno, heslo a doménu a ujistěte se, že není "
+"zapnutá klávesa Caps Lock."
 
 #: core/connectionerror.cpp:83
 #, kde-format
 msgctxt "@info"
 msgid "If you use a saved password, enter it again. It may be out of date."
 msgstr ""
+"Pokud používáte uložené heslo, zadejte ho znovu. Je možné, že již není "
+"aktuální."
 
 #: core/connectionerror.cpp:84
 #, kde-format
@@ -809,12 +787,14 @@ msgid ""
 "If the account is locked or expired, contact the administrator of the remote "
 "computer."
 msgstr ""
+"Pokud je účet uzamčen nebo jeho platnost vypršela, obraťte se na správce "
+"vzdáleného počítače."
 
 #: core/connectionerror.cpp:88
 #, kde-format
 msgctxt "@title connection error"
 msgid "Session setup failed"
-msgstr ""
+msgstr "Nastavení sezení se nezdařilo"
 
 #: core/connectionerror.cpp:90
 #, kde-format
@@ -823,6 +803,8 @@ msgid ""
 "Reset advanced options in the host settings, such as graphics acceleration "
 "or color depth, to their defaults."
 msgstr ""
+"Obnovte pokročilá nastavení v nastavení hostitele, jako je grafická "
+"akcelerace nebo barevná hloubka, na výchozí hodnoty."
 
 #: core/connectionerror.cpp:91
 #, kde-format
@@ -831,18 +813,20 @@ msgid ""
 "Ask the administrator of the remote computer whether new sessions are "
 "allowed. The number of users may be limited."
 msgstr ""
+"Zeptejte se správce vzdáleného počítače, zda jsou povoleny nová sezení. "
+"Počet uživatelů může být omezen."
 
 #: core/connectionerror.cpp:96
 #, kde-format
 msgctxt "@title connection error"
 msgid "Network connection interrupted"
-msgstr ""
+msgstr "Připojení k síti bylo přerušeno"
 
 #: core/connectionerror.cpp:98
 #, kde-format
 msgctxt "@info"
 msgid "Check your network connection, then reconnect."
-msgstr ""
+msgstr "Zkontrolujte připojení k síti a poté se znovu připojte."
 
 #: core/connectionerror.cpp:99
 #, kde-format
@@ -851,33 +835,32 @@ msgid ""
 "If the remote computer restarted or went to sleep, wait until it is back, "
 "then reconnect."
 msgstr ""
+"Pokud se vzdálený počítač restartoval nebo přešel do režimu spánku, "
+"počkejte, až se znovu spustí, a poté se znovu připojte."
 
 #: core/connectionerror.cpp:104
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Could not find the server."
+#, kde-format
 msgctxt "@title connection error"
 msgid "Closed by the server"
-msgstr "Server nelze najít."
+msgstr "Ukončeno serverem"
 
 #: core/connectionerror.cpp:109
 #, kde-format
 msgctxt "@title connection error"
 msgid "Unexpected error"
-msgstr ""
+msgstr "Neočekávaná chyba"
 
 #: core/connectionerror.cpp:118
 #, kde-format
 msgctxt "@label"
 msgid "It accepted the connection, then closed it before the session started."
-msgstr ""
+msgstr "Přijato připojení a uzavřeno před zahájením sezení."
 
 #: core/connectionerror.cpp:119
-#, fuzzy, kde-format
-#| msgid "VNC server closed connection."
+#, kde-format
 msgctxt "@title connection error"
 msgid "Server closed the connection"
-msgstr "VNC server ukončil spojení."
+msgstr "Server ukončil připojení"
 
 #: core/connectionerror.cpp:121
 #, kde-format
@@ -886,12 +869,15 @@ msgid ""
 "If another viewer is connected, close it. Some servers allow only one at a "
 "time."
 msgstr ""
+"Pokud je připojený další prohlížeč, zavřete jej. Některé servery povolují "
+"pouze jedno připojení najednou."
 
 #: core/connectionerror.cpp:122
 #, kde-format
 msgctxt "@info"
 msgid "Check that this port belongs to the remote desktop service you expect."
 msgstr ""
+"Ověřte, zda tento port patří ke službě vzdálené plochy, kterou očekáváte."
 
 #: core/connectionerror.cpp:123
 #, kde-format
@@ -900,48 +886,47 @@ msgid ""
 "Check the access and security settings of the server, or its log, for why it "
 "closed the connection."
 msgstr ""
+"Zkontrolujte nastavení přístupu a zabezpečení serveru nebo jeho protokol, "
+"abyste zjistili, proč došlo k přerušení připojení."
 
 #: core/connectionerror.cpp:133
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Connection Refused"
+#, kde-format
 msgctxt "@title connection error"
 msgid "Connection refused"
-msgstr "Spojení bylo odmítnuto"
+msgstr "Připojení bylo odmítnuto"
 
 #: core/connectionerror.cpp:137
 #, kde-format
 msgctxt "@info"
 msgid "Check that no firewall on the remote computer rejects the connection."
 msgstr ""
+"Zkontrolujte, zda žádné brány firewall na vzdáleném počítači toto připojení "
+"neodmítají."
 
 #: core/connectionerror.cpp:143
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Server not Found"
+#, kde-format
 msgctxt "@title connection error"
 msgid "Server not responding"
-msgstr "Server nenalezen"
+msgstr "Server neodpovídá"
 
 #: core/connectionerror.cpp:147 core/connectionerror.cpp:156
 #, kde-format
 msgctxt "@info"
 msgid "Check that the address is right."
-msgstr ""
+msgstr "Zkontrolujte, zda je adresa správná."
 
 #: core/connectionerror.cpp:153
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Could not connect to the server."
+#, kde-format
 msgctxt "@title connection error"
 msgid "No route to the server"
-msgstr "Na server se nelze připojit."
+msgstr "Žádná trasa k serveru"
 
 #: core/connectionerror.cpp:155
 #, kde-format
 msgctxt "@info"
 msgid "Connect to the network or VPN the remote computer is on."
 msgstr ""
+"Připojte se k síti nebo k síti VPN, ve které se vzdálený počítač nachází."
 
 #: core/hostpreferences.cpp:230
 #, kde-format
@@ -988,27 +973,25 @@ msgstr "Prosím, zadejte heslo SSH."
 #, kde-format
 msgctxt "@label"
 msgid "The SSH tunnel on port %1 could not be set up."
-msgstr ""
+msgstr "Není možné nastavit tunel SSH na portu %1."
 
 #: core/remoteview.cpp:704
 #, kde-format
 msgctxt "@title connection error"
 msgid "SSH server not reachable"
-msgstr ""
+msgstr "SSH server není dostupný"
 
 #: core/remoteview.cpp:705
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "The server refused the connection request."
+#, kde-format
 msgctxt "@label"
 msgid "The SSH server did not accept a connection on port %1."
-msgstr "Server odmítl požadavek na připojení."
+msgstr "SSH server nepřijal připojení na portu %1."
 
 #: core/remoteview.cpp:707
 #, kde-format
 msgctxt "@info"
 msgid "Make sure the SSH server is running and listens on port %1."
-msgstr ""
+msgstr "Ujistěte se, že server SSH běží a naslouchá na portu %1."
 
 #: core/remoteview.cpp:708
 #, kde-format
@@ -1016,37 +999,38 @@ msgctxt "@info"
 msgid ""
 "Check the host name, and that the computer is reachable from this network."
 msgstr ""
+"Zkontrolujte název hostitele a ověřte, zda je počítač z této sítě dostupný."
 
 #: core/remoteview.cpp:709
 #, kde-format
 msgctxt "@info"
 msgid "Check that no firewall blocks SSH connections."
-msgstr ""
+msgstr "Zkontrolujte, zda žádné brány firewall neblokují připojení přes SSH."
 
 #: core/remoteview.cpp:713
-#, fuzzy, kde-format
-#| msgid "SSH Tunnel failure"
+#, kde-format
 msgctxt "@title connection error"
 msgid "SSH login failed"
-msgstr "Selhání tunelu SSH"
+msgstr "Přihlášení přes SSH se nezdařilo"
 
 #: core/remoteview.cpp:714
 #, kde-format
 msgctxt "@label"
 msgid "The SSH server did not accept the login."
-msgstr ""
+msgstr "SSH server nepřijal přihlášení."
 
 #: core/remoteview.cpp:715
 #, kde-format
 msgctxt "@label"
 msgid "The SSH server did not accept the login for “%1”."
-msgstr ""
+msgstr "SSH server nepřijal přihlášení pro \"%1\"."
 
 #: core/remoteview.cpp:717
 #, kde-format
 msgctxt "@info"
 msgid "Check the SSH user name in the host settings, and the password."
 msgstr ""
+"Zkontrolujte uživatelské jméno pro SSH v nastavení hostitele a také heslo."
 
 #: core/remoteview.cpp:718
 #, kde-format
@@ -1055,6 +1039,8 @@ msgid ""
 "If you use key authentication, add the key to your SSH agent with ssh-add, "
 "and make sure it is authorized on the server."
 msgstr ""
+"Pokud používáte ověřování pomocí klíče, přidejte klíč do svého SSH agenta "
+"pomocí příkazu ssh-add a ujistěte se, že je na serveru autorizován."
 
 #: core/remoteview.cpp:719
 #, kde-format
@@ -1062,12 +1048,15 @@ msgctxt "@info"
 msgid ""
 "If the SSH server does not allow password logins, set up key authentication."
 msgstr ""
+"Pokud server SSH nepovoluje přihlášení pomocí hesla, nastavte ověřování "
+"pomocí klíče."
 
 #: core/remoteview.cpp:723
 #, kde-format
 msgctxt "@label"
 msgid "No free local port could be opened for the tunnel on this computer."
 msgstr ""
+"Na tomto počítači nebylo možné otevřít žádný volný lokální port pro tunel."
 
 #: core/remoteview.cpp:725
 #, kde-format
@@ -1076,6 +1065,8 @@ msgid ""
 "Close other applications that open many network connections, then connect "
 "again."
 msgstr ""
+"Ukončete ostatní aplikace, které otevírají mnoho síťových připojení, a poté "
+"se připojte znovu."
 
 #: core/sshtunnelthread.cpp:104
 #, kde-format
@@ -1255,7 +1246,7 @@ msgstr "Klient vzdálené plochy pro KDE spuštěn"
 #: mainwindow.cpp:1509
 #, kde-format
 msgid "New Connection"
-msgstr "Nové spojení"
+msgstr "Nové připojení"
 
 #: mainwindow.cpp:140
 #, kde-format
@@ -1338,6 +1329,8 @@ msgid ""
 "Unable to load connection data from “%1”.\n"
 "The file may be damaged, or it is in a format KRDC does not support."
 msgstr ""
+"Nelze načíst údaje o připojení ze souboru \"%1\".\n"
+"Soubor je možná poškozený nebo je v formátu, který KRDC nepodporuje."
 
 #: mainwindow.cpp:289
 #, kde-format
@@ -1351,6 +1344,10 @@ msgid ""
 "\n"
 "Use the form [username@]host[:port], for example: user@192.168.1.10:5900"
 msgstr ""
+"\"%1\" není platná adresa.\n"
+"\n"
+"Použijte formát [uživatelské jméno@]host[:port], například: "
+"user@192.168.1.10:5900"
 
 #: mainwindow.cpp:298
 #, kde-format
@@ -1363,6 +1360,8 @@ msgid ""
 "No installed plugin can handle the “%1” protocol.\n"
 "Supported protocols: %2"
 msgstr ""
+"Žádný nainstalovaný modul neumí zpracovat protokol \"%1\".\n"
+"Podporované protokoly: %2"
 
 #: mainwindow.cpp:533
 #, kde-format
@@ -1377,7 +1376,7 @@ msgstr "Probíhá ověřování na %1"
 #: mainwindow.cpp:541
 #, kde-format
 msgid "Preparing connection to %1"
-msgstr "Probíhá příprava spojení s %1"
+msgstr "Probíhá příprava připojení s %1"
 
 #: mainwindow.cpp:545
 #, kde-format
@@ -1519,13 +1518,13 @@ msgstr "Filtr"
 #, kde-format
 msgctxt "@label"
 msgid "The remote computer may have shut down or restarted."
-msgstr ""
+msgstr "Vzdálený počítač se možná vypnul nebo restartoval."
 
 #: mainwindow.cpp:1631
 #, kde-format
 msgctxt "@title connection error"
 msgid "Closed before the session started"
-msgstr ""
+msgstr "Ukončeno ještě před začátkem sezení"
 
 #. i18n: ectx: attribute (title), widget (QWidget, mainSettingsTab)
 #: rdp/rdppreferences.ui:21
@@ -2055,7 +2054,7 @@ msgstr "Zámek sezení:"
 #: rdp/rdppreferences.ui:721
 #, kde-format
 msgid "Prevent remote session lock"
-msgstr "Zabránit uzamčení vzdálené relace"
+msgstr "Zabránit uzamčení vzdáleného sezení"
 
 #. i18n: ectx: attribute (title), widget (QWidget, securitySettingsTab)
 #: rdp/rdppreferences.ui:729
@@ -2288,37 +2287,39 @@ msgstr ""
 #, kde-format
 msgctxt "@label"
 msgid "The credentials for “%1” were not accepted."
-msgstr ""
+msgstr "Přihlašovací údaje pro \"%1\" nebyly přijaty."
 
 #: rdp/rdpview.cpp:350
 #, kde-format
 msgctxt "@info"
 msgid "Check the RD Gateway credentials in the host settings."
-msgstr ""
+msgstr "Zkontrolujte přihlašovací údaje brány RD v nastavení hostitele."
 
 #: rdp/rdpview.cpp:366
 #, kde-format
 msgctxt "@label"
 msgid "This account may not log in remotely."
-msgstr ""
+msgstr "Tento účet se nesmí přihlašovat vzdáleně."
 
 #: rdp/rdpview.cpp:367
 #, kde-format
 msgctxt "@label"
 msgid "“%1” may not log in remotely."
-msgstr ""
+msgstr "\"%1\" se nemůže přihlásit vzdáleně."
 
 #: rdp/rdpview.cpp:369
 #, kde-format
 msgctxt "@title connection error"
 msgid "Access denied"
-msgstr ""
+msgstr "Přístup odmítnut"
 
 #: rdp/rdpview.cpp:371
 #, kde-format
 msgctxt "@info"
 msgid "Check whether the account is locked, disabled or expired."
 msgstr ""
+"Zkontrolujte, zda je účet uzamčen, deaktivován nebo zda vypršela jeho "
+"platnost."
 
 #: rdp/rdpview.cpp:373
 #, kde-format
@@ -2327,20 +2328,21 @@ msgid ""
 "Ask the administrator of the remote computer to add the account to the "
 "Remote Desktop Users group, or log in with a different account."
 msgstr ""
+"Požádejte správce vzdáleného počítače, aby tento účet přidal do skupiny "
+"Uživatelé vzdálené plochy, nebo se přihlaste pomocí jiného účtu."
 
 #: rdp/rdpview.cpp:381
 #, kde-format
 msgctxt "@label"
 msgid "The password must be changed before it can be used to log in remotely."
 msgstr ""
+"Heslo je nutné změnit, než jej bude možné použít k vzdálenému přihlášení."
 
 #: rdp/rdpview.cpp:382
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Password Problems"
+#, kde-format
 msgctxt "@title connection error"
 msgid "Password expired"
-msgstr "Problémy s heslem"
+msgstr "Platnost hesla vypršela"
 
 #: rdp/rdpview.cpp:384
 #, kde-format
@@ -2349,36 +2351,38 @@ msgid ""
 "Change the password by logging in locally on the remote computer, or ask its "
 "administrator to reset it."
 msgstr ""
+"Heslo změňte tak, že se přihlásíte lokálně na vzdáleném počítači, nebo "
+"požádejte jeho správce, aby ho resetoval."
 
 #: rdp/rdpview.cpp:389
 #, kde-format
 msgctxt "@label"
 msgid "The Kerberos domain controller could not be reached."
-msgstr ""
+msgstr "Nedařilo se navázat připojení s řadičem domény Kerberos."
 
 #: rdp/rdpview.cpp:391
 #, kde-format
 msgctxt "@info"
 msgid "Check the domain you entered when logging in."
-msgstr ""
+msgstr "Zkontrolujte doménu, kterou jste zadali při přihlášení."
 
 #: rdp/rdpview.cpp:392
 #, kde-format
 msgctxt "@info"
 msgid "Connect to the network or VPN of the domain."
-msgstr ""
+msgstr "Připojte se k síti nebo k VPN dané domény."
 
 #: rdp/rdpview.cpp:397 spice/spiceview.cpp:901 vnc/vncview.cpp:287
 #, kde-format
 msgctxt "@label"
 msgid "No IP address was found for this name."
-msgstr ""
+msgstr "Pro tento název nebyla nalezena žádná IP adresa."
 
 #: rdp/rdpview.cpp:408
 #, kde-format
 msgctxt "@label"
 msgid "The server and KRDC could not agree on a security protocol."
-msgstr ""
+msgstr "Server a KRDC se nedokázaly dohodnout na bezpečnostním protokolu."
 
 #: rdp/rdpview.cpp:410
 #, kde-format
@@ -2387,18 +2391,20 @@ msgid ""
 "Set the TLS security level in the host settings to “Any”. The server may not "
 "support the level selected."
 msgstr ""
+"V nastavení hostitele nastavte úroveň zabezpečení TLS na \"Cokoliv\". Server "
+"nemusí podporovat vybranou úroveň."
 
 #: rdp/rdpview.cpp:414
 #, kde-format
 msgctxt "@label"
 msgid "The server requires Network Level Authentication (NLA)."
-msgstr ""
+msgstr "Server vyžaduje ověřování na síťové úrovni (NLA)."
 
 #: rdp/rdpview.cpp:415
 #, kde-format
 msgctxt "@info"
 msgid "Enable NLA in the security settings for this host."
-msgstr ""
+msgstr "V nastavení zabezpečení tohoto hostitele povolte funkci NLA."
 
 #: rdp/rdpview.cpp:433
 #, kde-format
@@ -2407,12 +2413,14 @@ msgid ""
 "Check the RD Gateway settings for this host. The gateway “%1” may be "
 "unreachable or reject the connection."
 msgstr ""
+"Zkontrolujte nastavení brány RD pro tohoto hostitele. Brána \"%1\" může být "
+"nedostupná nebo může odmítat připojení."
 
 #: rdp/rdpview.cpp:440
 #, kde-format
 msgctxt "@label"
 msgid "The remote computer did not finish starting the session in time."
-msgstr ""
+msgstr "Vzdálený počítač nestihl včas dokončit spuštění sezení."
 
 #: rdp/rdpview.cpp:441
 #, kde-format
@@ -2421,61 +2429,65 @@ msgid ""
 "The remote computer may still be starting up or be under heavy load. Wait a "
 "minute, then connect again."
 msgstr ""
+"Vzdálený počítač se možná ještě spouští nebo je silně vytížený. Počkejte "
+"minutu a poté se připojte znovu."
 
 #: rdp/rdpview.cpp:445
 #, kde-format
 msgctxt "@label"
 msgid "It accepted the connection, then refused to start a session."
-msgstr ""
+msgstr "Připojení bylo přijato, ale poté bylo odmítnuto zahájení sezení."
 
 #: rdp/rdpview.cpp:446
-#, fuzzy, kde-format
-#| msgid "Sessions"
+#, kde-format
 msgctxt "@title connection error"
 msgid "Session refused"
-msgstr "Sezení"
+msgstr "Sezení zamítnuto"
 
 #: rdp/rdpview.cpp:450
 #, kde-format
 msgctxt "@label"
 msgid "The server did not accept the options selected for this host."
-msgstr ""
+msgstr "Server nepřijal volby vybrané pro tohoto hostitele."
 
 #: rdp/rdpview.cpp:453
 #, kde-format
 msgctxt "@label"
 msgid "An administrator or another program disconnected this session."
-msgstr ""
+msgstr "Toto sezení ukončil správce nebo jiný program."
 
 #: rdp/rdpview.cpp:456
 #, kde-format
 msgctxt "@label"
 msgid "An administrator signed this session out."
-msgstr ""
+msgstr "Správce ukončil toto sezení."
 
 #: rdp/rdpview.cpp:459
 #, kde-format
 msgctxt "@label"
 msgid "The session was disconnected from the remote computer."
-msgstr ""
+msgstr "Připojení k vzdálenému počítači bylo přerušeno."
 
 #: rdp/rdpview.cpp:466
 #, kde-format
 msgctxt "@label"
 msgid "Disconnected because someone else connected to this session."
 msgstr ""
+"Připojení bylo přerušeno, protože se k tomuto sezení připojil někdo jiný."
 
 #: rdp/rdpview.cpp:467
 #, kde-format
 msgctxt "@info"
 msgid "Reconnect to take the session back. This disconnects the other user."
 msgstr ""
+"Znovu se připojte, abyste převzali sezení. Tím dojde k odpojení druhého "
+"uživatele."
 
 #: rdp/rdpview.cpp:470
 #, kde-format
 msgctxt "@label"
 msgid "The session was closed after being idle for too long."
-msgstr ""
+msgstr "Sezení bylo ukončeno z důvodu příliš dlouhé nečinnosti."
 
 #: rdp/rdpview.cpp:471
 #, kde-format
@@ -2484,12 +2496,14 @@ msgid ""
 "Reconnect to continue. The idle time limit is set by the administrator of "
 "the server."
 msgstr ""
+"Pro pokračování se znovu připojte. Časový limit nečinnosti nastavuje správce "
+"serveru."
 
 #: rdp/rdpview.cpp:485
 #, kde-format
 msgctxt "@label"
 msgid "The remote computer reported a problem while logging in."
-msgstr ""
+msgstr "Vzdálený počítač nahlásil problém při přihlašování."
 
 #: rdp/rdpview.cpp:486
 #, kde-format
@@ -2498,6 +2512,8 @@ msgid ""
 "Check that this user may log in to the remote computer, and that the session "
 "is not busy."
 msgstr ""
+"Ověřte, zda se tento uživatel může přihlásit ke vzdálenému počítači a zda "
+"není sezení obsazeno."
 
 #: rdp/rdpview.cpp:865
 #, kde-format
@@ -2650,7 +2666,7 @@ msgstr "Pro připojení k <b>%1</b> je nutné ověření."
 #, kde-format
 msgctxt "@label"
 msgid "The TLS handshake failed."
-msgstr ""
+msgstr "Handshake TLS selhal."
 
 #: spice/spiceview.cpp:893
 #, kde-format
@@ -2659,14 +2675,14 @@ msgid ""
 "Check whether the server accepts TLS only on a separate port, and that its "
 "certificate is trusted."
 msgstr ""
+"Zkontrolujte, zda server přijímá protokol TLS pouze na samostatném portu a "
+"zda je jeho certifikát důvěryhodný."
 
 #: spice/spiceview.cpp:896
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "The server refused the connection request."
+#, kde-format
 msgctxt "@label"
 msgid "The server rejected the SPICE connection."
-msgstr "Server odmítl požadavek na připojení."
+msgstr "Server odmítl připojení SPICE."
 
 #: spice/spiceview.cpp:897
 #, kde-format
@@ -2675,6 +2691,8 @@ msgid ""
 "Check that this port belongs to a SPICE server with a compatible protocol "
 "version."
 msgstr ""
+"Zkontrolujte, zda tento port patří k serveru SPICE s kompatibilní verzí "
+"protokolu."
 
 #: spice/spiceview.cpp:907
 #, kde-format
@@ -2683,6 +2701,8 @@ msgid ""
 "Make sure the virtual machine is running, and its SPICE display listens on "
 "this address."
 msgstr ""
+"Ujistěte se, že virtuální stroj běží a že jeho SPICE displej naslouchá na "
+"této adrese."
 
 #: spice/spiceviewfactory.cpp:47
 #, kde-format
@@ -2744,17 +2764,17 @@ msgid ""
 "high speed connections and results in lower image quality, especially in "
 "'Low Quality' mode."
 msgstr ""
-"Toto použijte pro určení výkonnosti svého spojení. Uvědomte si, že byste "
+"Toto použijte pro určení výkonnosti svého připojení. Uvědomte si, že byste "
 "měli vybrat rychlost nejpomalejší části - pokud máte rychlé připojení, tak "
 "vám to nepomůže v případě, že vzdálený systém používá pomalý modem. Výběrem "
-"příliš vysoké kvality se spojení zpomalí a výsledkem bude nekvalitní obraz, "
-"hlavně v režimu 'Nízká kvalita'."
+"příliš vysoké kvality se připojení zpomalí a výsledkem bude nekvalitní "
+"obraz, hlavně v režimu 'Nízká kvalita'."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Quality)
 #: vnc/vncpreferences.ui:43
 #, kde-format
 msgid "High Quality (LAN, direct connection)"
-msgstr "Vysoká kvalita (LAN, přímé spojení)"
+msgstr "Vysoká kvalita (LAN, přímé připojení)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Quality)
 #: vnc/vncpreferences.ui:48
@@ -2844,19 +2864,21 @@ msgid ""
 "Wait a few minutes. The server blocks logins for a while after several "
 "failed attempts."
 msgstr ""
+"Počkejte pár minut. Server po několika neúspěšných pokusech o přihlášení na "
+"chvíli přihlášení zablokuje."
 
 #: vnc/vncview.cpp:310
 #, kde-format
 msgctxt "@info"
 msgid "Then connect again and enter the password carefully."
-msgstr ""
+msgstr "Poté se znovu připojte a pečlivě zadejte heslo."
 
 #: vnc/vncview.cpp:316
 #, kde-format
 msgctxt "@label"
 msgid ""
 "The server requires an authentication method that KRDC does not support."
-msgstr ""
+msgstr "Server vyžaduje metodu ověřování, kterou KRDC nepodporuje."
 
 #: vnc/vncview.cpp:318
 #, kde-format
@@ -2865,6 +2887,8 @@ msgid ""
 "Configure the VNC server to use standard VNC password authentication, or "
 "connect through an SSH tunnel."
 msgstr ""
+"Nastavte server VNC tak, aby používal standardní ověřování heslem VNC, nebo "
+"se připojte přes tunel SSH."
 
 #: vnc/vncviewfactory.cpp:47
 #, kde-format
