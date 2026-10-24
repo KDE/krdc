@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-10-23 00:48+0000\n"
-"PO-Revision-Date: 2026-09-28 17:25+0200\n"
+"PO-Revision-Date: 2026-10-23 08:22+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 26.08.1\n"
+"X-Generator: Lokalize 26.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -296,384 +296,350 @@ msgstr[0] "Преди година"
 msgstr[1] "Преди %1 години"
 
 #: connectionstatuswidget.cpp:64
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info:status connection step"
 msgid "Not started"
 msgstr "Не започнало"
 
 #: connectionstatuswidget.cpp:67
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info:status connection step"
 msgid "Done"
 msgstr "Готово"
 
 #: connectionstatuswidget.cpp:70
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info:status connection step"
 msgid "Failed"
 msgstr "Неуспешно"
 
 #: connectionstatuswidget.cpp:73
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info:status connection step"
 msgid "Information"
 msgstr "Информация"
 
 #: connectionstatuswidget.cpp:250
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid "Diagnostic information copied to the clipboard"
 msgstr "Диагностичната информация е копирана в клипборда"
 
 #: connectionstatuswidget.cpp:257
-#, fuzzy, kde-format
-#| msgid "Connecting to %1"
+#, kde-format
 msgctxt "@title"
 msgid "Connecting to %1"
 msgstr "Свързване с %1"
 
 #: connectionstatuswidget.cpp:258
-#, fuzzy, kde-format
-#| msgid "Connecting to %1"
+#, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Connecting to %1"
 msgstr "Свързване с %1"
 
 #: connectionstatuswidget.cpp:274
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@action:button"
 msgid "Cancel"
 msgstr "Отказ"
 
 #: connectionstatuswidget.cpp:330
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info:status connection step"
 msgid "In progress"
 msgstr "В процес на изпълнение"
 
 #: connectionstatuswidget.cpp:406
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info connection step"
 msgid "Looking up the server address"
 msgstr "Търсене на адреса на сървъра"
 
 #: connectionstatuswidget.cpp:408
-#, fuzzy, kde-format
-#| msgid "Connect via SSH tunnel"
+#, kde-format
 msgctxt "@info connection step"
 msgid "Opening the SSH tunnel"
 msgstr "Отваряне на SSH тунел"
 
 #: connectionstatuswidget.cpp:410
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info connection step"
 msgid "Opening a network connection"
 msgstr "Отваряне на мрежова връзка"
 
 #: connectionstatuswidget.cpp:412
-#, fuzzy, kde-format
-#| msgid "Preparing connection to %1"
+#, kde-format
 msgctxt "@info connection step"
 msgid "Securing the connection"
 msgstr "Засигуряване на връзката"
 
 #: connectionstatuswidget.cpp:414
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info connection step"
 msgid "Logging in"
 msgstr "Влизане в системата"
 
 #: connectionstatuswidget.cpp:416
-#, fuzzy, kde-format
-#| msgid "Prevent remote session lock"
+#, kde-format
 msgctxt "@info connection step"
 msgid "Starting the remote session"
 msgstr "Стартиране на отдалечената сесия"
 
 #: connectionstatuswidget.cpp:418
-#, fuzzy, kde-format
-#| msgid "Reconnecting."
+#, kde-format
 msgctxt "@info connection step"
 msgid "Reconnecting"
 msgstr "Повторно свързване"
 
 #: connectionstatuswidget.cpp:428
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info connection step"
 msgid "Server address resolved"
 msgstr "Разрешен адрес на сървъра"
 
 #: connectionstatuswidget.cpp:430
-#, fuzzy, kde-format
-#| msgid "SSH tunnel options"
+#, kde-format
 msgctxt "@info connection step"
 msgid "SSH tunnel established"
 msgstr "SSH тунелът е установен"
 
 #: connectionstatuswidget.cpp:432
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info connection step"
 msgid "Network connection established"
 msgstr "Установена мрежова връзка"
 
 #: connectionstatuswidget.cpp:434
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Connection Refused"
+#, kde-format
 msgctxt "@info connection step"
 msgid "Connection secured"
 msgstr "Сигурна връзка"
 
 #: connectionstatuswidget.cpp:437
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info connection step"
 msgid "Access granted"
 msgstr "Достъпът е разрешен"
 
 #: connectionstatuswidget.cpp:439
-#, fuzzy, kde-format
-#| msgid "KDE Remote Desktop Client started"
+#, kde-format
 msgctxt "@info connection step"
 msgid "Remote session started"
 msgstr "Дистанционната сесия е стартирана"
 
 #: connectionstatuswidget.cpp:449
-#, fuzzy, kde-format
-#| msgid "Connected to %1"
+#, kde-format
 msgctxt "@info"
 msgid "Resolved to %1."
 msgstr "Разрешено до %1."
 
 #: connectionstatuswidget.cpp:461
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Local address lookup failed: %1"
 msgstr "Грешка при търсене на локален адрес: %1"
 
 #: connectionstatuswidget.cpp:466
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "%1 resolved to %2"
 msgstr "%1 е разрешен до %2"
 
 #: connectionstatuswidget.cpp:498
-#, fuzzy, kde-format
-#| msgid "Connect to a VNC Remote Desktop"
+#, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Connecting to the remote desktop service"
 msgstr "Свързване с услугата за отдалечен работен плот"
 
 #: connectionstatuswidget.cpp:505
-#, fuzzy, kde-format
-#| msgid "Authenticating at %1"
+#, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Authenticating"
-msgstr "Автентициране"
+msgstr "Удостоверяване"
 
 #: connectionstatuswidget.cpp:509
-#, fuzzy, kde-format
-#| msgid "Prevent remote session lock"
+#, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Preparing the session"
 msgstr "Подготовка на сесията"
 
 #: connectionstatuswidget.cpp:513
-#, fuzzy, kde-format
-#| msgid "Connected."
+#, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Connected"
 msgstr "Свързан"
 
 #: connectionstatuswidget.cpp:546
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Connection dropped, reconnecting: %1"
 msgstr "Връзката е прекъсната, повторно свързване: %1"
 
 #: connectionstatuswidget.cpp:546
-#, fuzzy, kde-format
-#| msgid "Reconnected."
+#, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Reconnected"
 msgstr "Повторна връзка"
 
 #: connectionstatuswidget.cpp:559
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid "KRDC keeps trying until the connection is back."
 msgstr "KRDC продължава опитите, докато връзката бъде възстановена."
 
 #: connectionstatuswidget.cpp:563
-#, fuzzy, kde-format
-#| msgid "Connecting to %1"
+#, kde-format
 msgctxt "@title"
 msgid "Connection to %1 interrupted"
 msgstr "Прекъсната връзка с %1"
 
 #: connectionstatuswidget.cpp:565
-#, fuzzy, kde-format
-#| msgid "Disconnect"
+#, kde-format
 msgctxt "@action:button"
 msgid "Disconnect"
 msgstr "Прекъсване на връзката"
 
 #: connectionstatuswidget.cpp:575
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Failed while: %1"
 msgstr "Грешка при: %1"
 
 #: connectionstatuswidget.cpp:656
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@title"
 msgid "Session with %1 ended"
 msgstr "Сесията с %1 е приключена"
 
 #: connectionstatuswidget.cpp:658
-#, fuzzy, kde-format
-#| msgid "Connecting to %1"
+#, kde-format
 msgctxt "@title"
 msgid "Connection to %1 lost"
 msgstr "Връзката с %1 е прекъсната"
 
 #: connectionstatuswidget.cpp:660
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Could not Connect"
+#, kde-format
 msgctxt "@title"
 msgid "Could not connect to %1"
 msgstr "Неуспешна връзка с %1"
 
 #: connectionstatuswidget.cpp:666
-#, fuzzy, kde-format
-#| msgid "Reconnected."
+#, kde-format
 msgctxt "@action:button"
 msgid "Reconnect"
 msgstr "Повторно свързване"
 
 #: connectionstatuswidget.cpp:666
-#, fuzzy, kde-format
-#| msgid "Connection"
+#, kde-format
 msgctxt "@action:button"
 msgid "Connect Again"
 msgstr "Повторно свързване"
 
 #: connectionstatuswidget.cpp:671
-#, fuzzy, kde-format
-#| msgid "Goto Address"
+#, kde-format
 msgctxt "@action:button"
 msgid "Edit Address"
 msgstr "Редактиране на адреса"
 
 #: connectionstatuswidget.cpp:674
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@action:button"
 msgid "Edit Host Settings…"
 msgstr "Редактиране на настройките на хоста…"
 
 #: connectionstatuswidget.cpp:676
-#, fuzzy, kde-format
-#| msgid "Close Tab"
+#, kde-format
 msgctxt "@action:button"
 msgid "Close Tab"
 msgstr "Затваряне на раздела"
 
 #: connectionstatuswidget.cpp:714
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@action:button"
 msgid "Copy diagnostic information"
 msgstr "Копиране на диагностична информация"
 
 #: connectionstatuswidget.cpp:719
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@action:button"
 msgid "Hide details"
 msgstr "Скриване на подробностите"
 
 #: connectionstatuswidget.cpp:719
-#, fuzzy, kde-format
-#| msgctxt "EMAIL OF TRANSLATORS"
-#| msgid "Your emails"
+#, kde-format
 msgctxt "@action:button"
 msgid "Show details"
 msgstr "Показване на подробности"
 
 #: core/connectionerror.cpp:15
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info connection stage"
 msgid "Setting up the SSH tunnel"
 msgstr "Настройка на SSH тунела"
 
 #: core/connectionerror.cpp:17
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info connection stage"
 msgid "Looking up the host name"
 msgstr "Търсене на името на хоста"
 
 #: core/connectionerror.cpp:19
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Lost connection to the server."
+#, kde-format
 msgctxt "@info connection stage"
 msgid "Connecting to the server"
 msgstr "Свързване със сървъра"
 
 #: core/connectionerror.cpp:21
-#, fuzzy, kde-format
-#| msgid "Preparing connection to %1"
+#, kde-format
 msgctxt "@info connection stage"
 msgid "Securing the connection"
 msgstr "Засигуряване на връзката"
 
 #: core/connectionerror.cpp:23
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info connection stage"
 msgid "Logging in"
 msgstr "Влизане в профила"
 
 #: core/connectionerror.cpp:25
-#, fuzzy, kde-format
-#| msgid "Prevent remote session lock"
+#, kde-format
 msgctxt "@info connection stage"
 msgid "Starting the remote session"
 msgstr "Стартиране на отдалечената сесия"
 
 #: core/connectionerror.cpp:27
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Connection Refused"
+#, kde-format
 msgctxt "@info connection stage"
 msgid "Connection interrupted"
 msgstr "Прекъсната връзка"
 
 #: core/connectionerror.cpp:29
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info connection stage"
 msgid "Session ended remotely"
 msgstr "Сесията е прекратена отдалечено"
 
 #: core/connectionerror.cpp:33
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info connection stage"
 msgid "Unknown"
 msgstr "Неизвестно"
 
 #: core/connectionerror.cpp:45
-#, fuzzy, kde-format
-#| msgid "SSH Tunnel failure"
+#, kde-format
 msgctxt "@title connection error"
 msgid "SSH tunnel failed"
 msgstr "Грешка при създаване на SSH тунел"
 
 #: core/connectionerror.cpp:47
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid "Check the SSH tunnel user name and port in the host settings."
 msgstr ""
 "Проверете потребителското име и порта на SSH тунела в настройките на хоста."
 
 #: core/connectionerror.cpp:48
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid ""
 "Log in with an SSH client in a terminal to confirm that the server is "
@@ -683,55 +649,52 @@ msgstr ""
 "вашите данни за достъп са правилни."
 
 #: core/connectionerror.cpp:49
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid ""
 "If you use key authentication, add the key to your SSH agent with ssh-add."
 msgstr ""
-"Ако използвате автентикация с ключ, добавете ключа към вашия SSH агент с ssh-"
-"add."
+"Ако използвате удостоверяване с ключ, добавете ключа към вашия SSH агент с "
+"ssh-add."
 
 #: core/connectionerror.cpp:50
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid "Make sure the SSH server allows port forwarding."
 msgstr "Уверете се, че SSH сървърът позволява пренасочване на портове."
 
 #: core/connectionerror.cpp:54
-#, fuzzy, kde-format
-#| msgid "Server not found."
+#, kde-format
 msgctxt "@title connection error"
 msgid "Server not found"
 msgstr "Сървърът не е намерен"
 
 #: core/connectionerror.cpp:56
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid "Check the spelling of the address."
 msgstr "Проверка на изписването на адреса."
 
 #: core/connectionerror.cpp:57
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid "Connect to the network or VPN the computer is on."
 msgstr "Свързване с мрежата или VPN, в които се намира компютърът."
 
 #: core/connectionerror.cpp:58
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid "Try the IP address of the computer instead of its name."
 msgstr "Опитайте с IP адреса на компютъра вместо името му."
 
 #: core/connectionerror.cpp:63
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Server not Found"
+#, kde-format
 msgctxt "@title connection error"
 msgid "Server not reachable"
 msgstr "Сървърът е недостъпен"
 
 #: core/connectionerror.cpp:65 core/connectionerror.cpp:145
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid ""
 "Make sure the remote computer is turned on, awake and connected to the "
@@ -741,7 +704,7 @@ msgstr ""
 "мрежата."
 
 #: core/connectionerror.cpp:66 core/connectionerror.cpp:135
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid "Check that remote desktop sharing is enabled on the remote computer."
 msgstr ""
@@ -749,7 +712,7 @@ msgstr ""
 "отдалечения компютър."
 
 #: core/connectionerror.cpp:67 core/connectionerror.cpp:136
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid ""
 "Check the port in the address. The defaults are 3389 for RDP and 5900 for "
@@ -759,21 +722,19 @@ msgstr ""
 "за VNC и SPICE."
 
 #: core/connectionerror.cpp:68 core/connectionerror.cpp:146
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid "Check that no firewall blocks the connection."
 msgstr "Проверка дали защитна стена блокира връзката."
 
 #: core/connectionerror.cpp:73
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Connection Failed"
+#, kde-format
 msgctxt "@title connection error"
 msgid "Secure connection failed"
 msgstr "Грешка при сигурна връзка"
 
 #: core/connectionerror.cpp:75
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid ""
 "Review the security settings for this host, or reset them to their defaults."
@@ -782,7 +743,7 @@ msgstr ""
 "настройките по подразбиране."
 
 #: core/connectionerror.cpp:76
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid ""
 "If the server certificate changed unexpectedly, confirm the change with the "
@@ -792,14 +753,13 @@ msgstr ""
 "със системния администратор преди приемането ѝ."
 
 #: core/connectionerror.cpp:80
-#, fuzzy, kde-format
-#| msgid "VNC authentication failed."
+#, kde-format
 msgctxt "@title connection error"
 msgid "Authentication failed"
 msgstr "Грешка при удостоверяването"
 
 #: core/connectionerror.cpp:82
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid "Check the user name, password and domain, and that Caps Lock is off."
 msgstr ""
@@ -807,14 +767,14 @@ msgstr ""
 "изключен."
 
 #: core/connectionerror.cpp:83
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid "If you use a saved password, enter it again. It may be out of date."
 msgstr ""
 "Ако използвате запазена парола, въведете я отново. Тя може да е остаряла."
 
 #: core/connectionerror.cpp:84
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid ""
 "If the account is locked or expired, contact the administrator of the remote "
@@ -824,13 +784,13 @@ msgstr ""
 "отдалечения компютър."
 
 #: core/connectionerror.cpp:88
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@title connection error"
 msgid "Session setup failed"
 msgstr "Грешка при настройка на сесията"
 
 #: core/connectionerror.cpp:90
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid ""
 "Reset advanced options in the host settings, such as graphics acceleration "
@@ -840,7 +800,7 @@ msgstr ""
 "ускорение или дълбочина на цветовете, до техните стойности по подразбиране."
 
 #: core/connectionerror.cpp:91
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid ""
 "Ask the administrator of the remote computer whether new sessions are "
@@ -850,19 +810,19 @@ msgstr ""
 "сесии. Броят на потребителите може да бъде ограничен."
 
 #: core/connectionerror.cpp:96
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@title connection error"
 msgid "Network connection interrupted"
 msgstr "Прекъсната мрежова връзка"
 
 #: core/connectionerror.cpp:98
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid "Check your network connection, then reconnect."
 msgstr "Проверка на мрежовата връзка и повторно свързване."
 
 #: core/connectionerror.cpp:99
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid ""
 "If the remote computer restarted or went to sleep, wait until it is back, "
@@ -872,35 +832,32 @@ msgstr ""
 "възстановяването му и след това се свържете отново."
 
 #: core/connectionerror.cpp:104
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Could not find the server."
+#, kde-format
 msgctxt "@title connection error"
 msgid "Closed by the server"
 msgstr "Затворено от сървъра"
 
 #: core/connectionerror.cpp:109
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@title connection error"
 msgid "Unexpected error"
 msgstr "Непредвиден грешка"
 
 #: core/connectionerror.cpp:118
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@label"
 msgid "It accepted the connection, then closed it before the session started."
 msgstr ""
 "Връзката беше приета, но след това затворена преди началото на сесията."
 
 #: core/connectionerror.cpp:119
-#, fuzzy, kde-format
-#| msgid "VNC server closed connection."
+#, kde-format
 msgctxt "@title connection error"
 msgid "Server closed the connection"
 msgstr "Сървърът затвори връзката"
 
 #: core/connectionerror.cpp:121
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid ""
 "If another viewer is connected, close it. Some servers allow only one at a "
@@ -910,7 +867,7 @@ msgstr ""
 "връзка едновременно."
 
 #: core/connectionerror.cpp:122
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid "Check that this port belongs to the remote desktop service you expect."
 msgstr ""
@@ -918,7 +875,7 @@ msgstr ""
 "работен плот."
 
 #: core/connectionerror.cpp:123
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid ""
 "Check the access and security settings of the server, or its log, for why it "
@@ -928,44 +885,38 @@ msgstr ""
 "за да разберете защо връзката е прекратена."
 
 #: core/connectionerror.cpp:133
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Connection Refused"
+#, kde-format
 msgctxt "@title connection error"
 msgid "Connection refused"
 msgstr "Връзката е отказана"
 
 #: core/connectionerror.cpp:137
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid "Check that no firewall on the remote computer rejects the connection."
 msgstr ""
 "Проверка дали защитна стена на отдалечения компютър не отхвърля връзката."
 
 #: core/connectionerror.cpp:143
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Server not Found"
+#, kde-format
 msgctxt "@title connection error"
 msgid "Server not responding"
 msgstr "Сървърът не отговаря"
 
 #: core/connectionerror.cpp:147 core/connectionerror.cpp:156
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid "Check that the address is right."
 msgstr "Проверка за правилно въведен адрес."
 
 #: core/connectionerror.cpp:153
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Could not connect to the server."
+#, kde-format
 msgctxt "@title connection error"
 msgid "No route to the server"
 msgstr "Няма маршрут до сървъра"
 
 #: core/connectionerror.cpp:155
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid "Connect to the network or VPN the remote computer is on."
 msgstr "Свързване с мрежата или VPN, в която се намира отдалеченият компютър."
@@ -1012,97 +963,94 @@ msgid "Please enter the SSH password."
 msgstr "Моля, въведете паролата за SSH."
 
 #: core/remoteview.cpp:701
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@label"
 msgid "The SSH tunnel on port %1 could not be set up."
 msgstr "SSH тунелът на порт %1 не можа да бъде настроен."
 
 #: core/remoteview.cpp:704
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@title connection error"
 msgid "SSH server not reachable"
 msgstr "SSH сървърът е недостъпен"
 
 #: core/remoteview.cpp:705
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "The server refused the connection request."
+#, kde-format
 msgctxt "@label"
 msgid "The SSH server did not accept a connection on port %1."
 msgstr "SSH сървърът не прие връзка на порт %1."
 
 #: core/remoteview.cpp:707
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid "Make sure the SSH server is running and listens on port %1."
 msgstr "Уверете се, че SSH сървърът е активен и изслушва на порт %1."
 
 #: core/remoteview.cpp:708
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid ""
 "Check the host name, and that the computer is reachable from this network."
 msgstr "Проверете името на хоста и дали компютърът е достъпен от тази мрежа."
 
 #: core/remoteview.cpp:709
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid "Check that no firewall blocks SSH connections."
 msgstr "Проверка дали защитна стена блокира SSH връзките."
 
 #: core/remoteview.cpp:713
-#, fuzzy, kde-format
-#| msgid "SSH Tunnel failure"
+#, kde-format
 msgctxt "@title connection error"
 msgid "SSH login failed"
 msgstr "Грешка при SSH вход"
 
 #: core/remoteview.cpp:714
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@label"
 msgid "The SSH server did not accept the login."
 msgstr "SSH сървърът не прие влизането."
 
 #: core/remoteview.cpp:715
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@label"
 msgid "The SSH server did not accept the login for “%1”."
 msgstr "SSH сървърът не прие влизането за „%1“."
 
 #: core/remoteview.cpp:717
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid "Check the SSH user name in the host settings, and the password."
 msgstr ""
 "Проверка на потребителското име за SSH в настройките на хоста и на паролата."
 
 #: core/remoteview.cpp:718
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid ""
 "If you use key authentication, add the key to your SSH agent with ssh-add, "
 "and make sure it is authorized on the server."
 msgstr ""
-"Ако използвате автентификация с ключ, добавете ключа към вашия SSH агент с "
+"Ако използвате удостоверяване с ключ, добавете ключа към вашия SSH агент с "
 "ssh-add и се уверете, че той е оторизиран на сървъра."
 
 #: core/remoteview.cpp:719
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid ""
 "If the SSH server does not allow password logins, set up key authentication."
 msgstr ""
-"Ако SSH сървърът не позволява вход с парола, настройте автентификация с ключ."
+"Ако SSH сървърът не позволява вход с парола, настройте удостоверяване с ключ."
 
 #: core/remoteview.cpp:723
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@label"
 msgid "No free local port could be opened for the tunnel on this computer."
 msgstr ""
 "Няма свободен локален порт, който да бъде отворен за тунела на този компютър."
 
 #: core/remoteview.cpp:725
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid ""
 "Close other applications that open many network connections, then connect "
@@ -1367,7 +1315,7 @@ msgid "Bookmarks"
 msgstr "Отметки"
 
 #: mainwindow.cpp:288
-#, fuzzy, kde-format
+#, kde-format
 msgid ""
 "Unable to load connection data from “%1”.\n"
 "The file may be damaged, or it is in a format KRDC does not support."
@@ -1381,7 +1329,7 @@ msgid "Load failed"
 msgstr "Неуспешно зареждане"
 
 #: mainwindow.cpp:296
-#, fuzzy, kde-format
+#, kde-format
 msgid ""
 "“%1” is not a valid address.\n"
 "\n"
@@ -1398,7 +1346,7 @@ msgid "Malformed URL"
 msgstr "Неправилен URL-адрес"
 
 #: mainwindow.cpp:322
-#, fuzzy, kde-format
+#, kde-format
 msgid ""
 "No installed plugin can handle the “%1” protocol.\n"
 "Supported protocols: %2"
@@ -1559,13 +1507,13 @@ msgid "Filter"
 msgstr "Филтриране"
 
 #: mainwindow.cpp:1629
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@label"
 msgid "The remote computer may have shut down or restarted."
-msgstr "Дистанционният компютър може да е изключен или рестартиран."
+msgstr "Отдалеченият компютър може да е изключен или рестартиран."
 
 #: mainwindow.cpp:1633
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@title connection error"
 msgid "Closed before the session started"
 msgstr "Затворено преди началото на сесията"
@@ -2324,43 +2272,43 @@ msgstr ""
 "%2"
 
 #: rdp/rdpview.cpp:347
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@label"
 msgid "The credentials for “%1” were not accepted."
 msgstr "Данните за достъп за „%1“ не бяха приети."
 
 #: rdp/rdpview.cpp:350
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid "Check the RD Gateway credentials in the host settings."
 msgstr "Проверка на данните за достъп до RD Gateway в настройките на хоста."
 
 #: rdp/rdpview.cpp:366
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@label"
 msgid "This account may not log in remotely."
 msgstr "Този акаунт може да няма разрешение за отдалечен вход."
 
 #: rdp/rdpview.cpp:367
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@label"
 msgid "“%1” may not log in remotely."
 msgstr "„%1“ може да няма разрешение за отдалечен вход."
 
 #: rdp/rdpview.cpp:369
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@title connection error"
 msgid "Access denied"
 msgstr "Отказан достъп"
 
 #: rdp/rdpview.cpp:371
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid "Check whether the account is locked, disabled or expired."
 msgstr "Проверка дали акаунтът е заключен, деактивиран или изтекъл."
 
 #: rdp/rdpview.cpp:373
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid ""
 "Ask the administrator of the remote computer to add the account to the "
@@ -2370,7 +2318,7 @@ msgstr ""
 "„Потребители на отдалечен работен плот“ или влезте с друг профил."
 
 #: rdp/rdpview.cpp:381
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@label"
 msgid "The password must be changed before it can be used to log in remotely."
 msgstr ""
@@ -2378,15 +2326,13 @@ msgstr ""
 "отдалечен вход."
 
 #: rdp/rdpview.cpp:382
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Password Problems"
+#, kde-format
 msgctxt "@title connection error"
 msgid "Password expired"
 msgstr "Изтекла парола"
 
 #: rdp/rdpview.cpp:384
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid ""
 "Change the password by logging in locally on the remote computer, or ask its "
@@ -2396,37 +2342,37 @@ msgstr ""
 "към администратора за нейна нулиране."
 
 #: rdp/rdpview.cpp:389
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@label"
 msgid "The Kerberos domain controller could not be reached."
 msgstr "Контролерът на домейна на Kerberos не може да бъде достигнат."
 
 #: rdp/rdpview.cpp:391
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid "Check the domain you entered when logging in."
 msgstr "Проверка на въведения домейн при вход."
 
 #: rdp/rdpview.cpp:392
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid "Connect to the network or VPN of the domain."
 msgstr "Свързване с мрежата или VPN на домейна."
 
 #: rdp/rdpview.cpp:397 spice/spiceview.cpp:901 vnc/vncview.cpp:287
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@label"
 msgid "No IP address was found for this name."
 msgstr "Не е открит IP адрес за това име."
 
 #: rdp/rdpview.cpp:408
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@label"
 msgid "The server and KRDC could not agree on a security protocol."
 msgstr "Сървърът и KRDC не успяха да се договорят за протокол за сигурност."
 
 #: rdp/rdpview.cpp:410
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid ""
 "Set the TLS security level in the host settings to “Any”. The server may not "
@@ -2436,19 +2382,19 @@ msgstr ""
 "е сървърът да не поддържа избраното ниво."
 
 #: rdp/rdpview.cpp:414
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@label"
 msgid "The server requires Network Level Authentication (NLA)."
-msgstr "Сървърът изисква автентификация на мрежово ниво (NLA)."
+msgstr "Сървърът изисква удостоверяване на мрежово ниво (NLA)."
 
 #: rdp/rdpview.cpp:415
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid "Enable NLA in the security settings for this host."
 msgstr "Активиране на NLA в настройките за сигурност за този хост."
 
 #: rdp/rdpview.cpp:433
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid ""
 "Check the RD Gateway settings for this host. The gateway “%1” may be "
@@ -2458,66 +2404,65 @@ msgstr ""
 "недостъпен или да отхвърля връзката."
 
 #: rdp/rdpview.cpp:440
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@label"
 msgid "The remote computer did not finish starting the session in time."
-msgstr "Дистанционният компютър не успя да стартира сесията навреме."
+msgstr "Отдалеченият компютър не успя да стартира сесията навреме."
 
 #: rdp/rdpview.cpp:441
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid ""
 "The remote computer may still be starting up or be under heavy load. Wait a "
 "minute, then connect again."
 msgstr ""
-"Дистанционният компютър може все още да стартира или да бъде под голямо "
+"Отдалеченият компютър може все още да стартира или да бъде под голямо "
 "натоварване. Изчакайте минута и опитайте свързването отново."
 
 #: rdp/rdpview.cpp:445
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@label"
 msgid "It accepted the connection, then refused to start a session."
 msgstr "Връзката беше приета, но стартирането на сесия беше отказано."
 
 #: rdp/rdpview.cpp:446
-#, fuzzy, kde-format
-#| msgid "Sessions"
+#, kde-format
 msgctxt "@title connection error"
 msgid "Session refused"
 msgstr "Сесията е отказана"
 
 #: rdp/rdpview.cpp:450
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@label"
 msgid "The server did not accept the options selected for this host."
 msgstr "Сървърът не прие избраните опции за този хост."
 
 #: rdp/rdpview.cpp:453
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@label"
 msgid "An administrator or another program disconnected this session."
 msgstr "Сесията беше прекъсната от администратор или друга програма."
 
 #: rdp/rdpview.cpp:456
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@label"
 msgid "An administrator signed this session out."
 msgstr "Администратор прекрати тази сесия."
 
 #: rdp/rdpview.cpp:459
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@label"
 msgid "The session was disconnected from the remote computer."
 msgstr "Сесията беше прекъсната от отдалечения компютър."
 
 #: rdp/rdpview.cpp:466
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@label"
 msgid "Disconnected because someone else connected to this session."
 msgstr "Прекъсната връзка, тъй като друг потребител се свърза с тази сесия."
 
 #: rdp/rdpview.cpp:467
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid "Reconnect to take the session back. This disconnects the other user."
 msgstr ""
@@ -2525,13 +2470,13 @@ msgstr ""
 "на другия потребител."
 
 #: rdp/rdpview.cpp:470
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@label"
 msgid "The session was closed after being idle for too long."
 msgstr "Сесията беше затворена поради твърде дълго бездействие."
 
 #: rdp/rdpview.cpp:471
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid ""
 "Reconnect to continue. The idle time limit is set by the administrator of "
@@ -2541,13 +2486,13 @@ msgstr ""
 "зададен от администратора на сървъра."
 
 #: rdp/rdpview.cpp:485
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@label"
 msgid "The remote computer reported a problem while logging in."
-msgstr "Дистанционният компютър съобщи за проблем при влизането."
+msgstr "Отдалеченият компютър съобщи за проблем при влизането."
 
 #: rdp/rdpview.cpp:486
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid ""
 "Check that this user may log in to the remote computer, and that the session "
@@ -2704,13 +2649,13 @@ msgid "Authentication is required to connect to <b>%1</b>."
 msgstr "Необходимо е удостоверяване за свързване с <b>%1</b>."
 
 #: spice/spiceview.cpp:892
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@label"
 msgid "The TLS handshake failed."
 msgstr "Грешка при TLS ръкостискането."
 
 #: spice/spiceview.cpp:893
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid ""
 "Check whether the server accepts TLS only on a separate port, and that its "
@@ -2720,15 +2665,13 @@ msgstr ""
 "му е доверен."
 
 #: spice/spiceview.cpp:896
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "The server refused the connection request."
+#, kde-format
 msgctxt "@label"
 msgid "The server rejected the SPICE connection."
 msgstr "Сървърът отхвърли SPICE връзката."
 
 #: spice/spiceview.cpp:897
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid ""
 "Check that this port belongs to a SPICE server with a compatible protocol "
@@ -2738,7 +2681,7 @@ msgstr ""
 "протокола."
 
 #: spice/spiceview.cpp:907
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid ""
 "Make sure the virtual machine is running, and its SPICE display listens on "
@@ -2901,7 +2844,7 @@ msgid "VNC authentication failed because of too many authentication tries."
 msgstr "Грешка при удостоверяване на VNC поради твърде много опити."
 
 #: vnc/vncview.cpp:309
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid ""
 "Wait a few minutes. The server blocks logins for a while after several "
@@ -2911,20 +2854,20 @@ msgstr ""
 "след няколко неуспешни опита."
 
 #: vnc/vncview.cpp:310
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid "Then connect again and enter the password carefully."
 msgstr "След това се свържете отново и въведете паролата внимателно."
 
 #: vnc/vncview.cpp:316
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@label"
 msgid ""
 "The server requires an authentication method that KRDC does not support."
-msgstr "Сървърът изисква метод за автентификация, който KRDC не поддържа."
+msgstr "Сървърът изисква метод за удостоверяване, който KRDC не поддържа."
 
 #: vnc/vncview.cpp:318
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid ""
 "Configure the VNC server to use standard VNC password authentication, or "

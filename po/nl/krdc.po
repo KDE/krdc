@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-10-23 00:48+0000\n"
-"PO-Revision-Date: 2026-10-21 17:23+0200\n"
+"PO-Revision-Date: 2026-10-23 14:46+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -510,13 +510,13 @@ msgstr "Verbinding verbreken"
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Failed while: %1"
-msgstr ""
+msgstr "Mislukt tijdens: %1"
 
 #: connectionstatuswidget.cpp:656
 #, kde-format
 msgctxt "@title"
 msgid "Session with %1 ended"
-msgstr ""
+msgstr "Sessie met %1 beëindigd"
 
 #: connectionstatuswidget.cpp:658
 #, kde-format
@@ -552,7 +552,7 @@ msgstr "Adres bewerken"
 #, kde-format
 msgctxt "@action:button"
 msgid "Edit Host Settings…"
-msgstr ""
+msgstr "Host-instellingen bewerken…"
 
 #: connectionstatuswidget.cpp:676
 #, kde-format
@@ -564,7 +564,7 @@ msgstr "Tabblad sluiten"
 #, kde-format
 msgctxt "@action:button"
 msgid "Copy diagnostic information"
-msgstr ""
+msgstr "Diagnostische informatie kopiëren"
 
 #: connectionstatuswidget.cpp:719
 #, kde-format
@@ -582,13 +582,13 @@ msgstr "Details tonen"
 #, kde-format
 msgctxt "@info connection stage"
 msgid "Setting up the SSH tunnel"
-msgstr ""
+msgstr "De SSH-tunnel opzetten"
 
 #: core/connectionerror.cpp:17
 #, kde-format
 msgctxt "@info connection stage"
 msgid "Looking up the host name"
-msgstr ""
+msgstr "De hostnaam opzoeken"
 
 #: core/connectionerror.cpp:19
 #, kde-format
@@ -624,7 +624,7 @@ msgstr "Verbinding onderbroken"
 #, kde-format
 msgctxt "@info connection stage"
 msgid "Session ended remotely"
-msgstr ""
+msgstr "Sessie op afstand beëindigd"
 
 #: core/connectionerror.cpp:33
 #, kde-format
@@ -643,6 +643,8 @@ msgstr "SSH-tunnel is mislukt"
 msgctxt "@info"
 msgid "Check the SSH tunnel user name and port in the host settings."
 msgstr ""
+"Controleer de gebruikersnaam en poort voor de SSH-tunnel in de host-"
+"instellingen."
 
 #: core/connectionerror.cpp:48
 #, kde-format
@@ -651,6 +653,8 @@ msgid ""
 "Log in with an SSH client in a terminal to confirm that the server is "
 "reachable and your credentials work."
 msgstr ""
+"Aanmelden via een SSH-client in een terminal om te bevestigen dat de server "
+"bereikbaar is en u aanmeldgegevens werken."
 
 #: core/connectionerror.cpp:49
 #, kde-format
@@ -658,6 +662,8 @@ msgctxt "@info"
 msgid ""
 "If you use key authentication, add the key to your SSH agent with ssh-add."
 msgstr ""
+"Als u gebruikmaakt van sleutel-authenticatie, voeg de sleutel dan toe aan uw "
+"SSH-agent met ssh-add."
 
 #: core/connectionerror.cpp:50
 #, kde-format
