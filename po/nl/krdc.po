@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-10-23 00:48+0000\n"
-"PO-Revision-Date: 2026-10-23 14:46+0200\n"
+"PO-Revision-Date: 2026-10-24 15:53+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -669,7 +669,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info"
 msgid "Make sure the SSH server allows port forwarding."
-msgstr ""
+msgstr "Zorg ervoor dat de SSH-server port forwarding toestaat."
 
 #: core/connectionerror.cpp:54
 #, kde-format
@@ -681,19 +681,20 @@ msgstr "Server niet gevonden"
 #, kde-format
 msgctxt "@info"
 msgid "Check the spelling of the address."
-msgstr ""
+msgstr "Controleer de spelling van het adres."
 
 #: core/connectionerror.cpp:57
 #, kde-format
 msgctxt "@info"
 msgid "Connect to the network or VPN the computer is on."
 msgstr ""
+"Maak verbinding met het netwerk of de VPN waarop de computer zich bevindt."
 
 #: core/connectionerror.cpp:58
 #, kde-format
 msgctxt "@info"
 msgid "Try the IP address of the computer instead of its name."
-msgstr ""
+msgstr "Probeer het IP-adres van de computer in plaats van de naam ervan."
 
 #: core/connectionerror.cpp:63
 #, kde-format
@@ -708,12 +709,16 @@ msgid ""
 "Make sure the remote computer is turned on, awake and connected to the "
 "network."
 msgstr ""
+"Zorg ervoor dat de externe computer is ingeschakeld, niet in de slaapstand "
+"staat en is verbonden met het netwerk."
 
 #: core/connectionerror.cpp:66 core/connectionerror.cpp:135
 #, kde-format
 msgctxt "@info"
 msgid "Check that remote desktop sharing is enabled on the remote computer."
 msgstr ""
+"Controleer of het delen van het bureaublad op afstand is ingeschakeld op de "
+"externe computer."
 
 #: core/connectionerror.cpp:67 core/connectionerror.cpp:136
 #, kde-format
@@ -722,12 +727,14 @@ msgid ""
 "Check the port in the address. The defaults are 3389 for RDP and 5900 for "
 "VNC and SPICE."
 msgstr ""
+"Controleer de poort in het adres. De standaardwaarden zijn 3389 voor RDP en "
+"5900 voor VNC en SPICE."
 
 #: core/connectionerror.cpp:68 core/connectionerror.cpp:146
 #, kde-format
 msgctxt "@info"
 msgid "Check that no firewall blocks the connection."
-msgstr ""
+msgstr "Controleer of er geen firewall is die de verbinding blokkeert."
 
 #: core/connectionerror.cpp:73
 #, kde-format
@@ -741,6 +748,8 @@ msgctxt "@info"
 msgid ""
 "Review the security settings for this host, or reset them to their defaults."
 msgstr ""
+"Controleer de beveiligingsinstellingen voor deze host of zet ze terug naar "
+"de standaardwaarden."
 
 #: core/connectionerror.cpp:76
 #, kde-format
@@ -749,6 +758,8 @@ msgid ""
 "If the server certificate changed unexpectedly, confirm the change with the "
 "server administrator before accepting it."
 msgstr ""
+"Als het servercertificaat onverwacht is gewijzigd, verifieer de wijziging "
+"dan bij de serverbeheerder voordat u deze accepteert."
 
 #: core/connectionerror.cpp:80
 #, kde-format
@@ -761,12 +772,16 @@ msgstr "Authenticatie is mislukt"
 msgctxt "@info"
 msgid "Check the user name, password and domain, and that Caps Lock is off."
 msgstr ""
+"Controleer de gebruikersnaam, het wachtwoord en het domein, en zorg ervoor "
+"dat Caps Lock is uitgeschakeld."
 
 #: core/connectionerror.cpp:83
 #, kde-format
 msgctxt "@info"
 msgid "If you use a saved password, enter it again. It may be out of date."
 msgstr ""
+"Als u een opgeslagen wachtwoord gebruikt, voer het dan opnieuw in. Mogelijk "
+"is het verouderd."
 
 #: core/connectionerror.cpp:84
 #, kde-format
@@ -775,6 +790,8 @@ msgid ""
 "If the account is locked or expired, contact the administrator of the remote "
 "computer."
 msgstr ""
+"Als het account is vergrendeld of verlopen, neem dan contact op met de "
+"beheerder van de externe computer."
 
 #: core/connectionerror.cpp:88
 #, kde-format
@@ -789,6 +806,8 @@ msgid ""
 "Reset advanced options in the host settings, such as graphics acceleration "
 "or color depth, to their defaults."
 msgstr ""
+"Zet geavanceerde opties in de host-instellingen, zoals grafische versnelling "
+"of kleurdiepte, terug naar de standaardwaarden."
 
 #: core/connectionerror.cpp:91
 #, kde-format
@@ -797,18 +816,20 @@ msgid ""
 "Ask the administrator of the remote computer whether new sessions are "
 "allowed. The number of users may be limited."
 msgstr ""
+"Vraag de beheerder van de externe computer of nieuwe sessies zijn "
+"toegestaan. Het aantal gebruikers is mogelijk beperkt."
 
 #: core/connectionerror.cpp:96
 #, kde-format
 msgctxt "@title connection error"
 msgid "Network connection interrupted"
-msgstr ""
+msgstr "Netwerkverbinding onderbroken"
 
 #: core/connectionerror.cpp:98
 #, kde-format
 msgctxt "@info"
 msgid "Check your network connection, then reconnect."
-msgstr ""
+msgstr "Controleer uw netwerkverbinding en maak vervolgens opnieuw verbinding."
 
 #: core/connectionerror.cpp:99
 #, kde-format
@@ -817,6 +838,8 @@ msgid ""
 "If the remote computer restarted or went to sleep, wait until it is back, "
 "then reconnect."
 msgstr ""
+"Als de externe computer opnieuw is opgestart of in de slaapstand is gegaan, "
+"wacht dan tot deze weer beschikbaar is en maak vervolgens opnieuw verbinding."
 
 #: core/connectionerror.cpp:104
 #, kde-format
@@ -835,6 +858,8 @@ msgstr "Onverwachte fout"
 msgctxt "@label"
 msgid "It accepted the connection, then closed it before the session started."
 msgstr ""
+"Het accepteerde de verbinding, maar sloot deze vervolgens voordat de sessie "
+"begon."
 
 #: core/connectionerror.cpp:119
 #, kde-format
@@ -849,12 +874,16 @@ msgid ""
 "If another viewer is connected, close it. Some servers allow only one at a "
 "time."
 msgstr ""
+"Als er een andere viewer is verbonden, sluit deze dan. Sommige servers staan ​​"
+"er slechts één tegelijk toe."
 
 #: core/connectionerror.cpp:122
 #, kde-format
 msgctxt "@info"
 msgid "Check that this port belongs to the remote desktop service you expect."
 msgstr ""
+"Controleer of deze poort toebehoort aan de externe-bureaubladservice die je "
+"verwacht."
 
 #: core/connectionerror.cpp:123
 #, kde-format
@@ -863,6 +892,8 @@ msgid ""
 "Check the access and security settings of the server, or its log, for why it "
 "closed the connection."
 msgstr ""
+"Controleer de toegangs- en beveiligingsinstellingen van de server, of het "
+"logbestand ervan, om te achterhalen waarom de verbinding werd verbroken."
 
 #: core/connectionerror.cpp:133
 #, kde-format
@@ -875,6 +906,8 @@ msgstr "Verbinding geweigerd"
 msgctxt "@info"
 msgid "Check that no firewall on the remote computer rejects the connection."
 msgstr ""
+"Controleer of er op de externe computer geen firewall is die de verbinding "
+"weigert."
 
 #: core/connectionerror.cpp:143
 #, kde-format
@@ -886,7 +919,7 @@ msgstr "Server gaf geen antwoord"
 #, kde-format
 msgctxt "@info"
 msgid "Check that the address is right."
-msgstr ""
+msgstr "Controleer of het adres klopt."
 
 #: core/connectionerror.cpp:153
 #, kde-format
@@ -899,6 +932,8 @@ msgstr "Geen route naar de server"
 msgctxt "@info"
 msgid "Connect to the network or VPN the remote computer is on."
 msgstr ""
+"Maak verbinding met het netwerk of de VPN waarop de externe computer zich "
+"bevindt."
 
 #: core/hostpreferences.cpp:230
 #, kde-format
@@ -945,13 +980,13 @@ msgstr "Voer het SSH-wachtwoord in."
 #, kde-format
 msgctxt "@label"
 msgid "The SSH tunnel on port %1 could not be set up."
-msgstr ""
+msgstr "De SSH-tunnel op poort %1 kon niet worden opgezet."
 
 #: core/remoteview.cpp:704
 #, kde-format
 msgctxt "@title connection error"
 msgid "SSH server not reachable"
-msgstr ""
+msgstr "SSH-server niet bereikbaar"
 
 #: core/remoteview.cpp:705
 #, kde-format
@@ -963,7 +998,7 @@ msgstr "De SSH-server weigerde een verbinding op poort %1."
 #, kde-format
 msgctxt "@info"
 msgid "Make sure the SSH server is running and listens on port %1."
-msgstr ""
+msgstr "Zorg ervoor dat de SSH-server actief is en luistert op poort %1."
 
 #: core/remoteview.cpp:708
 #, kde-format
@@ -971,12 +1006,13 @@ msgctxt "@info"
 msgid ""
 "Check the host name, and that the computer is reachable from this network."
 msgstr ""
+"Controleer de hostnaam en of de computer vanuit dit netwerk bereikbaar is."
 
 #: core/remoteview.cpp:709
 #, kde-format
 msgctxt "@info"
 msgid "Check that no firewall blocks SSH connections."
-msgstr ""
+msgstr "Controleer of er geen firewall is die SSH-verbindingen blokkeert."
 
 #: core/remoteview.cpp:713
 #, kde-format
@@ -988,19 +1024,21 @@ msgstr "SSH-aanmelding is mislukt"
 #, kde-format
 msgctxt "@label"
 msgid "The SSH server did not accept the login."
-msgstr ""
+msgstr "De SSH-server heeft de aanmelding niet geaccepteerd."
 
 #: core/remoteview.cpp:715
 #, kde-format
 msgctxt "@label"
 msgid "The SSH server did not accept the login for “%1”."
-msgstr ""
+msgstr "De SSH-server heeft de aanmelding voor “%1” niet geaccepteerd."
 
 #: core/remoteview.cpp:717
 #, kde-format
 msgctxt "@info"
 msgid "Check the SSH user name in the host settings, and the password."
 msgstr ""
+"Controleer de SSH-gebruikersnaam in de hostinstellingen, evenals het "
+"wachtwoord."
 
 #: core/remoteview.cpp:718
 #, kde-format
@@ -1009,6 +1047,9 @@ msgid ""
 "If you use key authentication, add the key to your SSH agent with ssh-add, "
 "and make sure it is authorized on the server."
 msgstr ""
+"Als u gebruikmaakt van sleutelauthenticatie, voeg de sleutel dan toe aan uw "
+"SSH-agent met `ssh-add` en zorg ervoor dat deze op de server is "
+"geautoriseerd."
 
 #: core/remoteview.cpp:719
 #, kde-format
@@ -1016,12 +1057,16 @@ msgctxt "@info"
 msgid ""
 "If the SSH server does not allow password logins, set up key authentication."
 msgstr ""
+"Als de SSH-server geen aanmelden met wachtwoord toestaat, stel dan "
+"authenticatie via sleutels in."
 
 #: core/remoteview.cpp:723
 #, kde-format
 msgctxt "@label"
 msgid "No free local port could be opened for the tunnel on this computer."
 msgstr ""
+"Er kon op deze computer geen vrije lokale poort worden geopend voor de "
+"tunnel."
 
 #: core/remoteview.cpp:725
 #, kde-format
@@ -1030,6 +1075,8 @@ msgid ""
 "Close other applications that open many network connections, then connect "
 "again."
 msgstr ""
+"Sluit andere programma's die veel netwerkverbindingen openen en maak "
+"vervolgens opnieuw verbinding."
 
 #: core/sshtunnelthread.cpp:104
 #, kde-format
@@ -1292,6 +1339,9 @@ msgid ""
 "Unable to load connection data from “%1”.\n"
 "The file may be damaged, or it is in a format KRDC does not support."
 msgstr ""
+"Kan verbindingsgegevens uit “%1” niet laden.\n"
+"Het bestand is mogelijk beschadigd of heeft een indeling die niet door KRDC "
+"wordt ondersteund."
 
 #: mainwindow.cpp:289
 #, kde-format
@@ -1305,6 +1355,10 @@ msgid ""
 "\n"
 "Use the form [username@]host[:port], for example: user@192.168.1.10:5900"
 msgstr ""
+"“%1” is geen geldig adres.\n"
+"\n"
+"Gebruik de notatie [gebruikersnaam@]host[:poort], bijvoorbeeld: "
+"user@192.168.1.10:5900"
 
 #: mainwindow.cpp:298
 #, kde-format
@@ -1317,6 +1371,8 @@ msgid ""
 "No installed plugin can handle the “%1” protocol.\n"
 "Supported protocols: %2"
 msgstr ""
+"Geen enkele geïnstalleerde plug-in kan het “%1”-protocol verwerken.\n"
+"Ondersteunde protocollen: %2"
 
 #: mainwindow.cpp:533
 #, kde-format
@@ -1474,13 +1530,13 @@ msgstr "Filter"
 #, kde-format
 msgctxt "@label"
 msgid "The remote computer may have shut down or restarted."
-msgstr ""
+msgstr "De externe computer is mogelijk afgesloten of opnieuw opgestart."
 
 #: mainwindow.cpp:1633
 #, kde-format
 msgctxt "@title connection error"
 msgid "Closed before the session started"
-msgstr ""
+msgstr "Gesloten voordat de sessie begon"
 
 #. i18n: ectx: attribute (title), widget (QWidget, mainSettingsTab)
 #: rdp/rdppreferences.ui:21
@@ -2243,19 +2299,19 @@ msgstr ""
 #, kde-format
 msgctxt "@label"
 msgid "The credentials for “%1” were not accepted."
-msgstr ""
+msgstr "De aanmeldgegevens voor “%1” werden niet geaccepteerd."
 
 #: rdp/rdpview.cpp:350
 #, kde-format
 msgctxt "@info"
 msgid "Check the RD Gateway credentials in the host settings."
-msgstr ""
+msgstr "Controleer de RD Gateway-aanmeldgegevens in de hostinstellingen."
 
 #: rdp/rdpview.cpp:366
 #, kde-format
 msgctxt "@label"
 msgid "This account may not log in remotely."
-msgstr ""
+msgstr "Dit account mag niet op afstand zich aanmelden."
 
 #: rdp/rdpview.cpp:367
 #, kde-format
