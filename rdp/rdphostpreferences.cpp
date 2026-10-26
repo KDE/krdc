@@ -113,9 +113,40 @@ inline QString int2keymap(int layout)
         return keymaps.at(defaultKeymap);
 }
 
+// One-shot migration of the old free-text "authPkgList" entry (e.g.
+// "!ntlm,kerberos") into the per-package boolean entries. Runs once per
+// host group; afterwards the legacy entry is gone.
+static void migrateAuthPkgList(KConfigGroup &group)
+{
+    if (group.hasKey("authPkgKerberos") || group.hasKey("authPkgNtlm") || group.hasKey("authPkgU2u")) {
+        return;
+    }
+    const QString legacy = group.readEntry("authPkgList", QString());
+    if (legacy.isEmpty()) {
+        return;
+    }
+    group.deleteEntry("authPkgList");
+    if (legacy.compare(QLatin1String("none"), Qt::CaseInsensitive) == 0) {
+        return;
+    }
+    const auto tokens = legacy.split(QLatin1Char(','), Qt::SkipEmptyParts);
+    for (QString token : tokens) {
+        const bool denied = token.trimmed().startsWith(QLatin1Char('!'));
+        const QString name = token.trimmed().remove(QLatin1Char('!')).toLower();
+        if (name == QLatin1String("kerberos")) {
+            group.writeEntry("authPkgKerberos", !denied);
+        } else if (name == QLatin1String("ntlm")) {
+            group.writeEntry("authPkgNtlm", !denied);
+        } else if (name == QLatin1String("u2u")) {
+            group.writeEntry("authPkgU2u", !denied);
+        }
+    }
+}
+
 RdpHostPreferences::RdpHostPreferences(KConfigGroup configGroup, QObject *parent)
     : HostPreferences(configGroup, parent)
 {
+    migrateAuthPkgList(m_configGroup);
 }
 
 RdpHostPreferences::~RdpHostPreferences()
@@ -159,7 +190,9 @@ QWidget *RdpHostPreferences::createProtocolSpecificConfigPage(QWidget *sshTunnel
     rdpUi.kcfg_SecurityTLS->setChecked(securityTLS());
     rdpUi.kcfg_SecurityRDP->setChecked(securityRDP());
     rdpUi.kcfg_SecurityEXT->setChecked(securityEXT());
-    rdpUi.kcfg_AuthPkgList->setText(authPkgList());
+    rdpUi.kcfg_AuthPkgKerberos->setChecked(authPkgKerberos());
+    rdpUi.kcfg_AuthPkgNtlm->setChecked(authPkgNtlm());
+    rdpUi.kcfg_AuthPkgU2u->setChecked(authPkgU2u());
 
     // Have to call updateWidthHeight() here
     // We leverage the final part of this function to enable/disable kcfg_Height and kcfg_Width
@@ -267,7 +300,9 @@ void RdpHostPreferences::acceptConfig()
     setSecurityTLS(rdpUi.kcfg_SecurityTLS->isChecked());
     setSecurityRDP(rdpUi.kcfg_SecurityRDP->isChecked());
     setSecurityEXT(rdpUi.kcfg_SecurityEXT->isChecked());
-    setAuthPkgList(rdpUi.kcfg_AuthPkgList->text());
+    setAuthPkgKerberos(rdpUi.kcfg_AuthPkgKerberos->isChecked());
+    setAuthPkgNtlm(rdpUi.kcfg_AuthPkgNtlm->isChecked());
+    setAuthPkgU2u(rdpUi.kcfg_AuthPkgU2u->isChecked());
 }
 
 bool RdpHostPreferences::scaleToSize() const
@@ -520,11 +555,46 @@ void RdpHostPreferences::setSecurityEXT(bool enabled)
 
 QString RdpHostPreferences::authPkgList() const
 {
-    return m_configGroup.readEntry("authPkgList", Settings::authPkgList());
+    // FreeRDP semantics: packages are available unless explicitly denied
+    // with a "!" prefix, so only the unchecked ones need to be written out.
+    QStringList denied;
+    if (!authPkgKerberos()) {
+        denied << QStringLiteral("!kerberos");
+    }
+    if (!authPkgNtlm()) {
+        denied << QStringLiteral("!ntlm");
+    }
+    if (!authPkgU2u()) {
+        denied << QStringLiteral("!u2u");
+    }
+    return denied.join(QLatin1Char(','));
 }
-void RdpHostPreferences::setAuthPkgList(const QString &authPkgList)
+
+bool RdpHostPreferences::authPkgKerberos() const
 {
-    m_configGroup.writeEntry("authPkgList", authPkgList);
+    return m_configGroup.readEntry("authPkgKerberos", Settings::authPkgKerberos());
+}
+void RdpHostPreferences::setAuthPkgKerberos(bool enabled)
+{
+    m_configGroup.writeEntry("authPkgKerberos", enabled);
+}
+
+bool RdpHostPreferences::authPkgNtlm() const
+{
+    return m_configGroup.readEntry("authPkgNtlm", Settings::authPkgNtlm());
+}
+void RdpHostPreferences::setAuthPkgNtlm(bool enabled)
+{
+    m_configGroup.writeEntry("authPkgNtlm", enabled);
+}
+
+bool RdpHostPreferences::authPkgU2u() const
+{
+    return m_configGroup.readEntry("authPkgU2u", Settings::authPkgU2u());
+}
+void RdpHostPreferences::setAuthPkgU2u(bool enabled)
+{
+    m_configGroup.writeEntry("authPkgU2u", enabled);
 }
 
 void RdpHostPreferences::updateDesktopScaleFactor(DesktopScaleFactor desktopScaleFactor)

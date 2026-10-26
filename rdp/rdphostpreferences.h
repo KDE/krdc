@@ -161,7 +161,13 @@ public:
     void setSecurityEXT(bool enabled);
 
     QString authPkgList() const;
-    void setAuthPkgList(const QString &authPkgList);
+
+    bool authPkgKerberos() const;
+    void setAuthPkgKerberos(bool enabled);
+    bool authPkgNtlm() const;
+    void setAuthPkgNtlm(bool enabled);
+    bool authPkgU2u() const;
+    void setAuthPkgU2u(bool enabled);
 
     DesktopScaleFactor desktopScaleFactor() const;
     void setDesktopScaleFactor(DesktopScaleFactor desktopScaleFactor);

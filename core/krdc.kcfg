@@ -167,7 +167,14 @@
     <entry name="SecurityEXT" type="Bool">
       <default>false</default>
     </entry>
-    <entry name="AuthPkgList" type="String">
+    <entry name="AuthPkgKerberos" type="Bool">
+      <default>true</default>
+    </entry>
+    <entry name="AuthPkgNtlm" type="Bool">
+      <default>true</default>
+    </entry>
+    <entry name="AuthPkgU2u" type="Bool">
+      <default>true</default>
     </entry>
   </group>
   <group name="NX">

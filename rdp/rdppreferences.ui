@@ -835,7 +835,10 @@
          <item row="2" column="0">
           <widget class="QLabel" name="authPkgListLabel">
            <property name="text">
-            <string>Authentication Package List:</string>
+            <string>Authentication Packages:</string>
+           </property>
+           <property name="toolTip">
+            <string>Checked packages may be used during CredSSP/NLA negotiation; unchecked packages are explicitly forbidden. For Kerberos-only authentication (e.g. Active Directory Protected Users accounts), uncheck NTLM.</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
@@ -843,7 +846,42 @@
           </widget>
          </item>
          <item row="2" column="1">
-          <widget class="KLineEdit" name="kcfg_AuthPkgList"/>
+          <layout class="QHBoxLayout" name="authPkgLayout">
+           <item>
+            <widget class="QCheckBox" name="kcfg_AuthPkgKerberos">
+             <property name="text">
+              <string>Kerberos</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="kcfg_AuthPkgNtlm">
+             <property name="text">
+              <string>NTLM</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="kcfg_AuthPkgU2u">
+             <property name="text">
+              <string>U2U</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="authPkgSpacer">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
          </item>
         </layout>
        </item>
