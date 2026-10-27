@@ -244,7 +244,8 @@ void RdpView::onAuthRequested()
     m_password = dialog->password();
 
     // update m_url so it gets saved correctly
-    m_url.setUserName(m_user);
+    // A null username removes the user info; an empty one leaves an '@' in the URL.
+    m_url.setUserName(m_user.isEmpty() ? QString() : m_user);
     QUrlQuery query(m_url);
     const bool hasDomainItem = query.hasQueryItem(QStringLiteral("domain"));
     query.removeQueryItem(QStringLiteral("domain"));
