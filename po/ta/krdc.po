@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-23 00:48+0000\n"
+"POT-Creation-Date: 2026-10-27 00:59+0000\n"
 "PO-Revision-Date: 2025-04-13 17:59+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -1705,7 +1705,7 @@ msgstr "பணிமேடை தெளிவுத்திறன்"
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DeviceScaleFactor)
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_GatewayTransportType)
 #: rdp/rdppreferences.ui:300 rdp/rdppreferences.ui:368
-#: rdp/rdppreferences.ui:982
+#: rdp/rdppreferences.ui:1020
 #, fuzzy, kde-format
 msgid "Auto"
 msgstr "தானாகவே மறைக்க இயக்கு/நீக்கு"
@@ -2129,17 +2129,44 @@ msgstr ""
 #: rdp/rdppreferences.ui:838
 #, fuzzy, kde-format
 #| msgid "Authenticating..."
-msgid "Authentication Package List:"
+msgid "Authentication Packages:"
 msgstr "அனுமதிக்கிறது....."
 
+#. i18n: ectx: property (toolTip), widget (QLabel, authPkgListLabel)
+#: rdp/rdppreferences.ui:841
+#, kde-format
+msgid ""
+"Checked packages may be used during CredSSP/NLA negotiation; unchecked "
+"packages are explicitly forbidden. For Kerberos-only authentication (e.g. "
+"Active Directory Protected Users accounts), uncheck NTLM."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_AuthPkgKerberos)
+#: rdp/rdppreferences.ui:853
+#, kde-format
+msgid "Kerberos"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_AuthPkgNtlm)
+#: rdp/rdppreferences.ui:860
+#, kde-format
+msgid "NTLM"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_AuthPkgU2u)
+#: rdp/rdppreferences.ui:867
+#, kde-format
+msgid "U2U"
+msgstr ""
+
 #. i18n: ectx: attribute (title), widget (QWidget, proxySettingsTab)
-#: rdp/rdppreferences.ui:854
+#: rdp/rdppreferences.ui:892
 #, kde-format
 msgid "Proxy"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, protocolLabel)
-#: rdp/rdppreferences.ui:862
+#: rdp/rdppreferences.ui:900
 #, fuzzy, kde-format
 #| msgid "Protocol"
 msgid "Protocol:"
@@ -2147,65 +2174,65 @@ msgstr "நெறிமுறை"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ProxyProtocol)
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_GatewayTransportType)
-#: rdp/rdppreferences.ui:876 rdp/rdppreferences.ui:987
+#: rdp/rdppreferences.ui:914 rdp/rdppreferences.ui:1025
 #, kde-format
 msgid "HTTP"
 msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ProxyProtocol)
-#: rdp/rdppreferences.ui:881
+#: rdp/rdppreferences.ui:919
 #, kde-format
 msgid "SOCKS"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, pPasswordLabel)
 #. i18n: ectx: property (text), widget (QLabel, gPasswordLabel)
-#: rdp/rdppreferences.ui:892 rdp/rdppreferences.ui:948
+#: rdp/rdppreferences.ui:930 rdp/rdppreferences.ui:986
 #, kde-format
 msgid "Password:"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, pUsernameLabel)
 #. i18n: ectx: property (text), widget (QLabel, gUsernameLabel)
-#: rdp/rdppreferences.ui:902 rdp/rdppreferences.ui:941
+#: rdp/rdppreferences.ui:940 rdp/rdppreferences.ui:979
 #, fuzzy, kde-format
 msgid "Username:"
 msgstr "சிறப்பு விசைகளை உள்ளிடவும்"
 
 #. i18n: ectx: property (text), widget (QLabel, pHostLabel)
 #. i18n: ectx: property (text), widget (QLabel, gServerLabel)
-#: rdp/rdppreferences.ui:909 rdp/rdppreferences.ui:934
+#: rdp/rdppreferences.ui:947 rdp/rdppreferences.ui:972
 #, kde-format
 msgid "Server:"
 msgstr ""
 
 #. i18n: ectx: property (placeholderText), widget (KLineEdit, kcfg_ProxyHost)
 #. i18n: ectx: property (placeholderText), widget (KLineEdit, kcfg_GatewayServer)
-#: rdp/rdppreferences.ui:916 rdp/rdppreferences.ui:955
+#: rdp/rdppreferences.ui:954 rdp/rdppreferences.ui:993
 #, kde-format
 msgid "host:port"
 msgstr ""
 
 #. i18n: ectx: attribute (title), widget (QWidget, gatewaySettingsTab)
-#: rdp/rdppreferences.ui:926
+#: rdp/rdppreferences.ui:964
 #, kde-format
 msgid "Gateway"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, gTransportTypeLabel)
-#: rdp/rdppreferences.ui:968
+#: rdp/rdppreferences.ui:1006
 #, kde-format
 msgid "Transport type:"
 msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_GatewayTransportType)
-#: rdp/rdppreferences.ui:992
+#: rdp/rdppreferences.ui:1030
 #, kde-format
 msgid "RPC"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, gDomainLabel)
-#: rdp/rdppreferences.ui:1000
+#: rdp/rdppreferences.ui:1038
 #, kde-format
 msgid "Domain:"
 msgstr ""

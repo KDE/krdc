@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-23 00:48+0000\n"
-"PO-Revision-Date: 2026-10-25 17:09+0100\n"
+"POT-Creation-Date: 2026-10-27 00:59+0000\n"
+"PO-Revision-Date: 2026-10-26 14:18+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -1728,7 +1728,7 @@ msgstr "Schaalfactor van bureaublad:"
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DeviceScaleFactor)
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_GatewayTransportType)
 #: rdp/rdppreferences.ui:300 rdp/rdppreferences.ui:368
-#: rdp/rdppreferences.ui:982
+#: rdp/rdppreferences.ui:1020
 #, kde-format
 msgid "Auto"
 msgstr "Auto"
@@ -2148,83 +2148,111 @@ msgstr "256 bits"
 
 #. i18n: ectx: property (text), widget (QLabel, authPkgListLabel)
 #: rdp/rdppreferences.ui:838
-#, kde-format
-msgid "Authentication Package List:"
+#, fuzzy, kde-format
+#| msgid "Authentication Package List:"
+msgid "Authentication Packages:"
 msgstr "Authenticatiepakketlijst:"
 
+#. i18n: ectx: property (toolTip), widget (QLabel, authPkgListLabel)
+#: rdp/rdppreferences.ui:841
+#, kde-format
+msgid ""
+"Checked packages may be used during CredSSP/NLA negotiation; unchecked "
+"packages are explicitly forbidden. For Kerberos-only authentication (e.g. "
+"Active Directory Protected Users accounts), uncheck NTLM."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_AuthPkgKerberos)
+#: rdp/rdppreferences.ui:853
+#, kde-format
+msgid "Kerberos"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_AuthPkgNtlm)
+#: rdp/rdppreferences.ui:860
+#, kde-format
+msgid "NTLM"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_AuthPkgU2u)
+#: rdp/rdppreferences.ui:867
+#, kde-format
+msgid "U2U"
+msgstr ""
+
 #. i18n: ectx: attribute (title), widget (QWidget, proxySettingsTab)
-#: rdp/rdppreferences.ui:854
+#: rdp/rdppreferences.ui:892
 #, kde-format
 msgid "Proxy"
 msgstr "Proxy"
 
 #. i18n: ectx: property (text), widget (QLabel, protocolLabel)
-#: rdp/rdppreferences.ui:862
+#: rdp/rdppreferences.ui:900
 #, kde-format
 msgid "Protocol:"
 msgstr "Protocol:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ProxyProtocol)
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_GatewayTransportType)
-#: rdp/rdppreferences.ui:876 rdp/rdppreferences.ui:987
+#: rdp/rdppreferences.ui:914 rdp/rdppreferences.ui:1025
 #, kde-format
 msgid "HTTP"
 msgstr "HTTP"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ProxyProtocol)
-#: rdp/rdppreferences.ui:881
+#: rdp/rdppreferences.ui:919
 #, kde-format
 msgid "SOCKS"
 msgstr "SOCKS"
 
 #. i18n: ectx: property (text), widget (QLabel, pPasswordLabel)
 #. i18n: ectx: property (text), widget (QLabel, gPasswordLabel)
-#: rdp/rdppreferences.ui:892 rdp/rdppreferences.ui:948
+#: rdp/rdppreferences.ui:930 rdp/rdppreferences.ui:986
 #, kde-format
 msgid "Password:"
 msgstr "Wachtwoord:"
 
 #. i18n: ectx: property (text), widget (QLabel, pUsernameLabel)
 #. i18n: ectx: property (text), widget (QLabel, gUsernameLabel)
-#: rdp/rdppreferences.ui:902 rdp/rdppreferences.ui:941
+#: rdp/rdppreferences.ui:940 rdp/rdppreferences.ui:979
 #, kde-format
 msgid "Username:"
 msgstr "Gebruikersnaam:"
 
 #. i18n: ectx: property (text), widget (QLabel, pHostLabel)
 #. i18n: ectx: property (text), widget (QLabel, gServerLabel)
-#: rdp/rdppreferences.ui:909 rdp/rdppreferences.ui:934
+#: rdp/rdppreferences.ui:947 rdp/rdppreferences.ui:972
 #, kde-format
 msgid "Server:"
 msgstr "Server:"
 
 #. i18n: ectx: property (placeholderText), widget (KLineEdit, kcfg_ProxyHost)
 #. i18n: ectx: property (placeholderText), widget (KLineEdit, kcfg_GatewayServer)
-#: rdp/rdppreferences.ui:916 rdp/rdppreferences.ui:955
+#: rdp/rdppreferences.ui:954 rdp/rdppreferences.ui:993
 #, kde-format
 msgid "host:port"
 msgstr "host:poort"
 
 #. i18n: ectx: attribute (title), widget (QWidget, gatewaySettingsTab)
-#: rdp/rdppreferences.ui:926
+#: rdp/rdppreferences.ui:964
 #, kde-format
 msgid "Gateway"
 msgstr "Gateway"
 
 #. i18n: ectx: property (text), widget (QLabel, gTransportTypeLabel)
-#: rdp/rdppreferences.ui:968
+#: rdp/rdppreferences.ui:1006
 #, kde-format
 msgid "Transport type:"
 msgstr "Transporttype:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_GatewayTransportType)
-#: rdp/rdppreferences.ui:992
+#: rdp/rdppreferences.ui:1030
 #, kde-format
 msgid "RPC"
 msgstr "RPC"
 
 #. i18n: ectx: property (text), widget (QLabel, gDomainLabel)
-#: rdp/rdppreferences.ui:1000
+#: rdp/rdppreferences.ui:1038
 #, kde-format
 msgid "Domain:"
 msgstr "Domein:"
@@ -2370,31 +2398,32 @@ msgstr ""
 #, kde-format
 msgctxt "@label"
 msgid "The Kerberos domain controller could not be reached."
-msgstr ""
+msgstr "De Kerberos-domeincontroller kon niet worden bereikt."
 
 #: rdp/rdpview.cpp:391
 #, kde-format
 msgctxt "@info"
 msgid "Check the domain you entered when logging in."
-msgstr ""
+msgstr "Controleer het domein dat u hebt ingevoerd bij het aanmelden."
 
 #: rdp/rdpview.cpp:392
 #, kde-format
 msgctxt "@info"
 msgid "Connect to the network or VPN of the domain."
-msgstr ""
+msgstr "Maak verbinding met het netwerk of de VPN van het domein."
 
 #: rdp/rdpview.cpp:397 spice/spiceview.cpp:901 vnc/vncview.cpp:287
 #, kde-format
 msgctxt "@label"
 msgid "No IP address was found for this name."
-msgstr ""
+msgstr "Er is geen IP-adres gevonden voor deze naam."
 
 #: rdp/rdpview.cpp:408
 #, kde-format
 msgctxt "@label"
 msgid "The server and KRDC could not agree on a security protocol."
 msgstr ""
+"De server en KRDC konden het niet eens worden over een beveiligingsprotocol."
 
 #: rdp/rdpview.cpp:410
 #, kde-format
@@ -2403,18 +2432,20 @@ msgid ""
 "Set the TLS security level in the host settings to “Any”. The server may not "
 "support the level selected."
 msgstr ""
+"Stel het TLS-beveiligingsniveau in de hostinstellingen in op \"Any\". Het is "
+"mogelijk dat de server het geselecteerde niveau niet ondersteunt."
 
 #: rdp/rdpview.cpp:414
 #, kde-format
 msgctxt "@label"
 msgid "The server requires Network Level Authentication (NLA)."
-msgstr ""
+msgstr "De server vereist Network Level Authentication (NLA)."
 
 #: rdp/rdpview.cpp:415
 #, kde-format
 msgctxt "@info"
 msgid "Enable NLA in the security settings for this host."
-msgstr ""
+msgstr "Schakel NLA in de beveiligingsinstellingen voor deze host in."
 
 #: rdp/rdpview.cpp:433
 #, kde-format
@@ -2423,12 +2454,15 @@ msgid ""
 "Check the RD Gateway settings for this host. The gateway “%1” may be "
 "unreachable or reject the connection."
 msgstr ""
+"Controleer de RD Gateway-instellingen voor deze host. De gateway “%1” is "
+"mogelijk onbereikbaar of wijst de verbinding af."
 
 #: rdp/rdpview.cpp:440
 #, kde-format
 msgctxt "@label"
 msgid "The remote computer did not finish starting the session in time."
 msgstr ""
+"De externe computer heeft het starten van de sessie niet op tijd voltooid."
 
 #: rdp/rdpview.cpp:441
 #, kde-format
@@ -2437,12 +2471,16 @@ msgid ""
 "The remote computer may still be starting up or be under heavy load. Wait a "
 "minute, then connect again."
 msgstr ""
+"De externe computer is mogelijk nog aan het opstarten of zwaar belast. Wacht "
+"een minuut en probeer het daarna opnieuw."
 
 #: rdp/rdpview.cpp:445
 #, kde-format
 msgctxt "@label"
 msgid "It accepted the connection, then refused to start a session."
 msgstr ""
+"De verbinding werd geaccepteerd, maar vervolgens werd geweigerd een sessie "
+"te starten."
 
 #: rdp/rdpview.cpp:446
 #, kde-format
@@ -2455,42 +2493,47 @@ msgstr "Sessies geweigerd"
 msgctxt "@label"
 msgid "The server did not accept the options selected for this host."
 msgstr ""
+"De server heeft de voor deze host geselecteerde opties niet geaccepteerd."
 
 #: rdp/rdpview.cpp:453
 #, kde-format
 msgctxt "@label"
 msgid "An administrator or another program disconnected this session."
-msgstr ""
+msgstr "Een beheerder of een ander programma heeft deze sessie verbroken."
 
 #: rdp/rdpview.cpp:456
 #, kde-format
 msgctxt "@label"
 msgid "An administrator signed this session out."
-msgstr ""
+msgstr "Een beheerder heeft deze sessie beëindigd."
 
 #: rdp/rdpview.cpp:459
 #, kde-format
 msgctxt "@label"
 msgid "The session was disconnected from the remote computer."
-msgstr ""
+msgstr "De sessie met de externe computer is verbroken."
 
 #: rdp/rdpview.cpp:466
 #, kde-format
 msgctxt "@label"
 msgid "Disconnected because someone else connected to this session."
 msgstr ""
+"Verbinding verbroken omdat iemand anders verbinding heeft gemaakt met deze "
+"sessie."
 
 #: rdp/rdpview.cpp:467
 #, kde-format
 msgctxt "@info"
 msgid "Reconnect to take the session back. This disconnects the other user."
 msgstr ""
+"Maak opnieuw verbinding om de sessie over te nemen. Hierdoor wordt de "
+"verbinding van de andere gebruiker verbroken."
 
 #: rdp/rdpview.cpp:470
 #, kde-format
 msgctxt "@label"
 msgid "The session was closed after being idle for too long."
-msgstr ""
+msgstr "De sessie werd beëindigd omdat deze te lang inactief was."
 
 #: rdp/rdpview.cpp:471
 #, kde-format
@@ -2499,12 +2542,14 @@ msgid ""
 "Reconnect to continue. The idle time limit is set by the administrator of "
 "the server."
 msgstr ""
+"Maak opnieuw verbinding om door te gaan. De tijdslimiet voor inactiviteit is "
+"ingesteld door de beheerder van de server."
 
 #: rdp/rdpview.cpp:485
 #, kde-format
 msgctxt "@label"
 msgid "The remote computer reported a problem while logging in."
-msgstr ""
+msgstr "De externe computer meldde een probleem tijdens het aanmelden."
 
 #: rdp/rdpview.cpp:486
 #, kde-format
@@ -2513,6 +2558,8 @@ msgid ""
 "Check that this user may log in to the remote computer, and that the session "
 "is not busy."
 msgstr ""
+"Controleer of deze gebruiker zich mag aanmelden op de externe computer en of "
+"de sessie niet in gebruik is."
 
 #: rdp/rdpview.cpp:865
 #, kde-format
@@ -2665,7 +2712,7 @@ msgstr "Authenticatie is vereist om met <b>%1</b> te verbinden."
 #, kde-format
 msgctxt "@label"
 msgid "The TLS handshake failed."
-msgstr ""
+msgstr "De TLS-handdruk is mislukt."
 
 #: spice/spiceview.cpp:893
 #, kde-format
@@ -2674,6 +2721,8 @@ msgid ""
 "Check whether the server accepts TLS only on a separate port, and that its "
 "certificate is trusted."
 msgstr ""
+"Controleer of de server TLS uitsluitend op een aparte poort accepteert en of "
+"het certificaat ervan wordt vertrouwd."
 
 #: spice/spiceview.cpp:896
 #, kde-format
@@ -2688,6 +2737,8 @@ msgid ""
 "Check that this port belongs to a SPICE server with a compatible protocol "
 "version."
 msgstr ""
+"Controleer of deze poort toebehoort aan een SPICE-server met een compatibele "
+"protocolversie."
 
 #: spice/spiceview.cpp:907
 #, kde-format
@@ -2696,6 +2747,8 @@ msgid ""
 "Make sure the virtual machine is running, and its SPICE display listens on "
 "this address."
 msgstr ""
+"Zorg ervoor dat de virtuele machine draait en dat het SPICE-display ervan op "
+"dit adres luistert."
 
 #: spice/spiceviewfactory.cpp:47
 #, kde-format
@@ -2862,12 +2915,15 @@ msgid ""
 "Wait a few minutes. The server blocks logins for a while after several "
 "failed attempts."
 msgstr ""
+"Wacht een paar minuten. De server blokkeert aanmeldingen voor enige tijd na "
+"meerdere mislukte pogingen."
 
 #: vnc/vncview.cpp:310
 #, kde-format
 msgctxt "@info"
 msgid "Then connect again and enter the password carefully."
 msgstr ""
+"Maak vervolgens opnieuw verbinding en voer het wachtwoord zorgvuldig in."
 
 #: vnc/vncview.cpp:316
 #, kde-format
@@ -2875,6 +2931,8 @@ msgctxt "@label"
 msgid ""
 "The server requires an authentication method that KRDC does not support."
 msgstr ""
+"De server vereist een authenticatiemethode die door KRDC niet wordt "
+"ondersteund."
 
 #: vnc/vncview.cpp:318
 #, kde-format
@@ -2883,6 +2941,8 @@ msgid ""
 "Configure the VNC server to use standard VNC password authentication, or "
 "connect through an SSH tunnel."
 msgstr ""
+"Configureer de VNC-server zo dat deze gebruikmaakt van standaard VNC-"
+"wachtwoordauthenticatie, of maak verbinding via een SSH-tunnel."
 
 #: vnc/vncviewfactory.cpp:47
 #, kde-format
