@@ -85,6 +85,27 @@ public:
     explicit RdpHostPreferences(KConfigGroup configGroup, QObject *parent = nullptr);
     ~RdpHostPreferences() override;
 
+    // Stored value of "Same as This Computer". The keyboard layout list shows it first, the stored values have it last.
+    static constexpr int AutoKeyboardLayout = 37;
+    // Stored value of US English, used in place of unknown stored values.
+    static constexpr int FallbackKeyboardLayout = 7;
+
+    static int keyboardLayoutRow(int keyboardLayout)
+    {
+        if (keyboardLayout == AutoKeyboardLayout) {
+            return 0;
+        }
+        if (keyboardLayout < 0 || keyboardLayout > AutoKeyboardLayout) {
+            keyboardLayout = FallbackKeyboardLayout;
+        }
+        return keyboardLayout + 1;
+    }
+
+    static int keyboardLayoutFromRow(int row)
+    {
+        return row > 0 ? row - 1 : AutoKeyboardLayout;
+    }
+
     bool scaleToSize() const;
     void setScaleToSize(bool scale);
 

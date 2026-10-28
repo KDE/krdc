@@ -21,6 +21,12 @@ public:
 
     void save() override;
     void load() override;
+    void defaults() override;
+
+private:
+    void updateKeyboardLayoutState();
+
+    QComboBox *m_keyboardLayout;
 };
 
 #endif // RDPPREFERENCES_H

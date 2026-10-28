@@ -45,6 +45,11 @@ if(KF6Screen_FOUND)
     target_compile_definitions(krdc_rdpplugin PRIVATE HAVE_KSCREEN)
 endif()
 
+if(Qt6DBus_FOUND)
+    target_link_libraries(krdc_rdpplugin Qt::DBus)
+    target_compile_definitions(krdc_rdpplugin PRIVATE HAVE_DBUS)
+endif()
+
 add_library(kcm_krdc_rdpplugin)
 
 target_sources(kcm_krdc_rdpplugin PRIVATE

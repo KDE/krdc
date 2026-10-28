@@ -8,55 +8,80 @@
 #include "rdphostpreferences.h"
 #include "rdpsettingsform.h"
 
+#include "krdc_debug.h"
 #include "settings.h"
+
+#include <KConfig>
+#include <KConfigGroup>
 
 #include <QGuiApplication>
 #include <QScreen>
 #include <QWindow>
 
+#ifdef HAVE_DBUS
+#include <QDBusArgument>
+#include <QDBusConnection>
+#include <QDBusMessage>
+#include <QDBusPendingReply>
+#endif
+
 #include <freerdp/locale/keyboard.h>
 
-// clang-format off
-static const QStringList keymaps = (QStringList()
-    << QStringLiteral("ar")
-    << QStringLiteral("cs")
-    << QStringLiteral("da")
-    << QStringLiteral("de")
-    << QStringLiteral("de-ch")
-    << QStringLiteral("en-dv")
-    << QStringLiteral("en-gb")
-    << QStringLiteral("en-us")
-    << QStringLiteral("es")
-    << QStringLiteral("et")
-    << QStringLiteral("fi")
-    << QStringLiteral("fo")
-    << QStringLiteral("fr")
-    << QStringLiteral("fr-be")
-    << QStringLiteral("fr-ca")
-    << QStringLiteral("fr-ch")
-    << QStringLiteral("he")
-    << QStringLiteral("hr")
-    << QStringLiteral("hu")
-    << QStringLiteral("is")
-    << QStringLiteral("it")
-    << QStringLiteral("ja")
-    << QStringLiteral("ko")
-    << QStringLiteral("lt")
-    << QStringLiteral("lv")
-    << QStringLiteral("mk")
-    << QStringLiteral("nl")
-    << QStringLiteral("nl-be")
-    << QStringLiteral("no")
-    << QStringLiteral("pl")
-    << QStringLiteral("pt")
-    << QStringLiteral("pt-br")
-    << QStringLiteral("ru")
-    << QStringLiteral("sl")
-    << QStringLiteral("sv")
-    << QStringLiteral("th")
-    << QStringLiteral("tr")
-);
-// clang-format on
+#include <iterator>
+#include <string_view>
+
+// Detects the layout of this computer when connecting.
+static constexpr std::string_view autoKeymap = "auto";
+
+static constexpr std::string_view keymaps[] = {
+    "ar",
+    "cs",
+    "da",
+    "de",
+    "de-ch",
+    "en-dv",
+    "en-gb",
+    "en-us",
+    "es",
+    "et",
+    "fi",
+    "fo",
+    "fr",
+    "fr-be",
+    "fr-ca",
+    "fr-ch",
+    "he",
+    "hr",
+    "hu",
+    "is",
+    "it",
+    "ja",
+    "ko",
+    "lt",
+    "lv",
+    "mk",
+    "nl",
+    "nl-be",
+    "no",
+    "pl",
+    "pt",
+    "pt-br",
+    "ru",
+    "sl",
+    "sv",
+    "th",
+    "tr",
+    // Last, so that the stored indices of the other layouts stay valid.
+    autoKeymap,
+};
+
+static_assert(std::size(keymaps) == RdpHostPreferences::AutoKeyboardLayout + 1 && keymaps[RdpHostPreferences::AutoKeyboardLayout] == autoKeymap);
+static_assert(keymaps[RdpHostPreferences::FallbackKeyboardLayout] == "en-us");
+
+static QLatin1String latin1(std::string_view keymap)
+{
+    return QLatin1String(keymap.data(), qsizetype(keymap.size()));
+}
 
 static const QHash<QString, int> rdpLayouts = {
     {QStringLiteral("ar"), KBD_ARABIC_101},
@@ -98,20 +123,22 @@ static const QHash<QString, int> rdpLayouts = {
     {QStringLiteral("tr"), KBD_TURKISH_Q},
 };
 
-static const int defaultKeymap = 7; // en-us
-
 inline int keymap2int(const QString &keymap)
 {
-    const int index = keymaps.lastIndexOf(keymap);
-    return (index == -1) ? defaultKeymap : index;
+    for (int index = int(std::size(keymaps)) - 1; index >= 0; --index) {
+        if (keymap == latin1(keymaps[index])) {
+            return index;
+        }
+    }
+    return RdpHostPreferences::FallbackKeyboardLayout;
 }
 
 inline QString int2keymap(int layout)
 {
-    if (layout >= 0 && layout < keymaps.count())
-        return keymaps.at(layout);
+    if (layout >= 0 && layout < int(std::size(keymaps)))
+        return latin1(keymaps[layout]);
     else
-        return keymaps.at(defaultKeymap);
+        return latin1(keymaps[RdpHostPreferences::FallbackKeyboardLayout]);
 }
 
 // One-shot migration of the old free-text "authPkgList" entry (e.g.
@@ -166,6 +193,152 @@ static void migrateHostSettings(KConfigGroup &group)
     }
 }
 
+// Returns an entry of keymaps, or an empty string if the XKB layout has no RDP equivalent.
+static QString keymapForXkbLayout(const QString &layout, const QString &variant)
+{
+    // clang-format off
+    static const QHash<QString, QString> xkbLayouts = {
+        {QStringLiteral("ara"), QStringLiteral("ar")},
+        {QStringLiteral("be"), QStringLiteral("fr-be")},
+        {QStringLiteral("br"), QStringLiteral("pt-br")},
+        {QStringLiteral("ca"), QStringLiteral("fr-ca")},
+        {QStringLiteral("ch"), QStringLiteral("de-ch")},
+        {QStringLiteral("cz"), QStringLiteral("cs")},
+        {QStringLiteral("de"), QStringLiteral("de")},
+        {QStringLiteral("dk"), QStringLiteral("da")},
+        {QStringLiteral("ee"), QStringLiteral("et")},
+        {QStringLiteral("es"), QStringLiteral("es")},
+        {QStringLiteral("fi"), QStringLiteral("fi")},
+        {QStringLiteral("fo"), QStringLiteral("fo")},
+        {QStringLiteral("fr"), QStringLiteral("fr")},
+        {QStringLiteral("gb"), QStringLiteral("en-gb")},
+        {QStringLiteral("hr"), QStringLiteral("hr")},
+        {QStringLiteral("hu"), QStringLiteral("hu")},
+        {QStringLiteral("il"), QStringLiteral("he")},
+        {QStringLiteral("is"), QStringLiteral("is")},
+        {QStringLiteral("it"), QStringLiteral("it")},
+        {QStringLiteral("jp"), QStringLiteral("ja")},
+        {QStringLiteral("kr"), QStringLiteral("ko")},
+        {QStringLiteral("lt"), QStringLiteral("lt")},
+        {QStringLiteral("lv"), QStringLiteral("lv")},
+        {QStringLiteral("mk"), QStringLiteral("mk")},
+        {QStringLiteral("nl"), QStringLiteral("nl")},
+        {QStringLiteral("no"), QStringLiteral("no")},
+        {QStringLiteral("pl"), QStringLiteral("pl")},
+        {QStringLiteral("pt"), QStringLiteral("pt")},
+        {QStringLiteral("ru"), QStringLiteral("ru")},
+        {QStringLiteral("se"), QStringLiteral("sv")},
+        {QStringLiteral("si"), QStringLiteral("sl")},
+        {QStringLiteral("th"), QStringLiteral("th")},
+        {QStringLiteral("tr"), QStringLiteral("tr")},
+        {QStringLiteral("us"), QStringLiteral("en-us")},
+    };
+    // clang-format on
+
+    if (layout == QLatin1String("us") && (variant.contains(QLatin1String("dvorak")) || variant == QLatin1String("dvp"))) {
+        return QStringLiteral("en-dv");
+    }
+    if (layout == QLatin1String("ch") && variant.startsWith(QLatin1String("fr"))) {
+        return QStringLiteral("fr-ch");
+    }
+    if (layout == QLatin1String("ca") && variant == QLatin1String("eng")) {
+        return QStringLiteral("en-us");
+    }
+    if (layout == QLatin1String("tr") && variant == QLatin1String("f")) {
+        return {};
+    }
+    return xkbLayouts.value(layout);
+}
+
+struct XkbLayouts {
+    QStringList layouts;
+    QStringList variants;
+};
+
+// Returns the layouts that the session applies, in the order that Plasma switches between them.
+static XkbLayouts configuredLayouts()
+{
+    // Plasma applies the layouts from kxkbrc on X11 and Wayland when the user configured them.
+    // Other desktops ignore kxkbrc, which may be left over from an earlier Plasma session.
+    if (qEnvironmentVariable("XDG_CURRENT_DESKTOP").split(QLatin1Char(':')).contains(QLatin1String("KDE"))) {
+        const KConfig kxkbConfig(QStringLiteral("kxkbrc"), KConfig::NoGlobals);
+        const KConfigGroup kxkbLayout = kxkbConfig.group(QStringLiteral("Layout"));
+        if (kxkbLayout.readEntry("Use", false)) {
+            return {kxkbLayout.readEntry("LayoutList", QStringList()), kxkbLayout.readEntry("VariantList", QStringList())};
+        }
+    }
+
+    // Otherwise the Wayland session uses the system layout, which Plasma passes on in these variables.
+    return {qEnvironmentVariable("XKB_DEFAULT_LAYOUT").split(QLatin1Char(',')), qEnvironmentVariable("XKB_DEFAULT_VARIANT").split(QLatin1Char(','))};
+}
+
+#ifdef HAVE_DBUS
+// Reads the active layout from Plasma, which the user may have switched away from the first configured one.
+static bool activePlasmaLayout(qsizetype &index, QString &layout)
+{
+    const auto call = [](const QString &method) {
+        const QDBusMessage message =
+            QDBusMessage::createMethodCall(QStringLiteral("org.kde.keyboard"), QStringLiteral("/Layouts"), QStringLiteral("org.kde.KeyboardLayouts"), method);
+        // This runs while connecting, so do not hold up the user for long.
+        return QDBusConnection::sessionBus().asyncCall(message, 500);
+    };
+
+    QDBusPendingReply<uint> indexReply = call(QStringLiteral("getLayout"));
+    QDBusPendingCall listCall = call(QStringLiteral("getLayoutsList"));
+    indexReply.waitForFinished();
+    listCall.waitForFinished();
+    if (indexReply.isError() || listCall.isError()) {
+        return false;
+    }
+    const QDBusMessage listReply = listCall.reply();
+    if (listReply.arguments().isEmpty()) {
+        return false;
+    }
+
+    // Each entry is (short name, display name, long name). The list does not include variants.
+    const QDBusArgument list = listReply.arguments().constFirst().value<QDBusArgument>();
+    QStringList layouts;
+    list.beginArray();
+    while (!list.atEnd()) {
+        QString shortName;
+        QString displayName;
+        QString longName;
+        list.beginStructure();
+        list >> shortName >> displayName >> longName;
+        list.endStructure();
+        layouts << shortName;
+    }
+    list.endArray();
+
+    // The layouts may have changed between the two calls.
+    if (indexReply.value() >= uint(layouts.size())) {
+        return false;
+    }
+    index = indexReply.value();
+    layout = layouts.at(index);
+    return true;
+}
+#endif
+
+// Returns the entry of keymaps for the user's active keyboard layout, or an empty string if it is unknown.
+static QString systemKeymap()
+{
+    const XkbLayouts configured = configuredLayouts();
+    qsizetype index = 0;
+    QString layout = configured.layouts.value(0).trimmed();
+
+#ifdef HAVE_DBUS
+    activePlasmaLayout(index, layout);
+#endif
+
+    // Plasma reports only the layout, so take the variant from the configured layouts when they agree.
+    const QString variant = configured.layouts.value(index).trimmed() == layout ? configured.variants.value(index).trimmed() : QString();
+
+    const QString keymap = keymapForXkbLayout(layout, variant);
+    qCDebug(KRDC) << "Active keyboard layout" << layout << variant << "maps to RDP keymap" << keymap;
+    return keymap;
+}
+
 RdpHostPreferences::RdpHostPreferences(KConfigGroup configGroup, QObject *parent)
     : HostPreferences(configGroup, parent)
 {
@@ -202,7 +375,7 @@ QWidget *RdpHostPreferences::createProtocolSpecificConfigPage(QWidget *sshTunnel
     rdpUi.kcfg_DesktopScaleFactor->setCurrentIndex(int(desktopScaleFactor()));
     rdpUi.kcfg_DesktopScaleFactorCustom->setValue(desktopScaleFactorCustom());
     rdpUi.kcfg_DeviceScaleFactor->setCurrentIndex(int(deviceScaleFactor()));
-    rdpUi.kcfg_KeyboardLayout->setCurrentIndex(keymap2int(keyboardLayout()));
+    rdpUi.kcfg_KeyboardLayout->setCurrentIndex(keyboardLayoutRow(keymap2int(keyboardLayout())));
     rdpUi.kcfg_Sound->setCurrentIndex(int(sound()));
     rdpUi.kcfg_ShareMedia->setFolder(shareMedia());
     rdpUi.kcfg_TlsSecLevel->setCurrentIndex(int(tlsSecLevel()));
@@ -292,7 +465,7 @@ void RdpHostPreferences::acceptConfig()
     setDesktopScaleFactor(DesktopScaleFactor(rdpUi.kcfg_DesktopScaleFactor->currentIndex()));
     setDesktopScaleFactorCustom(rdpUi.kcfg_DesktopScaleFactorCustom->value());
     setDeviceScaleFactor(DeviceScaleFactor(rdpUi.kcfg_DeviceScaleFactor->currentIndex()));
-    setKeyboardLayout(int2keymap(rdpUi.kcfg_KeyboardLayout->currentIndex()));
+    setKeyboardLayout(int2keymap(keyboardLayoutFromRow(rdpUi.kcfg_KeyboardLayout->currentIndex())));
     setSound(Sound(rdpUi.kcfg_Sound->currentIndex()));
     setShareMedia(rdpUi.kcfg_ShareMedia->folder());
     setTlsSecLevel(TlsSecLevel(rdpUi.kcfg_TlsSecLevel->currentIndex()));
@@ -390,7 +563,10 @@ QString RdpHostPreferences::keyboardLayout() const
 
 int RdpHostPreferences::rdpKeyboardLayout() const
 {
-    auto layout = keyboardLayout();
+    QString layout = keyboardLayout();
+    if (layout == latin1(autoKeymap)) {
+        layout = systemKeymap();
+    }
     return rdpLayouts.value(layout, KBD_UNITED_STATES_INTERNATIONAL);
 }
 

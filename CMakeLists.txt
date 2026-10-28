@@ -33,6 +33,7 @@ endif()
 if (UNIX AND NOT APPLE AND NOT ANDROID)
     find_package(Qt6WaylandClient ${QT_MIN_VERSION} CONFIG)
     set(HAVE_WAYLAND ${Qt6WaylandClient_FOUND})
+    find_package(Qt6DBus ${QT_MIN_VERSION} CONFIG)
 endif()
 
 find_package(Qt6Keychain ${QT_KEYCHAIN_MIN_VERSION} REQUIRED)
