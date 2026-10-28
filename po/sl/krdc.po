@@ -1,6 +1,6 @@
 # Slovenian translation of krdc
 # Copyright (C) 2002, 2003, 2004, 2005, 2006, 2007 Free Software Foundation, Inc.
-# $Id: krdc.po 1751266 2026-10-27 01:55:11Z scripty $
+# $Id: krdc.po 1751347 2026-10-28 01:56:52Z scripty $
 # $Source$
 #
 # Andrej Vernekar <andrej.vernekar@moj.net>, 2002, 2007, 2008.
@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-10-27 00:59+0000\n"
-"PO-Revision-Date: 2026-10-21 20:22+0200\n"
+"PO-Revision-Date: 2026-10-27 16:57+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
 "Translator: Andrej Mernik <andrejm@ubuntu.si>\n"
-"X-Generator: Poedit 3.9\n"
+"X-Generator: Poedit 3.10\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2147,10 +2147,9 @@ msgstr "256 bitov"
 
 #. i18n: ectx: property (text), widget (QLabel, authPkgListLabel)
 #: rdp/rdppreferences.ui:838
-#, fuzzy, kde-format
-#| msgid "Authentication Package List:"
+#, kde-format
 msgid "Authentication Packages:"
-msgstr "Seznam paketov avtentikacije:"
+msgstr "Paketi za avtentikacijo:"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, authPkgListLabel)
 #: rdp/rdppreferences.ui:841
@@ -2160,24 +2159,27 @@ msgid ""
 "packages are explicitly forbidden. For Kerberos-only authentication (e.g. "
 "Active Directory Protected Users accounts), uncheck NTLM."
 msgstr ""
+"Preverjeni paketi se lahko uporabljajo med pogajanji CredSSP/NLA; "
+"nepreverjeni paketi so izrecno prepovedani. Za avtentikacijo samo Kerberos "
+"(npr. računi Active Directory Protected Users) počisti polje NTLM."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AuthPkgKerberos)
 #: rdp/rdppreferences.ui:853
 #, kde-format
 msgid "Kerberos"
-msgstr ""
+msgstr "Kerberos"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AuthPkgNtlm)
 #: rdp/rdppreferences.ui:860
 #, kde-format
 msgid "NTLM"
-msgstr ""
+msgstr "NTLM"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AuthPkgU2u)
 #: rdp/rdppreferences.ui:867
 #, kde-format
 msgid "U2U"
-msgstr ""
+msgstr "U2U"
 
 #. i18n: ectx: attribute (title), widget (QWidget, proxySettingsTab)
 #: rdp/rdppreferences.ui:892

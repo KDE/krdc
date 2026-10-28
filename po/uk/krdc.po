@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-10-27 00:59+0000\n"
-"PO-Revision-Date: 2026-10-21 21:47+0300\n"
+"PO-Revision-Date: 2026-10-27 12:17+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -2156,10 +2156,9 @@ msgstr "256-бітовий"
 
 #. i18n: ectx: property (text), widget (QLabel, authPkgListLabel)
 #: rdp/rdppreferences.ui:838
-#, fuzzy, kde-format
-#| msgid "Authentication Package List:"
+#, kde-format
 msgid "Authentication Packages:"
-msgstr "Список пакунка розпізнавання:"
+msgstr "Пакунки розпізнавання:"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, authPkgListLabel)
 #: rdp/rdppreferences.ui:841
@@ -2169,24 +2168,28 @@ msgid ""
 "packages are explicitly forbidden. For Kerberos-only authentication (e.g. "
 "Active Directory Protected Users accounts), uncheck NTLM."
 msgstr ""
+"Позначені пакети можуть використовуватися під час узгодження CredSSP/NLA; "
+"непозначені пакети явно заборонені. Для розпізнавання виключно за допомогою "
+"Kerberos (наприклад, для облікових записів «захищених користувачів» в Active "
+"Directory) зніміть позначку з NTLM."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AuthPkgKerberos)
 #: rdp/rdppreferences.ui:853
 #, kde-format
 msgid "Kerberos"
-msgstr ""
+msgstr "Kerberos"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AuthPkgNtlm)
 #: rdp/rdppreferences.ui:860
 #, kde-format
 msgid "NTLM"
-msgstr ""
+msgstr "NTLM"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AuthPkgU2u)
 #: rdp/rdppreferences.ui:867
 #, kde-format
 msgid "U2U"
-msgstr ""
+msgstr "U2U"
 
 #. i18n: ectx: attribute (title), widget (QWidget, proxySettingsTab)
 #: rdp/rdppreferences.ui:892
