@@ -13,6 +13,8 @@
 
 #include <KConfigGroup>
 
+#include <QList>
+
 class QCheckBox;
 class QLineEdit;
 class QWidget;
@@ -78,6 +80,8 @@ public:
 
     /** Show editable connection identity fields in the configuration dialog. */
     void setConnectionDetails(const QString &name, const QUrl &url);
+    /** The name of the connection, which all settings before connecting let the user change. */
+    void setConnectionName(const QString &name);
     QString connectionName() const;
     QUrl connectionUrl() const;
 
@@ -93,6 +97,14 @@ protected:
 
     virtual QWidget *createProtocolSpecificConfigPage(QWidget *sshTunnelWidget) = 0;
 
+    /**
+     * Show @p field, with its label, in the short dialog shown before connecting. Use it for the
+     * one or two settings that most often need a change for this protocol, the display first.
+     * @p field must be a field of a QFormLayout on the protocol specific page.
+     * Call this from createProtocolSpecificConfigPage().
+     */
+    void addQuickSetting(QWidget *field);
+
     /** Called when the user validates the config dialog. */
     virtual void acceptConfig();
 
@@ -102,6 +114,7 @@ protected:
     KConfigGroup m_configGroup;
 
 private:
+    bool execDialog(QWidget *parent, bool beforeConnecting);
     void setShowConfigAgain(bool show);
     void setWalletSupport(bool walletSupport);
 
@@ -120,6 +133,8 @@ private:
 
     QString m_connectionName;
     QUrl m_connectionUrl;
+
+    QList<QWidget *> m_quickSettings;
 
     QCheckBox *showAgainCheckBox;
     QCheckBox *walletSupportCheckBox;

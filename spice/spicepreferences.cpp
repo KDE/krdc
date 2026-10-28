@@ -7,7 +7,7 @@
 #include "spicepreferences.h"
 
 #include "settings.h"
-#include "ui_spicepreferences.h"
+#include "spicesettingsform.h"
 
 #include <KPluginFactory>
 
@@ -18,6 +18,9 @@ SpicePreferences::SpicePreferences(QObject *parent)
 {
     Ui::SpicePreferences spiceUi;
     spiceUi.setupUi(widget());
+    // An SSH tunnel is set up per host.
+    spiceUi.networkSection->hide();
+    setupSpiceSettingsForm(spiceUi);
     addConfig(Settings::self(), widget());
 }
 

@@ -104,6 +104,8 @@ private:
     void setAddressInput(const QUrl &url);
     ConnectionStatusWidget *statusWidgetFor(RemoteView *view) const;
     void reconnectInTab(QWidget *tab, const QUrl &url);
+    /** The name shown in the tab of a connection, or empty when the tab shows its address. */
+    QString connectionName(QWidget *tab, const QUrl &url) const;
     ConnectionError unexplainedDisconnect(const ConnectionStatusWidget *statusWidget) const;
     RemoteViewFactory *factoryFor(const QUrl &url) const;
     bool editHostSettings(const QUrl &url);

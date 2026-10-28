@@ -5,6 +5,7 @@
 */
 
 #include "spicehostpreferences.h"
+#include "spicesettingsform.h"
 
 #include <QGuiApplication>
 #include <QScreen>
@@ -28,7 +29,11 @@ QWidget *SpiceHostPreferences::createProtocolSpecificConfigPage(QWidget *sshTunn
     spiceUi.setupUi(spicePage);
     if (sshTunnelWidget) {
         spiceUi.sshTunnelLayout->addWidget(sshTunnelWidget);
+    } else {
+        spiceUi.networkSection->hide();
     }
+    addQuickSetting(spiceUi.resolutionField);
+    addQuickSetting(spiceUi.kcfg_EnableAudio);
 
     spiceUi.kcfg_EnableAudio->setChecked(enableAudio());
     spiceUi.kcfg_Resolution->setCurrentIndex(int(resolution()));
@@ -36,6 +41,7 @@ QWidget *SpiceHostPreferences::createProtocolSpecificConfigPage(QWidget *sshTunn
     spiceUi.kcfg_Height->setValue(height());
     spiceUi.kcfg_ScaleToWindow->setChecked(windowedScale());
 
+    setupSpiceSettingsForm(spiceUi);
     updateWidthHeight(resolution());
 
     connect(spiceUi.kcfg_Resolution, &QComboBox::currentIndexChanged, this, [this](int index) {
@@ -82,12 +88,6 @@ void SpiceHostPreferences::updateWidthHeight(Resolution res)
     default:
         break;
     }
-
-    const bool enabled = (res == Resolution::Custom);
-    spiceUi.kcfg_Width->setEnabled(enabled);
-    spiceUi.kcfg_Height->setEnabled(enabled);
-    spiceUi.widthLabel->setEnabled(enabled);
-    spiceUi.heightLabel->setEnabled(enabled);
 }
 
 void SpiceHostPreferences::acceptConfig()

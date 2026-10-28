@@ -6,6 +6,7 @@
 */
 
 #include "rdphostpreferences.h"
+#include "rdpsettingsform.h"
 
 #include "settings.h"
 
@@ -143,10 +144,34 @@ static void migrateAuthPkgList(KConfigGroup &group)
     }
 }
 
+// Before "useGateway" and "useProxy", a route was used whenever its server was set, and the
+// shared folder needs migratedShareMedia(). Saving a host writes "useGateway", so a host without
+// it was saved by an older version; "settingsMigrated" marks one that is already migrated, as a
+// host may have none of the keys that are migrated. Settings a host does not have follow the
+// default settings, which migrateRdpDefaults() handles.
+static void migrateHostSettings(KConfigGroup &group)
+{
+    if (!group.exists() || group.hasKey("useGateway") || group.hasKey("settingsMigrated")) {
+        return;
+    }
+    group.writeEntry("settingsMigrated", true);
+    if (group.hasKey("gatewayServer")) {
+        group.writeEntry("useGateway", !group.readEntry("gatewayServer", QString()).isEmpty());
+    }
+    if (group.hasKey("proxyHost")) {
+        group.writeEntry("useProxy", !group.readEntry("proxyHost", QString()).isEmpty());
+    }
+    if (group.hasKey("shareMedia")) {
+        group.writeEntry("shareMedia", migratedShareMedia(group.readEntry("shareMedia", QString())));
+    }
+}
+
 RdpHostPreferences::RdpHostPreferences(KConfigGroup configGroup, QObject *parent)
     : HostPreferences(configGroup, parent)
 {
     migrateAuthPkgList(m_configGroup);
+    migrateRdpDefaults();
+    migrateHostSettings(m_configGroup);
 }
 
 RdpHostPreferences::~RdpHostPreferences()
@@ -158,8 +183,13 @@ QWidget *RdpHostPreferences::createProtocolSpecificConfigPage(QWidget *sshTunnel
     QWidget *rdpPage = new QWidget();
     rdpUi.setupUi(rdpPage);
     if (sshTunnelWidget) {
-        rdpUi.settingsTabs->addTab(sshTunnelWidget, sshTunnelWidget->windowTitle());
+        rdpUi.sshTunnelLayout->addWidget(sshTunnelWidget);
+    } else {
+        rdpUi.sshTunnelSection->hide();
     }
+    addQuickSetting(rdpUi.resolutionField);
+    addQuickSetting(rdpUi.kcfg_Sound);
+    addQuickSetting(rdpUi.kcfg_ShareMedia);
 
     rdpUi.kcfg_ScaleToSize->setChecked(scaleToSize());
     rdpUi.kcfg_ConsoleMode->setChecked(consoleMode());
@@ -174,12 +204,14 @@ QWidget *RdpHostPreferences::createProtocolSpecificConfigPage(QWidget *sshTunnel
     rdpUi.kcfg_DeviceScaleFactor->setCurrentIndex(int(deviceScaleFactor()));
     rdpUi.kcfg_KeyboardLayout->setCurrentIndex(keymap2int(keyboardLayout()));
     rdpUi.kcfg_Sound->setCurrentIndex(int(sound()));
-    rdpUi.kcfg_ShareMedia->setText(shareMedia());
+    rdpUi.kcfg_ShareMedia->setFolder(shareMedia());
     rdpUi.kcfg_TlsSecLevel->setCurrentIndex(int(tlsSecLevel()));
+    rdpUi.kcfg_UseProxy->setChecked(useProxy());
     rdpUi.kcfg_ProxyProtocol->setCurrentIndex(int(proxyProtocol()));
     rdpUi.kcfg_ProxyUsername->setText(proxyUsername());
     rdpUi.kcfg_ProxyPassword->setPassword(proxyPassword());
     rdpUi.kcfg_ProxyHost->setText(proxyHost());
+    rdpUi.kcfg_UseGateway->setChecked(useGateway());
     rdpUi.kcfg_GatewayTransportType->setCurrentIndex(int(gatewayTransportType()));
     rdpUi.kcfg_GatewayUsername->setText(gatewayUsername());
     rdpUi.kcfg_GatewayPassword->setPassword(gatewayPassword());
@@ -194,25 +226,10 @@ QWidget *RdpHostPreferences::createProtocolSpecificConfigPage(QWidget *sshTunnel
     rdpUi.kcfg_AuthPkgNtlm->setChecked(authPkgNtlm());
     rdpUi.kcfg_AuthPkgU2u->setChecked(authPkgU2u());
 
-    // Have to call updateWidthHeight() here
-    // We leverage the final part of this function to enable/disable kcfg_Height and kcfg_Width
+    setupRdpSettingsForm(rdpUi);
     updateWidthHeight(resolution());
-
     connect(rdpUi.kcfg_Resolution, &QComboBox::currentIndexChanged, this, [this](int index) {
         updateWidthHeight(Resolution(index));
-    });
-
-    // Color depth depends on acceleration method, with the better ones only working with 32-bit
-    // color. So ensure we reflect that in the settings UI.
-    updateColorDepth(acceleration());
-    connect(rdpUi.kcfg_Acceleration, &QComboBox::currentIndexChanged, this, [this](int index) {
-        updateColorDepth(Acceleration(index));
-    });
-
-    // kcfg_DesktopScaleFactorCustom is enabled only when kcfg_DesktopScaleFactor = DesktopScaleFactor::Custom
-    updateDesktopScaleFactor(desktopScaleFactor());
-    connect(rdpUi.kcfg_DesktopScaleFactor, &QComboBox::currentIndexChanged, this, [this](int index) {
-        updateDesktopScaleFactor(DesktopScaleFactor(index));
     });
 
     return rdpPage;
@@ -258,13 +275,6 @@ void RdpHostPreferences::updateWidthHeight(Resolution resolution)
     default:
         break;
     }
-
-    const bool enabled = resolution == Resolution::Custom;
-
-    rdpUi.kcfg_Height->setEnabled(enabled);
-    rdpUi.kcfg_Width->setEnabled(enabled);
-    rdpUi.heightLabel->setEnabled(enabled);
-    rdpUi.widthLabel->setEnabled(enabled);
 }
 
 void RdpHostPreferences::acceptConfig()
@@ -284,12 +294,14 @@ void RdpHostPreferences::acceptConfig()
     setDeviceScaleFactor(DeviceScaleFactor(rdpUi.kcfg_DeviceScaleFactor->currentIndex()));
     setKeyboardLayout(int2keymap(rdpUi.kcfg_KeyboardLayout->currentIndex()));
     setSound(Sound(rdpUi.kcfg_Sound->currentIndex()));
-    setShareMedia(rdpUi.kcfg_ShareMedia->text());
+    setShareMedia(rdpUi.kcfg_ShareMedia->folder());
     setTlsSecLevel(TlsSecLevel(rdpUi.kcfg_TlsSecLevel->currentIndex()));
+    setUseProxy(rdpUi.kcfg_UseProxy->isChecked());
     setProxyProtocol(ProxyProtocol(rdpUi.kcfg_ProxyProtocol->currentIndex()));
     setProxyUsername(rdpUi.kcfg_ProxyUsername->text());
     setProxyPassword(rdpUi.kcfg_ProxyPassword->password());
     setProxyHost(rdpUi.kcfg_ProxyHost->text());
+    setUseGateway(rdpUi.kcfg_UseGateway->isChecked());
     setGatewayTransportType(GatewayTransportType(rdpUi.kcfg_GatewayTransportType->currentIndex()));
     setGatewayUsername(rdpUi.kcfg_GatewayUsername->text());
     setGatewayPassword(rdpUi.kcfg_GatewayPassword->password());
@@ -394,27 +406,12 @@ RdpHostPreferences::Sound RdpHostPreferences::sound() const
 
 void RdpHostPreferences::setShareMedia(const QString &shareMedia)
 {
-    if (!shareMedia.isNull())
-        m_configGroup.writeEntry("shareMedia", shareMedia);
+    m_configGroup.writeEntry("shareMedia", shareMedia);
 }
 
 QString RdpHostPreferences::shareMedia() const
 {
     return m_configGroup.readEntry("shareMedia", Settings::shareMedia());
-}
-
-void RdpHostPreferences::updateColorDepth(Acceleration acceleration)
-{
-    switch (acceleration) {
-    case Acceleration::Auto:
-    case Acceleration::ForceGraphicsPipeline:
-    case Acceleration::ForceRemoteFx:
-        rdpUi.kcfg_ColorDepth->setEnabled(false);
-        rdpUi.kcfg_ColorDepth->setCurrentIndex(0);
-        break;
-    case Acceleration::Disabled:
-        rdpUi.kcfg_ColorDepth->setEnabled(true);
-    }
 }
 
 void RdpHostPreferences::setTlsSecLevel(TlsSecLevel tlsSecLevel)
@@ -428,6 +425,15 @@ RdpHostPreferences::TlsSecLevel RdpHostPreferences::tlsSecLevel() const
 }
 
 // Proxy settings
+bool RdpHostPreferences::useProxy() const
+{
+    return m_configGroup.readEntry("useProxy", Settings::useProxy());
+}
+void RdpHostPreferences::setUseProxy(bool useProxy)
+{
+    m_configGroup.writeEntry("useProxy", useProxy);
+}
+
 RdpHostPreferences::ProxyProtocol RdpHostPreferences::proxyProtocol() const
 {
     return ProxyProtocol(m_configGroup.readEntry("proxyProtocol", Settings::proxyProtocol()));
@@ -466,6 +472,15 @@ void RdpHostPreferences::setProxyHost(const QString &proxyHost)
 }
 
 // Gateway settings
+bool RdpHostPreferences::useGateway() const
+{
+    return m_configGroup.readEntry("useGateway", Settings::useGateway());
+}
+void RdpHostPreferences::setUseGateway(bool useGateway)
+{
+    m_configGroup.writeEntry("useGateway", useGateway);
+}
+
 RdpHostPreferences::GatewayTransportType RdpHostPreferences::gatewayTransportType() const
 {
     return GatewayTransportType(m_configGroup.readEntry("gatewayTransportType", int(Settings::gatewayTransportType())));
@@ -595,19 +610,6 @@ bool RdpHostPreferences::authPkgU2u() const
 void RdpHostPreferences::setAuthPkgU2u(bool enabled)
 {
     m_configGroup.writeEntry("authPkgU2u", enabled);
-}
-
-void RdpHostPreferences::updateDesktopScaleFactor(DesktopScaleFactor desktopScaleFactor)
-{
-    switch (desktopScaleFactor) {
-    case DesktopScaleFactor::Auto:
-    case DesktopScaleFactor::DoNotScale:
-        rdpUi.kcfg_DesktopScaleFactorCustom->setEnabled(false);
-        break;
-    case DesktopScaleFactor::Custom:
-        rdpUi.kcfg_DesktopScaleFactorCustom->setEnabled(true);
-        break;
-    }
 }
 
 RdpHostPreferences::DesktopScaleFactor RdpHostPreferences::desktopScaleFactor() const

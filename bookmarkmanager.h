@@ -62,7 +62,10 @@ public:
     QString currentTitle() const override;
     bool supportsTabs() const override;
     QList<KBookmarkOwner::FutureBookmark> currentBookmarkList() const override;
-    void addHistoryBookmark(RemoteView *view);
+    /** Adds @p view to the history, or moves it to the top; a new entry gets @p title, if given. */
+    void addHistoryBookmark(RemoteView *view, const QString &title = QString());
+    /** Names the history entry of @p url @p title, or its address when @p title is empty. */
+    void renameHistoryBookmark(const QUrl &url, const QString &title);
     void addManualBookmark(const QUrl &url, const QString &text);
     void updateBookmark(const QString &address, const QString &name, const QUrl &url);
     KBookmarkManager *getManager();

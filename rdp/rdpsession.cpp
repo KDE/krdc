@@ -13,6 +13,7 @@
 #include <limits>
 
 #include <QApplication>
+#include <QDir>
 #include <QKeyEvent>
 #include <QMouseEvent>
 #include <QScreen>
@@ -669,11 +670,20 @@ int RdpSession::clientContextStart(rdpContext *context)
         break;
     }
 
-    if (!preferences->shareMedia().isEmpty()) {
+    const QString sharedFolder = preferences->shareMedia();
+    if (!sharedFolder.isEmpty()) {
         QByteArray name = "drive";
-        QByteArray value = preferences->shareMedia().toUtf8();
-        const char *params[2] = {name.data(), value.data()};
-        freerdp_client_add_device_channel(settings, 2, params);
+        QByteArray value = sharedFolder.toUtf8();
+        // Without a name, FreeRDP names a folder after its whole path, as in "_home_user_share".
+        // Other values, such as "DynamicDrives", name their drives themselves.
+        QByteArray driveName = QDir::isAbsolutePath(sharedFolder) ? QDir(sharedFolder).dirName().toUtf8() : QByteArray();
+        if (driveName.isEmpty()) {
+            const char *params[2] = {name.data(), value.data()};
+            freerdp_client_add_device_channel(settings, 2, params);
+        } else {
+            const char *params[3] = {name.data(), driveName.data(), value.data()};
+            freerdp_client_add_device_channel(settings, 3, params);
+        }
     }
 
     if (!preferences->smartcardName().isEmpty()) {
@@ -746,7 +756,7 @@ int RdpSession::clientContextStart(rdpContext *context)
     }
 
     const auto proxyHostAddress = QUrl::fromUserInput(preferences->proxyHost());
-    if (!proxyHostAddress.isEmpty()) {
+    if (preferences->useProxy() && !proxyHostAddress.isEmpty()) {
         int defaultPort = 8080;
         switch (preferences->proxyProtocol()) {
         case RdpHostPreferences::ProxyProtocol::HTTP:
@@ -782,7 +792,7 @@ int RdpSession::clientContextStart(rdpContext *context)
     }
 
     const auto gatewayServerAddress = QUrl::fromUserInput(preferences->gatewayServer());
-    if (!gatewayServerAddress.isEmpty()) {
+    if (preferences->useGateway() && !gatewayServerAddress.isEmpty()) {
         if (!freerdp_settings_set_string(settings, FreeRDP_GatewayHostname, gatewayServerAddress.host().toUtf8().data())) {
             return -1;
         }

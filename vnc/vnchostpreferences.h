@@ -32,11 +32,6 @@ private:
     void setDontCopyPasswords(bool dontCopyPasswords);
 
     Ui::VncPreferences vncUi;
-    void checkEnableCustomSize(int index);
-
-private Q_SLOTS:
-    void updateScalingWidthHeight(int index);
-    void updateScaling(bool enabled);
 };
 
 #endif

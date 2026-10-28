@@ -5,6 +5,7 @@
 */
 
 #include "sshtunnelwidget.h"
+#include "settingsform.h"
 #include "ui_sshtunnelwidget.h"
 
 SshTunnelWidget::SshTunnelWidget(QWidget *parent)
@@ -13,10 +14,8 @@ SshTunnelWidget::SshTunnelWidget(QWidget *parent)
 {
     ui->setupUi(this);
 
-    if (!ui->use_ssh_tunnel->isChecked()) {
-        ui->ssh_groupBox->hide();
-    }
-    connect(ui->use_ssh_tunnel, &QCheckBox::toggled, ui->ssh_groupBox, &QWidget::setVisible);
+    // The tunnel options follow the check box that enables the tunnel.
+    showRowsWhileChecked(ui->formLayout, ui->use_ssh_tunnel, {ui->ssh_tunnel_user_name, ui->ssh_tunnel_port, ui->use_loopback});
 }
 
 SshTunnelWidget::~SshTunnelWidget()

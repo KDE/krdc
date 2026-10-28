@@ -5,12 +5,9 @@
 */
 
 #include "vnchostpreferences.h"
+#include "vncsettingsform.h"
 
 #include "settings.h"
-
-#include <QGuiApplication>
-#include <QScreen>
-#include <QWindow>
 
 static const char quality_config_key[] = "quality";
 static const char dont_copy_passwords_config_key[] = "dont_copy_passwords";
@@ -31,84 +28,17 @@ QWidget *VncHostPreferences::createProtocolSpecificConfigPage(QWidget *sshTunnel
     if (sshTunnelWidget) {
         vncUi.sshTunnelLayout->addWidget(sshTunnelWidget);
     }
+    addQuickSetting(vncUi.scalingField);
+    addQuickSetting(vncUi.kcfg_Quality);
 
     vncUi.kcfg_Quality->setCurrentIndex(quality() - 1);
     vncUi.kcfg_Scaling->setChecked(windowedScale());
     vncUi.kcfg_ScalingWidth->setValue(width());
     vncUi.kcfg_ScalingHeight->setValue(height());
-
-    connect(vncUi.resolutionComboBox, &QComboBox::currentIndexChanged, this, &VncHostPreferences::updateScalingWidthHeight);
-    connect(vncUi.kcfg_Scaling, &QAbstractButton::toggled, this, &VncHostPreferences::updateScaling);
-
-    const QString resolutionString = QString::number(width()) + QLatin1Char('x') + QString::number(height());
-    const int resolutionIndex = vncUi.resolutionComboBox->findText(resolutionString, Qt::MatchContains);
-    vncUi.resolutionComboBox->setCurrentIndex((resolutionIndex == -1) ? vncUi.resolutionComboBox->count() - 1 : resolutionIndex);
-
-    updateScaling(windowedScale());
-
     vncUi.dont_copy_passwords->setChecked(dontCopyPasswords());
+    setupVncSettingsForm(vncUi);
 
     return vncPage;
-}
-
-void VncHostPreferences::updateScalingWidthHeight(int index)
-{
-    switch (index) {
-    case 0:
-        vncUi.kcfg_ScalingHeight->setValue(480);
-        vncUi.kcfg_ScalingWidth->setValue(640);
-        break;
-    case 1:
-        vncUi.kcfg_ScalingHeight->setValue(600);
-        vncUi.kcfg_ScalingWidth->setValue(800);
-        break;
-    case 2:
-        vncUi.kcfg_ScalingHeight->setValue(768);
-        vncUi.kcfg_ScalingWidth->setValue(1024);
-        break;
-    case 3:
-        vncUi.kcfg_ScalingHeight->setValue(1024);
-        vncUi.kcfg_ScalingWidth->setValue(1280);
-        break;
-    case 4:
-        vncUi.kcfg_ScalingHeight->setValue(1200);
-        vncUi.kcfg_ScalingWidth->setValue(1600);
-        break;
-    case 5: {
-        QWindow *window = vncUi.kcfg_ScalingWidth->window()->windowHandle();
-        QScreen *screen = window ? window->screen() : qGuiApp->primaryScreen();
-        const QSize size = screen->size() * screen->devicePixelRatio();
-
-        vncUi.kcfg_ScalingWidth->setValue(size.width());
-        vncUi.kcfg_ScalingHeight->setValue(size.height());
-        break;
-    }
-    case 6:
-    default:
-        break;
-    }
-
-    checkEnableCustomSize(index);
-}
-
-void VncHostPreferences::updateScaling(bool enabled)
-{
-    vncUi.resolutionComboBox->setEnabled(enabled);
-    if (enabled) {
-        checkEnableCustomSize(vncUi.resolutionComboBox->currentIndex());
-    } else {
-        checkEnableCustomSize(-1);
-    }
-}
-
-void VncHostPreferences::checkEnableCustomSize(int index)
-{
-    const bool enabled = (index == 6);
-
-    vncUi.kcfg_ScalingHeight->setEnabled(enabled);
-    vncUi.kcfg_ScalingWidth->setEnabled(enabled);
-    vncUi.heightLabel->setEnabled(enabled);
-    vncUi.widthLabel->setEnabled(enabled);
 }
 
 void VncHostPreferences::acceptConfig()

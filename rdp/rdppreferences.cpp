@@ -8,24 +8,21 @@
 #include "remoteviewfactory.h"
 #include "settings.h"
 
-#include "ui_rdppreferences.h"
+#include "rdpsettingsform.h"
 
 K_PLUGIN_CLASS(RdpPreferences)
 
 RdpPreferences::RdpPreferences(QObject *parent)
     : KCModule(parent)
 {
+    migrateRdpDefaults();
+
     Ui::RdpPreferences rdpUi;
     rdpUi.setupUi(widget());
-
-    // would need a lot of code duplication. find a solution, but it's not
-    // that important because you will not change this configuration each day...
-    // see rdp/rdphostpreferences.cpp
-    rdpUi.kcfg_Resolution->hide();
-    rdpUi.kcfg_Height->setEnabled(true);
-    rdpUi.kcfg_Width->setEnabled(true);
-    rdpUi.heightLabel->setEnabled(true);
-    rdpUi.widthLabel->setEnabled(true);
+    // An SSH tunnel is set up per host.
+    rdpUi.sshTunnelSection->hide();
+    setupRdpSettingsForm(rdpUi);
+    alignLabelColumns(widget());
 
     addConfig(Settings::self(), widget());
 }

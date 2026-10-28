@@ -117,6 +117,9 @@ public:
     void setTlsSecLevel(TlsSecLevel tlsSecLevel);
 
     // Proxy settings
+    bool useProxy() const;
+    void setUseProxy(bool useProxy);
+
     ProxyProtocol proxyProtocol() const;
     void setProxyProtocol(ProxyProtocol proxyProtocol);
 
@@ -130,6 +133,9 @@ public:
     void setProxyHost(const QString &proxyHost);
 
     // Gateway settings
+    bool useGateway() const;
+    void setUseGateway(bool useGateway);
+
     GatewayTransportType gatewayTransportType() const;
     void setGatewayTransportType(GatewayTransportType gatewayTransportType);
 
@@ -184,8 +190,6 @@ protected:
 
 private:
     void updateWidthHeight(Resolution resolution);
-    void updateColorDepth(Acceleration acceleration);
-    void updateDesktopScaleFactor(DesktopScaleFactor desktopScaleFactor);
 
     Ui::RdpPreferences rdpUi;
 };

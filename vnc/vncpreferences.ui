@@ -7,70 +7,70 @@
     <x>0</x>
     <y>0</y>
     <width>440</width>
-    <height>396</height>
+    <height>300</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
    <item>
-    <widget class="QGroupBox" name="vncGroupBox">
-     <property name="title">
-      <string>Connection</string>
+    <layout class="QFormLayout" name="formLayout">
+     <property name="leftMargin">
+      <number>0</number>
      </property>
-     <layout class="QFormLayout" name="formLayout">
-      <item row="0" column="0">
-       <widget class="QLabel" name="connectionLabel">
-        <property name="text">
-         <string>Connection &amp;type:</string>
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <property name="rightMargin">
+      <number>0</number>
+     </property>
+     <property name="bottomMargin">
+      <number>0</number>
+     </property>
+     <item row="0" column="0" colspan="2">
+      <widget class="QLabel" name="displayHeading">
+       <property name="font">
+        <font>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Display</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QCheckBox" name="kcfg_Scaling">
+       <property name="text">
+        <string>Scale to Size:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QWidget" name="scalingField">
+       <layout class="QVBoxLayout" name="scalingFieldLayout">
+        <property name="leftMargin">
+         <number>0</number>
         </property>
-        <property name="buddy">
-         <cstring>kcfg_Quality</cstring>
+        <property name="topMargin">
+         <number>0</number>
         </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="KComboBox" name="kcfg_Quality">
-        <property name="minimumSize">
-         <size>
-          <width>280</width>
-          <height>0</height>
-         </size>
+        <property name="rightMargin">
+         <number>0</number>
         </property>
-        <property name="whatsThis">
-         <string>Use this to specify the performance of your connection. Note that you should select the speed of the weakest link - even if you have a high speed connection, it will not help you if the remote computer uses a slow modem. Choosing a level of quality that is too high on a slow link will cause slower response times. Choosing a lower quality will increase latencies in high speed connections and results in lower image quality, especially in 'Low Quality' mode.</string>
+        <property name="bottomMargin">
+         <number>0</number>
         </property>
-        <item>
-         <property name="text">
-          <string>High Quality (LAN, direct connection)</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Medium Quality (DSL, Cable, fast Internet)</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Low Quality (Modem, ISDN, slow Internet)</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <layout class="QVBoxLayout">
-        <item>
-         <widget class="QCheckBox" name="kcfg_Scaling">
-          <property name="text">
-           <string>Scale to Size:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="resolutionDummyLabel"/>
-        </item>
-       </layout>
-      </item>
-      <item row="2" column="1">
-       <layout class="QVBoxLayout">
         <item>
          <widget class="KComboBox" name="resolutionComboBox">
           <property name="enabled">
@@ -126,104 +126,221 @@
          </widget>
         </item>
         <item>
-         <layout class="QHBoxLayout">
-          <item>
-           <widget class="QLabel" name="widthLabel">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="text">
-             <string>&amp;Width:</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-            <property name="buddy">
-             <cstring>kcfg_ScalingWidth</cstring>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QSpinBox" name="kcfg_ScalingWidth">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="whatsThis">
-             <string>This is the width of the remote desktop. You can only change this value manually if you select Custom as desktop resolution above.</string>
-            </property>
-            <property name="maximum">
-             <number>9999</number>
-            </property>
-            <property name="value">
-             <number>800</number>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="heightLabel">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="text">
-             <string>H&amp;eight:</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-            <property name="buddy">
-             <cstring>kcfg_ScalingHeight</cstring>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QSpinBox" name="kcfg_ScalingHeight">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="whatsThis">
-             <string>This is the height of the remote desktop. You can only change this value manually if you select Custom as desktop resolution above.</string>
-            </property>
-            <property name="maximum">
-             <number>9999</number>
-            </property>
-            <property name="value">
-             <number>600</number>
-            </property>
-           </widget>
-          </item>
-         </layout>
+         <widget class="QWidget" name="customSize">
+          <layout class="QHBoxLayout" name="customSizeLayout">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="widthLabel">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="text">
+              <string>&amp;Width:</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+             <property name="buddy">
+              <cstring>kcfg_ScalingWidth</cstring>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QSpinBox" name="kcfg_ScalingWidth">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="whatsThis">
+              <string>This is the width of the remote desktop. You can only change this value manually if you select Custom as desktop resolution above.</string>
+             </property>
+             <property name="maximum">
+              <number>9999</number>
+             </property>
+             <property name="value">
+              <number>800</number>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="heightLabel">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="text">
+              <string>H&amp;eight:</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+             <property name="buddy">
+              <cstring>kcfg_ScalingHeight</cstring>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QSpinBox" name="kcfg_ScalingHeight">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="whatsThis">
+              <string>This is the height of the remote desktop. You can only change this value manually if you select Custom as desktop resolution above.</string>
+             </property>
+             <property name="maximum">
+              <number>9999</number>
+             </property>
+             <property name="value">
+              <number>600</number>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
         </item>
        </layout>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="sshTunnelLayout">
-     <property name="spacing">
-      <number>0</number>
-     </property>
+      </widget>
+     </item>
+     <item row="2" column="0" colspan="2">
+      <spacer name="localResourcesHeadingSpacing">
+       <property name="orientation">
+        <enum>Qt::Orientation::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Policy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>0</width>
+         <height>8</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="3" column="0" colspan="2">
+      <widget class="QLabel" name="localResourcesHeading">
+       <property name="font">
+        <font>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Local Resources</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QCheckBox" name="dont_copy_passwords">
+       <property name="text">
+        <string>Don't copy passwords from supported password managers to remote hosts</string>
+       </property>
+       <property name="toolTip">
+        <string>Supported password managers (like KeePassXC) mark copied passwords with an additional MIME type "x-kde-passwordManagerHint" which is used for filtering.</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0" colspan="2">
+      <spacer name="networkHeadingSpacing">
+       <property name="orientation">
+        <enum>Qt::Orientation::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Policy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>0</width>
+         <height>8</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="6" column="0" colspan="2">
+      <widget class="QLabel" name="networkHeading">
+       <property name="font">
+        <font>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Network</string>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="0">
+      <widget class="QLabel" name="connectionLabel">
+       <property name="text">
+        <string>Connection &amp;type:</string>
+       </property>
+       <property name="buddy">
+        <cstring>kcfg_Quality</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="1">
+      <widget class="KComboBox" name="kcfg_Quality">
+       <property name="minimumSize">
+        <size>
+         <width>280</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="whatsThis">
+        <string>Use this to specify the performance of your connection. Note that you should select the speed of the weakest link - even if you have a high speed connection, it will not help you if the remote computer uses a slow modem. Choosing a level of quality that is too high on a slow link will cause slower response times. Choosing a lower quality will increase latencies in high speed connections and results in lower image quality, especially in 'Low Quality' mode.</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>High Quality (LAN, direct connection)</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Medium Quality (DSL, Cable, fast Internet)</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Low Quality (Modem, ISDN, slow Internet)</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="8" column="0" colspan="2">
+      <layout class="QHBoxLayout" name="sshTunnelLayout">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+      </layout>
+     </item>
     </layout>
-   </item>
-   <item>
-    <widget class="QCheckBox" name="dont_copy_passwords">
-     <property name="text">
-      <string>Don't copy passwords from supported password managers to remote hosts</string>
-     </property>
-     <property name="toolTip">
-      <string>Supported password managers (like KeePassXC) mark copied passwords with an additional MIME type "x-kde-passwordManagerHint" which is used for filtering.</string>
-     </property>
-    </widget>
    </item>
    <item>
     <spacer name="verticalSpacer">
      <property name="orientation">
-      <enum>Qt::Vertical</enum>
+      <enum>Qt::Orientation::Vertical</enum>
      </property>
      <property name="sizeHint" stdset="0">
       <size>
-       <width>428</width>
-       <height>16</height>
+       <width>0</width>
+       <height>0</height>
       </size>
      </property>
     </spacer>
@@ -237,6 +354,14 @@
    <header>kcombobox.h</header>
   </customwidget>
  </customwidgets>
- <resources/>
- <connections/>
+ <tabstops>
+  <tabstop>kcfg_Scaling</tabstop>
+  <tabstop>resolutionComboBox</tabstop>
+  <tabstop>kcfg_ScalingWidth</tabstop>
+  <tabstop>kcfg_ScalingHeight</tabstop>
+  <tabstop>dont_copy_passwords</tabstop>
+  <tabstop>kcfg_Quality</tabstop>
+ </tabstops>
+ <resources />
+ <connections />
 </ui>

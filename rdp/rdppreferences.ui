@@ -6,25 +6,37 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>948</width>
-    <height>500</height>
+    <width>520</width>
+    <height>360</height>
    </rect>
   </property>
-  <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0">
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
     <widget class="QTabWidget" name="settingsTabs">
      <property name="currentIndex">
       <number>0</number>
      </property>
-     <widget class="QWidget" name="mainSettingsTab">
+     <widget class="QWidget" name="displayTab">
       <attribute name="title">
-       <string>General</string>
+       <string>Display</string>
       </attribute>
-      <layout class="QGridLayout" name="gridLayoutMain">
+      <layout class="QFormLayout" name="displayLayout">
        <item row="0" column="0">
         <widget class="QLabel" name="resolutionLabel">
          <property name="text">
-          <string>Resolution</string>
+          <string>Resolution:</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
@@ -32,131 +44,163 @@
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="KComboBox" name="kcfg_Resolution">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>280</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="whatsThis">
-          <string>Here you can specify the resolution of the remote desktop. This resolution determines the size of the desktop that will be presented to you.</string>
-         </property>
-         <property name="currentIndex">
-          <number>0</number>
-         </property>
-         <item>
-          <property name="text">
-           <string>Small (1280x720)</string>
+        <widget class="QWidget" name="resolutionField">
+         <layout class="QVBoxLayout" name="resolutionFieldLayout">
+          <property name="leftMargin">
+           <number>0</number>
           </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Medium (1600x900)</string>
+          <property name="topMargin">
+           <number>0</number>
           </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Large (1920x1080)</string>
+          <property name="rightMargin">
+           <number>0</number>
           </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Current Window Size</string>
+          <property name="bottomMargin">
+           <number>0</number>
           </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Current Screen Resolution</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Custom Resolution (…)</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Use All Screens Resolution</string>
-          </property>
-         </item>
+          <item>
+           <widget class="KComboBox" name="kcfg_Resolution">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>280</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="whatsThis">
+             <string>Here you can specify the resolution of the remote desktop. This resolution determines the size of the desktop that will be presented to you.</string>
+            </property>
+            <property name="currentIndex">
+             <number>0</number>
+            </property>
+            <item>
+             <property name="text">
+              <string>Small (1280x720)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Medium (1600x900)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Large (1920x1080)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Current Window Size</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Current Screen Resolution</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Custom Resolution (…)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Use All Screens Resolution</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QWidget" name="customResolution">
+            <layout class="QHBoxLayout" name="customResolutionLayout">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="widthLabel">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="text">
+                <string>&amp;Width:</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+               </property>
+               <property name="buddy">
+                <cstring>kcfg_Width</cstring>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QSpinBox" name="kcfg_Width">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="whatsThis">
+                <string>This is the width of the remote desktop. You can only change this value manually if you select Custom as desktop resolution above.</string>
+               </property>
+               <property name="maximum">
+                <number>9999</number>
+               </property>
+               <property name="value">
+                <number>800</number>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="heightLabel">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="text">
+                <string>H&amp;eight:</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+               </property>
+               <property name="buddy">
+                <cstring>kcfg_Height</cstring>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QSpinBox" name="kcfg_Height">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="whatsThis">
+                <string>This is the height of the remote desktop. You can only change this value manually if you select Custom as desktop resolution above.</string>
+               </property>
+               <property name="maximum">
+                <number>9999</number>
+               </property>
+               <property name="value">
+                <number>600</number>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
         </widget>
        </item>
        <item row="1" column="1">
-        <layout class="QHBoxLayout">
-         <item>
-          <widget class="QLabel" name="widthLabel">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="text">
-            <string>&amp;Width:</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-           </property>
-           <property name="buddy">
-            <cstring>kcfg_Width</cstring>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QSpinBox" name="kcfg_Width">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="whatsThis">
-            <string>This is the width of the remote desktop. You can only change this value manually if you select Custom as desktop resolution above.</string>
-           </property>
-           <property name="maximum">
-            <number>9999</number>
-           </property>
-           <property name="value">
-            <number>800</number>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="heightLabel">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="text">
-            <string>H&amp;eight:</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-           </property>
-           <property name="buddy">
-            <cstring>kcfg_Height</cstring>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QSpinBox" name="kcfg_Height">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="whatsThis">
-            <string>This is the height of the remote desktop. You can only change this value manually if you select Custom as desktop resolution above.</string>
-           </property>
-           <property name="maximum">
-            <number>9999</number>
-           </property>
-           <property name="value">
-            <number>600</number>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item row="2" column="1">
         <widget class="QCheckBox" name="kcfg_ScaleToSize">
          <property name="minimumSize">
           <size>
@@ -172,107 +216,7 @@
          </property>
         </widget>
        </item>
-       <item row="3" column="0">
-        <widget class="QLabel" name="accelerationLabel">
-         <property name="text">
-          <string>Acceleration:</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="1">
-        <widget class="KComboBox" name="kcfg_Acceleration">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>280</width>
-           <height>0</height>
-          </size>
-         </property>
-         <item>
-          <property name="text">
-           <string comment="Use best acceleration supported by both the server and krdc">Use Best Available</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Force H.264</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Force RemoteFX</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Disable All Acceleration</string>
-          </property>
-         </item>
-        </widget>
-       </item>
-       <item row="4" column="0">
-        <widget class="QLabel" name="colorDepthLabel">
-         <property name="text">
-          <string>Color &amp;depth:</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-         </property>
-         <property name="buddy">
-          <cstring>kcfg_ColorDepth</cstring>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="1">
-        <widget class="KComboBox" name="kcfg_ColorDepth">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>280</width>
-           <height>0</height>
-          </size>
-         </property>
-         <item>
-          <property name="text">
-           <string comment="Use best color depth supported by both the server and krdc">Use Best Available</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>True Color with Alpha (32 Bit)</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>True Color (24 Bit)</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>High Color (16 Bit)</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Low Color (8 Bit)</string>
-          </property>
-         </item>
-        </widget>
-       </item>
-       <item row="5" column="0">
+       <item row="2" column="0">
         <widget class="QLabel" name="desktopScaleFactorLabel">
          <property name="text">
           <string>Desktop scale factor:</string>
@@ -285,8 +229,20 @@
          </property>
         </widget>
        </item>
-       <item row="5" column="1">
-        <layout class="QHBoxLayout">
+       <item row="2" column="1">
+        <layout class="QHBoxLayout" name="desktopScaleFactorLayout">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
          <item>
           <widget class="KComboBox" name="kcfg_DesktopScaleFactor">
            <property name="sizePolicy">
@@ -336,7 +292,7 @@
          </item>
         </layout>
        </item>
-       <item row="6" column="0">
+       <item row="3" column="0">
         <widget class="QLabel" name="deviceScaleFactorLabel">
          <property name="text">
           <string>Device scale factor:</string>
@@ -349,7 +305,7 @@
          </property>
         </widget>
        </item>
-       <item row="6" column="1">
+       <item row="3" column="1">
         <widget class="KComboBox" name="kcfg_DeviceScaleFactor">
          <property name="sizePolicy">
           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -385,7 +341,158 @@
          </item>
         </widget>
        </item>
-       <item row="7" column="0">
+       <item row="4" column="0">
+        <widget class="QLabel" name="accelerationLabel">
+         <property name="text">
+          <string>Acceleration:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="KComboBox" name="kcfg_Acceleration">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>280</width>
+           <height>0</height>
+          </size>
+         </property>
+         <item>
+          <property name="text">
+           <string comment="Use best acceleration supported by both the server and krdc">Use Best Available</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Force H.264</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Force RemoteFX</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Disable All Acceleration</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="5" column="0">
+        <widget class="QLabel" name="colorDepthLabel">
+         <property name="text">
+          <string>Color &amp;depth:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+         </property>
+         <property name="buddy">
+          <cstring>kcfg_ColorDepth</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1">
+        <widget class="KComboBox" name="kcfg_ColorDepth">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>280</width>
+           <height>0</height>
+          </size>
+         </property>
+         <item>
+          <property name="text">
+           <string comment="Use best color depth supported by both the server and krdc">Use Best Available</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>True Color with Alpha (32 Bit)</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>True Color (24 Bit)</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>High Color (16 Bit)</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Low Color (8 Bit)</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="localResourcesTab">
+      <attribute name="title">
+       <string>Local Resources</string>
+      </attribute>
+      <layout class="QFormLayout" name="localResourcesLayout">
+       <item row="0" column="0">
+        <widget class="QLabel" name="soundLabel">
+         <property name="text">
+          <string comment="label for soundsettings in preferences dialog">Sound:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+         </property>
+         <property name="buddy">
+          <cstring>kcfg_Sound</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="KComboBox" name="kcfg_Sound">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>280</width>
+           <height>0</height>
+          </size>
+         </property>
+         <item>
+          <property name="text">
+           <string>On This Computer</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>On Remote Computer</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Disable Sound</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="1" column="0">
         <widget class="QLabel" name="layoutLabel">
          <property name="text">
           <string>&amp;Keyboard layout:</string>
@@ -398,7 +505,7 @@
          </property>
         </widget>
        </item>
-       <item row="7" column="1">
+       <item row="1" column="1">
         <widget class="KComboBox" name="kcfg_KeyboardLayout">
          <property name="sizePolicy">
           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -605,442 +712,445 @@
          </item>
         </widget>
        </item>
-       <item row="8" column="0">
-        <widget class="QLabel" name="soundLabel">
+       <item row="2" column="0">
+        <widget class="QLabel" name="shareMediaLabel">
          <property name="text">
-          <string comment="label for soundsettings in preferences dialog">Sound:</string>
+          <string>Shared folder:</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
          </property>
-         <property name="buddy">
-          <cstring>kcfg_Sound</cstring>
-         </property>
         </widget>
        </item>
-       <item row="8" column="1">
-        <widget class="KComboBox" name="kcfg_Sound">
+       <item row="2" column="1">
+        <widget class="SharedFolderField" name="kcfg_ShareMedia">
          <property name="sizePolicy">
           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="minimumSize">
+         <property name="toolTip">
+          <string>A folder on this computer that the remote computer can read and write.</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="shareSmartcardLabel">
+         <property name="text">
+          <string>Shared smartcard:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="KLineEdit" name="kcfg_SmartcardName" />
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="connectionTab">
+      <attribute name="title">
+       <string>Connection</string>
+      </attribute>
+      <layout class="QFormLayout" name="connectionLayout">
+       <item row="0" column="0">
+        <widget class="QLabel" name="sessionLabel">
+         <property name="text">
+          <string>Session:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QCheckBox" name="kcfg_ConsoleMode">
+         <property name="text">
+          <string>Connect to the console (admin) session</string>
+         </property>
+         <property name="toolTip">
+          <string>Connect to the session an administrator uses to manage the remote computer, instead of a new user session.</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QCheckBox" name="kcfg_PreventSessionLock">
+         <property name="text">
+          <string>Keep the remote session from locking</string>
+         </property>
+         <property name="toolTip">
+          <string>Move the remote mouse pointer every few minutes so that the remote computer does not lock the session while it is idle.</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0" colspan="2">
+        <spacer name="routeSpacing">
+         <property name="orientation">
+          <enum>Qt::Orientation::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Policy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
           <size>
-           <width>280</width>
-           <height>0</height>
+           <width>0</width>
+           <height>8</height>
           </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="3" column="0">
+        <widget class="QWidget" name="gatewayIndent" />
+       </item>
+       <item row="3" column="1">
+        <widget class="QCheckBox" name="kcfg_UseGateway">
+         <property name="text">
+          <string>Connect through a Remote Desktop Gateway</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="gServerLabel">
+         <property name="text">
+          <string>Server:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="KLineEdit" name="kcfg_GatewayServer">
+         <property name="placeholderText">
+          <string>host:port</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0">
+        <widget class="QLabel" name="gUsernameLabel">
+         <property name="text">
+          <string>Username:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1">
+        <widget class="KLineEdit" name="kcfg_GatewayUsername" />
+       </item>
+       <item row="6" column="0">
+        <widget class="QLabel" name="gPasswordLabel">
+         <property name="text">
+          <string>Password:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="1">
+        <widget class="KPasswordLineEdit" name="kcfg_GatewayPassword" />
+       </item>
+       <item row="7" column="0">
+        <widget class="QLabel" name="gDomainLabel">
+         <property name="text">
+          <string>Domain:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="1">
+        <widget class="KLineEdit" name="kcfg_GatewayDomain" />
+       </item>
+       <item row="8" column="0">
+        <widget class="QLabel" name="gTransportTypeLabel">
+         <property name="text">
+          <string>Transport type:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="1">
+        <widget class="QComboBox" name="kcfg_GatewayTransportType">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
          </property>
          <item>
           <property name="text">
-           <string>On This Computer</string>
+           <string>Auto</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>On Remote Computer</string>
+           <string>HTTP</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>Disable Sound</string>
+           <string>RPC</string>
           </property>
          </item>
         </widget>
        </item>
        <item row="9" column="0">
-        <widget class="QLabel" name="shareMediaLabel">
-         <property name="text">
-          <string>Share Media:</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-         </property>
-        </widget>
+        <widget class="QWidget" name="proxyIndent" />
        </item>
        <item row="9" column="1">
-        <widget class="KUrlRequester" name="kcfg_ShareMedia">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="mode">
-          <set>KFile::Mode::Directory|KFile::Mode::ExistingOnly|KFile::Mode::LocalOnly</set>
-         </property>
-         <property name="acceptMode">
-          <enum>QFileDialog::AcceptMode::AcceptOpen</enum>
+        <widget class="QCheckBox" name="kcfg_UseProxy">
+         <property name="text">
+          <string>Connect through a proxy server</string>
          </property>
         </widget>
        </item>
        <item row="10" column="0">
-        <widget class="QLabel" name="shareSmartcardLabel">
+        <widget class="QLabel" name="pHostLabel">
          <property name="text">
-          <string>Share Smartcard:</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+          <string>Server:</string>
          </property>
         </widget>
        </item>
        <item row="10" column="1">
-        <widget class="KLineEdit" name="kcfg_SmartcardName"/>
+        <widget class="KLineEdit" name="kcfg_ProxyHost">
+         <property name="placeholderText">
+          <string>host:port</string>
+         </property>
+        </widget>
        </item>
        <item row="11" column="0">
-        <widget class="QLabel" name="consoleModeLabel">
+        <widget class="QLabel" name="pUsernameLabel">
          <property name="text">
-          <string>Alternate Session Type:</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+          <string>Username:</string>
          </property>
         </widget>
        </item>
        <item row="11" column="1">
-        <widget class="QCheckBox" name="kcfg_ConsoleMode">
-         <property name="text">
-          <string>Admin (or console) session</string>
-         </property>
-        </widget>
+        <widget class="KLineEdit" name="kcfg_ProxyUsername" />
        </item>
        <item row="12" column="0">
-        <widget class="QLabel" name="preventSessionLockLabel">
+        <widget class="QLabel" name="pPasswordLabel">
          <property name="text">
-          <string>Session lock:</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+          <string>Password:</string>
          </property>
         </widget>
        </item>
        <item row="12" column="1">
-        <widget class="QCheckBox" name="kcfg_PreventSessionLock">
+        <widget class="KPasswordLineEdit" name="kcfg_ProxyPassword" />
+       </item>
+       <item row="13" column="0">
+        <widget class="QLabel" name="protocolLabel">
          <property name="text">
-          <string>Prevent remote session lock</string>
+          <string>Protocol:</string>
          </property>
+        </widget>
+       </item>
+       <item row="13" column="1">
+        <widget class="QComboBox" name="kcfg_ProxyProtocol">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <item>
+          <property name="text">
+           <string>HTTP</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>SOCKS</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="14" column="0" colspan="2">
+        <widget class="QWidget" name="sshTunnelSection">
+         <layout class="QHBoxLayout" name="sshTunnelLayout">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+         </layout>
         </widget>
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="securitySettingsTab">
+     <widget class="QWidget" name="securityTab">
       <attribute name="title">
        <string>Security</string>
       </attribute>
-      <layout class="QVBoxLayout">
-       <item>
-        <layout class="QFormLayout" name="securityFormLayout">
-         <item row="0" column="0">
-          <widget class="QLabel" name="gSecurityLabel">
+      <layout class="QFormLayout" name="securityLayout">
+       <item row="0" column="0">
+        <widget class="QLabel" name="protocolsLabel">
+         <property name="text">
+          <string>Protocols:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <layout class="QHBoxLayout" name="protocolsLayout">
+         <item>
+          <widget class="QCheckBox" name="kcfg_SecurityNLA">
            <property name="text">
-            <string>Security:</string>
+            <string>NLA</string>
            </property>
-           <property name="alignment">
-            <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+           <property name="toolTip">
+            <string>Network Level Authentication: sign in before the remote session starts.</string>
            </property>
           </widget>
          </item>
-         <item row="0" column="1">
-          <layout class="QHBoxLayout" name="securityLayout">
-           <item>
-            <widget class="QCheckBox" name="kcfg_SecurityNLA">
-             <property name="text">
-              <string>NLA</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QCheckBox" name="kcfg_SecurityTLS">
-             <property name="text">
-              <string>TLS</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QCheckBox" name="kcfg_SecurityRDP">
-             <property name="text">
-              <string>RDP</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QCheckBox" name="kcfg_SecurityEXT">
-             <property name="text">
-              <string>Ext</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="TlsSecLevelLabel">
+         <item>
+          <widget class="QCheckBox" name="kcfg_SecurityTLS">
            <property name="text">
-            <string>TLS security level:</string>
+            <string>TLS</string>
            </property>
-           <property name="alignment">
-            <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-           </property>
-           <property name="buddy">
-            <cstring>kcfg_TlsSecLevel</cstring>
+           <property name="toolTip">
+            <string>TLS encryption, signing in on the login screen of the remote computer.</string>
            </property>
           </widget>
          </item>
-         <item row="1" column="1">
-          <widget class="KComboBox" name="kcfg_TlsSecLevel">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
+         <item>
+          <widget class="QCheckBox" name="kcfg_SecurityRDP">
+           <property name="text">
+            <string>RDP</string>
            </property>
-           <property name="minimumSize">
+           <property name="toolTip">
+            <string>Standard RDP security, the older encryption built into the protocol.</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="kcfg_SecurityEXT">
+           <property name="text">
+            <string>Ext</string>
+           </property>
+           <property name="toolTip">
+            <string>Extended Network Level Authentication, which also checks that the account may sign in before the session starts.</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="protocolsSpacer">
+           <property name="orientation">
+            <enum>Qt::Orientation::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
             <size>
-             <width>280</width>
-             <height>0</height>
+             <width>40</width>
+             <height>20</height>
             </size>
            </property>
-           <item>
-            <property name="text">
-             <string>any</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>80 bit</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>112 bit</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>128 bit</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>192 bit</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>256 bit</string>
-            </property>
-           </item>
-          </widget>
+          </spacer>
          </item>
-         <item row="2" column="0">
-          <widget class="QLabel" name="authPkgListLabel">
+        </layout>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="TlsSecLevelLabel">
+         <property name="text">
+          <string>TLS security level:</string>
+         </property>
+         <property name="buddy">
+          <cstring>kcfg_TlsSecLevel</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="KComboBox" name="kcfg_TlsSecLevel">
+         <property name="toolTip">
+          <string>The weakest TLS encryption to accept. A higher level may refuse to connect to older servers.</string>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <item>
+          <property name="text">
+           <string>Any</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>80 bit</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>112 bit</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>128 bit</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>192 bit</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>256 bit</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="authPkgListLabel">
+         <property name="text">
+          <string>Authentication packages:</string>
+         </property>
+         <property name="toolTip">
+          <string>Checked packages may be used during CredSSP/NLA negotiation; unchecked packages are explicitly forbidden. For Kerberos-only authentication (e.g. Active Directory Protected Users accounts), uncheck NTLM.</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <layout class="QHBoxLayout" name="authPkgLayout">
+         <item>
+          <widget class="QCheckBox" name="kcfg_AuthPkgKerberos">
            <property name="text">
-            <string>Authentication Packages:</string>
+            <string>Kerberos</string>
            </property>
            <property name="toolTip">
             <string>Checked packages may be used during CredSSP/NLA negotiation; unchecked packages are explicitly forbidden. For Kerberos-only authentication (e.g. Active Directory Protected Users accounts), uncheck NTLM.</string>
            </property>
-           <property name="alignment">
-            <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-           </property>
           </widget>
          </item>
-         <item row="2" column="1">
-          <layout class="QHBoxLayout" name="authPkgLayout">
-           <item>
-            <widget class="QCheckBox" name="kcfg_AuthPkgKerberos">
-             <property name="text">
-              <string>Kerberos</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QCheckBox" name="kcfg_AuthPkgNtlm">
-             <property name="text">
-              <string>NTLM</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QCheckBox" name="kcfg_AuthPkgU2u">
-             <property name="text">
-              <string>U2U</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <spacer name="authPkgSpacer">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-          </layout>
-         </item>
-        </layout>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="proxySettingsTab">
-      <attribute name="title">
-       <string>Proxy</string>
-      </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_4">
-       <item>
-        <layout class="QFormLayout" name="proxyFormLayout">
-         <item row="0" column="0">
-          <widget class="QLabel" name="protocolLabel">
+         <item>
+          <widget class="QCheckBox" name="kcfg_AuthPkgNtlm">
            <property name="text">
-            <string>Protocol:</string>
+            <string>NTLM</string>
+           </property>
+           <property name="toolTip">
+            <string>Checked packages may be used during CredSSP/NLA negotiation; unchecked packages are explicitly forbidden. For Kerberos-only authentication (e.g. Active Directory Protected Users accounts), uncheck NTLM.</string>
            </property>
           </widget>
          </item>
-         <item row="0" column="1">
-          <widget class="QComboBox" name="kcfg_ProxyProtocol">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <item>
-            <property name="text">
-             <string>HTTP</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>SOCKS</string>
-            </property>
-           </item>
-          </widget>
-         </item>
-         <item row="2" column="1">
-          <widget class="KLineEdit" name="kcfg_ProxyUsername"/>
-         </item>
-         <item row="3" column="0">
-          <widget class="QLabel" name="pPasswordLabel">
+         <item>
+          <widget class="QCheckBox" name="kcfg_AuthPkgU2u">
            <property name="text">
-            <string>Password:</string>
+            <string>U2U</string>
+           </property>
+           <property name="toolTip">
+            <string>Checked packages may be used during CredSSP/NLA negotiation; unchecked packages are explicitly forbidden. For Kerberos-only authentication (e.g. Active Directory Protected Users accounts), uncheck NTLM.</string>
            </property>
           </widget>
          </item>
-         <item row="3" column="1">
-          <widget class="KPasswordLineEdit" name="kcfg_ProxyPassword"/>
-         </item>
-         <item row="2" column="0">
-          <widget class="QLabel" name="pUsernameLabel">
-           <property name="text">
-            <string>Username:</string>
+         <item>
+          <spacer name="authPkgSpacer">
+           <property name="orientation">
+            <enum>Qt::Orientation::Horizontal</enum>
            </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="pHostLabel">
-           <property name="text">
-            <string>Server:</string>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
            </property>
-          </widget>
-         </item>
-         <item row="1" column="1">
-          <widget class="KLineEdit" name="kcfg_ProxyHost">
-           <property name="placeholderText">
-            <string>host:port</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="gatewaySettingsTab">
-      <attribute name="title">
-       <string>Gateway</string>
-      </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_9">
-       <item>
-        <layout class="QFormLayout" name="gatewayFormLayout">
-         <item row="1" column="0">
-          <widget class="QLabel" name="gServerLabel">
-           <property name="text">
-            <string>Server:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="0">
-          <widget class="QLabel" name="gUsernameLabel">
-           <property name="text">
-            <string>Username:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="0">
-          <widget class="QLabel" name="gPasswordLabel">
-           <property name="text">
-            <string>Password:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1">
-          <widget class="KLineEdit" name="kcfg_GatewayServer">
-           <property name="placeholderText">
-            <string>host:port</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="1">
-          <widget class="KLineEdit" name="kcfg_GatewayUsername"/>
-         </item>
-         <item row="4" column="1">
-          <widget class="KPasswordLineEdit" name="kcfg_GatewayPassword"/>
-         </item>
-         <item row="0" column="0">
-          <widget class="QLabel" name="gTransportTypeLabel">
-           <property name="text">
-            <string>Transport type:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QComboBox" name="kcfg_GatewayTransportType">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <item>
-            <property name="text">
-             <string>Auto</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>HTTP</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>RPC</string>
-            </property>
-           </item>
-          </widget>
-         </item>
-         <item row="2" column="0">
-          <widget class="QLabel" name="gDomainLabel">
-           <property name="text">
-            <string>Domain:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1">
-          <widget class="KLineEdit" name="kcfg_GatewayDomain"/>
+          </spacer>
          </item>
         </layout>
        </item>
@@ -1062,9 +1172,9 @@
    <header>klineedit.h</header>
   </customwidget>
   <customwidget>
-   <class>KUrlRequester</class>
-   <extends>QWidget</extends>
-   <header>kurlrequester.h</header>
+   <class>SharedFolderField</class>
+   <extends>QComboBox</extends>
+   <header>sharedfolderfield.h</header>
   </customwidget>
   <customwidget>
    <class>KPasswordLineEdit</class>
@@ -1073,11 +1183,42 @@
   </customwidget>
  </customwidgets>
  <tabstops>
+  <tabstop>settingsTabs</tabstop>
+  <tabstop>kcfg_Resolution</tabstop>
   <tabstop>kcfg_Width</tabstop>
   <tabstop>kcfg_Height</tabstop>
+  <tabstop>kcfg_ScaleToSize</tabstop>
+  <tabstop>kcfg_DesktopScaleFactor</tabstop>
+  <tabstop>kcfg_DesktopScaleFactorCustom</tabstop>
+  <tabstop>kcfg_DeviceScaleFactor</tabstop>
+  <tabstop>kcfg_Acceleration</tabstop>
   <tabstop>kcfg_ColorDepth</tabstop>
+  <tabstop>kcfg_Sound</tabstop>
   <tabstop>kcfg_KeyboardLayout</tabstop>
+  <tabstop>kcfg_ShareMedia</tabstop>
+  <tabstop>kcfg_SmartcardName</tabstop>
+  <tabstop>kcfg_ConsoleMode</tabstop>
+  <tabstop>kcfg_PreventSessionLock</tabstop>
+  <tabstop>kcfg_UseGateway</tabstop>
+  <tabstop>kcfg_GatewayServer</tabstop>
+  <tabstop>kcfg_GatewayUsername</tabstop>
+  <tabstop>kcfg_GatewayPassword</tabstop>
+  <tabstop>kcfg_GatewayDomain</tabstop>
+  <tabstop>kcfg_GatewayTransportType</tabstop>
+  <tabstop>kcfg_UseProxy</tabstop>
+  <tabstop>kcfg_ProxyHost</tabstop>
+  <tabstop>kcfg_ProxyUsername</tabstop>
+  <tabstop>kcfg_ProxyPassword</tabstop>
+  <tabstop>kcfg_ProxyProtocol</tabstop>
+  <tabstop>kcfg_SecurityNLA</tabstop>
+  <tabstop>kcfg_SecurityTLS</tabstop>
+  <tabstop>kcfg_SecurityRDP</tabstop>
+  <tabstop>kcfg_SecurityEXT</tabstop>
+  <tabstop>kcfg_TlsSecLevel</tabstop>
+  <tabstop>kcfg_AuthPkgKerberos</tabstop>
+  <tabstop>kcfg_AuthPkgNtlm</tabstop>
+  <tabstop>kcfg_AuthPkgU2u</tabstop>
  </tabstops>
- <resources/>
- <connections/>
+ <resources />
+ <connections />
 </ui>

@@ -8,23 +8,15 @@
 #include "remoteviewfactory.h"
 #include "settings.h"
 
-#include "ui_vncpreferences.h"
+#include "vncsettingsform.h"
 
 K_PLUGIN_CLASS(VncPreferences)
 
 VncPreferences::VncPreferences(QObject *parent)
     : KCModule(parent)
 {
-    Ui::VncPreferences vncUi;
-    vncUi.setupUi(widget());
-
-    // copying the RDP preferences... need to create generic code for the plugins.
-    vncUi.resolutionDummyLabel->hide();
-    vncUi.resolutionComboBox->hide();
-    vncUi.kcfg_ScalingHeight->setEnabled(true);
-    vncUi.kcfg_ScalingWidth->setEnabled(true);
-    vncUi.heightLabel->setEnabled(true);
-    vncUi.widthLabel->setEnabled(true);
+    m_ui.setupUi(widget());
+    setupVncSettingsForm(m_ui);
 
     addConfig(Settings::self(), widget());
 }
@@ -36,6 +28,13 @@ VncPreferences::~VncPreferences()
 void VncPreferences::load()
 {
     KCModule::load();
+    selectVncScalingSize(m_ui);
+}
+
+void VncPreferences::defaults()
+{
+    KCModule::defaults();
+    selectVncScalingSize(m_ui);
 }
 
 void VncPreferences::save()

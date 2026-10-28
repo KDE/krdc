@@ -246,8 +246,18 @@ and discovered connections.</para>
 <sect1 id="connection">
 <title>What happens when you connect</title>
 
-<para>The <guilabel>Host Configuration</guilabel> dialog contains settings for
-the selected protocol. Clear <guilabel>Show this dialog again for this
+<para>Before connecting to a new host, &krdc; asks for the settings that most often
+need a change: the display size, and the sound or connection type. Click
+<guibutton>All Settings…</guibutton> to see every setting for the host, and to give
+the connection a <guilabel>Name</guilabel> that the connection list shows instead of
+its address. The settings are
+grouped the same way as the default settings of the protocol in the
+<guilabel>Plugins</guilabel> preferences: <guilabel>Display</guilabel>,
+<guilabel>Local Resources</guilabel>, and for <acronym>RDP</acronym>
+<guilabel>Connection</guilabel> (session, gateway, proxy, and SSH tunnel) and
+<guilabel>Security</guilabel>. Click
+<guibutton>Connect</guibutton> to connect with the chosen settings. Clear
+<guilabel>Show this dialog again for this
 host</guilabel> to reuse them without being prompted on each connection.
 Settings are associated with the connection address; connecting by a different
 host name or IP address can use a different configuration.</para>
@@ -503,8 +513,9 @@ connection settings may take effect only after reconnecting.</para>
 </screenshot>
 </para>
 
-<para>The <guilabel>General</guilabel> tab controls the appearance of the
-remote desktop, input devices, and resources shared with the remote session.</para>
+<para>The <guilabel>Display</guilabel> tab controls the appearance of the
+remote desktop, and the <guilabel>Local Resources</guilabel> tab the sound,
+keyboard, and resources shared with the remote session.</para>
 
 <para><guilabel>Resolution</guilabel> selects the desktop size requested from
 the server. Choose a preset, the current window or screen size, or a custom
@@ -527,15 +538,83 @@ remote desktop; some acceleration modes require 32-bit color.
 key presses are interpreted correctly.</para>
 
 <para><guilabel>Sound:</guilabel> selects playback on this computer, playback
-on the remote computer, or no sound. <guilabel>Share Media:</guilabel> makes a
-local directory available to the remote session; leave it empty to disable
-drive sharing. <guilabel>Share Smartcard:</guilabel> specifies the smartcard
-name to redirect to the server.</para>
+on the remote computer, or no sound. <guilabel>Shared folder:</guilabel> makes
+a folder on this computer available to the remote session, which can read and
+write it. Choose <guilabel>Removable drives</guilabel> to share drives such as
+USB sticks as they are mounted, <guilabel>Downloads</guilabel> or
+<guilabel>Documents</guilabel>, or <guilabel>Other Folder…</guilabel> to pick any
+folder. No folder is shared unless you choose one. <guilabel>Shared
+smartcard:</guilabel> specifies the smartcard name to redirect to the server.</para>
 
-<para><guilabel>Admin (or console) session</guilabel> requests an administrative
-session on servers that support it. <guilabel>Prevent remote session
-lock</guilabel> sends periodic simulated mouse activity to keep the session
-active; server policies may still enforce locking.</para>
+<para><emphasis role="bold">Connection</emphasis></para>
+
+<para>The <guilabel>Connection</guilabel> tab sets which session you get on the
+remote computer and how the connection reaches it.</para>
+
+<para><guilabel>Connect to the console (admin) session</guilabel> requests the
+administrative session on servers that support it, instead of a new user session.
+<guilabel>Keep the remote session from locking</guilabel> sends periodic simulated
+mouse activity to keep the session active; server policies may still enforce
+locking.</para>
+
+<para>By default &krdc; connects directly to the remote desktop. Check one of the
+routes to show its settings; clearing it turns the route off and keeps its
+settings for later. The remote
+desktop address remains the address entered on the connection page.</para>
+
+<para>
+<screenshot>
+<screeninfo>&krdc; RDP preferences - Connection tab, gateway settings</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="rdp_preferences_gateway.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>&krdc; preferences - <guilabel>RDP</guilabel> gateway settings</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para><guilabel>Connect through a Remote Desktop Gateway</guilabel> routes the
+connection through an RDP gateway, which provides a route to a remote desktop on
+another network. Enter the gateway address in <guilabel>Server:</guilabel> as
+<userinput>host:port</userinput>, using the port supplied by your administrator.</para>
+
+<para>Enter the gateway account's <guilabel>Username:</guilabel>,
+<guilabel>Password:</guilabel>, and <guilabel>Domain:</guilabel> as required.
+These fields authenticate access to the gateway; the remote desktop may
+require separate credentials.</para>
+
+<para><guilabel>Transport type:</guilabel> offers <guilabel>Auto</guilabel>,
+<guilabel>HTTP</guilabel>, and <guilabel>RPC</guilabel>. Use
+<guilabel>Auto</guilabel> unless your administrator specifies a transport.</para>
+
+<para>
+<screenshot>
+<screeninfo>&krdc; RDP preferences - Connection tab, proxy settings</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="rdp_preferences_proxy.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>&krdc; preferences - <guilabel>RDP</guilabel> proxy settings</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para><guilabel>Connect through a proxy server</guilabel> routes the connection
+through a network proxy. Enter the proxy address in <guilabel>Server:</guilabel>
+using the form <userinput>host:port</userinput>, and select
+<guilabel>HTTP</guilabel> or <guilabel>SOCKS</guilabel> in
+<guilabel>Protocol:</guilabel>. If the proxy requires authentication, fill in
+<guilabel>Username:</guilabel> and <guilabel>Password:</guilabel> with the proxy
+credentials. These may differ from the credentials for the remote desktop.</para>
+
+<para>If SSH tunnel support is available, the host configuration dialog also
+offers <guilabel>Connect via SSH tunnel</guilabel> on this tab. See
+<xref linkend="ssh-tunnels"/> for its options.</para>
 
 <para><emphasis role="bold">Security</emphasis></para>
 
@@ -555,83 +634,21 @@ active; server policies may still enforce locking.</para>
 
 <para>The <guilabel>Security</guilabel> tab controls which security methods
 &krdc; offers when establishing the RDP connection. The
-<guilabel>NLA</guilabel>, <guilabel>TLS</guilabel>, <guilabel>RDP</guilabel>,
-and <guilabel>Ext</guilabel> check boxes enable the corresponding FreeRDP
-security modes. More than one can be enabled so that the client and server
-can negotiate a compatible method.</para>
+<guilabel>Protocols:</guilabel> check boxes enable Network Level Authentication
+(<guilabel>NLA</guilabel>), <guilabel>TLS</guilabel> encryption, standard
+<guilabel>RDP</guilabel> security, and extended Network Level Authentication
+(<guilabel>Ext</guilabel>). More than one can be enabled so that the client and
+server can negotiate a compatible method; at least one stays enabled.</para>
 
 <para><guilabel>TLS security level:</guilabel> sets the cryptographic security
 level required for TLS connections. A higher level imposes stricter
 requirements and may prevent connections to older servers.</para>
 
-<para><guilabel>Authentication Package List:</guilabel> passes a custom
-selection of authentication packages to FreeRDP. Leave it empty to use the
-default behavior, or enter the value supplied by your administrator. Change
-security options to match the server's requirements.</para>
-
-<para><emphasis role="bold">Proxy</emphasis></para>
-
-<para>
-<screenshot>
-<screeninfo>&krdc; RDP preferences - Proxy tab</screeninfo>
-	<mediaobject>
-	  <imageobject>
-	    <imagedata fileref="rdp_preferences_proxy.png" format="PNG"/>
-	  </imageobject>
-	  <textobject>
-	    <phrase>&krdc; preferences - <guilabel>RDP</guilabel> proxy tab</phrase>
-	  </textobject>
-	</mediaobject>
-</screenshot>
-</para>
-
-<para>The <guilabel>Proxy</guilabel> tab configures a network proxy used for
-the connection. Select <guilabel>HTTP</guilabel> or <guilabel>SOCKS</guilabel>
-in <guilabel>Protocol:</guilabel>, then enter the proxy address in
-<guilabel>Server:</guilabel> using the form <userinput>host:port</userinput>.</para>
-
-<para>If the proxy requires authentication, fill in
-<guilabel>Username:</guilabel> and <guilabel>Password:</guilabel> with the proxy
-credentials. These may differ from the credentials for the remote desktop.
-Leave <guilabel>Server:</guilabel> empty when no proxy is needed. The target
-remote desktop address remains the address entered on the connection page.</para>
-
-<para><emphasis role="bold">Gateway</emphasis></para>
-
-<para>
-<screenshot>
-<screeninfo>&krdc; RDP preferences - Gateway tab</screeninfo>
-	<mediaobject>
-	  <imageobject>
-	    <imagedata fileref="rdp_preferences_gateway.png" format="PNG"/>
-	  </imageobject>
-	  <textobject>
-	    <phrase>&krdc; preferences - <guilabel>RDP</guilabel> gateway tab</phrase>
-	  </textobject>
-	</mediaobject>
-</screenshot>
-</para>
-
-<para>The <guilabel>Gateway</guilabel> tab configures access through an RDP
-gateway, which provides a route to a remote desktop on another network.
-Enter the gateway address in <guilabel>Server:</guilabel> as
-<userinput>host:port</userinput>, using the port supplied by your administrator.
-Keep the destination computer's address on the main connection page.</para>
-
-<para>Enter the gateway account's <guilabel>Domain:</guilabel>,
-<guilabel>Username:</guilabel>, and <guilabel>Password:</guilabel> as required.
-These fields authenticate access to the gateway; the remote desktop may
-require separate credentials.</para>
-
-<para><guilabel>Transport type:</guilabel> offers <guilabel>Auto</guilabel>,
-<guilabel>HTTP</guilabel>, and <guilabel>RPC</guilabel>. Use
-<guilabel>Auto</guilabel> unless your administrator specifies a transport.
-Leave the gateway <guilabel>Server:</guilabel> field empty when connecting
-without an RDP gateway.</para>
-
-<para>If SSH tunnel support is available, an additional
-<guilabel>SSH tunnel</guilabel> tab appears in the host configuration dialog.
-See <xref linkend="ssh-tunnels"/> for its options.</para>
+<para><guilabel>Authentication packages:</guilabel> selects the packages that
+may be used to sign in with Network Level Authentication: <guilabel>Kerberos</guilabel>,
+<guilabel>NTLM</guilabel>, and <guilabel>U2U</guilabel>. Unchecked packages are
+not used. For Kerberos-only sign-in, such as with Active Directory Protected
+Users accounts, uncheck <guilabel>NTLM</guilabel>.</para>
 </sect1>
 
 <sect1 id="spice-settings">

@@ -9,6 +9,7 @@ target_sources(krdc_rdpplugin PRIVATE
     rdpviewfactory.cpp
     rdpview.cpp
     rdpsession.cpp
+    sharedfolderfield.cpp
 )
 
 ki18n_wrap_ui(krdc_rdpplugin
@@ -48,6 +49,7 @@ add_library(kcm_krdc_rdpplugin)
 
 target_sources(kcm_krdc_rdpplugin PRIVATE
     rdppreferences.cpp
+    sharedfolderfield.cpp
 )
 
 target_link_libraries(kcm_krdc_rdpplugin

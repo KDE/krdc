@@ -326,9 +326,17 @@ void MainWindow::newConnection(const QUrl &newUrl, bool switchFullscreenWhenConn
 
     // Configure the view
     HostPreferences *prefs = view->hostPreferences();
+    prefs->setConnectionName(tabName);
     // if the user press cancel
     if (!prefs->showDialogIfNeeded(this))
         return;
+
+    // The settings dialog may have named the connection; only its history entry follows, the
+    // user's own bookmarks keep their names.
+    const QString name = prefs->connectionName();
+    if (name != tabName) {
+        m_bookmarkManager->renameHistoryBookmark(url, name);
+    }
 
     view->showLocalCursor(prefs->showLocalCursor() ? RemoteView::CursorOn : RemoteView::CursorOff);
     view->setViewOnly(prefs->viewOnly());
@@ -416,7 +424,7 @@ void MainWindow::newConnection(const QUrl &newUrl, bool switchFullscreenWhenConn
     if (indexOfNewConnectionWidget >= 0)
         m_tabWidget->removeTab(indexOfNewConnectionWidget);
 
-    const QString tabTitle = tabName.isEmpty() ? url.toDisplayString(QUrl::StripTrailingSlash) : tabName;
+    const QString tabTitle = name.isEmpty() ? url.toDisplayString(QUrl::StripTrailingSlash) : name;
     const QIcon tabIcon = QIcon::fromTheme(QStringLiteral("krdc"));
     const int insertIndex = std::exchange(m_insertTabIndex, -1);
     const int newIndex =
@@ -565,7 +573,7 @@ void MainWindow::statusChanged(RemoteView::RemoteStatus status)
         }
 
         if (Settings::rememberHistory()) {
-            m_bookmarkManager->addHistoryBookmark(view);
+            m_bookmarkManager->addHistoryBookmark(view, connectionName(m_remoteViewMap.key(view), view->url()));
         }
 
         break;
@@ -917,7 +925,11 @@ void MainWindow::showSettingsDialog(const QString &url, const QString &bookmarkA
     }
 
     if (prefs) {
-        prefs->setShownWhileConnected(true);
+        // Settings changed while a connection to this host is open may only apply after reconnecting.
+        const bool hostOpen = std::any_of(m_remoteViewMap.cbegin(), m_remoteViewMap.cend(), [&originalUrlString](RemoteView *view) {
+            return view->url().toDisplayString(QUrl::StripTrailingSlash) == originalUrlString;
+        });
+        prefs->setShownWhileConnected(hostOpen);
         if (!selectedBookmarkAddress.isEmpty()) {
             prefs->setConnectionDetails(selectedBookmarkName, originalUrl);
         }
@@ -1641,10 +1653,7 @@ void MainWindow::reconnectInTab(QWidget *tab, const QUrl &url)
         return;
     }
 
-    QString tabName = m_tabWidget->tabText(index).remove(QLatin1Char('&'));
-    if (tabName == url.toDisplayString(QUrl::StripTrailingSlash)) {
-        tabName.clear();
-    }
+    const QString tabName = connectionName(tab, url);
 
     if (RemoteView *view = m_remoteViewMap.take(tab)) {
         m_savedGrabStatesBeforeFullscreen.remove(view);
@@ -1660,6 +1669,12 @@ void MainWindow::reconnectInTab(QWidget *tab, const QUrl &url)
         m_tabWidget->removePage(tab);
         tab->deleteLater();
     }
+}
+
+QString MainWindow::connectionName(QWidget *tab, const QUrl &url) const
+{
+    const QString name = m_tabWidget->tabText(m_tabWidget->indexOf(tab)).remove(QLatin1Char('&'));
+    return name == url.toDisplayString(QUrl::StripTrailingSlash) ? QString() : name;
 }
 
 RemoteViewFactory *MainWindow::factoryFor(const QUrl &url) const

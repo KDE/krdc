@@ -21,6 +21,10 @@ public:
 
     void save() override;
     void load() override;
+    void defaults() override;
+
+private:
+    Ui::VncPreferences m_ui;
 };
 
 #endif // VNCPREFERENCES_H

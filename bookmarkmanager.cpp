@@ -135,7 +135,7 @@ BookmarkManager::~BookmarkManager()
     delete m_bookmarkMenu;
 }
 
-void BookmarkManager::addHistoryBookmark(RemoteView *view)
+void BookmarkManager::addHistoryBookmark(RemoteView *view, const QString &title)
 {
     KBookmark bm = m_historyGroup.first();
     const QString urlString = urlForView(view);
@@ -153,10 +153,23 @@ void BookmarkManager::addHistoryBookmark(RemoteView *view)
 
     if (bm.isNull()) {
         qCDebug(KRDC) << "Add new history bookmark.";
-        bm = m_historyGroup.addBookmark(titleForUrl(url), url, QString());
+        bm = m_historyGroup.addBookmark(title.isEmpty() ? titleForUrl(url) : title, url, QString());
         bm.updateAccessMetadata();
         m_historyGroup.moveBookmark(bm, KBookmark());
         m_manager->emitChanged(m_historyGroup);
+    }
+}
+
+void BookmarkManager::renameHistoryBookmark(const QUrl &url, const QString &title)
+{
+    // History entries hold the address as addHistoryBookmark() stores it.
+    const QUrl historyUrl = QUrl::fromUserInput(titleForUrl(url));
+    for (KBookmark bm = m_historyGroup.first(); !bm.isNull(); bm = m_historyGroup.next(bm)) {
+        if (bm.url() == historyUrl) {
+            bm.setFullText(title.isEmpty() ? titleForUrl(url) : title);
+            m_manager->emitChanged(m_historyGroup);
+            return;
+        }
     }
 }
 
