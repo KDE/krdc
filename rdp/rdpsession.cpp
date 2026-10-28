@@ -8,6 +8,10 @@
 #include "rdpdisp.h"
 #include "rdpgraphics.h"
 #include "rdphostpreferences.h"
+#include "sharedfolderfield.h"
+#ifdef HAVE_RDPDR_HOTPLUG
+#include "rdpremovabledrives.h"
+#endif
 
 #include <algorithm>
 #include <limits>
@@ -25,6 +29,7 @@
 #endif
 
 #include <freerdp/addin.h>
+#include <freerdp/channels/rdpdr.h>
 #include <freerdp/channels/rdpgfx.h>
 #include <freerdp/client.h>
 #include <freerdp/client/channels.h>
@@ -202,6 +207,9 @@ BOOL RdpSession::preConnect(freerdp *rdp)
         return false;
     }
 
+    if (PubSub_SubscribeChannelInitialized(ctx->pubSub, channelInitialized) < 0) {
+        return false;
+    }
     if (PubSub_SubscribeChannelConnected(ctx->pubSub, channelConnected) < 0) {
         return false;
     }
@@ -671,12 +679,25 @@ int RdpSession::clientContextStart(rdpContext *context)
     }
 
     const QString sharedFolder = preferences->shareMedia();
-    if (!sharedFolder.isEmpty()) {
+#ifdef HAVE_RDPDR_HOTPLUG
+    session->m_removableDrives.reset();
+#endif
+    if (sharedFolder == SharedFolderField::RemovableDrives) {
+#ifdef HAVE_RDPDR_HOTPLUG
+        // "*" makes FreeRDP check for drives when connecting and then every second, but on its own
+        // it takes every mount below /media, /mnt and the like, network shares included.
+        // channelInitialized() lets m_removableDrives do the check instead.
+        session->m_removableDrives = std::make_unique<RdpRemovableDrives>();
+        const char *params[2] = {"drive", "*"};
+        freerdp_client_add_device_channel(settings, 2, params);
+#else
+        qCWarning(KRDC) << "Sharing removable drives needs FreeRDP 3.16 or later and Solid";
+#endif
+    } else if (QDir::isAbsolutePath(sharedFolder)) {
         QByteArray name = "drive";
         QByteArray value = sharedFolder.toUtf8();
         // Without a name, FreeRDP names a folder after its whole path, as in "_home_user_share".
-        // Other values, such as "DynamicDrives", name their drives themselves.
-        QByteArray driveName = QDir::isAbsolutePath(sharedFolder) ? QDir(sharedFolder).dirName().toUtf8() : QByteArray();
+        QByteArray driveName = QDir(sharedFolder).dirName().toUtf8();
         if (driveName.isEmpty()) {
             const char *params[2] = {name.data(), value.data()};
             freerdp_client_add_device_channel(settings, 2, params);
@@ -684,6 +705,8 @@ int RdpSession::clientContextStart(rdpContext *context)
             const char *params[3] = {name.data(), driveName.data(), value.data()};
             freerdp_client_add_device_channel(settings, 3, params);
         }
+    } else if (!sharedFolder.isEmpty()) {
+        qCWarning(KRDC) << "Not sharing" << sharedFolder << "as it is not the path of a folder";
     }
 
     if (!preferences->smartcardName().isEmpty()) {
@@ -1241,6 +1264,29 @@ BOOL RdpSession::playSound(rdpContext *context, const PLAY_SOUND_UPDATE *play_so
     Q_UNUSED(play_sound);
     QApplication::beep();
     return true;
+}
+
+void RdpSession::channelInitialized(void *context, const ChannelInitializedEventArgs *e)
+{
+#ifdef HAVE_RDPDR_HOTPLUG
+    // The drive redirection channel is initialized before it checks for drives.
+    if (strcmp(e->name, RDPDR_SVC_CHANNEL_NAME) == 0) {
+        auto krdp = reinterpret_cast<RdpContext *>(context);
+        WINPR_ASSERT(krdp);
+
+        auto session = krdp->session;
+        WINPR_ASSERT(session);
+
+        if (session->m_removableDrives) {
+            auto rdpdr = reinterpret_cast<RdpdrClientContext *>(e->pInterface);
+            WINPR_ASSERT(rdpdr);
+            session->m_removableDrives->attach(rdpdr);
+        }
+    }
+#else
+    Q_UNUSED(context)
+    Q_UNUSED(e)
+#endif
 }
 
 void RdpSession::channelConnected(void *context, const ChannelConnectedEventArgs *e)

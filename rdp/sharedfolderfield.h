@@ -11,8 +11,8 @@
 
 /**
  * Picks the folder that an RDP session shares: none, the removable drives, a standard folder,
- * or any other folder. The folder is empty when nothing is shared, and otherwise a drive as
- * FreeRDP takes it: "DynamicDrives" for the removable drives, or the path of a folder.
+ * or any other folder. The folder is empty when nothing is shared, and otherwise
+ * RemovableDrives or the path of a folder.
  */
 class SharedFolderField : public QComboBox
 {
@@ -20,6 +20,9 @@ class SharedFolderField : public QComboBox
     Q_PROPERTY(QString folder READ folder WRITE setFolder NOTIFY folderChanged USER true)
 
 public:
+    /** The folder that stands for the removable drives, including ones plugged in later. */
+    static inline const QString RemovableDrives = QStringLiteral("DynamicDrives");
+
     explicit SharedFolderField(QWidget *parent = nullptr);
 
     QString folder() const;

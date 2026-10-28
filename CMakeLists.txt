@@ -136,6 +136,11 @@ if(WITH_RDP)
     find_package(WinPR 3 REQUIRED)
     find_package(FreeRDP-Client 3 REQUIRED)
     find_package(KF6Screen ${KF_MIN_VERSION})
+    find_package(KF6Solid ${KF_MIN_VERSION})
+    set_package_properties(KF6Solid PROPERTIES
+        PURPOSE "Sharing removable drives with RDP sessions, with FreeRDP 3.16 or later"
+        TYPE OPTIONAL
+    )
 
     MESSAGE(STATUS "Found FreeRDP version ${FreeRDP_VERSION_MAJOR}.${FreeRDP_VERSION_MINOR}.${FreeRDP_VERSION_REVISION}")
 

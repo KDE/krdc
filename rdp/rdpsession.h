@@ -24,6 +24,7 @@
 class RdpClipboard;
 class RdpDisplay;
 class RdpGraphics;
+class RdpRemovableDrives;
 class RdpSession;
 class RdpView;
 class RdpHostPreferences;
@@ -169,6 +170,7 @@ public:
     static BOOL resizeDisplay(rdpContext *);
     static BOOL playSound(rdpContext *, const PLAY_SOUND_UPDATE *);
 
+    static void channelInitialized(void *context, const ChannelInitializedEventArgs *e);
     static void channelConnected(void *context, const ChannelConnectedEventArgs *e);
     static void channelDisconnected(void *context, const ChannelDisconnectedEventArgs *e);
 
@@ -212,6 +214,9 @@ private:
     std::unique_ptr<RdpClipboard> m_clipboard;
     std::unique_ptr<RdpDisplay> m_display;
     std::unique_ptr<RdpGraphics> m_graphics;
+#ifdef HAVE_RDPDR_HOTPLUG
+    std::unique_ptr<RdpRemovableDrives> m_removableDrives;
+#endif
 
     State m_state = State::Initial;
 

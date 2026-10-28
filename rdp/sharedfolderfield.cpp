@@ -16,7 +16,12 @@ SharedFolderField::SharedFolderField(QWidget *parent)
     : QComboBox(parent)
 {
     addItem(i18nc("@item:inlistbox shared folder", "Not shared"), QString());
-    addItem(i18nc("@item:inlistbox shared folder", "Removable drives"), QStringLiteral("DynamicDrives"));
+#ifdef HAVE_RDPDR_HOTPLUG
+    addItem(i18nc("@item:inlistbox shared folder", "Removable drives"), RemovableDrives);
+    setItemData(count() - 1,
+                i18nc("@info:tooltip", "USB drives and memory cards, including ones plugged in during the session. Network shares are not included."),
+                Qt::ToolTipRole);
+#endif
     // The home folder is not offered: it holds keys and passwords that a remote computer should
     // not see. A location without a folder of its own falls back to it, and is left out too.
     const auto addStandardFolder = [this](QStandardPaths::StandardLocation location, const QString &name) {
@@ -52,8 +57,17 @@ void SharedFolderField::setFolder(const QString &folder)
     int index = findData(folder);
     if (index < 0) {
         // A folder that is not offered gets an entry of its own, which the next one replaces.
+        // A value that is no folder, such as the removable drives in a build that cannot share
+        // them, is kept as it is, so that showing the settings does not change it.
         const QString name = QDir(folder).dirName();
-        const QString text = name.isEmpty() ? folder : i18nc("@item:inlistbox shared folder, %1 its name, %2 its path", "%1 (%2)", name, folder);
+        QString text;
+        if (!QDir::isAbsolutePath(folder)) {
+            text = i18nc("@item:inlistbox shared folder, %1 a stored value", "%1 (not supported)", folder);
+        } else if (name.isEmpty()) {
+            text = folder;
+        } else {
+            text = i18nc("@item:inlistbox shared folder, %1 its name, %2 its path", "%1 (%2)", name, folder);
+        }
         if (m_otherFolderEntry < 0) {
             m_otherFolderEntry = otherFolderIndex() - 1;
             insertItem(m_otherFolderEntry, text, folder);

@@ -72,6 +72,14 @@ if(HAIKU)
     target_link_libraries(kcm_krdc_rdpplugin network)
 endif()
 
+# Sharing removable drives as they are plugged in replaces the drive check of FreeRDP 3.16.
+if(KF6Solid_FOUND AND FreeRDP_VERSION VERSION_GREATER_EQUAL 3.16)
+    target_sources(krdc_rdpplugin PRIVATE rdpremovabledrives.cpp)
+    target_link_libraries(krdc_rdpplugin KF6::Solid)
+    target_compile_definitions(krdc_rdpplugin PRIVATE HAVE_RDPDR_HOTPLUG)
+    target_compile_definitions(kcm_krdc_rdpplugin PRIVATE HAVE_RDPDR_HOTPLUG)
+endif()
+
 add_dependencies(kcm_krdc_rdpplugin krdc_rdpplugin)
 
 install(TARGETS kcm_krdc_rdpplugin DESTINATION ${KDE_INSTALL_PLUGINDIR}/krdc/kcms)
