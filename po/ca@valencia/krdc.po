@@ -3,7 +3,7 @@
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# SPDX-FileCopyrightText: 2003-2004, 2011, 2016-2018, 2020, 2023 Antoni Bella Pérez <antonibella5@yahoo.com>
+# SPDX-FileCopyrightText: 2003-2004, 2011, 2016-2018, 2020, 2023, 2026 Antoni Bella Pérez <antonibella5@yahoo.com>
 # SPDX-FileCopyrightText: 2005-2010, 2012-2016, 2019-2021, 2023-2026 Josep M. Ferrer <txemaq@gmail.com>
 # SPDX-FileCopyrightText: 2004-2005 Albert Astals Cid <aacid@kde.org>
 msgid ""
@@ -11,16 +11,16 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-03-04 00:45+0000\n"
-"PO-Revision-Date: 2026-08-28 10:39+0200\n"
-"Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
+"PO-Revision-Date: 2026-10-28 18:33+0100\n"
+"Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 25.04.0\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
+"X-Generator: Lokalize 25.12.3\n"
 "X-Poedit-Language: Catalan\n"
 
 #, kde-format
@@ -150,7 +150,7 @@ msgstr "Protocol predeterminat:"
 #: config/general.ui:145
 #, kde-format
 msgid "vnc"
-msgstr "VNC"
+msgstr "vnc"
 
 #. i18n: ectx: property (title), widget (QGroupBox, tabGroupBox)
 #: config/general.ui:157
@@ -186,25 +186,25 @@ msgstr "Posició de la pestanya:"
 #: config/general.ui:194
 #, kde-format
 msgid "Top"
-msgstr "Dalt"
+msgstr "A dalt"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TabPosition)
 #: config/general.ui:199
 #, kde-format
 msgid "Bottom"
-msgstr "Baix"
+msgstr "A baix"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TabPosition)
 #: config/general.ui:204
 #, kde-format
 msgid "Left"
-msgstr "Esquerra"
+msgstr "A l'esquerra"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TabPosition)
 #: config/general.ui:209
 #, kde-format
 msgid "Right"
-msgstr "Dreta"
+msgstr "A la dreta"
 
 #: config/hostpreferenceslist.cpp:30
 #, kde-format
@@ -358,7 +358,7 @@ msgstr "Túnel SSH"
 #: core/sshtunnelwidget.ui:32
 #, kde-format
 msgid "Connect via SSH tunnel"
-msgstr "Connecta a través del túnel SSH"
+msgstr "Connecta a través de túnel SSH"
 
 #. i18n: ectx: property (title), widget (QGroupBox, ssh_groupBox)
 #: core/sshtunnelwidget.ui:39
@@ -370,7 +370,7 @@ msgstr "Opcions del túnel SSH"
 #: core/sshtunnelwidget.ui:45
 #, kde-format
 msgid "Tunnel via loopback address"
-msgstr "Túnel a través de l'adreça del bucle tancat"
+msgstr "Túnel a través d'adreça de bucle tancat"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: core/sshtunnelwidget.ui:52
@@ -790,7 +790,7 @@ msgstr ""
 #: rdp/rdppreferences.ui:56
 #, kde-format
 msgid "Small (1280x720)"
-msgstr "Baixa (1280x720)"
+msgstr "Xicoteta (1280x720)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:61
@@ -845,7 +845,7 @@ msgstr ""
 #: rdp/rdppreferences.ui:126 vnc/vncpreferences.ui:168
 #, kde-format
 msgid "H&eight:"
-msgstr "A&ltura:"
+msgstr "A&lçària:"
 
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Height)
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_ScalingHeight)
@@ -912,13 +912,13 @@ msgstr "Utilitza la millor disponible"
 #: rdp/rdppreferences.ui:250
 #, kde-format
 msgid "True Color with Alpha (32 Bit)"
-msgstr "Color real amb alfa (24 bits)"
+msgstr "Color verdader amb alfa (32 bits)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
 #: rdp/rdppreferences.ui:255
 #, kde-format
 msgid "True Color (24 Bit)"
-msgstr "Color real (24 bits)"
+msgstr "Color verdader (24 bits)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
 #: rdp/rdppreferences.ui:260
@@ -1251,7 +1251,7 @@ msgstr "Desactiva el so"
 #: rdp/rdppreferences.ui:650
 #, kde-format
 msgid "Share Media:"
-msgstr "Compartiu els suports:"
+msgstr "Compartiu multimèdia:"
 
 #. i18n: ectx: property (text), widget (QLabel, shareSmartcardLabel)
 #: rdp/rdppreferences.ui:676
@@ -1365,7 +1365,7 @@ msgstr "256 bits"
 #: rdp/rdppreferences.ui:833
 #, kde-format
 msgid "Authentication Package List:"
-msgstr "Llista de paquets d'autenticació:"
+msgstr "Autenticació de la llista de paquets:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, proxySettingsTab)
 #: rdp/rdppreferences.ui:849
@@ -1514,7 +1514,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Login Failure"
-msgstr "Fallada en iniciar la sessió"
+msgstr "No s'ha pogut fer l'inici de la sessió"
 
 #: rdp/rdpview.cpp:297
 #, kde-format
@@ -1628,7 +1628,7 @@ msgstr "S'ha produït un error desconegut"
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Logon Error"
-msgstr "S'ha produït un error de connexió"
+msgstr "S'ha produït un error d'inici de sessió"
 
 #: rdp/rdpviewfactory.cpp:26
 #, kde-format
@@ -1719,7 +1719,7 @@ msgstr "No s'ha trobat el servidor."
 #: vnc/vncclientthread.cpp:349 vnc/vncclientthread.cpp:423
 #, kde-format
 msgid "VNC authentication failed."
-msgstr "No s'ha pogut fer l'autenticació de VNC."
+msgstr "No s'ha pogut fer l'autenticació VNC."
 
 #: vnc/vncclientthread.cpp:354
 #, kde-format
@@ -1780,10 +1780,10 @@ msgstr ""
 "Utilitzeu-la per a especificar el rendiment de la vostra connexió. Cal "
 "tindre en compte que haureu de seleccionar la velocitat de l'enllaç més lent "
 "-encara que tingueu una connexió molt ràpida-, açò no vos ajudarà si "
-"l'ordinador remot utilitza un mòdem lent. El fet d'escollir una qualitat "
-"massa alta pot resultar en uns temps de resposta molt lents. Escollir una "
-"qualitat massa baixa pot incrementar la latència en connexions ràpides i "
-"resulta en una baixa qualitat de la imatge, especialment en el mode «Baixa "
+"l'ordinador remot utilitza un mòdem lent. Si es tria un nivell de qualitat "
+"massa alt en un enllaç lent, els temps de resposta seran més llargs. "
+"Escollir una qualitat més baixa augmentarà la latència en connexions d'alta "
+"velocitat i reduirà la qualitat de la imatge, especialment en el mode «Baixa "
 "qualitat»."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Quality)
@@ -1845,8 +1845,8 @@ msgstr "Molt gran (1600x1200)"
 #, kde-format
 msgid "Don't copy passwords from supported password managers to remote hosts"
 msgstr ""
-"No copieu contrasenyes des dels gestors de contrasenyes admesos a amfitrions "
-"remots"
+"No copieu les contrasenyes dels gestors de contrasenyes admesos als "
+"amfitrions remots"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, dont_copy_passwords)
 #: vnc/vncpreferences.ui:214
@@ -1873,7 +1873,7 @@ msgstr "No s'ha pogut fer l'autenticació. Torneu-ho a provar."
 #: vnc/vncview.cpp:266
 #, kde-format
 msgid "VNC failure"
-msgstr "S'ha produït un error de VNC"
+msgstr "Ha fallat VNC"
 
 #: vnc/vncviewfactory.cpp:47
 #, kde-format
