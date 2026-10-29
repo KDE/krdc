@@ -8,6 +8,7 @@
 #include <QFileInfo>
 #include <QImage>
 #include <QMimeData>
+#include <QStringDecoder>
 #include <QUrl>
 #include <QtEndian>
 
@@ -310,6 +311,7 @@ UINT RdpClipboard::onSendClientFormatList(CliprdrClientContext *cliprdr)
     UINT32 *pFormatIds = nullptr;
     UINT32 numFormats = ClipboardGetFormatIds(kclip->m_clipboard, &pFormatIds);
     auto formats = new CLIPRDR_FORMAT[numFormats];
+    UINT32 count = 0;
 
     if (!formats) {
         free(pFormatIds);
@@ -317,18 +319,32 @@ UINT RdpClipboard::onSendClientFormatList(CliprdrClientContext *cliprdr)
         return ERROR_INTERNAL_ERROR;
     }
 
+    // When the text is offered as CF_UNICODETEXT, leave out the ANSI formats
+    // and CF_LOCALE. WinPR would fill them with UTF-8 or escaped text marked as
+    // en-US, while Windows synthesizes them from CF_UNICODETEXT in the code
+    // page of the server.
+    bool haveUnicodeText = false;
+    for (UINT32 index = 0; index < numFormats; index++) {
+        haveUnicodeText = haveUnicodeText || (pFormatIds[index] == CF_UNICODETEXT);
+    }
+
     for (UINT32 index = 0; index < numFormats; index++) {
         UINT32 formatId = pFormatIds[index];
+        if (haveUnicodeText && ((formatId == CF_TEXT) || (formatId == CF_OEMTEXT) || (formatId == CF_LOCALE))) {
+            continue;
+        }
+
         const char *formatName = ClipboardGetFormatName(kclip->m_clipboard, formatId);
-        formats[index].formatId = formatId;
-        formats[index].formatName = nullptr;
+        CLIPRDR_FORMAT &format = formats[count++];
+        format.formatId = formatId;
+        format.formatName = nullptr;
 
         if ((formatId > CF_MAX) && formatName) {
-            formats[index].formatName = _strdup(formatName);
+            format.formatName = _strdup(formatName);
 
-            if (!formats[index].formatName) {
+            if (!format.formatName) {
                 free(pFormatIds);
-                cliprdr_format_free(formats, numFormats);
+                cliprdr_format_free(formats, count);
                 return ERROR_INTERNAL_ERROR;
             }
         }
@@ -337,18 +353,18 @@ UINT RdpClipboard::onSendClientFormatList(CliprdrClientContext *cliprdr)
     CLIPRDR_FORMAT_LIST formatList = {};
     formatList.common.msgType = CB_FORMAT_LIST;
     formatList.common.msgFlags = 0;
-    formatList.numFormats = numFormats;
+    formatList.numFormats = count;
     formatList.formats = formats;
 
     if (!cliprdr->ClientFormatList) {
         free(pFormatIds);
-        cliprdr_format_free(formats, numFormats);
+        cliprdr_format_free(formats, count);
         return ERROR_INTERNAL_ERROR;
     }
 
     auto rc = cliprdr->ClientFormatList(cliprdr, &formatList);
     free(pFormatIds);
-    cliprdr_format_free(formats, numFormats);
+    cliprdr_format_free(formats, count);
     return rc;
 }
 
@@ -490,15 +506,13 @@ UINT RdpClipboard::onServerFormatList(CliprdrClientContext *cliprdr, const CLIPR
 
     for (auto format : kclip->m_serverFormats) {
         if (format->formatId == CF_UNICODETEXT) {
-            if ((rc = onSendClientFormatDataRequest(cliprdr, CF_UNICODETEXT)) != CHANNEL_RC_OK)
-                return rc;
+            return onSendClientFormatDataRequest(cliprdr, CF_UNICODETEXT);
+        }
+    }
 
-            return CHANNEL_RC_OK;
-        } else if (format->formatId == CF_TEXT) {
-            if ((rc = onSendClientFormatDataRequest(cliprdr, CF_TEXT)) != CHANNEL_RC_OK)
-                return rc;
-
-            return CHANNEL_RC_OK;
+    for (auto format : kclip->m_serverFormats) {
+        if (format->formatId == CF_TEXT) {
+            return onSendClientFormatDataRequest(cliprdr, CF_TEXT);
         }
     }
 
@@ -627,15 +641,22 @@ UINT RdpClipboard::onServerFormatDataResponse(CliprdrClientContext *cliprdr, con
     const BYTE *rawData = reinterpret_cast<const BYTE *>(formatDataResponse->requestedFormatData);
 
     if ((formatId == CF_TEXT) || (formatId == CF_UNICODETEXT)) {
-        auto data = reinterpret_cast<char *>(ClipboardGetData(kclip->m_clipboard, CF_TEXT, &size));
+        // Read the text as CF_UNICODETEXT. Since WinPR 3.32.2, the CF_TEXT it
+        // converts from CF_UNICODETEXT is ASCII with \uXXXX escapes, not UTF-8.
+        auto data = reinterpret_cast<char *>(ClipboardGetData(kclip->m_clipboard, CF_UNICODETEXT, &size));
         if (!data) {
             return CHANNEL_RC_OK;
         }
-        const size_t textSize = strnlen(data, size);
+        QString text = QStringDecoder(QStringDecoder::Utf16LE).decode(QByteArrayView(data, size));
+        free(data);
+        const qsizetype end = text.indexOf(QChar::Null);
+        if (end >= 0) {
+            text.truncate(end);
+        }
+        text.replace(QLatin1String("\r\n"), QLatin1String("\n"));
 
         QMimeData *mimeData = new QMimeData;
-        mimeData->setText(QString::fromUtf8(data, int(textSize)));
-        free(data);
+        mimeData->setText(text);
         kclip->m_krdp->session->rdpView()->remoteClipboardChanged(mimeData);
     } else if ((formatId == CF_DIB) || (formatId == CF_DIBV5)) {
         QImage image = dibToQImage(rawData, size);
@@ -840,8 +861,17 @@ bool RdpClipboard::sendClipboard(const QMimeData *data)
         if (text.isEmpty()) {
             ClipboardEmpty(m_clipboard);
         } else {
-            QByteArray bytes = text.toUtf8();
-            ClipboardSetData(m_clipboard, CF_TEXT, bytes.data(), bytes.size() + 1);
+            // CF_TEXT is ANSI text in the code page given by CF_LOCALE, not UTF-8.
+            // Store the text as CF_UNICODETEXT instead: UTF-16LE with CRLF line
+            // endings and a terminating NUL.
+            QString unicodeText = text;
+            unicodeText.replace(QLatin1String("\r\n"), QLatin1String("\n"));
+            unicodeText.replace(QLatin1Char('\n'), QLatin1String("\r\n"));
+            QByteArray bytes((unicodeText.size() + 1) * qsizetype(sizeof(quint16)), Qt::Uninitialized);
+            qToLittleEndian<quint16>(unicodeText.utf16(), unicodeText.size() + 1, bytes.data());
+            if (!ClipboardSetData(m_clipboard, CF_UNICODETEXT, bytes.constData(), UINT32(bytes.size()))) {
+                qCWarning(KRDC) << "Failed to store clipboard text";
+            }
         }
 
         onSendClientFormatList(m_cliprdr);
