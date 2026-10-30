@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-10-29 00:53+0000\n"
-"PO-Revision-Date: 2026-10-27 10:24+0100\n"
+"PO-Revision-Date: 2026-10-29 11:00+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -926,11 +926,10 @@ msgid "Connect to the network or VPN the remote computer is on."
 msgstr "Connecteu-vos a la xarxa o VPN on està l'ordinador remot."
 
 #: core/hostpreferences.cpp:308
-#, fuzzy, kde-format
-#| msgid "Connected to %1"
+#, kde-format
 msgctxt "@title:window %1 is a host name"
 msgid "Connect to %1"
-msgstr "Connectat a %1"
+msgstr "Connecta a %1"
 
 #: core/hostpreferences.cpp:315
 #, kde-format
@@ -941,8 +940,7 @@ msgstr ""
 "connecteu de nou amb aquest servidor."
 
 #: core/hostpreferences.cpp:338
-#, fuzzy, kde-format
-#| msgid "Connect"
+#, kde-format
 msgctxt "@action:button"
 msgid "Connect"
 msgstr "Connecta"
@@ -970,11 +968,10 @@ msgid "Show this dialog again for this host"
 msgstr "Mostra aquest diàleg una altra vegada per a aquest servidor"
 
 #: core/hostpreferences.cpp:428
-#, fuzzy, kde-format
-#| msgid "Settings"
+#, kde-format
 msgctxt "@action:button"
 msgid "All Settings…"
-msgstr "Arranjament"
+msgstr "Tota la configuració…"
 
 #. i18n: ectx: label, entry (OpenSessions), group (General)
 #: core/krdc.kcfg:16
@@ -1117,7 +1114,7 @@ msgstr "Túnel SSH"
 #: core/sshtunnelwidget.ui:35
 #, kde-format
 msgid "Connect via SSH tunnel"
-msgstr "Connecta a través de túnel SSH"
+msgstr "Connecta a través d'un túnel SSH"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: core/sshtunnelwidget.ui:42
@@ -1782,10 +1779,9 @@ msgstr "Color reduït (8 bits)"
 #. i18n: ectx: property (text), widget (QLabel, localResourcesHeading)
 #: rdp/rdppreferences.ui:448 spice/spicepreferences.ui:242
 #: vnc/vncpreferences.ui:237
-#, fuzzy, kde-format
-#| msgid "Local Cursor"
+#, kde-format
 msgid "Local Resources"
-msgstr "Cursor local"
+msgstr "Recursos locals"
 
 #. i18n: ectx: property (text), widget (QLabel, soundLabel)
 #: rdp/rdppreferences.ui:454
@@ -1831,10 +1827,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:530
-#, fuzzy, kde-format
-#| msgid "On This Computer"
+#, kde-format
 msgid "Same as This Computer"
-msgstr "En aquest ordinador"
+msgstr "El mateix que aquest ordinador"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:535
@@ -2060,23 +2055,22 @@ msgstr "Turc (tr)"
 
 #. i18n: ectx: property (text), widget (QLabel, shareMediaLabel)
 #: rdp/rdppreferences.ui:723
-#, fuzzy, kde-format
-#| msgid "Share Media:"
+#, kde-format
 msgid "Shared folder:"
-msgstr "Compartició multimèdia:"
+msgstr "Carpeta compartida:"
 
 #. i18n: ectx: property (toolTip), widget (SharedFolderField, kcfg_ShareMedia)
 #: rdp/rdppreferences.ui:739
 #, kde-format
 msgid "A folder on this computer that the remote computer can read and write."
 msgstr ""
+"Una carpeta en aquest ordinador que l'ordinador remot pot llegir i escriure."
 
 #. i18n: ectx: property (text), widget (QLabel, shareSmartcardLabel)
 #: rdp/rdppreferences.ui:746
-#, fuzzy, kde-format
-#| msgid "Share Smartcard:"
+#, kde-format
 msgid "Shared smartcard:"
-msgstr "Comparteix la targeta intel·ligent:"
+msgstr "Targeta intel·ligent compartida:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, connectionTab)
 #: rdp/rdppreferences.ui:760
@@ -2086,34 +2080,31 @@ msgstr "Connexió"
 
 #. i18n: ectx: property (text), widget (QLabel, sessionLabel)
 #: rdp/rdppreferences.ui:766
-#, fuzzy, kde-format
-#| msgid "Sessions"
+#, kde-format
 msgid "Session:"
-msgstr "Sessions"
+msgstr "Sessió:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ConsoleMode)
 #: rdp/rdppreferences.ui:773
-#, fuzzy, kde-format
-#| msgid "Admin (or console) session"
+#, kde-format
 msgid "Connect to the console (admin) session"
-msgstr "Sessió d'administració (o consola)"
+msgstr "Connecta a la sessió de consola (administració)"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_ConsoleMode)
 #: rdp/rdppreferences.ui:776
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "Connect to the network or VPN the remote computer is on."
+#, kde-format
 msgid ""
 "Connect to the session an administrator uses to manage the remote computer, "
 "instead of a new user session."
-msgstr "Connecteu-vos a la xarxa o VPN on està l'ordinador remot."
+msgstr ""
+"Connecta a la sessió que un administrador utilitza per gestionar l'ordinador "
+"remot, en lloc d'una sessió d'usuari nova."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_PreventSessionLock)
 #: rdp/rdppreferences.ui:783
-#, fuzzy, kde-format
-#| msgid "Prevent remote session lock"
+#, kde-format
 msgid "Keep the remote session from locking"
-msgstr "Evita el bloqueig de la sessió remota"
+msgstr "Manté la sessió remota evitant el bloqueig"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_PreventSessionLock)
 #: rdp/rdppreferences.ui:786
@@ -2122,13 +2113,14 @@ msgid ""
 "Move the remote mouse pointer every few minutes so that the remote computer "
 "does not lock the session while it is idle."
 msgstr ""
+"Mou el punter del ratolí remot cada pocs minuts perquè l'ordinador remot no "
+"bloquegi la sessió mentre estigui inactiu."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseGateway)
 #: rdp/rdppreferences.ui:812
-#, fuzzy, kde-format
-#| msgid "Connect to a VNC Remote Desktop"
+#, kde-format
 msgid "Connect through a Remote Desktop Gateway"
-msgstr "Connecta a un escriptori remot VNC"
+msgstr "Connecta mitjançant una passarel·la d'escriptori remot"
 
 #. i18n: ectx: property (text), widget (QLabel, gServerLabel)
 #. i18n: ectx: property (text), widget (QLabel, pHostLabel)
@@ -2142,7 +2134,7 @@ msgstr "Servidor:"
 #: rdp/rdppreferences.ui:826 rdp/rdppreferences.ui:912
 #, kde-format
 msgid "host:port"
-msgstr "host:port"
+msgstr "servidor:port"
 
 #. i18n: ectx: property (text), widget (QLabel, gUsernameLabel)
 #. i18n: ectx: property (text), widget (QLabel, pUsernameLabel)
@@ -2185,11 +2177,9 @@ msgstr "RPC"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseProxy)
 #: rdp/rdppreferences.ui:898
-#, fuzzy, kde-format
-#| msgctxt "@info connection stage"
-#| msgid "Connecting to the server"
+#, kde-format
 msgid "Connect through a proxy server"
-msgstr "S'està connectant amb el servidor"
+msgstr "Connecta mitjançant un servidor intermediari"
 
 #. i18n: ectx: property (text), widget (QLabel, protocolLabel)
 #: rdp/rdppreferences.ui:939
@@ -2211,10 +2201,9 @@ msgstr "Seguretat"
 
 #. i18n: ectx: property (text), widget (QLabel, protocolsLabel)
 #: rdp/rdppreferences.ui:991
-#, fuzzy, kde-format
-#| msgid "Protocol:"
+#, kde-format
 msgid "Protocols:"
-msgstr "Protocol:"
+msgstr "Protocols:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityNLA)
 #: rdp/rdppreferences.ui:1000
@@ -2224,13 +2213,11 @@ msgstr "NLA"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SecurityNLA)
 #: rdp/rdppreferences.ui:1003
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid ""
-#| "It accepted the connection, then closed it before the session started."
+#, kde-format
 msgid "Network Level Authentication: sign in before the remote session starts."
 msgstr ""
-"Ha acceptat la connexió i després l'ha tancat abans que comencés la sessió."
+"Autenticació de nivell de xarxa: inicieu la sessió abans que comenci la "
+"sessió remota."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityTLS)
 #: rdp/rdppreferences.ui:1010
@@ -2240,11 +2227,11 @@ msgstr "TLS"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SecurityTLS)
 #: rdp/rdppreferences.ui:1013
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "The session was disconnected from the remote computer."
+#, kde-format
 msgid "TLS encryption, signing in on the login screen of the remote computer."
-msgstr "La sessió s'ha desconnectat de l'ordinador remot."
+msgstr ""
+"Encriptatge TLS, inicieu la sessió a la pantalla d'inici de sessió de "
+"l'ordinador remot."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityRDP)
 #: rdp/rdppreferences.ui:1020
@@ -2257,6 +2244,7 @@ msgstr "RDP"
 #, kde-format
 msgid "Standard RDP security, the older encryption built into the protocol."
 msgstr ""
+"Seguretat RDP estàndard, l'encriptatge antic incorporat en el protocol."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityEXT)
 #: rdp/rdppreferences.ui:1030
@@ -2271,6 +2259,8 @@ msgid ""
 "Extended Network Level Authentication, which also checks that the account "
 "may sign in before the session starts."
 msgstr ""
+"Autenticació ampliada de nivell de xarxa, que també comprova que el compte "
+"pugui iniciar la sessió abans que comenci la sessió."
 
 #. i18n: ectx: property (text), widget (QLabel, TlsSecLevelLabel)
 #: rdp/rdppreferences.ui:1055
@@ -2285,13 +2275,14 @@ msgid ""
 "The weakest TLS encryption to accept. A higher level may refuse to connect "
 "to older servers."
 msgstr ""
+"L'encriptatge TLS més feble a acceptar. Un nivell superior pot rebutjar a "
+"connectar-se a servidors més antics."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:1075
-#, fuzzy, kde-format
-#| msgid "any"
+#, kde-format
 msgid "Any"
-msgstr "qualsevol"
+msgstr "Qualsevol"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:1080
@@ -2325,8 +2316,7 @@ msgstr "256 bits"
 
 #. i18n: ectx: property (text), widget (QLabel, authPkgListLabel)
 #: rdp/rdppreferences.ui:1108
-#, fuzzy, kde-format
-#| msgid "Authentication Packages:"
+#, kde-format
 msgid "Authentication packages:"
 msgstr "Paquets d'autenticació:"
 
@@ -2692,18 +2682,16 @@ msgstr ""
 "rdpserver:3389 (servidor:port)</i></html>"
 
 #: rdp/sharedfolderfield.cpp:18
-#, fuzzy, kde-format
-#| msgctxt "@info:status connection step"
-#| msgid "Not started"
+#, kde-format
 msgctxt "@item:inlistbox shared folder"
 msgid "Not shared"
-msgstr "No iniciat"
+msgstr "No compartida"
 
 #: rdp/sharedfolderfield.cpp:20
 #, kde-format
 msgctxt "@item:inlistbox shared folder"
 msgid "Removable drives"
-msgstr ""
+msgstr "Unitats extraïbles"
 
 #: rdp/sharedfolderfield.cpp:22
 #, kde-format
@@ -2712,42 +2700,44 @@ msgid ""
 "USB drives and memory cards, including ones plugged in during the session. "
 "Network shares are not included."
 msgstr ""
+"Unitats USB i targetes de memòria, incloses les que s'han connectat durant "
+"la sessió. No s'inclouen les comparticions de xarxa."
 
 #: rdp/sharedfolderfield.cpp:33
 #, kde-format
 msgctxt "@item:inlistbox shared folder"
 msgid "Downloads"
-msgstr ""
+msgstr "Baixades"
 
 #: rdp/sharedfolderfield.cpp:34
 #, kde-format
 msgctxt "@item:inlistbox shared folder"
 msgid "Documents"
-msgstr ""
+msgstr "Documents"
 
 #: rdp/sharedfolderfield.cpp:36
 #, kde-format
 msgctxt "@item:inlistbox shared folder"
 msgid "Other Folder…"
-msgstr ""
+msgstr "Altres carpetes…"
 
 #: rdp/sharedfolderfield.cpp:65
 #, kde-format
 msgctxt "@item:inlistbox shared folder, %1 a stored value"
 msgid "%1 (not supported)"
-msgstr ""
+msgstr "%1 (no admès)"
 
 #: rdp/sharedfolderfield.cpp:69
 #, kde-format
 msgctxt "@item:inlistbox shared folder, %1 its name, %2 its path"
 msgid "%1 (%2)"
-msgstr ""
+msgstr "%1 (%2)"
 
 #: rdp/sharedfolderfield.cpp:102
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose Shared Folder"
-msgstr ""
+msgstr "Selecció de carpeta compartida"
 
 #: remotedesktopsmodel.cpp:112
 #, kde-format
@@ -2851,7 +2841,7 @@ msgstr "Reprodueix àudio del servidor remot en aquesta màquina."
 #: spice/spicepreferences.ui:295 vnc/vncpreferences.ui:275
 #, kde-format
 msgid "Network"
-msgstr ""
+msgstr "Xarxa"
 
 #: spice/spiceview.cpp:830
 #, kde-format

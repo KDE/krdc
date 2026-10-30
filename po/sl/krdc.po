@@ -1,6 +1,6 @@
 # Slovenian translation of krdc
 # Copyright (C) 2002, 2003, 2004, 2005, 2006, 2007 Free Software Foundation, Inc.
-# $Id: krdc.po 1751412 2026-10-29 01:53:58Z scripty $
+# $Id: krdc.po 1751478 2026-10-30 01:42:25Z scripty $
 # $Source$
 #
 # Andrej Vernekar <andrej.vernekar@moj.net>, 2002, 2007, 2008.
@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-10-29 00:53+0000\n"
-"PO-Revision-Date: 2026-10-27 16:57+0100\n"
+"PO-Revision-Date: 2026-10-29 09:35+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -936,11 +936,10 @@ msgid "Connect to the network or VPN the remote computer is on."
 msgstr "Povežite se v omrežje ali VPN, v katerem je oddaljeni računalnik."
 
 #: core/hostpreferences.cpp:308
-#, fuzzy, kde-format
-#| msgid "Connected to %1"
+#, kde-format
 msgctxt "@title:window %1 is a host name"
 msgid "Connect to %1"
-msgstr "Povezan z %1"
+msgstr "Poveži z %1"
 
 #: core/hostpreferences.cpp:315
 #, kde-format
@@ -951,8 +950,7 @@ msgstr ""
 "povežete s tem gostiteljem."
 
 #: core/hostpreferences.cpp:338
-#, fuzzy, kde-format
-#| msgid "Connect"
+#, kde-format
 msgctxt "@action:button"
 msgid "Connect"
 msgstr "Poveži"
@@ -980,11 +978,10 @@ msgid "Show this dialog again for this host"
 msgstr "Spet prikaži to pogovorno okno za tega gostitelja"
 
 #: core/hostpreferences.cpp:428
-#, fuzzy, kde-format
-#| msgid "Settings"
+#, kde-format
 msgctxt "@action:button"
 msgid "All Settings…"
-msgstr "Nastavitve"
+msgstr "Vse nastavitve…"
 
 #. i18n: ectx: label, entry (OpenSessions), group (General)
 #: core/krdc.kcfg:16
@@ -1788,10 +1785,9 @@ msgstr "Malo barv (8-bitne)"
 #. i18n: ectx: property (text), widget (QLabel, localResourcesHeading)
 #: rdp/rdppreferences.ui:448 spice/spicepreferences.ui:242
 #: vnc/vncpreferences.ui:237
-#, fuzzy, kde-format
-#| msgid "Local Cursor"
+#, kde-format
 msgid "Local Resources"
-msgstr "Krajevna kazalka"
+msgstr "Lokalni viri"
 
 #. i18n: ectx: property (text), widget (QLabel, soundLabel)
 #: rdp/rdppreferences.ui:454
@@ -1836,10 +1832,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:530
-#, fuzzy, kde-format
-#| msgid "On This Computer"
+#, kde-format
 msgid "Same as This Computer"
-msgstr "Na tem računalniku"
+msgstr "Enako kot ta računalnik"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:535
@@ -2065,23 +2060,23 @@ msgstr "Turška (tr)"
 
 #. i18n: ectx: property (text), widget (QLabel, shareMediaLabel)
 #: rdp/rdppreferences.ui:723
-#, fuzzy, kde-format
-#| msgid "Share Media:"
+#, kde-format
 msgid "Shared folder:"
-msgstr "Deli mapo:"
+msgstr "Skupna mapa:"
 
 #. i18n: ectx: property (toolTip), widget (SharedFolderField, kcfg_ShareMedia)
 #: rdp/rdppreferences.ui:739
 #, kde-format
 msgid "A folder on this computer that the remote computer can read and write."
 msgstr ""
+"Mapa na tem računalniku, iz katere lahko oddaljeni računalnik bere in v "
+"katero lahko piše."
 
 #. i18n: ectx: property (text), widget (QLabel, shareSmartcardLabel)
 #: rdp/rdppreferences.ui:746
-#, fuzzy, kde-format
-#| msgid "Share Smartcard:"
+#, kde-format
 msgid "Shared smartcard:"
-msgstr "Deli pametno kartico:"
+msgstr "Skupna pametna kartica:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, connectionTab)
 #: rdp/rdppreferences.ui:760
@@ -2091,34 +2086,31 @@ msgstr "Povezava"
 
 #. i18n: ectx: property (text), widget (QLabel, sessionLabel)
 #: rdp/rdppreferences.ui:766
-#, fuzzy, kde-format
-#| msgid "Sessions"
+#, kde-format
 msgid "Session:"
-msgstr "Seje"
+msgstr "Seja:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ConsoleMode)
 #: rdp/rdppreferences.ui:773
-#, fuzzy, kde-format
-#| msgid "Admin (or console) session"
+#, kde-format
 msgid "Connect to the console (admin) session"
-msgstr "Skrbniška (ali konzolna) seja"
+msgstr "Vzpostavi povezavo s konzolno (skrbniško) sejo"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_ConsoleMode)
 #: rdp/rdppreferences.ui:776
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "Connect to the network or VPN the remote computer is on."
+#, kde-format
 msgid ""
 "Connect to the session an administrator uses to manage the remote computer, "
 "instead of a new user session."
-msgstr "Povežite se v omrežje ali VPN, v katerem je oddaljeni računalnik."
+msgstr ""
+"Vzpostavi povezavo s sejo, ki jo skrbnik uporablja za upravljanje "
+"oddaljenega računalnika, namesto z novo uporabniško sejo."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_PreventSessionLock)
 #: rdp/rdppreferences.ui:783
-#, fuzzy, kde-format
-#| msgid "Prevent remote session lock"
+#, kde-format
 msgid "Keep the remote session from locking"
-msgstr "Prepreči oddaljeni zaklep seje"
+msgstr "Prepreči zaklepanje oddaljene seje"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_PreventSessionLock)
 #: rdp/rdppreferences.ui:786
@@ -2127,13 +2119,14 @@ msgid ""
 "Move the remote mouse pointer every few minutes so that the remote computer "
 "does not lock the session while it is idle."
 msgstr ""
+"Premakni kazalec miške na oddaljenem računalniku vsakih nekaj minut, da ta "
+"med nedejavnostjo ne zaklene seje, ker je nedejaven."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseGateway)
 #: rdp/rdppreferences.ui:812
-#, fuzzy, kde-format
-#| msgid "Connect to a VNC Remote Desktop"
+#, kde-format
 msgid "Connect through a Remote Desktop Gateway"
-msgstr "Poveži se z oddaljenim namizjem VNC"
+msgstr "Poveži se prek prehoda za oddaljeno namizje"
 
 #. i18n: ectx: property (text), widget (QLabel, gServerLabel)
 #. i18n: ectx: property (text), widget (QLabel, pHostLabel)
@@ -2190,11 +2183,9 @@ msgstr "RPC"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseProxy)
 #: rdp/rdppreferences.ui:898
-#, fuzzy, kde-format
-#| msgctxt "@info connection stage"
-#| msgid "Connecting to the server"
+#, kde-format
 msgid "Connect through a proxy server"
-msgstr "Povezovanje s strežnikom"
+msgstr "Povežite se prek posredniškega strežnika"
 
 #. i18n: ectx: property (text), widget (QLabel, protocolLabel)
 #: rdp/rdppreferences.ui:939
@@ -2216,10 +2207,9 @@ msgstr "Varnost"
 
 #. i18n: ectx: property (text), widget (QLabel, protocolsLabel)
 #: rdp/rdppreferences.ui:991
-#, fuzzy, kde-format
-#| msgid "Protocol:"
+#, kde-format
 msgid "Protocols:"
-msgstr "Protokol:"
+msgstr "Protokoli:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityNLA)
 #: rdp/rdppreferences.ui:1000
@@ -2229,12 +2219,9 @@ msgstr "NLA"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SecurityNLA)
 #: rdp/rdppreferences.ui:1003
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid ""
-#| "It accepted the connection, then closed it before the session started."
+#, kde-format
 msgid "Network Level Authentication: sign in before the remote session starts."
-msgstr "Sprejel je povezavo, nato pa jo zaprl, še preden se je seja začela."
+msgstr "Avtentikacija na ravni omrežja: prijava pred začetkom oddaljene seje."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityTLS)
 #: rdp/rdppreferences.ui:1010
@@ -2244,11 +2231,9 @@ msgstr "TLS"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SecurityTLS)
 #: rdp/rdppreferences.ui:1013
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "The session was disconnected from the remote computer."
+#, kde-format
 msgid "TLS encryption, signing in on the login screen of the remote computer."
-msgstr "Povezava seje z oddaljenim računalnikom je bila prekinjena."
+msgstr "Šifriranje TLS, prijava na prijavnem zaslonu oddaljenega računalnika."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityRDP)
 #: rdp/rdppreferences.ui:1020
@@ -2260,7 +2245,7 @@ msgstr "RDP"
 #: rdp/rdppreferences.ui:1023
 #, kde-format
 msgid "Standard RDP security, the older encryption built into the protocol."
-msgstr ""
+msgstr "Standardna varnost RDP – starejše šifriranje, vgrajeno v protokol."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityEXT)
 #: rdp/rdppreferences.ui:1030
@@ -2275,6 +2260,8 @@ msgid ""
 "Extended Network Level Authentication, which also checks that the account "
 "may sign in before the session starts."
 msgstr ""
+"Razširjena avtentikacija na ravni omrežja, ki pred začetkom seje tudi "
+"preveri, ali se je z računom dovoljeno prijaviti."
 
 #. i18n: ectx: property (text), widget (QLabel, TlsSecLevelLabel)
 #: rdp/rdppreferences.ui:1055
@@ -2289,13 +2276,14 @@ msgid ""
 "The weakest TLS encryption to accept. A higher level may refuse to connect "
 "to older servers."
 msgstr ""
+"Najšibkejše šifriranje TLS, ki se še sprejme. Pri višji nastavitvi lahko "
+"pride do zavrnitve povezave s starejšimi strežniki."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:1075
-#, fuzzy, kde-format
-#| msgid "any"
+#, kde-format
 msgid "Any"
-msgstr "katerakoli"
+msgstr "Katerakoli"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:1080
@@ -2329,8 +2317,7 @@ msgstr "256 bitov"
 
 #. i18n: ectx: property (text), widget (QLabel, authPkgListLabel)
 #: rdp/rdppreferences.ui:1108
-#, fuzzy, kde-format
-#| msgid "Authentication Packages:"
+#, kde-format
 msgid "Authentication packages:"
 msgstr "Paketi za avtentikacijo:"
 
@@ -2692,18 +2679,16 @@ msgstr ""
 "strežnik_rdp:3389 (gostitelj:vrata)</i></html>"
 
 #: rdp/sharedfolderfield.cpp:18
-#, fuzzy, kde-format
-#| msgctxt "@info:status connection step"
-#| msgid "Not started"
+#, kde-format
 msgctxt "@item:inlistbox shared folder"
 msgid "Not shared"
-msgstr "Ni začeto"
+msgstr "Ni deljeno"
 
 #: rdp/sharedfolderfield.cpp:20
 #, kde-format
 msgctxt "@item:inlistbox shared folder"
 msgid "Removable drives"
-msgstr ""
+msgstr "Odstranljivi pogoni"
 
 #: rdp/sharedfolderfield.cpp:22
 #, kde-format
@@ -2712,42 +2697,44 @@ msgid ""
 "USB drives and memory cards, including ones plugged in during the session. "
 "Network shares are not included."
 msgstr ""
+"Pogoni USB in pomnilniške kartice, vključno s tistimi, ki so priključeni med "
+"sejo. Omrežne skupne mape niso vključene."
 
 #: rdp/sharedfolderfield.cpp:33
 #, kde-format
 msgctxt "@item:inlistbox shared folder"
 msgid "Downloads"
-msgstr ""
+msgstr "Prenosi sem"
 
 #: rdp/sharedfolderfield.cpp:34
 #, kde-format
 msgctxt "@item:inlistbox shared folder"
 msgid "Documents"
-msgstr ""
+msgstr "Dokumenti"
 
 #: rdp/sharedfolderfield.cpp:36
 #, kde-format
 msgctxt "@item:inlistbox shared folder"
 msgid "Other Folder…"
-msgstr ""
+msgstr "Ostala mapa…"
 
 #: rdp/sharedfolderfield.cpp:65
 #, kde-format
 msgctxt "@item:inlistbox shared folder, %1 a stored value"
 msgid "%1 (not supported)"
-msgstr ""
+msgstr "%1 (ni podprto)"
 
 #: rdp/sharedfolderfield.cpp:69
 #, kde-format
 msgctxt "@item:inlistbox shared folder, %1 its name, %2 its path"
 msgid "%1 (%2)"
-msgstr ""
+msgstr "%1 (%2)"
 
 #: rdp/sharedfolderfield.cpp:102
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose Shared Folder"
-msgstr ""
+msgstr "Izberite skupno mapo"
 
 #: remotedesktopsmodel.cpp:112
 #, kde-format
@@ -2851,7 +2838,7 @@ msgstr "Predvajaj zvok z oddaljenega gostitelja na tem računalniku."
 #: spice/spicepreferences.ui:295 vnc/vncpreferences.ui:275
 #, kde-format
 msgid "Network"
-msgstr ""
+msgstr "Omežje"
 
 #: spice/spiceview.cpp:830
 #, kde-format

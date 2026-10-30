@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-10-29 00:53+0000\n"
-"PO-Revision-Date: 2026-09-25 22:15+0300\n"
+"PO-Revision-Date: 2026-10-30 01:09+0200\n"
 "Last-Translator: Liudas Ališauskas <liudas@akmc.lt>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
 "Language: lt\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
-"X-Generator: Poedit 3.9\n"
+"X-Generator: Poedit 3.10\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -310,42 +310,40 @@ msgstr[3] "Prieš %1 metus"
 #, kde-format
 msgctxt "@info:status connection step"
 msgid "Not started"
-msgstr ""
+msgstr "Nepradėta"
 
 #: connectionstatuswidget.cpp:67
 #, kde-format
 msgctxt "@info:status connection step"
 msgid "Done"
-msgstr ""
+msgstr "Atlikta"
 
 #: connectionstatuswidget.cpp:70
 #, kde-format
 msgctxt "@info:status connection step"
 msgid "Failed"
-msgstr ""
+msgstr "Nepavyko"
 
 #: connectionstatuswidget.cpp:73
 #, kde-format
 msgctxt "@info:status connection step"
 msgid "Information"
-msgstr ""
+msgstr "Informacija"
 
 #: connectionstatuswidget.cpp:250
 #, kde-format
 msgctxt "@info"
 msgid "Diagnostic information copied to the clipboard"
-msgstr ""
+msgstr "Diagnostinė informacija nukopijuota į iškarpinę"
 
 #: connectionstatuswidget.cpp:257
-#, fuzzy, kde-format
-#| msgid "Connecting to %1"
+#, kde-format
 msgctxt "@title"
 msgid "Connecting to %1"
 msgstr "Jungiamasi prie %1"
 
 #: connectionstatuswidget.cpp:258
-#, fuzzy, kde-format
-#| msgid "Connecting to %1"
+#, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Connecting to %1"
 msgstr "Jungiamasi prie %1"
@@ -354,176 +352,160 @@ msgstr "Jungiamasi prie %1"
 #, kde-format
 msgctxt "@action:button"
 msgid "Cancel"
-msgstr ""
+msgstr "Atsisakyti"
 
 #: connectionstatuswidget.cpp:330
 #, kde-format
 msgctxt "@info:status connection step"
 msgid "In progress"
-msgstr ""
+msgstr "Eigoje"
 
 #: connectionstatuswidget.cpp:406
 #, kde-format
 msgctxt "@info connection step"
 msgid "Looking up the server address"
-msgstr ""
+msgstr "Ieškoma serverio adreso"
 
 #: connectionstatuswidget.cpp:408
-#, fuzzy, kde-format
-#| msgid "Connect via SSH tunnel"
+#, kde-format
 msgctxt "@info connection step"
 msgid "Opening the SSH tunnel"
-msgstr "Prisijungti per SSH tunelį"
+msgstr "Atveriamas SSH tunelis"
 
 #: connectionstatuswidget.cpp:410
 #, kde-format
 msgctxt "@info connection step"
 msgid "Opening a network connection"
-msgstr ""
+msgstr "Atveriamas tinklo ryšys"
 
 #: connectionstatuswidget.cpp:412
-#, fuzzy, kde-format
-#| msgid "Preparing connection to %1"
+#, kde-format
 msgctxt "@info connection step"
 msgid "Securing the connection"
-msgstr "Ruošiamasi prisijungti prie %1"
+msgstr "Užtikrinamas ryšio saugumas"
 
 #: connectionstatuswidget.cpp:414
 #, kde-format
 msgctxt "@info connection step"
 msgid "Logging in"
-msgstr ""
+msgstr "Prisijungiama prie kompiuterio paskyros"
 
 #: connectionstatuswidget.cpp:416
-#, fuzzy, kde-format
-#| msgid "Prevent remote session lock"
+#, kde-format
 msgctxt "@info connection step"
 msgid "Starting the remote session"
-msgstr "Neleisti užrakinti nuotolinį seansą"
+msgstr "Pradedamas nuotolinis seansas"
 
 #: connectionstatuswidget.cpp:418
-#, fuzzy, kde-format
-#| msgid "Reconnecting."
+#, kde-format
 msgctxt "@info connection step"
 msgid "Reconnecting"
-msgstr "Jungiamasi iš naujo."
+msgstr "Jungiamasi iš naujo"
 
 #: connectionstatuswidget.cpp:428
 #, kde-format
 msgctxt "@info connection step"
 msgid "Server address resolved"
-msgstr ""
+msgstr "Nustatytas serverio adresas"
 
 #: connectionstatuswidget.cpp:430
-#, fuzzy, kde-format
-#| msgid "SSH tunnel options"
+#, kde-format
 msgctxt "@info connection step"
 msgid "SSH tunnel established"
-msgstr "SSH tunelio parinktys"
+msgstr "SSH tunelis užmegztas"
 
 #: connectionstatuswidget.cpp:432
 #, kde-format
 msgctxt "@info connection step"
 msgid "Network connection established"
-msgstr ""
+msgstr "Tinklo ryšys užmegztas"
 
 #: connectionstatuswidget.cpp:434
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Connection Refused"
+#, kde-format
 msgctxt "@info connection step"
 msgid "Connection secured"
-msgstr "Ryšys atmestas"
+msgstr "Ryšys apsaugotas"
 
 #: connectionstatuswidget.cpp:437
 #, kde-format
 msgctxt "@info connection step"
 msgid "Access granted"
-msgstr ""
+msgstr "Prieiga suteikta"
 
 #: connectionstatuswidget.cpp:439
-#, fuzzy, kde-format
-#| msgid "KDE Remote Desktop Client started"
+#, kde-format
 msgctxt "@info connection step"
 msgid "Remote session started"
-msgstr "KDE nuotolinio darbalaukio kliento programa paleista"
+msgstr "Pradėtas nuotolinis seansas"
 
 #: connectionstatuswidget.cpp:449
-#, fuzzy, kde-format
-#| msgid "Connected to %1"
+#, kde-format
 msgctxt "@info"
 msgid "Resolved to %1."
-msgstr "Prisijungta prie %1"
+msgstr "Nustatyta į %1."
 
 #: connectionstatuswidget.cpp:461
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Local address lookup failed: %1"
-msgstr ""
+msgstr "Vietinio adreso paieškos patyrė nesėkmę: %1"
 
 #: connectionstatuswidget.cpp:466
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "%1 resolved to %2"
-msgstr ""
+msgstr "%1 nustatyta į %2"
 
 #: connectionstatuswidget.cpp:498
-#, fuzzy, kde-format
-#| msgid "Connect to a NX Remote Desktop"
+#, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Connecting to the remote desktop service"
-msgstr "Prisijungti prie nutolusio NX darbastalio"
+msgstr "Prisijungiama prie nuotolinio darbalaukio tarnybos"
 
 #: connectionstatuswidget.cpp:505
-#, fuzzy, kde-format
-#| msgid "Authenticating at %1"
+#, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Authenticating"
-msgstr "Nustatoma tapatybė ties %1"
+msgstr "Nustatoma tapatybė"
 
 #: connectionstatuswidget.cpp:509
-#, fuzzy, kde-format
-#| msgid "Prevent remote session lock"
+#, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Preparing the session"
-msgstr "Neleisti užrakinti nuotolinį seansą"
+msgstr "Ruošiamas seansas"
 
 #: connectionstatuswidget.cpp:513
-#, fuzzy, kde-format
-#| msgid "Connected."
+#, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Connected"
-msgstr "Prisijungta."
+msgstr "Prisijungta"
 
 #: connectionstatuswidget.cpp:546
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Connection dropped, reconnecting: %1"
-msgstr ""
+msgstr "Ryšys nutrūko, jungiamasi iš naujo: %1"
 
 #: connectionstatuswidget.cpp:546
-#, fuzzy, kde-format
-#| msgid "Reconnected."
+#, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Reconnected"
-msgstr "Prisijungta iš naujo."
+msgstr "Prisijungta iš naujo"
 
 #: connectionstatuswidget.cpp:559
 #, kde-format
 msgctxt "@info"
 msgid "KRDC keeps trying until the connection is back."
-msgstr ""
+msgstr "KRDC bando tol, kol ryšys bus sugrąžintas."
 
 #: connectionstatuswidget.cpp:563
-#, fuzzy, kde-format
-#| msgid "Connecting to %1"
+#, kde-format
 msgctxt "@title"
 msgid "Connection to %1 interrupted"
-msgstr "Jungiamasi prie %1"
+msgstr "Ryšys su %1 pertrauktas"
 
 #: connectionstatuswidget.cpp:565
-#, fuzzy, kde-format
-#| msgid "Disconnect"
+#, kde-format
 msgctxt "@action:button"
 msgid "Disconnect"
 msgstr "Atsijungti"
@@ -532,59 +514,52 @@ msgstr "Atsijungti"
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Failed while: %1"
-msgstr ""
+msgstr "Nepavyko, kai: %1"
 
 #: connectionstatuswidget.cpp:656
 #, kde-format
 msgctxt "@title"
 msgid "Session with %1 ended"
-msgstr ""
+msgstr "Seansas su %1 pasibaigė"
 
 #: connectionstatuswidget.cpp:658
-#, fuzzy, kde-format
-#| msgid "Connecting to %1"
+#, kde-format
 msgctxt "@title"
 msgid "Connection to %1 lost"
-msgstr "Jungiamasi prie %1"
+msgstr "Ryšys su %1 nutrūko"
 
 #: connectionstatuswidget.cpp:660
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Could not Connect"
+#, kde-format
 msgctxt "@title"
 msgid "Could not connect to %1"
-msgstr "Nepavyko prisijungti"
+msgstr "Nepavyko prisijungti prie %1"
 
 #: connectionstatuswidget.cpp:666
-#, fuzzy, kde-format
-#| msgid "Reconnected."
+#, kde-format
 msgctxt "@action:button"
 msgid "Reconnect"
-msgstr "Prisijungta iš naujo."
+msgstr "Prisijungti iš naujo"
 
 #: connectionstatuswidget.cpp:666
-#, fuzzy, kde-format
-#| msgid "Connection"
+#, kde-format
 msgctxt "@action:button"
 msgid "Connect Again"
-msgstr "Prisijungimas"
+msgstr "Prisijungti dar kartą"
 
 #: connectionstatuswidget.cpp:671
-#, fuzzy, kde-format
-#| msgid "Goto Address"
+#, kde-format
 msgctxt "@action:button"
 msgid "Edit Address"
-msgstr "Eiti adresu"
+msgstr "Taisyti adresą"
 
 #: connectionstatuswidget.cpp:674
 #, kde-format
 msgctxt "@action:button"
 msgid "Edit Host Settings…"
-msgstr ""
+msgstr "Taisyti mazgo nuostatas…"
 
 #: connectionstatuswidget.cpp:676
-#, fuzzy, kde-format
-#| msgid "Close Tab"
+#, kde-format
 msgctxt "@action:button"
 msgid "Close Tab"
 msgstr "Užverti kortelę"
@@ -593,94 +568,85 @@ msgstr "Užverti kortelę"
 #, kde-format
 msgctxt "@action:button"
 msgid "Copy diagnostic information"
-msgstr ""
+msgstr "Kopijuoti diagnostinę informaciją"
 
 #: connectionstatuswidget.cpp:719
 #, kde-format
 msgctxt "@action:button"
 msgid "Hide details"
-msgstr ""
+msgstr "Slėpti išsamesnę informaciją"
 
 #: connectionstatuswidget.cpp:719
-#, fuzzy, kde-format
-#| msgctxt "EMAIL OF TRANSLATORS"
-#| msgid "Your emails"
+#, kde-format
 msgctxt "@action:button"
 msgid "Show details"
-msgstr "laisve@gmail.com, liudas@akmc.lt, <>"
+msgstr "Rodyti išsamiau"
 
 #: core/connectionerror.cpp:15
 #, kde-format
 msgctxt "@info connection stage"
 msgid "Setting up the SSH tunnel"
-msgstr ""
+msgstr "Paruošiamas SSH tunelis"
 
 #: core/connectionerror.cpp:17
 #, kde-format
 msgctxt "@info connection stage"
 msgid "Looking up the host name"
-msgstr ""
+msgstr "Ieškoma mazgo pavadinimo"
 
 #: core/connectionerror.cpp:19
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Lost connection to the server."
+#, kde-format
 msgctxt "@info connection stage"
 msgid "Connecting to the server"
-msgstr "Nutrūko ryšys su serveriu."
+msgstr "Jungiamasi prie serverio"
 
 #: core/connectionerror.cpp:21
-#, fuzzy, kde-format
-#| msgid "Preparing connection to %1"
+#, kde-format
 msgctxt "@info connection stage"
 msgid "Securing the connection"
-msgstr "Ruošiamasi prisijungti prie %1"
+msgstr "Užtikrinamas ryšio saugumas"
 
 #: core/connectionerror.cpp:23
 #, kde-format
 msgctxt "@info connection stage"
 msgid "Logging in"
-msgstr ""
+msgstr "Prisijungiama prie kompiuterio paskyros"
 
 #: core/connectionerror.cpp:25
-#, fuzzy, kde-format
-#| msgid "Prevent remote session lock"
+#, kde-format
 msgctxt "@info connection stage"
 msgid "Starting the remote session"
-msgstr "Neleisti užrakinti nuotolinį seansą"
+msgstr "Pradedamas nuotolinis seansas"
 
 #: core/connectionerror.cpp:27
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Connection Refused"
+#, kde-format
 msgctxt "@info connection stage"
 msgid "Connection interrupted"
-msgstr "Ryšys atmestas"
+msgstr "Ryšys pertrauktas"
 
 #: core/connectionerror.cpp:29
 #, kde-format
 msgctxt "@info connection stage"
 msgid "Session ended remotely"
-msgstr ""
+msgstr "Seansas pasibaigė nuotoliniu būdu"
 
 #: core/connectionerror.cpp:33
 #, kde-format
 msgctxt "@info connection stage"
 msgid "Unknown"
-msgstr ""
+msgstr "Nežinoma"
 
 #: core/connectionerror.cpp:45
-#, fuzzy, kde-format
-#| msgid "SSH Tunnel failure"
+#, kde-format
 msgctxt "@title connection error"
 msgid "SSH tunnel failed"
-msgstr "SSH tunelio nesėkmė"
+msgstr "SSH tunelis patyrė nesėkmę"
 
 #: core/connectionerror.cpp:47
 #, kde-format
 msgctxt "@info"
 msgid "Check the SSH tunnel user name and port in the host settings."
-msgstr ""
+msgstr "Patikrinkite mazgo nuostatose SSH tunelio naudotojo vardą ir prievadą."
 
 #: core/connectionerror.cpp:48
 #, kde-format
@@ -689,6 +655,8 @@ msgid ""
 "Log in with an SSH client in a terminal to confirm that the server is "
 "reachable and your credentials work."
 msgstr ""
+"Prisijunkite naudodami SSH kliento programą terminale, kad patvirtintumėte, "
+"jog serveris yra pasiekiamas, o jūsų prisijungimo duomenys veikia."
 
 #: core/connectionerror.cpp:49
 #, kde-format
@@ -696,45 +664,44 @@ msgctxt "@info"
 msgid ""
 "If you use key authentication, add the key to your SSH agent with ssh-add."
 msgstr ""
+"Jeigu naudojate tapatybės nustatymą raktu, tada pridėkite raktą į SSH agentą "
+"naudodami ssh-add."
 
 #: core/connectionerror.cpp:50
 #, kde-format
 msgctxt "@info"
 msgid "Make sure the SSH server allows port forwarding."
-msgstr ""
+msgstr "Įsitikinkite, kad SSH serveris leidžia prievadų peradresavimą."
 
 #: core/connectionerror.cpp:54
-#, fuzzy, kde-format
-#| msgid "Server not found."
+#, kde-format
 msgctxt "@title connection error"
 msgid "Server not found"
-msgstr "Serveris nerastas."
+msgstr "Serveris nerastas"
 
 #: core/connectionerror.cpp:56
 #, kde-format
 msgctxt "@info"
 msgid "Check the spelling of the address."
-msgstr ""
+msgstr "Patikrinkite adreso rašybą."
 
 #: core/connectionerror.cpp:57
 #, kde-format
 msgctxt "@info"
 msgid "Connect to the network or VPN the computer is on."
-msgstr ""
+msgstr "Prisijunkite prie tinklo ar VPN, kuriame yra tas kompiuteris."
 
 #: core/connectionerror.cpp:58
 #, kde-format
 msgctxt "@info"
 msgid "Try the IP address of the computer instead of its name."
-msgstr ""
+msgstr "Vietoj kompiuterio pavadinimo, pabandykite naudoti jo IP adresą."
 
 #: core/connectionerror.cpp:63
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Server not Found"
+#, kde-format
 msgctxt "@title connection error"
 msgid "Server not reachable"
-msgstr "Serveris nerastas"
+msgstr "Serveris nepasiekiamas"
 
 #: core/connectionerror.cpp:65 core/connectionerror.cpp:145
 #, kde-format
@@ -743,12 +710,16 @@ msgid ""
 "Make sure the remote computer is turned on, awake and connected to the "
 "network."
 msgstr ""
+"Įsitikinkite, kad nuotolinis kompiuteris yra įjungtas, aktyvioje būsenoje ir "
+"prijungtas prie tinklo."
 
 #: core/connectionerror.cpp:66 core/connectionerror.cpp:135
 #, kde-format
 msgctxt "@info"
 msgid "Check that remote desktop sharing is enabled on the remote computer."
 msgstr ""
+"Patikrinkite, ar nuotoliniame kompiuteryje įjungtas nuotolinis darbalaukio "
+"bendrinimas."
 
 #: core/connectionerror.cpp:67 core/connectionerror.cpp:136
 #, kde-format
@@ -757,20 +728,20 @@ msgid ""
 "Check the port in the address. The defaults are 3389 for RDP and 5900 for "
 "VNC and SPICE."
 msgstr ""
+"Patikrinkite prievadą adrese. Numatytieji prievadai yra: 3389, skirtas RDP, "
+"o 5900, skirtas VNC ir SPICE."
 
 #: core/connectionerror.cpp:68 core/connectionerror.cpp:146
 #, kde-format
 msgctxt "@info"
 msgid "Check that no firewall blocks the connection."
-msgstr ""
+msgstr "Patikrinkite, ar jokia užkarda neblokuoja ryšio."
 
 #: core/connectionerror.cpp:73
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Connection Failed"
+#, kde-format
 msgctxt "@title connection error"
 msgid "Secure connection failed"
-msgstr "Ryšys patyrė nesėkmę"
+msgstr "Saugus ryšys patyrė nesėkmę"
 
 #: core/connectionerror.cpp:75
 #, kde-format
@@ -778,6 +749,8 @@ msgctxt "@info"
 msgid ""
 "Review the security settings for this host, or reset them to their defaults."
 msgstr ""
+"Peržiūrėkite šio mazgo saugumo nuostatas arba atstatykite jas į numatytąsias "
+"reikšmes."
 
 #: core/connectionerror.cpp:76
 #, kde-format
@@ -786,25 +759,30 @@ msgid ""
 "If the server certificate changed unexpectedly, confirm the change with the "
 "server administrator before accepting it."
 msgstr ""
+"Jei serverio liudijimas netikėtai pasikeitė, prieš jį priimdami, "
+"patvirtinkite pakeitimą pas serverio administratorių."
 
 #: core/connectionerror.cpp:80
-#, fuzzy, kde-format
-#| msgid "VNC authentication failed."
+#, kde-format
 msgctxt "@title connection error"
 msgid "Authentication failed"
-msgstr "VNC tapatybės nustatymas patyrė nesėkmę."
+msgstr "Nepavyko nustatyti tapatybės"
 
 #: core/connectionerror.cpp:82
 #, kde-format
 msgctxt "@info"
 msgid "Check the user name, password and domain, and that Caps Lock is off."
 msgstr ""
+"Patikrinkite naudotojo vardą, slaptažodį ir domeną ir užtikrinkite, kad "
+"nebūtų įjungtos didžiosios raidės."
 
 #: core/connectionerror.cpp:83
 #, kde-format
 msgctxt "@info"
 msgid "If you use a saved password, enter it again. It may be out of date."
 msgstr ""
+"Jeigu naudojate įrašytą slaptažodį, įveskite jį dar kartą. Gali būti, kad "
+"jis jau pasenęs."
 
 #: core/connectionerror.cpp:84
 #, kde-format
@@ -813,13 +791,14 @@ msgid ""
 "If the account is locked or expired, contact the administrator of the remote "
 "computer."
 msgstr ""
+"Jei paskyra užrakinta ar nebegalioja, susisiekite su nuotolinio kompiuterio "
+"administratoriumi."
 
 #: core/connectionerror.cpp:88
-#, fuzzy, kde-format
-#| msgid "Session Name"
+#, kde-format
 msgctxt "@title connection error"
 msgid "Session setup failed"
-msgstr "Sesijos pavadinimas"
+msgstr "Seanso sąranka patyrė nesėkmę"
 
 #: core/connectionerror.cpp:90
 #, kde-format
@@ -828,6 +807,8 @@ msgid ""
 "Reset advanced options in the host settings, such as graphics acceleration "
 "or color depth, to their defaults."
 msgstr ""
+"Atstatykite mazgo nuostatose išplėstines parinktis, tokias kaip grafikos "
+"spartinimas ar spalvų skaičius, į jų numatytąsias reikšmes."
 
 #: core/connectionerror.cpp:91
 #, kde-format
@@ -836,18 +817,20 @@ msgid ""
 "Ask the administrator of the remote computer whether new sessions are "
 "allowed. The number of users may be limited."
 msgstr ""
+"Paklauskite nuotolinio kompiuterio administratoriaus, ar leidžiami nauji "
+"seansai. Gali būti, kad naudotojų skaičius yra ribotas."
 
 #: core/connectionerror.cpp:96
 #, kde-format
 msgctxt "@title connection error"
 msgid "Network connection interrupted"
-msgstr ""
+msgstr "Tinklo ryšys pertrauktas"
 
 #: core/connectionerror.cpp:98
 #, kde-format
 msgctxt "@info"
 msgid "Check your network connection, then reconnect."
-msgstr ""
+msgstr "Patikrinkite savo ryšį, o tada bandykite dar kartą."
 
 #: core/connectionerror.cpp:99
 #, kde-format
@@ -856,33 +839,33 @@ msgid ""
 "If the remote computer restarted or went to sleep, wait until it is back, "
 "then reconnect."
 msgstr ""
+"Jei nuotolinis kompiuteris pasileido iš naujo ar įžengė į miego būseną, "
+"palaukite, kol jis sugrįš į įprastą veikseną, o tada bandykite prisijungti "
+"iš naujo."
 
 #: core/connectionerror.cpp:104
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Could not find the server."
+#, kde-format
 msgctxt "@title connection error"
 msgid "Closed by the server"
-msgstr "Nepavyko rasti serverio."
+msgstr "Serveris užbaigė"
 
 #: core/connectionerror.cpp:109
 #, kde-format
 msgctxt "@title connection error"
 msgid "Unexpected error"
-msgstr ""
+msgstr "Netikėta klaida"
 
 #: core/connectionerror.cpp:118
 #, kde-format
 msgctxt "@label"
 msgid "It accepted the connection, then closed it before the session started."
-msgstr ""
+msgstr "Jis priėmė ryšį, o tada, dar seansui neprasidėjus, jį užbaigė."
 
 #: core/connectionerror.cpp:119
-#, fuzzy, kde-format
-#| msgid "VNC server closed connection."
+#, kde-format
 msgctxt "@title connection error"
 msgid "Server closed the connection"
-msgstr "VNC serveris nutraukė ryšį."
+msgstr "Serveris nutraukė ryšį"
 
 #: core/connectionerror.cpp:121
 #, kde-format
@@ -891,12 +874,16 @@ msgid ""
 "If another viewer is connected, close it. Some servers allow only one at a "
 "time."
 msgstr ""
+"Jei yra prisijungusi kita žiūryklė, užverkite ją. Kai kurie serveriai vienu "
+"metu leidžia tik vieną žiūryklę."
 
 #: core/connectionerror.cpp:122
 #, kde-format
 msgctxt "@info"
 msgid "Check that this port belongs to the remote desktop service you expect."
 msgstr ""
+"Patikrinkite, ar šis prievadas priklauso nuotolinio darbalaukio tarnybai, "
+"kurios tikitės."
 
 #: core/connectionerror.cpp:123
 #, kde-format
@@ -905,55 +892,52 @@ msgid ""
 "Check the access and security settings of the server, or its log, for why it "
 "closed the connection."
 msgstr ""
+"Patikrinkite prieigos prie serverio ir jo saugumo nuostatas arba jo žurnalą, "
+"kad sužinotumėte, kodėl jis užbaigė ryšį."
 
 #: core/connectionerror.cpp:133
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Connection Refused"
+#, kde-format
 msgctxt "@title connection error"
 msgid "Connection refused"
-msgstr "Ryšys atmestas"
+msgstr "Ryšio atsisakyta"
 
 #: core/connectionerror.cpp:137
 #, kde-format
 msgctxt "@info"
 msgid "Check that no firewall on the remote computer rejects the connection."
 msgstr ""
+"Patikrinkite, ar jokia nuotoliniame kompiuteryje esanti užkarda neatmeta "
+"ryšio."
 
 #: core/connectionerror.cpp:143
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Server not Found"
+#, kde-format
 msgctxt "@title connection error"
 msgid "Server not responding"
-msgstr "Serveris nerastas"
+msgstr "Serveris neatsako"
 
 #: core/connectionerror.cpp:147 core/connectionerror.cpp:156
 #, kde-format
 msgctxt "@info"
 msgid "Check that the address is right."
-msgstr ""
+msgstr "Patikrinkite, ar adresas yra teisingas."
 
 #: core/connectionerror.cpp:153
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Could not connect to the server."
+#, kde-format
 msgctxt "@title connection error"
 msgid "No route to the server"
-msgstr "Nepavyko prisijungti prie serverio."
+msgstr "Nėra maršruto į serverį"
 
 #: core/connectionerror.cpp:155
 #, kde-format
 msgctxt "@info"
 msgid "Connect to the network or VPN the remote computer is on."
-msgstr ""
+msgstr "Prisijunkite prie tinklo ar VPN, kuriame yra nuotolinis kompiuteris."
 
 #: core/hostpreferences.cpp:308
-#, fuzzy, kde-format
-#| msgid "Connected to %1"
+#, kde-format
 msgctxt "@title:window %1 is a host name"
 msgid "Connect to %1"
-msgstr "Prisijungta prie %1"
+msgstr "Prisijungti prie %1"
 
 #: core/hostpreferences.cpp:315
 #, kde-format
@@ -964,8 +948,7 @@ msgstr ""
 "kartą jungiantis prie šio mazgo."
 
 #: core/hostpreferences.cpp:338
-#, fuzzy, kde-format
-#| msgid "Connect"
+#, kde-format
 msgctxt "@action:button"
 msgid "Connect"
 msgstr "Prisijungti"
@@ -993,11 +976,10 @@ msgid "Show this dialog again for this host"
 msgstr "Rodyti šiam mazgui šį dialogą dar kartą"
 
 #: core/hostpreferences.cpp:428
-#, fuzzy, kde-format
-#| msgid "Settings"
+#, kde-format
 msgctxt "@action:button"
 msgid "All Settings…"
-msgstr "Nuostatos"
+msgstr "Visos nuostatos…"
 
 #. i18n: ectx: label, entry (OpenSessions), group (General)
 #: core/krdc.kcfg:16
@@ -1014,27 +996,25 @@ msgstr "Įveskite SSH slaptažodį."
 #, kde-format
 msgctxt "@label"
 msgid "The SSH tunnel on port %1 could not be set up."
-msgstr ""
+msgstr "Nepavyko paruošti SSH tunelio prievade %1."
 
 #: core/remoteview.cpp:704
 #, kde-format
 msgctxt "@title connection error"
 msgid "SSH server not reachable"
-msgstr ""
+msgstr "SSH serveris nepasiekiamas"
 
 #: core/remoteview.cpp:705
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "The server refused the connection request."
+#, kde-format
 msgctxt "@label"
 msgid "The SSH server did not accept a connection on port %1."
-msgstr "Serveris atsisakė priimti užklausą užmegzti ryšį."
+msgstr "SSH serveris nepriėmė ryšio prievade %1."
 
 #: core/remoteview.cpp:707
 #, kde-format
 msgctxt "@info"
 msgid "Make sure the SSH server is running and listens on port %1."
-msgstr ""
+msgstr "Įsitikinkite, kad SSH serveris veikia ir klausosi prievado %1."
 
 #: core/remoteview.cpp:708
 #, kde-format
@@ -1042,37 +1022,39 @@ msgctxt "@info"
 msgid ""
 "Check the host name, and that the computer is reachable from this network."
 msgstr ""
+"Patikrinkite mazgo pavadinimą ir ar kompiuteris pasiekiamas iš šio tinklo."
 
 #: core/remoteview.cpp:709
 #, kde-format
 msgctxt "@info"
 msgid "Check that no firewall blocks SSH connections."
-msgstr ""
+msgstr "Patikrinkite, ar jokia užkarda neblokuoja SSH ryšių."
 
 #: core/remoteview.cpp:713
-#, fuzzy, kde-format
-#| msgid "SSH Tunnel failure"
+#, kde-format
 msgctxt "@title connection error"
 msgid "SSH login failed"
-msgstr "SSH tunelio nesėkmė"
+msgstr "SSH prisijungimas patyrė nesėkmę"
 
 #: core/remoteview.cpp:714
 #, kde-format
 msgctxt "@label"
 msgid "The SSH server did not accept the login."
-msgstr ""
+msgstr "SSH serveris nepriėmė prisijungimo prie kompiuterio."
 
 #: core/remoteview.cpp:715
 #, kde-format
 msgctxt "@label"
 msgid "The SSH server did not accept the login for “%1”."
-msgstr ""
+msgstr "SSH serveris nepriėmė prisijungimo, skirto „%1“."
 
 #: core/remoteview.cpp:717
 #, kde-format
 msgctxt "@info"
 msgid "Check the SSH user name in the host settings, and the password."
 msgstr ""
+"Patikrinkite mazgo nuostatose SSH naudotojo vardą, o taip pat patikrinkite "
+"slaptažodį."
 
 #: core/remoteview.cpp:718
 #, kde-format
@@ -1081,6 +1063,8 @@ msgid ""
 "If you use key authentication, add the key to your SSH agent with ssh-add, "
 "and make sure it is authorized on the server."
 msgstr ""
+"Jeigu naudojate tapatybės nustatymą raktu, tada pridėkite raktą į SSH agentą "
+"naudodami ssh-add ir įsitikinkite, kad jis leistinas serveryje."
 
 #: core/remoteview.cpp:719
 #, kde-format
@@ -1088,12 +1072,16 @@ msgctxt "@info"
 msgid ""
 "If the SSH server does not allow password logins, set up key authentication."
 msgstr ""
+"Jei SSH serveris neleidžia prisijungimo prie kompiuterio paskyros naudojant "
+"slaptažodį, tada nusistatykite ir paruoškite tapatybės nustatymą raktu."
 
 #: core/remoteview.cpp:723
 #, kde-format
 msgctxt "@label"
 msgid "No free local port could be opened for the tunnel on this computer."
 msgstr ""
+"Šiame kompiuteryje nepavyko atverti jokio laisvo vietinio prievado, skirto "
+"tuneliui."
 
 #: core/remoteview.cpp:725
 #, kde-format
@@ -1102,6 +1090,8 @@ msgid ""
 "Close other applications that open many network connections, then connect "
 "again."
 msgstr ""
+"Užverkite kitas programas, atveriančias daug tinklo ryšių, o tada bandykite "
+"dar kartą."
 
 #: core/sshtunnelthread.cpp:104
 #, kde-format
@@ -1358,6 +1348,8 @@ msgid ""
 "Unable to load connection data from “%1”.\n"
 "The file may be damaged, or it is in a format KRDC does not support."
 msgstr ""
+"Nepavyko įkelti ryšio duomenų iš „%1“.\n"
+"Gali būti, kad failas yra pažeistas arba tokio formato, kurio KRDC nepalaiko."
 
 #: mainwindow.cpp:289
 #, kde-format
@@ -1371,6 +1363,10 @@ msgid ""
 "\n"
 "Use the form [username@]host[:port], for example: user@192.168.1.10:5900"
 msgstr ""
+"„%1“ nėra tinkamas adresas.\n"
+"\n"
+"Naudokite tokią formą [naudotojo_vardas@]mazgas[:prievadas], pavyzdžiui, "
+"naudotojas@192.168.1.10:5900"
 
 #: mainwindow.cpp:298
 #, kde-format
@@ -1383,6 +1379,8 @@ msgid ""
 "No installed plugin can handle the “%1” protocol.\n"
 "Supported protocols: %2"
 msgstr ""
+"Joks įdiegtas įskiepis negali apdoroti „%1“ protokolo.\n"
+"Palaikomi protokolai: %2"
 
 #: mainwindow.cpp:541
 #, kde-format
@@ -1540,12 +1538,13 @@ msgstr "Filtras"
 msgctxt "@label"
 msgid "The remote computer may have shut down or restarted."
 msgstr ""
+"Gali būti, kad nuotolinis kompiuteris išsijungė arba pasileido iš naujo."
 
 #: mainwindow.cpp:1645
 #, kde-format
 msgctxt "@title connection error"
 msgid "Closed before the session started"
-msgstr ""
+msgstr "Užbaigtas dar neprasidėjus seansui"
 
 #. i18n: ectx: attribute (title), widget (QWidget, displayTab)
 #. i18n: ectx: property (text), widget (QLabel, displayHeading)
@@ -1786,10 +1785,9 @@ msgstr "Mažai spalvų (8 bitų)"
 #. i18n: ectx: property (text), widget (QLabel, localResourcesHeading)
 #: rdp/rdppreferences.ui:448 spice/spicepreferences.ui:242
 #: vnc/vncpreferences.ui:237
-#, fuzzy, kde-format
-#| msgid "Local Cursor"
+#, kde-format
 msgid "Local Resources"
-msgstr "Vietinis žymeklis"
+msgstr "Vietiniai ištekliai"
 
 #. i18n: ectx: property (text), widget (QLabel, soundLabel)
 #: rdp/rdppreferences.ui:454
@@ -1834,10 +1832,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:530
-#, fuzzy, kde-format
-#| msgid "On This Computer"
+#, kde-format
 msgid "Same as This Computer"
-msgstr "Šiame kompiuteryje"
+msgstr "Toks pats, kaip šiame kompiuteryje"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:535
@@ -2063,23 +2060,23 @@ msgstr "Turkų (tr)"
 
 #. i18n: ectx: property (text), widget (QLabel, shareMediaLabel)
 #: rdp/rdppreferences.ui:723
-#, fuzzy, kde-format
-#| msgid "Share Media:"
+#, kde-format
 msgid "Shared folder:"
-msgstr "Bendrinti mediją:"
+msgstr "Bendrinamas aplankas:"
 
 #. i18n: ectx: property (toolTip), widget (SharedFolderField, kcfg_ShareMedia)
 #: rdp/rdppreferences.ui:739
 #, kde-format
 msgid "A folder on this computer that the remote computer can read and write."
 msgstr ""
+"Šiame kompiuteryje esantis aplankas, kurį nuotolinis kompiuteris galės "
+"skaityti ir į kurį galės rašyti."
 
 #. i18n: ectx: property (text), widget (QLabel, shareSmartcardLabel)
 #: rdp/rdppreferences.ui:746
-#, fuzzy, kde-format
-#| msgid "Share Smartcard:"
+#, kde-format
 msgid "Shared smartcard:"
-msgstr "Bendrinti lustinę kortelę:"
+msgstr "Bendrinama lustinė kortelė:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, connectionTab)
 #: rdp/rdppreferences.ui:760
@@ -2089,17 +2086,15 @@ msgstr "Prisijungimas"
 
 #. i18n: ectx: property (text), widget (QLabel, sessionLabel)
 #: rdp/rdppreferences.ui:766
-#, fuzzy, kde-format
-#| msgid "Sessions"
+#, kde-format
 msgid "Session:"
-msgstr "Seansai"
+msgstr "Seansas:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ConsoleMode)
 #: rdp/rdppreferences.ui:773
-#, fuzzy, kde-format
-#| msgid "Admin (or console) session"
+#, kde-format
 msgid "Connect to the console (admin) session"
-msgstr "Administratoriaus (ar pulto) seansas"
+msgstr "Prisijungti prie pulto (administratoriaus) seanso"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_ConsoleMode)
 #: rdp/rdppreferences.ui:776
@@ -2108,11 +2103,12 @@ msgid ""
 "Connect to the session an administrator uses to manage the remote computer, "
 "instead of a new user session."
 msgstr ""
+"Užuot jungiantis prie naujo naudotojo seanso, prisijungti prie seanso, kurį "
+"administratorius naudoja, kad valdytų nuotolinį kompiuterį."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_PreventSessionLock)
 #: rdp/rdppreferences.ui:783
-#, fuzzy, kde-format
-#| msgid "Prevent remote session lock"
+#, kde-format
 msgid "Keep the remote session from locking"
 msgstr "Neleisti užrakinti nuotolinį seansą"
 
@@ -2123,13 +2119,14 @@ msgid ""
 "Move the remote mouse pointer every few minutes so that the remote computer "
 "does not lock the session while it is idle."
 msgstr ""
+"Kas kelias minutes judinkite nuotolinę pelės rodyklę, kad nuotolinis "
+"kompiuteris neužrakintų seanso, kol jis neveiklus."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseGateway)
 #: rdp/rdppreferences.ui:812
-#, fuzzy, kde-format
-#| msgid "Connect to a VNC Remote Desktop"
+#, kde-format
 msgid "Connect through a Remote Desktop Gateway"
-msgstr "Prisijungti prie VNC nuotolinio darbalaukio"
+msgstr "Prisijungti per nuotolinio darbalaukio tinklų sietuvą"
 
 #. i18n: ectx: property (text), widget (QLabel, gServerLabel)
 #. i18n: ectx: property (text), widget (QLabel, pHostLabel)
@@ -2186,11 +2183,9 @@ msgstr "RPC"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseProxy)
 #: rdp/rdppreferences.ui:898
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Lost connection to the server."
+#, kde-format
 msgid "Connect through a proxy server"
-msgstr "Nutrūko ryšys su serveriu."
+msgstr "Prisijungti per įgaliotąjį serverį"
 
 #. i18n: ectx: property (text), widget (QLabel, protocolLabel)
 #: rdp/rdppreferences.ui:939
@@ -2212,10 +2207,9 @@ msgstr "Saugumas"
 
 #. i18n: ectx: property (text), widget (QLabel, protocolsLabel)
 #: rdp/rdppreferences.ui:991
-#, fuzzy, kde-format
-#| msgid "Protocol:"
+#, kde-format
 msgid "Protocols:"
-msgstr "Protokolas:"
+msgstr "Protokolai:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityNLA)
 #: rdp/rdppreferences.ui:1000
@@ -2228,6 +2222,8 @@ msgstr "NLA"
 #, kde-format
 msgid "Network Level Authentication: sign in before the remote session starts."
 msgstr ""
+"Tinklo lygio tapatybės nustatymas (Network Level Authentication): "
+"prisijungti prieš prasidedant nuotoliniam seansui."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityTLS)
 #: rdp/rdppreferences.ui:1010
@@ -2240,6 +2236,7 @@ msgstr "TLS"
 #, kde-format
 msgid "TLS encryption, signing in on the login screen of the remote computer."
 msgstr ""
+"TLS šifravimas, prisijungimas nuotolinio kompiuterio prisijungimo lange."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityRDP)
 #: rdp/rdppreferences.ui:1020
@@ -2251,7 +2248,7 @@ msgstr "RDP"
 #: rdp/rdppreferences.ui:1023
 #, kde-format
 msgid "Standard RDP security, the older encryption built into the protocol."
-msgstr ""
+msgstr "Standartinis RDP saugumas, senesnis šifravimas įtaisytas į protokolą."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityEXT)
 #: rdp/rdppreferences.ui:1030
@@ -2266,6 +2263,9 @@ msgid ""
 "Extended Network Level Authentication, which also checks that the account "
 "may sign in before the session starts."
 msgstr ""
+"Išplėstinis tinklo lygio tapatybės nustatymas (Extended Network Level "
+"Authentication), kuris tuo pačiu tikrina, kad paskyra galėtų prisijungti "
+"prieš prasidedant seansui."
 
 #. i18n: ectx: property (text), widget (QLabel, TlsSecLevelLabel)
 #: rdp/rdppreferences.ui:1055
@@ -2280,13 +2280,14 @@ msgid ""
 "The weakest TLS encryption to accept. A higher level may refuse to connect "
 "to older servers."
 msgstr ""
+"Silpniausias TLS šifravimas, kurį priimti. Aukštesnis lygis gali atsisakyti "
+"prisijungti prie senesnių serverių."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:1075
-#, fuzzy, kde-format
-#| msgid "any"
+#, kde-format
 msgid "Any"
-msgstr "bet koks"
+msgstr "Bet koks"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:1080
@@ -2320,10 +2321,9 @@ msgstr "256 bitai"
 
 #. i18n: ectx: property (text), widget (QLabel, authPkgListLabel)
 #: rdp/rdppreferences.ui:1108
-#, fuzzy, kde-format
-#| msgid "Authentication Package List:"
+#, kde-format
 msgid "Authentication packages:"
-msgstr "Tapatybės nustatymo paketų sąrašas:"
+msgstr "Tapatybės nustatymo paketai:"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, authPkgListLabel)
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_AuthPkgKerberos)
@@ -2337,24 +2337,28 @@ msgid ""
 "packages are explicitly forbidden. For Kerberos-only authentication (e.g. "
 "Active Directory Protected Users accounts), uncheck NTLM."
 msgstr ""
+"Pažymėti paketai gali būti naudojami CredSSP/NLA suderinimo metu; nepažymėti "
+"paketai yra aiškiai uždrausti. Tapatybės nustatymui tik per Kerberos (pvz., "
+"Aktyvaus katalogo apsaugotų naudotojų (Active Directory Protected Users) "
+"paskyroms), nuimkite žymėjimą nuo NTLM."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AuthPkgKerberos)
 #: rdp/rdppreferences.ui:1120
 #, kde-format
 msgid "Kerberos"
-msgstr ""
+msgstr "Kerberos"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AuthPkgNtlm)
 #: rdp/rdppreferences.ui:1130
 #, kde-format
 msgid "NTLM"
-msgstr ""
+msgstr "NTLM"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AuthPkgU2u)
 #: rdp/rdppreferences.ui:1140
 #, kde-format
 msgid "U2U"
-msgstr ""
+msgstr "U2U"
 
 #: rdp/rdpsession.cpp:1342
 #, kde-format
@@ -2427,37 +2431,38 @@ msgstr ""
 #, kde-format
 msgctxt "@label"
 msgid "The credentials for “%1” were not accepted."
-msgstr ""
+msgstr "Prisijungimo duomenys, skirti „%1“, nebuvo priimti."
 
 #: rdp/rdpview.cpp:351
 #, kde-format
 msgctxt "@info"
 msgid "Check the RD Gateway credentials in the host settings."
-msgstr ""
+msgstr "Patikrinkite mazgo nuostatose RD tinklų sietuvo prisijungimo duomenis."
 
 #: rdp/rdpview.cpp:367
 #, kde-format
 msgctxt "@label"
 msgid "This account may not log in remotely."
-msgstr ""
+msgstr "Ši paskyra negali prisijungti nuotoliniu būdu."
 
 #: rdp/rdpview.cpp:368
 #, kde-format
 msgctxt "@label"
 msgid "“%1” may not log in remotely."
-msgstr ""
+msgstr "„%1“ negali prisijungti nuotoliniu būdu."
 
 #: rdp/rdpview.cpp:370
 #, kde-format
 msgctxt "@title connection error"
 msgid "Access denied"
-msgstr ""
+msgstr "Prieiga negalima"
 
 #: rdp/rdpview.cpp:372
 #, kde-format
 msgctxt "@info"
 msgid "Check whether the account is locked, disabled or expired."
 msgstr ""
+"Patikrinkite, ar paskyra nėra užrakinta, išjungta ir, ar vis dar tebegalioja."
 
 #: rdp/rdpview.cpp:374
 #, kde-format
@@ -2466,20 +2471,23 @@ msgid ""
 "Ask the administrator of the remote computer to add the account to the "
 "Remote Desktop Users group, or log in with a different account."
 msgstr ""
+"Paprašykite nuotolinio kompiuterio administratoriaus, kad pridėtų paskyrą į "
+"nuotolinio darbalaukio naudotojų grupę, arba prisijunkite naudodami kitą "
+"paskyrą."
 
 #: rdp/rdpview.cpp:382
 #, kde-format
 msgctxt "@label"
 msgid "The password must be changed before it can be used to log in remotely."
 msgstr ""
+"Slaptažodis privalo būti pakeistas dar prieš tai, kai galima bus jį naudoti "
+"nuotoliniam prisijungimui."
 
 #: rdp/rdpview.cpp:383
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Password Problems"
+#, kde-format
 msgctxt "@title connection error"
 msgid "Password expired"
-msgstr "Problemos su slaptažodžiu"
+msgstr "Slaptažodis nebegalioja"
 
 #: rdp/rdpview.cpp:385
 #, kde-format
@@ -2488,36 +2496,40 @@ msgid ""
 "Change the password by logging in locally on the remote computer, or ask its "
 "administrator to reset it."
 msgstr ""
+"Pakeiskite slaptažodį prisijungdami prie kompiuterio paskyros ten vietoje, "
+"nuotoliniame kompiuteryje, arba paprašykite kompiuterio administratoriaus, "
+"kad atstatytų slaptažodį."
 
 #: rdp/rdpview.cpp:390
 #, kde-format
 msgctxt "@label"
 msgid "The Kerberos domain controller could not be reached."
-msgstr ""
+msgstr "Nepavyko pasiekti Kerberos domeno valdiklio."
 
 #: rdp/rdpview.cpp:392
 #, kde-format
 msgctxt "@info"
 msgid "Check the domain you entered when logging in."
-msgstr ""
+msgstr "Patikrinkite domeną, kurį įvedėte prisijungdami."
 
 #: rdp/rdpview.cpp:393
 #, kde-format
 msgctxt "@info"
 msgid "Connect to the network or VPN of the domain."
-msgstr ""
+msgstr "Prisijunkite prie domeno tinklo ar VPN."
 
 #: rdp/rdpview.cpp:398 spice/spiceview.cpp:901 vnc/vncview.cpp:287
 #, kde-format
 msgctxt "@label"
 msgid "No IP address was found for this name."
-msgstr ""
+msgstr "Šiuo pavadinimu nerastas joks IP adresas."
 
 #: rdp/rdpview.cpp:409
 #, kde-format
 msgctxt "@label"
 msgid "The server and KRDC could not agree on a security protocol."
 msgstr ""
+"Serveriui ir KRDC nepavyko sutarti dėl to, kokį saugumo protokolą naudoti."
 
 #: rdp/rdpview.cpp:411
 #, kde-format
@@ -2526,18 +2538,22 @@ msgid ""
 "Set the TLS security level in the host settings to “Any”. The server may not "
 "support the level selected."
 msgstr ""
+"Mazgo nuostatose nustatykite TLS saugumo lygį į „Bet koks“. Gali būti, kad "
+"serveris nepalaiko pasirinkto lygio."
 
 #: rdp/rdpview.cpp:415
 #, kde-format
 msgctxt "@label"
 msgid "The server requires Network Level Authentication (NLA)."
 msgstr ""
+"Serveris reikalauja tinklo lygmens tapatybės nustatymo (Network Level "
+"Authentication (NLA))."
 
 #: rdp/rdpview.cpp:416
 #, kde-format
 msgctxt "@info"
 msgid "Enable NLA in the security settings for this host."
-msgstr ""
+msgstr "Šiam mazgui saugumo nuostatose įjunkite NLA."
 
 #: rdp/rdpview.cpp:434
 #, kde-format
@@ -2546,12 +2562,14 @@ msgid ""
 "Check the RD Gateway settings for this host. The gateway “%1” may be "
 "unreachable or reject the connection."
 msgstr ""
+"Patikrinkite šio mazgo RD tinklų sietuvo nuostatas. Gali būti, kad tinklų "
+"sietuvas „%1“ yra nepasiekiamas arba atmeta ryšį."
 
 #: rdp/rdpview.cpp:441
 #, kde-format
 msgctxt "@label"
 msgid "The remote computer did not finish starting the session in time."
-msgstr ""
+msgstr "Nuotolinis kompiuteris neužbaigė seanso paleidimą laiku."
 
 #: rdp/rdpview.cpp:442
 #, kde-format
@@ -2560,61 +2578,64 @@ msgid ""
 "The remote computer may still be starting up or be under heavy load. Wait a "
 "minute, then connect again."
 msgstr ""
+"Gali būti, kad nuotolinis kompiuteris vis dar pasileidžia arba patiria "
+"didelį krūvį. Palaukite minutėlę, o tada bandykite prisijungti dar kartą."
 
 #: rdp/rdpview.cpp:446
 #, kde-format
 msgctxt "@label"
 msgid "It accepted the connection, then refused to start a session."
-msgstr ""
+msgstr "Jis priėmė ryšį, o tada atsisakė pradėti seansą."
 
 #: rdp/rdpview.cpp:447
-#, fuzzy, kde-format
-#| msgid "Sessions"
+#, kde-format
 msgctxt "@title connection error"
 msgid "Session refused"
-msgstr "Seansai"
+msgstr "Seanso atsisakyta"
 
 #: rdp/rdpview.cpp:451
 #, kde-format
 msgctxt "@label"
 msgid "The server did not accept the options selected for this host."
-msgstr ""
+msgstr "Serveris nepriėmė šiam mazgui pasirinktų parinkčių."
 
 #: rdp/rdpview.cpp:454
 #, kde-format
 msgctxt "@label"
 msgid "An administrator or another program disconnected this session."
-msgstr ""
+msgstr "Administratorius arba kita programa atjungė šį seansą."
 
 #: rdp/rdpview.cpp:457
 #, kde-format
 msgctxt "@label"
 msgid "An administrator signed this session out."
-msgstr ""
+msgstr "Administratorius atjungė šį seansą nuo kompiuterio paskyros."
 
 #: rdp/rdpview.cpp:460
 #, kde-format
 msgctxt "@label"
 msgid "The session was disconnected from the remote computer."
-msgstr ""
+msgstr "Seansas buvo atjungtas nuo nuotolinio kompiuterio."
 
 #: rdp/rdpview.cpp:467
 #, kde-format
 msgctxt "@label"
 msgid "Disconnected because someone else connected to this session."
-msgstr ""
+msgstr "Atsijungta, nes kažkas kitas prisijungė prie šio seanso."
 
 #: rdp/rdpview.cpp:468
 #, kde-format
 msgctxt "@info"
 msgid "Reconnect to take the session back. This disconnects the other user."
 msgstr ""
+"Prisijunkite iš naujo, kad susigrąžintumėte seansą. Tai atjungs kitą "
+"naudotoją."
 
 #: rdp/rdpview.cpp:471
 #, kde-format
 msgctxt "@label"
 msgid "The session was closed after being idle for too long."
-msgstr ""
+msgstr "Seansas buvo užbaigtas po to, kai pernelyg ilgą laiką buvo neveiklus."
 
 #: rdp/rdpview.cpp:472
 #, kde-format
@@ -2623,12 +2644,15 @@ msgid ""
 "Reconnect to continue. The idle time limit is set by the administrator of "
 "the server."
 msgstr ""
+"Prisijunkite iš naujo norėdami tęsti. Neveiklumo laiko ribą nustato serverio "
+"administratorius."
 
 #: rdp/rdpview.cpp:486
 #, kde-format
 msgctxt "@label"
 msgid "The remote computer reported a problem while logging in."
 msgstr ""
+"Nuotolinis kompiuteris pranešė apie problemą prisijungiant prie paskyros."
 
 #: rdp/rdpview.cpp:487
 #, kde-format
@@ -2637,6 +2661,8 @@ msgid ""
 "Check that this user may log in to the remote computer, and that the session "
 "is not busy."
 msgstr ""
+"Patikrinkite, ar šis naudotojas gali prisijungti prie nuotolinio "
+"kompiuterio, ir ar seansas nėra užimtas."
 
 #: rdp/rdpview.cpp:866
 #, kde-format
@@ -2667,13 +2693,13 @@ msgstr ""
 #, kde-format
 msgctxt "@item:inlistbox shared folder"
 msgid "Not shared"
-msgstr ""
+msgstr "Nebendrinamas"
 
 #: rdp/sharedfolderfield.cpp:20
 #, kde-format
 msgctxt "@item:inlistbox shared folder"
 msgid "Removable drives"
-msgstr ""
+msgstr "Keičiamieji diskai"
 
 #: rdp/sharedfolderfield.cpp:22
 #, kde-format
@@ -2682,42 +2708,44 @@ msgid ""
 "USB drives and memory cards, including ones plugged in during the session. "
 "Network shares are not included."
 msgstr ""
+"USB atmintukai ir atminties kortelės, įskaitant tuos, kurie prijungti seanso "
+"metu. Tinklo viešiniai nėra įtraukti."
 
 #: rdp/sharedfolderfield.cpp:33
 #, kde-format
 msgctxt "@item:inlistbox shared folder"
 msgid "Downloads"
-msgstr ""
+msgstr "Atsiuntimai"
 
 #: rdp/sharedfolderfield.cpp:34
 #, kde-format
 msgctxt "@item:inlistbox shared folder"
 msgid "Documents"
-msgstr ""
+msgstr "Dokumentai"
 
 #: rdp/sharedfolderfield.cpp:36
 #, kde-format
 msgctxt "@item:inlistbox shared folder"
 msgid "Other Folder…"
-msgstr ""
+msgstr "Kitas aplankas…"
 
 #: rdp/sharedfolderfield.cpp:65
 #, kde-format
 msgctxt "@item:inlistbox shared folder, %1 a stored value"
 msgid "%1 (not supported)"
-msgstr ""
+msgstr "%1 (nepalaikomas)"
 
 #: rdp/sharedfolderfield.cpp:69
 #, kde-format
 msgctxt "@item:inlistbox shared folder, %1 its name, %2 its path"
 msgid "%1 (%2)"
-msgstr ""
+msgstr "%1 (%2)"
 
 #: rdp/sharedfolderfield.cpp:102
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose Shared Folder"
-msgstr ""
+msgstr "Pasirinkite bendrinamą aplanką"
 
 #: remotedesktopsmodel.cpp:112
 #, kde-format
@@ -2821,7 +2849,7 @@ msgstr "Atkurti šiame kompiuteryje garsą iš nuotolinio mazgo."
 #: spice/spicepreferences.ui:295 vnc/vncpreferences.ui:275
 #, kde-format
 msgid "Network"
-msgstr ""
+msgstr "Tinklas"
 
 #: spice/spiceview.cpp:830
 #, kde-format
@@ -2832,7 +2860,7 @@ msgstr "Norint prisijungti prie <b>%1</b>, reikia nustatyti tapatybę."
 #, kde-format
 msgctxt "@label"
 msgid "The TLS handshake failed."
-msgstr ""
+msgstr "TLS išankstinis suderinimas patyrė nesėkmę."
 
 #: spice/spiceview.cpp:893
 #, kde-format
@@ -2841,14 +2869,14 @@ msgid ""
 "Check whether the server accepts TLS only on a separate port, and that its "
 "certificate is trusted."
 msgstr ""
+"Patikrinkite, ar serveris atskirame prievade priima tik TLS ir, ar jo "
+"liudijimas yra patikimas."
 
 #: spice/spiceview.cpp:896
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "The server refused the connection request."
+#, kde-format
 msgctxt "@label"
 msgid "The server rejected the SPICE connection."
-msgstr "Serveris atsisakė priimti užklausą užmegzti ryšį."
+msgstr "Serveris atmetė SPICE ryšį."
 
 #: spice/spiceview.cpp:897
 #, kde-format
@@ -2857,6 +2885,8 @@ msgid ""
 "Check that this port belongs to a SPICE server with a compatible protocol "
 "version."
 msgstr ""
+"Patikrinkite, ar šis prievadas priklauso SPICE serveriui, naudojančiam "
+"suderinamą protokolo versiją."
 
 #: spice/spiceview.cpp:907
 #, kde-format
@@ -2865,6 +2895,8 @@ msgid ""
 "Make sure the virtual machine is running, and its SPICE display listens on "
 "this address."
 msgstr ""
+"Įsitikinkite, kad virtuali mašina veikia ir jos SPICE ekranas klausosi šiuo "
+"adresu."
 
 #: spice/spiceviewfactory.cpp:47
 #, kde-format
@@ -3032,19 +3064,21 @@ msgid ""
 "Wait a few minutes. The server blocks logins for a while after several "
 "failed attempts."
 msgstr ""
+"Palaukite kelias minutes. Serveris po keleto nesėkmingų bandymų tam tikrą "
+"laiką blokuoja prisijungimus prie kompiuterio paskyros."
 
 #: vnc/vncview.cpp:310
 #, kde-format
 msgctxt "@info"
 msgid "Then connect again and enter the password carefully."
-msgstr ""
+msgstr "Tada prisijunkite dar kartą ir atidžiai įveskite slaptažodį."
 
 #: vnc/vncview.cpp:316
 #, kde-format
 msgctxt "@label"
 msgid ""
 "The server requires an authentication method that KRDC does not support."
-msgstr ""
+msgstr "Serveris reikalauja tapatybės nustatymo metodo, kurio KRDC nepalaiko."
 
 #: vnc/vncview.cpp:318
 #, kde-format
@@ -3053,6 +3087,8 @@ msgid ""
 "Configure the VNC server to use standard VNC password authentication, or "
 "connect through an SSH tunnel."
 msgstr ""
+"Sukonfigūruokite VNC serverį, kad naudotų standartinį VNC tapatybės "
+"nustatymą slaptažodžiu arba prisijunkite per SSH tunelį."
 
 #: vnc/vncviewfactory.cpp:47
 #, kde-format

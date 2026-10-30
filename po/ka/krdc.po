@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-10-29 00:53+0000\n"
-"PO-Revision-Date: 2026-10-27 09:49+0100\n"
+"PO-Revision-Date: 2026-10-29 03:45+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -585,7 +585,7 @@ msgstr "ჰოსტის სახელის ძებნა"
 #, kde-format
 msgctxt "@info connection stage"
 msgid "Connecting to the server"
-msgstr "სერვერთან მიერთება"
+msgstr "სერვერთან დაკავშირება"
 
 #: core/connectionerror.cpp:21
 #, kde-format
@@ -921,11 +921,10 @@ msgid "Connect to the network or VPN the remote computer is on."
 msgstr "დაუკავშირით ქსელს, ან VPN-ს, სადაც დაშორებული კომპიუტერია."
 
 #: core/hostpreferences.cpp:308
-#, fuzzy, kde-format
-#| msgid "Connected to %1"
+#, kde-format
 msgctxt "@title:window %1 is a host name"
 msgid "Connect to %1"
-msgstr "შეერთებული %1-სთან"
+msgstr "%1- სთან დაკავშირება"
 
 #: core/hostpreferences.cpp:315
 #, kde-format
@@ -936,8 +935,7 @@ msgstr ""
 "გამოყენებული."
 
 #: core/hostpreferences.cpp:338
-#, fuzzy, kde-format
-#| msgid "Connect"
+#, kde-format
 msgctxt "@action:button"
 msgid "Connect"
 msgstr "დაკავშირება"
@@ -965,11 +963,10 @@ msgid "Show this dialog again for this host"
 msgstr "ამ ჰოსტისთვის ამ ფანჯრის კიდევ ერთხელ ჩვენება"
 
 #: core/hostpreferences.cpp:428
-#, fuzzy, kde-format
-#| msgid "Settings"
+#, kde-format
 msgctxt "@action:button"
 msgid "All Settings…"
-msgstr "მორგება"
+msgstr "ყველა პარამეტრი…"
 
 #. i18n: ectx: label, entry (OpenSessions), group (General)
 #: core/krdc.kcfg:16
@@ -1766,10 +1763,9 @@ msgstr "ცოტა ფერი (8 ბიტი)"
 #. i18n: ectx: property (text), widget (QLabel, localResourcesHeading)
 #: rdp/rdppreferences.ui:448 spice/spicepreferences.ui:242
 #: vnc/vncpreferences.ui:237
-#, fuzzy, kde-format
-#| msgid "Local Cursor"
+#, kde-format
 msgid "Local Resources"
-msgstr "ლოკალური კურსორი"
+msgstr "ლოკალური რესურსები"
 
 #. i18n: ectx: property (text), widget (QLabel, soundLabel)
 #: rdp/rdppreferences.ui:454
@@ -1814,10 +1810,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:530
-#, fuzzy, kde-format
-#| msgid "On This Computer"
+#, kde-format
 msgid "Same as This Computer"
-msgstr "ამ კომპიუტერზე"
+msgstr "იგივე, რაც ამ კომპიუტერზე"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:535
@@ -2043,23 +2038,23 @@ msgstr "თურქული (tr)"
 
 #. i18n: ectx: property (text), widget (QLabel, shareMediaLabel)
 #: rdp/rdppreferences.ui:723
-#, fuzzy, kde-format
-#| msgid "Share Media:"
+#, kde-format
 msgid "Shared folder:"
-msgstr "მედის გაზიარება:"
+msgstr "გაზიარებული საქაღალდე:"
 
 #. i18n: ectx: property (toolTip), widget (SharedFolderField, kcfg_ShareMedia)
 #: rdp/rdppreferences.ui:739
 #, kde-format
 msgid "A folder on this computer that the remote computer can read and write."
 msgstr ""
+"საქაღალდე ა, კომპიუტერზე, რომელშიც დაშორებულ კომპიუტერზე ჩაწერა და საიდანაც "
+"წაკითხვა შეეძლება."
 
 #. i18n: ectx: property (text), widget (QLabel, shareSmartcardLabel)
 #: rdp/rdppreferences.ui:746
-#, fuzzy, kde-format
-#| msgid "Share Smartcard:"
+#, kde-format
 msgid "Shared smartcard:"
-msgstr "Smartcard-ის გაზიარება:"
+msgstr "გაზიარებული Smartcard::"
 
 #. i18n: ectx: attribute (title), widget (QWidget, connectionTab)
 #: rdp/rdppreferences.ui:760
@@ -2069,32 +2064,29 @@ msgstr "კავშირი"
 
 #. i18n: ectx: property (text), widget (QLabel, sessionLabel)
 #: rdp/rdppreferences.ui:766
-#, fuzzy, kde-format
-#| msgid "Sessions"
+#, kde-format
 msgid "Session:"
-msgstr "სესიები"
+msgstr "სესია:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ConsoleMode)
 #: rdp/rdppreferences.ui:773
-#, fuzzy, kde-format
-#| msgid "Admin (or console) session"
+#, kde-format
 msgid "Connect to the console (admin) session"
-msgstr "ადმინისტრატორის (ან კონსოლის) სესია"
+msgstr "ადმინისტრატორის (ან კონსოლის) სესიასთან დაკავშირება"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_ConsoleMode)
 #: rdp/rdppreferences.ui:776
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "Connect to the network or VPN the remote computer is on."
+#, kde-format
 msgid ""
 "Connect to the session an administrator uses to manage the remote computer, "
 "instead of a new user session."
-msgstr "დაუკავშირით ქსელს, ან VPN-ს, სადაც დაშორებული კომპიუტერია."
+msgstr ""
+"დაკავშირება სესიასთან, რომელსაც ადმინისტრატორი დაშორებული კომპიუტერის "
+"სამართავად იყენებს ახალი მომხმარებლის სესიის ნაცვლად."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_PreventSessionLock)
 #: rdp/rdppreferences.ui:783
-#, fuzzy, kde-format
-#| msgid "Prevent remote session lock"
+#, kde-format
 msgid "Keep the remote session from locking"
 msgstr "დაშორებული სესიის დაბლოკვის თავიდან აცილება"
 
@@ -2105,13 +2097,14 @@ msgid ""
 "Move the remote mouse pointer every few minutes so that the remote computer "
 "does not lock the session while it is idle."
 msgstr ""
+"დაშორებული თაგუნას მაჩვენებლის გადაადგილება ყოველ რამდენიმე წუთში ერთხელ, "
+"რომ დაშორებულმა მანქანამ არ ჩაკეტოს სესია, სანამ ის უქმადაა."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseGateway)
 #: rdp/rdppreferences.ui:812
-#, fuzzy, kde-format
-#| msgid "Connect to a VNC Remote Desktop"
+#, kde-format
 msgid "Connect through a Remote Desktop Gateway"
-msgstr "დაშორებულ სამუშაო მაგიდაზე VNC-ით მიერთება"
+msgstr "დაკავშირება დაშორებული სამუშაო მაგიდის მარშრუტიზატორის გავლით"
 
 #. i18n: ectx: property (text), widget (QLabel, gServerLabel)
 #. i18n: ectx: property (text), widget (QLabel, pHostLabel)
@@ -2168,11 +2161,9 @@ msgstr "RPC"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseProxy)
 #: rdp/rdppreferences.ui:898
-#, fuzzy, kde-format
-#| msgctxt "@info connection stage"
-#| msgid "Connecting to the server"
+#, kde-format
 msgid "Connect through a proxy server"
-msgstr "სერვერთან მიერთება"
+msgstr "დაკავშირება პროქსის სერვერის გავლით"
 
 #. i18n: ectx: property (text), widget (QLabel, protocolLabel)
 #: rdp/rdppreferences.ui:939
@@ -2194,10 +2185,9 @@ msgstr "უსაფრთხოება"
 
 #. i18n: ectx: property (text), widget (QLabel, protocolsLabel)
 #: rdp/rdppreferences.ui:991
-#, fuzzy, kde-format
-#| msgid "Protocol:"
+#, kde-format
 msgid "Protocols:"
-msgstr "პროტოკოლი:"
+msgstr "პროტოკოლები:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityNLA)
 #: rdp/rdppreferences.ui:1000
@@ -2207,13 +2197,9 @@ msgstr "NLA"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SecurityNLA)
 #: rdp/rdppreferences.ui:1003
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid ""
-#| "It accepted the connection, then closed it before the session started."
+#, kde-format
 msgid "Network Level Authentication: sign in before the remote session starts."
-msgstr ""
-"მან მიიღო კავშირი, შემდეგ კი დახურა ის მანამდე, სანამ სესია დაიწყებოდა."
+msgstr "ქსელური დონის ავთენტიკაცია: შესვლა დაშორებული სესიის გაშვებამდე."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityTLS)
 #: rdp/rdppreferences.ui:1010
@@ -2223,11 +2209,10 @@ msgstr "TLS"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SecurityTLS)
 #: rdp/rdppreferences.ui:1013
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "The session was disconnected from the remote computer."
+#, kde-format
 msgid "TLS encryption, signing in on the login screen of the remote computer."
-msgstr "სესია გაითიშა დაშორებული კომპიუტერიდან."
+msgstr ""
+"TLS დაშიფვრა. დაშორებულ კომპიუტერზე შესვლა შესვლის ეკრანის გამოყენებით."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityRDP)
 #: rdp/rdppreferences.ui:1020
@@ -2240,6 +2225,8 @@ msgstr "RDP"
 #, kde-format
 msgid "Standard RDP security, the older encryption built into the protocol."
 msgstr ""
+"RDP-ის სტანდარტული უსაფრთხოება. ძველი დაშიფვრა, რომელიც პროტოკოლშია "
+"ჩაშენებული."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityEXT)
 #: rdp/rdppreferences.ui:1030
@@ -2254,6 +2241,8 @@ msgid ""
 "Extended Network Level Authentication, which also checks that the account "
 "may sign in before the session starts."
 msgstr ""
+"გაფართოებული ქსელის დონის ავთენტიკაცია, რომელიც ასევე ამოწმებს, შეუძლია, თუ "
+"არა ანგარიშს შესვლა მანამდე, სანამ სესია გაეშვება."
 
 #. i18n: ectx: property (text), widget (QLabel, TlsSecLevelLabel)
 #: rdp/rdppreferences.ui:1055
@@ -2268,11 +2257,12 @@ msgid ""
 "The weakest TLS encryption to accept. A higher level may refuse to connect "
 "to older servers."
 msgstr ""
+"უსუსტესი მისაღები TLS დაშიფვრა. უფრო მაღალი დონით, შეიძლება, ძველ "
+"სერვერებთან დაკავშირება ვერ შეძლოთ."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:1075
-#, fuzzy, kde-format
-#| msgid "any"
+#, kde-format
 msgid "Any"
 msgstr "ნებისმიერი"
 
@@ -2308,8 +2298,7 @@ msgstr "256-ბიტიანი"
 
 #. i18n: ectx: property (text), widget (QLabel, authPkgListLabel)
 #: rdp/rdppreferences.ui:1108
-#, fuzzy, kde-format
-#| msgid "Authentication Packages:"
+#, kde-format
 msgid "Authentication packages:"
 msgstr "ავთენტიკაციის პაკეტები:"
 
@@ -2669,18 +2658,16 @@ msgstr ""
 "rdpserver:3389 (ჰოსტი:პორტი)</i></html>"
 
 #: rdp/sharedfolderfield.cpp:18
-#, fuzzy, kde-format
-#| msgctxt "@info:status connection step"
-#| msgid "Not started"
+#, kde-format
 msgctxt "@item:inlistbox shared folder"
 msgid "Not shared"
-msgstr "არ არის გაშვებული"
+msgstr "გაზიარებული არაა"
 
 #: rdp/sharedfolderfield.cpp:20
 #, kde-format
 msgctxt "@item:inlistbox shared folder"
 msgid "Removable drives"
-msgstr ""
+msgstr "მოხსნადი დისკები"
 
 #: rdp/sharedfolderfield.cpp:22
 #, kde-format
@@ -2689,42 +2676,44 @@ msgid ""
 "USB drives and memory cards, including ones plugged in during the session. "
 "Network shares are not included."
 msgstr ""
+"USB დისკები და მეხსიერების ბარათები, მათი ჩათვლით, რომლებიც სესიის "
+"განმავლობაში მიაერთეთ. ქსელური გაზიარებები ჩათვლილი არაა."
 
 #: rdp/sharedfolderfield.cpp:33
 #, kde-format
 msgctxt "@item:inlistbox shared folder"
 msgid "Downloads"
-msgstr ""
+msgstr "გადმოწერები"
 
 #: rdp/sharedfolderfield.cpp:34
 #, kde-format
 msgctxt "@item:inlistbox shared folder"
 msgid "Documents"
-msgstr ""
+msgstr "დოკუმენტები"
 
 #: rdp/sharedfolderfield.cpp:36
 #, kde-format
 msgctxt "@item:inlistbox shared folder"
 msgid "Other Folder…"
-msgstr ""
+msgstr "სხვა საქაღალდე…"
 
 #: rdp/sharedfolderfield.cpp:65
 #, kde-format
 msgctxt "@item:inlistbox shared folder, %1 a stored value"
 msgid "%1 (not supported)"
-msgstr ""
+msgstr "%1 (მხარდაჭერილი არაა)"
 
 #: rdp/sharedfolderfield.cpp:69
 #, kde-format
 msgctxt "@item:inlistbox shared folder, %1 its name, %2 its path"
 msgid "%1 (%2)"
-msgstr ""
+msgstr "%1 (%2)"
 
 #: rdp/sharedfolderfield.cpp:102
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose Shared Folder"
-msgstr ""
+msgstr "აირჩიეთ გაზიარებული საქაღალდე"
 
 #: remotedesktopsmodel.cpp:112
 #, kde-format
@@ -2828,7 +2817,7 @@ msgstr "აუდიოს დაკვრა დაშორებული ჰ
 #: spice/spicepreferences.ui:295 vnc/vncpreferences.ui:275
 #, kde-format
 msgid "Network"
-msgstr ""
+msgstr "ქსელი"
 
 #: spice/spiceview.cpp:830
 #, kde-format

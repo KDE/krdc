@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-10-29 00:53+0000\n"
-"PO-Revision-Date: 2026-10-27 12:17+0200\n"
+"PO-Revision-Date: 2026-10-29 15:44+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -944,11 +944,10 @@ msgstr ""
 "комп'ютер."
 
 #: core/hostpreferences.cpp:308
-#, fuzzy, kde-format
-#| msgid "Connected to %1"
+#, kde-format
 msgctxt "@title:window %1 is a host name"
 msgid "Connect to %1"
-msgstr "З'єднано з %1"
+msgstr "З'єднатися з %1"
 
 #: core/hostpreferences.cpp:315
 #, kde-format
@@ -959,8 +958,7 @@ msgstr ""
 "з’єднання з цим вузлом."
 
 #: core/hostpreferences.cpp:338
-#, fuzzy, kde-format
-#| msgid "Connect"
+#, kde-format
 msgctxt "@action:button"
 msgid "Connect"
 msgstr "З'єднатися"
@@ -988,11 +986,10 @@ msgid "Show this dialog again for this host"
 msgstr "Показувати це вікно знов для цього вузла"
 
 #: core/hostpreferences.cpp:428
-#, fuzzy, kde-format
-#| msgid "Settings"
+#, kde-format
 msgctxt "@action:button"
 msgid "All Settings…"
-msgstr "Параметри"
+msgstr "Усі параметри…"
 
 #. i18n: ectx: label, entry (OpenSessions), group (General)
 #: core/krdc.kcfg:16
@@ -1797,10 +1794,9 @@ msgstr "Низька глибина кольору (8 біт)"
 #. i18n: ectx: property (text), widget (QLabel, localResourcesHeading)
 #: rdp/rdppreferences.ui:448 spice/spicepreferences.ui:242
 #: vnc/vncpreferences.ui:237
-#, fuzzy, kde-format
-#| msgid "Local Cursor"
+#, kde-format
 msgid "Local Resources"
-msgstr "Локальний курсор"
+msgstr "Локальні ресурси"
 
 #. i18n: ectx: property (text), widget (QLabel, soundLabel)
 #: rdp/rdppreferences.ui:454
@@ -1845,10 +1841,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:530
-#, fuzzy, kde-format
-#| msgid "On This Computer"
+#, kde-format
 msgid "Same as This Computer"
-msgstr "На цьому комп'ютері"
+msgstr "Та сама, що і на цьому комп'ютері"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:535
@@ -2074,21 +2069,21 @@ msgstr "турецька (tr)"
 
 #. i18n: ectx: property (text), widget (QLabel, shareMediaLabel)
 #: rdp/rdppreferences.ui:723
-#, fuzzy, kde-format
-#| msgid "Share Media:"
+#, kde-format
 msgid "Shared folder:"
-msgstr "Спільний носій:"
+msgstr "Спільна тека:"
 
 #. i18n: ectx: property (toolTip), widget (SharedFolderField, kcfg_ShareMedia)
 #: rdp/rdppreferences.ui:739
 #, kde-format
 msgid "A folder on this computer that the remote computer can read and write."
 msgstr ""
+"Тека на цьому комп'ютері, читання і запис даних до якої дозволено "
+"віддаленому комп'ютері."
 
 #. i18n: ectx: property (text), widget (QLabel, shareSmartcardLabel)
 #: rdp/rdppreferences.ui:746
-#, fuzzy, kde-format
-#| msgid "Share Smartcard:"
+#, kde-format
 msgid "Shared smartcard:"
 msgstr "Спільна картка пам’яті:"
 
@@ -2100,34 +2095,29 @@ msgstr "З'єднання"
 
 #. i18n: ectx: property (text), widget (QLabel, sessionLabel)
 #: rdp/rdppreferences.ui:766
-#, fuzzy, kde-format
-#| msgid "Sessions"
+#, kde-format
 msgid "Session:"
-msgstr "Сеанси"
+msgstr "Сеанс:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ConsoleMode)
 #: rdp/rdppreferences.ui:773
-#, fuzzy, kde-format
-#| msgid "Admin (or console) session"
+#, kde-format
 msgid "Connect to the console (admin) session"
-msgstr "Адміністративний (або консольний) сеанс"
+msgstr "Встановити з'єднання з сеансом консолі (адміністратора)"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_ConsoleMode)
 #: rdp/rdppreferences.ui:776
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "Connect to the network or VPN the remote computer is on."
+#, kde-format
 msgid ""
 "Connect to the session an administrator uses to manage the remote computer, "
 "instead of a new user session."
 msgstr ""
-"Встановіть з'єднання з мережею або VPN, до якої належить віддалений "
-"комп'ютер."
+"Встановіть з'єднання з сеансом, який адміністратор використовує для "
+"керування віддаленим комп'ютером, а не з новим сеансом простого користувача."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_PreventSessionLock)
 #: rdp/rdppreferences.ui:783
-#, fuzzy, kde-format
-#| msgid "Prevent remote session lock"
+#, kde-format
 msgid "Keep the remote session from locking"
 msgstr "Запобігати блокуванню віддаленого сеансу"
 
@@ -2138,13 +2128,14 @@ msgid ""
 "Move the remote mouse pointer every few minutes so that the remote computer "
 "does not lock the session while it is idle."
 msgstr ""
+"Пересувати вказівник миші на віддаленому комп’ютері кожні кілька хвилин, щоб "
+"сеанс не блокувався через бездіяльність."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseGateway)
 #: rdp/rdppreferences.ui:812
-#, fuzzy, kde-format
-#| msgid "Connect to a VNC Remote Desktop"
+#, kde-format
 msgid "Connect through a Remote Desktop Gateway"
-msgstr "З'єднатись з Віддаленою стільницею VNC"
+msgstr "Встановити з'єднання за допомогою шлюзу віддаленої стільниці"
 
 #. i18n: ectx: property (text), widget (QLabel, gServerLabel)
 #. i18n: ectx: property (text), widget (QLabel, pHostLabel)
@@ -2201,11 +2192,9 @@ msgstr "RPC"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseProxy)
 #: rdp/rdppreferences.ui:898
-#, fuzzy, kde-format
-#| msgctxt "@info connection stage"
-#| msgid "Connecting to the server"
+#, kde-format
 msgid "Connect through a proxy server"
-msgstr "З'єднання з сервером'"
+msgstr "Встановити з'єднання за допомогою проксі-сервера"
 
 #. i18n: ectx: property (text), widget (QLabel, protocolLabel)
 #: rdp/rdppreferences.ui:939
@@ -2227,10 +2216,9 @@ msgstr "Безпека"
 
 #. i18n: ectx: property (text), widget (QLabel, protocolsLabel)
 #: rdp/rdppreferences.ui:991
-#, fuzzy, kde-format
-#| msgid "Protocol:"
+#, kde-format
 msgid "Protocols:"
-msgstr "Протокол:"
+msgstr "Протоколи:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityNLA)
 #: rdp/rdppreferences.ui:1000
@@ -2240,13 +2228,9 @@ msgstr "NLA"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SecurityNLA)
 #: rdp/rdppreferences.ui:1003
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid ""
-#| "It accepted the connection, then closed it before the session started."
+#, kde-format
 msgid "Network Level Authentication: sign in before the remote session starts."
-msgstr ""
-"З'єднання прийнято, а потім закрито до того, як вдалося розпочати сеанс."
+msgstr "Розпізнавання на рівні мережі: увійти до початку віддаленого сеансу."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityTLS)
 #: rdp/rdppreferences.ui:1010
@@ -2256,11 +2240,9 @@ msgstr "TLS"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SecurityTLS)
 #: rdp/rdppreferences.ui:1013
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "The session was disconnected from the remote computer."
+#, kde-format
 msgid "TLS encryption, signing in on the login screen of the remote computer."
-msgstr "З'єднання з сеансом розірвано з віддаленого комп'ютера."
+msgstr "Шифрування TLS, вхід на екрані входу віддаленого комп'ютера."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityRDP)
 #: rdp/rdppreferences.ui:1020
@@ -2273,6 +2255,8 @@ msgstr "RDP"
 #, kde-format
 msgid "Standard RDP security, the older encryption built into the protocol."
 msgstr ""
+"Стандартний захист RDP — застарілий механізм шифрування, вбудований у "
+"протокол."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityEXT)
 #: rdp/rdppreferences.ui:1030
@@ -2287,6 +2271,8 @@ msgid ""
 "Extended Network Level Authentication, which also checks that the account "
 "may sign in before the session starts."
 msgstr ""
+"Розширене розпізнавання на рівні мережі, яка також перевіряє, чи має "
+"обліковий запис право на вхід, ще до початку сеансу."
 
 #. i18n: ectx: property (text), widget (QLabel, TlsSecLevelLabel)
 #: rdp/rdppreferences.ui:1055
@@ -2301,13 +2287,14 @@ msgid ""
 "The weakest TLS encryption to accept. A higher level may refuse to connect "
 "to older servers."
 msgstr ""
+"Найслабший рівень шифрування TLS, який можна приймати. Вищий рівень може "
+"призвести до відмови у з'єднання із застарілими серверами."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:1075
-#, fuzzy, kde-format
-#| msgid "any"
+#, kde-format
 msgid "Any"
-msgstr "будь-який"
+msgstr "Будь-який"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:1080
@@ -2341,8 +2328,7 @@ msgstr "256-бітовий"
 
 #. i18n: ectx: property (text), widget (QLabel, authPkgListLabel)
 #: rdp/rdppreferences.ui:1108
-#, fuzzy, kde-format
-#| msgid "Authentication Packages:"
+#, kde-format
 msgid "Authentication packages:"
 msgstr "Пакунки розпізнавання:"
 
@@ -2711,18 +2697,16 @@ msgstr ""
 "rdpserver:3389 (вузол:порт)</i></html>"
 
 #: rdp/sharedfolderfield.cpp:18
-#, fuzzy, kde-format
-#| msgctxt "@info:status connection step"
-#| msgid "Not started"
+#, kde-format
 msgctxt "@item:inlistbox shared folder"
 msgid "Not shared"
-msgstr "Не почато"
+msgstr "Не оприлюднено"
 
 #: rdp/sharedfolderfield.cpp:20
 #, kde-format
 msgctxt "@item:inlistbox shared folder"
 msgid "Removable drives"
-msgstr ""
+msgstr "Портативні носії"
 
 #: rdp/sharedfolderfield.cpp:22
 #, kde-format
@@ -2731,42 +2715,44 @@ msgid ""
 "USB drives and memory cards, including ones plugged in during the session. "
 "Network shares are not included."
 msgstr ""
+"USB-накопичувачі та карти пам'яті, зокрема ті, які було з'єднано під час "
+"сеансу. Мережеві спільні ресурси до цього переліку не входять."
 
 #: rdp/sharedfolderfield.cpp:33
 #, kde-format
 msgctxt "@item:inlistbox shared folder"
 msgid "Downloads"
-msgstr ""
+msgstr "Отримання"
 
 #: rdp/sharedfolderfield.cpp:34
 #, kde-format
 msgctxt "@item:inlistbox shared folder"
 msgid "Documents"
-msgstr ""
+msgstr "Документи"
 
 #: rdp/sharedfolderfield.cpp:36
 #, kde-format
 msgctxt "@item:inlistbox shared folder"
 msgid "Other Folder…"
-msgstr ""
+msgstr "Інша тека…"
 
 #: rdp/sharedfolderfield.cpp:65
 #, kde-format
 msgctxt "@item:inlistbox shared folder, %1 a stored value"
 msgid "%1 (not supported)"
-msgstr ""
+msgstr "%1 (не підтримується)"
 
 #: rdp/sharedfolderfield.cpp:69
 #, kde-format
 msgctxt "@item:inlistbox shared folder, %1 its name, %2 its path"
 msgid "%1 (%2)"
-msgstr ""
+msgstr "%1 (%2)"
 
 #: rdp/sharedfolderfield.cpp:102
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose Shared Folder"
-msgstr ""
+msgstr "Виберіть спільну теку"
 
 #: remotedesktopsmodel.cpp:112
 #, kde-format
@@ -2871,7 +2857,7 @@ msgstr "Відтворювати звукові дані з віддаленог
 #: spice/spicepreferences.ui:295 vnc/vncpreferences.ui:275
 #, kde-format
 msgid "Network"
-msgstr ""
+msgstr "Мережа"
 
 #: spice/spiceview.cpp:830
 #, kde-format

@@ -374,11 +374,27 @@ as Authors, publish date, the abstract, and Keywords -->
 >Què passa quan es connecta</title>
 
 <para
->El diàleg de <guilabel
->Configuració del servidor</guilabel
-> conté la configuració del protocol seleccionat. Netegeu <guilabel
+>Abans de connectar-se a un servidor nou, el &krdc; demana la configuració que necessita un canvi més sovint: la mida de la pantalla i el so o el tipus de connexió. Feu clic a <guibutton
+>Tota la configuració…</guibutton
+> per a veure tots els paràmetres del servidor i per a donar a la connexió un <guilabel
+>Nom</guilabel
+> que mostri la llista de connexions en lloc de la seva adreça. Els paràmetres s'agrupen de la mateixa manera que els paràmetres predeterminats del protocol a les preferències dels <guilabel
+>Connectors</guilabel
+>: <guilabel
+>Visualització</guilabel
+>, <guilabel
+>Recursos locals</guilabel
+> i per a una <guilabel
+>Connexió</guilabel
+> <acronym
+>RDP</acronym
+> (sessió, passarel·la, servidor intermediari i túnel SSH) i <guilabel
+>Seguretat</guilabel
+>. Feu clic a <guibutton
+>Connecta</guibutton
+> per connectar amb la configuració seleccionada. Netegeu <guilabel
 >Mostra aquest diàleg una altra vegada per a aquest servidor</guilabel
-> per a reutilitzar-la sense que es demani en cada connexió. La configuració està associada amb l'adreça de connexió; connectar-se amb un nom de màquina o una adreça IP diferent pot utilitzar una configuració diferent.</para>
+> per a reutilitzar-los sense que es demanin en cada connexió. La configuració està associada amb l'adreça de connexió; connectar-se amb un nom de servidor o una adreça IP diferent pot utilitzar una configuració diferent.</para>
 
 <para>
 <screenshot>
@@ -752,8 +768,10 @@ as Authors, publish date, the abstract, and Keywords -->
 
 <para
 >La pestanya <guilabel
->General</guilabel
-> controla l'aparença de l'escriptori remot, els dispositius d'entrada i els recursos compartits amb la sessió remota.</para>
+>Visualització</guilabel
+> controla l'aparença de l'escriptori remot i la pestanya <guilabel
+>Recursos locals</guilabel
+> el so, teclat i els recursos compartits amb la sessió remota.</para>
 
 <para
 >La <guilabel
@@ -784,17 +802,129 @@ as Authors, publish date, the abstract, and Keywords -->
 ><guilabel
 >So:</guilabel
 > selecciona la reproducció en aquest ordinador, la reproducció en l'ordinador remot o cap so. <guilabel
->Compartició multimèdia:</guilabel
-> posa un directori local disponible per a la sessió remota; deixeu-lo buit per desactivar l'ús compartit de la unitat. <guilabel
->Comparteix la targeta intel·ligent:</guilabel
-> especifica el nom de la targeta intel·ligent per redirigir al servidor.</para>
+>Carpeta compartida:</guilabel
+> fa disponible un directori local a la sessió remota, que podrà llegir-hi i escriure-hi. Trieu <guilabel
+>Unitats extraïbles</guilabel
+> per compartir unitats USB i targetes de memòria amb els seus noms mentre estan muntades. Trieu <guilabel
+>Baixades</guilabel
+> o <guilabel
+>Documents</guilabel
+> o <guilabel
+>Altres carpetes…</guilabel
+> per triar qualsevol carpeta. No es comparteix cap carpeta tret que en trieu una. <guilabel
+>Targeta intel·ligent compartida:</guilabel
+> especifica el nom de targeta intel·ligent per redirigir al servidor.</para>
+
+<para
+><emphasis role="bold"
+>Connexió</emphasis
+></para>
+
+<para
+>La pestanya <guilabel
+>Connexió</guilabel
+> estableix quina sessió s'obté a l'ordinador remot i com hi arriba la connexió.</para>
 
 <para
 >La <guilabel
->Sessió d'administrador (o consola)</guilabel
-> sol·licita una sessió administrativa als servidors que la permeten. <guilabel
->Evita el bloqueig de la sessió remota</guilabel
+>Connecta a la sessió de consola (administració)</guilabel
+> sol·licita la sessió administrativa als servidors que la permeten, enlloc d'una sessió d'usuari nova. <guilabel
+>Manté la sessió remota evitant el bloqueig</guilabel
 > envia activitat periòdica simulada del ratolí per mantenir la sessió activa; les polítiques del servidor encara poden forçar el bloqueig.</para>
+
+<para
+>De manera predeterminada &krdc; es connecta directament a l'escriptori remot. Consulteu una de les rutes per mostrar-ne la configuració; en netejar-la, s'apagarà la ruta i es mantindrà la configuració per a més tard. L'adreça de l'escriptori remot continua sent l'adreça introduïda a la pàgina de connexió.</para>
+
+<para>
+<screenshot>
+<screeninfo
+>Preferències RDP del &krdc; - La pestanya Connexió, configuració de la passarel·la</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="rdp_preferences_gateway.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Preferències del &krdc; - La configuració de la Passarel·la del <guilabel
+>RDP</guilabel
+></phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+><guilabel
+>Connecta mitjançant una passarel·la d'escriptori remot</guilabel
+> encamina la connexió a través d'una passarel·la RDP, que proporciona una ruta a un escriptori remot en una altra xarxa. Introduïu l'adreça de la passarel·la a <guilabel
+>Servidor:</guilabel
+> com a <userinput
+>servidor:port</userinput
+>, utilitzant el port proporcionat pel vostre administrador.</para>
+
+<para
+>Introduïu el <guilabel
+>Nom d'usuari:</guilabel
+> del compte de la passarel·la, la <guilabel
+>Contrasenya:</guilabel
+> i el <guilabel
+>Domini:</guilabel
+> segons sigui necessari. Aquests camps autentiquen l'accés a la passarel·la; l'escriptori remot pot requerir credencials separades.</para>
+
+<para
+><guilabel
+>Tipus de transport:</guilabel
+> ofereix <guilabel
+>Automàtic</guilabel
+>, <guilabel
+>HTTP</guilabel
+> i <guilabel
+>RPC</guilabel
+>. Utilitzeu <guilabel
+>Automàtic</guilabel
+> llevat que el vostre administrador especifiqui un transport.</para>
+
+<para>
+<screenshot>
+<screeninfo
+>Preferències RDP del &krdc; - La pestanya de Connexió, configuració del servidor intermediari</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="rdp_preferences_proxy.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Preferències del &krdc; - Servidor intermediari del <guilabel
+>RDP</guilabel
+></phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+><guilabel
+>Connecta mitjançant un servidor intermediari</guilabel
+> inicia la connexió mitjançant un servidor intermediari de xarxa. Introduïu l'adreça del servidor intermediari a <guilabel
+>Servidor:</guilabel
+> utilitzant la forma <userinput
+>servidor:port</userinput
+> i seleccioneu <guilabel
+>HTTP</guilabel
+> o <guilabel
+>SOCKS</guilabel
+> a <guilabel
+>Protocol:</guilabel
+>. Si el servidor intermediari requereix autenticació, ompliu <guilabel
+>Nom d'usuari:</guilabel
+> i <guilabel
+>Contrasenya:</guilabel
+> amb les credencials del servidor intermediari. Aquestes poden diferir de les credencials de l'escriptori remot.</para>
+
+<para
+>Si està disponible el suport de túnel SSH, el diàleg de configuració del servidor també ofereix apareix <guilabel
+>Connecta a través d'un túnel SSH</guilabel
+> en aquesta pestanya. Vegeu les seves opcions a <xref linkend="ssh-tunnels"/>.</para>
 
 <para
 ><emphasis role="bold"
@@ -823,14 +953,16 @@ as Authors, publish date, the abstract, and Keywords -->
 >La pestanya <guilabel
 >Seguretat</guilabel
 > controla quins mètodes de seguretat ofereix el &krdc; en establir la connexió RDP. Les caselles de selecció <guilabel
+>Protocols: </guilabel
+> activen l'autenticació de nivell de xarxa (<guilabel
 >NLA</guilabel
->, <guilabel
+>), l'encriptatge <guilabel
 >TLS</guilabel
->, <guilabel
+>, la seguretat <guilabel
 >RDP</guilabel
-> i <guilabel
+> estàndard i l'autenticació de nivell de xarxa ampliada (<guilabel
 >Ext</guilabel
-> activen els modes de seguretat corresponents del FreeRDP. Es pot habilitar més d'un perquè el client i el servidor puguin negociar un mètode compatible.</para>
+>). Es pot activar més d'un perquè el client i el servidor puguin negociar un mètode compatible; almenys un està activat.</para>
 
 <para
 ><guilabel
@@ -839,116 +971,16 @@ as Authors, publish date, the abstract, and Keywords -->
 
 <para
 ><guilabel
->Llista de paquets d'autenticació:</guilabel
-> passa una selecció personalitzada de paquets d'autenticació al FreeRDP. Deixeu-ho buit per utilitzar el comportament predeterminat o introduïu el valor proporcionat pel vostre administrador. Canvieu les opcions de seguretat perquè coincideixin amb els requisits del servidor.</para>
-
-<para
-><emphasis role="bold"
->Servidor intermediari</emphasis
-></para>
-
-<para>
-<screenshot>
-<screeninfo
->Preferències RDP del &krdc; - La pestanya de servidor intermediari</screeninfo>
-	<mediaobject>
-	  <imageobject>
-	    <imagedata fileref="rdp_preferences_proxy.png" format="PNG"/>
-	  </imageobject>
-	  <textobject>
-	    <phrase
->Preferències del &krdc; - La pestanya de servidor intermediari del <guilabel
->RDP</guilabel
-></phrase>
-	  </textobject>
-	</mediaobject>
-</screenshot>
-</para>
-
-<para
->La pestanya <guilabel
->Servidor intermediari</guilabel
-> configura un servidor intermediari de xarxa utilitzat per a la connexió. Seleccioneu <guilabel
->HTTP</guilabel
-> o <guilabel
->SOCKS</guilabel
-> a <guilabel
->Protocol:</guilabel
->, després introduïu l'adreça del servidor intermediari a <guilabel
->Servidor:</guilabel
-> utilitzant la forma <userinput
->servidor:port</userinput
->.</para>
-
-<para
->Si el servidor intermediari requereix autenticació, ompliu <guilabel
->Nom d'usuari:</guilabel
-> i <guilabel
->Contrasenya:</guilabel
-> amb les credencials del servidor intermediari. Aquestes poden diferir de les credencials de l'escriptori remot. Deixeu el <guilabel
->Servidor:</guilabel
-> buit quan no calgui cap servidor intermediari. L'adreça de l'escriptori remot de destinació continua sent l'adreça introduïda a la pàgina de connexió.</para>
-
-<para
-><emphasis role="bold"
->Passarel·la</emphasis
-></para>
-
-<para>
-<screenshot>
-<screeninfo
->Preferències del &krdc; - La pestanya Passarel·la</screeninfo>
-	<mediaobject>
-	  <imageobject>
-	    <imagedata fileref="rdp_preferences_gateway.png" format="PNG"/>
-	  </imageobject>
-	  <textobject>
-	    <phrase
->Preferències del &krdc; - La pestanya Passarel·la del <guilabel
->RDP</guilabel
-></phrase>
-	  </textobject>
-	</mediaobject>
-</screenshot>
-</para>
-
-<para
->La pestanya <guilabel
->Passarel·la</guilabel
-> configura l'accés a través d'una passarel·la RDP, que proporciona una ruta a un escriptori remot en una altra xarxa. Introduïu l'adreça de la passarel·la a <guilabel
->Servidor:</guilabel
-> com a <userinput
->servidor:port</userinput
->, utilitzant el port proporcionat pel vostre administrador. Manteniu l'adreça de l'ordinador de destinació a la pàgina de connexió principal.</para>
-
-<para
->Introduïu el <guilabel
->Domini:</guilabel
-> del compte de la passarel·la, el <guilabel
->Nom d'usuari:</guilabel
-> i la <guilabel
->Contrasenya:</guilabel
-> segons sigui necessari. Aquests camps autentiquen l'accés a la passarel·la; l'escriptori remot pot requerir credencials separades.</para>
-
-<para
-><guilabel
->Tipus de transport:</guilabel
-> ofereix <guilabel
->Automàtic</guilabel
+>Paquets d'autenticació:</guilabel
+> selecciona els paquets que es poden utilitzar per iniciar sessió amb l'autenticació de nivell de xarxa: <guilabel
+>Kerberos</guilabel
 >, <guilabel
->HTTP</guilabel
+>NTLM</guilabel
 > i <guilabel
->RPC</guilabel
->. Utilitzeu <guilabel
->Automàtic</guilabel
-> llevat que el vostre administrador especifiqui un transport. Deixeu buit el camp <guilabel
->Servidor:</guilabel
-> de la passarel·la quan es connecta sense cap passarel·la RDP.</para>
-
-<para
->Si està disponible el suport de túnel SSH, apareix una pestanya addicional <guilabel
->Túnel SSH</guilabel
-> al diàleg de configuració del servidor. Vegeu les seves opcions a <xref linkend="ssh-tunnels"/>.</para>
+>U2U</guilabel
+>. No s'utilitzen els paquets no marcats. Per a l'inici de sessió només amb Kerberos, com ara amb els comptes d'usuaris protegits amb directoris actius, desmarqueu <guilabel
+>NTLM</guilabel
+>.</para>
 </sect1>
 
 <sect1 id="spice-settings">
