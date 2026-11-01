@@ -6,13 +6,13 @@
 # Mohamed Assar (محمد عَصَر) <aser@arabeyes.org>, 2003.
 # Ammar Tabbaa <atabba@kacst.edu.sa>, 2004.
 # Youssef Chahibi <chahibi@gmail.com>, 2007.
-# SPDX-FileCopyrightText: 2009, 2021, 2022, 2024, 2025, 2026 zayed <zayed.alsaidi@gmail.com>
+# SPDX-FileCopyrightText: 2009, 2021-2022, 2024-2026 zayed <zayed.alsaidi@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-10-29 00:53+0000\n"
-"PO-Revision-Date: 2026-09-26 16:52+0400\n"
+"PO-Revision-Date: 2026-10-31 21:22+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Lokalize 25.12.3\n"
+"X-Generator: Lokalize 26.08.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -319,46 +319,43 @@ msgstr[4] "قبل %1 سنة"
 msgstr[5] "قبل %1 سنة"
 
 #: connectionstatuswidget.cpp:64
-#, fuzzy, kde-format
-#| msgid "Show start page"
+#, kde-format
 msgctxt "@info:status connection step"
 msgid "Not started"
-msgstr "اظهر صفحة البداية"
+msgstr "لم يبدأ"
 
 #: connectionstatuswidget.cpp:67
 #, kde-format
 msgctxt "@info:status connection step"
 msgid "Done"
-msgstr ""
+msgstr "تمّ"
 
 #: connectionstatuswidget.cpp:70
 #, kde-format
 msgctxt "@info:status connection step"
 msgid "Failed"
-msgstr ""
+msgstr "فشل"
 
 #: connectionstatuswidget.cpp:73
 #, kde-format
 msgctxt "@info:status connection step"
 msgid "Information"
-msgstr ""
+msgstr "معلومات"
 
 #: connectionstatuswidget.cpp:250
 #, kde-format
 msgctxt "@info"
 msgid "Diagnostic information copied to the clipboard"
-msgstr ""
+msgstr "نُسخت معلومات التشخيص إلى الحافظة"
 
 #: connectionstatuswidget.cpp:257
-#, fuzzy, kde-format
-#| msgid "Connecting to %1"
+#, kde-format
 msgctxt "@title"
 msgid "Connecting to %1"
 msgstr "يتصل بـ %1"
 
 #: connectionstatuswidget.cpp:258
-#, fuzzy, kde-format
-#| msgid "Connecting to %1"
+#, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Connecting to %1"
 msgstr "يتصل بـ %1"
@@ -367,156 +364,142 @@ msgstr "يتصل بـ %1"
 #, kde-format
 msgctxt "@action:button"
 msgid "Cancel"
-msgstr ""
+msgstr "ألغِ"
 
 #: connectionstatuswidget.cpp:330
 #, kde-format
 msgctxt "@info:status connection step"
 msgid "In progress"
-msgstr ""
+msgstr "جارية"
 
 #: connectionstatuswidget.cpp:406
 #, kde-format
 msgctxt "@info connection step"
 msgid "Looking up the server address"
-msgstr ""
+msgstr "البحث عن عنوان الخادم"
 
 #: connectionstatuswidget.cpp:408
-#, fuzzy, kde-format
-#| msgid "Connect via SSH tunnel"
+#, kde-format
 msgctxt "@info connection step"
 msgid "Opening the SSH tunnel"
-msgstr "اتصل بنفق SSH"
+msgstr "فتح نفق SSH"
 
 #: connectionstatuswidget.cpp:410
 #, kde-format
 msgctxt "@info connection step"
 msgid "Opening a network connection"
-msgstr ""
+msgstr "فتح اتصال شبكي"
 
 #: connectionstatuswidget.cpp:412
-#, fuzzy, kde-format
-#| msgid "Preparing connection to %1"
+#, kde-format
 msgctxt "@info connection step"
 msgid "Securing the connection"
-msgstr "يحضر الاتصال بـ %1"
+msgstr "تأمين الاتصال"
 
 #: connectionstatuswidget.cpp:414
 #, kde-format
 msgctxt "@info connection step"
 msgid "Logging in"
-msgstr ""
+msgstr "يَلُجْ"
 
 #: connectionstatuswidget.cpp:416
-#, fuzzy, kde-format
-#| msgid "Prevent remote session lock"
+#, kde-format
 msgctxt "@info connection step"
 msgid "Starting the remote session"
-msgstr "امنع قفل الجلسة البعيدة"
+msgstr "بدء الجلسة البعيدة"
 
 #: connectionstatuswidget.cpp:418
-#, fuzzy, kde-format
-#| msgid "Reconnecting."
+#, kde-format
 msgctxt "@info connection step"
 msgid "Reconnecting"
-msgstr "يعيد الاتصال."
+msgstr "يعيد الاتصال"
 
 #: connectionstatuswidget.cpp:428
 #, kde-format
 msgctxt "@info connection step"
 msgid "Server address resolved"
-msgstr ""
+msgstr "حُلّ عنوان الخادم"
 
 #: connectionstatuswidget.cpp:430
-#, fuzzy, kde-format
-#| msgid "SSH tunnel options"
+#, kde-format
 msgctxt "@info connection step"
 msgid "SSH tunnel established"
-msgstr "خيارات نفق SSH"
+msgstr "أُنشئ نفق SSH"
 
 #: connectionstatuswidget.cpp:432
 #, kde-format
 msgctxt "@info connection step"
 msgid "Network connection established"
-msgstr ""
+msgstr "أُنشئ الاتصال الشبكي"
 
 #: connectionstatuswidget.cpp:434
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Connection Refused"
+#, kde-format
 msgctxt "@info connection step"
 msgid "Connection secured"
-msgstr "رفض اتصال"
+msgstr "أُمّن الاتصال"
 
 #: connectionstatuswidget.cpp:437
 #, kde-format
 msgctxt "@info connection step"
 msgid "Access granted"
-msgstr ""
+msgstr "مُنح الوصول"
 
 #: connectionstatuswidget.cpp:439
-#, fuzzy, kde-format
-#| msgid "KDE Remote Desktop Client started"
+#, kde-format
 msgctxt "@info connection step"
 msgid "Remote session started"
-msgstr "عميل سطح المكتب للكِيدِي بدء"
+msgstr "بدأت الجلسة البعيدة"
 
 #: connectionstatuswidget.cpp:449
-#, fuzzy, kde-format
-#| msgid "Connected to %1"
+#, kde-format
 msgctxt "@info"
 msgid "Resolved to %1."
-msgstr "يتصل بـ %1"
+msgstr "حُلّ  إلى %1."
 
 #: connectionstatuswidget.cpp:461
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Local address lookup failed: %1"
-msgstr ""
+msgstr "فشل البحث عن العنوان المحلي: %1"
 
 #: connectionstatuswidget.cpp:466
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "%1 resolved to %2"
-msgstr ""
+msgstr "حُلّ %1 إلى %2"
 
 #: connectionstatuswidget.cpp:498
-#, fuzzy, kde-format
-#| msgid "Connect to a NX Remote Desktop"
+#, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Connecting to the remote desktop service"
-msgstr "اتصل بسطح مكتب NX بعيد"
+msgstr "الاتصال بخدمة سطح المكتب البعيد"
 
 #: connectionstatuswidget.cpp:505
-#, fuzzy, kde-format
-#| msgid "Authenticating at %1"
+#, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Authenticating"
-msgstr "يستوثق عند %1"
+msgstr "يستوثق"
 
 #: connectionstatuswidget.cpp:509
-#, fuzzy, kde-format
-#| msgid "Prevent remote session lock"
+#, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Preparing the session"
-msgstr "امنع قفل الجلسة البعيدة"
+msgstr "تحضير الجلسة"
 
 #: connectionstatuswidget.cpp:513
-#, fuzzy, kde-format
-#| msgid "Connected."
+#, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Connected"
-msgstr "متّصل."
+msgstr "متّصل"
 
 #: connectionstatuswidget.cpp:546
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Connection dropped, reconnecting: %1"
-msgstr ""
+msgstr "انقطع الاتصال، إعادة الاتصال: %1"
 
 #: connectionstatuswidget.cpp:546
-#, fuzzy, kde-format
-#| msgid "Reconnected."
+#, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Reconnected"
 msgstr "أُعيد الاتصال"
@@ -525,18 +508,16 @@ msgstr "أُعيد الاتصال"
 #, kde-format
 msgctxt "@info"
 msgid "KRDC keeps trying until the connection is back."
-msgstr ""
+msgstr "يواصل KRDC المحاولة حتى يعود الاتصال."
 
 #: connectionstatuswidget.cpp:563
-#, fuzzy, kde-format
-#| msgid "Connecting to %1"
+#, kde-format
 msgctxt "@title"
 msgid "Connection to %1 interrupted"
-msgstr "يتصل بـ %1"
+msgstr "انقطع الاتصال بـ %1"
 
 #: connectionstatuswidget.cpp:565
-#, fuzzy, kde-format
-#| msgid "Disconnect"
+#, kde-format
 msgctxt "@action:button"
 msgid "Disconnect"
 msgstr "اقطع الاتصال"
@@ -545,59 +526,52 @@ msgstr "اقطع الاتصال"
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Failed while: %1"
-msgstr ""
+msgstr "فشل أثناء: %1"
 
 #: connectionstatuswidget.cpp:656
 #, kde-format
 msgctxt "@title"
 msgid "Session with %1 ended"
-msgstr ""
+msgstr "انتهت الجلسة مع %1"
 
 #: connectionstatuswidget.cpp:658
-#, fuzzy, kde-format
-#| msgid "Connecting to %1"
+#, kde-format
 msgctxt "@title"
 msgid "Connection to %1 lost"
-msgstr "يتصل بـ %1"
+msgstr "فُقد الاتصال بـ %1"
 
 #: connectionstatuswidget.cpp:660
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Could not Connect"
+#, kde-format
 msgctxt "@title"
 msgid "Could not connect to %1"
-msgstr "تعذّر الاتّصال"
+msgstr "تعذّر الاتصال بـ %1"
 
 #: connectionstatuswidget.cpp:666
-#, fuzzy, kde-format
-#| msgid "Reconnected."
+#, kde-format
 msgctxt "@action:button"
 msgid "Reconnect"
-msgstr "أُعيد الاتصال"
+msgstr "أعد الاتّصال"
 
 #: connectionstatuswidget.cpp:666
-#, fuzzy, kde-format
-#| msgid "Connection"
+#, kde-format
 msgctxt "@action:button"
 msgid "Connect Again"
-msgstr "الاتصال"
+msgstr "اتصل مجددًا"
 
 #: connectionstatuswidget.cpp:671
-#, fuzzy, kde-format
-#| msgid "Goto Address"
+#, kde-format
 msgctxt "@action:button"
 msgid "Edit Address"
-msgstr "إذهب إلى العنوان"
+msgstr "حرّر العنوان"
 
 #: connectionstatuswidget.cpp:674
 #, kde-format
 msgctxt "@action:button"
 msgid "Edit Host Settings…"
-msgstr ""
+msgstr "حرّر إعدادات المضيف…"
 
 #: connectionstatuswidget.cpp:676
-#, fuzzy, kde-format
-#| msgid "Close Tab"
+#, kde-format
 msgctxt "@action:button"
 msgid "Close Tab"
 msgstr "أغلق اللسان"
@@ -606,85 +580,76 @@ msgstr "أغلق اللسان"
 #, kde-format
 msgctxt "@action:button"
 msgid "Copy diagnostic information"
-msgstr ""
+msgstr "انسخ معلومات التشخيص"
 
 #: connectionstatuswidget.cpp:719
 #, kde-format
 msgctxt "@action:button"
 msgid "Hide details"
-msgstr ""
+msgstr "أخفِ التّفاصيل"
 
 #: connectionstatuswidget.cpp:719
-#, fuzzy, kde-format
-#| msgctxt "EMAIL OF TRANSLATORS"
-#| msgid "Your emails"
+#, kde-format
 msgctxt "@action:button"
 msgid "Show details"
-msgstr "metehyi@free.fr,zayed.alsaidi@gmail.com"
+msgstr "أظهر التّفاصيل"
 
 #: core/connectionerror.cpp:15
 #, kde-format
 msgctxt "@info connection stage"
 msgid "Setting up the SSH tunnel"
-msgstr ""
+msgstr "إعداد نفق SSH"
 
 #: core/connectionerror.cpp:17
 #, kde-format
 msgctxt "@info connection stage"
 msgid "Looking up the host name"
-msgstr ""
+msgstr "البحث عن اسم المضيف"
 
 #: core/connectionerror.cpp:19
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Lost connection to the server."
+#, kde-format
 msgctxt "@info connection stage"
 msgid "Connecting to the server"
-msgstr "فُقد الاتّصال بالخادم."
+msgstr "جاري الاتصال بالخادم"
 
 #: core/connectionerror.cpp:21
-#, fuzzy, kde-format
-#| msgid "Preparing connection to %1"
+#, kde-format
 msgctxt "@info connection stage"
 msgid "Securing the connection"
-msgstr "يحضر الاتصال بـ %1"
+msgstr "تأمين الاتصال"
 
 #: core/connectionerror.cpp:23
 #, kde-format
 msgctxt "@info connection stage"
 msgid "Logging in"
-msgstr ""
+msgstr "يَلُجْ"
 
 #: core/connectionerror.cpp:25
-#, fuzzy, kde-format
-#| msgid "Prevent remote session lock"
+#, kde-format
 msgctxt "@info connection stage"
 msgid "Starting the remote session"
-msgstr "امنع قفل الجلسة البعيدة"
+msgstr "بدء الجلسة البعيدة"
 
 #: core/connectionerror.cpp:27
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Connection Refused"
+#, kde-format
 msgctxt "@info connection stage"
 msgid "Connection interrupted"
-msgstr "رفض اتصال"
+msgstr "انقطع الاتصال"
 
 #: core/connectionerror.cpp:29
 #, kde-format
 msgctxt "@info connection stage"
 msgid "Session ended remotely"
-msgstr ""
+msgstr "انتهت الجلسة عن بُعد"
 
 #: core/connectionerror.cpp:33
 #, kde-format
 msgctxt "@info connection stage"
 msgid "Unknown"
-msgstr ""
+msgstr "مجهول"
 
 #: core/connectionerror.cpp:45
-#, fuzzy, kde-format
-#| msgid "SSH Tunnel failure"
+#, kde-format
 msgctxt "@title connection error"
 msgid "SSH tunnel failed"
 msgstr "فشل نفق SSH"
@@ -693,7 +658,7 @@ msgstr "فشل نفق SSH"
 #, kde-format
 msgctxt "@info"
 msgid "Check the SSH tunnel user name and port in the host settings."
-msgstr ""
+msgstr "تحقق من اسم مستخدم نفق SSH والمنفذ في إعدادات المضيف."
 
 #: core/connectionerror.cpp:48
 #, kde-format
@@ -702,6 +667,8 @@ msgid ""
 "Log in with an SSH client in a terminal to confirm that the server is "
 "reachable and your credentials work."
 msgstr ""
+"سجّل الدخول بعميل SSH في طرفية للتأكد من إمكانية الوصول إلى الخادم وأن بيانات "
+"اعتمادك تعمل."
 
 #: core/connectionerror.cpp:49
 #, kde-format
@@ -709,45 +676,44 @@ msgctxt "@info"
 msgid ""
 "If you use key authentication, add the key to your SSH agent with ssh-add."
 msgstr ""
+"إذا كنت تستخدم استيثاق المفتاح، فأضف المفتاح إلى وكيل SSH لديك باستخدام ssh-"
+"add."
 
 #: core/connectionerror.cpp:50
 #, kde-format
 msgctxt "@info"
 msgid "Make sure the SSH server allows port forwarding."
-msgstr ""
+msgstr "تأكد من أن خادم SSH يسمح بإعادة توجيه المنافذ."
 
 #: core/connectionerror.cpp:54
-#, fuzzy, kde-format
-#| msgid "Server not found."
+#, kde-format
 msgctxt "@title connection error"
 msgid "Server not found"
-msgstr "الخادم ليس موجود."
+msgstr "الخادم ليس موجود"
 
 #: core/connectionerror.cpp:56
 #, kde-format
 msgctxt "@info"
 msgid "Check the spelling of the address."
-msgstr ""
+msgstr "تحقق من تهجئة العنوان."
 
 #: core/connectionerror.cpp:57
 #, kde-format
 msgctxt "@info"
 msgid "Connect to the network or VPN the computer is on."
-msgstr ""
+msgstr "اتصل بالشبكة أو VPN التي يوجد عليها الحاسوب."
 
 #: core/connectionerror.cpp:58
 #, kde-format
 msgctxt "@info"
 msgid "Try the IP address of the computer instead of its name."
-msgstr ""
+msgstr "جرّب عنوان IP للحاسوب بدلًا من اسمه."
 
 #: core/connectionerror.cpp:63
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Server not Found"
+#, kde-format
 msgctxt "@title connection error"
 msgid "Server not reachable"
-msgstr "الخادم ليس موجود"
+msgstr "تعذّر الوصول إلى الخادم"
 
 #: core/connectionerror.cpp:65 core/connectionerror.cpp:145
 #, kde-format
@@ -755,13 +721,13 @@ msgctxt "@info"
 msgid ""
 "Make sure the remote computer is turned on, awake and connected to the "
 "network."
-msgstr ""
+msgstr "تأكد من أن الحاسوب البعيد قيد التشغيل، وغير نائم، ومتصل بالشبكة."
 
 #: core/connectionerror.cpp:66 core/connectionerror.cpp:135
 #, kde-format
 msgctxt "@info"
 msgid "Check that remote desktop sharing is enabled on the remote computer."
-msgstr ""
+msgstr "تحقق من أن مشاركة سطح المكتب البعيد مفعّلة على الحاسوب البعيد."
 
 #: core/connectionerror.cpp:67 core/connectionerror.cpp:136
 #, kde-format
@@ -769,28 +735,26 @@ msgctxt "@info"
 msgid ""
 "Check the port in the address. The defaults are 3389 for RDP and 5900 for "
 "VNC and SPICE."
-msgstr ""
+msgstr "تحقق من المنفذ في العنوان. المبدئي هو 3389 لـ RDP و5900 لـ VNC وSPICE."
 
 #: core/connectionerror.cpp:68 core/connectionerror.cpp:146
 #, kde-format
 msgctxt "@info"
 msgid "Check that no firewall blocks the connection."
-msgstr ""
+msgstr "تحقق من أن أيا من الجدر النارية لا يحجب الاتصال."
 
 #: core/connectionerror.cpp:73
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Connection Failed"
+#, kde-format
 msgctxt "@title connection error"
 msgid "Secure connection failed"
-msgstr "فشل الاتصال"
+msgstr "فشل الاتصال الآمن"
 
 #: core/connectionerror.cpp:75
 #, kde-format
 msgctxt "@info"
 msgid ""
 "Review the security settings for this host, or reset them to their defaults."
-msgstr ""
+msgstr "راجع إعدادات الأمان لهذا المضيف، أو أعد ضبطها إلى قيمها المبدئية."
 
 #: core/connectionerror.cpp:76
 #, kde-format
@@ -799,25 +763,25 @@ msgid ""
 "If the server certificate changed unexpectedly, confirm the change with the "
 "server administrator before accepting it."
 msgstr ""
+"إذا تغيرت شهادة الخادم بشكل غير متوقع، فأكد التغيير مع مدير الخادم قبل قبوله."
 
 #: core/connectionerror.cpp:80
-#, fuzzy, kde-format
-#| msgid "VNC authentication failed."
+#, kde-format
 msgctxt "@title connection error"
 msgid "Authentication failed"
-msgstr "فشل الاستيثاق من VNC."
+msgstr "فشل الاستيثاق"
 
 #: core/connectionerror.cpp:82
 #, kde-format
 msgctxt "@info"
 msgid "Check the user name, password and domain, and that Caps Lock is off."
-msgstr ""
+msgstr "تحقق من اسم المستخدم وكلمة السر والنطاق، ومن أن Caps Lock مغلق."
 
 #: core/connectionerror.cpp:83
 #, kde-format
 msgctxt "@info"
 msgid "If you use a saved password, enter it again. It may be out of date."
-msgstr ""
+msgstr "إذا كنت تستخدم كلمة سر محفوظة، فأدخلها مجددا. قد تكون قديمة."
 
 #: core/connectionerror.cpp:84
 #, kde-format
@@ -825,14 +789,13 @@ msgctxt "@info"
 msgid ""
 "If the account is locked or expired, contact the administrator of the remote "
 "computer."
-msgstr ""
+msgstr "إذا كان الحساب مقفلا أو منتهيا، فاتصل بمدير الحاسوب البعيد."
 
 #: core/connectionerror.cpp:88
-#, fuzzy, kde-format
-#| msgid "Session Name"
+#, kde-format
 msgctxt "@title connection error"
 msgid "Session setup failed"
-msgstr "اسم الجلسة"
+msgstr "فشل إعداد الجلسة"
 
 #: core/connectionerror.cpp:90
 #, kde-format
@@ -841,6 +804,8 @@ msgid ""
 "Reset advanced options in the host settings, such as graphics acceleration "
 "or color depth, to their defaults."
 msgstr ""
+"أعد ضبط الخيارات المتقدمة في إعدادات المضيف، مثل تسريع الرسوميات أو عمق "
+"اللون، إلى قيمها المبدئية."
 
 #: core/connectionerror.cpp:91
 #, kde-format
@@ -849,18 +814,20 @@ msgid ""
 "Ask the administrator of the remote computer whether new sessions are "
 "allowed. The number of users may be limited."
 msgstr ""
+"اسأل مدير الحاسوب البعيد إن كانت الجلسات الجديدة مسموحة. قد يكون عدد "
+"المستخدمين محدودا."
 
 #: core/connectionerror.cpp:96
 #, kde-format
 msgctxt "@title connection error"
 msgid "Network connection interrupted"
-msgstr ""
+msgstr "انقطع اتصال الشبكة"
 
 #: core/connectionerror.cpp:98
 #, kde-format
 msgctxt "@info"
 msgid "Check your network connection, then reconnect."
-msgstr ""
+msgstr "تحقق من اتصالك بالشبكة، ثم أعد الاتصال."
 
 #: core/connectionerror.cpp:99
 #, kde-format
@@ -869,33 +836,32 @@ msgid ""
 "If the remote computer restarted or went to sleep, wait until it is back, "
 "then reconnect."
 msgstr ""
+"إذا أعيد تشغيل الحاسوب البعيد أو دخل في النوم، فانتظر حتى يعود، ثم أعد "
+"الاتصال."
 
 #: core/connectionerror.cpp:104
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Could not find the server."
+#, kde-format
 msgctxt "@title connection error"
 msgid "Closed by the server"
-msgstr "لم يعثر على الخادم."
+msgstr "أغلقه الخادم"
 
 #: core/connectionerror.cpp:109
 #, kde-format
 msgctxt "@title connection error"
 msgid "Unexpected error"
-msgstr ""
+msgstr "خطأ غير متوقع"
 
 #: core/connectionerror.cpp:118
 #, kde-format
 msgctxt "@label"
 msgid "It accepted the connection, then closed it before the session started."
-msgstr ""
+msgstr "قبل الاتصال، ثم أغلقه قبل بدء الجلسة."
 
 #: core/connectionerror.cpp:119
-#, fuzzy, kde-format
-#| msgid "VNC server closed connection."
+#, kde-format
 msgctxt "@title connection error"
 msgid "Server closed the connection"
-msgstr "أغلق خادم VNC الاتصال."
+msgstr "أغلق الخادم الاتصال"
 
 #: core/connectionerror.cpp:121
 #, kde-format
@@ -903,13 +869,13 @@ msgctxt "@info"
 msgid ""
 "If another viewer is connected, close it. Some servers allow only one at a "
 "time."
-msgstr ""
+msgstr "إذا كان عارض آخر متصلا، فأغلقه. بعض الخوادم تسمح بواحد فقط في كل مرة."
 
 #: core/connectionerror.cpp:122
 #, kde-format
 msgctxt "@info"
 msgid "Check that this port belongs to the remote desktop service you expect."
-msgstr ""
+msgstr "تحقق من أن هذا المنفذ يخص خدمة سطح المكتب البعيد التي تتوقعها."
 
 #: core/connectionerror.cpp:123
 #, kde-format
@@ -918,55 +884,49 @@ msgid ""
 "Check the access and security settings of the server, or its log, for why it "
 "closed the connection."
 msgstr ""
+"تحقق من إعدادات الوصول والأمان للخادم، أو من سجله، لمعرفة سبب إغلاقه للاتصال."
 
 #: core/connectionerror.cpp:133
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Connection Refused"
+#, kde-format
 msgctxt "@title connection error"
 msgid "Connection refused"
-msgstr "رفض اتصال"
+msgstr "رُفض الاتصال"
 
 #: core/connectionerror.cpp:137
 #, kde-format
 msgctxt "@info"
 msgid "Check that no firewall on the remote computer rejects the connection."
-msgstr ""
+msgstr "تحقق من أن أيا من الجدر النارية على الحاسوب البعيد لا يرفض الاتصال."
 
 #: core/connectionerror.cpp:143
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Server not Found"
+#, kde-format
 msgctxt "@title connection error"
 msgid "Server not responding"
-msgstr "الخادم ليس موجود"
+msgstr "الخادم لا يستجيب"
 
 #: core/connectionerror.cpp:147 core/connectionerror.cpp:156
 #, kde-format
 msgctxt "@info"
 msgid "Check that the address is right."
-msgstr ""
+msgstr "تحقق من أن العنوان صحيح."
 
 #: core/connectionerror.cpp:153
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Could not connect to the server."
+#, kde-format
 msgctxt "@title connection error"
 msgid "No route to the server"
-msgstr "تعذّر الاتّصال بالخادم"
+msgstr "لا مسار إلى الخادم"
 
 #: core/connectionerror.cpp:155
 #, kde-format
 msgctxt "@info"
 msgid "Connect to the network or VPN the remote computer is on."
-msgstr ""
+msgstr "اتصل بالشبكة أو الشبكة الخاصة الافتراضية التي عليها الحاسوب البعيد."
 
 #: core/hostpreferences.cpp:308
-#, fuzzy, kde-format
-#| msgid "Connected to %1"
+#, kde-format
 msgctxt "@title:window %1 is a host name"
 msgid "Connect to %1"
-msgstr "يتصل بـ %1"
+msgstr "متصل ب %1"
 
 #: core/hostpreferences.cpp:315
 #, kde-format
@@ -976,8 +936,7 @@ msgstr ""
 "لاحظ أن الإعدادات قد تنطبق فقط عند الاتصال في المرة القادمة مع هذا المضيف."
 
 #: core/hostpreferences.cpp:338
-#, fuzzy, kde-format
-#| msgid "Connect"
+#, kde-format
 msgctxt "@action:button"
 msgid "Connect"
 msgstr "اتّصل"
@@ -1005,11 +964,10 @@ msgid "Show this dialog again for this host"
 msgstr "اظهر هذا الحوار مرة أخرى لهذا المضيف"
 
 #: core/hostpreferences.cpp:428
-#, fuzzy, kde-format
-#| msgid "Settings"
+#, kde-format
 msgctxt "@action:button"
 msgid "All Settings…"
-msgstr "إعدادات"
+msgstr "كلّ الإعدادات…"
 
 #. i18n: ectx: label, entry (OpenSessions), group (General)
 #: core/krdc.kcfg:16
@@ -1026,65 +984,62 @@ msgstr "الرجاء إدخال كلمة السر SSH."
 #, kde-format
 msgctxt "@label"
 msgid "The SSH tunnel on port %1 could not be set up."
-msgstr ""
+msgstr "تعذر إعداد نفق SSH على المنفذ %1."
 
 #: core/remoteview.cpp:704
 #, kde-format
 msgctxt "@title connection error"
 msgid "SSH server not reachable"
-msgstr ""
+msgstr "خادم SSH غير قابل للوصول"
 
 #: core/remoteview.cpp:705
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "The server refused the connection request."
+#, kde-format
 msgctxt "@label"
 msgid "The SSH server did not accept a connection on port %1."
-msgstr "رفض الخادم طلب الاتصال."
+msgstr "لم يقبل خادم SSH اتصالا على المنفذ %1."
 
 #: core/remoteview.cpp:707
 #, kde-format
 msgctxt "@info"
 msgid "Make sure the SSH server is running and listens on port %1."
-msgstr ""
+msgstr "تأكد من أن خادم SSH قيد التشغيل ويستمع على المنفذ %1."
 
 #: core/remoteview.cpp:708
 #, kde-format
 msgctxt "@info"
 msgid ""
 "Check the host name, and that the computer is reachable from this network."
-msgstr ""
+msgstr "تحقق من اسم المضيف، ومن أن الحاسوب قابل للوصول من هذه الشبكة."
 
 #: core/remoteview.cpp:709
 #, kde-format
 msgctxt "@info"
 msgid "Check that no firewall blocks SSH connections."
-msgstr ""
+msgstr "تحقق من أن أيا من الجدر النارية لا يحجب اتصالات SSH."
 
 #: core/remoteview.cpp:713
-#, fuzzy, kde-format
-#| msgid "SSH Tunnel failure"
+#, kde-format
 msgctxt "@title connection error"
 msgid "SSH login failed"
-msgstr "فشل نفق SSH"
+msgstr "فشل تسجيل الدخول عبر SSH"
 
 #: core/remoteview.cpp:714
 #, kde-format
 msgctxt "@label"
 msgid "The SSH server did not accept the login."
-msgstr ""
+msgstr "لم يقبل خادم SSH تسجيل الدخول."
 
 #: core/remoteview.cpp:715
 #, kde-format
 msgctxt "@label"
 msgid "The SSH server did not accept the login for “%1”."
-msgstr ""
+msgstr "لم يقبل خادم SSH تسجيل الدخول لـ «%1»."
 
 #: core/remoteview.cpp:717
 #, kde-format
 msgctxt "@info"
 msgid "Check the SSH user name in the host settings, and the password."
-msgstr ""
+msgstr "تحقق من اسم مستخدم SSH في إعدادات المضيف، ومن كلمة السر."
 
 #: core/remoteview.cpp:718
 #, kde-format
@@ -1093,6 +1048,8 @@ msgid ""
 "If you use key authentication, add the key to your SSH agent with ssh-add, "
 "and make sure it is authorized on the server."
 msgstr ""
+"إذا كنت تستخدم استيثاق المفتاح، فأضف المفتاح إلى وكيل SSH لديك باستخدام ssh-"
+"add، وتأكد من أنه مصرح به على الخادم."
 
 #: core/remoteview.cpp:719
 #, kde-format
@@ -1100,12 +1057,13 @@ msgctxt "@info"
 msgid ""
 "If the SSH server does not allow password logins, set up key authentication."
 msgstr ""
+"إذا كان خادم SSH لا يسمح بتسجيل الدخول بكلمة السر، فأعد استيثاق المفتاح."
 
 #: core/remoteview.cpp:723
 #, kde-format
 msgctxt "@label"
 msgid "No free local port could be opened for the tunnel on this computer."
-msgstr ""
+msgstr "تعذر فتح منفذ محلي حر للنفق على هذا الحاسوب."
 
 #: core/remoteview.cpp:725
 #, kde-format
@@ -1113,7 +1071,7 @@ msgctxt "@info"
 msgid ""
 "Close other applications that open many network connections, then connect "
 "again."
-msgstr ""
+msgstr "أغلق التطبيقات الأخرى التي تفتح اتصالات شبكة كثيرة، ثم اتصل مجددًا."
 
 #: core/sshtunnelthread.cpp:104
 #, kde-format
@@ -1368,6 +1326,8 @@ msgid ""
 "Unable to load connection data from “%1”.\n"
 "The file may be damaged, or it is in a format KRDC does not support."
 msgstr ""
+"تعذر تحميل بيانات الاتصال من ”%1“.\n"
+"ربما يكون الملف تالفًا، أو أنه بتنسيق لا يدعمه KRDC."
 
 #: mainwindow.cpp:289
 #, kde-format
@@ -1381,6 +1341,9 @@ msgid ""
 "\n"
 "Use the form [username@]host[:port], for example: user@192.168.1.10:5900"
 msgstr ""
+"«%1» ليس عنوانًا صالحًا.\n"
+"\n"
+"استخدم الصيغة [username@]host[:port]، على سبيل المثال: user@192.168.1.10:5900"
 
 #: mainwindow.cpp:298
 #, kde-format
@@ -1393,6 +1356,8 @@ msgid ""
 "No installed plugin can handle the “%1” protocol.\n"
 "Supported protocols: %2"
 msgstr ""
+"لا يوجد أي مكون إضافي مثبت يمكنه التعامل مع ميفاق ”%1“..\n"
+"الموافيق المتاحة: %2"
 
 #: mainwindow.cpp:541
 #, kde-format
@@ -1547,13 +1512,13 @@ msgstr "المرشّح"
 #, kde-format
 msgctxt "@label"
 msgid "The remote computer may have shut down or restarted."
-msgstr ""
+msgstr "ربما أُغلق الحاسوب البعيد أو أُعيد تشغيله."
 
 #: mainwindow.cpp:1645
 #, kde-format
 msgctxt "@title connection error"
 msgid "Closed before the session started"
-msgstr ""
+msgstr "أُغلق قبل بدء الجلسة"
 
 #. i18n: ectx: attribute (title), widget (QWidget, displayTab)
 #. i18n: ectx: property (text), widget (QLabel, displayHeading)
@@ -1792,10 +1757,9 @@ msgstr "لون منخفض (8بت)"
 #. i18n: ectx: property (text), widget (QLabel, localResourcesHeading)
 #: rdp/rdppreferences.ui:448 spice/spicepreferences.ui:242
 #: vnc/vncpreferences.ui:237
-#, fuzzy, kde-format
-#| msgid "Local Cursor"
+#, kde-format
 msgid "Local Resources"
-msgstr "المؤشر المحلي"
+msgstr "الموارد المحلية"
 
 #. i18n: ectx: property (text), widget (QLabel, soundLabel)
 #: rdp/rdppreferences.ui:454
@@ -1840,10 +1804,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:530
-#, fuzzy, kde-format
-#| msgid "On This Computer"
+#, kde-format
 msgid "Same as This Computer"
-msgstr "على هذا الحاسوب"
+msgstr "مثل هذا الحاسوب"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:535
@@ -2069,23 +2032,21 @@ msgstr "التركية (tr)"
 
 #. i18n: ectx: property (text), widget (QLabel, shareMediaLabel)
 #: rdp/rdppreferences.ui:723
-#, fuzzy, kde-format
-#| msgid "Share Media:"
+#, kde-format
 msgid "Shared folder:"
-msgstr "الوسائط المُشَاركة:"
+msgstr "المجلّد المشترك:"
 
 #. i18n: ectx: property (toolTip), widget (SharedFolderField, kcfg_ShareMedia)
 #: rdp/rdppreferences.ui:739
 #, kde-format
 msgid "A folder on this computer that the remote computer can read and write."
-msgstr ""
+msgstr "مجلد على هذا الحاسوب يمكن للحاسوب البعيد قراءته والكتابة فيه."
 
 #. i18n: ectx: property (text), widget (QLabel, shareSmartcardLabel)
 #: rdp/rdppreferences.ui:746
-#, fuzzy, kde-format
-#| msgid "Share Smartcard:"
+#, kde-format
 msgid "Shared smartcard:"
-msgstr "شارك البطاقة الذكية:"
+msgstr "البطاقة الذكية المشتركة:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, connectionTab)
 #: rdp/rdppreferences.ui:760
@@ -2095,17 +2056,15 @@ msgstr "الاتصال"
 
 #. i18n: ectx: property (text), widget (QLabel, sessionLabel)
 #: rdp/rdppreferences.ui:766
-#, fuzzy, kde-format
-#| msgid "Sessions"
+#, kde-format
 msgid "Session:"
-msgstr "الجلسات"
+msgstr "الجلسة:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ConsoleMode)
 #: rdp/rdppreferences.ui:773
-#, fuzzy, kde-format
-#| msgid "Admin (or console) session"
+#, kde-format
 msgid "Connect to the console (admin) session"
-msgstr "جلية مدير (أو طرفية)"
+msgstr "اتصل بجلسة الطرفية (المدير)"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_ConsoleMode)
 #: rdp/rdppreferences.ui:776
@@ -2114,11 +2073,12 @@ msgid ""
 "Connect to the session an administrator uses to manage the remote computer, "
 "instead of a new user session."
 msgstr ""
+"اتصل بالجلسة التي يستخدمها المدير لإدارة الحاسوب البعيد، بدلًا من جلسة مستخدم "
+"جديدة."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_PreventSessionLock)
 #: rdp/rdppreferences.ui:783
-#, fuzzy, kde-format
-#| msgid "Prevent remote session lock"
+#, kde-format
 msgid "Keep the remote session from locking"
 msgstr "امنع قفل الجلسة البعيدة"
 
@@ -2129,13 +2089,14 @@ msgid ""
 "Move the remote mouse pointer every few minutes so that the remote computer "
 "does not lock the session while it is idle."
 msgstr ""
+"حرّك مؤشر الفأرة البعيد كل بضع دقائق حتى لا يقفل الحاسوب البعيد الجلسة أثناء "
+"خمولها."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseGateway)
 #: rdp/rdppreferences.ui:812
-#, fuzzy, kde-format
-#| msgid "Connect to a VNC Remote Desktop"
+#, kde-format
 msgid "Connect through a Remote Desktop Gateway"
-msgstr "اتصل  بسطح المكتب VNC بعيد"
+msgstr "اتصل عبر بوابة سطح مكتب بعيد"
 
 #. i18n: ectx: property (text), widget (QLabel, gServerLabel)
 #. i18n: ectx: property (text), widget (QLabel, pHostLabel)
@@ -2192,11 +2153,9 @@ msgstr "أر بيه سي"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseProxy)
 #: rdp/rdppreferences.ui:898
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Lost connection to the server."
+#, kde-format
 msgid "Connect through a proxy server"
-msgstr "فُقد الاتّصال بالخادم."
+msgstr "اتصل عبر خادم وكيل"
 
 #. i18n: ectx: property (text), widget (QLabel, protocolLabel)
 #: rdp/rdppreferences.ui:939
@@ -2218,10 +2177,9 @@ msgstr "الأمن"
 
 #. i18n: ectx: property (text), widget (QLabel, protocolsLabel)
 #: rdp/rdppreferences.ui:991
-#, fuzzy, kde-format
-#| msgid "Protocol:"
+#, kde-format
 msgid "Protocols:"
-msgstr "الميفاق:"
+msgstr "الموافيق:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityNLA)
 #: rdp/rdppreferences.ui:1000
@@ -2233,7 +2191,7 @@ msgstr "NLA"
 #: rdp/rdppreferences.ui:1003
 #, kde-format
 msgid "Network Level Authentication: sign in before the remote session starts."
-msgstr ""
+msgstr "استيثاق على مستوى الشبكة: سجّل الدخول قبل بدء الجلسة البعيدة."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityTLS)
 #: rdp/rdppreferences.ui:1010
@@ -2245,7 +2203,7 @@ msgstr "TLS"
 #: rdp/rdppreferences.ui:1013
 #, kde-format
 msgid "TLS encryption, signing in on the login screen of the remote computer."
-msgstr ""
+msgstr "تعمية TLS، مع تسجيل الدخول في شاشة دخول الحاسوب البعيد."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityRDP)
 #: rdp/rdppreferences.ui:1020
@@ -2257,7 +2215,7 @@ msgstr "RDP"
 #: rdp/rdppreferences.ui:1023
 #, kde-format
 msgid "Standard RDP security, the older encryption built into the protocol."
-msgstr ""
+msgstr "أمان RDP القياسي، وهو التعمية الأقدم المدمجة في البروتوكول."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityEXT)
 #: rdp/rdppreferences.ui:1030
@@ -2272,6 +2230,8 @@ msgid ""
 "Extended Network Level Authentication, which also checks that the account "
 "may sign in before the session starts."
 msgstr ""
+"استيثاق موسّع على مستوى الشبكة، يتحقق أيضًا من إمكانية تسجيل دخول الحساب قبل "
+"بدء الجلسة."
 
 #. i18n: ectx: property (text), widget (QLabel, TlsSecLevelLabel)
 #: rdp/rdppreferences.ui:1055
@@ -2285,14 +2245,13 @@ msgstr "مستوى أمان TLS:"
 msgid ""
 "The weakest TLS encryption to accept. A higher level may refuse to connect "
 "to older servers."
-msgstr ""
+msgstr "أضعف تعمية TLS مقبولة. قد يرفض مستوى أعلى الاتصال بخوادم أقدم."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:1075
-#, fuzzy, kde-format
-#| msgid "any"
+#, kde-format
 msgid "Any"
-msgstr "أي"
+msgstr "أيّ واحد"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:1080
@@ -2326,10 +2285,9 @@ msgstr "256 بتة"
 
 #. i18n: ectx: property (text), widget (QLabel, authPkgListLabel)
 #: rdp/rdppreferences.ui:1108
-#, fuzzy, kde-format
-#| msgid "Authentication Package List:"
+#, kde-format
 msgid "Authentication packages:"
-msgstr "قائمة حزمة الاستيثاق:"
+msgstr "حزم الاستيثاق:"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, authPkgListLabel)
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_AuthPkgKerberos)
@@ -2343,24 +2301,27 @@ msgid ""
 "packages are explicitly forbidden. For Kerberos-only authentication (e.g. "
 "Active Directory Protected Users accounts), uncheck NTLM."
 msgstr ""
+"يمكن استخدام الحزم المؤشّرة أثناء تفاوض CredSSP/NLA؛ الحزم غير المؤشّرة ممنوعة "
+"صراحةً. للاستيثاق بـ Kerberos فقط (مثل حسابات المستخدمين المحميين في Active "
+"Directory)، أزل تأشير NTLM."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AuthPkgKerberos)
 #: rdp/rdppreferences.ui:1120
 #, kde-format
 msgid "Kerberos"
-msgstr ""
+msgstr "كيربيروس"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AuthPkgNtlm)
 #: rdp/rdppreferences.ui:1130
 #, kde-format
 msgid "NTLM"
-msgstr ""
+msgstr "NTLM"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AuthPkgU2u)
 #: rdp/rdppreferences.ui:1140
 #, kde-format
 msgid "U2U"
-msgstr ""
+msgstr "U2U"
 
 #: rdp/rdpsession.cpp:1342
 #, kde-format
@@ -2432,37 +2393,37 @@ msgstr ""
 #, kde-format
 msgctxt "@label"
 msgid "The credentials for “%1” were not accepted."
-msgstr ""
+msgstr "لم تُقبل بيانات اعتماد «%1»."
 
 #: rdp/rdpview.cpp:351
 #, kde-format
 msgctxt "@info"
 msgid "Check the RD Gateway credentials in the host settings."
-msgstr ""
+msgstr "تحقق من بيانات اعتماد بوابة سطح المكتب البعيد في إعدادات المضيف."
 
 #: rdp/rdpview.cpp:367
 #, kde-format
 msgctxt "@label"
 msgid "This account may not log in remotely."
-msgstr ""
+msgstr "قد لا يُسمح لهذا الحساب بتسجيل الدخول عن بُعد."
 
 #: rdp/rdpview.cpp:368
 #, kde-format
 msgctxt "@label"
 msgid "“%1” may not log in remotely."
-msgstr ""
+msgstr "قد لا يُسمح لـ«%1» بتسجيل الدخول عن بُعد."
 
 #: rdp/rdpview.cpp:370
 #, kde-format
 msgctxt "@title connection error"
 msgid "Access denied"
-msgstr ""
+msgstr "رُفض النّفاذ"
 
 #: rdp/rdpview.cpp:372
 #, kde-format
 msgctxt "@info"
 msgid "Check whether the account is locked, disabled or expired."
-msgstr ""
+msgstr "تحقق مما إذا كان الحساب مقفلًا أو معطّلًا أو منتهي الصلاحية."
 
 #: rdp/rdpview.cpp:374
 #, kde-format
@@ -2471,20 +2432,20 @@ msgid ""
 "Ask the administrator of the remote computer to add the account to the "
 "Remote Desktop Users group, or log in with a different account."
 msgstr ""
+"اطلب من مدير الحاسوب البعيد إضافة الحساب إلى مجموعة مستخدمي سطح المكتب "
+"البعيد، أو سجّل الدخول بحساب آخر."
 
 #: rdp/rdpview.cpp:382
 #, kde-format
 msgctxt "@label"
 msgid "The password must be changed before it can be used to log in remotely."
-msgstr ""
+msgstr "يجب تغيير كلمة السر قبل استخدامها لتسجيل الدخول عن بُعد."
 
 #: rdp/rdpview.cpp:383
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Password Problems"
+#, kde-format
 msgctxt "@title connection error"
 msgid "Password expired"
-msgstr "مشاكل كلمة السر"
+msgstr "انتهت صلاحية كلمة السر"
 
 #: rdp/rdpview.cpp:385
 #, kde-format
@@ -2493,36 +2454,38 @@ msgid ""
 "Change the password by logging in locally on the remote computer, or ask its "
 "administrator to reset it."
 msgstr ""
+"غيّر كلمة السر بتسجيل الدخول محليًا على الحاسوب البعيد، أو اطلب من مديره إعادة "
+"تعيينها."
 
 #: rdp/rdpview.cpp:390
 #, kde-format
 msgctxt "@label"
 msgid "The Kerberos domain controller could not be reached."
-msgstr ""
+msgstr "تعذّر الوصول إلى متحكم نطاق Kerberos."
 
 #: rdp/rdpview.cpp:392
 #, kde-format
 msgctxt "@info"
 msgid "Check the domain you entered when logging in."
-msgstr ""
+msgstr "تحقق من النطاق الذي أدخلته عند تسجيل الدخول."
 
 #: rdp/rdpview.cpp:393
 #, kde-format
 msgctxt "@info"
 msgid "Connect to the network or VPN of the domain."
-msgstr ""
+msgstr "اتصل بشبكة النطاق أو شبكته الافتراضية الخاصة."
 
 #: rdp/rdpview.cpp:398 spice/spiceview.cpp:901 vnc/vncview.cpp:287
 #, kde-format
 msgctxt "@label"
 msgid "No IP address was found for this name."
-msgstr ""
+msgstr "لم يُعثر على عنوان IP لهذا الاسم."
 
 #: rdp/rdpview.cpp:409
 #, kde-format
 msgctxt "@label"
 msgid "The server and KRDC could not agree on a security protocol."
-msgstr ""
+msgstr "تعذّر على الخادم وKRDC الاتفاق على بروتوكول أمان."
 
 #: rdp/rdpview.cpp:411
 #, kde-format
@@ -2531,18 +2494,20 @@ msgid ""
 "Set the TLS security level in the host settings to “Any”. The server may not "
 "support the level selected."
 msgstr ""
+"اضبط مستوى أمان TLS في إعدادات المضيف على «أي». قد لا يدعم الخادم المستوى "
+"المحدد."
 
 #: rdp/rdpview.cpp:415
 #, kde-format
 msgctxt "@label"
 msgid "The server requires Network Level Authentication (NLA)."
-msgstr ""
+msgstr "يتطلب الخادم الاستيثاق على مستوى الشبكة (NLA)."
 
 #: rdp/rdpview.cpp:416
 #, kde-format
 msgctxt "@info"
 msgid "Enable NLA in the security settings for this host."
-msgstr ""
+msgstr "فعّل NLA في إعدادات الأمان لهذا المضيف."
 
 #: rdp/rdpview.cpp:434
 #, kde-format
@@ -2551,12 +2516,14 @@ msgid ""
 "Check the RD Gateway settings for this host. The gateway “%1” may be "
 "unreachable or reject the connection."
 msgstr ""
+"تحقق من إعدادات بوابة سطح المكتب البعيد لهذا المضيف. قد تكون البوابة «%1» "
+"غير قابلة للوصول أو ترفض الاتصال."
 
 #: rdp/rdpview.cpp:441
 #, kde-format
 msgctxt "@label"
 msgid "The remote computer did not finish starting the session in time."
-msgstr ""
+msgstr "لم يُكمل الحاسوب البعيد بدء الجلسة في الوقت المحدد."
 
 #: rdp/rdpview.cpp:442
 #, kde-format
@@ -2565,61 +2532,62 @@ msgid ""
 "The remote computer may still be starting up or be under heavy load. Wait a "
 "minute, then connect again."
 msgstr ""
+"قد يكون الحاسوب البعيد لا يزال قيد التشغيل أو تحت حمل ثقيل. انتظر دقيقة ثم "
+"اتصل مجددًا."
 
 #: rdp/rdpview.cpp:446
 #, kde-format
 msgctxt "@label"
 msgid "It accepted the connection, then refused to start a session."
-msgstr ""
+msgstr "قبل الاتصال ثم رفض بدء جلسة."
 
 #: rdp/rdpview.cpp:447
-#, fuzzy, kde-format
-#| msgid "Sessions"
+#, kde-format
 msgctxt "@title connection error"
 msgid "Session refused"
-msgstr "الجلسات"
+msgstr "رُفضت الجلسة"
 
 #: rdp/rdpview.cpp:451
 #, kde-format
 msgctxt "@label"
 msgid "The server did not accept the options selected for this host."
-msgstr ""
+msgstr "لم يقبل الخادم الخيارات المحددة لهذا المضيف."
 
 #: rdp/rdpview.cpp:454
 #, kde-format
 msgctxt "@label"
 msgid "An administrator or another program disconnected this session."
-msgstr ""
+msgstr "فصل مسؤول أو برنامج آخر هذه الجلسة."
 
 #: rdp/rdpview.cpp:457
 #, kde-format
 msgctxt "@label"
 msgid "An administrator signed this session out."
-msgstr ""
+msgstr "سجّل مسؤول الخروج من هذه الجلسة."
 
 #: rdp/rdpview.cpp:460
 #, kde-format
 msgctxt "@label"
 msgid "The session was disconnected from the remote computer."
-msgstr ""
+msgstr "فُصلت الجلسة من الحاسوب البعيد."
 
 #: rdp/rdpview.cpp:467
 #, kde-format
 msgctxt "@label"
 msgid "Disconnected because someone else connected to this session."
-msgstr ""
+msgstr "فُصل الاتصال لأن شخصًا آخر اتصل بهذه الجلسة."
 
 #: rdp/rdpview.cpp:468
 #, kde-format
 msgctxt "@info"
 msgid "Reconnect to take the session back. This disconnects the other user."
-msgstr ""
+msgstr "أعد الاتصال لاستعادة الجلسة. سيؤدي هذا إلى فصل المستخدم الآخر."
 
 #: rdp/rdpview.cpp:471
 #, kde-format
 msgctxt "@label"
 msgid "The session was closed after being idle for too long."
-msgstr ""
+msgstr "أُغلقت الجلسة بعد خمول طويل."
 
 #: rdp/rdpview.cpp:472
 #, kde-format
@@ -2627,13 +2595,13 @@ msgctxt "@info"
 msgid ""
 "Reconnect to continue. The idle time limit is set by the administrator of "
 "the server."
-msgstr ""
+msgstr "أعد الاتصال للمتابعة. يحدد مسؤول الخادم حد وقت الخمول."
 
 #: rdp/rdpview.cpp:486
 #, kde-format
 msgctxt "@label"
 msgid "The remote computer reported a problem while logging in."
-msgstr ""
+msgstr "أبلغ الحاسوب البعيد عن مشكلة أثناء تسجيل الدخول."
 
 #: rdp/rdpview.cpp:487
 #, kde-format
@@ -2642,6 +2610,8 @@ msgid ""
 "Check that this user may log in to the remote computer, and that the session "
 "is not busy."
 msgstr ""
+"تحقق من أن هذا المستخدم يستطيع تسجيل الدخول إلى الحاسوب البعيد، وأن الجلسة "
+"غير مشغولة."
 
 #: rdp/rdpview.cpp:866
 #, kde-format
@@ -2669,17 +2639,16 @@ msgstr ""
 "المنفذ)</i></html>"
 
 #: rdp/sharedfolderfield.cpp:18
-#, fuzzy, kde-format
-#| msgid "Show start page"
+#, kde-format
 msgctxt "@item:inlistbox shared folder"
 msgid "Not shared"
-msgstr "اظهر صفحة البداية"
+msgstr "غير مشتركة"
 
 #: rdp/sharedfolderfield.cpp:20
 #, kde-format
 msgctxt "@item:inlistbox shared folder"
 msgid "Removable drives"
-msgstr ""
+msgstr "الأقراص القابلة للإزالة"
 
 #: rdp/sharedfolderfield.cpp:22
 #, kde-format
@@ -2688,42 +2657,44 @@ msgid ""
 "USB drives and memory cards, including ones plugged in during the session. "
 "Network shares are not included."
 msgstr ""
+"أقراص USB وبطاقات الذاكرة، بما في ذلك تلك الموصولة أثناء الجلسة. لا تشمل "
+"مشاركات الشبكة."
 
 #: rdp/sharedfolderfield.cpp:33
 #, kde-format
 msgctxt "@item:inlistbox shared folder"
 msgid "Downloads"
-msgstr ""
+msgstr "التنزيلات"
 
 #: rdp/sharedfolderfield.cpp:34
 #, kde-format
 msgctxt "@item:inlistbox shared folder"
 msgid "Documents"
-msgstr ""
+msgstr "المستندات"
 
 #: rdp/sharedfolderfield.cpp:36
 #, kde-format
 msgctxt "@item:inlistbox shared folder"
 msgid "Other Folder…"
-msgstr ""
+msgstr "مجلد أخر…"
 
 #: rdp/sharedfolderfield.cpp:65
 #, kde-format
 msgctxt "@item:inlistbox shared folder, %1 a stored value"
 msgid "%1 (not supported)"
-msgstr ""
+msgstr "%1 (غير متاح)"
 
 #: rdp/sharedfolderfield.cpp:69
 #, kde-format
 msgctxt "@item:inlistbox shared folder, %1 its name, %2 its path"
 msgid "%1 (%2)"
-msgstr ""
+msgstr "%1 (%2)"
 
 #: rdp/sharedfolderfield.cpp:102
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose Shared Folder"
-msgstr ""
+msgstr "اختر مجلدًا مشتركًا"
 
 #: remotedesktopsmodel.cpp:112
 #, kde-format
@@ -2823,7 +2794,7 @@ msgstr "شغّل الصوت من المضيف البعيد على هذا الح�
 #: spice/spicepreferences.ui:295 vnc/vncpreferences.ui:275
 #, kde-format
 msgid "Network"
-msgstr ""
+msgstr "الشبكة"
 
 #: spice/spiceview.cpp:830
 #, kde-format
@@ -2834,7 +2805,7 @@ msgstr "الاستيثاق مطلوب للاتصال بـ <b>%1</b>."
 #, kde-format
 msgctxt "@label"
 msgid "The TLS handshake failed."
-msgstr ""
+msgstr "فشلت مصافحة TLS."
 
 #: spice/spiceview.cpp:893
 #, kde-format
@@ -2843,14 +2814,13 @@ msgid ""
 "Check whether the server accepts TLS only on a separate port, and that its "
 "certificate is trusted."
 msgstr ""
+"تحقق مما إذا كان الخادم يقبل TLS على منفذ منفصل فقط، وأن شهادته موثوقة."
 
 #: spice/spiceview.cpp:896
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "The server refused the connection request."
+#, kde-format
 msgctxt "@label"
 msgid "The server rejected the SPICE connection."
-msgstr "رفض الخادم طلب الاتصال."
+msgstr "رفض الخادم اتصال SPICE."
 
 #: spice/spiceview.cpp:897
 #, kde-format
@@ -2858,7 +2828,7 @@ msgctxt "@info"
 msgid ""
 "Check that this port belongs to a SPICE server with a compatible protocol "
 "version."
-msgstr ""
+msgstr "تحقق من أن هذا المنفذ يخص خادم SPICE بإصدار بروتوكول متوافق."
 
 #: spice/spiceview.cpp:907
 #, kde-format
@@ -2867,6 +2837,8 @@ msgid ""
 "Make sure the virtual machine is running, and its SPICE display listens on "
 "this address."
 msgstr ""
+"تأكد من أن الآلة الافتراضية تعمل، وأن شاشة SPICE الخاصة بها تستمع على هذا "
+"العنوان."
 
 #: spice/spiceviewfactory.cpp:47
 #, kde-format
@@ -3026,19 +2998,20 @@ msgid ""
 "Wait a few minutes. The server blocks logins for a while after several "
 "failed attempts."
 msgstr ""
+"انتظر بضع دقائق. يحجب الخادم عمليات تسجيل الدخول لفترة بعد عدة محاولات فاشلة."
 
 #: vnc/vncview.cpp:310
 #, kde-format
 msgctxt "@info"
 msgid "Then connect again and enter the password carefully."
-msgstr ""
+msgstr "ثم اتصل مجددًا وأدخل كلمة المرور بعناية."
 
 #: vnc/vncview.cpp:316
 #, kde-format
 msgctxt "@label"
 msgid ""
 "The server requires an authentication method that KRDC does not support."
-msgstr ""
+msgstr "يتطلب الخادم طريقة استيثاق لا يدعمها KRDC."
 
 #: vnc/vncview.cpp:318
 #, kde-format
@@ -3047,6 +3020,7 @@ msgid ""
 "Configure the VNC server to use standard VNC password authentication, or "
 "connect through an SSH tunnel."
 msgstr ""
+"اضبط خادم VNC لاستخدام استيثاق كلمة مرور VNC القياسي، أو اتصل عبر نفق SSH."
 
 #: vnc/vncviewfactory.cpp:47
 #, kde-format
