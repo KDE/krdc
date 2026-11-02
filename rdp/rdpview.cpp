@@ -229,7 +229,10 @@ void RdpView::onAuthRequested()
     std::unique_ptr<KPasswordDialog> dialog;
     dialog =
         std::make_unique<KPasswordDialog>(nullptr, KPasswordDialog::ShowUsernameLine | KPasswordDialog::ShowKeepPassword | KPasswordDialog::ShowDomainLine);
-    dialog->setPrompt(i18nc("@label", "Access to this system requires a username and password."));
+    // Without its own user name, the gateway uses this login too.
+    const bool sharedWithGateway = m_hostPreferences->useGateway() && m_hostPreferences->gatewayUsername().isEmpty();
+    dialog->setPrompt(sharedWithGateway ? i18nc("@label", "Access to the gateway and this system requires a username and password.")
+                                        : i18nc("@label", "Access to this system requires a username and password."));
     dialog->setUsername(m_user);
     dialog->setDomain(m_domain);
     dialog->setPassword(m_password);
@@ -320,6 +323,11 @@ void RdpView::onVerifyChangedCertificate(RdpSession::CertificateResult *ret, con
     }
 }
 
+// Errors of RD Gateway servers, which FreeRDP passes on but has no public names for.
+static constexpr unsigned int GatewayNapAccessDenied = 0x800759DB;
+static constexpr unsigned int GatewayRapAccessDenied = 0x800759DA;
+static constexpr unsigned int GatewayTargetConnectFailed = 0x800759DD;
+
 void RdpView::handleError(const unsigned int error)
 {
     using Stage = ConnectionError::Stage;
@@ -368,6 +376,10 @@ void RdpView::handleError(const unsigned int error)
                                                           : i18nc("@label", "“%1” may not log in remotely.", m_user),
                                          details);
         report.title = i18nc("@title connection error", "Access denied");
+        // The gateway reports a refused login the same way, and its account can be a different one.
+        if (m_hostPreferences->useGateway()) {
+            report.message = i18nc("@label", "The gateway or the remote computer refused this login.");
+        }
         report.steps = {
             i18nc("@info", "Check whether the account is locked, disabled or expired."),
             i18nc("@info",
@@ -407,6 +419,14 @@ void RdpView::handleError(const unsigned int error)
             break;
         }
         report = ConnectionError::create(Stage::Security, i18nc("@label", "The server and KRDC could not agree on a security protocol."), details);
+        // Logging in to a gateway fails with the same error, for example without a domain controller.
+        if (m_hostPreferences->useGateway()) {
+            report.message = i18nc("@label", "Logging in to the gateway failed, or the server and KRDC could not agree on a security protocol.");
+        }
+        if (!m_hostPreferences->authPkgNtlm()) {
+            report.steps.prepend(
+                i18nc("@info", "NTLM is turned off for this host. Turn it on in the host settings unless the domain controller can be reached."));
+        }
         if (m_hostPreferences->tlsSecLevel() != RdpHostPreferences::TlsSecLevel::Any) {
             report.steps.prepend(i18nc("@info", "Set the TLS security level in the host settings to “Any”. The server may not support the level selected."));
         }
@@ -441,6 +461,26 @@ void RdpView::handleError(const unsigned int error)
         report = ConnectionError::create(Stage::Session, i18nc("@label", "The remote computer did not finish starting the session in time."), details);
         report.steps = {i18nc("@info", "The remote computer may still be starting up or be under heavy load. Wait a minute, then connect again.")};
         report.actions = ConnectionError::Retry;
+        break;
+    case GatewayRapAccessDenied:
+        report =
+            ConnectionError::create(Stage::Authentication, i18nc("@label", "The gateway does not allow this account to connect to “%1”.", m_host), details);
+        report.title = i18nc("@title connection error", "Access denied");
+        report.steps = {
+            i18nc("@info", "Try the full name of the computer. The gateway may only know it by that name."),
+            i18nc("@info", "Ask the administrator of the gateway to allow this account and computer in its resource authorization policy."),
+        };
+        break;
+    case GatewayNapAccessDenied:
+        report = ConnectionError::create(Stage::Authentication, i18nc("@label", "The gateway does not allow this device to connect."), details);
+        report.title = i18nc("@title connection error", "Access denied");
+        report.steps = {i18nc("@info", "Ask the administrator of the gateway to check its connection authorization policy.")};
+        break;
+    case GatewayTargetConnectFailed:
+        report = ConnectionError::create(Stage::Network, i18nc("@label", "The gateway could not reach “%1”.", m_host), details);
+        report.steps = {
+            i18nc("@info", "Make sure the remote computer is running, and that the gateway can reach it by this name."),
+        };
         break;
     case FREERDP_ERROR_SERVER_DENIED_CONNECTION:
         report = ConnectionError::create(Stage::Session, i18nc("@label", "It accepted the connection, then refused to start a session."), details);
