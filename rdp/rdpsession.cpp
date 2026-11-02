@@ -502,6 +502,9 @@ void RdpSession::clientContextFree(freerdp *instance, rdpContext *context)
     ctx->session = nullptr;
 }
 
+// RD Gateway listens on HTTPS unless its address says otherwise.
+static constexpr int DefaultGatewayPort = 443;
+
 int RdpSession::clientContextStart(rdpContext *context)
 {
     auto kcontext = reinterpret_cast<RdpContext *>(context);
@@ -819,7 +822,7 @@ int RdpSession::clientContextStart(rdpContext *context)
         if (!freerdp_settings_set_string(settings, FreeRDP_GatewayHostname, gatewayServerAddress.host().toUtf8().data())) {
             return -1;
         }
-        if (!freerdp_settings_set_uint32(settings, FreeRDP_GatewayPort, gatewayServerAddress.port(3389))) {
+        if (!freerdp_settings_set_uint32(settings, FreeRDP_GatewayPort, gatewayServerAddress.port(DefaultGatewayPort))) {
             return -1;
         }
         if (!freerdp_settings_set_string(settings, FreeRDP_GatewayUsername, preferences->gatewayUsername().toUtf8().data())) {
