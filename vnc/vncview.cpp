@@ -116,6 +116,13 @@ void VncView::scaleResize(int w, int h)
         const qreal newH = frameSize.height() * m_verticalFactor;
         setMaximumSize(newW, newH); // This is a hack to force Qt to center the view in the scroll area
         resize(newW, newH);
+
+        // Skip sizes the user did not choose for the window: before setup and in full screen.
+        if (m_initDone && !window()->isFullScreen()) {
+            const QSize savedSize = QSize(w, h) * devicePixelRatioF();
+            m_hostPreferences->setWidth(savedSize.width());
+            m_hostPreferences->setHeight(savedSize.height());
+        }
     }
 }
 

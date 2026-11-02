@@ -57,7 +57,6 @@ protected:
     void saveProperties(KConfigGroup &group) override;
     void applyMainWindowSettings(const KConfigGroup &group) override;
     void saveHostPrefs();
-    void saveHostPrefs(RemoteView *view);
 
 private Q_SLOTS:
     void restoreOpenSessions();

@@ -800,7 +800,7 @@ void MainWindow::detachRemoteView(RemoteView *view)
 
     m_remoteViewMap.remove(tab);
     m_savedGrabStatesBeforeFullscreen.remove(view);
-    saveHostPrefs(view);
+    saveHostPrefs();
     if (!view->isQuitting()) {
         view->startQuitting();
     }
@@ -822,7 +822,7 @@ void MainWindow::closeRemoteView(RemoteView *view)
         return; // The view is absent or its disconnection is already being handled.
     }
 
-    saveHostPrefs(view);
+    saveHostPrefs();
     closeTab(m_tabWidget->indexOf(tab));
 }
 
@@ -1041,7 +1041,7 @@ void MainWindow::showLocalCursor(bool showLocalCursor)
     RemoteView *view = currentRemoteView();
     view->showLocalCursor(showLocalCursor ? RemoteView::CursorOn : RemoteView::CursorOff);
     view->hostPreferences()->setShowLocalCursor(showLocalCursor);
-    saveHostPrefs(view);
+    saveHostPrefs();
 }
 
 void MainWindow::viewOnly(bool viewOnly)
@@ -1051,7 +1051,7 @@ void MainWindow::viewOnly(bool viewOnly)
     RemoteView *view = currentRemoteView();
     view->setViewOnly(viewOnly);
     view->hostPreferences()->setViewOnly(viewOnly);
-    saveHostPrefs(view);
+    saveHostPrefs();
 }
 
 void MainWindow::clipboardSharing(bool clipboardSharing)
@@ -1060,7 +1060,7 @@ void MainWindow::clipboardSharing(bool clipboardSharing)
 
     RemoteView *view = currentRemoteView();
     view->hostPreferences()->setClipboardSharing(clipboardSharing);
-    saveHostPrefs(view);
+    saveHostPrefs();
 }
 
 void MainWindow::grabAllKeys(bool grabAllKeys)
@@ -1076,7 +1076,7 @@ void MainWindow::grabAllKeys(bool grabAllKeys)
     m_savedGrabStatesBeforeFullscreen.remove(view);
 
     view->hostPreferences()->setGrabAllKeys(grabAllKeys);
-    saveHostPrefs(view);
+    saveHostPrefs();
 }
 
 void setActionStatus(QAction *action, bool enabled, bool visible, bool checked)
@@ -1097,7 +1097,7 @@ void MainWindow::scale(bool scale)
     else
         view->hostPreferences()->setWindowedScale(scale);
 
-    saveHostPrefs(view);
+    saveHostPrefs();
 
     Q_EMIT scaleUpdated(scale);
 }
@@ -1113,7 +1113,7 @@ void MainWindow::setFactor(int scale)
         view->enableScaling(view->scaling());
         view->hostPreferences()->setScaleFactor(scale);
 
-        saveHostPrefs(view);
+        saveHostPrefs();
     }
 }
 
@@ -1390,21 +1390,6 @@ void MainWindow::saveProperties(KConfigGroup &group)
 
 void MainWindow::saveHostPrefs()
 {
-    for (RemoteView *view : std::as_const(m_remoteViewMap)) {
-        saveHostPrefs(view);
-    }
-}
-
-void MainWindow::saveHostPrefs(RemoteView *view)
-{
-    // should saving this be a user option?
-    if (view && view->scaling()) {
-        QSize viewSize = m_tabWidget->currentWidget()->size();
-        qCDebug(KRDC) << "saving window size:" << viewSize;
-        view->hostPreferences()->setWidth(viewSize.width());
-        view->hostPreferences()->setHeight(viewSize.height());
-    }
-
     Settings::self()->config()->sync();
 }
 
