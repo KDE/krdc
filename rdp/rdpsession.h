@@ -99,6 +99,22 @@ public:
     QString password() const;
     void setPassword(const QString &newPassword);
 
+    QString gatewayUser() const
+    {
+        return m_gatewayUser;
+    }
+    QString gatewayDomain() const
+    {
+        return m_gatewayDomain;
+    }
+    /** Ask for the gateway password even if one is saved. */
+    void setIgnoreSavedGatewayPassword(bool ignore)
+    {
+        m_ignoreSavedGatewayPassword = ignore;
+    }
+    /** Answers onGatewayAuthRequested(). Without a call, the gateway login is canceled. */
+    void setGatewayLogin(const QString &user, const QString &domain, const QString &password);
+
     RdpHostPreferences *preferences() const;
     void setHostPreferences(RdpHostPreferences *preferences);
 
@@ -132,8 +148,9 @@ public:
 
     Q_SIGNAL void errorMessage(unsigned int error);
     Q_SIGNAL void onAuthRequested();
-    Q_SIGNAL void onVerifyCertificate(RdpSession::CertificateResult *ret, const QString &certificate);
-    Q_SIGNAL void onVerifyChangedCertificate(RdpSession::CertificateResult *ret, const QString &oldCertificate, const QString &newCertificate);
+    Q_SIGNAL void onGatewayAuthRequested();
+    Q_SIGNAL void onVerifyCertificate(RdpSession::CertificateResult *ret, const QString &certificate, bool gateway);
+    Q_SIGNAL void onVerifyChangedCertificate(RdpSession::CertificateResult *ret, const QString &oldCertificate, const QString &newCertificate, bool gateway);
     Q_SIGNAL void onLogonError(const QString &error);
 
     Q_SIGNAL void cursorChanged(const QCursor cursor);
@@ -197,6 +214,7 @@ private:
     void setState(State newState);
 
     bool onAuthenticate(char **username, char **password, char **domain);
+    bool onAuthenticateGateway(char **username, char **password, char **domain);
 
     void run();
 
@@ -227,6 +245,12 @@ private:
     int m_port = -1;
     QSize m_size;
     bool m_firstPasswordTry;
+
+    QString m_gatewayUser;
+    QString m_gatewayDomain;
+    QString m_gatewayPassword;
+    bool m_gatewayLoginEntered = false;
+    bool m_ignoreSavedGatewayPassword = false;
     bool m_needKeyStateSync = true;
 
     std::thread m_thread;

@@ -289,10 +289,15 @@ void RdpSession::postFinalDisconnect(freerdp *)
 
 BOOL RdpSession::authenticateEx(freerdp *instance, char **username, char **password, char **domain, rdp_auth_reason reason)
 {
-    Q_UNUSED(reason);
     auto session = reinterpret_cast<RdpContext *>(instance->context)->session;
+
+    // Without a gateway user name, the gateway uses the same login as the remote computer.
+    const bool gateway = reason == GW_AUTH_HTTP || reason == GW_AUTH_RDG || reason == GW_AUTH_RPC;
+    if (gateway && *username && **username) {
+        return session->onAuthenticateGateway(username, password, domain);
+    }
+
     // TODO: this needs to handle:
-    // gateway
     // user
     // smartcard
     // AAD
@@ -341,7 +346,7 @@ DWORD RdpSession::verifyChangedCertificateEx(freerdp *rdp,
     newCertificate.flags = flags;
 
     RdpSession::CertificateResult ret = RdpSession::CertificateResult::DoNotAccept;
-    Q_EMIT session->onVerifyChangedCertificate(&ret, oldCertificate.toString(), newCertificate.toString());
+    Q_EMIT session->onVerifyChangedCertificate(&ret, oldCertificate.toString(), newCertificate.toString(), flags & VERIFY_CERT_FLAG_GATEWAY);
     switch (ret) {
     case RdpSession::CertificateResult::DoNotAccept:
         return 0;
@@ -379,7 +384,7 @@ DWORD RdpSession::verifyCertificateEx(freerdp *rdp,
     certificate.flags = flags;
 
     RdpSession::CertificateResult ret = RdpSession::CertificateResult::DoNotAccept;
-    Q_EMIT session->onVerifyCertificate(&ret, certificate.toString());
+    Q_EMIT session->onVerifyCertificate(&ret, certificate.toString(), flags & VERIFY_CERT_FLAG_GATEWAY);
     switch (ret) {
     case RdpSession::CertificateResult::DoNotAccept:
         return 0;
@@ -828,7 +833,9 @@ int RdpSession::clientContextStart(rdpContext *context)
         if (!freerdp_settings_set_string(settings, FreeRDP_GatewayUsername, preferences->gatewayUsername().toUtf8().data())) {
             return -1;
         }
-        if (!freerdp_settings_set_string(settings, FreeRDP_GatewayPassword, preferences->gatewayPassword().toUtf8().data())) {
+        if (!freerdp_settings_set_string(settings,
+                                         FreeRDP_GatewayPassword,
+                                         session->m_ignoreSavedGatewayPassword ? "" : preferences->gatewayPassword().toUtf8().data())) {
             return -1;
         }
         if (!freerdp_settings_set_string(settings, FreeRDP_GatewayDomain, preferences->gatewayDomain().toUtf8().data())) {
@@ -1424,6 +1431,14 @@ RdpHostPreferences *RdpSession::preferences() const
     return m_preferences;
 }
 
+void RdpSession::setGatewayLogin(const QString &user, const QString &domain, const QString &password)
+{
+    m_gatewayUser = user;
+    m_gatewayDomain = domain;
+    m_gatewayPassword = password;
+    m_gatewayLoginEntered = true;
+}
+
 void RdpSession::setHostPreferences(RdpHostPreferences *preferences)
 {
     m_preferences = preferences;
@@ -1648,6 +1663,30 @@ void RdpSession::setState(RdpSession::State newState)
 
     m_state = newState;
     Q_EMIT stateChanged();
+}
+
+bool RdpSession::onAuthenticateGateway(char **username, char **password, char **domain)
+{
+    m_gatewayUser = QString::fromUtf8(*username);
+    m_gatewayDomain = *domain ? QString::fromUtf8(*domain) : QString();
+    m_gatewayPassword.clear();
+    m_gatewayLoginEntered = false;
+
+    Q_EMIT onGatewayAuthRequested();
+
+    if (!m_gatewayLoginEntered) {
+        return false;
+    }
+
+    free(*username);
+    *username = _strdup(m_gatewayUser.toUtf8().data());
+    free(*domain);
+    *domain = _strdup(m_gatewayDomain.toUtf8().data());
+    free(*password);
+    *password = _strdup(m_gatewayPassword.toUtf8().data());
+    m_gatewayPassword.clear();
+
+    return true;
 }
 
 bool RdpSession::onAuthenticate(char **username, char **password, char **domain)

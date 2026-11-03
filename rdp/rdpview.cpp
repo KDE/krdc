@@ -26,6 +26,7 @@
 #include <QMouseEvent>
 #include <QPainter>
 #include <QScreen>
+#include <QSet>
 #include <QTimer>
 #include <QUrlQuery>
 #include <QVBoxLayout>
@@ -144,10 +145,15 @@ bool RdpView::isQuitting()
     return m_quitting;
 }
 
+// Hosts whose saved gateway login the gateway refused, so that connecting again asks for a new one
+// instead of repeating it, which could lock the account.
+static QSet<QString> s_refusedGatewayLogins;
+
 bool RdpView::startConnection()
 {
     m_session = std::make_unique<RdpSession>(this);
     m_session->setHostPreferences(m_hostPreferences.get());
+    m_session->setIgnoreSavedGatewayPassword(s_refusedGatewayLogins.contains(m_url.toDisplayString(QUrl::StripTrailingSlash)));
     m_session->setHost(m_host);
     m_session->setPort(m_port);
     m_session->setUser(m_user);
@@ -195,6 +201,13 @@ bool RdpView::startConnection()
                     switchFullscreen(true);
                 }
             }
+            // The gateway accepted the login that replaces the refused one.
+            if (s_refusedGatewayLogins.remove(m_url.toDisplayString(QUrl::StripTrailingSlash)) && !m_enteredGatewayPassword.isEmpty()) {
+                m_hostPreferences->setGatewayUsername(m_session->gatewayUser());
+                m_hostPreferences->setGatewayDomain(m_session->gatewayDomain());
+                m_hostPreferences->setGatewayPassword(m_enteredGatewayPassword);
+            }
+            m_enteredGatewayPassword.clear();
             setStatus(Connected);
             break;
         case RdpSession::State::Closed:
@@ -208,6 +221,7 @@ bool RdpView::startConnection()
     connect(m_session.get(), &RdpSession::errorMessage, this, &RdpView::handleError);
     connect(m_session.get(), &RdpSession::onLogonError, this, &RdpView::onLogonError);
     connect(m_session.get(), &RdpSession::onAuthRequested, this, &RdpView::onAuthRequested, Qt::BlockingQueuedConnection);
+    connect(m_session.get(), &RdpSession::onGatewayAuthRequested, this, &RdpView::onGatewayAuthRequested, Qt::BlockingQueuedConnection);
     connect(m_session.get(), &RdpSession::onVerifyCertificate, this, &RdpView::onVerifyCertificate, Qt::BlockingQueuedConnection);
     connect(m_session.get(), &RdpSession::onVerifyChangedCertificate, this, &RdpView::onVerifyChangedCertificate, Qt::BlockingQueuedConnection);
 
@@ -226,6 +240,8 @@ bool RdpView::startConnection()
 
 void RdpView::onAuthRequested()
 {
+    setStatus(Authenticating);
+
     std::unique_ptr<KPasswordDialog> dialog;
     dialog =
         std::make_unique<KPasswordDialog>(nullptr, KPasswordDialog::ShowUsernameLine | KPasswordDialog::ShowKeepPassword | KPasswordDialog::ShowDomainLine);
@@ -271,9 +287,29 @@ void RdpView::onAuthRequested()
     m_session->setPassword(m_password);
 }
 
-void RdpView::onVerifyCertificate(RdpSession::CertificateResult *ret, const QString &certificate)
+void RdpView::onGatewayAuthRequested()
 {
-    KMessageDialog dialog{KMessageDialog::WarningContinueCancel, i18nc("@label", "The certificate for this system is unknown. Do you wish to continue?")};
+    setStatus(Authenticating);
+
+    KPasswordDialog dialog(nullptr, KPasswordDialog::ShowUsernameLine | KPasswordDialog::ShowDomainLine);
+    dialog.setPrompt(i18nc("@label %1 is a server address", "Access to the gateway %1 requires a username and password.", m_hostPreferences->gatewayServer()));
+    dialog.setUsername(m_session->gatewayUser());
+    dialog.setDomain(m_session->gatewayDomain());
+
+    if (!dialog.exec()) {
+        setCanceledByUser();
+        return;
+    }
+
+    m_enteredGatewayPassword = dialog.password();
+    m_session->setGatewayLogin(dialog.username(), dialog.domain(), m_enteredGatewayPassword);
+}
+
+void RdpView::onVerifyCertificate(RdpSession::CertificateResult *ret, const QString &certificate, bool gateway)
+{
+    KMessageDialog dialog{KMessageDialog::WarningContinueCancel,
+                          gateway ? i18nc("@label", "The certificate for this gateway is unknown. Do you wish to continue?")
+                                  : i18nc("@label", "The certificate for this system is unknown. Do you wish to continue?")};
     dialog.setCaption(i18nc("@title:dialog", "Verify Certificate"));
     dialog.setIcon(QIcon::fromTheme(QStringLiteral("view-certficate")));
 
@@ -297,9 +333,11 @@ void RdpView::onVerifyCertificate(RdpSession::CertificateResult *ret, const QStr
     }
 }
 
-void RdpView::onVerifyChangedCertificate(RdpSession::CertificateResult *ret, const QString &oldCertificate, const QString &newCertificate)
+void RdpView::onVerifyChangedCertificate(RdpSession::CertificateResult *ret, const QString &oldCertificate, const QString &newCertificate, bool gateway)
 {
-    KMessageDialog dialog{KMessageDialog::WarningContinueCancel, i18nc("@label", "The certificate for this system has changed. Do you wish to continue?")};
+    KMessageDialog dialog{KMessageDialog::WarningContinueCancel,
+                          gateway ? i18nc("@label", "The certificate for this gateway has changed. Do you wish to continue?")
+                                  : i18nc("@label", "The certificate for this system has changed. Do you wish to continue?")};
     dialog.setCaption(i18nc("@title:dialog", "Certificate has Changed"));
     dialog.setIcon(QIcon::fromTheme(QStringLiteral("view-certficate")));
 
@@ -379,6 +417,9 @@ void RdpView::handleError(const unsigned int error)
         // The gateway reports a refused login the same way, and its account can be a different one.
         if (m_hostPreferences->useGateway()) {
             report.message = i18nc("@label", "The gateway or the remote computer refused this login.");
+        }
+        if (m_hostPreferences->useGateway() && !m_hostPreferences->gatewayUsername().isEmpty()) {
+            s_refusedGatewayLogins.insert(m_url.toDisplayString(QUrl::StripTrailingSlash));
         }
         report.steps = {
             i18nc("@info", "Check whether the account is locked, disabled or expired."),

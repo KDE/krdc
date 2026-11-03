@@ -65,8 +65,9 @@ public:
 public Q_SLOTS:
     void scaleResize(int w, int h) override;
     void onAuthRequested();
-    void onVerifyCertificate(RdpSession::CertificateResult *ret, const QString &certificate);
-    void onVerifyChangedCertificate(RdpSession::CertificateResult *ret, const QString &oldCertificate, const QString &newCertificate);
+    void onGatewayAuthRequested();
+    void onVerifyCertificate(RdpSession::CertificateResult *ret, const QString &certificate, bool gateway);
+    void onVerifyChangedCertificate(RdpSession::CertificateResult *ret, const QString &oldCertificate, const QString &newCertificate, bool gateway);
     void onLogonError(const QString &error);
     void setRemoteCursor(const QCursor cursor);
 
@@ -94,6 +95,7 @@ private:
     QString m_user;
     QString m_domain;
     QString m_password;
+    QString m_enteredGatewayPassword;
     //
     bool m_quitting = false;
 
