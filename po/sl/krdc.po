@@ -1,6 +1,6 @@
 # Slovenian translation of krdc
 # Copyright (C) 2002, 2003, 2004, 2005, 2006, 2007 Free Software Foundation, Inc.
-# $Id: krdc.po 1751478 2026-10-30 01:42:25Z scripty $
+# $Id: krdc.po 1751927 2026-11-04 01:48:01Z scripty $
 # $Source$
 #
 # Andrej Vernekar <andrej.vernekar@moj.net>, 2002, 2007, 2008.
@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-29 00:53+0000\n"
+"POT-Creation-Date: 2026-11-04 01:02+0000\n"
 "PO-Revision-Date: 2026-10-29 09:35+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -1262,8 +1262,8 @@ msgstr "URL-ji za povezavo po zagonu"
 msgid "KDE Remote Desktop Client started"
 msgstr "Zagnan odjemalec za oddaljena namizja"
 
-#: mainwindow.cpp:115 mainwindow.cpp:132 mainwindow.cpp:1426
-#: mainwindow.cpp:1523
+#: mainwindow.cpp:115 mainwindow.cpp:132 mainwindow.cpp:1411
+#: mainwindow.cpp:1508
 #, kde-format
 msgid "New Connection"
 msgstr "Nova povezava"
@@ -1502,17 +1502,17 @@ msgstr ""
 msgid "Confirm Quit"
 msgstr "Potrdite izhod"
 
-#: mainwindow.cpp:1449
+#: mainwindow.cpp:1434
 #, kde-format
 msgid "Connect to:"
 msgstr "Poveži se z:"
 
-#: mainwindow.cpp:1453
+#: mainwindow.cpp:1438
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr "Vnesite za povezavo z naslovom ali filtriranje seznama."
 
-#: mainwindow.cpp:1464
+#: mainwindow.cpp:1449
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
@@ -1521,28 +1521,28 @@ msgstr ""
 "Vnesite naslov IP ali ime DNS. Počistite vrstico, da dobite seznam načinov "
 "za povezavo."
 
-#: mainwindow.cpp:1467
+#: mainwindow.cpp:1452
 #, kde-format
 msgid "Goto Address"
 msgstr "Pojdi na naslov"
 
-#: mainwindow.cpp:1559
+#: mainwindow.cpp:1544
 #, kde-format
 msgid "Remote Desktops"
 msgstr "Oddaljena namizja"
 
-#: mainwindow.cpp:1588
+#: mainwindow.cpp:1573
 #, kde-format
 msgid "Filter"
 msgstr "Filter"
 
-#: mainwindow.cpp:1641
+#: mainwindow.cpp:1626
 #, kde-format
 msgctxt "@label"
 msgid "The remote computer may have shut down or restarted."
 msgstr "Oddaljeni računalnik se je morda izklopil ali znova zagnal."
 
-#: mainwindow.cpp:1645
+#: mainwindow.cpp:1630
 #, kde-format
 msgctxt "@title connection error"
 msgid "Closed before the session started"
@@ -2355,7 +2355,7 @@ msgstr "NTLM"
 msgid "U2U"
 msgstr "U2U"
 
-#: rdp/rdpsession.cpp:1342
+#: rdp/rdpsession.cpp:1345
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -2371,43 +2371,51 @@ msgstr ""
 "Izdajatelj: %5\n"
 "Prstni odtis: %6\n"
 
-#: rdp/rdpview.cpp:232
+#: rdp/rdpview.cpp:234
+#, fuzzy, kde-format
+#| msgctxt "@label"
+#| msgid "Access to this system requires a username and password."
+msgctxt "@label"
+msgid "Access to the gateway and this system requires a username and password."
+msgstr "Za dostop do tega sistema sta potrebna uporabniško ime in geslo."
+
+#: rdp/rdpview.cpp:235
 #, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
 msgstr "Za dostop do tega sistema sta potrebna uporabniško ime in geslo."
 
-#: rdp/rdpview.cpp:273
+#: rdp/rdpview.cpp:276
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr "Potrdilo za ta sistem ni znano. Želite nadaljevati?"
 
-#: rdp/rdpview.cpp:274
+#: rdp/rdpview.cpp:277
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
 msgstr "Preveri potrdilo"
 
-#: rdp/rdpview.cpp:279 rdp/rdpview.cpp:305
+#: rdp/rdpview.cpp:282 rdp/rdpview.cpp:308
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
 msgstr "Zaponi si to potrdilo"
 
-#: rdp/rdpview.cpp:299
+#: rdp/rdpview.cpp:302
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
 msgstr "Potrdilo za ta sistem je spremenjeno. Želite nadaljevati?"
 
-#: rdp/rdpview.cpp:300
+#: rdp/rdpview.cpp:303
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
 msgstr "Potrdilo se je spremenilo"
 
-#: rdp/rdpview.cpp:303
+#: rdp/rdpview.cpp:306
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -2421,44 +2429,54 @@ msgstr ""
 "Novo potrdilo:\n"
 "%2"
 
-#: rdp/rdpview.cpp:348
+#: rdp/rdpview.cpp:356
 #, kde-format
 msgctxt "@label"
 msgid "The credentials for “%1” were not accepted."
 msgstr "Poverilnice za \"%1\" niso bili sprejete."
 
-#: rdp/rdpview.cpp:351
+#: rdp/rdpview.cpp:359
 #, kde-format
 msgctxt "@info"
 msgid "Check the RD Gateway credentials in the host settings."
 msgstr "Preverite poverilnice za prehod RD v nastavitvah gostitelja."
 
-#: rdp/rdpview.cpp:367
+#: rdp/rdpview.cpp:375
 #, kde-format
 msgctxt "@label"
 msgid "This account may not log in remotely."
 msgstr "S tem računom se ne sme prijavljati na daljavo."
 
-#: rdp/rdpview.cpp:368
+#: rdp/rdpview.cpp:376
 #, kde-format
 msgctxt "@label"
 msgid "“%1” may not log in remotely."
 msgstr "“%1” se morda ne more prijaviti na daljavo."
 
-#: rdp/rdpview.cpp:370
+#: rdp/rdpview.cpp:378 rdp/rdpview.cpp:468 rdp/rdpview.cpp:476
 #, kde-format
 msgctxt "@title connection error"
 msgid "Access denied"
 msgstr "Dostop zavrnjen"
 
-#: rdp/rdpview.cpp:372
+#: rdp/rdpview.cpp:381
+#, fuzzy, kde-format
+#| msgctxt "@info"
+#| msgid ""
+#| "Check that no firewall on the remote computer rejects the connection."
+msgctxt "@label"
+msgid "The gateway or the remote computer refused this login."
+msgstr ""
+"Preverite, da na oddaljenem računalniku kakšen vdorobran ne zavrača povezave."
+
+#: rdp/rdpview.cpp:384
 #, kde-format
 msgctxt "@info"
 msgid "Check whether the account is locked, disabled or expired."
 msgstr ""
 "Preverite, ali je račun zaklenjen, onemogočen ali mu je potekla veljavnost."
 
-#: rdp/rdpview.cpp:374
+#: rdp/rdpview.cpp:386
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2469,7 +2487,7 @@ msgstr ""
 "»Uporabniki oddaljenega namizja« (Remote Desktop Users), ali pa se prijavite "
 "z drugim računom."
 
-#: rdp/rdpview.cpp:382
+#: rdp/rdpview.cpp:394
 #, kde-format
 msgctxt "@label"
 msgid "The password must be changed before it can be used to log in remotely."
@@ -2477,13 +2495,13 @@ msgstr ""
 "Geslo je treba spremeniti, preden ga je mogoče uporabiti za oddaljeno "
 "prijavo."
 
-#: rdp/rdpview.cpp:383
+#: rdp/rdpview.cpp:395
 #, kde-format
 msgctxt "@title connection error"
 msgid "Password expired"
 msgstr "Geslo je poteklo"
 
-#: rdp/rdpview.cpp:385
+#: rdp/rdpview.cpp:397
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2493,37 +2511,55 @@ msgstr ""
 "Spremenite geslo tako, da se lokalno prijavite na oddaljeni računalnik, ali "
 "pa prosite njegovega skrbnika, da ga ponastavi."
 
-#: rdp/rdpview.cpp:390
+#: rdp/rdpview.cpp:402
 #, kde-format
 msgctxt "@label"
 msgid "The Kerberos domain controller could not be reached."
 msgstr "Do krmilnika domene Kerberos ni bilo mogoče vzpostaviti povezave."
 
-#: rdp/rdpview.cpp:392
+#: rdp/rdpview.cpp:404
 #, kde-format
 msgctxt "@info"
 msgid "Check the domain you entered when logging in."
 msgstr "Preverite domeno, ki ste jo vnesli ob prijavi."
 
-#: rdp/rdpview.cpp:393
+#: rdp/rdpview.cpp:405
 #, kde-format
 msgctxt "@info"
 msgid "Connect to the network or VPN of the domain."
 msgstr "Povežite se z omrežjem ali VPN-om domene."
 
-#: rdp/rdpview.cpp:398 spice/spiceview.cpp:901 vnc/vncview.cpp:287
+#: rdp/rdpview.cpp:410 spice/spiceview.cpp:901 vnc/vncview.cpp:294
 #, kde-format
 msgctxt "@label"
 msgid "No IP address was found for this name."
 msgstr "Za to ime ni bil najden noben naslov IP."
 
-#: rdp/rdpview.cpp:409
+#: rdp/rdpview.cpp:421
 #, kde-format
 msgctxt "@label"
 msgid "The server and KRDC could not agree on a security protocol."
 msgstr "Strežnik in KRDC se nista mogla dogovoriti o varnostnem protokolu."
 
-#: rdp/rdpview.cpp:411
+#: rdp/rdpview.cpp:424
+#, fuzzy, kde-format
+#| msgctxt "@label"
+#| msgid "The server and KRDC could not agree on a security protocol."
+msgctxt "@label"
+msgid ""
+"Logging in to the gateway failed, or the server and KRDC could not agree on "
+"a security protocol."
+msgstr "Strežnik in KRDC se nista mogla dogovoriti o varnostnem protokolu."
+
+#: rdp/rdpview.cpp:428
+#, kde-format
+msgctxt "@info"
+msgid ""
+"NTLM is turned off for this host. Turn it on in the host settings unless the "
+"domain controller can be reached."
+msgstr ""
+
+#: rdp/rdpview.cpp:431
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2533,19 +2569,19 @@ msgstr ""
 "V nastavitvah gostitelja nastavite varnostno raven TLS na "
 "»Any« (Katerakoli). Strežnik morda ne podpira izbrane ravni."
 
-#: rdp/rdpview.cpp:415
+#: rdp/rdpview.cpp:435
 #, kde-format
 msgctxt "@label"
 msgid "The server requires Network Level Authentication (NLA)."
 msgstr "Strežnik zahteva preverjanje pristnosti na ravni omrežja (NLA)."
 
-#: rdp/rdpview.cpp:416
+#: rdp/rdpview.cpp:436
 #, kde-format
 msgctxt "@info"
 msgid "Enable NLA in the security settings for this host."
 msgstr "Omogočite NLA v varnostnih nastavitvah za tega gostitelja."
 
-#: rdp/rdpview.cpp:434
+#: rdp/rdpview.cpp:454
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2555,13 +2591,13 @@ msgstr ""
 "Preverite nastavitve prehoda RD za tega gostitelja. Prehod “%1” je morda "
 "nedosegljiv ali pa zavrača povezavo."
 
-#: rdp/rdpview.cpp:441
+#: rdp/rdpview.cpp:461
 #, kde-format
 msgctxt "@label"
 msgid "The remote computer did not finish starting the session in time."
 msgstr "Oddaljeni računalnik ni pravočasno dokončal vzpostavljanja seje."
 
-#: rdp/rdpview.cpp:442
+#: rdp/rdpview.cpp:462
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2571,49 +2607,106 @@ msgstr ""
 "Oddaljeni računalnik se morda še zaganja ali pa je močno obremenjen. "
 "Počakajte minuto in se nato znova povežite."
 
-#: rdp/rdpview.cpp:446
+#: rdp/rdpview.cpp:467
+#, kde-format
+msgctxt "@label"
+msgid "The gateway does not allow this account to connect to “%1”."
+msgstr ""
+
+#: rdp/rdpview.cpp:470
+#, fuzzy, kde-format
+#| msgctxt "@info"
+#| msgid "Try the IP address of the computer instead of its name."
+msgctxt "@info"
+msgid ""
+"Try the full name of the computer. The gateway may only know it by that name."
+msgstr "Poskusi uporabiti njegov naslov IP namesto imena računalnika."
+
+#: rdp/rdpview.cpp:471
+#, kde-format
+msgctxt "@info"
+msgid ""
+"Ask the administrator of the gateway to allow this account and computer in "
+"its resource authorization policy."
+msgstr ""
+
+#: rdp/rdpview.cpp:475
+#, kde-format
+msgctxt "@label"
+msgid "The gateway does not allow this device to connect."
+msgstr ""
+
+#: rdp/rdpview.cpp:477
+#, kde-format
+msgctxt "@info"
+msgid ""
+"Ask the administrator of the gateway to check its connection authorization "
+"policy."
+msgstr ""
+
+#: rdp/rdpview.cpp:480
+#, kde-format
+msgctxt "@label"
+msgid "The gateway could not reach “%1”."
+msgstr ""
+
+#: rdp/rdpview.cpp:482
+#, fuzzy, kde-format
+#| msgctxt "@info"
+#| msgid ""
+#| "Make sure the remote computer is turned on, awake and connected to the "
+#| "network."
+msgctxt "@info"
+msgid ""
+"Make sure the remote computer is running, and that the gateway can reach it "
+"by this name."
+msgstr ""
+"Prepričajte se, da je oddaljeni računalnik vklopljen, aktiven in povezan v "
+"omrežje."
+
+#: rdp/rdpview.cpp:486
 #, kde-format
 msgctxt "@label"
 msgid "It accepted the connection, then refused to start a session."
 msgstr "Sprejel je povezavo, nato pa zavrnil začetek seje."
 
-#: rdp/rdpview.cpp:447
+#: rdp/rdpview.cpp:487
 #, kde-format
 msgctxt "@title connection error"
 msgid "Session refused"
 msgstr "Seja zavrnjena"
 
-#: rdp/rdpview.cpp:451
+#: rdp/rdpview.cpp:491
 #, kde-format
 msgctxt "@label"
 msgid "The server did not accept the options selected for this host."
 msgstr "Strežnik ni sprejel možnosti, izbranih za tega gostitelja."
 
-#: rdp/rdpview.cpp:454
+#: rdp/rdpview.cpp:494
 #, kde-format
 msgctxt "@label"
 msgid "An administrator or another program disconnected this session."
 msgstr "Skrbnik ali drug program je prekinil to sejo."
 
-#: rdp/rdpview.cpp:457
+#: rdp/rdpview.cpp:497
 #, kde-format
 msgctxt "@label"
 msgid "An administrator signed this session out."
 msgstr "Skrbnik je to sejo odjavil."
 
-#: rdp/rdpview.cpp:460
+#: rdp/rdpview.cpp:500
 #, kde-format
 msgctxt "@label"
 msgid "The session was disconnected from the remote computer."
 msgstr "Povezava seje z oddaljenim računalnikom je bila prekinjena."
 
-#: rdp/rdpview.cpp:467
+#: rdp/rdpview.cpp:507
 #, kde-format
 msgctxt "@label"
 msgid "Disconnected because someone else connected to this session."
 msgstr "Povezava je prekinjena, ker se je na to sejo povezal nekdo drug."
 
-#: rdp/rdpview.cpp:468
+#: rdp/rdpview.cpp:508
 #, kde-format
 msgctxt "@info"
 msgid "Reconnect to take the session back. This disconnects the other user."
@@ -2621,13 +2714,13 @@ msgstr ""
 "Ponovno vzpostavite povezavo, da prevzamete sejo. S tem boste prekinili "
 "povezavo z drugim uporabnikom."
 
-#: rdp/rdpview.cpp:471
+#: rdp/rdpview.cpp:511
 #, kde-format
 msgctxt "@label"
 msgid "The session was closed after being idle for too long."
 msgstr "Seja je bila zaprta, ker je bila predolgo nedejavna."
 
-#: rdp/rdpview.cpp:472
+#: rdp/rdpview.cpp:512
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2637,13 +2730,13 @@ msgstr ""
 "Za nadaljevanje znova vzpostavite povezavo. Časovno omejitev nedejavnosti "
 "določi skrbnik strežnika."
 
-#: rdp/rdpview.cpp:486
+#: rdp/rdpview.cpp:526
 #, kde-format
 msgctxt "@label"
 msgid "The remote computer reported a problem while logging in."
 msgstr "Oddaljeni računalnik je prijavil težavo med prijavo."
 
-#: rdp/rdpview.cpp:487
+#: rdp/rdpview.cpp:527
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2653,7 +2746,7 @@ msgstr ""
 "Preverite, ali se lahko ta uporabnik prijavi v oddaljeni računalnik in ali "
 "seja ni zasedena."
 
-#: rdp/rdpview.cpp:866
+#: rdp/rdpview.cpp:906
 #, kde-format
 msgctxt "@title:window"
 msgid "KRDC – Screen %1"
@@ -3027,22 +3120,22 @@ msgstr "Srednja kakovost (DSL, kabelski modem, hiter internet)"
 msgid "Low Quality (Modem, ISDN, slow Internet)"
 msgstr "Nizka kakovost (modem, ISDN, počasen internet)"
 
-#: vnc/vncview.cpp:255
+#: vnc/vncview.cpp:262
 #, kde-format
 msgid "Access to the system requires a password."
 msgstr "Dostop do sistem zahteva geslo."
 
-#: vnc/vncview.cpp:255
+#: vnc/vncview.cpp:262
 #, kde-format
 msgid "Authentication failed. Please try again."
 msgstr "Overitev ni uspela. Poskusite znova."
 
-#: vnc/vncview.cpp:306
+#: vnc/vncview.cpp:313
 #, kde-format
 msgid "VNC authentication failed because of too many authentication tries."
 msgstr "Overjanje VNC ni uspelo zaradi preštevilnih poskusov overitve."
 
-#: vnc/vncview.cpp:309
+#: vnc/vncview.cpp:316
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -3052,20 +3145,20 @@ msgstr ""
 "Počakajte nekaj minut. Strežnik po več neuspelih poskusih za določen čas "
 "onemogoči prijave."
 
-#: vnc/vncview.cpp:310
+#: vnc/vncview.cpp:317
 #, kde-format
 msgctxt "@info"
 msgid "Then connect again and enter the password carefully."
 msgstr "Nato se znova povežite in previdno vnesite geslo."
 
-#: vnc/vncview.cpp:316
+#: vnc/vncview.cpp:323
 #, kde-format
 msgctxt "@label"
 msgid ""
 "The server requires an authentication method that KRDC does not support."
 msgstr "Strežnik zahteva metodo avtentikacije, ki je KRDC ne podpira."
 
-#: vnc/vncview.cpp:318
+#: vnc/vncview.cpp:325
 #, kde-format
 msgctxt "@info"
 msgid ""
