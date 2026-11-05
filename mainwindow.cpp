@@ -257,6 +257,14 @@ QUrl MainWindow::getInputUrl()
 
 void MainWindow::newConnection(const QUrl &newUrl, bool switchFullscreenWhenConnected, const QString &tabName)
 {
+    openConnection(newUrl, switchFullscreenWhenConnected, tabName, {});
+}
+
+void MainWindow::openConnection(const QUrl &newUrl,
+                                bool switchFullscreenWhenConnected,
+                                const QString &tabName,
+                                RemoteViewFactory::ConnectionFile connectionFile)
+{
     m_switchFullscreenWhenConnected = switchFullscreenWhenConnected;
 
     // Bring the main window to the front when a connection is initiated from
@@ -270,7 +278,6 @@ void MainWindow::newConnection(const QUrl &newUrl, bool switchFullscreenWhenConn
     }
 
     QUrl url = newUrl.isEmpty() ? getInputUrl() : newUrl;
-    RemoteViewFactory::ConnectionFile connectionFile;
 
     if (url.isLocalFile()) {
         for (RemoteViewFactory *factory : std::as_const(m_remoteViewFactories)) {
@@ -413,17 +420,18 @@ void MainWindow::newConnection(const QUrl &newUrl, bool switchFullscreenWhenConn
             closeTab(m_tabWidget->indexOf(scrollArea));
         }
     });
-    connect(statusWidget, &ConnectionStatusWidget::retryRequested, this, [this, scrollArea, url]() {
-        reconnectInTab(scrollArea, url);
+    // The file's details stay with the tab, so that only reconnecting in it can use them again.
+    connect(statusWidget, &ConnectionStatusWidget::retryRequested, this, [this, scrollArea, url, connectionFile]() {
+        reconnectInTab(scrollArea, url, connectionFile);
     });
     connect(statusWidget, &ConnectionStatusWidget::editAddressRequested, this, [this, scrollArea, url]() {
         closeTab(m_tabWidget->indexOf(scrollArea));
         setAddressInput(url);
         newConnectionPage(false);
     });
-    connect(statusWidget, &ConnectionStatusWidget::editSettingsRequested, this, [this, scrollArea, url]() {
+    connect(statusWidget, &ConnectionStatusWidget::editSettingsRequested, this, [this, scrollArea, url, connectionFile]() {
         if (editHostSettings(url)) {
-            reconnectInTab(scrollArea, url);
+            reconnectInTab(scrollArea, url, connectionFile);
         }
     });
     connect(statusWidget, &ConnectionStatusWidget::closeRequested, this, [this, scrollArea]() {
@@ -1641,7 +1649,7 @@ ConnectionError MainWindow::unexplainedDisconnect(const ConnectionStatusWidget *
     return error;
 }
 
-void MainWindow::reconnectInTab(QWidget *tab, const QUrl &url)
+void MainWindow::reconnectInTab(QWidget *tab, const QUrl &url, const RemoteViewFactory::ConnectionFile &connectionFile)
 {
     const int index = m_tabWidget->indexOf(tab);
     if (index < 0 || !url.isValid()) {
@@ -1656,7 +1664,7 @@ void MainWindow::reconnectInTab(QWidget *tab, const QUrl &url)
     }
 
     m_insertTabIndex = index;
-    newConnection(url, false, tabName);
+    openConnection(url, false, tabName, connectionFile);
     m_insertTabIndex = -1;
 
     // Keep the error tab if the new connection was not opened, e.g. its settings dialog was canceled.

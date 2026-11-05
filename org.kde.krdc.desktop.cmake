@@ -176,6 +176,6 @@ Comment[zh_CN]=通过 RDP 或 VNC 连接到另一台计算机
 Comment[zh_TW]=以 RDP 或 VNC 連線到其他電腦
 X-DocPath=krdc/index.html
 StartupWMClass=krdc
-MimeType=x-scheme-handler/vnc;x-scheme-handler/rdp;application/x-krdc;
+MimeType=x-scheme-handler/vnc;x-scheme-handler/rdp;@KRDC_SPICE_MIME_TYPES@application/x-krdc;
 Categories=Qt;KDE;Network;RemoteAccess;
 X-KDE-Wayland-Interfaces=org_kde_kwin_keystate

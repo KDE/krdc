@@ -170,6 +170,7 @@ if(WITH_SPICE)
     find_package(Glib REQUIRED)
     find_package(Spiceglib REQUIRED)
     add_subdirectory(spice)
+    set(KRDC_SPICE_MIME_TYPES "x-scheme-handler/spice;application/x-virt-viewer;")
 endif()
 
 add_subdirectory(test)
@@ -246,6 +247,9 @@ ecm_install_icons(
 find_package(SharedMimeInfo)
 if(SharedMimeInfo_FOUND)
     install(FILES org.kde.krdc-mime.xml DESTINATION ${KDE_INSTALL_MIMEDIR})
+    if(WITH_SPICE)
+        install(FILES org.kde.krdc-spice-mime.xml DESTINATION ${KDE_INSTALL_MIMEDIR})
+    endif()
     update_xdg_mimetypes(${KDE_INSTALL_MIMEDIR})
 endif()
 

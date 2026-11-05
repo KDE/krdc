@@ -14,18 +14,42 @@
 #include <QClipboard>
 #include <QPoint>
 
+#include <optional>
+
 extern "C" {
 #include <spice-client-glib-2.0/spice-client.h>
 #include <spice/enums.h>
 #include <spice/vd_agent.h>
 }
 
+/**
+ * Connection details from a .vv file. A host such as Proxmox's "pvespiceproxy:..." cannot be part of
+ * a URL, and a password that is only valid for a short time and a proxy from a file should not be
+ * saved, so these replace the URL for the connection.
+ */
+struct SpiceFileConnection {
+    // The query item that marks the URL of a connection opened from a file.
+    static constexpr QLatin1StringView UrlQueryKey{"vv"};
+
+    QString title;
+    QString host;
+    int port = -1;
+    int tlsPort = -1;
+    QString password;
+    QByteArray ca;
+    QString certSubject;
+    QString proxy;
+};
+
 class SpiceView : public RemoteView
 {
     Q_OBJECT
 
 public:
-    explicit SpiceView(QWidget *parent = nullptr, const QUrl &url = QUrl(), KConfigGroup configGroup = KConfigGroup());
+    explicit SpiceView(QWidget *parent = nullptr,
+                       const QUrl &url = QUrl(),
+                       KConfigGroup configGroup = KConfigGroup(),
+                       const std::optional<SpiceFileConnection> &fileConnection = std::nullopt);
     ~SpiceView() override;
 
     QSize framebufferSize() override;
@@ -90,6 +114,7 @@ private:
     // saves a new password via the dialog.  Used to delete a stale wallet entry
     // on the next auth failure.
     bool m_walletPasswordUsed;
+    std::optional<SpiceFileConnection> m_fileConnection;
     qreal m_horizontalFactor;
     qreal m_verticalFactor;
 
@@ -115,6 +140,7 @@ private:
     void applyPasswordAndConnect(const QString &password);
 
     // Compute the initial pending resize from host preferences
+    void applyFileConnection();
     QSize resolveInitialSize() const;
 
     // Translate a Qt mouse button state into a SPICE button mask

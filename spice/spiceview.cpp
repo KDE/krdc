@@ -18,6 +18,7 @@
 #include <QPainter>
 #include <QScreen>
 #include <QTimer>
+#include <QUrlQuery>
 
 #include <KLocalizedString>
 #include <KPasswordDialog>
@@ -29,7 +30,7 @@ static const int DEFAULT_SPICE_PORT = 5900;
 // Construction / destruction
 // ---------------------------------------------------------------------------
 
-SpiceView::SpiceView(QWidget *parent, const QUrl &url, KConfigGroup configGroup)
+SpiceView::SpiceView(QWidget *parent, const QUrl &url, KConfigGroup configGroup, const std::optional<SpiceFileConnection> &fileConnection)
     : RemoteView(parent)
     , m_spiceSession(nullptr)
     , m_mainChannel(nullptr)
@@ -44,6 +45,7 @@ SpiceView::SpiceView(QWidget *parent, const QUrl &url, KConfigGroup configGroup)
     , m_quitFlag(false)
     , m_firstPasswordTry(true)
     , m_walletPasswordUsed(false)
+    , m_fileConnection(fileConnection)
     , m_horizontalFactor(1.0)
     , m_verticalFactor(1.0)
     , m_buttonMask(0)
@@ -53,6 +55,10 @@ SpiceView::SpiceView(QWidget *parent, const QUrl &url, KConfigGroup configGroup)
     m_url = url;
     m_host = url.host();
     m_port = url.port(DEFAULT_SPICE_PORT);
+    if (m_fileConnection) {
+        m_host = m_fileConnection->host;
+        m_port = m_fileConnection->tlsPort > 0 ? m_fileConnection->tlsPort : m_fileConnection->port;
+    }
 
     m_hostPreferences = new SpiceHostPreferences(configGroup, this);
 
@@ -79,12 +85,25 @@ bool SpiceView::startConnection()
 {
     setStatus(Connecting);
 
+    // A history entry or remembered session of a file connection: the details were never saved.
+    if (!m_fileConnection && QUrlQuery(m_url).hasQueryItem(SpiceFileConnection::UrlQueryKey)) {
+        ConnectionError error = ConnectionError::create(ConnectionError::Stage::Session, i18nc("@label", "This connection needs its connection file."));
+        error.steps.prepend(i18nc("@info", "Open a new .vv file for this virtual machine."));
+        reportError(error);
+        setStatus(Disconnected);
+        return false;
+    }
+
     m_spiceSession = spice_session_new();
 
-    const QByteArray hostBytes = m_host.toUtf8();
-    const QByteArray portBytes = QByteArray::number(m_port);
+    if (m_fileConnection) {
+        applyFileConnection();
+    } else {
+        const QByteArray hostBytes = m_host.toUtf8();
+        const QByteArray portBytes = QByteArray::number(m_port);
 
-    g_object_set(m_spiceSession, "host", hostBytes.constData(), "port", portBytes.constData(), nullptr);
+        g_object_set(m_spiceSession, "host", hostBytes.constData(), "port", portBytes.constData(), nullptr);
+    }
 
     // Wire audio to the system backend (GStreamer/PulseAudio via spice-client-glib).
     // spice_audio_get() is a session-scoped singleton; it registers itself on the
@@ -111,6 +130,34 @@ bool SpiceView::startConnection()
     }
 
     return true;
+}
+
+void SpiceView::applyFileConnection()
+{
+    g_object_set(m_spiceSession, "host", m_fileConnection->host.toUtf8().constData(), nullptr);
+    // With a TLS port, leave out the plain one: connecting to it would skip the certificate checks.
+    if (m_fileConnection->tlsPort > 0) {
+        g_object_set(m_spiceSession, "tls-port", QByteArray::number(m_fileConnection->tlsPort).constData(), nullptr);
+    } else {
+        g_object_set(m_spiceSession, "port", QByteArray::number(m_fileConnection->port).constData(), nullptr);
+    }
+    // A saved password must not go to the host and proxy that a file names.
+    m_firstPasswordTry = false;
+    if (!m_fileConnection->password.isEmpty()) {
+        g_object_set(m_spiceSession, "password", m_fileConnection->password.toUtf8().constData(), nullptr);
+    }
+    if (!m_fileConnection->ca.isEmpty()) {
+        GByteArray *ca = g_byte_array_new();
+        g_byte_array_append(ca, reinterpret_cast<const guint8 *>(m_fileConnection->ca.constData()), m_fileConnection->ca.size());
+        g_object_set(m_spiceSession, "ca", ca, nullptr);
+        g_byte_array_unref(ca);
+    }
+    if (!m_fileConnection->certSubject.isEmpty()) {
+        g_object_set(m_spiceSession, "cert-subject", m_fileConnection->certSubject.toUtf8().constData(), "verify", SPICE_SESSION_VERIFY_SUBJECT, nullptr);
+    }
+    if (!m_fileConnection->proxy.isEmpty()) {
+        g_object_set(m_spiceSession, "proxy", m_fileConnection->proxy.toUtf8().constData(), nullptr);
+    }
 }
 
 QSize SpiceView::resolveInitialSize() const
@@ -826,8 +873,13 @@ void SpiceView::requestPassword()
     }
 
     // Show the password dialog.
-    KPasswordDialog dialog(this, KPasswordDialog::ShowKeepPassword);
-    dialog.setPrompt(i18n("Authentication is required to connect to <b>%1</b>.", m_host));
+    KPasswordDialog dialog(this, m_fileConnection ? KPasswordDialog::KPasswordDialogFlags() : KPasswordDialog::ShowKeepPassword);
+    if (m_fileConnection && !m_fileConnection->password.isEmpty()) {
+        dialog.setPrompt(
+            i18nc("@info", "The server rejected the password in the connection file, which may have expired. Open a new file, or enter the password."));
+    } else {
+        dialog.setPrompt(i18n("Authentication is required to connect to <b>%1</b>.", m_url.host()));
+    }
 
     if (dialog.exec() != KPasswordDialog::Accepted) {
         qCDebug(KRDC) << "SpiceView: password dialog cancelled";

@@ -11,6 +11,10 @@
 #include "spicepreferences.h"
 #include "spiceview.h"
 
+#include <QHash>
+
+#include <optional>
+
 class SpiceViewFactory : public RemoteViewFactory
 {
     Q_OBJECT
@@ -21,6 +25,10 @@ public:
     ~SpiceViewFactory() override;
 
     bool supportsUrl(const QUrl &url) const override;
+
+    ConnectionFile loadConnectionFile(const QUrl &url) const override;
+
+    bool importFileSettings(const QHash<QString, QString> &entries, KConfigGroup configGroup, QWidget *parent) const override;
 
     RemoteView *createView(QWidget *parent, const QUrl &url, KConfigGroup configGroup) override;
 
@@ -33,6 +41,10 @@ public:
     QString connectButtonText() const override;
 
     QString connectToolTipText() const override;
+
+private:
+    // The connection that importFileSettings() accepted, for the createView() that follows it.
+    mutable std::optional<SpiceFileConnection> m_acceptedConnection;
 };
 
 #endif // SPICEVIEWFACTORY_H

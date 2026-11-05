@@ -732,6 +732,17 @@ folders, shared devices, or security settings from the file. Use the host
 configuration dialog for other options. Run
 <userinput><command>krdc</command> <option>--help</option></userinput> for
 command-line help.</para>
+
+<para>&krdc; can also open a SPICE connection from a Virt Viewer
+<filename>.vv</filename> file, such as one downloaded from Proxmox VE:</para>
+<screen><userinput><command>krdc</command> connection.vv</userinput></screen>
+<para>This reads the server address, ports, password, certificate, and proxy.
+They are kept only while the connection's tab is open and are not saved, so to
+connect again after closing it, open a new file. &krdc; asks you to accept a
+proxy each time before using it, and never sends a saved password on such a
+connection.
+The other settings in the file are ignored, and the file is not deleted, even
+if it asks for that.</para>
 </sect1>
 </chapter>
 
