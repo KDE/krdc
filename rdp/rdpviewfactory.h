@@ -23,7 +23,7 @@ public:
 
     bool supportsUrl(const QUrl &url) const override;
 
-    QUrl loadUrlFromFile(const QUrl &url) const override;
+    ConnectionFile loadConnectionFile(const QUrl &url) const override;
 
     RemoteView *createView(QWidget *parent, const QUrl &url, KConfigGroup configGroup) override;
 
@@ -36,6 +36,8 @@ public:
     QString connectButtonText() const override;
 
     QString connectToolTipText() const override;
+
+    bool importFileSettings(const QHash<QString, QString> &settings, KConfigGroup configGroup, QWidget *parent) const override;
 
 private:
     QString m_connectToolTipString;

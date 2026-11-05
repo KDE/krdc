@@ -270,18 +270,18 @@ void MainWindow::newConnection(const QUrl &newUrl, bool switchFullscreenWhenConn
     }
 
     QUrl url = newUrl.isEmpty() ? getInputUrl() : newUrl;
+    RemoteViewFactory::ConnectionFile connectionFile;
 
     if (url.isLocalFile()) {
-        QUrl loadedUrl;
         for (RemoteViewFactory *factory : std::as_const(m_remoteViewFactories)) {
-            loadedUrl = factory->loadUrlFromFile(url);
-            if (loadedUrl.isValid()) {
-                qCDebug(KRDC) << "Loaded file (" << url.path() << ") resulted in url (" << loadedUrl << ") using " << factory->metaObject()->className();
+            connectionFile = factory->loadConnectionFile(url);
+            if (connectionFile.url.isValid()) {
+                qCDebug(KRDC) << "Loaded file (" << url.path() << ") resulted in url (" << connectionFile.url << ") using " << factory->metaObject()->className();
                 break;
             }
         }
-        if (loadedUrl.isValid()) {
-            url = loadedUrl;
+        if (connectionFile.url.isValid()) {
+            url = connectionFile.url;
         } else {
             KMessageBox::error(
                 this,
@@ -308,9 +308,15 @@ void MainWindow::newConnection(const QUrl &newUrl, bool switchFullscreenWhenConn
     RemoteView *view = nullptr;
     KConfigGroup configGroup = Settings::self()->config()->group(QStringLiteral("hostpreferences")).group(url.toDisplayString(QUrl::StripTrailingSlash));
 
+    const bool fromFile = connectionFile.url.isValid();
+    const bool newHostFromFile = fromFile && !configGroup.exists();
+
     if (RemoteViewFactory *factory = factoryFor(url)) {
+        if (fromFile && !factory->importFileSettings(connectionFile.settings, configGroup, this)) {
+            return;
+        }
         view = factory->createView(this, url, configGroup);
-        qCDebug(KRDC) << "Found plugin to handle url (" << url.url() << "): " << view->metaObject()->className();
+        qCDebug(KRDC) << "Found plugin to handle url (" << url.toDisplayString() << "): " << view->metaObject()->className();
     }
 
     if (!view) {
@@ -328,8 +334,12 @@ void MainWindow::newConnection(const QUrl &newUrl, bool switchFullscreenWhenConn
     HostPreferences *prefs = view->hostPreferences();
     prefs->setConnectionName(tabName);
     // if the user press cancel
-    if (!prefs->showDialogIfNeeded(this))
+    if (!prefs->showDialogIfNeeded(this)) {
+        if (newHostFromFile) {
+            configGroup.deleteGroup();
+        }
         return;
+    }
 
     // The settings dialog may have named the connection; only its history entry follows, the
     // user's own bookmarks keep their names.
@@ -1584,7 +1594,7 @@ void MainWindow::setAddressInput(const QUrl &url)
 {
     if (m_protocolInput && m_addressInput) {
         m_protocolInput->setCurrentText(url.scheme());
-        m_addressInput->setText(url.toString(QUrl::RemoveScheme).remove(QRegularExpression(QStringLiteral("^/+"))));
+        m_addressInput->setText(url.toString(QUrl::RemoveScheme | QUrl::RemovePassword).remove(QRegularExpression(QStringLiteral("^/+"))));
     }
 }
 

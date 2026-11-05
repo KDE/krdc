@@ -13,6 +13,8 @@
 #include <KConfigGroup>
 #include <KPluginFactory>
 
+#include <QHash>
+
 /**
  * Factory to be implemented by any plugin.
  */
@@ -21,6 +23,17 @@ class KRDCCORE_EXPORT RemoteViewFactory : public QObject
     Q_OBJECT
 
 public:
+    struct ConnectionFile {
+        /**
+         * The connection that the file describes. Invalid if the plugin cannot load the file.
+         */
+        QUrl url;
+        /**
+         * The settings in the file, for importFileSettings(). The plugin defines the keys.
+         */
+        QHash<QString, QString> settings;
+    };
+
     /**
      * Deconstructor.
      */
@@ -32,9 +45,9 @@ public:
     virtual bool supportsUrl(const QUrl &url) const = 0;
 
     /**
-     * Tries to load connection parameters from a file and returns the loaded QUrl.
+     * Tries to load connection parameters from the file at @p url.
      */
-    virtual QUrl loadUrlFromFile(const QUrl &url) const;
+    virtual ConnectionFile loadConnectionFile(const QUrl &url) const;
 
     /**
      * Returns a new RemoteView implementing object.
@@ -67,6 +80,15 @@ public:
      * the connect action.
      */
     virtual QString connectToolTipText() const = 0;
+
+    /**
+     * Imports @p settings, from the ConnectionFile that loadConnectionFile() returned, into
+     * @p configGroup, the settings of the host that it names.
+     * The file is untrusted, so ask the user before importing a setting that is not safe for any
+     * file to set, with @p parent as the parent of the dialog.
+     * Returns false if the connection should not go ahead.
+     */
+    virtual bool importFileSettings(const QHash<QString, QString> &settings, KConfigGroup configGroup, QWidget *parent) const;
 
 protected:
     /**

@@ -724,8 +724,12 @@ user name <literal>alice@example.org</literal>.</para>
 file passed on the command line:</para>
 <screen><userinput><command>krdc</command> connection.rdp</userinput></screen>
 <para>This reads the server address, user name, domain, and a password field
-if present; it does not import every setting supported by other RDP clients.
-Use the host configuration dialog for other options. Run
+if present. For a host that has no saved settings, it also reads the display
+size, scaling and sound settings, whether to turn off clipboard sharing, and a
+gateway that is always used, which &krdc; asks you to accept first. Settings
+already saved for the host are kept. For safety, &krdc; does not import shared
+folders, shared devices, or security settings from the file. Use the host
+configuration dialog for other options. Run
 <userinput><command>krdc</command> <option>--help</option></userinput> for
 command-line help.</para>
 </sect1>

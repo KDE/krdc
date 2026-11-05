@@ -15,8 +15,16 @@ RemoteViewFactory::~RemoteViewFactory()
 {
 }
 
-QUrl RemoteViewFactory::loadUrlFromFile(const QUrl &url) const
+RemoteViewFactory::ConnectionFile RemoteViewFactory::loadConnectionFile(const QUrl &url) const
 {
     Q_UNUSED(url);
     return {};
+}
+
+bool RemoteViewFactory::importFileSettings(const QHash<QString, QString> &settings, KConfigGroup configGroup, QWidget *parent) const
+{
+    Q_UNUSED(settings);
+    Q_UNUSED(configGroup);
+    Q_UNUSED(parent);
+    return true;
 }

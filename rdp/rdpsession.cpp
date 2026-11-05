@@ -834,6 +834,9 @@ int RdpSession::clientContextStart(rdpContext *context)
         if (!freerdp_settings_set_string(settings, FreeRDP_GatewayDomain, preferences->gatewayDomain().toUtf8().data())) {
             return -1;
         }
+        if (!freerdp_settings_set_bool(settings, FreeRDP_GatewayUseSameCredentials, preferences->gatewayUsername().isEmpty())) {
+            return -1;
+        }
 
         switch (preferences->gatewayTransportType()) {
         case RdpHostPreferences::GatewayTransportType::RPC:
