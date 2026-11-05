@@ -100,7 +100,7 @@ private:
     bool m_quitting = false;
 
     std::unique_ptr<RdpHostPreferences> m_hostPreferences;
-    std::unique_ptr<RdpSession> m_session;
+    std::shared_ptr<RdpSession> m_session;
 
     QCursor m_remoteCursor;
 

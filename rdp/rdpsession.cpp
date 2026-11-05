@@ -21,6 +21,7 @@
 #include <QKeyEvent>
 #include <QMouseEvent>
 #include <QScreen>
+#include <QThreadPool>
 
 #ifdef HAVE_KSCREEN
 #include <KScreen/Config>
@@ -238,9 +239,8 @@ BOOL RdpSession::postConnect(freerdp *rdp)
     session->setState(State::Connected);
 
     auto &buffer = session->m_videoBuffer;
-    buffer = QImage(freerdp_settings_get_uint32(settings, FreeRDP_DesktopWidth),
-                    freerdp_settings_get_uint32(settings, FreeRDP_DesktopHeight),
-                    QImage::Format_RGB32);
+    buffer =
+        QImage(freerdp_settings_get_uint32(settings, FreeRDP_DesktopWidth), freerdp_settings_get_uint32(settings, FreeRDP_DesktopHeight), QImage::Format_RGB32);
 
     if (!gdi_init_ex(rdp, PIXEL_FORMAT_BGRX32, buffer.bytesPerLine(), buffer.bits(), nullptr)) {
         qCWarning(KRDC) << "Could not initialize GDI subsystem";
@@ -1256,9 +1256,8 @@ BOOL RdpSession::resizeDisplay(rdpContext *context)
     WINPR_ASSERT(settings);
 
     auto &buffer = session->m_videoBuffer;
-    buffer = QImage(freerdp_settings_get_uint32(settings, FreeRDP_DesktopWidth),
-                    freerdp_settings_get_uint32(settings, FreeRDP_DesktopHeight),
-                    QImage::Format_RGB32);
+    buffer =
+        QImage(freerdp_settings_get_uint32(settings, FreeRDP_DesktopWidth), freerdp_settings_get_uint32(settings, FreeRDP_DesktopHeight), QImage::Format_RGB32);
 
     if (!gdi_resize_ex(gdi, buffer.width(), buffer.height(), buffer.bytesPerLine(), PIXEL_FORMAT_BGRX32, buffer.bits(), nullptr)) {
         qCWarning(KRDC) << "Failed resizing GDI subsystem";
@@ -1501,6 +1500,15 @@ bool RdpSession::start()
 void RdpSession::stop()
 {
     freerdp_client_stop(m_context.rdp);
+}
+
+void RdpSession::stopInBackground(std::shared_ptr<RdpSession> session)
+{
+    session->disconnect();
+    SetEvent(freerdp_abort_event(session->m_context.rdp));
+    QThreadPool::globalInstance()->start([session = std::move(session)]() {
+        session->stop();
+    });
 }
 
 const QImage *RdpSession::videoBuffer() const

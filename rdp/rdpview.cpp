@@ -132,7 +132,11 @@ void RdpView::startQuittingConnection()
     destroyMonitorWindows();
 
     if (m_session) {
-        m_session->stop();
+        if (m_session->state() == RdpSession::State::Running) {
+            m_session->stop();
+        } else {
+            RdpSession::stopInBackground(m_session);
+        }
     }
 
     qCDebug(KRDC) << "RDP session stopped";
@@ -151,7 +155,10 @@ static QSet<QString> s_refusedGatewayLogins;
 
 bool RdpView::startConnection()
 {
-    m_session = std::make_unique<RdpSession>(this);
+    // The last reference can be released by the background stop task.
+    m_session = std::shared_ptr<RdpSession>(new RdpSession(this), [](RdpSession *session) {
+        session->deleteLater();
+    });
     m_session->setHostPreferences(m_hostPreferences.get());
     m_session->setIgnoreSavedGatewayPassword(s_refusedGatewayLogins.contains(m_url.toDisplayString(QUrl::StripTrailingSlash)));
     m_session->setHost(m_host);
@@ -174,6 +181,10 @@ bool RdpView::startConnection()
     });
     connect(m_session.get(), &RdpSession::rectangleUpdated, this, &RdpView::onRectangleUpdated);
     connect(m_session.get(), &RdpSession::stateChanged, this, [this]() {
+        if (m_quitting) {
+            return;
+        }
+
         switch (m_session->state()) {
         case RdpSession::State::Starting:
             // Starts before connecting, so it is no evidence of reaching the server.
@@ -240,6 +251,10 @@ bool RdpView::startConnection()
 
 void RdpView::onAuthRequested()
 {
+    if (m_quitting) {
+        return;
+    }
+
     setStatus(Authenticating);
 
     std::unique_ptr<KPasswordDialog> dialog;
@@ -289,6 +304,10 @@ void RdpView::onAuthRequested()
 
 void RdpView::onGatewayAuthRequested()
 {
+    if (m_quitting) {
+        return;
+    }
+
     setStatus(Authenticating);
 
     KPasswordDialog dialog(nullptr, KPasswordDialog::ShowUsernameLine | KPasswordDialog::ShowDomainLine);
@@ -307,6 +326,10 @@ void RdpView::onGatewayAuthRequested()
 
 void RdpView::onVerifyCertificate(RdpSession::CertificateResult *ret, const QString &certificate, bool gateway)
 {
+    if (m_quitting) {
+        return;
+    }
+
     KMessageDialog dialog{KMessageDialog::WarningContinueCancel,
                           gateway ? i18nc("@label", "The certificate for this gateway is unknown. Do you wish to continue?")
                                   : i18nc("@label", "The certificate for this system is unknown. Do you wish to continue?")};
@@ -335,6 +358,10 @@ void RdpView::onVerifyCertificate(RdpSession::CertificateResult *ret, const QStr
 
 void RdpView::onVerifyChangedCertificate(RdpSession::CertificateResult *ret, const QString &oldCertificate, const QString &newCertificate, bool gateway)
 {
+    if (m_quitting) {
+        return;
+    }
+
     KMessageDialog dialog{KMessageDialog::WarningContinueCancel,
                           gateway ? i18nc("@label", "The certificate for this gateway has changed. Do you wish to continue?")
                                   : i18nc("@label", "The certificate for this system has changed. Do you wish to continue?")};

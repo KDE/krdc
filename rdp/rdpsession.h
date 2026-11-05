@@ -129,6 +129,13 @@ public:
 
     bool start();
     void stop();
+    /**
+     * Stops a session that is still connecting without waiting for it: libraries such as Kerberos
+     * can block it for minutes, and cannot be interrupted. Disconnects future signals to the view;
+     * already queued slots must check whether the view is quitting. The shared pointer's deleter
+     * must use deleteLater(), since the last reference may be released by the background task.
+     */
+    static void stopInBackground(std::shared_ptr<RdpSession> session);
 
     bool sendEvent(QEvent *event, QWidget *source);
     bool sendEvent(QEvent *event, QWidget *source, const QRect &remoteRect);
