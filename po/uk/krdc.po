@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-04 01:02+0000\n"
-"PO-Revision-Date: 2026-10-29 15:44+0200\n"
+"PO-Revision-Date: 2026-11-04 21:58+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -2384,12 +2384,11 @@ msgstr ""
 "Відбиток: %6\n"
 
 #: rdp/rdpview.cpp:234
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Access to this system requires a username and password."
+#, kde-format
 msgctxt "@label"
 msgid "Access to the gateway and this system requires a username and password."
-msgstr "Для доступу до цієї системи потрібен ім'я користувача і пароль."
+msgstr ""
+"Для доступу до шлюзу і цієї системи потрібен ім'я користувача і пароль."
 
 #: rdp/rdpview.cpp:235
 #, kde-format
@@ -2474,15 +2473,10 @@ msgid "Access denied"
 msgstr "Доступ заборонено"
 
 #: rdp/rdpview.cpp:381
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid ""
-#| "Check that no firewall on the remote computer rejects the connection."
+#, kde-format
 msgctxt "@label"
 msgid "The gateway or the remote computer refused this login."
-msgstr ""
-"Перевірте, чи жоден брандмауер на віддаленому комп'ютері не запобігає "
-"встановленню з'єднання."
+msgstr "Шлюз або віддалений комп'ютер відмовив у вході."
 
 #: rdp/rdpview.cpp:384
 #, kde-format
@@ -2558,14 +2552,14 @@ msgid "The server and KRDC could not agree on a security protocol."
 msgstr "Серверу і KRDC не вдалося узгодити протокол захисту."
 
 #: rdp/rdpview.cpp:424
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "The server and KRDC could not agree on a security protocol."
+#, kde-format
 msgctxt "@label"
 msgid ""
 "Logging in to the gateway failed, or the server and KRDC could not agree on "
 "a security protocol."
-msgstr "Серверу і KRDC не вдалося узгодити протокол захисту."
+msgstr ""
+"Не вдалося увійти на шлюз або серверу і KRDC не вдалося узгодити протокол "
+"захисту."
 
 #: rdp/rdpview.cpp:428
 #, kde-format
@@ -2574,6 +2568,8 @@ msgid ""
 "NTLM is turned off for this host. Turn it on in the host settings unless the "
 "domain controller can be reached."
 msgstr ""
+"Для цього вузла NTLM вимкнено. Увімкніть його у параметрах вузла, якщо немає "
+"доступу до контролера домену."
 
 #: rdp/rdpview.cpp:431
 #, kde-format
@@ -2627,16 +2623,14 @@ msgstr ""
 #, kde-format
 msgctxt "@label"
 msgid "The gateway does not allow this account to connect to “%1”."
-msgstr ""
+msgstr "Шлюз забороняє цьому обліковому запису встановлювати з'єднання з «%1»."
 
 #: rdp/rdpview.cpp:470
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "Try the IP address of the computer instead of its name."
+#, kde-format
 msgctxt "@info"
 msgid ""
 "Try the full name of the computer. The gateway may only know it by that name."
-msgstr "Спробуйте IP-адресу комп'ютера замість його назви."
+msgstr "Назва комп'ютера повністю. Шлюз може знати його за цією назвою."
 
 #: rdp/rdpview.cpp:471
 #, kde-format
@@ -2645,12 +2639,14 @@ msgid ""
 "Ask the administrator of the gateway to allow this account and computer in "
 "its resource authorization policy."
 msgstr ""
+"Попросіть адміністратора шлюзу дозволити цьому обліковому запису і "
+"комп'ютеру з'єднання у правила уповноваження його ресурсів."
 
 #: rdp/rdpview.cpp:475
 #, kde-format
 msgctxt "@label"
 msgid "The gateway does not allow this device to connect."
-msgstr ""
+msgstr "Шлюз забороняє цьому пристрою встановлювати з'єднання."
 
 #: rdp/rdpview.cpp:477
 #, kde-format
@@ -2659,26 +2655,24 @@ msgid ""
 "Ask the administrator of the gateway to check its connection authorization "
 "policy."
 msgstr ""
+"Попросіть адміністратора шлюзу перевірити його правила уповноваження "
+"з'єднання."
 
 #: rdp/rdpview.cpp:480
 #, kde-format
 msgctxt "@label"
 msgid "The gateway could not reach “%1”."
-msgstr ""
+msgstr "Шлюзу не вдалося зв'язатися з «%1»."
 
 #: rdp/rdpview.cpp:482
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid ""
-#| "Make sure the remote computer is turned on, awake and connected to the "
-#| "network."
+#, kde-format
 msgctxt "@info"
 msgid ""
 "Make sure the remote computer is running, and that the gateway can reach it "
 "by this name."
 msgstr ""
-"Переконайтеся, що віддалений комп'ютер увімкнено, пробуджено і з'єднано з "
-"мережею."
+"Переконайтеся, що віддалений комп'ютер працює, і що шлюз може з ним "
+"зв'язатися за цією назвою."
 
 #: rdp/rdpview.cpp:486
 #, kde-format

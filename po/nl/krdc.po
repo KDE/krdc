@@ -6,20 +6,20 @@
 # Bram Schoenmakers <bramschoenmakers@kde.nl>, 2004, 2005, 2006, 2008.
 # Rinse de Vries <rinsedevries@kde.nl>, 2004, 2005, 2007, 2008.
 # SPDX-FileCopyrightText: 2008-2009, 2023-2026 Freek de Kruijf <f.de.kruijf@hetnet.nl>
-# SPDX-FileCopyrightText: 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2018, 2019, 2020, 2021, 2026 Freek de Kruijf <freekdekruijf@kde.nl>
+# SPDX-FileCopyrightText: 2009-2016, 2018-2021, 2026 Freek de Kruijf <freekdekruijf@kde.nl>
 msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-04 01:02+0000\n"
-"PO-Revision-Date: 2026-10-29 14:38+0100\n"
+"PO-Revision-Date: 2026-11-04 11:53+0100\n"
 "Last-Translator: freek <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 25.04.3\n"
+"X-Generator: Lokalize 26.04.1\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -2380,12 +2380,12 @@ msgstr ""
 "Vingerafdruk: %6\n"
 
 #: rdp/rdpview.cpp:234
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Access to this system requires a username and password."
+#, kde-format
 msgctxt "@label"
 msgid "Access to the gateway and this system requires a username and password."
-msgstr "Toegang tot dit systeem vereist een gebruikersnaam en wachtwoord."
+msgstr ""
+"Toegang tot de gateway van dit systeem vereist een gebruikersnaam en "
+"wachtwoord."
 
 #: rdp/rdpview.cpp:235
 #, kde-format
@@ -2468,15 +2468,10 @@ msgid "Access denied"
 msgstr "Toegang geweigerd"
 
 #: rdp/rdpview.cpp:381
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid ""
-#| "Check that no firewall on the remote computer rejects the connection."
+#, kde-format
 msgctxt "@label"
 msgid "The gateway or the remote computer refused this login."
-msgstr ""
-"Controleer of er op de externe computer geen firewall is die de verbinding "
-"weigert."
+msgstr "De gateway of de externe computer heeft deze aanmelding geweigerd."
 
 #: rdp/rdpview.cpp:384
 #, kde-format
@@ -2551,15 +2546,14 @@ msgstr ""
 "De server en KRDC konden het niet eens worden over een beveiligingsprotocol."
 
 #: rdp/rdpview.cpp:424
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "The server and KRDC could not agree on a security protocol."
+#, kde-format
 msgctxt "@label"
 msgid ""
 "Logging in to the gateway failed, or the server and KRDC could not agree on "
 "a security protocol."
 msgstr ""
-"De server en KRDC konden het niet eens worden over een beveiligingsprotocol."
+"Het aanmelden bij de gateway is mislukt, of de server en KRDC konden het "
+"niet eens worden over een beveiligingsprotocol."
 
 #: rdp/rdpview.cpp:428
 #, kde-format
@@ -2568,6 +2562,8 @@ msgid ""
 "NTLM is turned off for this host. Turn it on in the host settings unless the "
 "domain controller can be reached."
 msgstr ""
+"NTLM is uitgeschakeld voor deze host. Schakel het in via de "
+"hostinstellingen, tenzij de domeincontroller bereikbaar is."
 
 #: rdp/rdpview.cpp:431
 #, kde-format
@@ -2622,16 +2618,16 @@ msgstr ""
 #, kde-format
 msgctxt "@label"
 msgid "The gateway does not allow this account to connect to “%1”."
-msgstr ""
+msgstr "De gateway staat niet toe dat dit account verbinding maakt met “%1”."
 
 #: rdp/rdpview.cpp:470
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "Try the IP address of the computer instead of its name."
+#, kde-format
 msgctxt "@info"
 msgid ""
 "Try the full name of the computer. The gateway may only know it by that name."
-msgstr "Probeer het IP-adres van de computer in plaats van de naam ervan."
+msgstr ""
+"Probeer de volledige naam van de computer. Mogelijk kent de gateway de "
+"computer alleen onder die naam."
 
 #: rdp/rdpview.cpp:471
 #, kde-format
@@ -2640,12 +2636,14 @@ msgid ""
 "Ask the administrator of the gateway to allow this account and computer in "
 "its resource authorization policy."
 msgstr ""
+"Vraag de systeembeheerder van de gateway om dit account en deze computer toe "
+"te staan ​​in het autorisatiebeleid voor hulpbronnen."
 
 #: rdp/rdpview.cpp:475
 #, kde-format
 msgctxt "@label"
 msgid "The gateway does not allow this device to connect."
-msgstr ""
+msgstr "De gateway staat niet toe dat dit apparaat verbinding maakt."
 
 #: rdp/rdpview.cpp:477
 #, kde-format
@@ -2654,26 +2652,24 @@ msgid ""
 "Ask the administrator of the gateway to check its connection authorization "
 "policy."
 msgstr ""
+"Vraag de systeembeheerder van de gateway om het beleid voor "
+"verbindingsautorisatie te controleren."
 
 #: rdp/rdpview.cpp:480
 #, kde-format
 msgctxt "@label"
 msgid "The gateway could not reach “%1”."
-msgstr ""
+msgstr "De gateway kon “%1” niet bereiken."
 
 #: rdp/rdpview.cpp:482
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid ""
-#| "Make sure the remote computer is turned on, awake and connected to the "
-#| "network."
+#, kde-format
 msgctxt "@info"
 msgid ""
 "Make sure the remote computer is running, and that the gateway can reach it "
 "by this name."
 msgstr ""
-"Zorg ervoor dat de externe computer is ingeschakeld, niet in de slaapstand "
-"staat en is verbonden met het netwerk."
+"Zorg ervoor dat de externe computer aan staat en dat de gateway deze onder "
+"deze naam kan bereiken."
 
 #: rdp/rdpview.cpp:486
 #, kde-format

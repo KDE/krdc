@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-04 01:02+0000\n"
-"PO-Revision-Date: 2026-10-29 03:45+0100\n"
+"PO-Revision-Date: 2026-11-04 04:00+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -2354,12 +2354,12 @@ msgstr ""
 "ანაბეჭდი: %6\n"
 
 #: rdp/rdpview.cpp:234
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Access to this system requires a username and password."
+#, kde-format
 msgctxt "@label"
 msgid "Access to the gateway and this system requires a username and password."
-msgstr "ამ სისტემაზე წვდომისთვის საჭიროა მომხმარებლის სახელი და პაროლი."
+msgstr ""
+"მარშრუტიზატორზე და ამ სისტემაზე წვდომისთვის საჭიროა მომხმარებლის სახელი და "
+"პაროლი."
 
 #: rdp/rdpview.cpp:235
 #, kde-format
@@ -2442,15 +2442,10 @@ msgid "Access denied"
 msgstr "წვდომა აკრძალულია"
 
 #: rdp/rdpview.cpp:381
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid ""
-#| "Check that no firewall on the remote computer rejects the connection."
+#, kde-format
 msgctxt "@label"
 msgid "The gateway or the remote computer refused this login."
-msgstr ""
-"შეამოწმეთ, ხომ არ უარყოფს კავშირს დაშორებულ კომპიუტერზე გაშვებული ქსელური "
-"ფარი."
+msgstr "მარშრუტიზატორმა, ან დაშორებულმა კომპიუტერმა შესვლაზე უარი განაცხადა."
 
 #: rdp/rdpview.cpp:384
 #, kde-format
@@ -2521,14 +2516,14 @@ msgid "The server and KRDC could not agree on a security protocol."
 msgstr "სერვერი და KRDC უსაფრთხოების პროტოკოლზე ვერ შეთანხმდნენ."
 
 #: rdp/rdpview.cpp:424
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "The server and KRDC could not agree on a security protocol."
+#, kde-format
 msgctxt "@label"
 msgid ""
 "Logging in to the gateway failed, or the server and KRDC could not agree on "
 "a security protocol."
-msgstr "სერვერი და KRDC უსაფრთხოების პროტოკოლზე ვერ შეთანხმდნენ."
+msgstr ""
+"მარშრუტიზატორზე შესვლა ჩავარდა, ან სერვერი და KRDC უსაფრთხოების პროტოკოლზე "
+"ვერ შეთანხმდნენ."
 
 #: rdp/rdpview.cpp:428
 #, kde-format
@@ -2537,6 +2532,8 @@ msgid ""
 "NTLM is turned off for this host. Turn it on in the host settings unless the "
 "domain controller can be reached."
 msgstr ""
+"ამ ჰოსტისთვის NTLM გამორთულია. ჩართეთ ის ჰოსტის მორგების ფანჯრიდან, თუ "
+"დომენის კონტროლერამდე მიღწევა შეუძლებელია."
 
 #: rdp/rdpview.cpp:431
 #, kde-format
@@ -2590,16 +2587,16 @@ msgstr ""
 #, kde-format
 msgctxt "@label"
 msgid "The gateway does not allow this account to connect to “%1”."
-msgstr ""
+msgstr "მარშრუტიზატორი არ აძლევს ამ ანგარიშს უფლებას, დაუკავშირდეს \"%1\"-ს."
 
 #: rdp/rdpview.cpp:470
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "Try the IP address of the computer instead of its name."
+#, kde-format
 msgctxt "@info"
 msgid ""
 "Try the full name of the computer. The gateway may only know it by that name."
-msgstr "სცადეთ კომპიუტერის IP მისამართი მისი სახელის ნაცვლად."
+msgstr ""
+"სცადეთ კომპიუტერის სრული სახელი. შეიძლება, მარშრუტიზატორი მას, მხოლოდ, ასე "
+"ცნობს."
 
 #: rdp/rdpview.cpp:471
 #, kde-format
@@ -2608,12 +2605,14 @@ msgid ""
 "Ask the administrator of the gateway to allow this account and computer in "
 "its resource authorization policy."
 msgstr ""
+"სთხოვეთ მარშრუტიზატორის ადმინისტრატორს, დაუშვას ეს ანგარიში და კომპიუტერი "
+"მისი რესურსების ავტორიზაციის პოლიტიკაში."
 
 #: rdp/rdpview.cpp:475
 #, kde-format
 msgctxt "@label"
 msgid "The gateway does not allow this device to connect."
-msgstr ""
+msgstr "მარშრუტიზატორი არ აძლევს ამ მოწყობილობას დაკავშირების უფლებას."
 
 #: rdp/rdpview.cpp:477
 #, kde-format
@@ -2622,26 +2621,24 @@ msgid ""
 "Ask the administrator of the gateway to check its connection authorization "
 "policy."
 msgstr ""
+"სთხოვეთ მარშრუტიზატორის ადმინისტრატორს, შეამოწმოს თავისი კავშირის "
+"ავტორიზაციის პოლიტიკა."
 
 #: rdp/rdpview.cpp:480
 #, kde-format
 msgctxt "@label"
 msgid "The gateway could not reach “%1”."
-msgstr ""
+msgstr "მარშრუტიზატორმა \"%1\"-მდე ვერ მიაღწია."
 
 #: rdp/rdpview.cpp:482
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid ""
-#| "Make sure the remote computer is turned on, awake and connected to the "
-#| "network."
+#, kde-format
 msgctxt "@info"
 msgid ""
 "Make sure the remote computer is running, and that the gateway can reach it "
 "by this name."
 msgstr ""
-"დარწმუნდით, რომ დაშორებული კომპიუტერი ჩართულია, ჰღვიძავს და დაკავშირებულია "
-"ქსელთან."
+"დარწმუნდით, რომ დაშორებული კომპიუტერი ჩართულია და რომ მარშრუტიზატორს "
+"შეუძლია, ის სახელით იპოვოს."
 
 #: rdp/rdpview.cpp:486
 #, kde-format
