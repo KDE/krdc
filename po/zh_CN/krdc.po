@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-04 01:02+0000\n"
+"POT-Creation-Date: 2026-11-06 00:50+0000\n"
 "PO-Revision-Date: 2024-04-22 16:04\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -204,13 +204,13 @@ msgstr "配置…"
 msgid "Remove"
 msgstr "删除"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:323 mainwindow.cpp:940
-#: mainwindow.cpp:956
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:336 mainwindow.cpp:958
+#: mainwindow.cpp:974
 #, kde-format
 msgid "Unusable URL"
 msgstr "不可用的 URL"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:956
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:974
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr "无法处理选中的主机。"
@@ -1241,8 +1241,8 @@ msgstr "启动后要连接的 URL"
 msgid "KDE Remote Desktop Client started"
 msgstr "KDE 远程桌面客户端已启动"
 
-#: mainwindow.cpp:115 mainwindow.cpp:132 mainwindow.cpp:1411
-#: mainwindow.cpp:1508
+#: mainwindow.cpp:115 mainwindow.cpp:132 mainwindow.cpp:1429
+#: mainwindow.cpp:1526
 #, kde-format
 msgid "New Connection"
 msgstr "新建连接"
@@ -1257,12 +1257,12 @@ msgstr "复制抓屏到剪贴板"
 msgid "Screenshot"
 msgstr "抓屏"
 
-#: mainwindow.cpp:147 mainwindow.cpp:659
+#: mainwindow.cpp:147 mainwindow.cpp:677
 #, kde-format
 msgid "Switch to Full Screen Mode"
 msgstr "切换到全屏模式"
 
-#: mainwindow.cpp:148 mainwindow.cpp:660
+#: mainwindow.cpp:148 mainwindow.cpp:678
 #, kde-format
 msgid "Full Screen"
 msgstr "全屏"
@@ -1322,19 +1322,19 @@ msgstr "缩放倍数"
 msgid "Bookmarks"
 msgstr "书签"
 
-#: mainwindow.cpp:288
+#: mainwindow.cpp:295
 #, kde-format
 msgid ""
 "Unable to load connection data from “%1”.\n"
 "The file may be damaged, or it is in a format KRDC does not support."
 msgstr ""
 
-#: mainwindow.cpp:289
+#: mainwindow.cpp:296
 #, kde-format
 msgid "Load failed"
 msgstr "加载失败"
 
-#: mainwindow.cpp:296
+#: mainwindow.cpp:303
 #, kde-format
 msgid ""
 "“%1” is not a valid address.\n"
@@ -1342,174 +1342,174 @@ msgid ""
 "Use the form [username@]host[:port], for example: user@192.168.1.10:5900"
 msgstr ""
 
-#: mainwindow.cpp:298
+#: mainwindow.cpp:305
 #, kde-format
 msgid "Malformed URL"
 msgstr "URL 格式错误"
 
-#: mainwindow.cpp:322
+#: mainwindow.cpp:335
 #, kde-format
 msgid ""
 "No installed plugin can handle the “%1” protocol.\n"
 "Supported protocols: %2"
 msgstr ""
 
-#: mainwindow.cpp:541
+#: mainwindow.cpp:559
 #, kde-format
 msgid "Connecting to %1"
 msgstr "正在连接到 %1"
 
-#: mainwindow.cpp:545
+#: mainwindow.cpp:563
 #, kde-format
 msgid "Authenticating at %1"
 msgstr "正在 %1 上进行身份验证..."
 
-#: mainwindow.cpp:549
+#: mainwindow.cpp:567
 #, kde-format
 msgid "Preparing connection to %1"
 msgstr "正在准备连接到 %1"
 
-#: mainwindow.cpp:553
+#: mainwindow.cpp:571
 #, kde-format
 msgid "Connected to %1"
 msgstr "已连接到 %1"
 
-#: mainwindow.cpp:706
+#: mainwindow.cpp:724
 #, kde-format
 msgid "Switch to Window Mode"
 msgstr "切换到窗口模式"
 
-#: mainwindow.cpp:707
+#: mainwindow.cpp:725
 #, kde-format
 msgid "Window Mode"
 msgstr "窗口模式"
 
-#: mainwindow.cpp:940
+#: mainwindow.cpp:958
 #, kde-format
 msgid "The entered address cannot be handled by this connection type."
 msgstr "输入的地址无法通过此连接类型处理。"
 
-#: mainwindow.cpp:975
+#: mainwindow.cpp:993
 #, kde-format
 msgid "Connect"
 msgstr "连接"
 
-#: mainwindow.cpp:976
+#: mainwindow.cpp:994
 #, kde-format
 msgid "Rename"
 msgstr "重命名"
 
-#: mainwindow.cpp:977
+#: mainwindow.cpp:995
 #, kde-format
 msgid "Settings"
 msgstr "设置"
 
-#: mainwindow.cpp:978
+#: mainwindow.cpp:996
 #, kde-format
 msgid "Delete"
 msgstr "删除"
 
-#: mainwindow.cpp:981 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:999 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "书签"
 
-#: mainwindow.cpp:981 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:999 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "历史"
 
-#: mainwindow.cpp:993
+#: mainwindow.cpp:1011
 #, kde-format
 msgid "Rename %1"
 msgstr "重命名 %1"
 
-#: mainwindow.cpp:993
+#: mainwindow.cpp:1011
 #, kde-format
 msgid "Rename %1 to"
 msgstr "将 %1 重命名为"
 
-#: mainwindow.cpp:1000
+#: mainwindow.cpp:1018
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "您确定要想要删除 %1 吗？"
 
-#: mainwindow.cpp:1000
+#: mainwindow.cpp:1018
 #, kde-format
 msgid "Delete %1"
 msgstr "删除 %1"
 
-#: mainwindow.cpp:1024
+#: mainwindow.cpp:1042
 #, kde-format
 msgid "Add Bookmark"
 msgstr "添加书签"
 
-#: mainwindow.cpp:1025
+#: mainwindow.cpp:1043
 #, kde-format
 msgid "Close Tab"
 msgstr "关闭标签页"
 
-#: mainwindow.cpp:1142
+#: mainwindow.cpp:1160
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr "最小化全屏窗口"
 
-#: mainwindow.cpp:1159
+#: mainwindow.cpp:1177
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "吸附工具栏"
 
-#: mainwindow.cpp:1279
+#: mainwindow.cpp:1297
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr "您确定要退出 KDE 远程桌面客户端吗？"
 
-#: mainwindow.cpp:1280
+#: mainwindow.cpp:1298
 #, kde-format
 msgid "Confirm Quit"
 msgstr "确认退出"
 
-#: mainwindow.cpp:1434
+#: mainwindow.cpp:1452
 #, kde-format
 msgid "Connect to:"
 msgstr "连接到："
 
-#: mainwindow.cpp:1438
+#: mainwindow.cpp:1456
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr "在此输入以连接到该地址并过滤列表。"
 
-#: mainwindow.cpp:1449
+#: mainwindow.cpp:1467
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
 "methods."
 msgstr "在此输入 IP 或 DNS 名称。清除整行可获得连接方式列表。"
 
-#: mainwindow.cpp:1452
+#: mainwindow.cpp:1470
 #, kde-format
 msgid "Goto Address"
 msgstr "前往地址"
 
-#: mainwindow.cpp:1544
+#: mainwindow.cpp:1562
 #, kde-format
 msgid "Remote Desktops"
 msgstr "远程桌面"
 
-#: mainwindow.cpp:1573
+#: mainwindow.cpp:1591
 #, kde-format
 msgid "Filter"
 msgstr "过滤"
 
-#: mainwindow.cpp:1626
+#: mainwindow.cpp:1644
 #, kde-format
 msgctxt "@label"
 msgid "The remote computer may have shut down or restarted."
 msgstr ""
 
-#: mainwindow.cpp:1630
+#: mainwindow.cpp:1648
 #, kde-format
 msgctxt "@title connection error"
 msgid "Closed before the session started"
@@ -2319,7 +2319,7 @@ msgstr ""
 msgid "U2U"
 msgstr ""
 
-#: rdp/rdpsession.cpp:1345
+#: rdp/rdpsession.cpp:1354
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -2335,7 +2335,7 @@ msgstr ""
 "颁发机构：%5\n"
 "指纹：%6\n"
 
-#: rdp/rdpview.cpp:234
+#: rdp/rdpview.cpp:265
 #, fuzzy, kde-format
 #| msgctxt "@label"
 #| msgid "Access to this system requires a username and password."
@@ -2343,43 +2343,68 @@ msgctxt "@label"
 msgid "Access to the gateway and this system requires a username and password."
 msgstr "访问此系统需要用户名和密码。"
 
-#: rdp/rdpview.cpp:235
+#: rdp/rdpview.cpp:266
 #, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
 msgstr "访问此系统需要用户名和密码。"
 
-#: rdp/rdpview.cpp:276
+#: rdp/rdpview.cpp:314
+#, fuzzy, kde-format
+#| msgctxt "@label"
+#| msgid "Access to this system requires a username and password."
+msgctxt "@label %1 is a server address"
+msgid "Access to the gateway %1 requires a username and password."
+msgstr "访问此系统需要用户名和密码。"
+
+#: rdp/rdpview.cpp:334
+#, fuzzy, kde-format
+#| msgctxt "@label"
+#| msgid "The certificate for this system is unknown. Do you wish to continue?"
+msgctxt "@label"
+msgid "The certificate for this gateway is unknown. Do you wish to continue?"
+msgstr "此系统的证书未知。您确定要继续吗？"
+
+#: rdp/rdpview.cpp:335
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr "此系统的证书未知。您确定要继续吗？"
 
-#: rdp/rdpview.cpp:277
+#: rdp/rdpview.cpp:336
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
 msgstr "验证证书"
 
-#: rdp/rdpview.cpp:282 rdp/rdpview.cpp:308
+#: rdp/rdpview.cpp:341 rdp/rdpview.cpp:373
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
 msgstr "记住此证书"
 
-#: rdp/rdpview.cpp:302
+#: rdp/rdpview.cpp:366
+#, fuzzy, kde-format
+#| msgctxt "@label"
+#| msgid ""
+#| "The certificate for this system has changed. Do you wish to continue?"
+msgctxt "@label"
+msgid "The certificate for this gateway has changed. Do you wish to continue?"
+msgstr "此系统的证书已经改变。您确定要继续吗？"
+
+#: rdp/rdpview.cpp:367
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
 msgstr "此系统的证书已经改变。您确定要继续吗？"
 
-#: rdp/rdpview.cpp:303
+#: rdp/rdpview.cpp:368
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
 msgstr "证书已改变"
 
-#: rdp/rdpview.cpp:306
+#: rdp/rdpview.cpp:371
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -2393,49 +2418,49 @@ msgstr ""
 "新的证书：\n"
 "%2"
 
-#: rdp/rdpview.cpp:356
+#: rdp/rdpview.cpp:421
 #, kde-format
 msgctxt "@label"
 msgid "The credentials for “%1” were not accepted."
 msgstr ""
 
-#: rdp/rdpview.cpp:359
+#: rdp/rdpview.cpp:424
 #, kde-format
 msgctxt "@info"
 msgid "Check the RD Gateway credentials in the host settings."
 msgstr ""
 
-#: rdp/rdpview.cpp:375
+#: rdp/rdpview.cpp:440
 #, kde-format
 msgctxt "@label"
 msgid "This account may not log in remotely."
 msgstr ""
 
-#: rdp/rdpview.cpp:376
+#: rdp/rdpview.cpp:441
 #, kde-format
 msgctxt "@label"
 msgid "“%1” may not log in remotely."
 msgstr ""
 
-#: rdp/rdpview.cpp:378 rdp/rdpview.cpp:468 rdp/rdpview.cpp:476
+#: rdp/rdpview.cpp:443 rdp/rdpview.cpp:536 rdp/rdpview.cpp:544
 #, kde-format
 msgctxt "@title connection error"
 msgid "Access denied"
 msgstr ""
 
-#: rdp/rdpview.cpp:381
+#: rdp/rdpview.cpp:446
 #, kde-format
 msgctxt "@label"
 msgid "The gateway or the remote computer refused this login."
 msgstr ""
 
-#: rdp/rdpview.cpp:384
+#: rdp/rdpview.cpp:452
 #, kde-format
 msgctxt "@info"
 msgid "Check whether the account is locked, disabled or expired."
 msgstr ""
 
-#: rdp/rdpview.cpp:386
+#: rdp/rdpview.cpp:454
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2443,13 +2468,13 @@ msgid ""
 "Remote Desktop Users group, or log in with a different account."
 msgstr ""
 
-#: rdp/rdpview.cpp:394
+#: rdp/rdpview.cpp:462
 #, kde-format
 msgctxt "@label"
 msgid "The password must be changed before it can be used to log in remotely."
 msgstr ""
 
-#: rdp/rdpview.cpp:395
+#: rdp/rdpview.cpp:463
 #, fuzzy, kde-format
 #| msgctxt "@title:dialog"
 #| msgid "Password Problems"
@@ -2457,7 +2482,7 @@ msgctxt "@title connection error"
 msgid "Password expired"
 msgstr "密码问题"
 
-#: rdp/rdpview.cpp:397
+#: rdp/rdpview.cpp:465
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2465,37 +2490,37 @@ msgid ""
 "administrator to reset it."
 msgstr ""
 
-#: rdp/rdpview.cpp:402
+#: rdp/rdpview.cpp:470
 #, kde-format
 msgctxt "@label"
 msgid "The Kerberos domain controller could not be reached."
 msgstr ""
 
-#: rdp/rdpview.cpp:404
+#: rdp/rdpview.cpp:472
 #, kde-format
 msgctxt "@info"
 msgid "Check the domain you entered when logging in."
 msgstr ""
 
-#: rdp/rdpview.cpp:405
+#: rdp/rdpview.cpp:473
 #, kde-format
 msgctxt "@info"
 msgid "Connect to the network or VPN of the domain."
 msgstr ""
 
-#: rdp/rdpview.cpp:410 spice/spiceview.cpp:901 vnc/vncview.cpp:294
+#: rdp/rdpview.cpp:478 spice/spiceview.cpp:953 vnc/vncview.cpp:294
 #, kde-format
 msgctxt "@label"
 msgid "No IP address was found for this name."
 msgstr ""
 
-#: rdp/rdpview.cpp:421
+#: rdp/rdpview.cpp:489
 #, kde-format
 msgctxt "@label"
 msgid "The server and KRDC could not agree on a security protocol."
 msgstr ""
 
-#: rdp/rdpview.cpp:424
+#: rdp/rdpview.cpp:492
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -2503,7 +2528,7 @@ msgid ""
 "a security protocol."
 msgstr ""
 
-#: rdp/rdpview.cpp:428
+#: rdp/rdpview.cpp:496
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2511,7 +2536,7 @@ msgid ""
 "domain controller can be reached."
 msgstr ""
 
-#: rdp/rdpview.cpp:431
+#: rdp/rdpview.cpp:499
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2519,19 +2544,19 @@ msgid ""
 "support the level selected."
 msgstr ""
 
-#: rdp/rdpview.cpp:435
+#: rdp/rdpview.cpp:503
 #, kde-format
 msgctxt "@label"
 msgid "The server requires Network Level Authentication (NLA)."
 msgstr ""
 
-#: rdp/rdpview.cpp:436
+#: rdp/rdpview.cpp:504
 #, kde-format
 msgctxt "@info"
 msgid "Enable NLA in the security settings for this host."
 msgstr ""
 
-#: rdp/rdpview.cpp:454
+#: rdp/rdpview.cpp:522
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2539,13 +2564,13 @@ msgid ""
 "unreachable or reject the connection."
 msgstr ""
 
-#: rdp/rdpview.cpp:461
+#: rdp/rdpview.cpp:529
 #, kde-format
 msgctxt "@label"
 msgid "The remote computer did not finish starting the session in time."
 msgstr ""
 
-#: rdp/rdpview.cpp:462
+#: rdp/rdpview.cpp:530
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2553,20 +2578,20 @@ msgid ""
 "minute, then connect again."
 msgstr ""
 
-#: rdp/rdpview.cpp:467
+#: rdp/rdpview.cpp:535
 #, kde-format
 msgctxt "@label"
 msgid "The gateway does not allow this account to connect to “%1”."
 msgstr ""
 
-#: rdp/rdpview.cpp:470
+#: rdp/rdpview.cpp:538
 #, kde-format
 msgctxt "@info"
 msgid ""
 "Try the full name of the computer. The gateway may only know it by that name."
 msgstr ""
 
-#: rdp/rdpview.cpp:471
+#: rdp/rdpview.cpp:539
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2574,13 +2599,13 @@ msgid ""
 "its resource authorization policy."
 msgstr ""
 
-#: rdp/rdpview.cpp:475
+#: rdp/rdpview.cpp:543
 #, kde-format
 msgctxt "@label"
 msgid "The gateway does not allow this device to connect."
 msgstr ""
 
-#: rdp/rdpview.cpp:477
+#: rdp/rdpview.cpp:545
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2588,13 +2613,13 @@ msgid ""
 "policy."
 msgstr ""
 
-#: rdp/rdpview.cpp:480
+#: rdp/rdpview.cpp:548
 #, kde-format
 msgctxt "@label"
 msgid "The gateway could not reach “%1”."
 msgstr ""
 
-#: rdp/rdpview.cpp:482
+#: rdp/rdpview.cpp:550
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2602,62 +2627,62 @@ msgid ""
 "by this name."
 msgstr ""
 
-#: rdp/rdpview.cpp:486
+#: rdp/rdpview.cpp:554
 #, kde-format
 msgctxt "@label"
 msgid "It accepted the connection, then refused to start a session."
 msgstr ""
 
-#: rdp/rdpview.cpp:487
+#: rdp/rdpview.cpp:555
 #, fuzzy, kde-format
 #| msgid "Sessions"
 msgctxt "@title connection error"
 msgid "Session refused"
 msgstr "会话"
 
-#: rdp/rdpview.cpp:491
+#: rdp/rdpview.cpp:559
 #, kde-format
 msgctxt "@label"
 msgid "The server did not accept the options selected for this host."
 msgstr ""
 
-#: rdp/rdpview.cpp:494
+#: rdp/rdpview.cpp:562
 #, kde-format
 msgctxt "@label"
 msgid "An administrator or another program disconnected this session."
 msgstr ""
 
-#: rdp/rdpview.cpp:497
+#: rdp/rdpview.cpp:565
 #, kde-format
 msgctxt "@label"
 msgid "An administrator signed this session out."
 msgstr ""
 
-#: rdp/rdpview.cpp:500
+#: rdp/rdpview.cpp:568
 #, kde-format
 msgctxt "@label"
 msgid "The session was disconnected from the remote computer."
 msgstr ""
 
-#: rdp/rdpview.cpp:507
+#: rdp/rdpview.cpp:575
 #, kde-format
 msgctxt "@label"
 msgid "Disconnected because someone else connected to this session."
 msgstr ""
 
-#: rdp/rdpview.cpp:508
+#: rdp/rdpview.cpp:576
 #, kde-format
 msgctxt "@info"
 msgid "Reconnect to take the session back. This disconnects the other user."
 msgstr ""
 
-#: rdp/rdpview.cpp:511
+#: rdp/rdpview.cpp:579
 #, kde-format
 msgctxt "@label"
 msgid "The session was closed after being idle for too long."
 msgstr ""
 
-#: rdp/rdpview.cpp:512
+#: rdp/rdpview.cpp:580
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2665,13 +2690,13 @@ msgid ""
 "the server."
 msgstr ""
 
-#: rdp/rdpview.cpp:526
+#: rdp/rdpview.cpp:594
 #, kde-format
 msgctxt "@label"
 msgid "The remote computer reported a problem while logging in."
 msgstr ""
 
-#: rdp/rdpview.cpp:527
+#: rdp/rdpview.cpp:595
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2679,23 +2704,50 @@ msgid ""
 "is not busy."
 msgstr ""
 
-#: rdp/rdpview.cpp:906
+#: rdp/rdpview.cpp:974
 #, kde-format
 msgctxt "@title:window"
 msgid "KRDC – Screen %1"
 msgstr "KRDC – 屏幕 %1"
 
-#: rdp/rdpviewfactory.cpp:26
+#: rdp/rdpviewfactory.cpp:112
 #, kde-format
 msgid "Connect to a Windows Remote Desktop (RDP)"
 msgstr "连接到 Windows 远程桌面(RDP)"
 
-#: rdp/rdpviewfactory.cpp:109
+#: rdp/rdpviewfactory.cpp:193
+#, kde-format
+msgctxt "@info %1 is a server address"
+msgid "This file requires a gateway, but its address “%1” is not valid."
+msgstr ""
+
+#: rdp/rdpviewfactory.cpp:194
+#, fuzzy, kde-format
+#| msgid "Gateway"
+msgctxt "@title:window"
+msgid "Invalid Gateway"
+msgstr "网关"
+
+#: rdp/rdpviewfactory.cpp:203
+#, kde-format
+msgctxt "@info %1 is a server address"
+msgid ""
+"This file connects through the gateway “%1”, which could capture your login "
+"details. Continue only if you trust this file."
+msgstr ""
+
+#: rdp/rdpviewfactory.cpp:206
+#, kde-format
+msgctxt "@title:window"
+msgid "Use Gateway from File?"
+msgstr ""
+
+#: rdp/rdpviewfactory.cpp:280
 #, kde-format
 msgid "New RDP Connection…"
 msgstr "新建 RDP 连接…"
 
-#: rdp/rdpviewfactory.cpp:120
+#: rdp/rdpviewfactory.cpp:291
 #, kde-format
 msgid ""
 "<html>Enter the address here. Port is optional.<br /><i>Example: "
@@ -2858,18 +2910,38 @@ msgstr ""
 msgid "Network"
 msgstr ""
 
-#: spice/spiceview.cpp:830
+#: spice/spiceview.cpp:90
+#, kde-format
+msgctxt "@label"
+msgid "This connection needs its connection file."
+msgstr ""
+
+#: spice/spiceview.cpp:91
+#, kde-format
+msgctxt "@info"
+msgid "Open a new .vv file for this virtual machine."
+msgstr ""
+
+#: spice/spiceview.cpp:879
+#, kde-format
+msgctxt "@info"
+msgid ""
+"The server rejected the password in the connection file, which may have "
+"expired. Open a new file, or enter the password."
+msgstr ""
+
+#: spice/spiceview.cpp:881
 #, kde-format
 msgid "Authentication is required to connect to <b>%1</b>."
 msgstr ""
 
-#: spice/spiceview.cpp:892
+#: spice/spiceview.cpp:944
 #, kde-format
 msgctxt "@label"
 msgid "The TLS handshake failed."
 msgstr ""
 
-#: spice/spiceview.cpp:893
+#: spice/spiceview.cpp:945
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2877,7 +2949,7 @@ msgid ""
 "certificate is trusted."
 msgstr ""
 
-#: spice/spiceview.cpp:896
+#: spice/spiceview.cpp:948
 #, fuzzy, kde-format
 #| msgctxt "@label"
 #| msgid "The server refused the connection request."
@@ -2885,7 +2957,7 @@ msgctxt "@label"
 msgid "The server rejected the SPICE connection."
 msgstr "服务器拒绝了连接请求。"
 
-#: spice/spiceview.cpp:897
+#: spice/spiceview.cpp:949
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2893,7 +2965,7 @@ msgid ""
 "version."
 msgstr ""
 
-#: spice/spiceview.cpp:907
+#: spice/spiceview.cpp:959
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2901,19 +2973,33 @@ msgid ""
 "this address."
 msgstr ""
 
-#: spice/spiceviewfactory.cpp:47
+#: spice/spiceviewfactory.cpp:174
+#, kde-format
+msgctxt "@info %1 is a server address"
+msgid ""
+"This file connects through the proxy “%1”, which could intercept the "
+"session. Continue only if you trust this file."
+msgstr ""
+
+#: spice/spiceviewfactory.cpp:176
+#, kde-format
+msgctxt "@title:window"
+msgid "Use Proxy from File?"
+msgstr ""
+
+#: spice/spiceviewfactory.cpp:203
 #, fuzzy, kde-format
 #| msgid "New RDP Connection…"
 msgid "New SPICE Connection…"
 msgstr "新建 RDP 连接…"
 
-#: spice/spiceviewfactory.cpp:52
+#: spice/spiceviewfactory.cpp:208
 #, fuzzy, kde-format
 #| msgid "Connect to a VNC Remote Desktop"
 msgid "Connect to a SPICE Remote Desktop"
 msgstr "连接到 VNC 远程桌面"
 
-#: spice/spiceviewfactory.cpp:58
+#: spice/spiceviewfactory.cpp:214
 #, fuzzy, kde-format
 #| msgid ""
 #| "<html>Enter the address here.<br /><i>Example: vncserver:1 (host:port / "
@@ -3124,9 +3210,6 @@ msgstr ""
 
 #~ msgid "Proxy"
 #~ msgstr "代理服务器"
-
-#~ msgid "Gateway"
-#~ msgstr "网关"
 
 #~ msgid "Unable to load connection data from the provided file."
 #~ msgstr "无法从提供的文件加载连接数据。"

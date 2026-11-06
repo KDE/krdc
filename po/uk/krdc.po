@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-04 01:02+0000\n"
+"POT-Creation-Date: 2026-11-06 00:50+0000\n"
 "PO-Revision-Date: 2026-11-04 21:58+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -219,13 +219,13 @@ msgstr "Налаштувати…"
 msgid "Remove"
 msgstr "Вилучити"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:323 mainwindow.cpp:940
-#: mainwindow.cpp:956
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:336 mainwindow.cpp:958
+#: mainwindow.cpp:974
 #, kde-format
 msgid "Unusable URL"
 msgstr "Непридатна URL"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:956
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:974
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr "Неможливо опрацювати вибраний вузол."
@@ -1270,8 +1270,8 @@ msgstr "Адреси URL, з якими з’єднатись після зап�
 msgid "KDE Remote Desktop Client started"
 msgstr "Запущено клієнт віддаленої стільниці KDE"
 
-#: mainwindow.cpp:115 mainwindow.cpp:132 mainwindow.cpp:1411
-#: mainwindow.cpp:1508
+#: mainwindow.cpp:115 mainwindow.cpp:132 mainwindow.cpp:1429
+#: mainwindow.cpp:1526
 #, kde-format
 msgid "New Connection"
 msgstr "Нове з'єднання"
@@ -1286,12 +1286,12 @@ msgstr "Скопіювати знімок у кишеню"
 msgid "Screenshot"
 msgstr "Знімок вікна"
 
-#: mainwindow.cpp:147 mainwindow.cpp:659
+#: mainwindow.cpp:147 mainwindow.cpp:677
 #, kde-format
 msgid "Switch to Full Screen Mode"
 msgstr "Перемкнутися у повноекранний режим"
 
-#: mainwindow.cpp:148 mainwindow.cpp:660
+#: mainwindow.cpp:148 mainwindow.cpp:678
 #, kde-format
 msgid "Full Screen"
 msgstr "Весь екран"
@@ -1351,7 +1351,7 @@ msgstr "Коефіцієнт масштабування"
 msgid "Bookmarks"
 msgstr "Закладки"
 
-#: mainwindow.cpp:288
+#: mainwindow.cpp:295
 #, kde-format
 msgid ""
 "Unable to load connection data from “%1”.\n"
@@ -1361,12 +1361,12 @@ msgstr ""
 "Можливо, файл пошкоджено або його дані записано не у підтримуваному KRDC "
 "форматі."
 
-#: mainwindow.cpp:289
+#: mainwindow.cpp:296
 #, kde-format
 msgid "Load failed"
 msgstr "Не вдалося завантажити"
 
-#: mainwindow.cpp:296
+#: mainwindow.cpp:303
 #, kde-format
 msgid ""
 "“%1” is not a valid address.\n"
@@ -1378,12 +1378,12 @@ msgstr ""
 "Скористайтеся формою [користувач@]вузол[:порт], приклад: "
 "user@192.168.1.10:5900"
 
-#: mainwindow.cpp:298
+#: mainwindow.cpp:305
 #, kde-format
 msgid "Malformed URL"
 msgstr "Неправильно записана адреса URL"
 
-#: mainwindow.cpp:322
+#: mainwindow.cpp:335
 #, kde-format
 msgid ""
 "No installed plugin can handle the “%1” protocol.\n"
@@ -1392,136 +1392,136 @@ msgstr ""
 "Жоден зі встановлених додатків не може обробляти протокол «%1».\n"
 "Підтримувані протоколи: %2"
 
-#: mainwindow.cpp:541
+#: mainwindow.cpp:559
 #, kde-format
 msgid "Connecting to %1"
 msgstr "З'єднання з %1"
 
-#: mainwindow.cpp:545
+#: mainwindow.cpp:563
 #, kde-format
 msgid "Authenticating at %1"
 msgstr "Автентифікація на %1"
 
-#: mainwindow.cpp:549
+#: mainwindow.cpp:567
 #, kde-format
 msgid "Preparing connection to %1"
 msgstr "Підготовка з'єднання з %1"
 
-#: mainwindow.cpp:553
+#: mainwindow.cpp:571
 #, kde-format
 msgid "Connected to %1"
 msgstr "З'єднано з %1"
 
-#: mainwindow.cpp:706
+#: mainwindow.cpp:724
 #, kde-format
 msgid "Switch to Window Mode"
 msgstr "Перемкнути в віконний режим"
 
-#: mainwindow.cpp:707
+#: mainwindow.cpp:725
 #, kde-format
 msgid "Window Mode"
 msgstr "Режим вікна"
 
-#: mainwindow.cpp:940
+#: mainwindow.cpp:958
 #, kde-format
 msgid "The entered address cannot be handled by this connection type."
 msgstr "Неможливо опрацювати введену адресу за цим типом з'єднання."
 
-#: mainwindow.cpp:975
+#: mainwindow.cpp:993
 #, kde-format
 msgid "Connect"
 msgstr "З'єднатися"
 
-#: mainwindow.cpp:976
+#: mainwindow.cpp:994
 #, kde-format
 msgid "Rename"
 msgstr "Перейменувати"
 
-#: mainwindow.cpp:977
+#: mainwindow.cpp:995
 #, kde-format
 msgid "Settings"
 msgstr "Параметри"
 
-#: mainwindow.cpp:978
+#: mainwindow.cpp:996
 #, kde-format
 msgid "Delete"
 msgstr "Вилучити"
 
-#: mainwindow.cpp:981 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:999 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "Закладки"
 
-#: mainwindow.cpp:981 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:999 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "Журнал"
 
-#: mainwindow.cpp:993
+#: mainwindow.cpp:1011
 #, kde-format
 msgid "Rename %1"
 msgstr "Перейменувати %1"
 
-#: mainwindow.cpp:993
+#: mainwindow.cpp:1011
 #, kde-format
 msgid "Rename %1 to"
 msgstr "Перейменувати %1 на"
 
-#: mainwindow.cpp:1000
+#: mainwindow.cpp:1018
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "Ви справді бажаєте вилучити %1?"
 
-#: mainwindow.cpp:1000
+#: mainwindow.cpp:1018
 #, kde-format
 msgid "Delete %1"
 msgstr "Вилучити %1"
 
-#: mainwindow.cpp:1024
+#: mainwindow.cpp:1042
 #, kde-format
 msgid "Add Bookmark"
 msgstr "Додати закладку"
 
-#: mainwindow.cpp:1025
+#: mainwindow.cpp:1043
 #, kde-format
 msgid "Close Tab"
 msgstr "Закрити вкладку"
 
-#: mainwindow.cpp:1142
+#: mainwindow.cpp:1160
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr "Мінімізувати повноекранне вікно"
 
-#: mainwindow.cpp:1159
+#: mainwindow.cpp:1177
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "Приліпити пенал"
 
-#: mainwindow.cpp:1279
+#: mainwindow.cpp:1297
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr "Закрити Клієнт віддалених стільниць KDE?"
 
-#: mainwindow.cpp:1280
+#: mainwindow.cpp:1298
 #, kde-format
 msgid "Confirm Quit"
 msgstr "Підтвердження виходу"
 
-#: mainwindow.cpp:1434
+#: mainwindow.cpp:1452
 #, kde-format
 msgid "Connect to:"
 msgstr "З'єднатися з:"
 
-#: mainwindow.cpp:1438
+#: mainwindow.cpp:1456
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr ""
 "Введіть сюди дані для встановлення з’єднання з певною адресою або "
 "фільтрування списку."
 
-#: mainwindow.cpp:1449
+#: mainwindow.cpp:1467
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
@@ -1530,28 +1530,28 @@ msgstr ""
 "Тут вам слід ввести IP-адресу або назву у DNS. Спорожніть рядок, щоб "
 "переглянути список способів з’єднання."
 
-#: mainwindow.cpp:1452
+#: mainwindow.cpp:1470
 #, kde-format
 msgid "Goto Address"
 msgstr "Перейти до адреси"
 
-#: mainwindow.cpp:1544
+#: mainwindow.cpp:1562
 #, kde-format
 msgid "Remote Desktops"
 msgstr "Віддалені стільниці"
 
-#: mainwindow.cpp:1573
+#: mainwindow.cpp:1591
 #, kde-format
 msgid "Filter"
 msgstr "Фільтр"
 
-#: mainwindow.cpp:1626
+#: mainwindow.cpp:1644
 #, kde-format
 msgctxt "@label"
 msgid "The remote computer may have shut down or restarted."
 msgstr "Можливо, віддалений комп'ютер вимкнено або перезавантажено."
 
-#: mainwindow.cpp:1630
+#: mainwindow.cpp:1648
 #, kde-format
 msgctxt "@title connection error"
 msgid "Closed before the session started"
@@ -2367,7 +2367,7 @@ msgstr "NTLM"
 msgid "U2U"
 msgstr "U2U"
 
-#: rdp/rdpsession.cpp:1345
+#: rdp/rdpsession.cpp:1354
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -2383,50 +2383,77 @@ msgstr ""
 "Видавець: %5\n"
 "Відбиток: %6\n"
 
-#: rdp/rdpview.cpp:234
+#: rdp/rdpview.cpp:265
 #, kde-format
 msgctxt "@label"
 msgid "Access to the gateway and this system requires a username and password."
 msgstr ""
 "Для доступу до шлюзу і цієї системи потрібен ім'я користувача і пароль."
 
-#: rdp/rdpview.cpp:235
+#: rdp/rdpview.cpp:266
 #, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
 msgstr "Для доступу до цієї системи потрібен ім'я користувача і пароль."
 
-#: rdp/rdpview.cpp:276
+#: rdp/rdpview.cpp:314
+#, fuzzy, kde-format
+#| msgctxt "@label"
+#| msgid ""
+#| "Access to the gateway and this system requires a username and password."
+msgctxt "@label %1 is a server address"
+msgid "Access to the gateway %1 requires a username and password."
+msgstr ""
+"Для доступу до шлюзу і цієї системи потрібен ім'я користувача і пароль."
+
+#: rdp/rdpview.cpp:334
+#, fuzzy, kde-format
+#| msgctxt "@label"
+#| msgid "The certificate for this system is unknown. Do you wish to continue?"
+msgctxt "@label"
+msgid "The certificate for this gateway is unknown. Do you wish to continue?"
+msgstr "Сертифікат для цієї системи є невідомим. Хочете продовжувати?"
+
+#: rdp/rdpview.cpp:335
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr "Сертифікат для цієї системи є невідомим. Хочете продовжувати?"
 
-#: rdp/rdpview.cpp:277
+#: rdp/rdpview.cpp:336
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
 msgstr "Перевірка сертифіката"
 
-#: rdp/rdpview.cpp:282 rdp/rdpview.cpp:308
+#: rdp/rdpview.cpp:341 rdp/rdpview.cpp:373
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
 msgstr "Запам'ятати цей сертифікат"
 
-#: rdp/rdpview.cpp:302
+#: rdp/rdpview.cpp:366
+#, fuzzy, kde-format
+#| msgctxt "@label"
+#| msgid ""
+#| "The certificate for this system has changed. Do you wish to continue?"
+msgctxt "@label"
+msgid "The certificate for this gateway has changed. Do you wish to continue?"
+msgstr "Сертифікат для цієї системи було змінено. Хочете продовжувати?"
+
+#: rdp/rdpview.cpp:367
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
 msgstr "Сертифікат для цієї системи було змінено. Хочете продовжувати?"
 
-#: rdp/rdpview.cpp:303
+#: rdp/rdpview.cpp:368
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
 msgstr "Сертифікат змінено"
 
-#: rdp/rdpview.cpp:306
+#: rdp/rdpview.cpp:371
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -2440,13 +2467,13 @@ msgstr ""
 "Новий сертифікат:\n"
 "%2"
 
-#: rdp/rdpview.cpp:356
+#: rdp/rdpview.cpp:421
 #, kde-format
 msgctxt "@label"
 msgid "The credentials for “%1” were not accepted."
 msgstr "Реєстраційні дані для «%1» не було прийнято."
 
-#: rdp/rdpview.cpp:359
+#: rdp/rdpview.cpp:424
 #, kde-format
 msgctxt "@info"
 msgid "Check the RD Gateway credentials in the host settings."
@@ -2454,31 +2481,31 @@ msgstr ""
 "Перевірте реєстраційні дані для шлюзу віддаленої стільниці у параметрах "
 "вузла."
 
-#: rdp/rdpview.cpp:375
+#: rdp/rdpview.cpp:440
 #, kde-format
 msgctxt "@label"
 msgid "This account may not log in remotely."
 msgstr "Цьому обліковому запису заборонено віддалений вхід до системи."
 
-#: rdp/rdpview.cpp:376
+#: rdp/rdpview.cpp:441
 #, kde-format
 msgctxt "@label"
 msgid "“%1” may not log in remotely."
 msgstr "«%1» заборонено віддалений вхід."
 
-#: rdp/rdpview.cpp:378 rdp/rdpview.cpp:468 rdp/rdpview.cpp:476
+#: rdp/rdpview.cpp:443 rdp/rdpview.cpp:536 rdp/rdpview.cpp:544
 #, kde-format
 msgctxt "@title connection error"
 msgid "Access denied"
 msgstr "Доступ заборонено"
 
-#: rdp/rdpview.cpp:381
+#: rdp/rdpview.cpp:446
 #, kde-format
 msgctxt "@label"
 msgid "The gateway or the remote computer refused this login."
 msgstr "Шлюз або віддалений комп'ютер відмовив у вході."
 
-#: rdp/rdpview.cpp:384
+#: rdp/rdpview.cpp:452
 #, kde-format
 msgctxt "@info"
 msgid "Check whether the account is locked, disabled or expired."
@@ -2486,7 +2513,7 @@ msgstr ""
 "Перевірте, чи не є обліковий запис заблокованим, вимкненим або чи не "
 "завершився його строк дії."
 
-#: rdp/rdpview.cpp:386
+#: rdp/rdpview.cpp:454
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2497,7 +2524,7 @@ msgstr ""
 "групи користувачів віддаленої стільниці або увійдіть з іншого облікового "
 "запису."
 
-#: rdp/rdpview.cpp:394
+#: rdp/rdpview.cpp:462
 #, kde-format
 msgctxt "@label"
 msgid "The password must be changed before it can be used to log in remotely."
@@ -2505,13 +2532,13 @@ msgstr ""
 "Пароль має бути змінено до того, як ним можна буде скористатися для "
 "віддаленого входу."
 
-#: rdp/rdpview.cpp:395
+#: rdp/rdpview.cpp:463
 #, kde-format
 msgctxt "@title connection error"
 msgid "Password expired"
 msgstr "Строк дії пароля вичерпано"
 
-#: rdp/rdpview.cpp:397
+#: rdp/rdpview.cpp:465
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2521,37 +2548,37 @@ msgstr ""
 "Змініть пароль, увійшовши до системи локально на віддаленому комп'ютері, або "
 "попросіть адміністратора скинути його."
 
-#: rdp/rdpview.cpp:402
+#: rdp/rdpview.cpp:470
 #, kde-format
 msgctxt "@label"
 msgid "The Kerberos domain controller could not be reached."
 msgstr "Не вдалося встановити зв'язок із контролером домену Kerberos."
 
-#: rdp/rdpview.cpp:404
+#: rdp/rdpview.cpp:472
 #, kde-format
 msgctxt "@info"
 msgid "Check the domain you entered when logging in."
 msgstr "Перевірте домен, до якого ви входите при вході до системи."
 
-#: rdp/rdpview.cpp:405
+#: rdp/rdpview.cpp:473
 #, kde-format
 msgctxt "@info"
 msgid "Connect to the network or VPN of the domain."
 msgstr "Встановіть з'єднання з мережею або VPN домену."
 
-#: rdp/rdpview.cpp:410 spice/spiceview.cpp:901 vnc/vncview.cpp:294
+#: rdp/rdpview.cpp:478 spice/spiceview.cpp:953 vnc/vncview.cpp:294
 #, kde-format
 msgctxt "@label"
 msgid "No IP address was found for this name."
 msgstr "Для цієї назви не знайдено IP-адреси."
 
-#: rdp/rdpview.cpp:421
+#: rdp/rdpview.cpp:489
 #, kde-format
 msgctxt "@label"
 msgid "The server and KRDC could not agree on a security protocol."
 msgstr "Серверу і KRDC не вдалося узгодити протокол захисту."
 
-#: rdp/rdpview.cpp:424
+#: rdp/rdpview.cpp:492
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -2561,7 +2588,7 @@ msgstr ""
 "Не вдалося увійти на шлюз або серверу і KRDC не вдалося узгодити протокол "
 "захисту."
 
-#: rdp/rdpview.cpp:428
+#: rdp/rdpview.cpp:496
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2571,7 +2598,7 @@ msgstr ""
 "Для цього вузла NTLM вимкнено. Увімкніть його у параметрах вузла, якщо немає "
 "доступу до контролера домену."
 
-#: rdp/rdpview.cpp:431
+#: rdp/rdpview.cpp:499
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2581,19 +2608,19 @@ msgstr ""
 "Встановіть для рівня захисту TLS у параметрах вузла значення «Будь-який». "
 "Можливо, на сервері не передбачено вибору рівня."
 
-#: rdp/rdpview.cpp:435
+#: rdp/rdpview.cpp:503
 #, kde-format
 msgctxt "@label"
 msgid "The server requires Network Level Authentication (NLA)."
 msgstr "Сервер потребує розпізнавання на рівні мережі (NLA)."
 
-#: rdp/rdpview.cpp:436
+#: rdp/rdpview.cpp:504
 #, kde-format
 msgctxt "@info"
 msgid "Enable NLA in the security settings for this host."
 msgstr "Увімкніть NLA у параметрах захисту для цього вузла."
 
-#: rdp/rdpview.cpp:454
+#: rdp/rdpview.cpp:522
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2603,13 +2630,13 @@ msgstr ""
 "Перевірте параметри шлюзу віддаленої стільниці для цього вузла. Шлюз «%1» "
 "може бути недосяжним або відмовляти у з'єднанні."
 
-#: rdp/rdpview.cpp:461
+#: rdp/rdpview.cpp:529
 #, kde-format
 msgctxt "@label"
 msgid "The remote computer did not finish starting the session in time."
 msgstr "Віддалений комп'ютер не завершив вчасно започаткування сеансу."
 
-#: rdp/rdpview.cpp:462
+#: rdp/rdpview.cpp:530
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2619,20 +2646,20 @@ msgstr ""
 "Можливо, віддалений комп'ютер не завершив запуск або перевантажений. "
 "Зачекайте, а потім спробуйте встановити з'єднання знову."
 
-#: rdp/rdpview.cpp:467
+#: rdp/rdpview.cpp:535
 #, kde-format
 msgctxt "@label"
 msgid "The gateway does not allow this account to connect to “%1”."
 msgstr "Шлюз забороняє цьому обліковому запису встановлювати з'єднання з «%1»."
 
-#: rdp/rdpview.cpp:470
+#: rdp/rdpview.cpp:538
 #, kde-format
 msgctxt "@info"
 msgid ""
 "Try the full name of the computer. The gateway may only know it by that name."
 msgstr "Назва комп'ютера повністю. Шлюз може знати його за цією назвою."
 
-#: rdp/rdpview.cpp:471
+#: rdp/rdpview.cpp:539
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2642,13 +2669,13 @@ msgstr ""
 "Попросіть адміністратора шлюзу дозволити цьому обліковому запису і "
 "комп'ютеру з'єднання у правила уповноваження його ресурсів."
 
-#: rdp/rdpview.cpp:475
+#: rdp/rdpview.cpp:543
 #, kde-format
 msgctxt "@label"
 msgid "The gateway does not allow this device to connect."
 msgstr "Шлюз забороняє цьому пристрою встановлювати з'єднання."
 
-#: rdp/rdpview.cpp:477
+#: rdp/rdpview.cpp:545
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2658,13 +2685,13 @@ msgstr ""
 "Попросіть адміністратора шлюзу перевірити його правила уповноваження "
 "з'єднання."
 
-#: rdp/rdpview.cpp:480
+#: rdp/rdpview.cpp:548
 #, kde-format
 msgctxt "@label"
 msgid "The gateway could not reach “%1”."
 msgstr "Шлюзу не вдалося зв'язатися з «%1»."
 
-#: rdp/rdpview.cpp:482
+#: rdp/rdpview.cpp:550
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2674,50 +2701,50 @@ msgstr ""
 "Переконайтеся, що віддалений комп'ютер працює, і що шлюз може з ним "
 "зв'язатися за цією назвою."
 
-#: rdp/rdpview.cpp:486
+#: rdp/rdpview.cpp:554
 #, kde-format
 msgctxt "@label"
 msgid "It accepted the connection, then refused to start a session."
 msgstr "З'єднання прийнято, а потім відмовлено у започаткуванні сеансу."
 
-#: rdp/rdpview.cpp:487
+#: rdp/rdpview.cpp:555
 #, kde-format
 msgctxt "@title connection error"
 msgid "Session refused"
 msgstr "У сеансі відмовлено"
 
-#: rdp/rdpview.cpp:491
+#: rdp/rdpview.cpp:559
 #, kde-format
 msgctxt "@label"
 msgid "The server did not accept the options selected for this host."
 msgstr "Сервер відмовився приймати параметри, вибрані для цього вузла."
 
-#: rdp/rdpview.cpp:494
+#: rdp/rdpview.cpp:562
 #, kde-format
 msgctxt "@label"
 msgid "An administrator or another program disconnected this session."
 msgstr "З'єднання з цим сеансом перервано адміністратором або іншою програмою."
 
-#: rdp/rdpview.cpp:497
+#: rdp/rdpview.cpp:565
 #, kde-format
 msgctxt "@label"
 msgid "An administrator signed this session out."
 msgstr "Користувача викинуто з цього сеансу адміністратором."
 
-#: rdp/rdpview.cpp:500
+#: rdp/rdpview.cpp:568
 #, kde-format
 msgctxt "@label"
 msgid "The session was disconnected from the remote computer."
 msgstr "З'єднання з сеансом розірвано з віддаленого комп'ютера."
 
-#: rdp/rdpview.cpp:507
+#: rdp/rdpview.cpp:575
 #, kde-format
 msgctxt "@label"
 msgid "Disconnected because someone else connected to this session."
 msgstr ""
 "З'єднання розірвано, оскільки з цим сеансом встановив з'єднання хтось інший."
 
-#: rdp/rdpview.cpp:508
+#: rdp/rdpview.cpp:576
 #, kde-format
 msgctxt "@info"
 msgid "Reconnect to take the session back. This disconnects the other user."
@@ -2725,13 +2752,13 @@ msgstr ""
 "Повторіть встановлення з'єднання, щоб повернути сеанс. У результаті іншого "
 "користувача буде від'єднано."
 
-#: rdp/rdpview.cpp:511
+#: rdp/rdpview.cpp:579
 #, kde-format
 msgctxt "@label"
 msgid "The session was closed after being idle for too long."
 msgstr "Сеанс було закрито після надто великого періоду бездіяльності."
 
-#: rdp/rdpview.cpp:512
+#: rdp/rdpview.cpp:580
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2741,7 +2768,7 @@ msgstr ""
 "Повторіть спробу з'єднання для продовження роботи. Час бездіяльності "
 "встановлює адміністратор сервера."
 
-#: rdp/rdpview.cpp:526
+#: rdp/rdpview.cpp:594
 #, kde-format
 msgctxt "@label"
 msgid "The remote computer reported a problem while logging in."
@@ -2749,7 +2776,7 @@ msgstr ""
 "Віддаленим комп'ютером повідомлено про проблему під час спроби увійти до "
 "системи."
 
-#: rdp/rdpview.cpp:527
+#: rdp/rdpview.cpp:595
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2759,23 +2786,50 @@ msgstr ""
 "Перевірте, чи може цей користувач входити на віддалений комп'ютер, і що "
 "сеанс не є зайнятим."
 
-#: rdp/rdpview.cpp:906
+#: rdp/rdpview.cpp:974
 #, kde-format
 msgctxt "@title:window"
 msgid "KRDC – Screen %1"
 msgstr "KRDC – екран %1"
 
-#: rdp/rdpviewfactory.cpp:26
+#: rdp/rdpviewfactory.cpp:112
 #, kde-format
 msgid "Connect to a Windows Remote Desktop (RDP)"
 msgstr "З'єднатись з Віддаленою стільницею Windows (RDP)"
 
-#: rdp/rdpviewfactory.cpp:109
+#: rdp/rdpviewfactory.cpp:193
+#, kde-format
+msgctxt "@info %1 is a server address"
+msgid "This file requires a gateway, but its address “%1” is not valid."
+msgstr ""
+
+#: rdp/rdpviewfactory.cpp:194
+#, fuzzy, kde-format
+#| msgid "Gateway"
+msgctxt "@title:window"
+msgid "Invalid Gateway"
+msgstr "Шлюз"
+
+#: rdp/rdpviewfactory.cpp:203
+#, kde-format
+msgctxt "@info %1 is a server address"
+msgid ""
+"This file connects through the gateway “%1”, which could capture your login "
+"details. Continue only if you trust this file."
+msgstr ""
+
+#: rdp/rdpviewfactory.cpp:206
+#, kde-format
+msgctxt "@title:window"
+msgid "Use Gateway from File?"
+msgstr ""
+
+#: rdp/rdpviewfactory.cpp:280
 #, kde-format
 msgid "New RDP Connection…"
 msgstr "Нове з'єднання RDP…"
 
-#: rdp/rdpviewfactory.cpp:120
+#: rdp/rdpviewfactory.cpp:291
 #, kde-format
 msgid ""
 "<html>Enter the address here. Port is optional.<br /><i>Example: "
@@ -2947,18 +3001,38 @@ msgstr "Відтворювати звукові дані з віддаленог
 msgid "Network"
 msgstr "Мережа"
 
-#: spice/spiceview.cpp:830
+#: spice/spiceview.cpp:90
+#, kde-format
+msgctxt "@label"
+msgid "This connection needs its connection file."
+msgstr ""
+
+#: spice/spiceview.cpp:91
+#, kde-format
+msgctxt "@info"
+msgid "Open a new .vv file for this virtual machine."
+msgstr ""
+
+#: spice/spiceview.cpp:879
+#, kde-format
+msgctxt "@info"
+msgid ""
+"The server rejected the password in the connection file, which may have "
+"expired. Open a new file, or enter the password."
+msgstr ""
+
+#: spice/spiceview.cpp:881
 #, kde-format
 msgid "Authentication is required to connect to <b>%1</b>."
 msgstr "Для встановлення з'єднання з <b>%1</b> слід пройти розпізнавання."
 
-#: spice/spiceview.cpp:892
+#: spice/spiceview.cpp:944
 #, kde-format
 msgctxt "@label"
 msgid "The TLS handshake failed."
 msgstr "Помилка при узгодженні зв'язку TLS."
 
-#: spice/spiceview.cpp:893
+#: spice/spiceview.cpp:945
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2968,13 +3042,13 @@ msgstr ""
 "Перевірте, чи приймає сервер TLS лише на окремому порті, і що сертифікат є "
 "довіреним."
 
-#: spice/spiceview.cpp:896
+#: spice/spiceview.cpp:948
 #, kde-format
 msgctxt "@label"
 msgid "The server rejected the SPICE connection."
 msgstr "Сервер відмовив у з'єднанні SPICE."
 
-#: spice/spiceview.cpp:897
+#: spice/spiceview.cpp:949
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2983,7 +3057,7 @@ msgid ""
 msgstr ""
 "Перевірте, чи належить цей порт серверу SPICE з сумісною версією протоколу."
 
-#: spice/spiceview.cpp:907
+#: spice/spiceview.cpp:959
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2993,17 +3067,31 @@ msgstr ""
 "Переконайтеся, що віртуальну машину запущено, і що дисплей SPICE очікує на "
 "дані за цією адресою."
 
-#: spice/spiceviewfactory.cpp:47
+#: spice/spiceviewfactory.cpp:174
+#, kde-format
+msgctxt "@info %1 is a server address"
+msgid ""
+"This file connects through the proxy “%1”, which could intercept the "
+"session. Continue only if you trust this file."
+msgstr ""
+
+#: spice/spiceviewfactory.cpp:176
+#, kde-format
+msgctxt "@title:window"
+msgid "Use Proxy from File?"
+msgstr ""
+
+#: spice/spiceviewfactory.cpp:203
 #, kde-format
 msgid "New SPICE Connection…"
 msgstr "Нове з'єднання SPICE…"
 
-#: spice/spiceviewfactory.cpp:52
+#: spice/spiceviewfactory.cpp:208
 #, kde-format
 msgid "Connect to a SPICE Remote Desktop"
 msgstr "Встановити з'єднання з віддаленою стільницею SPICE"
 
-#: spice/spiceviewfactory.cpp:58
+#: spice/spiceviewfactory.cpp:214
 #, kde-format
 msgid ""
 "<html>Enter the address here.<br /><i>Example: spice://myhost:5900</i></html>"
@@ -3225,9 +3313,6 @@ msgstr ""
 
 #~ msgid "Proxy"
 #~ msgstr "Проксі"
-
-#~ msgid "Gateway"
-#~ msgstr "Шлюз"
 
 #~ msgid "Unable to load connection data from the provided file."
 #~ msgstr "Не вдалося завантажити дані з'єднання з наданого файла."
