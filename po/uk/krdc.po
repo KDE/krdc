@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-06 00:50+0000\n"
-"PO-Revision-Date: 2026-11-04 21:58+0200\n"
+"PO-Revision-Date: 2026-11-06 16:42+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -2388,31 +2388,25 @@ msgstr ""
 msgctxt "@label"
 msgid "Access to the gateway and this system requires a username and password."
 msgstr ""
-"Для доступу до шлюзу і цієї системи потрібен ім'я користувача і пароль."
+"Для доступу до шлюзу і цієї системи потрібне ім'я користувача і пароль."
 
 #: rdp/rdpview.cpp:266
 #, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
-msgstr "Для доступу до цієї системи потрібен ім'я користувача і пароль."
+msgstr "Для доступу до цієї системи потрібне ім'я користувача і пароль."
 
 #: rdp/rdpview.cpp:314
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid ""
-#| "Access to the gateway and this system requires a username and password."
+#, kde-format
 msgctxt "@label %1 is a server address"
 msgid "Access to the gateway %1 requires a username and password."
-msgstr ""
-"Для доступу до шлюзу і цієї системи потрібен ім'я користувача і пароль."
+msgstr "Для доступу до шлюзу %1 потрібне ім'я користувача і пароль."
 
 #: rdp/rdpview.cpp:334
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "The certificate for this system is unknown. Do you wish to continue?"
+#, kde-format
 msgctxt "@label"
 msgid "The certificate for this gateway is unknown. Do you wish to continue?"
-msgstr "Сертифікат для цієї системи є невідомим. Хочете продовжувати?"
+msgstr "Сертифікат для цього шлюзу є невідомим. Хочете продовжувати?"
 
 #: rdp/rdpview.cpp:335
 #, kde-format
@@ -2433,13 +2427,10 @@ msgid "Remember this certificate"
 msgstr "Запам'ятати цей сертифікат"
 
 #: rdp/rdpview.cpp:366
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid ""
-#| "The certificate for this system has changed. Do you wish to continue?"
+#, kde-format
 msgctxt "@label"
 msgid "The certificate for this gateway has changed. Do you wish to continue?"
-msgstr "Сертифікат для цієї системи було змінено. Хочете продовжувати?"
+msgstr "Сертифікат для цього шлюзу було змінено. Хочете продовжувати?"
 
 #: rdp/rdpview.cpp:367
 #, kde-format
@@ -2801,14 +2792,13 @@ msgstr "З'єднатись з Віддаленою стільницею Windows
 #, kde-format
 msgctxt "@info %1 is a server address"
 msgid "This file requires a gateway, but its address “%1” is not valid."
-msgstr ""
+msgstr "Для цього файла потрібен шлюз, але його адреса, «%1», є некоректною."
 
 #: rdp/rdpviewfactory.cpp:194
-#, fuzzy, kde-format
-#| msgid "Gateway"
+#, kde-format
 msgctxt "@title:window"
 msgid "Invalid Gateway"
-msgstr "Шлюз"
+msgstr "Некоректний шлюз"
 
 #: rdp/rdpviewfactory.cpp:203
 #, kde-format
@@ -2817,12 +2807,14 @@ msgid ""
 "This file connects through the gateway “%1”, which could capture your login "
 "details. Continue only if you trust this file."
 msgstr ""
+"Цей файл встановлює з'єднання через шлюз «%1», який може перехопити ваші "
+"облікові дані. Продовжуйте, лише якщо довіряєте вмісту цього файла."
 
 #: rdp/rdpviewfactory.cpp:206
 #, kde-format
 msgctxt "@title:window"
 msgid "Use Gateway from File?"
-msgstr ""
+msgstr "Використати шлюз із файла?"
 
 #: rdp/rdpviewfactory.cpp:280
 #, kde-format
@@ -3005,13 +2997,13 @@ msgstr "Мережа"
 #, kde-format
 msgctxt "@label"
 msgid "This connection needs its connection file."
-msgstr ""
+msgstr "Для цього з'єднання потрібен файл з'єднання."
 
 #: spice/spiceview.cpp:91
 #, kde-format
 msgctxt "@info"
 msgid "Open a new .vv file for this virtual machine."
-msgstr ""
+msgstr "Відкрийте новий файл .vv для цієї віртуальної машини."
 
 #: spice/spiceview.cpp:879
 #, kde-format
@@ -3020,6 +3012,8 @@ msgid ""
 "The server rejected the password in the connection file, which may have "
 "expired. Open a new file, or enter the password."
 msgstr ""
+"Сервер відхилив пароль у файлі з'єднання; можливо, строк його дії вичерпано. "
+"Відкрийте новий файл або введіть пароль."
 
 #: spice/spiceview.cpp:881
 #, kde-format
@@ -3074,12 +3068,14 @@ msgid ""
 "This file connects through the proxy “%1”, which could intercept the "
 "session. Continue only if you trust this file."
 msgstr ""
+"Цей файл встановлює з'єднання через проксі-сервер «%1», який може перехопити "
+"ваш сеанс. Продовжуйте, лише якщо довіряєте вмісту цього файла."
 
 #: spice/spiceviewfactory.cpp:176
 #, kde-format
 msgctxt "@title:window"
 msgid "Use Proxy from File?"
-msgstr ""
+msgstr "Використати проксі з файла?"
 
 #: spice/spiceviewfactory.cpp:203
 #, kde-format

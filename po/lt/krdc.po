@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-06 00:50+0000\n"
-"PO-Revision-Date: 2026-10-30 01:09+0200\n"
+"PO-Revision-Date: 2026-11-06 14:30+0200\n"
 "Last-Translator: Liudas Ališauskas <liudas@akmc.lt>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
 "Language: lt\n"
@@ -1064,7 +1064,8 @@ msgid ""
 "and make sure it is authorized on the server."
 msgstr ""
 "Jeigu naudojate tapatybės nustatymą raktu, tada pridėkite raktą į SSH agentą "
-"naudodami ssh-add ir įsitikinkite, kad jis leistinas serveryje."
+"naudodami ssh-add ir įsitikinkite, kad serveryje jam suteiktos prieigos "
+"teisės."
 
 #: core/remoteview.cpp:719
 #, kde-format
@@ -2377,13 +2378,12 @@ msgstr ""
 "Kontrolinis kodas: %6\n"
 
 #: rdp/rdpview.cpp:265
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Access to this system requires a username and password."
+#, kde-format
 msgctxt "@label"
 msgid "Access to the gateway and this system requires a username and password."
 msgstr ""
-"Prieigai prie šios sistemos reikia nurodyti naudotojo vardą ir slaptažodį."
+"Norint gauti prieigą prie tinklų sietuvo ir šio kompiuterio, reikia nurodyti "
+"naudotojo vardą ir slaptažodį."
 
 #: rdp/rdpview.cpp:266
 #, kde-format
@@ -2393,21 +2393,18 @@ msgstr ""
 "Prieigai prie šios sistemos reikia nurodyti naudotojo vardą ir slaptažodį."
 
 #: rdp/rdpview.cpp:314
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Access to this system requires a username and password."
+#, kde-format
 msgctxt "@label %1 is a server address"
 msgid "Access to the gateway %1 requires a username and password."
 msgstr ""
-"Prieigai prie šios sistemos reikia nurodyti naudotojo vardą ir slaptažodį."
+"Norint gauti prieigą prie tinklų sietuvo %1, reikia nurodyti naudotojo vardą "
+"ir slaptažodį."
 
 #: rdp/rdpview.cpp:334
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "The certificate for this system is unknown. Do you wish to continue?"
+#, kde-format
 msgctxt "@label"
 msgid "The certificate for this gateway is unknown. Do you wish to continue?"
-msgstr "Šios sistemos liudijimas yra nežinomas. Ar norite tęsti?"
+msgstr "Šio tinklų sietuvo liudijimas yra nežinomas. Ar norite tęsti?"
 
 #: rdp/rdpview.cpp:335
 #, kde-format
@@ -2428,13 +2425,10 @@ msgid "Remember this certificate"
 msgstr "Prisiminti šį liudijimą"
 
 #: rdp/rdpview.cpp:366
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid ""
-#| "The certificate for this system has changed. Do you wish to continue?"
+#, kde-format
 msgctxt "@label"
 msgid "The certificate for this gateway has changed. Do you wish to continue?"
-msgstr "Šios sistemos liudijimas pasikeitė. Ar norite tęsti?"
+msgstr "Šio tinklų sietuvo liudijimas pasikeitė. Ar norite tęsti?"
 
 #: rdp/rdpview.cpp:367
 #, kde-format
@@ -2493,15 +2487,12 @@ msgid "Access denied"
 msgstr "Prieiga negalima"
 
 #: rdp/rdpview.cpp:446
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid ""
-#| "Check that no firewall on the remote computer rejects the connection."
+#, kde-format
 msgctxt "@label"
 msgid "The gateway or the remote computer refused this login."
 msgstr ""
-"Patikrinkite, ar jokia nuotoliniame kompiuteryje esanti užkarda neatmeta "
-"ryšio."
+"Tinklų sietuvas ar nuotolinis kompiuteris atsisakė šio prisijungimo prie "
+"paskyros."
 
 #: rdp/rdpview.cpp:452
 #, kde-format
@@ -2578,15 +2569,14 @@ msgstr ""
 "Serveriui ir KRDC nepavyko sutarti dėl to, kokį saugumo protokolą naudoti."
 
 #: rdp/rdpview.cpp:492
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "The server and KRDC could not agree on a security protocol."
+#, kde-format
 msgctxt "@label"
 msgid ""
 "Logging in to the gateway failed, or the server and KRDC could not agree on "
 "a security protocol."
 msgstr ""
-"Serveriui ir KRDC nepavyko sutarti dėl to, kokį saugumo protokolą naudoti."
+"Nepavyko prisijungti prie tinklų sietuvo paskyros, arba serveris ir KRDC "
+"nesutarė dėl saugumo protokolo."
 
 #: rdp/rdpview.cpp:496
 #, kde-format
@@ -2595,6 +2585,8 @@ msgid ""
 "NTLM is turned off for this host. Turn it on in the host settings unless the "
 "domain controller can be reached."
 msgstr ""
+"Šiam mazgui NTLM yra išjungtas. Įjunkite jį mazgo nuostatose, nebent gali "
+"būti pasiektas domeno valdiklis."
 
 #: rdp/rdpview.cpp:499
 #, kde-format
@@ -2650,16 +2642,16 @@ msgstr ""
 #, kde-format
 msgctxt "@label"
 msgid "The gateway does not allow this account to connect to “%1”."
-msgstr ""
+msgstr "Šis tinklų sietuvas neleidžia šiai paskyrai prisijungti prie „%1“."
 
 #: rdp/rdpview.cpp:538
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "Try the IP address of the computer instead of its name."
+#, kde-format
 msgctxt "@info"
 msgid ""
 "Try the full name of the computer. The gateway may only know it by that name."
-msgstr "Vietoj kompiuterio pavadinimo, pabandykite naudoti jo IP adresą."
+msgstr ""
+"Pabandykite visą kompiuterio pavadinimą. Gali būti, kad tinklų sietuvas "
+"pažįsta kompiuterį tik pagal tą pavadinimą."
 
 #: rdp/rdpview.cpp:539
 #, kde-format
@@ -2668,12 +2660,14 @@ msgid ""
 "Ask the administrator of the gateway to allow this account and computer in "
 "its resource authorization policy."
 msgstr ""
+"Paprašykite tinklų sietuvo administratoriaus, kad prieigos teisių suteikimo "
+"ištekliams taisyklėse suteiktų šiai paskyrai ir kompiuteriui leidimą."
 
 #: rdp/rdpview.cpp:543
 #, kde-format
 msgctxt "@label"
 msgid "The gateway does not allow this device to connect."
-msgstr ""
+msgstr "Tinklų sietuvas neleidžia šiam įrenginiui prisijungti."
 
 #: rdp/rdpview.cpp:545
 #, kde-format
@@ -2682,26 +2676,24 @@ msgid ""
 "Ask the administrator of the gateway to check its connection authorization "
 "policy."
 msgstr ""
+"Paprašykite tinklų sietuvo administratoriaus, kad patikrintų prieigos teisių "
+"suteikimo ryšiams taisykles."
 
 #: rdp/rdpview.cpp:548
 #, kde-format
 msgctxt "@label"
 msgid "The gateway could not reach “%1”."
-msgstr ""
+msgstr "Tinklų sietuvui nepavyko pasiekti „%1“."
 
 #: rdp/rdpview.cpp:550
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid ""
-#| "Make sure the remote computer is turned on, awake and connected to the "
-#| "network."
+#, kde-format
 msgctxt "@info"
 msgid ""
 "Make sure the remote computer is running, and that the gateway can reach it "
 "by this name."
 msgstr ""
-"Įsitikinkite, kad nuotolinis kompiuteris yra įjungtas, aktyvioje būsenoje ir "
-"prijungtas prie tinklo."
+"Įsitikinkite, kad nuotolinis kompiuteris veikia ir kad tinklų sietuvas gali "
+"jį pasiekti pagal jo pavadinimą."
 
 #: rdp/rdpview.cpp:554
 #, kde-format
@@ -2802,13 +2794,13 @@ msgstr "Prisijungti prie nuotolinio „Windows“ darbalaukio (RDP)"
 msgctxt "@info %1 is a server address"
 msgid "This file requires a gateway, but its address “%1” is not valid."
 msgstr ""
+"Šis failas reikalauja tinklų sietuvo, bet jo adresas „%1“ nėra tinkamas."
 
 #: rdp/rdpviewfactory.cpp:194
-#, fuzzy, kde-format
-#| msgid "Gateway"
+#, kde-format
 msgctxt "@title:window"
 msgid "Invalid Gateway"
-msgstr "Tinklų sietuvas"
+msgstr "Netinkamas tinklų sietuvas"
 
 #: rdp/rdpviewfactory.cpp:203
 #, kde-format
@@ -2817,12 +2809,15 @@ msgid ""
 "This file connects through the gateway “%1”, which could capture your login "
 "details. Continue only if you trust this file."
 msgstr ""
+"Šis failas prisijungia per tinklų sietuvą „%1“, kuris gali užvaldyti jūsų "
+"prisijungimo prie paskyros duomenis. Tęskite tik tuo atveju, jei pasitikite "
+"šiuo failu."
 
 #: rdp/rdpviewfactory.cpp:206
 #, kde-format
 msgctxt "@title:window"
 msgid "Use Gateway from File?"
-msgstr ""
+msgstr "Naudoti tinklų sietuvą iš failo?"
 
 #: rdp/rdpviewfactory.cpp:280
 #, kde-format
@@ -3004,13 +2999,13 @@ msgstr "Tinklas"
 #, kde-format
 msgctxt "@label"
 msgid "This connection needs its connection file."
-msgstr ""
+msgstr "Šiam ryšiui reikia jo ryšio failo."
 
 #: spice/spiceview.cpp:91
 #, kde-format
 msgctxt "@info"
 msgid "Open a new .vv file for this virtual machine."
-msgstr ""
+msgstr "Atverti šiai virtualiai mašinai naują .vv failą."
 
 #: spice/spiceview.cpp:879
 #, kde-format
@@ -3019,6 +3014,8 @@ msgid ""
 "The server rejected the password in the connection file, which may have "
 "expired. Open a new file, or enter the password."
 msgstr ""
+"Serveris atmetė ryšio faile esantį slaptažodį, kuris, galimai, nebegalioja. "
+"Atverkite naują failą arba įveskite slaptažodį."
 
 #: spice/spiceview.cpp:881
 #, kde-format
@@ -3074,12 +3071,14 @@ msgid ""
 "This file connects through the proxy “%1”, which could intercept the "
 "session. Continue only if you trust this file."
 msgstr ""
+"Šis failas prisijungia per įgaliotąjį serverį „%1“, kuris gali perimti "
+"seansą. Tęskite tik tuo atveju, jei pasitikite šiuo failu."
 
 #: spice/spiceviewfactory.cpp:176
 #, kde-format
 msgctxt "@title:window"
 msgid "Use Proxy from File?"
-msgstr ""
+msgstr "Naudoti įgaliotąjį serverį iš failo?"
 
 #: spice/spiceviewfactory.cpp:203
 #, kde-format
@@ -3226,7 +3225,7 @@ msgstr "Žema kokybė (modemas, ISDN, lėtas internetas)"
 #: vnc/vncview.cpp:262
 #, kde-format
 msgid "Access to the system requires a password."
-msgstr "Prieigai prie kompiuterio reikia nurodyti slaptažodį."
+msgstr "Norint gauti prieigą prie kompiuterio, reikia nurodyti slaptažodį."
 
 #: vnc/vncview.cpp:262
 #, kde-format

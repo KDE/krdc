@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-06 00:50+0000\n"
-"PO-Revision-Date: 2026-11-04 14:04+0100\n"
+"PO-Revision-Date: 2026-11-06 11:23+0100\n"
 "Last-Translator: Libor Filípek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 26.08.2\n"
+"X-Generator: Lokalize 26.08.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2378,23 +2378,16 @@ msgid "Access to this system requires a username and password."
 msgstr "Přístup k tomuto systému vyžaduje přihlašovací jméno a heslo."
 
 #: rdp/rdpview.cpp:314
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid ""
-#| "Access to the gateway and this system requires a username and password."
+#, kde-format
 msgctxt "@label %1 is a server address"
 msgid "Access to the gateway %1 requires a username and password."
-msgstr ""
-"Pro přístup k bráně a k tomuto systému je nutné zadat uživatelské jméno a "
-"heslo."
+msgstr "Pro přístup k bráně %1 je nutné zadat uživatelské jméno a heslo."
 
 #: rdp/rdpview.cpp:334
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "The certificate for this system is unknown. Do you wish to continue?"
+#, kde-format
 msgctxt "@label"
 msgid "The certificate for this gateway is unknown. Do you wish to continue?"
-msgstr "Certifikát pro tento systém není znám. Chcete pokračovat?"
+msgstr "Certifikát této brány není znám. Chcete pokračovat?"
 
 #: rdp/rdpview.cpp:335
 #, kde-format
@@ -2415,13 +2408,10 @@ msgid "Remember this certificate"
 msgstr "Zapamatovat si tento certifikát"
 
 #: rdp/rdpview.cpp:366
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid ""
-#| "The certificate for this system has changed. Do you wish to continue?"
+#, kde-format
 msgctxt "@label"
 msgid "The certificate for this gateway has changed. Do you wish to continue?"
-msgstr "Certifikát pro tento systém se změnil. Chcete pokračovat?"
+msgstr "Certifikát této brány se změnil. Chcete pokračovat?"
 
 #: rdp/rdpview.cpp:367
 #, kde-format
@@ -2778,14 +2768,13 @@ msgstr "Připojit se na vzdálenou plochu Windows (RDP)"
 #, kde-format
 msgctxt "@info %1 is a server address"
 msgid "This file requires a gateway, but its address “%1” is not valid."
-msgstr ""
+msgstr "Tento soubor vyžaduje bránu, ale její adresa \"%1\" není platná."
 
 #: rdp/rdpviewfactory.cpp:194
-#, fuzzy, kde-format
-#| msgid "Gateway"
+#, kde-format
 msgctxt "@title:window"
 msgid "Invalid Gateway"
-msgstr "Brána"
+msgstr "Neplatná brána"
 
 #: rdp/rdpviewfactory.cpp:203
 #, kde-format
@@ -2794,12 +2783,14 @@ msgid ""
 "This file connects through the gateway “%1”, which could capture your login "
 "details. Continue only if you trust this file."
 msgstr ""
+"Tento soubor se připojuje přes bránu \"%1\", která by mohla zachytit vaše "
+"přihlašovací údaje. Pokračujte pouze v případě, že tomuto souboru důvěřujete."
 
 #: rdp/rdpviewfactory.cpp:206
 #, kde-format
 msgctxt "@title:window"
 msgid "Use Gateway from File?"
-msgstr ""
+msgstr "Použít bránu ze souboru?"
 
 #: rdp/rdpviewfactory.cpp:280
 #, kde-format
@@ -2981,13 +2972,13 @@ msgstr "Síť"
 #, kde-format
 msgctxt "@label"
 msgid "This connection needs its connection file."
-msgstr ""
+msgstr "Toto připojení vyžaduje svůj konfigurační soubor."
 
 #: spice/spiceview.cpp:91
 #, kde-format
 msgctxt "@info"
 msgid "Open a new .vv file for this virtual machine."
-msgstr ""
+msgstr "Otevřít nový soubor .vv pro tento virtuální stroj."
 
 #: spice/spiceview.cpp:879
 #, kde-format
@@ -2996,6 +2987,8 @@ msgid ""
 "The server rejected the password in the connection file, which may have "
 "expired. Open a new file, or enter the password."
 msgstr ""
+"Server odmítl heslo uvedené v souboru pro připojení; jeho platnost možná "
+"vypršela. Otevřete nový soubor nebo zadejte heslo."
 
 #: spice/spiceview.cpp:881
 #, kde-format
@@ -3051,12 +3044,14 @@ msgid ""
 "This file connects through the proxy “%1”, which could intercept the "
 "session. Continue only if you trust this file."
 msgstr ""
+"Tento soubor se připojuje přes proxy \"%1\", která by mohla zachytit sezení. "
+"Pokračujte pouze v případě, že tomuto souboru důvěřujete."
 
 #: spice/spiceviewfactory.cpp:176
 #, kde-format
 msgctxt "@title:window"
 msgid "Use Proxy from File?"
-msgstr ""
+msgstr "Použít proxy ze souboru?"
 
 #: spice/spiceviewfactory.cpp:203
 #, kde-format
