@@ -1102,13 +1102,26 @@ as Authors, publish date, the abstract, and Keywords -->
 > connection.rdp</userinput
 ></screen>
 <para
->Això llegeix l'adreça del servidor, el nom d'usuari, el domini i un camp de contrasenya si hi és present; no importa tots els paràmetres admesos per altres clients RDP. Usa el diàleg de configuració del servidor per a altres opcions. Executeu <userinput
+>Això llegeix l'adreça del servidor, el nom d'usuari, el domini i un camp de contrasenya si hi és present. Per a un servidor que no té cap configuració desada, també llegeix la mida de la pantalla, l'escalat i la configuració del so, si voleu desactivar la compartició del porta-retalls i una passarel·la que sempre s'utilitza, la qual cosa &krdc; us demana que accepteu primer. Els paràmetres que ja s'han desat per al servidor es mantenen. Per seguretat, &krdc; no importa carpetes compartides, dispositius compartits o paràmetres de seguretat des del fitxer. Useu el diàleg de configuració del servidor per a altres opcions. Executeu <userinput
 ><command
 >krdc</command
 > <option
 >--help</option
 ></userinput
 > per a l'ajuda de la línia d'ordres.</para>
+
+<para
+>El &krdc; també pot obrir una connexió SPICE des d'un fitxer de Visualitzador virtual <filename
+>.vv</filename
+>, com un de baixat des de Proxmox VE:</para>
+<screen
+><userinput
+><command
+>krdc</command
+> connection.vv</userinput
+></screen>
+<para
+>Això llegeix l'adreça del servidor, els ports, la contrasenya, el certificat i el servidor intermediari. Es mantenen només mentre la pestanya de la connexió està oberta i no es desen, de manera que per a connectar-se de nou després de tancar-la, obriu un fitxer nou. El &krdc; us demana que accepteu un servidor intermediari cada vegada abans d'utilitzar-lo i no envia mai cap contrasenya desada en una connexió similar. Els altres paràmetres del fitxer s'ignoren, i el fitxer no s'elimina, encara que ho demani.</para>
 </sect1>
 </chapter>
 
