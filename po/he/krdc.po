@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-06 00:50+0000\n"
-"PO-Revision-Date: 2026-11-05 14:02+0200\n"
+"PO-Revision-Date: 2026-11-07 22:08+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -341,18 +341,16 @@ msgid "Diagnostic information copied to the clipboard"
 msgstr ""
 
 #: connectionstatuswidget.cpp:257
-#, fuzzy, kde-format
-#| msgid "Connecting to %1"
+#, kde-format
 msgctxt "@title"
 msgid "Connecting to %1"
-msgstr "חיבור אל %1"
+msgstr "מתחבר אל %1"
 
 #: connectionstatuswidget.cpp:258
-#, fuzzy, kde-format
-#| msgid "Connecting to %1"
+#, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Connecting to %1"
-msgstr "חיבור אל %1"
+msgstr "מתחבר אל %1"
 
 #: connectionstatuswidget.cpp:274
 #, kde-format
@@ -373,11 +371,10 @@ msgid "Looking up the server address"
 msgstr ""
 
 #: connectionstatuswidget.cpp:408
-#, fuzzy, kde-format
-#| msgid "Connect via SSH tunnel"
+#, kde-format
 msgctxt "@info connection step"
 msgid "Opening the SSH tunnel"
-msgstr "התחברות דרך תעלת SSH"
+msgstr "תעלת SSH נפתחת"
 
 #: connectionstatuswidget.cpp:410
 #, kde-format
@@ -386,11 +383,10 @@ msgid "Opening a network connection"
 msgstr ""
 
 #: connectionstatuswidget.cpp:412
-#, fuzzy, kde-format
-#| msgid "Preparing connection to %1"
+#, kde-format
 msgctxt "@info connection step"
 msgid "Securing the connection"
-msgstr "בהכנות להתחברות אל %1"
+msgstr "החיבור מאובטח"
 
 #: connectionstatuswidget.cpp:414
 #, kde-format
@@ -399,18 +395,16 @@ msgid "Logging in"
 msgstr "מתבצעת כניסה"
 
 #: connectionstatuswidget.cpp:416
-#, fuzzy, kde-format
-#| msgid "Prevent remote session lock"
+#, kde-format
 msgctxt "@info connection step"
 msgid "Starting the remote session"
-msgstr "מניעת נעילת הפעלה מרוחקת"
+msgstr "ההפעלה המרוחקת מופעלת"
 
 #: connectionstatuswidget.cpp:418
-#, fuzzy, kde-format
-#| msgid "Reconnecting."
+#, kde-format
 msgctxt "@info connection step"
 msgid "Reconnecting"
-msgstr "התחברות מחדש."
+msgstr "התחברות מחדש"
 
 #: connectionstatuswidget.cpp:428
 #, kde-format
@@ -419,11 +413,10 @@ msgid "Server address resolved"
 msgstr ""
 
 #: connectionstatuswidget.cpp:430
-#, fuzzy, kde-format
-#| msgid "SSH tunnel options"
+#, kde-format
 msgctxt "@info connection step"
 msgid "SSH tunnel established"
-msgstr "אפשרויות תעלת SSH"
+msgstr "תעלת ה־SSH הוקמה"
 
 #: connectionstatuswidget.cpp:432
 #, kde-format
@@ -432,12 +425,10 @@ msgid "Network connection established"
 msgstr ""
 
 #: connectionstatuswidget.cpp:434
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Connection Refused"
+#, kde-format
 msgctxt "@info connection step"
 msgid "Connection secured"
-msgstr "החיבור סורב"
+msgstr "החיבור אובטח"
 
 #: connectionstatuswidget.cpp:437
 #, kde-format
@@ -446,18 +437,16 @@ msgid "Access granted"
 msgstr ""
 
 #: connectionstatuswidget.cpp:439
-#, fuzzy, kde-format
-#| msgid "KDE Remote Desktop Client started"
+#, kde-format
 msgctxt "@info connection step"
 msgid "Remote session started"
-msgstr "לקוח שולחן עבודה מבית KDE הופעל"
+msgstr "ההפעלה המרוחקת הופעלה"
 
 #: connectionstatuswidget.cpp:449
-#, fuzzy, kde-format
-#| msgid "Connected to %1"
+#, kde-format
 msgctxt "@info"
 msgid "Resolved to %1."
-msgstr "התחברת אל %1"
+msgstr "נפתר לכדי %1."
 
 #: connectionstatuswidget.cpp:461
 #, kde-format
@@ -472,32 +461,28 @@ msgid "%1 resolved to %2"
 msgstr ""
 
 #: connectionstatuswidget.cpp:498
-#, fuzzy, kde-format
-#| msgid "Connect to a VNC Remote Desktop"
+#, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Connecting to the remote desktop service"
 msgstr "התחברות לשולחן עבודה מרוחק דרך VNC"
 
 #: connectionstatuswidget.cpp:505
-#, fuzzy, kde-format
-#| msgid "Authenticating at %1"
+#, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Authenticating"
-msgstr "אימות מול %1"
+msgstr "מתבצע אימות"
 
 #: connectionstatuswidget.cpp:509
-#, fuzzy, kde-format
-#| msgid "Prevent remote session lock"
+#, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Preparing the session"
-msgstr "מניעת נעילת הפעלה מרוחקת"
+msgstr "ההפעלה בהכנה"
 
 #: connectionstatuswidget.cpp:513
-#, fuzzy, kde-format
-#| msgid "Connected."
+#, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Connected"
-msgstr "התחברת."
+msgstr "התחברת"
 
 #: connectionstatuswidget.cpp:546
 #, kde-format
@@ -506,11 +491,10 @@ msgid "Connection dropped, reconnecting: %1"
 msgstr ""
 
 #: connectionstatuswidget.cpp:546
-#, fuzzy, kde-format
-#| msgid "Reconnected."
+#, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Reconnected"
-msgstr "התחברת מחדש."
+msgstr "התחברת מחדש"
 
 #: connectionstatuswidget.cpp:559
 #, kde-format
@@ -519,18 +503,16 @@ msgid "KRDC keeps trying until the connection is back."
 msgstr ""
 
 #: connectionstatuswidget.cpp:563
-#, fuzzy, kde-format
-#| msgid "Connecting to %1"
+#, kde-format
 msgctxt "@title"
 msgid "Connection to %1 interrupted"
-msgstr "חיבור אל %1"
+msgstr "החיבור אל %1 נקטע"
 
 #: connectionstatuswidget.cpp:565
-#, fuzzy, kde-format
-#| msgid "Disconnect"
+#, kde-format
 msgctxt "@action:button"
 msgid "Disconnect"
-msgstr "ניתוק"
+msgstr "התנתקות"
 
 #: connectionstatuswidget.cpp:575
 #, kde-format
@@ -545,40 +527,34 @@ msgid "Session with %1 ended"
 msgstr ""
 
 #: connectionstatuswidget.cpp:658
-#, fuzzy, kde-format
-#| msgid "Connecting to %1"
+#, kde-format
 msgctxt "@title"
 msgid "Connection to %1 lost"
-msgstr "חיבור אל %1"
+msgstr "החיבור אל %1 אבד"
 
 #: connectionstatuswidget.cpp:660
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Could not Connect"
+#, kde-format
 msgctxt "@title"
 msgid "Could not connect to %1"
-msgstr "לא ניתן להתחבר"
+msgstr "לא ניתן להתחבר אל %1"
 
 #: connectionstatuswidget.cpp:666
-#, fuzzy, kde-format
-#| msgid "Reconnected."
+#, kde-format
 msgctxt "@action:button"
 msgid "Reconnect"
-msgstr "התחברת מחדש."
+msgstr "התחברות מחדש"
 
 #: connectionstatuswidget.cpp:666
-#, fuzzy, kde-format
-#| msgid "Connection"
+#, kde-format
 msgctxt "@action:button"
 msgid "Connect Again"
-msgstr "חיבור"
+msgstr "להתחבר שוב"
 
 #: connectionstatuswidget.cpp:671
-#, fuzzy, kde-format
-#| msgid "Goto Address"
+#, kde-format
 msgctxt "@action:button"
 msgid "Edit Address"
-msgstr "מעבר לכתובת"
+msgstr "עריכת כתובת"
 
 #: connectionstatuswidget.cpp:674
 #, kde-format
@@ -587,8 +563,7 @@ msgid "Edit Host Settings…"
 msgstr ""
 
 #: connectionstatuswidget.cpp:676
-#, fuzzy, kde-format
-#| msgid "Close Tab"
+#, kde-format
 msgctxt "@action:button"
 msgid "Close Tab"
 msgstr "סגירת לשונית"
@@ -606,12 +581,10 @@ msgid "Hide details"
 msgstr ""
 
 #: connectionstatuswidget.cpp:719
-#, fuzzy, kde-format
-#| msgctxt "EMAIL OF TRANSLATORS"
-#| msgid "Your emails"
+#, kde-format
 msgctxt "@action:button"
 msgid "Show details"
-msgstr "kde-l10n-he@kde.org"
+msgstr "הצגת פרטים"
 
 #: core/connectionerror.cpp:15
 #, kde-format
@@ -626,19 +599,16 @@ msgid "Looking up the host name"
 msgstr ""
 
 #: core/connectionerror.cpp:19
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Lost connection to the server."
+#, kde-format
 msgctxt "@info connection stage"
 msgid "Connecting to the server"
-msgstr "החיבור האחרון לשרת."
+msgstr "מתבצע חיבור לשרת"
 
 #: core/connectionerror.cpp:21
-#, fuzzy, kde-format
-#| msgid "Preparing connection to %1"
+#, kde-format
 msgctxt "@info connection stage"
 msgid "Securing the connection"
-msgstr "בהכנות להתחברות אל %1"
+msgstr "החיבור מאובטח"
 
 #: core/connectionerror.cpp:23
 #, kde-format
@@ -647,19 +617,16 @@ msgid "Logging in"
 msgstr ""
 
 #: core/connectionerror.cpp:25
-#, fuzzy, kde-format
-#| msgid "Prevent remote session lock"
+#, kde-format
 msgctxt "@info connection stage"
 msgid "Starting the remote session"
-msgstr "מניעת נעילת הפעלה מרוחקת"
+msgstr "ההפעלה המרוחקת מופעלת"
 
 #: core/connectionerror.cpp:27
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Connection Refused"
+#, kde-format
 msgctxt "@info connection stage"
 msgid "Connection interrupted"
-msgstr "החיבור סורב"
+msgstr "החיבור נקטע"
 
 #: core/connectionerror.cpp:29
 #, kde-format
@@ -674,11 +641,10 @@ msgid "Unknown"
 msgstr ""
 
 #: core/connectionerror.cpp:45
-#, fuzzy, kde-format
-#| msgid "SSH Tunnel failure"
+#, kde-format
 msgctxt "@title connection error"
 msgid "SSH tunnel failed"
-msgstr "שגיאת תעלת SSH"
+msgstr "תעלת SSH נכשלה"
 
 #: core/connectionerror.cpp:47
 #, kde-format
@@ -708,11 +674,10 @@ msgid "Make sure the SSH server allows port forwarding."
 msgstr ""
 
 #: core/connectionerror.cpp:54
-#, fuzzy, kde-format
-#| msgid "Server not found."
+#, kde-format
 msgctxt "@title connection error"
 msgid "Server not found"
-msgstr "השרת לא נמצא."
+msgstr "השרת לא נמצא"
 
 #: core/connectionerror.cpp:56
 #, kde-format
@@ -733,12 +698,10 @@ msgid "Try the IP address of the computer instead of its name."
 msgstr ""
 
 #: core/connectionerror.cpp:63
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Server not Found"
+#, kde-format
 msgctxt "@title connection error"
 msgid "Server not reachable"
-msgstr "השרת לא נמצא"
+msgstr "השרת לא נגיש"
 
 #: core/connectionerror.cpp:65 core/connectionerror.cpp:145
 #, kde-format
@@ -769,12 +732,10 @@ msgid "Check that no firewall blocks the connection."
 msgstr ""
 
 #: core/connectionerror.cpp:73
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Connection Failed"
+#, kde-format
 msgctxt "@title connection error"
 msgid "Secure connection failed"
-msgstr "החיבור נכשל"
+msgstr "החיבור המאובטח נכשל"
 
 #: core/connectionerror.cpp:75
 #, kde-format
@@ -792,11 +753,10 @@ msgid ""
 msgstr ""
 
 #: core/connectionerror.cpp:80
-#, fuzzy, kde-format
-#| msgid "VNC authentication failed."
+#, kde-format
 msgctxt "@title connection error"
 msgid "Authentication failed"
-msgstr "אימות VNC נכשל."
+msgstr "האימות נכשל."
 
 #: core/connectionerror.cpp:82
 #, kde-format
@@ -861,12 +821,10 @@ msgid ""
 msgstr ""
 
 #: core/connectionerror.cpp:104
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Could not find the server."
+#, kde-format
 msgctxt "@title connection error"
 msgid "Closed by the server"
-msgstr "לא ניתן למצוא את השרת."
+msgstr "נסגר על ידי השרת"
 
 #: core/connectionerror.cpp:109
 #, kde-format
@@ -881,11 +839,10 @@ msgid "It accepted the connection, then closed it before the session started."
 msgstr ""
 
 #: core/connectionerror.cpp:119
-#, fuzzy, kde-format
-#| msgid "VNC server closed connection."
+#, kde-format
 msgctxt "@title connection error"
 msgid "Server closed the connection"
-msgstr "שרת ה־VNC סגר את החיבור."
+msgstr "השרת סגר את החיבור"
 
 #: core/connectionerror.cpp:121
 #, kde-format
@@ -910,9 +867,7 @@ msgid ""
 msgstr ""
 
 #: core/connectionerror.cpp:133
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Connection Refused"
+#, kde-format
 msgctxt "@title connection error"
 msgid "Connection refused"
 msgstr "החיבור סורב"
@@ -924,12 +879,10 @@ msgid "Check that no firewall on the remote computer rejects the connection."
 msgstr ""
 
 #: core/connectionerror.cpp:143
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Server not Found"
+#, kde-format
 msgctxt "@title connection error"
 msgid "Server not responding"
-msgstr "השרת לא נמצא"
+msgstr "השרת לא מגיב"
 
 #: core/connectionerror.cpp:147 core/connectionerror.cpp:156
 #, kde-format
@@ -938,12 +891,10 @@ msgid "Check that the address is right."
 msgstr ""
 
 #: core/connectionerror.cpp:153
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Could not connect to the server."
+#, kde-format
 msgctxt "@title connection error"
 msgid "No route to the server"
-msgstr "לא ניתן להתחבר לשרת."
+msgstr "אין ניתוב לשרת"
 
 #: core/connectionerror.cpp:155
 #, kde-format
@@ -952,11 +903,10 @@ msgid "Connect to the network or VPN the remote computer is on."
 msgstr ""
 
 #: core/hostpreferences.cpp:308
-#, fuzzy, kde-format
-#| msgid "Connected to %1"
+#, kde-format
 msgctxt "@title:window %1 is a host name"
 msgid "Connect to %1"
-msgstr "התחברת אל %1"
+msgstr "התחברות אל %1"
 
 #: core/hostpreferences.cpp:315
 #, kde-format
@@ -965,8 +915,7 @@ msgid ""
 msgstr "נא לשים לב שההגדרה הזאת תחול רק בחיבור הבא למארח הזה."
 
 #: core/hostpreferences.cpp:338
-#, fuzzy, kde-format
-#| msgid "Connect"
+#, kde-format
 msgctxt "@action:button"
 msgid "Connect"
 msgstr "התחברות"
@@ -994,11 +943,10 @@ msgid "Show this dialog again for this host"
 msgstr "להציג את החלונית הזאת שוב למארח הזה"
 
 #: core/hostpreferences.cpp:428
-#, fuzzy, kde-format
-#| msgid "Settings"
+#, kde-format
 msgctxt "@action:button"
 msgid "All Settings…"
-msgstr "הגדרות"
+msgstr "כל הגדרות…"
 
 #. i18n: ectx: label, entry (OpenSessions), group (General)
 #: core/krdc.kcfg:16
@@ -1024,12 +972,10 @@ msgid "SSH server not reachable"
 msgstr ""
 
 #: core/remoteview.cpp:705
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "The server refused the connection request."
+#, kde-format
 msgctxt "@label"
 msgid "The SSH server did not accept a connection on port %1."
-msgstr "השרת סירב לבקשת החיבור."
+msgstr "שרת ה־SSH לא קיבל את החיבור בפתחה %1."
 
 #: core/remoteview.cpp:707
 #, kde-format
@@ -1051,11 +997,10 @@ msgid "Check that no firewall blocks SSH connections."
 msgstr ""
 
 #: core/remoteview.cpp:713
-#, fuzzy, kde-format
-#| msgid "SSH Tunnel failure"
+#, kde-format
 msgctxt "@title connection error"
 msgid "SSH login failed"
-msgstr "שגיאת תעלת SSH"
+msgstr "כניסת SSH נכשלה"
 
 #: core/remoteview.cpp:714
 #, kde-format
@@ -1783,10 +1728,9 @@ msgstr "רמת צבע נמוכה (8 סיביות)"
 #. i18n: ectx: property (text), widget (QLabel, localResourcesHeading)
 #: rdp/rdppreferences.ui:448 spice/spicepreferences.ui:242
 #: vnc/vncpreferences.ui:237
-#, fuzzy, kde-format
-#| msgid "Local Cursor"
+#, kde-format
 msgid "Local Resources"
-msgstr "סמן מקומי"
+msgstr "משאבים מקומיים"
 
 #. i18n: ectx: property (text), widget (QLabel, soundLabel)
 #: rdp/rdppreferences.ui:454
@@ -1831,10 +1775,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:530
-#, fuzzy, kde-format
-#| msgid "On This Computer"
+#, kde-format
 msgid "Same as This Computer"
-msgstr "במחשב הזה"
+msgstr "כמו המחשב הזה"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:535
@@ -2060,10 +2003,9 @@ msgstr "טורקית (tr)"
 
 #. i18n: ectx: property (text), widget (QLabel, shareMediaLabel)
 #: rdp/rdppreferences.ui:723
-#, fuzzy, kde-format
-#| msgid "Share Media:"
+#, kde-format
 msgid "Shared folder:"
-msgstr "שיתוף מדיה:"
+msgstr "תיקייה משותפת:"
 
 #. i18n: ectx: property (toolTip), widget (SharedFolderField, kcfg_ShareMedia)
 #: rdp/rdppreferences.ui:739
@@ -2073,10 +2015,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, shareSmartcardLabel)
 #: rdp/rdppreferences.ui:746
-#, fuzzy, kde-format
-#| msgid "Share Smartcard:"
+#, kde-format
 msgid "Shared smartcard:"
-msgstr "שיתוף כרטיס חכם:"
+msgstr "כרטיס חכם משותף:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, connectionTab)
 #: rdp/rdppreferences.ui:760
@@ -2086,17 +2027,15 @@ msgstr "חיבור"
 
 #. i18n: ectx: property (text), widget (QLabel, sessionLabel)
 #: rdp/rdppreferences.ui:766
-#, fuzzy, kde-format
-#| msgid "Sessions"
+#, kde-format
 msgid "Session:"
-msgstr "הפעלות"
+msgstr "הפעלה:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ConsoleMode)
 #: rdp/rdppreferences.ui:773
-#, fuzzy, kde-format
-#| msgid "Admin (or console) session"
+#, kde-format
 msgid "Connect to the console (admin) session"
-msgstr "הפעלת ניהול (או מסוף)"
+msgstr "התחברות להפעלת המסוף (ניהול)"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_ConsoleMode)
 #: rdp/rdppreferences.ui:776
@@ -2108,10 +2047,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_PreventSessionLock)
 #: rdp/rdppreferences.ui:783
-#, fuzzy, kde-format
-#| msgid "Prevent remote session lock"
+#, kde-format
 msgid "Keep the remote session from locking"
-msgstr "מניעת נעילת הפעלה מרוחקת"
+msgstr "למנוע מההפעלה המרוחק להינעל"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_PreventSessionLock)
 #: rdp/rdppreferences.ui:786
@@ -2123,10 +2061,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseGateway)
 #: rdp/rdppreferences.ui:812
-#, fuzzy, kde-format
-#| msgid "Connect to a VNC Remote Desktop"
+#, kde-format
 msgid "Connect through a Remote Desktop Gateway"
-msgstr "התחברות לשולחן עבודה מרוחק דרך VNC"
+msgstr "חיבור דרך שער שולחנות עבודה מרוחקים"
 
 #. i18n: ectx: property (text), widget (QLabel, gServerLabel)
 #. i18n: ectx: property (text), widget (QLabel, pHostLabel)
@@ -2183,11 +2120,9 @@ msgstr "RPC"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseProxy)
 #: rdp/rdppreferences.ui:898
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Lost connection to the server."
+#, kde-format
 msgid "Connect through a proxy server"
-msgstr "החיבור האחרון לשרת."
+msgstr "חיבור דרך שרת מתווך"
 
 #. i18n: ectx: property (text), widget (QLabel, protocolLabel)
 #: rdp/rdppreferences.ui:939
@@ -2209,10 +2144,9 @@ msgstr "אבטחה"
 
 #. i18n: ectx: property (text), widget (QLabel, protocolsLabel)
 #: rdp/rdppreferences.ui:991
-#, fuzzy, kde-format
-#| msgid "Protocol:"
+#, kde-format
 msgid "Protocols:"
-msgstr "פרוטוקול:"
+msgstr "פרוטוקולים:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityNLA)
 #: rdp/rdppreferences.ui:1000
@@ -2280,10 +2214,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:1075
-#, fuzzy, kde-format
-#| msgid "any"
+#, kde-format
 msgid "Any"
-msgstr "כלשהו"
+msgstr "כלשהם"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:1080
@@ -2317,10 +2250,9 @@ msgstr "256 סיביות"
 
 #. i18n: ectx: property (text), widget (QLabel, authPkgListLabel)
 #: rdp/rdppreferences.ui:1108
-#, fuzzy, kde-format
-#| msgid "Authentication Package List:"
+#, kde-format
 msgid "Authentication packages:"
-msgstr "רשימת חבילות אימות:"
+msgstr "חבילות אימות:"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, authPkgListLabel)
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_AuthPkgKerberos)
@@ -2370,12 +2302,10 @@ msgstr ""
 "טביעת אצבע: %6\n"
 
 #: rdp/rdpview.cpp:265
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Access to this system requires a username and password."
+#, kde-format
 msgctxt "@label"
 msgid "Access to the gateway and this system requires a username and password."
-msgstr "הגישה למערכת דורשת שם משתמש וסיסמה."
+msgstr "הגישה לשער הגישה ולמערכת הזאת דורשת שם משתמש וסיסמה."
 
 #: rdp/rdpview.cpp:266
 #, kde-format
@@ -2384,20 +2314,16 @@ msgid "Access to this system requires a username and password."
 msgstr "הגישה למערכת דורשת שם משתמש וסיסמה."
 
 #: rdp/rdpview.cpp:314
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Access to this system requires a username and password."
+#, kde-format
 msgctxt "@label %1 is a server address"
 msgid "Access to the gateway %1 requires a username and password."
-msgstr "הגישה למערכת דורשת שם משתמש וסיסמה."
+msgstr "הגישה לשער הגישה %1 דורשת שם משתמש וסיסמה."
 
 #: rdp/rdpview.cpp:334
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "The certificate for this system is unknown. Do you wish to continue?"
+#, kde-format
 msgctxt "@label"
 msgid "The certificate for this gateway is unknown. Do you wish to continue?"
-msgstr "האישור של המערכת הזה לא מוכר. להמשיך?"
+msgstr "האישור של שער הגישה הזה הזה לא מוכר. להמשיך?"
 
 #: rdp/rdpview.cpp:335
 #, kde-format
@@ -2418,13 +2344,10 @@ msgid "Remember this certificate"
 msgstr "שמירת האישור הזה"
 
 #: rdp/rdpview.cpp:366
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid ""
-#| "The certificate for this system has changed. Do you wish to continue?"
+#, kde-format
 msgctxt "@label"
 msgid "The certificate for this gateway has changed. Do you wish to continue?"
-msgstr "אישור המערכת השתנה. להמשיך?"
+msgstr "אישור שער הגישה השתנה. להמשיך?"
 
 #: rdp/rdpview.cpp:367
 #, kde-format
@@ -2509,12 +2432,10 @@ msgid "The password must be changed before it can be used to log in remotely."
 msgstr ""
 
 #: rdp/rdpview.cpp:463
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Password Problems"
+#, kde-format
 msgctxt "@title connection error"
 msgid "Password expired"
-msgstr "בעיות סיסמה"
+msgstr "הסיסמה פגה"
 
 #: rdp/rdpview.cpp:465
 #, kde-format
@@ -2668,11 +2589,10 @@ msgid "It accepted the connection, then refused to start a session."
 msgstr ""
 
 #: rdp/rdpview.cpp:555
-#, fuzzy, kde-format
-#| msgid "Sessions"
+#, kde-format
 msgctxt "@title connection error"
 msgid "Session refused"
-msgstr "הפעלות"
+msgstr "ההפעלה סורבה"
 
 #: rdp/rdpview.cpp:559
 #, kde-format
@@ -2756,11 +2676,10 @@ msgid "This file requires a gateway, but its address “%1” is not valid."
 msgstr ""
 
 #: rdp/rdpviewfactory.cpp:194
-#, fuzzy, kde-format
-#| msgid "Gateway"
+#, kde-format
 msgctxt "@title:window"
 msgid "Invalid Gateway"
-msgstr "שער גישה"
+msgstr "שער גישה שגוי"
 
 #: rdp/rdpviewfactory.cpp:203
 #, kde-format
@@ -2774,7 +2693,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Use Gateway from File?"
-msgstr ""
+msgstr "להשתמש בשער גישה מקובץ?"
 
 #: rdp/rdpviewfactory.cpp:280
 #, kde-format
@@ -2794,13 +2713,13 @@ msgstr ""
 #, kde-format
 msgctxt "@item:inlistbox shared folder"
 msgid "Not shared"
-msgstr ""
+msgstr "לא משותף"
 
 #: rdp/sharedfolderfield.cpp:20
 #, kde-format
 msgctxt "@item:inlistbox shared folder"
 msgid "Removable drives"
-msgstr ""
+msgstr "כוננים נשלפים"
 
 #: rdp/sharedfolderfield.cpp:22
 #, kde-format
@@ -2814,37 +2733,37 @@ msgstr ""
 #, kde-format
 msgctxt "@item:inlistbox shared folder"
 msgid "Downloads"
-msgstr ""
+msgstr "הורדות"
 
 #: rdp/sharedfolderfield.cpp:34
 #, kde-format
 msgctxt "@item:inlistbox shared folder"
 msgid "Documents"
-msgstr ""
+msgstr "מסמכים"
 
 #: rdp/sharedfolderfield.cpp:36
 #, kde-format
 msgctxt "@item:inlistbox shared folder"
 msgid "Other Folder…"
-msgstr ""
+msgstr "תיקייה אחרת…"
 
 #: rdp/sharedfolderfield.cpp:65
 #, kde-format
 msgctxt "@item:inlistbox shared folder, %1 a stored value"
 msgid "%1 (not supported)"
-msgstr ""
+msgstr "%1 (לא נתמך)"
 
 #: rdp/sharedfolderfield.cpp:69
 #, kde-format
 msgctxt "@item:inlistbox shared folder, %1 its name, %2 its path"
 msgid "%1 (%2)"
-msgstr ""
+msgstr "%1 (%2)"
 
 #: rdp/sharedfolderfield.cpp:102
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose Shared Folder"
-msgstr ""
+msgstr "בחירת תיקייה משותפת"
 
 #: remotedesktopsmodel.cpp:112
 #, kde-format
@@ -2948,19 +2867,19 @@ msgstr "לנגן שמע מהמארח המרוחק במכונה הזאת."
 #: spice/spicepreferences.ui:295 vnc/vncpreferences.ui:275
 #, kde-format
 msgid "Network"
-msgstr ""
+msgstr "רשת"
 
 #: spice/spiceview.cpp:90
 #, kde-format
 msgctxt "@label"
 msgid "This connection needs its connection file."
-msgstr ""
+msgstr "החיבור הזה צריך את קובץ החיבור שלו."
 
 #: spice/spiceview.cpp:91
 #, kde-format
 msgctxt "@info"
 msgid "Open a new .vv file for this virtual machine."
-msgstr ""
+msgstr "פתיחת קובץ ‎.vv חדש למכונה הווירטואלית הזאת."
 
 #: spice/spiceview.cpp:879
 #, kde-format
@@ -2969,6 +2888,8 @@ msgid ""
 "The server rejected the password in the connection file, which may have "
 "expired. Open a new file, or enter the password."
 msgstr ""
+"השרת דחה את הסיסמה בקובץ החיבור, שכנראה פגה. יש לפתוח קובץ חדש, או למלא את "
+"הסיסמה."
 
 #: spice/spiceview.cpp:881
 #, kde-format
@@ -2979,7 +2900,7 @@ msgstr "נדרש אימות כדי להתחבר אל <b>%1</b>."
 #, kde-format
 msgctxt "@label"
 msgid "The TLS handshake failed."
-msgstr ""
+msgstr "לחיצת יד ה־TLS נכשלה."
 
 #: spice/spiceview.cpp:945
 #, kde-format
@@ -2987,15 +2908,13 @@ msgctxt "@info"
 msgid ""
 "Check whether the server accepts TLS only on a separate port, and that its "
 "certificate is trusted."
-msgstr ""
+msgstr "לבדוק האם השרת מקבל TLS בלבד על פתחה נפרדת ושהאישור שלו אמין."
 
 #: spice/spiceview.cpp:948
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "The server refused the connection request."
+#, kde-format
 msgctxt "@label"
 msgid "The server rejected the SPICE connection."
-msgstr "השרת סירב לבקשת החיבור."
+msgstr "השרת סירב לחיבור ה־SPICE."
 
 #: spice/spiceview.cpp:949
 #, kde-format
@@ -3003,7 +2922,7 @@ msgctxt "@info"
 msgid ""
 "Check that this port belongs to a SPICE server with a compatible protocol "
 "version."
-msgstr ""
+msgstr "נא לבדוק שהפתחה הזאת שייכת לשרת SPICE עם גרסת פרוטוקול נתמכת."
 
 #: spice/spiceview.cpp:959
 #, kde-format
@@ -3012,6 +2931,7 @@ msgid ""
 "Make sure the virtual machine is running, and its SPICE display listens on "
 "this address."
 msgstr ""
+"נא לוודא שהמכונה הווירטואלית רצה ושתצוגת ה־SPICE שלה מאזינה בכתובת הזאת."
 
 #: spice/spiceviewfactory.cpp:174
 #, kde-format
@@ -3020,12 +2940,14 @@ msgid ""
 "This file connects through the proxy “%1”, which could intercept the "
 "session. Continue only if you trust this file."
 msgstr ""
+"הקובץ מתחבר דרך המתווך „%1”, שיכול ליירט את ההפעלה. יש להמשיך רק אם הקובץ "
+"הזה אמין בעיניך."
 
 #: spice/spiceviewfactory.cpp:176
 #, kde-format
 msgctxt "@title:window"
 msgid "Use Proxy from File?"
-msgstr ""
+msgstr "להשתמש במתווך מקובץ?"
 
 #: spice/spiceviewfactory.cpp:203
 #, kde-format
@@ -3186,19 +3108,20 @@ msgid ""
 "Wait a few minutes. The server blocks logins for a while after several "
 "failed attempts."
 msgstr ""
+"נא להמתין מספר דקות. השרת חוסם כניסה למשך זמן מה לאחר כמה ניסיונות כושלים."
 
 #: vnc/vncview.cpp:317
 #, kde-format
 msgctxt "@info"
 msgid "Then connect again and enter the password carefully."
-msgstr ""
+msgstr "לאחר מכן להתחבר שוב ולמלא את הסיסמה בקפידה."
 
 #: vnc/vncview.cpp:323
 #, kde-format
 msgctxt "@label"
 msgid ""
 "The server requires an authentication method that KRDC does not support."
-msgstr ""
+msgstr "השרת דורש שיטת אימות ש־KRDC לא תומך."
 
 #: vnc/vncview.cpp:325
 #, kde-format

@@ -925,7 +925,7 @@ msgstr "Свързване с мрежата или VPN, в която се на
 #| msgid "Connected to %1"
 msgctxt "@title:window %1 is a host name"
 msgid "Connect to %1"
-msgstr "Свързан с %1"
+msgstr "Свързване с %1"
 
 #: core/hostpreferences.cpp:315
 #, kde-format
@@ -969,7 +969,7 @@ msgstr "Показване на този диалогов прозорец от�
 #| msgid "Settings"
 msgctxt "@action:button"
 msgid "All Settings…"
-msgstr "Настройки"
+msgstr "Всички настройки…"
 
 #. i18n: ectx: label, entry (OpenSessions), group (General)
 #: core/krdc.kcfg:16
@@ -1768,7 +1768,7 @@ msgstr "Ниско качество (8 бита)"
 #, fuzzy, kde-format
 #| msgid "Local Cursor"
 msgid "Local Resources"
-msgstr "Локален показалец"
+msgstr "Локални ресурси"
 
 #. i18n: ectx: property (text), widget (QLabel, soundLabel)
 #: rdp/rdppreferences.ui:454
@@ -1816,7 +1816,7 @@ msgstr ""
 #, fuzzy, kde-format
 #| msgid "On This Computer"
 msgid "Same as This Computer"
-msgstr "На този компютър"
+msgstr "Същото като на този компютър"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:535
@@ -2045,20 +2045,22 @@ msgstr "Турски (tr)"
 #, fuzzy, kde-format
 #| msgid "Share Media:"
 msgid "Shared folder:"
-msgstr "Споделяне на медия:"
+msgstr "Споделена папка:"
 
 #. i18n: ectx: property (toolTip), widget (SharedFolderField, kcfg_ShareMedia)
 #: rdp/rdppreferences.ui:739
-#, kde-format
+#, fuzzy, kde-format
 msgid "A folder on this computer that the remote computer can read and write."
 msgstr ""
+"Папка в този компютър, до която отдалеченият компютър има достъп за четене и "
+"запис."
 
 #. i18n: ectx: property (text), widget (QLabel, shareSmartcardLabel)
 #: rdp/rdppreferences.ui:746
 #, fuzzy, kde-format
 #| msgid "Share Smartcard:"
 msgid "Shared smartcard:"
-msgstr "Споделяне на смарт карта:"
+msgstr "Споделена смарткарта:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, connectionTab)
 #: rdp/rdppreferences.ui:760
@@ -2071,14 +2073,14 @@ msgstr "Връзка"
 #, fuzzy, kde-format
 #| msgid "Sessions"
 msgid "Session:"
-msgstr "Сесии"
+msgstr "Сесия:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ConsoleMode)
 #: rdp/rdppreferences.ui:773
 #, fuzzy, kde-format
 #| msgid "Admin (or console) session"
 msgid "Connect to the console (admin) session"
-msgstr "Администраторска (или конзолна) сесия"
+msgstr "Свързване с конзолната сесия (администратор)"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_ConsoleMode)
 #: rdp/rdppreferences.ui:776
@@ -2088,29 +2090,33 @@ msgstr "Администраторска (или конзолна) сесия"
 msgid ""
 "Connect to the session an administrator uses to manage the remote computer, "
 "instead of a new user session."
-msgstr "Свързване с мрежата или VPN, в която се намира отдалеченият компютър."
+msgstr ""
+"Свързване към сесията на администратора за управление на отдалечения "
+"компютър, вместо създаване на нова потребителска сесия."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_PreventSessionLock)
 #: rdp/rdppreferences.ui:783
 #, fuzzy, kde-format
 #| msgid "Prevent remote session lock"
 msgid "Keep the remote session from locking"
-msgstr "Предотвратяване на заключване на отдалечена сесия"
+msgstr "Предотвратяване на заключване на отдалечената сесия"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_PreventSessionLock)
 #: rdp/rdppreferences.ui:786
-#, kde-format
+#, fuzzy, kde-format
 msgid ""
 "Move the remote mouse pointer every few minutes so that the remote computer "
 "does not lock the session while it is idle."
 msgstr ""
+"Периодично преместване на дистанционния курсор на мишката, за да се "
+"предотврати заключване на сесията на дистанционния компютър при бездействие."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseGateway)
 #: rdp/rdppreferences.ui:812
 #, fuzzy, kde-format
 #| msgid "Connect to a VNC Remote Desktop"
 msgid "Connect through a Remote Desktop Gateway"
-msgstr "Свързване с отдалечено работно място по VNC"
+msgstr "Свързване през Remote Desktop Gateway"
 
 #. i18n: ectx: property (text), widget (QLabel, gServerLabel)
 #. i18n: ectx: property (text), widget (QLabel, pHostLabel)
@@ -2171,7 +2177,7 @@ msgstr "RPC"
 #| msgctxt "@info connection stage"
 #| msgid "Connecting to the server"
 msgid "Connect through a proxy server"
-msgstr "Свързване със сървъра"
+msgstr "Свързване чрез прокси сървър"
 
 #. i18n: ectx: property (text), widget (QLabel, protocolLabel)
 #: rdp/rdppreferences.ui:939
@@ -2196,7 +2202,7 @@ msgstr "Сигурност"
 #, fuzzy, kde-format
 #| msgid "Protocol:"
 msgid "Protocols:"
-msgstr "Протокол:"
+msgstr "Протоколи:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityNLA)
 #: rdp/rdppreferences.ui:1000
@@ -2212,7 +2218,7 @@ msgstr "NLA"
 #| "It accepted the connection, then closed it before the session started."
 msgid "Network Level Authentication: sign in before the remote session starts."
 msgstr ""
-"Връзката беше приета, но след това затворена преди началото на сесията."
+"Автентификация на мрежово ниво: вход преди началото на отдалечената сесия."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityTLS)
 #: rdp/rdppreferences.ui:1010
@@ -2226,7 +2232,9 @@ msgstr "TLS"
 #| msgctxt "@label"
 #| msgid "The session was disconnected from the remote computer."
 msgid "TLS encryption, signing in on the login screen of the remote computer."
-msgstr "Сесията беше прекъсната от отдалечения компютър."
+msgstr ""
+"TLS криптиране и подписване при влизане от екрана за вход на отдалечения "
+"компютър."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityRDP)
 #: rdp/rdppreferences.ui:1020
@@ -2236,9 +2244,9 @@ msgstr "RDP"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SecurityRDP)
 #: rdp/rdppreferences.ui:1023
-#, kde-format
+#, fuzzy, kde-format
 msgid "Standard RDP security, the older encryption built into the protocol."
-msgstr ""
+msgstr "Стандартна RDP сигурност, по-старото криптиране, вградено в протокола."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityEXT)
 #: rdp/rdppreferences.ui:1030
@@ -2248,11 +2256,13 @@ msgstr "Ext"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SecurityEXT)
 #: rdp/rdppreferences.ui:1033
-#, kde-format
+#, fuzzy, kde-format
 msgid ""
 "Extended Network Level Authentication, which also checks that the account "
 "may sign in before the session starts."
 msgstr ""
+"Разширена автентификация на мрежово ниво, която също проверява дали акаунтът "
+"може да влезе, преди започване на сесията."
 
 #. i18n: ectx: property (text), widget (QLabel, TlsSecLevelLabel)
 #: rdp/rdppreferences.ui:1055
@@ -2262,18 +2272,20 @@ msgstr "Ниво на TLS сигурност:"
 
 #. i18n: ectx: property (toolTip), widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:1065
-#, kde-format
+#, fuzzy, kde-format
 msgid ""
 "The weakest TLS encryption to accept. A higher level may refuse to connect "
 "to older servers."
 msgstr ""
+"Най-слабото допустимо TLS криптиране. По-високото ниво може да доведе до "
+"отказ за свързване с по-стари сървъри."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:1075
 #, fuzzy, kde-format
 #| msgid "any"
 msgid "Any"
-msgstr "всякакви"
+msgstr "Всяка"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:1080
@@ -2369,7 +2381,7 @@ msgstr ""
 #| msgid "Access to this system requires a username and password."
 msgctxt "@label"
 msgid "Access to the gateway and this system requires a username and password."
-msgstr "Достъпът до системата изисква потребителско име и парола."
+msgstr "Достъпът до шлюза и тази система изисква потребителско име и парола."
 
 #: rdp/rdpview.cpp:266
 #, kde-format
@@ -2383,7 +2395,7 @@ msgstr "Достъпът до системата изисква потребит
 #| msgid "Access to this system requires a username and password."
 msgctxt "@label %1 is a server address"
 msgid "Access to the gateway %1 requires a username and password."
-msgstr "Достъпът до системата изисква потребителско име и парола."
+msgstr "Достъпът до шлюза %1 изисква потребителско име и парола."
 
 #: rdp/rdpview.cpp:334
 #, fuzzy, kde-format
@@ -2391,7 +2403,7 @@ msgstr "Достъпът до системата изисква потребит
 #| msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgctxt "@label"
 msgid "The certificate for this gateway is unknown. Do you wish to continue?"
-msgstr "Сертификатът за тази система е неизвестен. Да се продължи ли?"
+msgstr "Сертификатът за този шлюз е неизвестен. Желаете ли да продължите?"
 
 #: rdp/rdpview.cpp:335
 #, kde-format
@@ -2418,7 +2430,7 @@ msgstr "Запомняне на този сертификат"
 #| "The certificate for this system has changed. Do you wish to continue?"
 msgctxt "@label"
 msgid "The certificate for this gateway has changed. Do you wish to continue?"
-msgstr "Сертификатът за тази система е променен Да се продължи ли?"
+msgstr "Сертификатът за този шлюз е променен. Желаете ли да продължите?"
 
 #: rdp/rdpview.cpp:367
 #, kde-format
@@ -2483,8 +2495,7 @@ msgstr "Отказан достъп"
 #| "Check that no firewall on the remote computer rejects the connection."
 msgctxt "@label"
 msgid "The gateway or the remote computer refused this login."
-msgstr ""
-"Проверка дали защитна стена на отдалечения компютър не отхвърля връзката."
+msgstr "Шлюзът или отдалеченият компютър отказа този вход."
 
 #: rdp/rdpview.cpp:452
 #, kde-format
@@ -2564,15 +2575,19 @@ msgctxt "@label"
 msgid ""
 "Logging in to the gateway failed, or the server and KRDC could not agree on "
 "a security protocol."
-msgstr "Сървърът и KRDC не успяха да се договорят за протокол за сигурност."
+msgstr ""
+"Влизането в шлюза не успя или сървърът и KRDC не успяха да се договорят за "
+"протокол за сигурност."
 
 #: rdp/rdpview.cpp:496
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@info"
 msgid ""
 "NTLM is turned off for this host. Turn it on in the host settings unless the "
 "domain controller can be reached."
 msgstr ""
+"NTLM е изключено за този хост. Включете го в настройките на хоста, освен ако "
+"контролерът на домейна не е достъпен."
 
 #: rdp/rdpview.cpp:499
 #, kde-format
@@ -2623,10 +2638,10 @@ msgstr ""
 "натоварване. Изчакайте минута и опитайте свързването отново."
 
 #: rdp/rdpview.cpp:535
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@label"
 msgid "The gateway does not allow this account to connect to “%1”."
-msgstr ""
+msgstr "Шлюзът не позволява на този акаунт да се свърже с „%1“."
 
 #: rdp/rdpview.cpp:538
 #, fuzzy, kde-format
@@ -2635,35 +2650,41 @@ msgstr ""
 msgctxt "@info"
 msgid ""
 "Try the full name of the computer. The gateway may only know it by that name."
-msgstr "Опитайте с IP адреса на компютъра вместо името му."
+msgstr ""
+"Опитайте с пълното име на компютъра. Шлюзът може да го разпознава само по "
+"това име."
 
 #: rdp/rdpview.cpp:539
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@info"
 msgid ""
 "Ask the administrator of the gateway to allow this account and computer in "
 "its resource authorization policy."
 msgstr ""
+"Моля, потърсете администратора на шлюза за разрешаване на този акаунт и "
+"компютър в политиката за оторизация на ресурсите."
 
 #: rdp/rdpview.cpp:543
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@label"
 msgid "The gateway does not allow this device to connect."
-msgstr ""
+msgstr "Шлюзът не позволява свързване от това устройство."
 
 #: rdp/rdpview.cpp:545
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@info"
 msgid ""
 "Ask the administrator of the gateway to check its connection authorization "
 "policy."
 msgstr ""
+"Моля, помолете администратора на шлюза да провери политиката за разрешение "
+"за връзка."
 
 #: rdp/rdpview.cpp:548
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@label"
 msgid "The gateway could not reach “%1”."
-msgstr ""
+msgstr "Шлюзът не можа да се свърже с „%1“."
 
 #: rdp/rdpview.cpp:550
 #, fuzzy, kde-format
@@ -2676,8 +2697,8 @@ msgid ""
 "Make sure the remote computer is running, and that the gateway can reach it "
 "by this name."
 msgstr ""
-"Уверете се, че отдалеченият компютър е включен, активен и свързан към "
-"мрежата."
+"Уверете се, че отдалеченият компютър е включен и че шлюзът има достъп до "
+"него чрез това име."
 
 #: rdp/rdpview.cpp:554
 #, kde-format
@@ -2773,31 +2794,33 @@ msgid "Connect to a Windows Remote Desktop (RDP)"
 msgstr "Свързване с отдалечено работно място (Windows RDP)"
 
 #: rdp/rdpviewfactory.cpp:193
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@info %1 is a server address"
 msgid "This file requires a gateway, but its address “%1” is not valid."
-msgstr ""
+msgstr "Този файл изисква шлюз, но адресът му „%1“ не е валиден."
 
 #: rdp/rdpviewfactory.cpp:194
 #, fuzzy, kde-format
 #| msgid "Gateway"
 msgctxt "@title:window"
 msgid "Invalid Gateway"
-msgstr "Шлюз"
+msgstr "Невалиден шлюз"
 
 #: rdp/rdpviewfactory.cpp:203
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@info %1 is a server address"
 msgid ""
 "This file connects through the gateway “%1”, which could capture your login "
 "details. Continue only if you trust this file."
 msgstr ""
+"Този файл се свързва чрез шлюза „%1“, който може да заснеме вашите данни за "
+"вход. Продължете само ако имате доверие в този файл."
 
 #: rdp/rdpviewfactory.cpp:206
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Use Gateway from File?"
-msgstr ""
+msgstr "Използване на шлюз от файл?"
 
 #: rdp/rdpviewfactory.cpp:280
 #, kde-format
@@ -2819,57 +2842,59 @@ msgstr ""
 #| msgid "Not started"
 msgctxt "@item:inlistbox shared folder"
 msgid "Not shared"
-msgstr "Не започнало"
+msgstr "Несподелена"
 
 #: rdp/sharedfolderfield.cpp:20
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@item:inlistbox shared folder"
 msgid "Removable drives"
-msgstr ""
+msgstr "Преносими устройства"
 
 #: rdp/sharedfolderfield.cpp:22
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "USB drives and memory cards, including ones plugged in during the session. "
 "Network shares are not included."
 msgstr ""
+"USB устройства и карти памет, включително такива, свързани по време на "
+"сесията. Мрежовите споделени папки не са включени."
 
 #: rdp/sharedfolderfield.cpp:33
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@item:inlistbox shared folder"
 msgid "Downloads"
-msgstr ""
+msgstr "Изтеглени файлове"
 
 #: rdp/sharedfolderfield.cpp:34
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@item:inlistbox shared folder"
 msgid "Documents"
-msgstr ""
+msgstr "Документи"
 
 #: rdp/sharedfolderfield.cpp:36
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@item:inlistbox shared folder"
 msgid "Other Folder…"
-msgstr ""
+msgstr "Друга папка…"
 
 #: rdp/sharedfolderfield.cpp:65
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@item:inlistbox shared folder, %1 a stored value"
 msgid "%1 (not supported)"
-msgstr ""
+msgstr "%1 (не се поддържа)"
 
 #: rdp/sharedfolderfield.cpp:69
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@item:inlistbox shared folder, %1 its name, %2 its path"
 msgid "%1 (%2)"
-msgstr ""
+msgstr "%1 (%2)"
 
 #: rdp/sharedfolderfield.cpp:102
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Choose Shared Folder"
-msgstr ""
+msgstr "Избор на споделена папка"
 
 #: remotedesktopsmodel.cpp:112
 #, kde-format
@@ -2971,29 +2996,31 @@ msgstr "Възпроизвеждане на аудио от отдалечени
 
 #. i18n: ectx: property (text), widget (QLabel, networkHeading)
 #: spice/spicepreferences.ui:295 vnc/vncpreferences.ui:275
-#, kde-format
+#, fuzzy, kde-format
 msgid "Network"
-msgstr ""
+msgstr "Мрежа"
 
 #: spice/spiceview.cpp:90
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@label"
 msgid "This connection needs its connection file."
-msgstr ""
+msgstr "За тази връзка е необходим файл за връзка."
 
 #: spice/spiceview.cpp:91
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@info"
 msgid "Open a new .vv file for this virtual machine."
-msgstr ""
+msgstr "Отваряне на нов .vv файл за тази виртуална машина."
 
 #: spice/spiceview.cpp:879
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@info"
 msgid ""
 "The server rejected the password in the connection file, which may have "
 "expired. Open a new file, or enter the password."
 msgstr ""
+"Сървърът отхвърли паролата в файла за връзка, която може да е изтекла. "
+"Отваряне на нов файл или въвеждане на паролата."
 
 #: spice/spiceview.cpp:881
 #, kde-format
@@ -3043,18 +3070,20 @@ msgstr ""
 "приема връзки на този адрес."
 
 #: spice/spiceviewfactory.cpp:174
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@info %1 is a server address"
 msgid ""
 "This file connects through the proxy “%1”, which could intercept the "
 "session. Continue only if you trust this file."
 msgstr ""
+"Този файл се свързва чрез прокси сървъра „%1“, който може да прехване "
+"сесията. Продължаване само при доверие към този файл."
 
 #: spice/spiceviewfactory.cpp:176
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Use Proxy from File?"
-msgstr ""
+msgstr "Използване на прокси от файл?"
 
 #: spice/spiceviewfactory.cpp:203
 #, kde-format
@@ -3260,24 +3289,3 @@ msgid ""
 msgstr ""
 "<html>Въведете адрес.<br /><i>Пример: vncserver:1 (хост:порт / екран)</i></"
 "html>"
-
-#~ msgid "SSH tunnel options"
-#~ msgstr "Настройки за SSH тунел"
-
-#~ msgid "General"
-#~ msgstr "Общи"
-
-#~ msgid "Resolution"
-#~ msgstr "Резолюция"
-
-#~ msgid "Alternate Session Type:"
-#~ msgstr "Алтернативен тип сесия:"
-
-#~ msgid "Session lock:"
-#~ msgstr "Заключване на сесия:"
-
-#~ msgid "Security:"
-#~ msgstr "Сигурност:"
-
-#~ msgid "Proxy"
-#~ msgstr "Прокси"

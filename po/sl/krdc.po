@@ -1,6 +1,6 @@
 # Slovenian translation of krdc
 # Copyright (C) 2002, 2003, 2004, 2005, 2006, 2007 Free Software Foundation, Inc.
-# $Id: krdc.po 1752102 2026-11-06 01:38:44Z scripty $
+# $Id: krdc.po 1752194 2026-11-07 01:42:43Z scripty $
 # $Source$
 #
 # Andrej Vernekar <andrej.vernekar@moj.net>, 2002, 2007, 2008.
@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-06 00:50+0000\n"
-"PO-Revision-Date: 2026-11-04 11:03+0100\n"
+"PO-Revision-Date: 2026-11-06 07:01+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -2385,22 +2385,16 @@ msgid "Access to this system requires a username and password."
 msgstr "Za dostop do tega sistema sta potrebna uporabniško ime in geslo."
 
 #: rdp/rdpview.cpp:314
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid ""
-#| "Access to the gateway and this system requires a username and password."
+#, kde-format
 msgctxt "@label %1 is a server address"
 msgid "Access to the gateway %1 requires a username and password."
-msgstr ""
-"Za dostop do prehoda in tega sistema sta potrebna uporabniško ime in geslo."
+msgstr "Dostop do prehoda %1 zahteva uporabniško ime in geslo."
 
 #: rdp/rdpview.cpp:334
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "The certificate for this system is unknown. Do you wish to continue?"
+#, kde-format
 msgctxt "@label"
 msgid "The certificate for this gateway is unknown. Do you wish to continue?"
-msgstr "Potrdilo za ta sistem ni znano. Želite nadaljevati?"
+msgstr "Potrdilo za ta prehod ni znano. Ali želite nadaljevati?"
 
 #: rdp/rdpview.cpp:335
 #, kde-format
@@ -2421,13 +2415,10 @@ msgid "Remember this certificate"
 msgstr "Zaponi si to potrdilo"
 
 #: rdp/rdpview.cpp:366
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid ""
-#| "The certificate for this system has changed. Do you wish to continue?"
+#, kde-format
 msgctxt "@label"
 msgid "The certificate for this gateway has changed. Do you wish to continue?"
-msgstr "Potrdilo za ta sistem je spremenjeno. Želite nadaljevati?"
+msgstr "Potrdilo za ta prehod je spremenjeno. Ali želite nadaljevati?"
 
 #: rdp/rdpview.cpp:367
 #, kde-format
@@ -2785,14 +2776,13 @@ msgstr "Poveži se z oddaljenim namizjem Windows (RDP)"
 #, kde-format
 msgctxt "@info %1 is a server address"
 msgid "This file requires a gateway, but its address “%1” is not valid."
-msgstr ""
+msgstr "Ta datoteka zahteva prehod, vendar njegov naslov \"%1\" ni veljaven."
 
 #: rdp/rdpviewfactory.cpp:194
-#, fuzzy, kde-format
-#| msgid "Gateway"
+#, kde-format
 msgctxt "@title:window"
 msgid "Invalid Gateway"
-msgstr "Prehod"
+msgstr "Neveljaven prehod"
 
 #: rdp/rdpviewfactory.cpp:203
 #, kde-format
@@ -2801,12 +2791,14 @@ msgid ""
 "This file connects through the gateway “%1”, which could capture your login "
 "details. Continue only if you trust this file."
 msgstr ""
+"Ta datoteka se povezuje prek prehoda \"%1\", ki bi lahko zajel vaše prijavne "
+"podatke. Nadaljujte le, če tej datoteki zaupate."
 
 #: rdp/rdpviewfactory.cpp:206
 #, kde-format
 msgctxt "@title:window"
 msgid "Use Gateway from File?"
-msgstr ""
+msgstr "Naj uporabim prehod iz datoteke?"
 
 #: rdp/rdpviewfactory.cpp:280
 #, kde-format
@@ -2988,13 +2980,13 @@ msgstr "Omežje"
 #, kde-format
 msgctxt "@label"
 msgid "This connection needs its connection file."
-msgstr ""
+msgstr "Ta povezava potrebuje svojo datoteko povezave."
 
 #: spice/spiceview.cpp:91
 #, kde-format
 msgctxt "@info"
 msgid "Open a new .vv file for this virtual machine."
-msgstr ""
+msgstr "Odpri novo datoteko .vv za ta virtualni stroj."
 
 #: spice/spiceview.cpp:879
 #, kde-format
@@ -3003,6 +2995,8 @@ msgid ""
 "The server rejected the password in the connection file, which may have "
 "expired. Open a new file, or enter the password."
 msgstr ""
+"Strežnik je zavrnil geslo v datoteki za povezavo, ki je morda poteklo. "
+"Odprite novo datoteko ali vnesite geslo."
 
 #: spice/spiceview.cpp:881
 #, kde-format
@@ -3058,12 +3052,14 @@ msgid ""
 "This file connects through the proxy “%1”, which could intercept the "
 "session. Continue only if you trust this file."
 msgstr ""
+"Ta datoteka se povezuje prek posredniškega strežnika \"%1\", ki bi lahko "
+"prestregel sejo. Nadaljujte le, če tej datoteki zaupate."
 
 #: spice/spiceviewfactory.cpp:176
 #, kde-format
 msgctxt "@title:window"
 msgid "Use Proxy from File?"
-msgstr ""
+msgstr "Naj uporabim posredniški strežnik iz datoteke?"
 
 #: spice/spiceviewfactory.cpp:203
 #, kde-format

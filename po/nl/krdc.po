@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-06 00:50+0000\n"
-"PO-Revision-Date: 2026-11-04 11:53+0100\n"
+"PO-Revision-Date: 2026-11-06 11:44+0100\n"
 "Last-Translator: freek <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -2394,23 +2394,16 @@ msgid "Access to this system requires a username and password."
 msgstr "Toegang tot dit systeem vereist een gebruikersnaam en wachtwoord."
 
 #: rdp/rdpview.cpp:314
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid ""
-#| "Access to the gateway and this system requires a username and password."
+#, kde-format
 msgctxt "@label %1 is a server address"
 msgid "Access to the gateway %1 requires a username and password."
-msgstr ""
-"Toegang tot de gateway van dit systeem vereist een gebruikersnaam en "
-"wachtwoord."
+msgstr "Toegang tot de gateway %1 vereist een gebruikersnaam en wachtwoord."
 
 #: rdp/rdpview.cpp:334
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "The certificate for this system is unknown. Do you wish to continue?"
+#, kde-format
 msgctxt "@label"
 msgid "The certificate for this gateway is unknown. Do you wish to continue?"
-msgstr "Het servercertificaat voor dit systeem is onbekend. Wilt u doorgaan?"
+msgstr "Het servercertificaat voor deze gateway is onbekend. Wilt u doorgaan?"
 
 #: rdp/rdpview.cpp:335
 #, kde-format
@@ -2431,13 +2424,10 @@ msgid "Remember this certificate"
 msgstr "Dit certificaat onthouden"
 
 #: rdp/rdpview.cpp:366
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid ""
-#| "The certificate for this system has changed. Do you wish to continue?"
+#, kde-format
 msgctxt "@label"
 msgid "The certificate for this gateway has changed. Do you wish to continue?"
-msgstr "Het certificaat voor dit systeem is gewijzigd. Wilt u doorgaan?"
+msgstr "Het certificaat voor deze gateway is gewijzigd. Wilt u doorgaan?"
 
 #: rdp/rdpview.cpp:367
 #, kde-format
@@ -2802,13 +2792,13 @@ msgstr "Verbinding met een Windows-bureaublad op afstand (RDP)"
 msgctxt "@info %1 is a server address"
 msgid "This file requires a gateway, but its address “%1” is not valid."
 msgstr ""
+"Dit bestand vereist een gateway, maar het adres ervan, “%1”, is niet geldig."
 
 #: rdp/rdpviewfactory.cpp:194
-#, fuzzy, kde-format
-#| msgid "Gateway"
+#, kde-format
 msgctxt "@title:window"
 msgid "Invalid Gateway"
-msgstr "Gateway"
+msgstr "Ongeldige gateway"
 
 #: rdp/rdpviewfactory.cpp:203
 #, kde-format
@@ -2817,12 +2807,14 @@ msgid ""
 "This file connects through the gateway “%1”, which could capture your login "
 "details. Continue only if you trust this file."
 msgstr ""
+"Dit bestand maakt verbinding via de gateway “%1”, die uw aanmeldgegevens zou "
+"kunnen vastleggen. Ga alleen door als u dit bestand vertrouwt."
 
 #: rdp/rdpviewfactory.cpp:206
 #, kde-format
 msgctxt "@title:window"
 msgid "Use Gateway from File?"
-msgstr ""
+msgstr "Gateway uit bestand gebruiken?"
 
 #: rdp/rdpviewfactory.cpp:280
 #, kde-format
@@ -3004,13 +2996,13 @@ msgstr "Netwerk"
 #, kde-format
 msgctxt "@label"
 msgid "This connection needs its connection file."
-msgstr ""
+msgstr "Deze verbinding heeft haar verbindingsbestand nodig."
 
 #: spice/spiceview.cpp:91
 #, kde-format
 msgctxt "@info"
 msgid "Open a new .vv file for this virtual machine."
-msgstr ""
+msgstr "Open een nieuw .vv-bestand voor deze virtuele machine."
 
 #: spice/spiceview.cpp:879
 #, kde-format
@@ -3019,6 +3011,8 @@ msgid ""
 "The server rejected the password in the connection file, which may have "
 "expired. Open a new file, or enter the password."
 msgstr ""
+"De server heeft het wachtwoord in het verbindingsbestand geweigerd; mogelijk "
+"is dit wachtwoord verlopen. Open een nieuw bestand of voer het wachtwoord in."
 
 #: spice/spiceview.cpp:881
 #, kde-format
@@ -3074,12 +3068,14 @@ msgid ""
 "This file connects through the proxy “%1”, which could intercept the "
 "session. Continue only if you trust this file."
 msgstr ""
+"Dit bestand maakt verbinding via de proxy “%1”, die de sessie zou kunnen "
+"onderscheppen. Ga alleen door als u dit bestand vertrouwt."
 
 #: spice/spiceviewfactory.cpp:176
 #, kde-format
 msgctxt "@title:window"
 msgid "Use Proxy from File?"
-msgstr ""
+msgstr "Proxy uit bestand gebruiken?"
 
 #: spice/spiceviewfactory.cpp:203
 #, kde-format
