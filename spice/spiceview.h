@@ -110,6 +110,7 @@ private:
 
     bool m_quitFlag;
     bool m_firstPasswordTry;
+    QString m_passwordToSave;
     // True once a wallet password was silently applied; cleared when the user
     // saves a new password via the dialog.  Used to delete a stale wallet entry
     // on the next auth failure.

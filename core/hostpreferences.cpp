@@ -119,7 +119,6 @@ HostPreferences::HostPreferences(KConfigGroup configGroup, QObject *parent)
     , m_connected(false)
     , m_editConnectionDetails(false)
     , showAgainCheckBox(nullptr)
-    , walletSupportCheckBox(nullptr)
     , connectionNameLineEdit(nullptr)
     , connectionUrlLineEdit(nullptr)
 {
@@ -154,7 +153,6 @@ void HostPreferences::acceptConfig()
 #endif
 
     setShowConfigAgain(showAgainCheckBox->isChecked());
-    setWalletSupport(walletSupportCheckBox->isChecked());
 }
 
 bool HostPreferences::hostConfigured()
@@ -396,18 +394,13 @@ bool HostPreferences::execDialog(QWidget *parent, bool beforeConnecting)
         allSettingsLayout->addWidget(widget);
     }
 
-    walletSupportCheckBox = new QCheckBox(body);
-    walletSupportCheckBox->setText(i18n("Remember password"));
-    walletSupportCheckBox->setChecked(walletSupport());
-
     showAgainCheckBox = new QCheckBox(body);
     showAgainCheckBox->setText(i18n("Show this dialog again for this host"));
     showAgainCheckBox->setChecked(showConfigAgain());
 
     // The empty label keeps the options in the field column.
     auto *optionsLayout = new QFormLayout;
-    optionsLayout->addRow(new QWidget(body), walletSupportCheckBox);
-    optionsLayout->addRow(nullptr, showAgainCheckBox);
+    optionsLayout->addRow(new QWidget(body), showAgainCheckBox);
     layout->addSpacing(body->style()->pixelMetric(QStyle::PM_LayoutVerticalSpacing));
     layout->addLayout(optionsLayout);
     layout->addStretch(1);
@@ -455,7 +448,6 @@ bool HostPreferences::execDialog(QWidget *parent, bool beforeConnecting)
     sshTunnelWidget = nullptr;
 #endif
     showAgainCheckBox = nullptr;
-    walletSupportCheckBox = nullptr;
     connectionNameLineEdit = nullptr;
     connectionUrlLineEdit = nullptr;
     return accepted;

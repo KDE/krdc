@@ -62,6 +62,7 @@ private:
     int m_buttonMask;
     bool m_quitFlag;
     bool m_firstPasswordTry;
+    bool m_savePassword = false;
     qreal m_horizontalFactor;
     qreal m_verticalFactor;
     int m_wheelRemainderV;

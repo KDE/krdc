@@ -161,6 +161,13 @@ bool RdpView::startConnection()
     });
     m_session->setHostPreferences(m_hostPreferences.get());
     m_session->setIgnoreSavedGatewayPassword(s_refusedGatewayLogins.contains(m_url.toDisplayString(QUrl::StripTrailingSlash)));
+    if (m_hostPreferences->useGateway() && passwordStorageEnabled()) {
+        QString password = m_hostPreferences->gatewayPassword();
+        if (password.isEmpty()) {
+            password = readWalletPasswordForKey(gatewayPasswordKey());
+        }
+        m_session->setSavedGatewayPassword(password);
+    }
     m_session->setHost(m_host);
     m_session->setPort(m_port);
     m_session->setUser(m_user);
@@ -193,6 +200,10 @@ bool RdpView::startConnection()
             setStatus(Preparing);
             break;
         case RdpSession::State::Running:
+            if (m_savePassword) {
+                m_savePassword = false;
+                saveWalletPassword(m_password);
+            }
             if (m_hostPreferences->resolution() == RdpHostPreferences::Resolution::AllScreens) {
                 QScreen *primaryScreen = nullptr;
                 const auto screens = QGuiApplication::screens();
@@ -212,16 +223,30 @@ bool RdpView::startConnection()
                     switchFullscreen(true);
                 }
             }
-            // The gateway accepted the login that replaces the refused one.
-            if (s_refusedGatewayLogins.remove(m_url.toDisplayString(QUrl::StripTrailingSlash)) && !m_enteredGatewayPassword.isEmpty()) {
+            s_refusedGatewayLogins.remove(m_url.toDisplayString(QUrl::StripTrailingSlash));
+            if (m_saveGatewayPassword) {
+                m_saveGatewayPassword = false;
                 m_hostPreferences->setGatewayUsername(m_session->gatewayUser());
                 m_hostPreferences->setGatewayDomain(m_session->gatewayDomain());
-                m_hostPreferences->setGatewayPassword(m_enteredGatewayPassword);
+                const QString key = gatewayPasswordKey();
+                const QString previousPassword = m_hostPreferences->gatewayPassword();
+                saveWalletPasswordForKey(key, m_enteredGatewayPassword, [this, key, previousPassword]() {
+                    if (m_quitting || m_session->state() != RdpSession::State::Running) {
+                        return;
+                    }
+                    // Preserve any settings edited while the write was pending.
+                    if (gatewayPasswordKey() == key && m_hostPreferences->gatewayPassword() == previousPassword) {
+                        m_hostPreferences->setGatewayPassword(QString());
+                    }
+                });
             }
             m_enteredGatewayPassword.clear();
             setStatus(Connected);
             break;
         case RdpSession::State::Closed:
+            m_savePassword = false;
+            m_saveGatewayPassword = false;
+            m_enteredGatewayPassword.clear();
             Q_EMIT disconnected();
             setStatus(Disconnected);
             break;
@@ -255,11 +280,14 @@ void RdpView::onAuthRequested()
         return;
     }
 
+    m_savePassword = false;
     setStatus(Authenticating);
 
     std::unique_ptr<KPasswordDialog> dialog;
     dialog =
-        std::make_unique<KPasswordDialog>(nullptr, KPasswordDialog::ShowUsernameLine | KPasswordDialog::ShowKeepPassword | KPasswordDialog::ShowDomainLine);
+        std::make_unique<KPasswordDialog>(nullptr, KPasswordDialog::ShowUsernameLine | KPasswordDialog::ShowDomainLine
+                                              | (passwordStorageEnabled() ? KPasswordDialog::ShowKeepPassword : KPasswordDialog::NoFlags));
+    initializePasswordDialog(*dialog);
     // Without its own user name, the gateway uses this login too.
     const bool sharedWithGateway = m_hostPreferences->useGateway() && m_hostPreferences->gatewayUsername().isEmpty();
     dialog->setPrompt(sharedWithGateway ? i18nc("@label", "Access to the gateway and this system requires a username and password.")
@@ -293,13 +321,16 @@ void RdpView::onAuthRequested()
     }
     m_url.setQuery(query);
 
-    if (dialog->keepPassword()) {
-        savePassword(m_password);
-    }
+    m_savePassword = acceptPasswordDialog(*dialog);
 
     m_session->setUser(m_user);
     m_session->setDomain(m_domain);
     m_session->setPassword(m_password);
+}
+
+QString RdpView::gatewayPasswordKey() const
+{
+    return QStringLiteral("GATEWAY") + m_url.toDisplayString(QUrl::StripTrailingSlash) + QLatin1Char('/') + m_hostPreferences->gatewayServer();
 }
 
 void RdpView::onGatewayAuthRequested()
@@ -308,9 +339,13 @@ void RdpView::onGatewayAuthRequested()
         return;
     }
 
+    m_saveGatewayPassword = false;
+    m_enteredGatewayPassword.clear();
     setStatus(Authenticating);
 
-    KPasswordDialog dialog(nullptr, KPasswordDialog::ShowUsernameLine | KPasswordDialog::ShowDomainLine);
+    KPasswordDialog dialog(nullptr, KPasswordDialog::ShowUsernameLine | KPasswordDialog::ShowDomainLine
+                                      | (passwordStorageEnabled() ? KPasswordDialog::ShowKeepPassword : KPasswordDialog::NoFlags));
+    initializePasswordDialog(dialog);
     dialog.setPrompt(i18nc("@label %1 is a server address", "Access to the gateway %1 requires a username and password.", m_hostPreferences->gatewayServer()));
     dialog.setUsername(m_session->gatewayUser());
     dialog.setDomain(m_session->gatewayDomain());
@@ -320,6 +355,7 @@ void RdpView::onGatewayAuthRequested()
         return;
     }
 
+    m_saveGatewayPassword = acceptPasswordDialog(dialog);
     m_enteredGatewayPassword = dialog.password();
     m_session->setGatewayLogin(dialog.username(), dialog.domain(), m_enteredGatewayPassword);
 }
@@ -753,11 +789,6 @@ QSize RdpView::initialSize()
     default:
         return parentWidget()->size() * devicePixelRatio();
     }
-}
-
-void RdpView::savePassword(const QString &password)
-{
-    saveWalletPassword(password);
 }
 
 void RdpView::resizeEvent(QResizeEvent *event)

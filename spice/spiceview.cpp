@@ -830,7 +830,7 @@ void SpiceView::cbCursorReset(SpiceCursorChannel * /*channel*/, gpointer data)
 
 QString SpiceView::resolveSilentPassword()
 {
-    if (m_hostPreferences->walletSupport()) {
+    if (passwordStorageEnabled()) {
         const QString walletPw = readWalletPassword();
         if (!walletPw.isEmpty()) {
             m_walletPasswordUsed = true;
@@ -849,6 +849,7 @@ void SpiceView::applyPasswordAndConnect(const QString &password)
 
 void SpiceView::requestPassword()
 {
+    m_passwordToSave.clear();
     setStatus(Authenticating);
     Q_EMIT showingPasswordDialog(true);
 
@@ -873,7 +874,10 @@ void SpiceView::requestPassword()
     }
 
     // Show the password dialog.
-    KPasswordDialog dialog(this, m_fileConnection ? KPasswordDialog::KPasswordDialogFlags() : KPasswordDialog::ShowKeepPassword);
+    KPasswordDialog dialog(this, !m_fileConnection && passwordStorageEnabled() ? KPasswordDialog::ShowKeepPassword : KPasswordDialog::NoFlags);
+    if (!m_fileConnection) {
+        initializePasswordDialog(dialog);
+    }
     if (m_fileConnection && !m_fileConnection->password.isEmpty()) {
         dialog.setPrompt(
             i18nc("@info", "The server rejected the password in the connection file, which may have expired. Open a new file, or enter the password."));
@@ -891,8 +895,9 @@ void SpiceView::requestPassword()
 
     const QString password = dialog.password();
 
-    if (dialog.keepPassword())
-        saveWalletPassword(password);
+    if (!m_fileConnection && acceptPasswordDialog(dialog)) {
+        m_passwordToSave = password;
+    }
 
     applyPasswordAndConnect(password);
 }
@@ -900,6 +905,11 @@ void SpiceView::requestPassword()
 void SpiceView::onChannelConnected()
 {
     // The main channel opened — we are authenticated and ready.
+    if (!m_passwordToSave.isEmpty()) {
+        const QString password = m_passwordToSave;
+        m_passwordToSave.clear();
+        saveWalletPassword(password);
+    }
     if (m_status != Connected) {
         setStatus(Connected);
         Q_EMIT connected();
@@ -908,6 +918,7 @@ void SpiceView::onChannelConnected()
 
 void SpiceView::onChannelDisconnected()
 {
+    m_passwordToSave.clear();
     if (!m_quitFlag) {
         setStatus(Disconnected);
         Q_EMIT disconnected();

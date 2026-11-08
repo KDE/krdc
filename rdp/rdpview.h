@@ -60,8 +60,6 @@ public:
 
     QPixmap takeScreenshot() override;
 
-    void savePassword(const QString &password);
-
 public Q_SLOTS:
     void scaleResize(int w, int h) override;
     void onAuthRequested();
@@ -95,7 +93,10 @@ private:
     QString m_user;
     QString m_domain;
     QString m_password;
+    bool m_savePassword = false;
     QString m_enteredGatewayPassword;
+    bool m_saveGatewayPassword = false;
+    QString gatewayPasswordKey() const;
     //
     bool m_quitting = false;
 

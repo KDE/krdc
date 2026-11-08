@@ -278,9 +278,12 @@ host name or IP address can use a different configuration.</para>
 
 <para>When the server requests authentication, enter your password and, if
 requested, your user name. The <guilabel>Remember password</guilabel> option
-allows &krdc; to store credentials through the system credential store using
-QtKeychain. Password storage also depends on the global
-<guilabel>Remember passwords</guilabel> setting.</para>
+allows &krdc; to store the entered password through the system credential store
+using QtKeychain after authentication succeeds. The choice is remembered for
+this host. Previously saved passwords remain available even when this option
+is unchecked. The global <guilabel>Remember passwords</guilabel> setting controls
+both reading and saving passwords; when it is disabled, the authentication
+dialog does not offer to remember the password.</para>
 
 <para>
 <screenshot>

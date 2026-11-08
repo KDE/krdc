@@ -8,6 +8,9 @@
 
 #include "remoteview.h"
 #include "krdc_debug.h"
+#include "settings.h"
+
+#include <KPasswordDialog>
 
 #include <KModifierKeyInfo>
 #include <QApplication>
@@ -27,6 +30,7 @@
 
 #include <atomic>
 #include <memory>
+#include <utility>
 
 #ifdef HAVE_WAYLAND
 #include "waylandinhibition_p.h"
@@ -34,7 +38,6 @@
 
 #ifdef USE_SSH_TUNNEL
 #include <KLocalizedString>
-#include <KPasswordDialog>
 #endif
 
 #include "hostpreferences.h"
@@ -249,8 +252,9 @@ bool RemoteView::start()
 
         m_host = QStringLiteral("127.0.0.1");
 
-        connect(m_sshTunnelThread, &SshTunnelThread::listenReady, this, [this, prefs] {
-            if (prefs->walletSupport()) {
+        connect(m_sshTunnelThread, &SshTunnelThread::listenReady, this, [this] {
+            if (m_saveSshPassword) {
+                m_saveSshPassword = false;
                 saveWalletSshPassword();
             }
             m_port = m_sshTunnelThread->tunnelPort();
@@ -359,6 +363,26 @@ QUrl RemoteView::url()
     return m_url;
 }
 
+bool RemoteView::passwordStorageEnabled() const
+{
+    return Settings::walletSupport();
+}
+
+void RemoteView::initializePasswordDialog(KPasswordDialog &dialog)
+{
+    dialog.setKeepPassword(passwordStorageEnabled() && hostPreferences()->walletSupport());
+}
+
+bool RemoteView::acceptPasswordDialog(const KPasswordDialog &dialog)
+{
+    // Disabling storage globally must not overwrite the host's preferred default.
+    if (!passwordStorageEnabled()) {
+        return false;
+    }
+    hostPreferences()->setWalletSupport(dialog.keepPassword());
+    return dialog.keepPassword();
+}
+
 QString RemoteView::readWalletPassword(bool fromUserNameOnly)
 {
     return readWalletPasswordForKey(fromUserNameOnly ? m_url.userName() : m_url.toDisplayString(QUrl::StripTrailingSlash));
@@ -376,6 +400,10 @@ void RemoteView::deleteWalletPassword(bool fromUserNameOnly)
 
 QString RemoteView::readWalletPasswordForKey(const QString &key)
 {
+    if (!passwordStorageEnabled()) {
+        return {};
+    }
+
     QKeychain::ReadPasswordJob job(KEYCHAIN_SERVICE_NAME);
     job.setAutoDelete(false);
     job.setKey(key);
@@ -403,28 +431,43 @@ QString RemoteView::readWalletPasswordForKey(const QString &key)
     return QString();
 }
 
-void RemoteView::saveWalletPasswordForKey(const QString &key, const QString &password)
+void RemoteView::saveWalletPasswordForKey(const QString &key, const QString &password, std::function<void()> onSaved)
 {
-    QKeychain::WritePasswordJob job(KEYCHAIN_SERVICE_NAME);
-    job.setAutoDelete(false);
-    job.setKey(key);
-    job.setTextData(password);
-    QEventLoop loop;
-    job.connect(&job, &QKeychain::Job::finished, &loop, &QEventLoop::quit);
-    job.start();
-    loop.exec();
-    switch (job.error()) {
-    case QKeychain::NoError:
-        qCDebug(KRDC) << "Password write OK";
-        break;
-    default:
-        qCDebug(KRDC) << "QtKeychain write error:" << job.errorString();
-        break;
+    if (!passwordStorageEnabled() || password.isEmpty()) {
+        return;
     }
+
+    // Let an authenticated credential finish saving even if its view is closed.
+    // QtKeychain deletes the job after emitting finished().
+    auto *job = new QKeychain::WritePasswordJob(KEYCHAIN_SERVICE_NAME, qApp);
+    job->setKey(key);
+    job->setTextData(password);
+    connect(job, &QKeychain::Job::finished, job, [job]() {
+        if (job->error() == QKeychain::NoError) {
+            qCDebug(KRDC) << "Password write OK";
+        } else {
+            qCDebug(KRDC) << "QtKeychain write error:" << job->errorString();
+        }
+    });
+    if (onSaved) {
+        connect(job, &QKeychain::Job::finished, this, [job, onSaved = std::move(onSaved)]() {
+            if (job->error() == QKeychain::NoError) {
+                onSaved();
+            }
+        });
+    }
+    // Even a backend that finishes immediately must not re-enter the calling handler.
+    QTimer::singleShot(0, job, [job]() {
+        job->start();
+    });
 }
 
 void RemoteView::deleteWalletPasswordForKey(const QString &key)
 {
+    if (!passwordStorageEnabled()) {
+        return;
+    }
+
     QKeychain::DeletePasswordJob job(KEYCHAIN_SERVICE_NAME);
     job.setAutoDelete(false);
     job.setKey(key);
@@ -667,8 +710,9 @@ void RemoteView::saveWalletSshPassword()
 void RemoteView::sshRequestPassword(SshTunnelThread::PasswordRequestFlags flags)
 {
     qCDebug(KRDC) << "request ssh password";
+    m_saveSshPassword = false;
 
-    if (hostPreferences()->walletSupport() && ((flags & SshTunnelThread::IgnoreWallet) != SshTunnelThread::IgnoreWallet)) {
+    if ((flags & SshTunnelThread::IgnoreWallet) != SshTunnelThread::IgnoreWallet) {
         const QString walletPassword = readWalletSshPassword();
 
         if (!walletPassword.isNull()) {
@@ -677,9 +721,11 @@ void RemoteView::sshRequestPassword(SshTunnelThread::PasswordRequestFlags flags)
         }
     }
 
-    KPasswordDialog dialog(this);
+    KPasswordDialog dialog(this, passwordStorageEnabled() ? KPasswordDialog::ShowKeepPassword : KPasswordDialog::NoFlags);
+    initializePasswordDialog(dialog);
     dialog.setPrompt(i18n("Please enter the SSH password."));
     if (dialog.exec() == KPasswordDialog::Accepted) {
+        m_saveSshPassword = acceptPasswordDialog(dialog);
         m_sshTunnelThread->setPassword(dialog.password(), SshTunnelThread::PasswordFromDialog);
     } else {
         qCDebug(KRDC) << "ssh password dialog not accepted";
