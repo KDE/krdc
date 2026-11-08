@@ -17,6 +17,8 @@
 #include <QUrl>
 #include <QWidget>
 
+#include <functional>
+
 #ifdef HAVE_WAYLAND
 #include "shortcutinhibition_p.h"
 #endif
@@ -33,6 +35,7 @@ struct ModifierKey {
 
 class HostPreferences;
 class KModifierKeyInfo;
+class KPasswordDialog;
 class QScreen;
 class QWindow;
 
@@ -504,11 +507,16 @@ protected:
     std::unique_ptr<ShortcutInhibition> m_inhibition;
 #endif
 
+    bool passwordStorageEnabled() const;
+    void initializePasswordDialog(KPasswordDialog &dialog);
+    bool acceptPasswordDialog(const KPasswordDialog &dialog);
+
     QString readWalletPassword(bool fromUserNameOnly = false);
     void saveWalletPassword(const QString &password, bool fromUserNameOnly = false);
     void deleteWalletPassword(bool fromUserNameOnly = false);
     QString readWalletPasswordForKey(const QString &key);
-    void saveWalletPasswordForKey(const QString &key, const QString &password);
+    // Writes asynchronously. onSaved runs only on success while this view still exists.
+    void saveWalletPasswordForKey(const QString &key, const QString &password, std::function<void()> onSaved = {});
     void deleteWalletPasswordForKey(const QString &key);
 
     LocalCursorState m_localCursorState;
@@ -516,6 +524,7 @@ protected:
 #ifdef USE_SSH_TUNNEL
 private:
     SshTunnelThread *m_sshTunnelThread;
+    bool m_saveSshPassword = false;
 
     QString readWalletSshPassword();
     void saveWalletSshPassword();

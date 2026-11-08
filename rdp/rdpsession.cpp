@@ -835,7 +835,7 @@ int RdpSession::clientContextStart(rdpContext *context)
         }
         if (!freerdp_settings_set_string(settings,
                                          FreeRDP_GatewayPassword,
-                                         session->m_ignoreSavedGatewayPassword ? "" : preferences->gatewayPassword().toUtf8().data())) {
+                                         session->m_ignoreSavedGatewayPassword ? "" : session->m_savedGatewayPassword.toUtf8().data())) {
             return -1;
         }
         if (!freerdp_settings_set_string(settings, FreeRDP_GatewayDomain, preferences->gatewayDomain().toUtf8().data())) {

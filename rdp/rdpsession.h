@@ -107,6 +107,12 @@ public:
     {
         return m_gatewayDomain;
     }
+    /** Credential resolved on the GUI thread, before starting the session. */
+    void setSavedGatewayPassword(const QString &password)
+    {
+        m_savedGatewayPassword = password;
+    }
+
     /** Ask for the gateway password even if one is saved. */
     void setIgnoreSavedGatewayPassword(bool ignore)
     {
@@ -258,6 +264,7 @@ private:
     QString m_gatewayPassword;
     bool m_gatewayLoginEntered = false;
     bool m_ignoreSavedGatewayPassword = false;
+    QString m_savedGatewayPassword;
     bool m_needKeyStateSync = true;
 
     std::thread m_thread;

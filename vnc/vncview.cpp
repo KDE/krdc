@@ -234,6 +234,7 @@ bool VncView::supportsClipboardSharing() const
 void VncView::requestPassword(bool includingUsername)
 {
     qCDebug(KRDC) << "request password";
+    m_savePassword = false;
 
     setStatus(Authenticating);
 
@@ -242,7 +243,7 @@ void VncView::requestPassword(bool includingUsername)
     }
 
     // just try to get the password from the wallet the first time, otherwise it will loop (see issue #226283)
-    if (m_firstPasswordTry && m_hostPreferences->walletSupport()) {
+    if (m_firstPasswordTry) {
         QString walletPassword = readWalletPassword();
 
         if (!walletPassword.isNull()) {
@@ -258,12 +259,15 @@ void VncView::requestPassword(bool includingUsername)
         return;
     }
 
-    KPasswordDialog dialog(this, includingUsername ? KPasswordDialog::ShowUsernameLine : KPasswordDialog::NoFlags);
+    KPasswordDialog dialog(this, (includingUsername ? KPasswordDialog::ShowUsernameLine : KPasswordDialog::NoFlags)
+                                     | (passwordStorageEnabled() ? KPasswordDialog::ShowKeepPassword : KPasswordDialog::NoFlags));
+    initializePasswordDialog(dialog);
     dialog.setPrompt(m_firstPasswordTry ? i18n("Access to the system requires a password.") : i18n("Authentication failed. Please try again."));
     if (includingUsername)
         dialog.setUsername(m_url.userName());
     if (dialog.exec() == KPasswordDialog::Accepted) {
         m_firstPasswordTry = false;
+        m_savePassword = acceptPasswordDialog(dialog);
         vncThread.setPassword(dialog.password());
         if (includingUsername)
             vncThread.setUsername(dialog.username());
@@ -378,10 +382,11 @@ void VncView::updateImage(int x, int y, int w, int h)
         }
 
         m_initDone = true;
+    }
 
-        if (m_hostPreferences->walletSupport()) {
-            saveWalletPassword(vncThread.password());
-        }
+    if (m_savePassword) {
+        m_savePassword = false;
+        saveWalletPassword(vncThread.password());
     }
 
     const QSize frameSize = m_frame.size() / m_frame.devicePixelRatio();

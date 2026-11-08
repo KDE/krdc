@@ -32,7 +32,9 @@ public:
 
     KConfigGroup configGroup();
 
+    // Default for the remember checkbox; saved credentials can still be used.
     bool walletSupport();
+    void setWalletSupport(bool walletSupport);
 
     /** Whether scaling is enabled when session is full screen. Note: only windowedScale seems to be used. */
     bool fullscreenScale();
@@ -116,7 +118,6 @@ protected:
 private:
     bool execDialog(QWidget *parent, bool beforeConnecting);
     void setShowConfigAgain(bool show);
-    void setWalletSupport(bool walletSupport);
 
 #ifdef USE_SSH_TUNNEL
     void setUseSshTunnel(bool useSshTunnel);
@@ -137,7 +138,6 @@ private:
     QList<QWidget *> m_quickSettings;
 
     QCheckBox *showAgainCheckBox;
-    QCheckBox *walletSupportCheckBox;
     QLineEdit *connectionNameLineEdit;
     QLineEdit *connectionUrlLineEdit;
 };
