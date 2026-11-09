@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdenetwork-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-06 00:50+0000\n"
+"POT-Creation-Date: 2026-11-09 00:55+0000\n"
 "PO-Revision-Date: 2026-11-06 19:52+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -248,7 +248,7 @@ msgstr "Genel Yapılandırma"
 msgid "Hosts"
 msgstr "Makineler"
 
-#: config/preferencesdialog.cpp:28 core/hostpreferences.cpp:310
+#: config/preferencesdialog.cpp:28 core/hostpreferences.cpp:308
 #, kde-format
 msgid "Host Configuration"
 msgstr "Makine Yapılandırması"
@@ -928,48 +928,43 @@ msgctxt "@info"
 msgid "Connect to the network or VPN the remote computer is on."
 msgstr "Uzak masaüstünde ağa veya VPN’ye bağlanın."
 
-#: core/hostpreferences.cpp:308
+#: core/hostpreferences.cpp:306
 #, kde-format
 msgctxt "@title:window %1 is a host name"
 msgid "Connect to %1"
 msgstr "Bağlan: %1"
 
-#: core/hostpreferences.cpp:315
+#: core/hostpreferences.cpp:313
 #, kde-format
 msgid ""
 "Note that settings might only apply when you connect next time to this host."
 msgstr ""
 "Ayarların bu makineye bir sonraki bağlanışınızda uygulanacağını unutmayın."
 
-#: core/hostpreferences.cpp:338
+#: core/hostpreferences.cpp:336
 #, kde-format
 msgctxt "@action:button"
 msgid "Connect"
 msgstr "Bağlan"
 
-#: core/hostpreferences.cpp:352
+#: core/hostpreferences.cpp:350
 #, kde-format
 msgctxt "@label:textbox Name of a remote connection"
 msgid "Name:"
 msgstr "Ad:"
 
-#: core/hostpreferences.cpp:358
+#: core/hostpreferences.cpp:356
 #, kde-format
 msgctxt "@label:textbox URL of a remote connection"
 msgid "URL:"
 msgstr "URL:"
 
-#: core/hostpreferences.cpp:400
-#, kde-format
-msgid "Remember password"
-msgstr "Parolayı anımsa"
-
-#: core/hostpreferences.cpp:404
+#: core/hostpreferences.cpp:398
 #, kde-format
 msgid "Show this dialog again for this host"
 msgstr "Bu makine için bu iletişim kutusunu yeniden göster"
 
-#: core/hostpreferences.cpp:428
+#: core/hostpreferences.cpp:421
 #, kde-format
 msgctxt "@action:button"
 msgid "All Settings…"
@@ -981,30 +976,30 @@ msgstr "Tüm Ayarlar…"
 msgid "Sessions"
 msgstr "Oturumlar"
 
-#: core/remoteview.cpp:681
+#: core/remoteview.cpp:726
 #, kde-format
 msgid "Please enter the SSH password."
 msgstr "Lütfen SSH parolasını girin."
 
-#: core/remoteview.cpp:701
+#: core/remoteview.cpp:747
 #, kde-format
 msgctxt "@label"
 msgid "The SSH tunnel on port %1 could not be set up."
 msgstr "%1 numaralı kapıdaki SSH tüneli açılamadı."
 
-#: core/remoteview.cpp:704
+#: core/remoteview.cpp:750
 #, kde-format
 msgctxt "@title connection error"
 msgid "SSH server not reachable"
 msgstr "SSH Sunucusuna Erişilemez"
 
-#: core/remoteview.cpp:705
+#: core/remoteview.cpp:751
 #, kde-format
 msgctxt "@label"
 msgid "The SSH server did not accept a connection on port %1."
 msgstr "SSH sunucusu, %1 numaralı kapıdan bir bağlantıyı kabul etmedi."
 
-#: core/remoteview.cpp:707
+#: core/remoteview.cpp:753
 #, kde-format
 msgctxt "@info"
 msgid "Make sure the SSH server is running and listens on port %1."
@@ -1012,7 +1007,7 @@ msgstr ""
 "SSH sunucusunun açık olduğundan ve %1 numaralı kapıdan dinlediğinden emin "
 "olun."
 
-#: core/remoteview.cpp:708
+#: core/remoteview.cpp:754
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -1021,7 +1016,7 @@ msgstr ""
 "Makine adını denetleyin ve bilgisayarın ağdan erişilebilir olduğundan emin "
 "olun."
 
-#: core/remoteview.cpp:709
+#: core/remoteview.cpp:755
 #, kde-format
 msgctxt "@info"
 msgid "Check that no firewall blocks SSH connections."
@@ -1029,31 +1024,31 @@ msgstr ""
 "Herhangi bir güvenlik duvarının SSH bağlantılarını engellemediğinden emin "
 "olun."
 
-#: core/remoteview.cpp:713
+#: core/remoteview.cpp:759
 #, kde-format
 msgctxt "@title connection error"
 msgid "SSH login failed"
 msgstr "SSH Oturumu Açılamadı"
 
-#: core/remoteview.cpp:714
+#: core/remoteview.cpp:760
 #, kde-format
 msgctxt "@label"
 msgid "The SSH server did not accept the login."
 msgstr "SSH sunucusu, oturum açma isteğini kabul etmedi."
 
-#: core/remoteview.cpp:715
+#: core/remoteview.cpp:761
 #, kde-format
 msgctxt "@label"
 msgid "The SSH server did not accept the login for “%1”."
 msgstr "SSH sunucusu, “%1” için olan oturum açma isteğini kabul etmedi."
 
-#: core/remoteview.cpp:717
+#: core/remoteview.cpp:763
 #, kde-format
 msgctxt "@info"
 msgid "Check the SSH user name in the host settings, and the password."
 msgstr "Makine ayarlarından SSH kullanıcı adını ve parolasını denetleyin."
 
-#: core/remoteview.cpp:718
+#: core/remoteview.cpp:764
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -1063,7 +1058,7 @@ msgstr ""
 "Anahtar doğrulaması kullanıyorsanız ssh-add ile anahtarı SSH aracınıza "
 "ekleyin ve sunucu üzerinde yetkilendirildiğinden emin olun."
 
-#: core/remoteview.cpp:719
+#: core/remoteview.cpp:765
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -1072,13 +1067,13 @@ msgstr ""
 "SSH sunucusu, parola ile oturum açmaya izin vermiyorsa anahtar ile kimlik "
 "doğrulamayı ayarlayın."
 
-#: core/remoteview.cpp:723
+#: core/remoteview.cpp:769
 #, kde-format
 msgctxt "@label"
 msgid "No free local port could be opened for the tunnel on this computer."
 msgstr "Bu bilgisayarda tünel için herhangi bir boş yerel kapı açılamadı."
 
-#: core/remoteview.cpp:725
+#: core/remoteview.cpp:771
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2363,69 +2358,69 @@ msgstr ""
 "Veren: %5\n"
 "Parmak izi: %6\n"
 
-#: rdp/rdpview.cpp:265
+#: rdp/rdpview.cpp:293
 #, kde-format
 msgctxt "@label"
 msgid "Access to the gateway and this system requires a username and password."
 msgstr "Bu geçide ve sisteme erişim bir kullanıcı adı ve parola gerektiriyor."
 
-#: rdp/rdpview.cpp:266
+#: rdp/rdpview.cpp:294
 #, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
 msgstr "Bu sisteme erişim bir kullanıcı adı ve parola gerektiriyor."
 
-#: rdp/rdpview.cpp:314
+#: rdp/rdpview.cpp:349
 #, kde-format
 msgctxt "@label %1 is a server address"
 msgid "Access to the gateway %1 requires a username and password."
 msgstr "%1 geçidine erişim bir kullanıcı adı ve parola gerektiriyor."
 
-#: rdp/rdpview.cpp:334
+#: rdp/rdpview.cpp:370
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this gateway is unknown. Do you wish to continue?"
 msgstr ""
 "Bu ağ geçidi için olan sertifika bilinmiyor. Sürdürmek istiyor musunuz?"
 
-#: rdp/rdpview.cpp:335
+#: rdp/rdpview.cpp:371
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr "Bu sistem için olan sertifika bilinmiyor. Sürdürmek istiyor musunuz?"
 
-#: rdp/rdpview.cpp:336
+#: rdp/rdpview.cpp:372
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
 msgstr "Sertifikayı Doğrula"
 
-#: rdp/rdpview.cpp:341 rdp/rdpview.cpp:373
+#: rdp/rdpview.cpp:377 rdp/rdpview.cpp:409
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
 msgstr "Bu sertifikayı anımsa"
 
-#: rdp/rdpview.cpp:366
+#: rdp/rdpview.cpp:402
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this gateway has changed. Do you wish to continue?"
 msgstr ""
 "Bu ağ geçidi için olan sertifika değiştirildi. Sürdürmek istiyor musunuz?"
 
-#: rdp/rdpview.cpp:367
+#: rdp/rdpview.cpp:403
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
 msgstr "Bu sistem için olan sertifika değiştirildi. Sürdürmek istiyor musunuz?"
 
-#: rdp/rdpview.cpp:368
+#: rdp/rdpview.cpp:404
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
 msgstr "Sertifika Değişti"
 
-#: rdp/rdpview.cpp:371
+#: rdp/rdpview.cpp:407
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -2438,51 +2433,51 @@ msgstr ""
 "%1\n"
 "Yeni sertifika:\\ %2"
 
-#: rdp/rdpview.cpp:421
+#: rdp/rdpview.cpp:457
 #, kde-format
 msgctxt "@label"
 msgid "The credentials for “%1” were not accepted."
 msgstr "“%1” için olan kimlik bilgileri kabul edilmedi."
 
-#: rdp/rdpview.cpp:424
+#: rdp/rdpview.cpp:460
 #, kde-format
 msgctxt "@info"
 msgid "Check the RD Gateway credentials in the host settings."
 msgstr ""
 "Makine ayarlarından Uzak Masaüstü Geçidi kimlik bilgilerini denetleyin."
 
-#: rdp/rdpview.cpp:440
+#: rdp/rdpview.cpp:476
 #, kde-format
 msgctxt "@label"
 msgid "This account may not log in remotely."
 msgstr "Bu hesap, uzaktan oturum açamaz."
 
-#: rdp/rdpview.cpp:441
+#: rdp/rdpview.cpp:477
 #, kde-format
 msgctxt "@label"
 msgid "“%1” may not log in remotely."
 msgstr "“%1” uzaktan oturum açamaz."
 
-#: rdp/rdpview.cpp:443 rdp/rdpview.cpp:536 rdp/rdpview.cpp:544
+#: rdp/rdpview.cpp:479 rdp/rdpview.cpp:572 rdp/rdpview.cpp:580
 #, kde-format
 msgctxt "@title connection error"
 msgid "Access denied"
 msgstr "Erişim Engellendi"
 
-#: rdp/rdpview.cpp:446
+#: rdp/rdpview.cpp:482
 #, kde-format
 msgctxt "@label"
 msgid "The gateway or the remote computer refused this login."
 msgstr "Ağ geçidi veya uzak bilgisayar bu oturum açma girişimini reddetti."
 
-#: rdp/rdpview.cpp:452
+#: rdp/rdpview.cpp:488
 #, kde-format
 msgctxt "@info"
 msgid "Check whether the account is locked, disabled or expired."
 msgstr ""
 "Hesabın kilitli, devre dışı veya süresinin geçmiş olup olmadığını denetleyin."
 
-#: rdp/rdpview.cpp:454
+#: rdp/rdpview.cpp:490
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2492,7 +2487,7 @@ msgstr ""
 "Uzak bilgisayarın yöneticisinden hesabı Uzak Masaüstü Kullanıcıları grubuna "
 "eklemesini isteyin veya başka bir hesapla oturum açın."
 
-#: rdp/rdpview.cpp:462
+#: rdp/rdpview.cpp:498
 #, kde-format
 msgctxt "@label"
 msgid "The password must be changed before it can be used to log in remotely."
@@ -2500,13 +2495,13 @@ msgstr ""
 "Parolanın, uzaktan oturum açmada kullanılmasından önce değiştirilmesi "
 "gerekiyor."
 
-#: rdp/rdpview.cpp:463
+#: rdp/rdpview.cpp:499
 #, kde-format
 msgctxt "@title connection error"
 msgid "Password expired"
 msgstr "Parolaların Süresi Doldu"
 
-#: rdp/rdpview.cpp:465
+#: rdp/rdpview.cpp:501
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2516,37 +2511,37 @@ msgstr ""
 "Uzak masaüstünde uzaktan oturum açarak parolayı değiştirin veya yöneticiden "
 "onu sıfırlamasını isteyin."
 
-#: rdp/rdpview.cpp:470
+#: rdp/rdpview.cpp:506
 #, kde-format
 msgctxt "@label"
 msgid "The Kerberos domain controller could not be reached."
 msgstr "Kerberos etki alanı denetçisine ulaşılamadı."
 
-#: rdp/rdpview.cpp:472
+#: rdp/rdpview.cpp:508
 #, kde-format
 msgctxt "@info"
 msgid "Check the domain you entered when logging in."
 msgstr "Oturum açarken, girdiğiniz etki alanını denetleyin."
 
-#: rdp/rdpview.cpp:473
+#: rdp/rdpview.cpp:509
 #, kde-format
 msgctxt "@info"
 msgid "Connect to the network or VPN of the domain."
 msgstr "Etki alanının ağına veya VPN’ine bağlanın."
 
-#: rdp/rdpview.cpp:478 spice/spiceview.cpp:953 vnc/vncview.cpp:294
+#: rdp/rdpview.cpp:514 spice/spiceview.cpp:964 vnc/vncview.cpp:298
 #, kde-format
 msgctxt "@label"
 msgid "No IP address was found for this name."
 msgstr "Bu ad için herhangi bir IP adresi bulunamadı."
 
-#: rdp/rdpview.cpp:489
+#: rdp/rdpview.cpp:525
 #, kde-format
 msgctxt "@label"
 msgid "The server and KRDC could not agree on a security protocol."
 msgstr "Sunucu ve KRDC, bir güvenlik protokolü üzerinde anlaşmaya varamadı."
 
-#: rdp/rdpview.cpp:492
+#: rdp/rdpview.cpp:528
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -2556,7 +2551,7 @@ msgstr ""
 "Ağ geçidinde oturum açılamadı veya sunucu ve KRDC bir güvenlik protokolü "
 "üzerinde anlaşamadı."
 
-#: rdp/rdpview.cpp:496
+#: rdp/rdpview.cpp:532
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2566,7 +2561,7 @@ msgstr ""
 "Bu makine için NTLM kapalı. Etki alanı denetleyicisine ulaşılamadığı sürece "
 "makine ayarlarında bu özelliği açın."
 
-#: rdp/rdpview.cpp:499
+#: rdp/rdpview.cpp:535
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2576,7 +2571,7 @@ msgstr ""
 "Makine ayarlarından güvenlik düzeyini “Herhangi biri” olarak ayarlayın. "
 "Sunucu, seçtiğiniz düzeyi desteklemiyor olabilir."
 
-#: rdp/rdpview.cpp:503
+#: rdp/rdpview.cpp:539
 #, kde-format
 msgctxt "@label"
 msgid "The server requires Network Level Authentication (NLA)."
@@ -2584,13 +2579,13 @@ msgstr ""
 "Sunucu, Ağ Düzeyinde Kimlik Doğrulama (Network Level Authentication, NLA) "
 "gerektiriyor."
 
-#: rdp/rdpview.cpp:504
+#: rdp/rdpview.cpp:540
 #, kde-format
 msgctxt "@info"
 msgid "Enable NLA in the security settings for this host."
 msgstr "Bu makine için güvenlik ayarlarından NLA’yı etkinleştirin."
 
-#: rdp/rdpview.cpp:522
+#: rdp/rdpview.cpp:558
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2600,13 +2595,13 @@ msgstr ""
 "Bu makine için olan Uzak Masaüstü Geçidi ayarlarını denetleyin. “%1” geçidi "
 "erişilemez veya bağlantıyı reddediyor olabilir."
 
-#: rdp/rdpview.cpp:529
+#: rdp/rdpview.cpp:565
 #, kde-format
 msgctxt "@label"
 msgid "The remote computer did not finish starting the session in time."
 msgstr "Uzak bilgisayar, oturumu başlatmayı zamanında bitirmedi."
 
-#: rdp/rdpview.cpp:530
+#: rdp/rdpview.cpp:566
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2616,13 +2611,13 @@ msgstr ""
 "Uzak bilgisayar hâlen açılıyor veya ağır yük altında olabilir. Biraz "
 "bekleyin ve sonra yeniden bağlanın."
 
-#: rdp/rdpview.cpp:535
+#: rdp/rdpview.cpp:571
 #, kde-format
 msgctxt "@label"
 msgid "The gateway does not allow this account to connect to “%1”."
 msgstr "Ağ geçidi, bu hesabın “%1” konumuna bağlanmasına izin vermiyor."
 
-#: rdp/rdpview.cpp:538
+#: rdp/rdpview.cpp:574
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2631,7 +2626,7 @@ msgstr ""
 "Bilgisayarın tam adını deneyin. Ağ geçidi onu yalnızca bu adla biliyor "
 "olabilir."
 
-#: rdp/rdpview.cpp:539
+#: rdp/rdpview.cpp:575
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2641,13 +2636,13 @@ msgstr ""
 "Ağ geçidinin yöneticisinden bu hesaba ve bilgisayara özkaynak yetkilendirme "
 "ilkesinde izin vermesini isteyin."
 
-#: rdp/rdpview.cpp:543
+#: rdp/rdpview.cpp:579
 #, kde-format
 msgctxt "@label"
 msgid "The gateway does not allow this device to connect."
 msgstr "Ağ geçidi, bu aygıtın bağlanmasına izin vermiyor."
 
-#: rdp/rdpview.cpp:545
+#: rdp/rdpview.cpp:581
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2657,13 +2652,13 @@ msgstr ""
 "Ağ geçidinin yöneticisinden bağlantı yetkilendirme politikasını "
 "denetlemesini isteyin."
 
-#: rdp/rdpview.cpp:548
+#: rdp/rdpview.cpp:584
 #, kde-format
 msgctxt "@label"
 msgid "The gateway could not reach “%1”."
 msgstr "Ağ geçidi, “%1” konumuna erişemedi."
 
-#: rdp/rdpview.cpp:550
+#: rdp/rdpview.cpp:586
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2673,50 +2668,50 @@ msgstr ""
 "Uzak bilgisayarın çalıştığından ve ağ geçidinin ona bu adla erişebildiğinden "
 "emin olun."
 
-#: rdp/rdpview.cpp:554
+#: rdp/rdpview.cpp:590
 #, kde-format
 msgctxt "@label"
 msgid "It accepted the connection, then refused to start a session."
 msgstr ""
 "Bağlantıyı kabul etti; ancak sonrasında bir oturum başlatmayı reddetti."
 
-#: rdp/rdpview.cpp:555
+#: rdp/rdpview.cpp:591
 #, kde-format
 msgctxt "@title connection error"
 msgid "Session refused"
 msgstr "Oturum Reddedildi"
 
-#: rdp/rdpview.cpp:559
+#: rdp/rdpview.cpp:595
 #, kde-format
 msgctxt "@label"
 msgid "The server did not accept the options selected for this host."
 msgstr "Sunucu, bu makine için seçili olan seçenekleri kabul etmedi."
 
-#: rdp/rdpview.cpp:562
+#: rdp/rdpview.cpp:598
 #, kde-format
 msgctxt "@label"
 msgid "An administrator or another program disconnected this session."
 msgstr "Bir yönetici veya başka bir program, bu oturumu kapattı."
 
-#: rdp/rdpview.cpp:565
+#: rdp/rdpview.cpp:601
 #, kde-format
 msgctxt "@label"
 msgid "An administrator signed this session out."
 msgstr "Bir yönetici, bu oturumun çıkışını verdi."
 
-#: rdp/rdpview.cpp:568
+#: rdp/rdpview.cpp:604
 #, kde-format
 msgctxt "@label"
 msgid "The session was disconnected from the remote computer."
 msgstr "Bu oturumun uzak bilgisayar bağlantısı kapatıldı."
 
-#: rdp/rdpview.cpp:575
+#: rdp/rdpview.cpp:611
 #, kde-format
 msgctxt "@label"
 msgid "Disconnected because someone else connected to this session."
 msgstr "Bağlantı kesildi; çünkü başka birisi bu oturuma bağlandı."
 
-#: rdp/rdpview.cpp:576
+#: rdp/rdpview.cpp:612
 #, kde-format
 msgctxt "@info"
 msgid "Reconnect to take the session back. This disconnects the other user."
@@ -2724,13 +2719,13 @@ msgstr ""
 "Oturumu geri almak için yeniden bağlanın. Bu, diğer kullanıcının "
 "bağlantısını keser."
 
-#: rdp/rdpview.cpp:579
+#: rdp/rdpview.cpp:615
 #, kde-format
 msgctxt "@label"
 msgid "The session was closed after being idle for too long."
 msgstr "Bu oturum, bayağı bir süre boşta bekledikten sonra kapatıldı."
 
-#: rdp/rdpview.cpp:580
+#: rdp/rdpview.cpp:616
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2740,13 +2735,13 @@ msgstr ""
 "Sürdürmek için yeniden bağlanın. Boşta geçirilen zaman süresi, büyük "
 "olasılıkla sunucunun yöneticisi tarafından belirlenmiştir."
 
-#: rdp/rdpview.cpp:594
+#: rdp/rdpview.cpp:630
 #, kde-format
 msgctxt "@label"
 msgid "The remote computer reported a problem while logging in."
 msgstr "Uzak bilgisayar, oturum açma sırasında bir sorun bildirdi."
 
-#: rdp/rdpview.cpp:595
+#: rdp/rdpview.cpp:631
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2756,7 +2751,7 @@ msgstr ""
 "Bu kullanıcının uzak bilgisayara oturum açıp açamayacağını ve oturumun "
 "meşgûl olup olmadığını denetleyin."
 
-#: rdp/rdpview.cpp:974
+#: rdp/rdpview.cpp:1005
 #, kde-format
 msgctxt "@title:window"
 msgid "KRDC – Screen %1"
@@ -2984,7 +2979,7 @@ msgctxt "@info"
 msgid "Open a new .vv file for this virtual machine."
 msgstr "Bu sanal makine için yeni bir .vv dosyası açın."
 
-#: spice/spiceview.cpp:879
+#: spice/spiceview.cpp:883
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2994,18 +2989,18 @@ msgstr ""
 "Sunucu, bağlantı dosyası için olan parolayı yaptırdık; bu dosyanın süresi "
 "dolmuş olabilir. Yeni bir dosya açın veya parolayı girin."
 
-#: spice/spiceview.cpp:881
+#: spice/spiceview.cpp:885
 #, kde-format
 msgid "Authentication is required to connect to <b>%1</b>."
 msgstr "<b>%1</b> konumuna bağlanmak için kimlik doğrulama gerekiyor."
 
-#: spice/spiceview.cpp:944
+#: spice/spiceview.cpp:955
 #, kde-format
 msgctxt "@label"
 msgid "The TLS handshake failed."
 msgstr "TLS el sıkışması yapılamadı."
 
-#: spice/spiceview.cpp:945
+#: spice/spiceview.cpp:956
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -3015,13 +3010,13 @@ msgstr ""
 "Sunucunun TLS’yi yalnızca başka bir kapıda kabul edip etmediğini ve "
 "sertifikasının güvenilir olup olmadığını denetleyin."
 
-#: spice/spiceview.cpp:948
+#: spice/spiceview.cpp:959
 #, kde-format
 msgctxt "@label"
 msgid "The server rejected the SPICE connection."
 msgstr "Sunucu, SPICE bağlantı isteğini geri çevirdi."
 
-#: spice/spiceview.cpp:949
+#: spice/spiceview.cpp:960
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -3031,7 +3026,7 @@ msgstr ""
 "Bu kapının, uyumlu bir protokol sürümüne sahip bir SPICE sunucusuna ait olup "
 "olmadığını denetleyin."
 
-#: spice/spiceview.cpp:959
+#: spice/spiceview.cpp:970
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -3197,24 +3192,24 @@ msgstr "Orta Kaliteli (DSL, kablo ağ, hızlı İnternet)"
 msgid "Low Quality (Modem, ISDN, slow Internet)"
 msgstr "Düşük Kalite (Modem, ISDN veya yavaş İnternet)"
 
-#: vnc/vncview.cpp:262
+#: vnc/vncview.cpp:265
 #, kde-format
 msgid "Access to the system requires a password."
 msgstr "Bu sisteme erişim bir parola gerektiriyor."
 
-#: vnc/vncview.cpp:262
+#: vnc/vncview.cpp:265
 #, kde-format
 msgid "Authentication failed. Please try again."
 msgstr ""
 "Kimlik doğrulama başarısız oldu. Lütfen yeniden deneyin.Kimlik doğrulama "
 "başarısız oldu."
 
-#: vnc/vncview.cpp:313
+#: vnc/vncview.cpp:317
 #, kde-format
 msgid "VNC authentication failed because of too many authentication tries."
 msgstr "VNC kimlik doğrulaması çok fazla deneme yapıldığından başarısız oldu."
 
-#: vnc/vncview.cpp:316
+#: vnc/vncview.cpp:320
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -3224,13 +3219,13 @@ msgstr ""
 "Birkaç dakika bekleyin. Sunucu, birkaç başarısız deneme sonrası oturum "
 "açmayı bir süre engelliyor olabilir."
 
-#: vnc/vncview.cpp:317
+#: vnc/vncview.cpp:321
 #, kde-format
 msgctxt "@info"
 msgid "Then connect again and enter the password carefully."
 msgstr "Sonrasında yeniden bağlanın ve parolayı dikkatlice girin."
 
-#: vnc/vncview.cpp:323
+#: vnc/vncview.cpp:327
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -3238,7 +3233,7 @@ msgid ""
 msgstr ""
 "Sunucu, KRDC’nin desteklemediği bir kimlik doğrulama yöntemi gerektiriyor."
 
-#: vnc/vncview.cpp:325
+#: vnc/vncview.cpp:329
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -3267,6 +3262,9 @@ msgid ""
 msgstr ""
 "<html>Adresi buraya girin.<br /><i>Örnek: vncsunucu:1 (makine:port / ekran)</"
 "i></html>"
+
+#~ msgid "Remember password"
+#~ msgstr "Parolayı anımsa"
 
 #~ msgid "SSH tunnel options"
 #~ msgstr "SSH tüneli seçenekleri"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-06 00:50+0000\n"
+"POT-Creation-Date: 2026-11-09 00:55+0000\n"
 "PO-Revision-Date: 2007-09-14 13:45+0545\n"
 "Last-Translator: Ishwor Sharma <sharmabeeshwar@gmail.com>\n"
 "Language-Team: Nepali <info@mpp.org.np>\n"
@@ -239,7 +239,7 @@ msgstr ""
 msgid "Hosts"
 msgstr "होस्ट"
 
-#: config/preferencesdialog.cpp:28 core/hostpreferences.cpp:310
+#: config/preferencesdialog.cpp:28 core/hostpreferences.cpp:308
 #, kde-format
 msgid "Host Configuration"
 msgstr ""
@@ -913,50 +913,45 @@ msgctxt "@info"
 msgid "Connect to the network or VPN the remote computer is on."
 msgstr ""
 
-#: core/hostpreferences.cpp:308
+#: core/hostpreferences.cpp:306
 #, fuzzy, kde-format
 #| msgid "Connection"
 msgctxt "@title:window %1 is a host name"
 msgid "Connect to %1"
 msgstr "जडान"
 
-#: core/hostpreferences.cpp:315
+#: core/hostpreferences.cpp:313
 #, kde-format
 msgid ""
 "Note that settings might only apply when you connect next time to this host."
 msgstr ""
 
-#: core/hostpreferences.cpp:338
+#: core/hostpreferences.cpp:336
 #, fuzzy, kde-format
 #| msgid "Connection"
 msgctxt "@action:button"
 msgid "Connect"
 msgstr "जडान"
 
-#: core/hostpreferences.cpp:352
+#: core/hostpreferences.cpp:350
 #, kde-format
 msgctxt "@label:textbox Name of a remote connection"
 msgid "Name:"
 msgstr ""
 
-#: core/hostpreferences.cpp:358
+#: core/hostpreferences.cpp:356
 #, kde-format
 msgctxt "@label:textbox URL of a remote connection"
 msgid "URL:"
 msgstr ""
 
-#: core/hostpreferences.cpp:400
-#, kde-format
-msgid "Remember password"
-msgstr ""
-
-#: core/hostpreferences.cpp:404
+#: core/hostpreferences.cpp:398
 #, fuzzy, kde-format
 #| msgid "&Show this dialog again for this host"
 msgid "Show this dialog again for this host"
 msgstr "यो होस्टका लागि फेरि यो संवाद देखाउनुहोस्"
 
-#: core/hostpreferences.cpp:428
+#: core/hostpreferences.cpp:421
 #, fuzzy, kde-format
 #| msgid "Settings"
 msgctxt "@action:button"
@@ -969,76 +964,76 @@ msgstr "सेटिङ"
 msgid "Sessions"
 msgstr ""
 
-#: core/remoteview.cpp:681
+#: core/remoteview.cpp:726
 #, fuzzy, kde-format
 #| msgid "Please enter the password."
 msgid "Please enter the SSH password."
 msgstr "कृपया पासवर्ड प्रविष्ट गर्नुहोस्।"
 
-#: core/remoteview.cpp:701
+#: core/remoteview.cpp:747
 #, kde-format
 msgctxt "@label"
 msgid "The SSH tunnel on port %1 could not be set up."
 msgstr ""
 
-#: core/remoteview.cpp:704
+#: core/remoteview.cpp:750
 #, kde-format
 msgctxt "@title connection error"
 msgid "SSH server not reachable"
 msgstr ""
 
-#: core/remoteview.cpp:705
+#: core/remoteview.cpp:751
 #, fuzzy, kde-format
 #| msgid "Connection failed. The server does not accept new connections."
 msgctxt "@label"
 msgid "The SSH server did not accept a connection on port %1."
 msgstr "जडान असफल भयो। सर्भरले नयाँ जडान स्वीकार गर्दैन।"
 
-#: core/remoteview.cpp:707
+#: core/remoteview.cpp:753
 #, kde-format
 msgctxt "@info"
 msgid "Make sure the SSH server is running and listens on port %1."
 msgstr ""
 
-#: core/remoteview.cpp:708
+#: core/remoteview.cpp:754
 #, kde-format
 msgctxt "@info"
 msgid ""
 "Check the host name, and that the computer is reachable from this network."
 msgstr ""
 
-#: core/remoteview.cpp:709
+#: core/remoteview.cpp:755
 #, kde-format
 msgctxt "@info"
 msgid "Check that no firewall blocks SSH connections."
 msgstr ""
 
-#: core/remoteview.cpp:713
+#: core/remoteview.cpp:759
 #, fuzzy, kde-format
 #| msgid "Connection Failure"
 msgctxt "@title connection error"
 msgid "SSH login failed"
 msgstr "जडानको असफलता"
 
-#: core/remoteview.cpp:714
+#: core/remoteview.cpp:760
 #, kde-format
 msgctxt "@label"
 msgid "The SSH server did not accept the login."
 msgstr ""
 
-#: core/remoteview.cpp:715
+#: core/remoteview.cpp:761
 #, kde-format
 msgctxt "@label"
 msgid "The SSH server did not accept the login for “%1”."
 msgstr ""
 
-#: core/remoteview.cpp:717
+#: core/remoteview.cpp:763
 #, kde-format
 msgctxt "@info"
 msgid "Check the SSH user name in the host settings, and the password."
 msgstr ""
 
-#: core/remoteview.cpp:718
+#: core/remoteview.cpp:764
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -1046,20 +1041,20 @@ msgid ""
 "and make sure it is authorized on the server."
 msgstr ""
 
-#: core/remoteview.cpp:719
+#: core/remoteview.cpp:765
 #, kde-format
 msgctxt "@info"
 msgid ""
 "If the SSH server does not allow password logins, set up key authentication."
 msgstr ""
 
-#: core/remoteview.cpp:723
+#: core/remoteview.cpp:769
 #, kde-format
 msgctxt "@label"
 msgid "No free local port could be opened for the tunnel on this computer."
 msgstr ""
 
-#: core/remoteview.cpp:725
+#: core/remoteview.cpp:771
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2354,70 +2349,70 @@ msgid ""
 "Fingerprint: %6\n"
 msgstr ""
 
-#: rdp/rdpview.cpp:265
+#: rdp/rdpview.cpp:293
 #, fuzzy, kde-format
 #| msgid "Access to the system requires a password."
 msgctxt "@label"
 msgid "Access to the gateway and this system requires a username and password."
 msgstr "प्रणालीमा पहुँच गर्न पासवर्ड आवश्यक पर्दछ।"
 
-#: rdp/rdpview.cpp:266
+#: rdp/rdpview.cpp:294
 #, fuzzy, kde-format
 #| msgid "Access to the system requires a password."
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
 msgstr "प्रणालीमा पहुँच गर्न पासवर्ड आवश्यक पर्दछ।"
 
-#: rdp/rdpview.cpp:314
+#: rdp/rdpview.cpp:349
 #, fuzzy, kde-format
 #| msgid "Access to the system requires a password."
 msgctxt "@label %1 is a server address"
 msgid "Access to the gateway %1 requires a username and password."
 msgstr "प्रणालीमा पहुँच गर्न पासवर्ड आवश्यक पर्दछ।"
 
-#: rdp/rdpview.cpp:334
+#: rdp/rdpview.cpp:370
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this gateway is unknown. Do you wish to continue?"
 msgstr ""
 
-#: rdp/rdpview.cpp:335
+#: rdp/rdpview.cpp:371
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr ""
 
-#: rdp/rdpview.cpp:336
+#: rdp/rdpview.cpp:372
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
 msgstr ""
 
-#: rdp/rdpview.cpp:341 rdp/rdpview.cpp:373
+#: rdp/rdpview.cpp:377 rdp/rdpview.cpp:409
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
 msgstr ""
 
-#: rdp/rdpview.cpp:366
+#: rdp/rdpview.cpp:402
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this gateway has changed. Do you wish to continue?"
 msgstr ""
 
-#: rdp/rdpview.cpp:367
+#: rdp/rdpview.cpp:403
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
 msgstr ""
 
-#: rdp/rdpview.cpp:368
+#: rdp/rdpview.cpp:404
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
 msgstr ""
 
-#: rdp/rdpview.cpp:371
+#: rdp/rdpview.cpp:407
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -2427,49 +2422,49 @@ msgid ""
 "%2"
 msgstr ""
 
-#: rdp/rdpview.cpp:421
+#: rdp/rdpview.cpp:457
 #, kde-format
 msgctxt "@label"
 msgid "The credentials for “%1” were not accepted."
 msgstr ""
 
-#: rdp/rdpview.cpp:424
+#: rdp/rdpview.cpp:460
 #, kde-format
 msgctxt "@info"
 msgid "Check the RD Gateway credentials in the host settings."
 msgstr ""
 
-#: rdp/rdpview.cpp:440
+#: rdp/rdpview.cpp:476
 #, kde-format
 msgctxt "@label"
 msgid "This account may not log in remotely."
 msgstr ""
 
-#: rdp/rdpview.cpp:441
+#: rdp/rdpview.cpp:477
 #, kde-format
 msgctxt "@label"
 msgid "“%1” may not log in remotely."
 msgstr ""
 
-#: rdp/rdpview.cpp:443 rdp/rdpview.cpp:536 rdp/rdpview.cpp:544
+#: rdp/rdpview.cpp:479 rdp/rdpview.cpp:572 rdp/rdpview.cpp:580
 #, kde-format
 msgctxt "@title connection error"
 msgid "Access denied"
 msgstr ""
 
-#: rdp/rdpview.cpp:446
+#: rdp/rdpview.cpp:482
 #, kde-format
 msgctxt "@label"
 msgid "The gateway or the remote computer refused this login."
 msgstr ""
 
-#: rdp/rdpview.cpp:452
+#: rdp/rdpview.cpp:488
 #, kde-format
 msgctxt "@info"
 msgid "Check whether the account is locked, disabled or expired."
 msgstr ""
 
-#: rdp/rdpview.cpp:454
+#: rdp/rdpview.cpp:490
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2477,19 +2472,19 @@ msgid ""
 "Remote Desktop Users group, or log in with a different account."
 msgstr ""
 
-#: rdp/rdpview.cpp:462
+#: rdp/rdpview.cpp:498
 #, kde-format
 msgctxt "@label"
 msgid "The password must be changed before it can be used to log in remotely."
 msgstr ""
 
-#: rdp/rdpview.cpp:463
+#: rdp/rdpview.cpp:499
 #, kde-format
 msgctxt "@title connection error"
 msgid "Password expired"
 msgstr ""
 
-#: rdp/rdpview.cpp:465
+#: rdp/rdpview.cpp:501
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2497,37 +2492,37 @@ msgid ""
 "administrator to reset it."
 msgstr ""
 
-#: rdp/rdpview.cpp:470
+#: rdp/rdpview.cpp:506
 #, kde-format
 msgctxt "@label"
 msgid "The Kerberos domain controller could not be reached."
 msgstr ""
 
-#: rdp/rdpview.cpp:472
+#: rdp/rdpview.cpp:508
 #, kde-format
 msgctxt "@info"
 msgid "Check the domain you entered when logging in."
 msgstr ""
 
-#: rdp/rdpview.cpp:473
+#: rdp/rdpview.cpp:509
 #, kde-format
 msgctxt "@info"
 msgid "Connect to the network or VPN of the domain."
 msgstr ""
 
-#: rdp/rdpview.cpp:478 spice/spiceview.cpp:953 vnc/vncview.cpp:294
+#: rdp/rdpview.cpp:514 spice/spiceview.cpp:964 vnc/vncview.cpp:298
 #, kde-format
 msgctxt "@label"
 msgid "No IP address was found for this name."
 msgstr ""
 
-#: rdp/rdpview.cpp:489
+#: rdp/rdpview.cpp:525
 #, kde-format
 msgctxt "@label"
 msgid "The server and KRDC could not agree on a security protocol."
 msgstr ""
 
-#: rdp/rdpview.cpp:492
+#: rdp/rdpview.cpp:528
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -2535,7 +2530,7 @@ msgid ""
 "a security protocol."
 msgstr ""
 
-#: rdp/rdpview.cpp:496
+#: rdp/rdpview.cpp:532
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2543,7 +2538,7 @@ msgid ""
 "domain controller can be reached."
 msgstr ""
 
-#: rdp/rdpview.cpp:499
+#: rdp/rdpview.cpp:535
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2551,19 +2546,19 @@ msgid ""
 "support the level selected."
 msgstr ""
 
-#: rdp/rdpview.cpp:503
+#: rdp/rdpview.cpp:539
 #, kde-format
 msgctxt "@label"
 msgid "The server requires Network Level Authentication (NLA)."
 msgstr ""
 
-#: rdp/rdpview.cpp:504
+#: rdp/rdpview.cpp:540
 #, kde-format
 msgctxt "@info"
 msgid "Enable NLA in the security settings for this host."
 msgstr ""
 
-#: rdp/rdpview.cpp:522
+#: rdp/rdpview.cpp:558
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2571,13 +2566,13 @@ msgid ""
 "unreachable or reject the connection."
 msgstr ""
 
-#: rdp/rdpview.cpp:529
+#: rdp/rdpview.cpp:565
 #, kde-format
 msgctxt "@label"
 msgid "The remote computer did not finish starting the session in time."
 msgstr ""
 
-#: rdp/rdpview.cpp:530
+#: rdp/rdpview.cpp:566
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2585,20 +2580,20 @@ msgid ""
 "minute, then connect again."
 msgstr ""
 
-#: rdp/rdpview.cpp:535
+#: rdp/rdpview.cpp:571
 #, kde-format
 msgctxt "@label"
 msgid "The gateway does not allow this account to connect to “%1”."
 msgstr ""
 
-#: rdp/rdpview.cpp:538
+#: rdp/rdpview.cpp:574
 #, kde-format
 msgctxt "@info"
 msgid ""
 "Try the full name of the computer. The gateway may only know it by that name."
 msgstr ""
 
-#: rdp/rdpview.cpp:539
+#: rdp/rdpview.cpp:575
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2606,13 +2601,13 @@ msgid ""
 "its resource authorization policy."
 msgstr ""
 
-#: rdp/rdpview.cpp:543
+#: rdp/rdpview.cpp:579
 #, kde-format
 msgctxt "@label"
 msgid "The gateway does not allow this device to connect."
 msgstr ""
 
-#: rdp/rdpview.cpp:545
+#: rdp/rdpview.cpp:581
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2620,13 +2615,13 @@ msgid ""
 "policy."
 msgstr ""
 
-#: rdp/rdpview.cpp:548
+#: rdp/rdpview.cpp:584
 #, kde-format
 msgctxt "@label"
 msgid "The gateway could not reach “%1”."
 msgstr ""
 
-#: rdp/rdpview.cpp:550
+#: rdp/rdpview.cpp:586
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2634,62 +2629,62 @@ msgid ""
 "by this name."
 msgstr ""
 
-#: rdp/rdpview.cpp:554
+#: rdp/rdpview.cpp:590
 #, kde-format
 msgctxt "@label"
 msgid "It accepted the connection, then refused to start a session."
 msgstr ""
 
-#: rdp/rdpview.cpp:555
+#: rdp/rdpview.cpp:591
 #, fuzzy, kde-format
 #| msgid "Connection Failure"
 msgctxt "@title connection error"
 msgid "Session refused"
 msgstr "जडानको असफलता"
 
-#: rdp/rdpview.cpp:559
+#: rdp/rdpview.cpp:595
 #, kde-format
 msgctxt "@label"
 msgid "The server did not accept the options selected for this host."
 msgstr ""
 
-#: rdp/rdpview.cpp:562
+#: rdp/rdpview.cpp:598
 #, kde-format
 msgctxt "@label"
 msgid "An administrator or another program disconnected this session."
 msgstr ""
 
-#: rdp/rdpview.cpp:565
+#: rdp/rdpview.cpp:601
 #, kde-format
 msgctxt "@label"
 msgid "An administrator signed this session out."
 msgstr ""
 
-#: rdp/rdpview.cpp:568
+#: rdp/rdpview.cpp:604
 #, kde-format
 msgctxt "@label"
 msgid "The session was disconnected from the remote computer."
 msgstr ""
 
-#: rdp/rdpview.cpp:575
+#: rdp/rdpview.cpp:611
 #, kde-format
 msgctxt "@label"
 msgid "Disconnected because someone else connected to this session."
 msgstr ""
 
-#: rdp/rdpview.cpp:576
+#: rdp/rdpview.cpp:612
 #, kde-format
 msgctxt "@info"
 msgid "Reconnect to take the session back. This disconnects the other user."
 msgstr ""
 
-#: rdp/rdpview.cpp:579
+#: rdp/rdpview.cpp:615
 #, kde-format
 msgctxt "@label"
 msgid "The session was closed after being idle for too long."
 msgstr ""
 
-#: rdp/rdpview.cpp:580
+#: rdp/rdpview.cpp:616
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2697,13 +2692,13 @@ msgid ""
 "the server."
 msgstr ""
 
-#: rdp/rdpview.cpp:594
+#: rdp/rdpview.cpp:630
 #, kde-format
 msgctxt "@label"
 msgid "The remote computer reported a problem while logging in."
 msgstr ""
 
-#: rdp/rdpview.cpp:595
+#: rdp/rdpview.cpp:631
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2711,7 +2706,7 @@ msgid ""
 "is not busy."
 msgstr ""
 
-#: rdp/rdpview.cpp:974
+#: rdp/rdpview.cpp:1005
 #, kde-format
 msgctxt "@title:window"
 msgid "KRDC – Screen %1"
@@ -2930,7 +2925,7 @@ msgctxt "@info"
 msgid "Open a new .vv file for this virtual machine."
 msgstr ""
 
-#: spice/spiceview.cpp:879
+#: spice/spiceview.cpp:883
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2938,18 +2933,18 @@ msgid ""
 "expired. Open a new file, or enter the password."
 msgstr ""
 
-#: spice/spiceview.cpp:881
+#: spice/spiceview.cpp:885
 #, kde-format
 msgid "Authentication is required to connect to <b>%1</b>."
 msgstr ""
 
-#: spice/spiceview.cpp:944
+#: spice/spiceview.cpp:955
 #, kde-format
 msgctxt "@label"
 msgid "The TLS handshake failed."
 msgstr ""
 
-#: spice/spiceview.cpp:945
+#: spice/spiceview.cpp:956
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2957,13 +2952,13 @@ msgid ""
 "certificate is trusted."
 msgstr ""
 
-#: spice/spiceview.cpp:948
+#: spice/spiceview.cpp:959
 #, kde-format
 msgctxt "@label"
 msgid "The server rejected the SPICE connection."
 msgstr ""
 
-#: spice/spiceview.cpp:949
+#: spice/spiceview.cpp:960
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2971,7 +2966,7 @@ msgid ""
 "version."
 msgstr ""
 
-#: spice/spiceview.cpp:959
+#: spice/spiceview.cpp:970
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -3134,24 +3129,24 @@ msgstr "मध्यम गुणस्तर (DSL, केबल, द्रु�
 msgid "Low Quality (Modem, ISDN, slow Internet)"
 msgstr "न्यून गुणस्तर (मोडेम, ISDN, ढिलो इन्टरनेट)"
 
-#: vnc/vncview.cpp:262
+#: vnc/vncview.cpp:265
 #, kde-format
 msgid "Access to the system requires a password."
 msgstr "प्रणालीमा पहुँच गर्न पासवर्ड आवश्यक पर्दछ।"
 
-#: vnc/vncview.cpp:262
+#: vnc/vncview.cpp:265
 #, fuzzy, kde-format
 #| msgid "Authentication failed. Connection aborted."
 msgid "Authentication failed. Please try again."
 msgstr "प्रमाणीकरण असफल भयो। जडान परित्याग गरियो।"
 
-#: vnc/vncview.cpp:313
+#: vnc/vncview.cpp:317
 #, fuzzy, kde-format
 #| msgid "Authentication failed. Connection aborted."
 msgid "VNC authentication failed because of too many authentication tries."
 msgstr "प्रमाणीकरण असफल भयो। जडान परित्याग गरियो।"
 
-#: vnc/vncview.cpp:316
+#: vnc/vncview.cpp:320
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -3159,20 +3154,20 @@ msgid ""
 "failed attempts."
 msgstr ""
 
-#: vnc/vncview.cpp:317
+#: vnc/vncview.cpp:321
 #, kde-format
 msgctxt "@info"
 msgid "Then connect again and enter the password carefully."
 msgstr ""
 
-#: vnc/vncview.cpp:323
+#: vnc/vncview.cpp:327
 #, kde-format
 msgctxt "@label"
 msgid ""
 "The server requires an authentication method that KRDC does not support."
 msgstr ""
 
-#: vnc/vncview.cpp:325
+#: vnc/vncview.cpp:329
 #, kde-format
 msgctxt "@info"
 msgid ""
