@@ -189,6 +189,9 @@ public:
 
     QString authPkgList() const;
 
+    bool useDefaultKerberosRealm() const;
+    void setUseDefaultKerberosRealm(bool enabled);
+
     bool authPkgKerberos() const;
     void setAuthPkgKerberos(bool enabled);
     bool authPkgNtlm() const;

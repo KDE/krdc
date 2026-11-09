@@ -272,7 +272,7 @@ private:
     QImage m_videoBuffer;
     std::atomic_bool m_errorEmitted = false;
 
-    RdpHostPreferences *m_preferences;
+    RdpHostPreferences *m_preferences = nullptr;
     QVector<MonitorGeometry> m_monitors;
     QHash<QString, qreal> m_outputScaleFactors;
 };
