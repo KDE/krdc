@@ -91,7 +91,7 @@ static const QHash<QString, int> rdpLayouts = {
     {QStringLiteral("de-ch"), KBD_SWISS_GERMAN},
     {QStringLiteral("en-dv"), KBD_UNITED_STATES_DVORAK},
     {QStringLiteral("en-gb"), KBD_UNITED_KINGDOM},
-    {QStringLiteral("en-us"), KBD_UNITED_STATES_INTERNATIONAL},
+    {QStringLiteral("en-us"), KBD_US},
     {QStringLiteral("es"), KBD_SPANISH},
     {QStringLiteral("et"), KBD_ESTONIAN},
     {QStringLiteral("fi"), KBD_FINNISH},
@@ -569,7 +569,7 @@ int RdpHostPreferences::rdpKeyboardLayout() const
     if (layout == latin1(autoKeymap)) {
         layout = systemKeymap();
     }
-    return rdpLayouts.value(layout, KBD_UNITED_STATES_INTERNATIONAL);
+    return rdpLayouts.value(layout, KBD_US);
 }
 
 void RdpHostPreferences::setSound(Sound sound)
