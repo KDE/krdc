@@ -23,6 +23,10 @@
 #include <QScreen>
 #include <QThreadPool>
 
+#ifdef HAVE_KRB5
+#include <krb5.h>
+#endif
+
 #ifdef HAVE_KSCREEN
 #include <KScreen/Config>
 #include <KScreen/GetConfigOperation>
@@ -287,26 +291,65 @@ void RdpSession::postFinalDisconnect(freerdp *)
 {
 }
 
+static bool hasKerberosRealmMapping(const QString &domain)
+{
+#ifdef HAVE_KRB5
+    krb5_context context = nullptr;
+    if (krb5_init_context(&context) != 0) {
+        return false;
+    }
+
+    // An empty referral realm means there is no mapping. Do not ask for the
+    // fallback realm: that can be an unrelated default from the sample krb5.conf.
+    char **realms = nullptr;
+    const bool mapped = krb5_get_host_realm(context, domain.toUtf8().constData(), &realms) == 0 && realms && realms[0] && realms[0][0];
+    if (realms) {
+        krb5_free_host_realm(context, realms);
+    }
+    krb5_free_context(context);
+    return mapped;
+#else
+    Q_UNUSED(domain);
+    return false;
+#endif
+}
+
+static bool useSignInName(QString &user, QString &domain, bool useDefaultRealm)
+{
+    if (useDefaultRealm || domain == QLatin1String(".") || !domain.contains(QLatin1Char('.')) || user.isEmpty() || user.contains(QLatin1Char('@'))
+        || user.contains(QLatin1Char('\\')) || hasKerberosRealmMapping(domain)) {
+        return false;
+    }
+
+    // Without an explicit realm, FreeRDP can send the identity to an unrelated
+    // default realm. A sign-in name confines Kerberos to the supplied domain.
+    user += QLatin1Char('@') + domain;
+    domain.clear();
+    return true;
+}
+
 BOOL RdpSession::authenticateEx(freerdp *instance, char **username, char **password, char **domain, rdp_auth_reason reason)
 {
     auto session = reinterpret_cast<RdpContext *>(instance->context)->session;
 
     // Without a gateway user name, the gateway uses the same login as the remote computer.
     const bool gateway = reason == GW_AUTH_HTTP || reason == GW_AUTH_RDG || reason == GW_AUTH_RPC;
-    if (gateway && *username && **username) {
-        return session->onAuthenticateGateway(username, password, domain);
+    const bool authenticated = gateway && *username && **username ? session->onAuthenticateGateway(username, password, domain)
+                                                                  : session->onAuthenticate(username, password, domain);
+    if (!authenticated) {
+        return false;
     }
 
-    // TODO: this needs to handle:
-    // user
-    // smartcard
-    // AAD
-    // needs new settings
-    if (session->onAuthenticate(username, password, domain)) {
-        return true;
+    QString user = QString::fromUtf8(*username);
+    QString userDomain = QString::fromUtf8(*domain);
+    const auto preferences = session->preferences();
+    if (useSignInName(user, userDomain, preferences && preferences->useDefaultKerberosRealm())) {
+        free(*username);
+        *username = _strdup(user.toUtf8().constData());
+        free(*domain);
+        *domain = nullptr;
     }
-
-    return false;
+    return true;
 }
 
 DWORD RdpSession::verifyChangedCertificateEx(freerdp *rdp,
@@ -830,7 +873,10 @@ int RdpSession::clientContextStart(rdpContext *context)
         if (!freerdp_settings_set_uint32(settings, FreeRDP_GatewayPort, gatewayServerAddress.port(DefaultGatewayPort))) {
             return -1;
         }
-        if (!freerdp_settings_set_string(settings, FreeRDP_GatewayUsername, preferences->gatewayUsername().toUtf8().data())) {
+        QString gatewayUser = preferences->gatewayUsername();
+        QString gatewayDomain = preferences->gatewayDomain();
+        useSignInName(gatewayUser, gatewayDomain, preferences->useDefaultKerberosRealm());
+        if (!freerdp_settings_set_string(settings, FreeRDP_GatewayUsername, gatewayUser.toUtf8().data())) {
             return -1;
         }
         if (!freerdp_settings_set_string(settings,
@@ -838,7 +884,7 @@ int RdpSession::clientContextStart(rdpContext *context)
                                          session->m_ignoreSavedGatewayPassword ? "" : session->m_savedGatewayPassword.toUtf8().data())) {
             return -1;
         }
-        if (!freerdp_settings_set_string(settings, FreeRDP_GatewayDomain, preferences->gatewayDomain().toUtf8().data())) {
+        if (!freerdp_settings_set_string(settings, FreeRDP_GatewayDomain, gatewayDomain.toUtf8().data())) {
             return -1;
         }
         if (!freerdp_settings_set_bool(settings, FreeRDP_GatewayUseSameCredentials, preferences->gatewayUsername().isEmpty())) {

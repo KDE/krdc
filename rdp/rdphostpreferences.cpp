@@ -398,6 +398,7 @@ QWidget *RdpHostPreferences::createProtocolSpecificConfigPage(QWidget *sshTunnel
     rdpUi.kcfg_AuthPkgKerberos->setChecked(authPkgKerberos());
     rdpUi.kcfg_AuthPkgNtlm->setChecked(authPkgNtlm());
     rdpUi.kcfg_AuthPkgU2u->setChecked(authPkgU2u());
+    rdpUi.kcfg_UseDefaultKerberosRealm->setChecked(useDefaultKerberosRealm());
 
     setupRdpSettingsForm(rdpUi);
     updateWidthHeight(resolution());
@@ -488,6 +489,7 @@ void RdpHostPreferences::acceptConfig()
     setAuthPkgKerberos(rdpUi.kcfg_AuthPkgKerberos->isChecked());
     setAuthPkgNtlm(rdpUi.kcfg_AuthPkgNtlm->isChecked());
     setAuthPkgU2u(rdpUi.kcfg_AuthPkgU2u->isChecked());
+    setUseDefaultKerberosRealm(rdpUi.kcfg_UseDefaultKerberosRealm->isChecked());
 }
 
 bool RdpHostPreferences::scaleToSize() const
@@ -759,6 +761,16 @@ QString RdpHostPreferences::authPkgList() const
         denied << QStringLiteral("!u2u");
     }
     return denied.join(QLatin1Char(','));
+}
+
+bool RdpHostPreferences::useDefaultKerberosRealm() const
+{
+    return m_configGroup.readEntry("useDefaultKerberosRealm", Settings::useDefaultKerberosRealm());
+}
+
+void RdpHostPreferences::setUseDefaultKerberosRealm(bool enabled)
+{
+    m_configGroup.writeEntry("useDefaultKerberosRealm", enabled);
 }
 
 bool RdpHostPreferences::authPkgKerberos() const

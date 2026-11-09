@@ -40,6 +40,18 @@ target_link_libraries(krdc_rdpplugin
     winpr
 )
 
+find_package(PkgConfig QUIET)
+set(KRDC_HAVE_KRB5 FALSE)
+if(PkgConfig_FOUND)
+    pkg_check_modules(KRB5 QUIET IMPORTED_TARGET krb5)
+    if(KRB5_FOUND)
+        set(KRDC_HAVE_KRB5 TRUE)
+        target_link_libraries(krdc_rdpplugin PkgConfig::KRB5)
+        target_compile_definitions(krdc_rdpplugin PRIVATE HAVE_KRB5)
+    endif()
+endif()
+add_feature_info("Kerberos realm mappings" KRDC_HAVE_KRB5 "Preserve configured Kerberos domain-to-realm mappings for RDP logins")
+
 if(KF6Screen_FOUND)
     target_link_libraries(krdc_rdpplugin KF6::Screen)
     target_compile_definitions(krdc_rdpplugin PRIVATE HAVE_KSCREEN)

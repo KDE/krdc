@@ -1159,6 +1159,16 @@
          </item>
         </layout>
        </item>
+       <item row="3" column="1">
+        <widget class="QCheckBox" name="kcfg_UseDefaultKerberosRealm">
+         <property name="text">
+          <string>Use the default Kerberos realm for unmapped domains</string>
+         </property>
+         <property name="toolTip">
+          <string>Enable this for an alternate sign-in suffix that uses the default realm in your Kerberos configuration. The desktop and gateway login names may be sent to that realm. Leave this unchecked if the default realm is unrelated to this connection.</string>
+         </property>
+        </widget>
+       </item>
       </layout>
      </widget>
     </widget>
@@ -1223,6 +1233,7 @@
   <tabstop>kcfg_AuthPkgKerberos</tabstop>
   <tabstop>kcfg_AuthPkgNtlm</tabstop>
   <tabstop>kcfg_AuthPkgU2u</tabstop>
+  <tabstop>kcfg_UseDefaultKerberosRealm</tabstop>
  </tabstops>
  <resources />
  <connections />
