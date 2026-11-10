@@ -292,6 +292,11 @@ bool ConnectionStatusWidget::hasFatalError() const
     return m_hasError && m_error.fatal;
 }
 
+bool ConnectionStatusWidget::sessionDisconnected() const
+{
+    return m_error.stage == ConnectionError::Stage::SessionEnded || m_error.stage == ConnectionError::Stage::ConnectionLost;
+}
+
 bool ConnectionStatusWidget::wasConnected() const
 {
     return m_reached >= RemoteView::Connected;
@@ -579,7 +584,7 @@ void ConnectionStatusWidget::setError(const ConnectionError &error)
     }
 
     const bool ended = error.stage == Stage::SessionEnded;
-    const bool afterConnecting = ended || error.stage == Stage::ConnectionLost;
+    const bool afterConnecting = sessionDisconnected();
 
     Row *failed = nullptr;
     if (afterConnecting) {

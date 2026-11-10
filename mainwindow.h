@@ -102,8 +102,12 @@ private:
     void detachRemoteView(RemoteView *view);
     void setAddressInput(const QUrl &url);
     ConnectionStatusWidget *statusWidgetFor(RemoteView *view) const;
-    void openConnection(const QUrl &newUrl, bool switchFullscreenWhenConnected, const QString &tabName, RemoteViewFactory::ConnectionFile connectionFile);
-    void reconnectInTab(QWidget *tab, const QUrl &url, const RemoteViewFactory::ConnectionFile &connectionFile);
+    void openConnection(const QUrl &newUrl,
+                        bool switchFullscreenWhenConnected,
+                        const QString &tabName,
+                        RemoteViewFactory::ConnectionFile connectionFile,
+                        bool promptForSettings = true);
+    void reconnectInTab(QWidget *tab, const QUrl &url, const RemoteViewFactory::ConnectionFile &connectionFile, bool promptForSettings = true);
     /** The name shown in the tab of a connection, or empty when the tab shows its address. */
     QString connectionName(QWidget *tab, const QUrl &url) const;
     ConnectionError unexplainedDisconnect(const ConnectionStatusWidget *statusWidget) const;

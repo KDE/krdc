@@ -40,6 +40,8 @@ public:
     void setReconnecting(bool reconnecting, const QString &details);
     bool hasError() const;
     bool hasFatalError() const;
+    /// Whether the current error describes an ended session or a lost connection.
+    bool sessionDisconnected() const;
     /// Whether the connection reached Connected at some point.
     bool wasConnected() const;
     /// The address the connection was opened with; it names the host's settings group.
