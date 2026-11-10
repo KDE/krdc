@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-09 00:55+0000\n"
+"POT-Creation-Date: 2026-11-10 00:57+0000\n"
 "PO-Revision-Date: 2009-02-26 22:31+0530\n"
 "Last-Translator: Ravishankar Shrivastava <raviratlami@aol.in>\n"
 "Language-Team: Hindi <kde-i18n-doc@lists.kde.org>\n"
@@ -2341,7 +2341,23 @@ msgstr ""
 msgid "U2U"
 msgstr ""
 
-#: rdp/rdpsession.cpp:1354
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseDefaultKerberosRealm)
+#: rdp/rdppreferences.ui:1165
+#, kde-format
+msgid "Use the default Kerberos realm for unmapped domains"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_UseDefaultKerberosRealm)
+#: rdp/rdppreferences.ui:1168
+#, kde-format
+msgid ""
+"Enable this for an alternate sign-in suffix that uses the default realm in "
+"your Kerberos configuration. The desktop and gateway login names may be sent "
+"to that realm. Leave this unchecked if the default realm is unrelated to "
+"this connection."
+msgstr ""
+
+#: rdp/rdpsession.cpp:1400
 #, kde-format
 msgctxt "@label"
 msgid ""

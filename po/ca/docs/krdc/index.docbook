@@ -415,9 +415,9 @@ as Authors, publish date, the abstract, and Keywords -->
 <para
 >Quan el servidor sol·liciti autenticació, introduïu la seva contrasenya i, si ho sol·licita, el seu nom d'usuari. L'opció <guilabel
 >Recorda la contrasenya</guilabel
-> permet al &krdc; emmagatzemar les credencials mitjançant el magatzem de credencials del sistema utilitzant QtKeychain. L'emmagatzematge de contrasenyes també depèn del paràmetre global <guilabel
+> permet al &krdc; emmagatzemar la contrasenya introduïda mitjançant el magatzem de credencials del sistema utilitzant QtKeychain després d'una autenticació correcta. L'elecció és recorda per aquest servidor. Les contrasenyes desades anteriorment segueixen disponibles fins i tot quan aquesta opció no està marcada. La configuració global <guilabel
 >Recorda les contrasenyes</guilabel
->.</para>
+> controla tant la lectura com el desament de les contrasenyes; quan està desactivada, el diàleg d'autenticació no ofereix recordar la contrasenya.</para>
 
 <para>
 <screenshot>
