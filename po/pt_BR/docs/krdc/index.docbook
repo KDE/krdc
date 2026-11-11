@@ -35,6 +35,18 @@ as Authors, publish date, the abstract, and Keywords -->
 ></address>
     </affiliation>
 </author>
+<author
+><firstname
+>Fabio</firstname
+> <surname
+>Bas</surname
+> <affiliation
+> <address
+><email
+>ctrlaltca @ gmail.com</email
+></address>
+    </affiliation>
+</author>
 <othercredit role="translator"
 ><firstname
 >Marcus</firstname
@@ -43,7 +55,7 @@ as Authors, publish date, the abstract, and Keywords -->
 ><affiliation
 ><address
 ><email
->marcus.gama@gmail.com</email
+>marcus.gama@kde.org</email
 ></address
 ></affiliation
 ><contrib
@@ -56,22 +68,24 @@ as Authors, publish date, the abstract, and Keywords -->
 >&FDLNotice;</legalnotice>
 
 <date
->25/07/2016</date>
+>24/09/2026</date>
 <releaseinfo
->Applications 16.08</releaseinfo>
+>KDE Gear 26.12.00</releaseinfo>
 
 <copyright>
 <year
->2003, 2008</year>
+>2003, 2026</year>
 </copyright>
 
 <abstract>
 <para
->O &krdc; é um aplicativo cliente que lhe permite ver ou mesmo controlar a sessão de tela de outra máquina que esteja rodando um servidor compatível com o <acronym
+>O &krdc; é um aplicativo cliente que permite visualizar ou até mesmo controlar a sessão da área de trabalho em outra máquina que esteja executando um servidor compatível. O <acronym
 >VNC</acronym
-> ou o <acronym
+>, o <acronym
 >RDP</acronym
->. </para>
+> e o <acronym
+>SPICE</acronym
+> são suportados quando os respectivos plugins estão instalados e habilitados. </para>
 </abstract>
 
 <keywordset>
@@ -98,6 +112,8 @@ as Authors, publish date, the abstract, and Keywords -->
 <keyword
 >RDP</keyword>
 <keyword
+>SPICE</keyword>
+<keyword
 >Administração Remota</keyword>
 </keywordset>
 
@@ -108,57 +124,127 @@ as Authors, publish date, the abstract, and Keywords -->
 >Introdução</title>
 
 <para
->O &krdc; é um aplicativo cliente que lhe permite ver ou mesmo controlar a sessão de tela de outra máquina que esteja rodando um servidor compatível. </para>
+>O &krdc; permite visualizar e controlar a área de trabalho de outro computador. Você pode usá-lo para trabalhar em uma máquina remota ou ajudar outro usuário. O computador ao qual você se conecta deve executar um servidor de área de trabalho remota compatível; o &krdc; é o cliente e não habilita o compartilhamento da área de trabalho nesse computador.</para>
 
 <para
->Você irá usar tipicamente o &krdc; com o servidor de <acronym
+>O &krdc; suporta <acronym
 >VNC</acronym
-> do &kde;, que é o &krfb;, uma vez que ele é o que mais se adequa às funcionalidades especiais do &krdc;. </para>
+> (Computação em rede virtual, sigla em inglês), <acronym
+>RDP</acronym
+> (Protocolo de área de trabalho remota, sigla em inglês) e <acronym
+>SPICE</acronym
+>. Os protocolos disponíveis na sua instalação dependem dos plugins instalados e habilitados. Por exemplo, você pode conectar-se a uma área de trabalho compartilhada pelo &krfb; usando <acronym
+>VNC</acronym
+>, a um servidor de Área de Trabalho Remota usando <acronym
+>RDP</acronym
+> ou a uma máquina virtual com um servidor <acronym
+>SPICE</acronym
+>.</para>
 
 <para
->Se você quiser iniciar o &krdc; a partir do &konsole;, o comando é <userinput
+>Inicie o &krdc; a partir do seu lançador de aplicativos ou execute <userinput
 ><command
 >krdc</command
 ></userinput
->. </para>
-
-<para
->Por favor comunique quaisquer problemas ou pedidos de funcionalidades para as listas de discussão do &kde; ou envie um erro para <ulink url="https://bugs.kde.org"
->https://bugs.kde.org</ulink
->. </para>
+> em um terminal. Para exemplos de linha de comando, consulte <xref linkend="command-line"/>.</para>
 </chapter>
 
-<chapter id="what-is-RFB">
+<chapter id="supported-protocols">
 <title
->O protocolo do 'Buffer de Quadro Remoto' (Buffer de Quadro Remoto)</title>
+>Protocolos suportados</title>
 
 <para
->Este capítulo oferece uma breve descrição do protocolo Buffer de Quadro Remoto que é usado pelo &krdc; e pelos outros sistemas compatíveis. Se você já estiver familiarizado com o 'Buffer de Quadro Remoto', você poderá pular sem problemas este capítulo. </para>
-
-<para
->A implementação de alto nível de um sistema que use o protocolo Buffer de Quadro Remoto é conhecido como Virtual Network Computer (Computador de Rede Virtual), ou mais frequentemente por <acronym
+>O &krdc; oferece suporte a <acronym
 >VNC</acronym
->. </para>
+>, <acronym
+>RDP</acronym
+> e <acronym
+>SPICE</acronym
+> por meio de plugins de protocolo. Selecione o protocolo compatível com o servidor no computador remoto. O cliente e o servidor podem executar sistemas operacionais diferentes.</para>
+
+<sect1 id="protocol-vnc">
+<title
+>VNC</title>
 
 <para
->O Buffer de Quadro Remoto (ou, do inglês, <acronym
+>O <acronym
+>VNC</acronym
+> utiliza o protocolo Buffer de Quadro Remoto (<acronym
 >RFB</acronym
-> para abreviar) é um protocolo simples para o acesso remoto às interfaces gráficas dos usuários. Funciona ao nível do buffer de quadro, o que corresponde grosseiramente à imagem desenhada no tela, o que significa que pode ser aplicado a todos os sistemas de janelas (incluindo o X11, &MacOS; e &Microsoft; &Windows;). Os aplicativos do Buffer de Quadro Remoto existem para várias plataformas e poderão ser redistribuídos livremente. </para>
+>, sigla em inglês). O servidor envia atualizações da imagem de sua área de trabalho para o cliente, e o cliente envia de volta ao servidor as entradas de teclado e de ponteiro. Ele é comumente utilizado para compartilhar uma sessão de área de trabalho existente.</para>
 
 <para
->No protocolo do Buffer de Quadro Remoto, o aplicativo que se executa na máquina em que o usuário se senta (que contém a tela, o teclado e o mouse) é chamado de cliente. O aplicativo que roda na máquina em que o buffer de quadro se encontra (e onde está rodando o sistema de janelas e os aplicativos que o usuário está controlando remotamente) é chamado de servidor. O &krdc; é o cliente do &kde; para o protocolo do Buffer de Quadro Remoto. O &krfb; é o servidor do &kde; para o mesmo protocolo. </para>
+>O <ulink url="https://apps.kde.org/krfb/"
+>&krfb;</ulink
+> é o aplicativo de compartilhamento de área de trabalho do &kde; e fornece um servidor <acronym
+>VNC</acronym
+> para compartilhar uma área de trabalho do &plasma;. Inicie e configure o &krfb; no computador cuja área de trabalho você deseja compartilhar e, em seguida, conecte-se a ele a partir do &krdc; usando <acronym
+>VNC</acronym
+>. Outros servidores VNC compatíveis também podem ser utilizados.</para>
 
 <para
->Ele gera um significativo tráfego de rede para enviar uma imagem da tela completa, por isso o Buffer de Quadro Remoto funciona melhor em redes com banda larga, como uma rede local. É possível ainda usar o &krdc; em outras conexões, mas a performance é pouco provável que seja tão boa. </para>
+>A velocidade da conexão e a quantidade de alterações na tela remota afetam a responsividade. Se as atualizações estiverem lentas, tente uma configuração de qualidade <acronym
+>VNC</acronym
+> mais baixa em <xref linkend="vnc-settings"/>.</para>
+</sect1>
 
+<sect1 id="protocol-rdp">
+<title
+>RDP</title>
+
+<para
+>O <acronym
+>RDP</acronym
+> (Protocolo de Área de Trabalho Remota, sigla em inglês) fornece acesso remoto a uma área de trabalho, com recursos como reprodução de áudio e compartilhamento da área de transferência. Os recursos disponíveis dependem do servidor e de sua configuração.</para>
+
+<para
+>No &kde; &plasma;, o <ulink url="https://invent.kde.org/plasma/krdp"
+> <application
+>KRDP</application
+></ulink
+> fornece um servidor RDP para compartilhar uma sessão de área de trabalho Wayland. Configure o acesso remoto à área de trabalho nas &systemsettings; do &plasma; e, em seguida, conecte-se a partir do &krdc; usando <acronym
+>RDP</acronym
+>.</para>
+
+<para
+>O <acronym
+>RDP</acronym
+> também é utilizado nativamente pela Área de Trabalho Remota do &Microsoft; &Windows;. Você pode se conectar a um PC com Windows após habilitar a Área de Trabalho Remota nele. Para hospedar conexões de entrada, é necessária uma edição compatível; o Windows Home não inclui o servidor de Área de Trabalho Remota.</para>
+
+<para
+>Para opções de exibição, som, compartilhamento, gateway e outras conexões, consulte <xref linkend="rdp-settings"/>.</para>
+</sect1>
+
+<sect1 id="protocol-spice">
+<title
+>SPICE</title>
+
+<para
+>O <acronym
+>SPICE</acronym
+> é comumente utilizado para acessar o console gráfico de uma máquina virtual. O <application
+>QEMU</application
+> pode fornecer um servidor SPICE para uma máquina convidada, e ferramentas como o <application
+>virt-manager</application
+> podem configurar esse servidor por meio do <application
+>libvirt</application
+>.</para>
+
+<para
+>Habilite uma exibição SPICE para a máquina virtual e obtenha o endereço e a porta de escuta na configuração de virtualização. No &krdc;, conecte-se ao host que executa o QEMU e à porta atribuída a essa máquina virtual. Isso estabelece uma conexão com o console da máquina convidada através do host de virtualização, em vez de conectar-se a um servidor de área de trabalho remota em execução dentro da própria máquina convidada.</para>
+
+<para
+>O agente convidado, <application
+>spice-vdagent</application
+>, habilita recursos de integração, como o compartilhamento da área de transferência e alterações dinâmicas de resolução. Consulte <xref linkend="spice-settings"/> para opções do &krdc; e o <ulink url="https://www.spice-space.org/spice-user-manual.html"
+>Manual do Usuário do SPICE</ulink
+> para configurações do QEMU, virt-manager e do sistema convidado.</para>
+</sect1>
 </chapter>
 
 <chapter id="using-krdc">
 <title
 >Usando o &krdc;</title>
-
-<para
->É bastante simples usar o &krdc; - ele possui uma interface simples, tal como é demonstrado na captura de tela abaixo. </para>
 
 <para>
 <screenshot>
@@ -176,48 +262,68 @@ as Authors, publish date, the abstract, and Keywords -->
 </screenshot>
 </para>
 
-<sect1 id="compatible-versions"
-><title
+<sect1 id="compatible-versions">
+<title
 >Conectando o &krdc; a servidores compatíveis</title>
 
 <para
->O &krdc; é um cliente e necessita de ser usado com servidores compatíveis. Existem diferentes formas de se conectar a esses servidores: </para>
+>Antes de se conectar, habilite o servidor de área de trabalho remota apropriado no computador remoto e obtenha o endereço e os dados de login dele. O servidor deve estar acessível a partir do seu computador, e o firewall dele deve permitir a conexão necessária.</para>
 
-<itemizedlist>
-<listitem>
-<para
->Digitando diretamente o nome do servidor (ou o seu endereço IP) no campo <guilabel
->Conectar a:</guilabel
->.</para
-> 
-</listitem>
-<listitem>
-<para
->Usando um convite que tenha recebido. O &krfb; usa convites e pode enviá-los por mensagem eletrônica.</para>
-</listitem>
-</itemizedlist>
-
-<para
->Vamos olhar para um de cada vez. </para>
-
-<sect2
-><title
->Entrada do nome do servidor</title>
-<para
->Se você souber o nome da máquina (ou o seu endereço IP) do servidor ao qual se deseja conectar, você poderá indicá-lo diretamente no campo <guilabel
->Conectar a:</guilabel
->. </para>
-
-<para
->Se você quiser conectar à máquina chamada 'maria', que esteja rodando um servidor de <acronym
->VNC</acronym
-> na tela 1 (5901), você poderá digitar <userinput
->maria:1</userinput
-> ou <userinput
->maria:5901</userinput
-> e escolher o <guilabel
+<procedure>
+<step
+><para
+>Selecione <menuchoice
+><guimenu
+>Arquivo</guimenu
+><guimenuitem
+>Nova conexão</guimenuitem
+></menuchoice
+> para abrir a página de conexão.</para
+></step>
+<step
+><para
+>Selecione <guilabel
 >vnc</guilabel
-> como protocolo na lista. </para>
+>, <guilabel
+>rdp</guilabel
+> ou <guilabel
+>spice</guilabel
+> no seletor de protocolo ao lado de <guilabel
+>Conectar à:</guilabel
+>.</para
+></step>
+<step
+><para
+>Insira o endereço do servidor no formato <userinput
+>[nome_de_usuário@]host[:porta]</userinput
+> e, em seguida, pressione <keycap
+>Enter</keycap
+> ou clique no botão de seta ao lado do endereço. O protocolo já está selecionado, portanto, não o inclua no início deste campo.</para
+></step>
+<step
+><para
+>Revise as configurações do host, se solicitado, e insira as credenciais exigidas pelo servidor. Cada conexão é aberta em uma aba.</para
+></step>
+</procedure>
+
+<variablelist>
+<varlistentry
+><term
+><acronym
+>VNC</acronym
+></term>
+<listitem
+><para
+>Digite <userinput
+>megan</userinput
+> para a porta padrão 5900. Para a tela 1 na porta 5901, digite <userinput
+>megan:1</userinput
+> ou <userinput
+>megan:5901</userinput
+>. Números de porta inferiores a 100 são interpretados como números de tela <acronym
+>VNC</acronym
+> e somados a 5900.</para>
+
 <para>
 <screenshot>
 <screeninfo
@@ -232,49 +338,77 @@ as Authors, publish date, the abstract, and Keywords -->
 	  </textobject>
 	</mediaobject>
 </screenshot>
-</para>
+</para
+></listitem
+></varlistentry>
+<varlistentry
+><term
+><acronym
+>RDP</acronym
+></term>
+<listitem
+><para
+>Digite <userinput
+>megan</userinput
+> para a porta padrão 3389 ou <userinput
+>megan:3390</userinput
+> para uma porta diferente. Você pode incluir um nome de usuário, por exemplo, <userinput
+>alice@megan</userinput
+>.</para
+></listitem
+></varlistentry>
+<varlistentry
+><term
+><acronym
+>SPICE</acronym
+></term>
+<listitem
+><para
+>Insira o host e a porta do servidor <acronym
+>SPICE</acronym
+> da máquina virtual; por exemplo, <userinput
+>vmhost:5902</userinput
+>. A porta padrão é 5900.</para
+></listitem
+></varlistentry>
+</variablelist>
 
 <para
->De forma similar, se você estiver usando um servidor <acronym
->RDP</acronym
-> nessa máquina, você poderá inserir <userinput
->maria</userinput
->. Escolha o <guilabel
->rdp</guilabel
-> como protocolo. O <acronym
->RDP</acronym
-> não necessita que o número da tela seja indicado. Se o servidor rodar o servidor de <acronym
->RDP</acronym
-> numa porta diferente do padrão, você poderá indicá-la no formato <userinput
->maria:3910</userinput
-> </para>
-<para
->Você precisa indicar uma &URL; com uma sintaxe codificada em porcentagens, isto é, @ como %40, &eg;, <userinput
->usuário%40ad.domínio.exemplo</userinput
-> </para>
-<!--https://bugs.kde.org/show_bug.cgi?id=261076-->
-
-</sect2>
-
-<sect2
-><title
->Usando um convite</title>
-<para
->Dentro do aplicativo servidor do &krfb;, é possível enviar convites por e-mail (e de outras formas, ainda que a do e-mail seja a mais útil). Se você receber este tipo de convite por e-mail, você poderá simplesmente clicar na ligação fornecida pelo e-mail. Isto irá iniciar o &krdc; se não estiver já rodando, e conectar-se-á ao servidor indicado no convite. </para>
-
-</sect2>
-
+>A página de conexões também lista favoritos, histórico de conexões e serviços <acronym
+>VNC</acronym
+> anunciados na rede local via Zeroconf. Digitar no campo de endereço filtra essa lista. Você pode selecionar uma conexão listada e usar a opção <guimenuitem
+>Conectar</guimenuitem
+> no menu de contexto. O painel <guilabel
+>Áreas de trabalho remotas</guilabel
+> oferece outra maneira de encontrar conexões salvas e descobertas.</para>
 </sect1>
 
-<sect1 id="connection"
-><title
+<sect1 id="connection">
+<title
 >O que acontece quando você se conecta</title>
 
 <para
->Atenção: Antes de se conectar, certifique-se de que o computador-alvo (o servidor) esteja disponível na rede e, se necessário, que o seu 'firewall' esteja configurado corretamente ou desativado. </para>
-
-<para
->Independentemente de como seleciona o servidor ao qual se conecta, a próxima coisa que acontece é que o &krdc; lhe pergunta sobre a conexão de rede ao servidor, como é apresentado abaixo: </para>
+>Antes de se conectar a um novo host, o &krdc; solicita as configurações que, com maior frequência, precisam ser alteradas: o tamanho da tela, o som ou o tipo de conexão. Clique em <guibutton
+>Todas as configurações…</guibutton
+> para visualizar todas as opções disponíveis para o host e para atribuir um <guilabel
+>Nome</guilabel
+> à conexão — nome que será exibido na lista de conexões em vez do endereço do host. As configurações estão agrupadas da mesma forma que as definições padrão do protocolo, encontradas nas preferências de <guilabel
+>Plugins</guilabel
+>: <guilabel
+>Tela</guilabel
+>, <guilabel
+>Recursos locais</guilabel
+> e, para o protocolo <acronym
+>RDP</acronym
+>, <guilabel
+>Conexão</guilabel
+> (sessão, gateway, proxy e túnel SSH) e <guilabel
+>Segurança</guilabel
+>. Clique em <guibutton
+>Conectar</guibutton
+> para estabelecer a conexão com as definições escolhidas. Desmarque a opção <guilabel
+>Mostrar esta janela novamente para este host</guilabel
+> caso deseje reutilizar essas configurações sem que o sistema solicite confirmação a cada nova conexão. As configurações ficam vinculadas ao endereço da conexão; portanto, ao conectar-se utilizando um nome de host ou endereço IP diferente, é possível que uma configuração distinta seja aplicada.</para>
 
 <para>
 <screenshot>
@@ -293,45 +427,11 @@ as Authors, publish date, the abstract, and Keywords -->
 </para>
 
 <para
->Existem três configurações de velocidade para o protocolo <acronym
->VNC</acronym
->: </para>
-
-<itemizedlist>
-<listitem
-><para
->Alta Qualidade (LAN, conexão direta), que é a padrão, e você deverá avaliar como esta configuração se comporta antes de selecionar uma opção de menor performance que use menos largura de banda. </para
-></listitem>
-<listitem
-><para
->Qualidade Média (DSL, Cabo, Internet rápida).</para
-></listitem>
-<listitem
-><para
->Baixa Qualidade (Modem, RDIS, Internet lenta).</para
-></listitem>
-</itemizedlist>
-
-<para
->Se você sempre trabalha com o mesmo tipo de conexão, você poderá desmarcar a opção <guilabel
->Mostrar esta janela novamente para esta máquina</guilabel
->, o que significa que não terá que responder mais sobre o tipo de conexão para esta máquina, desde que a identifique da mesma forma. Por exemplo, se uma máquina tiver dois nomes, e desligar a opção ao conectar-se com um nome, você não será mais questionado se conectar-se por esse nome, ainda que o seja se usar o outro nome ou o endereço IP. </para>
-
-<para
->Você pode selecionar a configuração da velocidade apropriada e depois selecionar <guibutton
->OK</guibutton
-> para prosseguir. </para>
-
-<para
->Você poderá ver o estado da conexão no ícone da página. </para>
-
-<para
->Dependendo da configuração do servidor, você poderá (quase com certeza) necessitar de indicar uma senha para se autenticar no servidor. O &krdc; irá mostrar uma janela de autenticação semelhante à seguinte. </para>
-
-<para
->O &krdc; tem a capacidade de salvar a senha para conexões futuras à mesma máquina. Ele usa o KWallet para fazer isso. Você precisará assinalar a opção <guibutton
->Recordar a senha (KWallet)</guibutton
-> se quiser usar esta funcionalidade. </para>
+>Quando o servidor solicitar autenticação, insira sua senha e, se solicitado, seu nome de usuário. A opção <guilabel
+>Lembrar senha</guilabel
+> permite que o &krdc; armazene as credenciais no armazenamento de credenciais do sistema, utilizando o QtKeychain. O armazenamento da senha também depende da configuração global <guilabel
+>Lembrar senhas</guilabel
+>.</para>
 
 <para>
 <screenshot>
@@ -350,87 +450,158 @@ as Authors, publish date, the abstract, and Keywords -->
 </para>
 
 <para
->Após a autenticação, você irá conectar-se ao servidor remoto, e poderá começar a usar o &krdc; para observar ou controlar a tela remota. </para>
+>Para <acronym
+>RDP</acronym
+>, o &krdc; pode solicitar que você verifique um certificado de servidor desconhecido ou alterado. Verifique os detalhes do certificado com o administrador do servidor antes de aceitá-lo. A caixa de diálogo oferece a opção <guilabel
+>Lembrar deste certificado</guilabel
+> para conexões futuras.</para>
 
+<para
+>O ícone da aba indica o status da conexão. Após a autenticação bem-sucedida, você pode visualizar ou controlar a área de trabalho remota.</para>
 </sect1>
 
-<sect1 id="controlling-remote"
-><title
+<sect1 id="controlling-remote">
+<title
 >Controlando a conexão à tela remota</title>
 
 <para
->Depois de conectar-se à tela remota, você irá usar normalmente o teclado e o mouse para controlar o sistema de janelas e os aplicativos nessa máquina remota. </para>
-
-<para
->Você poderá ver a tela remota como uma tela cheia, ou como uma janela na tela local. Você poderá alternar entre esses modos com os ícones mostrados abaixo. </para>
+>Use o teclado e o mouse em uma aba conectada para trabalhar na área de trabalho remota. A barra de ferramentas exibida abaixo oferece controles para abrir conexões, alterar a visualização e interagir com a área de trabalho remota. Alguns botões podem ficar indisponíveis, dependendo do protocolo e do estado da conexão.</para>
 
 <para>
 <screenshot>
 <screeninfo
->Seleção do modo de tela cheia do &krdc;</screeninfo>
+>Barra de ferramentas do &krdc;</screeninfo>
 	<mediaobject>
 	  <imageobject>
-	    <imagedata fileref="view-fullscreen.png" format="PNG"/>
+	    <imagedata fileref="view-toolbar.png" format="PNG"/>
 	  </imageobject>
 	  <textobject>
 	    <phrase
->Seleção do modo de tela cheia do &krdc;</phrase>
-	  </textobject>
-	</mediaobject>
-</screenshot>
-</para>
-
-<para>
-<screenshot>
-<screeninfo
->Seleção do modo de janela do &krdc;</screeninfo>
-	<mediaobject>
-	  <imageobject>
-	    <imagedata fileref="view-restore.png" format="PNG"/>
-	  </imageobject>
-	  <textobject>
-	    <phrase
->Seleção do modo de tela completo do &krdc;</phrase>
+>Barra de ferramentas do &krdc;</phrase>
 	  </textobject>
 	</mediaobject>
 </screenshot>
 </para>
 
 <para
->O modo de tela cheia é normalmente melhor quando você está ajudando um usuário remoto, porque consegue ver tudo o que ele consegue ver. O modo de janela é mais útil quando você está trabalhando tanto remotamente como localmente - talvez vendo alguma documentação local e usando essas instruções na máquina remota. </para>
+>Da esquerda para a direita, a barra de ferramentas contém os seguintes botões:</para>
 
-<sect2
-><title
->Usando o modo de janela</title>
-
-<para
->No modo de janela, você poderá terminar a conexão ao fechar a janela, clicando no botão de saída. </para>
-
-</sect2>
-
-<sect2
-><title
->Usando o modo de tela cheia</title>
-
-<para
->No modo tela cheia, você poderá mudar a aparência da barra de ferramentas. A transparência da barra de ferramentas poderá ser alterada com a roda do mouse. </para>
-
-</sect2>
-
+<variablelist>
+<varlistentry>
+<term
+><guibutton
+>Nova conexão</guibutton
+></term>
+<listitem
+><para
+>Abra a página de conexão para escolher um protocolo e inserir o endereço do servidor. A nova conexão é aberta em uma aba, permitindo que você mantenha outras sessões abertas.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><guibutton
+>Tela cheia</guibutton
+></term>
+<listitem
+><para
+>Exiba a área de trabalho remota em tela cheia. O botão muda para <guibutton
+>Modo de janela</guibutton
+>, que retorna à janela normal. Em tela cheia, use a barra de ferramentas flutuante para acessar os controles da sessão. A opção <guimenuitem
+>Fixar barra de ferramentas</guimenuitem
+> a mantém visível, e <guimenuitem
+>Minimizar janela em tela cheia</guimenuitem
+> permite acessar sua área de trabalho local.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><guibutton
+>Captura de tela</guibutton
+></term>
+<listitem
+><para
+>Copia uma imagem da área de trabalho remota para a área de transferência local. Cole-a em um editor de imagens ou em outro aplicativo para salvá-la.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><guibutton
+>Somente ver</guibutton
+></term>
+<listitem
+><para
+>Visualiza a área de trabalho remota sem enviar comandos de teclado ou mouse. O compartilhamento da área de transferência também é desativado enquanto essa opção estiver habilitada. Clique no botão novamente para retomar o controle da área de trabalho remota.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><guibutton
+>Compartilhamento de área de transferência</guibutton
+></term>
+<listitem
+><para
+>Ativa ou desativa a troca de conteúdo da área de transferência entre o seu computador e a área de trabalho remota. O conteúdo suportado depende do protocolo e do servidor. A troca de conteúdo da área de transferência exige que a opção <guibutton
+>Somente visualização</guibutton
+> esteja desativada.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><guibutton
+>Cursor local</guibutton
+></term>
+<listitem
+><para
+>Mostra um ponteiro do mouse local para ajudar a acompanhar sua posição na área de trabalho remota. Clique no botão novamente para desativar essa opção.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><guibutton
+>Capturar teclas</guibutton
+></term>
+<listitem
+><para
+>Envia o maior número possível de atalhos de teclado para a área de trabalho remota. Alguns atalhos podem permanecer reservados pela área de trabalho local ou pelo sistema de janelas. Desative esta opção para voltar a processar os atalhos localmente. A captura automática do teclado ao entrar no modo de tela cheia pode ser ativada nas configurações gerais.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><guibutton
+>Escalonar</guibutton
+></term>
+<listitem
+><para
+>Redimensiona a imagem remota para caber na área disponível da janela. Desative esta opção para visualizar a área de trabalho sem redimensionamento. O &krdc; memoriza configurações de redimensionamento distintas para os modos de janela e tela cheia. Isso altera o tamanho da imagem exibida, e não a resolução da área de trabalho remota.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><guibutton
+>Desconectar</guibutton
+></term>
+<listitem
+><para
+>Encerra a conexão atual. Fechar a aba correspondente também desconecta a sessão. Isso não envia um comando de logout ou desligamento para o computador remoto; o que acontece com a sessão remota depende do servidor.</para
+></listitem>
+</varlistentry>
+</variablelist>
 </sect1>
 
-<sect1 id="bookmarks"
-><title
->Favoritos</title>
+<sect1 id="bookmarks">
+<title
+>Favoritos e histórico de conexões</title>
 
 <para
->O &krdc; tem a capacidade de gerenciar os favoritos. Se você precisar se conectar com frequência à mesma tela remota, poderá adicionar um item para esta conexão à lista de favoritos. Você poderá fazer isso clicando em <menuchoice
+>Para salvar uma conexão, escolha <menuchoice
 ><guimenu
 >Favoritos</guimenu
-> <guimenuitem
->Adicionar Favorito</guimenuitem
+><guimenuitem
+>Adicionar favorito</guimenuitem
 ></menuchoice
->. </para>
+>. Abra-a novamente a partir do menu <guimenu
+>Favoritos</guimenu
+> ou da lista de conexões.</para>
 
 <para>
 <screenshot>
@@ -448,37 +619,39 @@ as Authors, publish date, the abstract, and Keywords -->
 </screenshot>
 </para>
 
-
-<sect2
-><title
->Favoritos do Histórico</title>
-
 <para
->O &krdc; salva as últimas conexões remotas usadas. Você poderá acessar estes favoritos especiais em <menuchoice
+>Quando a opção <guilabel
+>Lembrar histórico de conexões</guilabel
+> está ativada, as conexões bem-sucedidas são registradas em <menuchoice
 ><guimenu
 >Favoritos</guimenu
-> <guimenuitem
+><guimenuitem
 >Histórico</guimenuitem
 ></menuchoice
->. Obviamente, também poderá apagar um favorito nesta lista se não precisar mais dele na lista. Basta clicar em <guibutton
->Apagar favorito</guibutton
->, que aparece após clicar com o botão direito no favorito que deseja apagar. </para>
+> e aparecem na lista de conexões. Clique com o botão direito em um item salvo na lista para conectar, renomear, alterar as configurações ou excluí-lo.</para>
 
-</sect2>
-
+<para
+>Para uma conexão salva nos favoritos, a caixa de diálogo de configurações também permite editar seu <guilabel
+>Nome:</guilabel
+> e <guilabel
+>URL:</guilabel
+>. Utilize uma URL completa, como <userinput
+>rdp://alice@megan:3389</userinput
+>, mantendo o mesmo protocolo. As alterações nas configurações da conexão podem entrar em vigor apenas ao reconectar.</para>
 </sect1>
 
-<sect1 id="managing-configuration"
-><title
+<sect1 id="managing-configuration">
+<title
 >Gerenciando a configuração do &krdc;</title>
+
 <para
->Usando o botão de <menuchoice
+>Abra <menuchoice
 ><guimenu
 >Configurações</guimenu
-> <guimenuitem
+><guimenuitem
 >Configurar o KRDC...</guimenuitem
 ></menuchoice
->, você poderá abrir uma janela para modificar o comportamento do &krdc;. Selecionar esse botão fará aparecer uma janela como a que aparece abaixo: </para>
+> para alterar as preferências do aplicativo.</para>
 
 <para>
 <screenshot>
@@ -498,11 +671,53 @@ as Authors, publish date, the abstract, and Keywords -->
 </screenshot>
 </para>
 
+<variablelist>
+<varlistentry
+><term
+><guilabel
+>Geral</guilabel
+></term>
+<listitem
+><para
+>Escolha se deseja restaurar sessões abertas na inicialização, lembrar histórico e senhas, exibir um ícone na bandeja do sistema ou barra de status e preservar a proporção ao redimensionar. Você também pode configurar o protocolo padrão, a caixa de diálogo de configuração inicial do host, o redimensionamento da janela, a tela cheia automática e a captura do teclado, bem como a aparência das abas e o comportamento de fechamento.</para
+></listitem
+></varlistentry>
+<varlistentry
+><term
+><guilabel
+>Hosts</guilabel
+></term>
+<listitem
+><para
+>Selecione um host salvo e clique em <guibutton
+>Configurar...</guibutton
+> para alterar suas configurações de protocolo. O botão <guibutton
+>Remover</guibutton
+> exclui a configuração do host salvo. Os favoritos e o histórico de conexões são gerenciados separadamente.</para
+></listitem
+></varlistentry>
+<varlistentry
+><term
+><guilabel
+>Plugins</guilabel
+></term>
+<listitem
+><para
+>Ativa ou desativa os plugins de protocolo instalados. Reinicie o &krdc; após alterar a disponibilidade dos plugins. O botão de configuração de um plugin de protocolo abre as suas definições padrão.</para
+></listitem
+></varlistentry>
+</variablelist>
+</sect1>
+
+<sect1 id="vnc-settings">
+<title
+>Configurações VNC</title>
+
 <para>
 <screenshot>
 <screeninfo
->Preferências do &krdc; - página de <guilabel
->Padrões do VNC</guilabel
+>Preferências do &krdc; - página <guilabel
+>VNC</guilabel
 ></screeninfo>
 	<mediaobject>
 	  <imageobject>
@@ -510,78 +725,508 @@ as Authors, publish date, the abstract, and Keywords -->
 	  </imageobject>
 	  <textobject>
 	    <phrase
->Preferências do &krdc; - página dos perfis dos <guilabel
->Padrões do VNC</guilabel
+>Preferências do &krdc; - página dos perfis <guilabel
+>VNC</guilabel
 ></phrase>
 	  </textobject>
 	</mediaobject>
 </screenshot>
 </para>
+
+<para
+><guilabel
+>Tipo de conexão:</guilabel
+> oferece <guilabel
+>Alta qualidade (LAN, conexão direta)</guilabel
+>, <guilabel
+>Qualidade média (DSL, cabo, Internet rápida)</guilabel
+> e <guilabel
+>Baixa qualidade (modem, ISDN, Internet lenta)</guilabel
+>. Escolha uma qualidade adequada para toda a conexão, incluindo o link de rede do computador remoto. Uma qualidade mais baixa pode ajudar em conexões lentas.</para>
+
+<para
+><guilabel
+>Dimensionar para o tamanho:</guilabel
+> define o tamanho usado para exibir a área de trabalho remota, com dimensões predefinidas e personalizadas. A opção do gerenciador de senhas impede o envio de conteúdo da área de transferência marcado como senha por gerenciadores de senhas compatíveis, como o KeePassXC. Ela não consegue identificar senhas copiadas por aplicativos que não fornecem essa marcação.</para>
+</sect1>
+
+<sect1 id="rdp-settings">
+<title
+>Configurações RDP</title>
+
+<para
+>A caixa de diálogo de configuração do RDP contém as seguintes abas. As alterações nas configurações de conexão podem entrar em vigor apenas após a reconexão.</para>
+
+<para
+><emphasis role="bold"
+>Geral</emphasis
+></para>
 
 <para>
 <screenshot>
 <screeninfo
->Preferências do &krdc; - página de <guilabel
->Padrões do RDP</guilabel
-></screeninfo>
+>Preferências RDP do &krdc; - página Geral</screeninfo>
 	<mediaobject>
 	  <imageobject>
-	    <imagedata fileref="rdp_preferences.png" format="PNG"/>
+	    <imagedata fileref="rdp_preferences_general.png" format="PNG"/>
 	  </imageobject>
 	  <textobject>
 	    <phrase
->Preferências do &krdc; - página dos perfis de <guilabel
->Padrões do RDP</guilabel
+>Preferências do &krdc; - página geral do <guilabel
+>RDP</guilabel
 ></phrase>
 	  </textobject>
 	</mediaobject>
 </screenshot>
 </para>
 
+<para
+>A aba <guilabel
+>Exibição</guilabel
+> controla a aparência da área de trabalho remota, e a aba <guilabel
+>Recursos locais</guilabel
+> controla o som, o teclado e os recursos compartilhados com a sessão remota.</para>
 
+<para
+><guilabel
+>Resolução</guilabel
+> seleciona o tamanho da área de trabalho solicitado ao servidor. Escolha uma opção predefinida, o tamanho atual da janela ou da tela, ou uma largura e altura personalizadas. <guilabel
+>Usar resolução de todas as telas</guilabel
+> solicita uma sessão com múltiplos monitores; no modo de tela cheia, os monitores remotos são exibidos nas telas locais correspondentes. A disponibilidade depende do servidor e da configuração de exibição local.</para>
+
+<para
+>A opção <guilabel
+>Dimensionar o conteúdo da janela para corresponder à resolução</guilabel
+> controla o dimensionamento local da imagem. Já as opções <guilabel
+>Fator de escala da área de trabalho:</guilabel
+> e <guilabel
+>Fator de escala do dispositivo:</guilabel
+> especificam as informações de escala enviadas ao servidor. Utilize-as para ajustar o tamanho dos elementos da interface remota em telas de alta resolução, caso o servidor ofereça suporte a esse recurso.</para>
+
+<para
+><guilabel
+>Aceleração:</guilabel
+> seleciona o modo de codificação gráfica, incluindo H.264, RemoteFX ou a desativação da aceleração. <guilabel
+>Profundidade de cor:</guilabel
+> controla o número de cores usadas para a área de trabalho remota; alguns modos de aceleração exigem cores de 32 bits. <guilabel
+>Layout do teclado:</guilabel
+> deve corresponder ao teclado que você utiliza, para que as teclas pressionadas sejam interpretadas corretamente.</para>
+
+<para
+><guilabel
+>Som:</guilabel
+> permite selecionar a reprodução neste computador, a reprodução no computador remoto ou a ausência de som. <guilabel
+>Pasta compartilhada:</guilabel
+> disponibiliza uma pasta deste computador para a sessão remota, permitindo operações de leitura e escrita nela. Selecione <guilabel
+>Unidades removíveis</guilabel
+> para compartilhar dispositivos USB e cartões de memória, utilizando os nomes sob os quais foram montados. Escolha <guilabel
+>Downloads</guilabel
+>, <guilabel
+>Documentos</guilabel
+> ou <guilabel
+>Outra pasta…</guilabel
+> para selecionar qualquer pasta. Nenhuma pasta é compartilhada, a menos que você escolha uma. <guilabel
+>Cartão inteligente compartilhado:</guilabel
+> especifica o nome do cartão inteligente a ser redirecionado para o servidor.</para>
+
+<para
+><emphasis role="bold"
+>Conexão</emphasis
+></para>
+
+<para
+>A aba <guilabel
+>Conexão</guilabel
+> define qual sessão você obtém no computador remoto e como a conexão chega até ele.</para>
+
+<para
+><guilabel
+>Conectar à sessão de terminal (administrador)</guilabel
+> solicita a sessão administrativa em servidores que oferecem suporte a ela, em vez de uma nova sessão de usuário. <guilabel
+>Impedir o bloqueio da sessão remota</guilabel
+> envia, periodicamente, uma simulação de atividade do mouse para manter a sessão ativa; no entanto, as políticas do servidor ainda podem impor o bloqueio.</para>
+
+<para
+>Por padrão, o &krdc; conecta-se diretamente à área de trabalho remota. Marque uma das rotas para exibir suas configurações; desmarcá-la desativa a rota, mantendo suas configurações para uso posterior. O endereço da área de trabalho remota permanece sendo aquele informado na página de conexão.</para>
+
+<para>
+<screenshot>
+<screeninfo
+>Preferências de RDP do &krdc; – aba conexão, configurações de gateway</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="rdp_preferences_gateway.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Preferências do &krdc; – configurações de gateway <guilabel
+>RDP</guilabel
+></phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+><guilabel
+>Conectar por meio de um Gateway de área de trabalho remota</guilabel
+> encaminha a conexão através de um gateway RDP, o qual fornece uma rota para uma área de trabalho remota em outra rede. Insira o endereço do gateway em <guilabel
+>Servidor:</guilabel
+> no formato <userinput
+>host:porta</userinput
+>, utilizando a porta fornecida pelo seu administrador.</para>
+
+<para
+>Insira o <guilabel
+>Nome de usuário:</guilabel
+>, a <guilabel
+>Senha:</guilabel
+> e o <guilabel
+>Domínio:</guilabel
+> da conta de gateway, conforme necessário. Esses campos autenticam o acesso ao gateway; a área de trabalho remota pode exigir credenciais separadas.</para>
+
+<para
+><guilabel
+>Tipo de transporte:</guilabel
+> oferece <guilabel
+>Automático</guilabel
+>, <guilabel
+>HTTP</guilabel
+> e <guilabel
+>RPC</guilabel
+>. Use <guilabel
+>Automático</guilabel
+>, a menos que seu administrador especifique um transporte.</para>
+
+<para>
+<screenshot>
+<screeninfo
+>Preferências RDP do &krdc; - aba conexão, configurações do proxy</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="rdp_preferences_proxy.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Preferências do &krdc; - configurações de proxy do <guilabel
+>RDP</guilabel
+></phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>A opção <guilabel
+>Conectar por meio de um servidor proxy</guilabel
+> encaminha a conexão através de um proxy de rede. Insira o endereço do proxy em <guilabel
+>Servidor:</guilabel
+> usando o formato <userinput
+>host:porta</userinput
+> e selecione <guilabel
+>HTTP</guilabel
+> ou <guilabel
+>SOCKS</guilabel
+> em <guilabel
+>Protocolo:</guilabel
+>. Se o proxy exigir autenticação, preencha os campos <guilabel
+>Nome de usuário:</guilabel
+> e <guilabel
+>Senha:</guilabel
+> com as credenciais do proxy. Elas podem ser diferentes das credenciais utilizadas para a área de trabalho remota.</para>
+
+<para
+>Se o suporte a túnel SSH estiver disponível, a janela de configuração do host também oferece a opção <guilabel
+>Conectar via túnel SSH</guilabel
+> nesta aba. Consulte <xref linkend="ssh-tunnels"/> para ver as opções relacionadas.</para>
+
+<para
+><emphasis role="bold"
+>Segurança</emphasis
+></para>
+
+<para>
+<screenshot>
+<screeninfo
+>Preferências RDP do &krdc; - página Segurança</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="rdp_preferences_security.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Preferências do &krdc; - página de segurança do <guilabel
+>RDP</guilabel
+></phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>A aba <guilabel
+>Segurança</guilabel
+> controla quais métodos de segurança o &krdc; oferece ao estabelecer uma conexão RDP. As caixas de seleção em <guilabel
+>Protocolos:</guilabel
+> permitem ativar a autenticação em nível de rede (<guilabel
+>NLA</guilabel
+>, sigla em inglês), a criptografia <guilabel
+>TLS</guilabel
+>, a segurança <guilabel
+>RDP</guilabel
+> padrão e a autenticação em nível de rede estendida (<guilabel
+>Ext</guilabel
+>). É possível habilitar mais de uma opção, permitindo que o cliente e o servidor negociem um método compatível; pelo menos uma opção deve permanecer habilitada.</para>
+
+<para
+><guilabel
+>Nível de segurança TLS:</guilabel
+> define o nível de segurança criptográfica exigido para conexões TLS. Um nível mais alto impõe requisitos mais rigorosos e pode impedir conexões com servidores mais antigos.</para>
+
+<para
+><guilabel
+>Pacotes de autenticação:</guilabel
+> seleciona os pacotes que podem ser usados ​​para realizar o logon com a autenticação em nível de rede: <guilabel
+>Kerberos</guilabel
+>, <guilabel
+>NTLM</guilabel
+> e <guilabel
+>U2U</guilabel
+>. Pacotes que não estiverem marcados não serão utilizados. Para realizar o logon exclusivamente via Kerberos — como no caso de contas de "usuários protegidos" no Active Directory —, desmarque a opção <guilabel
+>NTLM</guilabel
+>.</para>
 </sect1>
 
+<sect1 id="spice-settings">
+<title
+>Configurações SPICE</title>
+
+<para>
+<screenshot>
+<screeninfo
+>Preferências do &krdc; - página <guilabel
+>SPICE</guilabel
+></screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="spice_preferences.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Preferências do &krdc; - página dos perfis do <guilabel
+>SPICE</guilabel
+></phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Escolha a resolução remota desejada a partir das predefinições, do tamanho atual da janela ou da tela, ou de dimensões personalizadas. O redimensionamento dinâmico requer o <application
+>spice-vdagent</application
+> no sistema convidado. Você também pode habilitar o escalonamento local e a reprodução de áudio. O compartilhamento da área de transferência depende de suporte no sistema convidado.</para>
+</sect1>
+
+<sect1 id="ssh-tunnels">
+<title
+>Túneis SSH</title>
+
+<para>
+<screenshot>
+<screeninfo
+>Preferências do &krdc; - página <guilabel
+>SSH</guilabel
+></screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="sshtunnel_preferences.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Preferências do &krdc; - página <guilabel
+>SSH</guilabel
+></phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>Se a sua instalação incluir suporte a túnel SSH, as configurações do host oferecem a opção <guilabel
+>Conectar via túnel SSH</guilabel
+>. Insira a porta SSH e o nome de usuário para o mesmo host do servidor de área de trabalho remota. A autenticação SSH é independente da autenticação da área de trabalho remota.</para>
+
+<para
+>A opção <guilabel
+>Tunnel via endereço loopback</guilabel
+> faz com que o túnel se conecte ao serviço de área de trabalho remota por meio do endereço de loopback do host remoto. Utilize essa opção quando o serviço estiver escutando apenas nesse endereço. A porta da área de trabalho remota continua sendo aquela definida no endereço de conexão.</para>
+</sect1>
+
+
+<sect1 id="command-line">
+<title
+>Iniciar conexões a partir da linha de comando</title>
+<para
+>Forneça uma URL completa para conectar diretamente:</para>
+<screen
+><userinput
+><command
+>krdc</command
+> rdp://alice@megan</userinput>
+<userinput
+><command
+>krdc</command
+> vnc://megan:5901</userinput>
+<userinput
+><command
+>krdc</command
+> spice://vmhost:5902</userinput
+></screen>
+
+<para
+>Use <option
+>--fullscreen</option
+> com uma URL para iniciar essa conexão em tela cheia. Você também pode passar várias URLs para abrir múltiplas conexões:</para>
+<screen
+><userinput
+><command
+>krdc</command
+> --fullscreen rdp://megan</userinput>
+<userinput
+><command
+>krdc</command
+> vnc://megan rdp://workstation</userinput
+></screen>
+
+<para
+>Em uma URL completa, aplique a codificação percentual aos caracteres reservados no nome de usuário. Por exemplo, use <userinput
+>rdp://alice%40exemplo.org@megan</userinput
+> para o nome de usuário <literal
+>alice@exemplo.org</literal
+>.</para>
+
+<para
+>O &krdc; pode ler detalhes básicos de conexão a partir de um arquivo <filename
+>.rdp</filename
+> passado na linha de comando:</para>
+<screen
+><userinput
+><command
+>krdc</command
+> conexão.rdp</userinput
+></screen>
+<para
+>Isso lê o endereço do servidor, o nome de usuário, o domínio e um campo de senha, caso exista. Para um host que não possui configurações salvas, também são lidos o tamanho de exibição, as configurações de escala e de som, a opção de desativar o compartilhamento da área de transferência, além de um gateway que é sempre utilizado — o qual o &krdc; solicitará que você aceite previamente. As configurações já salvas para o host são mantidas. Por motivos de segurança, o &krdc; não importa pastas compartilhadas, dispositivos compartilhados ou configurações de segurança a partir do arquivo. Utilize a janela de configuração do host para acessar outras opções. Execute <userinput
+><command
+>krdc</command
+> <option
+>--help</option
+></userinput
+> para obter ajuda via linha de comando.</para>
+
+<para
+>O &krdc; também pode abrir uma conexão SPICE a partir de um arquivo Virt Viewer <filename
+>.vv</filename
+>, como um baixado do Proxmox VE:</para>
+<screen
+><userinput
+><command
+>krdc</command
+> conexão.vv</userinput
+></screen>
+<para
+>Isso lê o endereço do servidor, as portas, a senha, o certificado e o proxy. Essas informações são mantidas apenas enquanto a aba da conexão estiver aberta e não são salvas; portanto, para conectar novamente após fechá-la, abra um novo arquivo. O &krdc; solicita a aceitação do proxy a cada uso e nunca envia uma senha salva em conexões desse tipo. As demais configurações presentes no arquivo são ignoradas, e o arquivo não é excluído, mesmo que haja uma solicitação para isso.</para>
+</sect1>
 </chapter>
 
 <chapter id="faq">
 <title
 >Perguntas e respostas</title>
-
-<!-- (OPTIONAL but recommended) This chapter should include all of the silly
-(and not-so-silly) newbie questions that fill up your mailbox. This chapter
-should be reserved for BRIEF questions and answers! If one question uses more
-than a page or so then it should probably be part of the
-"Using this Application" chapter instead. You should use links to
-cross-reference questions to the parts of your documentation that answer them.
-This is also a great place to provide pointers to other FAQ's if your users
-must do some complicated configuration on other programs in order for your
-application work. -->
-
 <qandaset id="faqlist">
 <qandaentry>
-<question>
-<para
->Porque o suporte de <acronym
->RDP</acronym
-> não funciona?</para>
-</question>
-<answer>
-<para
->O suporte de <acronym
->RDP</acronym
-> do &krdc; depende do xfreerdp (FreeRDP). Certifique-se de ter instalado esta dependência de execução. </para>
-</answer>
+<question
+><para
+>Por que um protocolo está ausente ou um endereço foi rejeitado?</para
+></question>
+<answer
+><para
+>Verifique se o plugin correspondente está instalado e habilitado em <guilabel
+>Plugins</guilabel
+> e, em seguida, reinicie o &krdc;. Verifique o protocolo selecionado e a sintaxe do endereço em <xref linkend="compatible-versions"/>. O suporte a RDP utiliza diretamente as bibliotecas FreeRDP; não é necessário iniciar um executável externo <command
+>xfreerdp</command
+>.</para
+></answer>
+</qandaentry>
+<qandaentry>
+<question
+><para
+>Por que não consigo me conectar ao computador remoto?</para
+></question>
+<answer
+><para
+>Verifique o nome do host, a porta, a conexão de rede ou VPN e se o servidor de Área de Trabalho Remota está em execução. Certifique-se de que o firewall permita a conexão. Em caso de falhas de autenticação, verifique seu nome de usuário, senha, domínio e a permissão para fazer login remotamente. Se você utilizar um proxy, gateway ou túnel SSH, verifique também as configurações e as credenciais correspondentes.</para
+></answer>
+</qandaentry>
+<qandaentry>
+<question
+><para
+>Por que consigo ver a área de trabalho, mas não consigo controlá-la?</para
+></question>
+<answer
+><para
+>Desative a opção <guimenuitem
+>Somente visualização</guimenuitem
+> no menu <guimenu
+>Sessão</guimenu
+>. O servidor também pode restringir sua conexão apenas à visualização; peça à pessoa que administra a área de trabalho remota para verificar as permissões.</para
+></answer>
+</qandaentry>
+<qandaentry>
+<question
+><para
+>Por que o copiar e colar não funciona?</para
+></question>
+<answer
+><para
+>Ative o <guimenuitem
+>Compartilhamento da área de transferência</guimenuitem
+>, desative o <guimenuitem
+>Somente visualização</guimenuitem
+> e verifique se o servidor suporta o conteúdo que você está copiando. No caso do VNC, o filtro do gerenciador de senhas pode bloquear deliberadamente senhas copiadas. Para o SPICE, verifique o agente convidado.</para
+></answer>
+</qandaentry>
+<qandaentry>
+<question
+><para
+>Como posso alterar as configurações após ocultar a caixa de diálogo do host?</para
+></question>
+<answer
+><para
+>Abra <guilabel
+>Hosts</guilabel
+> nas preferências do aplicativo, selecione o host e clique em <guibutton
+>Configurar...</guibutton
+>. Você pode ativar a opção <guilabel
+>Mostrar esta caixa de diálogo novamente para este host</guilabel
+> nessa tela.</para
+></answer>
+</qandaentry>
+<qandaentry>
+<question
+><para
+>Onde posso relatar um problema?</para
+></question>
+<answer
+><para
+>Relate bugs no <ulink url="https://bugs.kde.org"
+>sistema de rastreamento de bugs do &kde;</ulink
+>. Inclua a versão do &krdc;, o protocolo, o sistema operacional local, o software do servidor e os passos para reproduzir o problema. Omita senhas e outros detalhes privados da conexão.</para
+></answer>
 </qandaentry>
 </qandaset>
-
 </chapter>
 
 <chapter id="credits">
-
-<!-- Include credits for the programmers, documentation writers, and
-contributors here. The license for your software should then be included below
-the credits with a reference to the appropriate license file included in the K D E
-distribution. -->
 
 <title
 >Créditos e licença</title>
@@ -596,8 +1241,10 @@ distribution. -->
 > reorganizou novamente o &krdc;. Obrigado ao Google por tornar isto possível, e muito obrigado ao grande mentor deste projeto do Summer of Code, o &Brad.Hards; &Brad.Hards.mail;. </para>
 
 <para
->Documentação com 'Copyright' &copy; 2003 de &Brad.Hards; &Brad.Hards.mail; Documentação com 'Copyright' &copy; 2007 de Urs Wolfer <email
+>Copyright da documentação &copy; 2003 &Brad.Hards; &Brad.Hards.mail; Copyright da documentação &copy; 2007 Urs Wolfer <email
 >uwolfer @ kde.org</email
+> Copyright da documentação &copy; 2026 Fabio Bas <email
+>ctrlaltca @ gmail.com</email
 > </para>
 
 <para
