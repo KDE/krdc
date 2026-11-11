@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-10 00:57+0000\n"
-"PO-Revision-Date: 2026-11-06 07:49+0200\n"
+"PO-Revision-Date: 2026-11-10 07:46+0200\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -2360,6 +2360,7 @@ msgstr "U2U"
 #, kde-format
 msgid "Use the default Kerberos realm for unmapped domains"
 msgstr ""
+"Использовать область Kerberos по умолчанию для несопоставленных доменов"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_UseDefaultKerberosRealm)
 #: rdp/rdppreferences.ui:1168
@@ -2370,6 +2371,10 @@ msgid ""
 "to that realm. Leave this unchecked if the default realm is unrelated to "
 "this connection."
 msgstr ""
+"Включите этот параметр, если альтернативный суффикс имени для входа "
+"относится к области по умолчанию из конфигурации Kerberos. Имена для входа "
+"на рабочий стол и в шлюз могут быть отправлены в эту область. Не включайте "
+"его, если область по умолчанию не связана с этим подключением."
 
 #: rdp/rdpsession.cpp:1400
 #, kde-format

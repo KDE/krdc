@@ -14,14 +14,14 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-10 00:57+0000\n"
-"PO-Revision-Date: 2026-11-06 18:33+0100\n"
+"PO-Revision-Date: 2026-11-10 16:00+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 26.08.2\n"
+"X-Generator: Lokalize 26.08.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -2358,7 +2358,7 @@ msgstr "U2U"
 #: rdp/rdppreferences.ui:1165
 #, kde-format
 msgid "Use the default Kerberos realm for unmapped domains"
-msgstr ""
+msgstr "Usar el ámbito predeterminado de Kerberos para dominios sin asignar"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_UseDefaultKerberosRealm)
 #: rdp/rdppreferences.ui:1168
@@ -2369,6 +2369,11 @@ msgid ""
 "to that realm. Leave this unchecked if the default realm is unrelated to "
 "this connection."
 msgstr ""
+"Active esta opción para un sufijo alternativo de inicio de sesión que use el "
+"ámbito predeterminado en su configuración de Kerberos. Los nombres de inicio "
+"de sesión del escritorio y de la puerta de enlace podrían enviarse a dicho "
+"ámbito. Deje esta opción sin marcar si el ámbito predeterminado no está "
+"relacionado con esta conexión."
 
 #: rdp/rdpsession.cpp:1400
 #, kde-format
@@ -3303,6 +3308,3 @@ msgid ""
 msgstr ""
 "<html>Introduzca la dirección aquí.<br /><i>Ejemplo: servidorvnc:1 (máquina:"
 "puerto / pantalla)</i></html>"
-
-#~ msgid "Remember password"
-#~ msgstr "Recordar la contraseña"

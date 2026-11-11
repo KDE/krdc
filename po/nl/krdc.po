@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-10 00:57+0000\n"
-"PO-Revision-Date: 2026-11-06 11:44+0100\n"
+"PO-Revision-Date: 2026-11-10 13:11+0100\n"
 "Last-Translator: freek <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -2362,7 +2362,7 @@ msgstr "U2U"
 #: rdp/rdppreferences.ui:1165
 #, kde-format
 msgid "Use the default Kerberos realm for unmapped domains"
-msgstr ""
+msgstr "Gebruik het standaard Kerberos-realm voor niet-toegewezen domeinen"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_UseDefaultKerberosRealm)
 #: rdp/rdppreferences.ui:1168
@@ -2373,6 +2373,11 @@ msgid ""
 "to that realm. Leave this unchecked if the default realm is unrelated to "
 "this connection."
 msgstr ""
+"Schakel dit in voor een alternatief aanmeldingsachtervoegsel dat "
+"gebruikmaakt van het standaarddomein (realm) in uw Kerberos-configuratie. De "
+"aanmeldingsnamen voor de desktop en gateway kunnen naar dat domein worden "
+"verzonden. Laat dit uitgeschakeld als het standaarddomein geen verband houdt "
+"met deze verbinding."
 
 #: rdp/rdpsession.cpp:1400
 #, kde-format
