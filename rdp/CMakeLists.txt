@@ -10,6 +10,7 @@ target_sources(krdc_rdpplugin PRIVATE
     rdpview.cpp
     rdpsession.cpp
     sharedfolderfield.cpp
+    smartcardreaderfield.cpp
 )
 
 ki18n_wrap_ui(krdc_rdpplugin
@@ -67,6 +68,7 @@ add_library(kcm_krdc_rdpplugin)
 target_sources(kcm_krdc_rdpplugin PRIVATE
     rdppreferences.cpp
     sharedfolderfield.cpp
+    smartcardreaderfield.cpp
 )
 
 target_link_libraries(kcm_krdc_rdpplugin
@@ -78,7 +80,9 @@ target_link_libraries(kcm_krdc_rdpplugin
     KF6::XmlGui
     KF6::KIOWidgets
     krdccore
+    winpr
 )
+target_include_directories(kcm_krdc_rdpplugin PRIVATE ${WinPR_INCLUDE_DIR})
 
 if(HAIKU)
     target_link_libraries(kcm_krdc_rdpplugin network)

@@ -390,7 +390,7 @@ QWidget *RdpHostPreferences::createProtocolSpecificConfigPage(QWidget *sshTunnel
     rdpUi.kcfg_GatewayPassword->setPassword(gatewayPassword());
     rdpUi.kcfg_GatewayServer->setText(gatewayServer());
     rdpUi.kcfg_GatewayDomain->setText(gatewayDomain());
-    rdpUi.kcfg_SmartcardName->setText(smartcardName());
+    rdpUi.kcfg_SmartcardName->setReaderName(smartcardName());
     rdpUi.kcfg_SecurityNLA->setChecked(securityNLA());
     rdpUi.kcfg_SecurityTLS->setChecked(securityTLS());
     rdpUi.kcfg_SecurityRDP->setChecked(securityRDP());
@@ -481,7 +481,7 @@ void RdpHostPreferences::acceptConfig()
     setGatewayPassword(rdpUi.kcfg_GatewayPassword->password());
     setGatewayServer(rdpUi.kcfg_GatewayServer->text());
     setGatewayDomain(rdpUi.kcfg_GatewayDomain->text());
-    setSmartcardName(rdpUi.kcfg_SmartcardName->text());
+    setSmartcardName(rdpUi.kcfg_SmartcardName->readerName());
     setSecurityNLA(rdpUi.kcfg_SecurityNLA->isChecked());
     setSecurityTLS(rdpUi.kcfg_SecurityTLS->isChecked());
     setSecurityRDP(rdpUi.kcfg_SecurityRDP->isChecked());

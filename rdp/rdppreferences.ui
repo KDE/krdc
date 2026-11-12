@@ -743,15 +743,22 @@
        <item row="3" column="0">
         <widget class="QLabel" name="shareSmartcardLabel">
          <property name="text">
-          <string>Shared smartcard:</string>
+          <string comment="@label:listbox">Shared smartcard:</string>
          </property>
-         <property name="alignment">
-          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+         <property name="buddy">
+          <cstring>kcfg_SmartcardName</cstring>
          </property>
         </widget>
        </item>
        <item row="3" column="1">
-        <widget class="KLineEdit" name="kcfg_SmartcardName" />
+        <widget class="SmartcardReaderField" name="kcfg_SmartcardName">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -1195,6 +1202,11 @@
    <class>KPasswordLineEdit</class>
    <extends>QWidget</extends>
    <header>kpasswordlineedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>SmartcardReaderField</class>
+   <extends>QComboBox</extends>
+   <header>smartcardreaderfield.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>
