@@ -83,6 +83,7 @@ protected:
     void handleLocalClipboardChanged(const QMimeData *data) override;
     void focusInEvent(QFocusEvent *event) override;
     bool eventFilter(QObject *watched, QEvent *event) override;
+    bool hasInputFocus() const override;
 
 private:
     void onRectangleUpdated(const QRect &remoteRect, const QSize &remoteSize);

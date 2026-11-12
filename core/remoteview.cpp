@@ -36,11 +36,41 @@
 #include "waylandinhibition_p.h"
 #endif
 
-#ifdef USE_SSH_TUNNEL
+#include <KLazyLocalizedString>
 #include <KLocalizedString>
-#endif
 
 #include "hostpreferences.h"
+
+struct HostKey {
+    // X11 keysym from nativeVirtualKey(). Qt::Key can't tell left from right.
+    quint32 keysym;
+    KLazyLocalizedString name;
+};
+
+// nullptr if the host key is disabled
+static const HostKey *configuredHostKey()
+{
+    static const HostKey rightCtrl{0xffe4, kli18n("Right Ctrl")};
+    static const HostKey rightAlt{0xffea, kli18n("Right Alt")};
+    static const HostKey rightMeta{0xffec, kli18n("Right Meta")};
+
+    switch (Settings::hostKey()) {
+    case Settings::EnumHostKey::RightCtrl:
+        return &rightCtrl;
+    case Settings::EnumHostKey::RightAlt:
+        return &rightAlt;
+    case Settings::EnumHostKey::RightMeta:
+        return &rightMeta;
+    default:
+        return nullptr;
+    }
+}
+
+static bool isHostKey(const QKeyEvent *event)
+{
+    const HostKey *hostKey = configuredHostKey();
+    return hostKey && event->nativeVirtualKey() == hostKey->keysym;
+}
 
 // Tags clipboard data krdc sets with the RemoteView that received it
 static constexpr const char s_clipboardSourceMime[] = "application/x-krdc-source-view";
@@ -73,9 +103,7 @@ RemoteView::RemoteView(QWidget *parent)
     , m_host(QString())
     , m_port(0)
     , m_viewOnly(false)
-    , m_grabAllKeys(false)
     , m_scale(false)
-    , m_keyboardIsGrabbed(false)
     , m_factor(0.)
     , m_clipboard(nullptr)
     , m_localCursorState(CursorOff)
@@ -179,6 +207,11 @@ void RemoteView::setStatus(RemoteView::RemoteStatus s)
         }
     }
     m_status = s;
+    if (m_status != Connected) {
+        m_pendingHostKey.reset();
+        setKeyboardReleased(false);
+    }
+    updateKeyboardGrab();
     Q_EMIT statusChanged(m_status);
 }
 
@@ -269,6 +302,7 @@ bool RemoteView::start()
 
 void RemoteView::updateConfiguration()
 {
+    updateKeyboardGrab();
 }
 
 void RemoteView::keyEvent(QKeyEvent *)
@@ -286,26 +320,69 @@ void RemoteView::setViewOnly(bool viewOnly)
 
     if (viewOnly) {
         setCursor(localDefaultCursor());
+        m_pendingHostKey.reset();
+        setKeyboardReleased(false);
     } else {
         showLocalCursor(m_localCursorState);
     }
+    updateKeyboardGrab();
 }
 
-bool RemoteView::grabAllKeys()
+bool RemoteView::keyboardCaptured() const
 {
-    return m_grabAllKeys;
+    return m_status == Connected && !m_viewOnly && !m_keyboardReleased;
 }
 
-void RemoteView::setGrabAllKeys(bool grabAllKeys)
+bool RemoteView::keyboardReleased() const
 {
-    m_grabAllKeys = grabAllKeys;
+    return m_keyboardReleased;
+}
 
-    if (grabAllKeys) {
-        m_keyboardIsGrabbed = true;
-        grabKeyboard();
-    } else if (m_keyboardIsGrabbed) {
-        releaseKeyboard();
+void RemoteView::setKeyboardReleased(bool released)
+{
+    if (m_keyboardReleased == released) {
+        return;
     }
+    m_keyboardReleased = released;
+    // Don't count a host key that is still held as a new tap
+    m_pendingHostKey.reset();
+
+    if (released) {
+        // Don't leave modifiers stuck on the remote desktop
+        unpressModifiers();
+    }
+    updateKeyboardGrab();
+    Q_EMIT keyboardReleasedChanged(released);
+}
+
+void RemoteView::updateKeyboardGrab()
+{
+    bool grab = keyboardCaptured() && hasInputFocus();
+    if (grab) {
+        switch (Settings::systemShortcuts()) {
+        case Settings::EnumSystemShortcuts::Remote:
+            break;
+        case Settings::EnumSystemShortcuts::FullScreen:
+            grab = window()->isFullScreen();
+            break;
+        default:
+            grab = false;
+            break;
+        }
+    }
+
+    setKeyboardGrabbed(grab);
+}
+
+bool RemoteView::hasInputFocus() const
+{
+    return m_hasFocus;
+}
+
+QString RemoteView::hostKeyName()
+{
+    const HostKey *hostKey = configuredHostKey();
+    return hostKey ? hostKey->name.toString() : QString();
 }
 
 QPixmap RemoteView::takeScreenshot()
@@ -341,12 +418,15 @@ void RemoteView::setScaleFactor(float factor)
 void RemoteView::switchFullscreen(bool on)
 {
     Q_UNUSED(on);
+    // The view moves to another window, so grab again
+    setKeyboardGrabbed(false);
 #ifdef HAVE_WAYLAND
     // fullscreen mode moves the widget to a temporary window, reinitialize inhibitor
     if (qGuiApp->platformName() == QLatin1String("wayland")) {
         m_inhibition.reset(new WaylandInhibition(window()->windowHandle()));
     }
 #endif
+    updateKeyboardGrab();
 }
 
 void RemoteView::setFullscreenMinimized(bool minimized)
@@ -492,21 +572,22 @@ QCursor RemoteView::localDefaultCursor() const
 
 void RemoteView::focusInEvent(QFocusEvent *event)
 {
-    if (m_grabAllKeys) {
-        m_keyboardIsGrabbed = true;
-        grabKeyboard();
-    }
+    m_hasFocus = true;
+    // Coming back recaptures the keyboard
+    setKeyboardReleased(false);
+    updateKeyboardGrab();
 
     QWidget::focusInEvent(event);
 }
 
 void RemoteView::focusOutEvent(QFocusEvent *event)
 {
-    if (m_grabAllKeys || m_keyboardIsGrabbed) {
-        m_keyboardIsGrabbed = false;
-        releaseKeyboard();
-    }
+    // hasFocus() stays true while a popup is open, so track it ourselves
+    m_hasFocus = false;
+    updateKeyboardGrab();
 
+    // A held-back host key was never sent, just drop it
+    m_pendingHostKey.reset();
     unpressModifiers();
 
     QWidget::focusOutEvent(event);
@@ -518,31 +599,26 @@ bool RemoteView::event(QEvent *event)
     case QEvent::KeyPress:
     case QEvent::KeyRelease: {
         auto keyEvent = static_cast<QKeyEvent *>(event);
-        auto key = keyEvent->key();
-        switch (key) {
-        case Qt::Key_Shift:
-        case Qt::Key_Control:
-        case Qt::Key_Meta:
-        case Qt::Key_Alt:
-        case Qt::Key_AltGr:
-        case Qt::Key_Super_L:
-        case Qt::Key_Super_R:
-        case Qt::Key_Hyper_L:
-        case Qt::Key_Hyper_R:
-            if (event->type() == QEvent::KeyPress) {
-                ModifierKey modifierToAdd = {keyEvent->nativeScanCode(), keyEvent->nativeVirtualKey()};
-                m_modifiers[key] = modifierToAdd;
-            } else if (m_modifiers.contains(key)) {
-                m_modifiers.remove(key);
-            } else {
-                unpressModifiers();
+        if (m_status == Connected && isHostKey(keyEvent)) {
+            if (m_pendingHostKey && keyEvent->isAutoRepeat()) {
+                return true;
             }
-            break;
-        default:
-            break;
+            if (event->type() == QEvent::KeyPress && !keyEvent->isAutoRepeat() && m_modifiers.isEmpty()) {
+                // Could be a tap or a modifier, hold it back until we know.
+                // With another modifier down it is already a combination.
+                m_pendingHostKey.reset(keyEvent->clone());
+                return true;
+            }
+            if (m_pendingHostKey) {
+                // Tapped
+                setKeyboardReleased(!m_keyboardReleased);
+                return true;
+            }
+        } else {
+            flushPendingHostKey();
         }
 
-        handleKeyEvent(keyEvent);
+        forwardKeyEvent(keyEvent);
         return true;
         break;
     }
@@ -574,12 +650,57 @@ bool RemoteView::eventFilter(QObject *obj, QEvent *event)
             || event->type() == QEvent::MouseMove) {
             return true;
         }
-    } else if (m_grabAllKeys && event->type() == QEvent::ShortcutOverride) {
+    } else if (event->type() == QEvent::ShortcutOverride && keyboardCaptured()) {
+        // Keep the key from triggering a local shortcut
         event->accept();
         return true;
+    } else if (event->type() == QEvent::MouseButtonPress || event->type() == QEvent::MouseButtonDblClick || event->type() == QEvent::Wheel) {
+        // Host key + click: send it as a modifier
+        flushPendingHostKey();
+        if (event->type() != QEvent::Wheel) {
+            // A click recaptures the keyboard
+            setKeyboardReleased(false);
+        }
     }
 
     return QWidget::eventFilter(obj, event);
+}
+
+void RemoteView::forwardKeyEvent(QKeyEvent *event)
+{
+    const int key = event->key();
+    switch (key) {
+    case Qt::Key_Shift:
+    case Qt::Key_Control:
+    case Qt::Key_Meta:
+    case Qt::Key_Alt:
+    case Qt::Key_AltGr:
+    case Qt::Key_Super_L:
+    case Qt::Key_Super_R:
+    case Qt::Key_Hyper_L:
+    case Qt::Key_Hyper_R:
+        if (event->type() == QEvent::KeyPress) {
+            ModifierKey modifierToAdd = {event->nativeScanCode(), event->nativeVirtualKey()};
+            m_modifiers[key] = modifierToAdd;
+        } else if (m_modifiers.contains(key)) {
+            m_modifiers.remove(key);
+        } else {
+            unpressModifiers();
+        }
+        break;
+    default:
+        break;
+    }
+
+    handleKeyEvent(event);
+}
+
+void RemoteView::flushPendingHostKey()
+{
+    if (m_pendingHostKey) {
+        const std::unique_ptr<QKeyEvent> hostKey = std::move(m_pendingHostKey);
+        forwardKeyEvent(hostKey.get());
+    }
 }
 
 void RemoteView::localClipboardChanged()
@@ -676,24 +797,28 @@ void RemoteView::unpressModifiers()
     m_modifiers.clear();
 }
 
-void RemoteView::grabKeyboard()
+void RemoteView::setKeyboardGrabbed(bool grab)
 {
-    QWidget::grabKeyboard();
-#ifdef HAVE_WAYLAND
-    if (qGuiApp->platformName() == QLatin1String("wayland")) {
-        m_inhibition->enableInhibition();
+    if (m_keyboardIsGrabbed == grab) {
+        return;
     }
-#endif
-}
+    m_keyboardIsGrabbed = grab;
 
-void RemoteView::releaseKeyboard()
-{
+    if (grab) {
+        grabKeyboard();
 #ifdef HAVE_WAYLAND
-    if (qGuiApp->platformName() == QLatin1String("wayland")) {
-        m_inhibition->disableInhibition();
-    }
+        if (qGuiApp->platformName() == QLatin1String("wayland")) {
+            m_inhibition->enableInhibition();
+        }
 #endif
-    QWidget::releaseKeyboard();
+    } else {
+#ifdef HAVE_WAYLAND
+        if (qGuiApp->platformName() == QLatin1String("wayland")) {
+            m_inhibition->disableInhibition();
+        }
+#endif
+        releaseKeyboard();
+    }
 }
 
 #ifdef USE_SSH_TUNNEL

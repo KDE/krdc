@@ -26,6 +26,7 @@ class BookmarkManager;
 class ConnectionStatusWidget;
 class FloatingToolBar;
 class MinimizePixel;
+class OverlayMessage;
 class RemoteDesktopsModel;
 class RemoteView;
 class SystemTrayIcon;
@@ -77,9 +78,9 @@ private Q_SLOTS:
     void viewOnly(bool viewOnly);
     void clipboardSharing(bool clipboardSharing);
     void showLocalCursor(bool showLocalCursor);
-    void grabAllKeys(bool grabAllKeys);
     void scale(bool scale);
     void updateActionStatus();
+    void updateKeyboardHint();
     void updateConfiguration();
     void tabChanged(int index);
     QWidget *newConnectionWidget();
@@ -150,7 +151,8 @@ private:
     KConfigGroup m_windowedAutoSaveGroup;
     MinimizePixel *m_minimizePixel = nullptr;
 
-    QMap<RemoteView *, bool> m_savedGrabStatesBeforeFullscreen;
+    OverlayMessage *m_keyboardHint = nullptr;
+    bool m_keyboardHintShown = false; // host key hint is shown once per run
     int m_insertTabIndex = -1; // where newConnection() puts its tab, for reconnecting in place
 
 Q_SIGNALS:

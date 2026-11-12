@@ -18,6 +18,7 @@
 #include <QWidget>
 
 #include <functional>
+#include <memory>
 
 #ifdef HAVE_WAYLAND
 #include "shortcutinhibition_p.h"
@@ -36,6 +37,7 @@ struct ModifierKey {
 class HostPreferences;
 class KModifierKeyInfo;
 class KPasswordDialog;
+class QKeyEvent;
 class QScreen;
 class QWindow;
 
@@ -198,9 +200,22 @@ public:
     virtual bool supportsClipboardSharing() const;
 
     /**
-     * Checks whether grabbing all possible keys is enabled.
+     * Whether shortcuts go to the remote desktop instead of the application.
+     * True while connected, not view-only and not released by the user.
+     * @see keyboardReleased()
      */
-    virtual bool grabAllKeys();
+    bool keyboardCaptured() const;
+
+    /**
+     * Whether the user released the keyboard, so shortcuts work locally.
+     * @see setKeyboardReleased()
+     */
+    bool keyboardReleased() const;
+
+    /**
+     * Display name of the host key, empty if it is disabled.
+     */
+    static QString hostKeyName();
 
     /**
      * Returns the resolution of the remote framebuffer.
@@ -330,12 +345,12 @@ public Q_SLOTS:
     virtual void setViewOnly(bool viewOnly);
 
     /**
-     * Enables/disables grabbing all possible keys.
-     * @param grabAllKeys true to enable, false to disable.
-     * Default is false.
-     * @see grabAllKeys()
+     * Releases or recaptures the keyboard. The user toggles this with the
+     * host key; focusing or clicking the view recaptures it.
+     * @param released true to handle shortcuts locally
+     * @see keyboardReleased()
      */
-    virtual void setGrabAllKeys(bool grabAllKeys);
+    void setKeyboardReleased(bool released);
 
     /**
      * Called to let the backend know it when
@@ -413,6 +428,13 @@ Q_SIGNALS:
     void reconnectingChanged(bool reconnecting, const QString &details);
 
     /**
+     * Emitted when the keyboard is released or recaptured.
+     * @param released true if shortcuts are handled locally
+     * @see setKeyboardReleased()
+     */
+    void keyboardReleasedChanged(bool released);
+
+    /**
      * Emitted when the status of the view changed.
      * @param s the new status
      */
@@ -450,6 +472,15 @@ protected:
     void focusOutEvent(QFocusEvent *event) override;
     bool event(QEvent *event) override;
     bool eventFilter(QObject *obj, QEvent *event) override;
+    /**
+     * Whether the view has keyboard focus.
+     * Backends with extra windows should include those.
+     */
+    virtual bool hasInputFocus() const;
+    /**
+     * Updates the grab that sends desktop shortcuts to the remote desktop.
+     */
+    void updateKeyboardGrab();
     virtual void handleKeyEvent(QKeyEvent *event) = 0;
     virtual void handleWheelEvent(QWheelEvent *event) = 0;
     virtual void handleMouseEvent(QMouseEvent *event) = 0;
@@ -486,16 +517,12 @@ protected:
     QCursor localDefaultCursor() const;
 
     void unpressModifiers();
-    void grabKeyboard();
-    void releaseKeyboard();
 
     QString m_host;
     int m_port;
     bool m_canceledByUser = false;
     bool m_viewOnly;
-    bool m_grabAllKeys;
     bool m_scale;
-    bool m_keyboardIsGrabbed;
     QUrl m_url;
     qreal m_factor;
     QClipboard *m_clipboard;
@@ -520,6 +547,17 @@ protected:
     void deleteWalletPasswordForKey(const QString &key);
 
     LocalCursorState m_localCursorState;
+
+private:
+    void forwardKeyEvent(QKeyEvent *event);
+    void flushPendingHostKey();
+    void setKeyboardGrabbed(bool grab);
+
+    bool m_hasFocus = false;
+    bool m_keyboardReleased = false;
+    bool m_keyboardIsGrabbed = false;
+    // Host key press, held back until we know if it is a tap or a modifier
+    std::unique_ptr<QKeyEvent> m_pendingHostKey;
 
 #ifdef USE_SSH_TUNNEL
 private:

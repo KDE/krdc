@@ -369,13 +369,6 @@ Clipboard exchange requires <guibutton>View Only</guibutton> to be turned off.</
 desktop. Click the button again to turn this option off.</para></listitem>
 </varlistentry>
 <varlistentry>
-<term><guibutton>Grab Keys</guibutton></term>
-<listitem><para>Send as many keyboard shortcuts as possible to the remote desktop.
-Some shortcuts may remain reserved by the local desktop or window system.
-Turn this option off to handle shortcuts locally again. Automatic keyboard
-grabbing on entering full screen can be enabled in the general settings.</para></listitem>
-</varlistentry>
-<varlistentry>
 <term><guibutton>Scale</guibutton></term>
 <listitem><para>Scale the remote image to fit the available window area.
 Turn this option off to view the desktop without scaling. &krdc; remembers
@@ -389,6 +382,22 @@ This does not issue a logout or shutdown command to the remote computer;
 what happens to the remote session depends on the server.</para></listitem>
 </varlistentry>
 </variablelist>
+</sect1>
+
+<sect1 id="keyboard-input">
+<title>Keyboard shortcuts</title>
+
+<para>While a remote desktop has focus, all keyboard shortcuts are sent to it,
+including the shortcuts of &krdc;.</para>
+
+<para>To use a shortcut on your own computer, press the
+<firstterm>host key</firstterm> (right &Ctrl; by default) and then the
+shortcut. To cancel, press the host key again or click the remote
+desktop.</para>
+
+<para>Desktop shortcuts such as
+<keycombo action="simul">&Alt;&Tab;</keycombo> are only sent in full screen
+mode. You can change this and the host key in the general settings.</para>
 </sect1>
 
 <sect1 id="bookmarks">
@@ -449,8 +458,9 @@ KRDC...</guimenuitem></menuchoice> to change application preferences.</para>
 <listitem><para>Choose whether to restore open sessions on startup, remember
 history and passwords, display a system tray icon or status bar, and preserve
 the aspect ratio when scaling. You can also configure the default protocol,
-initial host configuration dialog, window resizing, automatic full screen and
-keyboard grabbing, and tab appearance and closing behavior.</para></listitem></varlistentry>
+initial host configuration dialog, window resizing, automatic full screen,
+<link linkend="keyboard-input">keyboard shortcuts and the host key</link>,
+and tab appearance and closing behavior.</para></listitem></varlistentry>
 <varlistentry><term><guilabel>Hosts</guilabel></term>
 <listitem><para>Select a saved host and click <guibutton>Configure...</guibutton>
 to change its protocol settings. <guibutton>Remove</guibutton> deletes the
