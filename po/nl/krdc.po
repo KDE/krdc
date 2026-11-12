@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-10 00:57+0000\n"
+"POT-Creation-Date: 2026-11-12 01:01+0000\n"
 "PO-Revision-Date: 2026-11-10 13:11+0100\n"
 "Last-Translator: freek <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -219,13 +219,13 @@ msgstr "Configureren…"
 msgid "Remove"
 msgstr "Verwijderen"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:336 mainwindow.cpp:958
-#: mainwindow.cpp:974
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:337 mainwindow.cpp:959
+#: mainwindow.cpp:975
 #, kde-format
 msgid "Unusable URL"
 msgstr "Onbruikbaar URL-adres"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:974
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:975
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr "De geselecteerde host kan niet worden afgehandeld."
@@ -349,229 +349,229 @@ msgctxt "@action:button"
 msgid "Cancel"
 msgstr "Annuleren"
 
-#: connectionstatuswidget.cpp:330
+#: connectionstatuswidget.cpp:335
 #, kde-format
 msgctxt "@info:status connection step"
 msgid "In progress"
 msgstr "In uitvoering"
 
-#: connectionstatuswidget.cpp:406
+#: connectionstatuswidget.cpp:411
 #, kde-format
 msgctxt "@info connection step"
 msgid "Looking up the server address"
 msgstr "Het serveradres opzoeken"
 
-#: connectionstatuswidget.cpp:408
+#: connectionstatuswidget.cpp:413
 #, kde-format
 msgctxt "@info connection step"
 msgid "Opening the SSH tunnel"
 msgstr "De SSH-tunnel wordt geopend"
 
-#: connectionstatuswidget.cpp:410
+#: connectionstatuswidget.cpp:415
 #, kde-format
 msgctxt "@info connection step"
 msgid "Opening a network connection"
 msgstr "EEn netwerkverbinding wordt geopend"
 
-#: connectionstatuswidget.cpp:412
+#: connectionstatuswidget.cpp:417
 #, kde-format
 msgctxt "@info connection step"
 msgid "Securing the connection"
 msgstr "De verbinding wordt beveiligd"
 
-#: connectionstatuswidget.cpp:414
+#: connectionstatuswidget.cpp:419
 #, kde-format
 msgctxt "@info connection step"
 msgid "Logging in"
 msgstr "Aanmelden"
 
-#: connectionstatuswidget.cpp:416
+#: connectionstatuswidget.cpp:421
 #, kde-format
 msgctxt "@info connection step"
 msgid "Starting the remote session"
 msgstr "De sessie op afstand starten"
 
-#: connectionstatuswidget.cpp:418
+#: connectionstatuswidget.cpp:423
 #, kde-format
 msgctxt "@info connection step"
 msgid "Reconnecting"
 msgstr "Opnieuw verbinden"
 
-#: connectionstatuswidget.cpp:428
+#: connectionstatuswidget.cpp:433
 #, kde-format
 msgctxt "@info connection step"
 msgid "Server address resolved"
 msgstr "Serveradres opgelost"
 
-#: connectionstatuswidget.cpp:430
+#: connectionstatuswidget.cpp:435
 #, kde-format
 msgctxt "@info connection step"
 msgid "SSH tunnel established"
 msgstr "SSH-tunnel tot stand gebracht"
 
-#: connectionstatuswidget.cpp:432
+#: connectionstatuswidget.cpp:437
 #, kde-format
 msgctxt "@info connection step"
 msgid "Network connection established"
 msgstr "Netwerkverbinding tot stand gebracht"
 
-#: connectionstatuswidget.cpp:434
+#: connectionstatuswidget.cpp:439
 #, kde-format
 msgctxt "@info connection step"
 msgid "Connection secured"
 msgstr "Verbinding beveiligd"
 
-#: connectionstatuswidget.cpp:437
+#: connectionstatuswidget.cpp:442
 #, kde-format
 msgctxt "@info connection step"
 msgid "Access granted"
 msgstr "Toegang toegestaan"
 
-#: connectionstatuswidget.cpp:439
+#: connectionstatuswidget.cpp:444
 #, kde-format
 msgctxt "@info connection step"
 msgid "Remote session started"
 msgstr "Sessie op afstand gestart"
 
-#: connectionstatuswidget.cpp:449
+#: connectionstatuswidget.cpp:454
 #, kde-format
 msgctxt "@info"
 msgid "Resolved to %1."
 msgstr "Opgelost tot %1."
 
-#: connectionstatuswidget.cpp:461
+#: connectionstatuswidget.cpp:466
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Local address lookup failed: %1"
 msgstr "Lokaal adres opzoeken is mislukt: %1"
 
-#: connectionstatuswidget.cpp:466
+#: connectionstatuswidget.cpp:471
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "%1 resolved to %2"
 msgstr "%1 opgelost naar %2"
 
-#: connectionstatuswidget.cpp:498
+#: connectionstatuswidget.cpp:503
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Connecting to the remote desktop service"
 msgstr "Verbinding maken naar bureaubladservice op afstand"
 
-#: connectionstatuswidget.cpp:505
+#: connectionstatuswidget.cpp:510
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Authenticating"
 msgstr "Bezig met authenticatie"
 
-#: connectionstatuswidget.cpp:509
+#: connectionstatuswidget.cpp:514
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Preparing the session"
 msgstr "De sessie voorbereiden"
 
-#: connectionstatuswidget.cpp:513
+#: connectionstatuswidget.cpp:518
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Connected"
 msgstr "Verbonden"
 
-#: connectionstatuswidget.cpp:546
+#: connectionstatuswidget.cpp:551
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Connection dropped, reconnecting: %1"
 msgstr "Verbinding vervallen, opnieuw verbinden: %1"
 
-#: connectionstatuswidget.cpp:546
+#: connectionstatuswidget.cpp:551
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Reconnected"
 msgstr "Opnieuw verbonden"
 
-#: connectionstatuswidget.cpp:559
+#: connectionstatuswidget.cpp:564
 #, kde-format
 msgctxt "@info"
 msgid "KRDC keeps trying until the connection is back."
 msgstr "KRDC blijft het proberen totdat de verbinding is hersteld."
 
-#: connectionstatuswidget.cpp:563
+#: connectionstatuswidget.cpp:568
 #, kde-format
 msgctxt "@title"
 msgid "Connection to %1 interrupted"
 msgstr "Verbinding met %1 onderbroken"
 
-#: connectionstatuswidget.cpp:565
+#: connectionstatuswidget.cpp:570
 #, kde-format
 msgctxt "@action:button"
 msgid "Disconnect"
 msgstr "Verbinding verbreken"
 
-#: connectionstatuswidget.cpp:575
+#: connectionstatuswidget.cpp:580
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Failed while: %1"
 msgstr "Mislukt tijdens: %1"
 
-#: connectionstatuswidget.cpp:656
+#: connectionstatuswidget.cpp:661
 #, kde-format
 msgctxt "@title"
 msgid "Session with %1 ended"
 msgstr "Sessie met %1 beëindigd"
 
-#: connectionstatuswidget.cpp:658
+#: connectionstatuswidget.cpp:663
 #, kde-format
 msgctxt "@title"
 msgid "Connection to %1 lost"
 msgstr "Verbinding met %1 verloren"
 
-#: connectionstatuswidget.cpp:660
+#: connectionstatuswidget.cpp:665
 #, kde-format
 msgctxt "@title"
 msgid "Could not connect to %1"
 msgstr "Kon niet verbinden met %1"
 
-#: connectionstatuswidget.cpp:666
+#: connectionstatuswidget.cpp:671
 #, kde-format
 msgctxt "@action:button"
 msgid "Reconnect"
 msgstr "Opnieuw verbinden"
 
-#: connectionstatuswidget.cpp:666
+#: connectionstatuswidget.cpp:671
 #, kde-format
 msgctxt "@action:button"
 msgid "Connect Again"
 msgstr "Opnieuw verbinden"
 
-#: connectionstatuswidget.cpp:671
+#: connectionstatuswidget.cpp:676
 #, kde-format
 msgctxt "@action:button"
 msgid "Edit Address"
 msgstr "Adres bewerken"
 
-#: connectionstatuswidget.cpp:674
+#: connectionstatuswidget.cpp:679
 #, kde-format
 msgctxt "@action:button"
 msgid "Edit Host Settings…"
 msgstr "Host-instellingen bewerken…"
 
-#: connectionstatuswidget.cpp:676
+#: connectionstatuswidget.cpp:681
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Tab"
 msgstr "Tabblad sluiten"
 
-#: connectionstatuswidget.cpp:714
+#: connectionstatuswidget.cpp:719
 #, kde-format
 msgctxt "@action:button"
 msgid "Copy diagnostic information"
 msgstr "Diagnostische informatie kopiëren"
 
-#: connectionstatuswidget.cpp:719
+#: connectionstatuswidget.cpp:724
 #, kde-format
 msgctxt "@action:button"
 msgid "Hide details"
 msgstr "Details verbergen"
 
-#: connectionstatuswidget.cpp:719
+#: connectionstatuswidget.cpp:724
 #, kde-format
 msgctxt "@action:button"
 msgid "Show details"
@@ -1258,8 +1258,8 @@ msgstr "URL-adressen om mee te verbinden na het opstarten"
 msgid "KDE Remote Desktop Client started"
 msgstr "Verbinding met bureaublad op afstand gestart"
 
-#: mainwindow.cpp:115 mainwindow.cpp:132 mainwindow.cpp:1429
-#: mainwindow.cpp:1526
+#: mainwindow.cpp:115 mainwindow.cpp:132 mainwindow.cpp:1430
+#: mainwindow.cpp:1527
 #, kde-format
 msgid "New Connection"
 msgstr "Nieuwe verbinding"
@@ -1274,12 +1274,12 @@ msgstr "Schermafdruk naar klembord kopiëren"
 msgid "Screenshot"
 msgstr "Schermafdruk"
 
-#: mainwindow.cpp:147 mainwindow.cpp:677
+#: mainwindow.cpp:147 mainwindow.cpp:678
 #, kde-format
 msgid "Switch to Full Screen Mode"
 msgstr "Beeld schermvullend maken"
 
-#: mainwindow.cpp:148 mainwindow.cpp:678
+#: mainwindow.cpp:148 mainwindow.cpp:679
 #, kde-format
 msgid "Full Screen"
 msgstr "Volledig scherm"
@@ -1339,7 +1339,7 @@ msgstr "Schaalfactor"
 msgid "Bookmarks"
 msgstr "Bladwijzers"
 
-#: mainwindow.cpp:295
+#: mainwindow.cpp:296
 #, kde-format
 msgid ""
 "Unable to load connection data from “%1”.\n"
@@ -1349,12 +1349,12 @@ msgstr ""
 "Het bestand is mogelijk beschadigd of heeft een indeling die niet door KRDC "
 "wordt ondersteund."
 
-#: mainwindow.cpp:296
+#: mainwindow.cpp:297
 #, kde-format
 msgid "Load failed"
 msgstr "Laden is mislukt"
 
-#: mainwindow.cpp:303
+#: mainwindow.cpp:304
 #, kde-format
 msgid ""
 "“%1” is not a valid address.\n"
@@ -1366,12 +1366,12 @@ msgstr ""
 "Gebruik de notatie [gebruikersnaam@]host[:poort], bijvoorbeeld: "
 "user@192.168.1.10:5900"
 
-#: mainwindow.cpp:305
+#: mainwindow.cpp:306
 #, kde-format
 msgid "Malformed URL"
 msgstr "Ongeldig URL-adres"
 
-#: mainwindow.cpp:335
+#: mainwindow.cpp:336
 #, kde-format
 msgid ""
 "No installed plugin can handle the “%1” protocol.\n"
@@ -1380,135 +1380,135 @@ msgstr ""
 "Geen enkele geïnstalleerde plug-in kan het “%1”-protocol verwerken.\n"
 "Ondersteunde protocollen: %2"
 
-#: mainwindow.cpp:559
+#: mainwindow.cpp:560
 #, kde-format
 msgid "Connecting to %1"
 msgstr "Verbindt met %1"
 
-#: mainwindow.cpp:563
+#: mainwindow.cpp:564
 #, kde-format
 msgid "Authenticating at %1"
 msgstr "Authenticeert op %1"
 
-#: mainwindow.cpp:567
+#: mainwindow.cpp:568
 #, kde-format
 msgid "Preparing connection to %1"
 msgstr "Bereidt verbinding naar %1 voor"
 
-#: mainwindow.cpp:571
+#: mainwindow.cpp:572
 #, kde-format
 msgid "Connected to %1"
 msgstr "Verbonden met %1"
 
-#: mainwindow.cpp:724
+#: mainwindow.cpp:725
 #, kde-format
 msgid "Switch to Window Mode"
 msgstr "Ga naar venstermodus"
 
-#: mainwindow.cpp:725
+#: mainwindow.cpp:726
 #, kde-format
 msgid "Window Mode"
 msgstr "Venstermodus"
 
-#: mainwindow.cpp:958
+#: mainwindow.cpp:959
 #, kde-format
 msgid "The entered address cannot be handled by this connection type."
 msgstr ""
 "Het invoerde adres kon niet worden afgehandeld door dit type verbinding."
 
-#: mainwindow.cpp:993
+#: mainwindow.cpp:994
 #, kde-format
 msgid "Connect"
 msgstr "Verbinden"
 
-#: mainwindow.cpp:994
+#: mainwindow.cpp:995
 #, kde-format
 msgid "Rename"
 msgstr "Hernoemen"
 
-#: mainwindow.cpp:995
+#: mainwindow.cpp:996
 #, kde-format
 msgid "Settings"
 msgstr "Instellingen"
 
-#: mainwindow.cpp:996
+#: mainwindow.cpp:997
 #, kde-format
 msgid "Delete"
 msgstr "Verwijderen"
 
-#: mainwindow.cpp:999 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:1000 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "Bladwijzers"
 
-#: mainwindow.cpp:999 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:1000 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "Geschiedenis"
 
-#: mainwindow.cpp:1011
+#: mainwindow.cpp:1012
 #, kde-format
 msgid "Rename %1"
 msgstr "%1 hernoemen"
 
-#: mainwindow.cpp:1011
+#: mainwindow.cpp:1012
 #, kde-format
 msgid "Rename %1 to"
 msgstr "%1 hernoemen naar"
 
-#: mainwindow.cpp:1018
+#: mainwindow.cpp:1019
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "Wilt u %1 verwijderen?"
 
-#: mainwindow.cpp:1018
+#: mainwindow.cpp:1019
 #, kde-format
 msgid "Delete %1"
 msgstr "%1 verwijderen"
 
-#: mainwindow.cpp:1042
+#: mainwindow.cpp:1043
 #, kde-format
 msgid "Add Bookmark"
 msgstr "Bladwijzer toevoegen"
 
-#: mainwindow.cpp:1043
+#: mainwindow.cpp:1044
 #, kde-format
 msgid "Close Tab"
 msgstr "Tabblad sluiten"
 
-#: mainwindow.cpp:1160
+#: mainwindow.cpp:1161
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr "Schermvullend venster minimaliseren"
 
-#: mainwindow.cpp:1177
+#: mainwindow.cpp:1178
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "Werkbalk vastzetten"
 
-#: mainwindow.cpp:1297
+#: mainwindow.cpp:1298
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr "Wilt u KDE Remote Desktop Client afsluiten?"
 
-#: mainwindow.cpp:1298
+#: mainwindow.cpp:1299
 #, kde-format
 msgid "Confirm Quit"
 msgstr "Afsluiten bevestigen"
 
-#: mainwindow.cpp:1452
+#: mainwindow.cpp:1453
 #, kde-format
 msgid "Connect to:"
 msgstr "Verbinden met:"
 
-#: mainwindow.cpp:1456
+#: mainwindow.cpp:1457
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr "Typ hier om te verbinden naar een adres en de lijst te filteren."
 
-#: mainwindow.cpp:1467
+#: mainwindow.cpp:1468
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
@@ -1517,28 +1517,28 @@ msgstr ""
 "Type hier een IP-adres of DNS-naam. Wis de regel om een lijst met "
 "verbindingensmethoden te krijgen."
 
-#: mainwindow.cpp:1470
+#: mainwindow.cpp:1471
 #, kde-format
 msgid "Goto Address"
 msgstr "Ga naar adres"
 
-#: mainwindow.cpp:1562
+#: mainwindow.cpp:1563
 #, kde-format
 msgid "Remote Desktops"
 msgstr "Bureaubladen op afstand"
 
-#: mainwindow.cpp:1591
+#: mainwindow.cpp:1592
 #, kde-format
 msgid "Filter"
 msgstr "Filter"
 
-#: mainwindow.cpp:1644
+#: mainwindow.cpp:1645
 #, kde-format
 msgctxt "@label"
 msgid "The remote computer may have shut down or restarted."
 msgstr "De externe computer is mogelijk afgesloten of opnieuw opgestart."
 
-#: mainwindow.cpp:1648
+#: mainwindow.cpp:1649
 #, kde-format
 msgctxt "@title connection error"
 msgid "Closed before the session started"

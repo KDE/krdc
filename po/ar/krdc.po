@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-10 00:57+0000\n"
+"POT-Creation-Date: 2026-11-12 01:01+0000\n"
 "PO-Revision-Date: 2026-11-05 09:34+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -216,13 +216,13 @@ msgstr "اضبط…"
 msgid "Remove"
 msgstr "أزل"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:336 mainwindow.cpp:958
-#: mainwindow.cpp:974
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:337 mainwindow.cpp:959
+#: mainwindow.cpp:975
 #, kde-format
 msgid "Unusable URL"
 msgstr "عنوان غير صالح للاستعمال"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:974
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:975
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr "المضيف المنقى لا يمكن التعامل معه."
@@ -366,229 +366,229 @@ msgctxt "@action:button"
 msgid "Cancel"
 msgstr "ألغِ"
 
-#: connectionstatuswidget.cpp:330
+#: connectionstatuswidget.cpp:335
 #, kde-format
 msgctxt "@info:status connection step"
 msgid "In progress"
 msgstr "جارية"
 
-#: connectionstatuswidget.cpp:406
+#: connectionstatuswidget.cpp:411
 #, kde-format
 msgctxt "@info connection step"
 msgid "Looking up the server address"
 msgstr "البحث عن عنوان الخادم"
 
-#: connectionstatuswidget.cpp:408
+#: connectionstatuswidget.cpp:413
 #, kde-format
 msgctxt "@info connection step"
 msgid "Opening the SSH tunnel"
 msgstr "فتح نفق SSH"
 
-#: connectionstatuswidget.cpp:410
+#: connectionstatuswidget.cpp:415
 #, kde-format
 msgctxt "@info connection step"
 msgid "Opening a network connection"
 msgstr "فتح اتصال شبكي"
 
-#: connectionstatuswidget.cpp:412
+#: connectionstatuswidget.cpp:417
 #, kde-format
 msgctxt "@info connection step"
 msgid "Securing the connection"
 msgstr "تأمين الاتصال"
 
-#: connectionstatuswidget.cpp:414
+#: connectionstatuswidget.cpp:419
 #, kde-format
 msgctxt "@info connection step"
 msgid "Logging in"
 msgstr "يَلُجْ"
 
-#: connectionstatuswidget.cpp:416
+#: connectionstatuswidget.cpp:421
 #, kde-format
 msgctxt "@info connection step"
 msgid "Starting the remote session"
 msgstr "بدء الجلسة البعيدة"
 
-#: connectionstatuswidget.cpp:418
+#: connectionstatuswidget.cpp:423
 #, kde-format
 msgctxt "@info connection step"
 msgid "Reconnecting"
 msgstr "يعيد الاتصال"
 
-#: connectionstatuswidget.cpp:428
+#: connectionstatuswidget.cpp:433
 #, kde-format
 msgctxt "@info connection step"
 msgid "Server address resolved"
 msgstr "حُلّ عنوان الخادم"
 
-#: connectionstatuswidget.cpp:430
+#: connectionstatuswidget.cpp:435
 #, kde-format
 msgctxt "@info connection step"
 msgid "SSH tunnel established"
 msgstr "أُنشئ نفق SSH"
 
-#: connectionstatuswidget.cpp:432
+#: connectionstatuswidget.cpp:437
 #, kde-format
 msgctxt "@info connection step"
 msgid "Network connection established"
 msgstr "أُنشئ الاتصال الشبكي"
 
-#: connectionstatuswidget.cpp:434
+#: connectionstatuswidget.cpp:439
 #, kde-format
 msgctxt "@info connection step"
 msgid "Connection secured"
 msgstr "أُمّن الاتصال"
 
-#: connectionstatuswidget.cpp:437
+#: connectionstatuswidget.cpp:442
 #, kde-format
 msgctxt "@info connection step"
 msgid "Access granted"
 msgstr "مُنح الوصول"
 
-#: connectionstatuswidget.cpp:439
+#: connectionstatuswidget.cpp:444
 #, kde-format
 msgctxt "@info connection step"
 msgid "Remote session started"
 msgstr "بدأت الجلسة البعيدة"
 
-#: connectionstatuswidget.cpp:449
+#: connectionstatuswidget.cpp:454
 #, kde-format
 msgctxt "@info"
 msgid "Resolved to %1."
 msgstr "حُلّ  إلى %1."
 
-#: connectionstatuswidget.cpp:461
+#: connectionstatuswidget.cpp:466
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Local address lookup failed: %1"
 msgstr "فشل البحث عن العنوان المحلي: %1"
 
-#: connectionstatuswidget.cpp:466
+#: connectionstatuswidget.cpp:471
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "%1 resolved to %2"
 msgstr "حُلّ %1 إلى %2"
 
-#: connectionstatuswidget.cpp:498
+#: connectionstatuswidget.cpp:503
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Connecting to the remote desktop service"
 msgstr "الاتصال بخدمة سطح المكتب البعيد"
 
-#: connectionstatuswidget.cpp:505
+#: connectionstatuswidget.cpp:510
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Authenticating"
 msgstr "يستوثق"
 
-#: connectionstatuswidget.cpp:509
+#: connectionstatuswidget.cpp:514
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Preparing the session"
 msgstr "تحضير الجلسة"
 
-#: connectionstatuswidget.cpp:513
+#: connectionstatuswidget.cpp:518
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Connected"
 msgstr "متّصل"
 
-#: connectionstatuswidget.cpp:546
+#: connectionstatuswidget.cpp:551
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Connection dropped, reconnecting: %1"
 msgstr "انقطع الاتصال، إعادة الاتصال: %1"
 
-#: connectionstatuswidget.cpp:546
+#: connectionstatuswidget.cpp:551
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Reconnected"
 msgstr "أُعيد الاتصال"
 
-#: connectionstatuswidget.cpp:559
+#: connectionstatuswidget.cpp:564
 #, kde-format
 msgctxt "@info"
 msgid "KRDC keeps trying until the connection is back."
 msgstr "يواصل KRDC المحاولة حتى يعود الاتصال."
 
-#: connectionstatuswidget.cpp:563
+#: connectionstatuswidget.cpp:568
 #, kde-format
 msgctxt "@title"
 msgid "Connection to %1 interrupted"
 msgstr "انقطع الاتصال بـ %1"
 
-#: connectionstatuswidget.cpp:565
+#: connectionstatuswidget.cpp:570
 #, kde-format
 msgctxt "@action:button"
 msgid "Disconnect"
 msgstr "اقطع الاتصال"
 
-#: connectionstatuswidget.cpp:575
+#: connectionstatuswidget.cpp:580
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Failed while: %1"
 msgstr "فشل أثناء: %1"
 
-#: connectionstatuswidget.cpp:656
+#: connectionstatuswidget.cpp:661
 #, kde-format
 msgctxt "@title"
 msgid "Session with %1 ended"
 msgstr "انتهت الجلسة مع %1"
 
-#: connectionstatuswidget.cpp:658
+#: connectionstatuswidget.cpp:663
 #, kde-format
 msgctxt "@title"
 msgid "Connection to %1 lost"
 msgstr "فُقد الاتصال بـ %1"
 
-#: connectionstatuswidget.cpp:660
+#: connectionstatuswidget.cpp:665
 #, kde-format
 msgctxt "@title"
 msgid "Could not connect to %1"
 msgstr "تعذّر الاتصال بـ %1"
 
-#: connectionstatuswidget.cpp:666
+#: connectionstatuswidget.cpp:671
 #, kde-format
 msgctxt "@action:button"
 msgid "Reconnect"
 msgstr "أعد الاتّصال"
 
-#: connectionstatuswidget.cpp:666
+#: connectionstatuswidget.cpp:671
 #, kde-format
 msgctxt "@action:button"
 msgid "Connect Again"
 msgstr "اتصل مجددًا"
 
-#: connectionstatuswidget.cpp:671
+#: connectionstatuswidget.cpp:676
 #, kde-format
 msgctxt "@action:button"
 msgid "Edit Address"
 msgstr "حرّر العنوان"
 
-#: connectionstatuswidget.cpp:674
+#: connectionstatuswidget.cpp:679
 #, kde-format
 msgctxt "@action:button"
 msgid "Edit Host Settings…"
 msgstr "حرّر إعدادات المضيف…"
 
-#: connectionstatuswidget.cpp:676
+#: connectionstatuswidget.cpp:681
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Tab"
 msgstr "أغلق اللسان"
 
-#: connectionstatuswidget.cpp:714
+#: connectionstatuswidget.cpp:719
 #, kde-format
 msgctxt "@action:button"
 msgid "Copy diagnostic information"
 msgstr "انسخ معلومات التشخيص"
 
-#: connectionstatuswidget.cpp:719
+#: connectionstatuswidget.cpp:724
 #, kde-format
 msgctxt "@action:button"
 msgid "Hide details"
 msgstr "أخفِ التّفاصيل"
 
-#: connectionstatuswidget.cpp:719
+#: connectionstatuswidget.cpp:724
 #, kde-format
 msgctxt "@action:button"
 msgid "Show details"
@@ -1234,8 +1234,8 @@ msgstr "عناوين جاهزة للإتصال بعد الإقلاع"
 msgid "KDE Remote Desktop Client started"
 msgstr "عميل سطح المكتب للكِيدِي بدء"
 
-#: mainwindow.cpp:115 mainwindow.cpp:132 mainwindow.cpp:1429
-#: mainwindow.cpp:1526
+#: mainwindow.cpp:115 mainwindow.cpp:132 mainwindow.cpp:1430
+#: mainwindow.cpp:1527
 #, kde-format
 msgid "New Connection"
 msgstr "اتصال جديد"
@@ -1250,12 +1250,12 @@ msgstr "انسخ لقطة الشاشة للحافظة"
 msgid "Screenshot"
 msgstr "لقطة شاشة"
 
-#: mainwindow.cpp:147 mainwindow.cpp:677
+#: mainwindow.cpp:147 mainwindow.cpp:678
 #, kde-format
 msgid "Switch to Full Screen Mode"
 msgstr "بدل لنمط ملء الشاشة"
 
-#: mainwindow.cpp:148 mainwindow.cpp:678
+#: mainwindow.cpp:148 mainwindow.cpp:679
 #, kde-format
 msgid "Full Screen"
 msgstr "ملء الشاشة"
@@ -1315,7 +1315,7 @@ msgstr "عامل التحجيم"
 msgid "Bookmarks"
 msgstr "العلامات"
 
-#: mainwindow.cpp:295
+#: mainwindow.cpp:296
 #, kde-format
 msgid ""
 "Unable to load connection data from “%1”.\n"
@@ -1324,12 +1324,12 @@ msgstr ""
 "تعذر تحميل بيانات الاتصال من ”%1“.\n"
 "ربما يكون الملف تالفًا، أو أنه بتنسيق لا يدعمه KRDC."
 
-#: mainwindow.cpp:296
+#: mainwindow.cpp:297
 #, kde-format
 msgid "Load failed"
 msgstr "فشل التحميل"
 
-#: mainwindow.cpp:303
+#: mainwindow.cpp:304
 #, kde-format
 msgid ""
 "“%1” is not a valid address.\n"
@@ -1340,12 +1340,12 @@ msgstr ""
 "\n"
 "استخدم الصيغة [username@]host[:port]، على سبيل المثال: user@192.168.1.10:5900"
 
-#: mainwindow.cpp:305
+#: mainwindow.cpp:306
 #, kde-format
 msgid "Malformed URL"
 msgstr "عنوان مشوَّه"
 
-#: mainwindow.cpp:335
+#: mainwindow.cpp:336
 #, kde-format
 msgid ""
 "No installed plugin can handle the “%1” protocol.\n"
@@ -1354,162 +1354,162 @@ msgstr ""
 "لا يوجد أي مكون إضافي مثبت يمكنه التعامل مع ميفاق ”%1“..\n"
 "الموافيق المتاحة: %2"
 
-#: mainwindow.cpp:559
+#: mainwindow.cpp:560
 #, kde-format
 msgid "Connecting to %1"
 msgstr "يتصل بـ %1"
 
-#: mainwindow.cpp:563
+#: mainwindow.cpp:564
 #, kde-format
 msgid "Authenticating at %1"
 msgstr "يستوثق عند %1"
 
-#: mainwindow.cpp:567
+#: mainwindow.cpp:568
 #, kde-format
 msgid "Preparing connection to %1"
 msgstr "يحضر الاتصال بـ %1"
 
-#: mainwindow.cpp:571
+#: mainwindow.cpp:572
 #, kde-format
 msgid "Connected to %1"
 msgstr "يتصل بـ %1"
 
-#: mainwindow.cpp:724
+#: mainwindow.cpp:725
 #, kde-format
 msgid "Switch to Window Mode"
 msgstr "بدل إلى نمط النافذة"
 
-#: mainwindow.cpp:725
+#: mainwindow.cpp:726
 #, kde-format
 msgid "Window Mode"
 msgstr "نمط النافذة"
 
-#: mainwindow.cpp:958
+#: mainwindow.cpp:959
 #, kde-format
 msgid "The entered address cannot be handled by this connection type."
 msgstr "لا يمكن معالجة العنوان المُدخَل بواسطة نوع الاتصال هذا."
 
-#: mainwindow.cpp:993
+#: mainwindow.cpp:994
 #, kde-format
 msgid "Connect"
 msgstr "اتّصل"
 
-#: mainwindow.cpp:994
+#: mainwindow.cpp:995
 #, kde-format
 msgid "Rename"
 msgstr "غيّر الاسم"
 
-#: mainwindow.cpp:995
+#: mainwindow.cpp:996
 #, kde-format
 msgid "Settings"
 msgstr "إعدادات"
 
-#: mainwindow.cpp:996
+#: mainwindow.cpp:997
 #, kde-format
 msgid "Delete"
 msgstr "احذف"
 
-#: mainwindow.cpp:999 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:1000 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "العلامات"
 
-#: mainwindow.cpp:999 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:1000 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "التاريخ"
 
-#: mainwindow.cpp:1011
+#: mainwindow.cpp:1012
 #, kde-format
 msgid "Rename %1"
 msgstr "غيّر الاسم %1"
 
-#: mainwindow.cpp:1011
+#: mainwindow.cpp:1012
 #, kde-format
 msgid "Rename %1 to"
 msgstr "أعد تسمية %1 إلى"
 
-#: mainwindow.cpp:1018
+#: mainwindow.cpp:1019
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "أمتأكّد من حذف %1؟"
 
-#: mainwindow.cpp:1018
+#: mainwindow.cpp:1019
 #, kde-format
 msgid "Delete %1"
 msgstr "احذف %1"
 
-#: mainwindow.cpp:1042
+#: mainwindow.cpp:1043
 #, kde-format
 msgid "Add Bookmark"
 msgstr "أضف علامة"
 
-#: mainwindow.cpp:1043
+#: mainwindow.cpp:1044
 #, kde-format
 msgid "Close Tab"
 msgstr "أغلق اللسان"
 
-#: mainwindow.cpp:1160
+#: mainwindow.cpp:1161
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr "صغر النافذة التي تملأ الشاشة"
 
-#: mainwindow.cpp:1177
+#: mainwindow.cpp:1178
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "ثبت شريط الأدوات"
 
-#: mainwindow.cpp:1297
+#: mainwindow.cpp:1298
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr "هل ترغب في إنهاء عميل سطح المكتب البعيد للكِيدِي ؟"
 
-#: mainwindow.cpp:1298
+#: mainwindow.cpp:1299
 #, kde-format
 msgid "Confirm Quit"
 msgstr "أكد الإنهاء"
 
-#: mainwindow.cpp:1452
+#: mainwindow.cpp:1453
 #, kde-format
 msgid "Connect to:"
 msgstr "متصل ب:"
 
-#: mainwindow.cpp:1456
+#: mainwindow.cpp:1457
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr "اكتب هنا للاتصال بعنوان وتصفية القائمة."
 
-#: mainwindow.cpp:1467
+#: mainwindow.cpp:1468
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
 "methods."
 msgstr "اكتب اسم IP أو DNS هنا. امحُ الخط للحصول على قائمة بطُرق الاتصال."
 
-#: mainwindow.cpp:1470
+#: mainwindow.cpp:1471
 #, kde-format
 msgid "Goto Address"
 msgstr "إذهب إلى العنوان"
 
-#: mainwindow.cpp:1562
+#: mainwindow.cpp:1563
 #, kde-format
 msgid "Remote Desktops"
 msgstr "أسطح المكتب البعيدة"
 
-#: mainwindow.cpp:1591
+#: mainwindow.cpp:1592
 #, kde-format
 msgid "Filter"
 msgstr "المرشّح"
 
-#: mainwindow.cpp:1644
+#: mainwindow.cpp:1645
 #, kde-format
 msgctxt "@label"
 msgid "The remote computer may have shut down or restarted."
 msgstr "ربما أُغلق الحاسوب البعيد أو أُعيد تشغيله."
 
-#: mainwindow.cpp:1648
+#: mainwindow.cpp:1649
 #, kde-format
 msgctxt "@title connection error"
 msgid "Closed before the session started"
