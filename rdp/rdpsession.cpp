@@ -9,6 +9,7 @@
 #include "rdpgraphics.h"
 #include "rdphostpreferences.h"
 #include "sharedfolderfield.h"
+#include "smartcardreaderfield.h"
 #ifdef HAVE_RDPDR_HOTPLUG
 #include "rdpremovabledrives.h"
 #endif
@@ -760,11 +761,14 @@ int RdpSession::clientContextStart(rdpContext *context)
         qCWarning(KRDC) << "Not sharing" << sharedFolder << "as it is not the path of a folder";
     }
 
-    if (!preferences->smartcardName().isEmpty()) {
+    const QString smartcard = preferences->smartcardName();
+    if (!smartcard.isEmpty()) {
         QByteArray name = "smartcard";
-        QByteArray value = preferences->smartcardName().toLocal8Bit();
+        QByteArray value = smartcard.toLocal8Bit();
         const char *params[2] = {name.data(), value.data()};
-        freerdp_client_add_device_channel(settings, 2, params);
+        if (!freerdp_client_add_device_channel(settings, smartcard == SmartcardReaderField::AllReaders ? 1 : 2, params)) {
+            return -1;
+        }
     }
 
     if (!freerdp_settings_set_uint32(settings, FreeRDP_KeyboardLayout, preferences->rdpKeyboardLayout())) {
