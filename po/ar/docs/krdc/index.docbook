@@ -1,0 +1,1269 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Arabic "INCLUDE"
+> <!-- ONLY If you are writing non-English 
+                                     original documentation, change 
+                                     the language here -->
+    
+  <!-- Do not define any other entities; instead, use the entities
+       from entities/general.entities and $LANG/user.entities. -->
+]>
+<!-- Based on kdoctemplate v0.9 January 10 2003 -->
+
+<book id="krdc" lang="&language;">
+
+<!-- This header contains all of the meta-information for the document such
+as Authors, publish date, the abstract, and Keywords -->
+
+<bookinfo>
+<title
+>دليل كردس</title>
+
+<authorgroup>
+<author
+>&Brad.Hards; &Brad.Hards.mail; </author>
+<author
+><firstname
+>Urs</firstname
+> <surname
+>Wolfer</surname
+> <affiliation
+> <address
+><email
+>uwolfer @ kde.org</email
+></address>
+    </affiliation>
+</author>
+<author
+><firstname
+>فابيو</firstname
+> <surname
+>باس</surname
+> <affiliation
+> <address
+><email
+>ctrlaltca @ gmail.com</email
+></address>
+    </affiliation>
+</author>
+<othercredit role="translator"
+><firstname
+>زايد</firstname
+><surname
+>السعيدي</surname
+><affiliation
+><address
+><email
+>zayed.alsaidi@gmail.com</email
+></address
+></affiliation
+><contrib
+>التّرجمة العربيّة</contrib
+></othercredit
+> 
+</authorgroup>
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>2026-09-24</date>
+<releaseinfo
+>ترس كيدي 21.00</releaseinfo>
+
+<copyright>
+<year
+>2003, 2026</year>
+</copyright>
+
+<abstract>
+<para
+>كردس تطبيق عميل يتيح لك عرض جلسة سطح المكتب على حاسوب آخر يشغّل خادومًا متوافقًا أو حتى التحكم بها. يُدعم <acronym
+>VNC</acronym
+> و<acronym
+>RDP</acronym
+> و<acronym
+>SPICE</acronym
+> عند تثبيت الملحقات المقابلة وتمكينها. </para>
+</abstract>
+
+<keywordset>
+<keyword
+>كيدي</keyword>
+<keyword
+>kdenetwork</keyword>
+<keyword
+>كرفب</keyword>
+<keyword
+>VNC</keyword>
+<keyword
+>RFB</keyword>
+<keyword
+>كردس</keyword>
+<keyword
+>مشاركة سطح المكتب</keyword>
+<keyword
+>التحكم عن بُعد</keyword>
+<keyword
+>المساعدة عن بُعد</keyword>
+<keyword
+>سطح المكتب البعيد</keyword>
+<keyword
+>RDP</keyword>
+<keyword
+>SPICE</keyword>
+<keyword
+>الإدارة عن بُعد</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>مقدمة</title>
+
+<para
+>يتيح لك كردس عرض سطح مكتب على حاسوب آخر والتحكم به. يمكنك استخدامه للعمل على حاسوب بعيد أو لمساعدة مستخدم آخر. يجب أن يشغّل الحاسوب الذي تتصل به خادوم سطح مكتب بعيد متوافق؛ كردس هو العميل ولا يمكّن مشاركة سطح المكتب على ذلك الحاسوب.</para>
+
+<para
+>يدعم كردس ميفاق <acronym
+>VNC</acronym
+> (الحوسبة الشبكية الافتراضية) و<acronym
+>RDP</acronym
+> (ميفاق سطح المكتب البعيد) و<acronym
+>SPICE</acronym
+>. تعتمد الميفاقات المتاحة في تنصيبك على الملحقات المثبتة والممكّنة. على سبيل المثال، يمكنك الاتصال بسطح مكتب تشاركه &krfb; باستخدام <acronym
+>VNC</acronym
+>، أو بخادوم سطح مكتب بعيد باستخدام <acronym
+>RDP</acronym
+>، أو بآلة افتراضية لها خادوم <acronym
+>SPICE</acronym
+>.</para>
+
+<para
+>شغّل كردس من مشغّل التطبيقات أو نفّذ <userinput
+><command
+>krdc</command
+></userinput
+> في الطرفية. لأمثلة سطر الأوامر، انظر <xref linkend="command-line"/>.</para>
+</chapter>
+
+<chapter id="supported-protocols">
+<title
+>الموافيق المتاحة</title>
+
+<para
+>يدعم كردس موافيق <acronym
+>VNC</acronym
+> و<acronym
+>RDP</acronym
+> و<acronym
+>SPICE</acronym
+> عبر ملحقات الميفاق. اختر الميفاق الذي يطابق الخادوم على الحاسوب البعيد. يمكن للعميل والخادوم تشغيل أنظمة تشغيل مختلفة.</para>
+
+<sect1 id="protocol-vnc">
+<title
+>VNC</title>
+
+<para
+>يستخدم <acronym
+>VNC</acronym
+> ميفاق مخزن الإطار البعيد (<acronym
+>RFB</acronym
+>). يرسل الخادوم تحديثات صورة سطح مكتبه إلى العميل، ويرسل العميل مدخلات لوحة المفاتيح والمؤشر إلى الخادوم. يُستخدم عادةً لمشاركة جلسة سطح مكتب موجودة.</para>
+
+<para
+><ulink url="https://apps.kde.org/krfb/"
+>&krfb;</ulink
+> هو تطبيق مشاركة سطح المكتب في &kde; ويوفر خادوم <acronym
+>VNC</acronym
+> لمشاركة سطح مكتب &plasma;. شغّل &krfb; واضبطه على الحاسوب الذي تريد مشاركة سطح مكتبه، ثم اتصل به من كردس باستخدام <acronym
+>VNC</acronym
+>. يمكن أيضًا استخدام خواديم VNC متوافقة أخرى.</para>
+
+<para
+>تؤثر سرعة الاتصال ومقدار التغير على الشاشة البعيدة في الاستجابة. إذا كانت التحديثات بطيئة، جرّب إعداد جودة <acronym
+>VNC</acronym
+> أقل في <xref linkend="vnc-settings"/>.</para>
+</sect1>
+
+<sect1 id="protocol-rdp">
+<title
+>RDP</title>
+
+<para
+>يوفر <acronym
+>RDP</acronym
+> (ميفاق سطح المكتب البعيد) وصولًا بعيدًا إلى سطح مكتب، مع ميزات مثل تشغيل الصوت وتبادل الحافظة. تعتمد الميزات المتاحة على الخادوم وإعداده.</para>
+
+<para
+>في &kde; &plasma;، يوفر <ulink url="https://invent.kde.org/plasma/krdp"
+> <application
+>KRDP</application
+></ulink
+> خادوم RDP لمشاركة جلسة سطح مكتب Wayland. اضبط وصول سطح المكتب البعيد في &systemsettings; الخاص بـ &plasma;، ثم اتصل من كردس باستخدام <acronym
+>RDP</acronym
+>.</para>
+
+<para
+>يستخدم &Microsoft; &Windows; سطح المكتب البعيد <acronym
+>RDP</acronym
+> أصلاً أيضًا. يمكنك الاتصال بحاسوب Windows بعد تمكين سطح المكتب البعيد عليه. تتطلب استضافة الاتصالات الواردة إصدارًا مدعومًا؛ لا يتضمن Windows Home خادوم سطح المكتب البعيد.</para>
+
+<para
+>لخيارات العرض والصوت والمشاركة والبوابة وغيرها من خيارات الاتصال، انظر <xref linkend="rdp-settings"/>.</para>
+</sect1>
+
+<sect1 id="protocol-spice">
+<title
+>SPICE</title>
+
+<para
+>يُستخدم <acronym
+>SPICE</acronym
+> عادةً للوصول إلى الطرفية الرسومية لآلة افتراضية. يمكن لـ <application
+>QEMU</application
+> توفير خادوم SPICE لضيف، ويمكن لأدوات مثل <application
+>virt-manager</application
+> ضبط ذلك الخادوم عبر <application
+>libvirt</application
+>.</para>
+
+<para
+>مكّن عرض SPICE للآلة الافتراضية واحصل على عنوان الاستماع والمنفذ من إعدادات المحاكاة الافتراضية. في كردس، اتصل بالمضيف الذي يشغّل QEMU والمنفذ المخصص لتلك الآلة الافتراضية. يتصل هذا بوحدة تحكم الضيف عبر مضيف المحاكاة الافتراضية، بدلاً من خادم سطح مكتب بعيد يعمل داخل الضيف.</para>
+
+<para
+>وكيل الضيف، <application
+>spice-vdagent</application
+>، يمكّن ميزات التكامل مثل مشاركة الحافظة وتغييرات الدقة الديناميكية. انظر <xref linkend="spice-settings"/> لخيارات كردس و<ulink url="https://www.spice-space.org/spice-user-manual.html"
+>دليل مستخدم SPICE</ulink
+> لـ QEMU وvirt-manager وإعدادات الضيف.</para>
+</sect1>
+</chapter>
+
+<chapter id="using-krdc">
+<title
+>استخدام كردس</title>
+
+<para>
+<screenshot>
+<screeninfo
+>إليك لقطة شاشة لـ كردس</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="krdc_mainwindow.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>النافذة الرئيسة لـ كردس</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<sect1 id="compatible-versions">
+<title
+>توصيل كردس بالخوادم المتوافقة</title>
+
+<para
+>قبل الاتصال، مكّن خادم سطح المكتب البعيد المناسب على الحاسوب البعيد واحصل على عنوانه وتفاصيل تسجيل الدخول. يجب أن يكون الخادم قابلاً للوصول من حاسوبك، ويجب أن تسمح جدارته النارية بالاتصال المطلوب.</para>
+
+<procedure>
+<step
+><para
+>اختر <menuchoice
+><guimenu
+>ملف</guimenu
+><guimenuitem
+>اتصال جديد</guimenuitem
+></menuchoice
+> لفتح صفحة الاتصال.</para
+></step>
+<step
+><para
+>اختر <guilabel
+>vnc</guilabel
+> أو <guilabel
+>rdp</guilabel
+> أو <guilabel
+>spice</guilabel
+> في محدد الميفاق بجانب <guilabel
+>اتصل بـ:</guilabel
+>.</para
+></step>
+<step
+><para
+>أدخل عنوان الخادم بالصيغة <userinput
+>[username@]host[:port]</userinput
+>، ثم اضغط <keycap
+>Enter</keycap
+> أو انقر زر السهم بجانب العنوان. الميفاق محدد مسبقاً، لذا لا تضفه في بداية هذا الحقل.</para
+></step>
+<step
+><para
+>راجع إعدادات المضيف إذا طُلب منك ذلك، وأدخل بيانات الاعتماد التي يطلبها الخادم. يفتح كل اتصال في تبويب.</para
+></step>
+</procedure>
+
+<variablelist>
+<varlistentry
+><term
+><acronym
+>VNC</acronym
+></term>
+<listitem
+><para
+>أدخل <userinput
+>megan</userinput
+> للمنفذ المبدئي 5900. للعرض 1 على المنفذ 5901، أدخل <userinput
+>megan:1</userinput
+> أو <userinput
+>megan:5901</userinput
+>. تُفسَّر أرقام المنافذ الأقل من 100 كأرقام عرض <acronym
+>VNC</acronym
+> وتُضاف إلى 5900.</para>
+
+<para>
+<screenshot>
+<screeninfo
+>إدخال اسم مضيف في كردس</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="address_input.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>إدخال اسم مضيف في كردس</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para
+></listitem
+></varlistentry>
+<varlistentry
+><term
+><acronym
+>RDP</acronym
+></term>
+<listitem
+><para
+>أدخل <userinput
+>megan</userinput
+> للمنفذ المبدئي 3389، أو <userinput
+>megan:3390</userinput
+> لمنفذ مختلف. يمكنك تضمين اسم مستخدم، مثلاً <userinput
+>alice@megan</userinput
+>.</para
+></listitem
+></varlistentry>
+<varlistentry
+><term
+><acronym
+>SPICE</acronym
+></term>
+<listitem
+><para
+>أدخل المضيف والمنفذ لخادم <acronym
+>SPICE</acronym
+> للآلة الافتراضية، مثلاً <userinput
+>vmhost:5902</userinput
+>. المنفذ المبدئي هو 5900.</para
+></listitem
+></varlistentry>
+</variablelist>
+
+<para
+>تعرض صفحة الاتصال أيضاً الإشارات المرجعية وسجل الاتصالات وخدمات <acronym
+>VNC</acronym
+> المعلن عنها على الشبكة المحلية عبر Zeroconf. الكتابة في حقل العنوان ترشّح هذه القائمة. يمكنك تحديد اتصال مدرج واستخدام <guimenuitem
+>اتصل</guimenuitem
+> من قائمته السياقية. توفر لوحة <guilabel
+>أسطح المكتب البعيدة</guilabel
+> طريقة أخرى للعثور على الاتصالات المحفوظة والمكتشفة.</para>
+</sect1>
+
+<sect1 id="connection">
+<title
+>ما يحدث عند الاتصال</title>
+
+<para
+>قبل الاتصال بمضيف جديد، يطلب كردس الإعدادات التي تحتاج غالبًا إلى تغيير: حجم العرض، ونوع الصوت أو الاتصال. انقر على <guibutton
+>كل الإعدادات…</guibutton
+> لرؤية كل إعداد للمضيف، ولإعطاء الاتصال <guilabel
+>اسمًا</guilabel
+> تعرضه قائمة الاتصالات بدلًا من عنوانه. تُجمَّع الإعدادات بنفس طريقة الإعدادات المبدئية للبروتوكول في تفضيلات <guilabel
+>الملحقات</guilabel
+>: <guilabel
+>العرض</guilabel
+>، <guilabel
+>الموارد المحلية</guilabel
+>، ولـ<acronym
+>RDP</acronym
+> <guilabel
+>الاتصال</guilabel
+> (الجلسة، والبوابة، والوكيل، ونفق SSH) و<guilabel
+>الأمان</guilabel
+>. انقر على <guibutton
+>اتصل</guibutton
+> للاتصال بالإعدادات المختارة. أزل علامة <guilabel
+>أظهر هذا الحوار مجددًا لهذا المضيف</guilabel
+> لإعادة استخدامها دون مطالبتك عند كل اتصال. ترتبط الإعدادات بعنوان الاتصال؛ وقد يستخدم الاتصال باسم مضيف أو عنوان IP مختلف تشكيلة مختلفة.</para>
+
+<para>
+<screenshot>
+<screeninfo
+>اختيار سرعة اتصال كردس</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="vnc_host_configuration.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>اختيار سرعة اتصال كردس</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>حين يطلب الخادم الاستيثاق، أدخل كلمة السر، واسم المستخدم إن طُلب. يتيح خيار <guilabel
+>تذكّر كلمة السر</guilabel
+> لكردس تخزين كلمة السر المدخلة عبر مخزن بيانات الاعتماد في النظام باستخدام QtKeychain بعد نجاح الاستيثاق. يُتذكّر الاختيار لهذا المضيف. تبقى كلمات السر المحفوظة سابقًا متاحة حتى عند إلغاء تحديد هذا الخيار. يتحكم الإعداد العام <guilabel
+>تذكّر كلمات السر</guilabel
+> في قراءة كلمات السر وحفظها معًا؛ وعند تعطيله، لا يعرض حوار الاستيثاق تذكّر كلمة السر.</para>
+
+<para>
+<screenshot>
+<screeninfo
+>إدخال كلمة مرور كردس</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="password_entry.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>إدخال كلمة مرور كردس</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>بالنسبة لـ <acronym
+>RDP</acronym
+>، قد يطلب منك كردس التحقق من شهادة خادم غير معروفة أو متغيرة. تحقق من تفاصيل الشهادة مع مسؤول الخادم قبل قبولها. يعرض الحوار <guilabel
+>تذكّر هذه الشهادة</guilabel
+> للاتصالات اللاحقة.</para>
+
+<para
+>تشير أيقونة التبويب إلى حالة الاتصال. بعد نجاح الاستيثاق، يمكنك عرض سطح المكتب البعيد أو التحكم فيه.</para>
+</sect1>
+
+<sect1 id="controlling-remote">
+<title
+>التحكم في اتصال سطح المكتب البعيد</title>
+
+<para
+>استخدم لوحة المفاتيح والفأرة في تبويب متصل للعمل على سطح المكتب البعيد. يوفر شريط الأدوات المعروض أدناه عناصر تحكم لفتح الاتصالات وتغيير العرض والتفاعل مع سطح المكتب البعيد. قد تكون الأزرار غير متاحة حسب الميفاق وحالة الاتصال.</para>
+
+<para>
+<screenshot>
+<screeninfo
+>شريط الأدوات كردس</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="view-toolbar.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>شريط أدوات كردس</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>من اليسار إلى اليمين، يحتوي شريط الأدوات على الأزرار التالية:</para>
+
+<variablelist>
+<varlistentry>
+<term
+><guibutton
+>اتصال جديد</guibutton
+></term>
+<listitem
+><para
+>افتح صفحة الاتصال لاختيار ميفاق وإدخال عنوان الخادم. يُفتح الاتصال الجديد في لسان، حتى تتمكن من إبقاء الجلسات الأخرى مفتوحة.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><guibutton
+>ملء الشاشة</guibutton
+></term>
+<listitem
+><para
+>اعرض سطح المكتب البعيد بملء الشاشة. يتغير الزر إلى <guibutton
+>وضع النافذة</guibutton
+>، الذي يعيدك إلى النافذة العادية. في ملء الشاشة، استخدم شريط الأدوات العائم للوصول إلى عناصر التحكم في الجلسة. يُبقي <guimenuitem
+>تثبيت شريط الأدوات</guimenuitem
+> ظاهرًا، ويمنحك <guimenuitem
+>تصغير نافذة ملء الشاشة</guimenuitem
+> إمكانية الوصول إلى سطح مكتبك المحلي.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><guibutton
+>لقطة شاشة</guibutton
+></term>
+<listitem
+><para
+>انسخ صورة لسطح المكتب البعيد إلى الحافظة المحلية. الصقها في محرر صور أو تطبيق آخر لحفظها.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><guibutton
+>عرض فقط</guibutton
+></term>
+<listitem
+><para
+>راقب سطح المكتب البعيد دون إرسال إدخال من لوحة المفاتيح أو الفأرة. تُعطَّل أيضًا مشاركة الحافظة أثناء تفعيل هذا الخيار. انقر الزر مرة أخرى لاستئناف التحكم في سطح المكتب البعيد.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><guibutton
+>مشاركة الحافظة</guibutton
+></term>
+<listitem
+><para
+>فعّل أو عطّل تبادل الحافظة بين حاسوبك وسطح المكتب البعيد. يعتمد المحتوى المدعوم على الميفاق والخادم. يتطلب تبادل الحافظة إيقاف <guibutton
+>عرض فقط</guibutton
+>.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><guibutton
+>المؤشر المحلي</guibutton
+></term>
+<listitem
+><para
+>اعرض مؤشر فأرة محليًا للمساعدة في تتبع موضعه على سطح المكتب البعيد. انقر الزر مرة أخرى لإيقاف هذا الخيار.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><guibutton
+>التقاط المفاتيح</guibutton
+></term>
+<listitem
+><para
+>أرسل أكبر عدد ممكن من اختصارات لوحة المفاتيح إلى سطح المكتب البعيد. قد تبقى بعض الاختصارات محجوزة لسطح المكتب المحلي أو نظام النوافذ. أوقف هذا الخيار لمعالجة الاختصارات محليًا مرة أخرى. يمكن تفعيل الالتقاط الآلي للوحة المفاتيح عند الدخول إلى ملء الشاشة في الإعدادات العامة.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><guibutton
+>تحجيم</guibutton
+></term>
+<listitem
+><para
+>حجّم الصورة البعيدة لتناسب مساحة النافذة المتاحة. أوقف هذا الخيار لعرض سطح المكتب دون تحجيم. يتذكر كردس خيارات تحجيم منفصلة لوضعي النافذة وملء الشاشة. يغيّر هذا حجم الصورة المعروضة، وليس دقة سطح المكتب البعيد.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><guibutton
+>افصل</guibutton
+></term>
+<listitem
+><para
+>أغلق الاتصال الحالي. إغلاق لسانه يفصله أيضًا. لا يصدر هذا أمر خروج أو إيقاف تشغيل إلى الحاسوب البعيد؛ ما يحدث للجلسة البعيدة يعتمد على الخادم.</para
+></listitem>
+</varlistentry>
+</variablelist>
+</sect1>
+
+<sect1 id="bookmarks">
+<title
+>العلامات وتاريخ الاتصال</title>
+
+<para
+>لحفظ اتصال، اختر <menuchoice
+><guimenu
+>العلامات</guimenu
+><guimenuitem
+>أضف علامة</guimenuitem
+></menuchoice
+>. افتحه مجددا من قائمة <guimenu
+>العلامات</guimenu
+> أو من قائمة الاتصالات.</para>
+
+<para>
+<screenshot>
+<screeninfo
+>قائمة العلامات المرجعية لـ كردس</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="bookmarks_menu.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>قائمة العلامات المرجعية لـ كردس</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>عند تفعيل <guilabel
+>تذكر تاريخ الاتصال</guilabel
+>، تُسجَّل الاتصالات الناجحة تحت <menuchoice
+><guimenu
+>العلامات</guimenu
+><guimenuitem
+>التاريخ</guimenuitem
+></menuchoice
+> وتظهر في قائمة الاتصالات. انقر بزر الفأرة الأيمن على مدخلة محفوظة في القائمة للاتصال بها، أو إعادة تسميتها، أو تغيير إعداداتها، أو حذفها.</para>
+
+<para
+>بالنسبة لاتصال موسوم، يمكن لمحاورة الإعدادات أيضا تحرير <guilabel
+>الاسم:</guilabel
+> و<guilabel
+>المسار:</guilabel
+>. استخدم مسارا كاملا مثل <userinput
+>rdp://alice@megan:3389</userinput
+>، مع الإبقاء على الميفاق نفسه. قد تسري تغييرات إعدادات الاتصال فقط عند إعادة الاتصال.</para>
+</sect1>
+
+<sect1 id="managing-configuration">
+<title
+>إدارة تهيئة كردس</title>
+
+<para
+>افتح <menuchoice
+><guimenu
+>الإعدادات</guimenu
+><guimenuitem
+>اضبط KRDC...</guimenuitem
+></menuchoice
+> لتغيير تفضيلات التطبيق.</para>
+
+<para>
+<screenshot>
+<screeninfo
+>تفضيلات كردس - لسان عام</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="general_preferences.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>تفضيلات كردس - لسان <guilabel
+>عام</guilabel
+></phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<variablelist>
+<varlistentry
+><term
+><guilabel
+>عام</guilabel
+></term>
+<listitem
+><para
+>اختر ما إذا كنت تريد استعادة الجلسات المفتوحة عند بدء التشغيل، وتذكر التاريخ وكلمات السر، وعرض أيقونة صينية النظام أو شريط الحالة، والحفاظ على نسبة الأبعاد عند التحجيم. يمكنك أيضا ضبط الميفاق المبدئي، ومحاورة إعداد المضيف الأولية، وتغيير حجم النافذة، وملء الشاشة الآلي، والاستيلاء على لوحة المفاتيح، ومظهر التبويب وسلوك الإغلاق.</para
+></listitem
+></varlistentry>
+<varlistentry
+><term
+><guilabel
+>المضيفون</guilabel
+></term>
+<listitem
+><para
+>اختر مضيفا محفوظا وانقر <guibutton
+>اضبط...</guibutton
+> لتغيير إعدادات ميفاقه. <guibutton
+>أزل</guibutton
+> يحذف إعداد المضيف المحفوظ. تُدار العلامات وتاريخ الاتصال بشكل منفصل.</para
+></listitem
+></varlistentry>
+<varlistentry
+><term
+><guilabel
+>الملحقات</guilabel
+></term>
+<listitem
+><para
+>فعّل أو عطّل ملحقات الميفاق المثبتة. أعد تشغيل كردس بعد تغيير توفر الملحقات. يفتح زر ضبط ملحق الميفاق إعداداته المبدئية.</para
+></listitem
+></varlistentry>
+</variablelist>
+</sect1>
+
+<sect1 id="vnc-settings">
+<title
+>إعدادات VNC</title>
+
+<para>
+<screenshot>
+<screeninfo
+>تفضيلات كردس - تبويب <guilabel
+>VNC</guilabel
+></screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="vnc_preferences.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>تفضيلات كردس - تبويب تشكيلات <guilabel
+>VNC</guilabel
+></phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+><guilabel
+>نوع الاتصال:</guilabel
+> يوفر <guilabel
+>جودة عالية (شبكة محلية، اتصال مباشر)</guilabel
+>، و<guilabel
+>جودة متوسطة (DSL، كبل، إنترنت سريع)</guilabel
+>، و<guilabel
+>جودة منخفضة (مودم، ISDN، إنترنت بطيء)</guilabel
+>. اختر جودة مناسبة للاتصال بأكمله، بما في ذلك وصلة الشبكة للحاسوب البعيد. قد تساعد الجودة المنخفضة على الاتصالات البطيئة.</para>
+
+<para
+><guilabel
+>حجّم إلى الحجم:</guilabel
+> يضبط الحجم المستخدم لعرض سطح المكتب البعيد، بأبعاد محددة مسبقا ومخصصة. يمنع خيار مدير كلمات السر إرسال محتوى الحافظة الموسوم ككلمة سر من قبل مديري كلمات السر المدعومين، مثل KeePassXC. لا يمكنه التعرف على كلمات السر المنسوخة من تطبيقات لا توفر تلك العلامة.</para>
+</sect1>
+
+<sect1 id="rdp-settings">
+<title
+>إعدادات RDP</title>
+
+<para
+>تحتوي محاورة ضبط RDP على التبويبات التالية. قد تسري تغييرات إعدادات الاتصال فقط بعد إعادة الاتصال.</para>
+
+<para
+><emphasis role="bold"
+>عام</emphasis
+></para>
+
+<para>
+<screenshot>
+<screeninfo
+>تفضيلات كردس لـ RDP - تبويب عام</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="rdp_preferences_general.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>تفضيلات كردس - لسان <guilabel
+>RDP</guilabel
+> العام</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>يتحكم لسان <guilabel
+>العرض</guilabel
+> في مظهر سطح المكتب البعيد، وتتحكم لسانة <guilabel
+>الموارد المحلية</guilabel
+> في الصوت ولوحة المفاتيح والموارد المشتركة مع الجلسة البعيدة.</para>
+
+<para
+>يحدد <guilabel
+>الدقة</guilabel
+> حجم سطح المكتب المطلوب من الخادم. اختر إعدادًا مسبقًا، أو حجم النافذة أو الشاشة الحالي، أو عرضًا وارتفاعًا مخصصين. يطلب <guilabel
+>استخدام دقة كل الشاشات</guilabel
+> جلسة متعددة الشاشات؛ في وضع ملء الشاشة، تُعرض الشاشات البعيدة على الشاشات المحلية المقابلة. يعتمد التوفر على الخادم وإعدادات العرض المحلية.</para>
+
+<para
+>يتحكم <guilabel
+>تحجيم محتويات النافذة لتطابق الدقة</guilabel
+> في تحجيم الصورة محليًا. أما <guilabel
+>عامل تحجيم سطح المكتب:</guilabel
+> و<guilabel
+>عامل تحجيم الجهاز:</guilabel
+> فيحددان معلومات التحجيم المرسلة إلى الخادم. استخدم هذه لضبط حجم عناصر الواجهة البعيدة على الشاشات عالية الدقة، حيث يدعمها الخادم.</para>
+
+<para
+>يحدد <guilabel
+>التسريع:</guilabel
+> نمط ترميز الرسوميات، بما في ذلك H.264 وRemoteFX أو تعطيل التسريع. يتحكم <guilabel
+>عمق الألوان:</guilabel
+> في عدد الألوان المستخدمة لسطح المكتب البعيد؛ تتطلب بعض أنماط التسريع ألوانًا بعمق 32 بت. ينبغي أن تطابق <guilabel
+>تخطيط لوحة المفاتيح:</guilabel
+> لوحة المفاتيح التي تستخدمها حتى تُفسَّر ضغطات المفاتيح تفسيرًا صحيحًا.</para>
+
+<para
+>يختار <guilabel
+>الصوت:</guilabel
+> التشغيل على هذا الحاسوب، أو التشغيل على الحاسوب البعيد، أو عدم الصوت. يجعل <guilabel
+>المجلد المشترك:</guilabel
+> مجلدًا على هذا الحاسوب متاحًا للجلسة البعيدة، التي يمكنها قراءته والكتابة فيه. اختر <guilabel
+>الأقراص القابلة للإزالة</guilabel
+> لمشاركة أقراص USB وبطاقات الذاكرة بأسمائها عند وصلها. اختر <guilabel
+>التنزيلات</guilabel
+> أو <guilabel
+>المستندات</guilabel
+>، أو <guilabel
+>مجلد آخر…</guilabel
+> لاختيار أي مجلد. لا يُشارَك أي مجلد ما لم تختر واحدًا. يحدد <guilabel
+>البطاقة الذكية المشتركة:</guilabel
+> اسم البطاقة الذكية لإعادة توجيهها إلى الخادم.</para>
+
+<para
+><emphasis role="bold"
+>الاتصال</emphasis
+></para>
+
+<para
+>يضبط لسان <guilabel
+>الاتصال</guilabel
+> الجلسة التي تحصل عليها على الحاسوب البعيد وكيف يصل إليها الاتصال.</para>
+
+<para
+>يطلب <guilabel
+>الاتصال بجلسة الطرفية (المدير)</guilabel
+> الجلسة الإدارية على الخوادم التي تدعمها، بدلًا من جلسة مستخدم جديدة. يرسل <guilabel
+>منع قفل الجلسة البعيدة</guilabel
+> نشاط فأرة محاكى دوريًا لإبقاء الجلسة نشطة؛ وقد تفرض سياسات الخادم القفل رغم ذلك.</para>
+
+<para
+>يتصل كردس مبدئيًا مباشرةً بسطح المكتب البعيد. أشر على أحد المسارات لعرض إعداداته؛ وإزالة العلامة توقف المسار وتحتفظ بإعداداته لوقت لاحق. يبقى عنوان سطح المكتب البعيد هو العنوان المُدخل في صفحة الاتصال.</para>
+
+<para>
+<screenshot>
+<screeninfo
+>تفضيلات RDP في كردس - لسان الاتصال، إعدادات البوابة</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="rdp_preferences_gateway.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>تفضيلات كردس - إعدادات بوابة <guilabel
+>RDP</guilabel
+></phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>يوجّه <guilabel
+>الاتصال عبر بوابة سطح مكتب بعيد</guilabel
+> الاتصال عبر بوابة RDP، التي توفر مسارًا إلى سطح مكتب بعيد على شبكة أخرى. أدخل عنوان البوابة في <guilabel
+>الخادم:</guilabel
+> بالصيغة <userinput
+>host:port</userinput
+>، مستخدمًا المنفذ الذي وفره مديرك.</para>
+
+<para
+>أدخل <guilabel
+>اسم المستخدم:</guilabel
+> و<guilabel
+>كلمة السر:</guilabel
+> و<guilabel
+>النطاق:</guilabel
+> لحساب البوابة حسب الحاجة. تستوثق هذه الحقول الوصول إلى البوابة؛ وقد يتطلب سطح المكتب البعيد بيانات اعتماد منفصلة.</para>
+
+<para
+>يعرض <guilabel
+>نوع النقل:</guilabel
+> <guilabel
+>آلي</guilabel
+> و<guilabel
+>HTTP</guilabel
+> و<guilabel
+>RPC</guilabel
+>. استخدم <guilabel
+>آلي</guilabel
+> ما لم يحدد مديرك نوع نقل.</para>
+
+<para>
+<screenshot>
+<screeninfo
+>تفضيلات RDP فيك كردس - لسان الاتصال، إعدادات الوكيل</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="rdp_preferences_proxy.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>تفضيلات كردس - إعدادات وكيل <guilabel
+>RDP</guilabel
+></phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>يوجّه <guilabel
+>الاتصال عبر خادم وكيل</guilabel
+> الاتصال عبر وكيل شبكة. أدخل عنوان الوكيل في <guilabel
+>الخادم:</guilabel
+> بالصيغة <userinput
+>host:port</userinput
+>، واختر <guilabel
+>HTTP</guilabel
+> أو <guilabel
+>SOCKS</guilabel
+> في <guilabel
+>البروتوكول:</guilabel
+>. إذا تطلب الوكيل استيثاقًا، فاملأ <guilabel
+>اسم المستخدم:</guilabel
+> و<guilabel
+>كلمة السر:</guilabel
+> ببيانات اعتماد الوكيل. قد تختلف هذه عن بيانات اعتماد سطح المكتب البعيد.</para>
+
+<para
+>إذا توفر دعم نفق SSH، يعرض حوار إعداد المضيف أيضًا <guilabel
+>الاتصال عبر نفق SSH</guilabel
+> في هذه اللسان. انظر <xref linkend="ssh-tunnels"/> لخياراته.</para>
+
+<para
+><emphasis role="bold"
+>الأمن</emphasis
+></para>
+
+<para>
+<screenshot>
+<screeninfo
+>تفضيلات RDP في كردس - لسان الأمان</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="rdp_preferences_security.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>تفضيلات كردس - لسان أمان <guilabel
+>RDP</guilabel
+></phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>تتحكم لسانة <guilabel
+>الأمان</guilabel
+> في طرق الأمان التي يعرضها كردس عند إنشاء اتصال RDP. تُمكّن مربعات اختيار <guilabel
+>البروتوكولات:</guilabel
+> استيثاق مستوى الشبكة (<guilabel
+>NLA</guilabel
+>)، وتعمية <guilabel
+>TLS</guilabel
+>، وأمان <guilabel
+>RDP</guilabel
+> القياسي، واستيثاق مستوى الشبكة الموسع (<guilabel
+>Ext</guilabel
+>). يمكن تمكين أكثر من واحد حتى يتفاوض العميل والخادم على طريقة متوافقة؛ ويبقى واحد على الأقل ممكّنًا.</para>
+
+<para
+>يضبط <guilabel
+>مستوى أمان TLS:</guilabel
+> مستوى الأمان التعموي المطلوب لاتصالات TLS. يفرض المستوى الأعلى متطلبات أكثر صرامة وقد يمنع الاتصال بخوادم أقدم.</para>
+
+<para
+>تختار <guilabel
+>حزم الاستيثاق:</guilabel
+> الحزم التي يمكن استخدامها لتسجيل الدخول باستيثاق مستوى الشبكة: <guilabel
+>Kerberos</guilabel
+> و<guilabel
+>NTLM</guilabel
+> و<guilabel
+>U2U</guilabel
+>. لا تُستخدم الحزم غير المشر عليها. لتسجيل الدخول بـKerberos فقط، كما هو الحال مع حسابات المستخدمين المحميين في Active Directory، أزل علامة <guilabel
+>NTLM</guilabel
+>.</para>
+</sect1>
+
+<sect1 id="spice-settings">
+<title
+>إعدادات SPICE</title>
+
+<para>
+<screenshot>
+<screeninfo
+>تفضيلات كردس - لسان <guilabel
+>SPICE</guilabel
+></screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="spice_preferences.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>تفضيلات كردس - لسان تشكيلات <guilabel
+>SPICE</guilabel
+></phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>اختر الدقة البعيدة المطلوبة من الإعدادات المسبقة، أو حجم النافذة أو الشاشة الحالي، أو أبعاد مخصصة. يتطلب تغيير الحجم الديناميكي <application
+>spice-vdagent</application
+> في الضيف. يمكنك أيضًا تمكين التحجيم المحلي وتشغيل الصوت. يعتمد تبادل الحافظة على الدعم في الضيف.</para>
+</sect1>
+
+<sect1 id="ssh-tunnels">
+<title
+>أنفاق SSH</title>
+
+<para>
+<screenshot>
+<screeninfo
+>تفضيلات كردس - لسان <guilabel
+>SSH</guilabel
+></screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="sshtunnel_preferences.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>تفضيلات كردس - لسان <guilabel
+>SSH</guilabel
+></phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+</para>
+
+<para
+>إذا تضمن تنصيبك دعم نفق SSH، توفر إعدادات المضيف <guilabel
+>اتصل عبر نفق SSH</guilabel
+>. أدخل منفذ SSH واسم المستخدم لنفس المضيف الذي يعمل عليه خادم سطح المكتب البعيد. استيثاق SSH منفصل عن استيثاق سطح المكتب البعيد.</para>
+
+<para
+><guilabel
+>نفق عبر عنوان الاسترجاع</guilabel
+> يجعل النفق يتصل بخدمة سطح المكتب البعيد عبر عنوان الاسترجاع للمضيف البعيد. استخدم هذا عندما تستمع الخدمة على ذلك العنوان فقط. لا يزال منفذ سطح المكتب البعيد مأخوذًا من عنوان الاتصال.</para>
+</sect1>
+
+
+<sect1 id="command-line">
+<title
+>بدء الاتصالات من سطر الأوامر</title>
+<para
+>مرر مسار URL كاملًا للاتصال مباشرة:</para>
+<screen
+><userinput
+><command
+>krdc</command
+> rdp://alice@megan</userinput>
+<userinput
+><command
+>krdc</command
+> vnc://megan:5901</userinput>
+<userinput
+><command
+>krdc</command
+> spice://vmhost:5902</userinput
+></screen>
+
+<para
+>استخدم <option
+>--fullscreen</option
+> مع مسار URL واحد لبدء ذلك الاتصال بملء الشاشة. يمكنك أيضًا تمرير عدة مسارات URL لفتح اتصالات متعددة:</para>
+<screen
+><userinput
+><command
+>krdc</command
+> --fullscreen rdp://megan</userinput>
+<userinput
+><command
+>krdc</command
+> vnc://megan rdp://workstation</userinput
+></screen>
+
+<para
+>في مسار URL كامل، رمّز المحارف المحجوزة بنسبة مئوية في اسم المستخدم. على سبيل المثال، استخدم <userinput
+>rdp://alice%40example.org@megan</userinput
+> لاسم المستخدم <literal
+>alice@example.org</literal
+>.</para>
+
+<para
+>يستطيع كردس قراءة تفاصيل الاتصال الأساسية من ملف <filename
+>.rdp</filename
+> يُمرر على سطر الأوامر:</para>
+<screen
+><userinput
+><command
+>krdc</command
+> connection.rdp</userinput
+></screen>
+<para
+>يقرأ هذا عنوان الخادم، واسم المستخدم، والنطاق، وحقل كلمة سر إن وُجد. ولمضيف ليس له إعدادات محفوظة، يقرأ أيضًا حجم العرض، وإعدادات التحجيم والصوت، وما إذا كان سيُعطّل مشاركة الحافظة، وبوابة تُستخدم دائمًا، يطلب منك كردس قبولها أولًا. تُحفظ الإعدادات المحفوظة مسبقًا للمضيف. وللأمان، لا يستورد كردس مجلدات مشتركة، ولا أجهزة مشتركة، ولا إعدادات أمان من الملف. استخدم حوار إعداد المضيف لخيارات أخرى. شغّل <userinput
+><command
+>krdc</command
+> <option
+>--help</option
+></userinput
+> للحصول على مساعدة سطر الأوامر.</para>
+
+<para
+>يستطيع كردس أيضًا فتح اتصال SPICE من ملف <filename
+>.vv</filename
+> لـ Virt Viewer، مثل ملف نُزّل من Proxmox VE:</para>
+<screen
+><userinput
+><command
+>krdc</command
+> connection.vv</userinput
+></screen>
+<para
+>يقرأ هذا عنوان الخادم، والمنافذ، وكلمة السر، والشهادة، والوكيل. تُحفظ هذه فقط ما دام تبويب الاتصال مفتوحًا ولا تُحفظ، لذا للاتصال مجددًا بعد إغلاقه، افتح ملفًا جديدًا. يطلب منك كردس قبول الوكيل في كل مرة قبل استخدامه، ولا يرسل أبدًا كلمة سر محفوظة على اتصال كهذا. تُتجاهل الإعدادات الأخرى في الملف، ولا يُحذف الملف، حتى لو طلب ذلك.</para>
+</sect1>
+</chapter>
+
+<chapter id="faq">
+<title
+>أسئلة وأجوبة</title>
+<qandaset id="faqlist">
+<qandaentry>
+<question
+><para
+>لماذا يفقد ميفاق أو يُرفض عنوان؟</para
+></question>
+<answer
+><para
+>تحقق من أن الملحق المقابل مثبت وممكّن في <guilabel
+>الملحقات</guilabel
+>، ثم أعد تشغيل كردس. تحقق من الميفاق المحدد وصياغة العنوان في <xref linkend="compatible-versions"/>. يستخدم دعم RDP مكتبات FreeRDP مباشرة؛ ولا يتطلب تشغيل ملف <command
+>xfreerdp</command
+> تنفيذي خارجي.</para
+></answer>
+</qandaentry>
+<qandaentry>
+<question
+><para
+>لماذا لا أستطيع الاتصال بالحاسوب البعيد؟</para
+></question>
+<answer
+><para
+>تحقق من اسم المضيف والمنفذ والشبكة أو اتصال VPN، وما إذا كان خادم سطح المكتب البعيد يعمل. تأكد من أن جدار الحماية لديه يسمح بالاتصال. عند فشل الاستيثاق، تحقق من اسم المستخدم وكلمة السر والنطاق والإذن بتسجيل الدخول عن بعد. إذا كنت تستخدم وكيلًا أو بوابة أو نفق SSH، فتحقق من إعداداته وبيانات اعتماده أيضًا.</para
+></answer>
+</qandaentry>
+<qandaentry>
+<question
+><para
+>لماذا أرى سطح المكتب لكن لا أستطيع التحكم فيه؟</para
+></question>
+<answer
+><para
+>أوقف <guimenuitem
+>العرض فقط</guimenuitem
+> في قائمة <guimenu
+>الجلسة</guimenu
+>. قد يقيد الخادم اتصالك بالعرض فقط؛ اطلب من الشخص الذي يدير سطح المكتب البعيد التحقق من أذوناته.</para
+></answer>
+</qandaentry>
+<qandaentry>
+<question
+><para
+>لماذا لا يعمل النسخ واللصق؟</para
+></question>
+<answer
+><para
+>مكّن <guimenuitem
+>مشاركة الحافظة</guimenuitem
+>، وعطّل <guimenuitem
+>العرض فقط</guimenuitem
+>، وتحقق من أن الخادم يدعم المحتوى الذي تنسخه. بالنسبة لـ VNC، يمكن لمرشح مدير كلمات السر أن يحجب كلمات السر المنسوخة عمدًا. بالنسبة لـ SPICE، تحقق من وكيل الضيف.</para
+></answer>
+</qandaentry>
+<qandaentry>
+<question
+><para
+>كيف أغير الإعدادات بعد إخفاء حوار المضيف؟</para
+></question>
+<answer
+><para
+>افتح <guilabel
+>المضيفين</guilabel
+> في تفضيلات التطبيق، واختر المضيف، وانقر <guibutton
+>اضبط...</guibutton
+>. يمكنك تمكين <guilabel
+>إظهار هذا الحوار مجددًا لهذا المضيف</guilabel
+> هناك.</para
+></answer>
+</qandaentry>
+<qandaentry>
+<question
+><para
+>أين يمكنني الإبلاغ عن مشكلة؟</para
+></question>
+<answer
+><para
+>أبلغ عن العلل في <ulink url="https://bugs.kde.org"
+>متتبع علل &kde;</ulink
+>. ضمّن إصدار كردس والميفاق ونظام التشغيل المحلي وبرمجيات الخادم وخطوات إعادة إنتاج المشكلة. احذف كلمات السر وتفاصيل الاتصال الخاصة الأخرى.</para
+></answer>
+</qandaentry>
+</qandaset>
+</chapter>
+
+<chapter id="credits">
+
+<title
+>الإسهامات والرخصة</title>
+
+<para
+>كردس </para>
+<para
+>بدأ مشروع كردس تيم يانسن <email
+>tim@tjansen.de</email
+>. كمشروع صيف كود جوجل 2007، أعاد أورس وولفر <email
+>uwolfer @ kde.org</email
+> كتابة كردس بالكامل. الشكر لجوجل على جعل هذا ممكنًا، والشكر للمرشد العظيم لمشروع صيف الكود هذا، &Brad.Hards; &Brad.Hards.mail;. </para>
+
+<para
+>حقوق نشر التوثيق &copy; 2003 &Brad.Hards; &Brad.Hards.mail; حقوق نشر التوثيق &copy; 2007 Urs Wolfer <email
+>uwolfer @ kde.org</email
+> حقوق نشر التوثيق &copy; 2026 Fabio Bas <email
+>ctrlaltca @ gmail.com</email
+> </para>
+
+<para
+>الترجمة: زايد السعيدي <email
+>zayed.alsaidi@gmail.com</email
+></para
+> &underFDL; &underGPL; </chapter>
+
+&documentation.index;
+</book>
+
+<!--
+Local Variables:
+mode: xml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+
+vim:tabstop=2:shiftwidth=2:expandtab 
+-->

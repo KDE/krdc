@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-12 01:01+0000\n"
+"POT-Creation-Date: 2026-11-13 00:58+0000\n"
 "PO-Revision-Date: 2013-06-23 12:46-0500\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi/Panjabi <punjabi-users@lists.sf.net>\n"
@@ -1649,7 +1649,7 @@ msgstr "ਡੈਸਕਟਾਪ ਰੈਜ਼ੋਲੂਸ਼ਨ(&r):"
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_DeviceScaleFactor)
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_GatewayTransportType)
 #: rdp/rdppreferences.ui:256 rdp/rdppreferences.ui:324
-#: rdp/rdppreferences.ui:877
+#: rdp/rdppreferences.ui:884
 #, kde-format
 msgid "Auto"
 msgstr ""
@@ -2054,30 +2054,31 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QLabel, shareSmartcardLabel)
 #: rdp/rdppreferences.ui:746
 #, kde-format
+msgctxt "@label:listbox"
 msgid "Shared smartcard:"
 msgstr ""
 
 #. i18n: ectx: attribute (title), widget (QWidget, connectionTab)
-#: rdp/rdppreferences.ui:760
+#: rdp/rdppreferences.ui:767
 #, kde-format
 msgid "Connection"
 msgstr "ਕੁਨੈਕਸ਼ਨ"
 
 #. i18n: ectx: property (text), widget (QLabel, sessionLabel)
-#: rdp/rdppreferences.ui:766
+#: rdp/rdppreferences.ui:773
 #, fuzzy, kde-format
 #| msgid "Sessions"
 msgid "Session:"
 msgstr "ਸ਼ੈਸ਼ਨ"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ConsoleMode)
-#: rdp/rdppreferences.ui:773
+#: rdp/rdppreferences.ui:780
 #, kde-format
 msgid "Connect to the console (admin) session"
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_ConsoleMode)
-#: rdp/rdppreferences.ui:776
+#: rdp/rdppreferences.ui:783
 #, kde-format
 msgid ""
 "Connect to the session an administrator uses to manage the remote computer, "
@@ -2085,14 +2086,14 @@ msgid ""
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_PreventSessionLock)
-#: rdp/rdppreferences.ui:783
+#: rdp/rdppreferences.ui:790
 #, fuzzy, kde-format
 #| msgid "Invitation to view remote desktop"
 msgid "Keep the remote session from locking"
 msgstr "ਰਿਮੋਟ ਡੈਸਕਟਾਪ ਵੇਖਣ ਲਈ ਸੱਦਾ"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_PreventSessionLock)
-#: rdp/rdppreferences.ui:786
+#: rdp/rdppreferences.ui:793
 #, kde-format
 msgid ""
 "Move the remote mouse pointer every few minutes so that the remote computer "
@@ -2100,7 +2101,7 @@ msgid ""
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseGateway)
-#: rdp/rdppreferences.ui:812
+#: rdp/rdppreferences.ui:819
 #, fuzzy, kde-format
 #| msgid "Connect to a VNC Remote Desktop"
 msgid "Connect through a Remote Desktop Gateway"
@@ -2108,21 +2109,21 @@ msgstr "VNC ਰਿਮੋਟ ਡੈਸਕਟਾਪ ਨਾਲ ਕੁਨੈਕਟ �
 
 #. i18n: ectx: property (text), widget (QLabel, gServerLabel)
 #. i18n: ectx: property (text), widget (QLabel, pHostLabel)
-#: rdp/rdppreferences.ui:819 rdp/rdppreferences.ui:905
+#: rdp/rdppreferences.ui:826 rdp/rdppreferences.ui:912
 #, kde-format
 msgid "Server:"
 msgstr ""
 
 #. i18n: ectx: property (placeholderText), widget (KLineEdit, kcfg_GatewayServer)
 #. i18n: ectx: property (placeholderText), widget (KLineEdit, kcfg_ProxyHost)
-#: rdp/rdppreferences.ui:826 rdp/rdppreferences.ui:912
+#: rdp/rdppreferences.ui:833 rdp/rdppreferences.ui:919
 #, kde-format
 msgid "host:port"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, gUsernameLabel)
 #. i18n: ectx: property (text), widget (QLabel, pUsernameLabel)
-#: rdp/rdppreferences.ui:833 rdp/rdppreferences.ui:919
+#: rdp/rdppreferences.ui:840 rdp/rdppreferences.ui:926
 #, fuzzy, kde-format
 #| msgid "Enter Username"
 msgid "Username:"
@@ -2130,112 +2131,112 @@ msgstr "ਯੂਜ਼ਰ ਨਾਂ ਦਿਓ"
 
 #. i18n: ectx: property (text), widget (QLabel, gPasswordLabel)
 #. i18n: ectx: property (text), widget (QLabel, pPasswordLabel)
-#: rdp/rdppreferences.ui:843 rdp/rdppreferences.ui:929
+#: rdp/rdppreferences.ui:850 rdp/rdppreferences.ui:936
 #, kde-format
 msgid "Password:"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, gDomainLabel)
-#: rdp/rdppreferences.ui:853
+#: rdp/rdppreferences.ui:860
 #, kde-format
 msgid "Domain:"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, gTransportTypeLabel)
-#: rdp/rdppreferences.ui:863
+#: rdp/rdppreferences.ui:870
 #, kde-format
 msgid "Transport type:"
 msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_GatewayTransportType)
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ProxyProtocol)
-#: rdp/rdppreferences.ui:882 rdp/rdppreferences.ui:953
+#: rdp/rdppreferences.ui:889 rdp/rdppreferences.ui:960
 #, kde-format
 msgid "HTTP"
 msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_GatewayTransportType)
-#: rdp/rdppreferences.ui:887
+#: rdp/rdppreferences.ui:894
 #, kde-format
 msgid "RPC"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseProxy)
-#: rdp/rdppreferences.ui:898
+#: rdp/rdppreferences.ui:905
 #, fuzzy, kde-format
 #| msgid "An error has occurred during the connection to the NX server."
 msgid "Connect through a proxy server"
 msgstr "NX ਸਰਵਰ ਨਾਲ ਕੁਨੈਕਸ਼ਨ ਦੇ ਦੌਰਾਨ ਗਲਤੀ ਆਈ ਹੈ।"
 
 #. i18n: ectx: property (text), widget (QLabel, protocolLabel)
-#: rdp/rdppreferences.ui:939
+#: rdp/rdppreferences.ui:946
 #, kde-format
 msgid "Protocol:"
 msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_ProxyProtocol)
-#: rdp/rdppreferences.ui:958
+#: rdp/rdppreferences.ui:965
 #, kde-format
 msgid "SOCKS"
 msgstr ""
 
 #. i18n: ectx: attribute (title), widget (QWidget, securityTab)
-#: rdp/rdppreferences.ui:985
+#: rdp/rdppreferences.ui:992
 #, kde-format
 msgid "Security"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, protocolsLabel)
-#: rdp/rdppreferences.ui:991
+#: rdp/rdppreferences.ui:998
 #, kde-format
 msgid "Protocols:"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityNLA)
-#: rdp/rdppreferences.ui:1000
+#: rdp/rdppreferences.ui:1007
 #, fuzzy, kde-format
 #| msgid "LAN"
 msgid "NLA"
 msgstr "ਲੈਨ"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SecurityNLA)
-#: rdp/rdppreferences.ui:1003
+#: rdp/rdppreferences.ui:1010
 #, kde-format
 msgid "Network Level Authentication: sign in before the remote session starts."
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityTLS)
-#: rdp/rdppreferences.ui:1010
+#: rdp/rdppreferences.ui:1017
 #, kde-format
 msgid "TLS"
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SecurityTLS)
-#: rdp/rdppreferences.ui:1013
+#: rdp/rdppreferences.ui:1020
 #, kde-format
 msgid "TLS encryption, signing in on the login screen of the remote computer."
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityRDP)
-#: rdp/rdppreferences.ui:1020
+#: rdp/rdppreferences.ui:1027
 #, kde-format
 msgid "RDP"
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SecurityRDP)
-#: rdp/rdppreferences.ui:1023
+#: rdp/rdppreferences.ui:1030
 #, kde-format
 msgid "Standard RDP security, the older encryption built into the protocol."
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityEXT)
-#: rdp/rdppreferences.ui:1030
+#: rdp/rdppreferences.ui:1037
 #, kde-format
 msgid "Ext"
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SecurityEXT)
-#: rdp/rdppreferences.ui:1033
+#: rdp/rdppreferences.ui:1040
 #, kde-format
 msgid ""
 "Extended Network Level Authentication, which also checks that the account "
@@ -2243,13 +2244,13 @@ msgid ""
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, TlsSecLevelLabel)
-#: rdp/rdppreferences.ui:1055
+#: rdp/rdppreferences.ui:1062
 #, kde-format
 msgid "TLS security level:"
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (KComboBox, kcfg_TlsSecLevel)
-#: rdp/rdppreferences.ui:1065
+#: rdp/rdppreferences.ui:1072
 #, kde-format
 msgid ""
 "The weakest TLS encryption to accept. A higher level may refuse to connect "
@@ -2257,43 +2258,43 @@ msgid ""
 msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
-#: rdp/rdppreferences.ui:1075
+#: rdp/rdppreferences.ui:1082
 #, kde-format
 msgid "Any"
 msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
-#: rdp/rdppreferences.ui:1080
+#: rdp/rdppreferences.ui:1087
 #, kde-format
 msgid "80 bit"
 msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
-#: rdp/rdppreferences.ui:1085
+#: rdp/rdppreferences.ui:1092
 #, kde-format
 msgid "112 bit"
 msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
-#: rdp/rdppreferences.ui:1090
+#: rdp/rdppreferences.ui:1097
 #, kde-format
 msgid "128 bit"
 msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
-#: rdp/rdppreferences.ui:1095
+#: rdp/rdppreferences.ui:1102
 #, kde-format
 msgid "192 bit"
 msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
-#: rdp/rdppreferences.ui:1100
+#: rdp/rdppreferences.ui:1107
 #, kde-format
 msgid "256 bit"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, authPkgListLabel)
-#: rdp/rdppreferences.ui:1108
+#: rdp/rdppreferences.ui:1115
 #, fuzzy, kde-format
 #| msgid "Authenticating at %1"
 msgid "Authentication packages:"
@@ -2303,8 +2304,8 @@ msgstr "%1 ਉੱਤੇ ਪਰਮਾਣਿਤ ਕੀਤਾ ਜਾ ਰਿਹਾ �
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_AuthPkgKerberos)
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_AuthPkgNtlm)
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_AuthPkgU2u)
-#: rdp/rdppreferences.ui:1111 rdp/rdppreferences.ui:1123
-#: rdp/rdppreferences.ui:1133 rdp/rdppreferences.ui:1143
+#: rdp/rdppreferences.ui:1118 rdp/rdppreferences.ui:1130
+#: rdp/rdppreferences.ui:1140 rdp/rdppreferences.ui:1150
 #, kde-format
 msgid ""
 "Checked packages may be used during CredSSP/NLA negotiation; unchecked "
@@ -2313,31 +2314,31 @@ msgid ""
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AuthPkgKerberos)
-#: rdp/rdppreferences.ui:1120
+#: rdp/rdppreferences.ui:1127
 #, kde-format
 msgid "Kerberos"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AuthPkgNtlm)
-#: rdp/rdppreferences.ui:1130
+#: rdp/rdppreferences.ui:1137
 #, kde-format
 msgid "NTLM"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AuthPkgU2u)
-#: rdp/rdppreferences.ui:1140
+#: rdp/rdppreferences.ui:1147
 #, kde-format
 msgid "U2U"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseDefaultKerberosRealm)
-#: rdp/rdppreferences.ui:1165
+#: rdp/rdppreferences.ui:1172
 #, kde-format
 msgid "Use the default Kerberos realm for unmapped domains"
 msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_UseDefaultKerberosRealm)
-#: rdp/rdppreferences.ui:1168
+#: rdp/rdppreferences.ui:1175
 #, kde-format
 msgid ""
 "Enable this for an alternate sign-in suffix that uses the default realm in "
@@ -2346,7 +2347,7 @@ msgid ""
 "this connection."
 msgstr ""
 
-#: rdp/rdpsession.cpp:1400
+#: rdp/rdpsession.cpp:1404
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -2518,7 +2519,7 @@ msgctxt "@info"
 msgid "Connect to the network or VPN of the domain."
 msgstr ""
 
-#: rdp/rdpview.cpp:514 spice/spiceview.cpp:964 vnc/vncview.cpp:298
+#: rdp/rdpview.cpp:514 spice/spiceview.cpp:964 vnc/vncview.cpp:300
 #, kde-format
 msgctxt "@label"
 msgid "No IP address was found for this name."
@@ -2823,6 +2824,24 @@ msgctxt "@title:window"
 msgid "Choose Shared Folder"
 msgstr ""
 
+#: rdp/smartcardreaderfield.cpp:33
+#, kde-format
+msgctxt "@item:inlistbox smartcard reader, %1 is its saved name"
+msgid "%1 (not detected)"
+msgstr ""
+
+#: rdp/smartcardreaderfield.cpp:50
+#, kde-format
+msgctxt "@item:inlistbox smartcard reader"
+msgid "Not shared"
+msgstr ""
+
+#: rdp/smartcardreaderfield.cpp:51
+#, kde-format
+msgctxt "@item:inlistbox smartcard reader"
+msgid "All readers"
+msgstr ""
+
 #: remotedesktopsmodel.cpp:112
 #, kde-format
 msgctxt "Where each displayed link comes from"
@@ -2916,7 +2935,7 @@ msgid "Play audio from the remote host on this machine."
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, networkHeading)
-#: spice/spicepreferences.ui:295 vnc/vncpreferences.ui:275
+#: spice/spicepreferences.ui:295 vnc/vncpreferences.ui:304
 #, kde-format
 msgid "Network"
 msgstr ""
@@ -3097,15 +3116,37 @@ msgid ""
 "filtering."
 msgstr ""
 
+#. i18n: ectx: property (text), widget (QLabel, scrollMultiplierLabel)
+#: vnc/vncpreferences.ui:254
+#, kde-format
+msgid "Scroll &multiplier:"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QSpinBox, kcfg_ScrollMultiplier)
+#: vnc/vncpreferences.ui:264
+#, kde-format
+msgid ""
+"Number of scroll events sent to the remote desktop for each mouse wheel step."
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_ScrollMultiplier)
+#: vnc/vncpreferences.ui:267
+#, kde-format
+msgid ""
+"Number of scroll events sent to the remote desktop for each mouse wheel "
+"step. Increase this if scrolling is too slow, for example with macOS Screen "
+"Sharing."
+msgstr ""
+
 #. i18n: ectx: property (text), widget (QLabel, connectionLabel)
-#: vnc/vncpreferences.ui:282
+#: vnc/vncpreferences.ui:311
 #, fuzzy, kde-format
 #| msgid "Connection type:"
 msgid "Connection &type:"
 msgstr "ਕੁਨੈਕਸ਼ਨ ਕਿਸਮ:"
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_Quality)
-#: vnc/vncpreferences.ui:298
+#: vnc/vncpreferences.ui:327
 #, kde-format
 msgid ""
 "Use this to specify the performance of your connection. Note that you should "
@@ -3118,39 +3159,39 @@ msgid ""
 msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Quality)
-#: vnc/vncpreferences.ui:302
+#: vnc/vncpreferences.ui:331
 #, kde-format
 msgid "High Quality (LAN, direct connection)"
 msgstr "ਉੱਚ ਕੁਆਲਟੀ (ਲਾਨ, ਸਿੱਧਾ ਕੁਨੈਕਸ਼ਨ)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Quality)
-#: vnc/vncpreferences.ui:307
+#: vnc/vncpreferences.ui:336
 #, kde-format
 msgid "Medium Quality (DSL, Cable, fast Internet)"
 msgstr "ਮੱਧਮ ਕੁਆਲਟੀ (DSL, ਕੇਬਲ, ਤੇਜ਼ ਇੰਟਰਨੈੱਟ)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Quality)
-#: vnc/vncpreferences.ui:312
+#: vnc/vncpreferences.ui:341
 #, kde-format
 msgid "Low Quality (Modem, ISDN, slow Internet)"
 msgstr "ਘੱਟ ਕੁਆਲਟੀ (ਮਾਡਮਨ, ISDN, ਹੌਲੀ ਇੰਟਰਨੈੱਟ)"
 
-#: vnc/vncview.cpp:265
+#: vnc/vncview.cpp:267
 #, kde-format
 msgid "Access to the system requires a password."
 msgstr "ਸਿਸਟਮ ਵਰਤਣ ਲਈ ਪਾਸਵਰਡ ਚਾਹੀਦਾ ਹੈ।"
 
-#: vnc/vncview.cpp:265
+#: vnc/vncview.cpp:267
 #, kde-format
 msgid "Authentication failed. Please try again."
 msgstr "ਪਰਮਾਣਕਿਤਾ ਫੇਲ੍ਹ ਹੋਈ। ਬਾਅਦ 'ਚ ਟਰਾਈ ਕਰੋ ਜੀ।"
 
-#: vnc/vncview.cpp:317
+#: vnc/vncview.cpp:319
 #, kde-format
 msgid "VNC authentication failed because of too many authentication tries."
 msgstr "VNC ਪਰਮਾਣਕਿਤਾ ਫੇਲ੍ਹ ਹੋਈ, ਕਿਉਂਕਿ ਪਰਮਾਣਕਿਤਾ ਨਾਲ ਬਹੁਤ ਵੱਧ ਵਾਰ ਕੋਸ਼ਿਸ਼ ਹੋ ਚੁੱਕੀ ਹੈ।"
 
-#: vnc/vncview.cpp:320
+#: vnc/vncview.cpp:322
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -3158,20 +3199,20 @@ msgid ""
 "failed attempts."
 msgstr ""
 
-#: vnc/vncview.cpp:321
+#: vnc/vncview.cpp:323
 #, kde-format
 msgctxt "@info"
 msgid "Then connect again and enter the password carefully."
 msgstr ""
 
-#: vnc/vncview.cpp:327
+#: vnc/vncview.cpp:329
 #, kde-format
 msgctxt "@label"
 msgid ""
 "The server requires an authentication method that KRDC does not support."
 msgstr ""
 
-#: vnc/vncview.cpp:329
+#: vnc/vncview.cpp:331
 #, kde-format
 msgctxt "@info"
 msgid ""
