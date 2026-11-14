@@ -1,6 +1,6 @@
 # Slovenian translation of krdc
 # Copyright (C) 2002, 2003, 2004, 2005, 2006, 2007 Free Software Foundation, Inc.
-# $Id: krdc.po 1753010 2026-11-13 01:48:30Z scripty $
+# $Id: krdc.po 1753103 2026-11-14 01:51:19Z scripty $
 # $Source$
 #
 # Andrej Vernekar <andrej.vernekar@moj.net>, 2002, 2007, 2008.
@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-13 00:58+0000\n"
-"PO-Revision-Date: 2026-11-10 07:23+0100\n"
+"PO-Revision-Date: 2026-11-13 10:34+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -2069,8 +2069,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, shareSmartcardLabel)
 #: rdp/rdppreferences.ui:746
-#, fuzzy, kde-format
-#| msgid "Shared smartcard:"
+#, kde-format
 msgctxt "@label:listbox"
 msgid "Shared smartcard:"
 msgstr "Skupna pametna kartica:"
@@ -2890,17 +2889,13 @@ msgid "Choose Shared Folder"
 msgstr "Izberite skupno mapo"
 
 #: rdp/smartcardreaderfield.cpp:33
-#, fuzzy, kde-format
-#| msgctxt "@item:inlistbox shared folder, %1 a stored value"
-#| msgid "%1 (not supported)"
+#, kde-format
 msgctxt "@item:inlistbox smartcard reader, %1 is its saved name"
 msgid "%1 (not detected)"
-msgstr "%1 (ni podprto)"
+msgstr "%1 (ni zaznano)"
 
 #: rdp/smartcardreaderfield.cpp:50
-#, fuzzy, kde-format
-#| msgctxt "@item:inlistbox shared folder"
-#| msgid "Not shared"
+#, kde-format
 msgctxt "@item:inlistbox smartcard reader"
 msgid "Not shared"
 msgstr "Ni deljeno"
@@ -2909,7 +2904,7 @@ msgstr "Ni deljeno"
 #, kde-format
 msgctxt "@item:inlistbox smartcard reader"
 msgid "All readers"
-msgstr ""
+msgstr "Vsi bralniki"
 
 #: remotedesktopsmodel.cpp:112
 #, kde-format
@@ -3201,7 +3196,7 @@ msgstr ""
 #: vnc/vncpreferences.ui:254
 #, kde-format
 msgid "Scroll &multiplier:"
-msgstr ""
+msgstr "Pomikanje in množitelj:"
 
 #. i18n: ectx: property (toolTip), widget (QSpinBox, kcfg_ScrollMultiplier)
 #: vnc/vncpreferences.ui:264
@@ -3209,6 +3204,8 @@ msgstr ""
 msgid ""
 "Number of scroll events sent to the remote desktop for each mouse wheel step."
 msgstr ""
+"Število dogodkov pomikanja, poslanih na oddaljeno namizje za vsak korak "
+"kolesca miške."
 
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_ScrollMultiplier)
 #: vnc/vncpreferences.ui:267
@@ -3218,6 +3215,9 @@ msgid ""
 "step. Increase this if scrolling is too slow, for example with macOS Screen "
 "Sharing."
 msgstr ""
+"Število dogodkov drsenja, poslanih oddaljenemu namizju za vsak premik "
+"kolesca miške. Povečajte to število, če je drsenje prepočasno, na primer pri "
+"skupni rabi zaslona v sistemu macOS."
 
 #. i18n: ectx: property (text), widget (QLabel, connectionLabel)
 #: vnc/vncpreferences.ui:311

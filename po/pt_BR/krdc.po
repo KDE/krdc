@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-13 00:58+0000\n"
-"PO-Revision-Date: 2026-11-11 09:37-0300\n"
+"PO-Revision-Date: 2026-11-13 05:45-0300\n"
 "Last-Translator: Marcus Gama <marcus.gama@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -28,7 +28,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 26.08.3\n"
+"X-Generator: Lokalize 26.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2075,8 +2075,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, shareSmartcardLabel)
 #: rdp/rdppreferences.ui:746
-#, fuzzy, kde-format
-#| msgid "Shared smartcard:"
+#, kde-format
 msgctxt "@label:listbox"
 msgid "Shared smartcard:"
 msgstr "Cartão inteligente compartilhado:"
@@ -2901,17 +2900,13 @@ msgid "Choose Shared Folder"
 msgstr "Escolha a pasta compartilhada"
 
 #: rdp/smartcardreaderfield.cpp:33
-#, fuzzy, kde-format
-#| msgctxt "@item:inlistbox shared folder, %1 a stored value"
-#| msgid "%1 (not supported)"
+#, kde-format
 msgctxt "@item:inlistbox smartcard reader, %1 is its saved name"
 msgid "%1 (not detected)"
-msgstr "%1 (não suportado)"
+msgstr "%1 (não detectado)"
 
 #: rdp/smartcardreaderfield.cpp:50
-#, fuzzy, kde-format
-#| msgctxt "@item:inlistbox shared folder"
-#| msgid "Not shared"
+#, kde-format
 msgctxt "@item:inlistbox smartcard reader"
 msgid "Not shared"
 msgstr "Não compartilhado"
@@ -2920,7 +2915,7 @@ msgstr "Não compartilhado"
 #, kde-format
 msgctxt "@item:inlistbox smartcard reader"
 msgid "All readers"
-msgstr ""
+msgstr "Todos os leitores"
 
 #: remotedesktopsmodel.cpp:112
 #, kde-format
@@ -3215,7 +3210,7 @@ msgstr ""
 #: vnc/vncpreferences.ui:254
 #, kde-format
 msgid "Scroll &multiplier:"
-msgstr ""
+msgstr "&Multiplicador de rolagem:"
 
 #. i18n: ectx: property (toolTip), widget (QSpinBox, kcfg_ScrollMultiplier)
 #: vnc/vncpreferences.ui:264
@@ -3223,6 +3218,8 @@ msgstr ""
 msgid ""
 "Number of scroll events sent to the remote desktop for each mouse wheel step."
 msgstr ""
+"Número de eventos de rolagem enviados à área de trabalho remota para cada "
+"passo da roda do mouse."
 
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_ScrollMultiplier)
 #: vnc/vncpreferences.ui:267
@@ -3232,6 +3229,9 @@ msgid ""
 "step. Increase this if scrolling is too slow, for example with macOS Screen "
 "Sharing."
 msgstr ""
+"Número de eventos de rolagem enviados à área de trabalho remota para cada "
+"passo da roda do mouse. Aumente esse valor se a rolagem estiver muito lenta, "
+"por exemplo, ao usar o compartilhamento de tela do macOS."
 
 #. i18n: ectx: property (text), widget (QLabel, connectionLabel)
 #: vnc/vncpreferences.ui:311
