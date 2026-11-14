@@ -14,14 +14,14 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-13 03:39+0000\n"
-"PO-Revision-Date: 2026-11-07 22:08+0200\n"
+"PO-Revision-Date: 2026-11-13 14:00+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
-"Language-Team: צוות התרגום של KDE ישראל\n"
+"Language-Team: Hebrew <kde-l10n-he@kde.org>\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 26.08.1\n"
+"X-Generator: Lokalize 26.08.3\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
 
@@ -2010,8 +2010,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, shareSmartcardLabel)
 #: rdp/rdppreferences.ui:746
-#, fuzzy, kde-format
-#| msgid "Shared smartcard:"
+#, kde-format
 msgctxt "@label:listbox"
 msgid "Shared smartcard:"
 msgstr "כרטיס חכם משותף:"
@@ -2571,7 +2570,7 @@ msgstr ""
 #, kde-format
 msgctxt "@label"
 msgid "The gateway does not allow this device to connect."
-msgstr ""
+msgstr "שער הגישה לא מרשה להתקן הזה להתחבר."
 
 #: rdp/rdpview.cpp:581
 #, kde-format
@@ -2585,7 +2584,7 @@ msgstr ""
 #, kde-format
 msgctxt "@label"
 msgid "The gateway could not reach “%1”."
-msgstr ""
+msgstr "אי אפשר לגשת לשער הגישה „%1”."
 
 #: rdp/rdpview.cpp:586
 #, kde-format
@@ -2629,25 +2628,25 @@ msgstr ""
 #, kde-format
 msgctxt "@label"
 msgid "The session was disconnected from the remote computer."
-msgstr ""
+msgstr "ההפעלה נותקה מהמחשב המרוחק."
 
 #: rdp/rdpview.cpp:611
 #, kde-format
 msgctxt "@label"
 msgid "Disconnected because someone else connected to this session."
-msgstr ""
+msgstr "נותק כיוון שמישהו או מישהי אחרים התחברו להפעלה הזאת."
 
 #: rdp/rdpview.cpp:612
 #, kde-format
 msgctxt "@info"
 msgid "Reconnect to take the session back. This disconnects the other user."
-msgstr ""
+msgstr "אפשר להתחבר מחדש כדי לחטוף את ההפעלה. הפעולה הזאת תנתק את מי שנכנס."
 
 #: rdp/rdpview.cpp:615
 #, kde-format
 msgctxt "@label"
 msgid "The session was closed after being idle for too long."
-msgstr ""
+msgstr "ההפעלה הזאת נסגרה לאחר שהייתה לא פעילה למשך זמן רב."
 
 #: rdp/rdpview.cpp:616
 #, kde-format
@@ -2741,6 +2740,8 @@ msgid ""
 "USB drives and memory cards, including ones plugged in during the session. "
 "Network shares are not included."
 msgstr ""
+"כונני USB וכרטיסי זיכרון, כולל כאלו שמחוברים במהלך ההפעלה. שיתופי רשת לא "
+"נכללים."
 
 #: rdp/sharedfolderfield.cpp:33
 #, kde-format
@@ -2779,12 +2780,10 @@ msgid "Choose Shared Folder"
 msgstr "בחירת תיקייה משותפת"
 
 #: rdp/smartcardreaderfield.cpp:33
-#, fuzzy, kde-format
-#| msgctxt "@item:inlistbox shared folder, %1 a stored value"
-#| msgid "%1 (not supported)"
+#, kde-format
 msgctxt "@item:inlistbox smartcard reader, %1 is its saved name"
 msgid "%1 (not detected)"
-msgstr "%1 (לא נתמך)"
+msgstr "%1 (לא זוהה)"
 
 #: rdp/smartcardreaderfield.cpp:50
 #, fuzzy, kde-format
@@ -2798,7 +2797,7 @@ msgstr "לא משותף"
 #, kde-format
 msgctxt "@item:inlistbox smartcard reader"
 msgid "All readers"
-msgstr ""
+msgstr "כל הקוראים"
 
 #: remotedesktopsmodel.cpp:112
 #, kde-format

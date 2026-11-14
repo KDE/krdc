@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-13 03:39+0000\n"
-"PO-Revision-Date: 2026-11-06 11:26+0100\n"
+"PO-Revision-Date: 2026-11-13 12:22+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -2063,8 +2063,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, shareSmartcardLabel)
 #: rdp/rdppreferences.ui:746
-#, fuzzy, kde-format
-#| msgid "Shared smartcard:"
+#, kde-format
 msgctxt "@label:listbox"
 msgid "Shared smartcard:"
 msgstr "Targeta intel·ligent compartida:"
@@ -2356,7 +2355,7 @@ msgstr "U2U"
 #: rdp/rdppreferences.ui:1172
 #, kde-format
 msgid "Use the default Kerberos realm for unmapped domains"
-msgstr ""
+msgstr "Usa el reialme de Kerberos predeterminat per als dominis sense mapa"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_UseDefaultKerberosRealm)
 #: rdp/rdppreferences.ui:1175
@@ -2367,6 +2366,11 @@ msgid ""
 "to that realm. Leave this unchecked if the default realm is unrelated to "
 "this connection."
 msgstr ""
+"Activeu-ho per a un sufix d'inici de sessió alternatiu que usi el reialme "
+"predeterminat a la configuració del Kerberos. Els noms d'inici de sessió de "
+"l'escriptori i de la passarel·la es poden enviar a aquest reialme. Deixeu "
+"això sense marcar si el reialme predeterminat no està relacionat amb aquesta "
+"connexió."
 
 #: rdp/rdpsession.cpp:1404
 #, kde-format
@@ -2895,17 +2899,13 @@ msgid "Choose Shared Folder"
 msgstr "Selecció de carpeta compartida"
 
 #: rdp/smartcardreaderfield.cpp:33
-#, fuzzy, kde-format
-#| msgctxt "@item:inlistbox shared folder, %1 a stored value"
-#| msgid "%1 (not supported)"
+#, kde-format
 msgctxt "@item:inlistbox smartcard reader, %1 is its saved name"
 msgid "%1 (not detected)"
-msgstr "%1 (no admès)"
+msgstr "%1 (no detectada)"
 
 #: rdp/smartcardreaderfield.cpp:50
-#, fuzzy, kde-format
-#| msgctxt "@item:inlistbox shared folder"
-#| msgid "Not shared"
+#, kde-format
 msgctxt "@item:inlistbox smartcard reader"
 msgid "Not shared"
 msgstr "No compartida"
@@ -2914,7 +2914,7 @@ msgstr "No compartida"
 #, kde-format
 msgctxt "@item:inlistbox smartcard reader"
 msgid "All readers"
-msgstr ""
+msgstr "Tots els lectors"
 
 #: remotedesktopsmodel.cpp:112
 #, kde-format
