@@ -184,7 +184,9 @@ bool RdpView::startConnection()
     connect(m_session.get(), &RdpSession::sizeChanged, this, [this]() {
         resize(sizeHint());
         qCDebug(KRDC) << "freerdp resized rdp view" << sizeHint();
-        Q_EMIT framebufferSizeChanged(width(), height());
+        if (m_hostPreferences->resolution() != RdpHostPreferences::Resolution::MatchWindow) {
+            Q_EMIT framebufferSizeChanged(width(), height());
+        }
     });
     connect(m_session.get(), &RdpSession::rectangleUpdated, this, &RdpView::onRectangleUpdated);
     connect(m_session.get(), &RdpSession::stateChanged, this, [this]() {
