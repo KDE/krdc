@@ -429,9 +429,9 @@ as Authors, publish date, the abstract, and Keywords -->
 <para
 >Quando o servidor solicitar autenticação, insira sua senha e, se solicitado, seu nome de usuário. A opção <guilabel
 >Lembrar senha</guilabel
-> permite que o &krdc; armazene as credenciais no armazenamento de credenciais do sistema, utilizando o QtKeychain. O armazenamento da senha também depende da configuração global <guilabel
+> permite que o &krdc; armazene a senha inserida — por meio do armazenamento de credenciais do sistema e utilizando o QtKeychain — após a conclusão bem-sucedida da autenticação. Essa escolha é memorizada para o host em questão. Senhas salvas anteriormente permanecem disponíveis, mesmo que essa opção esteja desmarcada. A configuração global <guilabel
 >Lembrar senhas</guilabel
->.</para>
+> controla tanto a leitura quanto o salvamento de senhas; quando ela está desativada, a janela de autenticação não oferece a opção de memorizar a senha.</para>
 
 <para>
 <screenshot>
@@ -1249,7 +1249,7 @@ as Authors, publish date, the abstract, and Keywords -->
 
 <para
 >Tradução de Marcus Gama <email
->marcus.gama@gmail.com</email
+>marcus.gama@kde.org</email
 ></para
 > &underFDL; &underGPL; </chapter>
 
