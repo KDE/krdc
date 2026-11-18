@@ -121,16 +121,6 @@
        </widget>
       </item>
       <item>
-       <widget class="QCheckBox" name="kcfg_GrabAllKeysOnFullscreen">
-        <property name="toolTip">
-         <string>Automatically grab all keys when entering fullscreen mode and release them when leaving fullscreen</string>
-        </property>
-        <property name="text">
-         <string>Grab all keys when entering fullscreen</string>
-        </property>
-       </widget>
-      </item>
-      <item>
        <layout class="QHBoxLayout" name="horizontalLayoutP">
         <item>
          <widget class="QLabel" name="defaultProtocolLabel">
@@ -147,6 +137,94 @@
          </widget>
         </item>
        </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="keyboardGroupBox">
+     <property name="title">
+      <string>Keyboard</string>
+     </property>
+     <layout class="QFormLayout" name="keyboardLayout">
+      <item row="0" column="0" colspan="2">
+       <widget class="QLabel" name="keyboardLabel">
+        <property name="text">
+         <string>While you work in a remote desktop, the shortcuts you press are sent to it instead of KRDC.</string>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="systemShortcutsLabel">
+        <property name="text">
+         <string>Send system shortcuts like Alt+Tab:</string>
+        </property>
+        <property name="buddy">
+         <cstring>kcfg_SystemShortcuts</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QComboBox" name="kcfg_SystemShortcuts">
+        <property name="toolTip">
+         <string>Whether shortcuts of this computer's desktop, such as Alt+Tab or the Meta key, are sent to the remote desktop as well. Some shortcuts may remain reserved by this computer.</string>
+        </property>
+        <item>
+         <property name="text">
+          <string>Never</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Only in full screen mode</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Always</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="hostKeyLabel">
+        <property name="text">
+         <string>Host key:</string>
+        </property>
+        <property name="buddy">
+         <cstring>kcfg_HostKey</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QComboBox" name="kcfg_HostKey">
+        <property name="toolTip">
+         <string>Press and release this key on its own to release the keyboard: the next shortcut is then handled by KRDC or this computer. Held together with other keys, it works as usual in the remote desktop.</string>
+        </property>
+        <item>
+         <property name="text">
+          <string>Right Ctrl</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Right Alt</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Right Meta</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string comment="@item:inlistbox no host key">None</string>
+         </property>
+        </item>
+       </widget>
       </item>
      </layout>
     </widget>
