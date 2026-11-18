@@ -11,6 +11,10 @@
 #include <QMouseEvent>
 #include <QTabWidget>
 
+#include <memory>
+
+class QProxyStyle;
+
 class TabbedViewWidgetModel : public QAbstractItemModel
 {
     friend class TabbedViewWidget;
@@ -40,6 +44,7 @@ class TabbedViewWidget : public QTabWidget
 public:
     explicit TabbedViewWidget(QWidget *parent = nullptr);
     ~TabbedViewWidget() override;
+    void setTabPosition(TabPosition position);
     TabbedViewWidgetModel *getModel();
     int addTab(QWidget *page, const QString &label);
     int addTab(QWidget *page, const QIcon &icon, const QString &label);
@@ -54,11 +59,14 @@ Q_SIGNALS:
     void mouseMiddleClick(int index);
 
 protected:
+    void changeEvent(QEvent *event) override;
     void mouseDoubleClickEvent(QMouseEvent *event) override;
     void mouseReleaseEvent(QMouseEvent *) override;
 
 private:
     TabbedViewWidgetModel *m_model;
+    std::unique_ptr<QProxyStyle> m_sideTabStyle;
+    void updateTabBarStyle();
     bool isEmptyTabbarSpace(const QPoint &point) const;
 };
 

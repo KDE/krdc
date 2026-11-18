@@ -55,6 +55,7 @@
 #include <QStatusBar>
 #include <QTabWidget>
 #include <QTableView>
+#include <QTextDocument>
 #include <QTimer>
 #include <QToolBar>
 #include <QVBoxLayout>
@@ -448,6 +449,7 @@ void MainWindow::openConnection(const QUrl &newUrl,
     const int insertIndex = std::exchange(m_insertTabIndex, -1);
     const int newIndex =
         insertIndex >= 0 ? m_tabWidget->insertTab(insertIndex, scrollArea, tabIcon, tabTitle) : m_tabWidget->addTab(scrollArea, tabIcon, tabTitle);
+    m_tabWidget->setTabToolTip(newIndex, Qt::convertFromPlainText(tabTitle));
     m_tabWidget->setCurrentIndex(newIndex);
     m_remoteViewMap.insert(m_tabWidget->widget(newIndex), view);
     tabChanged(newIndex); // force to update m_currentRemoteView (tabChanged is not emitted when start page has been disabled)

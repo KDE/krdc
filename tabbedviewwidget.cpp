@@ -7,8 +7,78 @@
 #include "tabbedviewwidget.h"
 #include "krdc_debug.h"
 
+#include <QProxyStyle>
 #include <QRegularExpression>
+#include <QStyleOptionTab>
 #include <QTabBar>
+
+namespace
+{
+class SideTabStyle : public QProxyStyle
+{
+public:
+    using QProxyStyle::QProxyStyle;
+
+    void drawControl(ControlElement element, const QStyleOption *option, QPainter *painter, const QWidget *widget) const override
+    {
+        const auto *tab = qstyleoption_cast<const QStyleOptionTab *>(option);
+        if (element == CE_TabBarTab && tab) {
+            // Keep the side-facing frame while drawing the icon and text horizontally.
+            QProxyStyle::drawControl(CE_TabBarTabShape, tab, painter, widget);
+            const auto label = horizontalOption(*tab);
+            QProxyStyle::drawControl(CE_TabBarTabLabel, &label, painter, widget);
+            return;
+        }
+        QProxyStyle::drawControl(element, option, painter, widget);
+    }
+
+    QRect subElementRect(SubElement element, const QStyleOption *option, const QWidget *widget) const override
+    {
+        if (element == SE_TabBarTabText || element == SE_TabBarTabLeftButton || element == SE_TabBarTabRightButton) {
+            if (const auto *tab = qstyleoption_cast<const QStyleOptionTab *>(option)) {
+                // Styles such as Breeze place horizontal tab buttons relative to the first row.
+                auto label = horizontalOption(*tab);
+                label.rect.moveTopLeft(QPoint());
+                return QProxyStyle::subElementRect(element, &label, widget).translated(tab->rect.topLeft());
+            }
+        }
+        return QProxyStyle::subElementRect(element, option, widget);
+    }
+
+    QSize sizeFromContents(ContentsType type, const QStyleOption *option, const QSize &size, const QWidget *widget) const override
+    {
+        QSize result = QProxyStyle::sizeFromContents(type, option, size, widget);
+        if (type == CT_TabBarTab && option) {
+            // Qt measures side tabs for rotated labels. Swap the dimensions and cap the sidebar width.
+            result.transpose();
+            result.setWidth(qMin(result.width(), 32 * option->fontMetrics.averageCharWidth()));
+        }
+        return result;
+    }
+
+    int styleHint(StyleHint hint, const QStyleOption *option, const QWidget *widget, QStyleHintReturn *returnData) const override
+    {
+        if (hint == SH_TabBar_ElideMode) {
+            return Qt::ElideRight;
+        }
+        if (hint == SH_TabBar_PreferNoArrows) {
+            return 0;
+        }
+        return QProxyStyle::styleHint(hint, option, widget, returnData);
+    }
+
+private:
+    static QStyleOptionTab horizontalOption(QStyleOptionTab tab)
+    {
+        if (tab.shape == QTabBar::RoundedWest || tab.shape == QTabBar::RoundedEast) {
+            tab.shape = QTabBar::RoundedNorth;
+        } else if (tab.shape == QTabBar::TriangularWest || tab.shape == QTabBar::TriangularEast) {
+            tab.shape = QTabBar::TriangularNorth;
+        }
+        return tab;
+    }
+};
+}
 
 TabbedViewWidgetModel::TabbedViewWidgetModel(QTabWidget *modelTarget)
     : QAbstractItemModel(modelTarget)
@@ -98,10 +168,38 @@ TabbedViewWidget::TabbedViewWidget(QWidget *parent)
     : QTabWidget(parent)
     , m_model(new TabbedViewWidgetModel(this))
 {
+    updateTabBarStyle();
 }
 
 TabbedViewWidget::~TabbedViewWidget()
 {
+}
+
+void TabbedViewWidget::setTabPosition(TabPosition position)
+{
+    QTabWidget::setTabPosition(position);
+    const bool sideTabs = position == West || position == East;
+    if (sideTabs != bool(m_sideTabStyle)) {
+        updateTabBarStyle();
+    }
+}
+
+void TabbedViewWidget::changeEvent(QEvent *event)
+{
+    QTabWidget::changeEvent(event);
+    if (event->type() == QEvent::StyleChange) {
+        updateTabBarStyle();
+    }
+}
+
+void TabbedViewWidget::updateTabBarStyle()
+{
+    std::unique_ptr<QProxyStyle> sideTabStyle;
+    if (tabPosition() == West || tabPosition() == East) {
+        sideTabStyle = std::make_unique<SideTabStyle>(style()->name());
+    }
+    tabBar()->setStyle(sideTabStyle.get());
+    m_sideTabStyle = std::move(sideTabStyle);
 }
 
 TabbedViewWidgetModel *TabbedViewWidget::getModel()
@@ -233,10 +331,12 @@ void TabbedViewWidget::mouseReleaseEvent(QMouseEvent *event)
             Q_EMIT mouseMiddleClick(-1);
             return;
         }
-        int pos = tabBar()->tabAt(event->pos());
-        if (pos != -1) {
-            Q_EMIT mouseMiddleClick(pos);
-            return;
+        if (!tabBar()->isHidden() && tabBar()->geometry().contains(event->pos())) {
+            const int index = tabBar()->tabAt(tabBar()->mapFromParent(event->pos()));
+            if (index != -1) {
+                Q_EMIT mouseMiddleClick(index);
+                return;
+            }
         }
     }
 
