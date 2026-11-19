@@ -164,6 +164,15 @@ void MainWindow::setupActions()
     actionCollection()->setDefaultShortcuts(fullscreenAction, KStandardShortcut::fullScreen());
     connect(fullscreenAction, &QAction::triggered, this, &MainWindow::switchFullscreen);
 
+    // Only enabled while the full screen toolbar exists. Not plugged into a
+    // menu, so add it to the window directly for its shortcut to work.
+    QAction *minimizeFullScreenAction = actionCollection()->addAction(QStringLiteral("minimize_fullscreen"));
+    minimizeFullScreenAction->setIcon(QIcon::fromTheme(QStringLiteral("go-down")));
+    minimizeFullScreenAction->setText(i18n("Minimize Full Screen Window"));
+    minimizeFullScreenAction->setEnabled(false);
+    connect(minimizeFullScreenAction, &QAction::triggered, this, &MainWindow::minimizeFullScreen);
+    addAction(minimizeFullScreenAction);
+
     QAction *viewOnlyAction = actionCollection()->addAction(QStringLiteral("view_only"));
     viewOnlyAction->setCheckable(true);
     viewOnlyAction->setText(i18n("View Only"));
@@ -680,6 +689,7 @@ void MainWindow::applyFullscreenState(bool fullscreen)
             m_toolBar->deleteLater();
             m_toolBar = nullptr;
         }
+        actionCollection()->action(QStringLiteral("minimize_fullscreen"))->setEnabled(false);
 
         actionCollection()->action(QStringLiteral("switch_fullscreen"))->setIcon(QIcon::fromTheme(QStringLiteral("view-fullscreen")));
         actionCollection()->action(QStringLiteral("switch_fullscreen"))->setText(i18n("Switch to Full Screen Mode"));
@@ -1150,10 +1160,8 @@ void MainWindow::showRemoteViewToolbar()
         m_toolBar->addAction(actionCollection()->action(QStringLiteral("new_connection")));
         m_toolBar->addAction(actionCollection()->action(QStringLiteral("switch_fullscreen")));
 
-        QAction *minimizeAction = new QAction(m_toolBar);
-        minimizeAction->setIcon(QIcon::fromTheme(QStringLiteral("go-down")));
-        minimizeAction->setText(i18n("Minimize Full Screen Window"));
-        connect(minimizeAction, &QAction::triggered, this, &MainWindow::minimizeFullScreen);
+        QAction *minimizeAction = actionCollection()->action(QStringLiteral("minimize_fullscreen"));
+        minimizeAction->setEnabled(true);
         m_toolBar->addAction(minimizeAction);
 
         m_toolBar->addAction(actionCollection()->action(QStringLiteral("take_screenshot")));
