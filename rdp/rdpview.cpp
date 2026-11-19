@@ -18,7 +18,6 @@
 #include <KShell>
 #include <KWindowSystem>
 
-#include <QApplication>
 #include <QChar>
 #include <QDir>
 #include <QEvent>
@@ -920,29 +919,15 @@ bool RdpView::eventFilter(QObject *watched, QEvent *event)
         QTimer::singleShot(0, this, &RdpView::restoreMonitorWindowsIfNeeded);
     }
 
-    if (isMonitorWindow && (event->type() == QEvent::WindowActivate || event->type() == QEvent::WindowDeactivate)) {
-        // RemoteView only follows the focus of its embedded widget. Our
-        // monitor windows show the same session, so capture the keyboard
-        // while one of them is active too. The active window is settled
-        // once the event has been delivered.
-        const bool activated = event->type() == QEvent::WindowActivate;
-        QTimer::singleShot(0, this, [this, activated]() {
-            if (activated) {
-                setKeyboardReleased(false);
-            }
-            updateKeyboardGrab();
-        });
+    if (event->type() == QEvent::WindowActivate) {
+        if (isMonitorWindow && grabAllKeys()) {
+            // RemoteView releases the grab when its embedded widget loses
+            // focus. Reapply it when one of our external monitor windows
+            // becomes active.
+            setGrabAllKeys(true);
+        }
     }
     return RemoteView::eventFilter(watched, event);
-}
-
-bool RdpView::hasInputFocus() const
-{
-    if (RemoteView::hasInputFocus()) {
-        return true;
-    }
-    QWidget *activeWindow = QApplication::activeWindow();
-    return activeWindow && m_monitorWindows.contains(activeWindow);
 }
 
 void RdpView::restoreMonitorWindowsIfNeeded()

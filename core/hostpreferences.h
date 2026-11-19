@@ -48,6 +48,9 @@ public:
     int scaleFactor();
     void setScaleFactor(int factor);
 
+    bool grabAllKeys();
+    void setGrabAllKeys(bool grab);
+
     bool showLocalCursor();
     void setShowLocalCursor(bool show);
 

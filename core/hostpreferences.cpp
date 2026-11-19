@@ -232,6 +232,16 @@ void HostPreferences::setScaleFactor(int factor)
     m_configGroup.writeEntry("scaleFactor", factor);
 }
 
+bool HostPreferences::grabAllKeys()
+{
+    return m_configGroup.readEntry("grabAllKeys", false);
+}
+
+void HostPreferences::setGrabAllKeys(bool grab)
+{
+    m_configGroup.writeEntry("grabAllKeys", grab);
+}
+
 bool HostPreferences::showLocalCursor()
 {
     return m_configGroup.readEntry("showLocalCursor", false);

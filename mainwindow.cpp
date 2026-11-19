@@ -15,7 +15,6 @@
 #include "floatingtoolbar.h"
 #include "hostpreferences.h"
 #include "krdc_debug.h"
-#include "overlaymessage.h"
 #include "remotedesktopsmodel.h"
 #include "settings.h"
 #include "systemtrayicon.h"
@@ -78,16 +77,6 @@ MainWindow::MainWindow(QWidget *parent)
 {
     loadAllPlugins();
 
-    // The setting that grabbed all keys in full screen mode became SystemShortcuts
-    KConfigGroup generalGroup = Settings::self()->config()->group(QStringLiteral("General"));
-    if (generalGroup.hasKey("GrabAllKeysOnFullscreen")) {
-        if (!generalGroup.readEntry("GrabAllKeysOnFullscreen", true) && !generalGroup.hasKey("SystemShortcuts")) {
-            Settings::setSystemShortcuts(Settings::EnumSystemShortcuts::Local);
-        }
-        generalGroup.deleteEntry("GrabAllKeysOnFullscreen");
-        Settings::self()->save();
-    }
-
     setupActions();
 
     setStandardToolBarMenuEnabled(true);
@@ -111,8 +100,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     m_tabWidget->setMinimumSize(600, 400);
     setCentralWidget(m_tabWidget);
-
-    m_keyboardHint = new OverlayMessage(m_tabWidget);
 
     createDockWidget();
 
@@ -189,6 +176,13 @@ void MainWindow::setupActions()
     showLocalCursorAction->setIconText(i18n("Local Cursor"));
     connect(showLocalCursorAction, &QAction::triggered, this, &MainWindow::showLocalCursor);
 
+    QAction *grabAllKeysAction = actionCollection()->addAction(QStringLiteral("grab_all_keys"));
+    grabAllKeysAction->setCheckable(true);
+    grabAllKeysAction->setIcon(QIcon::fromTheme(QStringLiteral("configure-shortcuts")));
+    grabAllKeysAction->setText(i18n("Grab All Possible Keys"));
+    grabAllKeysAction->setIconText(i18n("Grab Keys"));
+    connect(grabAllKeysAction, &QAction::triggered, this, &MainWindow::grabAllKeys);
+
     QAction *scaleAction = actionCollection()->addAction(QStringLiteral("scale"));
     scaleAction->setCheckable(true);
     scaleAction->setIcon(QIcon::fromTheme(QStringLiteral("zoom-fit-best")));
@@ -213,14 +207,6 @@ void MainWindow::setupActions()
     connect(m_bookmarkManager, &BookmarkManager::openUrl, this, &MainWindow::newConnection);
     connect(m_bookmarkManager, &BookmarkManager::editBookmark, this, [this](const QString &address, const QString &name, const QUrl &url) {
         showSettingsDialog(url.toString(), address, name);
-    });
-
-    // The keyboard is released to use one of our actions. Capture it again
-    // afterwards, so that the following shortcuts go to the remote desktop.
-    connect(actionCollection(), &KActionCollection::actionTriggered, this, [this]() {
-        if (RemoteView *view = currentRemoteView()) {
-            view->setKeyboardReleased(false);
-        }
     });
 }
 
@@ -382,7 +368,6 @@ void MainWindow::openConnection(const QUrl &newUrl,
 
     connect(view, &RemoteView::framebufferSizeChanged, this, &MainWindow::resizeTabWidget);
     connect(view, &RemoteView::statusChanged, this, &MainWindow::statusChanged);
-    connect(view, &RemoteView::keyboardReleasedChanged, this, &MainWindow::updateKeyboardHint);
     connect(view, &RemoteView::disconnected, this, &MainWindow::disconnectHost);
     connect(view, &RemoteView::connectionError, this, [this, view](const ConnectionError &error) {
         handleConnectionError(view, error);
@@ -588,13 +573,16 @@ void MainWindow::statusChanged(RemoteView::RemoteStatus status)
         iconName = QStringLiteral("krdc");
         message = i18n("Connected to %1", host);
 
-        // Shortcuts go to the remote desktop from now on. Tell once how to get them back.
-        if (!m_keyboardHintShown && view == currentRemoteView() && view->keyboardCaptured() && !RemoteView::hostKeyName().isEmpty()) {
-            m_keyboardHintShown = true;
-            m_keyboardHint->showMessage(i18nc("@info %1 is the name of a key, such as Right Ctrl",
-                                              "Keyboard shortcuts go to the remote desktop. Press %1 first to use one on this computer instead.",
-                                              RemoteView::hostKeyName()),
-                                        8000);
+        if (view->grabAllKeys() != view->hostPreferences()->grabAllKeys()) {
+            view->setGrabAllKeys(view->hostPreferences()->grabAllKeys());
+            updateActionStatus();
+        }
+
+        // If already in fullscreen (e.g. fullscreenOnConnect), apply auto-grab
+        if (isFullScreen() && Settings::grabAllKeysOnFullscreen() && !view->grabAllKeys()) {
+            m_savedGrabStatesBeforeFullscreen.insert(view, view->grabAllKeys());
+            view->setGrabAllKeys(true);
+            updateActionStatus();
         }
 
         // when started with command line fullscreen argument
@@ -660,6 +648,12 @@ void MainWindow::applyFullscreenState(bool fullscreen)
             m_windowedAutoSaveGroup = KConfigGroup();
         }
 
+        // Restore grab states that were saved when entering fullscreen
+        for (auto it = m_savedGrabStatesBeforeFullscreen.constBegin(); it != m_savedGrabStatesBeforeFullscreen.constEnd(); ++it) {
+            it.key()->setGrabAllKeys(it.value());
+        }
+        m_savedGrabStatesBeforeFullscreen.clear();
+
         m_remoteDesktopsDockWidget->setVisible(m_guiItemsState.dockWidget);
         menuBar()->setVisible(m_guiItemsState.menuBar);
         statusBar()->setVisible(m_guiItemsState.statusBar);
@@ -717,6 +711,16 @@ void MainWindow::applyFullscreenState(bool fullscreen)
         for (RemoteView *currentView : std::as_const(m_remoteViewMap)) {
             currentView->enableScaling(currentView->hostPreferences()->fullscreenScale());
             currentView->switchFullscreen(true);
+        }
+
+        // Auto-grab keys for views when the global setting is enabled
+        if (Settings::grabAllKeysOnFullscreen()) {
+            for (RemoteView *currentView : std::as_const(m_remoteViewMap)) {
+                if (!currentView->grabAllKeys()) {
+                    m_savedGrabStatesBeforeFullscreen.insert(currentView, false);
+                    currentView->setGrabAllKeys(true);
+                }
+            }
         }
 
         actionCollection()->action(QStringLiteral("switch_fullscreen"))->setIcon(QIcon::fromTheme(QStringLiteral("view-restore")));
@@ -816,6 +820,7 @@ void MainWindow::detachRemoteView(RemoteView *view)
     }
 
     m_remoteViewMap.remove(tab);
+    m_savedGrabStatesBeforeFullscreen.remove(view);
     saveHostPrefs();
     if (!view->isQuitting()) {
         view->startQuitting();
@@ -853,6 +858,7 @@ void MainWindow::closeTab(int index)
     if (!isNewConnectionPage) {
         RemoteView *view = m_remoteViewMap.take(widget);
         if (view) {
+            m_savedGrabStatesBeforeFullscreen.remove(view);
             view->startQuitting();
         } else if (!qobject_cast<RemoteViewScrollArea *>(widget)) {
             return;
@@ -1078,19 +1084,20 @@ void MainWindow::clipboardSharing(bool clipboardSharing)
     saveHostPrefs();
 }
 
-void MainWindow::updateKeyboardHint()
+void MainWindow::grabAllKeys(bool grabAllKeys)
 {
-    const RemoteView *view = currentRemoteView();
-    if (view && view->keyboardReleased()) {
-        const QString hostKey = RemoteView::hostKeyName();
-        m_keyboardHint->showMessage(
-            hostKey.isEmpty() ? i18nc("@info", "Keyboard released: the next shortcut stays on this computer. Click the remote desktop to cancel.")
-                              : i18nc("@info %1 is the name of a key, such as Right Ctrl",
-                                      "Keyboard released: the next shortcut stays on this computer. Press %1 or click the remote desktop to cancel.",
-                                      hostKey));
-    } else {
-        m_keyboardHint->hide();
-    }
+    qCDebug(KRDC);
+
+    RemoteView *view = currentRemoteView();
+    view->setGrabAllKeys(grabAllKeys);
+
+    // If the user manually changes grab state while auto-grab is active,
+    // remove the view from saved states so we don't override the user's choice
+    // when leaving fullscreen.
+    m_savedGrabStatesBeforeFullscreen.remove(view);
+
+    view->hostPreferences()->setGrabAllKeys(grabAllKeys);
+    saveHostPrefs();
 }
 
 void setActionStatus(QAction *action, bool enabled, bool visible, bool checked)
@@ -1161,6 +1168,7 @@ void MainWindow::showRemoteViewToolbar()
         m_toolBar->addAction(actionCollection()->action(QStringLiteral("view_only")));
         m_toolBar->addAction(actionCollection()->action(QStringLiteral("clipboard_sharing")));
         m_toolBar->addAction(actionCollection()->action(QStringLiteral("show_local_cursor")));
+        m_toolBar->addAction(actionCollection()->action(QStringLiteral("grab_all_keys")));
         m_toolBar->addAction(actionCollection()->action(QStringLiteral("scale")));
         m_toolBar->addAction(actionCollection()->action(QStringLiteral("scale_factor")));
         m_toolBar->addAction(actionCollection()->action(QStringLiteral("disconnect")));
@@ -1222,6 +1230,8 @@ void MainWindow::updateActionStatus()
     setFactor(view ? view->hostPreferences()->scaleFactor() : 0);
     Q_EMIT factorUpdated(view ? view->hostPreferences()->scaleFactor() : 0);
     Q_EMIT scaleUpdated(view ? view->scaling() : false);
+
+    setActionStatus(actionCollection()->action(QStringLiteral("grab_all_keys")), enabled, enabled, view ? view->grabAllKeys() : false);
 }
 
 void MainWindow::preferences()
@@ -1280,7 +1290,6 @@ void MainWindow::updateConfiguration()
     for (RemoteView *view : std::as_const(m_remoteViewMap)) {
         view->updateConfiguration();
     }
-    updateKeyboardHint();
 }
 
 void MainWindow::quit(bool systemEvent)
@@ -1423,7 +1432,6 @@ void MainWindow::tabChanged(int index)
     setCaption(tabTitle == i18n("New Connection") ? QString() : tabTitle);
 
     updateActionStatus();
-    updateKeyboardHint();
 }
 
 QWidget *MainWindow::newConnectionWidget()
@@ -1654,6 +1662,7 @@ void MainWindow::reconnectInTab(QWidget *tab, const QUrl &url, const RemoteViewF
     const QString tabName = connectionName(tab, url);
 
     if (RemoteView *view = m_remoteViewMap.take(tab)) {
+        m_savedGrabStatesBeforeFullscreen.remove(view);
         view->startQuitting();
     }
 

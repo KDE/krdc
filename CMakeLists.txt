@@ -197,7 +197,6 @@ target_sources(krdc PRIVATE
     systemtrayicon.cpp
     tabbedviewwidget.cpp
     factorwidget.cpp
-    overlaymessage.cpp
     mainwindow.cpp
     main.cpp
 
