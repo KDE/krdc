@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdenetwork-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-19 01:07+0000\n"
-"PO-Revision-Date: 2026-11-13 19:11+0300\n"
+"POT-Creation-Date: 2026-11-20 01:10+0000\n"
+"PO-Revision-Date: 2026-11-19 18:32+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -143,22 +143,21 @@ msgstr "vnc"
 
 #. i18n: ectx: property (title), widget (QGroupBox, keyboardGroupBox)
 #: config/general.ui:147
-#, fuzzy, kde-format
-#| msgid "&Keyboard layout:"
+#, kde-format
 msgid "Keyboard"
-msgstr "&Klavye yerleşimi:"
+msgstr "Klavye"
 
 #. i18n: ectx: property (text), widget (QLabel, keyboardLabel)
 #: config/general.ui:153
 #, kde-format
 msgid "Shortcuts are sent to the remote desktop while it has focus."
-msgstr ""
+msgstr "Kısayollar, odağa sahipken uzak masaüstüne gönderilirler."
 
 #. i18n: ectx: property (text), widget (QLabel, systemShortcutsLabel)
 #: config/general.ui:163
 #, kde-format
 msgid "Send system shortcuts like Alt+Tab:"
-msgstr ""
+msgstr "Seçenek+Sekme gibi sistem kısayollarını gönder:"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, kcfg_SystemShortcuts)
 #: config/general.ui:173
@@ -167,31 +166,32 @@ msgid ""
 "Also send desktop shortcuts such as Alt+Tab or Meta. Your system may still "
 "keep some for itself."
 msgstr ""
+"Seçenek+Sekme veya Meta gibi masaüstü kısayollarını gönderin. Sisteminiz "
+"bazılarını yine de kendisi için tutabilir."
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_SystemShortcuts)
 #: config/general.ui:177
 #, kde-format
 msgid "Never"
-msgstr ""
+msgstr "Asla"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_SystemShortcuts)
 #: config/general.ui:182
-#, fuzzy, kde-format
-#| msgid "Switch to Full Screen Mode"
+#, kde-format
 msgid "Only in full screen mode"
-msgstr "Tam Ekran Kipine Geç"
+msgstr "Yalnızca tam ekran kipindeyken"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_SystemShortcuts)
 #: config/general.ui:187
 #, kde-format
 msgid "Always"
-msgstr ""
+msgstr "Her zaman"
 
 #. i18n: ectx: property (text), widget (QLabel, hostKeyLabel)
 #: config/general.ui:195
 #, kde-format
 msgid "Host key:"
-msgstr ""
+msgstr "Makine anahtarı:"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, kcfg_HostKey)
 #: config/general.ui:205
@@ -200,35 +200,33 @@ msgid ""
 "Press this key to use the next shortcut on this computer. Combined with "
 "other keys it works as normal."
 msgstr ""
+"Bu bilgisayarda bir sonraki kısayolu kullanmak için bu düğmeye basın. Diğer "
+"düğmelerle birlikte kullanıldığında olağan bir biçimde çalışır."
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_HostKey)
 #: config/general.ui:209 core/remoteview.cpp:53
-#, fuzzy, kde-format
-#| msgid "Right"
+#, kde-format
 msgid "Right Ctrl"
-msgstr "Sağ"
+msgstr "Sağ Kontrol"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_HostKey)
 #: config/general.ui:214 core/remoteview.cpp:54
-#, fuzzy, kde-format
-#| msgid "Right"
+#, kde-format
 msgid "Right Alt"
-msgstr "Sağ"
+msgstr "Sağ Seçenek"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_HostKey)
 #: config/general.ui:219 core/remoteview.cpp:55
-#, fuzzy, kde-format
-#| msgid "Right"
+#, kde-format
 msgid "Right Meta"
-msgstr "Sağ"
+msgstr "Sağ Meta"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_HostKey)
 #: config/general.ui:224
-#, fuzzy, kde-format
-#| msgid "None"
+#, kde-format
 msgctxt "@item:inlistbox no host key"
 msgid "None"
-msgstr "Hiçbiri"
+msgstr "Yok"
 
 #. i18n: ectx: property (title), widget (QGroupBox, tabGroupBox)
 #: config/general.ui:235
@@ -294,13 +292,13 @@ msgstr "Yapılandır…"
 msgid "Remove"
 msgstr "Kaldır"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:351 mainwindow.cpp:954
-#: mainwindow.cpp:970
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:360 mainwindow.cpp:964
+#: mainwindow.cpp:980
 #, kde-format
 msgid "Unusable URL"
 msgstr "Kullanılamaz URL"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:970
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:980
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr "Seçilen makine kullanılmaz."
@@ -1054,12 +1052,14 @@ msgstr "Oturumlar"
 #, kde-format
 msgid "When desktop shortcuts such as Alt+Tab are sent to the remote desktop."
 msgstr ""
+"Seçenek+Sekme gibi masaüstü kısayollarının uzak masaüstüne gönderildiği "
+"zamanları belirtir."
 
 #. i18n: ectx: label, entry (HostKey), group (General)
 #: core/krdc.kcfg:40
 #, kde-format
 msgid "Key that releases the keyboard from the remote desktop."
-msgstr ""
+msgstr "Klavyeyi uzak masaüstünden serbest bırakan düğme"
 
 #: core/remoteview.cpp:851
 #, kde-format
@@ -1335,8 +1335,8 @@ msgstr "Açılıştan sonra bağlanılacak URL’ler"
 msgid "KDE Remote Desktop Client started"
 msgstr "KDE Uzak Masaüstü İstemcisi başlatıldı"
 
-#: mainwindow.cpp:129 mainwindow.cpp:146 mainwindow.cpp:1422
-#: mainwindow.cpp:1520
+#: mainwindow.cpp:129 mainwindow.cpp:146 mainwindow.cpp:1430
+#: mainwindow.cpp:1528
 #, kde-format
 msgid "New Connection"
 msgstr "Yeni Bağlantı"
@@ -1351,62 +1351,67 @@ msgstr "Ekran Görüntüsünü Panoya Kopyala"
 msgid "Screenshot"
 msgstr "Ekran Görüntüsü"
 
-#: mainwindow.cpp:161 mainwindow.cpp:685
+#: mainwindow.cpp:161 mainwindow.cpp:695
 #, kde-format
 msgid "Switch to Full Screen Mode"
 msgstr "Tam Ekran Kipine Geç"
 
-#: mainwindow.cpp:162 mainwindow.cpp:686
+#: mainwindow.cpp:162 mainwindow.cpp:696
 #, kde-format
 msgid "Full Screen"
 msgstr "Tam Ekran"
 
-#: mainwindow.cpp:169
+#: mainwindow.cpp:171
+#, kde-format
+msgid "Minimize Full Screen Window"
+msgstr "Tam Ekran Pencereyi Küçült"
+
+#: mainwindow.cpp:178
 #, kde-format
 msgid "View Only"
 msgstr "Yalnızca Görüntüle"
 
-#: mainwindow.cpp:175
+#: mainwindow.cpp:184
 #, kde-format
 msgid "Clipboard Sharing"
 msgstr "Pano Paylaşımı"
 
-#: mainwindow.cpp:180
+#: mainwindow.cpp:189
 #, kde-format
 msgid "Disconnect"
 msgstr "Bağlantıyı Kes"
 
-#: mainwindow.cpp:188
+#: mainwindow.cpp:197
 #, kde-format
 msgid "Show Local Cursor"
 msgstr "Yerel Fare İmlecini Göster"
 
-#: mainwindow.cpp:189
+#: mainwindow.cpp:198
 #, kde-format
 msgid "Local Cursor"
 msgstr "Yerel Fare İmleci"
 
-#: mainwindow.cpp:195
+#: mainwindow.cpp:204
 #, kde-format
 msgid "Scale Remote Screen to Fit Window Size"
 msgstr "Uzak Ekranı Pencere Boyutuna Uydur"
 
-#: mainwindow.cpp:196
+#: mainwindow.cpp:205
 #, kde-format
 msgid "Scale"
 msgstr "Ölçeklendir"
 
-#: mainwindow.cpp:199
+#: mainwindow.cpp:208
 #, kde-format
 msgid "Scaling Factor"
 msgstr "Ölçeklendirme Faktörü"
 
-#: mainwindow.cpp:210
+#: mainwindow.cpp:219
 #, kde-format
 msgid "Bookmarks"
 msgstr "Yer İmleri"
 
-#: mainwindow.cpp:310
+#: mainwindow.cpp:319
 #, kde-format
 msgid ""
 "Unable to load connection data from “%1”.\n"
@@ -1415,12 +1420,12 @@ msgstr ""
 "“%1” konumundan bağlantı verisi yüklenemedi.\n"
 "Dosya hasarlı veya KRDC’nin anlamadığı bir biçimde olabilir."
 
-#: mainwindow.cpp:311
+#: mainwindow.cpp:320
 #, kde-format
 msgid "Load failed"
 msgstr "Yükleme Başarısız"
 
-#: mainwindow.cpp:318
+#: mainwindow.cpp:327
 #, kde-format
 msgid ""
 "“%1” is not a valid address.\n"
@@ -1432,12 +1437,12 @@ msgstr ""
 "[kullanıcı-adı]makine[:kapı] biçimini kullanın; örneğin, "
 "kullanıcı@192.168.1.19:5000."
 
-#: mainwindow.cpp:320
+#: mainwindow.cpp:329
 #, kde-format
 msgid "Malformed URL"
 msgstr "Hatalı Oluşturulmuş URL"
 
-#: mainwindow.cpp:350
+#: mainwindow.cpp:359
 #, kde-format
 msgid ""
 "No installed plugin can handle the “%1” protocol.\n"
@@ -1446,159 +1451,156 @@ msgstr ""
 "Kurulu eklentilerden hiçbiri “%1” protokolünü işleyemiyor.\n"
 "Desteklenen protokoller: %2"
 
-#: mainwindow.cpp:576
+#: mainwindow.cpp:585
 #, kde-format
 msgid "Connecting to %1"
 msgstr "%1 konumuna bağlanılıyor…"
 
-#: mainwindow.cpp:580
+#: mainwindow.cpp:589
 #, kde-format
 msgid "Authenticating at %1"
 msgstr "%1 konumunda kimlik doğrulaması yapılıyor…"
 
-#: mainwindow.cpp:584
+#: mainwindow.cpp:593
 #, kde-format
 msgid "Preparing connection to %1"
 msgstr "%1 konumuna bağlanılmaya çalışılıyor…"
 
-#: mainwindow.cpp:588
+#: mainwindow.cpp:597
 #, kde-format
 msgid "Connected to %1"
 msgstr "%1 konumuna bağlanıldı."
 
-#: mainwindow.cpp:594
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "Check that remote desktop sharing is enabled on the remote computer."
+#: mainwindow.cpp:603
+#, kde-format
 msgctxt "@info %1 is the name of a key, such as Right Ctrl"
 msgid ""
 "Shortcuts go to the remote desktop. Press %1 to use one on this computer."
 msgstr ""
-"Uzak bilgisayarda, uzak masaüstü paylaşımının etkinleştirilmiş olduğundan "
-"emin olun."
+"Kısayollar uzak masaüstüne gider. Bu bilgisayarda bir tane kullanmak için %1 "
+"düğmesine basın."
 
-#: mainwindow.cpp:722
+#: mainwindow.cpp:732
 #, kde-format
 msgid "Switch to Window Mode"
 msgstr "Pencere Kipine Geç"
 
-#: mainwindow.cpp:723
+#: mainwindow.cpp:733
 #, kde-format
 msgid "Window Mode"
 msgstr "Pencere Kipi"
 
-#: mainwindow.cpp:954
+#: mainwindow.cpp:964
 #, kde-format
 msgid "The entered address cannot be handled by this connection type."
 msgstr "Girilen adres, bu bağlantı türü tarafından işlenemiyor."
 
-#: mainwindow.cpp:989
+#: mainwindow.cpp:999
 #, kde-format
 msgid "Connect"
 msgstr "Bağlan"
 
-#: mainwindow.cpp:990
+#: mainwindow.cpp:1000
 #, kde-format
 msgid "Rename"
 msgstr "Yeniden Adlandır"
 
-#: mainwindow.cpp:991
+#: mainwindow.cpp:1001
 #, kde-format
 msgid "Settings"
 msgstr "Ayarlar"
 
-#: mainwindow.cpp:992
+#: mainwindow.cpp:1002
 #, kde-format
 msgid "Delete"
 msgstr "Sil"
 
-#: mainwindow.cpp:995 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:1005 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "Yer İmleri"
 
-#: mainwindow.cpp:995 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:1005 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "Geçmiş"
 
-#: mainwindow.cpp:1007
+#: mainwindow.cpp:1017
 #, kde-format
 msgid "Rename %1"
 msgstr "%1 Ögesini Yeniden Adlandır"
 
-#: mainwindow.cpp:1007
+#: mainwindow.cpp:1017
 #, kde-format
 msgid "Rename %1 to"
 msgstr "%1 Ögesini Şöyle Yeniden Adlandır"
 
-#: mainwindow.cpp:1014
+#: mainwindow.cpp:1024
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "%1 ögesini silmek istediğinizden emin misiniz?"
 
-#: mainwindow.cpp:1014
+#: mainwindow.cpp:1024
 #, kde-format
 msgid "Delete %1"
 msgstr "%1 Ögesini Sil"
 
-#: mainwindow.cpp:1038
+#: mainwindow.cpp:1048
 #, kde-format
 msgid "Add Bookmark"
 msgstr "Yer İmi Koy"
 
-#: mainwindow.cpp:1039
+#: mainwindow.cpp:1049
 #, kde-format
 msgid "Close Tab"
 msgstr "Sekmeyi Kapat"
 
-#: mainwindow.cpp:1086
+#: mainwindow.cpp:1096
 #, kde-format
 msgctxt "@info"
 msgid "Keyboard released for one shortcut. Click the remote desktop to cancel."
 msgstr ""
+"Klavye bir kısayol için serbest bırakıldı. İptal etmek için uzak masaüstüne "
+"tıklayın."
 
-#: mainwindow.cpp:1088
+#: mainwindow.cpp:1098
 #, kde-format
 msgctxt "@info %1 is the name of a key, such as Right Ctrl"
 msgid ""
 "Keyboard released for one shortcut. Press %1 or click the remote desktop to "
 "cancel."
 msgstr ""
+"Klavye bir kısayol için serbest bırakıldı. İptal etmek için %1 düğmesine "
+"basın veya uzak masaüstüne tıklayın."
 
-#: mainwindow.cpp:1155
-#, kde-format
-msgid "Minimize Full Screen Window"
-msgstr "Tam Ekran Pencereyi Küçült"
-
-#: mainwindow.cpp:1171
+#: mainwindow.cpp:1179
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "Araç Çubuğuna Yapış"
 
-#: mainwindow.cpp:1290
+#: mainwindow.cpp:1298
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr "KDE Uzak Masaüstü İstemcisininden çıkmak istediğinizden emin misiniz?"
 
-#: mainwindow.cpp:1291
+#: mainwindow.cpp:1299
 #, kde-format
 msgid "Confirm Quit"
 msgstr "Çıkışı Onayla"
 
-#: mainwindow.cpp:1446
+#: mainwindow.cpp:1454
 #, kde-format
 msgid "Connect to:"
 msgstr "Şuna bağlan:"
 
-#: mainwindow.cpp:1450
+#: mainwindow.cpp:1458
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr "Bağlanmak ve listeyi filtrelemek için buraya bir adres yazın."
 
-#: mainwindow.cpp:1461
+#: mainwindow.cpp:1469
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
@@ -1607,28 +1609,28 @@ msgstr ""
 "Buraya bir IP veya DNS Adı girin. Bağlantı yöntenmlerinin listesini almak "
 "için satırı temizleyin."
 
-#: mainwindow.cpp:1464
+#: mainwindow.cpp:1472
 #, kde-format
 msgid "Goto Address"
 msgstr "Adrese Git"
 
-#: mainwindow.cpp:1556
+#: mainwindow.cpp:1564
 #, kde-format
 msgid "Remote Desktops"
 msgstr "Uzak Masaüstleri"
 
-#: mainwindow.cpp:1585
+#: mainwindow.cpp:1593
 #, kde-format
 msgid "Filter"
 msgstr "Süz"
 
-#: mainwindow.cpp:1638
+#: mainwindow.cpp:1646
 #, kde-format
 msgctxt "@label"
 msgid "The remote computer may have shut down or restarted."
 msgstr "Uzak bilgisayar kapatılmış veya yeniden başlatılmış olabilir."
 
-#: mainwindow.cpp:1642
+#: mainwindow.cpp:1650
 #, kde-format
 msgctxt "@title connection error"
 msgid "Closed before the session started"

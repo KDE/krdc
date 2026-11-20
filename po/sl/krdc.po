@@ -1,6 +1,6 @@
 # Slovenian translation of krdc
 # Copyright (C) 2002, 2003, 2004, 2005, 2006, 2007 Free Software Foundation, Inc.
-# $Id: krdc.po 1753610 2026-11-19 01:53:04Z scripty $
+# $Id: krdc.po 1753717 2026-11-20 01:59:03Z scripty $
 # $Source$
 #
 # Andrej Vernekar <andrej.vernekar@moj.net>, 2002, 2007, 2008.
@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-19 01:07+0000\n"
+"POT-Creation-Date: 2026-11-20 01:10+0000\n"
 "PO-Revision-Date: 2026-11-13 10:34+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -292,13 +292,13 @@ msgstr "Konfiguriraj…"
 msgid "Remove"
 msgstr "Odstrani"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:351 mainwindow.cpp:954
-#: mainwindow.cpp:970
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:360 mainwindow.cpp:964
+#: mainwindow.cpp:980
 #, kde-format
 msgid "Unusable URL"
 msgstr "Neuporaben URL"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:970
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:980
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr "Izbranega gostitelja ni mogoče obravnavati."
@@ -1343,8 +1343,8 @@ msgstr "URL-ji za povezavo po zagonu"
 msgid "KDE Remote Desktop Client started"
 msgstr "Zagnan odjemalec za oddaljena namizja"
 
-#: mainwindow.cpp:129 mainwindow.cpp:146 mainwindow.cpp:1422
-#: mainwindow.cpp:1520
+#: mainwindow.cpp:129 mainwindow.cpp:146 mainwindow.cpp:1430
+#: mainwindow.cpp:1528
 #, kde-format
 msgid "New Connection"
 msgstr "Nova povezava"
@@ -1359,62 +1359,67 @@ msgstr "Kopiraj zaslonsko sliko na odložišče"
 msgid "Screenshot"
 msgstr "Zaslonska slika"
 
-#: mainwindow.cpp:161 mainwindow.cpp:685
+#: mainwindow.cpp:161 mainwindow.cpp:695
 #, kde-format
 msgid "Switch to Full Screen Mode"
 msgstr "Preklopi v celozaslonski način"
 
-#: mainwindow.cpp:162 mainwindow.cpp:686
+#: mainwindow.cpp:162 mainwindow.cpp:696
 #, kde-format
 msgid "Full Screen"
 msgstr "Cel zaslon"
 
-#: mainwindow.cpp:169
+#: mainwindow.cpp:171
+#, kde-format
+msgid "Minimize Full Screen Window"
+msgstr "Skrči celozaslonsko okno"
+
+#: mainwindow.cpp:178
 #, kde-format
 msgid "View Only"
 msgstr "Samo za pogled"
 
-#: mainwindow.cpp:175
+#: mainwindow.cpp:184
 #, kde-format
 msgid "Clipboard Sharing"
 msgstr "Deljenje odložišča"
 
-#: mainwindow.cpp:180
+#: mainwindow.cpp:189
 #, kde-format
 msgid "Disconnect"
 msgstr "Prekini povezavo"
 
-#: mainwindow.cpp:188
+#: mainwindow.cpp:197
 #, kde-format
 msgid "Show Local Cursor"
 msgstr "Prikaži krajevno kazalko"
 
-#: mainwindow.cpp:189
+#: mainwindow.cpp:198
 #, kde-format
 msgid "Local Cursor"
 msgstr "Krajevna kazalka"
 
-#: mainwindow.cpp:195
+#: mainwindow.cpp:204
 #, kde-format
 msgid "Scale Remote Screen to Fit Window Size"
 msgstr "Prilagodi velikost oddaljenega namizja velikosti okna"
 
-#: mainwindow.cpp:196
+#: mainwindow.cpp:205
 #, kde-format
 msgid "Scale"
 msgstr "Umeri"
 
-#: mainwindow.cpp:199
+#: mainwindow.cpp:208
 #, kde-format
 msgid "Scaling Factor"
 msgstr "Faktor"
 
-#: mainwindow.cpp:210
+#: mainwindow.cpp:219
 #, kde-format
 msgid "Bookmarks"
 msgstr "Zaznamki"
 
-#: mainwindow.cpp:310
+#: mainwindow.cpp:319
 #, kde-format
 msgid ""
 "Unable to load connection data from “%1”.\n"
@@ -1423,12 +1428,12 @@ msgstr ""
 "Podatkov o povezavi iz \"%1\" ni mogoče naložiti.\n"
 "Datoteka je morda poškodovana ali pa je v obliki, ki je KRDC ne podpira."
 
-#: mainwindow.cpp:311
+#: mainwindow.cpp:320
 #, kde-format
 msgid "Load failed"
 msgstr "Nalaganje ni uspelo"
 
-#: mainwindow.cpp:318
+#: mainwindow.cpp:327
 #, kde-format
 msgid ""
 "“%1” is not a valid address.\n"
@@ -1440,12 +1445,12 @@ msgstr ""
 "Uporabite obliko [uporabniško_ime@]gostitelj[:vrata], na primer: "
 "user@192.168.1.10:5900"
 
-#: mainwindow.cpp:320
+#: mainwindow.cpp:329
 #, kde-format
 msgid "Malformed URL"
 msgstr "Napačno oblikovan URL"
 
-#: mainwindow.cpp:350
+#: mainwindow.cpp:359
 #, kde-format
 msgid ""
 "No installed plugin can handle the “%1” protocol.\n"
@@ -1454,27 +1459,27 @@ msgstr ""
 "Noben nameščen vtičnik ne podpira protokola “%1”.\n"
 "Podprti protokoli: %2"
 
-#: mainwindow.cpp:576
+#: mainwindow.cpp:585
 #, kde-format
 msgid "Connecting to %1"
 msgstr "Povezovanje s %1"
 
-#: mainwindow.cpp:580
+#: mainwindow.cpp:589
 #, kde-format
 msgid "Authenticating at %1"
 msgstr "Overjanje z %1"
 
-#: mainwindow.cpp:584
+#: mainwindow.cpp:593
 #, kde-format
 msgid "Preparing connection to %1"
 msgstr "Pripravljanje povezave do %1"
 
-#: mainwindow.cpp:588
+#: mainwindow.cpp:597
 #, kde-format
 msgid "Connected to %1"
 msgstr "Povezan z %1"
 
-#: mainwindow.cpp:594
+#: mainwindow.cpp:603
 #, fuzzy, kde-format
 #| msgctxt "@info"
 #| msgid "Check that remote desktop sharing is enabled on the remote computer."
@@ -1485,90 +1490,90 @@ msgstr ""
 "Preverite, ali je na oddaljenem računalniku omogočeno deljenje oddaljenega "
 "namizja."
 
-#: mainwindow.cpp:722
+#: mainwindow.cpp:732
 #, kde-format
 msgid "Switch to Window Mode"
 msgstr "Preklopi v okenski način"
 
-#: mainwindow.cpp:723
+#: mainwindow.cpp:733
 #, kde-format
 msgid "Window Mode"
 msgstr "Okenski način"
 
-#: mainwindow.cpp:954
+#: mainwindow.cpp:964
 #, kde-format
 msgid "The entered address cannot be handled by this connection type."
 msgstr "Vnesenega naslova ni mogoče obdelati s to vrsto povezave."
 
-#: mainwindow.cpp:989
+#: mainwindow.cpp:999
 #, kde-format
 msgid "Connect"
 msgstr "Poveži"
 
-#: mainwindow.cpp:990
+#: mainwindow.cpp:1000
 #, kde-format
 msgid "Rename"
 msgstr "Preimenuj"
 
-#: mainwindow.cpp:991
+#: mainwindow.cpp:1001
 #, kde-format
 msgid "Settings"
 msgstr "Nastavitve"
 
-#: mainwindow.cpp:992
+#: mainwindow.cpp:1002
 #, kde-format
 msgid "Delete"
 msgstr "Izbriši"
 
-#: mainwindow.cpp:995 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:1005 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "Zaznamki"
 
-#: mainwindow.cpp:995 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:1005 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "Zgodovina"
 
-#: mainwindow.cpp:1007
+#: mainwindow.cpp:1017
 #, kde-format
 msgid "Rename %1"
 msgstr "Preimenuj %1"
 
-#: mainwindow.cpp:1007
+#: mainwindow.cpp:1017
 #, kde-format
 msgid "Rename %1 to"
 msgstr "Preimenuj %1 v"
 
-#: mainwindow.cpp:1014
+#: mainwindow.cpp:1024
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "Ali ste prepričani, da želite izbrisati %1?"
 
-#: mainwindow.cpp:1014
+#: mainwindow.cpp:1024
 #, kde-format
 msgid "Delete %1"
 msgstr "Izbriši %1"
 
-#: mainwindow.cpp:1038
+#: mainwindow.cpp:1048
 #, kde-format
 msgid "Add Bookmark"
 msgstr "Dodaj zaznamek"
 
-#: mainwindow.cpp:1039
+#: mainwindow.cpp:1049
 #, kde-format
 msgid "Close Tab"
 msgstr "Zapri zavihek"
 
-#: mainwindow.cpp:1086
+#: mainwindow.cpp:1096
 #, kde-format
 msgctxt "@info"
 msgid "Keyboard released for one shortcut. Click the remote desktop to cancel."
 msgstr ""
 
-#: mainwindow.cpp:1088
+#: mainwindow.cpp:1098
 #, kde-format
 msgctxt "@info %1 is the name of a key, such as Right Ctrl"
 msgid ""
@@ -1576,39 +1581,34 @@ msgid ""
 "cancel."
 msgstr ""
 
-#: mainwindow.cpp:1155
-#, kde-format
-msgid "Minimize Full Screen Window"
-msgstr "Skrči celozaslonsko okno"
-
-#: mainwindow.cpp:1171
+#: mainwindow.cpp:1179
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "Obdrži orodno vrstico"
 
-#: mainwindow.cpp:1290
+#: mainwindow.cpp:1298
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr ""
 "Ali ste prepričani da želite končati KDE-jevega odjemalca za oddaljena "
 "namizja?"
 
-#: mainwindow.cpp:1291
+#: mainwindow.cpp:1299
 #, kde-format
 msgid "Confirm Quit"
 msgstr "Potrdite izhod"
 
-#: mainwindow.cpp:1446
+#: mainwindow.cpp:1454
 #, kde-format
 msgid "Connect to:"
 msgstr "Poveži se z:"
 
-#: mainwindow.cpp:1450
+#: mainwindow.cpp:1458
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr "Vnesite za povezavo z naslovom ali filtriranje seznama."
 
-#: mainwindow.cpp:1461
+#: mainwindow.cpp:1469
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
@@ -1617,28 +1617,28 @@ msgstr ""
 "Vnesite naslov IP ali ime DNS. Počistite vrstico, da dobite seznam načinov "
 "za povezavo."
 
-#: mainwindow.cpp:1464
+#: mainwindow.cpp:1472
 #, kde-format
 msgid "Goto Address"
 msgstr "Pojdi na naslov"
 
-#: mainwindow.cpp:1556
+#: mainwindow.cpp:1564
 #, kde-format
 msgid "Remote Desktops"
 msgstr "Oddaljena namizja"
 
-#: mainwindow.cpp:1585
+#: mainwindow.cpp:1593
 #, kde-format
 msgid "Filter"
 msgstr "Filter"
 
-#: mainwindow.cpp:1638
+#: mainwindow.cpp:1646
 #, kde-format
 msgctxt "@label"
 msgid "The remote computer may have shut down or restarted."
 msgstr "Oddaljeni računalnik se je morda izklopil ali znova zagnal."
 
-#: mainwindow.cpp:1642
+#: mainwindow.cpp:1650
 #, kde-format
 msgctxt "@title connection error"
 msgid "Closed before the session started"

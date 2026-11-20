@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-19 01:07+0000\n"
-"PO-Revision-Date: 2026-11-14 16:15+0100\n"
+"POT-Creation-Date: 2026-11-20 01:10+0000\n"
+"PO-Revision-Date: 2026-11-19 17:02+0100\n"
 "Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
 "Language: sr@ijekavian\n"
@@ -140,22 +140,21 @@ msgstr "vnc"
 
 #. i18n: ectx: property (title), widget (QGroupBox, keyboardGroupBox)
 #: config/general.ui:147
-#, fuzzy, kde-format
-#| msgid "&Keyboard layout:"
+#, kde-format
 msgid "Keyboard"
-msgstr "Распоред &тастатуре:"
+msgstr "Тастатура"
 
 #. i18n: ectx: property (text), widget (QLabel, keyboardLabel)
 #: config/general.ui:153
 #, kde-format
 msgid "Shortcuts are sent to the remote desktop while it has focus."
-msgstr ""
+msgstr "Пречице се шаљу удаљеној површи док је она у фокусу."
 
 #. i18n: ectx: property (text), widget (QLabel, systemShortcutsLabel)
 #: config/general.ui:163
 #, kde-format
 msgid "Send system shortcuts like Alt+Tab:"
-msgstr ""
+msgstr "Шаљи системске пречице као Alt+Tab:"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, kcfg_SystemShortcuts)
 #: config/general.ui:173
@@ -164,31 +163,32 @@ msgid ""
 "Also send desktop shortcuts such as Alt+Tab or Meta. Your system may still "
 "keep some for itself."
 msgstr ""
+"Шаљи и пречице површи, као што су Alt+Tab или Meta. Ваш систем ће можда ипак "
+"неке задржати за себе."
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_SystemShortcuts)
 #: config/general.ui:177
 #, kde-format
 msgid "Never"
-msgstr ""
+msgstr "никад"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_SystemShortcuts)
 #: config/general.ui:182
-#, fuzzy, kde-format
-#| msgid "Switch to Full Screen Mode"
+#, kde-format
 msgid "Only in full screen mode"
-msgstr "Пребаци преко цијелог екрана"
+msgstr "само преко цијелог екрана"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_SystemShortcuts)
 #: config/general.ui:187
 #, kde-format
 msgid "Always"
-msgstr ""
+msgstr "увијек"
 
 #. i18n: ectx: property (text), widget (QLabel, hostKeyLabel)
 #: config/general.ui:195
 #, kde-format
 msgid "Host key:"
-msgstr ""
+msgstr "Тастер домаћина:"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, kcfg_HostKey)
 #: config/general.ui:205
@@ -197,36 +197,33 @@ msgid ""
 "Press this key to use the next shortcut on this computer. Combined with "
 "other keys it works as normal."
 msgstr ""
+"Притисните овај тастер да бисте сљедећу пречицу употријебили на овом "
+"рачунару. У комбинацији са другим тастерима ради уобичајено."
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_HostKey)
 #: config/general.ui:209 core/remoteview.cpp:53
-#, fuzzy, kde-format
-#| msgid "Right"
+#, kde-format
 msgid "Right Ctrl"
-msgstr "десно"
+msgstr "десни Ctrl"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_HostKey)
 #: config/general.ui:214 core/remoteview.cpp:54
-#, fuzzy, kde-format
-#| msgid "Right"
+#, kde-format
 msgid "Right Alt"
-msgstr "десно"
+msgstr "десни Alt"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_HostKey)
 #: config/general.ui:219 core/remoteview.cpp:55
-#, fuzzy, kde-format
-#| msgid "Right"
+#, kde-format
 msgid "Right Meta"
-msgstr "десно"
+msgstr "десни Meta"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_HostKey)
 #: config/general.ui:224
-#, fuzzy, kde-format
-#| msgctxt "Where each displayed link comes from"
-#| msgid "None"
+#, kde-format
 msgctxt "@item:inlistbox no host key"
 msgid "None"
-msgstr "ниоткуд"
+msgstr "нема"
 
 #. i18n: ectx: property (title), widget (QGroupBox, tabGroupBox)
 #: config/general.ui:235
@@ -292,13 +289,13 @@ msgstr "Подеси…"
 msgid "Remove"
 msgstr "Уклони"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:351 mainwindow.cpp:954
-#: mainwindow.cpp:970
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:360 mainwindow.cpp:964
+#: mainwindow.cpp:980
 #, kde-format
 msgid "Unusable URL"
 msgstr "Неупотребљив УРЛ"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:970
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:980
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr "Не могу да обрадим изабрани домаћин."
@@ -1060,13 +1057,14 @@ msgstr "Сесије"
 #: core/krdc.kcfg:31
 #, kde-format
 msgid "When desktop shortcuts such as Alt+Tab are sent to the remote desktop."
-msgstr ""
+msgstr "Када се пречице површи, као што је Alt+Tab, шаљу удаљеној површи."
 
+# skip-rule: t-desktop
 #. i18n: ectx: label, entry (HostKey), group (General)
 #: core/krdc.kcfg:40
 #, kde-format
 msgid "Key that releases the keyboard from the remote desktop."
-msgstr ""
+msgstr "Тастер који ослобађа тастатуру од удаљене површи."
 
 #: core/remoteview.cpp:851
 #, kde-format
@@ -1339,8 +1337,8 @@ msgstr "УРЛ‑ови за повезивање након покретања"
 msgid "KDE Remote Desktop Client started"
 msgstr "КДЕ‑ов клијент удаљене површи је покренут"
 
-#: mainwindow.cpp:129 mainwindow.cpp:146 mainwindow.cpp:1422
-#: mainwindow.cpp:1520
+#: mainwindow.cpp:129 mainwindow.cpp:146 mainwindow.cpp:1430
+#: mainwindow.cpp:1528
 #, kde-format
 msgid "New Connection"
 msgstr "Нова веза"
@@ -1355,64 +1353,69 @@ msgstr "Копирај снимак екрана у клипборд"
 msgid "Screenshot"
 msgstr "Снимак екрана"
 
-#: mainwindow.cpp:161 mainwindow.cpp:685
+#: mainwindow.cpp:161 mainwindow.cpp:695
 #, kde-format
 msgid "Switch to Full Screen Mode"
 msgstr "Пребаци преко цијелог екрана"
 
-#: mainwindow.cpp:162 mainwindow.cpp:686
+#: mainwindow.cpp:162 mainwindow.cpp:696
 #, kde-format
 msgid "Full Screen"
 msgstr "Цио екран"
 
-#: mainwindow.cpp:169
+#: mainwindow.cpp:171
+#, kde-format
+msgid "Minimize Full Screen Window"
+msgstr "Минимизуј прозор цијелог екрана"
+
+#: mainwindow.cpp:178
 #, kde-format
 msgid "View Only"
 msgstr "Само преглед"
 
-#: mainwindow.cpp:175
+#: mainwindow.cpp:184
 #, kde-format
 msgid "Clipboard Sharing"
 msgstr "Дијељење клипборда"
 
-#: mainwindow.cpp:180
+#: mainwindow.cpp:189
 #, kde-format
 msgid "Disconnect"
 msgstr "Прекини везу"
 
 # skip-rule: t-cursor
-#: mainwindow.cpp:188
+#: mainwindow.cpp:197
 #, kde-format
 msgid "Show Local Cursor"
 msgstr "Прикажи локални показивач"
 
 # skip-rule: t-cursor
-#: mainwindow.cpp:189
+#: mainwindow.cpp:198
 #, kde-format
 msgid "Local Cursor"
 msgstr "Локални показивач"
 
-#: mainwindow.cpp:195
+#: mainwindow.cpp:204
 #, kde-format
 msgid "Scale Remote Screen to Fit Window Size"
 msgstr "Скалирај удаљени екран да стане у прозор"
 
-#: mainwindow.cpp:196
+#: mainwindow.cpp:205
 #, kde-format
 msgid "Scale"
 msgstr "Скалирај"
 
-#: mainwindow.cpp:199
+#: mainwindow.cpp:208
 #, kde-format
 msgid "Scaling Factor"
 msgstr "Фактор скалирања"
 
-#: mainwindow.cpp:210
+#: mainwindow.cpp:219
 #, kde-format
 msgid "Bookmarks"
 msgstr "Обиљеживачи"
 
-#: mainwindow.cpp:310
+#: mainwindow.cpp:319
 #, kde-format
 msgid ""
 "Unable to load connection data from “%1”.\n"
@@ -1421,12 +1424,12 @@ msgstr ""
 "Не могу да учитам податке о вези из „%1“.\n"
 "Фајл је можда оштећен, или је у формату који КРДЦ не подржава."
 
-#: mainwindow.cpp:311
+#: mainwindow.cpp:320
 #, kde-format
 msgid "Load failed"
 msgstr "Учитавање није успјело"
 
-#: mainwindow.cpp:318
+#: mainwindow.cpp:327
 #, kde-format
 msgid ""
 "“%1” is not a valid address.\n"
@@ -1437,12 +1440,12 @@ msgstr ""
 "\n"
 "Користите облик [корисник@]домаћин[:порт], на примјер: user@192.168.1.10:5900"
 
-#: mainwindow.cpp:320
+#: mainwindow.cpp:329
 #, kde-format
 msgid "Malformed URL"
 msgstr "Лоше формиран УРЛ"
 
-#: mainwindow.cpp:350
+#: mainwindow.cpp:359
 #, kde-format
 msgid ""
 "No installed plugin can handle the “%1” protocol.\n"
@@ -1451,161 +1454,160 @@ msgstr ""
 "Ниједан инсталирани прикључак не може да обради протокол „%1“.\n"
 "Подржани протоколи: %2"
 
-#: mainwindow.cpp:576
+#: mainwindow.cpp:585
 #, kde-format
 msgid "Connecting to %1"
 msgstr "Повезујем се са %1"
 
-#: mainwindow.cpp:580
+#: mainwindow.cpp:589
 #, kde-format
 msgid "Authenticating at %1"
 msgstr "Аутентификујем се код %1"
 
-#: mainwindow.cpp:584
+#: mainwindow.cpp:593
 #, kde-format
 msgid "Preparing connection to %1"
 msgstr "Припремам везу са %1"
 
-#: mainwindow.cpp:588
+#: mainwindow.cpp:597
 #, kde-format
 msgid "Connected to %1"
 msgstr "Повезан са %1"
 
-#: mainwindow.cpp:594
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "Check that remote desktop sharing is enabled on the remote computer."
+#: mainwindow.cpp:603
+#, kde-format
 msgctxt "@info %1 is the name of a key, such as Right Ctrl"
 msgid ""
 "Shortcuts go to the remote desktop. Press %1 to use one on this computer."
-msgstr "Провјерите да ли је на удаљеном рачунару укључено дијељење површи."
+msgstr ""
+"Пречице иду удаљеној површи. Притисните %1 да бисте неку употријебили на "
+"овом рачунару."
 
-#: mainwindow.cpp:722
+#: mainwindow.cpp:732
 #, kde-format
 msgid "Switch to Window Mode"
 msgstr "Пребаци на прозор"
 
-#: mainwindow.cpp:723
+#: mainwindow.cpp:733
 #, kde-format
 msgid "Window Mode"
 msgstr "Прозор"
 
-#: mainwindow.cpp:954
+#: mainwindow.cpp:964
 #, kde-format
 msgid "The entered address cannot be handled by this connection type."
 msgstr "Не могу да обрадим унијету адресу за овај тип везе."
 
-#: mainwindow.cpp:989
+#: mainwindow.cpp:999
 #, kde-format
 msgid "Connect"
 msgstr "Повежи"
 
-#: mainwindow.cpp:990
+#: mainwindow.cpp:1000
 #, kde-format
 msgid "Rename"
 msgstr "Преименуј"
 
-#: mainwindow.cpp:991
+#: mainwindow.cpp:1001
 #, kde-format
 msgid "Settings"
 msgstr "Поставке"
 
-#: mainwindow.cpp:992
+#: mainwindow.cpp:1002
 #, kde-format
 msgid "Delete"
 msgstr "Обриши"
 
-#: mainwindow.cpp:995 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:1005 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "Обиљеживачи"
 
-#: mainwindow.cpp:995 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:1005 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "Историјат"
 
 # >> @title:window
-#: mainwindow.cpp:1007
+#: mainwindow.cpp:1017
 #, kde-format
 msgid "Rename %1"
 msgstr "Преименовање „%1“"
 
-#: mainwindow.cpp:1007
+#: mainwindow.cpp:1017
 #, kde-format
 msgid "Rename %1 to"
 msgstr "Преименуј „%1“ у"
 
-#: mainwindow.cpp:1014
+#: mainwindow.cpp:1024
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "Желите ли заиста да обришете „%1“?"
 
 # >> @title:window
-#: mainwindow.cpp:1014
+#: mainwindow.cpp:1024
 #, kde-format
 msgid "Delete %1"
 msgstr "Брисање „%1“"
 
-#: mainwindow.cpp:1038
+#: mainwindow.cpp:1048
 #, kde-format
 msgid "Add Bookmark"
 msgstr "Додај обиљеживач"
 
-#: mainwindow.cpp:1039
+#: mainwindow.cpp:1049
 #, kde-format
 msgid "Close Tab"
 msgstr "Затвори језичак"
 
-#: mainwindow.cpp:1086
+#: mainwindow.cpp:1096
 #, kde-format
 msgctxt "@info"
 msgid "Keyboard released for one shortcut. Click the remote desktop to cancel."
 msgstr ""
+"Тастатура је ослобођена за једну пречицу. Кликните на удаљену површ да "
+"одустанете."
 
-#: mainwindow.cpp:1088
+#: mainwindow.cpp:1098
 #, kde-format
 msgctxt "@info %1 is the name of a key, such as Right Ctrl"
 msgid ""
 "Keyboard released for one shortcut. Press %1 or click the remote desktop to "
 "cancel."
 msgstr ""
+"Тастатура је ослобођена за једну пречицу. Притисните %1 или кликните на "
+"удаљену површ да одустанете."
 
-#: mainwindow.cpp:1155
-#, kde-format
-msgid "Minimize Full Screen Window"
-msgstr "Минимизуј прозор цијелог екрана"
-
-#: mainwindow.cpp:1171
+#: mainwindow.cpp:1179
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "Залијепи траку алатки"
 
-#: mainwindow.cpp:1290
+#: mainwindow.cpp:1298
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr "Желите ли заиста да напустите КДЕ‑ов клијент удаљене површи?"
 
 # >> @title:window
-#: mainwindow.cpp:1291
+#: mainwindow.cpp:1299
 #, kde-format
 msgid "Confirm Quit"
 msgstr "Потврда напуштања"
 
-#: mainwindow.cpp:1446
+#: mainwindow.cpp:1454
 #, kde-format
 msgid "Connect to:"
 msgstr "Повежи се са:"
 
-#: mainwindow.cpp:1450
+#: mainwindow.cpp:1458
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr "Куцајте овдје се повежете на адресу и филтрирате списак."
 
 # rewrite-msgid: /line/field/
-#: mainwindow.cpp:1461
+#: mainwindow.cpp:1469
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
@@ -1614,28 +1616,28 @@ msgstr ""
 "Овдје унесите ИП или ДНС име. Очистите поље да добијете списак метода "
 "повезивања."
 
-#: mainwindow.cpp:1464
+#: mainwindow.cpp:1472
 #, kde-format
 msgid "Goto Address"
 msgstr "Иди на адресу"
 
-#: mainwindow.cpp:1556
+#: mainwindow.cpp:1564
 #, kde-format
 msgid "Remote Desktops"
 msgstr "Удаљене површи"
 
-#: mainwindow.cpp:1585
+#: mainwindow.cpp:1593
 #, kde-format
 msgid "Filter"
 msgstr "Филтер"
 
-#: mainwindow.cpp:1638
+#: mainwindow.cpp:1646
 #, kde-format
 msgctxt "@label"
 msgid "The remote computer may have shut down or restarted."
 msgstr "Удаљени рачунар се можда угасио или поново покренуо."
 
-#: mainwindow.cpp:1642
+#: mainwindow.cpp:1650
 #, kde-format
 msgctxt "@title connection error"
 msgid "Closed before the session started"
@@ -3438,19 +3440,3 @@ msgid ""
 msgstr ""
 "<html>Унесите адресу овдје.<br /><i>Примјер: <tt>vncserver:1</tt> (домаћин:"
 "порт/екран)</i></html>"
-
-#~ msgid ""
-#~ "Automatically grab all keys when entering fullscreen mode and release "
-#~ "them when leaving fullscreen"
-#~ msgstr ""
-#~ "Аутоматски хватај све тастере при уласку у режим цијелог екрана и пуштај "
-#~ "их при изласку из њега"
-
-#~ msgid "Grab all keys when entering fullscreen"
-#~ msgstr "Хватај све тастере при уласку у цио екран"
-
-#~ msgid "Grab All Possible Keys"
-#~ msgstr "Хватај све могуће тастере"
-
-#~ msgid "Grab Keys"
-#~ msgstr "Хватај тастере"

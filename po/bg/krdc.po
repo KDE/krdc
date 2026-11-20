@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-19 01:07+0000\n"
-"PO-Revision-Date: 2026-11-14 22:05+0100\n"
+"POT-Creation-Date: 2026-11-20 01:10+0000\n"
+"PO-Revision-Date: 2026-11-19 21:31+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -286,13 +286,13 @@ msgstr "Конфигуриране…"
 msgid "Remove"
 msgstr "Премахване"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:351 mainwindow.cpp:954
-#: mainwindow.cpp:970
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:360 mainwindow.cpp:964
+#: mainwindow.cpp:980
 #, kde-format
 msgid "Unusable URL"
 msgstr "Неизползваем URL-адрес"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:970
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:980
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr "Избраният хост не може да бъде обработен."
@@ -1325,8 +1325,8 @@ msgstr "URL адреси за свързване след стартиране"
 msgid "KDE Remote Desktop Client started"
 msgstr "Зареден е клиент за отдалечено работно място в KDE"
 
-#: mainwindow.cpp:129 mainwindow.cpp:146 mainwindow.cpp:1422
-#: mainwindow.cpp:1520
+#: mainwindow.cpp:129 mainwindow.cpp:146 mainwindow.cpp:1430
+#: mainwindow.cpp:1528
 #, kde-format
 msgid "New Connection"
 msgstr "Нова връзка"
@@ -1341,62 +1341,67 @@ msgstr "Копиране снимката на екрана в системни�
 msgid "Screenshot"
 msgstr "Снимка на екрана"
 
-#: mainwindow.cpp:161 mainwindow.cpp:685
+#: mainwindow.cpp:161 mainwindow.cpp:695
 #, kde-format
 msgid "Switch to Full Screen Mode"
 msgstr "Превключване на пълен екран"
 
-#: mainwindow.cpp:162 mainwindow.cpp:686
+#: mainwindow.cpp:162 mainwindow.cpp:696
 #, kde-format
 msgid "Full Screen"
 msgstr "Пълен екран"
 
-#: mainwindow.cpp:169
+#: mainwindow.cpp:171
+#, kde-format
+msgid "Minimize Full Screen Window"
+msgstr "Минимизиране на прозорец"
+
+#: mainwindow.cpp:178
 #, kde-format
 msgid "View Only"
 msgstr "Само наблюдение"
 
-#: mainwindow.cpp:175
+#: mainwindow.cpp:184
 #, kde-format
 msgid "Clipboard Sharing"
 msgstr "Споделяне на клипборда"
 
-#: mainwindow.cpp:180
+#: mainwindow.cpp:189
 #, kde-format
 msgid "Disconnect"
 msgstr "Изключване"
 
-#: mainwindow.cpp:188
+#: mainwindow.cpp:197
 #, kde-format
 msgid "Show Local Cursor"
 msgstr "Показване на локалния показалец"
 
-#: mainwindow.cpp:189
+#: mainwindow.cpp:198
 #, kde-format
 msgid "Local Cursor"
 msgstr "Локален показалец"
 
-#: mainwindow.cpp:195
+#: mainwindow.cpp:204
 #, kde-format
 msgid "Scale Remote Screen to Fit Window Size"
 msgstr "Мащабиране на отдалечения екран според размера на прозореца"
 
-#: mainwindow.cpp:196
+#: mainwindow.cpp:205
 #, kde-format
 msgid "Scale"
 msgstr "Мащабиране"
 
-#: mainwindow.cpp:199
+#: mainwindow.cpp:208
 #, kde-format
 msgid "Scaling Factor"
 msgstr "Фактор на мащабиране"
 
-#: mainwindow.cpp:210
+#: mainwindow.cpp:219
 #, kde-format
 msgid "Bookmarks"
 msgstr "Отметки"
 
-#: mainwindow.cpp:310
+#: mainwindow.cpp:319
 #, kde-format
 msgid ""
 "Unable to load connection data from “%1”.\n"
@@ -1405,12 +1410,12 @@ msgstr ""
 "Неуспешно зареждане на данни за връзка от „%1“.\n"
 "Файлът може да е повреден или да е във формат, който KRDC не поддържа."
 
-#: mainwindow.cpp:311
+#: mainwindow.cpp:320
 #, kde-format
 msgid "Load failed"
 msgstr "Неуспешно зареждане"
 
-#: mainwindow.cpp:318
+#: mainwindow.cpp:327
 #, kde-format
 msgid ""
 "“%1” is not a valid address.\n"
@@ -1422,12 +1427,12 @@ msgstr ""
 "Използвайте формата [потребител@]хост[:порт], например: "
 "user@192.168.1.10:5900"
 
-#: mainwindow.cpp:320
+#: mainwindow.cpp:329
 #, kde-format
 msgid "Malformed URL"
 msgstr "Неправилен URL-адрес"
 
-#: mainwindow.cpp:350
+#: mainwindow.cpp:359
 #, kde-format
 msgid ""
 "No installed plugin can handle the “%1” protocol.\n"
@@ -1436,27 +1441,27 @@ msgstr ""
 "Няма инсталиран плъгин за протокола „%1“.\n"
 "Поддържани протоколи: %2"
 
-#: mainwindow.cpp:576
+#: mainwindow.cpp:585
 #, kde-format
 msgid "Connecting to %1"
 msgstr "Свързване с %1"
 
-#: mainwindow.cpp:580
+#: mainwindow.cpp:589
 #, kde-format
 msgid "Authenticating at %1"
 msgstr "Удостоверяване в %1"
 
-#: mainwindow.cpp:584
+#: mainwindow.cpp:593
 #, kde-format
 msgid "Preparing connection to %1"
 msgstr "Подготовка на връзка с %1"
 
-#: mainwindow.cpp:588
+#: mainwindow.cpp:597
 #, kde-format
 msgid "Connected to %1"
 msgstr "Свързан с %1"
 
-#: mainwindow.cpp:594
+#: mainwindow.cpp:603
 #, fuzzy, kde-format
 #| msgctxt "@info"
 #| msgid "Check that remote desktop sharing is enabled on the remote computer."
@@ -1467,90 +1472,90 @@ msgstr ""
 "Проверете дали споделянето на отдалечен работен плот е активирано на "
 "отдалечения компютър."
 
-#: mainwindow.cpp:722
+#: mainwindow.cpp:732
 #, kde-format
 msgid "Switch to Window Mode"
 msgstr "Превключване в прозоречен режим"
 
-#: mainwindow.cpp:723
+#: mainwindow.cpp:733
 #, kde-format
 msgid "Window Mode"
 msgstr "Прозоречен режим"
 
-#: mainwindow.cpp:954
+#: mainwindow.cpp:964
 #, kde-format
 msgid "The entered address cannot be handled by this connection type."
 msgstr "Въведеният адрес не се поддържа от този тип връзка."
 
-#: mainwindow.cpp:989
+#: mainwindow.cpp:999
 #, kde-format
 msgid "Connect"
 msgstr "Свързване"
 
-#: mainwindow.cpp:990
+#: mainwindow.cpp:1000
 #, kde-format
 msgid "Rename"
 msgstr "Преименуване"
 
-#: mainwindow.cpp:991
+#: mainwindow.cpp:1001
 #, kde-format
 msgid "Settings"
 msgstr "Настройки"
 
-#: mainwindow.cpp:992
+#: mainwindow.cpp:1002
 #, kde-format
 msgid "Delete"
 msgstr "Изтриване"
 
-#: mainwindow.cpp:995 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:1005 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "Отметки"
 
-#: mainwindow.cpp:995 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:1005 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "История"
 
-#: mainwindow.cpp:1007
+#: mainwindow.cpp:1017
 #, kde-format
 msgid "Rename %1"
 msgstr "Преименуване на %1"
 
-#: mainwindow.cpp:1007
+#: mainwindow.cpp:1017
 #, kde-format
 msgid "Rename %1 to"
 msgstr "Преименуване на %1 в"
 
-#: mainwindow.cpp:1014
+#: mainwindow.cpp:1024
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "Наистина ли искате да изтриете %1?"
 
-#: mainwindow.cpp:1014
+#: mainwindow.cpp:1024
 #, kde-format
 msgid "Delete %1"
 msgstr "Изтриване на %1"
 
-#: mainwindow.cpp:1038
+#: mainwindow.cpp:1048
 #, kde-format
 msgid "Add Bookmark"
 msgstr "Добавяне на отметка"
 
-#: mainwindow.cpp:1039
+#: mainwindow.cpp:1049
 #, kde-format
 msgid "Close Tab"
 msgstr "Затваряне на подпрозорец"
 
-#: mainwindow.cpp:1086
+#: mainwindow.cpp:1096
 #, kde-format
 msgctxt "@info"
 msgid "Keyboard released for one shortcut. Click the remote desktop to cancel."
 msgstr ""
 
-#: mainwindow.cpp:1088
+#: mainwindow.cpp:1098
 #, kde-format
 msgctxt "@info %1 is the name of a key, such as Right Ctrl"
 msgid ""
@@ -1558,38 +1563,33 @@ msgid ""
 "cancel."
 msgstr ""
 
-#: mainwindow.cpp:1155
-#, kde-format
-msgid "Minimize Full Screen Window"
-msgstr "Минимизиране на прозорец"
-
-#: mainwindow.cpp:1171
+#: mainwindow.cpp:1179
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "Стик лента с инструменти"
 
-#: mainwindow.cpp:1290
+#: mainwindow.cpp:1298
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr ""
 "Наистина ли искате да напуснете програмата за отдалечено работно място в KDE?"
 
-#: mainwindow.cpp:1291
+#: mainwindow.cpp:1299
 #, kde-format
 msgid "Confirm Quit"
 msgstr "Потвърждение на излизането"
 
-#: mainwindow.cpp:1446
+#: mainwindow.cpp:1454
 #, kde-format
 msgid "Connect to:"
 msgstr "Свързване с:"
 
-#: mainwindow.cpp:1450
+#: mainwindow.cpp:1458
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr "Въведете тук, за да се свържете с даден адрес и да филтрирате списъка."
 
-#: mainwindow.cpp:1461
+#: mainwindow.cpp:1469
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
@@ -1598,28 +1598,28 @@ msgstr ""
 "Въведете IP адрес или DNS име. Изчистете реда, за да получите списък с "
 "методи за свързване."
 
-#: mainwindow.cpp:1464
+#: mainwindow.cpp:1472
 #, kde-format
 msgid "Goto Address"
 msgstr "Отиване на адрес"
 
-#: mainwindow.cpp:1556
+#: mainwindow.cpp:1564
 #, kde-format
 msgid "Remote Desktops"
 msgstr "Отдалечени работни места"
 
-#: mainwindow.cpp:1585
+#: mainwindow.cpp:1593
 #, kde-format
 msgid "Filter"
 msgstr "Филтриране"
 
-#: mainwindow.cpp:1638
+#: mainwindow.cpp:1646
 #, kde-format
 msgctxt "@label"
 msgid "The remote computer may have shut down or restarted."
 msgstr "Отдалеченият компютър може да е изключен или рестартиран."
 
-#: mainwindow.cpp:1642
+#: mainwindow.cpp:1650
 #, kde-format
 msgctxt "@title connection error"
 msgid "Closed before the session started"
@@ -3277,30 +3277,30 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, scrollMultiplierLabel)
 #: vnc/vncpreferences.ui:254
-#, fuzzy, kde-format
+#, kde-format
 msgid "Scroll &multiplier:"
-msgstr "Множител на скрол&иране:"
+msgstr "&Множител на превъртането:"
 
 #. i18n: ectx: property (toolTip), widget (QSpinBox, kcfg_ScrollMultiplier)
 #: vnc/vncpreferences.ui:264
-#, fuzzy, kde-format
+#, kde-format
 msgid ""
 "Number of scroll events sent to the remote desktop for each mouse wheel step."
 msgstr ""
-"Брой събития за скролване, изпращани към отдалечения работен плот за всяка "
+"Брой събития за превъртане, изпращани към отдалечения работен плот за всяка "
 "стъпка на мишката."
 
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_ScrollMultiplier)
 #: vnc/vncpreferences.ui:267
-#, fuzzy, kde-format
+#, kde-format
 msgid ""
 "Number of scroll events sent to the remote desktop for each mouse wheel "
 "step. Increase this if scrolling is too slow, for example with macOS Screen "
 "Sharing."
 msgstr ""
-"Брой събития за скролване, изпращани към отдалечения работен плот за всяка "
-"стъпка на колелото на мишката. Увеличете тази стойност, ако скролването е "
-"твърде бавно, например при Screen Sharing на macOS."
+"Брой събития за превъртане, изпращани към отдалечения работен плот при всяка "
+"стъпка на колелцето на мишката. Увеличете тази стойност, ако превъртането е "
+"твърде бавно, например при споделяне на екрана в macOS."
 
 #. i18n: ectx: property (text), widget (QLabel, connectionLabel)
 #: vnc/vncpreferences.ui:311

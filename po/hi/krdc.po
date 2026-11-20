@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-19 01:07+0000\n"
+"POT-Creation-Date: 2026-11-20 01:10+0000\n"
 "PO-Revision-Date: 2021-08-21 16:16+0530\n"
 "Last-Translator: Raghavendra Kamath <raghu@raghukamath.com>\n"
 "Language-Team: kde-hindi\n"
@@ -289,13 +289,13 @@ msgstr "कॉन्फ़िगर..."
 msgid "Remove"
 msgstr "हटाएँ"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:351 mainwindow.cpp:954
-#: mainwindow.cpp:970
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:360 mainwindow.cpp:964
+#: mainwindow.cpp:980
 #, kde-format
 msgid "Unusable URL"
 msgstr "प्रयोग में नहीं लिया जा सकने वाला यूआरएल"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:970
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:980
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr "चयनित होस्ट को हैंडल नहीं किया जा सकता."
@@ -1337,8 +1337,8 @@ msgstr "प्रारंभ होने के बाद जिन यूआ�
 msgid "KDE Remote Desktop Client started"
 msgstr "केडीई रिमोट डेस्कटॉप क्लाएंट प्रारंभ हो गया है"
 
-#: mainwindow.cpp:129 mainwindow.cpp:146 mainwindow.cpp:1422
-#: mainwindow.cpp:1520
+#: mainwindow.cpp:129 mainwindow.cpp:146 mainwindow.cpp:1430
+#: mainwindow.cpp:1528
 #, fuzzy, kde-format
 #| msgid "Connection"
 msgid "New Connection"
@@ -1355,80 +1355,86 @@ msgstr "स्क्रीनशॉट को क्लिपबोर्ड प
 msgid "Screenshot"
 msgstr ""
 
-#: mainwindow.cpp:161 mainwindow.cpp:685
+#: mainwindow.cpp:161 mainwindow.cpp:695
 #, fuzzy, kde-format
 #| msgid "Switch to Fullscreen Mode"
 msgid "Switch to Full Screen Mode"
 msgstr "पूरे स्क्रीन मोड में स्विच करें"
 
-#: mainwindow.cpp:162 mainwindow.cpp:686
+#: mainwindow.cpp:162 mainwindow.cpp:696
 #, kde-format
 msgid "Full Screen"
 msgstr ""
 
-#: mainwindow.cpp:169
+#: mainwindow.cpp:171
+#, fuzzy, kde-format
+#| msgid "Minimize Fullscreen Window"
+msgid "Minimize Full Screen Window"
+msgstr "फुल-स्क्रीन न्यूनतम करें"
+
+#: mainwindow.cpp:178
 #, fuzzy, kde-format
 #| msgid "&View Only"
 msgid "View Only"
 msgstr "सिर्फ दिखाएँ (&V)"
 
-#: mainwindow.cpp:175
+#: mainwindow.cpp:184
 #, kde-format
 msgid "Clipboard Sharing"
 msgstr ""
 
-#: mainwindow.cpp:180
+#: mainwindow.cpp:189
 #, fuzzy, kde-format
 #| msgid "Connection"
 msgid "Disconnect"
 msgstr "कनेक्शन"
 
-#: mainwindow.cpp:188
+#: mainwindow.cpp:197
 #, fuzzy, kde-format
 #| msgid "S&how Local Cursor"
 msgid "Show Local Cursor"
 msgstr "स्थानीय संकेतक दिखाएँ (&h)"
 
-#: mainwindow.cpp:189
+#: mainwindow.cpp:198
 #, fuzzy, kde-format
 #| msgid "S&how Local Cursor"
 msgid "Local Cursor"
 msgstr "स्थानीय संकेतक दिखाएँ (&h)"
 
-#: mainwindow.cpp:195
+#: mainwindow.cpp:204
 #, kde-format
 msgid "Scale Remote Screen to Fit Window Size"
 msgstr ""
 
-#: mainwindow.cpp:196
+#: mainwindow.cpp:205
 #, kde-format
 msgid "Scale"
 msgstr ""
 
-#: mainwindow.cpp:199
+#: mainwindow.cpp:208
 #, kde-format
 msgid "Scaling Factor"
 msgstr ""
 
-#: mainwindow.cpp:210
+#: mainwindow.cpp:219
 #, fuzzy, kde-format
 #| msgid "&Bookmarks"
 msgid "Bookmarks"
 msgstr " पुस्तचिन्ह  (&B)"
 
-#: mainwindow.cpp:310
+#: mainwindow.cpp:319
 #, kde-format
 msgid ""
 "Unable to load connection data from “%1”.\n"
 "The file may be damaged, or it is in a format KRDC does not support."
 msgstr ""
 
-#: mainwindow.cpp:311
+#: mainwindow.cpp:320
 #, kde-format
 msgid "Load failed"
 msgstr ""
 
-#: mainwindow.cpp:318
+#: mainwindow.cpp:327
 #, kde-format
 msgid ""
 "“%1” is not a valid address.\n"
@@ -1436,138 +1442,138 @@ msgid ""
 "Use the form [username@]host[:port], for example: user@192.168.1.10:5900"
 msgstr ""
 
-#: mainwindow.cpp:320
+#: mainwindow.cpp:329
 #, kde-format
 msgid "Malformed URL"
 msgstr "गलत रूप में यूआरएल"
 
-#: mainwindow.cpp:350
+#: mainwindow.cpp:359
 #, kde-format
 msgid ""
 "No installed plugin can handle the “%1” protocol.\n"
 "Supported protocols: %2"
 msgstr ""
 
-#: mainwindow.cpp:576
+#: mainwindow.cpp:585
 #, kde-format
 msgid "Connecting to %1"
 msgstr " %1 से जुड़ रहे"
 
-#: mainwindow.cpp:580
+#: mainwindow.cpp:589
 #, kde-format
 msgid "Authenticating at %1"
 msgstr "यहाँ पर प्रमाणीकरण %1"
 
-#: mainwindow.cpp:584
+#: mainwindow.cpp:593
 #, kde-format
 msgid "Preparing connection to %1"
 msgstr "%1 से कनेक्शन किया जा रहा है"
 
-#: mainwindow.cpp:588
+#: mainwindow.cpp:597
 #, kde-format
 msgid "Connected to %1"
 msgstr "%1 से कनेक्टेड है"
 
-#: mainwindow.cpp:594
+#: mainwindow.cpp:603
 #, kde-format
 msgctxt "@info %1 is the name of a key, such as Right Ctrl"
 msgid ""
 "Shortcuts go to the remote desktop. Press %1 to use one on this computer."
 msgstr ""
 
-#: mainwindow.cpp:722
+#: mainwindow.cpp:732
 #, kde-format
 msgid "Switch to Window Mode"
 msgstr "विंडो मोड में स्विच करें"
 
-#: mainwindow.cpp:723
+#: mainwindow.cpp:733
 #, fuzzy, kde-format
 #| msgid "Switch to Window Mode"
 msgid "Window Mode"
 msgstr "विंडो मोड में स्विच करें"
 
-#: mainwindow.cpp:954
+#: mainwindow.cpp:964
 #, fuzzy, kde-format
 #| msgid "The entered address cannot be handled."
 msgid "The entered address cannot be handled by this connection type."
 msgstr "भरा गया पता हैंडल नहीं किया जा सकता."
 
-#: mainwindow.cpp:989
+#: mainwindow.cpp:999
 #, fuzzy, kde-format
 #| msgid "Connection"
 msgid "Connect"
 msgstr "कनेक्शन"
 
-#: mainwindow.cpp:990
+#: mainwindow.cpp:1000
 #, fuzzy, kde-format
 #| msgid "Remove"
 msgid "Rename"
 msgstr "हटाएँ"
 
-#: mainwindow.cpp:991
+#: mainwindow.cpp:1001
 #, fuzzy, kde-format
 #| msgid "&Settings"
 msgid "Settings"
 msgstr "विन्यास (&S)"
 
-#: mainwindow.cpp:992
+#: mainwindow.cpp:1002
 #, kde-format
 msgid "Delete"
 msgstr ""
 
-#: mainwindow.cpp:995 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:1005 remotedesktopsmodel.cpp:108
 #, fuzzy, kde-format
 #| msgid "&Bookmarks"
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr " पुस्तचिन्ह  (&B)"
 
-#: mainwindow.cpp:995 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:1005 remotedesktopsmodel.cpp:110
 #, fuzzy, kde-format
 #| msgid "History"
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "इतिहास "
 
-#: mainwindow.cpp:1007
+#: mainwindow.cpp:1017
 #, kde-format
 msgid "Rename %1"
 msgstr ""
 
-#: mainwindow.cpp:1007
+#: mainwindow.cpp:1017
 #, kde-format
 msgid "Rename %1 to"
 msgstr ""
 
-#: mainwindow.cpp:1014
+#: mainwindow.cpp:1024
 #, fuzzy, kde-format
 #| msgid "Are you sure you want to close the KDE Remote Desktop Client?"
 msgid "Are you sure you want to delete %1?"
 msgstr "क्या आप सुनिश्चित हैं कि आप केडीई रिमोट डेस्कटॉप क्लाएंट को बन्द करना चाहते हैं?"
 
-#: mainwindow.cpp:1014
+#: mainwindow.cpp:1024
 #, kde-format
 msgid "Delete %1"
 msgstr ""
 
-#: mainwindow.cpp:1038
+#: mainwindow.cpp:1048
 #, fuzzy, kde-format
 #| msgid "&Bookmarks"
 msgid "Add Bookmark"
 msgstr " पुस्तचिन्ह  (&B)"
 
-#: mainwindow.cpp:1039
+#: mainwindow.cpp:1049
 #, kde-format
 msgid "Close Tab"
 msgstr ""
 
-#: mainwindow.cpp:1086
+#: mainwindow.cpp:1096
 #, kde-format
 msgctxt "@info"
 msgid "Keyboard released for one shortcut. Click the remote desktop to cancel."
 msgstr ""
 
-#: mainwindow.cpp:1088
+#: mainwindow.cpp:1098
 #, kde-format
 msgctxt "@info %1 is the name of a key, such as Right Ctrl"
 msgid ""
@@ -1575,72 +1581,66 @@ msgid ""
 "cancel."
 msgstr ""
 
-#: mainwindow.cpp:1155
-#, fuzzy, kde-format
-#| msgid "Minimize Fullscreen Window"
-msgid "Minimize Full Screen Window"
-msgstr "फुल-स्क्रीन न्यूनतम करें"
-
-#: mainwindow.cpp:1171
+#: mainwindow.cpp:1179
 #, fuzzy, kde-format
 #| msgid "S&tick Toolbar"
 msgid "Stick Toolbar"
 msgstr "औज़ार-पट्टी स्टिक करें (&t)"
 
-#: mainwindow.cpp:1290
+#: mainwindow.cpp:1298
 #, fuzzy, kde-format
 #| msgid "Are you sure you want to close the KDE Remote Desktop Client?"
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr "क्या आप सुनिश्चित हैं कि आप केडीई रिमोट डेस्कटॉप क्लाएंट को बन्द करना चाहते हैं?"
 
-#: mainwindow.cpp:1291
+#: mainwindow.cpp:1299
 #, kde-format
 msgid "Confirm Quit"
 msgstr "बाहर जाने की पुष्टि करें"
 
-#: mainwindow.cpp:1446
+#: mainwindow.cpp:1454
 #, fuzzy, kde-format
 #| msgid "Connection"
 msgid "Connect to:"
 msgstr "कनेक्शन"
 
-#: mainwindow.cpp:1450
+#: mainwindow.cpp:1458
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr ""
 
-#: mainwindow.cpp:1461
+#: mainwindow.cpp:1469
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
 "methods."
 msgstr ""
 
-#: mainwindow.cpp:1464
+#: mainwindow.cpp:1472
 #, fuzzy, kde-format
 #| msgid "&Goto Address"
 msgid "Goto Address"
 msgstr "इस पता पर जाएँ (&G)"
 
-#: mainwindow.cpp:1556
+#: mainwindow.cpp:1564
 #, fuzzy, kde-format
 #| msgid "Remote desktop:"
 msgid "Remote Desktops"
 msgstr "रिमोट डेस्कटॉप:"
 
-#: mainwindow.cpp:1585
+#: mainwindow.cpp:1593
 #, fuzzy, kde-format
 #| msgid "&File"
 msgid "Filter"
 msgstr "फ़ाइल (&F)"
 
-#: mainwindow.cpp:1638
+#: mainwindow.cpp:1646
 #, kde-format
 msgctxt "@label"
 msgid "The remote computer may have shut down or restarted."
 msgstr ""
 
-#: mainwindow.cpp:1642
+#: mainwindow.cpp:1650
 #, kde-format
 msgctxt "@title connection error"
 msgid "Closed before the session started"

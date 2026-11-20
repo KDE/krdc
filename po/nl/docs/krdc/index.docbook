@@ -413,11 +413,11 @@ as Authors, publish date, the abstract, and Keywords -->
 </para>
 
 <para
->Wanneer de server om authenticatie vraagt, voert u uw wachtwoord en, indien gevraagd, uw gebruikersnaam in. Met de optie <guilabel
+>Wanneer de server om authenticatie vraagt, voert u uw wachtwoord in en, indien gevraagd, uw gebruikersnaam. Met de optie <guilabel
 >Wachtwoord onthouden</guilabel
-> kan &krdc; inloggegevens opslaan via de systeemopslag voor inloggegevens, gebruikmakend van QtKeychain. De opslag van wachtwoorden hangt ook af van de algemene instelling <guilabel
+> kan &krdc; het ingevoerde wachtwoord na een geslaagde authenticatie opslaan in de systeemopslag voor inloggegevens, gebruikmakend van QtKeychain. Deze keuze wordt onthouden voor de betreffende host. Eerder opgeslagen wachtwoorden blijven beschikbaar, zelfs als deze optie niet is aangevinkt. De algemene instelling <guilabel
 >Wachtwoorden onthouden</guilabel
->.</para>
+> regelt zowel het lezen als het opslaan van wachtwoorden; wanneer deze is uitgeschakeld, biedt het authenticatievenster niet de mogelijkheid om het wachtwoord te onthouden.</para>
 
 <para>
 <screenshot>
@@ -544,16 +544,6 @@ as Authors, publish date, the abstract, and Keywords -->
 <varlistentry>
 <term
 ><guibutton
->Toetsen pakken</guibutton
-></term>
-<listitem
-><para
->Stuur zoveel mogelijk sneltoetsen door naar het externe bureaublad. Sommige sneltoetsen blijven mogelijk voorbehouden aan het lokale bureaublad of het venstersysteem. Schakel deze optie uit om sneltoetsen weer lokaal te verwerken. Automatische toetsenbordovername bij het overschakelen naar volledig scherm kan in de algemene instellingen worden ingeschakeld.</para
-></listitem>
-</varlistentry>
-<varlistentry>
-<term
-><guibutton
 >Schaal</guibutton
 ></term>
 <listitem
@@ -572,6 +562,24 @@ as Authors, publish date, the abstract, and Keywords -->
 ></listitem>
 </varlistentry>
 </variablelist>
+</sect1>
+
+<sect1 id="keyboard-input">
+<title
+>Sneltoetsen</title>
+
+<para
+>Wanneer een extern bureaublad de focus heeft, worden alle sneltoetsen ernaartoe gestuurd, inclusief de sneltoetsen van &krdc;.</para>
+
+<para
+>Om een ​​sneltoets op uw eigen computer te gebruiken, drukt u op de <firstterm
+>host-toets</firstterm
+> (standaard de rechter &Ctrl;-toets) en vervolgens op de sneltoets. Om dit te annuleren, drukt u nogmaals op de host-toets of klikt u op het externe bureaublad.</para>
+
+<para
+>Sneltoetsen zoals <keycombo action="simul"
+>&Alt;&Tab;</keycombo
+> worden alleen in de modus volledig scherm verstuurd. U kunt dit, evenals de 'host-toets, aanpassen in de algemene instellingen.</para>
 </sect1>
 
 <sect1 id="bookmarks">
@@ -665,7 +673,9 @@ as Authors, publish date, the abstract, and Keywords -->
 ></term>
 <listitem
 ><para
->Kies of open sessies bij het opstarten moeten worden hersteld, of geschiedenis en wachtwoorden moeten worden onthouden, of een systeemvakpictogram of statusbalk moet worden weergegeven en of de beeldverhouding bij schalen behouden moet blijven. U kunt ook het standaardprotocol, het dialoogvenster voor de initiële hostconfiguratie, het wijzigen van de venstergrootte, automatisch volledig scherm en toetsenbordovername, evenals het uiterlijk en sluitgedrag van tabbladen configureren.</para
+>Kies of open sessies bij het opstarten moeten worden hersteld, of geschiedenis en wachtwoorden moeten worden onthouden, of een systeemvakpictogram of statusbalk moet worden weergegeven en of de beeldverhouding bij schalen behouden moet blijven. U kunt ook het standaardprotocol, het dialoogvenster voor de initiële hostconfiguratie, het wijzigen van de venstergrootte, automatisch volledig scherm, <link linkend="keyboard-input"
+>sneltoetsen en de host-toets</link
+> en toetsenbordovername, evenals het uiterlijk en sluitgedrag van tabbladen configureren.</para
 ></listitem
 ></varlistentry>
 <varlistentry
@@ -1102,13 +1112,26 @@ as Authors, publish date, the abstract, and Keywords -->
 > connection.rdp</userinput
 ></screen>
 <para
->Hiermee worden het serveradres, de gebruikersnaam, het domein en (indien aanwezig) het wachtwoordveld ingelezen; niet alle instellingen die door andere RDP-clients worden ondersteund, worden geïmporteerd. Gebruik het dialoogvenster voor hostconfiguratie voor overige opties. Voer <userinput
+>Dit leest het serveradres, de gebruikersnaam, het domein en, indien aanwezig, een wachtwoordveld. Voor een host waarvoor nog geen instellingen zijn opgeslagen, worden ook de schermgrootte, schaling- en geluidsinstellingen ingelezen, evenals de optie om het delen van het klembord uit te schakelen en een gateway die altijd wordt gebruikt (waarvoor &krdc; eerst om uw toestemming vraagt). Instellingen die al voor de host waren opgeslagen, blijven behouden. Om veiligheidsredenen importeert &krdc; geen gedeelde mappen, gedeelde apparaten of beveiligingsinstellingen uit het bestand. Gebruik het configuratievenster voor de host voor overige opties. Voer <userinput
 ><command
 >krdc</command
 > <option
 >--help</option
 ></userinput
 > uit voor hulp via de opdrachtregel.</para>
+
+<para
+>&krdc; kan ook een SPICE-verbinding openen vanuit een Virt Viewer <filename
+>.vv</filename
+>-bestand, zoals een bestand dat is gedownload van Proxmox VE:</para>
+<screen
+><userinput
+><command
+>krdc</command
+> verbinding.vv</userinput
+></screen>
+<para
+>Dit leest het serveradres, de poorten, het wachtwoord, het certificaat en de proxy in. Deze gegevens worden uitsluitend bewaard zolang het tabblad van de verbinding geopend is; ze worden niet opgeslagen. Om na het sluiten opnieuw verbinding te maken, dient u een nieuw bestand te openen. &krdc; vraagt ​​u telkens om een ​​proxy te accepteren voordat deze wordt gebruikt, en zal bij een dergelijke verbinding nooit een opgeslagen wachtwoord meesturen. De overige instellingen in het bestand worden genegeerd, en het bestand wordt niet verwijderd, zelfs niet als daarom wordt verzocht.</para>
 </sect1>
 </chapter>
 

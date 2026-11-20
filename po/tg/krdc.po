@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-19 01:07+0000\n"
+"POT-Creation-Date: 2026-11-20 01:10+0000\n"
 "PO-Revision-Date: 2019-09-29 12:28+0500\n"
 "Last-Translator: Victor Ibragimov <victor.ibragimov@gmail.com>\n"
 "Language-Team: English <kde-i18n-doc@kde.org>\n"
@@ -288,13 +288,13 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:351 mainwindow.cpp:954
-#: mainwindow.cpp:970
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:360 mainwindow.cpp:964
+#: mainwindow.cpp:980
 #, kde-format
 msgid "Unusable URL"
 msgstr ""
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:970
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:980
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr ""
@@ -1318,8 +1318,8 @@ msgstr ""
 msgid "KDE Remote Desktop Client started"
 msgstr "Пайвастшавии Мизи Кории Дурдаст"
 
-#: mainwindow.cpp:129 mainwindow.cpp:146 mainwindow.cpp:1422
-#: mainwindow.cpp:1520
+#: mainwindow.cpp:129 mainwindow.cpp:146 mainwindow.cpp:1430
+#: mainwindow.cpp:1528
 #, fuzzy, kde-format
 #| msgid "Connection"
 msgid "New Connection"
@@ -1335,48 +1335,53 @@ msgstr ""
 msgid "Screenshot"
 msgstr ""
 
-#: mainwindow.cpp:161 mainwindow.cpp:685
+#: mainwindow.cpp:161 mainwindow.cpp:695
 #, fuzzy, kde-format
 #| msgid "Start in fullscreen mode"
 msgid "Switch to Full Screen Mode"
 msgstr "Дар усули экрани пурра оғоз кунед"
 
-#: mainwindow.cpp:162 mainwindow.cpp:686
+#: mainwindow.cpp:162 mainwindow.cpp:696
 #, fuzzy, kde-format
 #| msgid "Fullscreen"
 msgid "Full Screen"
 msgstr "Экрани пурра"
 
-#: mainwindow.cpp:169
+#: mainwindow.cpp:171
+#, kde-format
+msgid "Minimize Full Screen Window"
+msgstr ""
+
+#: mainwindow.cpp:178
 #, fuzzy, kde-format
 #| msgid "View Only"
 msgid "View Only"
 msgstr "Танҳо Азназаргузаронӣ"
 
-#: mainwindow.cpp:175
+#: mainwindow.cpp:184
 #, kde-format
 msgid "Clipboard Sharing"
 msgstr ""
 
-#: mainwindow.cpp:180
+#: mainwindow.cpp:189
 #, fuzzy, kde-format
 #| msgid "Connect"
 msgid "Disconnect"
 msgstr "Пайвастшавӣ"
 
-#: mainwindow.cpp:188
+#: mainwindow.cpp:197
 #, fuzzy, kde-format
 #| msgid "Always Show Local Cursor"
 msgid "Show Local Cursor"
 msgstr "Ҳамеша Нишоннамои Маҳаллиро Нишон Додан"
 
-#: mainwindow.cpp:189
+#: mainwindow.cpp:198
 #, fuzzy, kde-format
 #| msgid "Always Show Local Cursor"
 msgid "Local Cursor"
 msgstr "Ҳамеша Нишоннамои Маҳаллиро Нишон Додан"
 
-#: mainwindow.cpp:195
+#: mainwindow.cpp:204
 #, fuzzy, kde-format
 #| msgid "This option scales the remote screen to fit your window size."
 msgid "Scale Remote Screen to Fit Window Size"
@@ -1384,34 +1389,34 @@ msgstr ""
 "Тағири андозаи тирезаи мизи кории дурдаст барои мувофиқати он ба андозаи "
 "тирезаи шумо."
 
-#: mainwindow.cpp:196
+#: mainwindow.cpp:205
 #, kde-format
 msgid "Scale"
 msgstr "Ҷадвал"
 
-#: mainwindow.cpp:199
+#: mainwindow.cpp:208
 #, kde-format
 msgid "Scaling Factor"
 msgstr ""
 
-#: mainwindow.cpp:210
+#: mainwindow.cpp:219
 #, kde-format
 msgid "Bookmarks"
 msgstr "Хатчӯбҳо"
 
-#: mainwindow.cpp:310
+#: mainwindow.cpp:319
 #, kde-format
 msgid ""
 "Unable to load connection data from “%1”.\n"
 "The file may be damaged, or it is in a format KRDC does not support."
 msgstr ""
 
-#: mainwindow.cpp:311
+#: mainwindow.cpp:320
 #, kde-format
 msgid "Load failed"
 msgstr ""
 
-#: mainwindow.cpp:318
+#: mainwindow.cpp:327
 #, kde-format
 msgid ""
 "“%1” is not a valid address.\n"
@@ -1419,138 +1424,138 @@ msgid ""
 "Use the form [username@]host[:port], for example: user@192.168.1.10:5900"
 msgstr ""
 
-#: mainwindow.cpp:320
+#: mainwindow.cpp:329
 #, fuzzy, kde-format
 #| msgid "Malformed URL or Host"
 msgid "Malformed URL"
 msgstr "URL ё Соҳиби Нодуруст"
 
-#: mainwindow.cpp:350
+#: mainwindow.cpp:359
 #, kde-format
 msgid ""
 "No installed plugin can handle the “%1” protocol.\n"
 "Supported protocols: %2"
 msgstr ""
 
-#: mainwindow.cpp:576
+#: mainwindow.cpp:585
 #, fuzzy, kde-format
 #| msgid "Connection"
 msgid "Connecting to %1"
 msgstr "Пайвастшавӣ"
 
-#: mainwindow.cpp:580
+#: mainwindow.cpp:589
 #, fuzzy, kde-format
 #| msgid "Authenticating..."
 msgid "Authenticating at %1"
 msgstr "Аслшиносӣ..."
 
-#: mainwindow.cpp:584
+#: mainwindow.cpp:593
 #, kde-format
 msgid "Preparing connection to %1"
 msgstr ""
 
-#: mainwindow.cpp:588
+#: mainwindow.cpp:597
 #, fuzzy, kde-format
 #| msgid "Connection"
 msgid "Connected to %1"
 msgstr "Пайвастшавӣ"
 
-#: mainwindow.cpp:594
+#: mainwindow.cpp:603
 #, kde-format
 msgctxt "@info %1 is the name of a key, such as Right Ctrl"
 msgid ""
 "Shortcuts go to the remote desktop. Press %1 to use one on this computer."
 msgstr ""
 
-#: mainwindow.cpp:722
+#: mainwindow.cpp:732
 #, fuzzy, kde-format
 #| msgid "Start in fullscreen mode"
 msgid "Switch to Window Mode"
 msgstr "Дар усули экрани пурра оғоз кунед"
 
-#: mainwindow.cpp:723
+#: mainwindow.cpp:733
 #, fuzzy, kde-format
 #| msgid "Start in fullscreen mode"
 msgid "Window Mode"
 msgstr "Дар усули экрани пурра оғоз кунед"
 
-#: mainwindow.cpp:954
+#: mainwindow.cpp:964
 #, kde-format
 msgid "The entered address cannot be handled by this connection type."
 msgstr ""
 
-#: mainwindow.cpp:989
+#: mainwindow.cpp:999
 #, fuzzy, kde-format
 #| msgid "Connection"
 msgid "Connect"
 msgstr "Пайвастшавӣ"
 
-#: mainwindow.cpp:990
+#: mainwindow.cpp:1000
 #, fuzzy, kde-format
 #| msgid "Name"
 msgid "Rename"
 msgstr "Ном"
 
-#: mainwindow.cpp:991
+#: mainwindow.cpp:1001
 #, fuzzy, kde-format
 #| msgid "Settings"
 msgid "Settings"
 msgstr "Гузоришҳо"
 
-#: mainwindow.cpp:992
+#: mainwindow.cpp:1002
 #, kde-format
 msgid "Delete"
 msgstr ""
 
-#: mainwindow.cpp:995 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:1005 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "Хатчӯбҳо"
 
-#: mainwindow.cpp:995 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:1005 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr ""
 
-#: mainwindow.cpp:1007
+#: mainwindow.cpp:1017
 #, kde-format
 msgid "Rename %1"
 msgstr ""
 
-#: mainwindow.cpp:1007
+#: mainwindow.cpp:1017
 #, kde-format
 msgid "Rename %1 to"
 msgstr ""
 
-#: mainwindow.cpp:1014
+#: mainwindow.cpp:1024
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr ""
 
-#: mainwindow.cpp:1014
+#: mainwindow.cpp:1024
 #, kde-format
 msgid "Delete %1"
 msgstr ""
 
-#: mainwindow.cpp:1038
+#: mainwindow.cpp:1048
 #, kde-format
 msgid "Add Bookmark"
 msgstr ""
 
-#: mainwindow.cpp:1039
+#: mainwindow.cpp:1049
 #, kde-format
 msgid "Close Tab"
 msgstr ""
 
-#: mainwindow.cpp:1086
+#: mainwindow.cpp:1096
 #, kde-format
 msgctxt "@info"
 msgid "Keyboard released for one shortcut. Click the remote desktop to cancel."
 msgstr ""
 
-#: mainwindow.cpp:1088
+#: mainwindow.cpp:1098
 #, kde-format
 msgctxt "@info %1 is the name of a key, such as Right Ctrl"
 msgid ""
@@ -1558,68 +1563,63 @@ msgid ""
 "cancel."
 msgstr ""
 
-#: mainwindow.cpp:1155
-#, kde-format
-msgid "Minimize Full Screen Window"
-msgstr ""
-
-#: mainwindow.cpp:1171
+#: mainwindow.cpp:1179
 #, kde-format
 msgid "Stick Toolbar"
 msgstr ""
 
-#: mainwindow.cpp:1290
+#: mainwindow.cpp:1298
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr ""
 
-#: mainwindow.cpp:1291
+#: mainwindow.cpp:1299
 #, kde-format
 msgid "Confirm Quit"
 msgstr ""
 
-#: mainwindow.cpp:1446
+#: mainwindow.cpp:1454
 #, fuzzy, kde-format
 #| msgid "Connect"
 msgid "Connect to:"
 msgstr "Пайвастшавӣ"
 
-#: mainwindow.cpp:1450
+#: mainwindow.cpp:1458
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr ""
 
-#: mainwindow.cpp:1461
+#: mainwindow.cpp:1469
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
 "methods."
 msgstr ""
 
-#: mainwindow.cpp:1464
+#: mainwindow.cpp:1472
 #, fuzzy, kde-format
 #| msgid "Address"
 msgid "Goto Address"
 msgstr "Суроға"
 
-#: mainwindow.cpp:1556
+#: mainwindow.cpp:1564
 #, fuzzy, kde-format
 #| msgid "Remote &desktop:"
 msgid "Remote Desktops"
 msgstr "&Мизи кории дурдаст:"
 
-#: mainwindow.cpp:1585
+#: mainwindow.cpp:1593
 #, kde-format
 msgid "Filter"
 msgstr ""
 
-#: mainwindow.cpp:1638
+#: mainwindow.cpp:1646
 #, kde-format
 msgctxt "@label"
 msgid "The remote computer may have shut down or restarted."
 msgstr ""
 
-#: mainwindow.cpp:1642
+#: mainwindow.cpp:1650
 #, kde-format
 msgctxt "@title connection error"
 msgid "Closed before the session started"
