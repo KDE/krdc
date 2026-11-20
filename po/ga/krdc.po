@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdenetwork/krdc.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-19 03:21+0000\n"
+"POT-Creation-Date: 2026-11-20 03:38+0000\n"
 "PO-Revision-Date: 2004-12-03 14:52-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -114,160 +114,82 @@ msgstr ""
 msgid "Switch to Fullscreen if appropriate"
 msgstr "Athraigh go mód lánscáileáin más oiriúnach"
 
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_GrabAllKeysOnFullscreen)
+#: config/general.ui:126
+#, kde-format
+msgid ""
+"Automatically grab all keys when entering fullscreen mode and release them "
+"when leaving fullscreen"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_GrabAllKeysOnFullscreen)
+#: config/general.ui:129
+#, kde-format
+msgid "Grab all keys when entering fullscreen"
+msgstr ""
+
 #. i18n: ectx: property (text), widget (QLabel, defaultProtocolLabel)
-#: config/general.ui:128
+#: config/general.ui:138
 #, kde-format
 msgid "Default protocol:"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLineEdit, kcfg_DefaultProtocol)
-#: config/general.ui:135
+#: config/general.ui:145
 #, kde-format
 msgid "vnc"
 msgstr ""
 
-#. i18n: ectx: property (title), widget (QGroupBox, keyboardGroupBox)
-#: config/general.ui:147
-#, fuzzy, kde-format
-#| msgid "&Keyboard layout:"
-msgid "Keyboard"
-msgstr "Leagan amach an &mhéarchláir:"
-
-#. i18n: ectx: property (text), widget (QLabel, keyboardLabel)
-#: config/general.ui:153
-#, kde-format
-msgid ""
-"While you work in a remote desktop, the shortcuts you press are sent to it "
-"instead of KRDC."
-msgstr ""
-
-#. i18n: ectx: property (text), widget (QLabel, systemShortcutsLabel)
-#: config/general.ui:163
-#, kde-format
-msgid "Send system shortcuts like Alt+Tab:"
-msgstr ""
-
-#. i18n: ectx: property (toolTip), widget (QComboBox, kcfg_SystemShortcuts)
-#: config/general.ui:173
-#, kde-format
-msgid ""
-"Whether shortcuts of this computer's desktop, such as Alt+Tab or the Meta "
-"key, are sent to the remote desktop as well. Some shortcuts may remain "
-"reserved by this computer."
-msgstr ""
-
-#. i18n: ectx: property (text), item, widget (QComboBox, kcfg_SystemShortcuts)
-#: config/general.ui:177
-#, kde-format
-msgid "Never"
-msgstr ""
-
-#. i18n: ectx: property (text), item, widget (QComboBox, kcfg_SystemShortcuts)
-#: config/general.ui:182
-#, fuzzy, kde-format
-#| msgid "Switch to Full Screen Mode"
-msgid "Only in full screen mode"
-msgstr "Athraigh go Mód Lánscáileáin"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, kcfg_SystemShortcuts)
-#: config/general.ui:187
-#, kde-format
-msgid "Always"
-msgstr ""
-
-#. i18n: ectx: property (text), widget (QLabel, hostKeyLabel)
-#: config/general.ui:195
-#, kde-format
-msgid "Host key:"
-msgstr ""
-
-#. i18n: ectx: property (toolTip), widget (QComboBox, kcfg_HostKey)
-#: config/general.ui:205
-#, kde-format
-msgid ""
-"Press and release this key on its own to release the keyboard: the next "
-"shortcut is then handled by KRDC or this computer. Held together with other "
-"keys, it works as usual in the remote desktop."
-msgstr ""
-
-#. i18n: ectx: property (text), item, widget (QComboBox, kcfg_HostKey)
-#: config/general.ui:209 core/remoteview.cpp:54
-#, fuzzy, kde-format
-#| msgid "Right"
-msgid "Right Ctrl"
-msgstr "Ar Dheis"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, kcfg_HostKey)
-#: config/general.ui:214 core/remoteview.cpp:55
-#, fuzzy, kde-format
-#| msgid "Right"
-msgid "Right Alt"
-msgstr "Ar Dheis"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, kcfg_HostKey)
-#: config/general.ui:219 core/remoteview.cpp:56
-#, fuzzy, kde-format
-#| msgid "Right"
-msgid "Right Meta"
-msgstr "Ar Dheis"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, kcfg_HostKey)
-#: config/general.ui:224
-#, kde-format
-msgctxt "@item:inlistbox no host key"
-msgid "None"
-msgstr ""
-
 #. i18n: ectx: property (title), widget (QGroupBox, tabGroupBox)
-#: config/general.ui:235
+#: config/general.ui:157
 #, kde-format
 msgid "Tab Settings"
 msgstr "Socruithe Cluaisíní"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowTabBar)
-#: config/general.ui:241
+#: config/general.ui:163
 #, kde-format
 msgid "Always show tab bar"
 msgstr "Taispeáin barra na gcluaisíní i gcónaí"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabCloseButton)
-#: config/general.ui:248
+#: config/general.ui:170
 #, kde-format
 msgid "Show close button on tabs"
 msgstr "Taispeáin cnaipe dúnta ar chluaisíní"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabMiddleClick)
-#: config/general.ui:255
+#: config/general.ui:177
 #, kde-format
 msgid "Middle-click on a tab closes it"
 msgstr "Lárchliceáil ar chluaisín chun é a dhúnadh"
 
 #. i18n: ectx: property (text), widget (QLabel, tabOrientationLabel)
-#: config/general.ui:264
+#: config/general.ui:186
 #, kde-format
 msgid "Tab position:"
 msgstr "Ionad an chluaisín:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TabPosition)
-#: config/general.ui:272
+#: config/general.ui:194
 #, kde-format
 msgid "Top"
 msgstr "Barr"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TabPosition)
-#: config/general.ui:277
+#: config/general.ui:199
 #, kde-format
 msgid "Bottom"
 msgstr "Bun"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TabPosition)
-#: config/general.ui:282
+#: config/general.ui:204
 #, kde-format
 msgid "Left"
 msgstr "Ar Chlé"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TabPosition)
-#: config/general.ui:287
+#: config/general.ui:209
 #, kde-format
 msgid "Right"
 msgstr "Ar Dheis"
@@ -282,13 +204,13 @@ msgstr ""
 msgid "Remove"
 msgstr "Bain"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:352 mainwindow.cpp:955
-#: mainwindow.cpp:971
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:338 mainwindow.cpp:961
+#: mainwindow.cpp:977
 #, kde-format
 msgid "Unusable URL"
 msgstr "URL do-úsáidte"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:971
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:977
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr "Ní féidir an t-óstríomhaire roghnaithe a láimhseáil."
@@ -309,7 +231,7 @@ msgstr "Cumraíocht Ghinearálta"
 msgid "Hosts"
 msgstr "Óstríomhairí"
 
-#: config/preferencesdialog.cpp:28 core/hostpreferences.cpp:298
+#: config/preferencesdialog.cpp:28 core/hostpreferences.cpp:308
 #, kde-format
 msgid "Host Configuration"
 msgstr "Cumraíocht an Óstríomhaire"
@@ -1001,14 +923,14 @@ msgctxt "@info"
 msgid "Connect to the network or VPN the remote computer is on."
 msgstr ""
 
-#: core/hostpreferences.cpp:296
+#: core/hostpreferences.cpp:306
 #, fuzzy, kde-format
 #| msgid "Connected to %1"
 msgctxt "@title:window %1 is a host name"
 msgid "Connect to %1"
 msgstr "Ceangailte le %1"
 
-#: core/hostpreferences.cpp:303
+#: core/hostpreferences.cpp:313
 #, kde-format
 msgid ""
 "Note that settings might only apply when you connect next time to this host."
@@ -1016,31 +938,31 @@ msgstr ""
 "Tabhair faoi deara seans nach mbeidh na socruithe curtha i bhfeidhm go dtí "
 "an chéad uair eile a cheanglóidh tú leis an óstríomhaire seo."
 
-#: core/hostpreferences.cpp:326
+#: core/hostpreferences.cpp:336
 #, fuzzy, kde-format
 #| msgid "Connect"
 msgctxt "@action:button"
 msgid "Connect"
 msgstr "Ceangail"
 
-#: core/hostpreferences.cpp:340
+#: core/hostpreferences.cpp:350
 #, kde-format
 msgctxt "@label:textbox Name of a remote connection"
 msgid "Name:"
 msgstr ""
 
-#: core/hostpreferences.cpp:346
+#: core/hostpreferences.cpp:356
 #, kde-format
 msgctxt "@label:textbox URL of a remote connection"
 msgid "URL:"
 msgstr ""
 
-#: core/hostpreferences.cpp:388
+#: core/hostpreferences.cpp:398
 #, kde-format
 msgid "Show this dialog again for this host"
 msgstr "Taispeáin an dialóg seo arís le haghaidh an óstríomhaire seo"
 
-#: core/hostpreferences.cpp:411
+#: core/hostpreferences.cpp:421
 #, fuzzy, kde-format
 #| msgid "Settings"
 msgctxt "@action:button"
@@ -1053,89 +975,73 @@ msgstr "Socruithe"
 msgid "Sessions"
 msgstr "Seisiúin"
 
-#. i18n: ectx: label, entry (SystemShortcuts), group (General)
-#: core/krdc.kcfg:31
-#, kde-format
-msgid ""
-"When shortcuts of the local desktop, such as Alt+Tab, are sent to the remote "
-"desktop instead."
-msgstr ""
-
-#. i18n: ectx: label, entry (HostKey), group (General)
-#: core/krdc.kcfg:40
-#, kde-format
-msgid ""
-"Key that releases the keyboard from the remote desktop when pressed on its "
-"own."
-msgstr ""
-
-#: core/remoteview.cpp:853
+#: core/remoteview.cpp:726
 #, kde-format
 msgid "Please enter the SSH password."
 msgstr ""
 
-#: core/remoteview.cpp:874
+#: core/remoteview.cpp:747
 #, kde-format
 msgctxt "@label"
 msgid "The SSH tunnel on port %1 could not be set up."
 msgstr ""
 
-#: core/remoteview.cpp:877
+#: core/remoteview.cpp:750
 #, kde-format
 msgctxt "@title connection error"
 msgid "SSH server not reachable"
 msgstr ""
 
-#: core/remoteview.cpp:878
+#: core/remoteview.cpp:751
 #, kde-format
 msgctxt "@label"
 msgid "The SSH server did not accept a connection on port %1."
 msgstr ""
 
-#: core/remoteview.cpp:880
+#: core/remoteview.cpp:753
 #, kde-format
 msgctxt "@info"
 msgid "Make sure the SSH server is running and listens on port %1."
 msgstr ""
 
-#: core/remoteview.cpp:881
+#: core/remoteview.cpp:754
 #, kde-format
 msgctxt "@info"
 msgid ""
 "Check the host name, and that the computer is reachable from this network."
 msgstr ""
 
-#: core/remoteview.cpp:882
+#: core/remoteview.cpp:755
 #, kde-format
 msgctxt "@info"
 msgid "Check that no firewall blocks SSH connections."
 msgstr ""
 
-#: core/remoteview.cpp:886
+#: core/remoteview.cpp:759
 #, kde-format
 msgctxt "@title connection error"
 msgid "SSH login failed"
 msgstr ""
 
-#: core/remoteview.cpp:887
+#: core/remoteview.cpp:760
 #, kde-format
 msgctxt "@label"
 msgid "The SSH server did not accept the login."
 msgstr ""
 
-#: core/remoteview.cpp:888
+#: core/remoteview.cpp:761
 #, kde-format
 msgctxt "@label"
 msgid "The SSH server did not accept the login for “%1”."
 msgstr ""
 
-#: core/remoteview.cpp:890
+#: core/remoteview.cpp:763
 #, kde-format
 msgctxt "@info"
 msgid "Check the SSH user name in the host settings, and the password."
 msgstr ""
 
-#: core/remoteview.cpp:891
+#: core/remoteview.cpp:764
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -1143,20 +1049,20 @@ msgid ""
 "and make sure it is authorized on the server."
 msgstr ""
 
-#: core/remoteview.cpp:892
+#: core/remoteview.cpp:765
 #, kde-format
 msgctxt "@info"
 msgid ""
 "If the SSH server does not allow password logins, set up key authentication."
 msgstr ""
 
-#: core/remoteview.cpp:896
+#: core/remoteview.cpp:769
 #, kde-format
 msgctxt "@label"
 msgid "No free local port could be opened for the tunnel on this computer."
 msgstr ""
 
-#: core/remoteview.cpp:898
+#: core/remoteview.cpp:771
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -1218,7 +1124,7 @@ msgid "&Session"
 msgstr "&Seisiún"
 
 #. i18n: ectx: ToolBar (krdc_remote_view_toolbar)
-#: krdcui.rc:22
+#: krdcui.rc:23
 #, kde-format
 msgid "Remote View Toolbar"
 msgstr "Barra Amhairc Chianda"
@@ -1318,95 +1224,105 @@ msgstr ""
 msgid "URLs to connect after startup"
 msgstr "URLanna ar chóir ceangal leo tar éis tosaithe"
 
-#: mainwindow.cpp:124
+#: mainwindow.cpp:111
 #, kde-format
 msgid "KDE Remote Desktop Client started"
 msgstr "Tosaíodh an Cliant Deisce Cianda KDE"
 
-#: mainwindow.cpp:129 mainwindow.cpp:146 mainwindow.cpp:1423
-#: mainwindow.cpp:1521
+#: mainwindow.cpp:116 mainwindow.cpp:133 mainwindow.cpp:1432
+#: mainwindow.cpp:1529
 #, kde-format
 msgid "New Connection"
 msgstr "Ceangal Nua"
 
-#: mainwindow.cpp:154
+#: mainwindow.cpp:141
 #, kde-format
 msgid "Copy Screenshot to Clipboard"
 msgstr "Cóipeáil Seat den Scáileán sa Ghearrthaisce"
 
-#: mainwindow.cpp:155
+#: mainwindow.cpp:142
 #, kde-format
 msgid "Screenshot"
 msgstr "Seat den Scáileán"
 
-#: mainwindow.cpp:161 mainwindow.cpp:686
+#: mainwindow.cpp:148 mainwindow.cpp:680
 #, kde-format
 msgid "Switch to Full Screen Mode"
 msgstr "Athraigh go Mód Lánscáileáin"
 
-#: mainwindow.cpp:162 mainwindow.cpp:687
+#: mainwindow.cpp:149 mainwindow.cpp:681
 #, kde-format
 msgid "Full Screen"
 msgstr "Lánscáileán"
 
-#: mainwindow.cpp:169
+#: mainwindow.cpp:156
 #, kde-format
 msgid "View Only"
 msgstr "Amharc Amháin"
 
-#: mainwindow.cpp:175
+#: mainwindow.cpp:162
 #, kde-format
 msgid "Clipboard Sharing"
 msgstr ""
 
-#: mainwindow.cpp:180
+#: mainwindow.cpp:167
 #, kde-format
 msgid "Disconnect"
 msgstr "Dícheangail"
 
-#: mainwindow.cpp:188
+#: mainwindow.cpp:175
 #, kde-format
 msgid "Show Local Cursor"
 msgstr "Taispeáin an Cúrsóir Logánta"
 
-#: mainwindow.cpp:189
+#: mainwindow.cpp:176
 #, kde-format
 msgid "Local Cursor"
 msgstr "Cúrsóir Logánta"
 
-#: mainwindow.cpp:195
+#: mainwindow.cpp:182
+#, kde-format
+msgid "Grab All Possible Keys"
+msgstr "Faigh gach eochair is féidir"
+
+#: mainwindow.cpp:183
+#, kde-format
+msgid "Grab Keys"
+msgstr "Faigh Eochracha"
+
+#: mainwindow.cpp:189
 #, kde-format
 msgid "Scale Remote Screen to Fit Window Size"
 msgstr "Scálaigh an scáileán cianda do mhéid na fuinneoige"
 
-#: mainwindow.cpp:196
+#: mainwindow.cpp:190
 #, kde-format
 msgid "Scale"
 msgstr "Scála"
 
-#: mainwindow.cpp:199
+#: mainwindow.cpp:193
 #, kde-format
 msgid "Scaling Factor"
 msgstr ""
 
-#: mainwindow.cpp:210
+#: mainwindow.cpp:204
 #, kde-format
 msgid "Bookmarks"
 msgstr "Leabharmharcanna"
 
-#: mainwindow.cpp:311
+#: mainwindow.cpp:297
 #, kde-format
 msgid ""
 "Unable to load connection data from “%1”.\n"
 "The file may be damaged, or it is in a format KRDC does not support."
 msgstr ""
 
-#: mainwindow.cpp:312
+#: mainwindow.cpp:298
 #, kde-format
 msgid "Load failed"
 msgstr ""
 
-#: mainwindow.cpp:319
+#: mainwindow.cpp:305
 #, kde-format
 msgid ""
 "“%1” is not a valid address.\n"
@@ -1414,171 +1330,147 @@ msgid ""
 "Use the form [username@]host[:port], for example: user@192.168.1.10:5900"
 msgstr ""
 
-#: mainwindow.cpp:321
+#: mainwindow.cpp:307
 #, kde-format
 msgid "Malformed URL"
 msgstr "URL míchumtha"
 
-#: mainwindow.cpp:351
+#: mainwindow.cpp:337
 #, kde-format
 msgid ""
 "No installed plugin can handle the “%1” protocol.\n"
 "Supported protocols: %2"
 msgstr ""
 
-#: mainwindow.cpp:577
+#: mainwindow.cpp:562
 #, kde-format
 msgid "Connecting to %1"
 msgstr "Ag dul i dteagmháil le %1"
 
-#: mainwindow.cpp:581
+#: mainwindow.cpp:566
 #, kde-format
 msgid "Authenticating at %1"
 msgstr "Fíordheimhniú ag %1"
 
-#: mainwindow.cpp:585
+#: mainwindow.cpp:570
 #, kde-format
 msgid "Preparing connection to %1"
 msgstr "Ceangal le %1 á ullmhú"
 
-#: mainwindow.cpp:589
+#: mainwindow.cpp:574
 #, kde-format
 msgid "Connected to %1"
 msgstr "Ceangailte le %1"
 
-#: mainwindow.cpp:595
-#, kde-format
-msgctxt "@info %1 is the name of a key, such as Right Ctrl"
-msgid ""
-"Keyboard shortcuts go to the remote desktop. Press %1 first to use one on "
-"this computer instead."
-msgstr ""
-
-#: mainwindow.cpp:723
+#: mainwindow.cpp:727
 #, kde-format
 msgid "Switch to Window Mode"
 msgstr "Athraigh go Mód Fuinneoige"
 
-#: mainwindow.cpp:724
+#: mainwindow.cpp:728
 #, kde-format
 msgid "Window Mode"
 msgstr "Mód Fuinneoige"
 
-#: mainwindow.cpp:955
+#: mainwindow.cpp:961
 #, fuzzy, kde-format
 #| msgid "The entered address cannot be handled."
 msgid "The entered address cannot be handled by this connection type."
 msgstr "Ní féidir an seoladh iontráilte a láimhseáil."
 
-#: mainwindow.cpp:990
+#: mainwindow.cpp:996
 #, kde-format
 msgid "Connect"
 msgstr "Ceangail"
 
-#: mainwindow.cpp:991
+#: mainwindow.cpp:997
 #, kde-format
 msgid "Rename"
 msgstr "Athainmnigh"
 
-#: mainwindow.cpp:992
+#: mainwindow.cpp:998
 #, kde-format
 msgid "Settings"
 msgstr "Socruithe"
 
-#: mainwindow.cpp:993
+#: mainwindow.cpp:999
 #, kde-format
 msgid "Delete"
 msgstr "Scrios"
 
-#: mainwindow.cpp:996 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:1002 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "Leabharmharcanna"
 
-#: mainwindow.cpp:996 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:1002 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "Stair"
 
-#: mainwindow.cpp:1008
+#: mainwindow.cpp:1014
 #, kde-format
 msgid "Rename %1"
 msgstr "Athainmnigh %1"
 
-#: mainwindow.cpp:1008
+#: mainwindow.cpp:1014
 #, kde-format
 msgid "Rename %1 to"
 msgstr "Athainmnigh %1 mar"
 
-#: mainwindow.cpp:1015
+#: mainwindow.cpp:1021
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "An bhfuil tú cinnte gur mian leat %1 a scriosadh?"
 
-#: mainwindow.cpp:1015
+#: mainwindow.cpp:1021
 #, kde-format
 msgid "Delete %1"
 msgstr "Scrios %1"
 
-#: mainwindow.cpp:1039
+#: mainwindow.cpp:1045
 #, kde-format
 msgid "Add Bookmark"
 msgstr "Cuir Leabharmharc Leis"
 
-#: mainwindow.cpp:1040
+#: mainwindow.cpp:1046
 #, kde-format
 msgid "Close Tab"
 msgstr "Dún Cluaisín"
 
-#: mainwindow.cpp:1087
-#, kde-format
-msgctxt "@info"
-msgid ""
-"Keyboard released: the next shortcut stays on this computer. Click the "
-"remote desktop to cancel."
-msgstr ""
-
-#: mainwindow.cpp:1089
-#, kde-format
-msgctxt "@info %1 is the name of a key, such as Right Ctrl"
-msgid ""
-"Keyboard released: the next shortcut stays on this computer. Press %1 or "
-"click the remote desktop to cancel."
-msgstr ""
-
-#: mainwindow.cpp:1156
+#: mainwindow.cpp:1163
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr "Íoslaghdaigh Fuinneog Lánscáileáin"
 
-#: mainwindow.cpp:1172
+#: mainwindow.cpp:1180
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "Greamaigh an Barra Uirlisí"
 
-#: mainwindow.cpp:1291
+#: mainwindow.cpp:1300
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr "An bhfuil tú cinnte gur mian leat an Cliant Deisce Cianda KDE a scor?"
 
-#: mainwindow.cpp:1292
+#: mainwindow.cpp:1301
 #, kde-format
 msgid "Confirm Quit"
 msgstr "Deimhnigh Scor"
 
-#: mainwindow.cpp:1447
+#: mainwindow.cpp:1455
 #, kde-format
 msgid "Connect to:"
 msgstr "Ceangail le:"
 
-#: mainwindow.cpp:1451
+#: mainwindow.cpp:1459
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr "Clóscríobh anseo chun ceangal le seoladh agus an liosta a scagadh."
 
-#: mainwindow.cpp:1462
+#: mainwindow.cpp:1470
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
@@ -1587,28 +1479,28 @@ msgstr ""
 "Cuir seoladh IP nó ainm DNS anseo. Glan an líne chun liosta de mhodhanna "
 "ceangail a fháil."
 
-#: mainwindow.cpp:1465
+#: mainwindow.cpp:1473
 #, kde-format
 msgid "Goto Address"
 msgstr "Téigh go Seoladh"
 
-#: mainwindow.cpp:1557
+#: mainwindow.cpp:1565
 #, kde-format
 msgid "Remote Desktops"
 msgstr "Deasca Cianda"
 
-#: mainwindow.cpp:1586
+#: mainwindow.cpp:1594
 #, kde-format
 msgid "Filter"
 msgstr "Scagaire"
 
-#: mainwindow.cpp:1639
+#: mainwindow.cpp:1647
 #, kde-format
 msgctxt "@label"
 msgid "The remote computer may have shut down or restarted."
 msgstr ""
 
-#: mainwindow.cpp:1643
+#: mainwindow.cpp:1651
 #, kde-format
 msgctxt "@title connection error"
 msgid "Closed before the session started"
@@ -2445,69 +2337,69 @@ msgid ""
 "Fingerprint: %6\n"
 msgstr ""
 
-#: rdp/rdpview.cpp:296
+#: rdp/rdpview.cpp:295
 #, fuzzy, kde-format
 #| msgid "Access to the system requires a password."
 msgctxt "@label"
 msgid "Access to the gateway and this system requires a username and password."
 msgstr "Tá focal faire de dhíth chun an córas a rochtain."
 
-#: rdp/rdpview.cpp:297
+#: rdp/rdpview.cpp:296
 #, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
 msgstr ""
 
-#: rdp/rdpview.cpp:352
+#: rdp/rdpview.cpp:351
 #, fuzzy, kde-format
 #| msgid "Access to the system requires a password."
 msgctxt "@label %1 is a server address"
 msgid "Access to the gateway %1 requires a username and password."
 msgstr "Tá focal faire de dhíth chun an córas a rochtain."
 
-#: rdp/rdpview.cpp:373
+#: rdp/rdpview.cpp:372
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this gateway is unknown. Do you wish to continue?"
 msgstr ""
 
-#: rdp/rdpview.cpp:374
+#: rdp/rdpview.cpp:373
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr ""
 
-#: rdp/rdpview.cpp:375
+#: rdp/rdpview.cpp:374
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
 msgstr ""
 
-#: rdp/rdpview.cpp:380 rdp/rdpview.cpp:412
+#: rdp/rdpview.cpp:379 rdp/rdpview.cpp:411
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
 msgstr ""
 
-#: rdp/rdpview.cpp:405
+#: rdp/rdpview.cpp:404
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this gateway has changed. Do you wish to continue?"
 msgstr ""
 
-#: rdp/rdpview.cpp:406
+#: rdp/rdpview.cpp:405
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
 msgstr ""
 
-#: rdp/rdpview.cpp:407
+#: rdp/rdpview.cpp:406
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
 msgstr ""
 
-#: rdp/rdpview.cpp:410
+#: rdp/rdpview.cpp:409
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -2517,49 +2409,49 @@ msgid ""
 "%2"
 msgstr ""
 
-#: rdp/rdpview.cpp:460
+#: rdp/rdpview.cpp:459
 #, kde-format
 msgctxt "@label"
 msgid "The credentials for “%1” were not accepted."
 msgstr ""
 
-#: rdp/rdpview.cpp:463
+#: rdp/rdpview.cpp:462
 #, kde-format
 msgctxt "@info"
 msgid "Check the RD Gateway credentials in the host settings."
 msgstr ""
 
-#: rdp/rdpview.cpp:479
+#: rdp/rdpview.cpp:478
 #, kde-format
 msgctxt "@label"
 msgid "This account may not log in remotely."
 msgstr ""
 
-#: rdp/rdpview.cpp:480
+#: rdp/rdpview.cpp:479
 #, kde-format
 msgctxt "@label"
 msgid "“%1” may not log in remotely."
 msgstr ""
 
-#: rdp/rdpview.cpp:482 rdp/rdpview.cpp:575 rdp/rdpview.cpp:583
+#: rdp/rdpview.cpp:481 rdp/rdpview.cpp:574 rdp/rdpview.cpp:582
 #, kde-format
 msgctxt "@title connection error"
 msgid "Access denied"
 msgstr ""
 
-#: rdp/rdpview.cpp:485
+#: rdp/rdpview.cpp:484
 #, kde-format
 msgctxt "@label"
 msgid "The gateway or the remote computer refused this login."
 msgstr ""
 
-#: rdp/rdpview.cpp:491
+#: rdp/rdpview.cpp:490
 #, kde-format
 msgctxt "@info"
 msgid "Check whether the account is locked, disabled or expired."
 msgstr ""
 
-#: rdp/rdpview.cpp:493
+#: rdp/rdpview.cpp:492
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2567,19 +2459,19 @@ msgid ""
 "Remote Desktop Users group, or log in with a different account."
 msgstr ""
 
-#: rdp/rdpview.cpp:501
+#: rdp/rdpview.cpp:500
 #, kde-format
 msgctxt "@label"
 msgid "The password must be changed before it can be used to log in remotely."
 msgstr ""
 
-#: rdp/rdpview.cpp:502
+#: rdp/rdpview.cpp:501
 #, kde-format
 msgctxt "@title connection error"
 msgid "Password expired"
 msgstr ""
 
-#: rdp/rdpview.cpp:504
+#: rdp/rdpview.cpp:503
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2587,37 +2479,37 @@ msgid ""
 "administrator to reset it."
 msgstr ""
 
-#: rdp/rdpview.cpp:509
+#: rdp/rdpview.cpp:508
 #, kde-format
 msgctxt "@label"
 msgid "The Kerberos domain controller could not be reached."
 msgstr ""
 
-#: rdp/rdpview.cpp:511
+#: rdp/rdpview.cpp:510
 #, kde-format
 msgctxt "@info"
 msgid "Check the domain you entered when logging in."
 msgstr ""
 
-#: rdp/rdpview.cpp:512
+#: rdp/rdpview.cpp:511
 #, kde-format
 msgctxt "@info"
 msgid "Connect to the network or VPN of the domain."
 msgstr ""
 
-#: rdp/rdpview.cpp:517 spice/spiceview.cpp:964 vnc/vncview.cpp:298
+#: rdp/rdpview.cpp:516 spice/spiceview.cpp:964 vnc/vncview.cpp:298
 #, kde-format
 msgctxt "@label"
 msgid "No IP address was found for this name."
 msgstr ""
 
-#: rdp/rdpview.cpp:528
+#: rdp/rdpview.cpp:527
 #, kde-format
 msgctxt "@label"
 msgid "The server and KRDC could not agree on a security protocol."
 msgstr ""
 
-#: rdp/rdpview.cpp:531
+#: rdp/rdpview.cpp:530
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -2625,7 +2517,7 @@ msgid ""
 "a security protocol."
 msgstr ""
 
-#: rdp/rdpview.cpp:535
+#: rdp/rdpview.cpp:534
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2633,7 +2525,7 @@ msgid ""
 "domain controller can be reached."
 msgstr ""
 
-#: rdp/rdpview.cpp:538
+#: rdp/rdpview.cpp:537
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2641,19 +2533,19 @@ msgid ""
 "support the level selected."
 msgstr ""
 
-#: rdp/rdpview.cpp:542
+#: rdp/rdpview.cpp:541
 #, kde-format
 msgctxt "@label"
 msgid "The server requires Network Level Authentication (NLA)."
 msgstr ""
 
-#: rdp/rdpview.cpp:543
+#: rdp/rdpview.cpp:542
 #, kde-format
 msgctxt "@info"
 msgid "Enable NLA in the security settings for this host."
 msgstr ""
 
-#: rdp/rdpview.cpp:561
+#: rdp/rdpview.cpp:560
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2661,13 +2553,13 @@ msgid ""
 "unreachable or reject the connection."
 msgstr ""
 
-#: rdp/rdpview.cpp:568
+#: rdp/rdpview.cpp:567
 #, kde-format
 msgctxt "@label"
 msgid "The remote computer did not finish starting the session in time."
 msgstr ""
 
-#: rdp/rdpview.cpp:569
+#: rdp/rdpview.cpp:568
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2675,20 +2567,20 @@ msgid ""
 "minute, then connect again."
 msgstr ""
 
-#: rdp/rdpview.cpp:574
+#: rdp/rdpview.cpp:573
 #, kde-format
 msgctxt "@label"
 msgid "The gateway does not allow this account to connect to “%1”."
 msgstr ""
 
-#: rdp/rdpview.cpp:577
+#: rdp/rdpview.cpp:576
 #, kde-format
 msgctxt "@info"
 msgid ""
 "Try the full name of the computer. The gateway may only know it by that name."
 msgstr ""
 
-#: rdp/rdpview.cpp:578
+#: rdp/rdpview.cpp:577
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2696,13 +2588,13 @@ msgid ""
 "its resource authorization policy."
 msgstr ""
 
-#: rdp/rdpview.cpp:582
+#: rdp/rdpview.cpp:581
 #, kde-format
 msgctxt "@label"
 msgid "The gateway does not allow this device to connect."
 msgstr ""
 
-#: rdp/rdpview.cpp:584
+#: rdp/rdpview.cpp:583
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2710,13 +2602,13 @@ msgid ""
 "policy."
 msgstr ""
 
-#: rdp/rdpview.cpp:587
+#: rdp/rdpview.cpp:586
 #, kde-format
 msgctxt "@label"
 msgid "The gateway could not reach “%1”."
 msgstr ""
 
-#: rdp/rdpview.cpp:589
+#: rdp/rdpview.cpp:588
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2724,62 +2616,62 @@ msgid ""
 "by this name."
 msgstr ""
 
-#: rdp/rdpview.cpp:593
+#: rdp/rdpview.cpp:592
 #, kde-format
 msgctxt "@label"
 msgid "It accepted the connection, then refused to start a session."
 msgstr ""
 
-#: rdp/rdpview.cpp:594
+#: rdp/rdpview.cpp:593
 #, fuzzy, kde-format
 #| msgid "Sessions"
 msgctxt "@title connection error"
 msgid "Session refused"
 msgstr "Seisiúin"
 
-#: rdp/rdpview.cpp:598
+#: rdp/rdpview.cpp:597
 #, kde-format
 msgctxt "@label"
 msgid "The server did not accept the options selected for this host."
 msgstr ""
 
-#: rdp/rdpview.cpp:601
+#: rdp/rdpview.cpp:600
 #, kde-format
 msgctxt "@label"
 msgid "An administrator or another program disconnected this session."
 msgstr ""
 
-#: rdp/rdpview.cpp:604
+#: rdp/rdpview.cpp:603
 #, kde-format
 msgctxt "@label"
 msgid "An administrator signed this session out."
 msgstr ""
 
-#: rdp/rdpview.cpp:607
+#: rdp/rdpview.cpp:606
 #, kde-format
 msgctxt "@label"
 msgid "The session was disconnected from the remote computer."
 msgstr ""
 
-#: rdp/rdpview.cpp:614
+#: rdp/rdpview.cpp:613
 #, kde-format
 msgctxt "@label"
 msgid "Disconnected because someone else connected to this session."
 msgstr ""
 
-#: rdp/rdpview.cpp:615
+#: rdp/rdpview.cpp:614
 #, kde-format
 msgctxt "@info"
 msgid "Reconnect to take the session back. This disconnects the other user."
 msgstr ""
 
-#: rdp/rdpview.cpp:618
+#: rdp/rdpview.cpp:617
 #, kde-format
 msgctxt "@label"
 msgid "The session was closed after being idle for too long."
 msgstr ""
 
-#: rdp/rdpview.cpp:619
+#: rdp/rdpview.cpp:618
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2787,13 +2679,13 @@ msgid ""
 "the server."
 msgstr ""
 
-#: rdp/rdpview.cpp:633
+#: rdp/rdpview.cpp:632
 #, kde-format
 msgctxt "@label"
 msgid "The remote computer reported a problem while logging in."
 msgstr ""
 
-#: rdp/rdpview.cpp:634
+#: rdp/rdpview.cpp:633
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2801,7 +2693,7 @@ msgid ""
 "is not busy."
 msgstr ""
 
-#: rdp/rdpview.cpp:1022
+#: rdp/rdpview.cpp:1007
 #, kde-format
 msgctxt "@title:window"
 msgid "KRDC – Screen %1"
@@ -3307,11 +3199,30 @@ msgstr ""
 "<html>Iontráil an seoladh anseo.<br /><i>Sampla: vncserver:1 (ósta:port / "
 "scáileán)</i></html>"
 
-#~ msgid "Grab All Possible Keys"
-#~ msgstr "Faigh gach eochair is féidir"
+#, fuzzy
+#~| msgid "&Keyboard layout:"
+#~ msgid "Keyboard"
+#~ msgstr "Leagan amach an &mhéarchláir:"
 
-#~ msgid "Grab Keys"
-#~ msgstr "Faigh Eochracha"
+#, fuzzy
+#~| msgid "Switch to Full Screen Mode"
+#~ msgid "Only in full screen mode"
+#~ msgstr "Athraigh go Mód Lánscáileáin"
+
+#, fuzzy
+#~| msgid "Right"
+#~ msgid "Right Ctrl"
+#~ msgstr "Ar Dheis"
+
+#, fuzzy
+#~| msgid "Right"
+#~ msgid "Right Alt"
+#~ msgstr "Ar Dheis"
+
+#, fuzzy
+#~| msgid "Right"
+#~ msgid "Right Meta"
+#~ msgstr "Ar Dheis"
 
 #~ msgid "Resolution"
 #~ msgstr "Taifeach"

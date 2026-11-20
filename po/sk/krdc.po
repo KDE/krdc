@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-19 03:21+0000\n"
+"POT-Creation-Date: 2026-11-20 03:38+0000\n"
 "PO-Revision-Date: 2026-09-14 20:10+0200\n"
 "Last-Translator: Roman Paholík <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -127,161 +127,84 @@ msgstr ""
 msgid "Switch to Fullscreen if appropriate"
 msgstr "Prepnúť na celú obrazovku v prípade potreby"
 
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_GrabAllKeysOnFullscreen)
+#: config/general.ui:126
+#, kde-format
+msgid ""
+"Automatically grab all keys when entering fullscreen mode and release them "
+"when leaving fullscreen"
+msgstr ""
+"Automaticky zachytiť všetky klávesy pri vstupe do režimu celej obrazovky a "
+"uvoľniť ich pri odchode z celej obrazovky"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_GrabAllKeysOnFullscreen)
+#: config/general.ui:129
+#, kde-format
+msgid "Grab all keys when entering fullscreen"
+msgstr "Zachytiť všetky klávesy pri vstupe do celej obrazovky"
+
 #. i18n: ectx: property (text), widget (QLabel, defaultProtocolLabel)
-#: config/general.ui:128
+#: config/general.ui:138
 #, kde-format
 msgid "Default protocol:"
 msgstr "Predvolený protokol:"
 
 #. i18n: ectx: property (text), widget (QLineEdit, kcfg_DefaultProtocol)
-#: config/general.ui:135
+#: config/general.ui:145
 #, kde-format
 msgid "vnc"
 msgstr "vnc"
 
-#. i18n: ectx: property (title), widget (QGroupBox, keyboardGroupBox)
-#: config/general.ui:147
-#, fuzzy, kde-format
-#| msgid "&Keyboard layout:"
-msgid "Keyboard"
-msgstr "&Rozloženie klávesnice:"
-
-#. i18n: ectx: property (text), widget (QLabel, keyboardLabel)
-#: config/general.ui:153
-#, kde-format
-msgid ""
-"While you work in a remote desktop, the shortcuts you press are sent to it "
-"instead of KRDC."
-msgstr ""
-
-#. i18n: ectx: property (text), widget (QLabel, systemShortcutsLabel)
-#: config/general.ui:163
-#, kde-format
-msgid "Send system shortcuts like Alt+Tab:"
-msgstr ""
-
-#. i18n: ectx: property (toolTip), widget (QComboBox, kcfg_SystemShortcuts)
-#: config/general.ui:173
-#, kde-format
-msgid ""
-"Whether shortcuts of this computer's desktop, such as Alt+Tab or the Meta "
-"key, are sent to the remote desktop as well. Some shortcuts may remain "
-"reserved by this computer."
-msgstr ""
-
-#. i18n: ectx: property (text), item, widget (QComboBox, kcfg_SystemShortcuts)
-#: config/general.ui:177
-#, kde-format
-msgid "Never"
-msgstr ""
-
-#. i18n: ectx: property (text), item, widget (QComboBox, kcfg_SystemShortcuts)
-#: config/general.ui:182
-#, fuzzy, kde-format
-#| msgid "Switch to Full Screen Mode"
-msgid "Only in full screen mode"
-msgstr "Prepnúť na režim celej obrazovky"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, kcfg_SystemShortcuts)
-#: config/general.ui:187
-#, kde-format
-msgid "Always"
-msgstr ""
-
-#. i18n: ectx: property (text), widget (QLabel, hostKeyLabel)
-#: config/general.ui:195
-#, kde-format
-msgid "Host key:"
-msgstr ""
-
-#. i18n: ectx: property (toolTip), widget (QComboBox, kcfg_HostKey)
-#: config/general.ui:205
-#, kde-format
-msgid ""
-"Press and release this key on its own to release the keyboard: the next "
-"shortcut is then handled by KRDC or this computer. Held together with other "
-"keys, it works as usual in the remote desktop."
-msgstr ""
-
-#. i18n: ectx: property (text), item, widget (QComboBox, kcfg_HostKey)
-#: config/general.ui:209 core/remoteview.cpp:54
-#, fuzzy, kde-format
-#| msgid "Right"
-msgid "Right Ctrl"
-msgstr "Vpravo"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, kcfg_HostKey)
-#: config/general.ui:214 core/remoteview.cpp:55
-#, fuzzy, kde-format
-#| msgid "Right"
-msgid "Right Alt"
-msgstr "Vpravo"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, kcfg_HostKey)
-#: config/general.ui:219 core/remoteview.cpp:56
-#, fuzzy, kde-format
-#| msgid "Right"
-msgid "Right Meta"
-msgstr "Vpravo"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, kcfg_HostKey)
-#: config/general.ui:224
-#, fuzzy, kde-format
-#| msgid "None"
-msgctxt "@item:inlistbox no host key"
-msgid "None"
-msgstr "Žiadny"
-
 #. i18n: ectx: property (title), widget (QGroupBox, tabGroupBox)
-#: config/general.ui:235
+#: config/general.ui:157
 #, kde-format
 msgid "Tab Settings"
 msgstr "Nastavenie kariet"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowTabBar)
-#: config/general.ui:241
+#: config/general.ui:163
 #, kde-format
 msgid "Always show tab bar"
 msgstr "Vždy zobraziť panel kariet"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabCloseButton)
-#: config/general.ui:248
+#: config/general.ui:170
 #, kde-format
 msgid "Show close button on tabs"
 msgstr "Zobrazovať na kartách tlačidlo zatvorenia"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_TabMiddleClick)
-#: config/general.ui:255
+#: config/general.ui:177
 #, kde-format
 msgid "Middle-click on a tab closes it"
 msgstr "Kliknutie stredným tlačidlom myši zatvorí kartu"
 
 #. i18n: ectx: property (text), widget (QLabel, tabOrientationLabel)
-#: config/general.ui:264
+#: config/general.ui:186
 #, kde-format
 msgid "Tab position:"
 msgstr "Pozícia kariet:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TabPosition)
-#: config/general.ui:272
+#: config/general.ui:194
 #, kde-format
 msgid "Top"
 msgstr "Hore"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TabPosition)
-#: config/general.ui:277
+#: config/general.ui:199
 #, kde-format
 msgid "Bottom"
 msgstr "Dole"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TabPosition)
-#: config/general.ui:282
+#: config/general.ui:204
 #, kde-format
 msgid "Left"
 msgstr "Vľavo"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TabPosition)
-#: config/general.ui:287
+#: config/general.ui:209
 #, kde-format
 msgid "Right"
 msgstr "Vpravo"
@@ -296,13 +219,13 @@ msgstr "Nastaviť..."
 msgid "Remove"
 msgstr "Odstrániť"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:352 mainwindow.cpp:955
-#: mainwindow.cpp:971
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:338 mainwindow.cpp:961
+#: mainwindow.cpp:977
 #, kde-format
 msgid "Unusable URL"
 msgstr "Nepoužiteľná adresa URL"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:971
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:977
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr "Vybraný hostiteľ sa nedá spracovať."
@@ -323,7 +246,7 @@ msgstr "Všeobecné nastavenia"
 msgid "Hosts"
 msgstr "Hostitelia"
 
-#: config/preferencesdialog.cpp:28 core/hostpreferences.cpp:298
+#: config/preferencesdialog.cpp:28 core/hostpreferences.cpp:308
 #, kde-format
 msgid "Host Configuration"
 msgstr "Nastavenie hostiteľa"
@@ -1003,14 +926,13 @@ msgctxt "@info"
 msgid "Connect to the network or VPN the remote computer is on."
 msgstr "Pripojte sa k sieti alebo VPN, v ktorej je vzdialený počítač."
 
-#: core/hostpreferences.cpp:296
-#, fuzzy, kde-format
-#| msgid "Connected to %1"
+#: core/hostpreferences.cpp:306
+#, kde-format
 msgctxt "@title:window %1 is a host name"
 msgid "Connect to %1"
-msgstr "Pripojené k %1"
+msgstr "Pripojiť sa k %1"
 
-#: core/hostpreferences.cpp:303
+#: core/hostpreferences.cpp:313
 #, kde-format
 msgid ""
 "Note that settings might only apply when you connect next time to this host."
@@ -1018,36 +940,34 @@ msgstr ""
 "Uvedomte si, že toto nastavenie je možné použiť až pri ďalšom pripojení k "
 "tomuto hostiteľovi."
 
-#: core/hostpreferences.cpp:326
-#, fuzzy, kde-format
-#| msgid "Connect"
+#: core/hostpreferences.cpp:336
+#, kde-format
 msgctxt "@action:button"
 msgid "Connect"
 msgstr "Pripojiť"
 
-#: core/hostpreferences.cpp:340
+#: core/hostpreferences.cpp:350
 #, kde-format
 msgctxt "@label:textbox Name of a remote connection"
 msgid "Name:"
 msgstr "Názov:"
 
-#: core/hostpreferences.cpp:346
+#: core/hostpreferences.cpp:356
 #, kde-format
 msgctxt "@label:textbox URL of a remote connection"
 msgid "URL:"
 msgstr "URL:"
 
-#: core/hostpreferences.cpp:388
+#: core/hostpreferences.cpp:398
 #, kde-format
 msgid "Show this dialog again for this host"
 msgstr "Zobraziť toto dialógové okno znovu pre tohto hostiteľa"
 
-#: core/hostpreferences.cpp:411
-#, fuzzy, kde-format
-#| msgid "Settings"
+#: core/hostpreferences.cpp:421
+#, kde-format
 msgctxt "@action:button"
 msgid "All Settings…"
-msgstr "Nastavenia"
+msgstr "Všetky nastavenia…"
 
 #. i18n: ectx: label, entry (OpenSessions), group (General)
 #: core/krdc.kcfg:16
@@ -1055,89 +975,73 @@ msgstr "Nastavenia"
 msgid "Sessions"
 msgstr "Sedenia"
 
-#. i18n: ectx: label, entry (SystemShortcuts), group (General)
-#: core/krdc.kcfg:31
-#, kde-format
-msgid ""
-"When shortcuts of the local desktop, such as Alt+Tab, are sent to the remote "
-"desktop instead."
-msgstr ""
-
-#. i18n: ectx: label, entry (HostKey), group (General)
-#: core/krdc.kcfg:40
-#, kde-format
-msgid ""
-"Key that releases the keyboard from the remote desktop when pressed on its "
-"own."
-msgstr ""
-
-#: core/remoteview.cpp:853
+#: core/remoteview.cpp:726
 #, kde-format
 msgid "Please enter the SSH password."
 msgstr "Zadajte heslo SSH."
 
-#: core/remoteview.cpp:874
+#: core/remoteview.cpp:747
 #, kde-format
 msgctxt "@label"
 msgid "The SSH tunnel on port %1 could not be set up."
 msgstr "Tunel SSH na porte %1 sa nepodarilo nastaviť."
 
-#: core/remoteview.cpp:877
+#: core/remoteview.cpp:750
 #, kde-format
 msgctxt "@title connection error"
 msgid "SSH server not reachable"
 msgstr "Server SSH nie je dostupný"
 
-#: core/remoteview.cpp:878
+#: core/remoteview.cpp:751
 #, kde-format
 msgctxt "@label"
 msgid "The SSH server did not accept a connection on port %1."
 msgstr "Server SSH neprijal pripojenie na porte %1."
 
-#: core/remoteview.cpp:880
+#: core/remoteview.cpp:753
 #, kde-format
 msgctxt "@info"
 msgid "Make sure the SSH server is running and listens on port %1."
 msgstr "Uistite sa, že server SSH beží a počúva na porte %1."
 
-#: core/remoteview.cpp:881
+#: core/remoteview.cpp:754
 #, kde-format
 msgctxt "@info"
 msgid ""
 "Check the host name, and that the computer is reachable from this network."
 msgstr "Skontrolujte názov hostiteľa a či je počítač z tejto siete dostupný."
 
-#: core/remoteview.cpp:882
+#: core/remoteview.cpp:755
 #, kde-format
 msgctxt "@info"
 msgid "Check that no firewall blocks SSH connections."
 msgstr "Skontrolujte, či pripojenia SSH neblokuje firewall."
 
-#: core/remoteview.cpp:886
+#: core/remoteview.cpp:759
 #, kde-format
 msgctxt "@title connection error"
 msgid "SSH login failed"
 msgstr "Prihlásenie SSH zlyhalo"
 
-#: core/remoteview.cpp:887
+#: core/remoteview.cpp:760
 #, kde-format
 msgctxt "@label"
 msgid "The SSH server did not accept the login."
 msgstr "Server SSH neprijal prihlásenie."
 
-#: core/remoteview.cpp:888
+#: core/remoteview.cpp:761
 #, kde-format
 msgctxt "@label"
 msgid "The SSH server did not accept the login for “%1”."
 msgstr "Server SSH neprijal prihlásenie pre „%1“."
 
-#: core/remoteview.cpp:890
+#: core/remoteview.cpp:763
 #, kde-format
 msgctxt "@info"
 msgid "Check the SSH user name in the host settings, and the password."
 msgstr "Skontrolujte používateľské meno SSH v nastavení hostiteľa a heslo."
 
-#: core/remoteview.cpp:891
+#: core/remoteview.cpp:764
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -1147,7 +1051,7 @@ msgstr ""
 "Ak používate overovanie kľúčom, pridajte kľúč do agenta SSH príkazom ssh-add "
 "a uistite sa, že je na serveri autorizovaný."
 
-#: core/remoteview.cpp:892
+#: core/remoteview.cpp:765
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -1155,14 +1059,14 @@ msgid ""
 msgstr ""
 "Ak server SSH nepovoľuje prihlásenie heslom, nastavte overovanie kľúčom."
 
-#: core/remoteview.cpp:896
+#: core/remoteview.cpp:769
 #, kde-format
 msgctxt "@label"
 msgid "No free local port could be opened for the tunnel on this computer."
 msgstr ""
 "Na tomto počítači sa nepodarilo otvoriť žiadny voľný miestny port pre tunel."
 
-#: core/remoteview.cpp:898
+#: core/remoteview.cpp:771
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -1226,7 +1130,7 @@ msgid "&Session"
 msgstr "&Sedenie"
 
 #. i18n: ectx: ToolBar (krdc_remote_view_toolbar)
-#: krdcui.rc:22
+#: krdcui.rc:23
 #, kde-format
 msgid "Remote View Toolbar"
 msgstr "Panel nástrojov vzdialený pohľad"
@@ -1335,83 +1239,93 @@ msgstr ""
 msgid "URLs to connect after startup"
 msgstr "Adresa URL, ku ktorej sa pripojiť po spustení"
 
-#: mainwindow.cpp:124
+#: mainwindow.cpp:111
 #, kde-format
 msgid "KDE Remote Desktop Client started"
 msgstr "Klient vzdialenej plochy pre KDE bol spustený"
 
-#: mainwindow.cpp:129 mainwindow.cpp:146 mainwindow.cpp:1423
-#: mainwindow.cpp:1521
+#: mainwindow.cpp:116 mainwindow.cpp:133 mainwindow.cpp:1432
+#: mainwindow.cpp:1529
 #, kde-format
 msgid "New Connection"
 msgstr "Nové pripojenie"
 
-#: mainwindow.cpp:154
+#: mainwindow.cpp:141
 #, kde-format
 msgid "Copy Screenshot to Clipboard"
 msgstr "Kopírovať snímku obrazovky do schránky"
 
-#: mainwindow.cpp:155
+#: mainwindow.cpp:142
 #, kde-format
 msgid "Screenshot"
 msgstr "Snímka obrazovky"
 
-#: mainwindow.cpp:161 mainwindow.cpp:686
+#: mainwindow.cpp:148 mainwindow.cpp:680
 #, kde-format
 msgid "Switch to Full Screen Mode"
 msgstr "Prepnúť na režim celej obrazovky"
 
-#: mainwindow.cpp:162 mainwindow.cpp:687
+#: mainwindow.cpp:149 mainwindow.cpp:681
 #, kde-format
 msgid "Full Screen"
 msgstr "Na celú obrazovku"
 
-#: mainwindow.cpp:169
+#: mainwindow.cpp:156
 #, kde-format
 msgid "View Only"
 msgstr "Len zobraziť"
 
-#: mainwindow.cpp:175
+#: mainwindow.cpp:162
 #, kde-format
 msgid "Clipboard Sharing"
 msgstr "Zdieľanie schránky"
 
-#: mainwindow.cpp:180
+#: mainwindow.cpp:167
 #, kde-format
 msgid "Disconnect"
 msgstr "Odpojiť"
 
-#: mainwindow.cpp:188
+#: mainwindow.cpp:175
 #, kde-format
 msgid "Show Local Cursor"
 msgstr "Zobraziť miestny kurzor"
 
-#: mainwindow.cpp:189
+#: mainwindow.cpp:176
 #, kde-format
 msgid "Local Cursor"
 msgstr "Miestny kurzor"
 
-#: mainwindow.cpp:195
+#: mainwindow.cpp:182
+#, kde-format
+msgid "Grab All Possible Keys"
+msgstr "Zachytiť všetky možné klávesy"
+
+#: mainwindow.cpp:183
+#, kde-format
+msgid "Grab Keys"
+msgstr "Zachytiť klávesy"
+
+#: mainwindow.cpp:189
 #, kde-format
 msgid "Scale Remote Screen to Fit Window Size"
 msgstr "Prispôsobiť vzdialenú obrazovku veľkosti okna"
 
-#: mainwindow.cpp:196
+#: mainwindow.cpp:190
 #, kde-format
 msgid "Scale"
 msgstr "Mierka"
 
-#: mainwindow.cpp:199
+#: mainwindow.cpp:193
 #, kde-format
 msgid "Scaling Factor"
 msgstr "Faktor zmeny mierky"
 
-#: mainwindow.cpp:210
+#: mainwindow.cpp:204
 #, kde-format
 msgid "Bookmarks"
 msgstr "Záložky"
 
-#: mainwindow.cpp:311
+#: mainwindow.cpp:297
 #, kde-format
 msgid ""
 "Unable to load connection data from “%1”.\n"
@@ -1420,12 +1334,12 @@ msgstr ""
 "Nie je možné načítať údaje pripojenia z „%1“.\n"
 "Súbor môže byť poškodený alebo je vo formáte, ktorý KRDC nepodporuje."
 
-#: mainwindow.cpp:312
+#: mainwindow.cpp:298
 #, kde-format
 msgid "Load failed"
 msgstr "Načítanie zlyhalo"
 
-#: mainwindow.cpp:319
+#: mainwindow.cpp:305
 #, kde-format
 msgid ""
 "“%1” is not a valid address.\n"
@@ -1436,12 +1350,12 @@ msgstr ""
 "\n"
 "Použite tvar [používateľ@]hostiteľ[:port], napríklad: user@192.168.1.10:5900"
 
-#: mainwindow.cpp:321
+#: mainwindow.cpp:307
 #, kde-format
 msgid "Malformed URL"
 msgstr "Neplatná adresa URL"
 
-#: mainwindow.cpp:351
+#: mainwindow.cpp:337
 #, kde-format
 msgid ""
 "No installed plugin can handle the “%1” protocol.\n"
@@ -1450,158 +1364,134 @@ msgstr ""
 "Protokol „%1“ nedokáže spracovať žiadny nainštalovaný plugin.\n"
 "Podporované protokoly: %2"
 
-#: mainwindow.cpp:577
+#: mainwindow.cpp:562
 #, kde-format
 msgid "Connecting to %1"
 msgstr "Pripája sa k %1"
 
-#: mainwindow.cpp:581
+#: mainwindow.cpp:566
 #, kde-format
 msgid "Authenticating at %1"
 msgstr "Overuje sa na %1"
 
-#: mainwindow.cpp:585
+#: mainwindow.cpp:570
 #, kde-format
 msgid "Preparing connection to %1"
 msgstr "Pripravuje sa pripojenie k %1"
 
-#: mainwindow.cpp:589
+#: mainwindow.cpp:574
 #, kde-format
 msgid "Connected to %1"
 msgstr "Pripojené k %1"
 
-#: mainwindow.cpp:595
-#, kde-format
-msgctxt "@info %1 is the name of a key, such as Right Ctrl"
-msgid ""
-"Keyboard shortcuts go to the remote desktop. Press %1 first to use one on "
-"this computer instead."
-msgstr ""
-
-#: mainwindow.cpp:723
+#: mainwindow.cpp:727
 #, kde-format
 msgid "Switch to Window Mode"
 msgstr "Prepnúť do režimu okna"
 
-#: mainwindow.cpp:724
+#: mainwindow.cpp:728
 #, kde-format
 msgid "Window Mode"
 msgstr "Režim okna"
 
-#: mainwindow.cpp:955
+#: mainwindow.cpp:961
 #, kde-format
 msgid "The entered address cannot be handled by this connection type."
 msgstr "Zadanú adresu nedokáže tento typ pripojenia spracovať."
 
-#: mainwindow.cpp:990
+#: mainwindow.cpp:996
 #, kde-format
 msgid "Connect"
 msgstr "Pripojiť"
 
-#: mainwindow.cpp:991
+#: mainwindow.cpp:997
 #, kde-format
 msgid "Rename"
 msgstr "Premenovať"
 
-#: mainwindow.cpp:992
+#: mainwindow.cpp:998
 #, kde-format
 msgid "Settings"
 msgstr "Nastavenia"
 
-#: mainwindow.cpp:993
+#: mainwindow.cpp:999
 #, kde-format
 msgid "Delete"
 msgstr "Odstrániť"
 
-#: mainwindow.cpp:996 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:1002 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "Záložky"
 
-#: mainwindow.cpp:996 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:1002 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "História"
 
-#: mainwindow.cpp:1008
+#: mainwindow.cpp:1014
 #, kde-format
 msgid "Rename %1"
 msgstr "Premenovať %1"
 
-#: mainwindow.cpp:1008
+#: mainwindow.cpp:1014
 #, kde-format
 msgid "Rename %1 to"
 msgstr "Premenovať %1 na"
 
-#: mainwindow.cpp:1015
+#: mainwindow.cpp:1021
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "Naozaj chcete odstrániť %1?"
 
-#: mainwindow.cpp:1015
+#: mainwindow.cpp:1021
 #, kde-format
 msgid "Delete %1"
 msgstr "Odstrániť %1"
 
-#: mainwindow.cpp:1039
+#: mainwindow.cpp:1045
 #, kde-format
 msgid "Add Bookmark"
 msgstr "Pridať záložku"
 
-#: mainwindow.cpp:1040
+#: mainwindow.cpp:1046
 #, kde-format
 msgid "Close Tab"
 msgstr "Zavrieť kartu"
 
-#: mainwindow.cpp:1087
-#, kde-format
-msgctxt "@info"
-msgid ""
-"Keyboard released: the next shortcut stays on this computer. Click the "
-"remote desktop to cancel."
-msgstr ""
-
-#: mainwindow.cpp:1089
-#, kde-format
-msgctxt "@info %1 is the name of a key, such as Right Ctrl"
-msgid ""
-"Keyboard released: the next shortcut stays on this computer. Press %1 or "
-"click the remote desktop to cancel."
-msgstr ""
-
-#: mainwindow.cpp:1156
+#: mainwindow.cpp:1163
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr "Minimalizovať okno celej obrazovky"
 
-#: mainwindow.cpp:1172
+#: mainwindow.cpp:1180
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "Prichytiť panel nástrojov"
 
-#: mainwindow.cpp:1291
+#: mainwindow.cpp:1300
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr "Naozaj chcete ukončiť klienta vzdialenej plochy pre KDE?"
 
-#: mainwindow.cpp:1292
+#: mainwindow.cpp:1301
 #, kde-format
 msgid "Confirm Quit"
 msgstr "Potvrdiť ukončenie"
 
-#: mainwindow.cpp:1447
+#: mainwindow.cpp:1455
 #, kde-format
 msgid "Connect to:"
 msgstr "Pripojiť sa k:"
 
-#: mainwindow.cpp:1451
+#: mainwindow.cpp:1459
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr "Sem zadajte údaje na pripojenie k adrese alebo filtrovaniu zoznamu."
 
-#: mainwindow.cpp:1462
+#: mainwindow.cpp:1470
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
@@ -1610,28 +1500,28 @@ msgstr ""
 "Sem zadajte IP adresu alebo DNS názov. Na zobrazenie spôsobov pripojenia "
 "vyčistite riadok."
 
-#: mainwindow.cpp:1465
+#: mainwindow.cpp:1473
 #, kde-format
 msgid "Goto Address"
 msgstr "Prejsť na adresu"
 
-#: mainwindow.cpp:1557
+#: mainwindow.cpp:1565
 #, kde-format
 msgid "Remote Desktops"
 msgstr "Vzdialené plochy"
 
-#: mainwindow.cpp:1586
+#: mainwindow.cpp:1594
 #, kde-format
 msgid "Filter"
 msgstr "Filter"
 
-#: mainwindow.cpp:1639
+#: mainwindow.cpp:1647
 #, kde-format
 msgctxt "@label"
 msgid "The remote computer may have shut down or restarted."
 msgstr "Vzdialený počítač sa možno vypol alebo reštartoval."
 
-#: mainwindow.cpp:1643
+#: mainwindow.cpp:1651
 #, kde-format
 msgctxt "@title connection error"
 msgid "Closed before the session started"
@@ -1874,10 +1764,9 @@ msgstr "Málo farieb (8 bitov)"
 #. i18n: ectx: property (text), widget (QLabel, localResourcesHeading)
 #: rdp/rdppreferences.ui:448 spice/spicepreferences.ui:242
 #: vnc/vncpreferences.ui:237
-#, fuzzy, kde-format
-#| msgid "Local Cursor"
+#, kde-format
 msgid "Local Resources"
-msgstr "Miestny kurzor"
+msgstr "Lokálne zdroje"
 
 #. i18n: ectx: property (text), widget (QLabel, soundLabel)
 #: rdp/rdppreferences.ui:454
@@ -1922,10 +1811,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:530
-#, fuzzy, kde-format
-#| msgid "On This Computer"
+#, kde-format
 msgid "Same as This Computer"
-msgstr "Na tomto počítači"
+msgstr "Rovnaké ako tento počítač"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:535
@@ -2151,24 +2039,23 @@ msgstr "Turecká (tr)"
 
 #. i18n: ectx: property (text), widget (QLabel, shareMediaLabel)
 #: rdp/rdppreferences.ui:723
-#, fuzzy, kde-format
-#| msgid "Share Media:"
+#, kde-format
 msgid "Shared folder:"
-msgstr "Zdieľať médium:"
+msgstr "Zdieľaný priečinok:"
 
 #. i18n: ectx: property (toolTip), widget (SharedFolderField, kcfg_ShareMedia)
 #: rdp/rdppreferences.ui:739
 #, kde-format
 msgid "A folder on this computer that the remote computer can read and write."
 msgstr ""
+"Priečinok na tomto počítači, ktorý môže vzdialený počítač čítať a zapisovať."
 
 #. i18n: ectx: property (text), widget (QLabel, shareSmartcardLabel)
 #: rdp/rdppreferences.ui:746
-#, fuzzy, kde-format
-#| msgid "Share Smartcard:"
+#, kde-format
 msgctxt "@label:listbox"
 msgid "Shared smartcard:"
-msgstr "Share Smartcard:"
+msgstr "Zdieľaná čipová karta:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, connectionTab)
 #: rdp/rdppreferences.ui:767
@@ -2178,34 +2065,31 @@ msgstr "Pripojenie"
 
 #. i18n: ectx: property (text), widget (QLabel, sessionLabel)
 #: rdp/rdppreferences.ui:773
-#, fuzzy, kde-format
-#| msgid "Sessions"
+#, kde-format
 msgid "Session:"
-msgstr "Sedenia"
+msgstr "Sedenie:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ConsoleMode)
 #: rdp/rdppreferences.ui:780
-#, fuzzy, kde-format
-#| msgid "Admin (or console) session"
+#, kde-format
 msgid "Connect to the console (admin) session"
-msgstr "Admin (or console) session"
+msgstr "Pripojiť sa ku konzolovému (admin) sedeniu"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_ConsoleMode)
 #: rdp/rdppreferences.ui:783
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "Connect to the network or VPN the remote computer is on."
+#, kde-format
 msgid ""
 "Connect to the session an administrator uses to manage the remote computer, "
 "instead of a new user session."
-msgstr "Pripojte sa k sieti alebo VPN, v ktorej je vzdialený počítač."
+msgstr ""
+"Pripojiť sa k sedeniu, ktoré správca používa na správu vzdialeného počítača, "
+"namiesto nového používateľského sedenia."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_PreventSessionLock)
 #: rdp/rdppreferences.ui:790
-#, fuzzy, kde-format
-#| msgid "Prevent remote session lock"
+#, kde-format
 msgid "Keep the remote session from locking"
-msgstr "Prevent remote session lock"
+msgstr "Zabrániť uzamknutiu vzdialeného sedenia"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_PreventSessionLock)
 #: rdp/rdppreferences.ui:793
@@ -2214,13 +2098,14 @@ msgid ""
 "Move the remote mouse pointer every few minutes so that the remote computer "
 "does not lock the session while it is idle."
 msgstr ""
+"Každých pár minút pohnúť vzdialeným ukazovateľom myši, aby vzdialený počítač "
+"neuzamkol nečinné sedenie."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseGateway)
 #: rdp/rdppreferences.ui:819
-#, fuzzy, kde-format
-#| msgid "Connect to a VNC Remote Desktop"
+#, kde-format
 msgid "Connect through a Remote Desktop Gateway"
-msgstr "Pripojiť sa na vzdialenú plochu VNC"
+msgstr "Pripojiť sa cez bránu vzdialenej plochy"
 
 #. i18n: ectx: property (text), widget (QLabel, gServerLabel)
 #. i18n: ectx: property (text), widget (QLabel, pHostLabel)
@@ -2277,11 +2162,9 @@ msgstr "RPC"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseProxy)
 #: rdp/rdppreferences.ui:905
-#, fuzzy, kde-format
-#| msgctxt "@info connection stage"
-#| msgid "Connecting to the server"
+#, kde-format
 msgid "Connect through a proxy server"
-msgstr "Pripája sa k serveru"
+msgstr "Pripojiť sa cez proxy server"
 
 #. i18n: ectx: property (text), widget (QLabel, protocolLabel)
 #: rdp/rdppreferences.ui:946
@@ -2303,10 +2186,9 @@ msgstr "Bezpečnosť"
 
 #. i18n: ectx: property (text), widget (QLabel, protocolsLabel)
 #: rdp/rdppreferences.ui:998
-#, fuzzy, kde-format
-#| msgid "Protocol:"
+#, kde-format
 msgid "Protocols:"
-msgstr "Protokol:"
+msgstr "Protokoly:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityNLA)
 #: rdp/rdppreferences.ui:1007
@@ -2316,13 +2198,10 @@ msgstr "LAN"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SecurityNLA)
 #: rdp/rdppreferences.ui:1010
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid ""
-#| "It accepted the connection, then closed it before the session started."
+#, kde-format
 msgid "Network Level Authentication: sign in before the remote session starts."
 msgstr ""
-"Server prijal pripojenie a potom ho zavrel ešte pred spustením sedenia."
+"Overenie na úrovni siete: prihlásenie pred spustením vzdialeného sedenia."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityTLS)
 #: rdp/rdppreferences.ui:1017
@@ -2332,11 +2211,10 @@ msgstr "TLS"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_SecurityTLS)
 #: rdp/rdppreferences.ui:1020
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "The session was disconnected from the remote computer."
+#, kde-format
 msgid "TLS encryption, signing in on the login screen of the remote computer."
-msgstr "Sedenie bolo odpojené od vzdialeného počítača."
+msgstr ""
+"Šifrovanie TLS, prihlásenie na prihlasovacej obrazovke vzdialeného počítača."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityRDP)
 #: rdp/rdppreferences.ui:1027
@@ -2349,6 +2227,7 @@ msgstr "RDP"
 #, kde-format
 msgid "Standard RDP security, the older encryption built into the protocol."
 msgstr ""
+"Štandardné zabezpečenie RDP, staršie šifrovanie zabudované do protokolu."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityEXT)
 #: rdp/rdppreferences.ui:1037
@@ -2363,6 +2242,8 @@ msgid ""
 "Extended Network Level Authentication, which also checks that the account "
 "may sign in before the session starts."
 msgstr ""
+"Rozšírené overenie na úrovni siete, ktoré pred spustením sedenia tiež overí, "
+"či sa účet smie prihlásiť."
 
 #. i18n: ectx: property (text), widget (QLabel, TlsSecLevelLabel)
 #: rdp/rdppreferences.ui:1062
@@ -2377,13 +2258,14 @@ msgid ""
 "The weakest TLS encryption to accept. A higher level may refuse to connect "
 "to older servers."
 msgstr ""
+"Najslabšie prijateľné šifrovanie TLS. Vyššia úroveň môže odmietnuť "
+"pripojenie k starším serverom."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:1082
-#, fuzzy, kde-format
-#| msgid "any"
+#, kde-format
 msgid "Any"
-msgstr "any"
+msgstr "Hocičo"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:1087
@@ -2417,8 +2299,7 @@ msgstr "256 bit"
 
 #. i18n: ectx: property (text), widget (QLabel, authPkgListLabel)
 #: rdp/rdppreferences.ui:1115
-#, fuzzy, kde-format
-#| msgid "Authentication Packages:"
+#, kde-format
 msgid "Authentication packages:"
 msgstr "Overovacie balíky:"
 
@@ -2460,7 +2341,7 @@ msgstr "U2U"
 #: rdp/rdppreferences.ui:1172
 #, kde-format
 msgid "Use the default Kerberos realm for unmapped domains"
-msgstr ""
+msgstr "Použiť predvolenú oblasť Kerberos pre nenamapované domény"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_UseDefaultKerberosRealm)
 #: rdp/rdppreferences.ui:1175
@@ -2471,6 +2352,10 @@ msgid ""
 "to that realm. Leave this unchecked if the default realm is unrelated to "
 "this connection."
 msgstr ""
+"Zapnite pre alternatívnu príponu prihlásenia, ktorá používa predvolenú "
+"oblasť z vašej konfigurácie Kerberos. Prihlasovacie mená plochy a brány sa "
+"môžu posielať do tejto oblasti. Nechajte nezaškrtnuté, ak predvolená oblasť "
+"s týmto pripojením nesúvisí."
 
 #: rdp/rdpsession.cpp:1404
 #, kde-format
@@ -2488,76 +2373,67 @@ msgstr ""
 "Issuer: %5\n"
 "Fingerprint: %6\n"
 
-#: rdp/rdpview.cpp:296
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Access to this system requires a username and password."
+#: rdp/rdpview.cpp:295
+#, kde-format
 msgctxt "@label"
 msgid "Access to the gateway and this system requires a username and password."
-msgstr "Prístup k systému vyžaduje heslo."
+msgstr "Prístup k bráne a tomuto systému vyžaduje používateľské meno a heslo."
 
-#: rdp/rdpview.cpp:297
+#: rdp/rdpview.cpp:296
 #, kde-format
 msgctxt "@label"
 msgid "Access to this system requires a username and password."
 msgstr "Prístup k systému vyžaduje heslo."
 
-#: rdp/rdpview.cpp:352
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Access to this system requires a username and password."
+#: rdp/rdpview.cpp:351
+#, kde-format
 msgctxt "@label %1 is a server address"
 msgid "Access to the gateway %1 requires a username and password."
-msgstr "Prístup k systému vyžaduje heslo."
+msgstr "Prístup k bráne %1 vyžaduje používateľské meno a heslo."
 
-#: rdp/rdpview.cpp:373
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "The certificate for this system is unknown. Do you wish to continue?"
+#: rdp/rdpview.cpp:372
+#, kde-format
 msgctxt "@label"
 msgid "The certificate for this gateway is unknown. Do you wish to continue?"
-msgstr "The certificate for this system is unknown. Do you wish to continue?"
+msgstr "Certifikát tejto brány je neznámy. Chcete pokračovať?"
 
-#: rdp/rdpview.cpp:374
+#: rdp/rdpview.cpp:373
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
 msgstr "The certificate for this system is unknown. Do you wish to continue?"
 
-#: rdp/rdpview.cpp:375
+#: rdp/rdpview.cpp:374
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Verify Certificate"
 msgstr "Verify Certificate"
 
-#: rdp/rdpview.cpp:380 rdp/rdpview.cpp:412
+#: rdp/rdpview.cpp:379 rdp/rdpview.cpp:411
 #, kde-format
 msgctxt "@label"
 msgid "Remember this certificate"
 msgstr "Remember this certificate"
 
-#: rdp/rdpview.cpp:405
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid ""
-#| "The certificate for this system has changed. Do you wish to continue?"
+#: rdp/rdpview.cpp:404
+#, kde-format
 msgctxt "@label"
 msgid "The certificate for this gateway has changed. Do you wish to continue?"
-msgstr "The certificate for this system has changed. Do you wish to continue?"
+msgstr "Certifikát tejto brány sa zmenil. Chcete pokračovať?"
 
-#: rdp/rdpview.cpp:406
+#: rdp/rdpview.cpp:405
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
 msgstr "The certificate for this system has changed. Do you wish to continue?"
 
-#: rdp/rdpview.cpp:407
+#: rdp/rdpview.cpp:406
 #, kde-format
 msgctxt "@title:dialog"
 msgid "Certificate has Changed"
 msgstr "Certificate has Changed"
 
-#: rdp/rdpview.cpp:410
+#: rdp/rdpview.cpp:409
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -2571,46 +2447,43 @@ msgstr ""
 "New Certificate:\n"
 "%2"
 
-#: rdp/rdpview.cpp:460
+#: rdp/rdpview.cpp:459
 #, kde-format
 msgctxt "@label"
 msgid "The credentials for “%1” were not accepted."
 msgstr "Prihlasovacie údaje pre „%1“ neboli prijaté."
 
-#: rdp/rdpview.cpp:463
+#: rdp/rdpview.cpp:462
 #, kde-format
 msgctxt "@info"
 msgid "Check the RD Gateway credentials in the host settings."
 msgstr "Skontrolujte prihlasovacie údaje brány RD v nastavení hostiteľa."
 
-#: rdp/rdpview.cpp:479
+#: rdp/rdpview.cpp:478
 #, kde-format
 msgctxt "@label"
 msgid "This account may not log in remotely."
 msgstr "Tento účet sa nesmie prihlasovať vzdialene."
 
-#: rdp/rdpview.cpp:480
+#: rdp/rdpview.cpp:479
 #, kde-format
 msgctxt "@label"
 msgid "“%1” may not log in remotely."
 msgstr "„%1“ sa nesmie prihlasovať vzdialene."
 
-#: rdp/rdpview.cpp:482 rdp/rdpview.cpp:575 rdp/rdpview.cpp:583
+#: rdp/rdpview.cpp:481 rdp/rdpview.cpp:574 rdp/rdpview.cpp:582
 #, kde-format
 msgctxt "@title connection error"
 msgid "Access denied"
 msgstr "Prístup zamietnutý"
 
-#: rdp/rdpview.cpp:485
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid ""
-#| "Check that no firewall on the remote computer rejects the connection."
+#: rdp/rdpview.cpp:484
+#, kde-format
 msgctxt "@label"
 msgid "The gateway or the remote computer refused this login."
-msgstr "Skontrolujte, či pripojenie neodmieta firewall na vzdialenom počítači."
+msgstr "Brána alebo vzdialený počítač toto prihlásenie odmietli."
 
-#: rdp/rdpview.cpp:491
+#: rdp/rdpview.cpp:490
 #, kde-format
 msgctxt "@info"
 msgid "Check whether the account is locked, disabled or expired."
@@ -2618,7 +2491,7 @@ msgstr ""
 "Skontrolujte, či účet nie je zamknutý, zakázaný alebo či nevypršala jeho "
 "platnosť."
 
-#: rdp/rdpview.cpp:493
+#: rdp/rdpview.cpp:492
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2628,19 +2501,19 @@ msgstr ""
 "Požiadajte správcu vzdialeného počítača, aby účet pridal do skupiny "
 "Používatelia vzdialenej pracovnej plochy, alebo sa prihláste iným účtom."
 
-#: rdp/rdpview.cpp:501
+#: rdp/rdpview.cpp:500
 #, kde-format
 msgctxt "@label"
 msgid "The password must be changed before it can be used to log in remotely."
 msgstr "Heslo treba zmeniť, kým ho bude možné použiť na vzdialené prihlásenie."
 
-#: rdp/rdpview.cpp:502
+#: rdp/rdpview.cpp:501
 #, kde-format
 msgctxt "@title connection error"
 msgid "Password expired"
 msgstr "Platnosť hesla vypršala"
 
-#: rdp/rdpview.cpp:504
+#: rdp/rdpview.cpp:503
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2650,55 +2523,57 @@ msgstr ""
 "Zmeňte heslo miestnym prihlásením na vzdialenom počítači alebo požiadajte "
 "jeho správcu o obnovenie."
 
-#: rdp/rdpview.cpp:509
+#: rdp/rdpview.cpp:508
 #, kde-format
 msgctxt "@label"
 msgid "The Kerberos domain controller could not be reached."
 msgstr "Radič domény Kerberos nie je dostupný."
 
-#: rdp/rdpview.cpp:511
+#: rdp/rdpview.cpp:510
 #, kde-format
 msgctxt "@info"
 msgid "Check the domain you entered when logging in."
 msgstr "Skontrolujte doménu, ktorú ste zadali pri prihlásení."
 
-#: rdp/rdpview.cpp:512
+#: rdp/rdpview.cpp:511
 #, kde-format
 msgctxt "@info"
 msgid "Connect to the network or VPN of the domain."
 msgstr "Pripojte sa k sieti alebo VPN domény."
 
-#: rdp/rdpview.cpp:517 spice/spiceview.cpp:964 vnc/vncview.cpp:298
+#: rdp/rdpview.cpp:516 spice/spiceview.cpp:964 vnc/vncview.cpp:298
 #, kde-format
 msgctxt "@label"
 msgid "No IP address was found for this name."
 msgstr "Pre tento názov sa nenašla žiadna IP adresa."
 
-#: rdp/rdpview.cpp:528
+#: rdp/rdpview.cpp:527
 #, kde-format
 msgctxt "@label"
 msgid "The server and KRDC could not agree on a security protocol."
 msgstr "Server a KRDC sa nedokázali dohodnúť na bezpečnostnom protokole."
 
-#: rdp/rdpview.cpp:531
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "The server and KRDC could not agree on a security protocol."
+#: rdp/rdpview.cpp:530
+#, kde-format
 msgctxt "@label"
 msgid ""
 "Logging in to the gateway failed, or the server and KRDC could not agree on "
 "a security protocol."
-msgstr "Server a KRDC sa nedokázali dohodnúť na bezpečnostnom protokole."
+msgstr ""
+"Prihlásenie k bráne zlyhalo alebo sa server a KRDC nedokázali dohodnúť na "
+"bezpečnostnom protokole."
 
-#: rdp/rdpview.cpp:535
+#: rdp/rdpview.cpp:534
 #, kde-format
 msgctxt "@info"
 msgid ""
 "NTLM is turned off for this host. Turn it on in the host settings unless the "
 "domain controller can be reached."
 msgstr ""
+"NTLM je pre tohto hostiteľa vypnuté. Zapnite ho v nastaveniach hostiteľa, "
+"pokiaľ nie je dostupný radič domény."
 
-#: rdp/rdpview.cpp:538
+#: rdp/rdpview.cpp:537
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2708,19 +2583,19 @@ msgstr ""
 "Nastavte úroveň zabezpečenia TLS v nastavení hostiteľa na „Akákoľvek“. "
 "Server nemusí podporovať vybranú úroveň."
 
-#: rdp/rdpview.cpp:542
+#: rdp/rdpview.cpp:541
 #, kde-format
 msgctxt "@label"
 msgid "The server requires Network Level Authentication (NLA)."
 msgstr "Server vyžaduje overenie na úrovni siete (NLA)."
 
-#: rdp/rdpview.cpp:543
+#: rdp/rdpview.cpp:542
 #, kde-format
 msgctxt "@info"
 msgid "Enable NLA in the security settings for this host."
 msgstr "Povoľte NLA v nastavení zabezpečenia tohto hostiteľa."
 
-#: rdp/rdpview.cpp:561
+#: rdp/rdpview.cpp:560
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2730,13 +2605,13 @@ msgstr ""
 "Skontrolujte nastavenie brány RD pre tohto hostiteľa. Brána „%1“ môže byť "
 "nedostupná alebo pripojenie odmietať."
 
-#: rdp/rdpview.cpp:568
+#: rdp/rdpview.cpp:567
 #, kde-format
 msgctxt "@label"
 msgid "The remote computer did not finish starting the session in time."
 msgstr "Vzdialený počítač nestihol včas dokončiť spustenie sedenia."
 
-#: rdp/rdpview.cpp:569
+#: rdp/rdpview.cpp:568
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2746,119 +2621,117 @@ msgstr ""
 "Vzdialený počítač sa možno ešte spúšťa alebo je silne zaťažený. Počkajte "
 "minútu a potom sa pripojte znova."
 
-#: rdp/rdpview.cpp:574
+#: rdp/rdpview.cpp:573
 #, kde-format
 msgctxt "@label"
 msgid "The gateway does not allow this account to connect to “%1”."
-msgstr ""
+msgstr "Brána nepovoľuje tomuto účtu pripojiť sa k „%1“."
 
-#: rdp/rdpview.cpp:577
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "Try the IP address of the computer instead of its name."
+#: rdp/rdpview.cpp:576
+#, kde-format
 msgctxt "@info"
 msgid ""
 "Try the full name of the computer. The gateway may only know it by that name."
-msgstr "Skúste namiesto názvu počítača jeho IP adresu."
+msgstr ""
+"Skúste úplný názov počítača. Brána ho môže poznať iba pod týmto názvom."
 
-#: rdp/rdpview.cpp:578
+#: rdp/rdpview.cpp:577
 #, kde-format
 msgctxt "@info"
 msgid ""
 "Ask the administrator of the gateway to allow this account and computer in "
 "its resource authorization policy."
 msgstr ""
+"Požiadajte správcu brány, aby tento účet a počítač povolil v politike "
+"autorizácie prostriedkov."
 
-#: rdp/rdpview.cpp:582
+#: rdp/rdpview.cpp:581
 #, kde-format
 msgctxt "@label"
 msgid "The gateway does not allow this device to connect."
-msgstr ""
+msgstr "Brána nepovoľuje pripojenie tohto zariadenia."
 
-#: rdp/rdpview.cpp:584
+#: rdp/rdpview.cpp:583
 #, kde-format
 msgctxt "@info"
 msgid ""
 "Ask the administrator of the gateway to check its connection authorization "
 "policy."
 msgstr ""
+"Požiadajte správcu brány, aby skontroloval politiku autorizácie pripojení."
 
-#: rdp/rdpview.cpp:587
+#: rdp/rdpview.cpp:586
 #, kde-format
 msgctxt "@label"
 msgid "The gateway could not reach “%1”."
-msgstr ""
+msgstr "Brána nedokázala dosiahnuť „%1“."
 
-#: rdp/rdpview.cpp:589
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid ""
-#| "Make sure the remote computer is turned on, awake and connected to the "
-#| "network."
+#: rdp/rdpview.cpp:588
+#, kde-format
 msgctxt "@info"
 msgid ""
 "Make sure the remote computer is running, and that the gateway can reach it "
 "by this name."
 msgstr ""
-"Uistite sa, že vzdialený počítač je zapnutý, nie je v režime spánku a je "
-"pripojený k sieti."
+"Uistite sa, že vzdialený počítač beží a že ho brána dokáže pod týmto názvom "
+"dosiahnuť."
 
-#: rdp/rdpview.cpp:593
+#: rdp/rdpview.cpp:592
 #, kde-format
 msgctxt "@label"
 msgid "It accepted the connection, then refused to start a session."
 msgstr "Server prijal pripojenie a potom odmietol spustiť sedenie."
 
-#: rdp/rdpview.cpp:594
+#: rdp/rdpview.cpp:593
 #, kde-format
 msgctxt "@title connection error"
 msgid "Session refused"
 msgstr "Sedenie odmietnuté"
 
-#: rdp/rdpview.cpp:598
+#: rdp/rdpview.cpp:597
 #, kde-format
 msgctxt "@label"
 msgid "The server did not accept the options selected for this host."
 msgstr "Server neprijal možnosti vybrané pre tohto hostiteľa."
 
-#: rdp/rdpview.cpp:601
+#: rdp/rdpview.cpp:600
 #, kde-format
 msgctxt "@label"
 msgid "An administrator or another program disconnected this session."
 msgstr "Toto sedenie odpojil správca alebo iný program."
 
-#: rdp/rdpview.cpp:604
+#: rdp/rdpview.cpp:603
 #, kde-format
 msgctxt "@label"
 msgid "An administrator signed this session out."
 msgstr "Správca odhlásil toto sedenie."
 
-#: rdp/rdpview.cpp:607
+#: rdp/rdpview.cpp:606
 #, kde-format
 msgctxt "@label"
 msgid "The session was disconnected from the remote computer."
 msgstr "Sedenie bolo odpojené od vzdialeného počítača."
 
-#: rdp/rdpview.cpp:614
+#: rdp/rdpview.cpp:613
 #, kde-format
 msgctxt "@label"
 msgid "Disconnected because someone else connected to this session."
 msgstr "Odpojené, pretože sa k tomuto sedeniu pripojil niekto iný."
 
-#: rdp/rdpview.cpp:615
+#: rdp/rdpview.cpp:614
 #, kde-format
 msgctxt "@info"
 msgid "Reconnect to take the session back. This disconnects the other user."
 msgstr ""
 "Opätovným pripojením získate sedenie späť. Tým sa odpojí druhý používateľ."
 
-#: rdp/rdpview.cpp:618
+#: rdp/rdpview.cpp:617
 #, kde-format
 msgctxt "@label"
 msgid "The session was closed after being idle for too long."
 msgstr "Sedenie bolo zavreté po príliš dlhej nečinnosti."
 
-#: rdp/rdpview.cpp:619
+#: rdp/rdpview.cpp:618
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2868,13 +2741,13 @@ msgstr ""
 "Ak chcete pokračovať, pripojte sa znova. Limit nečinnosti nastavuje správca "
 "servera."
 
-#: rdp/rdpview.cpp:633
+#: rdp/rdpview.cpp:632
 #, kde-format
 msgctxt "@label"
 msgid "The remote computer reported a problem while logging in."
 msgstr "Vzdialený počítač pri prihlasovaní hlásil problém."
 
-#: rdp/rdpview.cpp:634
+#: rdp/rdpview.cpp:633
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -2884,7 +2757,7 @@ msgstr ""
 "Skontrolujte, či sa tento používateľ môže prihlásiť na vzdialený počítač a "
 "či sedenie nie je obsadené."
 
-#: rdp/rdpview.cpp:1022
+#: rdp/rdpview.cpp:1007
 #, kde-format
 msgctxt "@title:window"
 msgid "KRDC – Screen %1"
@@ -2899,14 +2772,13 @@ msgstr "Pripojiť sa k vzdialenej ploche systému Windows (RDP)"
 #, kde-format
 msgctxt "@info %1 is a server address"
 msgid "This file requires a gateway, but its address “%1” is not valid."
-msgstr ""
+msgstr "Tento súbor vyžaduje bránu, ale jej adresa „%1“ nie je platná."
 
 #: rdp/rdpviewfactory.cpp:194
-#, fuzzy, kde-format
-#| msgid "Gateway"
+#, kde-format
 msgctxt "@title:window"
 msgid "Invalid Gateway"
-msgstr "Brána"
+msgstr "Neplatná brána"
 
 #: rdp/rdpviewfactory.cpp:203
 #, kde-format
@@ -2915,12 +2787,14 @@ msgid ""
 "This file connects through the gateway “%1”, which could capture your login "
 "details. Continue only if you trust this file."
 msgstr ""
+"Tento súbor sa pripája cez bránu „%1“, ktorá by mohla zachytiť vaše "
+"prihlasovacie údaje. Pokračujte, iba ak tomuto súboru dôverujete."
 
 #: rdp/rdpviewfactory.cpp:206
 #, kde-format
 msgctxt "@title:window"
 msgid "Use Gateway from File?"
-msgstr ""
+msgstr "Použiť bránu zo súboru?"
 
 #: rdp/rdpviewfactory.cpp:280
 #, kde-format
@@ -2937,18 +2811,16 @@ msgstr ""
 "(hostiteľ:port)</i></html>"
 
 #: rdp/sharedfolderfield.cpp:18
-#, fuzzy, kde-format
-#| msgctxt "@info:status connection step"
-#| msgid "Not started"
+#, kde-format
 msgctxt "@item:inlistbox shared folder"
 msgid "Not shared"
-msgstr "Nezačaté"
+msgstr "Nezdieľané"
 
 #: rdp/sharedfolderfield.cpp:20
 #, kde-format
 msgctxt "@item:inlistbox shared folder"
 msgid "Removable drives"
-msgstr ""
+msgstr "Vymeniteľné jednotky"
 
 #: rdp/sharedfolderfield.cpp:22
 #, kde-format
@@ -2957,62 +2829,62 @@ msgid ""
 "USB drives and memory cards, including ones plugged in during the session. "
 "Network shares are not included."
 msgstr ""
+"USB jednotky a pamäťové karty vrátane tých, ktoré sa pripoja počas sedenia. "
+"Sieťové zdieľania nie sú zahrnuté."
 
 #: rdp/sharedfolderfield.cpp:33
 #, kde-format
 msgctxt "@item:inlistbox shared folder"
 msgid "Downloads"
-msgstr ""
+msgstr "Stiahnuté"
 
 #: rdp/sharedfolderfield.cpp:34
 #, kde-format
 msgctxt "@item:inlistbox shared folder"
 msgid "Documents"
-msgstr ""
+msgstr "Dokumenty"
 
 #: rdp/sharedfolderfield.cpp:36
 #, kde-format
 msgctxt "@item:inlistbox shared folder"
 msgid "Other Folder…"
-msgstr ""
+msgstr "Iný priečinok…"
 
 #: rdp/sharedfolderfield.cpp:65
 #, kde-format
 msgctxt "@item:inlistbox shared folder, %1 a stored value"
 msgid "%1 (not supported)"
-msgstr ""
+msgstr "%1 (nepodporované)"
 
 #: rdp/sharedfolderfield.cpp:69
 #, kde-format
 msgctxt "@item:inlistbox shared folder, %1 its name, %2 its path"
 msgid "%1 (%2)"
-msgstr ""
+msgstr "%1 (%2)"
 
 #: rdp/sharedfolderfield.cpp:102
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose Shared Folder"
-msgstr ""
+msgstr "Vybrať zdieľaný priečinok"
 
 #: rdp/smartcardreaderfield.cpp:33
 #, kde-format
 msgctxt "@item:inlistbox smartcard reader, %1 is its saved name"
 msgid "%1 (not detected)"
-msgstr ""
+msgstr "%1 (nezistená)"
 
 #: rdp/smartcardreaderfield.cpp:50
-#, fuzzy, kde-format
-#| msgctxt "@info:status connection step"
-#| msgid "Not started"
+#, kde-format
 msgctxt "@item:inlistbox smartcard reader"
 msgid "Not shared"
-msgstr "Nezačaté"
+msgstr "Nezdieľané"
 
 #: rdp/smartcardreaderfield.cpp:51
 #, kde-format
 msgctxt "@item:inlistbox smartcard reader"
 msgid "All readers"
-msgstr ""
+msgstr "Všetky čítačky"
 
 #: remotedesktopsmodel.cpp:112
 #, kde-format
@@ -3116,19 +2988,19 @@ msgstr "Prehrávať zvuk zo vzdialeného hostiteľa na tomto počítači."
 #: spice/spicepreferences.ui:295 vnc/vncpreferences.ui:275
 #, kde-format
 msgid "Network"
-msgstr ""
+msgstr "Sieť"
 
 #: spice/spiceview.cpp:90
 #, kde-format
 msgctxt "@label"
 msgid "This connection needs its connection file."
-msgstr ""
+msgstr "Toto pripojenie potrebuje svoj súbor pripojenia."
 
 #: spice/spiceview.cpp:91
 #, kde-format
 msgctxt "@info"
 msgid "Open a new .vv file for this virtual machine."
-msgstr ""
+msgstr "Otvorte nový súbor .vv pre tento virtuálny stroj."
 
 #: spice/spiceview.cpp:883
 #, kde-format
@@ -3137,6 +3009,8 @@ msgid ""
 "The server rejected the password in the connection file, which may have "
 "expired. Open a new file, or enter the password."
 msgstr ""
+"Server odmietol heslo zo súboru pripojenia, ktorého platnosť mohla vypršať. "
+"Otvorte nový súbor alebo zadajte heslo."
 
 #: spice/spiceview.cpp:885
 #, kde-format
@@ -3192,12 +3066,14 @@ msgid ""
 "This file connects through the proxy “%1”, which could intercept the "
 "session. Continue only if you trust this file."
 msgstr ""
+"Tento súbor sa pripája cez proxy „%1“, ktorá by mohla zachytiť sedenie. "
+"Pokračujte, iba ak tomuto súboru dôverujete."
 
 #: spice/spiceviewfactory.cpp:176
 #, kde-format
 msgctxt "@title:window"
 msgid "Use Proxy from File?"
-msgstr ""
+msgstr "Použiť proxy zo súboru?"
 
 #: spice/spiceviewfactory.cpp:203
 #, kde-format
@@ -3407,21 +3283,99 @@ msgstr ""
 "<html>Tu zadajte adresu.<br /><i>Príklad: vncserver:1 (hostiteľ:port / "
 "obrazovka)</i></html>"
 
+#~ msgid "Keyboard"
+#~ msgstr "Klávesnica"
+
 #~ msgid ""
-#~ "Automatically grab all keys when entering fullscreen mode and release "
-#~ "them when leaving fullscreen"
+#~ "While you work in a remote desktop, the shortcuts you press are sent to "
+#~ "it instead of KRDC."
 #~ msgstr ""
-#~ "Automaticky zachytiť všetky klávesy pri vstupe do režimu celej obrazovky "
-#~ "a uvoľniť ich pri odchode z celej obrazovky"
+#~ "Kým pracujete vo vzdialenej ploche, stlačené skratky sa posielajú jej, "
+#~ "nie KRDC."
 
-#~ msgid "Grab all keys when entering fullscreen"
-#~ msgstr "Zachytiť všetky klávesy pri vstupe do celej obrazovky"
+#~ msgid "Send system shortcuts like Alt+Tab:"
+#~ msgstr "Posielať systémové skratky ako Alt+Tab:"
 
-#~ msgid "Grab All Possible Keys"
-#~ msgstr "Zachytiť všetky možné klávesy"
+#~ msgid ""
+#~ "Whether shortcuts of this computer's desktop, such as Alt+Tab or the Meta "
+#~ "key, are sent to the remote desktop as well. Some shortcuts may remain "
+#~ "reserved by this computer."
+#~ msgstr ""
+#~ "Či sa na vzdialenú plochu posielajú aj skratky pracovnej plochy tohto "
+#~ "počítača, ako Alt+Tab alebo kláves Meta. Niektoré skratky môžu zostať "
+#~ "vyhradené pre tento počítač."
 
-#~ msgid "Grab Keys"
-#~ msgstr "Zachytiť klávesy"
+#~ msgid "Never"
+#~ msgstr "Nikdy"
+
+#~ msgid "Only in full screen mode"
+#~ msgstr "Iba v režime celej obrazovky"
+
+#~ msgid "Always"
+#~ msgstr "Vždy"
+
+#~ msgid "Host key:"
+#~ msgstr "Kláves hostiteľa:"
+
+#~ msgid ""
+#~ "Press and release this key on its own to release the keyboard: the next "
+#~ "shortcut is then handled by KRDC or this computer. Held together with "
+#~ "other keys, it works as usual in the remote desktop."
+#~ msgstr ""
+#~ "Stlačením a uvoľnením samotného tohto klávesu uvoľníte klávesnicu: "
+#~ "nasledujúcu skratku potom spracuje KRDC alebo tento počítač. Ak ho držíte "
+#~ "spolu s inými klávesmi, funguje vo vzdialenej ploche ako zvyčajne."
+
+#~ msgid "Right Ctrl"
+#~ msgstr "Pravý Ctrl"
+
+#~ msgid "Right Alt"
+#~ msgstr "Pravý Alt"
+
+#~ msgid "Right Meta"
+#~ msgstr "Pravý Meta"
+
+#~ msgctxt "@item:inlistbox no host key"
+#~ msgid "None"
+#~ msgstr "Žiadny"
+
+#~ msgid ""
+#~ "When shortcuts of the local desktop, such as Alt+Tab, are sent to the "
+#~ "remote desktop instead."
+#~ msgstr ""
+#~ "Kedy sa skratky lokálnej pracovnej plochy, ako Alt+Tab, namiesto toho "
+#~ "posielajú na vzdialenú plochu."
+
+#~ msgid ""
+#~ "Key that releases the keyboard from the remote desktop when pressed on "
+#~ "its own."
+#~ msgstr ""
+#~ "Kláves, ktorý po samostatnom stlačení uvoľní klávesnicu zo vzdialenej "
+#~ "plochy."
+
+#~ msgctxt "@info %1 is the name of a key, such as Right Ctrl"
+#~ msgid ""
+#~ "Keyboard shortcuts go to the remote desktop. Press %1 first to use one on "
+#~ "this computer instead."
+#~ msgstr ""
+#~ "Klávesové skratky idú na vzdialenú plochu. Ak chcete jednu použiť na "
+#~ "tomto počítači, najprv stlačte %1."
+
+#~ msgctxt "@info"
+#~ msgid ""
+#~ "Keyboard released: the next shortcut stays on this computer. Click the "
+#~ "remote desktop to cancel."
+#~ msgstr ""
+#~ "Klávesnica uvoľnená: nasledujúca skratka zostane na tomto počítači. "
+#~ "Kliknutím na vzdialenú plochu to zrušíte."
+
+#~ msgctxt "@info %1 is the name of a key, such as Right Ctrl"
+#~ msgid ""
+#~ "Keyboard released: the next shortcut stays on this computer. Press %1 or "
+#~ "click the remote desktop to cancel."
+#~ msgstr ""
+#~ "Klávesnica uvoľnená: nasledujúca skratka zostane na tomto počítači. "
+#~ "Zrušíte to stlačením %1 alebo kliknutím na vzdialenú plochu."
 
 #~ msgid "Remember password"
 #~ msgstr "Zapamätať si heslo (KWallet)"
