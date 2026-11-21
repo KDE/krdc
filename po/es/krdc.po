@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-20 01:10+0000\n"
-"PO-Revision-Date: 2026-11-17 19:44+0100\n"
+"PO-Revision-Date: 2026-11-19 14:00+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -141,22 +141,22 @@ msgstr "vnc"
 
 #. i18n: ectx: property (title), widget (QGroupBox, keyboardGroupBox)
 #: config/general.ui:147
-#, fuzzy, kde-format
-#| msgid "&Keyboard layout:"
+#, kde-format
 msgid "Keyboard"
-msgstr "&Distribución de teclado:"
+msgstr "Teclado"
 
 #. i18n: ectx: property (text), widget (QLabel, keyboardLabel)
 #: config/general.ui:153
 #, kde-format
 msgid "Shortcuts are sent to the remote desktop while it has focus."
 msgstr ""
+"Los atajos de teclado se envían al escritorio remoto mientras tenga el foco."
 
 #. i18n: ectx: property (text), widget (QLabel, systemShortcutsLabel)
 #: config/general.ui:163
 #, kde-format
 msgid "Send system shortcuts like Alt+Tab:"
-msgstr ""
+msgstr "Enviar atajos del sistema, como Alt+Tab:"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, kcfg_SystemShortcuts)
 #: config/general.ui:173
@@ -165,31 +165,32 @@ msgid ""
 "Also send desktop shortcuts such as Alt+Tab or Meta. Your system may still "
 "keep some for itself."
 msgstr ""
+"Enviar también atajos de teclado del escritorio, como Alt+Tab o Meta. Su "
+"sistema puede reservarse algunos para sí mismo."
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_SystemShortcuts)
 #: config/general.ui:177
 #, kde-format
 msgid "Never"
-msgstr ""
+msgstr "Nunca"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_SystemShortcuts)
 #: config/general.ui:182
-#, fuzzy, kde-format
-#| msgid "Switch to Full Screen Mode"
+#, kde-format
 msgid "Only in full screen mode"
-msgstr "Cambiar al modo de pantalla completa"
+msgstr "Solo en el modo de pantalla completa"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_SystemShortcuts)
 #: config/general.ui:187
 #, kde-format
 msgid "Always"
-msgstr ""
+msgstr "Siempre"
 
 #. i18n: ectx: property (text), widget (QLabel, hostKeyLabel)
 #: config/general.ui:195
 #, kde-format
 msgid "Host key:"
-msgstr ""
+msgstr "Tecla del anfitrión:"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, kcfg_HostKey)
 #: config/general.ui:205
@@ -198,36 +199,33 @@ msgid ""
 "Press this key to use the next shortcut on this computer. Combined with "
 "other keys it works as normal."
 msgstr ""
+"Pulse esta tecla para usar el siguiente atajo de teclado en esta máquina. "
+"Combinada con otras teclas funciona de forma normal."
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_HostKey)
 #: config/general.ui:209 core/remoteview.cpp:53
-#, fuzzy, kde-format
-#| msgid "Right"
+#, kde-format
 msgid "Right Ctrl"
-msgstr "Derecha"
+msgstr "Ctrl derecha"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_HostKey)
 #: config/general.ui:214 core/remoteview.cpp:54
-#, fuzzy, kde-format
-#| msgid "Right"
+#, kde-format
 msgid "Right Alt"
-msgstr "Derecha"
+msgstr "Alt derecha"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_HostKey)
 #: config/general.ui:219 core/remoteview.cpp:55
-#, fuzzy, kde-format
-#| msgid "Right"
+#, kde-format
 msgid "Right Meta"
-msgstr "Derecha"
+msgstr "Meta derecha"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_HostKey)
 #: config/general.ui:224
-#, fuzzy, kde-format
-#| msgctxt "Where each displayed link comes from"
-#| msgid "None"
+#, kde-format
 msgctxt "@item:inlistbox no host key"
 msgid "None"
-msgstr "Ninguno"
+msgstr "Ninguna"
 
 #. i18n: ectx: property (title), widget (QGroupBox, tabGroupBox)
 #: config/general.ui:235
@@ -1057,12 +1055,14 @@ msgstr "Sesiones"
 #, kde-format
 msgid "When desktop shortcuts such as Alt+Tab are sent to the remote desktop."
 msgstr ""
+"Indica cuándo se envían al escritorio remoto los atajos de teclado del "
+"escritorio, como Alt+Tab."
 
 #. i18n: ectx: label, entry (HostKey), group (General)
 #: core/krdc.kcfg:40
 #, kde-format
 msgid "Key that releases the keyboard from the remote desktop."
-msgstr ""
+msgstr "Tecla que libera el teclado del escritorio remoto."
 
 #: core/remoteview.cpp:851
 #, kde-format
@@ -1477,15 +1477,13 @@ msgid "Connected to %1"
 msgstr "Conectado a %1"
 
 #: mainwindow.cpp:603
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "Check that remote desktop sharing is enabled on the remote computer."
+#, kde-format
 msgctxt "@info %1 is the name of a key, such as Right Ctrl"
 msgid ""
 "Shortcuts go to the remote desktop. Press %1 to use one on this computer."
 msgstr ""
-"Comprueba que el uso compartido de escritorio remoto está activado en el "
-"equipo remoto."
+"Los atajos de teclado se envían al escritorio remoto. Pulse %1 para usar uno "
+"en este equipo."
 
 #: mainwindow.cpp:732
 #, kde-format
@@ -1570,6 +1568,8 @@ msgstr "Cerrar pestaña"
 msgctxt "@info"
 msgid "Keyboard released for one shortcut. Click the remote desktop to cancel."
 msgstr ""
+"Teclado liberado para un atajo de teclado. Haga clic en el escritorio remoto "
+"para cancelar."
 
 #: mainwindow.cpp:1098
 #, kde-format
@@ -1578,6 +1578,8 @@ msgid ""
 "Keyboard released for one shortcut. Press %1 or click the remote desktop to "
 "cancel."
 msgstr ""
+"Teclado liberado para un atajo de teclado. Pulse %1 o haga clic en el "
+"escritorio remoto para cancelar."
 
 #: mainwindow.cpp:1179
 #, kde-format
@@ -3455,19 +3457,3 @@ msgid ""
 msgstr ""
 "<html>Introduzca la dirección aquí.<br /><i>Ejemplo: servidorvnc:1 (máquina:"
 "puerto / pantalla)</i></html>"
-
-#~ msgid ""
-#~ "Automatically grab all keys when entering fullscreen mode and release "
-#~ "them when leaving fullscreen"
-#~ msgstr ""
-#~ "Capturar todas las pulsaciones automáticamente al entrar en el modo de "
-#~ "pantalla completa y liberarlas al salir de él"
-
-#~ msgid "Grab all keys when entering fullscreen"
-#~ msgstr "Capturar todas las pulsaciones al cambiar a pantalla completa"
-
-#~ msgid "Grab All Possible Keys"
-#~ msgstr "Capturar todas las pulsaciones posibles"
-
-#~ msgid "Grab Keys"
-#~ msgstr "Capturar pulsaciones"

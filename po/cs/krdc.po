@@ -136,22 +136,23 @@ msgstr "vnc"
 
 #. i18n: ectx: property (title), widget (QGroupBox, keyboardGroupBox)
 #: config/general.ui:147
-#, fuzzy, kde-format
-#| msgid "&Keyboard layout:"
+#, kde-format
 msgid "Keyboard"
-msgstr "&Rozvržení klávesnice:"
+msgstr "Klávesnice"
 
 #. i18n: ectx: property (text), widget (QLabel, keyboardLabel)
 #: config/general.ui:153
 #, kde-format
 msgid "Shortcuts are sent to the remote desktop while it has focus."
 msgstr ""
+"Klávesové zkratky se odesílají na vzdálenou plochu, pokud má aktivní "
+"zaměření."
 
 #. i18n: ectx: property (text), widget (QLabel, systemShortcutsLabel)
 #: config/general.ui:163
 #, kde-format
 msgid "Send system shortcuts like Alt+Tab:"
-msgstr ""
+msgstr "Odesílat systémové klávesové zkratky, jako je Alt+Tab:"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, kcfg_SystemShortcuts)
 #: config/general.ui:173
@@ -160,31 +161,32 @@ msgid ""
 "Also send desktop shortcuts such as Alt+Tab or Meta. Your system may still "
 "keep some for itself."
 msgstr ""
+"Odesílat také klávesové zkratky na ploše, jako jsou Alt+Tab nebo Meta. Váš "
+"systém si některé z nich možná ponechá pro vlastní potřebu."
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_SystemShortcuts)
 #: config/general.ui:177
 #, kde-format
 msgid "Never"
-msgstr ""
+msgstr "Nikdy"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_SystemShortcuts)
 #: config/general.ui:182
-#, fuzzy, kde-format
-#| msgid "Switch to Full Screen Mode"
+#, kde-format
 msgid "Only in full screen mode"
-msgstr "Přepnout do režimu na celou obrazovku"
+msgstr "Pouze v režimu celé obrazovky"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_SystemShortcuts)
 #: config/general.ui:187
 #, kde-format
 msgid "Always"
-msgstr ""
+msgstr "Vždy"
 
 #. i18n: ectx: property (text), widget (QLabel, hostKeyLabel)
 #: config/general.ui:195
 #, kde-format
 msgid "Host key:"
-msgstr ""
+msgstr "Klíč hostitele:"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, kcfg_HostKey)
 #: config/general.ui:205
@@ -193,36 +195,34 @@ msgid ""
 "Press this key to use the next shortcut on this computer. Combined with "
 "other keys it works as normal."
 msgstr ""
+"Stisknutím této klávesy použijete další klávesovou zkratku na tomto "
+"počítači. V kombinaci s jinými klávesami funguje jako obvykle."
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_HostKey)
 #: config/general.ui:209 core/remoteview.cpp:53
-#, fuzzy, kde-format
-#| msgid "Right"
+#, kde-format
 msgid "Right Ctrl"
-msgstr "Vpravo"
+msgstr "Pravý Ctrl"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_HostKey)
 #: config/general.ui:214 core/remoteview.cpp:54
-#, fuzzy, kde-format
-#| msgid "Right"
+#, kde-format
 msgid "Right Alt"
-msgstr "Vpravo"
+msgstr "Pravý Alt"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_HostKey)
 #: config/general.ui:219 core/remoteview.cpp:55
-#, fuzzy, kde-format
-#| msgid "Right"
+#, kde-format
 msgid "Right Meta"
-msgstr "Vpravo"
+msgstr "Pravá Meta"
 
+# žádné parametry funkce v inspektoru funkcí
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_HostKey)
 #: config/general.ui:224
-#, fuzzy, kde-format
-#| msgctxt "Where each displayed link comes from"
-#| msgid "None"
+#, kde-format
 msgctxt "@item:inlistbox no host key"
 msgid "None"
-msgstr "Nic"
+msgstr "Žádná"
 
 #. i18n: ectx: property (title), widget (QGroupBox, tabGroupBox)
 #: config/general.ui:235
@@ -1055,12 +1055,14 @@ msgstr "Sezení"
 #, kde-format
 msgid "When desktop shortcuts such as Alt+Tab are sent to the remote desktop."
 msgstr ""
+"Když jsou na vzdálenou plochu odeslány klávesové zkratky, jako je například "
+"Alt+Tab."
 
 #. i18n: ectx: label, entry (HostKey), group (General)
 #: core/krdc.kcfg:40
 #, kde-format
 msgid "Key that releases the keyboard from the remote desktop."
-msgstr ""
+msgstr "Klávesa, která odpojí klávesnici od vzdálené plochy."
 
 #: core/remoteview.cpp:851
 #, kde-format
@@ -1471,14 +1473,13 @@ msgid "Connected to %1"
 msgstr "Připojen k %1"
 
 #: mainwindow.cpp:603
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "Check that remote desktop sharing is enabled on the remote computer."
+#, kde-format
 msgctxt "@info %1 is the name of a key, such as Right Ctrl"
 msgid ""
 "Shortcuts go to the remote desktop. Press %1 to use one on this computer."
 msgstr ""
-"Zkontrolujte, zda je na vzdáleném počítači povoleno sdílení pracovní plochy."
+"Klávesové zkratky přejdou na vzdálenou plochu. Stisknutím klávesy %1 ji "
+"můžete použít na tomto počítači."
 
 #: mainwindow.cpp:732
 #, kde-format
@@ -1562,6 +1563,8 @@ msgstr "Uzavřít záložku"
 msgctxt "@info"
 msgid "Keyboard released for one shortcut. Click the remote desktop to cancel."
 msgstr ""
+"Uvolnit klávesnici pro provedení jedné klávesové zkratky. Kliknutím na "
+"vzdálenou plochu akci zrušíte."
 
 #: mainwindow.cpp:1098
 #, kde-format
@@ -1570,6 +1573,8 @@ msgid ""
 "Keyboard released for one shortcut. Press %1 or click the remote desktop to "
 "cancel."
 msgstr ""
+"Klávesnice uvolněna pro jednu klávesovou zkratku. Stiskněte %1 nebo klikněte "
+"na vzdálenou plochu, chcete-li akci zrušit."
 
 #: mainwindow.cpp:1179
 #, kde-format

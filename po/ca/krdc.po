@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-20 01:10+0000\n"
-"PO-Revision-Date: 2026-11-13 09:11+0100\n"
+"PO-Revision-Date: 2026-11-20 18:00+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -138,22 +138,21 @@ msgstr "VNC"
 
 #. i18n: ectx: property (title), widget (QGroupBox, keyboardGroupBox)
 #: config/general.ui:147
-#, fuzzy, kde-format
-#| msgid "&Keyboard layout:"
+#, kde-format
 msgid "Keyboard"
-msgstr "Disposició del &teclat:"
+msgstr "Teclat"
 
 #. i18n: ectx: property (text), widget (QLabel, keyboardLabel)
 #: config/general.ui:153
 #, kde-format
 msgid "Shortcuts are sent to the remote desktop while it has focus."
-msgstr ""
+msgstr "Les dreceres s'envien a l'escriptori remot mentre té el focus."
 
 #. i18n: ectx: property (text), widget (QLabel, systemShortcutsLabel)
 #: config/general.ui:163
 #, kde-format
 msgid "Send system shortcuts like Alt+Tab:"
-msgstr ""
+msgstr "Envia les dreceres del sistema com Alt+Tab:"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, kcfg_SystemShortcuts)
 #: config/general.ui:173
@@ -162,31 +161,32 @@ msgid ""
 "Also send desktop shortcuts such as Alt+Tab or Meta. Your system may still "
 "keep some for itself."
 msgstr ""
+"També envia dreceres d'escriptori com Alt+Tab o Meta. El vostre sistema pot "
+"tenir-ne algunes de pròpies."
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_SystemShortcuts)
 #: config/general.ui:177
 #, kde-format
 msgid "Never"
-msgstr ""
+msgstr "Mai"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_SystemShortcuts)
 #: config/general.ui:182
-#, fuzzy, kde-format
-#| msgid "Switch to Full Screen Mode"
+#, kde-format
 msgid "Only in full screen mode"
-msgstr "Commuta al mode de pantalla completa"
+msgstr "Només en el mode de pantalla completa"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_SystemShortcuts)
 #: config/general.ui:187
 #, kde-format
 msgid "Always"
-msgstr ""
+msgstr "Sempre"
 
 #. i18n: ectx: property (text), widget (QLabel, hostKeyLabel)
 #: config/general.ui:195
 #, kde-format
 msgid "Host key:"
-msgstr ""
+msgstr "Tecla de servidor:"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, kcfg_HostKey)
 #: config/general.ui:205
@@ -195,33 +195,30 @@ msgid ""
 "Press this key to use the next shortcut on this computer. Combined with "
 "other keys it works as normal."
 msgstr ""
+"Premeu aquesta tecla per a utilitzar la drecera següent en aquest ordinador. "
+"Combinada amb altres tecles funciona normalment."
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_HostKey)
 #: config/general.ui:209 core/remoteview.cpp:53
-#, fuzzy, kde-format
-#| msgid "Right"
+#, kde-format
 msgid "Right Ctrl"
-msgstr "Dreta"
+msgstr "Ctrl dreta"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_HostKey)
 #: config/general.ui:214 core/remoteview.cpp:54
-#, fuzzy, kde-format
-#| msgid "Right"
+#, kde-format
 msgid "Right Alt"
-msgstr "Dreta"
+msgstr "Alt dreta"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_HostKey)
 #: config/general.ui:219 core/remoteview.cpp:55
-#, fuzzy, kde-format
-#| msgid "Right"
+#, kde-format
 msgid "Right Meta"
-msgstr "Dreta"
+msgstr "Meta dreta"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_HostKey)
 #: config/general.ui:224
-#, fuzzy, kde-format
-#| msgctxt "Where each displayed link comes from"
-#| msgid "None"
+#, kde-format
 msgctxt "@item:inlistbox no host key"
 msgid "None"
 msgstr "Cap"
@@ -1053,12 +1050,13 @@ msgstr "Sessions"
 #, kde-format
 msgid "When desktop shortcuts such as Alt+Tab are sent to the remote desktop."
 msgstr ""
+"Quan les dreceres d'escriptori com Alt+Tab s'envien a l'escriptori remot."
 
 #. i18n: ectx: label, entry (HostKey), group (General)
 #: core/krdc.kcfg:40
 #, kde-format
 msgid "Key that releases the keyboard from the remote desktop."
-msgstr ""
+msgstr "Tecla que traspassa el teclat des de l'escriptori remot."
 
 #: core/remoteview.cpp:851
 #, kde-format
@@ -1474,15 +1472,13 @@ msgid "Connected to %1"
 msgstr "Connectat a %1"
 
 #: mainwindow.cpp:603
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "Check that remote desktop sharing is enabled on the remote computer."
+#, kde-format
 msgctxt "@info %1 is the name of a key, such as Right Ctrl"
 msgid ""
 "Shortcuts go to the remote desktop. Press %1 to use one on this computer."
 msgstr ""
-"Comproveu que la compartició remota d'escriptori està activada a l'ordinador "
-"remot."
+"Les dreceres van a l'escriptori remot. Premeu %1 per a utilitzar-ne una en "
+"aquest ordinador."
 
 #: mainwindow.cpp:732
 #, kde-format
@@ -1566,6 +1562,8 @@ msgstr "Tanca pestanya"
 msgctxt "@info"
 msgid "Keyboard released for one shortcut. Click the remote desktop to cancel."
 msgstr ""
+"Teclat traspassat per a una drecera. Feu clic a l'escriptori remot per "
+"cancel·lar."
 
 #: mainwindow.cpp:1098
 #, kde-format
@@ -1574,6 +1572,8 @@ msgid ""
 "Keyboard released for one shortcut. Press %1 or click the remote desktop to "
 "cancel."
 msgstr ""
+"Teclat traspassat per a una drecera. Premeu %1 o feu clic a l'escriptori "
+"remot per cancel·lar."
 
 #: mainwindow.cpp:1179
 #, kde-format
@@ -3354,15 +3354,15 @@ msgstr ""
 "compte que haureu de seleccionar la velocitat de l'enllaç més lent -encara "
 "que tingueu una connexió molt ràpida-, això no us ajudarà si l'ordinador "
 "remot usa un mòdem lent. El fet d'escollir una qualitat massa alta pot "
-"resultar en uns temps de resposta molt lents. Escollir una qualitat massa "
-"baixa pot incrementar les latències en connexions ràpides i resulta en una "
-"baixa qualitat de la imatge, especialment en el mode «Baixa qualitat»."
+"provocar uns temps de resposta molt lents. Escollir una qualitat massa baixa "
+"pot incrementar les latències en connexions ràpides i provoca una qualitat "
+"baixa de la imatge, especialment en el mode «Qualitat baixa»."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Quality)
 #: vnc/vncpreferences.ui:331
 #, kde-format
 msgid "High Quality (LAN, direct connection)"
-msgstr "Alta qualitat (LAN, connexió directa)"
+msgstr "Qualitat alta (LAN, connexió directa)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Quality)
 #: vnc/vncpreferences.ui:336
@@ -3374,7 +3374,7 @@ msgstr "Qualitat mitjana (DSL, cable, Internet ràpida)"
 #: vnc/vncpreferences.ui:341
 #, kde-format
 msgid "Low Quality (Modem, ISDN, slow Internet)"
-msgstr "Baixa qualitat (Mòdem, XDSI, Internet lenta)"
+msgstr "Qualitat baixa (Mòdem, XDSI, Internet lenta)"
 
 #: vnc/vncview.cpp:267
 #, kde-format

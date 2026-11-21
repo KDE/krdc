@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-20 01:10+0000\n"
-"PO-Revision-Date: 2026-11-16 14:56+0100\n"
+"PO-Revision-Date: 2026-11-20 18:23+0100\n"
 "Last-Translator: freek <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -140,22 +140,23 @@ msgstr "vnc"
 
 #. i18n: ectx: property (title), widget (QGroupBox, keyboardGroupBox)
 #: config/general.ui:147
-#, fuzzy, kde-format
-#| msgid "&Keyboard layout:"
+#, kde-format
 msgid "Keyboard"
-msgstr "&Toetsenbordindeling:"
+msgstr "Toetsenbord"
 
 #. i18n: ectx: property (text), widget (QLabel, keyboardLabel)
 #: config/general.ui:153
 #, kde-format
 msgid "Shortcuts are sent to the remote desktop while it has focus."
 msgstr ""
+"Sneltoetsen worden naar het externe bureaublad verzonden wanneer dit de "
+"focus heeft."
 
 #. i18n: ectx: property (text), widget (QLabel, systemShortcutsLabel)
 #: config/general.ui:163
 #, kde-format
 msgid "Send system shortcuts like Alt+Tab:"
-msgstr ""
+msgstr "Systeem-sneltoetsen zoals Alt+Tab verzenden:"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, kcfg_SystemShortcuts)
 #: config/general.ui:173
@@ -164,32 +165,32 @@ msgid ""
 "Also send desktop shortcuts such as Alt+Tab or Meta. Your system may still "
 "keep some for itself."
 msgstr ""
+"Verstuur ook sneltoetsen zoals Alt+Tab of Meta. Het is mogelijk dat uw "
+"systeem sommige daarvan voor eigen gebruik reserveert."
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_SystemShortcuts)
 #: config/general.ui:177
 #, kde-format
 msgid "Never"
-msgstr ""
+msgstr "Nooit"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_SystemShortcuts)
 #: config/general.ui:182
-#, fuzzy, kde-format
-#| msgid "Switch to Full Screen Mode"
+#, kde-format
 msgid "Only in full screen mode"
-msgstr "Beeld schermvullend maken"
+msgstr "Alleen in modus Volledig scherm"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_SystemShortcuts)
 #: config/general.ui:187
 #, kde-format
 msgid "Always"
-msgstr ""
+msgstr "Altijd"
 
 #. i18n: ectx: property (text), widget (QLabel, hostKeyLabel)
 #: config/general.ui:195
-#, fuzzy, kde-format
-#| msgid "Host"
+#, kde-format
 msgid "Host key:"
-msgstr "Host"
+msgstr "Host-toets"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, kcfg_HostKey)
 #: config/general.ui:205
@@ -198,32 +199,31 @@ msgid ""
 "Press this key to use the next shortcut on this computer. Combined with "
 "other keys it works as normal."
 msgstr ""
+"Druk op deze toets om de volgende snelkoppeling op deze computer te "
+"gebruiken. In combinatie met andere toetsen werkt de toets zoals "
+"gebruikelijk."
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_HostKey)
 #: config/general.ui:209 core/remoteview.cpp:53
-#, fuzzy, kde-format
-#| msgid "Right"
+#, kde-format
 msgid "Right Ctrl"
-msgstr "Rechts"
+msgstr "Ctrl rechts"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_HostKey)
 #: config/general.ui:214 core/remoteview.cpp:54
-#, fuzzy, kde-format
-#| msgid "Right"
+#, kde-format
 msgid "Right Alt"
-msgstr "Rechts"
+msgstr "Alt rechts"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_HostKey)
 #: config/general.ui:219 core/remoteview.cpp:55
-#, fuzzy, kde-format
-#| msgid "Right"
+#, kde-format
 msgid "Right Meta"
-msgstr "Rechts"
+msgstr "Meta rechts"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_HostKey)
 #: config/general.ui:224
-#, fuzzy, kde-format
-#| msgid "None"
+#, kde-format
 msgctxt "@item:inlistbox no host key"
 msgid "None"
 msgstr "Geen"
@@ -1061,14 +1061,14 @@ msgstr "Sessies"
 #, kde-format
 msgid "When desktop shortcuts such as Alt+Tab are sent to the remote desktop."
 msgstr ""
+"Wanneer sneltoetsen zoals Alt+Tab naar het externe bureaublad worden "
+"verstuurd."
 
 #. i18n: ectx: label, entry (HostKey), group (General)
 #: core/krdc.kcfg:40
-#, fuzzy, kde-format
-#| msgid "Here you can specify the desktop environment of the remote desktop."
+#, kde-format
 msgid "Key that releases the keyboard from the remote desktop."
-msgstr ""
-"U kunt hier de bureaubladomgeving specificeren van het bureaublad op afstand."
+msgstr "Toets die het toetsenbord loskoppelt van het externe bureaublad."
 
 #: core/remoteview.cpp:851
 #, kde-format
@@ -1483,15 +1483,13 @@ msgid "Connected to %1"
 msgstr "Verbonden met %1"
 
 #: mainwindow.cpp:603
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "Check that remote desktop sharing is enabled on the remote computer."
+#, kde-format
 msgctxt "@info %1 is the name of a key, such as Right Ctrl"
 msgid ""
 "Shortcuts go to the remote desktop. Press %1 to use one on this computer."
 msgstr ""
-"Controleer of het delen van het bureaublad op afstand is ingeschakeld op de "
-"externe computer."
+"Snelkoppelingen verwijzen naar het externe bureaublad. Druk op %1 om er een "
+"op deze computer te gebruiken."
 
 #: mainwindow.cpp:732
 #, kde-format
@@ -1576,6 +1574,8 @@ msgstr "Tabblad sluiten"
 msgctxt "@info"
 msgid "Keyboard released for one shortcut. Click the remote desktop to cancel."
 msgstr ""
+"Toetsenbord vrijgegeven voor een sneltoets. Klik op het extern bureaublad om "
+"dit te annuleren."
 
 #: mainwindow.cpp:1098
 #, kde-format
@@ -1584,6 +1584,8 @@ msgid ""
 "Keyboard released for one shortcut. Press %1 or click the remote desktop to "
 "cancel."
 msgstr ""
+"Toetsenbord vrijgegeven voor één sneltoets. Druk op %1 of klik op het extern "
+"bureaublad om te annuleren."
 
 #: mainwindow.cpp:1179
 #, kde-format

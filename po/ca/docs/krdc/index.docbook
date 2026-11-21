@@ -544,16 +544,6 @@ as Authors, publish date, the abstract, and Keywords -->
 <varlistentry>
 <term
 ><guibutton
->Captura de les tecles</guibutton
-></term>
-<listitem
-><para
->Envia tantes dreceres de teclat com sigui possible a l'escriptori remot. Algunes dreceres poden romandre reservades per l'escriptori local o el sistema de finestres. Desactiveu aquesta opció per a gestionar les dreceres localment de nou. La captura automàtica del teclat en entrar a pantalla completa es pot habilitar a la configuració general.</para
-></listitem>
-</varlistentry>
-<varlistentry>
-<term
-><guibutton
 >Escala</guibutton
 ></term>
 <listitem
@@ -572,6 +562,24 @@ as Authors, publish date, the abstract, and Keywords -->
 ></listitem>
 </varlistentry>
 </variablelist>
+</sect1>
+
+<sect1 id="keyboard-input">
+<title
+>Dreceres de teclat</title>
+
+<para
+>Mentre que un escriptori remot tingui el focus, s'hi envien totes les dreceres de teclat, incloses les dreceres del &krdc;.</para>
+
+<para
+>Per utilitzar una drecera al vostre ordinador, premeu la <firstterm
+>tecla de servidor</firstterm
+> (&Ctrl; dreta de manera predeterminada) i després la drecera. Per cancel·lar, torneu a prémer la tecla de servidor o feu clic a l'escriptori remot.</para>
+
+<para
+>Les dreceres d'escriptori com ara <keycombo action="simul"
+>&Alt;&Tab;</keycombo
+> només s'envien en mode de pantalla completa. Podeu canviar això i la tecla de servidor a la configuració general.</para>
 </sect1>
 
 <sect1 id="bookmarks">
@@ -665,7 +673,9 @@ as Authors, publish date, the abstract, and Keywords -->
 ></term>
 <listitem
 ><para
->Trieu si voleu restaurar les sessions obertes en iniciar, recordar l'historial i les contrasenyes, mostrar una icona de la safata del sistema o una barra d'estat i conservar la relació d'aspecte en canviar d'escala. També podeu configurar el protocol predeterminat, el diàleg de configuració inicial del servidor, el canvi de mida de la finestra, la captura automàtica de pantalla completa i el teclat i l'aparença i el comportament de tancament de les pestanyes.</para
+>Trieu si voleu restaurar les sessions obertes en iniciar, recordar l'historial i les contrasenyes, mostrar una icona de la safata del sistema o una barra d'estat i conservar la relació d'aspecte en canviar d'escala. També podeu configurar el protocol predeterminat, el diàleg de configuració inicial del servidor, el canvi de mida de la finestra, la captura automàtica de pantalla completa, les <link linkend="keyboard-input"
+>dreceres de teclat i la tecla de servidor</link
+> i l'aparença i el comportament de tancament de les pestanyes.</para
 ></listitem
 ></varlistentry>
 <varlistentry
@@ -723,11 +733,11 @@ as Authors, publish date, the abstract, and Keywords -->
 ><guilabel
 >Tipus de connexió:</guilabel
 > ofereix <guilabel
->Alta qualitat (LAN, connexió directa)</guilabel
+>Qualitat alta (LAN, connexió directa)</guilabel
 >, <guilabel
 >Qualitat mitjana (DSL, Cable, Internet ràpid)</guilabel
 > i <guilabel
->Baixa qualitat (Mòdem, XDSI, Internet lent)</guilabel
+>Qualitat baixa (Mòdem, XDSI, Internet lent)</guilabel
 >. Trieu una qualitat adequada a tota la connexió, incloent-hi l'enllaç de xarxa de l'ordinador remot. Una qualitat més baixa pot ajudar en les connexions lentes.</para>
 
 <para

@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-20 01:10+0000\n"
-"PO-Revision-Date: 2026-11-19 21:31+0100\n"
+"PO-Revision-Date: 2026-11-20 12:12+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -134,22 +134,23 @@ msgstr "vnc"
 
 #. i18n: ectx: property (title), widget (QGroupBox, keyboardGroupBox)
 #: config/general.ui:147
-#, fuzzy, kde-format
-#| msgid "&Keyboard layout:"
+#, kde-format
 msgid "Keyboard"
-msgstr "К&лавиатурна подредба:"
+msgstr "Клавиатура"
 
 #. i18n: ectx: property (text), widget (QLabel, keyboardLabel)
 #: config/general.ui:153
 #, kde-format
 msgid "Shortcuts are sent to the remote desktop while it has focus."
 msgstr ""
+"Клавишните комбинации се изпращат към отдалечения работен плот, докато той е "
+"на фокус."
 
 #. i18n: ectx: property (text), widget (QLabel, systemShortcutsLabel)
 #: config/general.ui:163
 #, kde-format
 msgid "Send system shortcuts like Alt+Tab:"
-msgstr ""
+msgstr "Изпращане на системни клавишни комбинации като Alt+Tab:"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, kcfg_SystemShortcuts)
 #: config/general.ui:173
@@ -158,31 +159,32 @@ msgid ""
 "Also send desktop shortcuts such as Alt+Tab or Meta. Your system may still "
 "keep some for itself."
 msgstr ""
+"Изпращане също и на клавишни комбинации за работния плот, като например Alt"
+"+Tab или Meta. Вашата система може все пак да запази някои за себе си."
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_SystemShortcuts)
 #: config/general.ui:177
 #, kde-format
 msgid "Never"
-msgstr ""
+msgstr "Никога"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_SystemShortcuts)
 #: config/general.ui:182
-#, fuzzy, kde-format
-#| msgid "Switch to Full Screen Mode"
+#, kde-format
 msgid "Only in full screen mode"
-msgstr "Превключване на пълен екран"
+msgstr "Само в режим на пълен екран"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_SystemShortcuts)
 #: config/general.ui:187
 #, kde-format
 msgid "Always"
-msgstr ""
+msgstr "Винаги"
 
 #. i18n: ectx: property (text), widget (QLabel, hostKeyLabel)
 #: config/general.ui:195
 #, kde-format
 msgid "Host key:"
-msgstr ""
+msgstr "Клавиш на хоста:"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, kcfg_HostKey)
 #: config/general.ui:205
@@ -191,33 +193,30 @@ msgid ""
 "Press this key to use the next shortcut on this computer. Combined with "
 "other keys it works as normal."
 msgstr ""
+"Натиснете този клавиш, за да използвате следващата клавишна комбинация на "
+"този компютър. В комбинация с други клавиши работи нормално."
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_HostKey)
 #: config/general.ui:209 core/remoteview.cpp:53
-#, fuzzy, kde-format
-#| msgid "Right"
+#, kde-format
 msgid "Right Ctrl"
-msgstr "Вдясно"
+msgstr "Десен Ctrl"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_HostKey)
 #: config/general.ui:214 core/remoteview.cpp:54
-#, fuzzy, kde-format
-#| msgid "Right"
+#, kde-format
 msgid "Right Alt"
-msgstr "Вдясно"
+msgstr "Десен Alt"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_HostKey)
 #: config/general.ui:219 core/remoteview.cpp:55
-#, fuzzy, kde-format
-#| msgid "Right"
+#, kde-format
 msgid "Right Meta"
-msgstr "Вдясно"
+msgstr "Десен Meta"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_HostKey)
 #: config/general.ui:224
-#, fuzzy, kde-format
-#| msgctxt "Where each displayed link comes from"
-#| msgid "None"
+#, kde-format
 msgctxt "@item:inlistbox no host key"
 msgid "None"
 msgstr "Без"
@@ -1048,12 +1047,14 @@ msgstr "Сесии"
 #, kde-format
 msgid "When desktop shortcuts such as Alt+Tab are sent to the remote desktop."
 msgstr ""
+"Когато клавишните комбинации за работния плот, като например Alt+Tab, се "
+"изпращат към отдалечения работен плот."
 
 #. i18n: ectx: label, entry (HostKey), group (General)
 #: core/krdc.kcfg:40
 #, kde-format
 msgid "Key that releases the keyboard from the remote desktop."
-msgstr ""
+msgstr "Клавиш, който освобождава клавиатурата от отдалечения работен плот."
 
 #: core/remoteview.cpp:851
 #, kde-format
@@ -1462,15 +1463,13 @@ msgid "Connected to %1"
 msgstr "Свързан с %1"
 
 #: mainwindow.cpp:603
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "Check that remote desktop sharing is enabled on the remote computer."
+#, kde-format
 msgctxt "@info %1 is the name of a key, such as Right Ctrl"
 msgid ""
 "Shortcuts go to the remote desktop. Press %1 to use one on this computer."
 msgstr ""
-"Проверете дали споделянето на отдалечен работен плот е активирано на "
-"отдалечения компютър."
+"Клавишните комбинации се изпращат към отдалечения работен плот. Натиснете "
+"%1, за да използвате комбинация на този компютър."
 
 #: mainwindow.cpp:732
 #, kde-format
@@ -1554,6 +1553,8 @@ msgstr "Затваряне на подпрозорец"
 msgctxt "@info"
 msgid "Keyboard released for one shortcut. Click the remote desktop to cancel."
 msgstr ""
+"Клавиатурата е освободена за една клавишна комбинация. Щракнете върху "
+"отдалечения работен плот, за да откажете."
 
 #: mainwindow.cpp:1098
 #, kde-format
@@ -1562,6 +1563,8 @@ msgid ""
 "Keyboard released for one shortcut. Press %1 or click the remote desktop to "
 "cancel."
 msgstr ""
+"Клавиатурата е освободена за една клавишна комбинация. Натиснете %1 или "
+"щракнете върху отдалечения работен плот, за да откажете."
 
 #: mainwindow.cpp:1179
 #, kde-format
