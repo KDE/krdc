@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-20 01:10+0000\n"
-"PO-Revision-Date: 2026-11-13 14:27+0100\n"
+"PO-Revision-Date: 2026-11-20 08:41+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -135,22 +135,23 @@ msgstr "vnc"
 
 #. i18n: ectx: property (title), widget (QGroupBox, keyboardGroupBox)
 #: config/general.ui:147
-#, fuzzy, kde-format
-#| msgid "&Keyboard layout:"
+#, kde-format
 msgid "Keyboard"
-msgstr "&Mappatura della tastiera:"
+msgstr "Tastiera"
 
 #. i18n: ectx: property (text), widget (QLabel, keyboardLabel)
 #: config/general.ui:153
 #, kde-format
 msgid "Shortcuts are sent to the remote desktop while it has focus."
 msgstr ""
+"Le scorciatoie vengono inviate al desktop remoto quando questo è in primo "
+"piano."
 
 #. i18n: ectx: property (text), widget (QLabel, systemShortcutsLabel)
 #: config/general.ui:163
 #, kde-format
 msgid "Send system shortcuts like Alt+Tab:"
-msgstr ""
+msgstr "Inviare scorciatoie di sistema come Alt+Tab:"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, kcfg_SystemShortcuts)
 #: config/general.ui:173
@@ -159,32 +160,32 @@ msgid ""
 "Also send desktop shortcuts such as Alt+Tab or Meta. Your system may still "
 "keep some for itself."
 msgstr ""
+"Invia anche le scorciatoie da tastiera, come Alt+Tab o Meta. È possibile che "
+"il sistema ne riservi alcune per sé."
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_SystemShortcuts)
 #: config/general.ui:177
 #, kde-format
 msgid "Never"
-msgstr ""
+msgstr "Mai"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_SystemShortcuts)
 #: config/general.ui:182
-#, fuzzy, kde-format
-#| msgid "Switch to Full Screen Mode"
+#, kde-format
 msgid "Only in full screen mode"
-msgstr "Passa alla modalità a tutto schermo"
+msgstr "Solo in modalità a schermo intero"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_SystemShortcuts)
 #: config/general.ui:187
 #, kde-format
 msgid "Always"
-msgstr ""
+msgstr "Sempre"
 
 #. i18n: ectx: property (text), widget (QLabel, hostKeyLabel)
 #: config/general.ui:195
-#, fuzzy, kde-format
-#| msgid "Host"
+#, kde-format
 msgid "Host key:"
-msgstr "Host"
+msgstr "Tasto host:"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, kcfg_HostKey)
 #: config/general.ui:205
@@ -193,32 +194,30 @@ msgid ""
 "Press this key to use the next shortcut on this computer. Combined with "
 "other keys it works as normal."
 msgstr ""
+"Premi questo tasto per utilizzare la scorciatoia successiva su questo "
+"computer. Se combinato con altri tasti, funziona come di consueto."
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_HostKey)
 #: config/general.ui:209 core/remoteview.cpp:53
-#, fuzzy, kde-format
-#| msgid "Right"
+#, kde-format
 msgid "Right Ctrl"
-msgstr "A destra"
+msgstr "Ctrl destro"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_HostKey)
 #: config/general.ui:214 core/remoteview.cpp:54
-#, fuzzy, kde-format
-#| msgid "Right"
+#, kde-format
 msgid "Right Alt"
-msgstr "A destra"
+msgstr "Alt destro"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_HostKey)
 #: config/general.ui:219 core/remoteview.cpp:55
-#, fuzzy, kde-format
-#| msgid "Right"
+#, kde-format
 msgid "Right Meta"
-msgstr "A destra"
+msgstr "Meta destro"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_HostKey)
 #: config/general.ui:224
-#, fuzzy, kde-format
-#| msgid "None"
+#, kde-format
 msgctxt "@item:inlistbox no host key"
 msgid "None"
 msgstr "Nessuno"
@@ -1051,13 +1050,14 @@ msgstr "Sessioni"
 #, kde-format
 msgid "When desktop shortcuts such as Alt+Tab are sent to the remote desktop."
 msgstr ""
+"Quando le scorciatoie da tastiera, come Alt+Tab, vengono inviate al desktop "
+"remoto."
 
 #. i18n: ectx: label, entry (HostKey), group (General)
 #: core/krdc.kcfg:40
-#, fuzzy, kde-format
-#| msgid "Here you can specify the desktop environment of the remote desktop."
+#, kde-format
 msgid "Key that releases the keyboard from the remote desktop."
-msgstr "Qui puoi specificare l'ambiente desktop del desktop remoto."
+msgstr "Tasto che svincola la tastiera dal desktop remoto."
 
 #: core/remoteview.cpp:851
 #, kde-format
@@ -1473,15 +1473,13 @@ msgid "Connected to %1"
 msgstr "Connesso a %1"
 
 #: mainwindow.cpp:603
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "Check that remote desktop sharing is enabled on the remote computer."
+#, kde-format
 msgctxt "@info %1 is the name of a key, such as Right Ctrl"
 msgid ""
 "Shortcuts go to the remote desktop. Press %1 to use one on this computer."
 msgstr ""
-"Verifica che la condivisione del desktop remoto sia abilitata sul computer "
-"remoto."
+"Le scorciatoie rimandano al desktop remoto. Premi %1 per usarne una su "
+"questo computer."
 
 #: mainwindow.cpp:732
 #, kde-format
@@ -1565,6 +1563,8 @@ msgstr "Chiudi la scheda"
 msgctxt "@info"
 msgid "Keyboard released for one shortcut. Click the remote desktop to cancel."
 msgstr ""
+"Tastiera rilasciata per una scorciatoia. Fai clic sul desktop remoto per "
+"annullare."
 
 #: mainwindow.cpp:1098
 #, kde-format
@@ -1573,6 +1573,8 @@ msgid ""
 "Keyboard released for one shortcut. Press %1 or click the remote desktop to "
 "cancel."
 msgstr ""
+"Tastiera rilasciata per consentire l'uso di una scorciatoia. Premi %1 o fai "
+"clic sul desktop remoto per annullare."
 
 #: mainwindow.cpp:1179
 #, kde-format
