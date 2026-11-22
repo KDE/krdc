@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-20 03:38+0000\n"
-"PO-Revision-Date: 2026-11-19 14:00+0100\n"
+"PO-Revision-Date: 2026-11-22 00:52+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -134,12 +134,14 @@ msgid ""
 "Automatically grab all keys when entering fullscreen mode and release them "
 "when leaving fullscreen"
 msgstr ""
+"Capturar todas las pulsaciones automáticamente al entrar en el modo de "
+"pantalla completa y liberarlas al salir de él"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_GrabAllKeysOnFullscreen)
 #: config/general.ui:129
 #, kde-format
 msgid "Grab all keys when entering fullscreen"
-msgstr ""
+msgstr "Capturar todas las pulsaciones al cambiar a pantalla completa"
 
 #. i18n: ectx: property (text), widget (QLabel, defaultProtocolLabel)
 #: config/general.ui:138
@@ -1306,12 +1308,12 @@ msgstr "Cursor local"
 #: mainwindow.cpp:182
 #, kde-format
 msgid "Grab All Possible Keys"
-msgstr ""
+msgstr "Capturar todas las pulsaciones posibles"
 
 #: mainwindow.cpp:183
 #, kde-format
 msgid "Grab Keys"
-msgstr ""
+msgstr "Capturar pulsaciones"
 
 #: mainwindow.cpp:189
 #, kde-format
@@ -3325,41 +3327,3 @@ msgid ""
 msgstr ""
 "<html>Introduzca la dirección aquí.<br /><i>Ejemplo: servidorvnc:1 (máquina:"
 "puerto / pantalla)</i></html>"
-
-#~| msgid "&Keyboard layout:"
-#~ msgid "Keyboard"
-#~ msgstr "Teclado"
-
-#~ msgid "Send system shortcuts like Alt+Tab:"
-#~ msgstr "Enviar atajos del sistema, como Alt+Tab:"
-
-#~ msgid "Never"
-#~ msgstr "Nunca"
-
-#~| msgid "Switch to Full Screen Mode"
-#~ msgid "Only in full screen mode"
-#~ msgstr "Solo en el modo de pantalla completa"
-
-#~ msgid "Always"
-#~ msgstr "Siempre"
-
-#~ msgid "Host key:"
-#~ msgstr "Tecla del anfitrión:"
-
-#~| msgid "Right"
-#~ msgid "Right Ctrl"
-#~ msgstr "Ctrl derecha"
-
-#~| msgid "Right"
-#~ msgid "Right Alt"
-#~ msgstr "Alt derecha"
-
-#~| msgid "Right"
-#~ msgid "Right Meta"
-#~ msgstr "Meta derecha"
-
-#~| msgctxt "Where each displayed link comes from"
-#~| msgid "None"
-#~ msgctxt "@item:inlistbox no host key"
-#~ msgid "None"
-#~ msgstr "Ninguna"
