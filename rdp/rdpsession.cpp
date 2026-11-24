@@ -1290,6 +1290,9 @@ BOOL RdpSession::endPaint(rdpContext *context)
         auto rect = QRect{rgn.x, rgn.y, rgn.w, rgn.h};
         Q_EMIT session->rectangleUpdated(rect, session->m_size);
     }
+
+    hwnd->invalid->null = TRUE;
+    hwnd->ninvalid = 0;
     return true;
 }
 
