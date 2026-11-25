@@ -13,7 +13,6 @@
 
 #include <functional>
 
-#include <QApplication>
 #include <QClipboard>
 #include <QCoreApplication>
 #include <QDateTime>
@@ -145,11 +144,6 @@ ConnectionStatusWidget::ConnectionStatusWidget(const QUrl &url, bool sshTunnel, 
     , m_sshTunnel(sshTunnel)
 {
     m_elapsed.start();
-
-    // Use the application window color, not the remote desktop background set on the parent.
-    QPalette ownPalette = palette();
-    ownPalette.setBrush(QPalette::Window, QApplication::palette(this).window());
-    setPalette(ownPalette);
 
     setAutoFillBackground(true);
 

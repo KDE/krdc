@@ -195,6 +195,14 @@ public:
     explicit RemoteViewScrollArea(QWidget *parent)
         : QScrollArea(parent)
     {
+        viewport()->setBackgroundRole(QPalette::Base);
+    }
+
+    void setBackgroundColor(const QColor &color)
+    {
+        QPalette palette;
+        palette.setColor(QPalette::Base, color);
+        viewport()->setPalette(palette);
     }
 
     /** Connection progress and errors, shown over the remote view. */

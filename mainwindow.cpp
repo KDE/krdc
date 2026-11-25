@@ -763,12 +763,8 @@ QScrollArea *MainWindow::createScrollArea(QWidget *parent, RemoteView *remoteVie
 
     connect(scrollArea, &RemoteViewScrollArea::resized, remoteView, &RemoteView::scaleResize);
 
-    QPalette palette = scrollArea->palette();
-    palette.setColor(QPalette::Window, Settings::backgroundColor());
-    scrollArea->setPalette(palette);
-
     scrollArea->setFrameStyle(QFrame::NoFrame);
-    scrollArea->setAutoFillBackground(true);
+    scrollArea->setBackgroundColor(Settings::backgroundColor());
     scrollArea->setWidget(remoteView);
 
     return scrollArea;
@@ -1272,11 +1268,10 @@ void MainWindow::updateConfiguration()
         m_systemTrayIcon = nullptr;
     }
 
-    // update the scroll areas background color
     for (int i = 0; i < m_tabWidget->count(); ++i) {
-        QPalette palette = m_tabWidget->widget(i)->palette();
-        palette.setColor(QPalette::Dark, Settings::backgroundColor());
-        m_tabWidget->widget(i)->setPalette(palette);
+        if (auto *scrollArea = qobject_cast<RemoteViewScrollArea *>(m_tabWidget->widget(i))) {
+            scrollArea->setBackgroundColor(Settings::backgroundColor());
+        }
     }
 
     if (m_protocolInput) {
