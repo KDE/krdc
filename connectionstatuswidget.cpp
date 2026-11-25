@@ -458,6 +458,9 @@ void ConnectionStatusWidget::hostLookedUp(const QHostInfo &info)
     if (info.error() != QHostInfo::NoError || info.addresses().isEmpty()) {
         // A gateway or proxy may resolve names this computer cannot; let the backend decide.
         log(i18nc("@info diagnostic timeline", "Local address lookup failed: %1", info.errorString()));
+        if (r && r->state == State::Active && !m_hasError) {
+            setRowState(r, State::Hidden);
+        }
         return;
     }
 
