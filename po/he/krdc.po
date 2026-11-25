@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-20 03:38+0000\n"
-"PO-Revision-Date: 2026-11-21 09:06+0200\n"
+"PO-Revision-Date: 2026-11-24 12:20+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <kde-l10n-he@kde.org>\n"
 "Language: he\n"
@@ -500,7 +500,7 @@ msgstr "התחברת מחדש"
 #, kde-format
 msgctxt "@info"
 msgid "KRDC keeps trying until the connection is back."
-msgstr ""
+msgstr "KRDC ממשיך לנסות עד שהחיבור משתחזר."
 
 #: connectionstatuswidget.cpp:568
 #, kde-format
@@ -518,13 +518,13 @@ msgstr "התנתקות"
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Failed while: %1"
-msgstr ""
+msgstr "נכשל תוך כדי: %1"
 
 #: connectionstatuswidget.cpp:661
 #, kde-format
 msgctxt "@title"
 msgid "Session with %1 ended"
-msgstr ""
+msgstr "ההפעלה עם %1 הסתיימה"
 
 #: connectionstatuswidget.cpp:663
 #, kde-format
@@ -572,7 +572,7 @@ msgstr "סגירת לשונית"
 #, kde-format
 msgctxt "@action:button"
 msgid "Copy diagnostic information"
-msgstr ""
+msgstr "העתקת פרטי אבחון"
 
 #: connectionstatuswidget.cpp:724
 #, kde-format
@@ -666,12 +666,13 @@ msgctxt "@info"
 msgid ""
 "If you use key authentication, add the key to your SSH agent with ssh-add."
 msgstr ""
+"אם בחרת להשתמש באימות מפתח, יש להוסיף את המפתח לסוכן ה־SSH שלך עם ssh-add."
 
 #: core/connectionerror.cpp:50
 #, kde-format
 msgctxt "@info"
 msgid "Make sure the SSH server allows port forwarding."
-msgstr ""
+msgstr "נא לוודא ששרת ה־SSH מאפשר הפניית פתחות (port forwarding)."
 
 #: core/connectionerror.cpp:54
 #, kde-format
@@ -2571,6 +2572,7 @@ msgid ""
 "Ask the administrator of the gateway to allow this account and computer in "
 "its resource authorization policy."
 msgstr ""
+"לבקש מהנהלת שער הגישה לאפשר את החשבון והמחשב האלה במדיניות אישור המשאבים שלו."
 
 #: rdp/rdpview.cpp:581
 #, kde-format
@@ -2584,7 +2586,7 @@ msgctxt "@info"
 msgid ""
 "Ask the administrator of the gateway to check its connection authorization "
 "policy."
-msgstr ""
+msgstr "לבקש מהמנהל/ת של שער הגישה לבדוק את מדיניות אישור החיבורים אליו."
 
 #: rdp/rdpview.cpp:586
 #, kde-format
@@ -2598,13 +2600,13 @@ msgctxt "@info"
 msgid ""
 "Make sure the remote computer is running, and that the gateway can reach it "
 "by this name."
-msgstr ""
+msgstr "נא לוודא שהמחשב המרוחק פעיל וששער הגישה יכול להגיע אליו בשם הזה."
 
 #: rdp/rdpview.cpp:592
 #, kde-format
 msgctxt "@label"
 msgid "It accepted the connection, then refused to start a session."
-msgstr ""
+msgstr "הוא קיבלת את החיבור ואז סירב להקים את ההפעלה."
 
 #: rdp/rdpview.cpp:593
 #, kde-format
@@ -2616,19 +2618,19 @@ msgstr "ההפעלה סורבה"
 #, kde-format
 msgctxt "@label"
 msgid "The server did not accept the options selected for this host."
-msgstr ""
+msgstr "השרת לא קיבל את האפשרויות שנבחרו למארח הזה."
 
 #: rdp/rdpview.cpp:600
 #, kde-format
 msgctxt "@label"
 msgid "An administrator or another program disconnected this session."
-msgstr ""
+msgstr "מנהל/ת או תוכנית אחרת ניתקו את ההפעלה."
 
 #: rdp/rdpview.cpp:603
 #, kde-format
 msgctxt "@label"
 msgid "An administrator signed this session out."
-msgstr ""
+msgstr "מנהל/ת הוציא אותך מההפעלה."
 
 #: rdp/rdpview.cpp:606
 #, kde-format
@@ -2660,13 +2662,13 @@ msgctxt "@info"
 msgid ""
 "Reconnect to continue. The idle time limit is set by the administrator of "
 "the server."
-msgstr ""
+msgstr "יש להתחבר מחדש כדי להמשיך. מגבלת זמן ההמתנה מוגדרת על ידי הנהלת השרת."
 
 #: rdp/rdpview.cpp:632
 #, kde-format
 msgctxt "@label"
 msgid "The remote computer reported a problem while logging in."
-msgstr ""
+msgstr "המחשב המרוחק דיווח על תקלה בעת הכניסה למערכת."
 
 #: rdp/rdpview.cpp:633
 #, kde-format
@@ -2675,6 +2677,7 @@ msgid ""
 "Check that this user may log in to the remote computer, and that the session "
 "is not busy."
 msgstr ""
+"נא לבדוק שהמשתמש הזה יכול להיכנס לחשבון במחשב המרוחק ושההפעלה לא תפוסה."
 
 #: rdp/rdpview.cpp:1007
 #, kde-format
