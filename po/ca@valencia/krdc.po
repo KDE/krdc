@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-20 01:10+0000\n"
-"PO-Revision-Date: 2026-11-19 16:41+0100\n"
+"POT-Creation-Date: 2026-11-26 01:03+0000\n"
+"PO-Revision-Date: 2026-11-25 21:03+0100\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -116,7 +116,7 @@ msgid ""
 "same as the current screen resolution"
 msgstr ""
 "Esta opció canvia a pantalla completa només si la resolució de la connexió "
-"és la mateixa resolució que la de la pantalla actual"
+"és la mateixa que la de la pantalla actual"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_FullscreenOnConnect)
 #: config/general.ui:119
@@ -134,7 +134,7 @@ msgstr "Protocol predeterminat:"
 #: config/general.ui:135
 #, kde-format
 msgid "vnc"
-msgstr "VNC"
+msgstr "vnc"
 
 #. i18n: ectx: property (title), widget (QGroupBox, keyboardGroupBox)
 #: config/general.ui:147
@@ -162,7 +162,7 @@ msgid ""
 "keep some for itself."
 msgstr ""
 "Envia també les dreceres de l'escriptori, com ara «Alt+Tab» o «Meta». El "
-"sistema encara se'n pot quedar algunes per ell."
+"sistema encara se'n pot quedar algunes per a ell."
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_SystemShortcuts)
 #: config/general.ui:177
@@ -195,7 +195,7 @@ msgid ""
 "Press this key to use the next shortcut on this computer. Combined with "
 "other keys it works as normal."
 msgstr ""
-"Premeu esta tecla per a utilitzar la drecera següent en este ordinador. "
+"Premeu aquesta tecla per a usar la drecera següent en aquest ordinador. "
 "Combinada amb altres tecles, funciona amb normalitat."
 
 #. i18n: ectx: property (text), item, widget (QComboBox, kcfg_HostKey)
@@ -245,7 +245,7 @@ msgstr "Mostra el botó de tancar en les pestanyes"
 #: config/general.ui:255
 #, kde-format
 msgid "Middle-click on a tab closes it"
-msgstr "Clic del mig damunt d'una pestanya, la tanca"
+msgstr "El clic del mig damunt d'una pestanya, la tanca"
 
 #. i18n: ectx: property (text), widget (QLabel, tabOrientationLabel)
 #: config/general.ui:264
@@ -257,25 +257,25 @@ msgstr "Posició de la pestanya:"
 #: config/general.ui:272
 #, kde-format
 msgid "Top"
-msgstr "Dalt"
+msgstr "A dalt"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TabPosition)
 #: config/general.ui:277
 #, kde-format
 msgid "Bottom"
-msgstr "Baix"
+msgstr "A baix"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TabPosition)
 #: config/general.ui:282
 #, kde-format
 msgid "Left"
-msgstr "Esquerra"
+msgstr "A l'esquerra"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TabPosition)
 #: config/general.ui:287
 #, kde-format
 msgid "Right"
-msgstr "Dreta"
+msgstr "A la dreta"
 
 #: config/hostpreferenceslist.cpp:30
 #, kde-format
@@ -287,13 +287,13 @@ msgstr "Configura…"
 msgid "Remove"
 msgstr "Elimina"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:360 mainwindow.cpp:964
-#: mainwindow.cpp:980
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:360 mainwindow.cpp:960
+#: mainwindow.cpp:976
 #, kde-format
 msgid "Unusable URL"
 msgstr "URL inservible"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:980
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:976
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr "L'amfitrió seleccionat no es pot gestionar."
@@ -312,12 +312,12 @@ msgstr "Configuració general"
 #: config/preferencesdialog.cpp:28
 #, kde-format
 msgid "Hosts"
-msgstr "Servidors"
+msgstr "Amfitrions"
 
 #: config/preferencesdialog.cpp:28 core/hostpreferences.cpp:298
 #, kde-format
 msgid "Host Configuration"
-msgstr "Configureu el servidor"
+msgstr "Configureu l'amfitrió"
 
 #: config/preferencesdialog.cpp:33 config/preferencesdialog.cpp:34
 #, kde-format
@@ -369,277 +369,277 @@ msgid_plural "%1 years ago"
 msgstr[0] "Fa un any"
 msgstr[1] "Fa %1 anys"
 
-#: connectionstatuswidget.cpp:64
+#: connectionstatuswidget.cpp:63
 #, kde-format
 msgctxt "@info:status connection step"
 msgid "Not started"
 msgstr "No iniciat"
 
-#: connectionstatuswidget.cpp:67
+#: connectionstatuswidget.cpp:66
 #, kde-format
 msgctxt "@info:status connection step"
 msgid "Done"
 msgstr "Fet"
 
-#: connectionstatuswidget.cpp:70
+#: connectionstatuswidget.cpp:69
 #, kde-format
 msgctxt "@info:status connection step"
 msgid "Failed"
 msgstr "No s'ha pogut"
 
-#: connectionstatuswidget.cpp:73
+#: connectionstatuswidget.cpp:72
 #, kde-format
 msgctxt "@info:status connection step"
 msgid "Information"
 msgstr "Informació"
 
-#: connectionstatuswidget.cpp:250
+#: connectionstatuswidget.cpp:244
 #, kde-format
 msgctxt "@info"
 msgid "Diagnostic information copied to the clipboard"
 msgstr "S'ha copiat la informació del diagnòstic en el porta-retalls"
 
-#: connectionstatuswidget.cpp:257
+#: connectionstatuswidget.cpp:251
 #, kde-format
 msgctxt "@title"
 msgid "Connecting to %1"
 msgstr "S'està connectant amb %1"
 
-#: connectionstatuswidget.cpp:258
+#: connectionstatuswidget.cpp:252
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Connecting to %1"
 msgstr "S'està connectant a %1"
 
-#: connectionstatuswidget.cpp:274
+#: connectionstatuswidget.cpp:268
 #, kde-format
 msgctxt "@action:button"
 msgid "Cancel"
 msgstr "Cancel·la"
 
-#: connectionstatuswidget.cpp:335
+#: connectionstatuswidget.cpp:329
 #, kde-format
 msgctxt "@info:status connection step"
 msgid "In progress"
 msgstr "En curs"
 
-#: connectionstatuswidget.cpp:411
+#: connectionstatuswidget.cpp:405
 #, kde-format
 msgctxt "@info connection step"
 msgid "Looking up the server address"
 msgstr "S'està buscant l'adreça del servidor"
 
-#: connectionstatuswidget.cpp:413
+#: connectionstatuswidget.cpp:407
 #, kde-format
 msgctxt "@info connection step"
 msgid "Opening the SSH tunnel"
 msgstr "S'està obrint el túnel SSH"
 
-#: connectionstatuswidget.cpp:415
+#: connectionstatuswidget.cpp:409
 #, kde-format
 msgctxt "@info connection step"
 msgid "Opening a network connection"
 msgstr "S'està obrint la connexió de xarxa"
 
-#: connectionstatuswidget.cpp:417
+#: connectionstatuswidget.cpp:411
 #, kde-format
 msgctxt "@info connection step"
 msgid "Securing the connection"
 msgstr "S'està assegurant la connexió"
 
-#: connectionstatuswidget.cpp:419
+#: connectionstatuswidget.cpp:413
 #, kde-format
 msgctxt "@info connection step"
 msgid "Logging in"
 msgstr "S'està iniciant la sessió"
 
-#: connectionstatuswidget.cpp:421
+#: connectionstatuswidget.cpp:415
 #, kde-format
 msgctxt "@info connection step"
 msgid "Starting the remote session"
 msgstr "S'està iniciant la sessió remota"
 
-#: connectionstatuswidget.cpp:423
+#: connectionstatuswidget.cpp:417
 #, kde-format
 msgctxt "@info connection step"
 msgid "Reconnecting"
 msgstr "S'està tornant a connectar"
 
-#: connectionstatuswidget.cpp:433
+#: connectionstatuswidget.cpp:427
 #, kde-format
 msgctxt "@info connection step"
 msgid "Server address resolved"
 msgstr "S'ha resolt l'adreça del servidor"
 
-#: connectionstatuswidget.cpp:435
+#: connectionstatuswidget.cpp:429
 #, kde-format
 msgctxt "@info connection step"
 msgid "SSH tunnel established"
 msgstr "S'ha establit el túnel SSH"
 
-#: connectionstatuswidget.cpp:437
+#: connectionstatuswidget.cpp:431
 #, kde-format
 msgctxt "@info connection step"
 msgid "Network connection established"
 msgstr "S'ha establit la connexió de xarxa"
 
-#: connectionstatuswidget.cpp:439
+#: connectionstatuswidget.cpp:433
 #, kde-format
 msgctxt "@info connection step"
 msgid "Connection secured"
 msgstr "S'ha assegurat la connexió"
 
-#: connectionstatuswidget.cpp:442
+#: connectionstatuswidget.cpp:436
 #, kde-format
 msgctxt "@info connection step"
 msgid "Access granted"
 msgstr "S'ha atorgat l'accés"
 
-#: connectionstatuswidget.cpp:444
+#: connectionstatuswidget.cpp:438
 #, kde-format
 msgctxt "@info connection step"
 msgid "Remote session started"
 msgstr "S'ha iniciat la sessió remota"
 
-#: connectionstatuswidget.cpp:454
+#: connectionstatuswidget.cpp:448
 #, kde-format
 msgctxt "@info"
 msgid "Resolved to %1."
 msgstr "S'ha resolt com a %1."
 
-#: connectionstatuswidget.cpp:466
+#: connectionstatuswidget.cpp:460
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Local address lookup failed: %1"
 msgstr "No s'ha pogut fer la busca de l'adreça local: %1"
 
-#: connectionstatuswidget.cpp:471
+#: connectionstatuswidget.cpp:468
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "%1 resolved to %2"
 msgstr "%1 ha resolt com a %2"
 
-#: connectionstatuswidget.cpp:503
+#: connectionstatuswidget.cpp:500
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Connecting to the remote desktop service"
 msgstr "S'està connectant al servei d'escriptori remot"
 
-#: connectionstatuswidget.cpp:510
+#: connectionstatuswidget.cpp:507
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Authenticating"
 msgstr "S'està autenticant"
 
-#: connectionstatuswidget.cpp:514
+#: connectionstatuswidget.cpp:511
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Preparing the session"
 msgstr "S'està preparant la sessió"
 
-#: connectionstatuswidget.cpp:518
+#: connectionstatuswidget.cpp:515
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Connected"
 msgstr "Connectat"
 
-#: connectionstatuswidget.cpp:551
+#: connectionstatuswidget.cpp:548
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Connection dropped, reconnecting: %1"
 msgstr "Ha caigut la connexió, es torna a connectar: %1"
 
-#: connectionstatuswidget.cpp:551
+#: connectionstatuswidget.cpp:548
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Reconnected"
 msgstr "S'ha tornat a connectar"
 
-#: connectionstatuswidget.cpp:564
+#: connectionstatuswidget.cpp:561
 #, kde-format
 msgctxt "@info"
 msgid "KRDC keeps trying until the connection is back."
 msgstr "KRDC continua intentant-ho fins que torne la connexió."
 
-#: connectionstatuswidget.cpp:568
+#: connectionstatuswidget.cpp:565
 #, kde-format
 msgctxt "@title"
 msgid "Connection to %1 interrupted"
 msgstr "S'ha interromput la connexió amb %1"
 
-#: connectionstatuswidget.cpp:570
+#: connectionstatuswidget.cpp:567
 #, kde-format
 msgctxt "@action:button"
 msgid "Disconnect"
 msgstr "Desconnecta"
 
-#: connectionstatuswidget.cpp:580
+#: connectionstatuswidget.cpp:577
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Failed while: %1"
 msgstr "Ha fallat mentre: %1"
 
-#: connectionstatuswidget.cpp:661
+#: connectionstatuswidget.cpp:658
 #, kde-format
 msgctxt "@title"
 msgid "Session with %1 ended"
 msgstr "Ha finalitzat la sessió amb %1"
 
-#: connectionstatuswidget.cpp:663
+#: connectionstatuswidget.cpp:660
 #, kde-format
 msgctxt "@title"
 msgid "Connection to %1 lost"
 msgstr "S'ha perdut la connexió amb %1"
 
-#: connectionstatuswidget.cpp:665
+#: connectionstatuswidget.cpp:662
 #, kde-format
 msgctxt "@title"
 msgid "Could not connect to %1"
 msgstr "No s'ha pogut connectar amb %1"
 
-#: connectionstatuswidget.cpp:671
+#: connectionstatuswidget.cpp:668
 #, kde-format
 msgctxt "@action:button"
 msgid "Reconnect"
 msgstr "Torna a connectar"
 
-#: connectionstatuswidget.cpp:671
+#: connectionstatuswidget.cpp:668
 #, kde-format
 msgctxt "@action:button"
 msgid "Connect Again"
 msgstr "Torna a connectar"
 
-#: connectionstatuswidget.cpp:676
+#: connectionstatuswidget.cpp:673
 #, kde-format
 msgctxt "@action:button"
 msgid "Edit Address"
 msgstr "Edita l'adreça"
 
-#: connectionstatuswidget.cpp:679
+#: connectionstatuswidget.cpp:676
 #, kde-format
 msgctxt "@action:button"
 msgid "Edit Host Settings…"
-msgstr "Edita la configuració del servidor…"
+msgstr "Edita la configuració de l'amfitrió…"
 
-#: connectionstatuswidget.cpp:681
+#: connectionstatuswidget.cpp:678
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Tab"
-msgstr "Tanca pestanya"
+msgstr "Tanca la pestanya"
 
-#: connectionstatuswidget.cpp:719
+#: connectionstatuswidget.cpp:716
 #, kde-format
 msgctxt "@action:button"
 msgid "Copy diagnostic information"
 msgstr "Copia la informació dels diagnòstics"
 
-#: connectionstatuswidget.cpp:724
+#: connectionstatuswidget.cpp:721
 #, kde-format
 msgctxt "@action:button"
 msgid "Hide details"
 msgstr "Oculta els detalls"
 
-#: connectionstatuswidget.cpp:724
+#: connectionstatuswidget.cpp:721
 #, kde-format
 msgctxt "@action:button"
 msgid "Show details"
@@ -649,13 +649,13 @@ msgstr "Mostra els detalls"
 #, kde-format
 msgctxt "@info connection stage"
 msgid "Setting up the SSH tunnel"
-msgstr "Establiment del túnel SSH"
+msgstr "Establiu el túnel SSH"
 
 #: core/connectionerror.cpp:17
 #, kde-format
 msgctxt "@info connection stage"
 msgid "Looking up the host name"
-msgstr "S'està buscant el nom del servidor"
+msgstr "S'està buscant el nom de l'amfitrió"
 
 #: core/connectionerror.cpp:19
 #, kde-format
@@ -710,8 +710,8 @@ msgstr "Ha fallat el túnel SSH"
 msgctxt "@info"
 msgid "Check the SSH tunnel user name and port in the host settings."
 msgstr ""
-"Comproveu el nom d'usuari i el port del túnel SSH en la configuració del "
-"servidor."
+"Comproveu el nom d'usuari i el port del túnel SSH en la configuració de "
+"l'amfitrió."
 
 #: core/connectionerror.cpp:48
 #, kde-format
@@ -814,7 +814,7 @@ msgctxt "@info"
 msgid ""
 "Review the security settings for this host, or reset them to their defaults."
 msgstr ""
-"Reviseu els paràmetres de seguretat d'este servidor o restabliu-los als seus "
+"Reviseu els paràmetres de seguretat d'este amfitrió o restabliu-los als seus "
 "valors predeterminats."
 
 #: core/connectionerror.cpp:76
@@ -872,7 +872,7 @@ msgid ""
 "Reset advanced options in the host settings, such as graphics acceleration "
 "or color depth, to their defaults."
 msgstr ""
-"Restabliu les opcions avançades en la configuració del servidor, com ara "
+"Restabliu les opcions avançades en la configuració de l'amfitrió, com ara "
 "l'acceleració gràfica o la profunditat de color, als seus valors "
 "predeterminats."
 
@@ -1037,7 +1037,7 @@ msgstr "Mostra este diàleg una altra vegada per a este amfitrió"
 #, kde-format
 msgctxt "@action:button"
 msgid "All Settings…"
-msgstr "Tota la configuració…"
+msgstr "Tots els paràmetres…"
 
 #. i18n: ectx: label, entry (OpenSessions), group (General)
 #: core/krdc.kcfg:16
@@ -1095,8 +1095,8 @@ msgctxt "@info"
 msgid ""
 "Check the host name, and that the computer is reachable from this network."
 msgstr ""
-"Comproveu el nom de l'ordinador, i que l'ordinador siga accessible des "
-"d'esta xarxa."
+"Comproveu el nom de l'amfitrió, i que l'ordinador siga accessible des d'esta "
+"xarxa."
 
 #: core/remoteview.cpp:880
 #, kde-format
@@ -1127,8 +1127,8 @@ msgstr "El servidor SSH no accepta l'inici de sessió de «%1»."
 msgctxt "@info"
 msgid "Check the SSH user name in the host settings, and the password."
 msgstr ""
-"Comproveu el nom d'usuari SSH a la configuració del servidor i la "
-"contrasenya."
+"Comproveu el nom d'usuari i la contrasenya SSH en la configuració de "
+"l'amfitrió."
 
 #: core/remoteview.cpp:889
 #, kde-format
@@ -1193,7 +1193,7 @@ msgstr "Túnel SSH"
 #: core/sshtunnelwidget.ui:35
 #, kde-format
 msgid "Connect via SSH tunnel"
-msgstr "Connecta a través d'un túnel SSH"
+msgstr "Connecta a través de túnel SSH"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: core/sshtunnelwidget.ui:42
@@ -1334,8 +1334,8 @@ msgstr "Els URL amb els que connectar després d'iniciar"
 msgid "KDE Remote Desktop Client started"
 msgstr "S'ha iniciat el client d'escriptori remot de KDE"
 
-#: mainwindow.cpp:129 mainwindow.cpp:146 mainwindow.cpp:1430
-#: mainwindow.cpp:1528
+#: mainwindow.cpp:129 mainwindow.cpp:146 mainwindow.cpp:1425
+#: mainwindow.cpp:1523
 #, kde-format
 msgid "New Connection"
 msgstr "Connexió nova"
@@ -1434,7 +1434,7 @@ msgid ""
 msgstr ""
 "«%1» no és una adreça vàlida.\n"
 "\n"
-"Utilitzeu la forma [nomusuari@]host[:port], per exemple: "
+"Utilitzeu la forma [nomusuari@]amfitrió[:port], per exemple: "
 "usuari@192.168.1.10:5900"
 
 #: mainwindow.cpp:329
@@ -1459,7 +1459,7 @@ msgstr "S'està connectant amb %1"
 #: mainwindow.cpp:589
 #, kde-format
 msgid "Authenticating at %1"
-msgstr "Autenticant-se a %1"
+msgstr "S'està autenticant a %1"
 
 #: mainwindow.cpp:593
 #, kde-format
@@ -1477,8 +1477,8 @@ msgctxt "@info %1 is the name of a key, such as Right Ctrl"
 msgid ""
 "Shortcuts go to the remote desktop. Press %1 to use one on this computer."
 msgstr ""
-"Les dreceres van cap a l'escriptori remot. Premeu «%1» per a utilitzar-ne "
-"una en este ordinador."
+"Les dreceres van a l'escriptori remot. Premeu %1 per a usar-ne una en aquest "
+"ordinador."
 
 #: mainwindow.cpp:732
 #, kde-format
@@ -1490,117 +1490,117 @@ msgstr "Canvia al mode de finestra"
 msgid "Window Mode"
 msgstr "Mode de finestra"
 
-#: mainwindow.cpp:964
+#: mainwindow.cpp:960
 #, kde-format
 msgid "The entered address cannot be handled by this connection type."
 msgstr "L'adreça introduïda no es pot gestionar amb este tipus de connexió."
 
-#: mainwindow.cpp:999
+#: mainwindow.cpp:995
 #, kde-format
 msgid "Connect"
 msgstr "Connecta"
 
-#: mainwindow.cpp:1000
+#: mainwindow.cpp:996
 #, kde-format
 msgid "Rename"
 msgstr "Canvia el nom"
 
-#: mainwindow.cpp:1001
+#: mainwindow.cpp:997
 #, kde-format
 msgid "Settings"
 msgstr "Configuració"
 
-#: mainwindow.cpp:1002
+#: mainwindow.cpp:998
 #, kde-format
 msgid "Delete"
 msgstr "Suprimix"
 
-#: mainwindow.cpp:1005 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:1001 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "Adreces d'interés"
 
-#: mainwindow.cpp:1005 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:1001 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "Historial"
 
-#: mainwindow.cpp:1017
+#: mainwindow.cpp:1013
 #, kde-format
 msgid "Rename %1"
 msgstr "Canvia el nom de %1"
 
-#: mainwindow.cpp:1017
+#: mainwindow.cpp:1013
 #, kde-format
 msgid "Rename %1 to"
 msgstr "Canvia el nom de %1 a"
 
-#: mainwindow.cpp:1024
+#: mainwindow.cpp:1020
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "Segur que voleu suprimir %1?"
 
-#: mainwindow.cpp:1024
+#: mainwindow.cpp:1020
 #, kde-format
 msgid "Delete %1"
 msgstr "Suprimix %1"
 
-#: mainwindow.cpp:1048
+#: mainwindow.cpp:1044
 #, kde-format
 msgid "Add Bookmark"
 msgstr "Afig una adreça d'interés"
 
-#: mainwindow.cpp:1049
+#: mainwindow.cpp:1045
 #, kde-format
 msgid "Close Tab"
 msgstr "Tanca pestanya"
 
-#: mainwindow.cpp:1096
+#: mainwindow.cpp:1092
 #, kde-format
 msgctxt "@info"
 msgid "Keyboard released for one shortcut. Click the remote desktop to cancel."
 msgstr ""
-"Teclat alliberat per a una drecera. Cliqueu damunt de l'escriptori remot per "
-"a cancel·lar-ho."
+"Teclat alliberat per a una drecera. Cliqueu a l'escriptori remot per a "
+"cancel·lar-ho."
 
-#: mainwindow.cpp:1098
+#: mainwindow.cpp:1094
 #, kde-format
 msgctxt "@info %1 is the name of a key, such as Right Ctrl"
 msgid ""
 "Keyboard released for one shortcut. Press %1 or click the remote desktop to "
 "cancel."
 msgstr ""
-"Teclat alliberat per a una drecera. Premeu «%1» o cliqueu damunt de "
-"l'escriptori remot per a cancel·lar-ho."
+"Teclat alliberat per a una drecera. Premeu %1 o cliqueu a l'escriptori remot "
+"per a cancel·lar-ho."
 
-#: mainwindow.cpp:1179
+#: mainwindow.cpp:1175
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "Apega la barra d'eines"
 
-#: mainwindow.cpp:1298
+#: mainwindow.cpp:1293
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr "Segur que voleu tancar el client d'escriptori remot de KDE?"
 
-#: mainwindow.cpp:1299
+#: mainwindow.cpp:1294
 #, kde-format
 msgid "Confirm Quit"
 msgstr "Confirma l'eixida"
 
-#: mainwindow.cpp:1454
+#: mainwindow.cpp:1449
 #, kde-format
 msgid "Connect to:"
 msgstr "Connecta a:"
 
-#: mainwindow.cpp:1458
+#: mainwindow.cpp:1453
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr "Teclegeu ací per a connectar amb una adreça i filtrar la llista."
 
-#: mainwindow.cpp:1469
+#: mainwindow.cpp:1464
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
@@ -1609,28 +1609,28 @@ msgstr ""
 "Teclegeu ací una IP o un nom DNS. Buideu la línia per a obtindre una llista "
 "dels mètodes de connexió."
 
-#: mainwindow.cpp:1472
+#: mainwindow.cpp:1467
 #, kde-format
 msgid "Goto Address"
 msgstr "Ves fins a l'adreça"
 
-#: mainwindow.cpp:1564
+#: mainwindow.cpp:1559
 #, kde-format
 msgid "Remote Desktops"
 msgstr "Escriptoris remots"
 
-#: mainwindow.cpp:1593
+#: mainwindow.cpp:1588
 #, kde-format
 msgid "Filter"
 msgstr "Filtre"
 
-#: mainwindow.cpp:1646
+#: mainwindow.cpp:1641
 #, kde-format
 msgctxt "@label"
 msgid "The remote computer may have shut down or restarted."
 msgstr "L'ordinador remot pot haver-se apagat o reiniciat."
 
-#: mainwindow.cpp:1650
+#: mainwindow.cpp:1645
 #, kde-format
 msgctxt "@title connection error"
 msgid "Closed before the session started"
@@ -1665,7 +1665,7 @@ msgstr ""
 #: rdp/rdppreferences.ui:83 spice/spicepreferences.ui:93
 #, kde-format
 msgid "Small (1280x720)"
-msgstr "Baixa (1280x720)"
+msgstr "Xicoteta (1280x720)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Resolution)
 #: rdp/rdppreferences.ui:88 spice/spicepreferences.ui:98
@@ -1849,13 +1849,13 @@ msgstr "Utilitza la millor disponible"
 #: rdp/rdppreferences.ui:424
 #, kde-format
 msgid "True Color with Alpha (32 Bit)"
-msgstr "Color real amb alfa (24 bits)"
+msgstr "Color verdader amb alfa (32 bits)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
 #: rdp/rdppreferences.ui:429
 #, kde-format
 msgid "True Color (24 Bit)"
-msgstr "Color real (24 bits)"
+msgstr "Color verdader (24 bits)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ColorDepth)
 #: rdp/rdppreferences.ui:434
@@ -1923,7 +1923,7 @@ msgstr ""
 #: rdp/rdppreferences.ui:530
 #, kde-format
 msgid "Same as This Computer"
-msgstr "El mateix que este ordinador"
+msgstr "Igual que este ordinador"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:535
@@ -2158,7 +2158,7 @@ msgstr "Carpeta compartida:"
 #, kde-format
 msgid "A folder on this computer that the remote computer can read and write."
 msgstr ""
-"Una carpeta en este ordinador que l'ordinador remot pot llegir i escriure."
+"Una carpeta d'este ordinador on l'ordinador remot pot llegir i escriure."
 
 #. i18n: ectx: property (text), widget (QLabel, shareSmartcardLabel)
 #: rdp/rdppreferences.ui:746
@@ -2192,14 +2192,14 @@ msgid ""
 "Connect to the session an administrator uses to manage the remote computer, "
 "instead of a new user session."
 msgstr ""
-"Connecta a la sessió que un administrador utilitza per a gestionar "
+"Connecta a la sessió que utilitza un administrador per a gestionar "
 "l'ordinador remot, en lloc d'una sessió d'usuari nova."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_PreventSessionLock)
 #: rdp/rdppreferences.ui:790
 #, kde-format
 msgid "Keep the remote session from locking"
-msgstr "Manté la sessió remota evitant el bloqueig"
+msgstr "Evita que es bloquege la sessió remota"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_PreventSessionLock)
 #: rdp/rdppreferences.ui:793
@@ -2209,13 +2209,13 @@ msgid ""
 "does not lock the session while it is idle."
 msgstr ""
 "Mou el punter del ratolí remot cada pocs minuts perquè l'ordinador remot no "
-"bloquege la sessió mentre estiga inactiu."
+"bloquege la sessió mentre estiga inactiva."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseGateway)
 #: rdp/rdppreferences.ui:819
 #, kde-format
 msgid "Connect through a Remote Desktop Gateway"
-msgstr "Connecta mitjançant una passarel·la d'escriptori remot"
+msgstr "Connecta a través d'una passarel·la d'escriptori remot"
 
 #. i18n: ectx: property (text), widget (QLabel, gServerLabel)
 #. i18n: ectx: property (text), widget (QLabel, pHostLabel)
@@ -2229,7 +2229,7 @@ msgstr "Servidor:"
 #: rdp/rdppreferences.ui:833 rdp/rdppreferences.ui:919
 #, kde-format
 msgid "host:port"
-msgstr "servidor:port"
+msgstr "amfitrió:port"
 
 #. i18n: ectx: property (text), widget (QLabel, gUsernameLabel)
 #. i18n: ectx: property (text), widget (QLabel, pUsernameLabel)
@@ -2274,7 +2274,7 @@ msgstr "RPC"
 #: rdp/rdppreferences.ui:905
 #, kde-format
 msgid "Connect through a proxy server"
-msgstr "Connecta mitjançant un servidor intermediari"
+msgstr "Connecta a través d'un servidor intermediari"
 
 #. i18n: ectx: property (text), widget (QLabel, protocolLabel)
 #: rdp/rdppreferences.ui:946
@@ -2311,7 +2311,7 @@ msgstr "NLA"
 #, kde-format
 msgid "Network Level Authentication: sign in before the remote session starts."
 msgstr ""
-"Autenticació de nivell de xarxa: inicieu la sessió abans que comence la "
+"Autenticació a nivell de xarxa: s'inicia la sessió abans que comence la "
 "sessió remota."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityTLS)
@@ -2325,7 +2325,7 @@ msgstr "TLS"
 #, kde-format
 msgid "TLS encryption, signing in on the login screen of the remote computer."
 msgstr ""
-"Encriptació TLS, inicieu la sessió a la pantalla d'inici de sessió de "
+"Encriptació TLS: s'inicia la sessió a la pantalla d'inici de sessió de "
 "l'ordinador remot."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityRDP)
@@ -2338,8 +2338,7 @@ msgstr "RDP"
 #: rdp/rdppreferences.ui:1030
 #, kde-format
 msgid "Standard RDP security, the older encryption built into the protocol."
-msgstr ""
-"Seguretat RDP estàndard, l'encriptació antic incorporat en el protocol."
+msgstr "Seguretat RDP estàndard: l'encriptació antiga integrada al protocol."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityEXT)
 #: rdp/rdppreferences.ui:1037
@@ -2354,8 +2353,8 @@ msgid ""
 "Extended Network Level Authentication, which also checks that the account "
 "may sign in before the session starts."
 msgstr ""
-"Autenticació ampliada de nivell de xarxa, que també comprova que el compte "
-"puga iniciar la sessió abans que comence la sessió."
+"Autenticació de nivell de xarxa estesa, la qual també comprova que el compte "
+"pot iniciar la sessió abans que comence."
 
 #. i18n: ectx: property (text), widget (QLabel, TlsSecLevelLabel)
 #: rdp/rdppreferences.ui:1062
@@ -2370,8 +2369,8 @@ msgid ""
 "The weakest TLS encryption to accept. A higher level may refuse to connect "
 "to older servers."
 msgstr ""
-"L'encriptació TLS més feble a acceptar. Un nivell superior pot rebutjar a "
-"connectar-se a servidors més antics."
+"L'encriptació TLS mínima que s'admet. Un nivell més alt pot rebutjar la "
+"connexió amb servidors més antics."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:1082
@@ -2455,7 +2454,7 @@ msgstr "U2U"
 #, kde-format
 msgid "Use the default Kerberos realm for unmapped domains"
 msgstr ""
-"Utilitza el reialme de Kerberos predeterminat per als dominis sense mapa"
+"Utilitza el reialme Kerberos predeterminat per als dominis sense assignar"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_UseDefaultKerberosRealm)
 #: rdp/rdppreferences.ui:1175
@@ -2466,13 +2465,13 @@ msgid ""
 "to that realm. Leave this unchecked if the default realm is unrelated to "
 "this connection."
 msgstr ""
-"Activeu-la per a un sufix d'inici de sessió alternatiu que utilitze el "
+"Marqueu-la per a un sufix d'inici de sessió alternatiu que utilitze el "
 "reialme predeterminat a la configuració de Kerberos. Els noms d'inici de "
 "sessió de l'escriptori i de la passarel·la es poden enviar a este reialme. "
-"Deixeu açò sense marcar si el reialme predeterminat no està relacionat amb "
-"esta connexió."
+"Deixeu-la sense marcar si el reialme predeterminat no té relació amb esta "
+"connexió."
 
-#: rdp/rdpsession.cpp:1404
+#: rdp/rdpsession.cpp:1407
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -2482,7 +2481,7 @@ msgid ""
 "Issuer: %5\n"
 "Fingerprint: %6\n"
 msgstr ""
-"Servidor: %1:%2\n"
+"Amfitrió: %1:%2\n"
 "Nom comú: %3\n"
 "Assumpte: %4\n"
 "Emissor: %5\n"
@@ -2513,13 +2512,13 @@ msgstr ""
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this gateway is unknown. Do you wish to continue?"
-msgstr "El certificat per a esta passarel·la és desconegut. Voleu continuar?"
+msgstr "El certificat d'esta passarel·la és desconegut. Voleu continuar?"
 
 #: rdp/rdpview.cpp:374
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system is unknown. Do you wish to continue?"
-msgstr "El certificat per a este sistema és desconegut. Voleu continuar?"
+msgstr "El certificat d'este sistema és desconegut. Voleu continuar?"
 
 #: rdp/rdpview.cpp:375
 #, kde-format
@@ -2537,13 +2536,13 @@ msgstr "Recorda este certificat"
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this gateway has changed. Do you wish to continue?"
-msgstr "El certificat per a esta passarel·la ha canviat. Voleu continuar?"
+msgstr "El certificat d'esta passarel·la ha canviat. Voleu continuar?"
 
 #: rdp/rdpview.cpp:406
 #, kde-format
 msgctxt "@label"
 msgid "The certificate for this system has changed. Do you wish to continue?"
-msgstr "El certificat per a este sistema ha canviat. Voleu continuar?"
+msgstr "El certificat d'este sistema ha canviat. Voleu continuar?"
 
 #: rdp/rdpview.cpp:407
 #, kde-format
@@ -2576,7 +2575,8 @@ msgstr "No s'han acceptat les credencials per a «%1»."
 msgctxt "@info"
 msgid "Check the RD Gateway credentials in the host settings."
 msgstr ""
-"Comproveu les credencials de RD Gateway a la configuració del servidor."
+"Comproveu les credencials de la passarel·la de RD en la configuració de "
+"l'amfitrió."
 
 #: rdp/rdpview.cpp:479
 #, kde-format
@@ -2681,7 +2681,7 @@ msgid ""
 "a security protocol."
 msgstr ""
 "No s'ha pogut fer l'inici de la sessió a la passarel·la, o el servidor i "
-"KRDC no han pogut posar-se d'acord en un protocol de seguretat."
+"KRDC no s'han pogut posar d'acord sobre un protocol de seguretat."
 
 #: rdp/rdpview.cpp:535
 #, kde-format
@@ -2690,8 +2690,8 @@ msgid ""
 "NTLM is turned off for this host. Turn it on in the host settings unless the "
 "domain controller can be reached."
 msgstr ""
-"El NTLM està desactivat per a este servidor. Activeu-lo a la configuració "
-"del servidor llevat que es puga arribar fins al controlador de domini."
+"El NTLM està desactivat per a este amfitrió. Activeu-lo a la configuració de "
+"l'amfitrió llevat que es puga arribar fins al controlador de domini."
 
 #: rdp/rdpview.cpp:538
 #, kde-format
@@ -2700,22 +2700,20 @@ msgid ""
 "Set the TLS security level in the host settings to “Any”. The server may not "
 "support the level selected."
 msgstr ""
-"Establiu el nivell de seguretat de TLS en la configuració del servidor a "
+"Establiu el nivell de seguretat de TLS en la configuració de l'amfitrió a "
 "«Qualsevol». És possible que el servidor no admeta el nivell seleccionat."
 
 #: rdp/rdpview.cpp:542
 #, kde-format
 msgctxt "@label"
 msgid "The server requires Network Level Authentication (NLA)."
-msgstr ""
-"El servidor requerix Autenticació a nivell de xarxa (Network Level "
-"Authentication, NLA)."
+msgstr "El servidor requerix «Autenticació a nivell de xarxa» (NLA)."
 
 #: rdp/rdpview.cpp:543
 #, kde-format
 msgctxt "@info"
 msgid "Enable NLA in the security settings for this host."
-msgstr "Habiliteu NLA en la configuració de seguretat d'este servidor."
+msgstr "Habiliteu NLA en la configuració de seguretat d'este amfitrió."
 
 #: rdp/rdpview.cpp:561
 #, kde-format
@@ -2724,8 +2722,8 @@ msgid ""
 "Check the RD Gateway settings for this host. The gateway “%1” may be "
 "unreachable or reject the connection."
 msgstr ""
-"Comproveu la configuració de RD Gateway per a este servidor. La passarel·la "
-"«%1» pot ser inaccessible o rebutjar la connexió."
+"Comproveu la configuració de la passarel·la de RD per a este amfitrió. La "
+"passarel·la «%1» pot ser inaccessible o rebutjar la connexió."
 
 #: rdp/rdpview.cpp:568
 #, kde-format
@@ -2755,8 +2753,8 @@ msgctxt "@info"
 msgid ""
 "Try the full name of the computer. The gateway may only know it by that name."
 msgstr ""
-"Proveu el nom complet de l'ordinador. La passarel·la només el pot conéixer "
-"amb este nom."
+"Proveu amb el nom complet de l'ordinador. És possible que la passarel·la "
+"només el conega per este nom."
 
 #: rdp/rdpview.cpp:578
 #, kde-format
@@ -2766,7 +2764,7 @@ msgid ""
 "its resource authorization policy."
 msgstr ""
 "Demaneu a l'administrador de la passarel·la que permeta este compte i "
-"l'ordinador en la seua política d'autorització de recursos."
+"ordinador a la seua política d'autorització de recursos."
 
 #: rdp/rdpview.cpp:582
 #, kde-format
@@ -2788,7 +2786,7 @@ msgstr ""
 #, kde-format
 msgctxt "@label"
 msgid "The gateway could not reach “%1”."
-msgstr "La passarel·la no ha pogut arribar fins a «%1»."
+msgstr "La passarel·la no ha pogut accedir a «%1»."
 
 #: rdp/rdpview.cpp:589
 #, kde-format
@@ -2797,8 +2795,8 @@ msgid ""
 "Make sure the remote computer is running, and that the gateway can reach it "
 "by this name."
 msgstr ""
-"Assegureu-vos que l'ordinador remot s'estiga executant i que la passarel·la "
-"puga arribar-hi amb este nom."
+"Assegureu-vos que l'ordinador remot estiga funcionant i que la passarel·la "
+"hi puga accedir amb este nom."
 
 #: rdp/rdpview.cpp:593
 #, kde-format
@@ -2863,8 +2861,8 @@ msgid ""
 "Reconnect to continue. The idle time limit is set by the administrator of "
 "the server."
 msgstr ""
-"Reconnecteu per a continuar. El límit de temps d'inactivitat l'establix "
-"l'administrador del servidor."
+"Torneu a connectar per a continuar. El límit de temps d'inactivitat "
+"l'establix l'administrador del servidor."
 
 #: rdp/rdpview.cpp:633
 #, kde-format
@@ -2904,7 +2902,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Invalid Gateway"
-msgstr "Passarel·la no vàlida"
+msgstr "La passarel·la no és vàlida"
 
 #: rdp/rdpviewfactory.cpp:203
 #, kde-format
@@ -2913,8 +2911,9 @@ msgid ""
 "This file connects through the gateway “%1”, which could capture your login "
 "details. Continue only if you trust this file."
 msgstr ""
-"Este fitxer connecta a través de la passarel·la «%1», que podria capturar "
-"els detalls d'inici de sessió. Continueu només si confieu en este fitxer."
+"Este fitxer es connecta a través de la passarel·la «%1», la qual podria "
+"capturar les vostres dades d'inici de sessió. Continueu només si confieu en "
+"este fitxer."
 
 #: rdp/rdpviewfactory.cpp:206
 #, kde-format
@@ -2955,8 +2954,8 @@ msgid ""
 "USB drives and memory cards, including ones plugged in during the session. "
 "Network shares are not included."
 msgstr ""
-"Unitats USB i targetes de memòria, incloses les que s'han connectat durant "
-"la sessió. No s'inclouen les comparticions de xarxa."
+"Unitats USB i targetes de memòria, incloent-hi les que es connecten durant "
+"la sessió. No s'hi inclouen els recursos compartits de xarxa."
 
 #: rdp/sharedfolderfield.cpp:33
 #, kde-format
@@ -2974,7 +2973,7 @@ msgstr "Documents"
 #, kde-format
 msgctxt "@item:inlistbox shared folder"
 msgid "Other Folder…"
-msgstr "Altres carpetes…"
+msgstr "Una altra carpeta…"
 
 #: rdp/sharedfolderfield.cpp:65
 #, kde-format
@@ -2992,13 +2991,13 @@ msgstr "%1 (%2)"
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose Shared Folder"
-msgstr "Trieu una carpeta compartida"
+msgstr "Trieu la carpeta compartida"
 
 #: rdp/smartcardreaderfield.cpp:33
 #, kde-format
 msgctxt "@item:inlistbox smartcard reader, %1 is its saved name"
 msgid "%1 (not detected)"
-msgstr "%1 (no detectada)"
+msgstr "%1 (no s'ha detectat)"
 
 #: rdp/smartcardreaderfield.cpp:50
 #, kde-format
@@ -3076,8 +3075,9 @@ msgid ""
 "The resolution requested from the remote desktop. The guest must have spice-"
 "vdagent running for dynamic resize to work."
 msgstr ""
-"La resolució sol·licitada des de l'escriptori remot. L'hoste ha de tindre "
-"«spice-vdagent» funcionant perquè funcione el canvi de mida dinàmic."
+"La resolució sol·licitada des de l'escriptori remot. El sistema convidat ha "
+"de tindre «spice-vdagent» en execució perquè funcione el canvi de mida "
+"dinàmic."
 
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Width)
 #: spice/spicepreferences.ui:160
@@ -3108,7 +3108,7 @@ msgstr "H&abilita la reproducció d'àudio"
 #: spice/spicepreferences.ui:252
 #, kde-format
 msgid "Play audio from the remote host on this machine."
-msgstr "Reproduïx àudio des de l'amfitrió remot en esta màquina."
+msgstr "Reproduïx àudio de l'amfitrió remot en esta màquina."
 
 #. i18n: ectx: property (text), widget (QLabel, networkHeading)
 #: spice/spicepreferences.ui:295 vnc/vncpreferences.ui:304
@@ -3126,7 +3126,7 @@ msgstr "Esta connexió necessita el seu fitxer de connexió."
 #, kde-format
 msgctxt "@info"
 msgid "Open a new .vv file for this virtual machine."
-msgstr "Obri un fitxer .vv nou per a esta màquina virtual."
+msgstr "Obri un fitxer «.vv» nou per a esta màquina virtual."
 
 #: spice/spiceview.cpp:883
 #, kde-format
@@ -3135,8 +3135,8 @@ msgid ""
 "The server rejected the password in the connection file, which may have "
 "expired. Open a new file, or enter the password."
 msgstr ""
-"El servidor ha rebutjat la contrasenya del fitxer de connexió, que podria "
-"haver caducat. Obriu un fitxer nou o introduïu la contrasenya."
+"El servidor ha rebutjat la contrasenya del fitxer de connexió, la qual "
+"podria haver caducat. Obriu un fitxer nou o introduïu la contrasenya."
 
 #: spice/spiceview.cpp:885
 #, kde-format
@@ -3147,7 +3147,7 @@ msgstr "Es requerix autenticació per a connectar-se a <b>%1</b>."
 #, kde-format
 msgctxt "@label"
 msgid "The TLS handshake failed."
-msgstr "El protocol inicial de SSL ha fallat."
+msgstr "Ha fallat la negociació TSL."
 
 #: spice/spiceview.cpp:956
 #, kde-format
@@ -3156,8 +3156,8 @@ msgid ""
 "Check whether the server accepts TLS only on a separate port, and that its "
 "certificate is trusted."
 msgstr ""
-"Comproveu si el servidor accepta TLS només en un port separat i que el seu "
-"certificat és de confiança."
+"Comproveu si el servidor només accepta TLS en un port independent i si el "
+"seu certificat és de confiança."
 
 #: spice/spiceview.cpp:959
 #, kde-format
@@ -3192,8 +3192,8 @@ msgid ""
 "This file connects through the proxy “%1”, which could intercept the "
 "session. Continue only if you trust this file."
 msgstr ""
-"Este fitxer connecta a través del servidor intermediari «%1», que podria "
-"interceptar la sessió Continueu només si confieu en este fitxer."
+"Este fitxer es connecta a través del servidor intermediari «%1», el qual "
+"podria interceptar la sessió. Continueu només si confieu en este fitxer."
 
 #: spice/spiceviewfactory.cpp:176
 #, kde-format
@@ -3284,8 +3284,8 @@ msgstr "Molt gran (1600x1200)"
 #, kde-format
 msgid "Don't copy passwords from supported password managers to remote hosts"
 msgstr ""
-"No copieu contrasenyes des dels gestors de contrasenyes admesos a amfitrions "
-"remots"
+"No copieu les contrasenyes dels gestors de contrasenyes admesos als "
+"amfitrions remots"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, dont_copy_passwords)
 #: vnc/vncpreferences.ui:247
@@ -3303,7 +3303,7 @@ msgstr ""
 #: vnc/vncpreferences.ui:254
 #, kde-format
 msgid "Scroll &multiplier:"
-msgstr "&Multiplicador de desplaçament:"
+msgstr "&Multiplicador del desplaçament:"
 
 #. i18n: ectx: property (toolTip), widget (QSpinBox, kcfg_ScrollMultiplier)
 #: vnc/vncpreferences.ui:264
@@ -3323,8 +3323,8 @@ msgid ""
 "Sharing."
 msgstr ""
 "Nombre d'esdeveniments de desplaçament enviats a l'escriptori remot per cada "
-"pas de la roda del ratolí. Incrementeu-ho si el desplaçament és massa lent, "
-"per exemple, amb macOS Screen Sharing."
+"pas de la roda del ratolí. Augmenteu aquest valor si el desplaçament és "
+"massa lent, per exemple amb la compartició de pantalla de macOS."
 
 #. i18n: ectx: property (text), widget (QLabel, connectionLabel)
 #: vnc/vncpreferences.ui:311
@@ -3347,10 +3347,10 @@ msgstr ""
 "Utilitzeu-la per a especificar el rendiment de la vostra connexió. Cal "
 "tindre en compte que haureu de seleccionar la velocitat de l'enllaç més lent "
 "-encara que tingueu una connexió molt ràpida-, açò no vos ajudarà si "
-"l'ordinador remot utilitza un mòdem lent. El fet d'escollir una qualitat "
-"massa alta pot resultar en uns temps de resposta molt lents. Escollir una "
-"qualitat massa baixa pot incrementar la latència en connexions ràpides i "
-"resulta en una baixa qualitat de la imatge, especialment en el mode «Baixa "
+"l'ordinador remot utilitza un mòdem lent. Si es tria un nivell de qualitat "
+"massa alt en un enllaç lent, els temps de resposta seran més llargs. "
+"Escollir una qualitat més baixa augmentarà la latència en connexions d'alta "
+"velocitat i reduirà la qualitat de la imatge, especialment en el mode «Baixa "
 "qualitat»."
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_Quality)
@@ -3402,7 +3402,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info"
 msgid "Then connect again and enter the password carefully."
-msgstr "Després connecteu-vos de nou i introduïu la contrasenya amb cura."
+msgstr "Després torneu a connectar i introduïu la contrasenya amb cura."
 
 #: vnc/vncview.cpp:329
 #, kde-format

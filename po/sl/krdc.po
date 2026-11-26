@@ -1,6 +1,6 @@
 # Slovenian translation of krdc
 # Copyright (C) 2002, 2003, 2004, 2005, 2006, 2007 Free Software Foundation, Inc.
-# $Id: krdc.po 1753717 2026-11-20 01:59:03Z scripty $
+# $Id: krdc.po 1754365 2026-11-26 01:49:39Z scripty $
 # $Source$
 #
 # Andrej Vernekar <andrej.vernekar@moj.net>, 2002, 2007, 2008.
@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-20 01:10+0000\n"
+"POT-Creation-Date: 2026-11-26 01:03+0000\n"
 "PO-Revision-Date: 2026-11-13 10:34+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -292,13 +292,13 @@ msgstr "Konfiguriraj…"
 msgid "Remove"
 msgstr "Odstrani"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:360 mainwindow.cpp:964
-#: mainwindow.cpp:980
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:360 mainwindow.cpp:960
+#: mainwindow.cpp:976
 #, kde-format
 msgid "Unusable URL"
 msgstr "Neuporaben URL"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:980
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:976
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr "Izbranega gostitelja ni mogoče obravnavati."
@@ -384,277 +384,277 @@ msgstr[1] "Pred %1 letoma"
 msgstr[2] "Pred %1 leti"
 msgstr[3] "Pred %1 leti"
 
-#: connectionstatuswidget.cpp:64
+#: connectionstatuswidget.cpp:63
 #, kde-format
 msgctxt "@info:status connection step"
 msgid "Not started"
 msgstr "Ni začeto"
 
-#: connectionstatuswidget.cpp:67
+#: connectionstatuswidget.cpp:66
 #, kde-format
 msgctxt "@info:status connection step"
 msgid "Done"
 msgstr "Narejeno"
 
-#: connectionstatuswidget.cpp:70
+#: connectionstatuswidget.cpp:69
 #, kde-format
 msgctxt "@info:status connection step"
 msgid "Failed"
 msgstr "Neuspelo"
 
-#: connectionstatuswidget.cpp:73
+#: connectionstatuswidget.cpp:72
 #, kde-format
 msgctxt "@info:status connection step"
 msgid "Information"
 msgstr "Informacije"
 
-#: connectionstatuswidget.cpp:250
+#: connectionstatuswidget.cpp:244
 #, kde-format
 msgctxt "@info"
 msgid "Diagnostic information copied to the clipboard"
 msgstr "Diagnostične informacije so bili skopirane na odložišče"
 
-#: connectionstatuswidget.cpp:257
+#: connectionstatuswidget.cpp:251
 #, kde-format
 msgctxt "@title"
 msgid "Connecting to %1"
 msgstr "Povezovanje na %1"
 
-#: connectionstatuswidget.cpp:258
+#: connectionstatuswidget.cpp:252
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Connecting to %1"
 msgstr "Povezovanje na %1"
 
-#: connectionstatuswidget.cpp:274
+#: connectionstatuswidget.cpp:268
 #, kde-format
 msgctxt "@action:button"
 msgid "Cancel"
 msgstr "Prekliči"
 
-#: connectionstatuswidget.cpp:335
+#: connectionstatuswidget.cpp:329
 #, kde-format
 msgctxt "@info:status connection step"
 msgid "In progress"
 msgstr "V teku"
 
-#: connectionstatuswidget.cpp:411
+#: connectionstatuswidget.cpp:405
 #, kde-format
 msgctxt "@info connection step"
 msgid "Looking up the server address"
 msgstr "Iskanje naslova strežnika"
 
-#: connectionstatuswidget.cpp:413
+#: connectionstatuswidget.cpp:407
 #, kde-format
 msgctxt "@info connection step"
 msgid "Opening the SSH tunnel"
 msgstr "Odpiranje tunela SSH"
 
-#: connectionstatuswidget.cpp:415
+#: connectionstatuswidget.cpp:409
 #, kde-format
 msgctxt "@info connection step"
 msgid "Opening a network connection"
 msgstr "Odpiranje omrežne povezave"
 
-#: connectionstatuswidget.cpp:417
+#: connectionstatuswidget.cpp:411
 #, kde-format
 msgctxt "@info connection step"
 msgid "Securing the connection"
 msgstr "Vzpostavljanje varne povezave"
 
-#: connectionstatuswidget.cpp:419
+#: connectionstatuswidget.cpp:413
 #, kde-format
 msgctxt "@info connection step"
 msgid "Logging in"
 msgstr "Prijavljanje"
 
-#: connectionstatuswidget.cpp:421
+#: connectionstatuswidget.cpp:415
 #, kde-format
 msgctxt "@info connection step"
 msgid "Starting the remote session"
 msgstr "Zaganjanje oddaljene seje"
 
-#: connectionstatuswidget.cpp:423
+#: connectionstatuswidget.cpp:417
 #, kde-format
 msgctxt "@info connection step"
 msgid "Reconnecting"
 msgstr "Ponovno povezovanje"
 
-#: connectionstatuswidget.cpp:433
+#: connectionstatuswidget.cpp:427
 #, kde-format
 msgctxt "@info connection step"
 msgid "Server address resolved"
 msgstr "Naslov strežnika razrešen"
 
-#: connectionstatuswidget.cpp:435
+#: connectionstatuswidget.cpp:429
 #, kde-format
 msgctxt "@info connection step"
 msgid "SSH tunnel established"
 msgstr "Vzpostavljen tunel SSH"
 
-#: connectionstatuswidget.cpp:437
+#: connectionstatuswidget.cpp:431
 #, kde-format
 msgctxt "@info connection step"
 msgid "Network connection established"
 msgstr "Mrežna povezava vzpostavljena"
 
-#: connectionstatuswidget.cpp:439
+#: connectionstatuswidget.cpp:433
 #, kde-format
 msgctxt "@info connection step"
 msgid "Connection secured"
 msgstr "Povezava zavarovana"
 
-#: connectionstatuswidget.cpp:442
+#: connectionstatuswidget.cpp:436
 #, kde-format
 msgctxt "@info connection step"
 msgid "Access granted"
 msgstr "Dostop odobren"
 
-#: connectionstatuswidget.cpp:444
+#: connectionstatuswidget.cpp:438
 #, kde-format
 msgctxt "@info connection step"
 msgid "Remote session started"
 msgstr "Oddaljena seja se je začela"
 
-#: connectionstatuswidget.cpp:454
+#: connectionstatuswidget.cpp:448
 #, kde-format
 msgctxt "@info"
 msgid "Resolved to %1."
 msgstr "Razrešeno na %1."
 
-#: connectionstatuswidget.cpp:466
+#: connectionstatuswidget.cpp:460
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Local address lookup failed: %1"
 msgstr "Iskanje lokalnega naslova ni uspelo: %1"
 
-#: connectionstatuswidget.cpp:471
+#: connectionstatuswidget.cpp:468
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "%1 resolved to %2"
 msgstr "%1 razrešeno na %2"
 
-#: connectionstatuswidget.cpp:503
+#: connectionstatuswidget.cpp:500
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Connecting to the remote desktop service"
 msgstr "Vzpostavljanje povezave s storitvijo oddaljenega namizja"
 
-#: connectionstatuswidget.cpp:510
+#: connectionstatuswidget.cpp:507
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Authenticating"
 msgstr "Avtentikacija"
 
-#: connectionstatuswidget.cpp:514
+#: connectionstatuswidget.cpp:511
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Preparing the session"
 msgstr "Pripravljanje seje"
 
-#: connectionstatuswidget.cpp:518
+#: connectionstatuswidget.cpp:515
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Connected"
 msgstr "Povezano"
 
-#: connectionstatuswidget.cpp:551
+#: connectionstatuswidget.cpp:548
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Connection dropped, reconnecting: %1"
 msgstr "Povezava prekinjena, ponovno vzpostavljanje povezave: %1"
 
-#: connectionstatuswidget.cpp:551
+#: connectionstatuswidget.cpp:548
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Reconnected"
 msgstr "Znova povezano"
 
-#: connectionstatuswidget.cpp:564
+#: connectionstatuswidget.cpp:561
 #, kde-format
 msgctxt "@info"
 msgid "KRDC keeps trying until the connection is back."
 msgstr "KRDC poskuša znova in znova, dokler se povezava ne vzpostavi."
 
-#: connectionstatuswidget.cpp:568
+#: connectionstatuswidget.cpp:565
 #, kde-format
 msgctxt "@title"
 msgid "Connection to %1 interrupted"
 msgstr "Povezava s %1 je prekinjena"
 
-#: connectionstatuswidget.cpp:570
+#: connectionstatuswidget.cpp:567
 #, kde-format
 msgctxt "@action:button"
 msgid "Disconnect"
 msgstr "Prekini povezavo"
 
-#: connectionstatuswidget.cpp:580
+#: connectionstatuswidget.cpp:577
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Failed while: %1"
 msgstr "Neuspeh med: %1"
 
-#: connectionstatuswidget.cpp:661
+#: connectionstatuswidget.cpp:658
 #, kde-format
 msgctxt "@title"
 msgid "Session with %1 ended"
 msgstr "Seja z %1 se je končala"
 
-#: connectionstatuswidget.cpp:663
+#: connectionstatuswidget.cpp:660
 #, kde-format
 msgctxt "@title"
 msgid "Connection to %1 lost"
 msgstr "Povezava z %1 je izgubljena"
 
-#: connectionstatuswidget.cpp:665
+#: connectionstatuswidget.cpp:662
 #, kde-format
 msgctxt "@title"
 msgid "Could not connect to %1"
 msgstr "Povezava z %1 ni uspela"
 
-#: connectionstatuswidget.cpp:671
+#: connectionstatuswidget.cpp:668
 #, kde-format
 msgctxt "@action:button"
 msgid "Reconnect"
 msgstr "Ponovno vzpostavi povezavo"
 
-#: connectionstatuswidget.cpp:671
+#: connectionstatuswidget.cpp:668
 #, kde-format
 msgctxt "@action:button"
 msgid "Connect Again"
 msgstr "Spet vzpostavi povezavo"
 
-#: connectionstatuswidget.cpp:676
+#: connectionstatuswidget.cpp:673
 #, kde-format
 msgctxt "@action:button"
 msgid "Edit Address"
 msgstr "Uredi naslov"
 
-#: connectionstatuswidget.cpp:679
+#: connectionstatuswidget.cpp:676
 #, kde-format
 msgctxt "@action:button"
 msgid "Edit Host Settings…"
 msgstr "Uredi nastavitve gostitelja…"
 
-#: connectionstatuswidget.cpp:681
+#: connectionstatuswidget.cpp:678
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Tab"
 msgstr "Zapri zavihek"
 
-#: connectionstatuswidget.cpp:719
+#: connectionstatuswidget.cpp:716
 #, kde-format
 msgctxt "@action:button"
 msgid "Copy diagnostic information"
 msgstr "Kopiraj diagnostične informacije"
 
-#: connectionstatuswidget.cpp:724
+#: connectionstatuswidget.cpp:721
 #, kde-format
 msgctxt "@action:button"
 msgid "Hide details"
 msgstr "Skrij podrobnosti"
 
-#: connectionstatuswidget.cpp:724
+#: connectionstatuswidget.cpp:721
 #, kde-format
 msgctxt "@action:button"
 msgid "Show details"
@@ -1343,8 +1343,8 @@ msgstr "URL-ji za povezavo po zagonu"
 msgid "KDE Remote Desktop Client started"
 msgstr "Zagnan odjemalec za oddaljena namizja"
 
-#: mainwindow.cpp:129 mainwindow.cpp:146 mainwindow.cpp:1430
-#: mainwindow.cpp:1528
+#: mainwindow.cpp:129 mainwindow.cpp:146 mainwindow.cpp:1425
+#: mainwindow.cpp:1523
 #, kde-format
 msgid "New Connection"
 msgstr "Nova povezava"
@@ -1500,80 +1500,80 @@ msgstr "Preklopi v okenski način"
 msgid "Window Mode"
 msgstr "Okenski način"
 
-#: mainwindow.cpp:964
+#: mainwindow.cpp:960
 #, kde-format
 msgid "The entered address cannot be handled by this connection type."
 msgstr "Vnesenega naslova ni mogoče obdelati s to vrsto povezave."
 
-#: mainwindow.cpp:999
+#: mainwindow.cpp:995
 #, kde-format
 msgid "Connect"
 msgstr "Poveži"
 
-#: mainwindow.cpp:1000
+#: mainwindow.cpp:996
 #, kde-format
 msgid "Rename"
 msgstr "Preimenuj"
 
-#: mainwindow.cpp:1001
+#: mainwindow.cpp:997
 #, kde-format
 msgid "Settings"
 msgstr "Nastavitve"
 
-#: mainwindow.cpp:1002
+#: mainwindow.cpp:998
 #, kde-format
 msgid "Delete"
 msgstr "Izbriši"
 
-#: mainwindow.cpp:1005 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:1001 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "Zaznamki"
 
-#: mainwindow.cpp:1005 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:1001 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "Zgodovina"
 
-#: mainwindow.cpp:1017
+#: mainwindow.cpp:1013
 #, kde-format
 msgid "Rename %1"
 msgstr "Preimenuj %1"
 
-#: mainwindow.cpp:1017
+#: mainwindow.cpp:1013
 #, kde-format
 msgid "Rename %1 to"
 msgstr "Preimenuj %1 v"
 
-#: mainwindow.cpp:1024
+#: mainwindow.cpp:1020
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "Ali ste prepričani, da želite izbrisati %1?"
 
-#: mainwindow.cpp:1024
+#: mainwindow.cpp:1020
 #, kde-format
 msgid "Delete %1"
 msgstr "Izbriši %1"
 
-#: mainwindow.cpp:1048
+#: mainwindow.cpp:1044
 #, kde-format
 msgid "Add Bookmark"
 msgstr "Dodaj zaznamek"
 
-#: mainwindow.cpp:1049
+#: mainwindow.cpp:1045
 #, kde-format
 msgid "Close Tab"
 msgstr "Zapri zavihek"
 
-#: mainwindow.cpp:1096
+#: mainwindow.cpp:1092
 #, kde-format
 msgctxt "@info"
 msgid "Keyboard released for one shortcut. Click the remote desktop to cancel."
 msgstr ""
 
-#: mainwindow.cpp:1098
+#: mainwindow.cpp:1094
 #, kde-format
 msgctxt "@info %1 is the name of a key, such as Right Ctrl"
 msgid ""
@@ -1581,34 +1581,34 @@ msgid ""
 "cancel."
 msgstr ""
 
-#: mainwindow.cpp:1179
+#: mainwindow.cpp:1175
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "Obdrži orodno vrstico"
 
-#: mainwindow.cpp:1298
+#: mainwindow.cpp:1293
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr ""
 "Ali ste prepričani da želite končati KDE-jevega odjemalca za oddaljena "
 "namizja?"
 
-#: mainwindow.cpp:1299
+#: mainwindow.cpp:1294
 #, kde-format
 msgid "Confirm Quit"
 msgstr "Potrdite izhod"
 
-#: mainwindow.cpp:1454
+#: mainwindow.cpp:1449
 #, kde-format
 msgid "Connect to:"
 msgstr "Poveži se z:"
 
-#: mainwindow.cpp:1458
+#: mainwindow.cpp:1453
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr "Vnesite za povezavo z naslovom ali filtriranje seznama."
 
-#: mainwindow.cpp:1469
+#: mainwindow.cpp:1464
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
@@ -1617,28 +1617,28 @@ msgstr ""
 "Vnesite naslov IP ali ime DNS. Počistite vrstico, da dobite seznam načinov "
 "za povezavo."
 
-#: mainwindow.cpp:1472
+#: mainwindow.cpp:1467
 #, kde-format
 msgid "Goto Address"
 msgstr "Pojdi na naslov"
 
-#: mainwindow.cpp:1564
+#: mainwindow.cpp:1559
 #, kde-format
 msgid "Remote Desktops"
 msgstr "Oddaljena namizja"
 
-#: mainwindow.cpp:1593
+#: mainwindow.cpp:1588
 #, kde-format
 msgid "Filter"
 msgstr "Filter"
 
-#: mainwindow.cpp:1646
+#: mainwindow.cpp:1641
 #, kde-format
 msgctxt "@label"
 msgid "The remote computer may have shut down or restarted."
 msgstr "Oddaljeni računalnik se je morda izklopil ali znova zagnal."
 
-#: mainwindow.cpp:1650
+#: mainwindow.cpp:1645
 #, kde-format
 msgctxt "@title connection error"
 msgid "Closed before the session started"
@@ -2472,7 +2472,7 @@ msgstr ""
 "prek prehoda se lahko pošljejo v ta realm. Pustite neoznačeno, če privzet "
 "realm ni povezan s to povezavo."
 
-#: rdp/rdpsession.cpp:1404
+#: rdp/rdpsession.cpp:1407
 #, kde-format
 msgctxt "@label"
 msgid ""
