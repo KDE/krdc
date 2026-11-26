@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-20 03:38+0000\n"
+"POT-Creation-Date: 2026-11-26 03:14+0000\n"
 "PO-Revision-Date: 2024-04-22 16:04\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -14,8 +14,8 @@ msgstr ""
 "X-Crowdin-Project: kdeorg\n"
 "X-Crowdin-Project-ID: 269464\n"
 "X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf6-trunk/messages/krdc/krdc.pot\n"
-"X-Crowdin-File-ID: 53550\n"
+"X-Crowdin-File: /kf6-stable/messages/krdc/krdc.pot\n"
+"X-Crowdin-File-ID: 54780\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -204,13 +204,13 @@ msgstr "配置…"
 msgid "Remove"
 msgstr "删除"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:338 mainwindow.cpp:961
-#: mainwindow.cpp:977
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:338 mainwindow.cpp:957
+#: mainwindow.cpp:973
 #, kde-format
 msgid "Unusable URL"
 msgstr "不可用的 URL"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:977
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:973
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr "无法处理选中的主机。"
@@ -281,372 +281,338 @@ msgid "A year ago"
 msgid_plural "%1 years ago"
 msgstr[0] "%1 年前"
 
-#: connectionstatuswidget.cpp:64
+#: connectionstatuswidget.cpp:63
 #, kde-format
 msgctxt "@info:status connection step"
 msgid "Not started"
-msgstr ""
+msgstr "尚未开始"
 
-#: connectionstatuswidget.cpp:67
+#: connectionstatuswidget.cpp:66
 #, kde-format
 msgctxt "@info:status connection step"
 msgid "Done"
-msgstr ""
+msgstr "完成"
 
-#: connectionstatuswidget.cpp:70
+#: connectionstatuswidget.cpp:69
 #, kde-format
 msgctxt "@info:status connection step"
 msgid "Failed"
-msgstr ""
+msgstr "失败"
 
-#: connectionstatuswidget.cpp:73
+#: connectionstatuswidget.cpp:72
 #, kde-format
 msgctxt "@info:status connection step"
 msgid "Information"
-msgstr ""
+msgstr "信息"
 
-#: connectionstatuswidget.cpp:250
+#: connectionstatuswidget.cpp:244
 #, kde-format
 msgctxt "@info"
 msgid "Diagnostic information copied to the clipboard"
-msgstr ""
+msgstr "诊断信息已复制到剪贴板"
 
-#: connectionstatuswidget.cpp:257
-#, fuzzy, kde-format
-#| msgid "Connecting to %1"
+#: connectionstatuswidget.cpp:251
+#, kde-format
 msgctxt "@title"
 msgid "Connecting to %1"
 msgstr "正在连接到 %1"
 
-#: connectionstatuswidget.cpp:258
-#, fuzzy, kde-format
-#| msgid "Connecting to %1"
+#: connectionstatuswidget.cpp:252
+#, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Connecting to %1"
 msgstr "正在连接到 %1"
 
-#: connectionstatuswidget.cpp:274
+#: connectionstatuswidget.cpp:268
 #, kde-format
 msgctxt "@action:button"
 msgid "Cancel"
-msgstr ""
+msgstr "取消"
 
-#: connectionstatuswidget.cpp:335
+#: connectionstatuswidget.cpp:329
 #, kde-format
 msgctxt "@info:status connection step"
 msgid "In progress"
-msgstr ""
+msgstr "进行中"
+
+#: connectionstatuswidget.cpp:405
+#, kde-format
+msgctxt "@info connection step"
+msgid "Looking up the server address"
+msgstr "正在查找服务器地址"
+
+#: connectionstatuswidget.cpp:407
+#, kde-format
+msgctxt "@info connection step"
+msgid "Opening the SSH tunnel"
+msgstr "正在打开 SSH 隧道"
+
+#: connectionstatuswidget.cpp:409
+#, kde-format
+msgctxt "@info connection step"
+msgid "Opening a network connection"
+msgstr "正在打开网络连接"
 
 #: connectionstatuswidget.cpp:411
 #, kde-format
 msgctxt "@info connection step"
-msgid "Looking up the server address"
-msgstr ""
+msgid "Securing the connection"
+msgstr "正在确保连接安全"
 
 #: connectionstatuswidget.cpp:413
-#, fuzzy, kde-format
-#| msgid "Connect via SSH tunnel"
+#, kde-format
 msgctxt "@info connection step"
-msgid "Opening the SSH tunnel"
-msgstr "通过 SSH 隧道连接"
+msgid "Logging in"
+msgstr "正在登录"
 
 #: connectionstatuswidget.cpp:415
 #, kde-format
 msgctxt "@info connection step"
-msgid "Opening a network connection"
-msgstr ""
+msgid "Starting the remote session"
+msgstr "正在启动远程会话"
 
 #: connectionstatuswidget.cpp:417
-#, fuzzy, kde-format
-#| msgid "Preparing connection to %1"
-msgctxt "@info connection step"
-msgid "Securing the connection"
-msgstr "正在准备连接到 %1"
-
-#: connectionstatuswidget.cpp:419
 #, kde-format
 msgctxt "@info connection step"
-msgid "Logging in"
-msgstr ""
-
-#: connectionstatuswidget.cpp:421
-#, fuzzy, kde-format
-#| msgid "Prevent remote session lock"
-msgctxt "@info connection step"
-msgid "Starting the remote session"
-msgstr "防止远程会话锁定"
-
-#: connectionstatuswidget.cpp:423
-#, fuzzy, kde-format
-#| msgid "Reconnecting."
-msgctxt "@info connection step"
 msgid "Reconnecting"
-msgstr "正在重新连接。"
+msgstr "正在重新连接"
+
+#: connectionstatuswidget.cpp:427
+#, kde-format
+msgctxt "@info connection step"
+msgid "Server address resolved"
+msgstr "服务器地址已解析"
+
+#: connectionstatuswidget.cpp:429
+#, kde-format
+msgctxt "@info connection step"
+msgid "SSH tunnel established"
+msgstr "SSH 隧道已建立"
+
+#: connectionstatuswidget.cpp:431
+#, kde-format
+msgctxt "@info connection step"
+msgid "Network connection established"
+msgstr "已建立网络连接"
 
 #: connectionstatuswidget.cpp:433
 #, kde-format
 msgctxt "@info connection step"
-msgid "Server address resolved"
-msgstr ""
-
-#: connectionstatuswidget.cpp:435
-#, fuzzy, kde-format
-#| msgid "SSH tunnel options"
-msgctxt "@info connection step"
-msgid "SSH tunnel established"
-msgstr "SSH 隧道选项"
-
-#: connectionstatuswidget.cpp:437
-#, kde-format
-msgctxt "@info connection step"
-msgid "Network connection established"
-msgstr ""
-
-#: connectionstatuswidget.cpp:439
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Connection Refused"
-msgctxt "@info connection step"
 msgid "Connection secured"
-msgstr "连接被拒绝"
+msgstr "连接安全"
 
-#: connectionstatuswidget.cpp:442
+#: connectionstatuswidget.cpp:436
 #, kde-format
 msgctxt "@info connection step"
 msgid "Access granted"
-msgstr ""
+msgstr "已被授予访问权限"
 
-#: connectionstatuswidget.cpp:444
-#, fuzzy, kde-format
-#| msgid "KDE Remote Desktop Client started"
+#: connectionstatuswidget.cpp:438
+#, kde-format
 msgctxt "@info connection step"
 msgid "Remote session started"
-msgstr "KDE 远程桌面客户端已启动"
+msgstr "远程会话已启动"
 
-#: connectionstatuswidget.cpp:454
-#, fuzzy, kde-format
-#| msgid "Connected to %1"
+#: connectionstatuswidget.cpp:448
+#, kde-format
 msgctxt "@info"
 msgid "Resolved to %1."
-msgstr "已连接到 %1"
+msgstr "已解析到 %1。"
 
-#: connectionstatuswidget.cpp:466
+#: connectionstatuswidget.cpp:460
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Local address lookup failed: %1"
-msgstr ""
+msgstr "本地地址查找失败：%1"
 
-#: connectionstatuswidget.cpp:471
+#: connectionstatuswidget.cpp:468
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "%1 resolved to %2"
-msgstr ""
+msgstr "%1 已解析到 %2"
 
-#: connectionstatuswidget.cpp:503
-#, fuzzy, kde-format
-#| msgid "Connect to a VNC Remote Desktop"
+#: connectionstatuswidget.cpp:500
+#, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Connecting to the remote desktop service"
-msgstr "连接到 VNC 远程桌面"
+msgstr "正在连接远程桌面服务"
 
-#: connectionstatuswidget.cpp:510
-#, fuzzy, kde-format
-#| msgid "Authenticating at %1"
+#: connectionstatuswidget.cpp:507
+#, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Authenticating"
-msgstr "正在 %1 上进行身份验证..."
+msgstr "正在验证身份"
 
-#: connectionstatuswidget.cpp:514
-#, fuzzy, kde-format
-#| msgid "Prevent remote session lock"
+#: connectionstatuswidget.cpp:511
+#, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Preparing the session"
-msgstr "防止远程会话锁定"
+msgstr "正在准备会话"
 
-#: connectionstatuswidget.cpp:518
-#, fuzzy, kde-format
-#| msgid "Connected."
+#: connectionstatuswidget.cpp:515
+#, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Connected"
-msgstr "已连接."
+msgstr "已连接"
 
-#: connectionstatuswidget.cpp:551
+#: connectionstatuswidget.cpp:548
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Connection dropped, reconnecting: %1"
-msgstr ""
+msgstr "连接已断开，正在重新连接：%1"
 
-#: connectionstatuswidget.cpp:551
-#, fuzzy, kde-format
-#| msgid "Reconnected."
+#: connectionstatuswidget.cpp:548
+#, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Reconnected"
-msgstr "已经重新连接。"
+msgstr "已重新连接"
 
-#: connectionstatuswidget.cpp:564
+#: connectionstatuswidget.cpp:561
 #, kde-format
 msgctxt "@info"
 msgid "KRDC keeps trying until the connection is back."
-msgstr ""
+msgstr "KRDC 会持续尝试，直到连接恢复为止。"
 
-#: connectionstatuswidget.cpp:568
-#, fuzzy, kde-format
-#| msgid "Connecting to %1"
+#: connectionstatuswidget.cpp:565
+#, kde-format
 msgctxt "@title"
 msgid "Connection to %1 interrupted"
-msgstr "正在连接到 %1"
+msgstr "与 %1 的连接已中断"
 
-#: connectionstatuswidget.cpp:570
-#, fuzzy, kde-format
-#| msgid "Disconnect"
+#: connectionstatuswidget.cpp:567
+#, kde-format
 msgctxt "@action:button"
 msgid "Disconnect"
 msgstr "断开连接"
 
-#: connectionstatuswidget.cpp:580
+#: connectionstatuswidget.cpp:577
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Failed while: %1"
-msgstr ""
+msgstr "失败：%1"
 
-#: connectionstatuswidget.cpp:661
+#: connectionstatuswidget.cpp:658
 #, kde-format
 msgctxt "@title"
 msgid "Session with %1 ended"
-msgstr ""
+msgstr "与 %1 的会话已结束"
 
-#: connectionstatuswidget.cpp:663
-#, fuzzy, kde-format
-#| msgid "Connecting to %1"
+#: connectionstatuswidget.cpp:660
+#, kde-format
 msgctxt "@title"
 msgid "Connection to %1 lost"
-msgstr "正在连接到 %1"
+msgstr "与 %1 的连接已丢失"
 
-#: connectionstatuswidget.cpp:665
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Could not Connect"
+#: connectionstatuswidget.cpp:662
+#, kde-format
 msgctxt "@title"
 msgid "Could not connect to %1"
-msgstr "无法连接"
+msgstr "无法连接到 %1"
 
-#: connectionstatuswidget.cpp:671
-#, fuzzy, kde-format
-#| msgid "Reconnected."
+#: connectionstatuswidget.cpp:668
+#, kde-format
 msgctxt "@action:button"
 msgid "Reconnect"
-msgstr "已经重新连接。"
+msgstr "重新连接"
 
-#: connectionstatuswidget.cpp:671
-#, fuzzy, kde-format
-#| msgid "Connection"
+#: connectionstatuswidget.cpp:668
+#, kde-format
 msgctxt "@action:button"
 msgid "Connect Again"
-msgstr "连接"
+msgstr "重新连接"
 
-#: connectionstatuswidget.cpp:676
-#, fuzzy, kde-format
-#| msgid "Goto Address"
+#: connectionstatuswidget.cpp:673
+#, kde-format
 msgctxt "@action:button"
 msgid "Edit Address"
-msgstr "前往地址"
+msgstr "编辑地址"
 
-#: connectionstatuswidget.cpp:679
+#: connectionstatuswidget.cpp:676
 #, kde-format
 msgctxt "@action:button"
 msgid "Edit Host Settings…"
-msgstr ""
+msgstr "编辑主机设置…"
 
-#: connectionstatuswidget.cpp:681
-#, fuzzy, kde-format
-#| msgid "Close Tab"
+#: connectionstatuswidget.cpp:678
+#, kde-format
 msgctxt "@action:button"
 msgid "Close Tab"
 msgstr "关闭标签页"
 
-#: connectionstatuswidget.cpp:719
+#: connectionstatuswidget.cpp:716
 #, kde-format
 msgctxt "@action:button"
 msgid "Copy diagnostic information"
-msgstr ""
+msgstr "复制诊断信息"
 
-#: connectionstatuswidget.cpp:724
+#: connectionstatuswidget.cpp:721
 #, kde-format
 msgctxt "@action:button"
 msgid "Hide details"
-msgstr ""
+msgstr "隐藏详情"
 
-#: connectionstatuswidget.cpp:724
-#, fuzzy, kde-format
-#| msgctxt "EMAIL OF TRANSLATORS"
-#| msgid "Your emails"
+#: connectionstatuswidget.cpp:721
+#, kde-format
 msgctxt "@action:button"
 msgid "Show details"
-msgstr "kde-china@kde.org, i@guoyunhe.me, tds00@qq.com"
+msgstr "显示详情"
 
 #: core/connectionerror.cpp:15
 #, kde-format
 msgctxt "@info connection stage"
 msgid "Setting up the SSH tunnel"
-msgstr ""
+msgstr "正在设置 SSH 隧道"
 
 #: core/connectionerror.cpp:17
 #, kde-format
 msgctxt "@info connection stage"
 msgid "Looking up the host name"
-msgstr ""
+msgstr "正在查找主机名"
 
 #: core/connectionerror.cpp:19
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Lost connection to the server."
+#, kde-format
 msgctxt "@info connection stage"
 msgid "Connecting to the server"
-msgstr "与服务器失去连接。"
+msgstr "正在连接到服务器"
 
 #: core/connectionerror.cpp:21
-#, fuzzy, kde-format
-#| msgid "Preparing connection to %1"
+#, kde-format
 msgctxt "@info connection stage"
 msgid "Securing the connection"
-msgstr "正在准备连接到 %1"
+msgstr "正在确保连接安全"
 
 #: core/connectionerror.cpp:23
 #, kde-format
 msgctxt "@info connection stage"
 msgid "Logging in"
-msgstr ""
+msgstr "正在登录"
 
 #: core/connectionerror.cpp:25
-#, fuzzy, kde-format
-#| msgid "Prevent remote session lock"
+#, kde-format
 msgctxt "@info connection stage"
 msgid "Starting the remote session"
-msgstr "防止远程会话锁定"
+msgstr "正在启动远程会话"
 
 #: core/connectionerror.cpp:27
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Connection Refused"
+#, kde-format
 msgctxt "@info connection stage"
 msgid "Connection interrupted"
-msgstr "连接被拒绝"
+msgstr "连接已中断"
 
 #: core/connectionerror.cpp:29
 #, kde-format
 msgctxt "@info connection stage"
 msgid "Session ended remotely"
-msgstr ""
+msgstr "会话已远程结束"
 
 #: core/connectionerror.cpp:33
 #, kde-format
 msgctxt "@info connection stage"
 msgid "Unknown"
-msgstr ""
+msgstr "未知"
 
 #: core/connectionerror.cpp:45
-#, fuzzy, kde-format
-#| msgid "SSH Tunnel failure"
+#, kde-format
 msgctxt "@title connection error"
 msgid "SSH tunnel failed"
 msgstr "SSH 隧道失败"
@@ -655,7 +621,7 @@ msgstr "SSH 隧道失败"
 #, kde-format
 msgctxt "@info"
 msgid "Check the SSH tunnel user name and port in the host settings."
-msgstr ""
+msgstr "请检查主机设置中的 SSH 隧道用户名和端口。"
 
 #: core/connectionerror.cpp:48
 #, kde-format
@@ -663,53 +629,50 @@ msgctxt "@info"
 msgid ""
 "Log in with an SSH client in a terminal to confirm that the server is "
 "reachable and your credentials work."
-msgstr ""
+msgstr "请使用终端中的 SSH 客户端登录，以确认服务器可访问且您的登录凭据有效。"
 
 #: core/connectionerror.cpp:49
 #, kde-format
 msgctxt "@info"
 msgid ""
 "If you use key authentication, add the key to your SSH agent with ssh-add."
-msgstr ""
+msgstr "如果使用密钥认证，请使用 ssh-add 将密钥添加到 SSH 代理中。"
 
 #: core/connectionerror.cpp:50
 #, kde-format
 msgctxt "@info"
 msgid "Make sure the SSH server allows port forwarding."
-msgstr ""
+msgstr "请确保 SSH 服务器允许端口转发。"
 
 #: core/connectionerror.cpp:54
-#, fuzzy, kde-format
-#| msgid "Server not found."
+#, kde-format
 msgctxt "@title connection error"
 msgid "Server not found"
-msgstr "未找到服务器。"
+msgstr "找不到服务器"
 
 #: core/connectionerror.cpp:56
 #, kde-format
 msgctxt "@info"
 msgid "Check the spelling of the address."
-msgstr ""
+msgstr "请检查地址的拼写是否有误。"
 
 #: core/connectionerror.cpp:57
 #, kde-format
 msgctxt "@info"
 msgid "Connect to the network or VPN the computer is on."
-msgstr ""
+msgstr "连接计算机所在的网络或 VPN。"
 
 #: core/connectionerror.cpp:58
 #, kde-format
 msgctxt "@info"
 msgid "Try the IP address of the computer instead of its name."
-msgstr ""
+msgstr "尝试使用计算机的 IP 地址，而不是主机名。"
 
 #: core/connectionerror.cpp:63
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Server not Found"
+#, kde-format
 msgctxt "@title connection error"
 msgid "Server not reachable"
-msgstr "找不到服务器"
+msgstr "服务器无法访问"
 
 #: core/connectionerror.cpp:65 core/connectionerror.cpp:145
 #, kde-format
@@ -717,13 +680,13 @@ msgctxt "@info"
 msgid ""
 "Make sure the remote computer is turned on, awake and connected to the "
 "network."
-msgstr ""
+msgstr "请确保远程计算机已开机、处于唤醒状态并已连接到网络。"
 
 #: core/connectionerror.cpp:66 core/connectionerror.cpp:135
 #, kde-format
 msgctxt "@info"
 msgid "Check that remote desktop sharing is enabled on the remote computer."
-msgstr ""
+msgstr "请检查远程计算机上是否已启用远程桌面共享。"
 
 #: core/connectionerror.cpp:67 core/connectionerror.cpp:136
 #, kde-format
@@ -732,27 +695,27 @@ msgid ""
 "Check the port in the address. The defaults are 3389 for RDP and 5900 for "
 "VNC and SPICE."
 msgstr ""
+"请检查地址中的端口。默认情况下，RDP 使用 3389 端口，VNC 和 SPICE 使用 5900 端"
+"口。"
 
 #: core/connectionerror.cpp:68 core/connectionerror.cpp:146
 #, kde-format
 msgctxt "@info"
 msgid "Check that no firewall blocks the connection."
-msgstr ""
+msgstr "检查是否有防火墙阻止了连接。"
 
 #: core/connectionerror.cpp:73
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Connection Failed"
+#, kde-format
 msgctxt "@title connection error"
 msgid "Secure connection failed"
-msgstr "连接失败"
+msgstr "安全连接失败"
 
 #: core/connectionerror.cpp:75
 #, kde-format
 msgctxt "@info"
 msgid ""
 "Review the security settings for this host, or reset them to their defaults."
-msgstr ""
+msgstr "请检查此主机的安全设置，或将其重置为默认值。"
 
 #: core/connectionerror.cpp:76
 #, kde-format
@@ -760,26 +723,25 @@ msgctxt "@info"
 msgid ""
 "If the server certificate changed unexpectedly, confirm the change with the "
 "server administrator before accepting it."
-msgstr ""
+msgstr "如果服务器证书意外更改，请在接受之前先与服务器管理员确认该变更。"
 
 #: core/connectionerror.cpp:80
-#, fuzzy, kde-format
-#| msgid "VNC authentication failed."
+#, kde-format
 msgctxt "@title connection error"
 msgid "Authentication failed"
-msgstr "VNC 认证失败"
+msgstr "身份验证失败"
 
 #: core/connectionerror.cpp:82
 #, kde-format
 msgctxt "@info"
 msgid "Check the user name, password and domain, and that Caps Lock is off."
-msgstr ""
+msgstr "请检查用户名、密码和域名，并确认大写锁定键的开关状态。"
 
 #: core/connectionerror.cpp:83
 #, kde-format
 msgctxt "@info"
 msgid "If you use a saved password, enter it again. It may be out of date."
-msgstr ""
+msgstr "如果使用的之前保存的密码，请重新输入，该密码可能已过期。"
 
 #: core/connectionerror.cpp:84
 #, kde-format
@@ -787,13 +749,13 @@ msgctxt "@info"
 msgid ""
 "If the account is locked or expired, contact the administrator of the remote "
 "computer."
-msgstr ""
+msgstr "如果账户被锁定或已过期，请联系远程计算机的管理员。"
 
 #: core/connectionerror.cpp:88
 #, kde-format
 msgctxt "@title connection error"
 msgid "Session setup failed"
-msgstr ""
+msgstr "会话设置失败"
 
 #: core/connectionerror.cpp:90
 #, kde-format
@@ -801,7 +763,7 @@ msgctxt "@info"
 msgid ""
 "Reset advanced options in the host settings, such as graphics acceleration "
 "or color depth, to their defaults."
-msgstr ""
+msgstr "请将主机设置中的高级选项 (如显卡加速或色彩位深) 重置为默认值。"
 
 #: core/connectionerror.cpp:91
 #, kde-format
@@ -809,19 +771,19 @@ msgctxt "@info"
 msgid ""
 "Ask the administrator of the remote computer whether new sessions are "
 "allowed. The number of users may be limited."
-msgstr ""
+msgstr "请询问远程计算机的管理员是否允许建立新会话，用户数量可能有限制。"
 
 #: core/connectionerror.cpp:96
 #, kde-format
 msgctxt "@title connection error"
 msgid "Network connection interrupted"
-msgstr ""
+msgstr "网络连接中断"
 
 #: core/connectionerror.cpp:98
 #, kde-format
 msgctxt "@info"
 msgid "Check your network connection, then reconnect."
-msgstr ""
+msgstr "请检查您的网络连接，然后重新连接。"
 
 #: core/connectionerror.cpp:99
 #, kde-format
@@ -829,34 +791,31 @@ msgctxt "@info"
 msgid ""
 "If the remote computer restarted or went to sleep, wait until it is back, "
 "then reconnect."
-msgstr ""
+msgstr "如果远程计算机已重启或进入睡眠状态，请等待其恢复后重新连接。"
 
 #: core/connectionerror.cpp:104
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Could not find the server."
+#, kde-format
 msgctxt "@title connection error"
 msgid "Closed by the server"
-msgstr "无法找到服务器。"
+msgstr "服务器关闭了连接"
 
 #: core/connectionerror.cpp:109
 #, kde-format
 msgctxt "@title connection error"
 msgid "Unexpected error"
-msgstr ""
+msgstr "意外错误"
 
 #: core/connectionerror.cpp:118
 #, kde-format
 msgctxt "@label"
 msgid "It accepted the connection, then closed it before the session started."
-msgstr ""
+msgstr "服务器接受了连接，但在会话开始前又关闭了连接。"
 
 #: core/connectionerror.cpp:119
-#, fuzzy, kde-format
-#| msgid "VNC server closed connection."
+#, kde-format
 msgctxt "@title connection error"
 msgid "Server closed the connection"
-msgstr "VNC 服务器端关闭了连接。"
+msgstr "服务器关闭了连接"
 
 #: core/connectionerror.cpp:121
 #, kde-format
@@ -865,12 +824,13 @@ msgid ""
 "If another viewer is connected, close it. Some servers allow only one at a "
 "time."
 msgstr ""
+"如果还有其他客户端建立了连接，请关闭它。某些服务器一次只允许一个客户端连接。"
 
 #: core/connectionerror.cpp:122
 #, kde-format
 msgctxt "@info"
 msgid "Check that this port belongs to the remote desktop service you expect."
-msgstr ""
+msgstr "请检查此端口是否属于您想使用的远程桌面服务。"
 
 #: core/connectionerror.cpp:123
 #, kde-format
@@ -878,12 +838,10 @@ msgctxt "@info"
 msgid ""
 "Check the access and security settings of the server, or its log, for why it "
 "closed the connection."
-msgstr ""
+msgstr "请检查服务器的访问和安全设置，或其日志，以确定它为何关闭了连接。"
 
 #: core/connectionerror.cpp:133
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Connection Refused"
+#, kde-format
 msgctxt "@title connection error"
 msgid "Connection refused"
 msgstr "连接被拒绝"
@@ -892,42 +850,37 @@ msgstr "连接被拒绝"
 #, kde-format
 msgctxt "@info"
 msgid "Check that no firewall on the remote computer rejects the connection."
-msgstr ""
+msgstr "请检查远程计算机上的防火墙是否拒绝了该连接。"
 
 #: core/connectionerror.cpp:143
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Server not Found"
+#, kde-format
 msgctxt "@title connection error"
 msgid "Server not responding"
-msgstr "找不到服务器"
+msgstr "服务器没有响应"
 
 #: core/connectionerror.cpp:147 core/connectionerror.cpp:156
 #, kde-format
 msgctxt "@info"
 msgid "Check that the address is right."
-msgstr ""
+msgstr "请检查地址是否正确。"
 
 #: core/connectionerror.cpp:153
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Could not connect to the server."
+#, kde-format
 msgctxt "@title connection error"
 msgid "No route to the server"
-msgstr "无法连接到服务器。"
+msgstr "没有可连接到服务器的路由"
 
 #: core/connectionerror.cpp:155
 #, kde-format
 msgctxt "@info"
 msgid "Connect to the network or VPN the remote computer is on."
-msgstr ""
+msgstr "连接远程计算机所在的网络或 VPN。"
 
 #: core/hostpreferences.cpp:306
-#, fuzzy, kde-format
-#| msgid "Connected to %1"
+#, kde-format
 msgctxt "@title:window %1 is a host name"
 msgid "Connect to %1"
-msgstr "已连接到 %1"
+msgstr "连接到 %1"
 
 #: core/hostpreferences.cpp:313
 #, kde-format
@@ -936,8 +889,7 @@ msgid ""
 msgstr "请注意，这些设置需在您下次登录到此主机时才会生效。"
 
 #: core/hostpreferences.cpp:336
-#, fuzzy, kde-format
-#| msgid "Connect"
+#, kde-format
 msgctxt "@action:button"
 msgid "Connect"
 msgstr "连接"
@@ -960,11 +912,10 @@ msgid "Show this dialog again for this host"
 msgstr "为此主机再次显示此对话框"
 
 #: core/hostpreferences.cpp:421
-#, fuzzy, kde-format
-#| msgid "Settings"
+#, kde-format
 msgctxt "@action:button"
 msgid "All Settings…"
-msgstr "设置"
+msgstr "所有设置…"
 
 #. i18n: ectx: label, entry (OpenSessions), group (General)
 #: core/krdc.kcfg:16
@@ -981,65 +932,62 @@ msgstr "请输入 SSH 密码。"
 #, kde-format
 msgctxt "@label"
 msgid "The SSH tunnel on port %1 could not be set up."
-msgstr ""
+msgstr "无法建立端口 %1 上的 SSH 隧道。"
 
 #: core/remoteview.cpp:750
 #, kde-format
 msgctxt "@title connection error"
 msgid "SSH server not reachable"
-msgstr ""
+msgstr "SSH 服务器无法访问"
 
 #: core/remoteview.cpp:751
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "The server refused the connection request."
+#, kde-format
 msgctxt "@label"
 msgid "The SSH server did not accept a connection on port %1."
-msgstr "服务器拒绝了连接请求。"
+msgstr "SSH 服务器没有在端口 %1 上接受连接。"
 
 #: core/remoteview.cpp:753
 #, kde-format
 msgctxt "@info"
 msgid "Make sure the SSH server is running and listens on port %1."
-msgstr ""
+msgstr "请确保 SSH 服务器正在运行，并监听 %1 端口。"
 
 #: core/remoteview.cpp:754
 #, kde-format
 msgctxt "@info"
 msgid ""
 "Check the host name, and that the computer is reachable from this network."
-msgstr ""
+msgstr "请检查主机名，并确认该计算机可从当前网络访问。"
 
 #: core/remoteview.cpp:755
 #, kde-format
 msgctxt "@info"
 msgid "Check that no firewall blocks SSH connections."
-msgstr ""
+msgstr "检查是否有防火墙阻止了 SSH 连接。"
 
 #: core/remoteview.cpp:759
-#, fuzzy, kde-format
-#| msgid "SSH Tunnel failure"
+#, kde-format
 msgctxt "@title connection error"
 msgid "SSH login failed"
-msgstr "SSH 隧道失败"
+msgstr "SSH 登录失败"
 
 #: core/remoteview.cpp:760
 #, kde-format
 msgctxt "@label"
 msgid "The SSH server did not accept the login."
-msgstr ""
+msgstr "SSH 服务器没有接受登录。"
 
 #: core/remoteview.cpp:761
 #, kde-format
 msgctxt "@label"
 msgid "The SSH server did not accept the login for “%1”."
-msgstr ""
+msgstr "SSH 服务器拒绝了“%1”的登录请求。"
 
 #: core/remoteview.cpp:763
 #, kde-format
 msgctxt "@info"
 msgid "Check the SSH user name in the host settings, and the password."
-msgstr ""
+msgstr "请检查主机设置中的 SSH 用户名和密码。"
 
 #: core/remoteview.cpp:764
 #, kde-format
@@ -1048,19 +996,21 @@ msgid ""
 "If you use key authentication, add the key to your SSH agent with ssh-add, "
 "and make sure it is authorized on the server."
 msgstr ""
+"如果使用密钥认证，请使用 ssh-add 将密钥添加到 SSH 代理中，并确保该密钥已在服"
+"务器上获得授权。"
 
 #: core/remoteview.cpp:765
 #, kde-format
 msgctxt "@info"
 msgid ""
 "If the SSH server does not allow password logins, set up key authentication."
-msgstr ""
+msgstr "如果 SSH 服务器不允许密码登录，请设置密钥认证。"
 
 #: core/remoteview.cpp:769
 #, kde-format
 msgctxt "@label"
 msgid "No free local port could be opened for the tunnel on this computer."
-msgstr ""
+msgstr "无法在此计算机上为隧道打开任何可用的本地端口。"
 
 #: core/remoteview.cpp:771
 #, kde-format
@@ -1068,7 +1018,7 @@ msgctxt "@info"
 msgid ""
 "Close other applications that open many network connections, then connect "
 "again."
-msgstr ""
+msgstr "关闭其他打开大量网络连接的应用程序，然后重新连接。"
 
 #: core/sshtunnelthread.cpp:104
 #, kde-format
@@ -1236,8 +1186,8 @@ msgstr "启动后要连接的 URL"
 msgid "KDE Remote Desktop Client started"
 msgstr "KDE 远程桌面客户端已启动"
 
-#: mainwindow.cpp:116 mainwindow.cpp:133 mainwindow.cpp:1432
-#: mainwindow.cpp:1529
+#: mainwindow.cpp:116 mainwindow.cpp:133 mainwindow.cpp:1427
+#: mainwindow.cpp:1524
 #, kde-format
 msgid "New Connection"
 msgstr "新建连接"
@@ -1323,6 +1273,8 @@ msgid ""
 "Unable to load connection data from “%1”.\n"
 "The file may be damaged, or it is in a format KRDC does not support."
 msgstr ""
+"无法从“%1”加载连接数据。  \n"
+"文件可能已损坏，或格式不受 KRDC 支持。"
 
 #: mainwindow.cpp:298
 #, kde-format
@@ -1336,6 +1288,9 @@ msgid ""
 "\n"
 "Use the form [username@]host[:port], for example: user@192.168.1.10:5900"
 msgstr ""
+"“%1”不是有效的地址。\n"
+"\n"
+"请使用以下格式的地址：[用户名@]主机[:端口]，例如：user@192.168.1.10:5900"
 
 #: mainwindow.cpp:307
 #, kde-format
@@ -1348,6 +1303,8 @@ msgid ""
 "No installed plugin can handle the “%1” protocol.\n"
 "Supported protocols: %2"
 msgstr ""
+"没有已安装的插件可以处理“%1”协议。  \n"
+"支持的协议：%2"
 
 #: mainwindow.cpp:562
 #, kde-format
@@ -1379,136 +1336,136 @@ msgstr "切换到窗口模式"
 msgid "Window Mode"
 msgstr "窗口模式"
 
-#: mainwindow.cpp:961
+#: mainwindow.cpp:957
 #, kde-format
 msgid "The entered address cannot be handled by this connection type."
 msgstr "输入的地址无法通过此连接类型处理。"
 
-#: mainwindow.cpp:996
+#: mainwindow.cpp:992
 #, kde-format
 msgid "Connect"
 msgstr "连接"
 
-#: mainwindow.cpp:997
+#: mainwindow.cpp:993
 #, kde-format
 msgid "Rename"
 msgstr "重命名"
 
-#: mainwindow.cpp:998
+#: mainwindow.cpp:994
 #, kde-format
 msgid "Settings"
 msgstr "设置"
 
-#: mainwindow.cpp:999
+#: mainwindow.cpp:995
 #, kde-format
 msgid "Delete"
 msgstr "删除"
 
-#: mainwindow.cpp:1002 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:998 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "书签"
 
-#: mainwindow.cpp:1002 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:998 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "历史"
 
-#: mainwindow.cpp:1014
+#: mainwindow.cpp:1010
 #, kde-format
 msgid "Rename %1"
 msgstr "重命名 %1"
 
-#: mainwindow.cpp:1014
+#: mainwindow.cpp:1010
 #, kde-format
 msgid "Rename %1 to"
 msgstr "将 %1 重命名为"
 
-#: mainwindow.cpp:1021
+#: mainwindow.cpp:1017
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "您确定要想要删除 %1 吗？"
 
-#: mainwindow.cpp:1021
+#: mainwindow.cpp:1017
 #, kde-format
 msgid "Delete %1"
 msgstr "删除 %1"
 
-#: mainwindow.cpp:1045
+#: mainwindow.cpp:1041
 #, kde-format
 msgid "Add Bookmark"
 msgstr "添加书签"
 
-#: mainwindow.cpp:1046
+#: mainwindow.cpp:1042
 #, kde-format
 msgid "Close Tab"
 msgstr "关闭标签页"
 
-#: mainwindow.cpp:1163
+#: mainwindow.cpp:1159
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr "最小化全屏窗口"
 
-#: mainwindow.cpp:1180
+#: mainwindow.cpp:1176
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "吸附工具栏"
 
-#: mainwindow.cpp:1300
+#: mainwindow.cpp:1295
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr "您确定要退出 KDE 远程桌面客户端吗？"
 
-#: mainwindow.cpp:1301
+#: mainwindow.cpp:1296
 #, kde-format
 msgid "Confirm Quit"
 msgstr "确认退出"
 
-#: mainwindow.cpp:1455
+#: mainwindow.cpp:1450
 #, kde-format
 msgid "Connect to:"
 msgstr "连接到："
 
-#: mainwindow.cpp:1459
+#: mainwindow.cpp:1454
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr "在此输入以连接到该地址并过滤列表。"
 
-#: mainwindow.cpp:1470
+#: mainwindow.cpp:1465
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
 "methods."
 msgstr "在此输入 IP 或 DNS 名称。清除整行可获得连接方式列表。"
 
-#: mainwindow.cpp:1473
+#: mainwindow.cpp:1468
 #, kde-format
 msgid "Goto Address"
 msgstr "前往地址"
 
-#: mainwindow.cpp:1565
+#: mainwindow.cpp:1560
 #, kde-format
 msgid "Remote Desktops"
 msgstr "远程桌面"
 
-#: mainwindow.cpp:1594
+#: mainwindow.cpp:1589
 #, kde-format
 msgid "Filter"
 msgstr "过滤"
 
-#: mainwindow.cpp:1647
+#: mainwindow.cpp:1642
 #, kde-format
 msgctxt "@label"
 msgid "The remote computer may have shut down or restarted."
-msgstr ""
+msgstr "远程计算机可能已关机或重启。"
 
-#: mainwindow.cpp:1651
+#: mainwindow.cpp:1646
 #, kde-format
 msgctxt "@title connection error"
 msgid "Closed before the session started"
-msgstr ""
+msgstr "在会话开始前关闭"
 
 #. i18n: ectx: attribute (title), widget (QWidget, displayTab)
 #. i18n: ectx: property (text), widget (QLabel, displayHeading)
@@ -1516,14 +1473,13 @@ msgstr ""
 #: vnc/vncpreferences.ui:48
 #, kde-format
 msgid "Display"
-msgstr ""
+msgstr "显示"
 
 #. i18n: ectx: property (text), widget (QLabel, resolutionLabel)
 #: rdp/rdppreferences.ui:39 spice/spicepreferences.ui:55
-#, fuzzy, kde-format
-#| msgid "Resolution"
+#, kde-format
 msgid "Resolution:"
-msgstr "分辨率"
+msgstr "分辨率："
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, kcfg_Resolution)
 #. i18n: ectx: property (whatsThis), widget (KComboBox, resolutionComboBox)
@@ -1746,10 +1702,9 @@ msgstr "低彩色(8位)"
 #. i18n: ectx: property (text), widget (QLabel, localResourcesHeading)
 #: rdp/rdppreferences.ui:448 spice/spicepreferences.ui:242
 #: vnc/vncpreferences.ui:237
-#, fuzzy, kde-format
-#| msgid "Local Cursor"
+#, kde-format
 msgid "Local Resources"
-msgstr "本地光标"
+msgstr "本地资源"
 
 #. i18n: ectx: property (text), widget (QLabel, soundLabel)
 #: rdp/rdppreferences.ui:454
@@ -1792,10 +1747,9 @@ msgstr "使用此处指定您的键盘布局。此布局设置用于向服务器
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:530
-#, fuzzy, kde-format
-#| msgid "On This Computer"
+#, kde-format
 msgid "Same as This Computer"
-msgstr "在此电脑上播放"
+msgstr "与这台计算机相同"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_KeyboardLayout)
 #: rdp/rdppreferences.ui:535
@@ -2021,24 +1975,22 @@ msgstr "土耳其语(tr)"
 
 #. i18n: ectx: property (text), widget (QLabel, shareMediaLabel)
 #: rdp/rdppreferences.ui:723
-#, fuzzy, kde-format
-#| msgid "Share Media:"
+#, kde-format
 msgid "Shared folder:"
-msgstr "共享媒体"
+msgstr "共享的文件夹："
 
 #. i18n: ectx: property (toolTip), widget (SharedFolderField, kcfg_ShareMedia)
 #: rdp/rdppreferences.ui:739
 #, kde-format
 msgid "A folder on this computer that the remote computer can read and write."
-msgstr ""
+msgstr "此计算机上可供远程计算机读写的一个文件夹。"
 
 #. i18n: ectx: property (text), widget (QLabel, shareSmartcardLabel)
 #: rdp/rdppreferences.ui:746
-#, fuzzy, kde-format
-#| msgid "Share Smartcard:"
+#, kde-format
 msgctxt "@label:listbox"
 msgid "Shared smartcard:"
-msgstr "分享智能卡："
+msgstr "共享的智能卡："
 
 #. i18n: ectx: attribute (title), widget (QWidget, connectionTab)
 #: rdp/rdppreferences.ui:767
@@ -2048,17 +2000,15 @@ msgstr "连接"
 
 #. i18n: ectx: property (text), widget (QLabel, sessionLabel)
 #: rdp/rdppreferences.ui:773
-#, fuzzy, kde-format
-#| msgid "Sessions"
+#, kde-format
 msgid "Session:"
-msgstr "会话"
+msgstr "会话："
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ConsoleMode)
 #: rdp/rdppreferences.ui:780
-#, fuzzy, kde-format
-#| msgid "Admin (or console) session"
+#, kde-format
 msgid "Connect to the console (admin) session"
-msgstr "管理员 (或命令行终端) 会话"
+msgstr "连接到控制台 (管理员) 会话"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_ConsoleMode)
 #: rdp/rdppreferences.ui:783
@@ -2066,14 +2016,13 @@ msgstr "管理员 (或命令行终端) 会话"
 msgid ""
 "Connect to the session an administrator uses to manage the remote computer, "
 "instead of a new user session."
-msgstr ""
+msgstr "连接到管理员用于管理远程计算机的会话，而不是创建一个新的用户会话。"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_PreventSessionLock)
 #: rdp/rdppreferences.ui:790
-#, fuzzy, kde-format
-#| msgid "Prevent remote session lock"
+#, kde-format
 msgid "Keep the remote session from locking"
-msgstr "防止远程会话锁定"
+msgstr "防止远程会话被锁定"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_PreventSessionLock)
 #: rdp/rdppreferences.ui:793
@@ -2081,14 +2030,13 @@ msgstr "防止远程会话锁定"
 msgid ""
 "Move the remote mouse pointer every few minutes so that the remote computer "
 "does not lock the session while it is idle."
-msgstr ""
+msgstr "每隔几分钟移动一下远程鼠标指针，以防止远程计算机在空闲时锁定会话。"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseGateway)
 #: rdp/rdppreferences.ui:819
-#, fuzzy, kde-format
-#| msgid "Connect to a VNC Remote Desktop"
+#, kde-format
 msgid "Connect through a Remote Desktop Gateway"
-msgstr "连接到 VNC 远程桌面"
+msgstr "通过远程桌面网关连接"
 
 #. i18n: ectx: property (text), widget (QLabel, gServerLabel)
 #. i18n: ectx: property (text), widget (QLabel, pHostLabel)
@@ -2145,11 +2093,9 @@ msgstr "RPC"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseProxy)
 #: rdp/rdppreferences.ui:905
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Lost connection to the server."
+#, kde-format
 msgid "Connect through a proxy server"
-msgstr "与服务器失去连接。"
+msgstr "通过代理服务器连接"
 
 #. i18n: ectx: property (text), widget (QLabel, protocolLabel)
 #: rdp/rdppreferences.ui:946
@@ -2171,8 +2117,7 @@ msgstr "安全性"
 
 #. i18n: ectx: property (text), widget (QLabel, protocolsLabel)
 #: rdp/rdppreferences.ui:998
-#, fuzzy, kde-format
-#| msgid "Protocol:"
+#, kde-format
 msgid "Protocols:"
 msgstr "协议："
 
@@ -2186,7 +2131,7 @@ msgstr "NLA"
 #: rdp/rdppreferences.ui:1010
 #, kde-format
 msgid "Network Level Authentication: sign in before the remote session starts."
-msgstr ""
+msgstr "网络级身份验证：在远程会话开始前登录。"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityTLS)
 #: rdp/rdppreferences.ui:1017
@@ -2198,7 +2143,7 @@ msgstr "TLS"
 #: rdp/rdppreferences.ui:1020
 #, kde-format
 msgid "TLS encryption, signing in on the login screen of the remote computer."
-msgstr ""
+msgstr "TLS 加密，在远程计算机的登录界面进行登录。"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityRDP)
 #: rdp/rdppreferences.ui:1027
@@ -2210,7 +2155,7 @@ msgstr "RDP"
 #: rdp/rdppreferences.ui:1030
 #, kde-format
 msgid "Standard RDP security, the older encryption built into the protocol."
-msgstr ""
+msgstr "标准 RDP 安全性，即协议内置的较早加密方式。"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_SecurityEXT)
 #: rdp/rdppreferences.ui:1037
@@ -2224,7 +2169,7 @@ msgstr "Ext"
 msgid ""
 "Extended Network Level Authentication, which also checks that the account "
 "may sign in before the session starts."
-msgstr ""
+msgstr "扩展的网络级别身份验证，此选项会在会话开始前检查账户是否可以登录。"
 
 #. i18n: ectx: property (text), widget (QLabel, TlsSecLevelLabel)
 #: rdp/rdppreferences.ui:1062
@@ -2238,12 +2183,11 @@ msgstr "TLS 安全等级："
 msgid ""
 "The weakest TLS encryption to accept. A higher level may refuse to connect "
 "to older servers."
-msgstr ""
+msgstr "可接受的最弱 TLS 加密级别。更高的级别可能会拒绝与较旧的服务器连接。"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_TlsSecLevel)
 #: rdp/rdppreferences.ui:1082
-#, fuzzy, kde-format
-#| msgid "any"
+#, kde-format
 msgid "Any"
 msgstr "任意"
 
@@ -2279,10 +2223,9 @@ msgstr "256 位"
 
 #. i18n: ectx: property (text), widget (QLabel, authPkgListLabel)
 #: rdp/rdppreferences.ui:1115
-#, fuzzy, kde-format
-#| msgid "Authentication Package List:"
+#, kde-format
 msgid "Authentication packages:"
-msgstr "身份验证软件包列表："
+msgstr "身份验证软件包："
 
 #. i18n: ectx: property (toolTip), widget (QLabel, authPkgListLabel)
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_AuthPkgKerberos)
@@ -2296,30 +2239,33 @@ msgid ""
 "packages are explicitly forbidden. For Kerberos-only authentication (e.g. "
 "Active Directory Protected Users accounts), uncheck NTLM."
 msgstr ""
+"已勾选的身份验证包在 CredSSP/NLA 协商期间可被使用；未勾选的身份验证包将被明确"
+"禁用。对于仅使用 Kerberos 身份认证的情况 (例如 Active Directory 受保护用户账"
+"户)，请取消勾选 NTLM。"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AuthPkgKerberos)
 #: rdp/rdppreferences.ui:1127
 #, kde-format
 msgid "Kerberos"
-msgstr ""
+msgstr "Kerberos"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AuthPkgNtlm)
 #: rdp/rdppreferences.ui:1137
 #, kde-format
 msgid "NTLM"
-msgstr ""
+msgstr "NTLM"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_AuthPkgU2u)
 #: rdp/rdppreferences.ui:1147
 #, kde-format
 msgid "U2U"
-msgstr ""
+msgstr "U2U"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_UseDefaultKerberosRealm)
 #: rdp/rdppreferences.ui:1172
 #, kde-format
 msgid "Use the default Kerberos realm for unmapped domains"
-msgstr ""
+msgstr "对未映射的域使用默认 Kerberos 域"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_UseDefaultKerberosRealm)
 #: rdp/rdppreferences.ui:1175
@@ -2330,8 +2276,10 @@ msgid ""
 "to that realm. Leave this unchecked if the default realm is unrelated to "
 "this connection."
 msgstr ""
+"启用此选项后，将使用 Kerberos 配置中的默认域作为备用登录后缀。桌面和网关登录"
+"名可能会发送到该域。如果默认域与此连接无关，请取消勾选此选项。"
 
-#: rdp/rdpsession.cpp:1404
+#: rdp/rdpsession.cpp:1407
 #, kde-format
 msgctxt "@label"
 msgid ""
@@ -2348,12 +2296,10 @@ msgstr ""
 "指纹：%6\n"
 
 #: rdp/rdpview.cpp:295
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Access to this system requires a username and password."
+#, kde-format
 msgctxt "@label"
 msgid "Access to the gateway and this system requires a username and password."
-msgstr "访问此系统需要用户名和密码。"
+msgstr "访问此网关和系统需要用户名和密码。"
 
 #: rdp/rdpview.cpp:296
 #, kde-format
@@ -2362,20 +2308,16 @@ msgid "Access to this system requires a username and password."
 msgstr "访问此系统需要用户名和密码。"
 
 #: rdp/rdpview.cpp:351
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Access to this system requires a username and password."
+#, kde-format
 msgctxt "@label %1 is a server address"
 msgid "Access to the gateway %1 requires a username and password."
-msgstr "访问此系统需要用户名和密码。"
+msgstr "访问网关 %1 需要用户名和密码。"
 
 #: rdp/rdpview.cpp:372
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "The certificate for this system is unknown. Do you wish to continue?"
+#, kde-format
 msgctxt "@label"
 msgid "The certificate for this gateway is unknown. Do you wish to continue?"
-msgstr "此系统的证书未知。您确定要继续吗？"
+msgstr "此网关的证书未知。您确定要继续吗？"
 
 #: rdp/rdpview.cpp:373
 #, kde-format
@@ -2396,13 +2338,10 @@ msgid "Remember this certificate"
 msgstr "记住此证书"
 
 #: rdp/rdpview.cpp:404
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid ""
-#| "The certificate for this system has changed. Do you wish to continue?"
+#, kde-format
 msgctxt "@label"
 msgid "The certificate for this gateway has changed. Do you wish to continue?"
-msgstr "此系统的证书已经改变。您确定要继续吗？"
+msgstr "此网关的证书已经改变。您确定要继续吗？"
 
 #: rdp/rdpview.cpp:405
 #, kde-format
@@ -2434,43 +2373,43 @@ msgstr ""
 #, kde-format
 msgctxt "@label"
 msgid "The credentials for “%1” were not accepted."
-msgstr ""
+msgstr "“%1”的登录凭据没有被接受。"
 
 #: rdp/rdpview.cpp:462
 #, kde-format
 msgctxt "@info"
 msgid "Check the RD Gateway credentials in the host settings."
-msgstr ""
+msgstr "请检查主机设置中的 RD 网关登录凭据。"
 
 #: rdp/rdpview.cpp:478
 #, kde-format
 msgctxt "@label"
 msgid "This account may not log in remotely."
-msgstr ""
+msgstr "此账户无法远程登录。"
 
 #: rdp/rdpview.cpp:479
 #, kde-format
 msgctxt "@label"
 msgid "“%1” may not log in remotely."
-msgstr ""
+msgstr "“%1”无法远程登录。"
 
 #: rdp/rdpview.cpp:481 rdp/rdpview.cpp:574 rdp/rdpview.cpp:582
 #, kde-format
 msgctxt "@title connection error"
 msgid "Access denied"
-msgstr ""
+msgstr "访问被拒绝"
 
 #: rdp/rdpview.cpp:484
 #, kde-format
 msgctxt "@label"
 msgid "The gateway or the remote computer refused this login."
-msgstr ""
+msgstr "网关或远程计算机已拒绝此次登录。"
 
 #: rdp/rdpview.cpp:490
 #, kde-format
 msgctxt "@info"
 msgid "Check whether the account is locked, disabled or expired."
-msgstr ""
+msgstr "请检查账户是否被锁定、禁用或已过期。"
 
 #: rdp/rdpview.cpp:492
 #, kde-format
@@ -2479,20 +2418,19 @@ msgid ""
 "Ask the administrator of the remote computer to add the account to the "
 "Remote Desktop Users group, or log in with a different account."
 msgstr ""
+"请让远程计算机的管理员将该账户添加到“远程桌面用户”组，或使用其他账户登录。"
 
 #: rdp/rdpview.cpp:500
 #, kde-format
 msgctxt "@label"
 msgid "The password must be changed before it can be used to log in remotely."
-msgstr ""
+msgstr "必须先更改密码，然后才能使用新密码进行远程登录。"
 
 #: rdp/rdpview.cpp:501
-#, fuzzy, kde-format
-#| msgctxt "@title:dialog"
-#| msgid "Password Problems"
+#, kde-format
 msgctxt "@title connection error"
 msgid "Password expired"
-msgstr "密码问题"
+msgstr "密码已过期"
 
 #: rdp/rdpview.cpp:503
 #, kde-format
@@ -2500,37 +2438,37 @@ msgctxt "@info"
 msgid ""
 "Change the password by logging in locally on the remote computer, or ask its "
 "administrator to reset it."
-msgstr ""
+msgstr "请在远程计算机上本地登录来更改密码，或请管理员重置密码。"
 
 #: rdp/rdpview.cpp:508
 #, kde-format
 msgctxt "@label"
 msgid "The Kerberos domain controller could not be reached."
-msgstr ""
+msgstr "无法连接到 Kerberos 域控制器。"
 
 #: rdp/rdpview.cpp:510
 #, kde-format
 msgctxt "@info"
 msgid "Check the domain you entered when logging in."
-msgstr ""
+msgstr "请在登录时检查您输入的域名。"
 
 #: rdp/rdpview.cpp:511
 #, kde-format
 msgctxt "@info"
 msgid "Connect to the network or VPN of the domain."
-msgstr ""
+msgstr "连接到该域的网络或 VPN。"
 
 #: rdp/rdpview.cpp:516 spice/spiceview.cpp:964 vnc/vncview.cpp:298
 #, kde-format
 msgctxt "@label"
 msgid "No IP address was found for this name."
-msgstr ""
+msgstr "没有找到此主机名对应的 IP 地址。"
 
 #: rdp/rdpview.cpp:527
 #, kde-format
 msgctxt "@label"
 msgid "The server and KRDC could not agree on a security protocol."
-msgstr ""
+msgstr "服务器与 KRDC 无法就安全协议达成一致。"
 
 #: rdp/rdpview.cpp:530
 #, kde-format
@@ -2538,7 +2476,7 @@ msgctxt "@label"
 msgid ""
 "Logging in to the gateway failed, or the server and KRDC could not agree on "
 "a security protocol."
-msgstr ""
+msgstr "登录网关失败，或服务器与 KRDC 无法就安全协议达成一致。"
 
 #: rdp/rdpview.cpp:534
 #, kde-format
@@ -2547,6 +2485,7 @@ msgid ""
 "NTLM is turned off for this host. Turn it on in the host settings unless the "
 "domain controller can be reached."
 msgstr ""
+"此主机的 NTLM 已关闭。除非可以访问域控制器，否则请在主机设置中将其开启。"
 
 #: rdp/rdpview.cpp:537
 #, kde-format
@@ -2555,18 +2494,19 @@ msgid ""
 "Set the TLS security level in the host settings to “Any”. The server may not "
 "support the level selected."
 msgstr ""
+"请在主机设置中将 TLS 安全级别设为“任意”。服务器可能不支持之前选择的安全级别。"
 
 #: rdp/rdpview.cpp:541
 #, kde-format
 msgctxt "@label"
 msgid "The server requires Network Level Authentication (NLA)."
-msgstr ""
+msgstr "服务器要求使用网络级身份验证 (NLA)。"
 
 #: rdp/rdpview.cpp:542
 #, kde-format
 msgctxt "@info"
 msgid "Enable NLA in the security settings for this host."
-msgstr ""
+msgstr "请在此主机的安全设置中启用网络级别身份验证 (NLA)。"
 
 #: rdp/rdpview.cpp:560
 #, kde-format
@@ -2574,13 +2514,13 @@ msgctxt "@info"
 msgid ""
 "Check the RD Gateway settings for this host. The gateway “%1” may be "
 "unreachable or reject the connection."
-msgstr ""
+msgstr "请检查此主机的 RD 网关设置。网关“%1”可能无法访问或拒绝连接。"
 
 #: rdp/rdpview.cpp:567
 #, kde-format
 msgctxt "@label"
 msgid "The remote computer did not finish starting the session in time."
-msgstr ""
+msgstr "远程计算机未能及时完成会话的启动。"
 
 #: rdp/rdpview.cpp:568
 #, kde-format
@@ -2588,20 +2528,20 @@ msgctxt "@info"
 msgid ""
 "The remote computer may still be starting up or be under heavy load. Wait a "
 "minute, then connect again."
-msgstr ""
+msgstr "远程计算机可能仍在启动中或负载较重。请稍等片刻，然后重新连接。"
 
 #: rdp/rdpview.cpp:573
 #, kde-format
 msgctxt "@label"
 msgid "The gateway does not allow this account to connect to “%1”."
-msgstr ""
+msgstr "网关不允许此账户连接到“%1”。"
 
 #: rdp/rdpview.cpp:576
 #, kde-format
 msgctxt "@info"
 msgid ""
 "Try the full name of the computer. The gateway may only know it by that name."
-msgstr ""
+msgstr "尝试使用计算机的全名。网关可能只能通过此名称识别该计算机。"
 
 #: rdp/rdpview.cpp:577
 #, kde-format
@@ -2609,13 +2549,13 @@ msgctxt "@info"
 msgid ""
 "Ask the administrator of the gateway to allow this account and computer in "
 "its resource authorization policy."
-msgstr ""
+msgstr "请要求网关管理员在其资源授权策略中允许此账户和此计算机。"
 
 #: rdp/rdpview.cpp:581
 #, kde-format
 msgctxt "@label"
 msgid "The gateway does not allow this device to connect."
-msgstr ""
+msgstr "网关不允许此设备连接。"
 
 #: rdp/rdpview.cpp:583
 #, kde-format
@@ -2623,13 +2563,13 @@ msgctxt "@info"
 msgid ""
 "Ask the administrator of the gateway to check its connection authorization "
 "policy."
-msgstr ""
+msgstr "请要求网关管理员检查其连接授权策略。"
 
 #: rdp/rdpview.cpp:586
 #, kde-format
 msgctxt "@label"
 msgid "The gateway could not reach “%1”."
-msgstr ""
+msgstr "网关无法连接到“%1”。"
 
 #: rdp/rdpview.cpp:588
 #, kde-format
@@ -2637,62 +2577,61 @@ msgctxt "@info"
 msgid ""
 "Make sure the remote computer is running, and that the gateway can reach it "
 "by this name."
-msgstr ""
+msgstr "请确保远程计算机正在运行，并且网关能够通过此名称访问它。"
 
 #: rdp/rdpview.cpp:592
 #, kde-format
 msgctxt "@label"
 msgid "It accepted the connection, then refused to start a session."
-msgstr ""
+msgstr "远程计算机接受了连接，但随后拒绝启动会话。"
 
 #: rdp/rdpview.cpp:593
-#, fuzzy, kde-format
-#| msgid "Sessions"
+#, kde-format
 msgctxt "@title connection error"
 msgid "Session refused"
-msgstr "会话"
+msgstr "会话被拒绝"
 
 #: rdp/rdpview.cpp:597
 #, kde-format
 msgctxt "@label"
 msgid "The server did not accept the options selected for this host."
-msgstr ""
+msgstr "服务器没有接受为此主机选择的选项。"
 
 #: rdp/rdpview.cpp:600
 #, kde-format
 msgctxt "@label"
 msgid "An administrator or another program disconnected this session."
-msgstr ""
+msgstr "管理员或其他程序已断开此会话。"
 
 #: rdp/rdpview.cpp:603
 #, kde-format
 msgctxt "@label"
 msgid "An administrator signed this session out."
-msgstr ""
+msgstr "管理员已退出此会话。"
 
 #: rdp/rdpview.cpp:606
 #, kde-format
 msgctxt "@label"
 msgid "The session was disconnected from the remote computer."
-msgstr ""
+msgstr "会话已与远程计算机断开连接。"
 
 #: rdp/rdpview.cpp:613
 #, kde-format
 msgctxt "@label"
 msgid "Disconnected because someone else connected to this session."
-msgstr ""
+msgstr "由于其他人连接到此会话，连接已断开。"
 
 #: rdp/rdpview.cpp:614
 #, kde-format
 msgctxt "@info"
 msgid "Reconnect to take the session back. This disconnects the other user."
-msgstr ""
+msgstr "重新连接以恢复会话，这将断开另一用户的连接。"
 
 #: rdp/rdpview.cpp:617
 #, kde-format
 msgctxt "@label"
 msgid "The session was closed after being idle for too long."
-msgstr ""
+msgstr "会话因长时间闲置而被关闭。"
 
 #: rdp/rdpview.cpp:618
 #, kde-format
@@ -2700,13 +2639,13 @@ msgctxt "@info"
 msgid ""
 "Reconnect to continue. The idle time limit is set by the administrator of "
 "the server."
-msgstr ""
+msgstr "重新连接以继续。闲置时间限制由服务器管理员设置。"
 
 #: rdp/rdpview.cpp:632
 #, kde-format
 msgctxt "@label"
 msgid "The remote computer reported a problem while logging in."
-msgstr ""
+msgstr "远程计算机在登录时报告了问题。"
 
 #: rdp/rdpview.cpp:633
 #, kde-format
@@ -2714,7 +2653,7 @@ msgctxt "@info"
 msgid ""
 "Check that this user may log in to the remote computer, and that the session "
 "is not busy."
-msgstr ""
+msgstr "请检查该用户是否可以登录到远程计算机，以及会话是否处于忙碌状态。"
 
 #: rdp/rdpview.cpp:1007
 #, kde-format
@@ -2731,14 +2670,13 @@ msgstr "连接到 Windows 远程桌面(RDP)"
 #, kde-format
 msgctxt "@info %1 is a server address"
 msgid "This file requires a gateway, but its address “%1” is not valid."
-msgstr ""
+msgstr "此文件需要一个网关，但其地址“%1”无效。"
 
 #: rdp/rdpviewfactory.cpp:194
-#, fuzzy, kde-format
-#| msgid "Gateway"
+#, kde-format
 msgctxt "@title:window"
 msgid "Invalid Gateway"
-msgstr "网关"
+msgstr "无效的网关"
 
 #: rdp/rdpviewfactory.cpp:203
 #, kde-format
@@ -2747,12 +2685,14 @@ msgid ""
 "This file connects through the gateway “%1”, which could capture your login "
 "details. Continue only if you trust this file."
 msgstr ""
+"此文件通过网关“%1”连接，该网关可能会捕获您的登录信息。仅当您信任此文件时，才"
+"应继续。"
 
 #: rdp/rdpviewfactory.cpp:206
 #, kde-format
 msgctxt "@title:window"
 msgid "Use Gateway from File?"
-msgstr ""
+msgstr "使用文件中的网关？"
 
 #: rdp/rdpviewfactory.cpp:280
 #, kde-format
@@ -2772,13 +2712,13 @@ msgstr ""
 #, kde-format
 msgctxt "@item:inlistbox shared folder"
 msgid "Not shared"
-msgstr ""
+msgstr "不共享"
 
 #: rdp/sharedfolderfield.cpp:20
 #, kde-format
 msgctxt "@item:inlistbox shared folder"
 msgid "Removable drives"
-msgstr ""
+msgstr "可移动磁盘"
 
 #: rdp/sharedfolderfield.cpp:22
 #, kde-format
@@ -2786,61 +2726,61 @@ msgctxt "@info:tooltip"
 msgid ""
 "USB drives and memory cards, including ones plugged in during the session. "
 "Network shares are not included."
-msgstr ""
+msgstr "U 盘和存储卡，包括在会话期间插入的此类设备。网络共享不包含在内。"
 
 #: rdp/sharedfolderfield.cpp:33
 #, kde-format
 msgctxt "@item:inlistbox shared folder"
 msgid "Downloads"
-msgstr ""
+msgstr "下载"
 
 #: rdp/sharedfolderfield.cpp:34
 #, kde-format
 msgctxt "@item:inlistbox shared folder"
 msgid "Documents"
-msgstr ""
+msgstr "文档"
 
 #: rdp/sharedfolderfield.cpp:36
 #, kde-format
 msgctxt "@item:inlistbox shared folder"
 msgid "Other Folder…"
-msgstr ""
+msgstr "其他文件夹…"
 
 #: rdp/sharedfolderfield.cpp:65
 #, kde-format
 msgctxt "@item:inlistbox shared folder, %1 a stored value"
 msgid "%1 (not supported)"
-msgstr ""
+msgstr "%1 (不支持)"
 
 #: rdp/sharedfolderfield.cpp:69
 #, kde-format
 msgctxt "@item:inlistbox shared folder, %1 its name, %2 its path"
 msgid "%1 (%2)"
-msgstr ""
+msgstr "%1 (%2)"
 
 #: rdp/sharedfolderfield.cpp:102
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose Shared Folder"
-msgstr ""
+msgstr "选择共享文件夹"
 
 #: rdp/smartcardreaderfield.cpp:33
 #, kde-format
 msgctxt "@item:inlistbox smartcard reader, %1 is its saved name"
 msgid "%1 (not detected)"
-msgstr ""
+msgstr "%1 (没有检测到)"
 
 #: rdp/smartcardreaderfield.cpp:50
 #, kde-format
 msgctxt "@item:inlistbox smartcard reader"
 msgid "Not shared"
-msgstr ""
+msgstr "不共享"
 
 #: rdp/smartcardreaderfield.cpp:51
 #, kde-format
 msgctxt "@item:inlistbox smartcard reader"
 msgid "All readers"
-msgstr ""
+msgstr "所有读卡器"
 
 #: remotedesktopsmodel.cpp:112
 #, kde-format
@@ -2906,13 +2846,14 @@ msgid ""
 "The resolution requested from the remote desktop. The guest must have spice-"
 "vdagent running for dynamic resize to work."
 msgstr ""
+"远程桌面请求的分辨率。要实现动态调整大小，客户端必须运行 spice-vdagent。"
 
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Width)
 #: spice/spicepreferences.ui:160
 #, kde-format
 msgid ""
 "Custom desktop width. Only editable when Custom Resolution is selected above."
-msgstr ""
+msgstr "自定义桌面宽度。仅在上方选择“自定义分辨率”时可编辑。"
 
 #. i18n: ectx: property (whatsThis), widget (QSpinBox, kcfg_Height)
 #: spice/spicepreferences.ui:192
@@ -2920,37 +2861,37 @@ msgstr ""
 msgid ""
 "Custom desktop height. Only editable when Custom Resolution is selected "
 "above."
-msgstr ""
+msgstr "自定义桌面高度。仅在上方选择“自定义分辨率”时可编辑。"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_EnableAudio)
 #: spice/spicepreferences.ui:249
 #, kde-format
 msgid "Enable &audio playback"
-msgstr ""
+msgstr "启用音频回放(&A)"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_EnableAudio)
 #: spice/spicepreferences.ui:252
 #, kde-format
 msgid "Play audio from the remote host on this machine."
-msgstr ""
+msgstr "通过本机播放来自远程主机的音频。"
 
 #. i18n: ectx: property (text), widget (QLabel, networkHeading)
 #: spice/spicepreferences.ui:295 vnc/vncpreferences.ui:275
 #, kde-format
 msgid "Network"
-msgstr ""
+msgstr "网络"
 
 #: spice/spiceview.cpp:90
 #, kde-format
 msgctxt "@label"
 msgid "This connection needs its connection file."
-msgstr ""
+msgstr "此连接需要其连接文件。"
 
 #: spice/spiceview.cpp:91
 #, kde-format
 msgctxt "@info"
 msgid "Open a new .vv file for this virtual machine."
-msgstr ""
+msgstr "为此虚拟机打开一个新的 .vv 文件。"
 
 #: spice/spiceview.cpp:883
 #, kde-format
@@ -2959,17 +2900,18 @@ msgid ""
 "The server rejected the password in the connection file, which may have "
 "expired. Open a new file, or enter the password."
 msgstr ""
+"服务器拒绝了连接文件中的密码，该密码可能已过期。请打开新文件，或输入密码。"
 
 #: spice/spiceview.cpp:885
 #, kde-format
 msgid "Authentication is required to connect to <b>%1</b>."
-msgstr ""
+msgstr "连接到 <b>%1</b> 需要身份验证。"
 
 #: spice/spiceview.cpp:955
 #, kde-format
 msgctxt "@label"
 msgid "The TLS handshake failed."
-msgstr ""
+msgstr "TLS 握手失败。"
 
 #: spice/spiceview.cpp:956
 #, kde-format
@@ -2977,15 +2919,13 @@ msgctxt "@info"
 msgid ""
 "Check whether the server accepts TLS only on a separate port, and that its "
 "certificate is trusted."
-msgstr ""
+msgstr "请检查服务器是否仅在独立端口上接受 TLS，且已信任其证书。"
 
 #: spice/spiceview.cpp:959
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "The server refused the connection request."
+#, kde-format
 msgctxt "@label"
 msgid "The server rejected the SPICE connection."
-msgstr "服务器拒绝了连接请求。"
+msgstr "服务器拒绝了 SPICE 连接。"
 
 #: spice/spiceview.cpp:960
 #, kde-format
@@ -2993,7 +2933,7 @@ msgctxt "@info"
 msgid ""
 "Check that this port belongs to a SPICE server with a compatible protocol "
 "version."
-msgstr ""
+msgstr "请确认此端口属于运行着兼容协议版本的 SPICE 服务器。"
 
 #: spice/spiceview.cpp:970
 #, kde-format
@@ -3001,7 +2941,7 @@ msgctxt "@info"
 msgid ""
 "Make sure the virtual machine is running, and its SPICE display listens on "
 "this address."
-msgstr ""
+msgstr "请确保虚拟机正在运行，并且其 SPICE 显示监听此地址。"
 
 #: spice/spiceviewfactory.cpp:174
 #, kde-format
@@ -3010,34 +2950,30 @@ msgid ""
 "This file connects through the proxy “%1”, which could intercept the "
 "session. Continue only if you trust this file."
 msgstr ""
+"此文件通过代理服务器“%1”连接，该代理服务器可能会拦截会话。仅当您信任此文件"
+"时，才应继续。"
 
 #: spice/spiceviewfactory.cpp:176
 #, kde-format
 msgctxt "@title:window"
 msgid "Use Proxy from File?"
-msgstr ""
+msgstr "使用文件中的代理服务器？"
 
 #: spice/spiceviewfactory.cpp:203
-#, fuzzy, kde-format
-#| msgid "New RDP Connection…"
+#, kde-format
 msgid "New SPICE Connection…"
-msgstr "新建 RDP 连接…"
+msgstr "新建 SPICE 连接…"
 
 #: spice/spiceviewfactory.cpp:208
-#, fuzzy, kde-format
-#| msgid "Connect to a VNC Remote Desktop"
+#, kde-format
 msgid "Connect to a SPICE Remote Desktop"
-msgstr "连接到 VNC 远程桌面"
+msgstr "连接到 SPICE 远程桌面"
 
 #: spice/spiceviewfactory.cpp:214
-#, fuzzy, kde-format
-#| msgid ""
-#| "<html>Enter the address here.<br /><i>Example: vncserver:1 (host:port / "
-#| "screen)</i></html>"
+#, kde-format
 msgid ""
 "<html>Enter the address here.<br /><i>Example: spice://myhost:5900</i></html>"
-msgstr ""
-"<html>在此输入地址。<br /><i>示例：vncserver:1 (主机:端口 /屏幕)</i></html>"
+msgstr "<html>在此输入地址。<br /><i>示例：spice://myhost:5900</i></html>"
 
 #: vnc/vncclientthread.cpp:357
 #, kde-format
@@ -3179,20 +3115,20 @@ msgctxt "@info"
 msgid ""
 "Wait a few minutes. The server blocks logins for a while after several "
 "failed attempts."
-msgstr ""
+msgstr "请稍等几分钟。服务器在多次登录失败后会暂时阻止登录。"
 
 #: vnc/vncview.cpp:321
 #, kde-format
 msgctxt "@info"
 msgid "Then connect again and enter the password carefully."
-msgstr ""
+msgstr "然后重新连接并小心输入密码。"
 
 #: vnc/vncview.cpp:327
 #, kde-format
 msgctxt "@label"
 msgid ""
 "The server requires an authentication method that KRDC does not support."
-msgstr ""
+msgstr "服务器要求一种 KRDC 不支持的身份认证方式。"
 
 #: vnc/vncview.cpp:329
 #, kde-format
@@ -3200,7 +3136,7 @@ msgctxt "@info"
 msgid ""
 "Configure the VNC server to use standard VNC password authentication, or "
 "connect through an SSH tunnel."
-msgstr ""
+msgstr "配置 VNC 服务器使用标准的 VNC 密码身份认证，或通过 SSH 隧道连接。"
 
 #: vnc/vncviewfactory.cpp:47
 #, kde-format
@@ -3219,120 +3155,3 @@ msgid ""
 "screen)</i></html>"
 msgstr ""
 "<html>在此输入地址。<br /><i>示例：vncserver:1 (主机:端口 /屏幕)</i></html>"
-
-#, fuzzy
-#~| msgid "&Keyboard layout:"
-#~ msgid "Keyboard"
-#~ msgstr "键盘布局(&K)："
-
-#, fuzzy
-#~| msgid "Switch to Full Screen Mode"
-#~ msgid "Only in full screen mode"
-#~ msgstr "切换到全屏模式"
-
-#, fuzzy
-#~| msgid "Right"
-#~ msgid "Right Ctrl"
-#~ msgstr "右侧"
-
-#, fuzzy
-#~| msgid "Right"
-#~ msgid "Right Alt"
-#~ msgstr "右侧"
-
-#, fuzzy
-#~| msgid "Right"
-#~ msgid "Right Meta"
-#~ msgstr "右侧"
-
-#, fuzzy
-#~| msgctxt "Where each displayed link comes from"
-#~| msgid "None"
-#~ msgctxt "@item:inlistbox no host key"
-#~ msgid "None"
-#~ msgstr "无"
-
-#~ msgid "Remember password"
-#~ msgstr "记住密码"
-
-#~ msgid "SSH tunnel options"
-#~ msgstr "SSH 隧道选项"
-
-#~ msgid "General"
-#~ msgstr "常规"
-
-#~ msgid "Resolution"
-#~ msgstr "分辨率"
-
-#~ msgid "Alternate Session Type:"
-#~ msgstr "备用会话类型："
-
-#~ msgid "Session lock:"
-#~ msgstr "会话锁定："
-
-#~ msgid "Security:"
-#~ msgstr "安全性："
-
-#~ msgid "Proxy"
-#~ msgstr "代理服务器"
-
-#~ msgid "Unable to load connection data from the provided file."
-#~ msgstr "无法从提供的文件加载连接数据。"
-
-#~ msgid ""
-#~ "The entered address does not have the required form.\n"
-#~ " Syntax: [username@]host[:port]"
-#~ msgstr ""
-#~ "输入的地址不符合所需的格式。\n"
-#~ " 语法：[用户名@]主机[:端口]"
-
-#~ msgid "The entered address cannot be handled."
-#~ msgstr "输入的地址无法处理。"
-
-#~ msgctxt "@title:dialog"
-#~ msgid "Login Failure"
-#~ msgstr "登录失败"
-
-#~ msgctxt "@label"
-#~ msgid ""
-#~ "Unable to login with the provided credentials. Please double check the "
-#~ "user and password."
-#~ msgstr "无法使用提供的凭据登录。请重新检查用户和密码。"
-
-#~ msgctxt "@title:dialog"
-#~ msgid "Account Problems"
-#~ msgstr "账户问题"
-
-#~ msgctxt "@label"
-#~ msgid ""
-#~ "The provided account is not allowed to log in to this machine. Please "
-#~ "contact your system administrator."
-#~ msgstr "提供的账户不允许登录此机器。请联系您的系统管理员。"
-
-#~ msgctxt "@label"
-#~ msgid ""
-#~ "Unable to login with the provided password. Please contact your system "
-#~ "administrator to change it."
-#~ msgstr "无法使用提供的密码登录。请联系您的系统管理员进行修改。"
-
-#~ msgctxt "@title:dialog"
-#~ msgid "Connection Lost"
-#~ msgstr "连接丢失"
-
-#~ msgctxt "@title:dialog"
-#~ msgid "Connection Closed"
-#~ msgstr "连接关闭"
-
-#~ msgctxt "@label"
-#~ msgid "An unknown error occurred"
-#~ msgstr "发生了未知错误"
-
-#~ msgctxt "@title:dialog"
-#~ msgid "Logon Error"
-#~ msgstr "登录错误"
-
-#~ msgid "VNC authentication type is not supported."
-#~ msgstr "不支持的 VNC 认证类型。"
-
-#~ msgid "VNC failure"
-#~ msgstr "VNC 失败"

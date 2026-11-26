@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krdc\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-20 03:38+0000\n"
+"POT-Creation-Date: 2026-11-26 03:14+0000\n"
 "PO-Revision-Date: 2026-11-19 11:10+0200\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -225,13 +225,13 @@ msgstr "Настроить…"
 msgid "Remove"
 msgstr "Удалить"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:338 mainwindow.cpp:961
-#: mainwindow.cpp:977
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:338 mainwindow.cpp:957
+#: mainwindow.cpp:973
 #, kde-format
 msgid "Unusable URL"
 msgstr "Неправильный URL"
 
-#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:977
+#: config/hostpreferenceslist.cpp:99 mainwindow.cpp:973
 #, kde-format
 msgid "The selected host cannot be handled."
 msgstr "Не удалось обработать адрес хоста."
@@ -317,277 +317,277 @@ msgstr[1] "%1 года назад"
 msgstr[2] "%1 лет назад"
 msgstr[3] "%1 год назад"
 
-#: connectionstatuswidget.cpp:64
+#: connectionstatuswidget.cpp:63
 #, kde-format
 msgctxt "@info:status connection step"
 msgid "Not started"
 msgstr "Не начато"
 
-#: connectionstatuswidget.cpp:67
+#: connectionstatuswidget.cpp:66
 #, kde-format
 msgctxt "@info:status connection step"
 msgid "Done"
 msgstr "Готово"
 
-#: connectionstatuswidget.cpp:70
+#: connectionstatuswidget.cpp:69
 #, kde-format
 msgctxt "@info:status connection step"
 msgid "Failed"
 msgstr "Ошибка"
 
-#: connectionstatuswidget.cpp:73
+#: connectionstatuswidget.cpp:72
 #, kde-format
 msgctxt "@info:status connection step"
 msgid "Information"
 msgstr "Сведения"
 
-#: connectionstatuswidget.cpp:250
+#: connectionstatuswidget.cpp:244
 #, kde-format
 msgctxt "@info"
 msgid "Diagnostic information copied to the clipboard"
 msgstr "Диагностические сведения скопированы в буфер обмена"
 
-#: connectionstatuswidget.cpp:257
+#: connectionstatuswidget.cpp:251
 #, kde-format
 msgctxt "@title"
 msgid "Connecting to %1"
 msgstr "Подключение к %1"
 
-#: connectionstatuswidget.cpp:258
+#: connectionstatuswidget.cpp:252
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Connecting to %1"
 msgstr "Подключение к %1"
 
-#: connectionstatuswidget.cpp:274
+#: connectionstatuswidget.cpp:268
 #, kde-format
 msgctxt "@action:button"
 msgid "Cancel"
 msgstr "Отмена"
 
-#: connectionstatuswidget.cpp:335
+#: connectionstatuswidget.cpp:329
 #, kde-format
 msgctxt "@info:status connection step"
 msgid "In progress"
 msgstr "Выполняется"
 
-#: connectionstatuswidget.cpp:411
+#: connectionstatuswidget.cpp:405
 #, kde-format
 msgctxt "@info connection step"
 msgid "Looking up the server address"
 msgstr "Поиск адреса сервера"
 
-#: connectionstatuswidget.cpp:413
+#: connectionstatuswidget.cpp:407
 #, kde-format
 msgctxt "@info connection step"
 msgid "Opening the SSH tunnel"
 msgstr "Открытие SSH-туннеля"
 
-#: connectionstatuswidget.cpp:415
+#: connectionstatuswidget.cpp:409
 #, kde-format
 msgctxt "@info connection step"
 msgid "Opening a network connection"
 msgstr "Открытие сетевого подключения"
 
-#: connectionstatuswidget.cpp:417
+#: connectionstatuswidget.cpp:411
 #, kde-format
 msgctxt "@info connection step"
 msgid "Securing the connection"
 msgstr "Защита подключения"
 
-#: connectionstatuswidget.cpp:419
+#: connectionstatuswidget.cpp:413
 #, kde-format
 msgctxt "@info connection step"
 msgid "Logging in"
 msgstr "Вход в систему"
 
-#: connectionstatuswidget.cpp:421
+#: connectionstatuswidget.cpp:415
 #, kde-format
 msgctxt "@info connection step"
 msgid "Starting the remote session"
 msgstr "Запуск удалённого сеанса"
 
-#: connectionstatuswidget.cpp:423
+#: connectionstatuswidget.cpp:417
 #, kde-format
 msgctxt "@info connection step"
 msgid "Reconnecting"
 msgstr "Повторное подключение"
 
-#: connectionstatuswidget.cpp:433
+#: connectionstatuswidget.cpp:427
 #, kde-format
 msgctxt "@info connection step"
 msgid "Server address resolved"
 msgstr "Адрес сервера найден"
 
-#: connectionstatuswidget.cpp:435
+#: connectionstatuswidget.cpp:429
 #, kde-format
 msgctxt "@info connection step"
 msgid "SSH tunnel established"
 msgstr "SSH-туннель установлен"
 
-#: connectionstatuswidget.cpp:437
+#: connectionstatuswidget.cpp:431
 #, kde-format
 msgctxt "@info connection step"
 msgid "Network connection established"
 msgstr "Сетевое подключение установлено"
 
-#: connectionstatuswidget.cpp:439
+#: connectionstatuswidget.cpp:433
 #, kde-format
 msgctxt "@info connection step"
 msgid "Connection secured"
 msgstr "Подключение защищено"
 
-#: connectionstatuswidget.cpp:442
+#: connectionstatuswidget.cpp:436
 #, kde-format
 msgctxt "@info connection step"
 msgid "Access granted"
 msgstr "Доступ предоставлен"
 
-#: connectionstatuswidget.cpp:444
+#: connectionstatuswidget.cpp:438
 #, kde-format
 msgctxt "@info connection step"
 msgid "Remote session started"
 msgstr "Удалённый сеанс запущен"
 
-#: connectionstatuswidget.cpp:454
+#: connectionstatuswidget.cpp:448
 #, kde-format
 msgctxt "@info"
 msgid "Resolved to %1."
 msgstr "Адрес: %1."
 
-#: connectionstatuswidget.cpp:466
+#: connectionstatuswidget.cpp:460
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Local address lookup failed: %1"
 msgstr "Не удалось определить локальный адрес: %1"
 
-#: connectionstatuswidget.cpp:471
+#: connectionstatuswidget.cpp:468
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "%1 resolved to %2"
 msgstr "Адрес %1: %2"
 
-#: connectionstatuswidget.cpp:503
+#: connectionstatuswidget.cpp:500
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Connecting to the remote desktop service"
 msgstr "Подключение к службе удалённого рабочего стола"
 
-#: connectionstatuswidget.cpp:510
+#: connectionstatuswidget.cpp:507
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Authenticating"
 msgstr "Аутентификация"
 
-#: connectionstatuswidget.cpp:514
+#: connectionstatuswidget.cpp:511
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Preparing the session"
 msgstr "Подготовка сеанса"
 
-#: connectionstatuswidget.cpp:518
+#: connectionstatuswidget.cpp:515
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Connected"
 msgstr "Подключено"
 
-#: connectionstatuswidget.cpp:551
+#: connectionstatuswidget.cpp:548
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Connection dropped, reconnecting: %1"
 msgstr "Подключение разорвано, повторное подключение: %1"
 
-#: connectionstatuswidget.cpp:551
+#: connectionstatuswidget.cpp:548
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Reconnected"
 msgstr "Подключено повторно"
 
-#: connectionstatuswidget.cpp:564
+#: connectionstatuswidget.cpp:561
 #, kde-format
 msgctxt "@info"
 msgid "KRDC keeps trying until the connection is back."
 msgstr "KRDC будет повторять попытки, пока подключение не восстановится."
 
-#: connectionstatuswidget.cpp:568
+#: connectionstatuswidget.cpp:565
 #, kde-format
 msgctxt "@title"
 msgid "Connection to %1 interrupted"
 msgstr "Подключение к %1 прервано"
 
-#: connectionstatuswidget.cpp:570
+#: connectionstatuswidget.cpp:567
 #, kde-format
 msgctxt "@action:button"
 msgid "Disconnect"
 msgstr "Отключиться"
 
-#: connectionstatuswidget.cpp:580
+#: connectionstatuswidget.cpp:577
 #, kde-format
 msgctxt "@info diagnostic timeline"
 msgid "Failed while: %1"
 msgstr "Ошибка на этапе: %1"
 
-#: connectionstatuswidget.cpp:661
+#: connectionstatuswidget.cpp:658
 #, kde-format
 msgctxt "@title"
 msgid "Session with %1 ended"
 msgstr "Сеанс с %1 завершён"
 
-#: connectionstatuswidget.cpp:663
+#: connectionstatuswidget.cpp:660
 #, kde-format
 msgctxt "@title"
 msgid "Connection to %1 lost"
 msgstr "Подключение к %1 потеряно"
 
-#: connectionstatuswidget.cpp:665
+#: connectionstatuswidget.cpp:662
 #, kde-format
 msgctxt "@title"
 msgid "Could not connect to %1"
 msgstr "Не удалось подключиться к %1"
 
-#: connectionstatuswidget.cpp:671
+#: connectionstatuswidget.cpp:668
 #, kde-format
 msgctxt "@action:button"
 msgid "Reconnect"
 msgstr "Подключиться повторно"
 
-#: connectionstatuswidget.cpp:671
+#: connectionstatuswidget.cpp:668
 #, kde-format
 msgctxt "@action:button"
 msgid "Connect Again"
 msgstr "Подключиться снова"
 
-#: connectionstatuswidget.cpp:676
+#: connectionstatuswidget.cpp:673
 #, kde-format
 msgctxt "@action:button"
 msgid "Edit Address"
 msgstr "Изменить адрес"
 
-#: connectionstatuswidget.cpp:679
+#: connectionstatuswidget.cpp:676
 #, kde-format
 msgctxt "@action:button"
 msgid "Edit Host Settings…"
 msgstr "Изменить параметры хоста…"
 
-#: connectionstatuswidget.cpp:681
+#: connectionstatuswidget.cpp:678
 #, kde-format
 msgctxt "@action:button"
 msgid "Close Tab"
 msgstr "Закрыть вкладку"
 
-#: connectionstatuswidget.cpp:719
+#: connectionstatuswidget.cpp:716
 #, kde-format
 msgctxt "@action:button"
 msgid "Copy diagnostic information"
 msgstr "Копировать диагностические сведения"
 
-#: connectionstatuswidget.cpp:724
+#: connectionstatuswidget.cpp:721
 #, kde-format
 msgctxt "@action:button"
 msgid "Hide details"
 msgstr "Скрыть подробности"
 
-#: connectionstatuswidget.cpp:724
+#: connectionstatuswidget.cpp:721
 #, kde-format
 msgctxt "@action:button"
 msgid "Show details"
@@ -1259,8 +1259,8 @@ msgstr "URL, к которым следует подключаться при з
 msgid "KDE Remote Desktop Client started"
 msgstr "Клиент удалённого рабочего стола для KDE запущен"
 
-#: mainwindow.cpp:116 mainwindow.cpp:133 mainwindow.cpp:1432
-#: mainwindow.cpp:1529
+#: mainwindow.cpp:116 mainwindow.cpp:133 mainwindow.cpp:1427
+#: mainwindow.cpp:1524
 #, kde-format
 msgid "New Connection"
 msgstr "Новое подключение"
@@ -1410,104 +1410,104 @@ msgstr "Перейти в оконный режим"
 msgid "Window Mode"
 msgstr "Оконный режим"
 
-#: mainwindow.cpp:961
+#: mainwindow.cpp:957
 #, kde-format
 msgid "The entered address cannot be handled by this connection type."
 msgstr "Введённый адрес не может быть обработан подключением этого типа."
 
-#: mainwindow.cpp:996
+#: mainwindow.cpp:992
 #, kde-format
 msgid "Connect"
 msgstr "Подключиться"
 
-#: mainwindow.cpp:997
+#: mainwindow.cpp:993
 #, kde-format
 msgid "Rename"
 msgstr "Переименовать"
 
-#: mainwindow.cpp:998
+#: mainwindow.cpp:994
 #, kde-format
 msgid "Settings"
 msgstr "Настройка"
 
-#: mainwindow.cpp:999
+#: mainwindow.cpp:995
 #, kde-format
 msgid "Delete"
 msgstr "Удалить"
 
-#: mainwindow.cpp:1002 remotedesktopsmodel.cpp:108
+#: mainwindow.cpp:998 remotedesktopsmodel.cpp:108
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "Bookmarks"
 msgstr "Закладки"
 
-#: mainwindow.cpp:1002 remotedesktopsmodel.cpp:110
+#: mainwindow.cpp:998 remotedesktopsmodel.cpp:110
 #, kde-format
 msgctxt "Where each displayed link comes from"
 msgid "History"
 msgstr "Журнал"
 
-#: mainwindow.cpp:1014
+#: mainwindow.cpp:1010
 #, kde-format
 msgid "Rename %1"
 msgstr "Переименование %1"
 
-#: mainwindow.cpp:1014
+#: mainwindow.cpp:1010
 #, kde-format
 msgid "Rename %1 to"
 msgstr "Переименовать %1 в"
 
-#: mainwindow.cpp:1021
+#: mainwindow.cpp:1017
 #, kde-format
 msgid "Are you sure you want to delete %1?"
 msgstr "Действительно удалить %1?"
 
-#: mainwindow.cpp:1021
+#: mainwindow.cpp:1017
 #, kde-format
 msgid "Delete %1"
 msgstr "Удаление %1"
 
-#: mainwindow.cpp:1045
+#: mainwindow.cpp:1041
 #, kde-format
 msgid "Add Bookmark"
 msgstr "Добавить закладку"
 
-#: mainwindow.cpp:1046
+#: mainwindow.cpp:1042
 #, kde-format
 msgid "Close Tab"
 msgstr "Закрыть вкладку"
 
-#: mainwindow.cpp:1163
+#: mainwindow.cpp:1159
 #, kde-format
 msgid "Minimize Full Screen Window"
 msgstr "Свернуть полноэкранное окно"
 
-#: mainwindow.cpp:1180
+#: mainwindow.cpp:1176
 #, kde-format
 msgid "Stick Toolbar"
 msgstr "Прикрепить панель инструментов"
 
-#: mainwindow.cpp:1300
+#: mainwindow.cpp:1295
 #, kde-format
 msgid "Are you sure you want to quit the KDE Remote Desktop Client?"
 msgstr "Закрыть клиент удалённого рабочего стола для KDE?"
 
-#: mainwindow.cpp:1301
+#: mainwindow.cpp:1296
 #, kde-format
 msgid "Confirm Quit"
 msgstr "Подтвердите выход"
 
-#: mainwindow.cpp:1455
+#: mainwindow.cpp:1450
 #, kde-format
 msgid "Connect to:"
 msgstr "Подключиться к:"
 
-#: mainwindow.cpp:1459
+#: mainwindow.cpp:1454
 #, kde-format
 msgid "Type here to connect to an address and filter the list."
 msgstr "Введите здесь текст для подключения к адресу или фильтрации списка."
 
-#: mainwindow.cpp:1470
+#: mainwindow.cpp:1465
 #, kde-format
 msgid ""
 "Type an IP or DNS Name here. Clear the line to get a list of connection "
@@ -1516,28 +1516,28 @@ msgstr ""
 "Введите здесь IP-адрес или имя хоста. Очистите строку, чтобы получить список "
 "способов подключения."
 
-#: mainwindow.cpp:1473
+#: mainwindow.cpp:1468
 #, kde-format
 msgid "Goto Address"
 msgstr "Перейти к адресу"
 
-#: mainwindow.cpp:1565
+#: mainwindow.cpp:1560
 #, kde-format
 msgid "Remote Desktops"
 msgstr "Удалённые системы"
 
-#: mainwindow.cpp:1594
+#: mainwindow.cpp:1589
 #, kde-format
 msgid "Filter"
 msgstr "Фильтр"
 
-#: mainwindow.cpp:1647
+#: mainwindow.cpp:1642
 #, kde-format
 msgctxt "@label"
 msgid "The remote computer may have shut down or restarted."
 msgstr "Возможно, удалённый компьютер выключился или перезагрузился."
 
-#: mainwindow.cpp:1651
+#: mainwindow.cpp:1646
 #, kde-format
 msgctxt "@title connection error"
 msgid "Closed before the session started"
@@ -2377,7 +2377,7 @@ msgstr ""
 "на рабочий стол и в шлюз могут быть отправлены в эту область. Не включайте "
 "его, если область по умолчанию не связана с этим подключением."
 
-#: rdp/rdpsession.cpp:1404
+#: rdp/rdpsession.cpp:1407
 #, kde-format
 msgctxt "@label"
 msgid ""
